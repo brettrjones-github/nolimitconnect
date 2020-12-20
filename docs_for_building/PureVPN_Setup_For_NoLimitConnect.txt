@@ -1,0 +1,70 @@
+//=== PureVPN Setup For NoLimitConnect ===//
+Pure VPN is a commercial VPN available at
+https://www.purevpn.com
+
+//=== Port Forwarding ===//
+For Chat Room and/or Group hosting a open port must be available
+Also a open port speeds up communication for users by avoiding the
+need of Chat Room or Group relay services. Relay services also
+require a lot of bandwidth/CPU usage of the hosting group or chat room.
+
+If you are familiar with routers you might be able to port forwarding
+to your host without a VPN but how to do that differs from router to router.
+Port Forwarding is not offered at all by phone data service.
+
+A simple way to Port Forward is to use a VPN that offers port forwarding.
+As of this writing most do not. This includes Nord VPN and Express VPN.
+
+Pure VPN is a vpn service that offers port forwarding. 
+Pure VPN also offers fixed IP addresses needed for NoLimitConnect network hosting.
+This is not a advertisement for VPN but my experience with it was good
+and it offers a simple setup for Android and Windows. Linux is more complicated
+but can be done.
+
+Pure VPN can be used on Phone Data service where port forwarding cannot be
+done by your phone service provider.
+
+//=== Fixed IP Address ===//
+Fixed IP is only required if you want to create your own NoLimitConnect network.
+Without a fixed ip then users would have to change there network host address to
+match your ip address when your ISP provider changes it.
+Pure VPN offers fixed ip at additional cost.
+At the time of this writing 2020/12/20 Pure VPN Fixed IP is available on windows but not Android
+
+//=== Pure VPN Port Forward Setup ===//
+
+These instructions should work for all supported operating systems ( Android,Windows,Linux )
+
+Please note: This is not and endorsement of any particular VPN but Pure VPN was the first VPN
+I could get port forwarding to work on.
+Other VPNs tried: 
+	NordVPN - has no port forwarding
+	ExpressVPN - has no port forwarding
+	PrivateVPN - has a form of port forwarding but difficult to setup in linux
+
+For this example the listen port in NoLimitConnect network settings was set to 45125
+and will be referenced as [LISTEN PORT]
+
+1.) Purchase a PureVPN subscription with the "Port Forward" addon package at https://www.purevpn.com
+2.) Click the gear at top right of the title bar to get to settings
+3.) Click Select Mode
+    Change PureVPN mode to File Sharing
+4.) Click App Settings
+    set Selected Protocol to SSTP for Windows or for Android use IKEV instead of TCP.
+5.) Click Network Type
+    set Network Type to Non-NAT Network
+6.) Click Port Forwarding then Configure
+    a.) Select Block all ports but enable the following
+    b.) In Custom Ports enter [LISTEN PORT]
+        NOTE: can add up to 15 ports if desired
+    c.) Click Apply Settings and log out or close the web page
+7.) Click Back to get back to the home window of PureVPN
+8.) Choose a country with less authoritarian network laws and connect.
+    A list of vpns and how restrictive the government is can be found at:
+    https://thatoneprivacysite.net/#vpn-review-badge-chart
+	Connect only to servers that offer P2P service.
+9.) If you are running on windows then will need to open the firewall
+	To open port on firewall read Open_Port_In_Firewall_Windows10.txt
+10.) You may have to restart NoLimitConnect in order for it to recognize the VPN network
+    
+    

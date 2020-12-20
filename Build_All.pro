@@ -7,7 +7,6 @@ CONFIG += no_docs_target
 
 # build the project sequentially as listed in SUBDIRS !
 # order is important so dependent libraries are available
-CONFIG += ordered
 
 SUBDIRS += $$PWD/Build1_PythonDepends.pro
 
@@ -21,3 +20,8 @@ SUBDIRS += $$PWD/Build5_AppOnly.pro
 
 #optional build of most often changed files
 #SUBDIRS += $$PWD/Build6_AppAndCore_Optional.pro
+
+Build5_AppOnly.pro.depends = Build4_Core.pro
+Build4_Core.pro.depends = Build3_DependLibs.pro
+Build3_DependLibs.pro.depends = Build2_PythonLib.pro
+Build2_PythonLib.pro.depends = Build1_PythonDepends.pro

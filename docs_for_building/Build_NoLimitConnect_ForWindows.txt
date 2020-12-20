@@ -1,0 +1,4 @@
+1.) Follow instructions in Build_NoLimitConnect_ForWindowsPrerequisitesInstructions.txt
+2.) As of 2020/12/20 only Debug With x64 configuration is supported
+	In your Visual Studio Tool Bar select these from the drop down combo boxes
+	A Release version will be supported in the future
