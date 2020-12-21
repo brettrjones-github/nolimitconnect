@@ -96,12 +96,10 @@ MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_T
 RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 
+# windows build of android for large projects
 # fails because command line limit in windoz is 32,768.. so
-#short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
-
-# fails because command line limit in windoz is 32,768.. so
-#short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
-unix:!android{
+# use short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
+android{
     CONFIG(debug, debug|release){
         OBJECTS_DIR=.ad
         MOC_DIR =.mocd
@@ -115,6 +113,7 @@ unix:!android{
     }
 }
 
+# linux needs a qualified path
 unix:!android{
     CONFIG(debug, debug|release){
         OBJECTS_DIR=$$PWD//objs/obs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}

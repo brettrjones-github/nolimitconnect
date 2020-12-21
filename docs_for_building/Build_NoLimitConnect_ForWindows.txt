@@ -2,3 +2,8 @@
 2.) As of 2020/12/20 only Debug With x64 configuration is supported
 	In your Visual Studio Tool Bar select these from the drop down combo boxes
 	A Release version will be supported in the future
+3.) Due to special requirements to build Python it must be built first
+	Open <ProjectRoot>/build/VS2017/NoLimitConnectPython.sln and build
+	There seems to be a copy python dll to destination error in build system
+	You may need to build once for each python project to finish without errors
+4.) Build the rest of NoLimitConnect using <ProjectRoot>/build/VS2017/NoLimitConnectAll.sln
