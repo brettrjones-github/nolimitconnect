@@ -33,10 +33,10 @@ public:
 	void						setLastHostWebsiteResolvedIp( std::string& strWebsiteIp );
 	void						getLastHostWebsiteResolvedIp( std::string& strWebsiteIp );
 
-	void						setLastNetServiceWebsiteUrl( std::string& strWebsiteUrl );
-	void						getLastNetServiceWebsiteUrl( std::string& strWebsiteUrl );
-	void						setLastNetServiceWebsiteResolvedIp( std::string& strWebsiteIp );
-	void						getLastNetServiceWebsiteResolvedIp( std::string& strWebsiteIp );
+	void						setLastConnectTestUrl( std::string& strWebsiteUrl );
+	void						getLastConnectTestUrl( std::string& strWebsiteUrl );
+	void						setLastConnectTestResolvedIp( std::string& strWebsiteIp );
+	void						getLastConnectTestResolvedIp( std::string& strWebsiteIp );
 
 private:
 	bool						m_Initialized;

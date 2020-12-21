@@ -16,24 +16,18 @@
 #include "NetHostSetting.h"
 
 //============================================================================
-NetHostSetting::NetHostSetting()
-: m_NetHostSettingName("")
-, m_NetworkName( NET_DEFAULT_NETWORK_NAME )
-, m_NetServiceWebsiteUrl( NET_DEFAULT_NETSERVICE_URL )
-, m_NetHostWebsiteUrl( NET_DEFAULT_NET_HOST_URL )
-{
-}
-
-//============================================================================
 NetHostSetting& NetHostSetting::operator =( const NetHostSetting& rhs )
 {
 	if( this != &rhs )
 	{
 		m_NetHostSettingName		= rhs.m_NetHostSettingName;
 		m_NetworkName				= rhs.m_NetworkName;
-		m_NetServiceWebsiteUrl		= rhs.m_NetServiceWebsiteUrl;
-        m_NetHostWebsiteUrl         = rhs.m_NetHostWebsiteUrl;
-		m_ThisNodeIsHost			= rhs.m_ThisNodeIsHost;
+		m_NetworkHostUrl		    = rhs.m_NetworkHostUrl;
+        m_NetConnectTestUrl         = rhs.m_NetConnectTestUrl;
+        m_NetRandomConnectUrl       = rhs.m_NetRandomConnectUrl;
+        m_GroupHostUrl              = rhs.m_GroupHostUrl;
+        m_ChatRoomHostUrl           = rhs.m_ChatRoomHostUrl;
+        m_ThisNodeIsHost            = rhs.m_ThisNodeIsHost;
 		m_ExcludeMeFromHostList	    = rhs.m_ExcludeMeFromHostList;
 	}
 
@@ -45,8 +39,11 @@ bool NetHostSetting::operator == ( const NetHostSetting& rhs ) const
 {
     return 	m_NetHostSettingName == rhs.m_NetHostSettingName &&
         m_NetworkName == rhs.m_NetworkName &&
-        m_NetServiceWebsiteUrl == rhs.m_NetServiceWebsiteUrl &&
-        m_NetHostWebsiteUrl == rhs.m_NetHostWebsiteUrl &&
+        m_NetworkHostUrl == rhs.m_NetworkHostUrl &&
+        m_NetConnectTestUrl == rhs.m_NetConnectTestUrl &&
+        m_NetRandomConnectUrl == rhs.m_NetRandomConnectUrl &&
+        m_GroupHostUrl == rhs.m_GroupHostUrl &&
+        m_ChatRoomHostUrl == rhs.m_ChatRoomHostUrl &&
         m_ThisNodeIsHost == rhs.m_ThisNodeIsHost &&
         m_ExcludeMeFromHostList == rhs.m_ExcludeMeFromHostList;
 }

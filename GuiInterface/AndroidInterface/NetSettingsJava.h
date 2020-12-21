@@ -28,7 +28,7 @@ public:
 	//=== vars ===//
 	//=== java class ids ===//
 	jfieldID					m_NetworkNameID;
-	jfieldID					m_NetServiceWebsiteUrlID;
+	jfieldID					m_NetworkHostUrlID;
 	jfieldID					m_HostWebsiteUrlID;
 
 	jfieldID					m_ThisDeviceIsAnHostID;

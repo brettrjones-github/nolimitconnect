@@ -50,8 +50,11 @@ protected slots:
 
     void                        slotShowNetworkHostInformation( void );
     void                        slotShowNetworkKeyInformation( void );
-    void                        slotShowConnectUrlInformation( void );
-    void						slotShowConnetTestInformation( void );
+    void                        slotShowConnectTestUrlInformation( void );
+    void                        slotShowConnectTestSettingsInformation( void );
+    void						slotShowRandomConnectUrlInformation( void );
+    void						slotShowDefaultGroupHostUrlInformation( void );
+    void						slotShowDefaultChatRoomUrlInformation( void );
 
     void						slotUpdateTimer( void );
 

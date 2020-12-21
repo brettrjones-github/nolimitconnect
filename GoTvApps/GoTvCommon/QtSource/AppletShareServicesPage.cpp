@@ -38,9 +38,9 @@ AppletShareServicesPage::AppletShareServicesPage( AppCommon& app, QWidget * pare
  //   connectSignals();
 
     // save original values so can restore them if need be
- //   m_Engine.getEngineSettings().getNetHostWebsiteUrl( m_OrigHostUrl );
+ //   m_Engine.getEngineSettings().getNetworkHostUrl( m_OrigHostUrl );
     //m_Engine.getEngineSettings().getNetworkKey( m_OrigNetworkName );
-    //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
+    //m_Engine.getEngineSettings().getConnectTestUrl( m_OrigConnectionTestUrl );
 
     //updateDlgFromSettings();
 

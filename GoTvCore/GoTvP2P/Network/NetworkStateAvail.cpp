@@ -56,7 +56,7 @@ void NetworkStateAvail::runNetworkState( void )
     }
 
     std::string netServiceUrl;
-	m_Engine.getEngineSettings().getNetServiceWebsiteUrl( netServiceUrl );
+	m_Engine.getEngineSettings().getConnectTestUrl( netServiceUrl );
 
 	// wait for log on if need be
 	while( ( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )

@@ -641,12 +641,12 @@ void NetworkStateMachine::setPktAnnounceWithRelayInfo( const char * relayOnlineI
 bool NetworkStateMachine::resolveWebsiteUrls( void )
 {
 	std::string networkHostUrl;
-	m_EngineSettings.getNetHostWebsiteUrl( networkHostUrl );
+	m_EngineSettings.getNetworkHostUrl( networkHostUrl );
 	std::string connectTestHostUrl;
-	m_EngineSettings.getNetServiceWebsiteUrl( connectTestHostUrl );
+	m_EngineSettings.getConnectTestUrl( connectTestHostUrl );
 	if( m_bWebsiteUrlsResolved
 		&& ( networkHostUrl == m_LastResolvedHostWebsite )
-		&& ( connectTestHostUrl == m_LastResolvedNetServiceWebsite ) )
+		&& ( connectTestHostUrl == m_LastResolvedConnectTest ) )
 	{
 		//LogMsg( LOG_INFO, "NetworkStateMachine::resolveWebsiteUrls already resolved\n" );
 		return true;
@@ -686,20 +686,20 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 
 	if( resolveConnectTestResult )
 	{
-		m_LastResolvedNetServiceWebsite = connectTestHostUrl;
-		engineParams.setLastNetServiceWebsiteUrl( m_LastResolvedNetServiceWebsite );
-		engineParams.setLastNetServiceWebsiteResolvedIp( m_NetServiceIp );
-        m_Engine.getOtherHostSrvMgr().addHostInfo( eOtherHostConnectTest, m_NetServiceIp, m_u16NetServicePort, m_LastResolvedNetServiceWebsite.c_str() );
+		m_LastResolvedConnectTest = connectTestHostUrl;
+		engineParams.setLastConnectTestUrl( m_LastResolvedConnectTest );
+		engineParams.setLastConnectTestResolvedIp( m_NetServiceIp );
+        m_Engine.getOtherHostSrvMgr().addHostInfo( eOtherHostConnectTest, m_NetServiceIp, m_u16NetServicePort, m_LastResolvedConnectTest.c_str() );
 	}
 	else
 	{
 		// use last known resolved ip
 		std::string lastNetServiceUrl;
-		engineParams.getLastNetServiceWebsiteUrl( lastNetServiceUrl );
+		engineParams.getLastConnectTestUrl( lastNetServiceUrl );
 		if( lastNetServiceUrl == connectTestHostUrl )
 		{
 			std::string lastNetServiceIp;
-			engineParams.getLastNetServiceWebsiteResolvedIp( lastNetServiceIp );
+			engineParams.getLastConnectTestResolvedIp( lastNetServiceIp );
 			if( 0 != lastNetServiceIp.length() )
 			{
 				m_NetServiceIp = lastNetServiceIp;

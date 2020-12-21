@@ -32,8 +32,13 @@ namespace
 	std::string 		TABLE_ACCOUNT_PROFILE			= "account_profile";
 	std::string 		TABLE_FRIENDS	 				= "friends";
 
-	std::string 		TABLE_LAST_ANCHOR_SETTING	 	= "last_anchor_setting";
-	std::string 		TABLE_ANCHOR_SETTINGS	 		= "anchor_settings";
+	std::string 		TABLE_LAST_NET_HOST_SETTING	 	= "last_net_host_setting";
+    std::string 		CREATE_COLUMNS_LAST_NET_HOST_SETTING = " (last_net_host_setting_name TEXT PRIMARY KEY) ";
+    std::string 		COLUMNS_LAST_NET_HOST_SETTING = "last_net_host_setting_name";
+
+	std::string 		TABLE_NET_HOST_SETTINGS	 		= "net_host_settings";
+    std::string 		CREATE_COLUMNS_NET_HOST_SETTINGS = " (net_host_setting_name TEXT PRIMARY KEY, network_name TEXT, net_host_url TEXT, connect_test_url TEXT, rand_connect_url TEXT, group_host_url TEXT, chat_room_host_url TEXT, is_anchor_node INTEGER, exclude_me INTEGER )  ";
+    std::string 		COLUMNS_NET_HOST_SETTINGS = "net_host_setting_name,network_name,net_host_url,connect_test_url,rand_connect_url,group_host_url,chat_room_host_url,is_anchor_node,exclude_me";
 
 	std::string 		COLUMNS_LAST_LOGIN				= " online_name ";
 	std::string 		CREATE_COLUMNS_LAST_LOGIN		= " (id INTEGER PRIMARY KEY AUTOINCREMENT, online_name  TEXT) ";
@@ -44,11 +49,6 @@ namespace
 	std::string 		COLUMNS_FRIENDS  				= "online_id,his_friendship,my_friendship,ident";
 	std::string 		CREATE_COLUMNS_FRIENDS  		= " (online_id TEXT PRIMARY KEY, his_friendship TINYINT, my_friendship TINYINT, ident BLOB ) ";
 
-	std::string 		CREATE_COLUMNS_LAST_ANCHOR_SETTING		= " (anchor_setting_name TEXT PRIMARY KEY) ";
-	std::string 		COLUMNS_LAST_ANCHOR_SETTING		= "anchor_setting_name";
-
-	std::string 		CREATE_COLUMNS_ANCHOR_SETTINGS	= " (anchor_setting_name TEXT PRIMARY KEY, network_name TEXT, anchor_url TEXT, connect_test_url TEXT, is_anchor_node INTEGER, exclude_me INTEGER )  ";
-	std::string 		COLUMNS_ANCHOR_SETTINGS			= "anchor_setting_name,network_name,anchor_url,connect_test_url,is_anchor_node,exclude_me";
 }
 
 //============================================================================
@@ -74,9 +74,9 @@ RCODE AccountDb::onCreateTables( int iDbVersion )
     rc |= sqlExec( exeStr );
     exeStr = "CREATE TABLE " + TABLE_FRIENDS + CREATE_COLUMNS_FRIENDS;
     rc |= sqlExec( exeStr );
-	exeStr = "CREATE TABLE " + TABLE_LAST_ANCHOR_SETTING + CREATE_COLUMNS_LAST_ANCHOR_SETTING;
+	exeStr = "CREATE TABLE " + TABLE_LAST_NET_HOST_SETTING + CREATE_COLUMNS_LAST_NET_HOST_SETTING;
 	rc |= sqlExec( exeStr );
-	exeStr = "CREATE TABLE " + TABLE_ANCHOR_SETTINGS + CREATE_COLUMNS_ANCHOR_SETTINGS;
+	exeStr = "CREATE TABLE " + TABLE_NET_HOST_SETTINGS + CREATE_COLUMNS_NET_HOST_SETTINGS;
 	rc |= sqlExec( exeStr );
 	return rc;
 }
@@ -89,8 +89,8 @@ RCODE AccountDb::onDeleteTables( int oldVersion )
     rc |= sqlExec("DROP TABLE IF EXISTS account_login" );
     rc |= sqlExec("DROP TABLE IF EXISTS account_profile" );
     rc |= sqlExec("DROP TABLE IF EXISTS friends" );
-	rc |= sqlExec("DROP TABLE IF EXISTS last_anchor_setting" );
-	rc |= sqlExec("DROP TABLE IF EXISTS anchor_settings" );
+	rc |= sqlExec("DROP TABLE IF EXISTS last_net_host_setting" );
+	rc |= sqlExec("DROP TABLE IF EXISTS net_host_settings" );
 	return rc;
 }
 
@@ -173,50 +173,6 @@ bool AccountDb::insertAccount( VxNetIdent& oUserAccount )
 //! update existing account
 bool AccountDb::updateAccount( VxNetIdent& oUserAccount ) 
 {
-    /*
-	bool bResult = false;
-	sqlite3_stmt * poSqlStatement;
-	char SQL_Statement[2048];
-	std::string strOnlineNameHex = oUserAccount.getMyOnlineId().toHexString();
-
-	sprintf(SQL_Statement, "UPDATE account_login SET online_name=?, ident=? WHERE online_id='%s'",
-			strOnlineNameHex.c_str() );
-	RCODE rc = dbOpen();
-	if( 0 == rc )
-	{
-		if( SQLITE_OK == sqlite3_prepare(m_Db, SQL_Statement, (int)strlen(SQL_Statement), &poSqlStatement, NULL) )
-		{
-			if( (SQLITE_OK == sqlite3_bind_text( poSqlStatement, 1, oUserAccount.getOnlineName(), (int)strlen( oUserAccount.getOnlineName() ), NULL ) ) &&
-				(SQLITE_OK == sqlite3_bind_blob( poSqlStatement, 2, &oUserAccount, sizeof( VxNetIdent ), NULL ) ) )
-			{
-				if( SQLITE_DONE == sqlite3_step( poSqlStatement ) )
-				{
-					if( SQLITE_OK == sqlite3_finalize( poSqlStatement ) )
-					{
-						bResult = true;
-					}
-				}
-				else
-				{
-					LogMsg( LOG_ERROR, "AccountDb::updateAccount: ERROR %s stepping\n", sqlite3_errmsg(m_Db) );
-				}
-			}
-			else
-			{
-				LogMsg( LOG_ERROR, "AccountDb::updateAccount: ERROR %s\n", sqlite3_errmsg(m_Db) );
-			}
-		}
-		else
-		{
-			LogMsg( LOG_ERROR, "AccountDb::updateAccount: ERROR %s\n", sqlite3_errmsg(m_Db) );
-		}
-
-        sqlite3_exec( m_Db, "END", NULL, NULL, NULL );
-        dbClose();
-	}
-
-	return bResult;
-    */
     return insertAccount( oUserAccount );
 }
 
@@ -391,8 +347,6 @@ bool AccountDb::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfi
 		DbBindList bindList2( strOnlineIdHex.c_str() );
 		bindList2.add( oUserAccount.getMyOnlineIdHiPart() );
 		rc = sqlExec(  "DELETE FROM account_profile WHERE online_id=?", bindList2 );
-
-		//rc = sqlExec( "UPDATE account_profile SET greeting=?, about=?, picture=?, url1=?, url2=?, url3=? WHERE online_id=?", bindList );
 	}
 	
 	rc |= sqlExec( "INSERT INTO account_profile (greeting,about,picture,url1,url2,url3,donation,online_id) values(?,?,?,?,?,?,?,?)", bindList );
@@ -452,12 +406,15 @@ bool AccountDb::updateNetHostSetting( NetHostSetting& anchorSetting )
    
 	DbBindList bindList( anchorSetting.getNetHostSettingName().c_str() );
 	bindList.add( anchorSetting.getNetworkKey().c_str() );
-	bindList.add( anchorSetting.getNetHostWebsiteUrl().c_str() );
-	bindList.add( anchorSetting.getNetServiceWebsiteUrl().c_str() );
+	bindList.add( anchorSetting.getNetworkHostUrl().c_str() );
+	bindList.add( anchorSetting.getConnectTestUrl().c_str() );
+    bindList.add( anchorSetting.getRandomConnectUrl().c_str() );
+    bindList.add( anchorSetting.getGroupHostUrl().c_str() );
+    bindList.add( anchorSetting.getChatRoomHostUrl().c_str() );
 	bindList.add( anchorSetting.getIsThisNodeAnNetHostOld() );
 	bindList.add( anchorSetting.getExcludeMeFromNetHostList() );
 
-	RCODE rc = sqlExec( "INSERT INTO anchor_settings (anchor_setting_name,network_name,anchor_url,connect_test_url,is_anchor_node,exclude_me) values(?,?,?,?,?,?)", bindList );
+	RCODE rc = sqlExec( "INSERT INTO net_host_settings (net_host_setting_name,network_name,net_host_url,connect_test_url,rand_connect_url,group_host_url,chat_room_host_url,is_anchor_node,exclude_me) values(?,?,?,?,?,?,?,?,?)", bindList );
 	return ( 0 == rc ) ? true : false;
 }
 
@@ -465,17 +422,20 @@ bool AccountDb::updateNetHostSetting( NetHostSetting& anchorSetting )
 bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting )
 {
 	bool bResult = false;
-	DbCursor * cursor = startQueryInsecure( "SELECT * FROM anchor_settings WHERE anchor_setting_name='%s'", name );
+	DbCursor * cursor = startQueryInsecure( "SELECT * FROM net_host_settings WHERE net_host_setting_name='%s'", name );
 	if( NULL != cursor )
 	{
 		if( cursor->getNextRow() )
 		{
 			anchorSetting.setNetHostSettingName( name );
 			anchorSetting.setNetworkKey( cursor->getString(1) );
-			anchorSetting.setNetHostWebsiteUrl( cursor->getString(2) );
-			anchorSetting.setNetServiceWebsiteUrl( cursor->getString(3) );
-			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(4) ) ? false : true );
-			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(5) ) ? false : true );
+			anchorSetting.setNetworkHostUrl( cursor->getString(2) );
+			anchorSetting.setConnectTestUrl( cursor->getString(3) );
+            anchorSetting.setRandomConnectUrl( cursor->getString( 4 ) );
+            anchorSetting.setGroupHostUrl( cursor->getString( 5 ) );
+            anchorSetting.setChatRoomHostUrl( cursor->getString( 6 ) );
+			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(7) ) ? false : true );
+			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(8) ) ? false : true );
 
 			bResult = true;
 		}
@@ -490,7 +450,7 @@ bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& anch
 bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList )
 {
 	bool bResult = false;
-	DbCursor * cursor = startQueryInsecure( "SELECT * FROM anchor_settings" );
+	DbCursor * cursor = startQueryInsecure( "SELECT * FROM net_host_settings" );
 	if( NULL != cursor )
 	{
 		while( cursor->getNextRow() )
@@ -499,10 +459,13 @@ bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettin
 
 			anchorSetting.setNetHostSettingName( cursor->getString(0) );
 			anchorSetting.setNetworkKey( cursor->getString(1) );
-			anchorSetting.setNetHostWebsiteUrl( cursor->getString(2) );
-			anchorSetting.setNetServiceWebsiteUrl( cursor->getString(3) );
-			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(4) ) ? false : true );
-			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(5) ) ? false : true );
+			anchorSetting.setNetworkHostUrl( cursor->getString(2) );
+			anchorSetting.setConnectTestUrl( cursor->getString(3) );
+            anchorSetting.setRandomConnectUrl( cursor->getString( 4 ) );
+            anchorSetting.setGroupHostUrl( cursor->getString( 5 ) );
+            anchorSetting.setChatRoomHostUrl( cursor->getString( 6 ) );
+			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(7) ) ? false : true );
+			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(8) ) ? false : true );
 			anchorSettingList.push_back( anchorSetting );
 
 			bResult = true;
@@ -518,7 +481,7 @@ bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettin
 bool AccountDb::removeNetHostSettingByName( const char * name )
 {
 	DbBindList bindList( name );
-	RCODE rc = sqlExec(  "DELETE FROM anchor_settings WHERE anchor_setting_name=?", bindList );
+	RCODE rc = sqlExec(  "DELETE FROM net_host_settings WHERE net_host_setting_name=?", bindList );
 	return rc ? false : true;
 }
 
@@ -526,8 +489,8 @@ bool AccountDb::removeNetHostSettingByName( const char * name )
 bool AccountDb::updateLastNetHostSettingName( const char * name )
 {
 	DbBindList bindList( name );
-	RCODE rc = sqlExec(  "DELETE FROM last_anchor_setting" );
-	rc |= sqlExec(  "INSERT INTO last_anchor_setting (anchor_setting_name) values(?)", bindList );
+	RCODE rc = sqlExec(  "DELETE FROM last_net_host_setting" );
+	rc |= sqlExec(  "INSERT INTO last_net_host_setting (last_net_host_setting_name) values(?)", bindList );
 	return rc ? false : true;
 }
 
@@ -535,7 +498,7 @@ bool AccountDb::updateLastNetHostSettingName( const char * name )
 std::string AccountDb::getLastNetHostSettingName( void )
 {
 	std::string strSettingName = "";
-	DbCursor * cursor = startQueryInsecure("SELECT * FROM %s", TABLE_LAST_ANCHOR_SETTING.c_str() );
+	DbCursor * cursor = startQueryInsecure("SELECT * FROM %s", TABLE_LAST_NET_HOST_SETTING.c_str() );
 	if( NULL != cursor )
 	{
 		if( cursor->getNextRow() )

@@ -40,7 +40,7 @@ ActivityChooseTestWebsiteUrl::ActivityChooseTestWebsiteUrl(	AppCommon& app, QWid
 void ActivityChooseTestWebsiteUrl::updateValues()
 {
 	std::string strWebsiteUrl;
-	m_Engine.getEngineSettings().getNetServiceWebsiteUrl(strWebsiteUrl);
+	m_Engine.getEngineSettings().getConnectTestUrl(strWebsiteUrl);
 	QString strUrl = strWebsiteUrl.c_str();
 	ui.TestWebsiteEdit->setText(strUrl);
 }
@@ -50,7 +50,7 @@ void ActivityChooseTestWebsiteUrl::applyResultsAndExit()
 {
 	QString strResult = ui.TestWebsiteEdit->text();
 	std::string strWebsiteUrl = strResult.toUtf8().constData();
-	m_Engine.getEngineSettings().setNetServiceWebsiteUrl(strWebsiteUrl);
+	m_Engine.getEngineSettings().setConnectTestUrl(strWebsiteUrl);
 	accept();
 }
 

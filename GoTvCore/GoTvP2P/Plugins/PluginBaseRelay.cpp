@@ -149,7 +149,7 @@ EPluginAccessState PluginBaseRelay::handlePktRelayServiceReq( BigListInfo * bigL
 				bool grantedUserSession = false;
 				if( ePluginAccessOk == bigListInfo->getHisAccessPermissionFromMe( m_ePluginType ) )
 				{
-					if( (int)m_FriendGuidList.size() < m_MaxUserRelayAllowCnt )
+					if( (int)m_FriendGuidList.size() < ( int )m_MaxUserRelayAllowCnt )
 					{
 						m_FriendGuidList.addGuid( bigListInfo->getMyOnlineId() );
 						grantedUserSession = true;
@@ -160,7 +160,7 @@ EPluginAccessState PluginBaseRelay::handlePktRelayServiceReq( BigListInfo * bigL
 				if( false == grantedUserSession )
 				{
 					// try anonymous list
-					if( ( int )m_AnonGuidList.size() < m_MaxAnonRelayAllowCnt )
+					if( ( int )m_AnonGuidList.size() < (int)m_MaxAnonRelayAllowCnt )
 					{
 						m_AnonGuidList.addGuid( bigListInfo->getMyOnlineId() );
 						grantedAnonSession = true;

@@ -85,25 +85,25 @@ void EngineParams::getLastHostWebsiteResolvedIp( std::string& strWebsiteIp )
 }
 
 //============================================================================
-void EngineParams::setLastNetServiceWebsiteUrl( std::string& strWebsiteUrl )
+void EngineParams::setLastConnectTestUrl( std::string& strWebsiteUrl )
 {
 	setIniValue( MY_SETTINGS_KEY, "NetServiceUrl", strWebsiteUrl );
 }
 
 //============================================================================
-void EngineParams::getLastNetServiceWebsiteUrl( std::string& strWebsiteUrl )
+void EngineParams::getLastConnectTestUrl( std::string& strWebsiteUrl )
 {
 	getIniValue( MY_SETTINGS_KEY, "NetServiceUrl", strWebsiteUrl, "" );
 }
 
 //============================================================================
-void EngineParams::setLastNetServiceWebsiteResolvedIp( std::string& strWebsiteIp )
+void EngineParams::setLastConnectTestResolvedIp( std::string& strWebsiteIp )
 {
 	setIniValue( MY_SETTINGS_KEY, "NetServiceIp", strWebsiteIp );
 }
 
 //============================================================================
-void EngineParams::getLastNetServiceWebsiteResolvedIp( std::string& strWebsiteIp )
+void EngineParams::getLastConnectTestResolvedIp( std::string& strWebsiteIp )
 {
 	getIniValue( MY_SETTINGS_KEY, "NetServiceIp", strWebsiteIp, "" );
 }

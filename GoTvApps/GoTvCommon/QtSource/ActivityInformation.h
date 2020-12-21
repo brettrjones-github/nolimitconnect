@@ -27,7 +27,9 @@ enum EInfoType
     eInfoTypeNetworkHost,
     eInfoTypeConnectTestUrl,
     eInfoTypeConnectTestSettings,
-
+    eInfoTypeRandomConnectUrl,
+    eInfoTypeDefaultGroupHostUrl,
+    eInfoTypeDefaultChatRoomHostUrl,
 
     eMaxInfoType // must be last
 };
@@ -77,4 +79,7 @@ protected:
     static QString              m_NetworkHost;
     static QString              m_ConnectTestUrl;
     static QString              m_ConnectTestSettings;
+    static QString              m_RandomConnectUrl;
+    static QString              m_DefaultGroupHostUrl;
+    static QString              m_DefaultChatRoomHostUrl;
 };

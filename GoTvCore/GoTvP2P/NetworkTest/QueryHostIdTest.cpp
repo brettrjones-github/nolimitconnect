@@ -72,7 +72,7 @@ void QueryHostIdTest::threadRunNetworkTest( void )
 {
     std::string netHostUrl;
 
-    m_EngineSettings.getNetHostWebsiteUrl( netHostUrl );
+    m_EngineSettings.getNetworkHostUrl( netHostUrl );
     LogModule( eLogQueryHostIdTest, LOG_INFO, "attempting connection test with host test url %s thread 0x%x", 
                netHostUrl.c_str(), VxGetCurrentThreadId() );
     doRunTest( netHostUrl );

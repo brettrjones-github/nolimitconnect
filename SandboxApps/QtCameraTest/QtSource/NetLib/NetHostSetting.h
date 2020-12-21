@@ -39,10 +39,10 @@ public:
 	void						setNetworkKey( const char * networkName )					{ m_NetworkName = networkName; }
 	std::string&				getNetworkKey( void )										{ return m_NetworkName; }
 
-	void						setNetHostWebsiteUrl( const char * anchorUrl )				{ m_NetHostWebsiteUrl = anchorUrl; }
-	std::string&				getNetHostWebsiteUrl( void )								{ return m_NetHostWebsiteUrl; }
-    void						setNetServiceWebsiteUrl( const char * netServiceUrl )		{ m_NetServiceWebsiteUrl = netServiceUrl; }
-    std::string&				getNetServiceWebsiteUrl( void )								{ return m_NetServiceWebsiteUrl; }
+	void						setNetworkHostUrl( const char * anchorUrl )				{ m_NetConnectTestUrl = anchorUrl; }
+	std::string&				getNetworkHostUrl( void )								{ return m_NetConnectTestUrl; }
+    void						setConnectTestUrl( const char * netServiceUrl )		{ m_NetworkHostUrl = netServiceUrl; }
+    std::string&				getConnectTestUrl( void )								{ return m_NetworkHostUrl; }
     
 	void						setIsThisNodeAnNetHostOld( bool isHost )						{ m_ThisNodeIsHost = isHost; }// TODO remove
 	bool						getIsThisNodeAnNetHostOld( void )								{ return m_ThisNodeIsHost; }// TODO remove
@@ -55,8 +55,8 @@ protected:
 	std::string					m_NetHostSettingName;
 	std::string					m_NetworkName;
 
-	std::string					m_NetServiceWebsiteUrl;
-	std::string					m_NetHostWebsiteUrl;
+	std::string					m_NetworkHostUrl;
+	std::string					m_NetConnectTestUrl;
     bool						m_ThisNodeIsHost{ false };  // TODO remove
     bool						m_ExcludeMeFromHostList{ false };
 };

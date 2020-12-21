@@ -57,6 +57,6 @@ void RcMulticastBase::setMulticastIp( const char * multicastIpAddr )
 //============================================================================
 void RcMulticastBase::setMulticastKey( const char * networkName )
 {
-	m_SktUdp.m_TxCrypto.setPassword( networkName, strlen(networkName ));
-	m_SktUdp.m_RxCrypto.setPassword( networkName, strlen(networkName ));
+	m_SktUdp.m_TxCrypto.setPassword( networkName, ( int )strlen(networkName ));
+	m_SktUdp.m_RxCrypto.setPassword( networkName, ( int )strlen(networkName ));
 }

@@ -68,11 +68,20 @@ void EngineSettings::getNetSettings( NetSettings& netSettings )
 	getNetworkKey( strValue );
 	netSettings.setNetworkKey( strValue.c_str() );
 	
-	getNetHostWebsiteUrl( strValue );
-	netSettings.setNetHostWebsiteUrl( strValue.c_str() );
+	getNetworkHostUrl( strValue );
+	netSettings.setNetworkHostUrl( strValue.c_str() );
 
-	getNetServiceWebsiteUrl( strValue );
-	netSettings.setNetServiceWebsiteUrl( strValue.c_str() );
+	getConnectTestUrl( strValue );
+	netSettings.setConnectTestUrl( strValue.c_str() );
+
+    getRandomConnectUrl( strValue );
+    netSettings.setRandomConnectUrl( strValue.c_str() );
+
+    getGroupHostUrl( strValue );
+    netSettings.setGroupHostUrl( strValue.c_str() );
+
+    getChatRoomHostUrl( strValue );
+    netSettings.setChatRoomHostUrl( strValue.c_str() );
 
 	uint16_t u16Port = getTcpIpPort();
 	netSettings.setMyTcpInPort( u16Port );
@@ -93,8 +102,11 @@ void EngineSettings::getNetSettings( NetSettings& netSettings )
 void EngineSettings::setNetSettings( NetSettings& netSettings )
 {
 	setNetworkKey( netSettings.getNetworkKey() );
-	setNetHostWebsiteUrl( netSettings.getNetHostWebsiteUrl() );
-	setNetServiceWebsiteUrl( netSettings.getNetServiceWebsiteUrl() );
+	setNetworkHostUrl( netSettings.getNetworkHostUrl() );
+	setConnectTestUrl( netSettings.getConnectTestUrl() );
+    setRandomConnectUrl( netSettings.getRandomConnectUrl() );
+    setGroupHostUrl( netSettings.getGroupHostUrl() );
+    setChatRoomHostUrl( netSettings.getChatRoomHostUrl() );
 
 	setTcpIpPort( netSettings.getMyTcpInPort() );
 	setMulticastPort( netSettings.getMyMulticastPort() );
@@ -210,34 +222,82 @@ void EngineSettings::getMulticastEnable( bool& enableMulticast )
 }
 
 //============================================================================
-void EngineSettings::getNetServiceWebsiteUrl( std::string& strWebsiteUrl )
+void EngineSettings::getConnectTestUrl( std::string& strWebsiteUrl )
 {
     m_SettingsDbMutex.lock();
-	getIniValue( MY_SETTINGS_KEY, "NetServiceUrl", strWebsiteUrl, NET_DEFAULT_NETSERVICE_URL );
+	getIniValue( MY_SETTINGS_KEY, "ConnectTestUrl", strWebsiteUrl, NET_DEFAULT_CONNECT_TEST_URL );
     m_SettingsDbMutex.unlock();
 }
 
 //============================================================================
-void EngineSettings::setNetServiceWebsiteUrl( std::string& strWebsiteUrl )
+void EngineSettings::setConnectTestUrl( std::string& strWebsiteUrl )
 {
     m_SettingsDbMutex.lock();
-	setIniValue( MY_SETTINGS_KEY, "NetServiceUrl", strWebsiteUrl );
+	setIniValue( MY_SETTINGS_KEY, "ConnectTestUrl", strWebsiteUrl );
     m_SettingsDbMutex.unlock();
 }
 
 //============================================================================
-void EngineSettings::getNetHostWebsiteUrl( std::string& strWebsiteUrl )
+void EngineSettings::getNetworkHostUrl( std::string& strWebsiteUrl )
 {
     m_SettingsDbMutex.lock();
-	getIniValue( MY_SETTINGS_KEY, "HostUrl", strWebsiteUrl, NET_DEFAULT_NET_HOST_URL );
+	getIniValue( MY_SETTINGS_KEY, "NetHostUrl", strWebsiteUrl, NET_DEFAULT_NET_HOST_URL );
     m_SettingsDbMutex.unlock();
 }
 
 //============================================================================
-void EngineSettings::setNetHostWebsiteUrl( std::string& strWebsiteUrl )
+void EngineSettings::setNetworkHostUrl( std::string& strWebsiteUrl )
 {
     m_SettingsDbMutex.lock();
-	setIniValue( MY_SETTINGS_KEY, "HostUrl", strWebsiteUrl );
+	setIniValue( MY_SETTINGS_KEY, "NetHostUrl", strWebsiteUrl );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+void EngineSettings::setRandomConnectUrl( std::string& strWebsiteUrl )
+{
+    m_SettingsDbMutex.lock();
+    setIniValue( MY_SETTINGS_KEY, "RandConnectUrl", strWebsiteUrl );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+void EngineSettings::getRandomConnectUrl( std::string& strWebsiteUrl )
+{
+    m_SettingsDbMutex.lock();
+    getIniValue( MY_SETTINGS_KEY, "RandConnectUrl", strWebsiteUrl, NET_DEFAULT_RANDOM_CONNECT_URL );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+void EngineSettings::setGroupHostUrl( std::string& strWebsiteUrl )
+{
+    m_SettingsDbMutex.lock();
+    setIniValue( MY_SETTINGS_KEY, "GroupHostUrl", strWebsiteUrl );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+void EngineSettings::getGroupHostUrl( std::string& strWebsiteUrl )
+{
+    m_SettingsDbMutex.lock();
+    getIniValue( MY_SETTINGS_KEY, "GroupHostUrl", strWebsiteUrl, NET_DEFAULT_GROUP_HOST_URL );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+void EngineSettings::setChatRoomHostUrl( std::string& strWebsiteUrl )
+{
+    m_SettingsDbMutex.lock();
+    setIniValue( MY_SETTINGS_KEY, "ChatRoomHostUrl", strWebsiteUrl );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+void EngineSettings::getChatRoomHostUrl( std::string& strWebsiteUrl )
+{
+    m_SettingsDbMutex.lock();
+    getIniValue( MY_SETTINGS_KEY, "ChatRoomHostUrl", strWebsiteUrl, NET_DEFAULT_CHAT_ROOM_HOST_URL );
     m_SettingsDbMutex.unlock();
 }
 

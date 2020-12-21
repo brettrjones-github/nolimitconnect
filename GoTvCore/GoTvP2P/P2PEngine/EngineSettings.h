@@ -49,8 +49,8 @@ public:
 	void						setNetworkKey( std::string& strNetworkName );
 	void						getNetworkKey( std::string& strNetworkName );
 
-	void						setNetHostWebsiteUrl( std::string& strWebsiteUrl );
-	void						getNetHostWebsiteUrl( std::string& strWebsiteUrl );
+	void						setNetworkHostUrl( std::string& strWebsiteUrl );
+	void						getNetworkHostUrl( std::string& strWebsiteUrl );
 
 	void						setIsThisNodeAnNetHostOld( bool isHost ); // TODO remove
 	bool						getIsThisNodeAnNetHostOld( void ); // TODO remove
@@ -58,8 +58,17 @@ public:
 	void						setExcludeMeFromNetHostList( bool excludeFromHostList );
 	bool						getExcludeMeFromNetHostList( void );
 
-	void						setNetServiceWebsiteUrl( std::string& strWebsiteUrl );
-	void						getNetServiceWebsiteUrl( std::string& strWebsiteUrl );
+	void						setConnectTestUrl( std::string& strWebsiteUrl );
+	void						getConnectTestUrl( std::string& strWebsiteUrl );
+
+    void						setRandomConnectUrl( std::string& strWebsiteUrl );
+    void						getRandomConnectUrl( std::string& strWebsiteUrl );
+
+    void						setGroupHostUrl( std::string& strWebsiteUrl );
+    void						getGroupHostUrl( std::string& strWebsiteUrl );
+
+    void						setChatRoomHostUrl( std::string& strWebsiteUrl );
+    void						getChatRoomHostUrl( std::string& strWebsiteUrl );
 
 	void						setUseUpnpPortForward( bool bUseUpnpPortForward );
 	bool						getUseUpnpPortForward( void );

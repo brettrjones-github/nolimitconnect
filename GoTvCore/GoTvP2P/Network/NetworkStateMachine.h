@@ -53,7 +53,7 @@ public:
 	DirectConnectTester&		getDirectConnectTester( void )					{ return m_DirectConnectTester; }
 
 	bool						isThisNodeHostWebsite( void )					{ return m_bHostIpMatch; }
-	bool						isThisNodeNetServiceWebsite( void )				{ return m_bNetServiceIpMatch; }
+	bool						isThisNodeConnectTest( void )				{ return m_bNetServiceIpMatch; }
 	bool						isNetworkWebsitesResolved( void )				{ return m_bWebsiteUrlsResolved; }
 	std::string&				getHostIp( void )								{ return m_HostIp; }
 	uint16_t					getHostPort( void )							    { return m_u16HostPort; }
@@ -148,7 +148,7 @@ protected:
 
 	std::string					m_NetServiceIp;
 	uint16_t					m_u16NetServicePort;
-	std::string					m_LastResolvedNetServiceWebsite;
+	std::string					m_LastResolvedConnectTest;
 
 	bool						m_bWebsiteUrlsResolved;
 	bool						m_bHostIpMatch;

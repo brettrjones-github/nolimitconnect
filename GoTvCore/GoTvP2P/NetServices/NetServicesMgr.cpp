@@ -506,7 +506,7 @@ bool NetServicesMgr::actionReqConnectToNetService( VxSktConnectSimple& sktSimple
 	}
 	else
 	{
-		m_EngineSettings.getNetServiceWebsiteUrl( netSrvUrl );
+		m_EngineSettings.getConnectTestUrl( netSrvUrl );
 	}
 
 	std::string strHost;
@@ -553,7 +553,7 @@ bool NetServicesMgr::actionReqConnectToHost( VxSktConnectSimple& sktSimple )
 	}
 	else
 	{
-		m_EngineSettings.getNetHostWebsiteUrl( anchorUrl );
+		m_EngineSettings.getNetworkHostUrl( anchorUrl );
 	}
 
 	std::string strHost;
@@ -697,7 +697,7 @@ static int uint16_t = 0;
     }
     else
     {
-        m_EngineSettings.getNetServiceWebsiteUrl( netSrvUrl );
+        m_EngineSettings.getConnectTestUrl( netSrvUrl );
     }
 
     LogModule( eLogIsPortOpenTest, LOG_DEBUG, "Starting IsPortOpen lcl ip %s port %d test url %s app sec %d thread 0x%x", lclIP.c_str(), tcpListenPort, netSrvUrl.c_str(), GetApplicationAliveSec(), VxGetCurrentThreadId() );

@@ -6,4 +6,7 @@
 	Open <ProjectRoot>/build/VS2017/NoLimitConnectPython.sln and build
 	There seems to be a copy python dll to destination error in build system
 	You may need to build once for each python project to finish without errors
-4.) Build the rest of NoLimitConnect using <ProjectRoot>/build/VS2017/NoLimitConnectAll.sln
+4.) Open <ProjectRoot>/build/VS2017/NoLimitConnectAll.sln
+	right click _NoLimitConnectApp and select Set As Startup Project
+5.) Make sure it is set to cpu x64 the same Debug/Release as the NoLimitConnectPython
+	build and run (It make take a very long time to build)

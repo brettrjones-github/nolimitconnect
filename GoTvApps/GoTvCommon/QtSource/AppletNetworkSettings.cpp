@@ -53,6 +53,14 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     ui.m_ConnectIsOpenInfoButton->setIcon( eMyIconInformation );
     ui.m_ConnectTestHostButton->setIcon( eMyIconServiceConnectionTest );
 
+    ui.m_RandomConnectUrlInfoButton->setIcon( eMyIconInformation );
+    ui.m_DefaultGroupHostUrlInfoButton->setIcon( eMyIconInformation );
+    ui.m_ChatRoomUrlInfoButton->setIcon( eMyIconInformation );
+
+    ui.m_RandomConnectButton->setIcon( eMyIconServiceRandomConnect );
+    ui.m_DefaultGroupHostButton->setIcon( eMyIconServiceHostGroup );
+    ui.m_DefaultChatRoomHostButton->setIcon( eMyIconServiceChatRoom );
+
     updateDlgFromSettings(true);
 
     connectSignals();
@@ -90,6 +98,15 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_DeleteSettingsButton, SIGNAL( clicked() ), this, SLOT( onDeleteButtonClick() ) );
     connect( ui.m_TestIsPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotTestIsMyPortOpenButtonClick() ) );
     connect( ui.m_TestQueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotTestQueryHostIdButtonClick() ) );
+
+    connect( ui.m_DefaultChatRoomHostButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultChatRoomUrlInformation() ) );
+    connect( ui.m_ChatRoomUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultChatRoomUrlInformation() ) );
+
+    connect( ui.m_DefaultGroupHostButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultGroupHostUrlInformation() ) );
+    connect( ui.m_DefaultGroupHostUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultGroupHostUrlInformation() ) );
+
+    connect( ui.m_RandomConnectButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultGroupHostUrlInformation() ) );
+    connect( ui.m_RandomConnectUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultGroupHostUrlInformation() ) );
 
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( currentIndexChanged( const QString& ) ), this, SLOT( onComboBoxSelectionChange( const QString& ) ) );
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( editTextChanged( const QString& ) ), this, SLOT( onComboBoxTextChanged( const QString& ) ) );
@@ -155,14 +172,23 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
         ui.m_NetworkSettingsNameComboBox->addItem( "default" );
         std::string strValue;
 
-        m_Engine.getEngineSettings().getNetHostWebsiteUrl( strValue );
+        m_Engine.getEngineSettings().getNetworkHostUrl( strValue );
         ui.m_NetworkHostUrlEdit->setText( strValue.c_str() );
 
         m_Engine.getEngineSettings().getNetworkKey( strValue );
         ui.m_NetworkKeyEdit->setText( strValue.c_str() );
 
-        m_Engine.getEngineSettings().getNetServiceWebsiteUrl( strValue );
+        m_Engine.getEngineSettings().getConnectTestUrl( strValue );
         ui.m_ConnectTestUrlEdit->setText( strValue.c_str() );
+
+        m_Engine.getEngineSettings().getRandomConnectUrl( strValue );
+        ui.m_RandomConnectUrlEdit->setText( strValue.c_str() );
+
+        m_Engine.getEngineSettings().getGroupHostUrl( strValue );
+        ui.m_GroupHostUrlEdit->setText( strValue.c_str() );
+
+        m_Engine.getEngineSettings().getChatRoomHostUrl( strValue );
+        ui.m_DefaultChatRoomHostUrlEdit->setText( strValue.c_str() );
     }
 
     uint16_t u16Port = m_Engine.getEngineSettings().getTcpIpPort();
@@ -236,9 +262,12 @@ void AppletNetworkSettings::updateSettingsFromDlg()
         LogMsg( LOG_DEBUG, "AppletNetworkSettings has changed" );
         NetHostSetting& netHostSetting = curData.getNetHostSetting();
 
-        m_Engine.getEngineSettings().setNetHostWebsiteUrl( netHostSetting.getNetHostWebsiteUrl() );
         m_Engine.getEngineSettings().setNetworkKey( netHostSetting.getNetworkKey() );
-        m_Engine.getEngineSettings().setNetServiceWebsiteUrl( netHostSetting.getNetServiceWebsiteUrl() );
+        m_Engine.getEngineSettings().setNetworkHostUrl( netHostSetting.getNetworkHostUrl() );
+        m_Engine.getEngineSettings().setConnectTestUrl( netHostSetting.getConnectTestUrl() );
+        m_Engine.getEngineSettings().setRandomConnectUrl( netHostSetting.getRandomConnectUrl() );
+        m_Engine.getEngineSettings().setGroupHostUrl( netHostSetting.getGroupHostUrl() );
+        m_Engine.getEngineSettings().setChatRoomHostUrl( netHostSetting.getChatRoomHostUrl() );
         m_MyApp.getAccountMgr().updateNetHostSetting( netHostSetting );
         m_MyApp.getAccountMgr().updateLastNetHostSettingName( netHostSetting.getNetHostSettingName().c_str() );
 
@@ -294,13 +323,34 @@ void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData 
 
     std::string strValue;
     strValue = ui.m_NetworkHostUrlEdit->text().toUtf8().constData();
-    netHostSetting.setNetHostWebsiteUrl( strValue.c_str() );
+    netHostSetting.setNetworkHostUrl( strValue.c_str() );
 
     strValue = ui.m_NetworkKeyEdit->text().toUtf8().constData();
     netHostSetting.setNetworkKey( strValue.c_str() );
 
     strValue = ui.m_ConnectTestUrlEdit->text().toUtf8().constData();
-    netHostSetting.setNetServiceWebsiteUrl( strValue.c_str() );
+    netHostSetting.setConnectTestUrl( strValue.c_str() );
+
+    strValue = ui.m_RandomConnectUrlEdit->text().toUtf8().constData();
+    if( strValue.empty() )
+    {
+        strValue = "";
+    }
+    netHostSetting.setRandomConnectUrl( strValue.c_str() );
+
+    strValue = ui.m_GroupHostUrlEdit->text().toUtf8().constData();
+    if( strValue.empty() )
+    {
+        strValue = "";
+    }
+    netHostSetting.setGroupHostUrl( strValue.c_str() );
+
+    strValue = ui.m_DefaultChatRoomHostUrlEdit->text().toUtf8().constData();
+    if( strValue.empty() )
+    {
+        strValue = "";
+    }
+    netHostSetting.setChatRoomHostUrl( strValue.c_str() );
 
     std::string strPreferredIp = "";
     if( 0 != ui.m_LclIpListComboBox->currentIndex() )
@@ -472,9 +522,12 @@ void AppletNetworkSettings::onComboBoxSelectionChange( const QString& anchorSett
 //============================================================================
 void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& anchorSetting )
 {
-    ui.m_NetworkHostUrlEdit->setText( anchorSetting.getNetHostWebsiteUrl().c_str() );
+    ui.m_NetworkHostUrlEdit->setText( anchorSetting.getNetworkHostUrl().c_str() );
     ui.m_NetworkKeyEdit->setText( anchorSetting.getNetworkKey().c_str() );
-    ui.m_ConnectTestUrlEdit->setText( anchorSetting.getNetServiceWebsiteUrl().c_str() );
+    ui.m_ConnectTestUrlEdit->setText( anchorSetting.getConnectTestUrl().c_str() );
+    ui.m_RandomConnectUrlEdit->setText( anchorSetting.getRandomConnectUrl().c_str() );
+    ui.m_GroupHostUrlEdit->setText( anchorSetting.getGroupHostUrl().c_str() );
+    ui.m_DefaultChatRoomHostUrlEdit->setText( anchorSetting.getGroupHostUrl().c_str() );
 }
 
 //============================================================================
@@ -519,6 +572,28 @@ void AppletNetworkSettings::onSaveButtonClick( void )
         {
             QMessageBox::information( this, QObject::tr( "Network Setting" ), QObject::tr( "Connection Test URL cannot be blank." ) );
             return;
+        }
+
+        std::string randomConnectUrl;
+        randomConnectUrl = ui.m_RandomConnectUrlEdit->text().toUtf8().constData();
+        if( randomConnectUrl.empty() )
+        {
+            randomConnectUrl = "";
+        }
+
+
+        std::string groupHostUrl;
+        groupHostUrl = ui.m_GroupHostUrlEdit->text().toUtf8().constData();
+        if( groupHostUrl.empty() )
+        {
+            groupHostUrl = "";
+        }
+
+        std::string chatRoomHostUrl;
+        chatRoomHostUrl = ui.m_DefaultChatRoomHostUrlEdit->text().toUtf8().constData();
+        if( chatRoomHostUrl.empty() )
+        {
+            chatRoomHostUrl = "";
         }
 
         NetHostSetting anchorSetting;
@@ -574,16 +649,37 @@ void AppletNetworkSettings::slotShowNetworkKeyInformation()
 }
 
 //============================================================================
-void AppletNetworkSettings::slotShowConnectUrlInformation( void )
+void AppletNetworkSettings::slotShowConnectTestUrlInformation( void )
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeConnectTestUrl );
     activityInfo->show();
 }
 
 //============================================================================
-void AppletNetworkSettings::slotShowConnetTestInformation( void )
+void AppletNetworkSettings::slotShowConnectTestSettingsInformation( void )
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeConnectTestSettings );
+    activityInfo->show();
+}
+
+//============================================================================
+void AppletNetworkSettings::slotShowRandomConnectUrlInformation( void )
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeRandomConnectUrl );
+    activityInfo->show();
+}
+
+//============================================================================
+void AppletNetworkSettings::slotShowDefaultGroupHostUrlInformation( void )
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeDefaultGroupHostUrl );
+    activityInfo->show();
+}
+
+//============================================================================
+void AppletNetworkSettings::slotShowDefaultChatRoomUrlInformation( void )
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeDefaultChatRoomHostUrl );
     activityInfo->show();
 }
 

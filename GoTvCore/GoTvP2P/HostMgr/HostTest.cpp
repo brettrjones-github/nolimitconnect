@@ -154,7 +154,7 @@ void HostTest::doHostUrlTest( void )
 	}
 
 	std::string anchorUrl;
-	m_EngineSettings.getNetHostWebsiteUrl( anchorUrl );
+	m_EngineSettings.getNetworkHostUrl( anchorUrl );
 	doConnectionTest( anchorUrl, true );
 }
 
@@ -162,7 +162,7 @@ void HostTest::doHostUrlTest( void )
 void HostTest::doNetServiceUrlTest( void )
 {
 	std::string netServiceUrl;
-	m_EngineSettings.getNetServiceWebsiteUrl( netServiceUrl );
+	m_EngineSettings.getConnectTestUrl( netServiceUrl );
 	doConnectionTest( netServiceUrl, false );
 }
 

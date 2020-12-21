@@ -216,8 +216,8 @@ void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
     std::string netHostUrl;
 
     //engineSettings.getNetworkKey( networkKeyString );
-    //engineSettings.getNetServiceWebsiteUrl( netServiceUrl );
-    engineSettings.getNetHostWebsiteUrl( netHostUrl );
+    //engineSettings.getConnectTestUrl( netServiceUrl );
+    engineSettings.getNetworkHostUrl( netHostUrl );
     // we need to update the globals so accessable everywhere
     std::string webHostName;
     std::string webFileName;

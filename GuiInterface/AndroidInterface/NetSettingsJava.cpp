@@ -108,7 +108,7 @@ NetSettingsJavaClass * GetNetSettingsJavaClass( void )
 	// get java member id s
 	//LogMsg( LOG_INFO, "GetNetSettingsJavaClass: Getting ID\n" );
 	poClass->m_NetworkNameID 				= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetworkName", "Ljava/lang/String;");
-	poClass->m_NetServiceWebsiteUrlID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetServiceWebsiteUrl", "Ljava/lang/String;");
+	poClass->m_NetworkHostUrlID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetworkHostUrl", "Ljava/lang/String;");
 	poClass->m_HostWebsiteUrlID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_HostWebsiteUrl", "Ljava/lang/String;");
 
 	poClass->m_ThisDeviceIsAnHostID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_ThisDeviceIsAnHost", "Z");
@@ -134,7 +134,7 @@ bool Java2NetSettings( jobject& o, NetSettings& netSettings )
 	if( poClass )
 	{
 		poClass->m_NetworkNameID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetworkName", "Ljava/lang/String;");
-		poClass->m_NetServiceWebsiteUrlID 	= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetServiceWebsiteUrl", "Ljava/lang/String;");
+		poClass->m_NetworkHostUrlID 	= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetworkHostUrl", "Ljava/lang/String;");
 		poClass->m_HostWebsiteUrlID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_HostWebsiteUrl", "Ljava/lang/String;");
 
 		poClass->m_ThisDeviceIsAnHostID 	= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_ThisDeviceIsAnHost", "Z");
@@ -150,9 +150,9 @@ bool Java2NetSettings( jobject& o, NetSettings& netSettings )
 		netSettings.setNetworkName( pNetworkName );
 		poClass->m_poEnv->ReleaseStringUTFChars( jstrNetworkName, pNetworkName );
 
-		jstring jstrNetServiceUrl = (jstring) poClass->m_poEnv->GetObjectField( o, poClass->m_NetServiceWebsiteUrlID );
+		jstring jstrNetServiceUrl = (jstring) poClass->m_poEnv->GetObjectField( o, poClass->m_NetworkHostUrlID );
 		const char * pNetServiceUrl = poClass->m_poEnv->GetStringUTFChars(jstrNetServiceUrl, 0);
-		netSettings.setNetServiceWebsiteUrl( pNetServiceUrl );
+		netSettings.setConnectTestUrl( pNetServiceUrl );
 		poClass->m_poEnv->ReleaseStringUTFChars( jstrNetServiceUrl, pNetServiceUrl );
 
 		jstring jstrHostWebsiteUrl = (jstring) poClass->m_poEnv->GetObjectField( o, poClass->m_HostWebsiteUrlID );
@@ -188,7 +188,7 @@ bool Java2NetSettings( jobject& o, NetSettings& netSettings )
 void javaFillNetSettingsClass( NetSettingsJavaClass * poClass, NetSettings& netSettings, jobject& oNetSettingsClass )
 {
 	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_NetworkNameID, poClass->m_poEnv->NewStringUTF( netSettings.getNetworkName().c_str() ) );
-	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_NetServiceWebsiteUrlID, poClass->m_poEnv->NewStringUTF( netSettings.getNetServiceWebsiteUrl().c_str() ) );
+	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_NetworkHostUrlID, poClass->m_poEnv->NewStringUTF( netSettings.getConnectTestUrl().c_str() ) );
 	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_HostWebsiteUrlID, poClass->m_poEnv->NewStringUTF( netSettings.getHostWebsiteUrl().c_str() ) );
 
 	poClass->m_poEnv->SetBooleanField(oNetSettingsClass, poClass->m_ThisDeviceIsAnHostID, netSettings.getIsThisNodeAnHost() );

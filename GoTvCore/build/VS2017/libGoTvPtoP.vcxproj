@@ -22,7 +22,7 @@
     <ProjectGuid>{3A68081D-E8F9-4523-9436-530DE9E5530A}</ProjectGuid>
     <RootNamespace>XBMC_PC</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>libGoTvPtoP</ProjectName>
+    <ProjectName>_NoLimitConnectCore</ProjectName>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\libGoTvPtoP.core-defaults.props" />
@@ -126,7 +126,7 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>$(ProjectName)D</TargetName>
+    <TargetName>NoLimitConnectCoreD</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
@@ -135,7 +135,8 @@
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetExt>.exe</TargetExt>
+    <TargetExt>.lib</TargetExt>
+    <TargetName>NoLimitConnectCore</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -266,6 +267,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <Lib>
+      <OutputFile>$(OutDir)NoLimitConnectCoreD$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">
     <ClCompile>
@@ -399,7 +403,7 @@
     <Link>
       <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>Mpr.lib;Iphlpapi.lib;PowrProf.lib;d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;setupapi.lib;dwmapi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <OutputFile>$(OutDir)NoLimitConnectCore$(TargetExt)</OutputFile>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <DelayLoadDLLs>dwmapi.dll;;avcodec-56.dll;avfilter-5.dll;avformat-56.dll;avutil-54.dll;postproc-53.dll;swresample-1.dll;swscale-3.dll;d3dcompiler_47.dll;%(DelayLoadDLLs)</DelayLoadDLLs>

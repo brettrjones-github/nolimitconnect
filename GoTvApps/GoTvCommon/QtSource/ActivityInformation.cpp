@@ -102,6 +102,15 @@ void ActivityInformation::updateInformation( void )
         ui.m_PictureLabel->setVisible( true );
         ui.m_ServiceInfoButton->setIcon( eMyIconServiceHostNetwork );
         break;
+    case eInfoTypeRandomConnectUrl:
+        ui.m_ServiceInfoButton->setIcon( eMyIconServiceRandomConnect );
+        break;
+    case eInfoTypeDefaultGroupHostUrl:
+        ui.m_ServiceInfoButton->setIcon( eMyIconSettingsHostGroup );
+        break;
+    case eInfoTypeDefaultChatRoomHostUrl:
+        ui.m_ServiceInfoButton->setIcon( eMyIconSettingsChatRoom );
+        break;
     default:
         break;
     }
@@ -307,6 +316,29 @@ QString ActivityInformation::m_ConnectTestSettings( QObject::tr(
     "\n"
     "\n"
 ) );
+
+QString ActivityInformation::m_RandomConnectUrl( QObject::tr(
+    "=== RANDOM CONNECT SERVICE URL ===\n"
+    "Provides Service of listing/connecting 2 Persons using the random connect feature.\n"
+    "The person listed could be anyone in the world also using the random connect feature.\n"
+    "Random connect works by listing persons who pressed the random connect button.\n"
+    "Within 20 seconds of the random connect button press.\n"
+) );
+
+QString ActivityInformation::m_DefaultGroupHostUrl( QObject::tr(
+    "=== Default GROUP HOST URL ===\n"
+    "No Limit Connect will attempt to connect the this group\n"
+    "When Log In is completed.\n"
+    "If connect fails or no url is provided then you can search for a Group to join\n"
+) );
+
+QString ActivityInformation::m_DefaultChatRoomHostUrl( QObject::tr(
+    "=== Default CHAT ROOM HOST URL ===\n"
+    "No Limit Connect will attempt to connect the this Chat Room\n"
+    "When Log In is completed.\n"
+    "If connect fails or no url is provided then you can search for a Chat Room to join\n"
+) );
+
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -337,7 +369,12 @@ QString ActivityInformation::getInfoText( void )
         return m_ConnectTestUrl;
     case eInfoTypeConnectTestSettings:
         return m_ConnectTestSettings;
-
+    case eInfoTypeRandomConnectUrl:
+        return m_RandomConnectUrl;
+    case eInfoTypeDefaultGroupHostUrl:
+        return m_DefaultGroupHostUrl;
+    case eInfoTypeDefaultChatRoomHostUrl:
+        return m_DefaultChatRoomHostUrl;
     default:
         return m_NoInfoAvailable;
     }

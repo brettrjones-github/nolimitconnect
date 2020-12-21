@@ -19,14 +19,17 @@
 #include <string>
 
 #define NET_DEFAULT_NETWORK_NAME			"NoLimitNet"
-#define NET_DEFAULT_NET_HOST_URL			"ptop://www.nolimitconnect.net:45124"
-#define NET_DEFAULT_NETSERVICE_URL			"ptop://www.nolimitconnect.net:45124" // for connection test.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_NET_HOST_URL			"ptop://nolimitconnect.net:45124"
+#define NET_DEFAULT_CONNECT_TEST_URL		"ptop://gotvptop.net:45124" // for connection test.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_RANDOM_CONNECT_URL		"ptop://gotvptop.com:45124" // for random connect.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_GROUP_HOST_URL		    "ptop://myp2pnetwork.com:45124" // for default group host.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_CHAT_ROOM_HOST_URL		"ptop://myp2pconnect.com:45124" // for default chat room host.. for now same as Network Host but could be seperated to spread network load
 #define NET_DEFAULT_NETSERVICE_PORT			45124
 
 class NetHostSetting
 {
 public:
-	NetHostSetting();
+	NetHostSetting() = default;
 	virtual ~NetHostSetting() = default;
 
 	NetHostSetting&				operator =( const NetHostSetting& rhs );
@@ -39,24 +42,34 @@ public:
 	void						setNetworkKey( const char * networkName )					{ m_NetworkName = networkName; }
 	std::string&				getNetworkKey( void )										{ return m_NetworkName; }
 
-	void						setNetHostWebsiteUrl( const char * anchorUrl )				{ m_NetHostWebsiteUrl = anchorUrl; }
-	std::string&				getNetHostWebsiteUrl( void )								{ return m_NetHostWebsiteUrl; }
-    void						setNetServiceWebsiteUrl( const char * netServiceUrl )		{ m_NetServiceWebsiteUrl = netServiceUrl; }
-    std::string&				getNetServiceWebsiteUrl( void )								{ return m_NetServiceWebsiteUrl; }
+	void						setNetworkHostUrl( const char * anchorUrl )				    { m_NetworkHostUrl = anchorUrl; }
+	std::string&				getNetworkHostUrl( void )								    { return m_NetworkHostUrl; }
+    void						setConnectTestUrl( const char * netServiceUrl )		        { m_NetConnectTestUrl = netServiceUrl; }
+    std::string&				getConnectTestUrl( void )								    { return m_NetConnectTestUrl; }
+    void						setRandomConnectUrl( const char * netServiceUrl )		    { m_NetRandomConnectUrl = netServiceUrl; }
+    std::string&				getRandomConnectUrl( void )								    { return m_NetRandomConnectUrl; }
+    void						setGroupHostUrl( const char * netServiceUrl )		        { m_GroupHostUrl = netServiceUrl; }
+    std::string&				getGroupHostUrl( void )								        { return m_GroupHostUrl; }
+    void						setChatRoomHostUrl( const char * netServiceUrl )		    { m_ChatRoomHostUrl = netServiceUrl; }
+    std::string&				getChatRoomHostUrl( void )								    { return m_ChatRoomHostUrl; }
     
-	void						setIsThisNodeAnNetHostOld( bool isHost )						{ m_ThisNodeIsHost = isHost; }// TODO remove
-	bool						getIsThisNodeAnNetHostOld( void )								{ return m_ThisNodeIsHost; }// TODO remove
+	void						setIsThisNodeAnNetHostOld( bool isHost )					{ m_ThisNodeIsHost = isHost; }// TODO remove
+	bool						getIsThisNodeAnNetHostOld( void )							{ return m_ThisNodeIsHost; }// TODO remove
 
 	void						setExcludeMeFromNetHostList( bool excludeMe )				{ m_ExcludeMeFromHostList = excludeMe; }
 	bool						getExcludeMeFromNetHostList( void )							{ return m_ExcludeMeFromHostList; }
 
 protected:
 	//=== vars ===//
-	std::string					m_NetHostSettingName;
-	std::string					m_NetworkName;
+    std::string					m_NetHostSettingName{ "default" };
+    std::string					m_NetworkName{ NET_DEFAULT_NETWORK_NAME };
 
-	std::string					m_NetServiceWebsiteUrl;
-	std::string					m_NetHostWebsiteUrl;
+    std::string					m_NetworkHostUrl{ NET_DEFAULT_NET_HOST_URL };
+	std::string					m_NetConnectTestUrl{ NET_DEFAULT_CONNECT_TEST_URL };
+    std::string					m_NetRandomConnectUrl{ NET_DEFAULT_RANDOM_CONNECT_URL };
+    std::string					m_GroupHostUrl{ NET_DEFAULT_GROUP_HOST_URL };
+    std::string					m_ChatRoomHostUrl{ NET_DEFAULT_GROUP_HOST_URL };
+
     bool						m_ThisNodeIsHost{ false };  // TODO remove
     bool						m_ExcludeMeFromHostList{ false };
 };
