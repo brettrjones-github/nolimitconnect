@@ -467,7 +467,7 @@ bool VxLocalIpExists(  std::string& strIpAddress )
 
 //============================================================================
 //! return true if port is already in use on this local ip address
-bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp )
+bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp, bool useBind )
 {
 	bool bInUse = true;
 
@@ -476,6 +476,12 @@ bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp )
 	{
 		addr.setIp( pLocalIp );
 	}
+    else
+    {
+        // use loopback
+        LogMsg( LOG_DEBUG, "VxIsIpPortInUse: null ip so default to loopback\n" );
+        addr.setIp( "127.0.0.1" );
+    }
 
 	SOCKET listenSocket = socket(addr.isIPv4() ? AF_INET : AF_INET6, SOCK_STREAM, 0);
 	if( INVALID_SOCKET == listenSocket )
@@ -485,29 +491,30 @@ bool VxIsIpPortInUse(  uint16_t u16Port, const char * pLocalIp )
 		return	bInUse;
 	}
 
-#if USE_BIND_LOCAL_IP
-	if( false == VxBindSkt( listenSocket, addr, u16Port ) )
+    // must always bind when checking for random port or on windows will get
+    // WSAEINVAL:"The socket is not already bound to an address."
+    if( useBind )
+    {
+        if( false == VxBindSkt( listenSocket, addr, u16Port ) )
+        {
+            ::VxCloseSkt( listenSocket );
+            LogMsg( LOG_INFO, "VxIsIpPortInUse: bind error %s\n", VxDescribeSktError( VxGetLastError() ) );
+            return bInUse;
+        }
+    }
+
+	RCODE rc;
+	if( 0 != ( rc = listen( listenSocket, SOMAXCONN ) ) )
 	{
-		LogMsg( LOG_INFO, "VxIsIpPortInUse: bind error %s\n", VxDescribeSktError( VxGetLastError() ) );
+		//listen error
+		rc = VxGetLastError();
+		LogMsg( LOG_ERROR, "VxIsIpPortInUse: listen error %s\n", VxDescribeSktError( rc ) );
+
 	}
 	else
-    {
-#endif // USE_BIND_LOCAL_IP
-		RCODE rc;
-		if( 0 != ( rc = listen( listenSocket, SOMAXCONN ) ) )
-		{
-			//listen error
-			rc = VxGetLastError();
-			LogMsg( LOG_ERROR, "VxIsIpPortInUse: listen error %s\n", VxDescribeSktError( rc ) );
-
-		}
-		else
-		{
-			bInUse = false;
-		}
-#if USE_BIND_LOCAL_IP
+	{
+		bInUse = false;
 	}
-#endif // USE_BIND_LOCAL_IP
 
 	::VxCloseSkt( listenSocket );
 	return bInUse;

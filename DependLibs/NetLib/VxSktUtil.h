@@ -105,10 +105,10 @@ RCODE							VxReceiveSktData( SOCKET&			oSkt,
                                                   int *             iRetBytesReceived,		// number of bytes actually received
 												  int				iTimeoutMilliSeconds = SKT_RECEIVE_TIMEOUT,	// milliseconds before receive attempt times out ( 0 = do not wait )
                                                   bool              bAbortIfCrLfCrLf = false,		// if true then abort receive when \r\n\r\n is received
-												  bool *			pbRetGotCrLfCrLf = NULL );		// if received \r\n\r\n set to truevoid							VxFillHints( struct addrinfo& oHints, bool bUdpSkt = false, bool ipv6Only = false );
+												  bool *			pbRetGotCrLfCrLf = nullptr );		// if received \r\n\r\n set to truevoid							VxFillHints( struct addrinfo& oHints, bool bUdpSkt = false, bool ipv6Only = false );
 
 bool							VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr );
-bool							VxIsIpPortInUse( uint16_t u16Port, const char * pLocalIp = NULL);
+bool							VxIsIpPortInUse( uint16_t u16Port, const char * pLocalIp = nullptr, bool useBind = false);
 #endif // __cplusplus
 
 //============================================================================
@@ -132,7 +132,6 @@ RCODE							VxSendSktData( SOCKET			oSkt,
 
 
 void							VxSetSktAllowReusePort( SOCKET skt );
-
 
 uint16_t						VxGetRmtPort( SOCKET skt );
 

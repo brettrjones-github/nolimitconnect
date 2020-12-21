@@ -117,15 +117,17 @@ uint16_t VxGetRandomTcpPort( bool bAbove4000 )
 			continue;
 		}
 
-		if( VxIsIpPortInUse( u16RandPort ))
+		if( VxIsIpPortInUse( u16RandPort, nullptr, true ))
 		{
+            // sleep a bit or the whole app will look like it is hung
+            VxSleep( 100 );
 			continue;
 		}
 
 		// success
 		return u16RandPort;
-
 	}
+
 	// if we got here we have tried 30000 times and failed.. give up
 	LogMsg( LOG_ERROR, "VxGetRandomTcpPort: could not find a port\n");
 	return 0;
