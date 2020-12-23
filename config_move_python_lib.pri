@@ -20,8 +20,17 @@ unix:!android{
         PYTHON_DEST_NAME = $${TARGET_NAME}.pyd
      }
 
-    PYTHON_LIB_COPY_CMD = cp -f $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}$${PYTHON_DEST_NAME}
-    QMAKE_POST_LINK += $$quote($${PYTHON_LIB_COPY_CMD})
+    PYTHON_LIB_MKDIR_CMD = mkdir -p $${DEST_PYTHON_DLL_DIR}
+    message("*python dll mkdir cmd $${PYTHON_LIB_MKDIR_CMD}")
+
+    PYTHON_LIB_COPY_CMD = cp -f $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}
+    message("**python dll cp cmd $${PYTHON_LIB_COPY_CMD}")
+
+    PYTHON_LIB_RENAME_CMD = mv -f $${DEST_PYTHON_DLL_DIR}$${PYTHON_SRC_NAME}  $${DEST_PYTHON_DLL_DIR}$${PYTHON_DEST_NAME}
+    message("***python dll rename cmd $${PYTHON_LIB_REMAME_CMD}")
+
+    QMAKE_POST_LINK += $$quote($${PYTHON_LIB_MKDIR_CMD} && $${PYTHON_LIB_COPY_CMD} && $${PYTHON_LIB_RENAME_CMD})
+    message("****python post link $${QMAKE_POST_LINK}")
 }
 
 android{
@@ -98,10 +107,6 @@ win32:{
 
     #copydata.commands = copy $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
     PYTHON_LIB_COPY_CMD = cp $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
+    QMAKE_POST_LINK += $$quote($${PYTHON_LIB_COPY_CMD})
 }
 
-!android:{
-#message("**python dll copy cmd $${PYTHON_LIB_COPY_CMD}")
-
-QMAKE_POST_LINK += $$quote($${PYTHON_LIB_COPY_CMD})
-}
