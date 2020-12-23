@@ -29,13 +29,10 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Chat Entry</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#ChatEntryWidget
-{   
-background-color: white;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

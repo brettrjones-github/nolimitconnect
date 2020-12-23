@@ -32,36 +32,26 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QFrame#m_MainFrame
-{   
-background-color: #BCFEBC;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QFrame#m_PhotoEntryFrame
-{   
-background-color: #D3EFF5;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QFrame#m_ButtonFrame
-{   
-background-color: #FBFED6;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <property name="horizontalSpacing">
     <number>0</number>
    </property>
    <property name="verticalSpacing">
     <number>4</number>
-   </property>
-   <property name="margin">
-    <number>0</number>
    </property>
    <item row="0" column="0">
     <widget class="QFrame" name="m_MainFrame">
@@ -81,7 +71,16 @@ border-radius: 4px;
       <property name="spacing">
        <number>2</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
        <number>5</number>
       </property>
       <item>
@@ -113,7 +112,16 @@ border-radius: 4px;
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <property name="margin">
+           <property name="leftMargin">
+            <number>2</number>
+           </property>
+           <property name="topMargin">
+            <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>2</number>
+           </property>
+           <property name="bottomMargin">
             <number>2</number>
            </property>
            <property name="spacing">
@@ -150,7 +158,16 @@ border-radius: 4px;
          <property name="spacing">
           <number>0</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -239,7 +256,16 @@ border-radius: 4px;
          <property name="spacing">
           <number>5</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
           <number>5</number>
          </property>
          <item>
@@ -319,15 +345,15 @@ border-radius: 4px;
    <header>VxPushButton.h</header>
   </customwidget>
   <customwidget>
-   <class>AvatarBar</class>
+   <class>VidWidget</class>
    <extends>QWidget</extends>
-   <header>AvatarBar.h</header>
+   <header location="global">VidWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>VidWidget</class>
+   <class>AvatarBar</class>
    <extends>QWidget</extends>
-   <header>VidWidget.h</header>
+   <header>AvatarBar.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

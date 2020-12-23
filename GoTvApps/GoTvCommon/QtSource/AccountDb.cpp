@@ -37,8 +37,8 @@ namespace
     std::string 		COLUMNS_LAST_NET_HOST_SETTING = "last_net_host_setting_name";
 
 	std::string 		TABLE_NET_HOST_SETTINGS	 		= "net_host_settings";
-    std::string 		CREATE_COLUMNS_NET_HOST_SETTINGS = " (net_host_setting_name TEXT PRIMARY KEY, network_name TEXT, net_host_url TEXT, connect_test_url TEXT, rand_connect_url TEXT, group_host_url TEXT, chat_room_host_url TEXT, is_anchor_node INTEGER, exclude_me INTEGER )  ";
-    std::string 		COLUMNS_NET_HOST_SETTINGS = "net_host_setting_name,network_name,net_host_url,connect_test_url,rand_connect_url,group_host_url,chat_room_host_url,is_anchor_node,exclude_me";
+    std::string 		CREATE_COLUMNS_NET_HOST_SETTINGS = " (net_host_setting_name TEXT PRIMARY KEY, network_name TEXT, net_host_url TEXT, connect_test_url TEXT, rand_connect_url TEXT, group_host_url TEXT, chat_room_host_url TEXT, extern_ip_addr TEXT, connect_test_type INTEGER, use_upnp INTEGER, exclude_me INTEGER )  ";
+    std::string 		COLUMNS_NET_HOST_SETTINGS = "net_host_setting_name,network_name,net_host_url,connect_test_url,rand_connect_url,group_host_url,chat_room_host_url,extern_ip_addr,connect_test_type,use_upnp,exclude_me";
 
 	std::string 		COLUMNS_LAST_LOGIN				= " online_name ";
 	std::string 		CREATE_COLUMNS_LAST_LOGIN		= " (id INTEGER PRIMARY KEY AUTOINCREMENT, online_name  TEXT) ";
@@ -411,10 +411,12 @@ bool AccountDb::updateNetHostSetting( NetHostSetting& anchorSetting )
     bindList.add( anchorSetting.getRandomConnectUrl().c_str() );
     bindList.add( anchorSetting.getGroupHostUrl().c_str() );
     bindList.add( anchorSetting.getChatRoomHostUrl().c_str() );
-	bindList.add( anchorSetting.getIsThisNodeAnNetHostOld() );
+    bindList.add( anchorSetting.getExternIpAddr().c_str() );
+	bindList.add( anchorSetting.getConnectTestType() );
+    bindList.add( anchorSetting.getUseUpnp() );
 	bindList.add( anchorSetting.getExcludeMeFromNetHostList() );
 
-	RCODE rc = sqlExec( "INSERT INTO net_host_settings (net_host_setting_name,network_name,net_host_url,connect_test_url,rand_connect_url,group_host_url,chat_room_host_url,is_anchor_node,exclude_me) values(?,?,?,?,?,?,?,?,?)", bindList );
+	RCODE rc = sqlExec( "INSERT INTO net_host_settings (net_host_setting_name,network_name,net_host_url,connect_test_url,rand_connect_url,group_host_url,chat_room_host_url,extern_ip_addr,connect_test_type,use_upnp,exclude_me) values(?,?,?,?,?,?,?,?,?,?,?)", bindList );
 	return ( 0 == rc ) ? true : false;
 }
 
@@ -434,8 +436,10 @@ bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& anch
             anchorSetting.setRandomConnectUrl( cursor->getString( 4 ) );
             anchorSetting.setGroupHostUrl( cursor->getString( 5 ) );
             anchorSetting.setChatRoomHostUrl( cursor->getString( 6 ) );
-			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(7) ) ? false : true );
-			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(8) ) ? false : true );
+            anchorSetting.setExternIpAddr( cursor->getString( 7 ) );
+			anchorSetting.setConnectTestType(  cursor->getS32( 8 ) );
+            anchorSetting.setUseUpnp( ( 0 == cursor->getS32( 9 ) ) ? false : true );
+			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32( 10 ) ) ? false : true );
 
 			bResult = true;
 		}
@@ -464,8 +468,10 @@ bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettin
             anchorSetting.setRandomConnectUrl( cursor->getString( 4 ) );
             anchorSetting.setGroupHostUrl( cursor->getString( 5 ) );
             anchorSetting.setChatRoomHostUrl( cursor->getString( 6 ) );
-			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(7) ) ? false : true );
-			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(8) ) ? false : true );
+            anchorSetting.setExternIpAddr( cursor->getString( 7 ) );
+            anchorSetting.setConnectTestType( cursor->getS32( 8 ) );
+			anchorSetting.setUseUpnp(  ( 0 == cursor->getS32( 9 ) ) ? false : true );
+			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32( 10 ) ) ? false : true );
 			anchorSettingList.push_back( anchorSetting );
 
 			bResult = true;

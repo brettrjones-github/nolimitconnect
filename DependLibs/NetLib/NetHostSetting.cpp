@@ -27,7 +27,9 @@ NetHostSetting& NetHostSetting::operator =( const NetHostSetting& rhs )
         m_NetRandomConnectUrl       = rhs.m_NetRandomConnectUrl;
         m_GroupHostUrl              = rhs.m_GroupHostUrl;
         m_ChatRoomHostUrl           = rhs.m_ChatRoomHostUrl;
-        m_ThisNodeIsHost            = rhs.m_ThisNodeIsHost;
+        m_ExternIpAddr              = rhs.m_ExternIpAddr;
+        m_ConnectTestType           = rhs.m_ConnectTestType;
+        m_UseUpnp                   = rhs.m_UseUpnp;
 		m_ExcludeMeFromHostList	    = rhs.m_ExcludeMeFromHostList;
 	}
 
@@ -44,7 +46,9 @@ bool NetHostSetting::operator == ( const NetHostSetting& rhs ) const
         m_NetRandomConnectUrl == rhs.m_NetRandomConnectUrl &&
         m_GroupHostUrl == rhs.m_GroupHostUrl &&
         m_ChatRoomHostUrl == rhs.m_ChatRoomHostUrl &&
-        m_ThisNodeIsHost == rhs.m_ThisNodeIsHost &&
+        m_ExternIpAddr == rhs.m_ExternIpAddr &&
+        m_ConnectTestType == rhs.m_ConnectTestType &&
+        m_UseUpnp == rhs.m_UseUpnp &&
         m_ExcludeMeFromHostList == rhs.m_ExcludeMeFromHostList;
 }
 

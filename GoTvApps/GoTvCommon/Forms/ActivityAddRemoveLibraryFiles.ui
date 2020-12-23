@@ -321,15 +321,6 @@
          </item>
          <item>
           <widget class="VxLabel" name="m_UpDirectoryLabel">
-           <property name="styleSheet">
-            <string notr="true">#m_UpDirectoryLabel
-{   
-color: white;
-background-color: rgb(50,88,177);
-
-}
-</string>
-           </property>
            <property name="text">
             <string>Move Up A Directory</string>
            </property>

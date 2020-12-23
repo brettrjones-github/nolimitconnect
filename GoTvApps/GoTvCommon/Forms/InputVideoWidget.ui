@@ -32,26 +32,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QFrame#m_MainFrame
-{   
-background-color: #BCFEBC;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QFrame#m_VideoPictureFrame
-{   
-background-color: #D3EFF5;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QFrame#m_ButtonFrame
-{   
-background-color: #FBFED6;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -70,13 +51,7 @@ border-radius: 4px;
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QFrame" name="m_MainFrame">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
+    <widget class="QGroupBox" name="m_MainGroupBox">
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
        <number>5</number>
@@ -343,7 +318,7 @@ border-radius: 4px;
   <customwidget>
    <class>VidWidget</class>
    <extends>QWidget</extends>
-   <header>VidWidget.h</header>
+   <header location="global">VidWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

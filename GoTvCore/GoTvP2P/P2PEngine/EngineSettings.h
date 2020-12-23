@@ -52,8 +52,14 @@ public:
 	void						setNetworkHostUrl( std::string& strWebsiteUrl );
 	void						getNetworkHostUrl( std::string& strWebsiteUrl );
 
-	void						setIsThisNodeAnNetHostOld( bool isHost ); // TODO remove
-	bool						getIsThisNodeAnNetHostOld( void ); // TODO remove
+    void						setExternalIpAddr( std::string& externIp );
+    void						getExternalIpAddr( std::string& externIp );
+
+	void						setConnectTestType( int32_t testType );
+    int32_t					    getConnectTestType( void );
+
+    void						setUseUpnp( bool useUpnp );
+    bool						getUseUpnp( void );
 
 	void						setExcludeMeFromNetHostList( bool excludeFromHostList );
 	bool						getExcludeMeFromNetHostList( void );

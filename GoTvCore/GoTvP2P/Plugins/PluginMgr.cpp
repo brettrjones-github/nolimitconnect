@@ -454,7 +454,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		if( poPlugin )
 		{
 			RCODE rc = 0;
-			if( ePluginTypeNetServices == poPlugin->getPluginType() )
+			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeServiceConnectTest == poPlugin->getPluginType() )
 			{
 				rc = poPlugin->handleHttpConnection( sktBase, netServiceHdr );
 			}

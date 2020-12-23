@@ -23,7 +23,6 @@
 PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseService( engine, pluginMgr, myIdent )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
-//, m_NetServiceUtil( m_NetServicesMgr.getNetUtils() )
 {
 	setPluginType( ePluginTypeNetServices );
 }

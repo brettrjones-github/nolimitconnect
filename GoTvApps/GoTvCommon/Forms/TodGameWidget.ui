@@ -20,41 +20,22 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton#DareButton
-{
-color: white;
-font: bold 14px;
-border-width: 5;
-border-image: url(:/MyP2PWeb/Resources/button_green_normal.png)10;
-padding: -5;
-}
-QPushButton#DareButton:pressed
-{
-border-width: 5;
-border-image: url(:/MyP2PWeb/Resources/button_green_pressed.png)10;
-padding: -5;
-}
-QPushButton#TruthButton
-{
-color: white;
-font: bold 14px;
-border-width: 5;
-border-image: url(:/MyP2PWeb/Resources/button_green_normal.png)10;
-padding: -5;
-}
-QPushButton#TruthButton:pressed
-{
-border-width: 5;
-border-image: url(:/MyP2PWeb/Resources/button_green_pressed.png)10;
-padding: -5;
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
     <number>5</number>
    </property>
    <item>
@@ -125,11 +106,7 @@ padding: -5;
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel#m_ChallengeImageLabel
-{   
-background-color: #e0f9f9;
-}
-</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string/>
@@ -144,12 +121,7 @@ background-color: #e0f9f9;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel#m_ChallengeTextLabel
-{   
-color: black;
-background-color: #e0f9f9;
-}
-</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string/>
@@ -172,12 +144,7 @@ background-color: #e0f9f9;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">#m_TodStatusLabel
-{   
-color: black;
-background-color: rgb(255,255,191);
-}
-</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Status</string>
@@ -242,15 +209,15 @@ background-color: rgb(255,255,191);
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VxLabel</class>
+   <extends>QLabel</extends>
+   <header>VxLabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>VidWidget</class>
    <extends>QWidget</extends>
    <header>VidWidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>VxLabel</class>
-   <extends>QLabel</extends>
-   <header>VxLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

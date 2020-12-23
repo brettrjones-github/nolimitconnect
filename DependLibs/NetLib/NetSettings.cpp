@@ -37,11 +37,15 @@ NetSettings& NetSettings::operator =( const NetSettings& rhs )
 	{
 		m_NetworkName				= rhs.m_NetworkName;
         m_NetConnectTestUrl         = rhs.m_NetConnectTestUrl;
-		m_ThisNodeIsHost			= rhs.m_ThisNodeIsHost;
+        m_u16MyMulticastPort        = rhs.m_u16MyMulticastPort;
 		m_u16MyTcpInPort			= rhs.m_u16MyTcpInPort;
-		m_u16MyMulticastPort		= rhs.m_u16MyMulticastPort;
+        m_bAttemptPortForward       = rhs.m_bAttemptPortForward;
 		m_bMulticastEnable			= rhs.m_bMulticastEnable;
+        m_AllowMulticastBroadcast   = rhs.m_AllowMulticastBroadcast;
 		m_bAttemptPortForward		= rhs.m_bAttemptPortForward;
+        m_UserRelayPermissionCount = rhs.m_UserRelayPermissionCount;
+        m_SystemRelayPermissionCount = rhs.m_SystemRelayPermissionCount;
+        m_AllowUserLocation         = rhs.m_AllowUserLocation;
 	}
 
 	return *this;

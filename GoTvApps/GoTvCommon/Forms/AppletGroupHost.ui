@@ -14,65 +14,7 @@
    <string>Search</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog#PhoneShakeDialogClass
-{   
-color: transparent;
-background-color: transparent;
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-
-#TitleGroupBox
-{   
-color: black;
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-}
-
-#TitleLabel
-{   
-color: black;
-}
-
-#ItemsGroupBox
-{   
-background-color: rgb(238,238,238);
-border: 2px solid green;
-border-top-color: green; 
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-
-#ProfileFrame
-{   
-background-color: white;
-border: 1px solid black;
-}
-
-QPushButton
-{
-color: white;
-font: bold 14px;
-border-width: 10;
-border-image: url(:/MyP2PWeb/Resources/button_green_normal.png)10;
-padding: -10;
-}
-
-QPushButton:pressed
-{
-border-width: 10;
-border-image: url(:/MyP2PWeb/Resources/button_green_pressed.png);
-padding: -10;
-}
-
-QPushButton#ExitDialogButton
-{
-color: black;
-font: bold 14px;
-border-image: none;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

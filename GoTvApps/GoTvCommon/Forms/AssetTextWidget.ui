@@ -32,26 +32,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QFrame#m_MainFrame
-{   
-background-color: #BCFEBC;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QFrame#m_TextFrame
-{   
-background-color: #FFFFFF;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QFrame#m_ButtonFrame
-{   
-background-color: #FBFED6;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -415,6 +396,11 @@ border-radius: 4px;
    <header>VxPushButton.h</header>
   </customwidget>
   <customwidget>
+   <class>VxLabel</class>
+   <extends>QLabel</extends>
+   <header>VxLabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>AvatarBar</class>
    <extends>QWidget</extends>
    <header>AvatarBar.h</header>
@@ -424,11 +410,6 @@ border-radius: 4px;
    <class>VxTagLabel</class>
    <extends>QLabel</extends>
    <header>VxTagLabel.h</header>
-  </customwidget>
-  <customwidget>
-   <class>VxLabel</class>
-   <extends>QLabel</extends>
-   <header>VxLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

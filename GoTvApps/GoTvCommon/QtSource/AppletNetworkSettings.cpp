@@ -30,7 +30,6 @@
 #include <NetLib/VxGetRandomPort.h>
 #include <NetLib/VxSktUtil.h>
 
-
 namespace
 {
     QString				DEFAULT_ADAPTER_IP_CHOICE = "default";
@@ -268,8 +267,6 @@ void AppletNetworkSettings::updateSettingsFromDlg()
         m_Engine.getEngineSettings().setRandomConnectUrl( netHostSetting.getRandomConnectUrl() );
         m_Engine.getEngineSettings().setGroupHostUrl( netHostSetting.getGroupHostUrl() );
         m_Engine.getEngineSettings().setChatRoomHostUrl( netHostSetting.getChatRoomHostUrl() );
-        m_MyApp.getAccountMgr().updateNetHostSetting( netHostSetting );
-        m_MyApp.getAccountMgr().updateLastNetHostSettingName( netHostSetting.getNetHostSettingName().c_str() );
 
         m_Engine.getEngineSettings().setPreferredNetworkAdapterIp( curData.getPreferredNetworkAdapterIp().c_str() );
         if( 0 != curData.getTcpPort() )
@@ -300,6 +297,9 @@ void AppletNetworkSettings::updateSettingsFromDlg()
 
         m_OriginalSettings = curData;
         m_Engine.fromGuiNetworkSettingsChanged();
+
+        m_MyApp.getAccountMgr().updateNetHostSetting( netHostSetting );
+        m_MyApp.getAccountMgr().updateLastNetHostSettingName( netHostSetting.getNetHostSettingName().c_str() );
     }
     else
     {
@@ -375,6 +375,11 @@ void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData 
     {
         netData.setExternalIp( externIp );
     }
+    else
+    {
+        externIp = "";
+        netData.setExternalIp( externIp );
+    }
 
     FirewallSettings::EFirewallTestType eFirewallTestType = FirewallSettings::eFirewallTestUrlConnectionTest;
     if( ui.AssumeNoProxyRadioButton->isChecked() )
@@ -430,10 +435,6 @@ void AppletNetworkSettings::setFirewallTest( FirewallSettings::EFirewallTestType
 
     switch( eFirewallType )
     {
-    case FirewallSettings::eFirewallTestUrlConnectionTest:
-        ui.AutoDetectProxyRadioButton->setChecked( true );
-        break;
-
     case FirewallSettings::eFirewallTestAssumeFirewalled:
         ui.AssumeProxyRadioButton->setChecked( true );
         break;
@@ -442,8 +443,10 @@ void AppletNetworkSettings::setFirewallTest( FirewallSettings::EFirewallTestType
         ui.AssumeNoProxyRadioButton->setChecked( true );
         break;
 
+    case FirewallSettings::eFirewallTestUrlConnectionTest:
     case FirewallSettings::eMaxFirewallTestType:
     default:
+        ui.AutoDetectProxyRadioButton->setChecked( true );
         break;
     }
 }
@@ -528,6 +531,29 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& ancho
     ui.m_RandomConnectUrlEdit->setText( anchorSetting.getRandomConnectUrl().c_str() );
     ui.m_GroupHostUrlEdit->setText( anchorSetting.getGroupHostUrl().c_str() );
     ui.m_DefaultChatRoomHostUrlEdit->setText( anchorSetting.getGroupHostUrl().c_str() );
+    ui.m_ExternIpEdit->setText( anchorSetting.getExternIpAddr().c_str() );
+    int32_t connectTestType = anchorSetting.getConnectTestType();
+
+    ui.AutoDetectProxyRadioButton->setChecked( false );
+    ui.AssumeNoProxyRadioButton->setChecked( false );
+    ui.AssumeProxyRadioButton->setChecked( false );
+
+    switch( connectTestType )
+    {
+    case 3:
+        ui.AssumeProxyRadioButton->setChecked( true );
+        break;
+
+    case 2:
+        ui.AssumeNoProxyRadioButton->setChecked( true );
+        break;
+
+    default:
+        ui.AutoDetectProxyRadioButton->setChecked( true );
+        break;
+    }
+
+    ui.m_UseUpnpCheckBox->setChecked( anchorSetting.getUseUpnp() );
 }
 
 //============================================================================
@@ -580,7 +606,6 @@ void AppletNetworkSettings::onSaveButtonClick( void )
         {
             randomConnectUrl = "";
         }
-
 
         std::string groupHostUrl;
         groupHostUrl = ui.m_GroupHostUrlEdit->text().toUtf8().constData();

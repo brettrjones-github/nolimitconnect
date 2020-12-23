@@ -37,10 +37,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel
-{
-font: 14px;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <property name="spacing">
@@ -115,7 +112,6 @@ font: 14px;
         <widget class="QLabel" name="TitlePart1">
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
@@ -192,7 +188,6 @@ font: 14px;
        </property>
        <property name="font">
         <font>
-         <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>

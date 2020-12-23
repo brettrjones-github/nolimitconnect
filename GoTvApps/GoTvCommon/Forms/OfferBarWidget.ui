@@ -35,7 +35,7 @@
    <double>9.000000000000000</double>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #e0f9f9; color: rgb(0, 0, 0); font: 14px;\n</string>
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
@@ -176,7 +176,6 @@
         <widget class="QLabel" name="m_FriendNameLabel">
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
@@ -191,7 +190,6 @@
         <widget class="QLabel" name="ColonLabel_2">
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
@@ -206,7 +204,6 @@
         <widget class="QLabel" name="m_FriendTypeLabel">
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
@@ -244,7 +241,6 @@
         <widget class="QLabel" name="m_MissedCallsLabel">
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
@@ -259,7 +255,6 @@
         <widget class="QLabel" name="m_MissedCallCntLabel">
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
@@ -280,7 +275,6 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>

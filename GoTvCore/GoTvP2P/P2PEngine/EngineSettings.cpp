@@ -302,21 +302,55 @@ void EngineSettings::getChatRoomHostUrl( std::string& strWebsiteUrl )
 }
 
 //============================================================================
-void EngineSettings::setIsThisNodeAnNetHostOld( bool isHost )
+void EngineSettings::setExternalIpAddr( std::string& externIp )
 {
     m_SettingsDbMutex.lock();
-	setIniValue( MY_SETTINGS_KEY, "IsNodeHost", isHost );
+    setIniValue( MY_SETTINGS_KEY, "ExternIpAddr", externIp );
     m_SettingsDbMutex.unlock();
 }
 
 //============================================================================
-bool EngineSettings::getIsThisNodeAnNetHostOld( void )
+void EngineSettings::getExternalIpAddr( std::string& strWebsiteUrl )
 {
-	bool isHost = false;
     m_SettingsDbMutex.lock();
-	getIniValue( MY_SETTINGS_KEY, "IsNodeHost", isHost, false );
+    getIniValue( MY_SETTINGS_KEY, "ExternIpAddr", strWebsiteUrl, "" );
     m_SettingsDbMutex.unlock();
-	return isHost;
+}
+
+//============================================================================
+void EngineSettings::setConnectTestType( int32_t testType )
+{
+    m_SettingsDbMutex.lock();
+    setIniValue( MY_SETTINGS_KEY, "ConnectTestType", testType );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+int32_t EngineSettings::getConnectTestType( void )
+{
+    uint16_t testType = 0;
+    m_SettingsDbMutex.lock();
+    getIniValue( MY_SETTINGS_KEY, "ConnectTestType", testType, 0 );
+    m_SettingsDbMutex.unlock();
+    return testType;
+}
+
+//============================================================================
+void EngineSettings::setUseUpnp( bool isHost )
+{
+    m_SettingsDbMutex.lock();
+	setIniValue( MY_SETTINGS_KEY, "UseUpnp", isHost );
+    m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+bool EngineSettings::getUseUpnp( void )
+{
+	bool useUpnp = false;
+    m_SettingsDbMutex.lock();
+	getIniValue( MY_SETTINGS_KEY, "UseUpnp", useUpnp, false );
+    m_SettingsDbMutex.unlock();
+	return useUpnp;
 }
 
 //============================================================================

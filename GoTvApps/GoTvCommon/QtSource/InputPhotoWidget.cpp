@@ -16,6 +16,7 @@
 #include "InputPhotoWidget.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "ChatEntryWidget.h"
 #include "GuiParams.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -46,11 +47,14 @@ InputPhotoWidget::InputPhotoWidget( QWidget * parent )
 	// TODO.. add camera selection
 	ui.m_SelectCamButton->setEnabled( false );
 
+    ui.m_BackButton->setIcons( eMyIconBack );
+
 	connect( ui.m_SnapShotButton,				SIGNAL(clicked()),							this, SLOT(slotSnapShotButtonClicked()) );
 	connect( ui.m_RotateCamButton,				SIGNAL(clicked()),							this, SLOT(slotRotateCamButtonClicked()) );
 	connect( ui.m_SelectCamButton,				SIGNAL(clicked()),							this, SLOT(slotSelectCamButtonClicked()) );
 	connect( ui.m_CancelPhotoButton,			SIGNAL(clicked()),							this, SLOT(slotCancelPhotoButtonClicked()) );
 	connect( ui.m_VidWidget->getVideoScreen(),	SIGNAL(signalPlayVideoFrame(QImage,int)),	this, SLOT(slotVideoFrameBitmap(QImage,int)) );
+    connect( ui.m_BackButton, SIGNAL( clicked() ), this, SLOT( slotExitPhotoWidget() ) );
 }
 
 //============================================================================
@@ -152,3 +156,10 @@ void InputPhotoWidget::slotVideoFrameBitmap( QImage picBitmap, int iRotate )
 	m_PicImage = picBitmap;
 }
 
+//============================================================================
+void InputPhotoWidget::slotExitPhotoWidget( void )
+{
+    this->setVisible( false );
+    m_ChatEntryWidget->setEntryMode( eAssetTypeUnknown );
+    m_ChatEntryWidget->setVisible( true );
+}

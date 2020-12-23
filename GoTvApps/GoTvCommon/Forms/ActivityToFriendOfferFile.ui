@@ -208,13 +208,7 @@ font: bold 14px;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">#m_BrowseForFileFrame
-{   
-color: black;
-background-color: rgb(255,255,230);
-border: 2px solid green;
-border-radius: 8px; 
-}</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <property name="spacing">

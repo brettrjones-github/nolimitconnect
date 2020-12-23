@@ -35,6 +35,7 @@ protected slots:
 	void						slotSelectCamButtonClicked( void );
 	void						slotCancelPhotoButtonClicked( void );
 	void						slotVideoFrameBitmap( QImage picBitmap, int iRotate );
+    void                        slotExitPhotoWidget( void );
 
 protected:
 	void						hideEvent( QHideEvent * hideEvent );

@@ -29,12 +29,7 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog#popupMenu
-{   
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

@@ -23,41 +23,7 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog#FileActionMenuDialog
-{   
-color: transparent;
-background-color: transparent;
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-
-#m_TitleGroupBox
-{   
-color: black;
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-}
-#popupTitleLabel
-{   
-color: black;
-}
-#m_MenuItemsGroupBox
-{   
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-color: green; 
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-#m_MenuItem
-{   
-background-color: transparent;
-border: 1px solid transparent;
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

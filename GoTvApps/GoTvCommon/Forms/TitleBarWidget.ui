@@ -563,12 +563,7 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">#m_StatusLabel
-{   
-color: black;
-background-color: rgb(255,255,191);
-}
-</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string notr="true"/>

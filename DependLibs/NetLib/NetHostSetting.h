@@ -52,9 +52,14 @@ public:
     std::string&				getGroupHostUrl( void )								        { return m_GroupHostUrl; }
     void						setChatRoomHostUrl( const char * netServiceUrl )		    { m_ChatRoomHostUrl = netServiceUrl; }
     std::string&				getChatRoomHostUrl( void )								    { return m_ChatRoomHostUrl; }
-    
-	void						setIsThisNodeAnNetHostOld( bool isHost )					{ m_ThisNodeIsHost = isHost; }// TODO remove
-	bool						getIsThisNodeAnNetHostOld( void )							{ return m_ThisNodeIsHost; }// TODO remove
+    void						setExternIpAddr( const char * ipAddr )		                { m_ExternIpAddr = ipAddr; }
+    std::string&				getExternIpAddr( void )								        { return m_ExternIpAddr; }
+
+    void                        setConnectTestType( int32_t testType )		                { m_ConnectTestType = testType; }
+    int32_t                     getConnectTestType( void )								    { return m_ConnectTestType; }
+
+    void						setUseUpnp( bool excludeMe )				                { m_UseUpnp = excludeMe; }
+    bool						getUseUpnp( void )							                { return m_UseUpnp; }
 
 	void						setExcludeMeFromNetHostList( bool excludeMe )				{ m_ExcludeMeFromHostList = excludeMe; }
 	bool						getExcludeMeFromNetHostList( void )							{ return m_ExcludeMeFromHostList; }
@@ -69,7 +74,9 @@ protected:
     std::string					m_NetRandomConnectUrl{ NET_DEFAULT_RANDOM_CONNECT_URL };
     std::string					m_GroupHostUrl{ NET_DEFAULT_GROUP_HOST_URL };
     std::string					m_ChatRoomHostUrl{ NET_DEFAULT_GROUP_HOST_URL };
+    std::string					m_ExternIpAddr{ "" };
 
-    bool						m_ThisNodeIsHost{ false };  // TODO remove
+    int32_t                     m_ConnectTestType{ 0 };
+    bool						m_UseUpnp{ false };
     bool						m_ExcludeMeFromHostList{ false };
 };

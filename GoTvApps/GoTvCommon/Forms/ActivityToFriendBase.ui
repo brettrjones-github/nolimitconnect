@@ -14,30 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog#ToFriendBaseDialog
-{   
-color: transparent;
-background-color: transparent;
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-
-
-#DlgItemsBox
-{   
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-color: green; 
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-QLabel#PermissionLabel
-{
-font: bold 14px;
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -195,7 +172,7 @@ font: bold 14px;
   <customwidget>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>
-   <header location="global">VxPushButton.h</header>
+   <header>VxPushButton.h</header>
   </customwidget>
   <customwidget>
    <class>IdentWidget</class>

@@ -142,12 +142,7 @@ font: bold 12px;
       <item>
        <widget class="QFrame" name="m_OffersFrame">
         <property name="styleSheet">
-         <string notr="true">QFrame#m_OffersFrame
-{   
-background-color: #e0f9f9;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -436,12 +431,7 @@ border-radius: 4px;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame#m_HangupSessionFrame
-{   
-background-color: #e0f9f9;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>

@@ -32,20 +32,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QFrame#m_MainFrame
-{   
-background-color: #BCFEBC;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QWidget#m_InputVoiceWidget
-{   
-background-color: #FBFED6;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -168,7 +155,7 @@ border-radius: 4px;
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="m_InputVoiceWidget" native="true">
+       <widget class="QGroupBox" name="m_InputVoiceGroupBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -188,19 +175,7 @@ border-radius: 4px;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QWidget#InputVoiceWidget
-{   
-background-color: #BCFEBC;
-border: 1px solid blue;
-border-radius: 4px; 
-}
-
-QWidget#m_InputVoiceWidget
-{   
-background-color: #FBFED6;
-border: 1px solid blue;
-border-radius: 4px; 
-}</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="spacing">
