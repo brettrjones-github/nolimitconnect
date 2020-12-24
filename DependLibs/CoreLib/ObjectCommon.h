@@ -67,6 +67,7 @@
 #define OBJNAME_ACTIVITY_YES_NO_MSG_BOX					"ActivityYesNoMsgBox"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
+#define OBJNAME_APPLET_BROWSE_FILES					    "AppletBrowseFiles"
 #define OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH			"AppletChatRoomJoinSearch"
 #define OBJNAME_APPLET_CHOOSE_THUMBNAIL					"AppletChooseThumbnail"
 #define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"

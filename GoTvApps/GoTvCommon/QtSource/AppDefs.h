@@ -71,6 +71,7 @@ enum EApplet
     eAppletNetworkSettings,
     eAppletNetHostingPage,	        // page to setup network/group hosts and services
     eAppletTheme,
+    eAppletBrowseFiles,
     eAppletApplicationInfo,
     eAppletAboutNoLimitConnect,
 
@@ -165,7 +166,7 @@ enum EApplet
     // not lauched by user
     eAppletCreateAccount,
     eAppletSnapShot,
-    eAppletBrowseFiles,
+    eActivityBrowseFiles,
 
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,

@@ -981,6 +981,15 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_AppletBrowseFiles.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_AppletBrowseFiles.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -2994,6 +3003,9 @@
     <ClInclude Include="..\..\..\..\app_precompiled_hdr.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AppletBrowseFiles.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\GoTvCommon\Resources\msg_state_fail_resend.png">
@@ -3198,5 +3210,13 @@
     <QtRcc Include="..\..\..\GoTvCommon\gotvcommon.qrc">
       <Filter>GoTvCommon\Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

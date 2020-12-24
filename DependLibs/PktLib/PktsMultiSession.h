@@ -24,10 +24,10 @@ class PktMultiSessionReq : public VxPktHdr
 public:
 	PktMultiSessionReq();
 
-	void						setMSessionAction( uint32_t action )		{ m_u32Action = htonl( action ); }
-	uint32_t							getMSessionAction( void )			{ return ntohl( m_u32Action ); }
-	void						setMSessionParam( uint32_t param )		{ m_u32ActionParam = htonl( param ); }
-	uint32_t							getMSessionParam( void )			{ return ntohl( m_u32ActionParam ); }
+	void						        setMSessionAction( uint32_t action )		{ m_u32Action = htonl( action ); }
+	uint32_t							getMSessionAction( void )			        { return ntohl( m_u32Action ); }
+	void						        setMSessionParam( uint32_t param )		    { m_u32ActionParam = htonl( param ); }
+	uint32_t							getMSessionParam( void )			        { return ntohl( m_u32ActionParam ); }
 
 private:
 	//=== vars ===//
@@ -44,10 +44,10 @@ class PktMultiSessionReply : public VxPktHdr
 public:
 	PktMultiSessionReply();
 
-	void						setMSessionAction( uint32_t action )		{ m_u32Action = htonl( action ); }
-	uint32_t							getMSessionAction( void )			{ return ntohl( m_u32Action ); }
-	void						setMSessionParam( uint32_t param )		{ m_u32ActionParam = htonl( param ); }
-	uint32_t							getMSessionParam( void )			{ return ntohl( m_u32ActionParam ); }
+	void						        setMSessionAction( uint32_t action )		{ m_u32Action = htonl( action ); }
+	uint32_t							getMSessionAction( void )			        { return ntohl( m_u32Action ); }
+	void						        setMSessionParam( uint32_t param )		    { m_u32ActionParam = htonl( param ); }
+	uint32_t							getMSessionParam( void )			        { return ntohl( m_u32ActionParam ); }
 
 private:
 	//=== vars ===//

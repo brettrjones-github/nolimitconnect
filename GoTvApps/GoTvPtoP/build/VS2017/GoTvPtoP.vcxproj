@@ -620,6 +620,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.cpp" />
@@ -1281,6 +1282,14 @@
     <ClCompile Include="..\..\AppSource\main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Debug\moc_AppletBrowseFiles.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_AppletBrowseFiles.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="..\..\..\GoTvCommon\gotvcommon.qrc">
@@ -1389,6 +1398,24 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletAboutApp.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletApplicationInfo.ui" />
+    <CustomBuild Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChooseThumbnail.ui" />
@@ -2079,6 +2106,24 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.h" />
+    <CustomBuild Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AppletBrowseFiles.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DNOMINMAX -D_USE_32BIT_TIME_T -D__STDC_CONSTANT_MACROS -DWIN32 -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I$(ProjectDir)\." "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec" "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include" "-I.\debug" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtMultimediaWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing AppletBrowseFiles.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -DCONSOLE -DWIN64 -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtOpenGL" "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(NOINHERIT)\."</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AppletBrowseFiles.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I$(QTDIR)\include\QtMultimediaWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing AppletBrowseFiles.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN64 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtMultimediaWidgets"</Command>
+    </CustomBuild>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
@@ -2497,6 +2542,7 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityViewVideoFile.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityWebCamClient.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityYesNo.h" />
+    <ClInclude Include="GeneratedFiles\ui_AppletBrowseFiles.h" />
     <ClInclude Include="GeneratedFiles\ui_AppletKodi.h" />
     <ClInclude Include="GeneratedFiles\ui_AppletLaunchWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_AppletPlayerVideo.h" />

@@ -79,6 +79,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
@@ -373,6 +374,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \
@@ -657,6 +659,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChooseThumbnail.ui \

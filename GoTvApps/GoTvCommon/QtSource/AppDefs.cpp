@@ -46,6 +46,12 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletAboutNoLimitConnect:	return eMyIconApp;
     //case eAppletApplicationInfo:	    return eMyIconDebug;
     case eAppletApplicationInfo:	    return eMyIconUnknown;
+    case eAppletBrowseFiles:	        return eMyIconFileOpen;
+    case eAppletChatRoomJoinSearch:	    return eMyIconSearchJoinChatRoom;
+    case eAppletClientAvatarImage:      return eMyIconAvatarImage;
+    case eAppletClientChatRoom:         return eMyIconClientChatRoom;
+    case eAppletClientRandomConnect:	return eMyIconSearchRandomConnect;
+    case eAppletClientStoryboard:       return eMyIconStoryBoardNormal;
     case eAppletCreateAccount:			return eMyIconUserIdentity;
     case eAppletGroupUser:              return eMyIconGroupUser;
     case eAppletHomePage:				return eMyIconHome;
@@ -57,11 +63,9 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPlayerVideo:			return eMyIconVideoPhoneNormal;
     case eAppletPersonalRecorder:		return eMyIconNotepadNormal;
     case eAppletSettings:				return eMyIconSettings;
-    case eAppletClientStoryboard:       return eMyIconStoryBoardNormal;
    
     case eAppletSearchPage:	            return eMyIconSearch;
     case eAppletGroupJoinSearch:	    return eMyIconSearchJoinGroup;
-    case eAppletChatRoomJoinSearch:	    return eMyIconSearchJoinChatRoom;
     case eAppletSearchPersons:	        return eMyIconSearchPerson;
     case eAppletSearchMood:	            return eMyIconSearchHeart;
     case eAppletScanAboutMe:	        return eMyIconSearchImage;
@@ -69,9 +73,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletScanSharedFiles:	    return eMyIconSearchFolder;
     case eAppletScanWebCam:	            return eMyIconSearchWebCam;
 
-    case eAppletClientAvatarImage:          return eMyIconAvatarImage;
-    case eAppletClientChatRoom:             return eMyIconClientChatRoom;
-    case eAppletClientRandomConnect:	    return eMyIconSearchRandomConnect;
     case eAppletTheme:					    return eMyIconTheme;
 
 	case ePluginAppletCamProvider:		    return eMyIconCamStreamProvider;
@@ -148,8 +149,13 @@ QString DescribeApplet( EApplet applet )
     case eAppletHomePage:				    return QObject::tr( "Home" );
     case eAppletAboutNoLimitConnect:        return QObject::tr( "About No Limit Connect" );
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );
+    case eAppletBrowseFiles:			    return QObject::tr( "Browse Files" );
     case eAppletChatRoomJoinSearch:			return QObject::tr( "Join Chat Room Search" );
     case eAppletChooseThumbnail:		    return QObject::tr( "Choose Thumbnail" );
+    case eAppletClientChatRoom:		        return QObject::tr("Chat with others in Chat room");
+    case eAppletClientRandomConnect:		return QObject::tr("Connect With Random Person");
+    case eAppletClientAvatarImage:          return QObject::tr("Get Persons Avatar Image For Contact List");
+    case eAppletClientStoryboard:           return QObject::tr("Share story (Blog)");
     case eAppletCreateAccount:			    return QObject::tr( "Create Account" );
     case eAppletGalleryImage:			    return QObject::tr( "Image Gallery" );
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
@@ -178,15 +184,9 @@ QString DescribeApplet( EApplet applet )
     case eAppletScanSharedFiles:		    return QObject::tr( "Search Group For Shared Files" );
     case eAppletScanWebCam:				    return QObject::tr( "Search Group For Shared Web Cams" );
 
-    case eAppletClientChatRoom:		        return QObject::tr( "Chat with others in Chat room" );
-    case eAppletClientRandomConnect:		return QObject::tr( "Connect With Random Person" );
-
     case eAppletGroupUser:                  return QObject::tr( "Join Group" );
     case eAppletNetHostingPage:             return QObject::tr( "Group And Network Hosting" );
     case eAppletPermissionList:             return QObject::tr( "Share Permission List" );
-
-    case eAppletClientAvatarImage:          return QObject::tr( "Get Persons Avatar Image For Contact List" );
-    case eAppletClientStoryboard:           return QObject::tr( "Share story (Blog)" );
 
     case eAppletShareServicesPage:          return QObject::tr( "Share with others sevices" );
     case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
