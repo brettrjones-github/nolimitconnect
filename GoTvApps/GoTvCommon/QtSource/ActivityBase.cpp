@@ -216,6 +216,27 @@ QFrame * ActivityBase::getContentItemsFrame( void )
 }
 
 //============================================================================
+// only available for applets
+QFrame * ActivityBase::getContentFrameOfLaunchFrame( void )
+{
+    return GuiHelpers::getLaunchPageFrame( ui.m_ContentItemsFrame );
+}
+
+//============================================================================
+// only available for applets
+QFrame * ActivityBase::getContentFrameOfMessengerFrame( void )
+{
+    return GuiHelpers::getMessengerPageFrame( ui.m_ContentItemsFrame );
+}
+
+//============================================================================
+// only available for applets
+QFrame * ActivityBase::getContentFrameOfOppositePageFrame( void )
+{
+    return GuiHelpers::getOppositePageFrame( ui.m_ContentItemsFrame );
+}
+
+//============================================================================
 // get home page activity ( Launch or Messenger Page )
 QWidget * ActivityBase::getParentPageFrame( void )
 {

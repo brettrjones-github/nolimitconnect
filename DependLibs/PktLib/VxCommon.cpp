@@ -302,6 +302,20 @@ VxNetIdent& VxNetIdent::operator =( const VxNetIdent& rhs  )
 }
 
 //============================================================================
+std::string VxNetIdent::getMyPtopUrl( void )
+{
+    std::string strIPv4; 
+    m_DirectConnectId.getIPv4(strIPv4);
+    std::string strIPv6; 
+    m_DirectConnectId.getIPv6(strIPv6);
+    std::string myIp = strIPv6.empty() ? strIPv4 : strIPv6;
+
+    std::string myUrl;
+    StdStringFormat( myUrl, "ptop://%s:%d/%s", myIp.c_str(), m_DirectConnectId.getPort(), getMyOnlineId().toHexString().c_str() );
+    return myUrl;
+}
+
+//============================================================================
 //! dump identity
 void VxNetIdent::debugDumpIdent( void )
 {

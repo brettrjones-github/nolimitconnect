@@ -32,6 +32,8 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  Created by Universal Icons from the Noun Project
  truth-or-dare.svg (modified)
  truth-or-dare-settings.svg (modified)
+ By Ataur Rahman, BD  from the Noun Project
+ log.svg
 
  
 https://iconmonstr.com/
@@ -97,13 +99,41 @@ wireless-setup.svg (modified)
 webcam.svg
 webcam-server.svg (modified)
 webcam-stop.svg (modified)
+edit-print.svg
+edit-cut.svg
+ file-save.svg
+ file-save-as.svg (modified)
 
 
 By Anton Barbarov, RU at https://thenounproject.com
 camera-snapshot.svg
 
+###### open iconic
+Copyright (c) 2014 Waybury
 
-# Glyph, a versatile SVG icon set 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+https://useiconic.com/open
+ edit-action-redo.svg
+ edit-action-undo.svg
+ edit-align-center.svg
+ edit-align-left.svg
+ edit-align-left-right.svg (modified)
+ edit-align-right.svg
+ edit-bold.svg
+ edit-copy.svg
+ edit-file-new.svg
+ edit-header.svg
+
+###### Glyph, a versatile SVG icon set 
 http://glyph.smarticons.co
 Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 http://creativecommons.org/licenses/by-sa/4.0/
@@ -133,28 +163,14 @@ heart.svg
 pause.svg
 file-open.svg
 
- # Not sure but from one of the above copywrites (will determaine correct one later)
- file-open.svg
- file-save.svg
- file-save-as.svg (modified)
-
- edit-action-redo.svg
- edit-action-undo.svg
- edit-align-center.svg
- edit-align-left.svg
- edit-align-left-right.svg (modified)
- edit-align-right.svg
- edit-bold.svg
- edit-copy.svg
- edit-cut.svg
- edit-file-new.svg
- edit-header.svg
- edit-italic.svg
- edit-paperclip.svg
+###### Not sure but from one of the above copywrites (will determaine correct one later)
  edit-paste.svg
- edit-print.svg
- edit-text.svg
- edit-underline.svg
+ edit-paperclip.svg
+  file-open.svg
+
+ 
+
+
 
 
  

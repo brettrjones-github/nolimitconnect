@@ -278,5 +278,6 @@
         <file>Resources/bars_6_direct.png</file>
         <file>Resources/bars_7_hosted_direct.png</file>
         <file>Resources/bars_7_hosted_with_relay.png</file>
+        <file>Resources/log.svg</file>
     </qresource>
 </RCC>

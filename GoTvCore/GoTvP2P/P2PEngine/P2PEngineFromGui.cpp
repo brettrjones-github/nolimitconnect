@@ -25,6 +25,7 @@
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/HostMgr/HostTest.h>
 #include <GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.h>
+#include <GoTvCore/GoTvP2P/NetworkTest/RunTestUrlTest.h>
 #include <GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 #include <MediaToolsLib/MediaTools.h>
@@ -1242,6 +1243,13 @@ void P2PEngine::fromGuiRunQueryHostIdTest( void )
 {
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
     m_QueryHostIdTest.fromGuiRunQueryHostIdTest();
+}
+
+//============================================================================
+void P2PEngine::fromGuiRunTestUrlTest( const char * ptopUrl, int testType )
+{
+    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
+    m_RunTestUrlTest.fromGuiRunQueryHostIdTest( ptopUrl, testType );
 }
 
 //============================================================================

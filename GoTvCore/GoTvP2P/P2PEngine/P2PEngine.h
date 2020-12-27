@@ -60,7 +60,7 @@ class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
 class QueryHostIdTest;
-
+class RunTestUrlTest;
 
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
@@ -206,6 +206,7 @@ public:
     virtual void				fromGuiVerifyNetHostSettings( void ) override;
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
     virtual void				fromGuiRunQueryHostIdTest( void ) override;
+    virtual void				fromGuiRunTestUrlTest( const char * ptopUrl, int testType ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
 																const char *	strGreeting,	// greeting text
@@ -600,6 +601,7 @@ protected:
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
     QueryHostIdTest&			m_QueryHostIdTest;
+    RunTestUrlTest&			    m_RunTestUrlTest;
 
 	RcScan						m_RcScan;
 

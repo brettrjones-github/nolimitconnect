@@ -44,7 +44,6 @@ EMyIcons GetAppletIcon( EApplet applet )
 	{
     case eActivityAppSetup:             return eMyIconApp;
     case eAppletAboutNoLimitConnect:	return eMyIconApp;
-    //case eAppletApplicationInfo:	    return eMyIconDebug;
     case eAppletApplicationInfo:	    return eMyIconUnknown;
     case eAppletBrowseFiles:	        return eMyIconFileOpen;
     case eAppletChatRoomJoinSearch:	    return eMyIconSearchJoinChatRoom;
@@ -57,6 +56,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletHomePage:				return eMyIconHome;
     case eAppletKodi:				    return eMyIconKodi;
     case eAppletLibrary:				return eMyIconLibraryNormal;
+    case eAppletLog:	                return eMyIconDebug;
     case eAppletMessenger:				return eMyIconMessenger;
     case eAppletNetHostingPage:         return eMyIconServiceHostNetwork;
     case eAppletNetworkSettings:	    return eMyIconNetworkSettings;
@@ -73,6 +73,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletScanSharedFiles:	    return eMyIconSearchFolder;
     case eAppletScanWebCam:	            return eMyIconSearchWebCam;
 
+    case eAppletTestAndDebug:	            return eMyIconDebug;
     case eAppletTheme:					    return eMyIconTheme;
 
 	case ePluginAppletCamProvider:		    return eMyIconCamStreamProvider;
@@ -162,19 +163,20 @@ QString DescribeApplet( EApplet applet )
     case eAppletGroupJoinSearch:			return QObject::tr( "Join Group Search" );
     case eAppletSnapshot:				    return QObject::tr( "Take Snapshot" );
     case eAppletKodi:				        return QObject::tr( "Kodi (TM)" );
-    case eAppletUserIdentity:			    return QObject::tr( "User Identity" );
-	case eAppletMessenger:				    return QObject::tr( "Messenger" );
-	case eAppletPlayerVideo:			    return QObject::tr( "Video Player" );
-    case eAppletPersonalRecorder:		    return QObject::tr( "Personal Notes And Records" );
     case eAppletLibrary:				    return QObject::tr( "My Library Of Media" );
-
-	case eAppletTheme:					    return QObject::tr( "Theme" );
-    case eAppletNetworkSettings:		    return QObject::tr( "Network Settings" );
-
-    case eAppletSettings:				    return QObject::tr( "Settings" );
-
+    case eAppletLog:                        return QObject::tr( "Application Log" );
     case eAppletLogSettings:		        return QObject::tr( "Log Settings" );
     case eAppletLogView:	                return QObject::tr( "View Log" );
+	case eAppletMessenger:				    return QObject::tr( "Messenger" );
+    case eAppletNetworkSettings:		    return QObject::tr( "Network Settings" );
+	case eAppletPlayerVideo:			    return QObject::tr( "Video Player" );
+    case eAppletPersonalRecorder:		    return QObject::tr( "Personal Notes And Records" );
+
+    case eAppletTestAndDebug:			    return QObject::tr( "Test And Debug" );
+	case eAppletTheme:					    return QObject::tr( "Theme" );
+    case eAppletUserIdentity:			    return QObject::tr( "User Identity" );
+
+    case eAppletSettings:				    return QObject::tr( "Settings" );
 
     case eAppletSearchPage:				    return QObject::tr( "Search" );
     case eAppletSearchPersons:			    return QObject::tr( "Search Group For Person Name" );

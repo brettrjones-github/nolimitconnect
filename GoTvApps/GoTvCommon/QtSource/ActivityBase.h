@@ -64,7 +64,14 @@ public:
 
     virtual TitleBarWidget *	getTitleBarWidget( void );
     virtual BottomBarWidget *	getBottomBarWidget( void );
+    // get parent frame of this activity
     virtual QFrame *			getContentItemsFrame( void );
+    // get content frame of launch page
+    virtual QFrame *            getContentFrameOfLaunchFrame( void );
+    // get content frame of messenger page
+    virtual QFrame *            getContentFrameOfMessengerFrame( void );
+    // get content frame of opposit page
+    virtual QFrame *            getContentFrameOfOppositePageFrame( void );
 
     VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
     virtual void                connectBarWidgets( void );

@@ -72,7 +72,14 @@ public:
     static QString				describeOrientation( Qt::Orientation qtOrientation );
 
     /// @brief get home or messenger topmost widget
-    static QWidget *            getParentPageFrame( QWidget * curWidget );
+    static QFrame *             getParentPageFrame( QWidget * curWidget );
+    /// @brief messenger frame topmost widget
+    static QFrame *             getMessengerPageFrame( QWidget * curWidget );
+    /// @brief get launch frame topmost widget
+    static QFrame *             getLaunchPageFrame( QWidget * curWidget );
+    /// @brief get opposite page frame of current widget's frame
+    static QFrame *             getOppositePageFrame( QWidget * curWidget );
+
     static bool                 validateUserName( QWidget * curWidget, QString strUserName );
     static bool                 validateMoodMessage( QWidget * curWidget, QString strMoodMsg );
     static bool                 validateAge( QWidget * curWidget, int age );

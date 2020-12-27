@@ -231,7 +231,7 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
     VxSktConnectSimple netServConn;
     if( !connectSimpleSkt( netServConn ) )
     {
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId failed connect %s\n", describeHostInfo().c_str());
+        LogModule( eLogRunTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId failed connect %s\n", describeHostInfo().c_str());
         return false;
     }
 
@@ -244,7 +244,7 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
     RCODE rc = netServConn.sendData( strNetActionUrl.c_str(), ( int )strNetActionUrl.length() );
     if( rc )
     {
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId: sendData error %d", rc );
+        LogModule( eLogRunTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId: sendData error %d", rc );
         return false;
     }
 
@@ -258,7 +258,7 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
                                                     QUERY_HOST_ID_RX_HDR_TIMEOUT,
                                                     QUERY_HOST_ID_RX_DATA_TIMEOUT ) )
     {
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId: Connected to %s but failed to respond (wrong network key ?)", strNetActionUrl.c_str() );
+        LogModule( eLogRunTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId: Connected to %s but failed to respond (wrong network key ?)", strNetActionUrl.c_str() );
         return false;
     }
 
@@ -266,14 +266,14 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
     std::string content = rxBuf;
     if( 0 == content.length() )
     {
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest: no content in response");
+        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest: no content in response");
         return false;
     }
 
     const char * contentBuf = content.c_str();
     if( '/' != contentBuf[ content.length() - 1 ] )
     {
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest no trailing / in content");
+        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest no trailing / in content");
         return false;
     }
 
@@ -282,7 +282,7 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
     std::string strPayload = content;
     if( content.empty() )
     {
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest no host id in content");
+        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest no host id in content");
         return false;
     }
 
@@ -299,7 +299,7 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
     }
 
     std::string hostIdStr = hostId.toHexString();
-    LogModule( eLogQueryHostIdTest, LOG_VERBOSE, " success host id %s", hostIdStr.c_str());
+    LogModule( eLogRunTest, LOG_VERBOSE, " success host id %s", hostIdStr.c_str());
     return true;
 }
 

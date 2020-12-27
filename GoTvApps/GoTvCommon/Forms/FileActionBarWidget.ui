@@ -26,19 +26,22 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#FileActionBarWidgetClass
-{   
-color: black;
-background-color: rgb(255,255,230);
-border: 2px solid green;
-border-radius: 8px; 
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -147,7 +150,7 @@ border-radius: 8px;
   <customwidget>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
+   <header location="global">VxPushButton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

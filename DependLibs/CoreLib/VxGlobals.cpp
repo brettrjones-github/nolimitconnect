@@ -43,7 +43,7 @@ namespace
 {
 	VxMutex				g_GlobalAccessMutex;
 
-	uint16_t			g_u16AppVersion					= 0x104;
+	uint16_t			g_u16AppVersion					= 0x101;
 #ifdef DEBUG
     std::string			g_strApplicationTitle			= "No Limit Connect";
     std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";

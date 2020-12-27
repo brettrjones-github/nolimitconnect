@@ -233,6 +233,8 @@ public:
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) = 0;
     /// Run test to query host guid
     virtual void				fromGuiRunQueryHostIdTest( void ) = 0;
+    /// Run test on the given url
+    virtual void				fromGuiRunTestUrlTest( const char * ptopUrl, int testType ) = 0;
 
 	/// Set file share settings
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) = 0;

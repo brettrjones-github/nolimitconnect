@@ -47,7 +47,8 @@ public:
     
     bool						buildIsMyPortOpenUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl, uint16_t u16Port );
     bool						buildQueryHostIdUrl( VxSktConnectSimple * netServConn, std::string& strNetCmdHttpUrl );
-    
+    bool						buildPingTestUrl( VxSktConnectSimple * netServConn, std::string& strNetCmdHttpUrl );
+
     bool 						buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode = 0, int version = 1 );
     bool 						buildNetCmd( uint16_t cryptoPort, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode = 0, int version = 1 );
     void						buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, std::string& strContent, int errCode = 0, int version = 1 );

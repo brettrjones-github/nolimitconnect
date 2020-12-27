@@ -952,9 +952,9 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
 }
 
 //============================================================================
-QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
+QFrame * GuiHelpers::getParentPageFrame( QWidget * curWidget )
 {
-    QWidget * parentActivity = nullptr;
+    QFrame * pageFrame = nullptr;
     QObject * curParent = curWidget;
 
     QString launchPageObjName;
@@ -968,8 +968,8 @@ QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
         QString objName = curParent->objectName();
         if( ( objName == launchPageObjName ) || ( objName == messengerPageObjName ) )
         {
-            parentActivity = dynamic_cast<QWidget *>( curParent );
-            if( parentActivity )
+            pageFrame = dynamic_cast<QFrame *>( curParent );
+            if( pageFrame )
             {
                 break;
             }
@@ -983,8 +983,186 @@ QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
         curParent = dynamic_cast<QObject *>( curParent->parent() );
     }
 
-    return parentActivity;
+    return pageFrame;
 }
+
+//============================================================================
+QFrame * GuiHelpers::getMessengerPageFrame( QWidget * curWidget )
+{
+    QFrame * pageFrame = nullptr;
+    QObject * curParent = curWidget;
+
+    QString launchPageObjName;
+    QString messengerPageObjName;
+
+    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+
+    while( curParent )
+    {
+        QString objName = curParent->objectName();
+        if( (objName == launchPageObjName) || (objName == messengerPageObjName) )
+        {
+            if( objName == messengerPageObjName )
+            {
+                pageFrame = dynamic_cast<QFrame *>(curParent);
+                if (pageFrame)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                bool foundMessengerFrame = false;
+                QWidget * baseFrame = dynamic_cast<QWidget *>(curParent->parent());
+                if( baseFrame )
+                {
+                    QObjectList childList = baseFrame->children();
+                    for( auto iter = childList.begin();  iter != childList.end(); ++iter )
+                    {
+                        QFrame *childFrame = dynamic_cast<QFrame *>(*iter);
+                        if( childFrame && childFrame->objectName() == messengerPageObjName )
+                        {
+                            pageFrame = childFrame;
+                            foundMessengerFrame = true;
+                            break;
+                        }
+                    }
+                }
+
+                if( foundMessengerFrame )
+                {
+                    break;
+                }
+            }
+        }
+
+        if( !curParent->parent() )
+        {
+            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
+        }
+
+        curParent = dynamic_cast<QObject *>(curParent->parent());
+    }
+
+    return pageFrame;
+}
+
+//============================================================================
+QFrame* GuiHelpers::getLaunchPageFrame( QWidget * curWidget )
+{
+    QFrame * pageFrame = nullptr;
+    QObject * curParent = curWidget;
+
+    QString launchPageObjName;
+    QString messengerPageObjName;
+
+    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+
+    while (curParent)
+    {
+        QString objName = curParent->objectName();
+        if ((objName == launchPageObjName) || (objName == messengerPageObjName))
+        {
+            if( objName == launchPageObjName )
+            {
+                pageFrame = dynamic_cast<QFrame *>(curParent);
+                if (pageFrame)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                bool foundLaunchFrame = false;
+                QWidget * baseFrame = dynamic_cast<QWidget *>(curParent->parent());
+                if( baseFrame )
+                {
+                    QObjectList childList = baseFrame->children();
+                    for( auto iter = childList.begin();  iter != childList.end(); ++iter )
+                    {
+                        QFrame* childFrame = dynamic_cast<QFrame *>(*iter);
+                        if( childFrame && childFrame->objectName() == launchPageObjName )
+                        {
+                            pageFrame = childFrame;
+                            foundLaunchFrame = true;
+                            break;
+                        }
+                    }
+                }
+
+                if( foundLaunchFrame )
+                {
+                    break;
+                }
+            }
+        }
+
+        if (!curParent->parent())
+        {
+            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
+        }
+
+        curParent = dynamic_cast<QObject *>(curParent->parent());
+    }
+
+    return pageFrame;
+}
+
+//============================================================================
+QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
+{
+    QFrame * pageFrame = nullptr;
+    QObject * curParent = curWidget;
+
+    QString launchPageObjName;
+    QString messengerPageObjName;
+
+    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+
+    while (curParent)
+    {
+        QString objName = curParent->objectName();
+        if ((objName == launchPageObjName) || (objName == messengerPageObjName))
+        {
+            QString otherPageObjeName = (objName == launchPageObjName) ? messengerPageObjName : launchPageObjName;
+
+            bool foundOtherFrame = false;
+            QWidget * baseFrame = dynamic_cast<QWidget *>(curParent->parent());
+            if( baseFrame )
+            {
+                QObjectList childList = baseFrame->children();
+                for( auto iter = childList.begin();  iter != childList.end(); ++iter )
+                {
+                    QFrame* childFrame = dynamic_cast<QFrame *>(*iter);
+                    if( childFrame && childFrame->objectName() == otherPageObjeName )
+                    {
+                        pageFrame = childFrame;
+                        foundOtherFrame = true;
+                        break;
+                    }
+                }
+            }
+
+            if( foundOtherFrame )
+            {
+                break;
+            }
+        }
+
+        if (!curParent->parent())
+        {
+            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
+        }
+
+        curParent = dynamic_cast<QObject *>(curParent->parent());
+    }
+
+    return pageFrame;
+}
+
 
 //============================================================================
 AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
@@ -1009,13 +1187,13 @@ AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
 //============================================================================
 bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
 {
-    if( strUserName.contains( "GoTv PtoP Web" )
+    if( strUserName.contains( "NoLimitConnect" )
+        || strUserName.contains( "nolimitconnect" )
+        || strUserName.contains( "No Limit Connect" )
+        || strUserName.contains( "no limit connect" )
         || strUserName.contains( "NoLimitConnectWeb" )
-        || strUserName.contains( "nolimitconnectweb" )
-        || strUserName.contains( "gotv ptop web" )
+        || strUserName.contains( "GoTvPtoP" )
         || strUserName.contains( "GoTv PtoP Web" )
-        || strUserName.contains( "NoLimitConnectWeb" )
-        || strUserName.contains( "nolimitconnectweb" )
         || strUserName.contains( "gotv ptop web" ) )
     {
         QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have NoLimitConnect in name." ) );

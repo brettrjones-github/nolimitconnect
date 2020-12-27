@@ -990,6 +990,12 @@
     <ClCompile Include="Release\moc_AppletBrowseFiles.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLog.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1958,6 +1964,12 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLog.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\GoTvCommon\Resources\spheres.svg">
@@ -2522,6 +2534,9 @@
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
     <None Include="..\..\..\GoTvCommon\Resources\webcam-stop.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\log.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -3203,6 +3218,12 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLog.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTestAndDebug.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -136,6 +136,7 @@ public:
 	void						setLastSessionTimeMs( int64_t lastSessionTimeGmtMs )		{ m_LastSessionTimeGmtMs = lastSessionTimeGmtMs; }
 	int64_t					    getLastSessionTimeMs( void )							    { return m_LastSessionTimeGmtMs; }
 
+    std::string					getMyPtopUrl( void );
 	void						debugDumpIdent( void );
 
 private:

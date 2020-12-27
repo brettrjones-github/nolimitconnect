@@ -188,6 +188,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.h \
+	$$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestUrlTest.h \
 	$$PWD/GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.h \
@@ -398,6 +399,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.cpp \
+	$$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestUrlTest.cpp \
 	$$PWD/GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.cpp \

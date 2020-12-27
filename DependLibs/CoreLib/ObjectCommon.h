@@ -95,6 +95,7 @@
 #define OBJNAME_APPLET_GROUP_USER						"AppletGroupUser"
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LIBRARY					        "AppletLibrary"
+#define OBJNAME_APPLET_LOG				                "AppletLog"
 #define OBJNAME_APPLET_NET_HOSTING_PAGE					"AppletNetHosting"
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
@@ -143,6 +144,7 @@
 
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
 
+#define OBJNAME_APPLET_TEST_AND_DEBUG				    "AppletTestAndDebug"
 #define OBJNAME_APPLET_THEME							"AppletTheme"
 #define OBJNAME_APPLET_USER_IDENTITY				    "AppletUserIdentity"
 

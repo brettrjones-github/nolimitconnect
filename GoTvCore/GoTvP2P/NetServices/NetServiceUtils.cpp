@@ -210,6 +210,14 @@ bool NetServiceUtils::buildQueryHostIdUrl( VxSktConnectSimple * netServConn, std
 }
 
 //============================================================================
+bool NetServiceUtils::buildPingTestUrl( VxSktConnectSimple * netServConn, std::string& strNetCmdHttpUrl )
+{
+    std::string strContent = "PING";
+
+    return buildNetCmd( netServConn, strNetCmdHttpUrl, eNetCmdPing, strContent );
+}
+
+//============================================================================
 bool NetServiceUtils::buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode, int version )
 {
     if( netServConn && netServConn->isConnected() )

@@ -101,6 +101,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLog.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
@@ -147,6 +148,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.h \
@@ -396,6 +398,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLog.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
@@ -442,6 +445,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.cpp \
@@ -677,6 +681,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLibrary.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLog.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLogSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLogView.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
@@ -693,6 +698,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostNetwork.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSnapshot.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletTestAndDebug.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AssetFaceWidget.ui \

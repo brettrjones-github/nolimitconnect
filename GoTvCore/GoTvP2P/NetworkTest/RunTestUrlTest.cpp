@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones 
+// Copyright (C) 2020 Brett R. Jones 
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "QueryHostIdTest.h"
+#include "RunTestUrlTest.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
@@ -38,37 +38,37 @@
 #endif //_MSC_VER
 
 //============================================================================
-QueryHostIdTest::QueryHostIdTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils )
+RunTestUrlTest::RunTestUrlTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils )
     : NetworkTestBase( engine, engineSettings, netServicesMgr, netServiceUtils )
 {
-    setTestName( "QUERY HOST ID: " );
+    setTestName( "PING TEST: " );
 }
 
 //============================================================================
-void QueryHostIdTest::runTestShutdown( void )
+void RunTestUrlTest::runTestShutdown( void )
 {
     m_RunTestThread.abortThreadRun( true );
 }
 
 //============================================================================
-void QueryHostIdTest::fromGuiRunQueryHostIdTest( void )
+void RunTestUrlTest::fromGuiRunQueryHostIdTest( const char * ptopUrl, int testType )
 {
     if ( !m_RunTestThread.isThreadRunning() )
 	{
         m_TestIsRunning = true;
-        LogModule( eLogRunTest, LOG_INFO, "QueryHostIdTest::fromGuiRunQueryHostIdTest thread 0x%x",VxGetCurrentThreadId() );
-        sendTestLog( "Starting Query Host Id test" );
+        LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest::fromGuiRunRunTestUrlTest" );
+        sendTestLog( "Starting Ping Test URL test" );
         startNetworkTest();
     }
     else
     {
-        LogModule( eLogRunTest, LOG_INFO, "QueryHostIdTest already running fromGuiRunQueryHostIdTest thread 0x%x",VxGetCurrentThreadId() );
-        sendTestLog( "Already Started Query Host Id test" );
+        LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest already running fromGuiRunRunTestUrlTest" );
+        sendTestLog( "Already Started Ping Test URL test" );
     }
 }
 
 //============================================================================
-void QueryHostIdTest::threadRunNetworkTest( void )
+void RunTestUrlTest::threadRunNetworkTest( void )
 {
     std::string netHostUrl;
 
@@ -79,7 +79,7 @@ void QueryHostIdTest::threadRunNetworkTest( void )
 }
 
 //============================================================================
-ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
+ERunTestStatus RunTestUrlTest::doRunTest( std::string& nodeUrl )
 {
     std::string testName = getTestName();
 	sendTestLog(	"start %s node %s \n", 
@@ -95,7 +95,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 	double sendTime= 0;
 	double reponseTime= 0;
 
-    LogModule( eLogRunTest, LOG_INFO, "QueryHostIdTest: sec %3.3f : connecting to %s thread 0x%x", 
+    LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest: sec %3.3f : connecting to %s thread 0x%x", 
                testTimer.elapsedSec(), nodeUrl.c_str(), VxGetCurrentThreadId() );
 	if( false == netServConn.connectToWebsite(	nodeUrl.c_str(), 
 		strHost, 
@@ -113,10 +113,10 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 
 	netServConn.dumpConnectionInfo();
 	std::string strNetActionUrl;
-	m_NetServiceUtils.buildQueryHostIdUrl( &netServConn, strNetActionUrl );
-    LogModule( eLogRunTest, LOG_INFO, "QueryHostIdTest: action url %s thread 0x%x", strNetActionUrl.c_str(), VxGetCurrentThreadId() );
+	m_NetServiceUtils.buildPingTestUrl( &netServConn, strNetActionUrl );
+    LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest: action url %s thread 0x%x", strNetActionUrl.c_str(), VxGetCurrentThreadId() );
 	connectTime = testTimer.elapsedSec();
-    LogModule( eLogRunTest, LOG_INFO, "QueryHostIdTest: sec %3.3f : sending %d action data thread 0x%x", 
+    LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest: sec %3.3f : sending %d action data thread 0x%x", 
                connectTime, (int)strNetActionUrl.length(), VxGetCurrentThreadId() );
 
 	RCODE rc = netServConn.sendData( strNetActionUrl.c_str(), (int)strNetActionUrl.length() );
@@ -129,7 +129,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 	}
 
 	sendTime = testTimer.elapsedSec();
-	LogMsg( LOG_INFO, "QueryHostIdTest: sec %3.3f : waiting for is port open response thread 0x%x", sendTime, VxGetCurrentThreadId() );
+	LogMsg( LOG_INFO, "RunTestUrlTest: sec %3.3f : waiting for is port open response thread 0x%x", sendTime, VxGetCurrentThreadId() );
 	char rxBuf[ 513 ];
     rxBuf[ 0 ] = 0;
 	NetServiceHdr netServiceHdr;
@@ -137,8 +137,8 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 													rxBuf, 
 													sizeof( rxBuf ) - 1, 
 													netServiceHdr, 
-                                                    QUERY_HOST_ID_RX_HDR_TIMEOUT,
-                                                    QUERY_HOST_ID_RX_DATA_TIMEOUT ) )
+                                                    PING_TEST_RX_HDR_TIMEOUT,
+                                                    PING_TEST_RX_DATA_TIMEOUT ) )
 	{
 		sendRunTestStatus( eRunTestStatusConnectionDropped,
 			"%s Connected to %s but failed to respond (wrong network key ?) thread 0x%x", testName.c_str(), nodeUrl.c_str(), VxGetCurrentThreadId() );
@@ -148,12 +148,12 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
     rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
 	std::string content = rxBuf;
 	reponseTime = testTimer.elapsedSec();
-    LogModule( eLogRunTest, LOG_INFO, "QueryHostIdTest: response len %d total time %3.3fsec connect %3.3fsec send %3.3fsec response %3.3f sec thread 0x%x",
+    LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest: response len %d total time %3.3fsec connect %3.3fsec send %3.3fsec response %3.3f sec thread 0x%x",
 		content.length(),
 		reponseTime, connectTime, sendTime - connectTime, reponseTime - sendTime, VxGetCurrentThreadId() );
 	if( 0 == content.length() )
 	{
-        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest: no content in response" );
+        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest: no content in response" );
 		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response content %s\n", testName.c_str(), content.c_str(), VxGetCurrentThreadId() );
 		return doRunTestFailed();
 	}
@@ -161,7 +161,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 	const char * contentBuf = content.c_str();
 	if( '/' != contentBuf[content.length() -1] )
 	{
-        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest no trailing / in content thread 0x%x", VxGetCurrentThreadId() );
+        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest no trailing / in content thread 0x%x", VxGetCurrentThreadId() );
 		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response content %s\n", testName.c_str(), content.c_str() );
 		return doRunTestFailed();
 	}
@@ -171,7 +171,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 	std::string strPayload = content;
     if( content.empty() )
     {
-        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest no host id in content thread 0x%x", VxGetCurrentThreadId() );
+        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest no host id in content thread 0x%x", VxGetCurrentThreadId() );
         sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid host id %s\n", testName.c_str(), content.c_str() );
         return doRunTestFailed();
     }
@@ -192,7 +192,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 }
 
 //============================================================================
-ERunTestStatus QueryHostIdTest::doRunTestFailed()
+ERunTestStatus RunTestUrlTest::doRunTestFailed()
 {
 	sendRunTestStatus( eRunTestStatusTestComplete,
 		"\n" );
@@ -200,7 +200,7 @@ ERunTestStatus QueryHostIdTest::doRunTestFailed()
 }
 
 //============================================================================
-ERunTestStatus QueryHostIdTest::doRunTestSuccess( void )
+ERunTestStatus RunTestUrlTest::doRunTestSuccess( void )
 {
 	sendRunTestStatus( eRunTestStatusTestComplete,
 		"\n" );

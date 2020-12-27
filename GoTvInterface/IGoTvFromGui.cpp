@@ -350,6 +350,12 @@ void IGoTv::fromGuiRunQueryHostIdTest( void )
 }
 
 //============================================================================
+void IGoTv::fromGuiRunTestUrlTest( const char * ptopUrl, int testType )
+{
+    getPtoP().fromGuiRunTestUrlTest( ptopUrl, testType );
+}
+
+//============================================================================
 void IGoTv::fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings )
 {
     getPtoP().fromGuiGetFileShareSettings( fileShareSettings );

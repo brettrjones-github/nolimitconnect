@@ -58,7 +58,7 @@ void AppletAboutApp::setupAboutMe( void )
     ui.labelMeLine1->setText( QString( "Online Name: %1" ).arg( oMyIdent.getOnlineName() ) );
     std::string strMyId = oMyIdent.m_DirectConnectId.describeVxGUID();
     ui.labelMeLine2->setText( QString( "Id: %1" ).arg( strMyId.c_str() ) );
-    ui.labelMeLine3->setText( QString( "My Node Url: http://%1:%2" ).arg( strOnlineIp.c_str() ).arg( oMyIdent.getOnlinePort() ) );
+    ui.labelMeLine3->setText( QString( "My Node Url:%1" ).arg( oMyIdent.getMyPtopUrl().c_str() ) );
     std::string strRelayId = oMyIdent.m_RelayConnectId.describeVxGUID();
     ui.labelMeLine4->setText( QString( "Relay Id: %1" ).arg( strRelayId.c_str() ) );
     std::string strRelayIp = oMyIdent.getRelayIpAddress().toStdString();

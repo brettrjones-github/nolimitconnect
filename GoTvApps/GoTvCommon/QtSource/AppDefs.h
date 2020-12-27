@@ -51,12 +51,13 @@ enum EHomeLayout
 
 enum EApplet
 {
-	eAppletUnknown = 0, // do not setup base class ui in the case of unknown
+	eAppletUnknown = 0,             // do not setup base class ui in the case of unknown
     eAppletActivityDialog,          // place dialog over home window.. do not setup base class ui in the case of dialog
     eAppletEditAboutMe,
     eAppletEditAvatarImage,
     eAppletEditStoryboard,
     eAppletHomePage,
+    // start of home page applets.. shown in order of enumeration
     eAppletKodi,
     eAppletUserIdentity,
     eAppletMessenger,
@@ -65,30 +66,28 @@ enum EApplet
     eAppletGroupUser,	
     eAppletSearchPage,
     eAppletShareServicesPage,       // page to setup share with others services
-    eAppletPermissionList,          // group listing host service for group hosts. provide search for groups to join, provide ip address etc
-
-    eAppletSettings,
-    eAppletNetworkSettings,
+    eAppletPermissionList,          // list of all users plugin permission levels
     eAppletNetHostingPage,	        // page to setup network/group hosts and services
+    eAppletNetworkSettings,
     eAppletTheme,
-    eAppletBrowseFiles,
-    eAppletApplicationInfo,
+    eAppletSettings,
+    eAppletTestAndDebug,
     eAppletAboutNoLimitConnect,
 
-	eMaxBasicApplets,               // marker.. past here is search applets
+	eMaxBasicApplets,               // marker.. end of home page applets.. start of search applets
 
     eAppletChatRoomJoinSearch,      // search for chat room to join
     eAppletGroupJoinSearch,         // search for group to join
     eAppletSearchPersons,           // search for person in group by name
     eAppletSearchMood,              // search for mood message
     eAppletScanAboutMe,             // scan group for pictures in about me page
-    eAppletScanStoryboard,          // scan group for pictures in about me page
-    eAppletScanSharedFiles,         // searc group for shared files
+    eAppletScanStoryboard,          // scan group for pictures in story board page
+    eAppletScanSharedFiles,         // search group for shared files
     eAppletScanWebCam,              // scan group for shared web cams
 
     eAppletClientRandomConnect,     // connect to random person
 
-    eMaxSearchApplets,              // marker.. past here is hosting applets
+    eMaxSearchApplets,              // marker.. end of search applets.. past here is hosting applets
 
     eAppletServiceChatRoom,	        // hosts a chat room. provide chat room services for group users
     eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
@@ -99,7 +98,7 @@ enum EApplet
     eAppletServiceRandomConnect,     // connect to random person service
     eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
 
-    eMaxHostApplets,                // marker.. past here is service applets for user share services
+    eMaxHostApplets,                // marker.. end of hosting applets.. start of user share services
 
     eAppletServiceAvatarImage,
     eAppletServiceAboutMe,
@@ -107,10 +106,12 @@ enum EApplet
     eAppletServiceShareWebCam,
     eAppletServiceShareFiles,
 
-    eMaxSharedServicesApplets,      // marker.. past here is applets not launched by user page icon
+    eMaxSharedServicesApplets,      // marker.. end of user share services applets.. start of not launched by user page icon
 
     // not launched from launch page icon
+    eAppletApplicationInfo,
     eActivityAppSetup,	            // application initialize
+    eAppletBrowseFiles,             // file directory browser
 
     eAppletPlayerVideo,
 
@@ -159,6 +160,7 @@ enum EApplet
 	ePluginAppletGoTvStation,
 	ePluginAppletGoTvNetworkHost,
 
+    eAppletLog,                     // logging window.. shown in other frame
     // app icon easter egg appletes
     eAppletLogSettings,
     eAppletLogView,

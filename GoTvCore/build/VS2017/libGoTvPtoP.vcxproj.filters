@@ -673,6 +673,9 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunTestUrlTest.cpp">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1446,6 +1449,9 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.h">
       <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunTestUrlTest.h">
+      <Filter>GoTvP2P\NetworkTest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

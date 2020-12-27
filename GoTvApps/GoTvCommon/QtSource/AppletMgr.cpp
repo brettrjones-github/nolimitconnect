@@ -34,6 +34,7 @@
 #include "AppletChatRoomClient.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletClientRandomConnect.h"
+#include "AppletClientStoryboard.h"
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
 #include "AppletEditStoryboard.h"
@@ -43,6 +44,7 @@
 #include "AppletGroupUser.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
+#include "AppletLog.h"
 #include "AppletLogSettings.h"
 #include "AppletLogView.h"
 
@@ -89,11 +91,12 @@
 #include "AppletSettings.h"
 #include "AppletSearchPage.h"
 #include "AppletShareServicesPage.h"
-#include "AppletClientStoryboard.h"
+#include "AppletSnapshot.h"
+
+#include "AppletTestAndDebug.h"
 #include "AppletTheme.h"
 #include "AppletRemoteControl.h"
 #include "AppletUserIdentity.h"
-#include "AppletSnapshot.h"
 
 #include "HomeWindow.h"
 
@@ -157,9 +160,10 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	if( appletDialog )
 	{
 		bringAppletToFront( appletDialog );
-#ifdef DEBUG
-        m_MyApp.errMessageBox2( QObject::tr( "AppletMgr::launchApplet" ).toUtf8().constData(), QObject::tr( "Applet enum %d already launched\n" ).toUtf8().constData(), applet );
-#endif // DEBUG
+        // TODO figure out why on button click and attemp to launch the applet is done multiple times
+//#ifdef DEBUG
+//        m_MyApp.errMessageBox2( QObject::tr( "AppletMgr::launchApplet" ).toUtf8().constData(), QObject::tr( "Applet enum %d already launched\n" ).toUtf8().constData(), applet );
+//#endif // DEBUG
 
 		return appletDialog;
 	}
@@ -185,9 +189,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
     case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
-    case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
-        
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
+    case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
 
@@ -249,7 +252,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletSettingsVideoPhone:         appletDialog = new AppletSettingsVideoPhone( m_MyApp, parent ); break;
     case eAppletSettingsVoicePhone:         appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
     case eAppletSettingsWebCamServer:       appletDialog = new AppletSettingsShareWebCam( m_MyApp, parent ); break;
+    case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
 
+    case eAppletTestAndDebug:               appletDialog = new AppletTestAndDebug( m_MyApp, parent ); break;
     case eAppletTheme:                      appletDialog = new AppletTheme( m_MyApp, parent ); break;
     case eAppletUnknown:                    m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" ); return nullptr;
     case eAppletUserIdentity:               appletDialog = new AppletUserIdentity( m_MyApp, parent ); break;

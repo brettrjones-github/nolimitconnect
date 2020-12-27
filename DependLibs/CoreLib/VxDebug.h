@@ -73,7 +73,7 @@ enum ELogModule
 
     eLogNetworkRelay  = 0x00100000,
     eLogNetService    = 0x00200000,
-    eLogQueryHostIdTest = 0x00400000,
+    eLogRunTest       = 0x00400000,
     eLogNetworkTest   = 0x00800000,
 
     eMaxLogModule

@@ -70,7 +70,7 @@ namespace
                     //| eLogAcceptConn
                     //| eLogNetworkRelay
                     | eLogNetService
-                    | eLogQueryHostIdTest
+                    | eLogRunTest
 
 
                     );
