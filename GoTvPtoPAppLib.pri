@@ -398,7 +398,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLog.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLog.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \

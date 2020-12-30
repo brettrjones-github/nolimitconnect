@@ -299,15 +299,17 @@ unix:!android:{
     DESTDIR = $${DEST_EXE_DIR}
 }
 
-unix:!android{
-#copy shared libs to local output directory so can easily be linked to
-    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
+#the linux shared libs are now moved to bin directory when built
+#so copy from shared folder to bin is no longer needed
+#unix:!android{
+##copy shared libs to local output directory so can easily be linked to
+#    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
 
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
-}
+#    first.depends = $(first) copydata
+#    export(first.depends)
+#    export(copydata.commands)
+#    QMAKE_EXTRA_TARGETS += first copydata
+#}
 
 win32:{
     #shared libs
