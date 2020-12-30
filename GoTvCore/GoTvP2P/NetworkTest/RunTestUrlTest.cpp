@@ -41,7 +41,6 @@
 RunTestUrlTest::RunTestUrlTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils )
     : NetworkTestBase( engine, engineSettings, netServicesMgr, netServiceUtils )
 {
-    setTestName( "PING TEST: " );
 }
 
 //============================================================================
@@ -51,14 +50,32 @@ void RunTestUrlTest::runTestShutdown( void )
 }
 
 //============================================================================
-void RunTestUrlTest::fromGuiRunQueryHostIdTest( const char * ptopUrl, int testType )
+void RunTestUrlTest::fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
-    if ( !m_RunTestThread.isThreadRunning() )
+    if ( !m_TestIsRunning && !m_RunTestThread.isThreadRunning() )
 	{
         m_TestIsRunning = true;
-        LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest::fromGuiRunRunTestUrlTest" );
+        setTestName( "PING TEST: " );
         sendTestLog( "Starting Ping Test URL test" );
-        startNetworkTest();
+        m_MyUrl.setUrl( myUrl );
+        m_TestUrl.setUrl( ptopUrl );
+        if( !m_MyUrl.validateUrl( true ) )
+        {
+            sendRunTestStatus( eRunTestStatusTestFail, "Local URL is invalid\n" );
+            m_TestIsRunning = false;
+            return;
+        }
+        else if( !m_TestUrl.validateUrl( false ) )
+        {
+            sendRunTestStatus( eRunTestStatusTestFail, "Test URL is invalid\n" );
+            m_TestIsRunning = false;
+            return;
+        }
+        else
+        {
+            LogModule( eLogRunTest, LOG_INFO, "RunTestUrlTest::fromGuiRunRunTestUrlTest" );
+            startNetworkTest();
+        }
     }
     else
     {
@@ -142,6 +159,7 @@ ERunTestStatus RunTestUrlTest::doRunTest( std::string& nodeUrl )
 	{
 		sendRunTestStatus( eRunTestStatusConnectionDropped,
 			"%s Connected to %s but failed to respond (wrong network key ?) thread 0x%x", testName.c_str(), nodeUrl.c_str(), VxGetCurrentThreadId() );
+        netServConn.closeSkt();
 		return doRunTestFailed();
 	}
 
@@ -154,56 +172,65 @@ ERunTestStatus RunTestUrlTest::doRunTest( std::string& nodeUrl )
 	if( 0 == content.length() )
 	{
         LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest: no content in response" );
-		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response content %s\n", testName.c_str(), content.c_str(), VxGetCurrentThreadId() );
+		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response content %s\n", testName.c_str(), content.c_str() );
+        netServConn.closeSkt();
 		return doRunTestFailed();
 	}
 
 	const char * contentBuf = content.c_str();
 	if( '/' != contentBuf[content.length() -1] )
 	{
-        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest no trailing / in content thread 0x%x", VxGetCurrentThreadId() );
-		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response content %s\n", testName.c_str(), content.c_str() );
+        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest no trailing / in PONG content" );
+		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response PONG content %s\n", testName.c_str(), content.c_str() );
+        netServConn.closeSkt();
 		return doRunTestFailed();
 	}
 
 	((char *)contentBuf)[content.length() -1] = 0;
 
 	std::string strPayload = content;
-    if( content.empty() )
+    if( strPayload.empty() || strPayload.length() < 5  )
     {
-        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest no host id in content thread 0x%x", VxGetCurrentThreadId() );
-        sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid host id %s\n", testName.c_str(), content.c_str() );
+        LogModule( eLogRunTest, LOG_ERROR, "RunTestUrlTest no content" );
+        sendRunTestStatus( eRunTestStatusInvalidResponse, "%s No PONG content\n", testName.c_str() );
+        netServConn.closeSkt();
         return doRunTestFailed();
     }
 
-    VxGUID hostId;
-    hostId.fromVxGUIDHexString( strPayload.c_str() );
-    if( !hostId.isVxGUIDValid() )
+    sendTestLog( "%s PONG Content (%s)", testName.c_str(), strPayload.c_str() );
+    std::string strPongSig = strPayload.substr( 0, 5 );
+    if( strPongSig != "PONG-" )
     {
-        LogMsg( LOG_ERROR, "Query Host Online Id %s Invalid Content (%3.3f sec) thread 0x%x", content.c_str(), testTimer.elapsedSec(), VxGetCurrentThreadId() );
-        sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid host id %s\n", testName.c_str(), content.c_str() );
+        sendRunTestStatus( eRunTestStatusInvalidResponse, "%s content did not contain PONG- %s\n", testName.c_str(), content.c_str() );
+        netServConn.closeSkt();
         return doRunTestFailed();
     }
-
-    std::string hostIdStr = hostId.toHexString();
-    LogModule( eLogRunTest, LOG_VERBOSE, "test success %s host id %s thread 0x%x", testName.c_str(), hostIdStr.c_str(), VxGetCurrentThreadId() );
-	sendTestLog( "Test %s complete with Id %s Elapsed Seconds Connect %3.3fsec Send %3.3fsec Respond %3.3f sec", testName.c_str(), hostIdStr.c_str(), connectTime, sendTime - connectTime, reponseTime - sendTime );
-	return doRunTestSuccess( );
+    else
+    {
+        std::string strMyIP = strPayload.substr( 5, strPayload.length() - 5 );
+        LogModule( eLogRunTest, LOG_VERBOSE, "%s PING test success .. My IP is %s", testName.c_str(), strMyIP.c_str() );
+        sendTestLog( "Test %s success. PONG returned My IP (%s)", testName.c_str(), strMyIP.c_str() );
+        sendTestLog( "Test %s Elapsed Seconds Connect %3.3f sec Send %3.3f sec Respond %3.3f sec", testName.c_str(), connectTime, sendTime - connectTime, reponseTime - sendTime );
+        netServConn.closeSkt();
+        return doRunTestSuccess( );
+    }
 }
 
 //============================================================================
 ERunTestStatus RunTestUrlTest::doRunTestFailed()
 {
-	sendRunTestStatus( eRunTestStatusTestComplete,
+	sendRunTestStatus( eRunTestStatusTestCompleteFail,
 		"\n" );
-	return eRunTestStatusTestComplete;
+    m_TestIsRunning = false;
+	return eRunTestStatusTestCompleteFail;
 }
 
 //============================================================================
 ERunTestStatus RunTestUrlTest::doRunTestSuccess( void )
 {
-	sendRunTestStatus( eRunTestStatusTestComplete,
+	sendRunTestStatus( eRunTestStatusTestCompleteSuccess,
 		"\n" );
-	return eRunTestStatusTestComplete;
+    m_TestIsRunning = false;
+	return eRunTestStatusTestCompleteSuccess;
 }
 

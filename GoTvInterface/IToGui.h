@@ -117,6 +117,8 @@ enum ERunTestStatus
     eRunTestStatusConnectionDropped = 5,
     eRunTestStatusInvalidResponse = 6,
     eRunTestStatusTestComplete = 7,
+    eRunTestStatusTestCompleteFail = 8,
+    eRunTestStatusTestCompleteSuccess = 9,
 
     eMaxRunTestStatusType
 };

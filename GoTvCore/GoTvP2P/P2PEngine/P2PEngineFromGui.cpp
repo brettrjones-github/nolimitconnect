@@ -1246,10 +1246,10 @@ void P2PEngine::fromGuiRunQueryHostIdTest( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiRunTestUrlTest( const char * ptopUrl, int testType )
+void P2PEngine::fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
-    m_RunTestUrlTest.fromGuiRunQueryHostIdTest( ptopUrl, testType );
+    m_RunTestUrlTest.fromGuiRunTestUrlTest( myUrl, ptopUrl, testType );
 }
 
 //============================================================================

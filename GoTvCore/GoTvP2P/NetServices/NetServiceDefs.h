@@ -30,20 +30,3 @@
 #define NET_CMD_HOST_ID_REQ		    "CMD_HOST_ID_REQ    "
 #define NET_CMD_HOST_ID_REPLY		"CMD_HOST_ID_REPLY  "
 
-enum ENetCmdType
-{
-	eNetCmdUnknown						= 0,
-	eNetCmdPing							= 1,		
-	eNetCmdPong							= 2,		
-	eNetCmdIsMyPortOpenReq				= 3,		
-	eNetCmdIsMyPortOpenReply			= 4,		
-	eNetCmdHostReq					    = 5,		
-	eNetCmdHostReply					= 6,		
-	eNetCmdAboutMePage					= 7,		
-	eNetCmdStoryboardPage				= 8,	
-    eNetCmdQueryHostOnlineIdReq         = 9,
-    eNetCmdQueryHostOnlineIdReply      = 10,
-
-	eMaxNetCmdType
-};
-

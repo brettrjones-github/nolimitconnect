@@ -40,11 +40,15 @@ public:
 	const char *				getPassword( void );
 
 	const char *				getHost( void );
+    std::string                 getHostString( void );
 	uint16_t					getPort( void );
 	void						setPath( const char * pFilePathAndName );
 	const char *				getPath( void );
 	const char *				getQuery( void );
 	const char *				getFragment( void );
+    std::string				    getOnlineId( void ) { return m_strOnlineId.empty() ? "" : m_strOnlineId.c_str(); }
+    bool                        hasValidOnlineId( void );
+    bool                        validateUrl( bool onlineIdMustBeValid );
 
 	bool						isAbsoluteUrl();
 	const char *				getRelativeURL( std::string& strRetRelativeUrl, bool bWithParam = false );
@@ -65,6 +69,7 @@ protected:
 
 	std::string					m_strQuery;
 	std::string					m_strFragment;
+    std::string					m_strOnlineId;
 };
 
 

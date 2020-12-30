@@ -14,10 +14,10 @@
 //============================================================================
 
 #include "VxUrl.h"
-//#include "VxSktUtil.h"
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxParse.h>
+#include <CoreLib/VxGUID.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +32,7 @@ namespace
 	const char * QUESTION_DELIM = "?";
     //const char * LEFT_BRACKET_DELIM = "[";
 	const char * RIGHT_BRACKET_DELIM = "]";
+    const char * ONLINE_ID_DELIM = "!";
 
 
     //============================================================================
@@ -96,91 +97,103 @@ VxUrl::VxUrl( const char * pUrl )
 //============================================================================
 void VxUrl::setUrl( const char * pUrl )
 {
-	m_Url = pUrl;
+    m_Url = pUrl;
 
-	// protocol
-	size_t iReadIdx = m_Url.find( PROTOCOL_DELIM );
+    // protocol
+    size_t iReadIdx = m_Url.find( PROTOCOL_DELIM );
     if( iReadIdx != std::string::npos )
-	{
-		m_strProtocol = m_Url.substr( 0, iReadIdx );
-		iReadIdx += strlen( PROTOCOL_DELIM );
-		StdStringTrim( m_strProtocol );
-	}
-	else
-	{
-		iReadIdx = 0;
-	}
+    {
+        m_strProtocol = m_Url.substr( 0, iReadIdx );
+        iReadIdx += strlen( PROTOCOL_DELIM );
+        StdStringTrim( m_strProtocol );
+    }
+    else
+    {
+        iReadIdx = 0;
+    }
 
-	// user and password
-	size_t iAtSymbolIdx = m_Url.find( USER_DELIM, iReadIdx );
+    // user and password
+    size_t iAtSymbolIdx = m_Url.find( USER_DELIM, iReadIdx );
     if( iAtSymbolIdx != std::string::npos )
-	{
-		std::string m_strUserPassStr = m_Url.substr( iReadIdx, iAtSymbolIdx - iReadIdx );
-		size_t iColonIdx = m_strUserPassStr.find( COLON_DELIM );
+    {
+        std::string m_strUserPassStr = m_Url.substr( iReadIdx, iAtSymbolIdx - iReadIdx );
+        size_t iColonIdx = m_strUserPassStr.find( COLON_DELIM );
         if( iColonIdx != std::string::npos )
-		{
-			m_strUser = m_strUserPassStr.substr(0, iColonIdx);
-			m_strPassword = m_strUserPassStr.substr(iColonIdx + 1, m_strUserPassStr.length() - iColonIdx -1);
-		}
-		else
-		{
-			m_strUser = m_strUserPassStr;
-		}
-		iReadIdx = iAtSymbolIdx + 1;
-	}
-	// host
-	size_t iSlashIdx = m_Url.find( SLASH_DELIM, iReadIdx );
+        {
+            m_strUser = m_strUserPassStr.substr( 0, iColonIdx );
+            m_strPassword = m_strUserPassStr.substr( iColonIdx + 1, m_strUserPassStr.length() - iColonIdx - 1 );
+        }
+        else
+        {
+            m_strUser = m_strUserPassStr;
+        }
+        iReadIdx = iAtSymbolIdx + 1;
+    }
+    // host
+    size_t iSlashIdx = m_Url.find( SLASH_DELIM, iReadIdx );
     if( iSlashIdx != std::string::npos )
-	{
-		m_strHost = m_Url.substr(iReadIdx, iSlashIdx - iReadIdx);
-	}
-	else
-	{
-		m_strHost = m_Url.substr(iReadIdx, m_Url.length() - iReadIdx);
-	}
+    {
+        m_strHost = m_Url.substr( iReadIdx, iSlashIdx - iReadIdx );
+    }
+    else
+    {
+        m_strHost = m_Url.substr( iReadIdx, m_Url.length() - iReadIdx );
+    }
 
-	// handle IPv6 and port
-	m_Port = 80;
+    // handle IPv6 and port
+    m_Port = 80;
 
-	size_t iColonIdx = m_strHost.rfind( COLON_DELIM );
-	if( iColonIdx > 0 )
-	{
-		if( strchr( m_strHost.c_str(), ']' ) )
-		{
-			// ipv6
-			size_t iLeftBracketIdx = m_strHost.rfind( RIGHT_BRACKET_DELIM );
-            if (iColonIdx != std::string::npos && iLeftBracketIdx < iColonIdx)
-			{
-				std::string strHost = m_strHost;
-				m_strHost = strHost.substr( 0, iColonIdx );
-				if (0 < m_strHost.length()) 
-				{
-					if( ( m_strHost.at(0) == '[' ) &&
-						( m_strHost.at( m_strHost.length() - 1 ) == ']') )
-					{
-						m_strHost = m_strHost.substr( 1, iColonIdx - 2 );
-					}
-				}
-				std::string m_PortStr = strHost.substr(iColonIdx + 1, strHost.length() - iColonIdx -1);
-				m_Port = atoi(m_PortStr.c_str());
-			}
-		}
-		else
-		{
-			std::string strHost = m_strHost;
-			std::string m_PortStr = m_strHost.substr(iColonIdx + 1, m_strHost.length() - iColonIdx -1);
-			m_Port = atoi(m_PortStr.c_str());
-			m_strHost = strHost.substr( 0, iColonIdx );
-		}
+    size_t iColonIdx = m_strHost.rfind( COLON_DELIM );
+    if( iColonIdx > 0 )
+    {
+        if( strchr( m_strHost.c_str(), ']' ) )
+        {
+            // ipv6
+            size_t iLeftBracketIdx = m_strHost.rfind( RIGHT_BRACKET_DELIM );
+            if( iColonIdx != std::string::npos && iLeftBracketIdx < iColonIdx )
+            {
+                std::string strHost = m_strHost;
+                m_strHost = strHost.substr( 0, iColonIdx );
+                if( 0 < m_strHost.length() )
+                {
+                    if( ( m_strHost.at( 0 ) == '[' ) &&
+                        ( m_strHost.at( m_strHost.length() - 1 ) == ']' ) )
+                    {
+                        m_strHost = m_strHost.substr( 1, iColonIdx - 2 );
+                    }
+                }
+                std::string m_PortStr = strHost.substr( iColonIdx + 1, strHost.length() - iColonIdx - 1 );
+                m_Port = atoi( m_PortStr.c_str() );
+            }
+        }
+        else
+        {
+            std::string strHost = m_strHost;
+            std::string m_PortStr = m_strHost.substr( iColonIdx + 1, m_strHost.length() - iColonIdx - 1 );
+            m_Port = atoi( m_PortStr.c_str() );
+            m_strHost = strHost.substr( 0, iColonIdx );
+        }
 
-	}
+    }
 
     if( iSlashIdx == std::string::npos )
-	{
-		return;
-	}
+    {
+        return;
+    }
 
-	iReadIdx = iSlashIdx;
+    iReadIdx = iSlashIdx;
+
+    // read online id if exists
+    m_strOnlineId = m_Url.substr( iReadIdx + 1, m_Url.length() - (iReadIdx + 1) );
+    if( VxGUID::isOnlineIdStringValid( m_strOnlineId.c_str() ) )
+    {
+        iReadIdx += m_strOnlineId.length();
+        iSlashIdx = m_Url.find( SLASH_DELIM, iReadIdx );
+        if( iSlashIdx == std::string::npos )
+        {
+            return;
+        }
+    }
 
 	// path and fragment
 	m_strPath = m_Url.substr(iReadIdx, m_Url.length() - iReadIdx);
@@ -227,6 +240,12 @@ const char * VxUrl::getHost()
 }
 
 //============================================================================
+std::string VxUrl::getHostString()
+{
+    return m_strHost.c_str();
+}
+
+//============================================================================
 uint16_t VxUrl::getPort()
 {
 	return m_Port;
@@ -267,6 +286,24 @@ const char * VxUrl::getFragment()
 bool VxUrl::isAbsoluteUrl()
 {
 	return (0 < m_strProtocol.length());
+}
+
+//============================================================================
+bool VxUrl::hasValidOnlineId( void )
+{
+    return !m_strOnlineId.empty() && VxGUID::isOnlineIdStringValid( m_strOnlineId.c_str() );
+}
+
+//============================================================================
+bool VxUrl::validateUrl( bool onlineIdMustBeValid )
+{
+    bool isValid = !getHostString().empty() && getPort() > 0;
+    if( onlineIdMustBeValid && !hasValidOnlineId() )
+    {
+        isValid = false;
+    }
+
+    return isValid;
 }
 
 //============================================================================

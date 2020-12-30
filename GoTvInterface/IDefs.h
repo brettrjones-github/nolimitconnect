@@ -310,9 +310,6 @@ enum EInternetStatus
     eMaxInternetStatus
 };
 
-//! Internet Status as text
-const char * DescribeInternetStatus( EInternetStatus internetStatus );
-
 enum ENetAvailStatus
 {
     eNetAvailNoInternet = 0,
@@ -327,5 +324,37 @@ enum ENetAvailStatus
     eMaxNetAvailStatus
 };
 
+enum ENetCmdType
+{
+    eNetCmdUnknown						= 0,
+    eNetCmdPing							= 1,		
+    eNetCmdPong							= 2,		
+    eNetCmdIsMyPortOpenReq				= 3,		
+    eNetCmdIsMyPortOpenReply			= 4,		
+    eNetCmdHostReq					    = 5,		
+    eNetCmdHostReply					= 6,		
+    eNetCmdAboutMePage					= 7,		
+    eNetCmdStoryboardPage				= 8,	
+    eNetCmdQueryHostOnlineIdReq         = 9,
+    eNetCmdQueryHostOnlineIdReply      = 10,
+
+    eMaxNetCmdType
+};
+
+enum ENetCmdError
+{
+    eNetCmdErrorNone                    = 0,
+    eNetCmdErrorServiceDisabled         = 1,
+    eNetCmdErrorPermissionLevel         = 2,
+
+    eMaxNetCmdError
+};
+
+//! Internet Status as text
+const char * DescribeInternetStatus( EInternetStatus internetStatus );
 //! Net Available Status as text
 const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus );
+//! Net Command type as text
+const char * DescribeNetCmdType( ENetCmdType netCmdType );
+//! Net Command Error as text
+const char * DescribeNetCmdError( ENetCmdError netCmdError );

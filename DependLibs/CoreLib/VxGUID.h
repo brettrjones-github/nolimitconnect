@@ -51,8 +51,18 @@ public:
     // buffer must be at least 33 characters in length
     void                        toHexString( char * retBuf );
 	std::string					toHexString( void );
-	//! set VxGUID by converting hex string into VxGUID
-	bool						fromVxGUIDHexString( const char * pHexString );
+    //! set VxGUID by converting hex string into VxGUID
+    bool						fromVxGUIDHexString( const char * pHexString );
+    static bool					isVxGUIDHexStringValid( const char * pId );
+
+    bool						toOnlineIdString( std::string& strRetId );
+    // buffer must be at least 36 characters in length
+    void                        toOnlineIdString( char * retBuf );
+    std::string					toOnlineIdString( void );
+    //! set VxGUID by converting online id string into VxGUID
+    bool						fromOnlineIdString( const char * pHexString );
+    static bool					isOnlineIdStringValid( const char * pId );
+
 	//! get low part of online id
 	uint64_t					getVxGUIDLoPart() const;
 	//! get high part of online id
@@ -70,7 +80,6 @@ public:
 	bool						isEqualTo( VxGUID& guid );
 
 	std::string					describeVxGUID( void );
-	static bool					isVxGUIDHexStringValid( const char * pId );
 
     // set bytes to network order
     void                       setToNetOrder();

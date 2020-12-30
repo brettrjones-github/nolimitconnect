@@ -41,6 +41,28 @@
 #include <stdio.h>
 
 //============================================================================
+static uint8_t charToHex( char cVal )
+{
+    if( cVal >= '0' && cVal <= '9' )
+    {
+        return cVal & 0x0f;
+    }
+    else if( cVal >= 'A' && cVal <= 'F' )
+    {
+        return cVal - 55;
+    }
+    else if( cVal >= 'a' && cVal <= 'f' )
+    {
+        return cVal - 87;
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "VxGUID::charToHex invalid char 0x%2.2x\n", cVal );
+        return 0;
+    }
+}
+
+//============================================================================
 VxGUID::VxGUID()
 : m_u64HiPart(0)
 , m_u64LoPart(0)
@@ -271,6 +293,14 @@ bool VxGUID::isVxGUIDValid() const
 }
 
 //============================================================================
+std::string VxGUID::toHexString( void )	
+{ 
+    char lclBuf[ 33 ];
+    toHexString( lclBuf );
+    return lclBuf; 
+} 
+
+//============================================================================
 bool VxGUID::toHexString( std::string& strRetId )	
 { 
 	char lclBuf[ 33 ];
@@ -286,6 +316,160 @@ void VxGUID::toHexString( char * retBuf )
     uint64ToHexAscii( &retBuf[ 0 ], m_u64HiPart );
     uint64ToHexAscii( &retBuf[ 16 ], m_u64LoPart );
     retBuf[ 32 ] = 0;
+}
+
+//============================================================================
+//! set online id by converting hex string into U128
+bool VxGUID::fromVxGUIDHexString( const char * pHexString )
+{
+    if( false == isVxGUIDHexStringValid( pHexString ) )
+    {
+        return false;
+    }
+
+    uint8_t u8Byte;
+    uint64_t u64Part = 0;
+    for( int i = 0; i < 8; i++ )
+    {
+        u64Part = u64Part << 8;
+        u8Byte = (charToHex(*pHexString))<<4;
+        pHexString++;
+        u8Byte |= charToHex(*pHexString);
+        pHexString++;
+        u64Part |= u8Byte;
+    }
+
+    m_u64HiPart = u64Part;
+    u64Part = 0;
+    for( int i = 0; i < 8; i++ )
+    {
+        u64Part = u64Part << 8;
+        u8Byte = (charToHex(*pHexString))<<4;
+        pHexString++;
+        u8Byte |= charToHex(*pHexString);
+        pHexString++;
+        u64Part |= u8Byte;
+    }
+
+    m_u64LoPart = u64Part;
+
+    return true;
+}
+
+//============================================================================
+bool VxGUID::isVxGUIDHexStringValid( const char * pId )
+{
+    if( NULL == pId )
+    {
+        return false;
+    }
+
+    for( int i = 0; i < 32; i++ )
+    {
+        char ch = pId[ i ];
+        if( false == ( (('0' <= ch) && ('9' >= ch)) 
+            || (('a' <= ch) && ('f' >= ch)) 
+            || (('A' <= ch) && ('F' >= ch)) ) )
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//============================================================================
+std::string VxGUID::toOnlineIdString( void )	
+{ 
+    char lclBuf[ 35 ];
+    toOnlineIdString( lclBuf );
+    return lclBuf; 
+} 
+
+//============================================================================
+bool VxGUID::toOnlineIdString( std::string& strRetId )	
+{ 
+    char lclBuf[ 35 ];
+    toOnlineIdString( lclBuf );
+    strRetId = lclBuf; 
+    return isOnlineIdStringValid( lclBuf ) && !strRetId.empty();
+} 
+
+//============================================================================
+// buffer must be at least 35 characters in length
+void VxGUID::toOnlineIdString( char * retBuf )
+{
+    retBuf[ 0 ] = '!';
+    uint64ToHexAscii( &retBuf[ 1 ], m_u64HiPart );
+    uint64ToHexAscii( &retBuf[ 17 ], m_u64LoPart );
+    retBuf[ 33 ] = '!';
+    retBuf[ 34 ] = 0;
+}
+
+//============================================================================
+//! set online id by converting hex string into U128
+bool VxGUID::fromOnlineIdString( const char * pHexString )
+{
+    if( false == isOnlineIdStringValid( pHexString ) )
+    {
+        return false;
+    }
+
+    pHexString++;
+    uint8_t u8Byte;
+    uint64_t u64Part = 0;
+    for( int i = 0; i < 8; i++ )
+    {
+        u64Part = u64Part << 8;
+        u8Byte = (charToHex(*pHexString))<<4;
+        pHexString++;
+        u8Byte |= charToHex(*pHexString);
+        pHexString++;
+        u64Part |= u8Byte;
+    }
+
+    m_u64HiPart = u64Part;
+    u64Part = 0;
+    for( int i = 0; i < 8; i++ )
+    {
+        u64Part = u64Part << 8;
+        u8Byte = (charToHex(*pHexString))<<4;
+        pHexString++;
+        u8Byte |= charToHex(*pHexString);
+        pHexString++;
+        u64Part |= u8Byte;
+    }
+
+    m_u64LoPart = u64Part;
+
+    return true;
+}
+
+//============================================================================
+bool VxGUID::isOnlineIdStringValid( const char * pId )
+{
+    if( nullptr == pId )
+    {
+        return false;
+    }
+
+    if( '!' != pId[0] || '!' != pId[33] )
+    {
+        return false;
+    }
+
+    for( int i = 1; i < 33; i++ )
+    {
+        char ch = pId[ i ];
+        if( false == ( (('0' <= ch) && ('9' >= ch)) 
+            || (('a' <= ch) && ('f' >= ch)) 
+            || (('A' <= ch) && ('F' >= ch)) ) )
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 //============================================================================
@@ -310,97 +494,6 @@ char VxGUID::nibbleToHex( uint8_t val )
 {
     return val > 9 ? ( val - 10 ) + 'A' : val + 0x30;
 }
-
-//============================================================================
-std::string VxGUID::toHexString( void )	
-{ 
-	char lclBuf[ 33 ];
-    toHexString( lclBuf );
-	return lclBuf; 
-} 
-
-//============================================================================
-static uint8_t charToHex( char cVal )
-{
-	if( cVal >= '0' && cVal <= '9' )
-	{
-		return cVal & 0x0f;
-	}
-	else if( cVal >= 'A' && cVal <= 'F' )
-	{
-		return cVal - 55;
-	}
-	else if( cVal >= 'a' && cVal <= 'f' )
-	{
-		return cVal - 87;
-	}
-	else
-	{
-		LogMsg( LOG_ERROR, "VxGUID::charToHex invalid char 0x%2.2x\n", cVal );
-		return 0;
-	}
-}
-
-//============================================================================
-//! set online id by converting hex string into U128
-bool VxGUID::fromVxGUIDHexString( const char * pHexString )
-{
-	if( false == isVxGUIDHexStringValid( pHexString ) )
-	{
-		return false;
-	}
-
-	uint8_t u8Byte;
-	uint64_t u64Part = 0;
-	for( int i = 0; i < 8; i++ )
-	{
-		u64Part = u64Part << 8;
-		u8Byte = (charToHex(*pHexString))<<4;
-		pHexString++;
-		u8Byte |= charToHex(*pHexString);
-		pHexString++;
-		u64Part |= u8Byte;
-	}
-
-    m_u64HiPart = u64Part;
-	u64Part = 0;
-	for( int i = 0; i < 8; i++ )
-	{
-		u64Part = u64Part << 8;
-		u8Byte = (charToHex(*pHexString))<<4;
-		pHexString++;
-		u8Byte |= charToHex(*pHexString);
-		pHexString++;
-		u64Part |= u8Byte;
-	}
-
-    m_u64LoPart = u64Part;
-
-	return true;
-}
-
-//============================================================================
-bool VxGUID::isVxGUIDHexStringValid( const char * pId )
-{
-	if( NULL == pId )
-	{
-		return false;
-	}
-
-	for( int i = 0; i < 32; i++ )
-	{
-		char ch = pId[ i ];
-		if( false == ( (('0' <= ch) && ('9' >= ch)) 
-					|| (('a' <= ch) && ('f' >= ch)) 
-					|| (('A' <= ch) && ('F' >= ch)) ) )
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
 
 //============================================================================
 //! get low part of online id

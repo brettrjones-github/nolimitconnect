@@ -311,7 +311,7 @@ std::string VxNetIdent::getMyPtopUrl( void )
     std::string myIp = strIPv6.empty() ? strIPv4 : strIPv6;
 
     std::string myUrl;
-    StdStringFormat( myUrl, "ptop://%s:%d/%s", myIp.c_str(), m_DirectConnectId.getPort(), getMyOnlineId().toHexString().c_str() );
+    StdStringFormat( myUrl, "ptop://%s:%d/%s", myIp.c_str(), m_DirectConnectId.getPort(), getMyOnlineId().toOnlineIdString().c_str() );
     return myUrl;
 }
 

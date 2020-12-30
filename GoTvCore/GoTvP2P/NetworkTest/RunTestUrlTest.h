@@ -16,14 +16,17 @@
 
 #include "NetworkTestBase.h"
 
+#include <CoreLib/VxUrl.h>
+
 class RunTestUrlTest : public NetworkTestBase
 {
 public:
     RunTestUrlTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils );
 	virtual ~RunTestUrlTest() = default;
+    RunTestUrlTest() = delete; // don't allow default constructor
+    RunTestUrlTest(const RunTestUrlTest&) = delete; // don't allow copy constructor
 
-
-	virtual void				fromGuiRunQueryHostIdTest( const char * ptopUrl, int testType );
+	virtual void				fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType );
 	void						runTestShutdown( void );
 
 	void						threadRunNetworkTest( void ) override;
@@ -35,9 +38,7 @@ private:
 
 	//=== vars ===//
     bool                        m_TestIsRunning{ false };
-
-private:
-	RunTestUrlTest() = delete; // don't allow default constructor
-	RunTestUrlTest(const RunTestUrlTest&) = delete; // don't allow copy constructor
+    VxUrl                       m_MyUrl;
+    VxUrl                       m_TestUrl;
 };
 

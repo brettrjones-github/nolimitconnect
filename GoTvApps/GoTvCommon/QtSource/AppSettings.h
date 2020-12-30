@@ -78,6 +78,9 @@ public:
     void						setLastAppletLaunched( EApplet applet );
     EApplet						getLastAppletLaunched( void );
 
+    void						setLastUsedTestUrl( std::string& testUrl );
+    void						getLastUsedTestUrl( std::string& testUrl );
+
     void                        setVerboseLog( bool verbose );
     bool                        getVerboseLog( void );
 

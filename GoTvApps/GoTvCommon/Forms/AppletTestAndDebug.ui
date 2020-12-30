@@ -129,6 +129,9 @@
        </layout>
       </item>
       <item>
+       <widget class="QComboBox" name="m_TestUrlsComboBox"/>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="m_TestUrlLabel">
@@ -159,7 +162,7 @@
       <item>
        <widget class="QPushButton" name="m_GetGuidButton">
         <property name="text">
-         <string>Get ID GUID</string>
+         <string>Query Host ID </string>
         </property>
        </widget>
       </item>

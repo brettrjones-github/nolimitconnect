@@ -91,6 +91,8 @@ namespace
         "Run Test: Connection Dropped",
         "Run Test: Invalid Response",
         "Run Test: Test Complete",
+        "Run Test: Test Complete But Failed",
+        "Run Test: Test Complete With Success",
 
         "Max Run Testn Status",
     };
@@ -133,6 +135,30 @@ namespace
         "Net Avail: Group Host ",
         "Net Avail: Max Net Avail Status ",
     };
+
+    const char * NetCmdTypeEnumStrings[] =
+    {
+        "Net Cmd: Unknown ",
+        "Net Cmd: Ping ",
+        "Net Cmd: Pong ",
+        "Net Cmd: Is Port Open Req ",
+        "Net Cmd: Is Port Open Reply ",
+        "Net Cmd: Host Req ",
+        "Net Cmd: Host Reply ",
+        "Net Cmd: About Me Page ",
+        "Net Cmd: Storyboard Page ",
+        "Net Cmd: Query Host Id Req ",
+        "Net Cmd: Query Host Id Reply ",
+    };
+
+    const char * NetCmdErrorEnumStrings[] =
+    {
+        "Cmd Error: None ",
+        "Cmd Error: Service Disabled ",
+        "Cmd Error: Permission Level ",
+    };
+
+    const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
 }
 
 //! Internet Status as text
@@ -175,4 +201,26 @@ const char * DescribeRunTestStatus( ERunTestStatus eTestStatus )
 const char * DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
 {
 	return RandomConnectStatusEnumStrings[ eRandomConnectStatus ];
+}
+
+//! Net Command type as text
+const char * DescribeNetCmdType( ENetCmdType netCmdType )
+{
+    if( netCmdType < 0 || eMaxNetCmdType <= netCmdType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return NetCmdTypeEnumStrings[ netCmdType ]; 
+}
+
+//! Net Command Error as text
+const char * DescribeNetCmdError( ENetCmdError netCmdError )
+{
+    if(  netCmdError < 0 || eMaxNetCmdError <= netCmdError )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return NetCmdErrorEnumStrings[ netCmdError ]; 
 }

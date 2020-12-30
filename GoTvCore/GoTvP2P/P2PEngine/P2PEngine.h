@@ -206,7 +206,7 @@ public:
     virtual void				fromGuiVerifyNetHostSettings( void ) override;
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
     virtual void				fromGuiRunQueryHostIdTest( void ) override;
-    virtual void				fromGuiRunTestUrlTest( const char * ptopUrl, int testType ) override;
+    virtual void				fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
 																const char *	strGreeting,	// greeting text

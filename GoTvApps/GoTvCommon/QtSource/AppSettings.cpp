@@ -414,3 +414,15 @@ void AppSettings::setupAppModeSettings( EDefaultAppMode appDefaultMode )
 	uint32_t u32Value = 1;
 	setIniValue( getAppShortName(), "AppDefaultInited", u32Value );
 }
+
+//============================================================================
+void AppSettings::setLastUsedTestUrl( std::string& testUrl )
+{
+    setIniValue( getAppShortName(), "LastTestUrl", testUrl );
+}
+
+//============================================================================
+void AppSettings::getLastUsedTestUrl( std::string& testUrl )
+{
+    getIniValue( getAppShortName(), "LastTestUrl", testUrl, "" );
+}

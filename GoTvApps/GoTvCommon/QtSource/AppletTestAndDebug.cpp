@@ -23,6 +23,7 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxUrl.h>
 
 #include <QDesktopServices>
 #include <QUrl>
@@ -46,14 +47,14 @@ AppletTestAndDebug::AppletTestAndDebug( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     setupApplet();
-    VxAddLogHandler( this );
+    // Log is seperate now VxAddLogHandler( this );
     m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
 AppletTestAndDebug::~AppletTestAndDebug()
 {
-    VxRemoveLogHandler( this );
+    // Log is seperate now VxRemoveLogHandler( this );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -64,31 +65,132 @@ void AppletTestAndDebug::setupApplet( void )
     getInfoEdit()->setMaximumBlockCount( MAX_LOG_EDIT_BLOCK_CNT );
     getInfoEdit()->setReadOnly( true );
 
-    connect( ui.gotoWebsiteButton, SIGNAL( clicked() ), this, SLOT( gotoWebsite() ) );
-    connect( ui.m_ShowLogButton, SIGNAL( clicked() ), this, SLOT( slotShowLogButtonClick() ) );
-    connect( ui.m_ShowAppInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowAppInfoButtonClick() ) );
-    connect( ui.m_CopyMyUrlButton, SIGNAL( clicked() ), this, SLOT( slotCopyMyUrlToClipboardClicked() ) );
-    connect( ui.m_CopyTestUrlButton, SIGNAL( clicked() ), this, SLOT( slotCopyTestUrlToClipboardClicked() ) );
-    connect( ui.m_CopyResultToClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyResultToClipboardClicked() ) );
-    
-    connect( ui.m_BrowseFilesButton, SIGNAL( clicked() ), this, SLOT( slotBrowseFilesButtonClicked() ) );
-    connect( ui.m_PingButton, SIGNAL( clicked() ), this, SLOT( slotPingTestButtonClicked() ) );
-
-    connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotLogMsg( const QString& ) ) );
-    connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
-
     VxNetIdent oMyIdent;
     m_FromGui.fromGuiQueryMyIdent( &oMyIdent );
     ui.m_MyUrlEdit->setText( QString( oMyIdent.getMyPtopUrl().c_str() ) );
 
     //fillBasicInfo();
     //fillExtraInfo();
+    std::string strValue;
+    m_MyApp.getAppSettings().getLastUsedTestUrl( strValue );
+    if( !strValue.empty() )
+    {
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
+        ui.m_TestUrlEdit->setText( strValue.c_str() );
+    }
+
+    m_Engine.getEngineSettings().getNetworkHostUrl( strValue );
+    if( !strValue.empty() )
+    {
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
+    }
+
+    m_Engine.getEngineSettings().getConnectTestUrl( strValue );
+    if( !strValue.empty() )
+    {
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
+    }
+
+    m_Engine.getEngineSettings().getRandomConnectUrl( strValue );
+    if( !strValue.empty() )
+    {
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
+    }
+
+    m_Engine.getEngineSettings().getGroupHostUrl( strValue );
+    if( !strValue.empty() )
+    {
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
+    }
+
+    m_Engine.getEngineSettings().getChatRoomHostUrl( strValue );
+    if( !strValue.empty() )
+    {
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
+    }
+
+    if( !ui.m_TestUrlsComboBox->currentText().isEmpty() )
+    {
+        if( ui.m_TestUrlEdit->text().isEmpty() )
+        {
+            ui.m_TestUrlEdit->setText( ui.m_TestUrlsComboBox->currentText() );
+        }     
+    }
+
+    connect( ui.gotoWebsiteButton, SIGNAL( clicked() ), this, SLOT( gotoWebsite() ) );
+    connect( ui.m_ShowLogButton, SIGNAL( clicked() ), this, SLOT( slotShowLogButtonClick() ) );
+    connect( ui.m_ShowAppInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowAppInfoButtonClick() ) );
+    connect( ui.m_CopyMyUrlButton, SIGNAL( clicked() ), this, SLOT( slotCopyMyUrlToClipboardClicked() ) );
+    connect( ui.m_CopyTestUrlButton, SIGNAL( clicked() ), this, SLOT( slotCopyTestUrlToClipboardClicked() ) );
+    connect( ui.m_CopyResultToClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyResultToClipboardClicked() ) );
+
+    connect( ui.m_BrowseFilesButton, SIGNAL( clicked() ), this, SLOT( slotBrowseFilesButtonClicked() ) );
+    connect( ui.m_PingButton, SIGNAL( clicked() ), this, SLOT( slotPingTestButtonClicked() ) );
+
+    connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+    connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+
+    connect( ui.m_TestUrlsComboBox, SIGNAL(currentText(const QString &)),	this,	SLOT(slotNewUrlSelected(const QString &)) );
+    connect( &m_MyApp, SIGNAL(signalRunTestStatus( QString,ERunTestStatus,QString )),
+            this, SLOT(slotRunTestStatus( QString,ERunTestStatus,QString )) );
+
+    updateDlgFromSettings();
+}
+
+//============================================================================
+void AppletTestAndDebug::updateDlgFromSettings()
+{
+    std::string lastTestUrl;
+    m_MyApp.getAppSettings().getLastUsedTestUrl( lastTestUrl );
+    if( !lastTestUrl.empty() )
+    {
+        ui.m_TestUrlEdit->setText( lastTestUrl.c_str() );
+    }
+}
+
+//============================================================================
+void AppletTestAndDebug::updateSettingsFromDlg()
+{
+    if( !ui.m_TestUrlEdit->text().isEmpty() )
+    {
+        std::string testUrl( ui.m_TestUrlEdit->text().toUtf8().constData() );
+        m_MyApp.getAppSettings().setLastUsedTestUrl( testUrl );
+    }
+}
+
+//============================================================================
+void AppletTestAndDebug::slotNewUrlSelected( const QString& newUrl )
+{
+    if( !newUrl.isEmpty() )
+    {
+        ui.m_TestUrlEdit->setText( newUrl );
+    }
 }
 
 //============================================================================
 void AppletTestAndDebug::slotPingTestButtonClicked( void )
 {
+    getInfoEdit()->clear();
+    VxUrl myUrl( ui.m_MyUrlEdit->text().toUtf8().constData() );
+    VxUrl testUrl( ui.m_TestUrlEdit->text().toUtf8().constData() );
 
+    if( myUrl.validateUrl( true ) && testUrl.validateUrl( false ) )
+    {
+        infoMsg( "Testing Ping" );
+        m_MyApp.getEngine().fromGuiRunTestUrlTest( myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdPing );
+    }
+    else
+    {
+        if( !myUrl.validateUrl( true ) )
+        {
+            infoMsg( "Invalid My URL" );
+        }
+        
+        if( !testUrl.validateUrl( false ) )
+        {
+            infoMsg( "Invalid Test URL" );
+        }
+    }
 }
 
 //============================================================================
@@ -100,16 +202,18 @@ void AppletTestAndDebug::slotBrowseFilesButtonClicked( void )
 //============================================================================
 void AppletTestAndDebug::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
 {
-    m_LogMutex.lock();
-    if( m_VerboseLog
-        || ( u32LogFlags & ~LOG_VERBOSE ) )
-    {
-        QString logStr( logMsg );
-        logStr.remove( QRegExp( "[\\n\\r]" ) );
-        emit signalLogMsg( logStr );
-    }
+    // Log is seperate now 
 
-    m_LogMutex.unlock();
+    //m_LogMutex.lock();
+    //if( m_VerboseLog
+    //    || ( u32LogFlags & ~LOG_VERBOSE ) )
+    //{
+    //    QString logStr( logMsg );
+    //    logStr.remove( QRegExp( "[\\n\\r]" ) );
+    //    emit signalLogMsg( logStr );
+    //}
+
+    //m_LogMutex.unlock();
 }
 
 //============================================================================
@@ -138,6 +242,18 @@ void AppletTestAndDebug::slotInfoMsg( const QString& text )
     getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
     getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
     //m_LogFile.write( text ); // Logs to file
+}
+
+//============================================================================
+void AppletTestAndDebug::slotRunTestStatus( QString testName, ERunTestStatus testStatus, QString testMsg )
+{
+    getInfoEdit()->appendPlainText( testMsg ); 
+    if( testStatus != eRunTestStatusLogMsg )
+    {
+        QString testStat = QObject::tr( "Test Status: " );
+        testStat += DescribeRunTestStatus( testStatus );
+        getInfoEdit()->appendPlainText( testStat );
+    }
 }
 
 //============================================================================

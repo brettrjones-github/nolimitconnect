@@ -14,12 +14,14 @@
 //============================================================================
 
 #include "AppletBase.h"
-
 #include "ui_AppletTestAndDebug.h"
+#include <GoTvInterface/IToGui.h>
+
+#include <CoreLib/VxDebug.h> // needed for ILogCallbackInterface
 
 #include <QMutex>
 
-#include <CoreLib/VxDebug.h>
+class VxUrl;
 
 class AppletTestAndDebug : public AppletBase, public ILogCallbackInterface
 {
@@ -44,6 +46,7 @@ protected slots:
     void                        slotShowAppInfoButtonClick( void );
     void                        slotLogMsg( const QString& text );
     void                        slotInfoMsg( const QString& text );
+    void                        slotRunTestStatus( QString testName, ERunTestStatus testStatus, QString testMsg );
 
     void                        slotCopyMyUrlToClipboardClicked( void );
     void                        slotCopyTestUrlToClipboardClicked( void );
@@ -52,8 +55,12 @@ protected slots:
     void                        slotBrowseFilesButtonClicked( void );
     void                        slotPingTestButtonClicked( void );
 
+    void                        slotNewUrlSelected( const QString &newUrl );
+
 protected:
     void						setupApplet( void );
+    void						updateDlgFromSettings( void );
+    void						updateSettingsFromDlg( void );
     QPlainTextEdit *            getInfoEdit( void )     { return ui.m_InfoPlainTextEdit; }
     void                        fillBasicInfo( void );
     void                        fillExtraInfo( void );
