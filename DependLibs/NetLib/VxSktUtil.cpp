@@ -904,7 +904,7 @@ SOCKET VxConnectToAddr(SOCKET sktHandle, struct sockaddr* sktAddr, socklen_t skt
             else if( iResult > 0 )
             {
                 // Socket selected for write
-                int iSktLen = sizeof(int);
+                socklen_t iSktLen = sizeof(int);
                 int valopt = 0;
                 if( getsockopt( sktHandle, SOL_SOCKET, SO_ERROR, (char*)(&valopt), &iSktLen ) < 0 )
                 {

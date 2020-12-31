@@ -14,6 +14,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <string>
+
 enum ENetActionType
 {
 	eNetActionUnknown			= 0,
@@ -35,7 +37,9 @@ class NetActionBase
 {
 public:
 	NetActionBase( NetServicesMgr& netServicesMgr );
-	virtual ~NetActionBase();
+    virtual ~NetActionBase() = default;
+
+    virtual std::string         getNetworkKey( void );
 
 	virtual ENetActionType		getNetActionType( void )			{ return eNetActionUnknown; }
 	virtual VxGUID&			    getMyOnlineId( void );

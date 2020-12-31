@@ -82,7 +82,7 @@ void NetActionAnnounce::doAction( void )
 	}
 
 	VxKey cryptKey;
-	m_NetServiceUtils.generateNetServiceCryptoKey( cryptKey, acceptedPort );
+    m_NetServiceUtils.generateNetServiceCryptoKey( cryptKey, acceptedPort, m_NetServicesMgr.getNetworkKey() );
 	VxSymEncrypt( &cryptKey, (char *)&anchorList, anchorDataLen );
 
 	rc = netServConn.sendData( (char *)&anchorList, anchorDataLen );
@@ -159,7 +159,7 @@ int NetActionAnnounce::buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t cli
 	int listLen = anchorList.calculateLength();
 
 	std::string netServChallengeHash;
-	m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, clientPort );
+    m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, clientPort, m_NetServiceUtils.getNetworkKey() );
 
 	int totalLen = m_NetServiceUtils.buildNetCmdHeader( strNetCmdHdr, eNetCmdHostReq, netServChallengeHash, listLen );
 	return totalLen;

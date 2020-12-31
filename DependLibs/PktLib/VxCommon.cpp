@@ -154,6 +154,9 @@ VxNetIdent::VxNetIdent()
 
 //============================================================================
 VxNetIdent::VxNetIdent(const VxNetIdent &rhs )
+    : VxNetIdentBase( rhs )
+    , PluginPermission( rhs )
+    , VxGroupService( rhs )
 {
 	*this = rhs;
 }

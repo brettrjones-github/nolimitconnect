@@ -107,7 +107,7 @@ void NetActionQueryHostOnlineId::doAction( void )
 void NetActionQueryHostOnlineId::buildQueryHostOnlineIdUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl )
 {
 	std::string netServChallengeHash;
-	m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, netServConn );
+    m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, netServConn, getNetworkKey() );
 
 	std::string strContent;
 	m_NetServiceUtils.buildNetCmd( strHttpUrl, eNetCmdQueryHostOnlineIdReq, netServChallengeHash, strContent );

@@ -68,7 +68,7 @@ static bool WhatsMyIP(	InetAddress& oLclAddr,
 	sprintf( as8TxRx, WHATS_MY_IP_POST_STR, 
 		pWebPage, 
 		pHost, 
-		strlen( as8Content ),
+        (int)strlen( as8Content ),
 		as8Content );
 
 	RCODE rc = VxSendSktData( oSkt, as8TxRx, (int)strlen( as8TxRx), SKT_SEND_TIMEOUT );

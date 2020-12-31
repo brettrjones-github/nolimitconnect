@@ -31,7 +31,11 @@ class NetServiceUtils
 {
 public:
 	NetServiceUtils( P2PEngine& engine );
-	virtual ~NetServiceUtils();
+    virtual ~NetServiceUtils() = default;
+
+    NetworkMgr&					getNetworkMgr( void ) { return m_NetworkMgr; }
+
+    std::string                 getNetworkKey( void );
 
     static ENetCmdType			netCmdStringToEnum( const char * netCmd );
 	static const char *			netCmdEnumToString( ENetCmdType	eNetCmdType );
@@ -56,14 +60,18 @@ public:
     // returns total length of data to send
     int							buildNetCmdHeader( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, int contentLength, int errCode = 0, int version = 1 );
 
-	void						generateNetServiceChallengeHash(	std::string&			strKey,	
-																	VxSktBase *				skt );
-	void						generateNetServiceChallengeHash(	std::string&			strKey,	
-																	VxSktConnectSimple *	skt );
-	void						generateNetServiceChallengeHash(	std::string&			strKey,		// set this key
-																	uint16_t						clientPort );
-	void						generateNetServiceCryptoKey(		VxKey&					key,		
-																	uint16_t						clientPort );
+    static void					generateNetServiceChallengeHash(	std::string&			strKey,
+                                                                    VxSktBase *				skt,
+                                                                    std::string             netKey);
+    static void					generateNetServiceChallengeHash(	std::string&			strKey,
+                                                                    VxSktConnectSimple *	skt,
+                                                                    std::string             netKey);
+    static void					generateNetServiceChallengeHash(	std::string&			strKey,		// set this key
+                                                                    uint16_t				clientPort,
+                                                                    std::string             netKey);
+    static void					generateNetServiceCryptoKey(		VxKey&					key,
+                                                                    uint16_t				clientPort,
+                                                                    std::string             netKey);
 	static bool					verifyAllDataArrivedOfNetServiceUrl( VxSktBase * sktBase );
 	// returns content length or -1 if invalid url
 	static int					getTotalLengthFromNetServiceUrl(  char * dataBuf, int dataLen );

@@ -47,8 +47,9 @@ NetServiceUtils::NetServiceUtils( P2PEngine& engine )
 }
 
 //============================================================================
-NetServiceUtils::~NetServiceUtils()
+std::string NetServiceUtils::getNetworkKey( void )
 {
+    return m_NetworkMgr.getNetworkKey();
 }
 
 //============================================================================
@@ -235,7 +236,7 @@ bool NetServiceUtils::buildNetCmd( uint16_t cryptoKeyPort, std::string& retResul
     if( cryptoKeyPort )
     {
         std::string netServChallengeHash;
-        generateNetServiceChallengeHash( netServChallengeHash, cryptoKeyPort );
+        generateNetServiceChallengeHash( netServChallengeHash, cryptoKeyPort, m_NetworkMgr.getNetworkKey() );
         buildNetCmd( retResult, netCmd, netServChallengeHash, strContent, errCode, version );
         return !retResult.empty();
     }
@@ -577,7 +578,7 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd,
 {
 	std::string retResult;
 	std::string netServChallengeHash;
-	generateNetServiceChallengeHash( netServChallengeHash, sktBase );
+    generateNetServiceChallengeHash( netServChallengeHash, sktBase, m_NetworkMgr.getNetworkKey() );
 	buildNetCmd( retResult, netCmd, netServChallengeHash, cmdContent, errCode, version );
 
 	return sktBase->sendData( retResult.c_str(), (int)retResult.length() );
@@ -588,7 +589,7 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdTyp
 {
     std::string retResult;
     std::string netServChallengeHash;
-    generateNetServiceChallengeHash( netServChallengeHash, sktBase );
+    generateNetServiceChallengeHash( netServChallengeHash, sktBase, m_NetworkMgr.getNetworkKey() );
     buildNetCmd( retResult, netCmd, netServChallengeHash, cmdContent, errCode, version );
 
     return sktBase->sendData( retResult.c_str(), ( int )retResult.length() );
@@ -596,7 +597,8 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdTyp
 
 //============================================================================
 void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,	
-														VxSktBase *				skt )
+                                                        VxSktBase *				skt,
+                                                        std::string             netKey)
 {
 	uint16_t clientPort;
 	if( skt->isAcceptSocket() )
@@ -608,41 +610,46 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,
 		clientPort = skt->m_LclIp.getPort();
 	}
 
-	generateNetServiceChallengeHash( strKey, clientPort );
+    generateNetServiceChallengeHash( strKey, clientPort, netKey );
 }
 
 //============================================================================
 void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,	
-														VxSktConnectSimple *	skt )
+                                                        VxSktConnectSimple *	skt,
+                                                        std::string             netKey)
 {
 	uint16_t clientPort = skt->m_LclIp.getPort();
-	generateNetServiceChallengeHash( strKey, clientPort );
+    generateNetServiceChallengeHash( strKey, clientPort, netKey );
 }
 
 //============================================================================
 void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash,	
-														uint16_t				clientPort )
+                                                        uint16_t				clientPort,
+                                                        std::string             netKey )
 {
 	std::string strPwd;
-	StdStringFormat( strPwd, "xs%ddfj%sd%d75!?jsaf", 
-		clientPort,
-        m_NetworkMgr.getNetworkKey(),
-		clientPort );
+    StdStringFormat( strPwd, "xs%dAfj%sd%d75!Bjsaf",
+                    clientPort,
+                    netKey.c_str(),
+                    clientPort );
+    LogMsg( LOG_DEBUG, "pwd %s thread 0x%x tid %d", strPwd.c_str(), VxGetCurrentThreadId(), VxGetCurrentThreadTid());
 
-	VxKey key;
+    VxKey key;
 	key.setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
 	key.exportToAsciiString( strKeyHash );
     LogModule( eLogNetService, LOG_INFO, "generateNetServiceChallengeHash: clientPort = %d, network %s hash %s", 
-               clientPort, m_NetworkMgr.getNetworkKey(), strPwd.c_str() );
+               clientPort, netKey.c_str(), strPwd.c_str() );
 }
 
 //============================================================================
-void NetServiceUtils::generateNetServiceCryptoKey(	VxKey& key, uint16_t clientPort )
+void NetServiceUtils::generateNetServiceCryptoKey(	VxKey&                  key,
+                                                    uint16_t                clientPort,
+                                                    std::string             netKey )
 {
 	std::string strPwd;
 	StdStringFormat( strPwd, "xz&gdf%d%s!?d%d759sdc", 
 		             clientPort,
-		             m_NetworkMgr.getNetworkKey(), 
+                     netKey.c_str(),
 		             clientPort );
 	key.setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
 }
@@ -658,7 +665,7 @@ bool NetServiceUtils::decryptNetServiceContent( char * content, int contentDataL
 	}
 
 	VxKey key;
-	generateNetServiceCryptoKey( key, clientPort );
+    generateNetServiceCryptoKey( key, clientPort, m_NetworkMgr.getNetworkKey() );
 	VxSymDecrypt( &key, content, contentDataLen );
 
 	return true;

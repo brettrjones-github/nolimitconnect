@@ -58,6 +58,7 @@ public:
 	NetServiceUtils&			getNetUtils( void )			{ return m_NetServiceUtils; }
 	NetServiceHost&			    getNetServiceHost( void )	{ return m_NetServiceHost; }
 
+    std::string                 getNetworkKey( void );
 	VxGUID&						getMyOnlineId( void );
 
 	void						netServicesStartup( void );

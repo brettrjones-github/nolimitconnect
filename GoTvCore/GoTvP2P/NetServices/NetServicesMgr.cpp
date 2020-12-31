@@ -82,6 +82,12 @@ NetServicesMgr::~NetServicesMgr()
 }
 
 //============================================================================
+std::string NetServicesMgr::getNetworkKey( void )
+{
+    return m_NetworkMgr.getNetworkKey();
+}
+
+//============================================================================
 VxGUID& NetServicesMgr::getMyOnlineId( void )
 {
 	return m_PktAnn.getMyOnlineId();
@@ -308,7 +314,7 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 	
 	std::string netServChallengeHash;
 	uint16_t cryptoKeyPort = toClientConn.getCryptoKeyPort();
-	m_NetServiceUtils.generateNetServiceChallengeHash(netServChallengeHash, cryptoKeyPort );
+    m_NetServiceUtils.generateNetServiceChallengeHash(netServChallengeHash, cryptoKeyPort, getNetworkKey() );
 
 	m_NetServiceUtils.buildNetCmd( strNetCmd, eNetCmdPing, netServChallengeHash, strPing );
 

@@ -107,7 +107,7 @@ void NetActionQueryMyIp::doAction( void )
 void NetActionQueryMyIp::buildQueryMyIpUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl )
 {
 	std::string netServChallengeHash;
-	m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, netServConn );
+    m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, netServConn, m_NetServiceUtils.getNetworkKey() );
 
 	std::string strContent;
 	m_NetServiceUtils.buildNetCmd( strHttpUrl, eNetCmdPing, netServChallengeHash, strContent );

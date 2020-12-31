@@ -80,7 +80,7 @@ RCODE NetServiceHost::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& n
 	HostList * anchorList = (HostList *)content;
 
 	VxKey key;
-	m_NetServiceUtils.generateNetServiceCryptoKey( key, clientPort );
+    m_NetServiceUtils.generateNetServiceCryptoKey( key, clientPort, m_NetServiceUtils.getNetworkKey() );
 	VxSymDecrypt( &key, content, contentDataLen );
 
 	if( false == verifyHostList( anchorList, contentDataLen ) )

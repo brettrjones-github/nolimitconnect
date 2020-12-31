@@ -27,8 +27,9 @@ NetActionBase::NetActionBase( NetServicesMgr& netServicesMgr )
 }
 
 //============================================================================
-NetActionBase::~NetActionBase()
+std::string NetActionBase::getNetworkKey( void )
 {
+    return m_NetServicesMgr.getNetworkKey();
 }
 
 //============================================================================
