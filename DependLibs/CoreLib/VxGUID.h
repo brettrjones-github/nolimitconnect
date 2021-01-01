@@ -27,16 +27,16 @@ class VxGUID
 {
 public:
 	VxGUID();
-	VxGUID( const VxGUID &rhs );
+	VxGUID( const VxGUID& rhs );
 	VxGUID( uint64_t u64HiPart, uint64_t u64LoPart );
 
-	VxGUID&						operator =( const VxGUID &a );
-	bool						operator == ( const VxGUID &a ) const;
-	bool						operator != ( const VxGUID &a ) const;
-	bool						operator < ( const VxGUID &b ) const;
-	bool						operator <= ( const VxGUID &b ) const;
-	bool						operator > ( const VxGUID &b ) const;
-	bool						operator >= ( const VxGUID &b ) const;
+	VxGUID&						operator = ( const VxGUID& rhs );
+	bool						operator == ( const VxGUID& rhs ) const;
+	bool						operator != ( const VxGUID& rhs ) const;
+	bool						operator < ( const VxGUID& rhs ) const;
+	bool						operator <= ( const VxGUID& rhs ) const;
+	bool						operator > ( const VxGUID& rhs ) const;
+	bool						operator >= ( const VxGUID& rhs ) const;
 
 	static void					generateNewVxGUID( VxGUID& retNewGUID );
 	static VxGUID&				nullVxGUID( void );

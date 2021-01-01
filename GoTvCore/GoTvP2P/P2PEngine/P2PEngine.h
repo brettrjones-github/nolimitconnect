@@ -60,7 +60,7 @@ class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
 class QueryHostIdTest;
-class RunTestUrlTest;
+class RunUrlAction;
 
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
@@ -110,6 +110,7 @@ public:
 
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
     VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
+    std::string					getMyUrl( void )							    { m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyPtopUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );
@@ -206,7 +207,7 @@ public:
     virtual void				fromGuiVerifyNetHostSettings( void ) override;
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
     virtual void				fromGuiRunQueryHostIdTest( void ) override;
-    virtual void				fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
+    virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
 																const char *	strGreeting,	// greeting text
@@ -556,7 +557,6 @@ protected:
     //========================================================================
     //========================================================================
     void						iniitializePtoPEngine( void );
-	void						bigListLoadComplete( RCODE rc );
 
 	virtual bool				txPluginPkt( 	EPluginType			ePluginType, 
 												VxNetIdentBase *	netIdent, 
@@ -601,7 +601,7 @@ protected:
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
     QueryHostIdTest&			m_QueryHostIdTest;
-    RunTestUrlTest&			    m_RunTestUrlTest;
+    RunUrlAction&			    m_RunUrlAction;
 
 	RcScan						m_RcScan;
 

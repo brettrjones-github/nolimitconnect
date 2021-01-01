@@ -92,8 +92,56 @@ VxUrl::VxUrl( std::string& url )
 //============================================================================
 VxUrl::VxUrl( const char * pUrl )
 {
-	setUrl( pUrl );
+    setUrl( pUrl );
 }
+
+//============================================================================
+VxUrl::VxUrl( const VxUrl& rhs )
+{
+    *this = rhs;
+}
+
+//============================================================================
+VxUrl& VxUrl::operator = ( const VxUrl& rhs )
+{
+    if( this != &rhs )
+    {
+        m_Url = rhs.m_Url;
+        m_FileName = m_FileName;
+        m_FileExtension = m_FileExtension;
+        m_ShareName = m_ShareName;
+        m_strProtocol = m_strProtocol;
+        m_strHost = m_strHost;
+        m_Port = m_Port;
+        m_strPath = m_strPath;
+        m_strUser = m_strUser;
+        m_strPassword = m_strPassword;
+        m_strQuery = m_strQuery;
+        m_strFragment = m_strFragment;
+        m_strOnlineId = m_strOnlineId;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool VxUrl::operator == ( const VxUrl& rhs ) const
+{
+    return m_Url == rhs.m_Url &&
+        m_FileName == m_FileName &&
+        m_FileExtension == m_FileExtension &&
+        m_ShareName == m_ShareName &&
+        m_strProtocol == m_strProtocol &&
+        m_strHost == m_strHost &&
+        m_Port == m_Port &&
+        m_strPath == m_strPath &&
+        m_strUser == m_strUser &&
+        m_strPassword == m_strPassword &&
+        m_strQuery == m_strQuery &&
+        m_strFragment == m_strFragment &&
+        m_strOnlineId == m_strOnlineId;
+}
+
 //============================================================================
 void VxUrl::setUrl( const char * pUrl )
 {

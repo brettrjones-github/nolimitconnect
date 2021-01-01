@@ -31,7 +31,6 @@ typedef void * 	(*VX_THREAD_FUNCTION_T)(void *);
 typedef void 	(*VX_THREAD_START_CALLBACK_T)(unsigned int,const char *);
 typedef void 	(*VX_THREAD_EXIT_CALLBACK_T)(unsigned int, bool,const char *);
 
-
 class VxThread
 {
 public:

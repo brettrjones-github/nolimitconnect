@@ -31,6 +31,8 @@ public:
     NetworkTestBase( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils );
     virtual ~NetworkTestBase() = default;
 
+    P2PEngine&					getEngine( void ) { return m_Engine; }
+
     void                        setIsHost( bool isHost ) { m_IsHost = isHost; }
     bool                        getIsHost( void ) { return m_IsHost; }
 

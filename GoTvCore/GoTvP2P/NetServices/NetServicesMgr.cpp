@@ -90,7 +90,7 @@ std::string NetServicesMgr::getNetworkKey( void )
 //============================================================================
 VxGUID& NetServicesMgr::getMyOnlineId( void )
 {
-	return m_PktAnn.getMyOnlineId();
+    return m_Engine.getMyPktAnnounce().getMyOnlineId();
 }
 
 //============================================================================

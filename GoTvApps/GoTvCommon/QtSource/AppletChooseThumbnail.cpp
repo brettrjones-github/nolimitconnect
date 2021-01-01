@@ -16,7 +16,6 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
-#include "ActivitySnapShot.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "AccountMgr.h"

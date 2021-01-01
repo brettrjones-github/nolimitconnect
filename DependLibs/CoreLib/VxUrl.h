@@ -24,6 +24,10 @@ public:
 	VxUrl();
 	VxUrl( const char * pUrl );
 	VxUrl( std::string& url );
+    VxUrl( const VxUrl& rhs );
+
+    VxUrl&                      operator = ( const VxUrl& rhs );
+    bool                        operator == ( const VxUrl& rhs ) const;
 
 	// return true if has :// in path
 	static bool					isURL( std::string& strFile );

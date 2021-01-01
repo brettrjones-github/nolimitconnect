@@ -17,7 +17,6 @@
 #include "ActivityIsPortOpenTest.h"
 #include "ActivityNetworkState.h"
 #include "ActivityInformation.h"
-#include "ActivityQueryHostIdTest.h"
 
 #include "AppGlobals.h"
 #include "AppCommon.h"
@@ -96,7 +95,6 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_SaveSettingsButton, SIGNAL( clicked() ), this, SLOT( onSaveButtonClick() ) );
     connect( ui.m_DeleteSettingsButton, SIGNAL( clicked() ), this, SLOT( onDeleteButtonClick() ) );
     connect( ui.m_TestIsPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotTestIsMyPortOpenButtonClick() ) );
-    connect( ui.m_TestQueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotTestQueryHostIdButtonClick() ) );
 
     connect( ui.m_DefaultChatRoomHostButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultChatRoomUrlInformation() ) );
     connect( ui.m_ChatRoomUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultChatRoomUrlInformation() ) );
@@ -471,25 +469,6 @@ void AppletNetworkSettings::slotTestIsMyPortOpenButtonClick( void )
         ActivityIsPortOpenTest * dlg = new ActivityIsPortOpenTest(
             m_MyApp,
             u16Port,
-            this );
-        dlg->exec();
-    }
-    else
-    {
-        QMessageBox::information( this, tr( "Error" ), tr( "TCP Port cannot be zero." ) );
-    }
-}
-
-//============================================================================
-void AppletNetworkSettings::slotTestQueryHostIdButtonClick( void )
-{
-    updateSettingsFromDlg();
-    uint16_t u16Port = ui.PortEdit->text().toUShort();
-    if( 0 != u16Port )
-    {
-        updateSettingsFromDlg();
-        ActivityQueryHostIdTest * dlg = new ActivityQueryHostIdTest(
-            m_MyApp,
             this );
         dlg->exec();
     }

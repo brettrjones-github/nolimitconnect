@@ -234,7 +234,7 @@ public:
     /// Run test to query host guid
     virtual void				fromGuiRunQueryHostIdTest( void ) = 0;
     /// Run test on the given url
-    virtual void				fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) = 0;
+    virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) = 0;
 
 	/// Set file share settings
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) = 0;

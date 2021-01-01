@@ -471,7 +471,7 @@ public:
     virtual void				fromGuiVerifyNetHostSettings( void );
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
     virtual void				fromGuiRunQueryHostIdTest( void );
-    virtual void				fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType );
+    virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType );
 
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
     virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );

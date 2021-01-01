@@ -350,9 +350,9 @@ void IGoTv::fromGuiRunQueryHostIdTest( void )
 }
 
 //============================================================================
-void IGoTv::fromGuiRunTestUrlTest( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
+void IGoTv::fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
-    getPtoP().fromGuiRunTestUrlTest( myUrl, ptopUrl, testType );
+    getPtoP().fromGuiRunUrlAction( myUrl, ptopUrl, testType );
 }
 
 //============================================================================

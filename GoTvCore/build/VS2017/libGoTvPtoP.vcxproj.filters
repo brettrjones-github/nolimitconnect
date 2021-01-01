@@ -673,7 +673,7 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunTestUrlTest.cpp">
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.cpp">
       <Filter>GoTvP2P\NetworkTest</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1450,7 +1450,7 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunTestUrlTest.h">
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.h">
       <Filter>GoTvP2P\NetworkTest</Filter>
     </ClInclude>
   </ItemGroup>

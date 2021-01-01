@@ -466,9 +466,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDebugSettings.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -503,9 +500,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -533,9 +527,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1306,8 +1298,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityChooseTestWebsiteUrl.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityCreateAccount.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDebugSettings.ui">
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloadItemMenu.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloads.ui">
@@ -1333,7 +1323,6 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPermissionsRelay.ui">
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityQueryHostIdTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityReplyFileOffer.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityScanPeopleSearch.ui">
@@ -1790,9 +1779,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDebugSettings.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
@@ -1842,9 +1828,6 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.h">
@@ -1918,10 +1901,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
@@ -2506,7 +2487,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityBase.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityBrowseFiles.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityChooseTestWebsiteUrl.h" />
-    <ClInclude Include="GeneratedFiles\ui_ActivityDebugSettings.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityDownloadItemMenu.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityDownloads.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityFileSearch.h" />

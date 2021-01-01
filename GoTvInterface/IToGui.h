@@ -113,12 +113,15 @@ enum ERunTestStatus
 
     eRunTestStatusTestSuccess = 2,
     eRunTestStatusTestFail = 3,
-    eRunTestStatusConnectFail = 4,
-    eRunTestStatusConnectionDropped = 5,
-    eRunTestStatusInvalidResponse = 6,
-    eRunTestStatusTestComplete = 7,
-    eRunTestStatusTestCompleteFail = 8,
-    eRunTestStatusTestCompleteSuccess = 9,
+    eRunTestStatusTestBadParam = 4,
+    eRunTestStatusConnectFail = 5,
+    eRunTestStatusConnectionDropped = 6,
+    eRunTestStatusInvalidResponse = 7,
+    eRunTestStatusMyPortIsOpen = 8,
+    eRunTestStatusMyPortIsClosed = 9,
+    eRunTestStatusTestComplete = 10,
+    eRunTestStatusTestCompleteFail = 11,
+    eRunTestStatusTestCompleteSuccess = 12,
 
     eMaxRunTestStatusType
 };

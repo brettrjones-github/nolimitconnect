@@ -36,7 +36,6 @@ protected slots:
     void						slotGoToNetHostSettingsButtonClick( void );
     void						slotRandomPortButtonClick( void );
     void						slotTestIsMyPortOpenButtonClick( void );
-    void						slotTestQueryHostIdButtonClick( void );
 
     void						slotAutoDetectProxyClick( void );
     void						slotNoProxyClick( void );

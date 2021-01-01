@@ -136,7 +136,7 @@
         <item>
          <widget class="QLabel" name="m_TestUrlLabel">
           <property name="text">
-           <string>Test URL:</string>
+           <string>Remote URL:</string>
           </property>
          </widget>
         </item>
@@ -155,12 +155,19 @@
       <item>
        <widget class="QPushButton" name="m_PingButton">
         <property name="text">
-         <string>Ping Test URL</string>
+         <string>Ping Test</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="m_GetGuidButton">
+       <widget class="QPushButton" name="m_IsMyPortOpenButton">
+        <property name="text">
+         <string>Test Is My Port Open</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_QueryHostIdButton">
         <property name="text">
          <string>Query Host ID </string>
         </property>

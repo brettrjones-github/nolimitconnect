@@ -87,14 +87,17 @@ namespace
 
         "Run Test: Test Success",
         "Run Test: Test Fail",
+        "Run Test: Bad Parameter",
         "Run Test: Connect Fail",
         "Run Test: Connection Dropped",
         "Run Test: Invalid Response",
+        "Run Test: My Port Is Open",
+        "Run Test: My Port Is Closed",
         "Run Test: Test Complete",
         "Run Test: Test Complete But Failed",
         "Run Test: Test Complete With Success",
 
-        "Max Run Testn Status",
+        "Max Run Test Status",
     };
 
 	const char * RandomConnectStatusEnumStrings[] = 
@@ -164,42 +167,82 @@ namespace
 //! Internet Status as text
 const char * DescribeInternetStatus( EInternetStatus internetStatus )
 {
+    if( internetStatus < 0 || eMaxInternetStatus <= internetStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
     return InternetStatusEnumStrings[ internetStatus ];
 }
 
 //! Net Available Status as text
 const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
 {
+    if( netAvailStatus < 0 || eMaxNetAvailStatus <= netAvailStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
     return NetAvailStatusEnumStrings[ netAvailStatus ];
 }
 
 const char * DescribeNetworkState( ENetworkStateType networkStateType )
 {
+    if( networkStateType < 0 || eMaxNetworkStateType <= networkStateType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
 	return NetworkStateEnumStrings[ networkStateType ];
 }
 
 const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus )
 {
+    if( eRelayStatus < 0 || eMaxMyRelayStatus <= eRelayStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
 	return RelayStatusEnumStrings[ eRelayStatus ];
 }
 
 const char * DescribeHostStatus( EHostTestStatus eHostStatus )
 {
+    if( eHostStatus < 0 || eMaxHostTestStatusType <= eHostStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
 	return HostStatusEnumStrings[ eHostStatus ];
 }
 
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
 {
+    if( ePortOpenStatus < 0 || eMaxIsPortOpenStatusType <= ePortOpenStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
 	return PortOpenStatusEnumStrings[ ePortOpenStatus ];
 }
 
 const char * DescribeRunTestStatus( ERunTestStatus eTestStatus )
 {
+    if( eTestStatus < 0 || eMaxRunTestStatusType <= eTestStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
     return RunTestStatusEnumStrings[ eTestStatus ];
 }
 
 const char * DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
 {
+    if( eRandomConnectStatus < 0 || eMaxRandomConnectStatusType <= eRandomConnectStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
 	return RandomConnectStatusEnumStrings[ eRandomConnectStatus ];
 }
 

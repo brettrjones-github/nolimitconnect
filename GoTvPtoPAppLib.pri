@@ -26,7 +26,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBrowseFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDebugSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
@@ -39,7 +38,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.h \
@@ -320,7 +318,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBrowseFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDebugSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
@@ -333,7 +330,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.cpp \
@@ -610,7 +606,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseTestWebsiteUrl.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityConnectionOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityCreateAccount.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDebugSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloadItemMenu.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloads.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
@@ -626,7 +621,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissionsRelay.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityQueryHostIdTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityReplyFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanPeopleSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanProfiles.ui \

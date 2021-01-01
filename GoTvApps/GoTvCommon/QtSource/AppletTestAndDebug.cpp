@@ -61,7 +61,6 @@ AppletTestAndDebug::~AppletTestAndDebug()
 //============================================================================
 void AppletTestAndDebug::setupApplet( void )
 {
-    ui.m_GetGuidButton->setVisible( false );
     getInfoEdit()->setMaximumBlockCount( MAX_LOG_EDIT_BLOCK_CNT );
     getInfoEdit()->setReadOnly( true );
 
@@ -126,6 +125,8 @@ void AppletTestAndDebug::setupApplet( void )
 
     connect( ui.m_BrowseFilesButton, SIGNAL( clicked() ), this, SLOT( slotBrowseFilesButtonClicked() ) );
     connect( ui.m_PingButton, SIGNAL( clicked() ), this, SLOT( slotPingTestButtonClicked() ) );
+    connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsMyPortOpenButtonClicked() ) );
+    connect( ui.m_QueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostIdButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -177,7 +178,7 @@ void AppletTestAndDebug::slotPingTestButtonClicked( void )
     if( myUrl.validateUrl( true ) && testUrl.validateUrl( false ) )
     {
         infoMsg( "Testing Ping" );
-        m_MyApp.getEngine().fromGuiRunTestUrlTest( myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdPing );
+        m_MyApp.getEngine().fromGuiRunUrlAction( myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdPing );
     }
     else
     {
@@ -186,6 +187,44 @@ void AppletTestAndDebug::slotPingTestButtonClicked( void )
             infoMsg( "Invalid My URL" );
         }
         
+        if( !testUrl.validateUrl( false ) )
+        {
+            infoMsg( "Invalid Test URL" );
+        }
+    }
+}
+
+//============================================================================
+void AppletTestAndDebug::slotIsMyPortOpenButtonClicked( void )
+{
+    startUrlTest( eNetCmdIsMyPortOpenReq );
+}
+
+//============================================================================
+void AppletTestAndDebug::slotQueryHostIdButtonClicked( void )
+{
+    startUrlTest( eNetCmdQueryHostOnlineIdReq );
+}
+
+//============================================================================
+void AppletTestAndDebug::startUrlTest( ENetCmdType netCmdType )
+{
+    getInfoEdit()->clear();
+    VxUrl myUrl( ui.m_MyUrlEdit->text().toUtf8().constData() );
+    VxUrl testUrl( ui.m_TestUrlEdit->text().toUtf8().constData() );
+
+    if( myUrl.validateUrl( true ) && testUrl.validateUrl( false ) )
+    {
+        infoMsg( "Testing %s", DescribeNetCmdType( netCmdType ) );
+        m_MyApp.getEngine().fromGuiRunUrlAction( myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), netCmdType );
+    }
+    else
+    {
+        if( !myUrl.validateUrl( true ) )
+        {
+            infoMsg( "Invalid My URL" );
+        }
+
         if( !testUrl.validateUrl( false ) )
         {
             infoMsg( "Invalid Test URL" );

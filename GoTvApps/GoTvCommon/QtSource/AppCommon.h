@@ -57,7 +57,6 @@ class ActivityDownloads;
 class ActivityUploads;
 class ActivityAbout;
 class ActivityAppSetup;
-class ActivityDebugSettings;
 class ActivityShowHelp;
 class GuiOfferSession;
 class GuiFileXferSession;
@@ -742,7 +741,6 @@ private:
 	ActivityCreateAccount *		m_CreateAccountDlg = nullptr;
 	ActivityDownloads *			m_Downloads = nullptr;
 	ActivityUploads *			m_Uploads = nullptr;
-	ActivityDebugSettings*		m_DebugSettingsDlg = nullptr;
 	ActivityShowHelp *			m_ActivityShowHelpDlg = nullptr;
 
 	std::string					m_strAccountUserName;

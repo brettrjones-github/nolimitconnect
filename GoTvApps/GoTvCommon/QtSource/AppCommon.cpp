@@ -31,7 +31,6 @@
 #include "ActivityCreateAccount.h"
 #include "ActivityDownloads.h"
 #include "ActivityUploads.h"
-#include "ActivityDebugSettings.h"
 #include "ActivityShowHelp.h"
 #include "ActivityWebCamClient.h"
 #include "ActivityReplyFileOffer.h"
@@ -347,9 +346,6 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 	m_Uploads->hide();
 
 	m_CreateAccountDlg = new ActivityCreateAccount( *this, appletFrame );
-
-	m_DebugSettingsDlg = new ActivityDebugSettings( *this, appletFrame );
-	m_DebugSettingsDlg->hide();
 
 	connectSignals();
 

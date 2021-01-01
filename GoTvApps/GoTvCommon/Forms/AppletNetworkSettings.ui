@@ -797,7 +797,7 @@
         <item>
          <widget class="QLabel" name="m_MyNodeTextLabel">
           <property name="text">
-           <string>My Node:</string>
+           <string>My URL:</string>
           </property>
          </widget>
         </item>
@@ -822,13 +822,6 @@
          <widget class="QPushButton" name="m_TestIsPortOpenButton">
           <property name="text">
            <string>Test Is My Port Open</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_TestQueryHostIdButton">
-          <property name="text">
-           <string>Query Network Host Id</string>
           </property>
          </widget>
         </item>

@@ -249,9 +249,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDebugSettings.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
@@ -301,9 +298,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp">
@@ -951,9 +945,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -996,6 +987,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLog.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1008,9 +1002,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityChooseTestWebsiteUrl.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDebugSettings.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloadItemMenu.ui">
@@ -1325,9 +1316,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDebugSettings.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
@@ -1377,9 +1365,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.h">
@@ -1937,9 +1922,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1969,6 +1951,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLog.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2548,9 +2533,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityChooseTestWebsiteUrl.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ActivityDebugSettings.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityDownloadItemMenu.h">
@@ -3194,9 +3176,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkHostTest.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityQueryHostIdTest.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostChatRoom.ui">

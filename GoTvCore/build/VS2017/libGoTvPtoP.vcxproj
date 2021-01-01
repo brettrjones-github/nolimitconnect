@@ -576,7 +576,7 @@
     <ClCompile Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetworkTest\PingResponseServer.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunTestUrlTest.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\ConnectRequest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\DirectConnectTester.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\Firewall.cpp" />
@@ -854,7 +854,7 @@
     <ClInclude Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.h" />
     <ClInclude Include="..\..\GoTvP2P\NetworkTest\PingResponseServer.h" />
     <ClInclude Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.h" />
-    <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunTestUrlTest.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\ConnectRequest.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\DirectConnectTester.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\Firewall.h" />
