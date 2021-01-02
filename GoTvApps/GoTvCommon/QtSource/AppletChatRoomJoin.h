@@ -13,31 +13,17 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletLaunchPage.h"
+#include "AppletBase.h"
+#include "ui_AppletChatRoomJoin.h"
 
-class VxWidgetBase;
-
-class AppletSearchPage : public AppletLaunchPage
+class AppletChatRoomJoin : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletSearchPage( AppCommon& app, QWidget * parent );
-	virtual ~AppletSearchPage() = default;
+    AppletChatRoomJoin( AppCommon& app, QWidget * parent );
+	virtual ~AppletChatRoomJoin();
 
-
-protected slots:
-	void						slotPowerButtonClicked( void );
-
-protected:
-	virtual void				showEvent( QShowEvent * );
-	//virtual void				hideEvent( QHideEvent * );
-	void						resizeEvent( QResizeEvent * );
-
-private:
-	void						setupAppletSearchPage( void );
-
-    bool						m_IsInitialized{ false };
-	QVector<VxWidgetBase*>		m_AppletList;
+    Ui::ChatRoomJoinUi          ui;
 };
 
 

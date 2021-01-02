@@ -21,7 +21,7 @@
 
 //============================================================================
 AppletChatRoomClient::AppletChatRoomClient( AppCommon& app, QWidget * parent )
-: AppletChatRoomBase( OBJNAME_APPLET_CLIENT_CHAT_ROOM, app, parent )
+: AppletBase( OBJNAME_APPLET_CLIENT_CHAT_ROOM, app, parent )
 {
 	setAppletType( eAppletClientChatRoom );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );

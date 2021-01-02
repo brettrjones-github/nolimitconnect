@@ -28,7 +28,8 @@ AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget * parent, EApplet eA
 {
     if( !( ( eAppletNetHostingPage == eAppletType ) 
            || ( eAppletSearchPage == eAppletType )
-           || ( eAppletShareServicesPage == eAppletType ) ) )
+           || ( eAppletShareServicesPage == eAppletType )
+           || ( eAppletSettingsPage == eAppletType ) ) )
     {
         setTitleBarText( QObject::tr( "Home" ) );
         setupAppletLaunchPage();

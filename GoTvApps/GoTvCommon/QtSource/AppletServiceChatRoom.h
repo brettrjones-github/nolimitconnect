@@ -15,9 +15,9 @@
 
 #include "ui_AppletServiceChatRoom.h"
 
-#include "AppletChatRoomBase.h"
+#include "AppletBase.h"
 
-class AppletServiceChatRoom : public AppletChatRoomBase
+class AppletServiceChatRoom : public AppletBase
 {
 	Q_OBJECT
 public:

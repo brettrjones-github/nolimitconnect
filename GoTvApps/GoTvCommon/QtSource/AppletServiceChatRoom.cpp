@@ -21,7 +21,7 @@
 
 //============================================================================
 AppletServiceChatRoom::AppletServiceChatRoom( AppCommon& app, QWidget * parent )
-: AppletChatRoomBase( OBJNAME_APPLET_SERVICE_CHAT_ROOM, app, parent )
+: AppletBase( OBJNAME_APPLET_SERVICE_CHAT_ROOM, app, parent )
 {
     setAppletType( eAppletClientChatRoom );
     ui.setupUi( getContentItemsFrame() );

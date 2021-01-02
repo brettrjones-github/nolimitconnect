@@ -63,18 +63,22 @@ enum EApplet
     eAppletMessenger,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletGroupUser,	
+    eAppletChatRoomJoin,
+    eAppletGroupJoin,	
     eAppletSearchPage,
     eAppletShareServicesPage,       // page to setup share with others services
-    eAppletPermissionList,          // list of all users plugin permission levels
     eAppletNetHostingPage,	        // page to setup network/group hosts and services
-    eAppletNetworkSettings,
-    eAppletTheme,
-    eAppletSettings,
-    eAppletTestAndDebug,
+    eAppletSettingsPage,            // page of setting applets
     eAppletAboutNoLimitConnect,
 
-	eMaxBasicApplets,               // marker.. end of home page applets.. start of search applets
+	eMaxBasicApplets,               // marker.. end of home page applets.. start of settings applets
+
+    eAppletTheme,
+    eAppletNetworkSettings,
+    eAppletPermissionList,          // list of all users plugin permission levels
+    eAppletTestAndDebug,
+
+    eMaxSettingsApplets,            // marker.. end of settings applets.. past here is search applets
 
     eAppletChatRoomJoinSearch,      // search for chat room to join
     eAppletGroupJoinSearch,         // search for group to join

@@ -468,9 +468,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettings.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTheme.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -608,9 +605,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
@@ -954,9 +948,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -989,6 +980,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsPage.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1529,9 +1532,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettings.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLaunchPage.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1539,9 +1539,6 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettings.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletTheme.h">
@@ -1630,9 +1627,6 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
@@ -1928,9 +1922,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1954,6 +1945,18 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsPage.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2874,9 +2877,6 @@
     <ClInclude Include="GeneratedFiles\ui_AcceptCancelWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_AppletSettings.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AppletPlayerVideo.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -3043,13 +3043,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupAnchor.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupUser.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionWidget.ui">
@@ -3203,6 +3197,12 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTestAndDebug.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoin.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoin.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

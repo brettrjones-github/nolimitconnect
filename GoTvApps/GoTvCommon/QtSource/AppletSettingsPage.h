@@ -13,18 +13,24 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletLaunchPage.h"
 
-class AppletSettings : public AppletBase
+class AppletSettingsPage : public AppletLaunchPage
 {
 	Q_OBJECT
 public:
-	AppletSettings( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettings();
-
-
+	AppletSettingsPage( AppCommon& app, QWidget * parent );
+	virtual ~AppletSettingsPage() = default;
 
 protected:
+    virtual void				showEvent( QShowEvent * );
+    void						resizeEvent( QResizeEvent * );
+
+private:
+    void						setupAppletSettingsgPage( void );
+
+    bool						m_IsInitialized{ false };
+    QVector<VxWidgetBase*>		m_AppletList;
 };
 
 

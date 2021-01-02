@@ -34,16 +34,7 @@ AppletNetHostingPage::AppletNetHostingPage( AppCommon& app, QWidget * parent )
 	setPowerButtonVisibility( false );
 	setExpandWindowVisibility( true );
 
-    slotRepositionToParent();
-}
-
-//============================================================================
-void AppletNetHostingPage::slotPowerButtonClicked( void )
-{
-	if( m_MyApp.confirmAppShutdown( this ) )
-	{
-		m_MyApp.shutdownAppCommon();
-	}
+    //slotRepositionToParent();
 }
 
 //============================================================================
@@ -83,7 +74,6 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
 void AppletNetHostingPage::resizeEvent( QResizeEvent * ev )
 {
 	ActivityBase::resizeEvent( ev );
-	//LogMsg( LOG_DEBUG, "AppletNetHostingPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
 	getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 

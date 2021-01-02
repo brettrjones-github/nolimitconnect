@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>406</width>
-    <height>702</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,10 +18,6 @@
   </property>
   <property name="windowTitle">
    <string>Chat Room Client</string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/TruthOrDare/Resources/ic_people_normal.png</normaloff>:/TruthOrDare/Resources/ic_people_normal.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

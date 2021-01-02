@@ -32,6 +32,7 @@
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletChooseThumbnail.h"
 #include "AppletChatRoomClient.h"
+#include "AppletChatRoomJoin.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletClientRandomConnect.h"
 #include "AppletClientStoryboard.h"
@@ -40,8 +41,8 @@
 #include "AppletEditStoryboard.h"
 #include "AppletGalleryImage.h"
 #include "AppletGalleryThumb.h"
+#include "AppletGroupJoin.h"
 #include "AppletGroupJoinSearch.h"
-#include "AppletGroupUser.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
 #include "AppletLog.h"
@@ -88,7 +89,7 @@
 #include "AppletSettingsVideoPhone.h"
 #include "AppletSettingsVoicePhone.h"
 
-#include "AppletSettings.h"
+#include "AppletSettingsPage.h"
 #include "AppletSearchPage.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSnapshot.h"
@@ -182,14 +183,15 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
     case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
     case eAppletBrowseFiles:                appletDialog = new AppletBrowseFiles (m_MyApp, parent); break;
+    case eAppletChatRoomJoin:               appletDialog = new AppletChatRoomJoin( m_MyApp, parent ); break;
     case eAppletChatRoomJoinSearch:         appletDialog = new AppletChatRoomJoinSearch( m_MyApp, parent ); break;
     case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
+    case eAppletGroupJoin:                  appletDialog = new AppletGroupJoin( m_MyApp, parent ); break;
     case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
-    case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
     case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
@@ -202,7 +204,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletMessenger:                  makeMessengerFullSized(); return appletDialog;
     case eAppletNetworkSettings:            appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
     case eAppletPersonalRecorder:           appletDialog = new AppletPersonalRecorder( m_MyApp, parent ); break;
-    case eAppletSettings:                   appletDialog = new AppletSettings( m_MyApp, parent ); break;
+    case eAppletSettingsPage:               appletDialog = new AppletSettingsPage( m_MyApp, parent ); break;
 
     case eAppletSearchPage:	                appletDialog = new AppletSearchPage( m_MyApp, parent ); break;
     case eAppletSearchPersons:              appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypePeopleSearch, launchFrame ); break;

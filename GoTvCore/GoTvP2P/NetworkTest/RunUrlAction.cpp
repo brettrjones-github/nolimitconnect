@@ -76,7 +76,6 @@ UrlActionInfo::UrlActionInfo( P2PEngine& engine, ENetCmdType testType, const cha
     {
         m_MyUrl.setUrl( m_Engine.getMyUrl() );
     }
-
 }
 
 //============================================================================
@@ -144,13 +143,14 @@ void RunUrlAction::runTestShutdown( void )
 void RunUrlAction::runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface )
 {
     UrlActionInfo urlAction( getEngine(), netCmdType, ptopUrl, myUrl, cbInterface );
+    std::string actionName = urlAction.getTestName();
     if( !urlAction.getMyVxUrl().validateUrl( true ) )
     {
         // if have callback interface then no need to send testing message
         LogModule( eLogRunTest, LOG_DEBUG, "RunUrlAction::runUrlAction Local URL is invalid" );
         if( !cbInterface )
         {
-            sendRunTestStatus( urlAction.getTestName(), eRunTestStatusTestFail, "My URL is invalid" );
+            sendRunTestStatus( actionName, eRunTestStatusTestFail, "My URL is invalid" );
         }
     }
     else if( !urlAction.getRemoteVxUrl().validateUrl( false ) )
@@ -158,7 +158,7 @@ void RunUrlAction::runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, c
         LogModule( eLogRunTest, LOG_DEBUG, "RunUrlAction::runUrlAction Remote URL is invalid" );
         if( !cbInterface )
         {
-            sendRunTestStatus( urlAction.getTestName(), eRunTestStatusTestFail, "Test URL is invalid" );
+            sendRunTestStatus( actionName, eRunTestStatusTestFail, "Test URL is invalid" );
         }
     }
     else
@@ -180,7 +180,7 @@ void RunUrlAction::runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, c
             m_ActionListMutex.unlock();
             if( !cbInterface )
             {
-                sendRunTestStatus( urlAction.getTestName(), eRunTestStatusTestFail, "URL action already qued for run" );
+                sendRunTestStatus( actionName, eRunTestStatusTestFail, "URL action already qued for run" );
             }
         }
         else

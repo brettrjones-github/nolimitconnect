@@ -33,7 +33,7 @@ public:
 	static bool					isURL( std::string& strFile );
 
 	void						setUrl( const char * pUrl );
-	void						setUrl( std::string& url )				{ setUrl( url.c_str() ); }
+    void						setUrl( std::string url )				{ setUrl( url.c_str() ); }
 	std::string&				getUrl( void )							{ return m_Url; }
 
 	void						setFileName( const std::string& fileName );

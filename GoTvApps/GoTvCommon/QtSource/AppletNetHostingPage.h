@@ -15,8 +15,6 @@
 
 #include "AppletLaunchPage.h"
 
-class VxWidgetBase;
-
 class AppletNetHostingPage : public AppletLaunchPage
 {
 	Q_OBJECT
@@ -24,19 +22,14 @@ public:
 	AppletNetHostingPage( AppCommon& app, QWidget * parent );
 	virtual ~AppletNetHostingPage() = default;
 
-
-protected slots:
-	void						slotPowerButtonClicked( void );
-
 protected:
 	virtual void				showEvent( QShowEvent * );
-	//virtual void				hideEvent( QHideEvent * );
 	void						resizeEvent( QResizeEvent * );
 
 private:
 	void						setupAppletNetHostingPage( void );
 
-	bool						m_IsInitialized;
+    bool						m_IsInitialized{ false };
 	QVector<VxWidgetBase*>		m_AppletList;
 };
 

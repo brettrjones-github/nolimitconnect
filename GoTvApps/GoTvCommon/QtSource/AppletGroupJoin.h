@@ -14,17 +14,17 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include "ui_AppletGroupUser.h"
+#include "ui_AppletGroupJoin.h"
 
-class AppletGroupUser : public AppletBase
+class AppletGroupJoin : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGroupUser( AppCommon& app, QWidget * parent );
-	virtual ~AppletGroupUser();
+    AppletGroupJoin( AppCommon& app, QWidget * parent );
+	virtual ~AppletGroupJoin();
 
 protected:
-
+    Ui::GroupJoinUi          ui;
 };
 
 

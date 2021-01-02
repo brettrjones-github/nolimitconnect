@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2018 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AppletSearchPage.h"
+#include "AppletSettingsPage.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "VxTilePositioner.h"
@@ -22,37 +22,28 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSearchPage::AppletSearchPage( AppCommon& app, QWidget * parent )
-: AppletLaunchPage( app, parent, eAppletSearchPage, OBJNAME_APPLET_SEARCH_PAGE )
+AppletSettingsPage::AppletSettingsPage( AppCommon& app, QWidget * parent )
+: AppletLaunchPage(  app, parent, eAppletSettingsPage, OBJNAME_APPLET_SETTINGS_PAGE )
 {
-    setAppletType( eAppletSearchPage );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-	setupAppletSearchPage();
-	setHomeButtonVisibility( false );
-	setBackButtonVisibility( true );
-	setPowerButtonVisibility( false );
-	setExpandWindowVisibility( true );
+    setAppletType( eAppletSettingsPage );
+	setTitleBarText( DescribeApplet( m_EAppletType ) );
+    setupAppletSettingsgPage();
+    setHomeButtonVisibility( false );
+    setBackButtonVisibility( true );
+    setPowerButtonVisibility( false );
+    setExpandWindowVisibility( true );
 
     slotRepositionToParent();
 }
 
 //============================================================================
-void AppletSearchPage::slotPowerButtonClicked( void )
+void AppletSettingsPage::setupAppletSettingsgPage( void )
 {
-	if( m_MyApp.confirmAppShutdown( this ) )
-	{
-		m_MyApp.shutdownAppCommon();
-	}
-}
-
-//============================================================================
-void AppletSearchPage::setupAppletSearchPage( void )
-{
-	if( ! m_IsInitialized )
+    if( ! m_IsInitialized )
     {
         m_AppletList.clear();
         // create launchers for the basic applets
-        for( int i = int( eMaxSettingsApplets + 1 ); i < eMaxSearchApplets; i++ )
+        for( int i = int( eMaxBasicApplets + 1 ); i < eMaxSettingsApplets; i++ )
         {
             AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
             m_AppletList.push_back( applet );
@@ -63,15 +54,14 @@ void AppletSearchPage::setupAppletSearchPage( void )
 }
 
 //============================================================================
-void AppletSearchPage::resizeEvent( QResizeEvent * ev )
+void AppletSettingsPage::resizeEvent( QResizeEvent * ev )
 {
-	ActivityBase::resizeEvent( ev );
-	//LogMsg( LOG_DEBUG, "AppletSearchPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
-	getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
+    ActivityBase::resizeEvent( ev );
+    getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 
 //============================================================================
-void AppletSearchPage::showEvent( QShowEvent * showEvent )
+void AppletSettingsPage::showEvent( QShowEvent * showEvent )
 {
     AppletLaunchPage::showEvent( showEvent );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );

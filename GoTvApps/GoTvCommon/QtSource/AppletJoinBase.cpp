@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AppletChatRoomBase.h"
+#include "AppletJoinBase.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,12 +20,12 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletChatRoomBase::AppletChatRoomBase( const char *name, AppCommon& app, QWidget * parent )
-: AppletClientBase( name, app, parent )
+AppletJoinBase::AppletJoinBase( const char *name, AppCommon& app, QWidget * parent )
+: AppletBase( name, app, parent )
 {
 }
 
 //============================================================================
-AppletChatRoomBase::~AppletChatRoomBase()
+AppletJoinBase::~AppletJoinBase()
 {
 }

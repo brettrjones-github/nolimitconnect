@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GroupUserUi</class>
- <widget class="QWidget" name="GroupUserUi">
+ <class>GroupJoinUi</class>
+ <widget class="QWidget" name="GroupJoinUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,11 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Group User</string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/TruthOrDare/Resources/ic_people_normal.png</normaloff>:/TruthOrDare/Resources/ic_people_normal.png</iconset>
+   <string>Join Group</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

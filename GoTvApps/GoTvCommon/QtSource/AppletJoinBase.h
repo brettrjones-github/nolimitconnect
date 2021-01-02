@@ -13,14 +13,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletClientBase.h"
+#include "AppletBase.h"
 
-class AppletChatRoomBase : public AppletClientBase
+class AppletJoinBase : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletChatRoomBase( const char *name, AppCommon& app, QWidget * parent );
-	virtual ~AppletChatRoomBase() override;
+    AppletJoinBase( const char *name, AppCommon& app, QWidget * parent );
+	virtual ~AppletJoinBase() override;
 
 };
 

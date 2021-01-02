@@ -65,6 +65,7 @@
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
 #define OBJNAME_APPLET_BROWSE_FILES					    "AppletBrowseFiles"
+#define OBJNAME_APPLET_CHAT_ROOM_JOIN			        "AppletChatRoomJoin"
 #define OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH			"AppletChatRoomJoinSearch"
 #define OBJNAME_APPLET_CHOOSE_THUMBNAIL					"AppletChooseThumbnail"
 #define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"
@@ -89,7 +90,7 @@
 
 #define OBJNAME_APPLET_GALLERY_IMAGE				    "AppletGalleryImage"
 #define OBJNAME_APPLET_GALLERY_THUMB				    "AppletGalleryThumb"
-#define OBJNAME_APPLET_GROUP_USER						"AppletGroupUser"
+#define OBJNAME_APPLET_GROUP_JOIN						"AppletGroupJoin"
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LIBRARY					        "AppletLibrary"
 #define OBJNAME_APPLET_LOG				                "AppletLog"
@@ -101,7 +102,6 @@
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
 //#define OBJNAME_APPLET_REMOTE_CONTROL					"AppletRemoteControl"
 #define OBJNAME_APPLET_SEARCH_PAGE					    "AppletSearchPage"
-#define OBJNAME_APPLET_SETTINGS							"AppletSettings"
 
 #define OBJNAME_APPLET_SERVICE_ABOUT_ME				    "AppletServiceAboutMe"
 #define OBJNAME_APPLET_SERVICE_AVATAR_IMAGE				"AppletServiceAvatarImage"
@@ -129,6 +129,7 @@
 #define OBJNAME_APPLET_SETTINGS_HOST_GROUP_LISTING		"AppletSettingsHostGroupListing"
 #define OBJNAME_APPLET_SETTINGS_HOST_NETWORK			"AppletSettingsHostNetwork"
 #define OBJNAME_APPLET_SETTINGS_MESSENGER			    "AppletSettingsMessenger"
+#define OBJNAME_APPLET_SETTINGS_PAGE					"AppletSettingsPage"
 #define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT		    "AppletSettingsRandomConnect"
 #define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT_RELAY	"AppletSettingsRandomConnectRelay"
 #define OBJNAME_APPLET_SETTINGS_RELAY					"AppletSettingsRelay"

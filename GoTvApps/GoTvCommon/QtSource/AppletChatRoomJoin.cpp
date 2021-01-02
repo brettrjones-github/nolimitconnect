@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AppletGroupUser.h"
+#include "AppletChatRoomJoin.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,17 +20,21 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletGroupUser::AppletGroupUser( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_GROUP_USER, app, parent )
+AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_CHAT_ROOM_JOIN, app, parent )
 {
-    setAppletType( eAppletGroupUser );
+    ui.setupUi( getContentItemsFrame() );
+    setAppletType( eAppletChatRoomJoin );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
 
+
 //============================================================================
-AppletGroupUser::~AppletGroupUser()
+AppletChatRoomJoin::~AppletChatRoomJoin()
 {
+    m_MyApp.activityStateChange( this, false );
 }

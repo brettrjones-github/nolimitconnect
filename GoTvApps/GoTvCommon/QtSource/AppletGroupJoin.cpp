@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AppletSettings.h"
+#include "AppletGroupJoin.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,17 +20,18 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettings::AppletSettings( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_SETTINGS, app, parent )
+AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_GROUP_JOIN, app, parent )
 {
-	m_EAppletType = eAppletSettings;
+    setAppletType( eAppletGroupJoin );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletSettings::~AppletSettings()
+AppletGroupJoin::~AppletGroupJoin()
 {
+    m_MyApp.activityStateChange( this, false );
 }
