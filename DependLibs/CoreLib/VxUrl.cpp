@@ -107,18 +107,18 @@ VxUrl& VxUrl::operator = ( const VxUrl& rhs )
     if( this != &rhs )
     {
         m_Url = rhs.m_Url;
-        m_FileName = m_FileName;
-        m_FileExtension = m_FileExtension;
-        m_ShareName = m_ShareName;
-        m_strProtocol = m_strProtocol;
-        m_strHost = m_strHost;
-        m_Port = m_Port;
-        m_strPath = m_strPath;
-        m_strUser = m_strUser;
-        m_strPassword = m_strPassword;
-        m_strQuery = m_strQuery;
-        m_strFragment = m_strFragment;
-        m_strOnlineId = m_strOnlineId;
+        m_FileName = rhs.m_FileName;
+        m_FileExtension = rhs.m_FileExtension;
+        m_ShareName = rhs.m_ShareName;
+        m_strProtocol = rhs.m_strProtocol;
+        m_strHost = rhs.m_strHost;
+        m_Port = rhs.m_Port;
+        m_strPath = rhs.m_strPath;
+        m_strUser = rhs.m_strUser;
+        m_strPassword = rhs.m_strPassword;
+        m_strQuery = rhs.m_strQuery;
+        m_strFragment = rhs.m_strFragment;
+        m_strOnlineId = rhs.m_strOnlineId;
     }
 
     return *this;
@@ -128,18 +128,18 @@ VxUrl& VxUrl::operator = ( const VxUrl& rhs )
 bool VxUrl::operator == ( const VxUrl& rhs ) const
 {
     return m_Url == rhs.m_Url &&
-        m_FileName == m_FileName &&
-        m_FileExtension == m_FileExtension &&
-        m_ShareName == m_ShareName &&
-        m_strProtocol == m_strProtocol &&
-        m_strHost == m_strHost &&
-        m_Port == m_Port &&
-        m_strPath == m_strPath &&
-        m_strUser == m_strUser &&
-        m_strPassword == m_strPassword &&
-        m_strQuery == m_strQuery &&
-        m_strFragment == m_strFragment &&
-        m_strOnlineId == m_strOnlineId;
+        m_FileName == rhs.m_FileName &&
+        m_FileExtension == rhs.m_FileExtension &&
+        m_ShareName == rhs.m_ShareName &&
+        m_strProtocol == rhs.m_strProtocol &&
+        m_strHost == rhs.m_strHost &&
+        m_Port == rhs.m_Port &&
+        m_strPath == rhs.m_strPath &&
+        m_strUser == rhs.m_strUser &&
+        m_strPassword == rhs.m_strPassword &&
+        m_strQuery == rhs.m_strQuery &&
+        m_strFragment == rhs.m_strFragment &&
+        m_strOnlineId == rhs.m_strOnlineId;
 }
 
 //============================================================================
@@ -188,40 +188,57 @@ void VxUrl::setUrl( const char * pUrl )
         m_strHost = m_Url.substr( iReadIdx, m_Url.length() - iReadIdx );
     }
 
-    // handle IPv6 and port
     m_Port = 80;
-
-    size_t iColonIdx = m_strHost.rfind( COLON_DELIM );
-    if( iColonIdx > 0 )
+    size_t iPeriodIdx = m_strHost.rfind( "." );
+    if( iPeriodIdx != std::string::npos )
     {
-        if( strchr( m_strHost.c_str(), ']' ) )
-        {
-            // ipv6
-            size_t iLeftBracketIdx = m_strHost.rfind( RIGHT_BRACKET_DELIM );
-            if( iColonIdx != std::string::npos && iLeftBracketIdx < iColonIdx )
-            {
-                std::string strHost = m_strHost;
-                m_strHost = strHost.substr( 0, iColonIdx );
-                if( 0 < m_strHost.length() )
-                {
-                    if( ( m_strHost.at( 0 ) == '[' ) &&
-                        ( m_strHost.at( m_strHost.length() - 1 ) == ']' ) )
-                    {
-                        m_strHost = m_strHost.substr( 1, iColonIdx - 2 );
-                    }
-                }
-                std::string m_PortStr = strHost.substr( iColonIdx + 1, strHost.length() - iColonIdx - 1 );
-                m_Port = atoi( m_PortStr.c_str() );
-            }
-        }
-        else
+        // host name or ipv4
+        // check if has :PortNumber
+        size_t iColonIdx = m_strHost.rfind( COLON_DELIM );
+        if( iColonIdx != std::string::npos )
         {
             std::string strHost = m_strHost;
-            std::string m_PortStr = m_strHost.substr( iColonIdx + 1, m_strHost.length() - iColonIdx - 1 );
-            m_Port = atoi( m_PortStr.c_str() );
+            std::string portStr = m_strHost.substr( iColonIdx + 1, m_strHost.length() - iColonIdx - 1 );
+            m_Port = atoi( portStr.c_str() );
+            if( 0 == m_Port )
+            {
+                m_Port = 80;
+            }
+
             m_strHost = strHost.substr( 0, iColonIdx );
         }
-
+    }
+    else
+    {
+        // handle IPv6 and port
+        size_t iColonIdx = m_strHost.rfind( COLON_DELIM );
+        if( iColonIdx > 0 )
+        {
+            if( strchr( m_strHost.c_str(), ']' ) )
+            {
+                // ipv6
+                size_t iLeftBracketIdx = m_strHost.rfind( RIGHT_BRACKET_DELIM );
+                if( iColonIdx != std::string::npos && iLeftBracketIdx < iColonIdx )
+                {
+                    std::string strHost = m_strHost;
+                    m_strHost = strHost.substr( 0, iColonIdx );
+                    if( 0 < m_strHost.length() )
+                    {
+                        if( ( m_strHost.at( 0 ) == '[' ) &&
+                            ( m_strHost.at( m_strHost.length() - 1 ) == ']' ) )
+                        {
+                            m_strHost = m_strHost.substr( 1, iColonIdx - 2 );
+                        }
+                    }
+                    std::string m_PortStr = strHost.substr( iColonIdx + 1, strHost.length() - iColonIdx - 1 );
+                    m_Port = atoi( m_PortStr.c_str() );
+                    if( 0 == m_Port )
+                    {
+                        m_Port = 80;
+                    }
+                }
+            }
+        }
     }
 
     if( iSlashIdx == std::string::npos )
