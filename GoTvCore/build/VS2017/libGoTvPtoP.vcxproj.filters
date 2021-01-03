@@ -196,9 +196,6 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.cpp">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServicesMgr.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
@@ -631,9 +628,6 @@
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp">
       <Filter>GoTvP2P\P2PEngine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.cpp">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
@@ -994,9 +988,6 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.h">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceDefs.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
@@ -1264,9 +1255,6 @@
     <ClInclude Include="..\..\..\GoTvInterface\IFromGui.h">
       <Filter>GoTvInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IGoTvDefs.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvInterface\IGoTvLib.h">
       <Filter>GoTvInterface</Filter>
     </ClInclude>
@@ -1410,9 +1398,6 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h">
       <Filter>GoTvP2P\PluginSettings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.h">
-      <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.h">
       <Filter>GoTvP2P\HostMgr</Filter>

@@ -28,9 +28,10 @@ NetHostSetting& NetHostSetting::operator =( const NetHostSetting& rhs )
         m_GroupHostUrl              = rhs.m_GroupHostUrl;
         m_ChatRoomHostUrl           = rhs.m_ChatRoomHostUrl;
         m_ExternIpAddr              = rhs.m_ExternIpAddr;
-        m_ConnectTestType           = rhs.m_ConnectTestType;
+        m_FirewallType              = rhs.m_FirewallType;
         m_UseUpnp                   = rhs.m_UseUpnp;
-		m_ExcludeMeFromHostList	    = rhs.m_ExcludeMeFromHostList;
+        m_TcpPort	                = rhs.m_TcpPort;
+        m_PreferredNetworkAdapterIp = rhs.m_PreferredNetworkAdapterIp;
 	}
 
 	return *this;
@@ -47,9 +48,10 @@ bool NetHostSetting::operator == ( const NetHostSetting& rhs ) const
         m_GroupHostUrl == rhs.m_GroupHostUrl &&
         m_ChatRoomHostUrl == rhs.m_ChatRoomHostUrl &&
         m_ExternIpAddr == rhs.m_ExternIpAddr &&
-        m_ConnectTestType == rhs.m_ConnectTestType &&
+        m_FirewallType == rhs.m_FirewallType &&
         m_UseUpnp == rhs.m_UseUpnp &&
-        m_ExcludeMeFromHostList == rhs.m_ExcludeMeFromHostList;
+        m_TcpPort == rhs.m_TcpPort &&
+        m_PreferredNetworkAdapterIp == rhs.m_PreferredNetworkAdapterIp;
 }
 
 //============================================================================

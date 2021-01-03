@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvInterface/IGoTvDefs.h>
+#include <GoTvInterface/IDefs.h>
 #include <QProgressBar>
 
 class AppCommon;

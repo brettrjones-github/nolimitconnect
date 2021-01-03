@@ -106,7 +106,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
@@ -297,7 +296,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvInterface/IDefs.h \
     $$PWD/GoTvInterface/IFromGui.h \
     $$PWD/GoTvInterface/IGoTv.h \
-    $$PWD/GoTvInterface/IGoTvDefs.h \
+    $$PWD/GoTvInterface/IDefs.h \
     $$PWD/GoTvInterface/IGoTvRender.h \
     $$PWD/GoTvInterface/ILog.h \
     $$PWD/GoTvInterface/IScan.h \
@@ -402,7 +401,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
@@ -590,8 +588,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxPlainTextEdit.cpp \
     $$PWD/GoTvInterface/GoTvRenderFrame.cpp \
+	$$PWD/GoTvInterface/IDefs.cpp \
     $$PWD/GoTvInterface/IGoTv.cpp \
-    $$PWD/GoTvInterface/IGoTvDefs.cpp \
     $$PWD/GoTvInterface/IGoTvFromGui.cpp \
     $$PWD/GoTvInterface/IGoTvRender.cpp \
     $$PWD/GoTvInterface/IGoTvToGui.cpp \

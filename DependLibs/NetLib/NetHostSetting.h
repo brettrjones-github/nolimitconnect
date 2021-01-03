@@ -25,6 +25,7 @@
 #define NET_DEFAULT_GROUP_HOST_URL		    "ptop://myp2pnetwork.com:45124" // for default group host.. for now same as Network Host but could be seperated to spread network load
 #define NET_DEFAULT_CHAT_ROOM_HOST_URL		"ptop://myp2pconnect.com:45124" // for default chat room host.. for now same as Network Host but could be seperated to spread network load
 #define NET_DEFAULT_NETSERVICE_PORT			45124
+#define NET_DEFAULT_UDP_PORT			    45123
 
 class NetHostSetting
 {
@@ -54,15 +55,16 @@ public:
     std::string&				getChatRoomHostUrl( void )								    { return m_ChatRoomHostUrl; }
     void						setExternIpAddr( const char * ipAddr )		                { m_ExternIpAddr = ipAddr; }
     std::string&				getExternIpAddr( void )								        { return m_ExternIpAddr; }
+    void                        setPreferredNetworkAdapterIp( const char * preferredAdaptIp ) { m_PreferredNetworkAdapterIp = preferredAdaptIp; }
+    std::string&                getPreferredNetworkAdapterIp( void )                        { return m_PreferredNetworkAdapterIp; }
 
-    void                        setConnectTestType( int32_t testType )		                { m_ConnectTestType = testType; }
-    int32_t                     getConnectTestType( void )								    { return m_ConnectTestType; }
+    void                        setUseUpnpPortForward( bool useUpnp )                       { m_UseUpnp = useUpnp; }
+    bool                        getUseUpnpPortForward( void )                               { return m_UseUpnp; }
+    void                        setTcpPort( uint16_t tcpPort )                              { m_TcpPort = tcpPort; }
+    uint16_t                    getTcpPort( void )                                          { return m_TcpPort; }
+    void                        setFirewallTestType( int32_t firewallTestType )             { m_FirewallType = firewallTestType; }
+    int32_t                     getFirewallTestType( void )                                 { return m_FirewallType; }
 
-    void						setUseUpnp( bool excludeMe )				                { m_UseUpnp = excludeMe; }
-    bool						getUseUpnp( void )							                { return m_UseUpnp; }
-
-	void						setExcludeMeFromNetHostList( bool excludeMe )				{ m_ExcludeMeFromHostList = excludeMe; }
-	bool						getExcludeMeFromNetHostList( void )							{ return m_ExcludeMeFromHostList; }
 
 protected:
 	//=== vars ===//
@@ -75,8 +77,9 @@ protected:
     std::string					m_GroupHostUrl{ NET_DEFAULT_GROUP_HOST_URL };
     std::string					m_ChatRoomHostUrl{ NET_DEFAULT_GROUP_HOST_URL };
     std::string					m_ExternIpAddr{ "" };
+    std::string					m_PreferredNetworkAdapterIp{ "" };
 
-    int32_t                     m_ConnectTestType{ 0 };
+    int32_t                     m_FirewallType{ 0 };
     bool						m_UseUpnp{ false };
-    bool						m_ExcludeMeFromHostList{ false };
+    uint16_t					m_TcpPort{ NET_DEFAULT_NETSERVICE_PORT };
 };

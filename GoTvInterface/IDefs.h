@@ -18,189 +18,15 @@
 
 #include <NetLib/VxXferDefs.h>
 
-//! \public Enumerated plugins
-enum EPluginType
+enum EAppModule
 {
-	//! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
-	ePluginTypeInvalid			= 0,	//!< unknown or disabled
+    eAppModuleInvalid = 0,
+    eAppModuleAll,
+    eAppModuleKodi,
+    eAppModulePtoP,
+    eAppModuleTest,
 
-	ePluginTypeAdmin			= 1,	//!< Administration ( intended for updates but not currently used )
-    ePluginTypeAboutMePage      = 2,	//!< about me page plugin ( using web page server )
-    ePluginTypeAvatarImage      = 3,	//!< handle users avatar image
-    ePluginTypeCamServer        = 4,	//!< Web cam broadcast plugin
-    ePluginTypeFileServer       = 5,	//!< Shared files server
-    ePluginTypeFileXfer         = 6,	//!< Offer/accept send a file person to person
-    ePluginTypeMessenger        = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeStoryboard       = 8,	//!< User editable story board web page server
-    ePluginTypeTruthOrDare      = 9,	//!< Video Chat Truth Or Dare game  
-    ePluginTypeVideoPhone       = 10,	//!< Video Chat with motion detect and stream recording
-    ePluginTypeVoicePhone       = 11,	//!< VOIP audio only phone call
-    ePluginTypeChatRoomClient   = 12,	//!< chat room user client plugin
-    ePluginTypeHostChatRoom     = 13,	//!< chat room hosting plugin
-    ePluginTypeHostGroup        = 14,	//!< group hosting
-    ePluginTypeHostNetwork      = 15,	//!< master network hosting
-    ePluginTypeServiceConnectTest = 16,	//!< Connection Test Service
-
-    ePluginTypeClientConnectTest = 17,	//!< Connection Test Client
-    ePluginTypeHostGroupListing = 18,	//!< group list host
-    ePluginTypeRandomConnect    = 19,	//!< Random connect to another person ( Using Phone Shake )
-    ePluginTypeRandomConnectRelay = 20,	//!< Random connect to another person relay service
-    ePluginTypeRelay            = 21,	//!< Relay services plugin
-
-	// NOTE: plugin types 22 - 47 not implemented .. reserved for future use
-	eMaxImplementedPluginType	= 22, 
-	// plugins 0-47 are part of PktAnnounce
-	// plugins after 47 are system plugins and do not go out in announcement pkt
-    eMaxUserPluginType = 48, // this marks end of announced permission
-    ePluginTypeCameraService,
-    ePluginTypeMJPEGReader,
-    ePluginTypeMJPEGWriter,
-    ePluginTypePersonalRecorder,
-    ePluginTypeNetServices,
-    ePluginTypeSearch,
-	ePluginTypeSndReader,
-    ePluginTypeSndWriter,
-    ePluginTypeWebServer,	//!< Web server plugin ( for About Me and Story Board web pages )
-
-	eMaxPluginType	
-};
-
-enum EHostServiceType
-{
-    eHostServiceInvalid = 0,
-    eHostServiceNetworkHost,        // Tier 1 network host service
-    eHostServiceGroupListing,       // Tier 2 group listing service
-    eHostServiceGroup,              // Tier 3 host a group service ( group users are considered Tier 4 )
-    eHostServiceRelay,              // relay service normally provided by group host ( Tier 3 )
-    eHostServiceRandomConnect,      // random connect service normally provided by network host ( Tier 1 )
-    eHostServiceRandomConnectRelay, // random connection relay service normally provided by network host ( Tier 1 )
-    eHostServiceConnectTest,        // test connection for relay requirement and IP Address  ( normally provided by all Tiers )
-
-    eMaxHostServiceType
-};
-
-// for use in database mainly 
-// If you add a plugin type be sure to update getPluginName
-const char * getPluginName( EPluginType pluginType );
-
-//! \public Enumeration of plugin accessibility
-enum EPluginAccessState
-{
-	ePluginAccessOk				= 0,		//!< Plugin access allowed
-	ePluginAccessLocked			= 1,		//!< Insufficient Friend permission level
-	ePluginAccessDisabled		= 2,		//!< Plugin disabled or no files shared or no web cam broadcast
-	ePluginAccessIgnored		= 3,		//!< Access denied because you are being ignored
-	ePluginAccessInactive		= 4,		//!< Enabled and have access but no shared files or web cam
-	ePluginAccessBusy			= 5,		//!< Sufficient permission but cannot accept any more sessions
-	ePluginAccessRequiresDirectConnect = 6,	//!< Plugin access requires contact have direct connection
-	ePluginAccessRequiresOnline		= 7		//!< Plugin access requires contact to be online
-};
-
-//! \public Enumeration of friendship type. NOTE: also used as plugin permission type
-enum EFriendState
-{
-	eFriendStateIgnore		= 0,	//!< Unknown or disabled or ignore
-	eFriendStateAnonymous	= 1,	//!< Anonymous contact
-	eFriendStateGuest		= 2,	//!< Guest contact
-	eFriendStateFriend		= 3,	//!< Friend contact
-	eFriendStateAdmin		= 4		//!< Administrator contact
-};
-
-//! \public Enumeration of session offer response
-enum EOfferResponse
-{
-	eOfferResponseNotSet		= 0,	//!< Unknown or not set offer response from contact
-	eOfferResponseAccept		= 1,	//!< Contact accepted offer
-	eOfferResponseReject		= 2,	//!< Contact rejected offer
-	eOfferResponseBusy			= 3,	//!< Contact cannot accept session because already in session
-	eOfferResponseCancelSession	= 4,	//!< Contact exited session
-	eOfferResponseEndSession	= 5,	//!< Session end because of any reason
-	eOfferResponseUserOffline	= 6		//!< Session end because contact is not online
-};
-
-//! \public In Text Chat Session Actions
-enum EMSessionAction
-{
-	eMSessionActionNone,
-	eMSessionActionChatSessionReq,
-	eMSessionActionChatSessionAccept,
-	eMSessionActionChatSessionReject,
-	eMSessionActionOffer,
-	eMSessionActionAccept,
-	eMSessionActionReject,
-	eMSessionActionHangup,
-
-	eMaxMSessionAction
-};
-
-//! \public Session Types
-enum EMSessionType
-{
-	eMSessionTypePhone 						= 0,
-	eMSessionTypeVidChat 					= 1,
-	eMSessionTypeTruthOrDare 				= 2,
-
-	eMaxMSessionType
-};
-
-//! \public Enumeration of which contacts to show in contact list
-enum EFriendViewType
-{
-	eFriendViewEverybody		= 0,
-	eFriendViewAdministrators   = 1,
-	eFriendViewFriendsAndGuests = 2,
-	eFriendViewAnonymous		= 3,
-	eFriendViewIgnored			= 4,
-	eFriendViewMyProxies		= 5,
-	eFriendViewAllProxies		= 6,
-	eFriendViewRefresh			= 7,
-
-	eMaxFriendViewType // must be last
-};
-
-//! \public Enumeration of relay status
-enum ERelayStatus
-{
-	eRelayStatusUnknown			= -1,	//!< Unknown
-	eRelayStatusOk				= 0,	//!< Relay enabled and access accepted 
-	eRelayStatusPermissionErr	= 1,	//!< Insufficient permission
-	eRelayStatusBusy			= 2,	//!< Relay cannot accept any more session
-
-	eMaxRelayStatus
-};
-
-
-//! \public Connect by shaking phone ( or press simulate phone shake ) status
-enum ERandomConnectStatus
-{
-	eRandomConnectStatusUnknown						= 0,
-	eRandomConnectStatusContactHostFail				= 1,
-	eRandomConnectStatusFoundFriend					= 2,
-	eRandomConnectStatusEmptyList						= 3,
-	eRandomConnectStatusSendRequestFail				= 4,
-	eRandomConnectStatusInvalidResponse				= 5,
-	eRandomConnectStatusDecryptError					= 6,
-	eRandomConnectStatusSearchComplete					= 7,
-
-	eMaxRandomConnectStatusType
-};
-
-enum EGenderType
-{
-    eGenderTypeUnspecified,
-    eGenderTypeMale,
-    eGenderTypeFemale,
-
-    eMaxGenderType
-};
-
-enum ELanguageType
-{
-    eLanguageUnspecified,
-    eLanguageEnglishUS,
-    eLanguageEnglishBritian,
-
-    eMaxLanguageType
+    eMaxAppModule // must be last
 };
 
 enum EContentRating
@@ -228,38 +54,259 @@ enum EContentCatagory
     eMaxContentCatagory
 };
 
-enum ESubCatagory
+//! \public Enumeration of friendship type. NOTE: also used as plugin permission type
+enum EFriendState
 {
-    eSubCatagoryUnspecified,
+    eFriendStateIgnore		= 0,	//!< Unknown or disabled or ignore
+    eFriendStateAnonymous	= 1,	//!< Anonymous contact
+    eFriendStateGuest		= 2,	//!< Guest contact
+    eFriendStateFriend		= 3,	//!< Friend contact
+    eFriendStateAdmin		= 4		//!< Administrator contact
+};
 
-    eSubCatagoryVideoOther,
-    eSubCatagoryVideoPersonal,
-    eSubCatagoryVideoXXX,
-    eSubCatagoryVideoMovie,
-    eSubCatagoryVideoMovieClip,
-    eSubCatagoryVideoTvShow,
-    eSubCatagoryVideo3d,
-    eSubCatagoryVideoCam,
-    
-    eSubCatagoryAudioOther,
-    eSubCatagoryAudioPersonal,
-    eSubCatagoryAudioXXX,
-    eSubCatagoryAudioMusic,
-    eSubCatagoryAudioBook,
-    eSubCatagoryAudioSoundClip,
+//! \public Enumeration of which contacts to show in contact list
+enum EFriendViewType
+{
+    eFriendViewEverybody		= 0,
+    eFriendViewAdministrators   = 1,
+    eFriendViewFriendsAndGuests = 2,
+    eFriendViewAnonymous		= 3,
+    eFriendViewIgnored			= 4,
+    eFriendViewMyProxies		= 5,
+    eFriendViewAllProxies		= 6,
+    eFriendViewRefresh			= 7,
 
-    eSubCatagoryImageOther,
-    eSubCatagoryImagePersonal,
-    eSubCatagoryImageXXX,
-    eSubCatagoryImagePictures,
-    eSubCatagoryImageCovers,
+    eMaxFriendViewType // must be last
+};
 
-    eSubCatagoryOtherPersonal,
-    eSubCatagoryOtherXXX,
-    eSubCatagoryOtherEBook,
-    eSubCatagoryOtherComic,
+namespace FirewallSettings
+{
+    enum EFirewallTestType
+    {
+        eFirewallTestUrlConnectionTest = 0,
+        eFirewallTestAssumeNoFirewall = 1,
+        eFirewallTestAssumeFirewalled = 2,
 
-    eMaxSubCatagory
+        eMaxFirewallTestType
+    };
+};
+
+enum EGenderType
+{
+    eGenderTypeUnspecified,
+    eGenderTypeMale,
+    eGenderTypeFemale,
+
+    eMaxGenderType
+};
+
+//! \public Host connection test state
+enum EHostTestStatus
+{
+    eHostTestStatusUnknown = 0,
+    eHostTestStatusLogMsg = 1,
+
+    eHostTestStatusHostOk = 2,
+    eHostTestStatusHostConnectFail = 3,
+    eHostTestStatusHostConnectionDropped = 4,
+    eHostTestStatusHostTestComplete = 5,
+
+    eHostTestStatusNetServiceOk = 6,
+    eHostTestStatusNetServiceConnectFail = 7,
+    eHostTestStatusNetServiceConnectionDropped = 8,
+    eHostTestStatusNetServiceTestComplete = 9,
+
+    eMaxHostTestStatusType
+};
+
+enum EHostServiceType
+{
+    eHostServiceInvalid = 0,
+    eHostServiceNetworkHost,        // Tier 1 network host service
+    eHostServiceGroupListing,       // Tier 2 group listing service
+    eHostServiceGroup,              // Tier 3 host a group service ( group users are considered Tier 4 )
+    eHostServiceRelay,              // relay service normally provided by group host ( Tier 3 )
+    eHostServiceRandomConnect,      // random connect service normally provided by network host ( Tier 1 )
+    eHostServiceRandomConnectRelay, // random connection relay service normally provided by network host ( Tier 1 )
+    eHostServiceConnectTest,        // test connection for relay requirement and IP Address  ( normally provided by all Tiers )
+
+    eMaxHostServiceType
+};
+
+enum EHostType
+{
+    eHostTypeUnknown = 0,
+    eHostTypeChatRoom = 1,
+    eHostTypeConnectTest = 2,
+    eHostTypeGroup = 3,
+    eHostTypeNetwork = 4,
+    eHostTypeRandomConnect = 5,
+
+    eMaxHostType
+};
+
+enum EInternetStatus
+{
+    eInternetNoInternet = 0,
+    eInternetInternetAvailable,
+    eInternetTestHostUnavailable,
+    eInternetTestHostAvailable,
+    eInternetAssumeDirectConnect,
+    eInternetCanDirectConnect,
+    eInternetRequiresRelay,
+
+    eMaxInternetStatus
+};
+
+enum EModuleState
+{
+    eModuleStateUnknown = 0,
+    eModuleStateInitialized,
+    eModuleStateDeinitialized,
+    eModuleStateInitError,
+
+    eMaxModuleState // must be last
+};
+
+//! \public Enumeration of Network State Machine states/actions
+enum ENetworkStateType
+{
+    eNetworkStateTypeUnknown				= 0,
+    eNetworkStateTypeLost					= 1,
+    eNetworkStateTypeAvail					= 2,
+    eNetworkStateTypeTestConnection			= 3,
+    eNetworkStateTypeRelaySearch			= 4,
+    eNetworkStateTypeAnnounce				= 5,
+    eNetworkStateTypeOnlineDirect			= 6,
+    eNetworkStateTypeOnlineThroughRelay		= 7,
+    eNetworkStateTypeGetRelayList			= 8,
+    eNetworkStateTypeNoInternetConnection	= 9,
+    eNetworkStateTypeFailedResolveHostNetwork	    = 10,
+    eNetworkStateTypeFailedResolveHostGroupList = 11,
+    eNetworkStateTypeFailedResolveHostGroup = 12,
+
+    eMaxNetworkStateType
+};
+
+//! \public Enumeration of session offer response
+enum EOfferResponse
+{
+    eOfferResponseNotSet		= 0,	//!< Unknown or not set offer response from contact
+    eOfferResponseAccept		= 1,	//!< Contact accepted offer
+    eOfferResponseReject		= 2,	//!< Contact rejected offer
+    eOfferResponseBusy			= 3,	//!< Contact cannot accept session because already in session
+    eOfferResponseCancelSession	= 4,	//!< Contact exited session
+    eOfferResponseEndSession	= 5,	//!< Session end because of any reason
+    eOfferResponseUserOffline	= 6		//!< Session end because contact is not online
+};
+
+//! \public Enumeration of plugin accessibility
+enum EPluginAccessState
+{
+	ePluginAccessOk				= 0,		//!< Plugin access allowed
+	ePluginAccessLocked			= 1,		//!< Insufficient Friend permission level
+	ePluginAccessDisabled		= 2,		//!< Plugin disabled or no files shared or no web cam broadcast
+	ePluginAccessIgnored		= 3,		//!< Access denied because you are being ignored
+	ePluginAccessInactive		= 4,		//!< Enabled and have access but no shared files or web cam
+	ePluginAccessBusy			= 5,		//!< Sufficient permission but cannot accept any more sessions
+	ePluginAccessRequiresDirectConnect = 6,	//!< Plugin access requires contact have direct connection
+	ePluginAccessRequiresOnline		= 7		//!< Plugin access requires contact to be online
+};
+
+//! \public Enumerated plugins
+enum EPluginType
+{
+    //! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
+    ePluginTypeInvalid			= 0,	//!< unknown or disabled
+
+    ePluginTypeAdmin			= 1,	//!< Administration ( intended for updates but not currently used )
+    ePluginTypeAboutMePage      = 2,	//!< about me page plugin ( using web page server )
+    ePluginTypeAvatarImage      = 3,	//!< handle users avatar image
+    ePluginTypeCamServer        = 4,	//!< Web cam broadcast plugin
+    ePluginTypeFileServer       = 5,	//!< Shared files server
+    ePluginTypeFileXfer         = 6,	//!< Offer/accept send a file person to person
+    ePluginTypeMessenger        = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+    ePluginTypeStoryboard       = 8,	//!< User editable story board web page server
+    ePluginTypeTruthOrDare      = 9,	//!< Video Chat Truth Or Dare game  
+    ePluginTypeVideoPhone       = 10,	//!< Video Chat with motion detect and stream recording
+    ePluginTypeVoicePhone       = 11,	//!< VOIP audio only phone call
+    ePluginTypeChatRoomClient   = 12,	//!< chat room user client plugin
+    ePluginTypeHostChatRoom     = 13,	//!< chat room hosting plugin
+    ePluginTypeHostGroup        = 14,	//!< group hosting
+    ePluginTypeHostNetwork      = 15,	//!< master network hosting
+    ePluginTypeServiceConnectTest = 16,	//!< Connection Test Service
+
+    ePluginTypeClientConnectTest = 17,	//!< Connection Test Client
+    ePluginTypeHostGroupListing = 18,	//!< group list host
+    ePluginTypeRandomConnect    = 19,	//!< Random connect to another person ( Using Phone Shake )
+    ePluginTypeRandomConnectRelay = 20,	//!< Random connect to another person relay service
+    ePluginTypeRelay            = 21,	//!< Relay services plugin
+
+    // NOTE: plugin types 22 - 47 not implemented .. reserved for future use
+    eMaxImplementedPluginType	= 22, 
+    // plugins 0-47 are part of PktAnnounce
+    // plugins after 47 are system plugins and do not go out in announcement pkt
+    eMaxUserPluginType = 48, // this marks end of announced permission
+    ePluginTypeCameraService,
+    ePluginTypeMJPEGReader,
+    ePluginTypeMJPEGWriter,
+    ePluginTypePersonalRecorder,
+    ePluginTypeNetServices,
+    ePluginTypeSearch,
+    ePluginTypeSndReader,
+    ePluginTypeSndWriter,
+    ePluginTypeWebServer,	//!< Web server plugin ( for About Me and Story Board web pages )
+
+    eMaxPluginType	
+};
+
+//! \public Enumeration of Relay Search Status
+enum EMyRelayStatus
+{
+    eMyRelayStatusDisconnected				= 0,
+    eMyRelayStatusConnected					= 1,
+    eMyRelayStatusSearching					= 2,
+    eMyRelayStatusRequestService			= 3,
+    eMyRelayStatusNoRelaysListed			= 4,
+    eMyRelayStatusRelayListExhasted			= 5,
+    eMyRelayStatusAssumeFirewalled			= 6,
+    eMyRelayStatusAssumeCanDirectConnect	= 7,
+
+    eMaxMyRelayStatus
+};
+
+//! \public In Text Chat Session Actions
+enum EMSessionAction
+{
+	eMSessionActionNone,
+	eMSessionActionChatSessionReq,
+	eMSessionActionChatSessionAccept,
+	eMSessionActionChatSessionReject,
+	eMSessionActionOffer,
+	eMSessionActionAccept,
+	eMSessionActionReject,
+	eMSessionActionHangup,
+
+	eMaxMSessionAction
+};
+
+//! \public Session Types
+enum EMSessionType
+{
+	eMSessionTypePhone 						= 0,
+	eMSessionTypeVidChat 					= 1,
+	eMSessionTypeTruthOrDare 				= 2,
+
+	eMaxMSessionType
+};
+
+enum ELanguageType
+{
+    eLanguageUnspecified,
+    eLanguageEnglishUS,
+    eLanguageEnglishBritian,
+
+    eMaxLanguageType
 };
 
 //! \public Network protocol layer
@@ -283,31 +330,6 @@ enum ENetLayerState
     eNetLayerStateAvailable,		    //< available and ready for use
 
     eMaxNetLayerState		            //< max must be last
-};
-
-namespace FirewallSettings
-{
-    enum EFirewallTestType
-    {
-        eFirewallTestUrlConnectionTest = 0,
-        eFirewallTestAssumeNoFirewall = 1,
-        eFirewallTestAssumeFirewalled = 2,
-
-        eMaxFirewallTestType
-    };
-};
-
-enum EInternetStatus
-{
-    eInternetNoInternet = 0,
-    eInternetInternetAvailable,
-    eInternetTestHostUnavailable,
-    eInternetTestHostAvailable,
-    eInternetAssumeDirectConnect,
-    eInternetCanDirectConnect,
-    eInternetRequiresRelay,
-
-    eMaxInternetStatus
 };
 
 enum ENetAvailStatus
@@ -349,12 +371,141 @@ enum ENetCmdError
 
     eMaxNetCmdError
 };
+//! Host connection test state as text
+const char * DescribeHostStatus( EHostTestStatus eHostStatus );
+
+//! \public Can Direct Connect test state
+enum EIsPortOpenStatus
+{
+    eIsPortOpenStatusUnknown						= 0,
+    eIsPortOpenStatusLogMsg							= 1,
+
+    eIsPortOpenStatusOpen							= 2,
+    eIsPortOpenStatusClosed							= 3,
+    eIsPortOpenStatusConnectFail					= 4,
+    eIsPortOpenStatusConnectionDropped				= 5,
+    eIsPortOpenStatusInvalidResponse				= 6,
+    eIsPortOpenStatusTestComplete					= 7,
+
+    eMaxIsPortOpenStatusType
+};
+
+//! \public Enumeration of relay status
+enum ERelayStatus
+{
+    eRelayStatusUnknown			= -1,	//!< Unknown
+    eRelayStatusOk				= 0,	//!< Relay enabled and access accepted 
+    eRelayStatusPermissionErr	= 1,	//!< Insufficient permission
+    eRelayStatusBusy			= 2,	//!< Relay cannot accept any more session
+
+    eMaxRelayStatus
+};
+
+
+//! \public Connect by shaking phone ( or press simulate phone shake ) status
+enum ERandomConnectStatus
+{
+    eRandomConnectStatusUnknown						= 0,
+    eRandomConnectStatusContactHostFail				= 1,
+    eRandomConnectStatusFoundFriend					= 2,
+    eRandomConnectStatusEmptyList					= 3,
+    eRandomConnectStatusSendRequestFail				= 4,
+    eRandomConnectStatusInvalidResponse				= 5,
+    eRandomConnectStatusDecryptError				= 6,
+    eRandomConnectStatusSearchComplete				= 7,
+
+    eMaxRandomConnectStatusType
+};
+
+enum ESubCatagory
+{
+    eSubCatagoryUnspecified,
+
+    eSubCatagoryVideoOther,
+    eSubCatagoryVideoPersonal,
+    eSubCatagoryVideoXXX,
+    eSubCatagoryVideoMovie,
+    eSubCatagoryVideoMovieClip,
+    eSubCatagoryVideoTvShow,
+    eSubCatagoryVideo3d,
+    eSubCatagoryVideoCam,
+
+    eSubCatagoryAudioOther,
+    eSubCatagoryAudioPersonal,
+    eSubCatagoryAudioXXX,
+    eSubCatagoryAudioMusic,
+    eSubCatagoryAudioBook,
+    eSubCatagoryAudioSoundClip,
+
+    eSubCatagoryImageOther,
+    eSubCatagoryImagePersonal,
+    eSubCatagoryImageXXX,
+    eSubCatagoryImagePictures,
+    eSubCatagoryImageCovers,
+
+    eSubCatagoryOtherPersonal,
+    eSubCatagoryOtherXXX,
+    eSubCatagoryOtherEBook,
+    eSubCatagoryOtherComic,
+
+    eMaxSubCatagory
+};
+
+//! \public run a test like query host id state
+enum ERunTestStatus
+{
+    eRunTestStatusUnknown = 0,
+    eRunTestStatusLogMsg = 1,
+
+    eRunTestStatusTestSuccess = 2,
+    eRunTestStatusTestFail = 3,
+    eRunTestStatusTestBadParam = 4,
+    eRunTestStatusConnectFail = 5,
+    eRunTestStatusConnectionDropped = 6,
+    eRunTestStatusInvalidResponse = 7,
+    eRunTestStatusMyPortIsOpen = 8,
+    eRunTestStatusMyPortIsClosed = 9,
+    eRunTestStatusTestComplete = 10,
+    eRunTestStatusTestCompleteFail = 11,
+    eRunTestStatusTestCompleteSuccess = 12,
+
+    eMaxRunTestStatusType
+};
+
+const char * DescribeAppModule( EAppModule appModule );
+
+//! Internet Status as text
+const char * DescribeHostType( EHostType hostType );
 
 //! Internet Status as text
 const char * DescribeInternetStatus( EInternetStatus internetStatus );
+
+const char * DescribeModuleState( EModuleState moduleState );
+
+//! Network State as text
+const char * DescribeNetworkState( ENetworkStateType networkStateType );
+
 //! Net Available Status as text
 const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus );
+
 //! Net Command type as text
 const char * DescribeNetCmdType( ENetCmdType netCmdType );
+
 //! Net Command Error as text
 const char * DescribeNetCmdError( ENetCmdError netCmdError );
+
+//! Describe Direct Connect test state as text
+const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
+
+//! Describe connect by shaking phone ( or press simulate phone shake ) status as text
+const char * DescribeRandomConnectStatus( ERandomConnectStatus ePortOpenStatus );
+
+//! Describe Relay Search Status as text
+const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus );
+
+//! Describe run network test state as text
+const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
+
+// for use in database mainly 
+// If you add a plugin type be sure to update getPluginName
+const char * getPluginName( EPluginType pluginType );

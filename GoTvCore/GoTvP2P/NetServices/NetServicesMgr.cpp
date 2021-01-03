@@ -15,7 +15,6 @@
 
 #include "NetServicesMgr.h"
 #include "NetServiceHdr.h"
-#include "NetActionQueryMyIp.h"
 #include "NetActionIsMyPortOpen.h"
 #include "NetActionAnnounce.h"
 #include "NetActionRandomConnect.h"
@@ -382,18 +381,6 @@ RCODE NetServicesMgr::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& n
 RCODE NetServicesMgr::handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
 	return m_NetServiceHost.handleNetCmdHostReply( sktBase, netServiceHdr );
-}
-
-//============================================================================
-void NetServicesMgr::queryWhatsMyIp( void )
-{
-	addNetActionCommand( new NetActionQueryMyIp( *this ) );
-}
-
-//============================================================================
-void NetServicesMgr::netActionResultQueryWhatsMyIp( const char * ipAddress )
-{
-	LogMsg( LOG_INFO, "NetServicesMgr::netActionResultQueryWhatsMyIp IP %s\n", ipAddress );
 }
 
 //============================================================================

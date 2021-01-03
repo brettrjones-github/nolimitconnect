@@ -68,8 +68,6 @@ public:
 	void						announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction = eHostActionAnnounce );
 	void						performRandomConnect( void );
 
-	void						queryWhatsMyIp( void );
-	void						netActionResultQueryWhatsMyIp( const char * ipAddress );
 	void						netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp );
     void                        netActionResultQueryHostId( EAppErr eAppErr, VxGUID& hostId );
 	void						netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );

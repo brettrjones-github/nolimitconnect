@@ -564,8 +564,6 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIdle.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServicesMgr.cpp" />
@@ -709,7 +707,6 @@
     <ClInclude Include="..\..\..\GoTvInterface\IDefs.h" />
     <ClInclude Include="..\..\..\GoTvInterface\IFromGui.h" />
     <ClInclude Include="..\..\..\GoTvInterface\IGoTv.h" />
-    <ClInclude Include="..\..\..\GoTvInterface\IGoTvDefs.h" />
     <ClInclude Include="..\..\..\GoTvInterface\IGoTvLib.h" />
     <ClInclude Include="..\..\..\GoTvInterface\ILog.h" />
     <ClInclude Include="..\..\..\GoTvInterface\IScan.h" />
@@ -840,8 +837,6 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionBase.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIdle.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.h" />
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.h" />
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceDefs.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHdr.h" />

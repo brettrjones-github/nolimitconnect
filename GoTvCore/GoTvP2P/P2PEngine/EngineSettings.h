@@ -28,6 +28,9 @@ public:
 	RCODE						engineSettingsStartup( std::string& strDbFileName );
 	void						engineSettingsShutdown( void );
 
+    void						getNetHostSettings( NetHostSetting& netSettings );
+    void						setNetHostSettings( NetHostSetting& netSettings );
+
 	void						getNetSettings( NetSettings& netSettings );
 	void						setNetSettings( NetSettings& netSettings );
 

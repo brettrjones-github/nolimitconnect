@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GoTvInterface/IGoTvDefs.h"
+#include "GoTvInterface/IDefs.h"
 #include "GoTvInterface/IGoTvEvents.h"
 
 #include "AppParamParser.h"

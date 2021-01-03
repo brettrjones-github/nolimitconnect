@@ -19,18 +19,15 @@
 class NetSettings : public NetHostSetting
 {
 public:
-	NetSettings();
+
+
+	NetSettings() = default;
 	virtual ~NetSettings() = default;
 
 	NetSettings&				operator =( const NetSettings& rhs );
 
-	void						setMyTcpInPort( uint16_t port )								{ m_u16MyTcpInPort = port; }
-	uint16_t					getMyTcpInPort( void )										{ return m_u16MyTcpInPort; }
 	void						setMyMulticastPort( uint16_t port )							{ m_u16MyMulticastPort = port; }
 	uint16_t					getMyMulticastPort( void )									{ return m_u16MyMulticastPort; }
-
-	void						setUseUpnpPortForward( bool enable )						{ m_bAttemptPortForward = enable; }
-	bool						getUseUpnpPortForward( void )								{ return m_bAttemptPortForward; }
 
 	void						setUserRelayPermissionCount( int count )					{ m_UserRelayPermissionCount = count; }
 	uint16_t					getUserRelayPermissionCount( void )							{ return m_UserRelayPermissionCount; }
@@ -46,14 +43,12 @@ public:
 
 protected:
 	//=== vars ===//
-	uint16_t					m_u16MyTcpInPort = NET_DEFAULT_NETSERVICE_PORT;
-	uint16_t					m_u16MyMulticastPort;
-	bool						m_bMulticastEnable;
-	bool						m_bAttemptPortForward;
-	int							m_UserRelayPermissionCount;
-	int							m_SystemRelayPermissionCount;
-	bool						m_AllowUserLocation;
-	bool						m_AllowMulticastBroadcast;
+    uint16_t					m_u16MyMulticastPort{ NET_DEFAULT_UDP_PORT };
+	bool						m_bMulticastEnable{ false };
+	int							m_UserRelayPermissionCount{ 0 };
+	int							m_SystemRelayPermissionCount{ 0 };
+	bool						m_AllowUserLocation{ false };
+	bool						m_AllowMulticastBroadcast{ false };
 };
 
 

@@ -13,7 +13,7 @@
 //============================================================================
 #pragma once
 
-#include "GoTvInterface/IGoTvDefs.h"
+#include "GoTvInterface/IDefs.h"
 #include "AudioDefs.h"
 
 #include <QMutex>

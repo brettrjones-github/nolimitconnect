@@ -20,10 +20,9 @@ enum ENetActionType
 {
 	eNetActionUnknown			= 0,
 	eNetActionIdle				= 1,
-	eNetActionQueryMyIp			= 2,
-	eNetActionAnnounce			= 3,
-	eNetActionIsPortOpen		= 4,
-	eNetActionRandomConnect		= 5,
+	eNetActionAnnounce			= 2,
+	eNetActionIsPortOpen		= 3,
+	eNetActionRandomConnect		= 4,
 
 	eMaxNetAction
 };

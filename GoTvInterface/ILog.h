@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "IGoTvDefs.h"
+#include "IDefs.h"
 
 #define ILOG_LEVEL_NONE         (0) // none ( disable )
 #define ILOG_LEVEL_INFO	        (1) // info only

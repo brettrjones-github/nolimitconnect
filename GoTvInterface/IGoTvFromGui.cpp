@@ -296,6 +296,12 @@ bool IGoTv::fromGuiMovieDone( void )
 }
 
 //============================================================================
+void IGoTv::fromGuiApplyNetHostSettings( NetHostSetting& netSettings )
+{
+    getPtoP().fromGuiApplyNetHostSettings( netSettings );
+}
+
+//============================================================================
 void IGoTv::fromGuiGetNetSettings( NetSettings& netSettings )
 {
     getPtoP().fromGuiGetNetSettings( netSettings );

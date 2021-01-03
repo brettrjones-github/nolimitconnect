@@ -217,6 +217,7 @@ public:
                                                                 const char *	url3,           // favorite url 3
                                                                 const char *	donation ) override;	// donation		
 
+    virtual void				fromGuiApplyNetHostSettings( NetHostSetting& netSettings ) override;
     virtual void				fromGuiSetNetSettings( NetSettings& netSettings ) override;
     virtual void				fromGuiGetNetSettings( NetSettings& netSettings ) override;
     virtual void				fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMaxCnt ) override;

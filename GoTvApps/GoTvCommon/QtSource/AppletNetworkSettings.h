@@ -18,7 +18,6 @@
 
 #include "AppletBase.h"
 #include "AppDefs.h"
-#include "AppletNetworkSettingsData.h"
 
 #include <QTimer>
 
@@ -44,6 +43,7 @@ protected slots:
 
     void						onSaveButtonClick( void );
     void						onDeleteButtonClick( void );
+    void						slotApplySettingsButtonClick( void );
     void						onComboBoxSelectionChange( const QString& anchorSettingName );
     void						onComboBoxTextChanged( const QString & text );
 
@@ -54,6 +54,8 @@ protected slots:
     void						slotShowRandomConnectUrlInformation( void );
     void						slotShowDefaultGroupHostUrlInformation( void );
     void						slotShowDefaultChatRoomUrlInformation( void );
+
+    void						slotCopyMyUrlToClipboard( void );
 
     void						slotUpdateTimer( void );
 
@@ -67,12 +69,15 @@ protected:
 
     void						updateDlgFromSettings( bool initialSettings );
     void						updateSettingsFromDlg( void );
-    void						populateDlgFromNetHostSetting( NetHostSetting& anchorSetting );
+    void						populateDlgFromNetHostSetting( NetHostSetting& netSettings );
     void						setFirewallTest( FirewallSettings::EFirewallTestType eFirewallType );
-    void                        populateNetData( AppletNetworkSettingsData& netData );
+    void                        populateNetHostSettingsFromDlg( NetHostSetting& netHostSetting );
+    void                        applyEngineSettingsFromHostSetting( NetHostSetting& netHostSetting );
+
+    void                        fillNetHostSettingFromEngine( NetHostSetting& netSettings );
 
 	Ui::AppletNetworkSettingsWidget		ui;
-    AppletNetworkSettingsData   m_OriginalSettings;
+    NetHostSetting              m_OriginalSettings;
     QTimer *                    m_UpdateTimer{ nullptr };
 };
 

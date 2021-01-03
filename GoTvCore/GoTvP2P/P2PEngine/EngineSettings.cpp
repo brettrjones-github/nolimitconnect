@@ -61,18 +61,17 @@ void EngineSettings::engineSettingsShutdown( void )
 }
 
 //============================================================================
-void EngineSettings::getNetSettings( NetSettings& netSettings )
+void EngineSettings::getNetHostSettings( NetHostSetting& netSettings )
 {
-    m_SettingsDbMutex.lock();
-	std::string strValue;
-	getNetworkKey( strValue );
-	netSettings.setNetworkKey( strValue.c_str() );
-	
-	getNetworkHostUrl( strValue );
-	netSettings.setNetworkHostUrl( strValue.c_str() );
+    std::string strValue;
+    getNetworkKey( strValue );
+    netSettings.setNetworkKey( strValue.c_str() );
 
-	getConnectTestUrl( strValue );
-	netSettings.setConnectTestUrl( strValue.c_str() );
+    getNetworkHostUrl( strValue );
+    netSettings.setNetworkHostUrl( strValue.c_str() );
+
+    getConnectTestUrl( strValue );
+    netSettings.setConnectTestUrl( strValue.c_str() );
 
     getRandomConnectUrl( strValue );
     netSettings.setRandomConnectUrl( strValue.c_str() );
@@ -83,11 +82,80 @@ void EngineSettings::getNetSettings( NetSettings& netSettings )
     getChatRoomHostUrl( strValue );
     netSettings.setChatRoomHostUrl( strValue.c_str() );
 
-	uint16_t u16Port = getTcpIpPort();
-	netSettings.setMyTcpInPort( u16Port );
+    uint16_t u16Port = getTcpIpPort();
+    netSettings.setTcpPort( u16Port );
 
-	getMulticastPort( u16Port );
-	netSettings.setMyMulticastPort( u16Port );
+    getExternalIp( strValue );
+    netSettings.setExternIpAddr( strValue.c_str() );
+
+    strValue = getPreferredNetworkAdapterIp();
+    netSettings.setPreferredNetworkAdapterIp( strValue.c_str() );
+
+    bool useUpnp = getUseUpnpPortForward();
+    netSettings.setUseUpnpPortForward( useUpnp );
+
+    int32_t firewallType = 0;
+    FirewallSettings::EFirewallTestType firewallEnum = getFirewallTestSetting();
+    switch( firewallEnum )
+    {
+    case FirewallSettings::eFirewallTestAssumeNoFirewall:
+        firewallType = 1;
+        break;
+
+    case FirewallSettings::eFirewallTestAssumeFirewalled:
+        firewallType = 2;
+        break;
+
+    case FirewallSettings::eFirewallTestUrlConnectionTest:
+    default:
+        firewallType = 0;
+        break;
+    }
+
+    netSettings.setFirewallTestType( firewallType );
+}
+
+//============================================================================
+void EngineSettings::setNetHostSettings( NetHostSetting& netSettings )
+{
+    setNetworkKey( netSettings.getNetworkKey() );
+    setNetworkHostUrl( netSettings.getNetworkHostUrl() );
+    setConnectTestUrl( netSettings.getConnectTestUrl() );
+    setRandomConnectUrl( netSettings.getRandomConnectUrl() );
+    setGroupHostUrl( netSettings.getGroupHostUrl() );
+    setChatRoomHostUrl( netSettings.getChatRoomHostUrl() );
+    setTcpIpPort( netSettings.getTcpPort() );
+    setExternalIp( netSettings.getExternIpAddr() );
+    setPreferredNetworkAdapterIp( netSettings.getPreferredNetworkAdapterIp().c_str() );
+    setUseUpnpPortForward( netSettings.getUseUpnpPortForward() );
+
+    int32_t firewallType = netSettings.getFirewallTestType();
+    FirewallSettings::EFirewallTestType firewallEnum =  FirewallSettings::eFirewallTestUrlConnectionTest;
+    switch( firewallType )
+    {
+    case 1:
+        firewallEnum = FirewallSettings::eFirewallTestAssumeNoFirewall;
+        break;
+
+    case 2:
+        firewallType = FirewallSettings::eFirewallTestAssumeFirewalled;
+        break;
+
+    default:
+        break;
+    }
+
+    setFirewallTestSetting( firewallEnum ); 
+}
+
+//============================================================================
+void EngineSettings::getNetSettings( NetSettings& netSettings )
+{
+    getNetHostSettings( netSettings );
+    
+    uint16_t u16MulticastPort = 0;
+	getMulticastPort( u16MulticastPort );
+	netSettings.setMyMulticastPort( u16MulticastPort );
 
 	uint32_t usrCnt;
 	uint32_t sysCnt;
@@ -101,14 +169,8 @@ void EngineSettings::getNetSettings( NetSettings& netSettings )
 //============================================================================
 void EngineSettings::setNetSettings( NetSettings& netSettings )
 {
-	setNetworkKey( netSettings.getNetworkKey() );
-	setNetworkHostUrl( netSettings.getNetworkHostUrl() );
-	setConnectTestUrl( netSettings.getConnectTestUrl() );
-    setRandomConnectUrl( netSettings.getRandomConnectUrl() );
-    setGroupHostUrl( netSettings.getGroupHostUrl() );
-    setChatRoomHostUrl( netSettings.getChatRoomHostUrl() );
+    setNetHostSettings( netSettings );
 
-	setTcpIpPort( netSettings.getMyTcpInPort() );
 	setMulticastPort( netSettings.getMyMulticastPort() );
 	setMulticastEnable( netSettings.getMulticastEnable() );
 	setUseUpnpPortForward( netSettings.getUseUpnpPortForward() );
@@ -139,14 +201,14 @@ void EngineSettings::setWhichContactsToView( EFriendViewType eViewType )
 void EngineSettings::getExternalIp( std::string& strIpAddress )
 {
     strIpAddress = "";
-    FirewallSettings::EFirewallTestType firewallType = getFirewallTestSetting();
-    if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallType )
-    {
+    //FirewallSettings::EFirewallTestType firewallType = getFirewallTestSetting();
+    //if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallType )
+    //{
         // only get extern ip if set to assume can connect directly
         m_SettingsDbMutex.lock();
         getIniValue( MY_SETTINGS_KEY, "ExternalIp", strIpAddress, "" );
         m_SettingsDbMutex.unlock();
-    }  
+   // }  
 }
 
 //============================================================================

@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "config_gotvcore.h"
-#include "GoTvInterface/IGoTvDefs.h"
+#include "GoTvInterface/IDefs.h"
 #include "GoTvInterface/OsInterface/OsInterface.h"
 #include "GoTvInterface/ILog.h"
 #include "GoTvInterface/IToGui.h"
@@ -460,6 +460,7 @@ public:
     virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly );
     virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent );
 
+    virtual void				fromGuiApplyNetHostSettings( NetHostSetting& netSettings );
     virtual void				fromGuiGetNetSettings( NetSettings& netSettings );
     virtual void				fromGuiSetNetSettings( NetSettings& netSettings );
     virtual void				fromGuiNetworkSettingsChanged( void );

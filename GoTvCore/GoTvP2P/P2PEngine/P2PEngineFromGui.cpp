@@ -38,6 +38,7 @@
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 
 #include <NetLib/VxGetRandomPort.h>
+#include <NetLib/VxPeerMgr.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
@@ -1059,6 +1060,36 @@ void P2PEngine::fromGuiGetNetSettings( NetSettings& netSettings )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetNetSettings" );
 	m_EngineSettings.getNetSettings( netSettings );
+}
+
+//============================================================================
+void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
+{
+    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetNetSettings" );
+    NetHostSetting origSettings;
+    m_EngineSettings.getNetHostSettings( origSettings );
+
+    if( origSettings != netHostSetting )
+    {
+        m_EngineSettings.setNetHostSettings( netHostSetting );
+        if( origSettings.getExternIpAddr() != netHostSetting.getExternIpAddr() )
+        {
+            if( !netHostSetting.getExternIpAddr().empty() && 1 == netHostSetting.getFirewallTestType() )
+            {
+                getMyPktAnnounce().setOnlineIpAddress( netHostSetting.getExternIpAddr().c_str() );
+            }
+        }
+
+        if( netHostSetting.getTcpPort() != netHostSetting.getTcpPort() )
+        {
+            IGoTv::getIGoTv().getPeerMgr().stopListening();
+            getMyPktAnnounce().setMyOnlinePort( netHostSetting.getTcpPort() );
+            getNetStatusAccum().setIpPort( netHostSetting.getTcpPort() );
+            IGoTv::getIGoTv().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
+        }
+
+        fromGuiNetworkSettingsChanged();
+    }
 }
 
 //============================================================================

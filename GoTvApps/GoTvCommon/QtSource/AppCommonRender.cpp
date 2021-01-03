@@ -63,7 +63,7 @@ void AppCommon::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState
 {
     if( eModuleStateInitError == moduleState )
     {
-        LogMsg( LOG_ERROR, "ERROR App Module %s failed to initialize", describeAppModule( moduleNum ) );
+        LogMsg( LOG_ERROR, "ERROR App Module %s failed to initialize", DescribeAppModule( moduleNum ) );
     }
 
 	if( moduleNum == eAppModuleKodi )

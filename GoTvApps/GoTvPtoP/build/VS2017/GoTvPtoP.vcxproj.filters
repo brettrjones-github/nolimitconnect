@@ -627,9 +627,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvDefs.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -992,6 +989,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IDefs.cpp">
+      <Filter>GoTvInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2905,9 +2905,6 @@
       <Filter>GoTvInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvInterface\IGoTv.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTvDefs.h">
       <Filter>GoTvInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvInterface\ILog.h">

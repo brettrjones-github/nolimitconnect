@@ -211,6 +211,8 @@ public:
 	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
 																EFriendState	eMyFriendshipToHim,
 																EFriendState	eHisFriendshipToMe ) = 0;
+    /// Set network settings
+    virtual void				fromGuiApplyNetHostSettings( NetHostSetting& netSettings ) = 0;
 	/// Set network settings
 	virtual void				fromGuiSetNetSettings( NetSettings& netSettings ) = 0;
 	/// Get network settings

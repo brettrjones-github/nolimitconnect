@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "IGoTvDefs.h"
+#include "IDefs.h"
 
 class IGoTvEvents
 {

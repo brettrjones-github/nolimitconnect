@@ -27,7 +27,6 @@ public:
 
     virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
-    void						queryWhatsMyIp( void );
     void						testIsMyPortOpen( void );
 
 protected:

@@ -94,6 +94,8 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_ConnectIsOpenInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowConnetTestInformation() ) );
     connect( ui.m_SaveSettingsButton, SIGNAL( clicked() ), this, SLOT( onSaveButtonClick() ) );
     connect( ui.m_DeleteSettingsButton, SIGNAL( clicked() ), this, SLOT( onDeleteButtonClick() ) );
+    connect( ui.m_ApplySettingsButton, SIGNAL( clicked() ), this, SLOT( slotApplySettingsButtonClick() ) );
+    connect( ui.m_CopyToClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyMyUrlToClipboard() ) );
     connect( ui.m_TestIsPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotTestIsMyPortOpenButtonClick() ) );
 
     connect( ui.m_DefaultChatRoomHostButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultChatRoomUrlInformation() ) );
@@ -121,20 +123,24 @@ void AppletNetworkSettings::slotNetworkSettingsSelectionChanged( int idx )
 void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
 {
     ui.m_NetworkSettingsNameComboBox->clear();
+    ui.AutoDetectProxyRadioButton->setChecked( false );
+    ui.AssumeNoProxyRadioButton->setChecked( false );
+    ui.AssumeProxyRadioButton->setChecked( false );
+    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
 
     bool hasPrevSetttings = false;
     bool validDbSettings = false;
     AccountMgr& dataHelper = m_MyApp.getAccountMgr();
-    std::vector<NetHostSetting> anchorSettingList;
+    std::vector<NetHostSetting> netSettingList;
     std::string lastSettingsName = dataHelper.getLastNetHostSettingName();
     int selectedIdx = 0;
     int currentSettingIdx = 0;
     if( ( 0 != lastSettingsName.length() )
-        && dataHelper.getAllNetHostSettings( anchorSettingList )
-        && ( 0 != anchorSettingList.size() ) )
+        && dataHelper.getAllNetHostSettings( netSettingList )
+        && ( 0 != netSettingList.size() ) )
     {
         std::vector<NetHostSetting>::iterator iter;
-        for( iter = anchorSettingList.begin(); iter != anchorSettingList.end(); ++iter )
+        for( iter = netSettingList.begin(); iter != netSettingList.end(); ++iter )
         {
             NetHostSetting& netHostSetting = *iter;
             ui.m_NetworkSettingsNameComboBox->addItem( netHostSetting.getNetHostSettingName().c_str() );
@@ -158,43 +164,20 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     {
         ui.m_NetworkSettingsNameComboBox->setCurrentIndex( selectedIdx );
     }
-    else if( anchorSettingList.size() )
+    else if( netSettingList.size() )
     {
-        ui.m_NetworkSettingsNameComboBox->addItem( anchorSettingList[ 0 ].getNetHostSettingName().c_str() );
-        populateDlgFromNetHostSetting( anchorSettingList[ 0 ] );
-        dataHelper.updateLastNetHostSettingName( anchorSettingList[ 0 ].getNetHostSettingName().c_str() );
+        ui.m_NetworkSettingsNameComboBox->addItem( netSettingList[ 0 ].getNetHostSettingName().c_str() );
+        populateDlgFromNetHostSetting( netSettingList[ 0 ] );
+        dataHelper.updateLastNetHostSettingName( netSettingList[ 0 ].getNetHostSettingName().c_str() );
     }
     else
     {
         ui.m_NetworkSettingsNameComboBox->addItem( "default" );
-        std::string strValue;
-
-        m_Engine.getEngineSettings().getNetworkHostUrl( strValue );
-        ui.m_NetworkHostUrlEdit->setText( strValue.c_str() );
-
-        m_Engine.getEngineSettings().getNetworkKey( strValue );
-        ui.m_NetworkKeyEdit->setText( strValue.c_str() );
-
-        m_Engine.getEngineSettings().getConnectTestUrl( strValue );
-        ui.m_ConnectTestUrlEdit->setText( strValue.c_str() );
-
-        m_Engine.getEngineSettings().getRandomConnectUrl( strValue );
-        ui.m_RandomConnectUrlEdit->setText( strValue.c_str() );
-
-        m_Engine.getEngineSettings().getGroupHostUrl( strValue );
-        ui.m_GroupHostUrlEdit->setText( strValue.c_str() );
-
-        m_Engine.getEngineSettings().getChatRoomHostUrl( strValue );
-        ui.m_DefaultChatRoomHostUrlEdit->setText( strValue.c_str() );
+        NetHostSetting engineHostSetting;
+        fillNetHostSettingFromEngine( engineHostSetting );
+        populateDlgFromNetHostSetting( engineHostSetting );        
     }
 
-    uint16_t u16Port = m_Engine.getEngineSettings().getTcpIpPort();
-    ui.PortEdit->setText( QString( "%1" ).arg( u16Port ) );
-
-    ui.AutoDetectProxyRadioButton->setChecked( false );
-    ui.AssumeNoProxyRadioButton->setChecked( false );
-    ui.AssumeProxyRadioButton->setChecked( false );
-    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
     switch( iDetectProxySetting )
     {
     case FirewallSettings::eFirewallTestAssumeNoFirewall:
@@ -245,56 +228,98 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     ui.m_ExternIpEdit->setText( externIP.c_str() );
     if( hasPrevSetttings )
     {
-        populateNetData( m_OriginalSettings );
+        populateDlgFromNetHostSetting( m_OriginalSettings );
     }
+}
+
+//============================================================================
+void AppletNetworkSettings::fillNetHostSettingFromEngine( NetHostSetting& netSetting )
+{
+
+    std::string strValue;
+
+    m_Engine.getEngineSettings().getNetworkHostUrl( strValue );
+    netSetting.setNetworkHostUrl( strValue.c_str() );
+
+    m_Engine.getEngineSettings().getNetworkKey( strValue );
+    netSetting.setNetworkKey( strValue.c_str() );
+
+    m_Engine.getEngineSettings().getGroupHostUrl( strValue );
+    netSetting.setGroupHostUrl( strValue.c_str() );
+
+    m_Engine.getEngineSettings().getConnectTestUrl( strValue );
+    netSetting.setConnectTestUrl( strValue.c_str() );
+
+    m_Engine.getEngineSettings().getRandomConnectUrl( strValue );
+    netSetting.setRandomConnectUrl( strValue.c_str() );
+
+    m_Engine.getEngineSettings().getChatRoomHostUrl( strValue );
+    netSetting.setGroupHostUrl( strValue.c_str() );
+
+    std::string externIP;
+    m_Engine.getEngineSettings().getExternalIp( externIP );
+    netSetting.setExternIpAddr( externIP.c_str() );
+
+    std::string preferredAdapterIP = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
+    netSetting.setPreferredNetworkAdapterIp( preferredAdapterIP.c_str() );
+
+    uint16_t u16Port = m_Engine.getEngineSettings().getTcpIpPort();
+    netSetting.setTcpPort( u16Port );
+
+    FirewallSettings::EFirewallTestType eFirewallType = m_Engine.getEngineSettings().getFirewallTestSetting();
+    int32_t fireWallType = 0;
+    switch( eFirewallType )
+    {
+    case  FirewallSettings::eFirewallTestAssumeNoFirewall:
+        fireWallType = 1;
+        break;
+
+    case FirewallSettings::eFirewallTestAssumeFirewalled:
+        fireWallType = 2;
+        break;
+
+    case FirewallSettings::eFirewallTestUrlConnectionTest:
+    default:
+        fireWallType = 0;
+    }
+
+    netSetting.setFirewallTestType( fireWallType );
+
+    bool useUpnp = m_Engine.getEngineSettings().getUseUpnpPortForward();
+    netSetting.setUseUpnpPortForward( useUpnp );
+
+}
+
+//============================================================================
+void AppletNetworkSettings::slotApplySettingsButtonClick( void )
+{
+    NetHostSetting netHostSetting;
+    populateNetHostSettingsFromDlg( netHostSetting );
+    applyEngineSettingsFromHostSetting( netHostSetting );
+}
+
+//============================================================================
+void AppletNetworkSettings::applyEngineSettingsFromHostSetting( NetHostSetting& netHostSetting )
+{
+    if( 1 == netHostSetting.getFirewallTestType() && !netHostSetting.getExternIpAddr().empty() )
+    {
+        m_MyApp.getAppGlobals().getUserIdent()->setOnlineIpAddress( netHostSetting.getExternIpAddr().c_str() );
+    }
+
+    m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( netHostSetting.getTcpPort() );
+    m_Engine.fromGuiApplyNetHostSettings(netHostSetting);
 }
 
 //============================================================================
 void AppletNetworkSettings::updateSettingsFromDlg()
 {
-    AppletNetworkSettingsData curData;
-    populateNetData( curData );
-    if( curData != m_OriginalSettings )
+    NetHostSetting netHostSetting;
+    populateNetHostSettingsFromDlg( netHostSetting );
+    if( netHostSetting != m_OriginalSettings )
     {
         LogMsg( LOG_DEBUG, "AppletNetworkSettings has changed" );
-        NetHostSetting& netHostSetting = curData.getNetHostSetting();
 
-        m_Engine.getEngineSettings().setNetworkKey( netHostSetting.getNetworkKey() );
-        m_Engine.getEngineSettings().setNetworkHostUrl( netHostSetting.getNetworkHostUrl() );
-        m_Engine.getEngineSettings().setConnectTestUrl( netHostSetting.getConnectTestUrl() );
-        m_Engine.getEngineSettings().setRandomConnectUrl( netHostSetting.getRandomConnectUrl() );
-        m_Engine.getEngineSettings().setGroupHostUrl( netHostSetting.getGroupHostUrl() );
-        m_Engine.getEngineSettings().setChatRoomHostUrl( netHostSetting.getChatRoomHostUrl() );
-
-        m_Engine.getEngineSettings().setPreferredNetworkAdapterIp( curData.getPreferredNetworkAdapterIp().c_str() );
-        if( 0 != curData.getTcpPort() )
-        {
-            m_Engine.getEngineSettings().setTcpIpPort( curData.getTcpPort() );
-            m_Engine.getMyPktAnnounce().setMyOnlinePort( curData.getTcpPort() );
-            m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( curData.getTcpPort() );
-            m_Engine.getNetStatusAccum().setIpPort( curData.getTcpPort() );
-        }
-
-        if( !curData.getExternalIp().empty() )
-        {
-            m_Engine.getEngineSettings().setExternalIp( curData.getExternalIp() );
-            m_Engine.getMyPktAnnounce().setOnlineIpAddress( curData.getExternalIp().c_str() );
-        }
-
-        FirewallSettings::EFirewallTestType eFirewallTestType = curData.getFirewallTestType();
-        if( eFirewallTestType == FirewallSettings::eFirewallTestAssumeNoFirewall )
-        {
-            if( !curData.getExternalIp().empty() )
-            {
-                m_Engine.getMyPktAnnounce().setOnlineIpAddress( curData.getExternalIp().c_str() );
-            }
-        }
-
-        m_Engine.getEngineSettings().setFirewallTestSetting( eFirewallTestType );
-        m_Engine.getEngineSettings().setUseUpnpPortForward( curData.getUseUpnpPortForward() );
-
-        m_OriginalSettings = curData;
-        m_Engine.fromGuiNetworkSettingsChanged();
+        m_OriginalSettings = netHostSetting;
 
         m_MyApp.getAccountMgr().updateNetHostSetting( netHostSetting );
         m_MyApp.getAccountMgr().updateLastNetHostSettingName( netHostSetting.getNetHostSettingName().c_str() );
@@ -306,12 +331,10 @@ void AppletNetworkSettings::updateSettingsFromDlg()
 }
 
 //============================================================================
-void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData )
+void AppletNetworkSettings::populateNetHostSettingsFromDlg( NetHostSetting& netHostSetting )
 {
-    NetHostSetting& netHostSetting = netData.getNetHostSetting();
     // get user name of the setting
-    std::string netSettingsName;
-    netSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
+    std::string netSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
     if( 0 == netSettingsName.length() )
     {
         netSettingsName = "default";
@@ -356,27 +379,27 @@ void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData 
         strPreferredIp = ui.m_LclIpListComboBox->currentText().toUtf8().constData();
     }
 
-    netData.setPreferredNetworkAdapterIp( strPreferredIp );
+    netHostSetting.setPreferredNetworkAdapterIp( strPreferredIp.c_str() );
 
     uint16_t u16TcpPort = ui.PortEdit->text().toUShort();
     if( 0 != u16TcpPort )
     {
-        netData.setTcpPort( u16TcpPort );
+        netHostSetting.setTcpPort( u16TcpPort );
     }
     else
     {
-        netData.setTcpPort( NET_DEFAULT_NETSERVICE_PORT );
+        netHostSetting.setTcpPort( NET_DEFAULT_NETSERVICE_PORT );
     }
 
     std::string externIp = ui.m_ExternIpEdit->text().toUtf8().constData();
     if( externIp.length() )
     {
-        netData.setExternalIp( externIp );
+        netHostSetting.setExternIpAddr( externIp.c_str() );
     }
     else
     {
         externIp = "";
-        netData.setExternalIp( externIp );
+        netHostSetting.setExternIpAddr( externIp.c_str() );
     }
 
     FirewallSettings::EFirewallTestType eFirewallTestType = FirewallSettings::eFirewallTestUrlConnectionTest;
@@ -389,8 +412,22 @@ void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData 
         eFirewallTestType = FirewallSettings::eFirewallTestAssumeFirewalled;
     }
 
-    netData.setFirewallTestType( eFirewallTestType );
-    netData.setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
+    switch( eFirewallTestType )
+    {
+    case FirewallSettings::eFirewallTestAssumeNoFirewall:
+        netHostSetting.setFirewallTestType( 1 );
+        break;
+ 
+    case FirewallSettings::eFirewallTestAssumeFirewalled:
+        netHostSetting.setFirewallTestType( 2 );
+        break;
+
+    case FirewallSettings::eFirewallTestUrlConnectionTest:
+    default:
+        netHostSetting.setFirewallTestType( 0 );
+    }
+    
+    netHostSetting.setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
 }
 
 //============================================================================
@@ -490,40 +527,40 @@ void AppletNetworkSettings::onComboBoxTextChanged( const QString & text )
 }
 
 //============================================================================
-void AppletNetworkSettings::onComboBoxSelectionChange( const QString& anchorSettingName )
+void AppletNetworkSettings::onComboBoxSelectionChange( const QString& netSettingName )
 {
     AccountMgr& dataHelper = m_MyApp.getAccountMgr();
-    NetHostSetting anchorSetting;
-    if( dataHelper.getNetHostSettingByName( anchorSettingName.toUtf8(), anchorSetting ) )
+    NetHostSetting netSetting;
+    if( dataHelper.getNetHostSettingByName( netSettingName.toUtf8(), netSetting ) )
     {
-        populateDlgFromNetHostSetting( anchorSetting );
+        populateDlgFromNetHostSetting( netSetting );
         updateSettingsFromDlg();
     }
 }
 
 //============================================================================
-void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& anchorSetting )
+void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSetting )
 {
-    ui.m_NetworkHostUrlEdit->setText( anchorSetting.getNetworkHostUrl().c_str() );
-    ui.m_NetworkKeyEdit->setText( anchorSetting.getNetworkKey().c_str() );
-    ui.m_ConnectTestUrlEdit->setText( anchorSetting.getConnectTestUrl().c_str() );
-    ui.m_RandomConnectUrlEdit->setText( anchorSetting.getRandomConnectUrl().c_str() );
-    ui.m_GroupHostUrlEdit->setText( anchorSetting.getGroupHostUrl().c_str() );
-    ui.m_DefaultChatRoomHostUrlEdit->setText( anchorSetting.getGroupHostUrl().c_str() );
-    ui.m_ExternIpEdit->setText( anchorSetting.getExternIpAddr().c_str() );
-    int32_t connectTestType = anchorSetting.getConnectTestType();
-
     ui.AutoDetectProxyRadioButton->setChecked( false );
     ui.AssumeNoProxyRadioButton->setChecked( false );
     ui.AssumeProxyRadioButton->setChecked( false );
 
-    switch( connectTestType )
+    ui.m_NetworkHostUrlEdit->setText( netSetting.getNetworkHostUrl().c_str() );
+    ui.m_NetworkKeyEdit->setText( netSetting.getNetworkKey().c_str() );
+    ui.m_ConnectTestUrlEdit->setText( netSetting.getConnectTestUrl().c_str() );
+    ui.m_RandomConnectUrlEdit->setText( netSetting.getRandomConnectUrl().c_str() );
+    ui.m_GroupHostUrlEdit->setText( netSetting.getGroupHostUrl().c_str() );
+    ui.m_DefaultChatRoomHostUrlEdit->setText( netSetting.getGroupHostUrl().c_str() );
+    ui.m_ExternIpEdit->setText( netSetting.getExternIpAddr().c_str() );
+
+    int32_t firewallType = netSetting.getFirewallTestType();
+    switch( firewallType )
     {
-    case 3:
+    case 2:
         ui.AssumeProxyRadioButton->setChecked( true );
         break;
 
-    case 2:
+    case 1:
         ui.AssumeNoProxyRadioButton->setChecked( true );
         break;
 
@@ -532,7 +569,38 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& ancho
         break;
     }
 
-    ui.m_UseUpnpCheckBox->setChecked( anchorSetting.getUseUpnp() );
+    ui.m_UseUpnpCheckBox->setChecked( netSetting.getUseUpnpPortForward() );
+
+    uint16_t u16Port = netSetting.getTcpPort();
+    ui.PortEdit->setText( QString( "%1" ).arg( u16Port ) );
+
+    ui.m_LclIpListComboBox->clear();
+    ui.m_LclIpListComboBox->addItem( DEFAULT_ADAPTER_IP_CHOICE );
+
+    std::string strPreferredIp = netSetting.getPreferredNetworkAdapterIp();
+
+    std::vector<InetAddress> lclIpAddresses;
+    VxGetLocalIps( lclIpAddresses );
+    std::vector<InetAddress>::iterator iter;
+    std::string ipAddr;
+    int preferredAddrIndex = 0;
+    int currIdx = 0;
+    for( iter = lclIpAddresses.begin(); iter != lclIpAddresses.end(); ++iter )
+    {
+        InetAddress& inetAddr = ( *iter );
+        if( inetAddr.isIPv4()
+            && ( false == inetAddr.isLoopBack() ) )
+        {
+            currIdx++;
+            ipAddr = inetAddr.toStdString();
+            if( ipAddr == strPreferredIp )
+            {
+                preferredAddrIndex = currIdx;
+            }
+
+            ui.m_LclIpListComboBox->addItem( ipAddr.c_str() );
+        }
+    }
 }
 
 //============================================================================
@@ -548,9 +616,9 @@ void AppletNetworkSettings::onSaveButtonClick( void )
     QString keyVal = getNetworkKey();
     if( verifyNetworkKey( keyVal ) )
     {
-        std::string anchorSettingsName;
-        anchorSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
-        if( anchorSettingsName.empty() )
+        std::string netSettingsName;
+        netSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
+        if( netSettingsName.empty() )
         {
             QMessageBox::information( this, QObject::tr( "Network Setting" ), QObject::tr( "Network setting name cannot be blank." ) );
             return;
@@ -600,8 +668,8 @@ void AppletNetworkSettings::onSaveButtonClick( void )
             chatRoomHostUrl = "";
         }
 
-        NetHostSetting anchorSetting;
-        if( m_MyApp.getAccountMgr().getNetHostSettingByName( anchorSettingsName.c_str(), anchorSetting ) )
+        NetHostSetting netSetting;
+        if( m_MyApp.getAccountMgr().getNetHostSettingByName( netSettingsName.c_str(), netSetting ) )
         {
             // setting exists.. check if user wants to change setting name
             if( QMessageBox::Yes != QMessageBox::question( this, QObject::tr( "Network Setting" ), 
@@ -629,11 +697,11 @@ void AppletNetworkSettings::onDeleteButtonClick( void )
         return;
     }
 
-    std::string anchorSettingsName;
-    anchorSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
-    if( 0 != anchorSettingsName.length() )
+    std::string netSettingsName;
+    netSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
+    if( 0 != netSettingsName.length() )
     {
-        m_MyApp.getAccountMgr().removeNetHostSettingByName( anchorSettingsName.c_str() );
+        m_MyApp.getAccountMgr().removeNetHostSettingByName( netSettingsName.c_str() );
         updateDlgFromSettings( false );
     }
 }
@@ -706,4 +774,11 @@ bool AppletNetworkSettings::verifyNetworkKey( QString& keyVal )
     }
 
     return isValid;
+}
+
+//============================================================================
+void AppletNetworkSettings::slotCopyMyUrlToClipboard( void )
+{
+    QClipboard * clipboard = QApplication::clipboard();
+    clipboard->setText( ui.m_NodeUrlLabel->text() );
 }

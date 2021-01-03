@@ -108,6 +108,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QPushButton" name="m_ApplySettingsButton">
+        <property name="text">
+         <string>Apply Settings</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="VxPushButton" name="m_NetworkHostButton">
@@ -811,6 +818,13 @@
           </property>
           <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_CopyToClipboardButton">
+          <property name="text">
+           <string>Copy My URL To Clipboard</string>
           </property>
          </widget>
         </item>

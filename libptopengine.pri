@@ -22,7 +22,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvInterface/IDefs.h \
     $$PWD/GoTvInterface/IFromGui.h \
     $$PWD/GoTvInterface/IGoTv.h \
-    $$PWD/GoTvInterface/IGoTvDefs.h \
     $$PWD/GoTvInterface/ILog.h \
     $$PWD/GoTvInterface/IScan.h \
     $$PWD/GoTvInterface/IToGui.h \
@@ -153,8 +152,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.h \
-	$$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryHostOnlineId.h \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceDefs.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h \
@@ -367,8 +364,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.cpp \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryHostOnlineId.cpp \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceUtils.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServicesMgr.cpp \
