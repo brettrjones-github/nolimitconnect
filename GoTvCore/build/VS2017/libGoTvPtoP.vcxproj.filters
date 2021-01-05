@@ -670,6 +670,21 @@
     <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.cpp">
       <Filter>GoTvP2P\NetworkTest</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectionMgr.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListBase.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedInfo.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\IConnectedCallback.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\IConnectRequest.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1438,6 +1453,21 @@
     <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.h">
       <Filter>GoTvP2P\NetworkTest</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectionMgr.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListBase.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedInfo.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\IConnectedCallback.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\IConnectRequest.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1523,6 +1553,9 @@
     </Filter>
     <Filter Include="GoTvP2P\NetworkTest">
       <UniqueIdentifier>{0f4e0e33-86c3-4f87-9a0e-ca56a6210b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\Connections">
+      <UniqueIdentifier>{43bc1941-42bb-4aa6-8541-8c04a3f317c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

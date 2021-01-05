@@ -897,9 +897,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -2990,9 +2987,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\app_precompiled_hdr.h">
       <Filter>Generated Files</Filter>

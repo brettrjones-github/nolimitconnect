@@ -24,7 +24,6 @@ HostListMgrBase::HostListMgrBase( P2PEngine& engine )
 {
 }
 
-
 //============================================================================
 IToGui&	HostListMgrBase::getToGui()
 {

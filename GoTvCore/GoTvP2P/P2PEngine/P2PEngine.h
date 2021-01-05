@@ -21,6 +21,7 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
 #include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
@@ -80,8 +81,9 @@ public:
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
-    HostListMgr&				getHostListMgr( void )							{ return m_HostListMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
+    ConnectionMgr&              getConnectionMgr( void )                        { return m_ConnectionMgr; }
+    HostListMgr&				getHostListMgr( void )							{ return m_HostListMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
@@ -577,7 +579,6 @@ protected:
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
     BigListMgr&					m_BigListMgr;
-
 	PktAnnounce					m_PktAnn;
 	VxMutex						m_AnnouncePktMutex;
 	EngineSettings				m_EngineSettings;
@@ -585,6 +586,7 @@ protected:
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
     HostListMgr&				m_HostListMgr;
+    ConnectionMgr&              m_ConnectionMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;
     NetworkMgr&					m_NetworkMgr;

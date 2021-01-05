@@ -137,8 +137,7 @@ void NetStatusAccum::onNetStatusChange( void )
                 {
                     netAvailStatus = eNetAvailRelayGroupHost;
                 }
-            }
-           
+            }     
         }
     }
 

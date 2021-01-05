@@ -42,6 +42,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListLib.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListBase.h \
+	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectionMgr.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/WebRtcTypeDefs.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_common.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core.h \
@@ -286,6 +288,8 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListBase.h \
+	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectionMgr.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core_mips.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core_neon.cpp \

@@ -675,9 +675,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -2099,7 +2096,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
