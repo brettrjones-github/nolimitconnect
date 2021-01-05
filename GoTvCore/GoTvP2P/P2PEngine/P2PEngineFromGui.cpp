@@ -1229,7 +1229,7 @@ uint16_t P2PEngine::fromGuiGetRandomTcpPort( void )
 //============================================================================
 void P2PEngine::fromGuiGetNodeUrl( std::string& nodeUrl )
 {
-    return getNetStatusAccum().getNodeUrl( nodeUrl );
+    nodeUrl = getMyUrl();
 }
 
 //============================================================================

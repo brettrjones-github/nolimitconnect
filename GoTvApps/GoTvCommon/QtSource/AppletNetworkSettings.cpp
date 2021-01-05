@@ -178,6 +178,7 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
         populateDlgFromNetHostSetting( engineHostSetting );        
     }
 
+    /*
     switch( iDetectProxySetting )
     {
     case FirewallSettings::eFirewallTestAssumeNoFirewall:
@@ -230,6 +231,7 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     {
         populateDlgFromNetHostSetting( m_OriginalSettings );
     }
+    */
 }
 
 //============================================================================
@@ -550,7 +552,7 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSe
     ui.m_ConnectTestUrlEdit->setText( netSetting.getConnectTestUrl().c_str() );
     ui.m_RandomConnectUrlEdit->setText( netSetting.getRandomConnectUrl().c_str() );
     ui.m_GroupHostUrlEdit->setText( netSetting.getGroupHostUrl().c_str() );
-    ui.m_DefaultChatRoomHostUrlEdit->setText( netSetting.getGroupHostUrl().c_str() );
+    ui.m_DefaultChatRoomHostUrlEdit->setText( netSetting.getChatRoomHostUrl().c_str() );
     ui.m_ExternIpEdit->setText( netSetting.getExternIpAddr().c_str() );
 
     int32_t firewallType = netSetting.getFirewallTestType();
