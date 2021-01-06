@@ -27,7 +27,7 @@ public:
     virtual ~ConnectedListBase() = default;
 
 #ifdef TARGET_OS_ANDROID
-    std::map<VxGUID, RcConnectInfo *>&				getConnectedList( void )		{ return m_ConnectList; }
+    std::map<VxGUID, ConnectedInfo *>&				getConnectedList( void )		{ return m_ConnectList; }
 #else
     std::map<VxGUID, ConnectedInfo *, cmp_vxguid>&	getConnectedList( void )		{ return m_ConnectList; }
 #endif
@@ -36,8 +36,8 @@ public:
 protected:
     //=== vars ===//
 #ifdef TARGET_OS_ANDROID
-    std::map<VxGUID, RcConnectInfo *> m_ConnectList;
-    typedef std::map<VxGUID, RcConnectInfo *>::iterator ConnectListIter;
+    std::map<VxGUID, ConnectedInfo *> m_ConnectList;
+    typedef std::map<VxGUID, ConnectedInfo *>::iterator ConnectListIter;
 #else
     std::map<VxGUID, ConnectedInfo *, cmp_vxguid> m_ConnectList;
     typedef std::map<VxGUID, ConnectedInfo *, cmp_vxguid>::iterator ConnectListIter;

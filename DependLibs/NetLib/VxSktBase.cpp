@@ -1318,6 +1318,7 @@ bool VxSktBase::setPeerPktAnn( PktAnnounce &peerAnn )
     if( isSameSize )
     {
         memcpy( &m_PeerPktAnn, &peerAnn, m_PeerPktAnn.getPktLength() );
+        m_PeerOnlineId = m_PeerPktAnn.getMyOnlineId();
         setIsPeerPktAnnSet( isSameSize );
     }
 
@@ -1337,15 +1338,4 @@ bool VxSktBase::getPeerPktAnnCopy( PktAnnounce &peerAnn )
 
     m_PeerAnnMutex.unlock();
     return copyResult;
-}
-
-//============================================================================
-VxGUID VxSktBase::getPeerOnlineId( void )
-{
-    VxGUID onlineId;
-    m_PeerAnnMutex.lock();
-    onlineId = m_PeerPktAnn.getMyOnlineId();
-    m_PeerAnnMutex.unlock();
-
-    return onlineId;
 }

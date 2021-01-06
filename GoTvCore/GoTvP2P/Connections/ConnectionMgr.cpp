@@ -13,13 +13,42 @@
 //============================================================================
 
 #include "ConnectionMgr.h"
+#include "ConnectedInfo.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-
+//============================================================================
 ConnectionMgr::ConnectionMgr( P2PEngine& engine )
     : m_Engine( engine )
     , m_BigListMgr( engine.getBigListMgr() )
+    , m_AllList( engine )
 {
+}
 
+//============================================================================
+bool ConnectionMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo * bigListInfo )
+{
+    bool result = true;
+    m_ConnectionMutex.lock();
+    ConnectedInfo* connectInfo = m_AllList.getOrAddConnectedInfo( bigListInfo );
+    if( nullptr == connectInfo )
+    {
+        result = false;
+        LogMsg( LOG_ERROR, "ConnectionMgr get connection info FAILED" );
+    }
+    else
+    {
+        connectInfo->onSktConnected( sktBase );
+    }
+
+    m_ConnectionMutex.unlock();
+    return result;
+}
+
+//============================================================================
+void ConnectionMgr::onSktDisconnected( VxSktBase* sktBase )
+{
+    m_ConnectionMutex.lock();
+    m_AllList.onSktDisconnected( sktBase );
+    m_ConnectionMutex.unlock();
 }

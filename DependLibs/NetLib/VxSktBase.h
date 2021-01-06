@@ -243,8 +243,8 @@ public:
     bool                        getIsPeerPktAnnSet( void ) { return m_IsPeerPktAnnSet; }
     bool                        getPeerPktAnnCopy( PktAnnounce &peerAnn );
 
-    // returns peer online id. check VxGUID::isVxGUIDValid() for validity
-    VxGUID                      getPeerOnlineId( void );
+    // returns peer online id. caller should check VxGUID::isVxGUIDValid() for validity
+    VxGUID                      getPeerOnlineId( void ) { return m_PeerOnlineId; }
 
 protected:
 	bool						toSocketAddrInfo(	int sockType, 
@@ -317,6 +317,7 @@ protected:
 
     bool                        m_IsPeerPktAnnSet{ false };
     PktAnnounce                 m_PeerPktAnn;
+    VxGUID                      m_PeerOnlineId;
     VxMutex                     m_PeerAnnMutex;
 };
 

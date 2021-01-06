@@ -98,6 +98,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
     if( sktBase->setPeerPktAnn( *pkt ) )
     {
+        getConnectionMgr().onSktConnectedWithPktAnn( sktBase, bigListInfo );
         getOtherHostSrvMgr().onSktConnectedWithPktAnn( sktBase );
     }
 

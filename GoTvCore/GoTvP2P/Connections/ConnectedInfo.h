@@ -26,12 +26,13 @@
 class VxSktConnectSimple;
 class P2PEngine;
 class PktAnnounce;
+class BigListInfo;
 
 class ConnectedInfo
 {
 public:
-    ConnectedInfo();
-    ConnectedInfo( P2PEngine& engine );
+    ConnectedInfo() = delete;
+    ConnectedInfo( P2PEngine& engine, BigListInfo* bigListInfo );
     virtual ~ConnectedInfo() = default;
 
     ConnectedInfo( const ConnectedInfo& rhs );
@@ -42,13 +43,17 @@ public:
 
     P2PEngine&                  getEngine() { return m_Engine; }
 
+    void                        onSktConnected( VxSktBase * sktBase );
+    void                        onSktDisconnected( VxSktBase * sktBase );
+
 protected:
     P2PEngine&                  m_Engine;
+    BigListInfo*                m_BigListInfo{ nullptr };
+    VxGUID                      m_PeerOnlineId;
     VxMutex                     m_CallbackListMutex;
-
-    EPluginType                 m_PluginType{ ePluginTypeInvalid };
-    VxGUID                      m_OnlineId;
-
+    std::vector<EPluginType>    m_RmtPlugins;
+    std::vector<EPluginType>    m_LclPlugins;
+    
 };
 
 

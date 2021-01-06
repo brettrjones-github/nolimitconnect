@@ -13,6 +13,10 @@
 //============================================================================
 #pragma once
 
+#include "ConnectedListAll.h"
+
+#include <PktLib/PktAnnounce.h>
+
 #include <CoreLib/VxMutex.h>
 
 class P2PEngine;
@@ -26,12 +30,21 @@ public:
     ConnectionMgr( P2PEngine& engine );
     virtual ~ConnectionMgr() = default;
 
-    void						onConnectionLost( VxSktBase * sktBase );
+    bool                        onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo* bigListInfo );
+    void                        onSktDisconnected( VxSktBase* sktBase );
+    
 
 protected:
+    ConnectedInfo*              getOrAddConnectedInfo( BigListInfo* bigListInfo ) { return m_AllList.getOrAddConnectedInfo( bigListInfo ); }
+    VxGUID&				        getMyOnlineId( void )   { return m_MyOnlineId; }
+    PktAnnounce&				getMyPktAnn( void )     { return m_MyPktAnn; }
+
     //=== vars ===//
     P2PEngine&					m_Engine;
     BigListMgr&					m_BigListMgr;
-    VxMutex						m_ConnectionMgrMutex;
+    VxMutex						m_ConnectionMutex;
+    ConnectedListAll            m_AllList;
+    VxGUID                      m_MyOnlineId;
+    PktAnnounce                 m_MyPktAnn;
 };
 

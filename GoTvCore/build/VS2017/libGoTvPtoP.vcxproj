@@ -488,6 +488,7 @@
     <ClCompile Include="..\..\GoTvP2P\BigListLib\BigListInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BigListLib\BigListMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListAll.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectionMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\IConnectedCallback.cpp" />
@@ -734,6 +735,7 @@
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListLib.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListAll.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListBase.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectionMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\IConnectedCallback.h" />

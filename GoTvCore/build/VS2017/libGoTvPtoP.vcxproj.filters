@@ -685,6 +685,9 @@
     <ClCompile Include="..\..\GoTvP2P\Connections\IConnectRequest.cpp">
       <Filter>GoTvP2P\Connections</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListAll.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1466,6 +1469,9 @@
       <Filter>GoTvP2P\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Connections\IConnectRequest.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListAll.h">
       <Filter>GoTvP2P\Connections</Filter>
     </ClInclude>
   </ItemGroup>

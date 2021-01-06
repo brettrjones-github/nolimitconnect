@@ -14,11 +14,11 @@
 
 #include "ConnectedInfo.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-#include <NetLib/VxSktConnectSimple.h>
 #include <NetLib/VxSktBase.h>
 
 #include <CoreLib/VxParse.h>
@@ -34,16 +34,24 @@ namespace
 }
 
 //============================================================================
-ConnectedInfo::ConnectedInfo( P2PEngine& engine )
+ConnectedInfo::ConnectedInfo( P2PEngine& engine, BigListInfo* bigListInfo )
     : m_Engine( engine )
+    , m_BigListInfo( bigListInfo )
 {
+    if( bigListInfo )
+    {
+        m_PeerOnlineId = bigListInfo->getMyOnlineId();
+    }
 }
 
 //============================================================================
 ConnectedInfo::ConnectedInfo( const ConnectedInfo& rhs )
     : m_Engine( rhs.m_Engine )
+    , m_BigListInfo( rhs.m_BigListInfo )
+    , m_PeerOnlineId( rhs.m_PeerOnlineId )
 {
-    *this = rhs;
+    m_RmtPlugins = rhs.m_RmtPlugins;
+    m_LclPlugins = rhs.m_LclPlugins;
 }
 
 //============================================================================
@@ -51,8 +59,10 @@ ConnectedInfo& ConnectedInfo::operator=( const ConnectedInfo& rhs )
 {
     if( this != &rhs )
     {
-        m_PluginType = rhs.m_PluginType;
-        m_OnlineId = rhs.m_OnlineId;
+        m_BigListInfo = rhs.m_BigListInfo;
+        m_PeerOnlineId = rhs.m_PeerOnlineId;
+        m_RmtPlugins = rhs.m_RmtPlugins;
+        m_LclPlugins = rhs.m_LclPlugins;
     }
 
     return *this;
@@ -61,6 +71,5 @@ ConnectedInfo& ConnectedInfo::operator=( const ConnectedInfo& rhs )
 //============================================================================
 bool ConnectedInfo::operator==( const ConnectedInfo& rhs )
 {
-    return  m_PluginType == rhs.m_PluginType &&
-        m_OnlineId == rhs.m_OnlineId;
+    return  m_PeerOnlineId == rhs.m_PeerOnlineId;
 }
