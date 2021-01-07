@@ -124,8 +124,6 @@ void P2PEngine::fromGuiSetUserSpecificDir( const char * userSpecificDir  )
 	LogMsg( LOG_INFO, "P2PEngine::fromGuiSetUserSpecificDir %s\n", userSpecificDir  );
 	VxSetUserSpecificDataDirectory( userSpecificDir );
 
-    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiSetUserSpecificDir %s\n", userDir);
-
 	std::string strDbFileName = VxGetSettingsDirectory();
 	strDbFileName += "biglist.db3";
 	RCODE rc = m_BigListMgr.bigListMgrStartup( strDbFileName.c_str() );
@@ -213,13 +211,9 @@ void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
 //============================================================================
 void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
 {
-    //std::string networkKeyString;
-    //std::string netServiceUrl;
     std::string netHostUrl;
-
-    //engineSettings.getNetworkKey( networkKeyString );
-    //engineSettings.getConnectTestUrl( netServiceUrl );
     engineSettings.getNetworkHostUrl( netHostUrl );
+
     // we need to update the globals so accessable everywhere
     std::string webHostName;
     std::string webFileName;
@@ -235,6 +229,18 @@ void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
     {
         LogMsg( LOG_ERROR, "Empty Network Host Name" );
     }
+
+    getConnectionMgr().applyHostUrl( eHostTypeNetwork, netHostUrl );
+
+    std::string hostUrl;
+    engineSettings.getChatRoomHostUrl( hostUrl );
+    getConnectionMgr().applyHostUrl( eHostTypeChatRoom, hostUrl );
+    engineSettings.getConnectTestUrl( hostUrl );
+    getConnectionMgr().applyHostUrl( eHostTypeConnectTest, hostUrl );
+    engineSettings.getGroupHostUrl( hostUrl );
+    getConnectionMgr().applyHostUrl( eHostTypeGroup, hostUrl );
+    engineSettings.getRandomConnectUrl( hostUrl );
+    getConnectionMgr().applyHostUrl( eHostTypeRandomConnect, hostUrl );
 
     m_NetworkStateMachine.updateFromEngineSettings( engineSettings );
 }
@@ -1080,12 +1086,37 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
             }
         }
 
-        if( netHostSetting.getTcpPort() != netHostSetting.getTcpPort() )
+        if( origSettings.getTcpPort() != netHostSetting.getTcpPort() )
         {
             IGoTv::getIGoTv().getPeerMgr().stopListening();
             getMyPktAnnounce().setMyOnlinePort( netHostSetting.getTcpPort() );
             getNetStatusAccum().setIpPort( netHostSetting.getTcpPort() );
             IGoTv::getIGoTv().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
+        }
+
+        if( origSettings.getNetworkHostUrl() != netHostSetting.getNetworkHostUrl() )
+        {
+            getConnectionMgr().applyHostUrl( eHostTypeNetwork, netHostSetting.getNetworkHostUrl() );
+        }
+
+        if( origSettings.getConnectTestUrl() != netHostSetting.getConnectTestUrl() )
+        {
+            getConnectionMgr().applyHostUrl( eHostTypeConnectTest, netHostSetting.getConnectTestUrl() );
+        }
+
+        if( origSettings.getRandomConnectUrl() != netHostSetting.getRandomConnectUrl() )
+        {
+            getConnectionMgr().applyHostUrl( eHostTypeRandomConnect, netHostSetting.getRandomConnectUrl() );
+        }
+
+        if( origSettings.getGroupHostUrl() != netHostSetting.getGroupHostUrl() )
+        {
+            getConnectionMgr().applyHostUrl( eHostTypeGroup, netHostSetting.getGroupHostUrl() );
+        }
+
+        if( origSettings.getChatRoomHostUrl() != netHostSetting.getChatRoomHostUrl() )
+        {
+            getConnectionMgr().applyHostUrl( eHostTypeChatRoom, netHostSetting.getChatRoomHostUrl() );
         }
 
         fromGuiNetworkSettingsChanged();

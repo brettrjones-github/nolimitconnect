@@ -67,6 +67,7 @@ public:
                                           VxPktHdr *			poPkt );
 
 protected:
+    virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) override {};
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) override;
 
     void                        startActionThread();

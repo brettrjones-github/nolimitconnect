@@ -26,6 +26,32 @@ ConnectionMgr::ConnectionMgr( P2PEngine& engine )
 }
 
 //============================================================================
+void ConnectionMgr::setHostOnlineId( EHostType hostType, VxGUID& hostOnlineId )
+{
+    m_ConnectionMutex.lock();
+    m_HostIdList[hostType] = hostOnlineId;
+    m_ConnectionMutex.unlock();
+}
+
+//============================================================================
+bool ConnectionMgr::getHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId )
+{
+    bool result = false;
+    retHostOnlineId.clearVxGUID();
+
+    m_ConnectionMutex.lock();
+    auto iter = m_HostIdList.find( hostType );
+    if( iter != m_HostIdList.end() )
+    {
+        retHostOnlineId = iter->second;
+        result = true;
+    }
+
+    m_ConnectionMutex.unlock();
+    return result;
+}
+
+//============================================================================
 bool ConnectionMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo * bigListInfo )
 {
     bool result = true;
@@ -51,4 +77,51 @@ void ConnectionMgr::onSktDisconnected( VxSktBase* sktBase )
     m_ConnectionMutex.lock();
     m_AllList.onSktDisconnected( sktBase );
     m_ConnectionMutex.unlock();
+}
+
+//============================================================================
+void ConnectionMgr::callbackInternetStatusChanged( EInternetStatus internetStatus )
+{
+    bool internetBecameAvailable = m_InternetStatus == eInternetNoInternet &&
+        internetStatus != eInternetNoInternet;
+    m_ConnectionMutex.lock();
+    m_InternetStatus = internetStatus;
+    m_ConnectionMutex.unlock();
+    if( internetBecameAvailable )
+    {
+        onInternetAvailable();
+    }
+}
+
+//============================================================================
+void ConnectionMgr::callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus )
+{
+    bool networkBecameAvailable = ( m_NetAvailStatus == eNetAvailNoInternet ) && 
+        ( netAvalilStatus != eNetAvailNoInternet );
+    m_ConnectionMutex.lock();
+    m_NetAvailStatus = netAvalilStatus;
+    m_ConnectionMutex.unlock();
+    if( networkBecameAvailable )
+    {
+        onNoLimitNetworkAvailable();
+    }
+
+}
+
+//============================================================================
+void ConnectionMgr::onInternetAvailable( void )
+{
+
+}
+
+//============================================================================
+void ConnectionMgr::onNoLimitNetworkAvailable( void )
+{
+
+}
+
+//============================================================================
+void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
+{
+
 }

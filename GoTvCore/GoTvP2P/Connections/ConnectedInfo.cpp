@@ -73,3 +73,35 @@ bool ConnectedInfo::operator==( const ConnectedInfo& rhs )
 {
     return  m_PeerOnlineId == rhs.m_PeerOnlineId;
 }
+
+//============================================================================
+void ConnectedInfo::onSktConnected( VxSktBase * sktBase )
+{
+    bool exists = false;
+    for( auto skt : m_SktList )
+    {
+        if( skt == sktBase )
+        {
+            exists = true;
+            break;
+        }
+    }
+
+    if( !exists )
+    {
+        m_SktList.push_back( sktBase );
+    }
+}
+
+//============================================================================
+void ConnectedInfo::onSktDisconnected( VxSktBase * sktBase )
+{
+    for( auto iter = m_SktList.begin(); iter != m_SktList.end(); ++iter )
+    {
+        if( *iter == sktBase )
+        {
+            m_SktList.erase( iter );
+            break;
+        }
+    }
+}

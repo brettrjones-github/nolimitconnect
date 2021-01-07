@@ -20,6 +20,7 @@
 class NetAvailStatusCallbackInterface
 {
 public:
+    virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) = 0;
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) = 0;
 };
 
@@ -32,8 +33,8 @@ public:
     NetStatusAccum( P2PEngine& toGui );
     virtual ~NetStatusAccum() = default;
 
-    void                        addCallback( NetAvailStatusCallbackInterface* callbackInt );
-    void                        removeCallback( NetAvailStatusCallbackInterface* callbackInt );
+    void                        addNetStatusCallback( NetAvailStatusCallbackInterface* callbackInt );
+    void                        removeNetStatusCallback( NetAvailStatusCallbackInterface* callbackInt );
 
     void                        resetNetStatus( void );
 

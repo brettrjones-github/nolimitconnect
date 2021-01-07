@@ -116,7 +116,6 @@ void AppletNetworkSettings::connectSignals( void )
 //============================================================================
 void AppletNetworkSettings::slotNetworkSettingsSelectionChanged( int idx )
 {
-	//applyNetworkSettings( ( ENetworkSettingsType )( idx + 1 ) );
 }
 
 //============================================================================

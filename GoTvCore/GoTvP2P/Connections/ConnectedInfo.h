@@ -33,10 +33,8 @@ class ConnectedInfo
 public:
     ConnectedInfo() = delete;
     ConnectedInfo( P2PEngine& engine, BigListInfo* bigListInfo );
-    virtual ~ConnectedInfo() = default;
-
     ConnectedInfo( const ConnectedInfo& rhs );
-    ConnectedInfo( P2PEngine& engine, EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl );
+    virtual ~ConnectedInfo() = default;
 
     ConnectedInfo&				operator=( const ConnectedInfo& rhs );
     bool                        operator==( const ConnectedInfo& rhs );
@@ -53,7 +51,7 @@ protected:
     VxMutex                     m_CallbackListMutex;
     std::vector<EPluginType>    m_RmtPlugins;
     std::vector<EPluginType>    m_LclPlugins;
-    
+    std::vector<VxSktBase *>    m_SktList;
 };
 
 

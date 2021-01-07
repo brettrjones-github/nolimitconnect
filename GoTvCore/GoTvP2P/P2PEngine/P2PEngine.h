@@ -608,9 +608,9 @@ protected:
 
 	RcScan						m_RcScan;
 
-	EAppState					m_eAppState;
+    EAppState					m_eAppState{ eAppStateInvalid };
 
-	EFriendViewType				m_eFriendView;
+    EFriendViewType				m_eFriendView{ eFriendViewEverybody };
 	unsigned int				m_iCurPreferredRelayConnectIdx{ 0 };
 	VxGUID						m_NextFileInstance;
     int64_t						m_LastTimeAnnounceFromContactListCalled{ 0 };

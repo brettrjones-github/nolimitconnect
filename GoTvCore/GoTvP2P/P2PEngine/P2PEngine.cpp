@@ -102,12 +102,10 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_QueryHostIdTest( *new QueryHostIdTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RunUrlAction( *new RunUrlAction( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RcScan( *this, m_ConnectionList )
-    , m_eAppState( eAppStateInvalid )
-    , m_eFriendView( eFriendViewEverybody )
-    , m_iCurPreferredRelayConnectIdx( 0 )
     , m_OtherHostSrvMgr( *this )
 {
-    m_NetStatusAccum.addCallback( &m_OtherHostSrvMgr );
+    m_NetStatusAccum.addNetStatusCallback( &m_OtherHostSrvMgr );
+    m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
 }
 
 //============================================================================

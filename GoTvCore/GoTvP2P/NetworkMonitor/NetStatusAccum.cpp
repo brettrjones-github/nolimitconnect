@@ -95,6 +95,14 @@ void NetStatusAccum::onNetStatusChange( void )
         m_InternetStatus = internetStatus;
         m_AccumMutex.unlock();
 
+        m_AccumCallbackMutex.lock();
+        for( auto callback : m_CallbackList )
+        {
+            callback->callbackInternetStatusChanged( internetStatus );
+        }
+
+        m_AccumCallbackMutex.unlock();
+
         LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Internet Status %s", DescribeInternetStatus( internetStatus ) );
     }
 
@@ -161,7 +169,7 @@ void NetStatusAccum::onNetStatusChange( void )
 }
 
 //============================================================================
-void NetStatusAccum::addCallback( NetAvailStatusCallbackInterface* callbackInt )
+void NetStatusAccum::addNetStatusCallback( NetAvailStatusCallbackInterface* callbackInt )
 {
     if( callbackInt )
     {
@@ -188,7 +196,7 @@ void NetStatusAccum::addCallback( NetAvailStatusCallbackInterface* callbackInt )
 }
 
 //============================================================================
-void NetStatusAccum::removeCallback( NetAvailStatusCallbackInterface* callbackInt )
+void NetStatusAccum::removeNetStatusCallback( NetAvailStatusCallbackInterface* callbackInt )
 {
     if( callbackInt )
     {
