@@ -24,10 +24,9 @@
 #define OS_LINUX_FLAG				0x04	
 #define OS_WINDOWS_FLAG				0x08	
 
-
-#define MAX_ONLINE_NAME_LEN		    24	//maximum length of online name including 0 terminator
-#define MAX_ONLINE_DESC_LEN		    28	//maximum length of online description including 0 terminator
-#define MAX_NET_HOST_URL_LEN		64	//maximum length of online description including 0 terminator
+#define MAX_ONLINE_NAME_LEN		    28	//maximum length of online name including 0 terminator
+#define MAX_ONLINE_DESC_LEN		    32	//maximum length of online description including 0 terminator
+#define MAX_NET_HOST_URL_LEN		64	//maximum length of a ptop url including 0 terminator
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -91,12 +90,16 @@ public:
 	VxConnectId					m_RelayConnectId;
 };
 
-//    84 bytes VxConnectBaseInfo
-// +  24 bytes Online Name
-// +  28 bytes Online Mood Message
-// = 136 bytes
-// + 16  reserved bytes
-// = 152 bytes
+// +  28 bytes Online Name
+// +  32 bytes Online Mood Message
+// +   8 bytes m_TimeLastContactMs
+// +   8 bytes reserved
+// +  80 bytes guids (5x16)
+// = 156 bytes
+// + 256  urls (4x64)
+// = 412 bytes
+// +  84 bytes VxConnectBaseInfo
+// = 496 bytes
 
 class VxConnectIdent : public VxConnectBaseInfo
 {
@@ -140,7 +143,7 @@ public:
 	//=== vars ===//
 private:
 	char						m_OnlineName[ MAX_ONLINE_NAME_LEN ];	// users online name
-	char						m_OnlineDesc[ MAX_ONLINE_DESC_LEN ]; // users online description 28 bytes
+	char						m_OnlineDesc[ MAX_ONLINE_DESC_LEN ];    // users online description
 	int64_t	    				m_TimeLastContactMs = 0;
 	uint32_t					m_IdentRes1 = 0;
 	uint32_t					m_IdentRes2 = 0;
@@ -156,11 +159,12 @@ private:
     char						m_RandomConnectUrl[ MAX_NET_HOST_URL_LEN ];
 };
 
-//   152 bytes VxConnectBaseInfo
-// +   8 bytes m_s64TimeTcpLastContactMs
+//     8 bytes m_s64TimeTcpLastContactMs
 // +   8 bytes last connect attempt
 // +   8 bytes reserved to fill to 16 byte boundary
-// = 176 bytes total
+// =  24 bytes total
+// + 496 bytes VxConnectBaseInfo
+// = 520 bytes total
 class VxConnectInfo : public VxConnectIdent
 {
 public:

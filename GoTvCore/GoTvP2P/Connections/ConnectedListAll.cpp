@@ -59,7 +59,7 @@ ConnectedInfo* ConnectedListAll::getOrAddConnectedInfo( BigListInfo * bigListInf
 }
 
 //============================================================================
-ConnectedInfo* ConnectedListAll::getConnectedInfo( VxGUID& onlineId )
+ConnectedInfo* ConnectedListAll::getConnectedInfo( const VxGUID& onlineId )
 {
     ConnectedInfo* connectedInfo = nullptr;
     auto iter = m_ConnectList.find( onlineId );

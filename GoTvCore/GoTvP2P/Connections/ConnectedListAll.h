@@ -26,7 +26,7 @@ public:
     virtual ~ConnectedListAll() override = default;
 
     ConnectedInfo*              getOrAddConnectedInfo( BigListInfo* bigListInfo );
-    ConnectedInfo*              getConnectedInfo( VxGUID& onlineId );
+    ConnectedInfo*              getConnectedInfo( const VxGUID& onlineId );
 
     void                        onSktDisconnected( VxSktBase* sktBase );
 

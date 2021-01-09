@@ -15,22 +15,22 @@
 
 #include <vector>
 
-enum EHostConnectType
+enum EConnectRequestType
 {
-    eHostConnectNone,
+    eConnectRequestNone,
 
-    eHostConnectRelayFind,
-    eHostConnectRelayJoin,
+    eConnectRequesttRelayFind,
+    eConnectRequestRelayJoin,
 
-    eHostConnectGroupAnnounce,
-    eHostConnectGroupFind,
-    eHostConnectGroupJoin,
+    eConnectRequestGroupAnnounce,
+    eConnectRequestGroupFind,
+    eConnectRequesttGroupJoin,
  
-    eHostConnectChatRoomAnnounce,
-    eHostConnectChatRoomFind,
-    eHostConnectChatRoomJoin,
+    eConnectRequestChatRoomAnnounce,
+    eConnectRequestChatRoomFind,
+    eConnectRequestChatRoomJoin,
 
-    eMaxHostConnectNone
+    eMaxConnectRequestType
 };
 
 class VxSktBase;
@@ -39,22 +39,14 @@ class IConnectRequestCallback
 {
 public:
     /// return true if have use for this connection
-    virtual bool                onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
-    virtual void                onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
-};
-
-class IHostConnectCallback : public IConnectRequestCallback
-{
-public:
-    /// return true if have use for this connection
-    virtual bool                onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
-    virtual void                onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBased ) = 0;
+    virtual bool                onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) = 0;
+    virtual void                onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBased ) = 0;
 
     // these should only be called by Host Connect Mgr
-    bool                        hasHostConnectType( EHostConnectType hostConnectType );
-    void                        addHostConnectType( EHostConnectType hostConnectType );
-    void                        removeConnectType( EHostConnectType hostConnectType );
+    bool                        hasHostConnectType( EConnectRequestType hostConnectType );
+    void                        addHostConnectType( EConnectRequestType hostConnectType );
+    void                        removeConnectType( EConnectRequestType hostConnectType );
 
     /// a single callback instance may want multiple host services connection
-    std::vector<EHostConnectType> m_ConnectTypeList;
+    std::vector<EConnectRequestType> m_ConnectTypeList;
 };

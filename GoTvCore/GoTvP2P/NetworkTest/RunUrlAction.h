@@ -18,23 +18,31 @@
 
 #include <CoreLib/VxUrl.h>
 
+class UrlActionInfo;
+
 class UrlActionResultInterface
 {
 public:
+    virtual void                callbackActionStatus( UrlActionInfo& actionInfo, ERunTestStatus eStatus, std::string statusMsg ) = 0;
+    virtual void                callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError = eNetCmdErrorUnknown ) = 0;
 
+    virtual void                callbackPingSuccess( UrlActionInfo& actionInfo, std::string myIp ) = 0;
+    virtual void                callbackConnectionTestSuccess( UrlActionInfo& actionInfo, bool canDirectConnect, std::string myIp ) = 0;
+    virtual void                callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID onlineId ) = 0;
 };
 
 class UrlActionInfo
 {
 public:
     UrlActionInfo();
-    UrlActionInfo(P2PEngine& engine, ENetCmdType testType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface);
+    UrlActionInfo(P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface);
     UrlActionInfo( const UrlActionInfo& rhs );
     UrlActionInfo&              operator = ( const UrlActionInfo& rhs );
     bool                        operator == ( const UrlActionInfo& rhs ) const;
     bool                        operator != ( const UrlActionInfo& rhs ) const;
 
     P2PEngine&					getEngine( void )               { return m_Engine; }
+    EHostType                   getHostType( void )             { return m_HostType; }
     VxUrl&                      getMyVxUrl( void )              { return m_MyUrl; }
     std::string&                getMyUrl( void )                { return m_MyUrl.getUrl(); }
     ENetCmdType                 getNetCmdType( void )           { return m_TestType; }
@@ -47,6 +55,7 @@ public:
 protected:
     //=== vars ===//
     P2PEngine&					m_Engine;
+    EHostType                   m_HostType{ eHostTypeUnknown };
     UrlActionResultInterface*   m_CallbackInterface{ nullptr };
     ENetCmdType                 m_TestType{ eNetCmdUnknown };
     VxUrl                       m_MyUrl;
@@ -64,7 +73,11 @@ public:
 
     P2PEngine&					getEngine() { return m_Engine; }
 
-	void				        runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl = nullptr, UrlActionResultInterface* cbInterface = nullptr );
+	void				        runUrlAction( ENetCmdType netCmdType, 
+                                              const char * ptopUrl, 
+                                              const char * myUrl = nullptr, 
+                                              EHostType hostType = eHostTypeUnknown, 
+                                              UrlActionResultInterface* cbInterface = nullptr );
 	void						runTestShutdown( void );
 
 	void						threadFuncRunUrlAction( void );
@@ -73,11 +86,11 @@ private:
     void                        startUrlActionThread( void );
     bool                        isThreadRunningActions( void );
     ERunTestStatus			    doUrlAction( UrlActionInfo& urlInfo );
-    ERunTestStatus			    doRunTestFailed( std::string& urlActionName );
-    ERunTestStatus			    doRunTestSuccess( std::string& urlActionName );
+    ERunTestStatus			    doRunTestFailed( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus );
+    ERunTestStatus			    doRunTestSuccess( UrlActionInfo& urlAction, std::string& urlActionName );
 
-    void						sendRunTestStatus( std::string& urlActionName, ERunTestStatus eStatus, const char * msg, ... );
-    void						sendTestLog( std::string& urlActionName, const char * msg, ... );
+    void						sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, const char * msg, ... );
+    void						sendTestLog( UrlActionInfo& urlAction, std::string& urlActionName, const char * msg, ... );
 
     //=== vars ===//
     P2PEngine&					m_Engine;

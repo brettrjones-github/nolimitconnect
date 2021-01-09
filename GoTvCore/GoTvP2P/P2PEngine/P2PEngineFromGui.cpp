@@ -1311,7 +1311,7 @@ void P2PEngine::fromGuiRunQueryHostIdTest( void )
 void P2PEngine::fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
-    m_RunUrlAction.runUrlAction( testType, ptopUrl, myUrl );
+    getRunUrlAction().runUrlAction( testType, ptopUrl, myUrl );
 }
 
 //============================================================================

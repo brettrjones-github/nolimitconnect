@@ -70,14 +70,14 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Just Enter A Online User Name and Log in!</string>
+      <string>Just Enter A Online User Name and Log In!</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="m_UserNameLabel">
      <property name="text">
-      <string>User Name: ( 4 to 23 characters )</string>
+      <string>User Name: (4 to 27 characters)</string>
      </property>
     </widget>
    </item>
@@ -89,12 +89,15 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="maxLength">
+      <number>27</number>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="m_MoodMessageLabel">
      <property name="text">
-      <string>Mood Message: ( Up to 27 characters )</string>
+      <string>Mood Message: (Up to 31 characters)</string>
      </property>
     </widget>
    </item>
@@ -108,6 +111,9 @@
      </property>
      <property name="text">
       <string>Let's Communicate!</string>
+     </property>
+     <property name="maxLength">
+      <number>31</number>
      </property>
     </widget>
    </item>

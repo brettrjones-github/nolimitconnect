@@ -365,9 +365,10 @@ enum ENetCmdType
 
 enum ENetCmdError
 {
-    eNetCmdErrorNone                    = 0,
-    eNetCmdErrorServiceDisabled         = 1,
-    eNetCmdErrorPermissionLevel         = 2,
+    eNetCmdErrorUnknown                 = 0,
+    eNetCmdErrorNone                    = 1,
+    eNetCmdErrorServiceDisabled         = 2,
+    eNetCmdErrorPermissionLevel         = 3,  
 
     eMaxNetCmdError
 };
@@ -460,14 +461,15 @@ enum ERunTestStatus
     eRunTestStatusTestSuccess = 2,
     eRunTestStatusTestFail = 3,
     eRunTestStatusTestBadParam = 4,
-    eRunTestStatusConnectFail = 5,
-    eRunTestStatusConnectionDropped = 6,
-    eRunTestStatusInvalidResponse = 7,
-    eRunTestStatusMyPortIsOpen = 8,
-    eRunTestStatusMyPortIsClosed = 9,
-    eRunTestStatusTestComplete = 10,
-    eRunTestStatusTestCompleteFail = 11,
-    eRunTestStatusTestCompleteSuccess = 12,
+    eRunTestStatusAlreadyQueued = 5,
+    eRunTestStatusConnectFail = 6,
+    eRunTestStatusConnectionDropped = 7,
+    eRunTestStatusInvalidResponse = 8,
+    eRunTestStatusMyPortIsOpen = 9,
+    eRunTestStatusMyPortIsClosed = 10,
+    eRunTestStatusTestComplete = 11,
+    eRunTestStatusTestCompleteFail = 12,
+    eRunTestStatusTestCompleteSuccess = 13,
 
     eMaxRunTestStatusType
 };

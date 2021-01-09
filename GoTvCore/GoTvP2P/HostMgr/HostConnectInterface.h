@@ -35,15 +35,7 @@ enum EHostConnectType
 
 class VxSktBase;
 
-class IConnectRequestCallback
-{
-public:
-    /// return true if have use for this connection
-    virtual bool                onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
-    virtual void                onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
-};
-
-class IHostConnectCallback : public IConnectRequestCallback
+class IHostConnectCallback
 {
 public:
     /// return true if have use for this connection

@@ -78,16 +78,6 @@ uint16_t		VxConnectBaseInfo::getMyOnlinePort( void )						{ return m_DirectConne
 //! get ip based on if we can connect ipv6 or ipv4 if not
 InetAddress	VxConnectBaseInfo::getOnlineIpAddress( void )
 {
-	//if( VxCanConnectUsingIPv6() && m_DirectConnectId.m_IPv6OnlineIp.isValid() )
-	//{
-	//	return m_DirectConnectId.m_IPv6OnlineIp;
-	//}
-	//else
-	//{
-		//InetAddress oAddr;
-		//oAddr.setIp( m_DirectConnectId.m_IPv4OnlineIp.getIPv4Address() );
-		//return oAddr;
-//	}
 	return m_DirectConnectId.m_IPv4OnlineIp.toInetAddress();
 }
 
@@ -95,14 +85,7 @@ InetAddress	VxConnectBaseInfo::getOnlineIpAddress( void )
 //! get ip based on if we can connect ipv6 or ipv4 if not
 InetAddress	VxConnectBaseInfo::getRelayIpAddress( void )
 {
-	//if( VxCanConnectUsingIPv6() && m_RelayConnectId.m_IPv6OnlineIp.isValid() )
-	//{
-	//	return m_RelayConnectId.m_IPv6OnlineIp;
-	//}
-	//else
-	//{
-		return m_RelayConnectId.m_IPv4OnlineIp.toInetAddress();
-//	}
+    return m_RelayConnectId.m_IPv4OnlineIp.toInetAddress();
 }
 
 //============================================================================
@@ -182,6 +165,20 @@ void VxConnectIdent::setOnlineName( const char * pUserName )
 }
 
 //============================================================================
+//! set users online description
+void VxConnectIdent::setOnlineDescription( const char * pUserDesc )	
+{ 
+    if( !pUserDesc )
+    {
+        m_OnlineName[0] = 0;
+    }
+    else
+    {
+        SafeStrCopy( m_OnlineDesc, pUserDesc, sizeof( m_OnlineDesc ) );
+    }
+}
+
+//============================================================================
 void VxConnectIdent::setNetHostUrl( const char * netHostUrl )
 {
     if( !netHostUrl )
@@ -231,13 +228,6 @@ void VxConnectIdent::setRandomConnectUrl( const char * randomConnecttUrl )
     {
         SafeStrCopy( m_RandomConnectUrl, randomConnecttUrl, sizeof( m_RandomConnectUrl ) );
     }
-}
-
-//============================================================================
-//! set users online description
-void VxConnectIdent::setOnlineDescription( const char * pUserDesc )	
-{ 
-	SafeStrCopy( m_OnlineDesc, pUserDesc, sizeof( m_OnlineDesc )); 
 }
 
 //============================================================================

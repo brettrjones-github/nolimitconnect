@@ -81,8 +81,8 @@ public:
 
     bool                        connectSimpleSkt( VxSktConnectSimple& sktSimple );
 
-    bool                        addConnectionRequest( EHostConnectType connectType, IConnectRequestCallback* connectReq );
-    bool                        removeConnectionRequest( EHostConnectType connectType, IConnectRequestCallback* connectReq );
+    bool                        addConnectionRequest( EHostConnectType connectType, IHostConnectCallback* connectReq );
+    bool                        removeConnectionRequest( EHostConnectType connectType, IHostConnectCallback* connectReq );
 
     /// return false if no current requests for given connection
     bool                        isSktInUse( VxSktBase* sktBase );
@@ -93,7 +93,7 @@ public:
     void                        updateConnectAttemptTime( void );
     bool                        isConnectAttemptTimeExpired( void );
 
-    void                        sendConnectionToCallback( EHostConnectType connectType, IConnectRequestCallback* connectReq );
+    void                        sendConnectionToCallback( EHostConnectType connectType, IHostConnectCallback* connectReq );
 
     virtual void                onSktConnectedWithPktAnn( VxSktBase* sktBase );
     virtual void                onSktDisconnected( VxSktBase* sktBase );
@@ -113,7 +113,7 @@ protected:
     uint16_t                    m_HostPort{ 0 };
     VxGUID                      m_OnlineId;
     VxMutex                     m_CallbackListMutex;
-    std::map<EHostConnectType, std::vector<IConnectRequestCallback*>> m_CallbackList;
+    std::map<EHostConnectType, std::vector<IHostConnectCallback*>> m_CallbackList;
     uint64_t                    m_ActionTimeMs{ 0 };
     uint64_t                    m_ConnectAttemptTimeMs{ 0 };
 

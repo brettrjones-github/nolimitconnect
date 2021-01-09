@@ -19,6 +19,8 @@
 #include "AppletBase.h"
 #include "AppDefs.h"
 
+#include <NetLib/NetHostSetting.h>
+
 #include <QTimer>
 
 class AppletNetworkSettings : public AppletBase

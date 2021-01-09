@@ -341,17 +341,17 @@ std::string HostInfoBase::describeHostInfo( void )
 }
 
 //============================================================================
-bool HostInfoBase::addConnectionRequest( EHostConnectType connectType, IConnectRequestCallback* connectReq )
+bool HostInfoBase::addConnectionRequest( EHostConnectType connectType, IHostConnectCallback* connectReq )
 {
     bool callbackAdded = false;
     m_CallbackListMutex.lock();
 
-    std::map<EHostConnectType, std::vector<IConnectRequestCallback*>>::iterator mapIter = m_CallbackList.find( connectType );
+    std::map<EHostConnectType, std::vector<IHostConnectCallback*>>::iterator mapIter = m_CallbackList.find( connectType );
 
     if( mapIter != m_CallbackList.end() )
     {
         // type already exists
-        std::vector<IConnectRequestCallback*>& callbackList = mapIter->second;
+        std::vector<IHostConnectCallback*>& callbackList = mapIter->second;
         for( auto & callback : callbackList )
         {
             bool callbackExists = false;
@@ -372,7 +372,7 @@ bool HostInfoBase::addConnectionRequest( EHostConnectType connectType, IConnectR
     else
     {
         // and new request type and list
-        std::vector<IConnectRequestCallback*> reqList;
+        std::vector<IHostConnectCallback*> reqList;
         reqList.push_back( connectReq );
         m_CallbackList.emplace( connectType, reqList );
         callbackAdded = true;
@@ -389,7 +389,7 @@ bool HostInfoBase::addConnectionRequest( EHostConnectType connectType, IConnectR
 }
 
 //============================================================================
-void HostInfoBase::sendConnectionToCallback( EHostConnectType connectType, IConnectRequestCallback* connectReq )
+void HostInfoBase::sendConnectionToCallback( EHostConnectType connectType, IHostConnectCallback* connectReq )
 {
     if( connectReq && !m_SktList.empty() )
     {
@@ -404,7 +404,7 @@ void HostInfoBase::sendConnectionToCallback( EHostConnectType connectType, IConn
 }
 
 //============================================================================
-bool HostInfoBase::removeConnectionRequest( EHostConnectType connectType, IConnectRequestCallback* connectReq )
+bool HostInfoBase::removeConnectionRequest( EHostConnectType connectType, IHostConnectCallback* connectReq )
 {
     bool callbackRemoved = false;
 
@@ -415,7 +415,7 @@ bool HostInfoBase::removeConnectionRequest( EHostConnectType connectType, IConne
         auto mapIter = m_CallbackList.find( connectType );
         if( mapIter != m_CallbackList.end() )
         {
-            std::vector<IConnectRequestCallback*>& callbackList = mapIter->second;
+            std::vector<IHostConnectCallback*>& callbackList = mapIter->second;
             for( auto iter = callbackList.begin(); iter != callbackList.end(); ++iter )
             {
                 if( *iter == connectReq )
@@ -664,8 +664,8 @@ void HostInfoBase::onSktDisconnected( VxSktBase* sktBase )
             {
                 if( !iter->second.empty() )
                 {
-                    std::vector<IConnectRequestCallback*>& callbackList = iter->second;
-                    for( IConnectRequestCallback* callback : callbackList )
+                    std::vector<IHostConnectCallback*>& callbackList = iter->second;
+                    for( IHostConnectCallback* callback : callbackList )
                     {
                         callback->onContactDisconnected( iter->first, sktBase );
                     }

@@ -17,6 +17,8 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <CoreLib/VxUrl.h>
+
 //============================================================================
 ConnectionMgr::ConnectionMgr( P2PEngine& engine )
     : m_Engine( engine )
@@ -121,7 +123,86 @@ void ConnectionMgr::onNoLimitNetworkAvailable( void )
 }
 
 //============================================================================
+void ConnectionMgr::reseHosttUrl( EHostType hostType )
+{
+    m_HostIdList[hostType] = VxGUID::nullVxGUID();
+    m_HostUrlList[hostType] = "";
+    m_HostRequiresOnlineId[hostType] = "";
+    m_HostQueryIdFailed[hostType] = eRunTestStatusUnknown;
+}
+
+//============================================================================
 void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
+{
+    m_ConnectionMutex.lock();
+    m_HostUrlList[hostType] = hostUrl;
+    m_ConnectionMutex.unlock();
+
+    VxUrl parsedUrl( hostUrl.c_str() );
+    if( parsedUrl.validateUrl( false ) )
+    {
+        bool needOnlineId = true;
+        if( parsedUrl.hasValidOnlineId() )
+        {
+            VxGUID onlineId;
+            onlineId.fromOnlineIdString( parsedUrl.getOnlineId().c_str() );
+            if( onlineId.isVxGUIDValid() )
+            {
+                needOnlineId = false;
+
+                m_ConnectionMutex.lock();
+                m_HostIdList[hostType] = onlineId;    
+                m_ConnectionMutex.unlock();
+            }       
+        }
+
+        if( needOnlineId )
+        {
+            m_ConnectionMutex.lock();
+            m_HostRequiresOnlineId[hostType] = hostUrl;
+            m_ConnectionMutex.unlock();
+
+            std::string myUrl = m_Engine.getMyUrl();
+            m_Engine.getRunUrlAction().runUrlAction( eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), hostType, this );
+        }
+    }
+}
+
+//============================================================================
+void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID onlineId )
+{
+    m_ConnectionMutex.lock();
+    m_HostIdList[actionInfo.getHostType()] = onlineId;
+    m_HostRequiresOnlineId[actionInfo.getHostType()] = "";
+    std::string hostUrl = m_HostUrlList[actionInfo.getHostType()];
+    m_ConnectionMutex.unlock();
+
+    LogMsg( LOG_VERBOSE, "ConnectionMgr: Success query host %s for online id is %s",  hostUrl.c_str(),
+        onlineId.toOnlineIdString().c_str());
+}
+
+//============================================================================
+void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError )
+{
+    m_ConnectionMutex.lock();
+    m_HostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+    std::string hostUrl = m_HostUrlList[actionInfo.getHostType()];
+    m_ConnectionMutex.unlock();
+
+    m_HostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+    LogMsg( LOG_ERROR, "ConnectionMgr: query host %s for id failed %s %s",  hostUrl.c_str(),
+        DescribeRunTestStatus( eStatus ), DescribeNetCmdError( netCmdError ));
+}
+
+//============================================================================
+bool ConnectionMgr::requestHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback )
+{
+
+    return false;
+}
+
+//============================================================================
+void ConnectionMgr::doneWithHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback )
 {
 
 }

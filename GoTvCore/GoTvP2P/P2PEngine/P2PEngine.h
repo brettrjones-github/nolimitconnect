@@ -98,6 +98,7 @@ public:
     PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
     PluginSettingMgr&			getPluginSettingMgr( void )						{ return m_PluginSettingMgr; }
     RcScan&						getRcScan( void )								{ return m_RcScan; }
+    RunUrlAction&               getRunUrlAction( void )                         { return m_RunUrlAction; }
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
     bool                        getHasHostService( EHostServiceType hostService );

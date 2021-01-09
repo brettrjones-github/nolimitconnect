@@ -96,15 +96,18 @@ public:
 };
 
 //  size
-//    192 bytes VxNetIdentBase
 // +   24 bytes PluginPermission
-// +    8 bytes VxGroupService
 // +    2 bytes m_u16AppVersion;	
 // +    2 bytes m_u16PingTimeMs;	
 // +    2 bytes m_PrimaryLanguage;	
-// +    2 bytes m_SecondLanguage;
-// +    8 bytes m_LastSessionTime;						
-// =  240 bytes total
+// +    1 bytes m_ContentType;
+// +    1 bytes m_u8Gender;
+// +    8 bytes m_LastSessionTime;	
+// +    8 bytes m_ResIdent
+// =  48 bytes
+// +  528 bytes VxNetIdentBase
+// +  8 bytes VxGroupService    
+// =  584 bytes total
 
 /// network indentiy of contact
 class VxNetIdent : public VxNetIdentBase, public PluginPermission, public VxGroupService
@@ -149,6 +152,7 @@ private:
     uint8_t					    m_ContentType = 0;      // preferred content type
     uint8_t						m_u8Gender = 0;
     int64_t					    m_LastSessionTimeGmtMs = 0;
+    int64_t					    m_ResIdent = 0;
 };
 
 #pragma pack()

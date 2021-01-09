@@ -74,6 +74,7 @@ namespace
 
     const char * NetCmdErrorEnumStrings[] =
     {
+        "Cmd Error: Unknown ",
         "Cmd Error: None ",
         "Cmd Error: Service Disabled ",
         "Cmd Error: Permission Level ",
@@ -131,6 +132,7 @@ namespace
         "Run Test: Test Success",
         "Run Test: Test Fail",
         "Run Test: Bad Parameter",
+        "Run Test: Already Queued",
         "Run Test: Connect Fail",
         "Run Test: Connection Dropped",
         "Run Test: Invalid Response",

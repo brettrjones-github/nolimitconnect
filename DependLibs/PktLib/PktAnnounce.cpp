@@ -153,7 +153,9 @@ static bool firstTime = true;
         firstTime = false;
         size_t hdr = sizeof( VxPktHdr );
         size_t connectBaseInfo = sizeof( VxConnectBaseInfo );
+        size_t connectIdent = sizeof( VxConnectIdent );
         size_t connectInfo = sizeof( VxConnectInfo );
+
         size_t identBase = sizeof( VxNetIdentBase );
         size_t netIdent = sizeof( VxNetIdent );
         size_t action = sizeof( PktAnnActionData );
