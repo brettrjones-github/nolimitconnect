@@ -100,6 +100,33 @@ enum EGenderType
     eMaxGenderType
 };
 
+enum EHostJoinStatus
+{
+    eHostJoinUnknown = 0,
+    eHostJoinConnecting = 1,
+    eHostJoinConnectFailed = 2,
+    eHostJoinSendingJoinRequest = 3,
+    eHostJoinSuccess = 4,
+    eHostJoinFailPermission = 5,
+    eHostJoinFailConnectDropped = 6,
+
+    eMaxHostJoinStatus
+};
+
+enum EHostServiceType
+{
+    eHostServiceInvalid = 0,
+    eHostServiceNetworkHost,        // Tier 1 network host service
+    eHostServiceGroupListing,       // Tier 2 group listing service
+    eHostServiceGroup,              // Tier 3 host a group service ( group users are considered Tier 4 )
+    eHostServiceRelay,              // relay service normally provided by group host ( Tier 3 )
+    eHostServiceRandomConnect,      // random connect service normally provided by network host ( Tier 1 )
+    eHostServiceRandomConnectRelay, // random connection relay service normally provided by network host ( Tier 1 )
+    eHostServiceConnectTest,        // test connection for relay requirement and IP Address  ( normally provided by all Tiers )
+
+    eMaxHostServiceType
+};
+
 //! \public Host connection test state
 enum EHostTestStatus
 {
@@ -117,20 +144,6 @@ enum EHostTestStatus
     eHostTestStatusNetServiceTestComplete = 9,
 
     eMaxHostTestStatusType
-};
-
-enum EHostServiceType
-{
-    eHostServiceInvalid = 0,
-    eHostServiceNetworkHost,        // Tier 1 network host service
-    eHostServiceGroupListing,       // Tier 2 group listing service
-    eHostServiceGroup,              // Tier 3 host a group service ( group users are considered Tier 4 )
-    eHostServiceRelay,              // relay service normally provided by group host ( Tier 3 )
-    eHostServiceRandomConnect,      // random connect service normally provided by network host ( Tier 1 )
-    eHostServiceRandomConnectRelay, // random connection relay service normally provided by network host ( Tier 1 )
-    eHostServiceConnectTest,        // test connection for relay requirement and IP Address  ( normally provided by all Tiers )
-
-    eMaxHostServiceType
 };
 
 enum EHostType
@@ -476,7 +489,10 @@ enum ERunTestStatus
 
 const char * DescribeAppModule( EAppModule appModule );
 
-//! Internet Status as text
+//! Host type as text
+const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus );
+
+//! Host type as text
 const char * DescribeHostType( EHostType hostType );
 
 //! Internet Status as text

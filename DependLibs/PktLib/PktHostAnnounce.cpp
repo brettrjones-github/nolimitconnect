@@ -30,10 +30,9 @@
 PktHostAnnounce::PktHostAnnounce()
     : PktAnnounce()
 { 
-	setPktLength( sizeof( PKT_TYPE_HOST_ANNOUNCE ) );
+	setPktLength( sizeof( PktHostAnnounce ) );
 	setPktType(  PKT_TYPE_HOST_ANNOUNCE );
     setPktVersionNum( PKT_HOST_ANNOUNCE_VERSION );
-
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 

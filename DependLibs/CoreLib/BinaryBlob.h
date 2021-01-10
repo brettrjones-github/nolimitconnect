@@ -18,7 +18,7 @@
 #include <vector>
 
 // defines for blobs
-#define BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN 4096
+#define BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN (4096 + 8)
 #define BLOB_PLUGIN_SETTING_STORAGE_VERSION 1
 
 class VxGUID;

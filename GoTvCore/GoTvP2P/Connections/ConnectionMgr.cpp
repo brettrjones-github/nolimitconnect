@@ -31,7 +31,7 @@ ConnectionMgr::ConnectionMgr( P2PEngine& engine )
 void ConnectionMgr::setHostOnlineId( EHostType hostType, VxGUID& hostOnlineId )
 {
     m_ConnectionMutex.lock();
-    m_HostIdList[hostType] = hostOnlineId;
+    m_DefaultHostIdList[hostType] = hostOnlineId;
     m_ConnectionMutex.unlock();
 }
 
@@ -42,8 +42,8 @@ bool ConnectionMgr::getHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId
     retHostOnlineId.clearVxGUID();
 
     m_ConnectionMutex.lock();
-    auto iter = m_HostIdList.find( hostType );
-    if( iter != m_HostIdList.end() )
+    auto iter = m_DefaultHostIdList.find( hostType );
+    if( iter != m_DefaultHostIdList.end() )
     {
         retHostOnlineId = iter->second;
         result = true;
@@ -125,17 +125,17 @@ void ConnectionMgr::onNoLimitNetworkAvailable( void )
 //============================================================================
 void ConnectionMgr::reseHosttUrl( EHostType hostType )
 {
-    m_HostIdList[hostType] = VxGUID::nullVxGUID();
-    m_HostUrlList[hostType] = "";
-    m_HostRequiresOnlineId[hostType] = "";
-    m_HostQueryIdFailed[hostType] = eRunTestStatusUnknown;
+    m_DefaultHostIdList[hostType] = VxGUID::nullVxGUID();
+    m_DefaultHostUrlList[hostType] = "";
+    m_DefaultHostRequiresOnlineId[hostType] = "";
+    m_DefaultHostQueryIdFailed[hostType] = eRunTestStatusUnknown;
 }
 
 //============================================================================
 void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
 {
     m_ConnectionMutex.lock();
-    m_HostUrlList[hostType] = hostUrl;
+    m_DefaultHostUrlList[hostType] = hostUrl;
     m_ConnectionMutex.unlock();
 
     VxUrl parsedUrl( hostUrl.c_str() );
@@ -151,7 +151,7 @@ void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
                 needOnlineId = false;
 
                 m_ConnectionMutex.lock();
-                m_HostIdList[hostType] = onlineId;    
+                m_DefaultHostIdList[hostType] = onlineId;    
                 m_ConnectionMutex.unlock();
             }       
         }
@@ -159,7 +159,7 @@ void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
         if( needOnlineId )
         {
             m_ConnectionMutex.lock();
-            m_HostRequiresOnlineId[hostType] = hostUrl;
+            m_DefaultHostRequiresOnlineId[hostType] = hostUrl;
             m_ConnectionMutex.unlock();
 
             std::string myUrl = m_Engine.getMyUrl();
@@ -172,9 +172,9 @@ void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
 void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID onlineId )
 {
     m_ConnectionMutex.lock();
-    m_HostIdList[actionInfo.getHostType()] = onlineId;
-    m_HostRequiresOnlineId[actionInfo.getHostType()] = "";
-    std::string hostUrl = m_HostUrlList[actionInfo.getHostType()];
+    m_DefaultHostIdList[actionInfo.getHostType()] = onlineId;
+    m_DefaultHostRequiresOnlineId[actionInfo.getHostType()] = "";
+    std::string hostUrl = m_DefaultHostUrlList[actionInfo.getHostType()];
     m_ConnectionMutex.unlock();
 
     LogMsg( LOG_VERBOSE, "ConnectionMgr: Success query host %s for online id is %s",  hostUrl.c_str(),
@@ -185,11 +185,11 @@ void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID on
 void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError )
 {
     m_ConnectionMutex.lock();
-    m_HostQueryIdFailed[actionInfo.getHostType()] = eStatus;
-    std::string hostUrl = m_HostUrlList[actionInfo.getHostType()];
+    m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+    std::string hostUrl = m_DefaultHostUrlList[actionInfo.getHostType()];
     m_ConnectionMutex.unlock();
 
-    m_HostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+    m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = eStatus;
     LogMsg( LOG_ERROR, "ConnectionMgr: query host %s for id failed %s %s",  hostUrl.c_str(),
         DescribeRunTestStatus( eStatus ), DescribeNetCmdError( netCmdError ));
 }
@@ -205,4 +205,10 @@ bool ConnectionMgr::requestHostConnection( EHostType hostType, EPluginType plugi
 void ConnectionMgr::doneWithHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback )
 {
 
+}
+
+//============================================================================
+void ConnectionMgr::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
+{
+    
 }

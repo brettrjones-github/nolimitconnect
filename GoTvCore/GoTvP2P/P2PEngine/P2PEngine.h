@@ -23,7 +23,6 @@
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
 #include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
-#include <GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
@@ -45,7 +44,6 @@ class VxPeerMgr;
 class PluginMgr;
 class AssetMgr;
 class HostListMgr;
-class HostTest;
 class IsPortOpenTest;
 class RcConnectInfo;
 class ConnectRequest;
@@ -60,7 +58,6 @@ class PluginServiceFileShare;
 class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
-class QueryHostIdTest;
 class RunUrlAction;
 
 class P2PEngine :	public IFromGui,
@@ -102,7 +99,6 @@ public:
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
     bool                        getHasHostService( EHostServiceType hostService );
-    OtherHostSrvMgr&            getOtherHostSrvMgr()                            { return m_OtherHostSrvMgr; }
 
     /// if skt exists in connection list then lock access to connection list
     bool						lockSkt( VxSktBase* sktBase );
@@ -207,9 +203,8 @@ public:
 
     virtual void				fromGuiNetworkSettingsChanged( void ) override;
 
-    virtual void				fromGuiVerifyNetHostSettings( void ) override;
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
-    virtual void				fromGuiRunQueryHostIdTest( void ) override;
+    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr ) override;
     virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
@@ -595,7 +590,6 @@ protected:
 	NetServicesMgr&				m_NetServicesMgr;
 	NetConnector&				m_NetConnector;
 	NetworkStateMachine&		m_NetworkStateMachine;
-	HostTest&					m_HostTest;
 
 	PluginMgr&					m_PluginMgr;
     PluginSettingMgr			m_PluginSettingMgr;
@@ -604,7 +598,6 @@ protected:
 	PluginServiceFileShare *	m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
-    QueryHostIdTest&			m_QueryHostIdTest;
     RunUrlAction&			    m_RunUrlAction;
 
 	RcScan						m_RcScan;
@@ -623,7 +616,6 @@ protected:
 	PktImAliveReq				m_PktImAliveReq;
 
     VxThread                    m_TimerThread;
-    OtherHostSrvMgr             m_OtherHostSrvMgr;
 
 private:
 	P2PEngine() = delete; // don't allow default constructor

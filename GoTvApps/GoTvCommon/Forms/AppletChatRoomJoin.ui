@@ -13,22 +13,7 @@
   <property name="windowTitle">
    <string>Join Chat Room</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QGroupBox" name="ItemsGroupBox">
      <property name="minimumSize">
@@ -40,22 +25,7 @@
      <property name="title">
       <string/>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>5</number>
-      </property>
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="m_StatusLabel">
         <property name="text">
@@ -64,9 +34,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="m_JoinDefaultButton">
+        <property name="text">
+         <string>Join Default Chat Room</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="SearchLabel">
         <property name="text">
-         <string>Find And Join A Group</string>
+         <string>Find And Join A Chat Room</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -132,17 +109,27 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="FriendListWidget" name="friendListWidget" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="m_CopyResultToClipboardButton">
+     <property name="text">
+      <string>Copy Results To Clipboard</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="m_InfoPlainTextEdit"/>
+   </item>
+   <item>
+    <widget class="FriendListWidget" name="m_FriendListWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
     </widget>
    </item>
   </layout>

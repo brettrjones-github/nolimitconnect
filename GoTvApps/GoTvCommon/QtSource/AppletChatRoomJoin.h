@@ -23,6 +23,25 @@ public:
     AppletChatRoomJoin( AppCommon& app, QWidget * parent );
 	virtual ~AppletChatRoomJoin();
 
+    void                        infoMsg( const char * infoMsg, ... );
+
+    void                        toGuiInfoMsg( char * logMsg );
+
+signals:
+    void                        signalInfoMsg( const QString& logMsg );
+
+protected slots:
+    void                        slotInfoMsg( const QString& text );
+    void                        slotHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, QString msg );
+
+    void                        slotJoinDefaultChatRoom( void );
+    void                        slotCopyResultToClipboardClicked( void );
+
+protected:
+    void						setupApplet( void );
+    QPlainTextEdit *            getInfoEdit( void )     { return ui.m_InfoPlainTextEdit; }
+
+    //=== vars ===//
     Ui::ChatRoomJoinUi          ui;
 };
 

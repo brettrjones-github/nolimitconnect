@@ -568,9 +568,6 @@
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostTest.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
@@ -627,15 +624,6 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp">
       <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.cpp">
       <Filter>GoTvP2P\NetworkTest</Filter>
@@ -1360,9 +1348,6 @@
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostTest.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
@@ -1416,15 +1401,6 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h">
       <Filter>GoTvP2P\PluginSettings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.h">
       <Filter>GoTvP2P\NetworkTest</Filter>

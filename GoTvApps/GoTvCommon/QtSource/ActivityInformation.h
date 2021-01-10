@@ -54,7 +54,7 @@ public:
     void						setPluginType( EPluginType pluginType ) { m_InfoType = eInfoTypePlugin; m_PluginType = pluginType; updateInformation(); }
     void						setInformationType( EInfoType infoType ) { m_InfoType = infoType; updateInformation(); }
 
-    EPluginType                 getPluginType() { return m_PluginType; }
+    EPluginType                 getPluginType() override { return m_PluginType; }
 
 protected slots:
 	void						slotCopyToClipboardButtonClicked( void );

@@ -170,12 +170,12 @@ private:
 
 	//=== vars ===//
 	/// @brief render thread
-    RenderGlLogic*				m_RenderGlLogic = nullptr;
+    RenderGlLogic*				m_RenderGlLogic{ nullptr };
 
-    RenderGlWidget *            m_GlWidget = nullptr;
+    RenderGlWidget *            m_GlWidget{ nullptr };
 
     /// @brief OpenGL render context.
-    QOpenGLContext*             m_RenderThreadContext = nullptr;
+    QOpenGLContext*             m_RenderThreadContext{ nullptr };
 
     /// @brief Mutex making sure not grabbing while drawing etc.
     std::mutex                  m_mutex;
@@ -184,7 +184,7 @@ private:
     std::atomic_bool            m_initialized;
 
     /// @brief False before the overridden initializeGL() was first called.
-    bool                        m_initializedGL = false;
+    bool                        m_initializedGL{ false };
 
 	/// @brief false before thread called initRenderSystem
 	bool                        m_RenderSystemInitialized = false;
@@ -193,18 +193,18 @@ private:
     std::atomic_bool            m_updatePending;
 
     /// @brief The OpenGL 2.1 / ES 2.0 function object that can be used the issue OpenGL commands.
-    QOpenGLFunctions*           m_Glf = nullptr;
-    QOpenGLExtraFunctions*      m_GlfExtra = nullptr;
+    QOpenGLFunctions*           m_Glf{ nullptr };
+    QOpenGLExtraFunctions*      m_GlfExtra{ nullptr };
 
     /// @brief Background FBO for off-screen rendering when the window is not exposed.
-    QOpenGLFramebufferObject*   m_fbo = nullptr;
+    QOpenGLFramebufferObject*   m_fbo{ nullptr };
 
     /// @brief Background FBO resolving a multi sampling frame buffer in m_fbo to a frame buffer
     /// that can be grabbed to a QImage.
-    QOpenGLFramebufferObject*   m_resolvedFbo = nullptr;
+    QOpenGLFramebufferObject*   m_resolvedFbo{ nullptr };
 
     /// @brief Shader used for blitting m_fbo to screen if glBlitFrameBuffer is not available.
-    QOpenGLShaderProgram*       m_blitShader = nullptr;
+    QOpenGLShaderProgram*       m_blitShader{ nullptr };
 
     /// @brief current size of surface to render on
     QSize                       m_SurfaceSize;

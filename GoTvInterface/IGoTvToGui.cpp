@@ -114,9 +114,9 @@ void IGoTv::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
 }
 
 //============================================================================
-void IGoTv::toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
+void IGoTv::toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg )
 {
-    getAppCommon().toGuiHostStatus( eHostStatus, msg );
+    getAppCommon().toGuiHostJoinStatus( hostType, joinStatus, msg );
 }
 
 //============================================================================

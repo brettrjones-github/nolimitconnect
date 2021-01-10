@@ -23,10 +23,8 @@
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
-#include <GoTvCore/GoTvP2P/HostMgr/HostTest.h>
 #include <GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.h>
 #include <GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.h>
-#include <GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 #include <MediaToolsLib/MediaTools.h>
 
@@ -1287,30 +1285,23 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 #endif // TARGET_OS_ANDROID
 
 //============================================================================
-void P2PEngine::fromGuiVerifyNetHostSettings( void )
+void P2PEngine::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiVerifyNetHostSettings" );
-	m_HostTest.fromGuiVerifyNetHostSettings();
+	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
+    getConnectionMgr().fromGuiJoinHost( hostType, ptopUrl );
 }
 
 //============================================================================
 void P2PEngine::fromGuiRunIsPortOpenTest( uint16_t port )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
-	m_IsPortOpenTest.fromGuiRunIsPortOpenTest( port );
-}
-
-//============================================================================
-void P2PEngine::fromGuiRunQueryHostIdTest( void )
-{
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
-    m_QueryHostIdTest.fromGuiRunQueryHostIdTest();
+    m_IsPortOpenTest.fromGuiRunIsPortOpenTest( port );
 }
 
 //============================================================================
 void P2PEngine::fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
-    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );
+    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunUrlAction" );
     getRunUrlAction().runUrlAction( testType, ptopUrl, myUrl );
 }
 

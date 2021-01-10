@@ -400,7 +400,7 @@ public:
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
-    virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
@@ -585,7 +585,7 @@ signals:
 	void						signalAppErr( EAppErr eAppErr, QString errMsg );
 	void						signalStatusMsg( QString strMsg );
 	void						signalUserMsg( QString strMsg );
-	void						signalHostStatus( EHostTestStatus eHostStatus, QString strMsg );
+	void						signalHostJoinStatus( EHostType, EHostJoinStatus, QString strMsg );
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
     void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );
 	void						signalRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, QString strMsg );

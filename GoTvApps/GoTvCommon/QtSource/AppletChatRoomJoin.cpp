@@ -19,6 +19,12 @@
 
 #include <CoreLib/VxDebug.h>
 
+namespace
+{
+    const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
+    const int MAX_INFO_MSG_SIZE = 2048;
+}
+
 //============================================================================
 AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_CHAT_ROOM_JOIN, app, parent )
@@ -27,14 +33,88 @@ AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget * parent )
     setAppletType( eAppletChatRoomJoin );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+    setupApplet();
 
 	m_MyApp.activityStateChange( this, true );
 }
-
 
 //============================================================================
 AppletChatRoomJoin::~AppletChatRoomJoin()
 {
     m_MyApp.activityStateChange( this, false );
+}
+
+
+//============================================================================
+void AppletChatRoomJoin::setupApplet( void )
+{
+    getInfoEdit()->setMaximumBlockCount( MAX_LOG_EDIT_BLOCK_CNT );
+    getInfoEdit()->setReadOnly( true );
+
+    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+    connect( ui.m_JoinDefaultButton, SIGNAL( clicked() ), this, SLOT( slotJoinDefaultChatRoom() ) );
+    connect( ui.m_CopyResultToClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyResultToClipboardClicked() ) );
+
+    connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+    connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+
+    connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, EHostJoinStatus, QString )),
+        this, SLOT(slotHostJoinStatus( EHostType, EHostJoinStatus, QString )) );
+
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotJoinDefaultChatRoom( void )
+{
+    m_Engine.fromGuiJoinHost( eHostTypeChatRoom );
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotCopyResultToClipboardClicked( void )
+{
+    QClipboard * clipboard = QApplication::clipboard();
+    clipboard->setText( getInfoEdit()->toPlainText() );
+}
+
+//============================================================================
+void AppletChatRoomJoin::toGuiInfoMsg( char * infoMsg )
+{
+    QString infoStr( infoMsg );
+    infoStr.remove( QRegExp( "[\\n\\r]" ) );
+    emit signalInfoMsg( infoStr );
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotInfoMsg( const QString& text )
+{
+    getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
+    getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom                                                                                                  //m_LogFile.write( text ); // Logs to file
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, QString text )
+{
+    getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
+    getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
+                                                                                                   //m_LogFile.write( text ); // Logs to file
+    /*
+    if( testStatus != eRunTestStatusLogMsg )
+    {
+        QString testStat = QObject::tr( "Test Status: " );
+        testStat += DescribeRunTestStatus( testStatus );
+        getInfoEdit()->appendPlainText( testStat );
+    }*/
+}
+
+//============================================================================
+void AppletChatRoomJoin::infoMsg( const char* errMsg, ... )
+{
+    char as8Buf[ MAX_INFO_MSG_SIZE ];
+    va_list argList;
+    va_start( argList, errMsg );
+    vsnprintf( as8Buf, sizeof( as8Buf ), errMsg, argList );
+    as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
+    va_end( argList );
+
+    toGuiInfoMsg( as8Buf );
 }

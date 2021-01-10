@@ -270,14 +270,14 @@ public:
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
+    virtual void				toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
+    virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
-    virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
-    virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
-    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
-    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
+    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
 
     virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) override;
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
@@ -469,9 +469,8 @@ public:
     virtual void				fromGuiNetworkLost( void );
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
 
-    virtual void				fromGuiVerifyNetHostSettings( void );
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
-    virtual void				fromGuiRunQueryHostIdTest( void );
+    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr );
     virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType );
 
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );

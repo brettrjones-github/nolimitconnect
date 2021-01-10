@@ -53,7 +53,7 @@ void P2PEngine::onConnectionLost( VxSktBase * sktBase )
 	m_ConnectionList.onConnectionLost( sktBase );
     if( sktBase->getIsPeerPktAnnSet() )
     {
-        getOtherHostSrvMgr().onSktDisconnected( sktBase );
+        getConnectionMgr().onSktDisconnected( sktBase );
     }
 
 	m_PluginMgr.onConnectionLost( sktBase );

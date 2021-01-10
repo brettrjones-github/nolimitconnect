@@ -43,6 +43,8 @@ public:
     
     void                        applyHostUrl( EHostType hostType, std::string& hostUrl );
 
+    void                        fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr );
+
     bool                        requestHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback );
     void                        doneWithHostConnection( EHostType hostType, EPluginType pluginType,  EConnectRequestType connectType, IConnectRequestCallback* callback );
 
@@ -74,10 +76,10 @@ protected:
     PktAnnounce                 m_MyPktAnn;
     EInternetStatus             m_InternetStatus{ eInternetNoInternet };
     ENetAvailStatus             m_NetAvailStatus{ eNetAvailNoInternet };
-    std::map<EHostType, VxGUID> m_HostIdList;
-    std::map<EHostType, std::string> m_HostUrlList;
-    std::map<EHostType, std::string> m_HostRequiresOnlineId;
-    std::map<EHostType, ERunTestStatus> m_HostQueryIdFailed;
+    std::map<EHostType, VxGUID>         m_DefaultHostIdList;
+    std::map<EHostType, std::string>    m_DefaultHostUrlList;
+    std::map<EHostType, std::string>    m_DefaultHostRequiresOnlineId;
+    std::map<EHostType, ERunTestStatus> m_DefaultHostQueryIdFailed;
 
     std::map<EHostType, VxGUIDList> m_HostedConnections;
     std::map<EHostType, VxGUIDList> m_PluginToHostConnections;

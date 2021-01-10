@@ -558,10 +558,6 @@
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostTest.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.cpp" />
@@ -834,10 +830,6 @@
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostTest.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.h" />

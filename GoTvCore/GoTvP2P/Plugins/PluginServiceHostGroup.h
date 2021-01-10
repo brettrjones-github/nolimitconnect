@@ -15,13 +15,13 @@
 
 #include "PluginBaseHostService.h"
 
-#include <GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.h>
+#include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
 #include <CoreLib/VxMutex.h>
 
 #include <PktLib/PktHostAnnounce.h>
 
-class PluginServiceHostGroup : public PluginBaseHostService, public IHostConnectCallback
+class PluginServiceHostGroup : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
 
@@ -36,8 +36,8 @@ public:
 protected:
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting ) override;
     /// return true if have use for this connection
-    virtual bool                onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) override;
-    virtual void                onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) override;
+    virtual bool                onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) override;
+    virtual void                onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) override;
 
     void                        buildHostGroupAnnounce( PluginSetting& pluginSetting );
     void                        sendHostGroupAnnounce( void );

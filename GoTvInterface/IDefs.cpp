@@ -3,22 +3,17 @@
 namespace
 {
 
-    const char * HostStatusEnumStrings[] = 
+    const char * HostJoinStatusEnumStrings[] = 
     { 
-        "Host Status Unknown",
-        "Host LogMsg",
+        "Host Join Status Unknown ",
+        "Host Join Connecting ",
+        "Host Connect Fail ",
+        "Sending Join Request ",
+        "Host Join Success ",
+        "Host Join Fail Permission ",  
+        "Host Join Fail Connect Dropped ",
 
-        "Host OK",
-        "Host Connect Fail",
-        "Host Connection Dropped",
-        "Host TestComplete",
-
-        "NetService OK",
-        "NetService Connect Fail",
-        "NetService Connection Dropped",
-        "NetService Test Complete",
-
-        "Max Host Status",
+        "Max Host Join Status ",
     };
 
     const char * HostTypeEnumStrings[] =
@@ -183,14 +178,14 @@ const char * DescribeAppModule( EAppModule appModule )
     }
 }
 
-const char * DescribeHostStatus( EHostTestStatus eHostStatus )
+const char * DescribeHostJoinStatus( EHostJoinStatus eHostStatus )
 {
-    if( eHostStatus < 0 || eMaxHostTestStatusType <= eHostStatus )
+    if( eHostStatus < 0 || eMaxHostJoinStatus <= eHostStatus )
     {
         return ENUM_BAD_PARM;
     }
 
-    return HostStatusEnumStrings[ eHostStatus ];
+    return HostJoinStatusEnumStrings[ eHostStatus ];
 }
 
 const char * DescribeHostType( EHostType eHostType )

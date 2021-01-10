@@ -114,10 +114,10 @@ private:
 
 //! is what we put in normal pkt announce so we can do actions etc
 //! size 
-//	 200 bytes PktAnnBase
+//	 596 bytes PktAnnBase
 // +  40 bytes VxPktHdr
 // +  32 bytes PktAnnActionData
-// = 272 bytes total
+// = 672 bytes total
 class PktAnnounce :  public VxPktHdr, public PktAnnBase,  public PktAnnActionData
 {
 public:

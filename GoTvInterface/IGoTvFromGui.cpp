@@ -320,12 +320,6 @@ void IGoTv::fromGuiNetworkSettingsChanged( void )
 }
 
 //============================================================================
-void IGoTv::fromGuiVerifyNetHostSettings( void )
-{
-    getPtoP().fromGuiVerifyNetHostSettings();
-}
-
-//============================================================================
 void IGoTv::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
 {
     getPtoP().fromGuiNetworkAvailable( lclIp, isCellularNetwork );
@@ -350,9 +344,9 @@ void IGoTv::fromGuiRunIsPortOpenTest( uint16_t port )
 }
 
 //============================================================================
-void IGoTv::fromGuiRunQueryHostIdTest( void )
+void IGoTv::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
-    getPtoP().fromGuiRunQueryHostIdTest();
+    getPtoP().fromGuiJoinHost( hostType, ptopUrl );
 }
 
 //============================================================================

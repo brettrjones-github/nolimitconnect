@@ -19,7 +19,7 @@ enum EConnectRequestType
 {
     eConnectRequestNone,
 
-    eConnectRequesttRelayFind,
+    eConnectRequestRelayFind,
     eConnectRequestRelayJoin,
 
     eConnectRequestGroupAnnounce,

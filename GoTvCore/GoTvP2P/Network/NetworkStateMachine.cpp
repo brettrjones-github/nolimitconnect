@@ -665,7 +665,6 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 		m_LastResolvedHostWebsite = networkHostUrl;
 		engineParams.setLastHostWebsiteUrl( m_LastResolvedHostWebsite );
 		engineParams.setLastHostWebsiteResolvedIp( m_HostIp );
-        m_Engine.getOtherHostSrvMgr().addHostInfo( eOtherHostNetworkHost, m_HostIp, m_u16HostPort, m_LastResolvedHostWebsite.c_str() );
 	}
 	else
 	{
@@ -689,7 +688,6 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 		m_LastResolvedConnectTest = connectTestHostUrl;
 		engineParams.setLastConnectTestUrl( m_LastResolvedConnectTest );
 		engineParams.setLastConnectTestResolvedIp( m_NetServiceIp );
-        m_Engine.getOtherHostSrvMgr().addHostInfo( eOtherHostConnectTest, m_NetServiceIp, m_u16NetServicePort, m_LastResolvedConnectTest.c_str() );
 	}
 	else
 	{

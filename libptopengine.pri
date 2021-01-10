@@ -139,11 +139,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.h \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.h \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.h \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/MyHostSrvMgr.h \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.h \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.h \
@@ -190,7 +185,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.h \
-	$$PWD/GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.h \
@@ -359,10 +353,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.cpp \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.cpp \
-    $$PWD/GoTvCore/GoTvP2P/HostMgr/MyHostSrvMgr.cpp \
-	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.cpp \
-	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.cpp \
@@ -403,7 +393,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.cpp \
-	$$PWD/GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.cpp \

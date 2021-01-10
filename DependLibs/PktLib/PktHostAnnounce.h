@@ -21,12 +21,23 @@
 #pragma pack(push) 
 #pragma pack(1)
 
+//      1 bytes m_HostType
+//      1 bytes m_SettingRes1
+// +    4 bytes m_SettingLength
+// + 4120 bytes m_SettingData    (4096 + 8 + 16)
+// = 4128
+// +  672 bytes PktAnnounce
+// = 4800 bytes total
+
 class PktHostAnnounce :  public PktAnnounce
 {
 public:
     PktHostAnnounce();
 
 	bool						isValidPktHostAnn( void );
+
+    void						setHostType( EHostType hostType ) { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void ) { return (EHostType)m_HostType; }
 
     void                        calcPktLen( void );
     void                        setPktAnn( PktAnnounce& pktAnn );
@@ -37,7 +48,8 @@ public:
     PktHostAnnounce *			makeHostAnnReverseCopy( void );
 	void						DebugHostDump( void );
 
-    uint32_t					m_SettingRes1 = 0;
+    uint8_t					    m_HostType = 0;
+    uint8_t					    m_SettingRes1 = 0;
     uint32_t					m_SettingLength = 0;
     uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };

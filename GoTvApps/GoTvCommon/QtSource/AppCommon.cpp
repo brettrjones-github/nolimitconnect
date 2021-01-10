@@ -1023,14 +1023,14 @@ void AppCommon::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * ms
 }
 
 //============================================================================
-void AppCommon::toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
+void AppCommon::toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * anchorStatus = DescribeHostStatus( eHostStatus );
+	const char * anchorStatus = DescribeHostJoinStatus( joinStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
@@ -1044,7 +1044,7 @@ void AppCommon::toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
 	emit signalLog( 0, formatedMsg.c_str() );
 	emit signalStatusMsg( formatedMsg.c_str() );
 
-	emit signalHostStatus( eHostStatus, formatedMsg.c_str() );
+	emit signalHostJoinStatus( hostType, joinStatus, formatedMsg.c_str() );
 }
 
 //============================================================================
@@ -1096,7 +1096,6 @@ void AppCommon::toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTes
 
     emit signalRunTestStatus( testName,  eRunTestStatus, formatedMsg.c_str() );
 }
-
 
 //============================================================================
 void AppCommon::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
@@ -1865,7 +1864,7 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<EAssetType>( "EAssetType" );
     qRegisterMetaType<EFileFilterType>( "EFileFilterType" );
     qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
-    qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
+    qRegisterMetaType<EHostJoinStatus>( "EHostJoinStatus" );
     qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
     qRegisterMetaType<ERunTestStatus>( "ERunTestStatus" );
     qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );

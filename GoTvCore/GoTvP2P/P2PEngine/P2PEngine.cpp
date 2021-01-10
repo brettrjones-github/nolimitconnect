@@ -34,10 +34,7 @@
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 
 #include <GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.h>
-#include <GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h>
 #include <GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.h>
-
-#include <GoTvCore/GoTvP2P/HostMgr/HostTest.h>
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/HostListMgr/HostListMgr.h>
@@ -92,19 +89,15 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_NetServicesMgr( *new NetServicesMgr( *this ) )
     , m_NetConnector( *new NetConnector( *this ) )
     , m_NetworkStateMachine( *new NetworkStateMachine( *this, m_NetworkMgr ) )
-    , m_HostTest( *( new HostTest( *this, m_EngineSettings, m_NetServicesMgr ) ) )
     , m_PluginMgr( *new PluginMgr( *this ) )
     , m_PluginSettingMgr( *this )
     , m_PluginServiceRelay( new PluginServiceRelay( *this, m_PluginMgr, &m_PktAnn ) )
     , m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn ) )
     , m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn ) )
     , m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
-    , m_QueryHostIdTest( *new QueryHostIdTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RunUrlAction( *new RunUrlAction( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RcScan( *this, m_ConnectionList )
-    , m_OtherHostSrvMgr( *this )
 {
-    m_NetStatusAccum.addNetStatusCallback( &m_OtherHostSrvMgr );
     m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
 }
 

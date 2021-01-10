@@ -483,12 +483,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetServiceTest.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1302,9 +1296,6 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityMessageBox.ui">
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetServiceTest.ui">
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkHostTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStartupTest.ui">
     </QtUic>
@@ -1780,9 +1771,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetServiceTest.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
@@ -1887,9 +1875,6 @@
     </QtMoc>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
@@ -2477,7 +2462,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityFileSearch.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityIsPortOpenTest.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityMessageBox.h" />
-    <ClInclude Include="GeneratedFiles\ui_ActivityNetServiceTest.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityNetworkStartupTest.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityNetworkTest.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityPermissions.h" />

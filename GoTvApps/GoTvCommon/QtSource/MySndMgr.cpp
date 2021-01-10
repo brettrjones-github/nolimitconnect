@@ -27,11 +27,6 @@
 
 #undef USE_ECHO_CANCEL
 
-namespace
-{
-	const int					MYP2PWEB_SAMPLE_RATE = 8000;
-}
-
 //============================================================================
 MySndMgr& GetSndMgrInstance( void )
 {

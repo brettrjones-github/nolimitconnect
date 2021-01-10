@@ -125,23 +125,30 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 { 
 	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
 	setPluginPermission( ePluginTypeAdmin, eFriendStateAdmin );	
-    setPluginPermission( ePluginTypeAvatarImage, eFriendStateAnonymous );
+
+    setPluginPermission( ePluginTypeMessenger, eFriendStateAnonymous );
+
+    setPluginPermission( ePluginTypeAboutMePage, eFriendStateGuest );
+    setPluginPermission( ePluginTypeAvatarImage, eFriendStateGuest );
+    setPluginPermission( ePluginTypeStoryboard, eFriendStateGuest );
+    setPluginPermission( ePluginTypeTruthOrDare, eFriendStateGuest );
+    setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
+    setPluginPermission( ePluginTypeVoicePhone, eFriendStateGuest );
+    setPluginPermission( ePluginTypeChatRoomClient, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
+
+    setPluginPermission( ePluginTypeCamServer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeFileServer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
+
     setPluginPermission( ePluginTypeServiceConnectTest, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeCamServer, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeFileServer, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
     setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
     setPluginPermission( ePluginTypeHostGroupListing, eFriendStateIgnore );
     setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
+
     setPluginPermission( ePluginTypeRandomConnect, eFriendStateIgnore );
     setPluginPermission( ePluginTypeRandomConnectRelay, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeRelay, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeStoryboard, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeTruthOrDare, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeVideoPhone, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeVoicePhone, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeChatRoomClient, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
+    setPluginPermission( ePluginTypeRelay, eFriendStateIgnore );
 } 
 
 //============================================================================

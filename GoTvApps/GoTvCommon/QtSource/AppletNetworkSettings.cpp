@@ -176,61 +176,6 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
         fillNetHostSettingFromEngine( engineHostSetting );
         populateDlgFromNetHostSetting( engineHostSetting );        
     }
-
-    /*
-    switch( iDetectProxySetting )
-    {
-    case FirewallSettings::eFirewallTestAssumeNoFirewall:
-        ui.AssumeNoProxyRadioButton->setChecked( true );
-        break;
-
-    case FirewallSettings::eFirewallTestAssumeFirewalled:
-        ui.AssumeProxyRadioButton->setChecked( true );
-        break;
-
-    case FirewallSettings::eFirewallTestUrlConnectionTest:
-    default:
-        ui.AutoDetectProxyRadioButton->setChecked( true );
-        break;
-    }
-
-    ui.m_UseUpnpCheckBox->setChecked( m_Engine.getEngineSettings().getUseUpnpPortForward() );
-    ui.m_LclIpListComboBox->clear();
-    ui.m_LclIpListComboBox->addItem( DEFAULT_ADAPTER_IP_CHOICE );
-
-    std::string strPreferredIp = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
-    std::vector<InetAddress> lclIpAddresses;
-    VxGetLocalIps( lclIpAddresses );
-    std::vector<InetAddress>::iterator iter;
-    std::string ipAddr;
-    int preferredAddrIndex = 0;
-    int currIdx = 0;
-    for( iter = lclIpAddresses.begin(); iter != lclIpAddresses.end(); ++iter )
-    {
-        InetAddress& inetAddr = ( *iter );
-        if( inetAddr.isIPv4()
-            && ( false == inetAddr.isLoopBack() ) )
-        {
-            currIdx++;
-            ipAddr = inetAddr.toStdString();
-            if( ipAddr == strPreferredIp )
-            {
-                preferredAddrIndex = currIdx;
-            }
-
-            ui.m_LclIpListComboBox->addItem( ipAddr.c_str() );
-        }
-    }
-
-    ui.m_LclIpListComboBox->setCurrentIndex( preferredAddrIndex );
-    std::string externIP;
-    m_Engine.getEngineSettings().getExternalIp( externIP );
-    ui.m_ExternIpEdit->setText( externIP.c_str() );
-    if( hasPrevSetttings )
-    {
-        populateDlgFromNetHostSetting( m_OriginalSettings );
-    }
-    */
 }
 
 //============================================================================

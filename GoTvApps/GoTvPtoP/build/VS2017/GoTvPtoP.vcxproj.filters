@@ -261,9 +261,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetServiceTest.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
@@ -930,9 +927,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -1017,9 +1011,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityMessageBox.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetServiceTest.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStartupTest.ui">
@@ -1326,9 +1317,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetServiceTest.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.h">
@@ -1909,9 +1897,6 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\CamLogic.h">
       <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -2550,9 +2535,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityMessageBox.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ActivityNetServiceTest.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityNetworkStartupTest.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -3158,9 +3140,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostGroup.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkHostTest.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostChatRoom.ui">

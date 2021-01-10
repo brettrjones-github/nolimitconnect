@@ -228,13 +228,9 @@ public:
 	virtual void				fromGuiNetworkLost( void ) = 0;
     /// state of a network layer
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) = 0;
-
-	/// Run anchor settings connection tests
-	virtual void				fromGuiVerifyNetHostSettings( void ) = 0;
 	/// Run test to see if TCP port is open and what the external IP Address is
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) = 0;
-    /// Run test to query host guid
-    virtual void				fromGuiRunQueryHostIdTest( void ) = 0;
+    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr ) = 0;
     /// Run test on the given url
     virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) = 0;
 

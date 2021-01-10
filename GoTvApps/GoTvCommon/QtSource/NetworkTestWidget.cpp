@@ -58,7 +58,7 @@ void NetworkTestWidget::slotRunFullTestButClick( void )
 	{
 		isBusyWithTest = true;
 		getLogWidget()->clear();
-		m_MyApp.getEngine().getFromGuiInterface().fromGuiVerifyNetHostSettings();
+		//m_MyApp.getEngine().getFromGuiInterface().fromGuiVerifyNetHostSettings();
 		isBusyWithTest = false;
 	}
 }

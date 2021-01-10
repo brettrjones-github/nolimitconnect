@@ -74,7 +74,7 @@ void PluginServiceHostChatRoom::sendHostChatRoomAnnounce( void )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        m_Engine.getOtherHostSrvMgr().requestHostConnection( eHostConnectChatRoomAnnounce, this, true );
+        m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectRequestChatRoomAnnounce, this );
     }
 }
 
@@ -86,11 +86,11 @@ void PluginServiceHostChatRoom::onPluginSettingChange( PluginSetting& pluginSett
 }
 
 //============================================================================
-bool PluginServiceHostChatRoom::onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase )
+bool PluginServiceHostChatRoom::onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        if( eHostConnectChatRoomAnnounce == hostConnectType )
+        if( eConnectRequestChatRoomAnnounce == hostConnectType )
         {
             m_AnnMutex.lock();
             if( m_Engine.lockSkt( sktBase ) )
@@ -108,15 +108,15 @@ bool PluginServiceHostChatRoom::onContactConnected( EHostConnectType hostConnect
         }
     }
 
-    m_Engine.getOtherHostSrvMgr().requestHostConnection( eHostConnectChatRoomAnnounce, this, false );
+    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectRequestChatRoomAnnounce, this );
 
     return false;
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBase )
+void PluginServiceHostChatRoom::onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
 {
-    if( eHostConnectChatRoomAnnounce == hostConnectType )
+    if( eConnectRequestChatRoomAnnounce == hostConnectType )
     {
         // no action needed. we connect and send our group listing then disconnect
     }
