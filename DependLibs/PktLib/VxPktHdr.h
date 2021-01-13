@@ -24,6 +24,12 @@
     #define MAX_PKT_LEN						16384
 #endif //MAX_PKT_LEN
 
+#define ROUTE_RELAY_MASK                0x0E
+#define ROUTE_FLAG_LOOPBACK             0x01
+#define ROUTE_FLAG_GROUP_RELAY          0x02
+#define ROUTE_FLAG_CHAT_RELAY           0x04
+#define ROUTE_FLAG_RAND_CONNECT_RELAY   0x08
+
 #pragma pack(push) 
 #pragma pack(1)
 
@@ -54,15 +60,25 @@ public:
 	void						setPktSeqNum( uint8_t seqNum )					{ m_u8SeqNum = seqNum; }
 	uint8_t						getPktSeqNum( void )							{ return m_u8SeqNum; }
 
+    void                        setIsLoopback( bool loopback )                  { if( loopback )m_RouteFlags |= ROUTE_FLAG_LOOPBACK; else m_RouteFlags &= ~ROUTE_FLAG_LOOPBACK; }
+    bool                        getIsLoopback( void )                           { return m_RouteFlags & ROUTE_FLAG_LOOPBACK ? true : false; }
+
+    bool                        getIsAnyRelay( void )                           { return m_RouteFlags & ROUTE_RELAY_MASK ? true : false; }
+    void                        setIsGroupRelay( bool groupRelay )              { if( groupRelay )m_RouteFlags |= ROUTE_FLAG_GROUP_RELAY; else m_RouteFlags &= ~ROUTE_FLAG_GROUP_RELAY; }
+    bool                        getIsGroupRelay( void )                         { return m_RouteFlags & ROUTE_FLAG_GROUP_RELAY ? true : false; }
+    void                        setIsChatRelay( bool chatRelay )                { if( chatRelay )m_RouteFlags |= ROUTE_FLAG_CHAT_RELAY; else m_RouteFlags &= ~ROUTE_FLAG_CHAT_RELAY; }
+    bool                        getIsChatRelay( void )                          { return m_RouteFlags & ROUTE_FLAG_CHAT_RELAY ? true : false; }
+    void                        setIsRandConnectRelay( bool randRelay )         { if( randRelay )m_RouteFlags |= ROUTE_FLAG_RAND_CONNECT_RELAY; else m_RouteFlags &= ~ROUTE_FLAG_RAND_CONNECT_RELAY; }
+    bool                        getIsRandConnectRelay( void )                   { return m_RouteFlags & ROUTE_FLAG_RAND_CONNECT_RELAY ? true : false; }
 private:
 	//=== vars ===//
-	uint16_t					m_u16PktLen;			// length of packet ( must be a multiple of 16 )
-	uint16_t					m_u16PktType;			// Type of packet ( defined by plugin 1-200..zero is reserved )
-	uint8_t						m_u8PluginNum;	
+    uint16_t					m_u16PktLen{ 0 };			// length of packet ( must be a multiple of 16 )
+	uint16_t					m_u16PktType{ 0 };			// Type of packet ( defined by plugin 1-200..zero is reserved )
+	uint8_t						m_u8PluginNum{ 0 };	
 
-	uint8_t						m_u8SeqNum;				// sequence number for lost packets and replay attack prevention
-	uint8_t						m_u8PktHdrVersion;		// pkt header version number
-	uint8_t						m_u8PktVersion;			// pkt specific version number
+	uint8_t						m_u8SeqNum;				    // sequence number for lost packets and replay attack prevention.. do not set. let be random data
+	uint8_t						m_RouteFlags{ 0 };		    // routing flags, relay, loopback etc
+	uint8_t						m_u8PktVersion{ 1 };		// pkt specific version number
 };
 
 //	  8 bytes VxPktHdrPrefix

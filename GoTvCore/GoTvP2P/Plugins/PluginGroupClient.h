@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseHostService.h"
+#include "PluginBaseHostClient.h"
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
@@ -21,12 +21,12 @@
 
 #include <PktLib/PktHostAnnounce.h>
 
-class PluginServiceHostGroup : public PluginBaseHostService, public IConnectRequestCallback
+class PluginGroupClient : public PluginBaseHostClient, public IConnectRequestCallback
 {
 public:
 
-    PluginServiceHostGroup( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceHostGroup() override = default;
+    PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginGroupClient() override = default;
 
     virtual void				pluginStartup( void ) override;
 
@@ -38,6 +38,10 @@ protected:
     /// return true if have use for this connection
     virtual bool                onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) override;
     virtual void                onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) override;
+
+    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};
+    virtual void				onConnectionLost( VxSktBase * sktBase ) override {};
+    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
 
     void                        buildHostGroupAnnounce( PluginSetting& pluginSetting );
     void                        sendHostGroupAnnounce( void );

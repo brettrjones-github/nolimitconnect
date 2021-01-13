@@ -155,7 +155,6 @@
 #define PKT_TYPE_THUMB_FILE_CHUNK_REPLY			    ( PKT_TYPE_THUMB_FILE_CHUNK_REQ	+ 1 )		// 105 ( 0x69 )
 
 #define PKT_TYPE_HOST_ANNOUNCE						( PKT_TYPE_THUMB_FILE_CHUNK_REPLY	+ 1 )		// 106 ( 0x6A )
-
 #define PKT_TYPE_HOST_LIST_SEND_REQ					( PKT_TYPE_HOST_ANNOUNCE	+ 1 )				// 107 ( 0x6B )
 #define PKT_TYPE_HOST_LIST_SEND_REPLY				( PKT_TYPE_HOST_LIST_SEND_REQ	+ 1 )			// 108 ( 0x6C )
 #define PKT_TYPE_HOST_LIST_CHUNK_REQ				( PKT_TYPE_HOST_LIST_SEND_REPLY	+ 1 )			// 109 ( 0x6D )
@@ -164,7 +163,15 @@
 #define PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY		( PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ + 1 )	// 112 ( 0x70 )
 #define PKT_TYPE_HOST_LIST_XFER_ERR					( PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY + 1 )	// 113 ( 0x71 )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_HOST_LIST_XFER_ERR + 1)
+#define PKT_TYPE_HOST_OFFER_REQ		                ( PKT_TYPE_HOST_LIST_XFER_ERR + 1 )	            // 114 ( 0x72 )
+#define PKT_TYPE_HOST_OFFER_REPLY					( PKT_TYPE_HOST_OFFER_REQ + 1 )	                // 115 ( 0x73 )
+#define PKT_TYPE_HOST_JOIN_REQ		                ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	            // 116 ( 0x74 )
+#define PKT_TYPE_HOST_JOIN_REPLY					( PKT_TYPE_HOST_JOIN_REQ + 1 )	                // 117 ( 0x75 )
+
+#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_JOIN_REPLY + 1 )	            // 118 ( 0x76 )
+#define PKT_TYPE_FRIEND_OFFER_REPLY					( PKT_TYPE_FRIEND_OFFER_REQ + 1 )	            // 119 ( 0x77 )
+
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_FRIEND_OFFER_REPLY + 1)
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

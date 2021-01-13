@@ -467,12 +467,12 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     {
     case eAppletClientAboutMe:              return ePluginTypeAboutMePage;
     case eAppletClientAvatarImage:          return ePluginTypeAvatarImage;
-    case eAppletClientConnectionTest:       return ePluginTypeClientConnectTest;
-    case eAppletClientHostGroup:            return ePluginTypeHostGroup;
-    case eAppletClientHostGroupListing:     return ePluginTypeHostGroupListing;
-    case eAppletClientHostNetwork:          return ePluginTypeHostNetwork;
-    case eAppletClientRandomConnect:        return ePluginTypeRandomConnect;
-    case eAppletClientRandomConnectRelay:   return ePluginTypeRandomConnectRelay;
+    case eAppletClientConnectionTest:       return ePluginTypeConnectTestClient;
+    case eAppletClientHostGroup:            return ePluginTypeGroupHost;
+    case eAppletClientHostGroupListing:     return ePluginTypeNetworkSearchList;
+    case eAppletClientHostNetwork:          return ePluginTypeNetworkHost;
+    case eAppletClientRandomConnect:        return ePluginTypeRandomConnectClient;
+    case eAppletClientRandomConnectRelay:   return ePluginTypeRandomConnectHost;
     case eAppletClientShareFiles:           return ePluginTypeFileServer;
     case eAppletClientShareWebCam:          return ePluginTypeCamServer;
     case eAppletClientStoryboard:           return ePluginTypeStoryboard;
@@ -480,11 +480,11 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
 
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePage;
     case eAppletServiceAvatarImage:          return ePluginTypeAvatarImage;
-    case eAppletServiceConnectionTest:       return ePluginTypeServiceConnectTest;
-    case eAppletServiceHostGroup:            return ePluginTypeHostGroup;
-    case eAppletServiceHostNetwork:          return ePluginTypeHostNetwork;
-    case eAppletServiceRandomConnect:        return ePluginTypeRandomConnect;
-    case eAppletServiceRandomConnectRelay:   return ePluginTypeRandomConnectRelay;
+    case eAppletServiceConnectionTest:       return ePluginTypeConnectTestHost;
+    case eAppletServiceHostGroup:            return ePluginTypeGroupHost;
+    case eAppletServiceHostNetwork:          return ePluginTypeNetworkHost;
+    case eAppletServiceRandomConnect:        return ePluginTypeRandomConnectClient;
+    case eAppletServiceRandomConnectRelay:   return ePluginTypeRandomConnectHost;
     case eAppletServiceShareFiles:           return ePluginTypeFileServer;
     case eAppletServiceShareWebCam:          return ePluginTypeCamServer;
     case eAppletServiceStoryboard:           return ePluginTypeStoryboard;
@@ -493,16 +493,16 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletSettingsAboutMe:            return ePluginTypeAboutMePage;
     case eAppletSettingsAvatarImage:        return ePluginTypeAvatarImage;
     case eAppletSettingsWebCamServer:       return ePluginTypeCamServer;
-    case eAppletSettingsConnectTest:        return ePluginTypeServiceConnectTest;
+    case eAppletSettingsConnectTest:        return ePluginTypeConnectTestHost;
     case eAppletSettingsShareFiles:         return ePluginTypeFileServer;
     case eAppletSettingsFileXfer:           return ePluginTypeFileXfer;
-    case eAppletSettingsHostChatRoom:       return ePluginTypeHostChatRoom;
-    case eAppletSettingsHostGroup:          return ePluginTypeHostGroup;
-    // case eAppletSettingsHostGroupListing:   return ePluginTypeHostGroupListing;
-    case eAppletSettingsHostNetwork:        return ePluginTypeHostNetwork;
+    case eAppletSettingsHostChatRoom:       return ePluginTypeChatRoomHost;
+    case eAppletSettingsHostGroup:          return ePluginTypeGroupHost;
+    // case eAppletSettingsHostGroupListing:   return ePluginTypeGroupHostListing;
+    case eAppletSettingsHostNetwork:        return ePluginTypeNetworkHost;
     case eAppletSettingsMessenger:          return ePluginTypeMessenger;
-    case eAppletSettingsRandomConnect:      return ePluginTypeRandomConnect;
-    case eAppletSettingsRandomConnectRelay: return ePluginTypeRandomConnectRelay;
+    case eAppletSettingsRandomConnect:      return ePluginTypeRandomConnectClient;
+    case eAppletSettingsRandomConnectRelay: return ePluginTypeRandomConnectHost;
     // case eAppletSettingsRelay:              return ePluginTypeRelay;
     case eAppletSettingsStoryboard:         return ePluginTypeStoryboard;
     case eAppletSettingsTruthOrDare:        return ePluginTypeTruthOrDare;
@@ -528,14 +528,14 @@ EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
     case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
-    case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
+    case ePluginTypeConnectTestHost:        return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletUnknown;
     case ePluginTypeFileXfer:               return eAppletUnknown;
-    case ePluginTypeHostGroup:              return eAppletUnknown;
-    case ePluginTypeHostGroupListing:       return eAppletUnknown;
-    case ePluginTypeHostNetwork:            return eAppletUnknown;
-    case ePluginTypeRandomConnect:          return eAppletUnknown;
-    case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
+    case ePluginTypeGroupHost:              return eAppletUnknown;
+    case ePluginTypeNetworkSearchList:      return eAppletUnknown;
+    case ePluginTypeNetworkHost:            return eAppletUnknown;
+    case ePluginTypeRandomConnectClient:    return eAppletUnknown;
+    case ePluginTypeRandomConnectHost:      return eAppletUnknown;
     case ePluginTypeRelay:                  return eAppletUnknown;
     default:
         break;
@@ -554,16 +554,16 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeAboutMePage:            return eAppletSettingsAboutMe;
     case ePluginTypeAvatarImage:            return eAppletSettingsAvatarImage;
     case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
-    case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
+    case ePluginTypeConnectTestHost:        return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletSettingsShareFiles;
     case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
-    case ePluginTypeHostChatRoom:           return eAppletSettingsHostChatRoom;
-    case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
-        // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
-    case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
+    case ePluginTypeChatRoomHost:           return eAppletSettingsHostChatRoom;
+    case ePluginTypeGroupHost:              return eAppletSettingsHostGroup;
+        // case ePluginTypeGroupHostListing:       return eAppletSettingsHostGroupListing;
+    case ePluginTypeNetworkHost:            return eAppletSettingsHostNetwork;
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
-    case ePluginTypeRandomConnect:          return eAppletSettingsRandomConnect;
-    case ePluginTypeRandomConnectRelay:     return eAppletSettingsRandomConnectRelay;
+    case ePluginTypeRandomConnectClient:    return eAppletSettingsRandomConnect;
+    case ePluginTypeRandomConnectHost:      return eAppletSettingsRandomConnectRelay;
         // case ePluginTypeRelay:                  return eAppletSettingsRelay;
     case ePluginTypeStoryboard:             return eAppletSettingsStoryboard;
     case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
@@ -588,14 +588,14 @@ EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
     case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
-    case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
+    case ePluginTypeConnectTestHost:        return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletUnknown;
     case ePluginTypeFileXfer:               return eAppletUnknown;
-    case ePluginTypeHostGroup:              return eAppletUnknown;
-    case ePluginTypeHostGroupListing:       return eAppletUnknown;
-    case ePluginTypeHostNetwork:            return eAppletUnknown;
-    case ePluginTypeRandomConnect:          return eAppletUnknown;
-    case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
+    case ePluginTypeGroupHost:              return eAppletUnknown;
+    case ePluginTypeNetworkSearchList:      return eAppletUnknown;
+    case ePluginTypeNetworkHost:            return eAppletUnknown;
+    case ePluginTypeRandomConnectClient:    return eAppletUnknown;
+    case ePluginTypeRandomConnectHost:      return eAppletUnknown;
     case ePluginTypeRelay:                  return eAppletUnknown;
     default:
         break;
@@ -614,16 +614,16 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
     case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
     //case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
-    // case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
+    // case ePluginTypeConnectTestHost:     return eAppletSettingsConnectTest;
     //case ePluginTypeFileServer:             return eAppletShareFiles;
     // case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
-    case ePluginTypeHostChatRoom:           return eAppletSettingsHostChatRoom;
-    case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
-    // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
-    case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
+    case ePluginTypeChatRoomHost:           return eAppletSettingsHostChatRoom;
+    case ePluginTypeGroupHost:              return eAppletSettingsHostGroup;
+    // case ePluginTypeGroupHostListing:       return eAppletSettingsHostGroupListing;
+    case ePluginTypeNetworkHost:            return eAppletSettingsHostNetwork;
     //case ePluginTypeMessenger:              return eAppletSettingsMessenger;
-    case ePluginTypeRandomConnect:          return eAppletServiceRandomConnect;
-    case ePluginTypeRandomConnectRelay:     return eAppletServiceRandomConnectRelay;
+    case ePluginTypeRandomConnectClient:          return eAppletServiceRandomConnect;
+    case ePluginTypeRandomConnectHost:     return eAppletServiceRandomConnectRelay;
     case ePluginTypeRelay:                  return eAppletServiceRelay;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     //case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
@@ -647,15 +647,15 @@ EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
     case ePluginTypeAboutMePage:            return eMyIconSettingsAboutMe;
     case ePluginTypeAvatarImage:            return eMyIconSettingsAvatarImage;
     case ePluginTypeCamServer:              return eMyIconSettingsShareWebCam;
-    case ePluginTypeServiceConnectTest:     return eMyIconSettingsConnectionTest;
+    case ePluginTypeConnectTestHost:        return eMyIconSettingsConnectionTest;
     case ePluginTypeFileServer:             return eMyIconSettingsShareFiles;
     case ePluginTypeFileXfer:               return eMyIconSettingsFileXfer;
-    case ePluginTypeHostGroup:              return eMyIconSettingsHostGroup;
-    case ePluginTypeHostGroupListing:       return eMyIconSettingsHostGroupListing;
-    case ePluginTypeHostNetwork:            return eMyIconSettingsHostNetwork;
+    case ePluginTypeGroupHost:              return eMyIconSettingsHostGroup;
+    case ePluginTypeNetworkSearchList:      return eMyIconSettingsHostGroupListing;
+    case ePluginTypeNetworkHost:            return eMyIconSettingsHostNetwork;
     case ePluginTypeMessenger:              return eMyIconSettingsMessenger;
-    case ePluginTypeRandomConnect:          return eMyIconSettingsRandomConnect;
-    case ePluginTypeRandomConnectRelay:     return eMyIconSettingsRandomConnectRelay;
+    case ePluginTypeRandomConnectClient:    return eMyIconSettingsRandomConnect;
+    case ePluginTypeRandomConnectHost:      return eMyIconSettingsRandomConnectRelay;
     case ePluginTypeRelay:                  return eMyIconSettingsRelay;
     case ePluginTypeStoryboard:             return eMyIconSettingsShareStoryboard;
     case ePluginTypeTruthOrDare:            return eMyIconSettingsTruthOrDare;
@@ -714,17 +714,17 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     case ePluginTypeFileServer:
     case ePluginTypeFileXfer:
     case ePluginTypeChatRoomClient:
-    case ePluginTypeHostChatRoom:
-    case ePluginTypeHostNetwork:
-    case ePluginTypeHostGroup:
+    case ePluginTypeChatRoomHost:
+    case ePluginTypeNetworkHost:
+    case ePluginTypeGroupHost:
     // connection test is special in that we want to be able to set it up seperately
     // but is required if user is network host or group host
-    case ePluginTypeServiceConnectTest:
+    case ePluginTypeConnectTestHost:
         isPrimaryPlugin = true;
         break;
     case ePluginTypeRelay:
-    case ePluginTypeHostGroupListing:
-    case ePluginTypeClientConnectTest:
+    case ePluginTypeNetworkSearchList:
+    case ePluginTypeConnectTestClient:
     default:
         break;
     }
@@ -738,19 +738,24 @@ bool GuiHelpers::getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginTy
     secondaryPlugins.clear();
     switch( ePluginType )
     {
-    case ePluginTypeHostNetwork:
-        secondaryPlugins.push_back( ePluginTypeHostGroupListing );
-        secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
+    case ePluginTypeNetworkHost:
+        secondaryPlugins.push_back( ePluginTypeNetworkSearchList );
+        secondaryPlugins.push_back( ePluginTypeConnectTestHost );
         break;
 
-    case ePluginTypeHostChatRoom:
+    case ePluginTypeChatRoomHost:
         secondaryPlugins.push_back( ePluginTypeRelay );
-        secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
+        secondaryPlugins.push_back( ePluginTypeConnectTestHost );
         break;
 
-    case ePluginTypeHostGroup:
+    case ePluginTypeGroupHost:
         secondaryPlugins.push_back( ePluginTypeRelay );
-        secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
+        secondaryPlugins.push_back( ePluginTypeConnectTestHost );
+        break;
+
+    case ePluginTypeRandomConnectHost:
+        secondaryPlugins.push_back( ePluginTypeRelay );
+        secondaryPlugins.push_back( ePluginTypeConnectTestHost );
         break;
 
     default:
@@ -808,7 +813,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeHostChatRoom:
+    case ePluginTypeChatRoomHost:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Chat Room User" ).toUtf8().constData();
@@ -834,15 +839,15 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
         break;
 
-    case ePluginTypeServiceConnectTest:
+    case ePluginTypeConnectTestHost:
         strPluginDesc = QObject::tr( "Connection Test Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeClientConnectTest:
+    case ePluginTypeConnectTestClient:
         strPluginDesc = QObject::tr( "Connection Test Client" ).toUtf8().constData();
         break;
 
-    case ePluginTypeHostGroup:
+    case ePluginTypeGroupHost:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Hosted Group Service" ).toUtf8().constData();
@@ -853,18 +858,18 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeHostGroupListing:
+    case ePluginTypeNetworkSearchList:
         if( rmtInitiated )
         {
-            strPluginDesc = QObject::tr( "Hosted Group List Search Service" ).toUtf8().constData();
+            strPluginDesc = QObject::tr( "Hosted Group/ChatRoom List Search Service" ).toUtf8().constData();
         }
         else
         {
-            strPluginDesc = QObject::tr( "Group Host List Search Service" ).toUtf8().constData();
+            strPluginDesc = QObject::tr( "Group/ChatRoom Host List Search Service" ).toUtf8().constData();
         }
         break;
 
-    case ePluginTypeHostNetwork:
+    case ePluginTypeNetworkHost:
         strPluginDesc = QObject::tr( "Host A NoLimitConnect Network" ).toUtf8().constData();
         break;
 
@@ -877,12 +882,12 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeRandomConnect:
-        strPluginDesc = QObject::tr( "Connect To Random Person Service" ).toUtf8().constData();
+    case ePluginTypeRandomConnectClient:
+        strPluginDesc = QObject::tr( "Connect To Random Person Client" ).toUtf8().constData();
         break;
 
-    case ePluginTypeRandomConnectRelay:
-        strPluginDesc = QObject::tr( "Connect To Random Person Relay Service" ).toUtf8().constData();
+    case ePluginTypeRandomConnectHost:
+        strPluginDesc = QObject::tr( "Connect To Random Person Service" ).toUtf8().constData();
         break;
 
     case ePluginTypeStoryboard:

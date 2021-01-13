@@ -27,13 +27,13 @@ AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget 
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostChatRoom );
-    setPluginType( ePluginTypeHostChatRoom );
+    setPluginType( ePluginTypeChatRoomHost );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostChatRoom, ePluginTypeHostChatRoom );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostChatRoom, ePluginTypeChatRoomHost );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getRelayWidget()->setPluginType( ePluginTypeRelay );
-    getConnectionTestWidget()->setPluginType( ePluginTypeServiceConnectTest );
+    getConnectionTestWidget()->setPluginType( ePluginTypeConnectTestHost );
     connectServiceWidgets();
     loadPluginSetting();
 

@@ -21,11 +21,11 @@
 
 #include <PktLib/PktHostAnnounce.h>
 
-class PluginServiceHostChatRoom : public PluginBaseHostService, public IConnectRequestCallback
+class PluginChatRoomHost : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
-    PluginServiceHostChatRoom( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceHostChatRoom() override = default;
+    PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginChatRoomHost() override = default;
 
     virtual void				pluginStartup( void ) override;
 

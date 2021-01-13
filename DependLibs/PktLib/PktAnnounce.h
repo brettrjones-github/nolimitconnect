@@ -25,46 +25,21 @@
 #pragma pack(push) 
 #pragma pack(1)
 
-class P2PEngineVersion
-{
-public:
-    P2PEngineVersion();
-
-    uint8_t							getP2PEngineVersion( void );
-    void						    getP2PEngineVersion( std::string& strRetP2PEngineVersion );
-
-private:
-    uint8_t							m_u8P2PEngineVersion{0};
-};
-
-class MyOSVersion
-{
-public:
-	MyOSVersion();
-
-	uint8_t							getOSVersion( void );
-	void						    getOSVersion( std::string& strRetOSVersion );
-
-private:
-    uint8_t							m_u8OSVersion{0};
-};
-
 //=== request FLAGS ===//
 #define FLAG_PKT_ANN_REQ_REPLY					0x01
 #define FLAG_PKT_ANN_REQ_REV_CONNECT			0x02
 #define FLAG_PKT_ANN_REQ_STUN					0x04
 #define FLAG_PKT_ANN_REQ_TOP_TEN				0x08
 
-//    1 P2PEngineVersion
-// +  1 MyOSVersion
 // +  1 m_u8TimeToLive
 // +  1 m_u8RequestFlags
-// + 28 reserved
+// +  2 m_u8Res16
+// + 28 reserved (7 * 4) 
 // = 32 bytes
-class PktAnnActionData : public P2PEngineVersion, public MyOSVersion
+class PktAnnActionData
 {
 public:
-	PktAnnActionData();
+    PktAnnActionData() {}; // do not set = default
 	void						setTTL( uint8_t timeToLive )					{ m_u8TimeToLive = timeToLive; }
 	uint8_t						getTTL( void )							        { return m_u8TimeToLive; }
 	void						setIsTopTenRequested( bool enable );
@@ -77,48 +52,41 @@ public:
 	void						setIsPktAnnStunRequested( bool bReqStun );
 	bool						getIsPktAnnStunRequested( void );
 
+    void						setAppAliveTimeSec( uint32_t aliveTime )				{ m_u32AppAliveTimeSec = aliveTime; }
+    uint32_t					getAppAliveTimeSec( void )						        { return m_u32AppAliveTimeSec; }
+
 private:
 	//=== vars ===//
-    uint8_t						m_u8TimeToLive{0};			//
-    uint8_t						m_u8RequestFlags{0};		// request flags
+    uint8_t						m_u8TimeToLive{0};		
+    uint8_t						m_u8RequestFlags{0};	// request flags
+    uint16_t				    m_u8Res16{0};
+    uint32_t				    m_u32AppAliveTimeSec{0};
     uint32_t				    m_u32ActionRes1{0};		// Action Flags				.. not currently used
     uint32_t					m_u32ActionRes2{0};		// Action Data				.. not currently used
     uint32_t					m_u32ActionRes3{0};
     uint32_t					m_u32ActionRes4{0};
     uint32_t					m_u32ActionRes5{0};
     uint32_t					m_u32ActionRes6{0};
-    uint32_t					m_u32ActionRes7{0};
-    uint32_t					m_u32ActionRes8{0};
 };
 
-//! this is the part of pkt announce that we would not expect to change often
-//! can be used for quick check to see if we need to update info about friend to user
-//! this is what we would send in list of pkt announcements
-// + 196 bytes VxNetIdent
-// +   4 bytes m_u32AppAliveTimeSec
-// = 200 bytes total
-class PktAnnBase : public VxNetIdent
+//     8 bytes reserved
+// +  40 bytes VxPktHdr
+// + 576 bytes VxNetIdent
+// = 624 bytes
+class PktAnnBase : public VxPktHdr, public VxNetIdent
 {
 public:
-	PktAnnBase();
-
-	void						setAppAliveTimeSec( uint32_t aliveTime )				{ m_u32AppAliveTimeSec = aliveTime; }
-	uint32_t					getAppAliveTimeSec( void )						        { return m_u32AppAliveTimeSec; }
-
-	bool						hasFriendDataChanged( PktAnnBase * poOther );
-
-private:
-	uint32_t					m_u32AppAliveTimeSec;		// how long application has been alive	
+    PktAnnBase() {}; // do not set = default
+    uint32_t				    m_AnnRes1{0};
+    uint32_t				    m_AnnRes2{0};	
 };
-
 
 //! is what we put in normal pkt announce so we can do actions etc
 //! size 
-//	 596 bytes PktAnnBase
-// +  40 bytes VxPktHdr
+//   624 bytes PktAnnBase
 // +  32 bytes PktAnnActionData
-// = 672 bytes total
-class PktAnnounce :  public VxPktHdr, public PktAnnBase,  public PktAnnActionData
+// = 656 bytes total
+class PktAnnounce :  public PktAnnBase,  public PktAnnActionData
 {
 public:
 	PktAnnounce();

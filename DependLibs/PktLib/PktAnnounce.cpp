@@ -97,21 +97,6 @@ void MyOSVersion::getOSVersion( std::string& strRetOSVersion )
 }
 
 //============================================================================
-PktAnnActionData::PktAnnActionData()
-	: m_u8TimeToLive( 0 )
-	, m_u8RequestFlags(0)
-	, m_u32ActionRes1(0)
-	, m_u32ActionRes2(0)								
-	, m_u32ActionRes3(0)
-	, m_u32ActionRes4(0)
-	, m_u32ActionRes5(0)	
-	, m_u32ActionRes6(0)	
-	, m_u32ActionRes7(0)
-	, m_u32ActionRes8(0)
-{
-}
-
-//============================================================================
 void PktAnnActionData::setIsTopTenRequested( bool enable )
 {
 	if( enable )(m_u8RequestFlags |= FLAG_PKT_ANN_REQ_TOP_TEN); else m_u8RequestFlags &= (~FLAG_PKT_ANN_REQ_TOP_TEN); 
@@ -132,17 +117,6 @@ void		PktAnnActionData::setIsPktAnnStunRequested( bool bReqStun )			{ if( bReqSt
 bool		PktAnnActionData::getIsPktAnnStunRequested( void )					{ return (m_u8RequestFlags & FLAG_PKT_ANN_REQ_STUN)?true:false; }
 
 //============================================================================
-PktAnnBase::PktAnnBase()
-{
-}
-
-//============================================================================
-bool PktAnnBase::hasFriendDataChanged( PktAnnBase * poOther ) 
-{ 
-	return ( 0 == memcmp( this, poOther, sizeof( PktAnnBase ) ))?0:1;
-}
-
-//============================================================================
 //============================================================================
 PktAnnounce::PktAnnounce()	
 { 
@@ -158,19 +132,19 @@ static bool firstTime = true;
 
         size_t identBase = sizeof( VxNetIdentBase );
         size_t netIdent = sizeof( VxNetIdent );
-        size_t action = sizeof( PktAnnActionData );
-        size_t base = sizeof( PktAnnBase );
+        size_t pktAnnBase = sizeof( PktAnnBase );
+        size_t action = sizeof( PktAnnActionData );  
         size_t pktAnn = sizeof( PktAnnounce );
         uint16_t remainder = sizeof( PktAnnounce ) & 0x0f;
         if( remainder )
         {
-            LogMsg( LOG_ERROR, "ERROR Invalid PktAnn len %d hdr %d baseinfo %d connectinfo %d ident base %d ident %d action %d annbase %d pktann %d remainder %d\n",
-                    sizeof( PktAnnounce ), hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, base, pktAnn, remainder );
+            LogMsg( LOG_ERROR, "ERROR Invalid PktAnn len %d hdr %d baseinfo %d connectinfo %d base ident %d ident %d action %d annbase %d pktann %d remainder %d\n",
+                    sizeof( PktAnnounce ), hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, pktAnn, remainder );
         }
         else
         {
-            LogMsg( LOG_DEBUG, "OK PktAnn len %d hdr %d baseinfo %d connectinfo %d ident base %d ident %d action %d annbase %d pktann %d remainder %d\n",
-                    sizeof( PktAnnounce ), hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, base, remainder );
+            LogMsg( LOG_DEBUG, "OK PktAnn len %d hdr %d baseinfo %d connectinfo %d ident base %d ident %d action %d pktann %d remainder %d\n",
+                    sizeof( PktAnnounce ), hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, pktAnn, remainder );
         }
     }
 #endif // defined(DEBUG)

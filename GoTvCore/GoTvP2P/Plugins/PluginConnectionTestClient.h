@@ -13,17 +13,17 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseService.h"
+#include "PluginBaseHostClient.h"
 
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 
-class PluginServiceConnectionTest : public PluginBaseService
+class PluginConnectionTestClient : public PluginBaseHostClient
 {
 public:
-    PluginServiceConnectionTest( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceConnectionTest() override = default;
-    PluginServiceConnectionTest() = delete; // don't allow default constructor
-    PluginServiceConnectionTest( const PluginServiceConnectionTest& ) = delete; // don't allow copy constructor
+    PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginConnectionTestClient() override = default;
+    PluginConnectionTestClient() = delete; // don't allow default constructor
+    PluginConnectionTestClient( const PluginConnectionTestClient& ) = delete; // don't allow copy constructor
 
     virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 

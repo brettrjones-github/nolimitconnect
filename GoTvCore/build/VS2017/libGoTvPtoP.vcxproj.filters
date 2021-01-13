@@ -493,25 +493,10 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceWebCam.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnectRelay.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceConnectionTest.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroup.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroupListing.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostNetwork.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseFileXfer.cpp">
@@ -524,9 +509,6 @@
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMessenger.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnect.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.cpp">
@@ -553,12 +535,6 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayTests.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
@@ -573,12 +549,6 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginClientConnectionTest.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseClient.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp">
       <Filter>GoTvP2P\NetworkMonitor</Filter>
@@ -637,17 +607,11 @@
     <ClCompile Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.cpp">
       <Filter>GoTvP2P\NetworkTest</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostInfoBase.cpp">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDefs.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostChatRoom.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
@@ -675,6 +639,42 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListAll.cpp">
       <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginConnectionTestClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginConnectionTestHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginGroupClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginNetworkHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRandomConnectClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRandomConnectHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginGroupHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginNetworkSearchList.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1282,25 +1282,10 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnectRelay.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceConnectionTest.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroup.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroupListing.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostNetwork.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseFileXfer.h">
@@ -1315,9 +1300,6 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMessenger.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnect.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
@@ -1329,12 +1311,6 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.h">
       <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h">
       <Filter>GoTvP2P\HostMgr</Filter>
@@ -1353,12 +1329,6 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h">
       <Filter>GoTvP2P\NetServices</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginClientConnectionTest.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseClient.h">
-      <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h">
       <Filter>GoTvP2P\NetworkMonitor</Filter>
@@ -1414,14 +1384,8 @@
     <ClInclude Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.h">
       <Filter>GoTvP2P\NetworkTest</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostInfoBase.h">
-      <Filter>GoTvP2P\HostMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h">
       <Filter>GoTvP2P\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostChatRoom.h">
-      <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.h">
       <Filter>GoTvP2P\Plugins</Filter>
@@ -1449,6 +1413,42 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListAll.h">
       <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginConnectionTestClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginConnectionTestHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginGroupClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginNetworkHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRandomConnectClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRandomConnectHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseHostClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginGroupHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginNetworkSearchList.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

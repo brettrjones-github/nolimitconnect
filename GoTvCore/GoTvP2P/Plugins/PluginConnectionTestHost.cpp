@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceConnectionTest.h"
+#include "PluginConnectionTestHost.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
@@ -26,21 +26,21 @@
 
 
 //============================================================================
-PluginServiceConnectionTest::PluginServiceConnectionTest( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseService( engine, pluginMgr, myIdent )
+PluginConnectionTestHost::PluginConnectionTestHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBaseHostService( engine, pluginMgr, myIdent )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 {
-    setPluginType( ePluginTypeServiceConnectTest );
+    setPluginType( ePluginTypeConnectTestHost );
 }
 
 //============================================================================
-void PluginServiceConnectionTest::testIsMyPortOpen( void )
+void PluginConnectionTestHost::testIsMyPortOpen( void )
 {
     m_NetServicesMgr.testIsMyPortOpen();
 }
 
 //============================================================================
-RCODE PluginServiceConnectionTest::handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginConnectionTestHost::handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
     //if( false == m_NetServiceUtil.isAllHttpContentArrived( sktBase ) )
     //{
@@ -61,7 +61,7 @@ RCODE PluginServiceConnectionTest::handleHttpConnection( VxSktBase * sktBase, Ne
 }
 
 //============================================================================
-RCODE PluginServiceConnectionTest::internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginConnectionTestHost::internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
     switch( netServiceHdr.m_NetCmdType )
     {

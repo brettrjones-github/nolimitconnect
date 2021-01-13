@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceHostNetwork.h"
+#include "PluginRandomConnectClient.h"
 #include "PluginMgr.h"
 #include "P2PSession.h"
 #include "RxSession.h"
@@ -24,8 +23,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginServiceHostNetwork::PluginServiceHostNetwork( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseHostService( engine, pluginMgr, myIdent )
+PluginRandomConnectClient::PluginRandomConnectClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBaseHostClient( engine, pluginMgr, myIdent )
 {
-    setPluginType( ePluginTypeHostNetwork );
+    setPluginType( ePluginTypeRandomConnectClient );
 }

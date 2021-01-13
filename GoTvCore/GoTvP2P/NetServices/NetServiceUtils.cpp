@@ -412,11 +412,11 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	}
     else if( eNetCmdQueryHostOnlineIdReq == netServiceHdr.m_NetCmdType )
     {
-        ePluginType = ePluginTypeHostNetwork;
+        ePluginType = ePluginTypeNetworkHost;
     }
     else if( eNetCmdIsMyPortOpenReq == netServiceHdr.m_NetCmdType )
     {
-        ePluginType = ePluginTypeServiceConnectTest;
+        ePluginType = ePluginTypeConnectTestHost;
     }
 
     LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %d\n", netCmdEnumToString( netServiceHdr.m_NetCmdType ), ePluginType );
@@ -632,7 +632,7 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash
                     clientPort,
                     netKey.c_str(),
                     clientPort );
-    LogMsg( LOG_DEBUG, "pwd %s thread 0x%x tid %d", strPwd.c_str(), VxGetCurrentThreadId(), VxGetCurrentThreadTid());
+    // LogMsg( LOG_DEBUG, "pwd %s thread 0x%x tid %d", strPwd.c_str(), VxGetCurrentThreadId(), VxGetCurrentThreadTid());
 
     VxKey key;
 	key.setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );

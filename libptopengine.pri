@@ -210,15 +210,23 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/P2PSession.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBase.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseClient.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXfer.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostClient.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseMultimedia.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseService.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginClientConnectionTest.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginChatRoomHost.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginConnectionTestClient.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginConnectionTestHost.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupClient.h \	
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupHost.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetworkHost.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetworkSearchList.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginRandomConnectClient.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginRandomConnectHost.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileXfer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginInvalid.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMgr.h \
@@ -226,14 +234,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginConnectionTestHost.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h \
-	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnect.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnectRelay.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceStoryboard.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.h \
@@ -432,9 +434,9 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/P2PSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBase.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseClient.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXfer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXferPktHandlers.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostClient.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseMultimedia.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.cpp \
@@ -445,23 +447,24 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServerFiles.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServerPktHandlers.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginClientConnectionTest.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginChatRoomHost.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginConnectionTestClient.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginConnectionTestHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileXfer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginInvalid.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupClient.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMgrSktApi.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMessenger.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetworkHost.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetworkSearchList.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginRandomConnectClient.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginRandomConnectHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.cpp \
-	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnect.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnectRelay.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceStoryboard.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.cpp \

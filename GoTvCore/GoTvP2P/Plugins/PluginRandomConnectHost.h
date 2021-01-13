@@ -15,12 +15,14 @@
 
 #include "PluginBaseHostService.h"
 
-class PluginServiceHostNetwork : public PluginBaseHostService
+#include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
+
+class PluginRandomConnectHost : public PluginBaseHostService
 {
 public:
 
-    PluginServiceHostNetwork( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceHostNetwork() override = default;
+    PluginRandomConnectHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginRandomConnectHost() override = default;
 
 
 protected:

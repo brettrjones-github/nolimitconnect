@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-class PktAnnBase;
+class VxNetIdent;
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -27,7 +27,7 @@ public:
 
 	int							emptyLen( void );
 	void						calcPktLen( void );
-	int						    addAnn( PktAnnBase * pgPktAnn );
+	int						    addAnn( VxNetIdent * pgPktAnn );
 
 private:
 	//=== vars ===//

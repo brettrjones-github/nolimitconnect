@@ -23,7 +23,7 @@
 AppletServiceRandomConnect::AppletServiceRandomConnect( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_RANDOM_PERSON, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceRandomConnect, ePluginTypeRandomConnect );
+    setupServiceBaseApplet( eAppletServiceRandomConnect, ePluginTypeRandomConnectClient );
 
     m_MyApp.activityStateChange( this, true );
 }

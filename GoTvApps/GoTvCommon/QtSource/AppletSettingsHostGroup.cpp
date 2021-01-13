@@ -27,13 +27,13 @@ AppletSettingsHostGroup::AppletSettingsHostGroup( AppCommon& app, QWidget * pare
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostGroup );
-    setPluginType( ePluginTypeHostGroup );
+    setPluginType( ePluginTypeGroupHost );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostGroup, ePluginTypeHostGroup );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostGroup, ePluginTypeGroupHost );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getRelayWidget()->setPluginType( ePluginTypeRelay );
-    getConnectionTestWidget()->setPluginType( ePluginTypeServiceConnectTest );
+    getConnectionTestWidget()->setPluginType( ePluginTypeConnectTestHost );
     connectServiceWidgets();
     loadPluginSetting();
 

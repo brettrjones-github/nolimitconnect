@@ -23,7 +23,7 @@
 AppletServiceRandomConnectRelay::AppletServiceRandomConnectRelay( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_RANDOM_PERSON_RELAY, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceRandomConnectRelay, ePluginTypeRandomConnectRelay );
+    setupServiceBaseApplet( eAppletServiceRandomConnectRelay, ePluginTypeRandomConnectHost );
 
     m_MyApp.activityStateChange( this, true );
 }

@@ -37,6 +37,7 @@ NetActionAnnounce::NetActionAnnounce( NetServicesMgr& netServicesMgr, std::strin
 //============================================================================
 void NetActionAnnounce::doAction( void )
 {
+    /* BRJ TODO NEED COMPLETE REWORK 
 	if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
 	{
 		if( m_Engine.getEngineSettings().getExcludeMeFromNetHostList() )
@@ -122,6 +123,7 @@ void NetActionAnnounce::doAction( void )
 
 	netServConn.closeSkt();
 	m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, (HostList *)rxBuf );
+    */
 }
 
 //============================================================================

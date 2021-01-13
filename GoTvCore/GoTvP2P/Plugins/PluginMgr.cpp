@@ -24,14 +24,17 @@
 #include <GoTvCore/GoTvP2P/Plugins/PluginMessenger.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginConnectionTestClient.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginConnectionTestHost.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnect.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnectRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginChatRoomHost.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginGroupClient.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginGroupHost.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginNetworkSearchList.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginNetworkHost.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginRandomConnectClient.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginRandomConnectHost.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceStoryboard.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.h>
@@ -111,8 +114,12 @@ void PluginMgr::pluginMgrStartup( void )
     poPlugin = new PluginServiceAvatarImage( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create connection test plugin\n" );
-    poPlugin = new PluginServiceConnectionTest( m_Engine, *this, &this->m_PktAnn );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create connection test client plugin\n" );
+    poPlugin = new PluginConnectionTestClient( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create connection test host plugin\n" );
+    poPlugin = new PluginConnectionTestHost( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create file share plugin\n" );
@@ -123,27 +130,31 @@ void PluginMgr::pluginMgrStartup( void )
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host chat room plugin\n" );
-    poPlugin = new PluginServiceHostChatRoom( m_Engine, *this, &this->m_PktAnn );
+    poPlugin = new PluginChatRoomHost( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host client plugin\n" );
+    poPlugin = new PluginGroupClient( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host group plugin\n" );
-    poPlugin = new PluginServiceHostGroup( m_Engine, *this, &this->m_PktAnn );
+    poPlugin = new PluginGroupHost( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host group listing plugin\n" );
-    poPlugin = new PluginServiceHostGroupListing( m_Engine, *this, &this->m_PktAnn );
+    poPlugin = new PluginNetworkSearchList( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host network plugin\n" );
-    poPlugin = new PluginServiceHostNetwork( m_Engine, *this, &this->m_PktAnn );
+    poPlugin = new PluginNetworkHost( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create random connect plugin\n" );
-    poPlugin = new PluginServiceRandomConnect( m_Engine, *this, &this->m_PktAnn );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create random connect client plugin\n" );
+    poPlugin = new PluginRandomConnectClient( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create random connect relay plugin\n" );
-    poPlugin = new PluginServiceRandomConnectRelay( m_Engine, *this, &this->m_PktAnn );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create random connect host plugin\n" );
+    poPlugin = new PluginRandomConnectHost( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
 	// relay pre created by engine
@@ -414,7 +425,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	NetServiceHdr netServiceHdr;
 	EPluginType pluginType = m_NetServiceUtils.parseHttpNetServiceUrl( sktBase, netServiceHdr );
-    if( ( ePluginTypeHostNetwork == pluginType ) && ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) )
+    if( ( ePluginTypeNetworkHost == pluginType ) && ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) )
     {
         // only allowed if Network Host feature is enabled
         PluginBase * poPlugin = getPlugin( pluginType );
@@ -454,7 +465,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		if( poPlugin )
 		{
 			RCODE rc = 0;
-			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeServiceConnectTest == poPlugin->getPluginType() )
+			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeConnectTestHost == poPlugin->getPluginType() )
 			{
 				rc = poPlugin->handleHttpConnection( sktBase, netServiceHdr );
 			}
@@ -721,7 +732,7 @@ void PluginMgr::fromGuiSendAsset( AssetInfo& assetInfo )
 }
 
 //============================================================================
-PluginBase * PluginMgr::findPlugin( EPluginType ePluginType )
+PluginBase* PluginMgr::findPlugin( EPluginType ePluginType )
 {
 	std::vector<PluginBase * >::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
@@ -732,7 +743,59 @@ PluginBase * PluginMgr::findPlugin( EPluginType ePluginType )
 		}
 	}
 
-	return 0;
+	return nullptr;
+}
+
+//============================================================================
+PluginBase* PluginMgr::findHostClientPlugin( EHostType hostType )
+{
+    return  hostClientToPlugin( hostType );
+}
+
+//============================================================================
+PluginBase* PluginMgr::findHostServicePlugin( EHostType hostType )
+{
+    return hostServiceToPlugin( hostType );
+}
+
+//============================================================================
+PluginBase* PluginMgr::hostClientToPlugin( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        return findPlugin( ePluginTypeChatRoomClient );
+    case eHostTypeConnectTest:
+        return findPlugin( ePluginTypeConnectTestClient );
+    case eHostTypeGroup:
+        return findPlugin( ePluginTypeGroupClient );
+    case eHostTypeNetwork:
+        return findPlugin( ePluginTypeNetworkClient );
+    case eHostTypeRandomConnect:
+        return findPlugin( ePluginTypeRandomConnectClient );
+    default:
+        return nullptr;
+    }
+}
+
+//============================================================================
+PluginBase* PluginMgr::hostServiceToPlugin( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        return findPlugin( ePluginTypeChatRoomHost );
+    case eHostTypeConnectTest:
+        return findPlugin( ePluginTypeConnectTestHost );
+    case eHostTypeGroup:
+        return findPlugin( ePluginTypeGroupHost );
+    case eHostTypeNetwork:
+        return findPlugin( ePluginTypeNetworkHost );
+    case eHostTypeRandomConnect:
+        return findPlugin( ePluginTypeRandomConnectHost );
+    default:
+        return nullptr;
+    }
 }
 
 //============================================================================

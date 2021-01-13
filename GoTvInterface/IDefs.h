@@ -244,19 +244,21 @@ enum EPluginType
     ePluginTypeVideoPhone       = 10,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone       = 11,	//!< VOIP audio only phone call
     ePluginTypeChatRoomClient   = 12,	//!< chat room user client plugin
-    ePluginTypeHostChatRoom     = 13,	//!< chat room hosting plugin
-    ePluginTypeHostGroup        = 14,	//!< group hosting
-    ePluginTypeHostNetwork      = 15,	//!< master network hosting
-    ePluginTypeServiceConnectTest = 16,	//!< Connection Test Service
+    ePluginTypeChatRoomHost     = 13,	//!< chat room hosting plugin
+    ePluginTypeConnectTestClient    = 14,	//!< Connection Test Client
+    ePluginTypeConnectTestHost      = 15,	//!< Connection Test Service
+    ePluginTypeGroupClient          = 16,	//!< group client
+    ePluginTypeGroupHost            = 17,   //!< group hosting
+    ePluginTypeRandomConnectClient  = 18,	//!< Random connect to another person client
+    ePluginTypeRandomConnectHost    = 19,	//!< Random connect to another person hosting
+    ePluginTypeNetworkClient        = 20,	//!< network client
+    ePluginTypeNetworkHost          = 21,	//!< master network hosting
+    ePluginTypeNetworkSearchList    = 22,	//!< group and chat room list for network search
 
-    ePluginTypeClientConnectTest = 17,	//!< Connection Test Client
-    ePluginTypeHostGroupListing = 18,	//!< group list host
-    ePluginTypeRandomConnect    = 19,	//!< Random connect to another person ( Using Phone Shake )
-    ePluginTypeRandomConnectRelay = 20,	//!< Random connect to another person relay service
-    ePluginTypeRelay            = 21,	//!< Relay services plugin
+    ePluginTypeRelay                = 23,	//!< Relay services plugin
 
-    // NOTE: plugin types 22 - 47 not implemented .. reserved for future use
-    eMaxImplementedPluginType	= 22, 
+    // NOTE: plugin types 24 - 47 not implemented .. reserved for future use
+    eMaxImplementedPluginType	= 24, 
     // plugins 0-47 are part of PktAnnounce
     // plugins after 47 are system plugins and do not go out in announcement pkt
     eMaxUserPluginType = 48, // this marks end of announced permission

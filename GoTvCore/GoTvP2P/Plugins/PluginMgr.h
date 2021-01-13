@@ -140,10 +140,14 @@ public:
 	void						handleFirstNetServiceConnection( VxSktBase * sktBase );
 	bool						handleFirstWebPageConnection( VxSktBase * sktBase );
 	void						handlePluginSpecificSkt( VxSktBase * sktBase );
-	PluginBase *				findPlugin( EPluginType ePluginType );
+	PluginBase*				    findPlugin( EPluginType ePluginType );
+    PluginBase*				    findHostClientPlugin( EHostType hostType );
+    PluginBase*				    findHostServicePlugin( EHostType hostType );
 
 protected:
 	bool						isValidPluginNum( uint8_t u8PluginNum );
+    PluginBase*                 hostClientToPlugin( EHostType hostType );
+    PluginBase*                 hostServiceToPlugin( EHostType hostType );
 
 	//=== vars ===//
 	P2PEngine&					m_Engine;

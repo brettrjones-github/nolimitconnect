@@ -12,19 +12,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceRandomConnectRelay.h"
-#include "PluginMgr.h"
-#include "P2PSession.h"
-#include "RxSession.h"
-#include "TxSession.h"
-
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-
-#include <CoreLib/VxFileUtil.h>
+#include "PluginBaseHostClient.h"
 
 //============================================================================
-PluginServiceRandomConnectRelay::PluginServiceRandomConnectRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseRelay( engine, pluginMgr, myIdent )
+PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+    : PluginBase( engine, pluginMgr, myIdent )
 {
-    setPluginType( ePluginTypeRandomConnectRelay );
 }

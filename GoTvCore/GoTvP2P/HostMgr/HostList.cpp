@@ -22,13 +22,6 @@
 
 //============================================================================
 HostList::HostList()
-: m_TotalLen( 0 )
-, m_EntryCount( 0 )
-, m_Version( 1 )
-, m_HostAction( eHostActionAnnounce )
-, m_u32Flags( 0 )
-, m_Latitude( 0 )
-, m_Longitude( 0 )
 {
 }
 
@@ -52,5 +45,6 @@ bool HostList::addEntry( PktAnnounce * pktAnn )
 uint16_t HostList::calculateLength( void )
 {
 	m_TotalLen = ROUND_TO_16BYTE_BOUNDRY((sizeof(HostList) - (sizeof(m_List) + sizeof(m_Padding))) + (m_EntryCount * sizeof(HostListEntry)));
+    vx_assert( m_TotalLen <= sizeof( HostList ) );
 	return m_TotalLen;
 }

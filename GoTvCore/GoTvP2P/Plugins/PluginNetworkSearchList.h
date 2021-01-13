@@ -15,12 +15,12 @@
 
 #include "PluginBaseHostService.h"
 
-class PluginServiceHostGroupListing : public PluginBaseHostService
+class PluginNetworkSearchList : public PluginBaseHostService
 {
 public:
 
-    PluginServiceHostGroupListing( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceHostGroupListing() override = default;
+    PluginNetworkSearchList( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginNetworkSearchList() override = default;
 
 
 protected:

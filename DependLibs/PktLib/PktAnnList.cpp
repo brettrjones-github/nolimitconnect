@@ -44,18 +44,18 @@ void PktAnnList::calcPktLen( void )
 }
 
 //============================================================================
-int PktAnnList::addAnn( PktAnnBase * poPktAnn )
+int PktAnnList::addAnn( VxNetIdent * poPktAnn )
 {
-	if( sizeof( PktAnnBase ) * m_u16ListCnt > MAX_PKT_ANN_LIST_LEN )
+	if( sizeof( VxNetIdent ) * m_u16ListCnt > MAX_PKT_ANN_LIST_LEN )
 	{
 		return -1;
 	}
 
 	int iOffs = getPktLength() - emptyLen();
-	*(( uint16_t *)&m_au8List[ iOffs ]) = ntohs( (uint16_t)sizeof( PktAnnBase ) );
+	*(( uint16_t *)&m_au8List[ iOffs ]) = ntohs( (uint16_t)sizeof( VxNetIdent ) );
 	iOffs += 2;
-	memcpy( &m_au8List[ iOffs ], poPktAnn, sizeof( PktAnnBase ) );
+	memcpy( &m_au8List[ iOffs ], poPktAnn, sizeof( VxNetIdent ) );
 	m_u16ListCnt++;
-	setPktLength( getPktLength() + sizeof( uint16_t ) + sizeof( PktAnnBase ) );
+	setPktLength( getPktLength() + sizeof( uint16_t ) + sizeof( VxNetIdent ) );
 	return 0;
 }

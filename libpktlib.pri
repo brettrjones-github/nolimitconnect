@@ -21,6 +21,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.h \
     $$PWD/DependLibs/PktLib/PktsFileList.h \
     $$PWD/DependLibs/PktLib/PktsFileShare.h \
+	$$PWD/DependLibs/PktLib/PktsFriendOffer.h \
+	$$PWD/DependLibs/PktLib/PktsHostJoin.h \
     $$PWD/DependLibs/PktLib/PktsImAlive.h \
     $$PWD/DependLibs/PktLib/PktsMultiSession.h \
     $$PWD/DependLibs/PktLib/PktsPing.h \
@@ -60,6 +62,8 @@ SOURCES += 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsFileList.cpp \
     $$PWD/DependLibs/PktLib/PktsFileShare.cpp \
+	$$PWD/DependLibs/PktLib/PktsFriendOffer.cpp \
+	$$PWD/DependLibs/PktLib/PktsHostJoin.cpp \
     $$PWD/DependLibs/PktLib/PktsImAlive.cpp \
     $$PWD/DependLibs/PktLib/PktsMultiSession.cpp \
     $$PWD/DependLibs/PktLib/PktsPing.cpp \

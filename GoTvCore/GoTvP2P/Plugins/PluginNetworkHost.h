@@ -1,3 +1,4 @@
+#pragma once
 //============================================================================
 // Copyright (C) 2019 Brett R. Jones
 //
@@ -12,10 +13,16 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseClient.h"
+#include "PluginBaseHostService.h"
 
-//============================================================================
-PluginBaseClient::PluginBaseClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-    : PluginBase( engine, pluginMgr, myIdent )
+class PluginNetworkHost : public PluginBaseHostService
 {
-}
+public:
+
+    PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginNetworkHost() override = default;
+
+
+protected:
+
+};

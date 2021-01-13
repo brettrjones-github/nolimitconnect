@@ -17,12 +17,12 @@
 
 class VxNetIdent;
 
-class PluginBaseClient : public PluginBase
+class PluginBaseHostClient : public PluginBase
 {
 public:
 
-    PluginBaseClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginBaseClient() override = default;
+    PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginBaseHostClient() override = default;
 
 
 protected:

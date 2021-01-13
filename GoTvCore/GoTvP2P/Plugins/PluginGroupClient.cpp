@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceHostChatRoom.h"
+#include "PluginGroupClient.h"
 #include "PluginMgr.h"
 #include "P2PSession.h"
 #include "RxSession.h"
@@ -27,35 +27,36 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginServiceHostChatRoom::PluginServiceHostChatRoom( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-    : PluginBaseHostService( engine, pluginMgr, myIdent )
+PluginGroupClient::PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBaseHostClient( engine, pluginMgr, myIdent )
+// , m_PluginSessionMgr( *this, pluginMgr )
 {
-    setPluginType( ePluginTypeHostChatRoom );
+    setPluginType( ePluginTypeGroupClient );
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::pluginStartup( void )
+void PluginGroupClient::pluginStartup( void )
 {
     PluginBase::pluginStartup();
 }
 
 //============================================================================
-bool PluginServiceHostChatRoom::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginGroupClient::setPluginSetting( PluginSetting& pluginSetting )
 {
-    bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
-    buildHostChatRoomAnnounce( pluginSetting );
-    sendHostChatRoomAnnounce();
+    bool result = PluginBaseHostClient::setPluginSetting( pluginSetting );
+    buildHostGroupAnnounce( pluginSetting );
+    sendHostGroupAnnounce();
     return result;
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::onThreadOncePer15Minutes( void )
+void PluginGroupClient::onThreadOncePer15Minutes( void )
 {
-    sendHostChatRoomAnnounce();
+    sendHostGroupAnnounce();
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::buildHostChatRoomAnnounce( PluginSetting& pluginSetting )
+void PluginGroupClient::buildHostGroupAnnounce( PluginSetting& pluginSetting )
 {
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
@@ -70,27 +71,27 @@ void PluginServiceHostChatRoom::buildHostChatRoomAnnounce( PluginSetting& plugin
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::sendHostChatRoomAnnounce( void )
+void PluginGroupClient::sendHostGroupAnnounce( void )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectRequestChatRoomAnnounce, this );
+        m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectRequestGroupAnnounce, this );
     }
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginGroupClient::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostChatRoomAnnounce( pluginSetting );
+    buildHostGroupAnnounce( pluginSetting );
 }
 
 //============================================================================
-bool PluginServiceHostChatRoom::onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
+bool PluginGroupClient::onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        if( eConnectRequestChatRoomAnnounce == hostConnectType )
+        if( eConnectRequestGroupAnnounce == hostConnectType )
         {
             m_AnnMutex.lock();
             if( m_Engine.lockSkt( sktBase ) )
@@ -108,15 +109,15 @@ bool PluginServiceHostChatRoom::onContactConnected( EConnectRequestType hostConn
         }
     }
 
-    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectRequestChatRoomAnnounce, this );
+    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectRequestGroupAnnounce, this );
 
     return false;
 }
 
 //============================================================================
-void PluginServiceHostChatRoom::onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
+void PluginGroupClient::onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
 {
-    if( eConnectRequestChatRoomAnnounce == hostConnectType )
+    if( eConnectRequestGroupAnnounce == hostConnectType )
     {
         // no action needed. we connect and send our group listing then disconnect
     }

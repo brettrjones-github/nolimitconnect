@@ -13,19 +13,23 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginNetServices.h"
+#include "PluginBaseHostService.h"
 
-class PluginBaseHostService : public PluginNetServices
+#include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
+
+class NetServicesMgr;
+
+class PluginConnectionTestHost : public PluginBaseHostService
 {
 public:
 
-    PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-    virtual ~PluginBaseHostService() override = default;
+    PluginConnectionTestHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginConnectionTestHost() override = default;
+
+    void                        testIsMyPortOpen( void );
+    RCODE                       handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+    RCODE                       internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 protected:
-    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
-    virtual void				onConnectionLost( VxSktBase * sktBase ) override;
-    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
-
+    NetServicesMgr&				m_NetServicesMgr;
 };
-

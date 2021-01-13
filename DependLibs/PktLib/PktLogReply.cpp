@@ -27,6 +27,7 @@ PktLogReply::PktLogReply()
 {
 	setPktType( PKT_TYPE_LOG_REPLY );
 	m_au8Data[0] = 0;
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktLogReply ) - sizeof(m_au8Data) + 1) ); 
 }
 
 //============================================================================
@@ -36,7 +37,7 @@ void PktLogReply::setLogMsg( const char * msg )
 	uint16_t msgLen = ( uint16_t)strlen( msg );
 	vx_assert( MAX_LOG_MSG_LEN > msgLen );
 	strcpy( (char *)m_au8Data, msg );
-	setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktLogReply ) - sizeof(m_au8Data) + msgLen ) ); 
+	setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktLogReply ) - sizeof(m_au8Data) + msgLen + 1) ); 
 	m_u16StrLen = htons( msgLen );
 }
 

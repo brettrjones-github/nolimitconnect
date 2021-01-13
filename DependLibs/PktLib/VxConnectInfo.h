@@ -30,15 +30,42 @@
 
 #pragma pack(push) 
 #pragma pack(1)
+
+class P2PEngineVersion
+{
+public:
+    P2PEngineVersion();
+
+    uint8_t							getP2PEngineVersion( void );
+    void						    getP2PEngineVersion( std::string& strRetP2PEngineVersion );
+
+private:
+    uint8_t							m_u8P2PEngineVersion{0};
+};
+
+class MyOSVersion
+{
+public:
+    MyOSVersion();
+
+    uint8_t							getOSVersion( void );
+    void						    getOSVersion( std::string& strRetOSVersion );
+
+private:
+    uint8_t							m_u8OSVersion{0};
+};
+
 // size
+// +  1 byte P2PEngineVersion
+// +  1 byte MyOSVersion
 // +  1 byte VxRelayFlags
 // +  1 byte FriendMatch
 // +  2 bytes VxSearchFlags
 // +  4 bytes m_LanIPv4
 // + 38 bytes m_DirectConnectId
 // + 38 bytes m_RelayConnectId 
-// = 84 bytes 
-class VxConnectBaseInfo : public VxRelayFlags, public FriendMatch, public VxSearchFlags
+// = 86 bytes 
+class VxConnectBaseInfo : public P2PEngineVersion, public MyOSVersion, public VxRelayFlags, public FriendMatch, public VxSearchFlags
 {
 public:
 	VxConnectBaseInfo() = default;
@@ -93,12 +120,12 @@ public:
 // +  28 bytes Online Name
 // +  32 bytes Online Mood Message
 // +   8 bytes m_TimeLastContactMs
-// +   8 bytes reserved
+// +   6 bytes reserved
 // +  80 bytes guids (5x16)
-// = 156 bytes
+// = 154 bytes
 // + 256  urls (4x64)
-// = 412 bytes
-// +  84 bytes VxConnectBaseInfo
+// = 410 bytes
+// +  86 bytes VxConnectBaseInfo
 // = 496 bytes
 
 class VxConnectIdent : public VxConnectBaseInfo
@@ -145,7 +172,7 @@ private:
 	char						m_OnlineName[ MAX_ONLINE_NAME_LEN ];	// users online name
 	char						m_OnlineDesc[ MAX_ONLINE_DESC_LEN ];    // users online description
 	int64_t	    				m_TimeLastContactMs = 0;
-	uint32_t					m_IdentRes1 = 0;
+	uint16_t					m_IdentRes1 = 0;
 	uint32_t					m_IdentRes2 = 0;
     VxGUID                      m_AvatarGuid;
 
@@ -161,10 +188,9 @@ private:
 
 //     8 bytes m_s64TimeTcpLastContactMs
 // +   8 bytes last connect attempt
-// +   8 bytes reserved to fill to 16 byte boundary
-// =  24 bytes total
-// + 496 bytes VxConnectBaseInfo
-// = 520 bytes total
+// =  16 bytes total
+// + 496 bytes VxConnectIdent
+// = 512 bytes total
 class VxConnectInfo : public VxConnectIdent
 {
 public:
@@ -187,7 +213,6 @@ public:
 private:
     int64_t					    m_s64TimeLastConnectAttemptMs{0};
     int64_t					    m_s64TimeTcpLastContactMs{0};	// time of last contact via tcp
-    int64_t					    m_u64TimeReserved{0};
 };
 
 #pragma pack(pop)

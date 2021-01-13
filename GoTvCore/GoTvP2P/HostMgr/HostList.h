@@ -31,15 +31,15 @@ public:
 	bool						addEntry( PktAnnounce * pktAnn );
     uint16_t					calculateLength( void );
 
-    uint16_t					m_TotalLen;		// length including this rounded to 16 bytes
-    uint16_t					m_EntryCount;
-    uint16_t					m_Version;
-	EHostAction				    m_HostAction;
-    uint32_t					m_u32Flags;
-	double						m_Latitude;
-	double						m_Longitude;
+    uint16_t					m_TotalLen{ 0 };		// length including this rounded to 16 bytes
+    uint16_t					m_EntryCount{ 0 };
+    uint16_t					m_Version{ 1 };
+    EHostAction				    m_HostAction{ eHostActionAnnounce };
+    uint32_t					m_u32Flags{ 0 };
+	double						m_Latitude{ 0 };
+	double						m_Longitude{ 0 };
 	char						m_SearchParam[ MAX_ONLINE_DESC_LEN ];
-	HostListEntry				m_List[ MAX_ANCHOR_ENTRIES ]; // VxConnectIdent 152 bytes * MAX_ANCHOR_ENTRIES
+	HostListEntry				m_List[ MAX_ANCHOR_ENTRIES ]; // VxConnectIdent 496 bytes * MAX_ANCHOR_ENTRIES
 	char						m_Padding[16];
 };
 

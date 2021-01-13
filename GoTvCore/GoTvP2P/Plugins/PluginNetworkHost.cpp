@@ -1,6 +1,6 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2010 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,16 +13,19 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseClient.h"
+#include "PluginNetworkHost.h"
+#include "PluginMgr.h"
+#include "P2PSession.h"
+#include "RxSession.h"
+#include "TxSession.h"
 
-class PluginClientConnectionTest : public PluginBaseClient
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+#include <CoreLib/VxFileUtil.h>
+
+//============================================================================
+PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBaseHostService( engine, pluginMgr, myIdent )
 {
-public:
-
-    PluginClientConnectionTest( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginClientConnectionTest() override = default;
-
-
-protected:
-
-};
+    setPluginType( ePluginTypeNetworkHost );
+}

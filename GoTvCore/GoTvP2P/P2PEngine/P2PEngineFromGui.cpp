@@ -874,13 +874,13 @@ bool P2PEngine::getHasHostService( EHostServiceType hostService )
 {
     switch( hostService )
     {
-    case eHostServiceNetworkHost: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
-    case eHostServiceGroupListing: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
-    case eHostServiceGroup: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
-    case eHostServiceRelay: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
-    case eHostServiceRandomConnect: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
-    case eHostServiceRandomConnectRelay: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
-    case eHostServiceConnectTest: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceNetworkHost: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceGroupListing: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceGroup: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceRelay: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceRandomConnect: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceRandomConnectRelay: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceConnectTest: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
     default:
         break;
     }
@@ -1288,7 +1288,15 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 void P2PEngine::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
-    getConnectionMgr().fromGuiJoinHost( hostType, ptopUrl );
+    PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
+    if( plugin )
+    {
+        getConnectionMgr().fromGuiJoinHost( hostType, ptopUrl );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Plugin not found for host %d", hostType );
+    }
 }
 
 //============================================================================

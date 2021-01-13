@@ -134,20 +134,22 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeTruthOrDare, eFriendStateGuest );
     setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
     setPluginPermission( ePluginTypeVoicePhone, eFriendStateGuest );
-    setPluginPermission( ePluginTypeChatRoomClient, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
 
     setPluginPermission( ePluginTypeCamServer, eFriendStateFriend );
     setPluginPermission( ePluginTypeFileServer, eFriendStateFriend );
     setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
 
-    setPluginPermission( ePluginTypeServiceConnectTest, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeHostGroupListing, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeChatRoomClient, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
+    setPluginPermission( ePluginTypeChatRoomHost, eFriendStateIgnore ); // gives guest permission to whoever is in chat room at the same time
+    setPluginPermission( ePluginTypeConnectTestHost, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeConnectTestClient, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeGroupClient, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeGroupHost, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeNetworkHost, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeNetworkSearchList, eFriendStateIgnore );
 
-    setPluginPermission( ePluginTypeRandomConnect, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeRandomConnectRelay, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeRandomConnectClient, eFriendStateGuest );
+    setPluginPermission( ePluginTypeRandomConnectHost, eFriendStateIgnore );
     setPluginPermission( ePluginTypeRelay, eFriendStateIgnore );
 } 
 
@@ -384,22 +386,24 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "VOIP Voice Phone";
     case ePluginTypeChatRoomClient:
         return "Chat Room Client";
-    case ePluginTypeHostChatRoom:
+    case ePluginTypeChatRoomHost:
         return "Chat Room Host Service";
-    case ePluginTypeHostGroup:
-        return "Group Host Sevice";
-    case ePluginTypeHostNetwork:
-        return "Network Host Sevice";
-    case ePluginTypeServiceConnectTest:
+    case ePluginTypeConnectTestHost:
         return "Connection Test Service";
-    case ePluginTypeClientConnectTest:
+    case ePluginTypeConnectTestClient:
         return "Connection Test Client";
-    case ePluginTypeHostGroupListing:
-        return "Group Listing Service";
-    case ePluginTypeRandomConnect:
+    case ePluginTypeGroupHost:
+        return "Group Host Service";
+    case ePluginTypeGroupClient:
+        return "Group Client";
+    case ePluginTypeNetworkHost:
+        return "Network Host Sevice";
+    case ePluginTypeNetworkSearchList:
+        return "Search Listing Service";
+    case ePluginTypeRandomConnectHost:
         return "Random Connect Service";
-    case ePluginTypeRandomConnectRelay:
-        return "Random Connect Relay Service";
+    case ePluginTypeRandomConnectClient:
+        return "Random Connect Client";
 	case ePluginTypeRelay:
 		return "Connection Relay";
 

@@ -13,16 +13,17 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseHostService.h"
+#include "PluginBaseHostClient.h"
 
-class PluginServiceRandomConnect : public PluginBaseHostService
+class PluginRandomConnectClient : public PluginBaseHostClient
 {
 public:
-
-    PluginServiceRandomConnect( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceRandomConnect() override = default;
-
+    PluginRandomConnectClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginRandomConnectClient() override = default;
 
 protected:
+    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};
+    virtual void				onConnectionLost( VxSktBase * sktBase ) override {};
+    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
 
 };

@@ -1,6 +1,6 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2010 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,15 +13,19 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseRelay.h"
+#include "PluginRandomConnectHost.h"
+#include "PluginMgr.h"
+#include "P2PSession.h"
+#include "RxSession.h"
+#include "TxSession.h"
 
-class PluginServiceRandomConnectRelay : public PluginBaseRelay
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+#include <CoreLib/VxFileUtil.h>
+
+//============================================================================
+PluginRandomConnectHost::PluginRandomConnectHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBaseHostService( engine, pluginMgr, myIdent )
 {
-public:
-    PluginServiceRandomConnectRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceRandomConnectRelay() override = default;
-
-
-protected:
-
-};
+    setPluginType( ePluginTypeRandomConnectHost );
+}

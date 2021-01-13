@@ -28,11 +28,11 @@ AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * 
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostNetwork );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostNetwork, ePluginTypeHostNetwork );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostNetwork, ePluginTypeNetworkHost );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
-    getGroupListingWidget()->setPluginType( ePluginTypeHostGroupListing );
-    getConnectionTestWidget()->setPluginType( ePluginTypeServiceConnectTest );
+    getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
+    getConnectionTestWidget()->setPluginType( ePluginTypeConnectTestHost );
     connectServiceWidgets();
     loadPluginSetting();
 

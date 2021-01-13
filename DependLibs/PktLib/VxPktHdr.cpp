@@ -25,12 +25,6 @@
 
 //============================================================================
 VxPktHdrPrefix::VxPktHdrPrefix()
-: m_u16PktLen(0)
-, m_u16PktType(0)
-, m_u8PluginNum(0)
-//, m_u8SeqNum(0) no need to set this
-, m_u8PktHdrVersion(1)
-, m_u8PktVersion(1)
 {
 }
 
@@ -68,7 +62,7 @@ bool VxPktHdrPrefix::isNetServicePkt( void )
 //! return true if data length is large enough to contain this packet
 bool VxPktHdrPrefix::isPktAllHere(int iDataLen)
 {
-    return (iDataLen >= ntohs(m_u16PktLen))?1:0;
+    return (iDataLen >= ntohs(m_u16PktLen))?true:false;
 }
 
 //============================================================================

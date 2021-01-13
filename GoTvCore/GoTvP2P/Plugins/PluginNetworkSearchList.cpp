@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceRandomConnect.h"
+#include "PluginNetworkSearchList.h"
 #include "PluginMgr.h"
 #include "P2PSession.h"
 #include "RxSession.h"
@@ -24,8 +24,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginServiceRandomConnect::PluginServiceRandomConnect( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+PluginNetworkSearchList::PluginNetworkSearchList( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostService( engine, pluginMgr, myIdent )
 {
-    setPluginType( ePluginTypeRandomConnect );
+    setPluginType( ePluginTypeNetworkSearchList );
 }

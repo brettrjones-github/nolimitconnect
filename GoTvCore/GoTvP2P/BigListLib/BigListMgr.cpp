@@ -202,7 +202,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 			eUpdateType = ePktAnnUpdateTypeContactChanged;
 		}
 
-		memcpy( poInfo, poPktAnnIn, sizeof( PktAnnBase ) );
+		memcpy( poInfo, poPktAnnIn, sizeof( VxNetIdent ) );
 		if( contactInfoChanged )
 		{
 			GetPtoPEngine().toGuiContactConnectionChange( poInfo );
@@ -292,7 +292,7 @@ RCODE BigListMgr::FillAnnList(	PktAnnList * poPktAnnList,
 		if( poInfo->getElapsedMsTcpLastContact() <= s64ContactTimeLimitMs )
 		{
 			//is a node we can add if fits
-			if( ((int)sizeof( PktAnnBase ) + poPktAnnList->getPktLength() ) <= (iMaxListLen + iemptyLen) )
+			if( ((int)sizeof( VxNetIdent ) + poPktAnnList->getPktLength() ) <= (iMaxListLen + iemptyLen) )
 			{
 			
 				if( ( false == bIncludeThisNode ) 
