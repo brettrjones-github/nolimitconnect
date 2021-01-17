@@ -163,12 +163,13 @@
 #define PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY		( PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ + 1 )	// 112 ( 0x70 )
 #define PKT_TYPE_HOST_LIST_XFER_ERR					( PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY + 1 )	// 113 ( 0x71 )
 
-#define PKT_TYPE_HOST_OFFER_REQ		                ( PKT_TYPE_HOST_LIST_XFER_ERR + 1 )	            // 114 ( 0x72 )
-#define PKT_TYPE_HOST_OFFER_REPLY					( PKT_TYPE_HOST_OFFER_REQ + 1 )	                // 115 ( 0x73 )
-#define PKT_TYPE_HOST_JOIN_REQ		                ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	            // 116 ( 0x74 )
-#define PKT_TYPE_HOST_JOIN_REPLY					( PKT_TYPE_HOST_JOIN_REQ + 1 )	                // 117 ( 0x75 )
+#define PKT_TYPE_HOST_JOIN_REQ		                ( PKT_TYPE_HOST_LIST_XFER_ERR + 1 )	            // 114 ( 0x72 )
+#define PKT_TYPE_HOST_JOIN_REPLY					( PKT_TYPE_HOST_JOIN_REQ + 1 )	                // 115 ( 0x73 )
 
-#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_JOIN_REPLY + 1 )	            // 118 ( 0x76 )
+#define PKT_TYPE_HOST_OFFER_REQ		                ( PKT_TYPE_HOST_JOIN_REPLY + 1 )	            // 116 ( 0x74 )
+#define PKT_TYPE_HOST_OFFER_REPLY					( PKT_TYPE_HOST_OFFER_REQ + 1 )	                // 117 ( 0x75 )
+
+#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	            // 118 ( 0x76 )
 #define PKT_TYPE_FRIEND_OFFER_REPLY					( PKT_TYPE_FRIEND_OFFER_REQ + 1 )	            // 119 ( 0x77 )
 
 #define MAX_PKT_TYPE_CNT							(PKT_TYPE_FRIEND_OFFER_REPLY + 1)

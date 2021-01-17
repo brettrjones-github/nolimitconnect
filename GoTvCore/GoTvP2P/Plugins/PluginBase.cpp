@@ -230,7 +230,19 @@ bool PluginBase::txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr 
 		return false;
 	}
 
-	return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, sktBase, poPkt, bDisconnectAfterSend );
+	return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), sktBase, poPkt, bDisconnectAfterSend );
+}
+
+//============================================================================
+bool PluginBase::txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend )
+{
+    if( NULL == sktBase )
+    {
+        LogMsg( LOG_WARN, "PluginBase::txPacket NULL sktBase\n" );
+        return false;
+    }
+
+    return m_PluginMgr.pluginApiTxPacket( m_ePluginType, onlineId, sktBase, poPkt, bDisconnectAfterSend );
 }
 
 //============================================================================

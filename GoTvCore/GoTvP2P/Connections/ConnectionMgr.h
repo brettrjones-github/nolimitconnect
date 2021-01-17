@@ -35,18 +35,22 @@ public:
     ConnectionMgr( P2PEngine& engine );
     virtual ~ConnectionMgr() = default;
 
+    /// set default url from network settings
+    void                        applyDefaultHostUrl( EHostType hostType, std::string& hostUrl );
+    /// get default url for given host type
+    std::string                 getDefaultHostUrl( EHostType hostType );
+
+    void                        setDefaultHostOnlineId( EHostType hostType, VxGUID& hostOnlineId );
+    bool                        getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId );
+
+    EHostJoinStatus             lookupOrQueryId( std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+
+    EConnectStatus              requestConnection( std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, 
+                                                   EConnectReason connectReason = eConnectReasonUnknown );
+    void                        doneWithConnection( VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+
     bool                        onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo* bigListInfo );
     void                        onSktDisconnected( VxSktBase* sktBase );
-
-    void                        setHostOnlineId( EHostType hostType, VxGUID& hostOnlineId );
-    bool                        getHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId );
-    
-    void                        applyHostUrl( EHostType hostType, std::string& hostUrl );
-
-    void                        fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr );
-
-    bool                        requestHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback );
-    void                        doneWithHostConnection( EHostType hostType, EPluginType pluginType,  EConnectRequestType connectType, IConnectRequestCallback* callback );
 
 protected:
     virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) override;
@@ -65,7 +69,13 @@ protected:
 
     void                        onInternetAvailable( void );
     void                        onNoLimitNetworkAvailable( void );
-    void                        reseHosttUrl( EHostType hostType );
+    void                        resetDefaultHostUrl( EHostType hostType );
+
+    /// keep a cache of urls to online id to avoid time consuming query host id
+    void                        updateUrlCache( std::string& hostUrl, VxGUID& onlineId );
+    bool                        urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& onlineId );
+    EConnectStatus              attemptConnection( std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason );
+
 
     //=== vars ===//
     P2PEngine&					m_Engine;
@@ -81,7 +91,8 @@ protected:
     std::map<EHostType, std::string>    m_DefaultHostRequiresOnlineId;
     std::map<EHostType, ERunTestStatus> m_DefaultHostQueryIdFailed;
 
-    std::map<EHostType, VxGUIDList> m_HostedConnections;
-    std::map<EHostType, VxGUIDList> m_PluginToHostConnections;
+    /// keep a cache of urls to online id to avoid time consuming query host id
+    std::map<std::string, VxGUID>       m_UrlCache;
+    std::map<VxGUID, std::pair<IConnectRequestCallback*, EConnectReason>>   m_ConnectRequests;
 };
 

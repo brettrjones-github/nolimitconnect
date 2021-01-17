@@ -12,16 +12,15 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginChatRoomClient.h"
-#include "P2PSession.h"
+#include "HostBaseMgr.h"
+#include "PluginBase.h"
 #include "PluginMgr.h"
 
-#include <PktLib/PktsVideoFeed.h>
-#include <PktLib/PktsMultiSession.h>
-#include <PktLib/PktsTodGame.h>
-
-#include <GoTvInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBase.h>
+
+#include <NetLib/VxSktBase.h>
+#include <PktLib/PktsHostJoin.h>
 
 #include <memory.h>
 
@@ -30,18 +29,18 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseMultimedia( engine, pluginMgr, myIdent )
-, m_HostClientMgr(engine, pluginMgr, myIdent, *this)
+HostBaseMgr::HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
+: m_Engine( engine )
+, m_PluginMgr( pluginMgr )
+, m_MyIdent( myIdent )
+, m_Plugin( pluginBase )
+, m_ConnectionMgr(engine.getConnectionMgr())
 {
-	setPluginType( ePluginTypeChatRoomClient );
 }
 
 //============================================================================
-void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
+void HostBaseMgr::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
-    m_HostClientMgr.fromGuiJoinHost( hostType, ptopUrl );
-    /*
     if( !ptopUrl && hostType == eHostTypeUnknown )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinInvalidUrl );
@@ -73,22 +72,33 @@ void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, const char * pto
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinInvalidUrl );
     }
-    */
 }
 
-/*
 //============================================================================
-void PluginChatRoomClient::onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId, EConnectReason connectReason )
 {
     if( eConnectReasonChatRoomJoin == connectReason )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnecting );
-        m_ConnectionMgr.requestConnection( url, onlineId, this, eConnectReasonChatRoomJoin );
+        VxSktBase* sktBase = nullptr;
+        EConnectStatus connectStatus = m_ConnectionMgr.requestConnection( url, onlineId, this, sktBase, eConnectReasonChatRoomJoin );
+        if( eConnectStatusReady == connectStatus )
+        {
+            if( sktBase )
+            {
+                m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectSuccess );
+                onContactConnected( sktBase, onlineId, eConnectReasonChatRoomJoin );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "requestConnection sucess but has null socket" );
+            }
+        }
     }
 }
 
 //============================================================================
-void PluginChatRoomClient::onUrlActionQueryIdFail( std::string& url, ERunTestStatus testStatus, EConnectReason connectReason )
+void HostBaseMgr::onUrlActionQueryIdFail( std::string& url, ERunTestStatus testStatus, EConnectReason connectReason )
 {
     if( eConnectReasonChatRoomJoin == connectReason )
     {
@@ -97,35 +107,46 @@ void PluginChatRoomClient::onUrlActionQueryIdFail( std::string& url, ERunTestSta
 }
 
 //============================================================================
-bool PluginChatRoomClient::onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+bool HostBaseMgr::onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     if( eConnectReasonChatRoomJoin == connectReason )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSendingJoinRequest );
-        sendJoinRequest( sktBase );
+        sendJoinRequest( sktBase, onlineId, connectReason );
     }
 
     return false;
 }
 
 //============================================================================
-void PluginChatRoomClient::onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason )
+void HostBaseMgr::onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason )
 {
     if( eConnectReasonChatRoomJoin == connectReason )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectFailed, DescribeConnectStatus( connectStatus ) );
+        m_ConnectionMgr.doneWithConnection( onlineId, this, connectReason);
     }
 }
 
 //============================================================================
-void PluginChatRoomClient::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
 
 }
 
 //============================================================================
-void PluginChatRoomClient::sendJoinRequest( VxSktBase* sktBase )
+void HostBaseMgr::sendJoinRequest( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
-
+    vx_assert( nullptr != sktBase );
+    PktHostJoinReq pktJoin;
+    pktJoin.setHostType( eHostTypeChatRoom );
+    if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSendingJoinRequest );
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSendJoinRequestFailed );
+        m_ConnectionMgr.doneWithConnection( onlineId, this, connectReason);
+    }
 }
-*/

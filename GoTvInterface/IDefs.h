@@ -29,9 +29,53 @@ enum EAppModule
     eMaxAppModule // must be last
 };
 
+enum EConnectReason
+{
+    eConnectReasonUnknown = 0,
+
+    eConnectReasonChatRoomAnnounce,
+    eConnectReasonChatRoomJoin,
+    eConnectReasonChatRoomSearch,
+
+    eConnectReasonGroupAnnounce,
+    eConnectReasonGroupJoin,
+    eConnectReasonGroupSearch,
+
+    eConnectReasonRandomConnectAnnounce,
+    eConnectReasonRandomConnectJoin,
+    eConnectReasonRandomConnectSearch,
+
+    eConnectReasonRelayAnnounce,
+    eConnectReasonRelayJoin,
+    eConnectReasonRelaySearch,
+
+    eConnectReasonAnnouncePing,
+    eConnectReasonStayConnected,
+    eConnectReasonPlugin,
+    eConnectReasonOtherSearch,
+
+    eMaxConnectReason
+};
+
+enum EConnectStatus
+{
+    eConnectStatusUnknown = 0,
+
+    eConnectStatusReady,
+    eConnectStatusBadParam,
+    eConnectStatusBadAddress,
+    eConnectStatusPermissionDenied,
+    eConnectStatusConnecting,
+    eConnectStatusConnectFailed,
+    eConnectStatusDropped,
+    eConnectStatusRxAnnTimeout,
+
+    eMaxConnectStatus
+};
+
 enum EContentRating
 {
-    eContentRatingUnspecified,
+    eContentRatingUnspecified = 0,
     eContentRatingFamily,
     eContentRatingAdult,
     eContentRatingXXX,
@@ -43,7 +87,7 @@ enum EContentRating
 
 enum EContentCatagory
 {
-    eContentCatagoryUnspecified,
+    eContentCatagoryUnspecified = 0,
     eContentCatagoryVideo,
     eContentCatagoryAudio,
     eContentCatagoryImage,
@@ -93,7 +137,7 @@ namespace FirewallSettings
 
 enum EGenderType
 {
-    eGenderTypeUnspecified,
+    eGenderTypeUnspecified = 0,
     eGenderTypeMale,
     eGenderTypeFemale,
 
@@ -103,12 +147,18 @@ enum EGenderType
 enum EHostJoinStatus
 {
     eHostJoinUnknown = 0,
-    eHostJoinConnecting = 1,
-    eHostJoinConnectFailed = 2,
-    eHostJoinSendingJoinRequest = 3,
-    eHostJoinSuccess = 4,
-    eHostJoinFailPermission = 5,
-    eHostJoinFailConnectDropped = 6,
+    eHostJoinInvalidUrl = 1,
+    eHostJoinQueryIdInProgress = 2,
+    eHostJoinQueryIdSuccess = 3,
+    eHostJoinQueryIdFailed = 4,
+    eHostJoinConnecting = 5,
+    eHostJoinConnectSuccess = 6,
+    eHostJoinConnectFailed = 7,
+    eHostJoinSendingJoinRequest = 8,
+    eHostJoinSendJoinRequestFailed = 9,
+    eHostJoinSuccess = 10,
+    eHostJoinFailPermission = 11,
+    eHostJoinFailConnectDropped = 12,
 
     eMaxHostJoinStatus
 };
@@ -293,7 +343,7 @@ enum EMyRelayStatus
 //! \public In Text Chat Session Actions
 enum EMSessionAction
 {
-	eMSessionActionNone,
+	eMSessionActionNone = 0,
 	eMSessionActionChatSessionReq,
 	eMSessionActionChatSessionAccept,
 	eMSessionActionChatSessionReject,
@@ -327,7 +377,7 @@ enum ELanguageType
 //! \public Network protocol layer
 enum ENetLayerType
 {
-    eNetLayerTypeUndefined,		        //< not specified/initialized
+    eNetLayerTypeUndefined = 0,		    //< not specified/initialized
     eNetLayerTypeInternet,		        //< can communicate with internet
     eNetLayerTypePtoP,		            //< tcp and extern ip found
     eNetLayerTypeNetHost,		        //< network host available
@@ -338,7 +388,7 @@ enum ENetLayerType
 
 enum ENetLayerState
 {
-    eNetLayerStateUndefined,		    //< not specified/initialized
+    eNetLayerStateUndefined = 0,		//< not specified/initialized
     eNetLayerStateWrongType,		    //< invalid or not relevant net layer type
     eNetLayerStateTesting,		        //< testing for available 
     eNetLayerStateFailed,		        //< failed or some issue
@@ -435,7 +485,7 @@ enum ERandomConnectStatus
 
 enum ESubCatagory
 {
-    eSubCatagoryUnspecified,
+    eSubCatagoryUnspecified = 0,
 
     eSubCatagoryVideoOther,
     eSubCatagoryVideoPersonal,
@@ -490,6 +540,10 @@ enum ERunTestStatus
 };
 
 const char * DescribeAppModule( EAppModule appModule );
+
+const char * DescribeConnectReason( EConnectReason connectReason );
+
+const char * DescribeConnectStatus( EConnectStatus connectStatus );
 
 //! Host type as text
 const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus );

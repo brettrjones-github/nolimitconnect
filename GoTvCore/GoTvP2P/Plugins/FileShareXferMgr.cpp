@@ -232,7 +232,7 @@ bool FileShareXferMgr::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identi
 	{
 		PktPluginOfferReq oPkt;
 		if( true == m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-			netIdent, 
+			netIdent->getMyOnlineId(), 
 			sktBase, 
 			&oPkt ) )
 		{
@@ -252,7 +252,7 @@ bool FileShareXferMgr::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identi
 				// if no file name then want directory list
 				PktFileListReq pktListReq;
 				m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-												netIdent, 
+												netIdent->getMyOnlineId(), 
 												sktBase, 
 												&pktListReq );
 			}
@@ -1497,7 +1497,7 @@ EXferError FileShareXferMgr::beginFileGet( FileRxSession * xferSession )
 		oPkt.setRmtSessionId( xferSession->m_astrFilesToXfer[0].getRmtSessionId() );
 		oPkt.setFileHashId( xferSession->m_astrFilesToXfer[0].getFileHashId() );
 		return ( m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-												xferSession->getIdent(), 
+												xferSession->getIdent()->getMyOnlineId(), 
 												xferSession->getSkt(), 
 												&oPkt ) ) ? eXferErrorNone : eXferErrorDisconnected;
 	}

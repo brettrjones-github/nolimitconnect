@@ -146,7 +146,7 @@ bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent *	netIdent,
 	{
 		PktChatReq oPkt;
 		oPkt.addMsg( pMsg );
-		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &oPkt );
+		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &oPkt );
 	}
 	else
 	{

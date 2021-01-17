@@ -45,8 +45,14 @@ public:
 protected:
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting ) override;
     /// return true if have use for this connection
-    virtual bool                onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) override;
-    virtual void                onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) override;
+    //=== callback overrides ==//
+    virtual void                onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onUrlActionQueryIdFail( std::string& url, ERunTestStatus testStatus, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+
+    /// returns false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
+    virtual bool                onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return false; };
+    virtual void                onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onContactDisconnected( VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
     void                        buildHostGroupAnnounce( PluginSetting& pluginSetting );
     void                        sendHostGroupAnnounce( void );

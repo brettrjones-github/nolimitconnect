@@ -89,7 +89,7 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * n
 			P2PSession * poSession = (P2PSession *)sessionBase;
 			if( poSession->getSkt() )
 			{
-				m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), poSession->getIdent(), poSession->getSkt(), &oPkt );
+				m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), poSession->getIdent()->getMyOnlineId(), poSession->getSkt(), &oPkt );
 			}
 		}
 	}
@@ -247,7 +247,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 {
 	PktVideoFeedPicAck oPkt;
 	m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-									netIdent, 
+									netIdent->getMyOnlineId(), 
 									sktBase, 
 									&oPkt ); 
 	
@@ -329,7 +329,7 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHd
 {
 	PktVideoFeedPicAck oPkt;
 	m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-									netIdent, 
+									netIdent->getMyOnlineId(), 
 									sktBase, 
 									&oPkt ); 
 
@@ -427,7 +427,7 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 			if( poSession && ( MAX_OUTSTANDING_VID_ACKS > ackCnt ) )
 			{
 				if( m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-													poSession->getIdent(), 
+													poSession->getIdent()->getMyOnlineId(), 
 													poSession->getSkt(), 
 													pktVid ) )
 				{
@@ -446,7 +446,7 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 			if( poSession && ( MAX_OUTSTANDING_VID_ACKS > ackCnt ) )
 			{
 				if( m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-													poSession->getIdent(), 
+													poSession->getIdent()->getMyOnlineId(), 
 													poSession->getSkt(), 
 													pktVid ) )
 				{
@@ -485,9 +485,9 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 		{
 			P2PSession * poSession = (P2PSession *)iter->second;
 			if( m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-					poSession->getIdent(), 
-					poSession->getSkt(), 
-					pktVid ) )
+					                            poSession->getIdent()->getMyOnlineId(), 
+					                            poSession->getSkt(), 
+					                            pktVid ) )
 			{
 				poSession->setOutstandingAckCnt( poSession->getOutstandingAckCnt() + 1 );
 			}
@@ -496,9 +496,9 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 		{
 			TxSession * poSession = (TxSession *)iter->second;
 			if( m_PluginMgr.pluginApiTxPacket(	m_Plugin.getPluginType(), 
-											poSession->getIdent(), 
-											poSession->getSkt(), 
-											pktVid ) )
+											    poSession->getIdent()->getMyOnlineId(), 
+											    poSession->getSkt(), 
+											    pktVid ) )
 			{
 				poSession->setOutstandingAckCnt( poSession->getOutstandingAckCnt() + 1 );
 			}

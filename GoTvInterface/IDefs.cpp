@@ -2,13 +2,60 @@
 
 namespace
 {
+    const char * ConnectReasonEnumStrings[] = 
+    { 
+        "Connect Reason Unknown ",
+        "Connect Reason Chat RoomAnnounce ",
+        "Connect Reason Chat Room Join ",
+        "Connect Reason Chat Room Search ",
+        "Connect Reason Group Announce ",
+        "Connect Reason Group Join ",
+        "Connect Reason Group Search ",
+
+        "Connect Reason Random Connect Announce ",
+        "Connect Reason Random Connect Join ",
+        "Connect Reason Random Connect Search ",  
+        "Connect Reason Relay Announce ",
+        "Connect Reason Relay Join ",
+        "Connect Reason Relay Search ",
+
+        "Connect Reason Announce Ping ",  
+        "Connect Reason Stay Connected ",
+        "Connect Reason Plugin ",  
+        "Connect Reason Other Search ",
+
+        "Max Connect Reason ",
+    };
+
+    const char * ConnectStatusEnumStrings[] = 
+    { 
+        "Connect Status Unknown ",
+
+        "Connect Status Ready ",
+        "Connect Status Bad Param ",
+        "Connect Status Bad Address ",
+        "Connect Status Permission Denied ",
+        "Connect Status Connecting ",
+        "Connect Status Connect Failed ",
+        "Connect Status Dropped ",
+        "Connect Status Rx Ann Timeout ",
+
+        "Max Connect Status ",
+    };
+
 
     const char * HostJoinStatusEnumStrings[] = 
     { 
         "Host Join Status Unknown ",
+        "Host Join Invalid Url ",
+        "Host Join Querying Id In Progress ",
+        "Host Join Querying Id Success ",
+        "Host Join Query Id Failed ",
         "Host Join Connecting ",
-        "Host Connect Fail ",
-        "Sending Join Request ",
+        "Host Join Connect Success ",
+        "Host Join Connect Failed ",
+        "Host Join Sending Request ",
+        "Host Join Send Request Failed ",
         "Host Join Success ",
         "Host Join Fail Permission ",  
         "Host Join Fail Connect Dropped ",
@@ -159,9 +206,14 @@ namespace
 }
 
 //============================================================================
-const char * DescribeAppModule( EAppModule appModule )
+const char * DescribeAppModule( EAppModule eAppModule )
 {
-    switch( appModule )
+    if( eAppModule < 0 || eMaxAppModule <= eAppModule )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    switch( eAppModule )
     {
     case eAppModuleInvalid:
         return "eAppModuleInvalid";
@@ -178,6 +230,29 @@ const char * DescribeAppModule( EAppModule appModule )
     }
 }
 
+//============================================================================
+const char * DescribeConnectReason( EConnectReason eConnectReason )
+{
+    if( eConnectReason < 0 || eMaxConnectReason <= eConnectReason )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return ConnectReasonEnumStrings[ eConnectReason ];
+}
+
+//============================================================================
+const char * DescribeConnectStatus( EConnectStatus eConnectStatus )
+{
+    if( eConnectStatus < 0 || eMaxConnectStatus <= eConnectStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return ConnectStatusEnumStrings[ eConnectStatus ];
+}
+
+//============================================================================
 const char * DescribeHostJoinStatus( EHostJoinStatus eHostStatus )
 {
     if( eHostStatus < 0 || eMaxHostJoinStatus <= eHostStatus )

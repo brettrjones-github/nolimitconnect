@@ -98,7 +98,7 @@ void PluginServiceWebCam::sendVidPkt( VxPktHdr * vidPkt, bool requiresAck )
 					&& ( !requiresAck  || (10 > poSession->getOutstandingAckCnt() ) ) )
 				{
 					m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-													poSession->getIdent(), 
+													poSession->getIdent()->getMyOnlineId(), 
 													poSession->getSkt(), 
 													vidPkt ); 
 					if( requiresAck )
@@ -229,7 +229,7 @@ void PluginServiceWebCam::fromGuiStopPluginSession( VxNetIdent * netIdent, int p
 						{
 							oPkt.setLclSessionId( poSession->getLclSessionId() );
 							oPkt.setRmtSessionId( poSession->getRmtSessionId() );
-							m_PluginMgr.pluginApiTxPacket( m_ePluginType, poSession->getIdent(), poSession->getSkt(), &oPkt );
+							m_PluginMgr.pluginApiTxPacket( m_ePluginType, poSession->getIdent()->getMyOnlineId(), poSession->getSkt(), &oPkt );
 							delete poSession;
 							sessionList.erase( iter );
 							bErased = true;
@@ -254,7 +254,7 @@ void PluginServiceWebCam::fromGuiStopPluginSession( VxNetIdent * netIdent, int p
 		{
 			oPkt.setLclSessionId( poSession->getLclSessionId() );
 			oPkt.setRmtSessionId( poSession->getRmtSessionId() );
-			m_PluginMgr.pluginApiTxPacket( m_ePluginType, poSession->getIdent(), poSession->getSkt(), &oPkt );
+			m_PluginMgr.pluginApiTxPacket( m_ePluginType, poSession->getIdent()->getMyOnlineId(), poSession->getSkt(), &oPkt );
 		}
 
 		m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -313,7 +313,7 @@ bool PluginServiceWebCam::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// ide
         if( 0 != rxSession )
         {
             if( true == m_PluginMgr.pluginApiTxPacket(	m_ePluginType,
-                                                        netIdent,
+                                                        netIdent->getMyOnlineId(),
                                                         sktBase,
                                                         &oPkt ) )
             {
@@ -341,7 +341,7 @@ bool PluginServiceWebCam::requestCamSession(	RxSession *			rxSession,
 	PktSessionStartReq oPkt;
 	oPkt.setLclSessionId( rxSession->getLclSessionId() );
 	bool bSuccess = m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-													rxSession->getIdent(), 
+													rxSession->getIdent()->getMyOnlineId(), 
 													rxSession->getSkt(), 
 													&oPkt );
 	if( ( true == bSuccess ) && bWaitForSuccess )
@@ -366,7 +366,7 @@ bool PluginServiceWebCam::stopCamSession(	VxNetIdent *		netIdent,
 	LogMsg( LOG_ERROR, "PluginServiceWebCam::stopCamSession\n");
 	PktSessionStopReq oPkt;
 	bool bSuccess = m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-												netIdent, 
+												netIdent->getMyOnlineId(), 
 												sktBase, 
 												&oPkt );
 	m_PluginSessionMgr.removeRxSessionByOnlineId( netIdent->getMyOnlineId(), false );
@@ -398,7 +398,7 @@ void PluginServiceWebCam::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * p
 	}
 
 	m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-									netIdent, 
+									netIdent->getMyOnlineId(), 
 									sktBase, 
 									&pktReply ); 
 }
@@ -453,7 +453,7 @@ void PluginServiceWebCam::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * 
 	}
 
 	m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-									netIdent, 
+									netIdent->getMyOnlineId(), 
 									sktBase, 
 									&oPkt ); 
 }
@@ -536,7 +536,7 @@ void PluginServiceWebCam::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pkt
 {
 	//LogMsg( LOG_INFO, "PluginServiceWebCam::onPktCastPic\n" );
 	PktVideoFeedPicAck oPkt;
-	m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, sktBase, &oPkt ); 
+	m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), sktBase, &oPkt ); 
 
 	PktVideoFeedPic * poPktCastPic = ( PktVideoFeedPic * )pktHdr;
 	if( poPktCastPic->getTotalDataLen() == poPktCastPic->getThisDataLen() )
@@ -610,7 +610,7 @@ void PluginServiceWebCam::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr 
 			// all of picture arrived
 			PktVideoFeedPicAck oPkt;
 			m_PluginMgr.pluginApiTxPacket(	m_ePluginType, 
-				netIdent, 
+				netIdent->getMyOnlineId(), 
 				sktBase, 
 				&oPkt ); 
 

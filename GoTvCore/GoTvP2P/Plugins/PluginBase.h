@@ -113,9 +113,9 @@ public:
 	virtual int					fromGuiPluginControl(	VxNetIdent *	netIdent,
 														const char *	pControl, 
 														const char *	pAction,
-														uint32_t				u32ActionData,
+														uint32_t		u32ActionData,
 														VxGUID&			fileId,
-														uint8_t *			fileHashId );
+														uint8_t *		fileHashId );
 
 	virtual bool				fromGuiInstMsg(	VxNetIdent * netIdent, const char *	pMsg );
 
@@ -135,21 +135,25 @@ public:
 	virtual void				fromGuiSendAsset( AssetInfo& assetInfo )							{};
 	virtual bool				fromGuiMultiSessionAction( VxNetIdent *	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) { return false; }; 
 
+    //=== hosting ===//
+    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl )	        {};
+
+    //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) = 0;
 	virtual void				onConnectionLost( VxSktBase * sktBase ) = 0;
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
 
-	virtual void				onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked );
-	virtual void				onSessionEnded( PluginSessionBase * poSession, 
-												bool pluginIsLocked,
-												EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
+    bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
+    bool						txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
 
+    //=== maintenence ===//
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )							{};
     virtual void				onMyPktAnnounceChange( PktAnnounce& pktAnn )							{};
     virtual void				onThreadOncePer15Minutes( void )							            {};
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting )                   {};
 
+    //=== packet handlers ===//
     virtual void				onPktUserConnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktUserDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
@@ -169,7 +173,12 @@ public:
     virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
+    //=== sessions ===//
+    virtual void				onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked );
+    virtual void				onSessionEnded( PluginSessionBase * poSession, 
+                                                bool pluginIsLocked,
+                                                EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
+
     virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent );
 
 	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
@@ -179,6 +188,7 @@ public:
 	virtual TxSession *			createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
 
+    //=== http ===//
 	virtual void				handlePluginSpecificSkt( VxSktBase * sktBase ) {};
 	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
 	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, VxNetIdent * netIdent )				{ return -1; }

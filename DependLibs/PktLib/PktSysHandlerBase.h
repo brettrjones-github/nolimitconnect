@@ -153,6 +153,13 @@ public:
     virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+    virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFriendOfferReq             ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFriendOfferReply           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
 
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  

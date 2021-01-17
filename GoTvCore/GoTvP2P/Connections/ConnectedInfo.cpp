@@ -51,7 +51,9 @@ ConnectedInfo::ConnectedInfo( const ConnectedInfo& rhs )
     , m_PeerOnlineId( rhs.m_PeerOnlineId )
 {
     m_RmtPlugins = rhs.m_RmtPlugins;
-    m_LclPlugins = rhs.m_LclPlugins;
+    m_LclList = rhs.m_LclList;
+    m_RmtList = rhs.m_RmtList;
+    m_SktList = rhs.m_SktList; 
 }
 
 //============================================================================
@@ -62,7 +64,9 @@ ConnectedInfo& ConnectedInfo::operator=( const ConnectedInfo& rhs )
         m_BigListInfo = rhs.m_BigListInfo;
         m_PeerOnlineId = rhs.m_PeerOnlineId;
         m_RmtPlugins = rhs.m_RmtPlugins;
-        m_LclPlugins = rhs.m_LclPlugins;
+        m_LclList = rhs.m_LclList;
+        m_RmtList = rhs.m_RmtList;
+        m_SktList = rhs.m_SktList; 
     }
 
     return *this;
@@ -72,6 +76,57 @@ ConnectedInfo& ConnectedInfo::operator=( const ConnectedInfo& rhs )
 bool ConnectedInfo::operator==( const ConnectedInfo& rhs )
 {
     return  m_PeerOnlineId == rhs.m_PeerOnlineId;
+}
+
+//============================================================================
+VxSktBase * ConnectedInfo::getSktBase( void )
+{
+    if( m_SktList.size() )
+    {
+        return m_SktList.front();
+    }
+
+    return nullptr;
+}
+
+//============================================================================
+void ConnectedInfo::addConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason )
+{
+    for( auto &pair : m_LclList )
+    {
+        if( pair.first == callback && pair.second == connectReason )
+        {
+            // already in list;
+            return;
+        }
+    }
+
+    m_LclList.push_back( std::make_pair( callback, connectReason ) );
+}
+
+//============================================================================
+void ConnectedInfo::removeConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason, bool disconnectIfNotInUse )
+{
+    for( auto iter = m_LclList.begin(); iter != m_LclList.end(); ++iter )
+    {
+        if( iter->first == callback && iter->second == connectReason )
+        {
+            m_LclList.erase(iter);
+            break;
+        }
+    }
+
+    if( m_LclList.empty() && m_RmtList.empty() )
+    {
+        // let the normal socket disconnected code do the work of removing the connection
+        for( auto skt : m_SktList )
+        {
+            if( skt->isConnectSocket() && skt->isConnected() )
+            {
+                skt->closeSkt(876, true);
+            }
+        }
+    }
 }
 
 //============================================================================

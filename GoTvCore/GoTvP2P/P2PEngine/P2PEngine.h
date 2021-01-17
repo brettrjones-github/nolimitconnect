@@ -551,7 +551,14 @@ protected:
     virtual void				onPktHostListChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostListSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-     virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+
+    virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFriendOfferReq             ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFriendOfferReply           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
     //========================================================================
     //========================================================================

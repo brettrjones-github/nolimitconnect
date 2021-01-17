@@ -15,38 +15,19 @@
 
 #include <vector>
 
-enum EConnectRequestType
-{
-    eConnectRequestNone,
-
-    eConnectRequestRelayFind,
-    eConnectRequestRelayJoin,
-
-    eConnectRequestGroupAnnounce,
-    eConnectRequestGroupFind,
-    eConnectRequesttGroupJoin,
- 
-    eConnectRequestChatRoomAnnounce,
-    eConnectRequestChatRoomFind,
-    eConnectRequestChatRoomJoin,
-
-    eMaxConnectRequestType
-};
+#include <GoTvInterface/IDefs.h>
 
 class VxSktBase;
+class VxGUID;
 
 class IConnectRequestCallback
 {
 public:
-    /// return true if have use for this connection
-    virtual bool                onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase ) = 0;
-    virtual void                onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBased ) = 0;
+    virtual void                onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) = 0;
+    virtual void                onUrlActionQueryIdFail( std::string& url, ERunTestStatus testStatus, EConnectReason connectReason = eConnectReasonUnknown ) = 0;
 
-    // these should only be called by Host Connect Mgr
-    bool                        hasHostConnectType( EConnectRequestType hostConnectType );
-    void                        addHostConnectType( EConnectRequestType hostConnectType );
-    void                        removeConnectType( EConnectRequestType hostConnectType );
-
-    /// a single callback instance may want multiple host services connection
-    std::vector<EConnectRequestType> m_ConnectTypeList;
+    /// returns false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
+    virtual bool                onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) = 0;
+    virtual void                onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason = eConnectReasonUnknown ) = 0;
+    virtual void                onContactDisconnected( VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) = 0;
 };

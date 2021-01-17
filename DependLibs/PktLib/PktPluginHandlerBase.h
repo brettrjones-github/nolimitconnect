@@ -24,7 +24,7 @@ class PktPluginHandlerBase
 {
 public:
 	PktPluginHandlerBase();
-	virtual ~PktPluginHandlerBase();
+	virtual ~PktPluginHandlerBase() = default;
 
 	virtual void				handlePkt				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
@@ -121,6 +121,42 @@ public:
 
 	virtual void				onPktImAliveReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktImAliveReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktPluginSettingReq       ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktPluginSettingReply     ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktThumbSettingReq        ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbSettingReply      ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbSettingChunkReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbSettingChunkReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktThumbAvatarReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbAvatarReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbAvatarChunkReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbAvatarChunkReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktThumbFileReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbFileReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbFileChunkReq      ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbFileChunkReply    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktHostAnnounce           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktHostListSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostListSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostListChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostListChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostListSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
+    virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktFriendOfferReq             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktFriendOfferReply           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+
 
 	//packet type 250 and greater not allowed
 	typedef void (PktPluginHandlerBase::*RC_PLUGIN_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr *, VxNetIdent * );  

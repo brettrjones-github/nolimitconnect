@@ -28,7 +28,22 @@ ConnectionMgr::ConnectionMgr( P2PEngine& engine )
 }
 
 //============================================================================
-void ConnectionMgr::setHostOnlineId( EHostType hostType, VxGUID& hostOnlineId )
+std::string ConnectionMgr::getDefaultHostUrl( EHostType hostType )
+{
+    std::string hostUrl("");
+    m_ConnectionMutex.lock();
+    auto iter = m_DefaultHostUrlList.find( hostType );
+    if( iter != m_DefaultHostUrlList.end() )
+    {
+        hostUrl = iter->second;
+    }
+
+    m_ConnectionMutex.unlock();
+    return hostUrl;
+}
+
+//============================================================================
+void ConnectionMgr::setDefaultHostOnlineId( EHostType hostType, VxGUID& hostOnlineId )
 {
     m_ConnectionMutex.lock();
     m_DefaultHostIdList[hostType] = hostOnlineId;
@@ -36,7 +51,7 @@ void ConnectionMgr::setHostOnlineId( EHostType hostType, VxGUID& hostOnlineId )
 }
 
 //============================================================================
-bool ConnectionMgr::getHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId )
+bool ConnectionMgr::getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId )
 {
     bool result = false;
     retHostOnlineId.clearVxGUID();
@@ -51,6 +66,24 @@ bool ConnectionMgr::getHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId
 
     m_ConnectionMutex.unlock();
     return result;
+}
+
+//============================================================================
+EHostJoinStatus ConnectionMgr::lookupOrQueryId( std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
+{
+    EHostJoinStatus joinStatus = eHostJoinUnknown;
+    if( urlCacheOnlineIdLookup( hostUrl, hostGuid ) )
+    {
+        joinStatus = eHostJoinQueryIdSuccess;
+    }
+    else
+    {
+        joinStatus = eHostJoinQueryIdInProgress;
+        std::string myUrl = m_Engine.getMyUrl();
+        m_Engine.getRunUrlAction().runUrlAction( eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown );
+    }
+
+    return joinStatus;
 }
 
 //============================================================================
@@ -107,7 +140,6 @@ void ConnectionMgr::callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStat
     {
         onNoLimitNetworkAvailable();
     }
-
 }
 
 //============================================================================
@@ -123,7 +155,7 @@ void ConnectionMgr::onNoLimitNetworkAvailable( void )
 }
 
 //============================================================================
-void ConnectionMgr::reseHosttUrl( EHostType hostType )
+void ConnectionMgr::resetDefaultHostUrl( EHostType hostType )
 {
     m_DefaultHostIdList[hostType] = VxGUID::nullVxGUID();
     m_DefaultHostUrlList[hostType] = "";
@@ -132,7 +164,7 @@ void ConnectionMgr::reseHosttUrl( EHostType hostType )
 }
 
 //============================================================================
-void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
+void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUrl )
 {
     m_ConnectionMutex.lock();
     m_DefaultHostUrlList[hostType] = hostUrl;
@@ -151,8 +183,9 @@ void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
                 needOnlineId = false;
 
                 m_ConnectionMutex.lock();
-                m_DefaultHostIdList[hostType] = onlineId;    
+                m_DefaultHostIdList[hostType] = onlineId;  
                 m_ConnectionMutex.unlock();
+                updateUrlCache( hostUrl, onlineId );
             }       
         }
 
@@ -163,7 +196,7 @@ void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
             m_ConnectionMutex.unlock();
 
             std::string myUrl = m_Engine.getMyUrl();
-            m_Engine.getRunUrlAction().runUrlAction( eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), hostType, this );
+            m_Engine.getRunUrlAction().runUrlAction( eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, nullptr, hostType );
         }
     }
 }
@@ -171,11 +204,20 @@ void ConnectionMgr::applyHostUrl( EHostType hostType, std::string& hostUrl )
 //============================================================================
 void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID onlineId )
 {
-    m_ConnectionMutex.lock();
-    m_DefaultHostIdList[actionInfo.getHostType()] = onlineId;
-    m_DefaultHostRequiresOnlineId[actionInfo.getHostType()] = "";
-    std::string hostUrl = m_DefaultHostUrlList[actionInfo.getHostType()];
-    m_ConnectionMutex.unlock();
+    if( eHostTypeUnknown != actionInfo.getHostType() )
+    {
+        m_ConnectionMutex.lock();
+        m_DefaultHostIdList[actionInfo.getHostType()] = onlineId;
+        m_DefaultHostRequiresOnlineId[actionInfo.getHostType()] = "";
+        m_ConnectionMutex.unlock();
+    }
+
+    std::string hostUrl = actionInfo.getRemoteUrl();
+    updateUrlCache( hostUrl, onlineId );
+    if( actionInfo.getConnectReqInterface() )
+    {
+        actionInfo.getConnectReqInterface()->onUrlActionQueryIdSuccess( hostUrl, onlineId, actionInfo.getConnectReason() );
+    }
 
     LogMsg( LOG_VERBOSE, "ConnectionMgr: Success query host %s for online id is %s",  hostUrl.c_str(),
         onlineId.toOnlineIdString().c_str());
@@ -184,31 +226,133 @@ void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID on
 //============================================================================
 void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError )
 {
-    m_ConnectionMutex.lock();
-    m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = eStatus;
-    std::string hostUrl = m_DefaultHostUrlList[actionInfo.getHostType()];
-    m_ConnectionMutex.unlock();
+    if( eHostTypeUnknown != actionInfo.getHostType() )
+    {
+        m_ConnectionMutex.lock();
+        m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+        m_ConnectionMutex.unlock();
+    }
 
-    m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+    std::string hostUrl = actionInfo.getRemoteUrl();
+    if( actionInfo.getConnectReqInterface() )
+    {
+        actionInfo.getConnectReqInterface()->onUrlActionQueryIdFail( hostUrl, eStatus, actionInfo.getConnectReason() );
+    }
+
     LogMsg( LOG_ERROR, "ConnectionMgr: query host %s for id failed %s %s",  hostUrl.c_str(),
         DescribeRunTestStatus( eStatus ), DescribeNetCmdError( netCmdError ));
 }
 
 //============================================================================
-bool ConnectionMgr::requestHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback )
+EConnectStatus ConnectionMgr::requestConnection( std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason )
 {
+    if( !onlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "ConnectionMgr::requestConnection must have valid online id" );
+        return eConnectStatusBadParam;
+    }
 
-    return false;
+    // first see if we already have a connection to the requested onlineId
+    VxSktBase *sktBase = nullptr;
+    m_ConnectionMutex.lock();
+    ConnectedInfo* connectInfo = m_AllList.getConnectedInfo( onlineId );
+    if( connectInfo )
+    {
+        sktBase = connectInfo->getSktBase();
+        if( sktBase )
+        {
+            connectInfo->addConnectReason( callback, connectReason );
+        }
+    }
+
+    m_ConnectionMutex.unlock();
+    if( sktBase )
+    {
+        retSktBase = sktBase;
+        return eConnectStatusReady;
+    }
+    else
+    {
+        return attemptConnection( url, onlineId, callback, retSktBase, connectReason );
+    }
+
+    return eConnectStatusUnknown;
 }
 
 //============================================================================
-void ConnectionMgr::doneWithHostConnection( EHostType hostType, EPluginType pluginType, EConnectRequestType connectType, IConnectRequestCallback* callback )
+EConnectStatus ConnectionMgr::attemptConnection( std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason )
 {
+    EConnectStatus connectStatus = eConnectStatusConnecting;
 
+    return connectStatus;
 }
 
 //============================================================================
-void ConnectionMgr::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
+void ConnectionMgr::doneWithConnection( VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
-    
+    m_ConnectionMutex.lock();
+    auto inProgressConnection = m_ConnectRequests.find( onlineId );
+    if( inProgressConnection != m_ConnectRequests.end() )
+    {
+        m_ConnectRequests.erase( inProgressConnection );
+    }
+
+    ConnectedInfo* connectInfo = m_AllList.getConnectedInfo( onlineId );
+    if( connectInfo )
+    {
+        connectInfo->removeConnectReason( callback, connectReason, true );
+    }
+
+    m_ConnectionMutex.unlock();
+}
+
+//============================================================================
+void ConnectionMgr::updateUrlCache( std::string& hostUrl, VxGUID& onlineId )
+{
+    if( !hostUrl.empty() && onlineId.isVxGUIDValid() )
+    {
+        // there should be only one online id per ip and port however the ip may change
+        // only keep the latest url
+        m_ConnectionMutex.lock();
+        for( auto iter = m_UrlCache.begin(); iter != m_UrlCache.end(); ++iter )
+        {
+            if( iter->second == onlineId )
+            {
+                if( iter->first == hostUrl )
+                {
+                    // already in map
+                    m_ConnectionMutex.unlock();
+                    return;
+                }
+
+                m_UrlCache.erase( iter );
+                break;
+            }
+        }
+
+        m_UrlCache[hostUrl] = onlineId;
+        m_ConnectionMutex.unlock();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "ConnectionMgr::updateUrlCache empty url" );
+    }
+}
+
+//============================================================================
+bool ConnectionMgr::urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& onlineId )
+{
+    bool foundId = false;
+    onlineId.clearVxGUID();
+    m_ConnectionMutex.lock();
+    auto iter = m_UrlCache.find( hostUrl );
+    if( iter != m_UrlCache.end() )
+    {
+        onlineId = iter->second;
+        foundId = true;
+    }
+
+    m_ConnectionMutex.unlock();
+
+    return foundId;
 }

@@ -75,7 +75,7 @@ void PluginGroupClient::sendHostGroupAnnounce( void )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectRequestGroupAnnounce, this );
+        //m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectReasonGroupAnnounce, this );
     }
 }
 
@@ -86,12 +86,13 @@ void PluginGroupClient::onPluginSettingChange( PluginSetting& pluginSetting )
     buildHostGroupAnnounce( pluginSetting );
 }
 
+/*
 //============================================================================
-bool PluginGroupClient::onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
+bool PluginGroupClient::onContactConnected( EConnectReason hostConnectType, VxSktBase* sktBase )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        if( eConnectRequestGroupAnnounce == hostConnectType )
+        if( eConnectReasonGroupAnnounce == hostConnectType )
         {
             m_AnnMutex.lock();
             if( m_Engine.lockSkt( sktBase ) )
@@ -109,16 +110,17 @@ bool PluginGroupClient::onContactConnected( EConnectRequestType hostConnectType,
         }
     }
 
-    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectRequestGroupAnnounce, this );
+    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectReasonGroupAnnounce, this );
 
     return false;
 }
 
 //============================================================================
-void PluginGroupClient::onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
+void PluginGroupClient::onContactDisconnected( EConnectReason hostConnectType, VxSktBase* sktBase )
 {
-    if( eConnectRequestGroupAnnounce == hostConnectType )
+    if( eConnectReasonGroupAnnounce == hostConnectType )
     {
         // no action needed. we connect and send our group listing then disconnect
     }
 }
+*/

@@ -24,6 +24,8 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListLib.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 
+#include <GoTvInterface/IDefs.h>
+
 #include <NetLib/VxSktConnect.h>
 #include <NetLib/VxPeerMgr.h>
 #include <NetLib/VxSktCrypto.h>
@@ -135,7 +137,7 @@ void NetConnector::stayConnectedShutdown( void )
 //============================================================================
 void NetConnector::handleRandomConnectResults( HostList * anchorList )
 {
-	handleAnnounceResults( anchorList, eConnectReasonRandomConnect );
+	//handleAnnounceResults( anchorList, eConnectReasonRandomConnect );
 }
 
 //============================================================================
@@ -175,7 +177,7 @@ void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason 
 		}
 		else 
 		{
-			if( eConnectReasonRandomConnect == connectReason )
+			if( eConnectReasonRandomConnectJoin == connectReason )
 			{
 				BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( entry->getMyOnlineId() );
 				m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
@@ -1041,7 +1043,7 @@ void NetConnector::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase *
 		bigListInfo->setTimeLastConnectAttemptMs( timeNow );
 		bigListInfo->setIsOnline( true );
 		bigListInfo->setIsConnected( true );
-		if( eConnectReasonRandomConnect == connectReason )
+		if( eConnectReasonRandomConnectJoin == connectReason )
 		{
 			m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
 		}

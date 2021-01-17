@@ -133,7 +133,7 @@ bool PluginTruthOrDare::fromGuiInstMsg( VxNetIdent * netIdent, const char * msg 
 	{
 		PktChatReq pkt;
 		pkt.addMsg( msg );
-		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &pkt );
+		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &pkt );
 	}
 	else
 	{
@@ -151,7 +151,7 @@ bool PluginTruthOrDare::fromGuiSetGameValueVar( VxNetIdent * netIdent, int32_t v
 	{
 		PktTodGameValue pktGameValue;
 		pktGameValue.setValue( (ETodGameVarId) varId, varValue );
-		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &pktGameValue );
+		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &pktGameValue );
 	}
 
 	return false;
@@ -166,7 +166,7 @@ bool PluginTruthOrDare::fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t 
 	{
 		PktTodGameAction pktGameAction;
 		pktGameAction.setAction( (ETodGameAction) actionId, actionValue );
-		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &pktGameAction );
+		return m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &pktGameAction );
 	}
 
 	return false;

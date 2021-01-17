@@ -637,6 +637,9 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileXferBaseMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileXferMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileXferPluginSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostBaseMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostClientMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostServerMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\LibraryFileInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\P2PSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBase.cpp" />
@@ -898,6 +901,9 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileXferBaseMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileXferMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileXferPluginSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostBaseMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostClientMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostServerMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\LibraryFileInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\P2PSession.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBase.h" />

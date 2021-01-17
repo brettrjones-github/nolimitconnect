@@ -72,22 +72,22 @@ public:
 	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual bool				fromGuiSetGameValueVar( EPluginType	ePluginType, 
-														VxGUID&		oOnlineId,
+	virtual bool				fromGuiSetGameValueVar( EPluginType	    ePluginType, 
+														VxGUID&		    oOnlineId,
 														int32_t			s32VarId, 
 														int32_t			s32VarValue );
-	virtual bool				fromGuiSetGameActionVar(	EPluginType	ePluginType, 
-															VxGUID&		oOnlineId,
+	virtual bool				fromGuiSetGameActionVar(	EPluginType	    ePluginType, 
+															VxGUID&		    oOnlineId,
 															int32_t			s32VarId, 
 															int32_t			s32VarValue );
 
 	virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile );
 
-	virtual  bool				pluginApiTxPacket(	EPluginType			ePluginType, 
-													VxNetIdentBase *	netIdent, 
-													VxSktBase *			sktBase, 
-													VxPktHdr *			poPkt, 
-													bool				bDisconnectAfterSend = false );
+    virtual bool                pluginApiTxPacket(  EPluginType			ePluginType,
+                                                    VxGUID&		        onlineId,
+                                                    VxSktBase *			sktBase,
+                                                    VxPktHdr *			poPkt,
+                                                    bool				bDisconnectAfterSend = false );
 	void						pluginApiLog( EPluginType ePluginType, const char * pMsg, ... );
 	virtual EPluginAccessState	pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent );
 	virtual VxNetIdent *		pluginApiGetMyIdentity( void );

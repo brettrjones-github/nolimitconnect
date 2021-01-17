@@ -1270,7 +1270,7 @@ EXferError AssetXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, Asset
 	sendReq.fillPktFromAsset( assetInfo );
 	sendReq.setLclSessionId( xferInfo.getLclSessionId() );
 	sendReq.setRmtSessionId( xferInfo.getRmtSessionId() );
-	if( false == m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), hisIdent, sktBase, &sendReq ) )
+	if( false == m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), hisIdent->getMyOnlineId(), sktBase, &sendReq ) )
 	{
 		xferErr = eXferErrorDisconnected;
 	}	

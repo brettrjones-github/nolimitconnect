@@ -1270,7 +1270,7 @@ EXferError HostListXferMgr::createHostListTxSessionAndSend( bool pluginIsLocked,
 	sendReq.fillPktFromHostList( assetInfo );
 	sendReq.setLclSessionId( xferInfo.getLclSessionId() );
 	sendReq.setRmtSessionId( xferInfo.getRmtSessionId() );
-	if( false == m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), hisIdent, sktBase, &sendReq ) )
+	if( false == m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), hisIdent->getMyOnlineId(), sktBase, &sendReq ) )
 	{
 		xferErr = eXferErrorDisconnected;
 	}	

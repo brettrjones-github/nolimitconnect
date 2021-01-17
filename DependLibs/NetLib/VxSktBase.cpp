@@ -804,7 +804,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
 
 //============================================================================
 RCODE VxSktBase::txPacket(	VxGUID				destOnlineId,
-							VxPktHdr *			pktHdr, 			// packet to send
+							VxPktHdr *			pktHdr, 		// packet to send
 							bool				bDisconnect )	// if true disconnect after send
 {
 	pktHdr->setDestOnlineId( destOnlineId );
@@ -812,7 +812,7 @@ RCODE VxSktBase::txPacket(	VxGUID				destOnlineId,
 }
 
 //============================================================================
-RCODE VxSktBase::txPacketWithDestId(	VxPktHdr *			pktHdr, 			// packet to send
+RCODE VxSktBase::txPacketWithDestId(	VxPktHdr *			pktHdr, 		// packet to send
 										bool				bDisconnect )	// if true disconnect after send
 {
 	m_u8TxSeqNum = (uint8_t)rand();

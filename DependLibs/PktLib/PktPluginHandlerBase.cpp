@@ -115,11 +115,44 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_PING_REPLY ]						= &PktPluginHandlerBase::onPktPingReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_IM_ALIVE_REQ ]						= &PktPluginHandlerBase::onPktImAliveReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_IM_ALIVE_REPLY ]					= &PktPluginHandlerBase::onPktImAliveReply;
-}
 
-//============================================================================
-PktPluginHandlerBase::~PktPluginHandlerBase()
-{
+    m_aBaseSysPktFuncTable[ PKT_TYPE_PLUGIN_SETTING_REQ ]               = &PktPluginHandlerBase::onPktPluginSettingReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_PLUGIN_SETTING_REPLY ]             = &PktPluginHandlerBase::onPktPluginSettingReply;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_REQ ]                = &PktPluginHandlerBase::onPktThumbSettingReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_REPLY ]              = &PktPluginHandlerBase::onPktThumbSettingReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_CHUNK_REQ ]          = &PktPluginHandlerBase::onPktThumbSettingChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SETTING_CHUNK_REPLY ]        = &PktPluginHandlerBase::onPktThumbSettingChunkReply;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_REQ ]                 = &PktPluginHandlerBase::onPktThumbAvatarReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_REPLY ]               = &PktPluginHandlerBase::onPktThumbAvatarReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_CHUNK_REQ ]           = &PktPluginHandlerBase::onPktThumbAvatarChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_AVATAR_CHUNK_REPLY ]         = &PktPluginHandlerBase::onPktThumbAvatarChunkReply;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_REQ ]                   = &PktPluginHandlerBase::onPktThumbFileReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_REPLY ]                 = &PktPluginHandlerBase::onPktThumbFileReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REQ ]             = &PktPluginHandlerBase::onPktThumbFileChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REPLY ]           = &PktPluginHandlerBase::onPktThumbFileChunkReply;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_ANNOUNCE ]                    = &PktPluginHandlerBase::onPktHostAnnounce;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REQ ]               = &PktPluginHandlerBase::onPktHostListSendReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REPLY ]             = &PktPluginHandlerBase::onPktHostListSendReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REQ ]              = &PktPluginHandlerBase::onPktHostListChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REPLY ]            = &PktPluginHandlerBase::onPktHostListChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ ]      = &PktPluginHandlerBase::onPktHostListSendCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY ]    = &PktPluginHandlerBase::onPktHostListSendCompleteReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_XFER_ERR ]               = &PktPluginHandlerBase::onPktHostListXferErr;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REQ ]                    = &PktPluginHandlerBase::onPktHostJoinReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REPLY ]                  = &PktPluginHandlerBase::onPktHostJoinReply;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_OFFER_REQ ]                   = &PktPluginHandlerBase::onPktHostOfferReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_OFFER_REPLY ]                 = &PktPluginHandlerBase::onPktHostOfferReply;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_FRIEND_OFFER_REQ ]                 = &PktPluginHandlerBase::onPktFriendOfferReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_FRIEND_OFFER_REPLY ]               = &PktPluginHandlerBase::onPktFriendOfferReply;
+
 }
 
 //============================================================================
@@ -574,3 +607,171 @@ void PktPluginHandlerBase::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pk
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }	
+
+//============================================================================
+void PktPluginHandlerBase::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbSettingChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbSettingChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbAvatarReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbAvatarReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbAvatarChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbAvatarChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}	
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostListXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFriendOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}

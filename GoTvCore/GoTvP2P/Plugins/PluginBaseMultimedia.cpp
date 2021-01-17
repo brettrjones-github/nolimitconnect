@@ -202,7 +202,7 @@ bool PluginBaseMultimedia::fromGuiMultiSessionAction( VxNetIdent * netIdent, EMS
 		PktMultiSessionReq pktReq;
 		pktReq.setMSessionAction( (uint32_t)mSessionAction );
 		pktReq.setMSessionParam( (uint32_t)pos0to100000 );
-		sendSucces = m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &pktReq );
+		sendSucces = m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &pktReq );
 	}
 
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -227,7 +227,7 @@ bool PluginBaseMultimedia::fromGuiSetGameValueVar( VxNetIdent * netIdent, int32_
 	{
 		PktTodGameValue pktGameValue;
 		pktGameValue.setValue( (ETodGameVarId) varId, varValue );
-		sendSucces = m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &pktGameValue );
+		sendSucces = m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &pktGameValue );
 	}
 
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -249,7 +249,7 @@ bool PluginBaseMultimedia::fromGuiSetGameActionVar( VxNetIdent * netIdent, int32
 	{
 		PktTodGameAction pktGameAction;
 		pktGameAction.setAction( (ETodGameAction) actionId, actionValue );
-		sendSucces = m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent, poSession->getSkt(), &pktGameAction );
+		sendSucces = m_PluginMgr.pluginApiTxPacket( m_ePluginType, netIdent->getMyOnlineId(), poSession->getSkt(), &pktGameAction );
 	}
 
 	#ifdef DEBUG_AUTOPLUGIN_LOCK

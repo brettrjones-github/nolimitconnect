@@ -523,7 +523,7 @@ void PluginMgr::handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		{
 			plugin->handlePkt( sktBase, pktHdr, netIdent );
 		}
-		else
+		else // TODO BRJ handle case of valid netIdent not needed?
 		{
 			LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets unknown ident 0x%llX 0x%llX\n", 
 				pktHdr->getSrcOnlineId().getVxGUIDHiPart(),
@@ -833,16 +833,15 @@ bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent 
 
 //============================================================================
 bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType, 
-									VxNetIdentBase *	netIdent, 
-									VxSktBase *			sktBase, 
-									VxPktHdr *			poPkt, 
-									bool				bDisconnectAfterSend )
-
+                                    VxGUID&		        onlineId, 
+                                    VxSktBase *			sktBase, 
+                                    VxPktHdr *			poPkt, 
+                                    bool				bDisconnectAfterSend )
 {
-	poPkt->setPluginNum( (uint8_t)ePluginType );
-	poPkt->setSrcOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
+    poPkt->setPluginNum( (uint8_t)ePluginType );
+    poPkt->setSrcOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
 
-	return m_Engine.getPeerMgr().txPacket( sktBase, netIdent->getMyOnlineId(), poPkt, bDisconnectAfterSend );
+    return m_Engine.getPeerMgr().txPacket( sktBase, onlineId, poPkt, bDisconnectAfterSend );
 }
 
 //============================================================================

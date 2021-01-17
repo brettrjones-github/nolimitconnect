@@ -14,18 +14,16 @@
 #pragma once
 
 #include <GoTvInterface/IDefs.h>
-#include <GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.h>
 
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxMutex.h>
 
 #include <vector>
-#include <string>
 #include <map>
+#include <utility>
 
-class VxSktConnectSimple;
 class P2PEngine;
-class PktAnnounce;
+class IConnectRequestCallback;
 class BigListInfo;
 
 class ConnectedInfo
@@ -40,6 +38,10 @@ public:
     bool                        operator==( const ConnectedInfo& rhs );
 
     P2PEngine&                  getEngine() { return m_Engine; }
+    VxSktBase *                 getSktBase( void );
+
+    void                        addConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason );
+    void                        removeConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason, bool disconnectIfNotInUse );
 
     void                        onSktConnected( VxSktBase * sktBase );
     void                        onSktDisconnected( VxSktBase * sktBase );
@@ -50,7 +52,8 @@ protected:
     VxGUID                      m_PeerOnlineId;
     VxMutex                     m_CallbackListMutex;
     std::vector<EPluginType>    m_RmtPlugins;
-    std::vector<EPluginType>    m_LclPlugins;
+    std::vector<std::pair<IConnectRequestCallback*, EConnectReason>>    m_LclList;
+    std::vector<std::pair<IConnectRequestCallback*, EConnectReason>>    m_RmtList;
     std::vector<VxSktBase *>    m_SktList;
 };
 

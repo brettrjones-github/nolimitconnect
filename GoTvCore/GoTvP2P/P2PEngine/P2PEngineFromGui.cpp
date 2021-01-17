@@ -228,17 +228,17 @@ void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
         LogMsg( LOG_ERROR, "Empty Network Host Name" );
     }
 
-    getConnectionMgr().applyHostUrl( eHostTypeNetwork, netHostUrl );
+    getConnectionMgr().applyDefaultHostUrl( eHostTypeNetwork, netHostUrl );
 
     std::string hostUrl;
     engineSettings.getChatRoomHostUrl( hostUrl );
-    getConnectionMgr().applyHostUrl( eHostTypeChatRoom, hostUrl );
+    getConnectionMgr().applyDefaultHostUrl( eHostTypeChatRoom, hostUrl );
     engineSettings.getConnectTestUrl( hostUrl );
-    getConnectionMgr().applyHostUrl( eHostTypeConnectTest, hostUrl );
+    getConnectionMgr().applyDefaultHostUrl( eHostTypeConnectTest, hostUrl );
     engineSettings.getGroupHostUrl( hostUrl );
-    getConnectionMgr().applyHostUrl( eHostTypeGroup, hostUrl );
+    getConnectionMgr().applyDefaultHostUrl( eHostTypeGroup, hostUrl );
     engineSettings.getRandomConnectUrl( hostUrl );
-    getConnectionMgr().applyHostUrl( eHostTypeRandomConnect, hostUrl );
+    getConnectionMgr().applyDefaultHostUrl( eHostTypeRandomConnect, hostUrl );
 
     m_NetworkStateMachine.updateFromEngineSettings( engineSettings );
 }
@@ -1094,27 +1094,27 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
 
         if( origSettings.getNetworkHostUrl() != netHostSetting.getNetworkHostUrl() )
         {
-            getConnectionMgr().applyHostUrl( eHostTypeNetwork, netHostSetting.getNetworkHostUrl() );
+            getConnectionMgr().applyDefaultHostUrl( eHostTypeNetwork, netHostSetting.getNetworkHostUrl() );
         }
 
         if( origSettings.getConnectTestUrl() != netHostSetting.getConnectTestUrl() )
         {
-            getConnectionMgr().applyHostUrl( eHostTypeConnectTest, netHostSetting.getConnectTestUrl() );
+            getConnectionMgr().applyDefaultHostUrl( eHostTypeConnectTest, netHostSetting.getConnectTestUrl() );
         }
 
         if( origSettings.getRandomConnectUrl() != netHostSetting.getRandomConnectUrl() )
         {
-            getConnectionMgr().applyHostUrl( eHostTypeRandomConnect, netHostSetting.getRandomConnectUrl() );
+            getConnectionMgr().applyDefaultHostUrl( eHostTypeRandomConnect, netHostSetting.getRandomConnectUrl() );
         }
 
         if( origSettings.getGroupHostUrl() != netHostSetting.getGroupHostUrl() )
         {
-            getConnectionMgr().applyHostUrl( eHostTypeGroup, netHostSetting.getGroupHostUrl() );
+            getConnectionMgr().applyDefaultHostUrl( eHostTypeGroup, netHostSetting.getGroupHostUrl() );
         }
 
         if( origSettings.getChatRoomHostUrl() != netHostSetting.getChatRoomHostUrl() )
         {
-            getConnectionMgr().applyHostUrl( eHostTypeChatRoom, netHostSetting.getChatRoomHostUrl() );
+            getConnectionMgr().applyDefaultHostUrl( eHostTypeChatRoom, netHostSetting.getChatRoomHostUrl() );
         }
 
         fromGuiNetworkSettingsChanged();
@@ -1291,7 +1291,7 @@ void P2PEngine::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
     PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
     if( plugin )
     {
-        getConnectionMgr().fromGuiJoinHost( hostType, ptopUrl );
+        plugin->fromGuiJoinHost( hostType, ptopUrl );
     }
     else
     {

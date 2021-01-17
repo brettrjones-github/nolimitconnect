@@ -19,6 +19,7 @@
 #include <CoreLib/VxUrl.h>
 
 class UrlActionInfo;
+class IConnectRequestCallback;
 
 class UrlActionResultInterface
 {
@@ -35,7 +36,8 @@ class UrlActionInfo
 {
 public:
     UrlActionInfo();
-    UrlActionInfo(P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface);
+    UrlActionInfo(P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
+                  UrlActionResultInterface* cbInterface, IConnectRequestCallback* cbConnectReq, EConnectReason connectReason );
     UrlActionInfo( const UrlActionInfo& rhs );
     UrlActionInfo&              operator = ( const UrlActionInfo& rhs );
     bool                        operator == ( const UrlActionInfo& rhs ) const;
@@ -48,7 +50,9 @@ public:
     ENetCmdType                 getNetCmdType( void )           { return m_TestType; }
     VxUrl&                      getRemoteVxUrl( void )          { return m_RemoteUrl; }
     std::string&                getRemoteUrl( void )            { return m_RemoteUrl.getUrl(); }
-    UrlActionResultInterface*   getResultInterface( void )      { return m_CallbackInterface; }
+    UrlActionResultInterface*   getResultInterface( void )      { return m_ResultCbInterface; }
+    IConnectRequestCallback*    getConnectReqInterface( void )  { return m_ConnectReqCbInterface; }
+    EConnectReason              getConnectReason( void )        { return m_ConnectReason; };
 
     std::string                 getTestName( void );
 
@@ -56,10 +60,12 @@ protected:
     //=== vars ===//
     P2PEngine&					m_Engine;
     EHostType                   m_HostType{ eHostTypeUnknown };
-    UrlActionResultInterface*   m_CallbackInterface{ nullptr };
+    UrlActionResultInterface*   m_ResultCbInterface{ nullptr };
+    IConnectRequestCallback*    m_ConnectReqCbInterface{ nullptr };
     ENetCmdType                 m_TestType{ eNetCmdUnknown };
     VxUrl                       m_MyUrl;
     VxUrl                       m_RemoteUrl;
+    EConnectReason              m_ConnectReason{ eConnectReasonUnknown };
 };
 
 
@@ -75,9 +81,11 @@ public:
 
 	void				        runUrlAction( ENetCmdType netCmdType, 
                                               const char * ptopUrl, 
-                                              const char * myUrl = nullptr, 
-                                              EHostType hostType = eHostTypeUnknown, 
-                                              UrlActionResultInterface* cbInterface = nullptr );
+                                              const char * myUrl = nullptr,                                        
+                                              UrlActionResultInterface* cbInterface = nullptr,
+                                              IConnectRequestCallback* cbConnectRequest = nullptr, 
+                                              EHostType hostType = eHostTypeUnknown,
+                                              EConnectReason connectReason = eConnectReasonUnknown );
 	void						runTestShutdown( void );
 
 	void						threadFuncRunUrlAction( void );

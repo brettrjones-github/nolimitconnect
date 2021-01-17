@@ -65,13 +65,16 @@ UrlActionInfo::UrlActionInfo()
 }
 
 //============================================================================
-UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface )
+UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
+                              UrlActionResultInterface* cbInterface, IConnectRequestCallback* cbConnectReq, EConnectReason connectReason )
     : m_Engine( engine )
     , m_HostType( hostType )
-    , m_CallbackInterface( cbInterface )
+    , m_ResultCbInterface( cbInterface )
+    , m_ConnectReqCbInterface( cbConnectReq )
     , m_TestType( testType )
     , m_MyUrl( myUrl )
     , m_RemoteUrl( ptopUrl )
+    , m_ConnectReason( connectReason )
 {
     if( nullptr == myUrl )
     {
@@ -83,10 +86,12 @@ UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, ENetCmdType
 UrlActionInfo::UrlActionInfo( const UrlActionInfo& rhs )
     : m_Engine( rhs.m_Engine )
     , m_HostType( rhs.m_HostType )
-    , m_CallbackInterface( rhs.m_CallbackInterface )
+    , m_ResultCbInterface( rhs.m_ResultCbInterface )
+    , m_ConnectReqCbInterface( rhs.m_ConnectReqCbInterface )
     , m_TestType( rhs.m_TestType )
     , m_MyUrl( rhs.m_MyUrl )
     , m_RemoteUrl( rhs.m_RemoteUrl )
+    , m_ConnectReason( rhs.m_ConnectReason )
 {
 }
 
@@ -95,11 +100,13 @@ UrlActionInfo& UrlActionInfo::operator = ( const UrlActionInfo& rhs )
 {
     if( this != &rhs )   
     {
-        m_CallbackInterface     = rhs.m_CallbackInterface;
+        m_ResultCbInterface     = rhs.m_ResultCbInterface;
+        m_ConnectReqCbInterface = rhs.m_ConnectReqCbInterface;
         m_TestType              = rhs.m_TestType;
         m_HostType              = rhs.m_HostType;
         m_MyUrl                 = rhs.m_MyUrl;
         m_RemoteUrl             = rhs.m_RemoteUrl;
+        m_ConnectReason         = rhs.m_ConnectReason;
     }
 
     return *this;
@@ -108,11 +115,12 @@ UrlActionInfo& UrlActionInfo::operator = ( const UrlActionInfo& rhs )
 //============================================================================
 bool UrlActionInfo::operator == ( const UrlActionInfo& rhs ) const
 {
-    return m_CallbackInterface == rhs.m_CallbackInterface &&
+    return m_ResultCbInterface == rhs.m_ResultCbInterface &&
+        m_ConnectReqCbInterface == rhs.m_ConnectReqCbInterface &&
         m_TestType == rhs.m_TestType &&
         m_HostType == rhs.m_HostType &&
         m_MyUrl == rhs.m_MyUrl &&
-        m_RemoteUrl == rhs.m_RemoteUrl;
+        m_RemoteUrl == rhs.m_RemoteUrl && m_ConnectReason == rhs.m_ConnectReason;
 }
 
 //============================================================================
@@ -144,9 +152,10 @@ void RunUrlAction::runTestShutdown( void )
 }
 
 //============================================================================
-void RunUrlAction::runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl, EHostType hostType, UrlActionResultInterface* cbInterface )
+void RunUrlAction::runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface, 
+                                 IConnectRequestCallback* cbConnectRequest, EHostType hostType, EConnectReason connectReason )
 {
-    UrlActionInfo urlAction( getEngine(), hostType, netCmdType, ptopUrl, myUrl, cbInterface );
+    UrlActionInfo urlAction( getEngine(), hostType, netCmdType, ptopUrl, myUrl, cbInterface, cbConnectRequest, connectReason );
     std::string actionName = urlAction.getTestName();
     if( !urlAction.getMyVxUrl().validateUrl( true ) )
     {
@@ -449,7 +458,7 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         LogModule( eLogRunTest, LOG_VERBOSE, "NetActionIsMyPortOpen::doAction: direct connect %s my ip %s result %d thread 0x%x", strPayload.c_str(), retMyExternalIp.c_str(), iIsOpen, VxGetCurrentThreadId() );
         if( iIsOpen )
         {
-            sendRunTestStatus(  urlAction, actionName, eRunTestStatusMyPortIsOpen, "My ip %s port %d is open\n", iIsOpen, myPort );
+            sendRunTestStatus(  urlAction, actionName, eRunTestStatusMyPortIsOpen, "My ip %s port %d is open\n", retMyExternalIp.c_str(), myPort );
         }
         else
         {

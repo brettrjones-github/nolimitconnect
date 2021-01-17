@@ -16,17 +16,7 @@
 
 #include <PktLib/VxConnectInfo.h>
 
-enum EConnectReason
-{
-	eConnectReasonAnnouncePing,
-	eConnectReasonStayConnected,
-	eConnectReasonRandomConnect,
-	eConnectReasonRelaySearch,
-	eConnectReasonPlugin,
-	eConnectReasonOtherSearch,
-
-	eMaxConnectReason
-};
+#include <GoTvInterface/IDefs.h>
 
 class ConnectRequest
 {

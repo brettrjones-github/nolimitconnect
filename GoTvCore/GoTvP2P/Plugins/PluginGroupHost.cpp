@@ -83,7 +83,7 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectRequestChatRoomAnnounce, this );
+        //m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectReasonChatRoomAnnounce, this );
     }
 }
 
@@ -94,12 +94,13 @@ void PluginGroupHost::onPluginSettingChange( PluginSetting& pluginSetting )
     buildHostGroupAnnounce( pluginSetting );
 }
 
+/*
 //============================================================================
-bool PluginGroupHost::onContactConnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
+bool PluginGroupHost::onContactConnected( EConnectReason hostConnectType, VxSktBase* sktBase )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        if( eConnectRequestChatRoomAnnounce == hostConnectType )
+        if( eConnectReasonChatRoomAnnounce == hostConnectType )
         {
             m_AnnMutex.lock();
             if( m_Engine.lockSkt( sktBase ) )
@@ -117,16 +118,17 @@ bool PluginGroupHost::onContactConnected( EConnectRequestType hostConnectType, V
         }
     }
 
-    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectRequestChatRoomAnnounce, this );
+    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectReasonChatRoomAnnounce, this );
 
     return false;
 }
 
 //============================================================================
-void PluginGroupHost::onContactDisconnected( EConnectRequestType hostConnectType, VxSktBase* sktBase )
+void PluginGroupHost::onContactDisconnected( EConnectReason hostConnectType, VxSktBase* sktBase )
 {
-    if( eConnectRequestChatRoomAnnounce == hostConnectType )
+    if( eConnectReasonChatRoomAnnounce == hostConnectType )
     {
         // no action needed. we connect and send our group listing then disconnect
     }
 }
+*/
