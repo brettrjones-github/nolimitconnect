@@ -33,6 +33,7 @@ PktHostAnnounce::PktHostAnnounce()
 	setPktLength( sizeof( PktHostAnnounce ) );
 	setPktType(  PKT_TYPE_HOST_ANNOUNCE );
     setPktVersionNum( PKT_HOST_ANNOUNCE_VERSION );
+    // LogMsg( LOG_DEBUG, "PktHostAnnounce size %d", sizeof( PktHostAnnounce ) );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 

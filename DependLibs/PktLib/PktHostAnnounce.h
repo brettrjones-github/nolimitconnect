@@ -50,6 +50,7 @@ public:
 
     uint8_t					    m_HostType = 0;
     uint8_t					    m_SettingRes1 = 0;
+    uint16_t					m_SettingRes2 = 0;
     uint32_t					m_SettingLength = 0;
     uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };
