@@ -41,6 +41,7 @@ PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& plugin
 void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
     m_HostClientMgr.fromGuiJoinHost( hostType, ptopUrl );
+    //m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinQueryIdInProgress );
 }
 
 //============================================================================
@@ -53,6 +54,7 @@ void PluginChatRoomClient::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pkt
 void PluginChatRoomClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomClient got join reply" );
+    m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSuccess );
 }
 
 //============================================================================

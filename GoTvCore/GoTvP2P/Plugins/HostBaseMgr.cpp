@@ -86,7 +86,6 @@ void HostBaseMgr::onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId,
         {
             if( sktBase )
             {
-                m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectSuccess );
                 onContactConnected( sktBase, onlineId, eConnectReasonChatRoomJoin );
             }
             else
@@ -111,7 +110,7 @@ bool HostBaseMgr::onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, ECon
 {
     if( eConnectReasonChatRoomJoin == connectReason )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSendingJoinRequest );
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectSuccess );
         sendJoinRequest( sktBase, onlineId, connectReason );
     }
 
