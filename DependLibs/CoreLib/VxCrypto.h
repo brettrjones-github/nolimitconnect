@@ -32,6 +32,7 @@
 #define		CHEEZY_KNOWN_TEXT_STR	"ads;&Okl*q3&O&T" // known string 16 chars long
 
 class VxConnectId;
+class VxGUID;
 
 class VxKey
 {
@@ -122,18 +123,27 @@ void CheezyFillRandom( void * pvData, int iLen );
 //============================================================================
 //! encrypt data with VxCryptoo
 RCODE VxSymEncrypt( VxKey *			poKey,			// Symmetric key must be 16 bytes long
-	char *			pData,			// buffer to encrypt
-	int				iDataLen,		// data length ( must be multiple of key length )
-	char *			pRetBuf = 0 );	// if null then encrypted data put in pData
-									//============================================================================
-									//! decrypt data with VxCryptoo
-RCODE VxSymDecrypt( VxKey *			poKey,			// Symmetric key must be 16 bytes long
-	char *			pData,			// buffer to decrypt
-	int				iDataLen,		// data length ( must be multiple of key length )
-	char *			pRetBuf = 0 );	// if null then encrypted data put in pData
+	                char *			pData,			// buffer to encrypt
+	                int				iDataLen,		// data length ( must be multiple of key length )
+	                char *			pRetBuf = 0 );	// if null then encrypted data put in pData
 
-									//============================================================================
+//============================================================================
+//! decrypt data with VxCryptoo
+RCODE VxSymDecrypt( VxKey *			poKey,			// Symmetric key must be 16 bytes long
+	                char *			pData,			// buffer to decrypt
+	                int				iDataLen,		// data length ( must be multiple of key length )
+	                char *			pRetBuf = 0 );	// if null then encrypted data put in pData
+
+//============================================================================
 RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
-							VxConnectId *				poConnectId,	// network identity
-							uint16_t					cryptoPort,
-							const char *				networkName );
+							 VxConnectId *				poConnectId,	// network identity
+							 uint16_t					cryptoPort,
+							 const char *				networkName );
+
+//============================================================================
+RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
+                             std::string&               ipAddr,
+                             uint16_t                   port,
+                             VxGUID&                    onlineId,
+                             uint16_t					cryptoPort,
+                             std::string&               strNetName );

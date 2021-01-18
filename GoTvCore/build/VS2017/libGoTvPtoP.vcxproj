@@ -491,6 +491,7 @@
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListAll.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\ConnectionMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectReqInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\IConnectedCallback.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Connections\IConnectRequest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_core.cpp" />
@@ -737,6 +738,7 @@
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListAll.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListBase.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\ConnectionMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectReqInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\IConnectedCallback.h" />
     <ClInclude Include="..\..\GoTvP2P\Connections\IConnectRequest.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_common.h" />

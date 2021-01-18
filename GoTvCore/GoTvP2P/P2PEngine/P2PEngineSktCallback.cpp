@@ -123,9 +123,9 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			iDataLen = sktBase->getRxDecryptedLen();
 		}
 
-		if( ( PKT_TYPE_ANNOUNCE != pktHdr->getPktType() ) 
-			|| ( pktHdr->getPktLength() < 288 )  // currently length of pkt announce is 288
-			|| ( pktHdr->getPktLength() > 400 ) ) // leave room for expanding pkt announce in the future
+		if( ( PKT_TYPE_ANNOUNCE != pktHdr->getPktType() ) ||
+			 ( pktHdr->getPktLength() < 288 ) ||  // currently length of pkt announce
+			 ( pktHdr->getPktLength() > sizeof( PktAnnounce ) + 100 ) ) // leave room for expanding pkt announce in the future
 		{
 			// somebody tried to send crap .. this may be a hack attack or it may be that our ip and port is same as someone else or network key has changed
 			LogMsg( LOG_INFO, "First packet is not Announce pkt skt %d type %d length %d ip %s:%d id %s\n", sktBase->getSktId(), 

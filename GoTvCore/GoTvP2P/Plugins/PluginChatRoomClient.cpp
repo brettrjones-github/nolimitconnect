@@ -129,3 +129,28 @@ void PluginChatRoomClient::sendJoinRequest( VxSktBase* sktBase )
 
 }
 */
+
+
+//============================================================================
+void PluginChatRoomClient::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomClient got join request" );
+}
+
+//============================================================================
+void PluginChatRoomClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomClient got join reply" );
+}
+
+//============================================================================
+void PluginChatRoomClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomClient got join offer request" );
+}
+
+//============================================================================
+void PluginChatRoomClient::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomClient got join offer reply" );
+}

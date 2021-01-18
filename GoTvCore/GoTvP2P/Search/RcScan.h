@@ -31,7 +31,7 @@ class RcScan : public IScan
 {
 public:
 	RcScan( P2PEngine& engine, P2PConnectList& connectList );
-	virtual ~RcScan();
+	virtual ~RcScan() = default;
 
 	RcScanAction&				getScanAction( void )		{ return m_ScanAction; }
 	EScanType					getScanType( void )			{ return m_ScanAction.getScanType(); }

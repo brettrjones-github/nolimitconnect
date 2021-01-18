@@ -835,13 +835,65 @@ bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent 
 bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType, 
                                     VxGUID&		        onlineId, 
                                     VxSktBase *			sktBase, 
-                                    VxPktHdr *			poPkt, 
+                                    VxPktHdr *			pktHdr, 
                                     bool				bDisconnectAfterSend )
 {
-    poPkt->setPluginNum( (uint8_t)ePluginType );
-    poPkt->setSrcOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
+    // when sending packets they are typically from plugin to the same remote plugin
+    // for host/client we convert host to client and client to hot
+    EPluginType hostClientType = ePluginTypeInvalid;
+    switch( ePluginType )
+    {
+    case ePluginTypeChatRoomClient:
+        hostClientType = ePluginTypeChatRoomHost;
+        break;
+    case ePluginTypeChatRoomHost:
+        hostClientType = ePluginTypeChatRoomClient;
+        break;
+    case ePluginTypeConnectTestClient:
+        hostClientType = ePluginTypeConnectTestHost;
+        break;
+    case ePluginTypeConnectTestHost:
+        hostClientType = ePluginTypeConnectTestClient;
+        break;
+    case ePluginTypeGroupClient:
+        hostClientType = ePluginTypeGroupHost;
+        break;
+    case ePluginTypeGroupHost:
+        hostClientType = ePluginTypeGroupClient;
+        break;
+    case ePluginTypeRandomConnectClient:
+        hostClientType = ePluginTypeRandomConnectHost;
+        break;
+    case ePluginTypeRandomConnectHost:
+        hostClientType = ePluginTypeRandomConnectClient;
+        break;
+    default:
+        break;
+    }
 
-    return m_Engine.getPeerMgr().txPacket( sktBase, onlineId, poPkt, bDisconnectAfterSend );
+    if( hostClientType != ePluginTypeInvalid )
+    {
+        pktHdr->setPluginNum( (uint8_t)hostClientType );
+    }
+    else
+    {
+        pktHdr->setPluginNum( (uint8_t)ePluginType );
+    }
+
+    pktHdr->setSrcOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
+
+#ifdef DEBUG
+    // loopback is only for development convenience and should never be used for production
+    if( pktHdr->getIsLoopback() )
+    {
+        pktHdr->setDestOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
+        pktHdr->setSrcOnlineId( onlineId );
+        handleNonSystemPackets( sktBase, pktHdr );
+        return true;
+    }
+#endif // DEBUG
+
+    return m_Engine.getPeerMgr().txPacket( sktBase, onlineId, pktHdr, bDisconnectAfterSend );
 }
 
 //============================================================================

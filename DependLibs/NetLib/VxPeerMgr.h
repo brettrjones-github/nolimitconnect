@@ -44,7 +44,7 @@ public:
 
 	//! Connect to ip or URL and return socket.. if cannot connect return NULL
 	virtual VxSktConnect *		connectTo(	const char *	pIpOrUrl,						// remote ip or url 
-											uint16_t				u16Port,						// port to connect to
+											uint16_t		u16Port,						// port to connect to
 											int				iTimeoutMilliSeconds = 1000 );	// seconds before connect attempt times out
 	virtual VxSktConnect *		createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port );
 

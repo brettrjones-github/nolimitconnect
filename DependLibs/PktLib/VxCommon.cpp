@@ -32,23 +32,35 @@ RCODE GenerateConnectionKey( VxKey *				poRetKey,		// set this key
                              const char *			networkName )
 {
     std::string strNetName = networkName;
-
-    uint64_t u64IdLowPart = poConnectId->getVxGUIDLoPart();
-    //vx_assert( u64IdLowPart );
-    uint64_t u64IdHiPart = poConnectId->getVxGUIDHiPart();
-    //vx_assert( u64IdHiPart );
     std::string strIPv4;
     poConnectId->getIPv4( strIPv4 );
     uint16_t u16Port = poConnectId->getPort();
-    vx_assert( u16Port );
+
+    return GenerateConnectionKey( poRetKey, strIPv4, u16Port, poConnectId->getOnlineId(), cryptoPort, strNetName );
+}
+
+//============================================================================
+RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
+                             std::string&               ipAddr,
+                             uint16_t                   port,
+                             VxGUID&                    onlineId,
+                             uint16_t					cryptoPort,
+                             std::string&				networkName )
+{
+    uint64_t u64IdLowPart = onlineId.getVxGUIDLoPart();
+    //vx_assert( u64IdLowPart );
+    uint64_t u64IdHiPart = onlineId.getVxGUIDHiPart();
+    //vx_assert( u64IdHiPart );
+    std::string strIPv4 = ipAddr;
+    vx_assert( port );
 
     //LogMsg( LOG_INFO, "GenerateConnectionKey: creating pwd\n");
     std::string strPwd;
     StdStringFormat( strPwd, "%d%llx%llx%s%s%d",
-        u16Port,
+        port,
         u64IdLowPart,
         u64IdHiPart,
-        strNetName.c_str(),
+        networkName.c_str(),
         strIPv4.c_str(),
         cryptoPort
     );

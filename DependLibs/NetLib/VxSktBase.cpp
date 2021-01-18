@@ -513,31 +513,8 @@ void VxSktBase::createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uin
 RCODE VxSktBase::doConnectTo( void )
 {
 	uint16_t u16Port = m_RmtIp.getPort();
-	//if ( 30200 == u16Port ) // Core8's port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "VxPeerMgr::connectTo Core8's port\n" );
-	//}
-
-	//if ( 7771 == u16Port ) 
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "VxPeerMgr::connectTo Mary's port\n" );
-	//}
-
-	//if ( 8319 == u16Port ) // Tarzan's port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "VxPeerMgr::connectTo Tarzan's port\n" );
-	//}
 
 	m_Socket = ::VxConnectTo( m_LclIp, m_RmtIp, u16Port, m_iConnectTimeout );
-	//
-	//if ( 8319 == u16Port ) // Tarzan's port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "VxPeerMgr::connectTo Tarzan's port\n" );
-	//}
 
 	if( INVALID_SOCKET != m_Socket )
 	{
@@ -874,13 +851,13 @@ RCODE VxSktBase::getRemoteIp(	InetAddress &u32RetIp,		// return ip
 }
 
 //============================================================================
-const char * VxSktBase::getRemoteIp( void )
+std::string VxSktBase::getRemoteIp( void )
 {
 	return m_strRmtIp.c_str();
 }
 
 //============================================================================
-const char * VxSktBase::getLocalIp( void )
+std::string VxSktBase::getLocalIp( void )
 {
 	return m_strLclIp.c_str();
 }

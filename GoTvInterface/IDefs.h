@@ -67,6 +67,8 @@ enum EConnectStatus
     eConnectStatusPermissionDenied,
     eConnectStatusConnecting,
     eConnectStatusConnectFailed,
+    eConnectStatusSendPktAnnFailed,
+    eConnectStatusConnectSuccess,
     eConnectStatusDropped,
     eConnectStatusRxAnnTimeout,
 

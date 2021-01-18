@@ -23,7 +23,7 @@ class VxClientMgr : public VxSktBaseMgr
 {
 public:
 	VxClientMgr();
-	virtual ~VxClientMgr();
+	virtual ~VxClientMgr() = default;
 
 	virtual VxSktBase *		makeNewSkt( void );
 
@@ -31,6 +31,5 @@ public:
 	virtual VxSktConnect *	connectTo(	const char *	pIpOrUrl,						// remote ip or url 
 										uint16_t	    u16Port,						// port to connect to
 										int				iTimeoutMilliSeconds = 1000 );	// seconds before connect attempt times out
-
 };
 

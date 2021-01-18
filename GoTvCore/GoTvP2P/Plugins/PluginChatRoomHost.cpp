@@ -23,6 +23,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 
 #include <NetLib/VxSktBase.h>
+#include <PktLib/PktsHostJoin.h>
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
@@ -122,3 +123,31 @@ void PluginChatRoomHost::onContactDisconnected( EConnectReason hostConnectType, 
     }
 }
 */
+
+//============================================================================
+void PluginChatRoomHost::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    PktHostJoinReply joinReply;
+    txPacket( netIdent, sktBase, &joinReply );
+}
+
+//============================================================================
+void PluginChatRoomHost::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join reply" );
+}
+
+//============================================================================
+void PluginChatRoomHost::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
+    PktHostOfferReply joinReply;
+    txPacket( netIdent, sktBase, &joinReply );
+}
+
+//============================================================================
+void PluginChatRoomHost::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer reply" );
+}

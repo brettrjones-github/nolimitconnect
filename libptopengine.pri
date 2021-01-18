@@ -46,6 +46,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListAll.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListBase.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectionMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectReqInfo.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/WebRtcTypeDefs.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_common.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core.h \
@@ -293,6 +294,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListAll.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListBase.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectionMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectReqInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core_mips.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core_neon.cpp \

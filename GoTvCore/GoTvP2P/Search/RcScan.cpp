@@ -49,11 +49,6 @@ RcScan::RcScan( P2PEngine& engine, P2PConnectList& connectList )
 }
 
 //============================================================================
-RcScan::~RcScan()
-{
-}
-
-//============================================================================
 void RcScan::onOncePer30Seconds( void )
 {
 	if( m_bIsScanning )

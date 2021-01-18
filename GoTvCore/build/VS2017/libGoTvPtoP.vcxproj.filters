@@ -685,6 +685,9 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostServerMgr.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectReqInfo.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1467,6 +1470,9 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostServerMgr.h">
       <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectReqInfo.h">
+      <Filter>GoTvP2P\Connections</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

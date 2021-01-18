@@ -139,6 +139,10 @@ void HostBaseMgr::sendJoinRequest( VxSktBase* sktBase, VxGUID& onlineId, EConnec
 {
     vx_assert( nullptr != sktBase );
     PktHostJoinReq pktJoin;
+    // temp for development
+    pktJoin.setIsLoopback( true );
+
+
     pktJoin.setHostType( eHostTypeChatRoom );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {

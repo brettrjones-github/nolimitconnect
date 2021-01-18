@@ -37,12 +37,13 @@ namespace
         "Connect Status Permission Denied ",
         "Connect Status Connecting ",
         "Connect Status Connect Failed ",
+        "Connect Status Send PktAnn Failed ",
+        "Connect Status Connect Success ",
         "Connect Status Dropped ",
         "Connect Status Rx Ann Timeout ",
 
         "Max Connect Status ",
     };
-
 
     const char * HostJoinStatusEnumStrings[] = 
     { 

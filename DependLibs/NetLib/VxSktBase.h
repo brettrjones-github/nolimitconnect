@@ -172,7 +172,7 @@ public:
 	virtual RCODE				getRemoteIp(	InetAddress &u32RetIp,		// return ip
 												uint16_t &u16RetPort );	// return port
 	//! get remote ip as string
-	virtual const char *		getRemoteIp( void );
+	virtual std::string		    getRemoteIp( void );
 
     //! get remote ip as string
     virtual void 		        getRemoteIp( std::string& rmtIp ) { rmtIp = m_strRmtIp.empty() ? "" : m_strRmtIp; }
@@ -183,7 +183,7 @@ public:
 	virtual InetAddress			getRemoteIpBinary( void ){ return m_RmtIp;}			// return ip in host ordered binary u32
 
 	//! get local ip as string
-	virtual const char *		getLocalIp( void );
+	virtual std::string		    getLocalIp( void );
 
 	//! set socket to blocking or not
 	virtual	RCODE				setSktBlocking( bool bBlock );
