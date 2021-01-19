@@ -138,7 +138,7 @@ void P2PEngine::onPktRelayServiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		PluginBase * pluginBase = m_PluginMgr.findPlugin( ePluginTypeRelay );
 		if( 0 != pluginBase )
 		{
-			EPluginAccessState eAccess = ( ( PluginServiceRelay * )pluginBase)->handlePktRelayServiceReq( bigListInfo, sktBase, pktReq, pktReply );
+			EPluginAccess eAccess = ( ( PluginServiceRelay * )pluginBase)->handlePktRelayServiceReq( bigListInfo, sktBase, pktReq, pktReply );
 			pktReply.setAccessState( eAccess );
 		}
 

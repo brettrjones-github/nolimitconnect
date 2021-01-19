@@ -840,7 +840,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
 
 //============================================================================
 //! get icon for given plugin
-EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePluginAccess )
+EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginAccess )
 {
 	switch( ePluginType )
 	{

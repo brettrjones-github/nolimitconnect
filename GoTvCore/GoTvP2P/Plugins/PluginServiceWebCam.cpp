@@ -269,7 +269,7 @@ bool PluginServiceWebCam::fromGuiIsPluginInSession( VxNetIdent * netIdent, int p
 }
 
 //============================================================================
-EPluginAccessState PluginServiceWebCam::canAcceptNewSession( VxNetIdent * netIdent )
+EPluginAccess PluginServiceWebCam::canAcceptNewSession( VxNetIdent * netIdent )
 {
 	EFriendState eHisPermissionToMe = netIdent->getHisFriendshipToMe();
 	EFriendState eMyPermissionToHim = netIdent->getMyFriendshipToHim();

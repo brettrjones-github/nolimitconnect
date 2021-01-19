@@ -47,7 +47,7 @@ public:
     //! get setting icon for given plugin
     EMyIcons					getPluginSettingsIcon( EPluginType ePluginType );
 	//! get icon for given plugin
-	EMyIcons					getPluginIcon( EPluginType ePluginType, EPluginAccessState ePluginAccess = ePluginAccessOk );
+	EMyIcons					getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginAccess = ePluginAccessOk );
     //! get setup icon for given plugin
     EMyIcons                    getPluginSetupIcon( EPluginType ePluginType );
 	//! get locked plugin icon

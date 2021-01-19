@@ -91,7 +91,7 @@ void PluginBaseRelay::onPktRelaySessionReq( VxSktBase * sktBase, VxPktHdr * pktH
 	oPkt.setTestOnly( poPkt->getTestOnly() );
 	oPkt.setRmtSessionId( poPkt->getLclSessionId() );
 
-	EPluginAccessState eAccess = m_PluginMgr.pluginApiGetPluginAccessState( m_ePluginType, netIdent );
+	EPluginAccess eAccess = m_PluginMgr.pluginApiGetPluginAccessState( m_ePluginType, netIdent );
 	oPkt.setPluginAccess(eAccess);
 
 	if( (ePluginAccessOk == eAccess) 

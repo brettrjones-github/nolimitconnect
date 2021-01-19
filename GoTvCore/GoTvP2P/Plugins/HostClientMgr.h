@@ -23,6 +23,8 @@ public:
     HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostClientMgr() = default;
 
+    virtual void                onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+
 protected:
     VxGUIDList                  m_JoinedHostList;
 };

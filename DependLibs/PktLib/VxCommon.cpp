@@ -195,15 +195,15 @@ uint16_t VxNetIdent::getPingTimeMs( void )
 }
 
 //============================================================================
-EPluginAccessState	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType )
+EPluginAccess	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType )
 {
 	return getPluginAccessState( ePluginType, getMyFriendshipToHim() );
 }
 
 //============================================================================
-EPluginAccessState	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType )
+EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType )
 {
-	EPluginAccessState accessState = getPluginAccessState( ePluginType, getHisFriendshipToMe() );
+	EPluginAccess accessState = getPluginAccessState( ePluginType, getHisFriendshipToMe() );
 	if( ePluginAccessOk == accessState )
 	{
 		if( ( ePluginTypeFileServer == ePluginType ) 
@@ -259,7 +259,7 @@ bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType )
 }
 
 //============================================================================
-EPluginAccessState	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriendState eHisPermissionToMe )
+EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriendState eHisPermissionToMe )
 {
 	if( eFriendStateIgnore == eHisPermissionToMe )
 	{
@@ -290,7 +290,7 @@ EPluginAccessState	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EF
 		return ePluginAccessInactive;
 	}
 
-	EPluginAccessState accessState = ePluginAccessOk;
+	EPluginAccess accessState = ePluginAccessOk;
 	if( ( ePluginTypeWebServer		== ePluginType )
 		|| ( ePluginTypeStoryboard	== ePluginType )
 		|| ( ePluginTypeRelay		== ePluginType ) )

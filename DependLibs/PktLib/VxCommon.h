@@ -117,10 +117,10 @@ public:
 	//! copy operator
 	VxNetIdent& operator =( const VxNetIdent &rhs );
 
-	EPluginAccessState			getHisAccessPermissionFromMe( EPluginType ePluginType );
+	EPluginAccess			    getHisAccessPermissionFromMe( EPluginType ePluginType );
 	bool						isHisAccessAllowedFromMe( EPluginType ePluginType );
 
-	EPluginAccessState			getMyAccessPermissionFromHim( EPluginType ePluginType );
+	EPluginAccess			    getMyAccessPermissionFromHim( EPluginType ePluginType );
 	bool						isMyAccessAllowedFromHim( EPluginType ePluginType );
 
     void						setPrimaryLanguage( uint16_t language ) { m_PrimaryLanguage = language; }
@@ -142,7 +142,7 @@ public:
 	void						debugDumpIdent( void );
 
 private:
-	EPluginAccessState			getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );
+	EPluginAccess			    getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );
 
 	//=== vars ===//
 	uint16_t					m_u16AppVersion = 0;			

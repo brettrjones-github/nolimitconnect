@@ -58,6 +58,7 @@ namespace
         "Host Join Sending Request ",
         "Host Join Send Request Failed ",
         "Host Join Success ",
+        "Host Join Failed ",
         "Host Join Fail Permission ",  
         "Host Join Fail Connect Dropped ",
 
@@ -150,6 +151,20 @@ namespace
         "Relay Assume Firewalled ",
         "Relay Assume Can Direct Connect ",
         "Max Relay Status "
+    };
+
+    const char * PluginAccessStateEnumStrings[] = 
+    {
+        "Access: Unknown ",
+        "Access: Granted ",
+        "Access: Insufficient Permission ",
+        "Access: Service Disabled ",
+        "Access: Ignored ",
+        "Access: Inactive ",
+        "Access: Busy ",
+        "Access: Requires Direct Connect ",
+        "Access: Requires Online ",
+        "Max Plugin Access ",
     };
 
     const char * PortOpenStatusEnumStrings[] = 
@@ -384,6 +399,17 @@ const char * DescribeNetCmdError( ENetCmdError netCmdError )
     }
 
     return NetCmdErrorEnumStrings[ netCmdError ]; 
+}
+
+//============================================================================
+const char * DescribePluginAccess2( EPluginAccess pluginAccess )
+{
+    if(  pluginAccess < 0 || eMaxPluginAccessState <= pluginAccess )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return PluginAccessStateEnumStrings[ pluginAccess ]; 
 }
 
 //============================================================================

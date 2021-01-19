@@ -46,7 +46,7 @@ public:
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ); 
 
-	EPluginAccessState			handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply );
+	EPluginAccess			handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply );
     bool 						isUserRelayOk( const VxGUID& srcOnlineId, const VxGUID& destOnlineId );
 
 	RelaySession *				startNewRelayService( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance );
@@ -88,7 +88,7 @@ protected:
 	//! test can use normal connection to connect to remote proxy which is connected to user 
 	virtual bool				onTestConnectUsingRmtRelay( VxNetIdent * netIdent );
 
-	virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent );
+	virtual EPluginAccess	canAcceptNewSession( VxNetIdent * netIdent );
 
 	RelaySession *				requestRelayService( VxNetIdent * netIdent, RelayClientSession * poSessionIn = NULL, bool bTest = false );
 	void						endSession( RelaySession * poSession );

@@ -1864,8 +1864,8 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<EAssetType>( "EAssetType" );
     qRegisterMetaType<EConnectReason>( "EConnectReason" );
     qRegisterMetaType<EConnectStatus>( "EConnectStatus" );
-    qRegisterMetaType<EContentRating>( "EContentRating" );
     qRegisterMetaType<EContentCatagory>( "EContentCatagory" );
+    qRegisterMetaType<EContentRating>( "EContentRating" );
     qRegisterMetaType<EFileFilterType>( "EFileFilterType" );
     qRegisterMetaType<EFriendState>( "EFriendState" );
     qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
@@ -1882,6 +1882,7 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<ENetAvailStatus>( "ENetAvailStatus" );
     qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
     qRegisterMetaType<EOfferResponse>( "EOfferResponse" );
+    qRegisterMetaType<EPluginAccess>( "EPluginAccess" );
     qRegisterMetaType<EPluginType>( "EPluginType" );
     qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
 	qRegisterMetaType<EMSessionAction>( "EMSessionAction" );

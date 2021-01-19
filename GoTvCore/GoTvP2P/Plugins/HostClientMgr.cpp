@@ -14,7 +14,12 @@
 
 #include "HostClientMgr.h"
 
+#include <GoTvInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <CoreLib/VxGUIDList.h>
+
+#include <PktLib/PktsHostJoin.h>
 
 //============================================================================
 HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
@@ -22,4 +27,23 @@ HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIden
 {
 }
 
-
+//============================================================================
+void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    PktHostJoinReply* hostReply = ( PktHostJoinReply* )pktHdr;
+    if( ePluginAccessOk == hostReply->getAccessState() )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSuccess );
+        m_JoinedHostList.addGuid( netIdent->getMyOnlineId() );
+    }
+    else if( ePluginAccessOk == hostReply->getAccessState() )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinFailPermission );
+        m_Engine.getConnectionMgr().doneWithConnection( netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinFail, DescribePluginAccess2( hostReply->getAccessState() ) );
+        m_Engine.getConnectionMgr().doneWithConnection( netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+    }
+}

@@ -16,12 +16,12 @@
 #include "P2PSession.h"
 #include "PluginMgr.h"
 
+#include <GoTvInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <PktLib/PktsVideoFeed.h>
 #include <PktLib/PktsMultiSession.h>
 #include <PktLib/PktsTodGame.h>
-
-#include <GoTvInterface/IToGui.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <memory.h>
 
@@ -54,7 +54,7 @@ void PluginChatRoomClient::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pkt
 void PluginChatRoomClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomClient got join reply" );
-    m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSuccess );
+    m_HostClientMgr.onPktHostJoinReply( sktBase, pktHdr,  netIdent );
 }
 
 //============================================================================

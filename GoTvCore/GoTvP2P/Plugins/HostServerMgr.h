@@ -23,7 +23,10 @@ public:
     HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostServerMgr() = default;
 
+    void                        addClient( VxNetIdent * ident );
+    void                        removeClient( VxGUID& onlineId );
+
 protected:
-    VxGUIDList                  m_JoinedList;
+    VxGUIDList                  m_ClientList;
 };
 

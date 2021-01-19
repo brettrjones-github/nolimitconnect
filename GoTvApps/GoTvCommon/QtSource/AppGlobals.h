@@ -54,11 +54,11 @@ QString							DescribePermissionLevel( EFriendState friendState );
 
 //! Describe type of plugin
 QString							DescribePluginType( EPluginType ePluginType );
-QString							DescribePluginAccess( EPluginAccessState accessState );
+QString							DescribePluginAccess( EPluginAccess accessState );
 //! Describe action user can take for given plugin and access
 QString							DescribePluginAction(	VxNetIdent * netIdent, 
 														EPluginType ePluginType, 
-														EPluginAccessState ePluginAccess );
+														EPluginAccess ePluginAccess );
 //! show message box to user
 void							ErrMsgBox( QWidget *, int infoLevel, const char * pMsg, ... );
 

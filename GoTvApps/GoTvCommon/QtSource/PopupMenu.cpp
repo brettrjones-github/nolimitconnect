@@ -111,7 +111,7 @@ void PopupMenu::showFriendMenu( VxNetIdent * poSelectedFriend )
 	strTitle += poSelectedFriend->getOnlineName();
 	setTitle(strTitle );
 	// populate menu
-	EPluginAccessState ePluginAccess;
+	EPluginAccess ePluginAccess;
 	QString strAction;
 
 	addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon(eMyIconPermissions), QObject::tr( "Change Friendship") );

@@ -104,7 +104,7 @@ void UpdateHasPicture( P2PEngine& engine, int bHasPicture )
 
 //============================================================================
 //! Describe action user can take for given plugin and access
-QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EPluginAccessState ePluginAccess )
+QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess )
 {
 	QString strAction;
 	switch( ePluginType )
@@ -545,11 +545,15 @@ QString DescribePluginType( EPluginType ePluginType )
 }
 
 //============================================================================
-QString DescribePluginAccess( EPluginAccessState accessState )
+QString DescribePluginAccess( EPluginAccess accessState )
 {
 	QString strAccess = "";
 	switch( accessState )
 	{
+    case ePluginAccessNotSet:
+        strAccess = QObject::tr("Access Unknown");
+        break;
+
 	case ePluginAccessOk:
 		strAccess = QObject::tr("Access Ok");
 		break;

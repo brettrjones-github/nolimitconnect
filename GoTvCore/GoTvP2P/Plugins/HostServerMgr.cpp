@@ -14,10 +14,22 @@
 
 #include "HostServerMgr.h"
 
+#include <PktLib/VxCommon.h>
+
 //============================================================================
 HostServerMgr::HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
     : HostBaseMgr( engine, pluginMgr, myIdent, pluginBase )
 {
 }
 
+//============================================================================
+void HostServerMgr::addClient( VxNetIdent * ident )
+{
+    m_ClientList.addGuid( ident->getMyOnlineId() );
+}
 
+//============================================================================
+void HostServerMgr::removeClient( VxGUID& onlineId )
+{
+    m_ClientList.removeGuid( onlineId );
+}

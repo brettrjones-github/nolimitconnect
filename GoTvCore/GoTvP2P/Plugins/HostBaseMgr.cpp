@@ -39,6 +39,47 @@ HostBaseMgr::HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * 
 }
 
 //============================================================================
+EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent * netIdent )
+{
+    EPluginAccess pluginAccess = ePluginAccessNotSet;
+
+    EFriendState pluginState = m_MyIdent->getPluginPermission( m_Plugin.getPluginType() );
+    if( eFriendStateIgnore == pluginState )
+    {
+        // we are not enabled
+        pluginAccess = ePluginAccessDisabled;
+    }
+    else
+    {
+        if( netIdent->isIgnored() )
+        {
+            pluginAccess = ePluginAccessIgnored;
+        }
+        else
+        {
+            EFriendState friendState = netIdent->getMyFriendshipToHim();
+            // everybody gets at least guest permission
+            if( friendState < eFriendStateGuest )
+            {
+                friendState = eFriendStateGuest;
+            }
+
+            if( friendState < pluginState )
+            {
+                // not enough permission
+                pluginAccess = ePluginAccessLocked;
+            }
+            else
+            {
+                pluginAccess = ePluginAccessOk;
+            }
+        }
+    }
+
+    return pluginAccess;
+}
+
+//============================================================================
 void HostBaseMgr::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
     if( !ptopUrl && hostType == eHostTypeUnknown )

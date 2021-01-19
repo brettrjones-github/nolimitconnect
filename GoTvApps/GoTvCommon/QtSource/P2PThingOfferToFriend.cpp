@@ -40,7 +40,7 @@ bool AppCommon::offerToFriendPluginSession( VxNetIdent * poFriend, EPluginType e
 	}
 	else
 	{
-		EPluginAccessState ePluginAccess = poFriend->getMyAccessPermissionFromHim( ePluginType );
+		EPluginAccess ePluginAccess = poFriend->getMyAccessPermissionFromHim( ePluginType );
         ActivityMessageBox errMsgBox( GetAppInstance(), this, LOG_INFO, "%s's %s", poFriend->getOnlineName(), DescribePluginAction( poFriend, ePluginType, ePluginAccess ).toStdString().c_str() );
 		errMsgBox.exec();
 	}

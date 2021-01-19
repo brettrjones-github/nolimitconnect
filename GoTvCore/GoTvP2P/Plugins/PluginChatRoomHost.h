@@ -14,11 +14,11 @@
 //============================================================================
 
 #include "PluginBaseHostService.h"
+#include "HostServerMgr.h"
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
 #include <CoreLib/VxMutex.h>
-
 #include <PktLib/PktHostAnnounce.h>
 
 class PluginChatRoomHost : public PluginBaseHostService, public IConnectRequestCallback
@@ -52,6 +52,8 @@ protected:
     void                        buildHostChatRoomAnnounce( PluginSetting& pluginSetting );
     void                        sendHostChatRoomAnnounce( void );
 
+    //=== vars ===//
+    HostServerMgr               m_HostServerMgr;
     bool                        m_SendAnnounceEnabled{ false };
     bool                        m_HostAnnounceBuilt{ false };
     PktHostAnnounce             m_PktHostAnnounce;

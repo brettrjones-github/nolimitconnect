@@ -544,12 +544,12 @@ bool PluginMgr::isValidPluginNum( uint8_t u8PluginNum )
 
 //============================================================================
 //! get permission/access state for remote user
-EPluginAccessState PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent )
+EPluginAccess PluginMgr::pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent )
 {
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		EPluginAccessState eAccess = m_PktAnn.getHisAccessPermissionFromMe( ePluginType );
+		EPluginAccess eAccess = m_PktAnn.getHisAccessPermissionFromMe( ePluginType );
 		if( ePluginAccessOk == eAccess )
 		{
 			eAccess = plugin->canAcceptNewSession( netIdent );
@@ -1056,9 +1056,9 @@ int PluginMgr::fromGuiDeleteFile( const char * fileName, bool shredFile )
 }
 
 //============================================================================
-EPluginAccessState PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent )
+EPluginAccess PluginMgr::canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent )
 {
-	EPluginAccessState canAcceptSession = ePluginAccessDisabled;
+	EPluginAccess canAcceptSession = ePluginAccessDisabled;
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{

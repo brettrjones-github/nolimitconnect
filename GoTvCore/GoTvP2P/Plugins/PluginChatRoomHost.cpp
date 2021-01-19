@@ -29,6 +29,7 @@
 //============================================================================
 PluginChatRoomHost::PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
     : PluginBaseHostService( engine, pluginMgr, myIdent )
+    , m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
     setPluginType( ePluginTypeChatRoomHost );
 }
@@ -85,50 +86,12 @@ void PluginChatRoomHost::onPluginSettingChange( PluginSetting& pluginSetting )
     buildHostChatRoomAnnounce( pluginSetting );
 }
 
-/*
-//============================================================================
-bool PluginChatRoomHost::onContactConnected( VxSktBase* sktBase, EConnectReason hostConnectType )
-{
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
-    {
-        if( eConnectReasonChatRoomAnnounce == hostConnectType )
-        {
-            m_AnnMutex.lock();
-            if( m_Engine.lockSkt( sktBase ) )
-            {
-
-                if( sktBase && sktBase->getPeerPktAnn().getMyOnlineId().isVxGUIDValid() )
-                {
-                    sktBase->txPacket( sktBase->getPeerPktAnn().getMyOnlineId(), &m_PktHostAnnounce );
-                }
-
-                m_Engine.unlockSkt( sktBase );
-            }
-
-            m_AnnMutex.unlock();
-        }
-    }
-
-    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectReasonChatRoomAnnounce, this );
-
-    return false;
-}
-
-//============================================================================
-void PluginChatRoomHost::onContactDisconnected( EConnectReason hostConnectType, VxSktBase* sktBase )
-{
-    if( eConnectReasonChatRoomAnnounce == hostConnectType )
-    {
-        // no action needed. we connect and send our group listing then disconnect
-    }
-}
-*/
-
 //============================================================================
 void PluginChatRoomHost::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
     PktHostJoinReply joinReply;
+    joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
     txPacket( netIdent, sktBase, &joinReply );
 }
 
@@ -142,8 +105,9 @@ void PluginChatRoomHost::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pkt
 void PluginChatRoomHost::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
-    PktHostOfferReply joinReply;
-    txPacket( netIdent, sktBase, &joinReply );
+    PktHostOfferReply offerReply;
+    offerReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+    txPacket( netIdent, sktBase, &offerReply );
 }
 
 //============================================================================

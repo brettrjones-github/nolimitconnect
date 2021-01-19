@@ -184,7 +184,7 @@ void ActivityToFriendMultiSession::doToGuiRxedOfferReply( void * callbackData, G
 //============================================================================
 void ActivityToFriendMultiSession::showReasonAccessNotAllowed( void )
 {
-	EPluginAccessState accessState = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
+	EPluginAccess accessState = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
 	QString accessDesc = DescribePluginType( m_ePluginType );
 	accessDesc += QObject::tr( " with " );
 	accessDesc += m_HisIdent->getOnlineName();

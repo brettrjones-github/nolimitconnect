@@ -179,7 +179,7 @@ public:
                                                 bool pluginIsLocked,
                                                 EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
 
-    virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent );
+    virtual EPluginAccess	canAcceptNewSession( VxNetIdent * netIdent );
 
 	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );

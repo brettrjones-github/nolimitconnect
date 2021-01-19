@@ -23,6 +23,7 @@ class P2PEngine;
 class PluginMgr;
 class VxNetIdent;
 class PluginBase;
+class VxPktHdr;
 
 class HostBaseMgr : public IConnectRequestCallback
 {
@@ -32,6 +33,8 @@ public:
 
     //=== hosting ===//
     virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl );
+
+    virtual EPluginAccess	    getPluginAccessState( VxNetIdent * netIdent );
 
 protected:
     //=== callback overrides ==//
@@ -44,6 +47,8 @@ protected:
     virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     void                        sendJoinRequest( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+
+    virtual void                onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
 
     //=== vars ===//
     P2PEngine&                  m_Engine; 

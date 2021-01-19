@@ -163,7 +163,7 @@ bool MultiSessionState::canSend( void )
 	if( m_IsInChatSession
 		&& m_HisIdent->isOnline() )
 	{
-		EPluginAccessState accessState = ePluginAccessLocked; 
+		EPluginAccess accessState = ePluginAccessLocked; 
 		switch( m_eMSessionType )
 		{
 		case eMSessionTypePhone:

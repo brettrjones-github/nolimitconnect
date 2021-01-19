@@ -103,7 +103,7 @@ void ActivityToFriendBase::setupBaseWidgets(	TitleBarWidget *	titleBarWidget,
 
 	if( 0 != permissionButton )
 	{
-		EPluginAccessState ePluginAccess = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
+		EPluginAccess ePluginAccess = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
 
 		permissionButton->setIcon( getMyIcons().getPluginIcon( m_ePluginType, ePluginAccess ) );
 		QString strAction = DescribePluginType( m_ePluginType );

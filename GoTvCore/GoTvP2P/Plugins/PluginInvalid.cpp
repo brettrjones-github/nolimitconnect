@@ -75,7 +75,7 @@ bool PluginInvalid::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserD
 }
 
 //============================================================================
-EPluginAccessState PluginInvalid::canAcceptNewSession( VxNetIdent * netIdent )
+EPluginAccess PluginInvalid::canAcceptNewSession( VxNetIdent * netIdent )
 {
 	return ePluginAccessDisabled;
 }

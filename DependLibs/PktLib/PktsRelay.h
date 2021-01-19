@@ -47,8 +47,8 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )					{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )								{ return m_RmtSessionId; }
 
-	void						setAccessState( EPluginAccessState ePluginAccess )  { m_u32Error = (uint32_t)ePluginAccess; }
-	EPluginAccessState			getAccessState( void )								{ return (EPluginAccessState)m_u32Error; }
+	void						setAccessState( EPluginAccess ePluginAccess )  { m_u32Error = (uint32_t)ePluginAccess; }
+	EPluginAccess			getAccessState( void )								{ return (EPluginAccess)m_u32Error; }
 	void						setRelayStatus( ERelayStatus eStatus )				{ m_u8RelayStatus = (uint8_t)eStatus; }
 	ERelayStatus				getRelayStatus( void )								{ return (ERelayStatus)m_u8RelayStatus; }
 
@@ -113,8 +113,8 @@ class PktRelaySessionReq : public VxPktHdr
 public:
 	PktRelaySessionReq();
 
-	void						setPluginAccess( EPluginAccessState eAccess );
-	EPluginAccessState			getPluginAccess();
+	void						setPluginAccess( EPluginAccess eAccess );
+	EPluginAccess			getPluginAccess();
 	void						setTestOnly( uint8_t test )							{ m_u8TestOnly = test; }
 	uint8_t						getTestOnly( void )									{ return m_u8TestOnly; }
 
@@ -139,8 +139,8 @@ class PktRelaySessionReply : public VxPktHdr
 public:
 	PktRelaySessionReply();
 
-	void						setPluginAccess( EPluginAccessState eAccess )	{ m_u8PluginAccess = (EPluginAccessState)eAccess; }
-	EPluginAccessState			getPluginAccess()								{ return (EPluginAccessState)m_u8PluginAccess; }
+	void						setPluginAccess( EPluginAccess eAccess )	{ m_u8PluginAccess = (EPluginAccess)eAccess; }
+	EPluginAccess			getPluginAccess()								{ return (EPluginAccess)m_u8PluginAccess; }
 	void						setTestOnly( uint8_t test )						{ m_u8TestOnly = test; }
 	uint8_t						getTestOnly( void )								{ return m_u8TestOnly; }
 
@@ -207,8 +207,8 @@ class PktRelayTestReq : public VxPktHdr
 public:
 	PktRelayTestReq();
 
-	void						setPluginAccess( EPluginAccessState eAccess );
-	EPluginAccessState			getPluginAccess();
+	void						setPluginAccess( EPluginAccess eAccess );
+	EPluginAccess			getPluginAccess();
 
 	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }
@@ -236,8 +236,8 @@ class PktRelayTestReply : public VxPktHdr
 {
 public:
 	PktRelayTestReply();
-	void						setPluginAccess( EPluginAccessState eAccess );
-	EPluginAccessState			getPluginAccess();
+	void						setPluginAccess( EPluginAccess eAccess );
+	EPluginAccess			getPluginAccess();
 
 	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }

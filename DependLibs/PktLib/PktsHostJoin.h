@@ -25,15 +25,17 @@ class PktHostOfferReq : public VxPktHdr
 public:
     PktHostOfferReq();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = (uint8_t)hostType; }
-    EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
+    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
+    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
     void						setOfferMsg( const char * msg );
     const char *				getOfferMsg( void );
 
 private:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
+    uint8_t					    m_AccessState{ 0 };
     uint16_t					m_StrLen{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
@@ -46,15 +48,17 @@ class PktHostOfferReply : public VxPktHdr
 public:
     PktHostOfferReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = (uint8_t)hostType; }
-    EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
+    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
+    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
     void						setOfferMsg( const char * msg );
     const char *				getOfferMsg( void );
 
 private:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
+    uint8_t					    m_AccessState{ 0 };
     uint16_t					m_StrLen{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
@@ -67,12 +71,14 @@ class PktHostJoinReq : public VxPktHdr
 public:
     PktHostJoinReq();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = (uint8_t)hostType; }
-    EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
+    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
+    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
 
 private:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
+    uint8_t					    m_AccessState{ 0 };
     uint16_t					m_Res2{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
@@ -84,12 +90,14 @@ class PktHostJoinReply : public VxPktHdr
 public:
     PktHostJoinReply();
 
-    void                        setHostType( EHostType hostType )   { m_HostType = (uint8_t)hostType; }
-    EHostType                   getHostType( void )                 { return (EHostType)m_HostType; }
+    void                        setHostType( EHostType hostType )                   { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void )                                 { return (EHostType)m_HostType; }
+    void                        setAccessState( EPluginAccess accessState )         { m_AccessState = (uint8_t)accessState; }
+    EPluginAccess               getAccessState( void )                              { return (EPluginAccess)m_AccessState; }
 
 private:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
+    uint8_t					    m_AccessState{ 0 };
     uint16_t					m_Res2{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		

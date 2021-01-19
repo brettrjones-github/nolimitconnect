@@ -31,7 +31,7 @@ public:
 	//! return true if is plugin session
 	virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 	//! can accept a new connection/session
-	virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent );	
+	virtual EPluginAccess	canAcceptNewSession( VxNetIdent * netIdent );	
 
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) {};
 	//! called when new better connection from user

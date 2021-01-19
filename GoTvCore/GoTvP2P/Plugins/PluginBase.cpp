@@ -302,7 +302,7 @@ void PluginBase::makeShortFileName( const char * pFullFileName, std::string& str
 }
 
 //============================================================================ 
-EPluginAccessState PluginBase::canAcceptNewSession( VxNetIdent * netIdent ) 
+EPluginAccess PluginBase::canAcceptNewSession( VxNetIdent * netIdent ) 
 { 
     return netIdent->getHisAccessPermissionFromMe( m_ePluginType ); 
 }

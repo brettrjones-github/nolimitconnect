@@ -89,7 +89,7 @@ public:
                                                     VxPktHdr *			poPkt,
                                                     bool				bDisconnectAfterSend = false );
 	void						pluginApiLog( EPluginType ePluginType, const char * pMsg, ... );
-	virtual EPluginAccessState	pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent );
+	virtual EPluginAccess	pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent );
 	virtual VxNetIdent *		pluginApiGetMyIdentity( void );
 	virtual VxNetIdent *		pluginApiFindUser( const char * pUserName );
 
@@ -129,7 +129,7 @@ public:
 	virtual void				fromGuiSendAsset( AssetInfo& assetInfo );
 	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual EPluginAccessState	canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );
+	virtual EPluginAccess	canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );
 
 	//! return true if access ok
 	bool						canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent );

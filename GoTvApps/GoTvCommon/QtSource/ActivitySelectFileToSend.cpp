@@ -44,7 +44,7 @@ ActivitySelectFileToSend::ActivitySelectFileToSend(	AppCommon&	app,
 	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
 
 	ui.m_FriendIdentWidget->updateGuiFromData( m_HisIdent );
-	EPluginAccessState ePluginAccess = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
+	EPluginAccess ePluginAccess = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
 
 	ui.m_PermissionButton->setIcon( getMyIcons().getPluginIcon( m_ePluginType, ePluginAccess ) );
 	QString strPermissionFromHim = DescribePluginType( m_ePluginType );

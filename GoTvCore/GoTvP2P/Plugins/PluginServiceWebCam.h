@@ -43,7 +43,7 @@ public:
 	void						sendVidPkt( VxPktHdr * vidPkt, bool requiresAck );
 
 protected:
-	virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent );
+	virtual EPluginAccess	canAcceptNewSession( VxNetIdent * netIdent );
 
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 	virtual void				onConnectionLost( VxSktBase * sktBase );

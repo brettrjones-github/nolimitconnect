@@ -159,8 +159,9 @@ enum EHostJoinStatus
     eHostJoinSendingJoinRequest = 8,
     eHostJoinSendJoinRequestFailed = 9,
     eHostJoinSuccess = 10,
-    eHostJoinFailPermission = 11,
-    eHostJoinFailConnectDropped = 12,
+    eHostJoinFail = 11,
+    eHostJoinFailPermission = 12,
+    eHostJoinFailConnectDropped = 13,
 
     eMaxHostJoinStatus
 };
@@ -266,16 +267,19 @@ enum EOfferResponse
 };
 
 //! \public Enumeration of plugin accessibility
-enum EPluginAccessState
+enum EPluginAccess
 {
-	ePluginAccessOk				= 0,		//!< Plugin access allowed
-	ePluginAccessLocked			= 1,		//!< Insufficient Friend permission level
-	ePluginAccessDisabled		= 2,		//!< Plugin disabled or no files shared or no web cam broadcast
-	ePluginAccessIgnored		= 3,		//!< Access denied because you are being ignored
-	ePluginAccessInactive		= 4,		//!< Enabled and have access but no shared files or web cam
-	ePluginAccessBusy			= 5,		//!< Sufficient permission but cannot accept any more sessions
-	ePluginAccessRequiresDirectConnect = 6,	//!< Plugin access requires contact have direct connection
-	ePluginAccessRequiresOnline		= 7		//!< Plugin access requires contact to be online
+    ePluginAccessNotSet			= 0,		//!< Plugin access not initialized
+	ePluginAccessOk				= 1,		//!< Plugin access allowed
+	ePluginAccessLocked			= 2,		//!< Insufficient Friend permission level
+	ePluginAccessDisabled		= 3,		//!< Plugin disabled or no files shared or no web cam broadcast
+	ePluginAccessIgnored		= 4,		//!< Access denied because you are being ignored
+	ePluginAccessInactive		= 5,		//!< Enabled and have access but no shared files or web cam
+	ePluginAccessBusy			= 6,		//!< Sufficient permission but cannot accept any more sessions
+	ePluginAccessRequiresDirectConnect = 7,	//!< Plugin access requires contact have direct connection
+	ePluginAccessRequiresOnline		= 8,	//!< Plugin access requires contact to be online
+
+    eMaxPluginAccessState
 };
 
 //! \public Enumerated plugins
@@ -569,6 +573,9 @@ const char * DescribeNetCmdType( ENetCmdType netCmdType );
 
 //! Net Command Error as text
 const char * DescribeNetCmdError( ENetCmdError netCmdError );
+
+/// the first DescribePluginAccess is translated.. this one is not
+const char * DescribePluginAccess2( EPluginAccess pluginAccess );
 
 //! Describe Direct Connect test state as text
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );

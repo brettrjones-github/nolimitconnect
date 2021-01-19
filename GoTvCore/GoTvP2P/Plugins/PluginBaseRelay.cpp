@@ -67,7 +67,7 @@ void PluginBaseRelay::fromGuiRelayPermissionCount( int userPermittedCount, int a
 }
 
 //============================================================================
-EPluginAccessState PluginBaseRelay::canAcceptNewSession( VxNetIdent * netIdent )
+EPluginAccess PluginBaseRelay::canAcceptNewSession( VxNetIdent * netIdent )
 {
 	if( m_PluginMgr.getPktAnnounce().requiresRelay() )
 	{
@@ -120,7 +120,7 @@ bool PluginBaseRelay::isUserRelayOk( const VxGUID& srcOnlineId, const VxGUID& de
 }
 
 //============================================================================
-EPluginAccessState PluginBaseRelay::handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply )
+EPluginAccess PluginBaseRelay::handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply )
 {
 	pktReply.setAccessState( ePluginAccessBusy );
 	if( relayServiceReq->m_u8CancelService )

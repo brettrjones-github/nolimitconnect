@@ -275,7 +275,7 @@ void ActivityBase::setupStyledDlg(	VxNetIdent *		poFriend,
 
 	if( poPermissionButton )
 	{
-		EPluginAccessState ePluginAccess = poFriend->getMyAccessPermissionFromHim(ePluginType);
+		EPluginAccess ePluginAccess = poFriend->getMyAccessPermissionFromHim(ePluginType);
 
 		poPermissionButton->setIcon( getMyIcons().getPluginIcon( ePluginType, ePluginAccess ) );
 		QString strAction = DescribePluginAction( poFriend, ePluginType, ePluginAccess );
