@@ -42,7 +42,6 @@ void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, const char * pto
 {
     std::string url = ptopUrl ? ptopUrl : "";
     m_HostClientMgr.fromGuiJoinHost( hostType, url );
-    //m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinQueryIdInProgress );
 }
 
 //============================================================================
