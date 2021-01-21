@@ -15,8 +15,6 @@
 
 #include "HostBaseMgr.h"
 
-#include <CoreLib/VxGUIDList.h>
-
 class HostClientMgr : public HostBaseMgr
 {
 public:
@@ -26,6 +24,11 @@ public:
     virtual void                onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 protected:
-    VxGUIDList                  m_JoinedHostList;
+    virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+
+    virtual void                onHostJoined( VxSktBase * sktBase,  VxNetIdent * netIdent );
+
+    VxMutex                     m_ClientMutex;
+    VxGUIDList                  m_ServerList;
 };
 

@@ -80,6 +80,7 @@ public:
     virtual EPluginType			getPluginType( void )									{ return m_ePluginType; }
     virtual bool                setPluginSetting( PluginSetting& pluginSetting );
     virtual PluginSetting&      getPluginSetting( void )                                { return m_PluginSetting; }
+    virtual EHostType			getHostType( void );
 
 	virtual PluginMgr&			getPluginMgr( void )									{ return m_PluginMgr;	}
 	virtual	VxMutex&			getPluginMutex( void )									{ return m_PluginMutex; }					
@@ -145,7 +146,7 @@ public:
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
 
     bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
-    bool						txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
+    bool						txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
 
     //=== maintenence ===//
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )							{};
@@ -179,7 +180,7 @@ public:
                                                 bool pluginIsLocked,
                                                 EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
 
-    virtual EPluginAccess	canAcceptNewSession( VxNetIdent * netIdent );
+    virtual EPluginAccess	    canAcceptNewSession( VxNetIdent * netIdent );
 
 	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );

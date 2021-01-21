@@ -40,7 +40,8 @@ PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& plugin
 //============================================================================
 void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
 {
-    m_HostClientMgr.fromGuiJoinHost( hostType, ptopUrl );
+    std::string url = ptopUrl ? ptopUrl : "";
+    m_HostClientMgr.fromGuiJoinHost( hostType, url );
     //m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinQueryIdInProgress );
 }
 

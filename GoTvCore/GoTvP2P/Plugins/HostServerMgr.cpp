@@ -13,6 +13,10 @@
 //============================================================================
 
 #include "HostServerMgr.h"
+#include "PluginBase.h"
+
+#include <GoTvInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <PktLib/VxCommon.h>
 
@@ -23,13 +27,91 @@ HostServerMgr::HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIden
 }
 
 //============================================================================
-void HostServerMgr::addClient( VxNetIdent * ident )
+void HostServerMgr::onClientJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-    m_ClientList.addGuid( ident->getMyOnlineId() );
+    m_ServerMutex.lock();
+    addClient( sktBase, netIdent );
+    m_ServerMutex.unlock();
+    addContact(sktBase, netIdent );
 }
 
 //============================================================================
-void HostServerMgr::removeClient( VxGUID& onlineId )
+void HostServerMgr::sendHostAnnounceToNetworkHost( PktHostAnnounce& hostAnnounce, EConnectReason connectReason )
 {
-    m_ClientList.removeGuid( onlineId );
+    m_ServerMutex.lock();
+    memcpy( &m_PktHostAnnounce, &hostAnnounce, hostAnnounce.getPktLength() );
+    m_ServerMutex.unlock();
+    std::string url = m_ConnectionMgr.getDefaultHostUrl( eHostTypeNetwork );
+    if( url.empty() )
+    {
+        LogMsg( LOG_VERBOSE, "HostServerMgr network host url is empty" );
+        return;
+    }
+
+    connectToHost( eHostTypeNetwork, url, connectReason );
+}
+
+//============================================================================
+void HostServerMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    m_ServerMutex.lock();
+    if( removeContact( onlineId ) )
+    {
+        // TODO send clients a status offline message
+    }
+
+    m_ServerMutex.unlock();
+    HostBaseMgr::onContactDisconnected( sktBase, onlineId, connectReason );
+}
+
+//============================================================================
+void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    if( hostType == eHostTypeNetwork &&
+        ( connectReason == eConnectReasonChatRoomAnnounce ||
+            connectReason == eConnectReasonGroupAnnounce ||
+            connectReason == eConnectReasonRandomConnectAnnounce ) )
+    {
+        m_ServerMutex.lock();
+        if( m_PktHostAnnounce.isValidPkt() )
+        {
+            m_Plugin.txPacket( onlineId, sktBase, &m_PktHostAnnounce, false, ePluginTypeNetworkHost );
+        }
+        else
+        {
+            LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostAnnounce is invalid" );
+        }
+
+        m_ServerMutex.unlock();
+
+        m_Engine.getConnectionMgr().doneWithConnection( onlineId, this, connectReason );
+    }
+    else
+    {
+        HostBaseMgr::onConnectToHostSuccess( hostType, sktBase, onlineId, connectReason );
+    }
+}
+
+//============================================================================
+bool HostServerMgr::addClient( VxSktBase * sktBase, VxNetIdent * netIdent )
+{
+    bool wasAdded = m_ContactList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
+    if( wasAdded )
+    {
+        // TODO implement contact added
+    }
+
+    return wasAdded;
+}
+
+//============================================================================
+bool HostServerMgr::removeClient( VxGUID& onlineId )
+{
+    bool wasRemoved = m_ContactList.removeGuid( onlineId );
+    if( wasRemoved )
+    {
+        // TODO implement contact removed
+    }
+
+    return wasRemoved;
 }

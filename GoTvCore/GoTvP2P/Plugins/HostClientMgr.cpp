@@ -17,8 +17,6 @@
 #include <GoTvInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-#include <CoreLib/VxGUIDList.h>
-
 #include <PktLib/PktsHostJoin.h>
 
 //============================================================================
@@ -34,7 +32,8 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
     if( ePluginAccessOk == hostReply->getAccessState() )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSuccess );
-        m_JoinedHostList.addGuid( netIdent->getMyOnlineId() );
+        onHostJoined( sktBase, netIdent );
+       
     }
     else if( ePluginAccessOk == hostReply->getAccessState() )
     {
@@ -46,4 +45,18 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
         m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinFail, DescribePluginAccess2( hostReply->getAccessState() ) );
         m_Engine.getConnectionMgr().doneWithConnection( netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
     }
+}
+
+//============================================================================
+void HostClientMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
+{
+    m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
+    //addContact(sktBase, netIdent );
+}
+
+//============================================================================
+void HostClientMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    m_ServerList.removeGuid( onlineId );
+    removeContact( onlineId );
 }

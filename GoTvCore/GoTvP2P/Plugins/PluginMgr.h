@@ -87,9 +87,10 @@ public:
                                                     VxGUID&		        onlineId,
                                                     VxSktBase *			sktBase,
                                                     VxPktHdr *			poPkt,
-                                                    bool				bDisconnectAfterSend = false );
+                                                    bool				bDisconnectAfterSend = false,
+                                                    EPluginType         overridePlugin = ePluginTypeInvalid );
 	void						pluginApiLog( EPluginType ePluginType, const char * pMsg, ... );
-	virtual EPluginAccess	pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent );
+	virtual EPluginAccess	    pluginApiGetPluginAccessState( EPluginType ePluginType, VxNetIdent * netIdent );
 	virtual VxNetIdent *		pluginApiGetMyIdentity( void );
 	virtual VxNetIdent *		pluginApiFindUser( const char * pUserName );
 

@@ -74,6 +74,45 @@ bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting )
 }
 
 //============================================================================
+EHostType PluginBase::getHostType( void )
+{
+    EHostType hostType = eHostTypeUnknown;
+    switch( getPluginType() )
+    {
+    case ePluginTypeChatRoomClient:
+    case ePluginTypeChatRoomHost:
+        hostType = eHostTypeChatRoom;
+        break;
+
+    case ePluginTypeConnectTestClient:
+    case ePluginTypeConnectTestHost:
+        hostType = eHostTypeConnectTest;
+        break;
+
+    case ePluginTypeGroupClient:
+    case ePluginTypeGroupHost:
+        hostType = eHostTypeGroup;
+        break;
+
+    case ePluginTypeRandomConnectClient:
+    case ePluginTypeRandomConnectHost:
+        hostType = eHostTypeRandomConnect;
+        break;
+
+    case ePluginTypeNetworkClient:
+    case ePluginTypeNetworkHost:
+    case ePluginTypeNetworkSearchList:
+        hostType = eHostTypeNetwork;
+        break;
+
+    default:
+        break;
+    }
+
+    return hostType;
+}
+
+//============================================================================
 EAppState PluginBase::getPluginState( void )
 {
 	if( eFriendStateIgnore == getPluginPermission() )
@@ -234,7 +273,7 @@ bool PluginBase::txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr 
 }
 
 //============================================================================
-bool PluginBase::txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend )
+bool PluginBase::txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend, EPluginType overridePlugin )
 {
     if( NULL == sktBase )
     {

@@ -22,7 +22,6 @@ public:
     PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginNetworkHost() override = default;
 
-
 protected:
-
+    virtual void				onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 };

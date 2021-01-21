@@ -15,7 +15,7 @@
 
 #include "HostBaseMgr.h"
 
-#include <CoreLib/VxGUIDList.h>
+#include <PktLib/PktHostAnnounce.h>
 
 class HostServerMgr : public HostBaseMgr
 {
@@ -23,10 +23,18 @@ public:
     HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostServerMgr() = default;
 
-    void                        addClient( VxNetIdent * ident );
-    void                        removeClient( VxGUID& onlineId );
+    virtual void                sendHostAnnounceToNetworkHost( PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
 
 protected:
+    virtual void                onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
+    virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+
+    virtual void                onClientJoined( VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual bool                addClient( VxSktBase * sktBase, VxNetIdent * netIdent );
+    virtual bool                removeClient( VxGUID& onlineId );
+
+    VxMutex                     m_ServerMutex;
     VxGUIDList                  m_ClientList;
+    PktHostAnnounce             m_PktHostAnnounce;
 };
 

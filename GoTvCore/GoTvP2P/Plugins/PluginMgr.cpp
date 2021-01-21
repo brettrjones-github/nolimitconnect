@@ -836,7 +836,8 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
                                     VxGUID&		        onlineId, 
                                     VxSktBase *			sktBase, 
                                     VxPktHdr *			pktHdr, 
-                                    bool				bDisconnectAfterSend )
+                                    bool				bDisconnectAfterSend,
+                                    EPluginType         overridePlugin )
 {
     // when sending packets they are typically from plugin to the same remote plugin
     // for host/client we convert host to client and client to hot
@@ -871,7 +872,11 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
         break;
     }
 
-    if( hostClientType != ePluginTypeInvalid )
+    if( overridePlugin != ePluginTypeInvalid )
+    {
+        pktHdr->setPluginNum( (uint8_t)overridePlugin );
+    }
+    else if( hostClientType != ePluginTypeInvalid )
     {
         pktHdr->setPluginNum( (uint8_t)hostClientType );
     }

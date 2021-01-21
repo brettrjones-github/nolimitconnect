@@ -75,7 +75,7 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        //m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectReasonChatRoomAnnounce, this );
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
     }
 }
 

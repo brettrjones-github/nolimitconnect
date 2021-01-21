@@ -22,10 +22,41 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxFileUtil.h>
+#include <PktLib/PktHostAnnounce.h>
 
 //============================================================================
 PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostService( engine, pluginMgr, myIdent )
 {
     setPluginType( ePluginTypeNetworkHost );
+}
+
+//============================================================================
+void PluginNetworkHost::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    PktHostAnnounce* hostAnn = (PktHostAnnounce*)pktHdr;
+    if( eHostTypeChatRoom == hostAnn->getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce" );
+    }
+    else if( eHostTypeConnectTest == hostAnn->getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce" );
+    }
+    else if( eHostTypeGroup == hostAnn->getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got group announce" );
+    }
+    else if( eHostTypeNetwork == hostAnn->getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got network announce" );
+    }
+    else if( eHostTypeRandomConnect == hostAnn->getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got random connect announce" );
+    }
+    else
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost unknown announce %d", hostAnn->getHostType() );
+    }
 }
