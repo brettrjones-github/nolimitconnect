@@ -73,7 +73,14 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
 //============================================================================
 void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
+    if( !m_HostAnnounceBuilt && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    {
+        PluginSetting pluginSetting;
+        m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting );
+        buildHostChatRoomAnnounce( pluginSetting );
+    }
+
+    if( m_HostAnnounceBuilt && isPluginEnabled() )
     {
         m_HostServerMgr.sendHostAnnounceToNetworkHost( m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
     }

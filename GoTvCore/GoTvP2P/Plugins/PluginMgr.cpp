@@ -682,6 +682,16 @@ void PluginMgr::onOncePerSecond( void )
 }
 
 //============================================================================
+void PluginMgr::onThreadOncePer15Minutes( void )
+{
+    std::vector<PluginBase * >::iterator iter;
+    for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
+    {
+    	(*iter)->onThreadOncePer15Minutes();
+    }
+}
+
+//============================================================================
 void PluginMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
 	std::vector<PluginBase * >::iterator iter;

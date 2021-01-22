@@ -122,6 +122,7 @@ public:
 	virtual void				fromGuiAppResume( void );
 
 	virtual void				onOncePerSecond( void );
+    virtual void				onThreadOncePer15Minutes( void );
 
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase );
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );

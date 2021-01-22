@@ -15,8 +15,11 @@
 
 #include "P2PEngine.h"
 
+#include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
+
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxParse.h>
+#include <CoreLib/VxTime.h>
 
 namespace
 {
@@ -59,7 +62,18 @@ void P2PEngine::enableTimerThread( bool enable )
 //============================================================================
 void P2PEngine::executeTimerThreadFunctions( void )
 {
+    static uint64_t timeLast = GetGmtTimeMs();
+    while( !m_TimerThread.isAborted() && !VxIsAppShuttingDown() )
+    {
+        uint64_t timeNow = GetGmtTimeMs();
+        if( timeNow - timeLast >= 1000 )
+        {
+            timeNow = timeLast;
+            onThreadOncePerSecond();
+        }
 
+        VxSleep( 400 );
+    }
 }
 
 //============================================================================
@@ -148,6 +162,7 @@ void P2PEngine::onThreadOncePerMinute( void )
 void P2PEngine::onThreadOncePer15Minutes( void )
 {
     //m_RcScan.onOncePer30Seconds();
+    m_PluginMgr.onThreadOncePer15Minutes();
 }
 
 //============================================================================

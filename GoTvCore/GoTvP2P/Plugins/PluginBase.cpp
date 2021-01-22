@@ -281,7 +281,7 @@ bool PluginBase::txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poP
         return false;
     }
 
-    return m_PluginMgr.pluginApiTxPacket( m_ePluginType, onlineId, sktBase, poPkt, bDisconnectAfterSend );
+    return m_PluginMgr.pluginApiTxPacket( m_ePluginType, onlineId, sktBase, poPkt, bDisconnectAfterSend, overridePlugin );
 }
 
 //============================================================================
