@@ -27,5 +27,7 @@ protected:
     virtual void				onConnectionLost( VxSktBase * sktBase ) override;
     virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
 
+    //=== vars ===//
+
 };
 

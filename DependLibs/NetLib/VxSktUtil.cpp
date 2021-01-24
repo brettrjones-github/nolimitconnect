@@ -93,6 +93,20 @@ RCODE VxSocketsStartup( void )
 	return  0;
 }
 
+//============================================================================
+bool VxIsIpValid( std::string& ipAddr )
+{
+    static const std::string nullIpV4 = "0.0.0.0";
+    static const std::string loopBackIpV4 = "127.0.0.1";
+    static const std::string loopBackIp1V6 = "0000:0000:0000:0000:0000:0000:0000:0001/128";
+    static const std::string loopBackIp2V6 = "::1/128";
+    return ipAddr.size() >= nullIpV4.size() &&
+        ipAddr != nullIpV4 &&
+        ipAddr != loopBackIpV4 &&
+        ipAddr != loopBackIp1V6 &&
+        ipAddr != loopBackIp2V6 &&
+        ( ipAddr.find('.') != std::string::npos || ipAddr.find(':') != std::string::npos );
+}
 
 //============================================================================
 void VxIpInNetOrderToString( uint32_t u32IpAddr, std::string& retIp )

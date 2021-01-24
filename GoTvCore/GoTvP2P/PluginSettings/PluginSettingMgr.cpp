@@ -96,7 +96,7 @@ bool PluginSettingMgr::getPluginSetting( EPluginType pluginType, PluginSetting& 
     if( result )
     {
         result = false;
-        if( pluginSetting.getPluginType() != ePluginTypeInvalid )
+        if( pluginType != ePluginTypeInvalid )
         {
             for( PluginSetting& setting : m_SettingList )
             {
@@ -111,10 +111,12 @@ bool PluginSettingMgr::getPluginSetting( EPluginType pluginType, PluginSetting& 
             if( !result )
             {
                 PluginSetting setting;
-                setting.setPluginType( pluginType );
-                m_SettingList.push_back( setting );
-                pluginSetting = setting;
-                result = true;
+                if( setting.setDefaultValues( m_Engine, pluginType ) )
+                {
+                    m_SettingList.push_back( setting );
+                    pluginSetting = setting;
+                    result = true;
+                }
             }
         }
         else

@@ -24,6 +24,8 @@
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsHostSearch.h>
+
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
@@ -61,11 +63,15 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
+    pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyPtopUrl() );
     m_Engine.unlockAnnouncePktAccess();
     m_PluginSetting = pluginSetting;
+    m_PluginSetting.setUpdateTimestampToNow();
     BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
+    m_PktHostAnnounce.setHostType( eHostTypeChatRoom );
     m_PktHostAnnounce.setSettingBinary( binarySetting );
+    m_PktHostAnnounce.setIsLoopback( true ); // BRJ temp for testing
     m_HostAnnounceBuilt = true;
     m_AnnMutex.unlock();
 }
@@ -73,14 +79,18 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
 //============================================================================
 void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
-    if( !m_HostAnnounceBuilt && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    if( !m_HostAnnounceBuilt && 
+        ( m_Engine.getEngineSettings().getFirewallTestSetting() == FirewallSettings::eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
+        m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
     {
         PluginSetting pluginSetting;
-        m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting );
-        buildHostChatRoomAnnounce( pluginSetting );
+        if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+        {
+            buildHostChatRoomAnnounce( pluginSetting );
+        }
     }
 
-    if( m_HostAnnounceBuilt && isPluginEnabled() )
+    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
     {
         m_HostServerMgr.sendHostAnnounceToNetworkHost( m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
     }
@@ -99,13 +109,26 @@ void PluginChatRoomHost::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHd
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
     PktHostJoinReply joinReply;
     joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+    if( ePluginAccessOk == joinReply.getAccessState() )
+    {
+
+    }
+
     txPacket( netIdent, sktBase, &joinReply );
 }
 
 //============================================================================
-void PluginChatRoomHost::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginChatRoomHost::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join reply" );
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    PktHostSearchReply searchReply;
+    searchReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+    if( ePluginAccessOk == searchReply.getAccessState() )
+    {
+
+    }
+
+    txPacket( netIdent, sktBase, &searchReply );
 }
 
 //============================================================================

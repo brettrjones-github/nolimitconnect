@@ -152,6 +152,8 @@ public:
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktHostSearchReply            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktFriendOfferReq             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

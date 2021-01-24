@@ -192,6 +192,7 @@
     <ClInclude Include="..\..\PktsFriendOffer.h" />
     <ClInclude Include="..\..\PktsHostJoin.h" />
     <ClInclude Include="..\..\PktsHostListXfer.h" />
+    <ClInclude Include="..\..\PktsHostSearch.h" />
     <ClInclude Include="..\..\PktsImAlive.h" />
     <ClInclude Include="..\..\PktsMultiSession.h" />
     <ClInclude Include="..\..\PktsPing.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />
     <ClCompile Include="..\..\PktsHostJoin.cpp" />
     <ClCompile Include="..\..\PktsHostListXfer.cpp" />
+    <ClCompile Include="..\..\PktsHostSearch.cpp" />
     <ClCompile Include="..\..\PktsImAlive.cpp" />
     <ClCompile Include="..\..\PktsMultiSession.cpp" />
     <ClCompile Include="..\..\PktsPing.cpp" />

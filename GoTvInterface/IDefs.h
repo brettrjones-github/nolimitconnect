@@ -577,6 +577,9 @@ const char * DescribeNetCmdError( ENetCmdError netCmdError );
 /// the first DescribePluginAccess is translated.. this one is not
 const char * DescribePluginAccess2( EPluginAccess pluginAccess );
 
+//! Describe plugin.. the first DescribePluginType is translated.. this one is not
+const char * DescribePluginType2( EPluginType ePluginType );
+
 //! Describe Direct Connect test state as text
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
 
@@ -588,6 +591,7 @@ const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus );
 
 //! Describe run network test state as text
 const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
+
 
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName

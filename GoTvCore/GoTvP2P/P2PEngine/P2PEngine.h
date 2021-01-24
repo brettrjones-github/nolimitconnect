@@ -107,6 +107,8 @@ public:
     void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
     void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
+    void						copyMyPktAnnounce( PktAnnounce& pktAnn )		{ m_AnnouncePktMutex.lock(); memcpy(&pktAnn, &m_PktAnn, sizeof(PktAnnounce)); m_AnnouncePktMutex.unlock(); }
+
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
     VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
     std::string					getMyUrl( void )							    { m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyPtopUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
@@ -555,6 +557,8 @@ protected:
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostSearchReply            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktFriendOfferReq             ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;

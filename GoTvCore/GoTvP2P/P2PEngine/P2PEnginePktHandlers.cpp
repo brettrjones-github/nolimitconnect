@@ -856,6 +856,24 @@ void P2PEngine::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
+void P2PEngine::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktHostSearchReq" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktHostSearchReply" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
 void P2PEngine::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS

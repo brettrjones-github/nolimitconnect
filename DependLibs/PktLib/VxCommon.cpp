@@ -16,6 +16,7 @@
 #include "VxCommon.h"
 
 #include <NetLib/VxSktBase.h>
+#include <NetLib/VxSktUtil.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
@@ -332,7 +333,7 @@ std::string VxNetIdent::getMyPtopUrl( void )
     m_DirectConnectId.getIPv4(strIPv4);
     std::string strIPv6; 
     m_DirectConnectId.getIPv6(strIPv6);
-    std::string myIp = strIPv6.empty() ? strIPv4 : strIPv6;
+    std::string myIp = VxIsIpValid( strIPv6 ) ? strIPv6  : strIPv4;
 
     std::string myUrl;
     StdStringFormat( myUrl, "ptop://%s:%d/%s", myIp.c_str(), m_DirectConnectId.getPort(), getMyOnlineId().toOnlineIdString().c_str() );

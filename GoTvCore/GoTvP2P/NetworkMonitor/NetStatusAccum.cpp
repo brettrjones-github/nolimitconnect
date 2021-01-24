@@ -18,6 +18,7 @@
 #include <GoTvInterface/IToGui.h>
 
 #include <CoreLib/VxGlobals.h>
+#include <NetLib/VxSktUtil.h>
 
 //============================================================================
 NetStatusAccum::NetStatusAccum( P2PEngine& engine )
@@ -250,18 +251,25 @@ void NetStatusAccum::setConnectionTestAvail( bool avail )
 //============================================================================
 void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, std::string& myExternalIp )
 {
-    if( isTested != m_ConnectionTestAvail || isTested != m_DirectConnectTested || requiresRelay != m_RequriesRelay )
+    if( VxIsIpValid( myExternalIp ) )
     {
-        m_ConnectionTestAvail = isTested;
-        m_DirectConnectTested = isTested;
-        m_RequriesRelay = requiresRelay;
-        if( isTested && !myExternalIp.empty() )
-        {
-            setIpAddress( myExternalIp );
-        }
+        m_Engine.lockAnnouncePktAccess();
+        m_Engine.getMyPktAnnounce().setOnlineIpAddress( myExternalIp.c_str() );
+        m_Engine.unlockAnnouncePktAccess();
 
-        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d extern ip %s", isTested, requiresRelay, myExternalIp.c_str() );
-        onNetStatusChange();
+        if( isTested != m_ConnectionTestAvail || isTested != m_DirectConnectTested || requiresRelay != m_RequriesRelay )
+        {
+            m_ConnectionTestAvail = isTested;
+            m_DirectConnectTested = isTested;
+            m_RequriesRelay = requiresRelay;
+            if( isTested && !myExternalIp.empty() )
+            {
+                setIpAddress( myExternalIp );
+            }
+
+            LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d extern ip %s", isTested, requiresRelay, myExternalIp.c_str() );
+            onNetStatusChange();
+        }
     }
 }
 

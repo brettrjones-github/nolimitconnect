@@ -167,6 +167,34 @@ namespace
         "Max Plugin Access ",
     };
 
+    const char * PluginTypeEnumStrings[] = 
+    {
+        "Unknown Plugin ",
+        "Admin ",
+        "About Me Page ",
+        "Shared Web Cam ",
+        "Shared Files ",
+        "Send A File ",    
+        "Messenger ",
+        "Story Board ", 
+        "Play Truth Or Dare ",
+        "Video Chat ",
+        "Voice Call ",
+        "Chat Room Client ",
+        "Chat Room Host ",
+        "Connect Test Client ",
+        "Connect Test Host ",
+        "Group Client ",
+        "Group Host ",
+        "Random Connect Client ",
+        "Random Connect Host ",
+        "Network Client ",
+        "Network Host ",
+        "Network Search ",
+        "Relay ",
+        "Max Public Plugin ",
+    };
+
     const char * PortOpenStatusEnumStrings[] = 
     { 
         "Port Open: Status Unknown",
@@ -410,6 +438,17 @@ const char * DescribePluginAccess2( EPluginAccess pluginAccess )
     }
 
     return PluginAccessStateEnumStrings[ pluginAccess ]; 
+}
+
+//============================================================================
+const char * DescribePluginType2( EPluginType plugType )
+{
+    if(  plugType < 0 || eMaxImplementedPluginType <= plugType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return PluginTypeEnumStrings[ plugType ]; 
 }
 
 //============================================================================

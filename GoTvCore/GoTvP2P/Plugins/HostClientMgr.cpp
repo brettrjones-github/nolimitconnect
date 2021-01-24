@@ -18,10 +18,11 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsHostSearch.h>
 
 //============================================================================
 HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
-    : HostBaseMgr( engine, pluginMgr, myIdent, pluginBase )
+    : HostClientSearchMgr( engine, pluginMgr, myIdent, pluginBase )
 {
 }
 
@@ -45,6 +46,13 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
         m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinFail, DescribePluginAccess2( hostReply->getAccessState() ) );
         m_Engine.getConnectionMgr().doneWithConnection( netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
     }
+}
+
+//============================================================================
+void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    PktHostSearchReply* hostReply = ( PktHostSearchReply* )pktHdr;
+
 }
 
 //============================================================================

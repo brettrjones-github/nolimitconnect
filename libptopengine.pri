@@ -210,7 +210,9 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileXferPluginSession.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostBaseMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientSearchMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerSearchMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/P2PSession.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBase.h \
@@ -438,7 +440,9 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileXferPluginSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostBaseMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientSearchMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerSearchMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/P2PSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBase.cpp \

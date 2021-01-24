@@ -58,6 +58,13 @@ void PluginChatRoomClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
+void PluginChatRoomClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomClient got search reply" );
+    m_HostClientMgr.onPktHostSearchReply( sktBase, pktHdr,  netIdent );
+}
+
+//============================================================================
 void PluginChatRoomClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomClient got join offer request" );

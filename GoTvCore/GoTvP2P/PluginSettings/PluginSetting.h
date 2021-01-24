@@ -73,6 +73,7 @@ public:
     void                        setRes2( uint32_t res2 )                            { m_Reserve2Setting = (uint32_t)res2; }
     uint32_t                    getRes2( void )                                     { return m_Reserve2Setting; }
 
+    void                        setUpdateTimestampToNow( void );
     void                        setLastUpdateTimestamp( int64_t timeStamp )         { m_UpdateTimestamp = timeStamp; }
     int64_t                     getLastUpdateTimestamp( void )                      { return m_UpdateTimestamp; }
 
@@ -103,6 +104,7 @@ protected:
 #pragma pack(pop)
 
 class BinaryBlob;
+class P2PEngine;
 
 class PluginSetting : public PluginSettingHdr
 {
@@ -115,6 +117,9 @@ public:
     PluginSetting& operator =( const PluginSetting & rhs ) = default;
     //! move operator
     PluginSetting& operator =( PluginSetting && rhs ) = default;
+
+    //! set to default values for case use has not set anything but has enabled the plugin
+    bool                        setDefaultValues( P2PEngine& engine, EPluginType pluginType );
 
     void                        setTitle( std::string title )                       { m_PluginTitle = title; }
     std::string&                getTitle( void )                                    { return m_PluginTitle; }

@@ -486,7 +486,7 @@ QString	DescribePermissionLevel( EFriendState friendState )
 }
 
 //============================================================================
-//! Describe action user can take for given plugin and access
+//! Describe plugin
 QString DescribePluginType( EPluginType ePluginType )
 {
 	QString strPluginType;
@@ -496,13 +496,13 @@ QString DescribePluginType( EPluginType ePluginType )
 		strPluginType = QObject::tr( "Admin" );
 		break;
 
-	case ePluginTypeRelay:	// proxy plugin
-		strPluginType = QObject::tr("Relay");
-		break;
+    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
+        strPluginType = QObject::tr("About Me Page");
+        break;
 
-	case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-		strPluginType = QObject::tr("Profile Web Page");
-		break;
+    case ePluginTypeAvatarImage:
+        strPluginType = QObject::tr("Avatar Image");
+        break;
 
 	case ePluginTypeFileXfer:	// file offer plugin
 		strPluginType = QObject::tr("Send A File");
@@ -517,7 +517,7 @@ QString DescribePluginType( EPluginType ePluginType )
 		break;
 
 	case ePluginTypeMessenger:	// multi session chat plugin
-		strPluginType = QObject::tr("Chat Session");
+		strPluginType = QObject::tr("Messenger");
 		break;
 
 	case ePluginTypeVoicePhone:	// VOIP p2p plugin
@@ -536,6 +536,42 @@ QString DescribePluginType( EPluginType ePluginType )
 		strPluginType = QObject::tr("Story Board");
 		break;
 
+    case ePluginTypeChatRoomClient:	//!< chat room user client plugin
+        strPluginType = QObject::tr("Chat Room Client");
+        break;
+    case ePluginTypeChatRoomHost:	//!< chat room hosting plugin
+        strPluginType = QObject::tr("Chat Room Host");
+        break;
+    case ePluginTypeConnectTestClient:	//!< Connection Test Client
+        strPluginType = QObject::tr("Connect Test Client");
+        break;
+    case ePluginTypeConnectTestHost:	//!< Connection Test Service
+        strPluginType = QObject::tr("Connect Test Host");
+        break;
+    case ePluginTypeGroupClient:	//!< group client
+        strPluginType = QObject::tr("Group Client");
+        break;
+    case ePluginTypeGroupHost:   //!< group hosting
+        strPluginType = QObject::tr("Group Host");
+        break;
+    case ePluginTypeRandomConnectClient:	//!< Random connect to another person client
+        strPluginType = QObject::tr("Random Connect Client");
+        break;
+    case ePluginTypeRandomConnectHost:	//!< Random connect to another person hosting
+        strPluginType = QObject::tr("Random Connect Host");
+        break;
+    case ePluginTypeNetworkClient:	//!< network client
+        strPluginType = QObject::tr("Network Client");
+        break;
+    case ePluginTypeNetworkHost:	//!< master network hosting
+        strPluginType = QObject::tr("Network Host");
+        break;
+    case  ePluginTypeNetworkSearchList:	//!< group and chat room list for network search
+        strPluginType = QObject::tr("Network Search");
+        break;
+    case ePluginTypeRelay:	// proxy plugin
+        strPluginType = QObject::tr("Relay");
+        break;
 	default:
 		strPluginType = QObject::tr("Unknown Plugin");
 		LogMsg( LOG_ERROR, "DescribePluginAction: unrecognized plugin %d\n", ePluginType );

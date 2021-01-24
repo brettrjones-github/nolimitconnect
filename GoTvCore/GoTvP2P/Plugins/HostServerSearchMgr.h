@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,19 +13,32 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseHostService.h"
-#include "HostServerMgr.h"
+#include "HostBaseMgr.h"
 
-class PluginNetworkHost : public PluginBaseHostService
+#include <CoreLib/VxGUIDList.h>
+#include <CoreLib/VxMutex.h>
+
+class ConnectionMgr;
+class P2PEngine;
+class PluginMgr;
+class VxNetIdent;
+class PluginBase;
+class VxPktHdr;
+class PktHostAnnounce;
+
+class HostServerSearchMgr : public HostBaseMgr
 {
 public:
+    HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
+	virtual ~HostServerSearchMgr() = default;
 
-    PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginNetworkHost() override = default;
+    void                        updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent * netIdent );
 
 protected:
-    virtual void				onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+
 
     //=== vars ===//
-    HostServerMgr               m_HostServerMgr;
+    VxMutex                     m_SearchMutex;
+    VxGUIDList                  m_HostSearchList;
 };
+

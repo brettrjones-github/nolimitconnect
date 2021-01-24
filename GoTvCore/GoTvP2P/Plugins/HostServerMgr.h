@@ -13,11 +13,11 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "HostBaseMgr.h"
+#include "HostServerSearchMgr.h"
 
 #include <PktLib/PktHostAnnounce.h>
 
-class HostServerMgr : public HostBaseMgr
+class HostServerMgr : public HostServerSearchMgr
 {
 public:
     HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );

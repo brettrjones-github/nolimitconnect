@@ -169,8 +169,11 @@
 #define PKT_TYPE_HOST_OFFER_REQ		                ( PKT_TYPE_HOST_JOIN_REPLY + 1 )	            // 116 ( 0x74 )
 #define PKT_TYPE_HOST_OFFER_REPLY					( PKT_TYPE_HOST_OFFER_REQ + 1 )	                // 117 ( 0x75 )
 
-#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	            // 118 ( 0x76 )
-#define PKT_TYPE_FRIEND_OFFER_REPLY					( PKT_TYPE_FRIEND_OFFER_REQ + 1 )	            // 119 ( 0x77 )
+#define PKT_TYPE_HOST_SEARCH_REQ		            ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	            // 118 ( 0x76 )
+#define PKT_TYPE_HOST_SEARCH_REPLY					( PKT_TYPE_HOST_SEARCH_REQ + 1 )	            // 110 ( 0x77 )
+
+#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_SEARCH_REPLY + 1 )	            // 120 ( 0x78 )
+#define PKT_TYPE_FRIEND_OFFER_REPLY					( PKT_TYPE_FRIEND_OFFER_REQ + 1 )	            // 111 ( 0x79 )
 
 #define MAX_PKT_TYPE_CNT							(PKT_TYPE_FRIEND_OFFER_REPLY + 1)
 

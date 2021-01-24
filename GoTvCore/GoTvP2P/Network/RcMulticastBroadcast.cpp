@@ -49,9 +49,7 @@ void RcMulticastBroadcast::setBroadcastEnable( bool enable )
 void RcMulticastBroadcast::onPktAnnUpdated( void )
 {
 	m_MulticastMutex.lock();
-	m_Engine.lockAnnouncePktAccess();
-	memcpy( &m_PktAnnEncrypted, &m_Engine.getMyPktAnnounce(), sizeof( PktAnnounce ) );
-	m_Engine.unlockAnnouncePktAccess();
+	m_Engine.copyMyPktAnnounce(m_PktAnnEncrypted);
 	m_PktAnnEncrypted.setMyFriendshipToHim(eFriendStateGuest);
 	m_PktAnnEncrypted.setHisFriendshipToMe(eFriendStateGuest);
 

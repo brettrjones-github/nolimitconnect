@@ -104,6 +104,7 @@ void P2PEngine::onThreadOncePerSecond( void )
     {
         thirtySecCntInSeconds = 30;
         onThreadOncePer30Seconds();
+        onThreadOncePer15Minutes();
     }
 
     static int minuteCntInSeconds = 62;

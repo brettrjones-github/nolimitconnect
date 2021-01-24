@@ -22,7 +22,7 @@
 
 //============================================================================
 HostServerMgr::HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
-    : HostBaseMgr( engine, pluginMgr, myIdent, pluginBase )
+    : HostServerSearchMgr( engine, pluginMgr, myIdent, pluginBase )
 {
 }
 

@@ -13,15 +13,16 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "HostBaseMgr.h"
+#include "HostClientSearchMgr.h"
 
-class HostClientMgr : public HostBaseMgr
+class HostClientMgr : public HostClientSearchMgr
 {
 public:
     HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostClientMgr() = default;
 
     virtual void                onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 protected:
     virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;

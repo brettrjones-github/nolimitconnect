@@ -27,6 +27,7 @@
 //============================================================================
 PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostService( engine, pluginMgr, myIdent )
+, m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
     setPluginType( ePluginTypeNetworkHost );
 }
@@ -38,22 +39,27 @@ void PluginNetworkHost::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHd
     if( eHostTypeChatRoom == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce" );
+        m_HostServerMgr.updateHostSearchList( eHostTypeChatRoom, hostAnn, netIdent );
     }
     else if( eHostTypeConnectTest == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce" );
+        m_HostServerMgr.updateHostSearchList( eHostTypeConnectTest, hostAnn, netIdent );
     }
     else if( eHostTypeGroup == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got group announce" );
+        m_HostServerMgr.updateHostSearchList( eHostTypeGroup, hostAnn, netIdent );
     }
     else if( eHostTypeNetwork == hostAnn->getHostType() )
     {
+        // for now we are the only network host so ignore
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got network announce" );
     }
     else if( eHostTypeRandomConnect == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got random connect announce" );
+        m_HostServerMgr.updateHostSearchList( eHostTypeRandomConnect, hostAnn, netIdent );
     }
     else
     {

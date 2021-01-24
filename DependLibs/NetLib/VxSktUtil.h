@@ -43,6 +43,8 @@
 
 //! initialize sockets
 RCODE							VxSocketsStartup( void );
+
+bool                            VxIsIpValid( std::string& ipAddr );
 std::string						VxGetRemoteIpAddress( SOCKET skt );
 std::string						VxGetRmtHostName( SOCKET& skt );
 //! split host name from website file path

@@ -14,6 +14,8 @@
 
 #include "PluginSetting.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <CoreLib/BinaryBlob.h>
 #include <CoreLib/StringListBinary.h>
 #include <CoreLib/VxDebug.h>
@@ -21,6 +23,13 @@
 #include <string.h>
 
 #define PLUGIN_SETTINGS_STRING_COUNT 7
+
+
+//============================================================================
+void PluginSettingHdr::setUpdateTimestampToNow( void )
+{
+    setLastUpdateTimestamp( GetTimeStampMs() );
+}
 
 //============================================================================
 bool PluginSetting::toBinary( BinaryBlob& binaryBlob, bool networkOrder )
@@ -144,5 +153,25 @@ bool PluginSetting::getStringList( std::vector<std::string>& stringList )
     stringList.push_back( m_SecondaryPluginDesc );
     stringList.push_back( m_SecondaryUrl );
 
+    return true;
+}
+
+//============================================================================
+//! set to default values for case use has not set anything but has enabled the plugin
+bool PluginSetting::setDefaultValues( P2PEngine& engine, EPluginType pluginType )
+{
+    setUpdateTimestampToNow();
+    setPluginType( pluginType );
+    PktAnnounce pktAnn;
+    engine.copyMyPktAnnounce(pktAnn);
+    std::string onlineName = pktAnn.getOnlineName();
+    std::string onlineDesc = pktAnn.getOnlineDescription();
+    std::string myUrl = pktAnn.getMyPtopUrl();
+    m_PluginTitle = DescribePluginType2( pluginType );
+    m_PluginTitle += " - ";
+    m_PluginTitle += onlineName;
+    m_PluginDesc = DescribePluginType2( pluginType );
+    m_PluginDesc += " - ";
+    m_PluginDesc += onlineDesc;
     return true;
 }
