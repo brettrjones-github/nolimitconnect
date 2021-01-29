@@ -563,7 +563,7 @@ public:
 
 	void						viewWebServerPage( VxNetIdentBase * netIdent, const char * webPageFileName );
 
-	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType );
+	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, EAgeType age, int primaryLanguage, int contentType );
     void                        setupAccountResources( VxNetIdent& userAccountIdent );
     // updates my ident in database and engine and global ident
     void                        updateMyIdent( VxNetIdent * myIdent, bool permissionAndStateOnly = false );

@@ -65,6 +65,8 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
         m_AppletList.push_back( appletHostNetwork );
         AppletLaunchWidget * appletHostGroup = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostGroup, this );
         m_AppletList.push_back( appletHostGroup );
+        AppletLaunchWidget * appletHostRandomConnect = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostRandomConnect, this );
+        m_AppletList.push_back( appletHostRandomConnect );
 
         m_IsInitialized = true;
     }

@@ -126,12 +126,14 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceStoryboard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAboutMe.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAvatarImage.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsConnectionTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsFileXfer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroup.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostNetwork.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostRandomConnect.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnect.h \
@@ -147,6 +149,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppTranslate.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetPhotoWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetTextWidget.h \
@@ -418,6 +421,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceStoryboard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAboutMe.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAvatarImage.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsChatRoom.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsConnectionTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsFileXfer.cpp \
@@ -425,6 +429,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroup.cpp \
 #    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroupListing.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostNetwork.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostRandomConnect.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnect.cpp \
@@ -440,6 +445,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppTranslate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetBaseWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.cpp \

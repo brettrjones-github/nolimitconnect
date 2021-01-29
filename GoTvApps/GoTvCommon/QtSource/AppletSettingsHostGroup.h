@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletSettingsBase.h"
 #include "PluginSettingsWidget.h"
 #include "PermissionWidget.h"
 
@@ -22,7 +22,7 @@
 
 #include "ui_AppletSettingsHostGroup.h"
  
-class AppletSettingsHostGroup : public AppletBase
+class AppletSettingsHostGroup : public AppletSettingsBase
 {
 	Q_OBJECT
 public:
@@ -30,7 +30,6 @@ public:
 	virtual ~AppletSettingsHostGroup();
 
     PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
-    PermissionWidget*           getRelayWidget()                    { return ui.m_RelayPermissionWidget; }
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
 
 protected slots:
@@ -40,14 +39,8 @@ protected:
     void                        connectServiceWidgets();
     void                        loadPluginSetting();
     void                        savePluginSetting();
-    void                        loadUiFromSetting();
-    void                        saveUiToSetting();
 
     Ui::AppletSettingsHostGroupUi     ui;
-    PluginSetting               m_PluginSetting;
-    EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
-    EFriendState                m_OrigRelayPermission = eFriendStateIgnore;
-    EFriendState                m_OrigConnectTestPermission = eFriendStateIgnore;
 };
 
 

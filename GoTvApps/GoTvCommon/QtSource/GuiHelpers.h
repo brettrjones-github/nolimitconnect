@@ -32,6 +32,7 @@ class QLineEdit;
 class VxNetIdent;
 class ActivityBase;
 class AppletBase;
+class PluginSettingsWidget;
 
 class GuiHelpers
 {
@@ -84,35 +85,40 @@ public:
     static bool                 validateMoodMessage( QWidget * curWidget, QString strMoodMsg );
     static bool                 validateAge( QWidget * curWidget, int age );
 
-    static void                 setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
-    static void                 setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
 
     static void                 fillPermissionComboBox( QComboBox * permissionComboBox );
     static EFriendState         comboIdxToFriendState( int comboIdx );
     static int                  friendStateToComboIdx( EFriendState friendState );
 
+    static void                 fillAge( QComboBox * comboBox );
+    static QString              describeAge( EAgeType gender );
     static QString              describeAge( int age );
+    static uint8_t              ageToIndex( EAgeType age );
 
     static void                 fillGender( QComboBox * comboBox );
     static QString              describeGender( EGenderType gender );
+    static uint8_t              genderToIndex( EGenderType gender );
 
     static void                 fillLanguage( QComboBox * comboBox );
     static QString              describeLanguage( ELanguageType language );
-    static uint16_t             languageToIndex( ELanguageType language );
+    static uint8_t              languageToIndex( ELanguageType language );
 
     static void                 fillContentRating( QComboBox * comboBox );
     static QString              describeContentRating( EContentRating content );
-    static uint16_t             contentRatingToIndex( EContentRating content );
+    static uint8_t              contentRatingToIndex( EContentRating content );
 
     static void                 fillContentCatagory( QComboBox * comboBox );
     static QString              describeContentCatagory( EContentCatagory content );
-    static uint16_t             contentCatagoryToIndex( EContentCatagory content );
+    static uint8_t              contentCatagoryToIndex( EContentCatagory content );
 
     static ActivityBase *       findParentActivity( QWidget * widget );
     static QWidget *            findAppletContentFrame( QWidget * widget );
     static ActivityBase *       findLaunchWindow( QWidget * widget );
     static AppletBase *         findParentApplet( QWidget * widget );
 
-
+    static bool                 widgetToPluginSettings( EPluginType pluginType, PluginSettingsWidget* settingsWidget, PluginSetting& pluginSetting );
+    static bool                 pluginSettingsToWidget( EPluginType pluginType, PluginSetting& pluginSetting, PluginSettingsWidget* settingsWidget );
 };
 

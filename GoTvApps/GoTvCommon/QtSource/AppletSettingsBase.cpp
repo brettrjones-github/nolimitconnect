@@ -11,66 +11,51 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+
 #include <app_precompiled_hdr.h>
-#include "AppletSettingsHostNetwork.h"
+#include "AppletSettingsBase.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
 #include "GuiHelpers.h"
 
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxTime.h>
 
 //============================================================================
-AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * parent )
-: AppletSettingsBase( OBJNAME_APPLET_SETTINGS_HOST_NETWORK, app, parent )
+AppletSettingsBase::AppletSettingsBase( const char * ObjName, AppCommon& app, QWidget * parent )
+    : AppletBase( ObjName, app, parent )
 {
-    ui.setupUi( getContentItemsFrame() );
-    setAppletType( eAppletSettingsHostNetwork );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostNetwork, ePluginTypeNetworkHost );
-    getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
-    getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
-    getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
-    getConnectionTestWidget()->setPluginType( ePluginTypeConnectTestHost );
-    connectServiceWidgets();
-    loadPluginSetting();
-
-    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletSettingsHostNetwork::~AppletSettingsHostNetwork()
+AppletSettingsBase::~AppletSettingsBase()
 {
-    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::connectServiceWidgets()
+void AppletSettingsBase::connectServiceWidgets()
 {
     connect( getPluginSettingsWidget()->getApplyButton(), SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::loadPluginSetting()
+void AppletSettingsBase::loadPluginSetting()
 {
     if( ePluginTypeInvalid != getPluginType() )
     {
-        m_OrigPermissionLevel = m_MyApp.getEngine().getPluginPermission( getPluginType() );
-        //m_OrigGroupListPermission = m_MyApp.getEngine().getPluginPermission( getGroupListingWidget()->getPluginType() );
-        m_OrigConnectTestPermission = m_MyApp.getEngine().getPluginPermission( getConnectionTestWidget()->getPluginType() );
-
+        m_OrigPermissionLevel = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( getPluginType() );
+        m_OrigConnectTestPermission = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( getConnectionTestWidget()->getPluginType() );
         getPluginSettingsWidget()->getPermissionWidget()->setPermissionLevel( m_OrigPermissionLevel );
-        //getGroupListingWidget()->setPermissionLevel( m_OrigGroupListPermission );
         getConnectionTestWidget()->setPermissionLevel( m_OrigConnectTestPermission );
 
+        m_PluginSetting.setPluginType( getPluginType() );// must set before get settings so engine will know which
         m_MyApp.getEngine().getPluginSettingMgr().getPluginSetting( getPluginType(), m_PluginSetting );
         loadUiFromSetting();
     }
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::savePluginSetting()
+void AppletSettingsBase::savePluginSetting()
 {
     if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
     {
@@ -80,29 +65,41 @@ void AppletSettingsHostNetwork::savePluginSetting()
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::slotApplyServiceSettings()
+void AppletSettingsBase::loadUiFromSetting()
+{
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        GuiHelpers::pluginSettingsToWidget( getPluginType(), m_PluginSetting, getPluginSettingsWidget() );
+    }
+}
+
+//============================================================================
+void AppletSettingsBase::saveUiToSetting()
+{
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        GuiHelpers::widgetToPluginSettings( getPluginType(), getPluginSettingsWidget(), m_PluginSetting );
+    }
+}
+
+//============================================================================
+void AppletSettingsBase::slotApplyServiceSettings()
 {
     saveUiToSetting();
-    m_PluginSetting.setLastUpdateTimestamp( GetGmtTimeMs() );
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+
     EFriendState newPermissionLevel = getPluginSettingsWidget()->getPermissionWidget()->getPermissionLevel();
-    EFriendState newGroupListPermission = getGroupListingWidget()->getPermissionLevel();
     EFriendState newConnectionTestPermission = getConnectionTestWidget()->getPermissionLevel();
     if( newPermissionLevel != m_OrigPermissionLevel )
     {
         m_MyApp.getEngine().setPluginPermission( getPluginSettingsWidget()->getPermissionWidget()->getPluginType(), newPermissionLevel );
     }
 
-    /*
-    if( newGroupListPermission != m_OrigGroupListPermission )
-    {
-        m_MyApp.getEngine().setPluginPermission( getGroupListingWidget()->getPluginType(), newGroupListPermission );
-    }*/
-
     if( newConnectionTestPermission != m_OrigConnectTestPermission )
     {
         m_MyApp.getEngine().setPluginPermission( getConnectionTestWidget()->getPluginType(), newConnectionTestPermission );
     }
 
+    savePluginSetting();
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
 }

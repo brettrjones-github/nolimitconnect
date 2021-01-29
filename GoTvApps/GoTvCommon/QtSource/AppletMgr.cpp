@@ -78,6 +78,7 @@
 #include "AppletSettingsHostGroup.h"
 // #include "AppletSettingsHostGroupListing.h"
 #include "AppletSettingsHostNetwork.h"
+#include "AppletSettingsHostRandomConnect.h"
 #include "AppletSettingsMessenger.h"
 #include "AppletSettingsRandomConnect.h"
 #include "AppletSettingsRandomConnectRelay.h"
@@ -244,8 +245,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
     // case eAppletSettingsHostGroupListing:   appletDialog = new AppletSettingsHostGroupListing( m_MyApp, parent ); break;
     case eAppletSettingsHostNetwork:        appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;
+    case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsHostRandomConnect( m_MyApp, parent ); break;
     case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
-    case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsRandomConnect( m_MyApp, parent ); break;
+    //case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsRandomConnect( m_MyApp, parent ); break;
     case eAppletSettingsRandomConnectRelay: appletDialog = new AppletSettingsRandomConnectRelay( m_MyApp, parent ); break;
     // case eAppletSettingsRelay:              appletDialog = new AppletSettingsRelay( m_MyApp, parent ); break;
     case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;

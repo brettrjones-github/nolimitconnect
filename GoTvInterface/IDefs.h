@@ -29,6 +29,15 @@ enum EAppModule
     eMaxAppModule // must be last
 };
 
+enum EAgeType
+{
+    eAgeTypeUnspecified = 0,
+    eAgeTypeUnder21,
+    eAgeType21OrOlder,
+
+    eMaxAgeType
+};
+
 enum EConnectReason
 {
     eConnectReasonUnknown = 0,
@@ -373,9 +382,37 @@ enum EMSessionType
 
 enum ELanguageType
 {
-    eLanguageUnspecified,
-    eLanguageEnglishUS,
-    eLanguageEnglishBritian,
+    eLangUnspecified = 0,
+    eLangEnglish,       //  (en) English
+    eLangBulgarian,	    //  (bg) Bulgarian
+    eLangChinese,	    //  (ch) Chinese
+    eLangCroatian,      //  (hr) Croatian
+    eLangCzech,         //  (cs) Czech
+    eLangDanish,        //  (da) Danish
+    eLangDutch,         //  (nl) Dutch
+    eLangEstonian,      //  (et) Estonian
+    eLangFinnish,       //  (fi) Finnish
+    eLangFrench,        //	(fr) French
+    eLangGerman,        //	(de) German
+    eLangGreek,         //  (el) Greek
+    eLangHindi,         //  (hi) Hindi
+    eLangHungarian,     //	(hu) Hungarian
+    eLangItalian,       //	(it) Italian
+    eLangJapanese,      //	(jp) Japanese
+    eLangLatvian,       //	(lv) Latvian
+    eLangLithuanian,    //	(lt) Lithuanian
+    eLangNorwegian,     //	(no) Norwegian
+    eLangPolish,        //	(pl) Polish
+    eLangPortuguese,    //	(pt) Portuguese
+    eLangRomanian,      //	(ro) Romanian
+    eLangRussian,       //	(ru) Russian
+    eLangSerbian,       //  (sr) Serbian
+    eLangSlovak,        //	(sl) Slovak
+    eLangSpanish,       //	(es) Spanish
+    eLangSwedish,       //	(sv) Swedish
+    eLangThai,          //  (th) Thiawanese
+    eLangTurkish,       //  (tr) Turkish
+    eLangUkrainian,     //	(uk) Ukrainian
 
     eMaxLanguageType
 };
@@ -443,8 +480,6 @@ enum ENetCmdError
 
     eMaxNetCmdError
 };
-//! Host connection test state as text
-const char * DescribeHostStatus( EHostTestStatus eHostStatus );
 
 //! \public Can Direct Connect test state
 enum EIsPortOpenStatus
@@ -547,12 +582,17 @@ enum ERunTestStatus
 
 const char * DescribeAppModule( EAppModule appModule );
 
+const char * DescribeAge( EAgeType ageType );
+
 const char * DescribeConnectReason( EConnectReason connectReason );
 
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
 
-//! Host type as text
+//! Host join status as text
 const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus );
+
+//! Host connection test state as text
+const char * DescribeHostStatus( EHostTestStatus eHostStatus );
 
 //! Host type as text
 const char * DescribeHostType( EHostType hostType );

@@ -126,6 +126,7 @@
 #define OBJNAME_APPLET_SETTINGS_HOST_GROUP				"AppletSettingsHostGroup"
 #define OBJNAME_APPLET_SETTINGS_HOST_GROUP_LISTING		"AppletSettingsHostGroupListing"
 #define OBJNAME_APPLET_SETTINGS_HOST_NETWORK			"AppletSettingsHostNetwork"
+#define OBJNAME_APPLET_SETTINGS_HOST_RANDOM_CONNECT		"AppletSettingsHostRandomConnect"
 #define OBJNAME_APPLET_SETTINGS_MESSENGER			    "AppletSettingsMessenger"
 #define OBJNAME_APPLET_SETTINGS_PAGE					"AppletSettingsPage"
 #define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT		    "AppletSettingsRandomConnect"

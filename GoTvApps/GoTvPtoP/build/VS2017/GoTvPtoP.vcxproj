@@ -729,6 +729,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAvatarImage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -745,6 +746,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostNetwork.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsMessenger.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -798,6 +800,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSetup.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppTranslate.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetBaseWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -2090,6 +2093,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">
@@ -2144,6 +2149,7 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">

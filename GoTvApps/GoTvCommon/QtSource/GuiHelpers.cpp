@@ -18,8 +18,10 @@
 #include "ActivityBase.h"
 #include "AppletBase.h"
 #include "AppCommon.h"
+#include "AppTranslate.h"
 #include "MyIconsDefs.h"
 #include "VxFrame.h"
+#include "PluginSettingsWidget.h"
 
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxParse.h>
@@ -500,6 +502,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletSettingsHostGroup:          return ePluginTypeGroupHost;
     // case eAppletSettingsHostGroupListing:   return ePluginTypeGroupHostListing;
     case eAppletSettingsHostNetwork:        return ePluginTypeNetworkHost;
+    case eAppletSettingsHostRandomConnect:  return ePluginTypeRandomConnectHost;
     case eAppletSettingsMessenger:          return ePluginTypeMessenger;
     case eAppletSettingsRandomConnect:      return ePluginTypeRandomConnectClient;
     case eAppletSettingsRandomConnectRelay: return ePluginTypeRandomConnectHost;
@@ -561,9 +564,10 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeGroupHost:              return eAppletSettingsHostGroup;
         // case ePluginTypeGroupHostListing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeNetworkHost:            return eAppletSettingsHostNetwork;
+    case ePluginTypeRandomConnectHost:      return eAppletSettingsHostRandomConnect;
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
     case ePluginTypeRandomConnectClient:    return eAppletSettingsRandomConnect;
-    case ePluginTypeRandomConnectHost:      return eAppletSettingsRandomConnectRelay;
+    // case ePluginTypeRandomConnectHost:      return eAppletSettingsRandomConnectRelay;
         // case ePluginTypeRelay:                  return eAppletSettingsRelay;
     case ePluginTypeStoryboard:             return eAppletSettingsStoryboard;
     case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
@@ -621,9 +625,10 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     case ePluginTypeGroupHost:              return eAppletSettingsHostGroup;
     // case ePluginTypeGroupHostListing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeNetworkHost:            return eAppletSettingsHostNetwork;
+    case ePluginTypeRandomConnectHost:      return eAppletSettingsHostRandomConnect;
     //case ePluginTypeMessenger:              return eAppletSettingsMessenger;
     case ePluginTypeRandomConnectClient:          return eAppletServiceRandomConnect;
-    case ePluginTypeRandomConnectHost:     return eAppletServiceRandomConnectRelay;
+    //case ePluginTypeRandomConnectHost:     return eAppletServiceRandomConnectRelay;
     case ePluginTypeRelay:                  return eAppletServiceRelay;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     //case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
@@ -1282,6 +1287,19 @@ bool GuiHelpers::validateAge( QWidget * curWidget, int age )
 }
 
 //============================================================================
+void GuiHelpers::fillGender( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        for( int i = 0; i < eMaxGenderType; i++ )
+        {
+            comboBox->addItem( describeGender( (EGenderType)i ) );
+        }
+    }
+}
+
+//============================================================================
 QString GuiHelpers::describeGender( EGenderType gender )
 {
     switch( gender )
@@ -1298,14 +1316,89 @@ QString GuiHelpers::describeGender( EGenderType gender )
 }
 
 //============================================================================
-void GuiHelpers::fillGender( QComboBox * comboBox )
+uint8_t GuiHelpers::genderToIndex( EGenderType gender )
+{
+    if( ( gender >= 0 ) && ( gender < eMaxGenderType ) )
+    {
+        return ( uint8_t )gender;
+    }
+
+    return 0;
+}
+
+//============================================================================
+void GuiHelpers::fillAge( QComboBox * comboBox )
 {
     if( comboBox )
     {
         comboBox->clear();
-        for( int i = 0; i < eMaxGenderType; i++ )
+        for( int i = 0; i < eMaxAgeType; i++ )
         {
-            comboBox->addItem( describeGender( (EGenderType)i ) );
+            comboBox->addItem( describeAge( (EAgeType)i ) );
+        }
+    }
+}
+
+//============================================================================
+QString GuiHelpers::describeAge( EAgeType gender )
+{
+    switch( gender )
+    {
+    case eAgeTypeUnspecified:
+        return QObject::tr( "Any" );
+    case eAgeTypeUnder21:
+        return QObject::tr( "Under 21" );
+    case eAgeType21OrOlder:
+        return QObject::tr( "21 Or Older" );
+    default:
+        return QObject::tr( "Unknown" );
+    }
+}
+
+//============================================================================
+QString GuiHelpers::describeAge( int age )
+{
+    QString ageStr( age );
+    if( ( age >= 80 ) || ( age < 0 ) )
+    {
+        ageStr = "Old";
+    }
+    else if( age == 0 )
+    {
+        ageStr = "Any";
+    }
+    else if( age < 21 )
+    {
+        ageStr = "Young";
+    }
+    else if( age >= 21 && age < 80 )
+    {
+        ageStr = "Middle Age";
+    }
+
+    return ageStr;
+}
+
+//============================================================================
+uint8_t GuiHelpers::ageToIndex( EAgeType age )
+{
+    if( ( age >= 0 ) && ( age < eMaxAgeType ) )
+    {
+        return ( uint8_t )age;
+    }
+
+    return 0;
+}
+
+//============================================================================
+void GuiHelpers::fillContentRating( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        for( int i = 0; i < eMaxContentRating; i++ )
+        {
+            comboBox->addItem( describeContentRating( (EContentRating)i ) );
         }
     }
 }
@@ -1334,25 +1427,25 @@ QString GuiHelpers::describeContentRating( EContentRating content )
 }
 
 //============================================================================
-uint16_t GuiHelpers::contentRatingToIndex( EContentRating rating )
+uint8_t GuiHelpers::contentRatingToIndex( EContentRating rating )
 {
     if( ( rating >= 0 ) && ( rating < eMaxContentRating ) )
     {
-        return ( uint16_t )rating;
+        return ( uint8_t )rating;
     }
 
     return 0;
 }
 
 //============================================================================
-void GuiHelpers::fillContentRating( QComboBox * comboBox )
+void GuiHelpers::fillContentCatagory( QComboBox * comboBox )
 {
     if( comboBox )
     {
         comboBox->clear();
-        for( int i = 0; i < eMaxContentRating; i++ )
+        for( int i = 0; i < eMaxContentCatagory; i++ )
         {
-            comboBox->addItem( describeContentRating( (EContentRating)i ) );
+            comboBox->addItem( describeContentCatagory( ( EContentCatagory )i ) );
         }
     }
 }
@@ -1383,57 +1476,15 @@ QString GuiHelpers::describeContentCatagory( EContentCatagory content )
 }
 
 //============================================================================
-uint16_t GuiHelpers::contentCatagoryToIndex( EContentCatagory rating )
+uint8_t GuiHelpers::contentCatagoryToIndex( EContentCatagory rating )
 {
     if( ( rating >= 0 ) && ( rating < eMaxContentCatagory ) )
     {
-        return ( uint16_t )rating;
+        return ( uint8_t )rating;
     }
 
     return 0;
 }
-
-//============================================================================
-void GuiHelpers::fillContentCatagory( QComboBox * comboBox )
-{
-    if( comboBox )
-    {
-        comboBox->clear();
-        for( int i = 0; i < eMaxContentCatagory; i++ )
-        {
-            comboBox->addItem( describeContentCatagory( ( EContentCatagory )i ) );
-        }
-    }
-}
-
-//============================================================================
-QString GuiHelpers::describeLanguage( ELanguageType language )
-{
-    switch( language )
-    {
-    case eLanguageUnspecified:
-        return QObject::tr( "Any" );
-    case eLanguageEnglishUS:
-        return QObject::tr( "English (USA)" );
-    case eLanguageEnglishBritian:
-        return QObject::tr( "English (Britain)" );
-
-    default:
-        return QObject::tr( "Unknown" );
-    }
-}
-
-//============================================================================
-uint16_t GuiHelpers::languageToIndex( ELanguageType language )
-{
-    if( ( language >= 0 ) && ( language < eMaxLanguageType ) )
-    {
-        return ( uint16_t )language;
-    }
-
-    return 0;
-}
-
 
 //============================================================================
 void GuiHelpers::fillLanguage( QComboBox * comboBox )
@@ -1446,6 +1497,23 @@ void GuiHelpers::fillLanguage( QComboBox * comboBox )
             comboBox->addItem( describeLanguage( (ELanguageType)i ) );
         }
     }
+}
+
+//============================================================================
+QString GuiHelpers::describeLanguage( ELanguageType language )
+{
+    return AppTranslate::describeLanguage( language );
+}
+
+//============================================================================
+uint8_t GuiHelpers::languageToIndex( ELanguageType language )
+{
+    if( ( language >= 0 ) && ( language < eMaxLanguageType ) )
+    {
+        return ( uint8_t )language;
+    }
+
+    return 0;
 }
 
 //============================================================================
@@ -1499,28 +1567,11 @@ int GuiHelpers::friendStateToComboIdx( EFriendState friendState )
 }
 
 //============================================================================
-QString GuiHelpers::describeAge( int age )
-{
-    QString ageStr( age );
-    if( ( age > 80 ) || ( age < 0 ) )
-    {
-        ageStr = "Old";
-    }
-    else if( age == 0 )
-    {
-        ageStr = "Any";
-    }
-
-    return ageStr;
-}
-
-//============================================================================
-void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox *  age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
     {
-        QString ageStr = QString::number( ident->getAge() );
-        age->setText( ageStr );
+        genderCombo->setCurrentIndex( ident->getAgeType() );
         genderCombo->setCurrentIndex( ident->getGender() );
         languageCombo->setCurrentIndex( ident->getPrimaryLanguage() );
         contentCombo->setCurrentIndex( ident->getPreferredContent() );
@@ -1528,17 +1579,17 @@ void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident,
 }
 
 //============================================================================
-void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QComboBox * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
     {
-        int ageValue = age->text().toInt();
-        if( ( 0 > ageValue ) || ( 120 < ageValue ) )
+        int ageValue = age->currentIndex();
+        if( ( 0 > ageValue ) || ( eMaxAgeType <= ageValue ) )
         {
             ageValue = 0;
         }
 
-        ident->setAge( ageValue );
+        ident->setAgeType( (EAgeType)ageValue );
 
         int genderValue = genderCombo->currentIndex();
         if( ( 0 > genderValue ) || ( eMaxGenderType <= genderValue ) )
@@ -1615,4 +1666,58 @@ ActivityBase * GuiHelpers::findLaunchWindow( QWidget * widget )
     }
 
     return nullptr;
+}
+
+//============================================================================
+bool GuiHelpers::widgetToPluginSettings( EPluginType pluginType, PluginSettingsWidget* settingsWidget, PluginSetting& pluginSetting )
+{
+    bool result = false;
+    if( ePluginTypeInvalid != pluginType && settingsWidget )
+    {
+        settingsWidget->getAgeComboBox()->setCurrentIndex( GuiHelpers::ageToIndex( pluginSetting.getAgeType() ) );
+        settingsWidget->getGenderComboBox()->setCurrentIndex( GuiHelpers::genderToIndex( pluginSetting.getGender() ) );
+        settingsWidget->getContentRatingComboBox()->setCurrentIndex( GuiHelpers::contentRatingToIndex( pluginSetting.getContentRating() ) );
+        settingsWidget->getLanguageComboBox()->setCurrentIndex( GuiHelpers::languageToIndex( pluginSetting.getLanguage() ) );
+
+        settingsWidget->getServiceUrlEdit()->setText( pluginSetting.getPluginUrl().c_str() );
+        settingsWidget->getServiceNameEdit()->setText( pluginSetting.getTitle().c_str() );
+        settingsWidget->getServiceDescriptionEdit()->appendPlainText( pluginSetting.getDescription().c_str() );
+        settingsWidget->getGreetingEdit()->appendPlainText( pluginSetting.getGreetingMsg().c_str() );
+        settingsWidget->getRejectEdit()->appendPlainText( pluginSetting.getRejectMsg().c_str() );
+
+        settingsWidget->getThumbnailChooseWidget()->loadThumbnail( pluginSetting.getThumnailId(), pluginSetting.getThumbnailIsCircular() );
+    }
+
+    return result;
+}
+
+//============================================================================
+bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& pluginSetting, PluginSettingsWidget* settingsWidget )
+{
+    bool result = false;
+    if( ePluginTypeInvalid != pluginType && settingsWidget )
+    {
+        pluginSetting.setPluginType( pluginType );
+        pluginSetting.setContentRating( (EContentRating)settingsWidget->getContentRatingComboBox()->currentIndex() );
+        pluginSetting.setLanguage( (ELanguageType)settingsWidget->getLanguageComboBox()->currentIndex() );
+        pluginSetting.setGender( (EGenderType)settingsWidget->getGenderComboBox()->currentIndex() );
+        pluginSetting.setAgeType( (EAgeType)settingsWidget->getAgeComboBox()->currentIndex() );
+        pluginSetting.setPluginUrl( settingsWidget->getServiceUrlEdit()->text().toUtf8().constData() );
+        pluginSetting.setTitle( settingsWidget->getServiceNameEdit()->text().toUtf8().constData() );
+        pluginSetting.setThumnailId( settingsWidget->getThumbnailChooseWidget()->updateAndGetThumbnailId(), settingsWidget->getThumbnailChooseWidget()->getThumbnailIsCircular() );
+
+        QString description =settingsWidget->getServiceDescriptionEdit()->toPlainText().trimmed();
+        if( !description.isEmpty() )
+        {
+            pluginSetting.setDescription( description.toUtf8().constData() );
+        }
+        else
+        {
+            pluginSetting.setDescription( "" );
+        }
+
+        result = true;
+    }
+
+    return result;
 }

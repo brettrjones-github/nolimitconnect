@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletSettingsBase.h"
 #include "PluginSettingsWidget.h"
 #include "PermissionWidget.h"
 
@@ -22,7 +22,7 @@
 
 #include "ui_AppletSettingsHostNetwork.h"
 
-class AppletSettingsHostNetwork : public AppletBase
+class AppletSettingsHostNetwork : public AppletSettingsBase
 {
 	Q_OBJECT
 public:
@@ -40,14 +40,8 @@ protected:
     void                        connectServiceWidgets();
     void                        loadPluginSetting();
     void                        savePluginSetting();
-    void                        loadUiFromSetting();   
-    void                        saveUiToSetting();
 
     Ui::AppletSettingsHostNetworkUi     ui;
-    PluginSetting               m_PluginSetting;
-    EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
-    EFriendState                m_OrigGroupListPermission = eFriendStateIgnore;
-    EFriendState                m_OrigConnectTestPermission = eFriendStateIgnore;
 };
 
 

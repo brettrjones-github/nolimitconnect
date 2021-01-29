@@ -172,6 +172,7 @@ namespace
         "Unknown Plugin ",
         "Admin ",
         "About Me Page ",
+        "Avatar Image ",
         "Shared Web Cam ",
         "Shared Files ",
         "Send A File ",    
@@ -247,6 +248,28 @@ namespace
     };
 
     const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
+}
+
+//============================================================================
+const char * DescribeAge( EAgeType ageType )
+{
+    if( ageType < 0 || eMaxAgeType <= ageType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    switch( ageType )
+    {
+    case eAppModuleInvalid:
+        return "Any";
+    case eAppModuleAll:
+        return "Under 21 ";
+    case eAppModuleKodi:
+        return "21 Or Older ";
+
+    default:
+        return "UNKNOWN Age ";
+    }
 }
 
 //============================================================================

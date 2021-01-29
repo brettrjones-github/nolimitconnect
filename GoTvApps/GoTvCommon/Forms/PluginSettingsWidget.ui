@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>301</width>
-    <height>297</height>
+    <width>292</width>
+    <height>441</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,11 +23,23 @@
    <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item>
     <widget class="InformationWidget" name="m_InfoWidget" native="true"/>
-   </item>
-   <item>
-    <widget class="PermissionWidget" name="m_PermissionWidget" native="true"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -67,7 +79,30 @@
     </widget>
    </item>
    <item>
+    <widget class="PermissionWidget" name="m_PermissionWidget" native="true"/>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Age</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="m_AgeComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maxCount">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="label_5">
        <property name="text">
@@ -85,6 +120,27 @@
        </property>
        <property name="maxCount">
         <number>100</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Gender:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="m_GenderComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
       </widget>
      </item>
@@ -138,7 +194,7 @@
    <item>
     <widget class="QLabel" name="m_DescriptionLabel">
      <property name="text">
-      <string>Description Of Service ( Optional )</string>
+      <string>Description Of Service (Optional)</string>
      </property>
     </widget>
    </item>
@@ -154,6 +210,40 @@
    </item>
    <item>
     <widget class="ThumbnailChooseWidget" name="m_ThumbnailChooseWidget" native="true"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Greeting When Joined (Optional)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="m_GreetingEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Message If Rejected (Optional)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="m_RejectEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

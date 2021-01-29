@@ -39,6 +39,7 @@ ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget * parent )
     GuiHelpers::fillGender( ui.m_GenderComboBox );
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
     GuiHelpers::fillContentRating( ui.m_ContentComboBox );
+    GuiHelpers::fillAge( ui.m_AgeComboBox );
 
     connect( ui.m_LoginButton, SIGNAL( clicked() ), this, SLOT( slotButtonLoginClicked() ) );
 }
@@ -53,9 +54,9 @@ void ActivityCreateAccount::slotButtonLoginClicked( void )
 
         m_MyApp.loadAccountSpecificSettings( strUserName.c_str() );
         m_MyApp.createAccountForUser( strUserName, m_UserAccount, (const char *)ui.m_MoodMessageEdit->text().toUtf8().data(), 
-                                      ui.m_GenderComboBox->currentIndex(), ui.m_AgeEdit->text().toInt(), ui.m_LanguageComboBox->currentIndex(), ui.m_ContentComboBox->currentIndex() );
+                                      ui.m_GenderComboBox->currentIndex(), (EAgeType)ui.m_AgeComboBox->currentIndex(), ui.m_LanguageComboBox->currentIndex(), ui.m_ContentComboBox->currentIndex() );
         m_MyApp.setAccountUserName( strUserName.c_str() );
-        m_UserAccount.setAge( ui.m_AgeEdit->text().toInt() );
+        m_UserAccount.setAgeType( (EAgeType)ui.m_AgeComboBox->currentIndex() );
         m_UserAccount.setGender( ui.m_GenderComboBox->currentIndex() );
         m_UserAccount.setPrimaryLanguage( ui.m_LanguageComboBox->currentIndex() );
         m_UserAccount.setPreferredContent( ui.m_ContentComboBox->currentIndex() );
@@ -90,7 +91,7 @@ bool ActivityCreateAccount::accountValidate( void )
     QString strMoodMsg = ui.m_MoodMessageEdit->text();
     validAccount &= GuiHelpers::validateMoodMessage( this, strMoodMsg );
 
-    validAccount &= GuiHelpers::validateAge( this, ui.m_AgeEdit->text().toInt() );
+    validAccount &= GuiHelpers::validateAge( this, ui.m_AgeComboBox->currentIndex() );
 
     return validAccount;
 }

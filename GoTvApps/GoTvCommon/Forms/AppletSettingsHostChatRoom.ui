@@ -48,81 +48,30 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="m_Special1Label">
-        <property name="text">
-         <string>Hosting a chat room has special network requirements</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_NetHostLabel">
-        <property name="text">
-         <string>1. An open port is required so users can direct connect</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>2. Relay service must be provided for users who can not</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>open a port (relay service may use alot of bandwidth)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_GroupHostLabel">
-        <property name="text">
-         <string>3. A fixed ip is not required but will speed up connection times</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>View My Chat Room</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="m_HostingRequirementsButton">
+          <property name="text">
+           <string>View Hosting Requirements</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_ViewMyChatRoomButton">
+          <property name="text">
+           <string>View My Chat Room</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="PluginSettingsWidget" name="m_PluginSettingsWidget" native="true"/>
       </item>
       <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Other Services Required To Host A Chat Room</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Recommend same permission as host chat room permission</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PermissionWidget" name="m_RelayPermissionWidget" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Recommend Anybody permission level</string>
+         <string>Recommend Anybody permission level (Optional)</string>
         </property>
        </widget>
       </item>

@@ -151,6 +151,7 @@ enum EApplet
     eAppletSettingsHostGroup,
     // eAppletSettingsHostGroupListing,
     eAppletSettingsHostNetwork,
+    eAppletSettingsHostRandomConnect,
     eAppletSettingsMessenger,
     eAppletSettingsRandomConnect,
     eAppletSettingsRandomConnectRelay,

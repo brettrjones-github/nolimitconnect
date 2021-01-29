@@ -38,14 +38,17 @@ public:
 
     virtual QLabel *            getServiceDescriptionLabel() { return ui.m_DescriptionLabel; }
     virtual QPlainTextEdit *    getServiceDescriptionEdit() { return ui.m_DescriptionEdit; }
+    virtual QPlainTextEdit *    getGreetingEdit()           { return ui.m_GreetingEdit; }
+    virtual QPlainTextEdit *    getRejectEdit()             { return ui.m_RejectEdit; }
 
     virtual QPushButton *       getStartButton()            { return ui.m_StartButton; }
     virtual QPushButton *       getStopButton()             { return ui.m_StopButton; }
     virtual QPushButton *       getApplyButton()            { return ui.m_ApplyButton; }
 
+    virtual QComboBox *         getAgeComboBox()            { return ui.m_AgeComboBox; }
     virtual QComboBox *         getContentRatingComboBox()  { return ui.m_ContentRatingComboBox; }
+    virtual QComboBox *         getGenderComboBox()         { return ui.m_GenderComboBox; }
     virtual QComboBox *         getLanguageComboBox()       { return ui.m_LanguageComboBox; }
-
 
     virtual PermissionWidget *  getPermissionWidget()       { return ui.m_PermissionWidget; }
     virtual InformationWidget * getInformationWidget()      { return ui.m_InfoWidget; }

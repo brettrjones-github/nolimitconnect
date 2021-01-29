@@ -35,10 +35,13 @@ public:
     void                        setIsUserPickedImage( bool userPicked )         { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }
     bool                        getIsUserPickedImage( void )                    { return ui.m_ThumbnailViewWidget->getIsUserPickedImage(); }
 
+    void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
+    bool                        getThumbnailIsCircular( void )                   { return m_ThumbnailIsCircular; }
+
     bool                        loadFromAsset( AssetInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
 
-    void                        setAssetId( VxGUID& assetGuid )                 { m_AsssetId = assetGuid; }
+    void                        setAssetId( VxGUID& assetGuid, bool isCircle )  { m_AsssetId = assetGuid; }
     VxGUID&                     getAssetId( void )                              { return m_AsssetId; }
     void                        clearAssetId( void )                            { m_AsssetId.clearVxGUID(); }
     bool                        isAssetIdValid( void )                          { return m_AsssetId.isVxGUIDValid(); }
@@ -46,7 +49,7 @@ public:
     VxGUID&                     getThumbnailId( void )                          { return m_ThumbnailId; }
     VxGUID                      updateAndGetThumbnailId( void );
 
-    bool                        loadThumbnail( VxGUID& assetGuid );
+    bool                        loadThumbnail( VxGUID& assetGuid, bool isCircle );
 
 signals:
     void                        signalThumbnailAssetChanged( void );
@@ -60,7 +63,8 @@ protected:
     AppCommon&					m_MyApp;
     AppletBase*                 m_ParentApplet{ nullptr };
     VxGUID                      m_AsssetId;
+    bool                        m_ThumbnailIsCircular{ false };
     VxGUID                      m_ThumbnailId;
 
-    bool                        m_bUserPickedImage = false;
+    bool                        m_bUserPickedImage{ false };
 };

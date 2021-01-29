@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AppletSettingsHostNetwork.h"
+#include "AppletSettingsHostRandomConnect.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -22,13 +22,13 @@
 #include <CoreLib/VxTime.h>
 
 //============================================================================
-AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * parent )
-: AppletSettingsBase( OBJNAME_APPLET_SETTINGS_HOST_NETWORK, app, parent )
+AppletSettingsHostRandomConnect::AppletSettingsHostRandomConnect( AppCommon& app, QWidget * parent )
+: AppletSettingsBase( OBJNAME_APPLET_SETTINGS_HOST_RANDOM_CONNECT, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );
-    setAppletType( eAppletSettingsHostNetwork );
+    setAppletType( eAppletSettingsHostRandomConnect );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostNetwork, ePluginTypeNetworkHost );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostRandomConnect, ePluginTypeRandomConnectHost );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
@@ -40,28 +40,28 @@ AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * 
 }
 
 //============================================================================
-AppletSettingsHostNetwork::~AppletSettingsHostNetwork()
+AppletSettingsHostRandomConnect::~AppletSettingsHostRandomConnect()
 {
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::connectServiceWidgets()
+void AppletSettingsHostRandomConnect::connectServiceWidgets()
 {
     connect( getPluginSettingsWidget()->getApplyButton(), SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::loadPluginSetting()
+void AppletSettingsHostRandomConnect::loadPluginSetting()
 {
     if( ePluginTypeInvalid != getPluginType() )
     {
         m_OrigPermissionLevel = m_MyApp.getEngine().getPluginPermission( getPluginType() );
-        //m_OrigGroupListPermission = m_MyApp.getEngine().getPluginPermission( getGroupListingWidget()->getPluginType() );
+        // m_OrigGroupListPermission = m_MyApp.getEngine().getPluginPermission( getGroupListingWidget()->getPluginType() );
         m_OrigConnectTestPermission = m_MyApp.getEngine().getPluginPermission( getConnectionTestWidget()->getPluginType() );
 
         getPluginSettingsWidget()->getPermissionWidget()->setPermissionLevel( m_OrigPermissionLevel );
-        //getGroupListingWidget()->setPermissionLevel( m_OrigGroupListPermission );
+        // getGroupListingWidget()->setPermissionLevel( m_OrigGroupListPermission );
         getConnectionTestWidget()->setPermissionLevel( m_OrigConnectTestPermission );
 
         m_MyApp.getEngine().getPluginSettingMgr().getPluginSetting( getPluginType(), m_PluginSetting );
@@ -70,7 +70,7 @@ void AppletSettingsHostNetwork::loadPluginSetting()
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::savePluginSetting()
+void AppletSettingsHostRandomConnect::savePluginSetting()
 {
     if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
     {
@@ -80,7 +80,7 @@ void AppletSettingsHostNetwork::savePluginSetting()
 }
 
 //============================================================================
-void AppletSettingsHostNetwork::slotApplyServiceSettings()
+void AppletSettingsHostRandomConnect::slotApplyServiceSettings()
 {
     saveUiToSetting();
     m_PluginSetting.setLastUpdateTimestamp( GetGmtTimeMs() );

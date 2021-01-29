@@ -113,6 +113,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     // case eAppletSettingsHostGroupListing:            return eMyIconSettingsHostGroupListing;
 
     case eAppletSettingsHostNetwork:        return eMyIconSettingsHostNetwork;
+    case eAppletSettingsHostRandomConnect:  return eMyIconSettingsRandomConnect;
     case eAppletSettingsMessenger:          return eMyIconSettingsMessenger;
     case eAppletSettingsRandomConnect:      return eMyIconSettingsRandomConnect;
     case eAppletSettingsRandomConnectRelay: return eMyIconSettingsRandomConnectRelay;
@@ -219,6 +220,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsHostGroup:          return QObject::tr( "Host A Group Settings" );
     // case eAppletSettingsHostGroupListing:   return QObject::tr( "Group Host Listing Service Settings" );
     case eAppletSettingsHostNetwork:        return QObject::tr( "Host A Network Settings" );
+    case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect" );
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );
     case eAppletSettingsRandomConnect:      return QObject::tr( "Random Connect Service Settings" );
     case eAppletSettingsRandomConnectRelay: return QObject::tr( "Random Connect Relay Service Settings" );

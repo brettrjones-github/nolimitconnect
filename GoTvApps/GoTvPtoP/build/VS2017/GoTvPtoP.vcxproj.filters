@@ -984,6 +984,15 @@
     <ClCompile Include="..\..\..\..\GoTvInterface\IDefs.cpp">
       <Filter>GoTvInterface</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppTranslate.cpp">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1938,6 +1947,12 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
@@ -2975,6 +2990,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AppletBrowseFiles.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

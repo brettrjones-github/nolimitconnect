@@ -70,7 +70,7 @@ bool ThumbnailChooseWidget::loadFromAsset( AssetInfo * thumbAsset )
         loadOk = ui.m_ThumbnailViewWidget->loadFromFile( thumbAsset->getAssetName().c_str() );
         if( loadOk )
         {
-            setAssetId( thumbAsset->getAssetUniqueId() );
+            setAssetId( thumbAsset->getAssetUniqueId(), getThumbnailIsCircular() );
         }
     }
 
@@ -88,7 +88,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
         {
             if( loadFromAsset( thumbAsset ) )
             {
-                setAssetId( assetGuid );
+                setAssetId( assetGuid, thumb->getThumbnailIsCircular() );
                 emit signalThumbnailAssetChanged();
             }
         }
@@ -105,7 +105,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
 }
 
 //============================================================================
-bool ThumbnailChooseWidget::loadThumbnail( VxGUID& assetId )
+bool ThumbnailChooseWidget::loadThumbnail( VxGUID& assetId, bool isCircle )
 {
     bool result = false;
     if( assetId.isVxGUIDValid() )
@@ -115,7 +115,7 @@ bool ThumbnailChooseWidget::loadThumbnail( VxGUID& assetId )
         {
             if( loadFromAsset( thumbAsset ) )
             {
-                setAssetId( assetId );
+                setAssetId( assetId, isCircle );
                 result = true;
             }
         }

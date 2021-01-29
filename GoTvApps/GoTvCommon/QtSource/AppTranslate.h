@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,16 +13,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletSettingsBase.h"
+#include <GoTvInterface/IDefs.h>
 
-class AppletSettingsRandomConnect : public AppletSettingsBase
+#include <QString>
+#include <QLocale>
+
+class AppTranslate
 {
-	Q_OBJECT
 public:
-    AppletSettingsRandomConnect( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsRandomConnect() override = default;
-
-protected:
+    static QString              describeLanguage( ELanguageType langType );
+    static QLocale              getLocale( ELanguageType langType );
 };
-
-

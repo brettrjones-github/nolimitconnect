@@ -152,7 +152,7 @@ void ThumbnailEditWidget::slotImageSnapshot( QImage snapshotImage )
 void ThumbnailEditWidget::slotBrowseButClick( void )
 {
     ui.m_ThumbnailViewWidget->browseForImage();
-    m_IsCircle = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
+    m_ThumbnailIsCircular = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
     if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
     {
         clearAssetId();
@@ -163,12 +163,12 @@ void ThumbnailEditWidget::slotBrowseButClick( void )
 //============================================================================
 void ThumbnailEditWidget::slotMakeCircleButClick( void )
 {
-    if( !m_IsCircle )
+    if( !m_ThumbnailIsCircular )
     {
         m_SquarePixmap = *ui.m_ThumbnailViewWidget->getThumbnailImage();
         if( !m_SquarePixmap.isNull() )
         {
-            m_IsCircle = true;
+            m_ThumbnailIsCircular = true;
             ui.m_ThumbnailViewWidget->setThumbnailImage( makeCircleImage( m_SquarePixmap ) );
         }
     }
@@ -177,9 +177,9 @@ void ThumbnailEditWidget::slotMakeCircleButClick( void )
 //============================================================================
 void ThumbnailEditWidget::slotUndoCircleClick( void )
 {
-    if( m_IsCircle && !m_SquarePixmap.isNull() )
+    if( m_ThumbnailIsCircular && !m_SquarePixmap.isNull() )
     {
-        m_IsCircle = false;
+        m_ThumbnailIsCircular = false;
         ui.m_ThumbnailViewWidget->setThumbnailImage( m_SquarePixmap );
         clearAssetId();
     }

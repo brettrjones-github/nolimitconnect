@@ -51,6 +51,7 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
     GuiHelpers::fillGender( ui.m_GenderComboBox );
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
     GuiHelpers::fillContentRating( ui.m_ContentComboBox );
+    GuiHelpers::fillAge( ui.m_AgeComboBox );
 
     VxNetIdent * curIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = curIdent->getOnlineName();
@@ -66,7 +67,7 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
         }
     }
 
-    GuiHelpers::setValuesFromIdentity( this, curIdent, ui.m_AgeEdit, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
+    GuiHelpers::setValuesFromIdentity( this, curIdent, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
 
     connect( ui.m_ApplyMoodButton, SIGNAL( clicked() ), this, SLOT( onApplyMoodMsgClick() ) );
     connect( ui.m_ApplyAgeButton, SIGNAL( clicked() ), this, SLOT( onApplyAgeClick() ) );
@@ -190,43 +191,38 @@ void AppletUserIdentity::onApplyMoodMsgClick( void )
 //============================================================================
 void AppletUserIdentity::onApplyAgeClick( void )
 {
-    if( GuiHelpers::validateAge( this, ui.m_AgeEdit->text().toInt() ) )
+    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
     {
-        if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
+        VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
+        GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
+
+        m_MyApp.getAccountMgr().updateAccount( ident );
+        if( m_strOrigOnlineName == ident.getOnlineName() )
         {
-            VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
-            GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeEdit, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
-
-            m_MyApp.getAccountMgr().updateAccount( ident );
-            if( m_strOrigOnlineName == ident.getOnlineName() )
-            {
-                m_Engine.fromGuiIdentPersonalInfoChanged( ident.getAge(), ident.getGender(), ident.getPrimaryLanguage(), ident.getPreferredContent() );
-            }
-
-            QString msgText = QObject::tr( "Applied Age and Preferred Content Change " );
-            QMessageBox::information( this, QObject::tr( "Age and Preferred Content Success" ), msgText );
+            m_Engine.fromGuiIdentPersonalInfoChanged( ident.getAgeType(), ident.getGender(), ident.getPrimaryLanguage(), ident.getPreferredContent() );
         }
+
+        QString msgText = QObject::tr( "Applied Age and Preferred Content Change " );
+        QMessageBox::information( this, QObject::tr( "Age and Preferred Content Success" ), msgText );
     }
 }
+
 //============================================================================
 void AppletUserIdentity::onApplyContentClick( void )
 {
-    if( GuiHelpers::validateAge( this, ui.m_AgeEdit->text().toInt() ) )
+    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
     {
-        if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
+        VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
+        GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
+
+        m_MyApp.getAccountMgr().updateAccount( ident );
+        if( m_strOrigOnlineName == ident.getOnlineName() )
         {
-            VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
-            GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeEdit, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
-
-            m_MyApp.getAccountMgr().updateAccount( ident );
-            if( m_strOrigOnlineName == ident.getOnlineName() )
-            {
-                m_Engine.fromGuiIdentPersonalInfoChanged( ident.getAge(), ident.getGender(), ident.getPrimaryLanguage(), ident.getPreferredContent() );
-            }
-
-            QString msgText = QObject::tr( "Applied Mood Message Change " );
-            QMessageBox::information( this, QObject::tr( "Mood Message Change Success" ), msgText );
+            m_Engine.fromGuiIdentPersonalInfoChanged( ident.getAgeType(), ident.getGender(), ident.getPrimaryLanguage(), ident.getPreferredContent() );
         }
+
+        QString msgText = QObject::tr( "Applied Mood Message Change " );
+        QMessageBox::information( this, QObject::tr( "Mood Message Change Success" ), msgText );
     }
 }
 

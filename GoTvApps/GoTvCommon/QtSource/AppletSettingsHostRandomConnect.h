@@ -20,16 +20,17 @@
 #include <GoTvInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
-#include "ui_AppletSettingsHostChatRoom.h"
- 
-class AppletSettingsHostChatRoom : public AppletSettingsBase
+#include "ui_AppletSettingsHostNetwork.h"
+
+class AppletSettingsHostRandomConnect : public AppletSettingsBase
 {
 	Q_OBJECT
 public:
-    AppletSettingsHostChatRoom( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsHostChatRoom();
+    AppletSettingsHostRandomConnect( AppCommon& app, QWidget * parent );
+	virtual ~AppletSettingsHostRandomConnect();
 
     PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
+    PermissionWidget*           getGroupListingWidget()             { return ui.m_GroupListPermissionWidget; }
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
 
 protected slots:
@@ -39,9 +40,8 @@ protected:
     void                        connectServiceWidgets();
     void                        loadPluginSetting();
     void                        savePluginSetting();
-    bool                        verifyPluginSettings();
 
-    Ui::AppletSettingsHostChatRoomUi     ui;
+    Ui::AppletSettingsHostNetworkUi     ui;
 };
 
 

@@ -260,7 +260,7 @@ void P2PEngine::fromGuiMoodMessageChanged( const char * newMoodMessage )
 //============================================================================
 void P2PEngine::fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent )
 {
-    m_PktAnn.setAge( age );
+    m_PktAnn.setAgeType( (EAgeType)age );
     m_PktAnn.setGender( gender );
     m_PktAnn.setPrimaryLanguage( language );
     m_PktAnn.setPreferredContent( preferredContent );

@@ -54,7 +54,7 @@ bool PluginSetting::toBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.setValue( m_MaxConnectionsPerUser );
     result &= binaryBlob.setValue( m_MaxStoreAndForwardPerUser );
     result &= binaryBlob.setValue( m_AnnounceToHost );
-    result &= binaryBlob.setValue( m_PluginThumbIsCircular );
+    result &= binaryBlob.setValue( m_ThumbnailIsCircular );
     result &= binaryBlob.setValue( m_ResBw1 );
     result &= binaryBlob.setValue( m_Reserve1Setting );
     result &= binaryBlob.setValue( m_Reserve2Setting );
@@ -62,11 +62,12 @@ bool PluginSetting::toBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.setValue( m_PluginTitle );
     result &= binaryBlob.setValue( m_PluginDesc );
     result &= binaryBlob.setValue( m_PluginUrl );
+    result &= binaryBlob.setValue( m_GreetingMsg );
+    result &= binaryBlob.setValue( m_RejectMsg );
     result &= binaryBlob.setValue( m_KeyWords );
-    result &= binaryBlob.setValue( m_SecondaryPluginTitle );
-    result &= binaryBlob.setValue( m_SecondaryPluginDesc );
     result &= binaryBlob.setValue( m_SecondaryUrl );
-    
+    result &= binaryBlob.setValue( m_Res1 );
+
     if( !result )
     {
         LogMsg( LOG_ERROR, "PluginSetting::toBinary failed" );
@@ -102,7 +103,7 @@ bool PluginSetting::fromBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.getValue( m_MaxConnectionsPerUser );
     result &= binaryBlob.getValue( m_MaxStoreAndForwardPerUser );
     result &= binaryBlob.getValue( m_AnnounceToHost );
-    result &= binaryBlob.getValue( m_PluginThumbIsCircular );
+    result &= binaryBlob.getValue( m_ThumbnailIsCircular );
     result &= binaryBlob.getValue( m_ResBw1 );
     result &= binaryBlob.getValue( m_Reserve1Setting );
     result &= binaryBlob.getValue( m_Reserve2Setting );
@@ -110,10 +111,11 @@ bool PluginSetting::fromBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.getValue( m_PluginTitle );
     result &= binaryBlob.getValue( m_PluginDesc );
     result &= binaryBlob.getValue( m_PluginUrl );
+    result &= binaryBlob.getValue( m_GreetingMsg );
+    result &= binaryBlob.getValue( m_RejectMsg );
     result &= binaryBlob.getValue( m_KeyWords );
-    result &= binaryBlob.getValue( m_SecondaryPluginTitle );
-    result &= binaryBlob.getValue( m_SecondaryPluginDesc );
     result &= binaryBlob.getValue( m_SecondaryUrl );
+    result &= binaryBlob.getValue( m_Res1 );
 
     if( !result )
     {
@@ -132,10 +134,12 @@ bool PluginSetting::setStringList( std::vector<std::string>& stringList )
         m_PluginTitle = stringList[ 0 ];
         m_PluginDesc = stringList[ 1 ];
         m_PluginUrl = stringList[ 2 ];
-        m_KeyWords = stringList[ 3 ];
-        m_SecondaryPluginTitle = stringList[ 4 ];
-        m_SecondaryPluginDesc = stringList[ 5 ];
+        m_GreetingMsg = stringList[ 3 ];
+        m_RejectMsg = stringList[ 4 ];
+        m_KeyWords = stringList[ 5 ];
         m_SecondaryUrl = stringList[ 6 ];
+        m_Res1 = stringList[ 7 ];
+
         result = true;
     }
 
@@ -148,10 +152,11 @@ bool PluginSetting::getStringList( std::vector<std::string>& stringList )
     stringList.push_back( m_PluginTitle );
     stringList.push_back( m_PluginDesc );
     stringList.push_back( m_PluginUrl );
+    stringList.push_back( m_GreetingMsg );
+    stringList.push_back( m_RejectMsg );
     stringList.push_back( m_KeyWords );
-    stringList.push_back( m_SecondaryPluginTitle );
-    stringList.push_back( m_SecondaryPluginDesc );
     stringList.push_back( m_SecondaryUrl );
+    stringList.push_back( m_Res1 );
 
     return true;
 }

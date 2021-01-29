@@ -217,7 +217,7 @@ bool AppCommon::loadLastUserAccount( void )
 }
 
 //============================================================================
-void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType )
+void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, EAgeType age, int primaryLanguage, int contentType )
 {
 
     QUuid uuidTmp = QUuid::createUuid();
@@ -233,7 +233,7 @@ void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& user
     SafeStrCopy( userAccountIdent.getOnlineName(), strUserName.c_str(), MAX_ONLINE_NAME_LEN );
     SafeStrCopy( userAccountIdent.getOnlineDescription(), moodMsg, MAX_ONLINE_DESC_LEN );
     userAccountIdent.setGender( gender );
-    userAccountIdent.setAge( age );
+    userAccountIdent.setAgeType( age );
     userAccountIdent.setPrimaryLanguage( primaryLanguage );
     userAccountIdent.setPreferredContent( contentType );
 

@@ -110,15 +110,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="m_AgeEdit">
+         <widget class="QComboBox" name="m_AgeComboBox">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="text">
-           <string>0</string>
           </property>
          </widget>
         </item>

@@ -53,8 +53,8 @@ public:
 	void						setRejectedDareCount( uint16_t rejectCnt );
 	uint16_t					getRejectedDareCount( void );
 
-    void						setAge( uint8_t age ) { m_u8Age = age; }
-    uint8_t					    getAge( void ) { return m_u8Age; }
+    void						setAgeType( EAgeType age ) { m_u8Age = (uint8_t)age; }
+    EAgeType					getAgeType( void ) { return (EAgeType)m_u8Age; }
 
 	bool						isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) const;
 	void						useAsRelay( VxNetIdentBase * poRelayIdent );

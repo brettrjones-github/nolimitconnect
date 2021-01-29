@@ -98,7 +98,7 @@ void PluginSettingsWidget::loadUiFromSetting()
         ui.m_UrlEdit->setText( m_PluginSetting.getPluginUrl().c_str() );
         ui.m_NameEdit->setText( m_PluginSetting.getTitle().c_str() );
         ui.m_DescriptionEdit->appendPlainText( m_PluginSetting.getDescription().c_str() );
-        ui.m_ThumbnailChooseWidget->loadThumbnail( m_PluginSetting.getThumnailId() );
+        ui.m_ThumbnailChooseWidget->loadThumbnail( m_PluginSetting.getThumnailId(), m_PluginSetting.getThumbnailIsCircular() );
     }
 }
 
@@ -111,7 +111,7 @@ void PluginSettingsWidget::saveUiToSetting()
         m_PluginSetting.setLanguage( ( ELanguageType )ui.m_LanguageComboBox->currentIndex() );
         m_PluginSetting.setPluginUrl( ui.m_UrlEdit->text().toUtf8().constData() );
         m_PluginSetting.setTitle( ui.m_NameEdit->text().toUtf8().constData() );
-        m_PluginSetting.setThumnailId( ui.m_ThumbnailChooseWidget->getThumbnailId() );
+        m_PluginSetting.setThumnailId( ui.m_ThumbnailChooseWidget->getThumbnailId(), ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
 
         QString description = ui.m_DescriptionEdit->toPlainText().trimmed();
         if( !description.isEmpty() )
@@ -138,5 +138,5 @@ void PluginSettingsWidget::slotThumbnailAssetChanged()
 {
     VxGUID thumbGuid = ui.m_ThumbnailChooseWidget->getAssetId();
     LogMsg( LOG_DEBUG, "slotThumbnailAssetChanged %s", thumbGuid.toGUIDStandardFormatedString().c_str() );
-    m_PluginSetting.setThumnailId( thumbGuid );
+    m_PluginSetting.setThumnailId( thumbGuid, ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
 }

@@ -21,7 +21,7 @@
 
 //============================================================================
 AppletSettingsRandomConnect::AppletSettingsRandomConnect( AppCommon& app, QWidget * parent )
-: AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT, app, parent )
+: AppletSettingsBase( OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT, app, parent )
 {
 	setAppletType( eAppletSettingsRandomConnect );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
