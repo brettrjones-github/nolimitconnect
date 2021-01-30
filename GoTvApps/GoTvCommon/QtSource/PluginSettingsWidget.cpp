@@ -43,6 +43,8 @@ void PluginSettingsWidget::setupSettingsWidget( EApplet applet, EPluginType plug
     getStopButton()->setVisible( false );
     getInformationWidget()->setVisible( false );
 
+    GuiHelpers::fillAge( ui.m_AgeComboBox );
+    GuiHelpers::fillGender( ui.m_GenderComboBox );
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
     GuiHelpers::fillContentRating( ui.m_ContentRatingComboBox );
 
@@ -139,4 +141,5 @@ void PluginSettingsWidget::slotThumbnailAssetChanged()
     VxGUID thumbGuid = ui.m_ThumbnailChooseWidget->getAssetId();
     LogMsg( LOG_DEBUG, "slotThumbnailAssetChanged %s", thumbGuid.toGUIDStandardFormatedString().c_str() );
     m_PluginSetting.setThumnailId( thumbGuid, ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
+    ui.m_ThumbnailChooseWidget->getThumbnailViewWidget()->updateImage( thumbGuid, ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
 }

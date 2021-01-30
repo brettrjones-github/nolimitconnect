@@ -22,6 +22,9 @@ QString AppTranslate::describeLanguage( ELanguageType langType )
     QString lang = "English";
     switch( langType )
     {
+    case eLangUnspecified:
+        lang = "Any";
+        break;
     case eLangEnglish:
         lang = "English";
         break;

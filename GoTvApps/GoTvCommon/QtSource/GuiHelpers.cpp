@@ -1674,29 +1674,6 @@ bool GuiHelpers::widgetToPluginSettings( EPluginType pluginType, PluginSettingsW
     bool result = false;
     if( ePluginTypeInvalid != pluginType && settingsWidget )
     {
-        settingsWidget->getAgeComboBox()->setCurrentIndex( GuiHelpers::ageToIndex( pluginSetting.getAgeType() ) );
-        settingsWidget->getGenderComboBox()->setCurrentIndex( GuiHelpers::genderToIndex( pluginSetting.getGender() ) );
-        settingsWidget->getContentRatingComboBox()->setCurrentIndex( GuiHelpers::contentRatingToIndex( pluginSetting.getContentRating() ) );
-        settingsWidget->getLanguageComboBox()->setCurrentIndex( GuiHelpers::languageToIndex( pluginSetting.getLanguage() ) );
-
-        settingsWidget->getServiceUrlEdit()->setText( pluginSetting.getPluginUrl().c_str() );
-        settingsWidget->getServiceNameEdit()->setText( pluginSetting.getTitle().c_str() );
-        settingsWidget->getServiceDescriptionEdit()->appendPlainText( pluginSetting.getDescription().c_str() );
-        settingsWidget->getGreetingEdit()->appendPlainText( pluginSetting.getGreetingMsg().c_str() );
-        settingsWidget->getRejectEdit()->appendPlainText( pluginSetting.getRejectMsg().c_str() );
-
-        settingsWidget->getThumbnailChooseWidget()->loadThumbnail( pluginSetting.getThumnailId(), pluginSetting.getThumbnailIsCircular() );
-    }
-
-    return result;
-}
-
-//============================================================================
-bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& pluginSetting, PluginSettingsWidget* settingsWidget )
-{
-    bool result = false;
-    if( ePluginTypeInvalid != pluginType && settingsWidget )
-    {
         pluginSetting.setPluginType( pluginType );
         pluginSetting.setContentRating( (EContentRating)settingsWidget->getContentRatingComboBox()->currentIndex() );
         pluginSetting.setLanguage( (ELanguageType)settingsWidget->getLanguageComboBox()->currentIndex() );
@@ -1704,6 +1681,9 @@ bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& 
         pluginSetting.setAgeType( (EAgeType)settingsWidget->getAgeComboBox()->currentIndex() );
         pluginSetting.setPluginUrl( settingsWidget->getServiceUrlEdit()->text().toUtf8().constData() );
         pluginSetting.setTitle( settingsWidget->getServiceNameEdit()->text().toUtf8().constData() );
+        pluginSetting.setGreetingMsg( settingsWidget->getGreetingEdit()->toPlainText().toUtf8().constData() );
+        pluginSetting.setRejectMsg( settingsWidget->getRejectEdit()->toPlainText().toUtf8().constData() );
+
         pluginSetting.setThumnailId( settingsWidget->getThumbnailChooseWidget()->updateAndGetThumbnailId(), settingsWidget->getThumbnailChooseWidget()->getThumbnailIsCircular() );
 
         QString description =settingsWidget->getServiceDescriptionEdit()->toPlainText().trimmed();
@@ -1716,6 +1696,31 @@ bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& 
             pluginSetting.setDescription( "" );
         }
 
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
+bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& pluginSetting, PluginSettingsWidget* settingsWidget )
+{
+    bool result = false;
+    if( ePluginTypeInvalid != pluginType && settingsWidget )
+    {
+        settingsWidget->getAgeComboBox()->setCurrentIndex( GuiHelpers::ageToIndex( pluginSetting.getAgeType() ) );
+        settingsWidget->getGenderComboBox()->setCurrentIndex( GuiHelpers::genderToIndex( pluginSetting.getGender() ) );
+        settingsWidget->getContentRatingComboBox()->setCurrentIndex( GuiHelpers::contentRatingToIndex( pluginSetting.getContentRating() ) );
+        settingsWidget->getLanguageComboBox()->setCurrentIndex( GuiHelpers::languageToIndex( pluginSetting.getLanguage() ) );
+
+        settingsWidget->getServiceUrlEdit()->setText( pluginSetting.getPluginUrl().c_str() );
+        settingsWidget->getServiceNameEdit()->setText( pluginSetting.getTitle().c_str() );
+        settingsWidget->getServiceDescriptionEdit()->appendPlainText( pluginSetting.getDescription().c_str() );
+        settingsWidget->getGreetingEdit()->appendPlainText( pluginSetting.getGreetingMsg().c_str() );
+        settingsWidget->getRejectEdit()->appendPlainText( pluginSetting.getRejectMsg().c_str() );
+
+        settingsWidget->getThumbnailChooseWidget()->loadThumbnail( pluginSetting.getThumnailId(), pluginSetting.getThumbnailIsCircular() );
+ 
         result = true;
     }
 

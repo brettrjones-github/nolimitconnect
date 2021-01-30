@@ -40,10 +40,10 @@ public:
 
     void                        setPluginType( EPluginType pluginType )             { m_PluginType = ( uint16_t )pluginType; }
     EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
-    void                        setThumnailId( VxGUID  thumbAssetId, bool isCircle ) { m_PluginThumb = thumbAssetId; m_ThumbnailIsCircular = isCircle; }
+    void                        setThumnailId( VxGUID& thumbAssetId, bool isCircle ) { m_PluginThumb = thumbAssetId; m_ThumbnailIsCircular = isCircle; }
     VxGUID&                     getThumnailId( void )                               { return m_PluginThumb; }
     void                        setThumnailIsCircular( bool isCircle )              { m_ThumbnailIsCircular = isCircle; }
-    bool                        getThumbnailIsCircular( void )                       { return m_ThumbnailIsCircular; }
+    bool                        getThumbnailIsCircular( void )                      { return m_ThumbnailIsCircular; }
 
     void						setAgeType( EAgeType age )                          { m_AgeType = (uint8_t)age; }
     EAgeType					getAgeType( void )                                  { return (EAgeType)m_AgeType; }
@@ -128,21 +128,21 @@ public:
     //! set to default values for case use has not set anything but has enabled the plugin
     bool                        setDefaultValues( P2PEngine& engine, EPluginType pluginType );
 
-    void                        setTitle( std::string title )                       { m_PluginTitle = title; }
+    void                        setTitle( std::string title )                       { m_PluginTitle = title.empty() ? "" : title; }
     std::string&                getTitle( void )                                    { return m_PluginTitle; }
-    void                        setDescription( std::string desc )                  { m_PluginDesc = desc; }
+    void                        setDescription( std::string desc )                  { m_PluginDesc = desc.empty() ? "" : desc; }
     std::string&                getDescription( void )                              { return m_PluginDesc; }
-    void                        setPluginUrl( std::string  url )                    { m_PluginUrl = url; }
+    void                        setPluginUrl( std::string url )                     { m_PluginUrl = url.empty() ? "" : url; }
     std::string&                getPluginUrl( void )                                { return m_PluginUrl; }
-    void                        setGreetingMsg( std::string msg )                   { m_GreetingMsg = msg; }
+    void                        setGreetingMsg( std::string msg )                   { m_GreetingMsg = msg.empty() ? "" : msg; }
     std::string&                getGreetingMsg( void )                              { return m_GreetingMsg; }
-    void                        setRejectMsg( std::string msg )                     { m_RejectMsg = msg; }
+    void                        setRejectMsg( std::string msg )                     { m_RejectMsg = msg.empty() ? "" : msg; }
     std::string&                getRejectMsg( void )                                { return m_RejectMsg; }
-    void                        setKeyWords( std::string desc )                     { m_KeyWords = desc; }
+    void                        setKeyWords( std::string keys )                     { m_KeyWords = keys.empty() ? "" : keys; }
     std::string&                getKeyWords( void )                                 { return m_KeyWords; }
-    void                        setSecondaryUrl( std::string  url )                 { m_SecondaryUrl = url; }
+    void                        setSecondaryUrl( std::string  url )                 { m_SecondaryUrl = url.empty() ? "" : url; }
     std::string&                getSecondaryUrl( void )                             { return m_SecondaryUrl; }
-    void                        setRes1( std::string title )                        { m_Res1 = title; }
+    void                        setRes1( std::string res )                          { m_Res1 = res.empty() ? "" : res; }
     std::string&                getRes1( void )                                     { return m_Res1; }
 
 

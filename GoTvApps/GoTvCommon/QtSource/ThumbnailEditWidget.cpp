@@ -155,7 +155,6 @@ void ThumbnailEditWidget::slotBrowseButClick( void )
     m_ThumbnailIsCircular = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
     if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
     {
-        clearAssetId();
         emit signalImageChanged();
     }
 }
@@ -170,6 +169,7 @@ void ThumbnailEditWidget::slotMakeCircleButClick( void )
         {
             m_ThumbnailIsCircular = true;
             ui.m_ThumbnailViewWidget->setThumbnailImage( makeCircleImage( m_SquarePixmap ) );
+            emit signalImageChanged();
         }
     }
 }
@@ -181,7 +181,7 @@ void ThumbnailEditWidget::slotUndoCircleClick( void )
     {
         m_ThumbnailIsCircular = false;
         ui.m_ThumbnailViewWidget->setThumbnailImage( m_SquarePixmap );
-        clearAssetId();
+        emit signalImageChanged();
     }
 }
 
@@ -198,7 +198,6 @@ QPixmap ThumbnailEditWidget::makeCircleImage( QPixmap& pixmap )
     painter.setClipRegion( clipRegion );
 
     painter.drawPixmap( 0, 0, pixmap );  
-    clearAssetId();
     return target;
 }
 

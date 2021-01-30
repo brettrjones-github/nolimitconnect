@@ -62,6 +62,13 @@ bool ThumbnailViewWidget::loadFromAsset( AssetInfo * asset )
 }
 
 //============================================================================
+void ThumbnailViewWidget::updateImage( VxGUID& thumbGuid, bool isCircle )
+{
+    m_ThumbnailIsCircular = isCircle;
+    cropAndUpdateImage( m_ThumbPixmap );
+}
+
+//============================================================================
 bool ThumbnailViewWidget::loadFromFile( QString fileName )
 {
     QPixmap pixmap;
@@ -91,6 +98,22 @@ void ThumbnailViewWidget::slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32Data
 }
 
 //============================================================================
+QPixmap ThumbnailViewWidget::makeCircleImage( QPixmap& pixmap )
+{
+    QPixmap target( pixmap.width(), pixmap.height() );
+    target.fill( Qt::transparent );
+
+    QPainter painter( &target );
+
+    // Set clipped region (circle) in the center of the target image
+    QRegion clipRegion( QRect( 0, 0, pixmap.width(), pixmap.height() ), QRegion::Ellipse );
+    painter.setClipRegion( clipRegion );
+
+    painter.drawPixmap( 0, 0, pixmap );  
+    return target;
+}
+
+//============================================================================
 void ThumbnailViewWidget::cropAndUpdateImage( QPixmap& pixmap )
 {
     QSize thumbSize = GuiParams::getThumbnailSize();
@@ -99,7 +122,15 @@ void ThumbnailViewWidget::cropAndUpdateImage( QPixmap& pixmap )
     if( thumbSize == origSize )
     {
         // no need to scale or crop image
-        setPixmap( pixmap );
+        m_ThumbPixmap = pixmap;
+        if( m_ThumbnailIsCircular )
+        {
+            setPixmap( makeCircleImage( m_ThumbPixmap ) );
+        }
+        else
+        {
+            setPixmap( m_ThumbPixmap );
+        }
     }
     else if( !pixmap.isNull() )
     {
@@ -111,7 +142,14 @@ void ThumbnailViewWidget::cropAndUpdateImage( QPixmap& pixmap )
         QPixmap scaledPixmap = cropped.scaled( GuiParams::getThumbnailSize() );
         if( !scaledPixmap.isNull() )
         {
-            setPixmap( scaledPixmap );
+            if( m_ThumbnailIsCircular )
+            {
+                setPixmap( makeCircleImage( scaledPixmap ) );
+            }
+            else
+            {
+                setPixmap( scaledPixmap );
+            }
         }
         else
         {

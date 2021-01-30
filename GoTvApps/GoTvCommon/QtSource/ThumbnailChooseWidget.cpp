@@ -54,10 +54,10 @@ ThumbnailChooseWidget::ThumbnailChooseWidget( QWidget * parent )
 //============================================================================
 void ThumbnailChooseWidget::slotChooseThumb()
 {
-    AppletChooseThumbnail * galleryThumb = dynamic_cast< AppletChooseThumbnail * >( m_MyApp.getAppletMgr().launchApplet( eAppletChooseThumbnail, m_ParentApplet ) );
+    AppletChooseThumbnail* galleryThumb = dynamic_cast< AppletChooseThumbnail * >( m_MyApp.getAppletMgr().launchApplet( eAppletChooseThumbnail, m_ParentApplet ) );
     if( galleryThumb )
     {
-        connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailEditWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailEditWidget * ) ) );
+        connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase*, ThumbnailEditWidget* ) ), this, SLOT( slotThumbSelected( AppletBase*, ThumbnailEditWidget* ) ) );
     }
 }
 
@@ -67,6 +67,7 @@ bool ThumbnailChooseWidget::loadFromAsset( AssetInfo * thumbAsset )
     bool loadOk = false;
     if( thumbAsset )
     {
+        ui.m_ThumbnailViewWidget->setThumnailIsCircular( getThumbnailIsCircular() );
         loadOk = ui.m_ThumbnailViewWidget->loadFromFile( thumbAsset->getAssetName().c_str() );
         if( loadOk )
         {
@@ -92,10 +93,6 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
                 emit signalThumbnailAssetChanged();
             }
         }
-        else
-        {
-            clearAssetId();
-        }
 
         /*
         disconnect( thumbGallery, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
@@ -108,6 +105,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
 bool ThumbnailChooseWidget::loadThumbnail( VxGUID& assetId, bool isCircle )
 {
     bool result = false;
+    setThumnailIsCircular( isCircle );
     if( assetId.isVxGUIDValid() )
     {
         AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetId );

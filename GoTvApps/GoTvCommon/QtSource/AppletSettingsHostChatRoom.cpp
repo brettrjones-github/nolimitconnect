@@ -61,7 +61,6 @@ void AppletSettingsHostChatRoom::loadPluginSetting()
         getPluginSettingsWidget()->getPermissionWidget()->setPermissionLevel( m_OrigPermissionLevel );
         getConnectionTestWidget()->setPermissionLevel( m_OrigConnectTestPermission );
 
-        m_PluginSetting.setPluginType( getPluginType() );// must set before get settings so engine will know which plugin setting to get
         m_MyApp.getEngine().getPluginSettingMgr().getPluginSetting( getPluginType(), m_PluginSetting );
         loadUiFromSetting();
     }

@@ -47,6 +47,8 @@ bool PluginSetting::toBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.setValue( m_SecondaryPluginThumb );
     result &= binaryBlob.setValue( m_SecondaryIdentGuid );
 
+    result &= binaryBlob.setValue( m_AgeType );
+    result &= binaryBlob.setValue( m_Gender );
     result &= binaryBlob.setValue( m_Language );
     result &= binaryBlob.setValue( m_ContentRating );
     result &= binaryBlob.setValue( m_ContentCatagory );
@@ -96,6 +98,8 @@ bool PluginSetting::fromBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.getValue( m_SecondaryPluginThumb );
     result &= binaryBlob.getValue( m_SecondaryIdentGuid );
 
+    result &= binaryBlob.getValue( m_AgeType );
+    result &= binaryBlob.getValue( m_Gender );
     result &= binaryBlob.getValue( m_Language );
     result &= binaryBlob.getValue( m_ContentRating );
     result &= binaryBlob.getValue( m_ContentCatagory );
@@ -172,6 +176,7 @@ bool PluginSetting::setDefaultValues( P2PEngine& engine, EPluginType pluginType 
     std::string onlineName = pktAnn.getOnlineName();
     std::string onlineDesc = pktAnn.getOnlineDescription();
     std::string myUrl = pktAnn.getMyPtopUrl();
+    m_PluginUrl = myUrl;
     m_PluginTitle = DescribePluginType2( pluginType );
     m_PluginTitle += " - ";
     m_PluginTitle += onlineName;

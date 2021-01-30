@@ -32,16 +32,18 @@ public:
     ThumbnailChooseWidget( QWidget * parent );
     virtual ~ThumbnailChooseWidget() override = default;
 
+    ThumbnailViewWidget*        getThumbnailViewWidget()                        { return ui.m_ThumbnailViewWidget; }
+
     void                        setIsUserPickedImage( bool userPicked )         { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }
     bool                        getIsUserPickedImage( void )                    { return ui.m_ThumbnailViewWidget->getIsUserPickedImage(); }
 
     void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
-    bool                        getThumbnailIsCircular( void )                   { return m_ThumbnailIsCircular; }
+    bool                        getThumbnailIsCircular( void )                  { return m_ThumbnailIsCircular; }
 
     bool                        loadFromAsset( AssetInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
 
-    void                        setAssetId( VxGUID& assetGuid, bool isCircle )  { m_AsssetId = assetGuid; }
+    void                        setAssetId( VxGUID& assetGuid, bool isCircle ) { m_AsssetId = assetGuid; m_ThumbnailIsCircular = isCircle; }
     VxGUID&                     getAssetId( void )                              { return m_AsssetId; }
     void                        clearAssetId( void )                            { m_AsssetId.clearVxGUID(); }
     bool                        isAssetIdValid( void )                          { return m_AsssetId.isVxGUIDValid(); }

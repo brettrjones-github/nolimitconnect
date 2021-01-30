@@ -31,6 +31,9 @@ public:
     void                        setIsUserPickedImage( bool userPicked )     { m_bUserPickedImage = userPicked;  }
     bool                        getIsUserPickedImage( void )                { return m_bUserPickedImage; }
 
+    void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
+    bool                        getThumbnailIsCircular( void )                  { return m_ThumbnailIsCircular; }
+
     void                        setThumbnailImage( QPixmap pixmap )         { cropAndUpdateImage( pixmap ); }
     const QPixmap *             getThumbnailImage( void )                   { return pixmap(); }
 
@@ -43,6 +46,8 @@ public:
     bool                        saveToPngFile( QString pngFileName );
     void                        browseForImage( void );
 
+    void                        updateImage( VxGUID& thumbGuid, bool isCircle );
+
 signals:
     void                        clicked( void );
     void						signalImageClicked( ThumbnailViewWidget * widget );
@@ -53,8 +58,11 @@ protected slots:
 protected:
     virtual void				mousePressEvent( QMouseEvent * ev ) override;
     void                        cropAndUpdateImage( QPixmap& pixmap );
+    QPixmap                     makeCircleImage( QPixmap& pixmap );
 
     AppCommon&					m_MyApp;
-    bool                        m_bUserPickedImage = false;
+    bool                        m_bUserPickedImage{ false };
     VxGUID                      m_ThumbnailId;
+    bool                        m_ThumbnailIsCircular{ false };
+    QPixmap                     m_ThumbPixmap;
 };
