@@ -47,12 +47,4 @@ protected:
     virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};
     virtual void				onConnectionLost( VxSktBase * sktBase ) override {};
     virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
-
-    void                        buildHostGroupAnnounce( PluginSetting& pluginSetting );
-    void                        sendHostGroupAnnounce( void );
-
-    bool                        m_SendAnnounceEnabled{ false };
-    bool                        m_HostAnnounceBuilt{ false };
-    PktHostAnnounce             m_PktHostAnnounce;
-    VxMutex                     m_AnnMutex;
 };

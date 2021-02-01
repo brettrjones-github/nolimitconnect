@@ -17,6 +17,7 @@
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
+#include <PktLib/PktHostAnnounce.h>
 #include <CoreLib/VxGUIDList.h>
 
 class VxNetIdent;
@@ -42,9 +43,16 @@ protected:
     virtual void                onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason = eConnectReasonUnknown ) override {};
     virtual void                onContactDisconnected( VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
+    virtual void                buildHostAnnounce( PluginSetting& pluginSetting ) {};
+    virtual void				sendHostAnnounce( void ) {};
+
     //=== vars ===//
     ConnectionMgr&              m_ConnectionMgr; 
     VxMutex                     m_ClientMutex;
     VxGUIDList                  m_JoinedHosts;
 
+    bool                        m_SendAnnounceEnabled{ false };
+    bool                        m_HostAnnounceBuilt{ false };
+    PktHostAnnounce             m_PktHostAnnounce;
+    VxMutex                     m_AnnMutex;
 };

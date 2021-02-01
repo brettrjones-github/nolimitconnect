@@ -29,6 +29,8 @@
 // +  672 bytes PktAnnounce
 // = 4800 bytes total
 
+class PluginSetting;
+
 class PktHostAnnounce :  public PktAnnounce
 {
 public:
@@ -41,8 +43,10 @@ public:
 
     void                        calcPktLen( void );
     void                        setPktAnn( PktAnnounce& pktAnn );
-    bool                        setSettingBinary( BinaryBlob& settingBinary );
-    bool                        getSettingBinary( BinaryBlob& settingBinary );
+    bool                        fillPktHostAnn( PktHostAnnounce& pktAnn ); // copy to another PktHostAnnounce
+
+    bool                        setPluginSettingBinary( BinaryBlob& settingBinary );
+    bool                        getPluginSettingBinary( BinaryBlob& settingBinary );
 
     PktHostAnnounce *			makeHostAnnCopy( void );
     PktHostAnnounce *			makeHostAnnReverseCopy( void );

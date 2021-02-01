@@ -54,13 +54,8 @@ protected:
     virtual void                onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason = eConnectReasonUnknown ) override {};
     virtual void                onContactDisconnected( VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
-    void                        buildHostGroupAnnounce( PluginSetting& pluginSetting );
-    void                        sendHostGroupAnnounce( void );
+    virtual void                sendHostGroupAnnounce( void );
 
-    bool                        m_SendAnnounceEnabled{ false };
-    bool                        m_HostAnnounceBuilt{ false };
-    PktHostAnnounce             m_PktHostAnnounce;
-    VxMutex                     m_AnnMutex;
 };
 
 

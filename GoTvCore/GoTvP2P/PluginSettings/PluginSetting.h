@@ -128,12 +128,12 @@ public:
     //! set to default values for case use has not set anything but has enabled the plugin
     bool                        setDefaultValues( P2PEngine& engine, EPluginType pluginType );
 
+    void                        setPluginUrl( std::string url )                     { m_PluginUrl = url.empty() ? "" : url; }
+    std::string&                getPluginUrl( void )                                { return m_PluginUrl; }
     void                        setTitle( std::string title )                       { m_PluginTitle = title.empty() ? "" : title; }
     std::string&                getTitle( void )                                    { return m_PluginTitle; }
     void                        setDescription( std::string desc )                  { m_PluginDesc = desc.empty() ? "" : desc; }
     std::string&                getDescription( void )                              { return m_PluginDesc; }
-    void                        setPluginUrl( std::string url )                     { m_PluginUrl = url.empty() ? "" : url; }
-    std::string&                getPluginUrl( void )                                { return m_PluginUrl; }
     void                        setGreetingMsg( std::string msg )                   { m_GreetingMsg = msg.empty() ? "" : msg; }
     std::string&                getGreetingMsg( void )                              { return m_GreetingMsg; }
     void                        setRejectMsg( std::string msg )                     { m_RejectMsg = msg.empty() ? "" : msg; }
@@ -145,16 +145,16 @@ public:
     void                        setRes1( std::string res )                          { m_Res1 = res.empty() ? "" : res; }
     std::string&                getRes1( void )                                     { return m_Res1; }
 
-
     bool                        toBinary( BinaryBlob& binarySetting, bool networkOrder = false );
     bool                        fromBinary( BinaryBlob& binarySetting, bool networkOrder = false );
 
-protected:
-    bool                        setStringList( std::vector<std::string>& stringList );
-    bool                        getStringList( std::vector<std::string>& stringList );
+    bool                        fillSearchStrings( std::vector<std::string>& searchStrings );
 
-    std::string                 m_PluginTitle;
+protected:
+
+    //=== vars ===//
     std::string                 m_PluginUrl;
+    std::string                 m_PluginTitle;
     std::string                 m_PluginDesc;
     std::string                 m_GreetingMsg;
     std::string                 m_RejectMsg;

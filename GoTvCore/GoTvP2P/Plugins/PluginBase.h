@@ -174,6 +174,9 @@ public:
     virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
+    // error handling for invalid packet
+    virtual void				onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg = "" );
+
     //=== sessions ===//
     virtual void				onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked );
     virtual void				onSessionEnded( PluginSessionBase * poSession, 

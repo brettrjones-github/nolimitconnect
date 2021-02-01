@@ -130,38 +130,15 @@ bool PluginSetting::fromBinary( BinaryBlob& binaryBlob, bool networkOrder )
 }
 
 //============================================================================
-bool PluginSetting::setStringList( std::vector<std::string>& stringList )
+bool PluginSetting::fillSearchStrings( std::vector<std::string>& searchStrings )
 {
-    bool result = false;
-    if( PLUGIN_SETTINGS_STRING_COUNT == stringList.size() )
-    {
-        m_PluginTitle = stringList[ 0 ];
-        m_PluginDesc = stringList[ 1 ];
-        m_PluginUrl = stringList[ 2 ];
-        m_GreetingMsg = stringList[ 3 ];
-        m_RejectMsg = stringList[ 4 ];
-        m_KeyWords = stringList[ 5 ];
-        m_SecondaryUrl = stringList[ 6 ];
-        m_Res1 = stringList[ 7 ];
-
-        result = true;
-    }
-
-    return result;
-}
-
-//============================================================================
-bool PluginSetting::getStringList( std::vector<std::string>& stringList )
-{
-    stringList.push_back( m_PluginTitle );
-    stringList.push_back( m_PluginDesc );
-    stringList.push_back( m_PluginUrl );
-    stringList.push_back( m_GreetingMsg );
-    stringList.push_back( m_RejectMsg );
-    stringList.push_back( m_KeyWords );
-    stringList.push_back( m_SecondaryUrl );
-    stringList.push_back( m_Res1 );
-
+    searchStrings.push_back( m_PluginTitle );
+    searchStrings.push_back( m_PluginDesc );
+    searchStrings.push_back( m_GreetingMsg );
+    searchStrings.push_back( m_RejectMsg );
+    searchStrings.push_back( m_KeyWords );
+    searchStrings.push_back( m_SecondaryUrl );
+    searchStrings.push_back( m_Res1 );
     return true;
 }
 

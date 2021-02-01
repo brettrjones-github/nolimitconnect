@@ -24,11 +24,6 @@
 #define PKT_LENGTH_NET_SERVICES						0x7470
 
 //============================================================================
-VxPktHdrPrefix::VxPktHdrPrefix()
-{
-}
-
-//============================================================================
 //=== return true if valid pkt type and length ===//
 bool VxPktHdrPrefix::isValidPkt( void )
 {
@@ -73,7 +68,7 @@ void VxPktHdrPrefix::setPktLength( uint16_t pktLen )
 
 //============================================================================
 //! return length of packet
-uint16_t VxPktHdrPrefix::getPktLength( void )
+uint16_t VxPktHdrPrefix::getPktLength( void ) const
 {
     return ntohs( m_u16PktLen );
 }
@@ -85,7 +80,7 @@ void VxPktHdrPrefix::setPktType( uint16_t u16PktType )
 }
 
 //============================================================================
-uint16_t	VxPktHdrPrefix::getPktType( void )
+uint16_t VxPktHdrPrefix::getPktType( void ) const
 {
 	return ntohs( m_u16PktType );
 }

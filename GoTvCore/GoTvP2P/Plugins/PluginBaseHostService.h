@@ -14,6 +14,9 @@
 //============================================================================
 
 #include "PluginNetServices.h"
+#include "HostServerMgr.h"
+
+#include <PktLib/PktHostAnnounce.h>
 
 class PluginBaseHostService : public PluginNetServices
 {
@@ -22,12 +25,24 @@ public:
     PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
     virtual ~PluginBaseHostService() override = default;
 
+    virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+
 protected:
     virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
     virtual void				onConnectionLost( VxSktBase * sktBase ) override;
     virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
 
-    //=== vars ===//
+    virtual void                buildHostAnnounce( PluginSetting& pluginSetting );
+    virtual void				sendHostAnnounce( void );
 
+    //=== vars ===//
+    HostServerMgr               m_HostServerMgr;
+    bool                        m_SendAnnounceEnabled{ false };
+    bool                        m_HostAnnounceBuilt{ false };
+    PktHostAnnounce             m_PktHostAnnounce;
+    VxMutex                     m_AnnMutex;
 };
 

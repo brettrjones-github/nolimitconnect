@@ -38,7 +38,7 @@ PktHostAnnounce::PktHostAnnounce()
 }
 
 //============================================================================
-PktHostAnnounce *	PktHostAnnounce::makeHostAnnCopy( void )
+PktHostAnnounce* PktHostAnnounce::makeHostAnnCopy( void )
 {
 	vx_assert( sizeof( PktHostAnnounce ) ==  getPktLength() );
 	vx_assert( PKT_TYPE_HOST_ANNOUNCE == getPktType() );
@@ -65,24 +65,42 @@ void PktHostAnnounce::setPktAnn( PktAnnounce& pktAnn )
 }
 
 //============================================================================
+bool PktHostAnnounce::fillPktHostAnn( PktHostAnnounce& pktAnn )
+{
+    bool result = false;
+    char * pktAnnData = ( char * )&pktAnn;
+    char * pktHost = ( char * )this;
+
+    int pktAnnDataLen = getPktLength();
+    if( pktAnnDataLen > 0 && pktAnnDataLen <= sizeof( PktHostAnnounce ) )
+    {
+        memcpy( pktAnnData, pktHost, pktAnnDataLen );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
 void PktHostAnnounce::calcPktLen( void )
 {
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostAnnounce ) - ( BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ) + m_SettingLength ) );
 }
 
 //============================================================================
-bool PktHostAnnounce::getSettingBinary( BinaryBlob& settingBinary )
+bool PktHostAnnounce::getPluginSettingBinary( BinaryBlob& settingBinary )
 {
     if( m_SettingLength && m_SettingLength <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
     {
-
+        settingBinary.setBlobData( m_SettingData, m_SettingLength, false, false );
+        return true;
     }
 
     return false;
 }
 
 //============================================================================
-bool PktHostAnnounce::setSettingBinary( BinaryBlob& settingBinary )
+bool PktHostAnnounce::setPluginSettingBinary( BinaryBlob& settingBinary )
 {
     if( settingBinary.getBlobLen() && settingBinary.getBlobLen() <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
     {

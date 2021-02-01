@@ -2,6 +2,15 @@
 
 namespace
 {
+    const char * CommErrEnumStrings[] =
+    {
+        "No Error ",
+        "Comm Error Invalid Packet ",
+        "Comm Error User Offline ",
+        "Comm Error Invalid Search Text ",
+        "Max Comm Error ",
+    };
+
     const char * ConnectReasonEnumStrings[] = 
     { 
         "Connect Reason Unknown ",
@@ -270,6 +279,17 @@ const char * DescribeAge( EAgeType ageType )
     default:
         return "UNKNOWN Age ";
     }
+}
+
+//============================================================================
+const char * DescribeCommError( ECommErr commErr )
+{
+    if( commErr < 0 || eMaxCommErr <= commErr )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return CommErrEnumStrings[ commErr ];
 }
 
 //============================================================================

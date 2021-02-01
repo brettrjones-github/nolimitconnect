@@ -38,6 +38,17 @@ enum EAgeType
     eMaxAgeType
 };
 
+#define MIN_SEARCH_TEXT_LEN 3
+enum ECommErr
+{
+    eCommErrNone = 0,
+    eCommErrInvalidPkt,
+    eCommErrUserOffline,
+    eCommErrSearchText, // search text invalid
+
+    eMaxCommErr
+};
+
 enum EConnectReason
 {
     eConnectReasonUnknown = 0,
@@ -583,6 +594,8 @@ enum ERunTestStatus
 const char * DescribeAppModule( EAppModule appModule );
 
 const char * DescribeAge( EAgeType ageType );
+
+const char * DescribeCommError( ECommErr commErr );
 
 const char * DescribeConnectReason( EConnectReason connectReason );
 

@@ -52,30 +52,15 @@ void PluginGroupHost::pluginStartup( void )
 bool PluginGroupHost::setPluginSetting( PluginSetting& pluginSetting )
 {
     bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
-    buildHostGroupAnnounce( pluginSetting );
-    sendHostGroupAnnounce();
+    buildHostAnnounce( pluginSetting );
+    sendHostAnnounce();
     return result;
 }
 
 //============================================================================
 void PluginGroupHost::onThreadOncePer15Minutes( void )
 {
-    sendHostGroupAnnounce();
-}
-
-//============================================================================
-void PluginGroupHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
-{
-    m_AnnMutex.lock();
-    m_Engine.lockAnnouncePktAccess();
-    m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
-    m_Engine.unlockAnnouncePktAccess();
-    m_PluginSetting = pluginSetting;
-    BinaryBlob binarySetting;
-    m_PluginSetting.toBinary( binarySetting );
-    m_PktHostAnnounce.setSettingBinary( binarySetting );
-    m_HostAnnounceBuilt = true;
-    m_AnnMutex.unlock();
+    sendHostAnnounce();
 }
 
 //============================================================================
@@ -83,7 +68,7 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
 {
     if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        //m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectReasonChatRoomAnnounce, this );
+        //m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectReasonGroupAnnounce, this );
     }
 }
 
@@ -91,7 +76,7 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
 void PluginGroupHost::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostGroupAnnounce( pluginSetting );
+    buildHostAnnounce( pluginSetting );
 }
 
 /*

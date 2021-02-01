@@ -27,3 +27,78 @@ PluginBaseService::PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, V
 : PluginBase( engine, pluginMgr, myIdent )
 {
 }
+
+//============================================================================
+EConnectReason PluginBaseService::getHostAnnounceConnectReason( void )
+{
+    EConnectReason connectReason = eConnectReasonUnknown;
+    switch( getPluginType() )
+    {
+    case ePluginTypeChatRoomClient:
+    case ePluginTypeChatRoomHost:
+        connectReason = eConnectReasonChatRoomAnnounce;
+        break;
+    case ePluginTypeGroupClient:
+    case ePluginTypeGroupHost:
+        connectReason = eConnectReasonGroupAnnounce;
+        break;
+    case ePluginTypeRandomConnectHost:
+    case ePluginTypeRandomConnectClient:
+        connectReason = eConnectReasonRandomConnectAnnounce;
+        break;
+    default:
+        break;
+    }
+
+    return connectReason;
+}
+
+//============================================================================
+EConnectReason PluginBaseService::getHostJoinConnectReason( void )
+{
+    EConnectReason connectReason = eConnectReasonUnknown;
+    switch( getPluginType() )
+    {
+    case ePluginTypeChatRoomClient:
+    case ePluginTypeChatRoomHost:
+        connectReason = eConnectReasonChatRoomJoin;
+        break;
+    case ePluginTypeGroupClient:
+    case ePluginTypeGroupHost:
+        connectReason = eConnectReasonGroupJoin;
+        break;
+    case ePluginTypeRandomConnectHost:
+    case ePluginTypeRandomConnectClient:
+        connectReason = eConnectReasonRandomConnectJoin;
+        break;
+    default:
+        break;
+    }
+
+    return connectReason;
+}
+
+//============================================================================
+EConnectReason PluginBaseService::getHostSearchConnectReason( void )
+{
+    EConnectReason connectReason = eConnectReasonUnknown;
+    switch( getPluginType() )
+    {
+    case ePluginTypeChatRoomClient:
+    case ePluginTypeChatRoomHost:
+        connectReason = eConnectReasonChatRoomSearch;
+        break;
+    case ePluginTypeGroupClient:
+    case ePluginTypeGroupHost:
+        connectReason = eConnectReasonGroupSearch;
+        break;
+    case ePluginTypeRandomConnectHost:
+    case ePluginTypeRandomConnectClient:
+        connectReason = eConnectReasonRandomConnectSearch;
+        break;
+    default:
+        break;
+    }
+
+    return connectReason;
+}

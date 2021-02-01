@@ -148,7 +148,7 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
     setPluginPermission( ePluginTypeVoicePhone, eFriendStateGuest );
 
-    setPluginPermission( ePluginTypeCamServer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeCamServer, eFriendStateIgnore );
     setPluginPermission( ePluginTypeFileServer, eFriendStateFriend );
     setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
 

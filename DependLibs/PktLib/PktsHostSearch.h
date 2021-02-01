@@ -50,11 +50,13 @@ public:
     EHostType                   getHostType( void )                                 { return (EHostType)m_HostType; }
     void                        setAccessState( EPluginAccess accessState )         { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                              { return (EPluginAccess)m_AccessState; }
+    void                        setCommError( ECommErr commError )                  { m_CommError = (uint8_t)commError; }
+    ECommErr                    getCommError( void )                                { return (ECommErr)m_CommError; }
 
 private:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_AccessState{ 0 };
-    uint16_t					m_Res2{ 0 };					
+    uint16_t					m_CommError{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
     uint64_t					m_Res4{ 0 };	

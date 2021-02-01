@@ -31,7 +31,6 @@
 //============================================================================
 PluginChatRoomHost::PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
     : PluginBaseHostService( engine, pluginMgr, myIdent )
-    , m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
     setPluginType( ePluginTypeChatRoomHost );
 }
@@ -70,7 +69,7 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
     BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setHostType( eHostTypeChatRoom );
-    m_PktHostAnnounce.setSettingBinary( binarySetting );
+    m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
     m_PktHostAnnounce.setIsLoopback( true ); // BRJ temp for testing
     m_HostAnnounceBuilt = true;
     m_AnnMutex.unlock();
@@ -101,47 +100,4 @@ void PluginChatRoomHost::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostChatRoomAnnounce( pluginSetting );
-}
-
-//============================================================================
-void PluginChatRoomHost::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
-    PktHostJoinReply joinReply;
-    joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-    if( ePluginAccessOk == joinReply.getAccessState() )
-    {
-
-    }
-
-    txPacket( netIdent, sktBase, &joinReply );
-}
-
-//============================================================================
-void PluginChatRoomHost::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
-    PktHostSearchReply searchReply;
-    searchReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-    if( ePluginAccessOk == searchReply.getAccessState() )
-    {
-
-    }
-
-    txPacket( netIdent, sktBase, &searchReply );
-}
-
-//============================================================================
-void PluginChatRoomHost::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
-    PktHostOfferReply offerReply;
-    offerReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-    txPacket( netIdent, sktBase, &offerReply );
-}
-
-//============================================================================
-void PluginChatRoomHost::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer reply" );
 }

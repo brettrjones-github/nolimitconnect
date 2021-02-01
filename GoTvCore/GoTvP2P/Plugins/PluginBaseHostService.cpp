@@ -14,12 +14,53 @@
 
 #include "PluginBaseHostService.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+#include <NetLib/VxSktBase.h>
+#include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsHostSearch.h>
+
 //============================================================================
 PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
     : PluginNetServices( engine, pluginMgr, myIdent )
+    , m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
 }
 
+//============================================================================
+void PluginBaseHostService::buildHostAnnounce( PluginSetting& pluginSetting )
+{
+    m_AnnMutex.lock();
+    m_Engine.lockAnnouncePktAccess();
+    m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
+    m_Engine.unlockAnnouncePktAccess();
+    m_PluginSetting = pluginSetting;
+    BinaryBlob binarySetting;
+    m_PluginSetting.toBinary( binarySetting );
+    m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
+    m_HostAnnounceBuilt = true;
+    m_AnnMutex.unlock();
+}
+
+//============================================================================
+void PluginBaseHostService::sendHostAnnounce( void )
+{
+    if( !m_HostAnnounceBuilt && 
+        ( m_Engine.getEngineSettings().getFirewallTestSetting() == FirewallSettings::eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
+            m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
+    {
+        PluginSetting pluginSetting;
+        if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+        {
+            buildHostAnnounce( pluginSetting );
+        }
+    }
+
+    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    {
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_PktHostAnnounce, getHostAnnounceConnectReason() );
+    }
+}
 
 //============================================================================
 void PluginBaseHostService::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
@@ -38,4 +79,62 @@ void PluginBaseHostService::onContactWentOffline( VxNetIdent * netIdent, VxSktBa
 void PluginBaseHostService::onConnectionLost( VxSktBase * sktBase )
 {
 //    m_PluginSessionMgr.onConnectionLost( sktBase );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    PktHostJoinReply joinReply;
+    joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+    if( ePluginAccessOk == joinReply.getAccessState() )
+    {
+
+    }
+
+    txPacket( netIdent, sktBase, &joinReply );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    PktHostSearchReply searchReply;
+    searchReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+    if( ePluginAccessOk == searchReply.getAccessState() )
+    {
+        PktHostSearchReq* searchReq = (PktHostSearchReq*)pktHdr;
+        if( searchReq->isValidPkt() )
+        {
+            std::string searchText = searchReq->getSearchText();
+            if( searchText.size() < MIN_SEARCH_TEXT_LEN )
+            {
+                searchReply.setCommError( eCommErrSearchText );
+            }
+
+
+        }
+        else
+        {
+            onInvalidRxedPacket( sktBase, pktHdr, netIdent );
+            searchReply.setCommError( eCommErrInvalidPkt );
+        }
+    }
+
+    txPacket( netIdent, sktBase, &searchReply );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
+    PktHostOfferReply offerReply;
+    offerReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+    txPacket( netIdent, sktBase, &offerReply );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer reply" );
 }

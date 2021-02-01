@@ -19,10 +19,12 @@ class PluginBaseService : public PluginBase
 {
 public:
 
-    PluginBaseService(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginBaseService() override = default;
 
-
 protected:
+    EConnectReason              getHostAnnounceConnectReason( void );
+    EConnectReason              getHostJoinConnectReason( void );
+    EConnectReason              getHostSearchConnectReason( void );
 
 };

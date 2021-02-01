@@ -43,7 +43,7 @@ public:
     bool                        loadFromAsset( AssetInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
 
-    void                        setAssetId( VxGUID& assetGuid, bool isCircle ) { m_AsssetId = assetGuid; m_ThumbnailIsCircular = isCircle; }
+    void                        setAssetId( VxGUID& assetGuid, bool isCircle )  { m_AsssetId = assetGuid; m_ThumbnailIsCircular = isCircle; }
     VxGUID&                     getAssetId( void )                              { return m_AsssetId; }
     void                        clearAssetId( void )                            { m_AsssetId.clearVxGUID(); }
     bool                        isAssetIdValid( void )                          { return m_AsssetId.isVxGUIDValid(); }

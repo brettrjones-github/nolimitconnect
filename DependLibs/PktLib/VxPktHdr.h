@@ -37,7 +37,7 @@
 class VxPktHdrPrefix
 {
 public:
-    VxPktHdrPrefix();
+    VxPktHdrPrefix() = default;
 
     //=== return true if valid pkt type and length ===//
     bool						isValidPkt( void );
@@ -46,10 +46,10 @@ public:
     //! return true if data length is large enough to contain this packet
     bool						isPktAllHere(int iDataLen);
 	void						setPktLength( uint16_t pktLen );
-	uint16_t					getPktLength( void );
+	uint16_t					getPktLength( void ) const;
 
 	void						setPktType( uint16_t u8PktType );
-	uint16_t					getPktType( void );
+	uint16_t					getPktType( void ) const;
 
 	void						setPluginNum( uint8_t u8PluginNum );
 	uint8_t						getPluginNum( void );

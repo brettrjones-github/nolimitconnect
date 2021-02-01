@@ -166,6 +166,13 @@ void PluginBase::onSessionStart( PluginSessionBase * poSession, bool pluginIsLoc
 }
 
 //============================================================================
+void PluginBase::onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg )
+{
+    // TODO proper invalid packet handling
+    LogMsg( LOG_INFO, "PluginBase::onInvalidRxedPacket plugin %s user %s", DescribePluginType2( getPluginType() ), netIdent->getOnlineName() );
+}
+
+//============================================================================
 void PluginBase::onPktUserConnect( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	LogMsg( LOG_INFO, "PluginBase::onPktUserConnect\n" );
