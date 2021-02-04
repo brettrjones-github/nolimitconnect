@@ -179,7 +179,7 @@ int VxGUID::compareTo( VxGUID& guid )
 
 //============================================================================
 // returns true if guids are same value
-bool VxGUID::isEqualTo( VxGUID& guid )
+bool VxGUID::isEqualTo( const VxGUID& guid )
 {
 	return ( ( m_u64LoPart == guid.m_u64LoPart ) && ( m_u64HiPart == guid.m_u64HiPart ) );
 }

@@ -145,6 +145,9 @@
     <ClInclude Include="..\..\PktsHostSearch.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\PktBlob.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\PktAnnList.cpp">
@@ -268,6 +271,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktsHostSearch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PktBlob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

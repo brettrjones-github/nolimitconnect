@@ -17,42 +17,48 @@
 #include <string>
 #include <vector>
 
-// defines for blobs
-#define BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN (4096 + 8)
-#define BLOB_PLUGIN_SETTING_STORAGE_VERSION 1
+// a class very similar to <CoreLib/BinaryBlob.h>
+// but a fixed length and pragma packed for network packet use
+// the length assumes the base packet is 2K or less in size
+
+// defines for pkt blob
+#define PKT_BLOB_MAX_STORAGE_LEN (1024 * 14 - 16) // approx 14K to fit within MAX_PKT_LEN - 2K.. -16 for packet alignment
+#define PKT_BLOB_STORAGE_VERSION 1
 
 class VxGUID;
 
-class BinaryBlob
+#pragma pack(push)
+#pragma pack(1)
+class PktBlob
 {
 public:
-    BinaryBlob() = default;
-    BinaryBlob( int dataLen ){ if( dataLen ) m_BlobData = new uint8_t[ dataLen ]; m_MaxDataLen = dataLen; }
-    ~BinaryBlob() { if( m_OwnBlob ) delete m_BlobData; }
-
-    bool                        createStorage( int maxStorageLen, bool useNetworkOrder = false );
+    PktBlob() = default;
+    ~PktBlob() = default;
 
     void                        setBlobVersion( int ver )       { m_BlobVersion = (uint8_t)ver; }
     uint8_t                     getBlobVersion( void )          { return m_BlobVersion; }
 
-    void                        setBlobLen( int len )           { m_BlobLen = (int32_t)len; }
-    int32_t                     getBlobLen( void )              { return m_BlobLen; }
+    void                        setBlobLen( int len )           { m_BlobLen = (int16_t)len; }
+    int16_t                     getBlobLen( void ) const        { return m_BlobLen; }
+    int16_t                     getRemainingStorageLen( void ) const { return PKT_BLOB_MAX_STORAGE_LEN - getBlobLen(); }
 
-    bool                        setBlobData( uint8_t* blob, int len, bool deleteOnDestruct, bool copyTheData );                     
+    bool                        setBlobData( uint8_t* blob, int len );                   
     uint8_t*                    getBlobData( void )             { return m_BlobData; }
 
     void                        setUseNetworkOrder( bool useNetOrder ) { m_UseNetworkOrder = useNetOrder; }
     bool                        getUseNetworkOrder( void )      { return m_UseNetworkOrder; }
 
     void                        resetWrite()                    { m_DataIdx = 0; m_PastEnd = 0; }
-    bool                        haveRoom( int valSize )         { return m_BlobData && ( ( m_MaxDataLen - m_DataIdx ) >= (int)valSize ); }
+    bool                        haveRoom( int valSize )         { return (int)( m_MaxBlobLen - m_DataIdx ) >= valSize; }
     bool                        incDataWrite( int valSize );
 
     void                        resetRead()                     { m_DataIdx = 0; m_PastEnd = 0; }
-    bool                        haveData( int valSize )         { return m_BlobData && ( ( m_BlobLen - m_DataIdx ) >= (int)valSize ); }
+    bool                        haveData( int valSize )         { return (int)( m_BlobLen - m_DataIdx ) >= valSize; }
     bool                        incDataRead( int valSize );
 
     bool                        isPastEnd()                     { return m_PastEnd; }
+
+   
 
     //! set value 
     bool                        setValue( bool& bValue );
@@ -92,14 +98,21 @@ public:
 
 protected:
     //=== vars ===//
-    uint8_t                     m_BlobVersion{ 1 };
+    uint8_t                     m_BlobVersion{ PKT_BLOB_STORAGE_VERSION };
+    uint8_t                     m_DataVersion{ 0 };     // can be set by caller for versioning
+    uint8_t                     m_DataType{ 0 };        // can be set by caller for the type of data contained in blob
     uint8_t                     m_UseNetworkOrder{ false };
+    int16_t                     m_DataIdx{ 0 };
+    uint8_t                     m_PastEnd{ 0 };  
 
-    uint8_t                     m_OwnBlob{ false };
-    int32_t                     m_BlobLen{ 0 };
-    uint8_t*                    m_BlobData{ nullptr };
+    uint8_t                     m_BlobRes1{ 0 };        // reserved for alignment
+    int16_t                     m_BlobRes2{ 0 };        // reserved for alignment
+    int32_t                     m_BlobRes3{ 0 };        // reserved for alignment
 
-    int32_t                     m_MaxDataLen{ 0 };
-    int32_t                     m_DataIdx{ 0 };
-    uint8_t                     m_PastEnd{ false };
+    int16_t                     m_BlobLen{ 0 };
+    int16_t                     m_MaxBlobLen{ PKT_BLOB_MAX_STORAGE_LEN };
+
+    uint8_t                     m_BlobData[PKT_BLOB_MAX_STORAGE_LEN + 16];
 };
+
+#pragma pack(pop)

@@ -7,7 +7,9 @@ namespace
         "No Error ",
         "Comm Error Invalid Packet ",
         "Comm Error User Offline ",
-        "Comm Error Invalid Search Text ",
+        "Comm Error Search Text To Short ",
+        "Comm Error Search No Match ",
+        "Comm Error Invalid Host Type ",
         "Max Comm Error ",
     };
 

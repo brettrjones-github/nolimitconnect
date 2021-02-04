@@ -44,7 +44,9 @@ enum ECommErr
     eCommErrNone = 0,
     eCommErrInvalidPkt,
     eCommErrUserOffline,
-    eCommErrSearchText, // search text invalid
+    eCommErrSearchTextToShort, 
+    eCommErrSearchNoMatch, 
+    eCommErrInvalidHostType, 
 
     eMaxCommErr
 };

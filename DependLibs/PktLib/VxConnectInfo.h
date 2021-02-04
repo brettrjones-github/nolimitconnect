@@ -120,7 +120,11 @@ public:
 // +  28 bytes Online Name
 // +  32 bytes Online Mood Message
 // +   8 bytes m_TimeLastContactMs
-// +   6 bytes reserved
+// +   2 bytes m_PrimaryLanguage
+// +   1 bytes m_ContentType
+// +   1 bytes m_u8Age
+// +   1 bytes m_u8Gender
+// +   1 bytes reserved
 // +  80 bytes guids (5x16)
 // = 154 bytes
 // + 256  urls (4x64)
@@ -167,13 +171,28 @@ public:
     void                        setRandomConnectGuid( VxGUID& guid )    { m_RandomConnectGuid = guid; }
     VxGUID&                     getRandomConnectGuid( void )            { return m_RandomConnectGuid; }
 
+    void						setPrimaryLanguage( uint16_t language ) { m_PrimaryLanguage = language; }
+    uint16_t					getPrimaryLanguage( void )              { return m_PrimaryLanguage; }
+
+    void						setPreferredContent( uint8_t contentType ) { m_ContentType = contentType; }
+    uint8_t					    getPreferredContent( void )             { return m_ContentType; }
+
+    void						setAgeType( EAgeType age )              { m_u8Age = (uint8_t)age; }
+    EAgeType					getAgeType( void )                      { return (EAgeType)m_u8Age; }
+
+    void						setGender( uint8_t gender )             { m_u8Gender = gender; }
+    uint8_t					    getGender( void )                       { return m_u8Gender; }
+
 	//=== vars ===//
 private:
 	char						m_OnlineName[ MAX_ONLINE_NAME_LEN ];	// users online name
 	char						m_OnlineDesc[ MAX_ONLINE_DESC_LEN ];    // users online description
-	int64_t	    				m_TimeLastContactMs = 0;
-	uint16_t					m_IdentRes1 = 0;
-	uint32_t					m_IdentRes2 = 0;
+    int64_t	    				m_TimeLastContactMs{ 0 };
+    uint16_t					m_PrimaryLanguage{ 0 };     // primary language user speaks
+    uint8_t					    m_ContentType{ 0 };         // preferred content type
+    uint8_t						m_u8Age{ 0 };
+    uint8_t						m_u8Gender{ 0 };
+	uint8_t					    m_IdentRes1{ 0 };
     VxGUID                      m_AvatarGuid;
 
     VxGUID                      m_NetHostGuid;

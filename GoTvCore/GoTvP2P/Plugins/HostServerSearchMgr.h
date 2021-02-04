@@ -14,45 +14,21 @@
 //============================================================================
 
 #include "HostBaseMgr.h"
-
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
+#include "HostSearchEntry.h"
 
 #include <CoreLib/VxGUIDList.h>
 #include <CoreLib/VxMutex.h>
 
-#include <PktLib/PktHostAnnounce.h>
-
 #include <map>
-#include <string>
-#include <vector>
+
+#define MIN_HOST_RX_TIME_MS         30000 // must rx a host announce in this time frame or host is considered offline
 
 class ConnectionMgr;
 class P2PEngine;
 class PluginMgr;
-class VxNetIdent;
 class PluginBase;
 class VxPktHdr;
-class PktHostAnnounce;
-
-class HostSearchEntry
-{
-public:
-    HostSearchEntry() = default;
-    ~HostSearchEntry() = default;
-    HostSearchEntry( const HostSearchEntry& rhs );
-
-    HostSearchEntry&			operator=( const HostSearchEntry& rhs );
-
-    void                        updateLastRxTime( void );
-
-    uint64_t                    m_LastRxTime{ 0 }; // time last recieved announce
-    VxNetIdent                  m_Ident;
-    PktHostAnnounce             m_PktHostAnn;
-    PluginSetting               m_PluginSetting;
-    std::string                 m_Url;
-    std::vector<std::string>    m_SearchStrings;
-    
-};
+class PktHostSearchReply;
 
 class HostServerSearchMgr : public HostBaseMgr
 {
@@ -61,11 +37,16 @@ public:
 	virtual ~HostServerSearchMgr() = default;
 
     void                        updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent );
+    virtual ECommErr            searchRequest( EHostType hostType, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 protected:
     std::map<VxGUID, HostSearchEntry>& getSearchList( EHostType hostType );
     bool                        haveHostList( EHostType hostType );
     bool                        fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent, bool forced );
+    void                        addOrQueSearchMatch( PktHostSearchReply&searchReply, VxSktBase* sktBase, VxNetIdent* netIdent, const VxGUID& guid, const HostSearchEntry& entry );
+
+    // remove entries does not lock m_SearchMutex
+    void                        removeEntries( std::map<VxGUID, HostSearchEntry>& searchMap, VxGUIDList& toRemoveList );
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;

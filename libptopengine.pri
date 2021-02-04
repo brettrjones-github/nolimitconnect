@@ -136,10 +136,12 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostedEntry.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.h \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/JoinedEntry.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.h \
@@ -211,6 +213,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostBaseMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientSearchMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/HostSearchEntry.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerSearchMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.h \
@@ -358,10 +361,12 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostedEntry.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/JoinedEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.cpp \
@@ -441,6 +446,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostBaseMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostClientSearchMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/HostSearchEntry.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/HostServerSearchMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.cpp \

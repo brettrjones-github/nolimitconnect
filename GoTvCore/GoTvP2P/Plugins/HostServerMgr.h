@@ -25,6 +25,7 @@ public:
 
     virtual void                sendHostAnnounceToNetworkHost( PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
 
+
 protected:
     virtual void                onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
     virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;

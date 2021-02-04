@@ -21,15 +21,15 @@ class VxGUIDList
 {
 public:
 	VxGUIDList();
-	~VxGUIDList();
+	~VxGUIDList() = default;
 
 	int							size( void )						{ return (int)m_GuidList.size(); }
 
-	void						addGuid( VxGUID& guid );
+	void						addGuid( const VxGUID& guid );
 	// returns false if guid already exists
-	bool						addGuidIfDoesntExist( VxGUID& guid );
+	bool						addGuidIfDoesntExist( const VxGUID& guid );
 	// return true if guid is in list
-	bool						doesGuidExist( VxGUID& guid );
+	bool						doesGuidExist( const VxGUID& guid );
 	// returns false if guid did not exists
 	bool						removeGuid( VxGUID& guid );
 	void						clearList( void );

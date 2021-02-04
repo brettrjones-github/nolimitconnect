@@ -137,3 +137,7 @@ std::string						WideToAscii( const std::wstring& utf16String );
 //! return pointer to first char that is not whitespace
 char *							TrimLeadingSpaces( char * pString );
 wchar_t *						TrimLeadingSpaces( wchar_t * pString );
+
+// find substring (case insensitive) second param str2 is the substring to search str1 for
+// returns -1 if not found
+int                             CaseInsensitiveFindSubstr( const std::string& str1, const std::string& str2 );

@@ -77,7 +77,7 @@ public:
 	// returns 0 if equal else -1 if less or 1 if greater
 	int							compareTo( VxGUID& guid );
 	// returns true if guids are same value
-	bool						isEqualTo( VxGUID& guid );
+	bool						isEqualTo( const VxGUID& guid );
 
 	std::string					describeVxGUID( void );
 

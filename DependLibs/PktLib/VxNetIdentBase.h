@@ -25,7 +25,7 @@
 //!   512 bytes VxConnectInfo
 // +    1 byte  VxOnlineStatusFlags
 //	= 513 bytes inherited
-// +    1 byte  m_u8Gender
+// +    1 byte  m_u8ResBase
 // +    1 byte  m_u8OfferCnt
 // +    1 byte  m_u8ReplyCnt
 // +    4 bytes m_u32TruthCnt;		
@@ -53,16 +53,13 @@ public:
 	void						setRejectedDareCount( uint16_t rejectCnt );
 	uint16_t					getRejectedDareCount( void );
 
-    void						setAgeType( EAgeType age ) { m_u8Age = (uint8_t)age; }
-    EAgeType					getAgeType( void ) { return (EAgeType)m_u8Age; }
-
 	bool						isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) const;
 	void						useAsRelay( VxNetIdentBase * poRelayIdent );
 	void						getProfileUri( std::string& retUri, const char * myIp, const char * webFileName );
 
 protected:
 	//=== vars ===//
-	uint8_t						m_u8Age = 0;	
+	uint8_t						m_u8ResBase = 0;	
 	uint8_t						m_u8OfferCnt = 0;							// offer count ( used as part of rating )
 	uint8_t						m_u8ReplyCnt = 0;							// reply count ( used as part of rating )
 	uint32_t					m_u32TruthCnt = 0;					

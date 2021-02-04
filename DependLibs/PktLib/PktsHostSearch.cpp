@@ -53,3 +53,33 @@ PktHostSearchReply::PktHostSearchReply()
     setPktLength( sizeof(PktHostSearchReply) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
+
+//============================================================================
+void PktHostSearchReply::setTotalMatches( uint16_t matchCnt )
+{
+    m_TotalMatches = htons( matchCnt );
+}
+
+//============================================================================
+uint16_t PktHostSearchReply::getTotalMatches( void ) const
+{
+    return ntohs( m_TotalMatches );
+}
+
+//============================================================================
+void PktHostSearchReply::setTotalBlobLen( uint16_t totalBlobLen )
+{
+    m_TotalBlobLen = htons( totalBlobLen );
+}
+
+//============================================================================
+uint16_t PktHostSearchReply::getTotalBlobLen( void ) const
+{
+    return ntohs( m_TotalBlobLen );
+}
+
+//============================================================================
+uint16_t PktHostSearchReply::getRemainingBlobStorageLen( void ) const
+{
+    return m_PktBlob.getRemainingStorageLen();
+}

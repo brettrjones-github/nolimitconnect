@@ -555,9 +555,11 @@
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDefs.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostedEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\JoinedEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.cpp" />
@@ -641,6 +643,7 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostBaseMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostClientMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostClientSearchMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostSearchEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostServerMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostServerSearchMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\LibraryFileInfo.cpp" />
@@ -833,9 +836,11 @@
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostedEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\JoinedEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.h" />
@@ -908,6 +913,7 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostBaseMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostClientMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostClientSearchMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostSearchEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostServerMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostServerSearchMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\LibraryFileInfo.h" />

@@ -98,7 +98,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
 //============================================================================
 void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    LogMsg( LOG_DEBUG, "PluginBaseHostService onPktHostSearchReq" );
     PktHostSearchReply searchReply;
     searchReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
     if( ePluginAccessOk == searchReply.getAccessState() )
@@ -109,15 +109,18 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
             std::string searchText = searchReq->getSearchText();
             if( searchText.size() < MIN_SEARCH_TEXT_LEN )
             {
-                searchReply.setCommError( eCommErrSearchText );
+                searchReply.setCommError( eCommErrSearchTextToShort );
             }
-
-
+            else
+            {
+                ECommErr searchErr = m_HostServerMgr.searchRequest( searchReq->getHostType(), searchReply, searchText, sktBase, netIdent );
+                searchReply.setCommError( searchErr );
+            }
         }
         else
         {
-            onInvalidRxedPacket( sktBase, pktHdr, netIdent );
             searchReply.setCommError( eCommErrInvalidPkt );
+            onInvalidRxedPacket( sktBase, pktHdr, netIdent );     
         }
     }
 

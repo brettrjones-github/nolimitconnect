@@ -13,23 +13,25 @@
 //============================================================================
 #pragma once
 
-#include <PktLib/VxCommon.h>
+#include "HostListEntry.h"
 
-#pragma pack(push) 
-#pragma pack(1)
-
-class HostListEntry : public VxConnectIdent
+class JoinedEntry : public HostListEntry
 {
 public:
-    void						setListEntryLength( uint16_t entryLen );
-    uint16_t					getListEntryLength( void ) const;
+	JoinedEntry() = default;
+    JoinedEntry( const VxConnectIdent& rhs );
+	JoinedEntry( const JoinedEntry& rhs );
+	JoinedEntry( const HostListEntry& anchorEntry, int64_t postTime );
+	~JoinedEntry() = default;
 
-    void						setListEntryType( uint16_t entryType );
-    uint16_t					getListEntryType( void ) const;
+	JoinedEntry& operator=( const JoinedEntry& rhs );
 
-    //=== vars ===//
-    uint16_t                    m_ListEntryLen{ 0 };
-    uint16_t					m_ListEntryType{ 0 };			
+	void						setHostListEntry( HostListEntry& entry );
+	void						setPostTimeMs( int64_t postTimeMs )		    { m_PostTimeMs = postTimeMs; }
+	int64_t						getPostTimeMs( void )					    { return m_PostTimeMs; }
+	HostListEntry *			    getHostListEntry( void )				    { return (HostListEntry *)this; }
+
+private:
+	int64_t						m_PostTimeMs = 0;
 };
 
-#pragma pack(pop)

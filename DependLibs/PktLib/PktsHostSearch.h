@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "PktTypes.h"
+#include "PktBlob.h"
 #include <GoTvInterface/IDefs.h>
 
 #pragma pack(1)
@@ -47,19 +48,32 @@ public:
     PktHostSearchReply();
 
     void                        setHostType( EHostType hostType )                   { m_HostType = (uint8_t)hostType; }
-    EHostType                   getHostType( void )                                 { return (EHostType)m_HostType; }
+    EHostType                   getHostType( void ) const                           { return (EHostType)m_HostType; }
     void                        setAccessState( EPluginAccess accessState )         { m_AccessState = (uint8_t)accessState; }
-    EPluginAccess               getAccessState( void )                              { return (EPluginAccess)m_AccessState; }
+    EPluginAccess               getAccessState( void ) const                        { return (EPluginAccess)m_AccessState; }
     void                        setCommError( ECommErr commError )                  { m_CommError = (uint8_t)commError; }
-    ECommErr                    getCommError( void )                                { return (ECommErr)m_CommError; }
+    ECommErr                    getCommError( void ) const                          { return (ECommErr)m_CommError; }
+
+    void                        setMatchesInThisPkt( uint8_t matchCnt )             { m_MatchesInThisPkt = matchCnt; }
+    uint8_t                     getMatchesInThisPkt( void ) const                   { return m_MatchesInThisPkt; }
+
+    void                        setTotalMatches( uint16_t matchCnt );
+    uint16_t                    getTotalMatches( void ) const;
+
+    void                        setTotalBlobLen( uint16_t totalBlobLen );
+    uint16_t                    getTotalBlobLen( void ) const;
+    uint16_t                    getRemainingBlobStorageLen( void ) const;
 
 private:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_AccessState{ 0 };
-    uint16_t					m_CommError{ 0 };					
-    uint32_t					m_Res3{ 0 };	
+    uint8_t					    m_CommError{ 0 };		
+    uint8_t					    m_MatchesInThisPkt{ 0 };		
+    uint16_t					m_TotalMatches{ 0 };	
+    uint16_t                    m_TotalBlobLen{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
-    uint64_t					m_Res4{ 0 };	
+    uint64_t					m_Res2{ 0 };	
+    PktBlob                     m_PktBlob;	
 };
 
 #pragma pack()

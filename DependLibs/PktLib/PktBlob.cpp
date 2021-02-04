@@ -12,71 +12,38 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "BinaryBlob.h"
-#include "IsBigEndianCpu.h"
-#include "VxGUID.h"
-#include "VxDebug.h"
+#include "PktBlob.h"
+#include <CoreLib/IsBigEndianCpu.h>
+#include <CoreLib/VxGUID.h>
+#include <CoreLib/VxDebug.h>
 #include <memory.h>
 
 //============================================================================
-bool BinaryBlob::createStorage( int maxStorageLen, bool useNetworkOrder )
+bool PktBlob::setBlobData( uint8_t* blob, int len )
 {
-    if( maxStorageLen <= 0 )
+    if( 0 == len || !blob )
     {
-        LogMsg( LOG_ERROR, "BinaryBlob createStorage invalid param" );
-        return false;
+        LogMsg( LOG_ERROR, "PktBlob setBlobData invalid param" );
     }
-
-    m_UseNetworkOrder = useNetworkOrder;
-    m_BlobData = new uint8_t[ maxStorageLen + sizeof( int ) ];
-    m_MaxDataLen = maxStorageLen;
-    m_BlobLen = 0;
-    m_OwnBlob = true;
-    m_DataIdx = 0;
-    m_PastEnd = false;
-    return true;
-}
-
-//============================================================================
-bool BinaryBlob::setBlobData( uint8_t* blob, int len, bool deleteOnDestruct, bool copyTheData )
-{
-    if( m_OwnBlob )
+    else if( len <= PKT_BLOB_MAX_STORAGE_LEN )
     {
-        delete m_BlobData;
-    }
-
-    m_BlobData = nullptr;
-    m_MaxDataLen = len; 
-    m_BlobLen = len; 
-    if( !copyTheData )
-    {
-        m_OwnBlob = deleteOnDestruct;
+        m_MaxBlobLen = len; 
+        m_BlobLen = len; 
+        memcpy( m_BlobData, blob, len );
+        return true;
     }
     else
     {
-        m_OwnBlob = true;
+        LogMsg( LOG_ERROR, "PktBlob setBlobData too large" );
     }
 
-    if( len )
-    {
-        if( copyTheData )
-        {
-            m_BlobData = new uint8_t[ len + sizeof( int ) ];
-            memcpy( m_BlobData, blob, len );
-        }
-        else
-        {
-            m_BlobData = blob;
-        }
-    }
-
-    return true;
+    return false;
 }
 
 //============================================================================
-bool BinaryBlob::incDataWrite( int valSize )
+bool PktBlob::incDataWrite( int valSize )
 {
-    if( ( m_MaxDataLen - m_DataIdx ) >= valSize )
+    if( ( m_MaxBlobLen - m_DataIdx ) >= valSize )
     {
         m_DataIdx += valSize;
         if( m_DataIdx > m_BlobLen )
@@ -88,14 +55,14 @@ bool BinaryBlob::incDataWrite( int valSize )
     }
     else
     {
-        LogMsg( LOG_ERROR, "BinaryBlob Write past end" );
+        LogMsg( LOG_ERROR, "PktBlob Write past end" );
         m_PastEnd = true;
         return false;
     }
 }
 
 //============================================================================
-bool BinaryBlob::incDataRead( int valSize )
+bool PktBlob::incDataRead( int valSize )
 {
     if( ( m_BlobLen - m_DataIdx ) >= valSize )
     {
@@ -104,14 +71,14 @@ bool BinaryBlob::incDataRead( int valSize )
     }
     else
     {
-        LogMsg( LOG_ERROR, "BinaryBlob Read past end" );
+        LogMsg( LOG_ERROR, "PktBlob Read past end" );
         m_PastEnd = true;
         return false;
     }
 }
 
 //============================================================================
-bool BinaryBlob::setValue( bool& bValue )
+bool PktBlob::setValue( bool& bValue )
 {
     bool result = false;
     if( haveRoom( sizeof( uint8_t ) ) )
@@ -126,7 +93,7 @@ bool BinaryBlob::setValue( bool& bValue )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( int8_t& s8Value )
+bool PktBlob::setValue( int8_t& s8Value )
 {
     bool result = false;
     if( haveRoom( sizeof( int8_t ) ) )
@@ -140,7 +107,7 @@ bool BinaryBlob::setValue( int8_t& s8Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( uint8_t& u8Value )
+bool PktBlob::setValue( uint8_t& u8Value )
 {
     bool result = false;
     if( haveRoom( sizeof( uint8_t ) ) )
@@ -154,7 +121,7 @@ bool BinaryBlob::setValue( uint8_t& u8Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( int16_t& s16Value )
+bool PktBlob::setValue( int16_t& s16Value )
 {
     bool result = false;
     if( haveRoom( sizeof( int16_t ) ) )
@@ -177,7 +144,7 @@ bool BinaryBlob::setValue( int16_t& s16Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( uint16_t& u16Value )
+bool PktBlob::setValue( uint16_t& u16Value )
 {
     bool result = false;
     if( haveRoom( sizeof( uint16_t ) ) )
@@ -200,7 +167,7 @@ bool BinaryBlob::setValue( uint16_t& u16Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( int32_t& s32Value )
+bool PktBlob::setValue( int32_t& s32Value )
 {
     bool result = false;
     if( haveRoom( sizeof( int32_t ) ) )
@@ -223,7 +190,7 @@ bool BinaryBlob::setValue( int32_t& s32Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( uint32_t& u32Value )
+bool PktBlob::setValue( uint32_t& u32Value )
 {
     bool result = false;
     if( haveRoom( sizeof( uint32_t ) ) )
@@ -246,7 +213,7 @@ bool BinaryBlob::setValue( uint32_t& u32Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( int64_t& s64Value )
+bool PktBlob::setValue( int64_t& s64Value )
 {
     bool result = false;
     if( haveRoom( sizeof( int64_t ) ) )
@@ -269,7 +236,7 @@ bool BinaryBlob::setValue( int64_t& s64Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( uint64_t& u64Value )
+bool PktBlob::setValue( uint64_t& u64Value )
 {
     bool result = false;
     if( haveRoom( sizeof( uint64_t ) ) )
@@ -293,7 +260,7 @@ bool BinaryBlob::setValue( uint64_t& u64Value )
 
 
 //============================================================================
-bool BinaryBlob::setValue( float& f32Value )
+bool PktBlob::setValue( float& f32Value )
 {
     bool result = false;
     if( haveRoom( sizeof( float ) ) )
@@ -316,7 +283,7 @@ bool BinaryBlob::setValue( float& f32Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( double& f64Value )
+bool PktBlob::setValue( double& f64Value )
 {
     bool result = false;
     if( haveRoom( sizeof( double ) ) )
@@ -339,13 +306,13 @@ bool BinaryBlob::setValue( double& f64Value )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( std::string& strValue )
+bool PktBlob::setValue( std::string& strValue )
 {
     return setValue( strValue.c_str(), strValue.length() + 1 );
 }
 
 //============================================================================
-bool BinaryBlob::setValue( std::vector<std::string>& aoStrValues )
+bool PktBlob::setValue( std::vector<std::string>& aoStrValues )
 {
     uint32_t strCnt = ( uint32_t )aoStrValues.size();
     bool status = setValue( strCnt );
@@ -361,13 +328,13 @@ bool BinaryBlob::setValue( std::vector<std::string>& aoStrValues )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( const char * pRetBuf, int iBufLen )
+bool PktBlob::setValue( const char * pRetBuf, int iBufLen )
 {
     return setValue( ( void* )pRetBuf, iBufLen );
 }
 
 //============================================================================
-bool BinaryBlob::setValue( void * pvRetBuf, int iBufLen )
+bool PktBlob::setValue( void * pvRetBuf, int iBufLen )
 {
     if( haveRoom( iBufLen + sizeof( uint32_t ) ) )
     {
@@ -389,7 +356,7 @@ bool BinaryBlob::setValue( void * pvRetBuf, int iBufLen )
 }
 
 //============================================================================
-bool BinaryBlob::setValue( VxGUID& guid )
+bool PktBlob::setValue( VxGUID& guid )
 {
     uint64_t loPart = guid.getVxGUIDLoPart();
     uint64_t hiPart = guid.getVxGUIDHiPart();
@@ -403,7 +370,7 @@ bool BinaryBlob::setValue( VxGUID& guid )
 //============================================================================
 
 //============================================================================
-bool BinaryBlob::getValue( bool& bValue )
+bool PktBlob::getValue( bool& bValue )
 {
     if( haveData( 1 ) )
     {
@@ -416,7 +383,7 @@ bool BinaryBlob::getValue( bool& bValue )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( int8_t& s8Value )
+bool PktBlob::getValue( int8_t& s8Value )
 {
     if( haveData( 1 ) )
     {
@@ -429,7 +396,7 @@ bool BinaryBlob::getValue( int8_t& s8Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( uint8_t& u8Value )
+bool PktBlob::getValue( uint8_t& u8Value )
 {
     if( haveData( 1 ) )
     {
@@ -442,7 +409,7 @@ bool BinaryBlob::getValue( uint8_t& u8Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( uint16_t& u16Value )
+bool PktBlob::getValue( uint16_t& u16Value )
 {
     if( haveData( sizeof( uint16_t ) ) )
     {
@@ -464,7 +431,7 @@ bool BinaryBlob::getValue( uint16_t& u16Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( int32_t& s32Value )
+bool PktBlob::getValue( int32_t& s32Value )
 {
     if( haveData( sizeof( int32_t ) ) )
     {
@@ -486,7 +453,7 @@ bool BinaryBlob::getValue( int32_t& s32Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( uint32_t& u32Value )
+bool PktBlob::getValue( uint32_t& u32Value )
 {
     if( haveData( sizeof( uint32_t ) ) )
     {
@@ -508,7 +475,7 @@ bool BinaryBlob::getValue( uint32_t& u32Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( int64_t& s64Value )
+bool PktBlob::getValue( int64_t& s64Value )
 {
     if( haveData( sizeof( int64_t ) ) )
     {
@@ -530,7 +497,7 @@ bool BinaryBlob::getValue( int64_t& s64Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( uint64_t& u64Value )
+bool PktBlob::getValue( uint64_t& u64Value )
 {
     if( haveData( sizeof( uint64_t ) ) )
     {
@@ -552,7 +519,7 @@ bool BinaryBlob::getValue( uint64_t& u64Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( float& f32Value )
+bool PktBlob::getValue( float& f32Value )
 {
     if( haveData( sizeof( float ) ) )
     {
@@ -575,7 +542,7 @@ bool BinaryBlob::getValue( float& f32Value )
 
 
 //============================================================================
-bool BinaryBlob::getValue( double& f64Value )
+bool PktBlob::getValue( double& f64Value )
 {
     if( haveData( sizeof( double ) ) )
     {
@@ -597,7 +564,7 @@ bool BinaryBlob::getValue( double& f64Value )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( std::string& strValue )
+bool PktBlob::getValue( std::string& strValue )
 {
     if( haveData( sizeof( uint32_t ) ) )
     {
@@ -616,7 +583,7 @@ bool BinaryBlob::getValue( std::string& strValue )
                 }
                 else
                 {
-                    LogMsg( LOG_ERROR, "BinaryBlob::getValue string length did not match" );
+                    LogMsg( LOG_ERROR, "PktBlob::getValue string length did not match" );
                 }
             }
         }
@@ -631,7 +598,7 @@ bool BinaryBlob::getValue( std::string& strValue )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( char * pRetBuf, int& iBufLen )
+bool PktBlob::getValue( char * pRetBuf, int& iBufLen )
 {
     if( haveData( sizeof( uint32_t ) ) )
     {
@@ -659,7 +626,7 @@ bool BinaryBlob::getValue( char * pRetBuf, int& iBufLen )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( std::vector<std::string>& aoStrValues )
+bool PktBlob::getValue( std::vector<std::string>& aoStrValues )
 {
     aoStrValues.clear();
     uint32_t strCnt;
@@ -686,7 +653,7 @@ bool BinaryBlob::getValue( std::vector<std::string>& aoStrValues )
 }
 
 //============================================================================
-bool BinaryBlob::getValue( void* pvRetBuf, int& iBufLen )
+bool PktBlob::getValue( void* pvRetBuf, int& iBufLen )
 {
     if( haveData( sizeof( uint32_t ) ) )
     {
@@ -706,7 +673,7 @@ bool BinaryBlob::getValue( void* pvRetBuf, int& iBufLen )
     return false;
 }
 //============================================================================
-bool BinaryBlob::getValue( VxGUID& guid )
+bool PktBlob::getValue( VxGUID& guid )
 {
     uint64_t loPart;
     uint64_t hiPart;

@@ -694,6 +694,15 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\HostClientSearchMgr.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostSearchEntry.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostedEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\JoinedEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1485,6 +1494,15 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\HostClientSearchMgr.h">
       <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostSearchEntry.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostedEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\JoinedEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

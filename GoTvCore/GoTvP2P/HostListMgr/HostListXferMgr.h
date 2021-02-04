@@ -70,7 +70,7 @@ public:
 	virtual void				onPktHostListSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktHostListSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktHostListChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktHostListChunkReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktHostListChunkReply		    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktHostListSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktHostListSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktHostListXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -127,11 +127,11 @@ protected:
 	PluginMgr&					m_PluginMgr;
 	P2PEngine&					m_Engine;					
 	
-	HostListMgr&					m_HostListMgr;
-	HostListXferDb					m_HostListXferDb;
+	HostListMgr&				m_HostListMgr;
+	HostListXferDb				m_HostListXferDb;
 
 	VxMutex						m_HostListSendQueMutex;
-	std::vector<HostListInfo>		m_HostListSendQue;
+	std::vector<HostListInfo>	m_HostListSendQue;
 	VxThread					m_WorkerThread;
 };
 

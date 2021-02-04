@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2020 Brett R. Jones
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -30,48 +30,6 @@
 #endif //_MSC_VER
 
 //============================================================================
-void HostSearchEntry::updateLastRxTime( void )
-{
-    m_LastRxTime = GetTimeStampMs();
-}
-
-//============================================================================
-HostSearchEntry::HostSearchEntry( const HostSearchEntry& rhs )
-: m_LastRxTime( rhs.m_LastRxTime )
-, m_PluginSetting( rhs.m_PluginSetting )
-, m_Url( rhs.m_Url )
-, m_SearchStrings( rhs.m_SearchStrings )
-{
-    memcpy( &m_Ident, &rhs.m_Ident, sizeof( VxNetIdent ) );
-    m_PktHostAnn.setPktLength( 0 );
-    if( rhs.m_PktHostAnn.getPktLength() )
-    {
-        memcpy( &m_PktHostAnn, &rhs.m_PktHostAnn, rhs.m_PktHostAnn.getPktLength() );
-    }
-}
-
-//============================================================================
-HostSearchEntry& HostSearchEntry::operator=( const HostSearchEntry& rhs )
-{
-    if( this != &rhs )
-    {
-        m_LastRxTime = rhs.m_LastRxTime;
-        memcpy( &m_Ident, &rhs.m_Ident, sizeof( VxNetIdent ) );
-        m_PktHostAnn.setPktLength( 0 );
-        if( rhs.m_PktHostAnn.getPktLength() )
-        {
-            memcpy( &m_PktHostAnn, &rhs.m_PktHostAnn, rhs.m_PktHostAnn.getPktLength() );
-        }
-
-        m_PluginSetting = rhs.m_PluginSetting;
-        m_Url = rhs.m_Url;
-        m_SearchStrings = rhs.m_SearchStrings;
-    }
-
-    return *this;
-}
-
-//============================================================================
 HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
 : HostBaseMgr(engine, pluginMgr, myIdent, pluginBase)
 {
@@ -97,6 +55,57 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
         }
 
         m_SearchMutex.unlock();
+    }
+}
+
+//============================================================================
+ECommErr HostServerSearchMgr::searchRequest( EHostType hostType, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    ECommErr searchErr = haveHostList(hostType) ? eCommErrNone : eCommErrInvalidHostType;
+    if( eCommErrNone == searchErr )
+    {
+        unsigned int matchCnt = 0;
+        VxGUIDList toRemoveList;
+        VxGUIDList matchList;
+        uint64_t timeNow = GetGmtTimeMs();
+        m_SearchMutex.lock();
+        std::map<VxGUID, HostSearchEntry>& searchMap = getSearchList( hostType );
+        for( std::map<VxGUID, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+        {
+            if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_TIME_MS )
+            {
+                toRemoveList.addGuid( iter->first );
+            }
+            else if( iter->second.searchMatch( searchStr ) )
+            {
+                matchList.addGuid( iter->first );
+                addOrQueSearchMatch( searchReply, sktBase, netIdent, iter->first, iter->second );
+            }
+        }
+
+        removeEntries( searchMap, toRemoveList );
+        m_SearchMutex.unlock();
+    }
+
+    return searchErr;
+}
+
+//============================================================================
+void HostServerSearchMgr::addOrQueSearchMatch( PktHostSearchReply& searchReply, VxSktBase* sktBase, VxNetIdent* netIdent, const VxGUID& guid, const HostSearchEntry& entry )
+{
+    // asdkfgs todo
+}
+
+//============================================================================
+void HostServerSearchMgr::removeEntries( std::map<VxGUID, HostSearchEntry>& searchMap, VxGUIDList& toRemoveList )
+{
+    for( auto& iter = toRemoveList.getGuidList().begin(); iter != toRemoveList.getGuidList().end(); ++iter )
+    {
+        auto& iter2 = searchMap.find( *iter );
+        if( iter2 != searchMap.end() )
+        {
+            searchMap.erase( iter2 );
+        }
     }
 }
 

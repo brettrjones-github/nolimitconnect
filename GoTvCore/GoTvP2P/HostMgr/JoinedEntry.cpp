@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones 
+// Copyright (C) 2021 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,29 +12,42 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "HostListEntry.h"
+#include "JoinedEntry.h"
 
+#include <memory.h>
 
 //============================================================================
-void HostListEntry::setListEntryLength( uint16_t entryLen )
+JoinedEntry::JoinedEntry( const JoinedEntry& rhs )
 {
-    m_ListEntryLen = htons( entryLen );
+    *((VxConnectIdent *)this) = rhs;
 }
 
 //============================================================================
-uint16_t HostListEntry::getListEntryLength( void ) const
+JoinedEntry::JoinedEntry( const VxConnectIdent& rhs )
 {
-    return ntohs( m_ListEntryLen );
+    *this = rhs;
 }
 
 //============================================================================
-void HostListEntry::setListEntryType( uint16_t entryType )
+JoinedEntry::JoinedEntry( const HostListEntry& listEntry, int64_t postTime )
 {
-    m_ListEntryType = htons( entryType );
+	memcpy( this, &listEntry, sizeof( HostListEntry ) );
+	m_PostTimeMs = postTime;
 }
 
 //============================================================================
-uint16_t HostListEntry::getListEntryType( void ) const
+JoinedEntry& JoinedEntry::operator=( const JoinedEntry& rhs )
 {
-    return ntohs( m_ListEntryType );
+	if( this != &rhs )
+	{
+		memcpy( this, &rhs, sizeof( JoinedEntry ) );
+	}
+
+	return *this;
+}
+
+//============================================================================
+void JoinedEntry::setHostListEntry( HostListEntry& entry )
+{
+	memcpy( this, &entry, sizeof( HostListEntry ) );
 }

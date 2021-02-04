@@ -297,9 +297,9 @@ RCODE HostDb::handleAnnounce(		HostList&			anchorListIn,
 }
 
 //============================================================================
-RCODE HostDb::handleRandomConnect(		HostListEntry&	callerEntry, 
+RCODE HostDb::handleRandomConnect(		HostListEntry&	    callerEntry, 
 										HostList&			anchorListOut,
-										int64_t					s64PostTimeMs )
+										int64_t				s64PostTimeMs )
 {
 	RCODE rc = 0;
 	m_RandomConnectMutex.lock();

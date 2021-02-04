@@ -178,6 +178,7 @@
     <ClInclude Include="..\..\AllPkts.h" />
     <ClInclude Include="..\..\PktAnnList.h" />
     <ClInclude Include="..\..\PktAnnounce.h" />
+    <ClInclude Include="..\..\PktBlob.h" />
     <ClInclude Include="..\..\PktChatReq.h" />
     <ClInclude Include="..\..\PktDebugHelpers.h" />
     <ClInclude Include="..\..\PktHostAnnounce.h" />
@@ -224,6 +225,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\PktAnnList.cpp" />
     <ClCompile Include="..\..\PktAnnounce.cpp" />
+    <ClCompile Include="..\..\PktBlob.cpp" />
     <ClCompile Include="..\..\PktChatReq.cpp" />
     <ClCompile Include="..\..\PktDebugHelpers.cpp" />
     <ClCompile Include="..\..\PktHostAnnounce.cpp" />

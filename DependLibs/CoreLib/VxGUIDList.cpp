@@ -40,18 +40,13 @@ VxGUIDList::VxGUIDList()
 }
 
 //============================================================================
-VxGUIDList::~VxGUIDList()
-{
-}
-
-//============================================================================
-void VxGUIDList::addGuid( VxGUID& guid )
+void VxGUIDList::addGuid( const VxGUID& guid )
 {
 	m_GuidList.push_back( guid );
 }
 
 //============================================================================
-bool VxGUIDList::addGuidIfDoesntExist( VxGUID& guid )
+bool VxGUIDList::addGuidIfDoesntExist( const VxGUID& guid )
 {
 	if( doesGuidExist( guid ) )
 	{
@@ -63,7 +58,7 @@ bool VxGUIDList::addGuidIfDoesntExist( VxGUID& guid )
 }
 
 //============================================================================
-bool VxGUIDList::doesGuidExist( VxGUID& guid )
+bool VxGUIDList::doesGuidExist( const VxGUID& guid )
 {
 	std::vector<VxGUID>::iterator iter;
 	for( iter = m_GuidList.begin(); iter != m_GuidList.end(); ++iter )

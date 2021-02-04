@@ -35,8 +35,8 @@ public:
     EPluginType                 getPluginType( void )                                   { return m_PluginType; }
     void                        setConnectionType( EHostConnectionType connectType )    { m_ConnectType = connectType; }
     EHostConnectionType         getConnectionType( void )                               { return m_ConnectType; }
-    void                        setServicName( std::string& serviceName )               { m_ServiceName = serviceName; }
-    std::string&                getServicName( void )                                   { return m_ServiceName; }
+    void                        setServiceName( std::string& serviceName )              { m_ServiceName = serviceName; }
+    std::string&                getServiceName( void )                                  { return m_ServiceName; }
     void                        setServiceUrl( std::string& serviceUrl )                { m_ServiceUrl = serviceUrl; }
     std::string&                getServiceUrl( void )                                   { return m_ServiceUrl; }
     void                        setServiceDesc( std::string& serviceDesc )              { m_ServiceDesc = serviceDesc; }

@@ -123,15 +123,6 @@ public:
 	EPluginAccess			    getMyAccessPermissionFromHim( EPluginType ePluginType );
 	bool						isMyAccessAllowedFromHim( EPluginType ePluginType );
 
-    void						setPrimaryLanguage( uint16_t language ) { m_PrimaryLanguage = language; }
-    uint16_t					getPrimaryLanguage( void ) { return m_PrimaryLanguage; }
-
-    void						setPreferredContent( uint8_t contentType ) { m_ContentType = contentType; }
-    uint8_t					    getPreferredContent( void ) { return m_ContentType; }
-
-    void						setGender( uint8_t gender ) { m_u8Gender = gender; }
-    uint8_t					    getGender( void ) { return m_u8Gender; }
-
 	void						setPingTimeMs( uint16_t pingTime );
 	uint16_t					getPingTimeMs( void );
 
@@ -145,12 +136,12 @@ private:
 	EPluginAccess			    getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );
 
 	//=== vars ===//
-	uint16_t					m_u16AppVersion = 0;			
-	uint16_t					m_u16PingTimeMs = 0;		
-    uint16_t					m_PrimaryLanguage = 0;  // primary language user speaks
-    uint8_t					    m_ContentType = 0;      // preferred content type
-    uint8_t						m_u8Gender = 0;
-    int64_t					    m_LastSessionTimeGmtMs = 0;
+    uint16_t					m_u16AppVersion{ 0 };
+	uint16_t					m_u16PingTimeMs{ 0 };	
+    uint16_t					m_NetIdentRes1{ 0 };  
+    uint8_t					    m_NetIdentRes2{ 0 };     
+    uint8_t						m_NetIdentRes3{ 0 };
+    int64_t					    m_LastSessionTimeGmtMs{ 0 };
 };
 
 #pragma pack()
