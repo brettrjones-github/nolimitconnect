@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "PktTypes.h"
-#include "PktBlob.h"
+#include "PktBlobEntry.h"
 #include <GoTvInterface/IDefs.h>
 
 #pragma pack(1)
@@ -73,7 +73,7 @@ private:
     uint16_t                    m_TotalBlobLen{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
     uint64_t					m_Res2{ 0 };	
-    PktBlob                     m_PktBlob;	
+    PktBlobEntry                     m_PktBlob;	
 };
 
 #pragma pack()

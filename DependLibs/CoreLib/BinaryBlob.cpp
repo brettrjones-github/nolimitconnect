@@ -442,6 +442,28 @@ bool BinaryBlob::getValue( uint8_t& u8Value )
 }
 
 //============================================================================
+bool BinaryBlob::getValue( int16_t& s16Value )
+{
+    if( haveData( sizeof( int16_t ) ) )
+    {
+        int16_t* data = ( int16_t* )( &m_BlobData[ m_DataIdx ] );
+        if( m_UseNetworkOrder )
+        {
+            s16Value = ntohs(*data);
+        }
+        else
+        {
+            s16Value = *data;
+        }
+
+        incDataRead( sizeof( uint16_t ) );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
 bool BinaryBlob::getValue( uint16_t& u16Value )
 {
     if( haveData( sizeof( uint16_t ) ) )

@@ -37,27 +37,25 @@ public:
     void						getFileName( std::string &csRetFileName );
 	void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )							{ return m_FileHashId; }
-    void						calcLen( void );
-    uint16_t							getemptyLen( void );
 
-	void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
-	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
-	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
-	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
+	void						setLclSessionId( VxGUID& lclId )			    { m_LclSessionId = lclId; }
+	VxGUID&						getLclSessionId( void )						    { return m_LclSessionId; }
+	void						setRmtSessionId( VxGUID& rmtId )			    { m_RmtSessionId = rmtId; }
+	VxGUID&						getRmtSessionId( void )						    { return m_RmtSessionId; }
 
-	void						setStartOffset( int64_t offset )					{ m_s64StartOffs = htonU64( offset ); }
-	int64_t							getStartOffset( void )							{ return ntohU64( m_s64StartOffs ); }
-	void						setEndOffset( int64_t offset )						{ m_s64EndOffs = htonU64( offset ); }
-	int64_t							getEndOffset( void )							{ return ntohU64( m_s64EndOffs ); }
+	void						setStartOffset( int64_t offset )				{ m_s64StartOffs = htonU64( offset ); }
+	int64_t						getStartOffset( void )							{ return ntohU64( m_s64StartOffs ); }
+	void						setEndOffset( int64_t offset )					{ m_s64EndOffs = htonU64( offset ); }
+	int64_t						getEndOffset( void )							{ return ntohU64( m_s64EndOffs ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	int64_t							m_s64StartOffs;
-	int64_t							m_s64EndOffs;	//if 0 then get all
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
+	int64_t						m_s64StartOffs;
+	int64_t						m_s64EndOffs;	//if 0 then get all
+	uint32_t					m_u32Res1;
+	uint32_t					m_u32Res2;
 	char						m_FileName[ VX_MAX_PATH + 16 ];
 };
 
@@ -68,32 +66,31 @@ public:
 
 	void						setFileName( std::string &csFileName );
 	void						getFileName( std::string &csRetFileName );
-	void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
-	VxSha1Hash&					getFileHashId( void )							{ return m_FileHashId; }
-	void						calcLen( void );
-    uint16_t							getemptyLen( void );
+	void						setFileHashId( VxSha1Hash& fileHashId )			    { m_FileHashId = fileHashId; }
+	VxSha1Hash&					getFileHashId( void )							    { return m_FileHashId; }
+    uint16_t					getemptyLen( void );
 
-	void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
-	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
-	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
-	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
+	void						setLclSessionId( VxGUID& lclId )			        { m_LclSessionId = lclId; }
+	VxGUID&						getLclSessionId( void )						        { return m_LclSessionId; }
+	void						setRmtSessionId( VxGUID& rmtId )			        { m_RmtSessionId = rmtId; }
+	VxGUID&						getRmtSessionId( void )						        { return m_RmtSessionId; }
 
 	void						setStartOffset( int64_t offset )					{ m_s64StartOffs = htonU64( offset ); }
-	int64_t							getStartOffset( void )							{ return ntohU64( m_s64StartOffs ); }
+	int64_t						getStartOffset( void )							    { return ntohU64( m_s64StartOffs ); }
 	void						setEndOffset( int64_t offset )						{ m_s64EndOffs = htonU64( offset ); }
-	int64_t							getEndOffset( void )							{ return ntohU64( m_s64EndOffs ); }
+	int64_t						getEndOffset( void )							    { return ntohU64( m_s64EndOffs ); }
 
 	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	uint32_t					getError( void )							        { return ntohl( m_u32Error ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	int64_t							m_s64StartOffs;
-	int64_t							m_s64EndOffs;	//if 0 then get all
-	uint32_t							m_u32Error; 
-	uint32_t							m_u32Res2; 
+	int64_t						m_s64StartOffs;
+	int64_t						m_s64EndOffs;	//if 0 then get all
+	uint32_t					m_u32Error; 
+	uint32_t					m_u32Res2; 
 	char						m_FileName[ VX_MAX_PATH + 16 ];
 };
 
@@ -133,33 +130,33 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setFileOffset( int64_t offset )						{ m_s64FileOffs = htonU64( offset ); }
-	int64_t							getFileOffset( void )							{ return ntohU64( m_s64FileOffs ); }
-	void						setFileLen( int64_t len )							{ m_s64FileLen = htonU64( len ); }
-	int64_t							getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
+	void						setFileOffset( int64_t offset )					{ m_s64FileOffs = htonU64( offset ); }
+	int64_t						getFileOffset( void )							{ return ntohU64( m_s64FileOffs ); }
+	void						setFileLen( int64_t len )						{ m_s64FileLen = htonU64( len ); }
+	int64_t						getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
 
-	void						setFileState( uint16_t state )						{ m_u16State = htons( state ); }
-	uint16_t							getFileState( void )							{ return ntohs( m_u16State ); }
-	void						setFileType( uint8_t fileType )						{ m_u8FileType = fileType; }
-	uint8_t							getFileType( void )								{ return m_u8FileType; }
+	void						setFileState( uint16_t state )					{ m_u16State = htons( state ); }
+	uint16_t					getFileState( void )							{ return ntohs( m_u16State ); }
+	void						setFileType( uint8_t fileType )					{ m_u8FileType = fileType; }
+	uint8_t						getFileType( void )								{ return m_u8FileType; }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t							m_u16State;
-	uint8_t							m_u8XferCmd;
-	uint8_t							m_u8XferOption;
-	uint8_t							m_u8FileType;
-	uint8_t							m_u8Res1;
-	uint16_t							m_u16Res1;
-	int64_t							m_s64FileOffs;
-	int64_t							m_s64FileLen;
+	uint16_t					m_u16State;
+	uint8_t						m_u8XferCmd;
+	uint8_t						m_u8XferOption;
+	uint8_t						m_u8FileType;
+	uint8_t						m_u8Res1;
+	uint16_t					m_u16Res1;
+	int64_t						m_s64FileOffs;
+	int64_t						m_s64FileLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Error; 
-	uint32_t							m_u32Res2; 
+	uint32_t					m_u32Error; 
+	uint32_t					m_u32Res2; 
 	char						m_FileName[ VX_MAX_PATH + 16 ];
 };
 
@@ -182,29 +179,29 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setFileOffset( int64_t offset )						{ m_s64FileOffs = htonU64( offset ); }
-	int64_t							getFileOffset( void )							{ return ntohU64( m_s64FileOffs ); }
-	void						setFileLen( int64_t len )							{ m_s64FileLen = htonU64( len ); }
-	int64_t							getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
+	void						setFileOffset( int64_t offset )					{ m_s64FileOffs = htonU64( offset ); }
+	int64_t						xgetFileOffset( void )							{ return ntohU64( m_s64FileOffs ); }
+	void						setFileLen( int64_t len )						{ m_s64FileLen = htonU64( len ); }
+	int64_t						getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
 
-	void						setFileState( uint16_t state )						{ m_u16State = htons( state ); }
-	uint16_t							getFileState( void )							{ return ntohs( m_u16State ); }
+	void						setFileState( uint16_t state )					{ m_u16State = htons( state ); }
+	uint16_t					getFileState( void )							{ return ntohs( m_u16State ); }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t							m_u16State;
-	uint8_t							m_u8XferCmd;
-	uint8_t							m_u8XferOption;
-	uint32_t							m_u32Res;
-	int64_t							m_s64FileOffs;
-	int64_t							m_s64FileLen;
+	uint16_t					m_u16State;
+	uint8_t						m_u8XferCmd;
+	uint8_t						m_u8XferOption;
+	uint32_t					m_u32Res;
+	int64_t						m_s64FileOffs;
+	int64_t						m_s64FileLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Error; 
-	uint32_t							m_u32Res2; 
+	uint32_t					m_u32Error; 
+	uint32_t					m_u32Res2; 
 	char						m_FileName[ VX_MAX_PATH + 16 ];
 };
 
@@ -216,7 +213,7 @@ class PktFileFindReq : public VxPktHdr
 {
 public:
 	PktFileFindReq();
-	uint16_t							getEmptyLen( void ){ return (uint16_t)(sizeof( PktFileFindReq )-PKT_SHARE_FIND_FILE_MATCHNAME_MAX_LEN); };
+	uint16_t					getEmptyLen( void ){ return (uint16_t)(sizeof( PktFileFindReq )-PKT_SHARE_FIND_FILE_MATCHNAME_MAX_LEN); };
 	void						SetMatchName( std::string & csMatchName );
 	void						GetMatchName( std::string & csRetMatchName );
 
@@ -228,24 +225,24 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )							{ return m_FileHashId; }
 
-	void						setFileLen( int64_t len )							{ m_s64FileLen = htonU64( len ); }
-	int64_t							getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
+	void						setFileLen( int64_t len )						{ m_s64FileLen = htonU64( len ); }
+	int64_t						getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
 
-	void						setFileFlags( uint16_t flags )						{ m_u16FileFlags = htons( flags ); }
-	uint16_t							getFileFlags( void )							{ return ntohs( m_u16FileFlags ); }
-	void						setSizeLimitType( uint16_t type )					{ m_u16SizeLimitType = htons( type ); }
-	uint16_t							getSizeLimitType( void )						{ return ntohs( m_u16SizeLimitType ); }
+	void						setFileFlags( uint16_t flags )					{ m_u16FileFlags = htons( flags ); }
+	uint16_t					getFileFlags( void )							{ return ntohs( m_u16FileFlags ); }
+	void						setSizeLimitType( uint16_t type )				{ m_u16SizeLimitType = htons( type ); }
+	uint16_t					getSizeLimitType( void )						{ return ntohs( m_u16SizeLimitType ); }
 
 private:
-	uint16_t							m_u16FileFlags;		// types of file to match ( SEE FILE_TYPE_MASK )
-	uint16_t							m_u16SizeLimitType;	// type of file size limit 0=any size 1=At Least 2=At Most 3=Exactly
-	uint32_t							m_u32ResP1;			// reserved
-	int64_t							m_s64FileLen;		// file size 
+	uint16_t					m_u16FileFlags;		// types of file to match ( SEE FILE_TYPE_MASK )
+	uint16_t					m_u16SizeLimitType;	// type of file size limit 0=any size 1=At Least 2=At Most 3=Exactly
+	uint32_t					m_u32ResP1;			// reserved
+	int64_t						m_s64FileLen;		// file size 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Res1; 
-	uint32_t							m_u32Res2; 
+	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Res2; 
 	char						m_MatchName[ PKT_SHARE_FIND_FILE_MATCHNAME_MAX_LEN + 16 ];
 };
 
@@ -256,30 +253,30 @@ class PktFileChunkReq : public VxPktHdr
 {
 public:
 	PktFileChunkReq();
-	uint16_t							emptyLength( void );
+	uint16_t					emptyLength( void );
 	void						setChunkLen( uint16_t u16ChunkLen );
-	uint16_t							getChunkLen( void );
+	uint16_t					getChunkLen( void );
 
 	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setDataLen( uint16_t len )							{ m_u16FileChunkLen = htons( len ); }
-	uint16_t							getDataLen( void )								{ return ntohs( m_u16FileChunkLen ); }
+	void						setDataLen( uint16_t len )						{ m_u16FileChunkLen = htons( len ); }
+	uint16_t					getDataLen( void )								{ return ntohs( m_u16FileChunkLen ); }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t							m_u16Res;
-	uint16_t							m_u16FileChunkLen;
+	uint16_t					m_u16Res;
+	uint16_t					m_u16FileChunkLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t							m_u32Error; 
-	uint32_t							m_u32Res1; 
+	uint32_t					m_u32Error; 
+	uint32_t					m_u32Res1; 
 public:
-	uint8_t							m_au8FileChunk[ PKT_TYPE_FILE_MAX_DATA_LEN ];
+	uint8_t						m_au8FileChunk[ PKT_TYPE_FILE_MAX_DATA_LEN ];
 };
 
 class PktFileChunkReply : public VxPktHdr
@@ -292,18 +289,18 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setDataLen( uint16_t len )							{ m_u16FileChunkLen = htons( len ); }
-	uint16_t							getDataLen( void )								{ return ntohs( m_u16FileChunkLen ); }
+	void						setDataLen( uint16_t len )						{ m_u16FileChunkLen = htons( len ); }
+	uint16_t					getDataLen( void )								{ return ntohs( m_u16FileChunkLen ); }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t							m_u16Res;	
-	uint16_t							m_u16FileChunkLen;
+	uint16_t					m_u16Res;	
+	uint16_t					m_u16FileChunkLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t							m_u32Error; 
+	uint32_t					m_u32Error; 
 };
 
 //============================================================================
@@ -322,14 +319,14 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Error; 
+	uint32_t					m_u32Error; 
 };
 
 class PktFileSendCompleteReply : public VxPktHdr
@@ -345,14 +342,14 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Error; 
+	uint32_t					m_u32Error; 
 };
 
 class PktFileGetCompleteReq : public VxPktHdr
@@ -368,14 +365,14 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Error; 
+	uint32_t					m_u32Error; 
 };
 
 class PktFileGetCompleteReply : public VxPktHdr
@@ -391,14 +388,14 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
-	void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
-	uint32_t							getError( void )								{ return ntohl( m_u32Error ); }
+	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
+	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t							m_u32Error; 
+	uint32_t					m_u32Error; 
 };
 
 //============================================================================
@@ -418,20 +415,20 @@ public:
 	void						setTxInstance( VxGUID& instanceGuid )			{ m_TxFileInstance = instanceGuid; }
 	VxGUID&						getTxInstance( void )							{ return m_TxFileInstance; }
 
-	void						setError( uint16_t error )							{ m_u16Err = htons( error ); }
-	uint16_t							getError( void )								{ return ntohs( m_u16Err ); }
+	void						setError( uint16_t error )						{ m_u16Err = htons( error ); }
+	uint16_t					getError( void )								{ return ntohs( m_u16Err ); }
 
 private:
-	uint16_t							m_u16Err;
-	uint16_t							m_u16Res1;
-	uint32_t							m_u32ResP1;
-	uint32_t							m_u32ResP2;
-	uint32_t							m_u32ResP3;
+	uint16_t					m_u16Err;
+	uint16_t					m_u16Res1;
+	uint32_t					m_u32ResP1;
+	uint32_t					m_u32ResP2;
+	uint32_t					m_u32ResP3;
 
 	VxGUID						m_RxFileInstance; 
 	VxGUID						m_TxFileInstance; 
-	uint32_t							m_u32Res1; 
-	uint32_t							m_u32Res2;
+	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Res2;
 };
 
 #pragma pack(pop)
