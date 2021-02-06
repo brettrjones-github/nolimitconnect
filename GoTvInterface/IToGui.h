@@ -19,12 +19,12 @@
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/AssetDefs.h>
-#include <CoreLib/HostListDefs.h>
+#include <CoreLib/BlobDefs.h>
 #include <PktLib/VxCommon.h>
 
 class VxNetIdent;
 class AssetInfo;
-class HostListInfo;
+class BlobInfo;
 class VxGUID;
 
 //! IToGui is an abstract interface for calls to GUI from native C++/C code
@@ -180,9 +180,9 @@ public:
 	virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) = 0;
 
     //=== to gui host list ===//
-    virtual void				toGuiHostListAdded( HostListInfo * assetInfo ) = 0;
-    virtual void				toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
-    virtual void				toGuiHostListSessionHistory( HostListInfo * assetInfo ) = 0;
+    virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) = 0;
+    virtual void				toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
+    virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
 	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 

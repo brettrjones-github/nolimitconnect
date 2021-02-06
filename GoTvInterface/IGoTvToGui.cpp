@@ -481,20 +481,20 @@ void IGoTv::toGuiAssetSessionHistory( AssetInfo * assetInfo )
 }
 
 //============================================================================
-void IGoTv::toGuiHostListAdded( HostListInfo * hostListInfo )
+void IGoTv::toGuiBlobAdded( BlobInfo * hostListInfo )
 {
-    getAppCommon().toGuiHostListAdded( hostListInfo );
+    getAppCommon().toGuiBlobAdded( hostListInfo );
 }
 
 //============================================================================
-void IGoTv::toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 )
+void IGoTv::toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
-    getAppCommon().toGuiHostListAction( assetAction,
+    getAppCommon().toGuiBlobAction( assetAction,
                                         assetId,
                                         pos0to100000 );
 }
 //============================================================================
-void IGoTv::toGuiHostListSessionHistory( HostListInfo * hostListInfo )
+void IGoTv::toGuiBlobSessionHistory( BlobInfo * hostListInfo )
 {
-    getAppCommon().toGuiHostListSessionHistory( hostListInfo );
+    getAppCommon().toGuiBlobSessionHistory( hostListInfo );
 }

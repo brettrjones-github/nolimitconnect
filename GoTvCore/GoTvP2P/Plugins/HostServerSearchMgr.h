@@ -41,7 +41,7 @@ public:
 
 protected:
     std::map<VxGUID, HostSearchEntry>& getSearchList( EHostType hostType );
-    bool                        haveHostList( EHostType hostType );
+    bool                        haveBlob( EHostType hostType );
     bool                        fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent, bool forced );
     void                        addOrQueSearchMatch( PktHostSearchReply&searchReply, VxSktBase* sktBase, VxNetIdent* netIdent, const VxGUID& guid, const HostSearchEntry& entry );
 
@@ -50,8 +50,8 @@ protected:
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;
-    std::map<VxGUID, HostSearchEntry>   m_ChatHostList;
-    std::map<VxGUID, HostSearchEntry>   m_GroupHostList;
+    std::map<VxGUID, HostSearchEntry>   m_ChatBlob;
+    std::map<VxGUID, HostSearchEntry>   m_GroupBlob;
     std::map<VxGUID, HostSearchEntry>   m_RandConnectList;
     std::map<VxGUID, HostSearchEntry>   m_NullList; // empty list and list for network hosts
 };

@@ -37,7 +37,7 @@
 #include <GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.h>
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
-#include <GoTvCore/GoTvP2P/HostListMgr/HostListMgr.h>
+#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
@@ -80,7 +80,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_EngineParams()
     , m_NetStatusAccum( *this )
     , m_AssetMgr( *new AssetMgr( *this ) )
-    , m_HostListMgr( *new HostListMgr( *this ) )
+    , m_BlobMgr( *new BlobMgr( *this ) )
     , m_ConnectionMgr( *new ConnectionMgr( *this ) )
     , m_ConnectionList( *this )
     , m_MediaProcessor( *( new MediaProcessor( *this ) ) )

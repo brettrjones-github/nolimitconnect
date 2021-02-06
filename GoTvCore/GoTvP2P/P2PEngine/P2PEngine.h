@@ -22,7 +22,7 @@
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
-#include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
@@ -43,7 +43,7 @@ class FileShareSettings;
 class VxPeerMgr;
 class PluginMgr;
 class AssetMgr;
-class HostListMgr;
+class BlobMgr;
 class IsPortOpenTest;
 class RcConnectInfo;
 class ConnectRequest;
@@ -63,7 +63,7 @@ class RunUrlAction;
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
 					public AssetCallbackInterface,
-                    public HostListCallbackInterface,
+                    public BlobCallbackInterface,
 					public MediaCallbackInterface,
                     public IAudioCallbacks
 {
@@ -80,7 +80,7 @@ public:
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     ConnectionMgr&              getConnectionMgr( void )                        { return m_ConnectionMgr; }
-    HostListMgr&				getHostListMgr( void )							{ return m_HostListMgr; }
+    BlobMgr&				    getBlobMgr( void )							    { return m_BlobMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
@@ -360,9 +360,9 @@ public:
     //========================================================================
     // host list mgr callbacks
     //========================================================================
-    virtual void				callbackHostListAdded( HostListInfo * assetInfo ) override;
-    virtual void				callbackHostListRemoved( HostListInfo * assetInfo ) override;
-    virtual void				callbackHostListHistory( void * userData, HostListInfo * assetInfo ) override;
+    virtual void				callbackBlobAdded( BlobInfo * assetInfo ) override;
+    virtual void				callbackBlobRemoved( BlobInfo * assetInfo ) override;
+    virtual void				callbackBlobHistory( void * userData, BlobInfo * assetInfo ) override;
 
 	//========================================================================
 	// media processor callbacks
@@ -547,13 +547,13 @@ protected:
     virtual void				onPktImAliveReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
     virtual void				onPktHostAnnounce               ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobSendReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobSendReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobChunkReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobChunkReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobSendCompleteReq        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobSendCompleteReply      ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktBlobXferErr                ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
@@ -592,7 +592,7 @@ protected:
 	EngineParams				m_EngineParams;
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
-    HostListMgr&				m_HostListMgr;
+    BlobMgr&				    m_BlobMgr;
     ConnectionMgr&              m_ConnectionMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;

@@ -5,10 +5,10 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.h \
+	$$PWD/DependLibs/PktLib/PktsBlobXfer.h \
     $$PWD/DependLibs/PktLib/PktChatReq.h \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.h \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.h \
-    $$PWD/DependLibs/PktLib/PktsHostListXfer.h \
 	$$PWD/DependLibs/PktLib/PktsHostSearch.h \
     $$PWD/DependLibs/PktLib/PktLogReply.h \
     $$PWD/DependLibs/PktLib/PktLogReq.h \
@@ -50,10 +50,10 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
 SOURCES += 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktAnnounce.cpp \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.cpp \
+	$$PWD/DependLibs/PktLib/PktsBlobXfer.cpp \
     $$PWD/DependLibs/PktLib/PktChatReq.cpp \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.cpp \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.cpp \
-    $$PWD/DependLibs/PktLib/PktsHostListXfer.cpp \
 	$$PWD/DependLibs/PktLib/PktsHostSearch.cpp \
     $$PWD/DependLibs/PktLib/PktLogReply.cpp \
     $$PWD/DependLibs/PktLib/PktLogReq.cpp \

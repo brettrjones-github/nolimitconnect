@@ -133,9 +133,6 @@
     <ClInclude Include="..\..\PktHostAnnounce.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\PktsHostListXfer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\PktsFriendOffer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -146,6 +143,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\PktBlobEntry.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PktsBlobXfer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -261,9 +261,6 @@
     <ClCompile Include="..\..\PktHostAnnounce.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\PktsHostListXfer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\PktsHostJoin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -274,6 +271,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktBlobEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PktsBlobXfer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

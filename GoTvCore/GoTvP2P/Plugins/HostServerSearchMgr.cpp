@@ -38,7 +38,7 @@ HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMg
 //============================================================================
 void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )
 {
-    if( haveHostList( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
+    if( haveBlob( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
     {
         m_SearchMutex.lock();
         std::map<VxGUID, HostSearchEntry>& searchMap = getSearchList( hostType );
@@ -61,7 +61,7 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
 //============================================================================
 ECommErr HostServerSearchMgr::searchRequest( EHostType hostType, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    ECommErr searchErr = haveHostList(hostType) ? eCommErrNone : eCommErrInvalidHostType;
+    ECommErr searchErr = haveBlob(hostType) ? eCommErrNone : eCommErrInvalidHostType;
     if( eCommErrNone == searchErr )
     {
         unsigned int matchCnt = 0;
@@ -137,7 +137,7 @@ bool HostServerSearchMgr::fillSearchEntry( HostSearchEntry& searchEntry, EHostTy
 }
 
 //============================================================================
-bool HostServerSearchMgr::haveHostList( EHostType hostType )
+bool HostServerSearchMgr::haveBlob( EHostType hostType )
 {
     return hostType == eHostTypeChatRoom || hostType == eHostTypeGroup || hostType == eHostTypeRandomConnect;
 }
@@ -148,9 +148,9 @@ std::map<VxGUID, HostSearchEntry>& HostServerSearchMgr::getSearchList( EHostType
     switch( hostType )
     {
     case eHostTypeChatRoom:
-        return m_ChatHostList;
+        return m_ChatBlob;
     case eHostTypeGroup:
-        return m_GroupHostList;
+        return m_GroupBlob;
     case eHostTypeRandomConnect:
         return m_RandConnectList;
     default:

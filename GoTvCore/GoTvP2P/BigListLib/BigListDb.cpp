@@ -370,7 +370,7 @@ RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * net
 	RCODE rc = saveBigListInfoIntoBlob( poInfo, &pu8Blob, &iBlobLen );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::InsertHostList:Make Blob Error:%d\n",rc);
+		LogMsg( LOG_ERROR,"BigListDb::InsertBlob:Make Blob Error:%d\n",rc);
 		vx_assert( false );
 		return -1;
 	}

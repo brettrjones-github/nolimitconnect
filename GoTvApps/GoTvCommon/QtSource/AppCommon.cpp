@@ -1422,18 +1422,18 @@ void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID&
 }
 
 //============================================================================
-void AppCommon::toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 )
+void AppCommon::toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	if( ( eHostListActionRxNotifyNewMsg == assetAction )
-		|| ( eHostListActionRxViewingMsg == assetAction ) )
+	if( ( eBlobActionRxNotifyNewMsg == assetAction )
+		|| ( eBlobActionRxViewingMsg == assetAction ) )
 	{
 		VxGuidQt qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
-		emit signalHostListViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
+		emit signalBlobViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
 		return;
 	}
 
@@ -1445,7 +1445,7 @@ void AppCommon::toGuiHostListAction( EHostListAction assetAction, VxGUID& assetI
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiClientHostListAction( client.m_UserData, assetAction, assetId, pos0to100000 );
+		client.m_Callback->toGuiClientBlobAction( client.m_UserData, assetAction, assetId, pos0to100000 );
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
@@ -1455,7 +1455,7 @@ void AppCommon::toGuiHostListAction( EHostListAction assetAction, VxGUID& assetI
 }
 
 //============================================================================
-void AppCommon::toGuiHostListAdded( HostListInfo * assetInfo )
+void AppCommon::toGuiBlobAdded( BlobInfo * assetInfo )
 {
     if( VxIsAppShuttingDown() )
     {
@@ -1463,7 +1463,7 @@ void AppCommon::toGuiHostListAdded( HostListInfo * assetInfo )
     }
 
     if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiHostListAdded: toGuiActivityClientsLock\n" );
+        LogMsg( LOG_INFO, "toGuiBlobAdded: toGuiActivityClientsLock\n" );
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsLock();
@@ -1471,11 +1471,11 @@ void AppCommon::toGuiHostListAdded( HostListInfo * assetInfo )
     for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
     {
         ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiHostListAdded( client.m_UserData, assetInfo );
+        client.m_Callback->toGuiBlobAdded( client.m_UserData, assetInfo );
     }
 
     if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiHostListAdded toGuiActivityClientsUnlock\n" );
+        LogMsg( LOG_INFO, "toGuiBlobAdded toGuiActivityClientsUnlock\n" );
 
     toGuiActivityClientsUnlock();
 
@@ -1483,7 +1483,7 @@ void AppCommon::toGuiHostListAdded( HostListInfo * assetInfo )
 }
 
 //============================================================================
-void AppCommon::toGuiHostListSessionHistory( HostListInfo * assetInfo )
+void AppCommon::toGuiBlobSessionHistory( BlobInfo * assetInfo )
 {
     if( VxIsAppShuttingDown() )
     {
@@ -1492,7 +1492,7 @@ void AppCommon::toGuiHostListSessionHistory( HostListInfo * assetInfo )
 
     //emit signalSessionHistory( assetInfo );
     //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiHostListSessionHistory: toGuiActivityClientsLock\n" );
+    LogMsg( LOG_INFO, "toGuiBlobSessionHistory: toGuiActivityClientsLock\n" );
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsLock();
@@ -1500,11 +1500,11 @@ void AppCommon::toGuiHostListSessionHistory( HostListInfo * assetInfo )
     for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
     {
         ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiHostListSessionHistory( client.m_UserData, assetInfo );
+        client.m_Callback->toGuiBlobSessionHistory( client.m_UserData, assetInfo );
     }
 
     //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-    LogMsg( LOG_INFO, "toGuiHostListSessionHistory toGuiActivityClientsUnlock\n" );
+    LogMsg( LOG_INFO, "toGuiBlobSessionHistory toGuiActivityClientsUnlock\n" );
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsUnlock();

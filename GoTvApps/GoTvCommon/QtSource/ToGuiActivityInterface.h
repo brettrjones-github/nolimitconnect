@@ -17,7 +17,7 @@
 #include "config_gotvapps.h"
 #include <CoreLib/VxDefs.h>
 #include <CoreLib/AssetDefs.h>
-#include <CoreLib/HostListDefs.h>
+#include <CoreLib/BlobDefs.h>
 #include <PktLib/VxCommon.h>
 
 #include <GoTvInterface/IDefs.h>
@@ -28,7 +28,7 @@ class VxGUID;
 class VxNetIdent;
 class GuiOfferSession;
 class AssetInfo;
-class HostListInfo;
+class BlobInfo;
 
 class ToGuiActivityInterface
 {
@@ -61,9 +61,9 @@ public:
 	virtual void				toGuiSetGameValueVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};
 	virtual void				toGuiSetGameActionVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t actionId, int32_t varValue ){};
 
-    virtual void				toGuiClientHostListAction( void * callbackData, EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ){};
-    virtual void				toGuiHostListAdded( void * userData, HostListInfo * assetInfo ){};
-    virtual void				toGuiHostListSessionHistory( void * userData, HostListInfo * assetInfo ){};
+    virtual void				toGuiClientBlobAction( void * callbackData, EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ){};
+    virtual void				toGuiBlobAdded( void * userData, BlobInfo * assetInfo ){};
+    virtual void				toGuiBlobSessionHistory( void * userData, BlobInfo * assetInfo ){};
 
 };
 

@@ -21,49 +21,49 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxSha1Hash.h>
 
-#define PKT_TYPE_HOST_LIST_MAX_DATA_LEN		14320	// maximum length of chunk of HostList data
-#define PKT_TYPE_HOST_LIST_MAX_NAME_AND_TAG_LEN		( 4096 * 2 + 48 )	// maximum length of chunk of HostList data
+#define PKT_TYPE_BLOB_MAX_DATA_LEN		14320	// maximum length of chunk of Blob data
+#define PKT_TYPE_BLOB_MAX_NAME_AND_TAG_LEN		( 4096 * 2 + 48 )	// maximum length of chunk of Blob data
 
-#define MAX_HOST_LIST_LIST_LEN				4096	// maximum length of list of HostLists
+#define MAX_HOST_LIST_LIST_LEN				4096	// maximum length of list of Blobs
 
 
 #pragma pack(push) 
 #pragma pack(1)
 
 //============================================================================
-// HostList Offer Packets
+// Blob Offer Packets
 //============================================================================
-enum EHostListXferCmd
+enum EBlobXferCmd
 {
-	eHostListXferCmdHostListSend		    = 0,
-	eHostListXferCmdHostListGet			= 1,
-	eHostListXferCmdHostListChecksum	    = 2,
-	eHostListXferCmdHostListDirectory	    = 3
+	eBlobXferCmdBlobSend		    = 0,
+	eBlobXferCmdBlobGet			= 1,
+	eBlobXferCmdBlobChecksum	    = 2,
+	eBlobXferCmdBlobDirectory	    = 3
 };
 
-enum EHostListXferOption
+enum EBlobXferOption
 {
-	eHostListXferOptionReplaceIfExists 	= 0,
-	eHostListXferOptionResumeIfExists	    = 1,
-	eHostListXferOptionFailIfExists		= 2
+	eBlobXferOptionReplaceIfExists 	= 0,
+	eBlobXferOptionResumeIfExists	    = 1,
+	eBlobXferOptionFailIfExists		= 2
 };
 
-class HostListInfo;
+class BlobInfo;
 
-class PktHostListSendReq : public VxPktHdr
+class PktBlobSendReq : public VxPktHdr
 {
 public:
-	PktHostListSendReq();
-	void						setHostListNameAndTag( const char * pHostListName, const char * assetTag = 0 );
-	void						setHostListNameLen( uint16_t nameLen )				{ m_HostListNameLen = htons( nameLen ); }
-	uint16_t					getHostListNameLen( void )							{ return ntohs( m_HostListNameLen ); }
-	void						setHostListTagLen( uint16_t tagLen )				{ m_HostListTagLen = htons( tagLen ); }
-	uint16_t					getHostListTagLen( void )							{ return ntohs( m_HostListTagLen ); }
+	PktBlobSendReq();
+	void						setBlobNameAndTag( const char * pBlobName, const char * assetTag = 0 );
+	void						setBlobNameLen( uint16_t nameLen )				{ m_BlobNameLen = htons( nameLen ); }
+	uint16_t					getBlobNameLen( void )							{ return ntohs( m_BlobNameLen ); }
+	void						setBlobTagLen( uint16_t tagLen )				{ m_BlobTagLen = htons( tagLen ); }
+	uint16_t					getBlobTagLen( void )							{ return ntohs( m_BlobTagLen ); }
 
-	std::string					getHostListName();
-	std::string					getHostListTag();
-	void						setHostListHashId( VxSha1Hash& HostListHashId )		{ m_HostListHashId = HostListHashId; }
-	VxSha1Hash&					getHostListHashId( void )							{ return m_HostListHashId; }
+	std::string					getBlobName();
+	std::string					getBlobTag();
+	void						setBlobHashId( VxSha1Hash& BlobHashId )		{ m_BlobHashId = BlobHashId; }
+	VxSha1Hash&					getBlobHashId( void )							{ return m_BlobHashId; }
 
 	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }
@@ -80,46 +80,46 @@ public:
     void						setCreationTime( uint32_t createTime )			{ m_CreationTime = htonl( createTime ); }
 	uint32_t					getCreationTime( void )						    { return ntohl( m_CreationTime ); }
 
-	void						setHostListOffset( int64_t offset )				{ m_s64HostListOffs = htonU64( offset ); }
-	int64_t						getHostListOffset( void )						{ return ntohU64( m_s64HostListOffs ); }
-	void						setHostListLen( int64_t len )					{ m_s64HostListLen = htonU64( len ); }
-	int64_t						getHostListLen( void )							{ return ntohU64( m_s64HostListLen ); }
+	void						setBlobOffset( int64_t offset )				{ m_s64BlobOffs = htonU64( offset ); }
+	int64_t						getBlobOffset( void )						{ return ntohU64( m_s64BlobOffs ); }
+	void						setBlobLen( int64_t len )					{ m_s64BlobLen = htonU64( len ); }
+	int64_t						getBlobLen( void )							{ return ntohU64( m_s64BlobLen ); }
 
-	void						setHostListType( uint16_t HostListType )		{ m_HostListType = htons( HostListType ); }
-	uint16_t					getHostListType( void )							{ return ntohs( m_HostListType ); }
+	void						setBlobType( uint16_t BlobType )		{ m_BlobType = htons( BlobType ); }
+	uint16_t					getBlobType( void )							{ return ntohs( m_BlobType ); }
 
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
-	void						fillPktFromHostList( HostListInfo& assetInfo );
-	void						fillHostListFromPkt( HostListInfo& assetInfo );
+	void						fillPktFromBlob( BlobInfo& assetInfo );
+	void						fillBlobFromPkt( BlobInfo& assetInfo );
 
 private:
-	uint16_t					m_HostListType;
+	uint16_t					m_BlobType;
 	VxGUID						m_UniqueId;
 	VxGUID						m_CreatorId;
 	VxGUID						m_HistoryId; 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	VxSha1Hash					m_HostListHashId;
+	VxSha1Hash					m_BlobHashId;
 	uint32_t					m_u32Error; 
-	int64_t						m_s64HostListLen;
-	int64_t						m_s64HostListOffs;
+	int64_t						m_s64BlobLen;
+	int64_t						m_s64BlobOffs;
 	uint32_t					m_CreationTime;
-	uint16_t					m_HostListNameLen;
-	uint16_t					m_HostListTagLen;
+	uint16_t					m_BlobNameLen;
+	uint16_t					m_BlobTagLen;
 
 	uint32_t					m_u32Res1; 
 	uint32_t					m_u32Res2; 
 	uint32_t					m_u32Res3; 
 	uint32_t					m_u32Res4; 
-	char						m_HostListNameAndTag[ PKT_TYPE_HOST_LIST_MAX_NAME_AND_TAG_LEN ];
+	char						m_BlobNameAndTag[ PKT_TYPE_BLOB_MAX_NAME_AND_TAG_LEN ];
 };
 
-class PktHostListSendReply : public VxPktHdr
+class PktBlobSendReply : public VxPktHdr
 {
 public:
-	PktHostListSendReply();
+	PktBlobSendReply();
 
 	void						setUniqueId( VxGUID& uniqueId )					{ m_UniqueId = uniqueId; }
 	VxGUID&						getUniqueId( void )								{ return m_UniqueId; }
@@ -129,8 +129,8 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setHostListOffset( int64_t offset )				{ m_s64HostListOffs = htonU64( offset ); }
-	int64_t						getHostListOffset( void )						{ return ntohU64( m_s64HostListOffs ); }
+	void						setBlobOffset( int64_t offset )				{ m_s64BlobOffs = htonU64( offset ); }
+	int64_t						getBlobOffset( void )						{ return ntohU64( m_s64BlobOffs ); }
 
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
@@ -142,7 +142,7 @@ private:
 	uint8_t						m_u8RequiresFileXfer;
 	uint8_t						m_u8Res;
 	uint16_t					m_u16Res; 
-	int64_t						m_s64HostListOffs;
+	int64_t						m_s64BlobOffs;
 	VxGUID						m_UniqueId;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
@@ -152,12 +152,12 @@ private:
 };
 
 //============================================================================
-// HostList chunk packets
+// Blob chunk packets
 //============================================================================
-class PktHostListChunkReq : public VxPktHdr
+class PktBlobChunkReq : public VxPktHdr
 {
 public:
-	PktHostListChunkReq();
+	PktBlobChunkReq();
 	uint16_t					emptyLength( void );
 	void						setChunkLen( uint16_t u16ChunkLen ); // also calculates packet length
 	uint16_t					getChunkLen( void );
@@ -167,62 +167,62 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setDataLen( uint16_t len )						{ m_u16HostListChunkLen = htons( len ); }
-	uint16_t					getDataLen( void )								{ return ntohs( m_u16HostListChunkLen ); }
+	void						setDataLen( uint16_t len )						{ m_u16BlobChunkLen = htons( len ); }
+	uint16_t					getDataLen( void )								{ return ntohs( m_u16BlobChunkLen ); }
 
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
 	uint16_t					m_u16Res;
-	uint16_t					m_u16HostListChunkLen;
+	uint16_t					m_u16BlobChunkLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	uint32_t					m_u32Error; 
 	uint32_t					m_u32Res1; 
 public:
-	uint8_t						m_au8HostListChunk[ PKT_TYPE_HOST_LIST_MAX_DATA_LEN ];
+	uint8_t						m_au8BlobChunk[ PKT_TYPE_BLOB_MAX_DATA_LEN ];
 };
 
-class PktHostListChunkReply : public VxPktHdr
+class PktBlobChunkReply : public VxPktHdr
 {
 public:
-	PktHostListChunkReply();
+	PktBlobChunkReply();
 
 	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setDataLen( uint16_t len )						{ m_u16HostListChunkLen = htons( len ); }
-	uint16_t					getDataLen( void )								{ return ntohs( m_u16HostListChunkLen ); }
+	void						setDataLen( uint16_t len )						{ m_u16BlobChunkLen = htons( len ); }
+	uint16_t					getDataLen( void )								{ return ntohs( m_u16BlobChunkLen ); }
 
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
 	uint16_t					m_u16Res;	
-	uint16_t					m_u16HostListChunkLen;
+	uint16_t					m_u16BlobChunkLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	uint32_t					m_u32Error; 
 };
 
 //============================================================================
-// PktHostListSendComplete
+// PktBlobSendComplete
 //============================================================================
-class PktHostListSendCompleteReq : public VxPktHdr
+class PktBlobSendCompleteReq : public VxPktHdr
 {
 public:
-	PktHostListSendCompleteReq();
+	PktBlobSendCompleteReq();
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
-	void						setHostListUniqueId( VxGUID& uniqueId  )		{ m_HostListUniqueId = uniqueId; }
-	VxGUID&						getHostListHashId( void )						{ return m_HostListUniqueId; }
+	void						setBlobUniqueId( VxGUID& uniqueId  )		{ m_BlobUniqueId = uniqueId; }
+	VxGUID&						getBlobHashId( void )						{ return m_BlobUniqueId; }
 
 	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
@@ -230,23 +230,23 @@ public:
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	VxGUID						m_HostListUniqueId;
+	VxGUID						m_BlobUniqueId;
 	uint32_t					m_u32Error; 
 	uint32_t					m_u32Res1; 
 };
 
-class PktHostListSendCompleteReply : public VxPktHdr
+class PktBlobSendCompleteReply : public VxPktHdr
 {
 public:
-	PktHostListSendCompleteReply();
+	PktBlobSendCompleteReply();
 
 	void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
 	VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
-	void						setHostListUniqueId( VxGUID& uniqueId  )	{ m_HostListUniqueId = uniqueId; }
-	VxGUID&						getHostListUniqueId( void )					{ return m_HostListUniqueId; }
+	void						setBlobUniqueId( VxGUID& uniqueId  )	{ m_BlobUniqueId = uniqueId; }
+	VxGUID&						getBlobUniqueId( void )					{ return m_BlobUniqueId; }
 
 	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
@@ -254,25 +254,25 @@ public:
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	VxGUID						m_HostListUniqueId;
+	VxGUID						m_BlobUniqueId;
 	uint32_t					m_u32Error; 
 	uint32_t					m_u32Res1; 
 };
 
 //============================================================================
-// PktHostListXferErr
+// PktBlobXferErr
 //============================================================================
-class PktHostListXferErr : public VxPktHdr
+class PktBlobXferErr : public VxPktHdr
 {
 public:
-	PktHostListXferErr();
+	PktBlobXferErr();
 
 	const char *				describeError();
 
-	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxHostListInstance = instanceGuid; }
-	VxGUID& 					getRxInstance( void )							{ return m_RxHostListInstance; }
-	void						setTxInstance( VxGUID& instanceGuid )			{ m_TxHostListInstance = instanceGuid; }
-	VxGUID&						getTxInstance( void )							{ return m_TxHostListInstance; }
+	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxBlobInstance = instanceGuid; }
+	VxGUID& 					getRxInstance( void )							{ return m_RxBlobInstance; }
+	void						setTxInstance( VxGUID& instanceGuid )			{ m_TxBlobInstance = instanceGuid; }
+	VxGUID&						getTxInstance( void )							{ return m_TxBlobInstance; }
 
 	void						setError( uint16_t error )						{ m_u16Err = htons( error ); }
 	uint16_t					getError( void )								{ return ntohs( m_u16Err ); }
@@ -284,8 +284,8 @@ private:
 	uint32_t					m_u32ResP2;
 	uint32_t					m_u32ResP3;
 
-	VxGUID						m_RxHostListInstance; 
-	VxGUID						m_TxHostListInstance; 
+	VxGUID						m_RxBlobInstance; 
+	VxGUID						m_TxBlobInstance; 
 	uint32_t					m_u32Res1; 
 	uint32_t					m_u32Res2;
 };

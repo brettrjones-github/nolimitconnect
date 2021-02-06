@@ -328,10 +328,10 @@
     <ClInclude Include="..\..\StringListBinary.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\HostListDefs.h">
+    <ClInclude Include="..\..\BinaryBlob.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\BinaryBlob.h">
+    <ClInclude Include="..\..\BlobDefs.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

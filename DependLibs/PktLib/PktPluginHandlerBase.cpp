@@ -136,13 +136,13 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_ANNOUNCE ]                    = &PktPluginHandlerBase::onPktHostAnnounce;
 
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REQ ]               = &PktPluginHandlerBase::onPktHostListSendReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REPLY ]             = &PktPluginHandlerBase::onPktHostListSendReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REQ ]              = &PktPluginHandlerBase::onPktHostListChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REPLY ]            = &PktPluginHandlerBase::onPktHostListChunkReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ ]      = &PktPluginHandlerBase::onPktHostListSendCompleteReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY ]    = &PktPluginHandlerBase::onPktHostListSendCompleteReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_XFER_ERR ]               = &PktPluginHandlerBase::onPktHostListXferErr;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REQ ]                    = &PktPluginHandlerBase::onPktBlobSendReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REPLY ]                  = &PktPluginHandlerBase::onPktBlobSendReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_CHUNK_REQ ]                   = &PktPluginHandlerBase::onPktBlobChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_CHUNK_REPLY ]                 = &PktPluginHandlerBase::onPktBlobChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_COMPLETE_REQ ]           = &PktPluginHandlerBase::onPktBlobSendCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_COMPLETE_REPLY ]         = &PktPluginHandlerBase::onPktBlobSendCompleteReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_XFER_ERR ]                    = &PktPluginHandlerBase::onPktBlobXferErr;
 
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REQ ]                    = &PktPluginHandlerBase::onPktHostJoinReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REPLY ]                  = &PktPluginHandlerBase::onPktHostJoinReply;
@@ -702,43 +702,43 @@ void PktPluginHandlerBase::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pk
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
-void PktPluginHandlerBase::onPktHostListXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PktPluginHandlerBase::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }

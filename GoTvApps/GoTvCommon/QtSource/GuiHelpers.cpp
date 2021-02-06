@@ -500,7 +500,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletSettingsFileXfer:           return ePluginTypeFileXfer;
     case eAppletSettingsHostChatRoom:       return ePluginTypeChatRoomHost;
     case eAppletSettingsHostGroup:          return ePluginTypeGroupHost;
-    // case eAppletSettingsHostGroupListing:   return ePluginTypeGroupHostListing;
+    // case eAppletSettingsHostGroupListing:   return ePluginTypeGroupBlobing;
     case eAppletSettingsHostNetwork:        return ePluginTypeNetworkHost;
     case eAppletSettingsHostRandomConnect:  return ePluginTypeRandomConnectHost;
     case eAppletSettingsMessenger:          return ePluginTypeMessenger;
@@ -562,7 +562,7 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
     case ePluginTypeChatRoomHost:           return eAppletSettingsHostChatRoom;
     case ePluginTypeGroupHost:              return eAppletSettingsHostGroup;
-        // case ePluginTypeGroupHostListing:       return eAppletSettingsHostGroupListing;
+        // case ePluginTypeGroupBlobing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeNetworkHost:            return eAppletSettingsHostNetwork;
     case ePluginTypeRandomConnectHost:      return eAppletSettingsHostRandomConnect;
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
@@ -623,7 +623,7 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     // case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
     case ePluginTypeChatRoomHost:           return eAppletSettingsHostChatRoom;
     case ePluginTypeGroupHost:              return eAppletSettingsHostGroup;
-    // case ePluginTypeGroupHostListing:       return eAppletSettingsHostGroupListing;
+    // case ePluginTypeGroupBlobing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeNetworkHost:            return eAppletSettingsHostNetwork;
     case ePluginTypeRandomConnectHost:      return eAppletSettingsHostRandomConnect;
     //case ePluginTypeMessenger:              return eAppletSettingsMessenger;

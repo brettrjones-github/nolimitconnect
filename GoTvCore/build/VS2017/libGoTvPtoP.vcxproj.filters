@@ -553,33 +553,6 @@
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp">
       <Filter>GoTvP2P\NetworkMonitor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfo.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListMgr.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListMgrBase.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListRxSession.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListTxSession.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferDb.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.cpp">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineHostList.cpp">
       <Filter>GoTvP2P\P2PEngine</Filter>
     </ClCompile>
@@ -702,6 +675,33 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\JoinedEntry.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobInfo.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobInfoDb.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobRxSession.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferDb.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferSession.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobMgr.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferMgr.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobMgrBase.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1360,36 +1360,6 @@
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h">
       <Filter>GoTvP2P\NetworkMonitor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListCallbackInterface.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfo.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListMgr.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListMgrBase.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListRxSession.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListTxSession.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferDb.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.h">
-      <Filter>GoTvP2P\HostListMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h">
       <Filter>GoTvP2P\PluginSettings</Filter>
     </ClInclude>
@@ -1504,6 +1474,36 @@
     <ClInclude Include="..\..\GoTvP2P\HostMgr\JoinedEntry.h">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobCallbackInterface.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobInfo.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobInfoDb.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobRxSession.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferDb.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferSession.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobMgr.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferMgr.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobMgrBase.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1581,9 +1581,6 @@
     <Filter Include="QtBuild">
       <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvP2P\HostListMgr">
-      <UniqueIdentifier>{4ecc7908-7e5d-461b-8c9f-226e2b8ab83b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GoTvP2P\PluginSettings">
       <UniqueIdentifier>{79d61f45-dfd4-45b2-aff4-e88593f636a1}</UniqueIdentifier>
     </Filter>
@@ -1592,6 +1589,9 @@
     </Filter>
     <Filter Include="GoTvP2P\Connections">
       <UniqueIdentifier>{43bc1941-42bb-4aa6-8541-8c04a3f317c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\BlobXferMgr">
+      <UniqueIdentifier>{68c61962-7aad-4927-bc06-08d952dcc131}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

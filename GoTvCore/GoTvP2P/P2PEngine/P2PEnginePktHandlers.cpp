@@ -775,64 +775,64 @@ void P2PEngine::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostListSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListSendReq" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendReq" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostListSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListSendReply" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendReply" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostListChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListChunkReq" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobChunkReq" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostListChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListChunkReply" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobChunkReply" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostListSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListSendCompleteReq" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendCompleteReq" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostListSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListSendCompleteReply" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendCompleteReply" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
-void P2PEngine::onPktHostListXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostListXferErr" );
+    LogMsg( LOG_INFO, "P2PEngine::onPktBlobXferErr" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }

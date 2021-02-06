@@ -14,8 +14,8 @@
 //============================================================================
 
 #include "PktTypes.h"
-#include "PktsHostListXfer.h"
-#include <GoTvCore/GoTvP2P/HostListMgr/HostListInfo.h>
+#include "PktsBlobXfer.h"
+#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.h>
 
 #include <CoreLib/VxChop.h>
 #include <CoreLib/VxDebug.h>
@@ -24,194 +24,194 @@
 #include <string.h>
 
 //============================================================================
-// PktHostListSendReq
+// PktBlobSendReq
 //============================================================================
-PktHostListSendReq::PktHostListSendReq()
-: m_HostListType( (uint16_t)eHostListTypeUnknown ) 
+PktBlobSendReq::PktBlobSendReq()
+: m_BlobType( (uint16_t)eBlobTypeUnknown ) 
 , m_u32Error(0)
-, m_s64HostListLen(0)
-, m_s64HostListOffs(0) 
+, m_s64BlobLen(0)
+, m_s64BlobOffs(0) 
 , m_CreationTime(0)
-, m_HostListNameLen(0)
-, m_HostListTagLen(0)
+, m_BlobNameLen(0)
+, m_BlobTagLen(0)
 , m_u32Res1(0)
 , m_u32Res2(0)
 , m_u32Res3(0)
 , m_u32Res4(0)
 { 
-	setPktType( PKT_TYPE_HOST_LIST_SEND_REQ );
-	m_HostListNameAndTag[0] = 0;
+	setPktType( PKT_TYPE_BLOB_SEND_REQ );
+	m_BlobNameAndTag[0] = 0;
 }
 
 //============================================================================
-void PktHostListSendReq::fillPktFromHostList( HostListInfo& hostInfo )
+void PktBlobSendReq::fillPktFromBlob( BlobInfo& hostInfo )
 {
-	setHostListType( (uint16_t)hostInfo.getHostListType() );
+	setBlobType( (uint16_t)hostInfo.getBlobType() );
 	setCreatorId( hostInfo.getCreatorId() );
 	setHistoryId( hostInfo.getHistoryId() );
-	setUniqueId( hostInfo.getHostListUniqueId() );
-	setHostListHashId( hostInfo.getHostListHashId() );
-	setHostListLen( hostInfo.getHostListLength() );
+	setUniqueId( hostInfo.getBlobUniqueId() );
+	setBlobHashId( hostInfo.getBlobHashId() );
+	setBlobLen( hostInfo.getBlobLength() );
 	setCreationTime( (uint32_t) hostInfo.getCreationTime() );
-	setHostListNameAndTag( hostInfo.getHostListName().c_str(), hostInfo.getHostListTag().c_str() );
+	setBlobNameAndTag( hostInfo.getBlobName().c_str(), hostInfo.getBlobTag().c_str() );
 }
 
 //============================================================================
-void PktHostListSendReq::fillHostListFromPkt( HostListInfo& hostInfo )
+void PktBlobSendReq::fillBlobFromPkt( BlobInfo& hostInfo )
 {
-	hostInfo.setHostListType( (EHostListType)getHostListType() );
-	hostInfo.setHostListUniqueId( getUniqueId() );
+	hostInfo.setBlobType( (EBlobType)getBlobType() );
+	hostInfo.setBlobUniqueId( getUniqueId() );
 	hostInfo.setCreatorId( getCreatorId() );
 	hostInfo.setHistoryId( getHistoryId() );
-	hostInfo.setHostListHashId( getHostListHashId() );
-	hostInfo.setHostListLength( getHostListLen() );
+	hostInfo.setBlobHashId( getBlobHashId() );
+	hostInfo.setBlobLength( getBlobLen() );
 	hostInfo.setCreationTime( (time_t)getCreationTime() );
-	std::string assetName = getHostListName();
-	hostInfo.setHostListName( assetName );
-	if( getHostListTagLen() )
+	std::string assetName = getBlobName();
+	hostInfo.setBlobName( assetName );
+	if( getBlobTagLen() )
 	{
-		hostInfo.setHostListTag(  &m_HostListNameAndTag[ getHostListNameLen() ] );
+		hostInfo.setBlobTag(  &m_BlobNameAndTag[ getBlobNameLen() ] );
 	}
 }
 
 //============================================================================
-std::string PktHostListSendReq::getHostListName()
+std::string PktBlobSendReq::getBlobName()
 {
-	return m_HostListNameAndTag;
+	return m_BlobNameAndTag;
 }
 
 //============================================================================
-std::string PktHostListSendReq::getHostListTag()
+std::string PktBlobSendReq::getBlobTag()
 {
 	std::string strTag = "";
-	if( getHostListTagLen() )
+	if( getBlobTagLen() )
 	{
-		strTag = &m_HostListNameAndTag[ getHostListNameLen() ];
+		strTag = &m_BlobNameAndTag[ getBlobNameLen() ];
 	}
 
 	return strTag;
 }
 
 //============================================================================
-void PktHostListSendReq::setHostListNameAndTag( const char * pHostListName, const char * pHostListTag )
+void PktBlobSendReq::setBlobNameAndTag( const char * pBlobName, const char * pBlobTag )
 {
-	int nameLen = (int)strlen( pHostListName );
+	int nameLen = (int)strlen( pBlobName );
 	if( nameLen > 4095 )
 	{
 		nameLen = 4095;
-		strncpy( m_HostListNameAndTag, pHostListName, nameLen );
-		m_HostListNameAndTag[ nameLen ] = 0;
+		strncpy( m_BlobNameAndTag, pBlobName, nameLen );
+		m_BlobNameAndTag[ nameLen ] = 0;
 	}
 	else
 	{
-		strcpy( m_HostListNameAndTag, pHostListName );	
+		strcpy( m_BlobNameAndTag, pBlobName );	
 	}
 
 	nameLen += 1;
-	setHostListNameLen( (uint16_t)nameLen );
+	setBlobNameLen( (uint16_t)nameLen );
 
 	int tagLen = 0;
-	if( pHostListTag )
+	if( pBlobTag )
 	{
-		tagLen = (int)strlen( pHostListTag );
+		tagLen = (int)strlen( pBlobTag );
 		if( tagLen > 0 )
 		{
 			if( tagLen > 4095 )
 			{
 				tagLen = 4095;
-				strncpy( &m_HostListNameAndTag[nameLen], pHostListTag, tagLen );
-				m_HostListNameAndTag[ nameLen = tagLen ] = 0;
+				strncpy( &m_BlobNameAndTag[nameLen], pBlobTag, tagLen );
+				m_BlobNameAndTag[ nameLen = tagLen ] = 0;
 			}
 			else
 			{
-				strcpy( &m_HostListNameAndTag[nameLen], pHostListTag );	
+				strcpy( &m_BlobNameAndTag[nameLen], pBlobTag );	
 			}
 
 			tagLen += 1;
-			setHostListTagLen( (uint16_t)tagLen );
+			setBlobTagLen( (uint16_t)tagLen );
 		}
 	}
 
-	uint16_t u16PktLen = ( uint16_t )( ( sizeof( PktHostListSendReq ) - sizeof( m_HostListNameAndTag ) ) + nameLen + tagLen );
+	uint16_t u16PktLen = ( uint16_t )( ( sizeof( PktBlobSendReq ) - sizeof( m_BlobNameAndTag ) ) + nameLen + tagLen );
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
 }
 
 //============================================================================
-PktHostListSendReply::PktHostListSendReply()
+PktBlobSendReply::PktBlobSendReply()
 : m_u8RequiresFileXfer( 0 )
 , m_u8Res( 0 )
 , m_u16Res( 0 )
-, m_s64HostListOffs( 0 )
+, m_s64BlobOffs( 0 )
 , m_u32Error(0) 
 , m_u32Res1( 0 )
 , m_u32Res2(0)
 { 
-	setPktType( PKT_TYPE_HOST_LIST_SEND_REPLY );
-	setPktLength( sizeof( PktHostListSendReply ) );
+	setPktType( PKT_TYPE_BLOB_SEND_REPLY );
+	setPktLength( sizeof( PktBlobSendReply ) );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
 //============================================================================
-PktHostListChunkReq::PktHostListChunkReq()
+PktBlobChunkReq::PktBlobChunkReq()
 : m_u16Res(0)
-, m_u16HostListChunkLen(0)
+, m_u16BlobChunkLen(0)
 , m_u32Error(0)
 , m_u32Res1(0) 
 {
-	setPktType( PKT_TYPE_HOST_LIST_CHUNK_REQ );
+	setPktType( PKT_TYPE_BLOB_CHUNK_REQ );
 	setPktLength( emptyLength() );
 }
 
 //============================================================================
-uint16_t PktHostListChunkReq::emptyLength( void )
+uint16_t PktBlobChunkReq::emptyLength( void )
 { 
-	return (uint16_t)(sizeof( PktHostListChunkReq) - PKT_TYPE_HOST_LIST_MAX_DATA_LEN);
+	return (uint16_t)(sizeof( PktBlobChunkReq) - PKT_TYPE_BLOB_MAX_DATA_LEN);
 }
 
 //============================================================================
-void PktHostListChunkReq::setChunkLen( uint16_t u16ChunkLen ) 
+void PktBlobChunkReq::setChunkLen( uint16_t u16ChunkLen ) 
 { 
-	m_u16HostListChunkLen = htons( u16ChunkLen ); 
+	m_u16BlobChunkLen = htons( u16ChunkLen ); 
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( emptyLength() + u16ChunkLen ) );
 }
 
 //============================================================================
-uint16_t PktHostListChunkReq::getChunkLen( void ) 
+uint16_t PktBlobChunkReq::getChunkLen( void ) 
 { 
-	return htons( m_u16HostListChunkLen ); 
+	return htons( m_u16BlobChunkLen ); 
 }
 
 //============================================================================
-PktHostListChunkReply::PktHostListChunkReply()
+PktBlobChunkReply::PktBlobChunkReply()
 : m_u16Res(0)
-, m_u16HostListChunkLen(0)
+, m_u16BlobChunkLen(0)
 , m_u32Error(0) 
 {
-	setPktType( PKT_TYPE_HOST_LIST_CHUNK_REPLY );
-	setPktLength( (uint16_t)sizeof( PktHostListChunkReply ) );
+	setPktType( PKT_TYPE_BLOB_CHUNK_REPLY );
+	setPktLength( (uint16_t)sizeof( PktBlobChunkReply ) );
 }
 
 //============================================================================
-PktHostListSendCompleteReq::PktHostListSendCompleteReq()
+PktBlobSendCompleteReq::PktBlobSendCompleteReq()
 : m_u32Error( 0 )
 , m_u32Res1( 0 )
 {
-	setPktType(  PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ );
-	setPktLength( (uint16_t)sizeof( PktHostListSendCompleteReq ) );
+	setPktType(  PKT_TYPE_BLOB_SEND_COMPLETE_REQ );
+	setPktLength( (uint16_t)sizeof( PktBlobSendCompleteReq ) );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );}
 
 //============================================================================
-PktHostListSendCompleteReply::PktHostListSendCompleteReply()
+PktBlobSendCompleteReply::PktBlobSendCompleteReply()
 : m_u32Error( 0 )
 , m_u32Res1( 0 )
 {
-	setPktType( PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY );
-	setPktLength( (uint16_t)sizeof( PktHostListSendCompleteReply ) );
+	setPktType( PKT_TYPE_BLOB_SEND_COMPLETE_REPLY );
+	setPktLength( (uint16_t)sizeof( PktBlobSendCompleteReply ) );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
 //============================================================================
-PktHostListXferErr::PktHostListXferErr()
+PktBlobXferErr::PktBlobXferErr()
 : m_u16Err(0xffff) 
 , m_u16Res1(0)
 , m_u32ResP1(0)
@@ -220,13 +220,13 @@ PktHostListXferErr::PktHostListXferErr()
 , m_u32Res1(0) 
 , m_u32Res2(0)
 {
-	setPktType( PKT_TYPE_HOST_LIST_XFER_ERR );
-	setPktLength( sizeof( PktHostListXferErr ) );
+	setPktType( PKT_TYPE_BLOB_XFER_ERR );
+	setPktLength( sizeof( PktBlobXferErr ) );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
 //============================================================================
-const char * PktHostListXferErr::describeError( void )
+const char * PktBlobXferErr::describeError( void )
 {
 	switch( m_u16Err )
 	{

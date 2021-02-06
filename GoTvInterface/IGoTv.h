@@ -398,9 +398,9 @@ public:
     virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
-    virtual void				toGuiHostListAdded( HostListInfo * assetInfo ) override;
-    virtual void				toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
-    virtual void				toGuiHostListSessionHistory( HostListInfo * assetInfo ) override;
+    virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) override;
+    virtual void				toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+    virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
 
     //============================================================================
     //=== from gui ===//

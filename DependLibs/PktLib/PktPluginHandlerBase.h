@@ -142,13 +142,13 @@ public:
 
     virtual void				onPktHostAnnounce           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-    virtual void				onPktHostListSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktHostListSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktHostListChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktHostListChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktHostListSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-    virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktBlobXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

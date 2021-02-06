@@ -16,22 +16,22 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvInterface/IToGui.h>
 
-#include <GoTvCore/GoTvP2P/HostListMgr/HostListInfo.h>
+#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.h>
 
 //============================================================================
-void P2PEngine::callbackHostListAdded( HostListInfo * assetInfo )
+void P2PEngine::callbackBlobAdded( BlobInfo * assetInfo )
 {
-    IToGui::getToGui().toGuiHostListAdded( assetInfo );
+    IToGui::getToGui().toGuiBlobAdded( assetInfo );
 }
 
 //============================================================================
-void P2PEngine::callbackHostListRemoved( HostListInfo * assetInfo )
+void P2PEngine::callbackBlobRemoved( BlobInfo * assetInfo )
 {
-    IToGui::getToGui().toGuiHostListAction( eHostListActionRemoveFromHostListMgr, assetInfo->getHostListUniqueId(), 0 );
+    IToGui::getToGui().toGuiBlobAction( eBlobActionRemoveFromBlobMgr, assetInfo->getBlobUniqueId(), 0 );
 }
 
 //============================================================================
-void P2PEngine::callbackHostListHistory( void * /*userData*/, HostListInfo * assetInfo )
+void P2PEngine::callbackBlobHistory( void * /*userData*/, BlobInfo * assetInfo )
 {
-	IToGui::getToGui().toGuiHostListSessionHistory( assetInfo );
+	IToGui::getToGui().toGuiBlobSessionHistory( assetInfo );
 }

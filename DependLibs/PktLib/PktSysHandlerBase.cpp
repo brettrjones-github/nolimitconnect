@@ -135,13 +135,13 @@ PktHandlerBase::PktHandlerBase()
 
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_ANNOUNCE ]                    = &PktHandlerBase::onPktHostAnnounce;
 
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REQ ]               = &PktHandlerBase::onPktHostListSendReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REPLY ]             = &PktHandlerBase::onPktHostListSendReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REQ ]              = &PktHandlerBase::onPktHostListChunkReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REPLY ]            = &PktHandlerBase::onPktHostListChunkReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ ]      = &PktHandlerBase::onPktHostListSendCompleteReq;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY ]    = &PktHandlerBase::onPktHostListSendCompleteReply;
-    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_XFER_ERR ]               = &PktHandlerBase::onPktHostListXferErr;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REQ ]               = &PktHandlerBase::onPktBlobSendReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_REPLY ]             = &PktHandlerBase::onPktBlobSendReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_CHUNK_REQ ]              = &PktHandlerBase::onPktBlobChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_CHUNK_REPLY ]            = &PktHandlerBase::onPktBlobChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_COMPLETE_REQ ]      = &PktHandlerBase::onPktBlobSendCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_SEND_COMPLETE_REPLY ]    = &PktHandlerBase::onPktBlobSendCompleteReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_BLOB_XFER_ERR ]               = &PktHandlerBase::onPktBlobXferErr;
 
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REQ ]                    = &PktHandlerBase::onPktHostJoinReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REPLY ]                  = &PktHandlerBase::onPktHostJoinReply;
@@ -713,43 +713,43 @@ void PktHandlerBase::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
-void PktHandlerBase::onPktHostListXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }

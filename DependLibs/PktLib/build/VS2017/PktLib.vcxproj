@@ -187,12 +187,12 @@
     <ClInclude Include="..\..\PktPluginHandlerBase.h" />
     <ClInclude Include="..\..\PktRequestErrors.h" />
     <ClInclude Include="..\..\PktsAssetXfer.h" />
+    <ClInclude Include="..\..\PktsBlobXfer.h" />
     <ClInclude Include="..\..\PktSearch.h" />
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
     <ClInclude Include="..\..\PktsFriendOffer.h" />
     <ClInclude Include="..\..\PktsHostJoin.h" />
-    <ClInclude Include="..\..\PktsHostListXfer.h" />
     <ClInclude Include="..\..\PktsHostSearch.h" />
     <ClInclude Include="..\..\PktsImAlive.h" />
     <ClInclude Include="..\..\PktsMultiSession.h" />
@@ -233,12 +233,12 @@
     <ClCompile Include="..\..\PktLogReq.cpp" />
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp" />
     <ClCompile Include="..\..\PktsAssetXfer.cpp" />
+    <ClCompile Include="..\..\PktsBlobXfer.cpp" />
     <ClCompile Include="..\..\PktSearch.cpp" />
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />
     <ClCompile Include="..\..\PktsHostJoin.cpp" />
-    <ClCompile Include="..\..\PktsHostListXfer.cpp" />
     <ClCompile Include="..\..\PktsHostSearch.cpp" />
     <ClCompile Include="..\..\PktsImAlive.cpp" />
     <ClCompile Include="..\..\PktsMultiSession.cpp" />

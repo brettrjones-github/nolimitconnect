@@ -256,13 +256,13 @@
     <ClInclude Include="..\..\AppErr.h" />
     <ClInclude Include="..\..\AssetDefs.h" />
     <ClInclude Include="..\..\BinaryBlob.h" />
+    <ClInclude Include="..\..\BlobDefs.h" />
     <ClInclude Include="..\..\Blowfish.h" />
     <ClInclude Include="..\..\config_corelib.h" />
     <ClInclude Include="..\..\DbBase.h" />
     <ClInclude Include="..\..\DbDataset.h" />
     <ClInclude Include="..\..\DbQueryData.h" />
     <ClInclude Include="..\..\dirent_sim.h" />
-    <ClInclude Include="..\..\HostListDefs.h" />
     <ClInclude Include="..\..\IsBigEndianCpu.h" />
     <ClInclude Include="..\..\md5.h" />
     <ClInclude Include="..\..\MediaCallbackInterface.h" />
