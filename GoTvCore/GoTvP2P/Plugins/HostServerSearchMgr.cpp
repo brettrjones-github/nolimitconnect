@@ -72,7 +72,7 @@ ECommErr HostServerSearchMgr::searchRequest( EHostType hostType, PktHostSearchRe
         std::map<VxGUID, HostSearchEntry>& searchMap = getSearchList( hostType );
         for( std::map<VxGUID, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
         {
-            if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_TIME_MS )
+            if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_UPDATE_TIME_MS )
             {
                 toRemoveList.addGuid( iter->first );
             }

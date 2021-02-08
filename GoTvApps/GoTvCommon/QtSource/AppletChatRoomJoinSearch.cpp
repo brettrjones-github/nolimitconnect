@@ -39,15 +39,13 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
 
 	connect( this,					SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
 
-	connect( ui.StartSearchButton,	SIGNAL(clicked()),							this, SLOT(slotStartSearchClicked()) );
-	connect( ui.StopSearchButton,	SIGNAL(clicked()),							this, SLOT(slotStopSearchClicked()) );
+	connect( ui.m_SearchsParamWidget,	SIGNAL(signalSearchState(bool)),		this, SLOT(slotStartSearchState(bool)) );
     connect( this,					SIGNAL(signalSearchComplete()),				this, SLOT(slotSearchComplete()) );
     connect( this,					SIGNAL(signalSearchResult(VxNetIdent*)),	this, SLOT(slotSearchResult(VxNetIdent*)) ); 
 
 	if( eScanTypePeopleSearch == getScanType() )
 	{
         setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
-		ui.SearchLabel->setText( QObject::tr( "Search for name (at least 3 characters)" ) );
 	}
 }
 
@@ -107,34 +105,37 @@ void AppletChatRoomJoinSearch::slotHomeButtonClicked( void )
 }
 
 //============================================================================
-void AppletChatRoomJoinSearch::slotStartSearchClicked()
+void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
 {
-	ui.m_FriendListWidget->clear();
-	QString strSearch = ui.searchEdit->text();
-	if( 3 > strSearch.length() )
-	{
-		ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
-		errMsgBox.exec();
-	}
-	else
-	{
-		setStatusLabel( QObject::tr( "Search Started" ) );
-		m_FromGui.fromGuiStartScan( m_eScanType, 0, 0, strSearch.toStdString().c_str() );
-	}
+    if( startSearch )
+    {
+        ui.m_FriendListWidget->clear();
+        QString strSearch = getSearchText();
+        if( 3 > strSearch.length() )
+        {
+            ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
+            errMsgBox.exec();
+        }
+        else
+        {
+            setStatusLabel( QObject::tr( "Search Started" ) );
+            m_FromGui.fromGuiStartScan( m_eScanType, 0, 0, strSearch.toStdString().c_str() );
+        }
+
+    }
+    else
+    {
+        m_FromGui.fromGuiStopScan( m_eScanType );
+        setStatusLabel( QObject::tr( "Search Stopped" ) );
+    }
 }
 
 //============================================================================
-void AppletChatRoomJoinSearch::slotStopSearchClicked()
+void AppletChatRoomJoinSearch::slotSearchComplete( void )
 {
-	m_FromGui.fromGuiStopScan( m_eScanType );
-	setStatusLabel( QObject::tr( "Search Stopped" ) );
+    ui.m_SearchsParamWidget->slotSearchComplete();
 }
 
-//============================================================================
-void AppletChatRoomJoinSearch::slotSearchComplete()
-{
-	setStatusLabel( QObject::tr( "Search Complete" ) );
-}
 
 ////============================================================================
 //void AppletChatRoomJoinSearch::slotFriendClicked( VxNetIdent * netIdent )

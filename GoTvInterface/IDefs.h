@@ -14,9 +14,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "IScan.h"
-
 #include <NetLib/VxXferDefs.h>
+
+#define MIN_SEARCH_TEXT_LEN 3
 
 enum EAppModule
 {
@@ -38,7 +38,6 @@ enum EAgeType
     eMaxAgeType
 };
 
-#define MIN_SEARCH_TEXT_LEN 3
 enum ECommErr
 {
     eCommErrNone = 0,
@@ -537,6 +536,55 @@ enum ERandomConnectStatus
     eMaxRandomConnectStatusType
 };
 
+//! \public run a test like query host id state
+enum ERunTestStatus
+{
+    eRunTestStatusUnknown = 0,
+    eRunTestStatusLogMsg = 1,
+
+    eRunTestStatusTestSuccess = 2,
+    eRunTestStatusTestFail = 3,
+    eRunTestStatusTestBadParam = 4,
+    eRunTestStatusAlreadyQueued = 5,
+    eRunTestStatusConnectFail = 6,
+    eRunTestStatusConnectionDropped = 7,
+    eRunTestStatusInvalidResponse = 8,
+    eRunTestStatusMyPortIsOpen = 9,
+    eRunTestStatusMyPortIsClosed = 10,
+    eRunTestStatusTestComplete = 11,
+    eRunTestStatusTestCompleteFail = 12,
+    eRunTestStatusTestCompleteSuccess = 13,
+
+    eMaxRunTestStatusType
+};
+
+//! \public Scan/search type enumeration
+enum EScanType
+{
+    eScanTypeNone,				    //!< Unknown or not set search type
+    eScanTypeChatRoomJoinSearch,	//!< Search for Chat Room to Join
+    eScanTypeGroupJoinSearch,	    //!< Search for Group to Join
+    eScanTypeRandomConnect,		    //!< Get contacts who have done phone shake connect in last 20 seconds
+    eScanTypePeopleSearch,		    //!< Search for contact of given name 
+    eScanTypeMoodMsgSearch,		    //!< Search for contacts with given text in mood message
+    eScanTypeProfilePic,		    //!< Search for contacts with not default About Me Web Page picture
+    eScanTypeCamServer,			    //!< Search for contacts with shared web cam
+    eScanTypeFileSearch,		    //!< Search for contacts with shared files containing given search text
+    eScanTypeStoryBoard,		    //!< Search for contacts with modified Story Board Web Page
+
+    eMaxScanType
+};
+
+enum ESearchType
+{
+    eSearchNone,
+    eSearchChatRoomHost,	        //!< Search for Chat Room to Join
+    eSearchGroupHost,	            //!< Search for Group to Join
+    eSearchRandomConnectHost,		//!< Search for Random Connect Server to Join
+
+    eMaxSearchType
+};
+
 enum ESubCatagory
 {
     eSubCatagoryUnspecified = 0,
@@ -569,28 +617,6 @@ enum ESubCatagory
     eSubCatagoryOtherComic,
 
     eMaxSubCatagory
-};
-
-//! \public run a test like query host id state
-enum ERunTestStatus
-{
-    eRunTestStatusUnknown = 0,
-    eRunTestStatusLogMsg = 1,
-
-    eRunTestStatusTestSuccess = 2,
-    eRunTestStatusTestFail = 3,
-    eRunTestStatusTestBadParam = 4,
-    eRunTestStatusAlreadyQueued = 5,
-    eRunTestStatusConnectFail = 6,
-    eRunTestStatusConnectionDropped = 7,
-    eRunTestStatusInvalidResponse = 8,
-    eRunTestStatusMyPortIsOpen = 9,
-    eRunTestStatusMyPortIsClosed = 10,
-    eRunTestStatusTestComplete = 11,
-    eRunTestStatusTestCompleteFail = 12,
-    eRunTestStatusTestCompleteSuccess = 13,
-
-    eMaxRunTestStatusType
 };
 
 const char * DescribeAppModule( EAppModule appModule );
@@ -647,6 +673,11 @@ const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus );
 //! Describe run network test state as text
 const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
 
+//! Describe scan type
+const char * DescribeScanType( EScanType scanType );
+
+//! Describe scan type
+const char * DescribeSearchType( ESearchType scearchType );
 
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName

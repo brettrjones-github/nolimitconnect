@@ -511,7 +511,7 @@ void PluginBaseWebServer::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * p
 	}
 	else
 	{
-		m_Engine.getRcScan().onSearchResultError( eScanTypeProfilePic, netIdent, sktBase, poPkt->getError() );
+		m_Engine.getRcScan().onScanResultError( eScanTypeProfilePic, netIdent, sktBase, poPkt->getError() );
 	}
 }
 
@@ -522,7 +522,7 @@ void PluginBaseWebServer::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHd
 	if( poPktPicChunk->getThisDataLen() == poPktPicChunk->getTotalDataLen() )
 	{
 		// all in one packet.. no need to do sessions
-		m_Engine.getRcScan().onSearchResultProfilePic( netIdent, sktBase, poPktPicChunk->getPayloadBuffer(), poPktPicChunk->getThisDataLen() ); 
+		m_Engine.getRcScan().onScanResultProfilePic( netIdent, sktBase, poPktPicChunk->getPayloadBuffer(), poPktPicChunk->getThisDataLen() ); 
 	}
 	else
 	{
@@ -548,20 +548,20 @@ void PluginBaseWebServer::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHd
 				if( false == txPacket(netIdent, sktBase, &oPkt))
 				{
 					LogMsg( LOG_ERROR, "PluginBaseWebServer::onPktWebServerPicChunkTx\n");
-					m_Engine.getRcScan().onSearchResultError( eScanTypeProfilePic, netIdent, sktBase, 5 );
+					m_Engine.getRcScan().onScanResultError( eScanTypeProfilePic, netIdent, sktBase, 5 );
 				}
 
 				if( poSession->m_u32PicDataIdx >= poSession->m_u32PicTotalDataLen )
 				{
 					// all of picture arrived
-					m_Engine.getRcScan().onSearchResultProfilePic( netIdent, sktBase, poSession->m_paPicData, poSession->m_u32PicDataIdx ); 
+					m_Engine.getRcScan().onScanResultProfilePic( netIdent, sktBase, poSession->m_paPicData, poSession->m_u32PicDataIdx ); 
 				}
 			}
 		}
 		else
 		{
 			LogMsg( LOG_ERROR, "PluginBaseWebServer::onPktWebServerPicChunkTx Error\n");
-			m_Engine.getRcScan().onSearchResultError( eScanTypeProfilePic, netIdent, sktBase, 6 );
+			m_Engine.getRcScan().onScanResultError( eScanTypeProfilePic, netIdent, sktBase, 6 );
 		}
 	}
 }

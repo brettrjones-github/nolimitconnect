@@ -47,8 +47,8 @@ public:
     void                        setDataVersion( int ver )       { m_DataVersion = (uint8_t)ver; }
     uint8_t                     getDataVersion( void )          { return m_DataVersion; }
 
-    void                        setBlobDataType( int ver )      { m_DataType = (uint8_t)ver; }
-    uint8_t                     getBlobDataType( void )         { return m_DataType; }
+    void                        setBlobDataType( int dataType );
+    uint16_t                    getBlobDataType( void );
 
     void                        setBlobLen( int len );
     int16_t                     getBlobLen( void ) const;
@@ -113,15 +113,14 @@ protected:
     //=== vars ===//
     uint8_t                     m_UseNetworkOrder{ true };
     uint8_t                     m_BlobObjVersion{ PKT_BLOB_STORAGE_VERSION };
-    uint8_t                     m_DataVersion{ 0 };     // can be set by caller for versioning
-    uint8_t                     m_DataType{ 0 };        // can be set by caller for the type of data contained in blob
-    int16_t                     m_DataIdx{ 0 };
     uint8_t                     m_PastEnd{ 0 };  
-    uint8_t                     m_BlobRes1{ 0 };        // reserved for alignment
+    uint8_t                     m_DataVersion{ 0 };     // can be set by caller for versioning
+    uint16_t                    m_DataType{ 0 };        // can be set by caller for the type of data contained in blob
+    int16_t                     m_DataIdx{ 0 };
     // 8 bytes to here
-    int32_t                     m_BlobRes3{ 0 };        // reserved for alignment
     int16_t                     m_BlobLen{ 0 };
     int16_t                     m_MaxBlobLen{ PKT_BLOB_MAX_STORAGE_LEN };
+    int32_t                     m_BlobRes3{ 0 };        // reserved for alignment
     // 16 bytes to here
 
     uint8_t                     m_BlobData[PKT_BLOB_MAX_STORAGE_LEN + 16];

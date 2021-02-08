@@ -258,6 +258,32 @@ namespace
         "Max Phone Shake Status ",
     };
 
+    const char * ScanTypeEnumStrings[] = 
+    { 
+        "Scan None ",
+        "Chat Room Host Join Search ",
+        "Group Host Join Search ",
+        "Random Connect Join ",
+        "Person Name ",
+        "Mood Message ",
+        "Profile Picture ",
+        "Cam Server ",
+        "File Search ",
+        "Scan Story Boards ",
+
+        "Max Scan Type ",
+    };
+
+    const char * SearchTypeEnumStrings[] =
+    {
+        "Search Type None ",
+        "Search For Chat Room Host ",	        //!< Search for Chat Room to Join
+        "Search For Group Host ",	            //!< Search for Group to Join
+        "Search For Random Connect Host ",	//!< Search for Random Connect Server to Join
+
+        "MaxSearchNone"
+    };
+
     const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
 }
 
@@ -494,6 +520,28 @@ const char * DescribePluginType2( EPluginType plugType )
     }
 
     return PluginTypeEnumStrings[ plugType ]; 
+}
+
+//============================================================================
+const char * DescribeScanType( EScanType scanType )
+{
+    if(  scanType < 0 || eMaxScanType <= scanType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return ScanTypeEnumStrings[ scanType ]; 
+}
+
+//============================================================================
+const char * DescribeSearchType( ESearchType scearchType )
+{
+    if(  scearchType < 0 || eMaxSearchType <= scearchType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return SearchTypeEnumStrings[ scearchType ]; 
 }
 
 //============================================================================

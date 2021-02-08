@@ -58,12 +58,12 @@ public:
 	void						onPktFindFileReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktFindFileReq * poPkt );
 	void						onPktFindFileReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktFindFileReply * poPkt );
 
-	virtual void				onSearchResultProfilePic(	VxNetIdent *	netIdent, 
+	virtual void				onScanResultProfilePic(	VxNetIdent *	netIdent, 
 															VxSktBase *		sktBase, 
 															uint8_t *			pu8JpgData, 
 															uint32_t				u32JpgDataLen );
 
-	virtual void				onSearchResultError(	EScanType			eScanType,
+	virtual void				onScanResultError(	EScanType			eScanType,
 														VxNetIdent *		netIdent, 
 														VxSktBase *			sktBase, 
 														uint32_t					errCode ); 

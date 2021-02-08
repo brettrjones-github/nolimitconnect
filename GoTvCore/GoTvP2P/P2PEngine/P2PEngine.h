@@ -26,6 +26,7 @@
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
+#include <GoTvInterface/IDefs.h>
 #include <GoTvInterface/IFromGui.h>
 #include <GoTvInterface/IAudioInterface.h>
 

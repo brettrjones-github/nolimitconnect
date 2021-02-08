@@ -23,7 +23,7 @@ class RcScanMatchedConnection
 {
 public:
 	RcScanMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual ~RcScanMatchedConnection();
+	virtual ~RcScanMatchedConnection() = default;
 
 	RcScanMatchedConnection( const RcScanMatchedConnection& rhs );
 	RcScanMatchedConnection& operator=( const RcScanMatchedConnection& rhs );

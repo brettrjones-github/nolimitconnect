@@ -176,6 +176,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AllPkts.h" />
+    <ClInclude Include="..\..\MatchParams.h" />
     <ClInclude Include="..\..\PktAnnList.h" />
     <ClInclude Include="..\..\PktAnnounce.h" />
     <ClInclude Include="..\..\PktBlobEntry.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="..\..\PktTypes.h" />
     <ClInclude Include="..\..\PktVoiceReply.h" />
     <ClInclude Include="..\..\PktVoiceReq.h" />
+    <ClInclude Include="..\..\SearchParams.h" />
     <ClInclude Include="..\..\VxCommon.h" />
     <ClInclude Include="..\..\VxConnectId.h" />
     <ClInclude Include="..\..\VxConnectInfo.h" />
@@ -223,6 +225,7 @@
     <ClInclude Include="..\..\VxSearchFlags.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\MatchParams.cpp" />
     <ClCompile Include="..\..\PktAnnList.cpp" />
     <ClCompile Include="..\..\PktAnnounce.cpp" />
     <ClCompile Include="..\..\PktBlobEntry.cpp" />
@@ -256,6 +259,7 @@
     <ClCompile Include="..\..\PktTcpPunch.cpp" />
     <ClCompile Include="..\..\PktVoiceReply.cpp" />
     <ClCompile Include="..\..\PktVoiceReq.cpp" />
+    <ClCompile Include="..\..\SearchParams.cpp" />
     <ClCompile Include="..\..\VxCommon.cpp" />
     <ClCompile Include="..\..\VxConnectId.cpp" />
     <ClCompile Include="..\..\VxConnectInfo.cpp" />

@@ -29,11 +29,6 @@ RcScanMatchedConnection::RcScanMatchedConnection( VxNetIdent * netIdent, VxSktBa
 }
 
 //============================================================================
-RcScanMatchedConnection::~RcScanMatchedConnection()
-{
-}
-
-//============================================================================
 RcScanMatchedConnection::RcScanMatchedConnection( const RcScanMatchedConnection& rhs )
 {
 	*this = rhs;

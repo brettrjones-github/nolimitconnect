@@ -227,6 +227,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/SearchParamsWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.h \
@@ -240,7 +242,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SoundDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TextChatLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.h \
@@ -537,6 +538,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/SearchParamsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.cpp \
@@ -739,6 +741,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PluginSettingsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PopupMenuWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/SearchParamsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ServiceSettingsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SessionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SoundCtrlWidget.ui \

@@ -14,24 +14,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvDependLibrariesConfig.h>
-
-//! \public Scan/search type enumeration
-enum EScanType
-{
-	eScanTypeNone,				    //!< Unknown or not set search type
-    eScanTypeChatRoomJoinSearch,	//!< Search for Chat Room to Join
-    eScanTypeGroupJoinSearch,	    //!< Search for Group to Join
-	eScanTypeRandomConnect,		    //!< Get contacts who have done phone shake connect in last 20 seconds
-	eScanTypePeopleSearch,		    //!< Search for contact of given name 
-	eScanTypeMoodMsgSearch,		    //!< Search for contacts with given text in mood message
-	eScanTypeProfilePic,		    //!< Search for contacts with not default About Me Web Page picture
-	eScanTypeCamServer,			    //!< Search for contacts with shared web cam
-	eScanTypeFileSearch,		    //!< Search for contacts with shared files containing given search text
-	eScanTypeStoryBoard,		    //!< Search for contacts with modified Story Board Web Page
-
-	eMaxScanType
-};
+//#include <GoTvDependLibrariesConfig.h>
+#include <GoTvInterface/IDefs.h>
 
 class VxSktBase;
 class VxNetIdent;
@@ -42,15 +26,14 @@ class IScan
 public:
 
 	//! error occurred during scan/search
-	virtual void	onSearchResultError(	EScanType			eScanType,
-											VxNetIdent *		netIdent,
-											VxSktBase *			sktBase,  
-											uint32_t			errorCode ) = 0; 
+	virtual void	onScanResultError(	EScanType			eScanType,
+										VxNetIdent *		netIdent,
+										VxSktBase *			sktBase,  
+										uint32_t			errorCode ) = 0; 
 
 	//! About Me Web Page scan pictures success result
-	virtual void	onSearchResultProfilePic(	VxNetIdent *	netIdent, 
-												VxSktBase *		sktBase, 
-												uint8_t *		pu8JpgData, 
-												uint32_t		u32JpgDataLen ) = 0;
-
+	virtual void	onScanResultProfilePic(	VxNetIdent *	netIdent, 
+											VxSktBase *		sktBase, 
+											uint8_t *		pu8JpgData, 
+											uint32_t		u32JpgDataLen ) = 0;
 };

@@ -41,6 +41,18 @@ bool PktBlobEntry::setBlobData( uint8_t* blob, int len )
 }
 
 //============================================================================
+void PktBlobEntry::setBlobDataType( int dataType )     
+{ 
+    m_DataType = m_UseNetworkOrder ? htons( (uint16_t)dataType ) : (uint16_t)dataType;
+}
+
+//============================================================================
+uint16_t PktBlobEntry::getBlobDataType( void )         
+{ 
+    return m_UseNetworkOrder ? htons(m_DataType) : m_DataType; 
+}
+
+//============================================================================
 void PktBlobEntry::setBlobLen( int len )
 {
     m_BlobLen = m_UseNetworkOrder ? htons( (int16_t)len ) : (int16_t)len;

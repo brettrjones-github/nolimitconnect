@@ -35,6 +35,7 @@ public:
 	EScanType					getScanType() { return m_eScanType; }
 	void						searchResult( VxNetIdent * netIdent );
 	void						setStatusLabel( QString strMsg );
+    QString                     getSearchText( void ) { return ui.m_SearchsParamWidget->getSearchTextEdit()->text(); }
 
     virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
     virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
@@ -47,8 +48,7 @@ private slots:
 	void						slotSearchResult( VxNetIdent * netIdent );
 	void						slotSearchComplete( void );
     void						slotHomeButtonClicked( void ) override;
-	void						slotStartSearchClicked();
-	void						slotStopSearchClicked();
+	void						slotStartSearchState(bool startSearch);
 	//void						slotFriendClicked( VxNetIdent * netIdent );
 
 protected:

@@ -282,7 +282,7 @@ RcScanMatchedConnection *  RcScanAction::findMatchedConnection( VxNetIdent * net
 }
 
 //============================================================================
-void RcScanAction::onSearchResultError(	EScanType			eScanType,
+void RcScanAction::onScanResultError(	EScanType			eScanType,
 										VxNetIdent *		netIdent,
 										VxSktBase *			sktBase,  
 										uint32_t					errCode )
@@ -291,7 +291,7 @@ void RcScanAction::onSearchResultError(	EScanType			eScanType,
 }
 
 //============================================================================
-void RcScanAction::onSearchResultProfilePic(	VxNetIdent *	netIdent, 
+void RcScanAction::onScanResultProfilePic(	VxNetIdent *	netIdent, 
 												VxSktBase *		sktBase, 
 												uint8_t *			pu8JpgData, 
 												uint32_t				u32JpgDataLen )

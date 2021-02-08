@@ -322,15 +322,15 @@ void RcScan::onPktFindFileReply( VxNetIdent * netIdent, VxSktBase * sktBase, Pkt
 }
 
 //============================================================================
-void RcScan::onSearchResultError( EScanType eScanType, VxNetIdent * netIdent, VxSktBase * sktBase,  uint32_t errCode )
+void RcScan::onScanResultError( EScanType eScanType, VxNetIdent * netIdent, VxSktBase * sktBase,  uint32_t errCode )
 {
-	m_ScanAction.onSearchResultError( eScanType, netIdent, sktBase, errCode );
+	m_ScanAction.onScanResultError( eScanType, netIdent, sktBase, errCode );
 }
 
 //============================================================================
-void RcScan::onSearchResultProfilePic( VxNetIdent * netIdent, VxSktBase * sktBase, uint8_t * pu8JpgData, uint32_t u32JpgDataLen )
+void RcScan::onScanResultProfilePic( VxNetIdent * netIdent, VxSktBase * sktBase, uint8_t * pu8JpgData, uint32_t u32JpgDataLen )
 {
-	m_ScanAction.onSearchResultProfilePic( netIdent, sktBase, pu8JpgData, u32JpgDataLen );
+	m_ScanAction.onScanResultProfilePic( netIdent, sktBase, pu8JpgData, u32JpgDataLen );
 }
 
 //============================================================================

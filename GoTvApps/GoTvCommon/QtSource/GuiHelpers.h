@@ -93,19 +93,27 @@ public:
     static int                  friendStateToComboIdx( EFriendState friendState );
 
     static void                 fillAge( QComboBox * comboBox );
+    static EAgeType             getAge( QComboBox * comboBox );
+    static bool                 setAge( QComboBox * comboBox, EAgeType ageType );
     static QString              describeAge( EAgeType gender );
     static QString              describeAge( int age );
     static uint8_t              ageToIndex( EAgeType age );
 
     static void                 fillGender( QComboBox * comboBox );
+    static EGenderType          getGender( QComboBox * comboBox );
+    static bool                 setGender( QComboBox * comboBox, EGenderType gender );
     static QString              describeGender( EGenderType gender );
     static uint8_t              genderToIndex( EGenderType gender );
 
     static void                 fillLanguage( QComboBox * comboBox );
+    static ELanguageType        getLanguage( QComboBox * comboBox );
+    static bool                 setLanguage( QComboBox * comboBox, ELanguageType language );
     static QString              describeLanguage( ELanguageType language );
-    static uint8_t              languageToIndex( ELanguageType language );
+    static uint16_t             languageToIndex( ELanguageType language );
 
     static void                 fillContentRating( QComboBox * comboBox );
+    static EContentRating       getContentRating( QComboBox * comboBox );
+    static bool                 setContentRating( QComboBox * comboBox, EContentRating contentRating );
     static QString              describeContentRating( EContentRating content );
     static uint8_t              contentRatingToIndex( EContentRating content );
 

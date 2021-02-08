@@ -1300,6 +1300,26 @@ void GuiHelpers::fillGender( QComboBox * comboBox )
 }
 
 //============================================================================
+EGenderType GuiHelpers::getGender( QComboBox * comboBox )
+{
+    return (EGenderType)comboBox->currentIndex();
+}
+
+//============================================================================
+bool GuiHelpers::setGender( QComboBox * comboBox, EGenderType gender)
+{
+    if( comboBox )
+    {
+        comboBox->setCurrentIndex(genderToIndex(gender));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//============================================================================
 QString GuiHelpers::describeGender( EGenderType gender )
 {
     switch( gender )
@@ -1336,6 +1356,33 @@ void GuiHelpers::fillAge( QComboBox * comboBox )
         {
             comboBox->addItem( describeAge( (EAgeType)i ) );
         }
+    }
+}
+
+//============================================================================
+EAgeType GuiHelpers::getAge( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        return (EAgeType)comboBox->currentIndex();
+    }
+    else
+    {
+        return eAgeTypeUnspecified;
+    }
+}
+
+//============================================================================
+bool GuiHelpers::setAge( QComboBox * comboBox, EAgeType ageType)
+{
+    if( comboBox )
+    {
+        comboBox->setCurrentIndex(ageToIndex(ageType));
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
@@ -1400,6 +1447,33 @@ void GuiHelpers::fillContentRating( QComboBox * comboBox )
         {
             comboBox->addItem( describeContentRating( (EContentRating)i ) );
         }
+    }
+}
+
+//============================================================================
+EContentRating GuiHelpers::getContentRating( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        return (EContentRating)comboBox->currentIndex();
+    }
+    else
+    {
+        return eContentRatingUnspecified;
+    }
+}
+
+//============================================================================
+bool GuiHelpers::setContentRating( QComboBox * comboBox, EContentRating contentRating)
+{
+    if( comboBox )
+    {
+        comboBox->setCurrentIndex(contentRatingToIndex(contentRating));
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
@@ -1500,17 +1574,44 @@ void GuiHelpers::fillLanguage( QComboBox * comboBox )
 }
 
 //============================================================================
+ELanguageType GuiHelpers::getLanguage( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        return (ELanguageType)comboBox->currentIndex();
+    }
+    else
+    {
+        return eLangUnspecified;
+    }
+}
+
+//============================================================================
+bool GuiHelpers::setLanguage( QComboBox * comboBox, ELanguageType language)
+{
+    if( comboBox )
+    {
+        comboBox->setCurrentIndex(languageToIndex(language));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//============================================================================
 QString GuiHelpers::describeLanguage( ELanguageType language )
 {
     return AppTranslate::describeLanguage( language );
 }
 
 //============================================================================
-uint8_t GuiHelpers::languageToIndex( ELanguageType language )
+uint16_t GuiHelpers::languageToIndex( ELanguageType language )
 {
     if( ( language >= 0 ) && ( language < eMaxLanguageType ) )
     {
-        return ( uint8_t )language;
+        return ( uint16_t )language;
     }
 
     return 0;

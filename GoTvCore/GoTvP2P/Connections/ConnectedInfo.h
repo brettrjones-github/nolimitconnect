@@ -25,6 +25,7 @@
 class P2PEngine;
 class IConnectRequestCallback;
 class BigListInfo;
+class VxSktBase;
 
 class ConnectedInfo
 {

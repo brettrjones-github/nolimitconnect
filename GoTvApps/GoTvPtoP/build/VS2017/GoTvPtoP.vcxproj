@@ -940,6 +940,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1493,6 +1494,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\PopupMenuWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\RelayServiceWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ServiceSettingsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\SessionWidget.ui">
     </QtUic>
@@ -2220,6 +2222,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\AudioDefs.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/soundio/%(Filename)%(Extension)</ForceInclude>
