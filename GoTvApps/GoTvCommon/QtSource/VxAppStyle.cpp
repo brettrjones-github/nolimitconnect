@@ -497,8 +497,29 @@ void VxAppStyle::drawControl(   ControlElement			element,
     }
     else if( element == QStyle::CE_PushButtonLabel )
     {
-        // could do something custom to the text if button is disabled
-        // allow default
+        if( widget && !widget->isEnabled() )
+        {
+            QPalette palette( option->palette );
+
+            // set disabled button text color
+            QColor fgdColor( m_AppTheme.getColor( eButtonTextDisabled ) );
+
+            palette.setBrush( QPalette::Disabled, QPalette::ButtonText, fgdColor );
+
+            QStyleOptionButton myButtonOption;
+            const QStyleOptionButton *buttonOption =
+                qstyleoption_cast<const QStyleOptionButton *>(option);
+            if (buttonOption) 
+            {
+                myButtonOption = *buttonOption;
+                myButtonOption.palette = palette;
+
+                QCommonStyle::drawControl( element, &myButtonOption, painter, widget );
+                painter->restore();
+                return;
+            }
+        }
+
         QCommonStyle::drawControl( element, option, painter, widget );
         painter->restore();
         return;

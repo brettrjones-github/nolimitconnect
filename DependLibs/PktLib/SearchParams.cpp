@@ -18,7 +18,8 @@
 //============================================================================
 SearchParams::SearchParams( const SearchParams& rhs )
     : MatchParams(rhs)
-    , m_SearchGuid(rhs.m_SearchGuid)
+    , m_SearchSessionGuid(rhs.m_SearchSessionGuid)
+    , m_SearchIdentGuid(rhs.m_SearchIdentGuid)
     , m_SearchText(rhs.m_SearchText)
 {
 }
@@ -30,8 +31,9 @@ SearchParams& SearchParams::operator =( const SearchParams& rhs )
 	{
         *((MatchParams *)this) = (const MatchParams&)rhs;
 
-        m_SearchGuid        = rhs.m_SearchGuid;
-        m_SearchText		= rhs.m_SearchText;
+        m_SearchSessionGuid     = rhs.m_SearchSessionGuid;
+        m_SearchIdentGuid       = rhs.m_SearchIdentGuid;
+        m_SearchText		    = rhs.m_SearchText;
 	}
 
 	return *this;
@@ -41,7 +43,8 @@ SearchParams& SearchParams::operator =( const SearchParams& rhs )
 bool SearchParams::addToBlob( PktBlobEntry& blob )
 {
     bool result = MatchParams::addToBlob( blob );
-    result &= blob.setValue( m_SearchGuid );
+    result &= blob.setValue( m_SearchSessionGuid );
+    result &= blob.setValue( m_SearchIdentGuid );
     result &= blob.setValue( m_SearchText );
     return result;
 }
@@ -50,7 +53,8 @@ bool SearchParams::addToBlob( PktBlobEntry& blob )
 bool SearchParams::extractFromBlob( PktBlobEntry& blob )
 {
     bool result = MatchParams::extractFromBlob( blob );
-    result &= blob.getValue( m_SearchGuid );
+    result &= blob.getValue( m_SearchSessionGuid );
+    result &= blob.getValue( m_SearchIdentGuid );
     result &= blob.getValue( m_SearchText );
     return result;
 }

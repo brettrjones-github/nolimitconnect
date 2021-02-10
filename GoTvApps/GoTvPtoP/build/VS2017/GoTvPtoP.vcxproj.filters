@@ -103,6 +103,9 @@
     <Filter Include="GoTvCommon\Source Files\NetService">
       <UniqueIdentifier>{1c03ddd4-be42-473c-9889-e12658320184}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\ForReferenceOnly">
+      <UniqueIdentifier>{2ec4c7e5-ba4a-46fc-91e9-793b1d853334}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -852,9 +855,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
@@ -995,6 +995,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp">
+      <Filter>GoTvCommon\Source Files\ForReferenceOnly</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2979,9 +2982,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
@@ -2999,6 +2999,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h">
+      <Filter>GoTvCommon\Source Files\ForReferenceOnly</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

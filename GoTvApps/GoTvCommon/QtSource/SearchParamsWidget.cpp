@@ -30,7 +30,7 @@ SearchParamsWidget::SearchParamsWidget( QWidget * parent )
     ui.setupUi( this );
 
     getSearchTypeComboBox()->setVisible( false );
-    //getStopButton()->setEnabled( false );
+    getStopButton()->setEnabled( false );
 
     GuiHelpers::fillAge( ui.m_AgeComboBox );
     GuiHelpers::fillGender( ui.m_GenderComboBox );
@@ -56,24 +56,47 @@ void SearchParamsWidget::setupSearchParamsWidget( EApplet applet, EPluginType pl
 //============================================================================
 void SearchParamsWidget::slotStartSearch()
 {
-    //getStartButton()->setEnabled( false );
-    //getStopButton()->setEnabled( true );
-    emit signalSearchState( true );
+    if( !m_SearchStarted )
+    {
+        getStartButton()->setEnabled( false );
+        getStopButton()->setEnabled( true );
+        m_SearchStarted = true;
+        emit signalSearchState( true );
+    }
 }
 
 //============================================================================
 void SearchParamsWidget::slotStopSearch()
 {
-    //getStartButton()->setEnabled( true );
-    //getStopButton()->setEnabled( false );
-    emit signalSearchState( false );
+    if( m_SearchStarted )
+    {
+        m_SearchStarted = false;
+        getStartButton()->setEnabled( true );
+        getStopButton()->setEnabled( false );
+        emit signalSearchState( false );
+    }
+}
+
+//============================================================================
+void SearchParamsWidget::slotSearchCancel()
+{
+    if( m_SearchStarted )
+    {
+        m_SearchStarted = false;
+        getStartButton()->setEnabled( true );
+        getStopButton()->setEnabled( false );
+    }
 }
 
 //============================================================================
 void SearchParamsWidget::slotSearchComplete()
 {
-    //getStartButton()->setEnabled( true );
-    //getStopButton()->setEnabled( false );
+    if( m_SearchStarted )
+    {
+        m_SearchStarted = false;
+        getStartButton()->setEnabled( true );
+        getStopButton()->setEnabled( false );
+    }
 }
 
 //============================================================================
@@ -83,6 +106,9 @@ bool SearchParamsWidget::toSearchParams( SearchParams& params )
     params.setGender( GuiHelpers::getGender( ui.m_GenderComboBox ) );
     params.setLanguage( GuiHelpers::getLanguage( ui.m_LanguageComboBox ) );
     params.setContentRating( GuiHelpers::getContentRating( ui.m_ContentRatingComboBox ) );
+    std::string searchText = ui.m_SearchTextEdit->text().isEmpty() ? "" : ui.m_SearchTextEdit->text().toUtf8().constData();
+    params.setSearchText( searchText );
+    VxGUID::generateNewVxGUID(params.getSearchSessionGuid());
     return true;
 }
 
@@ -93,5 +119,7 @@ bool SearchParamsWidget::fromSearchParams( SearchParams& params )
     result &= GuiHelpers::setGender( ui.m_GenderComboBox, params.getGender() );
     result &= GuiHelpers::setLanguage( ui.m_LanguageComboBox, params.getLanguage() );
     result &= GuiHelpers::setContentRating( ui.m_ContentRatingComboBox, params.getContentRating() );
+    std::string searchText = params.getSearchText();
+    ui.m_SearchTextEdit->setText( searchText.empty() ? "" : searchText.c_str() );
     return result;
 }

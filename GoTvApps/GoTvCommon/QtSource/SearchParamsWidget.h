@@ -50,6 +50,7 @@ signals:
     void                        signalSearchState(bool searchStarted);
 
 public slots:
+    virtual void                slotSearchCancel();
     virtual void                slotSearchComplete();
 
 protected slots:
@@ -62,14 +63,15 @@ protected:
     //=== vars ===//
     Ui::SearchParamsUi          ui;
     AppCommon&                  m_MyApp;
-    EApplet                     m_EAppletType = eAppletUnknown;
-    EPluginType                 m_PluginType = ePluginTypeInvalid;
+    EApplet                     m_EAppletType{ eAppletUnknown };
+    EPluginType                 m_PluginType{ ePluginTypeInvalid };
     AppletBase*                 m_ParentApplet{ nullptr };
-    int                         m_SubPluginType = 0;
-    bool                        m_OrigPermissionIsSet = false;
-    EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
-    bool                        m_PermissionsConnected = false;
+    int                         m_SubPluginType{ 0 };
+    bool                        m_OrigPermissionIsSet{ false };
+    EFriendState                m_OrigPermissionLevel{ eFriendStateIgnore };
+    bool                        m_PermissionsConnected{ false };
     SearchParams                m_SearchParams;
+    bool                        m_SearchStarted{ false };
 };
 
 

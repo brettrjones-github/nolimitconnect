@@ -25,8 +25,13 @@ public:
 
 	SearchParams&				operator =( const SearchParams& rhs );
 
-    void						setSearchGuid( VxGUID& guid )							    { m_SearchGuid = guid; }
-    VxGUID&					    getSearchGuid( void )									    { return m_SearchGuid; }
+    // search session (unique per search instance)
+    void						setSearchSessionGuid( VxGUID& guid )						{ m_SearchSessionGuid = guid; }
+    VxGUID&					    getSearchSessionGuid( void )								{ return m_SearchSessionGuid; }
+
+    // search for identity (for person or host)
+    void						setSearchIdentGuid( VxGUID& guid )							{ m_SearchIdentGuid = guid; }
+    VxGUID&					    getSearchIndentGuid( void )									{ return m_SearchIdentGuid; }
 
 	void						setSearchText( std::string& text )							{ m_SearchText = text; }
     std::string&				getSearchText( void )									    { return m_SearchText; }
@@ -36,7 +41,8 @@ public:
 
 protected:
 	//=== vars ===//
-    VxGUID					    m_SearchGuid;
+    VxGUID					    m_SearchSessionGuid;
+    VxGUID					    m_SearchIdentGuid;
 	std::string					m_SearchText;
 };
 

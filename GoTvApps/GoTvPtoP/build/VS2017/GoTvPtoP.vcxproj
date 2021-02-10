@@ -980,9 +980,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -2266,7 +2264,6 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
@@ -2413,6 +2410,7 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

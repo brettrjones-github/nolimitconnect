@@ -229,7 +229,7 @@ public:
 	virtual QBrush				initBrush( const QColor& color );
 
     // set every color role for testing
-    virtual void				setEveryColorPossible( QPalette& palette, const QColor& bkgColor, const QColor& fgdColor );
+    static void				    setEveryColorPossible( QPalette& palette, const QColor& bkgColor, const QColor& fgdColor );
 
 protected:
 	void						setWidgetPallette( QWidget* widget, QPalette & palette );

@@ -113,6 +113,7 @@ void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
         QString strSearch = getSearchText();
         if( 3 > strSearch.length() )
         {
+            ui.m_SearchsParamWidget->slotSearchCancel();
             ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
             errMsgBox.exec();
         }
