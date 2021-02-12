@@ -121,7 +121,7 @@ bool ConnectionMgr::getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostO
 }
 
 //============================================================================
-EHostJoinStatus ConnectionMgr::lookupOrQueryId( std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
+EHostJoinStatus ConnectionMgr::lookupOrQueryJoinId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     EHostJoinStatus joinStatus = eHostJoinUnknown;
     if( urlCacheOnlineIdLookup( hostUrl, hostGuid ) )
@@ -132,11 +132,30 @@ EHostJoinStatus ConnectionMgr::lookupOrQueryId( std::string hostUrl, VxGUID& hos
     {
         joinStatus = eHostJoinQueryIdInProgress;
         std::string myUrl = m_Engine.getMyUrl();
-        m_Engine.getRunUrlAction().runUrlAction( eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
+        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
     }
 
     return joinStatus;
 }
+
+//============================================================================
+EHostSearchStatus ConnectionMgr::lookupOrQuerySearchId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
+{
+    EHostSearchStatus joinStatus = eHostSearchUnknown;
+    if( urlCacheOnlineIdLookup( hostUrl, hostGuid ) )
+    {
+        joinStatus = eHostSearchQueryIdSuccess;
+    }
+    else
+    {
+        joinStatus = eHostSearchQueryIdInProgress;
+        std::string myUrl = m_Engine.getMyUrl();
+        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
+    }
+
+    return joinStatus;
+}
+
 
 //============================================================================
 bool ConnectionMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo * bigListInfo )
@@ -248,7 +267,9 @@ void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUr
             m_ConnectionMutex.unlock();
 
             std::string myUrl = m_Engine.getMyUrl();
-            m_Engine.getRunUrlAction().runUrlAction( eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, nullptr, hostType );
+            static VxGUID sessionId;
+            VxGUID::generateNewVxGUID( sessionId );
+            m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, nullptr, hostType );
         }
     }
 }
@@ -268,7 +289,7 @@ void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID on
     updateUrlCache( hostUrl, onlineId );
     if( actionInfo.getConnectReqInterface() )
     {
-        actionInfo.getConnectReqInterface()->onUrlActionQueryIdSuccess( hostUrl, onlineId, actionInfo.getConnectReason() );
+        actionInfo.getConnectReqInterface()->onUrlActionQueryIdSuccess( actionInfo.getSessionId(), hostUrl, onlineId, actionInfo.getConnectReason() );
     }
 
     LogMsg( LOG_VERBOSE, "ConnectionMgr: Success query host %s for online id is %s",  hostUrl.c_str(),
@@ -288,7 +309,7 @@ void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestSta
     std::string hostUrl = actionInfo.getRemoteUrl();
     if( actionInfo.getConnectReqInterface() )
     {
-        actionInfo.getConnectReqInterface()->onUrlActionQueryIdFail( hostUrl, eStatus, actionInfo.getConnectReason() );
+        actionInfo.getConnectReqInterface()->onUrlActionQueryIdFail( actionInfo.getSessionId(), hostUrl, eStatus, actionInfo.getConnectReason() );
     }
 
     LogMsg( LOG_ERROR, "ConnectionMgr: query host %s for id failed %s %s",  hostUrl.c_str(),
@@ -296,7 +317,7 @@ void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestSta
 }
 
 //============================================================================
-EConnectStatus ConnectionMgr::requestConnection( std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason )
+EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason )
 {
     if( !onlineId.isVxGUIDValid() )
     {
@@ -325,14 +346,14 @@ EConnectStatus ConnectionMgr::requestConnection( std::string url, VxGUID onlineI
     }
     else
     {
-        return attemptConnection( url, onlineId, callback, retSktBase, connectReason );
+        return attemptConnection( sessionId, url, onlineId, callback, retSktBase, connectReason );
     }
 
     return eConnectStatusUnknown;
 }
 
 //============================================================================
-EConnectStatus ConnectionMgr::attemptConnection( std::string url, VxGUID& onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason )
+EConnectStatus ConnectionMgr::attemptConnection( VxGUID& sessionId, std::string url, VxGUID& onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason )
 {
     EConnectStatus connectStatus = eConnectStatusConnecting;
     VxUrl connectUrl( url.c_str() );
@@ -355,7 +376,7 @@ EConnectStatus ConnectionMgr::attemptConnection( std::string url, VxGUID& online
 }
 
 //============================================================================
-void ConnectionMgr::doneWithConnection( VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
+void ConnectionMgr::doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     m_ConnectionMutex.lock();
     auto inProgressConnection = m_ConnectRequests.find( onlineId );

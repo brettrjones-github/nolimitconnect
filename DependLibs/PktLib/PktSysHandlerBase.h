@@ -38,8 +38,8 @@ public:
 	virtual void				onPktLogReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktLogReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
-	virtual void				onPktSearchReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktSearchReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+	virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+	virtual void				onPktScanReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );

@@ -22,7 +22,7 @@
 #include "PktLogReq.h"
 #include "PktLogReply.h"
 #include "PktsAssetXfer.h"
-#include "PktSearch.h"
+#include "PktsScan.h"
 #include "PktsFileList.h"
 #include "PktsFileShare.h"
 #include "PktsImAlive.h"

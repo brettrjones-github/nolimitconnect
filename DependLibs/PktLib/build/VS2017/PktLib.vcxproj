@@ -189,7 +189,6 @@
     <ClInclude Include="..\..\PktRequestErrors.h" />
     <ClInclude Include="..\..\PktsAssetXfer.h" />
     <ClInclude Include="..\..\PktsBlobXfer.h" />
-    <ClInclude Include="..\..\PktSearch.h" />
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
     <ClInclude Include="..\..\PktsFriendOffer.h" />
@@ -201,6 +200,8 @@
     <ClInclude Include="..\..\PktsPluginOffer.h" />
     <ClInclude Include="..\..\PktsPluginSetting.h" />
     <ClInclude Include="..\..\PktsRelay.h" />
+    <ClInclude Include="..\..\PktsScan.h" />
+    <ClInclude Include="..\..\PktsSearch.h" />
     <ClInclude Include="..\..\PktsSession.h" />
     <ClInclude Include="..\..\PktsStoryBoard.h" />
     <ClInclude Include="..\..\PktsThumb.h" />
@@ -237,7 +238,6 @@
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp" />
     <ClCompile Include="..\..\PktsAssetXfer.cpp" />
     <ClCompile Include="..\..\PktsBlobXfer.cpp" />
-    <ClCompile Include="..\..\PktSearch.cpp" />
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />
@@ -249,6 +249,8 @@
     <ClCompile Include="..\..\PktsPluginOffer.cpp" />
     <ClCompile Include="..\..\PktsPluginSetting.cpp" />
     <ClCompile Include="..\..\PktsRelay.cpp" />
+    <ClCompile Include="..\..\PktsScan.cpp" />
+    <ClCompile Include="..\..\PktsSearch.cpp" />
     <ClCompile Include="..\..\PktsSession.cpp" />
     <ClCompile Include="..\..\PktsStoryBoard.cpp" />
     <ClCompile Include="..\..\PktsThumb.cpp" />

@@ -15,7 +15,6 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktLogReq.h \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktRequestErrors.h \
-    $$PWD/DependLibs/PktLib/PktSearch.h \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktTcpPunch.h \
     $$PWD/DependLibs/PktLib/PktTypes.h \
@@ -32,6 +31,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.h \
     $$PWD/DependLibs/PktLib/PktsPluginSetting.h \
     $$PWD/DependLibs/PktLib/PktsRelay.h \
+	$$PWD/DependLibs/PktLib/PktsScan.h \
+	$$PWD/DependLibs/PktLib/PktsSearch.h \
     $$PWD/DependLibs/PktLib/PktsSession.h \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.h \
     $$PWD/DependLibs/PktLib/PktsTodGame.h \
@@ -61,7 +62,6 @@ SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktLogReply.cpp \
     $$PWD/DependLibs/PktLib/PktLogReq.cpp \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.cpp \
-    $$PWD/DependLibs/PktLib/PktSearch.cpp \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.cpp \
     $$PWD/DependLibs/PktLib/PktTcpPunch.cpp \
     $$PWD/DependLibs/PktLib/PktVoiceReply.cpp \
@@ -77,6 +77,8 @@ SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginSetting.cpp \
     $$PWD/DependLibs/PktLib/PktsRelay.cpp \
+	$$PWD/DependLibs/PktLib/PktsScan.cpp \
+	$$PWD/DependLibs/PktLib/PktsSearch.cpp \
     $$PWD/DependLibs/PktLib/PktsSession.cpp \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.cpp \
     $$PWD/DependLibs/PktLib/PktsTodGame.cpp \

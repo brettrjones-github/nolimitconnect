@@ -36,6 +36,7 @@ class PluginSetting;
 class RxSession;
 class TxSession;
 class VxSktBase;
+class SearchParams;
 
 class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface
 {
@@ -133,11 +134,13 @@ public:
 
 	virtual void				onSpeexData( uint16_t * pu16SpeexData, uint16_t u16SpeexDataLen )				{};
 	virtual void				fromGuiVideoData( uint8_t * pu8VidData, uint32_t u32VidDataLen, int iRotation )	{};
-	virtual void				fromGuiSendAsset( AssetInfo& assetInfo )							{};
+	virtual void				fromGuiSendAsset( AssetInfo& assetInfo )							            {};
 	virtual bool				fromGuiMultiSessionAction( VxNetIdent *	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) { return false; }; 
 
     //=== hosting ===//
-    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl )	        {};
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	    {};
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	        {};
+    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )        {};
 
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};

@@ -19,34 +19,34 @@
 #include <PktLib/VxCommon.h>
 
 //============================================================================
-void P2PEngine::onPktSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktScanReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent )
 	{
-		m_RcScan.onPktSearchReq( netIdent, sktBase, (PktSearchReq *)pktHdr );
+		m_RcScan.onPktScanReq( netIdent, sktBase, (PktScanReq *)pktHdr );
 		return;
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::onPktSearchReq unknown ident 0x%llX 0x%llX\n", 
+		LogMsg( LOG_ERROR, "P2PEngine::onPktScanReq unknown ident 0x%llX 0x%llX\n", 
 			pktHdr->getSrcOnlineId().getVxGUIDHiPart(),
 			pktHdr->getSrcOnlineId().getVxGUIDLoPart() );
 	}
 }
 
 //============================================================================
-void P2PEngine::onPktSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktScanReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent )
 	{
-		m_RcScan.onPktSearchReply( netIdent, sktBase, (PktSearchReply *)pktHdr );
+		m_RcScan.onPktScanReply( netIdent, sktBase, (PktScanReply *)pktHdr );
 		return;
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::onPktSearchReply unknown ident 0x%llX 0x%llX\n", 
+		LogMsg( LOG_ERROR, "P2PEngine::onPktScanReply unknown ident 0x%llX 0x%llX\n", 
 			pktHdr->getSrcOnlineId().getVxGUIDHiPart(),
 			pktHdr->getSrcOnlineId().getVxGUIDLoPart() );
 	}

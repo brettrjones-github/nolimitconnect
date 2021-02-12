@@ -24,8 +24,3 @@ AppletClientBase::AppletClientBase( const char * objName, AppCommon& app, QWidge
     : AppletBase( objName, app, parent )
 {
 }
-
-//============================================================================
-AppletClientBase::~AppletClientBase()
-{
-}

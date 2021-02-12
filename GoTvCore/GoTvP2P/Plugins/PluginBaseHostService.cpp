@@ -58,7 +58,8 @@ void PluginBaseHostService::sendHostAnnounce( void )
 
     if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
     {
-        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_PktHostAnnounce, getHostAnnounceConnectReason() );
+        VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, getHostAnnounceConnectReason() );
     }
 }
 
@@ -85,14 +86,25 @@ void PluginBaseHostService::onConnectionLost( VxSktBase * sktBase )
 void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    PktHostJoinReq * joinReq = (PktHostJoinReq *)pktHdr;
     PktHostJoinReply joinReply;
-    joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-    if( ePluginAccessOk == joinReply.getAccessState() )
+    if( joinReq->isValidPkt() )
     {
+        joinReply.setSessionId( joinReq->getSessionId() );
+        joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+        if( ePluginAccessOk == joinReply.getAccessState() )
+        {
 
+        }
+
+        txPacket( netIdent, sktBase, &joinReply );
     }
-
-    txPacket( netIdent, sktBase, &joinReply );
+    else
+    {
+        LogMsg( LOG_DEBUG, "PluginBaseHostService onPktHostJoinReq Invalid Packet" );
+        joinReply.setCommError( eCommErrInvalidPkt );
+        onInvalidRxedPacket( sktBase, pktHdr, netIdent );   
+    }
 }
 
 //============================================================================

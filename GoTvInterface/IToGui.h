@@ -55,7 +55,9 @@ public:
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) = 0;
 
     /// Send host status to GUI for display
-    virtual void				toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus joinStatus, const char * msg = "" ) = 0;
     /// Send is port open test state/status to GUI
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
     /// Send relay status to GUI for display

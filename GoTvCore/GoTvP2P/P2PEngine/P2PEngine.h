@@ -206,9 +206,12 @@ public:
 
     virtual void				fromGuiNetworkSettingsChanged( void ) override;
 
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) override;
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) override;
+    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) override;
+
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
-    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr ) override;
-    virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
+    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
 																const char *	strGreeting,	// greeting text
@@ -460,8 +463,8 @@ protected:
     virtual void				onPktLogReq						( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktLogReply					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-    virtual void				onPktSearchReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktSearchReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktScanReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktScanReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
     virtual void				onPktPluginOfferReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktPluginOfferReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;

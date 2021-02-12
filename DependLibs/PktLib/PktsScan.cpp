@@ -14,31 +14,31 @@
 //============================================================================
 
 #include "PktTypes.h"
-#include "PktSearch.h"
+#include "PktsScan.h"
 
 #include <string.h>
 
 //============================================================================
-PktSearchReq::PktSearchReq()
+PktScanReq::PktScanReq()
     : m_u8SearchType(0)
     , m_u8Res1(0)
     , m_u32Res3(0)
 {
-	setPktType( PKT_TYPE_SEARCH_REQ );
+	setPktType( PKT_TYPE_SCAN_REQ );
     m_as8SearchExpression[0] = 0;
 }
 
 //============================================================================
-void PktSearchReq::calcPktLen( void )
+void PktScanReq::calcPktLen( void )
 {
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktSearchReq ) - PKT_ANN_MAX_SEARCH_STR_LEN + strlen(m_as8SearchExpression) + 1 ) );
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktScanReq ) - PKT_ANN_MAX_SEARCH_STR_LEN + strlen(m_as8SearchExpression) + 1 ) );
 }
 
 //============================================================================
-void			PktSearchReq::setSearchType( EScanType eScanType )		{ m_u8SearchType = (uint8_t)eScanType; }
-EScanType		PktSearchReq::getSearchType( void )						{ return (EScanType)m_u8SearchType; }
+void			PktScanReq::setSearchType( EScanType eScanType )		{ m_u8SearchType = (uint8_t)eScanType; }
+EScanType		PktScanReq::getSearchType( void )						{ return (EScanType)m_u8SearchType; }
 //============================================================================
-bool			PktSearchReq::setSearchExpression( const char * pExp )
+bool			PktScanReq::setSearchExpression( const char * pExp )
 {
 	m_as8SearchExpression[0] = 0;
 	if( pExp )
@@ -54,32 +54,32 @@ bool			PktSearchReq::setSearchExpression( const char * pExp )
 }
 
 //============================================================================
-const char *	PktSearchReq::getSearchExpression( void )
+const char * PktScanReq::getSearchExpression( void )
 { 
 	return m_as8SearchExpression; 
 }
 
 //============================================================================
-PktSearchReply::PktSearchReply()
+PktScanReply::PktScanReply()
 : m_u8SearchType(0)
 , m_u8Res1(0)
 , m_u16IdentMatchCount(0)
 , m_u16TotalIdentCount(0)
 , m_u16Res2(0)
 {
-    setPktType( PKT_TYPE_SEARCH_REPLY );
+    setPktType( PKT_TYPE_SCAN_REPLY );
     calcPktLen();
 }
 
 //============================================================================
-void PktSearchReply::calcPktLen( void )
+void PktScanReply::calcPktLen( void )
 {
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktSearchReply ) - sizeof(m_aoSearchMatch) + getTotalIdentCount() * sizeof( VxConnectInfo ) ) );
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktScanReply ) - sizeof(m_aoSearchMatch) + getTotalIdentCount() * sizeof( VxConnectInfo ) ) );
 }
 
 //============================================================================
-void			PktSearchReply::setSearchType( EScanType eScanType )		{ m_u8SearchType = (uint8_t)eScanType; }
-EScanType		PktSearchReply::getSearchType( void )						{ return (EScanType)m_u8SearchType; }
+void			PktScanReply::setSearchType( EScanType eScanType )		{ m_u8SearchType = (uint8_t)eScanType; }
+EScanType		PktScanReply::getSearchType( void )						{ return (EScanType)m_u8SearchType; }
 
 
 

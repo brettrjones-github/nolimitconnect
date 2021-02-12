@@ -27,7 +27,7 @@
 class PktSearchReq : public VxPktHdr, public VxSearchFlags
 {
 public:
-	PktSearchReq();
+    PktSearchReq();
 
 	void						calcPktLen( void );
 
@@ -47,7 +47,7 @@ private:
 class PktSearchReply : public VxPktHdr, public VxSearchFlags
 {
 public:
-	PktSearchReply();
+    PktSearchReply();
 
 	void calcPktLen( void );
 

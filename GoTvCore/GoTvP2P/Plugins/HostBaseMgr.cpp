@@ -21,6 +21,8 @@
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsSearch.h>
+#include <PktLib/SearchParams.h>
 
 #include <memory.h>
 
@@ -80,67 +82,248 @@ EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void HostBaseMgr::fromGuiJoinHost( EHostType hostType, std::string ptopUrl )
+void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl )
 {
     std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
 
-    if( ptopUrl.empty() && hostType == eHostTypeUnknown )
+    if( ptopUrl.empty() || hostType == eHostTypeUnknown )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinInvalidUrl );
+        m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceInvalidUrl );
         return;
     }
 
-    connectToHost( hostType, url, eConnectReasonChatRoomJoin );
+    connectToHost( hostType, sessionId, url, eConnectReasonChatRoomAnnounce );
 }
 
 //============================================================================
-void HostBaseMgr::connectToHost( EHostType hostType, std::string& url, EConnectReason connectReason )
+void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl )
+{
+    std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
+
+    if( ptopUrl.empty() || hostType == eHostTypeUnknown )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+        return;
+    }
+
+    connectToHost( hostType, sessionId, url, eConnectReasonChatRoomJoin );
+}
+
+//============================================================================
+void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
+{
+    std::string url = searchParams.getSearchUrl();
+    if( url.empty() )
+    {
+        url = m_ConnectionMgr.getDefaultHostUrl( hostType );
+    }
+
+    if( url.empty() || hostType == eHostTypeUnknown )
+    {
+        LogMsg( LOG_VERBOSE, "HostBaseMgr Invalid url or host type %d", hostType );
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidUrl );
+        return;
+    }
+
+    if( !searchParams.getSearchSessionId().isVxGUIDValid() )
+    {
+        LogMsg( LOG_VERBOSE, "HostBaseMgr Search GUID invalid" );
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidParam );
+        return;
+    }
+
+    EConnectReason connectReason = eConnectReasonUnknown;
+    bool isJoinSearch = false;
+    switch( searchParams.getSearchType() )
+    {
+    case eSearchChatRoomHost:	        //!< Search for Chat Room to Join
+        isJoinSearch = true;
+        connectReason = eConnectReasonChatRoomSearch;
+        break;
+    case eSearchGroupHost:	            //!< Search for Group to Join
+        isJoinSearch = true;
+        connectReason = eConnectReasonGroupSearch;
+        break;
+    case eSearchRandomConnectHost:	    //!< Search for Random Connect Server to Join
+        isJoinSearch = true;
+        connectReason = eConnectReasonRandomConnectSearch;
+        break;
+
+    default:
+        LogMsg( LOG_VERBOSE, "HostBaseMgr Unknown search type" );
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidParam );
+        return;
+    }
+
+    searchParams.setHostType( hostType );
+    if( !enable )
+    {
+        stopHostSearch( hostType, searchParams );
+    }
+    else
+    {
+        if( updateOrAddSearchParms( m_SearchParamsList, searchParams ) )
+        {
+            connectToHost( hostType, searchParams.getSearchSessionId(), url, connectReason );
+        }
+    }
+}
+
+//============================================================================
+void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason )
 {
     if( !url.empty() )
     {
         VxGUID hostGuid;
-        EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryId( url.c_str(), hostGuid, this, connectReason);
-        if( eHostJoinQueryIdSuccess == joinStatus )
+        if( isSearchConnectReason( connectReason ) )
         {
-            // no need for id query.. just request connection
-            onUrlActionQueryIdSuccess( url, hostGuid, connectReason );
+            EHostSearchStatus joinStatus = m_ConnectionMgr.lookupOrQuerySearchId( sessionId, url.c_str(), hostGuid, this, connectReason);
+            if( eHostSearchQueryIdSuccess == joinStatus )
+            {
+                // no need for id query.. just request connection
+                onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+            }
+            else if( eHostSearchQueryIdInProgress == joinStatus )
+            {
+                // manager is attempting to query id
+                m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdInProgress );
+            }
+            else
+            {
+                m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchInvalidUrl );
+                onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchInvalidUrl );
+            }
         }
-        else if( eHostJoinQueryIdInProgress == joinStatus )
+        else if( isJoinConnectReason( connectReason ) )
         {
-            // manager is attempting to query id
-            m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinQueryIdInProgress );
-        }
-        else
-        {
-            m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinInvalidUrl );
-            onConnectToHostFail( hostType, connectReason, eHostJoinInvalidUrl );
+            EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryJoinId( sessionId, url.c_str(), hostGuid, this, connectReason);
+            if( eHostJoinQueryIdSuccess == joinStatus )
+            {
+                // no need for id query.. just request connection
+                onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+            }
+            else if( eHostJoinQueryIdInProgress == joinStatus )
+            {
+                // manager is attempting to query id
+                m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinQueryIdInProgress );
+            }
+            else
+            {
+                m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+                onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinInvalidUrl );
+            }
         }
     }
     else
     {
         LogMsg( LOG_VERBOSE, "HostBaseMgr host %s url is empty", DescribeHostType( hostType ) );
-        onConnectToHostFail( hostType, connectReason, eHostJoinInvalidUrl );
+        if( isSearchConnectReason( connectReason ) )
+        {
+            onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchInvalidUrl );
+        }
+        else if( isJoinConnectReason( connectReason ) )
+        {
+            onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinInvalidUrl );
+        }    
+        else
+        {
+            LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+        }
     }
 }
 
 //============================================================================
-void HostBaseMgr::onConnectToHostFail( EHostType hostType, EConnectReason connectReason, EHostJoinStatus hostJoinStatus )
+bool HostBaseMgr::isAnnounceConnectReason( EConnectReason connectReason )
 {
-    LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s failed %s ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ),
-           DescribeHostJoinStatus(hostJoinStatus));
-    m_Engine.getToGui().toGuiHostJoinStatus( hostType, hostJoinStatus );
+    bool isAnnounceReason = false;
+    switch( connectReason )
+    {
+    case eConnectReasonChatRoomAnnounce:
+    case eConnectReasonGroupAnnounce:
+    case eConnectReasonRandomConnectAnnounce:
+        isAnnounceReason = true;
+        break;
+    default:
+        break;
+    }
+
+    return isAnnounceReason;
 }
 
 //============================================================================
-void HostBaseMgr::onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+bool HostBaseMgr::isJoinConnectReason( EConnectReason connectReason )
+{
+    bool isJoinReason = false;
+    switch( connectReason )
+    {
+    case eConnectReasonChatRoomJoin:
+    case eConnectReasonGroupJoin:
+    case eConnectReasonRandomConnectJoin:
+        isJoinReason = true;
+        break;
+    default:
+        break;
+    }
+
+    return isJoinReason;
+}
+
+//============================================================================
+bool HostBaseMgr::isSearchConnectReason( EConnectReason connectReason )
+{
+    bool isSearchReason = false;
+    switch( connectReason )
+    {
+    case eConnectReasonChatRoomSearch:
+    case eConnectReasonGroupSearch:
+    case eConnectReasonRandomConnectSearch:
+        isSearchReason = true;
+        break;
+    default:
+        break;
+    }
+
+    return isSearchReason;
+}
+
+//============================================================================
+void HostBaseMgr::onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EConnectReason connectReason, EHostAnnounceStatus hostAnnStatus )
+{
+    LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s failed %s ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ),
+        DescribeHostAnnounceStatus(hostAnnStatus));
+    m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, hostAnnStatus );
+    removeSession( sessionId );
+}
+
+//============================================================================
+void HostBaseMgr::onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EConnectReason connectReason, EHostJoinStatus hostJoinStatus )
+{
+    LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s failed %s ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ),
+           DescribeHostJoinStatus(hostJoinStatus));
+    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, hostJoinStatus );
+    removeSession( sessionId );
+}
+
+//============================================================================
+void HostBaseMgr::onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EConnectReason connectReason, EHostSearchStatus hostSearchStatus )
+{
+    LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s failed %s ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ),
+        DescribeHostSearchStatus(hostSearchStatus));
+    m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, hostSearchStatus );
+    removeSession( sessionId );
+}
+
+//============================================================================
+void HostBaseMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId,  VxSktBase* sktBase, VxGUID& onlineId,EConnectReason connectReason )
 {
     LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s success ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
 }
 
 //============================================================================
-void HostBaseMgr::onConnectionToHostDisconnect( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::onConnectionToHostDisconnect( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     LogMsg( LOG_VERBOSE, "HostBaseMgr onConnectionToHostDisconnect reason %s to host %s ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
+    removeSession( sessionId );
 }
 
 //============================================================================
@@ -158,7 +341,6 @@ EHostType HostBaseMgr::connectReasonToHostType( EConnectReason connectReason )
         hostType = eHostTypeNetwork;
         break;
 
-
     case eConnectReasonChatRoomJoin:
         hostType = eHostTypeChatRoom;
         break;
@@ -173,95 +355,193 @@ EHostType HostBaseMgr::connectReasonToHostType( EConnectReason connectReason )
 
     default:
         break;
-
     }
 
     return hostType;
 }
 
 //============================================================================
-void HostBaseMgr::onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason )
 {
     EHostType hostType = connectReasonToHostType( connectReason );
     if( eHostTypeUnknown != hostType )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinConnecting );
+        if( isAnnounceConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceConnecting );
+        }
+        else if( isSearchConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnecting );
+        }
+        else if( isJoinConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnecting );
+        }  
     }
 
     VxSktBase* sktBase = nullptr;
-    EConnectStatus connectStatus = m_ConnectionMgr.requestConnection( url, onlineId, this, sktBase, connectReason );
+    EConnectStatus connectStatus = m_ConnectionMgr.requestConnection( sessionId, url, onlineId, this, sktBase, connectReason );
     if( eConnectStatusReady == connectStatus )
     {
         if( sktBase )
         {
-            onContactConnected( sktBase, onlineId, connectReason );
+            onContactConnected( sessionId, sktBase, onlineId, connectReason );
         }
         else
         {
-            LogMsg( LOG_ERROR, "requestConnection sucess but has null socket" );
-            onConnectToHostFail( hostType, connectReason, eHostJoinConnectFailed );
+            LogMsg( LOG_ERROR, "requestConnection success but has null socket" );
+            if( isSearchConnectReason( connectReason ) )
+            {
+                onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchConnectFailed );
+            }
+            else if( isJoinConnectReason( connectReason ) )
+            {
+                onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinConnectFailed );
+            } 
+            else
+            {
+                LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+            }
         }
     }
 }
 
 //============================================================================
-void HostBaseMgr::onUrlActionQueryIdFail( std::string& url, ERunTestStatus testStatus, EConnectReason connectReason )
+void HostBaseMgr::onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus, EConnectReason connectReason )
 {
     EHostType hostType = connectReasonToHostType( connectReason );
     if( eHostTypeUnknown != hostType )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+        if( isAnnounceConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+        }
+        else if( isSearchConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+        }
+        else if( isJoinConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+        }
+    }
+    else if( isAnnounceConnectReason( connectReason ) )
+    {
+        onConnectToHostFail( hostType, sessionId, connectReason, eHostAnnounceQueryIdFailed );
+    }
+    else if( isSearchConnectReason( connectReason ) )
+    {
+        onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchQueryIdFailed );
+    }
+    else if( isJoinConnectReason( connectReason ) )
+    {
+        onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinQueryIdFailed );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
     }
 
-    onConnectToHostFail( hostType, connectReason, eHostJoinQueryIdFailed );
 }
 
 //============================================================================
-bool HostBaseMgr::onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+bool HostBaseMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     EHostType hostType = connectReasonToHostType( connectReason );
     if( eHostTypeUnknown != hostType )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectSuccess );
-        onConnectToHostSuccess( hostType, sktBase, onlineId, connectReason);
+        if( isAnnounceConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceConnectSuccess );
+        }
+        else if( isJoinConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
+        }
+        else if( isSearchConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+        }
+       
+        onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason);
     }
 
     if( eConnectReasonChatRoomJoin == connectReason )
     {
-        sendJoinRequest( sktBase, onlineId, connectReason );
+        sendJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
+    }
+
+    if( eConnectReasonChatRoomSearch == connectReason )
+    {
+        sendSearchRequest( hostType, sessionId, sktBase, onlineId, connectReason );
     }
 
     return false;
 }
 
 //============================================================================
-void HostBaseMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     EHostType hostType = connectReasonToHostType( connectReason );
     if( eHostTypeUnknown != hostType )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectSuccess );
-        onConnectToHostSuccess( hostType, sktBase, onlineId, connectReason);
+        if( isAnnounceConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceConnectSuccess );
+        }
+        else if( isJoinConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
+        }
+        else if( isSearchConnectReason( connectReason ) )
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
+        }
+
+        onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason);
     }
 
     if( eConnectReasonChatRoomJoin == connectReason )
     {
-        sendJoinRequest( sktBase, onlineId, connectReason );
+        sendJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
     }
 }
 
 //============================================================================
-void HostBaseMgr::onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason )
+void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason )
 {
-    if( eConnectReasonChatRoomJoin == connectReason )
+    if( eConnectReasonChatRoomAnnounce == connectReason )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinConnectFailed, DescribeConnectStatus( connectStatus ) );
-        m_ConnectionMgr.doneWithConnection( onlineId, this, connectReason);
+        m_Engine.getToGui().toGuiHostAnnounceStatus( eHostTypeChatRoom, sessionId, eHostAnnounceConnectFailed, DescribeConnectStatus( connectStatus ) );
+        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
+    }
+    else if( eConnectReasonChatRoomJoin == connectReason )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, sessionId, eHostJoinConnectFailed, DescribeConnectStatus( connectStatus ) );
+        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
+    }
+    else if( eConnectReasonChatRoomSearch == connectReason )
+    {
+        m_Engine.getToGui().toGuiHostSearchStatus( eHostTypeChatRoom, sessionId, eHostSearchConnectFailed, DescribeConnectStatus( connectStatus ) );
+        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }
 
 //============================================================================
-void HostBaseMgr::sendJoinRequest( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     vx_assert( nullptr != sktBase );
     PktHostJoinReq pktJoin;
@@ -272,12 +552,33 @@ void HostBaseMgr::sendJoinRequest( VxSktBase* sktBase, VxGUID& onlineId, EConnec
     pktJoin.setHostType( eHostTypeChatRoom );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSendingJoinRequest );
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, sessionId, eHostJoinSendingJoinRequest );
     }
     else
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSendJoinRequestFailed );
-        m_ConnectionMgr.doneWithConnection( onlineId, this, connectReason);
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, sessionId, eHostJoinSendJoinRequestFailed );
+        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
+    }
+}
+
+//============================================================================
+void HostBaseMgr::sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    vx_assert( nullptr != sktBase );
+    PktSearchReq pktSearch;
+    // temp for development
+    //pktJoin.setIsLoopback( true );
+
+
+//    pktSearch.setHostType( hostType );
+    if( m_Plugin.txPacket( onlineId, sktBase, &pktSearch ) )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, sessionId, eHostJoinSendingJoinRequest );
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, sessionId, eHostJoinSendJoinRequestFailed );
+        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }
 
@@ -303,4 +604,23 @@ bool HostBaseMgr::removeContact( VxGUID& onlineId )
     }
 
     return wasRemoved;
+}
+
+//============================================================================
+bool HostBaseMgr::stopHostSearch( EHostType hostType, SearchParams& searchParams )
+{
+    return true;
+}
+
+//============================================================================
+bool HostBaseMgr::updateOrAddSearchParms( std::map<VxGUID, SearchParams>& paramsList, SearchParams& searchParams )
+{
+    return true;
+}
+
+//============================================================================
+void HostBaseMgr::onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg )
+{
+    // TODO proper invalid packet handling
+    LogMsg( LOG_INFO, "HostBaseMgr::onInvalidRxedPacket " );
 }

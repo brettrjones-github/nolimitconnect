@@ -190,7 +190,7 @@ void RcScan::fromGuiStopScan( EScanType eScanType )
 }
 
 //============================================================================
-void RcScan::onPktSearchReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktSearchReq * poPkt )
+void RcScan::onPktScanReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktScanReq * poPkt )
 {
 	unsigned int iMatchesFound = 0;
 	unsigned int iNotMatchesFound = 0;
@@ -198,12 +198,12 @@ void RcScan::onPktSearchReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktSear
 	P2PConnectList::ConnectListIter iter;
 	BigListInfo * poBigListInfo;
 	RcConnectInfo * poConnectInfo;
-	PktSearchReply oPktReply;
+	PktScanReply oPktReply;
 	uint8_t * pktPayload = oPktReply.getSearchMatch();
 	oPktReply.setSizeOfConnectInfo( (uint16_t)sizeof( VxConnectInfo ) );
 
 #ifdef DEBUG_MUTEXES
-	LogMsg( LOG_INFO, "RcScan::handlePktSearchReq: m_ConnectListMutex.lock()\n" );
+	LogMsg( LOG_INFO, "RcScan::handlePktScanReq: m_ConnectListMutex.lock()\n" );
 #endif // DEBUG_MUTEXES
 	std::vector<VxNetIdent *> noMatchList;
 	m_ConnectList.connectListLock();
@@ -234,7 +234,7 @@ void RcScan::onPktSearchReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktSear
 	}
 
 #ifdef DEBUG_MUTEXES
-	LogMsg( LOG_INFO, "RcScan::handlePktSearchReq: m_ConnectListMutex.unlock()\n" );
+	LogMsg( LOG_INFO, "RcScan::handlePktScanReq: m_ConnectListMutex.unlock()\n" );
 #endif // DEBUG_MUTEXES
 	m_ConnectList.connectListUnlock();
 
@@ -273,7 +273,7 @@ void RcScan::onPktSearchReq( VxNetIdent * netIdent, VxSktBase * sktBase, PktSear
 }
 
 //============================================================================
-void RcScan::onPktSearchReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktSearchReply * poPkt )
+void RcScan::onPktScanReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktScanReply * poPkt )
 {
 	if( m_bIsScanning )
 	{
@@ -417,7 +417,7 @@ bool RcScan::isLocalSearchMatch( VxNetIdent * netIdent )
 }
 
 //============================================================================
-bool RcScan::isRemoteSearchMatch( VxNetIdent * netIdent, PktSearchReq * poPkt )
+bool RcScan::isRemoteSearchMatch( VxNetIdent * netIdent, PktScanReq * poPkt )
 {
 	bool bIsMatch = false;
 	switch( poPkt->getSearchType() )

@@ -15,6 +15,8 @@
 #include "PluginBaseHostClient.h"
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <PktLib/SearchParams.h>
+
 //============================================================================
 PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
     : PluginBase( engine, pluginMgr, myIdent )
@@ -23,7 +25,7 @@ PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& plugin
 }
 
 //============================================================================
-void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
+void PluginBaseHostClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
     std::string url = ptopUrl ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
     if( !url.empty() )
@@ -33,6 +35,37 @@ void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, const char * pto
     }
     else
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, eHostJoinInvalidUrl );
+        m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceInvalidUrl );
     }
+}
+
+//============================================================================
+void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+{
+    std::string url = ptopUrl ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
+    if( !url.empty() )
+    {
+        VxGUID hostGuid;
+        //EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryId( hostType, url.c_str(), hostGuid, this);
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+    }
+}
+
+//============================================================================
+void PluginBaseHostClient::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
+{
+    std::string url = searchParams.getSearchUrl();
+    if( !url.empty() )
+    {
+        VxGUID hostGuid; // TODO
+        //EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryId( hostType, url.c_str(), hostGuid, this);
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidUrl );
+    }
+
 }

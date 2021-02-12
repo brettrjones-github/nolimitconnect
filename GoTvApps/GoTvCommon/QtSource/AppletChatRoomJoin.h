@@ -13,10 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletClientBase.h"
 #include "ui_AppletChatRoomJoin.h"
 
-class AppletChatRoomJoin : public AppletBase
+class AppletChatRoomJoin : public AppletClientBase
 {
 	Q_OBJECT
 public:
@@ -43,6 +43,7 @@ protected:
 
     //=== vars ===//
     Ui::ChatRoomJoinUi          ui;
+    VxGUID                      m_JoinSessionId;
 };
 
 

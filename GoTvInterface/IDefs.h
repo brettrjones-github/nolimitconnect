@@ -167,6 +167,27 @@ enum EGenderType
     eMaxGenderType
 };
 
+enum EHostAnnounceStatus
+{
+    eHostAnnounceUnknown = 0,
+    eHostAnnounceInvalidUrl = 1,
+    eHostAnnounceQueryIdInProgress = 2,
+    eHostAnnounceQueryIdSuccess = 3,
+    eHostAnnounceQueryIdFailed = 4,
+    eHostAnnounceConnecting = 5,
+    eHostAnnounceConnectSuccess = 6,
+    eHostAnnounceConnectFailed = 7,
+    eHostAnnounceSendingJoinRequest = 8,
+    eHostAnnounceSendJoinRequestFailed = 9,
+    eHostAnnounceSuccess = 10,
+    eHostAnnounceFail = 11,
+    eHostAnnounceFailPermission = 12,
+    eHostAnnounceFailConnectDropped = 13,
+    eHostAnnounceInvalidParam = 14,
+
+    eMaxHostAnnounceStatus
+};
+
 enum EHostJoinStatus
 {
     eHostJoinUnknown = 0,
@@ -183,8 +204,30 @@ enum EHostJoinStatus
     eHostJoinFail = 11,
     eHostJoinFailPermission = 12,
     eHostJoinFailConnectDropped = 13,
+    eHostJoinInvalidParam = 14,
 
     eMaxHostJoinStatus
+};
+
+enum EHostSearchStatus
+{
+    eHostSearchUnknown = 0,
+    eHostSearchInvalidUrl = 1,
+    eHostSearchQueryIdInProgress = 2,
+    eHostSearchQueryIdSuccess = 3,
+    eHostSearchQueryIdFailed = 4,
+    eHostSearchConnecting = 5,
+    eHostSearchConnectSuccess = 6,
+    eHostSearchConnectFailed = 7,
+    eHostSearchSendingSearchRequest = 8,
+    eHostSearchSendSearchRequestFailed = 9,
+    eHostSearchSuccess = 10,
+    eHostSearchFail = 11,
+    eHostSearchFailPermission = 12,
+    eHostSearchFailConnectDropped = 13,
+    eHostSearchInvalidParam = 14,
+
+    eMaxHostSearchStatus
 };
 
 enum EHostServiceType
@@ -629,11 +672,17 @@ const char * DescribeConnectReason( EConnectReason connectReason );
 
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
 
+//! Host announce status as text
+const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
+
 //! Host join status as text
 const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus );
 
+//! Host search status as text
+const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus );
+
 //! Host connection test state as text
-const char * DescribeHostStatus( EHostTestStatus eHostStatus );
+// const char * DescribeHostTestStatus( EHostTestStatus eHostStatus );
 
 //! Host type as text
 const char * DescribeHostType( EHostType hostType );

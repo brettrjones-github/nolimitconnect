@@ -47,11 +47,12 @@ public:
     void                        setDefaultHostOnlineId( EHostType hostType, VxGUID& hostOnlineId );
     bool                        getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId );
 
-    EHostJoinStatus             lookupOrQueryId( std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+    EHostJoinStatus             lookupOrQueryJoinId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+    EHostSearchStatus           lookupOrQuerySearchId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
 
-    EConnectStatus              requestConnection( std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, 
+    EConnectStatus              requestConnection( VxGUID& sessionId, std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, 
                                                    EConnectReason connectReason = eConnectReasonUnknown );
-    void                        doneWithConnection( VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+    void                        doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
 
     bool                        onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo* bigListInfo );
     void                        onSktDisconnected( VxSktBase* sktBase );
@@ -81,7 +82,7 @@ protected:
     /// keep a cache of urls to online id to avoid time consuming query host id
     void                        updateUrlCache( std::string& hostUrl, VxGUID& onlineId );
     bool                        urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& onlineId );
-    EConnectStatus              attemptConnection( std::string url, VxGUID& onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason );
+    EConnectStatus              attemptConnection( VxGUID& sessionId, std::string url, VxGUID& onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, EConnectReason connectReason );
 
     //=== connection low level ===/
     EConnectStatus              directConnectTo(    std::string                 url,

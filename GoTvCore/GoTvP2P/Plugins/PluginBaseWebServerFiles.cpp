@@ -16,7 +16,7 @@
 #include "PluginBaseWebServer.h"
 
 #include <PktLib/PktsWebServer.h>
-#include <PktLib/PktSearch.h>
+#include <PktLib/PktsScan.h>
 #include <NetLib/VxSktBase.h>
 #include <NetLib/VxSktUtil.h>
 #include <CoreLib/VxTimeUtil.h>

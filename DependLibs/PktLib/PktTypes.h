@@ -29,10 +29,10 @@
 #define PKT_TYPE_LOG_REQ							( PKT_TYPE_ANN_LIST	+ 1 )				// 3 ( 0x03 )
 #define PKT_TYPE_LOG_REPLY							( PKT_TYPE_LOG_REQ	+ 1 )				// 4 ( 0x04 )
 
-#define PKT_TYPE_SEARCH_REQ							( PKT_TYPE_LOG_REPLY	+ 1 )			// 5 ( 0x05 )
-#define PKT_TYPE_SEARCH_REPLY						( PKT_TYPE_SEARCH_REQ	+ 1 )			// 6 ( 0x06 )
+#define PKT_TYPE_SCAN_REQ							( PKT_TYPE_LOG_REPLY	+ 1 )			// 5 ( 0x05 )
+#define PKT_TYPE_SCAN_REPLY						    ( PKT_TYPE_SCAN_REQ	+ 1 )			    // 6 ( 0x06 )
 
-#define PKT_TYPE_PLUGIN_OFFER_REQ					( PKT_TYPE_SEARCH_REPLY	+ 1 )			// 7 ( 0x07 )
+#define PKT_TYPE_PLUGIN_OFFER_REQ					( PKT_TYPE_SCAN_REPLY	+ 1 )			// 7 ( 0x07 )
 #define PKT_TYPE_PLUGIN_OFFER_REPLY					( PKT_TYPE_PLUGIN_OFFER_REQ	+ 1 )		// 8 ( 0x08 )
 
 #define PKT_TYPE_CHAT_REQ							( PKT_TYPE_PLUGIN_OFFER_REPLY	+ 1 )	// 9 ( 0x09 )

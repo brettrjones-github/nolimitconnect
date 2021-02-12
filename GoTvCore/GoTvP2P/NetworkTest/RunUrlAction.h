@@ -36,23 +36,25 @@ class UrlActionInfo
 {
 public:
     UrlActionInfo();
-    UrlActionInfo(P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
+    UrlActionInfo(P2PEngine& engine, EHostType hostType, VxGUID& sessionId, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
                   UrlActionResultInterface* cbInterface, IConnectRequestCallback* cbConnectReq, EConnectReason connectReason );
     UrlActionInfo( const UrlActionInfo& rhs );
     UrlActionInfo&              operator = ( const UrlActionInfo& rhs );
     bool                        operator == ( const UrlActionInfo& rhs ) const;
     bool                        operator != ( const UrlActionInfo& rhs ) const;
 
-    P2PEngine&					getEngine( void )               { return m_Engine; }
-    EHostType                   getHostType( void )             { return m_HostType; }
-    VxUrl&                      getMyVxUrl( void )              { return m_MyUrl; }
-    std::string&                getMyUrl( void )                { return m_MyUrl.getUrl(); }
-    ENetCmdType                 getNetCmdType( void )           { return m_TestType; }
-    VxUrl&                      getRemoteVxUrl( void )          { return m_RemoteUrl; }
-    std::string&                getRemoteUrl( void )            { return m_RemoteUrl.getUrl(); }
-    UrlActionResultInterface*   getResultInterface( void )      { return m_ResultCbInterface; }
-    IConnectRequestCallback*    getConnectReqInterface( void )  { return m_ConnectReqCbInterface; }
-    EConnectReason              getConnectReason( void )        { return m_ConnectReason; };
+    P2PEngine&					getEngine( void )                   { return m_Engine; }
+    EHostType                   getHostType( void )                 { return m_HostType; }
+    VxUrl&                      getMyVxUrl( void )                  { return m_MyUrl; }
+    std::string&                getMyUrl( void )                    { return m_MyUrl.getUrl(); }
+    ENetCmdType                 getNetCmdType( void )               { return m_TestType; }
+    VxUrl&                      getRemoteVxUrl( void )              { return m_RemoteUrl; }
+    std::string&                getRemoteUrl( void )                { return m_RemoteUrl.getUrl(); }
+    UrlActionResultInterface*   getResultInterface( void )          { return m_ResultCbInterface; }
+    IConnectRequestCallback*    getConnectReqInterface( void )      { return m_ConnectReqCbInterface; }
+    EConnectReason              getConnectReason( void )            { return m_ConnectReason; };
+    void                        setSessionId( VxGUID& sessionId )   { m_SessionId = sessionId; };
+    VxGUID&                     getSessionId( void )                { return m_SessionId; };
 
     std::string                 getTestName( void );
 
@@ -66,6 +68,7 @@ protected:
     VxUrl                       m_MyUrl;
     VxUrl                       m_RemoteUrl;
     EConnectReason              m_ConnectReason{ eConnectReasonUnknown };
+    VxGUID                      m_SessionId;
 };
 
 
@@ -79,7 +82,8 @@ public:
 
     P2PEngine&					getEngine() { return m_Engine; }
 
-	void				        runUrlAction( ENetCmdType netCmdType, 
+	void				        runUrlAction( VxGUID& sessionId,
+                                              ENetCmdType netCmdType, 
                                               const char * ptopUrl, 
                                               const char * myUrl = nullptr,                                        
                                               UrlActionResultInterface* cbInterface = nullptr,

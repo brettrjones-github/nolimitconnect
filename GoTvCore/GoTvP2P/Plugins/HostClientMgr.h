@@ -25,7 +25,7 @@ public:
     virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 protected:
-    virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     virtual void                onHostJoined( VxSktBase * sktBase,  VxNetIdent * netIdent );
 

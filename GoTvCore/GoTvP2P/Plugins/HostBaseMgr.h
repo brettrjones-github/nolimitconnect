@@ -16,8 +16,11 @@
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
+#include <PktLib/SearchParams.h>
 #include <CoreLib/VxGUIDList.h>
 #include <CoreLib/VxMutex.h>
+
+#include <map>
 
 class ConnectionMgr;
 class P2PEngine;
@@ -25,6 +28,7 @@ class PluginMgr;
 class VxNetIdent;
 class PluginBase;
 class VxPktHdr;
+class SearchParams;
 
 class HostBaseMgr : public IConnectRequestCallback
 {
@@ -33,33 +37,49 @@ public:
 	virtual ~HostBaseMgr() = default;
 
     //=== hosting ===//
-    virtual void				fromGuiJoinHost( EHostType hostType, std::string ptopUrl );
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl );
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl );
+    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
 
     virtual EPluginAccess	    getPluginAccessState( VxNetIdent * netIdent );
 
-    virtual void                connectToHost( EHostType hostType, std::string& url, EConnectReason connectReason );
+    virtual void                connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason );
+    virtual void                removeSession( VxGUID& sessionId ) {};
+
+    // error handling for invalid packet
+    virtual void				onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg = "" );
 
 protected:
-
-    virtual void                onUrlActionQueryIdSuccess( std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
-    virtual void                onUrlActionQueryIdFail( std::string& url, ERunTestStatus testStatus, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     /// returns false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
-    virtual bool                onContactConnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
-    virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
-    virtual void                onConnectRequestFail( VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual bool                onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
-    virtual void                onConnectToHostFail( EHostType hostType, EConnectReason connectReason, EHostJoinStatus hostJoinStatus );
-    virtual void                onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
-    virtual void                onConnectionToHostDisconnect( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    virtual void                onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EConnectReason connectReason, EHostAnnounceStatus hostJoinStatus );
+    virtual void                onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EConnectReason connectReason, EHostJoinStatus hostJoinStatus );
+    virtual void                onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EConnectReason connectReason, EHostSearchStatus hostSearchStatus );
+    virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    virtual void                onConnectionToHostDisconnect( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
 
-    void                        sendJoinRequest( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    void                        sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    void                        sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
 
     virtual void                onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
 
     virtual bool                addContact( VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual bool                removeContact( VxGUID& onlineId );
     EHostType                   connectReasonToHostType( EConnectReason connectReason );
+
+    virtual bool                isAnnounceConnectReason( EConnectReason connectReason );
+    virtual bool                isJoinConnectReason( EConnectReason connectReason );
+    virtual bool                isSearchConnectReason( EConnectReason connectReason );
+
+    virtual bool                stopHostSearch( EHostType hostType, SearchParams& searchParams );
+    virtual bool                updateOrAddSearchParms( std::map<VxGUID, SearchParams>& paramsList, SearchParams& searchParams );
+
 
     //=== vars ===//
     P2PEngine&                  m_Engine; 
@@ -69,5 +89,6 @@ protected:
     ConnectionMgr&              m_ConnectionMgr; 
     VxMutex                     m_MgrMutex;
     VxGUIDList                  m_ContactList;
+    std::map<VxGUID, SearchParams> m_SearchParamsList;
 };
 

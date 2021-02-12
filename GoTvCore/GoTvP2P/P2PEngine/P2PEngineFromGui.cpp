@@ -1285,13 +1285,42 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 #endif // TARGET_OS_ANDROID
 
 //============================================================================
-void P2PEngine::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
+void P2PEngine::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+{
+    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
+    PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
+    if( plugin )
+    {
+        plugin->fromGuiAnnounceHost( hostType, sessionId, ptopUrl );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Plugin not found for host %d", hostType );
+    }
+}
+
+//============================================================================
+void P2PEngine::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
     PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
     if( plugin )
     {
-        plugin->fromGuiJoinHost( hostType, ptopUrl );
+        plugin->fromGuiJoinHost( hostType, sessionId, ptopUrl );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Plugin not found for host %d", hostType );
+    }
+}
+
+//============================================================================
+void P2PEngine::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
+{
+    PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
+    if( plugin )
+    {
+        plugin->fromGuiSearchHost( hostType, searchParams, enable );
     }
     else
     {
@@ -1307,10 +1336,10 @@ void P2PEngine::fromGuiRunIsPortOpenTest( uint16_t port )
 }
 
 //============================================================================
-void P2PEngine::fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
+void P2PEngine::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunUrlAction" );
-    getRunUrlAction().runUrlAction( testType, ptopUrl, myUrl );
+    getRunUrlAction().runUrlAction( sessionId, testType, ptopUrl, myUrl );
 }
 
 //============================================================================

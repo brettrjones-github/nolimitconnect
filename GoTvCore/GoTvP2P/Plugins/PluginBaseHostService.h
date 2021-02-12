@@ -21,9 +21,11 @@
 class PluginBaseHostService : public PluginNetServices
 {
 public:
-
     PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
     virtual ~PluginBaseHostService() override = default;
+
+    void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
+    EHostType                   getHostType(  void )                { return m_HostType; }
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
@@ -39,10 +41,13 @@ protected:
     virtual void				sendHostAnnounce( void );
 
     //=== vars ===//
+    EHostType                   m_HostType{ eHostTypeUnknown };
+
     HostServerMgr               m_HostServerMgr;
     bool                        m_SendAnnounceEnabled{ false };
     bool                        m_HostAnnounceBuilt{ false };
     PktHostAnnounce             m_PktHostAnnounce;
     VxMutex                     m_AnnMutex;
+    VxGUID                      m_AnnounceSessionId;
 };
 

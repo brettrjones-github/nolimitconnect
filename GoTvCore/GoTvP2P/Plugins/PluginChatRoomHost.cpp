@@ -91,7 +91,8 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 
     if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
     {
-        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
+        VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
     }
 }
 

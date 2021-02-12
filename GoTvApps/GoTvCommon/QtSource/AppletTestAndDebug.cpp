@@ -178,7 +178,8 @@ void AppletTestAndDebug::slotPingTestButtonClicked( void )
     if( myUrl.validateUrl( true ) && testUrl.validateUrl( false ) )
     {
         infoMsg( "Testing Ping" );
-        m_MyApp.getEngine().fromGuiRunUrlAction( myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdPing );
+        VxGUID::generateNewVxGUID(m_SessionId);
+        m_MyApp.getEngine().fromGuiRunUrlAction( m_SessionId, myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdPing );
     }
     else
     {
@@ -216,7 +217,8 @@ void AppletTestAndDebug::startUrlTest( ENetCmdType netCmdType )
     if( myUrl.validateUrl( true ) && testUrl.validateUrl( false ) )
     {
         infoMsg( "Testing %s", DescribeNetCmdType( netCmdType ) );
-        m_MyApp.getEngine().fromGuiRunUrlAction( myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), netCmdType );
+        VxGUID::generateNewVxGUID(m_SessionId);
+        m_MyApp.getEngine().fromGuiRunUrlAction( m_SessionId, myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), netCmdType );
     }
     else
     {

@@ -65,7 +65,7 @@ UrlActionInfo::UrlActionInfo()
 }
 
 //============================================================================
-UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
+UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, VxGUID& sessionId, ENetCmdType testType, const char * ptopUrl, const char * myUrl, 
                               UrlActionResultInterface* cbInterface, IConnectRequestCallback* cbConnectReq, EConnectReason connectReason )
     : m_Engine( engine )
     , m_HostType( hostType )
@@ -75,6 +75,7 @@ UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, ENetCmdType
     , m_MyUrl( myUrl )
     , m_RemoteUrl( ptopUrl )
     , m_ConnectReason( connectReason )
+    , m_SessionId( sessionId )
 {
     if( nullptr == myUrl )
     {
@@ -92,6 +93,7 @@ UrlActionInfo::UrlActionInfo( const UrlActionInfo& rhs )
     , m_MyUrl( rhs.m_MyUrl )
     , m_RemoteUrl( rhs.m_RemoteUrl )
     , m_ConnectReason( rhs.m_ConnectReason )
+    , m_SessionId( rhs.m_SessionId )
 {
 }
 
@@ -107,6 +109,7 @@ UrlActionInfo& UrlActionInfo::operator = ( const UrlActionInfo& rhs )
         m_MyUrl                 = rhs.m_MyUrl;
         m_RemoteUrl             = rhs.m_RemoteUrl;
         m_ConnectReason         = rhs.m_ConnectReason;
+        m_SessionId             = rhs.m_SessionId;
     }
 
     return *this;
@@ -152,10 +155,10 @@ void RunUrlAction::runTestShutdown( void )
 }
 
 //============================================================================
-void RunUrlAction::runUrlAction( ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface, 
+void RunUrlAction::runUrlAction( VxGUID& sessionId, ENetCmdType netCmdType, const char * ptopUrl, const char * myUrl, UrlActionResultInterface* cbInterface, 
                                  IConnectRequestCallback* cbConnectRequest, EHostType hostType, EConnectReason connectReason )
 {
-    UrlActionInfo urlAction( getEngine(), hostType, netCmdType, ptopUrl, myUrl, cbInterface, cbConnectRequest, connectReason );
+    UrlActionInfo urlAction( getEngine(), hostType, sessionId, netCmdType, ptopUrl, myUrl, cbInterface, cbConnectRequest, connectReason );
     std::string actionName = urlAction.getTestName();
     if( !urlAction.getMyVxUrl().validateUrl( true ) )
     {

@@ -56,6 +56,27 @@ namespace
         "Max Connect Status ",
     };
 
+    const char * HostAnnounceStatusEnumStrings[] = 
+    { 
+        "Host Announce Status Unknown ",
+        "Host Announce Invalid Url ",
+        "Host Announce Querying Id In Progress ",
+        "Host Announce Querying Id Success ",
+        "Host Announce Query Id Failed ",
+        "Host Announce Connecting ",
+        "Host Announce Connect Success ",
+        "Host Announce Connect Failed ",
+        "Host Announce Sending Request ",
+        "Host Announce Send Request Failed ",
+        "Host Announce Success ",
+        "Host Announce Failed ",
+        "Host Announce Fail Permission ",  
+        "Host Announce Fail Connect Dropped ",
+        "Host Announce Invalid Param ",
+
+        "Max Host Announce Status ",
+    };
+
     const char * HostJoinStatusEnumStrings[] = 
     { 
         "Host Join Status Unknown ",
@@ -72,8 +93,30 @@ namespace
         "Host Join Failed ",
         "Host Join Fail Permission ",  
         "Host Join Fail Connect Dropped ",
+        "Host Join Invalid Param ",
 
         "Max Host Join Status ",
+    };
+
+    const char * HostSearchStatusEnumStrings[] = 
+    { 
+        "Host Search Status Unknown ",
+        "Host Search Invalid Url ",
+        "Host Search Querying Id In Progress ",
+        "Host Search Querying Id Success ",
+        "Host Search Query Id Failed ",
+        "Host Search Connecting ",
+        "Host Search Connect Success ",
+        "Host Search Connect Failed ",
+        "Host Search Sending Request ",
+        "Host Search Send Request Failed ",
+        "Host Search Success ",
+        "Host Search Failed ",
+        "Host Search Fail Permission ",  
+        "Host Search Fail Connect Dropped ",
+        "Host Search Invalid Param ",
+
+        "Max Host Search Status ",
     };
 
     const char * HostTypeEnumStrings[] =
@@ -367,17 +410,42 @@ const char * DescribeConnectStatus( EConnectStatus eConnectStatus )
     return ConnectStatusEnumStrings[ eConnectStatus ];
 }
 
+const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
+
 //============================================================================
-const char * DescribeHostJoinStatus( EHostJoinStatus eHostStatus )
+const char * DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
 {
-    if( eHostStatus < 0 || eMaxHostJoinStatus <= eHostStatus )
+    if( hostStatus < 0 || eMaxHostAnnounceStatus <= hostStatus )
     {
         return ENUM_BAD_PARM;
     }
 
-    return HostJoinStatusEnumStrings[ eHostStatus ];
+    return HostAnnounceStatusEnumStrings[ hostStatus ];
 }
 
+//============================================================================
+const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus )
+{
+    if( hostStatus < 0 || eMaxHostJoinStatus <= hostStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return HostJoinStatusEnumStrings[ hostStatus ];
+}
+
+//============================================================================
+const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus )
+{
+    if( hostStatus < 0 || eMaxHostSearchStatus <= hostStatus )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return HostSearchStatusEnumStrings[ hostStatus ];
+}
+
+//============================================================================
 const char * DescribeHostType( EHostType eHostType )
 {
     if( eHostType < 0 || eMaxHostType <= eHostType )

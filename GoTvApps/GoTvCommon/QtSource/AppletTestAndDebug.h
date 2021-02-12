@@ -73,6 +73,7 @@ protected:
     LOG_FUNCTION                m_OldLogFunction{ nullptr };
     void *                      m_OldLogUserData{ nullptr};
     bool                        m_VerboseLog{ false };
+    VxGUID                      m_SessionId;
 
     Ui::AppletTestAndDebugUi ui;
 };

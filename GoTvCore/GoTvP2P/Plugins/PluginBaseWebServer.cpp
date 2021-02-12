@@ -17,7 +17,7 @@
 #include "PluginMgr.h"
 
 #include <PktLib/PktsWebServer.h>
-#include <PktLib/PktSearch.h>
+#include <PktLib/PktsScan.h>
 #include <NetLib/VxSktBase.h>
 #include <CoreLib/VxGlobals.h>
 

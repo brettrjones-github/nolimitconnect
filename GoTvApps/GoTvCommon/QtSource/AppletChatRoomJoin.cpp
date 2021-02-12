@@ -27,10 +27,11 @@ namespace
 
 //============================================================================
 AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_CHAT_ROOM_JOIN, app, parent )
+: AppletClientBase( OBJNAME_APPLET_CHAT_ROOM_JOIN, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletChatRoomJoin );
+    setHostType( eHostTypeChatRoom );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     setupApplet();
@@ -43,7 +44,6 @@ AppletChatRoomJoin::~AppletChatRoomJoin()
 {
     m_MyApp.activityStateChange( this, false );
 }
-
 
 //============================================================================
 void AppletChatRoomJoin::setupApplet( void )
@@ -58,15 +58,16 @@ void AppletChatRoomJoin::setupApplet( void )
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
-    connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, EHostJoinStatus, QString )),
-        this, SLOT(slotHostJoinStatus( EHostType, EHostJoinStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, EHostJoinStatus, QString )),
+        this, SLOT(slotHostJoinStatus( EHostType, EHostSearchStatus, QString )) );
 
 }
 
 //============================================================================
 void AppletChatRoomJoin::slotJoinDefaultChatRoom( void )
 {
-    m_Engine.fromGuiJoinHost( eHostTypeChatRoom );
+    VxGUID::generateNewVxGUID( m_JoinSessionId );
+    m_Engine.fromGuiJoinHost( getHostType(), m_JoinSessionId );
 }
 
 //============================================================================

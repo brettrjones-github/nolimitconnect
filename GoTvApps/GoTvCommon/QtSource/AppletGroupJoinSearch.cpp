@@ -28,7 +28,7 @@
 //============================================================================
 AppletGroupJoinSearch::AppletGroupJoinSearch(	AppCommon&		    app, 
 												QWidget *			parent )
-: AppletBase( OBJNAME_APPLET_GROUP_JOIN_SEARCH, app, parent, true )
+: AppletBase( OBJNAME_APPLET_GROUP_JOIN_SEARCH, app, parent )
 , m_eScanType( eScanTypeGroupJoinSearch )
 {
     setAppletType( eAppletGroupJoinSearch );

@@ -28,10 +28,10 @@
 //============================================================================
 AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app, 
 													QWidget *			parent )
-: AppletBase( OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH, app, parent, true )
-, m_eScanType( eScanTypeChatRoomJoinSearch )
+: AppletClientBase( OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH, app, parent )
 {
     setAppletType( eAppletChatRoomJoinSearch );
+    setHostType( eHostTypeChatRoom );
 	ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
@@ -43,10 +43,7 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
     connect( this,					SIGNAL(signalSearchComplete()),				this, SLOT(slotSearchComplete()) );
     connect( this,					SIGNAL(signalSearchResult(VxNetIdent*)),	this, SLOT(slotSearchResult(VxNetIdent*)) ); 
 
-	if( eScanTypePeopleSearch == getScanType() )
-	{
-        setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
-	}
+    setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
 }
 
 //============================================================================
@@ -64,7 +61,7 @@ void AppletChatRoomJoinSearch::toGuiSearchResultSuccess( void * callbackData, ES
 		return;
 	}
 
-	if( eScanType == getScanType() )
+	//if( eScanType == getScanType() )
 	{
 		emit signalSearchResult( netIdent );
 	}
@@ -79,7 +76,7 @@ void AppletChatRoomJoinSearch::toGuiClientScanSearchComplete( void * callbackDat
 		return;
 	}
 
-	if( eScanType == getScanType() )
+	//if( eScanType == getScanType() )
 	{
 		emit signalSearchComplete();
 	}
@@ -107,8 +104,9 @@ void AppletChatRoomJoinSearch::slotHomeButtonClicked( void )
 //============================================================================
 void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
 {
-    if( startSearch )
+    if( startSearch && !m_SearchStarted )
     {
+        m_SearchStarted = true;
         ui.m_FriendListWidget->clear();
         QString strSearch = getSearchText();
         if( 3 > strSearch.length() )
@@ -119,14 +117,17 @@ void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
         }
         else
         {
+            ui.m_SearchsParamWidget->toSearchParams( m_SearchParams );
+            m_SearchParams.setSearchType(eSearchChatRoomHost);
             setStatusLabel( QObject::tr( "Search Started" ) );
-            m_FromGui.fromGuiStartScan( m_eScanType, 0, 0, strSearch.toStdString().c_str() );
+            m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
         }
 
     }
-    else
+    else if( !startSearch && m_SearchStarted )
     {
-        m_FromGui.fromGuiStopScan( m_eScanType );
+        m_SearchStarted = false;
+        m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, false );
         setStatusLabel( QObject::tr( "Search Stopped" ) );
     }
 }

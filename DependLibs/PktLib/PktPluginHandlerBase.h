@@ -98,8 +98,8 @@ public:
 	virtual void				onPktRelayTestReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktRelayTestReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-	virtual void				onPktSearchReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSearchReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktScanReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

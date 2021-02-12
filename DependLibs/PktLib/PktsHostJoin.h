@@ -75,6 +75,8 @@ public:
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
     void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
+    void                        setSessionId( VxGUID& sessionId )               { m_SessionId = sessionId; }
+    VxGUID                      getSessionId( void )                            { return m_SessionId; }
 
 private:
     uint8_t					    m_HostType{ 0 };
@@ -82,7 +84,8 @@ private:
     uint16_t					m_Res2{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
-    uint64_t					m_Res4{ 0 };		
+    uint64_t					m_Res4{ 0 };
+    VxGUID                      m_SessionId;
 };
 
 class PktHostJoinReply : public VxPktHdr
@@ -90,18 +93,24 @@ class PktHostJoinReply : public VxPktHdr
 public:
     PktHostJoinReply();
 
-    void                        setHostType( EHostType hostType )                   { m_HostType = (uint8_t)hostType; }
-    EHostType                   getHostType( void )                                 { return (EHostType)m_HostType; }
-    void                        setAccessState( EPluginAccess accessState )         { m_AccessState = (uint8_t)accessState; }
-    EPluginAccess               getAccessState( void )                              { return (EPluginAccess)m_AccessState; }
+    void                        setHostType( EHostType hostType )               { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
+    void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
+    EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
+    void                        setSessionId( VxGUID& sessionId )               { m_SessionId = sessionId; }
+    VxGUID                      getSessionId( void )                            { return m_SessionId; }
+    void                        setCommError( ECommErr commError )              { m_CommError = (uint8_t)commError; }
+    ECommErr                    getCommError( void ) const                      { return (ECommErr)m_CommError; }
 
 private:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_AccessState{ 0 };
-    uint16_t					m_Res2{ 0 };					
+    uint8_t					    m_CommError{ 0 };
+    uint8_t					    m_Res2{ 0 };					
     uint32_t					m_Res3{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
-    uint64_t					m_Res4{ 0 };	
+    uint64_t					m_Res4{ 0 };
+    VxGUID                      m_SessionId;
 };
 
 #pragma pack()

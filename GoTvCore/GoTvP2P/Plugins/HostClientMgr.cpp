@@ -30,21 +30,28 @@ HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIden
 void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     PktHostJoinReply* hostReply = ( PktHostJoinReply* )pktHdr;
-    if( ePluginAccessOk == hostReply->getAccessState() )
+    if( hostReply->isValidPkt() )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinSuccess );
-        onHostJoined( sktBase, netIdent );
+        if( ePluginAccessOk == hostReply->getAccessState() )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinSuccess );
+            onHostJoined( sktBase, netIdent );
        
-    }
-    else if( ePluginAccessOk == hostReply->getAccessState() )
-    {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinFailPermission );
-        m_Engine.getConnectionMgr().doneWithConnection( netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+        }
+        else if( ePluginAccessOk == hostReply->getAccessState() )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinFailPermission );
+            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+        }
+        else
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinFail, DescribePluginAccess2( hostReply->getAccessState() ) );
+            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+        }
     }
     else
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, eHostJoinFail, DescribePluginAccess2( hostReply->getAccessState() ) );
-        m_Engine.getConnectionMgr().doneWithConnection( netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+        onInvalidRxedPacket( sktBase, pktHdr, netIdent );     
     }
 }
 
@@ -63,7 +70,7 @@ void HostClientMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
 }
 
 //============================================================================
-void HostClientMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostClientMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     m_ServerList.removeGuid( onlineId );
     removeContact( onlineId );

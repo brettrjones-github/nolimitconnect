@@ -41,7 +41,7 @@
 
 //============================================================================
 AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, int launchParam )
-    : AppletBase( OBJNAME_APPLET_LIBRARY, app, parent, launchParam )
+    : AppletBase( OBJNAME_APPLET_LIBRARY, app, parent )
     , m_ePluginType( ePluginTypeInvalid )
     , m_IsSelectAFileMode( launchParam ? true : false )
     , m_FileWasSelected( false )

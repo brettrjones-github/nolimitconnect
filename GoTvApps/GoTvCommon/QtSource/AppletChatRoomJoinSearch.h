@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletClientBase.h"
 
 #include <GoTvInterface/IDefs.h>
 #include <QString>
@@ -23,7 +23,7 @@
 
 class VxNetIdent;
 
-class AppletChatRoomJoinSearch : public AppletBase
+class AppletChatRoomJoinSearch : public AppletClientBase
 {
 	Q_OBJECT
 public:
@@ -32,7 +32,6 @@ public:
 	//=== destructor ===//
 	virtual ~AppletChatRoomJoinSearch() override = default;
 
-	EScanType					getScanType() { return m_eScanType; }
 	void						searchResult( VxNetIdent * netIdent );
 	void						setStatusLabel( QString strMsg );
     QString                     getSearchText( void ) { return ui.m_SearchsParamWidget->getSearchTextEdit()->text(); }
@@ -57,5 +56,6 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletChatRoomJoinSearchUi		ui;
-	EScanType					m_eScanType;
+    SearchParams                m_SearchParams;
+    bool                        m_SearchStarted{ false };
 };

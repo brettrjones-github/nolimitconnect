@@ -94,8 +94,8 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REQ ]					= &PktHandlerBase::onPktRelayTestReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REPLY ]					= &PktHandlerBase::onPktRelayTestReply;
 
-	m_aBaseSysPktFuncTable[ PKT_TYPE_SEARCH_REQ ]						= &PktHandlerBase::onPktSearchReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_SEARCH_REPLY ]						= &PktHandlerBase::onPktSearchReply;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REQ ]						= &PktHandlerBase::onPktScanReq;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REPLY ]						= &PktHandlerBase::onPktScanReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_WEB_SERVER_MY_PIC_SEND_REQ ]		= &PktHandlerBase::onPktMyPicSendReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_WEB_SERVER_MY_PIC_SEND_REPLY ]		= &PktHandlerBase::onPktMyPicSendReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_WEB_SERVER_PIC_CHUNK_TX ]			= &PktHandlerBase::onPktWebServerPicChunkTx;
@@ -515,13 +515,13 @@ void PktHandlerBase::onPktRelayTestReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }	
 
 //============================================================================
-void PktHandlerBase::onPktSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktScanReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktScanReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	

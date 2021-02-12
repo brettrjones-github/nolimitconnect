@@ -36,7 +36,7 @@ void HostServerMgr::onClientJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
 }
 
 //============================================================================
-void HostServerMgr::sendHostAnnounceToNetworkHost( PktHostAnnounce& hostAnnounce, EConnectReason connectReason )
+void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason )
 {
     m_ServerMutex.lock();
     memcpy( &m_PktHostAnnounce, &hostAnnounce, hostAnnounce.getPktLength() );
@@ -48,11 +48,11 @@ void HostServerMgr::sendHostAnnounceToNetworkHost( PktHostAnnounce& hostAnnounce
         return;
     }
 
-    connectToHost( eHostTypeNetwork, url, connectReason );
+    connectToHost( eHostTypeNetwork, sessionId, url, connectReason );
 }
 
 //============================================================================
-void HostServerMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostServerMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     m_ServerMutex.lock();
     if( removeContact( onlineId ) )
@@ -61,11 +61,11 @@ void HostServerMgr::onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId,
     }
 
     m_ServerMutex.unlock();
-    HostBaseMgr::onContactDisconnected( sktBase, onlineId, connectReason );
+    HostBaseMgr::onContactDisconnected( sessionId, sktBase, onlineId, connectReason );
 }
 
 //============================================================================
-void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     if( hostType == eHostTypeNetwork &&
         ( connectReason == eConnectReasonChatRoomAnnounce ||
@@ -84,11 +84,11 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBa
 
         m_ServerMutex.unlock();
 
-        m_Engine.getConnectionMgr().doneWithConnection( onlineId, this, connectReason );
+        m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
     }
     else
     {
-        HostBaseMgr::onConnectToHostSuccess( hostType, sktBase, onlineId, connectReason );
+        HostBaseMgr::onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason );
     }
 }
 

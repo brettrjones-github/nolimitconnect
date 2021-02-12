@@ -16,16 +16,19 @@
 #include "AppletBase.h"
 #include <GoTvInterface/IToGui.h>
 
-//#include "ui_AppletClientBase.h"
 
 class AppletClientBase : public AppletBase
 {
 	Q_OBJECT
 public:
     AppletClientBase( const char * objName, AppCommon& app, QWidget * parent );
-	virtual ~AppletClientBase();
+	virtual ~AppletClientBase() = default;
+
+    void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
+    EHostType                   getHostType(  void )                { return m_HostType; }
 
 protected:
+    EHostType                   m_HostType{ eHostTypeUnknown };
 };
 
 

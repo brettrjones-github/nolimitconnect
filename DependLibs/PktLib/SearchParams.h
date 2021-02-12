@@ -25,13 +25,22 @@ public:
 
 	SearchParams&				operator =( const SearchParams& rhs );
 
+    void						setHostType( EHostType hostType )						    { m_HostType = hostType; }
+    EHostType					getHostType( void )								            { return m_HostType; }
+
+    void						setSearchType( ESearchType searchType )						{ m_SearchType = searchType; }
+    ESearchType					getSearchType( void )								        { return m_SearchType; }
+
     // search session (unique per search instance)
-    void						setSearchSessionGuid( VxGUID& guid )						{ m_SearchSessionGuid = guid; }
-    VxGUID&					    getSearchSessionGuid( void )								{ return m_SearchSessionGuid; }
+    void						setSearchSessionId( VxGUID& guid )						    { m_SearchSessionId = guid; }
+    VxGUID&					    getSearchSessionId( void )								    { return m_SearchSessionId; }
 
     // search for identity (for person or host)
     void						setSearchIdentGuid( VxGUID& guid )							{ m_SearchIdentGuid = guid; }
     VxGUID&					    getSearchIndentGuid( void )									{ return m_SearchIdentGuid; }
+
+    void						setSearchUrl( std::string& url )							{ m_SearchUrl = url; }
+    std::string&				getSearchUrl( void )									    { return m_SearchUrl; }
 
 	void						setSearchText( std::string& text )							{ m_SearchText = text; }
     std::string&				getSearchText( void )									    { return m_SearchText; }
@@ -41,8 +50,11 @@ public:
 
 protected:
 	//=== vars ===//
-    VxGUID					    m_SearchSessionGuid;
+    EHostType                   m_HostType{ eHostTypeUnknown };
+    ESearchType                 m_SearchType{ eSearchNone };
+    VxGUID					    m_SearchSessionId;
     VxGUID					    m_SearchIdentGuid;
+    std::string					m_SearchUrl;
 	std::string					m_SearchText;
 };
 

@@ -344,15 +344,27 @@ void IGoTv::fromGuiRunIsPortOpenTest( uint16_t port )
 }
 
 //============================================================================
-void IGoTv::fromGuiJoinHost( EHostType hostType, const char * ptopUrl )
+void IGoTv::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
-    getPtoP().fromGuiJoinHost( hostType, ptopUrl );
+    getPtoP().fromGuiAnnounceHost( hostType, sessionId, ptopUrl );
 }
 
 //============================================================================
-void IGoTv::fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType )
+void IGoTv::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
-    getPtoP().fromGuiRunUrlAction( myUrl, ptopUrl, testType );
+    getPtoP().fromGuiJoinHost( hostType, sessionId, ptopUrl );
+}
+
+//============================================================================
+void IGoTv::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
+{
+    getPtoP().fromGuiSearchHost( hostType, searchParams, enable );
+}
+
+//============================================================================
+void IGoTv::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType )
+{
+    getPtoP().fromGuiRunUrlAction( sessionId, myUrl, ptopUrl, testType );
 }
 
 //============================================================================

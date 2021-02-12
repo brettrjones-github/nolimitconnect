@@ -270,7 +270,9 @@ public:
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
-    virtual void				toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
     /// Send Network available status to GUI for display
@@ -469,9 +471,12 @@ public:
     virtual void				fromGuiNetworkLost( void );
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
 
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
+    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
+
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
-    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr );
-    virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType );
+    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType );
 
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
     virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );

@@ -86,6 +86,8 @@ enum EMediaInputType
 	eMaxMediaInputType
 };
 
+class SearchParams;
+
 /// IFromGui is an abstract interface for from GUI to P2PEngine calls
 class IFromGui
 {
@@ -230,9 +232,12 @@ public:
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) = 0;
 	/// Run test to see if TCP port is open and what the external IP Address is
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) = 0;
-    virtual void				fromGuiJoinHost( EHostType hostType, const char * ptopUrl = nullptr ) = 0;
     /// Run test on the given url
-    virtual void				fromGuiRunUrlAction( const char * myUrl, const char * ptopUrl, ENetCmdType testType ) = 0;
+    virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType ) = 0;
+
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) = 0;
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) = 0;
+    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) = 0;
 
 	/// Set file share settings
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) = 0;

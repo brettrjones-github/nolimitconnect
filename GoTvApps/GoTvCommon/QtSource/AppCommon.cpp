@@ -1023,29 +1023,80 @@ void AppCommon::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * ms
 }
 
 //============================================================================
-void AppCommon::toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg )
+void AppCommon::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char * msg )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    const char * hostStatus = DescribeHostAnnounceStatus( annStatus );
+    std::string formatedMsg;
+    if( msg )
+    {
+        StdStringFormat( formatedMsg, "#%s %s", hostStatus, msg );
+    }
+    else
+    {
+        StdStringFormat( formatedMsg, "#%s\n", hostStatus );
+    }
+
+    emit signalLog( 0, formatedMsg.c_str() );
+    emit signalStatusMsg( formatedMsg.c_str() );
+
+    emit signalHostAnnounceStatus( hostType, sessionId, annStatus, formatedMsg.c_str() );
+}
+
+//============================================================================
+void AppCommon::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * anchorStatus = DescribeHostJoinStatus( joinStatus );
+	const char * hostStatus = DescribeHostJoinStatus( joinStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
-		StdStringFormat( formatedMsg, "#%s %s", anchorStatus, msg );
+		StdStringFormat( formatedMsg, "#%s %s", hostStatus, msg );
 	}
 	else
 	{
-		StdStringFormat( formatedMsg, "#%s\n", anchorStatus );
+		StdStringFormat( formatedMsg, "#%s\n", hostStatus );
 	}
 
 	emit signalLog( 0, formatedMsg.c_str() );
 	emit signalStatusMsg( formatedMsg.c_str() );
 
-	emit signalHostJoinStatus( hostType, joinStatus, formatedMsg.c_str() );
+	emit signalHostJoinStatus( hostType, sessionId, joinStatus, formatedMsg.c_str() );
 }
+
+//============================================================================
+void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, const char * msg )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    const char * hostStatus = DescribeHostSearchStatus( searchStatus );
+    std::string formatedMsg;
+    if( msg )
+    {
+        StdStringFormat( formatedMsg, "#%s %s", hostStatus, msg );
+    }
+    else
+    {
+        StdStringFormat( formatedMsg, "#%s\n", hostStatus );
+    }
+
+    emit signalLog( 0, formatedMsg.c_str() );
+    emit signalStatusMsg( formatedMsg.c_str() );
+
+    emit signalHostSearchStatus( hostType, sessionId, searchStatus, formatedMsg.c_str() );
+}
+
 
 //============================================================================
 void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg )
@@ -1870,11 +1921,12 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<EFriendState>( "EFriendState" );
     qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
     qRegisterMetaType<EGenderType>( "EGenderType" );
+    qRegisterMetaType<EHostAnnounceStatus>( "EHostAnnounceStatus" );
     qRegisterMetaType<EHostJoinStatus>( "EHostJoinStatus" );
+    qRegisterMetaType<EHostSearchStatus>( "EHostSearchStatus" );
     qRegisterMetaType<EHostServiceType>( "EHostServiceType" );
     qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
     qRegisterMetaType<EHostType>( "EHostType" );
-    qRegisterMetaType<EHostJoinStatus>( "EHostJoinStatus" );
     qRegisterMetaType<EInternetStatus>( "EInternetStatus" );
     qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
     qRegisterMetaType<ERunTestStatus>( "ERunTestStatus" );

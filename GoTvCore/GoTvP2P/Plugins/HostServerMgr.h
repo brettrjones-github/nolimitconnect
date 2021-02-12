@@ -23,12 +23,11 @@ public:
     HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostServerMgr() = default;
 
-    virtual void                sendHostAnnounceToNetworkHost( PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
-
+    virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
 
 protected:
-    virtual void                onConnectToHostSuccess( EHostType hostType, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
-    virtual void                onContactDisconnected( VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
+    virtual void                onContactDisconnected(VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     virtual void                onClientJoined( VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual bool                addClient( VxSktBase * sktBase, VxNetIdent * netIdent );

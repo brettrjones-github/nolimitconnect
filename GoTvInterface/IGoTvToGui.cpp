@@ -114,9 +114,21 @@ void IGoTv::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
 }
 
 //============================================================================
-void IGoTv::toGuiHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, const char * msg )
+void IGoTv::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus annStatus, const char * msg )
 {
-    getAppCommon().toGuiHostJoinStatus( hostType, joinStatus, msg );
+    getAppCommon().toGuiHostAnnounceStatus( hostType, sessionId, annStatus, msg );
+}
+
+//============================================================================
+void IGoTv::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg )
+{
+    getAppCommon().toGuiHostJoinStatus( hostType, sessionId, joinStatus, msg );
+}
+
+//============================================================================
+void IGoTv::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, const char * msg )
+{
+    getAppCommon().toGuiHostSearchStatus( hostType, sessionId, searchStatus, msg );
 }
 
 //============================================================================
