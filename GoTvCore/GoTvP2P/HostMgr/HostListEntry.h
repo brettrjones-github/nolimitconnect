@@ -21,6 +21,11 @@
 class HostListEntry : public VxConnectIdent
 {
 public:
+    HostListEntry() = default;
+    HostListEntry( const HostListEntry& rhs );
+
+    HostListEntry& operator=( const HostListEntry& rhs );
+
     void						setListEntryLength( uint16_t entryLen );
     uint16_t					getListEntryLength( void ) const;
 

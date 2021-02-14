@@ -62,7 +62,7 @@
        <widget class="SearchParamsWidget" name="m_SearchsParamWidget" native="true"/>
       </item>
       <item>
-       <widget class="QLabel" name="ScanStatusLabel">
+       <widget class="QLabel" name="m_InfoLabel">
         <property name="font">
          <font>
           <pointsize>10</pointsize>

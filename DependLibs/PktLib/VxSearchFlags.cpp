@@ -15,19 +15,48 @@
 
 #include "VxSearchFlags.h"
 #include "VxSearchDefs.h"
+#include "PktBlobEntry.h"
 
 #include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-VxSearchFlags::VxSearchFlags()
-: m_u8SearchFlags(0)
-, m_u8FileTypeFlags(0)
+VxSearchFlags::VxSearchFlags( const VxSearchFlags& rhs )
+    : m_u8SearchFlags( rhs.m_u8SearchFlags )
+    , m_u8FileTypeFlags( rhs.m_u8FileTypeFlags )
 {
 }
 
 //============================================================================
+VxSearchFlags& VxSearchFlags::operator =( const VxSearchFlags& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u8SearchFlags = rhs.m_u8SearchFlags;
+        m_u8FileTypeFlags = rhs.m_u8FileTypeFlags;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool VxSearchFlags::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_u8SearchFlags );
+    result &= blob.setValue( m_u8FileTypeFlags );
+    return result;
+}
+
+//============================================================================
+bool VxSearchFlags::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_u8SearchFlags );
+    result &= blob.getValue( m_u8FileTypeFlags );
+    return result;
+}
+
+//============================================================================
 //! return true if any search bits are set
-bool 	VxSearchFlags::hasSearchFlags( void )					
+bool VxSearchFlags::hasSearchFlags( void )					
 { 
 	return getSearchFlags()  ? true : false; 
 }

@@ -18,6 +18,7 @@
 #include "PopupMenu.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "ActivityMessageBox.h"
+#include "GuiHelpers.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -49,7 +50,13 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
 //============================================================================
 void AppletChatRoomJoinSearch::setStatusLabel( QString strMsg )
 {
-	ui.ScanStatusLabel->setText( strMsg );
+	ui.m_StatusLabel->setText( strMsg );
+}
+
+//============================================================================
+void AppletChatRoomJoinSearch::setInfoLabel( QString strMsg )
+{
+    ui.m_InfoLabel->setText( strMsg );
 }
 
 //============================================================================
@@ -158,3 +165,26 @@ void AppletChatRoomJoinSearch::slotSearchResult( VxNetIdent * netIdent )
 	ui.m_FriendListWidget->updateFriend( netIdent, false );
 }
 
+//============================================================================
+void AppletChatRoomJoinSearch::slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString text )
+{
+   // getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
+    //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
+    setInfoLabel( GuiHelpers::describeStatus(hostStatus) + text);
+}
+
+//============================================================================
+void AppletChatRoomJoinSearch::slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString text )
+{
+    //getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
+    //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
+    setInfoLabel( GuiHelpers::describeStatus(hostStatus) + text);
+}
+
+//============================================================================
+void AppletChatRoomJoinSearch::slotHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
+{
+    //getInfoEdit()->appendPlainText( strMsg ); // Adds the message to the widget
+    //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
+    setInfoLabel( GuiHelpers::describeStatus(hostStatus) + strMsg);
+}

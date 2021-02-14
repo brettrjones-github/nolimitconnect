@@ -14,15 +14,21 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <CoreLib/VxDefs.h>
+#include <inttypes.h>
 
 #pragma pack(push) 
 #pragma pack(1)
+
+class PktBlobEntry;
 //! 2 bytes in size
 class VxSearchFlags
 {
 public:
-	VxSearchFlags();
+	VxSearchFlags() = default;
+    VxSearchFlags( const VxSearchFlags& rhs );
+    VxSearchFlags&              operator =( const VxSearchFlags& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	void						setSearchFlags( uint8_t flags )			{ m_u8SearchFlags = flags; }
 	uint8_t						getSearchFlags( void )				    { return m_u8SearchFlags; }
@@ -59,10 +65,10 @@ public:
 	void						setHasModifiedStoryboard( bool bHasStoryBoard );
 	bool						hasModifiedStoryboard( void );
 
-private:
+protected:
 	//=== vars ===//
-	uint8_t							m_u8SearchFlags;
-	uint8_t							m_u8FileTypeFlags;
+    uint8_t						m_u8SearchFlags{ 0 };
+	uint8_t						m_u8FileTypeFlags{ 0 };
 };
 
 #pragma pack(pop)

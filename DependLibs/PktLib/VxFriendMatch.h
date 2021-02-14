@@ -24,10 +24,16 @@ const char * DescribeFriendState( EFriendState eFriendState );
 
 #pragma pack(push) 
 #pragma pack(1)
+class PktBlobEntry;
+
 class FriendMatch
 {
 public:
-	FriendMatch();
+	FriendMatch() = default;
+    FriendMatch( const FriendMatch& rhs );
+    FriendMatch&                operator =( const FriendMatch& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	//! return true if is ignored
 	bool						isIgnored();
@@ -78,7 +84,7 @@ public:
 	const char *				describeMyFriendshipToHim( void );
 
 	//=== vars ===//
-	uint8_t						m_u8FriendMatch = 0;
+    uint8_t						m_u8FriendMatch{ 0x11 };
 };
 
 #pragma pack(pop)

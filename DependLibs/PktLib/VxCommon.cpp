@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "VxCommon.h"
+#include "PktBlobEntry.h"
 
 #include <NetLib/VxSktBase.h>
 #include <NetLib/VxSktUtil.h>
@@ -75,6 +76,30 @@ RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
 PluginPermission::PluginPermission()
 {
 	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
+}
+
+//============================================================================
+bool PluginPermission::addToBlob( PktBlobEntry& blob )
+{
+    return blob.setValue( m_au8Permissions, (int)sizeof( m_au8Permissions ) );
+}
+
+//============================================================================
+bool PluginPermission::extractFromBlob( PktBlobEntry& blob )
+{
+    int iBufLen = 0;
+    return blob.getValue(  (void *)m_au8Permissions, iBufLen );
+}
+
+//============================================================================
+PluginPermission& PluginPermission::operator = ( const PluginPermission& rhs )
+{
+    if( this != &rhs )
+    {
+        memcpy( m_au8Permissions, rhs.m_au8Permissions, sizeof( m_au8Permissions ) );
+    }
+
+    return *this;
 }
 
 //============================================================================
@@ -167,20 +192,121 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 } 
 
 //============================================================================
+//============================================================================
+//============================================================================
+VxGroupService::VxGroupService( const VxGroupService &rhs )
+: m_GroupFlags( rhs.m_GroupFlags )
+, m_GroupCatagories( rhs.m_GroupCatagories )
+, m_GroupSubCatagories( rhs.m_GroupSubCatagories )
+, m_GroupReserved( rhs.m_GroupReserved )
+{
+}
+
+//============================================================================
+bool VxGroupService::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_GroupFlags );
+    result &= blob.setValue( m_GroupCatagories );
+    result &= blob.setValue( m_GroupSubCatagories );
+    result &= blob.setValue( m_GroupReserved );
+    return result;
+
+}
+
+//============================================================================
+bool VxGroupService::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_GroupFlags );
+    result &= blob.getValue( m_GroupCatagories );
+    result &= blob.getValue( m_GroupSubCatagories );
+    result &= blob.getValue( m_GroupReserved );
+    return result;
+}
+
+//============================================================================
+VxGroupService& VxGroupService::operator =( const VxGroupService &rhs )
+{
+    if( this != &rhs )
+    {
+        m_GroupFlags = rhs.m_GroupFlags;
+        m_GroupCatagories = rhs.m_GroupCatagories;
+        m_GroupSubCatagories = rhs.m_GroupSubCatagories;
+        m_GroupReserved = rhs.m_GroupReserved;
+    }
+
+    return *this;
+}
+
+//============================================================================
+//============================================================================
+//============================================================================
 VxNetIdent::VxNetIdent()
 : m_u16AppVersion( htons( VxGetAppVersion() ) )	
-, m_u16PingTimeMs(0)
-, m_LastSessionTimeGmtMs(0)
 {
 }
 
 //============================================================================
 VxNetIdent::VxNetIdent(const VxNetIdent &rhs )
-    : VxNetIdentBase( rhs )
-    , PluginPermission( rhs )
-    , VxGroupService( rhs )
+: VxNetIdentBase( rhs )
+, PluginPermission( rhs )
+, VxGroupService( rhs )
+, m_u16AppVersion( rhs.m_u16AppVersion )
+, m_u16PingTimeMs( rhs.m_u16PingTimeMs )
+, m_NetIdentRes1( rhs.m_NetIdentRes1 )
+, m_NetIdentRes2( rhs.m_NetIdentRes2 )  
+, m_NetIdentRes3( rhs.m_NetIdentRes3 )
+, m_LastSessionTimeGmtMs( rhs.m_LastSessionTimeGmtMs )
 {
-	*this = rhs;
+}
+
+//============================================================================
+bool VxNetIdent::addToBlob( PktBlobEntry& blob )
+{
+    bool result = VxNetIdentBase::addToBlob( blob );
+    result &= PluginPermission::addToBlob( blob );
+    result &= VxGroupService::addToBlob( blob );
+    result &= blob.setValue( m_u16AppVersion );
+    result &= blob.setValue( m_u16PingTimeMs );
+    result &= blob.setValue( m_NetIdentRes1 );
+    result &= blob.setValue( m_NetIdentRes2 );
+    result &= blob.setValue( m_NetIdentRes3 );
+    result &= blob.setValue( m_LastSessionTimeGmtMs );
+    return result;
+}
+
+//============================================================================
+bool VxNetIdent::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = VxNetIdentBase::extractFromBlob( blob );
+    result &= PluginPermission::extractFromBlob( blob );
+    result &= VxGroupService::extractFromBlob( blob );
+    result &= blob.getValue( m_u16AppVersion );
+    result &= blob.getValue( m_u16PingTimeMs );
+    result &= blob.getValue( m_NetIdentRes1 );
+    result &= blob.getValue( m_NetIdentRes2 );
+    result &= blob.getValue( m_NetIdentRes3 );
+    result &= blob.getValue( m_LastSessionTimeGmtMs );
+    return result;
+}
+
+//============================================================================
+//! copy operator
+VxNetIdent& VxNetIdent::operator =( const VxNetIdent& rhs  )
+{
+    if( this != &rhs )
+    {
+        *( (VxNetIdentBase*)this ) = *( (VxNetIdentBase*)&rhs );
+        *( (PluginPermission*)this ) = *( (PluginPermission*)&rhs );
+        *( (VxGroupService*)this ) = *( (VxGroupService*)&rhs );
+        m_u16AppVersion = rhs.m_u16AppVersion;
+        m_u16PingTimeMs = rhs.m_u16PingTimeMs;
+        m_NetIdentRes1 = rhs.m_NetIdentRes1;
+        m_NetIdentRes2 = rhs.m_NetIdentRes2;
+        m_NetIdentRes3 = rhs.m_NetIdentRes3;
+        m_LastSessionTimeGmtMs = rhs.m_LastSessionTimeGmtMs;
+    }
+
+    return *this;
 }
 
 //============================================================================
@@ -315,15 +441,6 @@ EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 	}		
 
 	return accessState;
-}
-
-//============================================================================
-//! copy operator
-VxNetIdent& VxNetIdent::operator =( const VxNetIdent& rhs  )
-{
-	// we can get away with memcpy because no virtual functions
-	memcpy( this, &rhs, sizeof( VxNetIdent ) );
-	return *this;
 }
 
 //============================================================================

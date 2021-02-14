@@ -35,12 +35,14 @@
 class VxNetIdentBase : public VxConnectInfo, public VxOnlineStatusFlags
 {
 public:
-	VxNetIdentBase();
+	VxNetIdentBase() = default;
 	VxNetIdentBase( const VxNetIdentBase &rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-	VxNetIdentBase& operator =( const VxNetIdentBase &rhs );
-	bool operator ==( const VxNetIdentBase &rhs ) const;
-	bool operator != ( const VxNetIdentBase &rhs ) const;
+	VxNetIdentBase&             operator =( const VxNetIdentBase &rhs );
+	bool                        operator ==( const VxNetIdentBase &rhs ) const;
+	bool                        operator != ( const VxNetIdentBase &rhs ) const;
 
 	VxConnectInfo&				getConnectInfo( void )					{ return *this; }
 
@@ -59,13 +61,13 @@ public:
 
 protected:
 	//=== vars ===//
-	uint8_t						m_u8ResBase = 0;	
-	uint8_t						m_u8OfferCnt = 0;							// offer count ( used as part of rating )
-	uint8_t						m_u8ReplyCnt = 0;							// reply count ( used as part of rating )
-	uint32_t					m_u32TruthCnt = 0;					
-	uint32_t					m_u32DareCnt = 0;					
-	uint16_t					m_u16RejectedTruthsCnt = 0;				
-	uint16_t					m_u16RejectedDaresCnt = 0;		
+    uint8_t						m_u8ResBase{ 0 };
+	uint8_t						m_u8OfferCnt{ 0 };							// offer count ( used as part of rating )
+	uint8_t						m_u8ReplyCnt{ 0 };					        // reply count ( used as part of rating )
+	uint32_t					m_u32TruthCnt{ 0 };					
+	uint32_t					m_u32DareCnt{ 0 };					
+	uint16_t					m_u16RejectedTruthsCnt{ 0 };				
+	uint16_t					m_u16RejectedDaresCnt{ 0 };	
 };
 
 #pragma pack(pop)

@@ -72,6 +72,10 @@ public:
 	static QString				describeFileLength( uint64_t fileLen );
     static QString				describeOrientation( Qt::Orientation qtOrientation );
 
+    static QString              describeStatus( EHostAnnounceStatus hostStatus );
+    static QString              describeStatus( EHostJoinStatus hostStatus );
+    static QString              describeStatus( EHostSearchStatus hostStatus );
+
     /// @brief get home or messenger topmost widget
     static QFrame *             getParentPageFrame( QWidget * curWidget );
     /// @brief messenger frame topmost widget

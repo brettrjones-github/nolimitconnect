@@ -141,3 +141,6 @@ wchar_t *						TrimLeadingSpaces( wchar_t * pString );
 // find substring (case insensitive) second param str2 is the substring to search str1 for
 // returns -1 if not found
 int                             CaseInsensitiveFindSubstr( const std::string& str1, const std::string& str2 );
+
+int                             SafeStrCopy( char * pDest, const char * pSrc, int iBufLen );
+int                             SafeStrCopy( wchar_t * pDest, const wchar_t * pSrc, int iBufLen );

@@ -31,28 +31,39 @@
 #pragma pack(push) 
 #pragma pack(1)
 
+class PktBlobEntry;
+
 class P2PEngineVersion
 {
 public:
     P2PEngineVersion();
+    P2PEngineVersion( const P2PEngineVersion& rhs );
+    P2PEngineVersion&           operator =( const P2PEngineVersion& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-    uint8_t							getP2PEngineVersion( void );
-    void						    getP2PEngineVersion( std::string& strRetP2PEngineVersion );
+    uint8_t						getP2PEngineVersion( void );
+    void						getP2PEngineVersion( std::string& strRetP2PEngineVersion );
 
 private:
-    uint8_t							m_u8P2PEngineVersion{0};
+    uint8_t						m_u8P2PEngineVersion{ 0 };
 };
 
 class MyOSVersion
 {
 public:
     MyOSVersion();
+    MyOSVersion( const MyOSVersion& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-    uint8_t							getOSVersion( void );
-    void						    getOSVersion( std::string& strRetOSVersion );
+    MyOSVersion&                operator =( const MyOSVersion& rhs );
+
+    uint8_t						getOSVersion( void );
+    void						getOSVersion( std::string& strRetOSVersion );
 
 private:
-    uint8_t							m_u8OSVersion{0};
+    uint8_t						m_u8OSVersion{0};
 };
 
 // size
@@ -70,8 +81,9 @@ class VxConnectBaseInfo : public P2PEngineVersion, public MyOSVersion, public Vx
 public:
 	VxConnectBaseInfo() = default;
 	VxConnectBaseInfo( const VxConnectBaseInfo& rhs );
-
-	VxConnectBaseInfo& operator =( const VxConnectBaseInfo& rhs );
+	VxConnectBaseInfo&          operator =( const VxConnectBaseInfo& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	void						setMyOnlineId( uint64_t u64HiPart, uint64_t u64LoPart );
 	VxGUID&						getMyOnlineId();
@@ -136,6 +148,11 @@ class VxConnectIdent : public VxConnectBaseInfo
 {
 public:
 	VxConnectIdent();
+    VxConnectIdent( const VxConnectIdent& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+
+    VxConnectIdent&             operator =( const VxConnectIdent& rhs );
 
 	VxConnectBaseInfo& 			getConnectBaseInfo( void )	                        { return * ((VxConnectBaseInfo *)this); }
 	VxConnectIdent& 			getConnectIdent( void )		                        { return * ((VxConnectIdent *)this); }
@@ -215,8 +232,9 @@ class VxConnectInfo : public VxConnectIdent
 public:
     VxConnectInfo() = default;
 	VxConnectInfo( const VxConnectInfo& rhs );
-
-	VxConnectInfo& operator =( const VxConnectInfo& rhs );
+	VxConnectInfo&              operator =( const VxConnectInfo& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	void						setTimeLastConnectAttemptMs( int64_t timeLastAttempt );
 	int64_t 					getTimeLastConnectAttemptMs( void );

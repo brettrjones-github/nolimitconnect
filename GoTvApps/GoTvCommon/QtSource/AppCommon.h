@@ -590,9 +590,9 @@ signals:
 	void						signalStatusMsg( QString strMsg );
 	void						signalUserMsg( QString strMsg );
 
-    void						signalHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus, QString strMsg );
-    void						signalHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus, QString strMsg );
-    void						signalHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus, QString strMsg );
+    void						signalHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
+    void						signalHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
+    void						signalHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
 
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
     void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );

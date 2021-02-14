@@ -18,14 +18,15 @@
 
 //============================================================================
 JoinedEntry::JoinedEntry( const JoinedEntry& rhs )
+    : HostListEntry( rhs )
+    , m_PostTimeMs( rhs.m_PostTimeMs )
 {
-    *((VxConnectIdent *)this) = rhs;
 }
 
 //============================================================================
 JoinedEntry::JoinedEntry( const VxConnectIdent& rhs )
 {
-    *this = rhs;
+    *((VxConnectIdent*)this) = *((VxConnectIdent*)&rhs);
 }
 
 //============================================================================

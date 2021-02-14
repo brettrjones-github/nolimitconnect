@@ -31,6 +31,7 @@ class InetAddress;
 class InetAddrAndPort;
 class InetAddrIPv4;
 class InetAddrIPv4AndPort;
+class PktBlobEntry;
 
 //============================================================================
 // size 16 bytes
@@ -38,17 +39,20 @@ class InetAddrIPv4AndPort;
 class InetAddress
 {
 public:
-	InetAddress();	
+	InetAddress() = default;	
 	InetAddress( const char * pIpAddress );
 	InetAddress( uint32_t u32IpAddr );
+    InetAddress( const InetAddress& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-    InetAddress& operator=(const InetAddress& inetAddr);
-	bool operator == (const InetAddress& inetAddr) const;
-    bool operator != (const InetAddress& inetAddr) const;
+    InetAddress&                operator=(const InetAddress& inetAddr);
+	bool                        operator == (const InetAddress& inetAddr) const;
+    bool                        operator != (const InetAddress& inetAddr) const;
 
-	InetAddress& operator=(const InetAddrIPv4& inetAddr);
-	bool operator == (const InetAddrIPv4& inetAddr) const;
-	bool operator != (const InetAddrIPv4& inetAddr) const;
+	InetAddress&                operator=(const InetAddrIPv4& inetAddr);
+	bool                        operator == (const InetAddrIPv4& inetAddr) const;
+	bool                        operator != (const InetAddrIPv4& inetAddr) const;
 
     bool                        isValid( void ) const;
     void                        setToInvalid( void );
@@ -99,23 +103,26 @@ private:
     static uint64_t             swap64Bit( uint64_t src );
 
 public:
-	uint64_t					m_u64AddrHi;
-	uint64_t					m_u64AddrLo;
+	uint64_t					m_u64AddrHi{ 0 };
+	uint64_t					m_u64AddrLo{ 0 };
 };
 
 //============================================================================
 class InetAddrAndPort : public InetAddress
 {
 public:
-    InetAddrAndPort();
+    InetAddrAndPort() = default;
 	InetAddrAndPort( const char * ipAddr );
 	InetAddrAndPort( const char * ipAddr, uint16_t port );
+    InetAddrAndPort( const InetAddrAndPort& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-	InetAddrAndPort& operator=(const InetAddress& inetAddr);
-	InetAddrAndPort& operator=(const InetAddrAndPort& inetAddr);
+	InetAddrAndPort&            operator=(const InetAddress& inetAddr);
+	InetAddrAndPort&            operator=(const InetAddrAndPort& inetAddr);
 
-	InetAddrAndPort& operator=(const InetAddrIPv4& inetAddr);
-	InetAddrAndPort& operator=(const InetAddrIPv4AndPort& inetAddr);
+	InetAddrAndPort&            operator=(const InetAddrIPv4& inetAddr);
+	InetAddrAndPort&            operator=(const InetAddrIPv4AndPort& inetAddr);
 
     uint16_t                    getPort( void )	const			    { return m_u16Port; }
     void                        setPort( uint16_t u16Port )			{ m_u16Port = u16Port; }
@@ -125,7 +132,7 @@ public:
     void                        setIpAndPort( const char * ipAddr, uint16_t port );
 
 	//=== vars ===//
-	uint16_t                    m_u16Port;
+    uint16_t                    m_u16Port{ 0 };
 };
 
 //============================================================================
@@ -133,18 +140,20 @@ public:
 class InetAddrIPv4
 {
 public:
-	InetAddrIPv4();
-
+	InetAddrIPv4() = default;
 	InetAddrIPv4( const char * pIpAddress );
 	InetAddrIPv4( uint32_t u32IpAddr );
+    InetAddrIPv4( const InetAddrIPv4& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-	InetAddrIPv4& operator=(const InetAddrIPv4& inetAddr);
-	bool operator != (const InetAddrIPv4& inetAddr) const;
-	bool operator == (const InetAddrIPv4& inetAddr) const;
+	InetAddrIPv4&               operator=(const InetAddrIPv4& inetAddr);
+	bool                        operator != (const InetAddrIPv4& inetAddr) const;
+	bool                        operator == (const InetAddrIPv4& inetAddr) const;
 
-	InetAddrIPv4& operator=(const InetAddress& inetAddr);
-	bool operator != (const InetAddress& inetAddr) const;
-	bool operator == (const InetAddress& inetAddr) const;
+	InetAddrIPv4&               operator=(const InetAddress& inetAddr);
+	bool                        operator != (const InetAddress& inetAddr) const;
+	bool                        operator == (const InetAddress& inetAddr) const;
 
 	bool                        isValid( void ) const;
 	void                        setToInvalid( void );
@@ -187,28 +196,31 @@ private:
 	static uint32_t             swap32Bit( uint32_t src );
 
 public:
-	uint32_t					m_u32AddrIPv4;
+    uint32_t					m_u32AddrIPv4{ 0 };
 };
 
 //============================================================================
 class InetAddrIPv4AndPort : public InetAddrIPv4
 {
 public:
-	InetAddrIPv4AndPort();
+	InetAddrIPv4AndPort() = default;
+    InetAddrIPv4AndPort( const InetAddrIPv4AndPort& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-	InetAddrIPv4AndPort& operator=(const InetAddrIPv4& inetAddr);
-	InetAddrIPv4AndPort& operator=(const InetAddrIPv4AndPort& inetAddr);
+	InetAddrIPv4AndPort&        operator=(const InetAddrIPv4& inetAddr);
+	InetAddrIPv4AndPort&        operator=(const InetAddrIPv4AndPort& inetAddr);
 
-	InetAddrIPv4AndPort& operator=(const InetAddress& oAddr);
-	InetAddrIPv4AndPort& operator=(const InetAddrAndPort& oAddr);
+	InetAddrIPv4AndPort&        operator=(const InetAddress& oAddr);
+	InetAddrIPv4AndPort&        operator=(const InetAddrAndPort& oAddr);
 
-	uint16_t                    getPort( void )	const		{ return m_u16Port; }
+	uint16_t                    getPort( void )	const		    { return m_u16Port; }
 	void                        setPort( uint16_t u16Port )		{ m_u16Port = u16Port; }
 
 	void                        setIpAndPort( struct sockaddr_storage& oAddr );
 	void                        setIpAndPort( struct sockaddr& oAddr );
 
-	uint16_t                    m_u16Port;
+	uint16_t                    m_u16Port{ 0 };
 };
 
 #pragma pack()

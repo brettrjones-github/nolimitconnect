@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "VxPktHdr.h"
+#include "PktBlobEntry.h"
 
 #include <memory.h>
 
@@ -22,6 +23,58 @@
 // http = 0x68747470
 #define PKT_TYPE_NET_SERVICES						0x6874
 #define PKT_LENGTH_NET_SERVICES						0x7470
+
+
+//============================================================================
+VxPktHdrPrefix::VxPktHdrPrefix( const VxPktHdrPrefix& rhs )
+    : m_u16PktLen( rhs.m_u16PktLen )
+    , m_u16PktType( rhs.m_u16PktType )
+    , m_u8PluginNum( rhs.m_u8PluginNum )
+    , m_u8SeqNum( rhs.m_u8SeqNum )
+    , m_RouteFlags( rhs.m_RouteFlags )
+    , m_u8PktVersion( rhs.m_u8PktVersion )
+{
+}
+
+//============================================================================
+VxPktHdrPrefix&  VxPktHdrPrefix::operator = ( const VxPktHdrPrefix& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u16PktLen = rhs.m_u16PktLen;
+        m_u16PktType = rhs.m_u16PktType;
+        m_u8PluginNum = rhs.m_u8PluginNum;
+        m_u8SeqNum = rhs.m_u8SeqNum;
+        m_RouteFlags = rhs.m_RouteFlags;
+        m_u8PktVersion = rhs.m_u8PktVersion;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool VxPktHdrPrefix::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_u16PktLen );
+    result &= blob.setValue( m_u16PktType );
+    result &= blob.setValue( m_u8PluginNum );
+    result &= blob.setValue( m_u8SeqNum );
+    result &= blob.setValue( m_RouteFlags );
+    result &= blob.setValue( m_u8PktVersion );
+    return result;
+}
+
+//============================================================================
+bool VxPktHdrPrefix::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_u16PktLen );
+    result &= blob.getValue( m_u16PktType );
+    result &= blob.getValue( m_u8PluginNum );
+    result &= blob.getValue( m_u8SeqNum );
+    result &= blob.getValue( m_RouteFlags );
+    result &= blob.getValue( m_u8PktVersion );
+    return result;
+}
 
 //============================================================================
 //=== return true if valid pkt type and length ===//
@@ -107,6 +160,44 @@ void VxPktHdrPrefix::setPktVersionNum( uint8_t  u8PktVersionNum )
 uint8_t	VxPktHdrPrefix::getPktVersionNum( void )
 {
 	return m_u8PktVersion;
+}
+
+//============================================================================
+VxPktHdr::VxPktHdr( const VxPktHdr& rhs )
+    : VxPktHdrPrefix( rhs )
+    , m_SrcOnlineId( rhs.m_SrcOnlineId )
+    , m_DestOnlineId( rhs.m_DestOnlineId )
+{
+}
+
+//============================================================================
+VxPktHdr&  VxPktHdr::operator = ( const VxPktHdr& rhs )
+{
+    if( this != &rhs )
+    {
+        m_SrcOnlineId = rhs.m_SrcOnlineId;
+        m_DestOnlineId = rhs.m_DestOnlineId;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool VxPktHdr::addToBlob( PktBlobEntry& blob )
+{
+    bool result = VxPktHdrPrefix::addToBlob( blob );
+    result &= blob.setValue( m_SrcOnlineId );
+    result &= blob.setValue( m_DestOnlineId );
+    return result;
+}
+
+//============================================================================
+bool VxPktHdr::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = VxPktHdrPrefix::extractFromBlob( blob );
+    result &= blob.getValue( m_SrcOnlineId );
+    result &= blob.getValue( m_DestOnlineId );
+    return result;
 }
 
 //============================================================================

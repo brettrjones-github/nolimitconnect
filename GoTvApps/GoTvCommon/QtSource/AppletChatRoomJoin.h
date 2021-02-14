@@ -32,7 +32,9 @@ signals:
 
 protected slots:
     void                        slotInfoMsg( const QString& text );
-    void                        slotHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, QString msg );
+    void						slotHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
+    void						slotHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
+    void						slotHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
 
     void                        slotJoinDefaultChatRoom( void );
     void                        slotCopyResultToClipboardClicked( void );

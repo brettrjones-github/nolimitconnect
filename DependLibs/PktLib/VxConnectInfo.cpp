@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "VxConnectInfo.h"
+#include "PktBlobEntry.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
@@ -28,8 +29,43 @@ namespace
 
 //============================================================================
 VxConnectBaseInfo::VxConnectBaseInfo( const VxConnectBaseInfo &rhs )
+    : P2PEngineVersion( rhs )
+    , MyOSVersion( rhs )
+    , VxRelayFlags( rhs )
+    , FriendMatch( rhs )
+    , VxSearchFlags( rhs )
+    , m_LanIPv4( rhs.m_LanIPv4 )
+    , m_DirectConnectId( rhs.m_DirectConnectId )
+    , m_RelayConnectId( rhs.m_RelayConnectId )
 {
-	*this = rhs;
+}
+
+//============================================================================
+bool VxConnectBaseInfo::addToBlob( PktBlobEntry& blob )
+{
+    bool result = P2PEngineVersion::addToBlob( blob );
+    result &= MyOSVersion::addToBlob( blob );
+    result &= VxRelayFlags::addToBlob( blob );
+    result &= FriendMatch::addToBlob( blob );
+    result &= VxSearchFlags::addToBlob( blob );
+    result &= m_LanIPv4.addToBlob( blob );
+    result &= m_DirectConnectId.addToBlob( blob );
+    result &= m_RelayConnectId.addToBlob( blob );
+    return result;
+}
+
+//============================================================================
+bool VxConnectBaseInfo::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = P2PEngineVersion::extractFromBlob( blob );
+    result &= MyOSVersion::extractFromBlob( blob );
+    result &= VxRelayFlags::extractFromBlob( blob );
+    result &= FriendMatch::extractFromBlob( blob );
+    result &= VxSearchFlags::extractFromBlob( blob );
+    result &= m_LanIPv4.extractFromBlob( blob );
+    result &= m_DirectConnectId.extractFromBlob( blob );
+    result &= m_RelayConnectId.extractFromBlob( blob );
+    return result;
 }
 
 //============================================================================
@@ -37,8 +73,14 @@ VxConnectBaseInfo& VxConnectBaseInfo::operator =( const VxConnectBaseInfo &rhs )
 {
 	if( this != &rhs )
 	{
-		// we can get away with memcpy because no virtual functions
-		memcpy( this, &rhs, sizeof( VxConnectBaseInfo ) );
+        *((P2PEngineVersion*)this) = *((P2PEngineVersion*)&rhs);
+        *((MyOSVersion*)this) = *((MyOSVersion*)&rhs);
+        *((VxRelayFlags*)this) = *((VxRelayFlags*)&rhs);
+        *((FriendMatch*)this) = *((FriendMatch*)&rhs);
+        *((VxSearchFlags*)this) = *((VxSearchFlags*)&rhs);
+        m_LanIPv4 = rhs.m_LanIPv4;
+        m_DirectConnectId = rhs.m_DirectConnectId;
+        m_RelayConnectId = rhs.m_RelayConnectId;
 	}
 
 	return *this;
@@ -152,6 +194,115 @@ VxConnectIdent::VxConnectIdent()
 }
 
 //============================================================================
+VxConnectIdent::VxConnectIdent( const VxConnectIdent& rhs )
+: VxConnectBaseInfo( rhs )
+, m_TimeLastContactMs( rhs.m_TimeLastContactMs )
+, m_PrimaryLanguage( rhs.m_PrimaryLanguage )
+, m_ContentType( rhs.m_ContentType )
+, m_u8Age( rhs.m_u8Age )
+, m_u8Gender( rhs.m_u8Gender )
+, m_IdentRes1( rhs.m_IdentRes1 )
+, m_AvatarGuid( rhs.m_AvatarGuid )
+, m_NetHostGuid( rhs.m_NetHostGuid )
+, m_ChatRoomHostGuid( rhs.m_ChatRoomHostGuid )
+, m_GroupHostGuid( rhs.m_GroupHostGuid )
+, m_RandomConnectGuid( rhs.m_RandomConnectGuid )
+{
+    SafeStrCopy( m_OnlineName, rhs.m_OnlineName, MAX_ONLINE_NAME_LEN );
+    SafeStrCopy( m_OnlineDesc, rhs.m_OnlineDesc, MAX_ONLINE_DESC_LEN );
+
+    SafeStrCopy( m_NetHostUrl, rhs.m_NetHostUrl, MAX_NET_HOST_URL_LEN );
+    SafeStrCopy( m_ChatRoomHostUrl, rhs.m_ChatRoomHostUrl, MAX_NET_HOST_URL_LEN );
+    SafeStrCopy( m_GroupHostUrl, rhs.m_GroupHostUrl, MAX_NET_HOST_URL_LEN );
+    SafeStrCopy( m_RandomConnectUrl, rhs.m_RandomConnectUrl, MAX_NET_HOST_URL_LEN );
+}
+
+//============================================================================
+bool VxConnectIdent::addToBlob( PktBlobEntry& blob )
+{
+    bool result = VxConnectBaseInfo::addToBlob( blob );
+    result &= blob.setValue( m_OnlineName, MAX_ONLINE_NAME_LEN );
+    result &= blob.setValue( m_OnlineDesc, MAX_ONLINE_DESC_LEN );
+    result &= blob.setValue( m_TimeLastContactMs );
+    result &= blob.setValue( m_PrimaryLanguage );
+    result &= blob.setValue( m_ContentType );
+    result &= blob.setValue( m_u8Age );
+    result &= blob.setValue( m_u8Gender );
+    result &= blob.setValue( m_IdentRes1 );
+
+    result &= blob.setValue( m_AvatarGuid );
+    result &= blob.setValue( m_NetHostGuid );
+    result &= blob.setValue( m_ChatRoomHostGuid );
+    result &= blob.setValue( m_GroupHostGuid );
+    result &= blob.setValue( m_RandomConnectGuid );
+
+    result &= blob.setValue( m_NetHostUrl, MAX_NET_HOST_URL_LEN );
+    result &= blob.setValue( m_ChatRoomHostUrl, MAX_NET_HOST_URL_LEN );
+    result &= blob.setValue( m_GroupHostUrl, MAX_NET_HOST_URL_LEN );
+    result &= blob.setValue( m_RandomConnectUrl, MAX_NET_HOST_URL_LEN );
+    return result;
+}
+
+//============================================================================
+bool VxConnectIdent::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = VxConnectBaseInfo::extractFromBlob( blob );
+    int onlineNameLen = MAX_ONLINE_NAME_LEN;
+    result &= blob.getValue( m_OnlineName, onlineNameLen );
+    int onlineDescLen = MAX_ONLINE_NAME_LEN;
+    result &= blob.getValue( m_OnlineDesc, onlineDescLen );
+    result &= blob.getValue( m_TimeLastContactMs );
+    result &= blob.getValue( m_PrimaryLanguage );
+    result &= blob.getValue( m_ContentType );
+    result &= blob.getValue( m_u8Age );
+    result &= blob.getValue( m_u8Gender );
+    result &= blob.getValue( m_IdentRes1 );
+
+    result &= blob.getValue( m_AvatarGuid );
+    result &= blob.getValue( m_NetHostGuid );
+    result &= blob.getValue( m_ChatRoomHostGuid );
+    result &= blob.getValue( m_GroupHostGuid );
+    result &= blob.getValue( m_RandomConnectGuid );
+
+    int len = MAX_NET_HOST_URL_LEN;
+    result &= blob.getValue( m_NetHostUrl, len );
+    result &= blob.getValue( m_ChatRoomHostUrl, len );
+    result &= blob.getValue( m_GroupHostUrl, len );
+    result &= blob.getValue( m_RandomConnectUrl, len );
+    return result;
+}
+
+//============================================================================
+VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
+{
+    if( this != &rhs )
+    {
+        SafeStrCopy( m_OnlineName, rhs.m_OnlineName, MAX_ONLINE_NAME_LEN );
+        SafeStrCopy( m_OnlineDesc, rhs.m_OnlineDesc, MAX_ONLINE_DESC_LEN );
+
+        m_TimeLastContactMs = rhs.m_TimeLastContactMs;
+        m_PrimaryLanguage = rhs.m_PrimaryLanguage;
+        m_ContentType = rhs.m_ContentType;
+        m_u8Age = rhs.m_u8Age;
+        m_u8Gender = rhs.m_u8Gender;
+        m_IdentRes1 = rhs.m_IdentRes1;
+        m_AvatarGuid = rhs.m_AvatarGuid;
+
+        m_NetHostGuid = rhs.m_NetHostGuid;
+        m_ChatRoomHostGuid = rhs.m_ChatRoomHostGuid;
+        m_GroupHostGuid = rhs.m_GroupHostGuid;
+        m_RandomConnectGuid = rhs.m_RandomConnectGuid;
+
+        SafeStrCopy( m_NetHostUrl, rhs.m_NetHostUrl, MAX_NET_HOST_URL_LEN );
+        SafeStrCopy( m_ChatRoomHostUrl, rhs.m_ChatRoomHostUrl, MAX_NET_HOST_URL_LEN );
+        SafeStrCopy( m_GroupHostUrl, rhs.m_GroupHostUrl, MAX_NET_HOST_URL_LEN );
+        SafeStrCopy( m_RandomConnectUrl, rhs.m_RandomConnectUrl, MAX_NET_HOST_URL_LEN );
+    }
+
+    return *this;
+}
+
+//============================================================================
 void VxConnectIdent::setOnlineName( const char * pUserName )			
 { 
     if( !pUserName )
@@ -242,8 +393,10 @@ std::string VxConnectIdent::getIdentFolderName( void )
 
 //============================================================================
 VxConnectInfo::VxConnectInfo( const VxConnectInfo &rhs )
+    : VxConnectIdent( rhs )
+    , m_s64TimeLastConnectAttemptMs( rhs.m_s64TimeLastConnectAttemptMs )
+    , m_s64TimeTcpLastContactMs( rhs.m_s64TimeTcpLastContactMs )
 {
-	*this = rhs;
 }
 
 //============================================================================
@@ -251,11 +404,30 @@ VxConnectInfo& VxConnectInfo::operator =( const VxConnectInfo &rhs )
 {
 	if( this != &rhs )
 	{
-		// we can get away with memcpy because no virtual functions
-		memcpy( this, &rhs, sizeof( VxConnectInfo ) );
-	}
+        *((VxConnectIdent*)this) = *((VxConnectIdent*)&rhs);
+        m_s64TimeLastConnectAttemptMs = rhs.m_s64TimeLastConnectAttemptMs;
+        m_s64TimeTcpLastContactMs = rhs.m_s64TimeLastConnectAttemptMs;
+    }
 
 	return *this;
+}
+
+//============================================================================
+bool VxConnectInfo::addToBlob( PktBlobEntry& blob )
+{
+    bool result = VxConnectIdent::addToBlob( blob );
+    result &= blob.setValue( m_s64TimeLastConnectAttemptMs );
+    result &= blob.setValue( m_s64TimeTcpLastContactMs );
+    return result;
+}
+
+//============================================================================
+bool VxConnectInfo::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = VxConnectIdent::extractFromBlob( blob );
+    result &= blob.getValue( m_s64TimeLastConnectAttemptMs );
+    result &= blob.getValue( m_s64TimeTcpLastContactMs );
+    return result;
 }
 
 //============================================================================

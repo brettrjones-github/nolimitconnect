@@ -20,6 +20,8 @@
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
 
+#include <PktLib/PktBlobEntry.h>
+
 #include <libcrossguid/guid.h>
 
 #ifdef TARGET_OS_ANDROID
@@ -80,6 +82,22 @@ VxGUID::VxGUID( uint64_t u64HiPart, uint64_t u64LoPart )
 : m_u64HiPart(u64HiPart)
 , m_u64LoPart(u64LoPart)
 {
+}
+
+//============================================================================
+bool VxGUID::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_u64HiPart );
+    result &= blob.setValue( m_u64LoPart );
+    return result;
+}
+
+//============================================================================
+bool VxGUID::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_u64HiPart );
+    result &= blob.getValue( m_u64LoPart );
+    return result;
 }
 
 //============================================================================

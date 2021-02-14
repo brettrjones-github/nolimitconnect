@@ -14,6 +14,26 @@
 
 #include "HostListEntry.h"
 
+//============================================================================
+HostListEntry::HostListEntry( const HostListEntry& rhs )
+: VxConnectIdent( rhs )
+, m_ListEntryLen( rhs.m_ListEntryLen )
+, m_ListEntryType( rhs.m_ListEntryType )
+{
+}
+
+//============================================================================
+HostListEntry& HostListEntry::operator=( const HostListEntry& rhs )
+{
+    if( this != &rhs )
+    {
+        *((VxConnectIdent*)this) = *((VxConnectIdent*)&rhs);
+        m_ListEntryLen = rhs.m_ListEntryLen;
+        m_ListEntryType = rhs.m_ListEntryType;
+    }
+
+    return *this;
+}
 
 //============================================================================
 void HostListEntry::setListEntryLength( uint16_t entryLen )

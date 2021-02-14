@@ -39,7 +39,12 @@
 class PktAnnActionData
 {
 public:
-    PktAnnActionData() {}; // do not set = default
+    PktAnnActionData() = default; // do not set = default
+    PktAnnActionData( const PktAnnActionData& rhs );
+    PktAnnActionData&		    operator = ( const PktAnnActionData& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+
 	void						setTTL( uint8_t timeToLive )					{ m_u8TimeToLive = timeToLive; }
 	uint8_t						getTTL( void )							        { return m_u8TimeToLive; }
 	void						setIsTopTenRequested( bool enable );
@@ -76,7 +81,12 @@ private:
 class PktAnnBase : public VxPktHdr, public VxNetIdent
 {
 public:
-    PktAnnBase() {}; // do not set = default
+    PktAnnBase() = default;
+    PktAnnBase( const PktAnnBase& rhs );
+    PktAnnBase&		            operator = ( const PktAnnBase& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+
     uint32_t				    m_AnnRes1{0};
     uint32_t				    m_AnnRes2{0};	
 };
@@ -90,6 +100,10 @@ class PktAnnounce :  public PktAnnBase,  public PktAnnActionData
 {
 public:
 	PktAnnounce();
+    PktAnnounce( const PktAnnounce& rhs );
+    PktAnnounce&				operator = ( const PktAnnounce& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	bool						isValidPktAnn( void );
 

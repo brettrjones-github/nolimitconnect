@@ -58,9 +58,12 @@ void AppletChatRoomJoin::setupApplet( void )
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
-    connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, EHostJoinStatus, QString )),
-        this, SLOT(slotHostJoinStatus( EHostType, EHostSearchStatus, QString )) );
-
+    connect( &m_MyApp, SIGNAL(signalHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )),
+        this, SLOT(slotHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )),
+        this, SLOT(slotHostJoinStatus( EHostType, VxGUID&, EHostJoinStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
+        this, SLOT(slotHostSearchStatus( EHostType, VxGUID&, EHostSearchStatus, QString )) );
 }
 
 //============================================================================
@@ -93,18 +96,24 @@ void AppletChatRoomJoin::slotInfoMsg( const QString& text )
 }
 
 //============================================================================
-void AppletChatRoomJoin::slotHostJoinStatus( EHostType hostType, EHostJoinStatus joinStatus, QString text )
+void AppletChatRoomJoin::slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString text )
 {
     getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
     getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
-                                                                                                   //m_LogFile.write( text ); // Logs to file
-    /*
-    if( testStatus != eRunTestStatusLogMsg )
-    {
-        QString testStat = QObject::tr( "Test Status: " );
-        testStat += DescribeRunTestStatus( testStatus );
-        getInfoEdit()->appendPlainText( testStat );
-    }*/
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString text )
+{
+    getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
+    getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
+{
+    getInfoEdit()->appendPlainText( strMsg ); // Adds the message to the widget
+    getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
 }
 
 //============================================================================

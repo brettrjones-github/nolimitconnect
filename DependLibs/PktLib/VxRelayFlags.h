@@ -14,19 +14,24 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <CoreLib/VxDefs.h>
+#include <inttypes.h>
 
 #pragma pack(push) 
 #pragma pack(1)
 
+class PktBlobEntry;
 //! 1 byte in size
 class VxRelayFlags
 {
 public:
-	VxRelayFlags();
+	VxRelayFlags() = default;
+    VxRelayFlags( const VxRelayFlags& rhs );
+    VxRelayFlags&               operator =( const VxRelayFlags& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	void						setRelayFlags( uint8_t u8RelayFlags );
-	uint8_t							getRelayFlags( void );
+	uint8_t						getRelayFlags( void );
 
 	void						setHasRelay( bool bHasRelay );
 	bool						hasRelay( void );
@@ -37,7 +42,7 @@ public:
 	bool						isMyPreferedRelay( void );
 
 	//=== vars ===//
-	uint8_t							m_u8RelayFlags;
+    uint8_t						m_u8RelayFlags{ 0 };
 };
 
 #pragma pack(pop)

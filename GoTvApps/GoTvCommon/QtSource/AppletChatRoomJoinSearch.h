@@ -34,6 +34,8 @@ public:
 
 	void						searchResult( VxNetIdent * netIdent );
 	void						setStatusLabel( QString strMsg );
+    void                        setInfoLabel( QString strMsg );
+
     QString                     getSearchText( void ) { return ui.m_SearchsParamWidget->getSearchTextEdit()->text(); }
 
     virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
@@ -49,6 +51,9 @@ private slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotStartSearchState(bool startSearch);
 	//void						slotFriendClicked( VxNetIdent * netIdent );
+    void						slotHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
+    void						slotHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
+    void						slotHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;

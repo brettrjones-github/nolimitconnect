@@ -15,6 +15,7 @@
 
 #include "PktAnnounce.h"
 #include "PktTypes.h"
+#include "PktBlobEntry.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
@@ -33,6 +34,35 @@ namespace
 P2PEngineVersion::P2PEngineVersion()
     : m_u8P2PEngineVersion( P2P_ENGINE_VERSION )
 {
+}
+
+//============================================================================
+P2PEngineVersion::P2PEngineVersion( const P2PEngineVersion& rhs )
+    : m_u8P2PEngineVersion( rhs.m_u8P2PEngineVersion )
+{
+}
+
+//============================================================================
+P2PEngineVersion& P2PEngineVersion::operator =( const P2PEngineVersion& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u8P2PEngineVersion = rhs.m_u8P2PEngineVersion;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool P2PEngineVersion::addToBlob( PktBlobEntry& blob )
+{
+    return blob.setValue( m_u8P2PEngineVersion );
+}
+
+//============================================================================
+bool P2PEngineVersion::extractFromBlob( PktBlobEntry& blob )
+{
+    return blob.getValue( m_u8P2PEngineVersion );
 }
 
 //============================================================================
@@ -63,6 +93,35 @@ MyOSVersion::MyOSVersion()
 #else
     m_u8OSVersion = 0;
 #endif
+}
+
+//============================================================================
+MyOSVersion::MyOSVersion( const MyOSVersion& rhs )
+    : m_u8OSVersion( rhs.m_u8OSVersion )
+{
+}
+
+//============================================================================
+MyOSVersion& MyOSVersion::operator =( const MyOSVersion& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u8OSVersion = rhs.m_u8OSVersion;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool MyOSVersion::addToBlob( PktBlobEntry& blob )
+{
+    return blob.setValue( m_u8OSVersion );
+}
+
+//============================================================================
+bool MyOSVersion::extractFromBlob( PktBlobEntry& blob )
+{
+    return blob.getValue( m_u8OSVersion );
 }
 
 //============================================================================
@@ -97,6 +156,73 @@ void MyOSVersion::getOSVersion( std::string& strRetOSVersion )
 }
 
 //============================================================================
+PktAnnActionData::PktAnnActionData( const PktAnnActionData& rhs )
+: m_u8TimeToLive( rhs.m_u8TimeToLive )
+, m_u8RequestFlags( rhs.m_u8RequestFlags )
+, m_u8Res16( rhs.m_u8Res16 )
+, m_u32AppAliveTimeSec( rhs.m_u32AppAliveTimeSec )
+, m_u32ActionRes1( rhs.m_u32ActionRes1 )
+, m_u32ActionRes2( rhs.m_u32ActionRes2 )
+, m_u32ActionRes3( rhs.m_u32ActionRes3 )
+, m_u32ActionRes4( rhs.m_u32ActionRes4 )
+, m_u32ActionRes5( rhs.m_u32ActionRes5 )
+, m_u32ActionRes6( rhs.m_u32ActionRes6 )
+{
+}
+
+//============================================================================
+PktAnnActionData& PktAnnActionData::operator = ( const PktAnnActionData& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u8TimeToLive = rhs.m_u8TimeToLive;
+        m_u8RequestFlags = rhs.m_u8RequestFlags;
+        m_u8Res16 = rhs.m_u8Res16;
+        m_u32AppAliveTimeSec = rhs.m_u32AppAliveTimeSec;
+        m_u32ActionRes1 = rhs.m_u32ActionRes1;
+        m_u32ActionRes2 = rhs.m_u32ActionRes2;
+        m_u32ActionRes3 = rhs.m_u32ActionRes3;
+        m_u32ActionRes4 = rhs.m_u32ActionRes4;
+        m_u32ActionRes5 = rhs.m_u32ActionRes5;
+        m_u32ActionRes6 = rhs.m_u32ActionRes6;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool PktAnnActionData::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_u8TimeToLive );
+    result &= blob.setValue( m_u8RequestFlags );
+    result &= blob.setValue( m_u8Res16 );
+    result &= blob.setValue( m_u32AppAliveTimeSec );
+    result &= blob.setValue( m_u32ActionRes1 );
+    result &= blob.setValue( m_u32ActionRes2 );
+    result &= blob.setValue( m_u32ActionRes3 );
+    result &= blob.setValue( m_u32ActionRes4 );
+    result &= blob.setValue( m_u32ActionRes5 );
+    result &= blob.setValue( m_u32ActionRes6 );
+    return result;
+}
+
+//============================================================================
+bool PktAnnActionData::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_u8TimeToLive );
+    result &= blob.getValue( m_u8RequestFlags );
+    result &= blob.getValue( m_u8Res16 );
+    result &= blob.getValue( m_u32AppAliveTimeSec );
+    result &= blob.getValue( m_u32ActionRes1 );
+    result &= blob.getValue( m_u32ActionRes2 );
+    result &= blob.getValue( m_u32ActionRes3 );
+    result &= blob.getValue( m_u32ActionRes4 );
+    result &= blob.getValue( m_u32ActionRes5 );
+    result &= blob.getValue( m_u32ActionRes6 );
+    return result;
+}
+
+//============================================================================
 void PktAnnActionData::setIsTopTenRequested( bool enable )
 {
 	if( enable )(m_u8RequestFlags |= FLAG_PKT_ANN_REQ_TOP_TEN); else m_u8RequestFlags &= (~FLAG_PKT_ANN_REQ_TOP_TEN); 
@@ -117,6 +243,52 @@ void		PktAnnActionData::setIsPktAnnStunRequested( bool bReqStun )			{ if( bReqSt
 bool		PktAnnActionData::getIsPktAnnStunRequested( void )					{ return (m_u8RequestFlags & FLAG_PKT_ANN_REQ_STUN)?true:false; }
 
 //============================================================================
+PktAnnBase::PktAnnBase( const PktAnnBase& rhs )
+    : VxPktHdr( rhs )
+    , VxNetIdent( rhs )
+    , m_AnnRes1( rhs.m_AnnRes1 )
+    , m_AnnRes2( rhs.m_AnnRes2 )
+{
+}
+
+//============================================================================
+PktAnnBase&	PktAnnBase::operator = ( const PktAnnBase& rhs )
+{
+    if( this != &rhs )
+    {
+        *((VxPktHdr*)this) = *((VxPktHdr*)&rhs);
+        *((VxNetIdent*)this) = *((VxNetIdent*)&rhs);
+        m_AnnRes1 = rhs.m_AnnRes1;
+        m_AnnRes2 = rhs.m_AnnRes2;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool PktAnnBase::addToBlob( PktBlobEntry& blob )
+{
+    bool result = VxPktHdr::addToBlob( blob );
+    result &= VxNetIdent::addToBlob( blob );
+    result &= blob.setValue( m_AnnRes1 );
+    result &= blob.setValue( m_AnnRes1 );
+    return result;
+}
+
+//============================================================================
+bool PktAnnBase::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = VxPktHdr::extractFromBlob( blob );
+    result &= VxNetIdent::extractFromBlob( blob );
+    result &= blob.getValue( m_AnnRes1 );
+    result &= blob.getValue( m_AnnRes1 );
+    return result;
+}
+
+//============================================================================
+//============================================================================
+
+
 //============================================================================
 PktAnnounce::PktAnnounce()	
 { 
@@ -153,9 +325,43 @@ static bool firstTime = true;
 	setPktType(  PKT_TYPE_ANNOUNCE );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
+//============================================================================
+PktAnnounce::PktAnnounce( const PktAnnounce& rhs )
+    : PktAnnBase( rhs )
+    , PktAnnActionData( rhs )
+{
+}
 
 //============================================================================
-PktAnnounce *	PktAnnounce::makeAnnCopy( void )
+PktAnnounce& PktAnnounce::operator = ( const PktAnnounce& rhs )
+{
+    if( this != &rhs )
+    {
+        *((PktAnnBase*)this) = *((PktAnnBase*)&rhs);
+        *((PktAnnActionData*)this) = *((PktAnnActionData*)&rhs);
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool PktAnnounce::addToBlob( PktBlobEntry& blob )
+{
+    bool result = PktAnnBase::addToBlob( blob );
+    result &= PktAnnActionData::addToBlob( blob );
+    return result;
+}
+
+//============================================================================
+bool PktAnnounce::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = PktAnnBase::extractFromBlob( blob );
+    result &= PktAnnActionData::extractFromBlob( blob );
+    return result;
+}
+
+//============================================================================
+PktAnnounce * PktAnnounce::makeAnnCopy( void )
 {
 	vx_assert( sizeof( PktAnnounce ) ==  getPktLength() );
 	vx_assert( PKT_TYPE_ANNOUNCE == getPktType() );
@@ -166,7 +372,7 @@ PktAnnounce *	PktAnnounce::makeAnnCopy( void )
 }
 
 //============================================================================
-PktAnnounce *	PktAnnounce::makeAnnReverseCopy( void )
+PktAnnounce * PktAnnounce::makeAnnReverseCopy( void )
 {
 	PktAnnounce * pTemp = makeAnnCopy();
 	pTemp->reversePermissions();

@@ -33,11 +33,19 @@
 #pragma pack(push) 
 #pragma pack(1)
 
+class PktBlobEntry;
+
 // size 8 bytes
 class VxPktHdrPrefix
 {
 public:
     VxPktHdrPrefix() = default;
+    VxPktHdrPrefix( const VxPktHdrPrefix& rhs );
+    VxPktHdrPrefix&				operator = ( const VxPktHdrPrefix& rhs );
+
+    // no virtuals allowed in packets.. jump table is os dependent
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
     //=== return true if valid pkt type and length ===//
     bool						isValidPkt( void );
@@ -88,6 +96,12 @@ private:
 class VxPktHdr : public VxPktHdrPrefix
 {
 public:
+    VxPktHdr() = default;
+    VxPktHdr( const VxPktHdr& rhs );
+    VxPktHdr&				    operator = ( const VxPktHdr& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+
     VxGUID						getSrcOnlineId( void );
     void						setSrcOnlineId( VxGUID onlineId )			{ setGuidToNetOrder( onlineId, m_SrcOnlineId ); }
     VxGUID						getDestOnlineId( void );

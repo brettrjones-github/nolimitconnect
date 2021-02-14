@@ -65,6 +65,10 @@ class PluginPermission
 {
 public:
 	PluginPermission();
+    PluginPermission( const PluginPermission &rhs ) = default;
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+    PluginPermission&           operator =( const PluginPermission &rhs );
 
 	bool						isPluginEnabled( EPluginType ePlugin );
 	//! get type of permission user has set for given plugin
@@ -84,14 +88,15 @@ class VxGroupService
 {
 public:
     VxGroupService() = default;
-    VxGroupService( const VxGroupService &rhs ) = default;
-    //! copy operator
-    VxGroupService& operator =( const VxGroupService &rhs ) = default;
+    VxGroupService( const VxGroupService &rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+    VxGroupService&             operator =( const VxGroupService &rhs );
 
-    uint16_t					m_GroupFlags = 0;           // group service flags
-    uint16_t					m_GroupCatagories = 0;      // catagory of service
-    uint16_t					m_GroupSubCatagories = 0;   // sub catagory of service
-    uint16_t					m_GroupReserved = 0;        // catagory of service
+    uint16_t					m_GroupFlags{ 0 };           // group service flags
+    uint16_t					m_GroupCatagories{ 0 };      // catagory of service
+    uint16_t					m_GroupSubCatagories{ 0 };   // sub catagory of service
+    uint16_t					m_GroupReserved{ 0 };        // catagory of service
 
 };
 
@@ -114,8 +119,9 @@ class VxNetIdent : public VxNetIdentBase, public PluginPermission, public VxGrou
 public:
 	VxNetIdent();
 	VxNetIdent(const VxNetIdent &rhs );
-	//! copy operator
-	VxNetIdent& operator =( const VxNetIdent &rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
+    VxNetIdent&                 operator =( const VxNetIdent &rhs );
 
 	EPluginAccess			    getHisAccessPermissionFromMe( EPluginType ePluginType );
 	bool						isHisAccessAllowedFromMe( EPluginType ePluginType );

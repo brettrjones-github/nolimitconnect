@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "VxFriendMatch.h"
+#include "PktBlobEntry.h"
 
 //============================================================================
 //! describe friend state
@@ -35,10 +36,33 @@ const char * DescribeFriendState( EFriendState eFriendState )
 }
 
 //============================================================================
-FriendMatch::FriendMatch() 
-: m_u8FriendMatch(0x11) // assume anonymous
+FriendMatch::FriendMatch( const FriendMatch& rhs ) 
+    : m_u8FriendMatch( rhs.m_u8FriendMatch )
 {
-} 
+}
+
+//============================================================================
+FriendMatch& FriendMatch::operator =( const FriendMatch& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u8FriendMatch = rhs.m_u8FriendMatch;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool FriendMatch::addToBlob( PktBlobEntry& blob )
+{
+    return blob.setValue( m_u8FriendMatch );
+}
+
+//============================================================================
+bool FriendMatch::extractFromBlob( PktBlobEntry& blob )
+{
+    return blob.getValue( m_u8FriendMatch );
+}
 
 //! return true if is ignored
 bool			FriendMatch::isIgnored()										{ return eFriendStateIgnore == getMyFriendshipToHim(); }

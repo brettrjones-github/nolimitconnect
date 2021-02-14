@@ -31,7 +31,7 @@ public:
 	int64_t						getPostTimeMs( void )					    { return m_PostTimeMs; }
 	HostListEntry *			    getHostListEntry( void )				    { return (HostListEntry *)this; }
 
-private:
+protected:
 	int64_t						m_PostTimeMs = 0;
 };
 

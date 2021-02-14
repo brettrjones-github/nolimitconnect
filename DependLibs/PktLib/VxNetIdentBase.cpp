@@ -15,6 +15,7 @@
 
 #include "VxConnectInfo.h"
 #include "VxNetIdentBase.h"
+#include "PktBlobEntry.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
@@ -23,15 +24,66 @@
 #include <stdio.h>
 
 //============================================================================
-VxNetIdentBase::VxNetIdentBase()
-: VxConnectInfo()
+VxNetIdentBase::VxNetIdentBase( const VxNetIdentBase &rhs )
+    : VxConnectInfo( rhs )
+    , VxOnlineStatusFlags( rhs )
+    , m_u8ResBase( rhs.m_u8ResBase )
+    , m_u8OfferCnt( rhs.m_u8OfferCnt )
+    , m_u8ReplyCnt( rhs.m_u8ReplyCnt )
+    , m_u32TruthCnt( rhs.m_u32TruthCnt )
+    , m_u32DareCnt( rhs.m_u32DareCnt )
+    , m_u16RejectedTruthsCnt( rhs.m_u16RejectedTruthsCnt )
+    , m_u16RejectedDaresCnt( rhs.m_u16RejectedDaresCnt )
 {
 }
 
 //============================================================================
-VxNetIdentBase::VxNetIdentBase( const VxNetIdentBase &rhs )
+VxNetIdentBase&  VxNetIdentBase::operator = ( const VxNetIdentBase& rhs )
 {
-	*this = rhs;
+    if( this != &rhs )
+    {
+        *((VxConnectInfo*)this) = *((VxConnectInfo*)&rhs);
+        *((VxOnlineStatusFlags*)this) = *((VxOnlineStatusFlags*)&rhs);
+        m_u8ResBase = rhs.m_u8ResBase;
+        m_u8OfferCnt = rhs.m_u8OfferCnt;
+        m_u8ReplyCnt = rhs.m_u8ReplyCnt;
+        m_u32TruthCnt = rhs.m_u32TruthCnt;
+        m_u32DareCnt = rhs.m_u32DareCnt;
+        m_u16RejectedTruthsCnt = rhs.m_u16RejectedTruthsCnt;
+        m_u16RejectedDaresCnt = rhs.m_u16RejectedDaresCnt;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool VxNetIdentBase::addToBlob( PktBlobEntry& blob )
+{
+    bool result = VxConnectInfo::addToBlob( blob );
+    result &= VxOnlineStatusFlags::addToBlob( blob );
+    result &= blob.setValue( m_u8ResBase );
+    result &= blob.setValue( m_u8OfferCnt );
+    result &= blob.setValue( m_u8ReplyCnt );
+    result &= blob.setValue( m_u32TruthCnt );
+    result &= blob.setValue( m_u32DareCnt );
+    result &= blob.setValue( m_u16RejectedTruthsCnt );
+    result &= blob.setValue( m_u16RejectedDaresCnt );
+    return result;
+}
+
+//============================================================================
+bool VxNetIdentBase::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = VxConnectInfo::extractFromBlob( blob );
+    result &= VxOnlineStatusFlags::addToBlob( blob );
+    result &= blob.getValue( m_u8ResBase );
+    result &= blob.getValue( m_u8OfferCnt );
+    result &= blob.getValue( m_u8ReplyCnt );
+    result &= blob.getValue( m_u32TruthCnt );
+    result &= blob.getValue( m_u32DareCnt );
+    result &= blob.getValue( m_u16RejectedTruthsCnt );
+    result &= blob.getValue( m_u16RejectedDaresCnt );
+    return result;
 }
 
 //============================================================================
@@ -91,18 +143,6 @@ void VxNetIdentBase::getProfileUri( std::string& retUri, const char * myIp, cons
 bool VxNetIdentBase::operator != ( const VxNetIdentBase &a ) const
 {
 	return !(this->isVxNetIdentMatch( a ));
-}
-
-//============================================================================
-//! assignment operator
-VxNetIdentBase& VxNetIdentBase::operator =( const VxNetIdentBase &rhs )
-{
-	// Check for self-assignment!
-    if (this == &rhs)      // Same object?
-		return *this;        // Yes, so skip assignment, and just return *this.
-	// we can get away with memcpy because no virtual functions
-    memcpy( this, &rhs, sizeof( VxNetIdentBase ) );
-	return *this;
 }
 
 //============================================================================

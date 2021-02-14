@@ -23,8 +23,10 @@ public:
 	MatchParams() = default;
     MatchParams( const MatchParams& rhs );
 	virtual ~MatchParams() = default;
-
 	MatchParams&				operator =( const MatchParams& rhs );
+
+    virtual bool                addToBlob( PktBlobEntry& blob );
+    virtual bool                extractFromBlob( PktBlobEntry& blob );
 
     void						setAgeType( EAgeType age )                  { m_AgeType = age; }
     EAgeType					getAgeType( void )                          { return m_AgeType; }
@@ -38,8 +40,6 @@ public:
     void						setContentRating( EContentRating content )  { m_ContentRating = content; }
     EContentRating			    getContentRating( void )                    { return m_ContentRating; }
 
-    virtual bool                addToBlob( PktBlobEntry& blob );
-    virtual bool                extractFromBlob( PktBlobEntry& blob );
 
 protected:
 	//=== vars ===//

@@ -22,6 +22,9 @@
 
 #pragma pack(push) 
 #pragma pack(1)
+
+class PktBlobEntry;
+
 //! derived from 16 bytes
 //! size 
 //	  16 bytes VxGUID
@@ -32,12 +35,14 @@
 class VxConnectId : public VxGUID
 {
 public:
-	VxConnectId();
+	VxConnectId() = default;
 	VxConnectId( const VxConnectId& rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
-	VxConnectId& operator = ( const VxConnectId& rhs );
-	bool operator != (const VxConnectId& rhs ) const;
-	bool operator == (const VxConnectId& rhs ) const;
+	VxConnectId&                operator = ( const VxConnectId& rhs );
+	bool                        operator != (const VxConnectId& rhs ) const;
+	bool                        operator == (const VxConnectId& rhs ) const;
 
 	void						setPort( uint16_t port )			{ m_u16OnlinePort = htons( port ); }
 	uint16_t					getPort( void )						{ return ntohs( m_u16OnlinePort ); }
@@ -61,7 +66,7 @@ public:
 	InetAddress					m_IPv6OnlineIp;						// users ip6 address
 	InetAddrIPv4				m_IPv4OnlineIp;						// users ip4 address
 
-private:
+protected:
 	uint16_t					m_u16OnlinePort;						// users incoming connection port
 };
 

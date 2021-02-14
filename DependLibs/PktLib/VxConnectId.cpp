@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "VxConnectId.h"
+#include "PktBlobEntry.h"
 
 #include <NetLib/VxSktUtil.h>
 #include <CoreLib/VxParse.h>
@@ -22,18 +23,32 @@
 #include <memory.h>
 
 //============================================================================
-VxConnectId::VxConnectId()
-    : m_IPv6OnlineIp()
-    , m_IPv4OnlineIp()
-    , m_u16OnlinePort(0)
+VxConnectId::VxConnectId( const VxConnectId &rhs )
+: VxGUID(rhs)
+, m_IPv6OnlineIp( rhs.m_IPv6OnlineIp )
+, m_IPv4OnlineIp( rhs.m_IPv4OnlineIp )
+, m_u16OnlinePort( rhs.m_u16OnlinePort )
 {
 }
 
 //============================================================================
-VxConnectId::VxConnectId( const VxConnectId &rhs )
-: VxGUID()
+bool VxConnectId::addToBlob( PktBlobEntry& blob )
 {
-	*this = rhs;
+    bool result = blob.setValue( *( (VxGUID *)this ) );
+    result &= m_IPv6OnlineIp.addToBlob( blob );
+    result &= m_IPv4OnlineIp.addToBlob( blob );
+    result &= blob.setValue( m_u16OnlinePort );
+    return result;
+}
+
+//============================================================================
+bool VxConnectId::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( *( (VxGUID *)this ) );
+    result &= m_IPv6OnlineIp.extractFromBlob( blob );
+    result &= m_IPv4OnlineIp.extractFromBlob( blob );
+    result &= blob.getValue( m_u16OnlinePort );
+    return result;
 }
 
 //============================================================================
@@ -41,9 +56,12 @@ VxConnectId& VxConnectId::operator =( const VxConnectId &rhs )
 {
 	if( this != &rhs )
 	{
-		// we can get away with memcpy because no virtual functions
-		memcpy( this, &rhs, sizeof( VxConnectId ) );
+        *((VxGUID*)this) = *((VxGUID*)&rhs);
+        m_IPv6OnlineIp = rhs.m_IPv6OnlineIp;
+        m_IPv4OnlineIp = rhs.m_IPv4OnlineIp;
+        m_u16OnlinePort = rhs.m_u16OnlinePort;
 	}
+
 	return *this;
 }
 

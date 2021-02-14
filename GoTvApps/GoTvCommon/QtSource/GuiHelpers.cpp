@@ -380,6 +380,126 @@ QString GuiHelpers::describeEXferState( EXferState xferState )
 }
 
 //============================================================================
+QString GuiHelpers::describeStatus( EHostAnnounceStatus hostStatus )
+{
+    switch( hostStatus )
+    {
+    case eHostAnnounceUnknown:
+        return QObject::tr( "Host Announce Status Unknown" );
+    case eHostAnnounceInvalidUrl:
+        return QObject::tr( "Host Announce Invalid Url" );
+    case eHostAnnounceQueryIdInProgress:
+        return QObject::tr( "Host Announce Querying Id In Progress" );
+    case eHostAnnounceQueryIdSuccess:
+        return QObject::tr( "Host Announce Querying Id Success" );
+    case eHostAnnounceQueryIdFailed:
+        return QObject::tr( "Host Announce Query Id Failed" );
+    case eHostAnnounceConnecting:
+        return QObject::tr( "Host Announce Connecting" );
+    case eHostAnnounceConnectSuccess:
+        return QObject::tr( "Host Announce Connect Success" );
+    case eHostAnnounceConnectFailed:
+        return QObject::tr( "Host Announce Connect Failed" );
+    case eHostAnnounceSendingJoinRequest:
+        return QObject::tr( "Host Announce Sending Request" );
+    case eHostAnnounceSendJoinRequestFailed:
+        return QObject::tr( "Host Announce Send Request Failed" );
+    case eHostAnnounceSuccess:
+        return QObject::tr( "Host Announce Success" );
+    case eHostAnnounceFail:
+        return QObject::tr( "Host Announce Failed" );
+    case eHostAnnounceFailPermission:
+        return QObject::tr( "Host Announce Fail Permission" );
+    case eHostAnnounceFailConnectDropped:
+        return QObject::tr( "Host Announce Fail Connect Dropped" );
+    case eHostAnnounceInvalidParam:
+        return QObject::tr( "Host Announce Invalid Param" );
+    default:
+        return QObject::tr( "Invalid Host Param" );
+    };
+}
+
+//============================================================================
+QString GuiHelpers::describeStatus( EHostJoinStatus hostStatus )
+{
+    switch( hostStatus )
+    {
+    case eHostJoinUnknown:
+        return QObject::tr( "Host Join Status Unknown " );
+    case eHostJoinInvalidUrl:
+        return QObject::tr( "Host Join Invalid Url" );
+    case eHostJoinQueryIdInProgress:
+        return QObject::tr( "Host Join Querying Id In Progress" );
+    case eHostJoinQueryIdSuccess:
+        return QObject::tr( "Host Join Querying Id Success" );
+    case eHostJoinQueryIdFailed:
+        return QObject::tr( "Host Join Query Id Failed" );
+    case eHostJoinConnecting:
+        return QObject::tr( "Host Join Connecting" );
+    case eHostJoinConnectSuccess:
+        return QObject::tr( "Host Join Connect Success" );
+    case eHostJoinConnectFailed:
+        return QObject::tr( "Host Join Connect Failed" );
+    case eHostJoinSendingJoinRequest:
+        return QObject::tr( "Host Join Sending Request" );
+    case eHostJoinSendJoinRequestFailed:
+        return QObject::tr( "Host Join Send Request Failed" );
+    case eHostJoinSuccess:
+        return QObject::tr( "Host Join Success" );
+    case eHostJoinFail:
+        return QObject::tr( "Host Join Failed" );
+    case eHostJoinFailPermission:
+        return QObject::tr( "Host Join Fail Permission" );
+    case eHostJoinFailConnectDropped:
+        return QObject::tr( "Host Join Fail Connect Dropped" );
+    case eHostJoinInvalidParam:
+        return QObject::tr( "Host Join Invalid Param" );
+    default:
+        return QObject::tr( "Invalid Host Param" );
+    }
+}
+
+//============================================================================
+QString GuiHelpers::describeStatus( EHostSearchStatus hostStatus )
+{
+    switch( hostStatus )
+    {
+    case eHostSearchUnknown:
+        return QObject::tr( "Host Search Status Unknown " );
+    case eHostSearchInvalidUrl:
+        return QObject::tr( "Host Search Invalid Url" );
+    case eHostSearchQueryIdInProgress:
+        return QObject::tr( "Host Search Querying Id In Progress" );
+    case eHostSearchQueryIdSuccess:
+        return QObject::tr( "Host Search Querying Id Success" );
+    case eHostSearchQueryIdFailed:
+        return QObject::tr( "Host Search Query Id Failed" );
+    case eHostSearchConnecting:
+        return QObject::tr( "Host Search Connecting" );
+    case eHostSearchConnectSuccess:
+        return QObject::tr( "Host Search Connect Success" );
+    case eHostSearchConnectFailed:
+        return QObject::tr( "Host Search Connect Failed" );
+    case eHostSearchSendingSearchRequest:
+        return QObject::tr( "Host Search Sending Request" );
+    case eHostSearchSendSearchRequestFailed:
+        return QObject::tr( "Host Search Send Request Failed" );
+    case eHostSearchSuccess:
+        return QObject::tr( "Host Search Success" );
+    case eHostSearchFail:
+        return QObject::tr( "Host Search Failed" );
+    case eHostSearchFailPermission:
+        return QObject::tr( "Host Search Fail Permission" );
+    case eHostSearchFailConnectDropped:
+        return QObject::tr( "Host Search Fail Connect Dropped" );
+    case eHostSearchInvalidParam:
+        return QObject::tr( "Host Search Invalid Param" );
+    default:
+        return QObject::tr( "Invalid Host Param" );
+    }
+}
+
+//============================================================================
 QString GuiHelpers::describeFileLength( uint64_t fileLen )
 {
     QString scaleText;

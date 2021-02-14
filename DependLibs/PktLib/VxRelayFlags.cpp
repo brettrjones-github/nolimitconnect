@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include "VxRelayFlags.h"
+#include "PktBlobEntry.h"
 
 #define RC_PROXY_FLAG_REQUIRES_PROXY			0x01	// user requires proxy to connect to him
 #define RC_PROXY_FLAG_HAS_PROXY					0x02	// user has at least one proxy that may be used to connect to him
@@ -20,9 +21,32 @@
 #define RC_PROXY_FLAG_USE_ENCRYPTION			0x08	// user wants encrypted traffic
 
 //============================================================================
-VxRelayFlags::VxRelayFlags() 
-: m_u8RelayFlags(0)
+VxRelayFlags::VxRelayFlags( const VxRelayFlags& rhs )
+: m_u8RelayFlags( rhs.m_u8RelayFlags )
 {
+}
+
+//============================================================================
+VxRelayFlags& VxRelayFlags::operator =( const VxRelayFlags& rhs )
+{
+    if( this != &rhs )
+    {
+        m_u8RelayFlags = rhs.m_u8RelayFlags;
+    }
+
+    return *this;
+}
+
+//============================================================================
+bool VxRelayFlags::addToBlob( PktBlobEntry& blob )
+{
+    return blob.setValue( m_u8RelayFlags );
+}
+
+//============================================================================
+bool VxRelayFlags::extractFromBlob( PktBlobEntry& blob )
+{
+    return blob.getValue( m_u8RelayFlags );
 }
 
 //============================================================================

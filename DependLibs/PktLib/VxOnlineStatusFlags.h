@@ -14,16 +14,21 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <CoreLib/VxDefs.h>
+#include <inttypes.h>
 
 #pragma pack(push) 
 #pragma pack(1)
 
+class PktBlobEntry;
 //! 1 byte in size
 class VxOnlineStatusFlags
 {
 public:
-	VxOnlineStatusFlags();
+	VxOnlineStatusFlags() = default;
+    VxOnlineStatusFlags( const VxOnlineStatusFlags &rhs );
+    VxOnlineStatusFlags&        operator =( const VxOnlineStatusFlags &rhs );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
 	void						setIsOnline( bool bIsOnline );
 	bool						isOnline( void );
@@ -36,7 +41,7 @@ public:
 	bool						isFromSearchPkt( void );
 
 	//=== vars ===//
-	uint8_t							m_u8OnlineStatusFlags;
+    uint8_t						m_u8OnlineStatusFlags{ 0 };
 };
 
 #pragma pack(pop)

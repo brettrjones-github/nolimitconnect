@@ -17,6 +17,7 @@
 #include "VxSktUtil.h"
 
 #include <CoreLib/VxDebug.h>
+#include <PktLib/PktBlobEntry.h>
 
 #ifdef TARGET_OS_WINDOWS
 	#include "Winsock2.h"
@@ -50,8 +51,8 @@
 //============================================================================
 // InetAddrIPv4
 //============================================================================
-InetAddrIPv4::InetAddrIPv4()
-: m_u32AddrIPv4(0)
+InetAddrIPv4::InetAddrIPv4(const InetAddrIPv4& rhs)
+: m_u32AddrIPv4(rhs.m_u32AddrIPv4)
 {
 }
 
@@ -66,6 +67,18 @@ InetAddrIPv4::InetAddrIPv4( const char * pIpAddress )
 InetAddrIPv4::InetAddrIPv4( uint32_t u32IpAddr )
 {
 	setIp( u32IpAddr );
+}
+
+//============================================================================
+bool InetAddrIPv4::addToBlob( PktBlobEntry& blob )
+{
+    return blob.setValue( m_u32AddrIPv4 );
+}
+
+//============================================================================
+bool InetAddrIPv4::extractFromBlob( PktBlobEntry& blob )
+{
+    return blob.getValue( m_u32AddrIPv4 );
 }
 
 //============================================================================
@@ -375,9 +388,26 @@ uint32_t InetAddrIPv4::swap32Bit( uint32_t src )
 //============================================================================
 // InetAddrIPv4AndPort
 //============================================================================
-InetAddrIPv4AndPort::InetAddrIPv4AndPort()
-: m_u16Port(0)
+InetAddrIPv4AndPort::InetAddrIPv4AndPort( const InetAddrIPv4AndPort& rhs )
+    : InetAddrIPv4( rhs )
+    , m_u16Port( rhs.m_u16Port )
 {
+}
+
+//============================================================================
+bool InetAddrIPv4AndPort::addToBlob( PktBlobEntry& blob )
+{
+    bool result = InetAddrIPv4::addToBlob( blob );
+    result &= blob.setValue( m_u16Port );
+    return result;
+}
+
+//============================================================================
+bool InetAddrIPv4AndPort::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = InetAddrIPv4::extractFromBlob( blob );
+    result &= blob.getValue( m_u16Port );
+    return result;
 }
 
 //============================================================================
@@ -436,12 +466,6 @@ void InetAddrIPv4AndPort::setIpAndPort( struct sockaddr& oAddr )
 //============================================================================
 //============================================================================
 // InetAddress
-//============================================================================
-InetAddress::InetAddress()
-: m_u64AddrHi(0)
-, m_u64AddrLo(0)
-{
-}
 
 //============================================================================
 InetAddress::InetAddress( const char * pIpAddress )
@@ -455,6 +479,29 @@ InetAddress::InetAddress( const char * pIpAddress )
 InetAddress::InetAddress( uint32_t u32IpAddr )
 {
 	setIp( u32IpAddr );
+}
+
+//============================================================================
+InetAddress::InetAddress( const InetAddress& rhs )
+    : m_u64AddrHi( rhs.m_u64AddrHi )
+    , m_u64AddrLo( rhs.m_u64AddrLo )
+{
+}
+
+//============================================================================
+bool InetAddress::addToBlob( PktBlobEntry& blob )
+{
+    bool result = blob.setValue( m_u64AddrHi );
+    result &= blob.setValue( m_u64AddrLo );
+    return result;
+}
+
+//============================================================================
+bool InetAddress::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = blob.getValue( m_u64AddrHi );
+    result &= blob.getValue( m_u64AddrLo );
+    return result;
 }
 
 //============================================================================
@@ -1244,17 +1291,35 @@ void InetAddress::litteEndianToNetIPv6( uint16_t * src, uint16_t * dest )
 //============================================================================
 // InetAddrAndPort
 //============================================================================
-InetAddrAndPort::InetAddrAndPort()
-: InetAddress()
-, m_u16Port(0)
-{
-}
 
 //============================================================================
 InetAddrAndPort::InetAddrAndPort( const char * ipAddr )
 : InetAddress( ipAddr )
 , m_u16Port(0)
 {
+}
+
+//============================================================================
+InetAddrAndPort::InetAddrAndPort( const InetAddrAndPort& rhs )
+    : InetAddress( rhs )
+    , m_u16Port( rhs.m_u16Port )
+{
+}
+
+//============================================================================
+bool InetAddrAndPort::addToBlob( PktBlobEntry& blob )
+{
+    bool result = InetAddress::addToBlob( blob );
+    result &= blob.setValue( m_u16Port );
+    return result;
+}
+
+//============================================================================
+bool InetAddrAndPort::extractFromBlob( PktBlobEntry& blob )
+{
+    bool result = InetAddress::extractFromBlob( blob );
+    result &= blob.getValue( m_u16Port );
+    return result;
 }
 
 //============================================================================
