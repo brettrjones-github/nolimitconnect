@@ -16,6 +16,7 @@
 #include <inttypes.h>
 #include <string>
 #include <vector>
+#include <GoTvInterface/IDefs.h>
 
 // a class very similar to <CoreLib/BinaryBlob.h>
 // but a fixed length and pragma packed for network packet use
@@ -74,6 +75,12 @@ public:
 
 
     //! set value 
+    bool                        setValue( EAgeType& eValue );
+    bool                        setValue( EContentRating& eValue );
+    bool                        setValue( EGenderType& eValue );
+    bool                        setValue( EHostType& eValue );
+    bool                        setValue( ELanguageType& eValue );
+    bool                        setValue( ESearchType& eValue );
     bool                        setValue( bool& bValue );
     bool                        setValue( int8_t& s8Value );
     bool                        setValue( uint8_t& u8Value );
@@ -92,6 +99,12 @@ public:
     bool                        setValue( VxGUID& guid );
 
     //! get value 
+    bool                        getValue( EAgeType& eValue );
+    bool                        getValue( EContentRating& eValue );
+    bool                        getValue( EGenderType& eValue );
+    bool                        getValue( EHostType& eValue );
+    bool                        getValue( ELanguageType& eValue );
+    bool                        getValue( ESearchType& eValue );
     bool                        getValue( bool& bValue );
     bool                        getValue( int8_t& s8Value );
     bool                        getValue( uint8_t& u8Value );

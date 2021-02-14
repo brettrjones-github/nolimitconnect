@@ -40,7 +40,8 @@ PktHostAnnounce::PktHostAnnounce()
 //============================================================================
 PktHostAnnounce* PktHostAnnounce::makeHostAnnCopy( void )
 {
-	vx_assert( sizeof( PktHostAnnounce ) ==  getPktLength() );
+	vx_assert( getPktLength() );
+    vx_assert( (getPktLength() & 0x0f) == 0 );
 	vx_assert( PKT_TYPE_HOST_ANNOUNCE == getPktType() );
 	char * pTemp = new char[ getPktLength() ];
 	vx_assert( pTemp );

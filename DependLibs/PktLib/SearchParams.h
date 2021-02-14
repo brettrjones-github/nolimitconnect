@@ -34,6 +34,8 @@ public:
     // search session (unique per search instance)
     void						setSearchSessionId( VxGUID& guid )						    { m_SearchSessionId = guid; }
     VxGUID&					    getSearchSessionId( void )								    { return m_SearchSessionId; }
+    void						createNewSessionId( void );
+    void						updateSearchStartTime( void );
 
     // search for identity (for person or host)
     void						setSearchIdentGuid( VxGUID& guid )							{ m_SearchIdentGuid = guid; }
@@ -52,6 +54,7 @@ protected:
 	//=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };
     ESearchType                 m_SearchType{ eSearchNone };
+    uint64_t                    m_SearchStartTimeGmtMs{ 0 };
     VxGUID					    m_SearchSessionId;
     VxGUID					    m_SearchIdentGuid;
     std::string					m_SearchUrl;

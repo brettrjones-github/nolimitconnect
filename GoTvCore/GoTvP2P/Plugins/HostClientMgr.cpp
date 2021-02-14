@@ -13,6 +13,7 @@
 //============================================================================
 
 #include "HostClientMgr.h"
+#include "PluginBase.h"
 
 #include <GoTvInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
@@ -70,8 +71,96 @@ void HostClientMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
 }
 
 //============================================================================
+void HostClientMgr::sendHostSearchToNetworkHost( VxGUID& sessionId, SearchParams& searchParams, EConnectReason connectReason )
+{
+    // save announce pkt in announce session list
+    std::string url = m_ConnectionMgr.getDefaultHostUrl( eHostTypeNetwork );
+    if( url.empty() )
+    {
+        LogMsg( LOG_VERBOSE, "HostServerMgr network host url is empty" );
+        return;
+    }
+
+    addSearchSession( sessionId,searchParams );
+    connectToHost( eHostTypeNetwork, sessionId, url, connectReason );
+}
+
+//============================================================================
+void HostClientMgr::addSearchSession( VxGUID& sessionId, SearchParams& searchParams )
+{
+    removeSearchSession( sessionId );
+    m_SearchListMutex.lock();
+    m_SearchList[sessionId] = searchParams;
+    m_SearchListMutex.unlock();
+}
+
+//============================================================================
+void HostClientMgr::removeSearchSession( VxGUID& sessionId )
+{
+    m_SearchListMutex.lock();
+    auto iter = m_SearchList.find( sessionId );
+    if( iter != m_SearchList.end() )
+    {
+        m_SearchList.erase( iter );
+    }
+
+    m_SearchListMutex.unlock();
+}
+
+//============================================================================
+void HostClientMgr::removeSession( VxGUID& sessionId, EConnectReason connectReason )
+{
+    if( isAnnounceConnectReason( connectReason ) )
+    {
+        removeSearchSession( sessionId );
+    }
+
+    HostClientSearchMgr::removeSession( sessionId, connectReason );
+}
+
+//============================================================================
 void HostClientMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     m_ServerList.removeGuid( onlineId );
     removeContact( onlineId );
+}
+
+//============================================================================
+void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    if( hostType == eHostTypeNetwork &&
+        ( connectReason == eConnectReasonChatRoomSearch ||
+            connectReason == eConnectReasonGroupSearch ||
+            connectReason == eConnectReasonRandomConnectSearch ) )
+    {
+        m_SearchListMutex.lock();
+        auto iter = m_SearchList.find( sessionId );
+        if( iter != m_SearchList.end() )
+        {
+            PktHostSearchReq searchReq;
+            bool result = iter->second.addToBlob( searchReq.getBlobEntry() );
+            searchReq.calculateLength();
+            if( result && searchReq.isValidPkt() )
+            {
+                // BRJ temporary for debugging
+                // TODO REMOVE
+                searchReq.setIsLoopback( true );
+                m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeNetworkHost );
+            }
+            else
+            {
+                LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostAnnounce is invalid" );
+            }
+
+            m_SearchList.erase( iter );
+        }
+
+        m_SearchListMutex.unlock();
+        // not done with connection.. wait for search results
+        // m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
+    }
+    else
+    {
+        HostBaseMgr::onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason );
+    }
 }

@@ -118,14 +118,19 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
         PktHostSearchReq* searchReq = (PktHostSearchReq*)pktHdr;
         if( searchReq->isValidPkt() )
         {
-            std::string searchText = searchReq->getSearchText();
+            SearchParams searchParams;
+            searchParams.extractFromBlob( searchReq->getBlobEntry() );
+            searchReply.setHostType( searchParams.getHostType() );
+            searchReply.setSearchSessionId( searchParams.getSearchSessionId() );
+            
+            std::string searchText = searchParams.getSearchText();
             if( searchText.size() < MIN_SEARCH_TEXT_LEN )
             {
                 searchReply.setCommError( eCommErrSearchTextToShort );
             }
             else
             {
-                ECommErr searchErr = m_HostServerMgr.searchRequest( searchReq->getHostType(), searchReply, searchText, sktBase, netIdent );
+                ECommErr searchErr = m_HostServerMgr.searchRequest( searchParams.getHostType(), searchReply, searchText, sktBase, netIdent );
                 searchReply.setCommError( searchErr );
             }
         }

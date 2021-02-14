@@ -47,6 +47,7 @@ public:
     void                        setDefaultHostOnlineId( EHostType hostType, VxGUID& hostOnlineId );
     bool                        getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId );
 
+    EHostAnnounceStatus         lookupOrQueryAnnounceId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
     EHostJoinStatus             lookupOrQueryJoinId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
     EHostSearchStatus           lookupOrQuerySearchId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
 

@@ -15,13 +15,18 @@
 #include "SearchParams.h"
 #include "PktBlobEntry.h"
 
+#include <CoreLib/VxTime.h>
+
 //============================================================================
 SearchParams::SearchParams( const SearchParams& rhs )
     : MatchParams(rhs)
-    , m_SearchSessionId(rhs.m_SearchSessionId)
-    , m_SearchIdentGuid(rhs.m_SearchIdentGuid)
-    , m_SearchUrl(rhs.m_SearchUrl)
-    , m_SearchText(rhs.m_SearchText)
+    , m_HostType( rhs.m_HostType )
+    , m_SearchType( rhs.m_SearchType )
+    , m_SearchStartTimeGmtMs( rhs.m_SearchStartTimeGmtMs )
+    , m_SearchSessionId( rhs.m_SearchSessionId )
+    , m_SearchIdentGuid(rhs.m_SearchIdentGuid )
+    , m_SearchUrl( rhs.m_SearchUrl )
+    , m_SearchText( rhs.m_SearchText )
 {
 }
 
@@ -32,6 +37,9 @@ SearchParams& SearchParams::operator =( const SearchParams& rhs )
 	{
         *((MatchParams *)this) = (const MatchParams&)rhs;
 
+        m_HostType              = rhs.m_HostType;
+        m_SearchType            = rhs.m_SearchType;
+        m_SearchStartTimeGmtMs  = rhs.m_SearchStartTimeGmtMs;
         m_SearchSessionId       = rhs.m_SearchSessionId;
         m_SearchIdentGuid       = rhs.m_SearchIdentGuid;
         m_SearchUrl		        = rhs.m_SearchUrl;
@@ -45,6 +53,9 @@ SearchParams& SearchParams::operator =( const SearchParams& rhs )
 bool SearchParams::addToBlob( PktBlobEntry& blob )
 {
     bool result = MatchParams::addToBlob( blob );
+    result &= blob.setValue( m_HostType );
+    result &= blob.setValue( m_SearchType );
+    result &= blob.setValue( m_SearchStartTimeGmtMs );
     result &= blob.setValue( m_SearchSessionId );
     result &= blob.setValue( m_SearchIdentGuid );
     result &= blob.setValue( m_SearchUrl );
@@ -56,9 +67,24 @@ bool SearchParams::addToBlob( PktBlobEntry& blob )
 bool SearchParams::extractFromBlob( PktBlobEntry& blob )
 {
     bool result = MatchParams::extractFromBlob( blob );
+    result &= blob.getValue( m_HostType );
+    result &= blob.getValue( m_SearchType );
+    result &= blob.getValue( m_SearchStartTimeGmtMs );
     result &= blob.getValue( m_SearchSessionId );
     result &= blob.getValue( m_SearchIdentGuid );
     result &= blob.getValue( m_SearchUrl );
     result &= blob.getValue( m_SearchText );
     return result;
+}
+
+//============================================================================
+void SearchParams::createNewSessionId( void )
+{
+    VxGUID::generateNewVxGUID( m_SearchSessionId );
+}
+
+//============================================================================
+void SearchParams::updateSearchStartTime( void )
+{
+    m_SearchStartTimeGmtMs = GetGmtTimeMs();
 }

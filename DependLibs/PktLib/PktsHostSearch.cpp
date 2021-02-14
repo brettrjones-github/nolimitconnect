@@ -23,27 +23,17 @@
 PktHostSearchReq::PktHostSearchReq()
 {
     setPktType( PKT_TYPE_HOST_SEARCH_REQ );
-    m_au8Data[0] = 0;
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostSearchReq ) - sizeof(m_au8Data) + 1) ); 
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostSearchReq ) ) ); 
     vx_assert( 0 == getPktLength() & 0x0f );
 }
 
 //============================================================================
-void PktHostSearchReq::setSearchText( const char * msg )
+void PktHostSearchReq::calculateLength()
 {
-    vx_assert( msg );
-    uint16_t msgLen = ( uint16_t)strlen( msg );
-    vx_assert( MAX_HOST_SEARCH_MSG_LEN > msgLen );
-    strcpy( (char *)m_au8Data, msg );
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostSearchReq ) - sizeof(m_au8Data) + msgLen + 1) ); 
-    m_StrLen = htons( msgLen );
+    uint16_t pktLen = ( uint16_t)sizeof( PktHostSearchReq ) - sizeof(PktBlobEntry);
+    pktLen += getBlobEntry().getTotalBlobLen();
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen ) ); 
     vx_assert( 0 == getPktLength() & 0x0f );
-}
-
-//============================================================================
-const char * PktHostSearchReq::getSearchText( void )
-{
-    return (const char *)m_au8Data;
 }
 
 //============================================================================

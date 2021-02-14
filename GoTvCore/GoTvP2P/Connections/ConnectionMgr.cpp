@@ -121,6 +121,24 @@ bool ConnectionMgr::getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostO
 }
 
 //============================================================================
+EHostAnnounceStatus ConnectionMgr::lookupOrQueryAnnounceId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
+{
+    EHostAnnounceStatus hostStatus = eHostAnnounceUnknown;
+    if( urlCacheOnlineIdLookup( hostUrl, hostGuid ) )
+    {
+        hostStatus = eHostAnnounceQueryIdSuccess;
+    }
+    else
+    {
+        hostStatus = eHostAnnounceQueryIdInProgress;
+        std::string myUrl = m_Engine.getMyUrl();
+        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
+    }
+
+    return hostStatus;
+}
+
+//============================================================================
 EHostJoinStatus ConnectionMgr::lookupOrQueryJoinId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     EHostJoinStatus joinStatus = eHostJoinUnknown;

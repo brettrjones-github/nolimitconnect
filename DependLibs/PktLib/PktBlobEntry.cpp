@@ -126,6 +126,102 @@ bool PktBlobEntry::incDataRead( int valSize )
 }
 
 //============================================================================
+bool PktBlobEntry::setValue( EAgeType& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ m_DataIdx ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( EContentRating& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ m_DataIdx ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( EGenderType& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ m_DataIdx ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( EHostType& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ m_DataIdx ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( ELanguageType& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint16_t ) ) )
+    {
+        uint16_t* data = ( uint16_t* )( &m_BlobData[ getDataIdx() ] );
+        uint16_t u16Value = (uint16_t)eValue;
+        if( m_UseNetworkOrder )
+        {
+            *data = htons( u16Value );
+        }
+        else
+        {
+            *data = u16Value;
+        }
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( ESearchType& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ m_DataIdx ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
 bool PktBlobEntry::setValue( bool& bValue )
 {
     bool result = false;
@@ -416,6 +512,92 @@ bool PktBlobEntry::setValue( VxGUID& guid )
 //============================================================================
 // setValues
 //============================================================================
+//============================================================================
+bool PktBlobEntry::getValue( EAgeType& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (EAgeType)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( EContentRating& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (EContentRating)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( EGenderType& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (EGenderType)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( EHostType& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (EHostType)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( ELanguageType& eValue )
+{
+    if( haveData( sizeof( uint16_t ) ) )
+    {
+        uint16_t* data = ( uint16_t* )( &m_BlobData[ getDataIdx() ] );
+        if( m_UseNetworkOrder )
+        {
+            eValue = (ELanguageType)ntohs(*data);
+        }
+        else
+        {
+            eValue = (ELanguageType)*data;
+        }
+
+        incDataRead( sizeof( uint16_t ) );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( ESearchType& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (ESearchType)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
+    }
+
+    return false;
+}
 
 //============================================================================
 bool PktBlobEntry::getValue( bool& bValue )

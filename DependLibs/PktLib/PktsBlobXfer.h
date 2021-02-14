@@ -62,7 +62,7 @@ public:
 
 	std::string					getBlobName();
 	std::string					getBlobTag();
-	void						setBlobHashId( VxSha1Hash& BlobHashId )		{ m_BlobHashId = BlobHashId; }
+	void						setBlobHashId( VxSha1Hash& BlobHashId )		    { m_BlobHashId = BlobHashId; }
 	VxSha1Hash&					getBlobHashId( void )							{ return m_BlobHashId; }
 
 	void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
@@ -80,13 +80,13 @@ public:
     void						setCreationTime( uint32_t createTime )			{ m_CreationTime = htonl( createTime ); }
 	uint32_t					getCreationTime( void )						    { return ntohl( m_CreationTime ); }
 
-	void						setBlobOffset( int64_t offset )				{ m_s64BlobOffs = htonU64( offset ); }
-	int64_t						getBlobOffset( void )						{ return ntohU64( m_s64BlobOffs ); }
-	void						setBlobLen( int64_t len )					{ m_s64BlobLen = htonU64( len ); }
-	int64_t						getBlobLen( void )							{ return ntohU64( m_s64BlobLen ); }
+	void						setBlobOffset( int64_t offset )				    { m_s64BlobOffs = htonU64( offset ); }
+	int64_t						getBlobOffset( void )						    { return ntohU64( m_s64BlobOffs ); }
+	void						setBlobLen( int64_t len )					    { m_s64BlobLen = htonU64( len ); }
+	int64_t						getBlobLen( void )							    { return ntohU64( m_s64BlobLen ); }
 
-	void						setBlobType( uint16_t BlobType )		{ m_BlobType = htons( BlobType ); }
-	uint16_t					getBlobType( void )							{ return ntohs( m_BlobType ); }
+	void						setBlobType( uint16_t BlobType )		        { m_BlobType = htons( BlobType ); }
+	uint16_t					getBlobType( void )							    { return ntohs( m_BlobType ); }
 
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
@@ -129,8 +129,8 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setBlobOffset( int64_t offset )				{ m_s64BlobOffs = htonU64( offset ); }
-	int64_t						getBlobOffset( void )						{ return ntohU64( m_s64BlobOffs ); }
+	void						setBlobOffset( int64_t offset )				    { m_s64BlobOffs = htonU64( offset ); }
+	int64_t						getBlobOffset( void )						    { return ntohU64( m_s64BlobOffs ); }
 
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
@@ -245,8 +245,8 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
-	void						setBlobUniqueId( VxGUID& uniqueId  )	{ m_BlobUniqueId = uniqueId; }
-	VxGUID&						getBlobUniqueId( void )					{ return m_BlobUniqueId; }
+	void						setBlobUniqueId( VxGUID& uniqueId  )	    { m_BlobUniqueId = uniqueId; }
+	VxGUID&						getBlobUniqueId( void )					    { return m_BlobUniqueId; }
 
 	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }

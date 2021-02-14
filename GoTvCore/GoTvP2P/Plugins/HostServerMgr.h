@@ -23,6 +23,7 @@ public:
     HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostServerMgr() = default;
 
+    virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) override;
     virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
 
 protected:
@@ -33,8 +34,12 @@ protected:
     virtual bool                addClient( VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual bool                removeClient( VxGUID& onlineId );
 
+    virtual void                addAnnounceSession( VxGUID& sessionId, PktHostAnnounce* hostAnn );
+    virtual void                removeAnnounceSession( VxGUID& sessionId );
+
     VxMutex                     m_ServerMutex;
     VxGUIDList                  m_ClientList;
-    PktHostAnnounce             m_PktHostAnnounce;
+    std::map<VxGUID, PktHostAnnounce*> m_AnnList;
+    VxMutex                     m_AnnListMutex;
 };
 

@@ -18,6 +18,7 @@
 #include <GoTvInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <PktLib/PktHostAnnounce.h>
 #include <PktLib/VxCommon.h>
 
 //============================================================================
@@ -38,9 +39,7 @@ void HostServerMgr::onClientJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
 //============================================================================
 void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason )
 {
-    m_ServerMutex.lock();
-    memcpy( &m_PktHostAnnounce, &hostAnnounce, hostAnnounce.getPktLength() );
-    m_ServerMutex.unlock();
+    // save announce pkt in announce session list
     std::string url = m_ConnectionMgr.getDefaultHostUrl( eHostTypeNetwork );
     if( url.empty() )
     {
@@ -48,19 +47,49 @@ void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnn
         return;
     }
 
+    addAnnounceSession( sessionId, hostAnnounce.makeHostAnnCopy() );
     connectToHost( eHostTypeNetwork, sessionId, url, connectReason );
+}
+
+//============================================================================
+void HostServerMgr::addAnnounceSession( VxGUID& sessionId, PktHostAnnounce* hostAnn )
+{
+    removeAnnounceSession( sessionId );
+    m_AnnListMutex.lock();
+    m_AnnList[sessionId] = hostAnn;
+    m_AnnListMutex.unlock();
+}
+
+//============================================================================
+void HostServerMgr::removeAnnounceSession( VxGUID& sessionId )
+{
+    m_AnnListMutex.lock();
+    auto iter = m_AnnList.find( sessionId );
+    if( iter != m_AnnList.end() )
+    {
+        delete iter->second;
+        m_AnnList.erase( iter );
+    }
+
+    m_AnnListMutex.unlock();
+}
+
+//============================================================================
+void HostServerMgr::removeSession( VxGUID& sessionId, EConnectReason connectReason )
+{
+    if( isAnnounceConnectReason( connectReason ) )
+    {
+        removeAnnounceSession( sessionId );
+    }
+
+    HostServerSearchMgr::removeSession( sessionId, connectReason );
 }
 
 //============================================================================
 void HostServerMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
-    m_ServerMutex.lock();
-    if( removeContact( onlineId ) )
-    {
-        // TODO send clients a status offline message
-    }
+    removeSession( sessionId, connectReason );
 
-    m_ServerMutex.unlock();
     HostBaseMgr::onContactDisconnected( sessionId, sktBase, onlineId, connectReason );
 }
 
@@ -72,17 +101,27 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
             connectReason == eConnectReasonGroupAnnounce ||
             connectReason == eConnectReasonRandomConnectAnnounce ) )
     {
-        m_ServerMutex.lock();
-        if( m_PktHostAnnounce.isValidPkt() )
+        m_AnnListMutex.lock();
+        auto iter = m_AnnList.find( sessionId );
+        if( iter != m_AnnList.end() )
         {
-            m_Plugin.txPacket( onlineId, sktBase, &m_PktHostAnnounce, false, ePluginTypeNetworkHost );
-        }
-        else
-        {
-            LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostAnnounce is invalid" );
+            if( iter->second->isValidPkt() )
+            {
+                // BRJ temporary for debugging
+                // TODO REMOVE
+                iter->second->setIsLoopback( true );
+                m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeNetworkHost );
+            }
+            else
+            {
+                LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostAnnounce is invalid" );
+            }
+
+            delete iter->second;
+            m_AnnList.erase( iter );
         }
 
-        m_ServerMutex.unlock();
+        m_AnnListMutex.unlock();
 
         m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
     }

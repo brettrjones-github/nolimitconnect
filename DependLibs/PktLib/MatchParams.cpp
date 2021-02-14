@@ -40,36 +40,20 @@ MatchParams& MatchParams::operator =( const MatchParams& rhs )
 //============================================================================
 bool MatchParams::addToBlob( PktBlobEntry& blob )
 {
-    uint8_t ageValue = (uint8_t)m_AgeType;
-    bool result = blob.setValue( ageValue );
-    uint8_t genderValue = (uint8_t)m_GenderType;
-    result &= blob.setValue( genderValue );
-    uint16_t languageValue = (uint16_t)m_LanguageType;
-    result &= blob.setValue( genderValue );
-    uint8_t contentValue = (uint8_t)m_ContentRating;
-    result &= blob.setValue( contentValue );
+    bool result = blob.setValue( m_AgeType );
+    result &= blob.setValue( m_GenderType );
+    result &= blob.setValue( m_LanguageType );
+    result &= blob.setValue( m_ContentRating );
     return result;
 }
 
 //============================================================================
 bool MatchParams::extractFromBlob( PktBlobEntry& blob )
 {
-    uint8_t ageValue{ 0 };
-    bool result = blob.getValue( ageValue );
-    uint8_t genderValue{ 0 };
-    result &= blob.getValue( genderValue );
-    uint16_t languageValue{ 0 };
-    result &= blob.getValue( languageValue );
-    uint8_t contentValue{ 0 };
-    result &= blob.getValue( contentValue );
-    if( result )
-    {
-        m_AgeType = (EAgeType)ageValue;
-        m_GenderType = (EGenderType)genderValue;
-        m_LanguageType = (ELanguageType)languageValue;
-        m_ContentRating = (EContentRating)contentValue;
-    }
-
+    bool result = blob.getValue( m_AgeType );
+    result &= blob.getValue( m_GenderType );
+    result &= blob.getValue( m_LanguageType );
+    result &= blob.getValue( m_ContentRating );
     return result;
 
 }

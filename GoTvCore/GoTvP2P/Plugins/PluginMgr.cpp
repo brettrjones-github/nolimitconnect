@@ -895,13 +895,13 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
         pktHdr->setPluginNum( (uint8_t)ePluginType );
     }
 
-    pktHdr->setSrcOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
+    pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );
 
 #ifdef DEBUG
     // loopback is only for development convenience and should never be used for production
     if( pktHdr->getIsLoopback() )
     {
-        pktHdr->setDestOnlineId( m_Engine.getMyPktAnnounce().getMyOnlineId() );
+        pktHdr->setDestOnlineId( m_Engine.getMyOnlineId() );
         pktHdr->setSrcOnlineId( onlineId );
         handleNonSystemPackets( sktBase, pktHdr );
         return true;

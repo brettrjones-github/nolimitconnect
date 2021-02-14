@@ -125,11 +125,13 @@ void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
         else
         {
             ui.m_SearchsParamWidget->toSearchParams( m_SearchParams );
+            m_SearchParams.setHostType(getHostType());
             m_SearchParams.setSearchType(eSearchChatRoomHost);
+            m_SearchParams.createNewSessionId();
+            m_SearchParams.updateSearchStartTime();
             setStatusLabel( QObject::tr( "Search Started" ) );
             m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
         }
-
     }
     else if( !startSearch && m_SearchStarted )
     {
