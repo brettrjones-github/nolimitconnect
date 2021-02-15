@@ -60,7 +60,14 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     PktHostSearchReply* hostReply = ( PktHostSearchReply* )pktHdr;
-
+    if( 0 == hostReply->getTotalMatches() )
+    {
+        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
+    }
+    else
+    {
+        startHostDetailSession( hostReply, sktBase, netIdent );
+    }
 }
 
 //============================================================================
@@ -157,10 +164,45 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
 
         m_SearchListMutex.unlock();
         // not done with connection.. wait for search results
-        // m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
     }
     else
     {
         HostBaseMgr::onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason );
     }
+}
+
+//============================================================================
+void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent )
+{
+
+}
+
+//============================================================================
+void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+{
+    removeSearchSession( sessionId );
+    EConnectReason connectReason = getSearchConnectReason(hostType);
+    m_Engine.getConnectionMgr().doneWithConnection( sessionId, netIdent->getMyOnlineId(), this, connectReason );
+}
+
+//============================================================================
+EConnectReason HostClientMgr::getSearchConnectReason( EHostType hostType )
+{
+    EConnectReason connectReason = eConnectReasonUnknown;
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        connectReason = eConnectReasonChatRoomSearch;
+        break;
+    case eHostTypeGroup:
+        connectReason = eConnectReasonGroupSearch;
+        break;
+    case eHostTypeRandomConnect:
+        connectReason = eConnectReasonRandomConnectSearch;
+        break;
+    default:
+        break;
+    }
+
+    return connectReason;
 }

@@ -20,7 +20,8 @@
 #include <GoTvCore/GoTvP2P/Plugins/PluginBase.h>
 
 #include <NetLib/VxSktBase.h>
-#include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsHostSearch.h>
+#include <PktLib/PluginIdList.h>
 #include <CoreLib/VxTime.h>
 
 #include <memory.h>
@@ -41,8 +42,9 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
     if( haveBlob( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
     {
         m_SearchMutex.lock();
-        std::map<VxGUID, HostSearchEntry>& searchMap = getSearchList( hostType );
-        auto& iter = searchMap.find( netIdent->getMyOnlineId() );
+        std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( hostType );
+        PluginId pluginId( netIdent->getMyOnlineId(), getSearchPluginType( hostType ) );
+        auto& iter = searchMap.find( pluginId );
         if( iter != searchMap.end() )
         {
             fillSearchEntry( iter->second, hostType, hostAnn, netIdent, false );
@@ -51,7 +53,7 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
         {
             HostSearchEntry searchEntry;
             fillSearchEntry( searchEntry, hostType, hostAnn, netIdent, true );
-            searchMap.insert_or_assign( netIdent->getMyOnlineId(), searchEntry );
+            searchMap.insert_or_assign( pluginId, searchEntry );
         }
 
         m_SearchMutex.unlock();
@@ -59,27 +61,28 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
 }
 
 //============================================================================
-ECommErr HostServerSearchMgr::searchRequest( EHostType hostType, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
+ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    ECommErr searchErr = haveBlob(hostType) ? eCommErrNone : eCommErrInvalidHostType;
+    ECommErr searchErr = haveBlob(searchParams.getHostType()) ? eCommErrNone : eCommErrInvalidHostType;
     if( eCommErrNone == searchErr )
     {
         unsigned int matchCnt = 0;
-        VxGUIDList toRemoveList;
-        VxGUIDList matchList;
+        PluginIdList toRemoveList;
+        PluginIdList matchList;
         uint64_t timeNow = GetGmtTimeMs();
+        searchReply.setIsGuidPluginTypePairs( true );
         m_SearchMutex.lock();
-        std::map<VxGUID, HostSearchEntry>& searchMap = getSearchList( hostType );
-        for( std::map<VxGUID, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+        std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( searchParams.getHostType() );
+        for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
         {
             if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_UPDATE_TIME_MS )
             {
-                toRemoveList.addGuid( iter->first );
+                toRemoveList.addPluginId( iter->first );
             }
-            else if( iter->second.searchMatch( searchStr ) )
+            else if( iter->second.searchMatch( searchParams, searchStr ) )
             {
-                matchList.addGuid( iter->first );
-                addOrQueSearchMatch( searchReply, sktBase, netIdent, iter->first, iter->second );
+                const PluginId& pluginId = iter->first;
+                searchReply.addPluginId( pluginId );
             }
         }
 
@@ -91,15 +94,9 @@ ECommErr HostServerSearchMgr::searchRequest( EHostType hostType, PktHostSearchRe
 }
 
 //============================================================================
-void HostServerSearchMgr::addOrQueSearchMatch( PktHostSearchReply& searchReply, VxSktBase* sktBase, VxNetIdent* netIdent, const VxGUID& guid, const HostSearchEntry& entry )
+void HostServerSearchMgr::removeEntries( std::map<PluginId, HostSearchEntry>& searchMap, PluginIdList& toRemoveList )
 {
-    // asdkfgs todo
-}
-
-//============================================================================
-void HostServerSearchMgr::removeEntries( std::map<VxGUID, HostSearchEntry>& searchMap, VxGUIDList& toRemoveList )
-{
-    for( auto& iter = toRemoveList.getGuidList().begin(); iter != toRemoveList.getGuidList().end(); ++iter )
+    for( auto& iter = toRemoveList.getPluginIdList().begin(); iter != toRemoveList.getPluginIdList().end(); ++iter )
     {
         auto& iter2 = searchMap.find( *iter );
         if( iter2 != searchMap.end() )
@@ -143,7 +140,7 @@ bool HostServerSearchMgr::haveBlob( EHostType hostType )
 }
 
 //============================================================================
-std::map<VxGUID, HostSearchEntry>& HostServerSearchMgr::getSearchList( EHostType hostType )
+std::map<PluginId, HostSearchEntry>& HostServerSearchMgr::getSearchList( EHostType hostType )
 {
     switch( hostType )
     {
@@ -155,5 +152,21 @@ std::map<VxGUID, HostSearchEntry>& HostServerSearchMgr::getSearchList( EHostType
         return m_RandConnectList;
     default:
         return m_NullList;
+    }
+}
+
+//============================================================================
+EPluginType HostServerSearchMgr::getSearchPluginType( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        return ePluginTypeChatRoomHost;
+    case eHostTypeGroup:
+        return ePluginTypeGroupHost;
+    case eHostTypeRandomConnect:
+        return ePluginTypeRandomConnectHost;
+    default:
+        return ePluginTypeInvalid;
     }
 }

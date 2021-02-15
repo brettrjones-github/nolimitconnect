@@ -16,6 +16,7 @@
 #include "HostServerSearchMgr.h"
 
 #include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PluginId.h>
 
 class HostServerMgr : public HostServerSearchMgr
 {

@@ -16,6 +16,8 @@
 #include "HostBaseMgr.h"
 #include "HostSearchEntry.h"
 
+#include <PktLib/PluginId.h>
+
 #include <CoreLib/VxGUIDList.h>
 #include <CoreLib/VxMutex.h>
 
@@ -25,8 +27,10 @@
 
 class ConnectionMgr;
 class P2PEngine;
-class PluginMgr;
 class PluginBase;
+class PluginId;
+class PluginIdList;
+class PluginMgr;
 class VxPktHdr;
 class PktHostSearchReply;
 
@@ -37,22 +41,22 @@ public:
 	virtual ~HostServerSearchMgr() = default;
 
     void                        updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent );
-    virtual ECommErr            searchRequest( EHostType hostType, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual ECommErr            searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 protected:
-    std::map<VxGUID, HostSearchEntry>& getSearchList( EHostType hostType );
+    std::map<PluginId, HostSearchEntry>& getSearchList( EHostType hostType );
     bool                        haveBlob( EHostType hostType );
     bool                        fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent, bool forced );
-    void                        addOrQueSearchMatch( PktHostSearchReply&searchReply, VxSktBase* sktBase, VxNetIdent* netIdent, const VxGUID& guid, const HostSearchEntry& entry );
 
     // remove entries does not lock m_SearchMutex
-    void                        removeEntries( std::map<VxGUID, HostSearchEntry>& searchMap, VxGUIDList& toRemoveList );
+    void                        removeEntries( std::map<PluginId, HostSearchEntry>& searchMap, PluginIdList& toRemoveList );
+    EPluginType                 getSearchPluginType( EHostType hostType );
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;
-    std::map<VxGUID, HostSearchEntry>   m_ChatBlob;
-    std::map<VxGUID, HostSearchEntry>   m_GroupBlob;
-    std::map<VxGUID, HostSearchEntry>   m_RandConnectList;
-    std::map<VxGUID, HostSearchEntry>   m_NullList; // empty list and list for network hosts
+    std::map<PluginId, HostSearchEntry>   m_ChatBlob;
+    std::map<PluginId, HostSearchEntry>   m_GroupBlob;
+    std::map<PluginId, HostSearchEntry>   m_RandConnectList;
+    std::map<PluginId, HostSearchEntry>   m_NullList; // empty list and list for network hosts
 };
 

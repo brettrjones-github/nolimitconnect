@@ -114,7 +114,6 @@ void MJPEGReader::setIsVidThreadRunning( bool isRunning )
 //============================================================================
 bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 {
-	bool isMyVid = false;
 	uint64_t fileLen = VxFileUtil::getFileLen( fileName );
 	if( fileLen < 4000 )
 	{

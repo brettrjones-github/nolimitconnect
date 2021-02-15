@@ -15,6 +15,7 @@
 #include "MatchParams.h"
 #include "PktBlobEntry.h"
 
+//============================================================================
 MatchParams::MatchParams( const MatchParams& rhs )
     : m_AgeType(rhs.m_AgeType)
     , m_GenderType(rhs.m_GenderType)

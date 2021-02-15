@@ -15,6 +15,7 @@
 
 #include "PktTypes.h"
 #include "PktBlobEntry.h"
+
 #include <GoTvInterface/IDefs.h>
 
 #pragma pack(1)
@@ -34,6 +35,7 @@ protected:
     PktBlobEntry                m_BlobEntry;							
 };
 
+class PluginId;
 class PktHostSearchReply : public VxPktHdr
 {
 public:
@@ -49,14 +51,15 @@ public:
     void                        setCommError( ECommErr commError )                          { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                                  { return (ECommErr)m_CommError; }
 
-    void                        setMatchesInThisPkt( uint8_t matchCnt )                     { m_MatchesInThisPkt = matchCnt; }
-    uint8_t                     getMatchesInThisPkt( void ) const                           { return m_MatchesInThisPkt; }
+    void                        setIsGuidPluginTypePairs( bool isPair )                     { m_IsGuidPluginTypePairs = (uint8_t)isPair; }
+    uint8_t                     getIsGuidPluginTypePairs( void ) const                      { return m_IsGuidPluginTypePairs; }
 
     void                        setTotalMatches( uint16_t matchCnt );
     uint16_t                    getTotalMatches( void ) const;
 
-    void                        setTotalBlobLen( uint16_t totalBlobLen );
-    uint16_t                    getTotalBlobLen( void ) const;
+    // add guid to blob and increment total match count
+    bool                        addMatchOnlineId( VxGUID& onlineId );
+    bool                        addPluginId( const PluginId& pluginId );
     uint16_t                    getRemainingBlobStorageLen( void ) const;
 
 private:
@@ -64,11 +67,12 @@ private:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_AccessState{ 0 };
     uint8_t					    m_CommError{ 0 };		
-    uint8_t					    m_MatchesInThisPkt{ 0 };	
+    uint8_t					    m_IsGuidPluginTypePairs{ 0 };	
+
     uint16_t					m_TotalMatches{ 0 };	
-    uint16_t                    m_TotalBlobLen{ 0 };	
+    uint16_t                    m_Res1{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
-    uint64_t					m_Res2{ 0 };	
+	// a pkt blob can hold up to PKT_BLOB_MAX_GUIDS
     PktBlobEntry                m_PktBlob;	
 };
 

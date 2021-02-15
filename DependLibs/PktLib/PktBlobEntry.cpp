@@ -13,6 +13,8 @@
 //============================================================================
 
 #include "PktBlobEntry.h"
+#include "PluginId.h"
+
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxDebug.h>
@@ -207,6 +209,21 @@ bool PktBlobEntry::setValue( ELanguageType& eValue )
 }
 
 //============================================================================
+bool PktBlobEntry::setValue( EPluginType& eValue )
+{
+    bool result = false;
+    if( haveRoom( sizeof( uint8_t ) ) )
+    {
+        uint8_t u8Val = (uint8_t)eValue;
+        m_BlobData[ m_DataIdx ] = u8Val;
+        incDataWrite( sizeof( uint8_t ) );
+        result = true;
+    }
+
+    return result;
+}
+
+//============================================================================
 bool PktBlobEntry::setValue( ESearchType& eValue )
 {
     bool result = false;
@@ -218,6 +235,29 @@ bool PktBlobEntry::setValue( ESearchType& eValue )
         result = true;
     }
 
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( const PluginId& pluginId )
+{
+    bool result = false;
+    if( haveRoom( 17 ) )
+    {
+        result &= setValue( const_cast<PluginId&>(pluginId).getOnlineId() );
+        result &= setValue( const_cast<PluginId&>(pluginId).getPluginType() );
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktBlobEntry::setValue( VxGUID& guid )
+{
+    uint64_t loPart = guid.getVxGUIDLoPart();
+    uint64_t hiPart = guid.getVxGUIDHiPart();
+    bool result = setValue( loPart );
+    result &= setValue( hiPart );
     return result;
 }
 
@@ -500,16 +540,6 @@ bool PktBlobEntry::setValue( void * pvRetBuf, int iBufLen )
 }
 
 //============================================================================
-bool PktBlobEntry::setValue( VxGUID& guid )
-{
-    uint64_t loPart = guid.getVxGUIDLoPart();
-    uint64_t hiPart = guid.getVxGUIDHiPart();
-    bool result = setValue( loPart );
-    result &= setValue( hiPart );
-    return result;
-}
-
-//============================================================================
 // setValues
 //============================================================================
 //============================================================================
@@ -587,6 +617,19 @@ bool PktBlobEntry::getValue( ELanguageType& eValue )
 }
 
 //============================================================================
+bool PktBlobEntry::getValue( EPluginType& eValue )
+{
+    if( haveData( 1 ) )
+    {
+        eValue = (EPluginType)m_BlobData[ getDataIdx() ];
+        incDataRead( 1 );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
 bool PktBlobEntry::getValue( ESearchType& eValue )
 {
     if( haveData( 1 ) )
@@ -597,6 +640,19 @@ bool PktBlobEntry::getValue( ESearchType& eValue )
     }
 
     return false;
+}
+
+//============================================================================
+bool PktBlobEntry::getValue( PluginId& pluginId )
+{
+    bool result = false;
+    if( haveData( 17 ) )
+    {
+        result &= getValue( pluginId.getOnlineId() );
+        result &= getValue( pluginId.getPluginType() );
+    }
+
+    return result;
 }
 
 //============================================================================

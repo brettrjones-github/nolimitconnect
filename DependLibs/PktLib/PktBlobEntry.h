@@ -25,8 +25,11 @@
 // defines for pkt blob
 #define PKT_BLOB_MAX_STORAGE_LEN (1024 * 14 - 16) // approx 14K to fit within MAX_PKT_LEN - 2K.. -16 for packet alignment
 #define PKT_BLOB_STORAGE_VERSION 1
+#define PKT_BLOB_MAX_IDS (PKT_BLOB_MAX_STORAGE_LEN / 16) // max number of guids a empty blob can hold.. this is search result limit (895 entries)
+#define PKT_BLOB_MAX_ID_PLUGIN_PAIR (PKT_BLOB_MAX_STORAGE_LEN / 17) // max number of guid and plugin pair a empty blob can hold.. this is search result limit (842 entries)
 
 class VxGUID;
+class PluginId;
 
 #pragma pack(push)
 #pragma pack(1)
@@ -73,14 +76,16 @@ public:
 
     bool                        isPastEnd()                     { return m_PastEnd; }
 
-
     //! set value 
     bool                        setValue( EAgeType& eValue );
     bool                        setValue( EContentRating& eValue );
     bool                        setValue( EGenderType& eValue );
     bool                        setValue( EHostType& eValue );
     bool                        setValue( ELanguageType& eValue );
+    bool                        setValue( EPluginType& eValue );
     bool                        setValue( ESearchType& eValue );
+    bool                        setValue( const PluginId& pluginId );
+    bool                        setValue( VxGUID& guid );
     bool                        setValue( bool& bValue );
     bool                        setValue( int8_t& s8Value );
     bool                        setValue( uint8_t& u8Value );
@@ -96,7 +101,6 @@ public:
     bool                        setValue( const char * pRetBuf, int iBufLen );
     bool                        setValue( std::vector<std::string>& aoStrValues );
     bool                        setValue( void * pvRetBuf, int iBufLen );
-    bool                        setValue( VxGUID& guid );
 
     //! get value 
     bool                        getValue( EAgeType& eValue );
@@ -104,7 +108,10 @@ public:
     bool                        getValue( EGenderType& eValue );
     bool                        getValue( EHostType& eValue );
     bool                        getValue( ELanguageType& eValue );
+    bool                        getValue( EPluginType& eValue );
     bool                        getValue( ESearchType& eValue );
+    bool                        getValue( PluginId& pluginId );
+    bool                        getValue( VxGUID& guid );
     bool                        getValue( bool& bValue );
     bool                        getValue( int8_t& s8Value );
     bool                        getValue( uint8_t& u8Value );
@@ -120,7 +127,6 @@ public:
     bool                        getValue( char * pRetBuf, int& iBufLen );
     bool                        getValue( std::vector<std::string>& aoStrValues );
     bool                        getValue( void * pvRetBuf, int& iBufLen );
-    bool                        getValue( VxGUID& guid );
 
 protected:
     //=== vars ===//

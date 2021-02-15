@@ -213,6 +213,8 @@
     <ClInclude Include="..\..\PktTypes.h" />
     <ClInclude Include="..\..\PktVoiceReply.h" />
     <ClInclude Include="..\..\PktVoiceReq.h" />
+    <ClInclude Include="..\..\PluginId.h" />
+    <ClInclude Include="..\..\PluginIdList.h" />
     <ClInclude Include="..\..\SearchParams.h" />
     <ClInclude Include="..\..\VxCommon.h" />
     <ClInclude Include="..\..\VxConnectId.h" />
@@ -261,6 +263,8 @@
     <ClCompile Include="..\..\PktTcpPunch.cpp" />
     <ClCompile Include="..\..\PktVoiceReply.cpp" />
     <ClCompile Include="..\..\PktVoiceReq.cpp" />
+    <ClCompile Include="..\..\PluginId.cpp" />
+    <ClCompile Include="..\..\PluginIdList.cpp" />
     <ClCompile Include="..\..\SearchParams.cpp" />
     <ClCompile Include="..\..\VxCommon.cpp" />
     <ClCompile Include="..\..\VxConnectId.cpp" />

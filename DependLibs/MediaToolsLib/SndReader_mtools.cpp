@@ -58,7 +58,6 @@ SndReader::~SndReader()
 //============================================================================
 bool SndReader::fromGuiIsMyP2PWebAudioFile( const char * fileName )
 {
-	bool isMyVid = false;
 	uint64_t fileLen = VxFileUtil::getFileLen( fileName );
 	if( fileLen < 1000 )
 	{

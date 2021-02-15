@@ -74,7 +74,7 @@ HostSearchEntry& HostSearchEntry::operator=( const HostSearchEntry& rhs )
 }
 
 //============================================================================
-bool HostSearchEntry::searchMatch( std::string& searchStr )
+bool HostSearchEntry::searchMatch( SearchParams& searchParams, std::string& searchStr )
 {
     if( !searchStr.empty() )
     {

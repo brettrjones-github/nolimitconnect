@@ -799,7 +799,6 @@ int OpusFileDecoder::opusFloatOutputToPcm(	float *			opusOutput,
 bool OpusFileDecoder::seekOpusFile( FILE * fileHandle, int pos0to100000 )
 {
 	ogg_int64_t 	pageGranule;
-	bool			endOfFile = false;
 	if( !m_HeaderHasBeenRead )
 	{
 		readTotalSndFrames( fileHandle );

@@ -130,7 +130,7 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
             }
             else
             {
-                ECommErr searchErr = m_HostServerMgr.searchRequest( searchParams.getHostType(), searchReply, searchText, sktBase, netIdent );
+                ECommErr searchErr = m_HostServerMgr.searchRequest( searchParams, searchReply, searchText, sktBase, netIdent );
                 searchReply.setCommError( searchErr );
             }
         }

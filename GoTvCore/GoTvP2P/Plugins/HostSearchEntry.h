@@ -35,7 +35,7 @@ public:
     HostSearchEntry&			operator=( const HostSearchEntry& rhs );
 
     void                        updateLastRxTime( void );
-    bool                        searchMatch( std::string& searchStr );
+    bool                        searchMatch( SearchParams& searchParams, std::string& searchStr );
     void                        toHostedEntry( HostedEntry& entry );
     void                        fillSearchReplyBlob( BinaryBlob& blob );
 

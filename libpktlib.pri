@@ -38,6 +38,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktsTodGame.h \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.h \
     $$PWD/DependLibs/PktLib/PktsWebServer.h \
+	$$PWD/DependLibs/PktLib/PluginId.h \
+	$$PWD/DependLibs/PktLib/PluginIdList.h \
 	$$PWD/DependLibs/PktLib/SearchParams.h \
     $$PWD/DependLibs/PktLib/VxCommon.h \
     $$PWD/DependLibs/PktLib/VxConnectId.h \
@@ -84,6 +86,8 @@ SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktsTodGame.cpp \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.cpp \
     $$PWD/DependLibs/PktLib/PktsWebServer.cpp \
+	$$PWD/DependLibs/PktLib/PluginId.cpp \
+	$$PWD/DependLibs/PktLib/PluginIdList.cpp \
 	$$PWD/DependLibs/PktLib/SearchParams.cpp \
     $$PWD/DependLibs/PktLib/VxCommon.cpp \
     $$PWD/DependLibs/PktLib/VxConnectId.cpp \

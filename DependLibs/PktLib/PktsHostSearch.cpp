@@ -57,15 +57,29 @@ uint16_t PktHostSearchReply::getTotalMatches( void ) const
 }
 
 //============================================================================
-void PktHostSearchReply::setTotalBlobLen( uint16_t totalBlobLen )
+// add guid to blob and increment total match count
+bool PktHostSearchReply::addMatchOnlineId( VxGUID& onlineId )
 {
-    m_TotalBlobLen = htons( totalBlobLen );
+    bool result = m_PktBlob.setValue( onlineId );
+    if( result )
+    {
+        setTotalMatches( getTotalMatches() + 1 );
+    }
+
+    return result;
 }
 
 //============================================================================
-uint16_t PktHostSearchReply::getTotalBlobLen( void ) const
+// add guid and plugin type to blob and increment total match count
+bool PktHostSearchReply::addPluginId( const PluginId& pluginId )
 {
-    return ntohs( m_TotalBlobLen );
+    bool result = m_PktBlob.setValue( pluginId );
+    if( result )
+    {
+        setTotalMatches( getTotalMatches() + 1 );
+    }
+
+    return result;
 }
 
 //============================================================================

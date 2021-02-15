@@ -17,6 +17,8 @@
 
 #include <PktLib/SearchParams.h>
 
+class PktHostSearchReply;
+
 class HostClientMgr : public HostClientSearchMgr
 {
 public:
@@ -37,6 +39,11 @@ protected:
 
     virtual void                addSearchSession( VxGUID& sessionId, SearchParams& searchParams );
     virtual void                removeSearchSession( VxGUID& sessionId );
+
+    virtual void                startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent );
+    virtual void                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+
+    EConnectReason              getSearchConnectReason( EHostType hostType );
 
     VxMutex                     m_ClientMutex;
     VxGUIDList                  m_ServerList;
