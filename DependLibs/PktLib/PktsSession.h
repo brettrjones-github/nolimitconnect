@@ -32,8 +32,8 @@ public:
 
 private:
 	//=== vars ===//
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -41,16 +41,16 @@ private:
 class PktSessionStartReply : public VxPktHdr
 {
 public:
+    PktSessionStartReply();
 
-	PktSessionStartReply();
 	void						setOfferResponse( EOfferResponse eResponse ){ m_u16Response = (uint16_t)eResponse; }
 	EOfferResponse				getOfferResponse( void )					{ return (EOfferResponse)m_u16Response; }
 
 private:
 	//=== vars ===//
-	uint16_t							m_u16Response;
-	uint16_t							m_u16Res1;
-	uint32_t							m_u32Res2;
+    uint16_t					m_u16Response{ 0 };
+	uint16_t					m_u16Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -67,8 +67,8 @@ public:
 
 private:
 	//=== vars ===//
-	uint32_t							m_u32Res1;
-	uint32_t							m_u32Res2;
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };
@@ -88,9 +88,9 @@ public:
 
 private:
 	//=== vars ===//
-	uint16_t							m_u16Response;
-	uint16_t							m_u16Res1;
-	uint32_t							m_u32Res2;
+	uint16_t					m_u16Response{ 0 };		
+	uint16_t					m_u16Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 };

@@ -14,6 +14,9 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktLogReply.h \
     $$PWD/DependLibs/PktLib/PktLogReq.h \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.h \
+	$$PWD/DependLibs/PktLib/PktsPing.h \
+	$$PWD/DependLibs/PktLib/PktsPluginOffer.h \
+	$$PWD/DependLibs/PktLib/PktsPluginSetting.h \
     $$PWD/DependLibs/PktLib/PktRequestErrors.h \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktTcpPunch.h \

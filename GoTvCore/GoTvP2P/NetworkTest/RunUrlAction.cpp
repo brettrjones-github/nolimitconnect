@@ -79,7 +79,7 @@ UrlActionInfo::UrlActionInfo( P2PEngine& engine, EHostType hostType, VxGUID& ses
 {
     if( nullptr == myUrl )
     {
-        m_MyUrl.setUrl( m_Engine.getMyUrl() );
+        m_MyUrl.setUrl( m_Engine.getMyOnlineUrl() );
     }
 }
 

@@ -20,6 +20,7 @@
 
 #include <PktLib/PktsHostJoin.h>
 #include <PktLib/PktsHostSearch.h>
+#include <PktLib/PluginIdList.h>
 
 //============================================================================
 HostClientMgr::HostClientMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase )
@@ -62,6 +63,7 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
     PktHostSearchReply* hostReply = ( PktHostSearchReply* )pktHdr;
     if( 0 == hostReply->getTotalMatches() )
     {
+        LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onPktHostSearchReply no matches" );
         stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
     }
     else
@@ -88,36 +90,36 @@ void HostClientMgr::sendHostSearchToNetworkHost( VxGUID& sessionId, SearchParams
         return;
     }
 
-    addSearchSession( sessionId,searchParams );
+    addSearchSession( sessionId, searchParams );
     connectToHost( eHostTypeNetwork, sessionId, url, connectReason );
 }
 
 //============================================================================
-void HostClientMgr::addSearchSession( VxGUID& sessionId, SearchParams& searchParams )
+void HostClientMgr::addPluginRxSession( VxGUID& sessionId, PluginIdList& pluginIdList )
 {
-    removeSearchSession( sessionId );
-    m_SearchListMutex.lock();
-    m_SearchList[sessionId] = searchParams;
-    m_SearchListMutex.unlock();
+    removePluginRxSession( sessionId );
+    m_PluginRxListMutex.lock();
+    m_PluginRxList[sessionId] = pluginIdList;
+    m_PluginRxListMutex.unlock();
 }
 
 //============================================================================
-void HostClientMgr::removeSearchSession( VxGUID& sessionId )
+void HostClientMgr::removePluginRxSession( VxGUID& sessionId )
 {
-    m_SearchListMutex.lock();
-    auto iter = m_SearchList.find( sessionId );
-    if( iter != m_SearchList.end() )
+    m_PluginRxListMutex.lock();
+    auto iter = m_PluginRxList.find( sessionId );
+    if( iter != m_PluginRxList.end() )
     {
-        m_SearchList.erase( iter );
+        m_PluginRxList.erase( iter );
     }
 
-    m_SearchListMutex.unlock();
+    m_PluginRxListMutex.unlock();
 }
 
 //============================================================================
 void HostClientMgr::removeSession( VxGUID& sessionId, EConnectReason connectReason )
 {
-    if( isAnnounceConnectReason( connectReason ) )
+    if( isSearchConnectReason( connectReason ) )
     {
         removeSearchSession( sessionId );
     }
@@ -140,29 +142,36 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
             connectReason == eConnectReasonGroupSearch ||
             connectReason == eConnectReasonRandomConnectSearch ) )
     {
-        m_SearchListMutex.lock();
-        auto iter = m_SearchList.find( sessionId );
-        if( iter != m_SearchList.end() )
+        m_SearchParamsMutex.lock();
+        auto iter = m_SearchParamsList.find( sessionId );
+        if( iter != m_SearchParamsList.end() )
         {
+            SearchParams& searchParams = iter->second;
             PktHostSearchReq searchReq;
-            bool result = iter->second.addToBlob( searchReq.getBlobEntry() );
-            searchReq.calculateLength();
+            searchReq.setHostType( searchParams.getHostType() );
+            searchReq.setSearchSessionId( sessionId );
+            PktBlobEntry& blobEntry = searchReq.getBlobEntry();
+            bool result = searchParams.addToBlob( blobEntry );
+            searchReq.calcPktLen();
             if( result && searchReq.isValidPkt() )
             {
                 // BRJ temporary for debugging
                 // TODO REMOVE
                 searchReq.setIsLoopback( true );
-                m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeNetworkHost );
+                if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeNetworkHost ) )
+                {
+                    LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onConnectToHostSuccess failed send PktHostSearchReq" );
+                }
             }
             else
             {
-                LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostAnnounce is invalid" );
+                LogMsg( LOG_ERROR, "HostServerMgr PktHostSearchReq is invalid" );
             }
 
-            m_SearchList.erase( iter );
+            m_SearchParamsList.erase( iter );
         }
 
-        m_SearchListMutex.unlock();
+        m_SearchParamsMutex.unlock();
         // not done with connection.. wait for search results
     }
     else
@@ -174,35 +183,145 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
 //============================================================================
 void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent )
 {
+    EHostType hostType = hostReply->getHostType();
+    VxGUID sessionId = hostReply->getSearchSessionId();
+    int pluginIdCnt = hostReply->getTotalMatches();
+    ECommErr commErr = hostReply->getCommError();
+    if( eCommErrNone != commErr )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession comm error %s", DescribeCommError( commErr ) );
+        if( commErr = eCommErrPluginNotEnabled )
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, netIdent->getMyOnlineId(), eHostSearchPluginDisabled );
+        }
 
+        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
+        return;
+    }
+
+    if( !sessionId.isVxGUIDValid() )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession session id invalid");
+    }
+
+    bool result = sessionId.isVxGUIDValid() && pluginIdCnt > 0 && eCommErrNone == commErr;
+    if( result )
+    {
+        // insert ids and send first request for plugin settings
+        PluginIdList pluginIdList;
+        PktBlobEntry& blobEntry = hostReply->getBlobEntry();
+        blobEntry.resetRead();
+        for( int i = 0; i < pluginIdCnt; i++ )
+        {
+            PluginId pluginId;
+            if( blobEntry.getValue( pluginId ) )
+            {
+                pluginIdList.addPluginId( pluginId );
+            }
+            else
+            {
+                LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession error getting plug id at index %d", i);
+                result = false;
+                break;
+            }
+        }
+
+        if( result )
+        {
+            addPluginRxSession( sessionId, pluginIdList );
+            result = sendNextPluginSettingRequest( hostReply->getHostType(), sessionId, sktBase, netIdent );
+        }
+    }
+
+    if( !result )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession failed");
+        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
+    }
+}
+
+//============================================================================
+bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+{
+    bool result = false;
+    m_PluginRxListMutex.lock();
+    auto iter = m_PluginRxList.find( sessionId );
+    if( iter != m_PluginRxList.end() )
+    {
+        PluginIdList& pluginAllList = iter->second;
+        std::vector<PluginId>& pluginList = pluginAllList.getPluginIdList();
+        if( pluginList.size() )
+        {
+            PluginId pluginId = pluginList.back();
+            pluginList.pop_back();
+            PktPluginSettingReq pluginIdReq;
+            pluginIdReq.setHostType( hostType );
+            pluginIdReq.setPluginId( pluginId );
+            pluginIdReq.setSessionId( sessionId );
+
+            // TODO debug only REMOVE ME
+            pluginIdReq.setIsLoopback( true );
+            if( m_Plugin.txPacket( netIdent->getMyOnlineId(), sktBase, &pluginIdReq, false, ePluginTypeNetworkHost ) )
+            {
+                result = true;
+            }
+            else
+            {
+                LogModule( eLogHostSearch, LOG_DEBUG, "sendNextPluginSettingRequest send failed" );
+            }
+        }
+        else
+        {
+            LogMsg( LOG_VERBOSE, "HostClientMgr rxed all plugin settings" );
+        }
+    }
+
+    m_PluginRxListMutex.unlock();
+    if( !result )
+    {
+        LogMsg( LOG_VERBOSE, "HostClientMgr rxed all plugin settings" );
+        stopHostSearch( hostType, sessionId, sktBase, netIdent );
+    }
+
+    return result;
 }
 
 //============================================================================
 void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
 {
+    m_Engine.getToGui().toGuiHostSearchStatus( hostType, netIdent->getMyOnlineId(), eHostSearchCompleted );
+
     removeSearchSession( sessionId );
     EConnectReason connectReason = getSearchConnectReason(hostType);
     m_Engine.getConnectionMgr().doneWithConnection( sessionId, netIdent->getMyOnlineId(), this, connectReason );
 }
 
 //============================================================================
-EConnectReason HostClientMgr::getSearchConnectReason( EHostType hostType )
+void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    EConnectReason connectReason = eConnectReasonUnknown;
-    switch( hostType )
+    PktPluginSettingReply* settingReply = ( PktPluginSettingReply* )pktHdr;
+    PktBlobEntry& blobEntry = settingReply->getBlobEntry();
+    if( 0 != blobEntry.getBlobLen() )
     {
-    case eHostTypeChatRoom:
-        connectReason = eConnectReasonChatRoomSearch;
-        break;
-    case eHostTypeGroup:
-        connectReason = eConnectReasonGroupSearch;
-        break;
-    case eHostTypeRandomConnect:
-        connectReason = eConnectReasonRandomConnectSearch;
-        break;
-    default:
-        break;
-    }
+        // extract ident and plugin settings and send to gui
+        VxNetIdent hostIdent;
+        PluginSetting pluginSetting;
+        bool extractResult = hostIdent.extractFromBlob( blobEntry );
+        extractResult &= pluginSetting.extractFromBlob( blobEntry );
+        if( extractResult )
+        {
+            m_Engine.getToGui().toGuiHostSearchResult( settingReply->getHostType(), settingReply->getSessionId(), hostIdent, pluginSetting );
+        }
+        else
+        {
+            LogMsg( LOG_VERBOSE, "HostClientMgr plugin setting reply extract error" );
+        }
 
-    return connectReason;
+        sendNextPluginSettingRequest( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent );
+    }
+    else
+    {
+        LogMsg( LOG_VERBOSE, "HostClientMgr plugin setting reply empty" );
+        stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent );
+    }
 }

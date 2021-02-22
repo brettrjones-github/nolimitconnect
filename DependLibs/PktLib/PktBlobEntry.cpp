@@ -21,6 +21,12 @@
 #include <memory.h>
 
 //============================================================================
+PktBlobEntry::PktBlobEntry()
+{
+    m_MaxBlobLen = m_UseNetworkOrder ? htons( PKT_BLOB_MAX_STORAGE_LEN ) : PKT_BLOB_MAX_STORAGE_LEN;
+}
+
+//============================================================================
 bool PktBlobEntry::setBlobData( uint8_t* blob, int len )
 {
     if( 0 == len || !blob )
@@ -75,7 +81,7 @@ void PktBlobEntry::setMaxBlobLen( int len )
 //============================================================================
 int16_t PktBlobEntry::getMaxBlobLen( void ) const        
 { 
-    return m_UseNetworkOrder ? htons(m_MaxBlobLen) : m_BlobLen; 
+    return m_UseNetworkOrder ? htons(m_MaxBlobLen) : m_MaxBlobLen; 
 }
 
 //============================================================================
@@ -134,7 +140,7 @@ bool PktBlobEntry::setValue( EAgeType& eValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t u8Val = (uint8_t)eValue;
-        m_BlobData[ m_DataIdx ] = u8Val;
+        m_BlobData[ getDataIdx() ] = u8Val;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }
@@ -149,7 +155,7 @@ bool PktBlobEntry::setValue( EContentRating& eValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t u8Val = (uint8_t)eValue;
-        m_BlobData[ m_DataIdx ] = u8Val;
+        m_BlobData[ getDataIdx() ] = u8Val;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }
@@ -164,7 +170,7 @@ bool PktBlobEntry::setValue( EGenderType& eValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t u8Val = (uint8_t)eValue;
-        m_BlobData[ m_DataIdx ] = u8Val;
+        m_BlobData[ getDataIdx() ] = u8Val;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }
@@ -179,7 +185,7 @@ bool PktBlobEntry::setValue( EHostType& eValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t u8Val = (uint8_t)eValue;
-        m_BlobData[ m_DataIdx ] = u8Val;
+        m_BlobData[ getDataIdx() ] = u8Val;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }
@@ -203,6 +209,8 @@ bool PktBlobEntry::setValue( ELanguageType& eValue )
         {
             *data = u16Value;
         }
+
+        result = true;
     }
 
     return result;
@@ -215,7 +223,7 @@ bool PktBlobEntry::setValue( EPluginType& eValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t u8Val = (uint8_t)eValue;
-        m_BlobData[ m_DataIdx ] = u8Val;
+        m_BlobData[ getDataIdx() ] = u8Val;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }
@@ -230,7 +238,7 @@ bool PktBlobEntry::setValue( ESearchType& eValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t u8Val = (uint8_t)eValue;
-        m_BlobData[ m_DataIdx ] = u8Val;
+        m_BlobData[ getDataIdx() ] = u8Val;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }
@@ -268,7 +276,7 @@ bool PktBlobEntry::setValue( bool& bValue )
     if( haveRoom( sizeof( uint8_t ) ) )
     {
         uint8_t boolVal = bValue ? 1 : 0;
-        m_BlobData[ m_DataIdx ] = boolVal;
+        m_BlobData[ getDataIdx() ] = boolVal;
         incDataWrite( sizeof( uint8_t ) );
         result = true;
     }

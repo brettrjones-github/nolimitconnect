@@ -162,3 +162,12 @@ bool PluginId::isEqualTo( const PluginId& pluginId )
 {
     return *this == pluginId;
 }
+
+// get a description of the plugin id
+//============================================================================
+std::string PluginId::describePluginId( void ) const
+{
+    std::string desc = DescribePluginType2( m_PluginType );
+    desc += m_OnlineId.toOnlineIdString();
+    return desc;
+}

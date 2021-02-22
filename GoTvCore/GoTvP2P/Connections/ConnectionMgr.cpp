@@ -131,7 +131,7 @@ EHostAnnounceStatus ConnectionMgr::lookupOrQueryAnnounceId( VxGUID& sessionId, s
     else
     {
         hostStatus = eHostAnnounceQueryIdInProgress;
-        std::string myUrl = m_Engine.getMyUrl();
+        std::string myUrl = m_Engine.getMyOnlineUrl();
         m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
     }
 
@@ -149,7 +149,7 @@ EHostJoinStatus ConnectionMgr::lookupOrQueryJoinId( VxGUID& sessionId, std::stri
     else
     {
         joinStatus = eHostJoinQueryIdInProgress;
-        std::string myUrl = m_Engine.getMyUrl();
+        std::string myUrl = m_Engine.getMyOnlineUrl();
         m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
     }
 
@@ -167,7 +167,7 @@ EHostSearchStatus ConnectionMgr::lookupOrQuerySearchId( VxGUID& sessionId, std::
     else
     {
         joinStatus = eHostSearchQueryIdInProgress;
-        std::string myUrl = m_Engine.getMyUrl();
+        std::string myUrl = m_Engine.getMyOnlineUrl();
         m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
     }
 
@@ -284,7 +284,7 @@ void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUr
             m_DefaultHostRequiresOnlineId[hostType] = hostUrl;
             m_ConnectionMutex.unlock();
 
-            std::string myUrl = m_Engine.getMyUrl();
+            std::string myUrl = m_Engine.getMyOnlineUrl();
             static VxGUID sessionId;
             VxGUID::generateNewVxGUID( sessionId );
             m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, nullptr, hostType );
@@ -396,6 +396,8 @@ EConnectStatus ConnectionMgr::attemptConnection( VxGUID& sessionId, std::string 
 //============================================================================
 void ConnectionMgr::doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
+    LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::doneWithConnection %s", DescribeConnectReason( connectReason ));
+
     m_ConnectionMutex.lock();
     auto inProgressConnection = m_ConnectRequests.find( onlineId );
     if( inProgressConnection != m_ConnectRequests.end() )
@@ -1089,7 +1091,7 @@ void ConnectionMgr::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase 
         bigListInfo->setIsConnected( true );
         if( eConnectReasonRandomConnectJoin == connectReason )
         {
-            m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
+            m_Engine.getToGui().toGuiScanResultSuccess( eScanTypeRandomConnect, bigListInfo );
         }
     }
 }

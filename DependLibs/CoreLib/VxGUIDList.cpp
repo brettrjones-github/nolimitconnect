@@ -40,6 +40,23 @@ VxGUIDList::VxGUIDList()
 }
 
 //============================================================================
+VxGUIDList::VxGUIDList( const VxGUIDList& rhs )
+    : m_GuidList( rhs.m_GuidList )
+{
+}
+
+//============================================================================
+VxGUIDList& VxGUIDList::operator =( const VxGUIDList& rhs )
+{
+    if( this != &rhs )
+    {
+        m_GuidList          = rhs.m_GuidList;
+    }
+
+    return *this;
+}
+
+//============================================================================
 void VxGUIDList::addGuid( const VxGUID& guid )
 {
 	m_GuidList.push_back( guid );
@@ -105,4 +122,10 @@ void VxGUIDList::copyTo( VxGUIDList& destGuidList )
 	{
 		guidList.push_back( *iter );
 	}
+}
+
+//============================================================================
+void VxGUIDList::updateLastActiveTime( void )
+{
+    setLastActiveTime( GetTimeStampMs() );
 }

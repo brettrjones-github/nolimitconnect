@@ -71,8 +71,8 @@ namespace
                     //| eLogNetworkRelay
                     | eLogNetService
                     | eLogRunTest
-
-
+                    | eLogHostConnect
+                    | eLogHostSearch
                     );
 #else
     uint32_t g_ModuleEnableLoggingFlags = 0;

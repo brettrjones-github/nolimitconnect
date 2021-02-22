@@ -42,6 +42,7 @@ public:
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
 
     virtual EPluginAccess	    getPluginAccessState( VxNetIdent * netIdent );
+    virtual EConnectReason      getSearchConnectReason( EHostType hostType );
 
     virtual void                connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason );
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) {};
@@ -66,9 +67,11 @@ protected:
 
     void                        sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
     void                        sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
-    void                        sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    //void                        sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
 
     virtual void                onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
+    virtual void                onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
+    virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
 
     virtual bool                addContact( VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual bool                removeContact( VxGUID& onlineId );
@@ -79,8 +82,8 @@ protected:
     virtual bool                isSearchConnectReason( EConnectReason connectReason );
 
     virtual bool                stopHostSearch( EHostType hostType, SearchParams& searchParams );
-    virtual bool                updateOrAddSearchParms( std::map<VxGUID, SearchParams>& paramsList, SearchParams& searchParams );
-
+    virtual bool                addSearchSession( VxGUID& sessionId, SearchParams& searchParams );
+    virtual void                removeSearchSession( VxGUID& sessionId );
 
     //=== vars ===//
     P2PEngine&                  m_Engine; 
@@ -91,5 +94,6 @@ protected:
     VxMutex                     m_MgrMutex;
     VxGUIDList                  m_ContactList;
     std::map<VxGUID, SearchParams> m_SearchParamsList;
+    VxMutex                     m_SearchParamsMutex;
 };
 

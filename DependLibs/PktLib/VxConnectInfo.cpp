@@ -87,6 +87,20 @@ VxConnectBaseInfo& VxConnectBaseInfo::operator =( const VxConnectBaseInfo &rhs )
 }
 
 //============================================================================
+std::string VxConnectBaseInfo::getMyOnlineUrl( void )
+{
+    std::string strIPv4; 
+    m_DirectConnectId.getIPv4(strIPv4);
+    std::string strIPv6; 
+    m_DirectConnectId.getIPv6(strIPv6);
+    std::string myIp = VxIsIpValid( strIPv6 ) ? strIPv6  : strIPv4;
+
+    std::string myUrl;
+    StdStringFormat( myUrl, "ptop://%s:%d/%s", myIp.c_str(), m_DirectConnectId.getPort(), getMyOnlineId().toOnlineIdString().c_str() );
+    return myUrl;
+}
+
+//============================================================================
 void VxConnectBaseInfo::setMyOnlineId( uint64_t u64HiPart, uint64_t u64LoPart )
 { 
 	m_DirectConnectId.setVxGUID( u64HiPart, u64LoPart );

@@ -82,8 +82,11 @@ public:
 	VxConnectBaseInfo() = default;
 	VxConnectBaseInfo( const VxConnectBaseInfo& rhs );
 	VxConnectBaseInfo&          operator =( const VxConnectBaseInfo& rhs );
+
     bool                        addToBlob( PktBlobEntry& blob );
     bool                        extractFromBlob( PktBlobEntry& blob );
+
+    std::string                 getMyOnlineUrl( void );
 
 	void						setMyOnlineId( uint64_t u64HiPart, uint64_t u64LoPart );
 	VxGUID&						getMyOnlineId();

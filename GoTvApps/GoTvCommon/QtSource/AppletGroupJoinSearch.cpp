@@ -58,7 +58,7 @@ void AppletGroupJoinSearch::setStatusLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletGroupJoinSearch::toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
+void AppletGroupJoinSearch::toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
 {
 	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )

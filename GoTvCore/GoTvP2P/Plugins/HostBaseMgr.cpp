@@ -82,6 +82,28 @@ EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent * netIdent )
 }
 
 //============================================================================
+EConnectReason HostBaseMgr::getSearchConnectReason( EHostType hostType )
+{
+    EConnectReason connectReason = eConnectReasonUnknown;
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        connectReason = eConnectReasonChatRoomSearch;
+        break;
+    case eHostTypeGroup:
+        connectReason = eConnectReasonGroupSearch;
+        break;
+    case eHostTypeRandomConnect:
+        connectReason = eConnectReasonRandomConnectSearch;
+        break;
+    default:
+        break;
+    }
+
+    return connectReason;
+}
+
+//============================================================================
 void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl )
 {
     std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
@@ -132,8 +154,6 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
         return;
     }
 
-
-
     EConnectReason connectReason = eConnectReasonUnknown;
     bool isJoinSearch = false;
     switch( searchParams.getSearchType() )
@@ -164,7 +184,7 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
     }
     else
     {
-        if( updateOrAddSearchParms( m_SearchParamsList, searchParams ) )
+        if( addSearchSession( searchParams.getSearchSessionId(), searchParams ) )
         {
             connectToHost( hostType, searchParams.getSearchSessionId(), url, connectReason );
         }
@@ -177,7 +197,8 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
     if( !url.empty() )
     {
         VxGUID hostGuid;
- 
+        LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::connectToHost %s url %s reason %s", DescribeHostType( hostType ), url.c_str(), 
+                  DescribeConnectReason( connectReason ));
         if( isAnnounceConnectReason( connectReason ) )
         {
             EHostAnnounceStatus annStatus = m_ConnectionMgr.lookupOrQueryAnnounceId( sessionId, url.c_str(), hostGuid, this, connectReason);
@@ -360,7 +381,8 @@ void HostBaseMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId,
     else if( isSearchConnectReason( connectReason ) )
     {
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
-        sendSearchRequest( hostType, sessionId, sktBase, onlineId, connectReason );
+        LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s success Default function should be overridden", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
+        //sendSearchRequest( hostType, sessionId, sktBase, onlineId, connectReason );
     }
     else
     {
@@ -413,6 +435,8 @@ EHostType HostBaseMgr::connectReasonToHostType( EConnectReason connectReason )
 void HostBaseMgr::onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason )
 {
     EHostType hostType = connectReasonToHostType( connectReason );
+    LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::onUrlActionQueryIdSuccess %s url %s reason %s", DescribeHostType( hostType ), url.c_str(), 
+               DescribeConnectReason( connectReason ));
     if( eHostTypeUnknown != hostType )
     {
         if( isAnnounceConnectReason( connectReason ) )
@@ -439,7 +463,7 @@ void HostBaseMgr::onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url
         }
         else
         {
-            LogMsg( LOG_ERROR, "requestConnection success but has null socket" );
+            LogModule( eLogHostConnect, LOG_DEBUG, "requestConnection success but has null socket" );
             if( isAnnounceConnectReason( connectReason ) )
             {
                 onConnectToHostFail( hostType, sessionId, connectReason, eHostAnnounceConnectFailed );
@@ -460,7 +484,7 @@ void HostBaseMgr::onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url
     }
     else
     {
-        LogMsg( LOG_ERROR, "requestConnection failed" );
+        LogModule( eLogHostConnect, LOG_DEBUG, "requestConnection failed" );
         if( isAnnounceConnectReason( connectReason ) )
         {
             onConnectToHostFail( hostType, sessionId, connectReason, eHostAnnounceConnectFailed );
@@ -519,7 +543,6 @@ void HostBaseMgr::onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, E
     {
         LogMsg( LOG_ERROR, "Unknown Connect Reason %d", connectReason );
     }
-
 }
 
 //============================================================================
@@ -532,7 +555,7 @@ bool HostBaseMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxG
     }
     else
     {
-        LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s unknown host type %d - %s success ", DescribeConnectReason( connectReason ), hostType, DescribeHostType( hostType ) );
+        LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr connect reason %s unknown host type %d - %s success ", DescribeConnectReason( connectReason ), hostType, DescribeHostType( hostType ) );
     }
 
     return false;
@@ -594,10 +617,10 @@ void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, ECo
 void HostBaseMgr::sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     vx_assert( nullptr != sktBase );
+    LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr:: sendAnnounceRequest not done %s", DescribeConnectReason( connectReason ) );
     PktHostJoinReq pktJoin;
     // temp for development
     //pktJoin.setIsLoopback( true );
-
 
     pktJoin.setHostType( hostType );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
@@ -632,6 +655,7 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
     }
 }
 
+/*
 //============================================================================
 void HostBaseMgr::sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
@@ -644,14 +668,17 @@ void HostBaseMgr::sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSk
 //    pktSearch.setHostType( hostType );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktSearch ) )
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingJoinRequest );
+        LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::sendSearchRequest %s %s success pkt send", DescribeHostType( hostType ), DescribeConnectReason( connectReason ));
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchSendingSearchRequest );
     }
     else
     {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendJoinRequestFailed );
+        LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::sendSearchRequest %s %s failed pkt send", DescribeHostType( hostType ), DescribeConnectReason( connectReason ));
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchSendSearchRequestFailed );
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }
+*/
 
 //============================================================================
 bool HostBaseMgr::addContact( VxSktBase * sktBase, VxNetIdent * netIdent )
@@ -684,9 +711,30 @@ bool HostBaseMgr::stopHostSearch( EHostType hostType, SearchParams& searchParams
 }
 
 //============================================================================
-bool HostBaseMgr::updateOrAddSearchParms( std::map<VxGUID, SearchParams>& paramsList, SearchParams& searchParams )
+bool HostBaseMgr::addSearchSession( VxGUID& sessionId, SearchParams& searchParams )
 {
+    removeSearchSession( sessionId );
+    m_SearchParamsMutex.lock();
+    m_SearchParamsList[sessionId] = searchParams;
+    m_SearchParamsMutex.unlock();
     return true;
+}
+
+//============================================================================
+void HostBaseMgr::removeSearchSession( VxGUID& sessionId )
+{
+    m_SearchParamsMutex.lock();
+    auto iter = m_SearchParamsList.find( sessionId );
+    if( iter != m_SearchParamsList.end() )
+    {
+        m_SearchParamsList.erase( sessionId );
+    }
+    else
+    {
+        LogMsg( LOG_INFO, "HostBaseMgr::removeSearchSession session not found " );
+    }
+
+    m_SearchParamsMutex.unlock();
 }
 
 //============================================================================

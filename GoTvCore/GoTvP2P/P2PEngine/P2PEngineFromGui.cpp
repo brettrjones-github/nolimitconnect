@@ -1258,7 +1258,7 @@ uint16_t P2PEngine::fromGuiGetRandomTcpPort( void )
 //============================================================================
 void P2PEngine::fromGuiGetNodeUrl( std::string& nodeUrl )
 {
-    nodeUrl = getMyUrl();
+    nodeUrl = getMyOnlineUrl();
 }
 
 //============================================================================

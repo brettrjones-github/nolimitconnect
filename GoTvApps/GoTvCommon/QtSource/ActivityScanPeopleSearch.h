@@ -42,7 +42,7 @@ public:
 	void						setTitle( QString strTitle );
 	void						setStatusLabel( QString strMsg );
 
-    virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
     virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
 
 signals:

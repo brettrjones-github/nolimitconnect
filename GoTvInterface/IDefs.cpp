@@ -10,6 +10,7 @@ namespace
         "Comm Error Search Text To Short ",
         "Comm Error Search No Match ",
         "Comm Error Invalid Host Type ",
+        "Comm Error Plugin Not Enabled ",
         "Max Comm Error ",
     };
 
@@ -73,6 +74,7 @@ namespace
         "Host Announce Fail Permission ",  
         "Host Announce Fail Connect Dropped ",
         "Host Announce Invalid Param ",
+        "Host Announce Plugin Disabled ",
 
         "Max Host Announce Status ",
     };
@@ -94,6 +96,7 @@ namespace
         "Host Join Fail Permission ",  
         "Host Join Fail Connect Dropped ",
         "Host Join Invalid Param ",
+        "Host Join Plugin Disabled ",
 
         "Max Host Join Status ",
     };
@@ -115,6 +118,8 @@ namespace
         "Host Search Fail Permission ",  
         "Host Search Fail Connect Dropped ",
         "Host Search Invalid Param ",
+        "Host Search Plugin Disabled ",
+        "Host Search Completed ",
 
         "Max Host Search Status ",
     };

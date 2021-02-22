@@ -60,10 +60,10 @@ public:
     bool						fromVxGUIDHexString( const char * pHexString );
     static bool					isVxGUIDHexStringValid( const char * pId );
 
-    bool						toOnlineIdString( std::string& strRetId );
+    bool						toOnlineIdString( std::string& strRetId ) const;
     // buffer must be at least 36 characters in length
-    void                        toOnlineIdString( char * retBuf );
-    std::string					toOnlineIdString( void );
+    void                        toOnlineIdString( char * retBuf ) const;
+    std::string					toOnlineIdString( void ) const;
     //! set VxGUID by converting online id string into VxGUID
     bool						fromOnlineIdString( const char * pHexString );
     static bool					isOnlineIdStringValid( const char * pId );
@@ -87,15 +87,15 @@ public:
 	std::string					describeVxGUID( void );
 
     // set bytes to network order
-    void                       setToNetOrder();
+    void                        setToNetOrder( void );
     // set bytes to host cpu endianess
-    void                       setToHostOrder();
+    void                        setToHostOrder( void );
+
+    // buffer must be at least 17 characters in length
+    static void                 uint64ToHexAscii( char * retBuf, const uint64_t& val );
+    static char                 nibbleToHex( uint8_t val );
 
 protected:
-    // buffer must be at least 17 characters in length
-    void                        uint64ToHexAscii( char * retBuf, uint64_t& val );
-    char                        nibbleToHex( uint8_t val );
-
 	uint64_t					m_u64HiPart;
 	uint64_t					m_u64LoPart;
 };

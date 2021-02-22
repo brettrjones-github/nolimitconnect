@@ -26,6 +26,12 @@
 
 #include <QString>
 
+namespace
+{
+    const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
+    const int MAX_INFO_MSG_SIZE = 2048;
+}
+
 //============================================================================
 AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app, 
 													QWidget *			parent )
@@ -44,7 +50,25 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
     connect( this,					SIGNAL(signalSearchComplete()),				this, SLOT(slotSearchComplete()) );
     connect( this,					SIGNAL(signalSearchResult(VxNetIdent*)),	this, SLOT(slotSearchResult(VxNetIdent*)) ); 
 
+    connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+    connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
+
+    connect( &m_MyApp, SIGNAL(signalHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )),
+        this, SLOT(slotHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )),
+        this, SLOT(slotHostJoinStatus( EHostType, VxGUID&, EHostJoinStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
+        this, SLOT(slotHostSearchStatus( EHostType, VxGUID&, EHostSearchStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent &, PluginSetting & )),
+        this, SLOT(slotHostSearchResult( EHostType, VxGUID&, VxNetIdent &, PluginSetting & )) );
+
     setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
+    std::string lastHostSearchText;
+    m_MyApp.getAppSettings().getLastHostSearchText( lastHostSearchText ); 
+    if( !lastHostSearchText.empty() )
+    {
+        ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
+    }
 }
 
 //============================================================================
@@ -60,7 +84,7 @@ void AppletChatRoomJoinSearch::setInfoLabel( QString strMsg )
 }
 
 //============================================================================
-void AppletChatRoomJoinSearch::toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
+void AppletChatRoomJoinSearch::toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
 {
 	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )
@@ -124,13 +148,23 @@ void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
         }
         else
         {
-            ui.m_SearchsParamWidget->toSearchParams( m_SearchParams );
-            m_SearchParams.setHostType(getHostType());
-            m_SearchParams.setSearchType(eSearchChatRoomHost);
-            m_SearchParams.createNewSessionId();
-            m_SearchParams.updateSearchStartTime();
-            setStatusLabel( QObject::tr( "Search Started" ) );
-            m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
+            if( ui.m_SearchsParamWidget->toSearchParams( m_SearchParams ) )
+            {
+                m_SearchParams.setHostType(getHostType());
+                m_SearchParams.setSearchType(eSearchChatRoomHost);
+                m_SearchParams.createNewSessionId();
+                m_SearchParams.updateSearchStartTime();
+                setStatusLabel( QObject::tr( "Search Started" ) );
+                m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
+                if( !m_SearchParams.getSearchText().empty() )
+                {
+                    m_MyApp.getAppSettings().setLastHostSearchText( m_SearchParams.getSearchText() );
+                }
+            }
+            else
+            {
+                setStatusLabel( QObject::tr( "Search Params Invalid" ) );
+            }
         }
     }
     else if( !startSearch && m_SearchStarted )
@@ -189,4 +223,32 @@ void AppletChatRoomJoinSearch::slotHostSearchStatus( EHostType, VxGUID sessionId
     //getInfoEdit()->appendPlainText( strMsg ); // Adds the message to the widget
     //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
     setInfoLabel( GuiHelpers::describeStatus(hostStatus) + strMsg);
+}
+
+//============================================================================
+void AppletChatRoomJoinSearch::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+{
+    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
+        DescribePluginType2( pluginSetting.getPluginType() ) );
+}
+
+//============================================================================
+void AppletChatRoomJoinSearch::toGuiInfoMsg( char * infoMsg )
+{
+    QString infoStr( infoMsg );
+    infoStr.remove( QRegExp( "[\\n\\r]" ) );
+    emit signalInfoMsg( infoStr );
+}
+
+//============================================================================
+void AppletChatRoomJoinSearch::infoMsg( const char* errMsg, ... )
+{
+    char as8Buf[ MAX_INFO_MSG_SIZE ];
+    va_list argList;
+    va_start( argList, errMsg );
+    vsnprintf( as8Buf, sizeof( as8Buf ), errMsg, argList );
+    as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
+    va_end( argList );
+
+    toGuiInfoMsg( as8Buf );
 }

@@ -132,6 +132,12 @@ void IGoTv::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostS
 }
 
 //============================================================================
+void IGoTv::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+{
+    getAppCommon().toGuiHostSearchResult( hostType, sessionId, hostIdent, pluginSetting );
+}
+
+//============================================================================
 void IGoTv::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg )
 {
     getAppCommon().toGuiIsPortOpenStatus( eIsPortOpenStatus, msg );
@@ -400,9 +406,9 @@ void IGoTv::toGuiScanSearchComplete( EScanType eScanType )
 }
 
 //============================================================================
-void IGoTv::toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent *	netIdent )
+void IGoTv::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent *	netIdent )
 {
-    getAppCommon().toGuiSearchResultSuccess( eScanType, netIdent );
+    getAppCommon().toGuiScanResultSuccess( eScanType, netIdent );
 }
 
 //============================================================================

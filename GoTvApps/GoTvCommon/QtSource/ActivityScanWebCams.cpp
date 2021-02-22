@@ -137,7 +137,7 @@ void ActivityScanWebCams::setupIdentWidget( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiSearchResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent )
+void ActivityScanWebCams::toGuiScanResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent )
 {
 	Q_UNUSED( userData );
 	if( eScanTypeCamServer == eScanType )

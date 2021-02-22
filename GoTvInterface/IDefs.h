@@ -46,6 +46,7 @@ enum ECommErr
     eCommErrSearchTextToShort, 
     eCommErrSearchNoMatch, 
     eCommErrInvalidHostType, 
+    eCommErrPluginNotEnabled,
 
     eMaxCommErr
 };
@@ -184,6 +185,7 @@ enum EHostAnnounceStatus
     eHostAnnounceFailPermission = 12,
     eHostAnnounceFailConnectDropped = 13,
     eHostAnnounceInvalidParam = 14,
+    eHostAnnouncePluginDisabled = 15,
 
     eMaxHostAnnounceStatus
 };
@@ -205,6 +207,7 @@ enum EHostJoinStatus
     eHostJoinFailPermission = 12,
     eHostJoinFailConnectDropped = 13,
     eHostJoinInvalidParam = 14,
+    eHostJoinPluginDisabled = 15,
 
     eMaxHostJoinStatus
 };
@@ -226,6 +229,8 @@ enum EHostSearchStatus
     eHostSearchFailPermission = 12,
     eHostSearchFailConnectDropped = 13,
     eHostSearchInvalidParam = 14,
+    eHostSearchPluginDisabled = 15,
+    eHostSearchCompleted = 16,
 
     eMaxHostSearchStatus
 };

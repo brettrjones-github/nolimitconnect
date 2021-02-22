@@ -15,7 +15,7 @@
 #include "PktTypes.h"
 #include "PktsPluginSetting.h"
 
-#include <string.h>
+#include <CoreLib/VxDebug.h>
 
 //============================================================================
 PktPluginSettingReq::PktPluginSettingReq()
@@ -33,25 +33,8 @@ PktPluginSettingReply::PktPluginSettingReply()
 //============================================================================
 void PktPluginSettingReply::calcPktLen( void )
 {
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktPluginSettingReply ) - ( BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ) + m_SettingLen ) );
-}
-
-//============================================================================
-bool PktPluginSettingReply::getSettingBinary( BinaryBlob& settingBinary )
-{
-    return settingBinary.setBlobData( m_SettingData, m_SettingLen, false, true );
-}
-
-//============================================================================
-bool PktPluginSettingReply::setSettingBinary( BinaryBlob& settingBinary )
-{
-    if( settingBinary.getBlobLen() <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
-    {
-        m_SettingLen = settingBinary.getBlobLen();
-        memcpy( m_SettingData, settingBinary.getBlobData(), settingBinary.getBlobLen() );
-        calcPktLen();
-        return true;
-    }
-
-    return true;
+    uint16_t pktLen = ( uint16_t)sizeof( PktPluginSettingReply ) - sizeof(PktBlobEntry);
+    pktLen += getBlobEntry().getTotalBlobLen();
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen ) ); 
+    vx_assert( 0 == getPktLength() & 0x0f );
 }

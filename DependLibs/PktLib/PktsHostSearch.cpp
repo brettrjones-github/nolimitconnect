@@ -21,27 +21,46 @@
 
 //============================================================================
 PktHostSearchReq::PktHostSearchReq()
+    : VxPktHdr()
+    , m_BlobEntry()
 {
     setPktType( PKT_TYPE_HOST_SEARCH_REQ );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostSearchReq ) ) ); 
-    vx_assert( 0 == getPktLength() & 0x0f );
+    // LogMsg( LOG_DEBUG, "PktHostSearchReq size %d %d", sizeof( PktHostSearchReq ), (getPktLength() & 0x0f) ); 
+    vx_assert( 0 == (getPktLength() & 0x0f) );
 }
 
 //============================================================================
-void PktHostSearchReq::calculateLength()
+void PktHostSearchReq::calcPktLen()
 {
     uint16_t pktLen = ( uint16_t)sizeof( PktHostSearchReq ) - sizeof(PktBlobEntry);
-    pktLen += getBlobEntry().getTotalBlobLen();
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen ) ); 
-    vx_assert( 0 == getPktLength() & 0x0f );
+    uint16_t blobLen = getBlobEntry().getTotalBlobLen();
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) ); 
+
+    // LogMsg( LOG_DEBUG, "PktHostSearchReq calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
+    vx_assert( 0 == (getPktLength() & 0x0f) );
 }
 
 //============================================================================
 PktHostSearchReply::PktHostSearchReply()
+    : VxPktHdr()
+    , m_BlobEntry()
 {
     setPktType( PKT_TYPE_HOST_SEARCH_REPLY );
     setPktLength( sizeof(PktHostSearchReply) );
+    LogMsg( LOG_DEBUG, "PktHostSearchReply size %d %d", sizeof( PktHostSearchReply ), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+void PktHostSearchReply::calcPktLen()
+{
+    uint16_t pktLen = ( uint16_t)sizeof( PktHostSearchReq ) - sizeof(PktBlobEntry);
+    uint16_t blobLen = getBlobEntry().getTotalBlobLen();
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) ); 
+
+    LogMsg( LOG_DEBUG, "PktHostSearchReply calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
+    vx_assert( 0 == (getPktLength() & 0x0f) );
 }
 
 //============================================================================
@@ -60,7 +79,7 @@ uint16_t PktHostSearchReply::getTotalMatches( void ) const
 // add guid to blob and increment total match count
 bool PktHostSearchReply::addMatchOnlineId( VxGUID& onlineId )
 {
-    bool result = m_PktBlob.setValue( onlineId );
+    bool result = m_BlobEntry.setValue( onlineId );
     if( result )
     {
         setTotalMatches( getTotalMatches() + 1 );
@@ -73,7 +92,7 @@ bool PktHostSearchReply::addMatchOnlineId( VxGUID& onlineId )
 // add guid and plugin type to blob and increment total match count
 bool PktHostSearchReply::addPluginId( const PluginId& pluginId )
 {
-    bool result = m_PktBlob.setValue( pluginId );
+    bool result = m_BlobEntry.setValue( pluginId );
     if( result )
     {
         setTotalMatches( getTotalMatches() + 1 );
@@ -85,5 +104,5 @@ bool PktHostSearchReply::addPluginId( const PluginId& pluginId )
 //============================================================================
 uint16_t PktHostSearchReply::getRemainingBlobStorageLen( void ) const
 {
-    return m_PktBlob.getRemainingStorageLen();
+    return m_BlobEntry.getRemainingStorageLen();
 }

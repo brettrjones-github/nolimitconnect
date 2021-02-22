@@ -285,7 +285,7 @@ void RcScan::onPktScanReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktScan
 				|| ( eScanTypeMoodMsgSearch == m_eScanType )
 				|| ( eScanTypeCamServer == m_eScanType ) )
 			{
-				m_Engine.getToGui().toGuiSearchResultSuccess( m_eScanType, netIdent );
+				m_Engine.getToGui().toGuiScanResultSuccess( m_eScanType, netIdent );
 			}
 			else
 			{

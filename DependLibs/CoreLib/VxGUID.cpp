@@ -397,7 +397,7 @@ bool VxGUID::isVxGUIDHexStringValid( const char * pId )
 }
 
 //============================================================================
-std::string VxGUID::toOnlineIdString( void )	
+std::string VxGUID::toOnlineIdString( void ) const	
 { 
     char lclBuf[ 35 ];
     toOnlineIdString( lclBuf );
@@ -405,7 +405,7 @@ std::string VxGUID::toOnlineIdString( void )
 } 
 
 //============================================================================
-bool VxGUID::toOnlineIdString( std::string& strRetId )	
+bool VxGUID::toOnlineIdString( std::string& strRetId ) const	
 { 
     char lclBuf[ 35 ];
     toOnlineIdString( lclBuf );
@@ -415,7 +415,7 @@ bool VxGUID::toOnlineIdString( std::string& strRetId )
 
 //============================================================================
 // buffer must be at least 35 characters in length
-void VxGUID::toOnlineIdString( char * retBuf )
+void VxGUID::toOnlineIdString( char * retBuf ) const
 {
     retBuf[ 0 ] = '!';
     uint64ToHexAscii( &retBuf[ 1 ], m_u64HiPart );
@@ -492,7 +492,7 @@ bool VxGUID::isOnlineIdStringValid( const char * pId )
 
 //============================================================================
 // buffer must be at least 17 characters in length
-void VxGUID::uint64ToHexAscii( char * retBuf, uint64_t& val )
+void VxGUID::uint64ToHexAscii( char * retBuf, const uint64_t& val )
 {
     uint64_t netOrderedVal = htonU64( val );
     uint8_t * byteArray = (uint8_t *)&netOrderedVal;

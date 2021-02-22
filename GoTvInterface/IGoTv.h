@@ -273,8 +273,10 @@ public:
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
+
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
@@ -365,7 +367,7 @@ public:
 
     //=== scan ===//
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
-    virtual void				toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent *	netIdent ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent *	netIdent ) override;
     virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) override;
 
     virtual void				toGuiSearchResultProfilePic( VxNetIdent *	netIdent,

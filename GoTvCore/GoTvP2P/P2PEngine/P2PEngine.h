@@ -112,7 +112,8 @@ public:
 
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
     VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
-    std::string					getMyUrl( void )							    { m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyPtopUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
+    std::string					getMyOnlineUrl( void )							{ m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyOnlineUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
+    bool						addMyIdentToBlob( PktBlobEntry& blobEntry );
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );

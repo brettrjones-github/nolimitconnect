@@ -41,9 +41,10 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
 {
     if( haveBlob( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
     {
+        EPluginType pluginType = getSearchPluginType( hostType );
         m_SearchMutex.lock();
         std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( hostType );
-        PluginId pluginId( netIdent->getMyOnlineId(), getSearchPluginType( hostType ) );
+        PluginId pluginId( netIdent->getMyOnlineId(), pluginType );
         auto& iter = searchMap.find( pluginId );
         if( iter != searchMap.end() )
         {
@@ -57,6 +58,7 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
         }
 
         m_SearchMutex.unlock();
+        LogModule( eLogHostConnect, LOG_DEBUG, "HostServerSearchMgr host ann plugin %s updated ", pluginId.describePluginId().c_str() );
     }
 }
 
@@ -83,11 +85,14 @@ ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHost
             {
                 const PluginId& pluginId = iter->first;
                 searchReply.addPluginId( pluginId );
+                matchCnt++;
+                LogModule( eLogHostConnect, LOG_DEBUG, "HostServerSearchMgr match %d plugin %s ", matchCnt, pluginId.describePluginId().c_str() );
             }
         }
 
         removeEntries( searchMap, toRemoveList );
         m_SearchMutex.unlock();
+        searchReply.calcPktLen();
     }
 
     return searchErr;
@@ -128,7 +133,7 @@ bool HostServerSearchMgr::fillSearchEntry( HostSearchEntry& searchEntry, EHostTy
         }
     }
 
-    searchEntry.m_Url = netIdent->getMyPtopUrl();
+    searchEntry.m_Url = netIdent->getMyOnlineUrl();
 
     return result;
 }

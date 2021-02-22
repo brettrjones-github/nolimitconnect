@@ -86,9 +86,9 @@ public:
 
 private:
 	//! returns port in host order
-    uint16_t                     setIp( struct sockaddr_in& oIPv4Addr );
+    uint16_t                    setIp( struct sockaddr_in& oIPv4Addr );
 	//! returns port in host order
-    uint16_t                     setIp( struct sockaddr_in6& oIPv6Addr );
+    uint16_t                    setIp( struct sockaddr_in6& oIPv6Addr );
 	//! fill address with this ip address and the given port.. returns struct len
     int                         fillAddress( struct sockaddr_in& oIPv4Addr, uint16_t port );
 	//! fill address with this ip address and the given port.. returns struct len

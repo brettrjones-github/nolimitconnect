@@ -27,11 +27,22 @@ class PktHostSearchReq : public VxPktHdr
 public:
     PktHostSearchReq();
 
-    PktBlobEntry&               getBlobEntry( void )                             { return m_BlobEntry; }
+    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
+    void						setSearchSessionId( VxGUID& guid )						    { m_SearchSessionId = guid; }
+    VxGUID&					    getSearchSessionId( void )								    { return m_SearchSessionId; }
 
-    void                        calculateLength();
+    PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
+
+    void                        calcPktLen( void );
 
 protected:
+    VxGUID                      m_SearchSessionId;
+    uint8_t					    m_HostType{ 0 };
+    uint8_t					    m_Res1{ 0 };
+    uint16_t                    m_Res2{ 0 };
+    uint32_t                    m_Res3{ 0 };	
+
     PktBlobEntry                m_BlobEntry;							
 };
 
@@ -54,6 +65,8 @@ public:
     void                        setIsGuidPluginTypePairs( bool isPair )                     { m_IsGuidPluginTypePairs = (uint8_t)isPair; }
     uint8_t                     getIsGuidPluginTypePairs( void ) const                      { return m_IsGuidPluginTypePairs; }
 
+    PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
+
     void                        setTotalMatches( uint16_t matchCnt );
     uint16_t                    getTotalMatches( void ) const;
 
@@ -61,6 +74,8 @@ public:
     bool                        addMatchOnlineId( VxGUID& onlineId );
     bool                        addPluginId( const PluginId& pluginId );
     uint16_t                    getRemainingBlobStorageLen( void ) const;
+
+    void                        calcPktLen( void );
 
 private:
     VxGUID                      m_SearchSessionId;
@@ -71,9 +86,9 @@ private:
 
     uint16_t					m_TotalMatches{ 0 };	
     uint16_t                    m_Res1{ 0 };	
+    uint64_t					m_Res2{ 0 };	
     uint64_t					m_TimeRequestedMs{ 0 };		
-	// a pkt blob can hold up to PKT_BLOB_MAX_GUIDS
-    PktBlobEntry                m_PktBlob;	
+    PktBlobEntry                m_BlobEntry;	
 };
 
 #pragma pack()

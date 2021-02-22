@@ -64,6 +64,8 @@ void AppletChatRoomJoin::setupApplet( void )
         this, SLOT(slotHostJoinStatus( EHostType, VxGUID&, EHostJoinStatus, QString )) );
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
         this, SLOT(slotHostSearchStatus( EHostType, VxGUID&, EHostSearchStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent &, PluginSetting & )),
+        this, SLOT(slotHostSearchResult( EHostType, VxGUID&, VxNetIdent &, PluginSetting & )) );
 }
 
 //============================================================================
@@ -110,10 +112,17 @@ void AppletChatRoomJoin::slotHostJoinStatus( EHostType hostType, VxGUID sessionI
 }
 
 //============================================================================
-void AppletChatRoomJoin::slotHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
+void AppletChatRoomJoin::slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
 {
     getInfoEdit()->appendPlainText( strMsg ); // Adds the message to the widget
     getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
+}
+
+//============================================================================
+void AppletChatRoomJoin::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+{
+    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
+           DescribePluginType2( pluginSetting.getPluginType() ) );
 }
 
 //============================================================================

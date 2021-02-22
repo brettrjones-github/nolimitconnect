@@ -67,9 +67,10 @@ bool PluginBase::setPluginSetting( PluginSetting& pluginSetting )
 //============================================================================
 bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting )
 {
-    BinaryBlob settingBinary;
-    pluginSetting.toBinary( settingBinary );
-    m_PktPluginSettingReply.setSettingBinary( settingBinary );
+    PktBlobEntry& blobEntry = m_PktPluginSettingReply.getBlobEntry();
+    blobEntry.resetWrite();
+    pluginSetting.addToBlob( blobEntry );
+    m_PktPluginSettingReply.calcPktLen();
     return true;
 }
 

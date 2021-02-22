@@ -26,6 +26,7 @@ class VxNetIdent;
 class AssetInfo;
 class BlobInfo;
 class VxGUID;
+class PluginSetting;
 
 //! IToGui is an abstract interface for calls to GUI from native C++/C code
 class IToGui
@@ -58,6 +59,7 @@ public:
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) = 0;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) = 0;
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus joinStatus, const char * msg = "" ) = 0;
+    virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting ) = 0;
     /// Send is port open test state/status to GUI
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
     /// Send relay status to GUI for display
@@ -202,7 +204,7 @@ public:
 	///============================================================================
 
 	/// Search found an contact matching and accessible from this node resource
-	virtual void				toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) = 0;
+	virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) = 0;
 	/// Search had error scanning this user
 	virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) = 0;
 	/// Search had completed or has no more contact nodes to search

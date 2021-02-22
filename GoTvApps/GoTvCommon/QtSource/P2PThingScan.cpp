@@ -49,7 +49,7 @@ void AppCommon::toGuiScanSearchComplete( EScanType eScanType )
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent * netIdent )
+void AppCommon::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -57,18 +57,18 @@ void AppCommon::toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent * netI
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSearchResultSuccess: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiScanResultSuccess: toGuiActivityClientsLock\n" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
     toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiSearchResultSuccess( client.m_UserData, eScanType, netIdent );
+		client.m_Callback->toGuiScanResultSuccess( client.m_UserData, eScanType, netIdent );
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSearchResultSuccess: toGuiActivityClientsUnlock\n" );
+	LogMsg( LOG_INFO, "toGuiScanResultSuccess: toGuiActivityClientsUnlock\n" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 	toGuiActivityClientsUnlock();
 }

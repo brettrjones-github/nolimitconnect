@@ -66,7 +66,7 @@ void AppletTestAndDebug::setupApplet( void )
 
     VxNetIdent oMyIdent;
     m_FromGui.fromGuiQueryMyIdent( &oMyIdent );
-    ui.m_MyUrlEdit->setText( QString( oMyIdent.getMyPtopUrl().c_str() ) );
+    ui.m_MyUrlEdit->setText( QString( oMyIdent.getMyOnlineUrl().c_str() ) );
 
     //fillBasicInfo();
     //fillExtraInfo();

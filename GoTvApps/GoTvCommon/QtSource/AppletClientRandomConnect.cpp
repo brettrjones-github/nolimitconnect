@@ -62,7 +62,7 @@ void AppletClientRandomConnect::hideEvent( QHideEvent * ev )
 }
 
 //============================================================================
-void AppletClientRandomConnect::toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
+void AppletClientRandomConnect::toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
 {
     Q_UNUSED( callbackData );
     if( VxIsAppShuttingDown() )

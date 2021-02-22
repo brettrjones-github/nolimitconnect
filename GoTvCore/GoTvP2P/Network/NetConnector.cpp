@@ -180,7 +180,7 @@ void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason 
 			if( eConnectReasonRandomConnectJoin == connectReason )
 			{
 				BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( entry->getMyOnlineId() );
-				m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
+				m_Engine.getToGui().toGuiScanResultSuccess( eScanTypeRandomConnect, bigListInfo );
 			}
 		}
 	}
@@ -1045,7 +1045,7 @@ void NetConnector::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase *
 		bigListInfo->setIsConnected( true );
 		if( eConnectReasonRandomConnectJoin == connectReason )
 		{
-			m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
+			m_Engine.getToGui().toGuiScanResultSuccess( eScanTypeRandomConnect, bigListInfo );
 		}
 	}
 }

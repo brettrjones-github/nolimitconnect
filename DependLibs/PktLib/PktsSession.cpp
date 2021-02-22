@@ -17,8 +17,7 @@
 
 //============================================================================
 PktSessionStartReq::PktSessionStartReq()
-: m_u32Res1(0)
-, m_u32Res2(0)
+    : VxPktHdr()
 {
 	setPktLength( sizeof( PktSessionStartReq ) ); 
 	setPktType(  PKT_TYPE_SESSION_START_REQ );
@@ -26,9 +25,7 @@ PktSessionStartReq::PktSessionStartReq()
 
 //============================================================================
 PktSessionStartReply::PktSessionStartReply()
-: m_u16Response(0)
-, m_u16Res1(0)
-, m_u32Res2(0)
+    : VxPktHdr()
 { 
 	setPktLength( sizeof( PktSessionStartReply ) ); 
 	setPktType(  PKT_TYPE_SESSION_START_REPLY );
@@ -36,8 +33,7 @@ PktSessionStartReply::PktSessionStartReply()
 
 //============================================================================
 PktSessionStopReq::PktSessionStopReq()
-	: m_u32Res1(0)
-	, m_u32Res2(0)
+    : VxPktHdr()
 {
 	setPktLength( sizeof( PktSessionStopReq ) ); 
 	setPktType(  PKT_TYPE_SESSION_STOP_REQ );
@@ -45,9 +41,7 @@ PktSessionStopReq::PktSessionStopReq()
 
 //============================================================================
 PktSessionStopReply::PktSessionStopReply()
-	: m_u16Response(0)
-	, m_u16Res1(0)
-	, m_u32Res2(0)
+    : VxPktHdr()
 { 
 	setPktLength( sizeof( PktSessionStopReply ) ); 
 	setPktType(  PKT_TYPE_SESSION_STOP_REPLY );

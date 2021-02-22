@@ -32,18 +32,22 @@ public:
 	//=== destructor ===//
 	virtual ~AppletChatRoomJoinSearch() override = default;
 
-	void						searchResult( VxNetIdent * netIdent );
+    void                        infoMsg( const char * infoMsg, ... );
+    void                        toGuiInfoMsg( char * logMsg );
+
 	void						setStatusLabel( QString strMsg );
     void                        setInfoLabel( QString strMsg );
 
     QString                     getSearchText( void ) { return ui.m_SearchsParamWidget->getSearchTextEdit()->text(); }
 
-    virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
     virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
 
 signals:
 	void						signalSearchResult( VxNetIdent * netIdent );
 	void						signalSearchComplete( void );
+    void                        signalLogMsg( const QString& logMsg );
+    void                        signalInfoMsg( const QString& logMsg );
 
 private slots:
 	void						slotSearchResult( VxNetIdent * netIdent );
@@ -51,9 +55,10 @@ private slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotStartSearchState(bool startSearch);
 	//void						slotFriendClicked( VxNetIdent * netIdent );
-    void						slotHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
-    void						slotHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
-    void						slotHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
+    void						slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
+    void						slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
+    void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
+    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;

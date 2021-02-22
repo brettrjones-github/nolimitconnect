@@ -15,11 +15,8 @@
 //============================================================================
 
 #include "VxPktHdr.h"
-#include "VxSearchFlags.h"
-#include "VxCommon.h"
-#include <GoTvInterface/IScan.h>
-
-#include <CoreLib/BinaryBlob.h>
+#include "PktBlobEntry.h"
+#include "PluginId.h"
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -28,10 +25,23 @@ class PktPluginSettingReq : public VxPktHdr
 public:
     PktPluginSettingReq();
 
+    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
+    void						setPluginId( PluginId& pluginId )						    { m_PluginId = pluginId; }
+    PluginId&					getPluginId( void )								            { return m_PluginId; }
+    void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
+    VxGUID&					    getSessionId( void )								        { return m_SessionId; }
+
 private:
 	//=== vars ===//
-    uint32_t					m_SettingRes1 = 0;
-    uint32_t					m_SettingRes2 = 0;
+    // VxPktHdr 40 bytes 
+    VxGUID                      m_SessionId;        // 16 bytes
+    PluginId                    m_PluginId;         // 17 bytes 
+    uint8_t					    m_HostType{ 0 };    // 1 byte
+    // 74 bytes to here
+    uint16_t                    m_Res1{ 0 };
+    uint32_t                    m_Res2{ 0 };
+    // 80 bytes to here
 };
 
 class PktPluginSettingReply : public VxPktHdr
@@ -41,14 +51,26 @@ public:
 
 	void                        calcPktLen( void );
 
-    bool                        getSettingBinary( BinaryBlob& settingBinary );
-    bool                        setSettingBinary( BinaryBlob& settingBinary );
+    void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
+    EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
+    void						setPluginId( PluginId& pluginId )						    { m_PluginId = pluginId; }
+    PluginId&					getPluginId( void )								            { return m_PluginId; }
+    void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
+    VxGUID&					    getSessionId( void )								        { return m_SessionId; }
+
+    PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
 
 private:
-	//=== vars ===//
-    uint32_t					m_SettingRes1 = 0;
-    uint32_t					m_SettingLen = 0;
-    uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
+    //=== vars ===//
+    // VxPktHdr 40 bytes 
+    VxGUID                      m_SessionId;        // 16 bytes
+    PluginId                    m_PluginId;         // 17 bytes 
+    uint8_t					    m_HostType{ 0 };    // 1 byte
+                                                    // 74 bytes to here
+    uint16_t                    m_Res1{ 0 };
+    uint32_t                    m_Res2{ 0 };
+    // 80 bytes to here
+    PktBlobEntry                m_BlobEntry;	
 };
 
 #pragma pack(pop)

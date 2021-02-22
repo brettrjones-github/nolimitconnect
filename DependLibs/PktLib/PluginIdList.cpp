@@ -21,9 +21,22 @@
 #include <stdio.h>
 
 //============================================================================
-PluginIdList::PluginIdList()
-: m_PluginIdList()
+PluginIdList::PluginIdList( const PluginIdList& rhs )
+    : m_PluginIdList( rhs.m_PluginIdList )
+    , m_LastActiveTimeMs( rhs.m_LastActiveTimeMs )
 {
+}
+
+//============================================================================
+PluginIdList& PluginIdList::operator =( const PluginIdList& rhs )
+{
+    if( this != &rhs )
+    {
+        m_PluginIdList          = rhs.m_PluginIdList;
+        m_LastActiveTimeMs      = rhs.m_LastActiveTimeMs;
+    }
+
+    return *this;
 }
 
 //============================================================================
@@ -92,4 +105,10 @@ void PluginIdList::copyTo( PluginIdList& destPluginIdList )
 	{
 		guidList.push_back( *iter );
 	}
+}
+
+//============================================================================
+void PluginIdList::updateLastActiveTime( void )
+{
+    setLastActiveTime( GetTimeStampMs() );
 }

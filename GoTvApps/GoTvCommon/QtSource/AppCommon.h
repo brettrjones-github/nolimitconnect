@@ -404,6 +404,7 @@ public:
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting ) override;
 
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
@@ -519,7 +520,7 @@ public:
 												bool			isInLibrary,
                                                 uint8_t *		fileHashId = 0 ) override;
 	//=== to gui search ===//
-    virtual void				toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) override;
     virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) override;
     virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
 
@@ -593,6 +594,7 @@ signals:
     void						signalHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
     void						signalHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
     void						signalHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
+    void						signalHostSearchResult( EHostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting );
 
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
     void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );

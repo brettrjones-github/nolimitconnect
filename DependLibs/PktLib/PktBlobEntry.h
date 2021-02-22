@@ -25,8 +25,8 @@
 // defines for pkt blob
 #define PKT_BLOB_MAX_STORAGE_LEN (1024 * 14 - 16) // approx 14K to fit within MAX_PKT_LEN - 2K.. -16 for packet alignment
 #define PKT_BLOB_STORAGE_VERSION 1
-#define PKT_BLOB_MAX_IDS (PKT_BLOB_MAX_STORAGE_LEN / 16) // max number of guids a empty blob can hold.. this is search result limit (895 entries)
-#define PKT_BLOB_MAX_ID_PLUGIN_PAIR (PKT_BLOB_MAX_STORAGE_LEN / 17) // max number of guid and plugin pair a empty blob can hold.. this is search result limit (842 entries)
+#define PKT_BLOB_MAX_ONLINE_IDS (PKT_BLOB_MAX_STORAGE_LEN / 16) // max number of guids a empty blob can hold.. this is search result limit (895 entries)
+#define PKT_BLOB_MAX_PLUGIN_IDS (PKT_BLOB_MAX_STORAGE_LEN / 17) // max number of guid and plugin pair a empty blob can hold.. this is search result limit (842 entries)
 
 class VxGUID;
 class PluginId;
@@ -36,7 +36,7 @@ class PluginId;
 class PktBlobEntry
 {
 public:
-    PktBlobEntry() = default;
+    PktBlobEntry();
     ~PktBlobEntry() = default;
 
     // gets blob len including member variables (does not round to 16 byte boundry)

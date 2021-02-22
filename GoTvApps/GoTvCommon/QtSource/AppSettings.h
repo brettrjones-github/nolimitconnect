@@ -63,6 +63,9 @@ public:
 	void						setLastGalleryDir( std::string& galleryDir );
 	void						getLastGalleryDir( std::string& galleryDir );
 
+    void						setLastHostSearchText( std::string& searchText );
+    void						getLastHostSearchText( std::string& searchText );
+
 	void						setCamSourceId( uint32_t camId );
 	uint32_t					getCamSourceId( void );
 

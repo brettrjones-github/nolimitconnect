@@ -47,6 +47,8 @@ public:
     int							compareTo( PluginId& guid );
     // returns true if guids are same value
     bool						isEqualTo( const PluginId& guid );
+    // get a description of the plugin id
+    std::string                 describePluginId( void ) const;
 
 protected:
 	//=== vars ===//

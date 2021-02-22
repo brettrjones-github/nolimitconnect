@@ -44,7 +44,7 @@ public:
 	void						setTitle( QString strTitle );
 
     virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
-    virtual void				toGuiSearchResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent ) override;
     virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );

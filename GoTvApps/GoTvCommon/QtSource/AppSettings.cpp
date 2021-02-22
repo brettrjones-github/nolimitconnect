@@ -172,6 +172,18 @@ void AppSettings::getLastBrowseShareDir( std::string& browseDir )
 }
 
 //============================================================================
+void AppSettings::getLastHostSearchText( std::string& searchText )
+{
+    getIniValue( getAppShortName(), "LastHostSearchText", searchText, "" );
+}
+
+//============================================================================
+void AppSettings::setLastHostSearchText( std::string& searchText )
+{
+    setIniValue( getAppShortName(), "LastHostSearchText", searchText );
+}
+
+//============================================================================
 void AppSettings::setCamRotation( uint32_t camId, uint32_t camRotation )
 {
 	std::string camKey;

@@ -325,6 +325,15 @@ void P2PEngine::doAppStateChange( EAppState eAppState )
 }
 
 //============================================================================
+bool P2PEngine::addMyIdentToBlob( PktBlobEntry& blobEntry )
+{ 
+    m_AnnouncePktMutex.lock(); 
+    bool result = (*((VxNetIdent *)&m_PktAnn)).addToBlob( blobEntry ); 
+    m_AnnouncePktMutex.unlock(); 
+    return result;
+}
+
+//============================================================================
 bool P2PEngine::setPluginSetting( PluginSetting& pluginSetting )
 {
     if( ( ePluginTypeInvalid < pluginSetting.getPluginType() ) && ( eMaxPluginType > pluginSetting.getPluginType() ) )

@@ -1097,6 +1097,16 @@ void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EH
     emit signalHostSearchStatus( hostType, sessionId, searchStatus, formatedMsg.c_str() );
 }
 
+//============================================================================
+void AppCommon::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    emit signalHostSearchResult( hostType, sessionId, hostIdent, pluginSetting );
+}
 
 //============================================================================
 void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg )

@@ -112,11 +112,12 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
 {
     LogMsg( LOG_DEBUG, "PluginBaseHostService onPktHostSearchReq" );
     PktHostSearchReply searchReply;
-    searchReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-    if( ePluginAccessOk == searchReply.getAccessState() )
+    PktHostSearchReq* searchReq = (PktHostSearchReq*)pktHdr;
+    if( searchReq->isValidPkt() )
     {
-        PktHostSearchReq* searchReq = (PktHostSearchReq*)pktHdr;
-        if( searchReq->isValidPkt() )
+        EPluginAccess pluginAccess = m_HostServerMgr.getPluginAccessState( netIdent );
+        searchReply.setAccessState( pluginAccess );
+        if( ePluginAccessOk == pluginAccess )
         {
             SearchParams searchParams;
             searchParams.extractFromBlob( searchReq->getBlobEntry() );
@@ -126,6 +127,7 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
             std::string searchText = searchParams.getSearchText();
             if( searchText.size() < MIN_SEARCH_TEXT_LEN )
             {
+                LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService search text too short" );
                 searchReply.setCommError( eCommErrSearchTextToShort );
             }
             else
@@ -136,12 +138,21 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
         }
         else
         {
-            searchReply.setCommError( eCommErrInvalidPkt );
-            onInvalidRxedPacket( sktBase, pktHdr, netIdent );     
+            LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService host service not enabled" );
+            searchReply.setCommError( eCommErrPluginNotEnabled );   
         }
     }
-
-    txPacket( netIdent, sktBase, &searchReply );
+    else
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService invalid search packet" );
+        searchReply.setCommError( eCommErrInvalidPkt );
+    }
+    // BRJ temp for debug
+    searchReply.setIsLoopback( true );
+    if( !txPacket( netIdent, sktBase, &searchReply ) )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
+    }
 }
 
 //============================================================================
@@ -150,7 +161,10 @@ void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * p
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer request" );
     PktHostOfferReply offerReply;
     offerReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
-    txPacket( netIdent, sktBase, &offerReply );
+    if( !txPacket( netIdent, sktBase, &offerReply ) )
+    {
+        LogMsg( LOG_DEBUG, "PluginBaseHostService failed send onPktHostOfferReq" );
+    }
 }
 
 //============================================================================

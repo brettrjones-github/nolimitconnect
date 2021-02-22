@@ -33,6 +33,7 @@ public:
 
 protected:
     virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
+    virtual void                onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;

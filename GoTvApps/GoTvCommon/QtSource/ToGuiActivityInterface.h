@@ -42,7 +42,7 @@ public:
     virtual int				    toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) { return 0;};
 	virtual void				toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
 
-	virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ){};
+	virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ){};
 	virtual void				toGuiSearchResultError( void * callbackData, EScanType eScanType, VxNetIdent * netIdent, int errCode ){};
 	virtual void				toGuiSearchResultProfilePic( void * callbackData, VxNetIdent * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
 	virtual void				toGuiSearchResultFileSearch(	void *			callbackData, 

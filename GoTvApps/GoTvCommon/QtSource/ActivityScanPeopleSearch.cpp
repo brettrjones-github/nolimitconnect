@@ -69,7 +69,7 @@ void ActivityScanPeopleSearch::setStatusLabel( QString strMsg )
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
+void ActivityScanPeopleSearch::toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
 {
 	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )

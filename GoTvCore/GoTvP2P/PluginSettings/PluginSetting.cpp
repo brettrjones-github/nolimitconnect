@@ -16,6 +16,7 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <PktLib/PktBlobEntry.h>
 #include <CoreLib/BinaryBlob.h>
 #include <CoreLib/StringListBinary.h>
 #include <CoreLib/VxDebug.h>
@@ -29,6 +30,99 @@
 void PluginSettingHdr::setUpdateTimestampToNow( void )
 {
     setLastUpdateTimestamp( GetTimeStampMs() );
+}
+
+//============================================================================
+bool PluginSetting::addToBlob( PktBlobEntry& binaryBlob )
+{
+    bool result = binaryBlob.setValue( m_BlobStorageVersion );
+    result &= binaryBlob.setValue( m_SecondaryPermissionLevel );
+    result &= binaryBlob.setValue( m_PluginType );
+    result &= binaryBlob.setValue( m_SecondaryPluginType );
+    result &= binaryBlob.setValue( m_UpdateTimestamp );
+    result &= binaryBlob.setValue( m_PluginThumb );
+    result &= binaryBlob.setValue( m_SecondaryPluginThumb );
+    result &= binaryBlob.setValue( m_SecondaryIdentGuid );
+
+    result &= binaryBlob.setValue( m_AgeType );
+    result &= binaryBlob.setValue( m_Gender );
+    result &= binaryBlob.setValue( m_Language );
+    result &= binaryBlob.setValue( m_ContentRating );
+    result &= binaryBlob.setValue( m_ContentCatagory );
+    result &= binaryBlob.setValue( m_ContentSubCatagory );
+    result &= binaryBlob.setValue( m_MaxConnectionsPerUser );
+    result &= binaryBlob.setValue( m_MaxStoreAndForwardPerUser );
+    result &= binaryBlob.setValue( m_AnnounceToHost );
+    result &= binaryBlob.setValue( m_ThumbnailIsCircular );
+    result &= binaryBlob.setValue( m_ResBw1 );
+    result &= binaryBlob.setValue( m_Reserve1Setting );
+    result &= binaryBlob.setValue( m_Reserve2Setting );
+
+    result &= binaryBlob.setValue( m_PluginTitle );
+    result &= binaryBlob.setValue( m_PluginDesc );
+    result &= binaryBlob.setValue( m_PluginUrl );
+    result &= binaryBlob.setValue( m_GreetingMsg );
+    result &= binaryBlob.setValue( m_RejectMsg );
+    result &= binaryBlob.setValue( m_KeyWords );
+    result &= binaryBlob.setValue( m_SecondaryUrl );
+    result &= binaryBlob.setValue( m_Res1 );
+
+    if( !result )
+    {
+        LogMsg( LOG_ERROR, "PluginSetting::addToBlob failed" );
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PluginSetting::extractFromBlob( PktBlobEntry& binaryBlob )
+{
+    // not sure if this is needed binaryBlob.setUseNetworkOrder( networkOrder );
+    uint16_t blobStorageVersion;
+    if( !binaryBlob.getValue( blobStorageVersion ) || blobStorageVersion != m_BlobStorageVersion )
+    {
+        LogMsg( LOG_ERROR, "PluginSetting::extractFromBlob invalid storage version" );
+        return false;
+    }
+
+    bool result = binaryBlob.getValue( m_SecondaryPermissionLevel );
+    result &= binaryBlob.getValue( m_PluginType );
+    result &= binaryBlob.getValue( m_SecondaryPluginType );
+    result &= binaryBlob.getValue( m_UpdateTimestamp );
+    result &= binaryBlob.getValue( m_PluginThumb );
+    result &= binaryBlob.getValue( m_SecondaryPluginThumb );
+    result &= binaryBlob.getValue( m_SecondaryIdentGuid );
+
+    result &= binaryBlob.getValue( m_AgeType );
+    result &= binaryBlob.getValue( m_Gender );
+    result &= binaryBlob.getValue( m_Language );
+    result &= binaryBlob.getValue( m_ContentRating );
+    result &= binaryBlob.getValue( m_ContentCatagory );
+    result &= binaryBlob.getValue( m_ContentSubCatagory );
+    result &= binaryBlob.getValue( m_MaxConnectionsPerUser );
+    result &= binaryBlob.getValue( m_MaxStoreAndForwardPerUser );
+    result &= binaryBlob.getValue( m_AnnounceToHost );
+    result &= binaryBlob.getValue( m_ThumbnailIsCircular );
+    result &= binaryBlob.getValue( m_ResBw1 );
+    result &= binaryBlob.getValue( m_Reserve1Setting );
+    result &= binaryBlob.getValue( m_Reserve2Setting );
+
+    result &= binaryBlob.getValue( m_PluginTitle );
+    result &= binaryBlob.getValue( m_PluginDesc );
+    result &= binaryBlob.getValue( m_PluginUrl );
+    result &= binaryBlob.getValue( m_GreetingMsg );
+    result &= binaryBlob.getValue( m_RejectMsg );
+    result &= binaryBlob.getValue( m_KeyWords );
+    result &= binaryBlob.getValue( m_SecondaryUrl );
+    result &= binaryBlob.getValue( m_Res1 );
+
+    if( !result )
+    {
+        LogMsg( LOG_ERROR, "PluginSetting::extractFromBlob failed" );
+    }
+
+    return result;
 }
 
 //============================================================================
@@ -152,7 +246,7 @@ bool PluginSetting::setDefaultValues( P2PEngine& engine, EPluginType pluginType 
     engine.copyMyPktAnnounce(pktAnn);
     std::string onlineName = pktAnn.getOnlineName();
     std::string onlineDesc = pktAnn.getOnlineDescription();
-    std::string myUrl = pktAnn.getMyPtopUrl();
+    std::string myUrl = pktAnn.getMyOnlineUrl();
     m_PluginUrl = myUrl;
     m_PluginTitle = DescribePluginType2( pluginType );
     m_PluginTitle += " - ";

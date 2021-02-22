@@ -40,7 +40,6 @@ public:
     void						setContentRating( EContentRating content )  { m_ContentRating = content; }
     EContentRating			    getContentRating( void )                    { return m_ContentRating; }
 
-
 protected:
 	//=== vars ===//
     EAgeType					m_AgeType{ eAgeTypeUnspecified };

@@ -23,6 +23,11 @@ public:
 	VxGUIDList();
 	~VxGUIDList() = default;
 
+    //! copy constructor
+    VxGUIDList( const VxGUIDList & rhs );
+    //! copy operator
+    VxGUIDList& operator =( const VxGUIDList & rhs );
+
 	int							size( void )						{ return (int)m_GuidList.size(); }
 
 	void						addGuid( const VxGUID& guid );
@@ -37,9 +42,11 @@ public:
 	std::vector<VxGUID>&		getGuidList( void )					{ return m_GuidList; }
 	void						copyTo( VxGUIDList& destGuidList );
 
+    void                        setLastActiveTime( uint64_t timeMs )    { m_LastActiveTimeMs = timeMs; }
+    uint64_t                    getLastActiveTime( void )               { return m_LastActiveTimeMs; }
+    void                        updateLastActiveTime( void );
+
 protected:
 	std::vector<VxGUID>			m_GuidList;
-
-private:
-	VxGUIDList( const VxGUIDList &rhs ); // disable copy constructor
+    uint64_t                    m_LastActiveTimeMs{ 0 };
 };

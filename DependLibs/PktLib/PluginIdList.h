@@ -19,10 +19,15 @@
 class PluginIdList
 {
 public:
-	PluginIdList();
+	PluginIdList() = default;
 	~PluginIdList() = default;
 
-	int							size( void )						{ return (int)m_PluginIdList.size(); }
+    //! copy constructor
+    PluginIdList( const PluginIdList& rhs );
+    //! copy operator
+    PluginIdList& operator =( const PluginIdList& rhs );
+
+	int							size( void )						    { return (int)m_PluginIdList.size(); }
 
 	void						addPluginId( const PluginId& guid );
 	// returns false if id already exists
@@ -36,9 +41,11 @@ public:
 	std::vector<PluginId>&		getPluginIdList( void )					{ return m_PluginIdList; }
 	void						copyTo( PluginIdList& destPluginIdList );
 
+    void                        setLastActiveTime( uint64_t timeMs )    { m_LastActiveTimeMs = timeMs; }
+    uint64_t                    getLastActiveTime( void )               { return m_LastActiveTimeMs; }
+    void                        updateLastActiveTime( void );
+
 protected:
 	std::vector<PluginId>		m_PluginIdList;
-
-private:
-	PluginIdList( const PluginIdList &rhs ); // disable copy constructor
+    uint64_t                    m_LastActiveTimeMs{ 0 };
 };

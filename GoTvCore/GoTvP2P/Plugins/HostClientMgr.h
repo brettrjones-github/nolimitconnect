@@ -15,6 +15,7 @@
 
 #include "HostClientSearchMgr.h"
 
+#include <PktLib/PluginIdList.h>
 #include <PktLib/SearchParams.h>
 
 class PktHostSearchReply;
@@ -30,6 +31,7 @@ public:
 
     virtual void                onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void                onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 protected:
     virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
@@ -37,17 +39,16 @@ protected:
 
     virtual void                onHostJoined( VxSktBase * sktBase,  VxNetIdent * netIdent );
 
-    virtual void                addSearchSession( VxGUID& sessionId, SearchParams& searchParams );
-    virtual void                removeSearchSession( VxGUID& sessionId );
-
     virtual void                startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual void                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
 
-    EConnectReason              getSearchConnectReason( EHostType hostType );
+    void                        addPluginRxSession( VxGUID& sessionId, PluginIdList& pluginIdList );
+    void                        removePluginRxSession( VxGUID& sessionId );
+    bool                        sendNextPluginSettingRequest( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
 
     VxMutex                     m_ClientMutex;
     VxGUIDList                  m_ServerList;
-    std::map<VxGUID, SearchParams> m_SearchList;
-    VxMutex                     m_SearchListMutex;
+    std::map<VxGUID, PluginIdList> m_PluginRxList;
+    VxMutex                     m_PluginRxListMutex;
 };
 
