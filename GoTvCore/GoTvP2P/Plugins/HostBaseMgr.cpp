@@ -239,13 +239,13 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
         }
         else if( isSearchConnectReason( connectReason ) )
         {
-            EHostSearchStatus joinStatus = m_ConnectionMgr.lookupOrQuerySearchId( sessionId, url.c_str(), hostGuid, this, connectReason);
-            if( eHostSearchQueryIdSuccess == joinStatus )
+            EHostSearchStatus searchStatus = m_ConnectionMgr.lookupOrQuerySearchId( sessionId, url.c_str(), hostGuid, this, connectReason);
+            if( eHostSearchQueryIdSuccess == searchStatus )
             {
                 // no need for id query.. just request connection
                 onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
             }
-            else if( eHostSearchQueryIdInProgress == joinStatus )
+            else if( eHostSearchQueryIdInProgress == searchStatus )
             {
                 // manager is attempting to query id
                 m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdInProgress );
@@ -505,7 +505,7 @@ void HostBaseMgr::onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url
 }
 
 //============================================================================
-void HostBaseMgr::onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus, EConnectReason connectReason )
+void HostBaseMgr::onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus, EConnectReason connectReason, ECommErr commErr )
 {
     EHostType hostType = connectReasonToHostType( connectReason );
     if( eHostTypeUnknown != hostType )
@@ -516,7 +516,7 @@ void HostBaseMgr::onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, E
         }
         else if( isSearchConnectReason( connectReason ) )
         {
-            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdFailed, commErr, DescribeRunTestStatus( testStatus ) );
         }
         else if( isJoinConnectReason( connectReason ) )
         {
@@ -594,7 +594,7 @@ void HostBaseMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, 
 }
 
 //============================================================================
-void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason )
+void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus, EConnectReason connectReason, ECommErr commErr )
 {
     if( eConnectReasonChatRoomAnnounce == connectReason )
     {
@@ -608,7 +608,7 @@ void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, ECo
     }
     else if( eConnectReasonChatRoomSearch == connectReason )
     {
-        m_Engine.getToGui().toGuiHostSearchStatus( eHostTypeChatRoom, sessionId, eHostSearchConnectFailed, DescribeConnectStatus( connectStatus ) );
+        m_Engine.getToGui().toGuiHostSearchStatus( eHostTypeChatRoom, sessionId, eHostSearchConnectFailed, commErr, DescribeConnectStatus( connectStatus ) );
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }

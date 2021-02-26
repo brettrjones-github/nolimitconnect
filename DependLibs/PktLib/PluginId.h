@@ -40,8 +40,8 @@ public:
     void						setOnlineId( VxGUID& onlineId )             { m_OnlineId = onlineId; }
     VxGUID&					    getOnlineId( void )                         { return m_OnlineId; }
 
-    void						setPluginType( EPluginType gender )         { m_PluginType = gender; }
-    EPluginType&				getPluginType( void )                       { return m_PluginType; }
+    void						setPluginType( EPluginType pluginType )     { m_PluginType = (uint8_t)pluginType; }
+    EPluginType  				getPluginType( void ) const                 { return (EPluginType)m_PluginType; }
 
     // returns 0 if equal else -1 if less or 1 if greater
     int							compareTo( PluginId& guid );
@@ -53,7 +53,7 @@ public:
 protected:
 	//=== vars ===//
     VxGUID					    m_OnlineId;
-    EPluginType					m_PluginType{ ePluginTypeInvalid };
+    uint8_t					    m_PluginType{ 0 };
 };
 
 

@@ -19,9 +19,6 @@
 
 #include <string>
 
-//! describe friend state
-const char * DescribeFriendState( EFriendState eFriendState );
-
 #pragma pack(push) 
 #pragma pack(1)
 class PktBlobEntry;

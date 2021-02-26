@@ -61,11 +61,11 @@ void AppletChatRoomJoin::setupApplet( void )
     connect( &m_MyApp, SIGNAL(signalHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )),
         this, SLOT(slotHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )) );
     connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )),
-        this, SLOT(slotHostJoinStatus( EHostType, VxGUID&, EHostJoinStatus, QString )) );
+        this, SLOT(slotHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )) );
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
-        this, SLOT(slotHostSearchStatus( EHostType, VxGUID&, EHostSearchStatus, QString )) );
-    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent &, PluginSetting & )),
-        this, SLOT(slotHostSearchResult( EHostType, VxGUID&, VxNetIdent &, PluginSetting & )) );
+        this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent , PluginSetting  )),
+        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent , PluginSetting  )) );
 }
 
 //============================================================================
@@ -119,10 +119,10 @@ void AppletChatRoomJoin::slotHostSearchStatus( EHostType hostType, VxGUID sessio
 }
 
 //============================================================================
-void AppletChatRoomJoin::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+void AppletChatRoomJoin::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
 {
     LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
-           DescribePluginType2( pluginSetting.getPluginType() ) );
+           DescribePluginType( pluginSetting.getPluginType() ) );
 }
 
 //============================================================================

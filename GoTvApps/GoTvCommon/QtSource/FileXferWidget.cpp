@@ -21,6 +21,7 @@
 #include "GuiFileXferSession.h"
 #include "VxMyFileInfo.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 //============================================================================
 FileXferWidget::FileXferWidget(QWidget *parent)
@@ -226,7 +227,7 @@ void FileXferWidget::updateWidgetFromInfo( void )
 
 		case eXferStateUploadError:
 		case eXferStateDownloadError:
-			ui.m_FileStatus->setText( GuiHelpers::describeEXferError( (EXferError)poSession->getXferStateParam2() ) );
+			ui.m_FileStatus->setText( GuiParams::describeEXferError( (EXferError)poSession->getXferStateParam2() ) );
 			ui.m_FileStatus->setStyleSheet("color: rgb(244, 0, 0);\n");
 			break;
 
@@ -234,7 +235,7 @@ void FileXferWidget::updateWidgetFromInfo( void )
 		case eXferStateCompletedDownload:
 			if( 0 != poSession->getXferStateParam2() )
 			{
-				ui.m_FileStatus->setText( GuiHelpers::describeEXferError( (EXferError)poSession->getXferStateParam2() ) );
+				ui.m_FileStatus->setText( GuiParams::describeEXferError( (EXferError)poSession->getXferStateParam2() ) );
 				ui.m_FileStatus->setStyleSheet("color: rgb(244, 0, 0);\n");
 			}
 			else

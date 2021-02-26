@@ -119,8 +119,11 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
         searchReply.setAccessState( pluginAccess );
         if( ePluginAccessOk == pluginAccess )
         {
+            PktBlobEntry& blobEntry = searchReq->getBlobEntry();
+            blobEntry.resetRead();
+
             SearchParams searchParams;
-            searchParams.extractFromBlob( searchReq->getBlobEntry() );
+            searchParams.extractFromBlob( blobEntry );
             searchReply.setHostType( searchParams.getHostType() );
             searchReply.setSearchSessionId( searchParams.getSearchSessionId() );
             
@@ -147,9 +150,50 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
         LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService invalid search packet" );
         searchReply.setCommError( eCommErrInvalidPkt );
     }
+    
+    searchReply.setHostType( searchReq->getHostType() );
+    searchReply.setSearchSessionId( searchReq->getSearchSessionId() );
+    EPluginType overridePlugin = searchReq->getPluginType();
+
     // BRJ temp for debug
-    searchReply.setIsLoopback( true );
-    if( !txPacket( netIdent, sktBase, &searchReply ) )
+    // searchReply.setIsLoopback( true );
+    if( !txPacket( netIdent->getMyOnlineId(), sktBase, &searchReply, false, overridePlugin ) )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
+    }
+}
+
+//============================================================================
+void PluginBaseHostService::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginBaseHostService onPktPluginSettingReq" );
+    PktPluginSettingReply settingReply;
+    PktPluginSettingReq* settingReq = (PktPluginSettingReq*)pktHdr;
+    if( settingReq->isValidPkt() )
+    {
+        PluginId pluginId = settingReq->getPluginId();
+
+        settingReply.setHostType( settingReq->getHostType() );
+        settingReply.setSessionId( settingReq->getSessionId() );
+        settingReply.setPluginId( pluginId );
+        settingReply.setPluginType( settingReq->getPluginType() );
+
+        // for now we only handle a single entry.. we could add more for efficiency
+        
+        ECommErr searchErr = m_HostServerMgr.settingsRequest( pluginId, settingReply, sktBase, netIdent );
+        settingReply.setCommError( searchErr );
+    }
+    else
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService invalid search packet" );
+        settingReply.setCommError( eCommErrInvalidPkt );
+    }
+
+    EPluginType overridePlugin = settingReq->getPluginType();
+
+    // BRJ temp for debug
+    // settingReply.setIsLoopback( true );
+    if( !txPacket( netIdent->getMyOnlineId(), sktBase, &settingReply, false, overridePlugin ) )
     {
         LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
     }

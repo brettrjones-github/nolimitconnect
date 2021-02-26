@@ -17,6 +17,7 @@
 #include "AppSettings.h"
 #include "MyIcons.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -52,7 +53,7 @@ void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType plug
     if( ePluginTypeInvalid != pluginType )
     {
         getPermissionWidget()->setPluginType( pluginType );
-        getServiceTitle()->setText( GuiHelpers::describePlugin( pluginType, false ).c_str() );
+        getServiceTitle()->setText( GuiParams::describePlugin( pluginType, false ).c_str() );
         ui.m_InfoWidget->setPluginType( pluginType );
     }
 

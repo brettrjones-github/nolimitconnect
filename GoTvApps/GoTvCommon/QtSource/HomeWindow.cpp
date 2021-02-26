@@ -322,7 +322,7 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
 		return;
 	}
 
-    LogMsg( LOG_ERROR, "HomeWindow::slotDeviceOrientationChanged %s", GuiHelpers::describeOrientation(m_Orientation).toUtf8().constData() );
+    LogMsg( LOG_ERROR, "HomeWindow::slotDeviceOrientationChanged %s", GuiParams::describeOrientation(m_Orientation).toUtf8().constData() );
 
     getMessengerParentFrame()->setVisible( false );
 	if( Qt::Vertical == m_Orientation )

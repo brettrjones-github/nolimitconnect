@@ -20,6 +20,7 @@
 
 #include "VxPushButton.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <QFrame>
 
@@ -193,15 +194,15 @@ std::string MultiSessionState::describeCantSendReason( void )
 	switch( m_eMSessionType )
 	{
 	case eMSessionTypePhone:
-		reasonStr = GuiHelpers::describePlugin( ePluginTypeVoicePhone, false );
+		reasonStr = GuiParams::describePlugin( ePluginTypeVoicePhone, false );
 		accessState = m_HisIdent->getMyAccessPermissionFromHim( ePluginTypeVoicePhone );
 		break;
 	case eMSessionTypeVidChat:
-		reasonStr = GuiHelpers::describePlugin( ePluginTypeVideoPhone, false );
+		reasonStr = GuiParams::describePlugin( ePluginTypeVideoPhone, false );
 		accessState = m_HisIdent->getMyAccessPermissionFromHim( ePluginTypeVideoPhone );
 		break;
 	case eMSessionTypeTruthOrDare:
-		reasonStr = GuiHelpers::describePlugin( ePluginTypeTruthOrDare, false );
+		reasonStr = GuiParams::describePlugin( ePluginTypeTruthOrDare, false );
 		accessState = m_HisIdent->getMyAccessPermissionFromHim( ePluginTypeTruthOrDare );
 		break;
 

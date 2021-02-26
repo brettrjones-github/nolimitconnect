@@ -17,6 +17,7 @@
 
 #include "LogMgr.h"
 
+#include "GuiParams.h"
 #include "PopupMenu.h"
 #include "ToGuiActivityInterface.h"
 #include "OffersMgr.h"
@@ -1073,28 +1074,28 @@ void AppCommon::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHos
 }
 
 //============================================================================
-void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, const char * msg )
+void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char * msg )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    const char * hostStatus = DescribeHostSearchStatus( searchStatus );
-    std::string formatedMsg;
+    QString hostStatus = GuiParams::describeHostSearchStatus( searchStatus );
+    if( eCommErrNone != commErr )
+    {
+        hostStatus += GuiParams::describeCommError( commErr );
+    }
+
     if( msg )
     {
-        StdStringFormat( formatedMsg, "#%s %s", hostStatus, msg );
-    }
-    else
-    {
-        StdStringFormat( formatedMsg, "#%s\n", hostStatus );
+        hostStatus += msg;
     }
 
-    emit signalLog( 0, formatedMsg.c_str() );
-    emit signalStatusMsg( formatedMsg.c_str() );
+    emit signalLog( 0, hostStatus );
+    emit signalStatusMsg( hostStatus );
 
-    emit signalHostSearchStatus( hostType, sessionId, searchStatus, formatedMsg.c_str() );
+    emit signalHostSearchStatus( hostType, sessionId, searchStatus, hostStatus );
 }
 
 //============================================================================
@@ -1951,6 +1952,9 @@ void  AppCommon::registerMetaData( void )
 	qRegisterMetaType<ESndDef>( "ESndDef" );
     qRegisterMetaType<EXferError>( "EXferError" );
     qRegisterMetaType<EXferState>( "EXferState" );
+    qRegisterMetaType<PluginSetting>( "PluginSetting" );
+    qRegisterMetaType<VxGUID>( "VxGUID" );
     qRegisterMetaType<VxGuidQt>( "VxGuidQt" );
+    qRegisterMetaType<VxNetIdent>( "VxNetIdent" );
     qRegisterMetaType<uint32_t>( "uint32_t" );
 }

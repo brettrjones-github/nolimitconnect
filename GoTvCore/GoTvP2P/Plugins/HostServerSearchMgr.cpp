@@ -65,7 +65,8 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
 //============================================================================
 ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    ECommErr searchErr = haveBlob(searchParams.getHostType()) ? eCommErrNone : eCommErrInvalidHostType;
+    EHostType hostType = searchParams.getHostType();
+    ECommErr searchErr = haveBlob(hostType) ? eCommErrNone : eCommErrInvalidHostType;
     if( eCommErrNone == searchErr )
     {
         unsigned int matchCnt = 0;
@@ -73,8 +74,9 @@ ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHost
         PluginIdList matchList;
         uint64_t timeNow = GetGmtTimeMs();
         searchReply.setIsGuidPluginTypePairs( true );
+        
         m_SearchMutex.lock();
-        std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( searchParams.getHostType() );
+        std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( hostType );
         for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
         {
             if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_UPDATE_TIME_MS )
@@ -93,6 +95,49 @@ ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHost
         removeEntries( searchMap, toRemoveList );
         m_SearchMutex.unlock();
         searchReply.calcPktLen();
+    }
+
+    return searchErr;
+}
+
+//============================================================================
+ECommErr HostServerSearchMgr::settingsRequest( PluginId& pluginId, PktPluginSettingReply& settingReply, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    EHostType hostType = settingReply.getHostType();
+    ECommErr searchErr = haveBlob(hostType) ? eCommErrNone : eCommErrInvalidHostType;
+    if( eCommErrNone == searchErr )
+    {
+        unsigned int matchCnt = 0;
+        PluginIdList toRemoveList;
+        PluginIdList matchList;
+        uint64_t timeNow = GetGmtTimeMs();
+        PktBlobEntry& blobEntry = settingReply.getBlobEntry();
+        blobEntry.resetWrite();
+        
+        m_SearchMutex.lock();
+        std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( hostType );
+        for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+        {
+            if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_UPDATE_TIME_MS )
+            {
+                toRemoveList.addPluginId( iter->first );
+            }
+            else if( iter->first == pluginId )
+            {
+                if( iter->second.m_Ident.addToBlob( blobEntry ) )
+                {
+                    if( iter->second.m_PluginSetting.addToBlob( blobEntry ) )
+                    {
+                        settingReply.setTotalMatches( settingReply.getTotalMatches() + 1 );
+                        LogModule( eLogHostConnect, LOG_DEBUG, "HostServerSearchMgr match %d plugin %s ", matchCnt, pluginId.describePluginId().c_str() );
+                    }
+                }    
+            }
+        }
+
+        removeEntries( searchMap, toRemoveList );
+        m_SearchMutex.unlock();
+        settingReply.calcPktLen();
     }
 
     return searchErr;

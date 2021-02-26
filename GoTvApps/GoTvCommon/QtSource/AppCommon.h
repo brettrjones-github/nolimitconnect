@@ -403,7 +403,7 @@ public:
 
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
-    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus joinStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) override;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting ) override;
 
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
@@ -591,10 +591,10 @@ signals:
 	void						signalStatusMsg( QString strMsg );
 	void						signalUserMsg( QString strMsg );
 
-    void						signalHostAnnounceStatus( EHostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
-    void						signalHostJoinStatus( EHostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
-    void						signalHostSearchStatus( EHostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
-    void						signalHostSearchResult( EHostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting );
+    void						signalHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
+    void						signalHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
+    void						signalHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
+    void						signalHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
     void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );

@@ -47,6 +47,7 @@ public:
     void                        setIpAddress( std::string ipAddr );
     void                        setIpPort( uint16_t ipPort );
     void                        setFirewallTestType( FirewallSettings::EFirewallTestType firewallTestType );
+    void                        setWebsiteUrlsResolved( bool resolved );
 
     bool                        isInternetAvailable( void )       { return m_InternetAvail; };
     bool                        isNetHostAvailable( void )        { return m_NetworkHostAvail; };
@@ -87,4 +88,5 @@ protected:
     FirewallSettings::EFirewallTestType           m_FirewallTestType{ FirewallSettings::eFirewallTestUrlConnectionTest };
     EInternetStatus             m_InternetStatus{ eInternetNoInternet };
     ENetAvailStatus             m_NetAvailStatus{ eNetAvailNoInternet };
+    bool                        m_WebsiteUrlsResolved{ false };
 };

@@ -31,6 +31,8 @@ public:
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setSearchSessionId( VxGUID& guid )						    { m_SearchSessionId = guid; }
     VxGUID&					    getSearchSessionId( void )								    { return m_SearchSessionId; }
+    void                        setPluginType( EPluginType hostType )                       { m_PluginType = (uint8_t)hostType; }
+    EPluginType                 getPluginType( void ) const                                 { return (EPluginType)m_PluginType; }
 
     PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
 
@@ -39,7 +41,7 @@ public:
 protected:
     VxGUID                      m_SearchSessionId;
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
+    uint8_t					    m_PluginType{ 0 };
     uint16_t                    m_Res2{ 0 };
     uint32_t                    m_Res3{ 0 };	
 
@@ -51,6 +53,8 @@ class PktHostSearchReply : public VxPktHdr
 {
 public:
     PktHostSearchReply();
+
+    void                        calcPktLen( void );
 
     void                        setHostType( EHostType hostType )                           { m_HostType = (uint8_t)hostType; }
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
@@ -74,8 +78,6 @@ public:
     bool                        addMatchOnlineId( VxGUID& onlineId );
     bool                        addPluginId( const PluginId& pluginId );
     uint16_t                    getRemainingBlobStorageLen( void ) const;
-
-    void                        calcPktLen( void );
 
 private:
     VxGUID                      m_SearchSessionId;

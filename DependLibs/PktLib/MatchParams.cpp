@@ -56,5 +56,4 @@ bool MatchParams::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_LanguageType );
     result &= blob.getValue( m_ContentRating );
     return result;
-
 }

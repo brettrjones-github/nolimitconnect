@@ -29,6 +29,8 @@ public:
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setPluginId( PluginId& pluginId )						    { m_PluginId = pluginId; }
     PluginId&					getPluginId( void )								            { return m_PluginId; }
+    void						setPluginType( EPluginType pluginType )						{ m_PluginType = (uint8_t)pluginType; }
+    EPluginType					getPluginType( void )								        { return (EPluginType)m_PluginType; }
     void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
     VxGUID&					    getSessionId( void )								        { return m_SessionId; }
 
@@ -39,8 +41,11 @@ private:
     PluginId                    m_PluginId;         // 17 bytes 
     uint8_t					    m_HostType{ 0 };    // 1 byte
     // 74 bytes to here
-    uint16_t                    m_Res1{ 0 };
-    uint32_t                    m_Res2{ 0 };
+    uint8_t					    m_CommError{ 0 };		
+    uint16_t					m_TotalMatches{ 0 };
+    uint8_t					    m_PluginType{ 0 };		
+    uint8_t					    m_Res1{ 0 };
+    uint16_t                    m_Res2{ 0 };
     // 80 bytes to here
 };
 
@@ -55,9 +60,17 @@ public:
     EHostType                   getHostType( void ) const                                   { return (EHostType)m_HostType; }
     void						setPluginId( PluginId& pluginId )						    { m_PluginId = pluginId; }
     PluginId&					getPluginId( void )								            { return m_PluginId; }
+    void						setPluginType( EPluginType pluginType )						{ m_PluginType = (uint8_t)pluginType; }
+    EPluginType					getPluginType( void )								        { return (EPluginType)m_PluginType; }
     void						setSessionId( VxGUID& guid )						        { m_SessionId = guid; }
     VxGUID&					    getSessionId( void )								        { return m_SessionId; }
+    void                        setCommError( ECommErr commError )                          { m_CommError = (uint8_t)commError; }
+    ECommErr                    getCommError( void ) const                                  { return (ECommErr)m_CommError; }
 
+    void                        setTotalMatches( uint16_t matchCnt );
+    uint16_t                    getTotalMatches( void ) const;
+
+    bool                        addPluginId( const PluginId& pluginId );
     PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
 
 private:
@@ -67,8 +80,11 @@ private:
     PluginId                    m_PluginId;         // 17 bytes 
     uint8_t					    m_HostType{ 0 };    // 1 byte
                                                     // 74 bytes to here
-    uint16_t                    m_Res1{ 0 };
-    uint32_t                    m_Res2{ 0 };
+    uint8_t					    m_CommError{ 0 };		
+    uint16_t					m_TotalMatches{ 0 };	
+    uint8_t					    m_PluginType{ 0 };		
+    uint8_t					    m_Res1{ 0 };
+    uint16_t                    m_Res2{ 0 };
     // 80 bytes to here
     PktBlobEntry                m_BlobEntry;	
 };

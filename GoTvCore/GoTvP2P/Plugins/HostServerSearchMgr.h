@@ -33,6 +33,7 @@ class PluginIdList;
 class PluginMgr;
 class VxPktHdr;
 class PktHostSearchReply;
+class PktPluginSettingReply;
 
 class HostServerSearchMgr : public HostBaseMgr
 {
@@ -42,6 +43,7 @@ public:
 
     void                        updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent );
     virtual ECommErr            searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
+    virtual ECommErr            settingsRequest( PluginId& pluginId, PktPluginSettingReply& searchReply, VxSktBase* sktBase, VxNetIdent* netIdent );
 
 protected:
     std::map<PluginId, HostSearchEntry>& getSearchList( EHostType hostType );

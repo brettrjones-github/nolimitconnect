@@ -39,6 +39,8 @@ public:
     void                        toHostedEntry( HostedEntry& entry );
     void                        fillSearchReplyBlob( BinaryBlob& blob );
 
+    bool                        addToBlob( PktBlobEntry& entryBlob );
+
     uint64_t                    m_LastRxTime{ 0 }; // time last recieved announce
     VxNetIdent                  m_Ident;
     PktHostAnnounce             m_PktHostAnn;

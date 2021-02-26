@@ -87,7 +87,7 @@ bool PluginPermission::addToBlob( PktBlobEntry& blob )
 //============================================================================
 bool PluginPermission::extractFromBlob( PktBlobEntry& blob )
 {
-    int iBufLen = 0;
+    int iBufLen = sizeof( m_au8Permissions );
     return blob.getValue(  (void *)m_au8Permissions, iBufLen );
 }
 
@@ -262,7 +262,9 @@ VxNetIdent::VxNetIdent(const VxNetIdent &rhs )
 //============================================================================
 bool VxNetIdent::addToBlob( PktBlobEntry& blob )
 {
-    bool result = VxNetIdentBase::addToBlob( blob );
+    uint8_t startMagicNum = 98;
+    bool result = blob.setValue( startMagicNum );
+    result &= VxNetIdentBase::addToBlob( blob );
     result &= PluginPermission::addToBlob( blob );
     result &= VxGroupService::addToBlob( blob );
     result &= blob.setValue( m_u16AppVersion );
@@ -271,13 +273,23 @@ bool VxNetIdent::addToBlob( PktBlobEntry& blob )
     result &= blob.setValue( m_NetIdentRes2 );
     result &= blob.setValue( m_NetIdentRes3 );
     result &= blob.setValue( m_LastSessionTimeGmtMs );
+    uint8_t stopMagicNum = 99;
+    result &= blob.setValue( stopMagicNum );
     return result;
 }
 
 //============================================================================
 bool VxNetIdent::extractFromBlob( PktBlobEntry& blob )
 {
-    bool result = VxNetIdentBase::extractFromBlob( blob );
+    uint8_t startMagicNum;
+    bool result = blob.getValue( startMagicNum );
+    if( !result || startMagicNum != 98 )
+    {
+        LogMsg( LOG_ERROR, "VxNetIdent::extractFromBlob startMagicNum not valid" );
+        return false;
+    }
+
+    result &= VxNetIdentBase::extractFromBlob( blob );
     result &= PluginPermission::extractFromBlob( blob );
     result &= VxGroupService::extractFromBlob( blob );
     result &= blob.getValue( m_u16AppVersion );
@@ -286,6 +298,15 @@ bool VxNetIdent::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_NetIdentRes2 );
     result &= blob.getValue( m_NetIdentRes3 );
     result &= blob.getValue( m_LastSessionTimeGmtMs );
+
+    uint8_t stopMagicNum;
+    result &= blob.getValue( stopMagicNum );
+    if( !result || stopMagicNum != 99 )
+    {
+        LogMsg( LOG_ERROR, "VxNetIdent::extractFromBlob stopMagicNum not valid" );
+        return false;
+    }
+
     return result;
 }
 

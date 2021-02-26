@@ -16,6 +16,7 @@
 #include <app_precompiled_hdr.h>
 #include "GuiFileXferSession.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <PktLib/VxSearchDefs.h>
 #include <CoreLib/VxParse.h>
@@ -149,7 +150,7 @@ QString GuiFileXferSession::describeFileType()
 //============================================================================
 QString GuiFileXferSession::describeFileLength()
 {
-	return GuiHelpers::describeFileLength( m_FileInfo.getFileLength() );
+	return GuiParams::describeFileLength( m_FileInfo.getFileLength() );
 }
 
 //============================================================================
@@ -167,5 +168,5 @@ bool GuiFileXferSession::getIsInError( void )
 //============================================================================
 QString GuiFileXferSession::describeXferState( void )
 {
-	return GuiHelpers::describeEXferState( m_eXferState );
+	return GuiParams::describeEXferState( m_eXferState );
 }

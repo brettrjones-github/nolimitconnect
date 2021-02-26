@@ -109,7 +109,7 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
             {
                 // BRJ temporary for debugging
                 // TODO REMOVE
-                iter->second->setIsLoopback( true );
+                // iter->second->setIsLoopback( true );
                 m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeNetworkHost );
             }
             else

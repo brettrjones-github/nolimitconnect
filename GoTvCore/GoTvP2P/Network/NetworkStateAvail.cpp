@@ -92,6 +92,10 @@ void NetworkStateAvail::runNetworkState( void )
 	{
 		m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeFailedResolveHostNetwork, "" );
 	}
+    else
+    {
+        m_Engine.getNetStatusAccum().setWebsiteUrlsResolved( true );
+    }
 
     if( m_NetworkStateMachine.checkAndHandleNetworkEvents() )
     {

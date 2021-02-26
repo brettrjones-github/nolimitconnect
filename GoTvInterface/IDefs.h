@@ -40,13 +40,14 @@ enum EAgeType
 
 enum ECommErr
 {
-    eCommErrNone = 0,
+    eCommErrNone                 = 0,
     eCommErrInvalidPkt,
     eCommErrUserOffline,
     eCommErrSearchTextToShort, 
     eCommErrSearchNoMatch, 
     eCommErrInvalidHostType, 
     eCommErrPluginNotEnabled,
+    eCommErrPluginPermission,
 
     eMaxCommErr
 };
@@ -230,7 +231,8 @@ enum EHostSearchStatus
     eHostSearchFailConnectDropped = 13,
     eHostSearchInvalidParam = 14,
     eHostSearchPluginDisabled = 15,
-    eHostSearchCompleted = 16,
+    eHostSearchNoMatches = 16,
+    eHostSearchCompleted = 17,
 
     eMaxHostSearchStatus
 };
@@ -667,69 +669,52 @@ enum ESubCatagory
     eMaxSubCatagory
 };
 
+//============================================================================
+// There is a qt translated version of these functions in GuiParams for the user interface
+//============================================================================
+
 const char * DescribeAppModule( EAppModule appModule );
-
 const char * DescribeAge( EAgeType ageType );
-
 const char * DescribeCommError( ECommErr commErr );
-
 const char * DescribeConnectReason( EConnectReason connectReason );
-
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
-
+//! describe friend state
+const char * DescribeFriendState( EFriendState eFriendState );
 //! Host announce status as text
 const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
-
 //! Host join status as text
 const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus );
-
 //! Host search status as text
 const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus );
-
 //! Host connection test state as text
 // const char * DescribeHostTestStatus( EHostTestStatus eHostStatus );
-
 //! Host type as text
 const char * DescribeHostType( EHostType hostType );
-
 //! Internet Status as text
 const char * DescribeInternetStatus( EInternetStatus internetStatus );
-
 const char * DescribeModuleState( EModuleState moduleState );
-
 //! Network State as text
 const char * DescribeNetworkState( ENetworkStateType networkStateType );
-
 //! Net Available Status as text
 const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus );
-
 //! Net Command type as text
 const char * DescribeNetCmdType( ENetCmdType netCmdType );
-
 //! Net Command Error as text
 const char * DescribeNetCmdError( ENetCmdError netCmdError );
-
-/// the first DescribePluginAccess is translated.. this one is not
-const char * DescribePluginAccess2( EPluginAccess pluginAccess );
-
+//! Plugin Access as text
+const char * DescribePluginAccess( EPluginAccess pluginAccess );
 //! Describe plugin.. the first DescribePluginType is translated.. this one is not
-const char * DescribePluginType2( EPluginType ePluginType );
-
+const char * DescribePluginType( EPluginType ePluginType );
 //! Describe Direct Connect test state as text
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
-
 //! Describe connect by shaking phone ( or press simulate phone shake ) status as text
 const char * DescribeRandomConnectStatus( ERandomConnectStatus ePortOpenStatus );
-
 //! Describe Relay Search Status as text
 const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus );
-
 //! Describe run network test state as text
 const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
-
 //! Describe scan type
 const char * DescribeScanType( EScanType scanType );
-
 //! Describe scan type
 const char * DescribeSearchType( ESearchType scearchType );
 

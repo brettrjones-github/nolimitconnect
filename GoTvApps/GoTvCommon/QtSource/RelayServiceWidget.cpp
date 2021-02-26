@@ -18,6 +18,7 @@
 #include "AppGlobals.h"
 #include "ActivityInformation.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -44,11 +45,11 @@ void RelayServiceWidget::initRelayServiceWidget( void )
 //============================================================================
 void RelayServiceWidget::fillPermissionComboBox( void )
 {
-    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateAdmin ) );
-    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateFriend ) );
-    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateGuest ) );
-    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateAnonymous ) );
-    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateIgnore ) );
+    ui.m_PermissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateAdmin ) );
+    ui.m_PermissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateFriend ) );
+    ui.m_PermissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateGuest ) );
+    ui.m_PermissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateAnonymous ) );
+    ui.m_PermissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateIgnore ) );
     ui.m_PermissionComboBox->setCurrentIndex( 4 );
 }
 

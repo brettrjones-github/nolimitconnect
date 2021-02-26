@@ -17,6 +17,8 @@
 #include "AppletClientBase.h"
 
 #include <GoTvInterface/IDefs.h>
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
+
 #include <QString>
 #include <QDialog>
 #include "ui_AppletChatRoomJoinSearch.h"
@@ -40,8 +42,9 @@ public:
 
     QString                     getSearchText( void ) { return ui.m_SearchsParamWidget->getSearchTextEdit()->text(); }
 
-    virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
-    virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
+    void						addPluginSettingToList( VxNetIdent& hostIdent, PluginSetting& pluginSetting );
+    void                        clearPluginSettingToList( void );
+    void                        clearStatus( void );
 
 signals:
 	void						signalSearchResult( VxNetIdent * netIdent );
@@ -50,6 +53,7 @@ signals:
     void                        signalInfoMsg( const QString& logMsg );
 
 private slots:
+    void                        slotInfoMsg( const QString& text );
 	void						slotSearchResult( VxNetIdent * netIdent );
 	void						slotSearchComplete( void );
     void						slotHomeButtonClicked( void ) override;
@@ -58,7 +62,7 @@ private slots:
     void						slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
     void						slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
     void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
-    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting );
+    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;

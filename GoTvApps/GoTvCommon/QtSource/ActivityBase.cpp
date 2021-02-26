@@ -23,6 +23,7 @@
 #include "PopupMenu.h"
 
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 #include "MySndMgr.h"
 #include "MyIcons.h"
 
@@ -278,7 +279,7 @@ void ActivityBase::setupStyledDlg(	VxNetIdent *		poFriend,
 		EPluginAccess ePluginAccess = poFriend->getMyAccessPermissionFromHim(ePluginType);
 
 		poPermissionButton->setIcon( getMyIcons().getPluginIcon( ePluginType, ePluginAccess ) );
-		QString strAction = DescribePluginAction( poFriend, ePluginType, ePluginAccess );
+		QString strAction = GuiParams::describePluginAction( poFriend, ePluginType, ePluginAccess );
 		poPermissionLabel->setText( strAction );
 	}
 }
@@ -327,7 +328,7 @@ void ActivityBase::checkDiskSpace( void )
 	uint64_t diskFreeSpace = m_Engine.fromGuiGetDiskFreeSpace();
 	if( ( 0 != diskFreeSpace ) && ( diskFreeSpace < 1000000000 ) )
 	{
-        m_MyApp.toGuiUserMessage( "Disk Space is low %s", GuiHelpers::describeFileLength( diskFreeSpace ).toUtf8().constData() );
+        m_MyApp.toGuiUserMessage( "Disk Space is low %s", GuiParams::describeFileLength( diskFreeSpace ).toUtf8().constData() );
 	}
 }
 

@@ -18,7 +18,7 @@
 #include "AppCommon.h"
 #include "GuiOfferSession.h"
 #include "GuiHelpers.h"
-
+#include "GuiParams.h"
 
 //============================================================================
 OfferSessionState::OfferSessionState( AppCommon& myApp, GuiOfferSession * offerSession )
@@ -41,7 +41,7 @@ OfferSessionState::~OfferSessionState()
 //============================================================================
 std::string OfferSessionState::describePlugin()
 {
-	return GuiHelpers::describePlugin( getPluginType(), getIsRemoteInitiated() );	
+	return GuiParams::describePlugin( getPluginType(), getIsRemoteInitiated() );	
 }
 
 //============================================================================
@@ -49,7 +49,7 @@ std::string OfferSessionState::describeOffer()
 {
 	std::string offferDesc = getHisIdent()->getOnlineName();
 	offferDesc +=  " Offers ";
-	offferDesc += GuiHelpers::describePlugin( getPluginType(), getIsRemoteInitiated() );
+	offferDesc += GuiParams::describePlugin( getPluginType(), getIsRemoteInitiated() );
 	return offferDesc;	
 }
 

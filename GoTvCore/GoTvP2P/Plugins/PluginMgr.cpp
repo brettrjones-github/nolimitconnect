@@ -425,9 +425,11 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	NetServiceHdr netServiceHdr;
 	EPluginType pluginType = m_NetServiceUtils.parseHttpNetServiceUrl( sktBase, netServiceHdr );
-    if( ( ePluginTypeNetworkHost == pluginType ) && ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) )
+    if( ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) &&
+        ( ePluginTypeNetworkHost == pluginType || ePluginTypeGroupHost == pluginType || 
+            ePluginTypeChatRoomHost == pluginType || ePluginTypeRandomConnectHost == pluginType || ePluginTypeConnectTestHost == pluginType) )
     {
-        // only allowed if Network Host feature is enabled
+        // only allowed if Hosting feature is enabled
         PluginBase * poPlugin = getPlugin( pluginType );
         if( poPlugin && ( eAppStatePermissionErr != poPlugin->getPluginState() ) )
         {

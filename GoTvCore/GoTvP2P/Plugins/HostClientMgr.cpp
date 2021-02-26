@@ -47,7 +47,7 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
         }
         else
         {
-            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinFail, DescribePluginAccess2( hostReply->getAccessState() ) );
+            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinFail, DescribePluginAccess( hostReply->getAccessState() ) );
             m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
         }
     }
@@ -61,10 +61,31 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     PktHostSearchReply* hostReply = ( PktHostSearchReply* )pktHdr;
+    ECommErr commErr = hostReply->getCommError();
     if( 0 == hostReply->getTotalMatches() )
     {
+        if( eCommErrNone != commErr )
+        {
+            if( eCommErrPluginNotEnabled == commErr )
+            {
+                m_Engine.getToGui().toGuiHostSearchStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostSearchPluginDisabled, hostReply->getCommError() );
+            }
+            else if( eCommErrPluginPermission == commErr )
+            {
+                m_Engine.getToGui().toGuiHostSearchStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostSearchFailPermission, hostReply->getCommError() );
+            }
+            else
+            {
+                m_Engine.getToGui().toGuiHostSearchStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostSearchFail, hostReply->getCommError() );
+            }
+        }
+        else
+        {
+            m_Engine.getToGui().toGuiHostSearchStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostSearchNoMatches, hostReply->getCommError() );
+        }
+
         LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onPktHostSearchReply no matches" );
-        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
+        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent->getMyOnlineId() );
     }
     else
     {
@@ -137,11 +158,18 @@ void HostClientMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase
 //============================================================================
 void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
+    if( isSearchConnectReason( connectReason ) )
+    {
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
+    }
+
     if( hostType == eHostTypeNetwork &&
         ( connectReason == eConnectReasonChatRoomSearch ||
             connectReason == eConnectReasonGroupSearch ||
             connectReason == eConnectReasonRandomConnectSearch ) )
     {
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchSendingSearchRequest );
+
         m_SearchParamsMutex.lock();
         auto iter = m_SearchParamsList.find( sessionId );
         if( iter != m_SearchParamsList.end() )
@@ -149,15 +177,20 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
             SearchParams& searchParams = iter->second;
             PktHostSearchReq searchReq;
             searchReq.setHostType( searchParams.getHostType() );
+            searchReq.setPluginType( m_Plugin.getPluginType() );
             searchReq.setSearchSessionId( sessionId );
             PktBlobEntry& blobEntry = searchReq.getBlobEntry();
             bool result = searchParams.addToBlob( blobEntry );
             searchReq.calcPktLen();
+            // unlock before txPacket else in looback mode can cause a deadlock
+            m_SearchParamsList.erase( iter );
+            m_SearchParamsMutex.unlock();
+
             if( result && searchReq.isValidPkt() )
             {
                 // BRJ temporary for debugging
                 // TODO REMOVE
-                searchReq.setIsLoopback( true );
+                // searchReq.setIsLoopback( true );
                 if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeNetworkHost ) )
                 {
                     LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onConnectToHostSuccess failed send PktHostSearchReq" );
@@ -168,11 +201,14 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
                 LogMsg( LOG_ERROR, "HostServerMgr PktHostSearchReq is invalid" );
             }
 
-            m_SearchParamsList.erase( iter );
+            // not done with connection.. wait for search results
         }
-
-        m_SearchParamsMutex.unlock();
-        // not done with connection.. wait for search results
+        else
+        {
+            m_SearchParamsMutex.unlock();
+            LogMsg( LOG_ERROR, "HostServerMgr Search Params Not Found" );
+            stopHostSearch( hostType, sessionId, sktBase, onlineId );
+        }     
     }
     else
     {
@@ -195,7 +231,7 @@ void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSkt
             m_Engine.getToGui().toGuiHostSearchStatus( hostType, netIdent->getMyOnlineId(), eHostSearchPluginDisabled );
         }
 
-        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
+        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent->getMyOnlineId() );
         return;
     }
 
@@ -236,7 +272,7 @@ void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSkt
     if( !result )
     {
         LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession failed");
-        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent );
+        stopHostSearch( hostReply->getHostType(), hostReply->getSearchSessionId(), sktBase, netIdent->getMyOnlineId() );
     }
 }
 
@@ -257,10 +293,11 @@ bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& se
             PktPluginSettingReq pluginIdReq;
             pluginIdReq.setHostType( hostType );
             pluginIdReq.setPluginId( pluginId );
+            pluginIdReq.setPluginType( m_Plugin.getPluginType() );
             pluginIdReq.setSessionId( sessionId );
 
             // TODO debug only REMOVE ME
-            pluginIdReq.setIsLoopback( true );
+            // pluginIdReq.setIsLoopback( true );
             if( m_Plugin.txPacket( netIdent->getMyOnlineId(), sktBase, &pluginIdReq, false, ePluginTypeNetworkHost ) )
             {
                 result = true;
@@ -280,20 +317,20 @@ bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& se
     if( !result )
     {
         LogMsg( LOG_VERBOSE, "HostClientMgr rxed all plugin settings" );
-        stopHostSearch( hostType, sessionId, sktBase, netIdent );
+        stopHostSearch( hostType, sessionId, sktBase, netIdent->getMyOnlineId() );
     }
 
     return result;
 }
 
 //============================================================================
-void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId )
 {
-    m_Engine.getToGui().toGuiHostSearchStatus( hostType, netIdent->getMyOnlineId(), eHostSearchCompleted );
+    m_Engine.getToGui().toGuiHostSearchStatus( hostType, onlineId, eHostSearchCompleted );
 
     removeSearchSession( sessionId );
     EConnectReason connectReason = getSearchConnectReason(hostType);
-    m_Engine.getConnectionMgr().doneWithConnection( sessionId, netIdent->getMyOnlineId(), this, connectReason );
+    m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
 }
 
 //============================================================================
@@ -301,6 +338,7 @@ void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pkt
 {
     PktPluginSettingReply* settingReply = ( PktPluginSettingReply* )pktHdr;
     PktBlobEntry& blobEntry = settingReply->getBlobEntry();
+    blobEntry.resetRead();
     if( 0 != blobEntry.getBlobLen() )
     {
         // extract ident and plugin settings and send to gui
@@ -311,17 +349,19 @@ void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pkt
         if( extractResult )
         {
             m_Engine.getToGui().toGuiHostSearchResult( settingReply->getHostType(), settingReply->getSessionId(), hostIdent, pluginSetting );
+            sendNextPluginSettingRequest( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent );
         }
         else
         {
-            LogMsg( LOG_VERBOSE, "HostClientMgr plugin setting reply extract error" );
+            LogMsg( LOG_ERROR, "HostClientMgr plugin setting reply extract error" );
+            m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchInvalidParam );
+            stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent->getMyOnlineId() );
         }
-
-        sendNextPluginSettingRequest( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent );
     }
     else
     {
-        LogMsg( LOG_VERBOSE, "HostClientMgr plugin setting reply empty" );
-        stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent );
+        LogModule( eLogHostSearch, LOG_VERBOSE, "HostClientMgr plugin setting reply empty" );
+        m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchCompleted );
+        stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent->getMyOnlineId() );
     }
 }

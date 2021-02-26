@@ -24,6 +24,7 @@
 #include "ActivityToFriendMultiSession.h"
 #include "ActivitySelectFileToSend.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvInterface/IFromGui.h>
 
@@ -54,7 +55,7 @@ void AppCommon::addPermissionMenuEntry(	PopupMenu *		poPopupMenu,
 	int iPluginPermission = m_Engine.getPluginPermission( (int)ePluginType );
 	
 	char as8Buf[255];
-	sprintf(as8Buf, pText, GuiHelpers::describePluginPermission( (EFriendState) iPluginPermission ) );
+	sprintf(as8Buf, pText, GuiParams::describePluginPermission( (EFriendState) iPluginPermission ) );
 	poPopupMenu->addMenuItem( ePluginType, getMyIcons().getIcon(eIconType), as8Buf );
 }
 

@@ -414,7 +414,7 @@ void ActivityToFriendViewSharedFiles::beginDownload( GuiFileXferSession * xferSe
 		}
 		else 
 		{
-			ActivityMessageBox errMsgBox( m_MyApp, this, LOG_INFO, GuiHelpers::describeEXferError( xferError ) );
+			ActivityMessageBox errMsgBox( m_MyApp, this, LOG_INFO, GuiParams::describeEXferError( xferError ) );
 			errMsgBox.exec();
 		}
 	}
@@ -582,7 +582,7 @@ void ActivityToFriendViewSharedFiles::slotDownloadFileSelected( int iMenuId, QWi
 			}
 			else 
 			{
-				ActivityMessageBox errMsgBox( m_MyApp, this, LOG_INFO, GuiHelpers::describeEXferError( xferError ) );
+				ActivityMessageBox errMsgBox( m_MyApp, this, LOG_INFO, GuiParams::describeEXferError( xferError ) );
 				errMsgBox.exec();
 			}
 		}

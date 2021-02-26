@@ -21,6 +21,7 @@
 #include "OffersMgr.h"
 #include "OfferSessionState.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 #include "ActivityBase.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -78,7 +79,7 @@ OfferSessionLogic::OfferSessionLogic(	ActivityBase * activity,
 	m_IsPluginSingleSession = GuiHelpers::isPluginSingleSession( m_ePluginType );
 	m_UserData = m_GuiOfferSession->getUserData();
 	m_FileHashId.setHashData( m_GuiOfferSession->getFileHashId().getHashData() );
-	m_strOfferText = GuiHelpers::describePlugin( m_ePluginType, false );
+	m_strOfferText = GuiParams::describePlugin( m_ePluginType, false );
 }
 
 //======================================================================== 
@@ -118,7 +119,7 @@ bool OfferSessionLogic::isOurSessionInstance( GuiOfferSession * offerSession )
 void OfferSessionLogic::onInSession( bool isInSession )
 {
 	std::string sessionMsg = isInSession ? "In " : "Ended ";
-	sessionMsg += GuiHelpers::describePlugin( m_ePluginType, m_IsOffer );
+	sessionMsg += GuiParams::describePlugin( m_ePluginType, m_IsOffer );
 	sessionMsg += " Session";
 	m_MyApp.toGuiStatusMessage( sessionMsg.c_str() );
 
@@ -528,7 +529,7 @@ std::string OfferSessionLogic::getHisOnlineName( void )
 //============================================================================
 std::string OfferSessionLogic::describePlugin( void )
 {
-	return GuiHelpers::describePlugin( m_ePluginType, m_IsOffer );
+	return GuiParams::describePlugin( m_ePluginType, m_IsOffer );
 }
 
 //============================================================================
@@ -617,7 +618,7 @@ std::string OfferSessionLogic::describeResponse( EOfferResponse eOfferResponse )
 		responseText += "Ended Session ";
 	}
 
-	responseText += GuiHelpers::describePlugin( m_ePluginType, m_IsOffer );
+	responseText += GuiParams::describePlugin( m_ePluginType, m_IsOffer );
 	return responseText;
 }
 

@@ -17,25 +17,6 @@
 #include "PktBlobEntry.h"
 
 //============================================================================
-//! describe friend state
-const char * DescribeFriendState( EFriendState eFriendState )
-{
-	switch( eFriendState )
-	{
-	case eFriendStateAnonymous:	// anonymous user
-		return "Anonymous ";
-	case eFriendStateGuest:		// guest user
-		return "Guest ";
-	case eFriendStateFriend:	// friend user
-		return "Friend ";
-	case eFriendStateAdmin:		// administrator
-		return "Administrator ";
-	default:
-		return "Ignore ";
-	}
-}
-
-//============================================================================
 FriendMatch::FriendMatch( const FriendMatch& rhs ) 
     : m_u8FriendMatch( rhs.m_u8FriendMatch )
 {

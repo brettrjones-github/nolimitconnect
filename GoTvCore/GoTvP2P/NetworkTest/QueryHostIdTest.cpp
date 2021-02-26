@@ -122,7 +122,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 	RCODE rc = netServConn.sendData( strNetActionUrl.c_str(), (int)strNetActionUrl.length() );
 	if( rc )
 	{
-        LogModule( eLogRunTest, LOG_ERROR, "NetActionIsMyPortOpen::doAction: sendData error %d thread 0x%x", rc, VxGetCurrentThreadId() );
+        LogModule( eLogRunTest, LOG_ERROR, "QueryHostIdTest: sendData error %d thread 0x%x", rc, VxGetCurrentThreadId() );
         sendRunTestStatus( eRunTestStatusConnectionDropped,
 			"%s Connected to %s but dropped connection (wrong network key ?) %s thread 0x%x", testName.c_str(), nodeUrl.c_str(), m_Engine.getNetworkMgr().getNetworkKey(), VxGetCurrentThreadId() );
 		return doRunTestFailed();

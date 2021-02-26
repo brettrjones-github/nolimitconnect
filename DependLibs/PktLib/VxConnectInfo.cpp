@@ -263,7 +263,7 @@ bool VxConnectIdent::extractFromBlob( PktBlobEntry& blob )
     bool result = VxConnectBaseInfo::extractFromBlob( blob );
     int onlineNameLen = MAX_ONLINE_NAME_LEN;
     result &= blob.getValue( m_OnlineName, onlineNameLen );
-    int onlineDescLen = MAX_ONLINE_NAME_LEN;
+    int onlineDescLen = MAX_ONLINE_DESC_LEN;
     result &= blob.getValue( m_OnlineDesc, onlineDescLen );
     result &= blob.getValue( m_TimeLastContactMs );
     result &= blob.getValue( m_PrimaryLanguage );

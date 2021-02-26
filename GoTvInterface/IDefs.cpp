@@ -11,6 +11,7 @@ namespace
         "Comm Error Search No Match ",
         "Comm Error Invalid Host Type ",
         "Comm Error Plugin Not Enabled ",
+        "Comm Error Plugin Permission Level ",
         "Max Comm Error ",
     };
 
@@ -119,6 +120,7 @@ namespace
         "Host Search Fail Connect Dropped ",
         "Host Search Invalid Param ",
         "Host Search Plugin Disabled ",
+        "Host Search No Matches ",
         "Host Search Completed ",
 
         "Max Host Search Status ",
@@ -415,7 +417,25 @@ const char * DescribeConnectStatus( EConnectStatus eConnectStatus )
     return ConnectStatusEnumStrings[ eConnectStatus ];
 }
 
-const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
+
+//============================================================================
+//! describe friend state
+const char * DescribeFriendState( EFriendState eFriendState )
+{
+    switch( eFriendState )
+    {
+    case eFriendStateAnonymous:	// anonymous user
+        return "Anonymous ";
+    case eFriendStateGuest:		// guest user
+        return "Guest ";
+    case eFriendStateFriend:	// friend user
+        return "Friend ";
+    case eFriendStateAdmin:		// administrator
+        return "Administrator ";
+    default:
+        return "Ignore ";
+    }
+}
 
 //============================================================================
 const char * DescribeHostAnnounceStatus( EHostAnnounceStatus  hostStatus )
@@ -574,7 +594,7 @@ const char * DescribeNetCmdError( ENetCmdError netCmdError )
 }
 
 //============================================================================
-const char * DescribePluginAccess2( EPluginAccess pluginAccess )
+const char * DescribePluginAccess( EPluginAccess pluginAccess )
 {
     if(  pluginAccess < 0 || eMaxPluginAccessState <= pluginAccess )
     {
@@ -585,7 +605,7 @@ const char * DescribePluginAccess2( EPluginAccess pluginAccess )
 }
 
 //============================================================================
-const char * DescribePluginType2( EPluginType plugType )
+const char * DescribePluginType( EPluginType plugType )
 {
     if(  plugType < 0 || eMaxImplementedPluginType <= plugType )
     {

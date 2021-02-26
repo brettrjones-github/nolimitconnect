@@ -19,6 +19,7 @@
 #include "AppGlobals.h"
 #include "AppletMgr.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include "ActivityInformation.h"
 #include "GuiHelpers.h"
@@ -62,13 +63,13 @@ void ServiceSettingsWidget::updateIcons( void )
     }
 
     ui.m_SettingsButton->setIcon( m_MyApp.getMyIcons().getPluginSettingsIcon( m_PluginType ) );
-    QString settingsText = GuiHelpers::describePlugin( m_PluginType, false ).c_str();
+    QString settingsText = GuiParams::describePlugin( m_PluginType, false ).c_str();
     settingsText += QObject::tr( "Settings" );
     ui.m_SettingsLabel->setText( settingsText );
 
 
     ui.m_ViewServiceButton->setIcon( m_MyApp.getMyIcons().getPluginIcon( m_PluginType ) );
-    QString viewText = QObject::tr( "View " ) + GuiHelpers::describePlugin( m_PluginType, false ).c_str();
+    QString viewText = QObject::tr( "View " ) + GuiParams::describePlugin( m_PluginType, false ).c_str();
     ui.m_ViewServiceLabel->setText( viewText );
 
     EApplet viewAppletType = GuiHelpers::pluginTypeToViewApplet( m_PluginType );

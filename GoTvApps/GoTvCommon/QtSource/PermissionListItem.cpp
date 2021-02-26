@@ -72,7 +72,7 @@ void PermissionListItem::fillPluginInfo()
     {
         ui.m_PluginRunButton->setIcon( m_MyApp.getMyIcons().getPluginIcon( m_PluginType ) );
         ui.m_PluginSettingsButton->setIcon( m_MyApp.getMyIcons().getPluginSettingsIcon( m_PluginType ) );
-        QString pluginName = GuiHelpers::describePlugin( m_PluginType, false ).c_str();
+        QString pluginName = GuiParams::describePlugin( m_PluginType, false ).c_str();
         ui.m_ServiceNameLabel->setText( pluginName );
         PluginSetting pluginSetting;
         m_MyApp.getEngine().getPluginSetting( m_PluginType, pluginSetting );

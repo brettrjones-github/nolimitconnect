@@ -148,8 +148,8 @@ public:
     bool                        toBinary( BinaryBlob& binarySetting, bool networkOrder = false );
     bool                        fromBinary( BinaryBlob& binarySetting, bool networkOrder = false );
 
-    bool                        addToBlob( PktBlobEntry& binaryBlob );
-    bool                        extractFromBlob( PktBlobEntry& blob );
+    bool                        addToBlob( PktBlobEntry& entryBlob );
+    bool                        extractFromBlob( PktBlobEntry& entryBlob );
 
     bool                        fillSearchStrings( std::vector<std::string>& searchStrings );
 

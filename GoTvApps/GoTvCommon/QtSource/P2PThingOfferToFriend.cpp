@@ -25,6 +25,7 @@
 #include "ActivitySelectFileToSend.h"
 #include "ActivityMessageBox.h"
 #include "MyIcons.h"
+#include "GuiParams.h"
 
 #include <QDesktopServices>
 #include <QUrl>
@@ -41,7 +42,7 @@ bool AppCommon::offerToFriendPluginSession( VxNetIdent * poFriend, EPluginType e
 	else
 	{
 		EPluginAccess ePluginAccess = poFriend->getMyAccessPermissionFromHim( ePluginType );
-        ActivityMessageBox errMsgBox( GetAppInstance(), this, LOG_INFO, "%s's %s", poFriend->getOnlineName(), DescribePluginAction( poFriend, ePluginType, ePluginAccess ).toStdString().c_str() );
+        ActivityMessageBox errMsgBox( GetAppInstance(), this, LOG_INFO, "%s's %s", poFriend->getOnlineName(), GuiParams::describePluginAction( poFriend, ePluginType, ePluginAccess ).toStdString().c_str() );
 		errMsgBox.exec();
 	}
 

@@ -79,6 +79,20 @@ void NetStatusAccum::onNetStatusChange( void )
                     }
                     else
                     {
+                        if( !m_NetworkHostAvail && m_Engine.getHasHostService( eHostServiceNetworkHost ) && m_WebsiteUrlsResolved && !m_IpAddr.empty() )
+                        {
+                            // normally if we are network host then we have a static ip and m_NetworkHostAvail is false
+                            // if we tested the connection and can direct connect and our ip is not the tested ip
+                            // then say host is available so the network bars in gui update
+                            EngineParams& engineParams = m_Engine.getEngineParams();
+                            std::string netHostAddr;
+                            engineParams.getLastHostWebsiteResolvedIp( netHostAddr );
+                            if( !netHostAddr.empty() && netHostAddr != m_IpAddr )
+                            {
+                                m_NetworkHostAvail = true;
+                            }
+                        }
+
                         internetStatus = eInternetCanDirectConnect;
                     }
                 }
@@ -320,6 +334,14 @@ void NetStatusAccum::setFirewallTestType( FirewallSettings::EFirewallTestType fi
 
         onNetStatusChange();
     }
+}
+
+//============================================================================
+void NetStatusAccum::setWebsiteUrlsResolved( bool resolved )
+{
+    m_AccumMutex.lock();
+    m_WebsiteUrlsResolved = resolved;
+    m_AccumMutex.unlock();
 }
 
 //============================================================================

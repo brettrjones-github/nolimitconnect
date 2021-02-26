@@ -107,3 +107,11 @@ void HostSearchEntry::fillSearchReplyBlob( BinaryBlob& blob )
 {
     m_PluginSetting.toBinary( blob );
 }
+
+//============================================================================
+bool HostSearchEntry::addToBlob( PktBlobEntry& entryBlob )
+{
+    bool result = m_Ident.addToBlob( entryBlob );
+    result &= m_PluginSetting.addToBlob( entryBlob );
+    return result;
+}

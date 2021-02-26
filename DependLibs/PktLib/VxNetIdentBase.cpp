@@ -75,7 +75,7 @@ bool VxNetIdentBase::addToBlob( PktBlobEntry& blob )
 bool VxNetIdentBase::extractFromBlob( PktBlobEntry& blob )
 {
     bool result = VxConnectInfo::extractFromBlob( blob );
-    result &= VxOnlineStatusFlags::addToBlob( blob );
+    result &= VxOnlineStatusFlags::extractFromBlob( blob );
     result &= blob.getValue( m_u8ResBase );
     result &= blob.getValue( m_u8OfferCnt );
     result &= blob.getValue( m_u8ReplyCnt );
@@ -164,7 +164,7 @@ void VxNetIdentBase::setRejectedTruthCount( uint16_t rejectedCnt )
 }
 
 //============================================================================
-uint16_t	VxNetIdentBase::getRejectedTruthCount()
+uint16_t VxNetIdentBase::getRejectedTruthCount()
 {
 	return ntohs( m_u16RejectedTruthsCnt );
 }

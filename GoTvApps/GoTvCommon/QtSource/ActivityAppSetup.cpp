@@ -16,6 +16,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -70,7 +71,7 @@ void ActivityAppSetup::slotCopyResult( QObject * workerObj, int rc, qint64 bytes
     else
     {
         LogMsg( LOG_INFO, "Setup copied %lld bytes", bytesCopied );
-        QString bytesStr = GuiHelpers::describeFileLength( bytesCopied );
+        QString bytesStr = GuiParams::describeFileLength( bytesCopied );
 
         QMessageBox::information( this, QObject::tr("Setup completed"), QObject::tr( "Setup success. Bytes Copied " ) + bytesStr, QMessageBox::Ok );
         close();

@@ -117,43 +117,43 @@ void PopupMenu::showFriendMenu( VxNetIdent * poSelectedFriend )
 	addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon(eMyIconPermissions), QObject::tr( "Change Friendship") );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeWebServer );
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeWebServer, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeWebServer, ePluginAccess );
 	addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeWebServer, ePluginAccess )), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryboard );
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeStoryboard, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeStoryboard, ePluginAccess );
 	addMenuItem( (int)ePluginTypeStoryboard, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeStoryboard, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeMessenger );
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeMessenger, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeMessenger, ePluginAccess );
 	addMenuItem( (int)ePluginTypeMessenger, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeMessenger, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeVideoPhone);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeVideoPhone, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeVideoPhone, ePluginAccess );
 	addMenuItem( (int)ePluginTypeVideoPhone, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeVideoPhone, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeVoicePhone);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeVoicePhone, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeVoicePhone, ePluginAccess );
 	addMenuItem( (int)ePluginTypeVoicePhone, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeVoicePhone, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeTruthOrDare);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeTruthOrDare, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeTruthOrDare, ePluginAccess );
 	addMenuItem( (int)ePluginTypeTruthOrDare, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeTruthOrDare, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeCamServer);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeCamServer, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeCamServer, ePluginAccess );
 	addMenuItem( (int)ePluginTypeCamServer, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeCamServer, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeFileXfer);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeFileXfer, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileXfer, ePluginAccess );
 	addMenuItem( (int)ePluginTypeFileXfer, getMyIcons().getIcon(getMyIcons().getPluginIcon( ePluginTypeFileXfer, ePluginAccess ) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeFileServer);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeFileServer, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileServer, ePluginAccess );
 	addMenuItem( (int)ePluginTypeFileServer, getMyIcons().getIcon(getMyIcons().getPluginIcon(ePluginTypeFileServer, ePluginAccess) ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeRelay);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeRelay, ePluginAccess );
+	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeRelay, ePluginAccess );
 	addMenuItem( (int)ePluginTypeRelay, getMyIcons().getIcon(getMyIcons().getPluginIcon(ePluginTypeRelay, ePluginAccess ) ), strAction );
 
 	exec();

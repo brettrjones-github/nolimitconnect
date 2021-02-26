@@ -19,6 +19,7 @@
 #include "ActivityInformation.h"
 #include "AppletBase.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -58,7 +59,7 @@ void PermissionWidget::updateUi( void )
         return;
     }
 
-    ui.m_PluginLabel->setText( GuiHelpers::describePlugin( m_PluginType, false ).c_str() );
+    ui.m_PluginLabel->setText( GuiParams::describePlugin( m_PluginType, false ).c_str() );
     EFriendState pluginPermission = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );
     if( !m_OrigPermissionIsSet )
     {

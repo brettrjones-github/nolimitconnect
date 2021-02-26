@@ -41,6 +41,35 @@ public:
     /// @brief camera video size mulitiplied by display scale
     static QSize                getSnapshotSize( void );
 
+    static QString				describeAge( EAgeType gender );
+    static QString				describeAge( int age );
+    static QString				describeCommError( ECommErr commErr );
+    static QString				describeContentCatagory( EContentCatagory content );
+    static QString				describeContentRating( EContentRating content );
+    static QString				describeFriendState( EFriendState eFriendState );
+    static QString				describeGender( EGenderType gender );
+    static QString				describeHostSearchStatus( EHostSearchStatus searchStatus );
+    static QString				describeLanguage( ELanguageType language );
+    //! Describe permission level ( and/or friend state )
+    static QString				describePermissionLevel( EFriendState friendState );
+    //! Describe type of plugin
+    static QString				describePluginAccess( EPluginAccess accessState );
+    //! Describe action user can take for given plugin and access
+    static QString				describePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess );
+    static QString				describePluginPermission( EFriendState ePluginPermission );
+    static QString				describePluginType( EPluginType ePluginType );
+    static std::string			describePlugin( EPluginType ePluginType, bool rmtInitiated );
+    static QString				describeEXferState( EXferState xferState );
+    static QString				describeEXferError( EXferError xferError );
+    static QString				describeFileLength( uint64_t fileLen );
+    static QString				describeOrientation( Qt::Orientation qtOrientation );
+
+    static QString              describeStatus( EHostAnnounceStatus hostStatus );
+    static QString              describeStatus( EHostJoinStatus hostStatus );
+    static QString              describeStatus( EHostSearchStatus hostStatus );
+    static QString				describeResponse( EOfferResponse eOfferResponse );
+
+
 protected:
 
     static QColor				m_OnlineBkgColor;

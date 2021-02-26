@@ -27,5 +27,4 @@ protected:
     virtual void				onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
     //=== vars ===//
-    HostServerMgr               m_HostServerMgr;
 };

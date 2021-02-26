@@ -14,6 +14,7 @@
 //============================================================================
 #include <app_precompiled_hdr.h>
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include "ActivityBase.h"
 #include "AppletBase.h"
@@ -65,52 +66,6 @@ bool GuiHelpers::isCameraSourceAvailable()
 }
 
 //============================================================================
-const char * GuiHelpers::describeResponse( EOfferResponse eOfferResponse )
-{
-	switch( eOfferResponse )
-	{
-	case eOfferResponseAccept:
-		return "Offer Accepted";
-
-	case eOfferResponseReject:
-		return "Offer Rejected";
-
-	case eOfferResponseBusy:
-		return "Busy";
-
-	case eOfferResponseCancelSession:
-		return "Session Canceled";
-
-	case eOfferResponseEndSession:
-		return "User Ended Session";
-
-	case eOfferResponseUserOffline:
-		return "User Is Offline";
-
-	default:
-		return "Session Ended";
-	}
-}
-
-//============================================================================
-const char * GuiHelpers::describePluginPermission( EFriendState ePluginPermission )
-{
-	switch(ePluginPermission)
-	{
-	case eFriendStateIgnore:
-		return "Disabled";
-	case eFriendStateAnonymous:
-		return "Anonymous";
-	case eFriendStateGuest:
-		return "Guest";
-	case eFriendStateFriend:
-		return "Friends";
-	default:
-		return "Unknown";
-	}
-}
-
-//============================================================================
 QString GuiHelpers::getJustFileName( QString& fileNameAndPath )
 {
 	QString justFileName("");
@@ -159,7 +114,7 @@ void GuiHelpers::splitPathAndFileName( QString& fileNameAndPath, QString& retFil
 //============================================================================
 QString GuiHelpers::getAvailableStorageSpaceText()
 {
-    return describeFileLength( VxFileUtil::getDiskFreeSpace( VxGetAppDirectory( eAppDirRootDataStorage ).c_str() ) );
+    return GuiParams::describeFileLength( VxFileUtil::getDiskFreeSpace( VxGetAppDirectory( eAppDirRootDataStorage ).c_str() ) );
 }
 
 //============================================================================
@@ -288,263 +243,6 @@ int GuiHelpers::calculateTextHeight( QFontMetrics& fontMetrics, QString textStr 
 	}
 
 	return textHeight;
-}
-
-//============================================================================
-QString GuiHelpers::describeEXferError( EXferError xferError )
-{
-	switch( xferError )
-	{
-	case eXferErrorNone:
-		return QObject::tr("No Error");
-	case eXferErrorDisconnected:
-		return QObject::tr("Disconnected");
-	case eXferErrorPermission:
-		return QObject::tr("Permission Error");
-	case eXferErrorFileNotFound:
-		return QObject::tr("File Not Found");
-	case eXferErrorCanceled:
-		return QObject::tr("Canceled");
-	case eXferErrorBadParam:
-		return QObject::tr("Bad Param");
-	case eXferErrorAtSrc:
-		return QObject::tr("Error At Source");
-	case eXferErrorBusy:
-		return QObject::tr("Busy");
-	case eXferErrorAlreadyDownloading:
-		return QObject::tr("Already Downloading");
-	case eXferErrorAlreadyDownloaded:
-		return QObject::tr("Already Downloaded");
-	case eXferErrorAlreadyUploading:
-		return QObject::tr("Already Uploading");
-	case eXferErrorFileCreateError:
-		return QObject::tr("File Create Error");
-	case eXferErrorFileOpenAppendError:
-		return QObject::tr("File Append Error");
-	case eXferErrorFileOpenError:
-		return QObject::tr("File Open Error");
-	case eXferErrorFileSeekError:
-		return QObject::tr("Seek Error");
-	case eXferErrorFileReadError:
-		return QObject::tr("Read Error");
-	case eXferErrorFileWriteError:
-		return QObject::tr("Write Error");
-	case eXferErrorFileMoveError:
-		return QObject::tr("Move File Error");
-	default:
-		return QObject::tr("Unknown Error");
-	}
-}
-
-//============================================================================
-QString GuiHelpers::describeEXferState( EXferState xferState )
-{
-	switch( xferState )
-	{
-	case eXferStateUploadNotStarted:
-		return QObject::tr("Upload Not Started");
-	case eXferStateWaitingOfferResponse:
-		return QObject::tr("Waiting Response");
-	case eXferStateInUploadQue:
-		return QObject::tr("In Upload Que");
-	case eXferStateBeginUpload:
-		return QObject::tr("Start Upload");
-	case eXferStateInUploadXfer:
-		return QObject::tr("Uploading");
-	case eXferStateCompletedUpload:
-		return QObject::tr("Completed Upload");
-	case eXferStateUserCanceledUpload:
-		return QObject::tr("Upload Canceled");
-	case eXferStateUploadOfferRejected:
-		return QObject::tr("Offer Rejected");
-	case eXferStateUploadError:
-		return QObject::tr("ERROR");
-	case eXferStateDownloadNotStarted:
-		return QObject::tr("Download Not Started");
-	case eXferStateInDownloadQue:
-		return QObject::tr("In Download Que");
-	case eXferStateBeginDownload:
-		return QObject::tr("Start Download");
-	case eXferStateInDownloadXfer:
-		return QObject::tr("Downloading");
-	case eXferStateCompletedDownload:
-		return QObject::tr("Completed Download");
-	case eXferStateUserCanceledDownload:
-		return QObject::tr("Download Canceled");
-	case eXferStateDownloadError:
-		return QObject::tr("ERROR");
-	case eXferStateUnknown:
-	default:
-		return QObject::tr("Unknown State");
-	}
-}
-
-//============================================================================
-QString GuiHelpers::describeStatus( EHostAnnounceStatus hostStatus )
-{
-    switch( hostStatus )
-    {
-    case eHostAnnounceUnknown:
-        return QObject::tr( "Host Announce Status Unknown" );
-    case eHostAnnounceInvalidUrl:
-        return QObject::tr( "Host Announce Invalid Url" );
-    case eHostAnnounceQueryIdInProgress:
-        return QObject::tr( "Host Announce Querying Id In Progress" );
-    case eHostAnnounceQueryIdSuccess:
-        return QObject::tr( "Host Announce Querying Id Success" );
-    case eHostAnnounceQueryIdFailed:
-        return QObject::tr( "Host Announce Query Id Failed" );
-    case eHostAnnounceConnecting:
-        return QObject::tr( "Host Announce Connecting" );
-    case eHostAnnounceConnectSuccess:
-        return QObject::tr( "Host Announce Connect Success" );
-    case eHostAnnounceConnectFailed:
-        return QObject::tr( "Host Announce Connect Failed" );
-    case eHostAnnounceSendingJoinRequest:
-        return QObject::tr( "Host Announce Sending Request" );
-    case eHostAnnounceSendJoinRequestFailed:
-        return QObject::tr( "Host Announce Send Request Failed" );
-    case eHostAnnounceSuccess:
-        return QObject::tr( "Host Announce Success" );
-    case eHostAnnounceFail:
-        return QObject::tr( "Host Announce Failed" );
-    case eHostAnnounceFailPermission:
-        return QObject::tr( "Host Announce Fail Permission" );
-    case eHostAnnounceFailConnectDropped:
-        return QObject::tr( "Host Announce Fail Connect Dropped" );
-    case eHostAnnounceInvalidParam:
-        return QObject::tr( "Host Announce Invalid Param" );
-    default:
-        return QObject::tr( "Invalid Host Param" );
-    };
-}
-
-//============================================================================
-QString GuiHelpers::describeStatus( EHostJoinStatus hostStatus )
-{
-    switch( hostStatus )
-    {
-    case eHostJoinUnknown:
-        return QObject::tr( "Host Join Status Unknown " );
-    case eHostJoinInvalidUrl:
-        return QObject::tr( "Host Join Invalid Url" );
-    case eHostJoinQueryIdInProgress:
-        return QObject::tr( "Host Join Querying Id In Progress" );
-    case eHostJoinQueryIdSuccess:
-        return QObject::tr( "Host Join Querying Id Success" );
-    case eHostJoinQueryIdFailed:
-        return QObject::tr( "Host Join Query Id Failed" );
-    case eHostJoinConnecting:
-        return QObject::tr( "Host Join Connecting" );
-    case eHostJoinConnectSuccess:
-        return QObject::tr( "Host Join Connect Success" );
-    case eHostJoinConnectFailed:
-        return QObject::tr( "Host Join Connect Failed" );
-    case eHostJoinSendingJoinRequest:
-        return QObject::tr( "Host Join Sending Request" );
-    case eHostJoinSendJoinRequestFailed:
-        return QObject::tr( "Host Join Send Request Failed" );
-    case eHostJoinSuccess:
-        return QObject::tr( "Host Join Success" );
-    case eHostJoinFail:
-        return QObject::tr( "Host Join Failed" );
-    case eHostJoinFailPermission:
-        return QObject::tr( "Host Join Fail Permission" );
-    case eHostJoinFailConnectDropped:
-        return QObject::tr( "Host Join Fail Connect Dropped" );
-    case eHostJoinInvalidParam:
-        return QObject::tr( "Host Join Invalid Param" );
-    default:
-        return QObject::tr( "Invalid Host Param" );
-    }
-}
-
-//============================================================================
-QString GuiHelpers::describeStatus( EHostSearchStatus hostStatus )
-{
-    switch( hostStatus )
-    {
-    case eHostSearchUnknown:
-        return QObject::tr( "Host Search Status Unknown " );
-    case eHostSearchInvalidUrl:
-        return QObject::tr( "Host Search Invalid Url" );
-    case eHostSearchQueryIdInProgress:
-        return QObject::tr( "Host Search Querying Id In Progress" );
-    case eHostSearchQueryIdSuccess:
-        return QObject::tr( "Host Search Querying Id Success" );
-    case eHostSearchQueryIdFailed:
-        return QObject::tr( "Host Search Query Id Failed" );
-    case eHostSearchConnecting:
-        return QObject::tr( "Host Search Connecting" );
-    case eHostSearchConnectSuccess:
-        return QObject::tr( "Host Search Connect Success" );
-    case eHostSearchConnectFailed:
-        return QObject::tr( "Host Search Connect Failed" );
-    case eHostSearchSendingSearchRequest:
-        return QObject::tr( "Host Search Sending Request" );
-    case eHostSearchSendSearchRequestFailed:
-        return QObject::tr( "Host Search Send Request Failed" );
-    case eHostSearchSuccess:
-        return QObject::tr( "Host Search Success" );
-    case eHostSearchFail:
-        return QObject::tr( "Host Search Failed" );
-    case eHostSearchFailPermission:
-        return QObject::tr( "Host Search Fail Permission" );
-    case eHostSearchFailConnectDropped:
-        return QObject::tr( "Host Search Fail Connect Dropped" );
-    case eHostSearchInvalidParam:
-        return QObject::tr( "Host Search Invalid Param" );
-    default:
-        return QObject::tr( "Invalid Host Param" );
-    }
-}
-
-//============================================================================
-QString GuiHelpers::describeFileLength( uint64_t fileLen )
-{
-    QString scaleText;
-    char buf[ 128 ];
-	if( fileLen >= 1000000000000ULL )
-	{
-        scaleText = QObject::tr( "TB" );
-		sprintf( buf, "%3.1f ", (double)(fileLen) / 1000000000000.0);
-	}
-	else if( fileLen >= 1000000000ULL )
-	{
-        scaleText = QObject::tr( "GB" );
-        sprintf( buf, "%3.1f ", (double)(fileLen) / 1000000000.0);
-	}
-	else if( fileLen >= 1000000 )
-	{
-        scaleText = QObject::tr( "MB" );
-        sprintf( buf, "%3.1fMB ", (double)(fileLen) / 1000000.0);
-	}
-	else if( fileLen >= 1000 )
-	{
-        scaleText = QObject::tr( "KB" );
-        sprintf( buf, "%3.1fKB ", (double)(fileLen) / 1000.0);
-	}
-	else
-	{
-        scaleText = QObject::tr( "Bytes" );
-        sprintf( buf, "%3.1fBytes ", (double)fileLen );
-	}
-
-	QString strFormatedLen = buf;
-	return strFormatedLen + scaleText;
-}
-
-//============================================================================
-QString GuiHelpers::describeOrientation( Qt::Orientation qtOrientation )
-{
-    switch( qtOrientation )
-    {
-    case Qt::Horizontal:
-        return QObject::tr("Horizontal");
-    case Qt::Vertical:
-    default:
-        return QObject::tr("Vertical");
-    }
 }
 
 //============================================================================
@@ -891,7 +589,7 @@ bool GuiHelpers::getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginTy
 }
 
 //============================================================================
-std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiated )
+std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiated )
 {
     std::string strPluginDesc = "";
 
@@ -1414,7 +1112,7 @@ void GuiHelpers::fillGender( QComboBox * comboBox )
         comboBox->clear();
         for( int i = 0; i < eMaxGenderType; i++ )
         {
-            comboBox->addItem( describeGender( (EGenderType)i ) );
+            comboBox->addItem( GuiParams::describeGender( (EGenderType)i ) );
         }
     }
 }
@@ -1440,22 +1138,6 @@ bool GuiHelpers::setGender( QComboBox * comboBox, EGenderType gender)
 }
 
 //============================================================================
-QString GuiHelpers::describeGender( EGenderType gender )
-{
-    switch( gender )
-    {
-    case eGenderTypeUnspecified:
-        return QObject::tr( "Any" );
-    case eGenderTypeMale:
-        return QObject::tr( "Male" );
-    case eGenderTypeFemale:
-        return QObject::tr( "Female" );
-    default:
-        return QObject::tr( "Unknown" );
-    }
-}
-
-//============================================================================
 uint8_t GuiHelpers::genderToIndex( EGenderType gender )
 {
     if( ( gender >= 0 ) && ( gender < eMaxGenderType ) )
@@ -1474,7 +1156,7 @@ void GuiHelpers::fillAge( QComboBox * comboBox )
         comboBox->clear();
         for( int i = 0; i < eMaxAgeType; i++ )
         {
-            comboBox->addItem( describeAge( (EAgeType)i ) );
+            comboBox->addItem(  GuiParams::describeAge( (EAgeType)i ) );
         }
     }
 }
@@ -1507,7 +1189,7 @@ bool GuiHelpers::setAge( QComboBox * comboBox, EAgeType ageType)
 }
 
 //============================================================================
-QString GuiHelpers::describeAge( EAgeType gender )
+QString GuiParams::describeAge( EAgeType gender )
 {
     switch( gender )
     {
@@ -1523,7 +1205,7 @@ QString GuiHelpers::describeAge( EAgeType gender )
 }
 
 //============================================================================
-QString GuiHelpers::describeAge( int age )
+QString GuiParams::describeAge( int age )
 {
     QString ageStr( age );
     if( ( age >= 80 ) || ( age < 0 ) )
@@ -1565,7 +1247,7 @@ void GuiHelpers::fillContentRating( QComboBox * comboBox )
         comboBox->clear();
         for( int i = 0; i < eMaxContentRating; i++ )
         {
-            comboBox->addItem( describeContentRating( (EContentRating)i ) );
+            comboBox->addItem(  GuiParams::describeContentRating( (EContentRating)i ) );
         }
     }
 }
@@ -1598,29 +1280,6 @@ bool GuiHelpers::setContentRating( QComboBox * comboBox, EContentRating contentR
 }
 
 //============================================================================
-QString GuiHelpers::describeContentRating( EContentRating content )
-{
-    switch( content )
-    {
-    case eContentRatingUnspecified:
-        return QObject::tr( "Any" );
-    case eContentRatingFamily:
-        return QObject::tr( "Family" );
-    case eContentRatingAdult:
-        return QObject::tr( "Adult" );
-    case eContentRatingXXX:
-        return QObject::tr( "XXX" );
-    case eContentRatingDarkWeb:
-        return QObject::tr( "DarkWeb" );
-    case eContentRatingPersonal:
-        return QObject::tr( "Personal" );
-
-    default:
-        return QObject::tr( "Unknown" );
-    }
-}
-
-//============================================================================
 uint8_t GuiHelpers::contentRatingToIndex( EContentRating rating )
 {
     if( ( rating >= 0 ) && ( rating < eMaxContentRating ) )
@@ -1639,33 +1298,8 @@ void GuiHelpers::fillContentCatagory( QComboBox * comboBox )
         comboBox->clear();
         for( int i = 0; i < eMaxContentCatagory; i++ )
         {
-            comboBox->addItem( describeContentCatagory( ( EContentCatagory )i ) );
+            comboBox->addItem(  GuiParams::describeContentCatagory( ( EContentCatagory )i ) );
         }
-    }
-}
-
-//============================================================================
-QString GuiHelpers::describeContentCatagory( EContentCatagory content )
-{
-    switch( content )
-    {
-    case eContentCatagoryUnspecified:
-        return QObject::tr( "Any" );
-    case eContentCatagoryVideo:
-        return QObject::tr( "Video" );
-    case eContentCatagoryAudio:
-        return QObject::tr( "Auidio" );
-    case eContentCatagoryImage:
-        return QObject::tr( "Image" );
-    case eContentCatagoryText:
-        return QObject::tr( "Text" );
-    case eContentCatagoryPersonal:
-        return QObject::tr( "Personal" );
-    case eContentCatagoryOther:
-        return QObject::tr( "Other" );
-
-    default:
-        return QObject::tr( "Unknown" );
     }
 }
 
@@ -1688,7 +1322,7 @@ void GuiHelpers::fillLanguage( QComboBox * comboBox )
         comboBox->clear();
         for( int i = 0; i < eMaxLanguageType; i++ )
         {
-            comboBox->addItem( describeLanguage( (ELanguageType)i ) );
+            comboBox->addItem(  GuiParams::describeLanguage( (ELanguageType)i ) );
         }
     }
 }
@@ -1721,12 +1355,6 @@ bool GuiHelpers::setLanguage( QComboBox * comboBox, ELanguageType language)
 }
 
 //============================================================================
-QString GuiHelpers::describeLanguage( ELanguageType language )
-{
-    return AppTranslate::describeLanguage( language );
-}
-
-//============================================================================
 uint16_t GuiHelpers::languageToIndex( ELanguageType language )
 {
     if( ( language >= 0 ) && ( language < eMaxLanguageType ) )
@@ -1743,11 +1371,11 @@ void GuiHelpers::fillPermissionComboBox( QComboBox * permissionComboBox )
     if( permissionComboBox )
     {
         permissionComboBox->clear();
-        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateAdmin ) );
-        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateFriend ) );
-        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateGuest ) );
-        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateAnonymous ) );
-        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateIgnore ) );
+        permissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateAdmin ) );
+        permissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateFriend ) );
+        permissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateGuest ) );
+        permissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateAnonymous ) );
+        permissionComboBox->addItem( GuiParams::describePermissionLevel( eFriendStateIgnore ) );
     }
 }
 

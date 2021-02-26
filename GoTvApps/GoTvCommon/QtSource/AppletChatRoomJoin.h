@@ -14,6 +14,9 @@
 //============================================================================
 
 #include "AppletClientBase.h"
+
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
+
 #include "ui_AppletChatRoomJoin.h"
 
 class AppletChatRoomJoin : public AppletClientBase
@@ -35,7 +38,7 @@ protected slots:
     void						slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
     void						slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
     void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
-    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting );
+    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
     void                        slotJoinDefaultChatRoom( void );
     void                        slotCopyResultToClipboardClicked( void );

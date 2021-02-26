@@ -93,7 +93,7 @@ void PktBlobEntry::setDataIdx( int len )
 //============================================================================
 int16_t PktBlobEntry::getDataIdx( void ) const        
 { 
-    return m_UseNetworkOrder ? htons(m_DataIdx) : m_BlobLen; 
+    return m_UseNetworkOrder ? htons(m_DataIdx) : m_DataIdx; 
 }
 
 //============================================================================
@@ -210,6 +210,7 @@ bool PktBlobEntry::setValue( ELanguageType& eValue )
             *data = u16Value;
         }
 
+        incDataWrite( sizeof( uint16_t ) );
         result = true;
     }
 
@@ -252,8 +253,10 @@ bool PktBlobEntry::setValue( const PluginId& pluginId )
     bool result = false;
     if( haveRoom( 17 ) )
     {
+        result = true;
         result &= setValue( const_cast<PluginId&>(pluginId).getOnlineId() );
-        result &= setValue( const_cast<PluginId&>(pluginId).getPluginType() );
+        EPluginType pluginType = pluginId.getPluginType();
+        result &= setValue( pluginType );
     }
 
     return result;
@@ -656,8 +659,11 @@ bool PktBlobEntry::getValue( PluginId& pluginId )
     bool result = false;
     if( haveData( 17 ) )
     {
+        result = true;
         result &= getValue( pluginId.getOnlineId() );
-        result &= getValue( pluginId.getPluginType() );
+        EPluginType pluginType;
+        result &= getValue( pluginType );
+        pluginId.setPluginType( pluginType );
     }
 
     return result;
