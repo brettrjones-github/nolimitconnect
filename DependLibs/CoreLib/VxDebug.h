@@ -46,36 +46,36 @@ enum ELogModule
 {
     eLogNone = 0,
 
-    eLogMulticast     = 0x0001,
-    eLogConnect       = 0x0002,
-    eLogListen        = 0x0004,
-    eLogSkt           = 0x0008,
+    eLogMulticast       = 0x0001, // 1
+    eLogConnect         = 0x0002, // 2
+    eLogListen          = 0x0004, // 3
+    eLogSkt             = 0x0008, // 4
 
-    eLogPkt           = 0x0010,
-    eLogNetAccessStatus = 0x0020,  // internet and p2p access status
-    eLogNetworkState  = 0x0040,
-    eLogNetworkMgr    = 0x0080,
+    eLogPkt             = 0x0010, // 5
+    eLogNetAccessStatus = 0x0020, // 6 internet and p2p access status
+    eLogNetworkState    = 0x0040, // 7
+    eLogNetworkMgr      = 0x0080, // 8
 
-    eLogIsPortOpenTest = 0x0100,
-    eLogThread        = 0x0200,
-    eLogStorage       = 0x0400, // mostly user and app directories
-    eLogAssets        = 0x0800,
+    eLogIsPortOpenTest  = 0x0100, // 9
+    eLogThread          = 0x0200, // 10
+    eLogStorage         = 0x0400, // 11 mostly user and app directories
+    eLogAssets          = 0x0800, // 12
 
-    eLogPlugins       = 0x1000,
-    eLogWindowPositions = 0x2000,
-    eLogStartup       = 0x4000,
-    eLogHosts         = 0x8000,
+    eLogPlugins         = 0x1000, // 13
+    eLogWindowPositions = 0x2000, // 14
+    eLogStartup         = 0x4000, // 15
+    eLogHosts           = 0x8000, // 16
 
-    eLogPlayer        = 0x00010000,
-    eLogTcpData       = 0x00020000,
-    eLogUdpData       = 0x00040000,
-    eLogAcceptConn    = 0x00080000,
+    eLogPlayer          = 0x00010000, // 17
+    eLogTcpData         = 0x00020000, // 18
+    eLogUdpData         = 0x00040000, // 19
+    eLogAcceptConn      = 0x00080000, // 20
 
-    eLogNetworkRelay  = 0x00100000,
-    eLogNetService    = 0x00200000,
-    eLogRunTest       = 0x00400000,
-    eLogHostConnect   = 0x00800000,
-    eLogHostSearch    = 0x01000000,
+    eLogNetworkRelay    = 0x00100000, // 21
+    eLogNetService      = 0x00200000, // 22
+    eLogRunTest         = 0x00400000, // 23
+    eLogHostConnect     = 0x00800000, // 24
+    eLogHostSearch      = 0x01000000, // 25
 
     eMaxLogModule
 };

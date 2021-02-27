@@ -23,7 +23,7 @@
 
 #include <map>
 
-#define MIN_HOST_RX_UPDATE_TIME_MS         30000 // must rx a host announce in this time frame or host is considered offline
+#define MIN_HOST_RX_UPDATE_TIME_MS         (30 * 60 * 1000) // must rx a host announce in this time frame or host is considered offline
 
 class ConnectionMgr;
 class P2PEngine;

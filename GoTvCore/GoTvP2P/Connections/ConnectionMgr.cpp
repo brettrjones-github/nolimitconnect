@@ -343,6 +343,7 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
         return eConnectStatusBadParam;
     }
 
+    LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s", DescribeConnectReason( connectReason ) );
     // first see if we already have a connection to the requested onlineId
     VxSktBase *sktBase = nullptr;
     m_ConnectionMutex.lock();

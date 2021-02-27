@@ -81,6 +81,7 @@ void AppletChatRoomJoinSearch::setStatusLabel( QString strMsg )
 void AppletChatRoomJoinSearch::setInfoLabel( QString strMsg )
 {
     ui.m_InfoLabel->setText( strMsg );
+    ui.m_InfoLabel->update();
 }
 
 //============================================================================

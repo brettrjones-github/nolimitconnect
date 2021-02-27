@@ -313,7 +313,7 @@ uint32_t AppSettings::getLogModules( void )
 {
     uint32_t logModuleFlags = 0;
 #if defined(DEBUG)
-    logModuleFlags = ( uint32_t )(
+    uint32_t logModuleFlagsDefault = ( uint32_t )(
         eLogMulticast
         | eLogConnect
         | eLogListen
@@ -333,7 +333,7 @@ uint32_t AppSettings::getLogModules( void )
         //| eLogPlayer
         //| eLogWindowPositions
         );
-    getIniValue( getAppShortName(), "LogModulessD", logModuleFlags, logModuleFlags );
+    getIniValue( getAppShortName(), "LogModulesD", logModuleFlags, logModuleFlagsDefault );
 #else
     getIniValue( getAppShortName(), "LogModules", logModuleFlags, logModuleFlags );
 #endif // defined(DEBUG)

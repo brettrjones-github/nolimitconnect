@@ -39,6 +39,8 @@ protected slots:
     void						slotClearAllModules( void );
 
 protected:
+    void                        showEvent( QShowEvent * ev ) override;
+
     void						connectSignals( void );
     void						updateDlgFromSettings( void );
     void						updateSettingsFromDlg( void );

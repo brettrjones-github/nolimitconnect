@@ -19,13 +19,46 @@
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "GuiParams.h"
 #include "MyIcons.h"
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/ObjectCommon.h>
 
-namespace
+//============================================================================
+QString describeLogModule( ELogModule logModule )
 {
+    switch( logModule )
+    {
+    case eLogNone: return QObject::tr( "Log None" );
+    case eLogMulticast: return QObject::tr( "Log Multicast" );
+    case eLogConnect: return QObject::tr( "Log Connect" );
+    case eLogListen : return QObject::tr( "Log Listen" );
+    case eLogSkt: return QObject::tr( "Log Skt" );
+    case eLogPkt: return QObject::tr( "Log Pkt" );
+    case eLogNetAccessStatus: return QObject::tr( "Log Net Access Status" );
+    case eLogNetworkState: return QObject::tr( "Log Network State" );
+    case eLogNetworkMgr: return QObject::tr( "Log Network Mgr" );
+    case eLogIsPortOpenTest: return QObject::tr( "Log Is Port Open Test" );
+    case eLogThread : return QObject::tr( "Log Thread" );
+    case eLogStorage: return QObject::tr( "Log Storage" );
+    case eLogAssets: return QObject::tr( "Log Assets" );
+    case eLogPlugins: return QObject::tr( "Log Plugins" );
+    case eLogWindowPositions: return QObject::tr( "Log Window Position" );
+    case eLogStartup: return QObject::tr( "Log Startup" );
+    case eLogHosts: return QObject::tr( "Log Hosts" );
+    case eLogPlayer: return QObject::tr( "Log Player" );
+    case eLogTcpData: return QObject::tr( "Log Tcp Data" );
+    case eLogUdpData: return QObject::tr( "Log Udp Data" );
+    case eLogAcceptConn: return QObject::tr( "Log Accept Connection" );
+    case eLogNetworkRelay: return QObject::tr( "Log Network Relay" );
+    case eLogNetService: return QObject::tr( "Log Net Service" );
+    case eLogRunTest: return QObject::tr( "Log Run Test" );
+    case eLogHostConnect: return QObject::tr( "Log Host Connect" );
+    case eLogHostSearch: return QObject::tr( "Log Host Search" );
+    default:
+        return QObject::tr( "Invalid Log Module" );
+    }
 }
 
 //============================================================================
@@ -35,7 +68,8 @@ AppletLogSettings::AppletLogSettings( AppCommon& app, QWidget * parent )
 {
 	setAppletType( eAppletLogSettings );
 	ui.setupUi( getContentItemsFrame() );
-    ui.m_LogModuleCheckBox_20->setVisible( false );
+    setTitleBarText( QObject::tr( "Log Settings" ) );
+    //ui.m_LogModuleCheckBox_20->setVisible( false );
 
     m_LogLevelList.push_back( ui.m_LogLevelCheckBox_1 );
     m_LogLevelList.push_back( ui.m_LogLevelCheckBox_2 );
@@ -67,6 +101,21 @@ AppletLogSettings::AppletLogSettings( AppCommon& app, QWidget * parent )
     m_LogModuleList.push_back( ui.m_LogModuleCheckBox_18 );
     m_LogModuleList.push_back( ui.m_LogModuleCheckBox_19 );
     m_LogModuleList.push_back( ui.m_LogModuleCheckBox_20 );
+    m_LogModuleList.push_back( ui.m_LogModuleCheckBox_21 );
+    m_LogModuleList.push_back( ui.m_LogModuleCheckBox_22 );
+    m_LogModuleList.push_back( ui.m_LogModuleCheckBox_23 );
+    m_LogModuleList.push_back( ui.m_LogModuleCheckBox_24 );
+    m_LogModuleList.push_back( ui.m_LogModuleCheckBox_25 );
+    m_LogModuleList.push_back( ui.m_LogModuleCheckBox_26 );
+
+    ui.m_LogModuleCheckBox_26->setVisible( false ); // not yet used
+    uint32_t logModuleMask = 0x01;
+    for( int i = 0; i < m_LogModuleList.size(); i++ )
+    {
+        m_LogModuleList[ i ]->setText( describeLogModule( (ELogModule)logModuleMask ) );
+        m_LogModuleList[i]->update();
+        logModuleMask = logModuleMask << 1;
+    }
 
     connectSignals();
     updateDlgFromSettings();
@@ -92,6 +141,21 @@ void AppletLogSettings::connectSignals( void )
 }
 
 //============================================================================
+void AppletLogSettings::showEvent( QShowEvent * ev )
+{
+    AppletBase::showEvent( ev );
+    uint32_t logModuleMask = 0x01;
+    for( int i = 0; i < m_LogModuleList.size(); i++ )
+    {
+        m_LogModuleList[ i ]->setText( describeLogModule( (ELogModule)logModuleMask ) );
+        m_LogModuleList[i]->update();
+        logModuleMask = logModuleMask << 1;
+    }
+
+
+}
+
+//============================================================================
 void AppletLogSettings::updateDlgFromSettings()
 {
     uint32_t logLevelFlags = m_LogMgr.getLogLevels();
@@ -104,7 +168,7 @@ void AppletLogSettings::updateDlgFromSettings()
 
     uint32_t logModuleFlags = m_LogMgr.getLogModules();
     uint32_t logModuleMask = 0x01;
-    for( int i = 0; i < m_LogLevelList.size(); i++ )
+    for( int i = 0; i < m_LogModuleList.size(); i++ )
     {
         m_LogModuleList[ i ]->setChecked( 0 != ( logModuleMask & logModuleFlags ) );
         logModuleMask = logModuleMask << 1;
@@ -130,7 +194,7 @@ void AppletLogSettings::updateSettingsFromDlg()
 
     uint32_t logModuleFlags = 0;
     uint32_t logModuleMask = 0x01;
-    for( int i = 0; i < m_LogLevelList.size(); i++ )
+    for( int i = 0; i < m_LogModuleList.size(); i++ )
     {
         if( m_LogModuleList[ i ]->isChecked() )
         {
@@ -140,7 +204,7 @@ void AppletLogSettings::updateSettingsFromDlg()
         logModuleMask = logModuleMask << 1;
     }
 
-    m_LogMgr.setLogModules( logLevelFlags );
+    m_LogMgr.setLogModules( logModuleFlags );
 }
 
 //============================================================================
