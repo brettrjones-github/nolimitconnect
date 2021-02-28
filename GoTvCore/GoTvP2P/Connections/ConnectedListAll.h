@@ -27,6 +27,7 @@ public:
 
     ConnectedInfo*              getOrAddConnectedInfo( BigListInfo* bigListInfo );
     ConnectedInfo*              getConnectedInfo( const VxGUID& onlineId );
+    void                        removeConnectedInfo( const VxGUID& onlineId );
 
     void                        onSktDisconnected( VxSktBase* sktBase );
 

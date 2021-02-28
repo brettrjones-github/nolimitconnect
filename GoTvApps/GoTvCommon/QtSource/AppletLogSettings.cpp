@@ -47,7 +47,7 @@ QString describeLogModule( ELogModule logModule )
     case eLogWindowPositions: return QObject::tr( "Log Window Position" );
     case eLogStartup: return QObject::tr( "Log Startup" );
     case eLogHosts: return QObject::tr( "Log Hosts" );
-    case eLogPlayer: return QObject::tr( "Log Player" );
+    case eLogMediaStream: return QObject::tr( "Log Media Stream" );
     case eLogTcpData: return QObject::tr( "Log Tcp Data" );
     case eLogUdpData: return QObject::tr( "Log Udp Data" );
     case eLogAcceptConn: return QObject::tr( "Log Accept Connection" );

@@ -29,7 +29,7 @@ class PktBlobEntry;
 class VxGUID
 {
 public:
-	VxGUID();
+	VxGUID() = default;
 	VxGUID( const VxGUID& rhs );
 	VxGUID( uint64_t u64HiPart, uint64_t u64LoPart );
     bool                        addToBlob( PktBlobEntry& blob );
@@ -96,8 +96,8 @@ public:
     static char                 nibbleToHex( uint8_t val );
 
 protected:
-	uint64_t					m_u64HiPart;
-	uint64_t					m_u64LoPart;
+    uint64_t					m_u64HiPart{ 0 };
+	uint64_t					m_u64LoPart{ 0 };
 };
 #pragma pack(pop)
 

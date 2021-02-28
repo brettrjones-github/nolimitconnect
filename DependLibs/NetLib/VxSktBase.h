@@ -292,8 +292,9 @@ public:
 	VxCrypto					m_RxCrypto;			    // encryption object for receive
 	VxKey						m_TxKey;				// encryption key for transmit
 	VxCrypto					m_TxCrypto;			    // encryption object for transmit
+    VxMutex                     m_TxMutex;              // tx thread mutex
 	uint8_t						m_u8TxSeqNum;			// sequence number used to thwart replay attacks
-
+    
 	VxSemaphore					m_RelayEventSemaphore;
 	VX_SKT_CALLBACK				m_pfnReceive = nullptr;			// receive function must be set by user
 

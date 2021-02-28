@@ -580,12 +580,12 @@ void PluginBaseMultimedia::onContactWentOnline( VxNetIdent * netIdent, VxSktBase
 }
 
 //============================================================================
-void PluginBaseMultimedia::onContactWentOffline( VxNetIdent *	netIdent, VxSktBase * sktBase )
+void PluginBaseMultimedia::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	LogMsg( LOG_INFO, "PluginBaseMultimedia::onContactWentOffline start\n" );
+	LogModule( eLogMediaStream, LOG_INFO, "PluginBaseMultimedia::onContactWentOffline start\n" );
 	m_VoiceFeedMgr.fromGuiStopPluginSession( true, netIdent );
 	m_VideoFeedMgr.fromGuiStopPluginSession( true, netIdent );
 	m_VideoFeedMgr.fromGuiStopPluginSession( true, &getEngine().getMyPktAnnounce() );
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
-	LogMsg( LOG_INFO, "PluginBaseMultimedia::onContactWentOffline done\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "PluginBaseMultimedia::onContactWentOffline done\n" );
 }

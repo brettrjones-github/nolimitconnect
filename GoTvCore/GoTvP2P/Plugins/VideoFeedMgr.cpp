@@ -62,7 +62,7 @@ void VideoFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * 
 void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent )
 {
 	enableVideoCapture( false, netIdent );
-	//LogMsg( LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession\n" );
+	//LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession\n" );
 
 	PktVideoFeedStatus oPkt;
 	oPkt.m_u8Status = 1;
@@ -72,11 +72,11 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * n
 	if( false == pluginIsLocked )
 	{ 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession PluginBase::AutoPluginLock autoLock start\n" );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession PluginBase::AutoPluginLock autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.lock(); 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession PluginBase::AutoPluginLock autoLock done\n" );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession PluginBase::AutoPluginLock autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
@@ -97,7 +97,7 @@ void VideoFeedMgr::fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * n
 	if( false == pluginIsLocked )
 	{ 
 		#ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession sessions done\n" );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::fromGuiStopPluginSession sessions done\n" );
 		#endif // DEBUG_AUTOPLUGIN_LOCK
 		pluginMutex.unlock(); 
 	}
@@ -163,7 +163,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent  )
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture true GUID already in list %s\n", netIdent->getOnlineName() );
+            LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::enableCapture true GUID already in list %s\n", netIdent->getOnlineName() );
 		}
 	}
 	else
@@ -209,7 +209,7 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent  )
 			{
 				if(  0 == m_GuidList.size() ) 
 				{
-					LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture eMediaInputVideoJpgSmall false %s\n", netIdent->getOnlineName() );
+                    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::enableCapture eMediaInputVideoJpgSmall false %s\n", netIdent->getOnlineName() );
 					m_PluginMgr.pluginApiWantMediaInput( m_Plugin.getPluginType(), eMediaInputVideoJpgSmall, false, (void *)m_Plugin.getPluginType() );
 					m_VideoJpgRequesed = false;
 					//LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture eMediaInputVideoPkts false %s\n", netIdent->getOnlineName() );
@@ -225,11 +225,11 @@ void VideoFeedMgr::enableVideoCapture( bool enable, VxNetIdent * netIdent  )
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture false GUID not found %s\n", netIdent->getOnlineName() );
+            LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::enableCapture false GUID not found %s\n", netIdent->getOnlineName() );
 		}
 	}
 
-	LogMsg( LOG_INFO, "VideoFeedMgr::enableCapture %d done %s\n", enable, netIdent->getOnlineName() );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::enableCapture %d done %s\n", enable, netIdent->getOnlineName() );
 }
 
 //============================================================================
@@ -260,7 +260,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 		|| ( picTotalLen > 4000000 )
 		|| ( poPktCastPic->getThisDataLen() > picTotalLen ) )
 	{
-		LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic invalid pic length %d\n", picTotalLen );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic invalid pic length %d\n", picTotalLen );
 		return;
 	}
 
@@ -269,7 +269,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 		|| ( 32 > picHeight  ) 
 		|| ( 1280 < picHeight ) )
 	{
-		LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic invalid pic width %d height %d\n", picWidth, picHeight );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic invalid pic width %d height %d\n", picWidth, picHeight );
 		return;
 	}
 
@@ -295,11 +295,11 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 	{
 		// picture was too big for one packet
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock start\n" );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 		PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock done\n" );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
 		P2PSession * poSession = m_SessionMgr.findOrCreateP2PSessionWithOnlineId( netIdent->getMyOnlineId(), sktBase, netIdent, true );
@@ -319,7 +319,7 @@ void VideoFeedMgr::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 		}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-		LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock destroy\n" );
+        LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPic autoLock destroy\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 }
@@ -334,11 +334,11 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHd
 									&oPkt ); 
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicChunk autoLock start\n" );
+    LogModule( eLogMediaStream,  LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicChunk autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicChunk autoLock done\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicChunk autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
 	PktVideoFeedPicChunk * poPktPicChunk = ( PktVideoFeedPicChunk * )pktHdr;
@@ -378,7 +378,7 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHd
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicChunk autoLock destroy\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicChunk autoLock destroy\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -386,11 +386,11 @@ void VideoFeedMgr::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHd
 void VideoFeedMgr::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock start\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock done\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 
 	P2PSession * poSession = m_SessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
@@ -400,7 +400,7 @@ void VideoFeedMgr::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr,
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock destroy\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::onPktVideoFeedPicAck autoLock destroy\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -411,11 +411,11 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 	std::map<VxGUID, PluginSessionBase *>&sessionList = m_SessionMgr.getSessions();
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock start\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock done\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
@@ -461,7 +461,7 @@ void VideoFeedMgr::callbackVideoPktPic( VxGUID& feedId, PktVideoFeedPic * pktVid
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock destroy\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPic autoLock destroy\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -472,11 +472,11 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 	std::map<VxGUID, PluginSessionBase *>&sessionList = m_SessionMgr.getSessions();
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock start\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock done\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock done\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	for( iter = sessionList.begin(); iter != sessionList.end(); ++iter )
 	{
@@ -506,6 +506,6 @@ void VideoFeedMgr::callbackVideoPktPicChunk( VxGUID& feedId, PktVideoFeedPicChun
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock destroy\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "VideoFeedMgr::callbackVideoPktPicChunk autoLock destroy\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }

@@ -707,23 +707,65 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
 								int				iDataLen,		// length of data
 								bool			bDisconnect )	// if true disconnect after send
 {
-	vx_assert( pDataIn );
-	vx_assert( iDataLen );
-	vx_assert( 0 == (iDataLen & 0x0f) );
+    if( !pDataIn )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted null data");
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        vx_assert( pDataIn );
+        return -1;
+    }
+
+    if( !iDataLen )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid data len %d", iDataLen);
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        vx_assert( pDataIn );
+        return -2;
+    }
+
 	if( 0 != (iDataLen & 0x0f) )
 	{
-		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid pkt len %d ( pkt type %d)\n", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
+		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        vx_assert( 0 == (iDataLen & 0x0f) );
+        return -3;
 	}
 
-	vx_assert( m_TxCrypto.isKeyValid() );
+    if( !m_TxCrypto.isKeyValid() )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid crypto key");
+        vx_assert( m_TxCrypto.isKeyValid() );
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        return -4;
+    }
+
 	// make copy of data so data is not destroyed
 	unsigned char * pu8Data = new unsigned char[ iDataLen ];
 	memcpy( pu8Data, pDataIn, iDataLen );
+
+    // protect in case we are sending from thread other than rx thread
+    m_TxMutex.lock();
 	// encrypt
 	RCODE rc =	m_TxCrypto.encrypt( pu8Data, iDataLen );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted: crypto error %d\n", rc );
+		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted: crypto error %d", rc );
 		vx_assert( 0 == rc );
 	}
 	else
@@ -732,40 +774,79 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
 		rc = this->sendData( (char *)pu8Data, iDataLen );
 	}
 
-	if( rc )
-	{
-	    LogModule( eLogTcpData, LOG_ERROR, "VxSktBase::txEncrypted: sendData error %d\n", rc );
-	}
-
 	delete[] pu8Data;
+    setLastSktError( rc );
+    m_TxMutex.unlock();
+    if( rc )
+    {
+        LogModule( eLogTcpData, LOG_ERROR, "VxSktBase::txEncrypted: sendData error %d", rc );
+    }
+
 	if( bDisconnect )
 	{
 		VxSleep( 50 );
 		closeSkt();
 	}
 
-	setLastSktError( rc );
 	return rc;
 }
 
 //============================================================================
 //! encrypt with given key then send.. does not affect session crypto
 RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
-								const char *	pDataIn,			// data to send
+								const char *	pDataIn,		// data to send
 								int				iDataLen,		// length of data
 								bool			bDisconnect )	// if true disconnect after send
 {
-	vx_assert( pDataIn );
-	vx_assert( iDataLen );
-	vx_assert( 0 == (iDataLen & 0x0f) );
+    if( !pDataIn )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 null data");
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        vx_assert( pDataIn );
+        return -1;
+    }
+
+    if( !iDataLen )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid data len %d", iDataLen);
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        vx_assert( pDataIn );
+        return -2;
+    }
+
+    if( 0 != (iDataLen & 0x0f) )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
+        if( bDisconnect )
+        {
+            closeSkt();
+        }
+
+        vx_assert( 0 == (iDataLen & 0x0f) );
+        return -3;
+    }
+
 	// make copy of data so data is not destroyed
 	char * pData = new char[ iDataLen ];
 	memcpy( pData, pDataIn, iDataLen );
+
+    // protect in case we are sending from thread other than rx thread
+    m_TxMutex.lock();
 	// encrypt
 	VxSymEncrypt( poKey, (char *)pData, iDataLen );
 	// send
 	RCODE rc = this->sendData( (char *)pData, iDataLen );
 	delete[] pData;
+    m_TxMutex.unlock();
+
 	if( bDisconnect )
 	{
 		closeSkt();

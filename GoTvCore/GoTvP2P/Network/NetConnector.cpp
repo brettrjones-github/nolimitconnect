@@ -684,8 +684,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 		//LogMsg( LOG_INFO, "sendMyPktAnnounce 2\n" ); 
 		if( false == sendMyPktAnnounce( connectInfo.getMyOnlineId(), sktBase, true, getShouldRequestTop10() ) )
 		{
-            if( IsLogEnabled( eLogConnect ) )
-			    LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
+            LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
 			return -1;
 		}
 
@@ -699,12 +698,10 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 	{
 
 		//LogMsg( LOG_INFO, "NetConnector::directConnectTo: connect FAIL to %s:%d\n", strIpAddress.c_str(), connectInfo.getOnlinePort() );
-        if( IsLogEnabled( eLogConnect ) )
-		    LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed\n" );
+        LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed\n" );
 	}
 
-    if( IsLogEnabled( eLogConnect ) )
-	    LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: done\n" );
+    LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: done\n" );
 
 	return rc;
 }

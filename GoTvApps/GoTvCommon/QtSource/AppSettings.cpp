@@ -330,7 +330,7 @@ uint32_t AppSettings::getLogModules( void )
         | eLogHosts
         | eLogTcpData
         | eLogUdpData
-        //| eLogPlayer
+        //| eLogMediaStream
         //| eLogWindowPositions
         );
     getIniValue( getAppShortName(), "LogModulesD", logModuleFlags, logModuleFlagsDefault );

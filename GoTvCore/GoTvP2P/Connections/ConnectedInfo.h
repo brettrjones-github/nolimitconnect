@@ -13,9 +13,8 @@
 //============================================================================
 #pragma once
 
-#include <GoTvInterface/IDefs.h>
+#include "HandshakeInfo.h"
 
-#include <CoreLib/VxGUID.h>
 #include <CoreLib/VxMutex.h>
 
 #include <vector>
@@ -41,21 +40,19 @@ public:
     P2PEngine&                  getEngine() { return m_Engine; }
     VxSktBase *                 getSktBase( void );
 
-    void                        addConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason );
-    void                        removeConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason, bool disconnectIfNotInUse );
+    void                        onHandshakeComplete( HandshakeInfo& shakeInfo );
+    void                        addConnectReason( HandshakeInfo& shakeInfo );
+    void                        removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason );
 
-    void                        onSktConnected( VxSktBase * sktBase );
     void                        onSktDisconnected( VxSktBase * sktBase );
+    void                        aboutToDelete( void );
 
 protected:
     P2PEngine&                  m_Engine;
     BigListInfo*                m_BigListInfo{ nullptr };
     VxGUID                      m_PeerOnlineId;
     VxMutex                     m_CallbackListMutex;
-    std::vector<EPluginType>    m_RmtPlugins;
-    std::vector<std::pair<IConnectRequestCallback*, EConnectReason>>    m_LclList;
-    std::vector<std::pair<IConnectRequestCallback*, EConnectReason>>    m_RmtList;
-    std::vector<VxSktBase *>    m_SktList;
+    std::vector<HandshakeInfo>  m_CallbackList;
 };
 
 

@@ -16,6 +16,7 @@
 #include "ConnectedListAll.h"
 #include "IConnectRequest.h"
 #include "ConnectReqInfo.h"
+#include "HandshakeList.h"
 
 #include <GoTvCore/GoTvP2P/Network/NetworkDefs.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
@@ -31,6 +32,7 @@ class P2PEngine;
 class BigListMgr;
 class VxSktBase;
 class VxPeerMgr;
+class HandshakeInfo;
 
 class ConnectionMgr : public NetAvailStatusCallbackInterface, public UrlActionResultInterface
 {
@@ -55,7 +57,7 @@ public:
                                                    EConnectReason connectReason = eConnectReasonUnknown );
     void                        doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
 
-    bool                        onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo* bigListInfo );
+    void                        onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo* bigListInfo );
     void                        onSktDisconnected( VxSktBase* sktBase );
 
     void						doNetConnectionsThread( void );
@@ -90,15 +92,17 @@ protected:
                                                     VxGUID&                     onlineId,
                                                     IConnectRequestCallback*    callback,
                                                     VxSktBase*&                 retSktBase,
+                                                    VxGUID                      sessionId,
                                                     EConnectReason              connectReason,
                                                     int					        iConnectTimeoutMs = DIRECT_CONNECT_TIMEOUT );  // how long to attempt connect
 
     EConnectStatus				directConnectTo(	VxConnectInfo&			    connectInfo,		 
-                                                    VxSktBase *&			    ppoRetSkt,		 
+                                                    VxSktBase *&			    ppoRetSkt,		
+                                                    VxGUID                      sessionId,
                                                     int						    iConnectTimeout = DIRECT_CONNECT_TIMEOUT,	 
                                                     bool					    useLanIp = false,
                                                     bool					    useUdpIp = false,
-                                                    IConnectRequestCallback*    callback = nullptr,
+                                                    IConnectRequestCallback*    callback = nullptr,                                                
                                                     EConnectReason              connectReason = eConnectReasonUnknown );	 
 
     EConnectStatus              directConnectTo(    std::string                 ipAddr,
@@ -106,6 +110,7 @@ protected:
                                                     VxGUID                      onlineId,
                                                     VxSktBase*&                 retSktBase,
                                                     IConnectRequestCallback*    callback,
+                                                    VxGUID                      sessionId,
                                                     EConnectReason              connectReason,
                                                     int					        iConnectTimeoutMs );
 
@@ -113,8 +118,9 @@ protected:
     void                        addConnectRequestToQue( ConnectReqInfo& connectRequest, bool addToHeadOfQue, bool replaceExisting );
     bool                        connectToContact(   VxConnectInfo&		connectInfo,
                                                     VxSktBase *&		ppoRetSkt,
+                                                    VxGUID&             sessionId,
                                                     bool&				retIsNewConnection );
-    bool                        connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& ppoRetSkt );
+    bool                        connectUsingTcp( VxConnectInfo& connectInfo, VxSktBase *& ppoRetSkt, VxGUID& sessionId );
     bool                        tryIPv6Connect( VxConnectInfo& connectInfo, VxSktBase *& ppoRetSkt );
 
     bool                        sendMyPktAnnounce(  VxGUID&				destinationId,
@@ -141,6 +147,7 @@ protected:
     BigListMgr&					m_BigListMgr;
     VxMutex						m_ConnectionMutex;
     ConnectedListAll            m_AllList;
+
     VxGUID                      m_MyOnlineId;
     PktAnnounce                 m_MyPktAnn;
     EInternetStatus             m_InternetStatus{ eInternetNoInternet };
@@ -152,7 +159,10 @@ protected:
 
     /// keep a cache of urls to online id to avoid time consuming query host id
     std::map<std::string, VxGUID>       m_UrlCache;
-    std::map<VxGUID, std::pair<IConnectRequestCallback*, EConnectReason>>   m_ConnectRequests;
+    //std::map<VxGUID, std::pair<IConnectRequestCallback*, EConnectReason>>   m_ConnectRequests;
+
+    HandshakeList               m_HandshakeList;
+    VxMutex                     m_HandshakeMutex;
 
     /// low level connect vars
     VxThread					m_NetConnectThread;

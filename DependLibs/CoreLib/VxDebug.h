@@ -66,7 +66,7 @@ enum ELogModule
     eLogStartup         = 0x4000, // 15
     eLogHosts           = 0x8000, // 16
 
-    eLogPlayer          = 0x00010000, // 17
+    eLogMediaStream     = 0x00010000, // 17
     eLogTcpData         = 0x00020000, // 18
     eLogUdpData         = 0x00040000, // 19
     eLogAcceptConn      = 0x00080000, // 20

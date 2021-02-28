@@ -924,6 +924,10 @@ QString GuiParams::describeStatus( EHostAnnounceStatus hostStatus )
         return QObject::tr( "Host Announce Query Id Failed" );
     case eHostAnnounceConnecting:
         return QObject::tr( "Host Announce Connecting" );
+    case eHostAnnounceHandshaking:
+        return QObject::tr( "Host Announce Handshaking" );
+    case eHostAnnounceHandshakeTimeout:
+        return QObject::tr( "Host Announce Handshake Timeout" );
     case eHostAnnounceConnectSuccess:
         return QObject::tr( "Host Announce Connect Success" );
     case eHostAnnounceConnectFailed:
@@ -942,6 +946,8 @@ QString GuiParams::describeStatus( EHostAnnounceStatus hostStatus )
         return QObject::tr( "Host Announce Fail Connect Dropped" );
     case eHostAnnounceInvalidParam:
         return QObject::tr( "Host Announce Invalid Param" );
+    case eHostAnnounceDone:
+        return QObject::tr( "Host Announce Done" );
     default:
         return QObject::tr( "Invalid Host Param" );
     };
@@ -964,6 +970,10 @@ QString GuiParams::describeStatus( EHostJoinStatus hostStatus )
         return QObject::tr( "Host Join Query Id Failed" );
     case eHostJoinConnecting:
         return QObject::tr( "Host Join Connecting" );
+    case eHostAnnounceHandshaking:
+        return QObject::tr( "Host Join Handshaking" );
+    case eHostAnnounceHandshakeTimeout:
+        return QObject::tr( "Host Join Handshake Timeout" );
     case eHostJoinConnectSuccess:
         return QObject::tr( "Host Join Connect Success" );
     case eHostJoinConnectFailed:
@@ -982,6 +992,8 @@ QString GuiParams::describeStatus( EHostJoinStatus hostStatus )
         return QObject::tr( "Host Join Fail Connect Dropped" );
     case eHostJoinInvalidParam:
         return QObject::tr( "Host Join Invalid Param" );
+    case eHostJoinDone:
+        return QObject::tr( "Host Join Done" );
     default:
         return QObject::tr( "Invalid Host Param" );
     }
@@ -1004,6 +1016,10 @@ QString GuiParams::describeStatus( EHostSearchStatus hostStatus )
         return QObject::tr( "Host Search Query Id Failed" );
     case eHostSearchConnecting:
         return QObject::tr( "Host Search Connecting" );
+    case eHostSearchHandshaking:
+        return QObject::tr( "Host Announce Handshaking" );
+    case eHostSearchHandshakeTimeout:
+        return QObject::tr( "Host Announce Handshake Timeout" );
     case eHostSearchConnectSuccess:
         return QObject::tr( "Host Search Connect Success" );
     case eHostSearchConnectFailed:
@@ -1022,6 +1038,8 @@ QString GuiParams::describeStatus( EHostSearchStatus hostStatus )
         return QObject::tr( "Host Search Fail Connect Dropped" );
     case eHostSearchInvalidParam:
         return QObject::tr( "Host Search Invalid Param" );
+    case eHostSearchDone:
+        return QObject::tr( "Host Search Done" );
     default:
         return QObject::tr( "Invalid Host Param" );
     }

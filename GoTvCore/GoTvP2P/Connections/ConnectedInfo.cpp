@@ -13,6 +13,7 @@
 //============================================================================
 
 #include "ConnectedInfo.h"
+#include "HandshakeInfo.h"
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
@@ -50,10 +51,7 @@ ConnectedInfo::ConnectedInfo( const ConnectedInfo& rhs )
     , m_BigListInfo( rhs.m_BigListInfo )
     , m_PeerOnlineId( rhs.m_PeerOnlineId )
 {
-    m_RmtPlugins = rhs.m_RmtPlugins;
-    m_LclList = rhs.m_LclList;
-    m_RmtList = rhs.m_RmtList;
-    m_SktList = rhs.m_SktList; 
+    m_CallbackList = rhs.m_CallbackList;
 }
 
 //============================================================================
@@ -63,10 +61,7 @@ ConnectedInfo& ConnectedInfo::operator=( const ConnectedInfo& rhs )
     {
         m_BigListInfo = rhs.m_BigListInfo;
         m_PeerOnlineId = rhs.m_PeerOnlineId;
-        m_RmtPlugins = rhs.m_RmtPlugins;
-        m_LclList = rhs.m_LclList;
-        m_RmtList = rhs.m_RmtList;
-        m_SktList = rhs.m_SktList; 
+        m_CallbackList = rhs.m_CallbackList;
     }
 
     return *this;
@@ -81,82 +76,67 @@ bool ConnectedInfo::operator==( const ConnectedInfo& rhs )
 //============================================================================
 VxSktBase * ConnectedInfo::getSktBase( void )
 {
-    if( m_SktList.size() )
+    if( m_CallbackList.size() )
     {
-        return m_SktList.front();
+        return m_CallbackList[0].getSktBase();
     }
 
     return nullptr;
 }
 
 //============================================================================
-void ConnectedInfo::addConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason )
+void ConnectedInfo::addConnectReason( HandshakeInfo& shakeInfo )
 {
-    for( auto &pair : m_LclList )
-    {
-        if( pair.first == callback && pair.second == connectReason )
-        {
-            // already in list;
-            return;
-        }
-    }
-
-    m_LclList.push_back( std::make_pair( callback, connectReason ) );
+    m_CallbackList.push_back( shakeInfo );
 }
 
 //============================================================================
-void ConnectedInfo::removeConnectReason( IConnectRequestCallback* callback, EConnectReason connectReason, bool disconnectIfNotInUse )
+void ConnectedInfo::onHandshakeComplete( HandshakeInfo& shakeInfo )
 {
-    for( auto iter = m_LclList.begin(); iter != m_LclList.end(); ++iter )
+    addConnectReason( shakeInfo );
+}
+
+//============================================================================
+void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason )
+{
+    std::vector<HandshakeInfo>  completedList;
+    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
     {
-        if( iter->first == callback && iter->second == connectReason )
+        if( iter->getSessionId() == sessionId && iter->getCallback() == callback && iter->getConnectReason() == connectReason )
         {
-            m_LclList.erase(iter);
+            iter->onContactSessionDone();
+            completedList.push_back( *iter );
+            iter = m_CallbackList.erase(iter);
             break;
         }
     }
 
-    if( m_LclList.empty() && m_RmtList.empty() )
+    if( m_CallbackList.empty() && !completedList.empty())
     {
-        // let the normal socket disconnected code do the work of removing the connection
-        for( auto skt : m_SktList )
+        HandshakeInfo& shakeInfo = completedList[0];
+        if( shakeInfo.getSktBase() && shakeInfo.getSktBase()->isConnected() )
         {
-            if( skt->isConnectSocket() && skt->isConnected() )
-            {
-                skt->closeSkt(876, true);
-            }
+            // let the normal socket disconnected code do the work of removing the connection
+            shakeInfo.getSktBase()->closeSkt( 9191 );
         }
-    }
-}
-
-//============================================================================
-void ConnectedInfo::onSktConnected( VxSktBase * sktBase )
-{
-    bool exists = false;
-    for( auto skt : m_SktList )
-    {
-        if( skt == sktBase )
-        {
-            exists = true;
-            break;
-        }
-    }
-
-    if( !exists )
-    {
-        m_SktList.push_back( sktBase );
     }
 }
 
 //============================================================================
 void ConnectedInfo::onSktDisconnected( VxSktBase * sktBase )
 {
-    for( auto iter = m_SktList.begin(); iter != m_SktList.end(); ++iter )
+    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
     {
-        if( *iter == sktBase )
+        if( iter->getSktBase() == sktBase )
         {
-            m_SktList.erase( iter );
-            break;
+            iter->onSktDisconnected();
+            iter = m_CallbackList.erase( iter );
         }
     }
+}
+
+//============================================================================
+void ConnectedInfo::aboutToDelete( void )
+{
+    // TODO callback those using the connection to say it is now unavailable
 }

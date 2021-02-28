@@ -72,6 +72,22 @@ ConnectedInfo* ConnectedListAll::getConnectedInfo( const VxGUID& onlineId )
 }
 
 //============================================================================
+void ConnectedListAll::removeConnectedInfo( const VxGUID& onlineId )
+{
+    auto iter = m_ConnectList.find( onlineId );
+    if( iter != m_ConnectList.end() )
+    {
+        ConnectedInfo* connectedInfo = iter->second;
+        if( connectedInfo )
+        {
+            m_ConnectList.erase( onlineId );
+            connectedInfo->aboutToDelete();
+            delete connectedInfo;
+        }
+    }
+}
+
+//============================================================================
 void ConnectedListAll::onSktDisconnected( VxSktBase* sktBase )
 {
     ConnectedInfo* connectInfo = getConnectedInfo( sktBase->getPeerOnlineId() );
@@ -82,5 +98,9 @@ void ConnectedListAll::onSktDisconnected( VxSktBase* sktBase )
     else
     {
         connectInfo->onSktDisconnected( sktBase );
+        if( !connectInfo->getSktBase() )
+        {
+            removeConnectedInfo( sktBase->getPeerOnlineId() );
+        }
     }
 }

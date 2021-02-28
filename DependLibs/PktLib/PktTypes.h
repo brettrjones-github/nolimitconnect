@@ -114,7 +114,7 @@
 #define PKT_TYPE_IM_ALIVE_REQ						( PKT_TYPE_PING_REPLY	+ 1 )	            // 72 ( 0x48 )
 #define PKT_TYPE_IM_ALIVE_REPLY						( PKT_TYPE_IM_ALIVE_REQ	+ 1 )		        // 73 ( 0x49 )
 
-#define PKT_TYPE_GROUP_SEND_REQ						( PKT_TYPE_IM_ALIVE_REQ	+ 1 )		        // 74 ( 0x4a )
+#define PKT_TYPE_GROUP_SEND_REQ						( PKT_TYPE_IM_ALIVE_REPLY	+ 1 )		    // 74 ( 0x4a )
 #define PKT_TYPE_GROUP_SEND_REPLY					( PKT_TYPE_GROUP_SEND_REQ	+ 1 )		    // 75 ( 0x4b )
 #define PKT_TYPE_GROUP_CHUNK_REQ					( PKT_TYPE_GROUP_SEND_REPLY	+ 1 )		    // 76 ( 0x4c )
 #define PKT_TYPE_GROUP_CHUNK_REPLY					( PKT_TYPE_GROUP_CHUNK_REQ	+ 1 )		    // 77 ( 0x4d )
@@ -154,26 +154,26 @@
 #define PKT_TYPE_THUMB_FILE_CHUNK_REQ				( PKT_TYPE_THUMB_FILE_REPLY	+ 1 )		    // 104 ( 0x68 )
 #define PKT_TYPE_THUMB_FILE_CHUNK_REPLY			    ( PKT_TYPE_THUMB_FILE_CHUNK_REQ	+ 1 )		// 105 ( 0x69 )
 
-#define PKT_TYPE_HOST_ANNOUNCE						( PKT_TYPE_THUMB_FILE_CHUNK_REPLY	+ 1 )		// 106 ( 0x6A )
-#define PKT_TYPE_BLOB_SEND_REQ					( PKT_TYPE_HOST_ANNOUNCE	+ 1 )				// 107 ( 0x6B )
-#define PKT_TYPE_BLOB_SEND_REPLY				( PKT_TYPE_BLOB_SEND_REQ	+ 1 )			// 108 ( 0x6C )
-#define PKT_TYPE_BLOB_CHUNK_REQ				( PKT_TYPE_BLOB_SEND_REPLY	+ 1 )			// 109 ( 0x6D )
-#define PKT_TYPE_BLOB_CHUNK_REPLY				( PKT_TYPE_BLOB_CHUNK_REQ	+ 1 )			// 110 ( 0x6E )
-#define PKT_TYPE_BLOB_SEND_COMPLETE_REQ		( PKT_TYPE_BLOB_CHUNK_REPLY	+ 1 )		// 111 ( 0x6f )
-#define PKT_TYPE_BLOB_SEND_COMPLETE_REPLY		( PKT_TYPE_BLOB_SEND_COMPLETE_REQ + 1 )	// 112 ( 0x70 )
-#define PKT_TYPE_BLOB_XFER_ERR					( PKT_TYPE_BLOB_SEND_COMPLETE_REPLY + 1 )	// 113 ( 0x71 )
+#define PKT_TYPE_HOST_ANNOUNCE						( PKT_TYPE_THUMB_FILE_CHUNK_REPLY	+ 1 )	// 106 ( 0x6A )
+#define PKT_TYPE_BLOB_SEND_REQ					    ( PKT_TYPE_HOST_ANNOUNCE	+ 1 )			// 107 ( 0x6B )
+#define PKT_TYPE_BLOB_SEND_REPLY				    ( PKT_TYPE_BLOB_SEND_REQ	+ 1 )			// 108 ( 0x6C )
+#define PKT_TYPE_BLOB_CHUNK_REQ				        ( PKT_TYPE_BLOB_SEND_REPLY	+ 1 )			// 109 ( 0x6D )
+#define PKT_TYPE_BLOB_CHUNK_REPLY				    ( PKT_TYPE_BLOB_CHUNK_REQ	+ 1 )			// 110 ( 0x6E )
+#define PKT_TYPE_BLOB_SEND_COMPLETE_REQ		        ( PKT_TYPE_BLOB_CHUNK_REPLY	+ 1 )		    // 111 ( 0x6f )
+#define PKT_TYPE_BLOB_SEND_COMPLETE_REPLY		    ( PKT_TYPE_BLOB_SEND_COMPLETE_REQ + 1 )	    // 112 ( 0x70 )
+#define PKT_TYPE_BLOB_XFER_ERR					    ( PKT_TYPE_BLOB_SEND_COMPLETE_REPLY + 1 )	// 113 ( 0x71 )
 
 #define PKT_TYPE_HOST_JOIN_REQ		                ( PKT_TYPE_BLOB_XFER_ERR + 1 )	            // 114 ( 0x72 )
-#define PKT_TYPE_HOST_JOIN_REPLY					( PKT_TYPE_HOST_JOIN_REQ + 1 )	                // 115 ( 0x73 )
+#define PKT_TYPE_HOST_JOIN_REPLY					( PKT_TYPE_HOST_JOIN_REQ + 1 )	            // 115 ( 0x73 )
 
-#define PKT_TYPE_HOST_OFFER_REQ		                ( PKT_TYPE_HOST_JOIN_REPLY + 1 )	            // 116 ( 0x74 )
-#define PKT_TYPE_HOST_OFFER_REPLY					( PKT_TYPE_HOST_OFFER_REQ + 1 )	                // 117 ( 0x75 )
+#define PKT_TYPE_HOST_OFFER_REQ		                ( PKT_TYPE_HOST_JOIN_REPLY + 1 )	        // 116 ( 0x74 )
+#define PKT_TYPE_HOST_OFFER_REPLY					( PKT_TYPE_HOST_OFFER_REQ + 1 )	            // 117 ( 0x75 )
 
-#define PKT_TYPE_HOST_SEARCH_REQ		            ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	            // 118 ( 0x76 )
-#define PKT_TYPE_HOST_SEARCH_REPLY					( PKT_TYPE_HOST_SEARCH_REQ + 1 )	            // 110 ( 0x77 )
+#define PKT_TYPE_HOST_SEARCH_REQ		            ( PKT_TYPE_HOST_OFFER_REPLY + 1 )	        // 118 ( 0x76 )
+#define PKT_TYPE_HOST_SEARCH_REPLY					( PKT_TYPE_HOST_SEARCH_REQ + 1 )	        // 110 ( 0x77 )
 
-#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_SEARCH_REPLY + 1 )	            // 120 ( 0x78 )
-#define PKT_TYPE_FRIEND_OFFER_REPLY					( PKT_TYPE_FRIEND_OFFER_REQ + 1 )	            // 111 ( 0x79 )
+#define PKT_TYPE_FRIEND_OFFER_REQ		            ( PKT_TYPE_HOST_SEARCH_REPLY + 1 )	        // 120 ( 0x78 )
+#define PKT_TYPE_FRIEND_OFFER_REPLY					( PKT_TYPE_FRIEND_OFFER_REQ + 1 )	        // 111 ( 0x79 )
 
 #define MAX_PKT_TYPE_CNT							(PKT_TYPE_FRIEND_OFFER_REPLY + 1)
 

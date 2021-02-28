@@ -14,6 +14,7 @@
 
 #include "ConnectionMgr.h"
 #include "ConnectedInfo.h"
+#include "HandshakeInfo.h"
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListLib.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
@@ -176,28 +177,57 @@ EHostSearchStatus ConnectionMgr::lookupOrQuerySearchId( VxGUID& sessionId, std::
 
 
 //============================================================================
-bool ConnectionMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo * bigListInfo )
+void ConnectionMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo * bigListInfo )
 {
     bool result = true;
-    m_ConnectionMutex.lock();
-    ConnectedInfo* connectInfo = m_AllList.getOrAddConnectedInfo( bigListInfo );
-    if( nullptr == connectInfo )
+    std::vector<HandshakeInfo> shakeList;
+    std::vector<HandshakeInfo> timedOutList;
+    m_HandshakeMutex.lock();
+    m_HandshakeList.getAndRemoveHandshakeInfo( bigListInfo->getMyOnlineId(), shakeList, timedOutList );
+    m_HandshakeMutex.unlock();
+
+    if( !timedOutList.empty() )
     {
-        result = false;
-        LogMsg( LOG_ERROR, "ConnectionMgr get connection info FAILED" );
-    }
-    else
-    {
-        connectInfo->onSktConnected( sktBase );
+        for( HandshakeInfo& shakeInfo : timedOutList )
+        {
+            shakeInfo.onHandshakeTimeout();
+        }
     }
 
-    m_ConnectionMutex.unlock();
-    return result;
+    if( !shakeList.empty() )
+    {
+        m_ConnectionMutex.lock();
+        ConnectedInfo* connectInfo = m_AllList.getOrAddConnectedInfo( bigListInfo );
+        if( nullptr == connectInfo )
+        {
+            result = false;
+            LogMsg( LOG_ERROR, "ConnectionMgr get connection info FAILED" );
+        }
+        else
+        {
+            for( HandshakeInfo& shakeInfo : shakeList )
+            {
+                connectInfo->addConnectReason( shakeInfo );
+            }
+        }
+
+        // if we do the onContactConnected() while locked then may deadlock if doneWithConnection is called in onContactConnected
+        m_ConnectionMutex.unlock();
+       
+        for( HandshakeInfo& shakeInfo : shakeList )
+        {
+            shakeInfo.onContactConnected();
+        }
+    }
 }
 
 //============================================================================
 void ConnectionMgr::onSktDisconnected( VxSktBase* sktBase )
 {
+    m_HandshakeMutex.lock();
+    m_HandshakeList.onSktDisconnected( sktBase );
+    m_HandshakeMutex.unlock();
+
     m_ConnectionMutex.lock();
     m_AllList.onSktDisconnected( sktBase );
     m_ConnectionMutex.unlock();
@@ -346,6 +376,7 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
     LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s", DescribeConnectReason( connectReason ) );
     // first see if we already have a connection to the requested onlineId
     VxSktBase *sktBase = nullptr;
+    bool isDisconnected = false;
     m_ConnectionMutex.lock();
     ConnectedInfo* connectInfo = m_AllList.getConnectedInfo( onlineId );
     if( connectInfo )
@@ -353,11 +384,26 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
         sktBase = connectInfo->getSktBase();
         if( sktBase )
         {
-            connectInfo->addConnectReason( callback, connectReason );
+            if( sktBase->isConnected() )
+            {
+                uint64_t timeNow = GetTimeStampMs();
+                HandshakeInfo shakeInfo( sktBase, sessionId, onlineId, callback, connectReason, timeNow );
+                connectInfo->addConnectReason( shakeInfo );
+            }
+            else
+            {
+                isDisconnected = true;
+            }
         }
     }
 
     m_ConnectionMutex.unlock();
+    if( isDisconnected && sktBase )
+    {
+        onSktDisconnected( sktBase );
+        sktBase = nullptr;
+    }
+
     if( sktBase )
     {
         retSktBase = sktBase;
@@ -378,11 +424,10 @@ EConnectStatus ConnectionMgr::attemptConnection( VxGUID& sessionId, std::string 
     VxUrl connectUrl( url.c_str() );
     if( onlineId.isVxGUIDValid() && connectUrl.validateUrl( false ) )
     {
-        connectStatus = directConnectTo( url, onlineId, callback, retSktBase, connectReason );
+        connectStatus = directConnectTo( url, onlineId, callback, retSktBase, sessionId, connectReason );
         if( connectStatus == eConnectStatusConnectSuccess )
         {
             // connected but waiting for PktAnnounce reply
-            m_ConnectRequests[onlineId] = std::make_pair( callback, connectReason );
             connectStatus = eConnectStatusReady;
         }
     }
@@ -398,18 +443,15 @@ EConnectStatus ConnectionMgr::attemptConnection( VxGUID& sessionId, std::string 
 void ConnectionMgr::doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::doneWithConnection %s", DescribeConnectReason( connectReason ));
+    m_HandshakeMutex.lock();
+    m_HandshakeList.removeHandshakeInfo( sessionId );
+    m_HandshakeMutex.unlock();
 
     m_ConnectionMutex.lock();
-    auto inProgressConnection = m_ConnectRequests.find( onlineId );
-    if( inProgressConnection != m_ConnectRequests.end() )
-    {
-        m_ConnectRequests.erase( inProgressConnection );
-    }
-
     ConnectedInfo* connectInfo = m_AllList.getConnectedInfo( onlineId );
     if( connectInfo )
     {
-        connectInfo->removeConnectReason( callback, connectReason, true );
+        connectInfo->removeConnectReason( sessionId, callback, connectReason );
     }
 
     m_ConnectionMutex.unlock();
@@ -453,15 +495,33 @@ bool ConnectionMgr::urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& online
 {
     bool foundId = false;
     onlineId.clearVxGUID();
-    m_ConnectionMutex.lock();
-    auto iter = m_UrlCache.find( hostUrl );
-    if( iter != m_UrlCache.end() )
+
+    // it may be part of the url .. if so no lookup required
+    VxUrl testUrl( hostUrl );
+    if( testUrl.hasValidOnlineId() )
     {
-        onlineId = iter->second;
-        foundId = true;
+        VxGUID testGuid;
+        testGuid.fromOnlineIdString( testUrl.getOnlineId().c_str() );
+        if( testGuid.isVxGUIDValid() )
+        {
+            onlineId = testGuid;
+            foundId = true;
+        }
     }
 
-    m_ConnectionMutex.unlock();
+    if( !foundId )
+    {
+        // not part of url.. see if is in cache
+        m_ConnectionMutex.lock();
+        auto iter = m_UrlCache.find( hostUrl );
+        if( iter != m_UrlCache.end() )
+        {
+            onlineId = iter->second;
+            foundId = true;
+        }
+
+        m_ConnectionMutex.unlock();
+    }
 
     return foundId;
 }
@@ -471,6 +531,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 url,
                                                 VxGUID&                     onlineId,
                                                 IConnectRequestCallback*    callback,
                                                 VxSktBase*&                 retSktBase,
+                                                VxGUID                      sessionId,
                                                 EConnectReason              connectReason,
                                                 int					        iConnectTimeoutMs )
 {
@@ -479,7 +540,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 url,
     uint16_t port = connectUrl.getPort();
     if( !ipAddr.empty() && port )
     {
-        return directConnectTo( ipAddr, port, onlineId, retSktBase, callback, connectReason, iConnectTimeoutMs );
+        return directConnectTo( ipAddr, port, onlineId, retSktBase, callback, sessionId, connectReason, iConnectTimeoutMs );
     }
     else
     {
@@ -490,6 +551,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 url,
 //============================================================================-
 EConnectStatus ConnectionMgr::directConnectTo(  VxConnectInfo&		        connectInfo,
                                                 VxSktBase *&		        ppoRetSkt,		// return pointer to socket if not null
+                                                VxGUID                      sessionId, 
                                                 int					        iConnectTimeoutMs,// how long to attempt connect
                                                 bool				        bUseUdpIp,
                                                 bool				        bUseLanIp,
@@ -510,7 +572,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  VxConnectInfo&		        connectI
         connectInfo.m_DirectConnectId.getIpAddress( ipAddr );
     }
 
-    return directConnectTo( ipAddr, connectInfo.getOnlinePort(), connectInfo.getMyOnlineId(), ppoRetSkt, callback, connectReason, iConnectTimeoutMs );
+    return directConnectTo( ipAddr, connectInfo.getOnlinePort(), connectInfo.getMyOnlineId(), ppoRetSkt, callback, sessionId, connectReason, iConnectTimeoutMs );
 }
 
 //============================================================================-
@@ -519,10 +581,12 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
                                                 VxGUID                      onlineId,
                                                 VxSktBase*&                 retSktBase,
                                                 IConnectRequestCallback*    callback,
+                                                VxGUID                      sessionId, 
                                                 EConnectReason              connectReason,
                                                 int					        iConnectTimeoutMs )
 {
     EConnectStatus connectStatus = eConnectStatusConnecting;
+    m_ConnectionMutex.lock();
     VxSktConnect * sktBase = m_PeerMgr.connectTo(	ipAddr.c_str(),			// remote ip or url 
                                                     port,	                // port to connect to
                                                     iConnectTimeoutMs );	// milli seconds before connect attempt times out
@@ -547,12 +611,15 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
         //LogMsg( LOG_INFO, "sendMyPktAnnounce 2\n" ); 
         if( false == sendMyPktAnnounce( onlineId, sktBase, true, false, false, false ) )
         {
-            if( IsLogEnabled( eLogConnect ) )
-                LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
+            LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
+            m_ConnectionMutex.unlock();
             return eConnectStatusSendPktAnnFailed;
         }
 
-        connectStatus = eConnectStatusConnectSuccess;
+        m_HandshakeMutex.lock();
+        m_HandshakeList.addHandshake(sktBase, sessionId, onlineId, callback, connectReason);
+        m_HandshakeMutex.unlock();
+        connectStatus = eConnectStatusHandshaking;
         retSktBase = (VxSktBase *)sktBase;
     }
     else
@@ -560,13 +627,12 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
         connectStatus = eConnectStatusConnectFailed;
 
         //LogMsg( LOG_INFO, "NetConnector::directConnectTo: connect FAIL to %s:%d\n", strIpAddress.c_str(), connectInfo.getOnlinePort() );
-        if( IsLogEnabled( eLogConnect ) )
-            LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed\n" );
+        LogModule( eLogConnect, LOG_DEBUG, "ConnectionMgr::DirectConnectTo: failed\n" );
     }
 
-    if( IsLogEnabled( eLogConnect ) )
-        LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: done\n" );
+    LogModule( eLogConnect, LOG_DEBUG, "ConnectionMgr::DirectConnectTo: done\n" );
 
+    m_ConnectionMutex.unlock();
     return connectStatus;
 }
 
@@ -620,6 +686,7 @@ void ConnectionMgr::addConnectRequestToQue( ConnectReqInfo& connectRequest, bool
 //============================================================================
 bool ConnectionMgr::connectToContact(	VxConnectInfo&		connectInfo, 
                                         VxSktBase *&		ppoRetSkt,
+                                        VxGUID&             sessionId,
                                         bool&				retIsNewConnection )
 {
     bool gotConnected	= false;
@@ -655,7 +722,7 @@ bool ConnectionMgr::connectToContact(	VxConnectInfo&		connectInfo,
     else
     {
         m_ConnectionMutex.unlock();
-        if( connectUsingTcp( connectInfo, ppoRetSkt ) )
+        if( connectUsingTcp( connectInfo, ppoRetSkt, sessionId ) )
         {
             gotConnected		= true;
             retIsNewConnection	= true;
@@ -666,7 +733,7 @@ bool ConnectionMgr::connectToContact(	VxConnectInfo&		connectInfo,
 }
 
 //============================================================================
-bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& ppoRetSkt )
+bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& ppoRetSkt, VxGUID& sessionId )
 {
     ppoRetSkt = nullptr;
     VxSktBase* sktBase = nullptr;
@@ -691,6 +758,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
         // probably on same network so use local ip
         if( eConnectStatusConnectSuccess == directConnectTo(	connectInfo, 
                                                                 sktBase, 
+                                                                sessionId,
                                                                 LAN_CONNECT_TIMEOUT,
                                                                 false, 
                                                                 true ) )
@@ -767,7 +835,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
             strDirectConnectIp.c_str(),
             connectInfo.m_DirectConnectId.getPort() );
 #endif // DEBUG_CONNECTIONS
-        if( eConnectStatusConnectSuccess == directConnectTo( connectInfo, sktBase, DIRECT_CONNECT_TIMEOUT ) )
+        if( eConnectStatusConnectSuccess == directConnectTo( connectInfo, sktBase, sessionId, DIRECT_CONNECT_TIMEOUT ) )
         {
             //LogMsg( LOG_INFO, "P2PEngine::connectUsingTcp: success\n" );
             // direct connection success

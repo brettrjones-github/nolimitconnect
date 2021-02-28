@@ -51,6 +51,7 @@ namespace
         "Connect Status Connecting ",
         "Connect Status Connect Failed ",
         "Connect Status Send PktAnn Failed ",
+        "Connect Status Handshake ",
         "Connect Status Connect Success ",
         "Connect Status Dropped ",
         "Connect Status Rx Ann Timeout ",
@@ -66,6 +67,8 @@ namespace
         "Host Announce Querying Id Success ",
         "Host Announce Query Id Failed ",
         "Host Announce Connecting ",
+        "Host Announce HandShaking ",
+        "Host Announce HandShake Timeout ",
         "Host Announce Connect Success ",
         "Host Announce Connect Failed ",
         "Host Announce Sending Request ",
@@ -76,6 +79,7 @@ namespace
         "Host Announce Fail Connect Dropped ",
         "Host Announce Invalid Param ",
         "Host Announce Plugin Disabled ",
+        "Host Announce Done ",
 
         "Max Host Announce Status ",
     };
@@ -88,6 +92,8 @@ namespace
         "Host Join Querying Id Success ",
         "Host Join Query Id Failed ",
         "Host Join Connecting ",
+        "Host Join HandShaking ",
+        "Host Join HandShake Timeout ",
         "Host Join Connect Success ",
         "Host Join Connect Failed ",
         "Host Join Sending Request ",
@@ -98,6 +104,7 @@ namespace
         "Host Join Fail Connect Dropped ",
         "Host Join Invalid Param ",
         "Host Join Plugin Disabled ",
+        "Host Join Done ",
 
         "Max Host Join Status ",
     };
@@ -110,6 +117,8 @@ namespace
         "Host Search Querying Id Success ",
         "Host Search Query Id Failed ",
         "Host Search Connecting ",
+        "Host Search HandShaking ",
+        "Host Search HandShake Timeout ",
         "Host Search Connect Success ",
         "Host Search Connect Failed ",
         "Host Search Sending Request ",
@@ -122,6 +131,7 @@ namespace
         "Host Search Plugin Disabled ",
         "Host Search No Matches ",
         "Host Search Completed ",
+        "Host Search Done ",
 
         "Max Host Search Status ",
     };
