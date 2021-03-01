@@ -361,6 +361,7 @@ void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pkt
     else
     {
         LogModule( eLogHostSearch, LOG_VERBOSE, "HostClientMgr plugin setting reply empty" );
+        m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchNoMatches );
         m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchCompleted );
         stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent->getMyOnlineId() );
     }

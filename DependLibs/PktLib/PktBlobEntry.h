@@ -40,7 +40,7 @@ public:
     ~PktBlobEntry() = default;
 
     // gets blob len including member variables (does not round to 16 byte boundry)
-    int16_t                     getTotalBlobLen( void )         { return 16 + getBlobLen(); }
+    int16_t                     getTotalBlobLen( void )         { return sizeof(PktBlobEntry) - sizeof(m_BlobData) + getBlobLen(); }
 
     void                        setUseNetworkOrder( bool useNetOrder ) { m_UseNetworkOrder = useNetOrder; }
     bool                        getUseNetworkOrder( void )      { return m_UseNetworkOrder; }

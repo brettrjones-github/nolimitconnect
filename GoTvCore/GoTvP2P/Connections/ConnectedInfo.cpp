@@ -100,7 +100,7 @@ void ConnectedInfo::onHandshakeComplete( HandshakeInfo& shakeInfo )
 void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     std::vector<HandshakeInfo>  completedList;
-    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
+    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end();  )
     {
         if( iter->getSessionId() == sessionId && iter->getCallback() == callback && iter->getConnectReason() == connectReason )
         {
@@ -108,6 +108,10 @@ void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallb
             completedList.push_back( *iter );
             iter = m_CallbackList.erase(iter);
             break;
+        }
+        else
+        {
+            ++iter;
         }
     }
 
@@ -125,12 +129,16 @@ void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallb
 //============================================================================
 void ConnectedInfo::onSktDisconnected( VxSktBase * sktBase )
 {
-    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
+    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end();  )
     {
         if( iter->getSktBase() == sktBase )
         {
             iter->onSktDisconnected();
             iter = m_CallbackList.erase( iter );
+        }
+        else
+        {
+            ++iter;
         }
     }
 }
