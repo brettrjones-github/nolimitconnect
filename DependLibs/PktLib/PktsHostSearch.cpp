@@ -55,7 +55,7 @@ PktHostSearchReply::PktHostSearchReply()
 //============================================================================
 void PktHostSearchReply::calcPktLen()
 {
-    uint16_t pktLen = ( uint16_t)sizeof( PktHostSearchReq ) - sizeof(PktBlobEntry);
+    uint16_t pktLen = ( uint16_t)sizeof( PktHostSearchReply ) - sizeof(PktBlobEntry);
     uint16_t blobLen = getBlobEntry().getTotalBlobLen();
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) ); 
 
