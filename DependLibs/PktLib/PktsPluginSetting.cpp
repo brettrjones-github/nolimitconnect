@@ -20,8 +20,7 @@
 //============================================================================
 PktPluginSettingReq::PktPluginSettingReq()
 {
-    LogMsg( LOG_DEBUG, "Alive %d grp find %d grp share err %d set req %d", PKT_TYPE_IM_ALIVE_REQ, PKT_TYPE_GROUP_FIND_REQ, PKT_TYPE_GROUP_SHARE_ERR, PKT_TYPE_PLUGIN_SETTING_REQ );
-	setPktType( PKT_TYPE_PLUGIN_SETTING_REQ );
+    setPktType( PKT_TYPE_PLUGIN_SETTING_REQ );
     setPktLength( sizeof( PktPluginSettingReq ) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }

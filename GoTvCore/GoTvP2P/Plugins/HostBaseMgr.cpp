@@ -641,7 +641,7 @@ void HostBaseMgr::onHandshakeTimeout( VxGUID& sessionId, VxSktBase* sktBase, VxG
 //============================================================================
 void HostBaseMgr::onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
-    LogMsg( LOG_INFO, "onContactSessionDone  Reason %d", DescribeConnectReason( connectReason ) );
+    LogMsg( LOG_INFO, "onContactSessionDone  Reason %s", DescribeConnectReason( connectReason ) );
 }
 
 //============================================================================
