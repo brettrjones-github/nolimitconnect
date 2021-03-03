@@ -45,11 +45,10 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
 
     connectBarWidgets();
 
-	connect( this,					SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
-
-	connect( ui.m_SearchsParamWidget,	SIGNAL(signalSearchState(bool)),		this, SLOT(slotStartSearchState(bool)) );
-    connect( this,					SIGNAL(signalSearchComplete()),				this, SLOT(slotSearchComplete()) );
-    connect( this,					SIGNAL(signalSearchResult(VxNetIdent*)),	this, SLOT(slotSearchResult(VxNetIdent*)) ); 
+	connect( this,					    SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
+	connect( ui.m_SearchsParamWidget,	SIGNAL(signalSearchState(bool)),		    this, SLOT(slotStartSearchState(bool)) );
+    connect( this,					    SIGNAL(signalSearchComplete()),				this, SLOT(slotSearchComplete()) );
+    connect( this,					    SIGNAL(signalSearchResult(VxNetIdent*)),	this, SLOT(slotSearchResult(VxNetIdent*)) ); 
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -59,8 +58,8 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
         this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
 
-    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent ,  PluginSetting  )),
-        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent ,  PluginSetting  )) );
+    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
+        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
 
     setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
     std::string lastHostSearchText;
@@ -68,6 +67,15 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
     if( !lastHostSearchText.empty() )
     {
         ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
+    }
+}
+
+//============================================================================
+AppletChatRoomJoinSearch::~AppletChatRoomJoinSearch()
+{
+    for( auto ident : m_ResultList )
+    {
+        delete ident;
     }
 }
 
@@ -154,7 +162,6 @@ void AppletChatRoomJoinSearch::slotSearchComplete( void )
     ui.m_SearchsParamWidget->slotSearchComplete();
 }
 
-
 ////============================================================================
 //void AppletChatRoomJoinSearch::slotFriendClicked( VxNetIdent * netIdent )
 //{
@@ -172,13 +179,6 @@ void AppletChatRoomJoinSearch::slotSearchComplete( void )
 void AppletChatRoomJoinSearch::slotInfoMsg( const QString& text )
 {
     setStatusLabel( text ); // Adds the message to the widget                                                                                              //m_LogFile.write( text ); // Logs to file
-}
-
-//============================================================================
-void AppletChatRoomJoinSearch::slotSearchResult( VxNetIdent * netIdent )
-{
-	setStatusLabel( QString("Found Match %1").arg( netIdent->getOnlineName() ) );
-	ui.m_FriendListWidget->updateFriend( netIdent, false );
 }
 
 //============================================================================
@@ -251,13 +251,15 @@ void AppletChatRoomJoinSearch::infoMsg( const char* errMsg, ... )
 //============================================================================
 void AppletChatRoomJoinSearch::addPluginSettingToList( VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
-
+    VxNetIdent* netIdent = new VxNetIdent( hostIdent );
+    m_ResultList.push_back(netIdent);
+    ui.m_HostListWidget->updateFriend( netIdent, false );
 }
 
 //============================================================================
 void AppletChatRoomJoinSearch::clearPluginSettingToList( void )
 {
-    ui.m_FriendListWidget->clear();
+    ui.m_HostListWidget->clear();
 }
 
 //============================================================================

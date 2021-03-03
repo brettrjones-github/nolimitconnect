@@ -14,7 +14,6 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "ListEntryWidget.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"

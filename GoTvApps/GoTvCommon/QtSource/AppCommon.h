@@ -49,7 +49,7 @@
 
 class AccountMgr;
 class IVxVidCap;
-class ListEntryWidget;
+class FriendListEntryWidget;
 class FileListReplySession;
 class ActivityCreateAccount;
 class ActivityOfferListDlg;

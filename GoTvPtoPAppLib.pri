@@ -93,7 +93,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.h \
-	 $$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.h \
@@ -181,6 +181,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HostListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.h \
@@ -196,7 +198,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
@@ -479,6 +481,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HostListEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListRow.cpp \
@@ -493,7 +497,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
@@ -717,6 +721,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/HostListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/IdentWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ImageListEntry.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ImageListRow.ui \
@@ -731,7 +736,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputVoiceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InstMsgWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/LogWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ListEntryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FriendListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkKeyWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkTestWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \

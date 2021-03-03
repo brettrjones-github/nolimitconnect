@@ -14,10 +14,10 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "ListEntryWidget.h"
+#include "FriendListEntryWidget.h"
 
 //============================================================================
-ListEntryWidget::ListEntryWidget( QListWidget * parent, int type  )
+FriendListEntryWidget::FriendListEntryWidget( QListWidget * parent, int type  )
 : QListWidgetItem( parent, type )
 {
 	SubWidget = new QPushButton( parent );
@@ -32,44 +32,39 @@ ListEntryWidget::ListEntryWidget( QListWidget * parent, int type  )
 }
 
 //============================================================================
-ListEntryWidget::~ListEntryWidget()
-{
-}
-
-//============================================================================
-void ListEntryWidget::iconButtonPressed()
+void FriendListEntryWidget::iconButtonPressed()
 {
 	SubWidget->setDown(true);
 	emit listButtonClicked( this );
 }
 
 //============================================================================
-void ListEntryWidget::iconButtonReleased()
+void FriendListEntryWidget::iconButtonReleased()
 {
 	SubWidget->setDown(false);
 }
 
 //============================================================================
-void ListEntryWidget::slotMenuButtonPressed()
+void FriendListEntryWidget::slotMenuButtonPressed()
 {
 	SubWidget->setDown(true);
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void ListEntryWidget::slotMenuButtonReleased()
+void FriendListEntryWidget::slotMenuButtonReleased()
 {
 	SubWidget->setDown(false);
 }
 
 //============================================================================
-void ListEntryWidget::listButtonPressed()
+void FriendListEntryWidget::listButtonPressed()
 {
 	emit listButtonClicked( this );
 }
 
 //============================================================================
-void ListEntryWidget::listButtonReleased()
+void FriendListEntryWidget::listButtonReleased()
 {
 
 }

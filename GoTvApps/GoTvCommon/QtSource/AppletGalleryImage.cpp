@@ -19,7 +19,6 @@
 
 #include "FileShareItemWidget.h"
 #include "MyIcons.h"
-#include "ListEntryWidget.h"
 #include "PopupMenu.h"
 #include "AppGlobals.h"
 #include "FileItemInfo.h"

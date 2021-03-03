@@ -147,12 +147,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
@@ -453,9 +447,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ListEntryWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -548,9 +539,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp">
       <Filter>GoTvInterface\OsWin32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -999,6 +987,24 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp">
       <Filter>GoTvCommon\Source Files\ForReferenceOnly</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1211,9 +1217,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\InstMsgWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ListEntryWidget.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\OfferBarWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
@@ -1263,9 +1266,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.h">
@@ -1520,9 +1520,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ListEntryWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTheme.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
@@ -1597,9 +1594,6 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxComboBox.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenu.h">
-      <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletKodi.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -1962,6 +1956,21 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenu.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>
@@ -2742,9 +2751,6 @@
     <ClInclude Include="GeneratedFiles\ui_InstMsgWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ListEntryWidget.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_OfferBarWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2806,9 +2812,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.h">
@@ -3002,6 +3005,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h">
       <Filter>GoTvCommon\Source Files\ForReferenceOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3203,6 +3209,12 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HostListEntryWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -74,7 +74,7 @@
        </widget>
       </item>
       <item>
-       <widget class="FriendListWidget" name="m_FriendListWidget" native="true">
+       <widget class="HostListWidget" name="m_HostListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -90,15 +90,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FriendListWidget</class>
-   <extends>QWidget</extends>
-   <header>FriendListWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>SearchParamsWidget</class>
    <extends>QWidget</extends>
    <header>SearchParamsWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HostListWidget</class>
+   <extends>QWidget</extends>
+   <header>HostListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

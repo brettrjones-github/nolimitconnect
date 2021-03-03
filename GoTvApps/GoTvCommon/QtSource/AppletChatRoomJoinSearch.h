@@ -32,7 +32,7 @@ public:
 	AppletChatRoomJoinSearch(	AppCommon&		    app, 
 								QWidget *			parent = NULL );
 	//=== destructor ===//
-	virtual ~AppletChatRoomJoinSearch() override = default;
+	virtual ~AppletChatRoomJoinSearch() override;
 
     void                        infoMsg( const char * infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
@@ -54,7 +54,6 @@ signals:
 
 private slots:
     void                        slotInfoMsg( const QString& text );
-	void						slotSearchResult( VxNetIdent * netIdent );
 	void						slotSearchComplete( void );
     void						slotHomeButtonClicked( void ) override;
 	void						slotStartSearchState(bool startSearch);
@@ -69,7 +68,8 @@ protected:
     void						hideEvent( QHideEvent * ev ) override;
 
 	//=== vars ===//
-	Ui::AppletChatRoomJoinSearchUi		ui;
+	Ui::AppletChatRoomJoinSearchUi  ui;
     SearchParams                m_SearchParams;
     bool                        m_SearchStarted{ false };
+    std::vector<VxNetIdent*>    m_ResultList;
 };

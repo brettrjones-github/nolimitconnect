@@ -1,6 +1,6 @@
 
 #include <app_precompiled_hdr.h>
-#include "config_gotvapps.h"
+#include "GuiParams.h"
 
 #include <QPainter>
 #include <QAbstractItemDelegate>
@@ -81,6 +81,6 @@ void PopupMenuDelegate::paint ( QPainter * painter, const QStyleOptionViewItem &
 
 QSize PopupMenuDelegate::sizeHint ( const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {
-	return QSize(200, 50); // very dumb value
+	return QSize(200, GuiParams::getButtonSize() + 4); // very dumb value
 }
 

@@ -24,18 +24,18 @@
 
 #include <QListWidget>
 
-class FriendListEntryWidget;
+class HostListEntryWidget;
 class VxNetIdent;
 class AppCommon;
 class MyIcons;
 class P2PEngine;
 
-class FriendListWidget : public QListWidget
+class HostListWidget : public QListWidget
 {
 	Q_OBJECT
 
 public:
-	FriendListWidget( QWidget * parent );
+	HostListWidget( QWidget * parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
@@ -60,20 +60,20 @@ private slots:
 	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGuidQt onlineId, int pos );
 	void						slotItemClicked(QListWidgetItem *);
 	void						slotRefreshFriendList( EFriendViewType eWhichFriendsToShow );
-	void						slotFriendListItemClicked( FriendListEntryWidget* widget );
-	void						slotFriendMenuButtonClicked( FriendListEntryWidget* widget );
+	void						slotFriendListItemClicked( HostListEntryWidget* widget );
+	void						slotFriendMenuButtonClicked( HostListEntryWidget* widget );
 
 protected:
 	//!	fill friend into new QListWidgetItem *
-	FriendListEntryWidget *			friendToWidget( VxNetIdent * poFriend );
+	HostListEntryWidget *			friendToWidget( VxNetIdent * poFriend );
 	//!	get friend from QListWidgetItem data
-	Friend *					widgetToFriend( FriendListEntryWidget * item );
+	Friend *					widgetToFriend( HostListEntryWidget * item );
 
-	void						updateListEntryWidget( FriendListEntryWidget * item, VxNetIdent * netIdent );
+	void						updateHostListEntryWidget( HostListEntryWidget * item, VxNetIdent * netIdent );
 
-	FriendListEntryWidget *			findListEntryWidget( VxNetIdent * netIdent );
+	HostListEntryWidget *			findHostListEntryWidget( VxNetIdent * netIdent );
 
-	void						updateListEntryBackgroundColor( VxNetIdent * netIdent, FriendListEntryWidget * poWidget );
+	void						updateListEntryBackgroundColor( VxNetIdent * netIdent, HostListEntryWidget * poWidget );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;

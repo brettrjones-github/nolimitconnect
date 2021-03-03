@@ -20,19 +20,19 @@
 #include <QListWidgetItem>
 #include <QObject>
 
-class ListEntryWidget : public QObject, public QListWidgetItem
+class HostListEntryWidget : public QObject, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	ListEntryWidget( QListWidget * parent = 0, int type = Type );
-	virtual ~ListEntryWidget();
+	HostListEntryWidget( QListWidget * parent = 0, int type = Type );
+	virtual ~HostListEntryWidget() override = default;
 
 	QPushButton *				getSubWidget( void )		{ return SubWidget; }
 	QPushButton *				getMenuButton( void )		{ return m_MenuButton; }
 
 signals:
-	void						listButtonClicked( ListEntryWidget* listEntryWidget );
-	void						signalMenuButtonClicked( ListEntryWidget* listEntryWidget );
+	void						listButtonClicked( HostListEntryWidget* listEntryWidget );
+	void						signalMenuButtonClicked( HostListEntryWidget* listEntryWidget );
 
 public slots:
 	void						iconButtonPressed( void );

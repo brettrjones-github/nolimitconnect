@@ -15,7 +15,8 @@
 
 #include <app_precompiled_hdr.h>
 #include "FriendListDelegate.h"
-#include "ListEntryWidget.h"
+#include "FriendListEntryWidget.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDefs.h>
 
@@ -47,6 +48,6 @@ void FriendListDelegate::paint ( QPainter * painter, const QStyleOptionViewItem 
 
 QSize FriendListDelegate::sizeHint ( const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {
-	return QSize(200, 52); // very dumb value
+	return QSize(200, GuiParams::getButtonSize() + 4); // very dumb value
 }
 
