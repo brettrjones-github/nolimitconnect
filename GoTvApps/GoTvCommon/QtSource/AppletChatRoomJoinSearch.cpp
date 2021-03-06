@@ -25,11 +25,8 @@
 
 #include <CoreLib/VxGlobals.h>
 
-#include <QString>
-
 namespace
 {
-    const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
     const int MAX_INFO_MSG_SIZE = 2048;
 }
 
@@ -42,6 +39,7 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
     setHostType( eHostTypeChatRoom );
 	ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+    setSearchType( eSearchChatRoomHost );
 
     connectBarWidgets();
 
@@ -63,19 +61,10 @@ AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app,
 
     setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
     std::string lastHostSearchText;
-    m_MyApp.getAppSettings().getLastHostSearchText( lastHostSearchText ); 
+    m_MyApp.getAppSettings().getLastHostSearchText( getSearchType(), lastHostSearchText ); 
     if( !lastHostSearchText.empty() )
     {
         ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
-    }
-}
-
-//============================================================================
-AppletChatRoomJoinSearch::~AppletChatRoomJoinSearch()
-{
-    for( auto ident : m_ResultList )
-    {
-        delete ident;
     }
 }
 
@@ -131,15 +120,19 @@ void AppletChatRoomJoinSearch::slotStartSearchState(bool startSearch)
         {
             if( ui.m_SearchsParamWidget->toSearchParams( m_SearchParams ) )
             {
-                m_SearchParams.setHostType(getHostType());
-                m_SearchParams.setSearchType( eSearchChatRoomHost );
+                m_SearchParams.setHostType( getHostType() );
+                m_SearchParams.setSearchType( getSearchType() );
                 m_SearchParams.createNewSessionId();
                 m_SearchParams.updateSearchStartTime();
                 setStatusLabel( QObject::tr( "Search Started" ) );
                 m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
                 if( !m_SearchParams.getSearchText().empty() )
                 {
-                    m_MyApp.getAppSettings().setLastHostSearchText( m_SearchParams.getSearchText() );
+                    m_MyApp.getAppSettings().setLastHostSearchText( m_SearchParams.getSearchType(), m_SearchParams.getSearchText() );
+                    m_MyApp.getAppSettings().setLastHostSearchAgeType( m_SearchParams.getSearchType(), m_SearchParams.getAgeType() );
+                    m_MyApp.getAppSettings().setLastHostSearchGender( m_SearchParams.getSearchType(), m_SearchParams.getGender() );
+                    m_MyApp.getAppSettings().setLastHostSearchLanguage( m_SearchParams.getSearchType(), m_SearchParams.getLanguage() );
+                    m_MyApp.getAppSettings().setLastHostSearchContentRating( m_SearchParams.getSearchType(), m_SearchParams.getContentRating() );
                 }
             }
             else
@@ -161,19 +154,6 @@ void AppletChatRoomJoinSearch::slotSearchComplete( void )
 {
     ui.m_SearchsParamWidget->slotSearchComplete();
 }
-
-////============================================================================
-//void AppletChatRoomJoinSearch::slotFriendClicked( VxNetIdent * netIdent )
-//{
-//	PopupMenu oPopupMenu( (QWidget *)this->parent() );
-//	if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), &oPopupMenu, SLOT(onFriendActionSelected(int)) ) )
-//	{
-//		LogMsg( LOG_ERROR, "FriendListWidget::findListEntryWidget failed connect\n" );
-//	}
-//
-//	oPopupMenu.showFriendMenu( netIdent );
-//}
-
 
 //============================================================================
 void AppletChatRoomJoinSearch::slotInfoMsg( const QString& text )
@@ -245,7 +225,6 @@ void AppletChatRoomJoinSearch::infoMsg( const char* errMsg, ... )
 void AppletChatRoomJoinSearch::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
     VxNetIdent* netIdent = new VxNetIdent( hostIdent );
-    m_ResultList.push_back(netIdent);
     ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
 }
 

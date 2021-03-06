@@ -24,11 +24,15 @@ public:
     AppletClientBase( const char * objName, AppCommon& app, QWidget * parent );
 	virtual ~AppletClientBase() = default;
 
-    void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
-    EHostType                   getHostType(  void )                { return m_HostType; }
+    void                        setHostType( EHostType hostType )           { m_HostType = hostType; }
+    EHostType                   getHostType(  void )                        { return m_HostType; }
+
+    void                        setSearchType( ESearchType searchType )     { m_SearchType = searchType; }
+    ESearchType                 getSearchType(  void )                      { return m_SearchType; }
 
 protected:
     EHostType                   m_HostType{ eHostTypeUnknown };
+    ESearchType                 m_SearchType{ eSearchNone };
 };
 
 

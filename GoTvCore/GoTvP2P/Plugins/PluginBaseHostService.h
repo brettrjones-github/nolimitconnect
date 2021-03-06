@@ -34,9 +34,9 @@ public:
     virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 protected:
-    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
-    virtual void				onConnectionLost( VxSktBase * sktBase ) override;
-    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+    virtual void				onContactWentOffline            ( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
+    virtual void				onConnectionLost                ( VxSktBase * sktBase ) override;
+    virtual void				replaceConnection               ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
 
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting );
     virtual void				sendHostAnnounce( void );

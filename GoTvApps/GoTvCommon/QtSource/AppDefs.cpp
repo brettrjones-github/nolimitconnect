@@ -218,7 +218,6 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsFileXfer:           return QObject::tr( "Person To Person File Xfer Settings" );
     case eAppletSettingsHostChatRoom:       return QObject::tr( "Host A Chat Room Settings" );
     case eAppletSettingsHostGroup:          return QObject::tr( "Host A Group Settings" );
-    // case eAppletSettingsHostGroupListing:   return QObject::tr( "Group Host Listing Service Settings" );
     case eAppletSettingsHostNetwork:        return QObject::tr( "Host A Network Settings" );
     case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect" );
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );

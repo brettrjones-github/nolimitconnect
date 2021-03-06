@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -29,74 +28,66 @@
 //============================================================================
 PluginGroupClient::PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostClient( engine, pluginMgr, myIdent )
-// , m_PluginSessionMgr( *this, pluginMgr )
+, m_HostClientMgr(engine, pluginMgr, myIdent, *this)
 {
     setPluginType( ePluginTypeGroupClient );
 }
 
 //============================================================================
-void PluginGroupClient::pluginStartup( void )
+void PluginGroupClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
-    PluginBase::pluginStartup();
+    std::string url = ptopUrl ? ptopUrl : "";
+    m_HostClientMgr.fromGuiAnnounceHost( hostType, sessionId, url );
 }
 
 //============================================================================
-bool PluginGroupClient::setPluginSetting( PluginSetting& pluginSetting )
+void PluginGroupClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
-    bool result = PluginBaseHostClient::setPluginSetting( pluginSetting );
-    buildHostAnnounce( pluginSetting );
-    sendHostAnnounce();
-    return result;
+    std::string url = ptopUrl ? ptopUrl : "";
+    m_HostClientMgr.fromGuiJoinHost( hostType, sessionId, url );
 }
 
 //============================================================================
-void PluginGroupClient::onThreadOncePer15Minutes( void )
+void PluginGroupClient::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
-    sendHostAnnounce();
+    m_HostClientMgr.fromGuiSearchHost( hostType, searchParams, enable );
 }
 
 //============================================================================
-void PluginGroupClient::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginGroupClient::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostAnnounce( pluginSetting );
-}
-
-/*
-//============================================================================
-bool PluginGroupClient::onContactConnected( EConnectReason hostConnectType, VxSktBase* sktBase )
-{
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
-    {
-        if( eConnectReasonGroupAnnounce == hostConnectType )
-        {
-            m_AnnMutex.lock();
-            if( m_Engine.lockSkt( sktBase ) )
-            {
-
-                if( sktBase && sktBase->getPeerPktAnn().getMyOnlineId().isVxGUIDValid() )
-                {
-                    sktBase->txPacket( sktBase->getPeerPktAnn().getMyOnlineId(), &m_PktHostAnnounce );
-                }
-
-                m_Engine.unlockSkt( sktBase );
-            }
-
-            m_AnnMutex.unlock();
-        }
-    }
-
-    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectReasonGroupAnnounce, this );
-
-    return false;
+    LogMsg( LOG_DEBUG, "PluginGroupClient got join request" );
 }
 
 //============================================================================
-void PluginGroupClient::onContactDisconnected( EConnectReason hostConnectType, VxSktBase* sktBase )
+void PluginGroupClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    if( eConnectReasonGroupAnnounce == hostConnectType )
-    {
-        // no action needed. we connect and send our group listing then disconnect
-    }
+    LogMsg( LOG_DEBUG, "PluginGroupClient got join reply" );
+    m_HostClientMgr.onPktHostJoinReply( sktBase, pktHdr,  netIdent );
 }
-*/
+
+//============================================================================
+void PluginGroupClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginGroupClient got search reply" );
+    m_HostClientMgr.onPktHostSearchReply( sktBase, pktHdr,  netIdent );
+}
+
+//============================================================================
+void PluginGroupClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginGroupClient got plugin setting reply" );
+    m_HostClientMgr.onPktPluginSettingReply( sktBase, pktHdr,  netIdent );
+}
+
+//============================================================================
+void PluginGroupClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginGroupClient got join offer request" );
+}
+
+//============================================================================
+void PluginGroupClient::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginGroupClient got join offer reply" );
+}

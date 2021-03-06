@@ -53,6 +53,11 @@ protected:
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting ) {};
     virtual void				sendHostAnnounce( void ) {};
 
+    virtual void				onContactWentOnline         ( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};
+    virtual void				onContactWentOffline        ( VxNetIdent *	netIdent, VxSktBase * sktBase ) override {};
+    virtual void				replaceConnection           ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
+    virtual void				onConnectionLost            ( VxSktBase * sktBase ) override {};
+
     //=== vars ===//
     ConnectionMgr&              m_ConnectionMgr; 
     VxMutex                     m_ClientMutex;

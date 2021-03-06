@@ -23,10 +23,7 @@
    <iconset>
     <normaloff>:/TruthOrDare/Resources/ic_people_normal.png</normaloff>:/TruthOrDare/Resources/ic_people_normal.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -39,7 +36,10 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
     <widget class="QGroupBox" name="ItemsGroupBox">
      <property name="minimumSize">
       <size>
@@ -51,21 +51,6 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>5</number>
-      </property>
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
       <item>
        <widget class="QLabel" name="m_StatusLabel">
         <property name="text">
@@ -74,7 +59,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="ScanStatusLabel">
+       <widget class="SearchParamsWidget" name="m_SearchsParamWidget" native="true"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="m_InfoLabel">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -86,73 +74,13 @@
        </widget>
       </item>
       <item>
-       <widget class="FriendListWidget" name="m_FriendListWidget" native="true">
+       <widget class="HostListWidget" name="m_HostListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="SearchLabel">
-        <property name="text">
-         <string>Search For Name ( at least 3 characters )</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="searchEdit"/>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="ScanButtonBox">
-        <property name="title">
-         <string/>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <property name="spacing">
-          <number>2</number>
-         </property>
-         <property name="leftMargin">
-          <number>2</number>
-         </property>
-         <property name="topMargin">
-          <number>2</number>
-         </property>
-         <property name="rightMargin">
-          <number>2</number>
-         </property>
-         <property name="bottomMargin">
-          <number>2</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="StartSearchButton">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Start Search</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="StopSearchButton">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Stop Search</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
       </item>
      </layout>
@@ -162,9 +90,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FriendListWidget</class>
+   <class>SearchParamsWidget</class>
    <extends>QWidget</extends>
-   <header>FriendListWidget.h</header>
+   <header>SearchParamsWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HostListWidget</class>
+   <extends>QWidget</extends>
+   <header>HostListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

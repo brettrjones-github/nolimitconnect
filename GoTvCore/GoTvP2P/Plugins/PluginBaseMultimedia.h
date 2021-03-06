@@ -89,15 +89,14 @@ protected:
 	virtual void				onSessionStart( PluginSessionBase * session, bool pluginIsLocked );
 	virtual void				onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse );
 
-	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onContactWentOffline( VxNetIdent *	netIdent, VxSktBase * sktBase );
-
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-	virtual void				onConnectionLost( VxSktBase * sktBase );
-
-
-	//=== vars ===//
 protected:
+	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
+	virtual void				onContactWentOffline( VxNetIdent *	netIdent, VxSktBase * sktBase ) override;
+
+	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+	virtual void				onConnectionLost( VxSktBase * sktBase ) override;
+
+	//=== vars ===
 	PluginSessionMgr			m_PluginSessionMgr;
 	VoiceFeedMgr				m_VoiceFeedMgr;
 	VideoFeedMgr				m_VideoFeedMgr;

@@ -172,15 +172,75 @@ void AppSettings::getLastBrowseShareDir( std::string& browseDir )
 }
 
 //============================================================================
-void AppSettings::getLastHostSearchText( std::string& searchText )
+void AppSettings::getLastHostSearchText( ESearchType searchType, std::string& searchText )
 {
-    getIniValue( getAppShortName(), "LastHostSearchText", searchText, "" );
+    getIniValue( getAppShortName(), getAppendedType("LastHostSearchText", searchType).c_str(), searchText, "" );
 }
 
 //============================================================================
-void AppSettings::setLastHostSearchText( std::string& searchText )
+void AppSettings::setLastHostSearchText( ESearchType searchType, std::string& searchText )
 {
-    setIniValue( getAppShortName(), "LastHostSearchText", searchText );
+    setIniValue( getAppShortName(), getAppendedType("LastHostSearchText", searchType).c_str(), searchText );
+}
+
+//============================================================================
+void AppSettings::setLastHostSearchAgeType( ESearchType searchType, EAgeType ageType )
+{
+    uint32_t val = (uint32_t)ageType;
+    setIniValue( getAppShortName(), getAppendedType("LastHostSearchAge", searchType).c_str(), val );
+}
+
+//============================================================================
+void AppSettings::getLastHostSearchAgeType( ESearchType searchType, EAgeType& ageType )
+{
+    uint32_t val = 0;
+    getIniValue( getAppShortName(), getAppendedType("LastHostSearchAge", searchType).c_str(), val, 0 );
+    ageType = (EAgeType)val;
+}
+
+//============================================================================
+void AppSettings::setLastHostSearchGender( ESearchType searchType, EGenderType genderType )
+{
+    uint32_t val = (uint32_t)genderType;
+    setIniValue( getAppShortName(), getAppendedType("LastHostSearchGender", searchType).c_str(), val );
+}
+
+//============================================================================
+void AppSettings::getLastHostSearchGender( ESearchType searchType, EGenderType& genderType )
+{
+    uint32_t val = 0;
+    getIniValue( getAppShortName(), getAppendedType("LastHostSearchGender", searchType).c_str(), val, 0 );
+    genderType = (EGenderType)val;
+}
+
+//============================================================================
+void AppSettings::setLastHostSearchLanguage( ESearchType searchType, ELanguageType languageType )
+{
+    uint32_t val = (uint32_t)languageType;
+    setIniValue( getAppShortName(), getAppendedType("LastHostSearchLanguage", searchType).c_str(), val );
+}
+
+//============================================================================
+void AppSettings::getLastHostSearchLanguage( ESearchType searchType, ELanguageType& languageType )
+{
+    uint32_t val = 0;
+    getIniValue( getAppShortName(), getAppendedType("LastHostSearchLanguage", searchType).c_str(), val, 0 );
+    languageType = (ELanguageType)val;
+}
+
+//============================================================================
+void AppSettings::setLastHostSearchContentRating( ESearchType searchType, EContentRating contentRating )
+{
+    uint32_t val = (uint32_t)contentRating;
+    setIniValue( getAppShortName(), getAppendedType("LastHostSearchRating", searchType).c_str(), val );
+}
+
+//============================================================================
+void AppSettings::getLastHostSearchContentRating( ESearchType searchType, EContentRating& contentRating )
+{
+    uint32_t val = 0;
+    getIniValue( getAppShortName(), getAppendedType("LastHostSearchRating", searchType).c_str(), val, 0 );
+    contentRating = (EContentRating)val;
 }
 
 //============================================================================
@@ -392,6 +452,14 @@ bool AppSettings::appModeSettingsAreInitialize( void )
 	bool confirmIsInitialized = false;
 	getIniValue( getAppShortName(), "AppDefaultInited", confirmIsInitialized, false );
 	return confirmIsInitialized;
+}
+
+//============================================================================
+std::string AppSettings::getAppendedType( const char * key, ESearchType searchType )
+{
+    std::string result;
+    StdStringFormat( result, "%s%d", key, (int)searchType );
+    return result;
 }
 
 //============================================================================

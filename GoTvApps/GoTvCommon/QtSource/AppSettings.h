@@ -63,8 +63,16 @@ public:
 	void						setLastGalleryDir( std::string& galleryDir );
 	void						getLastGalleryDir( std::string& galleryDir );
 
-    void						setLastHostSearchText( std::string& searchText );
-    void						getLastHostSearchText( std::string& searchText );
+    void						setLastHostSearchText( ESearchType searchType, std::string& searchText );
+    void						getLastHostSearchText( ESearchType searchType, std::string& searchText );
+    void						setLastHostSearchAgeType( ESearchType searchType, EAgeType ageType );
+    void						getLastHostSearchAgeType( ESearchType searchType, EAgeType& ageType );
+    void						setLastHostSearchGender( ESearchType searchType, EGenderType genderType );
+    void						getLastHostSearchGender( ESearchType searchType, EGenderType& genderType );
+    void						setLastHostSearchLanguage( ESearchType searchType, ELanguageType languageType );
+    void						getLastHostSearchLanguage( ESearchType searchType, ELanguageType& languageType );
+    void						setLastHostSearchContentRating( ESearchType searchType, EContentRating contentRating );
+    void						getLastHostSearchContentRating( ESearchType searchType, EContentRating& contentRating );
 
 	void						setCamSourceId( uint32_t camId );
 	uint32_t					getCamSourceId( void );
@@ -96,6 +104,7 @@ public:
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );
+    std::string                 getAppendedType( const char * key, ESearchType searchType );
 
 	std::string					m_AppShortName;
 	// caching of feature settings

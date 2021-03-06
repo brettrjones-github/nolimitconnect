@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -15,20 +15,12 @@
 #include "PluginGroupHost.h"
 #include "PluginMgr.h"
 
-#include "RelayServerSession.h"
-#include "RelayClientSession.h"
-#include "Relay.h"
-
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 
-#include <PktLib/PktsRelay.h>
-#include <PktLib/PktAnnounce.h>
-#include <PktLib/PktsRelay.h>
-
 #include <NetLib/VxSktBase.h>
-
-#include <string.h>
+#include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsHostSearch.h>
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4355) //'this' : used in base member initializer list
@@ -57,18 +49,50 @@ bool PluginGroupHost::setPluginSetting( PluginSetting& pluginSetting )
     return result;
 }
 
+
 //============================================================================
 void PluginGroupHost::onThreadOncePer15Minutes( void )
 {
-    sendHostAnnounce();
+    sendHostGroupAnnounce();
+}
+
+//============================================================================
+void PluginGroupHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
+{
+    m_AnnMutex.lock();
+    m_Engine.lockAnnouncePktAccess();
+    m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
+    pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyOnlineUrl() );
+    m_Engine.unlockAnnouncePktAccess();
+    m_PluginSetting = pluginSetting;
+    m_PluginSetting.setUpdateTimestampToNow();
+    BinaryBlob binarySetting;
+    m_PluginSetting.toBinary( binarySetting );
+    m_PktHostAnnounce.setHostType( eHostTypeGroup );
+    m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
+    // m_PktHostAnnounce.setIsLoopback( true ); // BRJ temp for testing
+    m_HostAnnounceBuilt = true;
+    m_AnnMutex.unlock();
 }
 
 //============================================================================
 void PluginGroupHost::sendHostGroupAnnounce( void )
 {
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
+    if( !m_HostAnnounceBuilt && 
+        ( m_Engine.getEngineSettings().getFirewallTestSetting() == FirewallSettings::eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
+            m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
     {
-        //m_Engine.getConnectionMgr().requestHostConnection( eHostTypeGroup, getPluginType(), eConnectReasonGroupAnnounce, this );
+        PluginSetting pluginSetting;
+        if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+        {
+            buildHostGroupAnnounce( pluginSetting );
+        }
+    }
+
+    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    {
+        VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonGroupAnnounce );
     }
 }
 
@@ -76,44 +100,5 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
 void PluginGroupHost::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostAnnounce( pluginSetting );
+    buildHostGroupAnnounce( pluginSetting );
 }
-
-/*
-//============================================================================
-bool PluginGroupHost::onContactConnected( EConnectReason hostConnectType, VxSktBase* sktBase )
-{
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
-    {
-        if( eConnectReasonChatRoomAnnounce == hostConnectType )
-        {
-            m_AnnMutex.lock();
-            if( m_Engine.lockSkt( sktBase ) )
-            {
-
-                if( sktBase && sktBase->getPeerPktAnn().getMyOnlineId().isVxGUIDValid() )
-                {
-                    sktBase->txPacket( sktBase->getPeerPktAnn().getMyOnlineId(), &m_PktHostAnnounce );
-                }
-
-                m_Engine.unlockSkt( sktBase );
-            }
-
-            m_AnnMutex.unlock();
-        }
-    }
-
-    m_Engine.getConnectionMgr().requestHostConnection( eHostTypeChatRoom, getPluginType(), eConnectReasonChatRoomAnnounce, this );
-
-    return false;
-}
-
-//============================================================================
-void PluginGroupHost::onContactDisconnected( EConnectReason hostConnectType, VxSktBase* sktBase )
-{
-    if( eConnectReasonChatRoomAnnounce == hostConnectType )
-    {
-        // no action needed. we connect and send our group listing then disconnect
-    }
-}
-*/
