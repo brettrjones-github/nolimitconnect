@@ -25,11 +25,11 @@
 
 //============================================================================
 void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent, 
-										EPluginType		ePluginType, 
-										uint8_t				u8FileType, 
-										uint64_t				u64FileLen, 
-										const char *	pFileName,
-										uint8_t *			fileHashData )
+									EPluginType		ePluginType, 
+									uint8_t			u8FileType, 
+									uint64_t		u64FileLen, 
+									const char *	pFileName,
+									uint8_t *		fileHashData )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -54,10 +54,10 @@ void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent,
 void AppCommon::toGuiStartUpload(	VxNetIdent *	netIdent, 
 									EPluginType		ePluginType, 
 									VxGUID&			lclSessionId, 
-									uint8_t				fileType, 
-									uint64_t				fileLen, 
+									uint8_t			fileType, 
+									uint64_t		fileLen, 
 									const char *	fileName,
-									uint8_t *			fileHashData )
+									uint8_t *		fileHashData )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -80,12 +80,12 @@ void AppCommon::toGuiStartUpload(	VxNetIdent *	netIdent,
 
 //============================================================================
 void AppCommon::toGuiStartDownload(	VxNetIdent *	netIdent, 
-										EPluginType		ePluginType, 
-										VxGUID&			lclSessionId, 
-										uint8_t				u8FileType, 
-										uint64_t				u64FileLen, 
-										const char *	pFileName,
-										uint8_t *			fileHashData )
+									EPluginType		ePluginType, 
+									VxGUID&			lclSessionId, 
+									uint8_t			u8FileType, 
+									uint64_t		u64FileLen, 
+									const char *	pFileName,
+									uint8_t *		fileHashData )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -145,7 +145,7 @@ void AppCommon::toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * ne
 }
 
 //============================================================================
-void AppCommon::toGuiFileUploadComplete( VxGUID&	lclSessionId, EXferError xferError  )
+void AppCommon::toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError  )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -165,11 +165,11 @@ void AppCommon::toGuiFileUploadComplete( VxGUID&	lclSessionId, EXferError xferEr
 
 //============================================================================
 void AppCommon::toGuiFileList(	const char *	fileName, 
-									uint64_t				fileLen, 
-									uint8_t				fileType, 
-									bool			isShared,
-									bool			isInLibrary,
-									uint8_t *			fileHashId )
+								uint64_t		fileLen, 
+								uint8_t			fileType, 
+								bool			isShared,
+								bool			isInLibrary,
+								uint8_t *		fileHashId )
 {
 	if( VxIsAppShuttingDown() )
 	{

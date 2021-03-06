@@ -41,11 +41,14 @@ FileXferWidget::FileXferWidget(QWidget *parent)
 FileXferWidget::~FileXferWidget()
 {
 	GuiFileXferSession * fileItemInfo = (GuiFileXferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
-	delete fileItemInfo;
+    if( fileItemInfo && !fileItemInfo->parent() )
+    {
+        delete fileItemInfo;
+    }
 }
 
 //============================================================================
-MyIcons&  FileXferWidget::getMyIcons( void )
+MyIcons& FileXferWidget::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();
 }
@@ -228,7 +231,7 @@ void FileXferWidget::updateWidgetFromInfo( void )
 		case eXferStateUploadError:
 		case eXferStateDownloadError:
 			ui.m_FileStatus->setText( GuiParams::describeEXferError( (EXferError)poSession->getXferStateParam2() ) );
-			ui.m_FileStatus->setStyleSheet("color: rgb(244, 0, 0);\n");
+			//ui.m_FileStatus->setStyleSheet("color: rgb(244, 0, 0);\n");
 			break;
 
 		case eXferStateCompletedUpload:
@@ -236,7 +239,7 @@ void FileXferWidget::updateWidgetFromInfo( void )
 			if( 0 != poSession->getXferStateParam2() )
 			{
 				ui.m_FileStatus->setText( GuiParams::describeEXferError( (EXferError)poSession->getXferStateParam2() ) );
-				ui.m_FileStatus->setStyleSheet("color: rgb(244, 0, 0);\n");
+				//ui.m_FileStatus->setStyleSheet("color: rgb(244, 0, 0);\n");
 			}
 			else
 			{

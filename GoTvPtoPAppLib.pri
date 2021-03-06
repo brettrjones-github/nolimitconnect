@@ -719,6 +719,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FileShareItemWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FileXferWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/FriendListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/HostListEntryWidget.ui \
@@ -736,7 +737,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputVoiceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InstMsgWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/LogWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FriendListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkKeyWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkTestWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \

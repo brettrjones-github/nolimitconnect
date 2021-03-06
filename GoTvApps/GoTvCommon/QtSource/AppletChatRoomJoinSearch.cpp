@@ -184,24 +184,18 @@ void AppletChatRoomJoinSearch::slotInfoMsg( const QString& text )
 //============================================================================
 void AppletChatRoomJoinSearch::slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString text )
 {
-   // getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
-    //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
     setInfoLabel( GuiParams::describeStatus(hostStatus) + text);
 }
 
 //============================================================================
 void AppletChatRoomJoinSearch::slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString text )
 {
-    //getInfoEdit()->appendPlainText( text ); // Adds the message to the widget
-    //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
     setInfoLabel( GuiParams::describeStatus(hostStatus) + text);
 }
 
 //============================================================================
 void AppletChatRoomJoinSearch::slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
 {
-    //getInfoEdit()->appendPlainText( strMsg ); // Adds the message to the widget
-    //getInfoEdit()->verticalScrollBar()->setValue( getInfoEdit()->verticalScrollBar()->maximum() ); // Scrolls to the bottom
     if( hostStatus == eHostSearchCompleted )
     {
         m_SearchStarted = false;
@@ -223,8 +217,7 @@ void AppletChatRoomJoinSearch::slotHostSearchResult( EHostType hostType, VxGUID 
     QString strMsg = QObject::tr( "Match found: " );
     strMsg += hostIdent.getOnlineName();
     setInfoLabel( strMsg );
-    addPluginSettingToList( hostIdent, pluginSetting );
-
+    addPluginSettingToList( hostType, sessionId, hostIdent, pluginSetting );
 }
 
 //============================================================================
@@ -249,17 +242,17 @@ void AppletChatRoomJoinSearch::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletChatRoomJoinSearch::addPluginSettingToList( VxNetIdent& hostIdent, PluginSetting& pluginSetting )
+void AppletChatRoomJoinSearch::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
     VxNetIdent* netIdent = new VxNetIdent( hostIdent );
     m_ResultList.push_back(netIdent);
-    ui.m_HostListWidget->updateFriend( netIdent, false );
+    ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
 }
 
 //============================================================================
 void AppletChatRoomJoinSearch::clearPluginSettingToList( void )
 {
-    ui.m_HostListWidget->clear();
+    ui.m_HostListWidget->clearHostList();
 }
 
 //============================================================================

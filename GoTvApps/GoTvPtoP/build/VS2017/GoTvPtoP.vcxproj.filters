@@ -106,6 +106,12 @@
     <Filter Include="GoTvCommon\Source Files\ForReferenceOnly">
       <UniqueIdentifier>{2ec4c7e5-ba4a-46fc-91e9-793b1d853334}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\GuiSession">
+      <UniqueIdentifier>{0376860a-3343-4d90-acd2-06652e5e6bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\GuiList">
+      <UniqueIdentifier>{0656ace4-2c51-4bc8-80af-ab3b501c4c20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -138,31 +144,10 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\Friend.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.cpp">
@@ -990,20 +975,44 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp">
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.cpp">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1263,24 +1272,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\IdentWidget.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.h">
@@ -1961,17 +1952,35 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenu.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.h">
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\IdentWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.h">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.h">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2814,9 +2823,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
@@ -3006,8 +3012,14 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h">
       <Filter>GoTvCommon\Source Files\ForReferenceOnly</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.h">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.h">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

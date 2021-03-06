@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_ListEntryWidget.h"
+#include "ui_FriendListEntryWidget.h"
 
 #include <QListWidgetItem>
 #include <QObject>
@@ -25,7 +25,7 @@ class FriendListEntryWidget : public QObject, public QListWidgetItem
 	Q_OBJECT;
 public:
 	FriendListEntryWidget( QListWidget * parent = 0, int type = Type );
-	virtual ~FriendListEntryWidget() override = default;
+	virtual ~FriendListEntryWidget();
 
 	QPushButton *				getSubWidget( void )		{ return SubWidget; }
 	QPushButton *				getMenuButton( void )		{ return m_MenuButton; }
@@ -44,7 +44,7 @@ public slots:
 
 public:
 	//=== vars ===//
-    Ui::ListWidgetEntryClass	ui;
+    Ui::FriendListEntryWidgetUi	ui;
 	QPushButton *				SubWidget;
 	QPushButton *				m_MenuButton;
 };

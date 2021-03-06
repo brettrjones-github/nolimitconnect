@@ -33,15 +33,15 @@ public:
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
+    void						setFileItemInfo( GuiFileXferSession * fileItemInfo );
+    GuiFileXferSession *		getFileItemInfo( void );
+
 	void						setXferState( EXferState eXferState, int param1, int param2 );
 
 	void						setIsShared( bool isShared );
 	bool						getIsShared( void );
 	void						setIsInLibrary( bool isInLibrary );
 	bool						getIsInLibrary( void );
-
-	void						setFileItemInfo( GuiFileXferSession * fileItemInfo );
-	GuiFileXferSession *		getFileItemInfo( void );
 
 	void						setFileIconButtonEnabled( bool enable );
 	void						setFileProgressBarValue( int val );
@@ -67,8 +67,8 @@ protected slots:
 	void						slotShredButtonClicked( void );
 
 protected:
-	virtual void				mousePressEvent(QMouseEvent * event);
-	virtual void				resizeEvent(QResizeEvent* resizeEvent);
+    virtual void				mousePressEvent( QMouseEvent * event ) override;
+    virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	Ui::FileXferWidgetClass		ui;
 	AppCommon&					m_MyApp;

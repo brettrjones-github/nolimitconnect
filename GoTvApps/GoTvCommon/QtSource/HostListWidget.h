@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2013 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -14,13 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "FriendList.h"
-#include "VxGuidQt.h"
+#include <GoTvInterface/IDefs.h>
 
 #include <CoreLib/VxTimer.h>
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/AssetDefs.h>
+#include <CoreLib/VxGUID.h>
 
 #include <QListWidget>
 
@@ -29,6 +25,8 @@ class VxNetIdent;
 class AppCommon;
 class MyIcons;
 class P2PEngine;
+class GuiHostSession;
+class PluginSetting;
 
 class HostListWidget : public QListWidget
 {
@@ -39,49 +37,32 @@ public:
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
+    void                        clearHostList( void );
 
-	void						setFriendViewType( EFriendViewType eWhichFriendsToShow );
-	EFriendViewType				getFriendViewType( void );
+    void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
+    HostListEntryWidget*        addOrUpdateHostSession( GuiHostSession* hostSession );
 
-	void						setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool hasTextMsgs );
-	//! update friend in list
-	void						updateFriend( VxNetIdent * netIdent, bool sessionTimeChange = false );
-	void						removeFriend( VxNetIdent * netIdent );
-	void						refreshFriendList( EFriendViewType eWhichFriendsToShow );
+    GuiHostSession*             findSession( VxGUID& lclSessionId );
+    HostListEntryWidget*        findListEntryWidgetBySessionId( VxGUID& sessionId );
+    HostListEntryWidget*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
 signals:
 	void						signalUpdateFriend( VxNetIdent * netIdent, bool sessionTimeChange );
 	void						signalFriendClicked( VxNetIdent * netIdent );
 	void						signalRefreshFriendList( EFriendViewType eWhichFriendsToShow );
 
-private slots:
-	void						slotUpdateFriend( VxNetIdent * netIdent, bool sessionTimeChange );
-	void						slotRefreshFriend( VxGuidQt friendId );
-	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGuidQt onlineId, int pos );
-	void						slotItemClicked(QListWidgetItem *);
-	void						slotRefreshFriendList( EFriendViewType eWhichFriendsToShow );
-	void						slotFriendListItemClicked( HostListEntryWidget* widget );
-	void						slotFriendMenuButtonClicked( HostListEntryWidget* widget );
+protected slots:
+	void						slotItemClicked( QListWidgetItem* item );
+    void                        slotHostListItemClicked( HostListEntryWidget* hostItem );
+    void                        slotHostMenuButtonClicked( HostListEntryWidget* hostItem );
 
 protected:
-	//!	fill friend into new QListWidgetItem *
-	HostListEntryWidget *			friendToWidget( VxNetIdent * poFriend );
-	//!	get friend from QListWidgetItem data
-	Friend *					widgetToFriend( HostListEntryWidget * item );
-
-	void						updateHostListEntryWidget( HostListEntryWidget * item, VxNetIdent * netIdent );
-
-	HostListEntryWidget *			findHostListEntryWidget( VxNetIdent * netIdent );
-
-	void						updateListEntryBackgroundColor( VxNetIdent * netIdent, HostListEntryWidget * poWidget );
+    HostListEntryWidget*        sessionToWidget( GuiHostSession* hostSession );
+    GuiHostSession*				widgetToSession( HostListEntryWidget* hostItem );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
-	EFriendViewType				m_eFriendViewType;
-    Friend *					m_SelectedFriend;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
-	VxGUID						m_ViewingOnlineId;
-	bool						m_IsCurrentlyViewing;
 };
 

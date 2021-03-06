@@ -34,18 +34,18 @@ public:
 	GuiFileXferSession(	EPluginType		ePluginType, 
 						VxNetIdent *	netIdent, 
 						VxGuidQt&		lclSessionId, 
-						uint8_t				u8FileType, 
-						uint64_t				u64FileLen, 
+						uint8_t			u8FileType, 
+						uint64_t		u64FileLen, 
 						const char *	pFileName,
 						VxSha1Hash&		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
 						VxNetIdent *	netIdent, 
 						VxGuidQt&		lclSessionId, 
-						uint8_t				u8FileType, 
-						uint64_t				u64FileLen, 
+						uint8_t			u8FileType, 
+						uint64_t		u64FileLen, 
 						const char *	pFileName,
-						uint8_t *			fileHashId );
+						uint8_t *		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
 						VxNetIdent *	netIdent, 
@@ -75,12 +75,12 @@ public:
 
 	void						setFullFileName( QString fileName )			{ m_FileInfo.setFullFileName( fileName ); }
 	QString&					getFullFileName( void )						{ return m_FileInfo.getFullFileName(); }
-	void						setFileType( uint8_t	fileType )					{ m_FileInfo.setFileType( fileType ); }
-	uint8_t							getFileType( void ) const					{ return m_FileInfo.getFileType(); }
-	void						setFileLength( uint64_t fileLen )				{ m_FileInfo.setFileLength( fileLen ); }
-	uint64_t							getFileLength( void ) const					{ return m_FileInfo.getFileLength(); }
+	void						setFileType( uint8_t	fileType )			{ m_FileInfo.setFileType( fileType ); }
+	uint8_t						getFileType( void ) const					{ return m_FileInfo.getFileType(); }
+	void						setFileLength( uint64_t fileLen )			{ m_FileInfo.setFileLength( fileLen ); }
+	uint64_t					getFileLength( void ) const					{ return m_FileInfo.getFileLength(); }
 	void						setFileHashId( VxSha1Hash& id )				{ m_FileInfo.getFileHashId() = id; }
-	void						setFileHashId( uint8_t * fileHashData )			{ m_FileInfo.setFileHashId( fileHashData ); }
+	void						setFileHashId( uint8_t * fileHashData )		{ m_FileInfo.setFileHashId( fileHashData ); }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileInfo.getFileHashId(); }
 
 	void						setIsShared( bool isShared )				{ m_FileInfo.setIsShared( isShared ); }
@@ -111,7 +111,7 @@ protected:
 	EPluginType					m_ePluginType;
 	VxNetIdent *				m_Ident;
 	VxGuidQt					m_LclSessionId;
-	VxMyFileInfo					m_FileInfo;
+	VxMyFileInfo				m_FileInfo;
 	QWidget *					m_Widget;
 	EXferState					m_eXferState;
 	int							m_XferStateParam1;

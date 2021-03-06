@@ -100,7 +100,7 @@ FileXferWidget * ActivityDownloads::sessionToWidget( GuiFileXferSession * poSess
     item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
         ( int )( 62 * GuiParams::getGuiScale() ) ) );
 
-    item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poSession) );
+    item->setFileItemInfo( poSession );
 
 	connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)) );
 	connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem *)) );
@@ -125,7 +125,7 @@ void ActivityDownloads::updateListEntryWidget( FileXferWidget * item, GuiFileXfe
 //============================================================================
 GuiFileXferSession * ActivityDownloads::widgetToSession( FileXferWidget * item )
 {
-	return (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
+	return item->getFileItemInfo();
 }
 
 //============================================================================
@@ -142,7 +142,7 @@ GuiFileXferSession * ActivityDownloads::findSession( VxGuidQt lclSessionId )
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 //============================================================================
@@ -162,7 +162,7 @@ FileXferWidget * ActivityDownloads::findListEntryWidget( VxGuidQt lclSessionId )
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 //============================================================================

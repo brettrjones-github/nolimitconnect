@@ -842,6 +842,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -2152,6 +2153,7 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

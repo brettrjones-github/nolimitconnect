@@ -24,6 +24,7 @@
 #include "ui_AppletChatRoomJoinSearch.h"
 
 class VxNetIdent;
+class GuiHostSession;
 
 class AppletChatRoomJoinSearch : public AppletClientBase
 {
@@ -42,7 +43,7 @@ public:
 
     QString                     getSearchText( void ) { return ui.m_SearchsParamWidget->getSearchTextEdit()->text(); }
 
-    void						addPluginSettingToList( VxNetIdent& hostIdent, PluginSetting& pluginSetting );
+    void						addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
     void                        clearPluginSettingToList( void );
     void                        clearStatus( void );
 

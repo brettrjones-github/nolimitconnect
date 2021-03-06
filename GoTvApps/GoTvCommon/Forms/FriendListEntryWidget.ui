@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ListWidgetEntryClass</class>
- <widget class="QWidget" name="ListWidgetEntryClass">
+ <class>FriendListEntryWidgetUi</class>
+ <widget class="QWidget" name="FriendListEntryWidgetUi">
   <property name="geometry">
    <rect>
     <x>0</x>

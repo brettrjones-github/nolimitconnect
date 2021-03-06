@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2013 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -16,6 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "HostListEntryWidget.h"
 #include "HostListWidget.h"
+#include "GuiHostSession.h"
 
 #include "MyIcons.h"
 #include "PopupMenu.h"
@@ -30,30 +30,43 @@ HostListWidget::HostListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
-, m_eFriendViewType( eFriendViewEverybody )
-, m_SelectedFriend( NULL )
-, m_ViewingOnlineId()
-, m_IsCurrentlyViewing( false )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
-	connect( this, SIGNAL(signalRefreshFriendList(EFriendViewType)), 
-             this, SLOT(slotRefreshFriendList(EFriendViewType)), Qt::QueuedConnection );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+}
 
-    connect( this, SIGNAL(signalUpdateFriend( VxNetIdent *,bool)),
-                          this, SLOT(slotUpdateFriend( VxNetIdent *,bool)), Qt::QueuedConnection );
+//============================================================================
+HostListEntryWidget* HostListWidget::sessionToWidget( GuiHostSession* hostSession )
+{
+    HostListEntryWidget* hostItem = new HostListEntryWidget(this);
+    hostItem->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
+        ( int )( 62 * GuiParams::getGuiScale() ) ) );
 
-    connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGuidQt)),
-                          this, SLOT(slotRefreshFriend(VxGuidQt)), Qt::QueuedConnection )
-            ;
-    connect( &m_MyApp, SIGNAL(signalAssetViewMsgAction(EAssetAction,VxGuidQt,int)),
-                          this, SLOT(slotAssetViewMsgAction(EAssetAction,VxGuidQt,int)), Qt::QueuedConnection );
+    hostItem->setHostSession( hostSession );
+
+    /*
+    connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)) );
+    connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem *)) );
+    connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem *)),	this, SLOT(slotCancelButtonClicked(QListWidgetItem *)) );
+    connect( item, SIGNAL(signalPlayButtonClicked(QListWidgetItem *)),		this, SLOT(slotPlayButtonClicked(QListWidgetItem *)) );
+    connect( item, SIGNAL(signalLibraryButtonClicked(QListWidgetItem *)),	this, SLOT(slotLibraryButtonClicked(QListWidgetItem *)) );
+    connect( item, SIGNAL(signalFileShareButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileShareButtonClicked(QListWidgetItem *)) );
+    connect( item, SIGNAL(signalShredButtonClicked(QListWidgetItem *)),		this, SLOT(slotShredButtonClicked(QListWidgetItem *)) );
+    */
+
+    hostItem->updateWidgetFromInfo();
+
+    return hostItem;
+}
+
+//============================================================================
+GuiHostSession* HostListWidget::widgetToSession( HostListEntryWidget * item )
+{
+    return item->getHostSession();
 }
 
 //============================================================================
@@ -63,108 +76,76 @@ MyIcons&  HostListWidget::getMyIcons( void )
 }
 
 //============================================================================
-void HostListWidget::slotAssetViewMsgAction( EAssetAction eAssetAction, VxGuidQt onlineIdIn, int pos0to100000 )
+GuiHostSession * HostListWidget::findSession( VxGUID& lclSessionId )
 {
-	VxGUID onlineId;
-	uint64_t hiPart = onlineIdIn.getVxGUIDHiPart();
-	uint64_t loPart = onlineIdIn.getVxGUIDLoPart();
-	onlineId.setVxGUID( hiPart, loPart );
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        HostListEntryWidget* listItem =  (HostListEntryWidget*)item( iRow );
+        if( listItem )
+        {
+            GuiHostSession * hostSession = listItem->getHostSession();
+            if( hostSession && hostSession->getSessionId() == lclSessionId )
+            {
+                return hostSession;
+            }
+        }
+    }
 
-	if( eAssetActionRxViewingMsg == eAssetAction )
-	{
-		m_IsCurrentlyViewing = pos0to100000 ? true : false;
-		if( m_IsCurrentlyViewing )
-		{
-			m_ViewingOnlineId = onlineId;
-			setFriendHasUnviewedTextMessages( m_ViewingOnlineId, false );
-		}
-
-		return;
-	}
-
-	if( eAssetActionRxNotifyNewMsg == eAssetAction )
-	{
-		if( m_IsCurrentlyViewing 
-			&& ( onlineId == m_ViewingOnlineId ) )
-		{
-			// user is viewing messages from this contact
-			setFriendHasUnviewedTextMessages( onlineId, false );
-			return;
-		}
-
-		setFriendHasUnviewedTextMessages( onlineId, true );
-	}
+    return nullptr;
 }
 
 //============================================================================
-void HostListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool hasTextMsgs )
+HostListEntryWidget* HostListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
 {
-	HostListEntryWidget * poWidget;
-	int iIdx = 0;
-	while( iIdx < this->count() )
-	{
-		poWidget = (HostListEntryWidget *)this->item(iIdx);
-		if( poWidget )
-		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
-			if( poFriend
-				&& ( poFriend->getMyOnlineId() == onlineId ) )
-			{
-				// found the widget
-				poFriend->setHasTextOffers( hasTextMsgs );
-				updateHostListEntryWidget( poWidget, poFriend );
-				return;
-			}
-		}
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        HostListEntryWidget*  hostItem = (HostListEntryWidget*)item( iRow );
+        if( hostItem )
+        {
+            GuiHostSession * hostSession = hostItem->getHostSession();
+            if( hostSession && ( hostSession->getSessionId() == sessionId ) )
+            {
+                return hostItem;
+            }
+        }
+    }
 
-		iIdx++;
-	}
+    return nullptr;
 }
 
 //============================================================================
-void HostListWidget::setFriendViewType( EFriendViewType eWhichFriendsToShow )
+HostListEntryWidget* HostListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 {
-	m_eFriendViewType = eWhichFriendsToShow;
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        HostListEntryWidget*  hostItem = (HostListEntryWidget*)item( iRow );
+        if( hostItem )
+        {
+            GuiHostSession * hostSession = hostItem->getHostSession();
+            if( hostSession && ( hostSession->getHostIdent().getMyOnlineId() == onlineId ) )
+            {
+                return hostItem;
+            }
+        }
+    }
+
+    return nullptr;
 }
 
 //============================================================================
-EFriendViewType HostListWidget::getFriendViewType( void )
-{
-	return m_eFriendViewType;
-}
-
-//============================================================================
-void HostListWidget::refreshFriendList( EFriendViewType eWhichFriendsToShow )
-{
-	this->clear();
-	emit signalRefreshFriendList( eWhichFriendsToShow );
-}
-
-//============================================================================
-void HostListWidget::slotRefreshFriendList( EFriendViewType eWhichFriendsToShow )
-{
-	this->clear();
-	this->setFriendViewType( eWhichFriendsToShow );
-	m_Engine.fromGuiSendContactList( eWhichFriendsToShow, 500 );
-}
-
-//============================================================================
-void HostListWidget::updateFriend( VxNetIdent * netIdent, bool sessionTimeChange ) 
-{
-	emit signalUpdateFriend( netIdent, sessionTimeChange );
-}
-
-//============================================================================
-void HostListWidget::slotItemClicked(QListWidgetItem * item )
+void HostListWidget::slotItemClicked( QListWidgetItem * item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
-		slotFriendListItemClicked( (HostListEntryWidget *) item );
+		slotHostListItemClicked( (HostListEntryWidget *)item );
 	}
 }
 
 //============================================================================
-void HostListWidget::slotFriendListItemClicked( HostListEntryWidget* item )
+void HostListWidget::slotHostListItemClicked( HostListEntryWidget* hostItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -172,32 +153,14 @@ void HostListWidget::slotFriendListItemClicked( HostListEntryWidget* item )
 	}
 
 	m_ClickEventTimer.startTimer();
-	m_SelectedFriend = widgetToFriend( item );
-	if( m_SelectedFriend )
+    GuiHostSession* hostSession  = hostItem->getHostSession();
+	if( hostSession )
 	{
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeMessenger ) )
-		{
-			QWidget * parent2 = 0;
-			QWidget * parent1 = (QWidget *)this->parent();
-			if( parent1 )
-			{
-				parent2 = (QWidget *)parent1->parent();
-			}
-
-			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, ePluginTypeMessenger, parent2 ? parent2 : parent1 );
-			emit signalFriendClicked( m_SelectedFriend );
-		}
-		else
-		{
-			QString warnTitle = QObject::tr("Insufficient Permission Level");
-			QString warmPermission = warnTitle + QObject::tr(" To Access Plugin ") + DescribePluginType( ePluginTypeMessenger );
-			QMessageBox::warning(this, QObject::tr("Insufficient Permission Level "), warmPermission );
-		}
 	}
 }
 
 //============================================================================
-void HostListWidget::slotFriendMenuButtonClicked( HostListEntryWidget* item )
+void HostListWidget::slotHostMenuButtonClicked( HostListEntryWidget* item )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -205,7 +168,8 @@ void HostListWidget::slotFriendMenuButtonClicked( HostListEntryWidget* item )
 	}
 
 	m_ClickEventTimer.startTimer();
-	m_SelectedFriend = widgetToFriend( item );
+    /*
+	m_SelectedFriend = widgetToHost( item );
 	if( m_SelectedFriend )
 	{
 		emit signalFriendClicked( m_SelectedFriend );
@@ -220,201 +184,63 @@ void HostListWidget::slotFriendMenuButtonClicked( HostListEntryWidget* item )
             popupMenu.showFriendMenu( m_SelectedFriend );
         }
 	}
+    */
 }
 
 //============================================================================
-void HostListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTimeChange ) 
+void HostListWidget::addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
-	LogMsg( LOG_INFO, "HostListWidget::slotUpdateFriend  %d\n", this->count() );
-	HostListEntryWidget * poWidget = findHostListEntryWidget( netIdent );
-	if( poWidget )
-	{
-		LogMsg( LOG_INFO, "HostListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->isOnline() );
-		updateHostListEntryWidget( poWidget, netIdent );
-	}
-	else
-	{
-		HostListEntryWidget * poFriendItem = friendToWidget( netIdent ); 
-		int64_t hisSessionTime = netIdent->getLastSessionTimeMs();
-		if( 0 == this->count() )
-		{
-			insertItem( this->count(), poFriendItem );
-			LogMsg( LOG_INFO, "HostListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
-			//addItem( poFriendItem );
-		}
-		else
-		{
-			bool wasInserted = false;
-			int rowIdx = 0;
-			HostListEntryWidget * listEntryWidget;
-			while( rowIdx < this->count() )
-			{
-				listEntryWidget = (HostListEntryWidget *)this->item( rowIdx );
-				if( listEntryWidget )
-				{
-					Friend * listEntryFriend = (Friend *)listEntryWidget->data( Qt::UserRole + 2 ).toULongLong();
-					if( listEntryFriend )
-					{
-						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
-						if( listSessionTime < hisSessionTime )
-						{
-							LogMsg( LOG_INFO, "HostListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), rowIdx, hisSessionTime  );
-							insertItem( rowIdx, poFriendItem );
-							wasInserted = true;
-							break;
-						}
-					}
-				}
+    GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, hostIdent, pluginSetting, this );
 
-				rowIdx++;
-			}
-
-			if( false == wasInserted )
-			{
-				//addItem( poFriendItem );
-				LogMsg( LOG_INFO, "HostListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count(), hisSessionTime );
-				insertItem( this->count(), poFriendItem );
-			}
-		}
-
-		//poFriendItem->setSizeHint( QSize((int)GuiParams::getGuiScale() * 200, GuiParams::getButtonSize() + 4) );
-
-		setItemWidget( poFriendItem, poFriendItem->getSubWidget() );
-
-		updateHostListEntryWidget( poFriendItem, netIdent );
-	}
+    addOrUpdateHostSession( hostSession );
 }
 
 //============================================================================
-void HostListWidget::slotRefreshFriend( VxGuidQt friendId )
+HostListEntryWidget* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSession )
 {
-	int iIdx = 0;
-	HostListEntryWidget * poWidget;
-	while( iIdx < this->count() )
-	{
-		poWidget = (HostListEntryWidget *)this->item(iIdx);
-		if( poWidget )
-		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
-			if( poFriend
-				&& ( poFriend->getMyOnlineId().getVxGUIDHiPart() == friendId.getVxGUIDHiPart() )
-				&& ( poFriend->getMyOnlineId().getVxGUIDLoPart() == friendId.getVxGUIDLoPart() ) )
-			{
-				// found the widget
-				updateHostListEntryWidget( poWidget, poFriend );
-				return;
-			}
-		}
+    HostListEntryWidget* hostItem = findListEntryWidgetBySessionId( hostSession->getSessionId() );
+    if( hostItem )
+    {
+        GuiHostSession* hostOldSession = hostItem->getHostSession();
+        if( hostOldSession != hostSession )
+        {
+            hostItem->setHostSession( hostSession );
+            if( !hostOldSession->parent() )
+            {
+                delete hostOldSession;
+            }
+        }
 
-		iIdx++;
-	}
+        hostItem->updateWidgetFromInfo();
+    }
+    else
+    {
+        hostItem = sessionToWidget( hostSession );
+        if( 0 == count() )
+        {
+            LogMsg( LOG_INFO, "add host %s\n", hostSession->getHostIdent().getOnlineName() );
+            addItem( hostItem );
+        }
+        else
+        {
+            LogMsg( LOG_INFO, "insert host %s\n", hostSession->getHostIdent().getOnlineName() );
+            insertItem( 0, (QListWidgetItem *)hostItem );
+        }
+
+        setItemWidget( (QListWidgetItem *)hostItem, (QWidget *)hostItem );
+    }
+
+    return hostItem;
 }
 
 //============================================================================
-//! called when friend in list is removed
-void HostListWidget::removeFriend( VxNetIdent * netIdent )
+void HostListWidget::clearHostList( void )
 {
-	int iIdx = 0;
-	HostListEntryWidget * poWidget;
-	while( iIdx < this->count() )
-	{
-		poWidget = (HostListEntryWidget *)this->item(iIdx);
-		if( poWidget )
-		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
-			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
-			{
-				LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName(), iIdx );
-				takeItem( iIdx );
-				return;
-			}
-		}
+    for(int i = 0; i < count(); ++i)
+    {
+        QListWidgetItem* hostItem = item(i);
+        delete ((HostListEntryWidget *)hostItem);
+    }
 
-		iIdx++;
-	}
-}
-
-//============================================================================
-void HostListWidget::updateListEntryBackgroundColor( VxNetIdent * netIdent, HostListEntryWidget * poWidget )
-{
-	if( netIdent->isNearby() )
-	{
-		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuNormal ) );
-	}
-	else if(  netIdent->isOnline() )
-	{
-		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuNormal ) );
-	}
-	else
-	{
-		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuDisabled ) );
-	}
-}
-
-//============================================================================
-//!	fill friend into new QListWidgetItem *
-HostListEntryWidget * HostListWidget::friendToWidget( VxNetIdent * poFriend )
-{
-	HostListEntryWidget * item = new HostListEntryWidget( this );
-    item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
-    item->setData( Qt::UserRole + 2, QVariant((quint64)(poFriend)) );
-    connect( item, SIGNAL(listButtonClicked(HostListEntryWidget*)), this, SLOT(slotFriendListItemClicked(HostListEntryWidget*)));
-
-    connect( item, SIGNAL(signalMenuButtonClicked(HostListEntryWidget*)), this, SLOT(slotFriendMenuButtonClicked(HostListEntryWidget*)));
-
-	return item;
-}
-
-//============================================================================
-void HostListWidget::updateHostListEntryWidget( HostListEntryWidget * item, VxNetIdent * netIdent )
-{
-	QString strName = netIdent->getOnlineName();
-	strName += " - ";
-	QString strDesc = netIdent->getOnlineDescription();
-    // display in seconds
-	QVariant dispValue( (uint)( netIdent->getLastSessionTimeMs() / 1000 ) );
-	item->setData( Qt::DisplayRole, dispValue );
-
-	updateListEntryBackgroundColor( netIdent, item );
-
-	item->ui.m_IconButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-	QPalette pal = item->ui.m_IconButton->palette();
-	pal.setColor(QPalette::Button, QColor( netIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
-	item->ui.m_IconButton->setAutoFillBackground(true);
-	item->ui.m_IconButton->setPalette(pal);
-	item->ui.m_IconButton->update();
-	item->ui.TitlePart1->setText( strName );
-	item->ui.TitlePart2->setText( netIdent->describeMyFriendshipToHim() );
-	item->ui.DescPart2->setText( strDesc );
-	//item->ui.TodLabel->setText( QString("Truths: %1 Dares: %2").arg(netIdent->getTruthCount()).arg(netIdent->getDareCount()) );
-}
-
-//============================================================================
-//!	get friend from QListWidgetItem data
-Friend * HostListWidget::widgetToFriend( HostListEntryWidget * item )
-{
-	return (Friend *)item->data( Qt::UserRole + 2 ).toULongLong();
-}
-
-//============================================================================
-HostListEntryWidget * HostListWidget::findHostListEntryWidget( VxNetIdent * netIdent )
-{
-	int iIdx = 0;
-	HostListEntryWidget * poWidget;
-	while( iIdx < this->count() )
-	{
-		poWidget = (HostListEntryWidget *)this->item(iIdx);
-		if( poWidget )
-		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
-			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
-			{
-				return poWidget;
-			}
-		}
-
-		iIdx++;
-	}
-
-	return NULL;
+    clear();
 }

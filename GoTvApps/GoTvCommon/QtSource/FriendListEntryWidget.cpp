@@ -32,6 +32,16 @@ FriendListEntryWidget::FriendListEntryWidget( QListWidget * parent, int type  )
 }
 
 //============================================================================
+FriendListEntryWidget::~FriendListEntryWidget()
+{
+   // GuiHostSession * hostSession = (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    //if( hostSession && !hostSession->parent() )
+    //{
+    //    delete hostSession;
+    //}
+}
+
+//============================================================================
 void FriendListEntryWidget::iconButtonPressed()
 {
 	SubWidget->setDown(true);

@@ -36,12 +36,12 @@ ActivityUploads::ActivityUploads(	AppCommon&	app,
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Uploads" ) );
 	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
-	connect( ui.m_TitleBarWidget,			SIGNAL(signalBackButtonClicked()),			this,	SLOT(slotHomeButtonClicked()) );
+	connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()),		this,	                SLOT(slotHomeButtonClicked()) );
 
     connectBarWidgets();
 
-    connect(ui.m_FileItemList,	SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
-    connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect(ui.m_FileItemList,	SIGNAL(itemClicked(QListWidgetItem *)),         this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiStartUpload(GuiFileXferSession *)),			this, SLOT(slotToGuiStartUpload(GuiFileXferSession *)) );
 	connect( this, SIGNAL(signalToGuiFileXferState(VxGuidQt,EXferState,int,int)),	this, SLOT(slotToGuiFileXferState(VxGuidQt,EXferState,int,int)) );
@@ -308,15 +308,15 @@ bool ActivityUploads::confirmDeleteFile( bool shredFile )
 	bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();
 	if( false == isConfirmDisabled )
 	{
-		QString title = shredFile ?  "Confirm Shred File" : "Confirm Delete File";
+		QString title = shredFile ?  QObject::tr("Confirm Shred File") :  QObject::tr("Confirm Delete File");
 		QString bodyText = "";
 		if( shredFile )
 		{
-			bodyText = "Are You Sure You Want To Write Random Data Into The File Then Delete From The Device?";
+			bodyText =  QObject::tr("Are You Sure You Want To Write Random Data Into The File Then Delete From The Device?");
 		}
 		else
 		{
-			bodyText = "Are You Sure To Delete The File From The Device?";
+			bodyText =  QObject::tr("Are You Sure To Delete The File From The Device?");
 		}
 
 		ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
