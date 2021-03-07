@@ -14,7 +14,6 @@
 //============================================================================
 
 #include "PluginBaseHostClient.h"
-#include "HostClientMgr.h"
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
@@ -44,5 +43,4 @@ protected:
     virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
     //=== vars ===//
-    HostClientMgr               m_HostClientMgr;
 };

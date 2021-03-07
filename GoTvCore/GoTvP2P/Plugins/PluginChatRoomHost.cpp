@@ -72,9 +72,7 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
 //============================================================================
 void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
-    if( !m_HostAnnounceBuilt && 
-        ( m_Engine.getEngineSettings().getFirewallTestSetting() == FirewallSettings::eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
-        m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
+    if( !m_HostAnnounceBuilt && m_Engine.isDirectConnectReady() )
     {
         PluginSetting pluginSetting;
         if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
@@ -83,10 +81,24 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
         }
     }
 
-    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )
     {
+        if( m_Engine.isNetworkHostEnabled() )
+        {
+            // if we are also network host then send to ourself also
+            PluginBase* netHostPlugin = m_PluginMgr.getPlugin( ePluginTypeNetworkHost );
+            if( netHostPlugin )
+            {
+                m_AnnMutex.lock();
+                netHostPlugin->updateHostSearchList( m_PktHostAnnounce.getHostType(), &m_PktHostAnnounce, m_MyIdent );
+                m_AnnMutex.unlock();
+            }
+        }
+
         VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+        m_AnnMutex.lock();
         m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
+        m_AnnMutex.unlock();
     }
 }
 

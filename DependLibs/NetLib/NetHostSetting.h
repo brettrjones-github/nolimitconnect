@@ -20,10 +20,10 @@
 
 #define NET_DEFAULT_NETWORK_NAME			"NoLimitNet"
 #define NET_DEFAULT_NET_HOST_URL			"ptop://nolimitconnect.net:45124"
-#define NET_DEFAULT_CONNECT_TEST_URL		"ptop://gotvptop.net:45124" // for connection test.. for now same as Network Host but could be seperated to spread network load
-#define NET_DEFAULT_RANDOM_CONNECT_URL		"ptop://gotvptop.com:45124" // for random connect.. for now same as Network Host but could be seperated to spread network load
-#define NET_DEFAULT_GROUP_HOST_URL		    "ptop://myp2pnetwork.com:45124" // for default group host.. for now same as Network Host but could be seperated to spread network load
-#define NET_DEFAULT_CHAT_ROOM_HOST_URL		"ptop://myp2pconnect.com:45124" // for default chat room host.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_CONNECT_TEST_URL		"ptop://nolimitconnect.net:45124" // for connection test.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_RANDOM_CONNECT_URL		"ptop://nolimitconnect.net:45124" // for random connect.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_GROUP_HOST_URL		    "ptop://nolimitconnect.net:45124" // for default group host.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_CHAT_ROOM_HOST_URL		"ptop://nolimitconnect.net:45124" // for default chat room host.. for now same as Network Host but could be seperated to spread network load
 #define NET_DEFAULT_NETSERVICE_PORT			45124
 #define NET_DEFAULT_UDP_PORT			    45123
 

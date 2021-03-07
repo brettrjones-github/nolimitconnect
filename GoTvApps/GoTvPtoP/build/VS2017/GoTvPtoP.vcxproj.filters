@@ -1014,6 +1014,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1982,6 +1985,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\GoTvCommon\Resources\spheres.svg">
@@ -2549,6 +2555,9 @@
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
     <None Include="..\..\..\GoTvCommon\Resources\log.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\search-random-connect.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -3227,6 +3236,9 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoinSearch.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

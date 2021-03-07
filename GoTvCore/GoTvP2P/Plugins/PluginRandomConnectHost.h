@@ -17,14 +17,40 @@
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
-class PluginRandomConnectHost : public PluginBaseHostService
+#include <PktLib/PktHostAnnounce.h>
+#include <CoreLib/VxMutex.h>
+
+class PluginRandomConnectHost : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
 
     PluginRandomConnectHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginRandomConnectHost() override = default;
 
+    virtual void				pluginStartup( void ) override;
+
+    virtual bool                setPluginSetting( PluginSetting& pluginSetting ) override;
+    virtual void				onThreadOncePer15Minutes( void ) override;
 
 protected:
+    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting ) override;
+    /// return true if have use for this connection
+    //=== callback overrides ==//
+    virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, ERunTestStatus testStatus, 
+                                                        EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
 
+    /// returns false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
+    virtual bool                onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return false; };
+    virtual void                onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, EConnectStatus connectStatus, 
+                                                      EConnectReason connectReason = eConnectReasonUnknown, ECommErr commErr = eCommErrNone ) override {};
+    virtual void                onContactHandshaking( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onHandshakeTimeout( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
+
+    void                        buildHostRandomConnectAnnounce( PluginSetting& pluginSetting );
+    void                        sendHostRandomConnectAnnounce( void );
+
+    //=== vars ===//
 };

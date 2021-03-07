@@ -380,24 +380,6 @@ void EngineSettings::getExternalIpAddr( std::string& strWebsiteUrl )
 }
 
 //============================================================================
-void EngineSettings::setConnectTestType( int32_t testType )
-{
-    m_SettingsDbMutex.lock();
-    setIniValue( MY_SETTINGS_KEY, "ConnectTestType", testType );
-    m_SettingsDbMutex.unlock();
-}
-
-//============================================================================
-int32_t EngineSettings::getConnectTestType( void )
-{
-    uint16_t testType = 0;
-    m_SettingsDbMutex.lock();
-    getIniValue( MY_SETTINGS_KEY, "ConnectTestType", testType, 0 );
-    m_SettingsDbMutex.unlock();
-    return testType;
-}
-
-//============================================================================
 void EngineSettings::setUseUpnp( bool isHost )
 {
     m_SettingsDbMutex.lock();

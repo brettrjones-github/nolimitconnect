@@ -98,6 +98,7 @@
 #define OBJNAME_APPLET_PERMISSION_LIST				    "AppletPermissionList"
 #define OBJNAME_APPLET_PERSONAL_RECORDER				"AppletPersonalRecorder"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
+#define OBJNAME_APPLET_RANDOM_CONNECT_JOIN_SEARCH	    "AppletRandomConnectJoinSearch"
 //#define OBJNAME_APPLET_REMOTE_CONTROL					"AppletRemoteControl"
 #define OBJNAME_APPLET_SEARCH_PAGE					    "AppletSearchPage"
 

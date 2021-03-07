@@ -334,6 +334,33 @@ bool P2PEngine::addMyIdentToBlob( PktBlobEntry& blobEntry )
 }
 
 //============================================================================
+// true if have open port and ready to recieve
+bool P2PEngine::isDirectConnectReady( void )
+{
+    bool directConnectReady = false;
+    if( FirewallSettings::eFirewallTestAssumeNoFirewall == m_EngineSettings.getFirewallTestSetting() )
+    {
+        directConnectReady = m_NetStatusAccum.isInternetAvailable();
+    }
+    else
+    {
+        directConnectReady = m_NetStatusAccum.isInternetAvailable() && m_NetStatusAccum.isDirectConnectTested() && !m_NetStatusAccum.requiresRelay();
+    }
+
+    return directConnectReady;
+}
+
+//============================================================================
+// true if netowrk host plugin is enabled
+bool P2PEngine::isNetworkHostEnabled( void )
+{
+    m_AnnouncePktMutex.lock(); 
+    bool netHostEnabled = ( eFriendStateIgnore != m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) ); 
+    m_AnnouncePktMutex.unlock();
+    return netHostEnabled;
+}
+
+//============================================================================
 bool P2PEngine::setPluginSetting( PluginSetting& pluginSetting )
 {
     if( ( ePluginTypeInvalid < pluginSetting.getPluginType() ) && ( eMaxPluginType > pluginSetting.getPluginType() ) )

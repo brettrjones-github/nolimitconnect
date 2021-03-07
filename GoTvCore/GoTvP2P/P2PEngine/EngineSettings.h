@@ -58,9 +58,6 @@ public:
     void						setExternalIpAddr( std::string& externIp );
     void						getExternalIpAddr( std::string& externIp );
 
-	void						setConnectTestType( int32_t testType );
-    int32_t					    getConnectTestType( void );
-
     void						setUseUpnp( bool useUpnp );
     bool						getUseUpnp( void );
 

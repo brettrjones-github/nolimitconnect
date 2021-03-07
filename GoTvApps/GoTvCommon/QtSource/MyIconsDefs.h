@@ -20,6 +20,7 @@ enum EMyIcons
     eMyIconSearch,
     eMyIconSearchJoinGroup,
     eMyIconSearchJoinChatRoom,
+    eMyIconSearchJoinRandomConnect,
     eMyIconSearchPerson,
     eMyIconSearchHeart,
     eMyIconSearchWebCam,

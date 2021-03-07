@@ -99,6 +99,9 @@ public:
     RunUrlAction&               getRunUrlAction( void )                         { return m_RunUrlAction; }
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
+    bool                        isDirectConnectReady( void );    // true if have open port and ready to recieve
+    bool                        isNetworkHostEnabled( void );    // true if netowrk host plugin is enabled
+
     bool                        getHasHostService( EHostServiceType hostService );
 
     /// if skt exists in connection list then lock access to connection list
@@ -175,7 +178,6 @@ public:
     virtual void				fromGuiNativeGlResumeRender( void ) override;
     virtual void				fromGuiNativeGlDestroy( void ) override;
 
-    //virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes ) override;
     virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
     virtual bool				fromGuiIsMicrophoneMuted( void ) override;

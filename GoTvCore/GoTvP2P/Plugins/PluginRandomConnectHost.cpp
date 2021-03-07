@@ -29,3 +29,84 @@ PluginRandomConnectHost::PluginRandomConnectHost( P2PEngine& engine, PluginMgr& 
 {
     setPluginType( ePluginTypeRandomConnectHost );
 }
+
+//============================================================================
+void PluginRandomConnectHost::pluginStartup( void )
+{
+    PluginBaseHostService::pluginStartup();
+}
+
+//============================================================================
+bool PluginRandomConnectHost::setPluginSetting( PluginSetting& pluginSetting )
+{
+    bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
+    buildHostAnnounce( pluginSetting );
+    sendHostAnnounce();
+    return result;
+}
+
+
+//============================================================================
+void PluginRandomConnectHost::onThreadOncePer15Minutes( void )
+{
+    sendHostRandomConnectAnnounce();
+}
+
+//============================================================================
+void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& pluginSetting )
+{
+    m_AnnMutex.lock();
+    m_Engine.lockAnnouncePktAccess();
+    m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
+    pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyOnlineUrl() );
+    m_Engine.unlockAnnouncePktAccess();
+    m_PluginSetting = pluginSetting;
+    m_PluginSetting.setUpdateTimestampToNow();
+    BinaryBlob binarySetting;
+    m_PluginSetting.toBinary( binarySetting );
+    m_PktHostAnnounce.setHostType( eHostTypeRandomConnect );
+    m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
+    // m_PktHostAnnounce.setIsLoopback( true ); // BRJ temp for testing
+    m_HostAnnounceBuilt = true;
+    m_AnnMutex.unlock();
+}
+
+//============================================================================
+void PluginRandomConnectHost::sendHostRandomConnectAnnounce( void )
+{
+    if( !m_HostAnnounceBuilt && m_Engine.isDirectConnectReady() )
+    {
+        PluginSetting pluginSetting;
+        if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+        {
+            buildHostRandomConnectAnnounce( pluginSetting );
+        }
+    }
+
+    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )
+    {
+        if( m_Engine.isNetworkHostEnabled() )
+        {
+            // if we are also network host then send to ourself also
+            PluginBase* netHostPlugin = m_PluginMgr.getPlugin( ePluginTypeNetworkHost );
+            if( netHostPlugin )
+            {
+                m_AnnMutex.lock();
+                netHostPlugin->updateHostSearchList( m_PktHostAnnounce.getHostType(), &m_PktHostAnnounce, m_MyIdent );
+                m_AnnMutex.unlock();
+            }
+        }
+
+        VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+        m_AnnMutex.lock();
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonRandomConnectAnnounce );
+        m_AnnMutex.unlock();
+    }
+}
+
+//============================================================================
+void PluginRandomConnectHost::onPluginSettingChange( PluginSetting& pluginSetting )
+{
+    m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
+    buildHostRandomConnectAnnounce( pluginSetting );
+}

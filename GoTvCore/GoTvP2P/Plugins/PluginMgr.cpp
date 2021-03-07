@@ -231,7 +231,7 @@ EAppState PluginMgr::getPluginState( EPluginType ePluginType )
 }
 
 //============================================================================
-PluginBase * PluginMgr::getPlugin( EPluginType ePluginType )
+PluginBase* PluginMgr::getPlugin( EPluginType ePluginType )
 {
 	std::vector<PluginBase *>::iterator iter;
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )

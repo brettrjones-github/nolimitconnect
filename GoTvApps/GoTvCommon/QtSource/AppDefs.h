@@ -82,8 +82,10 @@ enum EApplet
 
     eAppletChatRoomJoinSearch,      // search for chat room to join
     eAppletGroupJoinSearch,         // search for group to join
+    eAppletRandomConnectJoinSearch, // search for group to join
     eAppletSearchPersons,           // search for person in group by name
     eAppletSearchMood,              // search for mood message
+
     eAppletScanAboutMe,             // scan group for pictures in about me page
     eAppletScanStoryboard,          // scan group for pictures in story board page
     eAppletScanSharedFiles,         // search group for shared files

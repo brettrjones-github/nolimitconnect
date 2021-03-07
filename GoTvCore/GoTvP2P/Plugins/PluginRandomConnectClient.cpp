@@ -28,3 +28,61 @@ PluginRandomConnectClient::PluginRandomConnectClient( P2PEngine& engine, PluginM
 {
     setPluginType( ePluginTypeRandomConnectClient );
 }
+//============================================================================
+void PluginRandomConnectClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+{
+    std::string url = ptopUrl ? ptopUrl : "";
+    m_HostClientMgr.fromGuiAnnounceHost( hostType, sessionId, url );
+}
+
+//============================================================================
+void PluginRandomConnectClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+{
+    std::string url = ptopUrl ? ptopUrl : "";
+    m_HostClientMgr.fromGuiJoinHost( hostType, sessionId, url );
+}
+
+//============================================================================
+void PluginRandomConnectClient::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
+{
+    m_HostClientMgr.fromGuiSearchHost( hostType, searchParams, enable );
+}
+
+//============================================================================
+void PluginRandomConnectClient::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got join request" );
+}
+
+//============================================================================
+void PluginRandomConnectClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got join reply" );
+    m_HostClientMgr.onPktHostJoinReply( sktBase, pktHdr,  netIdent );
+}
+
+//============================================================================
+void PluginRandomConnectClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got search reply" );
+    m_HostClientMgr.onPktHostSearchReply( sktBase, pktHdr,  netIdent );
+}
+
+//============================================================================
+void PluginRandomConnectClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got plugin setting reply" );
+    m_HostClientMgr.onPktPluginSettingReply( sktBase, pktHdr,  netIdent );
+}
+
+//============================================================================
+void PluginRandomConnectClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got join offer request" );
+}
+
+//============================================================================
+void PluginRandomConnectClient::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginRandomConnectClient got join offer reply" );
+}

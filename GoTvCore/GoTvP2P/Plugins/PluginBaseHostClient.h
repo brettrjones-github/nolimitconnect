@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "PluginBase.h"
+#include "HostClientMgr.h"
 
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
 
@@ -60,6 +61,7 @@ protected:
 
     //=== vars ===//
     ConnectionMgr&              m_ConnectionMgr; 
+    HostClientMgr               m_HostClientMgr;
     VxMutex                     m_ClientMutex;
     VxGUIDList                  m_JoinedHosts;
 

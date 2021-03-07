@@ -54,6 +54,7 @@
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
+#include "AppletRandomConnectJoinSearch.h"
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
@@ -193,6 +194,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
     case eAppletGroupJoin:                  appletDialog = new AppletGroupJoin( m_MyApp, parent ); break;
     case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
+    case eAppletRandomConnectJoinSearch:    appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
     case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;

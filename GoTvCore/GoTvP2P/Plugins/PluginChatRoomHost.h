@@ -52,9 +52,4 @@ protected:
     void                        sendHostChatRoomAnnounce( void );
 
     //=== vars ===//
-    bool                        m_SendAnnounceEnabled{ false };
-    bool                        m_HostAnnounceBuilt{ false };
-    PktHostAnnounce             m_PktHostAnnounce;
-    VxMutex                     m_AnnMutex;
-    VxGUID                      m_AnnounceSessionId;
 };

@@ -139,6 +139,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/search-group.svg";
     case eMyIconSearchJoinChatRoom:
         return ":/AppRes/Resources/search-chat-room.svg";
+    case eMyIconSearchJoinRandomConnect:
+        return ":/AppRes/Resources/search-random-connect.svg";
     case eMyIconSearchFolder:
         return ":/AppRes/Resources/file-folder-search.svg";
     case eMyIconSearchPerson:

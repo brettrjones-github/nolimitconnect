@@ -30,6 +30,7 @@ class NetServiceHdr;
 class P2PEngine;
 class P2PSession;
 class PktAnnounce;
+class PktHostAnnounce;
 class PluginMgr;
 class PluginSessionBase;
 class PluginSetting;
@@ -138,9 +139,10 @@ public:
 	virtual bool				fromGuiMultiSessionAction( VxNetIdent *	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) { return false; }; 
 
     //=== hosting ===//
-    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	    {};
-    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	        {};
-    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )        {};
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	        {};
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	            {};
+    virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )            {};
+    virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )  {};
 
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};

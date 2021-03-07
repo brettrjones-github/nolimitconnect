@@ -65,14 +65,15 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPersonalRecorder:		return eMyIconNotepadNormal;
     case eAppletSettingsPage:		    return eMyIconSettings;
    
-    case eAppletSearchPage:	            return eMyIconSearch;
-    case eAppletGroupJoinSearch:	    return eMyIconSearchJoinGroup;
-    case eAppletSearchPersons:	        return eMyIconSearchPerson;
-    case eAppletSearchMood:	            return eMyIconSearchHeart;
-    case eAppletScanAboutMe:	        return eMyIconSearchImage;
-    case eAppletScanStoryboard:	        return eMyIconSearchStoryboard;
-    case eAppletScanSharedFiles:	    return eMyIconSearchFolder;
-    case eAppletScanWebCam:	            return eMyIconSearchWebCam;
+    case eAppletSearchPage:	                return eMyIconSearch;
+    case eAppletGroupJoinSearch:	        return eMyIconSearchJoinGroup;
+    case eAppletRandomConnectJoinSearch:    return eMyIconSearchJoinRandomConnect;
+    case eAppletSearchPersons:	            return eMyIconSearchPerson;
+    case eAppletSearchMood:	                return eMyIconSearchHeart;
+    case eAppletScanAboutMe:	            return eMyIconSearchImage;
+    case eAppletScanStoryboard:	            return eMyIconSearchStoryboard;
+    case eAppletScanSharedFiles:	        return eMyIconSearchFolder;
+    case eAppletScanWebCam:	                return eMyIconSearchWebCam;
 
     case eAppletTestAndDebug:	            return eMyIconDebug;
     case eAppletTheme:					    return eMyIconTheme;
@@ -165,6 +166,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
+    case eAppletRandomConnectJoinSearch:	return QObject::tr( "Search For Random Connect Host To Join" );
     case eAppletSnapshot:				    return QObject::tr( "Take Snapshot" );
     case eAppletKodi:				        return QObject::tr( "Kodi (TM)" );
     case eAppletLibrary:				    return QObject::tr( "My Library Of Media" );

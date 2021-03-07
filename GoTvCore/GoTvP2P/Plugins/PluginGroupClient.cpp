@@ -28,7 +28,6 @@
 //============================================================================
 PluginGroupClient::PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostClient( engine, pluginMgr, myIdent )
-, m_HostClientMgr(engine, pluginMgr, myIdent, *this)
 {
     setPluginType( ePluginTypeGroupClient );
 }

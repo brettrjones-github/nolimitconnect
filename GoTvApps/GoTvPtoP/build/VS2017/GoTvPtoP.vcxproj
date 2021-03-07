@@ -678,6 +678,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1415,6 +1416,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPermissionList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonalRecorder.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBase.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBaseSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceChatRoom.ui" />
@@ -1681,6 +1683,7 @@
     <None Include="..\..\..\GoTvCommon\Resources\remote-control.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\sd_card.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\search-normal.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\search-random-connect.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\send.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\settings-gear.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\share-services.svg" />
@@ -2096,6 +2099,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsPage.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">

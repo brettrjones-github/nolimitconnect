@@ -279,5 +279,6 @@
         <file>Resources/bars_7_hosted_direct.png</file>
         <file>Resources/bars_7_hosted_with_relay.png</file>
         <file>Resources/log.svg</file>
+        <file>Resources/search-random-connect.svg</file>
     </qresource>
 </RCC>

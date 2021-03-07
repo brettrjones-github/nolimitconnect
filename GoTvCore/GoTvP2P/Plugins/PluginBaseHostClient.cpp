@@ -21,6 +21,7 @@
 PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
     : PluginBase( engine, pluginMgr, myIdent )
     , m_ConnectionMgr(engine.getConnectionMgr())
+    , m_HostClientMgr(engine, pluginMgr, myIdent, *this)
 {
 }
 

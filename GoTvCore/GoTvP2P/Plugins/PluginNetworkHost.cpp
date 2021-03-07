@@ -38,30 +38,36 @@ void PluginNetworkHost::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHd
     if( eHostTypeChatRoom == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce" );
-        m_HostServerMgr.updateHostSearchList( eHostTypeChatRoom, hostAnn, netIdent );
-    }
-    else if( eHostTypeConnectTest == hostAnn->getHostType() )
-    {
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce" );
-        m_HostServerMgr.updateHostSearchList( eHostTypeConnectTest, hostAnn, netIdent );
+        updateHostSearchList( eHostTypeChatRoom, hostAnn, netIdent );
     }
     else if( eHostTypeGroup == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got group announce" );
-        m_HostServerMgr.updateHostSearchList( eHostTypeGroup, hostAnn, netIdent );
-    }
-    else if( eHostTypeNetwork == hostAnn->getHostType() )
-    {
-        // for now we are the only network host so ignore
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost got network announce" );
+        updateHostSearchList( eHostTypeGroup, hostAnn, netIdent );
     }
     else if( eHostTypeRandomConnect == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got random connect announce" );
-        m_HostServerMgr.updateHostSearchList( eHostTypeRandomConnect, hostAnn, netIdent );
+       updateHostSearchList( eHostTypeRandomConnect, hostAnn, netIdent );
+    }
+    else if( eHostTypeNetwork == hostAnn->getHostType() )
+    {
+        // for now we are the only network host so ignore
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got network announce.. ignored" );
+    }
+    else if( eHostTypeConnectTest == hostAnn->getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce" );
+        updateHostSearchList( eHostTypeConnectTest, hostAnn, netIdent );
     }
     else
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost unknown announce %d", hostAnn->getHostType() );
     }
+}
+
+//============================================================================
+void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )
+{
+    m_HostServerMgr.updateHostSearchList( hostType, hostAnn, netIdent );
 }
