@@ -51,6 +51,7 @@ public:
 
 	std::string					m_strExeDir;
 
+    std::string                 m_NlcPathPrefix; // prefix hash from exe directory so can run multiple instances on same device
 	std::string					m_strRootUserDataDir;
 	std::string					m_strRootXferDir;
 	uint32_t					m_u32NetServiceOnly;			// this app is not user but set for net services only

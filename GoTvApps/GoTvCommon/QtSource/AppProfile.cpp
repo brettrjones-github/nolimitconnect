@@ -46,13 +46,9 @@ AppProfile::AppProfile()
 //============================================================================
 void AppProfile::loadProfile( void )
 {
-	//QString userLocation = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
-	//m_strRootUserDataDir = userLocation.toStdString();
-	//m_strRootUserDataDir += "/MyP2PWeb/";
-	//makeDirectory( m_strRootUserDataDir.c_str() );
-
 	// if has ini file then use settings in it 
 	getExecuteDirectory( m_strExeDir );
+
 	std::string strIniFileName = m_strExeDir + INI_FILE;
 
 	uint32_t u32UseExeDir = 0;
@@ -173,9 +169,6 @@ void AppProfile::loadProfile( void )
 		// No need to put application in path because when call QCoreApplication::setApplicationName("MyP2PWeb")
         makeDirectory( m_strRootUserDataDir.c_str() );
 
-		// it made it a sub directory of DataLocation
-		VxSetRootDataStorageDirectory(m_strRootUserDataDir.c_str());
-
 		int exePathHash = 0;
 #if defined(TARGET_OS_ANDROID)
         // in some cases android may give a new exe directory for each launch and we get a different hash each time
@@ -189,8 +182,8 @@ void AppProfile::loadProfile( void )
             }
         }
 
-        char as8ExePathHash[16];
-        sprintf( as8ExePathHash, "z%x", exePathHash );
+        char as8ExePathHash[32];
+        sprintf( as8ExePathHash, "nlc%x/", exePathHash );
         // android does not allow numbers in file path so substitute )
         for( size_t i = 0; i < strlen(as8ExePathHash); i++)
         {
@@ -200,7 +193,7 @@ void AppProfile::loadProfile( void )
             }
         }
 
-        m_strRootUserDataDir += as8ExePathHash;
+        m_NlcPathPrefix += as8ExePathHash;
 
 #else
         // use exe directory to make a hash as part of path so can run multiple instances
@@ -213,9 +206,9 @@ void AppProfile::loadProfile( void )
 			}
 		}
 
-        char as8ExePathHash[16];
-        sprintf( as8ExePathHash, "z%x", exePathHash );
-        m_strRootUserDataDir += as8ExePathHash;
+        char as8ExePathHash[32];
+        sprintf( as8ExePathHash, "nlc%x/", exePathHash );
+        m_NlcPathPrefix += as8ExePathHash;
 
 #endif // defined(TARGET_OS_ANDROID)
 
@@ -225,6 +218,16 @@ void AppProfile::loadProfile( void )
         {
             LogMsg( LOG_ERROR, "AppProfile::loadProfile Could not create root data dir %s", m_strRootUserDataDir.c_str());
         }
+
+        m_strRootUserDataDir += m_NlcPathPrefix;
+        makeDirectory( m_strRootUserDataDir.c_str() );
+        if(!VxFileUtil::directoryExists(m_strRootUserDataDir.c_str()))
+        {
+            LogMsg( LOG_ERROR, "AppProfile::loadProfile Could not create prefixed root data dir %s", m_strRootUserDataDir.c_str());
+        }
+
+        // it made it a sub directory of DataLocation
+        VxSetRootDataStorageDirectory( m_strRootUserDataDir.c_str() );
 
 		VxSetRootUserDataDirectory( m_strRootUserDataDir.c_str() );
 
@@ -262,7 +265,7 @@ void AppProfile::loadProfile( void )
         VxFileUtil::assurePathEndWithSlash( m_strRootXferDir );
 
 		makeDirectory( m_strRootXferDir.c_str() );
-		m_strRootXferDir += as8ExePathHash;
+		m_strRootXferDir += m_NlcPathPrefix;
         VxFileUtil::assurePathEndWithSlash( m_strRootXferDir );
 		makeDirectory( m_strRootXferDir.c_str() );
         if(!VxFileUtil::directoryExists(m_strRootXferDir.c_str()))
@@ -353,6 +356,12 @@ std::string& AppProfile::getOsSpecificAppDataDir( void )
 	m_strOsSpecificAppDataDir = dataLocation.toStdString();
 	makeForwardSlashPath( m_strOsSpecificAppDataDir );
 	m_strOsSpecificAppDataDir += "/";
+    m_strOsSpecificHomeDir += m_NlcPathPrefix;
+    makeDirectory( m_strOsSpecificHomeDir.c_str() );
+    if(!VxFileUtil::directoryExists(m_strOsSpecificHomeDir.c_str()))
+    {
+        LogMsg( LOG_ERROR, "AppProfile::getOsSpecificDocumentsDir Could not create app data dir %s", m_strOsSpecificHomeDir.c_str());
+    }
 
 	return m_strOsSpecificAppDataDir;
 }
@@ -369,6 +378,13 @@ std::string& AppProfile::getOsSpecificHomeDir( void )
 	m_strOsSpecificHomeDir = homeLocation.toStdString();
 	makeForwardSlashPath( m_strOsSpecificHomeDir );
     VxFileUtil::assurePathEndWithSlash( m_strOsSpecificHomeDir );
+    m_strOsSpecificHomeDir += m_NlcPathPrefix;
+    makeDirectory( m_strOsSpecificHomeDir.c_str() );
+    if(!VxFileUtil::directoryExists(m_strOsSpecificHomeDir.c_str()))
+    {
+        LogMsg( LOG_ERROR, "AppProfile::getOsSpecificDocumentsDir Could not create home dir %s", m_strOsSpecificHomeDir.c_str());
+    }
+
 	return m_strOsSpecificHomeDir;
 }
 
@@ -384,5 +400,12 @@ std::string& AppProfile::getOsSpecificDocumentsDir( void )
 	m_strOsSpecificDocumentsDir = docsLocation.toStdString();
 	makeForwardSlashPath( m_strOsSpecificDocumentsDir );
     VxFileUtil::assurePathEndWithSlash( m_strOsSpecificDocumentsDir );
+    m_strOsSpecificDocumentsDir += m_NlcPathPrefix;
+    makeDirectory( m_strOsSpecificDocumentsDir.c_str() );
+    if(!VxFileUtil::directoryExists(m_strOsSpecificDocumentsDir.c_str()))
+    {
+        LogMsg( LOG_ERROR, "AppProfile::getOsSpecificDocumentsDir Could not create documents dir %s", m_strOsSpecificDocumentsDir.c_str());
+    }
+
 	return m_strOsSpecificDocumentsDir;
 }
