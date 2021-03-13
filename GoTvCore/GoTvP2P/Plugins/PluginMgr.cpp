@@ -438,7 +438,8 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
         }
         else
         {
-            m_Engine.hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed\n", sktBase->getRemoteIp() );
+            m_Engine.hackerOffense( NULL, eHackerLevelSuspicious, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed\n", sktBase->getRemoteIp() );
+            sktBase->dumpSocketStats();
         }
 
         // flush then close
@@ -484,15 +485,17 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		else
 		{
 			LogMsg( LOG_INFO, "PluginMgr::handleFirstNetServiceConnection; unknown plugin type\n" );
-			m_Engine.hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker http attack (unknown plugin)from ip %s\n", sktBase->getRemoteIp() );
+			m_Engine.hackerOffense( NULL, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Hacker http attack (unknown plugin)from ip %s\n", sktBase->getRemoteIp() );
+            sktBase->dumpSocketStats();
 			sktBase->closeSkt( 657 );
 		}
 	}
 
 	if( false == httpConnectionWasHandled )
 	{
-		m_Engine.hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s\n", sktBase->getRemoteIp() );
-		sktBase->closeSkt( 657 );
+		m_Engine.hackerOffense( NULL, eHackerLevelSevere, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s\n", sktBase->getRemoteIp() );
+        sktBase->dumpSocketStats();
+		sktBase->closeSkt( 659 );
 	}
 
 }

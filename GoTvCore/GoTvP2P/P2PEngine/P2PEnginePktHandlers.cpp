@@ -49,6 +49,21 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	if( contactOnlineId == m_PktAnn.getMyOnlineId() )
 	{
 		// it is ourself
+        LogMsg( LOG_ERROR, "onPktAnnounce Cannot send a packet to ourself  " );
+        std::string rmAddr = sktBase->getRemoteIpAddress() ? sktBase->getRemoteIpAddress() : "";
+        std::string ourAddr = getNetStatusAccum().getIpAddress();
+        if( rmAddr.empty() || sktBase->getRemoteIpAddress() != ourAddr )
+        {
+            // remote attack.. serious
+            hackerOffense( pkt, eHackerLevelSevere, "rxed same as our online id from another " );
+        }
+        else
+        {
+            hackerOffense( pkt, eHackerLevelSuspicious, "rxed same as our online from our address " );
+        }
+
+        sktBase->closeSkt( 321 );
+
 		return;
 	}
 

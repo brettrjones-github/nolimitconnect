@@ -239,12 +239,14 @@ public:
     virtual bool                setPeerPktAnn( PktAnnounce& pktAnn );
     virtual PktAnnounce&        getPeerPktAnn( void )                           { return m_PeerPktAnn; }
 
-    void                        setIsPeerPktAnnSet( bool isSet ) { m_IsPeerPktAnnSet = isSet; }  
-    bool                        getIsPeerPktAnnSet( void ) { return m_IsPeerPktAnnSet; }
+    void                        setIsPeerPktAnnSet( bool isSet )                { m_IsPeerPktAnnSet = isSet; }  
+    bool                        getIsPeerPktAnnSet( void )                      { return m_IsPeerPktAnnSet; }
     bool                        getPeerPktAnnCopy( PktAnnounce &peerAnn );
 
     // returns peer online id. caller should check VxGUID::isVxGUIDValid() for validity
     VxGUID                      getPeerOnlineId( void ) { return m_PeerOnlineId; }
+
+    virtual void                dumpSocketStats( const char* reason = nullptr );
 
 protected:
 	bool						toSocketAddrInfo(	int sockType, 

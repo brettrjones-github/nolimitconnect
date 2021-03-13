@@ -22,23 +22,48 @@
 //============================================================================
 //! called if hacker offense is detected
 void P2PEngine::hackerOffense(	VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
-								uint32_t				u32HackLevel,			// 1=severe 2=medium 3=suspicious
+                                EHackerLevel	hackLevel,			    // 1=severe 2=medium 3=suspicious
 								InetAddress		IpAddr,					// ip address if identity not known
 								const char *	pMsg, ... )				// message about the offense
 {
 	char szBuffer[4096];
-	va_list argList;
-	va_start(argList, pMsg);
-	vsnprintf(szBuffer, sizeof( szBuffer ), pMsg, argList);
-	szBuffer[ sizeof( szBuffer ) - 1] = 0;
-	va_end(argList);
-	InetAddress oIpAddr = IpAddr;
-	if( poContactIdent )
-	{
-		oIpAddr = poContactIdent->getOnlineIpAddress();
-	}
+    szBuffer[0] = 0;
+    if( pMsg )
+    {
+        va_list argList;
+        va_start( argList, pMsg );
+        vsnprintf( szBuffer, sizeof( szBuffer ), pMsg, argList );
+        szBuffer[sizeof( szBuffer ) - 1] = 0;
+        va_end( argList );
+    }
+
+    InetAddress oIpAddr = IpAddr;
+    if( poContactIdent )
+    {
+        oIpAddr = poContactIdent->getOnlineIpAddress();
+    }
 
 	std::string strIp = oIpAddr.toStdString();
-	LogMsg( LOG_SEVERE, "Hacker Offense severity %d: ip %s %s\n", u32HackLevel, strIp.c_str(), szBuffer );
+	LogMsg( LOG_SEVERE, "Hacker Offense %s: ip %s %s\n", DescribeHackerLevel( hackLevel ), strIp.c_str(), szBuffer );
+}
 
+
+//============================================================================
+//! called if hacker offense is detected
+void P2PEngine::hackerOffense(	VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
+                                EHackerLevel	hackLevel,			    // 1=severe 2=medium 3=suspicious
+                                const char *	pMsg, ... )				// message about the offense
+{
+    char szBuffer[4096];
+    szBuffer[0] = 0;
+    if( pMsg )
+    {
+        va_list argList;
+        va_start( argList, pMsg );
+        vsnprintf( szBuffer, sizeof( szBuffer ), pMsg, argList );
+        szBuffer[sizeof( szBuffer ) - 1] = 0;
+        va_end( argList );
+    }
+
+    LogMsg( LOG_SEVERE, "Hacker Offense %s: %s\n", DescribeHackerLevel( hackLevel ), szBuffer );
 }

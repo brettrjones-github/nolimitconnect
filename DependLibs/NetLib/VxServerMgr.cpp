@@ -800,6 +800,7 @@ static int acceptErrCnt = 0;
         {
             acceptErrCnt = 0;
             LogModule( eLogListen, LOG_DEBUG, "VxServerMgr::acceptConnection: listen port %d skt %d error %d thread 0x%x", m_u16ListenPort, oListenSkt, rc, VxGetCurrentThreadId() );
+            dumpSocketStats();
         }
 
 		if( 0 == rc )
@@ -846,8 +847,9 @@ static int acceptErrCnt = 0;
 	if( m_aoSkts.size() >= m_u32MaxConnections )
 	{
         LogMsg( LOG_ERROR, "VxServerMgr: reached max connections %d thread 0x%x", m_u32MaxConnections, VxGetCurrentThreadId() );
-		// we have reached max connections
-		// just close it immediately
+        dumpSocketStats("VxServerMgr");
+        // we have reached max connections
+        // just close it immediately
         VxCloseSktNow( oAcceptSkt );
 
 		// sleep awhile
@@ -973,7 +975,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	if( INVALID_SOCKET != m_aoListenSkts[ 0 ] )
 	{
 		SOCKET sktToClose = m_aoListenSkts[ 0 ];
-        LogModule( eLogListen, LOG_INFO, "VxServerMgr:listenForConnectionsToAccept closing listen skt %d\n", sktToClose );
+        LogModule( eLogListen, LOG_INFO, "VxServerMgr:listenForConnectionsToAccept closing listen skt %d", sktToClose );
 		m_aoListenSkts[ 0 ] = INVALID_SOCKET;
 		::VxCloseSktNow( sktToClose );
 	}
@@ -981,7 +983,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	if( (false == VxIsAppShuttingDown() )
 		&& ( false == checkWatchdog() ) )
 	{
-        LogModule( eLogListen, LOG_ERROR, "Listen Failed Watchdog\n" );
+        LogModule( eLogListen, LOG_ERROR, "Listen Failed Watchdog" );
 		std::terminate();
 	}
 

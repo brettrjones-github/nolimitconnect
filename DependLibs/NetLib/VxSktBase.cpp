@@ -554,7 +554,7 @@ void VxSktBase::closeSkt( int iInstance, bool bFlushThenClose )
 {
 	if( m_bClosingFromRxThread || m_bClosingFromDestructor )
 	{
-        LogModule( eLogConnect, LOG_VERBOSE, "skt %d closeSkt instance %d to %s:%d\n", m_iSktId, iInstance, m_strRmtIp.c_str(), m_RmtIp.getPort() );
+        LogModule( eLogConnect, LOG_VERBOSE, "%s skt id %d skt handle %d closeSkt instance %d to %s:%d\n", DescribeSktType(getSktType()), m_iSktId, m_Socket, iInstance, m_strRmtIp.c_str(), m_RmtIp.getPort() );
 		m_SktRxThread.abortThreadRun( true );
 		m_SktTxThread.abortThreadRun( true );
 		m_SktTxSemaphore.signal();
@@ -1359,12 +1359,12 @@ const char * VxSktBase::describeSktCallbackReason( ESktCallbackReason reason )
 std::string VxSktBase::describeSktType( void )
 {
     std::string typeDesc;
-    StdStringFormat( typeDesc, "skt %d skt id %d %s %s last active %s ", 
+    StdStringFormat( typeDesc, "skt id %d skt %d  %s %s last active %s ", 
+                     m_iSktId, 
                      m_Socket,
-					 m_iSktId, 
 					 m_strRmtIp.c_str(), 
 					 isAcceptSocket() ? "accept" : (isUdpSocket() ? "udp" : "connect" ),
-					 ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( getLastActiveTimeMs() ).c_str() );
+					 ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
     return typeDesc;
 }
 
@@ -1385,7 +1385,7 @@ bool VxSktBase::setPeerPktAnn( PktAnnounce &peerAnn )
 }
 
 //============================================================================
-bool VxSktBase::getPeerPktAnnCopy( PktAnnounce &peerAnn )
+bool VxSktBase::getPeerPktAnnCopy( PktAnnounce& peerAnn )
 {
     m_PeerAnnMutex.lock();
     bool copyResult = getIsPeerPktAnnSet() && peerAnn.getPktLength() && peerAnn.getPktLength() == m_PeerPktAnn.getPktLength();
@@ -1396,4 +1396,12 @@ bool VxSktBase::getPeerPktAnnCopy( PktAnnounce &peerAnn )
 
     m_PeerAnnMutex.unlock();
     return copyResult;
+}
+
+//============================================================================
+void VxSktBase::dumpSocketStats( const char* reason )
+{
+    std::string reasonMsg = reason ? reason : "";
+    LogModule( eLogSkt, LOG_DEBUG, "%s skt %d handle %d connected ? %d rmt %s last active %s", DescribeSktType(getSktType()), getSktId(), m_Socket, isConnected(), 
+               getRemoteIp().c_str(), ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
 }

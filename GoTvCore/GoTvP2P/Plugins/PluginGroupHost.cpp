@@ -100,11 +100,13 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
                 m_AnnMutex.unlock();
             }
         }
-
-        VxGUID::generateNewVxGUID( m_AnnounceSessionId );
-        m_AnnMutex.lock();
-        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonGroupAnnounce );
-        m_AnnMutex.unlock();
+        else
+        {
+            VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+            m_AnnMutex.lock();
+            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonGroupAnnounce );
+            m_AnnMutex.unlock();
+        }
     }
 }
 

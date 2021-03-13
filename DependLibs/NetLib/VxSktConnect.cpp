@@ -13,17 +13,11 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "VxSktConnect.h"
 
 //============================================================================
-
 VxSktConnect::VxSktConnect()
+    : VxSktBase()
 {
 	m_eSktType = eSktTypeTcpConnect;
-}
-//============================================================================
-
-VxSktConnect::~VxSktConnect()
-{
 }

@@ -47,7 +47,6 @@ public:
 	virtual bool				checkWatchdog( void );
 
     virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr );
-    // virtual bool				startListening( uint16_t u16ListenPort );
     /// @brief listen on port without binding to a ip address
     virtual bool                startListeningNoBind( uint16_t u16ListenPort );
 	virtual RCODE				stopListening( void );
@@ -63,6 +62,7 @@ protected:
     RCODE 						acceptConnection( VxThread * poVxThread, SOCKET oListenSkt );
     void                        closeListenSocket( void );
 
+    static constexpr size_t     m_u32MaxConnections = 10000;
     static int					m_iAcceptMgrCnt;				    // number of managers created
     RCODE						m_rcLastError = 0;					// last error that occurred
 

@@ -23,6 +23,8 @@
 #include <vector>
 #include <string>
 
+#define SKT_ALIVE_TIMEOUT (2 * 60 * 1000)
+
 class VxSktBase;
 
 // implements a manager to manage multiple sockets
@@ -86,6 +88,8 @@ public:
     virtual bool				lockSkt( VxSktBase* sktBase );
     virtual void				unlockSkt( VxSktBase* sktBase );
 
+    virtual void                dumpSocketStats( const char* reason = nullptr );
+
 	//=== vars ===//
 	RCODE						m_rcLastError{ 0 };
     ESktMgrType					m_eSktMgrType{ eSktMgrTypeNone };   // type of sockets we manage
@@ -100,7 +104,6 @@ public:
 	void *						m_pvRxCallbackUserData{ nullptr };	// user defined rx callback data
 	void *						m_pvTxCallbackUserData{ nullptr };	// user defined tx callback data
 
-	uint32_t					m_u32MaxConnections{ 10000 };	    // max connections we will accept
 	UINT						m_uiCreatorVxThreadId{ 0 };		    // thread id of thread that created this object
 
 	InetAddress					m_LclIp;

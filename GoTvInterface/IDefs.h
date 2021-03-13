@@ -171,6 +171,16 @@ enum EGenderType
     eMaxGenderType
 };
 
+enum EHackerLevel
+{
+    eHackerLevelUnknown,
+    eHackerLevelSuspicious,
+    eHackerLevelMedium,
+    eHackerLevelSevere,
+
+    eMaxHackerLevel
+};
+
 enum EHostAnnounceStatus
 {
     eHostAnnounceUnknown = 0,
@@ -646,6 +656,17 @@ enum ESearchType
     eMaxSearchType
 };
 
+enum ESktType
+{
+    eSktTypeNone				= 0,
+    eSktTypeTcpConnect			= 1,
+    eSktTypeTcpAccept			= 2,
+    eSktTypeUdp					= 3,
+    eSktTypeUdpBroadcast		= 4,
+
+    eMaxSktType			// always last
+};
+
 enum ESubCatagory
 {
     eSubCatagoryUnspecified = 0,
@@ -691,6 +712,7 @@ const char * DescribeConnectReason( EConnectReason connectReason );
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
 //! describe friend state
 const char * DescribeFriendState( EFriendState eFriendState );
+const char * DescribeHackerLevel( EHackerLevel hackLevel );
 //! Host announce status as text
 const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
 //! Host join status as text
@@ -726,8 +748,10 @@ const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus );
 const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
 //! Describe scan type
 const char * DescribeScanType( EScanType scanType );
-//! Describe scan type
-const char * DescribeSearchType( ESearchType scearchType );
+//! Describe search type
+const char * DescribeSearchType( ESearchType searchType );
+//! Describe skt type
+const char * DescribeSktType( ESktType sktType );
 
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName

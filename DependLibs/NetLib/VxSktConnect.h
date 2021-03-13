@@ -19,8 +19,6 @@
 class VxSktConnect : public VxSktBase
 {
 public:
-	
-	VxSktConnect();
-	
-	virtual ~VxSktConnect();
+	VxSktConnect();	
+	virtual ~VxSktConnect() = default;
 };

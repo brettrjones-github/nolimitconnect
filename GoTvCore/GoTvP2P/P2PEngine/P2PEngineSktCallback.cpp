@@ -212,7 +212,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		if( false == pktHdr->isValidPkt() )
 		{
 			// invalid data
-			hackerOffense( 0, 2, sktBase->getRemoteIpBinary(), "Invalid VxPktHdr\n" );
+			hackerOffense( 0, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Invalid VxPktHdr\n" );
 			// release the mutex
 			sktBase->sktBufAmountRead( 0 );
 			sktBase->closeSkt( 622 );

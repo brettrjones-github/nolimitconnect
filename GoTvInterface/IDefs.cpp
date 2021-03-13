@@ -59,6 +59,16 @@ namespace
         "Max Connect Status ",
     };
 
+    const char * HackerLevelEnumStrings[] =
+    {
+        "Hacker Level Unknown ",
+        "Hacker Level Suspicious ",
+        "Hacker Level Medium ",
+        "Hacker Level Severe ",
+
+        "Max Hacker Level ",
+    };
+
     const char * HostAnnounceStatusEnumStrings[] = 
     { 
         "Host Announce Status Unknown ",
@@ -344,6 +354,17 @@ namespace
         "MaxSearchNone"
     };
 
+    const char * SktTypeEnumStrings[] =
+    {
+        "Unknown Socket ",
+        "Connect Socket ",
+        "Accept Socket ",
+        "UDP Socket ",
+        "UDP Broadcast Socket ",
+
+        "eMaxSktType"
+    };
+
     const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
 }
 
@@ -445,6 +466,17 @@ const char * DescribeFriendState( EFriendState eFriendState )
     default:
         return "Ignore ";
     }
+}
+
+//============================================================================
+const char * DescribeHackerLevel( EHackerLevel hackLevel )
+{
+    if( hackLevel < 0 || eMaxHackerLevel <= hackLevel )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return HackerLevelEnumStrings[ hackLevel ];
 }
 
 //============================================================================
@@ -637,14 +669,26 @@ const char * DescribeScanType( EScanType scanType )
 }
 
 //============================================================================
-const char * DescribeSearchType( ESearchType scearchType )
+const char * DescribeSearchType( ESearchType searchType )
 {
-    if(  scearchType < 0 || eMaxSearchType <= scearchType )
+    if(  searchType < 0 || eMaxSearchType <= searchType )
     {
         return ENUM_BAD_PARM;
     }
 
-    return SearchTypeEnumStrings[ scearchType ]; 
+    return SearchTypeEnumStrings[ searchType ]; 
+}
+
+//============================================================================
+//! Describe skt type
+const char * DescribeSktType( ESktType sktType )
+{
+    if(  sktType < 0 || eMaxSktType <= sktType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return SktTypeEnumStrings[ sktType ]; 
 }
 
 //============================================================================

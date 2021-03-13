@@ -14,23 +14,13 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GoTvInterface/IDefs.h>
+
 class VxSktBase;
 
 typedef void (*VX_SKT_CALLBACK)(VxSktBase *, void *);
 
 #define MAX_DISCONNECTED_SKT_TO_KEEP_AROUND				50
-
-
-enum ESktType
-{
-	eSktTypeNone				= 0,
-	eSktTypeTcpConnect			= 1,
-	eSktTypeTcpAccept			= 2,
-	eSktTypeUdp					= 3,
-	eSktTypeUdpBroadcast		= 4,
-
-	eMaxSktType			// always last
-};
 
 enum ESktMgrType
 {

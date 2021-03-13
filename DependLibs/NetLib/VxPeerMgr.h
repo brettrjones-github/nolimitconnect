@@ -56,6 +56,8 @@ public:
 													VxPktHdr *		pktHdr, 				// packet to send
 													bool			bDisconnect = false );	// if true disconnect after send
 
+    virtual void                dumpSocketStats( const char *reason = nullptr ) override;
+
 protected:
 	VxClientMgr					m_ClientMgr;
 };

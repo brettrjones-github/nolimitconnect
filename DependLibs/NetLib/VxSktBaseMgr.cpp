@@ -315,6 +315,21 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 			}
 		}
 
+        uint64_t timeNow = GetTimeStampMs();
+        for( VxSktBase* sktBase : m_aoSkts )
+        {
+            if( sktBase )
+            {
+                if( timeNow - sktBase->getLastActiveTimeMs() > SKT_ALIVE_TIMEOUT )
+                {
+                    LogModule( eLogSkt, LOG_DEBUG, "Closing due to alive timeout %s skt %d handle %d", DescribeSktType( sktBase->getSktType() ), sktBase->getSktId(), sktBase->getSktHandle() );
+                    sktBase->dumpSocketStats();
+
+                    sktBase->closeSkt( 723 );
+                }
+            }
+        }
+
 		sktBaseMgrUnlock();
 		if( deletedSkt )
 		{
@@ -326,7 +341,6 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
     // put this skt in delete list to be deleted later
     moveToEraseList( sktBase );
 }
-
 
 //============================================================================
 //! move to erase/delete when safe to do so
@@ -344,5 +358,26 @@ void VxSktBaseMgr::moveToEraseList( VxSktBase * sktBase )
 
     sktBase->setToDeleteTimeMs( GetGmtTimeMs() + 30000 );
     m_aoSktsToDelete.push_back( sktBase );
+    m_SktMgrMutex.unlock( __FILE__, __LINE__ );
+}
+
+//============================================================================
+void VxSktBaseMgr::dumpSocketStats( const char* reason )
+{
+    std::string reasonMsg = reason ? reason : "";
+    LogModule( eLogSkt, LOG_DEBUG, "%s skt active %d to delete %d total in system %d", reasonMsg.c_str(), m_aoSkts.size(), m_aoSktsToDelete.size(), VxSktBase::getCurrentSktCount() );
+    uint64_t timeNow = GetTimeStampMs();
+    m_SktMgrMutex.lock( __FILE__, __LINE__ ); 
+    for( VxSktBase* sktBase : m_aoSkts )
+    {
+        if( sktBase )
+        {
+            if( timeNow - sktBase->getLastActiveTimeMs() > SKT_ALIVE_TIMEOUT )
+            {
+                sktBase->dumpSocketStats( reason );
+            }
+        }
+    }
+
     m_SktMgrMutex.unlock( __FILE__, __LINE__ );
 }
