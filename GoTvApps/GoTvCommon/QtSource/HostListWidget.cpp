@@ -48,15 +48,10 @@ HostListEntryWidget* HostListWidget::sessionToWidget( GuiHostSession* hostSessio
 
     hostItem->setHostSession( hostSession );
 
-    /*
-    connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)) );
-    connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem *)) );
-    connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem *)),	this, SLOT(slotCancelButtonClicked(QListWidgetItem *)) );
-    connect( item, SIGNAL(signalPlayButtonClicked(QListWidgetItem *)),		this, SLOT(slotPlayButtonClicked(QListWidgetItem *)) );
-    connect( item, SIGNAL(signalLibraryButtonClicked(QListWidgetItem *)),	this, SLOT(slotLibraryButtonClicked(QListWidgetItem *)) );
-    connect( item, SIGNAL(signalFileShareButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileShareButtonClicked(QListWidgetItem *)) );
-    connect( item, SIGNAL(signalShredButtonClicked(QListWidgetItem *)),		this, SLOT(slotShredButtonClicked(QListWidgetItem *)) );
-    */
+    connect( hostItem, SIGNAL(signalHostListItemClicked(QListWidgetItem *)),	    this, SLOT(slotHostListItemClicked(QListWidgetItem *)) );
+    connect( hostItem, SIGNAL(signalIconButtonClicked(HostListEntryWidget *)),	    this, SLOT(slotIconButtonClicked(HostListEntryWidget *)) );
+    connect( hostItem, SIGNAL(signalMenuButtonClicked(HostListEntryWidget *)),	    this, SLOT(slotMenuButtonClicked(HostListEntryWidget *)) );
+    connect( hostItem, SIGNAL(signalJoinButtonClicked(HostListEntryWidget *)),		this, SLOT(slotJoinButtonClicked(HostListEntryWidget *)) );
 
     hostItem->updateWidgetFromInfo();
 
@@ -145,7 +140,7 @@ void HostListWidget::slotItemClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void HostListWidget::slotHostListItemClicked( HostListEntryWidget* hostItem )
+void HostListWidget::slotHostListItemClicked( QListWidgetItem* hostItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -153,14 +148,27 @@ void HostListWidget::slotHostListItemClicked( HostListEntryWidget* hostItem )
 	}
 
 	m_ClickEventTimer.startTimer();
-    GuiHostSession* hostSession  = hostItem->getHostSession();
-	if( hostSession )
-	{
-	}
+    HostListEntryWidget* hostWidget = dynamic_cast<HostListEntryWidget*>(hostItem);
+    if( hostWidget )
+    {
+        onHostListItemClicked(hostWidget);
+    }
 }
 
 //============================================================================
-void HostListWidget::slotHostMenuButtonClicked( HostListEntryWidget* item )
+void HostListWidget::slotIconButtonClicked( HostListEntryWidget* hostItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    slotIconButtonClicked(hostItem);
+}
+
+//============================================================================
+void HostListWidget::slotMenuButtonClicked( HostListEntryWidget* hostItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -168,23 +176,19 @@ void HostListWidget::slotHostMenuButtonClicked( HostListEntryWidget* item )
 	}
 
 	m_ClickEventTimer.startTimer();
-    /*
-	m_SelectedFriend = widgetToHost( item );
-	if( m_SelectedFriend )
-	{
-		emit signalFriendClicked( m_SelectedFriend );
-        ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
-        if( activityBase )
-        {
-            PopupMenu popupMenu( m_MyApp, activityBase );
-            popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
-            popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-            connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
+    onMenuButtonClicked( hostItem );
+}
 
-            popupMenu.showFriendMenu( m_SelectedFriend );
-        }
-	}
-    */
+//============================================================================
+void HostListWidget::slotJoinButtonClicked( HostListEntryWidget* hostItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onJoinButtonClicked( hostItem );
 }
 
 //============================================================================
@@ -243,4 +247,52 @@ void HostListWidget::clearHostList( void )
     }
 
     clear();
+}
+
+//============================================================================
+void HostListWidget::onHostListItemClicked( HostListEntryWidget* hostItem )
+{
+    LogMsg( LOG_DEBUG, "onHostListItemClicked" );
+    onJoinButtonClicked( hostItem );
+}
+
+//============================================================================
+void HostListWidget::onIconButtonClicked( HostListEntryWidget* hostItem )
+{
+    LogMsg( LOG_DEBUG, "onIconButtonClicked" );
+    onJoinButtonClicked( hostItem );
+}
+
+//============================================================================
+void HostListWidget::onMenuButtonClicked( HostListEntryWidget* hostItem )
+{
+    LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
+    onJoinButtonClicked( hostItem );
+    /*
+    m_SelectedFriend = widgetToHost( item );
+    if( m_SelectedFriend )
+    {
+    emit signalFriendClicked( m_SelectedFriend );
+    ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
+    if( activityBase )
+    {
+    PopupMenu popupMenu( m_MyApp, activityBase );
+    popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
+    popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
+    connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
+
+    popupMenu.showFriendMenu( m_SelectedFriend );
+    }
+    }
+    */
+}
+
+//============================================================================
+void HostListWidget::onJoinButtonClicked( HostListEntryWidget* hostItem )
+{
+    LogMsg( LOG_DEBUG, "onJoinButtonClicked" );
+    GuiHostSession* hostSession = hostItem->getHostSession();
+    if( hostSession )
+    {
+    }
 }

@@ -232,9 +232,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="m_JoinButton">
           <property name="text">
-           <string>PushButton</string>
+           <string>Join</string>
           </property>
          </widget>
         </item>

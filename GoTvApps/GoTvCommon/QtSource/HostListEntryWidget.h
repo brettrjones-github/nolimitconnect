@@ -39,17 +39,16 @@ public:
 
 signals:
     void						signalHostListItemClicked( QListWidgetItem * poItemWidget );
-	void						listButtonClicked( HostListEntryWidget* listEntryWidget );
+	void						signalIconButtonClicked( HostListEntryWidget* listEntryWidget );
 	void						signalMenuButtonClicked( HostListEntryWidget* listEntryWidget );
+    void						signalJoinButtonClicked( HostListEntryWidget* listEntryWidget );
 
 public slots:
-	void						iconButtonPressed( void );
-	void						iconButtonReleased( void );
-	void						listButtonPressed( void );
-	void						listButtonReleased( void );
+	void						slotIconButtonClicked( void );
 	void						slotMenuButtonPressed( void );
 	void						slotMenuButtonReleased( void );
-
+    void						slotJoinButtonPressed( void );
+ 
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;

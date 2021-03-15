@@ -24,18 +24,9 @@ HostListEntryWidget::HostListEntryWidget(QWidget *parent  )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-	connect( ui.m_IconButton, SIGNAL(pressed()), this, SLOT(iconButtonPressed()) );
-	connect( ui.m_IconButton, SIGNAL(released()), this, SLOT(iconButtonReleased()) );
-	connect( ui.m_MenuButton, SIGNAL(pressed()), this, SLOT(slotMenuButtonPressed()) );
-	connect( ui.m_MenuButton, SIGNAL(released()), this, SLOT(slotMenuButtonReleased()) );
-    /*
-    connect( ui.m_FileIconButton,		SIGNAL(clicked()),						this, SLOT(slotFileIconButtonClicked()) );
-    connect( ui.m_FileCancelButton,		SIGNAL(clicked()),						this, SLOT(slotCancelButtonClicked()) );
-    connect( ui.m_FileActionBar,		SIGNAL(signalPlayButtonClicked()),		this, SLOT(slotPlayButtonClicked()) );
-    connect( ui.m_FileActionBar,		SIGNAL(signalLibraryButtonClicked()),	this, SLOT(slotLibraryButtonClicked()) );
-    connect( ui.m_FileActionBar,		SIGNAL(signalFileShareButtonClicked()), this, SLOT(slotFileShareButtonClicked()) );
-    connect( ui.m_FileActionBar,		SIGNAL(signalShredButtonClicked()),		this, SLOT(slotShredButtonClicked()) );
-    */
+    connect( ui.m_IconButton,       SIGNAL(clicked()),  this, SLOT(slotIconButtonClicked()) );
+	connect( ui.m_MenuButton,       SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
+    connect( ui.m_JoinButton,		SIGNAL(pressed()),	this, SLOT(slotJoinButtonPressed()) );
 }
 
 //============================================================================
@@ -81,41 +72,27 @@ GuiHostSession * HostListEntryWidget::getHostSession( void )
 }
 
 //============================================================================
-void HostListEntryWidget::iconButtonPressed()
+void HostListEntryWidget::slotIconButtonClicked()
 {
-	//SubWidget->setDown(true);
-	emit listButtonClicked( this );
+    LogMsg( LOG_DEBUG, "HostListEntryWidget::slotIconButtonClicked" );
+	emit signalIconButtonClicked( this );
 }
 
 //============================================================================
-void HostListEntryWidget::iconButtonReleased()
+void HostListEntryWidget::slotMenuButtonPressed( void )
 {
-	//SubWidget->setDown(false);
-}
-
-//============================================================================
-void HostListEntryWidget::slotMenuButtonPressed()
-{
-	//SubWidget->setDown(true);
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void HostListEntryWidget::slotMenuButtonReleased()
+void HostListEntryWidget::slotMenuButtonReleased( void )
 {
-	//SubWidget->setDown(false);
 }
 
 //============================================================================
-void HostListEntryWidget::listButtonPressed()
+void HostListEntryWidget::slotJoinButtonPressed( void )
 {
-	emit listButtonClicked( this );
-}
-
-//============================================================================
-void HostListEntryWidget::listButtonReleased()
-{
-
+    emit signalJoinButtonClicked( this );
 }
 
 //============================================================================
@@ -143,5 +120,4 @@ void HostListEntryWidget::updateWidgetFromInfo( void )
     ui.TitlePart1->setText( strName );
     ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );
-
 }
