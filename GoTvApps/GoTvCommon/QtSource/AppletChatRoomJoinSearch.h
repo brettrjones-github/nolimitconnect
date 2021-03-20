@@ -62,6 +62,10 @@ private slots:
     void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
     void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
+    virtual void                slotIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+
 protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;

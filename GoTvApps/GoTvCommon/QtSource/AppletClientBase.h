@@ -16,6 +16,7 @@
 #include "AppletBase.h"
 #include <GoTvInterface/IToGui.h>
 
+class GuiHostSession;
 
 class AppletClientBase : public AppletBase
 {
@@ -30,9 +31,14 @@ public:
     void                        setSearchType( ESearchType searchType )     { m_SearchType = searchType; }
     ESearchType                 getSearchType(  void )                      { return m_SearchType; }
 
+    virtual void                onJointButtonClicked( GuiHostSession* hostSession );
+
 protected:
     EHostType                   m_HostType{ eHostTypeUnknown };
     ESearchType                 m_SearchType{ eSearchNone };
+    VxGUID                      m_JoinSessionId;
+    std::string                 m_JoinHostUrl;
+    EHostType                   m_JoinHostType{ eHostTypeUnknown };
 };
 
 

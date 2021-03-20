@@ -260,14 +260,23 @@ void HostListWidget::onHostListItemClicked( HostListEntryWidget* hostItem )
 void HostListWidget::onIconButtonClicked( HostListEntryWidget* hostItem )
 {
     LogMsg( LOG_DEBUG, "onIconButtonClicked" );
-    onJoinButtonClicked( hostItem );
+    GuiHostSession* hostSession = hostItem->getHostSession();
+    if( hostSession )
+    {
+        emit signalIconButtonClicked( hostSession, hostItem );
+    }
 }
 
 //============================================================================
 void HostListWidget::onMenuButtonClicked( HostListEntryWidget* hostItem )
 {
     LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
-    onJoinButtonClicked( hostItem );
+    GuiHostSession* hostSession = hostItem->getHostSession();
+    if( hostSession )
+    {
+        emit signalMenuButtonClicked( hostSession, hostItem );
+    }
+
     /*
     m_SelectedFriend = widgetToHost( item );
     if( m_SelectedFriend )
@@ -294,5 +303,6 @@ void HostListWidget::onJoinButtonClicked( HostListEntryWidget* hostItem )
     GuiHostSession* hostSession = hostItem->getHostSession();
     if( hostSession )
     {
+        emit signalJoinButtonClicked( hostSession, hostItem );
     }
 }

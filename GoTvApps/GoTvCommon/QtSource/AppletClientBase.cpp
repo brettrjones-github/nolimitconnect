@@ -16,6 +16,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
+#include "GuiHostSession.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -24,3 +25,20 @@ AppletClientBase::AppletClientBase( const char * objName, AppCommon& app, QWidge
     : AppletBase( objName, app, parent )
 {
 }
+
+//============================================================================
+void AppletClientBase::onJointButtonClicked( GuiHostSession* hostSession )
+{
+    if( hostSession )
+    {
+        VxGUID::generateNewVxGUID( m_JoinSessionId );
+        m_JoinHostType = hostSession->getHostType();
+        m_JoinHostUrl = hostSession->getHostUrl();
+        m_Engine.fromGuiJoinHost( m_JoinHostType, m_JoinSessionId, m_JoinHostUrl.c_str() );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "AppletClientBase::onJointButtonClicked null hostSession" );
+    }
+}
+

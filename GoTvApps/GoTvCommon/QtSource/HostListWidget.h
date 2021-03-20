@@ -47,9 +47,9 @@ public:
     HostListEntryWidget*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
 signals:
-	void						signalUpdateFriend( VxNetIdent * netIdent, bool sessionTimeChange );
-	void						signalFriendClicked( VxNetIdent * netIdent );
-	void						signalRefreshFriendList( EFriendViewType eWhichFriendsToShow );
+    virtual void                signalIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    virtual void                signalMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    virtual void                signalJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
 
 protected slots:
 	void						slotItemClicked( QListWidgetItem* item );

@@ -31,9 +31,13 @@ public:
 
 	GuiHostSession&			    operator =( const GuiHostSession &rhs );
 
-    VxGUID&					    getSessionId( void )                        { return m_SessionId; }
     VxNetIdent&					getHostIdent( void )                        { return m_HostIdent; }
+    EHostType                   getHostType( void )                         { return m_HostType; }
+    std::string                 getHostUrl( void );
+
     PluginSetting&				getPluginSetting( void )                    { return m_PluginSetting; }
+    void						setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
+    VxGUID&					    getSessionId( void )                        { return m_SessionId; }
 
     void						setWidget( QWidget * widget )				{ m_Widget = widget; }
     QWidget *					getWidget( void )							{ return m_Widget; }

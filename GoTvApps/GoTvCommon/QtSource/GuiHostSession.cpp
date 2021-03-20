@@ -63,3 +63,9 @@ GuiHostSession& GuiHostSession::operator =( const GuiHostSession &rhs )
 
 	return *this;
 }
+
+//============================================================================
+std::string GuiHostSession::getHostUrl( void )
+{
+    return m_HostIdent.getMyOnlineUrl();
+}

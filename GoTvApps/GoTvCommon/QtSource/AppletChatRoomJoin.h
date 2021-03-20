@@ -49,7 +49,6 @@ protected:
 
     //=== vars ===//
     Ui::ChatRoomJoinUi          ui;
-    VxGUID                      m_JoinSessionId;
 };
 
 

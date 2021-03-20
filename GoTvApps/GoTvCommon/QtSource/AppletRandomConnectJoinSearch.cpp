@@ -57,6 +57,10 @@ AppletRandomConnectJoinSearch::AppletRandomConnectJoinSearch(	AppCommon&		    ap
     connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
         this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
 
+    connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListEntryWidget* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListEntryWidget* ) ) );
+    connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListEntryWidget* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListEntryWidget* ) ) );
+    connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListEntryWidget* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListEntryWidget* ) ) );
+
     setStatusLabel( QObject::tr( "Search For Random Connect Host To Join" ) );
     std::string lastHostSearchText;
     m_MyApp.getAppSettings().getLastHostSearchText( getSearchType(), lastHostSearchText ); 
@@ -237,4 +241,22 @@ void AppletRandomConnectJoinSearch::clearStatus( void )
 {
     setInfoLabel( "" );
     setStatusLabel( "" );
+}
+
+//============================================================================
+void AppletRandomConnectJoinSearch::slotIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem )
+{
+
+}
+
+//============================================================================
+void AppletRandomConnectJoinSearch::slotMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem )
+{
+
+}
+
+//============================================================================
+void AppletRandomConnectJoinSearch::slotJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem )
+{
+    onJointButtonClicked( hostSession );
 }
