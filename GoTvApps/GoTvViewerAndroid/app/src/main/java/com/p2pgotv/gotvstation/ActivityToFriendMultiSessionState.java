@@ -15,9 +15,9 @@
 
 package com.p2pgotv.gotvstation;
 
-public class ActivityToFriendMultiSessionState extends ChatSessionState
+public class AppletPeerMultiSessionState extends ChatSessionState
 {
-	ActivityToFriendMultiSessionState( MyApp myApp )
+	AppletPeerMultiSessionState( MyApp myApp )
 	{
 		super( myApp );
 	}

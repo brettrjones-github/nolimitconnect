@@ -9,9 +9,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ActivityToFriendVideoPhone extends ActivityToFriendGuiBase
+public class AppletPeerVideoPhone extends AppletPeerGuiBase
 {
-	private static final String LOG_TAG = "ActivityToFriendVideoPhone:";
+	private static final String LOG_TAG = "AppletPeerVideoPhone:";
 	
 	//=== vars ===//
 	private EditText				m_InstMsgHistoryText 		= null;

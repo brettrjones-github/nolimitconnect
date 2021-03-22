@@ -91,10 +91,10 @@ public:
 	void						setStatusText( QString statusMsgText );
 	void						checkDiskSpace( void );
 
-	void						setPluginType( EPluginType ePluginType )			{ m_ePluginType = ePluginType; }
+    virtual void				setPluginType( EPluginType ePluginType )			{ m_ePluginType = ePluginType; }
 	virtual EPluginType			getPluginType( void )								{ return m_ePluginType; }
-	void						setHisIdent( VxNetIdent * hisIdent )				{ m_HisIdent = hisIdent; }
-	VxNetIdent *				getHisIdent( void )									{ return m_HisIdent; }
+    virtual void				setHisIdent( VxNetIdent * hisIdent )				{ m_HisIdent = hisIdent; }
+    virtual VxNetIdent *		getHisIdent( void )									{ return m_HisIdent; }
 
 	virtual void				okMessageBox( QString title, QString msg );
 	virtual void				okMessageBox2( QString title, const char * msg, ... );

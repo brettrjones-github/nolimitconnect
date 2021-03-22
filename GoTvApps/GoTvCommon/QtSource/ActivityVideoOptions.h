@@ -19,14 +19,14 @@
 #include <QDialog>
 #include <QPixmap>
 #include "ui_ActivityVideoOptions.h"
-#include "ActivityToFriendBase.h"
+#include "AppletPeerBase.h"
 #include "VidWidget.h"
 
 class AppCommon;
 class P2PEngine;
 class VxNetIdent;
 
-class ActivityVideoOptions : public ActivityToFriendBase
+class ActivityVideoOptions : public AppletPeerBase
 {
 	Q_OBJECT
 public:

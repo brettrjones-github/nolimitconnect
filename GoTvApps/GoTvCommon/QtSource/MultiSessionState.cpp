@@ -15,7 +15,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "MultiSessionState.h"
-#include "ActivityToFriendMultiSession.h"
+#include "AppletMultiMessenger.h"
 #include "AppCommon.h"
 
 #include "VxPushButton.h"
@@ -25,7 +25,7 @@
 #include <QFrame>
 
 //========================================================================
-MultiSessionState::MultiSessionState( AppCommon& myApp, ActivityToFriendMultiSession& activityToFriendMultiSession, EMSessionType sessionType )
+MultiSessionState::MultiSessionState( AppCommon& myApp, AppletMultiMessenger& activityToFriendMultiSession, EMSessionType sessionType )
 : QWidget( &activityToFriendMultiSession )
 , m_MyApp( myApp )
 , m_IFromGui( myApp.getEngine().getFromGuiInterface() )

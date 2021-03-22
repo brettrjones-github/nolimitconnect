@@ -57,7 +57,7 @@ public class MultiSessionState
 	static public final int eMSessionActionHangup 					= 7;
 	
 	MyApp 							m_MyApp;
-	ActivityToFriendMultiSession  	m_Activity;
+	AppletPeerMultiSession  	m_Activity;
 
 	int								m_eMSessionType;
 	private int						m_SessionState					= eMSessionStateUnknown;
@@ -87,7 +87,7 @@ public class MultiSessionState
 	
 	
 	//========================================================================
-	MultiSessionState( MyApp myApp, ActivityToFriendMultiSession activityToFriendMultiSession, int sessionType )
+	MultiSessionState( MyApp myApp, AppletPeerMultiSession activityToFriendMultiSession, int sessionType )
 	{
 		m_MyApp 						= myApp;
 		m_Activity 						= activityToFriendMultiSession;

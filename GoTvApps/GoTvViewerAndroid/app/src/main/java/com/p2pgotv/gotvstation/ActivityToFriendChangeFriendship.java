@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 import android.os.Bundle;
 
-public class ActivityToFriendChangeFriendship extends ActivityBase implements RadioGroup.OnCheckedChangeListener 
+public class AppletPeerChangeFriendship extends ActivityBase implements RadioGroup.OnCheckedChangeListener 
 {
     public static final String LOG_TAG = "ChangeFriendship:";
     //=== activity vars ===//

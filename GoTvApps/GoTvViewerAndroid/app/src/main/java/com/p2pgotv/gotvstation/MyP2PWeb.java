@@ -1079,7 +1079,7 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 				{
 					if (oSelectedFriend.isAccessAllowed(Constants.ePluginTypeMultiSession)) 
 					{
-						Intent myIntent = new Intent(MyP2PWeb.this, ActivityToFriendMultiSession.class);
+						Intent myIntent = new Intent(MyP2PWeb.this, AppletPeerMultiSession.class);
 						m_MyApp.getOffersMgr().lockOffersMgr();
 						GuiOfferSession oSession = m_MyApp.getOffersMgr().findAvailableAndActiveOffer( Constants.ePluginTypeMultiSession, oSelectedFriend );
 						m_MyApp.getOffersMgr().unlockOffersMgr();
@@ -1106,7 +1106,7 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 				{
 					if( oSelectedFriend.isAccessAllowed( Constants.ePluginTypeVoicePhone ) ) 
 					{
-						Intent myIntent = new Intent(MyP2PWeb.this, ActivityToFriendVoicePhone.class);
+						Intent myIntent = new Intent(MyP2PWeb.this, AppletPeerVoicePhone.class);
 						myIntent.putExtra("PluginType", Constants.ePluginTypeVoicePhone);
 						m_MyApp.getOffersMgr().lockOffersMgr();
 						GuiOfferSession oSession = m_MyApp.getOffersMgr().findAvailableAndActiveOffer( Constants.ePluginTypeVoicePhone, oSelectedFriend );
@@ -1133,7 +1133,7 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 					if (oSelectedFriend
 							.isAccessAllowed(Constants.ePluginTypeVideoPhone)) 
 					{
-						Intent myIntent = new Intent(MyP2PWeb.this, ActivityToFriendVideoPhone.class);
+						Intent myIntent = new Intent(MyP2PWeb.this, AppletPeerVideoPhone.class);
 						myIntent.putExtra("PluginType",Constants.ePluginTypeVideoPhone);
 						m_MyApp.getOffersMgr().lockOffersMgr();
 						GuiOfferSession oSession = m_MyApp.getOffersMgr().findAvailableAndActiveOffer( Constants.ePluginTypeVideoPhone, oSelectedFriend );
@@ -1159,7 +1159,7 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 				{
 					if (oSelectedFriend.isAccessAllowed(Constants.ePluginTypeTruthOrDare)) 
 					{
-						Intent myIntent = new Intent(MyP2PWeb.this,ActivityToFriendTodGame.class);
+						Intent myIntent = new Intent(MyP2PWeb.this,AppletPeerTodGame.class);
 						myIntent.putExtra("PluginType", Constants.ePluginTypeTruthOrDare);
 						m_MyApp.getOffersMgr().lockOffersMgr();
 						GuiOfferSession oSession = m_MyApp.getOffersMgr().findAvailableAndActiveOffer( Constants.ePluginTypeTruthOrDare, oSelectedFriend );
@@ -1197,7 +1197,7 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 				{
 					if( oSelectedFriend.isAccessAllowed( Constants.ePluginTypeFileServer ) ) 
 					{
-						Intent myIntent = new Intent( MyP2PWeb.this, ActivityToFriendViewSharedFiles.class );
+						Intent myIntent = new Intent( MyP2PWeb.this, AppletPeerViewSharedFiles.class );
 						MyP2PWeb.this.startActivityForResult( myIntent, Constants.ACTIVITY_VIEW_SHARED_FILES );
 					}
 					else 
@@ -1219,12 +1219,12 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 				} 
 				else if (Constants.MENU_FRIEND_CHANGE_FRIENDSHIP == oMenuItem.m_iSubMenuId) 
 				{
-					Intent myIntent = new Intent( MyP2PWeb.this, ActivityToFriendChangeFriendship.class );
+					Intent myIntent = new Intent( MyP2PWeb.this, AppletPeerChangeFriendship.class );
 					MyP2PWeb.this.startActivityForResult( myIntent, Constants.ACTIVITY_TO_FRIEND_CHANGE_FRIENDSHIP );
 				} 
 				else if (Constants.MENU_FRIEND_PROXY == oMenuItem.m_iSubMenuId) 
 				{
-					Intent myIntent = new Intent( MyP2PWeb.this, ActivityToFriendRequestRelay.class );
+					Intent myIntent = new Intent( MyP2PWeb.this, AppletPeerRequestRelay.class );
 					MyP2PWeb.this.startActivityForResult( myIntent, Constants.ACTIVITY_TO_FRIEND_REQUEST_PROXY );
 				} 
 				/*
@@ -1235,12 +1235,12 @@ public class MyP2PWeb extends ActivityFriendListBase implements OnItemSelectedLi
 				} 
 				else if (Constants.MENU_FRIEND_CALL_USING_PHONE_NUM == oMenuItem.m_iSubMenuId) 
 				{
-					Intent myIntent = new Intent( MyP2PWeb.this, ActivityToFriendCallPhoneNumber.class );
+					Intent myIntent = new Intent( MyP2PWeb.this, AppletPeerCallPhoneNumber.class );
 					MyP2PWeb.this.startActivityForResult( myIntent, Constants.ACTIVITY_CALL_PHONE_NUM );
 				} 
 				else if (Constants.MENU_FRIEND_SEND_TEXT_USING_SMS == oMenuItem.m_iSubMenuId) 
 				{
-					Intent myIntent = new Intent( MyP2PWeb.this, ActivityToFriendSendSmsTextMsg.class );
+					Intent myIntent = new Intent( MyP2PWeb.this, AppletPeerSendSmsTextMsg.class );
 					MyP2PWeb.this.startActivityForResult( myIntent, Constants.ACTIVITY_SMS_TEXT_MESSAGE );
 				} 				
 				else 

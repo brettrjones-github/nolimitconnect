@@ -94,7 +94,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
         joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
         if( ePluginAccessOk == joinReply.getAccessState() )
         {
-
+            m_HostServerMgr.onUserJoined( sktBase, netIdent );
         }
 
         txPacket( netIdent, sktBase, &joinReply );

@@ -708,6 +708,8 @@
     <ClCompile Include="..\..\GoTvP2P\Search\RcScan.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Search\RcScanAction.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Search\RcScanMatchedConnection.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\User\User.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.cpp" />
     <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageSettings.cpp" />
     <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebServer.cpp" />
@@ -977,6 +979,8 @@
     <ClInclude Include="..\..\GoTvP2P\Search\RcScanAction.h" />
     <ClInclude Include="..\..\GoTvP2P\Search\RcScanMatchedConnection.h" />
     <ClInclude Include="..\..\GoTvP2P\Search\RcScanPic.h" />
+    <ClInclude Include="..\..\GoTvP2P\User\User.h" />
+    <ClInclude Include="..\..\GoTvP2P\User\UserList.h" />
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.h" />
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageSettings.h" />
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebServer.h" />

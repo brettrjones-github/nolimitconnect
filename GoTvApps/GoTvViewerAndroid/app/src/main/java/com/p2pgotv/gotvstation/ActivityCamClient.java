@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
-public class ActivityCamClient extends ActivityToFriendGuiBase
+public class ActivityCamClient extends AppletPeerGuiBase
 {
 	//=== constants ===//
 	public static final String LOG_TAG = "ActivityCamClient:";

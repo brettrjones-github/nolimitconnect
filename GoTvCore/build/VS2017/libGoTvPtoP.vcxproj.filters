@@ -709,6 +709,12 @@
     <ClCompile Include="..\..\GoTvP2P\Connections\HandshakeList.cpp">
       <Filter>GoTvP2P\Connections</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\User\User.cpp">
+      <Filter>GoTvP2P\User</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp">
+      <Filter>GoTvP2P\User</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1516,6 +1522,12 @@
     <ClInclude Include="..\..\GoTvP2P\Connections\HandshakeList.h">
       <Filter>GoTvP2P\Connections</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\User\User.h">
+      <Filter>GoTvP2P\User</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\User\UserList.h">
+      <Filter>GoTvP2P\User</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1604,6 +1616,9 @@
     </Filter>
     <Filter Include="GoTvP2P\BlobXferMgr">
       <UniqueIdentifier>{68c61962-7aad-4927-bc06-08d952dcc131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\User">
+      <UniqueIdentifier>{d8b95c40-fa5a-4e3e-b03e-5a33c754d6b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

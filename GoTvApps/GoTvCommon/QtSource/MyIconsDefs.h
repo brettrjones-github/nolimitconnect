@@ -359,5 +359,8 @@ enum EMyIcons
     eMyIconZoomIn,
     eMyIconZoomOut,
 
+    eMyIconEyeHide,
+    eMyIconEyeShow,
+
 	eMaxMyIcon	// must be last
 };

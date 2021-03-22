@@ -731,6 +731,11 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconZoomOut:
         return ":/AppRes/Resources/zoom-out.svg";
 
+    case eMyIconEyeHide:
+        return ":/AppRes/Resources/eye-hide.svg";
+    case eMyIconEyeShow:
+        return ":/AppRes/Resources/eye-show.svg";
+
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}

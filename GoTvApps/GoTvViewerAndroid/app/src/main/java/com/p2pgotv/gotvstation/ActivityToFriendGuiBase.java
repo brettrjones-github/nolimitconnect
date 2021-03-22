@@ -27,10 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class ActivityToFriendGuiBase extends ActivityBase implements ToGuiActivityInterface 
+public class AppletPeerGuiBase extends ActivityBase implements ToGuiActivityInterface 
 {
 	//=== constants ===//
-	private static final String LOG_TAG = "ActivityToFriendGuiBase:";
+	private static final String LOG_TAG = "AppletPeerGuiBase:";
 	
 	//=== vars ===//
     public VxNetIdent 			m_HisIdent 				= null;

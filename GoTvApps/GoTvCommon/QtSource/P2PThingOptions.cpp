@@ -21,8 +21,8 @@
 #include "ActivityPermissionsRelay.h"
 #include "ActivityNetworkSettings.h"
 #include "ActivityVideoOptions.h"
-#include "ActivityToFriendMultiSession.h"
-#include "ActivitySelectFileToSend.h"
+#include "AppletMultiMessenger.h"
+#include "AppletPeerSelectFileToSend.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 

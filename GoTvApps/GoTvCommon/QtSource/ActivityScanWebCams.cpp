@@ -90,14 +90,14 @@ void ActivityScanWebCams::setScanStatusText( QString strMsg )
 //============================================================================
 void ActivityScanWebCams::showEvent( QShowEvent * ev )
 {
-	// don't call ActivityToFriendBase::showEvent ... we don't want plugin offer/response for web cam server or client
+	// don't call AppletPeerBase::showEvent ... we don't want plugin offer/response for web cam server or client
 	ActivityBase::showEvent( ev );
 }
 
 //============================================================================
 void ActivityScanWebCams::hideEvent( QHideEvent * ev )
 {
-	// don't call ActivityToFriendBase::hideEvent ... we don't want plugin offer/response for web cam server or client
+	// don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
 	ActivityBase::hideEvent( ev );
 }
 

@@ -14,49 +14,34 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "OfferSessionLogic.h"
 #include "AppCommon.h"
+#include "AppletPeerBase.h"
+#include "OfferSessionLogic.h"
 #include "GuiOfferSession.h"
 #include "OfferSessionCallbackInterface.h"
 #include "OffersMgr.h"
 #include "OfferSessionState.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
-#include "ActivityBase.h"
 
 #include <CoreLib/VxGlobals.h>
 
 #include <stdio.h>
 
 //======================================================================== 
-OfferSessionLogic::OfferSessionLogic(	ActivityBase * activity,  
-										OfferSessionCallbackInterface * callbackInterface, 
-										AppCommon& myApp, 
-										EPluginType ePluginType, 
-										VxNetIdent * hisIdent, 
-										GuiOfferSession * offerSession )
+OfferSessionLogic::OfferSessionLogic( AppletBase* appletBase, OfferSessionCallbackInterface * callbackInterface, AppCommon& myApp )
 : m_MyApp( myApp )
 , m_OffersMgr( myApp.getOffersMgr() )
-, m_Activity( activity )
+, m_AppletBase( appletBase )
 , m_OfferCallback( callbackInterface )
-, m_ePluginType( ePluginType )	
-, m_HisIdent( hisIdent )
 , m_MyIdent( myApp.getMyIdentity() )
 , m_LclSessionId()
 , m_RmtSessionId()
 , m_OfferSessionId()
-, m_GuiOfferSession( offerSession )
-, m_IsOffer( false )
-, m_IsMyself( false )
-, m_IsServerSession(  false )
-, m_IsPluginSingleSession(  false )
 , m_strOfferText( "" )
 , m_strOfferFileName(  "" )
-, m_UserData( 0 )	
-, m_SessionEndIsHandled( false )
-, m_IsInSession( false )
-, m_IsOnStopCalled( false )
 {
+    /*
 	m_IsMyself 					= (m_MyIdent->getMyOnlineId() == m_HisIdent->getMyOnlineId() );
 	if( 0 != m_GuiOfferSession )
 	{
@@ -80,6 +65,7 @@ OfferSessionLogic::OfferSessionLogic(	ActivityBase * activity,
 	m_UserData = m_GuiOfferSession->getUserData();
 	m_FileHashId.setHashData( m_GuiOfferSession->getFileHashId().getHashData() );
 	m_strOfferText = GuiParams::describePlugin( m_ePluginType, false );
+    */
 }
 
 //======================================================================== 
@@ -379,7 +365,7 @@ bool OfferSessionLogic::sendOfferReply( EOfferResponse offerResponse )
 		}
 		else
 		{
-			m_Activity->setStatusText( QObject::tr( "Sent Offer Reply" ) );
+			m_AppletBase->setStatusText( QObject::tr( "Sent Offer Reply" ) );
 		}
 
 		return bSentMsg;

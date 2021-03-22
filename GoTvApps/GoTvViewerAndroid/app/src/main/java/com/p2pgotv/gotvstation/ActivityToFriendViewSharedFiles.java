@@ -28,9 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ActivityToFriendViewSharedFiles  extends ActivityListBase implements ToGuiFileXferInterface
+public class AppletPeerViewSharedFiles  extends ActivityListBase implements ToGuiFileXferInterface
 {
-	public static final String LOG_TAG = "ActivityToFriendViewSharedFiles:";
+	public static final String LOG_TAG = "AppletPeerViewSharedFiles:";
 	   
 	//=== vars ===//
 	private ReuseFriendDisplayLogic m_FriendDisplayLogic 	= new ReuseFriendDisplayLogic();
@@ -140,7 +140,7 @@ public class ActivityToFriendViewSharedFiles  extends ActivityListBase implement
 	//========================================================================
 	void showOfflineMsg()
 	{
-        Toast.makeText(ActivityToFriendViewSharedFiles.this, m_HisIdent.m_as8OnlineName + " Is Offline.", Toast.LENGTH_SHORT).show();		
+        Toast.makeText(AppletPeerViewSharedFiles.this, m_HisIdent.m_as8OnlineName + " Is Offline.", Toast.LENGTH_SHORT).show();		
 	}
 
 	//========================================================================
@@ -341,7 +341,7 @@ public class ActivityToFriendViewSharedFiles  extends ActivityListBase implement
 	{
 		if(	-1 != NativeTxTo.fromGuiGetFileDownloadState( xferSession.getFileHashId().getHashData() ) )
 		{
-		    Toast.makeText(ActivityToFriendViewSharedFiles.this, "File is already downloading", Toast.LENGTH_SHORT).show();		
+		    Toast.makeText(AppletPeerViewSharedFiles.this, "File is already downloading", Toast.LENGTH_SHORT).show();		
 			return;
 		}
 		else
@@ -370,7 +370,7 @@ public class ActivityToFriendViewSharedFiles  extends ActivityListBase implement
 			else 
 			{
 				String xferErr = GuiHelpers.describeEXferError( xferError );
-			    Toast.makeText(ActivityToFriendViewSharedFiles.this, xferErr, Toast.LENGTH_LONG).show();		
+			    Toast.makeText(AppletPeerViewSharedFiles.this, xferErr, Toast.LENGTH_LONG).show();		
 				return;
 			}
 		}	

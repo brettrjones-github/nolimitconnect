@@ -15,7 +15,7 @@
 
 #include <app_precompiled_hdr.h>
 
-#include "ActivityToFriendViewSharedFiles.h"
+#include "AppletPeerViewSharedFiles.h"
 #include "FileListReplySession.h"
 #include "AppCommon.h"
 #include "GuiFileXferSession.h"

@@ -19,7 +19,7 @@
 #include <PktLib/VxCommon.h>
 
 #include "Friend.h"
-#include "ActivityToFriendBase.h"
+#include "AppletPeerBase.h"
 #include "ui_ActivityDownloadItemMenu.h"
 
 class AppCommon;

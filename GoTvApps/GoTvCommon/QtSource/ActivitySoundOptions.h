@@ -32,8 +32,6 @@ public:
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
-	void						setPluginType( EPluginType ePluginType );
-
 public slots:
 	void						onApplyButClick();
 	void						onCancelButClick(); 

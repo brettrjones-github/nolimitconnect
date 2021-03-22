@@ -56,6 +56,9 @@
 #include "AppletPlayerVideo.h"
 #include "AppletRandomConnectJoinSearch.h"
 
+#include "AppletPeerSelectFileToSend.h"
+#include "AppletPeerSessionFileOffer.h"
+
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
 #include "AppletServiceChatRoom.h"
@@ -101,8 +104,15 @@
 #include "AppletRemoteControl.h"
 #include "AppletUserIdentity.h"
 
-#include "HomeWindow.h"
+#include "AppletMultiMessenger.h"
+#include "AppletPeerChangeFriendship.h"
+#include "AppletPeerReplyFileOffer.h"
+#include "AppletPeerTodGame.h"
+#include "AppletPeerVideoPhone.h"
+#include "AppletPeerViewSharedFiles.h"
+#include "AppletPeerVoicePhone.h"
 
+#include "HomeWindow.h"
 
 //============================================================================
 AppletMgr::AppletMgr( AppCommon& myMpp, QWidget * parent )
@@ -177,6 +187,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	}
 
     QWidget * launchFrame = m_MyApp.getHomePage().getLaunchPageFrame();
+    QWidget * messengerFrame = m_MyApp.getHomePage().getMessengerParentFrame();
 
 	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )
@@ -262,8 +273,20 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 
     case eAppletTestAndDebug:               appletDialog = new AppletTestAndDebug( m_MyApp, parent ); break;
     case eAppletTheme:                      appletDialog = new AppletTheme( m_MyApp, parent ); break;
-    case eAppletUnknown:                    m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" ); return nullptr;
+    case eAppletUnknown:                    m_MyApp.errMessageBox( appletMissingTitle, QObject::tr("Unknown Or Not Implemented") ); return nullptr;
     case eAppletUserIdentity:               appletDialog = new AppletUserIdentity( m_MyApp, parent ); break;
+
+    case eAppletMultiMessenger:	            appletDialog = new AppletMultiMessenger( m_MyApp, parent ); break;
+    case eAppletPeerChangeFriendship:	    appletDialog = new AppletPeerChangeFriendship( m_MyApp, parent ); break;
+    case eAppletPeerReplyOfferFile:         appletDialog = new AppletPeerReplyFileOffer( m_MyApp, parent ); break;
+    case eAppletPeerTodGame:                appletDialog = new AppletPeerTodGame( m_MyApp, parent ); break;
+    case eAppletPeerVideoPhone:             appletDialog = new AppletPeerVideoPhone( m_MyApp, parent ); break;
+    case eAppletPeerViewSharedFiles:        appletDialog = new AppletPeerViewSharedFiles( m_MyApp, parent ); break;
+    case eAppletPeerVoicePhone:             appletDialog = new AppletPeerVoicePhone( m_MyApp, parent ); break;
+
+    case eAppletPeerSelectFileToSend:       appletDialog = new AppletPeerSelectFileToSend( m_MyApp, parent ); break;
+    case eAppletPeerSessionFileOffer:       appletDialog = new AppletPeerSessionFileOffer( m_MyApp, parent ); break;
+
 
 //	case eAppletPlayerVideo:
 //		appletDialog = new AppletPlayerVideo( m_MyApp, parent );

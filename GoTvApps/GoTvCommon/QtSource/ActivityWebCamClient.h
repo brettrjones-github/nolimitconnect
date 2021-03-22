@@ -17,7 +17,7 @@
 #include <PktLib/VxCommon.h>
 
 #include "ui_ActivityWebCamClient.h"
-#include "ActivityToFriendBase.h"
+#include "AppletPeerBase.h"
 
 class AppCommon;
 class P2PEngine;
@@ -25,7 +25,7 @@ class VxNetIdent;
 class QLabel;
 class QImage;
 
-class ActivityWebCamClient : public ActivityToFriendBase
+class ActivityWebCamClient : public AppletPeerBase
 {
 	Q_OBJECT
 public:

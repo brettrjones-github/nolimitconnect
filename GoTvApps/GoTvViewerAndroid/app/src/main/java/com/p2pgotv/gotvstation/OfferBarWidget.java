@@ -139,25 +139,25 @@ public class OfferBarWidget implements ToGuiOfferInterface
     		switch( offerSession.m_ePluginType )
     		{       			
     		case Constants.ePluginTypeMultiSession:
-    			myIntent = new Intent( m_Activity, ActivityToFriendMultiSession.class);
+    			myIntent = new Intent( m_Activity, AppletPeerMultiSession.class);
     			myIntent.putExtra("IS_OFFER", true);
     			m_Activity.startActivityForResult( myIntent, Constants.ACTIVITY_TO_FRIEND_MULTISESSION );
     			break;  		
     		
     		case Constants.ePluginTypeVoicePhone:
-    			myIntent = new Intent(m_Activity, ActivityToFriendVoicePhone.class);
+    			myIntent = new Intent(m_Activity, AppletPeerVoicePhone.class);
     			myIntent.putExtra("IS_OFFER", true);
     			m_Activity.startActivityForResult( myIntent, Constants.ACTIVITY_TO_FRIEND_VOICE_PHONE );
     			break;  	
         		
     		case Constants.ePluginTypeVideoPhone:
-    			myIntent = new Intent(m_Activity, ActivityToFriendVideoPhone.class);
+    			myIntent = new Intent(m_Activity, AppletPeerVideoPhone.class);
     			myIntent.putExtra("IS_OFFER", true);
     			m_Activity.startActivityForResult( myIntent, Constants.ACTIVITY_TO_FRIEND_VIDEO_PHONE );
     			break;  	
         		
     		case Constants.ePluginTypeTruthOrDare:
-    			myIntent = new Intent(m_Activity, ActivityToFriendTodGame.class);
+    			myIntent = new Intent(m_Activity, AppletPeerTodGame.class);
     			myIntent.putExtra("IS_OFFER", true);
     			m_Activity.startActivityForResult( myIntent, Constants.ACTIVITY_TO_FRIEND_TOD_GAME );
     			break;  	

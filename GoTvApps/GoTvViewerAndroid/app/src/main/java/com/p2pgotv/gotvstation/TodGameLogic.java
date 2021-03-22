@@ -15,9 +15,9 @@
 
 package com.p2pgotv.gotvstation;
 
-import com.p2pgotv.gotvstation.ActivityToFriendTodGame.EGameAction;
-import com.p2pgotv.gotvstation.ActivityToFriendTodGame.EGameButton;
-import com.p2pgotv.gotvstation.ActivityToFriendTodGame.EGameStatus;
+import com.p2pgotv.gotvstation.AppletPeerTodGame.EGameAction;
+import com.p2pgotv.gotvstation.AppletPeerTodGame.EGameButton;
+import com.p2pgotv.gotvstation.AppletPeerTodGame.EGameStatus;
 
 import android.view.View;
 import android.view.View.OnClickListener;

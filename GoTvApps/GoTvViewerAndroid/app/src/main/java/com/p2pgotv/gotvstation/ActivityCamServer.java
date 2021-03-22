@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class ActivityCamServer extends ActivityToFriendGuiBase 
+public class ActivityCamServer extends AppletPeerGuiBase 
 {
 	// === constants ===//
 	public static final String LOG_TAG = "ActivityCamServer:";

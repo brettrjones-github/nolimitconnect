@@ -115,6 +115,7 @@ enum EApplet
     eMaxSharedServicesApplets,      // marker.. end of user share services applets.. start of not launched by user page icon
 
     // not launched from launch page icon
+
     eAppletApplicationInfo,
     eActivityAppSetup,	            // application initialize
     eAppletBrowseFiles,             // file directory browser
@@ -177,6 +178,17 @@ enum EApplet
     eAppletCreateAccount,
     eAppletSnapShot,
     eActivityBrowseFiles,
+
+    eAppletMultiMessenger,          // messenger for all hosts and friend
+    eAppletPeerChangeFriendship,
+    eAppletPeerReplyOfferFile,
+    eAppletPeerTodGame,
+    eAppletPeerVideoPhone,
+    eAppletPeerViewSharedFiles,
+    eAppletPeerVoicePhone,
+
+    eAppletPeerSelectFileToSend,
+    eAppletPeerSessionFileOffer,
 
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,

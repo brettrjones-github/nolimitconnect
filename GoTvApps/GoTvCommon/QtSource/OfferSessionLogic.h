@@ -39,7 +39,6 @@ enum ESessionState
 	eMaxSessionState
 };
 
-#include <PktLib/VxCommon.h>
 #include <CoreLib/VxSha1Hash.h>
 
 #include <string>
@@ -50,16 +49,14 @@ class OfferSessionCallbackInterface;
 class AppCommon;
 class VxNetIdent;
 class GuiOfferSession;
+class AppletBase;
 
 class OfferSessionLogic
 {
 public:	
-	OfferSessionLogic(	ActivityBase * activity,  
+	OfferSessionLogic(	AppletBase* appletBase,  
 						OfferSessionCallbackInterface * callbackInterface, 
-						AppCommon&	myApp, 
-						EPluginType		ePluginType, 
-						VxNetIdent *	hisIdent, 
-						GuiOfferSession * offerSession );
+						AppCommon& myApp );
 	
 	bool 						isSessionOffer( void )							{ return m_IsOffer; }
 	bool 						isRmtInitiated( void )							{ return m_IsOffer; }
@@ -68,6 +65,7 @@ public:
 	void 						setIsInSession( bool isInSession )				{ m_IsInSession = isInSession; }
 	bool 						getIsInSession()								{ return m_IsInSession; }
 	bool 						getIsMyself( void )								{ return m_IsMyself; }
+
 	void 						setOfferText( std::string strOfferText )		{ m_strOfferText = strOfferText; }
 	std::string 				getOfferText( void )							{ return m_strOfferText; }
 	void 						setOfferFileName( std::string strOfferFileName ){ m_strOfferFileName = strOfferFileName; }
@@ -76,7 +74,12 @@ public:
 	int 						getUserData( void )								{ return m_UserData; }
     VxGUID& 					getLclSessionId( void )							{ return m_LclSessionId;    }
 	VxGUID& 					getOfferSessionId( void )						{ return m_OfferSessionId;    }
+
+    void                        setPluginType( EPluginType pluginType )			{ m_ePluginType = pluginType;    }
 	EPluginType 				getPluginType( void )							{ return m_ePluginType;    }
+    void                        setGuiOfferSession( GuiOfferSession* offerSession ) { m_GuiOfferSession = offerSession; };
+    GuiOfferSession *			getGuiOfferSession( void )                      { return m_GuiOfferSession; };
+    void                        setHisIdent( VxNetIdent * netIdent )			{ m_HisIdent = netIdent;    }
 	VxNetIdent * 				getHisIdent( void )								{ return m_HisIdent;    }
 
 	bool						isOurSessionType( GuiOfferSession * offerSession ); 
@@ -116,28 +119,28 @@ public:
 	//void						errMsgBox( bool bExitWhenClicked, std::string strMsg );
 
 private:
-	AppCommon& 				m_MyApp;
+	AppCommon& 				    m_MyApp;
     OffersMgr& 					m_OffersMgr;
-    ActivityBase *				m_Activity;
-	OfferSessionCallbackInterface * m_OfferCallback;
-	EPluginType					m_ePluginType;	
-	VxNetIdent * 				m_HisIdent;
-	VxNetIdent * 				m_MyIdent;
+    AppletBase*				    m_AppletBase{ nullptr };
+	OfferSessionCallbackInterface* m_OfferCallback;
+    EPluginType					m_ePluginType{ ePluginTypeInvalid };
+    VxNetIdent* 				m_HisIdent{ nullptr };
+	VxNetIdent* 				m_MyIdent{ nullptr };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_OfferSessionId;
 	VxSha1Hash					m_FileHashId;
-	GuiOfferSession *			m_GuiOfferSession;
-	bool 						m_IsOffer;
-	bool 						m_IsMyself;
-	bool 						m_IsServerSession;
-	bool 						m_IsPluginSingleSession;
-	std::string 				m_strOfferText;
-	std::string 				m_strOfferFileName;
-	int							m_UserData;	
-	bool 						m_SessionEndIsHandled;
-	bool 						m_IsInSession;
-	bool 						m_IsOnStopCalled;
+	GuiOfferSession *			m_GuiOfferSession{ nullptr };
+    bool 						m_IsOffer{ false };
+	bool 						m_IsMyself{ false };
+	bool 						m_IsServerSession{ false };
+	bool 						m_IsPluginSingleSession{ false };
+    std::string 				m_strOfferText{ "" };
+	std::string 				m_strOfferFileName{ "" };
+	int							m_UserData{ 0 };
+	bool 						m_SessionEndIsHandled{ false };
+	bool 						m_IsInSession{ false };
+	bool 						m_IsOnStopCalled{ false };
 };
 
 

@@ -92,6 +92,7 @@
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LIBRARY					        "AppletLibrary"
 #define OBJNAME_APPLET_LOG				                "AppletLog"
+#define OBJNAME_APPLET_MULTI_MESSENGER					"AppletMultiMessenger"
 #define OBJNAME_APPLET_NET_HOSTING_PAGE					"AppletNetHosting"
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"

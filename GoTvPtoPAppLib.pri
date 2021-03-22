@@ -41,22 +41,12 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanStoryBoards.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanWebCams.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySelectFileToSend.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySessionFileOffer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySessionOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityShowHelp.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySnapShot.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendBase.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendChangeFriendship.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendMultiSession.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendRequestRelay.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendTodGame.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendVideoPhone.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendViewSharedFiles.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendVoicePhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityUploads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityVideoOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.h \
@@ -101,9 +91,19 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLog.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMutiMessenger.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerRequestRelay.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerSelectFileToSend.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerSessionFileOffer.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerTodGame.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerVideoPhone.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerViewSharedFiles.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerVoicePhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
@@ -338,22 +338,12 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanStoryBoards.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanWebCams.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySelectFileToSend.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySessionFileOffer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySessionOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityShowHelp.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySnapShot.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendBase.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendChangeFriendship.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendMultiSession.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendRequestRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendTodGame.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendVideoPhone.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendViewSharedFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityToFriendVoicePhone.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityUploads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityVideoOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.cpp \
@@ -402,8 +392,18 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMultiMessenger.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.cpp \\
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerRequestRelay.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerSelectFileToSend.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerSessionFileOffer.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerTodGame.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerVideoPhone.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerViewSharedFiles.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerVoicePhone.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
@@ -628,29 +628,24 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissionsRelay.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityReplyFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanPeopleSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanProfiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanStoryBoards.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanWebCams.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySelectFileToSend.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityShowHelp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySnapShot.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySoundOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityStoryBoard.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTimedMessage.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendBase.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendChangeFriendship.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendMultiSession.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendOfferFile.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendRequestRelay.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendTodGame.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendVideoPhone.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendViewSharedFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendVoicePhone.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerBase.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerChangeFriendship.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerOfferFile.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerReplyFileOffer.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerTodGame.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerVideoPhone.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerViewSharedFiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerVoicePhone.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTruthOrDare.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityUploads.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityVideoOptions.ui \
@@ -686,8 +681,11 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLog.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLogSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLogView.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletMultiMessenger.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSelectFileToSend.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSessionFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPermissionList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \

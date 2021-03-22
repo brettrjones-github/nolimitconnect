@@ -34,12 +34,11 @@
 #include "ActivityUploads.h"
 #include "ActivityShowHelp.h"
 #include "ActivityWebCamClient.h"
-#include "ActivityReplyFileOffer.h"
-#include "ActivitySessionFileOffer.h"
-#include "ActivityToFriendTodGame.h"
-#include "ActivityToFriendMultiSession.h"
-#include "ActivityToFriendVoicePhone.h"
-#include "ActivityToFriendVideoPhone.h"
+//#include "ActivityReplyFileOffer.h"
+#include "AppletPeerSessionFileOffer.h"
+//#include "ActivityToFriendTodGame.h"
+//#include "ActivityToFriendVoicePhone.h"
+//#include "ActivityToFriendVideoPhone.h"
 #include "ActivityMessageBox.h"
 #include "ActivityViewLibraryFiles.h"
 
@@ -579,14 +578,17 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 	{
 	case ePluginTypeCamServer:
 		{
+        /*
 			ActivityWebCamClient * poDlg = new ActivityWebCamClient( *this, netIdent, 0 );
 			poDlg->show();
+            */
 		}
 
 		break;
 
 	case ePluginTypeMessenger:
 		{
+            /*
 			if( false == getIsPluginVisible( ePluginTypeMessenger ) )
 			{
 				ActivityToFriendMultiSession * poDlg;
@@ -594,12 +596,14 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 									: poDlg = new ActivityToFriendMultiSession( *this, netIdent, parent );
 				poDlg->show();
 			}
+            */
 		}
 
 		break;
 
 	case ePluginTypeVoicePhone:
 		{
+        /*
 			if( false == getIsPluginVisible( ePluginTypeVoicePhone ) )
 			{
 				ActivityToFriendVoicePhone * poDlg;
@@ -607,12 +611,14 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 									: poDlg = new ActivityToFriendVoicePhone( *this, netIdent, parent );
 				poDlg->show();
 			}
+            */
 		}
 
 		break;
 
 	case ePluginTypeVideoPhone:
 		{
+        /*
 			if( false == getIsPluginVisible( ePluginTypeVideoPhone ) )
 			{
 				ActivityToFriendVideoPhone * poDlg;
@@ -620,12 +626,14 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 									: poDlg = new ActivityToFriendVideoPhone( *this, netIdent, parent );
 				poDlg->show();
 			}
+            */
 		}
 
 		break;
 
 	case ePluginTypeTruthOrDare:
 		{
+        /*
 			if( false == getIsPluginVisible( ePluginTypeTruthOrDare ) )
 			{
 				ActivityToFriendTodGame * poDlg;
@@ -633,6 +641,7 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 									: poDlg = new ActivityToFriendTodGame( *this, netIdent, parent );
 				poDlg->show();
 			}
+            */
 		}
 
 		break;
@@ -655,19 +664,21 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 	{
 	case ePluginTypeFileXfer:
 		{
-			ActivitySessionFileOffer * poDlg = new ActivitySessionFileOffer( *this, offer, parent );
-			poDlg->exec();
+			//ActivitySessionFileOffer * poDlg = new ActivitySessionFileOffer( *this, offer, parent );
+			//poDlg->exec();
 		}
 
 		break;
 
 	case ePluginTypeMessenger:
 		{
+        /*
 			if( false == getIsPluginVisible( ePluginTypeMessenger ) )
 			{
 				ActivityToFriendMultiSession * poDlg = new ActivityToFriendMultiSession( *this, offer, parent );
 				poDlg->exec();
 			}
+            */
 		}
 
 		break;
@@ -676,8 +687,10 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 		{
 			if( false == getIsPluginVisible( ePluginTypeVoicePhone ) )
 			{
+                /*
 				ActivityToFriendVoicePhone * poDlg = new ActivityToFriendVoicePhone( *this, offer, parent );
 				poDlg->exec();
+                */
 			}
 		}
 
@@ -687,8 +700,10 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 		{
 			if( false == getIsPluginVisible( ePluginTypeVideoPhone ) )
 			{
+                /*
 				ActivityToFriendVideoPhone * poDlg = new ActivityToFriendVideoPhone( *this, offer, parent );
 				poDlg->exec();
+                */
 			}
 		}
 
@@ -698,8 +713,10 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 		{
 			if( false == getIsPluginVisible( ePluginTypeTruthOrDare ) )
 			{
+                /*
 				ActivityToFriendTodGame * poDlg = new ActivityToFriendTodGame( *this, offer, parent );
 				poDlg->exec();
+                */
 			}
 		}
 

@@ -18,10 +18,9 @@
 #include "AppGlobals.h"
 #include "OffersMgr.h"
 
-#include "ActivityToFriendChangeFriendship.h"
-#include "ActivityToFriendRequestRelay.h"
-#include "ActivityToFriendViewSharedFiles.h"
-#include "ActivitySelectFileToSend.h"
+#include "AppletPeerChangeFriendship.h"
+#include "AppletPeerViewSharedFiles.h"
+#include "AppletPeerSelectFileToSend.h"
 #include "ActivityMessageBox.h"
 #include "MyIcons.h"
 #include "GuiParams.h"
@@ -93,33 +92,33 @@ void AppCommon::viewWebServerPage( VxNetIdentBase * netIdent, const char * webPa
 // view shared files
 void AppCommon::offerToFriendViewSharedFiles( VxNetIdent * poFriend )
 {
-	ActivityToFriendViewSharedFiles oDlg( *this, poFriend, this  );
-	oDlg.exec();
+	//AppletPeerViewSharedFiles oDlg( *this, poFriend, this  );
+	//oDlg.exec();
 }
 
 //============================================================================
 // offer to send a file
 void AppCommon::offerToFriendSendFile( VxNetIdent * poFriend )
 {
-	ActivitySelectFileToSend * dlg = new ActivitySelectFileToSend( *this, poFriend, this);
-	dlg->exec();
+	//ActivitySelectFileToSend * dlg = new ActivitySelectFileToSend( *this, poFriend, this);
+	//dlg->exec();
 }
 
 //============================================================================
 // change friendship
 void AppCommon::offerToFriendChangeFriendship( VxNetIdent * poFriend )
 {
-	ActivityToFriendChangeFriendship * poDlg = new ActivityToFriendChangeFriendship( *this, this);
-	poDlg->setFriend( poFriend );
-	poDlg->exec();
+	//AppletPeerChangeFriendship * poDlg = new AppletPeerChangeFriendship( *this, this);
+	//poDlg->setFriend( poFriend );
+	//poDlg->exec();
 }
 
 //============================================================================
 // see if user wants to change his preferred proxy
 void AppCommon::offerToFriendUseAsRelay( VxNetIdent * poFriend )
 {
-	ActivityToFriendRequestRelay * poDlg = new ActivityToFriendRequestRelay( *this, poFriend, this);
-	poDlg->exec();
+	//AppletPeerRequestRelay * poDlg = new AppletPeerRequestRelay( *this, poFriend, this);
+	//poDlg->exec();
 }
 
 //============================================================================

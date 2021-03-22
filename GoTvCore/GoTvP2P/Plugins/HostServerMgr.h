@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "HostServerSearchMgr.h"
+#include <GoTvCore/GoTvP2P/User/UserList.h>
 
 #include <PktLib/PktHostAnnounce.h>
 #include <PktLib/PluginId.h>
@@ -26,6 +27,8 @@ public:
 
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) override;
     virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
+
+    virtual void				onUserJoined( VxSktBase * sktBase, VxNetIdent * netIdent );
 
 protected:
     virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
@@ -42,5 +45,6 @@ protected:
     VxGUIDList                  m_ClientList;
     std::map<VxGUID, PktHostAnnounce*> m_AnnList;
     VxMutex                     m_AnnListMutex;
+    UserList                    m_UserList;
 };
 

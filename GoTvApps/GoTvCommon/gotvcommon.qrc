@@ -280,5 +280,7 @@
         <file>Resources/bars_7_hosted_with_relay.png</file>
         <file>Resources/log.svg</file>
         <file>Resources/search-random-connect.svg</file>
+        <file>Resources/eye-hide.svg</file>
+        <file>Resources/eye-show.svg</file>
     </qresource>
 </RCC>

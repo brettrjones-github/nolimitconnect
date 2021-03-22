@@ -84,7 +84,7 @@ public class MyApp extends  Application
 
 	public ActivityPersonalRecorder 	m_ActivityPersonalRecorder 		= null;
 	ActivityPersonalRecorderState		m_ActivityPersonalRecorderState = null;
-	ActivityToFriendMultiSessionState	m_ActivityMultiSessionState 	= null;
+	AppletPeerMultiSessionState	m_ActivityMultiSessionState 	= null;
 
 	public boolean 						m_bRelayRequired 				= true;
 	ArrayList<GuiFileXferSession> 		m_UploadsList 					= new  ArrayList<GuiFileXferSession>();
@@ -323,11 +323,11 @@ public class MyApp extends  Application
 	}
 	
 	//========================================================================
-	public ActivityToFriendMultiSessionState getMultiSessionState()
+	public AppletPeerMultiSessionState getMultiSessionState()
 	{
 		if( null == m_ActivityMultiSessionState )
 		{
-			m_ActivityMultiSessionState = new ActivityToFriendMultiSessionState( this );
+			m_ActivityMultiSessionState = new AppletPeerMultiSessionState( this );
 		}
 		
 		return m_ActivityMultiSessionState;
@@ -507,28 +507,28 @@ public class MyApp extends  Application
 
 			case Constants.ePluginTypeVoicePhone:
 				setCurrentFriend( friendIdent );
-				Intent myVoicePhoneIntent = new Intent( getMainActivity(), ActivityToFriendVoicePhone.class );
+				Intent myVoicePhoneIntent = new Intent( getMainActivity(), AppletPeerVoicePhone.class );
 				myVoicePhoneIntent.putExtra("IS_OFFER", isOffer);
 				getMainActivity().startActivityForResult( myVoicePhoneIntent, Constants.ACTIVITY_TO_FRIEND_VOICE_PHONE );
 				break;
 
 			case Constants.ePluginTypeVideoPhone:
 				setCurrentFriend( friendIdent );
-				Intent myVideoPhoneIntent = new Intent( getMainActivity(), ActivityToFriendVideoPhone.class );
+				Intent myVideoPhoneIntent = new Intent( getMainActivity(), AppletPeerVideoPhone.class );
 				myVideoPhoneIntent.putExtra("IS_OFFER", isOffer);
 				getMainActivity().startActivityForResult( myVideoPhoneIntent, Constants.ACTIVITY_TO_FRIEND_VIDEO_PHONE );
 				break;
 				
 			case Constants.ePluginTypeTruthOrDare:
 				setCurrentFriend( friendIdent );
-				Intent myTodGameIntent = new Intent( getMainActivity(), ActivityToFriendTodGame.class );
+				Intent myTodGameIntent = new Intent( getMainActivity(), AppletPeerTodGame.class );
 				myTodGameIntent.putExtra("IS_OFFER", isOffer);
 				getMainActivity().startActivityForResult( myTodGameIntent, Constants.ACTIVITY_TO_FRIEND_TOD_GAME );
 				break;			
 				
 			case Constants.ePluginTypeMultiSession:
 				setCurrentFriend( friendIdent );
-				Intent myMultiSessionIntent = new Intent( getMainActivity(), ActivityToFriendMultiSession.class );
+				Intent myMultiSessionIntent = new Intent( getMainActivity(), AppletPeerMultiSession.class );
 				myMultiSessionIntent.putExtra("IS_OFFER", isOffer);
 				getMainActivity().startActivityForResult( myMultiSessionIntent, Constants.ACTIVITY_TO_FRIEND_MULTISESSION );
 				break;

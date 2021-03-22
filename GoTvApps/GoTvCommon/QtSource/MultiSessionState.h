@@ -46,7 +46,7 @@ enum EImageType
 #include <QWidget>
 
 class AppCommon;
-class ActivityToFriendMultiSession;
+class AppletMultiMessenger;
 class QFrame;
 class VxPushButton;
 class QLabel;
@@ -60,7 +60,7 @@ class MultiSessionState : public QWidget
 	Q_OBJECT
 
 public:
-	MultiSessionState( AppCommon& myApp, ActivityToFriendMultiSession& activityToFriendMultiSession, EMSessionType sessionType );
+	MultiSessionState( AppCommon& myApp, AppletMultiMessenger& activityToFriendMultiSession, EMSessionType sessionType );
 
 	void						setGuiWidgets(	VxNetIdent *		hisIdent,
 												QFrame * 			offersLayout,
@@ -96,7 +96,7 @@ protected:
 
 	AppCommon& 				    m_MyApp;
 	IFromGui&					m_IFromGui;
-	ActivityToFriendMultiSession&  	m_Activity;
+    AppletMultiMessenger&  	    m_Activity;
 	EMSessionType				m_eMSessionType;
 	EMSessionState				m_SessionState;
 

@@ -157,7 +157,7 @@ public class ActivityFriendListBase extends ActivityListBase implements ToGuiOff
 			m_MyApp.setCurrentFriend(friend);
 			if( friend.isAccessAllowed( Constants.ePluginTypeMultiSession ) ) 
 			{
-				Intent myIntent = new Intent( this, ActivityToFriendMultiSession.class );
+				Intent myIntent = new Intent( this, AppletPeerMultiSession.class );
 				m_MyApp.getOffersMgr().lockOffersMgr();
 				GuiOfferSession oSession = m_MyApp.getOffersMgr().findAvailableAndActiveOffer( Constants.ePluginTypeMultiSession, friend );
 				m_MyApp.getOffersMgr().unlockOffersMgr();

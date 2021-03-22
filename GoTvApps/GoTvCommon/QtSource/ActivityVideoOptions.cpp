@@ -26,7 +26,7 @@ ActivityVideoOptions::ActivityVideoOptions( AppCommon&			app,
 											VxNetIdent *			netIdent, 
 											bool					bIsMyself,
 											QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_VIDEO_OPTIONS, app, ePluginTypeCamServer, netIdent, 0 )
+: AppletPeerBase( OBJNAME_ACTIVITY_VIDEO_OPTIONS, app, ePluginTypeCamServer, netIdent, 0 )
 , m_bIsMyself( bIsMyself )
 {
 	ui.setupUi( this );

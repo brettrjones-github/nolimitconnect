@@ -11,7 +11,7 @@ import android.widget.Toast;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class ActivityEditContactInfo extends ActivityToFriendGuiBase 
+public class ActivityEditContactInfo extends AppletPeerGuiBase 
 {
 	//=== constants ===//
 	public static final String LOG_TAG = "ActivityEditContactInfo:";

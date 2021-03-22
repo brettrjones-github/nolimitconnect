@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.os.Bundle;
 
-public class ActivityToFriendRequestRelay extends ActivityToFriendGuiBase 
+public class AppletPeerRequestRelay extends AppletPeerGuiBase 
 {
 	// === constants ===//
 	public static final String LOG_TAG = "ActivityRequestRelay:";

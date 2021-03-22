@@ -22,7 +22,7 @@ import android.widget.EditText;
 
 import android.os.Bundle;
 
-public class ActivityToFriendVoicePhone extends ActivityToFriendGuiBase 
+public class AppletPeerVoicePhone extends AppletPeerGuiBase 
 {
 	//=== constants ===//
 	public static final String LOG_TAG = "ActivityVoicePhone:";

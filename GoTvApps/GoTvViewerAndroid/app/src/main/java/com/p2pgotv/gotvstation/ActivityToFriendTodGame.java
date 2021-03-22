@@ -25,9 +25,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class ActivityToFriendTodGame extends ActivityToFriendGuiBase
+public class AppletPeerTodGame extends AppletPeerGuiBase
 {
-	private static final String LOG_TAG = "ActivityToFriendTodGame:";
+	private static final String LOG_TAG = "AppletPeerTodGame:";
 	
 	class EGameStatus
 	{

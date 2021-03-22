@@ -154,3 +154,9 @@ bool HostServerMgr::removeClient( VxGUID& onlineId )
 
     return wasRemoved;
 }
+
+//============================================================================
+void HostServerMgr::onUserJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
+{
+
+}

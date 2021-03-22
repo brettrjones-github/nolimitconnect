@@ -47,7 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBar;
 
-public class ActivityToFriendMultiSession extends AppCompatActivity implements ToGuiUserInputInterface, AssetCallbackInterface, ToGuiActivityInterface, ToGuiMessageInterface, OfferSessionCallbackInterface  
+public class AppletPeerMultiSession extends AppCompatActivity implements ToGuiUserInputInterface, AssetCallbackInterface, ToGuiActivityInterface, ToGuiMessageInterface, OfferSessionCallbackInterface  
 {
 	private static final String LOG_TAG 					= "ActivityMultiSession";
 	
@@ -67,7 +67,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
 	private ChatMessageAdapter 	m_ChatAdapter               = null;
     private final Semaphore     m_AddChatMsgListMutex       = new Semaphore(1);
     private MyApp 				m_MyApp 					= null;
-	private ActivityToFriendMultiSessionState m_ActivityState 	= null;
+	private AppletPeerMultiSessionState m_ActivityState 	= null;
 	
 	public final  ArrayList<String> m_oMessages 			= new  ArrayList<String>();
 	private Button 				m_CloseButton 				= null;
@@ -328,7 +328,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
 													(TextView)findViewById( R.id.offer_bar_bottomtext )
 													);
 		
-    	setCamCaptureActivity( ActivityToFriendMultiSession.this );
+    	setCamCaptureActivity( AppletPeerMultiSession.this );
         setActivityReadyState( this );
         
 	    NativeTxTo.fromGuiQuerySessionHistory( m_ActivityState.getFriendId().getOnlineIdHiPart(), m_ActivityState.getFriendId().getOnlineIdLoPart() );
@@ -721,7 +721,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
 	//========================================================================
 	void showOfflineMsg()
 	{
-        Toast.makeText(ActivityToFriendMultiSession.this, m_HisIdent.m_as8OnlineName + " Is Offline.", Toast.LENGTH_SHORT).show();		
+        Toast.makeText(AppletPeerMultiSession.this, m_HisIdent.m_as8OnlineName + " Is Offline.", Toast.LENGTH_SHORT).show();		
 	}
 	
 	//========================================================================
@@ -749,7 +749,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
     @Override
     protected void onDestroy() 
     {
-    	Log.i( LOG_TAG, "ActivityToFriendMultiSession:onDestroy" );
+    	Log.i( LOG_TAG, "AppletPeerMultiSession:onDestroy" );
     	m_VidCamLogic.activityOnDestroy();
     	m_IsDestroyed = true;
 		if( null != m_OfferBarWidget )
@@ -923,7 +923,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
 					break;
 				}
 				
-				Toast.makeText(ActivityToFriendMultiSession.this, "Do some thing here, index :" + index, 1000).show();				
+				Toast.makeText(AppletPeerMultiSession.this, "Do some thing here, index :" + index, 1000).show();				
 			}		
 		});
 		
@@ -1421,7 +1421,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
 	public void toGuiGalleryButtonClicked( AssetGuiInfo assetGuiInfo )
 	{
 		m_GalleryPickAsset = assetGuiInfo;
-    	Intent myIntent = new Intent( ActivityToFriendMultiSession.this, ActivityPickImage.class );
+    	Intent myIntent = new Intent( AppletPeerMultiSession.this, ActivityPickImage.class );
     	myIntent.putExtra( Constants.PARAM_FILE_NAME, m_GalleryPickAsset.getAssetName() ); 	
     	startActivityForResult( myIntent, Constants.ACTIVITY_PICK_IMAGE );
 	}	
@@ -1491,7 +1491,7 @@ public class ActivityToFriendMultiSession extends AppCompatActivity implements T
 			break;
 		}
 		
-		setCamCaptureActivity( ActivityToFriendMultiSession.this );
+		setCamCaptureActivity( AppletPeerMultiSession.this );
 	}
 	
 	   

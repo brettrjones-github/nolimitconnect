@@ -27,7 +27,7 @@
 ActivityWebCamClient::ActivityWebCamClient( AppCommon&			    app,
 											VxNetIdent *			netIdent, 
 											QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_WEB_CAM_CLIENT, app, ePluginTypeCamServer, netIdent, parent, eAppletMessenger, Qt::Dialog | Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint )
+: AppletPeerBase( OBJNAME_ACTIVITY_WEB_CAM_CLIENT, app, ePluginTypeCamServer, netIdent, parent, eAppletMessenger, Qt::Dialog | Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint )
 , m_bIsMyself( false )
 {
 	m_bIsMyself = ( netIdent->getMyOnlineId() == m_MyApp.getAppGlobals().getUserIdent()->getMyOnlineId() );
@@ -100,23 +100,23 @@ void ActivityWebCamClient::setupActivityWebCamClient()
 //============================================================================
 void ActivityWebCamClient::showEvent( QShowEvent * ev )
 {
-	// don't call ActivityToFriendBase::showEvent ... we don't want plugin offer/response for web cam server or client
-	ActivityToFriendBase::showEvent( ev );
+	// don't call AppletPeerBase::showEvent ... we don't want plugin offer/response for web cam server or client
+	AppletPeerBase::showEvent( ev );
 	//m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, true );
 }
 
 //============================================================================
 void ActivityWebCamClient::hideEvent( QHideEvent * ev )
 {
-	// don't call ActivityToFriendBase::hideEvent ... we don't want plugin offer/response for web cam server or client
-	ActivityToFriendBase::hideEvent( ev );
+	// don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
+	AppletPeerBase::hideEvent( ev );
 	//m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, false );
 }
 
 //============================================================================
 void ActivityWebCamClient::closeEvent( QCloseEvent * ev )
 {
-	// don't call ActivityToFriendBase::hideEvent ... we don't want plugin offer/response for web cam server or client
+	// don't call AppletPeerBase::hideEvent ... we don't want plugin offer/response for web cam server or client
     m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), 0 );
 	if( m_bIsMyself )
 	{
@@ -126,7 +126,7 @@ void ActivityWebCamClient::closeEvent( QCloseEvent * ev )
 		//m_Engine.setHasSharedWebCam(false);
 	}
 
-	ActivityToFriendBase::closeEvent( ev );
+	AppletPeerBase::closeEvent( ev );
 }
 
 //============================================================================
