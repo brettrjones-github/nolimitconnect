@@ -30,8 +30,9 @@
 
 #include "ActivityTimedMessage.h"
 #include "ActivityCreateAccount.h"
-#include "ActivityDownloads.h"
-#include "ActivityUploads.h"
+#include "AppletDownloads.h"
+#include "AppletMultiMessenger.h"
+#include "AppletUploads.h"
 #include "ActivityShowHelp.h"
 #include "ActivityWebCamClient.h"
 //#include "ActivityReplyFileOffer.h"
@@ -339,11 +340,13 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
     // need to setup theme before the first window or dialog is created
     getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
 
-	m_Downloads = new ActivityDownloads( *this, messangerFrame );
-	m_Downloads->hide();
+    m_AppletMultiMessenger = new AppletMultiMessenger( *this, messangerFrame );
 
-	m_Uploads = new ActivityUploads( *this, messangerFrame );
-	m_Uploads->hide();
+	m_AppletDownloads = new AppletDownloads( *this, m_AppletMultiMessenger );
+    m_AppletDownloads->hide();
+
+	m_AppletUploads = new AppletUploads( *this, m_AppletMultiMessenger );
+	m_AppletUploads->hide();
 
 	m_CreateAccountDlg = new ActivityCreateAccount( *this, appletFrame );
 
@@ -1124,6 +1127,18 @@ void AppCommon::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, Vx
     }
 
     emit signalHostSearchResult( hostType, sessionId, hostIdent, pluginSetting );
+}
+
+
+//============================================================================
+void AppCommon::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent *hostIdent, VxGUID& sessionId, bool isOnline )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    emit signalUserOnlineStatus( hostType, sessionId, *hostIdent, isOnline );
 }
 
 //============================================================================

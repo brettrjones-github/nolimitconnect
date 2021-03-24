@@ -45,6 +45,16 @@ bool FriendMatch::extractFromBlob( PktBlobEntry& blob )
     return blob.getValue( m_u8FriendMatch );
 }
 
+//============================================================================
+//! if was anonymouse upgrade to guest friendship
+void FriendMatch::upgradeToGuestFriendship( void )
+{
+    if( isAnonymous() )
+    {
+        setMyFriendshipToHim( eFriendStateGuest );
+    }
+}
+
 //! return true if is ignored
 bool			FriendMatch::isIgnored()										{ return eFriendStateIgnore == getMyFriendshipToHim(); }
 //! return true if is Anonymous

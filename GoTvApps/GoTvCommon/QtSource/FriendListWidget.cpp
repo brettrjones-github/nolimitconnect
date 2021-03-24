@@ -228,7 +228,7 @@ void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTime
 	FriendListEntryWidget * poWidget = findListEntryWidget( netIdent );
 	if( poWidget )
 	{
-		LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->isOnline() );
+		LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->getIsOnline() );
 		updateListEntryWidget( poWidget, netIdent );
 	}
 	else
@@ -238,7 +238,7 @@ void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTime
 		if( 0 == this->count() )
 		{
 			insertItem( this->count(), poFriendItem );
-			LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
+			LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->getIsOnline(), this->count() - 1, hisSessionTime );
 			//addItem( poFriendItem );
 		}
 		else
@@ -257,7 +257,7 @@ void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTime
 						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
 						if( listSessionTime < hisSessionTime )
 						{
-							LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), rowIdx, hisSessionTime  );
+							LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->getIsOnline(), rowIdx, hisSessionTime  );
 							insertItem( rowIdx, poFriendItem );
 							wasInserted = true;
 							break;
@@ -271,7 +271,7 @@ void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTime
 			if( false == wasInserted )
 			{
 				//addItem( poFriendItem );
-				LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count(), hisSessionTime );
+				LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->getIsOnline(), this->count(), hisSessionTime );
 				insertItem( this->count(), poFriendItem );
 			}
 		}
@@ -340,7 +340,7 @@ void FriendListWidget::updateListEntryBackgroundColor( VxNetIdent * netIdent, Fr
 	{
 		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuNormal ) );
 	}
-	else if(  netIdent->isOnline() )
+	else if(  netIdent->getIsOnline() )
 	{
 		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuNormal ) );
 	}

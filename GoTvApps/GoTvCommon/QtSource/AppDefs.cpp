@@ -138,6 +138,9 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPeerSelectFileToSend:       return eMyIconDebug;
     case eAppletPeerSessionFileOffer:       return eMyIconDebug;
 
+    case eAppletDownloads:                  return eMyIconFileDownloadNormal;
+    case eAppletUploads:                    return eMyIconSendFileNormal;
+
     // case eAppletPlayerMusic:			return eMyIconMusic;
     // case eAppletPlayerPhoto:			return eMyIconGallery;
     // case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
@@ -255,6 +258,9 @@ QString DescribeApplet( EApplet applet )
 
     case eAppletPeerSelectFileToSend:       return QObject::tr( "Select File To Send" );
     case eAppletPeerSessionFileOffer:       return QObject::tr( "File Offer" );
+
+    case eAppletDownloads:                  return QObject::tr( "Downloads" );
+    case eAppletUploads:                    return QObject::tr( "Uploads" );
 
         //case eAppletPlayerMusic:			return QObject::tr( "Music Player" );
 //case eAppletPlayerPhoto:			return QObject::tr( "Image Gallery" );

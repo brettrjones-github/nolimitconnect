@@ -13,8 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include <GoTvCore/GoTvP2P/Connections/IConnectRequest.h>
+#include <GoTvCore/GoTvP2P/User/UserList.h>
 
 #include <PktLib/SearchParams.h>
 #include <CoreLib/VxGUIDList.h>
@@ -91,6 +91,9 @@ protected:
     virtual bool                addSearchSession( VxGUID& sessionId, SearchParams& searchParams );
     virtual void                removeSearchSession( VxGUID& sessionId );
 
+    virtual void				onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& sessionId );
+    virtual void				onUserOffline( VxGUID& onlineId, VxGUID& sessionId );
+
     //=== vars ===//
     P2PEngine&                  m_Engine; 
     PluginMgr&                  m_PluginMgr; 
@@ -101,5 +104,7 @@ protected:
     VxGUIDList                  m_ContactList;
     std::map<VxGUID, SearchParams> m_SearchParamsList;
     VxMutex                     m_SearchParamsMutex;
+    UserList                    m_UserList;
+    VxMutex                     m_UserListMutex;
 };
 

@@ -30,8 +30,6 @@ public:
     bool                        addToBlob( PktBlobEntry& blob );
     bool                        extractFromBlob( PktBlobEntry& blob );
 
-	void						setIsOnline( bool bIsOnline );
-	bool						isOnline( void );
 	void						setIsNearby( bool bIsNearby );
 	bool						isNearby( void );
 	void						setHasTextOffers( bool hasOffers );

@@ -19,7 +19,7 @@
 
 #include "AppletPeerViewSharedFiles.h"
 
-#include "ActivityDownloads.h"
+#include "AppletDownloads.h"
 #include "ActivityMessageBox.h"
 #include "ActivityYesNoMsgBox.h"
 
@@ -411,7 +411,7 @@ void AppletPeerViewSharedFiles::beginDownload( GuiFileXferSession * xferSession,
 			// make copy.. downloads will delete
 			//GuiFileXferSession * poNewInfo = new GuiFileXferSession();
 			//*poNewInfo = *m_SelectedFileInfo;
-			//m_MyApp.getActivityDownloads()->slotUpdateDownload( poNewInfo );
+			//m_MyApp.getAppletDownloads()->slotUpdateDownload( poNewInfo );
 		}
 		else 
 		{
@@ -579,7 +579,7 @@ void AppletPeerViewSharedFiles::slotDownloadFileSelected( int iMenuId, QWidget *
 				// make copy.. downloads will delete
 				//GuiFileXferSession * poNewInfo = new GuiFileXferSession();
 				//*poNewInfo = *m_SelectedFileInfo;
-				//m_MyApp.getActivityDownloads()->slotUpdateDownload( poNewInfo );
+				//m_MyApp.getAppletDownloads()->slotUpdateDownload( poNewInfo );
 			}
 			else 
 			{

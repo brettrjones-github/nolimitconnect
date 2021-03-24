@@ -276,6 +276,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanPic.h \
+	$$PWD/GoTvCore/GoTvP2P/User/User.h \
+	$$PWD/GoTvCore/GoTvP2P/User/UserList.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
@@ -513,6 +515,8 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.cpp \
+	$$PWD/GoTvCore/GoTvP2P/User/User.cpp \
+	$$PWD/GoTvCore/GoTvP2P/User/UserList.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \

@@ -412,7 +412,7 @@ void OffersMgr::rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerS
 		return;
 	}
 
-	if( offerSession->getHisIdent()->isOnline() 
+	if( offerSession->getHisIdent()->getIsOnline() 
 		&&  offerState->isAvailableAndActiveOffer() )
 	{
 		VxGUID lclSessionId	= offerSession->getLclSessionId();

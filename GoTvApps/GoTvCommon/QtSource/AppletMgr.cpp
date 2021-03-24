@@ -36,6 +36,7 @@
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletClientRandomConnect.h"
 #include "AppletClientStoryboard.h"
+#include "AppletDownloads.h"
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
 #include "AppletEditStoryboard.h"
@@ -102,6 +103,7 @@
 #include "AppletTestAndDebug.h"
 #include "AppletTheme.h"
 #include "AppletRemoteControl.h"
+#include "AppletUploads.h"
 #include "AppletUserIdentity.h"
 
 #include "AppletMultiMessenger.h"
@@ -169,6 +171,24 @@ QFrame * AppletMgr::getAppletFrame( EApplet applet )
 //============================================================================
 ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 {
+    // these are permanent applets
+    if( eAppletMultiMessenger == applet )
+    {
+        bringAppletToFront( m_MyApp.getAppletMultiMessenger() );
+        return m_MyApp.getAppletMultiMessenger();
+    }
+    else  if( eAppletDownloads == applet )
+    {
+        bringAppletToFront( m_MyApp.getAppletDownloads() );
+        return m_MyApp.getAppletDownloads();
+    }
+    else  if( eAppletUploads == applet )
+    {
+        bringAppletToFront( m_MyApp.getAppletUploads() );
+        return m_MyApp.getAppletUploads();
+    }
+
+    // other applets
 	ActivityBase * appletDialog = findAppletDialog( applet );
 	if( appletDialog )
 	{

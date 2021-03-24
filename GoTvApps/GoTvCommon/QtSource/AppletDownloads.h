@@ -14,45 +14,37 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ActivityBase.h"
+#include "AppletPeerBase.h"
+#include "VxGuidQt.h"
 #include "ToGuiFileXferInterface.h"
-#include "ui_ActivityUploads.h"
+#include "ui_AppletDownloads.h"
 
 #include <PktLib/VxCommon.h>
 
-class GuiFileXferSession;
 class FileXferWidget;
+class P2PEngine;
+class GuiFileXferSession;
 
-class ActivityUploads : public ActivityBase, public ToGuiFileXferInterface
+class AppletDownloads : public AppletPeerBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
-	ActivityUploads(	AppCommon&	app, 
+	AppletDownloads(	AppCommon&	app, 
 						QWidget *		parent = NULL );
-	virtual ~ActivityUploads() override;
+	virtual ~AppletDownloads() override;
 
-    // overrides required for dialogs with there own title bar and bottom bar widgets
-    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
-    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
-
-public:
-	FileXferWidget *			addDownload( GuiFileXferSession * poFileInfo );
-
-	bool						isUploadInProgress( VxGuidQt fileInstance );
-
-	GuiFileXferSession *		findSession( VxGuidQt fileInstance );
-	FileXferWidget *			findListEntryWidget( VxGuidQt fileInstance );
-	FileXferWidget *			addUpload( GuiFileXferSession * poSession );
+	bool						isXferInProgress( VxGuidQt fileInstance );
+	FileXferWidget *			addDownload( GuiFileXferSession * poSession );
 
 signals:
-	void						signalToGuiStartUpload( GuiFileXferSession * xferSession );
+	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
 	void						signalToGuiFileXferState( VxGuidQt lclSession, EXferState eXferState, int param1, int param2 );
-	void						signalToGuiFileUploadComplete( VxGuidQt lclSession, int xferError );
+	void						signalToGuiFileDownloadComplete( VxGuidQt lclSession, QString newFileName, EXferError xferError );
 
 private slots:
-	void						slotToGuiStartUpload(	GuiFileXferSession * poSession );
+	void						slotToGuiStartDownload(	GuiFileXferSession * poSession );
 	void						slotToGuiFileXferState( VxGuidQt lclSessionId, EXferState eXferState, int param1, int param2 );
-	void						slotToGuiFileUploadComplete( VxGuidQt lclSessionId, int xferError );
+	void						slotToGuiFileDownloadComplete( VxGuidQt lclSessionId, QString newFileName, EXferError xferError );
 
     void						slotHomeButtonClicked( void ) override;
 	void						slotFileXferItemClicked( QListWidgetItem * item );
@@ -68,16 +60,17 @@ protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
 
-    virtual void				toGuiStartUpload( void * userData, GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
     virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
-    virtual void				toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError ) override;
+    virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
 	FileXferWidget *			sessionToWidget( GuiFileXferSession * poSession );
 	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession );
 	GuiFileXferSession *		widgetToSession( FileXferWidget * item );
+	GuiFileXferSession *		findSession( VxGuidQt lclSessionId );
+	FileXferWidget *			findListEntryWidget( VxGuidQt lclSessionId );
 	bool						confirmDeleteFile( bool shredFile );
 
 	//=== vars ===//
-	Ui::UploadsDialog			ui;
+	Ui::DownloadsDialog			ui;
 };
-

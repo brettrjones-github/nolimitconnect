@@ -50,8 +50,6 @@ bool VxOnlineStatusFlags::extractFromBlob( PktBlobEntry& blob )
     return blob.getValue( m_u8OnlineStatusFlags );
 }
 
-void		VxOnlineStatusFlags::setIsOnline( bool bIsOnline )				{ if( bIsOnline )(m_u8OnlineStatusFlags |= ONLINE_STATUS_CONNECTED); else m_u8OnlineStatusFlags &= (~ONLINE_STATUS_CONNECTED); }
-bool		VxOnlineStatusFlags::isOnline( void )								{ return (m_u8OnlineStatusFlags & ONLINE_STATUS_CONNECTED)?1:0; }
 void		VxOnlineStatusFlags::setIsNearby( bool bIsNearby )				{ if( bIsNearby )(m_u8OnlineStatusFlags |= ONLINE_STATUS_NEARBY); else m_u8OnlineStatusFlags &= (~ONLINE_STATUS_NEARBY); }
 bool		VxOnlineStatusFlags::isNearby( void )							{ return (m_u8OnlineStatusFlags & ONLINE_STATUS_NEARBY)?1:0; }
 void		VxOnlineStatusFlags::setHasTextOffers( bool hasOffers )			{ if( hasOffers )(m_u8OnlineStatusFlags |= ONLINE_STATUS_HAS_TEXT_OFFERS); else m_u8OnlineStatusFlags &= (~ONLINE_STATUS_HAS_TEXT_OFFERS); }

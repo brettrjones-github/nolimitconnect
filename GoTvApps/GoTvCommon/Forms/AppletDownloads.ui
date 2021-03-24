@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>DownloadsDialog</class>
- <widget class="QDialog" name="DownloadsDialog">
+ <widget class="QWidget" name="DownloadsDialog">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>

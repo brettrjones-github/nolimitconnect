@@ -1,5 +1,6 @@
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2021 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -11,27 +12,21 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
-#include "AppletClientStoryboard.h"
-#include "AppCommon.h"
-#include "AppSettings.h"
-#include "MyIcons.h"
 
-#include <CoreLib/VxDebug.h>
+#include "GuiUserWidget.h"
 
 //============================================================================
-AppletClientStoryboard::AppletClientStoryboard( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_CLIENT_STORYBOARD, app, parent )
+GuiUserWidget::GuiUserWidget( VxNetIdent * netIdent, VxGUID& sessionId, bool online )
+    : m_NetIdent( *netIdent )
+    , m_SessionId( sessionId )
+    , m_IsOnline( online )
 {
-	setAppletType( eAppletClientStoryboard );
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
-
-	m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletClientStoryboard::~AppletClientStoryboard()
+GuiUserWidget::GuiUserWidget( const GuiUserWidget& rhs )
+    : m_NetIdent( rhs.m_NetIdent )
+    , m_SessionId( rhs.m_SessionId )
+    , m_IsOnline( rhs.m_IsOnline )
 {
-    m_MyApp.activityStateChange( this, false );
 }

@@ -126,6 +126,12 @@ void IGoTv::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoi
 }
 
 //============================================================================
+void IGoTv::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline )
+{
+    getAppCommon().toGuiUserOnlineStatus( hostType, netIdent, sessionId, isOnline );
+}
+
+//============================================================================
 void IGoTv::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char * msg )
 {
     getAppCommon().toGuiHostSearchStatus( hostType, sessionId, searchStatus, commErr, msg );

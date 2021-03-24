@@ -32,15 +32,13 @@ public:
     bool                        addToBlob( PktBlobEntry& blob );
     bool                        extractFromBlob( PktBlobEntry& blob );
 
-	//! return true if is ignored
+    //! if was anonymouse upgrade to guest friendship
+    void                        upgradeToGuestFriendship( void );
+
 	bool						isIgnored();
-	//! return true if is Anonymous
 	bool						isAnonymous();
-	//! return true if is Guest
 	bool						isGuest();
-	//! return true if is Friend
 	bool						isFriend();
-	//! return true if is Administrator
 	bool						isAdministrator();
 	//! set my permissions to him as ignored
 	void						makeIgnored();

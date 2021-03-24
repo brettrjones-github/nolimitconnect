@@ -14,20 +14,20 @@
 //============================================================================
 
 #include "UserList.h"
+#include <PktLib/VxCommon.h>
 
 //============================================================================
-User::User()
-{
-}
-
-//============================================================================
-User::User(VxNetIdent * netIdent, VxSktBase * sktBase)
+User::User( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& sessionId, bool online )
     : m_NetIdent( netIdent )
     , m_SktBase( sktBase )
+    , m_SessionId( sessionId )
 {
 }
 
 //============================================================================
-User::~User()
+User::User( const User& rhs )
+    : m_NetIdent( rhs.m_NetIdent )
+    , m_SktBase( rhs.m_SktBase )
+    , m_SessionId( rhs.m_SessionId )
 {
 }

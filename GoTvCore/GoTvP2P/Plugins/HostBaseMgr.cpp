@@ -842,3 +842,32 @@ void HostBaseMgr::onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, V
     // TODO proper invalid packet handling
     LogMsg( LOG_INFO, "HostBaseMgr::onInvalidRxedPacket " );
 }
+
+
+//============================================================================
+void HostBaseMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& sessionId )
+{
+    if( sktBase && netIdent )
+    {
+        netIdent->setIsOnline( true );
+        netIdent->upgradeToGuestFriendship();
+        User user( sktBase, netIdent, sessionId, true );
+        m_UserListMutex.lock();
+        m_UserList.addOrUpdateUser( user );
+        m_UserListMutex.unlock();
+
+        m_Engine.getToGui().toGuiUserOnlineStatus( m_Plugin.getHostType(), netIdent, sessionId, true );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostBaseMgr::onUserOnline invalid param " );
+    }
+}
+
+//============================================================================
+void HostBaseMgr::onUserOffline( VxGUID& onlineId, VxGUID& sessionId )
+{
+    m_UserListMutex.lock();
+    m_UserList.removeUser( onlineId, sessionId );
+    m_UserListMutex.unlock();
+}

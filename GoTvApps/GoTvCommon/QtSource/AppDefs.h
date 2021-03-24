@@ -67,6 +67,8 @@ enum EApplet
     eAppletGroupJoin,	
     eAppletSearchPage,
     eAppletShareServicesPage,       // page to setup share with others services
+    eAppletDownloads,
+    eAppletUploads,
     eAppletNetHostingPage,	        // page to setup network/group hosts and services
     eAppletSettingsPage,            // page of setting applets
     eAppletAboutNoLimitConnect,

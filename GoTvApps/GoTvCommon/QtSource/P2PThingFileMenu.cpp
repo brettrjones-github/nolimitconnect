@@ -19,8 +19,8 @@
 #include "MyIcons.h"
 #include "AppGlobals.h"
 
-#include "ActivityUploads.h"
-#include "ActivityDownloads.h"
+#include "AppletUploads.h"
+#include "AppletDownloads.h"
 #include "ActivityBrowseFiles.h"
 #include "ActivityViewMySharedFiles.h"
 #include "ActivityViewLibraryFiles.h"
@@ -113,11 +113,17 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 		//	break;
 
 	case 5: // View Downloading Files
-		m_Downloads->show();
+        if( getAppletDownloads() )
+        {
+            getAppletDownloads()->show();
+        }
 		break;
 
 	case 6: // View Uploading Files
-		m_Uploads->show();
+        if( getAppletUploads() )
+        {
+            getAppletUploads()->show();
+        }
 		break;
 
 	case 7: // Open Download Folder

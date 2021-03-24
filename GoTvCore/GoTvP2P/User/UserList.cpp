@@ -16,12 +16,8 @@
 #include <PktLib/VxCommon.h>
 
 //============================================================================
-UserList::UserList()
-{
-}
-
-//============================================================================
-UserList::~UserList()
+UserList::UserList( const UserList& rhs )
+    : m_UserList( rhs.m_UserList)
 {
 }
 
@@ -41,13 +37,42 @@ User UserList::findUser( VxGUID& userId )
 }*/
 
 //============================================================================
-void UserList::addOrUpdateUser( User& user )
+void UserList::addOrUpdateUser( User& userIn )
 {
+    if( !userIn.getNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "UserList::addOrUpdateUser invalid param " );
+        return;
+    }
 
+    bool foundUser = false;
+    VxGUID onlineId = userIn.getNetIdent()->getMyOnlineId();
+    VxGUID sessionId = userIn.getSessionId();
+    for( User& user : m_UserList )
+    {
+        if( user.getNetIdent() && user.getNetIdent()->getMyOnlineId() == onlineId && user.getSessionId() == sessionId )
+        {
+            user = userIn;
+            foundUser = true;
+            break;
+        }
+    }
+
+    if( !foundUser )
+    {
+        m_UserList.push_back( userIn );
+    }
 }
 
 //============================================================================
-void UserList::removeUser( VxGUID& userId )
+void UserList::removeUser( VxGUID& onlineId, VxGUID& sessionId )
 {
-
+    for( auto iter = m_UserList.begin(); iter != m_UserList.end(); ++iter )
+    {
+        if( iter->getNetIdent() && iter->getNetIdent()->getMyOnlineId() == onlineId && iter->getSessionId() == sessionId )
+        {
+            m_UserList.erase( iter );
+            break;
+        }
+    }
 }

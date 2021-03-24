@@ -27,7 +27,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
@@ -47,7 +47,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityUploads.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUploads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityVideoOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewLibraryFiles.h \
@@ -180,6 +180,9 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.h \
@@ -324,7 +327,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.cpp \
@@ -344,7 +347,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityUploads.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUploads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityVideoOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewLibraryFiles.cpp \
@@ -480,6 +483,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.cpp \
@@ -617,7 +623,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityConnectionOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityCreateAccount.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloadItemMenu.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloads.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletDownloads.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityHelpSignal.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityInformation.ui \
@@ -647,7 +653,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerViewSharedFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerVoicePhone.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTruthOrDare.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityUploads.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletUploads.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityVideoOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewAudioFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLibraryFiles.ui \
@@ -721,6 +727,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FileXferWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/FriendListEntryWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/GuiUserListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/HostListEntryWidget.ui \

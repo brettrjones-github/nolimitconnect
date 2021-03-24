@@ -120,7 +120,7 @@ void OfferBarWidget::updateOfferBar( OfferSessionState * offerState )
 			break;
 		}
 
-		setOfferOnlineState( offerState->getHisIdent()->isOnline() );
+		setOfferOnlineState( offerState->getHisIdent()->getIsOnline() );
 
 		GuiOfferSession * offerSession = offerState->getGuiOfferSession();
 		QString strMsg		= offerSession->getOfferMsg().c_str();

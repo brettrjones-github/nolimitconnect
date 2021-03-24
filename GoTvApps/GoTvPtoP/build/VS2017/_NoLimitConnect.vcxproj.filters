@@ -112,6 +112,9 @@
     <Filter Include="GoTvCommon\Source Files\GuiList">
       <UniqueIdentifier>{0656ace4-2c51-4bc8-80af-ab3b501c4c20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\GuiUser">
+      <UniqueIdentifier>{efdb3b74-c7d6-4791-9c58-2dd1faaddc74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -234,9 +237,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloads.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
@@ -274,9 +274,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityUploads.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp">
@@ -1011,6 +1008,21 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUploads.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1026,9 +1038,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloadItemMenu.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloads.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityFileSearch.ui">
@@ -1095,9 +1104,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerVoicePhone.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityUploads.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityVideoOptions.ui">
@@ -1289,9 +1295,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloads.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
@@ -1329,9 +1332,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityUploads.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.h">
@@ -1952,6 +1952,21 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiUser</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUploads.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\GoTvCommon\Resources\spheres.svg">
@@ -2538,9 +2553,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityDownloadItemMenu.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ActivityDownloads.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityFileSearch.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2605,9 +2617,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AppletPeerVoicePhone.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ActivityUploads.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityVideoOptions.h">
@@ -3191,6 +3200,15 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerSessionFileOffer.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletDownloads.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUploads.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

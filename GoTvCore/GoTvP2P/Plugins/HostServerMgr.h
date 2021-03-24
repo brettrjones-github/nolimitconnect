@@ -28,11 +28,11 @@ public:
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) override;
     virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
 
-    virtual void				onUserJoined( VxSktBase * sktBase, VxNetIdent * netIdent );
+    virtual void				onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& sessionId );
 
 protected:
     virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
-    virtual void                onContactDisconnected(VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
+    virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     virtual void                onClientJoined( VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual bool                addClient( VxSktBase * sktBase, VxNetIdent * netIdent );
@@ -45,6 +45,5 @@ protected:
     VxGUIDList                  m_ClientList;
     std::map<VxGUID, PktHostAnnounce*> m_AnnList;
     VxMutex                     m_AnnListMutex;
-    UserList                    m_UserList;
 };
 

@@ -467,9 +467,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloads.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -517,6 +514,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -536,9 +534,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerVoicePhone.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityUploads.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp">
@@ -772,6 +767,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUploads.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -830,6 +826,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.cpp">
@@ -1273,8 +1272,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityCreateAccount.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloadItemMenu.ui">
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloads.ui">
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityFileSearch.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui" />
@@ -1313,6 +1310,7 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityTimedMessage.ui">
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletDownloads.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerChangeFriendship.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerReplyOfferFile.ui" />
@@ -1325,8 +1323,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerViewSharedFiles.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerVoicePhone.ui">
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityUploads.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityVideoOptions.ui">
     </QtUic>
@@ -1396,6 +1392,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostNetwork.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSnapShot.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTestAndDebug.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUploads.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AssetFaceWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AssetPhotoWidget.ui">
@@ -1430,6 +1427,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileXferWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HostListEntryWidget.ui" />
@@ -1740,9 +1738,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloads.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
@@ -1795,9 +1790,6 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerVoicePhone.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityUploads.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.h">
@@ -2052,6 +2044,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerReplyFileOffer.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSelectFileToSend.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUploads.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">
@@ -2131,6 +2125,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h">
@@ -2423,7 +2420,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityBrowseFiles.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityChooseTestWebsiteUrl.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityDownloadItemMenu.h" />
-    <ClInclude Include="GeneratedFiles\ui_ActivityDownloads.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityFileSearch.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityIsPortOpenTest.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityMessageBox.h" />
@@ -2446,7 +2442,6 @@
     <ClInclude Include="GeneratedFiles\ui_AppletPeerVideoPhone.h" />
     <ClInclude Include="GeneratedFiles\ui_AppletPeerViewSharedFiles.h" />
     <ClInclude Include="GeneratedFiles\ui_AppletPeerVoicePhone.h" />
-    <ClInclude Include="GeneratedFiles\ui_ActivityUploads.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityVideoOptions.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityViewAudioFile.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityViewLibraryFiles.h" />

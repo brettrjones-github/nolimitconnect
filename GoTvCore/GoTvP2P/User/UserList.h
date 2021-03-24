@@ -20,14 +20,15 @@
 class UserList
 {
 public:
-    UserList();
-	virtual ~UserList();
+    UserList() = default;
+    UserList( const UserList& rhs );
+	virtual ~UserList() = default;
 
     /*
     User					    findUser( VxGUID& userId );
     */
     void 				        addOrUpdateUser( User& user );
-    void 				        removeUser( VxGUID& userId );
+    void 				        removeUser( VxGUID& onlineId, VxGUID& sessionId );
 
 protected:
 

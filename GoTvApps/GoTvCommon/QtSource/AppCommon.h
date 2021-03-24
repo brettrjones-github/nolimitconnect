@@ -48,29 +48,33 @@
 #include "VxAppStyle.h"
 
 class AccountMgr;
+class AppSettings;
 class IVxVidCap;
-class FriendListEntryWidget;
-class FileListReplySession;
 class ActivityCreateAccount;
 class ActivityOfferListDlg;
-class ActivityDownloads;
-class ActivityUploads;
+class AppletDownloads;
+class AppletUploads;
 class ActivityAbout;
 class ActivityAppSetup;
 class ActivityShowHelp;
+
+class AppletMultiMessenger;
+class AppletDownloads;
+class AppletUploads;
+
+class FriendListEntryWidget;
+class FileListReplySession;
 class GuiOfferSession;
 class GuiFileXferSession;
 class VxPeerMgr;
 class PopupMenu;
 class VxMyFileInfo;
-class AppSettings;
 class VxTilePositioner;
 class AppletMgr;
 class IGoTv;
 class RenderGlWidget;
 class KodiThread;
 class BlobInfo;
-
 
 // media
 class CRenderBuffer;
@@ -97,7 +101,6 @@ public:
     void                        setIsAppInitialized( bool initialized )     { m_AppInitialized = initialized; }
     bool                        getIsAppInitialized( void )                 { return m_AppInitialized; }
 
-    ActivityDownloads *			getActivityDownloads( void )				{ return m_Downloads; }
     VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
     AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
     QFrame *					getAppletFrame( EApplet applet );
@@ -136,6 +139,14 @@ public:
 
 	void						setIsMaxScreenSize(  bool isMessagerFrame, bool isFullSizeWindow );
 	bool						getIsMaxScreenSize( bool isMessagerFrame );
+
+    // permanent applets for lifetime of application
+    void						setAppletMultiMessenger( AppletMultiMessenger* applet ) { m_AppletMultiMessenger = applet; }
+    AppletMultiMessenger*		getAppletMultiMessenger( void )                         { return m_AppletMultiMessenger; };
+    void						setAppletDownloads( AppletDownloads* applet )           { m_AppletDownloads = applet; }
+    AppletDownloads*		    getAppletDownloads( void )                              { return m_AppletDownloads; };
+    void						setAppletUploads( AppletUploads* applet )               { m_AppletUploads = applet; }
+    AppletUploads*		        getAppletUploads( void )                                { return m_AppletUploads; };
 
 	void						switchWindowFocus( QWidget * goTvButton );
 
@@ -406,6 +417,8 @@ public:
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) override;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting ) override;
 
+    virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline ) override;
+
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
@@ -596,6 +609,8 @@ signals:
     void						signalHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
     void						signalHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
+    void						signalUserOnlineStatus( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, bool isOnline );
+
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
     void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );
 	void						signalRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, QString strMsg );
@@ -748,10 +763,12 @@ private:
 
 	HomeWindow					m_HomePage;
 
-	ActivityCreateAccount *		m_CreateAccountDlg = nullptr;
-	ActivityDownloads *			m_Downloads = nullptr;
-	ActivityUploads *			m_Uploads = nullptr;
-	ActivityShowHelp *			m_ActivityShowHelpDlg = nullptr;
+	ActivityCreateAccount *		m_CreateAccountDlg{ nullptr };
+	ActivityShowHelp *			m_ActivityShowHelpDlg{ nullptr };
+
+    AppletMultiMessenger*       m_AppletMultiMessenger{ nullptr };
+    AppletDownloads *			m_AppletDownloads{ nullptr };
+    AppletUploads *			    m_AppletUploads{ nullptr };
 
 	std::string					m_strAccountUserName;
 

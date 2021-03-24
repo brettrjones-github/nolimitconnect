@@ -19,7 +19,7 @@
 #include "AppCommon.h"	
 #include "AppSettings.h"
 
-#include "ActivityDownloads.h"
+#include "AppletDownloads.h"
 #include "ActivityBrowseFiles.h"
 #include "ActivityYesNoMsgBox.h"
 

@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "ActivityDownloads.h"
+#include "AppletDownloads.h"
 #include "ActivityYesNoMsgBox.h"
 
 #include "AppCommon.h"
@@ -32,19 +32,17 @@
 #include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-ActivityDownloads::ActivityDownloads(	AppCommon&	app, 
-										QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_DOWNLOADS, app, parent, eAppletMessenger, true ) 
+AppletDownloads::AppletDownloads( AppCommon& app,  QWidget* parent )
+: AppletPeerBase( OBJNAME_ACTIVITY_DOWNLOADS, app, parent ) 
 {
-	ui.setupUi( this );
-	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
+    setAppletType( eAppletDownloads );
+    ui.setupUi( parent );
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Downloads" ) );
-    connectBarWidgets();
+    //connectBarWidgets();
 
-	connect( ui.m_TitleBarWidget,					SIGNAL(signalBackButtonClicked()),				this, SLOT(slotHomeButtonClicked()) );
-    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
-    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		                this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	            this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
 	connect( this, SIGNAL(signalToGuiFileXferState(VxGuidQt,EXferState,int,int)),			this, SLOT(slotToGuiFileXferState(VxGuidQt,EXferState,int,int)) );
@@ -54,31 +52,31 @@ ActivityDownloads::ActivityDownloads(	AppCommon&	app,
 }
 
 //============================================================================
-ActivityDownloads::~ActivityDownloads()
+AppletDownloads::~AppletDownloads()
 {
 	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
 }
 
 //============================================================================
-void ActivityDownloads::showEvent( QShowEvent * ev )
+void AppletDownloads::showEvent( QShowEvent * ev )
 {
 	ActivityBase::showEvent( ev );
 }
 
 //============================================================================
-void ActivityDownloads::hideEvent( QHideEvent * ev )
+void AppletDownloads::hideEvent( QHideEvent * ev )
 {
 	ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void ActivityDownloads::slotHomeButtonClicked( void )
+void AppletDownloads::slotHomeButtonClicked( void )
 {
 	hide();
 }
 
 ////============================================================================
-//void ActivityDownloads::slotItemClicked(QListWidgetItem * item)
+//void AppletDownloads::slotItemClicked(QListWidgetItem * item)
 //{
 //	GuiFileXferSession * poSession = (GuiFileXferSession *)item->data( Qt::UserRole + 1).toULongLong();
 //	if( poSession )
@@ -94,7 +92,7 @@ void ActivityDownloads::slotHomeButtonClicked( void )
 //}
 
 //============================================================================
-FileXferWidget * ActivityDownloads::sessionToWidget( GuiFileXferSession * poSession )
+FileXferWidget * AppletDownloads::sessionToWidget( GuiFileXferSession * poSession )
 {
 	FileXferWidget * item = new FileXferWidget(ui.m_FileItemList);
     item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
@@ -116,20 +114,20 @@ FileXferWidget * ActivityDownloads::sessionToWidget( GuiFileXferSession * poSess
 }
 
 //============================================================================
-void ActivityDownloads::updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession )
+void AppletDownloads::updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession )
 {
 	poSession->setWidget( item );
 	item->updateWidgetFromInfo();
 }
 
 //============================================================================
-GuiFileXferSession * ActivityDownloads::widgetToSession( FileXferWidget * item )
+GuiFileXferSession * AppletDownloads::widgetToSession( FileXferWidget * item )
 {
 	return item->getFileItemInfo();
 }
 
 //============================================================================
-GuiFileXferSession * ActivityDownloads::findSession( VxGuidQt lclSessionId )
+GuiFileXferSession * AppletDownloads::findSession( VxGuidQt lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -146,7 +144,7 @@ GuiFileXferSession * ActivityDownloads::findSession( VxGuidQt lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * ActivityDownloads::findListEntryWidget( VxGuidQt lclSessionId )
+FileXferWidget * AppletDownloads::findListEntryWidget( VxGuidQt lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -166,7 +164,7 @@ FileXferWidget * ActivityDownloads::findListEntryWidget( VxGuidQt lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * ActivityDownloads::addDownload( GuiFileXferSession * poSession )
+FileXferWidget * AppletDownloads::addDownload( GuiFileXferSession * poSession )
 {
 	FileXferWidget * item = findListEntryWidget( poSession->getLclSessionId() );
 	if( item )
@@ -189,7 +187,7 @@ FileXferWidget * ActivityDownloads::addDownload( GuiFileXferSession * poSession 
 }
 
 //============================================================================
-bool ActivityDownloads::isXferInProgress( VxGuidQt lclSessionId )
+bool AppletDownloads::isXferInProgress( VxGuidQt lclSessionId )
 {
 	if( findSession( lclSessionId ) )
 	{
@@ -200,7 +198,7 @@ bool ActivityDownloads::isXferInProgress( VxGuidQt lclSessionId )
 }
 
 //============================================================================
-void ActivityDownloads::slotToGuiStartDownload( GuiFileXferSession * poSession )
+void AppletDownloads::slotToGuiStartDownload( GuiFileXferSession * poSession )
 {
 	GuiFileXferSession * newSession = new GuiFileXferSession( *poSession );
 	newSession->setXferDirection( eXferDirectionRx );
@@ -210,7 +208,7 @@ void ActivityDownloads::slotToGuiStartDownload( GuiFileXferSession * poSession )
 }
 
 //============================================================================
-void ActivityDownloads::slotToGuiFileXferState(	VxGuidQt		lclSessionId, 
+void AppletDownloads::slotToGuiFileXferState(	VxGuidQt		lclSessionId, 
 												EXferState		eXferState, 
 												int				param1, 
 												int				param2  )
@@ -223,7 +221,7 @@ void ActivityDownloads::slotToGuiFileXferState(	VxGuidQt		lclSessionId,
 }
 
 //============================================================================
-void ActivityDownloads::slotToGuiFileDownloadComplete(	VxGuidQt lclSessionId, QString newFileName, EXferError xferError )
+void AppletDownloads::slotToGuiFileDownloadComplete(	VxGuidQt lclSessionId, QString newFileName, EXferError xferError )
 {
 	GuiFileXferSession * xferSession = findSession( lclSessionId );
 	if( xferSession )
@@ -243,14 +241,14 @@ void ActivityDownloads::slotToGuiFileDownloadComplete(	VxGuidQt lclSessionId, QS
 }
 
 //============================================================================
-void ActivityDownloads::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
+void AppletDownloads::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
 {
 	Q_UNUSED( userData );
 	emit signalToGuiStartDownload( xferSession );
 }
 
 //============================================================================
-void ActivityDownloads::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
+void AppletDownloads::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
 	Q_UNUSED( userData );
 	VxGuidQt myLclSession( lclSessionId );
@@ -258,7 +256,7 @@ void ActivityDownloads::toGuiFileXferState( void * userData, VxGUID& lclSessionI
 }
 
 //============================================================================
-void ActivityDownloads::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
+void AppletDownloads::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
 {
 	Q_UNUSED( userData );
 	VxGuidQt myLclSession( lclSession );
@@ -266,12 +264,12 @@ void ActivityDownloads::toGuiFileDownloadComplete( void * userData, VxGUID& lclS
 }
 
 //============================================================================
-void ActivityDownloads::slotFileXferItemClicked(QListWidgetItem * item)
+void AppletDownloads::slotFileXferItemClicked(QListWidgetItem * item)
 {
 }
 
 //============================================================================
-void ActivityDownloads::slotFileIconButtonClicked( QListWidgetItem * item )
+void AppletDownloads::slotFileIconButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -281,7 +279,7 @@ void ActivityDownloads::slotFileIconButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityDownloads::slotCancelButtonClicked( QListWidgetItem * item )
+void AppletDownloads::slotCancelButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -298,7 +296,7 @@ void ActivityDownloads::slotCancelButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityDownloads::slotPlayButtonClicked( QListWidgetItem * item )
+void AppletDownloads::slotPlayButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -308,7 +306,7 @@ void ActivityDownloads::slotPlayButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityDownloads::slotLibraryButtonClicked( QListWidgetItem * item )
+void AppletDownloads::slotLibraryButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -322,7 +320,7 @@ void ActivityDownloads::slotLibraryButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityDownloads::slotFileShareButtonClicked( QListWidgetItem * item )
+void AppletDownloads::slotFileShareButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -336,7 +334,7 @@ void ActivityDownloads::slotFileShareButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void ActivityDownloads::slotShredButtonClicked( QListWidgetItem * item )
+void AppletDownloads::slotShredButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -351,7 +349,7 @@ void ActivityDownloads::slotShredButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-bool ActivityDownloads::confirmDeleteFile( bool shredFile )
+bool AppletDownloads::confirmDeleteFile( bool shredFile )
 {
 	bool acceptAction = true;
 	bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();

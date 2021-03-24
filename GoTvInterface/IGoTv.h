@@ -277,6 +277,8 @@ public:
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
 
+    virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline ) override;
+
     /// Send Network available status to GUI for display
     virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
