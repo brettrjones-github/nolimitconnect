@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SessionFileOfferDialog</class>
- <widget class="QWidget" name="SessionFileOfferDialog">
+ <class>AppletPeerSessionFileOfferUi</class>
+ <widget class="QWidget" name="AppletPeerSessionFileOfferUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,32 +10,16 @@
     <height>491</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Accept File Offer</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>103</height>
-      </size>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QGroupBox" name="StyledDlgItemsBox">
      <property name="sizePolicy">
@@ -232,40 +216,9 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>30</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBarWidget</class>
-   <extends>QWidget</extends>
-   <header>TitleBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BottomBarWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">BottomBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>

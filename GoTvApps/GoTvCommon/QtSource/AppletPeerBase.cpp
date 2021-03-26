@@ -67,7 +67,7 @@ void AppletPeerBase::setupBaseWidgets( IdentWidget*	friendIdentWidget, VxPushBut
 		friendIdentWidget->updateGuiFromData( m_HisIdent );
 	}
 
-	if( 0 != permissionButton )
+	if( 0 != permissionButton && m_HisIdent )
 	{
 		EPluginAccess ePluginAccess = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
 
@@ -81,64 +81,33 @@ void AppletPeerBase::setupBaseWidgets( IdentWidget*	friendIdentWidget, VxPushBut
 }
 
 //============================================================================
-void AppletPeerBase::enableAudioControls( bool enable )
-{
-}
-
-//============================================================================
-void AppletPeerBase::enableVideoControls( bool enable )
-{
-	if( m_TitleBarWidget )
-	{
-		m_TitleBarWidget->enableVideoControls( enable );
-	}
-}
-
-//============================================================================
 void AppletPeerBase::showEvent( QShowEvent * ev )
 {
-	ActivityBase::showEvent( ev );
-	m_MyApp.setPluginVisible( m_ePluginType, true );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+	AppletBase::showEvent( ev );
+    if( ePluginTypeInvalid == m_ePluginType )
+    {
+        m_MyApp.setPluginVisible( m_ePluginType, true );
+        m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    }
 }
 
 //============================================================================
 void AppletPeerBase::hideEvent( QHideEvent * ev )
 {
-	m_MyApp.setPluginVisible( m_ePluginType, false );
-	m_MyApp.wantToGuiActivityCallbacks( this, this, false );	
-	ActivityBase::hideEvent( ev );
+    if( ePluginTypeInvalid == m_ePluginType )
+    {
+        m_MyApp.setPluginVisible( m_ePluginType, false );
+        m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    }
+
+    AppletBase::hideEvent( ev );
 }
 
 //============================================================================   
 void AppletPeerBase::closeEvent( QCloseEvent * ev )
 {
 	m_OfferSessionLogic.onStop();
-	ActivityBase::closeEvent( ev );
-}
-
-//============================================================================
-void AppletPeerBase::slotMuteMicButtonClicked( bool muteMic )
-{
-	m_Engine.fromGuiMuteMicrophone( muteMic );
-}
-
-//============================================================================
-void AppletPeerBase::slotMuteSpeakerButtonClicked( bool muteSpeaker )
-{
-	m_Engine.fromGuiMuteSpeaker( muteSpeaker );
-}
-
-//============================================================================
-void AppletPeerBase::slotCameraSnapshotButtonClicked( void )
-{
-    //m_Engine.fromGuiEchoCancelEnable( enableEchoCancel );
-}
-
-//============================================================================
-void AppletPeerBase::slotCamPreviewClicked( void )
-{
-
+    AppletBase::closeEvent( ev );
 }
 
 //============================================================================

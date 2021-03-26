@@ -60,6 +60,9 @@ protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
 
+    // override default behavior of closing dialog when back button is clicked
+    void                        onBackButtonClicked( void ) override;
+
     virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
     virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
     virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
@@ -72,5 +75,5 @@ protected:
 	bool						confirmDeleteFile( bool shredFile );
 
 	//=== vars ===//
-	Ui::DownloadsDialog			ui;
+	Ui::AppletDownloadsUi		ui;
 };

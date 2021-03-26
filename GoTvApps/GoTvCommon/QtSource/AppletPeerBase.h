@@ -19,7 +19,6 @@
 class GuiOfferSession;
 class VidWidget;
 class VxLabel;
-class TitleBarWidget;
 class VxPushButton;
 
 class AppletPeerBase : public AppletBase
@@ -35,9 +34,6 @@ public:
 	void						setupBaseWidgets(	IdentWidget *		friendIdentWidget = 0, 
 													VxPushButton *		permissionButton = 0, 
 													QLabel *			permissionLabel = 0 );
-
-	void						enableAudioControls( bool enable );
-	void						enableVideoControls( bool enable );
 
 	void						setVidCamWidget( VidWidget * camWidget )			{ m_VidCamWidget = camWidget; }
 	VidWidget *					getVidCamWidget( void )								{ return m_VidCamWidget; }
@@ -55,12 +51,6 @@ signals:
 	void						signalToGuiPluginSessionEnded( GuiOfferSession * offerSession );
 	void						signalToGuiContactOnline( VxNetIdent * hisIdent, bool newContact );
 	void						signalToGuiContactOffline( VxNetIdent * hisIdent );
-
-public slots:
-    void						slotMuteMicButtonClicked( bool muteMic ) override;
-    void						slotMuteSpeakerButtonClicked( bool muteSpeaker ) override;
-    void						slotCameraSnapshotButtonClicked( void ) override;
-    void						slotCamPreviewClicked( void ) override;
 
 protected slots:
 	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
@@ -104,6 +94,5 @@ protected:
 	//=== vars ===//
     bool						m_bFirstMsg{false};
     VidWidget *					m_VidCamWidget{nullptr};
-    TitleBarWidget *			m_TitleBarWidget{nullptr};
 	OfferSessionLogic			m_OfferSessionLogic;
 };

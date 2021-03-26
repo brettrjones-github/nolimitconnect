@@ -12,6 +12,7 @@ class VxAppDisplay;
 class AppletLaunchPage;
 class PageMediaPlayer;
 class MessengerPage;
+class AppletMultiMessenger;
 class VxFrame;
 class AppletBase;
 
@@ -43,6 +44,8 @@ public:
 	QFrame *					getAppletFrame( EApplet applet );
 	QFrame *					getMessengerParentFrame( void );
     QFrame *					getLaunchPageFrame( void );
+
+    AppletLaunchPage *          getLaunchPage( void ) { return m_AppletLaunchPage; }
 
 signals:
 	void						signalMainWindowResized( void );
@@ -88,6 +91,7 @@ protected:
     AppletLaunchPage *			m_AppletLaunchPage{nullptr};
     QWidget *					m_MessengerParent{nullptr};
     MessengerPage *				m_MessengerPage{nullptr};
+    AppletMultiMessenger*       m_AppletMultiMessenger{ nullptr };
 
     bool						m_MessengerIsFullSize{false};
     bool						m_HomeFrameFullSize{false};

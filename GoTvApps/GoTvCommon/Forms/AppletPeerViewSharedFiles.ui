@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ViewFriendsSharedFilesDialog</class>
- <widget class="QWidget" name="ViewFriendsSharedFilesDialog">
+ <class>AppletPeerViewSharedFilesUi</class>
+ <widget class="QWidget" name="AppletPeerViewSharedFilesUi">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -12,6 +12,12 @@
     <width>361</width>
     <height>559</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Browse Files</string>
@@ -39,29 +45,13 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
+    <widget class="QGroupBox" name="FileItemsBox">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>130</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="FileItemsBox">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -196,40 +186,9 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>30</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBarWidget</class>
-   <extends>QWidget</extends>
-   <header>TitleBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BottomBarWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">BottomBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>VxComboBoxFileFilter</class>
    <extends>QComboBox</extends>

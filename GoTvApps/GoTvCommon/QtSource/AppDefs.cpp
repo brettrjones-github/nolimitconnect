@@ -127,7 +127,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletLogView:                    return eMyIconDebug;
 
     case eAppletPermissionList:             return eMyIconKeyEnabled;
-    case eAppletMultiMessenger:             return eMyIconDebug;
+    case eAppletMultiMessenger:             return eMyIconMessenger;
     case eAppletPeerChangeFriendship:       return eMyIconKeyEnabled;
     case eAppletPeerReplyOfferFile:         return eMyIconDebug;
     case eAppletPeerTodGame:                return eMyIconDebug;

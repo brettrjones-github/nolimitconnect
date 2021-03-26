@@ -43,6 +43,6 @@ protected:
     void						toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
-	Ui::ToFriendTodGameDialog	ui;
+	Ui::AppletPeerTodGameUi	    ui;
 	TodGameLogic				m_TodGameLogic;
 };

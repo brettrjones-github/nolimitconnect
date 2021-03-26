@@ -377,7 +377,7 @@ bool OfferSessionLogic::sendOfferReply( EOfferResponse offerResponse )
 //============================================================================  
 void OfferSessionLogic::onStop()
 {
-	if( false == m_IsOnStopCalled )
+	if( false == m_IsOnStopCalled && m_HisIdent )
 	{
 		m_IsOnStopCalled = true;
 		m_OffersMgr.onSessionExit( m_ePluginType, m_OfferSessionId, m_HisIdent );

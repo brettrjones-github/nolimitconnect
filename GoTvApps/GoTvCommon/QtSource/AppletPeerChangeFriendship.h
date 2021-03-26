@@ -48,6 +48,6 @@ protected:
 	void						setMyPermissionToHim( EFriendState myFriendshipToHim );
 
 	//=== vars ===//
-	Ui::ToFriendChangeFriendshipDlg	ui;
+	Ui::AppletPeerChangeFriendshipUi	ui;
 	VxNetIdent *				m_Friend;					
 };

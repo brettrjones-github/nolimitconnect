@@ -78,7 +78,7 @@ protected:
 
     void                        fillNetHostSettingFromEngine( NetHostSetting& netSettings );
 
-	Ui::AppletNetworkSettingsWidget		ui;
+	Ui::AppletNetworkSettingsUi		ui;
     NetHostSetting              m_OriginalSettings;
     QTimer *                    m_UpdateTimer{ nullptr };
 };

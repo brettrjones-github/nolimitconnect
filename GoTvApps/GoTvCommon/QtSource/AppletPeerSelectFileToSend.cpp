@@ -47,7 +47,7 @@ AppletPeerSelectFileToSend::AppletPeerSelectFileToSend(	AppCommon&	app, QWidget 
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-	ui.m_FriendIdentWidget->updateGuiFromData( m_HisIdent );
+	//ui.m_FriendIdentWidget->updateGuiFromData( m_HisIdent );
 	EPluginAccess ePluginAccess = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
 
 	ui.m_PermissionButton->setIcon( getMyIcons().getPluginIcon( m_ePluginType, ePluginAccess ) );
@@ -60,7 +60,6 @@ AppletPeerSelectFileToSend::AppletPeerSelectFileToSend(	AppCommon&	app, QWidget 
 	ui.m_OfferMsgEdit->appendPlainText(QObject::tr("File "));
     connectBarWidgets();
 
-	connect( ui.m_TitleBarWidget,			SIGNAL(signalBackButtonClicked()),			this,	SLOT(accept()) );
 	connect( ui.m_ChooseFromLibraryButton,	SIGNAL(clicked()),							this,	SLOT(onBrowseLibraryButClick()) );
 	connect( ui.m_ChooseFromLibraryLabel,	SIGNAL(clicked()),							this,	SLOT(onBrowseLibraryButClick()) );
 	connect( ui.m_BrowseForFileButton,		SIGNAL(clicked()),							this,	SLOT(onBrowseForFileButClick()) );

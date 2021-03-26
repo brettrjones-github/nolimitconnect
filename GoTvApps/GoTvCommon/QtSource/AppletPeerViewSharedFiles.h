@@ -91,7 +91,7 @@ protected:
 	bool						confirmDeleteFile( bool shredFile );
 
 	//=== vars ===//
-	Ui::ViewFriendsSharedFilesDialog	ui;
+	Ui::AppletPeerViewSharedFilesUi	ui;
     VxNetIdent *				m_Friend{ nullptr };
 	int							m_iMenuItemHeight{ 34 };
 	std::string					m_strCurrentDirectory;

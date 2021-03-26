@@ -340,12 +340,10 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
     // need to setup theme before the first window or dialog is created
     getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
 
-    m_AppletMultiMessenger = new AppletMultiMessenger( *this, messangerFrame );
-
-	m_AppletDownloads = new AppletDownloads( *this, m_AppletMultiMessenger );
+	m_AppletDownloads = new AppletDownloads( *this, appletFrame );
     m_AppletDownloads->hide();
 
-	m_AppletUploads = new AppletUploads( *this, m_AppletMultiMessenger );
+	m_AppletUploads = new AppletUploads( *this, appletFrame );
 	m_AppletUploads->hide();
 
 	m_CreateAccountDlg = new ActivityCreateAccount( *this, appletFrame );
@@ -519,6 +517,11 @@ bool AppCommon::getIsPluginVisible( EPluginType ePluginType )
 //============================================================================
 void AppCommon::setPluginVisible( EPluginType ePluginType, bool isVisible )
 {
+    if( ePluginType == ePluginTypeInvalid )
+    {
+        return;
+    }
+
 	QVector<EPluginType>::iterator iter;
 	for( iter = m_VisiblePluginsList.begin(); iter != m_VisiblePluginsList.end(); ++iter )
 	{

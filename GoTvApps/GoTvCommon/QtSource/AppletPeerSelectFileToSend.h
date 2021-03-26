@@ -41,7 +41,7 @@ protected:
 	bool						verifyUserInput( void );
 
 	//=== vars ===//
-	Ui::SelectFileToSendDialog	ui;
+	Ui::AppletPeerSelectFileToSendUi	ui;
     VxNetIdent *				m_HisIdent{ nullptr };
 	VxGUID						m_LclSessionId;
 };

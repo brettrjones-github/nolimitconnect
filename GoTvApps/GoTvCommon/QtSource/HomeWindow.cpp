@@ -6,6 +6,7 @@
 #include "VxAppDisplay.h"
 
 #include "AppletLaunchPage.h"
+#include "AppletMultiMessenger.h"
 #include "MessengerPage.h"
 #include "GuiParams.h"
 #include "GuiHelpers.h"
@@ -30,13 +31,6 @@ HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
 , m_HomeFrameUpperLeft( new VxFrame( appCommon, this ) )
 , m_HomeFrameRight( new VxFrame( appCommon, this ) )
 , m_HomeFrameBottom( new VxFrame( appCommon, this ) )
-, m_MediaPlayerPage( 0 )
-, m_AppletLaunchPage( 0 )
-, m_MessengerParent( 0 )
-, m_MessengerPage( 0 )
-, m_MessengerIsFullSize( false )
-, m_HomeFrameFullSize( false )
-, m_EngineInitialized( false )
 {
     setObjectName( "HomeWindow" );
     m_HomeFrameUpperLeft->setObjectName( OBJNAME_FRAME_LAUNCH_PAGE );
@@ -283,7 +277,7 @@ void HomeWindow::switchWindowFocus(  QWidget * goTvButton )
 //============================================================================
 QFrame *  HomeWindow::getAppletFrame( EApplet applet )
 {
-	if( eAppletMessenger == applet )
+	if( eAppletMessenger == applet || eAppletMultiMessenger == applet )
 	{
 		return getMessengerParentFrame();
 	}
@@ -429,6 +423,8 @@ void HomeWindow::createMessengerPage( void )
 {
 	m_MessengerPage = new MessengerPage( getMyApp(), m_HomeFrameRight );
 	connect( m_MessengerPage, SIGNAL( signalBackButtonClicked() ), this, SLOT( help() ) );
+    m_AppletMultiMessenger = new AppletMultiMessenger( getMyApp(),m_HomeFrameRight );
+    m_MyApp.setAppletMultiMessenger( m_AppletMultiMessenger );
 }
 
 //============================================================================

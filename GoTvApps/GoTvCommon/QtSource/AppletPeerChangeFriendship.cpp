@@ -34,7 +34,6 @@ AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget 
 	connect( ui.ToIgnoreButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.OkButton,			SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	connect( ui.CancelButton,		SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
-	connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()), this, SLOT(onCancelButClick()) );
 }
 
 //============================================================================

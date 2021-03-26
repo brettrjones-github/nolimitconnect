@@ -29,10 +29,6 @@ public:
 	AppletPeerVideoPhone( AppCommon& app, QWidget* parent = nullptr );
 	virtual ~AppletPeerVideoPhone() override = default;
 
-    // overrides required for dialogs with there own title bar and bottom bar widgets
-    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
-    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
-
 	//! called by base class with in session state
     virtual void				onInSession( bool isInSession ) override;
 
@@ -45,6 +41,6 @@ protected:
     void						toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
-	Ui::ToFriendVideoPhoneDialog	ui;
+	Ui::AppletPeerVideoPhoneUi	ui;
 };
 

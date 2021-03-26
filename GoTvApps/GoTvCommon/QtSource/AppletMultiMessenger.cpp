@@ -30,10 +30,13 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
 : AppletPeerBase( OBJNAME_APPLET_MULTI_MESSENGER, app, parent )
 , m_TodGameLogic( app, app.getEngine(), ePluginTypeMessenger, this )
 {
+    setPluginType( ePluginTypeMessenger );
     setAppletType( eAppletMultiMessenger );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+    setBackButtonVisibility( false );
 
+    /*
 	//setupMultiSessionActivity( netIdent );
 	//m_OfferSessionLogic.sendOfferOrResponse();
 	//m_OfferOrResponseIsSent = true;
@@ -51,6 +54,7 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     connect( ui.m_SessionWidget,	SIGNAL(signalUserInputButtonClicked()),	this,	SLOT(slotUserInputButtonClicked()) );
 
 	m_IsInitialized = true;
+    */
     m_MyApp.activityStateChange( this, true ); 
 }
 
@@ -69,7 +73,6 @@ void AppletMultiMessenger::setupMultiSessionActivity( VxNetIdent * hisIdent )
 	m_ResponseFrame			= ui.m_ResponseFrame;
 	m_HangupSessionFrame	= ui.m_HangupSessionFrame;
 	m_VidChatWidget			= ui.m_VidWidget;
-	m_TodGameWidget			= ui.m_TodGameWidget;
 
 	m_VidChatWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 	m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId() );
@@ -149,7 +152,6 @@ void AppletMultiMessenger::onActivityFinish( void )
 {
 	ui.m_SessionWidget->onActivityStop();
 	m_OfferSessionLogic.onStop();
-	this->deleteLater();
 }
 
 //============================================================================
@@ -261,23 +263,26 @@ bool AppletMultiMessenger::checkForSendAccess( bool sendOfferIfPossible )
 //============================================================================
 void AppletMultiMessenger::showEvent( QShowEvent * ev )
 {
-	Q_UNUSED( ev );
 	AppletPeerBase::showEvent( ev );
 	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
-	m_MyApp.toGuiAssetAction( eAssetActionRxViewingMsg, m_HisIdent->getMyOnlineId(), 1 );
+    if( m_HisIdent )
+    {
+        m_MyApp.toGuiAssetAction( eAssetActionRxViewingMsg, m_HisIdent->getMyOnlineId(), 1 );
+    }
 }
 
 //============================================================================
 void AppletMultiMessenger::hideEvent( QHideEvent * ev )
 {
-	Q_UNUSED( ev );
-	m_MyApp.toGuiAssetAction( eAssetActionRxViewingMsg, m_HisIdent->getMyOnlineId(), 0 );
+    if( m_HisIdent )
+    {
+        m_MyApp.toGuiAssetAction( eAssetActionRxViewingMsg, m_HisIdent->getMyOnlineId(), 0 );
+    }
+
 	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
 
-	// purposely bypass  ActivityToFriendBase::hideEvent and call ActivityBase::hideEvent instead
-	// this is so ??
 	m_MyApp.setPluginVisible( m_ePluginType, false );
-	ActivityBase::hideEvent( ev );
+    AppletPeerBase::hideEvent( ev );
 }
 
 //============================================================================

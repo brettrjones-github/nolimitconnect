@@ -380,7 +380,16 @@ void AppletMgr::activityStateChange( ActivityBase * activity, bool isCreated )
 //============================================================================
 void AppletMgr::bringAppletToFront( ActivityBase * appletDialog )
 {
+    if( appletDialog )
+    {
+        if( !appletDialog->isVisible() )
+        {
+            appletDialog->show();
+        }
+    }
 
+
+    // TODO force window to front
 }
 
 //============================================================================

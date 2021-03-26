@@ -42,6 +42,6 @@ protected:
 	void						setPluginIcon( EPluginType ePluginType, EFriendState ePluginPermission );
 
 	//=== vars ===//
-	Ui::SessionFileOfferDialog	ui;
+	Ui::AppletPeerSessionFileOfferUi	ui;
 	EPluginType					m_ePluginType;
 };

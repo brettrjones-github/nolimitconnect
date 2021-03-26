@@ -32,12 +32,9 @@
 AppletUploads::AppletUploads( AppCommon& app, QWidget *	parent )
 : AppletPeerBase( OBJNAME_ACTIVITY_UPLOADS, app, parent )
 {
-    setAppletType( eAppletPeerViewSharedFiles );
-    ui.setupUi( parent );
+    setAppletType( eAppletUploads );
+    ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-
-	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
-	connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()),		this,	                SLOT(slotHomeButtonClicked()) );
 
     connectBarWidgets();
 
@@ -49,30 +46,39 @@ AppletUploads::AppletUploads( AppCommon& app, QWidget *	parent )
 	connect( this, SIGNAL(signalToGuiFileUploadComplete(VxGuidQt,int)),				this, SLOT(slotToGuiFileUploadComplete(VxGuidQt,int)) );
 	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
 	checkDiskSpace();
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
 AppletUploads::~AppletUploads()
 {
 	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
 void AppletUploads::showEvent( QShowEvent * ev )
 {
-	ActivityBase::showEvent( ev );
+    AppletPeerBase::showEvent( ev );
 }
 
 //============================================================================
 void AppletUploads::hideEvent( QHideEvent * ev )
 {
-	ActivityBase::hideEvent( ev );
+    AppletPeerBase::hideEvent( ev );
 }
 
 //============================================================================
 void AppletUploads::slotHomeButtonClicked( void )
 {
 	hide();
+}
+
+// override default behavior of closing dialog when back button is clicked
+//============================================================================
+void AppletUploads::onBackButtonClicked( void )
+{
+    hide();
 }
 
 //============================================================================

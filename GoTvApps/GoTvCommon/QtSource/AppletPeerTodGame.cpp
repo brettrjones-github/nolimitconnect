@@ -65,8 +65,6 @@ AppletPeerTodGame::AppletPeerTodGame( AppCommon& app, QWidget* parent )
 void AppletPeerTodGame::setupAppletPeerTodGame( void )
 {
 	//setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, ui.m_PermissionButton, ui.m_PermissionLabel );
-	ui.m_TitleBarWidget->setTitleBarText( tr("Truth Or Dare Game") );
-	ui.m_TitleBarWidget->enableAudioControls( true );
     connectBarWidgets();
 	m_TodGameLogic.setGuiWidgets( m_HisIdent, ui.m_TodGameWidget );
 	ui.m_InstMsgWidget->setInstMsgWidgets( m_ePluginType, m_HisIdent );

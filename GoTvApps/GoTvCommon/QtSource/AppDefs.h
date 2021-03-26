@@ -60,7 +60,6 @@ enum EApplet
     // start of home page applets.. shown in order of enumeration
     eAppletKodi,
     eAppletUserIdentity,
-    eAppletMessenger,
     eAppletPersonalRecorder,
     eAppletLibrary,
     eAppletChatRoomJoin,
@@ -191,6 +190,8 @@ enum EApplet
 
     eAppletPeerSelectFileToSend,
     eAppletPeerSessionFileOffer,
+
+    eAppletMessenger,
 
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,

@@ -40,5 +40,5 @@ protected:
     void						toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
-	Ui::ToFriendVoicePhoneDialog	ui;
+	Ui::AppletPeerVoicePhoneUi	ui;
 };
