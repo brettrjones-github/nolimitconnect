@@ -34,21 +34,21 @@ public:
 public:
 	FileXferWidget *			addDownload( GuiFileXferSession * poFileInfo );
 
-	bool						isUploadInProgress( VxGuidQt fileInstance );
+	bool						isUploadInProgress( VxGUID fileInstance );
 
-	GuiFileXferSession *		findSession( VxGuidQt fileInstance );
-	FileXferWidget *			findListEntryWidget( VxGuidQt fileInstance );
+	GuiFileXferSession *		findSession( VxGUID fileInstance );
+	FileXferWidget *			findListEntryWidget( VxGUID fileInstance );
 	FileXferWidget *			addUpload( GuiFileXferSession * poSession );
 
 signals:
 	void						signalToGuiStartUpload( GuiFileXferSession * xferSession );
-	void						signalToGuiFileXferState( VxGuidQt lclSession, EXferState eXferState, int param1, int param2 );
-	void						signalToGuiFileUploadComplete( VxGuidQt lclSession, int xferError );
+	void						signalToGuiFileXferState( VxGUID lclSession, EXferState eXferState, int param1, int param2 );
+	void						signalToGuiFileUploadComplete( VxGUID lclSession, int xferError );
 
 private slots:
 	void						slotToGuiStartUpload(	GuiFileXferSession * poSession );
-	void						slotToGuiFileXferState( VxGuidQt lclSessionId, EXferState eXferState, int param1, int param2 );
-	void						slotToGuiFileUploadComplete( VxGuidQt lclSessionId, int xferError );
+	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
+	void						slotToGuiFileUploadComplete( VxGUID lclSessionId, int xferError );
 
     void						slotHomeButtonClicked( void ) override;
 	void						slotFileXferItemClicked( QListWidgetItem * item );

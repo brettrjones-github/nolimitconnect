@@ -53,7 +53,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletClientRandomConnect:	return eMyIconSearchRandomConnect;
     case eAppletClientStoryboard:       return eMyIconStoryBoardNormal;
     case eAppletCreateAccount:			return eMyIconUserIdentity;
-    case eAppletGroupJoin:              return eMyIconGroupUser;
+    case eAppletGroupJoin:              return eMyIconClientGroup;
     case eAppletHomePage:				return eMyIconHome;
     case eAppletKodi:				    return eMyIconKodi;
     case eAppletLibrary:				return eMyIconLibraryNormal;
@@ -63,7 +63,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletNetworkSettings:	    return eMyIconNetworkSettings;
     case eAppletPlayerVideo:			return eMyIconVideoPhoneNormal;
     case eAppletPersonalRecorder:		return eMyIconNotepadNormal;
-    case eAppletSettingsPage:		    return eMyIconSettings;
+    case eAppletSettingsPage:		    return eMyIconSettingsGear;
    
     case eAppletSearchPage:	                return eMyIconSearch;
     case eAppletGroupJoinSearch:	        return eMyIconSearchJoinGroup;

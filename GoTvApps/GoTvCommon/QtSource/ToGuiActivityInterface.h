@@ -36,8 +36,24 @@ public:
 	virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ){}; 
 	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ){}; 
 	virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ){}; 
-	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, bool newContact ){}; 
+
+    virtual void				toGuiContactAdded( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactRemoved( void * callbackData, VxGUID& onlineId ) {}; 
+
+	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, EHostType hostType, bool newContact ){}; 
 	virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactNearby( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactNotNearby( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactNameChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactDescChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactMyFriendshipChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactHisFriendshipChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiPluginPermissionChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactSearchFlagsChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiContactLastSessionTimeChange( void * callbackData, VxNetIdent * netIdent ){}; 
+    virtual void				toGuiUpdateMyIdent( void * callbackData, VxNetIdent * netIdent ){}; 
+
+
     virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) {};
     virtual int				    toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) { return 0;};
 	virtual void				toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
@@ -48,8 +64,8 @@ public:
 	virtual void				toGuiSearchResultFileSearch(	void *			callbackData, 
 																VxNetIdent *	netIdent, 		
 																VxGUID&			lclSessionId, 
-																uint8_t				u8FileType, 
-																uint64_t				u64FileLen, 
+																uint8_t			u8FileType, 
+																uint64_t		u64FileLen, 
 																const char *	pFileName ){};
 	virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ){};
 

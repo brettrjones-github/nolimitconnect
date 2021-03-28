@@ -42,7 +42,7 @@ static void * BigListLoadThreadFunction( void * pvParam )
         rc = poMgr->dbRestoreAll( poMgr->getNetworkKey().c_str() );
         if( rc )
         {
-            LogMsg( LOG_INFO, "BigListLoadThreadFunction: Restore Error %d\n" );
+            LogMsg( LOG_ERROR, "BigListLoadThreadFunction: Restore Error %d", rc );
         }
 
         GetPtoPEngine().onBigListLoadComplete( rc );

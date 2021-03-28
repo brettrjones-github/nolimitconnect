@@ -372,14 +372,14 @@ void NetworkStateMachine::updateFromEngineSettings( EngineSettings& engineSettin
 
 	std::string networkKey;
 	engineSettings.getNetworkKey( networkKey );
+    m_Engine.getNetStatusAccum().setIpPort( u16TcpPort );
     if( !networkKey.empty() && ( networkKey != m_NetworkMgr.getNetworkKey() ) )
     {
         m_NetworkMgr.setNetworkKey( networkKey.c_str() );
-    }
+        // will restore only if network key has changed
+        m_Engine.getBigListMgr().dbRestoreAll( networkKey.c_str() );
 
-    // will restore only if network key has changed
-    m_Engine.getBigListMgr().dbRestoreAll( networkKey.c_str() );
-    m_Engine.getNetStatusAccum().setIpPort( u16TcpPort );
+    }
 }
 
 //============================================================================

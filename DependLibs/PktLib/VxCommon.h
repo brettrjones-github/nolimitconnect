@@ -137,6 +137,8 @@ public:
 
 	void						debugDumpIdent( void );
 
+    bool                        isIdentValid( void )                                        { return true; } // TODO validate ident
+
 private:
 	EPluginAccess			    getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );
 

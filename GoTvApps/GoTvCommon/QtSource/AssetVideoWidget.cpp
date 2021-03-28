@@ -59,7 +59,7 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 	connect( ui.m_PlayPauseButton,	SIGNAL(clicked()),						this, SLOT(slotPlayButtonClicked()) );
 	connect( ui.m_LeftAvatarBar,	SIGNAL(signalShredAsset()),				this, SLOT(slotShredAsset()) );
 	connect( ui.m_RightAvatarBar,	SIGNAL(signalShredAsset()),				this, SLOT(slotShredAsset()) );
-	//connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGuidQt, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGuidQt, int)) );
+	//connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGUID, int)) );
 	connect( ui.m_PlayPosSlider,	SIGNAL(sliderPressed()),				this, SLOT(slotSliderPressed()) );
 	connect( ui.m_PlayPosSlider,	SIGNAL(sliderReleased()),				this, SLOT(slotSliderReleased()) );
 

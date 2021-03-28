@@ -154,6 +154,7 @@ namespace
         "Host Group ",
         "Host Network ",
         "Host Random Connect ",
+        "Host Peer User ",
 
         "Max Host Type ",
     };

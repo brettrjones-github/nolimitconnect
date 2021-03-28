@@ -28,17 +28,19 @@
 #include <QDialog>
 
 class AppCommon;
-class P2PEngine;
 class IFromGui;
+class GuiUserMgr;
+class GuiOfferSession;
+class IdentWidget;
 class MyIcons;
+class PopupMenu;
+class P2PEngine;
+class TitleBarWidget;
+
 class QWidget;
 class QLabel;
 class QFrame;
-class GuiOfferSession;
-class IdentWidget;
-class TitleBarWidget;
 class VxPushButton;
-class PopupMenu;
 
 class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityInterface, public OfferSessionCallbackInterface
 {
@@ -295,6 +297,7 @@ protected:
 	Ui::ActivityBaseClass		ui;
 
 	AppCommon&					m_MyApp;
+    GuiUserMgr&                 m_UserMgr;
 	P2PEngine&					m_Engine;
 	IFromGui&					m_FromGui;	
     Qt::WindowFlags				m_WindowFlags = Qt::Widget;

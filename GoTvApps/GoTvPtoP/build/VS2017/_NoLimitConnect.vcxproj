@@ -826,8 +826,10 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp" />
@@ -1171,9 +1173,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxLabel.cpp">
@@ -2128,6 +2127,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h">
@@ -2326,9 +2327,6 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxLabel.h">

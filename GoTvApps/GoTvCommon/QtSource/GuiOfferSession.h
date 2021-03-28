@@ -16,8 +16,7 @@
 
 #include "config_gotvapps.h"
 
-#include "VxGuidQt.h"
-
+#include <CoreLib/VxGUID.h>
 #include <CoreLib/VxSha1Hash.h>
 #include <PktLib/VxCommon.h>
 
@@ -53,12 +52,12 @@ public:
 	std::string&				getOfferMsg( void )						{ return m_strOfferMsg; }
 	std::vector<std::string>&	getQuedMessages( void )					{ return m_aoQuedMessages; }
 
-	void						setLclSessionId( VxGuidQt lclSessionId)	{ m_LclSessionId = lclSessionId;}
-	VxGuidQt					getLclSessionId( void )					{ return m_LclSessionId; }
-	void						setRmtSessionId( VxGuidQt rmtSessionId ){ m_RmtSessionId = rmtSessionId;}
-	VxGuidQt					getRmtSessionId( void )					{ return m_RmtSessionId; }
-	void						setOfferSessionId( VxGuidQt offerSessionId ){ m_OfferSessionId = offerSessionId;}
-	VxGuidQt					getOfferSessionId( void )				{ return m_OfferSessionId; }
+	void						setLclSessionId( VxGUID lclSessionId)	{ m_LclSessionId = lclSessionId;}
+	VxGUID					    getLclSessionId( void )					{ return m_LclSessionId; }
+	void						setRmtSessionId( VxGUID rmtSessionId )  { m_RmtSessionId = rmtSessionId;}
+	VxGUID					    getRmtSessionId( void )					{ return m_RmtSessionId; }
+	void						setOfferSessionId( VxGUID offerSessionId ){ m_OfferSessionId = offerSessionId;}
+	VxGUID					    getOfferSessionId( void )				{ return m_OfferSessionId; }
 
 	void						setProgress( int iProgress )			{ m_iProgress = iProgress; }
 	int							getProgress( void )						{ return m_iProgress; }
@@ -102,9 +101,9 @@ protected:
 	bool						m_bRequiresReply;
 	std::string					m_strOfferMsg;
 	std::string					m_strFileName;
-	VxGuidQt					m_LclSessionId;
-	VxGuidQt					m_RmtSessionId;
-	VxGuidQt					m_OfferSessionId;
+	VxGUID					    m_LclSessionId;
+	VxGUID					    m_RmtSessionId;
+	VxGUID					    m_OfferSessionId;
 	VxSha1Hash					m_FileHashId;
 	bool						m_bHasNewResponse;
 	EOfferResponse				m_eOfferResponse;

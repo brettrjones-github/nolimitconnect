@@ -95,7 +95,7 @@ void AppletKodi::initAppletKodi( void )
 
 	//ui.m_PlayPosSlider->setRange( 0, 100000 );
 
-	////connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGuidQt, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGuidQt, int)) );
+	////connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGUID, int)) );
 	//connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
 	//connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
 

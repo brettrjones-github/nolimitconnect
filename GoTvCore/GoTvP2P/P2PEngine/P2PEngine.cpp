@@ -301,6 +301,7 @@ void P2PEngine::onBigListInfoDelete( BigListInfo * poInfo )
 {
 	LogMsg( LOG_INFO, "onBigListInfoDelete\n");
 	poInfo->debugDumpIdent();
+    getToGui().toGuiContactRemoved( poInfo->getConnectIdent().getMyOnlineId() );
 	if( poInfo->isMyRelay() )
 	{
 		m_ConnectionList.removeContactInfo( poInfo->getConnectInfo() );
@@ -314,7 +315,29 @@ void P2PEngine::onBigListInfoDelete( BigListInfo * poInfo )
 //! called by big list when all friends are loaded
 void P2PEngine::onBigListLoadComplete( RCODE rc )
 {
-	LogMsg( LOG_INFO, "onBigListLoadComplete\n");
+	LogMsg( LOG_INFO, "onBigListLoadComplete %d", rc );
+    getBigListMgr().bigListLock();
+    for( auto iter = getBigListMgr().m_BigList.begin(); iter != getBigListMgr().m_BigList.end(); ++iter )
+    {
+        BigListInfo * info = iter->second;
+        if( info && !info->isAnonymous() )
+        {
+            getToGui().toGuiContactAdded( info );
+        }
+        else
+        {
+            if( info )
+            {
+                LogMsg( LOG_ERROR, "onBigListLoadComplete anonymouse info %s %s", info->getOnlineName(), info->getMyOnlineIdHexString().c_str() );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "onBigListLoadComplete null info" );
+            }
+        }
+    }
+
+    getBigListMgr().bigListUnlock();
 }
 
 //============================================================================

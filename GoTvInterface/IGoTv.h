@@ -285,7 +285,10 @@ public:
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
 
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) override;
+    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
+
+    virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact = false ) override;
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactNearby( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) override;

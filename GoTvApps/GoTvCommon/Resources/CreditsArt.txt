@@ -41,12 +41,27 @@ avatar.svg
 cancel.svg
 check-mark.svg
 connection-test.svg (modified)
+client-chat-room.svg
+client-chat-room-settings.svg (modified)
+client-group.svg
+client-random-connect.svg (modified)
+client-webcam.svg (modified)
+edit-print.svg
+edit-cut.svg
+eye-all.svg (modified)
+eye-chat-room.svg (modified)
+eye-group.svg (modified)
+eye-hide.svg
+eye-random-connect.svg (modified)
+eye-show.svg
 file-folder-cancel.svg
 file-folder-locked.svg
 file-folder-minus.svg
 file-folder-normal.svg
 file-folder-plus.svg
 file-folder-share.svg (modified)
+file-save.svg
+file-save-as.svg (modified)
 file-xfer.svg (modified)
 file-xfer-settings.svg (modified)
 friend.svg
@@ -99,10 +114,6 @@ wireless-setup.svg (modified)
 webcam.svg
 webcam-server.svg (modified)
 webcam-stop.svg (modified)
-edit-print.svg
-edit-cut.svg
- file-save.svg
- file-save-as.svg (modified)
 
 
 By Anton Barbarov, RU at https://thenounproject.com

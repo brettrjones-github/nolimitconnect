@@ -13,33 +13,17 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <QWidget>
+#include "GuiUser.h"
 
-#include <PktLib/VxCommon.h>
-#include <CoreLib/VxGUID.h>
-
-class VxNetIdent;
-class VxSktBase;
-
-class GuiUserWidget : public QWidget
+class GuiUserWidget : public GuiUser
 {
     Q_OBJECT
 public:
     GuiUserWidget() = default;
-    GuiUserWidget( VxNetIdent * netIdent, VxGUID& sessionId, bool online = false );
+    GuiUserWidget( AppCommon& app, VxNetIdent * netIdent, VxGUID& sessionId, bool online = false );
     GuiUserWidget( const GuiUserWidget& rhs );
 	virtual ~GuiUserWidget() = default;
 
-    void                        setNetIdent( VxNetIdent* netIdent )     { m_NetIdent = *netIdent; }
-    VxNetIdent&                 getNetIdent( void )                     { return m_NetIdent; }
-    void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void )                    { return m_SessionId; }
-
-    void                        setIsOnline( bool isOnline )            { m_IsOnline = isOnline; }
-    bool                        getIsOnline( void )                     { return m_IsOnline; }
-
 protected:
-    VxNetIdent                  m_NetIdent;
-    VxGUID                      m_SessionId;
-    bool                        m_IsOnline{ false };
+
 };

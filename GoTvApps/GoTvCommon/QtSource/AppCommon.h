@@ -18,6 +18,12 @@
 #include "AppDefs.h"
 #include "AppGlobals.h"
 #include "CamLogic.h"
+#include "HomeWindow.h"
+#include "FriendList.h"
+#include "GuiUserMgr.h"
+#include "MyIcons.h"
+#include "VxAppTheme.h"
+#include "VxAppStyle.h"
 #include "VxAppDisplay.h"
 
 #include "ToGuiActivityClient.h"
@@ -29,12 +35,6 @@
 #include "GoTvInterface/IGoTvEvents.h"
 #include "GoTvInterface/IAudioInterface.h"
 
-#include "HomeWindow.h"
-
-#include "FriendList.h"
-
-#include "VxGuidQt.h"
-
 #include <QPushButton>
 #include <QComboBox>
 #include <QMessageBox>
@@ -42,10 +42,6 @@
 #include <QObject>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-
-#include "MyIcons.h"
-#include "VxAppTheme.h"
-#include "VxAppStyle.h"
 
 class AccountMgr;
 class AppSettings;
@@ -101,6 +97,7 @@ public:
     void                        setIsAppInitialized( bool initialized )     { m_AppInitialized = initialized; }
     bool                        getIsAppInitialized( void )                 { return m_AppInitialized; }
 
+    AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
     AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
     QFrame *					getAppletFrame( EApplet applet );
@@ -110,8 +107,8 @@ public:
     VxAppStyle&					getAppStyle( void )							{ return m_AppStyle; }
     QString&					getAppTitle( void )							{ return m_AppTitle; }
     VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
+    CamLogic&					getCamLogic( void )							{ return m_CamLogic; }
     QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
-    AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     P2PEngine&					getEngine( void )							{ return m_Engine; }
     IFromGui&					getFromGuiInterface( void );
     IGoTv&				        getGoTv( void )						        { return m_GoTv; }
@@ -120,7 +117,6 @@ public:
     bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
     bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
     MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
-    CamLogic&					getCamLogic( void )							{ return m_CamLogic; }
     VxNetIdent *				getMyIdentity( void );
     VxGUID				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
@@ -129,6 +125,7 @@ public:
     RenderGlWidget *            getRenderConsumer( void );
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
+    GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
 
 	void						setCamCaptureRotation( uint32_t rot );
@@ -437,8 +434,11 @@ public:
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
+    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
+
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) override;
+    virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType , bool newContact = false ) override;
     virtual void				toGuiContactNearby( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) override;
 
@@ -617,14 +617,14 @@ signals:
     void						signalNetworkStateChanged( ENetworkStateType eNetworkState );
     void						signalNetAvailStatus( ENetAvailStatus eNetAvailStatus );
 
-	void						signalRefreshFriend( VxGuidQt onlineId ); // emitted if friend has changed
-	void						signalAssetViewMsgAction( EAssetAction, VxGuidQt onlineId, int pos0to100000 );
-    void						signalBlobViewMsgAction( EBlobAction, VxGuidQt onlineId, int pos0to100000 );
+	void						signalRefreshFriend( VxGUID onlineId ); // emitted if friend has changed
+	void						signalAssetViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
+    void						signalBlobViewMsgAction( EBlobAction, VxGUID onlineId, int pos0to100000 );
 
 	void						signalToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg );
+
+    /*
 	void						signalRemoveContact( VxNetIdent * netIdent );
-	void						signalContactOnline( VxNetIdent * netIdent, bool newContact );
-	void						signalContactOffline( VxNetIdent * netIdent );
 	void						signalContactNearby( VxNetIdent * netIdent );
 	void						signalContactNotNearby( VxNetIdent * netIdent );
 	void						signalContactNameChange( VxNetIdent * netIdent );
@@ -634,8 +634,8 @@ signals:
 	void						signalContactPluginPermissionChange( VxNetIdent * netIdent );
 	void						signalContactSearchFlagsChange( VxNetIdent * netIdent );
 	void						signalContactLastSessionTimeChange( VxNetIdent * netIdent );
-
 	void						signalUpdateMyIdent( VxNetIdent * netIdent );
+    */
 
 	void						signalEnableVideoCapture( bool enableCapture );
 	void						signalEnableMicrophoneRecording( bool enableMicInput );
@@ -643,7 +643,7 @@ signals:
 	void						signalEnableSpeakerOutput( bool enableSpeakerOutput );
 
 	void						signalSetRelayHelpButtonVisibility( bool isVisible );
-	void						signalMultiSessionAction( VxGuidQt idPro, EMSessionAction mSessionAction, int pos0to100000 );
+	void						signalMultiSessionAction( VxGUID idPro, EMSessionAction mSessionAction, int pos0to100000 );
 
 	void						signalToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
 
@@ -684,6 +684,8 @@ protected slots:
 	void						onOncePerSecond( void );
 
 	void						onEditPermissionsSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
+
+    /*
 	void						slotRemoveContact( VxNetIdent * netIdent );
 	void						slotContactOnline( VxNetIdent * netIdent, bool newContact );
 	void						slotContactOffline( VxNetIdent * netIdent );
@@ -696,6 +698,7 @@ protected slots:
 	void						onContactPluginPermissionChange( VxNetIdent * netIdent );
 	void						onContactSearchFlagsChange( VxNetIdent * netIdent );
 	void						onContactLastSessionTimeChange( VxNetIdent * netIdent );
+    */
 
 	void						onEngineStatusMsg( QString );
 
@@ -744,11 +747,12 @@ private:
 	EDefaultAppMode				m_AppDefaultMode;
 	AppGlobals					m_AppGlobals;
 	AppSettings&				m_AppSettings;
+    QString						m_AppShortName;
+    QString						m_AppTitle;
     AccountMgr&				    m_AccountMgr;
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
-	QString						m_AppTitle;
-	QString						m_AppShortName;
+    GuiUserMgr					m_UserMgr;
 
 	MyIcons					    m_MyIcons;
 	VxAppTheme					m_AppTheme;

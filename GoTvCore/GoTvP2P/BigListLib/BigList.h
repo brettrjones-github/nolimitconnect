@@ -43,7 +43,7 @@ class P2PEngine;
 class BigList
 {
 public:
-	BigList();
+	BigList() = default;
 
 	//P2PEngine&					getEngine( void )					{ return m_Engine; }
 

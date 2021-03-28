@@ -159,10 +159,21 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 	case eMyIconServers:
 		return ":/AppRes/Resources/radio-tower.svg";
-	case eMyIconOptions:
-		return ":/AppRes/Resources/settings-gear.svg";
 	case eMyIconFileServer:
 		return ":/AppRes/Resources/file-folder-share.svg";
+
+    case eMyIconEyeAll:
+        return ":/AppRes/Resources/eye-all.svg";
+    case eMyIconEyeChatRoom:
+        return ":/AppRes/Resources/eye-chat-room.svg";
+    case eMyIconEyeGroup:
+        return ":/AppRes/Resources/eye-group.svg";
+    case eMyIconEyeHide:
+        return ":/AppRes/Resources/eye-hide.svg";
+    case eMyIconEyeRandomConnect:
+        return ":/AppRes/Resources/eye-random-connect.svg";
+    case eMyIconEyeShow:
+        return ":/AppRes/Resources/eye-show.svg";
 
 	case eMyIconAdministrator:
 		return ":/AppRes/Resources/user-tie.svg";
@@ -177,6 +188,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
     case eMyIconClientChatRoom:
         return ":/AppRes/Resources/client-chat-room.svg";
+    case eMyIconClientGroup:
+        return ":/AppRes/Resources/client-group.svg";
+    case eMyIconClientRandomConnect:
+        return ":/AppRes/Resources/client-random-connect.svg";
     case eMyIconClientWebCam:
 		return ":/AppRes/Resources/client-webcam.svg";
 
@@ -592,7 +607,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/plugin.svg";
 	case eMyIconTheme:
 		return ":/AppRes/Resources/theme.svg";
-	case eMyIconSettings:
+	case eMyIconSettingsGear:
 		return ":/AppRes/Resources/settings-gear.svg";
 
 
@@ -609,9 +624,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconGoTvStation:
 		return ":/AppRes/Resources/radio-tower.svg";
 
-	// groups
-	case eMyIconGroupUser:
-		return ":/AppRes/Resources/group.svg";
     case eMyIconShareServices:
         return ":/AppRes/Resources/share-services.svg";
     case eMyIconServiceAvatarImage:
@@ -730,11 +742,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/zoom-in.svg";
     case eMyIconZoomOut:
         return ":/AppRes/Resources/zoom-out.svg";
-
-    case eMyIconEyeHide:
-        return ":/AppRes/Resources/eye-hide.svg";
-    case eMyIconEyeShow:
-        return ":/AppRes/Resources/eye-show.svg";
 
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark

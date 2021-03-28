@@ -49,6 +49,11 @@ void AppletPeerBase::onActivityFinish( void )
 //============================================================================
 void AppletPeerBase::setupAppletPeerBase( void )
 {
+    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)), Qt::QueuedConnection );
+
 	connect( this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this,	SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),		this,	SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this,	SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)), Qt::QueuedConnection );
@@ -57,6 +62,30 @@ void AppletPeerBase::setupAppletPeerBase( void )
 	m_Engine.fromGuiMuteMicrophone( false );
 	m_Engine.fromGuiMuteSpeaker( false );
 	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+}
+
+//============================================================================
+void AppletPeerBase::slotUserAdded( GuiUser* user )
+{
+    LogMsg( LOG_DEBUG, "AppletPeerBase::slotUserAdded" );
+}
+
+//============================================================================
+void AppletPeerBase::slotUserRemoved( VxGUID onlineId )
+{
+    LogMsg( LOG_DEBUG, "AppletPeerBase::slotUserRemoved" );
+}
+
+//============================================================================
+void AppletPeerBase::slotUserUpdated( GuiUser* user )
+{
+    LogMsg( LOG_DEBUG, "AppletPeerBase::slotUserUpdated" );
+}
+
+//============================================================================
+void AppletPeerBase::slotUserOnlineStatus( GuiUser* user, bool isOnline )
+{
+    LogMsg( LOG_DEBUG, "AppletPeerBase::slotUserOnlineStatus" );
 }
 
 //============================================================================
@@ -181,6 +210,7 @@ void AppletPeerBase::slotToGuiPluginSessionEnded( GuiOfferSession * offer )
 	//handleSessionEnded( offerResponse, this );
 }; 
 
+/*
 //============================================================================
 void AppletPeerBase::toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, bool newContact )
 {
@@ -200,13 +230,14 @@ void AppletPeerBase::toGuiContactOffline( void * callbackData, VxNetIdent * frie
 	Q_UNUSED( callbackData );
 	emit signalToGuiContactOffline( friendIdent );
 }; 
+*/
 
 //============================================================================
 void AppletPeerBase::toGuiClientPlayVideoFrame(	void *			userData, 
-														VxGUID&			onlineId, 
-														uint8_t *			pu8Jpg, 
-														uint32_t				u32JpgDataLen,
-														int				motion0To100000 )
+												VxGUID&			onlineId, 
+												uint8_t *		pu8Jpg, 
+												uint32_t		u32JpgDataLen,
+												int				motion0To100000 )
 {
 	if( m_VidCamWidget && m_VidCamWidget->isVisible() )
 	{

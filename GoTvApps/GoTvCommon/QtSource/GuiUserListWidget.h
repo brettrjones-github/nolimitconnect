@@ -20,13 +20,26 @@
 
 #include <QListWidget>
 
-class HostListEntryWidget;
-class VxNetIdent;
+enum EUserListViewType
+{
+    eUserListViewTypeNone,
+    eUserListViewTypeFriends,
+    eUserListViewTypeGroupHosted,
+    eUserListViewTypeChatRoomHosted,
+    eUserListViewTypeRandomConnectHosted,
+
+    eMaxUserListViewType
+};
+
 class AppCommon;
+class GuiUser;
+class GuiUserMgr;
+class GuiHostSession;
+class HostListEntryWidget;
 class MyIcons;
 class P2PEngine;
-class GuiHostSession;
 class PluginSetting;
+class VxNetIdent;
 
 class GuiUserListWidget : public QListWidget
 {
@@ -37,7 +50,7 @@ public:
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
-    void                        clearHostList( void );
+    void                        clearUserList( void );
 
     void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
     HostListEntryWidget*        addOrUpdateHostSession( GuiHostSession* hostSession );
@@ -46,12 +59,19 @@ public:
     HostListEntryWidget*        findListEntryWidgetBySessionId( VxGUID& sessionId );
     HostListEntryWidget*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
+    void                        setUserListViewType( EUserListViewType viewType );
+
 signals:
-    virtual void                signalIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
-    virtual void                signalMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
-    virtual void                signalJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    void                        signalIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    void                        signalMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    void                        signalJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
 
 protected slots:
+    void				        slotUserAdded( GuiUser* user ); 
+    void				        slotUserRemoved( VxGUID onlineId ); 
+    void                        slotUserUpdated( GuiUser* user );
+    void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
+
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotHostListItemClicked( QListWidgetItem* hostItem );
     void                        slotIconButtonClicked( HostListEntryWidget* hostItem );
@@ -59,6 +79,10 @@ protected slots:
     void                        slotJoinButtonClicked( HostListEntryWidget* hostItem );
 
 protected:
+    virtual void				showEvent( QShowEvent * ev ) override;
+
+    bool                        isUserAListMatch( GuiUser* user );
+
     HostListEntryWidget*        sessionToWidget( GuiHostSession* hostSession );
     GuiHostSession*				widgetToSession( HostListEntryWidget* hostItem );
 
@@ -67,9 +91,15 @@ protected:
     virtual void                onMenuButtonClicked( HostListEntryWidget* hostItem );
     virtual void                onJoinButtonClicked( HostListEntryWidget* hostItem );
 
+    void                        refreshUserList( void );
+    void                        addUser( GuiUser* user );
+
 	//=== vars ===//
 	AppCommon&					m_MyApp;
+    GuiUserMgr&					m_UserMgr;
 	P2PEngine&					m_Engine;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
+    EUserListViewType           m_ViewType{ eUserListViewTypeNone };
+    bool                        m_FirstShow{ false };
 };
 

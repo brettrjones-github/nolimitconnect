@@ -14,8 +14,15 @@ enum EMyIcons
     eMyIconInformation,
     eMyIconPeople,
 	eMyIconServers,
-	eMyIconOptions,
+    eMyIconSettingsGear,
 	eMyIconFileServer,
+
+    eMyIconEyeAll,
+    eMyIconEyeChatRoom,
+    eMyIconEyeGroup,
+    eMyIconEyeHide,
+    eMyIconEyeRandomConnect,
+    eMyIconEyeShow,
 
     eMyIconSearch,
     eMyIconSearchJoinGroup,
@@ -37,6 +44,8 @@ enum EMyIcons
 	eMyIconIgnored,
 
     eMyIconClientChatRoom,
+    eMyIconClientGroup,
+    eMyIconClientRandomConnect,
     eMyIconClientWebCam,
 
 	eMyIconRelay,
@@ -283,7 +292,6 @@ enum EMyIcons
 
 	eMyIconPlugins,
 	eMyIconTheme,
-	eMyIconSettings,
 
     eMyIconNetworkKey,
     eMyIconNetworkSettings,
@@ -293,8 +301,6 @@ enum EMyIcons
 	// built in plugin options
 	eMyIconCamStreamProvider,
 	eMyIconGoTvStation,
-
-	eMyIconGroupUser,
 
     eMyIconShareServices,
 
@@ -358,9 +364,6 @@ enum EMyIcons
     eMyIconFileSaveAs,
     eMyIconZoomIn,
     eMyIconZoomOut,
-
-    eMyIconEyeHide,
-    eMyIconEyeShow,
 
 	eMaxMyIcon	// must be last
 };

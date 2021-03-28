@@ -193,7 +193,6 @@
         <file>Resources/snd_yes.wav</file>
         <file>Resources/kodi.svg</file>
         <file>Resources/user-ident.svg</file>
-        <file>Resources/group.svg</file>
         <file>Resources/NetworkDesign.png</file>
         <file>Resources/wireless-key.svg</file>
         <file>Resources/wireless-setup.svg</file>
@@ -270,6 +269,15 @@
         <file>Resources/zoom-out.svg</file>
         <file>Resources/cancel.svg</file>
         <file>Resources/webcam-stop.svg</file>
+        <file>Resources/log.svg</file>
+        <file>Resources/search-random-connect.svg</file>
+        <file>Resources/eye-hide.svg</file>
+        <file>Resources/eye-show.svg</file>
+        <file>Resources/client-group.svg</file>
+        <file>Resources/eye-all.svg</file>
+        <file>Resources/eye-chat-room.svg</file>
+        <file>Resources/eye-group.svg</file>
+        <file>Resources/eye-random-connect.svg</file>
         <file>Resources/bars_1_internet.png</file>
         <file>Resources/bars_2_test_avail.png</file>
         <file>Resources/bars_3_net_avail.png</file>
@@ -278,9 +286,6 @@
         <file>Resources/bars_6_direct.png</file>
         <file>Resources/bars_7_hosted_direct.png</file>
         <file>Resources/bars_7_hosted_with_relay.png</file>
-        <file>Resources/log.svg</file>
-        <file>Resources/search-random-connect.svg</file>
-        <file>Resources/eye-hide.svg</file>
-        <file>Resources/eye-show.svg</file>
+        <file>Resources/client-random-connect.svg</file>
     </qresource>
 </RCC>

@@ -180,6 +180,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListEntryWidget.h \
@@ -483,6 +485,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListEntryWidget.cpp \

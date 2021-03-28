@@ -16,7 +16,6 @@
 
 #include "AssetBaseWidget.h"
 #include "ui_AssetVoiceWidget.h"
-#include "VxGuidQt.h"
 
 class AssetVoiceWidget : public AssetBaseWidget
 {

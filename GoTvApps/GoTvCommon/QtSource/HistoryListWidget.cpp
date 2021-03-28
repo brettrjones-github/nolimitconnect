@@ -36,7 +36,7 @@ HistoryListWidget::HistoryListWidget(QWidget *parent)
 , m_HisIdent( 0 )
 , m_CallbacksRequested( false )
 {
-	connect( this, SIGNAL(signalToGuiClientAssetAction(EAssetAction, VxGuidQt, int)), this, SLOT(slotToGuiClientAssetAction(EAssetAction, VxGuidQt, int)), Qt::QueuedConnection );
+	connect( this, SIGNAL(signalToGuiClientAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiClientAssetAction(EAssetAction, VxGUID, int)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalToGuiSessionHistory(AssetInfo *)), this, SLOT(slotToGuiSessionHistory(AssetInfo *)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalToGuiAssetAdded(AssetInfo *)), this, SLOT(slotToGuiAssetAdded(AssetInfo *)), Qt::QueuedConnection );
 }
@@ -98,7 +98,7 @@ void HistoryListWidget::setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent )
 void HistoryListWidget::toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
 	Q_UNUSED( userData );
-	VxGuidQt assetIdPro( assetId );
+	VxGUID assetIdPro( assetId );
 	emit signalToGuiClientAssetAction( assetAction, assetIdPro, pos0to100000 );
 }
 
@@ -117,7 +117,7 @@ void HistoryListWidget::toGuiAssetAdded( void * userData, AssetInfo * assetInfo 
 }
 
 //============================================================================
-void HistoryListWidget::slotToGuiClientAssetAction( EAssetAction assetAction, VxGuidQt assetId, int pos0to100000 )
+void HistoryListWidget::slotToGuiClientAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 )
 {
 }
 

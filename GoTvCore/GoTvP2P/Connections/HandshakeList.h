@@ -39,12 +39,5 @@ protected:
     void                        getAndRemoveHandshakeInfo( VxSktBase* sktBase, std::vector<HandshakeInfo>& disconnectedList );
 
     //=== vars ===//
-
-//#ifdef TARGET_OS_ANDROID
     std::map<VxGUID, HandshakeInfo> m_ShakeList;
-    //typedef std::map<VxGUID, HandshakeInfo>::iterator HandshakeListIter;
-//#else
-//    std::map<VxGUID, HandshakeInfo, cmp_vxguid> m_ShakeList;
-//    typedef std::map<VxGUID, HandshakeInfo, cmp_vxguid>::iterator HandshakeListIter;
-//#endif
 };

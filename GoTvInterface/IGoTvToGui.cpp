@@ -162,9 +162,21 @@ void IGoTv::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus,
 }
 
 //============================================================================
-void IGoTv::toGuiContactOnline( VxNetIdent * netIdent, bool newContact )
+void IGoTv::toGuiContactAdded( VxNetIdent * netIdent )
 {
-    getAppCommon().toGuiContactOnline( netIdent, newContact );
+    getAppCommon().toGuiContactAdded( netIdent );
+}
+
+//============================================================================
+void IGoTv::toGuiContactRemoved( VxGUID& onlineId )
+{
+    getAppCommon().toGuiContactRemoved( onlineId );
+}
+
+//============================================================================
+void IGoTv::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact )
+{
+    getAppCommon().toGuiContactOnline( netIdent, hostType, newContact );
 }
 
 //============================================================================

@@ -47,6 +47,7 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 : QDialog( parent, 0 )
 , ObjectCommon( objName )
 , m_MyApp( app )
+, m_UserMgr( app.getUserMgr() )
 , m_Engine( app.getEngine() )
 , m_FromGui( m_Engine.getFromGuiInterface() )
 //, m_WindowFlags( 0 )

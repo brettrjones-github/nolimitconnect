@@ -55,10 +55,10 @@ AppletPeerViewSharedFiles::AppletPeerViewSharedFiles( AppCommon& app, QWidget *	
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)),			this,  SLOT(slotApplyFileFilter(unsigned char)) );
 
 	connect( this, SIGNAL(signalToGuiFileListReply(FileListReplySession*)),					this, SLOT(slotToGuiFileListReply(FileListReplySession*)) );
-	connect( this, SIGNAL(signalToGuiFileXferState(VxGuidQt, EXferState, int, int)),		this, SLOT(slotToGuiFileXferState(VxGuidQt, EXferState, int, int)) );
+	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID, EXferState, int, int)),		this, SLOT(slotToGuiFileXferState(VxGUID, EXferState, int, int)) );
 
 	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
-	connect( this, SIGNAL(signalToGuiFileDownloadComplete(VxGuidQt,QString,EXferError)),	this, SLOT(slotToGuiFileDownloadComplete(VxGuidQt,QString,EXferError)) );
+	connect( this, SIGNAL(signalToGuiFileDownloadComplete(VxGUID,QString,EXferError)),	this, SLOT(slotToGuiFileDownloadComplete(VxGUID,QString,EXferError)) );
 
 	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
 
@@ -110,7 +110,7 @@ void AppletPeerViewSharedFiles::toGuiFileXferState( void * userData, VxGUID& lcl
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::slotToGuiFileXferState( VxGuidQt lclSessionId, EXferState eXferState, int param1, int param2 )
+void AppletPeerViewSharedFiles::slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 )
 {
 	LogMsg( LOG_INFO, "Got Update File Download\n");
 	FileXferWidget * item = findListEntryWidget( lclSessionId );
@@ -128,7 +128,7 @@ void AppletPeerViewSharedFiles::toGuiStartDownload( void * userData, GuiFileXfer
 }
 
 //============================================================================
-GuiFileXferSession * AppletPeerViewSharedFiles::findSession( VxGuidQt lclSessionId )
+GuiFileXferSession * AppletPeerViewSharedFiles::findSession( VxGUID lclSessionId )
 {
 	int iCnt = ui.FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -163,12 +163,12 @@ void AppletPeerViewSharedFiles::slotToGuiStartDownload( GuiFileXferSession * xfe
 void AppletPeerViewSharedFiles::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
 {
 	Q_UNUSED( userData );
-	VxGuidQt myLclSessionId( lclSession );
+	VxGUID myLclSessionId( lclSession );
 	emit signalToGuiFileDownloadComplete( myLclSessionId, newFileName, xferError );
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::slotToGuiFileDownloadComplete( VxGuidQt lclSessionId, QString newFileName, EXferError xferError )
+void AppletPeerViewSharedFiles::slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError )
 {
 	GuiFileXferSession * xferSession = findSession( lclSessionId );
 	if( xferSession )
@@ -220,7 +220,7 @@ FileXferWidget * AppletPeerViewSharedFiles::fileToWidget(  VxNetIdent *      net
 	FileXferWidget * item = new FileXferWidget(ui.FileItemList);
     item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
         ( int )( 62 * GuiParams::getGuiScale() ) ) );
-    VxGuidQt lclSessionId;
+    VxGUID lclSessionId;
     lclSessionId.initializeWithNewVxGUID();
 	GuiFileXferSession * xferSession = new GuiFileXferSession(	ePluginTypeFileServer, 
 																netIdent, 
@@ -283,7 +283,7 @@ GuiFileXferSession * AppletPeerViewSharedFiles::widgetToFileItemInfo( FileXferWi
 }
 
 //============================================================================
-FileXferWidget * AppletPeerViewSharedFiles::findListEntryWidget( VxGuidQt lclSessionId )
+FileXferWidget * AppletPeerViewSharedFiles::findListEntryWidget( VxGUID lclSessionId )
 {
 	int iIdx = 0;
 	FileXferWidget * poWidget;

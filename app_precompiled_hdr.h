@@ -23,10 +23,7 @@
 #include "GoTvInterface/IAudioInterface.h"
 
 #include "HomeWindow.h"
-
 #include "FriendList.h"
-
-#include "VxGuidQt.h"
 
 #include <QPushButton>
 #include <QComboBox>

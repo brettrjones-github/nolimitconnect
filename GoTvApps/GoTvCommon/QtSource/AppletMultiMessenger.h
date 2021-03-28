@@ -45,10 +45,20 @@ public:
     virtual void				onActivityFinish( void ) override;
 
 signals:
-	void						signalToGuiMultiSessionAction( VxGuidQt onlineId, EMSessionAction mSessionAction, int pos );
+	void						signalToGuiMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos );
 
 protected slots:
-	void						slotToGuiMultiSessionAction( VxGuidQt onlineId, EMSessionAction mSessionAction, int pos );
+    void						slotEyeHostButtonClicked( void );
+    void						slotEyeSessionButtonClicked( void );
+
+    void						slotFriendsButtonClicked( void );
+    void						slotGroupHostButtonClicked( void );
+    void						slotChatRoomHostButtonClicked( void );
+    void						slotRandomConnectHostButtonClicked( void );
+
+    void						slotOfferFileButtonClicked( void );
+
+	void						slotToGuiMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos );
 	void						slotToGuiPluginSessionEnded(GuiOfferSession * offerSession );
 	void						slotToGuiContactOnlineMultisession( VxNetIdent * hisIdent, bool newContact );
 	void						slotToGuiContactOfflineMultisession( VxNetIdent * hisIdent );
@@ -101,6 +111,6 @@ protected:
 	VidWidget *					m_VidChatWidget{ nullptr };
 	bool						m_IsInitialized{ false };
 	bool						m_OfferOrResponseIsSent{ false };
-	bool						m_CanSend{ false };
+	bool						m_CanSend{ false };                 
 };
 

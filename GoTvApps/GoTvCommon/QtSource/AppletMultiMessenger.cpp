@@ -36,23 +36,65 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     setTitleBarText( DescribeApplet( m_EAppletType ) );
     setBackButtonVisibility( false );
 
+    ui.m_FriendsView->setIcon( eMyIconEyeAll );
+    ui.m_GroupHosts->setIcon( eMyIconEyeGroup );
+    ui.m_ChatRoomHosts->setIcon( eMyIconEyeChatRoom );
+    ui.m_RandomConnectHosts->setIcon( eMyIconEyeRandomConnect );
+
+    ui.m_EyeHosts->setIcon( eMyIconEyeShow );
+    ui.m_EyeSession->setIcon( eMyIconEyeShow );
+
+    ui.m_VideoChatButton->setIcon( eMyIconVideoPhoneNormal );
+    ui.m_VoipButton->setIcon( eMyIconVoicePhoneNormal );
+    ui.m_TrueOrDareButton->setIcon( eMyIconTruthOrDareNormal );
+    ui.m_OfferFileButton->setIcon( eMyIconFileServer );
+    ui.m_OptionsButton->setIcon( eMyIconSettingsGear );
+
+    m_OffersFrame			= ui.m_OffersFrame;
+    m_ResponseFrame			= ui.m_ResponseFrame;
+    m_HangupSessionFrame	= ui.m_HangupSessionFrame;
+    m_VidChatWidget			= ui.m_VidWidget;
+
+    m_ResponseFrame->setVisible( false );
+    m_HangupSessionFrame->setVisible( false );
+    m_VidChatWidget->setVisible( false );
+    m_VidChatWidget->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
+    ui.m_SessionWidget->setIsPersonalRecorder( false );
+
+    ui.m_SessionWidget->setEntryMode( eAssetTypeUnknown );
+    ui.m_OptionsButton->setVisible( false );
+    ui.m_OfferFileButton->setVisible( false );
+    m_TodGameLogic.setVisible( false );
+
+    connect( ui.m_EyeHosts,		        SIGNAL(clicked()),						this,	SLOT(slotEyeHostButtonClicked()) );
+    connect( ui.m_EyeSession,           SIGNAL(clicked()),						this,	SLOT(slotEyeSessionButtonClicked()) );
+
+    connect( ui.m_FriendsView,		    SIGNAL(clicked()),						this,	SLOT(slotFriendsButtonClicked()) );
+    connect( ui.m_GroupHosts,	        SIGNAL(clicked()),						this,	SLOT(slotGroupHostButtonClicked()) );
+    connect( ui.m_ChatRoomHosts,        SIGNAL(clicked()),						this,	SLOT(slotChatRoomHostButtonClicked()) );
+    connect( ui.m_RandomConnectHosts,	SIGNAL(clicked()),	                    this,	SLOT(slotRandomConnectHostButtonClicked()) );
+
+    connect( ui.m_OfferFileButton,	    SIGNAL(clicked()),						this,	SLOT(slotOfferFileButtonClicked()) );
+
+    connect( ui.m_VideoChatButton,	    SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
+    connect( ui.m_VoipButton,		    SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
+    connect( ui.m_TrueOrDareButton,     SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
+    connect( ui.m_SessionWidget,	    SIGNAL(signalUserInputButtonClicked()),	this,	SLOT(slotUserInputButtonClicked()) );
+
+
+    connect( this, SIGNAL(signalToGuiContactOnline(VxNetIdent *,bool)),				    this,			    SLOT(slotToGuiContactOnlineMultisession(VxNetIdent *,bool)) );
+    connect( this, SIGNAL(signalToGuiContactOffline(VxNetIdent *)),				        this,				SLOT(slotToGuiContactOfflineMultisession(VxNetIdent *)) );
+
+    connect( this, SIGNAL(signalToGuiSetGameValueVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );
+    connect( this, SIGNAL(signalToGuiSetGameActionVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameActionVar(long,long)) );
+    connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	        this,				SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
+    connect( this, SIGNAL(signalToGuiMultiSessionAction(VxGUID,EMSessionAction,int)),	this,		        SLOT(slotToGuiMultiSessionAction(VxGUID,EMSessionAction,int)) );
+
+
     /*
-	//setupMultiSessionActivity( netIdent );
-	//m_OfferSessionLogic.sendOfferOrResponse();
-	//m_OfferOrResponseIsSent = true;
-
-    connect( this, SIGNAL(signalToGuiSetGameValueVar(long,long)),				&m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );
-    connect( this, SIGNAL(signalToGuiSetGameActionVar(long,long)),				&m_TodGameLogic,	SLOT(slotToGuiSetGameActionVar(long,long)) );
-    connect( this, SIGNAL(signalToGuiContactOnline(VxNetIdent *,bool)),				this,			SLOT(slotToGuiContactOnlineMultisession(VxNetIdent *,bool)) );
-    connect( this, SIGNAL(signalToGuiContactOffline(VxNetIdent *)),				this,				SLOT(slotToGuiContactOfflineMultisession(VxNetIdent *)) );
-    connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this,				SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
-    connect( this, SIGNAL(signalToGuiMultiSessionAction(VxGuidQt,EMSessionAction,int)),	this,		SLOT(slotToGuiMultiSessionAction(VxGuidQt,EMSessionAction,int)) );
-
-    connect( ui.m_VoipButton,		SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
-    connect( ui.m_VideoChatButton,	SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
-    connect( ui.m_TrueOrDareButton, SIGNAL(clicked()),						this,	SLOT(slotUserInputButtonClicked()) );
-    connect( ui.m_SessionWidget,	SIGNAL(signalUserInputButtonClicked()),	this,	SLOT(slotUserInputButtonClicked()) );
-
+    //setupMultiSessionActivity( netIdent );
+    //m_OfferSessionLogic.sendOfferOrResponse();
+    //m_OfferOrResponseIsSent = true;
 	m_IsInitialized = true;
     */
     m_MyApp.activityStateChange( this, true ); 
@@ -69,29 +111,14 @@ void AppletMultiMessenger::setupMultiSessionActivity( VxNetIdent * hisIdent )
 {
 	m_HisIdent = hisIdent;
 
-	m_OffersFrame			= ui.m_OffersFrame;
-	m_ResponseFrame			= ui.m_ResponseFrame;
-	m_HangupSessionFrame	= ui.m_HangupSessionFrame;
-	m_VidChatWidget			= ui.m_VidWidget;
-
 	m_VidChatWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 	m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 
-	m_ResponseFrame->setVisible( false );
-	m_HangupSessionFrame->setVisible( false );
-	m_VidChatWidget->setVisible( false );
-	m_VidChatWidget->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
 	m_VidChatWidget->setRecordFriendName( m_HisIdent->getOnlineName() );
 
-	slotRepositionToParent();
-	ui.m_SessionWidget->setIsPersonalRecorder( false );
 	ui.m_SessionWidget->setIdents( &m_Engine.getMyPktAnnounce(), hisIdent );
-	ui.m_SessionWidget->setEntryMode( eAssetTypeUnknown );
-	ui.m_OptionsButton->setVisible( false );
-	ui.m_SendAttachmentButton->setVisible( false );
 
 	m_TodGameLogic.setGuiWidgets( m_HisIdent, m_TodGameWidget );
-	m_TodGameLogic.setVisible( false );
 
 	MultiSessionState * sessionState = new MultiSessionState( m_MyApp, *this, eMSessionTypePhone );
 	sessionState->setGuiWidgets(	hisIdent,
@@ -193,9 +220,16 @@ void AppletMultiMessenger::showReasonAccessNotAllowed( void )
 //============================================================================
 void AppletMultiMessenger::slotToGuiContactOnlineMultisession( VxNetIdent * hisIdent, bool newContact )
 {
-	if( hisIdent->getMyOnlineId() == m_HisIdent->getMyOnlineId() )
+    if( !hisIdent || !hisIdent->isIdentValid() )
+    {
+        LogMsg( LOG_ERROR, "AppletMultiMessenger online invalid param" );
+        return;
+    }
+
+    m_UserMgr.updateUser( hisIdent );
+    if( m_UserMgr.userIsInSession( hisIdent->getMyOnlineId() ) || hisIdent->isFriend() )
 	{
-		QString statMsg = m_HisIdent->getOnlineName();
+		QString statMsg = hisIdent->getOnlineName();
 		statMsg += QObject::tr( " is online" );
 		setStatusMsg( statMsg );
 
@@ -206,10 +240,16 @@ void AppletMultiMessenger::slotToGuiContactOnlineMultisession( VxNetIdent * hisI
 //============================================================================
 void AppletMultiMessenger::slotToGuiContactOfflineMultisession( VxNetIdent * hisIdent )
 {
-	if( hisIdent->getMyOnlineId() == m_HisIdent->getMyOnlineId() )
-	{
+    if( !hisIdent || !hisIdent->isIdentValid() )
+    {
+        LogMsg( LOG_ERROR, "AppletMultiMessenger offline invalid param" );
+        return;
+    }
+
+    if( m_UserMgr.userIsInSession( hisIdent->getMyOnlineId() ) || hisIdent->isFriend() )
+    {
 		QString statMsg = m_HisIdent->getOnlineName();
-		statMsg += QObject::tr( " went offline-chat is disabled" );
+		statMsg += QObject::tr( " went offline" );
 		setStatusMsg( statMsg );
 
 		checkForSendAccess( false );
@@ -280,8 +320,11 @@ void AppletMultiMessenger::hideEvent( QHideEvent * ev )
     }
 
 	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+    if( ePluginTypeInvalid != m_ePluginType )
+    {
+        m_MyApp.setPluginVisible( m_ePluginType, false );
+    }
 
-	m_MyApp.setPluginVisible( m_ePluginType, false );
     AppletPeerBase::hideEvent( ev );
 }
 
@@ -320,17 +363,17 @@ void AppletMultiMessenger::toGuiMultiSessionAction( void * callbackData, EMSessi
 	Q_UNUSED( callbackData );
 	if( m_HisIdent && m_HisIdent->getMyOnlineId() == onlineId )
 	{
-		VxGuidQt guidId( onlineId );
+		VxGUID guidId( onlineId );
 		emit signalToGuiMultiSessionAction( onlineId, mSessionAction, pos0to100000 );
 	}
 }
 
 //============================================================================
 void AppletMultiMessenger::toGuiClientPlayVideoFrame(	void *			userData, 
-																VxGUID&			onlineId, 
-																uint8_t *			pu8Jpg, 
-																uint32_t				u32JpgDataLen,
-																int				motion0To100000 )
+														VxGUID&			onlineId, 
+														uint8_t *		pu8Jpg, 
+														uint32_t		u32JpgDataLen,
+														int				motion0To100000 )
 {
 	if( m_IsInitialized )
 	{
@@ -344,15 +387,15 @@ void AppletMultiMessenger::toGuiClientPlayVideoFrame(	void *			userData,
 }
 
 //============================================================================
-void AppletMultiMessenger::slotToGuiMultiSessionAction( VxGuidQt idPro, EMSessionAction mSessionAction, int pos0to100000 )
+void AppletMultiMessenger::slotToGuiMultiSessionAction( VxGUID idPro, EMSessionAction mSessionAction, int pos0to100000 )
 {
-	if( !m_IsInitialized || ( 0 == m_HisIdent ) )
+	if( !m_IsInitialized || ( !m_HisIdent ) )
 	{
 		return;
 	}
 
-	if(		( idPro.getVxGUIDHiPart() == m_HisIdent->getMyOnlineId().getVxGUIDHiPart() )
-		&&	( idPro.getVxGUIDLoPart() == m_HisIdent->getMyOnlineId().getVxGUIDLoPart() ) )
+	if(	( idPro.getVxGUIDHiPart() == m_HisIdent->getMyOnlineId().getVxGUIDHiPart() ) &&	
+		( idPro.getVxGUIDLoPart() == m_HisIdent->getMyOnlineId().getVxGUIDLoPart() ) )
 	{
 		if( eMSessionActionChatSessionAccept == mSessionAction )
 		{
@@ -385,10 +428,10 @@ void AppletMultiMessenger::setStatusMsg( QString strStatus )
 
 //============================================================================
 void AppletMultiMessenger::toGuiSetGameValueVar(	void *		userData, 
-															EPluginType ePluginType, 
-															VxGUID&		onlineId, 
-															int32_t			s32VarId, 
-															int32_t			s32VarValue )
+													EPluginType ePluginType, 
+													VxGUID&		onlineId, 
+													int32_t		s32VarId, 
+													int32_t		s32VarValue )
 {
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
@@ -398,11 +441,11 @@ void AppletMultiMessenger::toGuiSetGameValueVar(	void *		userData,
 }
 
 //============================================================================
-void AppletMultiMessenger::toGuiSetGameActionVar(	void *		userData, 
-															EPluginType ePluginType, 
-															VxGUID&		onlineId, 
-															int32_t			s32VarId, 
-															int32_t			s32VarValue )
+void AppletMultiMessenger::toGuiSetGameActionVar(	void *		    userData, 
+													EPluginType     ePluginType, 
+													VxGUID&		    onlineId, 
+													int32_t			s32VarId, 
+													int32_t			s32VarValue )
 {
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
@@ -410,3 +453,64 @@ void AppletMultiMessenger::toGuiSetGameActionVar(	void *		userData,
 		emit signalToGuiSetGameActionVar( s32VarId, s32VarValue );
 	}
 }
+
+//============================================================================
+void AppletMultiMessenger::slotEyeHostButtonClicked( void )
+{
+    if( ui.m_UserListWidget->isVisible() )
+    {
+        ui.m_UserListWidget->setVisible( false );
+        ui.m_EyeHosts->setIcon( eMyIconEyeHide );
+    }
+    else
+    {
+        ui.m_UserListWidget->setVisible( true );
+        ui.m_EyeHosts->setIcon( eMyIconEyeShow );
+    }
+}
+
+//============================================================================
+void AppletMultiMessenger::slotEyeSessionButtonClicked( void )
+{
+    if( ui.m_SessionFrame->isVisible() )
+    {
+        ui.m_SessionFrame->setVisible( false );
+        ui.m_EyeHosts->setIcon( eMyIconEyeHide );
+    }
+    else
+    {
+        ui.m_SessionFrame->setVisible( true );
+        ui.m_EyeHosts->setIcon( eMyIconEyeShow );
+    }
+}
+
+//============================================================================
+void AppletMultiMessenger::slotFriendsButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void AppletMultiMessenger::slotGroupHostButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void AppletMultiMessenger::slotChatRoomHostButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void AppletMultiMessenger::slotRandomConnectHostButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void AppletMultiMessenger::slotOfferFileButtonClicked( void )
+{
+
+}
+

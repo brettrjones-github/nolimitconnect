@@ -162,11 +162,12 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppDefaultMode( appDefaultMode )
 , m_AppGlobals( *this )
 , m_AppSettings( appSettings )
+, m_AppShortName( GetAppShortName( appDefaultMode ) )
+, m_AppTitle( GetAppTitle( appDefaultMode ) )
 , m_AccountMgr( accountMgr )
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
-, m_AppTitle( GetAppTitle( appDefaultMode ) )
-, m_AppShortName( GetAppShortName( appDefaultMode ) )
+, m_UserMgr( *this )
 
 , m_MyIcons( *this )
 , m_AppTheme( *this )
@@ -211,6 +212,7 @@ void AppCommon::loadWithoutThread( void )
     uint64_t startMs = GetApplicationAliveMs();
 
     registerMetaData();
+    m_UserMgr.onAppCommonCreated();
 
     // set application short name used for directory paths
     VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
@@ -270,6 +272,7 @@ void AppCommon::loadWithoutThread( void )
 void AppCommon::slotStartLoadingFromThread( void )
 {
 	registerMetaData();
+    m_UserMgr.onAppCommonCreated();
 	QObject::connect( this, SIGNAL( signalFinishedLoadingGui() ), this, SLOT( slotFinishedLoadingGui() ) );
 	QObject::connect( this, SIGNAL( signalFinishedLoadingEngine() ), this, SLOT( slotFinishedLoadingEngine() ) );
 
@@ -402,6 +405,7 @@ void AppCommon::connectSignals( void )
 	//connect(this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),				this, SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
 	connect(this, SIGNAL(signalToGuiInstMsg(VxNetIdent*,EPluginType,QString)),		this, SLOT(slotToGuiInstMsg(VxNetIdent*,EPluginType,QString)) );
 
+    /*
 	connect(this, SIGNAL(signalRemoveContact(VxNetIdent*)),							this, SLOT(slotRemoveContact(VxNetIdent*)));
 	connect(this, SIGNAL(signalContactOffline(VxNetIdent*)),						this, SLOT(slotContactOffline(VxNetIdent*)));
 	connect(this, SIGNAL(signalContactOnline(VxNetIdent*,bool)),					this, SLOT(slotContactOnline(VxNetIdent*,bool)));
@@ -416,6 +420,7 @@ void AppCommon::connectSignals( void )
 	connect(this, SIGNAL(signalContactLastSessionTimeChange(VxNetIdent*)),			this, SLOT(onContactLastSessionTimeChange(VxNetIdent*)));
 
 	connect(this, SIGNAL(signalUpdateMyIdent(VxNetIdent*)),							this, SLOT(onUpdateMyIdent(VxNetIdent*)));
+    */
 
 	//   connect(this, SIGNAL(signalStartDownload(GuiFileXferSession*)),					m_Downloads,	SLOT(slotUpdateDownload(GuiFileXferSession*)));
 	//   connect(this, SIGNAL(signalStartUpload(GuiFileXferSession*)),					m_Uploads,		SLOT(onStartUpload(GuiFileXferSession*)));
@@ -1472,7 +1477,7 @@ void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int
     if( ( eAssetActionRxNotifyNewMsg == assetAction )
         || ( eAssetActionRxViewingMsg == assetAction ) )
     {
-        VxGuidQt qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
+        VxGUID qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
         emit signalAssetViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
         return;
     }
@@ -1502,7 +1507,7 @@ void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID&
         return;
     }
 
-    VxGuidQt idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
+    VxGUID idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
     emit signalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
     LogMsg( LOG_INFO, "toGuiMultiSessionAction: toGuiActivityClientsLock\n" );
@@ -1529,7 +1534,7 @@ void AppCommon::toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int p
 	if( ( eBlobActionRxNotifyNewMsg == assetAction )
 		|| ( eBlobActionRxViewingMsg == assetAction ) )
 	{
-		VxGuidQt qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
+		VxGUID qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
 		emit signalBlobViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
 		return;
 	}
@@ -1948,7 +1953,7 @@ void AppCommon::refreshFriend( VxGUID& onlineId )
 		return;
 	}
 
-	VxGuidQt friendId( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
+	VxGUID friendId( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
 	emit signalRefreshFriend( friendId );
 }
 
@@ -1989,7 +1994,6 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<EXferState>( "EXferState" );
     qRegisterMetaType<PluginSetting>( "PluginSetting" );
     qRegisterMetaType<VxGUID>( "VxGUID" );
-    qRegisterMetaType<VxGuidQt>( "VxGuidQt" );
     qRegisterMetaType<VxNetIdent>( "VxNetIdent" );
     qRegisterMetaType<uint32_t>( "uint32_t" );
 }

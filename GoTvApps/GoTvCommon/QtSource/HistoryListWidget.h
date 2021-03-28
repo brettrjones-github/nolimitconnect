@@ -16,8 +16,8 @@
 
 #include "config_gotvapps.h"
 #include "ToGuiActivityInterface.h"
+
 #include <QListWidget>
-#include <VxGuidQt.h>
 
 class AppCommon;
 class P2PEngine;
@@ -37,12 +37,12 @@ public:
 	void						onActivityStop( void );
 
 signals:
-	void						signalToGuiClientAssetAction(EAssetAction, VxGuidQt, int);
+	void						signalToGuiClientAssetAction(EAssetAction, VxGUID, int);
 	void						signalToGuiAssetAdded( AssetInfo * assetInfo );
 	void						signalToGuiSessionHistory( AssetInfo * assetInfo );
 
 public slots:
-	void						slotToGuiClientAssetAction( EAssetAction assetAction, VxGuidQt assetId, int pos0to100000 );
+	void						slotToGuiClientAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
 	void						slotToGuiAssetAdded( AssetInfo * assetInfo );
 	void						slotToGuiSessionHistory( AssetInfo * assetInfo );
 

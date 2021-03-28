@@ -42,15 +42,15 @@ public:
 
 signals:
 	void						signalToGuiFileListReply( FileListReplySession* replySession );
-	void						signalToGuiFileXferState( VxGuidQt lclSessionId, EXferState eXferState, int param1, int param2 );
+	void						signalToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
 	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
-	void						signalToGuiFileDownloadComplete( VxGuidQt lclSessionId, QString newFileName, EXferError xferError );
+	void						signalToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
 
 private slots:
 	void						slotToGuiFileListReply( FileListReplySession* replySession );
-	void						slotToGuiFileXferState( VxGuidQt lclSessionId, EXferState eXferState, int param1, int param2 );
+	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
 	void						slotToGuiStartDownload( GuiFileXferSession * xferSession );
-	void						slotToGuiFileDownloadComplete( VxGuidQt lclSessionId, QString newFileName, EXferError xferError );
+	void						slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
 
     void						slotHomeButtonClicked( void ) override;
 	void						statusMsg( QString strMsg );
@@ -78,8 +78,8 @@ protected:
 	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * xferSession );
 	GuiFileXferSession *		widgetToFileItemInfo( FileXferWidget * item );
 
-	FileXferWidget *			findListEntryWidget( VxGuidQt fileInstance );
-	GuiFileXferSession *		findSession( VxGuidQt lclSessionId );
+	FileXferWidget *			findListEntryWidget( VxGUID fileInstance );
+	GuiFileXferSession *		findSession( VxGUID lclSessionId );
 
 	void						clearFileList( void );
 	void						moveUpOneFolder( void );

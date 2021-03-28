@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "VxGuidQt.h"
 #include "VxMyFileInfo.h"
 
 #include <PktLib/VxCommon.h>
@@ -33,7 +32,7 @@ public:
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
 						VxNetIdent *	netIdent, 
-						VxGuidQt&		lclSessionId, 
+						VxGUID&		lclSessionId, 
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
 						const char *	pFileName,
@@ -41,7 +40,7 @@ public:
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
 						VxNetIdent *	netIdent, 
-						VxGuidQt&		lclSessionId, 
+						VxGUID&		lclSessionId, 
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
 						const char *	pFileName,
@@ -49,7 +48,7 @@ public:
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
 						VxNetIdent *	netIdent, 
-						VxGuidQt&		lclSessionId, 
+						VxGUID&		lclSessionId, 
 						VxMyFileInfo&	fileInfo );
 
 	GuiFileXferSession( const GuiFileXferSession &rhs );
@@ -58,8 +57,8 @@ public:
 	QString						describeFileType( void );
 	QString						describeFileLength( void );
 
-	void						setLclSessionId( VxGuidQt lclSessionId )	{ m_LclSessionId = lclSessionId; }
-	VxGuidQt&					getLclSessionId( void )						{ return m_LclSessionId; }
+	void						setLclSessionId( VxGUID lclSessionId )	{ m_LclSessionId = lclSessionId; }
+	VxGUID&					getLclSessionId( void )						{ return m_LclSessionId; }
 
 	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
 	VxNetIdent *				getIdent( void )							{ return m_Ident; }
@@ -110,7 +109,7 @@ protected:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
 	VxNetIdent *				m_Ident;
-	VxGuidQt					m_LclSessionId;
+	VxGUID					m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;
 	QWidget *					m_Widget;
 	EXferState					m_eXferState;

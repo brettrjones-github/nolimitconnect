@@ -29,6 +29,44 @@ void AppCommon::updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange 
 }
 
 //============================================================================
+void AppCommon::toGuiContactAdded( VxNetIdent * netIdent )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactAdded( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::toGuiContactRemoved( VxGUID& onlineId )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactRemoved( client.m_UserData, onlineId );
+    }
+
+    toGuiActivityClientsUnlock();
+}
+
+//============================================================================
 //! called when friend goes offline
 void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 {
@@ -37,10 +75,7 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactOffline %s \n", netIdent->getOnlineName());
-	emit signalContactOffline( netIdent );
-
-	LogMsg( LOG_INFO, "toGuiContactOffline: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiContactOffline: toGuiActivityClientsLock" );
 	// don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
 	toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
@@ -55,7 +90,7 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 
 //============================================================================
 //! called when friend goes online
-void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, bool newContact )
+void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -71,12 +106,10 @@ void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, bool newContact )
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiContactOnline( client.m_UserData, netIdent, newContact );
+		client.m_Callback->toGuiContactOnline( client.m_UserData, netIdent, hostType, newContact );
 	}
 
 	toGuiActivityClientsUnlock();
-
-	emit signalContactOnline( netIdent, newContact );
 }
 
 //============================================================================
@@ -88,16 +121,38 @@ void AppCommon::toGuiContactNearby( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactNearby %s \n", netIdent->getOnlineName());
-	emit signalContactNearby( netIdent );
+	LogMsg( LOG_INFO, "AppCommon::toGuiContactNearby %s", netIdent->getOnlineName());
+    // don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactNearby( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
 //! called when friend leaves udp network
 void AppCommon::toGuiContactNotNearby( VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactNotNearby %s \n", netIdent->getOnlineName());
-	emit signalContactNotNearby( netIdent );
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+	LogMsg( LOG_INFO, "AppCommon::toGuiContactNotNearby %s", netIdent->getOnlineName());
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactNotNearby( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -109,16 +164,37 @@ void AppCommon::toGuiContactNameChange( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactNameChange %s \n", netIdent->getOnlineName());
-	emit signalContactNameChange( netIdent );
+	LogMsg( LOG_INFO, "AppCommon::toGuiContactNameChange %s", netIdent->getOnlineName());
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactNameChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
 //! called when description changes
 void AppCommon::toGuiContactDescChange( VxNetIdent * netIdent )
 {
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactDescChange %s \n", netIdent->getOnlineName());
-	emit signalContactDescChange( netIdent );
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+	LogMsg( LOG_INFO, "AppCommon::toGuiContactDescChange %s", netIdent->getOnlineName());
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactDescChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -131,7 +207,15 @@ void AppCommon::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactMyFriendshipChange %s \n", netIdent->getOnlineName());
-	emit signalContactMyFriendshipChange( netIdent );
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactMyFriendshipChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -144,7 +228,15 @@ void AppCommon::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactHisFriendshipChange %s \n", netIdent->getOnlineName());
-	emit signalContactHisFriendshipChange( netIdent );
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactHisFriendshipChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -156,8 +248,16 @@ void AppCommon::toGuiPluginPermissionChange( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiPluginPermissionChange %s\n", netIdent->getOnlineName());
-	emit signalContactPluginPermissionChange( netIdent );
+	LogMsg( LOG_INFO, "AppCommon::toGuiPluginPermissionChange %s", netIdent->getOnlineName());
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiPluginPermissionChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -169,8 +269,16 @@ void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactSearchFlagsChange %s\n", netIdent->getOnlineName());
-	emit signalContactSearchFlagsChange( netIdent );
+	LogMsg( LOG_INFO, "AppCommon::toGuiContactSearchFlagsChange %s", netIdent->getOnlineName()); 
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactSearchFlagsChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -182,8 +290,7 @@ void AppCommon::toGuiContactConnectionChange( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactConnectionChange %s\n", netIdent->getOnlineName());
-	//emit signalContactSearchFlagsChange( netIdent );
+	LogMsg( LOG_INFO, "AppCommon::toGuiContactConnectionChange %s ??", netIdent->getOnlineName()); // BRJ is this needed??
 }
 
 //============================================================================
@@ -209,7 +316,15 @@ void AppCommon::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactLastSessionTimeChange %s\n", netIdent->getOnlineName());
-	emit signalContactLastSessionTimeChange( netIdent );
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiContactLastSessionTimeChange( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -221,13 +336,21 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiUpdateMyIdent %s\n", netIdent->getOnlineName());
-	emit signalUpdateMyIdent( netIdent );
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiUpdateMyIdent( client.m_UserData, netIdent );
+    }
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
 //=== slot to handle corresponding signals from other threads ===//
 //============================================================================
-
+/*
 //============================================================================
 //! remove contact
 void AppCommon::slotRemoveContact( VxNetIdent * netIdent )
@@ -328,6 +451,7 @@ void AppCommon::onContactLastSessionTimeChange( VxNetIdent * netIdent )
 	LogMsg( LOG_INFO, "AppCommon::onContactLastSessionTimeChange %s\n", netIdent->getOnlineName());
 	updateFriendList( netIdent, true );
 }
+*/
 
 //============================================================================
 void AppCommon::onEngineStatusMsg( QString msg )

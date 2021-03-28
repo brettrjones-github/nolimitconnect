@@ -342,9 +342,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxLabel.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -1023,6 +1020,12 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUploads.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1392,9 +1395,6 @@
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxLabel.h">
@@ -1966,6 +1966,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUploads.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h">
+      <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2978,6 +2981,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h">
+      <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

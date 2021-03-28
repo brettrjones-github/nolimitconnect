@@ -76,8 +76,13 @@ public:
     /// Send state/status to GUI (currently just query host id)
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) = 0;
 
+    /// contact added to engine
+    virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0;
+    /// contact removed from engine
+    virtual void				toGuiContactRemoved( VxGUID& onlineId ) = 0;
+
 	/// Update contact to online state GUI
-	virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) = 0;
+	virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact = false ) = 0;
 	/// Update contact to offline state GUI
 	virtual void				toGuiContactOffline( VxNetIdent * netIdent ) = 0;
 	/// Not currently used. Notify GUI if contact is on same LAN network or is nearby

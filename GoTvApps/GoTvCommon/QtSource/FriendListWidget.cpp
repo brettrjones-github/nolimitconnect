@@ -48,11 +48,11 @@ FriendListWidget::FriendListWidget( QWidget * parent )
     connect( this, SIGNAL(signalUpdateFriend( VxNetIdent *,bool)),
                           this, SLOT(slotUpdateFriend( VxNetIdent *,bool)), Qt::QueuedConnection );
 
-    connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGuidQt)),
-                          this, SLOT(slotRefreshFriend(VxGuidQt)), Qt::QueuedConnection )
+    connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGUID)),
+                          this, SLOT(slotRefreshFriend(VxGUID)), Qt::QueuedConnection )
             ;
-    connect( &m_MyApp, SIGNAL(signalAssetViewMsgAction(EAssetAction,VxGuidQt,int)),
-                          this, SLOT(slotAssetViewMsgAction(EAssetAction,VxGuidQt,int)), Qt::QueuedConnection );
+    connect( &m_MyApp, SIGNAL(signalAssetViewMsgAction(EAssetAction,VxGUID,int)),
+                          this, SLOT(slotAssetViewMsgAction(EAssetAction,VxGUID,int)), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -62,7 +62,7 @@ MyIcons&  FriendListWidget::getMyIcons( void )
 }
 
 //============================================================================
-void FriendListWidget::slotAssetViewMsgAction( EAssetAction eAssetAction, VxGuidQt onlineIdIn, int pos0to100000 )
+void FriendListWidget::slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineIdIn, int pos0to100000 )
 {
 	VxGUID onlineId;
 	uint64_t hiPart = onlineIdIn.getVxGUIDHiPart();
@@ -285,7 +285,7 @@ void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTime
 }
 
 //============================================================================
-void FriendListWidget::slotRefreshFriend( VxGuidQt friendId )
+void FriendListWidget::slotRefreshFriend( VxGUID friendId )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;

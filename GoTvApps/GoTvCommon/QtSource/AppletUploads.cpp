@@ -42,8 +42,8 @@ AppletUploads::AppletUploads( AppCommon& app, QWidget *	parent )
     connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiStartUpload(GuiFileXferSession *)),			this, SLOT(slotToGuiStartUpload(GuiFileXferSession *)) );
-	connect( this, SIGNAL(signalToGuiFileXferState(VxGuidQt,EXferState,int,int)),	this, SLOT(slotToGuiFileXferState(VxGuidQt,EXferState,int,int)) );
-	connect( this, SIGNAL(signalToGuiFileUploadComplete(VxGuidQt,int)),				this, SLOT(slotToGuiFileUploadComplete(VxGuidQt,int)) );
+	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID,EXferState,int,int)),	this, SLOT(slotToGuiFileXferState(VxGUID,EXferState,int,int)) );
+	connect( this, SIGNAL(signalToGuiFileUploadComplete(VxGUID,int)),				this, SLOT(slotToGuiFileUploadComplete(VxGUID,int)) );
 	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
 	checkDiskSpace();
     m_MyApp.activityStateChange( this, true );
@@ -111,7 +111,7 @@ GuiFileXferSession * AppletUploads::widgetToSession( FileXferWidget * item )
 }
 
 //============================================================================
-GuiFileXferSession * AppletUploads::findSession( VxGuidQt lclSessionId )
+GuiFileXferSession * AppletUploads::findSession( VxGUID lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -128,7 +128,7 @@ GuiFileXferSession * AppletUploads::findSession( VxGuidQt lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * AppletUploads::findListEntryWidget( VxGuidQt lclSessionId )
+FileXferWidget * AppletUploads::findListEntryWidget( VxGUID lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -155,7 +155,7 @@ FileXferWidget * AppletUploads::addUpload( GuiFileXferSession * poSession )
 }
 
 //============================================================================
-bool AppletUploads::isUploadInProgress( VxGuidQt fileInstance )
+bool AppletUploads::isUploadInProgress( VxGUID fileInstance )
 {
 	if( findSession( fileInstance ) )
 	{
@@ -176,7 +176,7 @@ void AppletUploads::slotToGuiStartUpload( GuiFileXferSession * poSession )
 }
 
 //============================================================================
-void AppletUploads::slotToGuiFileXferState(	VxGuidQt		lclSessionId, 
+void AppletUploads::slotToGuiFileXferState(	VxGUID		lclSessionId, 
 												EXferState		eXferState, 
 												int				param1, 
 												int				param2  )
@@ -189,7 +189,7 @@ void AppletUploads::slotToGuiFileXferState(	VxGuidQt		lclSessionId,
 }
 
 //============================================================================
-void AppletUploads::slotToGuiFileUploadComplete(	VxGuidQt		lclSessionId, 
+void AppletUploads::slotToGuiFileUploadComplete(	VxGUID		lclSessionId, 
 													int				xferError )
 {
 	FileXferWidget * item = findListEntryWidget( lclSessionId );
@@ -211,7 +211,7 @@ void AppletUploads::toGuiStartUpload( void * userData, GuiFileXferSession * xfer
 void AppletUploads::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
 	Q_UNUSED( userData );
-	VxGuidQt myLclSession( lclSessionId );
+	VxGUID myLclSession( lclSessionId );
 	emit signalToGuiFileXferState( myLclSession, eXferState, param1, param2 );
 }
 
@@ -219,7 +219,7 @@ void AppletUploads::toGuiFileXferState( void * userData, VxGUID& lclSessionId, E
 void AppletUploads::toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError )
 {
 	Q_UNUSED( userData );
-	VxGuidQt myLclSession( lclSession );
+	VxGUID myLclSession( lclSession );
 	emit signalToGuiFileUploadComplete( myLclSession, (int)xferError );
 }
 

@@ -17,6 +17,7 @@
 #include "AppletBase.h"
 
 class GuiOfferSession;
+class GuiUser;
 class VidWidget;
 class VxLabel;
 class VxPushButton;
@@ -49,14 +50,16 @@ signals:
 	void						signalToGuiRxedPluginOffer( GuiOfferSession * offerSession );
 	void						signalToGuiRxedOfferReply( GuiOfferSession * offerSession );
 	void						signalToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-	void						signalToGuiContactOnline( VxNetIdent * hisIdent, bool newContact );
-	void						signalToGuiContactOffline( VxNetIdent * hisIdent );
 
 protected slots:
+    void				        slotUserAdded( GuiUser* user ); 
+    void				        slotUserRemoved( VxGUID onlineId ); 
+    void                        slotUserUpdated( GuiUser* user );
+    void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
+
 	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
 	void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
 	void						slotToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-	void						slotToGuiContactOffline( VxNetIdent * hisIdent );
 
 private:
 	void						setupAppletPeerBase( void );
@@ -65,8 +68,8 @@ protected:
     virtual void				toGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer );
     virtual void				toGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerReply );
     virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ) override;
-    virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * friendIdent, bool newContact ) override;
-    virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * friendIdent ) override;
+    //virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * friendIdent, EHostType hostType, bool newContact ) override;
+    //virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * friendIdent ) override;
 	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
 															VxGUID&			onlineId, 
                                                             uint8_t *		pu8Jpg,

@@ -15,12 +15,9 @@
 //============================================================================
 
 #include "FriendList.h"
-#include "VxGuidQt.h"
 
-#include <CoreLib/VxTimer.h>
-
-#include <CoreLib/VxTimer.h>
 #include <CoreLib/AssetDefs.h>
+#include <CoreLib/VxTimer.h>
 
 #include <QListWidget>
 
@@ -56,8 +53,8 @@ signals:
 
 private slots:
 	void						slotUpdateFriend( VxNetIdent * netIdent, bool sessionTimeChange );
-	void						slotRefreshFriend( VxGuidQt friendId );
-	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGuidQt onlineId, int pos );
+	void						slotRefreshFriend( VxGUID friendId );
+	void						slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineId, int pos );
 	void						slotItemClicked(QListWidgetItem *);
 	void						slotRefreshFriendList( EFriendViewType eWhichFriendsToShow );
 	void						slotFriendListItemClicked( FriendListEntryWidget* widget );

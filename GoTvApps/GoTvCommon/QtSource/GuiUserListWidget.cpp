@@ -29,13 +29,18 @@
 GuiUserListWidget::GuiUserListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
+, m_UserMgr( m_MyApp.getUserMgr() )
 , m_Engine( m_MyApp.getEngine() )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)), Qt::QueuedConnection );
 
+    connect( this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
     connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 }
 
@@ -56,6 +61,126 @@ HostListEntryWidget* GuiUserListWidget::sessionToWidget( GuiHostSession* hostSes
     hostItem->updateWidgetFromInfo();
 
     return hostItem;
+}
+
+//============================================================================
+bool GuiUserListWidget::isUserAListMatch( GuiUser* user )
+{
+    bool isMatch = false;
+    if( user )
+    {
+        if( eUserListViewTypeFriends == m_ViewType )
+        {
+            if( user->isFriend() || user->isAdmin() )
+            {
+                isMatch = true;
+            }
+        }
+        else if( eUserListViewTypeGroupHosted == m_ViewType )
+        {
+            if( user->isGroupHosted() )
+            {
+                isMatch = true;
+            }
+        }
+        else if( eUserListViewTypeChatRoomHosted == m_ViewType )
+        {
+            if( user->isChatRoomHosted() )
+            {
+                isMatch = true;
+            }
+        }
+        else if( eUserListViewTypeRandomConnectHosted == m_ViewType )
+        {
+            if( user->isRandomConnectHosted() )
+            {
+                isMatch = true;
+            }
+        }
+    }
+
+    return isMatch;
+}
+
+//============================================================================
+void GuiUserListWidget::slotUserAdded( GuiUser* user )
+{
+    LogMsg( LOG_DEBUG, "GuiUserListWidget::slotUserAdded" );
+    if( isUserAListMatch( user ) )
+    {
+        refreshUserList();
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::slotUserRemoved( VxGUID onlineId )
+{
+    refreshUserList();
+}
+
+//============================================================================
+void GuiUserListWidget::slotUserUpdated( GuiUser* user )
+{
+    LogMsg( LOG_DEBUG, "GuiUserListWidget::slotUserUpdated" );
+    if( isUserAListMatch( user ) )
+    {
+        refreshUserList();
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::slotUserOnlineStatus( GuiUser* user, bool isOnline )
+{
+    LogMsg( LOG_DEBUG, "GuiUserListWidget::slotUserOnlineStatus" );
+    if( isUserAListMatch( user ) )
+    {
+        refreshUserList();
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::showEvent( QShowEvent * ev )
+{
+    QListWidget::showEvent( ev );
+    if( m_FirstShow )
+    {
+        m_FirstShow = false;
+        setUserListViewType( eUserListViewTypeFriends );
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::setUserListViewType( EUserListViewType viewType )
+{
+    if( viewType != m_ViewType )
+    {
+        m_ViewType = viewType;
+        refreshUserList();
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::refreshUserList( void )
+{
+    clearUserList();
+    m_UserMgr.lockUserMgr();
+    std::map<VxGUID, GuiUser*>& userList = m_UserMgr.getUserList();
+    for( auto iter = userList.begin(); iter != userList.end(); ++iter )
+    {
+        if( isUserAListMatch( iter->second ) )
+        {
+            addUser( iter->second );
+        }
+    }
+
+    m_UserMgr.unlockUserMgr();
+    update();
+}
+
+//============================================================================
+void GuiUserListWidget::addUser( GuiUser* user )
+{
+    LogMsg( LOG_DEBUG, "GuiUserListWidget::addUser" );
 }
 
 //============================================================================
@@ -238,11 +363,12 @@ HostListEntryWidget* GuiUserListWidget::addOrUpdateHostSession( GuiHostSession* 
 }
 
 //============================================================================
-void GuiUserListWidget::clearHostList( void )
+void GuiUserListWidget::clearUserList( void )
 {
     for(int i = 0; i < count(); ++i)
     {
         QListWidgetItem* hostItem = item(i);
+
         delete ((HostListEntryWidget *)hostItem);
     }
 

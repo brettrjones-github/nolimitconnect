@@ -299,6 +299,7 @@ enum EHostType
     eHostTypeGroup = 3,
     eHostTypeNetwork = 4,
     eHostTypeRandomConnect = 5,
+    eHostTypePeerUser = 6,
 
     eMaxHostType
 };

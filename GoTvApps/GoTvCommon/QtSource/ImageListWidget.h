@@ -13,13 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
-#include "VxGuidQt.h"
-
-#include <CoreLib/VxTimer.h>
-
-#include <CoreLib/VxTimer.h>
 #include <CoreLib/AssetDefs.h>
+#include <CoreLib/VxTimer.h>
 
 #include <QListWidget>
 
