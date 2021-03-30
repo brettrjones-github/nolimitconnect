@@ -44,7 +44,7 @@ AppletPersonalRecorder::~AppletPersonalRecorder()
 void AppletPersonalRecorder::setupMultiSessionActivity( void )
 {
     ui.m_SessionWidget->setIsPersonalRecorder( true );
-    ui.m_SessionWidget->setIdents( &m_Engine.getMyPktAnnounce(), &m_Engine.getMyPktAnnounce() );
+    ui.m_SessionWidget->setIdents( m_UserMgr.getMyIdent(), m_UserMgr.getMyIdent() );
     ui.m_SessionWidget->setEntryMode( eAssetTypeUnknown );
 }
 

@@ -18,7 +18,7 @@
 
 #include "ui_BottomBarWidget.h"
 
-class Friend;
+class GuiUser;
 class GuiOfferSession;
 class QLabel;
 class AppCommon;

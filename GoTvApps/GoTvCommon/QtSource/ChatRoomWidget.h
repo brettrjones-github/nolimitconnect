@@ -29,7 +29,7 @@ public:
 	ChatRoomWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
 	virtual ~ChatRoomWidget();
 
-	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
+	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						setEntryMode( EAssetType inputMode );
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );

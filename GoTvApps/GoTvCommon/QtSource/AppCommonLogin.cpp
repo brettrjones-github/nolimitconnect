@@ -423,29 +423,3 @@ void AppCommon::showUserNameInTitle()
     strTitle += getAccountUserName().c_str();
     setWindowTitle( strTitle );
 }
-
-//============================================================================
-void AppCommon::checkForIniSettings( VxNetIdent * netIdent, std::string& strNetworkName )
-{
-    if( m_AppSettings.m_u16TcpPort )
-    {
-        m_Engine.getEngineSettings().setTcpIpPort( m_AppSettings.m_u16TcpPort );
-        netIdent->m_DirectConnectId.setPort( m_AppSettings.m_u16TcpPort );
-        m_Engine.getNetStatusAccum().setIpPort( m_AppSettings.m_u16TcpPort );
-    }
-
-    if( 0 != m_AppSettings.m_strUserName.length() )
-    {
-        netIdent->setOnlineName( m_AppSettings.m_strUserName.c_str() );
-    }
-
-    if( 0 != m_AppSettings.m_strUserGuid.length() )
-    {
-        netIdent->m_DirectConnectId.setVxGUID( m_AppSettings.m_strUserGuid.c_str() );
-    }
-
-    if( 0 != m_AppSettings.m_strNetworkName.length() )
-    {
-        strNetworkName = m_AppSettings.m_strNetworkName;
-    }
-}

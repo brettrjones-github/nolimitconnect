@@ -49,13 +49,14 @@ void AppCommon::toGuiScanSearchComplete( EScanType eScanType )
 }
 
 //============================================================================
-void AppCommon::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent )
+void AppCommon::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdentIn )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
+    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 	LogMsg( LOG_INFO, "toGuiScanResultSuccess: toGuiActivityClientsLock\n" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
@@ -74,13 +75,14 @@ void AppCommon::toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIde
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode )
+void AppCommon::toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdentIn, int errCode )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
+    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 	LogMsg( LOG_INFO, "toGuiSearchResultError: toGuiActivityClientsLock\n" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
@@ -99,15 +101,16 @@ void AppCommon::toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIde
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdent, 
-												uint8_t *			pu8JpgData, 
-												uint32_t				u32JpgDataLen )
+void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdentIn, 
+												uint8_t *		pu8JpgData, 
+												uint32_t		u32JpgDataLen )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
+    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 	LogMsg( LOG_INFO, "toGuiSearchResultProfilePic: toGuiActivityClientsLock\n" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
@@ -126,10 +129,10 @@ void AppCommon::toGuiSearchResultProfilePic(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdent, 		
+void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn, 		
 												VxGUID&			lclSessionId, 
-												uint8_t				u8FileType, 
-												uint64_t				u64FileLen, 
+												uint8_t			u8FileType, 
+												uint64_t		u64FileLen, 
 												const char *	pFileName )
 {
 	if( VxIsAppShuttingDown() )
@@ -137,6 +140,7 @@ void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdent,
 		return;
 	}
 
+    GuiUser * netIdent = m_UserMgr.getUser( netIdentIn->getMyOnlineId() );
 	std::vector<ToGuiActivityClient>::iterator iter;
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 	LogMsg( LOG_INFO, "toGuiSearchResultFileSearch: toGuiActivityClientsLock\n" );

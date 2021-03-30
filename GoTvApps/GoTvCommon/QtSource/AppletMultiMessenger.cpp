@@ -36,7 +36,7 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     setTitleBarText( DescribeApplet( m_EAppletType ) );
     setBackButtonVisibility( false );
 
-    ui.m_FriendsView->setIcon( eMyIconEyeAll );
+    ui.m_FriendsView->setIcon( eMyIconEyeFriends );
     ui.m_GroupHosts->setIcon( eMyIconEyeGroup );
     ui.m_ChatRoomHosts->setIcon( eMyIconEyeChatRoom );
     ui.m_RandomConnectHosts->setIcon( eMyIconEyeRandomConnect );
@@ -82,13 +82,12 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     connect( ui.m_SessionWidget,	    SIGNAL(signalUserInputButtonClicked()),	this,	SLOT(slotUserInputButtonClicked()) );
 
 
-    connect( this, SIGNAL(signalToGuiContactOnline(VxNetIdent *,bool)),				    this,			    SLOT(slotToGuiContactOnlineMultisession(VxNetIdent *,bool)) );
-    connect( this, SIGNAL(signalToGuiContactOffline(VxNetIdent *)),				        this,				SLOT(slotToGuiContactOfflineMultisession(VxNetIdent *)) );
+    connect( &m_UserMgr,    SIGNAL(signalUserOnlineStatus(GuiUser*,bool)),				         this,			    SLOT(slotUserOnlineStatus(GuiUser*,bool)) );
 
-    connect( this, SIGNAL(signalToGuiSetGameValueVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );
-    connect( this, SIGNAL(signalToGuiSetGameActionVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameActionVar(long,long)) );
-    connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	        this,				SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
-    connect( this, SIGNAL(signalToGuiMultiSessionAction(VxGUID,EMSessionAction,int)),	this,		        SLOT(slotToGuiMultiSessionAction(VxGUID,EMSessionAction,int)) );
+    connect( this,          SIGNAL(signalToGuiSetGameValueVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );
+    connect( this,          SIGNAL(signalToGuiSetGameActionVar(long,long)),				        &m_TodGameLogic,	SLOT(slotToGuiSetGameActionVar(long,long)) );
+    connect( this,          SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	        this,				SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
+    connect( this,          SIGNAL(signalToGuiMultiSessionAction(VxGUID,EMSessionAction,int)),	this,		        SLOT(slotToGuiMultiSessionAction(VxGUID,EMSessionAction,int)) );
 
 
     /*
@@ -107,7 +106,7 @@ AppletMultiMessenger::~AppletMultiMessenger()
 }
 
 //============================================================================
-void AppletMultiMessenger::setupMultiSessionActivity( VxNetIdent * hisIdent )
+void AppletMultiMessenger::setupMultiSessionActivity( GuiUser * hisIdent )
 {
 	m_HisIdent = hisIdent;
 
@@ -116,7 +115,7 @@ void AppletMultiMessenger::setupMultiSessionActivity( VxNetIdent * hisIdent )
 
 	m_VidChatWidget->setRecordFriendName( m_HisIdent->getOnlineName() );
 
-	ui.m_SessionWidget->setIdents( &m_Engine.getMyPktAnnounce(), hisIdent );
+	ui.m_SessionWidget->setIdents( m_UserMgr.getMyIdent(), hisIdent );
 
 	m_TodGameLogic.setGuiWidgets( m_HisIdent, m_TodGameWidget );
 
@@ -218,38 +217,18 @@ void AppletMultiMessenger::showReasonAccessNotAllowed( void )
 }
 
 //============================================================================
-void AppletMultiMessenger::slotToGuiContactOnlineMultisession( VxNetIdent * hisIdent, bool newContact )
+void AppletMultiMessenger::slotUserOnlineStatus( GuiUser* user, bool isOnline )
 {
-    if( !hisIdent || !hisIdent->isIdentValid() )
+    if( !user || !user->isIdentValid() )
     {
-        LogMsg( LOG_ERROR, "AppletMultiMessenger online invalid param" );
+        LogMsg( LOG_ERROR, "AppletMultiMessenger slotUserOnlineStatus invalid param" );
         return;
     }
 
-    m_UserMgr.updateUser( hisIdent );
-    if( m_UserMgr.userIsInSession( hisIdent->getMyOnlineId() ) || hisIdent->isFriend() )
+    if( m_UserMgr.isUserInSession( user->getMyOnlineId() ) || user->isFriend() )
 	{
-		QString statMsg = hisIdent->getOnlineName();
-		statMsg += QObject::tr( " is online" );
-		setStatusMsg( statMsg );
-
-		checkForSendAccess( false );
-	}
-}
-
-//============================================================================
-void AppletMultiMessenger::slotToGuiContactOfflineMultisession( VxNetIdent * hisIdent )
-{
-    if( !hisIdent || !hisIdent->isIdentValid() )
-    {
-        LogMsg( LOG_ERROR, "AppletMultiMessenger offline invalid param" );
-        return;
-    }
-
-    if( m_UserMgr.userIsInSession( hisIdent->getMyOnlineId() ) || hisIdent->isFriend() )
-    {
-		QString statMsg = m_HisIdent->getOnlineName();
-		statMsg += QObject::tr( " went offline" );
+		QString statMsg = user->getOnlineName();
+		statMsg += isOnline ? QObject::tr( " is online" ) : QObject::tr( " went offline" );
 		setStatusMsg( statMsg );
 
 		checkForSendAccess( false );

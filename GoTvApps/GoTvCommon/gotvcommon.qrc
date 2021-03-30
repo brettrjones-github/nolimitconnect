@@ -287,5 +287,10 @@
         <file>Resources/bars_7_hosted_direct.png</file>
         <file>Resources/bars_7_hosted_with_relay.png</file>
         <file>Resources/client-random-connect.svg</file>
+        <file>Resources/eye-friends.svg</file>
+        <file>Resources/offer-file.svg</file>
+        <file>Resources/offer-friendship.svg</file>
+        <file>Resources/offer-video-chat.svg</file>
+        <file>Resources/offer-voice-phone.svg</file>
     </qresource>
 </RCC>

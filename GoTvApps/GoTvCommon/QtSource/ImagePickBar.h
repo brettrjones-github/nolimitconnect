@@ -17,7 +17,7 @@
 #include "ui_ImagePickBar.h"
 #include <QListWidgetItem>
 
-class Friend;
+class GuiUser;
 class GuiOfferSession;
 class QLabel;
 class AppCommon;

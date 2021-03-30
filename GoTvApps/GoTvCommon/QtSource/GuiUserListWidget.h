@@ -35,7 +35,7 @@ class AppCommon;
 class GuiUser;
 class GuiUserMgr;
 class GuiHostSession;
-class HostListEntryWidget;
+class UserListEntryWidget;
 class MyIcons;
 class P2PEngine;
 class PluginSetting;
@@ -53,18 +53,18 @@ public:
     void                        clearUserList( void );
 
     void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
-    HostListEntryWidget*        addOrUpdateHostSession( GuiHostSession* hostSession );
+    UserListEntryWidget*        addOrUpdateHostSession( GuiHostSession* hostSession );
 
     GuiHostSession*             findSession( VxGUID& lclSessionId );
-    HostListEntryWidget*        findListEntryWidgetBySessionId( VxGUID& sessionId );
-    HostListEntryWidget*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    UserListEntryWidget*        findListEntryWidgetBySessionId( VxGUID& sessionId );
+    UserListEntryWidget*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
     void                        setUserListViewType( EUserListViewType viewType );
 
 signals:
-    void                        signalIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
-    void                        signalMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
-    void                        signalJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    void                        signalAvatarButtonClicked( GuiHostSession* hostSession, UserListEntryWidget* hostItem );
+    void                        signalFriendshipButtonClicked( GuiHostSession* hostSession, UserListEntryWidget* hostItem );
+    void                        signalMenuButtonClicked( GuiHostSession* hostSession, UserListEntryWidget* hostItem ); 
 
 protected slots:
     void				        slotUserAdded( GuiUser* user ); 
@@ -74,22 +74,22 @@ protected slots:
 
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotHostListItemClicked( QListWidgetItem* hostItem );
-    void                        slotIconButtonClicked( HostListEntryWidget* hostItem );
-    void                        slotMenuButtonClicked( HostListEntryWidget* hostItem );
-    void                        slotJoinButtonClicked( HostListEntryWidget* hostItem );
+    void                        slotAvatarButtonClicked( UserListEntryWidget* hostItem );
+    void                        slotFriendshipButtonClicked( UserListEntryWidget* hostItem );
+    void                        slotMenuButtonClicked( UserListEntryWidget* hostItem ); 
 
 protected:
     virtual void				showEvent( QShowEvent * ev ) override;
 
     bool                        isUserAListMatch( GuiUser* user );
 
-    HostListEntryWidget*        sessionToWidget( GuiHostSession* hostSession );
-    GuiHostSession*				widgetToSession( HostListEntryWidget* hostItem );
+    UserListEntryWidget*        sessionToWidget( GuiHostSession* hostSession );
+    GuiHostSession*				widgetToSession( UserListEntryWidget* hostItem );
 
-    virtual void                onHostListItemClicked( HostListEntryWidget* hostItem );
-    virtual void                onIconButtonClicked( HostListEntryWidget* hostItem );
-    virtual void                onMenuButtonClicked( HostListEntryWidget* hostItem );
-    virtual void                onJoinButtonClicked( HostListEntryWidget* hostItem );
+    virtual void                onHostListItemClicked( UserListEntryWidget* hostItem );
+    virtual void                onAvatarButtonClicked( UserListEntryWidget* hostItem );
+    virtual void                onFriendshipButtonClicked( UserListEntryWidget* hostItem );
+    virtual void                onMenuButtonClicked( UserListEntryWidget* hostItem );
 
     void                        refreshUserList( void );
     void                        addUser( GuiUser* user );

@@ -37,7 +37,7 @@ ChatRoomWidget::~ChatRoomWidget()
 }
 
 //============================================================================
-void ChatRoomWidget::setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent )
+void ChatRoomWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 {
     getSessionChatEntry()->setIdents( myIdent, hisIdent );
     getSessionHistoryList()->setIdents( myIdent, hisIdent );

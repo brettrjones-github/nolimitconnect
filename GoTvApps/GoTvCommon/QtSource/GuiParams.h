@@ -55,10 +55,11 @@ public:
     //! Describe type of plugin
     static QString				describePluginAccess( EPluginAccess accessState );
     //! Describe action user can take for given plugin and access
-    static QString				describePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess );
+    static QString				describePluginAction( GuiUser * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess );
     static QString				describePluginPermission( EFriendState ePluginPermission );
     static QString				describePluginType( EPluginType ePluginType );
     static std::string			describePlugin( EPluginType ePluginType, bool rmtInitiated );
+    static QString				describePluginOffer( EPluginType ePluginType );
     static QString				describeEXferState( EXferState xferState );
     static QString				describeEXferError( EXferError xferError );
     static QString				describeFileLength( uint64_t fileLen );
@@ -68,7 +69,7 @@ public:
     static QString              describeStatus( EHostJoinStatus hostStatus );
     static QString              describeStatus( EHostSearchStatus hostStatus );
     static QString				describeResponse( EOfferResponse eOfferResponse );
-
+    static QString				describeFriendship( EFriendState friendState );
 
 protected:
 

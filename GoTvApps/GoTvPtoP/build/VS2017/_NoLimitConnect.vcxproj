@@ -966,6 +966,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1004,9 +1009,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\Friend.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp">
@@ -1227,15 +1229,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VidWidget.cpp">
@@ -1477,6 +1470,7 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\TodGameWidget.ui">
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HomeWindow.ui">
@@ -1593,6 +1587,7 @@
     <None Include="..\..\..\GoTvCommon\Resources\emoj39.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\emoj40.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\emoj41.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\eye-friends.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-audio.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-folder-cancel.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-folder-locked.svg" />
@@ -1640,6 +1635,11 @@
     <None Include="..\..\..\GoTvCommon\Resources\motion-alarm.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\motion-video-record.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\notepad.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\offer-file.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\offer-friendship.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\offer-truth-or-dare.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\offer-video-chat.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\offer-voice-phone.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\phone.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\play.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\plugin.svg" />
@@ -2103,7 +2103,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
@@ -2222,6 +2221,16 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareControlInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
@@ -2245,7 +2254,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\Friend.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h">
@@ -2397,13 +2405,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityInterface.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferInterface.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareControlInterface.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\UserProfile.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VidWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

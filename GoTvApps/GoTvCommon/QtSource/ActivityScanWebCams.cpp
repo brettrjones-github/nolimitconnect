@@ -46,7 +46,7 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
 
     connectBarWidgets();
 
-    connect( this, SIGNAL(signalNewWebCamSession( VxNetIdent * )), this, SLOT(slotNewWebCamSession( VxNetIdent * )));
+    connect( this, SIGNAL(signalNewWebCamSession( GuiUser * )), this, SLOT(slotNewWebCamSession( GuiUser * )));
     connect( this, SIGNAL(signalPlayVideoFrame( QImage, int )), this, SLOT(slotPlayVideoFrame( QImage, int )));
     connect( this, SIGNAL(signalPlayAudio(unsigned short *, unsigned short)), this, SLOT(signalPlayAudio(unsigned short *, unsigned short)));
 
@@ -119,7 +119,7 @@ void ActivityScanWebCams::slotSearchComplete()
 }
 
 //============================================================================
-void ActivityScanWebCams::setupIdentWidget( VxNetIdent * netIdent )
+void ActivityScanWebCams::setupIdentWidget( GuiUser * netIdent )
 {
 	m_HisIdent = netIdent;
 	IdentWidget * poIdentWidget = ui.FriendIdentWidget;
@@ -137,7 +137,7 @@ void ActivityScanWebCams::setupIdentWidget( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void ActivityScanWebCams::toGuiScanResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent )
+void ActivityScanWebCams::toGuiScanResultSuccess( void * userData, EScanType eScanType, GuiUser * netIdent )
 {
 	Q_UNUSED( userData );
 	if( eScanTypeCamServer == eScanType )
@@ -147,7 +147,7 @@ void ActivityScanWebCams::toGuiScanResultSuccess( void * userData, EScanType eSc
 }
 
 //============================================================================
-void ActivityScanWebCams::slotNewWebCamSession( VxNetIdent * netIdent )
+void ActivityScanWebCams::slotNewWebCamSession( GuiUser * netIdent )
 {
 	m_ScanList.push_back( netIdent );
 	showNextCam();
@@ -185,7 +185,7 @@ void ActivityScanWebCams::updateCountdownGui()
 }
 
 //============================================================================
-void ActivityScanWebCams::doCamConnect( VxNetIdent * netIdent )
+void ActivityScanWebCams::doCamConnect( GuiUser * netIdent )
 {
 	if( 0 != m_HisIdent )
 	{

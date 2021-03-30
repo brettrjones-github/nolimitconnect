@@ -48,6 +48,8 @@ signals:
 	void						signalToGuiMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos );
 
 protected slots:
+    void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
+
     void						slotEyeHostButtonClicked( void );
     void						slotEyeSessionButtonClicked( void );
 
@@ -60,8 +62,6 @@ protected slots:
 
 	void						slotToGuiMultiSessionAction( VxGUID onlineId, EMSessionAction mSessionAction, int pos );
 	void						slotToGuiPluginSessionEnded(GuiOfferSession * offerSession );
-	void						slotToGuiContactOnlineMultisession( VxNetIdent * hisIdent, bool newContact );
-	void						slotToGuiContactOfflineMultisession( VxNetIdent * hisIdent );
 
 	void						slotUserInputButtonClicked( void );
 
@@ -80,7 +80,7 @@ protected:
 	// called from session logic
     virtual void				onInSession( bool isInSession ) override;
 
-	void						setupMultiSessionActivity(  VxNetIdent * hisIdent );
+	void						setupMultiSessionActivity( GuiUser * hisIdent );
 	void						setStatusMsg( QString strStatus );
 
 	void						toGuiSetGameValueVar(	void *		    userData, 

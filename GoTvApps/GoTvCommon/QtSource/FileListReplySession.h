@@ -33,41 +33,39 @@ class FileListReplySession : public QObject
 public:
 	FileListReplySession();
 	FileListReplySession(	EPluginType		ePluginType, 
-							VxNetIdent *	netIdent, 
-							uint8_t				u8FileType, 
-							uint64_t				u64FileLen, 
+                            GuiUser *	    netIdent, 
+							uint8_t			u8FileType, 
+							uint64_t		u64FileLen, 
 							const char *	pFileName,
-							uint8_t *			fileHashData );
+							uint8_t *		fileHashData );
     FileListReplySession(	EPluginType		ePluginType,
-                            VxNetIdent *	netIdent,
-                            VxMyFileInfo&    fileInfo );
+                            GuiUser *	    netIdent,
+                            VxMyFileInfo&   fileInfo );
 	FileListReplySession(const FileListReplySession& rhs);
 	FileListReplySession& operator=(const FileListReplySession& rhs); 
 
-    void						setIdent( VxNetIdent * ident )			{ m_Ident = ident; }
-    VxNetIdent *				getIdent( void )						{ return m_Ident; }
+    void						setIdent( GuiUser * ident )			    { m_Ident = ident; }
+    GuiUser *				    getIdent( void )						{ return m_Ident; }
 
     void						setFileInfo( VxMyFileInfo& fileInfo )	{ m_FileInfo = fileInfo; }
     VxMyFileInfo&				getFileInfo( void )						{ return m_FileInfo; }
 
     QString&					getFullFileName( void )					{ return m_FileInfo.getFullFileName(); }
-    void						setFileType( uint8_t	fileType )				{ m_FileInfo.setFileType( fileType ); }
-    uint8_t							getFileType( void ) const				{ return m_FileInfo.getFileType(); }
-    void						setFileLength( uint64_t fileLen )			{ m_FileInfo.setFileLength( fileLen ); }
-    uint64_t							getFileLength( void ) const				{ return m_FileInfo.getFileLength(); }
+    void						setFileType( uint8_t	fileType )		{ m_FileInfo.setFileType( fileType ); }
+    uint8_t						getFileType( void ) const				{ return m_FileInfo.getFileType(); }
+    void						setFileLength( uint64_t fileLen )		{ m_FileInfo.setFileLength( fileLen ); }
+    uint64_t					getFileLength( void ) const				{ return m_FileInfo.getFileLength(); }
     void						setFileHashId( VxSha1Hash& id )			{ m_FileInfo.getFileHashId() = id; }
-    void						setFileHashId( uint8_t * fileHashData )		{ m_FileInfo.setFileHashId( fileHashData ); }
+    void						setFileHashId( uint8_t * fileHashData )	{ m_FileInfo.setFileHashId( fileHashData ); }
     VxSha1Hash&					getFileHashId( void )					{ return m_FileInfo.getFileHashId(); }
 
     void						setJustFileName( QString fileName )		{ m_FileInfo.setJustFileName( fileName ); }
     QString&					getJustFileName( void )					{ return m_FileInfo.getJustFileName(); }
 
-
-
 	//=== vars ===//
-    EPluginType                 m_ePluginType;
+    EPluginType                 m_ePluginType{ ePluginTypeInvalid };
 
 protected:
-    VxNetIdent *                m_Ident;
-    VxMyFileInfo					m_FileInfo;
+    GuiUser *                   m_Ident{ nullptr };
+    VxMyFileInfo				m_FileInfo;
 };

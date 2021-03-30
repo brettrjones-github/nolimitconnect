@@ -19,7 +19,7 @@
 #include <PktLib/VxCommon.h>
 
 #include <QDialog>
-#include "Friend.h"
+#include "GuiUser.h"
 #include "ui_AppletPeerReplyOfferFile.h"
 
 class AppCommon;

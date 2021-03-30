@@ -49,15 +49,14 @@ void AppletPeerBase::onActivityFinish( void )
 //============================================================================
 void AppletPeerBase::setupAppletPeerBase( void )
 {
-    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)), Qt::QueuedConnection );
-    connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)), Qt::QueuedConnection );
-    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)), Qt::QueuedConnection );
-    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)), Qt::QueuedConnection );
+    connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)) );
+    connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)) );
+    connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)) );
+    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)) );
 
 	connect( this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this,	SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),		this,	SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)), Qt::QueuedConnection );
 	connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this,	SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)), Qt::QueuedConnection );
-	connect( this, SIGNAL(signalToGuiContactOffline(VxNetIdent *)),				this,	SLOT(slotToGuiContactOffline(VxNetIdent *)), Qt::QueuedConnection );
 
 	m_Engine.fromGuiMuteMicrophone( false );
 	m_Engine.fromGuiMuteSpeaker( false );
@@ -86,6 +85,10 @@ void AppletPeerBase::slotUserUpdated( GuiUser* user )
 void AppletPeerBase::slotUserOnlineStatus( GuiUser* user, bool isOnline )
 {
     LogMsg( LOG_DEBUG, "AppletPeerBase::slotUserOnlineStatus" );
+    if( !isOnline )
+    {
+        m_OfferSessionLogic.toGuiContactOffline( user );
+    }
 }
 
 //============================================================================
@@ -210,28 +213,6 @@ void AppletPeerBase::slotToGuiPluginSessionEnded( GuiOfferSession * offer )
 	//handleSessionEnded( offerResponse, this );
 }; 
 
-/*
-//============================================================================
-void AppletPeerBase::toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, bool newContact )
-{
-	Q_UNUSED( callbackData );
-	emit signalToGuiContactOnline( netIdent, newContact );
-}; 
-
-//============================================================================
-void AppletPeerBase::slotToGuiContactOffline( VxNetIdent * netIdent )
-{
-	m_OfferSessionLogic.toGuiContactOffline( netIdent );
-}
-
-//============================================================================
-void AppletPeerBase::toGuiContactOffline( void * callbackData, VxNetIdent * friendIdent )
-{
-	Q_UNUSED( callbackData );
-	emit signalToGuiContactOffline( friendIdent );
-}; 
-*/
-
 //============================================================================
 void AppletPeerBase::toGuiClientPlayVideoFrame(	void *			userData, 
 												VxGUID&			onlineId, 
@@ -246,11 +227,11 @@ void AppletPeerBase::toGuiClientPlayVideoFrame(	void *			userData,
 }
 
 //============================================================================
-void AppletPeerBase::toGuiSetGameValueVar(	void *		userData, 
-													EPluginType ePluginType, 
-													VxGUID&		onlineId, 
-													int32_t			s32VarId, 
-													int32_t			s32VarValue )
+void AppletPeerBase::toGuiSetGameValueVar(	void *		    userData, 
+											EPluginType     ePluginType, 
+											VxGUID&		    onlineId, 
+											int32_t			s32VarId, 
+											int32_t			s32VarValue )
 {
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
@@ -260,69 +241,15 @@ void AppletPeerBase::toGuiSetGameValueVar(	void *		userData,
 }
 
 //============================================================================
-void AppletPeerBase::toGuiSetGameActionVar(	void *		userData, 
-													EPluginType ePluginType, 
-													VxGUID&		onlineId, 
-													int32_t			s32VarId, 
-													int32_t			s32VarValue )
+void AppletPeerBase::toGuiSetGameActionVar(	void *		    userData, 
+											EPluginType     ePluginType, 
+											VxGUID&		    onlineId, 
+											int32_t			s32VarId, 
+											int32_t			s32VarValue )
 {
 	if( ( ePluginType == m_ePluginType )
 		&& ( onlineId == m_HisIdent->getMyOnlineId() ) )
 	{
 		emit signalToGuiSetGameActionVar( s32VarId, s32VarValue );
 	}
-}
-
-//============================================================================
-QString AppletPeerBase::describePluginOffer( EPluginType ePluginType )
-{
-	QString strPluginOffer;
-	switch( ePluginType )
-	{
-	case ePluginTypeRelay:	// proxy plugin
-		strPluginOffer = QObject::tr(" Relay ");
-		break;
-
-	case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-		strPluginOffer = QObject::tr(" View Profile Page " );
-		break;
-
-	case ePluginTypeFileXfer:	// file offer plugin
-		strPluginOffer = QObject::tr(" Receive A File " );
-		break;
-
-	case ePluginTypeFileServer:	// file share plugin
-		strPluginOffer = QObject::tr(" View Shared Files " );
-		break;
-
-	case ePluginTypeCamServer:	// web cam broadcast plugin
-		strPluginOffer = QObject::tr(" View Shared Web Cam ");
-		break;
-
-	case ePluginTypeMessenger:	// multi session chat plugin
-		strPluginOffer = QObject::tr(" Join Chat Session " );
-		break;
-
-	case ePluginTypeVoicePhone:	// VOIP p2p plugin
-		strPluginOffer = QObject::tr(" Voice Phone Call ");
-		break;
-
-	case ePluginTypeVideoPhone:
-		strPluginOffer = QObject::tr(" Video Chat Offer ");
-		break;
-
-	case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
-		strPluginOffer = QObject::tr(" Play Truth Or Dare ");
-		break;
-
-	case ePluginTypeStoryboard:	// story board plugin
-		strPluginOffer = QObject::tr(" View Story Board ");
-		break;
-
-	default:
-		strPluginOffer = QObject::tr("Unknown Plugin Offer");
-		LogMsg( LOG_ERROR, "AppletPeerBase::describePluginOffer: unrecognized plugin %d\n", ePluginType );
-	}
-
-	return strPluginOffer;
 }

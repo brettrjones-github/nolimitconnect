@@ -102,7 +102,7 @@ void PopupMenu::showAppSystemMenu( void )
 }
 
 //============================================================================
-void PopupMenu::showFriendMenu( VxNetIdent * poSelectedFriend )
+void PopupMenu::showFriendMenu( GuiUser * poSelectedFriend )
 {
 	m_SelectedFriend = poSelectedFriend;
 	// populate title

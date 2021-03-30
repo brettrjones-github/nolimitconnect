@@ -29,7 +29,7 @@ public:
     ChatEntryWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
 	virtual ~ChatEntryWidget() = default;
 
-	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
+	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						setEntryMode( EAssetType inputMode );
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );
@@ -52,6 +52,6 @@ private slots:
 private:
 	Ui::ChatEntryWidget			ui;
 	EAssetType					m_InputMode;
-	VxNetIdent *				m_MyIdent;
-	VxNetIdent *				m_HisIdent;
+    GuiUser *				    m_MyIdent;
+    GuiUser *				    m_HisIdent;
 };

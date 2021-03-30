@@ -38,7 +38,7 @@ AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget 
 
 //============================================================================
 //! set friend to change your permission to him   
-void AppletPeerChangeFriendship::setFriend( VxNetIdent * poFriend )
+void AppletPeerChangeFriendship::setFriend( GuiUser * poFriend )
 {
 	vx_assert( poFriend );
 	m_Friend = poFriend;

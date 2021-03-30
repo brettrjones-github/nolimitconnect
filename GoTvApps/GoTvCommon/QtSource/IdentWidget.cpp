@@ -15,7 +15,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "IdentWidget.h"
-#include "Friend.h"
+#include "GuiUser.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
 
@@ -35,7 +35,7 @@ MyIcons&  IdentWidget::getMyIcons( void )
 }
 
 //============================================================================
-void IdentWidget::updateGuiFromData( VxNetIdent * netIdent )
+void IdentWidget::updateGuiFromData( GuiUser * netIdent )
 {
 	setOnlineState( netIdent->getIsOnline() );
 	this->FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );

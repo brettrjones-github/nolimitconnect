@@ -98,12 +98,12 @@ enum EThemeColorRole
 {
 	eFocusRect = 0,					
 
-	eWindowBackground,
-	eWindowTextColor,
-	eWindowHighlightTextColor,
+	eWindowBackground = 1,
+	eWindowTextColor = 2,
+	eWindowHighlightTextColor = 3,
 
-	eTitleBarBackground,
-	eTitleBarTextText,
+	eTitleBarBackground = 4,
+	eTitleBarTextText = 5,
 
 	// note: use button colors for icons also
 	eButtonBackgroundNormal,

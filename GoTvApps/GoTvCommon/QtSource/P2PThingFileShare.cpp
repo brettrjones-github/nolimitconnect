@@ -36,7 +36,7 @@ void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent,
 		return;
 	}
 
-	FileListReplySession * replySession = new FileListReplySession( ePluginType, netIdent, u8FileType, u64FileLen, pFileName, fileHashData );
+	FileListReplySession * replySession = new FileListReplySession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), u8FileType, u64FileLen, pFileName, fileHashData );
 
 	toGuiFileXferClientsLock();
 	std::vector<ToGuiFileXferClient>::iterator iter;
@@ -65,7 +65,7 @@ void AppCommon::toGuiStartUpload(	VxNetIdent *	netIdent,
 	}
 
 	VxGUID lclSession( lclSessionId );
-	GuiFileXferSession * fileXferSession =  new GuiFileXferSession( ePluginType, netIdent, lclSession, fileType, fileLen, fileName, fileHashData );
+	GuiFileXferSession * fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), lclSession, fileType, fileLen, fileName, fileHashData );
 	toGuiFileXferClientsLock();
 	std::vector<ToGuiFileXferClient>::iterator iter;
 	for( iter = m_ToGuiFileXferClientList.begin(); iter != m_ToGuiFileXferClientList.end(); ++iter )
@@ -93,7 +93,7 @@ void AppCommon::toGuiStartDownload(	VxNetIdent *	netIdent,
 	}
 
 	VxGUID lclSession( lclSessionId );
-	GuiFileXferSession * fileXferSession = new GuiFileXferSession( ePluginType, netIdent, lclSession, u8FileType, u64FileLen, pFileName, fileHashData );
+	GuiFileXferSession * fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), lclSession, u8FileType, u64FileLen, pFileName, fileHashData );
 	toGuiFileXferClientsLock();
 	std::vector<ToGuiFileXferClient>::iterator iter;
 	for( iter = m_ToGuiFileXferClientList.begin(); iter != m_ToGuiFileXferClientList.end(); ++iter )

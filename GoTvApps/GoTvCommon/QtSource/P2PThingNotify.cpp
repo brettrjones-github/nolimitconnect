@@ -50,9 +50,9 @@ void AppCommon::onMenuNotifySelected( int iMenuId, PopupMenu * senderPopupMenu, 
 void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of friend
 												EPluginType		ePluginType,		// plugin type
 												const char *	pOfferMsg,			// offer message
-												int			pvUserData,			// plugin defined data
+												int			    pvUserData,			// plugin defined data
 												const char *	pFileName, 			// filename if any
-												uint8_t *			fileHashId,
+												uint8_t *		fileHashId,
 												VxGUID&			lclSessionId,
 												VxGUID&			rmtSessionId )
 {
@@ -65,7 +65,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 	// we must put into new session so offer msg and file name is still available when queued signal is received
 	GuiOfferSession * poOffer = new GuiOfferSession();
 	poOffer->setPluginType( ePluginType );
-	poOffer->setHisIdent( netIdent );
+	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
 	poOffer->setOfferMsg( pOfferMsg );
 	poOffer->setIsRemoteInitiated( true );
@@ -105,10 +105,10 @@ void AppCommon::onToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 //! response to offer
 void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent, 
 										EPluginType		ePluginType, 
-										int			pvUserData, 
+										int			    pvUserData, 
 										EOfferResponse	eOfferResponse,
 										const char *	pFileName,
-										uint8_t *			fileHashData,
+										uint8_t *		fileHashData,
 										VxGUID&			lclSessionId,
 										VxGUID&			rmtSessionId )
 {
@@ -119,7 +119,7 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent,
 
 	GuiOfferSession * poOffer = new GuiOfferSession();
 	poOffer->setPluginType( ePluginType );
-	poOffer->setHisIdent( netIdent );
+	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
 	poOffer->setOfferResponse(eOfferResponse);
 	poOffer->setIsRemoteInitiated( false );
@@ -160,7 +160,7 @@ void AppCommon::toGuiPluginSessionEnded(	VxNetIdent *	netIdent,
 
 	GuiOfferSession * poOffer = new GuiOfferSession();
 	poOffer->setPluginType( ePluginType );
-	poOffer->setHisIdent( netIdent );
+	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
 	poOffer->setOfferResponse(eOfferResponse);
 	poOffer->setIsRemoteInitiated( false );
@@ -188,11 +188,11 @@ void AppCommon::toGuiInstMsg(	VxNetIdent *	netIdent,
 		return;
 	}
 
-	emit signalToGuiInstMsg( netIdent, ePluginType, pMsg );
+	emit signalToGuiInstMsg( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType, pMsg );
 }
 
 //============================================================================
-void AppCommon::slotToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg )
+void AppCommon::slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg )
 {
 	LogMsg( LOG_INFO, "slotToGuiInstMsg: toGuiActivityClientsLock\n" );
 	toGuiActivityClientsLock();

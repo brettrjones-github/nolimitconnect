@@ -165,7 +165,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemInfo.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.h \
@@ -264,6 +263,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareControlInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiOfferInterface.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateClient.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/UserProfile.h \
@@ -476,7 +477,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileListReplySession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.cpp \
@@ -578,6 +578,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.cpp \
@@ -767,6 +768,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailChooseWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/UserListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui
 
 

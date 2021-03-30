@@ -27,17 +27,17 @@ public:
 	virtual ~AppletClientRandomConnect() override;
 
     EScanType					getScanType() { return m_eScanType; }
-    void						searchResult( VxNetIdent * netIdent );
+    void						searchResult( GuiUser * netIdent );
 
-    virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, GuiUser * netIdent ) override;
     virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
 
 signals:
-    void						signalSearchResult( VxNetIdent * netIdent );
+    void						signalSearchResult( GuiUser * netIdent );
     void						signalSearchComplete( void );
 
 private slots:
-    void						slotSearchResult( VxNetIdent * netIdent );
+    void						slotSearchResult( GuiUser * netIdent );
     void						slotSearchComplete();
 
     void						slotHomeButtonClicked( void ) override;

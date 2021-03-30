@@ -26,7 +26,7 @@ class AppCommon;
 class VxGUID;
 class GuiOfferSession;
 class OfferSessionState;
-class VxNetIdent;
+class GuiUser;
 class OfferWidget;
 class QListWidgetItem;
 class QTimer;
@@ -51,19 +51,19 @@ public:
 	void						toGuiRxedOfferReply( GuiOfferSession * offerSession );
 	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession );
 
-	void						onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent, bool isInSession );
-	void						onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent );
-	void						startedSessionInReply( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent );
+	void						onIsInSession( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, bool isInSession );
+	void						onSessionExit( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
+	void						startedSessionInReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
 
-	void						acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent );
-	void						rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent );
+	void						acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
+	void						rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
 
 
 	// called if starting new session to know if responding to existing offer
-	GuiOfferSession *			findActiveAndAvailableOffer( VxNetIdent * netIdent, EPluginType ePluginType );
-	void						sentOffer( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent );
-	void						sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent, EOfferResponse eOfferResponse );
-	void						removePluginSessionOffer( EPluginType ePluginType, VxNetIdent * netIdent );
+	GuiOfferSession *			findActiveAndAvailableOffer( GuiUser * netIdent, EPluginType ePluginType );
+	void						sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
+	void						sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
+	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser * netIdent );
 	void						removePluginSessionOffer( VxGUID& offerSessionId );
 
 signals:
@@ -77,15 +77,15 @@ protected slots:
 	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
 	void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
 	void						slotToGuiPluginSessionEnded( GuiOfferSession * offerSession );
-	void						slotToGuiContactOffline( VxNetIdent * netIdent ); // connected to app signal
+	void						slotToGuiContactOffline( GuiUser * netIdent ); // connected to app signal
 
 protected:
 	GuiOfferSession *			findOffer( void * pvUserData );
-	GuiOfferSession *			findOffer( VxNetIdent * netIdent, EPluginType ePluginType );
+	GuiOfferSession *			findOffer( GuiUser * netIdent, EPluginType ePluginType );
 
-	void						recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent );
-	void						recievedOfferReply( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent, EOfferResponse eOfferResponse );
-	void						recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, VxNetIdent * hisIdent, EOfferResponse eOfferResponse );
+	void						recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
+	void						recievedOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
+	void						recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
 
 	bool						isPhonePlugin( EPluginType ePluginType );
 	bool						isOfferBasedPlugin( EPluginType ePluginType );
@@ -97,7 +97,7 @@ protected:
 	bool						handleOfferResponse(  OfferWidget * item, GuiOfferSession * poOffer );
 	void						handleMissedCall( GuiOfferSession * offerSession );
 
-	bool						isMatch( OfferWidget * poOfferWidget, EPluginType ePluginType, VxNetIdent * netIdent );
+	bool						isMatch( OfferWidget * poOfferWidget, EPluginType ePluginType, GuiUser * netIdent );
 
 	void						setOnlineState( GuiOfferSession * offerSession, bool isOnline );
 	void						enableNotifyIconFlash( bool enable );

@@ -245,6 +245,8 @@ void AppCommon::loadWithoutThread( void )
     uint64_t loadingMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "LoadSettings %lld ms alive ms %lld", loadingMs - startMs, loadingMs );
 
+    getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
+
     // load icons from resources
     m_MyIcons.myIconsStartup();
 
@@ -300,6 +302,8 @@ void AppCommon::slotStartLoadingFromThread( void )
 
 	// asset database and user specific setting database will be created in sub directory of account login
 	// after user has logged into account
+
+    getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
 
 	// load icons from resources
 	m_MyIcons.myIconsStartup();
@@ -401,9 +405,9 @@ void AppCommon::connectSignals( void )
 	connect(this, SIGNAL(signalAppErr(EAppErr,QString)),	this, SLOT(slotAppErr(EAppErr,QString)) );
 	connect(this, SIGNAL(signalNetworkStateChanged(ENetworkStateType)),	this, SLOT(slotNetworkStateChanged(ENetworkStateType)) );
 
-	//connect(this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),			this, SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)) );
-	//connect(this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),				this, SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
-	connect(this, SIGNAL(signalToGuiInstMsg(VxNetIdent*,EPluginType,QString)),		this, SLOT(slotToGuiInstMsg(VxNetIdent*,EPluginType,QString)) );
+	connect(this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this, SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)) );
+	connect(this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),			this, SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
+	connect(this, SIGNAL(signalToGuiInstMsg(GuiUser*,EPluginType,QString)),		this, SLOT(slotToGuiInstMsg(GuiUser*,EPluginType,QString)) );
 
     /*
 	connect(this, SIGNAL(signalRemoveContact(VxNetIdent*)),							this, SLOT(slotRemoveContact(VxNetIdent*)));
@@ -571,7 +575,7 @@ void AppCommon::activityStateChange( ActivityBase * activity, bool isCreated )
 }
 
 //============================================================================
-void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, QWidget * parent )
+void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWidget * parent )
 {
 	if( 0 == parent )
 	{
@@ -579,7 +583,7 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 	}
 
 	bool haveExistingOffer = false;
-	GuiOfferSession * exitingOffer = getOffersMgr().findActiveAndAvailableOffer( netIdent, ePluginType );
+	GuiOfferSession * exitingOffer = getOffersMgr().findActiveAndAvailableOffer( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType );
 	if( exitingOffer )
 	{
 		haveExistingOffer = true;
@@ -664,7 +668,7 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 
 	if( haveExistingOffer )
 	{
-		removePluginSessionOffer( ePluginType, netIdent );
+		removePluginSessionOffer( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	}
 }
 
@@ -1700,8 +1704,8 @@ void AppCommon::toGuiActivityClientsUnlock( void )
 
 //============================================================================
 void AppCommon::wantToGuiActivityCallbacks(	ToGuiActivityInterface *	callback, 
-												void *						userData,
-												bool						wantCallback )
+											void *						userData,
+											bool						wantCallback )
 {
 static bool actCallbackShutdownComplete = false;
 	if( VxIsAppShuttingDown() )
@@ -1899,8 +1903,7 @@ static bool actCallbackShutdownComplete = false;
 
 	if( wantCallback )
 	{
-		std::vector<ToGuiHardwareCtrlClient>::iterator iter;
-		for( iter = m_ToGuiHardwareCtrlList.begin(); iter != m_ToGuiHardwareCtrlList.end(); ++iter )
+		for( auto iter = m_ToGuiHardwareCtrlList.begin(); iter != m_ToGuiHardwareCtrlList.end(); ++iter )
 		{
 			ToGuiHardwareCtrlClient& client = *iter;
 			if( client.m_Callback == callback )
@@ -1917,8 +1920,7 @@ static bool actCallbackShutdownComplete = false;
 		return;
 	}
 
-	std::vector<ToGuiHardwareCtrlClient>::iterator iter;
-	for( iter = m_ToGuiHardwareCtrlList.begin(); iter != m_ToGuiHardwareCtrlList.end(); ++iter )
+	for( auto iter = m_ToGuiHardwareCtrlList.begin(); iter != m_ToGuiHardwareCtrlList.end(); ++iter )
 	{
 		ToGuiHardwareCtrlClient& client = *iter;
 		if( client.m_Callback == callback )
@@ -1943,6 +1945,87 @@ void AppCommon::clearHardwareCtrlList( void )
 		m_ToGuiHardwareCtrlList.clear();
 		toGuiHardwareCtrlUnlock();
 	}
+}
+
+//============================================================================
+void AppCommon::toGuiUserUpdateClientsLock( void )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    m_ToGuiUserUpdateClientMutex.lock();
+}
+
+//============================================================================
+void AppCommon::toGuiUserUpdateClientsUnlock( void )
+{
+    m_ToGuiUserUpdateClientMutex.unlock();
+}
+
+//============================================================================
+void AppCommon::wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callback, bool wantCallback )
+{
+    static bool userCallbackShutdownComplete = false;
+    if( VxIsAppShuttingDown() )
+    {
+        if( userCallbackShutdownComplete )
+        {
+            return;
+        }
+
+        userCallbackShutdownComplete = true;
+        clearUserUpdateClientList();
+        return;
+    }
+
+    toGuiUserUpdateClientsLock();
+
+    if( wantCallback )
+    {
+        for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
+        {
+            ToGuiUserUpdateClient& client = *iter;
+            if( client.m_Callback == callback )
+            {
+                LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiUserUpdateCallbacks because already in list" );
+                toGuiUserUpdateClientsUnlock();
+                return;
+            }
+        }
+
+        ToGuiUserUpdateClient newClient( callback );
+        m_ToGuiUserUpdateClientList.push_back( newClient );
+        toGuiUserUpdateClientsUnlock();
+        return;
+    }
+
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
+    {
+        ToGuiUserUpdateClient& client = *iter;
+        if( client.m_Callback == callback )
+        {
+            m_ToGuiUserUpdateClientList.erase( iter );
+            toGuiUserUpdateClientsUnlock();
+            return;
+        }
+    }
+
+    LogMsg( LOG_INFO, "WARNING. ToGuiUserUpdateClient remove not found in list" );
+    toGuiUserUpdateClientsUnlock();
+    return;
+}
+
+//============================================================================
+void AppCommon::clearUserUpdateClientList( void )
+{
+    if( m_ToGuiHardwareCtrlList.size() )
+    {
+        toGuiUserUpdateClientsLock();
+        m_ToGuiUserUpdateClientList.clear();
+        toGuiUserUpdateClientsUnlock();
+    }
 }
 
 //============================================================================

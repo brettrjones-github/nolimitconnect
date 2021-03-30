@@ -35,7 +35,7 @@ public:
 	void						setOnlineState( bool isOnline );
 	void						setMenuButtonVisible( bool visible );
 	//! fill gui widgets from friend data
-	void						updateGuiFromData( VxNetIdent * poFriend );
+	void						updateGuiFromData( GuiUser * poFriend );
 
 signals:
 	void						signalFriendMenuClicked( void );

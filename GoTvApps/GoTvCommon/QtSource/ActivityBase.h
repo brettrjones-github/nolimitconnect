@@ -84,19 +84,19 @@ public:
  
 	void						setNewParent( QWidget * parent );
 
-	void						setupStyledDlg(	VxNetIdent *	poFriend			= NULL,
-												IdentWidget *	poIdentWidget		= NULL,
+	void						setupStyledDlg(	GuiUser *	    poFriend			= nullptr,
+												IdentWidget *	poIdentWidget		= nullptr,
 												EPluginType		ePluginType			= ePluginTypeInvalid,
-												VxPushButton *	poPermissionButton	= NULL,
-												QLabel *		poPermissionLabel	= NULL );
+												VxPushButton *	poPermissionButton	= nullptr,
+												QLabel *		poPermissionLabel	= nullptr );
 
 	void						setStatusText( QString statusMsgText );
 	void						checkDiskSpace( void );
 
     virtual void				setPluginType( EPluginType ePluginType )			{ m_ePluginType = ePluginType; }
 	virtual EPluginType			getPluginType( void )								{ return m_ePluginType; }
-    virtual void				setHisIdent( VxNetIdent * hisIdent )				{ m_HisIdent = hisIdent; }
-    virtual VxNetIdent *		getHisIdent( void )									{ return m_HisIdent; }
+    virtual void				setHisIdent( GuiUser * hisIdent )				    { m_HisIdent = hisIdent; }
+    virtual GuiUser *		    getHisIdent( void )									{ return m_HisIdent; }
 
 	virtual void				okMessageBox( QString title, QString msg );
 	virtual void				okMessageBox2( QString title, const char * msg, ... );
@@ -309,7 +309,7 @@ protected:
     bool                        m_IsAppletLaunchWidget{false};
     QLabel *					m_StatusMsgLabel{nullptr};
 
-    VxNetIdent *				m_HisIdent{nullptr};
+    GuiUser *				    m_HisIdent{nullptr};
     QTimer *					m_ResizingTimer{nullptr};
     bool						m_IsResizing{false};
 	QSize						m_ResizingWindowSize;

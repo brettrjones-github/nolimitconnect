@@ -115,6 +115,9 @@
     <Filter Include="GoTvCommon\Source Files\GuiUser">
       <UniqueIdentifier>{efdb3b74-c7d6-4791-9c58-2dd1faaddc74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\ToGuiInterface">
+      <UniqueIdentifier>{0bddb8b1-8da4-4dae-b94e-b5d86cb6042f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -145,9 +148,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\Friend.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp">
@@ -208,15 +208,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatEntryWidget.cpp">
@@ -1025,6 +1016,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.cpp">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1970,6 +1976,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\GoTvCommon\Resources\spheres.svg">
@@ -2542,6 +2551,24 @@
     <None Include="..\..\..\GoTvCommon\Resources\search-random-connect.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
+    <None Include="..\..\..\GoTvCommon\Resources\eye-friends.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\offer-file.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\offer-friendship.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\offer-truth-or-dare.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\offer-video-chat.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\offer-voice-phone.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ActivityAddRemoveLibraryFiles.h">
@@ -2778,9 +2805,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FileItemInfo.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\Friend.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
@@ -2797,27 +2821,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\SoundDefs.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityInterface.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferInterface.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareControlInterface.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\UserProfile.h">
@@ -2946,9 +2949,6 @@
     <ClInclude Include="..\..\..\..\GoTvInterface\IAudioInterface.h">
       <Filter>GoTvInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
@@ -2984,6 +2984,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityInterface.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferInterface.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareControlInterface.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3215,6 +3242,9 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUploads.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListEntryWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

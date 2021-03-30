@@ -166,6 +166,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/eye-all.svg";
     case eMyIconEyeChatRoom:
         return ":/AppRes/Resources/eye-chat-room.svg";
+    case eMyIconEyeFriends:
+        return ":/AppRes/Resources/eye-friends.svg";
     case eMyIconEyeGroup:
         return ":/AppRes/Resources/eye-group.svg";
     case eMyIconEyeHide:
@@ -742,6 +744,17 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/zoom-in.svg";
     case eMyIconZoomOut:
         return ":/AppRes/Resources/zoom-out.svg";
+
+    case eMyIconOfferFile:
+        return ":/AppRes/Resources/offer-file.svg";
+    case eMyIconOfferFriendship:
+        return ":/AppRes/Resources/offer-friendship.svg";
+    case eMyIconOfferTruthOrDare:
+        return ":/AppRes/Resources/offer-truth-or-dare.svg";
+    case eMyIconOfferVideoChat:
+        return ":/AppRes/Resources/offer-video-chat.svg";
+    case eMyIconOfferVoicePhone:
+        return ":/AppRes/Resources/offer-voice-phone.svg";
 
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark

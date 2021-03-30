@@ -105,7 +105,7 @@ void ActivityScanProfiles::slotSearchComplete()
 }
 
 //============================================================================
-void ActivityScanProfiles::setupIdentWidget( VxNetIdent * netIdent )
+void ActivityScanProfiles::setupIdentWidget( GuiUser * netIdent )
 {
 	m_Ident = netIdent;
 	IdentWidget * poIdentWidget = ui.FriendIdentWidget;
@@ -143,9 +143,9 @@ void ActivityScanProfiles::toGuiClientScanSearchComplete( void * userData, EScan
 
 //============================================================================
 void ActivityScanProfiles::toGuiSearchResultProfilePic(	void *			userData, 
-														VxNetIdent *	netIdent, 
-														uint8_t *			pu8JpgData, 
-														uint32_t				u32JpgDataLen )
+                                                        GuiUser *	    netIdent, 
+														uint8_t *		pu8JpgData, 
+														uint32_t		u32JpgDataLen )
 {
 	Q_UNUSED( userData );
 	QImage	oPicBitmap;
@@ -156,7 +156,7 @@ void ActivityScanProfiles::toGuiSearchResultProfilePic(	void *			userData,
 }
 
 //============================================================================
-void ActivityScanProfiles::slotSearchResultProfilePic( VxNetIdent * netIdent, QImage oPicBitmap ) 
+void ActivityScanProfiles::slotSearchResultProfilePic( GuiUser * netIdent, QImage oPicBitmap ) 
 {
 	ScanProfilePair profilePair( netIdent, oPicBitmap );
 	m_ScanList.push_back( profilePair );
@@ -186,7 +186,7 @@ void ActivityScanProfiles::showNextImage( void )
 }
 
 //============================================================================
-void ActivityScanProfiles::showMatchedPair( VxNetIdent * netIdent, QImage& oPicBitmap ) 
+void ActivityScanProfiles::showMatchedPair( GuiUser * netIdent, QImage& oPicBitmap ) 
 {
 	setupIdentWidget( netIdent );
 	QPixmap oPicPixmap = QPixmap::fromImage(oPicBitmap);

@@ -247,7 +247,7 @@ QString GuiParams::describeLanguage( ELanguageType language )
 
 //============================================================================
 //! Describe action user can take for given plugin and access
-QString GuiParams::describePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess )
+QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePluginType, EPluginAccess ePluginAccess )
 {
     QString strAction;
     switch( ePluginType )
@@ -791,6 +791,60 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
 }
 
 //============================================================================
+QString GuiParams::describePluginOffer( EPluginType ePluginType )
+{
+    QString strPluginOffer;
+    switch( ePluginType )
+    {
+    case ePluginTypeRelay:	// proxy plugin
+        strPluginOffer = QObject::tr(" Relay ");
+        break;
+
+    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
+        strPluginOffer = QObject::tr(" View Profile Page " );
+        break;
+
+    case ePluginTypeFileXfer:	// file offer plugin
+        strPluginOffer = QObject::tr(" Receive A File " );
+        break;
+
+    case ePluginTypeFileServer:	// file share plugin
+        strPluginOffer = QObject::tr(" View Shared Files " );
+        break;
+
+    case ePluginTypeCamServer:	// web cam broadcast plugin
+        strPluginOffer = QObject::tr(" View Shared Web Cam ");
+        break;
+
+    case ePluginTypeMessenger:	// multi session chat plugin
+        strPluginOffer = QObject::tr(" Join Chat Session " );
+        break;
+
+    case ePluginTypeVoicePhone:	// VOIP p2p plugin
+        strPluginOffer = QObject::tr(" Voice Phone Call ");
+        break;
+
+    case ePluginTypeVideoPhone:
+        strPluginOffer = QObject::tr(" Video Chat Offer ");
+        break;
+
+    case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
+        strPluginOffer = QObject::tr(" Play Truth Or Dare ");
+        break;
+
+    case ePluginTypeStoryboard:	// story board plugin
+        strPluginOffer = QObject::tr(" View Story Board ");
+        break;
+
+    default:
+        strPluginOffer = QObject::tr("Unknown Plugin Offer");
+        LogMsg( LOG_ERROR, "AppletPeerBase::describePluginOffer: unrecognized plugin %d\n", ePluginType );
+    }
+
+    return strPluginOffer;
+}
+
+//============================================================================
 QString GuiParams::describeResponse( EOfferResponse eOfferResponse )
 {
     switch( eOfferResponse )
@@ -1090,5 +1144,23 @@ QString GuiParams::describeOrientation( Qt::Orientation qtOrientation )
     case Qt::Vertical:
     default:
         return QObject::tr("Vertical");
+    }
+}
+
+//============================================================================
+QString GuiParams::describeFriendship( EFriendState friendState )
+{
+    switch( friendState )
+    {
+    case eFriendStateAnonymous:	// anonymous user
+        return QObject::tr( "Anonymous " );
+    case eFriendStateGuest:		// guest user
+        return QObject::tr( "Guest " );
+    case eFriendStateFriend:	// friend user
+        return  QObject::tr( "Friend " );
+    case eFriendStateAdmin:		// administrator
+        return  QObject::tr( "Administrator " );
+    default:
+        return  QObject::tr( "Ignore " );
     }
 }

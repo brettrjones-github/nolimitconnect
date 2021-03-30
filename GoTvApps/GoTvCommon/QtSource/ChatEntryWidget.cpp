@@ -56,7 +56,7 @@ ChatEntryWidget::ChatEntryWidget( QWidget *parent, EAssetType inputMode )
 }
 
 //============================================================================
-void ChatEntryWidget::setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent )
+void ChatEntryWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 {
 	m_MyIdent		= myIdent;
 	m_HisIdent		= hisIdent;

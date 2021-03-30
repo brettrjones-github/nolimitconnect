@@ -29,7 +29,7 @@ class InstMsgWidget : public QWidget
 public:
 	InstMsgWidget( QWidget * parent = 0 );
 
-	void						setInstMsgWidgets( EPluginType ePluginType, VxNetIdent * hisIdent );
+	void						setInstMsgWidgets( EPluginType ePluginType, GuiUser * hisIdent );
 	void						toGuiInstMsg( QString instMsg );
 
 signals:
@@ -46,8 +46,8 @@ private:
 	void						appendHistoryMsg( QString strChatMsg );
 
 	Ui::InstMsgWidgetClass		ui;
-	AppCommon&				m_MyApp;
+	AppCommon&				    m_MyApp;
 	P2PEngine&					m_Engine;
 	EPluginType					m_ePluginType;
-	VxNetIdent *				m_HisIdent;
+    GuiUser *				    m_HisIdent;
 };

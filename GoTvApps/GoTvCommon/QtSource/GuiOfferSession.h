@@ -22,10 +22,11 @@
 
 #include <QObject>
 
-class P2PEngine;
+class AppCommon;
+class GuiUser;
 class OfferWidget;
 class OfferSessionState;
-class AppCommon;
+class P2PEngine;
 
 // offer from remote friend
 class GuiOfferSession : public QObject
@@ -46,8 +47,8 @@ public:
 	void						setIsRemoteInitiated( bool bIsRemoteInitiated ) { m_bRmtInitiated = bIsRemoteInitiated; }
 	bool						getIsRemoteInitiated( void )			{ return m_bRmtInitiated; }
 
-	void						setHisIdent( VxNetIdent * netIdent )	{ m_HisIdent = netIdent; }
-	VxNetIdent *				getHisIdent( void )						{ return m_HisIdent; }
+	void						setHisIdent( GuiUser * netIdent )	    { m_HisIdent = netIdent; }
+    GuiUser *				    getHisIdent( void )						{ return m_HisIdent; }
 	void						setOfferMsg( const char * msg )			{ m_strOfferMsg = msg; }
 	std::string&				getOfferMsg( void )						{ return m_strOfferMsg; }
 	std::vector<std::string>&	getQuedMessages( void )					{ return m_aoQuedMessages; }
@@ -84,7 +85,7 @@ public:
 	void						setFileName( const char * fileName );
 	std::string&				getFileName( void )						{ return m_strFileName; }
 	void						setFileHashId( VxSha1Hash& hashId )		{ m_FileHashId = hashId; }
-	void						setFileHashId( uint8_t * id )				{ m_FileHashId.setHashData( id ); }
+	void						setFileHashId( uint8_t * id )			{ m_FileHashId.setHashData( id ); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
 
 	void						setUserData( int userData )				{ m_pvUserData = userData; }
@@ -93,7 +94,7 @@ public:
 protected:
 	//=== vars ===//
 	EPluginType					m_ePluginType;
-	VxNetIdent *				m_HisIdent;
+    GuiUser *				    m_HisIdent;
 	int							m_pvUserData;
 	bool						m_bRmtInitiated;
 	bool						m_bHasBeenViewed;

@@ -33,7 +33,7 @@ public:
 	HistoryListWidget(QWidget *parent=0);
 	virtual ~HistoryListWidget();
 
-	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
+	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						onActivityStop( void );
 
 signals:
@@ -63,7 +63,7 @@ protected:
 
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
-	VxNetIdent *				m_MyIdent;
-	VxNetIdent *				m_HisIdent;
+    GuiUser *				    m_MyIdent;
+    GuiUser *				    m_HisIdent;
 	bool						m_CallbacksRequested;
 };

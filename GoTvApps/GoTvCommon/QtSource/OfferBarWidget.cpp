@@ -98,7 +98,7 @@ void OfferBarWidget::fillOfferBar( OfferSessionState * offerState )
 	{
 		this->setVisible( false );
 		m_OfferSessionId.clearVxGUID();
-		m_HisIdent = 0;
+		m_HisIdent = nullptr;
 		m_ePluginType = ePluginTypeInvalid;
 	}
 }

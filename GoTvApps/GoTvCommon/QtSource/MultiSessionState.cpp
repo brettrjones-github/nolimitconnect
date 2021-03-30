@@ -48,7 +48,7 @@ MultiSessionState::MultiSessionState( AppCommon& myApp, AppletMultiMessenger& ac
 }
 
 //========================================================================
-void MultiSessionState::setGuiWidgets(	VxNetIdent *		hisIdent,
+void MultiSessionState::setGuiWidgets(	GuiUser *		    hisIdent,
 										QFrame * 			offersLayout,
 										QFrame * 			responseLayout,
 										QFrame * 			hangupLayout,

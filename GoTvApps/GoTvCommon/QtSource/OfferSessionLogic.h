@@ -79,8 +79,8 @@ public:
 	EPluginType 				getPluginType( void )							{ return m_ePluginType;    }
     void                        setGuiOfferSession( GuiOfferSession* offerSession ) { m_GuiOfferSession = offerSession; };
     GuiOfferSession *			getGuiOfferSession( void )                      { return m_GuiOfferSession; };
-    void                        setHisIdent( VxNetIdent * netIdent )			{ m_HisIdent = netIdent;    }
-	VxNetIdent * 				getHisIdent( void )								{ return m_HisIdent;    }
+    void                        setHisIdent( GuiUser * netIdent )			    { m_HisIdent = netIdent;    }
+	GuiUser * 				    getHisIdent( void )								{ return m_HisIdent;    }
 
 	bool						isOurSessionType( GuiOfferSession * offerSession ); 
 	bool						isOurSessionInstance( GuiOfferSession * offerSession ); 
@@ -91,7 +91,7 @@ public:
 	void						doToGuiRxedOfferReply( GuiOfferSession * offerSession );
 
 	void						toGuiPluginSessionEnded( GuiOfferSession * offerSession ); 
-	void						toGuiContactOffline( VxNetIdent * friendIdent ); 
+	void						toGuiContactOffline( GuiUser * friendIdent ); 
 
 	bool						sendOfferOrResponse();
 	bool						sendOfferReply( EOfferResponse offerResponse );
@@ -124,8 +124,8 @@ private:
     AppletBase*				    m_AppletBase{ nullptr };
 	OfferSessionCallbackInterface* m_OfferCallback;
     EPluginType					m_ePluginType{ ePluginTypeInvalid };
-    VxNetIdent* 				m_HisIdent{ nullptr };
-	VxNetIdent* 				m_MyIdent{ nullptr };
+    GuiUser* 				    m_HisIdent{ nullptr };
+    VxNetIdent*				    m_MyIdent{ nullptr };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_OfferSessionId;

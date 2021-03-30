@@ -69,10 +69,10 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 		{
 		case ePluginServerStateStarted:	// app has started
 			m_Engine.setHasSharedWebCam(false);
-			m_Engine.fromGuiStopPluginSession( ePluginTypeCamServer, m_Engine.getMyPktAnnounce().getMyOnlineId(), NULL );
+			m_Engine.fromGuiStopPluginSession( ePluginTypeCamServer, m_UserMgr.getMyOnlineId(), NULL );
 			break;
 		case ePluginServerStateStopped:
-			startActivity( ePluginTypeCamServer, &m_Engine.getMyPktAnnounce() );
+			startActivity( ePluginTypeCamServer, m_UserMgr.getMyIdent() );
 			m_Engine.setHasSharedWebCam(true);
 			break;
 		case ePluginServerStateDisabled:	// disabled by permissions
@@ -90,13 +90,13 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 
 	case 2: // view my profile
 		{
-			viewWebServerPage( getAppGlobals().getUserIdent(), "index.htm" );
+			viewWebServerPage( m_UserMgr.getMyIdent(), "index.htm" );
 			break;
 		}
 
 	case 3: // view my storyboard
 		{
-			viewWebServerPage( getAppGlobals().getUserIdent(), "story_board.htm" );
+			viewWebServerPage( m_UserMgr.getMyIdent(), "story_board.htm" );
 			break;
 		}
 

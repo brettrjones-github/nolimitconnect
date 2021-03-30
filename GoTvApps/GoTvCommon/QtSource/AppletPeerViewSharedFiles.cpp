@@ -214,8 +214,7 @@ void AppletPeerViewSharedFiles::slotApplyFileFilter( unsigned char fileTypeMask 
 }
 
 //============================================================================
-FileXferWidget * AppletPeerViewSharedFiles::fileToWidget(  VxNetIdent *      netIdent,
-                                                                 VxMyFileInfo&     fileInfo )
+FileXferWidget * AppletPeerViewSharedFiles::fileToWidget( GuiUser * netIdent, VxMyFileInfo& fileInfo )
 {
 	FileXferWidget * item = new FileXferWidget(ui.FileItemList);
     item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
@@ -306,8 +305,7 @@ FileXferWidget * AppletPeerViewSharedFiles::findListEntryWidget( VxGUID lclSessi
 }
 
 //============================================================================
-void AppletPeerViewSharedFiles::addFile(	VxNetIdent *	netIdent, 
-                                                VxMyFileInfo&     fileInfo )
+void AppletPeerViewSharedFiles::addFile( GuiUser * netIdent, VxMyFileInfo& fileInfo )
 {
     if( fileInfo.getFileLength()
         && !fileInfo.getFullFileName().isEmpty() )

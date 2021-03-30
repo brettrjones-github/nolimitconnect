@@ -41,9 +41,9 @@ EFriendViewType FriendList::getFriendViewType( void )
 
 //============================================================================
 //! find friend by id
-Friend * FriendList::findFriend( VxGUID& oId )
+GuiUser * FriendList::findFriend( VxGUID& oId )
 {
-	std::vector<Friend*>::iterator iter;
+	std::vector<GuiUser*>::iterator iter;
 	for( iter = m_aoFriends.begin(); iter != m_aoFriends.end(); ++iter )
 	{
 		if( oId == (*iter)->getMyOnlineId() )
@@ -56,22 +56,22 @@ Friend * FriendList::findFriend( VxGUID& oId )
 
 //============================================================================
 //! update friend in list
-void FriendList::updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange )
+void FriendList::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 {
-	std::vector<Friend*>::iterator iter;
+	std::vector<GuiUser*>::iterator iter;
 	for( iter = m_aoFriends.begin(); iter != m_aoFriends.end(); ++iter )
 	{
 		if( netIdent->getMyOnlineId() == (*iter)->getMyOnlineId() )
 		{
 			if( false == sessionTimeChange )
 			{
-				memcpy( (VxNetIdent *)(*iter), netIdent, sizeof( VxNetIdent) );
+				//memcpy( (VxNetIdent *)(*iter), netIdent, sizeof( VxNetIdent) );
 				onFriendUpdated( (*iter) );
 				return;
 			}
 			else
 			{
-				VxNetIdent * removeFriend = (*iter);
+                GuiUser * removeFriend = (*iter);
 				m_aoFriends.erase( iter );
 				onFriendRemoved( removeFriend );
 				break;
@@ -80,11 +80,11 @@ void FriendList::updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange
 	}
 
 	// not found so add
-	Friend * poFriend = new Friend();
-	memcpy( (VxNetIdent *) poFriend, netIdent, sizeof( VxNetIdent ) );
-	if( ( 0 == m_aoFriends.size() ) || ( 0 == poFriend->getLastSessionTimeMs() ) )
+	//Friend * poFriend = new Friend();
+	//memcpy( (VxNetIdent *) poFriend, netIdent, sizeof( VxNetIdent ) );
+	if( ( 0 == m_aoFriends.size() ) || ( 0 == netIdent->getLastSessionTimeMs() ) )
 	{
-		m_aoFriends.push_back( poFriend );
+		m_aoFriends.push_back( netIdent );
 	}
 	else
 	{
@@ -93,7 +93,7 @@ void FriendList::updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange
 		{
 			if( netIdent->getLastSessionTimeMs() < (*iter)->getLastSessionTimeMs() )
 			{
-				m_aoFriends.insert( iter, poFriend );
+				m_aoFriends.insert( iter, netIdent );
 				wasInserted = true;
 				break;
 			}
@@ -101,18 +101,18 @@ void FriendList::updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange
 
 		if( false == wasInserted )
 		{
-			m_aoFriends.push_back( poFriend );
+			m_aoFriends.push_back( netIdent );
 		}
 	}
 
-	onFriendAdded( poFriend );
+	onFriendAdded( netIdent );
 }
 
 //============================================================================
 //! remove friend from list.. return non zero if should not be removed
 RCODE FriendList::removeFriendFromList( VxGUID& oId )
 {
-	std::vector<Friend*>::iterator iter;
+	std::vector<GuiUser*>::iterator iter;
 	for( iter = m_aoFriends.begin(); iter != m_aoFriends.end(); ++iter )
 	{
 		if( oId == (*iter)->getMyOnlineId() )

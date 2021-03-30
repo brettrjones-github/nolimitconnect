@@ -26,7 +26,7 @@
 class FileXferWidget;
 class GuiFileXferSession;
 class FileListReplySession;
-class VxNetIdent;
+class GuiUser;
 class VxSha1Hash;
 class VxMyFileInfo;
 
@@ -38,7 +38,7 @@ public:
 	virtual ~AppletPeerViewSharedFiles() override = default;
 
 public:
-    void						addFile( VxNetIdent * netIdent, VxMyFileInfo& fileInfo  );
+    void						addFile( GuiUser * netIdent, VxMyFileInfo& fileInfo  );
 
 signals:
 	void						signalToGuiFileListReply( FileListReplySession* replySession );
@@ -73,8 +73,7 @@ protected:
     virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
     virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
-	FileXferWidget *			fileToWidget( VxNetIdent *      netIdent,
-                                              VxMyFileInfo&     fileInfo );
+	FileXferWidget *			fileToWidget( GuiUser * netIdent, VxMyFileInfo& fileInfo );
 	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * xferSession );
 	GuiFileXferSession *		widgetToFileItemInfo( FileXferWidget * item );
 
@@ -92,7 +91,7 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletPeerViewSharedFilesUi	ui;
-    VxNetIdent *				m_Friend{ nullptr };
+    GuiUser *				    m_Friend{ nullptr };
 	int							m_iMenuItemHeight{ 34 };
 	std::string					m_strCurrentDirectory;
 	GuiFileXferSession *		m_SelectedFileInfo{ nullptr };

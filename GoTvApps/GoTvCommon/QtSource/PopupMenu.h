@@ -43,7 +43,7 @@ public:
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 
 	void						showRefreshMenu();
-	void						showFriendMenu( VxNetIdent * poSelectedFriend );
+	void						showFriendMenu( GuiUser * poSelectedFriend );
     void						showAppSystemMenu( void );
 
 signals:
@@ -65,7 +65,7 @@ protected:
 	Ui::popupMenu				ui;
     ActivityBase *              m_ParentActivity{ nullptr };
     int							m_iMenuItemHeight{ 48 };
-    VxNetIdent *				m_SelectedFriend{ nullptr };
+    GuiUser *				    m_SelectedFriend{ nullptr };
     TitleBarWidget *			m_TitleBarWidget{ nullptr };
     BottomBarWidget *			m_BottomBarWidget{ nullptr };
     QFrame *                    m_ContentItemsFrame{ nullptr };

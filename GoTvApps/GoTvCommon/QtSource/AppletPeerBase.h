@@ -68,8 +68,6 @@ protected:
     virtual void				toGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer );
     virtual void				toGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerReply );
     virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ) override;
-    //virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * friendIdent, EHostType hostType, bool newContact ) override;
-    //virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * friendIdent ) override;
 	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
 															VxGUID&			onlineId, 
                                                             uint8_t *		pu8Jpg,
@@ -91,8 +89,6 @@ protected:
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
     virtual void				closeEvent( QCloseEvent * ev ) override;
-
-	QString						describePluginOffer( EPluginType ePluginType );
 
 	//=== vars ===//
     bool						m_bFirstMsg{false};

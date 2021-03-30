@@ -28,27 +28,27 @@ class P2PEngine;
 class GuiFileXferSession : public QObject
 {
 public:
-	GuiFileXferSession();
+	GuiFileXferSession() = default;
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
-						VxNetIdent *	netIdent, 
-						VxGUID&		lclSessionId, 
+						GuiUser *	    netIdent, 
+						VxGUID&		    lclSessionId, 
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
 						const char *	pFileName,
 						VxSha1Hash&		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
-						VxNetIdent *	netIdent, 
-						VxGUID&		lclSessionId, 
+                        GuiUser *	    netIdent, 
+						VxGUID&		    lclSessionId, 
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
 						const char *	pFileName,
 						uint8_t *		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
-						VxNetIdent *	netIdent, 
-						VxGUID&		lclSessionId, 
+                        GuiUser *	    netIdent, 
+						VxGUID&		    lclSessionId, 
 						VxMyFileInfo&	fileInfo );
 
 	GuiFileXferSession( const GuiFileXferSession &rhs );
@@ -57,11 +57,11 @@ public:
 	QString						describeFileType( void );
 	QString						describeFileLength( void );
 
-	void						setLclSessionId( VxGUID lclSessionId )	{ m_LclSessionId = lclSessionId; }
-	VxGUID&					getLclSessionId( void )						{ return m_LclSessionId; }
+	void						setLclSessionId( VxGUID lclSessionId )	    { m_LclSessionId = lclSessionId; }
+	VxGUID&					    getLclSessionId( void )						{ return m_LclSessionId; }
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( GuiUser * ident )				    { m_Ident = ident; }
+    GuiUser *				    getIdent( void )							{ return m_Ident; }
 
 	void						setWidget( QWidget * widget )				{ m_Widget = widget; }
 	QWidget *					getWidget( void )							{ return m_Widget; }
@@ -107,15 +107,15 @@ public:
 
 protected:
 	//=== vars ===//
-	EPluginType					m_ePluginType;
-	VxNetIdent *				m_Ident;
-	VxGUID					m_LclSessionId;
+    EPluginType					m_ePluginType{ ePluginTypeFileServer };
+    GuiUser *				    m_Ident{ nullptr };
+	VxGUID					    m_LclSessionId;
 	VxMyFileInfo				m_FileInfo;
-	QWidget *					m_Widget;
+	QWidget *					m_Widget{ nullptr };
 	EXferState					m_eXferState;
-	int							m_XferStateParam1;
-	int							m_XferStateParam2;
-	RCODE						m_XferErrorCode;
-	EXferDirection				m_XferDirection;
+    int							m_XferStateParam1{ 0 };
+	int							m_XferStateParam2{ 0 };
+	RCODE						m_XferErrorCode{ 0 };
+    EXferDirection				m_XferDirection{ eXferDirectionRx };
 };
 

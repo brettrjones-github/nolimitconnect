@@ -25,24 +25,11 @@
 #include <QObject>
 
 //============================================================================
-GuiFileXferSession::GuiFileXferSession()
-: m_ePluginType( ePluginTypeFileServer )
-, m_Ident(NULL)
-, m_Widget(0)
-, m_eXferState( eXferStateUnknown )
-, m_XferStateParam1( 0 )
-, m_XferStateParam2( 0 )
-, m_XferErrorCode( 0 )
-, m_XferDirection( eXferDirectionRx )
-{
-}
-
-//============================================================================
 GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType, 
-											VxNetIdent *	netIdent, 
-											VxGUID&		lclSessionId, 
-											uint8_t				u8FileType, 
-											uint64_t				u64FileLen, 
+                                            GuiUser *	    netIdent, 
+											VxGUID&		    lclSessionId, 
+											uint8_t			u8FileType, 
+											uint64_t		u64FileLen, 
 											const char *	pFileName,
 											VxSha1Hash&		fileHashId )
 : m_ePluginType( ePluginType )
@@ -60,12 +47,12 @@ GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType, 
-											VxNetIdent *	netIdent, 
-											VxGUID&		lclSessionId, 
-											uint8_t				u8FileType, 
-											uint64_t				u64FileLen, 
+                                            GuiUser *	    netIdent, 
+											VxGUID&		    lclSessionId, 
+											uint8_t			u8FileType, 
+											uint64_t		u64FileLen, 
 											const char *	pFileName,
-											uint8_t *			fileHashId )
+											uint8_t *		fileHashId )
 : m_ePluginType( ePluginType )
 , m_Ident( netIdent )
 , m_LclSessionId( lclSessionId )
@@ -81,8 +68,8 @@ GuiFileXferSession::GuiFileXferSession(		EPluginType		ePluginType,
 
 //============================================================================
 GuiFileXferSession::GuiFileXferSession(		EPluginType			ePluginType, 
-											VxNetIdent *		netIdent, 
-											VxGUID&			lclSessionId, 
+                                            GuiUser *		    netIdent, 
+											VxGUID&			    lclSessionId, 
 											VxMyFileInfo&		fileInfo )
 : m_ePluginType( ePluginType )
 , m_Ident( netIdent )

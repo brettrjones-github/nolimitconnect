@@ -80,7 +80,7 @@ void AppletPeerVideoPhone::onInSession( bool isInSession )
 }
 
 //============================================================================
-void AppletPeerVideoPhone::toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerVideoPhone::toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
 {
 	Q_UNUSED( callbackData );
 	if( ( ePluginType == m_ePluginType )

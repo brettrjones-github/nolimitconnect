@@ -86,7 +86,7 @@ void HistoryListWidget::onActivityStop( void )
 }
 
 //============================================================================
-void HistoryListWidget::setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent )
+void HistoryListWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 { 
 	m_MyIdent = myIdent; 
 	m_HisIdent = hisIdent; 

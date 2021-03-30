@@ -23,7 +23,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-void AppCommon::updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange )
+void AppCommon::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 {
 	//ui.mainFriendList->updateFriend( netIdent, sessionTimeChange );
 }
@@ -76,13 +76,14 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "toGuiContactOffline: toGuiActivityClientsLock" );
+    GuiUser *user = m_UserMgr.getUser( netIdent->getMyOnlineId() );
 	// don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
 	toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiContactOffline( client.m_UserData, netIdent );
+		client.m_Callback->toGuiContactOffline( client.m_UserData, user );
 	}
 
 	toGuiActivityClientsUnlock();
@@ -123,15 +124,14 @@ void AppCommon::toGuiContactNearby( VxNetIdent * netIdent )
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactNearby %s", netIdent->getOnlineName());
     // don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactNearby( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactNearby( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -144,15 +144,14 @@ void AppCommon::toGuiContactNotNearby( VxNetIdent * netIdent )
     }
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactNotNearby %s", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactNotNearby( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactNotNearby( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -165,15 +164,14 @@ void AppCommon::toGuiContactNameChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactNameChange %s", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactNameChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactNameChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -186,15 +184,14 @@ void AppCommon::toGuiContactDescChange( VxNetIdent * netIdent )
     }
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactDescChange %s", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactDescChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactDescChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -207,15 +204,14 @@ void AppCommon::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactMyFriendshipChange %s \n", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactMyFriendshipChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactMyFriendshipChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -228,15 +224,14 @@ void AppCommon::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactHisFriendshipChange %s \n", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactHisFriendshipChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactHisFriendshipChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -249,15 +244,14 @@ void AppCommon::toGuiPluginPermissionChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiPluginPermissionChange %s", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiPluginPermissionChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiPluginPermissionChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -270,15 +264,14 @@ void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactSearchFlagsChange %s", netIdent->getOnlineName()); 
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactSearchFlagsChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactSearchFlagsChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -316,15 +309,14 @@ void AppCommon::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiContactLastSessionTimeChange %s\n", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiContactLastSessionTimeChange( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiContactLastSessionTimeChange( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================
@@ -336,122 +328,15 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 	}
 
 	LogMsg( LOG_INFO, "AppCommon::toGuiUpdateMyIdent %s\n", netIdent->getOnlineName());
-    toGuiActivityClientsLock();
-    std::vector<ToGuiActivityClient>::iterator iter;
-    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
-        ToGuiActivityClient& client = *iter;
-        client.m_Callback->toGuiUpdateMyIdent( client.m_UserData, netIdent );
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiUpdateMyIdent( netIdent );
     }
 
-    toGuiActivityClientsUnlock();
+    toGuiUserUpdateClientsUnlock();
 }
-
-//============================================================================
-//=== slot to handle corresponding signals from other threads ===//
-//============================================================================
-/*
-//============================================================================
-//! remove contact
-void AppCommon::slotRemoveContact( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::slotRemoveContact %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-
-//============================================================================
-//! called when friend goes offline
-void AppCommon::slotContactOffline( VxNetIdent * netIdent )
-{
-	if( false == VxIsAppShuttingDown() )
-	{
-		LogMsg( LOG_INFO, "AppCommon::slotContactOffline %s\n", netIdent->getOnlineName());
-		updateFriendList( netIdent );
-	}
-}
-
-//============================================================================
-//! called when friend goes online
-void AppCommon::slotContactOnline( VxNetIdent * netIdent, bool newContact )
-{
-	if( false == VxIsAppShuttingDown() )
-	{
-		LogMsg( LOG_INFO, "AppCommon::slotContactOnline %s\n", netIdent->getOnlineName());
-		updateFriendList( netIdent );
-	}
-}
-
-//============================================================================
-//! called when friend is nearby
-void AppCommon::slotContactNearby( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::slotContactNearby %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-
-//============================================================================
-//! called when friend leaves udp network
-void AppCommon::onContactNotNearby( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactNotNearby %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-
-//============================================================================
-//! called when name changes
-void AppCommon::onContactNameChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactNameChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-
-//============================================================================
-//! called when description changes
-void AppCommon::onContactDescChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactDescChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-//============================================================================
-//! called when my friendship to him changes
-void AppCommon::onContactMyFriendshipChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactMyFriendshipChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-
-//============================================================================
-//! called when his friendship to me changes
-void AppCommon::onContactHisFriendshipChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactHisFriendshipChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent );
-}
-
-//============================================================================
-//! called when plugin permission changes
-void AppCommon::onContactPluginPermissionChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactPluginPermissionChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent, false );
-}
-
-//============================================================================
-//! called when search flags changes
-void AppCommon::onContactSearchFlagsChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactSearchFlagsChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent, false );
-}
-
-//============================================================================
-//! called when search flags changes
-void AppCommon::onContactLastSessionTimeChange( VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "AppCommon::onContactLastSessionTimeChange %s\n", netIdent->getOnlineName());
-	updateFriendList( netIdent, true );
-}
-*/
 
 //============================================================================
 void AppCommon::onEngineStatusMsg( QString msg )
@@ -469,79 +354,3 @@ void AppCommon::onUpdateMyIdent( VxNetIdent * netIdent )
 	    m_AccountMgr.updateAccount(*netIdent);
     }
 }
-
-//============================================================================
-//! called when friend in list is changed
-void AppCommon::onFriendAdded( VxNetIdent * netIdent ) 
-{
-	onFriendUpdated( netIdent );
-}
-
-//============================================================================
-//! called when friend in list is changed or added
-void AppCommon::onFriendUpdated( VxNetIdent * netIdent ) 
-{
-	//ui.mainFriendList->updateFriend( netIdent );
-}
-
-//============================================================================
-//! called when friend in list is removed
-void AppCommon::onFriendRemoved( VxNetIdent * netIdent )
-{
-	//ui.mainFriendList->removeFriend( netIdent );
-}
-
-//============================================================================
-//!	return true if should show friend in current list
-bool AppCommon::shouldShowFriend( VxNetIdent * poFriend )
-{
-	/*
-	EFriendState eMyFriendshipToHim = poFriend->getMyFriendshipToHim();
-
-	switch( ui.mainFriendList->getFriendViewType() )
-	{
-	case eFriendViewEverybody:
-		return true;
-
-	case eFriendViewFriendsAndGuests:
-		if( (eFriendStateFriend == eMyFriendshipToHim) || (eFriendStateGuest == eMyFriendshipToHim) )
-		{
-			return true;
-		}
-		return false;
-
-	case eFriendViewAnonymous:
-		if( eFriendStateAnonymous == eMyFriendshipToHim )
-		{
-			return true;
-		}
-		return false;
-
-	case eFriendViewIgnored:
-        if( eFriendStateIgnore == eMyFriendshipToHim )
-		{
-			return true;
-		}
-		return false;
-
-	case eFriendViewMyProxies:
-		if( poFriend->isMyPreferedRelay() )
-		{
-			return true;
-		}
-		return false;
-
-	case eFriendViewAllProxies:
-		if( ( poFriend->isMyAccessAllowedFromHim( ePluginTypeRelay ) ) &&
-			( false == poFriend->requiresRelay() ) )
-		{
-			return true;
-		}
-		return false;
-	default:
-		return false;
-	}*/
-
-	return false;
-}
-

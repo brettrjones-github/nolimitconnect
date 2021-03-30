@@ -29,7 +29,7 @@
 #include <QUrl>
 
 //============================================================================
-bool AppCommon::offerToFriendPluginSession( VxNetIdent * poFriend, EPluginType ePluginType, QWidget * parent )
+bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, QWidget * parent )
 {
 	bool showedActivity = false;
 	if( poFriend->isMyAccessAllowedFromHim( ePluginType ) )
@@ -49,48 +49,52 @@ bool AppCommon::offerToFriendPluginSession( VxNetIdent * poFriend, EPluginType e
 }
 
 //============================================================================
-void AppCommon::offerToFriendViewProfile( VxNetIdent * poFriend )
+void AppCommon::offerToFriendViewProfile( GuiUser * poFriend )
 {
 	viewWebServerPage( poFriend, "index.htm" );
 }
 
 //============================================================================
-void AppCommon::offerToFriendViewStoryboard( VxNetIdent * poFriend )
+void AppCommon::offerToFriendViewStoryboard( GuiUser * poFriend )
 {
 	viewWebServerPage( poFriend, "story_board.htm" );
 }
 
 //============================================================================
-void AppCommon::viewWebServerPage( VxNetIdentBase * netIdent, const char * webPageFileName )
+void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName )
 {
-	std::string uri;
-	std::string myExternIp;
-	if( ( netIdent->getMyOnlineIPv4() == m_Engine.getMyPktAnnounce().getMyOnlineIPv4() )
-		&& netIdent->getLanIPv4().isValid() )
-	{
-		// is on same sub network as us.. use LAN ip
-		myExternIp = netIdent->getLanIPv4().toStdString();
-	}
-	else
-	{
-		myExternIp = netIdent->getMyOnlineIPv4().toStdString();
-	}
+    VxNetIdent * netIdent = user->getNetIdent();
+    if( netIdent )
+    {
+        std::string uri;
+        std::string myExternIp;
+        if( ( netIdent->getMyOnlineIPv4() == m_Engine.getMyPktAnnounce().getMyOnlineIPv4() )
+            && netIdent->getLanIPv4().isValid() )
+        {
+            // is on same sub network as us.. use LAN ip
+            myExternIp = netIdent->getLanIPv4().toStdString();
+        }
+        else
+        {
+            myExternIp = netIdent->getMyOnlineIPv4().toStdString();
+        }
 
-	if( netIdent->getMyOnlineId() == m_Engine.getMyPktAnnounce().getMyOnlineId() )
-	{
-		if( m_Engine.getMyPktAnnounce().getLanIPv4().isValid() )
-		{
-			myExternIp = m_Engine.getMyPktAnnounce().getLanIPv4().toStdString();
-		}
-	}
+        if( netIdent->getMyOnlineId() == m_Engine.getMyPktAnnounce().getMyOnlineId() )
+        {
+            if( m_Engine.getMyPktAnnounce().getLanIPv4().isValid() )
+            {
+                myExternIp = m_Engine.getMyPktAnnounce().getLanIPv4().toStdString();
+            }
+        }
 
-	netIdent->getProfileUri( uri, myExternIp.c_str(), webPageFileName );
-	getAppGlobals().launchWebBrowser( uri.c_str() );
+        netIdent->getProfileUri( uri, myExternIp.c_str(), webPageFileName );
+        getAppGlobals().launchWebBrowser( uri.c_str() );
+    }
 }
 
 //============================================================================
 // view shared files
-void AppCommon::offerToFriendViewSharedFiles( VxNetIdent * poFriend )
+void AppCommon::offerToFriendViewSharedFiles( GuiUser * poFriend )
 {
 	//AppletPeerViewSharedFiles oDlg( *this, poFriend, this  );
 	//oDlg.exec();
@@ -98,7 +102,7 @@ void AppCommon::offerToFriendViewSharedFiles( VxNetIdent * poFriend )
 
 //============================================================================
 // offer to send a file
-void AppCommon::offerToFriendSendFile( VxNetIdent * poFriend )
+void AppCommon::offerToFriendSendFile( GuiUser * poFriend )
 {
 	//ActivitySelectFileToSend * dlg = new ActivitySelectFileToSend( *this, poFriend, this);
 	//dlg->exec();
@@ -106,7 +110,7 @@ void AppCommon::offerToFriendSendFile( VxNetIdent * poFriend )
 
 //============================================================================
 // change friendship
-void AppCommon::offerToFriendChangeFriendship( VxNetIdent * poFriend )
+void AppCommon::offerToFriendChangeFriendship( GuiUser * poFriend )
 {
 	//AppletPeerChangeFriendship * poDlg = new AppletPeerChangeFriendship( *this, this);
 	//poDlg->setFriend( poFriend );
@@ -115,14 +119,14 @@ void AppCommon::offerToFriendChangeFriendship( VxNetIdent * poFriend )
 
 //============================================================================
 // see if user wants to change his preferred proxy
-void AppCommon::offerToFriendUseAsRelay( VxNetIdent * poFriend )
+void AppCommon::offerToFriendUseAsRelay( GuiUser * poFriend )
 {
 	//AppletPeerRequestRelay * poDlg = new AppletPeerRequestRelay( *this, poFriend, this);
 	//poDlg->exec();
 }
 
 //============================================================================
-void AppCommon::removePluginSessionOffer( EPluginType ePluginType, VxNetIdent * poFriend )
+void AppCommon::removePluginSessionOffer( EPluginType ePluginType, GuiUser * poFriend )
 {
 	getOffersMgr().removePluginSessionOffer( ePluginType, poFriend );
 }

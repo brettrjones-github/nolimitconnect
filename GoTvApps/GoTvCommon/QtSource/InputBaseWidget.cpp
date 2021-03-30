@@ -48,7 +48,7 @@ MyIcons&  InputBaseWidget::getMyIcons( void )
 }
 
 //============================================================================
-void InputBaseWidget::setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent )		
+void InputBaseWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )		
 { 
 	m_MyIdent = myIdent; 
 	m_HisIdent = hisIdent; 

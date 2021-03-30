@@ -30,11 +30,13 @@ class ScanProfilePair
 public:
 	ScanProfilePair()
 		: m_Ident( 0 ){}
-	ScanProfilePair( VxNetIdent * netIdent, QImage& image )
+
+	ScanProfilePair( GuiUser * netIdent, QImage& image )
 		: m_Ident( netIdent )
 		, m_Image( image )
 	{
 	}
+
 	~ScanProfilePair(){};
 	ScanProfilePair( const ScanProfilePair& rhs ){ *this = rhs; }
 	ScanProfilePair& operator=( const ScanProfilePair& rhs )
@@ -44,11 +46,12 @@ public:
 			m_Ident					= rhs.m_Ident;
 			m_Image					= rhs.m_Image;
 		}
+
 		return *this;
 	}
 
 	//=== vars ===//
-	VxNetIdent *				m_Ident;
+    GuiUser *				    m_Ident;
 	QImage						m_Image;
 
 };
@@ -69,16 +72,16 @@ public:
 
 public:
     virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
-    virtual void				toGuiSearchResultProfilePic( void * userData, VxNetIdent * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
+    virtual void				toGuiSearchResultProfilePic( void * userData, GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
 
 signals:
-	 void						signalSearchResultProfilePic( VxNetIdent * netIdent, QImage oPicBitmap );
+	 void						signalSearchResultProfilePic( GuiUser * netIdent, QImage oPicBitmap );
 	 void						signalSearchComplete();
 
 protected slots:
 	void						slotSearchComplete();
 
-	void						slotSearchResultProfilePic( VxNetIdent * netIdent, QImage oPicBitmap ); 
+	void						slotSearchResultProfilePic( GuiUser * netIdent, QImage oPicBitmap ); 
 
     void						slotHomeButtonClicked( void ) override;
 	void						slotPauseScanClicked( void );
@@ -96,17 +99,17 @@ protected:
 	void						startCountdown();
 	void						updateCountdownGui();
 	void						showNextImage( void ); 
-	void						showMatchedPair( VxNetIdent * netIdent, QImage& oPicBitmap ); 
+	void						showMatchedPair( GuiUser * netIdent, QImage& oPicBitmap ); 
 
 	void						setTitle( QString strTitle );
 	void						setScanStatusText( QString strMsg );
-	void						setupIdentWidget( VxNetIdent * netIdent );
+	void						setupIdentWidget( GuiUser * netIdent );
 
 
 	//=== vars ===//
 	Ui::ScanProfilesDialog		ui;
 
-	VxNetIdent *				m_Ident;
+    GuiUser *				    m_Ident;
 	int							m_iCountdownCnt;
 	bool						m_bPaused;
 

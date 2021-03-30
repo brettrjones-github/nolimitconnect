@@ -15,6 +15,7 @@
 #include "AppCommon.h"
 #include "GuiUser.h"
 #include "GuiUserMgr.h"
+#include "GuiParams.h"
 
 //============================================================================
 GuiUser::GuiUser( AppCommon& app )
@@ -46,6 +47,18 @@ GuiUser::GuiUser( const GuiUser& rhs )
     , m_IsOnline( rhs.m_IsOnline )
     , m_HostSet( rhs.m_HostSet )
 {
+}
+
+//============================================================================
+QString GuiUser::describeMyFriendshipToHim( void )
+{
+    return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getMyFriendshipToHim() : eFriendStateIgnore );
+}
+
+//============================================================================
+QString GuiUser::describeHisFriendshipToMe( void )
+{
+    return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getHisFriendshipToMe() : eFriendStateIgnore );
 }
 
 //============================================================================

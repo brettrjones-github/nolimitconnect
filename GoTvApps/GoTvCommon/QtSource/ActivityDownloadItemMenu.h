@@ -18,7 +18,7 @@
 
 #include <PktLib/VxCommon.h>
 
-#include "Friend.h"
+#include "GuiUser.h"
 #include "AppletPeerBase.h"
 #include "ui_ActivityDownloadItemMenu.h"
 

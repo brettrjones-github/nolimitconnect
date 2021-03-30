@@ -115,7 +115,7 @@ void AppletPeerTodGame::onEndSession( void )
 }
 
 //============================================================================
-void AppletPeerTodGame::toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerTodGame::toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
 {
 	Q_UNUSED( callbackData );
 	if( ( ePluginType == m_ePluginType )

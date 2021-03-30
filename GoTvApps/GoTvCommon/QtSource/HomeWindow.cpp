@@ -132,7 +132,6 @@ static bool firstShow = true;
     {
         firstShow = false;
         m_MyApp.startupAppCommon( getAppletFrame( eAppletHomePage ), getAppletFrame( eAppletMessenger ) );
-        m_MyApp.getAppTheme().selectTheme( m_MyApp.getAppSettings().getLastSelectedTheme() );
     }
 }
 

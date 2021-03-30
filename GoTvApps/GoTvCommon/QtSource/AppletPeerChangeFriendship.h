@@ -20,7 +20,7 @@
 #include <QDialog>
 #include "ui_AppletPeerChangeFriendship.h"
 
-class Friend;
+class GuiUser;
 
 class AppletPeerChangeFriendship : public AppletPeerBase
 {
@@ -32,7 +32,7 @@ public:
 
 	//=== helpers ===//
 	//! set friend to change your permission to him   
-	void						setFriend( VxNetIdent * poFriend );
+	void						setFriend( GuiUser * poFriend );
 	//! get current permission selection
 	EFriendState				getPermissionSelection( void );
 	//! set which radio button is checked
@@ -49,5 +49,5 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletPeerChangeFriendshipUi	ui;
-	VxNetIdent *				m_Friend;					
+    GuiUser *				    m_Friend;					
 };

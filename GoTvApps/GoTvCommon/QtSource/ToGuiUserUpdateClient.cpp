@@ -1,8 +1,7 @@
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones 
 //
-// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
 //
 // This code is distributed in the hope that it will be useful,
@@ -14,14 +13,28 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "FriendList.h"
+#include "ToGuiUserUpdateClient.h"
 
 //============================================================================
-Friend::Friend()
+ToGuiUserUpdateClient::ToGuiUserUpdateClient( ToGuiUserUpdateInterface * callback )
+: m_Callback( callback )
 {
 }
 
 //============================================================================
-Friend::~Friend()
+ToGuiUserUpdateClient::ToGuiUserUpdateClient( const ToGuiUserUpdateInterface &rhs )
 {
+	*this = rhs;
 }
+
+//============================================================================
+ToGuiUserUpdateClient& ToGuiUserUpdateClient::operator =( const ToGuiUserUpdateClient &rhs )
+{
+	if( this != &rhs )
+	{
+		m_Callback			= rhs.m_Callback;
+	}
+
+	return *this;
+}
+

@@ -26,101 +26,107 @@ GuiUserMgr::GuiUserMgr( AppCommon& app )
 //============================================================================
 void GuiUserMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL(signalInternalUpdateUser(VxNetIdent*,EHostType)),	                    this, SLOT(slotInternalUpdateUser(VxNetIdent*,EHostType)), Qt::QueuedConnection );
-    connect( this, SIGNAL(signalInternalUserRemoved(VxGUID)),	                                this, SLOT(slotInternalUserRemoved(VxGUID)), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*,EHostType) ),	                this, SLOT( slotInternalUpdateUser(VxNetIdent*,EHostType) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserRemoved(VxGUID) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserOnlineStatus( VxNetIdent*, EHostType, bool ) ),    this, SLOT( slotInternalUserOnlineStatus( VxNetIdent*, EHostType, bool ) ), Qt::QueuedConnection );
 
-    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    m_MyApp.wantToGuiUserUpdateCallbacks( this, true );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactAdded( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactAdded( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactRemoved( void * callbackData, VxGUID& onlineId )
+void GuiUserMgr::toGuiContactRemoved( VxGUID& onlineId )
 {
     emit signalInternalUserRemoved( onlineId );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, EHostType hostType, bool newContact )
+void GuiUserMgr::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact )
 {
     emit signalInternalUserOnlineStatus( netIdent, hostType, true );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactOffline( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactOffline( VxNetIdent * netIdent )
 {
     emit signalInternalUserOnlineStatus( netIdent, eHostTypeUnknown, false );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactNearby( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactNearby( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactNotNearby( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactNotNearby( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactNameChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactNameChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactDescChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactDescChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactMyFriendshipChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactHisFriendshipChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiPluginPermissionChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiPluginPermissionChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactSearchFlagsChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiContactLastSessionTimeChange( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiUpdateMyIdent( void * callbackData, VxNetIdent * netIdent )
+void GuiUserMgr::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 {
-    emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );
+    emit signalInternalUpdateMyIdent( netIdent );
 }
 
 //============================================================================
 void GuiUserMgr::slotInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType )
 {
     updateUser( netIdent, hostType );
+}
+
+//============================================================================
+void GuiUserMgr::slotInternalUpdateMyIdent( VxNetIdent* netIdent )
+{
+    updateMyIdent( netIdent );
 }
 
 //============================================================================
@@ -175,12 +181,21 @@ void GuiUserMgr::removeUser( VxGUID& onlineId )
 }
 
 //============================================================================
-bool GuiUserMgr::userIsInSession( VxGUID& onlineId )
+bool GuiUserMgr::isUserInSession( VxGUID& onlineId )
 {
     m_UserListMutex.lock();
     GuiUser* guiUser = findUser( onlineId );
     m_UserListMutex.unlock();
     return guiUser && guiUser->isInSession();
+}
+
+//============================================================================
+GuiUser* GuiUserMgr::getUser( VxGUID& onlineId )
+{
+    m_UserListMutex.lock();
+    GuiUser* guiUser = findUser( onlineId );
+    m_UserListMutex.unlock();
+    return guiUser;
 }
 
 //============================================================================
@@ -212,6 +227,22 @@ GuiUser* GuiUserMgr::updateUser( VxNetIdent* hisIdent, EHostType hostType )
     }
 
     return guiUser;
+}
+
+//============================================================================
+void GuiUserMgr::updateMyIdent( VxNetIdent* myIdent )
+{
+    if( !m_MyIdent )
+    {
+        GuiUser* guiUser = new GuiUser( m_MyApp );
+        guiUser->setNetIdent( myIdent );
+        m_UserListMutex.lock();
+        m_MyIdent = guiUser;
+        m_MyOnlineId = m_MyIdent->getMyOnlineId();
+        m_UserListMutex.unlock();
+    }
+
+    emit signalMyIdentUpdated( m_MyIdent );
 }
 
 //============================================================================
@@ -259,5 +290,14 @@ void GuiUserMgr::onUserUpdated( GuiUser* user )
     if( isMessengerReady() )
     {
         emit signalUserUpdated( user );
+    }
+}
+
+//============================================================================
+void GuiUserMgr::onMyIdentUpdated( GuiUser* user )
+{
+    if( isMessengerReady() )
+    {
+        emit signalMyIdentUpdated( user );
     }
 }

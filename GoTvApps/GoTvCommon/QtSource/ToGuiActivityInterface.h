@@ -25,7 +25,7 @@
 #include <QString>
 
 class VxGUID;
-class VxNetIdent;
+class GuiUser;
 class GuiOfferSession;
 class AssetInfo;
 class BlobInfo;
@@ -41,28 +41,28 @@ public:
     virtual void				toGuiContactRemoved( void * callbackData, VxGUID& onlineId ) {}; 
 
 	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, EHostType hostType, bool newContact ){}; 
-	virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactNearby( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactNotNearby( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactNameChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactDescChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactMyFriendshipChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactHisFriendshipChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiPluginPermissionChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactSearchFlagsChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiContactLastSessionTimeChange( void * callbackData, VxNetIdent * netIdent ){}; 
-    virtual void				toGuiUpdateMyIdent( void * callbackData, VxNetIdent * netIdent ){}; 
+	virtual void				toGuiContactOffline( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactNearby( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactNotNearby( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactNameChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactDescChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactMyFriendshipChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactHisFriendshipChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiPluginPermissionChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactSearchFlagsChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiContactLastSessionTimeChange( void * callbackData, GuiUser * netIdent ){}; 
+    virtual void				toGuiUpdateMyIdent( void * callbackData, GuiUser * netIdent ){}; 
 
 
     virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) {};
     virtual int				    toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) { return 0;};
-	virtual void				toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
+	virtual void				toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg ){}; 
 
-	virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ){};
-	virtual void				toGuiSearchResultError( void * callbackData, EScanType eScanType, VxNetIdent * netIdent, int errCode ){};
-	virtual void				toGuiSearchResultProfilePic( void * callbackData, VxNetIdent * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
+	virtual void				toGuiScanResultSuccess( void * callbackData, EScanType eScanType, GuiUser * netIdent ){};
+	virtual void				toGuiSearchResultError( void * callbackData, EScanType eScanType, GuiUser * netIdent, int errCode ){};
+	virtual void				toGuiSearchResultProfilePic( void * callbackData, GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
 	virtual void				toGuiSearchResultFileSearch(	void *			callbackData, 
-																VxNetIdent *	netIdent, 		
+																GuiUser *	netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 

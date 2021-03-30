@@ -36,7 +36,7 @@ public:
 	AppCommon&					getMyApp( void )		{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
-	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
+	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						setIsPersonalRecorder( bool isPersonal );
     void                        setIsChatRoom( bool isChatRoom );
 
@@ -58,8 +58,8 @@ protected:
 	//=== vars ===//
 	AppCommon&				    m_MyApp;
 	ChatEntryWidget *			m_ChatEntryWidget{ nullptr };
-	VxNetIdent *				m_MyIdent{ nullptr };
-	VxNetIdent *				m_HisIdent{ nullptr };
+    GuiUser *				    m_MyIdent{ nullptr };
+    GuiUser *				    m_HisIdent{ nullptr };
 	AssetInfo					m_AssetInfo;
 	std::string					m_FileName;
 	int64_t						m_TimeRecStart{ 0 };

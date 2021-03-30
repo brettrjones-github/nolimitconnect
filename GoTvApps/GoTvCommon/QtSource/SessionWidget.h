@@ -19,7 +19,7 @@
 
 #include <CoreLib/AssetDefs.h>
 
-class VxNetIdent;
+class GuiUser;
 
 class SessionWidget : public QWidget
 {
@@ -29,7 +29,7 @@ public:
 	SessionWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
     virtual ~SessionWidget() = default;
 
-	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
+	void						setIdents( GuiUser * myIdent, GuiUser * hisIdent );
 	void						setEntryMode( EAssetType inputMode );
 	void						setIsPersonalRecorder( bool isPersonal );
 	void						setCanSend( bool canSend );

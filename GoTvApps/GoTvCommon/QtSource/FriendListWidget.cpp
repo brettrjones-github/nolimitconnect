@@ -45,8 +45,8 @@ FriendListWidget::FriendListWidget( QWidget * parent )
     connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),
                           this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-    connect( this, SIGNAL(signalUpdateFriend( VxNetIdent *,bool)),
-                          this, SLOT(slotUpdateFriend( VxNetIdent *,bool)), Qt::QueuedConnection );
+    connect( this, SIGNAL(signalUpdateFriend( GuiUser *,bool)),
+                          this, SLOT(slotUpdateFriend( GuiUser *,bool)), Qt::QueuedConnection );
 
     connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGUID)),
                           this, SLOT(slotRefreshFriend(VxGUID)), Qt::QueuedConnection )
@@ -105,7 +105,7 @@ void FriendListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool 
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+			GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
 			if( poFriend
 				&& ( poFriend->getMyOnlineId() == onlineId ) )
 			{
@@ -148,7 +148,7 @@ void FriendListWidget::slotRefreshFriendList( EFriendViewType eWhichFriendsToSho
 }
 
 //============================================================================
-void FriendListWidget::updateFriend( VxNetIdent * netIdent, bool sessionTimeChange ) 
+void FriendListWidget::updateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
 {
 	emit signalUpdateFriend( netIdent, sessionTimeChange );
 }
@@ -222,7 +222,7 @@ void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item 
 }
 
 //============================================================================
-void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTimeChange ) 
+void FriendListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
 {
 	LogMsg( LOG_INFO, "FriendListWidget::slotUpdateFriend  %d\n", this->count() );
 	FriendListEntryWidget * poWidget = findListEntryWidget( netIdent );
@@ -251,7 +251,7 @@ void FriendListWidget::slotUpdateFriend( VxNetIdent * netIdent, bool sessionTime
 				listEntryWidget = (FriendListEntryWidget *)this->item( rowIdx );
 				if( listEntryWidget )
 				{
-					Friend * listEntryFriend = (Friend *)listEntryWidget->data( Qt::UserRole + 2 ).toULongLong();
+                    GuiUser * listEntryFriend = (GuiUser *)listEntryWidget->data( Qt::UserRole + 2 ).toULongLong();
 					if( listEntryFriend )
 					{
 						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
@@ -294,7 +294,7 @@ void FriendListWidget::slotRefreshFriend( VxGUID friendId )
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+            GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
 			if( poFriend
 				&& ( poFriend->getMyOnlineId().getVxGUIDHiPart() == friendId.getVxGUIDHiPart() )
 				&& ( poFriend->getMyOnlineId().getVxGUIDLoPart() == friendId.getVxGUIDLoPart() ) )
@@ -311,7 +311,7 @@ void FriendListWidget::slotRefreshFriend( VxGUID friendId )
 
 //============================================================================
 //! called when friend in list is removed
-void FriendListWidget::removeFriend( VxNetIdent * netIdent )
+void FriendListWidget::removeFriend( GuiUser * netIdent )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -320,7 +320,7 @@ void FriendListWidget::removeFriend( VxNetIdent * netIdent )
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+            GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
 				LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName(), iIdx );
@@ -334,7 +334,7 @@ void FriendListWidget::removeFriend( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void FriendListWidget::updateListEntryBackgroundColor( VxNetIdent * netIdent, FriendListEntryWidget * poWidget )
+void FriendListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, FriendListEntryWidget * poWidget )
 {
 	if( netIdent->isNearby() )
 	{
@@ -352,7 +352,7 @@ void FriendListWidget::updateListEntryBackgroundColor( VxNetIdent * netIdent, Fr
 
 //============================================================================
 //!	fill friend into new QListWidgetItem *
-FriendListEntryWidget * FriendListWidget::friendToWidget( VxNetIdent * poFriend )
+FriendListEntryWidget * FriendListWidget::friendToWidget( GuiUser * poFriend )
 {
 	FriendListEntryWidget * item = new FriendListEntryWidget( this );
     item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
@@ -365,7 +365,7 @@ FriendListEntryWidget * FriendListWidget::friendToWidget( VxNetIdent * poFriend 
 }
 
 //============================================================================
-void FriendListWidget::updateListEntryWidget( FriendListEntryWidget * item, VxNetIdent * netIdent )
+void FriendListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent )
 {
 	QString strName = netIdent->getOnlineName();
 	strName += " - ";
@@ -390,13 +390,13 @@ void FriendListWidget::updateListEntryWidget( FriendListEntryWidget * item, VxNe
 
 //============================================================================
 //!	get friend from QListWidgetItem data
-Friend * FriendListWidget::widgetToFriend( FriendListEntryWidget * item )
+GuiUser * FriendListWidget::widgetToFriend( FriendListEntryWidget * item )
 {
-	return (Friend *)item->data( Qt::UserRole + 2 ).toULongLong();
+	return (GuiUser *)item->data( Qt::UserRole + 2 ).toULongLong();
 }
 
 //============================================================================
-FriendListEntryWidget * FriendListWidget::findListEntryWidget( VxNetIdent * netIdent )
+FriendListEntryWidget * FriendListWidget::findListEntryWidget( GuiUser * netIdent )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -405,7 +405,7 @@ FriendListEntryWidget * FriendListWidget::findListEntryWidget( VxNetIdent * netI
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-			Friend * poFriend = (Friend *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+            GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
 				return poWidget;

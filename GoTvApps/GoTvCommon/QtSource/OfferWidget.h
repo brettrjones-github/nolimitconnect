@@ -18,7 +18,7 @@
 #include "ui_OfferWidget.h"
 #include <QListWidgetItem>
 
-class Friend;
+class GuiUser;
 class GuiOfferSession;
 class AppCommon;
 class MyIcons;

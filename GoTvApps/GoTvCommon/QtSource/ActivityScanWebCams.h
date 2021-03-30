@@ -44,20 +44,20 @@ public:
 	void						setTitle( QString strTitle );
 
     virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
-    virtual void				toGuiScanResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiScanResultSuccess( void * userData, EScanType eScanType, GuiUser * netIdent ) override;
     virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );
 
 signals:
-	void						signalNewWebCamSession( VxNetIdent * netIdent );
+	void						signalNewWebCamSession( GuiUser * netIdent );
 	void						signalPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						signalPlayAudio( unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 	void						signalSearchComplete();
 
 public slots:
 	void						slotSearchComplete();
-	void						slotNewWebCamSession( VxNetIdent * netIdent );
+	void						slotNewWebCamSession( GuiUser * netIdent );
 	void						slotPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						slotPlayAudio(  unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
@@ -75,13 +75,13 @@ protected:
     void						hideEvent( QHideEvent * ev ) override;
 
 	void						setScanStatusText( QString strMsg );
-	void						setupIdentWidget( VxNetIdent * netIdent );
+	void						setupIdentWidget( GuiUser * netIdent );
 
 	void						startCountdown();
 	void						updateCountdownGui();
 	void						startStopScan( bool startScan );
 	void						showNextCam( void ); 
-	void						doCamConnect( VxNetIdent * netIdent );
+	void						doCamConnect( GuiUser * netIdent );
 	void						updateAvailableGui( void );
 	void						startWebCamSession( VxGUID& onlineId, bool startSession );
 	void						setCamViewToOfflineImage( void );
@@ -89,14 +89,14 @@ protected:
 
 	//=== vars ===//
 	Ui::ScanWebCamsDialog		ui;
-	VxNetIdent *				m_HisIdent;
+    GuiUser *				    m_HisIdent;
 	int							m_iCountdownCnt;
 	bool						m_bPaused;
 	QTimer *					m_CountdownTimer;
 	EScanType					m_eScanType;
 	bool						m_bIconConnected;
 	bool						m_bSearchComplete;
-	QVector<VxNetIdent *>		m_ScanList;
+	QVector<GuiUser *>		    m_ScanList;
 	bool						m_ShowNextCam;
 	bool						m_IsScanning;
 	VxGUID						m_LclSessionId;

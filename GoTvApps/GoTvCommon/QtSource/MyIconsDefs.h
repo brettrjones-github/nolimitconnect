@@ -19,6 +19,7 @@ enum EMyIcons
 
     eMyIconEyeAll,
     eMyIconEyeChatRoom,
+    eMyIconEyeFriends,
     eMyIconEyeGroup,
     eMyIconEyeHide,
     eMyIconEyeRandomConnect,
@@ -364,6 +365,12 @@ enum EMyIcons
     eMyIconFileSaveAs,
     eMyIconZoomIn,
     eMyIconZoomOut,
+
+    eMyIconOfferFile,
+    eMyIconOfferFriendship,
+    eMyIconOfferTruthOrDare,
+    eMyIconOfferVideoChat,
+    eMyIconOfferVoicePhone,
 
 	eMaxMyIcon	// must be last
 };

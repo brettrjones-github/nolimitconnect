@@ -76,7 +76,7 @@ void AppletPeerVoicePhone::onInSession( bool isInSession )
 }
 
 //============================================================================
-void AppletPeerVoicePhone::toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg )
+void AppletPeerVoicePhone::toGuiInstMsg( void * callbackData, GuiUser * friendIdent, EPluginType ePluginType, QString instMsg )
 {
 	Q_UNUSED( callbackData );
 	if( ( ePluginType == m_ePluginType )

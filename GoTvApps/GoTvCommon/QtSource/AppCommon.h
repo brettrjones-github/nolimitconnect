@@ -29,6 +29,7 @@
 #include "ToGuiActivityClient.h"
 #include "ToGuiFileXferClient.h"
 #include "ToGuiHardwareCtrlClient.h"
+#include "ToGuiUserUpdateClient.h"
 
 #include "GoTvInterface/IToGui.h"
 #include "GoTvInterface/IGoTvRender.h"
@@ -176,7 +177,7 @@ public:
 	void						launchApplet( EApplet applet, QWidget * parent );
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
-	void						startActivity( EPluginType ePluginType, VxNetIdent * friendIdent, QWidget * parent = 0 );
+	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget * parent = 0 );
 	void						executeActivity( GuiOfferSession * offer, QWidget * parent );
 
 	void						launchLibraryActivity( uint8_t fileTypeFilter = 0 );
@@ -191,6 +192,7 @@ public:
 															bool						wantCallback );
 	void						wantToGuiHardwareCtrlCallbacks( ToGuiHardwareControlInterface *	callback, 
 																bool							wantCallback );
+    void						wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callback, bool	wantCallback );
 
 	bool						getIsPluginVisible( EPluginType ePluginType );
 	void						setPluginVisible( EPluginType ePluginType, bool isVisible );
@@ -434,6 +436,7 @@ public:
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
+    // user update interface
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
 
@@ -561,25 +564,21 @@ public:
     //=== implementation ===//
     //============================================================================
 
-	virtual void				onFriendAdded( VxNetIdent * poFriend );
-	virtual void				onFriendUpdated( VxNetIdent * poFriend );
-	virtual void				onFriendRemoved( VxNetIdent * poFriend );
-
 	virtual void				onToGuiRxedPluginOffer( GuiOfferSession * offerSession );
 	virtual void				onToGuiRxedOfferReply( GuiOfferSession * offerSession );
 
 	bool						userCanceled( void );
 
 	// returns true if showed activity
-	bool 						offerToFriendPluginSession( VxNetIdent * poFriend, EPluginType ePluginType, QWidget * parent = 0 );
-	void						offerToFriendViewProfile( VxNetIdent * poFriend );
-	void						offerToFriendViewStoryboard( VxNetIdent * poFriend );
-	void						offerToFriendViewSharedFiles( VxNetIdent * poFriend );
-	void						offerToFriendSendFile( VxNetIdent * poFriend );
-	void						offerToFriendChangeFriendship( VxNetIdent * poFriend );
-	void						offerToFriendUseAsRelay( VxNetIdent * poFriend );
+	bool 						offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePluginType, QWidget * parent = 0 );
+	void						offerToFriendViewProfile( GuiUser * poFriend );
+	void						offerToFriendViewStoryboard( GuiUser * poFriend );
+	void						offerToFriendViewSharedFiles( GuiUser * poFriend );
+	void						offerToFriendSendFile( GuiUser * poFriend );
+	void						offerToFriendChangeFriendship( GuiUser * poFriend );
+	void						offerToFriendUseAsRelay( GuiUser * poFriend );
 
-	void						viewWebServerPage( VxNetIdentBase * netIdent, const char * webPageFileName );
+	void						viewWebServerPage( GuiUser * netIdent, const char * webPageFileName );
 
 	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, EAgeType age, int primaryLanguage, int contentType );
     void                        setupAccountResources( VxNetIdent& userAccountIdent );
@@ -621,21 +620,7 @@ signals:
 	void						signalAssetViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
     void						signalBlobViewMsgAction( EBlobAction, VxGUID onlineId, int pos0to100000 );
 
-	void						signalToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg );
-
-    /*
-	void						signalRemoveContact( VxNetIdent * netIdent );
-	void						signalContactNearby( VxNetIdent * netIdent );
-	void						signalContactNotNearby( VxNetIdent * netIdent );
-	void						signalContactNameChange( VxNetIdent * netIdent );
-	void						signalContactDescChange( VxNetIdent * netIdent );
-	void						signalContactMyFriendshipChange( VxNetIdent * netIdent );
-	void						signalContactHisFriendshipChange( VxNetIdent * netIdent );
-	void						signalContactPluginPermissionChange( VxNetIdent * netIdent );
-	void						signalContactSearchFlagsChange( VxNetIdent * netIdent );
-	void						signalContactLastSessionTimeChange( VxNetIdent * netIdent );
-	void						signalUpdateMyIdent( VxNetIdent * netIdent );
-    */
+	void						signalToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
 
 	void						signalEnableVideoCapture( bool enableCapture );
 	void						signalEnableMicrophoneRecording( bool enableMicInput );
@@ -658,7 +643,7 @@ protected slots:
 
 	void						slotOnNotifyIconFlashTimeout( bool bWhite );
 
-	void						slotToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg );
+	void						slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
 
 	//void						slotSearchButtonClick( void );
 	// void						slotFileMenuButtonClick( void );
@@ -685,21 +670,6 @@ protected slots:
 
 	void						onEditPermissionsSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 
-    /*
-	void						slotRemoveContact( VxNetIdent * netIdent );
-	void						slotContactOnline( VxNetIdent * netIdent, bool newContact );
-	void						slotContactOffline( VxNetIdent * netIdent );
-	void						slotContactNearby( VxNetIdent * netIdent );
-	void						onContactNotNearby( VxNetIdent * netIdent );
-	void						onContactNameChange( VxNetIdent * netIdent );
-	void						onContactDescChange( VxNetIdent * netIdent );
-	void						onContactMyFriendshipChange( VxNetIdent * netIdent );
-	void						onContactHisFriendshipChange( VxNetIdent * netIdent );
-	void						onContactPluginPermissionChange( VxNetIdent * netIdent );
-	void						onContactSearchFlagsChange( VxNetIdent * netIdent );
-	void						onContactLastSessionTimeChange( VxNetIdent * netIdent );
-    */
-
 	void						onEngineStatusMsg( QString );
 
 	void						onUpdateMyIdent( VxNetIdent * poMyIdent );
@@ -718,17 +688,15 @@ private:
 	void						showUserNameInTitle();
 	void						sendAppSettingsToEngine( void );
 	void						startNetworkMonitor( void );
-	bool						shouldShowFriend( VxNetIdent * poFriend );
 
-	void						removePluginSessionOffer( EPluginType ePluginType, VxNetIdent * poFriend );
+	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser * poFriend );
 
 	void						addPermissionMenuEntry( PopupMenu *		poPopupMenu, 
 														EPluginType		ePluginType, 
 														EMyIcons		eIconType, 
 														const char *	pText );
 	void						connectSignals( void );
-	void						checkForIniSettings( VxNetIdent * netIdent, std::string& strNetworkName );
-	void						updateFriendList( VxNetIdent * netIdent, bool sessionTimeChange = false );
+	void						updateFriendList( GuiUser * netIdent, bool sessionTimeChange = false );
 
 	void						toGuiActivityClientsLock( void );
 	void						toGuiActivityClientsUnlock( void );
@@ -741,6 +709,10 @@ private:
 	void						toGuiHardwareCtrlLock( void );
 	void						toGuiHardwareCtrlUnlock( void );
 	void						clearHardwareCtrlList( void );
+
+    void						toGuiUserUpdateClientsLock( void );
+    void						toGuiUserUpdateClientsUnlock( void );
+    void						clearUserUpdateClientList( void );
 
 	//=== vars ===//
 	QApplication&				m_QApp;
@@ -805,6 +777,9 @@ private:
 	
 	VxMutex						m_ToGuiHardwareCtrlMutex;
 	std::vector<ToGuiHardwareCtrlClient> m_ToGuiHardwareCtrlList;
+
+    VxMutex						m_ToGuiUserUpdateClientMutex;
+    std::vector<ToGuiUserUpdateClient> m_ToGuiUserUpdateClientList;
 
 	bool						m_LibraryActivityActive = false;
 	bool						m_VidCaptureEnabled = false;

@@ -44,7 +44,7 @@ void SessionWidget::slotStatusMsg( QString msg )
 }
 
 //============================================================================
-void SessionWidget::setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent )
+void SessionWidget::setIdents( GuiUser * myIdent, GuiUser * hisIdent )
 {
 	ui.m_ChatEntry->setIdents( myIdent, hisIdent );
 	ui.m_HistoryList->setIdents( myIdent, hisIdent );

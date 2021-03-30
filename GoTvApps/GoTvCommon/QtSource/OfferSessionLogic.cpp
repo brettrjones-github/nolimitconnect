@@ -269,10 +269,9 @@ void OfferSessionLogic::toGuiPluginSessionEnded( GuiOfferSession * offerSession 
 }
 
 //======================================================================== 
-void OfferSessionLogic::toGuiContactOffline( VxNetIdent * friendIdent ) 
+void OfferSessionLogic::toGuiContactOffline( GuiUser * friendIdent ) 
 {
-	if( ( 0 != m_HisIdent )
-		&& ( friendIdent->getMyOnlineId() == m_HisIdent->getMyOnlineId() ) )
+	if( m_HisIdent && ( friendIdent->getMyOnlineId() == m_HisIdent->getMyOnlineId() ) )
 	{
 		//m_OffersMgr.contactWentOffline( m_HisIdent );
 		handleSessionEnded( eOfferResponseUserOffline );
