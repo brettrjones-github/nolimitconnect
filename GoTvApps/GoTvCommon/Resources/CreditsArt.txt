@@ -50,7 +50,7 @@ edit-print.svg
 edit-cut.svg
 eye-all.svg (modified)
 eye-chat-room.svg (modified)
-c
+eye-friends
 eye-group.svg (modified)
 eye-hide.svg
 eye-random-connect.svg (modified)
@@ -81,6 +81,8 @@ offer-friendship.svg (modified)
 offer-truth-or-dare.svg (modified)
 offer-video-chat.svg (modified)
 offer-voice-phone.svg (modified)
+pin-pinned.svg
+pin-unpinned.svg
 plugin.svg
 radio-tower.svg
 remote-control.svg

@@ -62,9 +62,11 @@ public:
     void                        onMyIdentUpdated( GuiUser* user );
 
     void                        lockUserMgr( void )             { m_UserListMutex.lock(); }
-    void                        unlockUserMgr( void )           { m_UserListMutex.lock(); }
+    void                        unlockUserMgr( void )           { m_UserListMutex.unlock(); }
     GuiUser*                    getUser( VxGUID& onlineId );
     std::map<VxGUID, GuiUser*>& getUserList( void )             { return m_UserList; }
+
+    void                        updateMyIdent( VxNetIdent* myIdent );
 
 signals:
     void				        signalMyIdentUpdated( GuiUser* user ); 
@@ -89,8 +91,7 @@ protected:
     void                        removeUser( VxGUID& onlineId );
     GuiUser*                    findUser( VxGUID& onlineId );
     GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
-    void                        updateMyIdent( VxNetIdent* myIdent );
-
+    
     AppCommon&                  m_MyApp;
     VxMutex                     m_UserListMutex;
     // map of online id to GuiUser

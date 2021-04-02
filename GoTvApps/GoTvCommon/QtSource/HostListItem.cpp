@@ -13,12 +13,12 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "HostListEntryWidget.h"
+#include "HostListItem.h"
 #include "GuiHostSession.h"
 #include "GuiParams.h"
 
 //============================================================================
-HostListEntryWidget::HostListEntryWidget(QWidget *parent  )
+HostListItem::HostListItem(QWidget *parent  )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 {
@@ -29,7 +29,7 @@ HostListEntryWidget::HostListEntryWidget(QWidget *parent  )
 }
 
 //============================================================================
-HostListEntryWidget::~HostListEntryWidget()
+HostListItem::~HostListItem()
 {
     GuiHostSession * hostSession = (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
@@ -39,63 +39,63 @@ HostListEntryWidget::~HostListEntryWidget()
 }
 
 //============================================================================
-MyIcons& HostListEntryWidget::getMyIcons( void )
+MyIcons& HostListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void HostListEntryWidget::resizeEvent(QResizeEvent* resizeEvent)
+void HostListItem::resizeEvent(QResizeEvent* resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
     updateWidgetFromInfo();
 }
 
 //============================================================================
-void HostListEntryWidget::mousePressEvent(QMouseEvent * event)
+void HostListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
     emit signalHostListItemClicked( this );
 }
 
 //============================================================================
-void HostListEntryWidget::setHostSession( GuiHostSession* hostSession )
+void HostListItem::setHostSession( GuiHostSession* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
 }
 
 //============================================================================
-GuiHostSession * HostListEntryWidget::getHostSession( void )
+GuiHostSession * HostListItem::getHostSession( void )
 {
     return (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-void HostListEntryWidget::slotIconButtonClicked()
+void HostListItem::slotIconButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "HostListEntryWidget::slotIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "HostListItem::slotIconButtonClicked" );
 	emit signalIconButtonClicked( this );
 }
 
 //============================================================================
-void HostListEntryWidget::slotMenuButtonPressed( void )
+void HostListItem::slotMenuButtonPressed( void )
 {
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void HostListEntryWidget::slotMenuButtonReleased( void )
+void HostListItem::slotMenuButtonReleased( void )
 {
 }
 
 //============================================================================
-void HostListEntryWidget::slotJoinButtonPressed( void )
+void HostListItem::slotJoinButtonPressed( void )
 {
     emit signalJoinButtonClicked( this );
 }
 
 //============================================================================
-void HostListEntryWidget::updateWidgetFromInfo( void )
+void HostListItem::updateWidgetFromInfo( void )
 {
     GuiHostSession* hostSession = getHostSession();
     if( nullptr == hostSession )

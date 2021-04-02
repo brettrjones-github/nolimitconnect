@@ -13,25 +13,29 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "UserListEntryWidget.h"
-#include "GuiHostSession.h"
+#include "UserListItem.h"
+#include "GuiUserSessionBase.h"
 #include "GuiParams.h"
 
 //============================================================================
-UserListEntryWidget::UserListEntryWidget(QWidget *parent  )
+UserListItem::UserListItem(QWidget *parent  )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
+    ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
+    ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
+    ui.m_MenuButton->setIcon( eMyIconMenu );
+
     connect( ui.m_AvatarButton,     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
     connect( ui.m_FriendshipButton, SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
-	connect( ui.m_MenuButton,       SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
+	connect( ui.m_MenuButton,       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
 }
 
 //============================================================================
-UserListEntryWidget::~UserListEntryWidget()
+UserListItem::~UserListItem()
 {
-    GuiHostSession * hostSession = (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiUserSessionBase * hostSession = (GuiUserSessionBase *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -39,85 +43,86 @@ UserListEntryWidget::~UserListEntryWidget()
 }
 
 //============================================================================
-MyIcons& UserListEntryWidget::getMyIcons( void )
+QSize UserListItem::calculateSizeHint( void )
+{
+    return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( 62 * GuiParams::getGuiScale() ) );
+}
+
+//============================================================================
+MyIcons& UserListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void UserListEntryWidget::resizeEvent(QResizeEvent* resizeEvent)
+void UserListItem::resizeEvent(QResizeEvent* resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
     updateWidgetFromInfo();
 }
 
 //============================================================================
-void UserListEntryWidget::mousePressEvent(QMouseEvent * event)
+void UserListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
     emit signalUserListItemClicked( this );
 }
 
 //============================================================================
-void UserListEntryWidget::setHostSession( GuiHostSession* hostSession )
+void UserListItem::setUserSession( GuiUserSessionBase* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
 }
 
 //============================================================================
-GuiHostSession * UserListEntryWidget::getHostSession( void )
+GuiUserSessionBase * UserListItem::getUserSession( void )
 {
-    return (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return (GuiUserSessionBase *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-void UserListEntryWidget::slotAvatarButtonClicked()
+void UserListItem::slotAvatarButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "UserListEntryWidget::slotIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "UserListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserListEntryWidget::slotFriendshipButtonClicked()
+void UserListItem::slotFriendshipButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "UserListEntryWidget::slotFriendshipButtonClicked" );
+    LogMsg( LOG_DEBUG, "UserListItem::slotFriendshipButtonClicked" );
     emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserListEntryWidget::slotMenuButtonPressed( void )
+void UserListItem::slotMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void UserListEntryWidget::slotMenuButtonReleased( void )
+void UserListItem::updateWidgetFromInfo( void )
 {
-}
-
-//============================================================================
-void UserListEntryWidget::updateWidgetFromInfo( void )
-{
-    GuiHostSession* hostSession = getHostSession();
+    GuiUserSessionBase* hostSession = getUserSession();
     if( nullptr == hostSession )
     {
         return;
     }
 
-    VxNetIdent& hostIdent = hostSession->getHostIdent();
-    QString strName = hostIdent.getOnlineName();
+    GuiUser *hostIdent = hostSession->getUserIdent();
+    QString strName = hostIdent->getOnlineName();
     strName += " - ";
-    QString strDesc = hostIdent.getOnlineDescription();
+    QString strDesc = hostIdent->getOnlineDescription();
 
     // updateListEntryBackgroundColor( netIdent, item );
 
-    ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent.getMyFriendshipToHim() ) );
+    ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
     QPalette pal = ui.m_FriendshipButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent.getHasTextOffers() ? Qt::yellow : Qt::white ));
+    pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
     ui.m_FriendshipButton->setAutoFillBackground(true);
     ui.m_FriendshipButton->setPalette(pal);
     ui.m_FriendshipButton->update();
     ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
+    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );
 }

@@ -22,7 +22,7 @@
 
 class AppCommon;
 class MyIcons;
-class VxNetIdent;
+class GuiUser;
 class AssetInfo;
 class ChatEntryWidget;
 

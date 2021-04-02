@@ -57,9 +57,9 @@ AppletRandomConnectJoinSearch::AppletRandomConnectJoinSearch(	AppCommon&		    ap
     connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
         this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
 
-    connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListEntryWidget* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListEntryWidget* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListEntryWidget* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListEntryWidget* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListEntryWidget* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListEntryWidget* ) ) );
+    connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListItem* ) ) );
+    connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
+    connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
 
     setStatusLabel( QObject::tr( "Search For Random Connect Host To Join" ) );
     std::string lastHostSearchText;
@@ -244,19 +244,19 @@ void AppletRandomConnectJoinSearch::clearStatus( void )
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem )
+void AppletRandomConnectJoinSearch::slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem )
+void AppletRandomConnectJoinSearch::slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem )
+void AppletRandomConnectJoinSearch::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
 }

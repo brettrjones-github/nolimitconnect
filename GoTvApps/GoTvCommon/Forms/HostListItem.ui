@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>HostListEntryWidgetUi</class>
- <widget class="QWidget" name="HostListEntryWidgetUi">
+ <class>HostListItemUi</class>
+ <widget class="QWidget" name="HostListItemUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -58,13 +58,13 @@
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="title">
-      <string/>
+      <string notr="true"/>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="spacing">

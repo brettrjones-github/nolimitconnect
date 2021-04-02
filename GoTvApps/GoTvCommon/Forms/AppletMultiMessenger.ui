@@ -246,7 +246,7 @@
        </widget>
       </item>
       <item>
-       <widget class="GuiUserListWidget" name="m_UserListWidget" native="true">
+       <widget class="UserListWidget" name="m_UserListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -695,9 +695,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>GuiUserListWidget</class>
+   <class>UserListWidget</class>
    <extends>QWidget</extends>
-   <header>GuiUserListWidget.h</header>
+   <header>UserListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

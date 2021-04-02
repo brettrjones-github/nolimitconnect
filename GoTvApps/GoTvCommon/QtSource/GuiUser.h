@@ -61,6 +61,7 @@ public:
     bool                        isGuest( void )                         { return m_NetIdent ? m_NetIdent->isGuest() : false; }
     bool                        isAnonymous( void )                     { return m_NetIdent ? m_NetIdent->isAnonymous() : false; }
     bool                        isIgnored( void )                       { return m_NetIdent ? m_NetIdent->isIgnored() : true; }
+    bool                        isMyself( void );
 
     bool                        isGroupHosted( void )                   { return m_HostSet.find( eHostTypeGroup ) != m_HostSet.end(); }
     bool                        isChatRoomHosted( void )                { return m_HostSet.find( eHostTypeChatRoom ) != m_HostSet.end(); }

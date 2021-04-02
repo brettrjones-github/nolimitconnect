@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
 // Copyright (C) 2021 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -15,46 +14,46 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_HostListEntryWidget.h"
+#include "ui_UserListEntryWidget.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
 
-class GuiHostSession;
+class GuiUserSessionBase;
 
-class HostListEntryWidget : public QWidget, public QListWidgetItem
+class UserListItem : public QWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	HostListEntryWidget( QWidget *parent=0 );
-	virtual ~HostListEntryWidget();
+	UserListItem( QWidget *parent=0 );
+	virtual ~UserListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
 
-    void                        setHostSession( GuiHostSession* hostSession );
-    GuiHostSession*             getHostSession( void );
+    void                        setUserSession( GuiUserSessionBase* hostSession );
+    GuiUserSessionBase*         getUserSession( void );
 
     void						updateWidgetFromInfo( void );
+    QSize                       calculateSizeHint( void );
 
 signals:
-    void						signalHostListItemClicked( QListWidgetItem * poItemWidget );
-	void						signalIconButtonClicked( HostListEntryWidget* listEntryWidget );
-	void						signalMenuButtonClicked( HostListEntryWidget* listEntryWidget );
-    void						signalJoinButtonClicked( HostListEntryWidget* listEntryWidget );
+    void						signalUserListItemClicked( UserListItem * poItemWidget );
+	void						signalAvatarButtonClicked( UserListItem* listEntryWidget );
+    void						signalFriendshipButtonClicked( UserListItem* listEntryWidget );
+	void						signalMenuButtonClicked( UserListItem* listEntryWidget );
 
 public slots:
-	void						slotIconButtonClicked( void );
-	void						slotMenuButtonPressed( void );
-	void						slotMenuButtonReleased( void );
-    void						slotJoinButtonPressed( void );
- 
+	void						slotAvatarButtonClicked( void );
+    void						slotFriendshipButtonClicked( void );
+	void						slotMenuButtonClicked( void );
+
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::HostListEntryWidgetUi	ui;
+    Ui::UserListEntryWidgetUi	ui;
     AppCommon&					m_MyApp;
 };
 

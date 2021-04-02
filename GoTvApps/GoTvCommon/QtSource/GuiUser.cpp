@@ -50,6 +50,12 @@ GuiUser::GuiUser( const GuiUser& rhs )
 }
 
 //============================================================================
+bool GuiUser::isMyself( void )
+{
+    return getMyOnlineId() == m_GuiUserMgr.getMyOnlineId();
+}
+
+//============================================================================
 QString GuiUser::describeMyFriendshipToHim( void )
 {
     return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getMyFriendshipToHim() : eFriendStateIgnore );

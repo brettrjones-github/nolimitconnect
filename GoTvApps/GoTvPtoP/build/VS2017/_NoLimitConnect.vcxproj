@@ -827,11 +827,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -970,7 +969,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1422,7 +1422,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui">
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\HostListEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HostListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\IdentWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ImageListEntry.ui" />
@@ -1470,7 +1470,7 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\TodGameWidget.ui">
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HomeWindow.ui">
@@ -2121,13 +2121,12 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogMgr.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListItem.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h">
@@ -2230,7 +2229,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

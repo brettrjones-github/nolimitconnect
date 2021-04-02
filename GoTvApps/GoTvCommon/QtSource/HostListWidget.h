@@ -20,7 +20,7 @@
 
 #include <QListWidget>
 
-class HostListEntryWidget;
+class HostListItem;
 class VxNetIdent;
 class AppCommon;
 class MyIcons;
@@ -40,32 +40,32 @@ public:
     void                        clearHostList( void );
 
     void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
-    HostListEntryWidget*        addOrUpdateHostSession( GuiHostSession* hostSession );
+    HostListItem*               addOrUpdateHostSession( GuiHostSession* hostSession );
 
     GuiHostSession*             findSession( VxGUID& lclSessionId );
-    HostListEntryWidget*        findListEntryWidgetBySessionId( VxGUID& sessionId );
-    HostListEntryWidget*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    HostListItem*               findListEntryWidgetBySessionId( VxGUID& sessionId );
+    HostListItem*               findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
 signals:
-    virtual void                signalIconButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
-    virtual void                signalMenuButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
-    virtual void                signalJoinButtonClicked( GuiHostSession* hostSession, HostListEntryWidget* hostItem );
+    void                        signalIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
+    void                        signalMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
+    void                        signalJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
 
 protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotHostListItemClicked( QListWidgetItem* hostItem );
-    void                        slotIconButtonClicked( HostListEntryWidget* hostItem );
-    void                        slotMenuButtonClicked( HostListEntryWidget* hostItem );
-    void                        slotJoinButtonClicked( HostListEntryWidget* hostItem );
+    void                        slotIconButtonClicked( HostListItem* hostItem );
+    void                        slotMenuButtonClicked( HostListItem* hostItem );
+    void                        slotJoinButtonClicked( HostListItem* hostItem );
 
 protected:
-    HostListEntryWidget*        sessionToWidget( GuiHostSession* hostSession );
-    GuiHostSession*				widgetToSession( HostListEntryWidget* hostItem );
+    HostListItem*               sessionToWidget( GuiHostSession* hostSession );
+    GuiHostSession*				widgetToSession( HostListItem* hostItem );
 
-    virtual void                onHostListItemClicked( HostListEntryWidget* hostItem );
-    virtual void                onIconButtonClicked( HostListEntryWidget* hostItem );
-    virtual void                onMenuButtonClicked( HostListEntryWidget* hostItem );
-    virtual void                onJoinButtonClicked( HostListEntryWidget* hostItem );
+    virtual void                onHostListItemClicked( HostListItem* hostItem );
+    virtual void                onIconButtonClicked( HostListItem* hostItem );
+    virtual void                onMenuButtonClicked( HostListItem* hostItem );
+    virtual void                onJoinButtonClicked( HostListItem* hostItem );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;

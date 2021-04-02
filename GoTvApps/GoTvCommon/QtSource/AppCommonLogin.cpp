@@ -167,6 +167,8 @@ void AppCommon::completeLogin( void )
     m_Engine.fromGuiUserLoggedOn( netIdent );
     setLoginCompleted( true );
 
+    m_UserMgr.updateMyIdent( netIdent );
+
     // get settings from engine
     m_eLastSelectedWhichContactsToView = m_Engine.getEngineSettings().getWhichContactsToView();
     //ui.m_ListViewTypeComboBox->setCurrentIndex( m_eLastSelectedWhichContactsToView );

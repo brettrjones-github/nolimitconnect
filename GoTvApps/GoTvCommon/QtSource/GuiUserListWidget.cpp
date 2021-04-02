@@ -13,9 +13,10 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "UserListEntryWidget.h"
+#include "UserListItem.h"
+#include "GuiUser.h"
 #include "GuiUserListWidget.h"
-#include "GuiHostSession.h"
+#include "GuiUserSessionBase.h"
 
 #include "MyIcons.h"
 #include "PopupMenu.h"
@@ -24,6 +25,8 @@
 #include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
+
+#include <vector>
  
 //============================================================================
 GuiUserListWidget::GuiUserListWidget( QWidget * parent )
@@ -34,33 +37,17 @@ GuiUserListWidget::GuiUserListWidget( QWidget * parent )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
+    setShowMyself( true );
+
+    connect( &m_UserMgr, SIGNAL(signalMyIdentUpdated(GuiUser *)),	            this, SLOT(slotMyIdentUpdated(GuiUser *)) );
 
     connect( &m_UserMgr, SIGNAL(signalUserAdded(GuiUser *)),	                this, SLOT(slotUserAdded(GuiUser *)) );
     connect( &m_UserMgr, SIGNAL(signalUserRemoved(VxGUID)),	                    this, SLOT(slotUserRemoved(VxGUID)) );
     connect( &m_UserMgr, SIGNAL(signalUserUpdated(GuiUser *)),	                this, SLOT(slotUserUpdated(GuiUser *)) );
     connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus(GuiUser *, bool)),	    this, SLOT(slotUserOnlineStatus(GuiUser *, bool)) );
 
-    connect( this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) ;
-}
-
-//============================================================================
-UserListEntryWidget* GuiUserListWidget::sessionToWidget( GuiHostSession* hostSession )
-{
-    UserListEntryWidget* hostItem = new UserListEntryWidget(this);
-    hostItem->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
-
-    hostItem->setHostSession( hostSession );
-
-    connect( hostItem, SIGNAL(signalHostListItemClicked(QListWidgetItem *)),	    this, SLOT(slotHostListItemClicked(QListWidgetItem *)) );
-    connect( hostItem, SIGNAL(signalIconButtonClicked(UserListEntryWidget *)),	    this, SLOT(slotIconButtonClicked(UserListEntryWidget *)) );
-    connect( hostItem, SIGNAL(signalMenuButtonClicked(UserListEntryWidget *)),	    this, SLOT(slotMenuButtonClicked(UserListEntryWidget *)) );
-    connect( hostItem, SIGNAL(signalJoinButtonClicked(UserListEntryWidget *)),		this, SLOT(slotJoinButtonClicked(UserListEntryWidget *)) );
-
-    hostItem->updateWidgetFromInfo();
-
-    return hostItem;
+    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),                      this, SLOT(slotItemClicked(QListWidgetItem *))) ;
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),                this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 }
 
 //============================================================================
@@ -69,6 +56,13 @@ bool GuiUserListWidget::isUserAListMatch( GuiUser* user )
     bool isMatch = false;
     if( user )
     {
+        // BRJ temp for debugging
+        if( user->isMyself() && getShowMyself())
+        {
+            return true;
+        }
+
+
         if( eUserListViewTypeFriends == m_ViewType )
         {
             if( user->isFriend() || user->isAdmin() )
@@ -100,6 +94,15 @@ bool GuiUserListWidget::isUserAListMatch( GuiUser* user )
     }
 
     return isMatch;
+}
+
+//============================================================================
+void GuiUserListWidget::slotMyIdentUpdated( GuiUser* user )
+{
+    if( getShowMyself() && user )
+    {
+        slotUserUpdated( user );
+    }
 }
 
 //============================================================================
@@ -142,11 +145,6 @@ void GuiUserListWidget::slotUserOnlineStatus( GuiUser* user, bool isOnline )
 void GuiUserListWidget::showEvent( QShowEvent * ev )
 {
     QListWidget::showEvent( ev );
-    if( m_FirstShow )
-    {
-        m_FirstShow = false;
-        setUserListViewType( eUserListViewTypeFriends );
-    }
 }
 
 //============================================================================
@@ -163,30 +161,136 @@ void GuiUserListWidget::setUserListViewType( EUserListViewType viewType )
 void GuiUserListWidget::refreshUserList( void )
 {
     clearUserList();
+    std::vector<GuiUser*> updateUserList;
     m_UserMgr.lockUserMgr();
     std::map<VxGUID, GuiUser*>& userList = m_UserMgr.getUserList();
     for( auto iter = userList.begin(); iter != userList.end(); ++iter )
     {
         if( isUserAListMatch( iter->second ) )
         {
-            addUser( iter->second );
+            updateUserList.push_back( iter->second );
+        }
+    }
+
+    if( getShowMyself() )
+    {
+        if( m_UserMgr.getMyIdent() )
+        {
+            updateUserList.push_back( m_UserMgr.getMyIdent() );
         }
     }
 
     m_UserMgr.unlockUserMgr();
+    for( auto user : updateUserList )
+    {
+        updateUser( user );
+    }
+
     update();
 }
 
 //============================================================================
-void GuiUserListWidget::addUser( GuiUser* user )
+UserListItem* GuiUserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
 {
-    LogMsg( LOG_DEBUG, "GuiUserListWidget::addUser" );
+    UserListItem* userItem = new UserListItem(this);
+    userItem->setSizeHint( userItem->calcualteSizeHint() );
+
+    userItem->setUserSession( userSession );
+
+    connect( userItem, SIGNAL(signalUserListItemClicked(UserListItem *)),	    this, SLOT(slotUserListItemClicked(UserListItem *)) );
+    connect( userItem, SIGNAL(signalAvatarButtonClicked(UserListItem *)),	    this, SLOT(slotAvatarButtonClicked(UserListItem *)) );
+    connect( userItem, SIGNAL(signalMenuButtonClicked(UserListItem *)),	        this, SLOT(slotMenuButtonClicked(UserListItem *)) );
+    connect( userItem, SIGNAL(signalFriendshipButtonClicked(UserListItem *)),	this, SLOT(slotFriendshipButtonClicked(UserListItem *)) );
+
+    userItem->updateWidgetFromInfo();
+
+    return userItem;
 }
 
 //============================================================================
-GuiHostSession* GuiUserListWidget::widgetToSession( UserListEntryWidget * item )
+GuiUserSessionBase* GuiUserListWidget::widgetToSession( UserListItem * item )
 {
-    return item->getHostSession();
+    return item->getUserSession();
+}
+
+//============================================================================
+void GuiUserListWidget::updateUser( GuiUser* user )
+{
+    if( user )
+    {
+        GuiUserSessionBase* userSession = nullptr;
+        auto iter = m_UserCache.find( user->getMyOnlineId() );
+        if( iter == m_UserCache.end() )
+        {
+            LogMsg( LOG_DEBUG, "GuiUserListWidget::updateUser new user %s", user->getOnlineName() );
+            userSession = makeSession( user );
+            if( userSession )
+            {
+                m_UserCache[user->getMyOnlineId()] = userSession;
+                UserListItem* entryWidget = sessionToWidget( userSession );
+                if( 0 == count() )
+                {
+                    LogMsg( LOG_INFO, "add host %s\n", user->getOnlineName() );
+                    addItem( entryWidget );
+                }
+                else
+                {
+                    LogMsg( LOG_INFO, "insert host %s\n", user->getOnlineName() );
+                    insertItem( 0, (QListWidgetItem *)entryWidget );
+                }
+
+                setItemWidget( (QListWidgetItem *)entryWidget, (QWidget *)entryWidget );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "GuiUserListWidget::updateUser failed create session for user %s", user->getOnlineName() );
+            }
+        }
+        else
+        {
+            updateEntryWidget( user->getMyOnlineId() );
+        }
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::updateEntryWidget( VxGUID& onlineId )
+{
+    UserListItem* entryWidget = findListEntryWidgetByOnlineId( onlineId );
+    if( entryWidget )
+    {
+        entryWidget->update();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiUserListWidget::updateUser failed to find session for user" );
+    }
+}
+
+//============================================================================
+GuiUserSessionBase* GuiUserListWidget::makeSession( GuiUser* user )
+{
+    return new GuiUserSessionBase( user, this );
+}
+
+//============================================================================
+void GuiUserListWidget::removeUser( VxGUID& onlineId )
+{
+    auto iter = m_UserCache.find( onlineId );
+    if( iter != m_UserCache.end() )
+    {
+        LogMsg( LOG_DEBUG, "GuiUserListWidget::removeUser %s", iter->second->getOnlineName() );
+        m_UserCache.erase( iter );
+
+        UserListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
+        if( userItem )
+        {
+            delete userItem->getUserSession();
+            QListWidgetItem* listItem = dynamic_cast<QListWidgetItem*>( userItem );
+            removeItemWidget(listItem);
+            delete listItem; // Qt documentation warnings you to destroy item to effectively remove it from QListWidget.
+        }  
+    }
 }
 
 //============================================================================
@@ -196,18 +300,18 @@ MyIcons&  GuiUserListWidget::getMyIcons( void )
 }
 
 //============================================================================
-GuiHostSession * GuiUserListWidget::findSession( VxGUID& lclSessionId )
+GuiUserSessionBase * GuiUserListWidget::findSession( VxGUID& lclSessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        UserListEntryWidget* listItem =  (UserListEntryWidget*)item( iRow );
+        UserListItem* listItem =  (UserListItem*)item( iRow );
         if( listItem )
         {
-            GuiHostSession * hostSession = listItem->getHostSession();
-            if( hostSession && hostSession->getSessionId() == lclSessionId )
+            GuiUserSessionBase * userSession = listItem->getUserSession();
+            if( userSession && userSession->getSessionId() == lclSessionId )
             {
-                return hostSession;
+                return userSession;
             }
         }
     }
@@ -216,18 +320,18 @@ GuiHostSession * GuiUserListWidget::findSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-UserListEntryWidget* GuiUserListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
+UserListItem* GuiUserListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        UserListEntryWidget*  hostItem = (UserListEntryWidget*)item( iRow );
-        if( hostItem )
+        UserListItem*  userItem = (UserListItem*)item( iRow );
+        if( userItem )
         {
-            GuiHostSession * hostSession = hostItem->getHostSession();
-            if( hostSession && ( hostSession->getSessionId() == sessionId ) )
+            GuiUserSessionBase * userSession = userItem->getUserSession();
+            if( userSession && ( userSession->getSessionId() == sessionId ) )
             {
-                return hostItem;
+                return userItem;
             }
         }
     }
@@ -236,18 +340,18 @@ UserListEntryWidget* GuiUserListWidget::findListEntryWidgetBySessionId( VxGUID& 
 }
 
 //============================================================================
-UserListEntryWidget* GuiUserListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
+UserListItem* GuiUserListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        UserListEntryWidget*  hostItem = (UserListEntryWidget*)item( iRow );
-        if( hostItem )
+        UserListItem*  userItem = (UserListItem*)item( iRow );
+        if( userItem )
         {
-            GuiHostSession * hostSession = hostItem->getHostSession();
-            if( hostSession && ( hostSession->getHostIdent().getMyOnlineId() == onlineId ) )
+            GuiUserSessionBase * userSession = userItem->getUserSession();
+            if( userSession && ( userSession->getMyOnlineId() == onlineId ) )
             {
-                return hostItem;
+                return userItem;
             }
         }
     }
@@ -260,28 +364,15 @@ void GuiUserListWidget::slotItemClicked( QListWidgetItem * item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
-		slotHostListItemClicked( (UserListEntryWidget *)item );
+        return;
 	}
+
+    m_ClickEventTimer.startTimer();
+    onUserListItemClicked( dynamic_cast<UserListItem *>(item) );
 }
 
 //============================================================================
-void GuiUserListWidget::slotHostListItemClicked( QListWidgetItem* hostItem )
-{
-	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-	{
-		return;
-	}
-
-	m_ClickEventTimer.startTimer();
-    UserListEntryWidget* hostWidget = dynamic_cast<UserListEntryWidget*>(hostItem);
-    if( hostWidget )
-    {
-        onHostListItemClicked(hostWidget);
-    }
-}
-
-//============================================================================
-void GuiUserListWidget::slotAvatarButtonClicked( UserListEntryWidget* hostItem )
+void GuiUserListWidget::slotUserListItemClicked( UserListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
     {
@@ -289,11 +380,23 @@ void GuiUserListWidget::slotAvatarButtonClicked( UserListEntryWidget* hostItem )
     }
 
     m_ClickEventTimer.startTimer();
-    slotAvatarButtonClicked(hostItem);
+    onUserListItemClicked( userItem );
 }
 
 //============================================================================
-void GuiUserListWidget::slotFriendshipButtonClicked( UserListEntryWidget* hostItem )
+void GuiUserListWidget::slotAvatarButtonClicked( UserListItem* userItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onAvatarButtonClicked(userItem);
+}
+
+//============================================================================
+void GuiUserListWidget::slotFriendshipButtonClicked( UserListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
     {
@@ -301,11 +404,11 @@ void GuiUserListWidget::slotFriendshipButtonClicked( UserListEntryWidget* hostIt
     }
 
     m_ClickEventTimer.startTimer();
-    onFriendshipButtonClicked( hostItem );
+    onFriendshipButtonClicked( userItem );
 }
 
 //============================================================================
-void GuiUserListWidget::slotMenuButtonClicked( UserListEntryWidget* hostItem )
+void GuiUserListWidget::slotMenuButtonClicked( UserListItem* userItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -313,94 +416,122 @@ void GuiUserListWidget::slotMenuButtonClicked( UserListEntryWidget* hostItem )
 	}
 
 	m_ClickEventTimer.startTimer();
-    onMenuButtonClicked( hostItem );
+    onMenuButtonClicked( userItem );
 }
 
 //============================================================================
-void GuiUserListWidget::addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
+void GuiUserListWidget::addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent )
 {
-    GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, hostIdent, pluginSetting, this );
+    GuiUserSessionBase* userSession = new GuiUserSessionBase( hostType, sessionId, hostIdent, this );
 
-    addOrUpdateHostSession( hostSession );
+    addOrUpdateSession( userSession );
 }
 
 //============================================================================
-UserListEntryWidget* GuiUserListWidget::addOrUpdateHostSession( GuiHostSession* hostSession )
+UserListItem* GuiUserListWidget::addOrUpdateSession( GuiUserSessionBase* userSession )
 {
-    UserListEntryWidget* hostItem = findListEntryWidgetBySessionId( hostSession->getSessionId() );
-    if( hostItem )
+    UserListItem* userItem = findListEntryWidgetBySessionId( userSession->getSessionId() );
+    if( userItem )
     {
-        GuiHostSession* hostOldSession = hostItem->getHostSession();
-        if( hostOldSession != hostSession )
+        GuiUserSessionBase* hostOldSession = userItem->getUserSession();
+        if( hostOldSession != userSession )
         {
-            hostItem->setHostSession( hostSession );
+            userItem->setUserSession( userSession );
             if( !hostOldSession->parent() )
             {
                 delete hostOldSession;
             }
         }
 
-        hostItem->updateWidgetFromInfo();
+        userItem->updateWidgetFromInfo();
     }
     else
     {
-        hostItem = sessionToWidget( hostSession );
+        userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add host %s\n", hostSession->getHostIdent().getOnlineName() );
-            addItem( hostItem );
+            LogMsg( LOG_INFO, "add user %s\n", userSession->getHostIdent()->getOnlineName() );
+            addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert host %s\n", hostSession->getHostIdent().getOnlineName() );
-            insertItem( 0, (QListWidgetItem *)hostItem );
+            LogMsg( LOG_INFO, "insert user %s\n", userSession->getHostIdent()->getOnlineName() );
+            insertItem( 0, (QListWidgetItem *)userItem );
         }
 
-        setItemWidget( (QListWidgetItem *)hostItem, (QWidget *)hostItem );
+        setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
     }
 
-    return hostItem;
+    return userItem;
 }
 
 //============================================================================
 void GuiUserListWidget::clearUserList( void )
 {
+    m_UserCache.clear();
     for(int i = 0; i < count(); ++i)
     {
-        QListWidgetItem* hostItem = item(i);
+        QListWidgetItem* userItem = item(i);
 
-        delete ((UserListEntryWidget *)hostItem);
+        delete ((UserListItem *)userItem);
     }
 
     clear();
 }
 
-//============================================================================
-void GuiUserListWidget::onHostListItemClicked( UserListEntryWidget* hostItem )
-{
-    LogMsg( LOG_DEBUG, "onHostListItemClicked" );
-    onAvatarButtonClicked( hostItem );
-}
 
 //============================================================================
-void GuiUserListWidget::onAvatarButtonClicked( UserListEntryWidget* hostItem )
+void GuiUserListWidget::onUserListItemClicked( UserListItem* userItem )
 {
-    LogMsg( LOG_DEBUG, "onIconButtonClicked" );
-    GuiHostSession* hostSession = hostItem->getHostSession();
-    if( hostSession )
+    LogMsg( LOG_DEBUG, "onHostListItemClicked" );
+    if( userItem )
     {
-        emit signalAvatarButtonClicked( hostSession, hostItem );
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalUserListItemClicked( userSession, userItem );
+        }
     }
 }
 
 //============================================================================
-void GuiUserListWidget::onMenuButtonClicked( UserListEntryWidget* hostItem )
+void GuiUserListWidget::onAvatarButtonClicked( UserListItem* userItem )
+{
+    LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
+    if( userItem )
+    {
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalAvatarButtonClicked( userSession, userItem );
+        }
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::onFriendshipButtonClicked( UserListItem* userItem )
+{
+    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
+    if( userItem )
+    {
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalFriendshipButtonClicked( userSession, userItem );
+        }
+    }
+}
+//============================================================================
+void GuiUserListWidget::onMenuButtonClicked( UserListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
-    GuiHostSession* hostSession = hostItem->getHostSession();
-    if( hostSession )
+    if( userItem )
     {
-        emit signalMenuButtonClicked( hostSession, hostItem );
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalMenuButtonClicked( userSession, userItem );
+        }
     }
 
     /*
@@ -420,15 +551,4 @@ void GuiUserListWidget::onMenuButtonClicked( UserListEntryWidget* hostItem )
     }
     }
     */
-}
-
-//============================================================================
-void GuiUserListWidget::onFriendshipButtonClicked( UserListEntryWidget* hostItem )
-{
-    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
-    GuiHostSession* hostSession = hostItem->getHostSession();
-    if( hostSession )
-    {
-        emit signalFriendshipButtonClicked( hostSession, hostItem );
-    }
 }

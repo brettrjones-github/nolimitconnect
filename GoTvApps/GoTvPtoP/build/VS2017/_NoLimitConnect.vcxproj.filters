@@ -118,6 +118,9 @@
     <Filter Include="GoTvCommon\Source Files\ToGuiInterface">
       <UniqueIdentifier>{0bddb8b1-8da4-4dae-b94e-b5d86cb6042f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\Log">
+      <UniqueIdentifier>{85ddef01-870a-497e-99df-6943f13897bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -594,9 +597,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
@@ -813,9 +813,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogSettings.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -954,9 +951,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.cpp">
-      <Filter>GoTvCommon\Source Files\GuiList</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
@@ -996,12 +990,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.cpp">
-      <Filter>GoTvCommon\Source Files\GuiList</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.cpp">
-      <Filter>GoTvCommon\Source Files\GuiList</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </ClCompile>
@@ -1029,7 +1017,22 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.cpp">
       <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.cpp">
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.cpp">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp">
+      <Filter>GoTvCommon\Source Files\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListItem.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListItem.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1598,9 +1601,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1805,9 +1805,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogMgr.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLogSettings.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1916,9 +1913,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListEntryWidget.h">
-      <Filter>GoTvCommon\Source Files\GuiList</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
@@ -1958,14 +1952,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.h">
-      <Filter>GoTvCommon\Source Files\GuiList</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.h">
-      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -1976,7 +1964,19 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListEntryWidget.h">
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogMgr.h">
+      <Filter>GoTvCommon\Source Files\Log</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogWidget.h">
+      <Filter>GoTvCommon\Source Files\Log</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListItem.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListItem.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListWidget.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
   </ItemGroup>
@@ -3012,6 +3012,9 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h">
       <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h">
+      <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\GoTvCommon\Resources\msg_state_fail_resend.png">
@@ -3214,9 +3217,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\HostListEntryWidget.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
@@ -3244,8 +3244,11 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUploads.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListEntryWidget.ui">
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HostListItem.ui">
       <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListItem.ui">
+      <Filter>GoTvCommon</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
