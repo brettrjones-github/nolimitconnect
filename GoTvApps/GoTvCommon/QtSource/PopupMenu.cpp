@@ -27,7 +27,7 @@
 PopupMenu::PopupMenu( AppCommon& app, ActivityBase * parent )
 : ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessenger, true, false )
 , m_ParentActivity( parent )
-, m_iMenuItemHeight( GuiParams::getButtonSize() )
+, m_iMenuItemHeight( GuiParams::getButtonSize().height() )
 {
     vx_assert( parent );
     QFrame * contentFrame = dynamic_cast< QFrame * >( parent );

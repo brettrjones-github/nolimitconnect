@@ -22,6 +22,14 @@
 
 #include <CoreLib/VxDebug.h>
 
+namespace
+{
+    static const int            TINY_PUSHBUTTON_SIZE = 16;
+    static const int            SMALL_PUSHBUTTON_SIZE = 30;
+    static const int            MEDIUM_PUSHBUTTON_SIZE = 46;
+    static const int            LARGE_PUSHBUTTON_SIZE = 54;
+}
+
 //============================================================================
 QColor GuiParams::m_OnlineBkgColor( 176, 255, 176 );
 QColor GuiParams::m_OfflineBkgColor( 192, 192, 192 );
@@ -68,6 +76,23 @@ void GuiParams::initGuiParams()
 int GuiParams::getControlIndicatorWidth( void )
 { 
     return 10; 
+}
+
+//============================================================================
+QSize GuiParams::getButtonSize( EButtonSize buttonSize )
+{
+    switch( buttonSize )
+    {
+    case eButtonSizeTiny:
+        return QSize( TINY_PUSHBUTTON_SIZE * getGuiScale(), TINY_PUSHBUTTON_SIZE * getGuiScale() );
+    case eButtonSizeSmall:
+        return QSize( SMALL_PUSHBUTTON_SIZE * getGuiScale(), SMALL_PUSHBUTTON_SIZE * getGuiScale() );
+    case eButtonSizeMedium:
+        return QSize( MEDIUM_PUSHBUTTON_SIZE * getGuiScale(), MEDIUM_PUSHBUTTON_SIZE * getGuiScale() );
+    case eButtonSizeLarge:
+    default:
+        return QSize( LARGE_PUSHBUTTON_SIZE * getGuiScale(), LARGE_PUSHBUTTON_SIZE * getGuiScale() );
+    }
 }
 
 //============================================================================

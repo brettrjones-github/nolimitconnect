@@ -42,28 +42,29 @@ EMyIcons GetAppletIcon( EApplet applet )
 {
 	switch( applet )
 	{
-    case eActivityAppSetup:             return eMyIconApp;
-    case eAppletAboutNoLimitConnect:	return eMyIconApp;
-    case eAppletApplicationInfo:	    return eMyIconUnknown;
-    case eAppletBrowseFiles:	        return eMyIconFileOpen;
-    case eAppletChatRoomJoinSearch:	    return eMyIconSearchJoinChatRoom;
-    case eAppletChatRoomJoin:	        return eMyIconClientChatRoom;
-    case eAppletClientAvatarImage:      return eMyIconAvatarImage;
-    case eAppletClientChatRoom:         return eMyIconClientChatRoom;
-    case eAppletClientRandomConnect:	return eMyIconSearchRandomConnect;
-    case eAppletClientStoryboard:       return eMyIconStoryBoardNormal;
-    case eAppletCreateAccount:			return eMyIconUserIdentity;
-    case eAppletGroupJoin:              return eMyIconClientGroup;
-    case eAppletHomePage:				return eMyIconHome;
-    case eAppletKodi:				    return eMyIconKodi;
-    case eAppletLibrary:				return eMyIconLibraryNormal;
-    case eAppletLog:	                return eMyIconDebug;
-    case eAppletMessenger:				return eMyIconMessenger;
-    case eAppletNetHostingPage:         return eMyIconServiceHostNetwork;
-    case eAppletNetworkSettings:	    return eMyIconNetworkSettings;
-    case eAppletPlayerVideo:			return eMyIconVideoPhoneNormal;
-    case eAppletPersonalRecorder:		return eMyIconNotepadNormal;
-    case eAppletSettingsPage:		    return eMyIconSettingsGear;
+    case eActivityAppSetup:                 return eMyIconApp;
+    case eAppletAboutNoLimitConnect:	    return eMyIconApp;
+    case eAppletApplicationInfo:	        return eMyIconUnknown;
+    case eAppletBrowseFiles:	            return eMyIconFileOpen;
+    case eAppletChatRoomJoinSearch:	        return eMyIconSearchJoinChatRoom;
+    case eAppletChatRoomJoin:	            return eMyIconClientChatRoom;
+    case eAppletClientAvatarImage:          return eMyIconAvatarImage;
+    case eAppletClientChatRoom:             return eMyIconClientChatRoom;
+    case eAppletClientRandomConnect:	    return eMyIconSearchRandomConnect;
+    case eAppletClientStoryboard:           return eMyIconStoryBoardNormal;
+    case eAppletCreateAccount:			    return eMyIconUserIdentity;
+    case eAppletGroupJoin:                  return eMyIconClientGroup;
+    case eAppletHomePage:				    return eMyIconHome;
+    case eAppletKodi:				        return eMyIconKodi;
+    case eAppletLibrary:				    return eMyIconLibraryNormal;
+    case eAppletLog:	                    return eMyIconDebug;
+    case eAppletMessenger:				    return eMyIconMessenger;
+    case eAppletNetHostingPage:             return eMyIconServiceHostNetwork;
+    case eAppletNetworkSettings:	        return eMyIconNetworkSettings;
+    case eAppletPlayerVideo:			    return eMyIconVideoPhoneNormal;
+    case eAppletPersonalRecorder:		    return eMyIconNotepadNormal;
+    case eAppletRandomConnectJoin:	        return eMyIconClientRandomConnect;
+    case eAppletSettingsPage:		        return eMyIconSettingsGear;
    
     case eAppletSearchPage:	                return eMyIconSearch;
     case eAppletGroupJoinSearch:	        return eMyIconSearchJoinGroup;
@@ -179,6 +180,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
+    case eAppletRandomConnectJoin:          return QObject::tr( "Join Random Connect" );
     case eAppletRandomConnectJoinSearch:	return QObject::tr( "Search For Random Connect Host To Join" );
     case eAppletSnapshot:				    return QObject::tr( "Take Snapshot" );
     case eAppletKodi:				        return QObject::tr( "Kodi (TM)" );

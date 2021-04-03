@@ -27,6 +27,8 @@ enum EUserViewType
     eUserViewTypeGroup,
     eUserViewTypeChatRoom,
     eUserViewTypeRandomConnect,
+    eUserViewTypeEverybody,
+    eUserViewTypeIgnored,
 
     eMaxUserViewTypeNone,
 };
@@ -97,7 +99,6 @@ protected:
 
     void                        refreshList( void );
     bool                        isListViewMatch( GuiUser * user );
-
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;

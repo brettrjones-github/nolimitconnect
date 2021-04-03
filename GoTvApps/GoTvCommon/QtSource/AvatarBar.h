@@ -26,7 +26,7 @@ class AvatarBar : public QWidget
 
 public:
 	AvatarBar( QWidget * parent = 0 );
-	virtual ~AvatarBar();
+	virtual ~AvatarBar() = default;
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );

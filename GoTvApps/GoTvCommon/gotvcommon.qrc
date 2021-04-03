@@ -292,5 +292,6 @@
         <file>Resources/offer-friendship.svg</file>
         <file>Resources/offer-video-chat.svg</file>
         <file>Resources/offer-voice-phone.svg</file>
+        <file>Resources/notify-offer.svg</file>
     </qresource>
 </RCC>

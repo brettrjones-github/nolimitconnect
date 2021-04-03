@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RandomConnectJoinUi</class>
+ <widget class="QWidget" name="RandomConnectJoinUi">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>269</width>
+    <height>702</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Join Random Connect Host</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QGroupBox" name="ItemsGroupBox">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="m_StatusLabel">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_JoinDefaultButton">
+        <property name="text">
+         <string>Join Default Chat Room</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="SearchLabel">
+        <property name="text">
+         <string>Find And Join A Chat Room</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_NetworkHostButton">
+        <property name="text">
+         <string>Choose Network Host</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="m_NetHostLabel">
+        <property name="text">
+         <string>Network Host Not Selected</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_GroupHostButton">
+        <property name="text">
+         <string>Choose Group Host</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="m_GroupHostLabel">
+        <property name="text">
+         <string>Group Host Not Selected</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_ConnectToHostButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Join Group</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="m_GroupUserStatusLabel">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="m_CopyResultToClipboardButton">
+     <property name="text">
+      <string>Copy Results To Clipboard</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="m_InfoPlainTextEdit"/>
+   </item>
+   <item>
+    <widget class="FriendListWidget" name="m_FriendListWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FriendListWidget</class>
+   <extends>QWidget</extends>
+   <header>FriendListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../gotvcommon.qrc"/>
+ </resources>
+ <connections/>
+</ui>

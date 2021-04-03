@@ -1035,6 +1035,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1978,6 +1981,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListWidget.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -3235,9 +3241,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerSessionFileOffer.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletDownloads.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
@@ -3247,8 +3250,11 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\HostListItem.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoin.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\UserListItem.ui">
-      <Filter>GoTvCommon</Filter>
+      <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

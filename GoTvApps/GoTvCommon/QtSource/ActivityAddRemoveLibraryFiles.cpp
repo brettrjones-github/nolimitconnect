@@ -96,7 +96,7 @@ void ActivityAddRemoveLibraryFiles::setCurrentBrowseDir( QString browseDir )
 FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, bool isShared )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
-	item->setSizeHint(QSize(200, GuiParams::getButtonSize() + 4));
+	item->setSizeHint(QSize(200, GuiParams::getButtonSize().height() + 4));
 
 	FileItemInfo * poItemInfo = new FileItemInfo( u8FileType, pFileName, u64FileLen );
 	poItemInfo->setIsShared( isShared );

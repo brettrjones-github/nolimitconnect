@@ -13,8 +13,21 @@
 //============================================================================
 #pragma once
 
+#include <GoTvInterface/IDefs.h>
 #include <QColor>
 #include <QSize>
+
+enum EButtonSize
+{
+    eButtonSizeTiny,
+    eButtonSizeSmall,
+    eButtonSizeMedium,
+    eButtonSizeLarge,
+
+    eMaxButtonSize
+};
+
+class GuiUser;
 
 class GuiParams
 {
@@ -23,9 +36,6 @@ public:
     virtual ~GuiParams() = default;
 
     static const int            MIN_TITLE_BAR_BUTTON_SIZE = 30;
-    static const int            MIN_PUSHBUTTON_SIZE = 30;
-    static const int            SMALL_PUSHBUTTON_SIZE = 32;
-    static const int            MEDIUM_PUSHBUTTON_SIZE = 48;
 
     /// @brief initialize gui scaling etc
     static void                 initGuiParams();
@@ -33,7 +43,9 @@ public:
     /// @brief get scaling required to make icons etc. usable on high dpi screens
     static int                  getGuiScale( void )  { return m_DisplayScale; }
     /// @brief get scaling required to make icons etc. usable on high dpi screens
-    static int                  getButtonSize( void )  { return MIN_PUSHBUTTON_SIZE * m_DisplayScale; }
+    //static int                  getButtonHeight( void )  { return MIN_PUSHBUTTON_SIZE * m_DisplayScale; }
+    /// @brief get scaling required to make icons etc. usable on high dpi screens
+    static QSize                getButtonSize( EButtonSize buttonSize = eButtonSizeSmall );
 
     static int                  getControlIndicatorWidth( void );
     /// @brief thumbnails are square so this is both width and height

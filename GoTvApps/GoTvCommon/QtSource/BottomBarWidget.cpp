@@ -203,66 +203,66 @@ void BottomBarWidget::setPlayProgressBarColor( QColor iconColor )
 //============================================================================
 void BottomBarWidget::setArrowLeftButtonColor( QColor iconColor )
 {
-	ui.m_ArrowLeftButton->setIconColor( iconColor );
+	ui.m_ArrowLeftButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::set30SecBackwardButtonColor( QColor iconColor )
 {
-	ui.m_30SecBackButton->setIconColor( iconColor );
+	ui.m_30SecBackButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setMediaPlayButtonColor( QColor iconColor )
 {
-	ui.m_MediaPlayButton->setIconColor( iconColor );
+	ui.m_MediaPlayButton->setIconOverrideColor( iconColor );
 }
 //============================================================================
 void BottomBarWidget::setMediaTrashButtonColor( QColor iconColor )
 {
-	ui.m_MediaTrashButton->setIconColor( iconColor );
+	ui.m_MediaTrashButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setMediaFileShareButtonColor( QColor iconColor )
 {
-	ui.m_MediaFileShareButton->setIconColor( iconColor );
+	ui.m_MediaFileShareButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setMediaLibraryButtonColor( QColor iconColor )
 {
-	ui.m_MediaLibraryButton->setIconColor( iconColor );
+	ui.m_MediaLibraryButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::set30SecForwardButtonColor( QColor iconColor )
 {
-	ui.m_30SecForwardButton->setIconColor( iconColor );
+	ui.m_30SecForwardButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setArrowRightButtonColor( QColor iconColor )
 {
-	ui.m_ArrowRightButton->setIconColor( iconColor );
+	ui.m_ArrowRightButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setMediaRepeatButtonColor( QColor iconColor )
 {
-	ui.m_MediaRepeatButton->setIconColor( iconColor );
+	ui.m_MediaRepeatButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setMenuBottomButtonColor( QColor iconColor )
 {
-	ui.m_MenuBottomButton->setIconColor( iconColor );
+	ui.m_MenuBottomButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void BottomBarWidget::setExpandWindowButtonColor( QColor iconColor )
 {
-	ui.m_ExpandButton->setIconColor( iconColor );
+	ui.m_ExpandButton->setIconOverrideColor( iconColor );
 }
 
 //=== bottom bar button clicked ===// 

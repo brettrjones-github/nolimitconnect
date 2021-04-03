@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_UserListEntryWidget.h"
+#include "ui_UserListItem.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
@@ -53,7 +53,7 @@ protected:
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::UserListEntryWidgetUi	ui;
+    Ui::UserListItemUi	        ui;
     AppCommon&					m_MyApp;
 };
 

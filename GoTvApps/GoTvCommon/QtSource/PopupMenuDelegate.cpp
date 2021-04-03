@@ -81,6 +81,6 @@ void PopupMenuDelegate::paint ( QPainter * painter, const QStyleOptionViewItem &
 
 QSize PopupMenuDelegate::sizeHint ( const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {
-	return QSize(200, GuiParams::getButtonSize() + 4); // very dumb value
+	return QSize(200, GuiParams::getButtonSize(eButtonSizeMedium).height() + 4); // very dumb value
 }
 

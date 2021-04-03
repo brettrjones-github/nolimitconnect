@@ -62,8 +62,9 @@ enum EApplet
     eAppletUserIdentity,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletChatRoomJoin,
     eAppletGroupJoin,	
+    eAppletChatRoomJoin,
+    eAppletRandomConnectJoin,	
     eAppletSearchPage,
     eAppletShareServicesPage,       // page to setup share with others services
     eAppletDownloads,

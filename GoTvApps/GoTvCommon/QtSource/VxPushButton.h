@@ -16,6 +16,7 @@
 
 #include "SoundDefs.h"
 #include "MyIconsDefs.h"
+#include "GuiParams.h"
 
 #include <QPushButton>
 
@@ -53,11 +54,18 @@ public:
 	void						setEnabled( bool enabled );
 	void						setUseTheme( bool useTheme )						{ m_UseTheme = useTheme; }
 	bool						getUseTheme( void )									{ return m_UseTheme; }
-	void						setNotifyEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOverlay );
-	bool						getNotifyEnabled( void )							{ return m_NotifyEnabled; }
+
+	void						setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOnlineOverlay );
+	bool						getNotifyOnlineEnabled( void )						{ return m_NotifyOnlineEnabled; }
+    void						setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOfferOverlay );
+    bool						getNotifyOfferEnabled( void )						{ return m_NotifyOfferEnabled; }
+    void						setNotifyForbiddenEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyForbbidenOverlay );
+    bool						getNotifyForbiddenEnabled( void )						{ return m_NotifyOfferEnabled; }
+    void						setNotifyErrorEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyErrorOverlay );
+    bool						getNotifyErrorEnabled( void )						{ return m_NotifyOfferEnabled; }
 
 	void						setIcon( EMyIcons myIcon );
-	void						setIconColor( QColor iconColor );
+	void						setIconOverrideColor( QColor iconColor );
 	void						setDrawButtonBorder( bool drawBoarder )				{ m_DrawButtonBorder = drawBoarder; }
 	bool						getDrawButtonBorder( void )							{ return m_DrawButtonBorder; }
 
@@ -76,6 +84,9 @@ public:
 
     virtual void                setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame );
 
+    void                        setSquareButtonSize( EButtonSize buttonSize );
+    EButtonSize                 getSquareButtonSize( void )                         { return m_SquareButtonSize;  }
+
 signals:
 	void						buttonToggleState( bool isOn );
 	void						slideLeftCompleted( void );
@@ -91,15 +102,16 @@ protected:
 	virtual void				mouseReleaseEvent( QMouseEvent * event ) override;
 	virtual void				mouseMoveEvent( QMouseEvent * event ) override;
     virtual void				paintEvent( QPaintEvent* ev ) override;
+
     void                        drawBorder( VxAppTheme& appTheme, QPainter& painter );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
-	QColor						m_DefaultIconColor;
-    bool						m_IconColorWasSet{ false };
+	QColor						m_IconOverrideColor;
+    bool						m_IconOverrideColorWasSet{ false };
+    bool						m_ButtonEnabled{ true };
 	bool						m_DrawButtonBorder{ false };
 	bool						m_UseTheme{ true };
-	bool						m_NotifyEnabled{ false };
 
 	EMyIcons					m_MyIcon;
     EMyIcons					m_MyIconLast;
@@ -107,11 +119,33 @@ protected:
 	QColor						m_LastIconColor;
 	QSize						m_LastIconSize;
 
-	EMyIcons					m_NotifyIcon;
-	EMyIcons					m_LastNotifyIcon;
-	QPixmap						m_NotifyIconImage;
-	QColor						m_NotifyLastIconColor;
-	QSize						m_NotifyLastIconSize;
+    bool						m_NotifyOnlineEnabled{ false };
+	EMyIcons					m_NotifyOnlineIcon;
+	EMyIcons					m_LastNotifyOnlineIcon;
+	QPixmap						m_NotifyIconOnlineImage;
+	QColor						m_NotifyLastIconOnlineColor;
+	QSize						m_NotifyLastIconOnlineSize;
+
+    bool						m_NotifyOfferEnabled{ false };
+    EMyIcons					m_NotifyOfferIcon;
+    EMyIcons					m_LastNotifyOfferIcon;
+    QPixmap						m_NotifyIconOfferImage;
+    QColor						m_NotifyLastIconOfferColor;
+    QSize						m_NotifyLastIconOfferSize;
+
+    bool						m_NotifyForbiddenEnabled{ false };
+    EMyIcons					m_NotifyForbiddenIcon;
+    EMyIcons					m_LastNotifyForbiddenIcon;
+    QPixmap						m_NotifyIconForbiddenImage;
+    QColor						m_NotifyLastIconForbiddenColor;
+    QSize						m_NotifyLastIconForbiddenSize;
+
+    bool						m_NotifyErrorEnabled{ false };
+    EMyIcons					m_NotifyErrorIcon;
+    EMyIcons					m_LastNotifyErrorIcon;
+    QPixmap						m_NotifyIconErrorImage;
+    QColor						m_NotifyLastIconErrorColor;
+    QSize						m_NotifyLastIconErrorSize;
 
 	EMyIcons					m_OverlayIcon;
 	EMyIcons					m_LastOverlayIcon;
@@ -133,5 +167,6 @@ protected:
     QWidget *					m_AppFrame{ nullptr };
     int							m_AppClickCount{ 0 };
     int64_t                     m_AppClickTime{ 0 };
+    EButtonSize                 m_SquareButtonSize{ eButtonSizeSmall };
 };
 

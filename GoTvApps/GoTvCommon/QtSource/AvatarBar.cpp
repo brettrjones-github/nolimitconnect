@@ -30,11 +30,11 @@ AvatarBar::AvatarBar( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    QSize buttonSize( GuiParams::getButtonSize() );
     ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
     ui.m_ResendButton->setFixedSize( buttonSize );
 
-	this->setFixedWidth( 60 );
+	this->setFixedWidth( GuiParams::getButtonSize().width() + 20 );
 	setShredButtonIcon( eMyIconShredderNormal  );
 	ui.m_ProgressSpinner->setVisible( false );
 	ui.m_ShredButton->setVisible( false );
@@ -43,11 +43,6 @@ AvatarBar::AvatarBar( QWidget * parent )
 
 	connect( ui.m_ShredButton, SIGNAL( clicked() ),		this, SIGNAL( signalShredAsset() ) );
 	connect( ui.m_ResendButton, SIGNAL( clicked() ),	this, SIGNAL( signalResendAsset() ) );
-}
-
-//============================================================================
-AvatarBar::~AvatarBar()
-{
 }
 
 //============================================================================

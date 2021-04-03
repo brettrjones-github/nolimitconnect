@@ -29,7 +29,7 @@ DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetInfo& assetInfo, QW
 , m_AssetAction( eAssetActionUnknown )
 {
 	ui.setupUi(this);
-    QSize buttonSize( GuiParams::MEDIUM_PUSHBUTTON_SIZE, GuiParams::MEDIUM_PUSHBUTTON_SIZE );
+    QSize buttonSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
     ui.m_ExitDlgButton->setFixedSize( buttonSize );
     ui.m_CancelButton->setFixedSizeAbsolute( buttonSize );
     ui.m_RemoveButton->setFixedSizeAbsolute( buttonSize );

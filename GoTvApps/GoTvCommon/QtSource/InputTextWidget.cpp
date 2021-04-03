@@ -26,9 +26,8 @@ InputTextWidget::InputTextWidget( QWidget * parent )
 	m_AssetInfo.setAssetType( eAssetTypeChatText );
 
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
-    ui.m_CancelTextButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_SendTextButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_CancelTextButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_SendTextButton->setSquareButtonSize( eButtonSizeTiny );
 
 	ui.m_CancelTextButton->setIcons( eMyIconSendArrowCancel );
 	ui.m_SendTextButton->setIcons( eMyIconSendArrowNormal );

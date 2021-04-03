@@ -38,7 +38,7 @@ AssetFaceWidget::AssetFaceWidget( AppCommon& appCommon, QWidget * parent )
 void AssetFaceWidget::initAssetFaceWidget( void )
 {
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    QSize buttonSize(  GuiParams::getButtonSize( eButtonSizeSmall ) );
     ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
     ui.m_SendButton->setFixedSizeAbsolute( buttonSize );
 

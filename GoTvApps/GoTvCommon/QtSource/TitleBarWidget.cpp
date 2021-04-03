@@ -435,55 +435,55 @@ void TitleBarWidget::setBackButtonIcon( EMyIcons myIcon )
 //============================================================================
 void TitleBarWidget::setPowerButtonColor( QColor iconColor )
 {
-	ui.m_PowerOffButton->setIconColor( iconColor );
+	ui.m_PowerOffButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setHomeButtonColor( QColor iconColor )
 {
-	ui.m_HomeButton->setIconColor( iconColor );
+	ui.m_HomeButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setMicrophoneColor( QColor iconColor )
 {
-	ui.m_BackDlgButton->setIconColor( iconColor );
+	ui.m_BackDlgButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setSpeakerColor( QColor iconColor )
 {
-	ui.m_MuteMicButton->setIconColor( iconColor );
+	ui.m_MuteMicButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setCameraColor( QColor iconColor )
 {
-	ui.m_CameraButton->setIconColor( iconColor );
+	ui.m_CameraButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setTrashButtonColor( QColor iconColor )
 {
-	ui.m_TrashButton->setIconColor( iconColor );
+	ui.m_TrashButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setShareButtonColor( QColor iconColor )
 {
-	ui.m_ShareButton->setIconColor( iconColor );
+	ui.m_ShareButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setTopMenuButtonColor( QColor iconColor )
 {
-	ui.m_MenuTopButton->setIconColor( iconColor );
+	ui.m_MenuTopButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================
 void TitleBarWidget::setBackButtonColor( QColor iconColor )
 {
-	ui.m_BackDlgButton->setIconColor( iconColor );
+	ui.m_BackDlgButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================

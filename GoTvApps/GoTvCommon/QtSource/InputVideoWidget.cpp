@@ -33,12 +33,11 @@ InputVideoWidget::InputVideoWidget( QWidget * parent )
 	m_AssetInfo.setAssetType( eAssetTypeVideo );
 
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
-    ui.m_CancelRecordButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_StartStopRecButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_RotateCamButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_SelectVidSrcButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_BackButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_CancelRecordButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_StartStopRecButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_RotateCamButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_SelectVidSrcButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_BackButton->setSquareButtonSize( eButtonSizeTiny );
 
 	ui.m_CancelRecordButton->setIcons( eMyIconCancel );
     ui.m_CancelRecordButton->setVisible( false );

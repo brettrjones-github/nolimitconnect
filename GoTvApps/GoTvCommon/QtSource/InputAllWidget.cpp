@@ -29,12 +29,11 @@ InputAllWidget::InputAllWidget( QWidget * parent )
 	ui.m_VideoAllButton->setIcons( eMyIconCamcorderNormal );
 	ui.m_MicAllButton->setIcons( eMyIconMicrophoneOn );
 
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
-    ui.m_SelectFaceAllButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_CameraAllButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_GalleryAllButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_VideoAllButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_MicAllButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_SelectFaceAllButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_CameraAllButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_GalleryAllButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_VideoAllButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_MicAllButton->setSquareButtonSize( eButtonSizeTiny );
 
 	connect( ui.m_TextAllButton, SIGNAL(clicked()), this, SLOT(slotTextButtonClicked()) );
 	connect( ui.m_SelectFaceAllButton, SIGNAL(clicked()), this, SLOT(slotEmoteButtonClicked()) );

@@ -29,7 +29,7 @@ PermissionListItem::PermissionListItem( QListWidget * parent, AppletBase *parent
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ParentApplet( parentApplet )
-, m_SizeHint( parent ? parent->geometry().width() : 200, GuiParams::getButtonSize() + 30 )
+, m_SizeHint( parent ? parent->geometry().width() : 200, GuiParams::getButtonSize(eButtonSizeMedium).height() + 30 )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );

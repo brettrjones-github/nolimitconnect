@@ -656,6 +656,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -1375,6 +1376,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPermissionList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonalRecorder.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoin.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBase.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBaseSettings.ui" />
@@ -1419,7 +1421,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileXferWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HostListItem.ui" />
@@ -2045,6 +2046,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUploads.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">

@@ -39,7 +39,6 @@ namespace
 VxPushButton::VxPushButton( QWidget *parent ) 
 : QPushButton( parent ) 
 , m_MyApp( GetAppInstance() )
-, m_DefaultIconColor( COLOR_UNKNOWN )
 
 , m_MyIcon( eMyIconNone )
 , m_MyIconLast( eMyIconNone )
@@ -47,11 +46,29 @@ VxPushButton::VxPushButton( QWidget *parent )
 , m_LastIconColor( COLOR_TRANSPARENT)
 , m_LastIconSize( 0, 0 )
 
-, m_NotifyIcon( eMyIconNone )
-, m_LastNotifyIcon( eMyIconNone )
-, m_NotifyIconImage()
-, m_NotifyLastIconColor( COLOR_TRANSPARENT)
-, m_NotifyLastIconSize( 0, 0 )
+, m_NotifyOnlineIcon( eMyIconNone )
+, m_LastNotifyOnlineIcon( eMyIconNone )
+, m_NotifyIconOnlineImage()
+, m_NotifyLastIconOnlineColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconOnlineSize( 0, 0 )
+
+, m_NotifyOfferIcon( eMyIconNone )
+, m_LastNotifyOfferIcon( eMyIconNone )
+, m_NotifyIconOfferImage()
+, m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconOfferSize( 0, 0 )
+
+, m_NotifyForbiddenIcon( eMyIconNone )
+, m_LastNotifyForbiddenIcon( eMyIconNone )
+, m_NotifyIconForbiddenImage()
+, m_NotifyLastIconForbiddenColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconForbiddenSize( 0, 0 )
+
+, m_NotifyErrorIcon( eMyIconNone )
+, m_LastNotifyErrorIcon( eMyIconNone )
+, m_NotifyIconErrorImage()
+, m_NotifyLastIconErrorColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconErrorSize( 0, 0 )
 
 , m_OverlayIcon( eMyIconNone )
 , m_LastOverlayIcon( eMyIconNone )
@@ -72,18 +89,35 @@ VxPushButton::VxPushButton( QWidget *parent )
 VxPushButton::VxPushButton( const QString &text, QWidget *parent ) 
 : QPushButton( text, parent ) 
 , m_MyApp( GetAppInstance() )
-, m_DefaultIconColor( COLOR_UNKNOWN )
 
 , m_MyIcon( eMyIconNone )
 , m_IconImage()
 , m_LastIconColor( COLOR_TRANSPARENT )
 , m_LastIconSize( 0, 0 )
 
-, m_NotifyIcon( eMyIconNone )
-, m_LastNotifyIcon( eMyIconNone )
-, m_NotifyIconImage()
-, m_NotifyLastIconColor( COLOR_TRANSPARENT )
-, m_NotifyLastIconSize( 0, 0 )
+, m_NotifyOnlineIcon( eMyIconNone )
+, m_LastNotifyOnlineIcon( eMyIconNone )
+, m_NotifyIconOnlineImage()
+, m_NotifyLastIconOnlineColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconOnlineSize( 0, 0 )
+
+, m_NotifyOfferIcon( eMyIconNone )
+, m_LastNotifyOfferIcon( eMyIconNone )
+, m_NotifyIconOfferImage()
+, m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconOfferSize( 0, 0 )
+
+, m_NotifyForbiddenIcon( eMyIconNone )
+, m_LastNotifyForbiddenIcon( eMyIconNone )
+, m_NotifyIconForbiddenImage()
+, m_NotifyLastIconForbiddenColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconForbiddenSize( 0, 0 )
+
+, m_NotifyErrorIcon( eMyIconNone )
+, m_LastNotifyErrorIcon( eMyIconNone )
+, m_NotifyIconErrorImage()
+, m_NotifyLastIconErrorColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconErrorSize( 0, 0 )
 
 , m_OverlayIcon( eMyIconNone )
 , m_LastOverlayIcon( eMyIconNone )
@@ -118,19 +152,18 @@ void VxPushButton::initQButtonPro( void )
 //============================================================================
 int VxPushButton::heightForWidth( int width ) const
 {
-    if( width >= (int)( GuiParams::getButtonSize() ) )
+    if( width >= (int)( GuiParams::getButtonSize( m_SquareButtonSize ).width() ) )
 	{
 		return width;
 	}
 
-    return ( int )( GuiParams::getButtonSize() );
+    return ( int )( GuiParams::getButtonSize( m_SquareButtonSize ).width() );
 }
 
 //============================================================================
 QSize VxPushButton::sizeHint( void ) const
 {
-    int buttonSize = (int)( GuiParams::getButtonSize() );
-	return QSize( buttonSize, buttonSize );
+	return GuiParams::getButtonSize( m_SquareButtonSize );
 }
 
 //============================================================================
@@ -138,8 +171,7 @@ void VxPushButton::setFixedSize( const QSize & fixedSize )
 {
     if( fixedSize.width() == fixedSize.height() )
     {
-        QPushButton::setFixedSize( ( int )( fixedSize.width() * GuiParams::getGuiScale() ),
-            ( int )( fixedSize.height() * GuiParams::getGuiScale() ) );
+        QPushButton::setFixedSize( GuiParams::getButtonSize( m_SquareButtonSize ) );
     }
     else
     {
@@ -243,30 +275,73 @@ void VxPushButton::setMaximumSize( int maxw, int maxh )
 void VxPushButton::setEnabled( bool enabled )
 {
 	QPushButton::setEnabled( enabled );
+    if( enabled != m_ButtonEnabled )
+    {
+
+    }
+
+
 	update();
 }
 
 //============================================================================
-void VxPushButton::setNotifyEnabled( bool enabled, EMyIcons eNotifyIcon )
+void VxPushButton::setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon )
 {
-	m_NotifyEnabled = enabled;
+	m_NotifyOnlineEnabled = enabled;
 	if( enabled )
 	{
 		if( eMyIconNone != eNotifyIcon )
 		{
-			m_NotifyIcon = eNotifyIcon;
+			m_NotifyOnlineIcon = eNotifyIcon;
 		}
-
-		m_BlinkState = 1;
-		m_BlinkTimer->start();
-	}
-	else
-	{
-		m_BlinkTimer->stop();
-		m_BlinkState = 0;
 	}
 
 	update();
+}
+
+//============================================================================
+void VxPushButton::setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+    m_NotifyOfferEnabled = enabled;
+    if( enabled )
+    {
+        if( eMyIconNone != eNotifyIcon )
+        {
+            m_NotifyOfferIcon = eNotifyIcon;
+        }
+    }
+
+    update();
+}
+
+//============================================================================
+void VxPushButton::setNotifyForbiddenEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+    m_NotifyForbiddenEnabled = enabled;
+    if( enabled )
+    {
+        if( eMyIconNone != eNotifyIcon )
+        {
+            m_NotifyForbiddenIcon = eNotifyIcon;
+        }
+    }
+
+    update();
+}
+
+//============================================================================
+void VxPushButton::setNotifyErrorEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+    m_NotifyErrorEnabled = enabled;
+    if( enabled )
+    {
+        if( eMyIconNone != eNotifyIcon )
+        {
+            m_NotifyErrorIcon = eNotifyIcon;
+        }
+    }
+
+    update();
 }
 
 //============================================================================
@@ -277,10 +352,10 @@ void VxPushButton::setIcon( EMyIcons myIcon )
 }
 
 //============================================================================
-void VxPushButton::setIconColor( QColor iconColor )
+void VxPushButton::setIconOverrideColor( QColor iconColor )
 {
-	m_DefaultIconColor = iconColor;
-	m_IconColorWasSet = true;
+    m_IconOverrideColor = iconColor;
+    m_IconOverrideColorWasSet = true;
     update();
 }
 
@@ -324,7 +399,16 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 	}
 
 
-	QColor iconColor = m_IconColorWasSet ? m_DefaultIconColor : appTheme.getButtonColor( this, eColorLayerIcon );
+    QColor iconColor;
+    if( m_IconOverrideColorWasSet )
+    {
+        iconColor = m_IconOverrideColor;
+    }
+    else
+    {
+        iconColor = appTheme.getButtonColor( this, eColorLayerIcon );
+    }
+
     drawBorder( appTheme, painter );
 
 	// draw button icon
@@ -384,32 +468,105 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 		}
 	}
 
-	if( m_NotifyEnabled
-		&& ( eMyIconNone != m_NotifyIcon ) 
-		&& ( 1 == m_BlinkState ) )
+	if( m_NotifyOnlineEnabled && ( eMyIconNone != m_NotifyOnlineIcon ) )
 	{
-		// draw notify dot
-		iconColor = appTheme.getButtonColor( this, eColorLayerNotify );
+		// draw online notify dot
+		iconColor = appTheme.getButtonColor( this, eColorLayerNotifyOnline );
 
-		if( ( m_LastIconColor != iconColor )
-			|| m_NotifyIconImage.isNull()
-			|| ( drawRect.size() != m_LastIconSize )
-			|| ( m_NotifyIcon != m_LastNotifyIcon ) )
+		if( ( m_NotifyLastIconOnlineColor != iconColor )
+			|| m_NotifyIconOnlineImage.isNull()
+			|| ( drawRect.size() != m_NotifyLastIconOnlineSize )
+			|| ( m_NotifyOnlineIcon != m_LastNotifyOnlineIcon ) )
 		{
-			m_NotifyIconImage = getMyIcons().getIconPixmap( m_NotifyIcon, drawRect.size(), iconColor );
+            m_NotifyIconOnlineImage = getMyIcons().getIconPixmap( m_NotifyOnlineIcon, drawRect.size(), iconColor );
 			if( ! m_IconImage.isNull() )
 			{
-				m_LastNotifyIcon = m_NotifyIcon;
-				m_NotifyLastIconColor = iconColor;
-				m_NotifyLastIconSize = drawRect.size();
+                m_LastNotifyOnlineIcon = m_NotifyOnlineIcon;
+                m_NotifyLastIconOnlineColor = iconColor;
+                m_NotifyLastIconOnlineSize = drawRect.size();
 			}
 		}
 
-		if( ! m_NotifyIconImage.isNull() )
+		if( ! m_NotifyIconOnlineImage.isNull() )
 		{
-			painter.drawPixmap( drawRect, m_IconImage );
+			painter.drawPixmap( drawRect, m_NotifyIconOnlineImage );
 		}
 	}
+
+    if( m_NotifyOfferEnabled && ( eMyIconNone != m_NotifyOfferIcon ) )
+    {
+        // draw online notify dot
+        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyOffer );
+
+        if( ( m_NotifyLastIconOfferColor != iconColor )
+            || m_NotifyIconOfferImage.isNull()
+            || ( drawRect.size() != m_NotifyLastIconOfferSize )
+            || ( m_NotifyOfferIcon != m_LastNotifyOfferIcon ) )
+        {
+            m_NotifyIconOfferImage = getMyIcons().getIconPixmap( m_NotifyOfferIcon, drawRect.size(), iconColor );
+            if( ! m_IconImage.isNull() )
+            {
+                m_LastNotifyOfferIcon = m_NotifyOfferIcon;
+                m_NotifyLastIconOfferColor = iconColor;
+                m_NotifyLastIconOfferSize = drawRect.size();
+            }
+        }
+
+        if( ! m_NotifyIconOfferImage.isNull() )
+        {
+            painter.drawPixmap( drawRect, m_NotifyIconOfferImage );
+        }
+    }
+
+    if( m_NotifyForbiddenEnabled && ( eMyIconNone != m_NotifyForbiddenIcon ) )
+    {
+        // draw online notify dot
+        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyForbidden );
+
+        if( ( m_NotifyLastIconForbiddenColor != iconColor )
+            || m_NotifyIconForbiddenImage.isNull()
+            || ( drawRect.size() != m_NotifyLastIconForbiddenSize )
+            || ( m_NotifyForbiddenIcon != m_LastNotifyForbiddenIcon ) )
+        {
+            m_NotifyIconForbiddenImage = getMyIcons().getIconPixmap( m_NotifyForbiddenIcon, drawRect.size(), iconColor );
+            if( ! m_IconImage.isNull() )
+            {
+                m_LastNotifyForbiddenIcon = m_NotifyForbiddenIcon;
+                m_NotifyLastIconForbiddenColor = iconColor;
+                m_NotifyLastIconForbiddenSize = drawRect.size();
+            }
+        }
+
+        if( ! m_NotifyIconForbiddenImage.isNull() )
+        {
+            painter.drawPixmap( drawRect, m_NotifyIconForbiddenImage );
+        }
+    }
+
+    if( m_NotifyErrorEnabled && ( eMyIconNone != m_NotifyErrorIcon ) )
+    {
+        // draw online notify dot
+        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyError );
+
+        if( ( m_NotifyLastIconErrorColor != iconColor )
+            || m_NotifyIconErrorImage.isNull()
+            || ( drawRect.size() != m_NotifyLastIconErrorSize )
+            || ( m_NotifyErrorIcon != m_LastNotifyErrorIcon ) )
+        {
+            m_NotifyIconErrorImage = getMyIcons().getIconPixmap( m_LastNotifyErrorIcon, drawRect.size(), iconColor );
+            if( ! m_IconImage.isNull() )
+            {
+                m_LastNotifyErrorIcon = m_NotifyErrorIcon;
+                m_NotifyLastIconErrorColor = iconColor;
+                m_NotifyLastIconErrorSize = drawRect.size();
+            }
+        }
+
+        if( ! m_NotifyIconErrorImage.isNull() )
+        {
+            painter.drawPixmap( drawRect, m_NotifyIconErrorImage );
+        }
+    }
 
 	painter.end();
 }
@@ -549,7 +706,7 @@ void VxPushButton::mouseReleaseEvent( QMouseEvent * event )
 	m_InSlideLeftMode = false;
 	if( !m_IsToggleButton )
 	{
-		setNotifyEnabled( false );
+		setNotifyOnlineEnabled( false );
 	}
 
 	QPushButton::mouseReleaseEvent( event );
@@ -592,4 +749,11 @@ void VxPushButton::mouseMoveEvent( QMouseEvent * event )
 			return;
 		}
 	}
+}
+
+//============================================================================
+void VxPushButton::setSquareButtonSize( EButtonSize buttonSize )
+{ 
+    m_SquareButtonSize = buttonSize; 
+    setFixedSize( GuiParams::getButtonSize( m_SquareButtonSize ) );
 }

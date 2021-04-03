@@ -31,8 +31,7 @@ InputFaceWidget::InputFaceWidget( QWidget * parent )
 	qDebug() << "InputFaceWidget::InputFaceWidget ";
 
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
-    ui.m_CancelFaceButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_CancelFaceButton->setSquareButtonSize( eButtonSizeTiny );
 
 	connect( ui.m_FaceLabel1_1,		SIGNAL(clicked()),	this, SLOT(slotFace1LabelClicked()) );
 	m_FaceList.push_back( ui.m_FaceLabel1_1 );

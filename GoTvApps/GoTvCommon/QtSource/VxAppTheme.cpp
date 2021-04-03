@@ -279,8 +279,14 @@ QColor VxAppTheme::getButtonColor( QPushButton * button, EColorLayerType colorLa
 
 		case eColorLayerOverlay:
 			return getColor( eLayerOverlayColor );
-		case eColorLayerNotify:
-			return getColor( eLayerNotifyColor );
+		case eColorLayerNotifyOnline:
+			return getColor( eLayerNotifyOnlineColor );
+        case eColorLayerNotifyOffer:
+            return getColor( eLayerNotifyOfferColor );
+        case eColorLayerNotifyForbidden:
+            return getColor( eLayerNotifyForbiddenColor );
+        case eColorLayerNotifyError:
+            return getColor( eLayerNotifyErrorColor );
 
 		case eColorLayerText:
 		default:
@@ -902,7 +908,10 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ).darker() ); //eButtonTextPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
-		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eProgressBarColor,
 
@@ -933,7 +942,10 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
-		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eProgressBarColor,
 
@@ -965,7 +977,10 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
-		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
 
@@ -998,7 +1013,10 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
-		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
 

@@ -30,10 +30,10 @@ InputVoiceWidget::InputVoiceWidget( QWidget * parent )
 	m_AssetInfo.setAssetType( eAssetTypeAudio );
 
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
-    ui.m_RecVoiceButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_CancelRecordButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_BackButton->setFixedSizeAbsolute( buttonSize );
+
+    ui.m_RecVoiceButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_CancelRecordButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_BackButton->setSquareButtonSize( eButtonSizeTiny );
 
 	ui.m_RecVoiceButton->setIcons( eMyIconMicrophoneOn );
 	ui.m_RecVoiceButton->setIsSlideLeftButton( true );

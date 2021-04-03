@@ -421,9 +421,9 @@ void PlayerGlWidget::hideEvent( QHideEvent * ev )
 //============================================================================
 void PlayerGlWidget::slotIconToggleTimeout( void )
 {
-	ui.m_MotionAlarmButton->setNotifyEnabled( m_MotionAlarmDetected  );
-	ui.m_MotionRecordButton->setNotifyEnabled( m_MotionRecordDetected );
-	ui.m_NormalRecordButton->setNotifyEnabled( m_InNormalRecord );
+	ui.m_MotionAlarmButton->setNotifyOnlineEnabled( m_MotionAlarmDetected  );
+	ui.m_MotionRecordButton->setNotifyOnlineEnabled( m_MotionRecordDetected );
+	ui.m_NormalRecordButton->setNotifyOnlineEnabled( m_InNormalRecord );
 }
 
 //============================================================================
@@ -431,7 +431,7 @@ void PlayerGlWidget::slotMotionAlarmTimeout( void )
 {
 	m_MotionAlarmExpireTimer->stop();
 	m_MotionAlarmDetected = false;
-	ui.m_MotionAlarmButton->setNotifyEnabled( false );
+	ui.m_MotionAlarmButton->setNotifyOnlineEnabled( false );
 	ui.m_MotionAlarmButton->setIcon( m_MotionAlarmOn ? eMyIconMotionAlarmRed : eMyIconMotionAlarmWhite );
 
 	updateMotionBarColor();
@@ -442,7 +442,7 @@ void PlayerGlWidget::slotMotionRecordTimeout( void )
 {
 	m_MotionRecordExpireTimer->stop();
 	m_MotionRecordDetected = false;
-	ui.m_MotionRecordButton->setNotifyEnabled( false );
+	ui.m_MotionRecordButton->setNotifyOnlineEnabled( false );
 	if( m_MotionRecordOn )
 	{
 		m_Engine.fromGuiVideoRecord( eVideoRecordStatePauseRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
@@ -467,7 +467,7 @@ void PlayerGlWidget::slotVidFeedMotion( int motion0To100000 )
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateResumeRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
 				m_MyApp.toGuiUserMessage( "Video Motion Record Resumed" );
 				updateMotionBarColor();
-				ui.m_MotionRecordButton->setNotifyEnabled( true );
+				ui.m_MotionRecordButton->setNotifyOnlineEnabled( true );
 			}
 		}
 
@@ -479,7 +479,7 @@ void PlayerGlWidget::slotVidFeedMotion( int motion0To100000 )
 				m_MotionAlarmDetected = true;
 				playMotionAlarm();
 				updateMotionBarColor();
-				ui.m_MotionAlarmButton->setNotifyEnabled( true );
+				ui.m_MotionAlarmButton->setNotifyOnlineEnabled( true );
 			}
 		}
 	}
@@ -561,7 +561,7 @@ void PlayerGlWidget::slotMotionAlarmButtonClicked( void )
 	}
 
 	m_MotionAlarmOn = !m_MotionAlarmOn;
-	ui.m_MotionAlarmButton->setNotifyEnabled( false );
+	ui.m_MotionAlarmButton->setNotifyOnlineEnabled( false );
 	ui.m_MotionAlarmButton->setIcon( m_MotionAlarmOn ? eMyIconMotionAlarmRed : eMyIconMotionAlarmWhite );
 	if( m_MotionAlarmOn )
 	{
@@ -585,7 +585,7 @@ void PlayerGlWidget::slotRecMotionButtonClicked( void )
 	{
 		if( !m_RecFilePath.isEmpty() )
 		{
-			ui.m_MotionRecordButton->setNotifyEnabled( false );
+			ui.m_MotionRecordButton->setNotifyOnlineEnabled( false );
 			if( m_MotionRecordOn )
 			{
 				ui.m_MotionRecordButton->setIcon( eMyIconRecordMotionNormal );
@@ -615,7 +615,7 @@ void PlayerGlWidget::slotRecMotionButtonClicked( void )
 				m_RecFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( timeNow ).c_str();
 				m_RecFileName += ".avi";
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStartRecordingInPausedState, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
-				ui.m_MotionRecordButton->setNotifyEnabled( true );
+				ui.m_MotionRecordButton->setNotifyOnlineEnabled( true );
 				m_MyApp.toGuiUserMessage( "Video Motion Record Started" );
 			}
 		}
@@ -677,7 +677,7 @@ void PlayerGlWidget::slotRecNormalButtonClicked( void )
 				m_RecFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( timeNow ).c_str();
 				m_RecFileName += ".avi";
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStartRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
-				ui.m_NormalRecordButton->setNotifyEnabled( true );
+				ui.m_NormalRecordButton->setNotifyOnlineEnabled( true );
 				m_MyApp.toGuiUserMessage( "Starting Video Record" );
 			}
 		}

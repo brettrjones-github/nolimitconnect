@@ -23,8 +23,11 @@ UserListItem::UserListItem(QWidget *parent  )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
+    ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize() );
     ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
+    ui.m_FriendshipButton->setFixedSize( GuiParams::getButtonSize() );
     ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
+    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize() );
     ui.m_MenuButton->setIcon( eMyIconMenu );
 
     connect( ui.m_AvatarButton,     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
@@ -45,7 +48,7 @@ UserListItem::~UserListItem()
 //============================================================================
 QSize UserListItem::calculateSizeHint( void )
 {
-    return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( 62 * GuiParams::getGuiScale() ) );
+    return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize().height() + 8 ) );
 }
 
 //============================================================================
@@ -106,10 +109,17 @@ void UserListItem::updateWidgetFromInfo( void )
     GuiUserSessionBase* hostSession = getUserSession();
     if( nullptr == hostSession )
     {
+        LogMsg( LOG_DEBUG, "UserListItem::updateWidgetFromInfo null user session" );
         return;
     }
 
-    GuiUser *hostIdent = hostSession->getUserIdent();
+    GuiUser * hostIdent = hostSession->getUserIdent();
+    if( nullptr == hostIdent )
+    {
+        LogMsg( LOG_DEBUG, "UserListItem::updateWidgetFromInfo null gui user" );
+        return;
+    }
+
     QString strName = hostIdent->getOnlineName();
     strName += " - ";
     QString strDesc = hostIdent->getOnlineDescription();
@@ -117,11 +127,13 @@ void UserListItem::updateWidgetFromInfo( void )
     // updateListEntryBackgroundColor( netIdent, item );
 
     ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
+    /*
     QPalette pal = ui.m_FriendshipButton->palette();
     pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
     ui.m_FriendshipButton->setAutoFillBackground(true);
     ui.m_FriendshipButton->setPalette(pal);
     ui.m_FriendshipButton->update();
+    */
     ui.TitlePart1->setText( strName );
     ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );

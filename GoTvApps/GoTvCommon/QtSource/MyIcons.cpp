@@ -117,8 +117,16 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/gotv_icon.svg";
     case eMyIconAvatarImage:
         return ":/AppRes/Resources/avatar.svg";
-	case eMyIconNotifyOverlay:		// activity flashing dot
+
+	case eMyIconNotifyOnlineOverlay:		
 		return ":/AppRes/Resources/notify-dot.svg";
+    case eMyIconNotifyOfferOverlay:		
+        return ":/AppRes/Resources/notify-offer.svg";
+    case eMyIconNotifyForbbidenOverlay:		
+        return ":/AppRes/Resources/notify-offer.svg";
+    case eMyIconNotifyErrorOverlay:		
+        return ":/AppRes/Resources/notify-offer.svg";
+
 	case eMyIconPlusOverlay:		// add to library or shared files
 		return ":/AppRes/Resources/overlay-plus.svg";
 	case eMyIconMinusOverlay:		// remove from library or shared files

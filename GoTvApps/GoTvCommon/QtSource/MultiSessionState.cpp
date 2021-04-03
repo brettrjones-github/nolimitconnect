@@ -348,7 +348,7 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 	case eMSessionStateWaitingClickSessionButton :
 		m_SessionState = sessionState;
 		m_SessionOfferButton->setEnabled( true );
-		m_SessionOfferButton->setNotifyEnabled( true );
+		m_SessionOfferButton->setNotifyOnlineEnabled( true );
 		switch( m_eMSessionType )
 		{
 		case eMSessionTypePhone:
@@ -368,7 +368,7 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 
 	case eMSessionStateWaitingUserAcceptReject:
 		m_SessionState = sessionState;
-		m_SessionOfferButton->setNotifyEnabled( false );
+		m_SessionOfferButton->setNotifyOnlineEnabled( false );
 		m_SessionOfferButton->setEnabled( true );
 		switch( m_eMSessionType )
 		{
@@ -439,7 +439,7 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 		resetGui();
 		m_SessionState = eMSessionStateIdle;
 		setButtonImage( m_SessionOfferButton, eImageTypeNormal );
-		m_SessionOfferButton->setNotifyEnabled( false );
+		m_SessionOfferButton->setNotifyOnlineEnabled( false );
 		m_SessionOfferButton->setEnabled( true );
 		switch( m_eMSessionType )
 		{
@@ -610,7 +610,7 @@ void MultiSessionState::resetGui()
 	m_HangupLayout->setVisible( false );
 	m_OffersLayout->setVisible( true );
 	m_ResponseLayout->setVisible( false );
-	m_SessionOfferButton->setNotifyEnabled( false );
+	m_SessionOfferButton->setNotifyOnlineEnabled( false );
 	m_VidCamView->setVisible( false );
 	m_TodGameLogic->setVisible( false );
 	if( canSend() )

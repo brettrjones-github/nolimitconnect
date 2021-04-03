@@ -34,11 +34,10 @@ InputPhotoWidget::InputPhotoWidget( QWidget * parent )
 	qDebug() << "InputPhotoWidget::InputPhotoWidget ";
 
 	ui.setupUi( this );
-    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
-    ui.m_SnapShotButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_RotateCamButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_SelectCamButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_CancelPhotoButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_SnapShotButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_RotateCamButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_SelectCamButton->setSquareButtonSize( eButtonSizeTiny );
+    ui.m_CancelPhotoButton->setSquareButtonSize( eButtonSizeTiny );
 
 	ui.m_SnapShotButton->setIcons( eMyIconCameraNormal );
 	ui.m_RotateCamButton->setIcons( eMyIconCamRotateNormal );

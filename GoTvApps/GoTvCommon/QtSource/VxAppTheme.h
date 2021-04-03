@@ -119,7 +119,10 @@ enum EThemeColorRole
 	eButtonTextPressed,
 
 	eLayerOverlayColor,
-	eLayerNotifyColor, 
+	eLayerNotifyOnlineColor, 
+    eLayerNotifyOfferColor, 
+    eLayerNotifyForbiddenColor, 
+    eLayerNotifyErrorColor, 
 	
 	eProgressBarColor,
 
@@ -139,7 +142,10 @@ enum EColorLayerType
 	eColorLayerIcon,
 	eColorLayerText,
 	eColorLayerOverlay,
-	eColorLayerNotify,
+	eColorLayerNotifyOnline,
+    eColorLayerNotifyOffer,
+    eColorLayerNotifyForbidden,
+    eColorLayerNotifyError,
 
 	eColorLayerCount // must be last
 };

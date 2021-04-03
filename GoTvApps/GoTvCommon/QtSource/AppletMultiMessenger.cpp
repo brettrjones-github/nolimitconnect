@@ -40,6 +40,9 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     ui.m_GroupHosts->setIcon( eMyIconEyeGroup );
     ui.m_ChatRoomHosts->setIcon( eMyIconEyeChatRoom );
     ui.m_RandomConnectHosts->setIcon( eMyIconEyeRandomConnect );
+    ui.m_EverybodyView->setIcon( eMyIconEyeAll );
+
+    ui.m_EverybodyView->setEnabled( false );
 
     ui.m_EyeHosts->setIcon( eMyIconEyeShow );
     ui.m_EyeSession->setIcon( eMyIconEyeShow );
@@ -245,6 +248,12 @@ void AppletMultiMessenger::slotUserInputButtonClicked( void )
 bool AppletMultiMessenger::checkForSendAccess( bool sendOfferIfPossible )
 {
 	bool canSend = false;
+    if( !m_HisIdent )
+    {
+        LogMsg( LOG_DEBUG, "AppletMultiMessenger::checkForSendAccess null m_HisIdent" );
+        return false;
+    }
+
 	if( m_HisIdent->getIsOnline() 
 		&& m_HisIdent->isMyAccessAllowedFromHim( m_ePluginType ) )
 	{

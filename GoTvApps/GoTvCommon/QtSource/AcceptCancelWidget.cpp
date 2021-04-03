@@ -23,9 +23,9 @@ AcceptCancelWidget::AcceptCancelWidget( QWidget *parent )
 : QFrame( parent )
 {
 	ui.setupUi( this );
-	ui.m_AcceptButton->setIconColor( QColor( COLOR_GREEN ) );
+	ui.m_AcceptButton->setIconOverrideColor( QColor( COLOR_GREEN ) );
 	ui.m_AcceptButton->setIcon( eMyIconCheckMark );
-	ui.m_CancelButton->setIconColor( QColor( COLOR_RED ) );
+	ui.m_CancelButton->setIconOverrideColor( QColor( COLOR_RED ) );
 	ui.m_CancelButton->setIcon( eMyIconRedX );
 	connect( ui.m_AcceptButton, SIGNAL( clicked() ), this, SLOT( slotAccepted() ) );
 	connect( ui.m_CancelButton, SIGNAL( clicked() ), this, SLOT( slotCanceled() ) );

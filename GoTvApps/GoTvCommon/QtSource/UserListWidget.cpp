@@ -47,18 +47,15 @@ UserListWidget::UserListWidget( QWidget * parent )
     //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
     //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-    setUserViewType( eUserViewTypeFriends );
+    setUserViewType( eUserViewTypeEverybody );
 }
 
 //============================================================================
 UserListItem* UserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
 {
     UserListItem* userItem = new UserListItem(this);
-    userItem->setSizeHint( userItem->calculateSizeHint() );
-    userItem->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
-
     userItem->setUserSession( userSession );
+    userItem->setSizeHint( userItem->calculateSizeHint() );
 
     connect( userItem, SIGNAL(signalUserListItemClicked(QListWidgetItem *)),	    this, SLOT(slotUserListItemClicked(QListWidgetItem *)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(UserListItem *)),	        this, SLOT(slotAvatarButtonClicked(UserListItem *)) );
@@ -406,6 +403,10 @@ bool UserListWidget::isListViewMatch( GuiUser * user )
         { 
             return getShowMyself();
         }
+        else if( eUserViewTypeEverybody == getUserViewType() )
+        {
+            return true;
+        }
         else if( eUserViewTypeFriends == getUserViewType() )
         {
             return user->isFriend() || user->isAdmin();
@@ -427,6 +428,10 @@ bool UserListWidget::isListViewMatch( GuiUser * user )
         {
             return true;
         }
+    }
+    else if( user && user->isIgnored() && eUserViewTypeIgnored == getUserViewType() )
+    {
+        return true;
     }
 
     return false;

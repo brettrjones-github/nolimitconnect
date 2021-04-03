@@ -5,7 +5,10 @@ enum EMyIcons
 	eMyIconUnknown,					// Icon with question mark
 	eMyIconApp,
     eMyIconAvatarImage,
-    eMyIconNotifyOverlay,			// activity flashing dot
+    eMyIconNotifyOnlineOverlay,		// activity flashing dot
+    eMyIconNotifyOfferOverlay,		// hand offer overlay
+    eMyIconNotifyForbbidenOverlay,	// permission denied
+    eMyIconNotifyErrorOverlay,		// error
 	eMyIconPlusOverlay,				// add to shared or library icon overlay
 	eMyIconMinusOverlay,			// remove from shared or library
 	eMyIconFriendOverlay,			// is friend
