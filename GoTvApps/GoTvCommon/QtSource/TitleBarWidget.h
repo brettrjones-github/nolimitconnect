@@ -47,7 +47,7 @@ public:
 	VxPushButton *				getAppIconPushButton( void );
     VxPushButton *				getBackButton( void ) { return ui.m_BackDlgButton; }
 
-    void						setTitleBarAppletIcon( EMyIcons appletIcon );
+    // void						setTitleBarAppletIcon( EMyIcons appletIcon );
 
 	void						enableAudioControls( bool enable );
 	void						enableVideoControls( bool enable );
@@ -122,6 +122,12 @@ public slots:
     virtual void				slotCamTimeout( void );
     virtual void				slotSignalHelpClick( void );
 
+    virtual void				slotCallListButtonClicked( void );
+    virtual void				slotOfferListButtonClicked( void );
+
+    virtual void				slotCallOfferCount( int activeCnt );
+    virtual void				slotOfferListCount( int activeCnt );
+
 protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
@@ -133,6 +139,7 @@ protected:
                                                            int				motion0To100000 ) override;
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
+    OfferMgr&                   m_OfferMgr;
 	bool						m_MuteMic{ false };
 	bool						m_MuteSpeaker{ false };
 	bool						m_EchoCancelEnabled{ false };

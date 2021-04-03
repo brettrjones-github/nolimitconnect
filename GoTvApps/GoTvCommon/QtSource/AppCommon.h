@@ -121,7 +121,7 @@ public:
     VxNetIdent *				getMyIdentity( void );
     VxGUID				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
-    OffersMgr&					getOffersMgr( void )						{ return m_OffersMgr; }
+    OfferMgr&					getOfferMgr( void )						    { return m_OfferMgr; }
     VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
     RenderGlWidget *            getRenderConsumer( void );
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
@@ -735,7 +735,7 @@ private:
 
 	P2PEngine&					m_Engine; // engine before sound so can initialize engine sound interface
 	MySndMgr&					m_MySndMgr;
-	OffersMgr&					m_OffersMgr;
+	OfferMgr&					m_OfferMgr;
 
 	HomeWindow					m_HomePage;
 

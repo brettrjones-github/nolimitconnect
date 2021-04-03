@@ -44,7 +44,7 @@ enum ESessionState
 #include <string>
 
 class ActivityBase;
-class OffersMgr;
+class OfferMgr;
 class OfferSessionCallbackInterface;
 class AppCommon;
 class VxNetIdent;
@@ -120,7 +120,7 @@ public:
 
 private:
 	AppCommon& 				    m_MyApp;
-    OffersMgr& 					m_OffersMgr;
+    OfferMgr& 					m_OfferMgr;
     AppletBase*				    m_AppletBase{ nullptr };
 	OfferSessionCallbackInterface* m_OfferCallback;
     EPluginType					m_ePluginType{ ePluginTypeInvalid };

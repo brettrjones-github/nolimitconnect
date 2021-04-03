@@ -193,6 +193,8 @@ enum EApplet
     eAppletPeerSessionFileOffer,
 
     eAppletMessenger,
+    eAppletCallList,	
+    eAppletOfferList,	
 
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,

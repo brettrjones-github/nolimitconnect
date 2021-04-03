@@ -66,6 +66,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
@@ -95,6 +96,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletOfferList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerRequestRelay.h \
@@ -218,7 +220,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
@@ -373,6 +375,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \
@@ -402,6 +405,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMultiMessenger.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletOfferList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.cpp \\
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerRequestRelay.cpp \
@@ -524,9 +528,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/OfferMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileShare.cpp \
@@ -675,6 +679,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCallList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoin.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \
@@ -698,6 +703,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletMultiMessenger.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletOfferList.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSelectFileToSend.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSessionFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPermissionList.ui \
@@ -723,6 +729,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AssetVoiceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AvatarBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/CallListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/CentralFrame.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/CentralWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ChatEntryWidget.ui \
@@ -757,6 +764,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkKeyWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkTestWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/OfferListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PermissionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \

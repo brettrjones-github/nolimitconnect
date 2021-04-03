@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?> 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-     android:orientation="vertical" android:layout_width="fill_parent" 
-     android:layout_height="fill_parent"> 
-     <com.p2pgotv.gotvstation.CamcorderView android:id="@+id/camcorder_preview" 
-          android:layout_width="fill_parent" android:layout_height="fill_parent" 
-          android:enabled="false" android:focusable="true" android:clickable="true" /> 
-</LinearLayout> 

@@ -20,7 +20,7 @@
 #include "GuiParams.h"
 #include "PopupMenu.h"
 #include "ToGuiActivityInterface.h"
-#include "OffersMgr.h"
+#include "OfferMgr.h"
 #include "MySndMgr.h"
 #include "MyIcons.h"
 
@@ -178,7 +178,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 
 , m_Engine( gotv.getPtoP() )
 , m_MySndMgr( * new MySndMgr( *this ) )
-, m_OffersMgr( * new OffersMgr( *this ) )
+, m_OfferMgr( * new OfferMgr( *this ) )
 
 , m_HomePage( *this, m_AppTitle )
 
@@ -196,7 +196,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 {
     g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
 
-    connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );
+    connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OfferMgr, SLOT( slotOncePerSecond() ) );
     connect( m_CheckSetupTimer, SIGNAL( timeout() ), this, SLOT( slotCheckSetupTimer() ) );
 }
 
@@ -583,7 +583,7 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWid
 	}
 
 	bool haveExistingOffer = false;
-	GuiOfferSession * exitingOffer = getOffersMgr().findActiveAndAvailableOffer( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType );
+	GuiOfferSession * exitingOffer = getOfferMgr().findActiveAndAvailableOffer( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType );
 	if( exitingOffer )
 	{
 		haveExistingOffer = true;
@@ -2068,6 +2068,8 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<ENetAvailStatus>( "ENetAvailStatus" );
     qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
     qRegisterMetaType<EOfferResponse>( "EOfferResponse" );
+    qRegisterMetaType<EOfferState>( "EOfferState" );
+    qRegisterMetaType<EOfferType>( "EOfferType" );
     qRegisterMetaType<EPluginAccess>( "EPluginAccess" );
     qRegisterMetaType<EPluginType>( "EPluginType" );
     qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );

@@ -16,7 +16,7 @@
 #include <app_precompiled_hdr.h>
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "OffersMgr.h"
+#include "OfferMgr.h"
 
 #include "AppletPeerChangeFriendship.h"
 #include "AppletPeerViewSharedFiles.h"
@@ -128,5 +128,5 @@ void AppCommon::offerToFriendUseAsRelay( GuiUser * poFriend )
 //============================================================================
 void AppCommon::removePluginSessionOffer( EPluginType ePluginType, GuiUser * poFriend )
 {
-	getOffersMgr().removePluginSessionOffer( ePluginType, poFriend );
+	getOfferMgr().removePluginSessionOffer( ePluginType, poFriend );
 }

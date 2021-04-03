@@ -15,31 +15,36 @@
 
 #include <app_precompiled_hdr.h>
 #include "TitleBarWidget.h"
-#include "MyIcons.h"
+
 #include "AppCommon.h"
 #include "ActivityHelpSignal.h"
+#include "MyIcons.h"
+#include "OfferMgr.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
-
-namespace
-{
-    const int MIN_CAM_PREVIEW_HEIGHT = 30;
-    const int MIN_CAM_PREVIEW_WIDTH = 30;
-}
 
 //============================================================================
 TitleBarWidget::TitleBarWidget( QWidget * parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
+, m_OfferMgr( m_MyApp.getOfferMgr() )
 , m_CamTimer(new QTimer(this))
 {
 	ui.setupUi( this );
+
+    setFixedHeight( GuiParams::getButtonSize().height() + 4 );
+
 	ui.m_StatusLabel->setVisible( false );
+    ui.m_OfferBarWidget->setVisible( false );
+
 	ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+
 	m_MuteMic			= GetAppInstance().getEngine().fromGuiIsMicrophoneMuted();
 	m_MuteSpeaker		= GetAppInstance().getEngine().fromGuiIsSpeakerMuted();
 	m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
+    ui.m_CallListButton->setIcon( eMyIconVoicePhoneNormal );
+    ui.m_OfferListButton->setIcon( eMyIconOfferList );
 
 	ui.m_GoTvButton->setUseTheme( false );
 	ui.m_GoTvButton->setProperty("GoTvIcon", true);
@@ -72,20 +77,25 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     setHomeButtonVisibility( false );
     setBackButtonVisibility( true );
 
-    connect( ui.m_PowerOffButton, SIGNAL( clicked() ), this, SLOT( slotPowerButtonClicked() ) );
-    connect( ui.m_HomeButton, SIGNAL( clicked() ), this, SLOT( slotHomeButtonClicked() ) );
-    connect( ui.m_BackDlgButton, SIGNAL( clicked() ), this, SLOT( slotBackButtonClicked() ) );
-    connect( ui.m_MuteMicButton, SIGNAL( clicked() ), this, SLOT( slotMuteMicButtonClicked() ) );
-    connect( ui.m_MuteSpeakerButton, SIGNAL( clicked() ), this, SLOT( slotMuteSpeakerButtonClicked() ) );
-    connect( ui.m_CameraButton, SIGNAL( clicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
-    connect( ui.m_CamPreviewScreen, SIGNAL( clicked() ), this, SLOT( slotCamPreviewClicked() ) );
-    connect( &m_MyApp, SIGNAL( signalStatusMsg( QString ) ), this, SLOT( slotTitleStatusBarMsg( QString ) ) );
-    connect( &m_MyApp, SIGNAL( signalToGuiPluginStatus( EPluginType, int, int ) ), this, SLOT( slotToGuiPluginStatus( EPluginType, int, int ) ) );
-    connect( &m_MyApp, SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
-    connect( &m_MyApp, SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
-    connect( m_CamTimer, SIGNAL( timeout() ), this, SLOT( slotCamTimeout() ) );
-    connect( this, SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
+    connect( ui.m_PowerOffButton,       SIGNAL( clicked() ), this, SLOT( slotPowerButtonClicked() ) );
+    connect( ui.m_HomeButton,           SIGNAL( clicked() ), this, SLOT( slotHomeButtonClicked() ) );
+    connect( ui.m_CallListButton,       SIGNAL( clicked() ), this, SLOT( slotCallListButtonClicked() ) );
+    connect( ui.m_OfferListButton,      SIGNAL( clicked() ), this, SLOT( slotOfferListButtonClicked() ) );
+    connect( ui.m_BackDlgButton,        SIGNAL( clicked() ), this, SLOT( slotBackButtonClicked() ) );
+    connect( ui.m_MuteMicButton,        SIGNAL( clicked() ), this, SLOT( slotMuteMicButtonClicked() ) );
+    connect( ui.m_MuteSpeakerButton,    SIGNAL( clicked() ), this, SLOT( slotMuteSpeakerButtonClicked() ) );
+    connect( ui.m_CameraButton,         SIGNAL( clicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
+    connect( ui.m_CamPreviewScreen,     SIGNAL( clicked() ), this, SLOT( slotCamPreviewClicked() ) );
+    connect( &m_MyApp,                  SIGNAL( signalStatusMsg( QString ) ), this, SLOT( slotTitleStatusBarMsg( QString ) ) );
+    connect( &m_MyApp,                  SIGNAL( signalToGuiPluginStatus( EPluginType, int, int ) ), this, SLOT( slotToGuiPluginStatus( EPluginType, int, int ) ) );
+    connect( &m_MyApp,                  SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
+    connect( &m_MyApp,                  SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
+    connect( m_CamTimer,                SIGNAL( timeout() ), this, SLOT( slotCamTimeout() ) );
+    connect( this,                      SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
     connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
+
+    connect( &m_OfferMgr,              SIGNAL( signalCallOfferCount( int ) ), this, SLOT( slotCallOfferCount( int ) ) );
+    connect( &m_OfferMgr,              SIGNAL( signalOfferListCount( int ) ), this, SLOT( slotOfferListCount( int ) ) );
 }
 
 //============================================================================
@@ -490,4 +500,28 @@ void TitleBarWidget::setBackButtonColor( QColor iconColor )
 void TitleBarWidget::slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus )
 {
     ui.m_NetAvailStatusWidget->toGuiNetAvailStatus( eNetAvailStatus );
+}
+
+//============================================================================
+void TitleBarWidget::slotCallOfferCount( int activeCnt )
+{
+    ui.m_CallListButton->setNotifyOnlineEnabled( activeCnt > 0 );
+}
+
+//============================================================================
+void TitleBarWidget::slotOfferListCount( int activeCnt )
+{
+    ui.m_OfferListButton->setNotifyOnlineEnabled( activeCnt > 0 );
+}
+
+//============================================================================
+void TitleBarWidget::slotCallListButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void TitleBarWidget::slotOfferListButtonClicked( void )
+{
+
 }

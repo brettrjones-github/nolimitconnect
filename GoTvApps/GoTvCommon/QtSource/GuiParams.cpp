@@ -1160,6 +1160,86 @@ QString GuiParams::describeFileLength( uint64_t fileLen )
 }
 
 //============================================================================
+QString GuiParams::describeOfferState( EOfferState offerState )
+{
+    switch( offerState )
+    {
+    case eOfferStateNone:
+        return QObject::tr( "No Offer" );
+    case eOfferStateSending:
+        return QObject::tr( "Seding Offer" );
+    case eOfferStateSent:
+        return QObject::tr( "Offer Sent" );
+    case eOfferStateSendFailed:
+        return QObject::tr( "Offer Send Failed" );
+    case eOfferStateRxedByUser:
+        return QObject::tr( "Offer Recieved By User" );
+    case eOfferStateBusy:
+        return QObject::tr( "User Is Busy" );
+    case eOfferStateAccepted:
+        return QObject::tr( "Offer Accepted" );
+    case eOfferStateRejected:
+        return QObject::tr( "Offer Rejected" );
+    case eOfferStateCanceled:
+        return QObject::tr( "Offer Canceled" );
+    case eOfferStateUserOffline:
+        return QObject::tr( "User Is Offline" );
+    case eOfferStateInSession:
+        return QObject::tr( "Offer Is In Session" );
+    case eOfferStateSessionComplete:
+        return QObject::tr( "Offer Session Complete" );
+    case eOfferStateSessionFailed:
+        return QObject::tr( "Offer Session Failed" );
+    default:
+        return QObject::tr( "Unknown Offer Type" );
+    }
+}
+
+//============================================================================
+QString GuiParams::describeOfferType( EOfferType offerType )
+{
+    switch( offerType )
+    {
+    case eOfferTypeNone:
+        return QObject::tr( "Unknonn Offer Type" );
+    case eOfferTypeJoinGroup:
+        return QObject::tr( "Offer: Join Group" );
+    case eOfferTypeJoinChatRoom:
+        return QObject::tr( "Offer: Join Chat Roome" );
+    case eOfferTypeJoinRandomConnect:
+        return QObject::tr( "Offer: Join Random Connect" );
+    case eOfferTypePhotoFile:
+        return QObject::tr( "Offer: Photo File" );
+    case eOfferTypeAudioFile:
+        return QObject::tr( "Offer: Audio File" );
+    case eOfferTypeVideoFile:
+        return QObject::tr( "Offer: Video File" );
+    case eOfferTypeDocumentFile:
+        return QObject::tr( "Offer: Document File" );
+    case eOfferTypeArchiveFile:
+        return QObject::tr( "Offer: Archive File" );
+    case eOfferTypeExecutableFile:
+        return QObject::tr( "Offer: Executable File" );
+    case eOfferTypeOtherFile:
+        return QObject::tr( "Offer: Unknown File Type" );
+    case eOfferTypeDirectory:
+        return QObject::tr( "Offer: Folder Of Files" );
+    case eOfferTypeFriendship:
+        return QObject::tr( "Offer: Friendship" );
+    case eOfferTypeMessenger:
+        return QObject::tr( "Offer: Instant Message Session" );
+    case eOfferTypeTruthOrDare:
+        return QObject::tr( "Offer: Truth Or Dare Game" );
+    case eOfferTypeVideoPhone:
+        return QObject::tr( "Offer: Video Chat" );
+    case eOfferTypeVoicePhone:
+        return QObject::tr( "Offer: Voice Phone Call" );
+    default:
+        return QObject::tr( "Unknown Offer Type" );
+    }
+}
+
+//============================================================================
 QString GuiParams::describeOrientation( Qt::Orientation qtOrientation )
 {
     switch( qtOrientation )

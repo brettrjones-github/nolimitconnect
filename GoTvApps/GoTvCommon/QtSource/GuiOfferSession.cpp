@@ -20,8 +20,8 @@
 #include "GuiHelpers.h"
 
 //============================================================================
-GuiOfferSession::GuiOfferSession()
-: QObject(0)
+GuiOfferSession::GuiOfferSession(QWidget *parent)
+: GuiUserSessionBase(parent)
 , m_ePluginType(ePluginTypeInvalid)
 , m_HisIdent(0)
 , m_pvUserData(0)
@@ -37,9 +37,8 @@ GuiOfferSession::GuiOfferSession()
 
 //============================================================================
 GuiOfferSession::GuiOfferSession(const GuiOfferSession& rhs)
-: QObject(0)
+: GuiUserSessionBase(rhs)
 {
-	*this = rhs;
 }
 
 //============================================================================

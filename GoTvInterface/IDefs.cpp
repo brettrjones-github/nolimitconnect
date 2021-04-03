@@ -235,6 +235,46 @@ namespace
         "Max Relay Status "
     };
 
+    const char * OfferStateEnumStrings[] = 
+    {
+        "No Offer ",
+        "Sending Offer ",
+        "Offer Sent ",
+        "Offer Send Failed ",
+        "Offer Recieved By User ",
+        "User Is Busy ",
+        "Offer Accepted ",
+        "Offer Rejected ",
+        "Offer Was Canceled ",
+        "User Is Offline ",
+        "Offer Is In Session ",
+        "Offer Session Complete ",
+        "Offer Session Failed ",
+        "Max Offer State ",
+    };
+
+    const char * OfferTypeEnumStrings[] = 
+    {
+        "Offer Type: None ",
+        "Offer Type: Join Group ",
+        "Offer Type: Join Chat Room ",
+        "Offer Type: Join Random Connect ",
+        "Offer Type: Photo File ",
+        "Offer Type: Audio File ",
+        "Offer Type: Video File ",
+        "Offer Type: Document File ",
+        "Offer Type: Archive File ",
+        "Offer Type: Executable File ",
+        "Offer Type: Unknown Type File ",
+        "Offer Type: Folder Of Files ",
+        "Offer Type: Friendship ",
+        "Offer Type: Instant Message Session ",
+        "Offer Type: Truth Or Dare Game ",
+        "Offer Type: Video Chat ",
+        "Offer Type: Voice Phone Call ",
+        "Max Offer Type ",
+    };
+
     const char * PluginAccessStateEnumStrings[] = 
     {
         "Access: Unknown ",
@@ -634,6 +674,28 @@ const char * DescribeNetCmdError( ENetCmdError netCmdError )
     }
 
     return NetCmdErrorEnumStrings[ netCmdError ]; 
+}
+
+//============================================================================
+const char * DescribeOfferState( EOfferState offerState )
+{
+    if(  offerState < 0 || eMaxOfferState <= offerState )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return OfferStateEnumStrings[ offerState ]; 
+}
+
+//============================================================================
+const char * DescribeOfferType( EOfferType offerType )
+{
+    if(  offerType < 0 || eMaxOfferType <= offerType )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return OfferTypeEnumStrings[ offerType ]; 
 }
 
 //============================================================================

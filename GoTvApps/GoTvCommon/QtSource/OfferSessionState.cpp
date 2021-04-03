@@ -24,7 +24,6 @@
 OfferSessionState::OfferSessionState( AppCommon& myApp, GuiOfferSession * offerSession )
 : m_MyApp( myApp )
 , m_OfferSession( offerSession )
-, m_EOfferState( eOfferStateUnknown )
 {
 }
 
@@ -70,21 +69,12 @@ bool OfferSessionState::isAvailableAndActiveOffer( void )
 	bool avail = false;
 	switch( m_EOfferState )
 	{
-	case eOfferStateRxedOffer:
-	case eOfferStateWaitingReply:
+	case eOfferStateSending:
+	case eOfferStateSent:
+    case eOfferStateRxedByUser:
 	case eOfferStateInSession:
-	case eOfferStateSentAccept:
 		avail = true;
 		break;
-	case eOfferStateOfferCanceled:
-	case eOfferStateSentRejected:
-	case eOfferStateReplyBusy:
-	case eOfferStateReplyAccept:
-	case eOfferStateReplyRejected:
-	case eOfferStateReplyCanceled:
-	case eOfferStateReplyEndSession:
-	case eOfferStateUserOffline:
-	case eOfferStateUnknown:
 	default:
 		break;
 	}

@@ -371,6 +371,7 @@ enum EMyIcons
 
     eMyIconOfferFile,
     eMyIconOfferFriendship,
+    eMyIconOfferList,
     eMyIconOfferTruthOrDare,
     eMyIconOfferVideoChat,
     eMyIconOfferVoicePhone,

@@ -38,6 +38,8 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  
 https://iconmonstr.com/
 avatar.svg
+cam-rotate.svg (modified)
+cam-preview.svg (modified)
 cancel.svg
 check-mark.svg
 connection-test.svg (modified)
@@ -67,6 +69,7 @@ file-xfer.svg (modified)
 file-xfer-settings.svg (modified)
 friend.svg
 flask.svg
+image-rotate.svg (modified)
 key-disabled.svg
 key-enabled.svg
 mediatype-audio.svg
@@ -78,9 +81,14 @@ notify-dot.svg (modified)
 notepad.svg
 offer-file.svg (modified)
 offer-friendship.svg (modified)
+offer-list.svg (modified)
 offer-truth-or-dare.svg (modified)
 offer-video-chat.svg (modified)
 offer-voice-phone.svg (modified)
+overlay-friend.svg (modified)
+overlay-globe.svg (modified)
+overlay-minus.svg (modified)
+overlay-plus.svg (modified)
 pin-pinned.svg
 pin-unpinned.svg
 plugin.svg
@@ -106,13 +114,6 @@ star-half-full.svg
 storyboard.svg
 thumbs-up.svg
 thumbs-down.svg (modified)
-cam-rotate.svg (modified)
-cam-preview.svg (modified)
-image-rotate.svg (modified)
-overlay-friend.svg (modified)
-overlay-globe.svg (modified)
-overlay-minus.svg (modified)
-overlay-plus.svg (modified)
 video-chat-settings.svg (modified)
 window-expand.svg
 window-shrink.svg

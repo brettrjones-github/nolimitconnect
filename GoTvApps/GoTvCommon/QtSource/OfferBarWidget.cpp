@@ -15,7 +15,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "OfferBarWidget.h"
-#include "OffersMgr.h"
+#include "OfferMgr.h"
 
 #include "MyIcons.h"
 #include "AppCommon.h"
@@ -28,7 +28,7 @@
 OfferBarWidget::OfferBarWidget( QWidget * parent )
 : QFrame( parent )
 , m_MyApp( GetAppInstance() )
-, m_OffersMgr( m_MyApp.getOffersMgr() )
+, m_OfferMgr( m_MyApp.getOfferMgr() )
 , m_HisIdent( 0 )
 , m_ePluginType( ePluginTypeInvalid )
 {
@@ -38,7 +38,7 @@ OfferBarWidget::OfferBarWidget( QWidget * parent )
 	connect( ui.m_FriendButton,				SIGNAL(clicked()),		this, SLOT(slotAcceptOfferButtonClicked()) );
 	connect( ui.m_AcceptButton,				SIGNAL(clicked()),		this, SLOT(slotAcceptOfferButtonClicked()) );
 	connect( ui.m_RejectButton,				SIGNAL(clicked()),		this, SLOT(slotRejectOfferButtonClicked()) );
-	m_OffersMgr.wantToGuiOfferCallbacks( this, true );
+	m_OfferMgr.wantToGuiOfferCallbacks( this, true );
 }
 
 //============================================================================
@@ -46,7 +46,7 @@ OfferBarWidget::~OfferBarWidget()
 {
     if( false == VxIsAppShuttingDown() )
     {
-        m_OffersMgr.wantToGuiOfferCallbacks( this, false );
+        m_OfferMgr.wantToGuiOfferCallbacks( this, false );
     }
 }
 
@@ -72,14 +72,14 @@ void OfferBarWidget::hideEvent( QHideEvent * ev )
 //============================================================================
 void OfferBarWidget::closeEvent( QCloseEvent * ev )
 {
-	m_OffersMgr.wantToGuiOfferCallbacks( this, false );
+	m_OfferMgr.wantToGuiOfferCallbacks( this, false );
 	ev->accept();
 }
 
 //============================================================================
 void OfferBarWidget::initializeOfferBar( void )
 {
-	OfferSessionState * offerState = m_OffersMgr.getTopGuiOfferSession();
+	OfferSessionState * offerState = m_OfferMgr.getTopGuiOfferSession();
 	fillOfferBar( offerState );
 }
 
@@ -106,12 +106,12 @@ void OfferBarWidget::fillOfferBar( OfferSessionState * offerState )
 //============================================================================
 void OfferBarWidget::updateOfferBar( OfferSessionState * offerState )
 {
-	ui.m_OfferCntLabel->setText( QString("%1").arg( m_OffersMgr.getTotalOffersCount() ) );
+	ui.m_OfferCntLabel->setText( QString("%1").arg( m_OfferMgr.getTotalOffersCount() ) );
 	if( offerState->getOfferSessionId() == m_OfferSessionId )
 	{
 		switch( offerState->getOfferState() )
 		{
-		case eOfferStateRxedOffer:
+		case eOfferStateRxedByUser:
 			setIsOfferAvailable( true );
 			break;
 
@@ -189,13 +189,13 @@ bool OfferBarWidget::getIsOfferAvailable( void )
 //============================================================================
 void OfferBarWidget::slotAcceptOfferButtonClicked( void )
 {
-	m_OffersMgr.acceptOfferButtonClicked( m_ePluginType, m_OfferSessionId, m_HisIdent );
+	m_OfferMgr.acceptOfferButtonClicked( m_ePluginType, m_OfferSessionId, m_HisIdent );
 }
 
 //============================================================================
 void OfferBarWidget::slotRejectOfferButtonClicked( void )
 {
-	m_OffersMgr.rejectOfferButtonClicked( m_ePluginType, m_OfferSessionId, m_HisIdent );	
+	m_OfferMgr.rejectOfferButtonClicked( m_ePluginType, m_OfferSessionId, m_HisIdent );	
 }
 
 //============================================================================

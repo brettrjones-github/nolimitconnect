@@ -17,7 +17,7 @@
 #include "GuiOfferSession.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "OffersMgr.h"
+#include "OfferMgr.h"
 
 #include "ToGuiActivityInterface.h"
 #include "ActivityNetworkState.h"
@@ -63,7 +63,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 
 	// use signal so widgets will be built in gui thread
 	// we must put into new session so offer msg and file name is still available when queued signal is received
-	GuiOfferSession * poOffer = new GuiOfferSession();
+	GuiOfferSession * poOffer = new GuiOfferSession(this);
 	poOffer->setPluginType( ePluginType );
 	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
@@ -84,7 +84,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 		break;
 	}
 
-	getOffersMgr().toGuiRxedPluginOffer( poOffer );
+	getOfferMgr().toGuiRxedPluginOffer( poOffer );
 }
 
 //============================================================================
@@ -117,7 +117,7 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent,
 		return;
 	}
 
-	GuiOfferSession * poOffer = new GuiOfferSession();
+	GuiOfferSession * poOffer = new GuiOfferSession(this);
 	poOffer->setPluginType( ePluginType );
 	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
@@ -129,7 +129,7 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent,
 	poOffer->setLclSessionId( lclSessionId );
 	poOffer->assuredValidLclSessionId();
 
-	getOffersMgr().toGuiRxedOfferReply( poOffer );
+	getOfferMgr().toGuiRxedOfferReply( poOffer );
 }
 
 //============================================================================
@@ -158,7 +158,7 @@ void AppCommon::toGuiPluginSessionEnded(	VxNetIdent *	netIdent,
 		return;
 	}
 
-	GuiOfferSession * poOffer = new GuiOfferSession();
+	GuiOfferSession * poOffer = new GuiOfferSession(this);
 	poOffer->setPluginType( ePluginType );
 	poOffer->setHisIdent( m_UserMgr.getUser( netIdent->getMyOnlineId() ) );
 	poOffer->setUserData( pvUserData );
@@ -167,7 +167,7 @@ void AppCommon::toGuiPluginSessionEnded(	VxNetIdent *	netIdent,
 	poOffer->setLclSessionId( lclSessionId );
 	poOffer->assuredValidLclSessionId();
 
-	getOffersMgr().toGuiPluginSessionEnded( poOffer );
+	getOfferMgr().toGuiPluginSessionEnded( poOffer );
 }
 
 //============================================================================

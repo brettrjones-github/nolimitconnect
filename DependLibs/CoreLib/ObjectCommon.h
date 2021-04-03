@@ -63,6 +63,7 @@
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
 #define OBJNAME_APPLET_BROWSE_FILES					    "AppletBrowseFiles"
+#define OBJNAME_APPLET_CALL_LIST			            "AppletCallList"
 #define OBJNAME_APPLET_CHAT_ROOM_JOIN			        "AppletChatRoomJoin"
 #define OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH			"AppletChatRoomJoinSearch"
 #define OBJNAME_APPLET_CHOOSE_THUMBNAIL					"AppletChooseThumbnail"
@@ -96,6 +97,7 @@
 #define OBJNAME_APPLET_NET_HOSTING_PAGE					"AppletNetHosting"
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
+#define OBJNAME_APPLET_OFFER_LIST				        "AppletOfferList"
 #define OBJNAME_APPLET_PERMISSION_LIST				    "AppletPermissionList"
 #define OBJNAME_APPLET_PERSONAL_RECORDER				"AppletPersonalRecorder"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"

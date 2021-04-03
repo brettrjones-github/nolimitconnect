@@ -20,7 +20,7 @@
 #include <CoreLib/VxSha1Hash.h>
 #include <PktLib/VxCommon.h>
 
-#include <QObject>
+#include "GuiUserSessionBase.h"
 
 class AppCommon;
 class GuiUser;
@@ -29,12 +29,12 @@ class OfferSessionState;
 class P2PEngine;
 
 // offer from remote friend
-class GuiOfferSession : public QObject
+class GuiOfferSession : public GuiUserSessionBase
 {
 	Q_OBJECT
 
 public:
-	GuiOfferSession();
+	GuiOfferSession(QWidget *parent);
 	GuiOfferSession(const GuiOfferSession& rhs);
 	GuiOfferSession& operator=(const GuiOfferSession& rhs); 
 

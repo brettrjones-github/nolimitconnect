@@ -42,8 +42,6 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     ui.m_RandomConnectHosts->setIcon( eMyIconEyeRandomConnect );
     ui.m_EverybodyView->setIcon( eMyIconEyeAll );
 
-    ui.m_EverybodyView->setEnabled( false );
-
     ui.m_EyeHosts->setIcon( eMyIconEyeShow );
     ui.m_EyeSession->setIcon( eMyIconEyeShow );
 

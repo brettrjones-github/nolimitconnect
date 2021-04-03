@@ -15,11 +15,12 @@
 
 #include <GoTvInterface/IDefs.h>
 
+#include "GuiUser.h"
+
 #include <QWidget>
 
 class P2PEngine;
 class VxGUID;
-class GuiUser;
 class PluginSetting;
 
 class GuiUserSessionBase : public QWidget

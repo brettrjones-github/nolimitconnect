@@ -60,7 +60,7 @@ protected:
 
 	Ui::OfferBarWidgetClass		ui;
 	AppCommon&				    m_MyApp;
-	OffersMgr&					m_OffersMgr;
+	OfferMgr&					m_OfferMgr;
 	VxGUID						m_OfferSessionId;
 	GuiUser *				    m_HisIdent;
 	EPluginType					m_ePluginType;

@@ -514,7 +514,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -806,6 +808,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CallListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CallListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -872,6 +876,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1087,7 +1093,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OffersMgr.cpp">
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferMgr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp">
@@ -1303,7 +1309,9 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityTimedMessage.ui">
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletDownloads.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletOfferList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerChangeFriendship.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerReplyOfferFile.ui" />
@@ -1399,6 +1407,7 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AvatarBarWidget.ui">
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\CallListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\CentralFrame.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\CentralWidget.ui">
@@ -1449,6 +1458,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkTestWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\OfferBarWidget.ui">
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\OfferWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionListItemWidget.ui" />
@@ -1638,6 +1648,7 @@
     <None Include="..\..\..\GoTvCommon\Resources\notepad.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\offer-file.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\offer-friendship.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\offer-list.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\offer-truth-or-dare.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\offer-video-chat.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\offer-voice-phone.svg" />
@@ -2047,6 +2058,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUploads.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">
@@ -2102,6 +2115,8 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CallListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CallListWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.h" />
@@ -2170,6 +2185,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
@@ -2320,7 +2337,7 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OffersMgr.h">
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferMgr.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferWidget.h">

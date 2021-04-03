@@ -340,9 +340,9 @@ enum ENetworkStateType
     eNetworkStateTypeOnlineThroughRelay		= 7,
     eNetworkStateTypeGetRelayList			= 8,
     eNetworkStateTypeNoInternetConnection	= 9,
-    eNetworkStateTypeFailedResolveHostNetwork	    = 10,
+    eNetworkStateTypeFailedResolveHostNetwork	= 10,
     eNetworkStateTypeFailedResolveHostGroupList = 11,
-    eNetworkStateTypeFailedResolveHostGroup = 12,
+    eNetworkStateTypeFailedResolveHostGroup     = 12,
 
     eMaxNetworkStateType
 };
@@ -357,6 +357,50 @@ enum EOfferResponse
     eOfferResponseCancelSession	= 4,	//!< Contact exited session
     eOfferResponseEndSession	= 5,	//!< Session end because of any reason
     eOfferResponseUserOffline	= 6		//!< Session end because contact is not online
+};
+
+//! public Enumeration of offer state
+enum EOfferState
+{
+    eOfferStateNone                 = 0,	// no offer state
+    eOfferStateSending              = 1,
+    eOfferStateSent                 = 2,
+    eOfferStateSendFailed           = 3,
+    eOfferStateRxedByUser           = 4,    // recieved by destination user
+    eOfferStateBusy                 = 5,    // destination user is already in session
+    eOfferStateAccepted             = 6,
+    eOfferStateRejected             = 7,
+    eOfferStateCanceled             = 8,
+    eOfferStateUserOffline          = 9,
+    eOfferStateInSession            = 10,   // in session or in xfer progress
+    eOfferStateSessionComplete      = 11,   // session or xfer completed
+    eOfferStateSessionFailed        = 12,   // session or xfer failed
+
+    eMaxOfferState
+};
+
+//! public Enumeration of offer
+enum EOfferType
+{
+    eOfferTypeNone		            = 0,	//!< Unknown or no offer
+    eOfferTypeJoinGroup		        = 1,
+    eOfferTypeJoinChatRoom		    = 2,
+    eOfferTypeJoinRandomConnect		= 3,
+    eOfferTypePhotoFile		        = 4,
+    eOfferTypeAudioFile		        = 5,
+    eOfferTypeVideoFile		        = 6,
+    eOfferTypeDocumentFile		    = 7,
+    eOfferTypeArchiveFile		    = 8,    // archive or cd/dvd image
+    eOfferTypeExecutableFile		= 9,    // exe files are not normally allowed but here for error notification
+    eOfferTypeOtherFile		        = 10,   // unrecognized file type
+    eOfferTypeDirectory		        = 11,   // directory of files
+    eOfferTypeFriendship		    = 12, 
+    eOfferTypeMessenger		        = 13,   // instant message session 
+    eOfferTypeTruthOrDare           = 14,	// Video Chat Truth Or Dare game  
+    eOfferTypeVideoPhone            = 15,	// Video Chat with motion detect and stream recording
+    eOfferTypeVoicePhone            = 16,	// VOIP audio only phone call
+
+    eMaxOfferType
 };
 
 //! \public Enumeration of plugin accessibility
@@ -381,19 +425,19 @@ enum EPluginType
     //! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
     ePluginTypeInvalid			= 0,	//!< unknown or disabled
 
-    ePluginTypeAdmin			= 1,	//!< Administration ( intended for updates but not currently used )
-    ePluginTypeAboutMePage      = 2,	//!< about me page plugin ( using web page server )
-    ePluginTypeAvatarImage      = 3,	//!< handle users avatar image
-    ePluginTypeCamServer        = 4,	//!< Web cam broadcast plugin
-    ePluginTypeFileServer       = 5,	//!< Shared files server
-    ePluginTypeFileXfer         = 6,	//!< Offer/accept send a file person to person
-    ePluginTypeMessenger        = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeStoryboard       = 8,	//!< User editable story board web page server
-    ePluginTypeTruthOrDare      = 9,	//!< Video Chat Truth Or Dare game  
-    ePluginTypeVideoPhone       = 10,	//!< Video Chat with motion detect and stream recording
-    ePluginTypeVoicePhone       = 11,	//!< VOIP audio only phone call
-    ePluginTypeChatRoomClient   = 12,	//!< chat room user client plugin
-    ePluginTypeChatRoomHost     = 13,	//!< chat room hosting plugin
+    ePluginTypeAdmin			    = 1,	//!< Administration ( intended for updates but not currently used )
+    ePluginTypeAboutMePage          = 2,	//!< about me page plugin ( using web page server )
+    ePluginTypeAvatarImage          = 3,	//!< handle users avatar image
+    ePluginTypeCamServer            = 4,	//!< Web cam broadcast plugin
+    ePluginTypeFileServer           = 5,	//!< Shared files server
+    ePluginTypeFileXfer             = 6,	//!< Offer/accept send a file person to person
+    ePluginTypeMessenger            = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+    ePluginTypeStoryboard           = 8,	//!< User editable story board web page server
+    ePluginTypeTruthOrDare          = 9,	//!< Video Chat Truth Or Dare game  
+    ePluginTypeVideoPhone           = 10,	//!< Video Chat with motion detect and stream recording
+    ePluginTypeVoicePhone           = 11,	//!< VOIP audio only phone call
+    ePluginTypeChatRoomClient       = 12,	//!< chat room user client plugin
+    ePluginTypeChatRoomHost         = 13,	//!< chat room hosting plugin
     ePluginTypeConnectTestClient    = 14,	//!< Connection Test Client
     ePluginTypeConnectTestHost      = 15,	//!< Connection Test Service
     ePluginTypeGroupClient          = 16,	//!< group client
@@ -735,6 +779,10 @@ const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus );
 const char * DescribeNetCmdType( ENetCmdType netCmdType );
 //! Net Command Error as text
 const char * DescribeNetCmdError( ENetCmdError netCmdError );
+//! Offer state as text
+const char * DescribeOfferState( EOfferState offerState );
+//! Offer type as text
+const char * DescribeOfferType( EOfferType offerType );
 //! Plugin Access as text
 const char * DescribePluginAccess( EPluginAccess pluginAccess );
 //! Describe plugin.. the first DescribePluginType is translated.. this one is not

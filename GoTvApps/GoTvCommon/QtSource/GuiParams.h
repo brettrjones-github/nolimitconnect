@@ -75,6 +75,8 @@ public:
     static QString				describeEXferState( EXferState xferState );
     static QString				describeEXferError( EXferError xferError );
     static QString				describeFileLength( uint64_t fileLen );
+    static QString				describeOfferState( EOfferState offerState );
+    static QString				describeOfferType( EOfferType offerType );
     static QString				describeOrientation( Qt::Orientation qtOrientation );
 
     static QString              describeStatus( EHostAnnounceStatus hostStatus );

@@ -121,15 +121,27 @@
     <Filter Include="GoTvCommon\Source Files\Log">
       <UniqueIdentifier>{85ddef01-870a-497e-99df-6943f13897bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\Offers">
+      <UniqueIdentifier>{f836255a-0314-42b1-b29d-8e996528f608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\MyIcons">
+      <UniqueIdentifier>{acabb7c0-8ce5-442d-bb37-7b86cde2a57d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\TitleBar">
+      <UniqueIdentifier>{ec7dead5-a348-4d66-a079-45069837f691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\Thumbnails">
+      <UniqueIdentifier>{617f1696-e550-4fba-bf8c-2353a8285e24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\Render">
+      <UniqueIdentifier>{8d81a947-e851-441e-a876-184d91ae5c38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
       <Filter>AppSource</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyIcons.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp">
@@ -160,21 +172,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OffersMgr.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp">
@@ -495,29 +492,11 @@
     <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvRender.cpp">
       <Filter>GoTvInterface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.cpp">
       <Filter>GoTvInterface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonRender.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetFonts.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetRender.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetTextures.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonEvents.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
@@ -527,30 +506,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaderInterface.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.cpp">
       <Filter>GoTvCommon\Source Files\soundio</Filter>
@@ -607,9 +562,6 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp">
@@ -783,12 +735,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountDb.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -826,9 +772,6 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp">
@@ -1037,6 +980,96 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferMgr.cpp">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyIcons.cpp">
+      <Filter>GoTvCommon\Source Files\MyIcons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
+      <Filter>GoTvCommon\Source Files\TitleBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Thumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Thumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Thumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetFonts.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetRender.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaderInterface.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetTextures.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CallListItem.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CallListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListItem.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1272,15 +1305,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OffersMgr.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferWidget.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h">
@@ -1553,18 +1577,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.h">
       <Filter>GoTvCommon\Source Files\soundio</Filter>
     </QtMoc>
@@ -1611,9 +1623,6 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\StoryWidget.h">
@@ -1778,12 +1787,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1821,9 +1824,6 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.h">
@@ -1984,6 +1984,57 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.h">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferMgr.h">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferWidget.h">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.h">
+      <Filter>GoTvCommon\Source Files\TitleBar</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.h">
+      <Filter>GoTvCommon\Source Files\Thumbnails</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.h">
+      <Filter>GoTvCommon\Source Files\Thumbnails</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.h">
+      <Filter>GoTvCommon\Source Files\Thumbnails</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CallListItem.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CallListWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListItem.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiList</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2575,6 +2626,9 @@
     <None Include="..\..\..\GoTvCommon\Resources\offer-voice-phone.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
+    <None Include="..\..\..\GoTvCommon\Resources\offer-list.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ActivityAddRemoveLibraryFiles.h">
@@ -2781,9 +2835,6 @@
     <ClInclude Include="GeneratedFiles\ui_VidWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIcons.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\config_gotvapps.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
@@ -2814,15 +2865,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
@@ -2837,9 +2879,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h">
-      <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_BottomBarWidget.h">
       <Filter>Generated Files</Filter>
@@ -2931,15 +2970,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvDebugConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
@@ -3020,6 +3050,30 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h">
       <Filter>GoTvCommon\Source Files\GuiSession</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.h">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.h">
+      <Filter>GoTvCommon\Source Files\Offers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIcons.h">
+      <Filter>GoTvCommon\Source Files\MyIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h">
+      <Filter>GoTvCommon\Source Files\MyIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h">
+      <Filter>GoTvCommon\Source Files\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3254,6 +3308,18 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\UserListItem.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferListItem.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\CallListItem.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletOfferList.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

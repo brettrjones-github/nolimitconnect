@@ -14,27 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-enum EOfferState
-{
-	eOfferStateUnknown,
-	eOfferStateRxedOffer,
-	eOfferStateOfferCanceled,
-	eOfferStateSentAccept,
-	eOfferStateSentRejected,
-
-	eOfferStateWaitingReply,
-	eOfferStateReplyBusy,
-	eOfferStateReplyAccept,
-	eOfferStateReplyRejected,
-	eOfferStateReplyCanceled,
-	eOfferStateReplyEndSession,
-
-	eOfferStateInSession,
-	eOfferStateUserOffline,
-
-	eMaxOfferState
-};
-
 
 #include "GuiOfferSession.h"
 #include <PktLib/VxCommon.h>
@@ -43,7 +22,7 @@ enum EOfferState
 #include <QObject>
 
 class ActivityBase;
-class OffersMgr;
+class OfferMgr;
 class OfferSessionCallbackInterface;
 class AppCommon;
 class VxNetIdent;
@@ -82,7 +61,7 @@ private:
 	//=== vars ===//
 	AppCommon& 				    m_MyApp;
 	GuiOfferSession *			m_OfferSession;
-	EOfferState					m_EOfferState;
+    EOfferState					m_EOfferState{ eOfferStateNone };
 };
 
 
