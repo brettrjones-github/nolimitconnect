@@ -43,7 +43,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	m_MuteMic			= GetAppInstance().getEngine().fromGuiIsMicrophoneMuted();
 	m_MuteSpeaker		= GetAppInstance().getEngine().fromGuiIsSpeakerMuted();
 	m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
-    ui.m_CallListButton->setIcon( eMyIconVoicePhoneNormal );
+    ui.m_CallListButton->setIcon( eMyIconCallList );
     ui.m_OfferListButton->setIcon( eMyIconOfferList );
 
 	ui.m_GoTvButton->setUseTheme( false );

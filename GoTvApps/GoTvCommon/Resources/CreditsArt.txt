@@ -38,6 +38,7 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  
 https://iconmonstr.com/
 avatar.svg
+call-list.svg (modified)
 cam-rotate.svg (modified)
 cam-preview.svg (modified)
 cancel.svg

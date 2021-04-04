@@ -2629,6 +2629,9 @@
     <None Include="..\..\..\GoTvCommon\Resources\offer-list.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
+    <None Include="..\..\..\GoTvCommon\Resources\call-list.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ActivityAddRemoveLibraryFiles.h">

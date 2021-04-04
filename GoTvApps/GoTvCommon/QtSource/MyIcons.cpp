@@ -766,6 +766,9 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconOfferVoicePhone:
         return ":/AppRes/Resources/offer-voice-phone.svg";
 
+    case eMyIconCallList:
+        return ":/AppRes/Resources/call-list.svg";
+
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}

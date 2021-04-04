@@ -16,6 +16,7 @@
 #include "AppletMultiMessenger.h"
 #include "ActivityMessageBox.h"
 #include "GuiOfferSession.h"
+#include "GuiParams.h"
 #include "AppGlobals.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
@@ -36,6 +37,7 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     setTitleBarText( DescribeApplet( m_EAppletType ) );
     setBackButtonVisibility( false );
 
+    ui.m_HostViewFrame->setFixedHeight( GuiParams::getButtonSize().height() + 4 );
     ui.m_FriendsView->setIcon( eMyIconEyeFriends );
     ui.m_GroupHosts->setIcon( eMyIconEyeGroup );
     ui.m_ChatRoomHosts->setIcon( eMyIconEyeChatRoom );

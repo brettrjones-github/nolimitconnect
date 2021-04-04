@@ -276,35 +276,35 @@ enum EMyIcons
 	eMyIcon30SecBackward,
 	eMyIcon30SecForward,
 	eMyIconArrowRight,
-	eMyIconMediaRepeat,
-	eMyIconWindowExpand,
-	eMyIconWindowShrink,
+    eMyIconMediaRepeat,
+    eMyIconWindowExpand,
+    eMyIconWindowShrink,
 
-	//=== applet icons ===//
+    //=== applet icons ===//
     eMyIconKodi,
     eMyIconUserIdentity,
     eMyIconSharedContent,
 
-	eMyIconMessenger,
-	eMyIconGallery,
+    eMyIconMessenger,
+    eMyIconGallery,
 
-	eMyIconVideoStreamViewer,
-	eMyIconCamStreamViewer,
-	eMyIconMusicStreamPlayer,
+    eMyIconVideoStreamViewer,
+    eMyIconCamStreamViewer,
+    eMyIconMusicStreamPlayer,
 
-	eMyIconRemoteControl,
+    eMyIconRemoteControl,
 
-	eMyIconPlugins,
-	eMyIconTheme,
+    eMyIconPlugins,
+    eMyIconTheme,
 
     eMyIconNetworkKey,
     eMyIconNetworkSettings,
     eMyIconSearchRandomConnect,
 
- 
-	// built in plugin options
-	eMyIconCamStreamProvider,
-	eMyIconGoTvStation,
+
+    // built in plugin options
+    eMyIconCamStreamProvider,
+    eMyIconGoTvStation,
 
     eMyIconShareServices,
 
@@ -375,6 +375,8 @@ enum EMyIcons
     eMyIconOfferTruthOrDare,
     eMyIconOfferVideoChat,
     eMyIconOfferVoicePhone,
+
+    eMyIconCallList,
 
 	eMaxMyIcon	// must be last
 };

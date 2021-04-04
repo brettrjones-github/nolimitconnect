@@ -1527,6 +1527,7 @@
     <None Include="..\..\..\GoTvCommon\Resources\arrow-up.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\bell.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\bug.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\call-list.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cam-preview.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cam-rotate.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cam-select.svg" />
