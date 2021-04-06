@@ -27,7 +27,7 @@
 // PktBlobSendReq
 //============================================================================
 PktBlobSendReq::PktBlobSendReq()
-: m_BlobType( (uint16_t)eBlobTypeUnknown ) 
+: m_BlobType( (uint16_t)eAssetTypeUnknown ) 
 , m_u32Error(0)
 , m_s64BlobLen(0)
 , m_s64BlobOffs(0) 
@@ -46,31 +46,35 @@ PktBlobSendReq::PktBlobSendReq()
 //============================================================================
 void PktBlobSendReq::fillPktFromBlob( BlobInfo& hostInfo )
 {
-	setBlobType( (uint16_t)hostInfo.getBlobType() );
+	setBlobType( (uint16_t)hostInfo.getAssetType() );
 	setCreatorId( hostInfo.getCreatorId() );
 	setHistoryId( hostInfo.getHistoryId() );
-	setUniqueId( hostInfo.getBlobUniqueId() );
-	setBlobHashId( hostInfo.getBlobHashId() );
-	setBlobLen( hostInfo.getBlobLength() );
-	setCreationTime( (uint32_t) hostInfo.getCreationTime() );
-	setBlobNameAndTag( hostInfo.getBlobName().c_str(), hostInfo.getBlobTag().c_str() );
+	setUniqueId( hostInfo.getAssetUniqueId() );
+	setBlobHashId( hostInfo.getAssetHashId() );
+	setBlobLen( hostInfo.getAssetLength() );
+	setCreationTime( (uint64_t) hostInfo.getCreationTime() );
+    setModifiedTime( (uint64_t) hostInfo.getModifiedTime() );
+    setAccessedTime( (uint64_t) hostInfo.getAccessedTime() );
+	setBlobNameAndTag( hostInfo.getAssetName().c_str(), hostInfo.getAssetTag().c_str() );
 }
 
 //============================================================================
 void PktBlobSendReq::fillBlobFromPkt( BlobInfo& hostInfo )
 {
-	hostInfo.setBlobType( (EBlobType)getBlobType() );
-	hostInfo.setBlobUniqueId( getUniqueId() );
+	hostInfo.setAssetType( (EAssetType)getBlobType() );
+	hostInfo.setAssetUniqueId( getUniqueId() );
 	hostInfo.setCreatorId( getCreatorId() );
 	hostInfo.setHistoryId( getHistoryId() );
-	hostInfo.setBlobHashId( getBlobHashId() );
-	hostInfo.setBlobLength( getBlobLen() );
-	hostInfo.setCreationTime( (time_t)getCreationTime() );
+	hostInfo.setAssetHashId( getBlobHashId() );
+	hostInfo.setAssetLength( getBlobLen() );
+	hostInfo.setCreationTime( (uint64_t)getCreationTime() );
+    hostInfo.setModifiedTime( (uint64_t)getCreationTime() );
+    hostInfo.setAccessedTime( (uint64_t)getAccessedTime() );
 	std::string assetName = getBlobName();
-	hostInfo.setBlobName( assetName );
+	hostInfo.setAssetName( assetName );
 	if( getBlobTagLen() )
 	{
-		hostInfo.setBlobTag(  &m_BlobNameAndTag[ getBlobNameLen() ] );
+		hostInfo.setAssetTag(  &m_BlobNameAndTag[ getBlobNameLen() ] );
 	}
 }
 

@@ -14,54 +14,16 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
-
-#include <CoreLib/DbBase.h>
-#include <CoreLib/VxGUID.h>
-#include <CoreLib/BlobDefs.h>
+#include <GoTvCore/GoTvP2P/AssetBase/AssetBaseInfoDb.h>
 
 class BlobInfo;
 class BlobMgr;
-class VxGUID;
-class VxSha1Hash;
 
-class BlobInfoDb : public DbBase
+class BlobInfoDb : public AssetBaseInfoDb
 {
 public:
-	BlobInfoDb( BlobMgr& mgr );
+	BlobInfoDb( BlobMgr& mgr, const char * dbName );
 	virtual ~BlobInfoDb();
-
-	void						lockBlobInfoDb( void )					{ m_BlobInfoDbMutex.lock(); }
-	void						unlockBlobInfoDb( void )				{ m_BlobInfoDbMutex.unlock(); }
-
-	void						addBlob(	VxGUID&			assetId, 
-											VxGUID&			creatorId, 
-											VxGUID&			historyId, 
-											const char *	assetName, 
-											int64_t			assetLen, 
-											uint32_t		assetType, 							
-											VxSha1Hash&		hashId, 
-											uint32_t		locationFlags, 
-											const char *	assetTag = "", 
-											time_t			timestamp = 0,
-											EBlobSendState sendState = eBlobSendStateNone );
-
-	void 						addBlob( BlobInfo * assetInfo );
-	void						removeBlob( const char * assetName );
-	void						removeBlob( VxGUID& assetId );
-	void						removeBlob( BlobInfo * assetInfo );
-
-	void						getAllBlobs( std::vector<BlobInfo*>& BlobBlobList );
-	void						purgeAllBlobs( void ); 
-	void						updateBlobTypes( void );
-	void						updateBlobSendState( VxGUID& assetId, EBlobSendState sendState );
-
-protected:
-	virtual RCODE				onCreateTables( int iDbVersion );
-	virtual RCODE				onDeleteTables( int iOldVersion );
-	void						insertBlobInTimeOrder( BlobInfo *assetInfo, std::vector<BlobInfo*>& assetList );
-
-	BlobMgr&					m_BlobMgr;
-	VxMutex						m_BlobInfoDbMutex;
 };
+
 

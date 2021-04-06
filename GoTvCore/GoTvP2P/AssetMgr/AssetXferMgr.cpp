@@ -132,7 +132,7 @@ void AssetXferMgr::assetXferThreadWork( VxThread * workThread )
 	lockAssetQue();
 	for( iter = assetToSendList.begin(); iter != assetToSendList.end(); ++iter )
 	{
-		AssetInfo * assetInfo = m_AssetMgr.findAsset( *iter );
+		AssetInfo * assetInfo = dynamic_cast<AssetInfo*>(m_AssetMgr.findAsset( *iter ));
 		if( assetInfo )
 		{
 			m_AssetSendQue.push_back( *assetInfo );
@@ -451,7 +451,7 @@ void AssetXferMgr::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 	LogMsg( LOG_INFO, "AssetXferMgr::onPktAssetSendReply\n");
 	PktAssetSendReply * poPkt = (PktAssetSendReply *)pktHdr;
 	VxGUID&	assetUniqueId =	poPkt->getUniqueId();
-	AssetInfo * assetInfo = m_AssetMgr.findAsset( assetUniqueId );
+	AssetInfo * assetInfo = dynamic_cast<AssetInfo*>(m_AssetMgr.findAsset( assetUniqueId ));
 	if( 0 == assetInfo )
 	{
 		LogMsg( LOG_ERROR, "AssetXferMgr::onPktAssetSendReply failed to find asset id\n");

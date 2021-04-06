@@ -16,9 +16,8 @@
 #include "AppletBase.h"
 #include "ui_AppletGalleryThumb.h"
 
-
 class ThumbnailViewWidget;
-class AssetMgr;
+class ThumbMgr;
 
 class AppletGalleryThumb : public AppletBase
 {
@@ -41,7 +40,7 @@ protected:
 
 	//=== vars ===//
 	Ui::AppletGalleryThumbUi	ui;
-    AssetMgr&					m_AssetMgr;
+    ThumbMgr&					m_ThumbMgr;
     bool                        m_isShown = false;
     bool                        m_isLoaded = false;
 

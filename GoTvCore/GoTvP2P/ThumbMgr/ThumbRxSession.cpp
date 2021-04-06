@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
+// Copyright (C) 2010 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
@@ -14,54 +14,47 @@
 //============================================================================
 
 #include <config_gotvcore.h>
-#include "AssetMgrBase.h"
-#include <GoTvInterface/IToGui.h>
+#include "ThumbRxSession.h"
 
-#include <CoreLib/VxFileIsTypeFunctions.h>
+#include <CoreLib/VxFileUtil.h>
 
-//============================================================================
-AssetMgrBase::AssetMgrBase( P2PEngine& engine )
-: m_Engine( engine )
-{
-}
-
+#include <stdio.h>
 
 //============================================================================
-IToGui&	AssetMgrBase::getToGui()
+ThumbRxSession::ThumbRxSession( P2PEngine& engine )
+: ThumbXferSession( engine )
 {
-    return IToGui::getToGui();
+	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-void AssetMgrBase::addAssetMgrClient( AssetCallbackInterface * client, bool enable )
+ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxSktBase * sktBase, VxNetIdent * netIdent )
+: ThumbXferSession( engine, sktBase, netIdent )
 {
-	AutoResourceLock( this );
-	if( enable )
-	{
-		m_AssetClients.push_back( client );
-	}
-	else
-	{
-		std::vector<AssetCallbackInterface *>::iterator iter;
-		for( iter = m_AssetClients.begin(); iter != m_AssetClients.end(); ++iter )
-		{
-			if( *iter == client )
-			{
-				m_AssetClients.erase( iter );
-				return;
-			}
-		}
-	}
+	getXferInfo().setXferDirection( eXferDirectionRx );
 }
 
 //============================================================================
-bool AssetMgrBase::isAllowedFileOrDir( std::string strFileName )
+ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+: ThumbXferSession( engine, lclSessionId, sktBase, netIdent )
 {
-	if( VxIsExecutableFile( strFileName ) 
-		|| VxIsShortcutFile( strFileName ) )
+	getXferInfo().setXferDirection( eXferDirectionRx );
+}
+
+//============================================================================
+ThumbRxSession::~ThumbRxSession()
+{
+}
+
+//============================================================================
+void ThumbRxSession::cancelDownload( VxGUID& lclSessionId )
+{
+	VxFileXferInfo& xferInfo = getXferInfo();
+	if( xferInfo.m_hFile )
 	{
-		return false;
+		fclose( xferInfo.m_hFile );
 	}
 
-	return true;
+	VxFileUtil::deleteFile( xferInfo.getLclFileName().c_str() );
+
 }

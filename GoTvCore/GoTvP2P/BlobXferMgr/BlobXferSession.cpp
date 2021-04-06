@@ -92,13 +92,13 @@ void BlobXferSession::setBlobStateSendBegin( void )
 {
 	if( eXferDirectionRx == getXferDirection() )
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateRxProgress );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionRxBegin, m_BlobInfo.getBlobUniqueId(), 0 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateRxProgress );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionRxBegin, m_BlobInfo.getAssetUniqueId(), 0 );
 	}
 	else
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateTxProgress );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionTxBegin, m_BlobInfo.getBlobUniqueId(), 0 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateTxProgress );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionTxBegin, m_BlobInfo.getAssetUniqueId(), 0 );
 	}
 }
 
@@ -107,13 +107,13 @@ void BlobXferSession::setBlobStateSendCanceled( void )
 {
 	if( eXferDirectionRx == getXferDirection() )
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateRxFail );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionRxCancel, m_BlobInfo.getBlobUniqueId(), 0 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateRxFail );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionRxCancel, m_BlobInfo.getAssetUniqueId(), 0 );
 	}
 	else
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateTxFail );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionTxCancel, m_BlobInfo.getBlobUniqueId(), 0 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateTxFail );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionTxCancel, m_BlobInfo.getAssetUniqueId(), 0 );
 	}
 }
 
@@ -122,13 +122,13 @@ void BlobXferSession::setBlobStateSendFail( void )
 {
 	if( eXferDirectionRx == getXferDirection() )
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateRxFail );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionRxError, m_BlobInfo.getBlobUniqueId(), 0 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateRxFail );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionRxError, m_BlobInfo.getAssetUniqueId(), 0 );
 	}
 	else
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateTxFail );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionTxError, m_BlobInfo.getBlobUniqueId(), 0 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateTxFail );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionTxError, m_BlobInfo.getAssetUniqueId(), 0 );
 	}
 }
 
@@ -137,13 +137,13 @@ void BlobXferSession::setBlobStateSendProgress( int progress )
 {
 	if( eXferDirectionRx == getXferDirection() )
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateRxProgress );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionRxProgress, m_BlobInfo.getBlobUniqueId(), progress );
+		m_BlobInfo.setAssetSendState( eAssetSendStateRxProgress );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionRxProgress, m_BlobInfo.getAssetUniqueId(), progress );
 	}
 	else
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateTxProgress );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionTxProgress, m_BlobInfo.getBlobUniqueId(), progress );
+		m_BlobInfo.setAssetSendState( eAssetSendStateTxProgress );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionTxProgress, m_BlobInfo.getAssetUniqueId(), progress );
 	}
 }
 
@@ -152,13 +152,13 @@ void BlobXferSession::setBlobStateSendSuccess( void )
 {
 	if( eXferDirectionRx == getXferDirection() )
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateRxSuccess );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionRxSuccess, m_BlobInfo.getBlobUniqueId(), 100 );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionRxNotifyNewMsg, m_BlobInfo.getCreatorId(), 100 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateRxSuccess );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionRxSuccess, m_BlobInfo.getAssetUniqueId(), 100 );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionRxNotifyNewMsg, m_BlobInfo.getCreatorId(), 100 );
 	}
 	else
 	{
-		m_BlobInfo.setBlobSendState( eBlobSendStateRxSuccess );
-		m_Engine.getToGui().toGuiBlobAction( eBlobActionTxSuccess, m_BlobInfo.getBlobUniqueId(), 100 );
+		m_BlobInfo.setAssetSendState( eAssetSendStateRxSuccess );
+		m_Engine.getToGui().toGuiBlobAction( eAssetActionTxSuccess, m_BlobInfo.getAssetUniqueId(), 100 );
 	}
 }

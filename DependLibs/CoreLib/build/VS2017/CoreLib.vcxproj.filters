@@ -331,9 +331,6 @@
     <ClInclude Include="..\..\BinaryBlob.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\BlobDefs.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp">

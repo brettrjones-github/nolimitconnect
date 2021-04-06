@@ -79,8 +79,9 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_EngineSettings()
     , m_EngineParams()
     , m_NetStatusAccum( *this )
-    , m_AssetMgr( *new AssetMgr( *this ) )
-    , m_BlobMgr( *new BlobMgr( *this ) )
+    , m_AssetMgr( *new AssetMgr( *this, "BaseAssetDb.db3"  ) )
+    , m_BlobMgr( *new BlobMgr( *this, "BlobAssetDb.db3" ) )
+    , m_ThumbMgr( *new ThumbMgr( *this, "ThumbAssetDb.db3" ) )
     , m_ConnectionMgr( *new ConnectionMgr( *this ) )
     , m_ConnectionList( *this )
     , m_MediaProcessor( *( new MediaProcessor( *this ) ) )
@@ -153,7 +154,9 @@ void P2PEngine::iniitializePtoPEngine( void )
         VxSetAppErrHandler( AppErrHandler, this );
         VxSocketsStartup();
         m_PluginMgr.pluginMgrStartup();
-        m_AssetMgr.addAssetMgrClient( this, true );
+        //m_AssetMgr.addAssetMgrClient( this, true );
+        //m_BlobMgr.addBlobMgrClient( this, true );
+        //m_ThumbMgr.addThumbMgrClient( this, true );
    }
 }
 
@@ -164,7 +167,7 @@ void P2PEngine::shutdownEngine( void )
 	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: stop listening\n" );
 	m_PeerMgr.stopListening();
 	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: remove asset client\n" );
-	m_AssetMgr.addAssetMgrClient( this, false );
+	//m_AssetMgr.addAssetMgrClient( this, false );
 	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: shutdown media processor\n" );
 	m_MediaProcessor.shutdownMediaProcessor();
 	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: shutdown IsPortOpen\n" );

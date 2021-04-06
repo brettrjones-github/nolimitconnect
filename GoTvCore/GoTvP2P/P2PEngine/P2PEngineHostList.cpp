@@ -27,7 +27,7 @@ void P2PEngine::callbackBlobAdded( BlobInfo * assetInfo )
 //============================================================================
 void P2PEngine::callbackBlobRemoved( BlobInfo * assetInfo )
 {
-    IToGui::getToGui().toGuiBlobAction( eBlobActionRemoveFromBlobMgr, assetInfo->getBlobUniqueId(), 0 );
+    IToGui::getToGui().toGuiBlobAction( eAssetActionRemoveFromAssetMgr, assetInfo->getAssetUniqueId(), 0 );
 }
 
 //============================================================================

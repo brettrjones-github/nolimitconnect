@@ -18,10 +18,10 @@
 
 #include <CoreLib/VxGUID.h>
 
-
-class IVxVidCap;
-class AssetInfo;  
 class AppletBase;
+class IVxVidCap;
+class ThumbInfo;  
+class ThumbMgr;
 
 class ThumbnailEditWidget : public QWidget
 {
@@ -36,7 +36,7 @@ public:
     void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
     bool                        getThumbnailIsCircular( void )                   { return m_ThumbnailIsCircular; }
 
-    bool                        loadFromAsset( AssetInfo * thumbAsset );
+    bool                        loadFromAsset( ThumbInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
 
     void                        setAssetId( VxGUID& assetGuid )                 { m_AsssetId = assetGuid; }
@@ -44,7 +44,7 @@ public:
     void                        clearAssetId( void )                            { m_AsssetId.clearVxGUID(); }
     bool                        isAssetIdValid( void )                          { return m_AsssetId.isVxGUIDValid(); }
 
-    bool                        generateThumbAsset( AssetInfo& assetInfo );
+    bool                        generateThumbAsset( ThumbInfo& assetInfo );
 
     bool                        loadThumbnail( VxGUID& assetGuid );
     VxGUID                      updateAndGetThumbnailId( void );
@@ -67,6 +67,7 @@ protected:
 
     Ui::ThumnailEditWidgetUi	ui;
     AppCommon&					m_MyApp;
+    ThumbMgr&                   m_ThumbMgr;
     AppletBase*                 m_ParentApplet{ nullptr };
     IVxVidCap *					m_VidCap = nullptr;
     bool 					    m_CameraSourceAvail = false;

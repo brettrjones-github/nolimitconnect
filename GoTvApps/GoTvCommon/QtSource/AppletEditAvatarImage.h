@@ -38,7 +38,7 @@ protected:
 
     //=== vars ===//
     Ui::AppletEditAvatarImageUi	ui;
-    AssetMgr&                   m_AssetMgr;
+    ThumbMgr&                   m_ThumbMgr;
     UserProfile 				m_UserProfile;
     VxNetIdent *				m_MyIdent = nullptr;
     QString                     m_strOrigOnlineName;

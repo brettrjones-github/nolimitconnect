@@ -26,7 +26,8 @@
 #include "GuiHelpers.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 
 #include <PktLib/VxSearchDefs.h>
 #include <NetLib/VxFileXferInfo.h>
@@ -38,7 +39,7 @@
 //============================================================================
 AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_GALLERY_THUMB, app, parent )
-, m_AssetMgr( app.getEngine().getAssetMgr() )
+, m_ThumbMgr( app.getEngine().getThumbMgr() )
 {
     setAppletType( eAppletGalleryThumb );
     ui.setupUi( getContentItemsFrame() );
@@ -79,12 +80,12 @@ void AppletGalleryThumb::showEvent( QShowEvent * ev )
 //============================================================================
 void AppletGalleryThumb::loadAssets( void )
 {
-    std::vector<AssetInfo*>& assetList = m_AssetMgr.getAssetInfoList();
-    for( AssetInfo* assetInfo : assetList )
+    std::vector<AssetBaseInfo*>& assetList = m_ThumbMgr.getAssetBaseInfoList();
+    for( AssetBaseInfo* assetInfo : assetList )
     {
         if( eAssetTypeThumbnail == assetInfo->getAssetType() )
         {
-            ui.m_ImageListWidget->addAsset( assetInfo );
+            ui.m_ImageListWidget->addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
         }
     }
 }

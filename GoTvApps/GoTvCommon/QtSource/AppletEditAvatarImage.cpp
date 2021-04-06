@@ -28,6 +28,8 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxDebug.h>
@@ -38,7 +40,7 @@
 //============================================================================
 AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_EDIT_AVATAR_IMAGE, app, parent )
-, m_AssetMgr( app.getEngine().getAssetMgr() )
+, m_ThumbMgr( app.getEngine().getThumbMgr() )
 {
     setAppletType( eAppletEditAvatarImage );
     ui.setupUi( getContentItemsFrame() );
@@ -51,7 +53,7 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
     m_strOrigMoodMessage = m_MyIdent->getOnlineDescription();
     if( m_MyIdent->getAvatarGuid().isVxGUIDValid() )
     {
-        AssetInfo * thumbAsset = m_AssetMgr.findAsset( m_MyIdent->getAvatarGuid() );
+        ThumbInfo * thumbAsset = dynamic_cast<ThumbInfo *>(m_ThumbMgr.findAsset( m_MyIdent->getAvatarGuid() ));
         if( thumbAsset )
         {
             ui.m_ThumbnailEditWidget->loadFromAsset( thumbAsset );
@@ -70,7 +72,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
     bool assetExists = ui.m_ThumbnailEditWidget->isAssetIdValid();
     if( assetExists )
     {
-        AssetInfo * existingAsset = m_MyApp.getEngine().getAssetMgr().findAsset( ui.m_ThumbnailEditWidget->getAssetId() );
+        ThumbInfo * existingAsset = dynamic_cast<ThumbInfo *>( m_ThumbMgr.findAsset( ui.m_ThumbnailEditWidget->getAssetId() ) );
         if( existingAsset )
         {
             if( m_MyIdent->getAvatarGuid().isVxGUIDValid() && m_MyIdent->getAvatarGuid() == existingAsset->getAssetUniqueId() )
@@ -96,7 +98,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
     
     if( !assetExists && ui.m_ThumbnailEditWidget->getIsUserPickedImage()  )
     {
-        AssetInfo assetInfo;
+        ThumbInfo assetInfo;
         if( ui.m_ThumbnailEditWidget->generateThumbAsset( assetInfo ) )
         {
             // setup identity with new avatar image

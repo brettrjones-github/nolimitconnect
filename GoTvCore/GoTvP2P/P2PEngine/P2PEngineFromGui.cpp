@@ -540,7 +540,7 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, i
 	}
 
 	//TODO figure out lock protection here... should we make copy? would be slow
-	AssetInfo * assetInfo = m_AssetMgr.findAsset( assetId );
+	AssetInfo * assetInfo =  dynamic_cast<AssetInfo*>(m_AssetMgr.findAsset( assetId ));
 	if( assetInfo )
 	{
 		return fromGuiAssetAction( assetAction, *assetInfo, pos0to100000 );
@@ -564,10 +564,10 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
     bool result = true;
     if( !fileNameStr.empty() &&  fileLen && fileType )
     {
-        AssetInfo * assetInfo = getAssetMgr().findAsset( fileNameStr );
+        AssetInfo * assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().findAsset( fileNameStr ));
         if( 0 == assetInfo )
         {
-            assetInfo = getAssetMgr().addAssetFile( fileName, fileLen, fileType );
+            assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().addAssetFile( fileName, fileLen, fileType ));
             assetInfo->setPlayPosition( pos0to100000 );
         }
 

@@ -1,8 +1,8 @@
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
+// Copyright (C) 2015 Brett R. Jones 
 // Issued to MIT style license by Brett R. Jones in 2017
 //
-// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
 //
 // This code is distributed in the hope that it will be useful,
@@ -13,53 +13,51 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "BlobMgrBase.h"
-#include <GoTvInterface/IToGui.h>
+#include <config_gotvcore.h>
+#include "ThumbInfo.h"
 
+#include <PktLib/VxSearchDefs.h>
+
+#include <CoreLib/VxFileLists.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
+#include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
 
 //============================================================================
-BlobMgrBase::BlobMgrBase( P2PEngine& engine )
-: m_Engine( engine )
+ThumbInfo::ThumbInfo()
+    : AssetBaseInfo()
+{ 
+}
+
+//============================================================================
+ThumbInfo::ThumbInfo( const ThumbInfo& rhs )
+{
+	*this = rhs;
+}
+
+//============================================================================
+ThumbInfo::ThumbInfo( const std::string& fileName )
+    : AssetBaseInfo(fileName)
+{ 
+}
+
+//============================================================================
+ThumbInfo::ThumbInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
+: AssetBaseInfo( fileName, fileLen, assetType )
 {
 }
 
 //============================================================================
-IToGui&	BlobMgrBase::getToGui()
-{
-    return IToGui::getToGui();
-}
-
-//============================================================================
-void BlobMgrBase::addBlobMgrClient( BlobCallbackInterface * client, bool enable )
-{
-	AutoResourceLock( this );
-	if( enable )
+ThumbInfo& ThumbInfo::operator=( const ThumbInfo& rhs ) 
+{	
+	if( this != &rhs )
 	{
-		m_BlobClients.push_back( client );
-	}
-	else
-	{
-		std::vector<BlobCallbackInterface *>::iterator iter;
-		for( iter = m_BlobClients.begin(); iter != m_BlobClients.end(); ++iter )
-		{
-			if( *iter == client )
-			{
-				m_BlobClients.erase( iter );
-				return;
-			}
-		}
-	}
-}
-
-//============================================================================
-bool BlobMgrBase::isAllowedFileOrDir( std::string strFileName )
-{
-	if( VxIsExecutableFile( strFileName ) 
-		|| VxIsShortcutFile( strFileName ) )
-	{
-		return false;
+        *( (AssetBaseInfo*)this ) = rhs;
 	}
 
-	return true;
+	return *this;
 }

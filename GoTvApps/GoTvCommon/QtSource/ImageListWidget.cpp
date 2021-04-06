@@ -27,6 +27,8 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
 
 #include <CoreLib/VxDebug.h>
 
@@ -38,7 +40,7 @@ ImageListWidget::ImageListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
-, m_AssetMgr( m_MyApp.getEngine().getAssetMgr() )
+, m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )
 {
     connect( this, SIGNAL(itemClicked(QListWidgetItem *)),
                           this, SLOT(slotItemClicked(QListWidgetItem *))) ;
@@ -96,18 +98,18 @@ void ImageListWidget::resizeEvent( QResizeEvent * ev )
 //============================================================================
 void ImageListWidget::loadAssets( void )
 {
-    std::vector<AssetInfo*>& assetList = m_AssetMgr.getAssetInfoList();
-    for( AssetInfo* assetInfo : assetList )
+    std::vector<AssetBaseInfo*>& assetList = m_ThumbMgr.getAssetBaseInfoList();
+    for( AssetBaseInfo* assetInfo : assetList )
     {
         if( eAssetTypeThumbnail == assetInfo->getAssetType() )
         {
-            addAsset( assetInfo );
+            addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
         }
     }
 }
 
 //============================================================================
-void ImageListWidget::addAsset( AssetInfo * asset )
+void ImageListWidget::addAsset( ThumbInfo * asset )
 {
     if( asset && ( eAssetTypeThumbnail == asset->getAssetType() ) )
     {

@@ -21,10 +21,10 @@
 class ImageListRow;
 class ThumbnailViewWidget;
 
-class AssetMgr;
 class AppCommon;
-class AssetInfo;
 class P2PEngine;
+class ThumbInfo;
+class ThumbMgr;
 
 class ImageListWidget : public QListWidget
 {
@@ -39,7 +39,7 @@ public:
     void                        clearImages( void );
     void                        clearItems( void );
 
-    void                        addAsset( AssetInfo * asset );
+    void                        addAsset( ThumbInfo * asset );
 
 signals:
 	void						signalImageClicked( ThumbnailViewWidget * thumb );
@@ -57,7 +57,7 @@ protected:
 	//=== vars ===//
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
-    AssetMgr&					m_AssetMgr;
+    ThumbMgr&					m_ThumbMgr;
 
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
 };

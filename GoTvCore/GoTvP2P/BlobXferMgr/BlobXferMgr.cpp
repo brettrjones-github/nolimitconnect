@@ -117,7 +117,7 @@ void BlobXferMgr::assetXferThreadWork( VxThread * workThread )
 		return;
 	}
 
-	while( ( false == m_BlobMgr.isBlobListInitialized() )
+	while( ( false == m_BlobMgr.isAssetListInitialized() )
 			&& ( false == workThread->isAborted() ) )
 	{
 		// waiting for assets to be available
@@ -132,7 +132,7 @@ void BlobXferMgr::assetXferThreadWork( VxThread * workThread )
 	lockBlobQue();
 	for( iter = assetToSendList.begin(); iter != assetToSendList.end(); ++iter )
 	{
-		BlobInfo * assetInfo = m_BlobMgr.findBlob( *iter );
+		BlobInfo * assetInfo = dynamic_cast<BlobInfo*>(m_BlobMgr.findAsset( *iter ));
 		if( assetInfo )
 		{
 			m_BlobSendQue.push_back( *assetInfo );
@@ -340,15 +340,15 @@ void BlobXferMgr::onConnectionLost( VxSktBase * sktBase )
 }
 
 //============================================================================
-bool BlobXferMgr::requireFileXfer( EBlobType assetType )
+bool BlobXferMgr::requireFileXfer( EAssetType assetType )
 {
-	return ( ( eBlobTypePhoto == assetType )
-		|| ( eBlobTypeAudio == assetType )
-		|| ( eBlobTypeVideo == assetType )
-		|| ( eBlobTypeDocument == assetType )
-		|| ( eBlobTypeArchives == assetType )
-		|| ( eBlobTypeExe == assetType )
-		|| ( eBlobTypeOtherFiles == assetType ) );
+	return ( ( eAssetTypePhoto == assetType )
+		|| ( eAssetTypeAudio == assetType )
+		|| ( eAssetTypeVideo == assetType )
+		|| ( eAssetTypeDocument == assetType )
+		|| ( eAssetTypeArchives == assetType )
+		|| ( eAssetTypeExe == assetType )
+		|| ( eAssetTypeOtherFiles == assetType ) );
 
 }
 
@@ -366,7 +366,7 @@ void BlobXferMgr::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 	LogMsg( LOG_INFO, "BlobXferMgr::onPktBlobSendReq\n");
 	PktBlobSendReq * poPkt = (PktBlobSendReq *)pktHdr;
 	VxGUID& assetUniqueId = poPkt->getUniqueId();
-	EBlobType assetType = (EBlobType)poPkt->getBlobType();
+    EAssetType assetType = (EAssetType)poPkt->getBlobType();
 	bool needFileXfer = requireFileXfer( assetType );
 	PktBlobSendReply pktReply;
 	pktReply.setRequiresFileXfer( needFileXfer );
@@ -392,11 +392,11 @@ void BlobXferMgr::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 		poPkt->fillBlobFromPkt( assetInfo );
 		// make history id his id
 		assetInfo.setHistoryId( netIdent->getMyOnlineId() );
-		assetInfo.setBlobSendState( eBlobSendStateRxSuccess );
-		m_BlobMgr.addBlob( assetInfo );
+		assetInfo.setAssetSendState( eAssetSendStateRxSuccess );
+		m_BlobMgr.addAsset( assetInfo );
 		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
-		IToGui::getToGui().toGuiBlobAction( eBlobActionRxSuccess, assetInfo.getBlobUniqueId(), 100 );
-		IToGui::getToGui().toGuiBlobAction( eBlobActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
+		IToGui::getToGui().toGuiBlobAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
+		IToGui::getToGui().toGuiBlobAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
 	}
 	else
 	{
@@ -407,7 +407,7 @@ void BlobXferMgr::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 			poPkt->fillBlobFromPkt( assetInfo );
 			// make history id his id
 			assetInfo.setHistoryId( netIdent->getMyOnlineId() );
-			assetInfo.setBlobSendState( eBlobSendStateRxProgress );
+			assetInfo.setAssetSendState( eAssetSendStateRxProgress );
 
 			xferSession->setRmtSessionId( poPkt->getLclSessionId() );
 			pktReply.setLclSessionId( xferSession->getLclSessionId() );
@@ -435,7 +435,7 @@ void BlobXferMgr::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 //============================================================================
 void BlobXferMgr::assetSendComplete( BlobTxSession * xferSession )
 {
-	updateBlobMgrSendState( xferSession->getBlobInfo().getBlobUniqueId(), eBlobSendStateTxSuccess, 100 );
+	updateBlobMgrSendState( xferSession->getBlobInfo().getAssetUniqueId(), eAssetSendStateTxSuccess, 100 );
 }
 
 //============================================================================
@@ -451,11 +451,11 @@ void BlobXferMgr::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 	LogMsg( LOG_INFO, "BlobXferMgr::onPktBlobSendReply\n");
 	PktBlobSendReply * poPkt = (PktBlobSendReply *)pktHdr;
 	VxGUID&	assetUniqueId =	poPkt->getUniqueId();
-	BlobInfo * assetInfo = m_BlobMgr.findBlob( assetUniqueId );
+	BlobInfo * assetInfo = dynamic_cast<BlobInfo*>(m_BlobMgr.findAsset( assetUniqueId ));
 	if( 0 == assetInfo )
 	{
 		LogMsg( LOG_ERROR, "BlobXferMgr::onPktBlobSendReply failed to find asset id\n");
-		updateBlobMgrSendState( assetUniqueId, eBlobSendStateTxFail, 0 );
+		updateBlobMgrSendState( assetUniqueId, eAssetSendStateTxFail, 0 );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "BlobXferMgr::onPktBlobSendReply AutoPluginLock destroy\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -492,7 +492,7 @@ void BlobXferMgr::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 		{
 			LogMsg( LOG_ERROR, "BlobXferMgr::onPktBlobSendReply PktBlobSendReply returned error %d\n", poPkt->getError() );
 			endBlobXferSession( xferSession, true, false );
-			updateBlobMgrSendState( assetUniqueId, eBlobSendStateTxFail, rxedErrCode );
+			updateBlobMgrSendState( assetUniqueId, eAssetSendStateTxFail, rxedErrCode );
 		}
 	}
 	else
@@ -500,11 +500,11 @@ void BlobXferMgr::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 		if( isFileXfer )
 		{
 			LogMsg( LOG_ERROR, "BlobXferMgr::onPktBlobSendReply failed to find session\n");
-			updateBlobMgrSendState( assetUniqueId, eBlobSendStateTxFail, rxedErrCode );
+			updateBlobMgrSendState( assetUniqueId, eAssetSendStateTxFail, rxedErrCode );
 		}
 		else
 		{
-			updateBlobMgrSendState( assetUniqueId, rxedErrCode ? eBlobSendStateTxFail : eBlobSendStateTxSuccess, rxedErrCode );
+			updateBlobMgrSendState( assetUniqueId, rxedErrCode ? eAssetSendStateTxFail : eAssetSendStateTxSuccess, rxedErrCode );
 		}
 	}
 
@@ -545,7 +545,7 @@ void BlobXferMgr::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxN
 				pktReply.setError( xferErr );
 				m_Plugin.txPacket( netIdent, sktBase, &pktReply );
 
-				IToGui::getToGui().toGuiBlobAction( eBlobActionRxError, xferSession->getBlobInfo().getBlobUniqueId(), xferErr );
+				IToGui::getToGui().toGuiBlobAction( eAssetActionRxError, xferSession->getBlobInfo().getAssetUniqueId(), xferErr );
 				endBlobXferSession( xferSession, true );
 			}
 		}
@@ -655,7 +655,7 @@ void BlobXferMgr::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pk
 	else
 	{
 		LogMsg( LOG_ERROR, "BlobXferMgr::onPktBlobSendCompleteReply failed to find session\n");
-		updateBlobMgrSendState( poPkt->getBlobUniqueId(), eBlobSendStateTxSuccess, 100 );
+		updateBlobMgrSendState( poPkt->getAssetUniqueId(), eAssetSendStateTxSuccess, 100 );
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -1157,26 +1157,26 @@ void BlobXferMgr::fromGuiSendBlob( BlobInfo& assetInfo )
 
 	if( xferFailed )
 	{
-		onTxFailed( assetInfo.getBlobUniqueId(), false );
+		onTxFailed( assetInfo.getAssetUniqueId(), false );
 	}
 }
 
 //============================================================================
 void BlobXferMgr::onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked )
 {
-	updateBlobMgrSendState( assetUniqueId, eBlobSendStateTxFail, 0 );
+	updateBlobMgrSendState( assetUniqueId, eAssetSendStateTxFail, 0 );
 }
 
 //============================================================================
 void BlobXferMgr::onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked )
 {
-	updateBlobMgrSendState( assetUniqueId, eBlobSendStateTxSuccess, 0 );
+	updateBlobMgrSendState( assetUniqueId, eAssetSendStateTxSuccess, 0 );
 }
 
 //============================================================================
-void BlobXferMgr::updateBlobMgrSendState( VxGUID& assetUniqueId, EBlobSendState sendState, int param )
+void BlobXferMgr::updateBlobMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param )
 {
-	m_BlobMgr.updateBlobXferState( assetUniqueId, sendState, param );
+	m_BlobMgr.updateAssetXferState( assetUniqueId, sendState, param );
 }
 
 //============================================================================
@@ -1187,7 +1187,7 @@ void BlobXferMgr::queBlob( BlobInfo& assetInfo )
     std::vector<BlobInfo>::iterator iter;
 	for( iter = m_BlobSendQue.begin(); iter != m_BlobSendQue.end(); ++iter )
 	{
-		if( (*iter).getBlobUniqueId() == assetInfo.getBlobUniqueId() )
+		if( (*iter).getAssetUniqueId() == assetInfo.getAssetUniqueId() )
 		{
 			foundBlob = true;
 			break;
@@ -1239,7 +1239,7 @@ EXferError BlobXferMgr::createBlobTxSessionAndSend( bool pluginIsLocked, BlobInf
 	m_TxSessions.push_back( txSession );
 	m_TxSessionsMutex.unlock();
 
-	updateBlobMgrSendState( assetInfo.getBlobUniqueId(), eBlobSendStateTxProgress, 0 );
+	updateBlobMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxProgress, 0 );
 	if( assetInfo.hasFileName() )
 	{
 		// need to do first so file handle is set before get asset send reply back
@@ -1253,7 +1253,7 @@ EXferError BlobXferMgr::createBlobTxSessionAndSend( bool pluginIsLocked, BlobInf
 	if( eXferErrorNone != xferErr )
 	{
 		// failed to open file
-		updateBlobMgrSendState( assetInfo.getBlobUniqueId(), eBlobSendStateTxFail, xferErr );
+		updateBlobMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxFail, xferErr );
 		endBlobXferSession( txSession, true, false );
 		if( false == pluginIsLocked )
 		{
@@ -1278,7 +1278,7 @@ EXferError BlobXferMgr::createBlobTxSessionAndSend( bool pluginIsLocked, BlobInf
 	if( eXferErrorNone == xferErr )
 	{
 		// re que for try some other time
-		if( requireFileXfer( assetInfo.getBlobType() ) )
+		if( requireFileXfer( assetInfo.getAssetType() ) )
 		{
 			xferErr = txNextBlobChunk( txSession, eXferErrorNone, true );
 		}
@@ -1287,7 +1287,7 @@ EXferError BlobXferMgr::createBlobTxSessionAndSend( bool pluginIsLocked, BlobInf
 	if( eXferErrorNone != xferErr )
 	{
 		// re que for try some other time
-		updateBlobMgrSendState( assetInfo.getBlobUniqueId(), eBlobSendStateTxFail, xferErr );
+		updateBlobMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxFail, xferErr );
 		endBlobXferSession( txSession, true, ( ( eXferErrorFileNotFound == xferErr ) || ( eXferErrorDisconnected == xferErr ) ) ? false : true );
 	}
 
@@ -1317,8 +1317,8 @@ EXferError BlobXferMgr::beginBlobSend( BlobTxSession * xferSession )
 	if( eXferErrorNone == xferErr )
 	{
 		xferInfo.setXferDirection( eXferDirectionTx );
-		xferInfo.setLclFileName( xferSession->getBlobInfo().getBlobName().c_str() );
-		VxFileUtil::getJustFileName( xferSession->getBlobInfo().getBlobName().c_str(), xferInfo.getRmtFileName() );
+		xferInfo.setLclFileName( xferSession->getBlobInfo().getAssetName().c_str() );
+		VxFileUtil::getJustFileName( xferSession->getBlobInfo().getAssetName().c_str(), xferInfo.getRmtFileName() );
 		xferInfo.setLclSessionId( xferSession->getLclSessionId() );
 		xferInfo.setRmtSessionId( xferSession->getRmtSessionId() );
 		xferInfo.setFileHashId( xferSession->getFileHashId() );
@@ -1574,7 +1574,7 @@ EXferError BlobXferMgr::txNextBlobChunk( BlobTxSession * xferSession, uint32_t r
 		PktBlobSendCompleteReq oPkt;
 		oPkt.setLclSessionId( xferSession->getLclSessionId() );
 		oPkt.setRmtSessionId( xferSession->getRmtSessionId() );
-		oPkt.setBlobUniqueId( xferSession->getBlobInfo().getBlobUniqueId() );
+		oPkt.setBlobUniqueId( xferSession->getBlobInfo().getAssetUniqueId() );
 		m_Plugin.txPacket(  xferSession->getIdent(), xferSession->getSkt(), &oPkt );
 
 		LogMsg( LOG_ERROR, "BlobXferMgr:: Done Sending file %s", xferInfo.getLclFileName().c_str() );
@@ -1634,13 +1634,13 @@ EXferError BlobXferMgr::txNextBlobChunk( BlobTxSession * xferSession, uint32_t r
 
 	if( eXferErrorNone != xferErr )
 	{
-		IToGui::getToGui().toGuiBlobAction( eBlobActionTxError, xferSession->getBlobInfo().getBlobUniqueId(), xferErr );
+		IToGui::getToGui().toGuiBlobAction( eAssetActionTxError, xferSession->getBlobInfo().getAssetUniqueId(), xferErr );
 	}
 	else
 	{
 		if( xferInfo.calcProgress() )
 		{
-			IToGui::getToGui().toGuiBlobAction( eBlobActionTxProgress, xferSession->getBlobInfo().getBlobUniqueId(), xferInfo.getProgress() );
+			IToGui::getToGui().toGuiBlobAction( eAssetActionTxProgress, xferSession->getBlobInfo().getAssetUniqueId(), xferInfo.getProgress() );
 		}
 	}
 
@@ -1702,12 +1702,12 @@ EXferError BlobXferMgr::rxBlobChunk( bool pluginIsLocked, BlobRxSession * xferSe
 	{
 		if( xferInfo.calcProgress() )
 		{
-			IToGui::getToGui().toGuiBlobAction( eBlobActionRxProgress, xferSession->getBlobInfo().getBlobUniqueId(), xferInfo.getProgress() );
+			IToGui::getToGui().toGuiBlobAction( eAssetActionRxProgress, xferSession->getBlobInfo().getAssetUniqueId(), xferInfo.getProgress() );
 		}
 	}
 	else
 	{
-		IToGui::getToGui().toGuiBlobAction( eBlobActionRxError, xferSession->getBlobInfo().getBlobUniqueId(), xferErr );
+		IToGui::getToGui().toGuiBlobAction( eAssetActionRxError, xferSession->getBlobInfo().getAssetUniqueId(), xferErr );
 	}
 
 	return xferErr;
@@ -1734,7 +1734,7 @@ void BlobXferMgr::finishBlobReceive( BlobRxSession * xferSession, PktBlobSendCom
 	PktBlobSendCompleteReply oPkt;
 	oPkt.setLclSessionId( xferInfo.getLclSessionId() );
 	oPkt.setRmtSessionId( xferInfo.getRmtSessionId() );
-	oPkt.setBlobUniqueId( xferSession->getBlobInfo().getBlobUniqueId() );
+	oPkt.setBlobUniqueId( xferSession->getBlobInfo().getAssetUniqueId() );
 	m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt );
 	LogMsg( LOG_INFO,  "VxPktHandler: Done Receiving file %s", strBlobName.c_str() );
 
@@ -1754,27 +1754,27 @@ void BlobXferMgr::onBlobReceived( BlobRxSession * xferSession, BlobInfo& assetIn
 		RCODE rc = 0;
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteBlob.c_str(), completedBlob.c_str() ) ) )
 		{
-			assetInfo.setBlobName( completedBlob.c_str() );
+			assetInfo.setAssetName( completedBlob.c_str() );
 			assetInfo.setHistoryId( xferSession->getIdent()->getMyOnlineId() );
 
 			if( eXferErrorNone == error )
 			{
-				assetInfo.setBlobSendState( eBlobSendStateRxSuccess );
+				assetInfo.setAssetSendState( eAssetSendStateRxSuccess );
 			}
 			else
 			{
-				assetInfo.setBlobSendState(  eBlobSendStateRxFail );
+				assetInfo.setAssetSendState(  eAssetSendStateRxFail );
 			}
 
-			m_BlobMgr.addBlob( assetInfo );
+			m_BlobMgr.addAsset( assetInfo );
 			m_Engine.fromGuiAddFileToLibrary( completedBlob.c_str(), true, xferInfo.getFileHashId().getHashData() );
 			if( eXferErrorNone == error )
 			{
-				IToGui::getToGui().toGuiBlobAction( eBlobActionRxSuccess, xferSession->getBlobInfo().getBlobUniqueId(), 0 );
+				IToGui::getToGui().toGuiBlobAction( eAssetActionRxSuccess, xferSession->getBlobInfo().getAssetUniqueId(), 0 );
 			}
 			else
 			{
-				IToGui::getToGui().toGuiBlobAction( eBlobActionRxError, xferSession->getBlobInfo().getBlobUniqueId(), error );
+				IToGui::getToGui().toGuiBlobAction( eAssetActionRxError, xferSession->getBlobInfo().getAssetUniqueId(), error );
 			}
 		}
 		else
@@ -1794,13 +1794,13 @@ void BlobXferMgr::onBlobSent( BlobTxSession * xferSession, BlobInfo& assetInfo, 
 	VxNetIdent * hisIdent	= xferSession->getIdent();
 	if( eXferErrorNone != error )
 	{
-		updateBlobMgrSendState( assetInfo.getBlobUniqueId(), eBlobSendStateTxFail, (int)error );
-		IToGui::getToGui().toGuiBlobAction( eBlobActionTxError, xferSession->getBlobInfo().getBlobUniqueId(), error );
+		updateBlobMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxFail, (int)error );
+		IToGui::getToGui().toGuiBlobAction( eAssetActionTxError, xferSession->getBlobInfo().getAssetUniqueId(), error );
 	}
 	else
 	{
-		updateBlobMgrSendState( assetInfo.getBlobUniqueId(), eBlobSendStateTxSuccess, (int)error );
-		IToGui::getToGui().toGuiBlobAction( eBlobActionTxSuccess, xferSession->getBlobInfo().getBlobUniqueId(), 0 );
+		updateBlobMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxSuccess, (int)error );
+		IToGui::getToGui().toGuiBlobAction( eAssetActionTxSuccess, xferSession->getBlobInfo().getAssetUniqueId(), 0 );
 	}
 
 	endBlobXferSession( xferSession, pluginIsLocked, false );

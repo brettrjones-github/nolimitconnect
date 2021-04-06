@@ -27,11 +27,19 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvInterface/IToGui.h \
     $$PWD/GoTvInterface/config_libgotvptop.h \
     $$PWD/GoTvTargetOsConfig.h \
+	$$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseCallbackInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseRxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseTxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferDb.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h \
-    $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgrBase.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetRxSession.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetTxSession.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.h \
@@ -130,7 +138,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.h \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.h \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgrBase.h \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobRxSession.h \
 	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobTxSession.h \
 	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferDb.h \
@@ -276,6 +283,15 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanPic.h \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbRxSession.h \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbTxSession.h \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferDb.h \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.h \
 	$$PWD/GoTvCore/GoTvP2P/User/User.h \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
@@ -286,10 +302,18 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 
 
 SOURCES += \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseRxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseTxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgr.cpp \
-    $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgrBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetRxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetTxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.cpp \
@@ -358,7 +382,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.cpp \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgrBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobRxSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobTxSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferDb.cpp \
@@ -515,6 +538,14 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.cpp \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbRxSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbTxSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/User.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.cpp \

@@ -408,8 +408,10 @@ public:
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
     virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) override;
-    virtual void				toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+    virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
+
+    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) override;
 
     //============================================================================
     //=== from gui ===//

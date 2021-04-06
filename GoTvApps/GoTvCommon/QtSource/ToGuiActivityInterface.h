@@ -17,7 +17,6 @@
 #include "config_gotvapps.h"
 #include <CoreLib/VxDefs.h>
 #include <CoreLib/AssetDefs.h>
-#include <CoreLib/BlobDefs.h>
 #include <PktLib/VxCommon.h>
 
 #include <GoTvInterface/IDefs.h>
@@ -29,6 +28,7 @@ class GuiUser;
 class GuiOfferSession;
 class AssetInfo;
 class BlobInfo;
+class ThumbInfo;
 
 class ToGuiActivityInterface
 {
@@ -77,9 +77,11 @@ public:
 	virtual void				toGuiSetGameValueVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};
 	virtual void				toGuiSetGameActionVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t actionId, int32_t varValue ){};
 
-    virtual void				toGuiClientBlobAction( void * callbackData, EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ){};
+    virtual void				toGuiClientBlobAction( void * callbackData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
     virtual void				toGuiBlobAdded( void * userData, BlobInfo * assetInfo ){};
     virtual void				toGuiBlobSessionHistory( void * userData, BlobInfo * assetInfo ){};
+
+    virtual void				toGuiThumbAdded( void * userData, ThumbInfo * assetInfo ){};
 
 };
 

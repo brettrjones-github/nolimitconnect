@@ -21,8 +21,8 @@
 #include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileUtil.h>
@@ -50,7 +50,7 @@ void ThumbnailViewWidget::mousePressEvent( QMouseEvent * event )
 }
 
 //============================================================================
-bool ThumbnailViewWidget::loadFromAsset( AssetInfo * asset )
+bool ThumbnailViewWidget::loadFromAsset( ThumbInfo * asset )
 {
     if( asset && ( asset->isPhotoAsset() || asset->isThumbAsset() ) )
     {

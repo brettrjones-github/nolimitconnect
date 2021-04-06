@@ -14,26 +14,16 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
-
-#include <CoreLib/BlobDefs.h>
-#include <CoreLib/VxGUID.h>
-#include <CoreLib/VxSha1Hash.h>
+#include <GoTvCore/GoTvP2P/AssetBase/AssetBaseCallbackInterface.h>
 
 class BlobInfo;
 
-class BlobCallbackInterface
+class BlobCallbackInterface : public AssetBaseCallbackInterface
 {
 public:
-	virtual void				callbackFileWasShredded( std::string& fileName ){};
-
-	virtual void				callbackHashIdGenerated( std::string& fileName, VxSha1Hash& hashId ){};
 	virtual void				callbackBlobAdded( BlobInfo * assetInfo ){};
 	virtual void				callbackBlobRemoved( BlobInfo * assetInfo ){};
-	virtual void				callbackBlobSendState( VxGUID& assetUniqueId, EBlobSendState assetSendState, int param ){};
-
-	virtual void				callbackBlobFileTypesChanged( uint16_t fileTypes ){};
-	virtual void				callbackBlobPktFileListUpdated( void ){};
+	virtual void				callbackBlobSendState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ){};
 
 	virtual void				callbackBlobHistory( void * userData, BlobInfo * assetInfo ){};
 };

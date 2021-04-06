@@ -23,13 +23,14 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxTime.h>
 #include <VxVideoLib/VxVideoLib.h>
 
 #include <QMessageBox>
@@ -39,6 +40,7 @@
 ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
+    , m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     m_CameraSourceAvail = GuiHelpers::isCameraSourceAvailable();
@@ -54,7 +56,7 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
 }
 
 //============================================================================
-bool ThumbnailEditWidget::loadFromAsset( AssetInfo * thumbAsset )
+bool ThumbnailEditWidget::loadFromAsset( ThumbInfo * thumbAsset )
 {
     bool loadOk = false;
     if( thumbAsset )
@@ -70,7 +72,7 @@ bool ThumbnailEditWidget::loadFromAsset( AssetInfo * thumbAsset )
 }
 
 //============================================================================
-bool ThumbnailEditWidget::generateThumbAsset( AssetInfo& assetInfoOut )
+bool ThumbnailEditWidget::generateThumbAsset( ThumbInfo& assetInfoOut )
 {
     bool assetGenerated = false;
     VxGUID assetGuid;
@@ -80,10 +82,11 @@ bool ThumbnailEditWidget::generateThumbAsset( AssetInfo& assetInfoOut )
     fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
     if( saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
     {
-        AssetInfo assetInfo( ( const char * )fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ), ( uint16_t )eAssetTypeThumbnail );
+        ThumbInfo assetInfo( ( const char * )fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ), ( uint16_t )eAssetTypeThumbnail );
         assetInfo.setAssetUniqueId( assetGuid );
-        assetInfo.setCreatorId( m_MyApp.getAppGlobals().getUserIdent()->getMyOnlineId() );
-        if( m_MyApp.getEngine().getAssetMgr().addAsset( assetInfo ) )
+        assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
+        assetInfo.setCreationTime( GetTimeStampMs() );
+        if( m_ThumbMgr.addAsset( assetInfo ) )
         {
             assetGenerated = true;
             assetInfoOut = assetInfo;
@@ -217,7 +220,7 @@ void ThumbnailEditWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbnai
     if( thumbGallery && thumb )
     {
         VxGUID assetGuid = thumb->getThumbnailId();
-        AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetGuid );
+        ThumbInfo * thumbAsset = dynamic_cast<ThumbInfo *>(m_ThumbMgr.findAsset( assetGuid ));
         if( thumbAsset )
         {
             if( loadFromAsset( thumbAsset ) )
@@ -238,7 +241,7 @@ bool ThumbnailEditWidget::loadThumbnail( VxGUID& assetId )
     bool result = false;
     if( false == assetId.isVxGUIDValid() )
     {
-        AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetId );
+        ThumbInfo * thumbAsset = dynamic_cast<ThumbInfo*>(m_ThumbMgr.findAsset( assetId ));
         if( thumbAsset )
         {
             if( loadFromAsset( thumbAsset ) )
@@ -258,7 +261,7 @@ VxGUID ThumbnailEditWidget::updateAndGetThumbnailId( void )
     bool assetExists = isAssetIdValid();
     if( assetExists )
     {
-        AssetInfo * existingAsset = m_MyApp.getEngine().getAssetMgr().findAsset( getAssetId() );
+        ThumbInfo * existingAsset =  dynamic_cast<ThumbInfo*>(m_ThumbMgr.findAsset( getAssetId() ));
         if( existingAsset )
         {
             return existingAsset->getAssetUniqueId();
@@ -271,7 +274,7 @@ VxGUID ThumbnailEditWidget::updateAndGetThumbnailId( void )
 
     if( !assetExists && getIsUserPickedImage() )
     {
-        AssetInfo assetInfo;
+        ThumbInfo assetInfo;
         if( generateThumbAsset( assetInfo ) )
         {
             return assetInfo.getAssetUniqueId();

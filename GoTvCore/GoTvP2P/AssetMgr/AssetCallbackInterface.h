@@ -14,27 +14,15 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
-
-#include <CoreLib/AssetDefs.h>
-#include <CoreLib/VxGUID.h>
-#include <CoreLib/VxSha1Hash.h>
+#include <GoTvCore/GoTvP2P/AssetBase/AssetBaseCallbackInterface.h>
 
 class AssetInfo;
 
 class AssetCallbackInterface
 {
 public:
-	virtual void				callbackFileWasShredded( std::string& fileName ){};
-
-	virtual void				callbackHashIdGenerated( std::string& fileName, VxSha1Hash& hashId ){};
-	virtual void				callbackAssetAdded( AssetInfo * assetInfo ){};
-	virtual void				callbackAssetRemoved( AssetInfo * assetInfo ){};
-	virtual void				callbackAssetSendState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ){};
-
-	virtual void				callbackAssetFileTypesChanged( uint16_t fileTypes ){};
-	virtual void				callbackAssetPktFileListUpdated( void ){};
-
-	virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ){};
+    virtual void				callbackAssetAdded( AssetInfo * assetInfo ){};
+    virtual void				callbackAssetRemoved( AssetInfo * assetInfo ){};
+    virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ){};
 };
 

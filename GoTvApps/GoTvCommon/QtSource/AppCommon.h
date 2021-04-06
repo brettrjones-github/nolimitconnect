@@ -24,7 +24,7 @@
 #include "MyIcons.h"
 #include "VxAppTheme.h"
 #include "VxAppStyle.h"
-#include "VxAppDisplay.h"
+#include "VxAppDisplay.h" 
 
 #include "ToGuiActivityClient.h"
 #include "ToGuiFileXferClient.h"
@@ -555,7 +555,9 @@ public:
     //=== to gui host list ===//
     virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) override;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
-    virtual void				toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+    virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+
+    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) override;
 
 	/// a module has changed state
 	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
@@ -618,7 +620,7 @@ signals:
 
 	void						signalRefreshFriend( VxGUID onlineId ); // emitted if friend has changed
 	void						signalAssetViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
-    void						signalBlobViewMsgAction( EBlobAction, VxGUID onlineId, int pos0to100000 );
+    void						signalBlobViewMsgAction( EAssetAction, VxGUID onlineId, int pos0to100000 );
 
 	void						signalToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
 

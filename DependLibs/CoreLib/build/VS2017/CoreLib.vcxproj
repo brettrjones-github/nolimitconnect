@@ -256,7 +256,6 @@
     <ClInclude Include="..\..\AppErr.h" />
     <ClInclude Include="..\..\AssetDefs.h" />
     <ClInclude Include="..\..\BinaryBlob.h" />
-    <ClInclude Include="..\..\BlobDefs.h" />
     <ClInclude Include="..\..\Blowfish.h" />
     <ClInclude Include="..\..\config_corelib.h" />
     <ClInclude Include="..\..\DbBase.h" />

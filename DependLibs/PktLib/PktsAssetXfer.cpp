@@ -16,6 +16,7 @@
 #include "PktTypes.h"
 #include "PktsAssetXfer.h"
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/AssetBase/AssetBaseInfo.h>
 
 #include <CoreLib/VxChop.h>
 #include <CoreLib/VxDebug.h>
@@ -44,7 +45,7 @@ PktAssetSendReq::PktAssetSendReq()
 }
 
 //============================================================================
-void PktAssetSendReq::fillPktFromAsset( AssetInfo& assetInfo )
+void PktAssetSendReq::fillPktFromAsset( AssetBaseInfo& assetInfo )
 {
 	setAssetType( (uint16_t)assetInfo.getAssetType() );
 	setCreatorId( assetInfo.getCreatorId() );
@@ -57,7 +58,7 @@ void PktAssetSendReq::fillPktFromAsset( AssetInfo& assetInfo )
 }
 
 //============================================================================
-void PktAssetSendReq::fillAssetFromPkt( AssetInfo& assetInfo )
+void PktAssetSendReq::fillAssetFromPkt( AssetBaseInfo& assetInfo )
 {
 	assetInfo.setAssetType( (EAssetType)getAssetType() );
 	assetInfo.setAssetUniqueId( getUniqueId() );

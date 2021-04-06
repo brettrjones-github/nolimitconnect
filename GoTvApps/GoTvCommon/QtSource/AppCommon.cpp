@@ -1528,15 +1528,15 @@ void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID&
 }
 
 //============================================================================
-void AppCommon::toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 )
+void AppCommon::toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	if( ( eBlobActionRxNotifyNewMsg == assetAction )
-		|| ( eBlobActionRxViewingMsg == assetAction ) )
+	if( ( eAssetActionRxNotifyNewMsg == assetAction )
+		|| ( eAssetActionRxViewingMsg == assetAction ) )
 	{
 		VxGUID qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
 		emit signalBlobViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
@@ -1614,6 +1614,34 @@ void AppCommon::toGuiBlobSessionHistory( BlobInfo * assetInfo )
     //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
     toGuiActivityClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::toGuiThumbAdded( ThumbInfo * assetInfo )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    if( IsLogEnabled( eLogAssets ) )
+        LogMsg( LOG_INFO, "toGuiBlobAdded: toGuiActivityClientsLock\n" );
+    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
+
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiThumbAdded( client.m_UserData, assetInfo );
+    }
+
+    if( IsLogEnabled( eLogAssets ) )
+        LogMsg( LOG_INFO, "toGuiBlobAdded toGuiActivityClientsUnlock\n" );
+
+    toGuiActivityClientsUnlock();
+
+    //emit signalAssetAdded( assetInfo );
 }
 
 //============================================================================

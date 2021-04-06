@@ -18,11 +18,11 @@
 #include "ui_ThumbnailChooseWidget.h"
 #include <QLabel>
 
-
 class AppCommon;
-class QPixmap;
-class AssetInfo;
 class AppletBase;
+class QPixmap;
+class ThumbInfo;
+class ThumbMgr;
 class ThumbnailEditWidget;
 
 class ThumbnailChooseWidget : public QLabel
@@ -40,7 +40,7 @@ public:
     void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
     bool                        getThumbnailIsCircular( void )                  { return m_ThumbnailIsCircular; }
 
-    bool                        loadFromAsset( AssetInfo * thumbAsset );
+    bool                        loadFromAsset( ThumbInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
 
     void                        setAssetId( VxGUID& assetGuid, bool isCircle )  { m_AsssetId = assetGuid; m_ThumbnailIsCircular = isCircle; }
@@ -63,6 +63,7 @@ protected slots:
 protected:
     Ui::ThumnailChooseWidgetUi	ui;
     AppCommon&					m_MyApp;
+    ThumbMgr&                   m_ThumbMgr;
     AppletBase*                 m_ParentApplet{ nullptr };
     VxGUID                      m_AsssetId;
     bool                        m_ThumbnailIsCircular{ false };

@@ -10,7 +10,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/AppErr.h \
     $$PWD/DependLibs/CoreLib/AssetDefs.h \
 	$$PWD/DependLibs/CoreLib/BinaryBlob.h \
-	$$PWD/DependLibs/CoreLib/BlobDefs.h \
     $$PWD/DependLibs/CoreLib/Blowfish.h \
     $$PWD/DependLibs/CoreLib/DbBase.h \
     $$PWD/DependLibs/CoreLib/DbDataset.h \

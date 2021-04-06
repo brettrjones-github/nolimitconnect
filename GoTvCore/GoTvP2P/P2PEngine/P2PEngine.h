@@ -21,10 +21,12 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
 #include <GoTvCore/GoTvP2P/BlobXferMgr/BlobCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 
 #include <GoTvInterface/IDefs.h>
 #include <GoTvInterface/IFromGui.h>
@@ -63,7 +65,8 @@ class RunUrlAction;
 
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
-					public AssetCallbackInterface,
+                    public AssetCallbackInterface,
+					public ThumbCallbackInterface,
                     public BlobCallbackInterface,
 					public MediaCallbackInterface,
                     public IAudioCallbacks
@@ -79,6 +82,7 @@ public:
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
+    ThumbMgr&					getThumbMgr( void )								{ return m_ThumbMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     ConnectionMgr&              getConnectionMgr( void )                        { return m_ConnectionMgr; }
     BlobMgr&				    getBlobMgr( void )							    { return m_BlobMgr; }
@@ -97,6 +101,7 @@ public:
     PluginSettingMgr&			getPluginSettingMgr( void )						{ return m_PluginSettingMgr; }
     RcScan&						getRcScan( void )								{ return m_RcScan; }
     RunUrlAction&               getRunUrlAction( void )                         { return m_RunUrlAction; }
+
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
     bool                        isDirectConnectReady( void );    // true if have open port and ready to recieve
@@ -625,6 +630,7 @@ protected:
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
     BlobMgr&				    m_BlobMgr;
+    ThumbMgr&					m_ThumbMgr;
     ConnectionMgr&              m_ConnectionMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;

@@ -48,7 +48,7 @@ enum EAssetXferOption
 	eAssetXferOptionFailIfExists		= 2
 };
 
-class AssetInfo;
+class AssetBaseInfo;
 
 class PktAssetSendReq : public VxPktHdr
 {
@@ -91,8 +91,8 @@ public:
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
-	void						fillPktFromAsset( AssetInfo& assetInfo );
-	void						fillAssetFromPkt( AssetInfo& assetInfo );
+	void						fillPktFromAsset( AssetBaseInfo& assetInfo );
+	void						fillAssetFromPkt( AssetBaseInfo& assetInfo );
 
 private:
 	uint16_t					m_AssetType;

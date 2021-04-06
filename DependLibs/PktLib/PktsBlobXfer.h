@@ -77,8 +77,12 @@ public:
 	void						setHistoryId( VxGUID& historyId )				{ m_HistoryId = historyId; }
 	VxGUID&						getHistoryId( void )							{ return m_HistoryId; }
 
-    void						setCreationTime( uint32_t createTime )			{ m_CreationTime = htonl( createTime ); }
-	uint32_t					getCreationTime( void )						    { return ntohl( m_CreationTime ); }
+    void						setCreationTime( int64_t createTime )			{ m_CreationTime = htonU64( createTime ); }
+    int64_t					    getCreationTime( void )						    { return ntohU64( m_CreationTime ); }
+    void						setModifiedTime( int64_t createTime )			{ m_ModifiedTime = htonU64( createTime ); }
+    int64_t					    getModifiedTime( void )						    { return ntohU64( m_ModifiedTime ); }
+    void						setAccessedTime( int64_t createTime )			{ m_AccessedTime = htonU64( createTime ); }
+    int64_t					    getAccessedTime( void )						    { return ntohU64( m_AccessedTime ); }
 
 	void						setBlobOffset( int64_t offset )				    { m_s64BlobOffs = htonU64( offset ); }
 	int64_t						getBlobOffset( void )						    { return ntohU64( m_s64BlobOffs ); }
@@ -105,7 +109,9 @@ private:
 	uint32_t					m_u32Error; 
 	int64_t						m_s64BlobLen;
 	int64_t						m_s64BlobOffs;
-	uint32_t					m_CreationTime;
+	uint64_t					m_CreationTime;
+    uint64_t					m_ModifiedTime;
+    uint64_t					m_AccessedTime;
 	uint16_t					m_BlobNameLen;
 	uint16_t					m_BlobTagLen;
 
@@ -246,7 +252,7 @@ public:
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
 	void						setBlobUniqueId( VxGUID& uniqueId  )	    { m_BlobUniqueId = uniqueId; }
-	VxGUID&						getBlobUniqueId( void )					    { return m_BlobUniqueId; }
+	VxGUID&						getAssetUniqueId( void )					    { return m_BlobUniqueId; }
 
 	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }

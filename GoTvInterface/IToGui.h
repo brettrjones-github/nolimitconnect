@@ -19,12 +19,12 @@
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/AssetDefs.h>
-#include <CoreLib/BlobDefs.h>
 #include <PktLib/VxCommon.h>
 
 class VxNetIdent;
 class AssetInfo;
 class BlobInfo;
+class ThumbInfo;
 class VxGUID;
 class PluginSetting;
 
@@ -193,8 +193,10 @@ public:
 
     //=== to gui host list ===//
     virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) = 0;
-    virtual void				toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
+    virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) = 0;
+
+    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
 	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 

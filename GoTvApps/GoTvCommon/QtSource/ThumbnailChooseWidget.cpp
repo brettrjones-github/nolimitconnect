@@ -25,6 +25,8 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileUtil.h>
@@ -41,6 +43,7 @@
 ThumbnailChooseWidget::ThumbnailChooseWidget( QWidget * parent )
     : QLabel( parent )
     , m_MyApp( GetAppInstance() )
+    , m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );
@@ -62,7 +65,7 @@ void ThumbnailChooseWidget::slotChooseThumb()
 }
 
 //============================================================================
-bool ThumbnailChooseWidget::loadFromAsset( AssetInfo * thumbAsset )
+bool ThumbnailChooseWidget::loadFromAsset( ThumbInfo * thumbAsset )
 {
     bool loadOk = false;
     if( thumbAsset )
@@ -84,7 +87,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
     if( thumbGallery && thumb )
     {
         VxGUID assetGuid = thumb->updateAndGetThumbnailId();
-        AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetGuid );
+        ThumbInfo * thumbAsset = dynamic_cast<ThumbInfo *>(m_MyApp.getEngine().getThumbMgr().findAsset( assetGuid ));
         if( thumbAsset )
         {
             if( loadFromAsset( thumbAsset ) )
@@ -108,10 +111,10 @@ bool ThumbnailChooseWidget::loadThumbnail( VxGUID& assetId, bool isCircle )
     setThumnailIsCircular( isCircle );
     if( assetId.isVxGUIDValid() )
     {
-        AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetId );
+        AssetBaseInfo * thumbAsset = m_ThumbMgr.findAsset( assetId );
         if( thumbAsset )
         {
-            if( loadFromAsset( thumbAsset ) )
+            if( loadFromAsset( dynamic_cast<ThumbInfo*>(thumbAsset) ) )
             {
                 setAssetId( assetId, isCircle );
                 result = true;
@@ -128,7 +131,7 @@ VxGUID ThumbnailChooseWidget::updateAndGetThumbnailId( void )
     bool assetExists = isAssetIdValid();
     if( assetExists )
     {
-        AssetInfo * existingAsset = m_MyApp.getEngine().getAssetMgr().findAsset( getAssetId() );
+        AssetBaseInfo * existingAsset = m_ThumbMgr.findAsset( getAssetId() );
         if( existingAsset )
         {
             return existingAsset->getAssetUniqueId();

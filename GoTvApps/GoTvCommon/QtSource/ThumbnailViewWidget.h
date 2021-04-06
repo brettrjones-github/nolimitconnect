@@ -19,7 +19,7 @@
 
 class AppCommon;
 class QPixmap;
-class AssetInfo;
+class ThumbInfo;
 
 class ThumbnailViewWidget : public QLabel
 {
@@ -40,7 +40,7 @@ public:
     void                        setThumbnailId( VxGUID& id )                { m_ThumbnailId = id; }
     VxGUID&                     getThumbnailId( void )                      { return m_ThumbnailId; }
 
-    bool                        loadFromAsset( AssetInfo * asset );
+    bool                        loadFromAsset( ThumbInfo * asset );
     bool                        loadFromFile( QString fileName );
 
     bool                        saveToPngFile( QString pngFileName );

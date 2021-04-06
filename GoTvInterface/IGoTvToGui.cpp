@@ -523,7 +523,7 @@ void IGoTv::toGuiBlobAdded( BlobInfo * hostListInfo )
 }
 
 //============================================================================
-void IGoTv::toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0to100000 )
+void IGoTv::toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
     getAppCommon().toGuiBlobAction( assetAction,
                                         assetId,
@@ -533,4 +533,10 @@ void IGoTv::toGuiBlobAction( EBlobAction assetAction, VxGUID& assetId, int pos0t
 void IGoTv::toGuiBlobSessionHistory( BlobInfo * hostListInfo )
 {
     getAppCommon().toGuiBlobSessionHistory( hostListInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiThumbAdded( ThumbInfo * hostListInfo )
+{
+    getAppCommon().toGuiThumbAdded( hostListInfo );
 }

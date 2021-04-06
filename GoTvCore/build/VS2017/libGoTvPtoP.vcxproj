@@ -424,6 +424,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfoDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseRxSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetInfo.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -437,12 +445,6 @@
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetMgr.cpp">
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetMgrBase.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -490,7 +492,6 @@
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobInfoDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobMgr.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobMgrBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobRxSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferDb.cpp" />
@@ -708,6 +709,14 @@
     <ClCompile Include="..\..\GoTvP2P\Search\RcScan.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Search\RcScanAction.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Search\RcScanMatchedConnection.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbInfoDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbRxSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\User\User.cpp" />
     <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.cpp" />
@@ -728,11 +737,19 @@
     <ClInclude Include="..\..\..\GoTvInterface\IToGui.h" />
     <ClInclude Include="..\..\..\GoTvTargetOsConfig.h" />
     <ClInclude Include="..\..\config_gotvcore.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseCallbackInterface.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfoDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseRxSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetCallbackInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfoDb.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetMgr.h" />
-    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetMgrBase.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetRxSession.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetTxSession.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferDb.h" />
@@ -747,7 +764,6 @@
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobInfoDb.h" />
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobMgr.h" />
-    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobMgrBase.h" />
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobRxSession.h" />
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.h" />
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferDb.h" />
@@ -979,6 +995,15 @@
     <ClInclude Include="..\..\GoTvP2P\Search\RcScanAction.h" />
     <ClInclude Include="..\..\GoTvP2P\Search\RcScanMatchedConnection.h" />
     <ClInclude Include="..\..\GoTvP2P\Search\RcScanPic.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbCallbackInterface.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbInfoDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbRxSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.h" />
     <ClInclude Include="..\..\GoTvP2P\User\User.h" />
     <ClInclude Include="..\..\GoTvP2P\User\UserList.h" />
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.h" />

@@ -84,7 +84,7 @@ protected:
 	virtual void				onBlobSent( BlobTxSession * xferSession, BlobInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
-	virtual void				updateBlobMgrSendState( VxGUID& assetUniqueId, EBlobSendState sendState, int param );
+	virtual void				updateBlobMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param );
 
 	virtual BlobRxSession *	    findRxSession( bool pluginIsLocked, VxNetIdent * netIdent );
 	virtual BlobRxSession *	    findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
@@ -114,7 +114,7 @@ protected:
 	void						assetSendComplete( BlobTxSession * xferSession );
 	void						queBlob( BlobInfo& assetInfo );
 	EXferError					createBlobTxSessionAndSend( bool pluginIsLocked, BlobInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase );
-	bool						requireFileXfer( EBlobType assetType );
+	bool						requireFileXfer( EAssetType assetType );
 
 	//=== vars ===//
 	bool						m_Initialized;

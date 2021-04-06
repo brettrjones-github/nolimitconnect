@@ -10,9 +10,6 @@
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetMgr.cpp">
       <Filter>GoTvP2P\AssetMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetMgrBase.cpp">
-      <Filter>GoTvP2P\AssetMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetRxSession.cpp">
       <Filter>GoTvP2P\AssetMgr</Filter>
     </ClCompile>
@@ -697,9 +694,6 @@
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferMgr.cpp">
       <Filter>GoTvP2P\BlobXferMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobMgrBase.cpp">
-      <Filter>GoTvP2P\BlobXferMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.cpp">
       <Filter>GoTvP2P\BlobXferMgr</Filter>
     </ClCompile>
@@ -714,6 +708,54 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp">
       <Filter>GoTvP2P\User</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfoDb.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseMgr.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseRxSession.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbInfo.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbInfoDb.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbMgr.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbRxSession.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -740,9 +782,6 @@
       <Filter>GoTvP2P\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetMgr.h">
-      <Filter>GoTvP2P\AssetMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetMgrBase.h">
       <Filter>GoTvP2P\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetRxSession.h">
@@ -1513,9 +1552,6 @@
     <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferMgr.h">
       <Filter>GoTvP2P\BlobXferMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobMgrBase.h">
-      <Filter>GoTvP2P\BlobXferMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Connections\HandshakeInfo.h">
       <Filter>GoTvP2P\Connections</Filter>
     </ClInclude>
@@ -1527,6 +1563,60 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\User\UserList.h">
       <Filter>GoTvP2P\User</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseCallbackInterface.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfoDb.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseMgr.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseRxSession.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbCallbackInterface.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbInfo.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbInfoDb.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbMgr.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbRxSession.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1619,6 +1709,12 @@
     </Filter>
     <Filter Include="GoTvP2P\User">
       <UniqueIdentifier>{d8b95c40-fa5a-4e3e-b03e-5a33c754d6b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\ThumbMgr">
+      <UniqueIdentifier>{85ae1a80-8839-4ec0-8992-1e2098f01c0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\AssetBase">
+      <UniqueIdentifier>{9f3693fb-5343-4243-af51-b0ed6fb60a55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
