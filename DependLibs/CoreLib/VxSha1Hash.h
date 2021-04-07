@@ -41,7 +41,7 @@ public:
 
 
 protected:
-	uint8_t							m_HashId[20];
+	uint8_t						m_HashId[20];
 };
 #pragma pack(pop)
 

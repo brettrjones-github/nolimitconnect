@@ -86,15 +86,15 @@ protected:
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				updateThumbMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param );
 
-	virtual ThumbRxSession *	    findRxSession( bool pluginIsLocked, VxNetIdent * netIdent );
-	virtual ThumbRxSession *	    findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual ThumbRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual ThumbRxSession *	    findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual ThumbTxSession *	    findTxSession( bool pluginIsLocked, VxNetIdent * netIdent );
-	virtual ThumbTxSession *	    findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
-	virtual ThumbTxSession *	    createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual ThumbTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual ThumbTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual ThumbRxSession *	findRxSession( bool pluginIsLocked, VxNetIdent * netIdent );
+	virtual ThumbRxSession *	findRxSession( bool pluginIsLocked, VxGUID& lclSessionId );
+	virtual ThumbRxSession *	findOrCreateRxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual ThumbRxSession *	findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual ThumbTxSession *	findTxSession( bool pluginIsLocked, VxNetIdent * netIdent );
+	virtual ThumbTxSession *	findTxSession( bool pluginIsLocked, VxGUID& lclSessionId );
+	virtual ThumbTxSession *	createTxSession( VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual ThumbTxSession *	findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
+	virtual ThumbTxSession *	findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
 
 	virtual EXferError			beginThumbReceive( ThumbRxSession * xferSession, PktAssetSendReq * poPkt, PktAssetSendReply& pktReply );
 	virtual EXferError			beginThumbSend( ThumbTxSession * xferSession );

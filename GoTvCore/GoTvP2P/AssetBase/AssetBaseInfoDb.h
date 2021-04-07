@@ -43,12 +43,13 @@ public:
 											uint32_t		assetType, 							
 											VxSha1Hash&		hashId, 
 											uint32_t		locationFlags, 
-                                            uint32_t		attributedFlags = 0, 
+                                            uint32_t		attributedFlags, 
+                                            int             isTemp,
                                             int64_t			createdTimestamp = 0,
                                             int64_t			modifiedTimestamp = 0,     
                                             int64_t			accessedTimestamp = 0,          
 											const char *	assetTag = "", 
-											EAssetSendState sendState = eAssetSendStateNone );
+											EAssetSendState sendState = eAssetSendStateNone);
 
 	void 						addAsset( AssetBaseInfo * assetInfo );
 

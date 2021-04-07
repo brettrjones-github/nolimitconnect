@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -21,11 +20,8 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxSha1Hash.h>
 
-#define PKT_TYPE_BLOB_MAX_DATA_LEN		14320	// maximum length of chunk of Blob data
-#define PKT_TYPE_BLOB_MAX_NAME_AND_TAG_LEN		( 4096 * 2 + 48 )	// maximum length of chunk of Blob data
-
-#define MAX_HOST_LIST_LIST_LEN				4096	// maximum length of list of Blobs
-
+#define PKT_TYPE_BLOB_MAX_DATA_LEN		    14320	            // maximum length of chunk of Blob data
+#define PKT_TYPE_BLOB_MAX_NAME_AND_TAG_LEN	( 4096 * 2 + 48 )	// maximum length of name and tag
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -36,7 +32,7 @@
 enum EBlobXferCmd
 {
 	eBlobXferCmdBlobSend		    = 0,
-	eBlobXferCmdBlobGet			= 1,
+	eBlobXferCmdBlobGet			    = 1,
 	eBlobXferCmdBlobChecksum	    = 2,
 	eBlobXferCmdBlobDirectory	    = 3
 };
@@ -44,7 +40,7 @@ enum EBlobXferCmd
 enum EBlobXferOption
 {
 	eBlobXferOptionReplaceIfExists 	= 0,
-	eBlobXferOptionResumeIfExists	    = 1,
+	eBlobXferOptionResumeIfExists	= 1,
 	eBlobXferOptionFailIfExists		= 2
 };
 
@@ -76,6 +72,8 @@ public:
 	VxGUID&						getCreatorId( void )							{ return m_CreatorId; }
 	void						setHistoryId( VxGUID& historyId )				{ m_HistoryId = historyId; }
 	VxGUID&						getHistoryId( void )							{ return m_HistoryId; }
+    void						setThumbId( VxGUID& historyId )				    { m_ThumbId = historyId; }
+    VxGUID&						getThumbId( void )							    { return m_ThumbId; }
 
     void						setCreationTime( int64_t createTime )			{ m_CreationTime = htonU64( createTime ); }
     int64_t					    getCreationTime( void )						    { return ntohU64( m_CreationTime ); }
@@ -92,6 +90,9 @@ public:
 	void						setBlobType( uint16_t BlobType )		        { m_BlobType = htons( BlobType ); }
 	uint16_t					getBlobType( void )							    { return ntohs( m_BlobType ); }
 
+    void						setAttributeFlags( uint16_t attribFlages )		{ m_AttributeFlags = htons( attribFlages ); }
+    uint16_t					getAttributeFlags( void )					    { return ntohs( m_AttributeFlags ); }
+
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
@@ -99,26 +100,29 @@ public:
 	void						fillBlobFromPkt( BlobInfo& assetInfo );
 
 private:
-	uint16_t					m_BlobType;
+    uint16_t					m_BlobType{ 0 };
+    uint16_t					m_AttributeFlags{ 0 };
 	VxGUID						m_UniqueId;
 	VxGUID						m_CreatorId;
 	VxGUID						m_HistoryId; 
+    VxGUID						m_ThumbId; 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_BlobHashId;
-	uint32_t					m_u32Error; 
-	int64_t						m_s64BlobLen;
-	int64_t						m_s64BlobOffs;
-	uint64_t					m_CreationTime;
-    uint64_t					m_ModifiedTime;
-    uint64_t					m_AccessedTime;
-	uint16_t					m_BlobNameLen;
-	uint16_t					m_BlobTagLen;
+    uint32_t					m_u32Error{ 0 };
+	int64_t						m_s64BlobLen{ 0 };
+	int64_t						m_s64BlobOffs{ 0 };
+	uint64_t					m_CreationTime{ 0 };
+    uint64_t					m_ModifiedTime{ 0 };
+    uint64_t					m_AccessedTime{ 0 };
+    uint32_t					m_BlobAttribue{ 0 };
+	uint16_t					m_BlobNameLen{ 0 };
+	uint16_t					m_BlobTagLen{ 0 };
 
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2; 
-	uint32_t					m_u32Res3; 
-	uint32_t					m_u32Res4; 
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 }; 
+	uint32_t					m_u32Res3{ 0 };
+	uint32_t					m_u32Res4{ 0 };
 	char						m_BlobNameAndTag[ PKT_TYPE_BLOB_MAX_NAME_AND_TAG_LEN ];
 };
 
@@ -145,16 +149,16 @@ public:
 	bool						getRequiresFileXfer( void )						{ return m_u8RequiresFileXfer ? true : false; }
 
 private:
-	uint8_t						m_u8RequiresFileXfer;
-	uint8_t						m_u8Res;
-	uint16_t					m_u16Res; 
-	int64_t						m_s64BlobOffs;
+	uint8_t						m_u8RequiresFileXfer{ 0 };
+	uint8_t						m_u8Res{ 0 };
+	uint16_t					m_u16Res{ 0 };
+	int64_t						m_s64BlobOffs{ 0 };
 	VxGUID						m_UniqueId;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1;
-	uint32_t					m_u32Res2; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 //============================================================================
@@ -180,12 +184,12 @@ public:
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t					m_u16Res;
-	uint16_t					m_u16BlobChunkLen;
+	uint16_t					m_u16Res{ 0 };
+	uint16_t					m_u16BlobChunkLen{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
 public:
 	uint8_t						m_au8BlobChunk[ PKT_TYPE_BLOB_MAX_DATA_LEN ];
 };
@@ -207,11 +211,11 @@ public:
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t					m_u16Res;	
-	uint16_t					m_u16BlobChunkLen;
+	uint16_t					m_u16Res{ 0 };
+	uint16_t					m_u16BlobChunkLen{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t					m_u32Error; 
+	uint32_t					m_u32Error{ 0 };
 };
 
 //============================================================================
@@ -237,8 +241,8 @@ private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_BlobUniqueId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
 };
 
 class PktBlobSendCompleteReply : public VxPktHdr
@@ -261,8 +265,8 @@ private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_BlobUniqueId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
 };
 
 //============================================================================
@@ -273,7 +277,7 @@ class PktBlobXferErr : public VxPktHdr
 public:
 	PktBlobXferErr();
 
-	const char *				describeError();
+	static const char *			describeError( uint16_t error );
 
 	void						setRxInstance( VxGUID& instanceGuid )			{ m_RxBlobInstance = instanceGuid; }
 	VxGUID& 					getRxInstance( void )							{ return m_RxBlobInstance; }
@@ -284,16 +288,16 @@ public:
 	uint16_t					getError( void )								{ return ntohs( m_u16Err ); }
 
 private:
-	uint16_t					m_u16Err;
-	uint16_t					m_u16Res1;
-	uint32_t					m_u32ResP1;
-	uint32_t					m_u32ResP2;
-	uint32_t					m_u32ResP3;
+	uint16_t					m_u16Err{ 0xffff };
+	uint16_t					m_u16Res1{ 0 };
+	uint32_t					m_u32ResP1{ 0 };
+	uint32_t					m_u32ResP2{ 0 };
+	uint32_t					m_u32ResP3{ 0 };
 
 	VxGUID						m_RxBlobInstance; 
 	VxGUID						m_TxBlobInstance; 
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2;
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 #pragma pack(pop)

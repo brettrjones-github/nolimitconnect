@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2003 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -27,29 +26,22 @@
 // PktBlobSendReq
 //============================================================================
 PktBlobSendReq::PktBlobSendReq()
-: m_BlobType( (uint16_t)eAssetTypeUnknown ) 
-, m_u32Error(0)
-, m_s64BlobLen(0)
-, m_s64BlobOffs(0) 
-, m_CreationTime(0)
-, m_BlobNameLen(0)
-, m_BlobTagLen(0)
-, m_u32Res1(0)
-, m_u32Res2(0)
-, m_u32Res3(0)
-, m_u32Res4(0)
 { 
 	setPktType( PKT_TYPE_BLOB_SEND_REQ );
+    setPktLength( sizeof(PktBlobSendReq) );
 	m_BlobNameAndTag[0] = 0;
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
 //============================================================================
 void PktBlobSendReq::fillPktFromBlob( BlobInfo& hostInfo )
 {
 	setBlobType( (uint16_t)hostInfo.getAssetType() );
-	setCreatorId( hostInfo.getCreatorId() );
+    setAttributeFlags( hostInfo.getAttributeFlags() );
+    setCreatorId( hostInfo.getCreatorId() );
 	setHistoryId( hostInfo.getHistoryId() );
 	setUniqueId( hostInfo.getAssetUniqueId() );
+    setThumbId( hostInfo.getThumbId() );
 	setBlobHashId( hostInfo.getAssetHashId() );
 	setBlobLen( hostInfo.getAssetLength() );
 	setCreationTime( (uint64_t) hostInfo.getCreationTime() );
@@ -62,9 +54,11 @@ void PktBlobSendReq::fillPktFromBlob( BlobInfo& hostInfo )
 void PktBlobSendReq::fillBlobFromPkt( BlobInfo& hostInfo )
 {
 	hostInfo.setAssetType( (EAssetType)getBlobType() );
+    hostInfo.setAttributeFlags( getAttributeFlags() );
 	hostInfo.setAssetUniqueId( getUniqueId() );
 	hostInfo.setCreatorId( getCreatorId() );
 	hostInfo.setHistoryId( getHistoryId() );
+    hostInfo.setThumbId( getThumbId() );
 	hostInfo.setAssetHashId( getBlobHashId() );
 	hostInfo.setAssetLength( getBlobLen() );
 	hostInfo.setCreationTime( (uint64_t)getCreationTime() );
@@ -142,13 +136,6 @@ void PktBlobSendReq::setBlobNameAndTag( const char * pBlobName, const char * pBl
 
 //============================================================================
 PktBlobSendReply::PktBlobSendReply()
-: m_u8RequiresFileXfer( 0 )
-, m_u8Res( 0 )
-, m_u16Res( 0 )
-, m_s64BlobOffs( 0 )
-, m_u32Error(0) 
-, m_u32Res1( 0 )
-, m_u32Res2(0)
 { 
 	setPktType( PKT_TYPE_BLOB_SEND_REPLY );
 	setPktLength( sizeof( PktBlobSendReply ) );
@@ -157,10 +144,6 @@ PktBlobSendReply::PktBlobSendReply()
 
 //============================================================================
 PktBlobChunkReq::PktBlobChunkReq()
-: m_u16Res(0)
-, m_u16BlobChunkLen(0)
-, m_u32Error(0)
-, m_u32Res1(0) 
 {
 	setPktType( PKT_TYPE_BLOB_CHUNK_REQ );
 	setPktLength( emptyLength() );
@@ -197,8 +180,6 @@ PktBlobChunkReply::PktBlobChunkReply()
 
 //============================================================================
 PktBlobSendCompleteReq::PktBlobSendCompleteReq()
-: m_u32Error( 0 )
-, m_u32Res1( 0 )
 {
 	setPktType(  PKT_TYPE_BLOB_SEND_COMPLETE_REQ );
 	setPktLength( (uint16_t)sizeof( PktBlobSendCompleteReq ) );
@@ -206,8 +187,6 @@ PktBlobSendCompleteReq::PktBlobSendCompleteReq()
 
 //============================================================================
 PktBlobSendCompleteReply::PktBlobSendCompleteReply()
-: m_u32Error( 0 )
-, m_u32Res1( 0 )
 {
 	setPktType( PKT_TYPE_BLOB_SEND_COMPLETE_REPLY );
 	setPktLength( (uint16_t)sizeof( PktBlobSendCompleteReply ) );
@@ -216,13 +195,6 @@ PktBlobSendCompleteReply::PktBlobSendCompleteReply()
 
 //============================================================================
 PktBlobXferErr::PktBlobXferErr()
-: m_u16Err(0xffff) 
-, m_u16Res1(0)
-, m_u32ResP1(0)
-, m_u32ResP2(0)
-, m_u32ResP3(0)
-, m_u32Res1(0) 
-, m_u32Res2(0)
 {
 	setPktType( PKT_TYPE_BLOB_XFER_ERR );
 	setPktLength( sizeof( PktBlobXferErr ) );
@@ -230,9 +202,9 @@ PktBlobXferErr::PktBlobXferErr()
 }
 
 //============================================================================
-const char * PktBlobXferErr::describeError( void )
+const char * PktBlobXferErr::describeError( uint16_t error )
 {
-	switch( m_u16Err )
+	switch( error )
 	{
 	case PKT_REQ_STATUS_OK:
 		return "200 Ok";

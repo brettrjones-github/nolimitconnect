@@ -325,6 +325,7 @@ static bool firstTime = true;
 	setPktType(  PKT_TYPE_ANNOUNCE );
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
+
 //============================================================================
 PktAnnounce::PktAnnounce( const PktAnnounce& rhs )
     : PktAnnBase( rhs )

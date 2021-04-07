@@ -20,6 +20,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktRequestErrors.h \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktTcpPunch.h \
+	$$PWD/DependLibs/PktLib/PktThumbXfer.h \
     $$PWD/DependLibs/PktLib/PktTypes.h \
     $$PWD/DependLibs/PktLib/PktVoiceReply.h \
     $$PWD/DependLibs/PktLib/PktVoiceReq.h \
@@ -86,6 +87,7 @@ SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktsSearch.cpp \
     $$PWD/DependLibs/PktLib/PktsSession.cpp \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.cpp \
+	$$PWD/DependLibs/PktLib/PktThumbXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsTodGame.cpp \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.cpp \
     $$PWD/DependLibs/PktLib/PktsWebServer.cpp \

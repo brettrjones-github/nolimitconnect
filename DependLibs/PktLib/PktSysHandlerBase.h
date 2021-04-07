@@ -39,7 +39,7 @@ public:
 	virtual void				onPktLogReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktScanReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+	virtual void				onPktScanReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
@@ -153,14 +153,22 @@ public:
     virtual void				onPktBlobSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktBlobXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
-    virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktHostJoinReply              ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktHostSearchReply            ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktFriendOfferReq             ( VxSktBase * sktBase, VxPktHdr * pktHdr );
-    virtual void				onPktFriendOfferReply           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostJoinReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostJoinReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostSearchReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostSearchReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostOfferReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostOfferReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFriendOfferReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFriendOfferReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+    virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 
 	//packet type 250 and greater not allowed
