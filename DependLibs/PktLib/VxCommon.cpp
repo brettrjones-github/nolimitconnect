@@ -194,52 +194,6 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 //============================================================================
 //============================================================================
 //============================================================================
-VxGroupService::VxGroupService( const VxGroupService &rhs )
-: m_GroupFlags( rhs.m_GroupFlags )
-, m_GroupCatagories( rhs.m_GroupCatagories )
-, m_GroupSubCatagories( rhs.m_GroupSubCatagories )
-, m_GroupReserved( rhs.m_GroupReserved )
-{
-}
-
-//============================================================================
-bool VxGroupService::addToBlob( PktBlobEntry& blob )
-{
-    bool result = blob.setValue( m_GroupFlags );
-    result &= blob.setValue( m_GroupCatagories );
-    result &= blob.setValue( m_GroupSubCatagories );
-    result &= blob.setValue( m_GroupReserved );
-    return result;
-
-}
-
-//============================================================================
-bool VxGroupService::extractFromBlob( PktBlobEntry& blob )
-{
-    bool result = blob.getValue( m_GroupFlags );
-    result &= blob.getValue( m_GroupCatagories );
-    result &= blob.getValue( m_GroupSubCatagories );
-    result &= blob.getValue( m_GroupReserved );
-    return result;
-}
-
-//============================================================================
-VxGroupService& VxGroupService::operator =( const VxGroupService &rhs )
-{
-    if( this != &rhs )
-    {
-        m_GroupFlags = rhs.m_GroupFlags;
-        m_GroupCatagories = rhs.m_GroupCatagories;
-        m_GroupSubCatagories = rhs.m_GroupSubCatagories;
-        m_GroupReserved = rhs.m_GroupReserved;
-    }
-
-    return *this;
-}
-
-//============================================================================
-//============================================================================
-//============================================================================
 VxNetIdent::VxNetIdent()
 : m_u16AppVersion( htons( VxGetAppVersion() ) )	
 {
@@ -249,7 +203,6 @@ VxNetIdent::VxNetIdent()
 VxNetIdent::VxNetIdent(const VxNetIdent &rhs )
 : VxNetIdentBase( rhs )
 , PluginPermission( rhs )
-, VxGroupService( rhs )
 , m_u16AppVersion( rhs.m_u16AppVersion )
 , m_u16PingTimeMs( rhs.m_u16PingTimeMs )
 , m_NetIdentRes1( rhs.m_NetIdentRes1 )
@@ -266,7 +219,6 @@ bool VxNetIdent::addToBlob( PktBlobEntry& blob )
     bool result = blob.setValue( startMagicNum );
     result &= VxNetIdentBase::addToBlob( blob );
     result &= PluginPermission::addToBlob( blob );
-    result &= VxGroupService::addToBlob( blob );
     result &= blob.setValue( m_u16AppVersion );
     result &= blob.setValue( m_u16PingTimeMs );
     result &= blob.setValue( m_NetIdentRes1 );
@@ -291,7 +243,6 @@ bool VxNetIdent::extractFromBlob( PktBlobEntry& blob )
 
     result &= VxNetIdentBase::extractFromBlob( blob );
     result &= PluginPermission::extractFromBlob( blob );
-    result &= VxGroupService::extractFromBlob( blob );
     result &= blob.getValue( m_u16AppVersion );
     result &= blob.getValue( m_u16PingTimeMs );
     result &= blob.getValue( m_NetIdentRes1 );
@@ -318,7 +269,6 @@ VxNetIdent& VxNetIdent::operator =( const VxNetIdent& rhs  )
     {
         *( (VxNetIdentBase*)this ) = *( (VxNetIdentBase*)&rhs );
         *( (PluginPermission*)this ) = *( (PluginPermission*)&rhs );
-        *( (VxGroupService*)this ) = *( (VxGroupService*)&rhs );
         m_u16AppVersion = rhs.m_u16AppVersion;
         m_u16PingTimeMs = rhs.m_u16PingTimeMs;
         m_NetIdentRes1 = rhs.m_NetIdentRes1;

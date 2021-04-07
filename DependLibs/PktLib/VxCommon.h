@@ -84,22 +84,6 @@ private:
 	uint8_t						m_au8Permissions[ PERMISSION_ARRAY_SIZE ];
 };
 
-class VxGroupService
-{
-public:
-    VxGroupService() = default;
-    VxGroupService( const VxGroupService &rhs );
-    bool                        addToBlob( PktBlobEntry& blob );
-    bool                        extractFromBlob( PktBlobEntry& blob );
-    VxGroupService&             operator =( const VxGroupService &rhs );
-
-    uint16_t					m_GroupFlags{ 0 };           // group service flags
-    uint16_t					m_GroupCatagories{ 0 };      // catagory of service
-    uint16_t					m_GroupSubCatagories{ 0 };   // sub catagory of service
-    uint16_t					m_GroupReserved{ 0 };        // catagory of service
-
-};
-
 //  size
 // +   24 bytes PluginPermission
 // +    2 bytes m_u16AppVersion;	
@@ -109,12 +93,11 @@ public:
 // +    1 bytes m_u8Gender;
 // +    8 bytes m_LastSessionTime;	
 // =   40 bytes
-// +  528 bytes VxNetIdentBase
-// +    8 bytes VxGroupService    
-// =  576 bytes total
+// +  529 bytes VxNetIdentBase   
+// =  568 bytes total
 
 /// network indentiy of contact
-class VxNetIdent : public VxNetIdentBase, public PluginPermission, public VxGroupService
+class VxNetIdent : public VxNetIdentBase, public PluginPermission
 {
 public:
 	VxNetIdent();

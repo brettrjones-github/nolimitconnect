@@ -76,8 +76,8 @@ private:
 
 //     8 bytes reserved
 // +  40 bytes VxPktHdr
-// + 576 bytes VxNetIdent
-// = 624 bytes
+// + 368 bytes VxNetIdent
+// = 416 bytes
 class PktAnnBase : public VxPktHdr, public VxNetIdent
 {
 public:
@@ -93,9 +93,9 @@ public:
 
 //! is what we put in normal pkt announce so we can do actions etc
 //! size 
-//   624 bytes PktAnnBase
+//   416 bytes PktAnnBase
 // +  32 bytes PktAnnActionData
-// = 656 bytes total
+// = 448 bytes total
 class PktAnnounce :  public PktAnnBase,  public PktAnnActionData
 {
 public:

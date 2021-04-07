@@ -83,7 +83,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
             else
             {
                 // setup identity with new avatar image
-                m_MyIdent->setAvatarGuid( existingAsset->getAssetUniqueId() );
+                m_MyIdent->setAvatarGuid( existingAsset->getAssetUniqueId(), existingAsset->getModifiedTime() );
                 m_MyApp.updateMyIdent( m_MyIdent );
 
                 QString msgText = QObject::tr( "Applied Avatar Image Changes " );
@@ -102,7 +102,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
         if( ui.m_ThumbnailEditWidget->generateThumbAsset( assetInfo ) )
         {
             // setup identity with new avatar image
-            m_MyIdent->setAvatarGuid( assetInfo.getAssetUniqueId() );
+            m_MyIdent->setAvatarGuid( assetInfo.getAssetUniqueId(), assetInfo.getModifiedTime() );
             m_MyApp.updateMyIdent( m_MyIdent );
 
             QString msgText = QObject::tr( "Applied Avatar Image Changes " );

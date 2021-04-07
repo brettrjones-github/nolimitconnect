@@ -201,10 +201,7 @@ VxConnectIdent::VxConnectIdent()
 {
 	m_OnlineName[ 0 ] = 0;
 	m_OnlineDesc[ 0 ] = 0;
-    m_NetHostUrl[ 0 ] = 0;
-    m_ChatRoomHostUrl[ 0 ] = 0;
-    m_GroupHostUrl[ 0 ] = 0;
-    m_RandomConnectUrl[ 0 ] = 0;
+
 }
 
 //============================================================================
@@ -216,19 +213,24 @@ VxConnectIdent::VxConnectIdent( const VxConnectIdent& rhs )
 , m_u8Age( rhs.m_u8Age )
 , m_u8Gender( rhs.m_u8Gender )
 , m_IdentRes1( rhs.m_IdentRes1 )
-, m_AvatarGuid( rhs.m_AvatarGuid )
+, m_IdentRes2( rhs.m_IdentRes2 )
 , m_NetHostGuid( rhs.m_NetHostGuid )
 , m_ChatRoomHostGuid( rhs.m_ChatRoomHostGuid )
 , m_GroupHostGuid( rhs.m_GroupHostGuid )
 , m_RandomConnectGuid( rhs.m_RandomConnectGuid )
+, m_AvatarGuid( rhs.m_AvatarGuid )
+, m_AvatarModifiedTime( rhs.m_AvatarModifiedTime )
+, m_NetHostThumbGuid( rhs.m_NetHostThumbGuid )
+, m_NetHostThumbModifiedTime( rhs.m_NetHostThumbModifiedTime )
+, m_ChatRoomThumbGuid( rhs.m_ChatRoomThumbGuid )
+, m_ChatRoomThumbModifiedTime( rhs.m_ChatRoomThumbModifiedTime )
+, m_GroupThumbGuid( rhs.m_GroupThumbGuid )
+, m_GroupThumbModifiedTime( rhs.m_GroupThumbModifiedTime )
+, m_RandomConnectThumbGuid( rhs.m_RandomConnectThumbGuid )
+, m_RandomConnectThumbModifiedTime( rhs.m_RandomConnectThumbModifiedTime )
 {
     SafeStrCopy( m_OnlineName, rhs.m_OnlineName, MAX_ONLINE_NAME_LEN );
     SafeStrCopy( m_OnlineDesc, rhs.m_OnlineDesc, MAX_ONLINE_DESC_LEN );
-
-    SafeStrCopy( m_NetHostUrl, rhs.m_NetHostUrl, MAX_NET_HOST_URL_LEN );
-    SafeStrCopy( m_ChatRoomHostUrl, rhs.m_ChatRoomHostUrl, MAX_NET_HOST_URL_LEN );
-    SafeStrCopy( m_GroupHostUrl, rhs.m_GroupHostUrl, MAX_NET_HOST_URL_LEN );
-    SafeStrCopy( m_RandomConnectUrl, rhs.m_RandomConnectUrl, MAX_NET_HOST_URL_LEN );
 }
 
 //============================================================================
@@ -243,17 +245,28 @@ bool VxConnectIdent::addToBlob( PktBlobEntry& blob )
     result &= blob.setValue( m_u8Age );
     result &= blob.setValue( m_u8Gender );
     result &= blob.setValue( m_IdentRes1 );
+    result &= blob.setValue( m_IdentRes2 );
 
-    result &= blob.setValue( m_AvatarGuid );
     result &= blob.setValue( m_NetHostGuid );
     result &= blob.setValue( m_ChatRoomHostGuid );
     result &= blob.setValue( m_GroupHostGuid );
     result &= blob.setValue( m_RandomConnectGuid );
 
-    result &= blob.setValue( m_NetHostUrl, MAX_NET_HOST_URL_LEN );
-    result &= blob.setValue( m_ChatRoomHostUrl, MAX_NET_HOST_URL_LEN );
-    result &= blob.setValue( m_GroupHostUrl, MAX_NET_HOST_URL_LEN );
-    result &= blob.setValue( m_RandomConnectUrl, MAX_NET_HOST_URL_LEN );
+    result &= blob.setValue( m_AvatarGuid );
+    result &= blob.setValue( m_AvatarModifiedTime );
+
+    result &= blob.setValue( m_NetHostThumbGuid );
+    result &= blob.setValue( m_NetHostThumbModifiedTime );
+
+    result &= blob.setValue( m_ChatRoomThumbGuid );
+    result &= blob.setValue( m_ChatRoomThumbModifiedTime );
+
+    result &= blob.setValue( m_GroupThumbGuid );
+    result &= blob.setValue( m_GroupThumbModifiedTime );
+
+    result &= blob.setValue( m_RandomConnectThumbGuid );
+    result &= blob.setValue( m_RandomConnectThumbModifiedTime );
+
     return result;
 }
 
@@ -271,18 +284,27 @@ bool VxConnectIdent::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_u8Age );
     result &= blob.getValue( m_u8Gender );
     result &= blob.getValue( m_IdentRes1 );
+    result &= blob.getValue( m_IdentRes2 );
 
-    result &= blob.getValue( m_AvatarGuid );
     result &= blob.getValue( m_NetHostGuid );
     result &= blob.getValue( m_ChatRoomHostGuid );
     result &= blob.getValue( m_GroupHostGuid );
     result &= blob.getValue( m_RandomConnectGuid );
 
-    int len = MAX_NET_HOST_URL_LEN;
-    result &= blob.getValue( m_NetHostUrl, len );
-    result &= blob.getValue( m_ChatRoomHostUrl, len );
-    result &= blob.getValue( m_GroupHostUrl, len );
-    result &= blob.getValue( m_RandomConnectUrl, len );
+    result &= blob.getValue( m_AvatarGuid );
+    result &= blob.getValue( m_AvatarModifiedTime );
+
+    result &= blob.getValue( m_NetHostThumbGuid );
+    result &= blob.getValue( m_NetHostThumbModifiedTime );
+
+    result &= blob.getValue( m_ChatRoomThumbGuid );
+    result &= blob.getValue( m_ChatRoomThumbModifiedTime );
+
+    result &= blob.getValue( m_GroupThumbGuid );
+    result &= blob.getValue( m_GroupThumbModifiedTime );
+
+    result &= blob.getValue( m_RandomConnectThumbGuid );
+    result &= blob.getValue( m_RandomConnectThumbModifiedTime );
     return result;
 }
 
@@ -300,6 +322,7 @@ VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
         m_u8Age = rhs.m_u8Age;
         m_u8Gender = rhs.m_u8Gender;
         m_IdentRes1 = rhs.m_IdentRes1;
+        m_IdentRes2 = rhs.m_IdentRes2;
         m_AvatarGuid = rhs.m_AvatarGuid;
 
         m_NetHostGuid = rhs.m_NetHostGuid;
@@ -307,10 +330,20 @@ VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
         m_GroupHostGuid = rhs.m_GroupHostGuid;
         m_RandomConnectGuid = rhs.m_RandomConnectGuid;
 
-        SafeStrCopy( m_NetHostUrl, rhs.m_NetHostUrl, MAX_NET_HOST_URL_LEN );
-        SafeStrCopy( m_ChatRoomHostUrl, rhs.m_ChatRoomHostUrl, MAX_NET_HOST_URL_LEN );
-        SafeStrCopy( m_GroupHostUrl, rhs.m_GroupHostUrl, MAX_NET_HOST_URL_LEN );
-        SafeStrCopy( m_RandomConnectUrl, rhs.m_RandomConnectUrl, MAX_NET_HOST_URL_LEN );
+        m_AvatarGuid = rhs.m_AvatarGuid;
+        m_AvatarModifiedTime = rhs.m_AvatarModifiedTime;
+
+        m_NetHostThumbGuid = rhs.m_NetHostThumbGuid;
+        m_NetHostThumbModifiedTime = rhs.m_NetHostThumbModifiedTime;
+
+        m_ChatRoomThumbGuid = rhs.m_ChatRoomThumbGuid;
+        m_ChatRoomThumbModifiedTime = rhs.m_ChatRoomThumbModifiedTime;
+
+        m_GroupThumbGuid = rhs.m_GroupThumbGuid;
+        m_GroupThumbModifiedTime = rhs.m_GroupThumbModifiedTime;
+
+        m_RandomConnectThumbGuid = rhs.m_RandomConnectThumbGuid;
+        m_RandomConnectThumbModifiedTime = rhs.m_RandomConnectThumbModifiedTime;
     }
 
     return *this;
@@ -340,58 +373,6 @@ void VxConnectIdent::setOnlineDescription( const char * pUserDesc )
     else
     {
         SafeStrCopy( m_OnlineDesc, pUserDesc, sizeof( m_OnlineDesc ) );
-    }
-}
-
-//============================================================================
-void VxConnectIdent::setNetHostUrl( const char * netHostUrl )
-{
-    if( !netHostUrl )
-    {
-        m_NetHostUrl[ 0 ] = 0;
-    }
-    else
-    {
-        SafeStrCopy( m_NetHostUrl, netHostUrl, sizeof( m_NetHostUrl ) );
-    }
-}
-
-//============================================================================
-void VxConnectIdent::setChatRoomHostUrl( const char * groupListUrl )
-{
-    if( !groupListUrl )
-    {
-        m_ChatRoomHostUrl[ 0 ] = 0;
-    }
-    else
-    {
-        SafeStrCopy( m_ChatRoomHostUrl, groupListUrl, sizeof( m_ChatRoomHostUrl ) );
-    }
-}
-
-//============================================================================
-void VxConnectIdent::setGroupHostUrl( const char * groupHostUrl )
-{
-    if( !groupHostUrl )
-    {
-        m_GroupHostUrl[ 0 ] = 0;
-    }
-    else
-    {
-        SafeStrCopy( m_GroupHostUrl, groupHostUrl, sizeof( m_GroupHostUrl ) );
-    }
-}
-
-//============================================================================
-void VxConnectIdent::setRandomConnectUrl( const char * randomConnecttUrl )
-{
-    if( !randomConnecttUrl )
-    {
-        m_RandomConnectUrl[ 0 ] = 0;
-    }
-    else
-    {
-        SafeStrCopy( m_RandomConnectUrl, randomConnecttUrl, sizeof( m_RandomConnectUrl ) );
     }
 }
 

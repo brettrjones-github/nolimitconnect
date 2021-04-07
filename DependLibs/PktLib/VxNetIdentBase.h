@@ -22,16 +22,15 @@
 
 //! implements minimum to uniquely identify user as individual on the network
 //! size
-//!   512 bytes VxConnectInfo
+//!   368 bytes VxConnectInfo
 // +    1 byte  VxOnlineStatusFlags
-//	= 513 bytes inherited
 // +    1 byte  m_u8ResBase
 // +    1 byte  m_u8OfferCnt
 // +    1 byte  m_u8ReplyCnt
 // +    4 bytes m_u32TruthCnt;		
 // +    4 bytes m_u32DareCnt;					
 // +    4 bytes m_u32RejectedCnt;
-// =  528 bytes
+// =  384 bytes
 class VxNetIdentBase : public VxConnectInfo, public VxOnlineStatusFlags
 {
 public:

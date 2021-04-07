@@ -49,10 +49,10 @@ P2PSession * PluginTruthOrDare::createP2PSession( VxSktBase * sktBase, VxNetIden
 
 //============================================================================
 bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		
-												int			pvUserData,
+												int			    pvUserData,
 												const char *	pOfferMsg,		
 												const char *	pFileName,
-												uint8_t *			fileHashId,
+												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	
 {
 	bool result = false;

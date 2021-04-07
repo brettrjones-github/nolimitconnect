@@ -140,12 +140,13 @@ public:
 // +   1 bytes m_u8Age
 // +   1 bytes m_u8Gender
 // +   1 bytes reserved
-// +  80 bytes guids (5x16)
-// = 154 bytes
-// + 256  urls (4x64)
-// = 410 bytes
+// +   8 bytes reserved
+// =  82 bytes
+// +  64 bytes (4x16 host guids)
+// + 120 bytes (5x24 thumb guids and modified times)
+// = 266 bytes
 // +  86 bytes VxConnectBaseInfo
-// = 496 bytes
+// = 352 bytes
 
 class VxConnectIdent : public VxConnectBaseInfo
 {
@@ -165,32 +166,6 @@ public:
 	void 						setOnlineDescription( const char * pUserDesc );
 	char *						getOnlineDescription( void )                        { return m_OnlineDesc; }
 
-    void 						setNetHostUrl( const char * netHostUrl );
-    char *						getNetHostUrl( void )                               { return m_NetHostUrl; }
-    void 						setChatRoomHostUrl( const char * groupListUrl );
-    char *						getChatRoomHostUrl( void )                          { return m_ChatRoomHostUrl; }
-    void 						setGroupHostUrl( const char * groupHostUrl );
-    char *						getGroupHostUrl( void )                             { return m_GroupHostUrl; }
-    void 						setRandomConnectUrl( const char * groupHostUrl );
-    char *						getRandomConnectUrl( void )                         { return m_RandomConnectUrl; }
-
-	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
-	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
-
-    /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
-    std::string	    			getIdentFolderName( void );
-
-    void                        setAvatarGuid( VxGUID& guid )           { m_AvatarGuid = guid;  }
-    VxGUID&                     getAvatarGuid( void )                   { return m_AvatarGuid; }
-    void                        setNetHostGuid( VxGUID& guid )          { m_NetHostGuid = guid; }
-    VxGUID&                     getNetHostGuid( void )                  { return m_NetHostGuid; }
-    void                        setChatRoomHostGuid( VxGUID& guid )     { m_ChatRoomHostGuid = guid; }
-    VxGUID&                     getChatRoomHostGuid( void )             { return m_ChatRoomHostGuid; }
-    void                        setGroupHostGuid( VxGUID& guid )        { m_GroupHostGuid = guid; }
-    VxGUID&                     getGroupHostGuid( void )                { return m_GroupHostGuid; }
-    void                        setRandomConnectGuid( VxGUID& guid )    { m_RandomConnectGuid = guid; }
-    VxGUID&                     getRandomConnectGuid( void )            { return m_RandomConnectGuid; }
-
     void						setPrimaryLanguage( uint16_t language ) { m_PrimaryLanguage = language; }
     uint16_t					getPrimaryLanguage( void )              { return m_PrimaryLanguage; }
 
@@ -203,6 +178,49 @@ public:
     void						setGender( uint8_t gender )             { m_u8Gender = gender; }
     uint8_t					    getGender( void )                       { return m_u8Gender; }
 
+	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
+	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
+
+    /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
+    std::string	    			getIdentFolderName( void );
+
+    void                        setAvatarGuid( VxGUID& guid, uint64_t timeModified )    { m_AvatarGuid = guid; m_AvatarModifiedTime = timeModified; }
+    VxGUID&                     getAvatarGuid( void )                                   { return m_AvatarGuid; }
+    uint64_t                    getAvatarModifiedTime( void )                           { return m_AvatarModifiedTime; }
+    bool                        isAvatarValid( void )                                   { return m_AvatarModifiedTime && m_AvatarGuid.isVxGUIDValid(); }
+
+    // if hosts a network
+    void                        setNetHostGuid( VxGUID& guid )                          { m_NetHostGuid = guid; }
+    VxGUID&                     getNetHostGuid( void )                                  { return m_NetHostGuid; }
+    void                        setNetHostThumb( VxGUID& guid, uint64_t timeModified )  { m_NetHostThumbGuid = guid; m_NetHostThumbModifiedTime = timeModified; }
+    VxGUID&                     getNetHostThumbGuid( void )                             { return m_NetHostThumbGuid; }
+    uint64_t                    getNetHostThumbModifiedTime( void )                     { return m_NetHostThumbModifiedTime; }
+    bool                        isNetHostThumbValid( void )                             { return m_NetHostThumbModifiedTime && m_NetHostThumbGuid.isVxGUIDValid(); }
+
+    // if hosts a chat room
+    void                        setChatRoomHostGuid( VxGUID& guid )                     { m_ChatRoomHostGuid = guid; }
+    VxGUID&                     getChatRoomHostGuid( void )                             { return m_ChatRoomHostGuid; }
+    void                        setChatRoomThumb( VxGUID& guid, uint64_t timeModified ) { m_ChatRoomThumbGuid = guid; m_ChatRoomThumbModifiedTime = timeModified; }
+    VxGUID&                     getChatRoomThumbGuid( void )                            { return m_ChatRoomThumbGuid; }
+    uint64_t                    getChatRoomThumbModifiedTime( void )                    { return m_ChatRoomThumbModifiedTime; }
+    bool                        isChatRoomThumbValid( void )                            { return m_ChatRoomThumbModifiedTime && m_ChatRoomThumbGuid.isVxGUIDValid(); }
+
+    // if hosts a group
+    void                        setGroupHostGuid( VxGUID& guid )                        { m_GroupHostGuid = guid; }
+    VxGUID&                     getGroupHostGuid( void )                                { return m_GroupHostGuid; }
+    void                        setGroupThumb( VxGUID& guid, uint64_t timeModified )    { m_GroupThumbGuid = guid; m_GroupThumbModifiedTime = timeModified; }
+    VxGUID&                     getGroupThumbGuid( void )                               { return m_GroupThumbGuid; }
+    uint64_t                    getGroupThumbModifiedTime( void )                       { return m_GroupThumbModifiedTime; }
+    bool                        isGroupThumbValid( void )                               { return m_GroupThumbModifiedTime && m_GroupThumbGuid.isVxGUIDValid(); }
+
+    // if hosts random connect
+    void                        setRandomConnectGuid( VxGUID& guid )                            { m_RandomConnectGuid = guid; }
+    VxGUID&                     getRandomConnectGuid( void )                                    { return m_RandomConnectGuid; }
+    void                        setRandomConnectThumb( VxGUID& guid, uint64_t timeModified )    { m_RandomConnectThumbGuid = guid; m_RandomConnectThumbModifiedTime = timeModified; }
+    VxGUID&                     getRandomConnectThumbGuid( void )                               { return m_RandomConnectThumbGuid; }
+    uint64_t                    getRandomdConnectThumbModifiedTime( void )                      { return m_RandomConnectThumbModifiedTime; }
+    bool                        isRandomConnectThumbValid( void )                               { return m_RandomConnectThumbModifiedTime && m_RandomConnectThumbGuid.isVxGUIDValid(); }
+
 	//=== vars ===//
 private:
 	char						m_OnlineName[ MAX_ONLINE_NAME_LEN ];	// users online name
@@ -213,23 +231,31 @@ private:
     uint8_t						m_u8Age{ 0 };
     uint8_t						m_u8Gender{ 0 };
 	uint8_t					    m_IdentRes1{ 0 };
-    VxGUID                      m_AvatarGuid;
+    int64_t	    				m_IdentRes2{ 0 };
 
     VxGUID                      m_NetHostGuid;
     VxGUID                      m_ChatRoomHostGuid;
     VxGUID                      m_GroupHostGuid;
     VxGUID                      m_RandomConnectGuid;
-    char						m_NetHostUrl[ MAX_NET_HOST_URL_LEN ];
-    char						m_ChatRoomHostUrl[ MAX_NET_HOST_URL_LEN ]; 
-    char						m_GroupHostUrl[ MAX_NET_HOST_URL_LEN ];
-    char						m_RandomConnectUrl[ MAX_NET_HOST_URL_LEN ];
+
+    VxGUID                      m_AvatarGuid;
+    uint64_t                    m_AvatarModifiedTime{ 0 };
+
+    VxGUID                      m_NetHostThumbGuid;
+    uint64_t                    m_NetHostThumbModifiedTime{ 0 };
+    VxGUID                      m_ChatRoomThumbGuid;
+    uint64_t                    m_ChatRoomThumbModifiedTime{ 0 };
+    VxGUID                      m_GroupThumbGuid;
+    uint64_t                    m_GroupThumbModifiedTime{ 0 };
+    VxGUID                      m_RandomConnectThumbGuid;
+    uint64_t                    m_RandomConnectThumbModifiedTime{ 0 };
 };
 
 //     8 bytes m_s64TimeTcpLastContactMs
 // +   8 bytes last connect attempt
 // =  16 bytes total
-// + 496 bytes VxConnectIdent
-// = 512 bytes total
+// + 352 bytes VxConnectIdent
+// = 368 bytes total
 class VxConnectInfo : public VxConnectIdent
 {
 public:
