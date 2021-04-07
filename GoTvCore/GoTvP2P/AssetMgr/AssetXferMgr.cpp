@@ -67,12 +67,11 @@ namespace
 
 
 //============================================================================
-AssetXferMgr::AssetXferMgr( PluginBaseMultimedia&	plugin,
-							PluginSessionMgr&		pluginSessionMgr )
-: m_Plugin( plugin )
+AssetXferMgr::AssetXferMgr( P2PEngine& engine, PluginBaseMultimedia& plugin, PluginSessionMgr& pluginSessionMgr )
+: m_Engine( engine )
+, m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )
-, m_PluginMgr( plugin.getPluginMgr() )
-, m_Engine( plugin.getEngine() )
+, m_PluginMgr( engine.getPluginMgr() )
 , m_AssetMgr( m_Engine.getAssetMgr() )
 {
 }

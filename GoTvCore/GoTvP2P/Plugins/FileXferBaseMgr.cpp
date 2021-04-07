@@ -31,15 +31,10 @@
 #include <string.h>
 
 //============================================================================
-FileXferBaseMgr::FileXferBaseMgr( PluginBase& plugin )
-: m_Plugin( plugin )
-, m_PluginMgr( plugin.getPluginMgr() )
-, m_Engine( plugin.getEngine() )
-{
-}
-
-//============================================================================
-FileXferBaseMgr::~FileXferBaseMgr()
+FileXferBaseMgr::FileXferBaseMgr( P2PEngine& engine, PluginBase& plugin )
+: m_Engine( engine )
+, m_Plugin( plugin )
+, m_PluginMgr( engine.getPluginMgr() )
 {
 }
 

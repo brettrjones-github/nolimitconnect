@@ -25,7 +25,7 @@
 class PluginSessionMgr : public SessionMgrBase
 {
 public:
-	PluginSessionMgr( PluginBase& plugin, PluginMgr& pluginMgr );
+	PluginSessionMgr( P2PEngine& engine, PluginBase& plugin, PluginMgr& pluginMgr );
 	virtual ~PluginSessionMgr();
 
 	std::map<VxGUID, PluginSessionBase *>&	getSessions( void )			{ return m_aoSessions; }

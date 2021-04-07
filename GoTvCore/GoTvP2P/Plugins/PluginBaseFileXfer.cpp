@@ -29,8 +29,8 @@
 //============================================================================
 PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBase( engine, pluginMgr, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr )
-, m_FileXferMgr( *this, m_PluginSessionMgr )
+, m_PluginSessionMgr( engine, *this, pluginMgr )
+, m_FileXferMgr( engine, *this, m_PluginSessionMgr )
 {
 }
 

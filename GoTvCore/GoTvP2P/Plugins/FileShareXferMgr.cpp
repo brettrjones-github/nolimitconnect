@@ -42,10 +42,11 @@
 #include <stdio.h>
 
 //============================================================================
-FileShareXferMgr::FileShareXferMgr( PluginBase&			plugin, 
+FileShareXferMgr::FileShareXferMgr( P2PEngine& engine, 
+                                    PluginBase&			plugin, 
 									SharedFilesMgr&		sharedFilesMgr,
 									FileLibraryMgr&		fileLibraryMgr )
-: FileXferBaseMgr( plugin )
+: FileXferBaseMgr( engine, plugin )
 , m_SharedFilesMgr( sharedFilesMgr )
 , m_FileLibraryMgr( fileLibraryMgr )
 , m_bIsInSession(true)

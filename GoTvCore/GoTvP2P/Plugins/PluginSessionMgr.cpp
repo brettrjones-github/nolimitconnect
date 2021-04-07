@@ -31,8 +31,8 @@
 //#define DEBUG_AUTOPLUGIN_LOCK 1
 
 //============================================================================ 
-PluginSessionMgr::PluginSessionMgr( PluginBase& plugin, PluginMgr& pluginMgr )
-: SessionMgrBase( plugin, pluginMgr )
+PluginSessionMgr::PluginSessionMgr( P2PEngine& engine, PluginBase& plugin, PluginMgr& pluginMgr )
+: SessionMgrBase( engine, plugin, pluginMgr )
 {
 }
 

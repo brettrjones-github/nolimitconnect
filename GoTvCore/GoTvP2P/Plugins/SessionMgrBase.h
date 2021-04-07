@@ -16,6 +16,7 @@
 
 #include <CoreLib/VxMutex.h>
 
+class P2PEngine;
 class PluginBase;
 class PluginMgr;
 class IToGui;
@@ -33,7 +34,7 @@ public:
 		VxMutex&				m_SessionMgrMutex;
 	};
 
-	SessionMgrBase( PluginBase& plugin, PluginMgr& pluginMgr );
+	SessionMgrBase( P2PEngine& engine, PluginBase& plugin, PluginMgr& pluginMgr );
 	virtual ~SessionMgrBase() = default;
 
 	PluginBase&					getPlugin( void )							{ return m_Plugin; }
@@ -50,6 +51,7 @@ public:
 
 protected:
 	//=== vars ===//
+    P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;
 	PluginMgr&					m_PluginMgr;
 	

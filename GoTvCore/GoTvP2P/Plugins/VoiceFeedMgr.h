@@ -19,6 +19,7 @@
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxGUIDList.h>
 
+class P2PEngine;
 class PluginBase;
 class PluginMgr;
 class PluginSessionMgr;
@@ -30,7 +31,7 @@ class PktVoiceReq;
 class VoiceFeedMgr
 {
 public:
-	VoiceFeedMgr( PluginBase& plugin, PluginSessionMgr& sessionMgr );
+	VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 
 	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
 	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
@@ -44,6 +45,7 @@ public:
 protected:
 	void						enableAudioCapture( bool enable, VxNetIdent * netIdent );
 
+    P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;
 	PluginMgr&					m_PluginMgr;
 	PluginSessionMgr&			m_SessionMgr;

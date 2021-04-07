@@ -31,14 +31,9 @@
 #include <string.h>
 
 //============================================================================
-FileXferMgr::FileXferMgr( PluginBase& plugin, PluginSessionMgr& sessionMgr )
-: FileXferBaseMgr( plugin )
+FileXferMgr::FileXferMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr )
+: FileXferBaseMgr( engine, plugin )
 , m_PluginSessionMgr( sessionMgr )
-{
-}
-
-//============================================================================
-FileXferMgr::~FileXferMgr()
 {
 }
 

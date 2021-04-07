@@ -23,13 +23,13 @@ class PluginVideoPhone : public PluginBase
 {
 public:
 	PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginVideoPhone();
+	virtual ~PluginVideoPhone() = default;
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				
 														int				pvUserData,
 														const char *	pOfferMsg,				
 														const char *	pFileName = NULL,
-														uint8_t *			fileHashId = 0,
+														uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
 
 	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,

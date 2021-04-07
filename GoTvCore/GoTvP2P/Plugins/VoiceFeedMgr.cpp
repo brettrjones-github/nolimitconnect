@@ -33,9 +33,10 @@
 //#define DEBUG_AUTOPLUGIN_LOCK 1
 
 //============================================================================
-VoiceFeedMgr::VoiceFeedMgr( PluginBase& plugin, PluginSessionMgr& sessionMgr )
-: m_Plugin( plugin )
-, m_PluginMgr( plugin.getPluginMgr() )
+VoiceFeedMgr::VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr )
+: m_Engine( engine )
+, m_Plugin( plugin )
+, m_PluginMgr( engine.getPluginMgr() )
 , m_SessionMgr( sessionMgr )
 , m_Enabled( false )
 , m_CamServerEnabled( false )

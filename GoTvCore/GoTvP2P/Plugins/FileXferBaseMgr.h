@@ -29,9 +29,8 @@ class VxNetIdent;
 class FileXferBaseMgr
 {
 public:
-	FileXferBaseMgr( PluginBase& plugin );
-	virtual ~FileXferBaseMgr();
-
+	FileXferBaseMgr( P2PEngine& engine, PluginBase& plugin );
+	virtual ~FileXferBaseMgr() = default;
 
 protected:
 	EXferError					setupFileDownload( VxFileXferInfo& xferInfo );
@@ -39,8 +38,7 @@ protected:
 	EXferError					sendNextFileChunk( VxFileXferInfo& xxferInfo, VxNetIdent * netIdent, VxSktBase * skt );
 
 	//=== vars ====//
+    P2PEngine&					m_Engine;	
 	PluginBase&					m_Plugin;				
 	PluginMgr&					m_PluginMgr;
-	P2PEngine&					m_Engine;					
-	
 };

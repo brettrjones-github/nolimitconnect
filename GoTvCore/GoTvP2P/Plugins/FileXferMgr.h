@@ -29,8 +29,8 @@ class FileXferPluginSession;
 class FileXferMgr : public FileXferBaseMgr
 {
 public:
-	FileXferMgr( PluginBase& plugin, PluginSessionMgr& sessionMgr );
-	virtual ~FileXferMgr();
+	FileXferMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
+	virtual ~FileXferMgr() = default;
 
 	virtual	void				fromGuiStartPluginSession( bool pluginIsLocked, PluginSessionBase * poOffer );
 

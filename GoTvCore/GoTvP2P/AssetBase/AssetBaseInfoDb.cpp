@@ -19,8 +19,6 @@
 #include "AssetBaseXferMgr.h"
 #include "AssetBaseInfo.h"
 
-//#include <time.h>
-
 namespace
 {
 	std::string 		TABLE_ASSETS	 				= "tblAssets";

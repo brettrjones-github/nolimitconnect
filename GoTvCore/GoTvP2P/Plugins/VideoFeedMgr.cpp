@@ -37,9 +37,10 @@ namespace
 }
 
 //============================================================================
-VideoFeedMgr::VideoFeedMgr( PluginBase& plugin, PluginSessionMgr& sessionMgr )
-: m_Plugin( plugin )
-, m_PluginMgr( plugin.getPluginMgr() )
+VideoFeedMgr::VideoFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr )
+: m_Engine( engine )
+, m_Plugin( plugin )
+, m_PluginMgr( engine.getPluginMgr() )
 , m_SessionMgr( sessionMgr )
 , m_CamServerEnabled( false )
 , m_VideoPktsRequested( false )

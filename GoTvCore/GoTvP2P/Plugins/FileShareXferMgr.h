@@ -52,9 +52,7 @@ public:
 	typedef std::map<VxGUID, FileRxSession *>::iterator FileRxIter;
 	typedef std::vector<FileTxSession *>::iterator FileTxIter;
 
-	FileShareXferMgr(	PluginBase&		plugin, 
-						SharedFilesMgr& sharedFilesMgr,
-						FileLibraryMgr&	fileLibraryMgr );
+	FileShareXferMgr( P2PEngine& engine, PluginBase& plugin, SharedFilesMgr& sharedFilesMgr, FileLibraryMgr& fileLibraryMgr );
 	virtual ~FileShareXferMgr();
 
 	void						fileAboutToBeDeleted( std::string& fileName );

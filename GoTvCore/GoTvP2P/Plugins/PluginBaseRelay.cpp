@@ -36,7 +36,7 @@
 //============================================================================
 PluginBaseRelay::PluginBaseRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseService( engine, pluginMgr, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr )
+, m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_TestTimer()
 {
 }

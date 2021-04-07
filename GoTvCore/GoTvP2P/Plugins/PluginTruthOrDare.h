@@ -25,7 +25,7 @@ class PluginTruthOrDare : public PluginBase
 {
 public:
 	PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginTruthOrDare();
+	virtual ~PluginTruthOrDare() = default;
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				
 														int			    pvUserData,

@@ -68,13 +68,12 @@ namespace
 
 
 //============================================================================
-AssetBaseXferMgr::AssetBaseXferMgr( PluginMessenger&		plugin, 
-							        PluginSessionMgr&		pluginSessionMgr )
-: m_Plugin( plugin )
-, m_PluginSessionMgr( pluginSessionMgr )
+AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr )
+: m_Engine( engine )
+, m_AssetBaseMgr( engine.getAssetMgr() )
 , m_PluginMgr( plugin.getPluginMgr() )
-, m_Engine( plugin.getEngine() )
-, m_AssetBaseMgr( m_Engine.getAssetMgr() )
+, m_Plugin( plugin )
+, m_PluginSessionMgr( pluginSessionMgr )
 {
 }
 

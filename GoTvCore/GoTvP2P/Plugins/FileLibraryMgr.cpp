@@ -66,9 +66,9 @@ namespace
 }
 
 //============================================================================
-FileLibraryMgr::FileLibraryMgr( PluginBase& plugin, SharedFilesMgr& sharedFilesMgr )
-: m_Plugin( plugin )
-, m_Engine( plugin.getEngine() )
+FileLibraryMgr::FileLibraryMgr( P2PEngine& engine, PluginBase& plugin, SharedFilesMgr& sharedFilesMgr )
+: m_Engine( engine )
+, m_Plugin( plugin )
 , m_SharedFilesMgr( sharedFilesMgr )
 , m_s64TotalByteCnt(0)
 , m_u16FileTypes(0)

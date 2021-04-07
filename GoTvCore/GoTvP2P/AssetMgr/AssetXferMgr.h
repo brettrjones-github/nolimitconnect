@@ -49,7 +49,7 @@ public:
 	typedef std::map<VxGUID, AssetRxSession *>::iterator AssetRxIter;
 	typedef std::vector<AssetTxSession *>::iterator AssetTxIter;
 
-	AssetXferMgr( PluginBaseMultimedia& plugin, PluginSessionMgr&	pluginSessionMgr );
+	AssetXferMgr( P2PEngine& engine, PluginBaseMultimedia& plugin, PluginSessionMgr&	pluginSessionMgr );
 	virtual ~AssetXferMgr();
 
 	VxMutex&					getAssetQueMutex( void )					{ return m_AssetSendQueMutex; }
@@ -122,10 +122,10 @@ protected:
 	std::vector<AssetTxSession *>		m_TxSessions;
 	VxMutex						m_TxSessionsMutex;
 
+    P2PEngine&                  m_Engine;
     PluginBaseMultimedia&		m_Plugin;
 	PluginSessionMgr&			m_PluginSessionMgr;
-	PluginMgr&					m_PluginMgr;
-	P2PEngine&					m_Engine;					
+	PluginMgr&					m_PluginMgr;				
 	
 	AssetMgr&					m_AssetMgr;
 	AssetXferDb					m_AssetXferDb;

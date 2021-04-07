@@ -19,8 +19,9 @@
 #include <GoTvInterface/IToGui.h>
 
 
-SessionMgrBase::SessionMgrBase( PluginBase& plugin, PluginMgr& pluginMgr )
-: m_Plugin( plugin )
+SessionMgrBase::SessionMgrBase( P2PEngine& engine, PluginBase& plugin, PluginMgr& pluginMgr )
+: m_Engine( engine )
+, m_Plugin( plugin )
 , m_PluginMgr( pluginMgr )
 {
 }

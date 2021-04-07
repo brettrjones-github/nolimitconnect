@@ -32,7 +32,7 @@ class VxSha1Hash;
 class FileLibraryMgr : public VxThread
 {
 public:
-	FileLibraryMgr( PluginBase& plugin, SharedFilesMgr& sharedFilesMgr );
+	FileLibraryMgr( P2PEngine& engine, PluginBase& plugin, SharedFilesMgr& sharedFilesMgr );
 	virtual ~FileLibraryMgr();
 
 	void						fileLibraryShutdown( void );
@@ -71,13 +71,13 @@ public:
 
 private:
 	//=== vars ===//
+    P2PEngine&					m_Engine;
 	PluginBase&					m_Plugin;
-	P2PEngine&					m_Engine;
-	
+
 	SharedFilesMgr&				m_SharedFilesMgr;
 
-	int64_t							m_s64TotalByteCnt;
-	uint16_t							m_u16FileTypes;
+	int64_t						m_s64TotalByteCnt;
+	uint16_t					m_u16FileTypes;
 	VxMutex						m_FilesListMutex;
 
 	std::vector<LibraryFileInfo*>m_LibraryFileList;

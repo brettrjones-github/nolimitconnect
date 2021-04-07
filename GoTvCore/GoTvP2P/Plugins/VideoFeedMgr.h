@@ -19,6 +19,7 @@
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxGUIDList.h>
 
+class P2PEngine;
 class PluginBase;
 class PluginMgr;
 class PluginSessionMgr;
@@ -29,7 +30,7 @@ class VxPktHdr;
 class VideoFeedMgr
 {
 public:
-	VideoFeedMgr( PluginBase& plugin, PluginSessionMgr& sessionMgr );
+	VideoFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 	virtual ~VideoFeedMgr();
 
 	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
@@ -48,6 +49,7 @@ public:
 protected:
 	void						enableVideoCapture( bool bStart, VxNetIdent * netIdent );
 
+    P2PEngine&                  m_Engine;
 	PluginBase&					m_Plugin;
 	PluginMgr&					m_PluginMgr;
 	PluginSessionMgr&			m_SessionMgr;

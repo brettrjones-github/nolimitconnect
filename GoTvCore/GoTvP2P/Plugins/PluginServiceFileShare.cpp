@@ -37,10 +37,10 @@
 //============================================================================
 PluginServiceFileShare::PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBase( engine, pluginMgr, myIdent ) 
-, m_PluginSessionMgr( *this, pluginMgr)
-, m_SharedFilesMgr( *this)
-, m_FileLibraryMgr( *this, m_SharedFilesMgr )
-, m_FileShareXferMgr( *this, m_SharedFilesMgr, m_FileLibraryMgr )
+, m_PluginSessionMgr( engine, *this, pluginMgr)
+, m_SharedFilesMgr( engine, *this)
+, m_FileLibraryMgr( engine, *this, m_SharedFilesMgr )
+, m_FileShareXferMgr( engine, *this, m_SharedFilesMgr, m_FileLibraryMgr )
 , m_FileShredder( GetVxFileShredder() )
 {
 	setPluginType( ePluginTypeFileServer );

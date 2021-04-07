@@ -32,7 +32,7 @@ class AssetMgr;
 class SharedFilesMgr
 {
 public:
-	SharedFilesMgr( PluginServiceFileShare& plugin );
+	SharedFilesMgr( P2PEngine& engine, PluginServiceFileShare& plugin );
 	virtual ~SharedFilesMgr();
 
 	void						lockSharedFiles( void )				{ m_FilesListMutex.lock(); }
@@ -70,12 +70,11 @@ public:
 
 private:
 	//=== vars ===//
-	PluginServiceFileShare&			m_Plugin;
-	P2PEngine&					m_Engine;
-	
+    P2PEngine&					m_Engine;
+	PluginServiceFileShare&		m_Plugin;
 
-	int64_t							m_s64TotalByteCnt;
-	uint16_t							m_u16FileTypes;
+	int64_t						m_s64TotalByteCnt;
+	uint16_t					m_u16FileTypes;
 	VxMutex						m_FilesListMutex;
 
 	std::vector<SharedFileInfo*>m_SharedList;

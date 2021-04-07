@@ -38,9 +38,9 @@
 //============================================================================
 PluginServiceWebCam::PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBase( engine, pluginMgr, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr )
-, m_VoiceFeedMgr( *this, m_PluginSessionMgr )
-, m_VideoFeedMgr( *this, m_PluginSessionMgr )
+, m_PluginSessionMgr( engine, *this, pluginMgr )
+, m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
+, m_VideoFeedMgr( engine, *this, m_PluginSessionMgr )
 {
 	m_ePluginType = ePluginTypeCamServer;
 }

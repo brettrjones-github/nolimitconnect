@@ -68,9 +68,9 @@ namespace
 }
 
 //============================================================================
-SharedFilesMgr::SharedFilesMgr( PluginServiceFileShare& plugin )
-: m_Plugin( plugin )
-, m_Engine( plugin.getEngine() )
+SharedFilesMgr::SharedFilesMgr( P2PEngine& engine, PluginServiceFileShare& plugin )
+: m_Engine( engine )
+, m_Plugin( plugin )
 , m_s64TotalByteCnt(0)
 , m_u16FileTypes(0)
 {
