@@ -46,7 +46,7 @@ public:
 
     bool                        setIsOnline( bool isOnline )
     {
-        if( m_Userdent && m_Userdent->getIsOnline() != isOnline )
+        if( m_Userdent && m_Userdent->isOnline() != isOnline )
         {
             m_Userdent->setOnlineStatus( isOnline );
             return true;

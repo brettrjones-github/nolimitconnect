@@ -412,6 +412,8 @@ public:
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
 
     virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) override;
+    virtual void				toGuiThumbUpdated( ThumbInfo * thumb ) override;
+    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) override;
 
     //============================================================================
     //=== from gui ===//

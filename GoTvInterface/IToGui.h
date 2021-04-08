@@ -196,7 +196,9 @@ public:
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) = 0;
 
-    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) = 0;
+    virtual void				toGuiThumbAdded( ThumbInfo * thumbInfo ) = 0;
+    virtual void				toGuiThumbUpdated( ThumbInfo * thumbInfo ) = 0;
+    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
 	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 

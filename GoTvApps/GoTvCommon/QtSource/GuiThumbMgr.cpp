@@ -1,0 +1,172 @@
+//============================================================================
+// Copyright (C) 2021 Brett R. Jones
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.nolimitconnect.com
+//============================================================================
+
+#include "GuiThumbMgr.h"
+#include "GuiThumb.h"
+#include "AppCommon.h"
+
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
+
+//============================================================================
+GuiThumbMgr::GuiThumbMgr( AppCommon& app )
+    : QObject( &app )
+    , m_MyApp( app )
+{
+}
+
+//============================================================================
+void GuiThumbMgr::onAppCommonCreated( void )
+{
+    connect( this, SIGNAL( signalInternalThumbAdded( ThumbInfo * ) ),	    this, SLOT( slotInternalThumbAdded( ThumbInfo * ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalThumbUpdated( ThumbInfo *) ),      this, SLOT( slotInternalThumbUpdated( ThumbInfo * ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalThumbRemoved(VxGUID) ),	        this, SLOT( slotInternalThumbRemoved(VxGUID) ), Qt::QueuedConnection );
+
+    m_MyApp.wantToGuiThumbUpdateCallbacks( this, true );
+}
+
+//============================================================================
+void GuiThumbMgr::toGuiThumbAdded( ThumbInfo *  thumb )
+{
+    emit signalInternalThumbAdded( thumb );
+}
+
+//============================================================================
+void GuiThumbMgr::toGuiThumbUpdated( ThumbInfo * thumb )
+{
+    emit signalInternalThumbUpdated( thumb );
+}
+
+//============================================================================
+void GuiThumbMgr::toGuiThumbRemoved( VxGUID& thumbId )
+{
+    emit signalInternalThumbRemoved( thumbId );
+}
+
+//============================================================================
+void GuiThumbMgr::slotInternalThumbAdded( ThumbInfo* thumbInfo )
+{
+    updateThumb( thumbInfo );
+}
+
+//============================================================================
+void GuiThumbMgr::slotInternalThumbUpdated( ThumbInfo* thumbInfo )
+{
+    updateThumb( thumbInfo );
+}
+
+//============================================================================
+void GuiThumbMgr::slotInternalThumbRemoved( VxGUID thumbId )
+{
+    m_ThumbListMutex.lock();
+    GuiThumb* guiThumb = findThumb( thumbId );
+    m_ThumbListMutex.unlock();
+    if( guiThumb )
+    {
+        onThumbRemoved( thumbId );
+    }
+
+    removeThumb( thumbId );
+}
+
+//============================================================================
+GuiThumb* GuiThumbMgr::findThumb( VxGUID& thumbId )
+{
+    GuiThumb* user = nullptr;
+    auto iter = m_ThumbList.find( thumbId );
+    if( iter != m_ThumbList.end() )
+    {
+        user = iter->second;
+    }
+
+    return user;
+}
+
+//============================================================================
+void GuiThumbMgr::removeThumb( VxGUID& thumbId )
+{
+    m_ThumbListMutex.lock();
+    auto iter = m_ThumbList.find( thumbId );
+    if( iter != m_ThumbList.end() )
+    {
+        iter->second->deleteLater();
+        m_ThumbList.erase( iter );
+    }
+
+    m_ThumbListMutex.unlock();
+}
+
+//============================================================================
+GuiThumb* GuiThumbMgr::getThumb( VxGUID& thumbId )
+{
+    m_ThumbListMutex.lock();
+    GuiThumb* guiThumb = findThumb( thumbId );
+    m_ThumbListMutex.unlock();
+    return guiThumb;
+}
+
+//============================================================================
+GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo * thumbInfo )
+{
+    if( !thumbInfo )
+    {
+        LogMsg( LOG_ERROR, "GuiThumbMgr::updateThumbOnline invalid param" );
+        return nullptr;
+    }
+
+    m_ThumbListMutex.lock();
+    GuiThumb* guiThumb = findThumb( thumbInfo->getCreatorId() );
+    m_ThumbListMutex.unlock();
+    if( guiThumb )
+    {
+        onThumbUpdated( guiThumb );
+    }
+    else
+    {
+        guiThumb = new GuiThumb( m_MyApp );
+        guiThumb->setThumbInfo( thumbInfo );
+        m_ThumbListMutex.lock();
+        m_ThumbList[guiThumb->getCreatorId()] = guiThumb;
+        m_ThumbListMutex.unlock();
+        onThumbAdded( guiThumb );
+    }
+
+    return guiThumb;
+}
+
+//============================================================================
+void GuiThumbMgr::onThumbAdded( GuiThumb* user )
+{
+    if( isMessengerReady() )
+    {
+        emit signalThumbAdded( user );
+    }
+}
+
+//============================================================================
+void GuiThumbMgr::onThumbUpdated( GuiThumb* user )
+{
+    if( isMessengerReady() )
+    {
+        emit signalThumbUpdated( user );
+    }
+}
+
+//============================================================================
+void GuiThumbMgr::onThumbRemoved( VxGUID& onlineId )
+{
+    if( isMessengerReady() )
+    {
+        emit signalThumbRemoved( onlineId );
+    }
+}

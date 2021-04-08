@@ -322,7 +322,7 @@ EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType 
 			|| ( ePluginTypeStoryboard == ePluginType )
 			|| ( ePluginTypeRelay == ePluginType ) )
 		{
-			if( false == getIsOnline() )
+			if( false == isOnline() )
 			{
 				accessState = ePluginAccessRequiresOnline;
 			}
@@ -334,7 +334,7 @@ EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType 
 		}
 		else if( ePluginTypeMessenger != ePluginType )
 		{
-			if( false == getIsOnline() )
+			if( false == isOnline() )
 			{
 				accessState = ePluginAccessRequiresOnline;
 			}
@@ -393,7 +393,7 @@ EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 		|| ( ePluginTypeStoryboard	== ePluginType )
 		|| ( ePluginTypeRelay		== ePluginType ) )
 	{
-		if( false == getIsOnline() )
+		if( false == isOnline() )
 		{
 			accessState = ePluginAccessRequiresOnline;
 		}
@@ -405,7 +405,7 @@ EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 	}
 	else if( ePluginTypeMessenger != ePluginType )
 	{
-		if( false == getIsOnline() )
+		if( false == isOnline() )
 		{
 			accessState = ePluginAccessRequiresOnline;
 		}

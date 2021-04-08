@@ -61,7 +61,7 @@ std::string OfferSessionState::getOnlineName()
 //============================================================================
 bool OfferSessionState::isAvailableAndActiveOffer( void )
 {
-	if( false == getHisIdent()->getIsOnline() )
+	if( false == getHisIdent()->isOnline() )
 	{
 		return false;
 	}

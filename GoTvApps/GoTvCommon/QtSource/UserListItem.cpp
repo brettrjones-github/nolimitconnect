@@ -123,17 +123,17 @@ void UserListItem::updateWidgetFromInfo( void )
     QString strName = hostIdent->getOnlineName();
     strName += " - ";
     QString strDesc = hostIdent->getOnlineDescription();
+    if( hostIdent->isMyself() )
+    {
+        ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
+        ui.m_AvatarButton->setNotifyOnlineEnabled( true );
+    }
+    else
+    {
+        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
+        ui.m_AvatarButton->setNotifyOnlineEnabled( hostIdent->isOnline() );
+    }
 
-    // updateListEntryBackgroundColor( netIdent, item );
-
-    ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-    /*
-    QPalette pal = ui.m_FriendshipButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
-    ui.m_FriendshipButton->setAutoFillBackground(true);
-    ui.m_FriendshipButton->setPalette(pal);
-    ui.m_FriendshipButton->update();
-    */
     ui.TitlePart1->setText( strName );
     ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );

@@ -92,6 +92,8 @@ protected:
     UserListItem*               sessionToWidget( GuiUserSessionBase* hostSession );
     GuiUserSessionBase*			widgetToSession( UserListItem* hostItem );
 
+    virtual void                onListItemAdded( GuiUserSessionBase* userSession, UserListItem* userItem );
+
     virtual void                onUserListItemClicked( UserListItem* hostItem );
     virtual void                onAvatarButtonClicked( UserListItem* hostItem );
     virtual void                onFriendshipButtonClicked( UserListItem* hostItem );

@@ -228,6 +228,7 @@ UserListItem* UserListWidget::addOrUpdateUserSession( GuiUserSessionBase* userSe
         }
 
         setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
+        onListItemAdded( userSession, userItem );
     }
 
     return userItem;
@@ -490,4 +491,10 @@ void UserListWidget::removeUser( VxGUID& onlineId )
             delete userSession;
         }
     }
+}
+
+//============================================================================
+void UserListWidget::onListItemAdded( GuiUserSessionBase* userSession, UserListItem* userItem )
+{
+
 }

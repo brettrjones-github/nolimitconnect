@@ -536,7 +536,19 @@ void IGoTv::toGuiBlobSessionHistory( BlobInfo * hostListInfo )
 }
 
 //============================================================================
-void IGoTv::toGuiThumbAdded( ThumbInfo * hostListInfo )
+void IGoTv::toGuiThumbAdded( ThumbInfo * thumbInfo )
 {
-    getAppCommon().toGuiThumbAdded( hostListInfo );
+    getAppCommon().toGuiThumbAdded( thumbInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiThumbUpdated( ThumbInfo * thumbInfo )
+{
+    getAppCommon().toGuiThumbUpdated( thumbInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiThumbRemoved( VxGUID& thumbId )
+{
+    getAppCommon().toGuiThumbRemoved( thumbId );
 }

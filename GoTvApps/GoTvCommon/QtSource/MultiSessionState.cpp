@@ -162,7 +162,7 @@ void MultiSessionState::onSessionOfferButtonClicked()
 bool MultiSessionState::canSend( void )
 {
 	if( m_IsInChatSession
-		&& m_HisIdent->getIsOnline() )
+		&& m_HisIdent->isOnline() )
 	{
 		EPluginAccess accessState = ePluginAccessLocked; 
 		switch( m_eMSessionType )
@@ -216,7 +216,7 @@ std::string MultiSessionState::describeCantSendReason( void )
 	{
 		reasonStr += "Insufficient Permission";
 	}
-	else if( false == m_HisIdent->getIsOnline() )
+	else if( false == m_HisIdent->isOnline() )
 	{
 		reasonStr += m_HisIdent->getOnlineName();	
 		reasonStr += "Is Offline";							

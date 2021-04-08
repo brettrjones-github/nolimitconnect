@@ -188,6 +188,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserItem.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserSessionBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.h \
@@ -269,6 +271,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiOfferInterface.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateClient.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateInterface.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateClient.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.h \
@@ -497,6 +501,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserItem.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserSessionBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.cpp \
@@ -586,6 +592,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateClient.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.cpp \

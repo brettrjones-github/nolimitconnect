@@ -21,6 +21,7 @@
 #include "HomeWindow.h"
 #include "FriendList.h"
 #include "GuiUserMgr.h"
+#include "GuiThumbMgr.h"
 #include "MyIcons.h"
 #include "VxAppTheme.h"
 #include "VxAppStyle.h"
@@ -30,6 +31,7 @@
 #include "ToGuiFileXferClient.h"
 #include "ToGuiHardwareCtrlClient.h"
 #include "ToGuiUserUpdateClient.h"
+#include "ToGuiThumbUpdateClient.h"
 
 #include "GoTvInterface/IToGui.h"
 #include "GoTvInterface/IGoTvRender.h"
@@ -127,6 +129,7 @@ public:
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
+    GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
 
 	void						setCamCaptureRotation( uint32_t rot );
@@ -193,6 +196,7 @@ public:
 	void						wantToGuiHardwareCtrlCallbacks( ToGuiHardwareControlInterface *	callback, 
 																bool							wantCallback );
     void						wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callback, bool	wantCallback );
+    void						wantToGuiThumbUpdateCallbacks( ToGuiThumbUpdateInterface * callback, bool	wantCallback );
 
 	bool						getIsPluginVisible( EPluginType ePluginType );
 	void						setPluginVisible( EPluginType ePluginType, bool isVisible );
@@ -558,6 +562,8 @@ public:
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
 
     virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) override;
+    virtual void				toGuiThumbUpdated( ThumbInfo * assetInfo ) override;
+    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) override;
 
 	/// a module has changed state
 	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
@@ -647,13 +653,6 @@ protected slots:
 
 	void						slotToGuiInstMsg( GuiUser * netIdent, EPluginType ePluginType, QString pMsg );
 
-	//void						slotSearchButtonClick( void );
-	// void						slotFileMenuButtonClick( void );
-	//void						slotServerButtonClick( void );
-	//void						slotOptionsButtonClick( void );
-	//void						slotNotifyButtonClick( void );
-	// void						slotRefreshListButtonClick( void );
-
 	void						slotListViewTypeChanged( int viewSelectedIdx );
 
 	void						slotRelayHelpButtonClicked( void );
@@ -716,6 +715,10 @@ private:
     void						toGuiUserUpdateClientsUnlock( void );
     void						clearUserUpdateClientList( void );
 
+    void						toGuiThumbUpdateClientsLock( void );
+    void						toGuiThumbUpdateClientsUnlock( void );
+    void						clearThumbUpdateClientList( void );
+
 	//=== vars ===//
 	QApplication&				m_QApp;
 	EDefaultAppMode				m_AppDefaultMode;
@@ -727,6 +730,7 @@ private:
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
     GuiUserMgr					m_UserMgr;
+    GuiThumbMgr					m_ThumbMgr;
 
 	MyIcons					    m_MyIcons;
 	VxAppTheme					m_AppTheme;
@@ -782,6 +786,9 @@ private:
 
     VxMutex						m_ToGuiUserUpdateClientMutex;
     std::vector<ToGuiUserUpdateClient> m_ToGuiUserUpdateClientList;
+
+    VxMutex						m_ToGuiThumbUpdateClientMutex;
+    std::vector<ToGuiThumbUpdateClient> m_ToGuiThumbUpdateClientList;
 
 	bool						m_LibraryActivityActive = false;
 	bool						m_VidCaptureEnabled = false;

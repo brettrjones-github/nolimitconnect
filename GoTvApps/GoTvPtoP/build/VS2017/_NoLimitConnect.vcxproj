@@ -831,6 +831,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.cpp" />
@@ -975,6 +977,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp" />
@@ -2141,6 +2144,8 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h" />
@@ -2247,6 +2252,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareControlInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListItem.h" />

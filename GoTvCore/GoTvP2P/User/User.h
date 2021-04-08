@@ -34,7 +34,7 @@ public:
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
     void                        setIsOnline( bool isOnline )            { m_IsOnline = isOnline; }
-    bool                        getIsOnline( void )                     { return m_IsOnline; }
+    bool                        isOnline( void )                     { return m_IsOnline; }
 
 protected:
     VxNetIdent *                m_NetIdent{ nullptr };

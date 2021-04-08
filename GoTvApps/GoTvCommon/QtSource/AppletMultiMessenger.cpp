@@ -211,7 +211,7 @@ void AppletMultiMessenger::showReasonAccessNotAllowed( void )
 		return;
 	}
 
-	if( false == m_HisIdent->getIsOnline() )
+	if( false == m_HisIdent->isOnline() )
 	{
 		accessDesc +=   QObject::tr( " requires user be online " );
 		setStatusMsg( accessDesc );
@@ -254,7 +254,7 @@ bool AppletMultiMessenger::checkForSendAccess( bool sendOfferIfPossible )
         return false;
     }
 
-	if( m_HisIdent->getIsOnline() 
+	if( m_HisIdent->isOnline() 
 		&& m_HisIdent->isMyAccessAllowedFromHim( m_ePluginType ) )
 	{
 		canSend = true;

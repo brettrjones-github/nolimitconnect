@@ -37,7 +37,7 @@ MyIcons&  IdentWidget::getMyIcons( void )
 //============================================================================
 void IdentWidget::updateGuiFromData( GuiUser * netIdent )
 {
-	setOnlineState( netIdent->getIsOnline() );
+	setOnlineState( netIdent->isOnline() );
 	this->FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
 	this->FriendNameLabel->setText( netIdent->getOnlineName() );
 	this->DescTextLabel->setText( netIdent->getOnlineDescription() );

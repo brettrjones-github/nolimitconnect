@@ -82,6 +82,7 @@ public:
     virtual void				toGuiBlobSessionHistory( void * userData, BlobInfo * assetInfo ){};
 
     virtual void				toGuiThumbAdded( void * userData, ThumbInfo * assetInfo ){};
-
+    virtual void				toGuiThumbUpdated( void * userData, ThumbInfo * assetInfo ){};
+    virtual void				toGuiThumbRemoved( void * userData, VxGUID& thumbId ){};
 };
 

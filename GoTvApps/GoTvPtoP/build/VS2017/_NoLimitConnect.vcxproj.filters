@@ -136,6 +136,9 @@
     <Filter Include="GoTvCommon\Source Files\Render">
       <UniqueIdentifier>{8d81a947-e851-441e-a876-184d91ae5c38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\GuiThumb">
+      <UniqueIdentifier>{0d0a8382-0106-4939-8688-dd30b9b4e7e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -1070,6 +1073,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumb.cpp">
+      <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.cpp">
+      <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.cpp">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2035,6 +2047,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.h">
       <Filter>GoTvCommon\Source Files\GuiList</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.h">
+      <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -3077,6 +3092,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h">
       <Filter>GoTvCommon\Source Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h">
+      <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateInterface.h">
+      <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

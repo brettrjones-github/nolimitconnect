@@ -168,6 +168,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
 , m_UserMgr( *this )
+, m_ThumbMgr( *this )
 
 , m_MyIcons( *this )
 , m_AppTheme( *this )
@@ -1624,10 +1625,7 @@ void AppCommon::toGuiThumbAdded( ThumbInfo * assetInfo )
         return;
     }
 
-    if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiBlobAdded: toGuiActivityClientsLock\n" );
-    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
-
+    LogModule( eLogAssets, LOG_INFO, "toGuiThumbAdded: toGuiActivityClientsLock\n" );
     toGuiActivityClientsLock();
     std::vector<ToGuiActivityClient>::iterator iter;
     for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
@@ -1636,12 +1634,50 @@ void AppCommon::toGuiThumbAdded( ThumbInfo * assetInfo )
         client.m_Callback->toGuiThumbAdded( client.m_UserData, assetInfo );
     }
 
-    if( IsLogEnabled( eLogAssets ) )
-        LogMsg( LOG_INFO, "toGuiBlobAdded toGuiActivityClientsUnlock\n" );
-
+    LogModule( eLogAssets, LOG_INFO, "toGuiThumbAdded toGuiActivityClientsUnlock\n" );
     toGuiActivityClientsUnlock();
+}
 
-    //emit signalAssetAdded( assetInfo );
+//============================================================================
+void AppCommon::toGuiThumbUpdated( ThumbInfo * assetInfo )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    LogModule( eLogAssets, LOG_INFO, "toGuiThumbUpdated: toGuiActivityClientsLock\n" );
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiThumbUpdated( client.m_UserData, assetInfo );
+    }
+
+    LogModule( eLogAssets, LOG_INFO, "toGuiThumbUpdated toGuiActivityClientsUnlock\n" );
+    toGuiActivityClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::toGuiThumbRemoved( VxGUID& thumbId )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    LogModule( eLogAssets, LOG_INFO, "toGuiThumbRemoved: toGuiActivityClientsLock\n" );
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiThumbRemoved( client.m_UserData, thumbId );
+    }
+
+    LogModule( eLogAssets, LOG_INFO, "toGuiThumbRemoved toGuiActivityClientsUnlock\n" );
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================
@@ -2048,11 +2084,92 @@ void AppCommon::wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callbac
 //============================================================================
 void AppCommon::clearUserUpdateClientList( void )
 {
-    if( m_ToGuiHardwareCtrlList.size() )
+    if( m_ToGuiUserUpdateClientList.size() )
     {
         toGuiUserUpdateClientsLock();
         m_ToGuiUserUpdateClientList.clear();
         toGuiUserUpdateClientsUnlock();
+    }
+}
+
+//============================================================================
+void AppCommon::toGuiThumbUpdateClientsLock( void )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    m_ToGuiThumbUpdateClientMutex.lock();
+}
+
+//============================================================================
+void AppCommon::toGuiThumbUpdateClientsUnlock( void )
+{
+    m_ToGuiThumbUpdateClientMutex.unlock();
+}
+
+//============================================================================
+void AppCommon::wantToGuiThumbUpdateCallbacks( ToGuiThumbUpdateInterface * callback, bool wantCallback )
+{
+    static bool userCallbackShutdownComplete = false;
+    if( VxIsAppShuttingDown() )
+    {
+        if( userCallbackShutdownComplete )
+        {
+            return;
+        }
+
+        userCallbackShutdownComplete = true;
+        clearThumbUpdateClientList();
+        return;
+    }
+
+    toGuiThumbUpdateClientsLock();
+
+    if( wantCallback )
+    {
+        for( auto iter = m_ToGuiThumbUpdateClientList.begin(); iter != m_ToGuiThumbUpdateClientList.end(); ++iter )
+        {
+            ToGuiThumbUpdateClient& client = *iter;
+            if( client.m_Callback == callback )
+            {
+                LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiThumbUpdateCallbacks because already in list" );
+                toGuiThumbUpdateClientsUnlock();
+                return;
+            }
+        }
+
+        ToGuiThumbUpdateClient newClient( callback );
+        m_ToGuiThumbUpdateClientList.push_back( newClient );
+        toGuiThumbUpdateClientsUnlock();
+        return;
+    }
+
+    for( auto iter = m_ToGuiThumbUpdateClientList.begin(); iter != m_ToGuiThumbUpdateClientList.end(); ++iter )
+    {
+        ToGuiThumbUpdateClient& client = *iter;
+        if( client.m_Callback == callback )
+        {
+            m_ToGuiThumbUpdateClientList.erase( iter );
+            toGuiThumbUpdateClientsUnlock();
+            return;
+        }
+    }
+
+    LogMsg( LOG_INFO, "WARNING. ToGuiThumbUpdateClient remove not found in list" );
+    toGuiThumbUpdateClientsUnlock();
+    return;
+}
+
+//============================================================================
+void AppCommon::clearThumbUpdateClientList( void )
+{
+    if( m_ToGuiThumbUpdateClientList.size() )
+    {
+        toGuiThumbUpdateClientsLock();
+        m_ToGuiThumbUpdateClientList.clear();
+        toGuiThumbUpdateClientsUnlock();
     }
 }
 

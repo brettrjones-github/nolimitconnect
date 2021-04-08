@@ -41,7 +41,7 @@ public:
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
     void                        setOnlineStatus( bool isOnline );
-    bool                        getIsOnline( void )                     { return m_IsOnline; }
+    bool                        isOnline( void )                        { return m_IsOnline; }
     VxGUID&                     getMyOnlineId( void )                   { return m_OnlineId; }
     const char *                getOnlineName( void )                   { return m_NetIdent ? m_NetIdent->getOnlineName() : ""; }
     const char *                getOnlineDescription( void )            { return m_NetIdent ? m_NetIdent->getOnlineDescription() : ""; }
