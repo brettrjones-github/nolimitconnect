@@ -311,7 +311,7 @@ static bool firstTime = true;
         if( remainder )
         {
             LogMsg( LOG_ERROR, "ERROR Invalid PktAnn len %d hdr %d baseinfo %d connectinfo %d base ident %d ident %d action %d annbase %d pktann %d remainder %d\n",
-                    sizeof( PktAnnounce ), hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, pktAnn, remainder );
+                    sizeof( PktAnnounce ), hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, pktAnnBase, pktAnn, remainder );
         }
         else
         {

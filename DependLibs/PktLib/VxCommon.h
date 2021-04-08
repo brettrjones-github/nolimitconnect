@@ -88,13 +88,14 @@ private:
 // +   24 bytes PluginPermission
 // +    2 bytes m_u16AppVersion;	
 // +    2 bytes m_u16PingTimeMs;	
-// +    2 bytes m_PrimaryLanguage;	
-// +    1 bytes m_ContentType;
-// +    1 bytes m_u8Gender;
-// +    8 bytes m_LastSessionTime;	
-// =   40 bytes
-// +  529 bytes VxNetIdentBase   
-// =  568 bytes total
+// +    2 bytes m_NetIdentRes1;	
+// +    1 bytes m_NetIdentRes2;
+// +    1 bytes m_NetIdentRes3;
+// +    8 bytes m_NetIdentRes3;	
+// +    8 bytes m_LastSessionTime;
+// =   48 bytes
+// +  384 bytes VxNetIdentBase   
+// =  432 bytes total
 
 /// network indentiy of contact
 class VxNetIdent : public VxNetIdentBase, public PluginPermission
@@ -131,6 +132,7 @@ private:
     uint16_t					m_NetIdentRes1{ 0 };  
     uint8_t					    m_NetIdentRes2{ 0 };     
     uint8_t						m_NetIdentRes3{ 0 };
+    int64_t                     m_NetIdentRes4{ 0 };
     int64_t					    m_LastSessionTimeGmtMs{ 0 };
 };
 
