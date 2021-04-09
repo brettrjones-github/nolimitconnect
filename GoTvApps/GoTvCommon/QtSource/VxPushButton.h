@@ -66,6 +66,8 @@ public:
 
 	void						setIcon( EMyIcons myIcon );
 	void						setIconOverrideColor( QColor iconColor );
+    void						setIconOverrideImage( QImage& iconImage );
+
 	void						setDrawButtonBorder( bool drawBoarder )				{ m_DrawButtonBorder = drawBoarder; }
 	bool						getDrawButtonBorder( void )							{ return m_DrawButtonBorder; }
 
@@ -109,6 +111,12 @@ protected:
 	AppCommon&					m_MyApp;
 	QColor						m_IconOverrideColor;
     bool						m_IconOverrideColorWasSet{ false };
+
+    QImage						m_IconOverrideImage;
+    bool						m_IconOverrideImageWasSet{ false };
+    bool                        m_IconOverrideImageWasDrawn{ false };
+    QSize						m_LastOverrideImageSize;
+
     bool						m_ButtonEnabled{ true };
 	bool						m_DrawButtonBorder{ false };
 	bool						m_UseTheme{ true };

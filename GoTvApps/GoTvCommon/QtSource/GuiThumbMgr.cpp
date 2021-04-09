@@ -82,27 +82,14 @@ void GuiThumbMgr::slotInternalThumbRemoved( VxGUID thumbId )
 //============================================================================
 GuiThumb* GuiThumbMgr::findThumb( VxGUID& thumbId )
 {
-    GuiThumb* user = nullptr;
-    auto iter = m_ThumbList.find( thumbId );
-    if( iter != m_ThumbList.end() )
-    {
-        user = iter->second;
-    }
-
-    return user;
+    return m_ThumbList.findThumb( thumbId );
 }
 
 //============================================================================
 void GuiThumbMgr::removeThumb( VxGUID& thumbId )
 {
     m_ThumbListMutex.lock();
-    auto iter = m_ThumbList.find( thumbId );
-    if( iter != m_ThumbList.end() )
-    {
-        iter->second->deleteLater();
-        m_ThumbList.erase( iter );
-    }
-
+    m_ThumbList.removeThumb( thumbId );
     m_ThumbListMutex.unlock();
 }
 
@@ -136,7 +123,7 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo * thumbInfo )
         guiThumb = new GuiThumb( m_MyApp );
         guiThumb->setThumbInfo( thumbInfo );
         m_ThumbListMutex.lock();
-        m_ThumbList[guiThumb->getCreatorId()] = guiThumb;
+        m_ThumbList.addThumbIfDoesntExist( guiThumb );
         m_ThumbListMutex.unlock();
         onThumbAdded( guiThumb );
     }
@@ -169,4 +156,33 @@ void GuiThumbMgr::onThumbRemoved( VxGUID& onlineId )
     {
         emit signalThumbRemoved( onlineId );
     }
+}
+
+//============================================================================
+bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EHostType hostType, QImage& retAvatarImage, bool requestFromUserIfValid )
+{
+    bool foundThumb = false;
+    if( user && user->getNetIdent() )
+    {
+        VxNetIdent* netIdent = user->getNetIdent();
+        VxGUID thumbId = netIdent->getThumbId( hostType ).isVxGUIDValid() ? netIdent->getThumbId( hostType ) : netIdent->getAvatarGuid();
+        if( thumbId.isVxGUIDValid() )
+        {
+            GuiThumb* thumb = m_ThumbList.findThumb( thumbId );
+            if( thumb )
+            {
+                return thumb->createImage( retAvatarImage );
+            }
+            else if( requestFromUserIfValid )
+            {
+                // TODO
+            }
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "requestAvatarImage null user" );
+    }
+
+    return foundThumb;
 }

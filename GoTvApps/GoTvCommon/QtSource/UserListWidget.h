@@ -40,6 +40,7 @@ class MyIcons;
 class P2PEngine;
 class GuiUserSessionBase;
 class GuiUserMgr;
+class GuiThumbMgr;
 
 class UserListWidget : public QListWidget
 {
@@ -93,6 +94,7 @@ protected:
     GuiUserSessionBase*			widgetToSession( UserListItem* hostItem );
 
     virtual void                onListItemAdded( GuiUserSessionBase* userSession, UserListItem* userItem );
+    virtual void                onListItemUpdated( GuiUserSessionBase* userSession, UserListItem* userItem );
 
     virtual void                onUserListItemClicked( UserListItem* hostItem );
     virtual void                onAvatarButtonClicked( UserListItem* hostItem );
@@ -102,10 +104,12 @@ protected:
     void                        refreshList( void );
     bool                        isListViewMatch( GuiUser * user );
 
+ 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
+    P2PEngine&					m_Engine;
     GuiUserMgr&					m_UserMgr;
-	P2PEngine&					m_Engine;
+    GuiThumbMgr&				m_ThumbMgr;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;
     bool                        m_ShowMyself{ true };

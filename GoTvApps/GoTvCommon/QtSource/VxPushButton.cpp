@@ -360,6 +360,21 @@ void VxPushButton::setIconOverrideColor( QColor iconColor )
 }
 
 //============================================================================
+void VxPushButton::setIconOverrideImage( QImage& iconImage )
+{
+    if( !iconImage.isNull() )
+    {
+        m_IconOverrideImage = iconImage;
+        m_IconOverrideImageWasSet = true;
+        m_IconOverrideImageWasDrawn = false;
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "VxPushButton::setIconOverrideImage image is null" );
+    }
+}
+
+//============================================================================
 void VxPushButton::drawBorder(  VxAppTheme& appTheme, QPainter& painter )
 {
     // draw button border if needed
@@ -384,7 +399,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
         return;
     }
 
-	if( eMyIconNone == m_MyIcon )
+	if( eMyIconNone == m_MyIcon && !m_IconOverrideImageWasSet)
 	{
 		// no icon set yet
 		return;
@@ -416,7 +431,14 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 	painter.setRenderHint( QPainter::TextAntialiasing, true );
 	painter.setRenderHint( QPainter::SmoothPixmapTransform, true );
 
-	if( ( m_LastIconColor != iconColor )
+    if( m_IconOverrideImageWasSet && !m_IconOverrideImageWasDrawn || ( drawRect.size() != m_LastIconSize ) )
+    {
+        QImage resizedPicmap = m_IconOverrideImage.scaled( drawRect.size(), Qt::KeepAspectRatio );
+        m_IconImage = QPixmap::fromImage( resizedPicmap );
+        m_LastIconSize = drawRect.size();
+        m_IconOverrideImageWasDrawn = true;
+    }
+	else if( ( m_LastIconColor != iconColor )
 		|| m_IconImage.isNull()
         || ( m_MyIconLast != m_MyIcon )
 		|| ( drawRect.size() != m_LastIconSize ) )

@@ -34,6 +34,10 @@ public:
     void                        setUserSession( GuiUserSessionBase* hostSession );
     GuiUserSessionBase*         getUserSession( void );
 
+    VxPushButton *              getAvatarButton( void )                 { return ui.m_AvatarButton; }
+    VxPushButton *              getFriendshipButton( void )             { return ui.m_FriendshipButton; }
+    VxPushButton *              getMenuButton( void )                   { return ui.m_MenuButton; }
+
     void						updateWidgetFromInfo( void );
     QSize                       calculateSizeHint( void );
 

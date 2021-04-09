@@ -166,23 +166,26 @@ public:
 	void 						setOnlineDescription( const char * pUserDesc );
 	char *						getOnlineDescription( void )                        { return m_OnlineDesc; }
 
-    void						setPrimaryLanguage( uint16_t language ) { m_PrimaryLanguage = language; }
-    uint16_t					getPrimaryLanguage( void )              { return m_PrimaryLanguage; }
+    void						setPrimaryLanguage( uint16_t language )             { m_PrimaryLanguage = language; }
+    uint16_t					getPrimaryLanguage( void )                          { return m_PrimaryLanguage; }
 
-    void						setPreferredContent( uint8_t contentType ) { m_ContentType = contentType; }
-    uint8_t					    getPreferredContent( void )             { return m_ContentType; }
+    void						setPreferredContent( uint8_t contentType )          { m_ContentType = contentType; }
+    uint8_t					    getPreferredContent( void )                         { return m_ContentType; }
 
-    void						setAgeType( EAgeType age )              { m_u8Age = (uint8_t)age; }
-    EAgeType					getAgeType( void )                      { return (EAgeType)m_u8Age; }
+    void						setAgeType( EAgeType age )                          { m_u8Age = (uint8_t)age; }
+    EAgeType					getAgeType( void )                                  { return (EAgeType)m_u8Age; }
 
-    void						setGender( uint8_t gender )             { m_u8Gender = gender; }
-    uint8_t					    getGender( void )                       { return m_u8Gender; }
+    void						setGender( uint8_t gender )                         { m_u8Gender = gender; }
+    uint8_t					    getGender( void )                                   { return m_u8Gender; }
 
 	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
 	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
 
     /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
     std::string	    			getIdentFolderName( void );
+
+    /// @brief get thumb guid of the given hosted typ
+    VxGUID&                     getThumbId( EHostType hostType );
 
     void                        setAvatarGuid( VxGUID& guid, uint64_t timeModified )    { m_AvatarGuid = guid; m_AvatarModifiedTime = timeModified; }
     VxGUID&                     getAvatarGuid( void )                                   { return m_AvatarGuid; }

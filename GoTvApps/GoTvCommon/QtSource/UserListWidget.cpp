@@ -30,8 +30,9 @@
 UserListWidget::UserListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
-, m_UserMgr( m_MyApp.getUserMgr() )
 , m_Engine( m_MyApp.getEngine() )
+, m_UserMgr( m_MyApp.getUserMgr() )
+, m_ThumbMgr( m_MyApp.getThumbMgr() )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -463,6 +464,7 @@ void UserListWidget::updateUser( GuiUser * user )
 
                 setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
                 m_UserCache[user->getMyOnlineId()] = userSession;
+                onListItemAdded( userSession, userItem );
             }
         }
         else
@@ -470,6 +472,12 @@ void UserListWidget::updateUser( GuiUser * user )
             UserListItem* userItem = findListEntryWidgetByOnlineId( user->getMyOnlineId() );
             if( userItem )
             {
+                GuiUserSessionBase * userSession = userItem->getUserSession();
+                if( userSession )
+                {
+                    onListItemUpdated( userItem->getUserSession(), userItem );
+                }
+               
                 userItem->update();
             }
         }
@@ -496,5 +504,38 @@ void UserListWidget::removeUser( VxGUID& onlineId )
 //============================================================================
 void UserListWidget::onListItemAdded( GuiUserSessionBase* userSession, UserListItem* userItem )
 {
+    onListItemUpdated( userSession, userItem );
+}
 
+//============================================================================
+void UserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, UserListItem* userItem )
+{
+    if( userSession && userItem && userSession->getUserIdent() )
+    {
+        EHostType hostType = eHostTypeUnknown;
+        switch( m_UserViewType )
+        {
+        case eUserViewTypeGroup:
+            hostType = eHostTypeGroup;
+            break;
+        case eUserViewTypeChatRoom:
+            hostType = eHostTypeChatRoom;
+            break;
+        case eUserViewTypeRandomConnect:
+            hostType = eHostTypeRandomConnect;
+            break;
+        default:
+            hostType = eHostTypePeerUser;
+        }
+        
+        VxPushButton* avatarButton = userItem->getAvatarButton();
+        GuiUser* user = userSession->getUserIdent();
+
+        QImage	avatarImage;
+        bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
+        if( havAvatarImage && avatarButton )
+        {
+            avatarButton->setIconOverrideImage( avatarImage );
+        }
+    }
 }

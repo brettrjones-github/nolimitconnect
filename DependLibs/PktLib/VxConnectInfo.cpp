@@ -377,6 +377,24 @@ void VxConnectIdent::setOnlineDescription( const char * pUserDesc )
 }
 
 //============================================================================
+VxGUID& VxConnectIdent::getThumbId( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        return m_ChatRoomThumbGuid;
+    case eHostTypeGroup:
+        return m_GroupThumbGuid;
+    case eHostTypeNetwork:
+        return m_NetHostThumbGuid;
+    case eHostTypeRandomConnect:
+        return m_RandomConnectThumbGuid;
+    default:
+        return m_AvatarGuid;
+    }
+}
+
+//============================================================================
 /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
 std::string VxConnectIdent::getIdentFolderName( void )
 {

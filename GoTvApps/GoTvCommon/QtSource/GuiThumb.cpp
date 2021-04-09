@@ -65,3 +65,52 @@ void GuiThumb::updateThumbInfoIds( void )
         m_CreatorId = m_ThumbInfo->getCreatorId();
     }
 }
+
+//============================================================================
+bool GuiThumb::operator == ( const GuiThumb& rhs ) const
+{
+    bool isEqual = false;
+    if( m_ThumbInfo && rhs.m_ThumbInfo )
+    {
+        isEqual = m_ThumbId == rhs.m_ThumbId && m_CreatorId == rhs.m_CreatorId;
+    }
+
+    return isEqual;
+}
+
+//============================================================================
+bool GuiThumb::operator == ( GuiThumb& rhs )
+{
+    bool isEqual = false;
+    if( m_ThumbInfo && rhs.m_ThumbInfo )
+    {
+        isEqual = m_ThumbId == rhs.m_ThumbId && m_CreatorId == rhs.m_CreatorId;
+    }
+
+    return isEqual;
+}
+
+//============================================================================
+bool GuiThumb::isEqualTo( GuiThumb* guiThumb )
+{
+    bool isEqual = false;
+    if( m_ThumbInfo && guiThumb && guiThumb->getThumbInfo() )
+    {
+        isEqual = m_ThumbId == guiThumb->getThumbId() && m_CreatorId == guiThumb->getCreatorId();
+    }
+
+    return isEqual;
+}
+
+//============================================================================
+bool GuiThumb::createImage( QImage& retAvatarImage )
+{
+    bool status = false;
+    if( m_ThumbInfo && !m_ThumbInfo->getAssetName().empty() )
+    {
+        QString filename = m_ThumbInfo->getAssetName().c_str();
+        status = retAvatarImage.load( filename ) && !retAvatarImage.isNull();
+    }
+
+    return status;
+}

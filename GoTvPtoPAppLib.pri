@@ -189,6 +189,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserSessionBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
@@ -502,6 +503,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserSessionBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \

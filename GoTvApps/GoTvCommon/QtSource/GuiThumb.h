@@ -34,6 +34,11 @@ public:
     GuiThumb( const GuiThumb& rhs );
 	virtual ~GuiThumb() = default;
 
+    bool						operator == ( const GuiThumb& rhs ) const;
+    bool						operator == ( GuiThumb& rhs );
+
+    bool                        isEqualTo( GuiThumb* guiThumb );
+
     void                        setThumbInfo( ThumbInfo* thumbInfo );
     ThumbInfo*                  getThumbInfo( void )                    { return m_ThumbInfo; }
     bool                        isThumbValid( void )                    { return m_ThumbInfo && m_ThumbId.isVxGUIDValid(); }
@@ -42,6 +47,8 @@ public:
 
     VxGUID&                     getCreatorId( void )                    { return m_CreatorId; }
     VxGUID&                     getThumbId( void )                      { return m_ThumbId; }
+
+    bool                        createImage( QImage& retAvatarImage );
 
 protected:
     void                        updateThumbInfoIds( void );

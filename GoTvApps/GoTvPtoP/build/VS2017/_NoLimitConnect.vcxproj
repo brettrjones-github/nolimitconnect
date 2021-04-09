@@ -832,6 +832,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp" />
@@ -2146,6 +2147,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h" />

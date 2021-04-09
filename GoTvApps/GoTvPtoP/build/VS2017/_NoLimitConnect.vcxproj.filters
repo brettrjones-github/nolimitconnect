@@ -1083,6 +1083,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.cpp">
       <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.cpp">
+      <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -3101,6 +3104,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateInterface.h">
       <Filter>GoTvCommon\Source Files\ToGuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h">
+      <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

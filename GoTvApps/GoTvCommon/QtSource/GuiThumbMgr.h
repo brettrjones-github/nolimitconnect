@@ -15,12 +15,14 @@
 
 #include "ToGuiThumbUpdateInterface.h"
 #include "GuiThumb.h"
+#include "GuiThumbList.h"
 
 #include <CoreLib/VxMutex.h>
 
 #include <QObject>
 
 class AppCommon;
+class GuiUser;
 
 class GuiThumbMgr : public QObject, public ToGuiThumbUpdateInterface
 {
@@ -36,6 +38,8 @@ public:
     bool                        isMessengerReady( void )                    { return m_MessengerReady; }
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
+    bool                        requestAvatarImage( GuiUser* user, EHostType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
+
     virtual void				toGuiThumbAdded( ThumbInfo * thumb ) override; 
     virtual void				toGuiThumbUpdated( ThumbInfo * thumb ) override; 
     virtual void				toGuiThumbRemoved( VxGUID& thumbId ) override; 
@@ -49,8 +53,9 @@ public:
 
     void                        lockThumbMgr( void )             { m_ThumbListMutex.lock(); }
     void                        unlockThumbMgr( void )           { m_ThumbListMutex.unlock(); }
-    GuiThumb*                   getThumb( VxGUID& onlineId );
-    std::map<VxGUID, GuiThumb*>& getThumbList( void )             { return m_ThumbList; }
+
+    GuiThumb*                   getThumb( VxGUID& thumbId);
+    GuiThumbList&               getThumbList( void )             { return m_ThumbList; }
 
 signals:
     void				        signalThumbAdded( GuiThumb* thumb ); 
@@ -73,8 +78,7 @@ protected:
     
     AppCommon&                  m_MyApp;
     VxMutex                     m_ThumbListMutex;
-    // map of online id to GuiThumb
-    std::map<VxGUID, GuiThumb*> m_ThumbList;
+    GuiThumbList                m_ThumbList;
     bool                        m_MessengerReady{ false };
     GuiThumb*                   m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
