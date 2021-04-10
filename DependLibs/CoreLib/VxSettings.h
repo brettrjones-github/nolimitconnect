@@ -29,7 +29,7 @@ public:
 	static const int	MAX_VALUE_STRING_LEN = 2047;
 
 	VxSettings( const char * settingDbName );
-	virtual ~VxSettings();
+	virtual ~VxSettings() = default;
 
 	bool				isValid( void )							{ return m_bIsValid; }
 	void				setIsValid( bool bValid )				{ m_bIsValid = bValid; }

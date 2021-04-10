@@ -30,11 +30,6 @@ VxSettings::VxSettings( const char * settingDbName )
 }
 
 //============================================================================
-VxSettings::~VxSettings()
-{
-}
-
-//============================================================================
 //! override onCreateTables to create our tables
 RCODE VxSettings::onCreateTables( int iDbVersion )
 {

@@ -123,9 +123,10 @@ void UserListItem::updateWidgetFromInfo( void )
     QString strName = hostIdent->getOnlineName();
     strName += " - ";
     QString strDesc = hostIdent->getOnlineDescription();
+
     if( hostIdent->isMyself() )
     {
-        ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
+        ui.m_FriendshipButton->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
         ui.m_AvatarButton->setNotifyOnlineEnabled( true );
     }
     else
@@ -137,4 +138,18 @@ void UserListItem::updateWidgetFromInfo( void )
     ui.TitlePart1->setText( strName );
     ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );
+}
+
+//============================================================================
+void UserListItem::updateThumb( GuiThumb* thumb )
+{
+    if( thumb )
+    {
+        QImage thumbImage;
+        if( thumb->createImage( thumbImage ) && !thumbImage.isNull() )
+        {
+            ui.m_AvatarButton->setIconOverrideImage( thumbImage );
+            update();
+        }
+    }
 }

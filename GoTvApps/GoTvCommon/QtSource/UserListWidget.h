@@ -40,6 +40,7 @@ class MyIcons;
 class P2PEngine;
 class GuiUserSessionBase;
 class GuiUserMgr;
+class GuiThumb;
 class GuiThumbMgr;
 
 class UserListWidget : public QListWidget
@@ -84,6 +85,10 @@ protected slots:
     void                        slotUserUpdated( GuiUser* user );
     void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
 
+    void				        slotThumbAdded( GuiThumb* thumb ); 
+    void                        slotThumbUpdated( GuiThumb* thumb );
+    void				        slotThumbRemoved( VxGUID thumbId ); 
+
     void                        slotUserListItemClicked( UserListItem* hostItem );
     void                        slotAvatarButtonClicked( UserListItem* hostItem );
     void                        slotMenuButtonClicked( UserListItem* hostItem );
@@ -104,6 +109,7 @@ protected:
     void                        refreshList( void );
     bool                        isListViewMatch( GuiUser * user );
 
+    void                        updateThumb( GuiThumb* thumb );
  
 	//=== vars ===//
 	AppCommon&					m_MyApp;

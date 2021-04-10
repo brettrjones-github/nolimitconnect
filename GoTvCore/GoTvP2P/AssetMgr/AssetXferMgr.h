@@ -79,6 +79,7 @@ public:
 	//virtual void				onPktMultiSessionReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	void						assetXferThreadWork( VxThread * workThread );
+
 protected:
 	virtual void				onAssetReceived( AssetRxSession * xferSession, AssetInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onAssetSent( AssetTxSession * xferSession, AssetInfo& assetInfo, EXferError error, bool pluginIsLocked );

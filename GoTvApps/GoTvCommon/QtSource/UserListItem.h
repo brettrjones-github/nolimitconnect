@@ -20,6 +20,7 @@
 #include <QWidget>
 
 class GuiUserSessionBase;
+class GuiThumb;
 
 class UserListItem : public QWidget, public QListWidgetItem
 {
@@ -39,6 +40,8 @@ public:
     VxPushButton *              getMenuButton( void )                   { return ui.m_MenuButton; }
 
     void						updateWidgetFromInfo( void );
+    void                        updateThumb( GuiThumb* thumb );
+
     QSize                       calculateSizeHint( void );
 
 signals:

@@ -21,10 +21,14 @@ class ThumbInfo : public AssetBaseInfo
 public:
 	ThumbInfo();
 	ThumbInfo( const ThumbInfo& rhs );
+    ThumbInfo( const AssetBaseInfo& rhs );
 	ThumbInfo( const std::string& fileName );
     ThumbInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
 
 	ThumbInfo&				    operator=( const ThumbInfo& rhs ); 
+
+    /// thumb objects use the asset id and ther is no other assciated thumb to this thumb fil
+    virtual VxGUID&				getThumbId( void ) override                             { return m_UniqueId; }
 
 public:
 	//=== vars ===//

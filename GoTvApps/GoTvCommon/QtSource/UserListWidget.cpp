@@ -44,6 +44,10 @@ UserListWidget::UserListWidget( QWidget * parent )
     connect( &m_UserMgr, SIGNAL(signalUserUpdated( GuiUser*)),              this, SLOT(slotUserUpdated( GuiUser*))) ;
     connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus( GuiUser*,bool)),    this, SLOT(slotUserOnlineStatus( GuiUser*,bool))) ;
 
+    connect( &m_ThumbMgr, SIGNAL( signalThumbAdded( GuiThumb* ) ),          this, SLOT( slotThumbAdded( GuiThumb* ) ) );
+    connect( &m_ThumbMgr, SIGNAL(signalThumbUpdated( GuiThumb*)),           this, SLOT(slotThumbUpdated( GuiThumb*))) ;
+    connect( &m_ThumbMgr, SIGNAL(signalThumbRemoved( VxGUID)),              this, SLOT(slotThumbRemoved( VxGUID))) ;
+
 
     //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
     //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
@@ -345,6 +349,24 @@ void UserListWidget::slotUserOnlineStatus( GuiUser* user, bool isOnline )
 }
 
 //============================================================================
+void UserListWidget::slotThumbAdded( GuiThumb* thumb )
+{
+    updateThumb( thumb );
+}
+
+//============================================================================
+void UserListWidget::slotThumbUpdated( GuiThumb* thumb )
+{
+    updateThumb( thumb );
+}
+
+//============================================================================
+void UserListWidget::slotThumbRemoved( VxGUID thumbId )
+{
+    // TODO
+}
+
+//============================================================================
 void UserListWidget::setUserViewType( EUserViewType viewType )
 {
     if( viewType != m_UserViewType )
@@ -498,6 +520,16 @@ void UserListWidget::removeUser( VxGUID& onlineId )
             delete userItem;
             delete userSession;
         }
+    }
+}
+
+//============================================================================
+void UserListWidget::updateThumb( GuiThumb* thumb )
+{
+    UserListItem* userItem = findListEntryWidgetByOnlineId( thumb->getCreatorId() );
+    if( userItem )
+    {
+        userItem->updateThumb( thumb );
     }
 }
 

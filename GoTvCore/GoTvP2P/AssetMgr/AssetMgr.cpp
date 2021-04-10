@@ -14,9 +14,22 @@
 //============================================================================
 
 #include "AssetMgr.h"
+#include "AssetInfo.h"
 
 //============================================================================
 AssetMgr::AssetMgr( P2PEngine& engine, const char * dbName )
-: AssetBaseMgr( engine, dbName )
+: AssetBaseMgr( engine, dbName, eAssetMgrTypeAssets )
 {
+}
+
+//============================================================================
+AssetBaseInfo * AssetMgr::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+{
+    return new AssetInfo( assetName, assetLen, assetType );
+}
+
+//============================================================================
+AssetBaseInfo * AssetMgr::createAssetInfo( AssetBaseInfo& assetInfo )
+{
+    return new AssetInfo( assetInfo );
 }

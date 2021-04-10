@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include "ThumbInfoDb.h"
 
 #include <GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.h>
 
@@ -25,23 +25,35 @@
 class PktFileListReply;
 
 class ThumbInfo;
-class ThumbInfoDb;
 class ThumbHistoryMgr;
 class ThumbCallbackInterface;
 
 class ThumbMgr : public AssetBaseMgr
 {
+    const int THUMB_DB_VERSION = 1;
 public:
 	ThumbMgr( P2PEngine& engine, const char * dbName );
 	virtual ~ThumbMgr() = default;
 
+    void                        addThumbMgrClient( ThumbCallbackInterface * client, bool enable );
+
+    void                        fromGuiUserLoggedOn( void ) override;
+    bool				        fromGuiThumbCreated( ThumbInfo& thumbInfo );
+    bool				        fromGuiThumbUpdated( ThumbInfo& thumbInfo );
+
     virtual void				announceAssetAdded( AssetBaseInfo * assetInfo ) override;
+    virtual void				announceAssetUpdated( AssetBaseInfo * assetInfo ) override;
     virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo ) override;
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) override;
 
 protected:
-    std::vector<AssetBaseInfo*>	m_ThumbInfoList;
+    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+
+    ThumbInfoDb&                m_ThumbInfoDb;
+    std::vector<AssetBaseInfo*>&	m_ThumbInfoList;
     VxMutex						m_ThumbInfoMutex;
+    bool                        m_ThumbListInitialized{ false };
 
     std::vector<ThumbCallbackInterface *> m_ThumbClients;
     VxMutex						m_ThumbClientMutex;

@@ -188,24 +188,24 @@ void P2PEngine::fromGuiSendLog(	uint32_t u32LogFlags )
 void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiUserLoggedOn" );
-	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn\n" );
-	VxSetMyOnlineId( netIdent->getMyOnlineId() );
-	m_AssetMgr.fromGuiUserLoggedOn();
+	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn" );
+    memcpy( (VxNetIdent *)&m_PktAnn, netIdent, sizeof( VxNetIdent ));
+    m_PktAnn.setSrcOnlineId( netIdent->getMyOnlineId() );
+    m_MyOnlineId = netIdent->getMyOnlineId();
 
-	//LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn ident Hi 0x%llX Lo 0x%llX\n", 
-	//								netIdent->getMyOnlineId().getVxGUIDHiPart(), 
-	//								netIdent->getMyOnlineId().getVxGUIDLoPart() );
-	
-	memcpy( (VxNetIdent *)&m_PktAnn, netIdent, sizeof( VxNetIdent ));
-	m_PktAnn.setSrcOnlineId( netIdent->getMyOnlineId() );
+	m_AssetMgr.fromGuiUserLoggedOn();
+    // m_BlobMgr.fromGuiUserLoggedOn();
+    m_ThumbMgr.fromGuiUserLoggedOn();
+
     // set network settings from saved settings
 
 	startupEngine();
     updateFromEngineSettings( getEngineSettings() );
 	m_PluginMgr.fromGuiUserLoggedOn();
 	m_NetworkStateMachine.fromGuiUserLoggedOn();
-	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn done\n" );
+	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn done" );
 }
+
 //============================================================================
 void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
 {

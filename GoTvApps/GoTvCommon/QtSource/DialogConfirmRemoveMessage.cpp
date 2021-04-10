@@ -43,7 +43,7 @@ DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetInfo& assetInfo, QW
 	connect( ui.m_CancelButton,			SIGNAL(clicked()), this, SLOT(reject()) );
 	connect( ui.m_RemoveButton,			SIGNAL(clicked()), this, SLOT(slotRemoveAssetButtonClicked()) );
 	connect( ui.m_ShredButton,			SIGNAL(clicked()), this, SLOT(slotShredFileButtonClicked()) );
-	if( false == m_AssetInfo.getIsFileAsset() )
+	if( false == m_AssetInfo.isFileAsset() )
 	{
 		ui.m_ShredButton->setVisible( false );
         ui.m_ShreadButtonTextLabel->setVisible( false );

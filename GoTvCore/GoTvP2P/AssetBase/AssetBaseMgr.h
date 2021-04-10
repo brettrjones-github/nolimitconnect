@@ -23,7 +23,16 @@
 #include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
 
-class PktFileListReply;
+enum EAssetMgrType
+{
+    eAssetMgrTypeNone,
+    eAssetMgrTypeAssetBase,
+    eAssetMgrTypeAssets,
+    eAssetMgrTypeBlob,
+    eAssetMgrTypeThumb,
+
+    eMaxAssetMgrType
+};
 
 class AssetBaseCallbackInterface;
 class AssetBaseInfo;
@@ -31,11 +40,12 @@ class AssetBaseInfoDb;
 class AssetBaseHistoryMgr;
 class IToGui;
 class P2PEngine;
+class PktFileListReply;
 
 class AssetBaseMgr
 {
 public:
-	AssetBaseMgr( P2PEngine& engine, const char * dbName );
+	AssetBaseMgr( P2PEngine& engine, const char * dbName, EAssetMgrType assetMgrType );
 	virtual ~AssetBaseMgr();
 
     class AutoResourceLock
@@ -46,10 +56,17 @@ public:
         VxMutex&				m_Mutex;
     };
 
+    virtual AssetBaseInfoDb&    getAssetInfoDb( void ) { return m_AssetBaseInfoDb; }
+
     virtual std::vector<AssetBaseInfo*>&	getAssetBaseInfoList( void )				{ return m_AssetBaseInfoList; }
 
+    // startup when user specific directory has been set after user logs on
+    virtual void				fromGuiUserLoggedOn( void );
+    virtual bool				fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter );
+    virtual bool				fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId );
 
     virtual void				announceAssetAdded( AssetBaseInfo * assetInfo );
+    virtual void				announceAssetUpdated( AssetBaseInfo * assetInfo );
     virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo );
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param );
 
@@ -63,13 +80,9 @@ public:
     bool						isAllowedFileOrDir( std::string strFileName );
 
 	virtual bool				isAssetListInitialized( void )				{ return m_AssetBaseListInitialized; }
-	// startup when user specific directory has been set after user logs on
-	void						fromGuiUserLoggedOn( void );
+
 	void						assetInfoMgrStartup( VxThread * startupThread );
 	void						assetInfoMgrShutdown( void );
-
-	virtual bool				fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter );
-	virtual bool				fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId );
 
     bool						getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId );
 	bool						getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName );
@@ -87,9 +100,7 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )			{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-	void						fileWasShredded( const char * fileName );
-
-    AssetBaseInfo * 			addAssetFile( const char * fileName, uint64_t fileLen, uint8_t fileType );
+    AssetBaseInfo * 			addAssetFile( const char * fileName, uint64_t fileLen, uint16_t fileType );
 
 	bool						addAssetFile(	const char *	fileName, 
 												VxGUID&			assetId,  
@@ -108,6 +119,8 @@ public:
                                                 int64_t			timestamp = 0 );
 
 	bool						addAsset( AssetBaseInfo& assetInfo );
+
+    bool						updateAsset( AssetBaseInfo& assetInfo );
 	bool						removeAsset( std::string fileName );
 	bool						removeAsset( VxGUID& assetUniqueId );
 	void						queryHistoryAssets( VxGUID& historyId );
@@ -115,16 +128,20 @@ public:
 	void						generateHashForFile( std::string fileName );
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
 
-
 protected:
+    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) = 0;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
+
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
     void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }
+
+    virtual AssetBaseInfoDb&    createAssetInfoDb(  const char * dbName, EAssetMgrType assetMgrType );
+
 
 	void						updateAssetListFromDb( VxThread * thread );
 	void						generateHashIds( VxThread * thread );
 	void						clearAssetFileListPackets( void );
 	void						clearAssetInfoList( void );
-    AssetBaseInfo *             createAssetInfo( const char * fileName, uint64_t fileLen, uint8_t fileType );
 	AssetBaseInfo *				createAssetInfo(	const char *	fileName, 
 													VxGUID&			assetId,  
 													uint8_t *		hashId, 
@@ -134,19 +151,16 @@ protected:
 	bool						insertNewInfo( AssetBaseInfo * assetInfo );
 	void						updateDatabase( AssetBaseInfo * assetInfo );
 	void						updateAssetDatabaseSendState( VxGUID& assetUniqueId, EAssetSendState sendState );
-	void						insertAssetInTimeOrder( AssetBaseInfo * assetInfo );
 
     //=== vars ===//
     P2PEngine&					m_Engine;
+    EAssetMgrType               m_AssetMgrType{ eAssetMgrTypeNone };
     VxMutex						m_ResourceMutex;
     VxMutex						m_ClientListMutex;
 
     std::vector<AssetBaseCallbackInterface *> m_AssetClients;
 
 	bool						m_Initialized{ false };
-	bool						m_AssetBaseListInitialized{ false };
-	AssetBaseInfoDb&			m_AssetBaseInfoDb;
-	std::vector<AssetBaseInfo*>	m_AssetBaseInfoList;
 
 	std::vector<AssetBaseInfo*>	m_WaitingForHastList;
 	std::vector<std::string>	m_GenHashList;
@@ -157,5 +171,10 @@ protected:
     uint16_t					m_u16AssetBaseFileTypes{ 0 };
 	VxMutex						m_FileListPacketsMutex;
 	std::vector<PktFileListReply*> m_FileListPackets;
+
+private:
+    bool						m_AssetBaseListInitialized{ false };
+    AssetBaseInfoDb&			m_AssetBaseInfoDb;
+    std::vector<AssetBaseInfo*>	m_AssetBaseInfoList;
 };
 

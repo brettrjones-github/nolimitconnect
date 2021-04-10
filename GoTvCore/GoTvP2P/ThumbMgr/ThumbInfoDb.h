@@ -21,7 +21,11 @@ class ThumbMgr;
 class ThumbInfoDb : public AssetBaseInfoDb
 {
 public:
-	ThumbInfoDb( ThumbMgr& mgr, const char * dbname );
+	ThumbInfoDb( AssetBaseMgr& mgr, const char * dbname );
 	virtual ~ThumbInfoDb();
+
+protected:
+    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
 };
 

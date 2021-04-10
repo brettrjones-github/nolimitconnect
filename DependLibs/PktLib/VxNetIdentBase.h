@@ -46,6 +46,7 @@ public:
 	VxConnectInfo&				getConnectInfo( void )					{ return *this; }
     void						setIsOnline( bool isOnline )		    { m_IsOnline = (uint8_t)isOnline; }
     bool						isOnline( void )					    { return (bool)m_IsOnline;  }
+    bool                        isMyself( void );
 
 	void						setTruthCount( uint32_t truthCnt );
 	uint32_t					getTruthCount( void );

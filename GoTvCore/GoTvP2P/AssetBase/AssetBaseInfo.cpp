@@ -16,6 +16,8 @@
 #include <config_gotvcore.h>
 #include "AssetBaseInfo.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <PktLib/VxSearchDefs.h>
 
 #include <CoreLib/VxFileLists.h>
@@ -29,14 +31,6 @@
 
 //============================================================================
 AssetBaseInfo::AssetBaseInfo()
-: m_AssetName( "" )
-, m_AssetTag( "" )
-, m_s64AssetLen( 0 )
-, m_u16AssetType( VXFILE_TYPE_UNKNOWN )
-, m_LocationFlags( 0 )
-, m_AssetSendState( eAssetSendStateNone )
-, m_CreationTime( 0 )
-, m_PlayPosition0to100000( 0 )
 { 
 }
 
@@ -49,27 +43,17 @@ AssetBaseInfo::AssetBaseInfo( const AssetBaseInfo& rhs )
 //============================================================================
 AssetBaseInfo::AssetBaseInfo( const std::string& fileName )
 : m_AssetName( fileName )
-, m_AssetTag( "" )
-, m_s64AssetLen(0)
-, m_u16AssetType(VXFILE_TYPE_UNKNOWN)
-, m_LocationFlags( 0 )
-, m_AssetSendState( eAssetSendStateNone )
-, m_CreationTime( 0 )
-, m_PlayPosition0to100000( 0 )
 { 
 }
 
 //============================================================================
 AssetBaseInfo::AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
 : m_AssetName( fileName )
-, m_AssetTag( "" )
 , m_s64AssetLen( fileLen )
 , m_u16AssetType( assetType )
-, m_LocationFlags( 0 )
-, m_AssetSendState( eAssetSendStateNone )
 , m_CreationTime( GetTimeStampMs() )
 , m_ModifiedTime( m_CreationTime )
-, m_PlayPosition0to100000( 0 )
+, m_AccessedTime( m_CreationTime )
 {
 }
 
@@ -85,7 +69,8 @@ AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs )
 		m_AssetHash					= rhs.m_AssetHash;
 		m_s64AssetLen				= rhs.m_s64AssetLen;
 		m_u16AssetType				= rhs.m_u16AssetType;
-		m_LocationFlags				= rhs.m_LocationFlags;
+        m_AttributeFlags			= rhs.m_AttributeFlags;
+        m_LocationFlags				= rhs.m_LocationFlags;
 		m_CreationTime				= rhs.m_CreationTime;
         m_ModifiedTime				= rhs.m_ModifiedTime;
 		m_AssetTag					= rhs.m_AssetTag;
@@ -99,13 +84,14 @@ AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs )
 //============================================================================
 bool AssetBaseInfo::isValid( void )
 {
-	return ( VXFILE_TYPE_UNKNOWN != m_u16AssetType );
+    vx_assert( ( VXFILE_TYPE_UNKNOWN != m_u16AssetType ) && m_UniqueId.isVxGUIDValid() && m_CreatorId.isVxGUIDValid() && 0 != m_CreationTime && 0 != m_ModifiedTime );
+	return ( VXFILE_TYPE_UNKNOWN != m_u16AssetType ) && m_UniqueId.isVxGUIDValid() && m_CreatorId.isVxGUIDValid() && 0 != m_CreationTime && 0 != m_ModifiedTime;
 }
 
 //============================================================================
 bool AssetBaseInfo::isMine( void )
 {
-	return isValid() && ( m_CreatorId == VxGetMyOnlineId() );
+	return isValid() && ( m_CreatorId == GetPtoPEngine().getMyOnlineId() );
 }
 
 //============================================================================
@@ -117,7 +103,7 @@ VxGUID& AssetBaseInfo::generateNewUniqueId( void )
 }
 
 //============================================================================
-bool AssetBaseInfo::getIsFileAsset( void )
+bool AssetBaseInfo::isFileAsset( void )
 {
 	return (0 != (m_u16AssetType & ( eAssetTypePhoto | eAssetTypeAudio | eAssetTypeVideo | eAssetTypeDocument | eAssetTypeArchives | eAssetTypeExe | eAssetTypeOtherFiles	)) );
 }
@@ -125,7 +111,7 @@ bool AssetBaseInfo::getIsFileAsset( void )
 //============================================================================
 bool AssetBaseInfo::hasFileName( void )
 {
-	return ( 0 != m_AssetName.length() ) && getIsFileAsset();
+	return ( 0 != m_AssetName.length() ) && isFileAsset();
 }
 
 //============================================================================

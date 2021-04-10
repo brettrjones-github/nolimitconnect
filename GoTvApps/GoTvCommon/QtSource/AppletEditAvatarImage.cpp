@@ -75,15 +75,12 @@ void AppletEditAvatarImage::onApplyButClick( void )
         ThumbInfo * existingAsset = dynamic_cast<ThumbInfo *>( m_ThumbMgr.findAsset( ui.m_ThumbnailEditWidget->getAssetId() ) );
         if( existingAsset )
         {
-            if( m_MyIdent->getAvatarGuid().isVxGUIDValid() && m_MyIdent->getAvatarGuid() == existingAsset->getAssetUniqueId() )
+            if( ui.m_ThumbnailEditWidget->updateThumbAsset( *existingAsset ) )
             {
-                QString msgText = QObject::tr( "No Avatar Image Changes " );
-                QMessageBox::information( this, QObject::tr( "Avatar Image is not changed" ), msgText );
-            }
-            else
-            {
-                // setup identity with new avatar image
+                // setup identity with updated avatar image
                 m_MyIdent->setAvatarGuid( existingAsset->getAssetUniqueId(), existingAsset->getModifiedTime() );
+
+                // notify others of change to identity
                 m_MyApp.updateMyIdent( m_MyIdent );
 
                 QString msgText = QObject::tr( "Applied Avatar Image Changes " );
@@ -98,11 +95,13 @@ void AppletEditAvatarImage::onApplyButClick( void )
     
     if( !assetExists && ui.m_ThumbnailEditWidget->getIsUserPickedImage()  )
     {
-        ThumbInfo assetInfo;
-        if( ui.m_ThumbnailEditWidget->generateThumbAsset( assetInfo ) )
+        ThumbInfo thumbInfo;
+        if( ui.m_ThumbnailEditWidget->generateThumbAsset( thumbInfo ) )
         {
             // setup identity with new avatar image
-            m_MyIdent->setAvatarGuid( assetInfo.getAssetUniqueId(), assetInfo.getModifiedTime() );
+            m_MyIdent->setAvatarGuid( thumbInfo.getAssetUniqueId(), thumbInfo.getModifiedTime() );
+
+            // notify others of change to identity
             m_MyApp.updateMyIdent( m_MyIdent );
 
             QString msgText = QObject::tr( "Applied Avatar Image Changes " );

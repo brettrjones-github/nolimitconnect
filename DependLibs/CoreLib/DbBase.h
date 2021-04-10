@@ -36,12 +36,12 @@ public:
 	DbBindParam( int asInt );
 	DbBindParam( int64_t asS64 );
 	DbBindParam( void * blob, int len );
-	~DbBindParam( void );
+	virtual ~DbBindParam( void ) = default;
 
 	EDbBindType					getType( void );
 	const char*					getText( void );
 	int							getInt( void );
-	int64_t							getS64( void );
+	int64_t						getS64( void );
 	unsigned short				getTextLen( void );
 	void *						getBlob( int& len );
 
@@ -49,7 +49,7 @@ private:
 	EDbBindType					m_EDbBindType;
 	std::string					m_AsText;
 	int							m_AsInt;
-	int64_t							m_AsS64;
+	int64_t						m_AsS64;
 	void *						m_AsBlob;
 	int							m_BlobLen;
 };
@@ -90,15 +90,15 @@ public:
 	//! fetch next row from table
 	bool						getNextRow( void );
 	//! return 8 bit integer from column
-	uint8_t							getByte( int iColumnIdx );
+	uint8_t						getByte( int iColumnIdx );
 	//! return 32 bit integer from column
-	int32_t							getS32( int iColumnIdx );
+	int32_t						getS32( int iColumnIdx );
 	//! return 64 bit integer from column
-	int64_t							getS64( int iColumnIdx );
+	int64_t						getS64( int iColumnIdx );
 	//! return float from column
-	float							getF32( int iColumnIdx );
+	float						getF32( int iColumnIdx );
 	//! return float from column
-	double							getF64( int iColumnIdx );
+	double						getF64( int iColumnIdx );
 	//! return string from column
 	const char *				getString(int iColumnIdx );
 	//! return blob from column.. 
@@ -113,7 +113,9 @@ class DbBase
 {
 public:
 	DbBase( const char * databaseName );	
-	virtual ~DbBase();
+	virtual ~DbBase() = default;
+
+    virtual std::string&        getDatabaseName( void )                 { return m_strDatabaseName; }
 
 	virtual	void				onSqlError( RCODE rc, const char * errMsg ){};
 	//=== overrides ===//
@@ -160,7 +162,7 @@ public:
 	virtual DbCursor *			startQuery( const char * pSqlString, const char * textParam );
 
 	//! get the row id of the last inserted row
-	virtual int64_t					getLastInsertId( void );
+	virtual int64_t				getLastInsertId( void );
 
 	//! return true if table exists
 	bool						dbTableExists( const char * pTableName );

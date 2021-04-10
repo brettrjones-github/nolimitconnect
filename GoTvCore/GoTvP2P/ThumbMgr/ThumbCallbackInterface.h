@@ -21,7 +21,8 @@ class ThumbInfo;
 class ThumbCallbackInterface : public AssetBaseCallbackInterface
 {
 public:
-    virtual void				callbackThumbAdded( ThumbInfo * assetInfo ){};
-    virtual void				callbackThumbRemoved( ThumbInfo * assetInfo ){};
+    virtual void				callbackThumbAdded( ThumbInfo * thumbInfo ){};
+    virtual void				callbackThumbUpdated( ThumbInfo * thumbInfo ){};
+    virtual void				callbackThumbRemoved( VxGUID& thumbId ){};
 };
 

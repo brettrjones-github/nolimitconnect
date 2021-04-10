@@ -22,8 +22,13 @@ class BlobMgr;
 class BlobInfoDb : public AssetBaseInfoDb
 {
 public:
-	BlobInfoDb( BlobMgr& mgr, const char * dbName );
+	BlobInfoDb( AssetBaseMgr& mgr, const char * dbName );
 	virtual ~BlobInfoDb();
+
+protected:
+    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+
 };
 
 

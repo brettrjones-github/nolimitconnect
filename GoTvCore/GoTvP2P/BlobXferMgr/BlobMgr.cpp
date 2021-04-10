@@ -36,7 +36,7 @@ namespace
 
 //============================================================================
 BlobMgr::BlobMgr( P2PEngine& engine, const char * dbName )
-: AssetBaseMgr( engine, dbName )
+: AssetBaseMgr( engine, dbName, eAssetMgrTypeBlob )
 {
 }
 
@@ -45,3 +45,14 @@ BlobMgr::~BlobMgr()
 {
 }
 
+//============================================================================
+AssetBaseInfo * BlobMgr::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+{
+    return new BlobInfo( assetName, assetLen, assetType );
+}
+
+//============================================================================
+AssetBaseInfo * BlobMgr::createAssetInfo( AssetBaseInfo& assetInfo )
+{
+    return new BlobInfo( assetInfo );
+}

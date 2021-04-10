@@ -61,7 +61,7 @@ void GuiThumb::updateThumbInfoIds( void )
 {
     if( m_ThumbInfo )
     {
-        m_CreatorId = m_ThumbInfo->getAssetUniqueId();
+        m_ThumbId = m_ThumbInfo->getAssetUniqueId();
         m_CreatorId = m_ThumbInfo->getCreatorId();
     }
 }

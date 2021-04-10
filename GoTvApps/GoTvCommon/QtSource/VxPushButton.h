@@ -47,7 +47,6 @@ public:
     virtual void				setMaximumSize( const QSize & maxSize );
     virtual void				setMaximumSize( int maxw, int maxh );
 
-
 	AppCommon&					getMyApp( void )                                    { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 

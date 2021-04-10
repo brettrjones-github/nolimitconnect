@@ -86,7 +86,8 @@ bool ThumbnailEditWidget::generateThumbAsset( ThumbInfo& assetInfoOut )
         assetInfo.setAssetUniqueId( assetGuid );
         assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
         assetInfo.setCreationTime( GetTimeStampMs() );
-        if( m_ThumbMgr.addAsset( assetInfo ) )
+        assetInfo.setIsCircular( m_ThumbnailIsCircular );
+        if( m_ThumbMgr.fromGuiThumbCreated( assetInfo ) )
         {
             assetGenerated = true;
             assetInfoOut = assetInfo;
@@ -104,6 +105,52 @@ bool ThumbnailEditWidget::generateThumbAsset( ThumbInfo& assetInfoOut )
     }
 
     return assetGenerated;
+}
+
+//============================================================================
+bool ThumbnailEditWidget::updateThumbAsset( ThumbInfo& thumbInfo )
+{
+    vx_assert( thumbInfo.isValid() );
+    bool assetUpdated = false;
+    VxGUID assetGuid = thumbInfo.getAssetUniqueId();
+    if( assetGuid.isVxGUIDValid() )
+    {
+        QString fileName = thumbInfo.getAssetName().c_str();
+        if( !VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
+        {
+            fileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
+            fileName += assetGuid.toHexString().c_str();
+            fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
+            thumbInfo.setAssetName( fileName.toUtf8().constData() );
+        }
+
+        if( saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
+        {
+            thumbInfo.setModifiedTime( GetTimeStampMs() );
+            thumbInfo.setIsCircular( m_ThumbnailIsCircular );
+            if( m_ThumbMgr.fromGuiThumbUpdated( thumbInfo ) )
+            {
+                assetUpdated = true;
+            }
+            else
+            {
+                QString msgText = QObject::tr( "Could not update thumbnail asset" );
+                QMessageBox::information( this, QObject::tr( "Error occured update thumbnail asset " ) + fileName, msgText );
+            }
+        }
+        else
+        {
+            QString msgText = QObject::tr( "Could not save updated thumbnail image" );
+            QMessageBox::information( this, QObject::tr( "Error occured saving thumbnail to file " ) + fileName, msgText );
+        }
+    }
+    else
+    {
+        QString msgText = QObject::tr( "thumbnail id was invalid" );
+        QMessageBox::information( this, QObject::tr( "Error occured updatin thumbnail " ), msgText );
+    }
+
+    return assetUpdated;
 }
 
 //============================================================================

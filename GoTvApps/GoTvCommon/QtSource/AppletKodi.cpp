@@ -301,7 +301,7 @@ void AppletKodi::setAssetInfo( AssetInfo& assetInfo )
 	//	ui.m_RightAvatarBar->setTime( m_AssetInfo.getCreationTime() );
 	//}
 
-	//if( assetInfo.getIsFileAsset() )
+	//if( assetInfo.isFileAsset() )
 	//{
 	//	ui.m_LeftAvatarBar->setShredButtonIcon( eMyIconShredderNormal );
 	//	ui.m_RightAvatarBar->setShredButtonIcon( eMyIconShredderNormal );

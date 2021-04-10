@@ -96,7 +96,7 @@ void AssetTextWidget::setAssetInfo( AssetInfo& assetInfo )
 		ui.m_LeftAvatarBar->showAvatar( true );
 	}
 
-	if( assetInfo.getIsFileAsset() )
+	if( assetInfo.isFileAsset() )
 	{
 		ui.m_LeftAvatarBar->setShredButtonIcon( eMyIconShredderNormal );
 		ui.m_RightAvatarBar->setShredButtonIcon(eMyIconShredderNormal );

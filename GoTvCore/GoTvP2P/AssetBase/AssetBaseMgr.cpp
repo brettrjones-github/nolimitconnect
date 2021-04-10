@@ -19,6 +19,10 @@
 #include "AssetBaseCallbackInterface.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.h>
+#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfoDb.h>
+
 #include <GoTvInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
@@ -52,9 +56,10 @@ namespace
 }
 
 //============================================================================
-AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName )
+AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName, EAssetMgrType assetMgrType )
 : m_Engine( engine )
-, m_AssetBaseInfoDb( * new AssetBaseInfoDb( *this, dbName ) )
+, m_AssetMgrType( assetMgrType )
+, m_AssetBaseInfoDb( createAssetInfoDb( dbName, assetMgrType ) )
 {
 }
 
@@ -62,6 +67,23 @@ AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName )
 AssetBaseMgr::~AssetBaseMgr()
 {
 	delete &m_AssetBaseInfoDb;
+}
+
+//============================================================================
+AssetBaseInfoDb& AssetBaseMgr::createAssetInfoDb( const char * dbName, EAssetMgrType assetMgrType )
+{
+    switch( assetMgrType )
+    {
+    case eAssetMgrTypeAssets:
+        return *(new AssetInfoDb( *this, dbName ));
+    case eAssetMgrTypeBlob:
+        return *(new BlobInfoDb( *this, dbName ));
+    case eAssetMgrTypeThumb:
+        return *(new ThumbInfoDb( *this, dbName ));
+
+    default:
+        return *(new AssetInfoDb( *this, dbName ));
+    }
 }
 
 //============================================================================
@@ -243,7 +265,7 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::addAssetFile( const char * fileName, uint64_t fileLen, uint8_t fileType )
+AssetBaseInfo * AssetBaseMgr::addAssetFile( const char * fileName, uint64_t fileLen, uint16_t fileType )
 {
     AssetBaseInfo * assetInfo = createAssetInfo( fileName, fileLen, fileType );
     if( assetInfo )
@@ -275,7 +297,7 @@ bool AssetBaseMgr::addAssetFile(	const char *	fileName,
 }
 
 //============================================================================
-bool AssetBaseMgr::addAssetFile(	    const char *	fileName, 
+bool AssetBaseMgr::addAssetFile(	const char *	fileName, 
 									VxGUID&			assetId,  
 									VxGUID&		    creatorId, 
 									VxGUID&		    historyId, 
@@ -298,13 +320,13 @@ bool AssetBaseMgr::addAssetFile(	    const char *	fileName,
 //============================================================================
 bool AssetBaseMgr::addAsset( AssetBaseInfo& assetInfo )
 {
-	AssetBaseInfo * newAssetBaseInfo = new AssetBaseInfo( assetInfo );
-	LogMsg( LOG_INFO, "AssetBaseMgr::addAsset\n" );
+	AssetBaseInfo * newAssetBaseInfo = createAssetInfo( assetInfo );
+	LogMsg( LOG_INFO, "AssetBaseMgr::addAsset" );
 	return insertNewInfo( newAssetBaseInfo );
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::createAssetInfo( const char * fileName, uint64_t fileLen, uint8_t fileType )
+AssetBaseInfo * AssetBaseMgr::createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType )
 {
     AssetBaseInfo * assetInfo = new AssetBaseInfo( fileName, fileLen, fileType );
     if( assetInfo )
@@ -317,11 +339,11 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( const char * fileName, uint64_t f
 
 //============================================================================
 AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	const char *	fileName, 
-										VxGUID&			assetId,  
-										uint8_t *	    hashId, 
-										EAssetLocation	locationFlags, 
-										const char *	assetTag, 
-                                        int64_t			timestamp )
+										        VxGUID&			assetId,  
+										        uint8_t *	    hashId, 
+										        EAssetLocation	locationFlags, 
+										        const char *	assetTag, 
+                                                int64_t			timestamp )
 {
 	uint64_t  fileLen = VxFileUtil::getFileLen( fileName );
 	uint8_t	fileType = VxFileExtensionToFileTypeFlag( fileName );
@@ -332,7 +354,7 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	const char *	fileName,
 		return NULL;
 	}
 
-	AssetBaseInfo * assetInfo = new AssetBaseInfo( fileName, fileLen, fileType );
+	AssetBaseInfo * assetInfo = createAssetInfo( fileName, fileLen, fileType );
 	assetInfo->setAssetUniqueId( assetId );
 	if( false == assetInfo->getAssetUniqueId().isVxGUIDValid() )
 	{
@@ -376,27 +398,46 @@ bool AssetBaseMgr::insertNewInfo( AssetBaseInfo * assetInfo )
 	//	result = true;
 	//}
 	//else
-	//{
-		if( 0 == assetInfoExisting )
+	{
+        updateDatabase( assetInfo );
+		if( !assetInfoExisting )
 		{
 			lockResources();
 			m_AssetBaseInfoList.push_back( assetInfo );
 			unlockResources();
 			announceAssetAdded( assetInfo );
 		}
-
-		updateDatabase( assetInfo );
+        else
+        {
+            announceAssetUpdated( assetInfo );
+        }
+	
 		result = true;
-	//}
+	}
 
 	return result;
 }
 
 //============================================================================
+bool AssetBaseMgr::updateAsset( AssetBaseInfo& assetInfo )
+{
+    AssetBaseInfo * existingAsset = findAsset( assetInfo.getAssetUniqueId() );
+    if( existingAsset )
+    {
+        *existingAsset = assetInfo;
+        updateDatabase( existingAsset );
+        announceAssetUpdated( existingAsset );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
 void AssetBaseMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 {
-	LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetAdded start\n" );
-	if( assetInfo->getIsFileAsset() )
+	// LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetAdded start" );
+	if( assetInfo->isFileAsset() )
 	{
 		updateFileListPackets();
 		updateAssetFileTypes();
@@ -411,7 +452,23 @@ void AssetBaseMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 	}
 
 	unlockClientList();
-	LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetAdded done\n" );
+	// LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetAdded done" );
+}
+
+//============================================================================
+void AssetBaseMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
+{
+    // LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetUpdated start" );
+    lockClientList();
+    std::vector<AssetBaseCallbackInterface *>::iterator iter;
+    for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
+    {
+        AssetBaseCallbackInterface * client = *iter;
+        client->callbackAssetAdded( assetInfo );
+    }
+
+    unlockClientList();
+    // LogMsg( LOG_INFO, "AssetBaseMgr::announceAssetUpdated done" );
 }
 
 //============================================================================
@@ -558,7 +615,7 @@ void AssetBaseMgr::updateAssetFileTypes( void )
 	lockResources();
 	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
 	{
-		if( (*iter)->getIsFileAsset() )
+		if( (*iter)->isFileAsset() )
 		{
 			u16FileTypes		|= (*iter)->getAssetType();
 		}
@@ -605,7 +662,7 @@ void AssetBaseMgr::updateFileListPackets( void )
 	for( iter = m_AssetBaseInfoList.begin(); iter != m_AssetBaseInfoList.end(); ++iter )
 	{
 		AssetBaseInfo * assetInfo = (*iter); 
-		if( ( false == assetInfo->getIsFileAsset() ) || ( false == assetInfo->getAssetHashId().isHashValid() ) )
+		if( ( false == assetInfo->isFileAsset() ) || ( false == assetInfo->getAssetHashId().isHashValid() ) )
 			continue;
 
 		if( 0 == pktFileList )
@@ -683,7 +740,7 @@ bool AssetBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile,
 	AssetBaseInfo* assetInfo = findAsset( fileName );
 	if( assetInfo )
 	{
-		if( ( false == shareFile ) && assetInfo->getIsSharedFileAsset() )
+		if( ( false == shareFile ) && assetInfo->isSharedFileAsset() )
 		{
 			assetInfo->setIsSharedFileAsset( false );
 			updateDatabase( assetInfo );
@@ -713,38 +770,6 @@ bool AssetBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile,
 
 	return true;
 }
-
-/*
-//============================================================================
-bool AssetBaseMgr::isFileAsset( std::string& fileName )
-{
-	bool isAssetBase = false;
-	lockResources();
-	AssetBaseInfo * assetInfo = findAsset( fileName );
-	if( assetInfo )
-	{
-		isAssetBase = assetInfo->getIsAssetBase();
-	}
-
-	unlockResources();
-	return isAssetBase;
-}
-
-//============================================================================
-bool AssetBaseMgr::isFileAsset( VxSha1Hash& fileHashId )
-{
-	bool isAssetBase = false;
-	lockResources();
-	AssetBaseInfo * assetInfo = findAsset( fileHashId );
-	if( assetInfo )
-	{
-		isAssetBase = assetInfo->getIsAssetBase();
-	}
-
-	unlockResources();
-	return isAssetBase;
-}
-*/
 
 //============================================================================
 bool AssetBaseMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId )
@@ -797,14 +822,14 @@ bool AssetBaseMgr::fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter )
 		AssetBaseInfo* assetInfo = (*iter);
 		if( 0 != ( fileTypeFilter & assetInfo->getAssetType() ) )
 		{
-			if( assetInfo->getIsSharedFileAsset() || assetInfo->getIsInLibary() )
+			if( assetInfo->isSharedFileAsset() || assetInfo->isInLibary() )
 			{
 				IToGui::getToGui().toGuiFileList(	assetInfo->getAssetName().c_str(), 
-										assetInfo->getAssetLength(), 
-										assetInfo->getAssetType(), 
-										assetInfo->getIsSharedFileAsset(),
-										assetInfo->getIsInLibary(),
-										assetInfo->getAssetHashId().getHashData() );
+										            assetInfo->getAssetLength(), 
+										            assetInfo->getAssetType(), 
+										            assetInfo->isSharedFileAsset(),
+										            assetInfo->isInLibary(),
+										            assetInfo->getAssetHashId().getHashData() );
 			}
 		}
 	}

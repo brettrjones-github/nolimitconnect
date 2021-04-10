@@ -144,8 +144,5 @@ bool			VxIsDebugEnabled( void );
 int 			VxGlobalAccessLock( void );
 int 			VxGlobalAccessUnlock( void );
 
-void			VxSetMyOnlineId( VxGUID& onlineId );
-const VxGUID&	VxGetMyOnlineId( void );
-
 void			VxSetLclIpAddress( const char * lclIpAddress );
 std::string		VxGetLclIpAddress( void );

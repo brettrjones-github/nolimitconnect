@@ -13,9 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ToGuiThumbUpdateInterface.h"
 #include "GuiThumb.h"
 #include "GuiThumbList.h"
+
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 
 #include <CoreLib/VxMutex.h>
 
@@ -24,7 +25,7 @@
 class AppCommon;
 class GuiUser;
 
-class GuiThumbMgr : public QObject, public ToGuiThumbUpdateInterface
+class GuiThumbMgr : public QObject, public ThumbCallbackInterface
 {
     Q_OBJECT
 public:
@@ -40,12 +41,9 @@ public:
 
     bool                        requestAvatarImage( GuiUser* user, EHostType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
 
-    virtual void				toGuiThumbAdded( ThumbInfo * thumb ) override; 
-    virtual void				toGuiThumbUpdated( ThumbInfo * thumb ) override; 
-    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) override; 
-
-    bool                        isThumbInSession( VxGUID& onlineId );
-    void                        setThumbOffline( VxGUID& onlineId );
+    virtual void				callbackThumbAdded( ThumbInfo * thumbInfo ) override; 
+    virtual void				callbackThumbUpdated( ThumbInfo * thumbInfo ) override; 
+    virtual void				callbackThumbRemoved( VxGUID& thumbId ) override; 
 
     void                        onThumbAdded( GuiThumb* thumb );
     void                        onThumbRemoved( VxGUID& onlineId );

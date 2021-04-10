@@ -431,7 +431,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 	painter.setRenderHint( QPainter::TextAntialiasing, true );
 	painter.setRenderHint( QPainter::SmoothPixmapTransform, true );
 
-    if( m_IconOverrideImageWasSet && !m_IconOverrideImageWasDrawn || ( drawRect.size() != m_LastIconSize ) )
+    if( m_IconOverrideImageWasSet && ( !m_IconOverrideImageWasDrawn || m_IconImage.isNull() || ( drawRect.size() != m_LastIconSize ) ) )
     {
         QImage resizedPicmap = m_IconOverrideImage.scaled( drawRect.size(), Qt::KeepAspectRatio );
         m_IconImage = QPixmap::fromImage( resizedPicmap );

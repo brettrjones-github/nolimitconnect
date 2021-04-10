@@ -38,6 +38,11 @@ AssetInfo::AssetInfo( const AssetInfo& rhs )
 	*this = rhs;
 }
 
+AssetInfo::AssetInfo( const AssetBaseInfo& rhs )
+{
+    *((AssetBaseInfo *)this) = rhs;
+}
+
 //============================================================================
 AssetInfo::AssetInfo( const std::string& fileName )
 : AssetBaseInfo( fileName )

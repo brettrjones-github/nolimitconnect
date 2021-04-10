@@ -13,11 +13,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include "BlobInfo.h"
 #include "BlobInfoDb.h"
 #include "BlobMgr.h"
 
 //============================================================================
-BlobInfoDb::BlobInfoDb( BlobMgr& hostListMgr, const char * dbName )
+BlobInfoDb::BlobInfoDb( AssetBaseMgr& hostListMgr, const char * dbName )
 : AssetBaseInfoDb( hostListMgr, "BlobInfoDb" )
 {
 }
@@ -25,4 +26,16 @@ BlobInfoDb::BlobInfoDb( BlobMgr& hostListMgr, const char * dbName )
 //============================================================================
 BlobInfoDb::~BlobInfoDb()
 {
+}
+
+//============================================================================
+AssetBaseInfo * BlobInfoDb::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+{
+    return new BlobInfo( assetName, assetLen, assetType );
+}
+
+//============================================================================
+AssetBaseInfo * BlobInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
+{
+    return new BlobInfo( assetInfo );
 }

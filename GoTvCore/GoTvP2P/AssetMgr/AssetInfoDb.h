@@ -16,12 +16,17 @@
 
 #include <GoTvCore/GoTvP2P/AssetBase/AssetBaseInfoDb.h>
 
-class AssetMgr;
+class AssetBaseMgr;
 
 class AssetInfoDb : public AssetBaseInfoDb
 {
 public:
-	AssetInfoDb( AssetMgr& mgr, const char * dbName );
+	AssetInfoDb( AssetBaseMgr& mgr, const char * dbName );
 	virtual ~AssetInfoDb() = default;
+
+protected:
+    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+
 };
 

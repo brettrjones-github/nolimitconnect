@@ -15,9 +15,10 @@
 
 #include "ThumbInfoDb.h"
 #include "ThumbMgr.h"
+#include "ThumbInfo.h"
 
 //============================================================================
-ThumbInfoDb::ThumbInfoDb( ThumbMgr& hostListMgr, const char * dbname )
+ThumbInfoDb::ThumbInfoDb( AssetBaseMgr& hostListMgr, const char * dbname )
 : AssetBaseInfoDb( hostListMgr, dbname )
 {
 }
@@ -25,4 +26,16 @@ ThumbInfoDb::ThumbInfoDb( ThumbMgr& hostListMgr, const char * dbname )
 //============================================================================
 ThumbInfoDb::~ThumbInfoDb()
 {
+}
+
+//============================================================================
+AssetBaseInfo * ThumbInfoDb::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+{
+    return new ThumbInfo( assetName, assetLen, assetType );
+}
+
+//============================================================================
+AssetBaseInfo * ThumbInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
+{
+    return new ThumbInfo( assetInfo );
 }

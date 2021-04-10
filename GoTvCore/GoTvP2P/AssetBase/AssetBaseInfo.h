@@ -55,23 +55,23 @@ public:
     virtual bool				isThumbAsset( void )                            { return ( eAssetTypeThumbnail & m_u16AssetType ) ? true : false; }
     virtual bool				isAudioAsset( void )                            { return ( eAssetTypeAudio & m_u16AssetType ) ? true : false; }
     virtual bool				isVideoAsset( void )                            { return ( eAssetTypeVideo & m_u16AssetType ) ? true : false; }
-    virtual bool				getIsFileAsset( void );
+    virtual bool				isFileAsset( void );
     virtual bool				hasFileName( void );
 
     void						setIsChatRoomRecord( bool isSharedAsset )	    { if( isSharedAsset ) m_LocationFlags |= ASSET_LOC_FLAG_CHAT_ROOM; else m_LocationFlags &= ~ASSET_LOC_FLAG_CHAT_ROOM; }
-    bool						setIsChatRoomRecord( void )				        { return m_LocationFlags & ASSET_LOC_FLAG_CHAT_ROOM ? true : false; }
+    bool						isChatRoomRecord( void )				        { return m_LocationFlags & ASSET_LOC_FLAG_CHAT_ROOM ? true : false; }
     virtual void				setIsPersonalRecord( bool isRecord )            { if( isRecord ) m_LocationFlags |= ASSET_LOC_FLAG_PERSONAL_RECORD; else m_LocationFlags &= ~ASSET_LOC_FLAG_PERSONAL_RECORD; }
-    virtual bool				getIsPersonalRecord( void )                     { return m_LocationFlags & ASSET_LOC_FLAG_PERSONAL_RECORD ? true : false; }
+    virtual bool				isPersonalRecord( void )                        { return m_LocationFlags & ASSET_LOC_FLAG_PERSONAL_RECORD ? true : false; }
     virtual void				setIsInLibary( bool isInLibrary )               { if( isInLibrary ) m_LocationFlags |= ASSET_LOC_FLAG_LIBRARY; else m_LocationFlags &= ~ASSET_LOC_FLAG_LIBRARY; }
-    virtual bool				getIsInLibary( void )                           { return m_LocationFlags & ASSET_LOC_FLAG_LIBRARY ? true : false; }
+    virtual bool				isInLibary( void )                              { return m_LocationFlags & ASSET_LOC_FLAG_LIBRARY ? true : false; }
     virtual void				setIsSharedFileAsset( bool isSharedAsset )      { if( isSharedAsset ) m_LocationFlags |= ASSET_LOC_FLAG_SHARED_FILE; else m_LocationFlags &= ~ASSET_LOC_FLAG_SHARED_FILE; }
-    virtual bool				getIsSharedFileAsset( void )                    { return m_LocationFlags & ASSET_LOC_FLAG_SHARED_FILE ? true : false; }
+    virtual bool				isSharedFileAsset( void )                       { return m_LocationFlags & ASSET_LOC_FLAG_SHARED_FILE ? true : false; }
 
-    virtual void				setHasCircularAttribute( bool isCircular )      { if( isCircular ) m_AttributeFlags |= ASSET_ATTRIB_FLAG_CIRCULAR; else m_AttributeFlags &= ~ASSET_ATTRIB_FLAG_CIRCULAR; }
-    virtual bool				getHasCircularAttribute( void )                 { return m_AttributeFlags & ASSET_ATTRIB_FLAG_CIRCULAR ? true : false; }
+    virtual void				setIsCircular( bool isCircular )                { if( isCircular ) m_AttributeFlags |= ASSET_ATTRIB_FLAG_CIRCULAR; else m_AttributeFlags &= ~ASSET_ATTRIB_FLAG_CIRCULAR; }
+    virtual bool				isCircular( void )                              { return m_AttributeFlags & ASSET_ATTRIB_FLAG_CIRCULAR ? true : false; }
     virtual void				setIsTemporary( bool isTemp )                   { if( isTemp ) m_AttributeFlags |= ASSET_ATTRIB_TEMPORARY; else m_AttributeFlags &= ~ASSET_ATTRIB_TEMPORARY; }
-    virtual bool				getIsTemporary( void )                          { return m_AttributeFlags & ASSET_ATTRIB_TEMPORARY ? true : false; }
-    virtual bool				getIsPermanent( void )                          { return !getIsTemporary(); }
+    virtual bool				isTemporary( void )                             { return m_AttributeFlags & ASSET_ATTRIB_TEMPORARY ? true : false; }
+    virtual bool				isPermanent( void )                             { return !isTemporary(); }
 
     virtual void				setAssetName( const char * assetName );
     virtual void				setAssetName( std::string& assetName )          { m_AssetName = assetName; }

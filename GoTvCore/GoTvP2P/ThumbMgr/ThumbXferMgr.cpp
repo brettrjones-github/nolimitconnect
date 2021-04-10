@@ -69,8 +69,7 @@ namespace
 
 
 //============================================================================
-ThumbXferMgr::ThumbXferMgr( PluginMessenger&		plugin, 
-							      PluginSessionMgr&		pluginSessionMgr )
+ThumbXferMgr::ThumbXferMgr( PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr )
 : m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )
 , m_PluginMgr( plugin.getPluginMgr() )

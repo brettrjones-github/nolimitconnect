@@ -21,6 +21,7 @@ class AssetInfo : public AssetBaseInfo
 public:
 	AssetInfo();
 	AssetInfo( const AssetInfo& rhs );
+    AssetInfo( const AssetBaseInfo& rhs );
 	AssetInfo( const std::string& fileName );
     AssetInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
 

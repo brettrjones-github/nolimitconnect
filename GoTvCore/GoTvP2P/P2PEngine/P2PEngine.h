@@ -119,7 +119,7 @@ public:
     void						copyMyPktAnnounce( PktAnnounce& pktAnn )		{ m_AnnouncePktMutex.lock(); memcpy(&pktAnn, &m_PktAnn, sizeof(PktAnnounce)); m_AnnouncePktMutex.unlock(); }
 
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
-    VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
+    VxGUID						getMyOnlineId( void )							{ return m_MyOnlineId; }
     std::string					getMyOnlineUrl( void )							{ m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyOnlineUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
     bool						addMyIdentToBlob( PktBlobEntry& blobEntry );
 
@@ -631,6 +631,7 @@ protected:
 	VxPeerMgr&					m_PeerMgr;
     BigListMgr&					m_BigListMgr;
 	PktAnnounce					m_PktAnn;
+    VxGUID                      m_MyOnlineId;
 	VxMutex						m_AnnouncePktMutex;
 	EngineSettings				m_EngineSettings;
 	EngineParams				m_EngineParams;
@@ -678,3 +679,4 @@ private:
 	P2PEngine( const P2PEngine& ) = delete; // don't allow copy constructor
 };
 
+extern P2PEngine& GetPtoPEngine();

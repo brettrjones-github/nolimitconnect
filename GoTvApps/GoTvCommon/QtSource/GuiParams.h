@@ -41,9 +41,14 @@ public:
     static void                 initGuiParams();
 
     /// @brief get scaling required to make icons etc. usable on high dpi screens
-    static int                  getGuiScale( void )  { return m_DisplayScale; }
-    /// @brief get scaling required to make icons etc. usable on high dpi screens
-    //static int                  getButtonHeight( void )  { return MIN_PUSHBUTTON_SIZE * m_DisplayScale; }
+    static int                  getGuiScale( void )                 { return m_DisplayScale; }
+    /// @brief calculate widget scaling required to make icons etc. usable on high dpi screens
+    static int                  getScaled( int param )              { return m_DisplayScale * param; }
+    /// @brief calculate widget scaling required to make icons etc. usable on high dpi screens
+    static QSize                getScaled( QSize size )             { return QSize( getScaled( size.width() ), getScaled( size.height() ) ); }
+    /// @brief calculate widget scaling required to make icons etc. usable on high dpi screens
+    static QRect                getScaled( QRect rect )             { return QRect( rect.left(), rect.top(), getScaled( rect.width() ), getScaled( rect.height() ) ); }
+
     /// @brief get scaling required to make icons etc. usable on high dpi screens
     static QSize                getButtonSize( EButtonSize buttonSize = eButtonSizeSmall );
 

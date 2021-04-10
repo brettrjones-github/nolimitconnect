@@ -34,6 +34,7 @@ public:
 	virtual void				callbackAssetPktFileListUpdated( void ){};
 
     virtual void				callbackAssetAdded( AssetBaseInfo * assetInfo ){};
+    virtual void				callbackAssetUpdated( AssetBaseInfo * assetInfo ){};
     virtual void				callbackAssetRemoved( AssetBaseInfo * assetInfo ){};
 	virtual void				callbackAssetHistory( void * userData, AssetBaseInfo * assetInfo ){};
 };

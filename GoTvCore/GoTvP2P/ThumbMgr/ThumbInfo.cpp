@@ -40,6 +40,12 @@ ThumbInfo::ThumbInfo( const ThumbInfo& rhs )
 }
 
 //============================================================================
+ThumbInfo::ThumbInfo( const AssetBaseInfo& rhs )
+{
+    *((AssetBaseInfo *)this) = rhs;
+}
+
+//============================================================================
 ThumbInfo::ThumbInfo( const std::string& fileName )
     : AssetBaseInfo(fileName)
 { 

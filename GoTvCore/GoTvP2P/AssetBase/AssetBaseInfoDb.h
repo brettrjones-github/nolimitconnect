@@ -62,6 +62,9 @@ public:
 	void						updateAssetSendState( VxGUID& assetId, EAssetSendState sendState );
 
 protected:
+    virtual AssetBaseInfo *     createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType ) = 0;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
+
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
 	void						insertAssetInTimeOrder( AssetBaseInfo *assetInfo, std::vector<AssetBaseInfo*>& assetList );

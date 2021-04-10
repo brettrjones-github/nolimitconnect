@@ -22,5 +22,8 @@ public:
 	AssetMgr( P2PEngine& engine, const char * dbName );
 	virtual ~AssetMgr() = default;
 
+protected:
+    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
 };
 

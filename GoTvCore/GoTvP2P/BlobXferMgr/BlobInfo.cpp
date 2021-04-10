@@ -40,6 +40,12 @@ BlobInfo::BlobInfo( const BlobInfo& rhs )
 }
 
 //============================================================================
+BlobInfo::BlobInfo( const AssetBaseInfo& rhs )
+{
+    *((AssetBaseInfo *)this) = rhs;
+}
+
+//============================================================================
 BlobInfo::BlobInfo( const std::string& fileName )
 : AssetBaseInfo( fileName )
 { 

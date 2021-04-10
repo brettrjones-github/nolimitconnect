@@ -20,7 +20,7 @@ class VxFileShredderDb : public DbBase
 {
 public:
 	VxFileShredderDb();
-	virtual ~VxFileShredderDb();
+	virtual ~VxFileShredderDb() = default;
 	void						initShredderDb( std::string& dataDirectory );
 
 	void						addFileToShred( std::string& fileName );

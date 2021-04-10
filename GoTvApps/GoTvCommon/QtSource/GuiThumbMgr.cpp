@@ -32,23 +32,23 @@ void GuiThumbMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalThumbUpdated( ThumbInfo *) ),      this, SLOT( slotInternalThumbUpdated( ThumbInfo * ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalThumbRemoved(VxGUID) ),	        this, SLOT( slotInternalThumbRemoved(VxGUID) ), Qt::QueuedConnection );
 
-    m_MyApp.wantToGuiThumbUpdateCallbacks( this, true );
+    m_MyApp.getEngine().getThumbMgr().addThumbMgrClient( this, true );
 }
 
 //============================================================================
-void GuiThumbMgr::toGuiThumbAdded( ThumbInfo *  thumb )
+void GuiThumbMgr::callbackThumbAdded( ThumbInfo *  thumb )
 {
     emit signalInternalThumbAdded( thumb );
 }
 
 //============================================================================
-void GuiThumbMgr::toGuiThumbUpdated( ThumbInfo * thumb )
+void GuiThumbMgr::callbackThumbUpdated( ThumbInfo * thumb )
 {
     emit signalInternalThumbUpdated( thumb );
 }
 
 //============================================================================
-void GuiThumbMgr::toGuiThumbRemoved( VxGUID& thumbId )
+void GuiThumbMgr::callbackThumbRemoved( VxGUID& thumbId )
 {
     emit signalInternalThumbRemoved( thumbId );
 }
@@ -132,20 +132,20 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo * thumbInfo )
 }
 
 //============================================================================
-void GuiThumbMgr::onThumbAdded( GuiThumb* user )
+void GuiThumbMgr::onThumbAdded( GuiThumb* guiThumb )
 {
     if( isMessengerReady() )
     {
-        emit signalThumbAdded( user );
+        emit signalThumbAdded( guiThumb );
     }
 }
 
 //============================================================================
-void GuiThumbMgr::onThumbUpdated( GuiThumb* user )
+void GuiThumbMgr::onThumbUpdated( GuiThumb* guiThumb )
 {
     if( isMessengerReady() )
     {
-        emit signalThumbUpdated( user );
+        emit signalThumbUpdated( guiThumb );
     }
 }
 

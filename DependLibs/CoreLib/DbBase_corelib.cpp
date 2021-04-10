@@ -91,11 +91,6 @@ DbBindParam::DbBindParam( void * blob, int len )
 }
 
 //============================================================================
-DbBindParam::~DbBindParam( void )
-{
-}
-
-//============================================================================
 EDbBindType DbBindParam::getType( void )
 {
 	return( m_EDbBindType );
@@ -272,11 +267,6 @@ DbBase::DbBase( const char * databaseName )
 , m_bDbInitialized(0)
 , m_iDbVersion(0)
 , m_Db(0)
-{
-}
-
-//============================================================================
-DbBase::~DbBase()
 {
 }
 

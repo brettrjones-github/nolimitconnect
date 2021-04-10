@@ -23,7 +23,7 @@ namespace
 {
 	std::string 		TABLE_ASSETS	 				= "tblAssets";
 
-	std::string 		CREATE_COLUMNS_ASSETS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, temp INTEGER) ";
+	std::string 		CREATE_COLUMNS_ASSETS			= " (unique_id TEXT PRIMARY KEY, creatorId TEXT, historyId TEXT, thumbId TEXT, assetName TEXT, length BIGINT, type INTEGER, hashId BLOB, locFlags INTEGER, attribFlags INTEGER, creationTime BIGINT, modifiedTime BIGINT, accessedTime BIGINT, assetTag TEXT, sendState INTEGER, isTemp INTEGER) ";
 
 	const int			COLUMN_ASSET_UNIQUE_ID			= 0;
 	const int			COLUMN_ASSET_CREATOR_ID			= 1;
@@ -115,52 +115,52 @@ void AssetBaseInfoDb::removeAsset( AssetBaseInfo * assetInfo )
 }
 
 //============================================================================
-void AssetBaseInfoDb::addAsset( VxGUID&			assetId, 
-							    VxGUID&			creatorId, 
-							    VxGUID&			historyId, 
-                                VxGUID&			thumbId, 
-							    const char *	assetName, 
-							    int64_t			assetLen, 
-							    uint32_t		assetType, 							
-							    VxSha1Hash&		hashId, 
-							    uint32_t		locationFlags,
+void AssetBaseInfoDb::addAsset( VxGUID&			assetId,
+                                VxGUID&			creatorId,
+                                VxGUID&			historyId,
+                                VxGUID&			thumbId,
+                                const char *	assetName,
+                                int64_t			assetLen,
+                                uint32_t		assetType,
+                                VxSha1Hash&		hashId,
+                                uint32_t		locationFlags,
                                 uint32_t		attibuteFlags,
                                 int             isTemp,
                                 int64_t			creationTimeStamp,
                                 int64_t			modifiedTimeStamp,
                                 int64_t			accessedTimeStamp,
-							    const char *	assetTag, 
-                                EAssetSendState sendState)
+                                const char *	assetTag,
+                                EAssetSendState sendState )
 {
-	removeAsset( assetId );
+    removeAsset( assetId );
 
-	std::string assetIdStr		= assetId.toHexString();
-	std::string creatorIdStr	= creatorId.toHexString();
-	std::string historyIdStr	= historyId.toHexString();
-    std::string thumbIdStr	    = thumbId.toHexString();
+    std::string assetIdStr = assetId.toHexString();
+    std::string creatorIdStr = creatorId.toHexString();
+    std::string historyIdStr = historyId.toHexString();
+    std::string thumbIdStr = thumbId.toHexString();
 
-	DbBindList bindList( assetIdStr.c_str() );
-	bindList.add( creatorIdStr.c_str() );
-	bindList.add( historyIdStr.c_str() );
+    DbBindList bindList( assetIdStr.c_str() );
+    bindList.add( creatorIdStr.c_str() );
+    bindList.add( historyIdStr.c_str() );
     bindList.add( thumbIdStr.c_str() );
-	bindList.add( assetName );	 
-	bindList.add( assetLen );
-	bindList.add( (int)assetType );
-	bindList.add( (void *)hashId.getHashData(), 20 );
-	bindList.add( locationFlags );
+    bindList.add( assetName );
+    bindList.add( assetLen );
+    bindList.add( (int)assetType );
+    bindList.add( (void *)hashId.getHashData(), 20 );
+    bindList.add( locationFlags );
     bindList.add( attibuteFlags );
     bindList.add( (uint64_t)creationTimeStamp );
     bindList.add( (uint64_t)modifiedTimeStamp );
     bindList.add( (uint64_t)accessedTimeStamp );
-	bindList.add( assetTag );
-	bindList.add( (int)sendState );
+    bindList.add( assetTag );
+    bindList.add( (int)sendState );
 
-	RCODE rc  = sqlExec( "INSERT INTO tblAssets (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-		bindList );
-	if( rc )
-	{
-		LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d\n", rc );
-	}
+    RCODE rc = sqlExec( "INSERT INTO tblAssets (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        bindList );
+    if( rc )
+    {
+        LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d\n", rc );
+    }
 }
 
 //============================================================================
@@ -190,7 +190,7 @@ void AssetBaseInfoDb::addAsset( AssetBaseInfo* assetInfo )
 				assetInfo->getAssetHashId(),
 				assetInfo->getLocationFlags(),
                 (uint32_t)assetInfo->getAttributeFlags(),
-                assetInfo->getIsTemporary(),
+                assetInfo->isTemporary(),
                 assetInfo->getCreationTime(),
                 assetInfo->getModifiedTime(),
                 assetInfo->getAccessedTime(),
@@ -217,7 +217,7 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 			assetLen =  (uint64_t)cursor->getS64( COLUMN_ASSET_LEN );
 			assetType = (uint16_t)cursor->getS32( COLUMN_ASSET_TYPE );
 
-			AssetBaseInfo * assetInfo = new AssetBaseInfo( assetName.c_str(), assetLen, assetType );
+			AssetBaseInfo * assetInfo = createAssetInfo( assetName.c_str(), assetLen, assetType );
 			assetInfo->setAssetUniqueId( cursor->getString( COLUMN_ASSET_UNIQUE_ID ) );
 			assetInfo->setCreatorId( cursor->getString( COLUMN_ASSET_CREATOR_ID ) );
 			assetInfo->setHistoryId( cursor->getString( COLUMN_ASSET_HISTORY_ID ) );
@@ -230,6 +230,8 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
             assetInfo->setAccessedTime(  (int64_t)cursor->getS64( COLUMN_ACCESSED_TIME ) );
 			assetInfo->setAssetTag( cursor->getString( COLUMN_ASSET_TAG ) );		
 			assetInfo->setAssetSendState( ( EAssetSendState )cursor->getS32( COLUMN_ASSET_SEND_STATE ) );
+
+            vx_assert( assetInfo->isValid() );
 			
 			insertAssetInTimeOrder( assetInfo, AssetAssetList );
 		}
@@ -243,6 +245,8 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 //============================================================================
 void AssetBaseInfoDb::insertAssetInTimeOrder( AssetBaseInfo *assetInfo, std::vector<AssetBaseInfo*>& assetList )
 {
+    vx_assert( assetInfo->isValid() );
+
 	std::vector<AssetBaseInfo*>::iterator iter;
 	for( iter = assetList.begin(); iter != assetList.end(); ++iter )
 	{

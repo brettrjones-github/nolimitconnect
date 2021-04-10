@@ -32,11 +32,6 @@ VxFileShredderDb::VxFileShredderDb()
 }
 
 //============================================================================
-VxFileShredderDb::~VxFileShredderDb()
-{
-}
-
-//============================================================================
 void VxFileShredderDb::initShredderDb( std::string& dataDirectory )
 {
 	std::string dbFileName = dataDirectory + SHRED_FILES_DB_NAME;

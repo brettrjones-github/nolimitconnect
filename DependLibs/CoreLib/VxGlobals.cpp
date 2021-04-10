@@ -103,7 +103,6 @@ namespace
 	bool				g_bIsAppShuttingDown			= false;
 	bool				g_bIsNetLoopbackAllowed			= false;
 	bool				g_bIsDebugEnabled				= true;
-	VxGUID				g_MyOnlineId;
 	std::string			g_LclIpAddress					= "";
 }
 
@@ -315,19 +314,6 @@ bool VxIsAppShuttingDown( void )
 {
 	return g_bIsAppShuttingDown;
 }
-
-//============================================================================
-void VxSetMyOnlineId( VxGUID& onlineId )
-{
-	g_MyOnlineId = onlineId;
-}
-
-//============================================================================
-const VxGUID& VxGetMyOnlineId( void )
-{
-	return g_MyOnlineId;
-}
-
 
 //============================================================================
 void VxSetLclIpAddress( const char * lclIpAddress )

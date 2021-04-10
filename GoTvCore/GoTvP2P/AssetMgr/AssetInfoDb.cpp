@@ -17,9 +17,22 @@
 
 #include "AssetInfoDb.h"
 #include "AssetMgr.h"
+#include "AssetInfo.h"
 
 //============================================================================
-AssetInfoDb::AssetInfoDb( AssetMgr& assetInfoMgr, const char * dbName )
+AssetInfoDb::AssetInfoDb( AssetBaseMgr& assetInfoMgr, const char * dbName )
 : AssetBaseInfoDb( assetInfoMgr, dbName )
 {
+}
+
+//============================================================================
+AssetBaseInfo * AssetInfoDb::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+{
+    return new AssetInfo( assetName, assetLen, assetType );
+}
+
+//============================================================================
+AssetBaseInfo * AssetInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
+{
+    return new AssetInfo( assetInfo );
 }

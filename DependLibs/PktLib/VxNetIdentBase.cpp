@@ -17,6 +17,8 @@
 #include "VxNetIdentBase.h"
 #include "PktBlobEntry.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
 
@@ -84,6 +86,12 @@ bool VxNetIdentBase::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_u16RejectedTruthsCnt );
     result &= blob.getValue( m_u16RejectedDaresCnt );
     return result;
+}
+
+//============================================================================
+bool VxNetIdentBase::isMyself( void )
+{
+    return GetPtoPEngine().getMyOnlineId() == getMyOnlineId();
 }
 
 //============================================================================

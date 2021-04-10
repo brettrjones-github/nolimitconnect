@@ -87,7 +87,7 @@ void AssetFaceWidget::setAssetInfo( AssetInfo& assetInfo )
 		ui.m_LeftSpacer->changeSize( 0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed );
 	}
 
-	if( assetInfo.getIsFileAsset() )
+	if( assetInfo.isFileAsset() )
 	{
 		ui.m_LeftAvatarBar->setShredButtonIcon( eMyIconShredderNormal );
 		ui.m_RightAvatarBar->setShredButtonIcon( eMyIconShredderNormal );

@@ -214,6 +214,7 @@ void AppCommon::loadWithoutThread( void )
 
     registerMetaData();
     m_UserMgr.onAppCommonCreated();
+    m_ThumbMgr.onAppCommonCreated();
 
     // set application short name used for directory paths
     VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
@@ -276,6 +277,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 {
 	registerMetaData();
     m_UserMgr.onAppCommonCreated();
+    m_ThumbMgr.onAppCommonCreated();
 	QObject::connect( this, SIGNAL( signalFinishedLoadingGui() ), this, SLOT( slotFinishedLoadingGui() ) );
 	QObject::connect( this, SIGNAL( signalFinishedLoadingEngine() ), this, SLOT( slotFinishedLoadingEngine() ) );
 
