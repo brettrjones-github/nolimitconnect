@@ -14,6 +14,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktLogReply.h \
     $$PWD/DependLibs/PktLib/PktLogReq.h \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.h \
+	$$PWD/DependLibs/PktLib/PktsOfferXfer.h \
 	$$PWD/DependLibs/PktLib/PktsPing.h \
 	$$PWD/DependLibs/PktLib/PktsPluginOffer.h \
 	$$PWD/DependLibs/PktLib/PktsPluginSetting.h \
@@ -67,6 +68,7 @@ SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktsHostSearch.cpp \
     $$PWD/DependLibs/PktLib/PktLogReply.cpp \
     $$PWD/DependLibs/PktLib/PktLogReq.cpp \
+	$$PWD/DependLibs/PktLib/PktsOfferXfer.cpp \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.cpp \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.cpp \
     $$PWD/DependLibs/PktLib/PktTcpPunch.cpp \

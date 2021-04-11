@@ -170,6 +170,13 @@ public:
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+    virtual void				onPktOfferSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  

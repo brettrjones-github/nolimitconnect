@@ -49,7 +49,7 @@ public:
 	typedef std::map<VxGUID, ThumbRxSession *>::iterator ThumbRxIter;
 	typedef std::vector<ThumbTxSession *>::iterator ThumbTxIter;
 
-	ThumbXferMgr( PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr );
+	ThumbXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr );
 	virtual ~ThumbXferMgr();
 
 	VxMutex&					getAssetQueMutex( void )					{ return m_ThumbSendQueMutex; }
@@ -122,10 +122,10 @@ protected:
 	std::vector<ThumbTxSession *>		m_TxSessions;
 	VxMutex						m_TxSessionsMutex;
 
+    P2PEngine&					m_Engine;
 	PluginMessenger&			m_Plugin;	
 	PluginSessionMgr&			m_PluginSessionMgr;
-	PluginMgr&					m_PluginMgr;
-	P2PEngine&					m_Engine;					
+	PluginMgr&					m_PluginMgr;					
 	
 	ThumbMgr&				    m_ThumbMgr;
 	ThumbXferDb				    m_ThumbXferDb;

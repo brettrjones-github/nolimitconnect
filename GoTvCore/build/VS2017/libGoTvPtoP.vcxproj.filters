@@ -757,6 +757,78 @@
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.cpp">
       <Filter>GoTvP2P\ThumbMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseInfo.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseInfoDb.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseMgr.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseRxSession.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseTxSession.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseXferDb.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseXferMgr.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseXferSession.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfo.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfoDb.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientMgr.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientRxSession.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientTxSession.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferDb.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferMgr.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferSession.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfo.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfoDb.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostMgr.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostRxSession.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostTxSession.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferDb.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferMgr.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferSession.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1618,6 +1690,87 @@
     <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.h">
       <Filter>GoTvP2P\ThumbMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseInfo.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseInfoDb.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseMgr.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseRxSession.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseTxSession.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseXferDb.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseXferMgr.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseXferSession.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientCallbackInterface.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfo.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfoDb.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientMgr.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientRxSession.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientTxSession.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferDb.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferMgr.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferSession.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostCallbackInterface.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfo.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfoDb.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostMgr.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostRxSession.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostTxSession.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferDb.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferMgr.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferSession.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseCallbackInterface.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1715,6 +1868,15 @@
     </Filter>
     <Filter Include="GoTvP2P\AssetBase">
       <UniqueIdentifier>{9f3693fb-5343-4243-af51-b0ed6fb60a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\OfferBase">
+      <UniqueIdentifier>{df8389e0-0bdd-4773-9dfe-9ba516d0d026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\OfferClientMgr">
+      <UniqueIdentifier>{910c7eeb-e37d-4ff4-9de5-f7b01e4f1292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\OfferHostMgr">
+      <UniqueIdentifier>{f8868528-d130-4a76-81b0-d74ac433ab10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

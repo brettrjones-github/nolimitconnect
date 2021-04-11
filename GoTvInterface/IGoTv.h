@@ -411,10 +411,6 @@ public:
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
 
-    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) override;
-    virtual void				toGuiThumbUpdated( ThumbInfo * thumb ) override;
-    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) override;
-
     //============================================================================
     //=== from gui ===//
     //============================================================================

@@ -162,6 +162,14 @@ PktHandlerBase::PktHandlerBase()
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_COMPLETE_REQ ]          = &PktHandlerBase::onPktThumbSendCompleteReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_COMPLETE_REPLY ]        = &PktHandlerBase::onPktThumbSendCompleteReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_XFER_ERR ]                   = &PktHandlerBase::onPktThumbXferErr;
+
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_SEND_REQ ]                   = &PktHandlerBase::onPktThumbSendReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_SEND_REPLY ]                 = &PktHandlerBase::onPktThumbSendReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_CHUNK_REQ ]                  = &PktHandlerBase::onPktThumbChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_CHUNK_REPLY ]                = &PktHandlerBase::onPktThumbChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_SEND_COMPLETE_REQ ]          = &PktHandlerBase::onPktThumbSendCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_SEND_COMPLETE_REPLY ]        = &PktHandlerBase::onPktThumbSendCompleteReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_XFER_ERR ]                   = &PktHandlerBase::onPktThumbXferErr;
 }
 
 //============================================================================
@@ -848,6 +856,50 @@ void PktHandlerBase::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr 
 
 //============================================================================
 void PktHandlerBase::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+// offers
+
+//============================================================================
+void PktHandlerBase::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }

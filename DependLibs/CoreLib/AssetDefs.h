@@ -18,16 +18,6 @@
 
 enum EAssetType
 {
-// the first 8 bits MUST match VxFileInfo 
-//#define VXFILE_TYPE_PHOTO					0x01		
-//#define VXFILE_TYPE_AUDIO					0x02		
-//#define VXFILE_TYPE_VIDEO					0x04		
-//#define VXFILE_TYPE_DOC					0x08
-//#define VXFILE_TYPE_ARCHIVE_OR_CDIMAGE	0x10
-//#define VXFILE_TYPE_EXECUTABLE			0x20	
-//#define VXFILE_TYPE_OTHER					0x40
-//#define VXFILE_TYPE_DIRECTORY				0x80
-
 	eAssetTypeUnknown				= 0x00,
 	eAssetTypePhoto					= 0x01,
 	eAssetTypeAudio					= 0x02,

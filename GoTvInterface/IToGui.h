@@ -24,6 +24,8 @@
 class VxNetIdent;
 class AssetInfo;
 class BlobInfo;
+class OfferClientInfo;
+class OfferHostInfo;
 class ThumbInfo;
 class VxGUID;
 class PluginSetting;
@@ -196,9 +198,9 @@ public:
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) = 0;
 
-    virtual void				toGuiThumbAdded( ThumbInfo * thumbInfo ) = 0;
-    virtual void				toGuiThumbUpdated( ThumbInfo * thumbInfo ) = 0;
-    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) = 0;
+    //virtual void				toGuiThumbAdded( ThumbInfo * thumbInfo ) = 0;
+    //virtual void				toGuiThumbUpdated( ThumbInfo * thumbInfo ) = 0;
+    //virtual void				toGuiThumbRemoved( VxGUID& thumbId ) = 0;
 
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
 	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 
@@ -231,4 +233,14 @@ public:
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
 																const char *	pFileName ) = 0;
+
+    //virtual void				toGuiOfferAction( EOfferAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
+
+    //virtual void				toGuiOfferClientAdded( OfferClientInfo * offerClent ) = 0;
+    //virtual void				toGuiOfferClientUpdated( OfferClientInfo * offerClent ) = 0;
+    //virtual void				toGuiOfferClientRemoved( VxGUID& offerId ) = 0;
+
+    //virtual void				toGuiOfferHostAdded( OfferHostInfo * offerHost ) = 0;
+    //virtual void				toGuiOfferHostUpdated( OfferHostInfo * offerHost ) = 0;
+    //virtual void				toGuiOfferHostRemoved( VxGUID& offerId ) = 0;
 };

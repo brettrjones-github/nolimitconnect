@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2003 Brett R. Jones 
+// Copyright (C) 2010 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 

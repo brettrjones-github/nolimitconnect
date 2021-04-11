@@ -66,7 +66,7 @@ protected:
 	//! send final sent file packet and close file
 	virtual void				finishFileReceive( FileXferPluginSession * poSession, PktFileSendCompleteReq * poPkt, bool pluginIsLocked  );
 
-	virtual long				sendFileXferError(	VxSktBase *		sktBase,		// socket
+	virtual long				sendFileXferError(	VxSktBase *		sktBase,	// socket
 													int				iPktType,	// type of packet
 													unsigned short	u16Cmd,		// packet command
 													long			rc,			// error code

@@ -581,10 +581,12 @@ VxNetIdent * PluginMgr::pluginApiFindUser( const char * pUserName )
 //============================================================================
 void PluginMgr::fromGuiUserLoggedOn( void )
 {
+    vx_assert( m_PluginMgrInitialized );
 	// set all plugin permissions
 	std::vector<PluginBase * >::iterator iter;
 	for( PluginBase * pluginBase : m_aoPlugins )
 	{
+        vx_assert( pluginBase );
         pluginBase->setPluginPermission( m_PktAnn.getPluginPermission( pluginBase->getPluginType() ) );
 	}
 
@@ -592,6 +594,7 @@ void PluginMgr::fromGuiUserLoggedOn( void )
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		PluginBase * pluginBase = ( *iter );
+        vx_assert( pluginBase );
 		pluginBase->fromGuiUserLoggedOn();
 	}
 

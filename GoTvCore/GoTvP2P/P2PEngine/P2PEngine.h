@@ -25,6 +25,8 @@
 #include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
 #include <GoTvCore/GoTvP2P/BlobXferMgr/BlobCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
+#include <GoTvCore/GoTvP2P/OfferClientMgr/OfferClientMgr.h>
+#include <GoTvCore/GoTvP2P/OfferHostMgr/OfferHostMgr.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 
@@ -101,6 +103,22 @@ public:
     PluginSettingMgr&			getPluginSettingMgr( void )						{ return m_PluginSettingMgr; }
     RcScan&						getRcScan( void )								{ return m_RcScan; }
     RunUrlAction&               getRunUrlAction( void )                         { return m_RunUrlAction; }
+
+    OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
+    OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
+    OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType )
+    {
+        switch( mgrType )
+        {
+        case eOfferMgrTypeOfferClient:
+            return getOfferClientMgr();
+        case eOfferMgrTypeOfferHost:
+            return getOfferHostMgr();
+        default:
+            vx_assert( false );
+            return getOfferClientMgr();
+        }
+    }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
@@ -608,6 +626,14 @@ protected:
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+    virtual void				onPktOfferSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
     //========================================================================
     //========================================================================
     void						iniitializePtoPEngine( void );
@@ -638,6 +664,8 @@ protected:
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
     BlobMgr&				    m_BlobMgr;
+    OfferClientMgr&				m_OfferClientMgr;
+    OfferHostMgr&				m_OfferHostMgr;
     ThumbMgr&					m_ThumbMgr;
     ConnectionMgr&              m_ConnectionMgr;
 	P2PConnectList				m_ConnectionList;

@@ -1200,7 +1200,7 @@ QString GuiParams::describeOfferType( EOfferType offerType )
 {
     switch( offerType )
     {
-    case eOfferTypeNone:
+    case eOfferTypeUnknown:
         return QObject::tr( "Unknonn Offer Type" );
     case eOfferTypeJoinGroup:
         return QObject::tr( "Offer: Join Group" );
@@ -1234,6 +1234,19 @@ QString GuiParams::describeOfferType( EOfferType offerType )
         return QObject::tr( "Offer: Video Chat" );
     case eOfferTypeVoicePhone:
         return QObject::tr( "Offer: Voice Phone Call" );
+
+    case eOfferTypeChatText:
+        return QObject::tr( "Offer: Chat Text" );
+    case eOfferTypeChatFace:
+        return QObject::tr( "Offer: Chat Fase" );
+    case eOfferTypeChatStockAvatar:
+        return QObject::tr( "Offer: Stock Avatar" );
+    case eOfferTypeChatCustomAvatar:
+        return QObject::tr( "Offer: Custom Avatar" );
+    case eOfferTypeThumbnail:
+        return QObject::tr( "Offer: Thumbnail" );
+    case eOfferTypeCamRecord:
+        return QObject::tr( "Offer: Cam Recording" );
     default:
         return QObject::tr( "Unknown Offer Type" );
     }

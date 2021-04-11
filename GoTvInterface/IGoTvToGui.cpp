@@ -535,20 +535,20 @@ void IGoTv::toGuiBlobSessionHistory( BlobInfo * hostListInfo )
     getAppCommon().toGuiBlobSessionHistory( hostListInfo );
 }
 
-//============================================================================
-void IGoTv::toGuiThumbAdded( ThumbInfo * thumbInfo )
-{
-    getAppCommon().toGuiThumbAdded( thumbInfo );
-}
-
-//============================================================================
-void IGoTv::toGuiThumbUpdated( ThumbInfo * thumbInfo )
-{
-    getAppCommon().toGuiThumbUpdated( thumbInfo );
-}
-
-//============================================================================
-void IGoTv::toGuiThumbRemoved( VxGUID& thumbId )
-{
-    getAppCommon().toGuiThumbRemoved( thumbId );
-}
+////============================================================================
+//void IGoTv::toGuiThumbAdded( ThumbInfo * thumbInfo )
+//{
+//    getAppCommon().toGuiThumbAdded( thumbInfo );
+//}
+//
+////============================================================================
+//void IGoTv::toGuiThumbUpdated( ThumbInfo * thumbInfo )
+//{
+//    getAppCommon().toGuiThumbUpdated( thumbInfo );
+//}
+//
+////============================================================================
+//void IGoTv::toGuiThumbRemoved( VxGUID& thumbId )
+//{
+//    getAppCommon().toGuiThumbRemoved( thumbId );
+//}

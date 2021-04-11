@@ -1111,3 +1111,67 @@ void P2PEngine::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
+
+// offers
+//============================================================================
+void P2PEngine::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendReq" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendReply" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferChunkReq" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferChunkReply" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendCompleteReq" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendCompleteReply" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktOfferXferErr" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}

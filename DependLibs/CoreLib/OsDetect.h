@@ -13,6 +13,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+
 #include <CoreLib/config_corelib.h>
 
 class OsDetect

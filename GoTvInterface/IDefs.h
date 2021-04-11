@@ -382,7 +382,7 @@ enum EOfferState
 //! public Enumeration of offer
 enum EOfferType
 {
-    eOfferTypeNone		            = 0,	//!< Unknown or no offer
+    eOfferTypeUnknown		        = 0,	//!< Unknown or no offer
     eOfferTypeJoinGroup		        = 1,
     eOfferTypeJoinChatRoom		    = 2,
     eOfferTypeJoinRandomConnect		= 3,
@@ -400,7 +400,100 @@ enum EOfferType
     eOfferTypeVideoPhone            = 15,	// Video Chat with motion detect and stream recording
     eOfferTypeVoicePhone            = 16,	// VOIP audio only phone call
 
+    eOfferTypeChatText				= 17,
+    eOfferTypeChatFace				= 18,
+    eOfferTypeChatStockAvatar		= 19,
+    eOfferTypeChatCustomAvatar		= 20,
+    eOfferTypeThumbnail             = 21,
+    eOfferTypeCamRecord             = 22,
+
     eMaxOfferType
+};
+
+enum EOfferLocation
+{
+    eOfferLocUnknown				= 0x00,
+    eOfferLocLibrary				= 0x01,
+    eOfferLocShared					= 0x02,
+    eOfferLocPersonalRec			= 0x04,
+    eOfferLocThumbDirectory         = 0x08,
+    eOfferLocCamRecord              = 0x10
+};
+
+enum EOfferAction
+{
+    eOfferActionUnknown				= 0,
+    eOfferActionDeleteFile			= 1,
+    eOfferActionShreadFile			= 2,
+    eOfferActionAddToOfferMgr		= 3,
+    eOfferActionRemoveFromOfferMgr	= 4,	
+    eOfferActionUpdateOffer			= 5,
+    eOfferActionAddOfferAndSend		= 6,
+    eOfferActionOfferResend			= 7,
+
+    eOfferActionAddToShare			= 8,
+    eOfferActionRemoveFromShare		= 9,
+    eOfferActionAddToLibrary		= 10,
+    eOfferActionRemoveFromLibrary	= 11,
+    eOfferActionAddToHistory		= 12,
+    eOfferActionRemoveFromHistory	= 13,
+
+    eOfferActionRecordBegin			= 14,
+    eOfferActionRecordPause			= 15,
+    eOfferActionRecordResume		= 16,
+    eOfferActionRecordProgress		= 17,
+    eOfferActionRecordEnd			= 18,
+    eOfferActionRecordCancel		= 19,
+
+    eOfferActionPlayBegin			= 20,
+    eOfferActionPlayOneFrame		= 21,
+    eOfferActionPlayPause			= 22,
+    eOfferActionPlayResume			= 23,
+    eOfferActionPlayProgress		= 24,
+    eOfferActionPlayEnd				= 25,
+    eOfferActionPlayCancel			= 26,
+
+    eOfferActionTxBegin				= 27,
+    eOfferActionTxProgress			= 28,
+    eOfferActionTxSuccess			= 29,
+    eOfferActionTxError				= 30,
+    eOfferActionTxCancel			= 31,
+    eOfferActionTxPermission		= 32,
+
+    eOfferActionRxBegin				= 33,
+    eOfferActionRxProgress			= 34,
+    eOfferActionRxSuccess			= 35,
+    eOfferActionRxError				= 36,
+    eOfferActionRxCancel			= 37,
+    eOfferActionRxPermission		= 38,
+
+    eOfferActionRxNotifyNewMsg		= 39,
+    eOfferActionRxViewingMsg		= 40,
+};
+
+enum EOfferMgrType
+{
+    eOfferMgrTypeNone,
+    eOfferMgrTypeOfferBase,
+    eOfferMgrTypeOfferClient,
+    eOfferMgrTypeOfferHost,
+
+    eMaxOfferMgrType
+};
+
+enum EOfferSendState
+{
+    eOfferSendStateNone     = 0,
+    eOfferSendStateTxProgress,
+    eOfferSendStateRxProgress,
+    eOfferSendStateTxSuccess,
+    eOfferSendStateTxFail,
+    eOfferSendStateRxSuccess,
+    eOfferSendStateRxFail,
+    eOfferSendStateTxPermissionErr,
+    eOfferSendStateRxPermissionErr,
+
+    eMaxOfferSendState	
 };
 
 //! \public Enumeration of plugin accessibility

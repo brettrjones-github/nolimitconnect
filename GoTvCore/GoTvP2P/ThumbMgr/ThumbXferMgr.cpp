@@ -69,12 +69,12 @@ namespace
 
 
 //============================================================================
-ThumbXferMgr::ThumbXferMgr( PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr )
-: m_Plugin( plugin )
+ThumbXferMgr::ThumbXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr )
+: m_Engine( engine )
+, m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )
-, m_PluginMgr( plugin.getPluginMgr() )
-, m_Engine( plugin.getEngine() )
-, m_ThumbMgr( m_Engine.getThumbMgr() )
+, m_PluginMgr( engine.getPluginMgr() )
+, m_ThumbMgr( engine.getThumbMgr() )
 {
 }
 

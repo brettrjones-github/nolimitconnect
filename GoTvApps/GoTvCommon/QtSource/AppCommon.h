@@ -196,7 +196,6 @@ public:
 	void						wantToGuiHardwareCtrlCallbacks( ToGuiHardwareControlInterface *	callback, 
 																bool							wantCallback );
     void						wantToGuiUserUpdateCallbacks( ToGuiUserUpdateInterface * callback, bool	wantCallback );
-    void						wantToGuiThumbUpdateCallbacks( ToGuiThumbUpdateInterface * callback, bool	wantCallback );
 
 	bool						getIsPluginVisible( EPluginType ePluginType );
 	void						setPluginVisible( EPluginType ePluginType, bool isVisible );
@@ -561,10 +560,6 @@ public:
     virtual void				toGuiBlobSessionHistory( BlobInfo * assetInfo ) override;
     virtual void				toGuiBlobAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
 
-    virtual void				toGuiThumbAdded( ThumbInfo * assetInfo ) override;
-    virtual void				toGuiThumbUpdated( ThumbInfo * assetInfo ) override;
-    virtual void				toGuiThumbRemoved( VxGUID& thumbId ) override;
-
 	/// a module has changed state
 	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
@@ -715,10 +710,6 @@ private:
     void						toGuiUserUpdateClientsUnlock( void );
     void						clearUserUpdateClientList( void );
 
-    void						toGuiThumbUpdateClientsLock( void );
-    void						toGuiThumbUpdateClientsUnlock( void );
-    void						clearThumbUpdateClientList( void );
-
 	//=== vars ===//
 	QApplication&				m_QApp;
 	EDefaultAppMode				m_AppDefaultMode;
@@ -786,9 +777,6 @@ private:
 
     VxMutex						m_ToGuiUserUpdateClientMutex;
     std::vector<ToGuiUserUpdateClient> m_ToGuiUserUpdateClientList;
-
-    VxMutex						m_ToGuiThumbUpdateClientMutex;
-    std::vector<ToGuiThumbUpdateClient> m_ToGuiThumbUpdateClientList;
 
 	bool						m_LibraryActivityActive = false;
 	bool						m_VidCaptureEnabled = false;
