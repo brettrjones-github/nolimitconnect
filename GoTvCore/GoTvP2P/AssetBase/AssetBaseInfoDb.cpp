@@ -157,6 +157,7 @@ void AssetBaseInfoDb::addAsset( VxGUID&			assetId,
 
     RCODE rc = sqlExec( "INSERT INTO tblAssets (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         bindList );
+    vx_assert( 0 == rc );
     if( rc )
     {
         LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d\n", rc );
@@ -171,6 +172,7 @@ void AssetBaseInfoDb::updateAssetSendState( VxGUID& assetId, EAssetSendState sen
 	bindList.add( assetIdStr.c_str() );
 	RCODE rc  = sqlExec( "UPDATE tblAssets SET sendState=? WHERE unique_id=?",
 		bindList );
+    vx_assert( 0 == rc );
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d\n", rc );

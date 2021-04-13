@@ -24,11 +24,12 @@
 
 #include <CoreLib/VxGUID.h>
 
-class GuiUser;
-class GuiOfferSession;
-class QLabel;
 class AppCommon;
+class GuiOfferMgr;
+class GuiOfferSession;
+class GuiUser;
 class MyIcons;
+class QLabel;
 
 class TitleBarWidget : public QWidget, public ToGuiActivityInterface
 {
@@ -139,7 +140,7 @@ protected:
                                                            int				motion0To100000 ) override;
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
-    OfferMgr&                   m_OfferMgr;
+    GuiOfferMgr&                m_OfferMgr;
 	bool						m_MuteMic{ false };
 	bool						m_MuteSpeaker{ false };
 	bool						m_EchoCancelEnabled{ false };

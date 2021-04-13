@@ -19,11 +19,12 @@
 #include "ui_OfferBarWidget.h"
 #include <QListWidgetItem>
 
-class GuiUser;
-class GuiOfferSession;
-class QLabel;
 class AppCommon;
+class GuiOfferMgr;
+class GuiOfferSession;
+class GuiUser;
 class MyIcons;
+class QLabel;
 
 class OfferBarWidget : public QFrame, public ToGuiOfferInterface
 {
@@ -60,7 +61,7 @@ protected:
 
 	Ui::OfferBarWidgetClass		ui;
 	AppCommon&				    m_MyApp;
-	OfferMgr&					m_OfferMgr;
+	GuiOfferMgr&				m_OfferMgr;
 	VxGUID						m_OfferSessionId;
 	GuiUser *				    m_HisIdent;
 	EPluginType					m_ePluginType;

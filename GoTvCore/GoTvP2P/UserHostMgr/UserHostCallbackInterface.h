@@ -13,17 +13,18 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GuiUser.h"
+#include <GoTvInterface/IDefs.h>
 
-class GuiUserWidget : public GuiUser
+class UserHostInfo;
+class VxGUID;
+
+class UserHostCallbackInterface
 {
-    Q_OBJECT
 public:
-    GuiUserWidget() = default;
-    GuiUserWidget( AppCommon& app, VxNetIdent * netIdent, VxGUID& sessionId, bool online = false );
-    GuiUserWidget( const GuiUserWidget& rhs );
-	virtual ~GuiUserWidget() = default;
-
-protected:
-
+    virtual void				callbackUserHostAdded( UserHostInfo * userHostInfo ){};
+    virtual void				callbackUserHostUpdated( UserHostInfo * userHostInfo ){};
+    virtual void				callbackUserHostRemoved( VxGUID& userHostId ){};
+    virtual void				callbackUserHostOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState ) {};
+    virtual void				callbackUserHostOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId ) {};
 };
+

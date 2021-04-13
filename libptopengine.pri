@@ -294,6 +294,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.h \
 	$$PWD/GoTvCore/GoTvP2P/User/User.h \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfoDb.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostMgr.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
@@ -548,6 +552,9 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/User.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfoDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \

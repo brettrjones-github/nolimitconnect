@@ -20,6 +20,9 @@
 #include "CamLogic.h"
 #include "HomeWindow.h"
 #include "FriendList.h"
+#include "GuiConnectMgr.h"
+#include "GuiOfferMgr.h"
+#include "GuiUserHostMgr.h"
 #include "GuiUserMgr.h"
 #include "GuiThumbMgr.h"
 #include "MyIcons.h"
@@ -48,7 +51,6 @@
 
 class AccountMgr;
 class AppSettings;
-class IVxVidCap;
 class ActivityCreateAccount;
 class ActivityOfferListDlg;
 class AppletDownloads;
@@ -61,19 +63,21 @@ class AppletMultiMessenger;
 class AppletDownloads;
 class AppletUploads;
 
+class AppletMgr;
+class BlobInfo;
 class FriendListEntryWidget;
 class FileListReplySession;
-class GuiOfferSession;
 class GuiFileXferSession;
-class VxPeerMgr;
+class GuiOfferSession;
+class IGoTv;
 class PopupMenu;
+class RenderGlWidget;
+class IVxVidCap;
+class KodiThread;
+
+class VxPeerMgr;
 class VxMyFileInfo;
 class VxTilePositioner;
-class AppletMgr;
-class IGoTv;
-class RenderGlWidget;
-class KodiThread;
-class BlobInfo;
 
 // media
 class CRenderBuffer;
@@ -123,11 +127,13 @@ public:
     VxNetIdent *				getMyIdentity( void );
     VxGUID				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
-    OfferMgr&					getOfferMgr( void )						    { return m_OfferMgr; }
+    GuiOfferMgr&				getOfferMgr( void )						    { return m_OfferMgr; }
     VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
     RenderGlWidget *            getRenderConsumer( void );
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
+    GuiConnectMgr&              getConnectMgr( void )						{ return m_ConnectMgr; }
+    GuiUserHostMgr&             getUserHostMgr( void )						{ return m_UserHostMgr; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
@@ -720,7 +726,10 @@ private:
     AccountMgr&				    m_AccountMgr;
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
+    GuiConnectMgr				m_ConnectMgr;
+    GuiOfferMgr				    m_OfferMgr;
     GuiUserMgr					m_UserMgr;
+    GuiUserHostMgr				m_UserHostMgr;
     GuiThumbMgr					m_ThumbMgr;
 
 	MyIcons					    m_MyIcons;
@@ -732,7 +741,7 @@ private:
 
 	P2PEngine&					m_Engine; // engine before sound so can initialize engine sound interface
 	MySndMgr&					m_MySndMgr;
-	OfferMgr&					m_OfferMgr;
+	//OfferMgr&					m_OfferMgr;
 
 	HomeWindow					m_HomePage;
 

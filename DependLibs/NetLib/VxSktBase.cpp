@@ -95,6 +95,7 @@ VxSktBase::VxSktBase()
 	m_TotalCreatedSktCnt++;
 	m_iSktId = m_TotalCreatedSktCnt;
 	m_CurrentSktCnt++;
+    m_ConnectionId.generateNewVxGUID( m_ConnectionId );
 	m_u8TxSeqNum = (uint8_t)rand();
 	m_LclIp.setToInvalid();
 	m_RmtIp.setToInvalid();

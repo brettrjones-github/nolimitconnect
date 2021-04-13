@@ -1,3 +1,4 @@
+#pragma once
 //============================================================================
 // Copyright (C) 2021 Brett R. Jones
 //
@@ -12,16 +13,22 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GuiUserWidget.h"
+#include <QObject>
 
-//============================================================================
-GuiUserWidget::GuiUserWidget( AppCommon& app, VxNetIdent * netIdent, VxGUID& sessionId, bool online )
-    : GuiUser( app, netIdent, sessionId, online )
-{
-}
+class AppCommon;
 
-//============================================================================
-GuiUserWidget::GuiUserWidget( const GuiUserWidget& rhs )
-    : GuiUser( rhs )
+class GuiConnectMgr : public QObject
 {
-}
+    Q_OBJECT
+public:
+    GuiConnectMgr() = delete;
+    GuiConnectMgr( AppCommon& app );
+    GuiConnectMgr( const GuiConnectMgr& rhs ) = delete;
+	virtual ~GuiConnectMgr() = default;
+
+    void                        onAppCommonCreated( void );
+
+protected:
+    
+    AppCommon&                  m_MyApp;
+};

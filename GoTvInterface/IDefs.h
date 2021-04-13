@@ -496,6 +496,17 @@ enum EOfferSendState
     eMaxOfferSendState	
 };
 
+enum EOnlineState
+{
+    eOnlineStateUnknown         = 0,
+    eOnlineStateConnecting      = 1,
+    eOnlineStateConnectFailed   = 2,
+    eOnlineStateOnline          = 3,
+    eOnlineStateOffline         = 4,
+
+    eMaxOnlineState	
+};
+
 //! \public Enumeration of plugin accessibility
 enum EPluginAccess
 {

@@ -829,6 +829,15 @@
     <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferSession.cpp">
       <Filter>GoTvP2P\OfferHostMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostInfo.cpp">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostInfoDb.cpp">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostMgr.cpp">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1771,6 +1780,18 @@
     <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseCallbackInterface.h">
       <Filter>GoTvP2P\OfferBase</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostCallbackInterface.h">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostInfo.h">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostInfoDb.h">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostMgr.h">
+      <Filter>GoTvP2P\UserHostMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1877,6 +1898,9 @@
     </Filter>
     <Filter Include="GoTvP2P\OfferHostMgr">
       <UniqueIdentifier>{f8868528-d130-4a76-81b0-d74ac433ab10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\UserHostMgr">
+      <UniqueIdentifier>{f2383251-442f-404f-9baf-f062208c7b6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

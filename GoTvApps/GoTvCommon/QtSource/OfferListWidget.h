@@ -33,13 +33,13 @@ enum EOfferViewType
     eMaxOfferViewTypeNone,
 };
 
-class OfferListItem;
-class GuiOffer;
 class AppCommon;
-class MyIcons;
-class P2PEngine;
+class GuiOffer;
+class GuiOfferMgr;
 class GuiOfferSession;
-class OfferMgr;
+class MyIcons;
+class OfferListItem;
+class P2PEngine;
 
 class OfferListWidget : public QListWidget
 {
@@ -103,7 +103,7 @@ protected:
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
-    OfferMgr&					m_OfferMgr;
+    GuiOfferMgr&				m_OfferMgr;
 	P2PEngine&					m_Engine;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     bool                        m_ShowMyself{ true };

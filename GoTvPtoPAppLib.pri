@@ -177,14 +177,20 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiConnectMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHost.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostList.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostMgr.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostSession.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserItem.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserSessionBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserWidget.h \
@@ -274,6 +280,10 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateInterface.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateClient.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateInterface.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListItem.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListItem.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.h \
@@ -491,12 +501,18 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiConnectMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHost.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostList.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostMgr.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostSession.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserItem.cpp \
@@ -595,6 +611,10 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateClient.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListItem.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListItem.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.cpp \
@@ -789,6 +809,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailChooseWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/UserHostListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/UserListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui
 

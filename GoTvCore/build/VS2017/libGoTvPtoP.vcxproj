@@ -741,6 +741,9 @@
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostInfoDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\User\User.cpp" />
     <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.cpp" />
@@ -1055,6 +1058,10 @@
     <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.h" />
     <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostCallbackInterface.h" />
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostInfoDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\User\User.h" />
     <ClInclude Include="..\..\GoTvP2P\User\UserList.h" />
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.h" />

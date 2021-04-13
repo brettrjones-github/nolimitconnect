@@ -77,6 +77,7 @@ public:
 	virtual ~VxSktBase() override;
 
 	virtual int					getSktId( void )								{ return m_iSktId; }
+    virtual VxGUID&             getConnectionId( void )                         { return m_ConnectionId; }
 
 	virtual void				setSktType( ESktType sktType )					{ m_eSktType = sktType; }
 	virtual ESktType			getSktType( void )								{ return m_eSktType; }
@@ -265,6 +266,7 @@ protected:
 public:
 	SOCKET						m_Socket;				// handle to socket
 	int							m_iSktId;				// socket unique id
+    VxGUID                      m_ConnectionId;         // unique connection id 
 
 	InetAddrAndPort				m_LclIp;				// local ip address
 	std::string					m_strLclIp;				// local ip address in dotted form

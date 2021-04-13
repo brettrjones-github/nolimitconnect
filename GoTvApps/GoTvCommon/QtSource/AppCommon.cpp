@@ -167,7 +167,10 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AccountMgr( accountMgr )
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
+, m_ConnectMgr( *this )
+, m_OfferMgr( *this )
 , m_UserMgr( *this )
+, m_UserHostMgr( *this )
 , m_ThumbMgr( *this )
 
 , m_MyIcons( *this )
@@ -179,7 +182,6 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 
 , m_Engine( gotv.getPtoP() )
 , m_MySndMgr( * new MySndMgr( *this ) )
-, m_OfferMgr( * new OfferMgr( *this ) )
 
 , m_HomePage( *this, m_AppTitle )
 
@@ -586,11 +588,12 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWid
 	}
 
 	bool haveExistingOffer = false;
+    /*
 	GuiOfferSession * exitingOffer = getOfferMgr().findActiveAndAvailableOffer( m_UserMgr.getUser( netIdent->getMyOnlineId() ), ePluginType );
 	if( exitingOffer )
 	{
 		haveExistingOffer = true;
-	}
+	}*/
 
 	switch( ePluginType )
 	{
