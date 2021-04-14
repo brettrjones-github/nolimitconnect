@@ -30,7 +30,7 @@ PluginConnectionTestClient::PluginConnectionTestClient( P2PEngine& engine, Plugi
 : PluginBaseHostClient( engine, pluginMgr, myIdent )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 {
-    setPluginType( ePluginTypeConnectTestClient );
+    setPluginType( ePluginTypeClientConnectTest );
 }
 
 //============================================================================

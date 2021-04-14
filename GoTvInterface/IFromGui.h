@@ -259,9 +259,9 @@ public:
 	virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType ePluginType ) = 0;
 
 	/// Start plugin session or server
-	virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
+	virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	/// Stop plugin session or server
-	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) = 0;
+	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) = 0;
 	/// Return true if plugin is in session
 	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	/// Send offer of file or session to a contact

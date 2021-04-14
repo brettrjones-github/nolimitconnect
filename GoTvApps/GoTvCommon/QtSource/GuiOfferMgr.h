@@ -60,7 +60,7 @@ public:
     void						rejectOfferButtonClicked( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent ) {};
 
     // called if starting new session to know if responding to existing offer
-    GuiOfferSession *			findActiveAndAvailableOffer( GuiUser * netIdent, EPluginType ePluginType ) {};
+    GuiOfferSession *			findActiveAndAvailableOffer( GuiUser * netIdent, EPluginType ePluginType ) { return nullptr; };
     void						sentOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent ) {};
     void						sentOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse ) {};
     void						removePluginSessionOffer( EPluginType ePluginType, GuiUser * netIdent ) {};

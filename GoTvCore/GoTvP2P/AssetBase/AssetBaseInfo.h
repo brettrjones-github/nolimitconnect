@@ -96,7 +96,7 @@ public:
     virtual VxGUID&				getAssetUniqueId( void )                        { return m_UniqueId; }
     virtual VxGUID&				generateNewUniqueId( void ); // generates unique id, assigns it to asset and returns reference to it
 
-    virtual void				setCreatorId( VxGUID& creatorId )               { m_CreatorId = creatorId; }
+    virtual void				setCreatorId( VxGUID creatorId )                { m_CreatorId = creatorId; }
     virtual void				setCreatorId( const char * creatorId )          { m_CreatorId.fromVxGUIDHexString( creatorId ); }
     virtual VxGUID&				getCreatorId( void )                            { return m_CreatorId; }
 

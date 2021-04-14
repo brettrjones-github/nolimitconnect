@@ -110,7 +110,7 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
                 // BRJ temporary for debugging
                 // TODO REMOVE
                 // iter->second->setIsLoopback( true );
-                m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeNetworkHost );
+                m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeHostNetwork );
             }
             else
             {
@@ -156,7 +156,7 @@ bool HostServerMgr::removeClient( VxGUID& onlineId )
 }
 
 //============================================================================
-void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& sessionId )
+void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId )
 {
     onUserOnline( sktBase, netIdent, sessionId );
 }

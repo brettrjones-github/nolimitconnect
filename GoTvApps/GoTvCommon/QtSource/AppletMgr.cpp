@@ -274,15 +274,14 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletSettingsChatRoom:           appletDialog = new AppletSettingsChatRoom( m_MyApp, parent ); break;
     case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
     case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
+
     case eAppletSettingsHostChatRoom:       appletDialog = new AppletSettingsHostChatRoom( m_MyApp, parent ); break;
     case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
-    // case eAppletSettingsHostGroupListing:   appletDialog = new AppletSettingsHostGroupListing( m_MyApp, parent ); break;
     case eAppletSettingsHostNetwork:        appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;
-    case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsHostRandomConnect( m_MyApp, parent ); break;
+    case eAppletSettingsHostRandomConnect:  appletDialog = new AppletSettingsHostRandomConnect( m_MyApp, parent ); break;
+
     case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
-    //case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsRandomConnect( m_MyApp, parent ); break;
     case eAppletSettingsRandomConnectRelay: appletDialog = new AppletSettingsRandomConnectRelay( m_MyApp, parent ); break;
-    // case eAppletSettingsRelay:              appletDialog = new AppletSettingsRelay( m_MyApp, parent ); break;
     case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
     case eAppletSettingsStoryboard:         appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;
     case eAppletSettingsTruthOrDare:        appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;

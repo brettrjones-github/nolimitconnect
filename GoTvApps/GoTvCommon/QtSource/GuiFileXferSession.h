@@ -23,6 +23,7 @@
 #include <QString>
 #include <QObject>
 
+class GuiUser;
 class P2PEngine;
 
 class GuiFileXferSession : public QObject

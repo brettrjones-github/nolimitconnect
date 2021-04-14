@@ -55,7 +55,7 @@ public:
 
     EConnectStatus              requestConnection( VxGUID& sessionId, std::string url, VxGUID onlineId, IConnectRequestCallback* callback, VxSktBase*& retSktBase, 
                                                    EConnectReason connectReason = eConnectReasonUnknown );
-    void                        doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+    void                        doneWithConnection( VxGUID sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
 
     void                        onSktConnectedWithPktAnn( VxSktBase* sktBase, BigListInfo* bigListInfo );
     void                        onSktDisconnected( VxSktBase* sktBase );

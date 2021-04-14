@@ -687,14 +687,14 @@ void P2PEngine::fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// direct
 }
 
 //============================================================================
-void P2PEngine::fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+void P2PEngine::fromGuiStartPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiStartPluginSession" );
 	m_PluginMgr.fromGuiStartPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
 }
 
 //============================================================================
-void P2PEngine::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+void P2PEngine::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiStopPluginSession" );
 	m_PluginMgr.fromGuiStopPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
@@ -874,13 +874,13 @@ bool P2PEngine::getHasHostService( EHostServiceType hostService )
 {
     switch( hostService )
     {
-    case eHostServiceNetworkHost: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
-    case eHostServiceGroupListing: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
-    case eHostServiceGroup: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
-    case eHostServiceRelay: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
-    case eHostServiceRandomConnect: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
-    case eHostServiceRandomConnectRelay: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
-    case eHostServiceConnectTest: return m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) != eFriendStateIgnore;
+    case eHostServiceNetworkHost: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceGroupListing: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceGroup: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceRelay: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceRandomConnect: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceRandomConnectRelay: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceConnectTest: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
     default:
         break;
     }

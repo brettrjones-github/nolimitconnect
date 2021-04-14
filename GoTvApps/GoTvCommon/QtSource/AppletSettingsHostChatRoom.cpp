@@ -23,16 +23,16 @@
 
 //============================================================================
 AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget * parent )
-    : AppletSettingsBase( OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM, app, parent )
+    : AppletSettingsHostBase( OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostChatRoom );
-    setPluginType( ePluginTypeChatRoomHost );
+    setPluginType( ePluginTypeHostChatRoom );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostChatRoom, ePluginTypeChatRoomHost );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostChatRoom, ePluginTypeHostChatRoom );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
-    getConnectionTestWidget()->setPluginType( ePluginTypeConnectTestHost );
+    getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
     connectServiceWidgets();
     loadPluginSetting();
 

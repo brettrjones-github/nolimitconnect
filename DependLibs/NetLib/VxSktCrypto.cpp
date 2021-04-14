@@ -87,7 +87,7 @@ RCODE GenerateTxConnectionKey(	VxSktBase *			sktBase,
 //============================================================================
 //! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
 RCODE GenerateTxConnectionKey(  VxSktBase *				sktBase,
-                                std::string&            ipAddr, 
+                                std::string             ipAddr,
                                 uint16_t                port, 
                                 VxGUID                  onlineId,
                                 std::string		        networkName )

@@ -416,19 +416,19 @@ int IGoTv::fromGuiGetPluginServerState( EPluginType ePluginType )
 }
 
 //============================================================================
-void IGoTv::fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+void IGoTv::fromGuiStartPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
     getPtoP().fromGuiStartPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
 }
 
 //============================================================================
-void IGoTv::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+void IGoTv::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
     getPtoP().fromGuiStopPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
 }
 
 //============================================================================
-bool IGoTv::fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+bool IGoTv::fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
     BigListInfo * bigListInfo = getPtoP().getBigListMgr().findBigListInfo( oOnlineId );
     return getPtoP().fromGuiIsPluginInSession( ePluginType, ( VxNetIdent * )bigListInfo, pvUserData, lclSessionId );

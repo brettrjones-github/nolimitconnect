@@ -440,7 +440,7 @@ EConnectStatus ConnectionMgr::attemptConnection( VxGUID& sessionId, std::string 
 }
 
 //============================================================================
-void ConnectionMgr::doneWithConnection( VxGUID& sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
+void ConnectionMgr::doneWithConnection( VxGUID sessionId, VxGUID onlineId, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::doneWithConnection %s", DescribeConnectReason( connectReason ));
     m_HandshakeMutex.lock();

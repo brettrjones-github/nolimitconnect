@@ -426,8 +426,8 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 	NetServiceHdr netServiceHdr;
 	EPluginType pluginType = m_NetServiceUtils.parseHttpNetServiceUrl( sktBase, netServiceHdr );
     if( ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) &&
-        ( ePluginTypeNetworkHost == pluginType || ePluginTypeGroupHost == pluginType || 
-            ePluginTypeChatRoomHost == pluginType || ePluginTypeRandomConnectHost == pluginType || ePluginTypeConnectTestHost == pluginType) )
+        ( ePluginTypeHostNetwork == pluginType || ePluginTypeHostGroup == pluginType || 
+            ePluginTypeHostChatRoom == pluginType || ePluginTypeHostRandomConnect == pluginType || ePluginTypeHostConnectTest == pluginType) )
     {
         // only allowed if Hosting feature is enabled
         PluginBase * poPlugin = getPlugin( pluginType );
@@ -438,7 +438,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
         }
         else
         {
-            m_Engine.hackerOffense( NULL, eHackerLevelSuspicious, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed\n", sktBase->getRemoteIp() );
+            m_Engine.hackerOffense( NULL, eHackerLevelSuspicious, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed\n", sktBase->getRemoteIp().c_str() );
             sktBase->dumpSocketStats();
         }
 
@@ -468,7 +468,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		if( poPlugin )
 		{
 			RCODE rc = 0;
-			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeConnectTestHost == poPlugin->getPluginType() )
+			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeHostConnectTest == poPlugin->getPluginType() )
 			{
 				rc = poPlugin->handleHttpConnection( sktBase, netServiceHdr );
 			}
@@ -485,7 +485,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		else
 		{
 			LogMsg( LOG_INFO, "PluginMgr::handleFirstNetServiceConnection; unknown plugin type\n" );
-			m_Engine.hackerOffense( NULL, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Hacker http attack (unknown plugin)from ip %s\n", sktBase->getRemoteIp() );
+            m_Engine.hackerOffense( NULL, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Hacker http attack (unknown plugin)from ip %s\n", sktBase->getRemoteIp().c_str() );
             sktBase->dumpSocketStats();
 			sktBase->closeSkt( 657 );
 		}
@@ -493,7 +493,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	if( false == httpConnectionWasHandled )
 	{
-		m_Engine.hackerOffense( NULL, eHackerLevelSevere, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s\n", sktBase->getRemoteIp() );
+        m_Engine.hackerOffense( NULL, eHackerLevelSevere, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s\n", sktBase->getRemoteIp().c_str() );
         sktBase->dumpSocketStats();
 		sktBase->closeSkt( 659 );
 	}
@@ -782,15 +782,15 @@ PluginBase* PluginMgr::hostClientToPlugin( EHostType hostType )
     switch( hostType )
     {
     case eHostTypeChatRoom:
-        return findPlugin( ePluginTypeChatRoomClient );
+        return findPlugin( ePluginTypeClientChatRoom );
     case eHostTypeConnectTest:
-        return findPlugin( ePluginTypeConnectTestClient );
+        return findPlugin( ePluginTypeClientConnectTest );
     case eHostTypeGroup:
-        return findPlugin( ePluginTypeGroupClient );
+        return findPlugin( ePluginTypeClientGroup );
     case eHostTypeNetwork:
-        return findPlugin( ePluginTypeNetworkClient );
+        return findPlugin( ePluginTypeClientNetwork );
     case eHostTypeRandomConnect:
-        return findPlugin( ePluginTypeRandomConnectClient );
+        return findPlugin( ePluginTypeClientRandomConnect );
     default:
         return nullptr;
     }
@@ -802,15 +802,15 @@ PluginBase* PluginMgr::hostServiceToPlugin( EHostType hostType )
     switch( hostType )
     {
     case eHostTypeChatRoom:
-        return findPlugin( ePluginTypeChatRoomHost );
+        return findPlugin( ePluginTypeHostChatRoom );
     case eHostTypeConnectTest:
-        return findPlugin( ePluginTypeConnectTestHost );
+        return findPlugin( ePluginTypeHostConnectTest );
     case eHostTypeGroup:
-        return findPlugin( ePluginTypeGroupHost );
+        return findPlugin( ePluginTypeHostGroup );
     case eHostTypeNetwork:
-        return findPlugin( ePluginTypeNetworkHost );
+        return findPlugin( ePluginTypeHostNetwork );
     case eHostTypeRandomConnect:
-        return findPlugin( ePluginTypeRandomConnectHost );
+        return findPlugin( ePluginTypeHostRandomConnect );
     default:
         return nullptr;
     }
@@ -862,29 +862,29 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
     EPluginType hostClientType = ePluginTypeInvalid;
     switch( ePluginType )
     {
-    case ePluginTypeChatRoomClient:
-        hostClientType = ePluginTypeChatRoomHost;
+    case ePluginTypeClientChatRoom:
+        hostClientType = ePluginTypeHostChatRoom;
         break;
-    case ePluginTypeChatRoomHost:
-        hostClientType = ePluginTypeChatRoomClient;
+    case ePluginTypeHostChatRoom:
+        hostClientType = ePluginTypeClientChatRoom;
         break;
-    case ePluginTypeConnectTestClient:
-        hostClientType = ePluginTypeConnectTestHost;
+    case ePluginTypeClientConnectTest:
+        hostClientType = ePluginTypeHostConnectTest;
         break;
-    case ePluginTypeConnectTestHost:
-        hostClientType = ePluginTypeConnectTestClient;
+    case ePluginTypeHostConnectTest:
+        hostClientType = ePluginTypeClientConnectTest;
         break;
-    case ePluginTypeGroupClient:
-        hostClientType = ePluginTypeGroupHost;
+    case ePluginTypeClientGroup:
+        hostClientType = ePluginTypeHostGroup;
         break;
-    case ePluginTypeGroupHost:
-        hostClientType = ePluginTypeGroupClient;
+    case ePluginTypeHostGroup:
+        hostClientType = ePluginTypeClientGroup;
         break;
-    case ePluginTypeRandomConnectClient:
-        hostClientType = ePluginTypeRandomConnectHost;
+    case ePluginTypeClientRandomConnect:
+        hostClientType = ePluginTypeHostRandomConnect;
         break;
-    case ePluginTypeRandomConnectHost:
-        hostClientType = ePluginTypeRandomConnectClient;
+    case ePluginTypeHostRandomConnect:
+        hostClientType = ePluginTypeClientRandomConnect;
         break;
     default:
         break;

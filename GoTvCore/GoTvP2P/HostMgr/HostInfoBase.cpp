@@ -123,7 +123,7 @@ void HostInfoBase::addPluginService( EPluginType pluginType )
         case ePluginTypeHostGroup:
             m_HostType = eOtherHostGroupHost;
             break;
-        case ePluginTypeServiceConnectTest:
+        case ePluginTypeHostConnectTest:
             m_HostType = eOtherHostConnectTest;
             break;
         case ePluginTypeHostNetwork:
@@ -182,10 +182,10 @@ void HostInfoBase::setOtherHostType( EOtherHostType hostType )
     {
     case eOtherHostNetworkHost:
         // network host always provides group listing and optionally connection test
-        addPluginService( ePluginTypeHostGroupListing );
+        addPluginService( ePluginTypeNetworkSearchList );
         break;
     case eOtherHostConnectTest:
-        addPluginService( ePluginTypeServiceConnectTest );
+        addPluginService( ePluginTypeHostConnectTest );
         break;
     case eOtherHostGroupHost:
         addPluginService( ePluginTypeHostGroup );
@@ -597,38 +597,13 @@ bool HostInfoBase::hasHostMatch( PktAnnounce& peerPktAnn )
 {
     bool hasMatch = false;
 
-    /*
-
-    ePluginTypeAdmin = 1,	//!< Administration ( intended for updates but not currently used )
-        ePluginTypeAboutMePage = 2,	//!< about me page plugin ( using web page server )
-        ePluginTypeAvatarImage = 3,	//!< handle users avatar image
-        ePluginTypeCamServer = 4,	//!< Web cam broadcast plugin
-        ePluginTypeChatRoom = 5,	//!< chat room host plugin
-        ePluginTypeFileServer = 6,	//!< Shared files server
-        ePluginTypeFileXfer = 7,	//!< Offer/accept send a file person to person
-        ePluginTypeMessenger = 8,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-        ePluginTypeStoryboard = 9,	//!< User editable story board web page server
-        ePluginTypeTruthOrDare = 10,	//!< Video Chat Truth Or Dare game  
-        ePluginTypeVideoPhone = 11,	//!< Video Chat with motion detect and stream recording
-        ePluginTypeVoicePhone = 12,	//!< VOIP audio only phone call
-        ePluginTypeHostGroup = 13,	//!< group host
-        ePluginTypeHostNetwork = 14,	//!< master network host
-        ePluginTypeServiceConnectTest = 15,	//!< Connection Test Service
-
-        ePluginTypeClientConnectTest = 16,	//!< Connection Test Client
-        ePluginTypeHostGroupListing = 17,	//!< group list host
-        ePluginTypeRandomConnect = 18,	//!< Random connect to another person ( Using Phone Shake )
-        ePluginTypeRandomConnectRelay = 19,	//!< Random connect to another person relay service
-        ePluginTypeRelay = 20,	//!< Relay services plugin
-        */
-
     switch( m_HostType )
     {
     case eOtherHostNetworkHost:
-        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostNetwork ) ) || ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostGroupListing ) );
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostNetwork ) ) || ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeNetworkSearchList ) );
         break;
     case eOtherHostConnectTest:
-        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeServiceConnectTest ) );
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostConnectTest ) );
         break;
     case eOtherHostGroupHost:
         hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostGroup ) );

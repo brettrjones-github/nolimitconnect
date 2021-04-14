@@ -23,8 +23,9 @@
 
 #include <string>
 
-class P2PEngine;
+class GuiUser;
 class OfferWidget;
+class P2PEngine;
 class VxNetIdent;
 
 class FileListReplySession : public QObject

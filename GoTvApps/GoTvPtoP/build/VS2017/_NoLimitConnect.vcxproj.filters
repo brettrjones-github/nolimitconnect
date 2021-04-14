@@ -1116,6 +1116,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiConnectMgr.cpp">
       <Filter>GoTvCommon\Source Files\GuiConnect</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -2095,6 +2098,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiConnectMgr.h">
       <Filter>GoTvCommon\Source Files\GuiConnect</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

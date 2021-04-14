@@ -193,7 +193,7 @@ void GuiUserListWidget::refreshUserList( void )
 UserListItem* GuiUserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
 {
     UserListItem* userItem = new UserListItem(this);
-    userItem->setSizeHint( userItem->calcualteSizeHint() );
+    userItem->setSizeHint( userItem->calculateSizeHint() );
 
     userItem->setUserSession( userSession );
 
@@ -450,12 +450,12 @@ UserListItem* GuiUserListWidget::addOrUpdateSession( GuiUserSessionBase* userSes
         userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add user %s\n", userSession->getHostIdent()->getOnlineName() );
+            LogMsg( LOG_INFO, "add user %s\n", userSession->getUserIdent()->getOnlineName() );
             addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert user %s\n", userSession->getHostIdent()->getOnlineName() );
+            LogMsg( LOG_INFO, "insert user %s\n", userSession->getUserIdent()->getOnlineName() );
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 

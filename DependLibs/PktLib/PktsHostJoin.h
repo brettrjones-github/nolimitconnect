@@ -97,7 +97,7 @@ public:
     EHostType                   getHostType( void )                             { return (EHostType)m_HostType; }
     void                        setAccessState( EPluginAccess accessState )     { m_AccessState = (uint8_t)accessState; }
     EPluginAccess               getAccessState( void )                          { return (EPluginAccess)m_AccessState; }
-    void                        setSessionId( VxGUID& sessionId )               { m_SessionId = sessionId; }
+    void                        setSessionId( VxGUID sessionId )                { m_SessionId = sessionId; }
     VxGUID                      getSessionId( void )                            { return m_SessionId; }
     void                        setCommError( ECommErr commError )              { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                      { return (ECommErr)m_CommError; }

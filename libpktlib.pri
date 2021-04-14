@@ -2,7 +2,7 @@ INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 
 HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
-	$$PWD/DependLibs/NetLib/MatchParams.h \
+    $$PWD/DependLibs/PktLib/MatchParams.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.h \
@@ -21,7 +21,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktRequestErrors.h \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktTcpPunch.h \
-	$$PWD/DependLibs/PktLib/PktThumbXfer.h \
+    $$PWD/DependLibs/PktLib/PktsThumbXfer.h \
     $$PWD/DependLibs/PktLib/PktTypes.h \
     $$PWD/DependLibs/PktLib/PktVoiceReply.h \
     $$PWD/DependLibs/PktLib/PktVoiceReq.h \
@@ -57,7 +57,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/VxSearchDefs.h \
     $$PWD/DependLibs/PktLib/VxSearchFlags.h
 
-SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
+SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktAnnounce.cpp \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.cpp \
@@ -89,7 +89,7 @@ SOURCES += 	$$PWD/DependLibs/NetLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktsSearch.cpp \
     $$PWD/DependLibs/PktLib/PktsSession.cpp \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.cpp \
-	$$PWD/DependLibs/PktLib/PktThumbXfer.cpp \
+    $$PWD/DependLibs/PktLib/PktsThumbXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsTodGame.cpp \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.cpp \
     $$PWD/DependLibs/PktLib/PktsWebServer.cpp \

@@ -55,7 +55,7 @@ void AppCommon::addPermissionMenuEntry(	PopupMenu *		poPopupMenu,
 	int iPluginPermission = m_Engine.getPluginPermission( (int)ePluginType );
 	
 	char as8Buf[255];
-	sprintf(as8Buf, pText, GuiParams::describePluginPermission( (EFriendState) iPluginPermission ) );
+    sprintf(as8Buf, pText, GuiParams::describePluginPermission( (EFriendState) iPluginPermission ).toUtf8().constData() );
 	poPopupMenu->addMenuItem( ePluginType, getMyIcons().getIcon(eIconType), as8Buf );
 }
 

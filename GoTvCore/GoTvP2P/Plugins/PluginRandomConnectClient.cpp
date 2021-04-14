@@ -26,7 +26,7 @@
 PluginRandomConnectClient::PluginRandomConnectClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostClient( engine, pluginMgr, myIdent )
 {
-    setPluginType( ePluginTypeRandomConnectClient );
+    setPluginType( ePluginTypeClientRandomConnect );
 }
 //============================================================================
 void PluginRandomConnectClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )

@@ -19,15 +19,13 @@
 
 #include <GoTvInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
-
-#include "ui_AppletSettingsHostGroup.h"
  
 class AppletSettingsBase : public AppletBase
 {
 	Q_OBJECT
 public:
     AppletSettingsBase( const char * ObjName, AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsBase();
+	virtual ~AppletSettingsBase() = default;
 
     virtual PluginSettingsWidget*   getPluginSettingsWidget() = 0;
     virtual PermissionWidget*       getConnectionTestWidget() = 0;

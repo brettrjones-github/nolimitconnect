@@ -721,6 +721,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsFileXfer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostGroup.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -2073,6 +2074,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">

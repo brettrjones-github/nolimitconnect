@@ -85,7 +85,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	{
 		LogMsg( LOG_INFO, "Ignoring %s ip %s id %s\n",
 			pkt->getOnlineName(),
-			sktBase->getRemoteIp(),
+            sktBase->getRemoteIp().c_str(),
 			contactOnlineId.toHexString().c_str() );
 		m_NetConnector.closeConnection( contactOnlineId, sktBase );	
 		return;
@@ -95,7 +95,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	{
 		LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s myFriendship %d hisFriendship %d\n",
 			pkt->getOnlineName(),
-			sktBase->getRemoteIp(),
+            sktBase->getRemoteIp().c_str(),
 			bigListInfo->getMyFriendshipToHim(),
 			bigListInfo->getHisFriendshipToMe()
 			);
@@ -103,7 +103,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsPktAnnReplyRequested() )
 	{
-		LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reply requested\n", pkt->getOnlineName(), sktBase->getRemoteIp() ); 
+        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reply requested\n", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		m_NetConnector.sendMyPktAnnounce( pkt->getMyOnlineId(), 
 											sktBase,
 											false,
@@ -120,7 +120,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsTopTenRequested() )
 	{
-		LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s top ten requested\n", pkt->getOnlineName(), sktBase->getRemoteIp() ); 
+        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s top ten requested\n", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		pkt->setIsTopTenRequested( false );
 		m_ConnectionList.sendMyTop10( sktBase, pkt->getSrcOnlineId() );
 	}
@@ -134,7 +134,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsPktAnnRevConnectRequested() )
 	{
-		LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested\n", pkt->getOnlineName(), sktBase->getRemoteIp() ); 
+        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested\n", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		VxSktBase * poNewSkt = 0;
 		m_NetConnector.directConnectTo( pkt->getConnectInfo(), &poNewSkt );
 		if( poNewSkt )

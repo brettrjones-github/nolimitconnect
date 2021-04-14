@@ -881,7 +881,6 @@
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\WebRtcTypeDefs.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32filesystem.h" />
-    <ClInclude Include="..\..\GoTvP2P\Groups\GroupDefs.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h" />

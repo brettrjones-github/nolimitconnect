@@ -80,28 +80,28 @@ EHostType PluginBase::getHostType( void )
     EHostType hostType = eHostTypeUnknown;
     switch( getPluginType() )
     {
-    case ePluginTypeChatRoomClient:
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
         hostType = eHostTypeChatRoom;
         break;
 
-    case ePluginTypeConnectTestClient:
-    case ePluginTypeConnectTestHost:
+    case ePluginTypeClientConnectTest:
+    case ePluginTypeHostConnectTest:
         hostType = eHostTypeConnectTest;
         break;
 
-    case ePluginTypeGroupClient:
-    case ePluginTypeGroupHost:
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
         hostType = eHostTypeGroup;
         break;
 
-    case ePluginTypeRandomConnectClient:
-    case ePluginTypeRandomConnectHost:
+    case ePluginTypeClientRandomConnect:
+    case ePluginTypeHostRandomConnect:
         hostType = eHostTypeRandomConnect;
         break;
 
-    case ePluginTypeNetworkClient:
-    case ePluginTypeNetworkHost:
+    case ePluginTypeClientNetwork:
+    case ePluginTypeHostNetwork:
     case ePluginTypeNetworkSearchList:
         hostType = eHostTypeNetwork;
         break;

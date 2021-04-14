@@ -28,11 +28,6 @@ AppletSettingsBase::AppletSettingsBase( const char * ObjName, AppCommon& app, QW
 }
 
 //============================================================================
-AppletSettingsBase::~AppletSettingsBase()
-{
-}
-
-//============================================================================
 void AppletSettingsBase::connectServiceWidgets()
 {
     connect( getPluginSettingsWidget()->getApplyButton(), SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );

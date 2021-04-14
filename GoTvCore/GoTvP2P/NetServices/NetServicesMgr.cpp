@@ -217,16 +217,16 @@ RCODE NetServicesMgr::handleNetCmdPing( VxSktBase * sktBase, NetServiceHdr& netS
 //============================================================================
 RCODE NetServicesMgr::sendPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
-    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "Got ping from %s thread 0x%x", sktBase->getRemoteIp(), VxGetCurrentThreadId() );
+    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "Got ping from %s thread 0x%x", sktBase->getRemoteIp().c_str(), VxGetCurrentThreadId() );
 	std::string content;
-	StdStringFormat( content, "PONG-%s", sktBase->getRemoteIp() );
+    StdStringFormat( content, "PONG-%s", sktBase->getRemoteIp().c_str() );
 	return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdPong, content );
 }
 
 //============================================================================
 RCODE NetServicesMgr::handleNetCmdPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
-    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "Got PONG from %s thread 0x%x", sktBase->getRemoteIp(), VxGetCurrentThreadId() );
+    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "Got PONG from %s thread 0x%x", sktBase->getRemoteIp().c_str(), VxGetCurrentThreadId() );
 	return 0;
 }
 

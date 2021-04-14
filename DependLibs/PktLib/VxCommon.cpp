@@ -177,17 +177,17 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeFileServer, eFriendStateFriend );
     setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
 
-    setPluginPermission( ePluginTypeChatRoomClient, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
-    setPluginPermission( ePluginTypeChatRoomHost, eFriendStateIgnore ); // gives guest permission to whoever is in chat room at the same time
-    setPluginPermission( ePluginTypeConnectTestHost, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeConnectTestClient, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeGroupClient, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeGroupHost, eFriendStateIgnore );
-    setPluginPermission( ePluginTypeNetworkHost, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeClientChatRoom, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
+    setPluginPermission( ePluginTypeHostChatRoom, eFriendStateIgnore ); // gives guest permission to whoever is in chat room at the same time
+    setPluginPermission( ePluginTypeHostConnectTest, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeClientGroup, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
     setPluginPermission( ePluginTypeNetworkSearchList, eFriendStateIgnore );
 
-    setPluginPermission( ePluginTypeRandomConnectClient, eFriendStateGuest );
-    setPluginPermission( ePluginTypeRandomConnectHost, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeClientRandomConnect, eFriendStateGuest );
+    setPluginPermission( ePluginTypeHostRandomConnect, eFriendStateIgnore );
     setPluginPermission( ePluginTypeRelay, eFriendStateIgnore );
 } 
 
@@ -471,25 +471,25 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Video Phone";
     case ePluginTypeVoicePhone:
         return "VOIP Voice Phone";
-    case ePluginTypeChatRoomClient:
+    case ePluginTypeClientChatRoom:
         return "Chat Room Client";
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeHostChatRoom:
         return "Chat Room Host Service";
-    case ePluginTypeConnectTestHost:
+    case ePluginTypeHostConnectTest:
         return "Connection Test Service";
-    case ePluginTypeConnectTestClient:
+    case ePluginTypeClientConnectTest:
         return "Connection Test Client";
-    case ePluginTypeGroupHost:
+    case ePluginTypeHostGroup:
         return "Group Host Service";
-    case ePluginTypeGroupClient:
+    case ePluginTypeClientGroup:
         return "Group Client";
-    case ePluginTypeNetworkHost:
+    case ePluginTypeHostNetwork:
         return "Network Host Sevice";
     case ePluginTypeNetworkSearchList:
         return "Search Listing Service";
-    case ePluginTypeRandomConnectHost:
+    case ePluginTypeHostRandomConnect:
         return "Random Connect Service";
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeClientRandomConnect:
         return "Random Connect Client";
 	case ePluginTypeRelay:
 		return "Connection Relay";
@@ -529,7 +529,7 @@ RCODE VxReportHack(	VxSktBase *	sktBase, const char *	pDescription, ... )
 	va_end( argList );
 	LogMsg( LOG_ERROR, "HACK ALERT: skt handle %d ip %s %s\n", 
 		sktBase->m_Socket, 
-		sktBase->getRemoteIp(),  
+        sktBase->getRemoteIp().c_str(),
 		as8Buf );
 	return 0;
 }

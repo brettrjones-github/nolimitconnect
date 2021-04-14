@@ -31,7 +31,7 @@
 PluginGroupHost::PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
     : PluginBaseHostService( engine, pluginMgr, myIdent )
 {
-    setPluginType( ePluginTypeGroupHost );
+    setPluginType( ePluginTypeHostGroup );
 }
 
 //============================================================================
@@ -92,7 +92,7 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
         if( m_Engine.isNetworkHostEnabled() )
         {
             // if we are also network host then send to ourself also
-            PluginBase* netHostPlugin = m_PluginMgr.getPlugin( ePluginTypeNetworkHost );
+            PluginBase* netHostPlugin = m_PluginMgr.getPlugin( ePluginTypeHostNetwork );
             if( netHostPlugin )
             {
                 m_AnnMutex.lock();

@@ -40,7 +40,7 @@ public:
 
     void                        setPluginType( EPluginType pluginType )             { m_PluginType = ( uint16_t )pluginType; }
     EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
-    void                        setThumnailId( VxGUID& thumbAssetId, bool isCircle ) { m_PluginThumb = thumbAssetId; m_ThumbnailIsCircular = isCircle; }
+    void                        setThumnailId( VxGUID thumbAssetId, bool isCircle ) { m_PluginThumb = thumbAssetId; m_ThumbnailIsCircular = isCircle; }
     VxGUID&                     getThumnailId( void )                               { return m_PluginThumb; }
     void                        setThumnailIsCircular( bool isCircle )              { m_ThumbnailIsCircular = isCircle; }
     bool                        getThumbnailIsCircular( void )                      { return m_ThumbnailIsCircular; }

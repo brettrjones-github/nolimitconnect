@@ -45,7 +45,7 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
         m_SearchMutex.lock();
         std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( hostType );
         PluginId pluginId( netIdent->getMyOnlineId(), pluginType );
-        auto& iter = searchMap.find( pluginId );
+        auto iter = searchMap.find( pluginId );
         if( iter != searchMap.end() )
         {
             fillSearchEntry( iter->second, hostType, hostAnn, netIdent, false );
@@ -54,7 +54,7 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnou
         {
             HostSearchEntry searchEntry;
             fillSearchEntry( searchEntry, hostType, hostAnn, netIdent, true );
-            searchMap.insert_or_assign( pluginId, searchEntry );
+            searchMap[pluginId] = searchEntry;
         }
 
         m_SearchMutex.unlock();
@@ -146,9 +146,9 @@ ECommErr HostServerSearchMgr::settingsRequest( PluginId& pluginId, PktPluginSett
 //============================================================================
 void HostServerSearchMgr::removeEntries( std::map<PluginId, HostSearchEntry>& searchMap, PluginIdList& toRemoveList )
 {
-    for( auto& iter = toRemoveList.getPluginIdList().begin(); iter != toRemoveList.getPluginIdList().end(); ++iter )
+    for( auto iter = toRemoveList.getPluginIdList().begin(); iter != toRemoveList.getPluginIdList().end(); ++iter )
     {
-        auto& iter2 = searchMap.find( *iter );
+        auto iter2 = searchMap.find( *iter );
         if( iter2 != searchMap.end() )
         {
             searchMap.erase( iter2 );
@@ -211,11 +211,11 @@ EPluginType HostServerSearchMgr::getSearchPluginType( EHostType hostType )
     switch( hostType )
     {
     case eHostTypeChatRoom:
-        return ePluginTypeChatRoomHost;
+        return ePluginTypeHostChatRoom;
     case eHostTypeGroup:
-        return ePluginTypeGroupHost;
+        return ePluginTypeHostGroup;
     case eHostTypeRandomConnect:
-        return ePluginTypeRandomConnectHost;
+        return ePluginTypeHostRandomConnect;
     default:
         return ePluginTypeInvalid;
     }

@@ -412,11 +412,11 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	}
     else if( eNetCmdQueryHostOnlineIdReq == netServiceHdr.m_NetCmdType )
     {
-        ePluginType = ePluginTypeNetworkHost;
+        ePluginType = ePluginTypeHostNetwork;
     }
     else if( eNetCmdIsMyPortOpenReq == netServiceHdr.m_NetCmdType )
     {
-        ePluginType = ePluginTypeConnectTestHost;
+        ePluginType = ePluginTypeHostConnectTest;
     }
 
     LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %d\n", netCmdEnumToString( netServiceHdr.m_NetCmdType ), ePluginType );

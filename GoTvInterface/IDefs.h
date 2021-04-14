@@ -527,7 +527,7 @@ enum EPluginAccess
 enum EPluginType
 {
     //! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
-    ePluginTypeInvalid			= 0,	//!< unknown or disabled
+    ePluginTypeInvalid			    = 0,	//!< unknown or disabled
 
     ePluginTypeAdmin			    = 1,	//!< Administration ( intended for updates but not currently used )
     ePluginTypeAboutMePage          = 2,	//!< about me page plugin ( using web page server )
@@ -540,25 +540,28 @@ enum EPluginType
     ePluginTypeTruthOrDare          = 9,	//!< Video Chat Truth Or Dare game  
     ePluginTypeVideoPhone           = 10,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone           = 11,	//!< VOIP audio only phone call
-    ePluginTypeChatRoomClient       = 12,	//!< chat room user client plugin
-    ePluginTypeChatRoomHost         = 13,	//!< chat room hosting plugin
-    ePluginTypeConnectTestClient    = 14,	//!< Connection Test Client
-    ePluginTypeConnectTestHost      = 15,	//!< Connection Test Service
-    ePluginTypeGroupClient          = 16,	//!< group client
-    ePluginTypeGroupHost            = 17,   //!< group hosting
-    ePluginTypeRandomConnectClient  = 18,	//!< Random connect to another person client
-    ePluginTypeRandomConnectHost    = 19,	//!< Random connect to another person hosting
-    ePluginTypeNetworkClient        = 20,	//!< network client
-    ePluginTypeNetworkHost          = 21,	//!< master network hosting
+
+    ePluginTypeClientChatRoom       = 12,	//!< chat room user client plugin
+    ePluginTypeClientConnectTest    = 13,	//!< Connection Test Client
+    ePluginTypeClientGroup          = 14,	//!< group client
+    ePluginTypeClientNetwork        = 15,	//!< network client
+    ePluginTypeClientRandomConnect  = 16,	//!< Random connect to another person client
+
+    ePluginTypeHostChatRoom         = 17,	//!< chat room hosting plugin
+    ePluginTypeHostConnectTest      = 18,	//!< Connection Test Service
+    ePluginTypeHostGroup            = 19,   //!< group hosting
+    ePluginTypeHostNetwork          = 20,	//!< master network hosting
+    ePluginTypeHostRandomConnect    = 21,	//!< Random connect to another person hosting
+
     ePluginTypeNetworkSearchList    = 22,	//!< group and chat room list for network search
 
     ePluginTypeRelay                = 23,	//!< Relay services plugin
 
     // NOTE: plugin types 24 - 47 not implemented .. reserved for future use
-    eMaxImplementedPluginType	= 24, 
+    eMaxImplementedPluginType	    = 24, 
     // plugins 0-47 are part of PktAnnounce
     // plugins after 47 are system plugins and do not go out in announcement pkt
-    eMaxUserPluginType = 48, // this marks end of announced permission
+    eMaxUserPluginType              = 48, // this marks end of announced permission
     ePluginTypeCameraService,
     ePluginTypeMJPEGReader,
     ePluginTypeMJPEGWriter,

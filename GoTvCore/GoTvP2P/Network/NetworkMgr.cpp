@@ -294,7 +294,7 @@ void NetworkMgr::handleMulticastSktCallback( VxSktBase * sktBase )
 
 	case eSktCallbackReasonConnected:
         if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
+            LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp().c_str(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonData:

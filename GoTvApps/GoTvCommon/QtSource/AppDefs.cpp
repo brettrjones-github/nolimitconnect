@@ -109,16 +109,15 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletSettingsConnectTest:        return eMyIconSettingsConnectionTest;
     case eAppletSettingsShareFiles:         return eMyIconSettingsShareFiles;
     case eAppletSettingsFileXfer:           return eMyIconSettingsFileXfer;
+
     case eAppletSettingsHostChatRoom:       return eMyIconSettingsChatRoom;
     case eAppletSettingsHostGroup:          return eMyIconSettingsHostGroup;
-    // case eAppletSettingsHostGroupListing:            return eMyIconSettingsHostGroupListing;
-
     case eAppletSettingsHostNetwork:        return eMyIconSettingsHostNetwork;
     case eAppletSettingsHostRandomConnect:  return eMyIconSettingsRandomConnect;
+
     case eAppletSettingsMessenger:          return eMyIconSettingsMessenger;
     case eAppletSettingsRandomConnect:      return eMyIconSettingsRandomConnect;
     case eAppletSettingsRandomConnectRelay: return eMyIconSettingsRandomConnectRelay;
-    // case eAppletSettingsRelay:            return eMyIconSettingsRelay;
     case eAppletSettingsStoryboard:         return eMyIconSettingsShareStoryboard;
     case eAppletSettingsTruthOrDare:        return eMyIconSettingsTruthOrDare;
     case eAppletSettingsVideoPhone:         return eMyIconSettingsVideoPhone;
@@ -238,10 +237,12 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsConnectTest:        return QObject::tr( "Connection Test Service Settings" );
     case eAppletSettingsShareFiles:         return QObject::tr( "Shared Files Settings" );
     case eAppletSettingsFileXfer:           return QObject::tr( "Person To Person File Xfer Settings" );
+
     case eAppletSettingsHostChatRoom:       return QObject::tr( "Host A Chat Room Settings" );
     case eAppletSettingsHostGroup:          return QObject::tr( "Host A Group Settings" );
     case eAppletSettingsHostNetwork:        return QObject::tr( "Host A Network Settings" );
     case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect" );
+
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );
     case eAppletSettingsRandomConnect:      return QObject::tr( "Random Connect Service Settings" );
     case eAppletSettingsRandomConnectRelay: return QObject::tr( "Random Connect Relay Service Settings" );

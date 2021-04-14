@@ -26,47 +26,21 @@ class VxSktBase;
 class VxSktConnectSimple;
 class VxGUID;
 
-/*
-//! generate connection key from network identity
-RCODE GenerateConnectionKey(	VxKey *					poRetKey,		// set this key
-								VxConnectId *			poConnectId,	// network identity
-								const char *			networkName );
-
-//! generate connection key from network identity
-RCODE GenerateConnectionKey(	VxKey *					poRetKey,		// set this key
-                                std::string&            ipAddr,
-                                uint16_t                port,
-                                VxGUID&                 onlineId,
-                                const char *			networkName );
-                                */
 //! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
-RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,				// pointer to VxSktBase
+RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,			// pointer to VxSktBase
 								VxConnectId *			poConnectId, 		// network identity
 								const char *			networkName );
                              
 //! generate key from net identity and connection data and place int sockets m_TxKey and initialize its crypto
-RCODE GenerateTxConnectionKey(	VxSktBase *				sktBase,				// pointer to VxSktBase
+RCODE GenerateTxConnectionKey(	VxSktBase *				sktBase,			// pointer to VxSktBase
 								VxConnectId *			poConnectId,		// announce packet
 								const char *			networkName );
 
 RCODE GenerateTxConnectionKey(  VxSktBase *				sktBase,
-                                std::string&            ipAddr,
+                                std::string             ipAddr,
                                 uint16_t                port,
                                 VxGUID                  onlineId,
                                 std::string			    networkName );
-                       
-/*
-//! generate key from net identity and connection data and place int sockets m_RxKey and initialize its crypto
-RCODE GenerateRxConnectionKey(	VxSktConnectSimple *	sktBase,				// pointer to VxSktBase
-								VxConnectId *			poConnectId,		// network identity
-								const char *			networkName );
-
-//! generate key from net identity and connection data and place int sockets m_TxKey and initialize its crypto
-RCODE GenerateTxConnectionKey(	VxSktConnectSimple *	sktBase,				// pointer to VxSktBase
-								VxConnectId *			poConnectId,		// announce packet
-								const char *			networkName );
-                                */
-
                           
 unsigned char * GetVxSktRandData( int iRandDataIdx );
 

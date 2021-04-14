@@ -71,11 +71,11 @@ void ActivityInformation::updateInformation( void )
 
         switch( m_PluginType )
         {
-        case ePluginTypeChatRoomHost:
-        case ePluginTypeGroupHost:
+        case ePluginTypeHostChatRoom:
+        case ePluginTypeHostGroup:
         case ePluginTypeNetworkSearchList:
-        case ePluginTypeNetworkHost:
-        case ePluginTypeRandomConnectHost:
+        case ePluginTypeHostNetwork:
+        case ePluginTypeHostRandomConnect:
             ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
             ui.m_PictureLabel->setVisible( true );
             break;
@@ -348,11 +348,11 @@ QString ActivityInformation::getInfoText( void )
     {
         switch( m_PluginType )
         {
-        case ePluginTypeChatRoomHost:
-        case ePluginTypeGroupHost:
+        case ePluginTypeHostChatRoom:
+        case ePluginTypeHostGroup:
         case ePluginTypeNetworkSearchList:
-        case ePluginTypeNetworkHost:
-        case ePluginTypeRandomConnectHost:
+        case ePluginTypeHostNetwork:
+        case ePluginTypeHostRandomConnect:
             return m_NetworkDesign + m_PluginDefinitions;
             break;
         default:

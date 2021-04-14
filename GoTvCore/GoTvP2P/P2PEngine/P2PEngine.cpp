@@ -383,7 +383,7 @@ bool P2PEngine::isDirectConnectReady( void )
 bool P2PEngine::isNetworkHostEnabled( void )
 {
     m_AnnouncePktMutex.lock(); 
-    bool netHostEnabled = ( eFriendStateIgnore != m_PktAnn.getPluginPermission( ePluginTypeNetworkHost ) ); 
+    bool netHostEnabled = ( eFriendStateIgnore != m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) ); 
     m_AnnouncePktMutex.unlock();
     return netHostEnabled;
 }

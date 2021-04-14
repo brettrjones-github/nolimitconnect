@@ -24,7 +24,7 @@ class GuiOfferSession;
 class EngineSettings;
 class MultiSessionState;
 
-class AppletMultiMessenger : public AppletPeerBase, public ToGuiActivityInterface, public OfferSessionCallbackInterface
+class AppletMultiMessenger : public AppletPeerBase, public OfferSessionCallbackInterface
 {
 	Q_OBJECT
 public:

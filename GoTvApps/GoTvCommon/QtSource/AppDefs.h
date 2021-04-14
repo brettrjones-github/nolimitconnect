@@ -161,7 +161,6 @@ enum EApplet
     eAppletSettingsMessenger,
     eAppletSettingsRandomConnect,
     eAppletSettingsRandomConnectRelay,
-    // eAppletSettingsRelay,
     eAppletSettingsStoryboard,
     eAppletSettingsTruthOrDare,
     eAppletSettingsVideoPhone,

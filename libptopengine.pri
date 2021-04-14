@@ -50,6 +50,15 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListLib.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobCallbackInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobRxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobTxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferDb.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferSession.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListAll.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListBase.h \
@@ -134,15 +143,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.h \
     $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobCallbackInterface.h \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.h \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.h \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.h \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobRxSession.h \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobTxSession.h \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferDb.h \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferMgr.h \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostedEntry.h \
@@ -197,6 +197,33 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseCallbackInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseRxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseTxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseXferDb.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseXferMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseXferSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientCallbackInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientRxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientTxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientXferDb.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientXferMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientXferSession.h \
+	$$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostCallbackInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostRxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostTxSession.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostXferDb.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostXferMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.h \
@@ -294,10 +321,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.h \
 	$$PWD/GoTvCore/GoTvP2P/User/User.h \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostCallbackInterface.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfo.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfoDb.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfoDb.h \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
@@ -314,7 +341,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferSession.cpp \
-    $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgr.cpp \
@@ -327,6 +353,14 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobRxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobTxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListAll.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectedListBase.cpp \
@@ -383,14 +417,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/wav_header.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.cpp \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.cpp \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.cpp \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobMgr.cpp \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobRxSession.cpp \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobTxSession.cpp \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferDb.cpp \
-    $$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferMgr.cpp \
-	$$PWD/GoTvCore/GoTvP2P/BlobXferMgr/BlobXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.cpp \
@@ -440,6 +466,30 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkTest/RunUrlAction.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseRxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseTxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseXferDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseXferMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferBase/OfferBaseXferSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientRxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientTxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientXferDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientXferMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferClientMgr/OfferClientXferSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostRxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostTxSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostXferDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostXferMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/OfferHostMgr/OfferHostXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.cpp \
@@ -452,7 +502,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineConnections.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineContact.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineFromGui.cpp \
-    $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineBlob.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineIgnoredAndHackers.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineMediaProcessorCallbacks.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEnginePktAnnChanged.cpp \
@@ -552,9 +601,9 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/User.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.cpp \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfo.cpp \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostInfoDb.cpp \
-	$$PWD/GoTvCore/GoTvP2P/UserHost/UserHostMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfoDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \

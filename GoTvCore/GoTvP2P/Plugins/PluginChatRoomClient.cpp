@@ -34,7 +34,7 @@ PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& plugin
 : PluginBaseMultimedia( engine, pluginMgr, myIdent )
 , m_HostClientMgr(engine, pluginMgr, myIdent, *this)
 {
-	setPluginType( ePluginTypeChatRoomClient );
+	setPluginType( ePluginTypeClientChatRoom );
 }
 
 //============================================================================

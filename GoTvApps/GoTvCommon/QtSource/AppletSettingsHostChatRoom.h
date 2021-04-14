@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletSettingsBase.h"
+#include "AppletSettingsHostBase.h"
 #include "PluginSettingsWidget.h"
 #include "PermissionWidget.h"
 
@@ -22,7 +22,7 @@
 
 #include "ui_AppletSettingsHostChatRoom.h"
  
-class AppletSettingsHostChatRoom : public AppletSettingsBase
+class AppletSettingsHostChatRoom : public AppletSettingsHostBase
 {
 	Q_OBJECT
 public:

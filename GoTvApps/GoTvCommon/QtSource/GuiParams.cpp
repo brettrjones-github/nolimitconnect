@@ -771,34 +771,34 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Story Board");
         break;
 
-    case ePluginTypeChatRoomClient:	//!< chat room user client plugin
+    case ePluginTypeClientChatRoom:	//!< chat room user client plugin
         strPluginType = QObject::tr("Chat Room Client");
         break;
-    case ePluginTypeChatRoomHost:	//!< chat room hosting plugin
+    case ePluginTypeHostChatRoom:	//!< chat room hosting plugin
         strPluginType = QObject::tr("Chat Room Host");
         break;
-    case ePluginTypeConnectTestClient:	//!< Connection Test Client
+    case ePluginTypeClientConnectTest:	//!< Connection Test Client
         strPluginType = QObject::tr("Connect Test Client");
         break;
-    case ePluginTypeConnectTestHost:	//!< Connection Test Service
+    case ePluginTypeHostConnectTest:	//!< Connection Test Service
         strPluginType = QObject::tr("Connect Test Host");
         break;
-    case ePluginTypeGroupClient:	//!< group client
+    case ePluginTypeClientGroup:	//!< group client
         strPluginType = QObject::tr("Group Client");
         break;
-    case ePluginTypeGroupHost:   //!< group hosting
+    case ePluginTypeHostGroup:   //!< group hosting
         strPluginType = QObject::tr("Group Host");
         break;
-    case ePluginTypeRandomConnectClient:	//!< Random connect to another person client
+    case ePluginTypeClientRandomConnect:	//!< Random connect to another person client
         strPluginType = QObject::tr("Random Connect Client");
         break;
-    case ePluginTypeRandomConnectHost:	//!< Random connect to another person hosting
+    case ePluginTypeHostRandomConnect:	//!< Random connect to another person hosting
         strPluginType = QObject::tr("Random Connect Host");
         break;
-    case ePluginTypeNetworkClient:	//!< network client
+    case ePluginTypeClientNetwork:	//!< network client
         strPluginType = QObject::tr("Network Client");
         break;
-    case ePluginTypeNetworkHost:	//!< master network hosting
+    case ePluginTypeHostNetwork:	//!< master network hosting
         strPluginType = QObject::tr("Network Host");
         break;
     case  ePluginTypeNetworkSearchList:	//!< group and chat room list for network search

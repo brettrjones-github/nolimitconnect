@@ -500,9 +500,9 @@ public:
     virtual int					fromGuiGetPluginPermission( EPluginType ePluginType );
     virtual int					fromGuiGetPluginServerState( EPluginType ePluginType );
 
-    virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-    virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-    virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
     virtual bool				fromGuiMakePluginOffer( EPluginType		ePluginType,
                                                         VxGUID&			oOnlineId,

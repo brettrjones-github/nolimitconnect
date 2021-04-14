@@ -7,6 +7,7 @@ CONFIG += ordered
 
 include(config_os_detect.pri)
 
+SUBDIRS += $$PWD/libpktlib.pro
 SUBDIRS += $$PWD/libdepends.pro
 SUBDIRS += $$PWD/libgnu.pro
 SUBDIRS += $$PWD/libbz2.pro

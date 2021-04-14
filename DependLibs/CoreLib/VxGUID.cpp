@@ -77,6 +77,7 @@ VxGUID::VxGUID( uint64_t u64HiPart, uint64_t u64LoPart )
 {
 }
 
+/* commented out because of linux order of dependency linking issue
 //============================================================================
 bool VxGUID::addToBlob( PktBlobEntry& blob )
 {
@@ -92,6 +93,7 @@ bool VxGUID::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_u64LoPart );
     return result;
 }
+*/
 
 //============================================================================
 VxGUID & VxGUID::operator =( const VxGUID &rhs )

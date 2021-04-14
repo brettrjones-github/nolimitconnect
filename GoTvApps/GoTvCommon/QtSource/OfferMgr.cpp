@@ -610,5 +610,5 @@ GuiOfferSession * OfferMgr::findActiveAndAvailableOffer( GuiUser * netIdent, EPl
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }

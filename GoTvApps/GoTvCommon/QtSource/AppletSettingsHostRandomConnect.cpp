@@ -23,16 +23,16 @@
 
 //============================================================================
 AppletSettingsHostRandomConnect::AppletSettingsHostRandomConnect( AppCommon& app, QWidget * parent )
-: AppletSettingsBase( OBJNAME_APPLET_SETTINGS_HOST_RANDOM_CONNECT, app, parent )
+: AppletSettingsHostBase( OBJNAME_APPLET_SETTINGS_HOST_RANDOM_CONNECT, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostRandomConnect );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostRandomConnect, ePluginTypeRandomConnectHost );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostRandomConnect, ePluginTypeHostRandomConnect );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
-    getConnectionTestWidget()->setPluginType( ePluginTypeConnectTestHost );
+    getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
     connectServiceWidgets();
     loadPluginSetting();
 

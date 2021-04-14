@@ -32,8 +32,8 @@ public:
 	VxGUID() = default;
 	VxGUID( const VxGUID& rhs );
 	VxGUID( uint64_t u64HiPart, uint64_t u64LoPart );
-    bool                        addToBlob( PktBlobEntry& blob );
-    bool                        extractFromBlob( PktBlobEntry& blob );
+    //bool                        addToBlob( PktBlobEntry& blob );
+    //bool                        extractFromBlob( PktBlobEntry& blob );
 
 	VxGUID&						operator = ( const VxGUID& rhs );
 	bool						operator == ( const VxGUID& rhs ) const;

@@ -23,7 +23,7 @@
 AppletServiceConnectionTest::AppletServiceConnectionTest( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_CONNECT_TEST, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceConnectionTest, ePluginTypeConnectTestHost );
+    setupServiceBaseApplet( eAppletServiceConnectionTest, ePluginTypeHostConnectTest );
 
 	m_MyApp.activityStateChange( this, true );
 }

@@ -131,7 +131,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			LogMsg( LOG_INFO, "First packet is not Announce pkt skt %d type %d length %d ip %s:%d id %s\n", sktBase->getSktId(), 
 																							pktHdr->getPktType(),  
 																							pktHdr->getPktLength(),
-																							sktBase->getRemoteIp(),
+                                                                                            sktBase->getRemoteIp().c_str(),
 																							sktBase->getRemotePort(),
 																							pktHdr->getSrcOnlineId().toHexString().c_str() );
 
@@ -145,7 +145,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		if( ( true == sktBase->isAcceptSocket() ) 
 			&& ( false == this->isP2POnline() ) )
 		{
-			LogMsg( LOG_INFO, "Not Online Yet so cannot accept skt id %d ip %s\n", sktBase->getSktId(), sktBase->getRemoteIp() );
+            LogMsg( LOG_INFO, "Not Online Yet so cannot accept skt id %d ip %s\n", sktBase->getSktId(), sktBase->getRemoteIp().c_str() );
 			sktBase->sktBufAmountRead( 0 );
 			sktBase->closeSkt( 659 );
 			return;
@@ -164,7 +164,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			sktBase->setIsFirstRxPacket( false ); 
 			// release the mutex
 			sktBase->sktBufAmountRead( 0 );
-			LogMsg( LOG_ERROR, "Invalid Packet announce from ip %s\n", sktBase->getRemoteIp() );
+            LogMsg( LOG_ERROR, "Invalid Packet announce from ip %s\n", sktBase->getRemoteIp().c_str() );
 			// disconnect
 			sktBase->closeSkt( 659 );
 		}

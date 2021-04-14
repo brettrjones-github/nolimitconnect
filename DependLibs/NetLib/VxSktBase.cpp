@@ -599,7 +599,6 @@ void VxSktBase::closeSkt( int iInstance, bool bFlushThenClose )
 	}
 }
 
-
 //============================================================================
 void VxSktBase::doCloseThisSocketHandle( bool bFlushThenClose )
 {

@@ -34,16 +34,16 @@ EConnectReason PluginBaseService::getHostAnnounceConnectReason( void )
     EConnectReason connectReason = eConnectReasonUnknown;
     switch( getPluginType() )
     {
-    case ePluginTypeChatRoomClient:
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
         connectReason = eConnectReasonChatRoomAnnounce;
         break;
-    case ePluginTypeGroupClient:
-    case ePluginTypeGroupHost:
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
         connectReason = eConnectReasonGroupAnnounce;
         break;
-    case ePluginTypeRandomConnectHost:
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeHostRandomConnect:
+    case ePluginTypeClientRandomConnect:
         connectReason = eConnectReasonRandomConnectAnnounce;
         break;
     default:
@@ -59,16 +59,16 @@ EConnectReason PluginBaseService::getHostJoinConnectReason( void )
     EConnectReason connectReason = eConnectReasonUnknown;
     switch( getPluginType() )
     {
-    case ePluginTypeChatRoomClient:
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
         connectReason = eConnectReasonChatRoomJoin;
         break;
-    case ePluginTypeGroupClient:
-    case ePluginTypeGroupHost:
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
         connectReason = eConnectReasonGroupJoin;
         break;
-    case ePluginTypeRandomConnectHost:
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeHostRandomConnect:
+    case ePluginTypeClientRandomConnect:
         connectReason = eConnectReasonRandomConnectJoin;
         break;
     default:
@@ -84,16 +84,16 @@ EConnectReason PluginBaseService::getHostSearchConnectReason( void )
     EConnectReason connectReason = eConnectReasonUnknown;
     switch( getPluginType() )
     {
-    case ePluginTypeChatRoomClient:
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
         connectReason = eConnectReasonChatRoomSearch;
         break;
-    case ePluginTypeGroupClient:
-    case ePluginTypeGroupHost:
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
         connectReason = eConnectReasonGroupSearch;
         break;
-    case ePluginTypeRandomConnectHost:
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeHostRandomConnect:
+    case ePluginTypeClientRandomConnect:
         connectReason = eConnectReasonRandomConnectSearch;
         break;
     default:

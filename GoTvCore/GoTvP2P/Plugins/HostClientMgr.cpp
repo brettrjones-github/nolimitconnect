@@ -191,7 +191,7 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
                 // BRJ temporary for debugging
                 // TODO REMOVE
                 // searchReq.setIsLoopback( true );
-                if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeNetworkHost ) )
+                if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeHostNetwork ) )
                 {
                     LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onConnectToHostSuccess failed send PktHostSearchReq" );
                 }
@@ -298,7 +298,7 @@ bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& se
 
             // TODO debug only REMOVE ME
             // pluginIdReq.setIsLoopback( true );
-            if( m_Plugin.txPacket( netIdent->getMyOnlineId(), sktBase, &pluginIdReq, false, ePluginTypeNetworkHost ) )
+            if( m_Plugin.txPacket( netIdent->getMyOnlineId(), sktBase, &pluginIdReq, false, ePluginTypeHostNetwork ) )
             {
                 result = true;
             }

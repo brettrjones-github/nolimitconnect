@@ -820,13 +820,13 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeCamServer:
         return eMyIconSettingsShareWebCam;
 
-    case ePluginTypeChatRoomClient:
+    case ePluginTypeClientChatRoom:
         return eMyIconSettingsChatRoom;
 
-    case ePluginTypeConnectTestHost:
+    case ePluginTypeHostConnectTest:
         return eMyIconSettingsConnectionTest;
 
-    case ePluginTypeConnectTestClient:
+    case ePluginTypeClientConnectTest:
         return eMyIconSettingsConnectionTest;
 
     case ePluginTypeFileXfer:
@@ -835,16 +835,16 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeFileServer:
         return eMyIconSettingsShareFiles;
 
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeHostChatRoom:
         return eMyIconServiceChatRoom;
 
-    case ePluginTypeGroupHost:
+    case ePluginTypeHostGroup:
         return eMyIconSettingsHostGroup;
 
     case ePluginTypeNetworkSearchList:
         return eMyIconSettingsHostGroupListing;
 
-    case ePluginTypeNetworkHost:
+    case ePluginTypeHostNetwork:
         return eMyIconSettingsHostNetwork;
 
     case ePluginTypeMessenger:
@@ -853,10 +853,10 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeRelay:
         return eMyIconSettingsRelay;
 
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeClientRandomConnect:
         return eMyIconSettingsRandomConnect;
 
-    case ePluginTypeRandomConnectHost:
+    case ePluginTypeHostRandomConnect:
         return eMyIconSettingsRandomConnectRelay;
 
     case ePluginTypeStoryboard:
@@ -937,7 +937,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeChatRoomClient:
+    case ePluginTypeClientChatRoom:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -955,7 +955,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeConnectTestHost:
+    case ePluginTypeHostConnectTest:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -973,7 +973,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeConnectTestClient:
+    case ePluginTypeClientConnectTest:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -991,7 +991,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeClientRandomConnect:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -1009,7 +1009,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeRandomConnectHost:
+    case ePluginTypeHostRandomConnect:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -1208,7 +1208,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		}
 		break;
 
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeHostChatRoom:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -1226,7 +1226,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeGroupHost:
+    case ePluginTypeHostGroup:
         return eMyIconServiceHostGroup;
         break;
 
@@ -1234,7 +1234,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         return eMyIconServiceHostGroupListing;
         break;
 
-    case ePluginTypeNetworkHost:
+    case ePluginTypeHostNetwork:
         return eMyIconServiceHostNetwork;
         break;
 
@@ -1259,19 +1259,19 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeAvatarImage:
          return eMyIconSettingsAvatarImage;
 
-    case ePluginTypeChatRoomClient:
+    case ePluginTypeClientChatRoom:
         return eMyIconSettingsChatRoom;
 
-    case ePluginTypeConnectTestHost:
+    case ePluginTypeHostConnectTest:
         return eMyIconSettingsConnectionTest;
 
-    case ePluginTypeConnectTestClient:
+    case ePluginTypeClientConnectTest:
         return eMyIconSettingsConnectionTest;
 
-    case ePluginTypeRandomConnectClient:
+    case ePluginTypeClientRandomConnect:
         return eMyIconSettingsRandomConnect;
 
-    case ePluginTypeRandomConnectHost:
+    case ePluginTypeHostRandomConnect:
         return eMyIconSettingsRandomConnectRelay;
 
     case ePluginTypeRelay:
@@ -1304,16 +1304,16 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeMessenger:	// multisession p2p plugin
         return eMyIconSettingsMessenger;
 
-    case ePluginTypeChatRoomHost:
+    case ePluginTypeHostChatRoom:
         return eMyIconServiceChatRoom;
 
-    case ePluginTypeGroupHost:
+    case ePluginTypeHostGroup:
         return eMyIconSettingsHostGroup;
 
     case ePluginTypeNetworkSearchList:
         return eMyIconSettingsHostGroupListing;
 
-    case ePluginTypeNetworkHost:
+    case ePluginTypeHostNetwork:
         return eMyIconSettingsHostNetwork;
 
     default:
