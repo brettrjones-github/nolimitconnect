@@ -713,6 +713,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletOfferList.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerChangeFriendship.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerReplyOfferFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSelectFileToSend.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSessionFileOffer.ui \
