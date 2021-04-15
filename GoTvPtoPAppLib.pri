@@ -90,7 +90,7 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLog.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMutiMessenger.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMultiMessenger.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
