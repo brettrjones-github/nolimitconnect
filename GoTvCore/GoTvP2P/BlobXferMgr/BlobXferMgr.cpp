@@ -67,13 +67,13 @@ namespace
 
 
 //============================================================================
-BlobXferMgr::BlobXferMgr( PluginMessenger&		plugin, 
-							      PluginSessionMgr&		pluginSessionMgr )
-: m_Plugin( plugin )
+BlobXferMgr::BlobXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr&pluginSessionMgr, const char * stateDbName )
+: m_Engine( engine )
+, m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )
-, m_PluginMgr( plugin.getPluginMgr() )
-, m_Engine( plugin.getEngine() )
+, m_PluginMgr( engine.getPluginMgr() )
 , m_BlobMgr( m_Engine.getBlobMgr() )
+, m_BlobXferDb( stateDbName )
 {
 }
 

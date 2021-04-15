@@ -66,6 +66,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectReqInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/HandshakeInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/Connections/HandshakeList.h \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectCallbackInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectMgr.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/WebRtcTypeDefs.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_common.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core.h \
@@ -368,6 +372,9 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/Connections/ConnectReqInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/HandshakeInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Connections/HandshakeList.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/ConnectMgr/ConnectMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core_mips.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/aec_core_neon.cpp \

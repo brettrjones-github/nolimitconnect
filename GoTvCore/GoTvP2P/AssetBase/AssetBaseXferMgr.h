@@ -49,7 +49,7 @@ public:
 	typedef std::map<VxGUID, AssetBaseRxSession *>::iterator AssetBaseRxIter;
 	typedef std::vector<AssetBaseTxSession *>::iterator AssetBaseTxIter;
 
-	AssetBaseXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr );
+	AssetBaseXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char * stateDbName );
 	virtual ~AssetBaseXferMgr();
 
 	VxMutex&					getAssetBaseQueMutex( void )					{ return m_AssetBaseSendQueMutex; }

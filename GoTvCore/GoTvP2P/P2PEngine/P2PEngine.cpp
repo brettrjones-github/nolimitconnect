@@ -79,12 +79,13 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_EngineSettings()
     , m_EngineParams()
     , m_NetStatusAccum( *this )
-    , m_AssetMgr( *new AssetMgr( *this, "AssetMgrDb.db3"  ) )
-    , m_BlobMgr( *new BlobMgr( *this, "BlobAssetDb.db3" ) )
-    , m_OfferClientMgr( *new OfferClientMgr( *this, "OfferClientDb.db3" ) )
-    , m_OfferHostMgr( *new OfferHostMgr( *this, "OfferHostDb.db3" ) )
-    , m_ThumbMgr( *new ThumbMgr( *this, "ThumbAssetDb.db3" ) )
+    , m_AssetMgr( *new AssetMgr( *this, "AssetMgrDb.db3", "AssetStateDb.db3"  ) )
+    , m_BlobMgr( *new BlobMgr( *this, "BlobAssetDb.db3", "BlobStateDb.db3"  ) )
+    , m_OfferClientMgr( *new OfferClientMgr( *this, "OfferClientDb.db3", "OfferClientStateDb.db3" ) )
+    , m_OfferHostMgr( *new OfferHostMgr( *this, "OfferHostDb.db3", "OfferHostStateDb.db3" ) )
+    , m_ThumbMgr( *new ThumbMgr( *this, "ThumbAssetDb.db3", "ThumbStateDb.db3" ) )
     , m_ConnectionMgr( *new ConnectionMgr( *this ) )
+    , m_ConnectMgr( *new ConnectMgr( *this, "ConnectMgrDb.db3", "ConnectStateDb.db3" ) )
     , m_ConnectionList( *this )
     , m_MediaProcessor( *( new MediaProcessor( *this ) ) )
     , m_NetworkMgr( *new NetworkMgr( *this, peerMgr, m_BigListMgr, m_ConnectionList ) )
@@ -100,6 +101,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RunUrlAction( *new RunUrlAction( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RcScan( *this, m_ConnectionList )
+    , m_UserHostMgr( *new UserHostMgr( *this, "UserHostMgrDb.db3", "UserHostStateDb.db3" ) )
 {
     m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
 }
@@ -134,6 +136,21 @@ IToGui& P2PEngine::getToGui()
 IAudioRequests& P2PEngine::getAudioRequest()
 {
     return IToGui::getAudioRequests();
+}
+
+//============================================================================
+OfferBaseMgr& P2PEngine::getOfferMgr( EOfferMgrType mgrType )
+{
+    switch( mgrType )
+    {
+    case eOfferMgrTypeOfferClient:
+        return getOfferClientMgr();
+    case eOfferMgrTypeOfferHost:
+        return getOfferHostMgr();
+    default:
+        vx_assert( false );
+        return getOfferClientMgr();
+    }
 }
 
 //============================================================================

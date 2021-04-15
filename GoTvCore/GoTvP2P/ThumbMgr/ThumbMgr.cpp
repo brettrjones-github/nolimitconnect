@@ -32,8 +32,8 @@
 #include <time.h>
 
 //============================================================================
-ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName )
-: AssetBaseMgr( engine, dbName, eAssetMgrTypeThumb )
+ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
+: AssetBaseMgr( engine, dbName, dbStateName,  eAssetMgrTypeThumb )
 , m_ThumbInfoDb( dynamic_cast<ThumbInfoDb&>(AssetBaseMgr::getAssetInfoDb()) )
 , m_ThumbInfoList( getAssetBaseInfoList() )
 {

@@ -68,12 +68,13 @@ namespace
 
 
 //============================================================================
-AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr )
+AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr, const char * stateDbName )
 : m_Engine( engine )
 , m_AssetBaseMgr( engine.getAssetMgr() )
-, m_PluginMgr( plugin.getPluginMgr() )
+, m_PluginMgr( engine.getPluginMgr() )
 , m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )
+, m_AssetBaseXferDb( stateDbName )
 {
 }
 
@@ -90,7 +91,7 @@ void AssetBaseXferMgr::fromGuiUserLoggedOn( void )
 	if( !m_Initialized )
 	{
 		m_Initialized = true;
-		m_WorkerThread.startThread( (VX_THREAD_FUNCTION_T)AssetBaseXferMgrThreadFunc, this, "AssetBaseXferThrd" );			
+		m_WorkerThread.startThread( (VX_THREAD_FUNCTION_T)AssetBaseXferMgrThreadFunc, this, "OfferBaseXferThrd" );			
 	}
 }
 
@@ -101,7 +102,7 @@ void AssetBaseXferMgr::assetXferThreadWork( VxThread * workThread )
 		return;
 	// user specific directory should be set
 	std::string dbName = VxGetSettingsDirectory();
-	dbName += ASSET_XFER_DB_NAME; 
+	dbName += m_AssetBaseXferDb.getDatabaseName(); 
 	lockAssetBaseQue();
 	m_AssetBaseXferDb.dbShutdown();
 	m_AssetBaseXferDb.dbStartup( 1, dbName );

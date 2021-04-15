@@ -31,7 +31,7 @@
 #include <time.h>
 
 //============================================================================
-UserHostMgr::UserHostMgr( P2PEngine& engine, const char * dbName )
+UserHostMgr::UserHostMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
 : m_Engine( engine )
 , m_UserHostInfoDb( engine, *this, dbName )
 {
@@ -174,4 +174,15 @@ void UserHostMgr::announceUserHostOnlineState( VxGUID& hostOnlineId, EOnlineStat
 
     unlockClientList();
     LogMsg( LOG_INFO, "UserHostMgr::announceUserHostOnlineState state %d done\n", onlineState );
+}
+
+//============================================================================
+void UserHostMgr::clearUserHostInfoList( void )
+{
+    for( auto iter = m_UserHostInfoList.begin(); iter != m_UserHostInfoList.end(); ++iter )
+    {
+        delete (*iter);
+    }
+
+    m_UserHostInfoList.clear();
 }

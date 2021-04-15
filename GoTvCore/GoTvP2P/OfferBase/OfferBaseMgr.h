@@ -33,7 +33,7 @@ class PktFileListReply;
 class OfferBaseMgr
 {
 public:
-	OfferBaseMgr( P2PEngine& engine, const char * dbName, EOfferMgrType assetMgrType );
+	OfferBaseMgr( P2PEngine& engine, const char * dbName, const char * stateDbName, EOfferMgrType assetMgrType );
 	virtual ~OfferBaseMgr();
 
     class AutoResourceLock

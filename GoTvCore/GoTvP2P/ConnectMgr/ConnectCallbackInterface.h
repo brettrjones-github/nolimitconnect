@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -14,16 +13,18 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.h>
+#include <GoTvInterface/IDefs.h>
 
-class AssetMgr : public AssetBaseMgr
+class ConnectInfo;
+class VxGUID;
+
+class ConnectCallbackInterface
 {
 public:
-	AssetMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
-	virtual ~AssetMgr() = default;
-
-protected:
-    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
-    virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+    virtual void				callbackConnectAdded( ConnectInfo * userHostInfo ){};
+    virtual void				callbackConnectUpdated( ConnectInfo * userHostInfo ){};
+    virtual void				callbackConnectRemoved( VxGUID& userHostId ){};
+    virtual void				callbackConnectOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState ) {};
+    virtual void				callbackConnectOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId ) {};
 };
 

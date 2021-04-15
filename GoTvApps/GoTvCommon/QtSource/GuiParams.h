@@ -14,7 +14,9 @@
 #pragma once
 
 #include <GoTvInterface/IDefs.h>
+
 #include <QColor>
+#include <QRect>
 #include <QSize>
 
 enum EButtonSize

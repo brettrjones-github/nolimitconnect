@@ -24,15 +24,11 @@ namespace
 }
 
 //============================================================================
-BlobXferDb::BlobXferDb()
-: DbBase( "BlobXferDb" )
+BlobXferDb::BlobXferDb( const char * stateDbName )
+: DbBase( stateDbName )
 {
 }
 
-//============================================================================
-BlobXferDb::~BlobXferDb()
-{
-}
 
 //============================================================================
 //! create tables in database 

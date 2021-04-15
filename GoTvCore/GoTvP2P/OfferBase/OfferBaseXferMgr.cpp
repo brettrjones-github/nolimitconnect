@@ -69,12 +69,13 @@ namespace
 
 
 //============================================================================
-OfferBaseXferMgr::OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr, EOfferMgrType offerMgrType )
+OfferBaseXferMgr::OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr, const char * stateDbName, EOfferMgrType offerMgrType )
 : m_Engine( engine )
 , m_OfferMgr( offerMgr )
 , m_PluginMgr( engine.getPluginMgr() )
 , m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )
+, m_OfferBaseXferDb( stateDbName )
 {
 }
 

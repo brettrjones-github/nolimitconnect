@@ -19,10 +19,7 @@
 #include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
 
-class PktFileListReply;
-
 class UserHostInfo;
-class UserHostHistoryMgr;
 class UserHostCallbackInterface;
 class P2PEngine;
 
@@ -30,7 +27,7 @@ class UserHostMgr
 {
     const int USER_HOST_DB_VERSION = 1;
 public:
-	UserHostMgr( P2PEngine& engine, const char * dbName );
+	UserHostMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
 	virtual ~UserHostMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );

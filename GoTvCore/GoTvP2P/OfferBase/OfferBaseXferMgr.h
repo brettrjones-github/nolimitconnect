@@ -48,7 +48,7 @@ public:
 	typedef std::map<VxGUID, OfferBaseRxSession *>::iterator OfferBaseRxIter;
 	typedef std::vector<OfferBaseTxSession *>::iterator OfferBaseTxIter;
 
-	OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, EOfferMgrType offerMgrType );
+	OfferBaseXferMgr( P2PEngine& engine, OfferBaseMgr& offerMgr, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char * stateDbName, EOfferMgrType offerMgrType );
 	virtual ~OfferBaseXferMgr();
 
 	VxMutex&					getOfferBaseQueMutex( void )					{ return m_OfferBaseSendQueMutex; }

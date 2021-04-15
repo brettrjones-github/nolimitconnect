@@ -31,8 +31,8 @@ class BlobHistoryMgr;
 class BlobMgr : public AssetBaseMgr, public BlobCallbackInterface
 {
 public:
-	BlobMgr( P2PEngine& engine, const char * dbName );
-	virtual ~BlobMgr();
+	BlobMgr( P2PEngine& engine, const char * dbName, const char * stateDbName );
+	virtual ~BlobMgr() = default;
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;

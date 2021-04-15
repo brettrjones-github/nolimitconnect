@@ -31,7 +31,7 @@ class OfferHostMgr : public OfferBaseMgr
 {
     const int THUMB_DB_VERSION = 1;
 public:
-	OfferHostMgr( P2PEngine& engine, const char * dbName );
+	OfferHostMgr( P2PEngine& engine, const char * dbName, const char * stateDbName );
 	virtual ~OfferHostMgr() = default;
 
     void                        addOfferHostMgrClient( OfferHostCallbackInterface * client, bool enable );

@@ -31,8 +31,8 @@
 #include <time.h>
 
 //============================================================================
-OfferHostMgr::OfferHostMgr( P2PEngine& engine, const char * dbName )
-: OfferBaseMgr( engine, dbName, eOfferMgrTypeOfferHost )
+OfferHostMgr::OfferHostMgr( P2PEngine& engine, const char * dbName, const char * stateDbName )
+: OfferBaseMgr( engine, dbName, stateDbName, eOfferMgrTypeOfferHost )
 , m_OfferHostInfoDb( dynamic_cast<OfferHostInfoDb&>(OfferBaseMgr::getOfferInfoDb()) )
 , m_OfferHostInfoList( getOfferBaseInfoList() )
 {

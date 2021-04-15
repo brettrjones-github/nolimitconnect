@@ -23,13 +23,8 @@ namespace
 }
 
 //============================================================================
-OfferHostXferDb::OfferHostXferDb()
-: DbBase( "OfferHostXferDb" )
-{
-}
-
-//============================================================================
-OfferHostXferDb::~OfferHostXferDb()
+OfferHostXferDb::OfferHostXferDb( const char * stateDbName )
+: DbBase( stateDbName )
 {
 }
 

@@ -56,7 +56,7 @@ namespace
 }
 
 //============================================================================
-AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName, EAssetMgrType assetMgrType )
+AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName, const char * dbStateName, EAssetMgrType assetMgrType )
 : m_Engine( engine )
 , m_AssetMgrType( assetMgrType )
 , m_AssetBaseInfoDb( createAssetInfoDb( dbName, assetMgrType ) )

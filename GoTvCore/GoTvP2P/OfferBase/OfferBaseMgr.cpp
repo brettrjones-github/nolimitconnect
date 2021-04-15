@@ -54,7 +54,7 @@ namespace
 }
 
 //============================================================================
-OfferBaseMgr::OfferBaseMgr( P2PEngine& engine, const char * dbName, EOfferMgrType assetMgrType )
+OfferBaseMgr::OfferBaseMgr( P2PEngine& engine, const char * dbName, const char * stateDbName, EOfferMgrType assetMgrType )
 : m_Engine( engine )
 , m_OfferMgrType( assetMgrType )
 , m_OfferBaseInfoDb( createOfferInfoDb( dbName, assetMgrType ) )

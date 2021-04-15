@@ -23,10 +23,10 @@ class OfferHostInfo;
 class OfferHostXferDb : public DbBase
 {
 public:
-	OfferHostXferDb();
-	virtual ~OfferHostXferDb();
+	OfferHostXferDb( const char * stateDbName );
+	virtual ~OfferHostXferDb() = default;
 
-	void						lockOfferHostXferDb( void )			{ m_OfferHostXferDbMutex.lock(); }
+	void						lockOfferHostXferDb( void )			    { m_OfferHostXferDbMutex.lock(); }
 	void						unlockOfferHostXferDb( void )			{ m_OfferHostXferDbMutex.unlock(); }
 
 	virtual RCODE				onCreateTables( int iDbVersion );

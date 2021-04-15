@@ -45,7 +45,7 @@ class PktFileListReply;
 class AssetBaseMgr
 {
 public:
-	AssetBaseMgr( P2PEngine& engine, const char * dbName, EAssetMgrType assetMgrType );
+	AssetBaseMgr( P2PEngine& engine, const char * dbName, const char * dbStateName, EAssetMgrType assetMgrType );
 	virtual ~AssetBaseMgr();
 
     class AutoResourceLock

@@ -24,10 +24,10 @@ class BlobInfo;
 class BlobXferDb : public DbBase
 {
 public:
-	BlobXferDb();
-	virtual ~BlobXferDb();
+	BlobXferDb( const char * stateDbName );
+	virtual ~BlobXferDb() = default;
 
-	void						lockBlobXferDb( void )			{ m_BlobXferDbMutex.lock(); }
+	void						lockBlobXferDb( void )			    { m_BlobXferDbMutex.lock(); }
 	void						unlockBlobXferDb( void )			{ m_BlobXferDbMutex.unlock(); }
 
 	virtual RCODE				onCreateTables( int iDbVersion );

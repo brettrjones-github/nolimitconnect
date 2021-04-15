@@ -24,13 +24,8 @@ namespace
 }
 
 //============================================================================
-AssetBaseXferDb::AssetBaseXferDb()
-: DbBase( "AssetBaseXferDb" )
-{
-}
-
-//============================================================================
-AssetBaseXferDb::~AssetBaseXferDb()
+AssetBaseXferDb::AssetBaseXferDb( const char * stateDbName )
+: DbBase( stateDbName )
 {
 }
 

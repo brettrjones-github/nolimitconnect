@@ -45,7 +45,7 @@
 #include <stdio.h>
 
 //============================================================================
-OfferHostXferMgr::OfferHostXferMgr( P2PEngine& engine, OfferHostMgr offerMgr, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr )
-: OfferBaseXferMgr( engine, offerMgr, plugin, pluginSessionMgr, eOfferMgrTypeOfferHost )
+OfferHostXferMgr::OfferHostXferMgr( P2PEngine& engine, OfferHostMgr offerMgr, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr, const char * stateDbName )
+: OfferBaseXferMgr( engine, offerMgr, plugin, pluginSessionMgr, stateDbName, eOfferMgrTypeOfferHost )
 {
 }

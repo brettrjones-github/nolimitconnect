@@ -49,7 +49,7 @@ public:
 	typedef std::map<VxGUID, BlobRxSession *>::iterator BlobRxIter;
 	typedef std::vector<BlobTxSession *>::iterator BlobTxIter;
 
-	BlobXferMgr( PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr );
+	BlobXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char * stateDbName );
 	virtual ~BlobXferMgr();
 
 	VxMutex&					getBlobQueMutex( void )					{ return m_BlobSendQueMutex; }
@@ -122,11 +122,11 @@ protected:
 	std::vector<BlobTxSession *>		m_TxSessions;
 	VxMutex						m_TxSessionsMutex;
 
+    P2PEngine&					m_Engine;
 	PluginMessenger&			m_Plugin;	
 	PluginSessionMgr&			m_PluginSessionMgr;
 	PluginMgr&					m_PluginMgr;
-	P2PEngine&					m_Engine;					
-	
+					
 	BlobMgr&				    m_BlobMgr;
 	BlobXferDb				    m_BlobXferDb;
 

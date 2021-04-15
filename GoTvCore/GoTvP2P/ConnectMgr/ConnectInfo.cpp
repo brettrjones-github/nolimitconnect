@@ -1,8 +1,7 @@
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2021 Brett R. Jones 
 //
-// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
 //
 // This code is distributed in the hope that it will be useful,
@@ -13,23 +12,38 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AssetMgr.h"
-#include "AssetInfo.h"
+#include <config_gotvcore.h>
+#include "ConnectInfo.h"
+
+#include <PktLib/VxSearchDefs.h>
+
+#include <CoreLib/VxFileLists.h>
+#include <CoreLib/VxFileIsTypeFunctions.h>
+#include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
 
 //============================================================================
-AssetMgr::AssetMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
-: AssetBaseMgr( engine, dbName, dbStateName, eAssetMgrTypeAssets )
+ConnectInfo::ConnectInfo()
+{ 
+}
+
+//============================================================================
+ConnectInfo::ConnectInfo( const ConnectInfo& rhs )
+    : m_HostOnlineId( rhs.m_HostOnlineId )
 {
 }
 
 //============================================================================
-AssetBaseInfo * AssetMgr::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
-{
-    return new AssetInfo( assetName, assetLen, assetType );
-}
+ConnectInfo& ConnectInfo::operator=( const ConnectInfo& rhs ) 
+{	
+	if( this != &rhs )
+	{
+        m_HostOnlineId = rhs.m_HostOnlineId;
+	}
 
-//============================================================================
-AssetBaseInfo * AssetMgr::createAssetInfo( AssetBaseInfo& assetInfo )
-{
-    return new AssetInfo( assetInfo );
+	return *this;
 }

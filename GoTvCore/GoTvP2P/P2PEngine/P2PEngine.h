@@ -21,14 +21,16 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
+#include <GoTvCore/GoTvP2P/ConnectMgr/ConnectMgr.h>
 #include <GoTvCore/GoTvP2P/BlobXferMgr/BlobCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 #include <GoTvCore/GoTvP2P/OfferClientMgr/OfferClientMgr.h>
 #include <GoTvCore/GoTvP2P/OfferHostMgr/OfferHostMgr.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.h>
 
 #include <GoTvInterface/IDefs.h>
 #include <GoTvInterface/IFromGui.h>
@@ -42,16 +44,16 @@
 #include <PktLib/PktSysHandlerBase.h>
 #include <PktLib/PktsImAlive.h>
 
-class IToGui;
-class IGoTv;
-class FileShareSettings;
-class VxPeerMgr;
-class PluginMgr;
 class AssetMgr;
 class BlobMgr;
-class IsPortOpenTest;
-class RcConnectInfo;
+class ConnectMgr;
 class ConnectRequest;
+class FileShareSettings;
+class IToGui;
+class IGoTv;
+class IsPortOpenTest;
+class PluginMgr;
+class RcConnectInfo;
 class MediaProcessor;
 class NetworkMgr;
 class NetworkStateMachine;
@@ -64,6 +66,7 @@ class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
 class RunUrlAction;
+class VxPeerMgr;
 
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
@@ -87,6 +90,7 @@ public:
     ThumbMgr&					getThumbMgr( void )								{ return m_ThumbMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     ConnectionMgr&              getConnectionMgr( void )                        { return m_ConnectionMgr; }
+    ConnectMgr&                 getConnectMgr( void )                           { return m_ConnectMgr; }
     BlobMgr&				    getBlobMgr( void )							    { return m_BlobMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
@@ -106,19 +110,8 @@ public:
 
     OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
     OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
-    OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType )
-    {
-        switch( mgrType )
-        {
-        case eOfferMgrTypeOfferClient:
-            return getOfferClientMgr();
-        case eOfferMgrTypeOfferHost:
-            return getOfferHostMgr();
-        default:
-            vx_assert( false );
-            return getOfferClientMgr();
-        }
-    }
+    OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
+    UserHostMgr&                getUserHostMgr( void )                          { return m_UserHostMgr; }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
@@ -668,6 +661,7 @@ protected:
     OfferHostMgr&				m_OfferHostMgr;
     ThumbMgr&					m_ThumbMgr;
     ConnectionMgr&              m_ConnectionMgr;
+    ConnectMgr&                 m_ConnectMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;
     NetworkMgr&					m_NetworkMgr;
@@ -684,6 +678,7 @@ protected:
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
     RunUrlAction&			    m_RunUrlAction;
+    UserHostMgr&				m_UserHostMgr;
 
 	RcScan						m_RcScan;
 

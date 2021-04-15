@@ -32,7 +32,7 @@ class ThumbMgr : public AssetBaseMgr
 {
     const int THUMB_DB_VERSION = 1;
 public:
-	ThumbMgr( P2PEngine& engine, const char * dbName );
+	ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
 	virtual ~ThumbMgr() = default;
 
     void                        addThumbMgrClient( ThumbCallbackInterface * client, bool enable );

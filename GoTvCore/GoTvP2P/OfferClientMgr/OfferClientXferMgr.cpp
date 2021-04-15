@@ -42,7 +42,7 @@
 #include <stdio.h>
 
 //============================================================================
-OfferClientXferMgr::OfferClientXferMgr( P2PEngine& engine, OfferClientMgr& offerMgr, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr )
-    : OfferBaseXferMgr( engine, offerMgr, plugin, pluginSessionMgr, eOfferMgrTypeOfferClient )
+OfferClientXferMgr::OfferClientXferMgr( P2PEngine& engine, OfferClientMgr& offerMgr, PluginMessenger& plugin, PluginSessionMgr& pluginSessionMgr, const char * stateDbName )
+    : OfferBaseXferMgr( engine, offerMgr, plugin, pluginSessionMgr, stateDbName, eOfferMgrTypeOfferClient )
 {
 }

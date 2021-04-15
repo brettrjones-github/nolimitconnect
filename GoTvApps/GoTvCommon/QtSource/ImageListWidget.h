@@ -25,6 +25,7 @@ class AppCommon;
 class P2PEngine;
 class ThumbInfo;
 class ThumbMgr;
+class VxGUID;
 
 class ImageListWidget : public QListWidget
 {

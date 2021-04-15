@@ -35,13 +35,8 @@ namespace
 }
 
 //============================================================================
-BlobMgr::BlobMgr( P2PEngine& engine, const char * dbName )
-: AssetBaseMgr( engine, dbName, eAssetMgrTypeBlob )
-{
-}
-
-//============================================================================
-BlobMgr::~BlobMgr()
+BlobMgr::BlobMgr( P2PEngine& engine, const char * dbName, const char * stateDbName )
+: AssetBaseMgr( engine, dbName, stateDbName, eAssetMgrTypeBlob )
 {
 }
 
