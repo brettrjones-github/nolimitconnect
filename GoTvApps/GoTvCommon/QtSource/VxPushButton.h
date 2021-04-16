@@ -54,6 +54,8 @@ public:
 	void						setUseTheme( bool useTheme )						{ m_UseTheme = useTheme; }
 	bool						getUseTheme( void )									{ return m_UseTheme; }
 
+    void						setNotifyJoinEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyJoinOverlay );
+    bool						getNotifyJoinEnabled( void )						{ return m_NotifyJoinEnabled; }
 	void						setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOnlineOverlay );
 	bool						getNotifyOnlineEnabled( void )						{ return m_NotifyOnlineEnabled; }
     void						setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOfferOverlay );
@@ -127,18 +129,25 @@ protected:
 	QSize						m_LastIconSize;
 
     bool						m_NotifyOnlineEnabled{ false };
-	EMyIcons					m_NotifyOnlineIcon;
-	EMyIcons					m_LastNotifyOnlineIcon;
+	EMyIcons					m_NotifyOnlineIcon{ eMyIconNone };
+	EMyIcons					m_LastNotifyOnlineIcon{ eMyIconNone };
 	QPixmap						m_NotifyIconOnlineImage;
 	QColor						m_NotifyLastIconOnlineColor;
-	QSize						m_NotifyLastIconOnlineSize;
+	QSize						m_NotifyLastIconOnlineSize{ 0, 0 };
+
+    bool						m_NotifyJoinEnabled{ false };
+    EMyIcons					m_NotifyJoinIcon{ eMyIconNone };
+    EMyIcons					m_LastNotifyJoinIcon{ eMyIconNone };
+    QPixmap						m_NotifyIconJoinImage;
+    QColor						m_NotifyLastIconJoinColor;
+    QSize						m_NotifyLastIconJoinSize{ 0, 0 };
 
     bool						m_NotifyOfferEnabled{ false };
-    EMyIcons					m_NotifyOfferIcon;
-    EMyIcons					m_LastNotifyOfferIcon;
+    EMyIcons					m_NotifyOfferIcon{ eMyIconNone };
+    EMyIcons					m_LastNotifyOfferIcon{ eMyIconNone };
     QPixmap						m_NotifyIconOfferImage;
     QColor						m_NotifyLastIconOfferColor;
-    QSize						m_NotifyLastIconOfferSize;
+    QSize						m_NotifyLastIconOfferSize{ 0, 0 };
 
     bool						m_NotifyForbiddenEnabled{ false };
     EMyIcons					m_NotifyForbiddenIcon;

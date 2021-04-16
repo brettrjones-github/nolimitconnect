@@ -17,20 +17,18 @@
 
 namespace
 {
-    std::string 		TABLE_ASSETS	 				= "tblUserHosts";
+    std::string 		TABLE_USER_HOST	 				= "tblUserHosts";
 
-    std::string 		CREATE_COLUMNS_ASSETS			= " (hostid TEXT PRIMARY KEY, hostType INTEGER, hostModMs BIGINT, hostFlags INTEGER, thumbId TEXT, thumbModMs BIGINT, offerId TEXT, offerState INTEGER, offerModMs BIGINT, hostUrl TEXT) ";
+    std::string 		CREATE_COLUMNS_USER_HOST		= " (onlineId TEXT, thumbId TEXT, infoModMs BIGINT, hostType INTEGER, hostFlags INTEGER, hostUrl TEXT, lastConnMs BIGINT, lastJoinMs BIGINT) ";
 
-    const int			COLUMN_HOST_ID			        = 0;
-    const int			COLUMN_HOST_TYPE			    = 1;
-    const int			COLUMN_HOST_MOD_MS				= 2;
-    const int			COLUMN_HOST_FLAGS			    = 3;
-    const int			COLUMN_HOST_THUMB_ID			= 4;
-    const int			COLUMN_THUMB_MOD_MS				= 5;
-    const int			COLUMN_OFFER_ID				    = 6;
-    const int			COLUMN_OFFER_STATE			    = 7;
-    const int			COLUMN_OFFER_MOD_MS			    = 8;
-    const int			COLUMN_HOST_URL			        = 9;
+    const int			COLUMN_ONLINE_ID			    = 0;
+    const int			COLUMN_HOST_THUMB_ID			= 1;
+    const int			COLUMN_INFO_MOD_MS				= 2;
+    const int			COLUMN_HOST_TYPE			    = 3;
+    const int			COLUMN_HOST_FLAGS			    = 4;
+    const int			COLUMN_HOST_URL			        = 5;
+    const int			COLUMN_LAST_CONN_MS				= 6;
+    const int			COLUMN_LAST_JOIN_MS			    = 7;
 }
 
 //============================================================================
@@ -46,7 +44,7 @@ UserHostInfoDb::UserHostInfoDb( P2PEngine& engine, UserHostMgr& hostListMgr, con
 RCODE UserHostInfoDb::onCreateTables( int iDbVersion )
 {
     lockUserHostInfoDb();
-    std::string strCmd = "CREATE TABLE " + TABLE_ASSETS + CREATE_COLUMNS_ASSETS;
+    std::string strCmd = "CREATE TABLE " + TABLE_USER_HOST + CREATE_COLUMNS_USER_HOST;
     RCODE rc = sqlExec(strCmd);
     unlockUserHostInfoDb();
     return rc;
@@ -57,7 +55,7 @@ RCODE UserHostInfoDb::onCreateTables( int iDbVersion )
 RCODE UserHostInfoDb::onDeleteTables( int iOldVersion ) 
 {
     lockUserHostInfoDb();
-    std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_ASSETS;
+    std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_USER_HOST;
     RCODE rc = sqlExec(strCmd);
     unlockUserHostInfoDb();
     return rc;
@@ -67,7 +65,7 @@ RCODE UserHostInfoDb::onDeleteTables( int iOldVersion )
 void UserHostInfoDb::purgeAllUserHosts( void ) 
 {
     lockUserHostInfoDb();
-    std::string strCmd = "DELETE FROM " + TABLE_ASSETS;
+    std::string strCmd = "DELETE FROM " + TABLE_USER_HOST;
     RCODE rc = sqlExec( strCmd );
     unlockUserHostInfoDb();
     if( rc )
@@ -81,44 +79,40 @@ void UserHostInfoDb::purgeAllUserHosts( void )
 }
 
 //============================================================================
-void UserHostInfoDb::removeUserHost( VxGUID& assetId )
+void UserHostInfoDb::removeUserHost( VxGUID& onlineId, EHostType hostType )
 {
-    std::string assetStr = assetId.toHexString();
-    DbBindList bindList( assetStr.c_str() );
-    sqlExec( "DELETE FROM tblUserHosts WHERE unique_id=?", bindList );
+    std::string onlineIdStr = onlineId.toHexString();
+    DbBindList bindList( onlineIdStr.c_str() );
+    bindList.add( (int)hostType );
+    sqlExec( "DELETE FROM tblUserHosts WHERE onlineId=? AND hostType=?", bindList );
 }
 
 //============================================================================
-void UserHostInfoDb::addUserHost(   EHostType       hostType,
-                                    VxGUID&			hostOnlineId,  
-                                    uint64_t		hostModTime,
-                                    uint32_t        hostFlags,
+void UserHostInfoDb::addUserHost(   VxGUID&			onlineId, 
                                     VxGUID&			thumbId,
-                                    uint64_t		thumbModTime,
-                                    VxGUID&			offerId,
-                                    EOfferState		offerState,
-                                    uint64_t		offerModTime,
-                                    std::string     hostUrl
-)
+                                    uint64_t		infoModTime,
+                                    EHostType       hostType,
+                                    uint32_t        hostFlags,
+                                    std::string     hostUrl,
+                                    uint64_t		lastConnectMs,
+                                    uint64_t		lastJoinMs
+                                   )
 {
-    removeUserHost( hostOnlineId );
+    removeUserHost( onlineId, hostType );
 
-    std::string hostIdStr = hostOnlineId.toHexString();
+    std::string onlineIdStr = onlineId.toHexString();
     std::string thumbIdStr = thumbId.toHexString();
-    std::string offerIdStr = offerId.toHexString();
 
-    DbBindList bindList( hostIdStr.c_str() );
-    bindList.add( (int)hostType );
-    bindList.add( hostModTime );
-    bindList.add( (int)hostFlags );
+    DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( thumbIdStr.c_str() );
-    bindList.add( thumbModTime );
-    bindList.add( offerIdStr.c_str() );
-    bindList.add( (int)offerState );
-    bindList.add( offerModTime );
+    bindList.add( infoModTime );
+    bindList.add( (int)hostType );
+    bindList.add( (int)hostFlags );
     bindList.add( hostUrl.c_str() );
+    bindList.add( lastConnectMs );
+    bindList.add( lastJoinMs );    
 
-    RCODE rc = sqlExec( "INSERT INTO tblUserHosts (hostId,hostType, hostModMs, hostFlags, thumbId, thumbModMs, offerId, offerState, offerModMs, hostUrl) values(?,?,?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblUserHosts (onlineId, thumbId, infoModMs, hostType, hostFlags, hostUrl, lastConnMs, lastJoinMs) values(?,?,?,?,?,?,?,?)",
         bindList );
     vx_assert( 0 == rc );
     if( rc )
@@ -130,17 +124,15 @@ void UserHostInfoDb::addUserHost(   EHostType       hostType,
 //============================================================================
 void UserHostInfoDb::addUserHost( UserHostInfo* hostInfo )
 {
-    addUserHost(	hostInfo->getHostType(),
-        hostInfo->getHostId(),
-        hostInfo->getHostModifiedTime(),
-        hostInfo->getHostFlags(),
-        hostInfo->getThumbId(),
-        hostInfo->getThumbModifiedTime(),
-        hostInfo->getOfferId(),				
-        hostInfo->getOfferState(),
-        hostInfo->getOfferModifiedTime(),
-        hostInfo->getHostUrl()
-    );
+    addUserHost(	hostInfo->getOnlineId(),
+                    hostInfo->getThumbId(),
+                    hostInfo->getInfoModifiedTime(),                    
+                    hostInfo->getHostType(),
+                    hostInfo->getHostFlags(),			
+                    hostInfo->getHostUrl(),
+                    hostInfo->getLastConnectTime(),	
+                    hostInfo->getLastJoinTime()	
+                    );
 }
 
 //============================================================================
@@ -153,20 +145,24 @@ void UserHostInfoDb::getAllUserHosts( std::vector<UserHostInfo*>& UserHostUserHo
         while( cursor->getNextRow() )
         {
             UserHostInfo * hostInfo = new UserHostInfo();
+            const int			COLUMN_ONLINE_ID			    = 0;
+            const int			COLUMN_HOST_THUMB_ID			= 1;
+            const int			COLUMN_INFO_MOD_MS				= 2;
+            const int			COLUMN_HOST_TYPE			    = 3;
+            const int			COLUMN_HOST_FLAGS			    = 4;
+            const int			COLUMN_HOST_URL			        = 5;
+            const int			COLUMN_LAST_CONN_MS				= 6;
+            const int			COLUMN_LAST_JOIN_MS			    = 7;
 
-            hostInfo->setHostId( cursor->getString( COLUMN_HOST_ID ) );
-            hostInfo->setHostType( (EHostType)cursor->getS32( COLUMN_HOST_TYPE ) );
-            hostInfo->setHostModifiedTime( (uint64_t)cursor->getS64( COLUMN_HOST_MOD_MS ) );
-            hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
-
+            hostInfo->setOnlineId( cursor->getString( COLUMN_ONLINE_ID ) );
             hostInfo->setThumbId( cursor->getString( COLUMN_HOST_THUMB_ID ) );
-            hostInfo->setThumbModifiedTime( (uint64_t)cursor->getS64( COLUMN_THUMB_MOD_MS ) );
-
-            hostInfo->setOfferId( cursor->getString( COLUMN_OFFER_ID ) );
-            hostInfo->setOfferState( (EOfferState) cursor->getS32( COLUMN_OFFER_STATE ) );
-            hostInfo->setOfferModifiedTime(  (int64_t)cursor->getS64( COLUMN_OFFER_MOD_MS ) );
-
+            hostInfo->setInfoModifiedTime( (uint64_t)cursor->getS64( COLUMN_INFO_MOD_MS ) );
+            hostInfo->setHostType( (EHostType)cursor->getS32( COLUMN_HOST_TYPE ) );
+            hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
             hostInfo->setHostUrl( cursor->getString( COLUMN_HOST_URL ) );
+            
+            hostInfo->setLastConnectTime( (uint64_t)cursor->getS64( COLUMN_LAST_CONN_MS ) );
+            hostInfo->setLastJoinTime(  (uint64_t)cursor->getS64( COLUMN_LAST_JOIN_MS ) ); 
 
             vx_assert( hostInfo->isValid() );
 
@@ -180,24 +176,30 @@ void UserHostInfoDb::getAllUserHosts( std::vector<UserHostInfo*>& UserHostUserHo
 } 
 
 //============================================================================
-void UserHostInfoDb::insertUserHostInTimeOrder( UserHostInfo *hostInfo, std::vector<UserHostInfo*>& assetList )
+void UserHostInfoDb::insertUserHostInTimeOrder( UserHostInfo *hostInfo, std::vector<UserHostInfo*>& hostList )
 {
-    vx_assert( hostInfo->isValid() );
+    vx_assert( hostInfo && hostInfo->isValid() );
+    if( hostInfo->isDefaultHost() )
+    {
+        hostList.insert( hostList.begin(), hostInfo );
+        return;
+    }
 
     std::vector<UserHostInfo*>::iterator iter;
-    for( iter = assetList.begin(); iter != assetList.end(); ++iter )
+    for( iter = hostList.begin(); iter != hostList.end(); ++iter )
     {
-
         if( ( *iter )->isDefaultHost() )
         {
+            // skip defaults so they are at front of list
+            continue;
         }
-        else if( (*iter)->getHostModifiedTime() > hostInfo->getHostModifiedTime() )
+        else if( (*iter)->getLastJoinTime() > hostInfo->getLastJoinTime() )
         {
-            assetList.insert( iter, hostInfo );
+            hostList.insert( iter, hostInfo );
             return;
         }
     }
 
-    assetList.push_back( hostInfo );
+    hostList.push_back( hostInfo );
 }
 

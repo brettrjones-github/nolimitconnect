@@ -142,6 +142,7 @@ enum EColorLayerType
 	eColorLayerIcon,
 	eColorLayerText,
 	eColorLayerOverlay,
+    eColorLayerNotifyJoin,
 	eColorLayerNotifyOnline,
     eColorLayerNotifyOffer,
     eColorLayerNotifyForbidden,

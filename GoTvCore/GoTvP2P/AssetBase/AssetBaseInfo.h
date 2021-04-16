@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h>
 
 #include <CoreLib/AssetDefs.h>
 #include <CoreLib/VxFileTypeMasks.h>
@@ -33,7 +33,7 @@
 
 class VxThread;
 
-class AssetBaseInfo
+class AssetBaseInfo : public BaseInfo
 {
 public:
     AssetBaseInfo();
@@ -96,17 +96,13 @@ public:
     virtual VxGUID&				getAssetUniqueId( void )                        { return m_UniqueId; }
     virtual VxGUID&				generateNewUniqueId( void ); // generates unique id, assigns it to asset and returns reference to it
 
-    virtual void				setCreatorId( VxGUID creatorId )                { m_CreatorId = creatorId; }
-    virtual void				setCreatorId( const char * creatorId )          { m_CreatorId.fromVxGUIDHexString( creatorId ); }
-    virtual VxGUID&				getCreatorId( void )                            { return m_CreatorId; }
+    virtual void				setCreatorId( VxGUID creatorId )                { BaseInfo::setOnlineId( creatorId ); }
+    virtual void				setCreatorId( const char * creatorId )          { BaseInfo::setOnlineId( creatorId ); }
+    virtual VxGUID&				getCreatorId( void )                            { return BaseInfo::getOnlineId(); }
 
     virtual void				setHistoryId( VxGUID& historyId )               { m_HistoryId = historyId; }
     virtual void				setHistoryId( const char * historyId )          { m_HistoryId.fromVxGUIDHexString( historyId ); }
     virtual VxGUID&				getHistoryId( void )                            { return m_HistoryId; }
-
-    virtual void				setThumbId( VxGUID& historyId )                 { m_ThumbId = historyId; }
-    virtual void				setThumbId( const char * historyId )            { m_ThumbId.fromVxGUIDHexString( historyId ); }
-    virtual VxGUID&				getThumbId( void )                              { return m_ThumbId; }
 
     virtual void				setLocationFlags( uint32_t locFlags )           { m_LocationFlags = locFlags; }
     virtual uint32_t			getLocationFlags( void )                        { return m_LocationFlags; }
@@ -117,11 +113,11 @@ public:
     virtual void				setAssetSendState( EAssetSendState sendState )  { m_AssetSendState = sendState; }
     virtual EAssetSendState		getAssetSendState( void )                       { return m_AssetSendState; }
 
-    virtual void				setCreationTime( uint64_t timestamp )           { m_CreationTime = timestamp; m_ModifiedTime = timestamp; m_AccessedTime = timestamp; }
+    virtual void				setCreationTime( uint64_t timestamp )           { m_CreationTime = timestamp; m_InfoModifiedTime = timestamp; m_AccessedTime = timestamp; }
     virtual uint64_t			getCreationTime( void )                         { return m_CreationTime; }
 
-    virtual void				setModifiedTime( uint64_t timestamp )           { m_ModifiedTime = timestamp; m_AccessedTime = timestamp; }
-    virtual uint64_t			getModifiedTime( void )                         { return m_ModifiedTime; }
+    virtual void				setModifiedTime( uint64_t timestamp )           { BaseInfo::setInfoModifiedTime( timestamp ); m_AccessedTime = timestamp; }
+    virtual uint64_t			getModifiedTime( void )                         { return BaseInfo::getInfoModifiedTime(); }
 
     virtual void				setAccessedTime( uint64_t timestamp )           { m_AccessedTime = timestamp; }
     virtual uint64_t			getAccessedTime( void )                         { return m_AccessedTime; }
@@ -140,16 +136,13 @@ public:
     std::string					m_AssetName{""}; // usually file name
 	std::string					m_AssetTag{""};
 	VxGUID						m_UniqueId;
-	VxGUID						m_CreatorId;
 	VxGUID						m_HistoryId; 
-    VxGUID						m_ThumbId; 
 	VxSha1Hash					m_AssetHash;
     int64_t						m_s64AssetLen{ 0 };
     uint16_t					m_u16AssetType{ VXFILE_TYPE_UNKNOWN };
     uint16_t					m_AttributeFlags{ 0 };
 	uint32_t					m_LocationFlags{ 0 };
     int64_t						m_CreationTime{ 0 };
-    int64_t						m_ModifiedTime{ 0 };
     int64_t						m_AccessedTime{ 0 };
 	EAssetSendState			    m_AssetSendState{ eAssetSendStateNone };
     int						    m_PlayPosition0to100000{ 0 };

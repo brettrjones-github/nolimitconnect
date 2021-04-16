@@ -480,6 +480,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BigListLib\BigList.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -785,6 +786,7 @@
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferDb.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigList.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListDb.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListInfo.h" />

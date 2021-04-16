@@ -45,6 +45,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.h \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.h \
@@ -353,6 +354,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.cpp \

@@ -1,0 +1,20 @@
+
+=== Core Module Manager Responsibilities ===
+ConnectionMgr
+1.) Connect to hosts - primary keys - host type, online id, connect reason 
+2.) Provide Callbacks for connection request process states
+3.) Cache connections for fast host connection lookups/requests
+
+ConnectMgr - primary keys - host type, online id, connection id
+1.) By connection id track which connections are live
+2.) Provide connection info with connection id as primary key
+
+UserHostMgr - primary keys - host type, online id, connection id
+1.) Provide past connected to host history to gui for user host selections
+2.) Provide gui with default host urls by host type
+
+OfferClientMgr - primary keys - host type/offer type, online id, offer id, offer state
+1.) Provide offer info and state as seen from users perspective
+
+OfferHostMgr - primary keys - host type/offer type, online id, offer id, offer state
+1.) Provide offer info and state as seen from host admin perspective

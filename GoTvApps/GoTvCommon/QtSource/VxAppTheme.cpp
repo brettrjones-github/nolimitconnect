@@ -281,6 +281,8 @@ QColor VxAppTheme::getButtonColor( QPushButton * button, EColorLayerType colorLa
 			return getColor( eLayerOverlayColor );
 		case eColorLayerNotifyOnline:
 			return getColor( eLayerNotifyOnlineColor );
+        case eColorLayerNotifyJoin:
+            return getColor( eLayerNotifyOnlineColor );
         case eColorLayerNotifyOffer:
             return getColor( eLayerNotifyOfferColor );
         case eColorLayerNotifyForbidden:

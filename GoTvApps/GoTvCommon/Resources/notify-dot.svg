@@ -13,7 +13,7 @@
    version="1.1"
    id="svg4"
    sodipodi:docname="notify-dot.svg"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,22 +37,22 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="879"
-     inkscape:window-height="480"
+     inkscape:window-width="1635"
+     inkscape:window-height="927"
      id="namedview6"
      showgrid="false"
      inkscape:zoom="9.8333333"
      inkscape:cx="12"
      inkscape:cy="12"
-     inkscape:window-x="688"
-     inkscape:window-y="154"
+     inkscape:window-x="1557"
+     inkscape:window-y="794"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg4" />
   <ellipse
-     cx="19.372881"
-     cy="4.4237289"
+     cx="21.35593"
+     cy="2.9491527"
      id="circle2"
-     rx="3.7118645"
-     ry="3.6101694"
-     style="stroke-width:0.30505532" />
+     rx="2.5423729"
+     ry="2.6440678"
+     style="stroke-width:0.21606015" />
 </svg>

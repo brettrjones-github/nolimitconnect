@@ -79,6 +79,8 @@ messenger-settings.svg (modified)
 microphone.svg
 microphone-muted.svg (modified)
 notify-dot.svg (modified)
+notify-join.svg (modified)
+notify-offer.svg (modified)
 notepad.svg
 offer-file.svg (modified)
 offer-friendship.svg (modified)

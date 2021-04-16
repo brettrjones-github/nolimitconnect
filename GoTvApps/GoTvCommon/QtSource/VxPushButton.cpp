@@ -52,8 +52,6 @@ VxPushButton::VxPushButton( QWidget *parent )
 , m_NotifyLastIconOnlineColor( COLOR_TRANSPARENT)
 , m_NotifyLastIconOnlineSize( 0, 0 )
 
-, m_NotifyOfferIcon( eMyIconNone )
-, m_LastNotifyOfferIcon( eMyIconNone )
 , m_NotifyIconOfferImage()
 , m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)
 , m_NotifyLastIconOfferSize( 0, 0 )
@@ -95,17 +93,14 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 , m_LastIconColor( COLOR_TRANSPARENT )
 , m_LastIconSize( 0, 0 )
 
-, m_NotifyOnlineIcon( eMyIconNone )
-, m_LastNotifyOnlineIcon( eMyIconNone )
+, m_NotifyIconJoinImage()
+, m_NotifyLastIconJoinColor( COLOR_TRANSPARENT)
+
 , m_NotifyIconOnlineImage()
 , m_NotifyLastIconOnlineColor( COLOR_TRANSPARENT)
-, m_NotifyLastIconOnlineSize( 0, 0 )
 
-, m_NotifyOfferIcon( eMyIconNone )
-, m_LastNotifyOfferIcon( eMyIconNone )
 , m_NotifyIconOfferImage()
 , m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)
-, m_NotifyLastIconOfferSize( 0, 0 )
 
 , m_NotifyForbiddenIcon( eMyIconNone )
 , m_LastNotifyForbiddenIcon( eMyIconNone )
@@ -300,6 +295,21 @@ void VxPushButton::setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon )
 }
 
 //============================================================================
+void VxPushButton::setNotifyJoinEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+    m_NotifyJoinEnabled = enabled;
+    if( enabled )
+    {
+        if( eMyIconNone != eNotifyIcon )
+        {
+            m_NotifyJoinIcon = eNotifyIcon;
+        }
+    }
+
+    update();
+}
+
+//============================================================================
 void VxPushButton::setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon )
 {
     m_NotifyOfferEnabled = enabled;
@@ -489,6 +499,31 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 			painter.drawPixmap( drawRect, m_OverlayIconImage );
 		}
 	}
+
+    if( m_NotifyJoinEnabled && ( eMyIconNone != m_NotifyJoinIcon ) )
+    {
+        // draw online notify dot
+        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyJoin );
+
+        if( ( m_NotifyLastIconJoinColor != iconColor )
+            || m_NotifyIconJoinImage.isNull()
+            || ( drawRect.size() != m_NotifyLastIconJoinSize )
+            || ( m_NotifyOfferIcon != m_LastNotifyJoinIcon ) )
+        {
+            m_NotifyIconJoinImage = getMyIcons().getIconPixmap( m_NotifyJoinIcon, drawRect.size(), iconColor );
+            if( ! m_IconImage.isNull() )
+            {
+                m_LastNotifyJoinIcon = m_NotifyJoinIcon;
+                m_NotifyLastIconJoinColor = iconColor;
+                m_NotifyLastIconJoinSize = drawRect.size();
+            }
+        }
+
+        if( ! m_NotifyIconJoinImage.isNull() )
+        {
+            painter.drawPixmap( drawRect, m_NotifyIconJoinImage );
+        }
+    }
 
 	if( m_NotifyOnlineEnabled && ( eMyIconNone != m_NotifyOnlineIcon ) )
 	{

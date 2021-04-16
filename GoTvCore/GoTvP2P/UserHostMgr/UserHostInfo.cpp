@@ -28,12 +28,19 @@
 
 //============================================================================
 UserHostInfo::UserHostInfo()
+    : BaseInfo()
 { 
 }
 
 //============================================================================
 UserHostInfo::UserHostInfo( const UserHostInfo& rhs )
-    : m_HostOnlineId( rhs.m_HostOnlineId )
+    : BaseInfo( rhs )
+    , m_HostType( rhs.m_HostType )
+    , m_HostFlags( rhs.m_HostFlags )
+    , m_HostUrl( rhs.m_HostUrl )
+    , m_LastConnectMs( rhs.m_LastConnectMs )
+    , m_LastJoinMs( rhs.m_LastJoinMs )
+    , m_ConnectionId( rhs.m_ConnectionId )
 {
 }
 
@@ -42,8 +49,14 @@ UserHostInfo& UserHostInfo::operator=( const UserHostInfo& rhs )
 {	
 	if( this != &rhs )
 	{
-        m_HostOnlineId = rhs.m_HostOnlineId;
-	}
+        BaseInfo::operator = ( rhs );
+        m_HostType = rhs.m_HostType;
+        m_HostFlags = rhs.m_HostFlags;
+        m_HostUrl = rhs.m_HostUrl;
+        m_LastConnectMs = rhs.m_LastConnectMs;
+        m_LastJoinMs = rhs.m_LastJoinMs;
+        m_ConnectionId = rhs.m_ConnectionId;
+    }
 
 	return *this;
 }

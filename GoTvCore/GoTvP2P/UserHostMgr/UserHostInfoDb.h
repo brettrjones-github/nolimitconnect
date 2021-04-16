@@ -32,20 +32,18 @@ public:
     void						lockUserHostInfoDb( void ) { m_UserHostInfoDbMutex.lock(); }
     void						unlockUserHostInfoDb( void ) { m_UserHostInfoDbMutex.unlock(); }
 
-    void						addUserHost(    EHostType       hostType,
-                                                VxGUID&			hostOnlineId,  
-                                                uint64_t		hostModTime,
-                                                uint32_t        hostFlags,
+    void						addUserHost(    VxGUID&			onlineId, 
                                                 VxGUID&			thumbId,
-                                                uint64_t		thumbModTime,
-                                                VxGUID&			offerId,
-                                                EOfferState		offerState,
-                                                uint64_t		offerModTime,
-                                                std::string     hostUrl
+                                                uint64_t		infoModTime,
+                                                EHostType       hostType,
+                                                uint32_t        hostFlags,
+                                                std::string     hostUrl,
+                                                uint64_t		lastConnectMs,
+                                                uint64_t		lastJoinMs
                                                 );
 
     void						addUserHost( UserHostInfo * hostInfo );
-    void						removeUserHost( VxGUID& hostOnlineId );
+    void						removeUserHost( VxGUID& onlineId, EHostType hostType );
 
     void						getAllUserHosts( std::vector<UserHostInfo*>& userHostList );
     void						purgeAllUserHosts( void ); 

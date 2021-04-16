@@ -847,6 +847,9 @@
     <ClCompile Include="..\..\GoTvP2P\ConnectMgr\ConnectMgr.cpp">
       <Filter>GoTvP2P\ConnectMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1810,6 +1813,9 @@
     <ClInclude Include="..\..\GoTvP2P\ConnectMgr\ConnectMgr.h">
       <Filter>GoTvP2P\ConnectMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1919,6 +1925,9 @@
     </Filter>
     <Filter Include="GoTvP2P\ConnectMgr">
       <UniqueIdentifier>{26c521ac-2eac-49e1-b3c7-1edef2efe660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\BaseInfo">
+      <UniqueIdentifier>{019f1a11-04eb-4df7-a4e1-77d4aee987f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

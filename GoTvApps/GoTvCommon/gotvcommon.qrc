@@ -295,5 +295,6 @@
         <file>Resources/notify-offer.svg</file>
         <file>Resources/offer-list.svg</file>
         <file>Resources/call-list.svg</file>
+        <file>Resources/notify-join.svg</file>
     </qresource>
 </RCC>

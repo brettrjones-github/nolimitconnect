@@ -31,19 +31,36 @@
 
 //============================================================================
 AssetBaseInfo::AssetBaseInfo()
+    : BaseInfo()
 { 
 }
 
 //============================================================================
 AssetBaseInfo::AssetBaseInfo( const AssetBaseInfo& rhs )
+: BaseInfo( rhs )
+, m_AssetName( rhs.m_AssetName )
+, m_UniqueId( rhs.m_UniqueId )
+, m_HistoryId( rhs.m_HistoryId )
+, m_AssetHash( rhs.m_AssetHash )
+, m_s64AssetLen( rhs.m_s64AssetLen )
+, m_u16AssetType( rhs.m_u16AssetType )
+, m_AttributeFlags( rhs.m_AttributeFlags )
+, m_LocationFlags( rhs.m_LocationFlags )
+, m_CreationTime( rhs.m_CreationTime )
+, m_AccessedTime( rhs.m_AccessedTime ) 
+, m_AssetTag( rhs.m_AssetTag )
+, m_AssetSendState( rhs.m_AssetSendState )
+, m_PlayPosition0to100000( rhs.m_PlayPosition0to100000 )
 {
-	*this = rhs;
 }
 
 //============================================================================
 AssetBaseInfo::AssetBaseInfo( const std::string& fileName )
 : m_AssetName( fileName )
+, m_CreationTime( GetTimeStampMs() )
+, m_AccessedTime( m_CreationTime )
 { 
+    BaseInfo::setInfoModifiedTime( m_CreationTime );
 }
 
 //============================================================================
@@ -52,9 +69,9 @@ AssetBaseInfo::AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t 
 , m_s64AssetLen( fileLen )
 , m_u16AssetType( assetType )
 , m_CreationTime( GetTimeStampMs() )
-, m_ModifiedTime( m_CreationTime )
 , m_AccessedTime( m_CreationTime )
 {
+    BaseInfo::setInfoModifiedTime( m_CreationTime );
 }
 
 //============================================================================
@@ -62,9 +79,9 @@ AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs )
 {	
 	if( this != &rhs )
 	{
+        BaseInfo::operator=( rhs );
 		m_AssetName					= rhs.m_AssetName;
 		m_UniqueId					= rhs.m_UniqueId;
-		m_CreatorId					= rhs.m_CreatorId;
 		m_HistoryId					= rhs.m_HistoryId; 
 		m_AssetHash					= rhs.m_AssetHash;
 		m_s64AssetLen				= rhs.m_s64AssetLen;
@@ -72,7 +89,7 @@ AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs )
         m_AttributeFlags			= rhs.m_AttributeFlags;
         m_LocationFlags				= rhs.m_LocationFlags;
 		m_CreationTime				= rhs.m_CreationTime;
-        m_ModifiedTime				= rhs.m_ModifiedTime;
+        m_AccessedTime              = rhs.m_AccessedTime;
 		m_AssetTag					= rhs.m_AssetTag;
 		m_AssetSendState			= rhs.m_AssetSendState;
         m_PlayPosition0to100000     = rhs.m_PlayPosition0to100000;
@@ -84,14 +101,14 @@ AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs )
 //============================================================================
 bool AssetBaseInfo::isValid( void )
 {
-    vx_assert( ( VXFILE_TYPE_UNKNOWN != m_u16AssetType ) && m_UniqueId.isVxGUIDValid() && m_CreatorId.isVxGUIDValid() && 0 != m_CreationTime && 0 != m_ModifiedTime );
-	return ( VXFILE_TYPE_UNKNOWN != m_u16AssetType ) && m_UniqueId.isVxGUIDValid() && m_CreatorId.isVxGUIDValid() && 0 != m_CreationTime && 0 != m_ModifiedTime;
+    vx_assert( ( VXFILE_TYPE_UNKNOWN != m_u16AssetType ) && m_UniqueId.isVxGUIDValid() && getCreatorId().isVxGUIDValid() && 0 != m_CreationTime && 0 != m_InfoModifiedTime );
+	return ( VXFILE_TYPE_UNKNOWN != m_u16AssetType ) && m_UniqueId.isVxGUIDValid() && getCreatorId().isVxGUIDValid() && 0 != m_CreationTime && 0 != m_InfoModifiedTime;
 }
 
 //============================================================================
 bool AssetBaseInfo::isMine( void )
 {
-	return isValid() && ( m_CreatorId == GetPtoPEngine().getMyOnlineId() );
+	return isValid() && ( getCreatorId() == GetPtoPEngine().getMyOnlineId() );
 }
 
 //============================================================================

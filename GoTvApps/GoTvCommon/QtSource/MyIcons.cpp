@@ -118,6 +118,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconAvatarImage:
         return ":/AppRes/Resources/avatar.svg";
 
+    case eMyIconNotifyJoinOverlay:		
+        return ":/AppRes/Resources/notify-join.svg";
 	case eMyIconNotifyOnlineOverlay:		
 		return ":/AppRes/Resources/notify-dot.svg";
     case eMyIconNotifyOfferOverlay:		
