@@ -57,7 +57,7 @@
 #include <CoreLib/VxGlobals.h>
 #include "VxDataHelper.h"
 #include <NetLib/VxPeerMgr.h>
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 
 int main(int argc, char **argv)

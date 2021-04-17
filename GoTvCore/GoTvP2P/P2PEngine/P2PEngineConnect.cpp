@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "P2PEngine.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/Network/NetConnector.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkStateMachine.h>

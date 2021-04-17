@@ -16,7 +16,7 @@
 #include "PktTypes.h"
 #include "PktBlobEntry.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #pragma pack(1)
 

@@ -22,7 +22,7 @@
 #include "MyIcons.h"
 #include "RenderGlOffScreenSurface.h"
 
-#include "GoTvInterface/GoTvRenderFrame.h"
+#include "GuiInterface/GoTvRenderFrame.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>

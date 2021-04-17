@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "PluginMgr.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 

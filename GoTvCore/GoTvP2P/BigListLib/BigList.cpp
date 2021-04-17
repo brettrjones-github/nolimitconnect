@@ -17,7 +17,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigList.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 #include <string.h>
 

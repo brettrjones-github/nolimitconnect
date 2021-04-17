@@ -13,7 +13,7 @@
 //============================================================================
 #pragma once
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/BinaryBlob.h>
 

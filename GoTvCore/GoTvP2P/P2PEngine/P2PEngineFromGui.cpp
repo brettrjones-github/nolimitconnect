@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "P2PEngine.h"
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 #include "P2PConnectList.h"
 #include "../NetServices/NetServicesMgr.h"

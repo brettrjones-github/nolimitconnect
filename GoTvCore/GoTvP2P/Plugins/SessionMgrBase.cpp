@@ -16,7 +16,7 @@
 #include "SessionMgrBase.h"
 #include "PluginBase.h"
 #include "PluginMgr.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 
 SessionMgrBase::SessionMgrBase( P2PEngine& engine, PluginBase& plugin, PluginMgr& pluginMgr )

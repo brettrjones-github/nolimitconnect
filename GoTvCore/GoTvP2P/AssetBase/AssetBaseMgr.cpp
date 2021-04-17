@@ -23,7 +23,7 @@
 #include <GoTvCore/GoTvP2P/BlobXferMgr/BlobInfoDb.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfoDb.h>
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>

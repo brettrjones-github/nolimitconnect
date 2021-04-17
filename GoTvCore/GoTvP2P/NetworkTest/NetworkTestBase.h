@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxMutex.h>

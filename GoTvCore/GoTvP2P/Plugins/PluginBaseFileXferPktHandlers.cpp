@@ -20,7 +20,7 @@
 #include "PluginBaseFileXfer.h"
 #include "PluginMgr.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 
 //============================================================================

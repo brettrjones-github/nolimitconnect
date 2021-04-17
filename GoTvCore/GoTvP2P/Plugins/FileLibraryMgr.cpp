@@ -20,7 +20,7 @@
 #include "PluginBase.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>

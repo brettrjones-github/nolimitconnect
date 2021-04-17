@@ -22,7 +22,7 @@
 
 #include "utils/TransformMatrix.h"
 #include "ShaderFormats.h"
-#include "GoTvInterface/IGoTvRender.h"
+#include "GuiInterface/IGoTvRender.h"
 
 
 void CalculateYUVMatrixGLES( TransformMatrix&  matrix

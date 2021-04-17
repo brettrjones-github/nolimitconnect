@@ -21,7 +21,7 @@
 #include <libjpg/VxJpgLib.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <NetLib/VxSktBase.h>
 

@@ -24,7 +24,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListLib.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <NetLib/VxSktConnect.h>
 #include <NetLib/VxPeerMgr.h>

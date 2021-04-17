@@ -16,8 +16,8 @@
 #include "ui_AppletClientRandomConnect.h"
 
 #include "AppletClientBase.h"
-#include <GoTvInterface/IDefs.h>
-#include <GoTvInterface/IToGui.h> 
+#include <GuiInterface/IDefs.h>
+#include <GuiInterface/IToGui.h> 
 
 class AppletClientRandomConnect : public AppletClientBase
 {

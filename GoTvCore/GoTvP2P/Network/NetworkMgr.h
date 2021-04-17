@@ -22,7 +22,7 @@
 #include <CoreLib/VxDefs.h>
 #include <PktLib/VxFriendMatch.h>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class P2PEngine;
 class VxPeerMgr;

@@ -24,7 +24,7 @@
 #else
 	#ifdef TARGET_OS_ANDROID
 		// android has no uuid.h.. get from java
-        //#include <GoTvInterface/AndroidInterface/NativeToJava.h>
+        //#include <GuiInterface/AndroidInterface/NativeToJava.h>
 	#else
 		#include <uuid/uuid.h>
 	#endif

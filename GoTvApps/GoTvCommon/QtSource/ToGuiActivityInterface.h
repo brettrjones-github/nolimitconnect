@@ -19,7 +19,7 @@
 #include <CoreLib/AssetDefs.h>
 #include <PktLib/VxCommon.h>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <QString>
 

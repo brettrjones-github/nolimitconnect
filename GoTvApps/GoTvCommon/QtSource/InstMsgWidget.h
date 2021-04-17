@@ -16,7 +16,7 @@
 
 #include "config_gotvapps.h"
 #include "ui_InstMsgWidget.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class P2PEngine;
 class AppCommon;

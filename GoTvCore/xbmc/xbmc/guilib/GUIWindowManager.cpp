@@ -146,7 +146,7 @@
 #include "games/dialogs/osd/DialogGameVolume.h"
 
 #ifdef HAVE_QT_GUI
-# include "GoTvInterface/IGoTv.h"
+# include "GuiInterface/IGoTv.h"
 # include <CoreLib/VxDebug.h>
 #endif // HAVE_QT_GUI
 

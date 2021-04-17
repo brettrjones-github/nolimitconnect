@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GoTvInterface/OsInterface/OsInterface.h"
+#include "GuiInterface/OsInterface/OsInterface.h"
 #ifdef TARGET_OS_ANDROID
 
 class IAndroid : public OsInterface

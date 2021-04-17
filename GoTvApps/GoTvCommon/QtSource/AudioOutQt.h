@@ -35,7 +35,7 @@
 #include "AudioOutIo.h"
 #include "AudioBuffer.h"
 
-#include <GoTvInterface/IGoTvDefs.h>
+#include <GuiInterface/IGoTvDefs.h>
 
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/VxBuffer.h>

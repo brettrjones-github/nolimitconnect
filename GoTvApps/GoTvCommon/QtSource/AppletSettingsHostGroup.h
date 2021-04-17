@@ -17,7 +17,7 @@
 #include "PluginSettingsWidget.h"
 #include "PermissionWidget.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
 #include "ui_AppletSettingsHostGroup.h"

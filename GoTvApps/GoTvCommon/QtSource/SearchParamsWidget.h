@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <PktLib/SearchParams.h>
 
 #include "ui_SearchParamsWidget.h"

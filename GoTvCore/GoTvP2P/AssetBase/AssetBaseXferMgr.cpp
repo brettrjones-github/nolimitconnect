@@ -24,7 +24,7 @@
 #include "AssetBaseTxSession.h"
 #include "AssetBaseRxSession.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>

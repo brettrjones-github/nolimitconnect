@@ -13,7 +13,7 @@
 #include "system_gl.h"
 #include "rendering/RenderSystem.h"
 #include "utils/Color.h"
-#include "GoTvInterface/IGoTvRender.h"
+#include "GuiInterface/IGoTvRender.h"
 
 #include <array>
 

@@ -16,7 +16,7 @@
 #include <inttypes.h>
 #include <string>
 #include <vector>
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 // a class very similar to <CoreLib/BinaryBlob.h>
 // but a fixed length and pragma packed for network packet use

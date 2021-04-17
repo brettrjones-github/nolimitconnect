@@ -22,7 +22,7 @@
 #include "AudioMixer.h"
 #include "AudioOutIo.h"
 #include "AudioInIo.h"
-#include <GoTvInterface/IAudioInterface.h>
+#include <GuiInterface/IAudioInterface.h>
 
 class AudioIoMgr : public QWidget, public IAudioRequests
 {

@@ -75,7 +75,7 @@
 
 #include <iterator>
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 #include "GoTvDebugConfig.h"
 
 using namespace KODI::MESSAGING;

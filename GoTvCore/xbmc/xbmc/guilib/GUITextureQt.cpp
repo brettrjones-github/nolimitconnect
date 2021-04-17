@@ -35,7 +35,7 @@
 
 #include <cstddef>
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 
 CGUITextureQt::CGUITextureQt( float posX, float posY, float width, float height, const CTextureInfo &texture )

@@ -18,7 +18,7 @@
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxSha1Hash.h>
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <QString>
 #include <QObject>

@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GoTvInterface/OsInterface/OsInterface.h"
+#include "GuiInterface/OsInterface/OsInterface.h"
 
 class IWin32 : public OsInterface
 {

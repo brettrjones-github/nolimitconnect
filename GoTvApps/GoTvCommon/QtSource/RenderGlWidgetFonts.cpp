@@ -21,7 +21,7 @@
 #include "GuiHelpers.h"
 #include "MyIcons.h"
 
-#include "GoTvInterface/GoTvRenderFrame.h"
+#include "GuiInterface/GoTvRenderFrame.h"
 
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>

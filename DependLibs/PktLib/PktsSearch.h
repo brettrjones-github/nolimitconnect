@@ -17,7 +17,7 @@
 #include "VxPktHdr.h"
 #include "VxSearchFlags.h"
 #include "VxCommon.h"
-#include <GoTvInterface/IScan.h>
+#include <GuiInterface/IScan.h>
 
 #define PKT_ANN_MAX_SEARCH_STR_LEN (255 + 16)
 #define PKT_ANN_MAX_IDENT_MATCH (40)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GoTvInterface/IDefs.h"
-#include "GoTvInterface/IGoTvEvents.h"
+#include "GuiInterface/IDefs.h"
+#include "GuiInterface/IGoTvEvents.h"
 
 #include "AppParamParser.h"
 

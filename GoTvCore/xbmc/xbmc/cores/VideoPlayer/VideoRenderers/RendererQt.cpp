@@ -45,7 +45,7 @@
 #include "cores/IPlayer.h"
 #include "windowing/WinSystem.h"
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 
 #if defined(__ARM_NEON__) && !defined(__LP64__)

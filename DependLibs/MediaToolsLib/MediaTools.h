@@ -15,7 +15,7 @@
 //============================================================================
 
 #include <CoreLib/MediaCallbackInterface.h>
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IFromGui.h>
 
 #include <string>
 

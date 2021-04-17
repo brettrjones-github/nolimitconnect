@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxGUID.h>
 
 enum EMSessionState

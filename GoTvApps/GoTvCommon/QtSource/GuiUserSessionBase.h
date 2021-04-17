@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include "GuiUser.h"
 

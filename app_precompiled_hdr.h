@@ -17,10 +17,10 @@
 #include "ToGuiFileXferClient.h"
 #include "ToGuiHardwareCtrlClient.h"
 
-#include "GoTvInterface/IToGui.h"
-#include "GoTvInterface/IGoTvRender.h"
-#include "GoTvInterface/IGoTvEvents.h"
-#include "GoTvInterface/IAudioInterface.h"
+#include "GuiInterface/IToGui.h"
+#include "GuiInterface/IGoTvRender.h"
+#include "GuiInterface/IGoTvEvents.h"
+#include "GuiInterface/IAudioInterface.h"
 
 #include "HomeWindow.h"
 #include "FriendList.h"

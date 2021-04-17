@@ -315,21 +315,21 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
     $$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
-    $$PWD/GoTvInterface/config_libgotvptop.h \
-    $$PWD/GoTvInterface/GoTvRenderFrame.h \
-    $$PWD/GoTvInterface/IAudioInterface.h \
-    $$PWD/GoTvInterface/IDefs.h \
-    $$PWD/GoTvInterface/IFromGui.h \
-    $$PWD/GoTvInterface/IGoTv.h \
-    $$PWD/GoTvInterface/IDefs.h \
-    $$PWD/GoTvInterface/IGoTvRender.h \
-    $$PWD/GoTvInterface/ILog.h \
-    $$PWD/GoTvInterface/IScan.h \
-    $$PWD/GoTvInterface/IToGui.h \
-    $$PWD/GoTvInterface/OsInterface/OsInterface.h \
-    $$PWD/GoTvInterface/OsWin32/IWin32.h \
-    $$PWD/GoTvInterface/OsLinux/ILinux.h \
-    $$PWD/GoTvInterface/OsAndroid/IAndroid.h
+    $$PWD/GuiInterface/config_libgotvptop.h \
+    $$PWD/GuiInterface/GoTvRenderFrame.h \
+    $$PWD/GuiInterface/IAudioInterface.h \
+    $$PWD/GuiInterface/IDefs.h \
+    $$PWD/GuiInterface/IFromGui.h \
+    $$PWD/GuiInterface/IGoTv.h \
+    $$PWD/GuiInterface/IDefs.h \
+    $$PWD/GuiInterface/IGoTvRender.h \
+    $$PWD/GuiInterface/ILog.h \
+    $$PWD/GuiInterface/IScan.h \
+    $$PWD/GuiInterface/IToGui.h \
+    $$PWD/GuiInterface/OsInterface/OsInterface.h \
+    $$PWD/GuiInterface/OsWin32/IWin32.h \
+    $$PWD/GuiInterface/OsLinux/ILinux.h \
+    $$PWD/GuiInterface/OsAndroid/IAndroid.h
 
 SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
@@ -633,18 +633,18 @@ SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxPlainTextEdit.cpp \
-    $$PWD/GoTvInterface/GoTvRenderFrame.cpp \
-	$$PWD/GoTvInterface/IDefs.cpp \
-    $$PWD/GoTvInterface/IGoTv.cpp \
-    $$PWD/GoTvInterface/IGoTvFromGui.cpp \
-    $$PWD/GoTvInterface/IGoTvRender.cpp \
-    $$PWD/GoTvInterface/IGoTvToGui.cpp \
-    $$PWD/GoTvInterface/ILog.cpp \
-    $$PWD/GoTvInterface/IToGui.cpp \
-    $$PWD/GoTvInterface/OsInterface/OsInterface.cpp \
-    $$PWD/GoTvInterface/OsWin32/IWin32.cpp \
-    $$PWD/GoTvInterface/OsLinux/ILinux.cpp \
-    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp
+    $$PWD/GuiInterface/GoTvRenderFrame.cpp \
+	$$PWD/GuiInterface/IDefs.cpp \
+    $$PWD/GuiInterface/IGoTv.cpp \
+    $$PWD/GuiInterface/IGoTvFromGui.cpp \
+    $$PWD/GuiInterface/IGoTvRender.cpp \
+    $$PWD/GuiInterface/IGoTvToGui.cpp \
+    $$PWD/GuiInterface/ILog.cpp \
+    $$PWD/GuiInterface/IToGui.cpp \
+    $$PWD/GuiInterface/OsInterface/OsInterface.cpp \
+    $$PWD/GuiInterface/OsWin32/IWin32.cpp \
+    $$PWD/GuiInterface/OsLinux/ILinux.cpp \
+    $$PWD/GuiInterface/OsAndroid/IAndroid.cpp
 
 FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAppSetup.ui \

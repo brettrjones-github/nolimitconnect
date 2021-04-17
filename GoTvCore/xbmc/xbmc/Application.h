@@ -46,7 +46,7 @@
 #include "ApplicationPlayer.h"
 #include "FileItem.h"
 
-#include <GoTvInterface/IGoTvEvents.h>
+#include <GuiInterface/IGoTvEvents.h>
 
 class CAction;
 class CFileItem;

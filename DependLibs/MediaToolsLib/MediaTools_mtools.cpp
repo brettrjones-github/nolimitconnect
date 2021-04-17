@@ -19,7 +19,7 @@
 #include "SndReader.h"
 #include "MJPEGWriter.h"
 #include "MJPEGReader.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 

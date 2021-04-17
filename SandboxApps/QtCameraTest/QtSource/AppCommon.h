@@ -22,7 +22,7 @@
 #include "MyIcons.h"
 #include "SoundDefs.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <QWidget>
 

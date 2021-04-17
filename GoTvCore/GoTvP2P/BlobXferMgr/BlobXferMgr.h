@@ -19,7 +19,7 @@
 #include "BlobXferDb.h"
 #include "BlobInfo.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxThread.h>

@@ -19,7 +19,7 @@
 #include "RawVideo.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <GoTvCore/GoTvP2P/Plugins/PluginBase.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>

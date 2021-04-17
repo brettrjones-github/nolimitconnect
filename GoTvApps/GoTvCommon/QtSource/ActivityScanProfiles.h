@@ -22,7 +22,7 @@
 #include <QTimer>
 #include "ui_ActivityScanProfiles.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxDefs.h>
 
 class ScanProfilePair

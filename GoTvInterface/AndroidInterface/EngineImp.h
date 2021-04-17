@@ -18,8 +18,8 @@
 #include "build_info.h"
 #include "AndroidAudioMgr.h"
 
-#include <GoTvInterface/IToGui.h>
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IToGui.h>
+#include <GuiInterface/IFromGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <NetLib/VxPeerMgr.h>

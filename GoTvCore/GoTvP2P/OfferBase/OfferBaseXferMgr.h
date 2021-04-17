@@ -18,7 +18,7 @@
 #include "OfferBaseXferDb.h"
 #include "OfferBaseInfo.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxThread.h>

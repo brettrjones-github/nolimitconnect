@@ -16,8 +16,8 @@
 
 #include <CoreLib/VxDefs.h>
 
-#include <GoTvInterface/IToGui.h>
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IToGui.h>
+#include <GuiInterface/IFromGui.h>
 
 class P2PEngine;
 class NetworkStateMachine;

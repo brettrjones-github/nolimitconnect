@@ -31,7 +31,7 @@
 #include "utils/log.h"
 #include "utils/GLUtils.h"
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 #include <string>
 #include <sstream>

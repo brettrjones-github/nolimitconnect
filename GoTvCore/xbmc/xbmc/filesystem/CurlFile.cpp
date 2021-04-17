@@ -37,7 +37,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 #include "GoTvDebugConfig.h"
 
 using namespace XFILE;

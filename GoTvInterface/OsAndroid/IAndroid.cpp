@@ -24,7 +24,7 @@
 #include "IAndroid.h"
 #ifdef TARGET_OS_ANDROID
 
-#include "GoTvInterface/IGoTv.h" 
+#include "GuiInterface/IGoTv.h" 
 
 
 #include "CompileInfo.h"

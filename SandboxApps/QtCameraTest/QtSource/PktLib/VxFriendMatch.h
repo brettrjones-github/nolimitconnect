@@ -15,7 +15,7 @@
 //============================================================================
 
 #include <CoreLib/VxDefs.h>
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <string>
 

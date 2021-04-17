@@ -17,7 +17,7 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 #ifdef HAVE_QT_GUI
-# include "GoTvInterface/IGoTv.h"
+# include "GuiInterface/IGoTv.h"
 #endif // HAVE_QT_GUI
 
  //////////////////////////////////////////////////////////////////////

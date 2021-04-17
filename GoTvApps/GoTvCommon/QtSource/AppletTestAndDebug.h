@@ -15,7 +15,7 @@
 
 #include "AppletBase.h"
 #include "ui_AppletTestAndDebug.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxDebug.h> // needed for ILogCallbackInterface
 

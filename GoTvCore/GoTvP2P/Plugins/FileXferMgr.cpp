@@ -18,7 +18,7 @@
 #include "FileXferMgr.h"
 #include "FileXferPluginSession.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <PktLib/PktsPluginOffer.h>
 #include <PktLib/PktsFileShare.h>

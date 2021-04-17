@@ -21,7 +21,7 @@
 #include <QTimer>
 #include "ui_ActivityStoryBoard.h"
 #include "ui_StoryWidget.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class ActivityStoryBoard : public ActivityBase
 {

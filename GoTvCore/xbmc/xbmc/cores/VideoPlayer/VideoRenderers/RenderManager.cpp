@@ -35,7 +35,7 @@
 #include "cores/VideoPlayer/DVDClock.h"
 #include "cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 
 using namespace KODI::MESSAGING;

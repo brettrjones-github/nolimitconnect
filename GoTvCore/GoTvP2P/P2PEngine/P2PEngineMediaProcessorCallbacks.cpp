@@ -14,7 +14,7 @@
 //============================================================================
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 //============================================================================
 void P2PEngine::callbackVideoJpgBig( void * /*userData*/, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen )

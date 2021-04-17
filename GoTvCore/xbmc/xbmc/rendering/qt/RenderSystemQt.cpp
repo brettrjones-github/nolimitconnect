@@ -23,7 +23,7 @@
 #include "XTimeUtils.h"
 #endif
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 //============================================================================
 CRenderSystemQt::CRenderSystemQt()

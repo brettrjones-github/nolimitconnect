@@ -17,7 +17,7 @@
 #include "FileXferBaseMgr.h"
 #include <PktLib/VxCommon.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h>
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include <CoreLib/VxFileUtil.h>
 

@@ -24,7 +24,7 @@
 
 #include "guilib/Shader.h"
 #include "cores/VideoSettings.h"
-#include "GoTvInterface/IGoTvRender.h"
+#include "GuiInterface/IGoTvRender.h"
 
 class IGoTv;
 

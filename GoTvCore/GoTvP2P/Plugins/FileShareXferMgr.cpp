@@ -25,7 +25,7 @@
 #include "SharedFilesMgr.h"
 #include "SharedFileInfo.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <PktLib/VxSearchDefs.h>

@@ -14,7 +14,7 @@
 #pragma once
 
 #include "HostDefs.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.h>
 
 #include <CoreLib/VxGUID.h>

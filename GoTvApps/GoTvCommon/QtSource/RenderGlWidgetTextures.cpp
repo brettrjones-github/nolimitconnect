@@ -21,7 +21,7 @@
 #include "GuiHelpers.h"
 #include "MyIcons.h"
 
-#include "GoTvInterface/GoTvRenderFrame.h"
+#include "GuiInterface/GoTvRenderFrame.h"
 
 #include "guilib/TextureQt.h"
 #include "guilib/GUITextureQt.h"

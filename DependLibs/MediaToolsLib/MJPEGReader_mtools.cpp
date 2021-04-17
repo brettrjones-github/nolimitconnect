@@ -16,7 +16,7 @@
 #include "MJPEGReader.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 

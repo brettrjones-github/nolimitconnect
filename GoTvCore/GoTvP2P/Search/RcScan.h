@@ -17,7 +17,7 @@
 #include "RcScanMatchedConnection.h"
 #include "RcScanAction.h"
 
-#include <GoTvInterface/IScan.h>
+#include <GuiInterface/IScan.h>
 #include <PktLib/PktsScan.h>
 #include <PktLib/PktsImAlive.h>
 #include <CoreLib/VxGUIDList.h>

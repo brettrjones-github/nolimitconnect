@@ -13,7 +13,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
 #include "GoTvCoreUtil.h"
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 CRenderSystemBase::CRenderSystemBase()
 {

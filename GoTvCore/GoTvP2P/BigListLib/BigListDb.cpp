@@ -18,7 +18,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListMgr.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 #include <CoreLib/sqlite3.h>
 #include <CoreLib/VxMacros.h>

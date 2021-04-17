@@ -65,24 +65,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="GoTvInterface">
-      <UniqueIdentifier>{9b1e3685-e484-45d0-a1b9-e9c2a25cddcc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GoTvInterface\OsApple">
-      <UniqueIdentifier>{830c1c64-d15e-4848-ad7b-e55c82a9de8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GoTvInterface\OsAndroid">
-      <UniqueIdentifier>{70ac619c-85bc-42d8-87da-24463a05f85a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GoTvInterface\OsWin32">
-      <UniqueIdentifier>{8b86e186-f11f-42c7-9933-67d8397dbfa0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GoTvInterface\OsLinux">
-      <UniqueIdentifier>{cab84aea-1d0b-4bb0-9353-8876b6fbd314}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GoTvInterface\OsInterface">
-      <UniqueIdentifier>{b4d92a74-8c46-483f-bdb6-f2488c99608b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Generated Files\moc">
       <UniqueIdentifier>{013fbb56-3206-4bda-b462-b31732294505}</UniqueIdentifier>
     </Filter>
@@ -471,41 +453,14 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonLogin.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTv.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\ILog.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.cpp">
-      <Filter>GoTvInterface\OsInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp">
-      <Filter>GoTvInterface\OsWin32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvToGui.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvFromGui.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IToGui.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvRender.cpp">
-      <Filter>GoTvInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.cpp">
-      <Filter>GoTvInterface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonRender.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
@@ -851,9 +806,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IDefs.cpp">
-      <Filter>GoTvInterface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -2991,21 +2943,6 @@
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\config_libgotvptop.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTv.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\ILog.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.h">
-      <Filter>GoTvInterface\OsInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.h">
-      <Filter>GoTvInterface\OsWin32</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AppletKodi.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -3015,26 +2952,8 @@
     <ClInclude Include="GeneratedFiles\ui_AppletUserIdentity.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IDefs.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IFromGui.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IScan.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IToGui.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_PlayerGlWidget.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.h">
-      <Filter>GoTvInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTvRender.h">
-      <Filter>GoTvInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
@@ -3050,9 +2969,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\IAudioInterface.h">
       <Filter>GoTvCommon\Source Files\soundio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GoTvInterface\IAudioInterface.h">
-      <Filter>GoTvInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>

@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IFromGui.h>
 #include <CoreLib/MediaCallbackInterface.h>
 
 class MediaClient

@@ -1,6 +1,6 @@
 
 #include <app_precompiled_hdr.h>
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxDebug.h>

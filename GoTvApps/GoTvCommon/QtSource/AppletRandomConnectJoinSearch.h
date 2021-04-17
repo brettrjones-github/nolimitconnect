@@ -16,7 +16,7 @@
 
 #include "AppletClientBase.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
 
 #include <QString>

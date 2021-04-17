@@ -20,7 +20,7 @@
 #include "FileLibraryMgr.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktsFileShare.h>
 #include <PktLib/PktsPluginOffer.h>

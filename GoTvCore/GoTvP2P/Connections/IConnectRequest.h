@@ -15,7 +15,7 @@
 
 #include <vector>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class VxSktBase;
 class VxGUID;

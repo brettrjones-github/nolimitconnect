@@ -48,7 +48,7 @@ using namespace Microsoft::WRL;
 #endif
 
 #if defined(HAVE_QT_GUI)
-# include "GoTvInterface/IGoTv.h"
+# include "GuiInterface/IGoTv.h"
 #endif
 
 using namespace XFILE;

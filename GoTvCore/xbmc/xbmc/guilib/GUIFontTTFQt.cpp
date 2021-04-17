@@ -37,7 +37,7 @@
 #include "rendering/qt/RenderSystemQt.h"
  //#include "rendering/MatrixGL.h"
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 
 // stuff for freetype

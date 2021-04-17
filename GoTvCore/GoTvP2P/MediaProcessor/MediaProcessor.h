@@ -16,7 +16,7 @@
 
 #include "EchoCancel.h"
 
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IFromGui.h>
 
 #include <PktLib/PktVoiceReq.h>
 

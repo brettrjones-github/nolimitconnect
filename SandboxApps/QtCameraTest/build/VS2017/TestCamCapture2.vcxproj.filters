@@ -20,7 +20,7 @@
     <Filter Include="QtSource\CoreLib">
       <UniqueIdentifier>{6fb040bc-aa51-40d2-a6a6-2f6cb7cce8c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="QtSource\GoTvInterface">
+    <Filter Include="QtSource\GuiInterface">
       <UniqueIdentifier>{e3b3922a-2ca4-4a6b-9026-0bf7700e5a05}</UniqueIdentifier>
     </Filter>
     <Filter Include="QtSource\GoTvCore">
@@ -149,8 +149,8 @@
     <ClInclude Include="..\..\QtSource\CoreLib\VxParse.h">
       <Filter>QtSource\CoreLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IToGui.h">
-      <Filter>QtSource\GoTvInterface</Filter>
+    <ClInclude Include="..\..\QtSource\GuiInterface\IToGui.h">
+      <Filter>QtSource\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSource\AppSettings.h">
       <Filter>QtSource</Filter>
@@ -158,8 +158,8 @@
     <ClInclude Include="..\..\QtSource\CoreLib\MediaCallbackInterface.h">
       <Filter>QtSource\CoreLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IFromGui.h">
-      <Filter>QtSource\GoTvInterface</Filter>
+    <ClInclude Include="..\..\QtSource\GuiInterface\IFromGui.h">
+      <Filter>QtSource\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.h">
       <Filter>QtSource\GoTvCore\GoTvP2P\P2PEngine</Filter>
@@ -170,8 +170,8 @@
     <ClInclude Include="..\..\QtSource\MyIconsDefs.h">
       <Filter>QtSource</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IDefs.h">
-      <Filter>QtSource\GoTvInterface</Filter>
+    <ClInclude Include="..\..\QtSource\GuiInterface\IDefs.h">
+      <Filter>QtSource\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSource\AppDefs.h">
       <Filter>QtSource</Filter>
@@ -245,8 +245,8 @@
     <ClInclude Include="..\..\QtSource\CoreLib\AppErr.h">
       <Filter>QtSource\CoreLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IGoTv.h">
-      <Filter>QtSource\GoTvInterface</Filter>
+    <ClInclude Include="..\..\QtSource\GuiInterface\IGoTv.h">
+      <Filter>QtSource\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSource\PktLib\AllPkts.h">
       <Filter>QtSource\PktLib</Filter>
@@ -862,8 +862,8 @@
     <ClCompile Include="..\..\QtSource\CoreLib\AppErr_corelib.cpp">
       <Filter>QtSource\CoreLib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtSource\GoTvInterface\IGoTv.cpp">
-      <Filter>QtSource\GoTvInterface</Filter>
+    <ClCompile Include="..\..\QtSource\GuiInterface\IGoTv.cpp">
+      <Filter>QtSource\GuiInterface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\QtSource\PktLib\PktAnnList.cpp">
       <Filter>QtSource\PktLib</Filter>

@@ -16,7 +16,7 @@
 #include "PktsOfferXfer.h"
 #include <GoTvCore/GoTvP2P/OfferBase/OfferBaseInfo.h>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxChop.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxParse.h>

@@ -18,7 +18,7 @@
 #include "NetServiceDefs.h"
 
 #include <GoTvCore/GoTvP2P/HostMgr/HostDefs.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <string>
 

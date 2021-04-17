@@ -16,7 +16,7 @@
 
 #include "ActivityBase.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <QString>
 #include <QDialog>
 #include "ui_ActivityScanPeopleSearch.h"

@@ -1,7 +1,7 @@
 #include <app_precompiled_hdr.h>
 #include "OsInterface.h"
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 #include "CompileInfo.h"
 #include "threads/Thread.h"

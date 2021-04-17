@@ -16,7 +16,7 @@
 
 #include "RcScanMatchedConnection.h"
 
-#include <GoTvInterface/IScan.h>
+#include <GuiInterface/IScan.h>
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxThread.h>

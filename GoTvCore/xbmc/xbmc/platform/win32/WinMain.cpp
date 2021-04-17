@@ -23,7 +23,7 @@
 #include "utils/CharsetConverter.h" // Required to initialize converters before usage
 
 #include "AppParamParser.h" 
-#include "GoTvInterface/IGoTv.h" 
+#include "GuiInterface/IGoTv.h" 
 
 
 

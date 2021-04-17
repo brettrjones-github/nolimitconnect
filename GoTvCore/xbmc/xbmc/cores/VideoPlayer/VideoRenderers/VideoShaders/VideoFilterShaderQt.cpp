@@ -32,7 +32,7 @@
 #include "utils/GLUtils.h"
 #include "ConvolutionKernels.h"
 #include "rendering/qt/RenderSystemQt.h"
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 using namespace Shaders;
 

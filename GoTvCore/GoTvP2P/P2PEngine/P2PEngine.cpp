@@ -15,7 +15,7 @@
 
 #include "P2PEngine.h"
 #include "P2PConnectList.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include "Application.h"
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 

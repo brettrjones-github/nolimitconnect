@@ -64,7 +64,7 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGUID.h>
 
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 #include <NetLib/VxPeerMgr.h>
 

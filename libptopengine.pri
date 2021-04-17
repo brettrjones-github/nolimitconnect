@@ -19,13 +19,13 @@ INCLUDEPATH += $$PWD/DependLibs/
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvInterface/IDefs.h \
-    $$PWD/GoTvInterface/IFromGui.h \
-    $$PWD/GoTvInterface/IGoTv.h \
-    $$PWD/GoTvInterface/ILog.h \
-    $$PWD/GoTvInterface/IScan.h \
-    $$PWD/GoTvInterface/IToGui.h \
-    $$PWD/GoTvInterface/config_libgotvptop.h \
+    $$PWD/GuiInterface/IDefs.h \
+    $$PWD/GuiInterface/IFromGui.h \
+    $$PWD/GuiInterface/IGoTv.h \
+    $$PWD/GuiInterface/ILog.h \
+    $$PWD/GuiInterface/IScan.h \
+    $$PWD/GuiInterface/IToGui.h \
+    $$PWD/GuiInterface/config_libgotvptop.h \
     $$PWD/GoTvTargetOsConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseCallbackInterface.h \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseInfo.h \

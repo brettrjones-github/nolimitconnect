@@ -195,10 +195,10 @@
     <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawAudio.h" />
     <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawVideo.h" />
     <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.h" />
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IDefs.h" />
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IFromGui.h" />
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IGoTv.h" />
-    <ClInclude Include="..\..\QtSource\GoTvInterface\IToGui.h" />
+    <ClInclude Include="..\..\QtSource\GuiInterface\IDefs.h" />
+    <ClInclude Include="..\..\QtSource\GuiInterface\IFromGui.h" />
+    <ClInclude Include="..\..\QtSource\GuiInterface\IGoTv.h" />
+    <ClInclude Include="..\..\QtSource\GuiInterface\IToGui.h" />
     <CustomBuild Include="..\..\QtSource\MainWindow.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
@@ -375,7 +375,7 @@
     <ClCompile Include="..\..\QtSource\CoreLib\VxValuePair.cpp" />
     <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.cpp" />
     <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.cpp" />
-    <ClCompile Include="..\..\QtSource\GoTvInterface\IGoTv.cpp" />
+    <ClCompile Include="..\..\QtSource\GuiInterface\IGoTv.cpp" />
     <ClCompile Include="..\..\QtSource\GuiParams.cpp" />
     <ClCompile Include="..\..\QtSource\ImageSettings.cpp" />
     <ClCompile Include="..\..\QtSource\libjpg\jcapimin.c" />

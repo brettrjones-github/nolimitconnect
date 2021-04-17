@@ -21,7 +21,7 @@
 #include <GoTvCore/GoTvP2P/OfferClientMgr/OfferClientInfoDb.h>
 #include <GoTvCore/GoTvP2P/OfferHostMgr/OfferHostInfoDb.h>
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>

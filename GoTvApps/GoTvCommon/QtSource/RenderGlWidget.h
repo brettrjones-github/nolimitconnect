@@ -16,8 +16,8 @@
 #include "RenderGlLogic.h"
 #include "RenderShaderQt.h"
 #include "EventsQtToGoTv.h"
-#include "GoTvInterface/IGoTvRender.h"
-#include "GoTvInterface/IGoTvEvents.h"
+#include "GuiInterface/IGoTvRender.h"
+#include "GuiInterface/IGoTvEvents.h"
 
 class GoTvRenderFrame;
 class CRenderBuffer;

@@ -32,9 +32,9 @@
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 #include <GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.h>
 
-#include <GoTvInterface/IDefs.h>
-#include <GoTvInterface/IFromGui.h>
-#include <GoTvInterface/IAudioInterface.h>
+#include <GuiInterface/IDefs.h>
+#include <GuiInterface/IFromGui.h>
+#include <GuiInterface/IAudioInterface.h>
 
 #include <GoTvCore/GoTvP2P/Search/RcScan.h>
 

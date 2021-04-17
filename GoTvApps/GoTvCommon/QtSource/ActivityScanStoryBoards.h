@@ -20,7 +20,7 @@
 #include <QDialog>
 #include <QTimer>
 #include "ui_ActivityScanStoryBoards.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class VxNetIdent;
 

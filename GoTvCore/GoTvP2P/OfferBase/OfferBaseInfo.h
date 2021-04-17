@@ -15,7 +15,7 @@
 
 #include <config_gotvcore.h>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxFileTypeMasks.h>
 #include <CoreLib/VxSha1Hash.h>
 #include <CoreLib/VxGUID.h>

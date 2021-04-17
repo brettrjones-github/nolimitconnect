@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "VxNetIdentBase.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class VxSktBase;
 

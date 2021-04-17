@@ -36,7 +36,7 @@
 #include "platform/linux/XMemUtils.h"
 #endif
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 
  /************************************************************************/

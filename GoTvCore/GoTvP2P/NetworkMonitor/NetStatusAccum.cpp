@@ -15,7 +15,7 @@
 #include "NetStatusAccum.h"
 
 #include "../P2PEngine/P2PEngine.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxGlobals.h>
 #include <NetLib/VxSktUtil.h>

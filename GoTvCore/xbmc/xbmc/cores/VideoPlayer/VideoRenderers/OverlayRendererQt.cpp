@@ -42,7 +42,7 @@
 #include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "utils/GLUtils.h"
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 #if HAS_GLES >= 2
  // GLES2.0 cant do CLAMP, but can do CLAMP_TO_EDGE.

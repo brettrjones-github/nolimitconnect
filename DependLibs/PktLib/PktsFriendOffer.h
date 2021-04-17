@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "PktTypes.h"
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #pragma pack(1)
 

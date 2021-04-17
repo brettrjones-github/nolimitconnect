@@ -26,7 +26,7 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IFromGui.h>
 
 #include <CoreLib/VxGlobals.h>
 

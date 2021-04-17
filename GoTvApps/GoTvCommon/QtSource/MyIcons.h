@@ -17,7 +17,7 @@
 #include "config_gotvapps.h"
 #include "MyIconsDefs.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <QIcon>
 
 

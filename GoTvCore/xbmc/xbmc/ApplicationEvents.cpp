@@ -219,7 +219,7 @@
 #include "utils/CharsetConverter.h"
 #include "pictures/GUIWindowSlideShow.h"
 
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 
 #include "windowing/qt/WinSystemQt.h"
 

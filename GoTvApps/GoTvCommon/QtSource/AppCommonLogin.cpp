@@ -24,7 +24,7 @@
 #include "GuiHelpers.h"
 #include "AccountMgr.h"
 
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>

@@ -33,7 +33,7 @@
 #include "VideoSyncD3D.h"
 #include "windowing/GraphicContext.h"
 #include "WinEventsWin32.h"
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 #include <algorithm>
 #include <tpcshrd.h>

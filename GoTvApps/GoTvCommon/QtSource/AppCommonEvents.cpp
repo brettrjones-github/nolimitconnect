@@ -15,7 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "AppCommon.h"	
 
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 //============================================================================
 void AppCommon::fromGuiKeyPressEvent( int moduleNum, int key, int mod )

@@ -15,7 +15,7 @@
 
 #include <PktLib/VxConnectInfo.h>
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class ConnectReqInfo
 {

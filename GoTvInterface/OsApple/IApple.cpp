@@ -24,7 +24,7 @@
 #include "IApple.h"
 #ifdef TARGET_OS_APPLE
 
-#include "GoTvInterface/IGoTv.h" 
+#include "GuiInterface/IGoTv.h" 
 
 
 #include "CompileInfo.h"

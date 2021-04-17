@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GoTvInterface/IToGui.h"
-#include <GoTvInterface/IFromGui.h>
+#include "GuiInterface/IToGui.h"
+#include <GuiInterface/IFromGui.h>
 
 class AppCommon;
 class P2PEngine;

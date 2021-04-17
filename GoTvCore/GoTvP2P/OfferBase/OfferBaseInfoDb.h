@@ -17,7 +17,7 @@
 
 #include <CoreLib/DbBase.h>
 #include <CoreLib/VxGUID.h>
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 class OfferBaseInfo;
 class OfferBaseMgr;

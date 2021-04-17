@@ -23,7 +23,7 @@
 #include "OfferClientTxSession.h"
 #include "OfferClientRxSession.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/OfferBase/OfferBaseMgr.h>

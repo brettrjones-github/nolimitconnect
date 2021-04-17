@@ -19,7 +19,7 @@
 #include "PluginMgr.h"
 #include "FileXferPluginSession.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <PktLib/PktsPluginOffer.h>
 
 #ifdef _MSC_VER

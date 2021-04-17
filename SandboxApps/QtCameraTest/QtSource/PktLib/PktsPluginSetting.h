@@ -17,7 +17,7 @@
 #include "VxPktHdr.h"
 #include "VxSearchFlags.h"
 #include "VxCommon.h"
-#include <GoTvInterface/IScan.h>
+#include <GuiInterface/IScan.h>
 
 #include <CoreLib/BinaryBlob.h>
 

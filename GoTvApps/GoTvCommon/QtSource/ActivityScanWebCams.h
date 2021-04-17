@@ -18,7 +18,7 @@
 
 #include "ui_ActivityScanWebCams.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxDefs.h>
 
 #include <QString>

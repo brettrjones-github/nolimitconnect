@@ -23,7 +23,7 @@
 //ePluginTypeRandomConnectRelay = 19,	//!< Random connect to another person relay service
 //ePluginTypeRelay = 20,	//!< Relay services plugin
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 #include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
 
 #include <CoreLib/VxGUID.h>

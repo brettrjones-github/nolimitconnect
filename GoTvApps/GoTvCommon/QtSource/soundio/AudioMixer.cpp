@@ -14,7 +14,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "AudioMixer.h"
-#include <GoTvInterface/IAudioInterface.h>
+#include <GuiInterface/IAudioInterface.h>
 #include "AudioIoMgr.h"
 #include "AudioUtils.h"
 

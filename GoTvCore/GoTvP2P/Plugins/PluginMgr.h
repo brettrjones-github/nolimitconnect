@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IFromGui.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceUtils.h>
 #include <GoTvCore/GoTvP2P/Network/ConnectRequest.h>
 

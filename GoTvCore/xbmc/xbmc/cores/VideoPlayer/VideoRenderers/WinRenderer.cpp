@@ -32,7 +32,7 @@
 #include "rendering/dx/RenderContext.h"
 #endif // HAS_DX
 #ifdef HAVE_QT_GUI
-#include "GoTvInterface/IGoTv.h"
+#include "GuiInterface/IGoTv.h"
 #endif // HAVE_QT_GUI
 
 typedef struct

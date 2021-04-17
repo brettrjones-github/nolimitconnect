@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "IDefs.h"
-#include <GoTvInterface/IAudioInterface.h>
+#include <GuiInterface/IAudioInterface.h>
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/AssetDefs.h>

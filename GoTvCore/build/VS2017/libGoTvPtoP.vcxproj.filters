@@ -1417,29 +1417,29 @@
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebSkt.h">
       <Filter>GoTvP2P\WebServer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\config_libgotvptop.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IGoTv.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTv.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IDefs.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\IDefs.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IFromGui.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\IFromGui.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IGoTvLib.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvLib.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\ILog.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\ILog.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IScan.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\IScan.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvInterface\IToGui.h">
-      <Filter>GoTvInterface</Filter>
+    <ClInclude Include="..\..\..\GuiInterface\IToGui.h">
+      <Filter>GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseRelay.h">
       <Filter>GoTvP2P\Plugins</Filter>
@@ -1881,7 +1881,7 @@
     <Filter Include="GoTvP2P\WebServer">
       <UniqueIdentifier>{caa85f20-2991-480c-8d7d-78d5db3ecf35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvInterface">
+    <Filter Include="GuiInterface">
       <UniqueIdentifier>{a7d7cf01-9fe8-4738-89a1-b8f9e2826363}</UniqueIdentifier>
     </Filter>
     <Filter Include="GoTvP2P\HostMgr">

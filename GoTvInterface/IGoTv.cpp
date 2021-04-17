@@ -9,11 +9,11 @@
 #include <libavfilter/avfilter.h>
 
 #ifdef TARGET_OS_WINDOWS
-# include "GoTvInterface/OsWin32/IWin32.h"
+# include "GuiInterface/OsWin32/IWin32.h"
 #elif TARGET_OS_LINUX
-# include "GoTvInterface/OsLinux/ILinux.h"
+# include "GuiInterface/OsLinux/ILinux.h"
 #elif TARGET_OS_ANDROID
-# include "GoTvInterface/OsAndroid/IAndroid.h"
+# include "GuiInterface/OsAndroid/IAndroid.h"
 # include "CoreLib/VxJava.h"
 # include "GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h"
 #else 

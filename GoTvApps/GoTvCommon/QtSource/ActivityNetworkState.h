@@ -19,7 +19,7 @@
 #include "ui_ActivityNetworkStatus.h"
 
 #include <CoreLib/VxDefs.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 class AppCommon;
 class P2PEngine;

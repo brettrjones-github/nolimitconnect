@@ -23,7 +23,7 @@
 
 #include "ILinux.h"
 #ifdef TARGET_OS_LINUX
-#include "GoTvInterface/IGoTv.h" 
+#include "GuiInterface/IGoTv.h" 
 
 
 #include "CompileInfo.h"

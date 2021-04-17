@@ -21,7 +21,7 @@
 #include <CoreLib/VxFileUtil.h>
 #include <GoTvApps/GoTvCommon/QtSource/AccountMgr.h>
 #include <NetLib/VxPeerMgr.h>
-#include <GoTvInterface/IGoTv.h>
+#include <GuiInterface/IGoTv.h>
 
 namespace{
     void setupRootStorageDirectory()

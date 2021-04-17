@@ -15,7 +15,7 @@
 #include <config_gotvcore.h>
 #include "OfferClientXferSession.h"
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxGlobals.h>
 

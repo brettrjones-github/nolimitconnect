@@ -16,7 +16,7 @@
 #include "ActivityBase.h"
 #include "AppSetup.h"
 
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #include "ui_ActivityAppSetup.h"
 

@@ -409,34 +409,6 @@
     <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IDefs.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTv.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvFromGui.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvRender.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvToGui.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\ILog.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\IToGui.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1734,18 +1706,6 @@
     <ClInclude Include="..\..\..\..\GoTvDebugConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\config_libgotvptop.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IAudioInterface.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IDefs.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IFromGui.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTv.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTvRender.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\ILog.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IScan.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\IToGui.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.h" />
-    <ClInclude Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.h" />
     <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
     <ClInclude Include="..\..\..\config_gotvapps.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppCommon.h">

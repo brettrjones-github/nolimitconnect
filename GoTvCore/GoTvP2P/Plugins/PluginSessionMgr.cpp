@@ -19,7 +19,7 @@
 
 #include "PluginSessionBase.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktsPluginOffer.h>
 #include <PktLib/PktsSession.h>

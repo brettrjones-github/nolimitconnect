@@ -14,14 +14,14 @@
 //============================================================================
 
 #include "config_gotvcore.h"
-#include "GoTvInterface/IDefs.h"
-#include "GoTvInterface/OsInterface/OsInterface.h"
-#include "GoTvInterface/ILog.h"
-#include "GoTvInterface/IToGui.h"
-#include <GoTvInterface/IFromGui.h>
-#include <GoTvInterface/IGoTvRender.h>
-#include <GoTvInterface/IGoTvEvents.h>
-#include <GoTvInterface/IAudioInterface.h>
+#include "GuiInterface/IDefs.h"
+#include "GuiInterface/OsInterface/OsInterface.h"
+#include "GuiInterface/ILog.h"
+#include "GuiInterface/IToGui.h"
+#include <GuiInterface/IFromGui.h>
+#include <GuiInterface/IGoTvRender.h>
+#include <GuiInterface/IGoTvEvents.h>
+#include <GuiInterface/IAudioInterface.h>
 
 #include <string>
 

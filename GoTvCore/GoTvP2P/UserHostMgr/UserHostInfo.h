@@ -14,7 +14,7 @@
 //============================================================================
 
 #include <GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h>
-#include <GoTvInterface/IDefs.h>
+#include <GuiInterface/IDefs.h>
 
 #define HOST_FLAG_DEFAULT_HOST			0x0001
 #define HOST_FLAG_IS_TEMP			    0x0002

@@ -23,7 +23,7 @@
 #include "IWin32.h"
 #ifdef TARGET_OS_WINDOWS
 
-#include "GoTvInterface/IGoTv.h" 
+#include "GuiInterface/IGoTv.h" 
 
 #include "CompileInfo.h"
 #include "threads/Thread.h"

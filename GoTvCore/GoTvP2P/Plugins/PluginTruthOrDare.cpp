@@ -20,7 +20,7 @@
 
 #include "TodGameSession.h"
 
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <PktLib/PktsTodGame.h>

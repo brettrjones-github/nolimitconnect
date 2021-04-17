@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
 #include "ui_AppletServiceBaseSettings.h"

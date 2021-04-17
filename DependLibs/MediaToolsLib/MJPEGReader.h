@@ -16,7 +16,7 @@
 
 #include "AviDefs.h"
 
-#include <GoTvInterface/IFromGui.h>
+#include <GuiInterface/IFromGui.h>
 #include <PktLib/VxCommon.h>
 
 #include <CoreLib/VxTimer.h>

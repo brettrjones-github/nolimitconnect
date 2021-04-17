@@ -18,7 +18,7 @@
 #ifdef TARGET_OS_ANDROID
 
 #include "JavaBaseClass.h"
-#include <GoTvInterface/IToGui.h>
+#include <GuiInterface/IToGui.h>
 
 class NativeToJavaClass : public JavaBaseClass
 {
