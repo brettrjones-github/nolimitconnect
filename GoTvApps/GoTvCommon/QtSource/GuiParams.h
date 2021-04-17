@@ -40,12 +40,14 @@ public:
     static const int            MIN_TITLE_BAR_BUTTON_SIZE = 30;
 
     /// @brief initialize gui scaling etc
-    static void                 initGuiParams();
+    static void                 initGuiParams(int defaultFontHeight);
+
+    static int                  getDefaultFontHeight( void )        { return m_DefaultFontHeight; }
 
     /// @brief get scaling required to make icons etc. usable on high dpi screens
-    static int                  getGuiScale( void )                 { return m_DisplayScale; }
+    static float                getGuiScale( void )                 { return m_DisplayScale; }
     /// @brief calculate widget scaling required to make icons etc. usable on high dpi screens
-    static int                  getScaled( int param )              { return m_DisplayScale * param; }
+    static int                  getScaled( int param )              { return (int)(m_DisplayScale * param); }
     /// @brief calculate widget scaling required to make icons etc. usable on high dpi screens
     static QSize                getScaled( QSize size )             { return QSize( getScaled( size.width() ), getScaled( size.height() ) ); }
     /// @brief calculate widget scaling required to make icons etc. usable on high dpi screens
@@ -98,5 +100,10 @@ protected:
     static QColor				m_OfflineBkgColor;
     static QColor				m_NearbyBkgColor;
 
-    static int                  m_DisplayScale;
+    static int                  m_DefaultFontHeight;
+    static float                m_DisplayScale;
+    static int                  m_TinyPushButtonSize;
+    static int                  m_SmallPushButtonSize;
+    static int                  m_MediumPushButtonSize;
+    static int                  m_LargePushButtonSize;
 };

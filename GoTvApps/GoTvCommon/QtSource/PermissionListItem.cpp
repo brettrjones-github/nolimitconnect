@@ -29,7 +29,7 @@ PermissionListItem::PermissionListItem( QListWidget * parent, AppletBase *parent
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ParentApplet( parentApplet )
-, m_SizeHint( parent ? parent->geometry().width() : 200, GuiParams::getButtonSize(eButtonSizeMedium).height() + 30 )
+, m_SizeHint( parent ? parent->geometry().width() : 200, GuiParams::getButtonSize(eButtonSizeMedium).height() + 8 )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );
@@ -72,8 +72,10 @@ void PermissionListItem::fillPluginInfo()
     {
         ui.m_PluginRunButton->setIcon( m_MyApp.getMyIcons().getPluginIcon( m_PluginType ) );
         ui.m_PluginSettingsButton->setIcon( m_MyApp.getMyIcons().getPluginSettingsIcon( m_PluginType ) );
-        QString pluginName = GuiParams::describePlugin( m_PluginType, false ).c_str();
+
+        QString pluginName = GuiParams::describePluginType( m_PluginType );
         ui.m_ServiceNameLabel->setText( pluginName );
+
         PluginSetting pluginSetting;
         m_MyApp.getEngine().getPluginSetting( m_PluginType, pluginSetting );
         QString pluginDesc = pluginSetting.getDescription().c_str();

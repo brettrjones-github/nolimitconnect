@@ -34,17 +34,30 @@ namespace
 QColor GuiParams::m_OnlineBkgColor( 176, 255, 176 );
 QColor GuiParams::m_OfflineBkgColor( 192, 192, 192 );
 QColor GuiParams::m_NearbyBkgColor( 176, 176, 255 );
-int GuiParams::m_DisplayScale{1};
+int GuiParams::m_DefaultFontHeight{ 10 };
+float GuiParams::m_DisplayScale{1.0f};
+int GuiParams::m_TinyPushButtonSize{ TINY_PUSHBUTTON_SIZE };
+int GuiParams::m_SmallPushButtonSize{ SMALL_PUSHBUTTON_SIZE };
+int GuiParams::m_MediumPushButtonSize{ MEDIUM_PUSHBUTTON_SIZE };
+int GuiParams::m_LargePushButtonSize{ LARGE_PUSHBUTTON_SIZE };
 
 //============================================================================
 GuiParams::GuiParams()
 {
-    //initGuiParams();
 }
 
 //============================================================================
-void GuiParams::initGuiParams()
+void GuiParams::initGuiParams(int defaultFontHeight)
 {
+    m_DefaultFontHeight = defaultFontHeight;
+    m_SmallPushButtonSize = m_DefaultFontHeight * 3 + 2;
+    m_DisplayScale = (float)m_SmallPushButtonSize / (float)SMALL_PUSHBUTTON_SIZE;
+    m_TinyPushButtonSize = getScaled(TINY_PUSHBUTTON_SIZE);
+    m_MediumPushButtonSize = getScaled(MEDIUM_PUSHBUTTON_SIZE);
+    m_LargePushButtonSize = getScaled(LARGE_PUSHBUTTON_SIZE);
+
+
+    /*
     QScreen *screen = QGuiApplication::primaryScreen();
     if( screen )
     {
@@ -69,7 +82,9 @@ void GuiParams::initGuiParams()
 
         LogMsg( LOG_VERBOSE, "Screen dpi %3.0f pixels %3.0f screen size %3.0f icon size 0x%3f scale %d",
                 dpi, maxPixels, screenSizeInches, iconSizeInches, m_DisplayScale );
+                
     }
+    */
 }
 
 //============================================================================
@@ -84,14 +99,14 @@ QSize GuiParams::getButtonSize( EButtonSize buttonSize )
     switch( buttonSize )
     {
     case eButtonSizeTiny:
-        return QSize( TINY_PUSHBUTTON_SIZE * getGuiScale(), TINY_PUSHBUTTON_SIZE * getGuiScale() );
+        return QSize( m_TinyPushButtonSize, m_TinyPushButtonSize );
     case eButtonSizeSmall:
-        return QSize( SMALL_PUSHBUTTON_SIZE * getGuiScale(), SMALL_PUSHBUTTON_SIZE * getGuiScale() );
+        return QSize( m_SmallPushButtonSize, m_SmallPushButtonSize );
     case eButtonSizeMedium:
-        return QSize( MEDIUM_PUSHBUTTON_SIZE * getGuiScale(), MEDIUM_PUSHBUTTON_SIZE * getGuiScale() );
+        return QSize( m_MediumPushButtonSize, m_MediumPushButtonSize );
     case eButtonSizeLarge:
     default:
-        return QSize( LARGE_PUSHBUTTON_SIZE * getGuiScale(), LARGE_PUSHBUTTON_SIZE * getGuiScale() );
+        return QSize( m_LargePushButtonSize, m_LargePushButtonSize );
     }
 }
 
@@ -104,7 +119,7 @@ QSize GuiParams::getThumbnailSize( void )
 //============================================================================
 QSize GuiParams::getSnapshotSize( void )
 {
-    return QSize( 320 * m_DisplayScale, 240 * m_DisplayScale );
+    return QSize( getScaled(320), getScaled(240) );
 }
 
 //============================================================================
@@ -771,39 +786,43 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Story Board");
         break;
 
-    case ePluginTypeClientChatRoom:	//!< chat room user client plugin
-        strPluginType = QObject::tr("Chat Room Client");
-        break;
-    case ePluginTypeHostChatRoom:	//!< chat room hosting plugin
-        strPluginType = QObject::tr("Chat Room Host");
-        break;
-    case ePluginTypeClientConnectTest:	//!< Connection Test Client
-        strPluginType = QObject::tr("Connect Test Client");
-        break;
-    case ePluginTypeHostConnectTest:	//!< Connection Test Service
-        strPluginType = QObject::tr("Connect Test Host");
-        break;
+
     case ePluginTypeClientGroup:	//!< group client
-        strPluginType = QObject::tr("Group Client");
+        strPluginType = QObject::tr("Client Group");
         break;
-    case ePluginTypeHostGroup:   //!< group hosting
-        strPluginType = QObject::tr("Group Host");
+    case ePluginTypeClientChatRoom:	//!< chat room client
+        strPluginType = QObject::tr("Client Chat Room");
         break;
     case ePluginTypeClientRandomConnect:	//!< Random connect to another person client
-        strPluginType = QObject::tr("Random Connect Client");
+        strPluginType = QObject::tr("Client Random Connect");
+        break;
+    case ePluginTypeClientNetwork:	//!< Random connect to another person client
+        strPluginType = QObject::tr("Client No Limit Network");
+        break;
+    case ePluginTypeClientConnectTest:	//!< Connection Test Client
+        strPluginType = QObject::tr("Client Connect Test");
+        break;
+
+    case ePluginTypeHostGroup:   //!< group hosting
+        strPluginType = QObject::tr("Host Group");
+        break;
+    case ePluginTypeHostChatRoom:	//!< chat room hosting plugin
+        strPluginType = QObject::tr("Host Chat Room");
         break;
     case ePluginTypeHostRandomConnect:	//!< Random connect to another person hosting
-        strPluginType = QObject::tr("Random Connect Host");
-        break;
-    case ePluginTypeClientNetwork:	//!< network client
-        strPluginType = QObject::tr("Network Client");
+        strPluginType = QObject::tr("Host Random Connect");
         break;
     case ePluginTypeHostNetwork:	//!< master network hosting
-        strPluginType = QObject::tr("Network Host");
+        strPluginType = QObject::tr("Host No Limit Network");
         break;
+    case ePluginTypeHostConnectTest:	//!< Connection Test Service
+        strPluginType = QObject::tr("Host Connect Test");
+        break;
+
     case  ePluginTypeNetworkSearchList:	//!< group and chat room list for network search
         strPluginType = QObject::tr("Network Search");
         break;
+
     case ePluginTypeRelay:	// proxy plugin
         strPluginType = QObject::tr("Relay");
         break;
@@ -813,6 +832,183 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
     }
 
     return strPluginType;
+}
+
+//============================================================================
+std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiated )
+{
+    std::string strPluginDesc = "";
+
+    switch(ePluginType)
+    {
+    case ePluginTypeAdmin:
+        strPluginDesc = QObject::tr( "Administration Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeAboutMePage:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared About Me Page" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "About Me Page Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeAvatarImage:
+        strPluginDesc = QObject::tr( "Avatar Image Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeCamServer:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Web Cam" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Web Cam Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeFileServer:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Files" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Shared Files Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeFileXfer:
+        strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeHostConnectTest:
+        strPluginDesc = QObject::tr( "Connection Test Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeClientConnectTest:
+        strPluginDesc = QObject::tr( "Connection Test Client" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Group User" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Host Group Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeClientChatRoom:
+        strPluginDesc = QObject::tr( "Chat Room User" ).toUtf8().constData();
+        break;
+    case ePluginTypeHostChatRoom:
+        strPluginDesc = QObject::tr( "Host Chat Room Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeClientRandomConnect:
+        strPluginDesc = QObject::tr( "Connect To Random Person" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeHostRandomConnect:
+        strPluginDesc = QObject::tr( "Connect To Random Person Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeNetworkSearchList:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Host List Search Service" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Host List Search Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeHostNetwork:
+        strPluginDesc = QObject::tr( "Host No Limit Network" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeMessenger:
+        strPluginDesc = QObject::tr( "Messanger Service" ).toUtf8().constData();
+        break;
+
+
+    case ePluginTypeRelay:
+        strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeStoryboard:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Story Page (Blog)" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Shared Story Page Service (Blog)" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeTruthOrDare:
+        strPluginDesc = QObject::tr( "Truth Or Dare Video Chat Game" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeVideoPhone:
+        strPluginDesc = QObject::tr( "Phone Call With Video Chat" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeVoicePhone:
+        strPluginDesc = QObject::tr( "Phone Call With Voice Only" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeCameraService:
+        strPluginDesc = QObject::tr( "Camera Feed Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeMJPEGReader:
+        strPluginDesc = QObject::tr( "MJPEG Movie Reader" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeMJPEGWriter:
+        strPluginDesc = QObject::tr( "MJPEG Movie Recorder" ).toUtf8().constData();
+        break;
+
+    case ePluginTypePersonalRecorder:
+        strPluginDesc = QObject::tr( "Personal Notes And Media Recorder" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeNetServices:
+        strPluginDesc = QObject::tr( "Network Services" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeSearch:
+        strPluginDesc = QObject::tr( "Search Services" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeSndReader:
+        strPluginDesc = QObject::tr( "Recorded Audio Reader" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeSndWriter:
+        strPluginDesc = QObject::tr( "Audio Recorder" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeWebServer:
+        strPluginDesc = QObject::tr( "Server for About Me And Story Pages" ).toUtf8().constData();
+        break;
+
+    default:
+        strPluginDesc = QObject::tr( "UNKNOWN PLUGIN" ).toUtf8().constData();
+    }
+
+    return strPluginDesc;
 }
 
 //============================================================================

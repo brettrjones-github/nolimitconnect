@@ -112,7 +112,9 @@ int main(int argc, char **argv)
 #endif // !defined(TARGET_OS_ANDROID)
 
     // initialize display scaling etc
-    GuiParams::initGuiParams();
+    // the best method I have found to scale the gui is to use the default font height as the scaling factor
+    QFontMetrics fontMetrics( myApp->font() );
+    GuiParams::initGuiParams(fontMetrics.height());
 
     // chicken and egg kind of thing.. we need the storage path here
     QGuiApplication::setApplicationDisplayName( VxGetApplicationTitle() );

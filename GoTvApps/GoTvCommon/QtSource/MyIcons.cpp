@@ -838,7 +838,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
         return eMyIconSettingsShareFiles;
 
     case ePluginTypeHostChatRoom:
-        return eMyIconServiceChatRoom;
+        return eMyIconSettingsChatRoom;
 
     case ePluginTypeHostGroup:
         return eMyIconSettingsHostGroup;

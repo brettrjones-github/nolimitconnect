@@ -541,17 +541,17 @@ enum EPluginType
     ePluginTypeVideoPhone           = 10,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone           = 11,	//!< VOIP audio only phone call
 
-    ePluginTypeClientChatRoom       = 12,	//!< chat room user client plugin
-    ePluginTypeClientConnectTest    = 13,	//!< Connection Test Client
-    ePluginTypeClientGroup          = 14,	//!< group client
+    ePluginTypeClientGroup          = 12,	//!< group client
+    ePluginTypeClientChatRoom       = 13,	//!< chat room user client plugin
+    ePluginTypeClientRandomConnect  = 14,	//!< Random connect to another person client
     ePluginTypeClientNetwork        = 15,	//!< network client
-    ePluginTypeClientRandomConnect  = 16,	//!< Random connect to another person client
+    ePluginTypeClientConnectTest    = 16,	//!< Connection Test Client
 
-    ePluginTypeHostChatRoom         = 17,	//!< chat room hosting plugin
-    ePluginTypeHostConnectTest      = 18,	//!< Connection Test Service
-    ePluginTypeHostGroup            = 19,   //!< group hosting
+    ePluginTypeHostGroup            = 17,   //!< group hosting
+    ePluginTypeHostChatRoom         = 18,	//!< chat room hosting plugin
+    ePluginTypeHostRandomConnect    = 19,	//!< Random connect to another person hosting
     ePluginTypeHostNetwork          = 20,	//!< master network hosting
-    ePluginTypeHostRandomConnect    = 21,	//!< Random connect to another person hosting
+    ePluginTypeHostConnectTest      = 21,	//!< Connection Test Service
 
     ePluginTypeNetworkSearchList    = 22,	//!< group and chat room list for network search
 
