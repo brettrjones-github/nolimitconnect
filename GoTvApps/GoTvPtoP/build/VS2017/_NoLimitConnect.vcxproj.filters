@@ -130,6 +130,15 @@
     <Filter Include="GoTvCommon\Source Files\GuiConnect">
       <UniqueIdentifier>{ab1a9c7d-21e6-4d97-9045-443a5354852e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GuiInterface">
+      <UniqueIdentifier>{f760397b-3573-4af5-b119-0646ceceb59c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsInterface">
+      <UniqueIdentifier>{0e3e9199-c34e-441b-9f52-4418fed3b8b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsWin32">
+      <UniqueIdentifier>{b9f3a92c-14f9-41fc-a792-78971fc51cf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -1070,6 +1079,36 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\GoTvRenderFrame.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IDefs.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTv.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvFromGui.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvRender.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvToGui.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\ILog.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp">
+      <Filter>GuiInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\OsWin32\IWin32.cpp">
+      <Filter>GuiInterface\OsWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp">
+      <Filter>GuiInterface\OsInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3080,6 +3119,51 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserHostSession.h">
       <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTv.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvEvents.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvGeometry.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvRender.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\ILog.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IScan.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\OsWin32\IWin32.h">
+      <Filter>GuiInterface\OsWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh">
+      <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.h">
+      <Filter>GuiInterface\OsInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

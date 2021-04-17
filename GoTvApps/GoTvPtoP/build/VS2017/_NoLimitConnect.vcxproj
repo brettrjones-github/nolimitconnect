@@ -409,6 +409,16 @@
     <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\GoTvRenderFrame.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IDefs.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTv.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvFromGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvRender.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvToGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\ILog.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\OsWin32\IWin32.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1707,6 +1717,21 @@
     <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTv.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvEvents.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvGeometry.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvRender.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\ILog.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IScan.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh" />
+    <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\OsWin32\IWin32.h" />
     <ClInclude Include="..\..\..\config_gotvapps.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppCommon.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

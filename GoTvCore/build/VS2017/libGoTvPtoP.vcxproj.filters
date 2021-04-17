@@ -1816,6 +1816,30 @@
     <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseInfo.h">
       <Filter>GoTvP2P\BaseInfo</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvEvents.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvGeometry.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvRender.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\OsWin32\IWin32.h">
+      <Filter>GuiInterface\OsWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh">
+      <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h">
+      <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1928,6 +1952,21 @@
     </Filter>
     <Filter Include="GoTvP2P\BaseInfo">
       <UniqueIdentifier>{019f1a11-04eb-4df7-a4e1-77d4aee987f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsAndroid">
+      <UniqueIdentifier>{4081e437-7215-437e-991e-b897737cac6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsApple">
+      <UniqueIdentifier>{e6bae512-40cb-4671-8f41-a2253a4ad19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsInterface">
+      <UniqueIdentifier>{e837defc-6b40-4d1a-a09c-13ce9d0a5057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsLinux">
+      <UniqueIdentifier>{144cdece-b4b9-416a-80ca-d5870fd2e442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsWin32">
+      <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
