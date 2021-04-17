@@ -1287,7 +1287,7 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 //============================================================================
 void P2PEngine::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
-    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
+    //assureUserSpecificDirIsSet( "P2PEngine::fromGuiAnnounceHost" );
     PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
     if( plugin )
     {

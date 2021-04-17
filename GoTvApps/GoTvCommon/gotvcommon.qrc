@@ -128,7 +128,6 @@
         <file>Resources/notepad.svg</file>
         <file>Resources/play.svg</file>
         <file>Resources/plugin.svg</file>
-        <file>Resources/question_mark.svg</file>
         <file>Resources/remote-control.svg</file>
         <file>Resources/speaker-muted.svg</file>
         <file>Resources/speakers-on.svg</file>
@@ -296,5 +295,6 @@
         <file>Resources/offer-list.svg</file>
         <file>Resources/call-list.svg</file>
         <file>Resources/notify-join.svg</file>
+        <file>Resources/question-mark.svg</file>
     </qresource>
 </RCC>

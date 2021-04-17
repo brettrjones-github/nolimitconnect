@@ -13,7 +13,7 @@
    clip-rule="evenodd"
    version="1.1"
    id="svg4"
-   sodipodi:docname="unknown-person.svg"
+   sodipodi:docname="person.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata10">
@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,7 +43,7 @@
      id="namedview6"
      showgrid="false"
      inkscape:zoom="32"
-     inkscape:cx="9.709794"
+     inkscape:cx="20.725419"
      inkscape:cy="7.3409626"
      inkscape:window-x="1185"
      inkscape:window-y="393"
@@ -55,9 +55,4 @@
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="sccccccccccccccsccccccccccccss"
      style="stroke-width:1.58119893" />
-  <path
-     inkscape:connector-curvature="0"
-     d="m 13.304209,16.898437 c 0,0.884063 -0.606472,1.601563 -1.358041,1.601563 -0.748851,0 -1.35804,-0.7175 -1.35804,-1.601563 0,-0.884062 0.609189,-1.601562 1.35804,-1.601562 0.751569,0 1.358041,0.71686 1.358041,1.601562 z M 11.989099,3.125 c -2.1894934,0 -3.8366406,1.7252032 -3.8366406,5.125 h 2.1492806 c 0,-1.476 0.49235,-2.6835781 1.643342,-2.6835781 0.677662,0 1.396624,0.5304375 1.458576,1.5445468 0.06684,1.0672813 -0.416814,1.6086094 -1.028176,2.2947188 -1.589,1.7809375 -1.530309,2.5938905 -1.530309,4.6099375 h 2.142759 c 0,-0.930188 -0.08531,-1.606688 0.998831,-2.984672 0.723309,-0.919937 1.622693,-2.0640936 1.641712,-3.8072343 C 15.654016,4.6849219 14.133489,3.125 11.989099,3.125 Z"
-     id="path2-6"
-     style="stroke-width:0.5900315" />
 </svg>

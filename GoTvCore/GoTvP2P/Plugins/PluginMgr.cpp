@@ -431,15 +431,25 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
     {
         // only allowed if Hosting feature is enabled
         PluginBase * poPlugin = getPlugin( pluginType );
-        if( poPlugin && ( eAppStatePermissionErr != poPlugin->getPluginState() ) )
+        if( poPlugin )
         {
-            std::string onlineId = m_Engine.getMyOnlineId().toHexString();
-            m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId );
+            if( eAppStatePermissionErr != poPlugin->getPluginState() )
+            {
+                std::string onlineId = m_Engine.getMyOnlineId().toHexString();
+                m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId );
+            }
+            else
+            {
+                m_Engine.hackerOffense( NULL, eHackerLevelSuspicious, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed", sktBase->getRemoteIp().c_str() );
+                VxGUID nullGuid;
+                std::string onlineId = nullGuid.toHexString();
+                m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId, ( eFriendStateIgnore == poPlugin->getPluginPermission() ) ? eNetCmdErrorServiceDisabled : eNetCmdErrorPermissionLevel );
+                sktBase->dumpSocketStats();
+            }
         }
         else
         {
-            m_Engine.hackerOffense( NULL, eHackerLevelSuspicious, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed\n", sktBase->getRemoteIp().c_str() );
-            sktBase->dumpSocketStats();
+            m_Engine.hackerOffense( NULL, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s invalid plugin", sktBase->getRemoteIp().c_str() );
         }
 
         // flush then close

@@ -27,7 +27,7 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  
  
  https://thenounproject.com/edward/
- unknown by Bybzee from the Noun Project
+ by Bybzee from the Noun Project
  bug.svg 
  Created by Universal Icons from the Noun Project
  truth-or-dare.svg (modified)
@@ -49,6 +49,7 @@ client-chat-room-settings.svg (modified)
 client-group.svg
 client-random-connect.svg (modified)
 client-webcam.svg (modified)
+earth-globe.svg
 edit-print.svg
 edit-cut.svg
 eye-all.svg (modified)
@@ -92,9 +93,14 @@ overlay-friend.svg (modified)
 overlay-globe.svg (modified)
 overlay-minus.svg (modified)
 overlay-plus.svg (modified)
+person.svg (modified) 
+person-round.svg (modified) 
+person-unknown-round.svg (modified) 
 pin-pinned.svg
 pin-unpinned.svg
 plugin.svg
+question-mark.svg
+question-mark-outlined.svg (modified)
 radio-tower.svg
 remote-control.svg
 service-group-chat.svg
@@ -117,6 +123,7 @@ star-half-full.svg
 storyboard.svg
 thumbs-up.svg
 thumbs-down.svg (modified)
+unknown-person.svg (modified) 
 video-chat-settings.svg (modified)
 window-expand.svg
 window-shrink.svg

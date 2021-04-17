@@ -294,11 +294,11 @@ enum EHostTestStatus
 enum EHostType
 {
     eHostTypeUnknown = 0,
-    eHostTypeChatRoom = 1,
-    eHostTypeConnectTest = 2,
-    eHostTypeGroup = 3,
+    eHostTypeGroup = 1,
+    eHostTypeChatRoom = 2,
+    eHostTypeRandomConnect = 3,
     eHostTypeNetwork = 4,
-    eHostTypeRandomConnect = 5,
+    eHostTypeConnectTest = 5,
     eHostTypePeerUser = 6,
 
     eMaxHostType
@@ -912,3 +912,11 @@ const char * DescribeSktType( ESktType sktType );
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName
 const char * getPluginName( EPluginType pluginType );
+
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType );
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectJoinReason( EHostType hostType );
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectSearchReason( EHostType hostType );
+

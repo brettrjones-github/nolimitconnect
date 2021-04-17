@@ -114,7 +114,7 @@ void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, st
         return;
     }
 
-    connectToHost( hostType, sessionId, url, eConnectReasonChatRoomAnnounce );
+    connectToHost( hostType, sessionId, url, HostTypeToConnectAnnounceReason( hostType ) );
 }
 
 //============================================================================
@@ -128,7 +128,7 @@ void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::s
         return;
     }
 
-    connectToHost( hostType, sessionId, url, eConnectReasonChatRoomJoin );
+    connectToHost( hostType, sessionId, url, HostTypeToConnectJoinReason( hostType ) );
 }
 
 //============================================================================

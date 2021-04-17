@@ -112,7 +112,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	switch( eMyIcon )
 	{
 	case eMyIconUnknown:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconApp:
 		return ":/AppRes/Resources/gotv_icon.svg";
     case eMyIconAvatarImage:
@@ -208,11 +208,11 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/client-webcam.svg";
 
 	case eMyIconRelay:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconRelayLocked:
 	case eMyIconRelayIgnored:
 	case eMyIconRelayDisabled:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 
 	case eMyIconProfile:
 		return ":/AppRes/Resources/magnifier-on-a-user.svg";
@@ -560,15 +560,15 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/user-tie.svg";
 
 	case eMyIconNetworkStateDiscover:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconNetworkStateDisconnected:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconNetworkStateDirectConnected:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconNetworkStateHostFail:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 	case eMyIconNetworkStateRelayConnected:
-		return ":/AppRes/Resources/question_mark.svg";
+		return ":/AppRes/Resources/question-mark.svg";
 
 	//=== title bar icons ===//
 	case eMyIconPowerOff:
@@ -772,7 +772,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/call-list.svg";
 
 	default:
-		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
+		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}
 }
 

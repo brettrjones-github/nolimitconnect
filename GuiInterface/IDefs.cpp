@@ -1,4 +1,5 @@
 #include "IDefs.h"
+#include <CoreLib/VxDebug.h>
 
 namespace
 {
@@ -795,5 +796,62 @@ const char * getPluginName( EPluginType pluginType )
 
     default:
         return "UnknownPlugin";
+    }
+}
+
+//============================================================================
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        return eConnectReasonGroupAnnounce;
+    case eHostTypeChatRoom:
+        return eConnectReasonChatRoomAnnounce;
+    case eHostTypeRandomConnect:
+        return eConnectReasonRandomConnectAnnounce;
+    default:
+        vx_assert( false );
+        LogMsg( LOG_ERROR, "HostTypeToConnectAnnounceReason unknown host type %d", hostType );
+        return eConnectReasonUnknown;
+    }
+}
+
+//============================================================================
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectJoinReason( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        return eConnectReasonGroupJoin;
+    case eHostTypeChatRoom:
+        return eConnectReasonChatRoomJoin;
+    case eHostTypeRandomConnect:
+        return eConnectReasonRandomConnectJoin;
+    default:
+        vx_assert( false );
+        LogMsg( LOG_ERROR, "HostTypeToConnectJoinReason unknown host type %d", hostType );
+        return eConnectReasonUnknown;
+    }
+}
+
+//============================================================================
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectSearchReason( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        return eConnectReasonGroupSearch;
+    case eHostTypeChatRoom:
+        return eConnectReasonChatRoomSearch;
+    case eHostTypeRandomConnect:
+        return eConnectReasonRandomConnectSearch;
+    default:
+        vx_assert( false );
+        LogMsg( LOG_ERROR, "HostTypeToConnectSearchReason unknown host type %d", hostType );
+        return eConnectReasonUnknown;
     }
 }
