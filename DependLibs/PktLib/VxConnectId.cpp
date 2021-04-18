@@ -78,8 +78,9 @@ bool VxConnectId::operator !=( const VxConnectId &rhs )  const
 }
 
 //============================================================================
-void VxConnectId::setIpAddress( const char * pIp )		
+bool VxConnectId::setIpAddress( const char * pIp )		
 {
+    bool changed = false;
 	InetAddress oAddr;
 	oAddr.setIp( pIp );
 	if( oAddr.isValid() && oAddr.isIPv6() )
@@ -88,12 +89,14 @@ void VxConnectId::setIpAddress( const char * pIp )
 	}
 	else if( oAddr.isValid() )
 	{
-		m_IPv4OnlineIp.setIp( oAddr.getIPv4AddressInNetOrder() );
+        changed = m_IPv4OnlineIp.setIp( oAddr.getIPv4AddressInNetOrder() );
 	}
 	else
 	{
 		vx_assert( false );
 	}
+
+    return changed;
 };
 
 //============================================================================

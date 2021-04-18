@@ -33,6 +33,7 @@ void PluginBaseHostService::buildHostAnnounce( PluginSetting& pluginSetting )
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
+    m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
     m_Engine.unlockAnnouncePktAccess();
     m_PluginSetting = pluginSetting;
     BinaryBlob binarySetting;

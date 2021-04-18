@@ -13,14 +13,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
+#include <GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.h>
 
 #include <CoreLib/VxGUID.h>
 
 #define HOST_FLAG_DEFAULT_HOST			0x0001
 #define HOST_FLAG_IS_TEMP			    0x0002
 
-class ConnectInfo
+class ConnectInfo : public BaseHostInfo
 {
 public:
 	ConnectInfo();
@@ -30,22 +30,8 @@ public:
 
     bool                        isValid( void ) { return true;  }
 
-    /// thumb objects use the asset id and ther is no other assciated thumb to this thumb fil
-    virtual void			    setHostType( EHostType hostType )                   { m_HostType = hostType; }
-    virtual EHostType			getHostType( void )                                 { return m_HostType; }
-    virtual void				setHostId( VxGUID& hostId )                         { m_HostOnlineId = hostId; }
-    virtual void				setHostId( const char * guid )                      { m_HostOnlineId.fromVxGUIDHexString( guid ); }
-    virtual VxGUID&				getHostId( void )                                   { return m_HostOnlineId; }
-    virtual void			    setHostModifiedTime( uint64_t timeMs )              { m_HostModMs = timeMs; }
-    virtual uint64_t			getHostModifiedTime( void )                         { return m_HostModMs; }
     virtual void			    setHostFlags( uint32_t hostFlags )                  { m_HostFlags = hostFlags; }
     virtual uint32_t			getHostFlags( void )                                { return m_HostFlags; }
-
-    virtual void				setThumbId( VxGUID& thumbId )                       { m_ThumbId = thumbId; }
-    virtual void				setThumbId( const char * guid )                     { m_ThumbId.fromVxGUIDHexString( guid ); }
-    virtual VxGUID&				getThumbId( void )                                  { return m_ThumbId; }
-    virtual void			    setThumbModifiedTime( uint64_t timeMs )             { m_ThumbModMs = timeMs; }
-    virtual uint64_t			getThumbModifiedTime( void )                        { return m_ThumbModMs; }
 
     virtual void				setOfferId( VxGUID& offerId )                       { m_OfferId = offerId; }
     virtual void				setOfferId( const char * guid )                     { m_OfferId.fromVxGUIDHexString( guid ); }
@@ -55,7 +41,7 @@ public:
     virtual void			    setOfferModifiedTime( uint64_t timeMs )             { m_OfferModMs = timeMs; }
     virtual uint64_t			getOfferModifiedTime( void )                        { return m_OfferModMs; }
 
-    virtual void			    setHostUrl( std::string hostUrl )                  { m_HostUrl = hostUrl; }
+    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
     virtual std::string&	    getHostUrl( void )                                  { return m_HostUrl; }
 
     void						setIsDefaultHost( bool isDefault )	                { if( isDefault ) m_HostFlags |= HOST_FLAG_DEFAULT_HOST; else m_HostFlags &= ~HOST_FLAG_DEFAULT_HOST; }

@@ -78,12 +78,15 @@ void PluginGroupHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
 //============================================================================
 void PluginGroupHost::sendHostGroupAnnounce( void )
 {
-    if( !m_HostAnnounceBuilt && m_Engine.isDirectConnectReady() )
+    if( m_Engine.isDirectConnectReady() )
     {
-        PluginSetting pluginSetting;
-        if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+        if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
-            buildHostGroupAnnounce( pluginSetting );
+            PluginSetting pluginSetting;
+            if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+            {
+                buildHostGroupAnnounce( pluginSetting );
+            }
         }
     }
 

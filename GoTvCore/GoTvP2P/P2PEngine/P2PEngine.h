@@ -19,6 +19,7 @@
 #include "P2PConnectList.h"
 #include "EngineSettings.h"
 #include "EngineParams.h"
+#include "VxSktLoopback.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/Connections/ConnectionMgr.h>
@@ -112,6 +113,7 @@ public:
     OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
     OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
     UserHostMgr&                getUserHostMgr( void )                          { return m_UserHostMgr; }
+    VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
@@ -128,10 +130,14 @@ public:
     void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
     void						copyMyPktAnnounce( PktAnnounce& pktAnn )		{ m_AnnouncePktMutex.lock(); memcpy(&pktAnn, &m_PktAnn, sizeof(PktAnnounce)); m_AnnouncePktMutex.unlock(); }
-
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
+
+    void                        setPktAnnLastModTime( int64_t timeMs )          { m_PktAnnLastModTime = timeMs; }
+    int64_t                     getPktAnnLastModTime( void )                    { return m_PktAnnLastModTime; }
+
     VxGUID						getMyOnlineId( void )							{ return m_MyOnlineId; }
     std::string					getMyOnlineUrl( void )							{ m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyOnlineUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
+    VxNetIdent*				    getMyNetIdent( void )						    { return &m_PktAnn; }
     bool						addMyIdentToBlob( PktBlobEntry& blobEntry );
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
@@ -472,7 +478,7 @@ public:
 	virtual void				onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
 	virtual void				onRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
 	virtual void				onRelayServiceUnavailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
-protected:
+
 	//========================================================================
 	// pkt handlers
 	//========================================================================
@@ -627,6 +633,7 @@ protected:
     virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
+protected:
     //========================================================================
     //========================================================================
     void						iniitializePtoPEngine( void );
@@ -650,6 +657,7 @@ protected:
 	VxPeerMgr&					m_PeerMgr;
     BigListMgr&					m_BigListMgr;
 	PktAnnounce					m_PktAnn;
+    int64_t                     m_PktAnnLastModTime{ 0 };
     VxGUID                      m_MyOnlineId;
 	VxMutex						m_AnnouncePktMutex;
 	EngineSettings				m_EngineSettings;
@@ -679,6 +687,7 @@ protected:
 	IsPortOpenTest&				m_IsPortOpenTest;
     RunUrlAction&			    m_RunUrlAction;
     UserHostMgr&				m_UserHostMgr;
+    VxSktLoopback               m_SktLoopback;
 
 	RcScan						m_RcScan;
 

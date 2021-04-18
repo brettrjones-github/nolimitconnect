@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "VxDefs.h"
 #include <string>
 

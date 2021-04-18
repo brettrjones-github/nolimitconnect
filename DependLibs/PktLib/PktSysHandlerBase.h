@@ -25,8 +25,7 @@ public:
 	PktHandlerBase();
 	virtual ~PktHandlerBase() = default;
 
-	virtual void				handlePkt				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-
+	virtual void				handlePkt				    ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	//=== packet handlers ===//
 	virtual void				onPktUnhandled				( VxSktBase * sktBase, VxPktHdr * pktHdr );
@@ -110,7 +109,7 @@ public:
 	virtual void				onPktWebServerPicChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktWebServerGetChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktWebServerGetChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * poPktHdrt );
+	virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	virtual void				onPktTodGameStats			( VxSktBase * sktBase, VxPktHdr * pktHdr );

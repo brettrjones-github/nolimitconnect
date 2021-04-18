@@ -403,6 +403,7 @@ namespace
         "Accept Socket ",
         "UDP Socket ",
         "UDP Broadcast Socket ",
+        "Loopback Socket ",
 
         "eMaxSktType"
     };

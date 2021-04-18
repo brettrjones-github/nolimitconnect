@@ -131,11 +131,11 @@ void ConnectInfoDb::addConnect(   EHostType       hostType,
 void ConnectInfoDb::addConnect( ConnectInfo* hostInfo )
 {
     addConnect(	hostInfo->getHostType(),
-        hostInfo->getHostId(),
-        hostInfo->getHostModifiedTime(),
+        hostInfo->getOnlineId(),
+        hostInfo->getInfoModifiedTime(),
         hostInfo->getHostFlags(),
         hostInfo->getThumbId(),
-        hostInfo->getThumbModifiedTime(),
+        hostInfo->getInfoModifiedTime(),
         hostInfo->getOfferId(),				
         hostInfo->getOfferState(),
         hostInfo->getOfferModifiedTime(),
@@ -154,13 +154,13 @@ void ConnectInfoDb::getAllConnects( std::vector<ConnectInfo*>& ConnectConnectLis
         {
             ConnectInfo * hostInfo = new ConnectInfo();
 
-            hostInfo->setHostId( cursor->getString( COLUMN_HOST_ID ) );
+            hostInfo->setOnlineId( cursor->getString( COLUMN_HOST_ID ) );
             hostInfo->setHostType( (EHostType)cursor->getS32( COLUMN_HOST_TYPE ) );
-            hostInfo->setHostModifiedTime( (uint64_t)cursor->getS64( COLUMN_HOST_MOD_MS ) );
+            hostInfo->setInfoModifiedTime( (uint64_t)cursor->getS64( COLUMN_HOST_MOD_MS ) );
             hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
 
             hostInfo->setThumbId( cursor->getString( COLUMN_HOST_THUMB_ID ) );
-            hostInfo->setThumbModifiedTime( (uint64_t)cursor->getS64( COLUMN_THUMB_MOD_MS ) );
+            hostInfo->setInfoModifiedTime( (uint64_t)cursor->getS64( COLUMN_THUMB_MOD_MS ) );
 
             hostInfo->setOfferId( cursor->getString( COLUMN_OFFER_ID ) );
             hostInfo->setOfferState( (EOfferState) cursor->getS32( COLUMN_OFFER_STATE ) );
@@ -191,7 +191,7 @@ void ConnectInfoDb::insertConnectInTimeOrder( ConnectInfo *hostInfo, std::vector
         if( ( *iter )->isDefaultHost() )
         {
         }
-        else if( (*iter)->getHostModifiedTime() > hostInfo->getHostModifiedTime() )
+        else if( (*iter)->getInfoModifiedTime() > hostInfo->getInfoModifiedTime() )
         {
             assetList.insert( iter, hostInfo );
             return;

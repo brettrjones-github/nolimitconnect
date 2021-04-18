@@ -116,7 +116,7 @@ public:
 	virtual void				setIsPluginSpecificSkt( bool isPluginSpecific )	{ m_bIsPluginSpecificSkt = isPluginSpecific; };
 	virtual bool				isPluginSpecificSkt( void )						{ return m_bIsPluginSpecificSkt; };
 
-	virtual void				setPluginSpecificNum( uint8_t pluginNum )			{ m_u8PluginSpecificNum = pluginNum; };
+	virtual void				setPluginSpecificNum( uint8_t pluginNum )		{ m_u8PluginSpecificNum = pluginNum; };
 	virtual uint8_t				getPluginSpecificNum( void )					{ return m_u8PluginSpecificNum; };
 
     uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
@@ -176,12 +176,12 @@ public:
 	virtual std::string		    getRemoteIp( void );
 
     //! get remote ip as string
-    virtual void 		        getRemoteIp( std::string& rmtIp ) { rmtIp = m_strRmtIp.empty() ? "" : m_strRmtIp; }
+    virtual void 		        getRemoteIp( std::string& rmtIp )   { rmtIp = m_strRmtIp.empty() ? "" : m_strRmtIp; }
 
 	//! simpler version of getRemoteIp returns ip as host order int32_t
 	//virtual RCODE				getRemoteIp( InetAddress &u32RetIp );			// return ip
 	//! get remote port connection is on
-	virtual InetAddress			getRemoteIpBinary( void ){ return m_RmtIp;}			// return ip in host ordered binary u32
+	virtual InetAddress			getRemoteIpBinary( void )           { return m_RmtIp;}			// return ip in host ordered binary u32
 
 	//! get local ip as string
 	virtual std::string		    getLocalIp( void );
@@ -191,9 +191,9 @@ public:
 
 	//=== encryption functions ===//
 	//! return true if transmit encryption key is set
-	virtual bool				isTxEncryptionKeySet( void ) { return m_TxKey.isKeySet(); }
+	virtual bool				isTxEncryptionKeySet( void )        { return m_TxKey.isKeySet(); }
 	//! return true if receive encryption key is set
-	virtual bool				isRxEncryptionKeySet( void ) { return m_RxKey.isKeySet(); }
+	virtual bool				isRxEncryptionKeySet( void )        { return m_RxKey.isKeySet(); }
 
 	//! encrypt then send data using session crypto
 	virtual RCODE				txEncrypted(	const char *	pData, 					// data to send

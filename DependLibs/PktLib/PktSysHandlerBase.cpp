@@ -94,7 +94,7 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REQ ]					= &PktHandlerBase::onPktRelayTestReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_RELAY_TEST_REPLY ]					= &PktHandlerBase::onPktRelayTestReply;
 
-	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REQ ]						= &PktHandlerBase::onPktScanReq;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REQ ]						    = &PktHandlerBase::onPktScanReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_SCAN_REPLY ]						= &PktHandlerBase::onPktScanReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_WEB_SERVER_MY_PIC_SEND_REQ ]		= &PktHandlerBase::onPktMyPicSendReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_WEB_SERVER_MY_PIC_SEND_REPLY ]		= &PktHandlerBase::onPktMyPicSendReply;

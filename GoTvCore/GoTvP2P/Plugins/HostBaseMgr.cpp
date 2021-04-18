@@ -120,15 +120,34 @@ void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, st
 //============================================================================
 void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl )
 {
-    std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
-
-    if( ptopUrl.empty() || hostType == eHostTypeUnknown )
+    std::string url = ptopUrl.empty() ? m_ConnectionMgr.getDefaultHostUrl( hostType ) : ptopUrl;
+    if( url.empty() || hostType == eHostTypeUnknown )
     {
+        LogMsg( LOG_ERROR, "HostBaseMgr::fromGuiJoinHost invalid param" );
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
         return;
     }
 
-    connectToHost( hostType, sessionId, url, HostTypeToConnectJoinReason( hostType ) );
+    VxUrl hostUrl( url );
+    if( hostUrl.hasValidOnlineId() )
+    {
+        VxSktBase* sktBase = nullptr;
+        if( m_Engine.getConnectMgr().isConnectedToHost( hostType, hostUrl, sktBase ) )
+        {
+            // handle already connected
+            onConnectToHostSuccess( hostType, sessionId, sktBase, hostUrl.getOnlineId(), HostTypeToConnectJoinReason( hostType ) );
+        }
+        else
+        {
+            // connect without having to query host id
+            connectToHost( hostType, sessionId, ptopUrl, HostTypeToConnectJoinReason( hostType ) );
+        }
+    } 
+    else
+    {
+        // the url may not have online id and will have to be queried from host
+        connectToHost( hostType, sessionId, url, HostTypeToConnectJoinReason( hostType ) );
+    }
 }
 
 //============================================================================

@@ -1,6 +1,5 @@
 //============================================================================
 // Copyright (C) 2017 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -70,21 +69,12 @@ namespace
 
 //============================================================================
 VxUrl::VxUrl()
-: m_Url( "" )
-, m_FileName( "" )
-, m_FileExtension( "" )
-, m_ShareName( "" )
-, m_Port( 80 )
 {
 }
 
 //============================================================================
 VxUrl::VxUrl( std::string& url )
 : m_Url( url )
-, m_FileName( "" )
-, m_FileExtension( "" )
-, m_ShareName( "" )
-, m_Port( 80 )
 {
 	setUrl( url.c_str() );
 }
@@ -119,6 +109,7 @@ VxUrl& VxUrl::operator = ( const VxUrl& rhs )
         m_strQuery = rhs.m_strQuery;
         m_strFragment = rhs.m_strFragment;
         m_strOnlineId = rhs.m_strOnlineId;
+        m_OnlineId = rhs.m_OnlineId;
     }
 
     return *this;
@@ -139,7 +130,8 @@ bool VxUrl::operator == ( const VxUrl& rhs ) const
         m_strPassword == rhs.m_strPassword &&
         m_strQuery == rhs.m_strQuery &&
         m_strFragment == rhs.m_strFragment &&
-        m_strOnlineId == rhs.m_strOnlineId;
+        m_strOnlineId == rhs.m_strOnlineId &&
+        m_OnlineId == rhs.m_OnlineId;
 }
 
 //============================================================================
@@ -252,12 +244,18 @@ void VxUrl::setUrl( const char * pUrl )
     m_strOnlineId = m_Url.substr( iReadIdx + 1, m_Url.length() - (iReadIdx + 1) );
     if( VxGUID::isOnlineIdStringValid( m_strOnlineId.c_str() ) )
     {
+        if( m_strOnlineId.length() == 34 )
+        {
+            // there is nothing past the online id but it looks valid
+            m_OnlineId.fromOnlineIdString( m_strOnlineId.c_str() );
+        }
+
         iReadIdx += m_strOnlineId.length();
         iSlashIdx = m_Url.find( SLASH_DELIM, iReadIdx );
         if( iSlashIdx == std::string::npos )
         {
             return;
-        }
+        }     
     }
 
 	// path and fragment
@@ -351,12 +349,6 @@ const char * VxUrl::getFragment()
 bool VxUrl::isAbsoluteUrl()
 {
 	return (0 < m_strProtocol.length());
-}
-
-//============================================================================
-bool VxUrl::hasValidOnlineId( void )
-{
-    return !m_strOnlineId.empty() && VxGUID::isOnlineIdStringValid( m_strOnlineId.c_str() );
 }
 
 //============================================================================

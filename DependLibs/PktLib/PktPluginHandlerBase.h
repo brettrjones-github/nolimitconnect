@@ -26,7 +26,7 @@ public:
 	PktPluginHandlerBase();
 	virtual ~PktPluginHandlerBase() = default;
 
-	virtual void				handlePkt				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				handlePkt				    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 
 	//=== packet handlers ===//
@@ -99,7 +99,7 @@ public:
 	virtual void				onPktRelayTestReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktScanReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktScanReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

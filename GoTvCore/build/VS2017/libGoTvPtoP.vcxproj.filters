@@ -850,6 +850,12 @@
     <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseInfo.cpp">
       <Filter>GoTvP2P\BaseInfo</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\VxSktLoopback.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1839,6 +1845,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h">
       <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\VxSktLoopback.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

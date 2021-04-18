@@ -13,30 +13,37 @@
 //============================================================================
 
 #include <config_gotvcore.h>
-#include "BaseInfo.h"
+#include "BaseHostInfo.h"
 
 //============================================================================
-BaseInfo::BaseInfo()
+BaseHostInfo::BaseHostInfo()
+    : BaseInfo()
 { 
 }
 
 //============================================================================
-BaseInfo::BaseInfo( const BaseInfo& rhs )
-    : m_OnlineId( rhs.m_OnlineId )
-    , m_ThumbId( rhs.m_ThumbId )
-    , m_InfoModifiedTime( rhs.m_InfoModifiedTime )
+BaseHostInfo::BaseHostInfo( const BaseHostInfo& rhs )
+    : BaseInfo( rhs )
+    , m_HostType( rhs.m_HostType )
+    , m_ConnectUrl( rhs.m_ConnectUrl )
 {
 }
 
 //============================================================================
-BaseInfo& BaseInfo::operator=( const BaseInfo& rhs )
+BaseHostInfo& BaseHostInfo::operator=( const BaseHostInfo& rhs )
 {
     if( this != &rhs )
     {
-        m_OnlineId = rhs.m_OnlineId;
-        m_ThumbId = rhs.m_ThumbId;
-        m_InfoModifiedTime = rhs.m_InfoModifiedTime;
+        BaseInfo::operator=( rhs );
+        m_HostType = rhs.m_HostType;
+        m_ConnectUrl = rhs.m_ConnectUrl;
     }
 
     return *this;
+}
+
+//============================================================================
+bool BaseHostInfo::isHostMatch( EHostType hostType, VxGUID& onlineId )
+{
+    return  hostType == m_HostType && onlineId == m_OnlineId;
 }

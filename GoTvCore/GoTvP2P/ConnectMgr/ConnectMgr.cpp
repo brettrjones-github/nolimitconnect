@@ -49,7 +49,7 @@ void ConnectMgr::fromGuiUserLoggedOn( void )
         dbFileName += m_ConnectInfoDb.getDatabaseName(); 
         lockResources();
         m_ConnectInfoDb.dbShutdown();
-        m_ConnectInfoDb.dbStartup( USER_HOST_DB_VERSION, dbFileName );
+        m_ConnectInfoDb.dbStartup( CONNECT_MGR_DB_VERSION, dbFileName );
 
         clearConnectInfoList();
         m_ConnectInfoDb.getAllConnects( m_ConnectInfoList );
@@ -57,6 +57,25 @@ void ConnectMgr::fromGuiUserLoggedOn( void )
         m_ConnectListInitialized = true;
         unlockResources();
     }
+}
+
+//============================================================================
+bool ConnectMgr::isConnectedToHost( EHostType hostType, VxUrl& hostUrl, VxSktBase*& sktBase )
+{
+    bool isConnected = false;
+    if( hostUrl.getOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // we are connecting to ourself
+        sktBase = m_Engine.getSktLoopback();
+        return true;
+    }
+    else
+    {
+        // lookup connection
+
+    }
+
+    return isConnected;
 }
 
 //============================================================================

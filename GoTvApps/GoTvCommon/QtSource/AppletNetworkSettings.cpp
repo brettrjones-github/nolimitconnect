@@ -252,7 +252,12 @@ void AppletNetworkSettings::applyEngineSettingsFromHostSetting( NetHostSetting& 
         m_MyApp.getAppGlobals().getUserIdent()->setOnlineIpAddress( netHostSetting.getExternIpAddr().c_str() );
     }
 
-    m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( netHostSetting.getTcpPort() );
+    if( m_Engine.getMyNetIdent()->getMyOnlinePort() != netHostSetting.getTcpPort() )
+    {
+        m_Engine.getMyNetIdent()->setMyOnlinePort( netHostSetting.getTcpPort() );
+        m_Engine.setPktAnnLastModTime( GetTimeStampMs() );
+    }
+
     m_Engine.fromGuiApplyNetHostSettings(netHostSetting);
 }
 

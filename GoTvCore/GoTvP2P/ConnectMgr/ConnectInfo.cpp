@@ -28,12 +28,13 @@
 
 //============================================================================
 ConnectInfo::ConnectInfo()
+    : BaseHostInfo()
 { 
 }
 
 //============================================================================
 ConnectInfo::ConnectInfo( const ConnectInfo& rhs )
-    : m_HostOnlineId( rhs.m_HostOnlineId )
+    : BaseHostInfo( rhs )
 {
 }
 
@@ -42,7 +43,7 @@ ConnectInfo& ConnectInfo::operator=( const ConnectInfo& rhs )
 {	
 	if( this != &rhs )
 	{
-        m_HostOnlineId = rhs.m_HostOnlineId;
+        BaseHostInfo::operator=( rhs );
 	}
 
 	return *this;

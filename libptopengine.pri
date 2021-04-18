@@ -45,6 +45,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.h \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.h \
@@ -237,6 +238,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PConnectList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/VxSktLoopback.h \
     $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h \
     $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.h \
     $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h \
@@ -354,6 +356,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.cpp \
@@ -520,6 +523,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSearch.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSktCallback.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineTimerThread.cpp \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/VxSktLoopback.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.cpp \

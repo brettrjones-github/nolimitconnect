@@ -145,21 +145,22 @@ InetAddress	VxConnectBaseInfo::getRelayIpAddress( void )
 }
 
 //============================================================================
-void VxConnectBaseInfo::setOnlineIpAddress( const char * pIp )			
+bool VxConnectBaseInfo::setOnlineIpAddress( const char * pIp )			
 { 
-	m_DirectConnectId.setIpAddress( pIp ); 
+	return m_DirectConnectId.setIpAddress( pIp ); 
 };
 
 //============================================================================
-void VxConnectBaseInfo::setOnlineIpAddress( InetAddress& oIp )			
+bool VxConnectBaseInfo::setOnlineIpAddress( InetAddress& oIp )			
 { 
 	if( oIp.isIPv4() )
 	{
-		m_DirectConnectId.m_IPv4OnlineIp.setIp( oIp.getIPv4AddressInNetOrder() );
+		return m_DirectConnectId.m_IPv4OnlineIp.setIp( oIp.getIPv4AddressInNetOrder() );
 	}
 	else
 	{
 		m_DirectConnectId.m_IPv6OnlineIp  = oIp;
+        return true;
 	}
 }
 

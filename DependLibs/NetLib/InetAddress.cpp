@@ -212,8 +212,9 @@ uint32_t InetAddrIPv4::getIPv4AddressInNetOrder( void ) const
 
 //============================================================================
 // note.. internally kept in network order instead of host order
-void InetAddrIPv4::setIp( uint32_t u32IPv4Addr, bool bIsHostOrder )
+bool InetAddrIPv4::setIp( uint32_t u32IPv4Addr, bool bIsHostOrder )
 {
+    uint32_t oldAddrIPv4 = m_u32AddrIPv4;
 	if( bIsHostOrder )
 	{
 		u32IPv4Addr = htonl( u32IPv4Addr );
@@ -227,12 +228,16 @@ void InetAddrIPv4::setIp( uint32_t u32IPv4Addr, bool bIsHostOrder )
 	{
 		setToInvalid();
 	}
+
+    return oldAddrIPv4 != m_u32AddrIPv4;
 }
 
 //============================================================================
-void InetAddrIPv4::setIp( const char * pIp )
+bool InetAddrIPv4::setIp( const char * pIp )
 {
+    uint32_t oldAddrIPv4 = m_u32AddrIPv4;
 	fromString( pIp );
+    return oldAddrIPv4 != m_u32AddrIPv4;
 }
 
 //============================================================================

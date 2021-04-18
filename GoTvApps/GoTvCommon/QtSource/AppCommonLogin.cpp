@@ -346,8 +346,9 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
 
     // get port to listen on 
     uint16_t tcpPort = m_Engine.getEngineSettings().getTcpIpPort();
-    getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( tcpPort );
-    getAppGlobals().getUserIdent()->m_DirectConnectId.m_IPv6OnlineIp = m_Engine.getFromGuiInterface().fromGuiGetMyIPv6Address();
+    getEngine().getMyNetIdent()->setMyOnlinePort( tcpPort );
+    getEngine().getMyNetIdent()->m_DirectConnectId.m_IPv6OnlineIp = m_Engine.getFromGuiInterface().fromGuiGetMyIPv6Address();
+    getEngine().setPktAnnLastModTime( GetTimeStampMs() );
 
     uint64_t aliveMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Account Loaded ms %lld alive ms %lld", aliveMs - loadStartMs, aliveMs );

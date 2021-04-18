@@ -27,6 +27,7 @@
 void P2PEngine::doPktAnnHasChanged( bool connectionListIsLocked )
 {
 	//LogMsg( LOG_ERROR, "P2PEngine::doPktAnnHasChanged start\n" );
+    setPktAnnLastModTime( GetTimeStampMs() );
 	m_ConnectionList.setIsRelayRequired( m_PktAnn.requiresRelay() );
 	m_NetworkMgr.onPktAnnUpdated();
 	// announce to all our new announce

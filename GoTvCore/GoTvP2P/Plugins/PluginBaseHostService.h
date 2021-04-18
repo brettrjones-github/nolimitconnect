@@ -50,5 +50,6 @@ protected:
     PktHostAnnounce             m_PktHostAnnounce;
     VxMutex                     m_AnnMutex;
     VxGUID                      m_AnnounceSessionId;
+    int64_t                     m_PktAnnLastModTime{ 0 };
 };
 

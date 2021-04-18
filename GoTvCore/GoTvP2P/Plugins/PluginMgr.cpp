@@ -533,7 +533,7 @@ void PluginMgr::handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	if( isValidPluginNum( u8PluginNum ) )
 	{
 		PluginBase * plugin = getPlugin( (EPluginType)u8PluginNum );
-		VxNetIdent * netIdent = m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+		VxNetIdent * netIdent = pktHdr->getSrcOnlineId() == m_Engine.getMyOnlineId() ? m_Engine.getMyNetIdent() : m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 		if( netIdent && plugin )
 		{
 			plugin->handlePkt( sktBase, pktHdr, netIdent );
@@ -915,8 +915,15 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
 
     pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );
 
+    if( pktHdr->getDestOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // destination is ourself
+        handleNonSystemPackets( sktBase, pktHdr );
+        return true;
+    }
+
 #ifdef DEBUG
-    // loopback is only for development convenience and should never be used for production
+    // loopback flag is only for development convenience and should never be used for production
     if( pktHdr->getIsLoopback() )
     {
         pktHdr->setDestOnlineId( m_Engine.getMyOnlineId() );
@@ -983,17 +990,17 @@ void PluginMgr::fromGuiStartPluginSession( EPluginType ePluginType,  VxGUID& oOn
 
 //============================================================================
 //! called to stop service or session with remote friend
-void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+void PluginMgr::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData, VxGUID lclSessionId )
 {
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 		if( poInfo )
 		{
 			plugin->fromGuiStopPluginSession( poInfo, pvUserData, lclSessionId );	
 		}
-		else if( oOnlineId == m_PktAnn.getMyOnlineId() )
+		else if( onlineId == m_PktAnn.getMyOnlineId() )
 		{
 			plugin->fromGuiStopPluginSession( &m_PktAnn, pvUserData, lclSessionId );	
 		}
@@ -1023,8 +1030,8 @@ bool PluginMgr::fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * 
 }
 
 //============================================================================
-bool PluginMgr::fromGuiSetGameValueVar(	EPluginType	ePluginType, 
-											VxGUID&	oOnlineId, 
+bool PluginMgr::fromGuiSetGameValueVar(	    EPluginType	    ePluginType, 
+											VxGUID&	        onlineId, 
 											int32_t			s32VarId, 
 											int32_t			s32VarValue )
 {
@@ -1032,12 +1039,12 @@ bool PluginMgr::fromGuiSetGameValueVar(	EPluginType	ePluginType,
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 		if( poInfo )
 		{
 			bResult = plugin->fromGuiSetGameValueVar( poInfo, s32VarId, s32VarValue );	
 		}
-		else if( oOnlineId == m_PktAnn.getMyOnlineId() )
+		else if( onlineId == m_PktAnn.getMyOnlineId() )
 		{
 			bResult = plugin->fromGuiSetGameValueVar( &m_PktAnn, s32VarId, s32VarValue );	
 		}
@@ -1050,8 +1057,8 @@ bool PluginMgr::fromGuiSetGameValueVar(	EPluginType	ePluginType,
 }
 
 //============================================================================
-bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	ePluginType, 
-											VxGUID&		oOnlineId,
+bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	    ePluginType, 
+											VxGUID&		    onlineId,
 											int32_t			s32VarId, 
 											int32_t			s32VarValue )
 {
@@ -1059,12 +1066,12 @@ bool PluginMgr::fromGuiSetGameActionVar(	EPluginType	ePluginType,
 	PluginBase * plugin = getPlugin( ePluginType );
 	if( plugin )
 	{
-		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 		if( poInfo )
 		{
 			bResult = plugin->fromGuiSetGameActionVar( poInfo, s32VarId, s32VarValue );	
 		}
-		else if( oOnlineId == m_PktAnn.getMyOnlineId() )
+		else if( onlineId == m_PktAnn.getMyOnlineId() )
 		{
 			bResult = plugin->fromGuiSetGameActionVar( &m_PktAnn, s32VarId, s32VarValue );	
 		}

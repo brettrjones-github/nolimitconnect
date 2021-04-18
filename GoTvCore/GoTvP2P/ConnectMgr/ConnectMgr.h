@@ -15,22 +15,23 @@
 
 #include "ConnectInfoDb.h"
 
-#include <CoreLib/VxThread.h>
-#include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
 
 class ConnectInfo;
 class ConnectCallbackInterface;
 class P2PEngine;
+class VxUrl;
+class VxSktBase;
 
 class ConnectMgr 
 {
-    const int USER_HOST_DB_VERSION = 1;
+    const int CONNECT_MGR_DB_VERSION = 1;
 public:
 	ConnectMgr( P2PEngine& engine, const char * dbName, const char * stateDbName );
 	virtual ~ConnectMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
+    bool                        isConnectedToHost( EHostType hostType, VxUrl& hostUrl, VxSktBase*& sktBase );
 
     void                        addConnectMgrClient( ConnectCallbackInterface * client, bool enable );
 

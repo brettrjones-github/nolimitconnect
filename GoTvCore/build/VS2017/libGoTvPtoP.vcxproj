@@ -480,6 +480,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BigListLib\BigList.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -657,6 +658,7 @@
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSearch.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSktCallback.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\VxSktLoopback.cpp" />
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSetting.cpp" />
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.cpp" />
@@ -794,6 +796,7 @@
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferDb.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigList.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListDb.h" />
@@ -988,6 +991,7 @@
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\FileShareSettings.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PConnectList.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PEngine.h" />
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\VxSktLoopback.h" />
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h" />
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.h" />
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h" />

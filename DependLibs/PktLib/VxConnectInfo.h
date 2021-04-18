@@ -114,8 +114,8 @@ public:
 	InetAddress					getOnlineIpAddress( void );
 	InetAddress					getRelayIpAddress( void );
 
-	void						setOnlineIpAddress( InetAddress& oIp );
-	void						setOnlineIpAddress( const char * pIp );
+    bool						setOnlineIpAddress( InetAddress& oIp );
+	bool						setOnlineIpAddress( const char * pIp ); // return true if changed
 
 	uint16_t					getOnlinePort( void );
 	void						getOnlinePort( std::string& strRetPort );

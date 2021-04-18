@@ -815,6 +815,7 @@ enum ESktType
     eSktTypeTcpAccept			= 2,
     eSktTypeUdp					= 3,
     eSktTypeUdpBroadcast		= 4,
+    eSktTypeLoopback    		= 5,
 
     eMaxSktType			// always last
 };

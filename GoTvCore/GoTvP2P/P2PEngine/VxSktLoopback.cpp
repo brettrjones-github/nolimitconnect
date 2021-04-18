@@ -12,31 +12,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
-#include "BaseInfo.h"
+#include "P2PEngine.h"
 
 //============================================================================
-BaseInfo::BaseInfo()
-{ 
+VxSktLoopback::VxSktLoopback( P2PEngine& engine )
+    : VxSktBase()
+    , m_Engine( engine )
+{
+	m_eSktType = eSktTypeLoopback;
 }
 
 //============================================================================
-BaseInfo::BaseInfo( const BaseInfo& rhs )
-    : m_OnlineId( rhs.m_OnlineId )
-    , m_ThumbId( rhs.m_ThumbId )
-    , m_InfoModifiedTime( rhs.m_InfoModifiedTime )
+RCODE VxSktLoopback::txPacketWithDestId( VxPktHdr * pktHdr, bool bDisconnect )
 {
-}
-
-//============================================================================
-BaseInfo& BaseInfo::operator=( const BaseInfo& rhs )
-{
-    if( this != &rhs )
-    {
-        m_OnlineId = rhs.m_OnlineId;
-        m_ThumbId = rhs.m_ThumbId;
-        m_InfoModifiedTime = rhs.m_InfoModifiedTime;
-    }
-
-    return *this;
+    vx_assert( pktHdr->getDestOnlineId() == m_Engine.getMyOnlineId() );
+    m_Engine.handlePkt( this, pktHdr );
+    return 0;
 }

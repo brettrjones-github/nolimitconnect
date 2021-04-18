@@ -293,19 +293,15 @@ void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUr
     if( parsedUrl.validateUrl( false ) )
     {
         bool needOnlineId = true;
-        if( parsedUrl.hasValidOnlineId() )
+        VxGUID onlineId = parsedUrl.getOnlineId();
+        if( onlineId.isVxGUIDValid() )
         {
-            VxGUID onlineId;
-            onlineId.fromOnlineIdString( parsedUrl.getOnlineId().c_str() );
-            if( onlineId.isVxGUIDValid() )
-            {
-                needOnlineId = false;
+            needOnlineId = false;
 
-                m_ConnectionMutex.lock();
-                m_DefaultHostIdList[hostType] = onlineId;  
-                m_ConnectionMutex.unlock();
-                updateUrlCache( hostUrl, onlineId );
-            }       
+            m_ConnectionMutex.lock();
+            m_DefaultHostIdList[hostType] = onlineId;  
+            m_ConnectionMutex.unlock();
+            updateUrlCache( hostUrl, onlineId );     
         }
 
         if( needOnlineId )
@@ -500,13 +496,8 @@ bool ConnectionMgr::urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& online
     VxUrl testUrl( hostUrl );
     if( testUrl.hasValidOnlineId() )
     {
-        VxGUID testGuid;
-        testGuid.fromOnlineIdString( testUrl.getOnlineId().c_str() );
-        if( testGuid.isVxGUIDValid() )
-        {
-            onlineId = testGuid;
-            foundId = true;
-        }
+        onlineId = testUrl.getOnlineId();
+        foundId = true;
     }
 
     if( !foundId )

@@ -1081,6 +1081,7 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
             if( !netHostSetting.getExternIpAddr().empty() && 1 == netHostSetting.getFirewallTestType() )
             {
                 getMyPktAnnounce().setOnlineIpAddress( netHostSetting.getExternIpAddr().c_str() );
+                setPktAnnLastModTime( GetTimeStampMs() );
             }
         }
 
@@ -1088,6 +1089,7 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
         {
             IGoTv::getIGoTv().getPeerMgr().stopListening();
             getMyPktAnnounce().setMyOnlinePort( netHostSetting.getTcpPort() );
+            setPktAnnLastModTime( GetTimeStampMs() );
             getNetStatusAccum().setIpPort( netHostSetting.getTcpPort() );
             IGoTv::getIGoTv().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
         }

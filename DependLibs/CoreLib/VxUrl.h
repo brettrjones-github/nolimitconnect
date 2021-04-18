@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
 // Copyright (C) 2017 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -14,9 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <CoreLib/config_corelib.h>
-
-#include <string>
+#include <CoreLib/VxGUID.h>
 
 class VxUrl
 {
@@ -33,11 +30,11 @@ public:
 	static bool					isURL( std::string& strFile );
 
 	void						setUrl( const char * pUrl );
-    void						setUrl( std::string url )				{ setUrl( url.c_str() ); }
-	std::string&				getUrl( void )							{ return m_Url; }
+    void						setUrl( std::string url )				    { setUrl( url.c_str() ); }
+	std::string&				getUrl( void )							    { return m_Url; }
 
 	void						setFileName( const std::string& fileName );
-	std::string&				getFileName( void )						{ return m_FileName; }
+	std::string&				getFileName( void )						    { return m_FileName; }
 	const char *				getProtocol( void );
 
 	const char *				getUser( void );
@@ -50,8 +47,9 @@ public:
 	const char *				getPath( void );
 	const char *				getQuery( void );
 	const char *				getFragment( void );
-    std::string				    getOnlineId( void ) { return m_strOnlineId.empty() ? "" : m_strOnlineId.c_str(); }
-    bool                        hasValidOnlineId( void );
+    VxGUID&                     getOnlineId( void )                         { return m_OnlineId; }
+    std::string				    getOnlineIdStr( void )                      { return m_strOnlineId.empty() ? "" : m_strOnlineId.c_str(); }
+    bool                        hasValidOnlineId( void )                    { return m_OnlineId.isVxGUIDValid(); }
     bool                        validateUrl( bool onlineIdMustBeValid );
 
 	bool						isAbsoluteUrl();
@@ -60,20 +58,21 @@ public:
 	const char *				getHostURL( const char * host, int port, const char * uri, std::string& buf );
 
 protected:
-	std::string					m_Url;
-	std::string					m_FileName;
-	std::string					m_FileExtension;
-	std::string					m_ShareName;
-	std::string					m_strProtocol;
-	std::string					m_strHost;
-	uint16_t					m_Port;
-	std::string					m_strPath;
-	std::string					m_strUser;
-	std::string					m_strPassword;
+    std::string					m_Url{ "" };
+	std::string					m_FileName{ "" };
+	std::string					m_FileExtension{ "" };
+	std::string					m_ShareName{ "" };
+	std::string					m_strProtocol{ "" };
+	std::string					m_strHost{ "" };
+    uint16_t					m_Port{ 80 };
+	std::string					m_strPath{ "" };
+	std::string					m_strUser{ "" };
+	std::string					m_strPassword{ "" };
 
-	std::string					m_strQuery;
-	std::string					m_strFragment;
-    std::string					m_strOnlineId;
+	std::string					m_strQuery{ "" };
+	std::string					m_strFragment{ "" };
+    std::string					m_strOnlineId{ "" };
+    VxGUID                      m_OnlineId;
 };
 
 

@@ -162,9 +162,9 @@ public:
 	bool                        isLoopBack( void ) const;
 	bool					    isLocalAddress( void ) const;
 
-	void                        setIp( const char * pIpAddress );
+	bool                        setIp( const char * pIpAddress );
 	// note.. u32IPv4Addr must be in host order
-	void                        setIp( uint32_t u32IPv4Addr, bool bIsHostOrder = false );
+    bool                        setIp( uint32_t u32IPv4Addr, bool bIsHostOrder = false );
 	//! returns port in host order
 	uint16_t                    setIp( struct sockaddr_storage& ipAddr );
 	//! returns port in host order
