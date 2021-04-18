@@ -35,6 +35,8 @@ public:
     EHostType                   getHostType( void )                         { return m_HostType; }
     std::string                 getHostUrl( void );
 
+    VxGUID&					    getOnlineId( void )                         { return m_OnlineId; }
+
     PluginSetting&				getPluginSetting( void )                    { return m_PluginSetting; }
     void						setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
     VxGUID&					    getSessionId( void )                        { return m_SessionId; }
@@ -46,6 +48,7 @@ protected:
 	//=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };
 	VxGUID					    m_SessionId;
+    VxGUID					    m_OnlineId;
     VxNetIdent			    	m_HostIdent;
     PluginSetting               m_PluginSetting;
     QWidget*					m_Widget{ nullptr };

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ExampleTests">
+      <UniqueIdentifier>{39a857f0-4fa4-4428-a545-d45b19dad164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PktTests">
+      <UniqueIdentifier>{d8242e69-9101-46ac-becb-4f7cf4ddc4ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CoreLibTests">
+      <UniqueIdentifier>{26f21a78-b8ed-4ef3-8013-dfd624141374}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\GoogleTestRunnerMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ExampleTests\ExampleTests.cpp">
+      <Filter>Source Files\ExampleTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PktTests\PktTests.cpp">
+      <Filter>Source Files\PktTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreLibTests\CoreLibTests.cpp">
+      <Filter>Source Files\CoreLibTests</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

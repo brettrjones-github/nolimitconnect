@@ -90,7 +90,7 @@ GuiHostSession * HostListWidget::findSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-HostListItem* HostListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
+HostListItem* HostListWidget::findListEntryWidgetByHostId( EHostType hostType, VxGUID& onlineId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -99,7 +99,7 @@ HostListItem* HostListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId 
         if( hostItem )
         {
             GuiHostSession * hostSession = hostItem->getHostSession();
-            if( hostSession && ( hostSession->getSessionId() == sessionId ) )
+            if( hostSession && hostSession->getOnlineId() == onlineId && hostType == hostSession->getHostType() )
             {
                 return hostItem;
             }
@@ -119,7 +119,7 @@ HostListItem* HostListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
         if( hostItem )
         {
             GuiHostSession * hostSession = hostItem->getHostSession();
-            if( hostSession && ( hostSession->getHostIdent().getMyOnlineId() == onlineId ) )
+            if( hostSession && hostSession->getHostIdent().getMyOnlineId() == onlineId )
             {
                 return hostItem;
             }
@@ -201,7 +201,7 @@ void HostListWidget::addHostAndSettingsToList( EHostType hostType, VxGUID& sessi
 //============================================================================
 HostListItem* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSession )
 {
-    HostListItem* hostItem = findListEntryWidgetBySessionId( hostSession->getSessionId() );
+    HostListItem* hostItem = findListEntryWidgetByHostId( hostSession->getHostType(), hostSession->getOnlineId() );
     if( hostItem )
     {
         GuiHostSession* hostOldSession = hostItem->getHostSession();

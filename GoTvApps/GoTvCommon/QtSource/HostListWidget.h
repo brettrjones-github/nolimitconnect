@@ -43,7 +43,7 @@ public:
     HostListItem*               addOrUpdateHostSession( GuiHostSession* hostSession );
 
     GuiHostSession*             findSession( VxGUID& lclSessionId );
-    HostListItem*               findListEntryWidgetBySessionId( VxGUID& sessionId );
+    HostListItem*               findListEntryWidgetByHostId( EHostType hostType, VxGUID& onlineId );
     HostListItem*               findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
 signals:
