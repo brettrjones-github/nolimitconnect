@@ -44,7 +44,7 @@ public:
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
-    void                        onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent, EHostType hostType );
+    void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType );
 
 protected:
     void						clearUserHostInfoList( void );

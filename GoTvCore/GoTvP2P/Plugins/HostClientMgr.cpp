@@ -37,7 +37,7 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinSuccess );
-            onHostJoined( sktBase, netIdent, hostReply->getHostType() );    
+            onUserJoinedHost( sktBase, netIdent, hostReply->getSessionId(), m_Plugin.getPluginType(), hostReply->getHostType() );    
         }
         else if( ePluginAccessOk == hostReply->getAccessState() )
         {
@@ -93,10 +93,10 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void HostClientMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent, EHostType hostType )
+void HostClientMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& sessionId, EPluginType pluginType, EHostType hostType )
 {
     m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
-    m_Engine.getUserHostMgr().onHostJoined( sktBase, netIdent, hostType );
+    m_Engine.getUserHostMgr().onUserJoinedHost( sktBase, netIdent, sessionId, pluginType, hostType );
 }
 
 //============================================================================

@@ -187,9 +187,8 @@ void UserHostMgr::clearUserHostInfoList( void )
     m_UserHostInfoList.clear();
 }
 
-
 //============================================================================
-void UserHostMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent, EHostType hostType )
+void UserHostMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType )
 {
     // TODO IMPLEMENT
     vx_assert( false );

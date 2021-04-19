@@ -31,6 +31,7 @@
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
 #include <GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.h>
 
 #include <GuiInterface/IDefs.h>
@@ -112,6 +113,7 @@ public:
     OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
     OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
     OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
+    HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
     UserHostMgr&                getUserHostMgr( void )                          { return m_UserHostMgr; }
     VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
@@ -686,6 +688,7 @@ protected:
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
     RunUrlAction&			    m_RunUrlAction;
+    HostJoinMgr&				m_HostJoinMgr;
     UserHostMgr&				m_UserHostMgr;
     VxSktLoopback               m_SktLoopback;
 

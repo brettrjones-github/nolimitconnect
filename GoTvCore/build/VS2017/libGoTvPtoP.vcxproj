@@ -560,6 +560,9 @@
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32filesystem.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfoDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDefs.cpp" />
@@ -901,6 +904,10 @@
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\WebRtcTypeDefs.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32filesystem.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinCallbackInterface.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfoDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h" />

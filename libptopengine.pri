@@ -149,6 +149,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.h \
     $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinInfoDb.h \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostedEntry.h \
@@ -429,6 +433,9 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/wav_header.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinInfoDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.cpp \
