@@ -91,11 +91,12 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
     PktHostJoinReply joinReply;
     if( joinReq->isValidPkt() )
     {
+        joinReply.setHostType( joinReq->getHostType() );
         joinReply.setSessionId( joinReq->getSessionId() );
         joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
         if( ePluginAccessOk == joinReply.getAccessState() )
         {
-            m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId() );
+            m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
         }
 
         txPacket( netIdent, sktBase, &joinReply );

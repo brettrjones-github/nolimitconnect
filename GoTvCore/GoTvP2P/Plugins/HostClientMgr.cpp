@@ -36,19 +36,18 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
     {
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
-            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinSuccess );
-            onHostJoined( sktBase, netIdent );
-       
+            m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinSuccess );
+            onHostJoined( sktBase, netIdent, hostReply->getHostType() );    
         }
         else if( ePluginAccessOk == hostReply->getAccessState() )
         {
-            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinFailPermission );
-            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+            m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinFailPermission );
+            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, HostTypeToConnectJoinReason( hostReply->getHostType() ) );
         }
         else
         {
-            m_Engine.getToGui().toGuiHostJoinStatus( eHostTypeChatRoom, netIdent->getMyOnlineId(), eHostJoinFail, DescribePluginAccess( hostReply->getAccessState() ) );
-            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, eConnectReasonChatRoomJoin );
+            m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinFail, DescribePluginAccess( hostReply->getAccessState() ) );
+            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, HostTypeToConnectJoinReason( hostReply->getHostType() ) );
         }
     }
     else
@@ -94,10 +93,10 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void HostClientMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
+void HostClientMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent, EHostType hostType )
 {
     m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
-    //addContact(sktBase, netIdent );
+    m_Engine.getUserHostMgr().onHostJoined( sktBase, netIdent, hostType );
 }
 
 //============================================================================
@@ -191,7 +190,7 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
                 // BRJ temporary for debugging
                 // TODO REMOVE
                 // searchReq.setIsLoopback( true );
-                if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, ePluginTypeHostNetwork ) )
+                if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, m_Plugin.getDestinationPluginOverride( hostType ) ) )
                 {
                     LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onConnectToHostSuccess failed send PktHostSearchReq" );
                 }

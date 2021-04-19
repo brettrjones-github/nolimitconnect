@@ -156,7 +156,10 @@ bool HostServerMgr::removeClient( VxGUID& onlineId )
 }
 
 //============================================================================
-void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId )
+void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
     onUserOnline( sktBase, netIdent, sessionId );
+    // TODO BRJ implement join as offers
+    // TODO BRJ keep joined members in database
+    vx_assert( false );
 }

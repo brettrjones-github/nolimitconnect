@@ -59,6 +59,7 @@ void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& plu
     m_Engine.lockAnnouncePktAccess();
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
     pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyOnlineUrl() );
+    m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
     m_Engine.unlockAnnouncePktAccess();
     m_PluginSetting = pluginSetting;
     m_PluginSetting.setUpdateTimestampToNow();
@@ -74,12 +75,15 @@ void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& plu
 //============================================================================
 void PluginRandomConnectHost::sendHostRandomConnectAnnounce( void )
 {
-    if( !m_HostAnnounceBuilt && m_Engine.isDirectConnectReady() )
+    if( m_Engine.isDirectConnectReady() )
     {
-        PluginSetting pluginSetting;
-        if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+        if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
-            buildHostRandomConnectAnnounce( pluginSetting );
+            PluginSetting pluginSetting;
+            if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
+            {
+                buildHostRandomConnectAnnounce( pluginSetting );
+            }
         }
     }
 

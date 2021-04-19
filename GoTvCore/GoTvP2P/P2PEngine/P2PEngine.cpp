@@ -104,6 +104,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_UserHostMgr( *new UserHostMgr( *this, "UserHostMgrDb.db3", "UserHostStateDb.db3" ) )
     , m_SktLoopback( *this )
 {
+    m_PeerMgr.setSktLoopback( &m_SktLoopback );
     m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
 }
 

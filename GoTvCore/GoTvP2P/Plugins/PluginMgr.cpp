@@ -915,9 +915,10 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
 
     pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );
 
-    if( pktHdr->getDestOnlineId() == m_Engine.getMyOnlineId() )
+    if( onlineId == m_Engine.getMyOnlineId() )
     {
         // destination is ourself
+        pktHdr->setDestOnlineId( onlineId );
         handleNonSystemPackets( sktBase, pktHdr );
         return true;
     }

@@ -401,7 +401,6 @@ void HostBaseMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId,
     {
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
         LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s success Default function should be overridden", DescribeConnectReason( connectReason ), DescribeHostType( hostType ) );
-        //sendSearchRequest( hostType, sessionId, sktBase, onlineId, connectReason );
     }
     else
     {
@@ -759,8 +758,7 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
     PktHostJoinReq pktJoin;
     // temp for development
     //pktJoin.setIsLoopback( true );
-
-
+ 
     pktJoin.setHostType( hostType );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
@@ -772,31 +770,6 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }
-
-/*
-//============================================================================
-void HostBaseMgr::sendSearchRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
-{
-    vx_assert( nullptr != sktBase );
-    PktSearchReq pktSearch;
-    // temp for development
-    //pktJoin.setIsLoopback( true );
-
-
-//    pktSearch.setHostType( hostType );
-    if( m_Plugin.txPacket( onlineId, sktBase, &pktSearch ) )
-    {
-        LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::sendSearchRequest %s %s success pkt send", DescribeHostType( hostType ), DescribeConnectReason( connectReason ));
-        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchSendingSearchRequest );
-    }
-    else
-    {
-        LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::sendSearchRequest %s %s failed pkt send", DescribeHostType( hostType ), DescribeConnectReason( connectReason ));
-        m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchSendSearchRequestFailed );
-        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
-    }
-}
-*/
 
 //============================================================================
 bool HostBaseMgr::addContact( VxSktBase * sktBase, VxNetIdent * netIdent )

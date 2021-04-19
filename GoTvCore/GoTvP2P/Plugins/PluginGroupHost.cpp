@@ -63,6 +63,7 @@ void PluginGroupHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
     m_Engine.lockAnnouncePktAccess();
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
     pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyOnlineUrl() );
+    m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
     m_Engine.unlockAnnouncePktAccess();
     m_PluginSetting = pluginSetting;
     m_PluginSetting.setUpdateTimestampToNow();

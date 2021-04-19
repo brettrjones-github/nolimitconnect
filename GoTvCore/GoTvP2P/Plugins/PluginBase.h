@@ -202,6 +202,8 @@ public:
 	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
 	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, VxNetIdent * netIdent )				{ return -1; }
 
+    virtual EPluginType         getDestinationPluginOverride( EHostType hostType );
+
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
     virtual bool                generateSettingPkt( PluginSetting& pluginSetting );

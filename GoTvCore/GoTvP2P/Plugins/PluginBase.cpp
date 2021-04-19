@@ -428,3 +428,91 @@ void PluginBase::fromGuiAppResume( void )
 {
 	m_AppIsPaused = false;
 }
+
+//============================================================================ 
+EPluginType PluginBase::getDestinationPluginOverride( EHostType hostType )
+{
+    if( eHostTypeNetwork == hostType )
+    {
+        // no matter which plugin we send from if the destination host is network host
+        // the always set the packet plugin destination to network host
+        if( ePluginTypeHostNetwork == m_ePluginType )
+        {
+            LogMsg( LOG_ERROR, "Tried to send to host %s from plugin %s", DescribeHostType( hostType ), DescribePluginType( m_ePluginType ) );
+            vx_assert( false );
+            return ePluginTypeInvalid;
+        }
+
+        return ePluginTypeHostNetwork;
+    }
+
+    if( eHostTypePeerUser == hostType )
+    {
+        // directly connected peer users can only access peer type plugins (Not Client/Host)
+        return ePluginTypeInvalid;
+    }
+
+    if( eHostTypeGroup == hostType )
+    {
+        switch( m_ePluginType )
+        {
+        case ePluginTypeClientGroup:
+            return ePluginTypeHostGroup;
+        case ePluginTypeHostGroup:
+            return ePluginTypeClientGroup;
+        default:
+            LogMsg( LOG_ERROR, "Tried to send to host %s from plugin %s", DescribeHostType( hostType ), DescribePluginType( m_ePluginType ) );
+            vx_assert( false );
+            return ePluginTypeInvalid;
+        }
+    }
+
+    if( eHostTypeChatRoom == hostType )
+    {
+        switch( m_ePluginType )
+        {
+        case ePluginTypeClientChatRoom:
+            return ePluginTypeHostChatRoom;
+        case ePluginTypeHostChatRoom:
+            return ePluginTypeClientChatRoom;
+        default:
+            LogMsg( LOG_ERROR, "Tried to send to host %s from plugin %s", DescribeHostType( hostType ), DescribePluginType( m_ePluginType ) );
+            vx_assert( false );
+            return ePluginTypeInvalid;
+        }
+    }
+
+    if( eHostTypeRandomConnect == hostType )
+    {
+        switch( m_ePluginType )
+        {
+        case ePluginTypeClientRandomConnect:
+            return ePluginTypeHostRandomConnect;
+        case ePluginTypeHostRandomConnect:
+            return ePluginTypeClientRandomConnect;
+        default:
+            LogMsg( LOG_ERROR, "Tried to send to host %s from plugin %s", DescribeHostType( hostType ), DescribePluginType( m_ePluginType ) );
+            vx_assert( false );
+            return ePluginTypeInvalid;
+        }
+    }
+
+    if( eHostTypeConnectTest == hostType )
+    {
+        switch( m_ePluginType )
+        {
+        case ePluginTypeClientConnectTest:
+            return ePluginTypeHostConnectTest;
+        case ePluginTypeHostConnectTest:
+            return ePluginTypeClientConnectTest;
+        default:
+            LogMsg( LOG_ERROR, "Tried to send to host %s from plugin %s", DescribeHostType( hostType ), DescribePluginType( m_ePluginType ) );
+            vx_assert( false );
+            return ePluginTypeInvalid;
+        }
+    }
+
+    LogMsg( LOG_ERROR, "Tried to send to Unknown Host Type %d from plugin %s", hostType, DescribePluginType( m_ePluginType ) );
+    vx_assert( false );
+    return ePluginTypeInvalid;
+}

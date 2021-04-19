@@ -15,13 +15,13 @@
 
 #include "UserHostInfoDb.h"
 
-#include <CoreLib/VxThread.h>
-#include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
 
 class UserHostInfo;
 class UserHostCallbackInterface;
 class P2PEngine;
+class VxSktBase;
+class VxNetIdent;
 
 class UserHostMgr 
 {
@@ -43,6 +43,8 @@ public:
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
+
+    void                        onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent, EHostType hostType );
 
 protected:
     void						clearUserHostInfoList( void );

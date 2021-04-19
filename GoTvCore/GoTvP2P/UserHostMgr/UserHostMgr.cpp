@@ -186,3 +186,11 @@ void UserHostMgr::clearUserHostInfoList( void )
 
     m_UserHostInfoList.clear();
 }
+
+
+//============================================================================
+void UserHostMgr::onHostJoined( VxSktBase * sktBase, VxNetIdent * netIdent, EHostType hostType )
+{
+    // TODO IMPLEMENT
+    vx_assert( false );
+}

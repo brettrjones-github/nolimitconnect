@@ -33,7 +33,7 @@ public:
     virtual bool				lockSkt( VxSktBase* sktBase ) override;
     virtual void				unlockSkt( VxSktBase* sktBase ) override;
 
-	VxClientMgr&				getClientMgr( void )			{ return m_ClientMgr; }
+	VxClientMgr&				getClientMgr( void )			                            { return m_ClientMgr; }
 
     virtual void				setReceiveCallback( VX_SKT_CALLBACK pfnReceive, void * pvUserData ) override;
 	void						setLocalIp( InetAddress& newLocalIp );
@@ -49,14 +49,16 @@ public:
 	virtual VxSktConnect *		createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port );
 
 	virtual bool				txPacket(	VxSktBase *			sktBase,
-											VxGUID&				destOnlineId,			// online id of destination user
-											VxPktHdr *			pktHdr, 				// packet to send
-											bool				bDisconnect = false );	// if true disconnect after send
+											VxGUID&				destOnlineId,			    // online id of destination user
+											VxPktHdr *			pktHdr, 				    // packet to send
+											bool				bDisconnect = false );	    // if true disconnect after send
 	virtual bool				txPacketWithDestId(	VxSktBase *		sktBase,
 													VxPktHdr *		pktHdr, 				// packet to send
 													bool			bDisconnect = false );	// if true disconnect after send
 
     virtual void                dumpSocketStats( const char *reason = nullptr ) override;
+
+    virtual void                setSktLoopback( VxSktBase * sktLoopback ) override          { m_SktLoopback = sktLoopback; m_ClientMgr.setSktLoopback( sktLoopback ); }
 
 protected:
 	VxClientMgr					m_ClientMgr;

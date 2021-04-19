@@ -78,7 +78,7 @@ public:
 	virtual void				addSkt( VxSktBase * sktBase );
 	//! remove a socket from management
 	virtual RCODE				removeSkt(	VxSktBase *	sktBase,				// skt to remove
-											bool		bDelete = true );	// if true delete the skt
+											bool		bDelete = true );	    // if true delete the skt
 	virtual bool				isSktActive( VxSktBase * sktBase );
 
     //! move to erase/delete when safe to do so
@@ -89,6 +89,8 @@ public:
     virtual void				unlockSkt( VxSktBase* sktBase );
 
     virtual void                dumpSocketStats( const char* reason = nullptr );
+
+    virtual void                setSktLoopback( VxSktBase * sktLoopback )       { m_SktLoopback = sktLoopback; }
 
 	//=== vars ===//
 	RCODE						m_rcLastError{ 0 };
@@ -111,6 +113,6 @@ public:
 
 protected:
 	virtual void				deleteAllSockets();
-
+    VxSktBase *                 m_SktLoopback{ nullptr };	        
 };
 

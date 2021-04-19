@@ -181,6 +181,12 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 bool VxSktBaseMgr::isSktActive( VxSktBase * sktBase )
 {
 	bool isActive = false;
+    vx_assert( sktBase );
+    if( sktBase == m_SktLoopback )
+    {
+        return true;
+    }
+
 	std::vector<VxSktBase *>::iterator iter;
 	sktBaseMgrLock();
 	for( iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
