@@ -15,8 +15,6 @@
 
 #include "BaseInfo.h"
 
-#include <GuiInterface/IDefs.h>
-
 #include <CoreLib/VxUrl.h>
 
 class BaseHostInfo : public BaseInfo

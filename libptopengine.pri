@@ -46,6 +46,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.h \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseJoinInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.h \
@@ -332,10 +333,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.h \
 	$$PWD/GoTvCore/GoTvP2P/User/User.h \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostCallbackInterface.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfo.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfoDb.h \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfoDb.h \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
@@ -361,6 +362,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseJoinInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.cpp \
@@ -621,9 +623,9 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/User.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.cpp \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfo.cpp \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostInfoDb.cpp \
-	$$PWD/GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfoDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \

@@ -25,14 +25,14 @@ class GuiUserMgr;
 class VxNetIdent;
 class VxSktBase;
 
-class GuiUserHost : public QWidget
+class GuiUserJoin : public QWidget
 {
 public:
-    GuiUserHost() = delete;
-    GuiUserHost( AppCommon& app );
-    GuiUserHost( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online = false );
-    GuiUserHost( const GuiUserHost& rhs );
-	virtual ~GuiUserHost() = default;
+    GuiUserJoin() = delete;
+    GuiUserJoin( AppCommon& app );
+    GuiUserJoin( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online = false );
+    GuiUserJoin( const GuiUserJoin& rhs );
+	virtual ~GuiUserJoin() = default;
 
     void                        setNetIdent( VxNetIdent* netIdent );
     VxNetIdent*                 getNetIdent( void )                     { return m_NetIdent; }

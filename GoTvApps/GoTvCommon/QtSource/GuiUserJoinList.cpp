@@ -12,56 +12,56 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GuiUserHostList.h"
-#include "GuiUserHost.h"
+#include "GuiUserJoinList.h"
+#include "GuiUserJoin.h"
 
 //============================================================================
-GuiUserHostList::GuiUserHostList()
-: m_UserHostList()
+GuiUserJoinList::GuiUserJoinList()
+: m_UserJoinList()
 {
 }
 
 //============================================================================
-GuiUserHostList::GuiUserHostList( const GuiUserHostList& rhs )
-    : m_UserHostList( rhs.m_UserHostList )
+GuiUserJoinList::GuiUserJoinList( const GuiUserJoinList& rhs )
+    : m_UserJoinList( rhs.m_UserJoinList )
 {
 }
 
 //============================================================================
-GuiUserHostList& GuiUserHostList::operator =( const GuiUserHostList& rhs )
+GuiUserJoinList& GuiUserJoinList::operator =( const GuiUserJoinList& rhs )
 {
     if( this != &rhs )
     {
-        m_UserHostList          = rhs.m_UserHostList;
+        m_UserJoinList          = rhs.m_UserJoinList;
     }
 
     return *this;
 }
 
 //============================================================================
-bool GuiUserHostList::addUserHostIfDoesntExist( GuiUserHost* guiUserHost )
+bool GuiUserJoinList::addUserJoinIfDoesntExist( GuiUserJoin* guiUserJoin )
 {
-	if( doesUserHostExist( guiUserHost ) )
+	if( doesUserJoinExist( guiUserJoin ) )
 	{
 		return false;
 	}
 	
-	addUserHost( guiUserHost );
+	addUserJoin( guiUserJoin );
 	return true;
 }
 
 //============================================================================
-void GuiUserHostList::addUserHost( GuiUserHost* guiUserHost )
+void GuiUserJoinList::addUserJoin( GuiUserJoin* guiUserJoin )
 {
-    m_UserHostList.push_back( guiUserHost );
+    m_UserJoinList.push_back( guiUserJoin );
 }
 
 //============================================================================
-bool GuiUserHostList::doesUserHostExist( GuiUserHost* guiUserHost )
+bool GuiUserJoinList::doesUserJoinExist( GuiUserJoin* guiUserJoin )
 {
-	for( auto thumb : m_UserHostList )
+	for( auto thumb : m_UserJoinList )
 	{
-		if( guiUserHost == thumb )
+		if( guiUserJoin == thumb )
 		{
 			return true;
 		}
@@ -71,9 +71,9 @@ bool GuiUserHostList::doesUserHostExist( GuiUserHost* guiUserHost )
 }
 
 //============================================================================
-GuiUserHost* GuiUserHostList::findUserHost( VxGUID& thumbId )
+GuiUserJoin* GuiUserJoinList::findUserJoin( VxGUID& thumbId )
 {
-    for( auto iter = m_UserHostList.begin(); iter != m_UserHostList.end(); ++iter )
+    for( auto iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
     {
         if( (*iter)->getMyOnlineId() == thumbId )
         {
@@ -85,27 +85,27 @@ GuiUserHost* GuiUserHostList::findUserHost( VxGUID& thumbId )
 }
 
 //============================================================================
-bool GuiUserHostList::removeUserHost( GuiUserHost* guiUserHost )
+bool GuiUserJoinList::removeUserJoin( GuiUserJoin* guiUserJoin )
 {
-    if( guiUserHost )
+    if( guiUserJoin )
     {
-        return removeUserHost( guiUserHost->getMyOnlineId() );
+        return removeUserJoin( guiUserJoin->getMyOnlineId() );
     }
 
     return false;
 }
 
 //============================================================================
-bool GuiUserHostList::removeUserHost( VxGUID& thumbId )
+bool GuiUserJoinList::removeUserJoin( VxGUID& thumbId )
 {
     bool thumbExisted = false;
-    std::vector<GuiUserHost*>::iterator iter;
-    for( iter = m_UserHostList.begin(); iter != m_UserHostList.end(); ++iter )
+    std::vector<GuiUserJoin*>::iterator iter;
+    for( iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
     {
         if( (*iter)->getMyOnlineId() == thumbId )
         {
             thumbExisted = true;
-            m_UserHostList.erase( iter );
+            m_UserJoinList.erase( iter );
             break;
         }
     }
@@ -114,17 +114,17 @@ bool GuiUserHostList::removeUserHost( VxGUID& thumbId )
 }
 
 //============================================================================
-void GuiUserHostList::clearList( void )
+void GuiUserJoinList::clearList( void )
 {
-	m_UserHostList.clear();
+	m_UserJoinList.clear();
 }
 
 //============================================================================
-void GuiUserHostList::copyTo( GuiUserHostList& destUserHostList )
+void GuiUserJoinList::copyTo( GuiUserJoinList& destUserJoinList )
 {
-	std::vector<GuiUserHost*>& thumbList = destUserHostList.getUserHostList();
-	std::vector<GuiUserHost*>::iterator iter;
-	for( iter = m_UserHostList.begin(); iter != m_UserHostList.end(); ++iter )
+	std::vector<GuiUserJoin*>& thumbList = destUserJoinList.getUserJoinList();
+	std::vector<GuiUserJoin*>::iterator iter;
+	for( iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
 	{
 		thumbList.push_back( *iter );
 	}

@@ -32,7 +32,7 @@
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 #include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
-#include <GoTvCore/GoTvP2P/UserHostMgr/UserHostMgr.h>
+#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
 
 #include <GuiInterface/IDefs.h>
 #include <GuiInterface/IFromGui.h>
@@ -114,7 +114,7 @@ public:
     OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
     OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
     HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
-    UserHostMgr&                getUserHostMgr( void )                          { return m_UserHostMgr; }
+    UserJoinMgr&                getUserJoinMgr( void )                          { return m_UserJoinMgr; }
     VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
@@ -689,7 +689,7 @@ protected:
 	IsPortOpenTest&				m_IsPortOpenTest;
     RunUrlAction&			    m_RunUrlAction;
     HostJoinMgr&				m_HostJoinMgr;
-    UserHostMgr&				m_UserHostMgr;
+    UserJoinMgr&				m_UserJoinMgr;
     VxSktLoopback               m_SktLoopback;
 
 	RcScan						m_RcScan;

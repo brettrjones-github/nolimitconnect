@@ -13,12 +13,12 @@
 //============================================================================
 
 #include "AppCommon.h"
-#include "GuiUserHost.h"
+#include "GuiUserJoin.h"
 #include "GuiUserMgr.h"
 #include "GuiParams.h"
 
 //============================================================================
-GuiUserHost::GuiUserHost( AppCommon& app )
+GuiUserJoin::GuiUserJoin( AppCommon& app )
     : QWidget( &app )
     , m_MyApp( app )
     , m_GuiUserMgr( app.getUserMgr() )
@@ -26,7 +26,7 @@ GuiUserHost::GuiUserHost( AppCommon& app )
 }
 
 //============================================================================
-GuiUserHost::GuiUserHost( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online )
+GuiUserJoin::GuiUserJoin( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online )
     : QWidget( &app )
     , m_MyApp( app )
     , m_GuiUserMgr( m_MyApp.getUserMgr() )
@@ -38,7 +38,7 @@ GuiUserHost::GuiUserHost( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionI
 }
 
 //============================================================================
-GuiUserHost::GuiUserHost( const GuiUserHost& rhs )
+GuiUserJoin::GuiUserJoin( const GuiUserJoin& rhs )
     : m_MyApp( rhs.m_MyApp )
     , m_GuiUserMgr( m_MyApp.getUserMgr() )
     , m_NetIdent( rhs.m_NetIdent )
@@ -50,25 +50,25 @@ GuiUserHost::GuiUserHost( const GuiUserHost& rhs )
 }
 
 //============================================================================
-bool GuiUserHost::isMyself( void )
+bool GuiUserJoin::isMyself( void )
 {
     return getMyOnlineId() == m_GuiUserMgr.getMyOnlineId();
 }
 
 //============================================================================
-QString GuiUserHost::describeMyFriendshipToHim( void )
+QString GuiUserJoin::describeMyFriendshipToHim( void )
 {
     return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getMyFriendshipToHim() : eFriendStateIgnore );
 }
 
 //============================================================================
-QString GuiUserHost::describeHisFriendshipToMe( void )
+QString GuiUserJoin::describeHisFriendshipToMe( void )
 {
     return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getHisFriendshipToMe() : eFriendStateIgnore );
 }
 
 //============================================================================
-void GuiUserHost::setNetIdent( VxNetIdent* netIdent )
+void GuiUserJoin::setNetIdent( VxNetIdent* netIdent )
 { 
     if( netIdent )
     {
@@ -80,18 +80,18 @@ void GuiUserHost::setNetIdent( VxNetIdent* netIdent )
     }
     else
     {
-        LogMsg( LOG_ERROR, "GuiUserHost::setNetIdent null ident" );
+        LogMsg( LOG_ERROR, "GuiUserJoin::setNetIdent null ident" );
     }
 }
 
 //============================================================================
-void GuiUserHost::setOnlineStatus( bool isOnline )
+void GuiUserJoin::setOnlineStatus( bool isOnline )
 {
     /*
     if( isOnline != m_IsOnline )
     {
         m_IsOnline = isOnline;
-        m_GuiUserMgr.onUserHostOnlineStatusChange( this, m_IsOnline );
+        m_GuiUserMgr.onUserJoinOnlineStatusChange( this, m_IsOnline );
         if( !m_IsOnline )
         {
             m_SessionId.clearVxGUID();
@@ -101,13 +101,13 @@ void GuiUserHost::setOnlineStatus( bool isOnline )
 }
 
 //============================================================================
-bool GuiUserHost::isInSession( void )
+bool GuiUserJoin::isInSession( void )
 {
     return m_IsOnline && m_SessionId.isVxGUIDValid();
 }
 
 //============================================================================
-void GuiUserHost::addHostType( EHostType hostType )
+void GuiUserJoin::addHostType( EHostType hostType )
 {
     if( hostType > eHostTypeUnknown && hostType < eMaxHostType )
     {

@@ -187,10 +187,10 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHost.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostList.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostMgr.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostSession.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoin.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinList.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinMgr.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinSession.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.h \
@@ -277,8 +277,8 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateInterface.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateClient.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateInterface.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListItem.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserJoinListItem.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserJoinListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListItem.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
@@ -503,10 +503,10 @@ SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHost.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostList.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostMgr.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserHostSession.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoin.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinList.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinMgr.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinSession.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.cpp \
@@ -601,8 +601,8 @@ SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiUserUpdateClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiThumbUpdateClient.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListItem.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/UserHostListWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserJoinListItem.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/UserJoinListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListItem.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
@@ -795,7 +795,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailChooseWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/UserHostListItem.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/UserJoinListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/UserListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui
 

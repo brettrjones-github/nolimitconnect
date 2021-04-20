@@ -15,39 +15,39 @@
 
 #include <vector>
 
-class GuiUserHost;
+class GuiUserJoin;
 class VxGUID;
 
-class GuiUserHostList
+class GuiUserJoinList
 {
 public:
-	GuiUserHostList();
-	~GuiUserHostList() = default;
+	GuiUserJoinList();
+	~GuiUserJoinList() = default;
 
     //! copy constructor
-    GuiUserHostList( const GuiUserHostList & rhs );
+    GuiUserJoinList( const GuiUserJoinList & rhs );
     //! copy operator
-    GuiUserHostList& operator =( const GuiUserHostList & rhs );
+    GuiUserJoinList& operator =( const GuiUserJoinList & rhs );
 
-	int							size( void )						{ return (int)m_UserHostList.size(); }
+	int							size( void )						{ return (int)m_UserJoinList.size(); }
 
-	void						addUserHost( GuiUserHost* guiUserHost );
+	void						addUserJoin( GuiUserJoin* guiUserJoin );
 
-    bool                        removeUserHost( GuiUserHost* guiUserHost );
-    bool						removeUserHost( VxGUID& thumbId );
+    bool                        removeUserJoin( GuiUserJoin* guiUserJoin );
+    bool						removeUserJoin( VxGUID& thumbId );
 
-    GuiUserHost*					findUserHost( VxGUID& thumbId );
+    GuiUserJoin*					findUserJoin( VxGUID& thumbId );
 
 	// returns false if guid already exists
-	bool						addUserHostIfDoesntExist( GuiUserHost* guiUserHost );
+	bool						addUserJoinIfDoesntExist( GuiUserJoin* guiUserJoin );
 	// return true if guid is in list
-	bool						doesUserHostExist( GuiUserHost* guiUserHost );
+	bool						doesUserJoinExist( GuiUserJoin* guiUserJoin );
 
 	void						clearList( void );
 
-	std::vector<GuiUserHost*>&		getUserHostList( void )					{ return m_UserHostList; }
-	void						copyTo( GuiUserHostList& destUserHostList );
+	std::vector<GuiUserJoin*>&		getUserJoinList( void )					{ return m_UserJoinList; }
+	void						copyTo( GuiUserJoinList& destUserJoinList );
 
 protected:
-	std::vector<GuiUserHost*>		m_UserHostList;
+	std::vector<GuiUserJoin*>		m_UserJoinList;
 };

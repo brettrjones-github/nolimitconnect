@@ -22,7 +22,7 @@
 #include "FriendList.h"
 #include "GuiConnectMgr.h"
 #include "GuiOfferMgr.h"
-#include "GuiUserHostMgr.h"
+#include "GuiUserJoinMgr.h"
 #include "GuiUserMgr.h"
 #include "GuiThumbMgr.h"
 #include "MyIcons.h"
@@ -133,7 +133,7 @@ public:
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
     GuiConnectMgr&              getConnectMgr( void )						{ return m_ConnectMgr; }
-    GuiUserHostMgr&             getUserHostMgr( void )						{ return m_UserHostMgr; }
+    GuiUserJoinMgr&             getUserJoinMgr( void )						{ return m_UserJoinMgr; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
@@ -729,7 +729,7 @@ private:
     GuiConnectMgr				m_ConnectMgr;
     GuiOfferMgr				    m_OfferMgr;
     GuiUserMgr					m_UserMgr;
-    GuiUserHostMgr				m_UserHostMgr;
+    GuiUserJoinMgr				m_UserJoinMgr;
     GuiThumbMgr					m_ThumbMgr;
 
 	MyIcons					    m_MyIcons;

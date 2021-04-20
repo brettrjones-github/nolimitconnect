@@ -13,7 +13,11 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/VxGUID.h>
+
+class VxNetIdent;
 
 class BaseInfo
 {
@@ -34,6 +38,8 @@ public:
 
     virtual void				setInfoModifiedTime( uint64_t timestamp )       { m_InfoModifiedTime = timestamp; }
     virtual uint64_t			getInfoModifiedTime( void )                     { return m_InfoModifiedTime; }
+
+    virtual void                fillBaseInfo( VxNetIdent* netIdent, EHostType hostType );
 
 public:
 	//=== vars ===//

@@ -172,6 +172,17 @@ namespace
         "Internet: Max Internet Status ",
     };
 
+    const char * JoinStateEnumStrings[] =
+    {
+        "Join: No State ",
+        "Join: Sending ",
+        "Join: Send Failed ",
+        "Join: Send Acknowleged ",
+        "Join: Accepted ",
+        "Join: Denied ",
+        "Join: Max JoinState ",
+    };
+
     const char * NetAvailStatusEnumStrings[] =
     {
         "Net Avail: Network Unavailable ",
@@ -575,6 +586,17 @@ const char * DescribeInternetStatus( EInternetStatus internetStatus )
     }
 
     return InternetStatusEnumStrings[ internetStatus ];
+}
+
+//============================================================================
+const char * DescribeJoinState( EJoinState joinState )
+{
+    if( joinState < 0 || eMaxJoinState <= joinState )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return JoinStateEnumStrings[ joinState ];
 }
 
 //============================================================================

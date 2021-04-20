@@ -19,13 +19,13 @@
 #define HOST_FLAG_DEFAULT_HOST			0x0001
 #define HOST_FLAG_IS_TEMP			    0x0002
 
-class HostJoinInfo : public BaseJoinInfo
+class UserJoinInfo : public BaseJoinInfo
 {
 public:
-	HostJoinInfo();
-	HostJoinInfo( const HostJoinInfo& rhs );
+	UserJoinInfo();
+	UserJoinInfo( const UserJoinInfo& rhs );
 
-	HostJoinInfo&				operator=( const HostJoinInfo& rhs ); 
+	UserJoinInfo&				operator=( const UserJoinInfo& rhs ); 
 
     bool                        isValid( void ) { return true;  }
 

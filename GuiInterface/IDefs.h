@@ -317,6 +317,18 @@ enum EInternetStatus
     eMaxInternetStatus
 };
 
+enum EJoinState
+{
+    eJoinStateNone     = 0,
+    eJoinStateSending,
+    eJoinStateSendFail,
+    eJoinStateSendAcked,
+    eJoinStateJoinAccepted,
+    eJoinStateJoinDenied,
+
+    eMaxJoinState	
+};
+
 enum EModuleState
 {
     eModuleStateUnknown = 0,
@@ -878,6 +890,7 @@ const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus );
 const char * DescribeHostType( EHostType hostType );
 //! Internet Status as text
 const char * DescribeInternetStatus( EInternetStatus internetStatus );
+const char * DescribeJoinState( EJoinState joinState );
 const char * DescribeModuleState( EModuleState moduleState );
 //! Network State as text
 const char * DescribeNetworkState( ENetworkStateType networkStateType );

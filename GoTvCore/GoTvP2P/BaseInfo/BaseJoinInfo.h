@@ -13,21 +13,18 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h>
-#include <GuiInterface/IDefs.h>
+#include "BaseInfo.h"
 
-#define HOST_FLAG_DEFAULT_HOST			0x0001
-#define HOST_FLAG_IS_TEMP			    0x0002
+#include <CoreLib/VxUrl.h>
 
-class UserHostInfo : public BaseInfo
+class BaseJoinInfo : public BaseInfo
 {
 public:
-	UserHostInfo();
-	UserHostInfo( const UserHostInfo& rhs );
+    BaseJoinInfo();
+    BaseJoinInfo( const BaseJoinInfo& rhs );
+    virtual ~BaseJoinInfo() = default;
 
-	UserHostInfo&				operator=( const UserHostInfo& rhs ); 
-
-    bool                        isValid( void ) { return true;  }
+    BaseJoinInfo&				operator=( const BaseJoinInfo& rhs ); 
 
     virtual void			    setPluginType( EPluginType pluginType )             { m_PluginType = pluginType; }
     virtual EPluginType			getPluginType( void )                               { return m_PluginType; }
@@ -35,16 +32,8 @@ public:
     virtual void			    setHostType( EHostType hostType )                   { m_HostType = hostType; }
     virtual EHostType			getHostType( void )                                 { return m_HostType; }
 
-    virtual void			    setHostFlags( uint32_t hostFlags )                  { m_HostFlags = hostFlags; }
-    virtual uint32_t			getHostFlags( void )                                { return m_HostFlags; }
-
-    void						setIsDefaultHost( bool isDefault )	                { if( isDefault ) m_HostFlags |= HOST_FLAG_DEFAULT_HOST; else m_HostFlags &= ~HOST_FLAG_DEFAULT_HOST; }
-    bool						isDefaultHost( void )				                { return m_HostFlags & HOST_FLAG_DEFAULT_HOST ? true : false; }
-    void						setIsTemp( bool isTemp )	                        { if( isTemp ) m_HostFlags |= HOST_FLAG_IS_TEMP; else m_HostFlags &= ~HOST_FLAG_IS_TEMP; }
-    bool						isTemp( void )				                        { return m_HostFlags & HOST_FLAG_IS_TEMP ? true : false; }
-
-    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
-    virtual std::string&	    getHostUrl( void )                                  { return m_HostUrl; }
+    virtual void			    setJoinState( EJoinState joinState )                { m_JoinState = joinState; }
+    virtual EJoinState			getJoinState( void )                                { return m_JoinState; }
 
     virtual void				setLastConnectTime( uint64_t timestamp )            { m_LastConnectMs = timestamp; }
     virtual uint64_t			getLastConnectTime( void )                          { return m_LastConnectMs; }
@@ -52,19 +41,11 @@ public:
     virtual void				setLastJoinTime( uint64_t timestamp )               { m_LastJoinMs = timestamp; }
     virtual uint64_t			getLastJoinTime( void )                             { return m_LastJoinMs; }
 
-    // temporaries
-    virtual void				setConnectionId( VxGUID& connectionId )             { m_ConnectionId = connectionId; }
-    virtual VxGUID&				getConnectionId( void )                             { return m_ConnectionId; }
-
-protected:
+public:
 	//=== vars ===//
     EPluginType                 m_PluginType{ ePluginTypeInvalid };
     EHostType                   m_HostType{ eHostTypeUnknown };
-    uint32_t                    m_HostFlags{ 0 };
-    std::string                 m_HostUrl{ "" };
+    EJoinState                  m_JoinState{ eJoinStateNone };
     int64_t						m_LastConnectMs{ 0 };
     int64_t						m_LastJoinMs{ 0 };
-
-    // temporaries
-    VxGUID                      m_ConnectionId;
 };

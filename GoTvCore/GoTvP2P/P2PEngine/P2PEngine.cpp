@@ -102,7 +102,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_RunUrlAction( *new RunUrlAction( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RcScan( *this, m_ConnectionList )
     , m_HostJoinMgr( *new HostJoinMgr( *this, "HostJoinMgrDb.db3", "HostJoinStateDb.db3" ) )
-    , m_UserHostMgr( *new UserHostMgr( *this, "UserHostMgrDb.db3", "UserHostStateDb.db3" ) )
+    , m_UserJoinMgr( *new UserJoinMgr( *this, "UserJoinMgrDb.db3", "UserJoinStateDb.db3" ) )
     , m_SktLoopback( *this )
 {
     m_PeerMgr.setSktLoopback( &m_SktLoopback );

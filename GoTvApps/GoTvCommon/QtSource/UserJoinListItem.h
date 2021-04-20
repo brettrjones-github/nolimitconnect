@@ -14,32 +14,32 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_UserHostListItem.h"
+#include "ui_UserJoinListItem.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
 
 class GuiConnectMgr;
 class GuiOfferMgr;
-class GuiUserHostSession;
+class GuiUserJoinSession;
 class GuiUser;
-class GuiUserHost;
-class GuiUserHostMgr;
+class GuiUserJoin;
+class GuiUserJoinMgr;
 class GuiUserMgr;
 class GuiThumb;
 
-class UserHostListItem : public QWidget, public QListWidgetItem
+class UserJoinListItem : public QWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	UserHostListItem( QWidget *parent=0 );
-	virtual ~UserHostListItem();
+	UserJoinListItem( QWidget *parent=0 );
+	virtual ~UserJoinListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
 
-    void                        setUserHostSession( GuiUserHostSession* hostSession );
-    GuiUserHostSession*         getUserHostSession( void );
+    void                        setUserJoinSession( GuiUserJoinSession* hostSession );
+    GuiUserJoinSession*         getUserJoinSession( void );
 
     VxPushButton *              getAvatarButton( void )                 { return ui.m_AvatarButton; }
     VxPushButton *              getFriendshipButton( void )             { return ui.m_FriendshipButton; }
@@ -51,10 +51,10 @@ public:
     QSize                       calculateSizeHint( void );
 
 signals:
-    void						signalUserHostListItemClicked( UserHostListItem * poItemWidget );
-	void						signalAvatarButtonClicked( UserHostListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( UserHostListItem* listEntryWidget );
-	void						signalMenuButtonClicked( UserHostListItem* listEntryWidget );
+    void						signalUserJoinListItemClicked( UserJoinListItem * poItemWidget );
+	void						signalAvatarButtonClicked( UserJoinListItem* listEntryWidget );
+    void						signalFriendshipButtonClicked( UserJoinListItem* listEntryWidget );
+	void						signalMenuButtonClicked( UserJoinListItem* listEntryWidget );
 
 public slots:
 	void						slotAvatarButtonClicked( void );
@@ -66,12 +66,12 @@ protected:
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::UserHostListItemUi	    ui;
+    Ui::UserJoinListItemUi	    ui;
     AppCommon&					m_MyApp;
     GuiConnectMgr&				m_ConnectMgr;
     GuiOfferMgr&				m_OfferMgr;
     GuiUserMgr&					m_UserMgr;
-    GuiUserHostMgr&				m_UserHostMgr;
+    GuiUserJoinMgr&				m_UserJoinMgr;
 };
 
 

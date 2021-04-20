@@ -28,18 +28,15 @@
 
 //============================================================================
 HostJoinInfo::HostJoinInfo()
-    : BaseInfo()
+    : BaseJoinInfo()
 { 
 }
 
 //============================================================================
 HostJoinInfo::HostJoinInfo( const HostJoinInfo& rhs )
-    : BaseInfo( rhs )
-    , m_HostType( rhs.m_HostType )
+    : BaseJoinInfo( rhs )
     , m_HostFlags( rhs.m_HostFlags )
     , m_HostUrl( rhs.m_HostUrl )
-    , m_LastConnectMs( rhs.m_LastConnectMs )
-    , m_LastJoinMs( rhs.m_LastJoinMs )
     , m_ConnectionId( rhs.m_ConnectionId )
 {
 }
@@ -49,12 +46,9 @@ HostJoinInfo& HostJoinInfo::operator=( const HostJoinInfo& rhs )
 {	
 	if( this != &rhs )
 	{
-        BaseInfo::operator = ( rhs );
-        m_HostType = rhs.m_HostType;
+        BaseJoinInfo::operator = ( rhs );
         m_HostFlags = rhs.m_HostFlags;
         m_HostUrl = rhs.m_HostUrl;
-        m_LastConnectMs = rhs.m_LastConnectMs;
-        m_LastJoinMs = rhs.m_LastJoinMs;
         m_ConnectionId = rhs.m_ConnectionId;
     }
 

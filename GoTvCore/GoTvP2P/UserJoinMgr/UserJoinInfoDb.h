@@ -19,20 +19,20 @@
 #include <CoreLib/VxGUID.h>
 
 class P2PEngine;
-class UserHostInfo;
-class UserHostMgr;
+class UserJoinInfo;
+class UserJoinMgr;
 class VxGUID;
 
-class UserHostInfoDb : public DbBase
+class UserJoinInfoDb : public DbBase
 {
 public:
-    UserHostInfoDb( P2PEngine& engine, UserHostMgr& mgr, const char *dbName );
-    virtual ~UserHostInfoDb() = default;
+    UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& mgr, const char *dbName );
+    virtual ~UserJoinInfoDb() = default;
 
-    void						lockUserHostInfoDb( void ) { m_UserHostInfoDbMutex.lock(); }
-    void						unlockUserHostInfoDb( void ) { m_UserHostInfoDbMutex.unlock(); }
+    void						lockUserJoinInfoDb( void ) { m_UserJoinInfoDbMutex.lock(); }
+    void						unlockUserJoinInfoDb( void ) { m_UserJoinInfoDbMutex.unlock(); }
 
-    void						addUserHost(    VxGUID&			onlineId, 
+    void						addUserJoin(    VxGUID&			onlineId, 
                                                 VxGUID&			thumbId,
                                                 uint64_t		infoModTime,
                                                 EHostType       hostType,
@@ -42,20 +42,20 @@ public:
                                                 uint64_t		lastJoinMs
                                                 );
 
-    void						addUserHost( UserHostInfo * hostInfo );
-    void						removeUserHost( VxGUID& onlineId, EHostType hostType );
+    void						addUserJoin( UserJoinInfo * hostInfo );
+    void						removeUserJoin( VxGUID& onlineId, EHostType hostType );
 
-    void						getAllUserHosts( std::vector<UserHostInfo*>& userHostList );
-    void						purgeAllUserHosts( void ); 
+    void						getAllUserJoins( std::vector<UserJoinInfo*>& userHostList );
+    void						purgeAllUserJoins( void ); 
 
 protected:
 
     virtual RCODE				onCreateTables( int iDbVersion );
     virtual RCODE				onDeleteTables( int iOldVersion );
-    void						insertUserHostInTimeOrder( UserHostInfo * hostInfo, std::vector<UserHostInfo*>& assetList );
+    void						insertUserJoinInTimeOrder( UserJoinInfo * hostInfo, std::vector<UserJoinInfo*>& assetList );
 
     P2PEngine&					m_Engine;
-    UserHostMgr&				m_UserHostMgr;
-    VxMutex						m_UserHostInfoDbMutex;
+    UserJoinMgr&				m_UserJoinMgr;
+    VxMutex						m_UserJoinInfoDbMutex;
 };
 

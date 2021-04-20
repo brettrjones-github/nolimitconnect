@@ -13,50 +13,37 @@
 //============================================================================
 
 #include <config_gotvcore.h>
-#include "UserHostInfo.h"
-
-#include <PktLib/VxSearchDefs.h>
-
-#include <CoreLib/VxFileLists.h>
-#include <CoreLib/VxFileIsTypeFunctions.h>
-#include <CoreLib/VxFileUtil.h>
-#include <CoreLib/VxDebug.h>
-#include <CoreLib/VxGlobals.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
+#include "BaseJoinInfo.h"
 
 //============================================================================
-UserHostInfo::UserHostInfo()
+BaseJoinInfo::BaseJoinInfo()
     : BaseInfo()
 { 
 }
 
 //============================================================================
-UserHostInfo::UserHostInfo( const UserHostInfo& rhs )
+BaseJoinInfo::BaseJoinInfo( const BaseJoinInfo& rhs )
     : BaseInfo( rhs )
+    , m_PluginType( rhs.m_PluginType )
     , m_HostType( rhs.m_HostType )
-    , m_HostFlags( rhs.m_HostFlags )
-    , m_HostUrl( rhs.m_HostUrl )
+    , m_JoinState( rhs.m_JoinState )
     , m_LastConnectMs( rhs.m_LastConnectMs )
     , m_LastJoinMs( rhs.m_LastJoinMs )
-    , m_ConnectionId( rhs.m_ConnectionId )
 {
 }
 
 //============================================================================
-UserHostInfo& UserHostInfo::operator=( const UserHostInfo& rhs ) 
-{	
-	if( this != &rhs )
-	{
-        BaseInfo::operator = ( rhs );
+BaseJoinInfo& BaseJoinInfo::operator=( const BaseJoinInfo& rhs )
+{
+    if( this != &rhs )
+    {
+        BaseInfo::operator=( rhs );
+        m_PluginType = rhs.m_PluginType;
         m_HostType = rhs.m_HostType;
-        m_HostFlags = rhs.m_HostFlags;
-        m_HostUrl = rhs.m_HostUrl;
+        m_JoinState = rhs.m_JoinState;
         m_LastConnectMs = rhs.m_LastConnectMs;
         m_LastJoinMs = rhs.m_LastJoinMs;
-        m_ConnectionId = rhs.m_ConnectionId;
     }
 
-	return *this;
+    return *this;
 }

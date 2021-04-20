@@ -170,7 +170,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_ConnectMgr( *this )
 , m_OfferMgr( *this )
 , m_UserMgr( *this )
-, m_UserHostMgr( *this )
+, m_UserJoinMgr( *this )
 , m_ThumbMgr( *this )
 
 , m_MyIcons( *this )

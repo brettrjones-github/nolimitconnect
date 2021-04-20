@@ -121,9 +121,6 @@
     <Filter Include="GoTvCommon\Source Files\GuiThumb">
       <UniqueIdentifier>{0d0a8382-0106-4939-8688-dd30b9b4e7e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvCommon\Source Files\GuiUserHost">
-      <UniqueIdentifier>{eb1a929e-fc2f-469e-b939-8f01704d66f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GoTvCommon\Source Files\GuiOffer">
       <UniqueIdentifier>{2b5ec467-2ff9-4474-8345-58088a983f34}</UniqueIdentifier>
     </Filter>
@@ -138,6 +135,9 @@
     </Filter>
     <Filter Include="GuiInterface\OsWin32">
       <UniqueIdentifier>{b9f3a92c-14f9-41fc-a792-78971fc51cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\GuiUserJoin">
+      <UniqueIdentifier>{eb1a929e-fc2f-469e-b939-8f01704d66f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1047,29 +1047,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.cpp">
       <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserHost.cpp">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserHostMgr.cpp">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserHostListItem.cpp">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserHostListWidget.cpp">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListItem.cpp">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserHostList.cpp">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserHostSession.cpp">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgr.cpp">
       <Filter>GoTvCommon\Source Files\GuiOffer</Filter>
@@ -1109,6 +1091,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp">
       <Filter>GuiInterface\OsInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserJoinListItem.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserJoinListWidget.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.cpp">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2069,15 +2069,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.h">
       <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserHostMgr.h">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserHostListItem.h">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserHostListWidget.h">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListItem.h">
       <Filter>GoTvCommon\Source Files\GuiUser</Filter>
     </QtMoc>
@@ -2092,6 +2083,15 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserJoinListItem.h">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserJoinListWidget.h">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.h">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -3111,15 +3111,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h">
       <Filter>GoTvCommon\Source Files\GuiThumb</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserHost.h">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserHostList.h">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserHostSession.h">
-      <Filter>GoTvCommon\Source Files\GuiUserHost</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h">
       <Filter>GuiInterface</Filter>
     </ClInclude>
@@ -3164,6 +3155,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.h">
       <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.h">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.h">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.h">
+      <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3412,7 +3412,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletOfferList.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\UserHostListItem.ui">
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserJoinListItem.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -829,15 +829,6 @@
     <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferSession.cpp">
       <Filter>GoTvP2P\OfferHostMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostInfo.cpp">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostInfoDb.cpp">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\UserHostMgr\UserHostMgr.cpp">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\ConnectMgr\ConnectInfo.cpp">
       <Filter>GoTvP2P\ConnectMgr</Filter>
     </ClCompile>
@@ -864,6 +855,18 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinMgr.cpp">
       <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseJoinInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.cpp">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.cpp">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.cpp">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1804,18 +1807,6 @@
     <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseCallbackInterface.h">
       <Filter>GoTvP2P\OfferBase</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostCallbackInterface.h">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostInfo.h">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostInfoDb.h">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\UserHostMgr\UserHostMgr.h">
-      <Filter>GoTvP2P\UserHostMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\ConnectMgr\ConnectCallbackInterface.h">
       <Filter>GoTvP2P\ConnectMgr</Filter>
     </ClInclude>
@@ -1872,6 +1863,21 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinMgr.h">
       <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseJoinInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinCallbackInterface.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1977,9 +1983,6 @@
     <Filter Include="GoTvP2P\OfferHostMgr">
       <UniqueIdentifier>{f8868528-d130-4a76-81b0-d74ac433ab10}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvP2P\UserHostMgr">
-      <UniqueIdentifier>{f2383251-442f-404f-9baf-f062208c7b6f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GoTvP2P\ConnectMgr">
       <UniqueIdentifier>{26c521ac-2eac-49e1-b3c7-1edef2efe660}</UniqueIdentifier>
     </Filter>
@@ -2003,6 +2006,9 @@
     </Filter>
     <Filter Include="GoTvP2P\HostJoinMgr">
       <UniqueIdentifier>{ac65286f-e7a8-467f-b13c-c685c20ff0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\UserJoinMgr">
+      <UniqueIdentifier>{5e2fa986-b854-42bf-aa66-3f3e7c1b489d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

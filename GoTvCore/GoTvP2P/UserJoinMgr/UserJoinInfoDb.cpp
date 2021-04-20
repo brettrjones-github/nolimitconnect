@@ -12,12 +12,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "UserHostInfoDb.h"
-#include "UserHostInfo.h"
+#include "UserJoinInfoDb.h"
+#include "UserJoinInfo.h"
 
 namespace
 {
-    std::string 		TABLE_USER_HOST	 				= "tblUserHosts";
+    std::string 		TABLE_USER_HOST	 				= "tblUserJoins";
 
     std::string 		CREATE_COLUMNS_USER_HOST		= " (onlineId TEXT, thumbId TEXT, infoModMs BIGINT, hostType INTEGER, hostFlags INTEGER, hostUrl TEXT, lastConnMs BIGINT, lastJoinMs BIGINT) ";
 
@@ -32,63 +32,63 @@ namespace
 }
 
 //============================================================================
-UserHostInfoDb::UserHostInfoDb( P2PEngine& engine, UserHostMgr& hostListMgr, const char *dbName  )
+UserJoinInfoDb::UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& hostListMgr, const char *dbName  )
     : m_Engine( engine )
     , DbBase( dbName )
-    , m_UserHostMgr( hostListMgr )
+    , m_UserJoinMgr( hostListMgr )
 {
 }
 
 //============================================================================
 //! create tables in database 
-RCODE UserHostInfoDb::onCreateTables( int iDbVersion )
+RCODE UserJoinInfoDb::onCreateTables( int iDbVersion )
 {
-    lockUserHostInfoDb();
+    lockUserJoinInfoDb();
     std::string strCmd = "CREATE TABLE " + TABLE_USER_HOST + CREATE_COLUMNS_USER_HOST;
     RCODE rc = sqlExec(strCmd);
-    unlockUserHostInfoDb();
+    unlockUserJoinInfoDb();
     return rc;
 }
 
 //============================================================================
 // delete tables in database
-RCODE UserHostInfoDb::onDeleteTables( int iOldVersion ) 
+RCODE UserJoinInfoDb::onDeleteTables( int iOldVersion ) 
 {
-    lockUserHostInfoDb();
+    lockUserJoinInfoDb();
     std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_USER_HOST;
     RCODE rc = sqlExec(strCmd);
-    unlockUserHostInfoDb();
+    unlockUserJoinInfoDb();
     return rc;
 }
 
 //============================================================================
-void UserHostInfoDb::purgeAllUserHosts( void ) 
+void UserJoinInfoDb::purgeAllUserJoins( void ) 
 {
-    lockUserHostInfoDb();
+    lockUserJoinInfoDb();
     std::string strCmd = "DELETE FROM " + TABLE_USER_HOST;
     RCODE rc = sqlExec( strCmd );
-    unlockUserHostInfoDb();
+    unlockUserJoinInfoDb();
     if( rc )
     {
-        LogMsg( LOG_ERROR, "UserHostInfoDb::purgeAllUserHosts error %d", rc );
+        LogMsg( LOG_ERROR, "UserJoinInfoDb::purgeAllUserJoins error %d", rc );
     }
     else
     {
-        LogMsg( LOG_INFO, "UserHostInfoDb::purgeAllUserHosts success" );
+        LogMsg( LOG_INFO, "UserJoinInfoDb::purgeAllUserJoins success" );
     }
 }
 
 //============================================================================
-void UserHostInfoDb::removeUserHost( VxGUID& onlineId, EHostType hostType )
+void UserJoinInfoDb::removeUserJoin( VxGUID& onlineId, EHostType hostType )
 {
     std::string onlineIdStr = onlineId.toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( (int)hostType );
-    sqlExec( "DELETE FROM tblUserHosts WHERE onlineId=? AND hostType=?", bindList );
+    sqlExec( "DELETE FROM tblUserJoins WHERE onlineId=? AND hostType=?", bindList );
 }
 
 //============================================================================
-void UserHostInfoDb::addUserHost(   VxGUID&			onlineId, 
+void UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId, 
                                     VxGUID&			thumbId,
                                     uint64_t		infoModTime,
                                     EHostType       hostType,
@@ -98,7 +98,7 @@ void UserHostInfoDb::addUserHost(   VxGUID&			onlineId,
                                     uint64_t		lastJoinMs
                                    )
 {
-    removeUserHost( onlineId, hostType );
+    removeUserJoin( onlineId, hostType );
 
     std::string onlineIdStr = onlineId.toHexString();
     std::string thumbIdStr = thumbId.toHexString();
@@ -112,19 +112,19 @@ void UserHostInfoDb::addUserHost(   VxGUID&			onlineId,
     bindList.add( lastConnectMs );
     bindList.add( lastJoinMs );    
 
-    RCODE rc = sqlExec( "INSERT INTO tblUserHosts (onlineId, thumbId, infoModMs, hostType, hostFlags, hostUrl, lastConnMs, lastJoinMs) values(?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblUserJoins (onlineId, thumbId, infoModMs, hostType, hostFlags, hostUrl, lastConnMs, lastJoinMs) values(?,?,?,?,?,?,?,?)",
         bindList );
     vx_assert( 0 == rc );
     if( rc )
     {
-        LogMsg( LOG_ERROR, "UserHostInfoDb::addUserHost error %d\n", rc );
+        LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin error %d\n", rc );
     }
 }
 
 //============================================================================
-void UserHostInfoDb::addUserHost( UserHostInfo* hostInfo )
+void UserJoinInfoDb::addUserJoin( UserJoinInfo* hostInfo )
 {
-    addUserHost(	hostInfo->getOnlineId(),
+    addUserJoin(	hostInfo->getOnlineId(),
                     hostInfo->getThumbId(),
                     hostInfo->getInfoModifiedTime(),                    
                     hostInfo->getHostType(),
@@ -136,15 +136,15 @@ void UserHostInfoDb::addUserHost( UserHostInfo* hostInfo )
 }
 
 //============================================================================
-void UserHostInfoDb::getAllUserHosts( std::vector<UserHostInfo*>& UserHostUserHostList )
+void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJoinList )
 {
-    lockUserHostInfoDb();
-    DbCursor * cursor = startQuery( "SELECT * FROM tblUserHosts" ); // ORDER BY unique_id DESC  // BRJ don't know why ORDER BY quit working on android.. do in code
+    lockUserJoinInfoDb();
+    DbCursor * cursor = startQuery( "SELECT * FROM tblUserJoins" ); // ORDER BY unique_id DESC  // BRJ don't know why ORDER BY quit working on android.. do in code
     if( NULL != cursor )
     {
         while( cursor->getNextRow() )
         {
-            UserHostInfo * hostInfo = new UserHostInfo();
+            UserJoinInfo * hostInfo = new UserJoinInfo();
             const int			COLUMN_ONLINE_ID			    = 0;
             const int			COLUMN_HOST_THUMB_ID			= 1;
             const int			COLUMN_INFO_MOD_MS				= 2;
@@ -166,17 +166,17 @@ void UserHostInfoDb::getAllUserHosts( std::vector<UserHostInfo*>& UserHostUserHo
 
             vx_assert( hostInfo->isValid() );
 
-            insertUserHostInTimeOrder( hostInfo, UserHostUserHostList );
+            insertUserJoinInTimeOrder( hostInfo, UserJoinUserJoinList );
         }
 
         cursor->close();
     }
 
-    unlockUserHostInfoDb();
+    unlockUserJoinInfoDb();
 } 
 
 //============================================================================
-void UserHostInfoDb::insertUserHostInTimeOrder( UserHostInfo *hostInfo, std::vector<UserHostInfo*>& hostList )
+void UserJoinInfoDb::insertUserJoinInTimeOrder( UserJoinInfo *hostInfo, std::vector<UserJoinInfo*>& hostList )
 {
     vx_assert( hostInfo && hostInfo->isValid() );
     if( hostInfo->isDefaultHost() )
@@ -185,7 +185,7 @@ void UserHostInfoDb::insertUserHostInTimeOrder( UserHostInfo *hostInfo, std::vec
         return;
     }
 
-    std::vector<UserHostInfo*>::iterator iter;
+    std::vector<UserJoinInfo*>::iterator iter;
     for( iter = hostList.begin(); iter != hostList.end(); ++iter )
     {
         if( ( *iter )->isDefaultHost() )

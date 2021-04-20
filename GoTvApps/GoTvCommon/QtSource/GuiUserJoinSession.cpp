@@ -14,7 +14,7 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "GuiUserHostSession.h"
+#include "GuiUserJoinSession.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
@@ -25,47 +25,47 @@
 #include <QObject>
 
 //============================================================================
-GuiUserHostSession::GuiUserHostSession( QWidget* parent )
+GuiUserJoinSession::GuiUserJoinSession( QWidget* parent )
     : QWidget( parent )
 {
 }
 
 //============================================================================
-GuiUserHostSession::GuiUserHostSession( GuiUserHost* hostIdent, QWidget* parent )
+GuiUserJoinSession::GuiUserJoinSession( GuiUserJoin* hostIdent, QWidget* parent )
     : QWidget( parent )
-    , m_UserHost( hostIdent )
+    , m_UserJoin( hostIdent )
 {
-    setUserHost( m_UserHost );
+    setUserJoin( m_UserJoin );
 }
 
 //============================================================================
-GuiUserHostSession::GuiUserHostSession( EHostType hostType, VxGUID& sessionId, GuiUserHost* hostIdent, QWidget* parent )
+GuiUserJoinSession::GuiUserJoinSession( EHostType hostType, VxGUID& sessionId, GuiUserJoin* hostIdent, QWidget* parent )
     : QWidget( parent )
     , m_HostType( hostType )
     , m_SessionId( sessionId )
-    , m_UserHost( hostIdent )
+    , m_UserJoin( hostIdent )
 {
-    setUserHost( m_UserHost );
+    setUserJoin( m_UserJoin );
 }
 
 //============================================================================
-GuiUserHostSession::GuiUserHostSession( const GuiUserHostSession &rhs )
+GuiUserJoinSession::GuiUserJoinSession( const GuiUserJoinSession &rhs )
     : QWidget()
     , m_HostType( rhs.m_HostType )
     , m_SessionId( rhs.m_SessionId )
-    , m_UserHost( rhs.m_UserHost )
+    , m_UserJoin( rhs.m_UserJoin )
     , m_OnlineId( rhs.m_OnlineId )
 {
 }
 
 //============================================================================
-GuiUserHostSession& GuiUserHostSession::operator =( const GuiUserHostSession &rhs )
+GuiUserJoinSession& GuiUserJoinSession::operator =( const GuiUserJoinSession &rhs )
 {
 	if( this != &rhs )   
 	{
         m_HostType		        = rhs.m_HostType;
         m_SessionId				= rhs.m_SessionId;
-        m_UserHost		        = rhs.m_UserHost;
+        m_UserJoin		        = rhs.m_UserJoin;
         m_OnlineId		        = rhs.m_OnlineId;
 	}
 
@@ -73,11 +73,11 @@ GuiUserHostSession& GuiUserHostSession::operator =( const GuiUserHostSession &rh
 }
 
 //============================================================================
-void GuiUserHostSession::setUserHost( GuiUserHost* user )
+void GuiUserJoinSession::setUserJoin( GuiUserJoin* user )
 { 
-    m_UserHost = user; 
-    if( m_UserHost )
+    m_UserJoin = user; 
+    if( m_UserJoin )
     {
-        m_OnlineId = m_UserHost->getMyOnlineId();
+        m_OnlineId = m_UserJoin->getMyOnlineId();
     }
 }

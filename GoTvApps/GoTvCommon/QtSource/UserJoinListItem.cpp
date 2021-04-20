@@ -13,18 +13,18 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "UserHostListItem.h"
-#include "GuiUserHostSession.h"
+#include "UserJoinListItem.h"
+#include "GuiUserJoinSession.h"
 #include "GuiParams.h"
 
 //============================================================================
-UserHostListItem::UserHostListItem(QWidget *parent  )
+UserJoinListItem::UserJoinListItem(QWidget *parent  )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ConnectMgr( m_MyApp.getConnectMgr() )
 , m_OfferMgr( m_MyApp.getOfferMgr() )
 , m_UserMgr( m_MyApp.getUserMgr() )
-, m_UserHostMgr( m_MyApp.getUserHostMgr() )
+, m_UserJoinMgr( m_MyApp.getUserJoinMgr() )
 {
 	ui.setupUi( this );
     ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize() );
@@ -40,9 +40,9 @@ UserHostListItem::UserHostListItem(QWidget *parent  )
 }
 
 //============================================================================
-UserHostListItem::~UserHostListItem()
+UserJoinListItem::~UserJoinListItem()
 {
-    GuiUserHostSession * hostSession = (GuiUserHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiUserJoinSession * hostSession = (GuiUserJoinSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -50,77 +50,77 @@ UserHostListItem::~UserHostListItem()
 }
 
 //============================================================================
-QSize UserHostListItem::calculateSizeHint( void )
+QSize UserJoinListItem::calculateSizeHint( void )
 {
     return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize().height() + 8 ) );
 }
 
 //============================================================================
-MyIcons& UserHostListItem::getMyIcons( void )
+MyIcons& UserJoinListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void UserHostListItem::resizeEvent(QResizeEvent* resizeEvent)
+void UserJoinListItem::resizeEvent(QResizeEvent* resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
     updateWidgetFromInfo();
 }
 
 //============================================================================
-void UserHostListItem::mousePressEvent(QMouseEvent * event)
+void UserJoinListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
-    emit signalUserHostListItemClicked( this );
+    emit signalUserJoinListItemClicked( this );
 }
 
 //============================================================================
-void UserHostListItem::setUserHostSession( GuiUserHostSession* hostSession )
+void UserJoinListItem::setUserJoinSession( GuiUserJoinSession* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
 }
 
 //============================================================================
-GuiUserHostSession * UserHostListItem::getUserHostSession( void )
+GuiUserJoinSession * UserJoinListItem::getUserJoinSession( void )
 {
-    return (GuiUserHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return (GuiUserJoinSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-void UserHostListItem::slotAvatarButtonClicked()
+void UserJoinListItem::slotAvatarButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "UserHostListItem::slotIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "UserJoinListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserHostListItem::slotFriendshipButtonClicked()
+void UserJoinListItem::slotFriendshipButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "UserHostListItem::slotFriendshipButtonClicked" );
+    LogMsg( LOG_DEBUG, "UserJoinListItem::slotFriendshipButtonClicked" );
     emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserHostListItem::slotMenuButtonClicked( void )
+void UserJoinListItem::slotMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void UserHostListItem::updateWidgetFromInfo( void )
+void UserJoinListItem::updateWidgetFromInfo( void )
 {
-    GuiUserHostSession* hostSession = getUserHostSession();
+    GuiUserJoinSession* hostSession = getUserJoinSession();
     if( nullptr == hostSession )
     {
-        LogMsg( LOG_DEBUG, "UserHostListItem::updateWidgetFromInfo null user session" );
+        LogMsg( LOG_DEBUG, "UserJoinListItem::updateWidgetFromInfo null user session" );
         return;
     }
 
     GuiUser * hostIdent = hostSession->getUserIdent();
     if( nullptr == hostIdent )
     {
-        LogMsg( LOG_DEBUG, "UserHostListItem::updateWidgetFromInfo null gui user" );
+        LogMsg( LOG_DEBUG, "UserJoinListItem::updateWidgetFromInfo null gui user" );
         return;
     }
 
@@ -145,7 +145,7 @@ void UserHostListItem::updateWidgetFromInfo( void )
 }
 
 //============================================================================
-void UserHostListItem::updateThumb( GuiThumb* thumb )
+void UserJoinListItem::updateThumb( GuiThumb* thumb )
 {
     if( thumb )
     {

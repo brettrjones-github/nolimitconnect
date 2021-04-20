@@ -21,23 +21,23 @@
 
 class P2PEngine;
 class VxGUID;
-class GuiUserHost;
+class GuiUserJoin;
 
-class GuiUserHostSession : public QWidget
+class GuiUserJoinSession : public QWidget
 {
 public:
-	GuiUserHostSession( QWidget* parent = nullptr );
-    GuiUserHostSession( GuiUserHost* hostIdent, QWidget* parent = nullptr );
-	GuiUserHostSession(	VxGUID& sessionId, GuiUserHost* hostIdent, QWidget* parent = nullptr );
-    GuiUserHostSession(	EHostType userType, VxGUID& sessionId, GuiUserHost * userIdent, QWidget* parent = nullptr );
-	GuiUserHostSession( const GuiUserHostSession &rhs );
+	GuiUserJoinSession( QWidget* parent = nullptr );
+    GuiUserJoinSession( GuiUserJoin* hostIdent, QWidget* parent = nullptr );
+	GuiUserJoinSession(	VxGUID& sessionId, GuiUserJoin* hostIdent, QWidget* parent = nullptr );
+    GuiUserJoinSession(	EHostType userType, VxGUID& sessionId, GuiUserJoin * userIdent, QWidget* parent = nullptr );
+	GuiUserJoinSession( const GuiUserJoinSession &rhs );
 
-	GuiUserHostSession&			operator =( const GuiUserHostSession &rhs );
+	GuiUserJoinSession&			operator =( const GuiUserJoinSession &rhs );
 
     GuiUser *                   getUserIdent( void ) { return nullptr; }
 
-    void				        setUserHost( GuiUserHost* user );
-    GuiUserHost*				getUserHost( void )                         { return m_UserHost; }
+    void				        setUserJoin( GuiUserJoin* user );
+    GuiUserJoin*				getUserJoin( void )                         { return m_UserJoin; }
 
     EHostType                   getHostType( void )                         { return m_HostType; }
 
@@ -45,13 +45,13 @@ public:
     VxGUID&					    getSessionId( void )                        { return m_SessionId; }
 
     VxGUID&					    getMyOnlineId( void )                       { return m_OnlineId; }
-    const char *                getOnlineName( void )                       { return m_UserHost ? m_UserHost->getOnlineName() : ""; }
+    const char *                getOnlineName( void )                       { return m_UserJoin ? m_UserJoin->getOnlineName() : ""; }
 
     bool                        setIsOnline( bool isOnline )
     {
-        if( m_UserHost && m_UserHost->isOnline() != isOnline )
+        if( m_UserJoin && m_UserJoin->isOnline() != isOnline )
         {
-            m_UserHost->setOnlineStatus( isOnline );
+            m_UserJoin->setOnlineStatus( isOnline );
             return true;
         }
 
@@ -61,7 +61,7 @@ public:
 protected:
 	//=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };
-    GuiUserHost*			    m_UserHost;
+    GuiUserJoin*			    m_UserJoin;
     VxGUID					    m_SessionId;
     VxGUID                      m_OnlineId;
 };

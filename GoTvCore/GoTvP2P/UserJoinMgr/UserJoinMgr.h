@@ -13,32 +13,31 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "UserHostInfoDb.h"
+#include "UserJoinInfoDb.h"
 
 #include <CoreLib/VxMutex.h>
 
-class UserHostInfo;
-class UserHostCallbackInterface;
+class UserJoinInfo;
+class UserJoinCallbackInterface;
 class P2PEngine;
 class VxSktBase;
 class VxNetIdent;
 
-class UserHostMgr 
+class UserJoinMgr 
 {
-    const int USER_HOST_DB_VERSION = 1;
+    const int USER_JOIN_DB_VERSION = 1;
 public:
-	UserHostMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
-	virtual ~UserHostMgr() = default;
+	UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
+	virtual ~UserJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
 
-    void                        addUserHostMgrClient( UserHostCallbackInterface * client, bool enable );
+    void                        addUserJoinMgrClient( UserJoinCallbackInterface * client, bool enable );
 
-    virtual void				announceUserHostAdded( UserHostInfo * userHostInfo );
-    virtual void				announceUserHostUpdated( UserHostInfo * userHostInfo );
-    virtual void				announceUserHostRemoved( VxGUID& hostOnlineId );
-    virtual void				announceUserHostOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState );
-    virtual void				announceUserHostOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId );
+    virtual void				announceUserJoinAdded( UserJoinInfo * userJoinInfo );
+    virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
+    virtual void				announceUserJoinRemoved( VxGUID& hostOnlineId, EHostType hostType );
+
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
@@ -46,22 +45,24 @@ public:
 
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType );
 
-protected:
-    void						clearUserHostInfoList( void );
+    UserJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EHostType hostType );
 
-    void						lockClientList( void )						{ m_UserHostClientMutex.lock(); }
-    void						unlockClientList( void )					{ m_UserHostClientMutex.unlock(); }
+protected:
+    void						clearUserJoinInfoList( void );
+
+    void						lockClientList( void )						{ m_UserJoinClientMutex.lock(); }
+    void						unlockClientList( void )					{ m_UserJoinClientMutex.unlock(); }
 
     P2PEngine&					m_Engine;
-    UserHostInfoDb              m_UserHostInfoDb;
+    UserJoinInfoDb              m_UserJoinInfoDb;
     VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  
-    std::vector<UserHostInfo*>	m_UserHostInfoList;
-    VxMutex						m_UserHostInfoMutex;
-    bool                        m_UserHostListInitialized{ false };
+    std::vector<UserJoinInfo*>	m_UserJoinInfoList;
+    VxMutex						m_UserJoinInfoMutex;
+    bool                        m_UserJoinListInitialized{ false };
 
-    std::vector<UserHostCallbackInterface *> m_UserHostClients;
-    VxMutex						m_UserHostClientMutex;
+    std::vector<UserJoinCallbackInterface *> m_UserJoinClients;
+    VxMutex						m_UserJoinClientMutex;
 };
 

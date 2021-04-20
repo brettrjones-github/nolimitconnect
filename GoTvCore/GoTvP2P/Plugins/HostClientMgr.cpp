@@ -96,7 +96,7 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 void HostClientMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& sessionId, EPluginType pluginType, EHostType hostType )
 {
     m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
-    m_Engine.getUserHostMgr().onUserJoinedHost( sktBase, netIdent, sessionId, pluginType, hostType );
+    m_Engine.getUserJoinMgr().onUserJoinedHost( sktBase, netIdent, sessionId, pluginType, hostType );
 }
 
 //============================================================================

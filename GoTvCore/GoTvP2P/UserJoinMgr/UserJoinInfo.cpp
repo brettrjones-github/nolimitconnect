@@ -13,42 +13,44 @@
 //============================================================================
 
 #include <config_gotvcore.h>
-#include "BaseInfo.h"
+#include "UserJoinInfo.h"
 
+#include <PktLib/VxSearchDefs.h>
+
+#include <CoreLib/VxFileLists.h>
+#include <CoreLib/VxFileIsTypeFunctions.h>
+#include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxDebug.h>
-#include <PktLib/VxCommon.h>
+#include <CoreLib/VxGlobals.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
 
 //============================================================================
-BaseInfo::BaseInfo()
+UserJoinInfo::UserJoinInfo()
+    : BaseJoinInfo()
 { 
 }
 
 //============================================================================
-BaseInfo::BaseInfo( const BaseInfo& rhs )
-    : m_OnlineId( rhs.m_OnlineId )
-    , m_ThumbId( rhs.m_ThumbId )
-    , m_InfoModifiedTime( rhs.m_InfoModifiedTime )
+UserJoinInfo::UserJoinInfo( const UserJoinInfo& rhs )
+    : BaseJoinInfo( rhs )
+    , m_HostFlags( rhs.m_HostFlags )
+    , m_HostUrl( rhs.m_HostUrl )
+    , m_ConnectionId( rhs.m_ConnectionId )
 {
 }
 
 //============================================================================
-BaseInfo& BaseInfo::operator=( const BaseInfo& rhs )
-{
-    if( this != &rhs )
-    {
-        m_OnlineId = rhs.m_OnlineId;
-        m_ThumbId = rhs.m_ThumbId;
-        m_InfoModifiedTime = rhs.m_InfoModifiedTime;
+UserJoinInfo& UserJoinInfo::operator=( const UserJoinInfo& rhs ) 
+{	
+	if( this != &rhs )
+	{
+        BaseJoinInfo::operator = ( rhs );
+        m_HostFlags = rhs.m_HostFlags;
+        m_HostUrl = rhs.m_HostUrl;
+        m_ConnectionId = rhs.m_ConnectionId;
     }
 
-    return *this;
-}
-
-//============================================================================
-void BaseInfo::fillBaseInfo( VxNetIdent* netIdent, EHostType hostType )
-{
-    vx_assert( netIdent );
-    m_OnlineId = netIdent->getMyOnlineId();
-    m_ThumbId = netIdent->getThumbId( hostType );
-    m_InfoModifiedTime = GetTimeStampMs();
+	return *this;
 }

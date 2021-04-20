@@ -15,16 +15,14 @@
 
 #include <GuiInterface/IDefs.h>
 
-class UserHostInfo;
+class UserJoinInfo;
 class VxGUID;
 
-class UserHostCallbackInterface
+class UserJoinCallbackInterface
 {
 public:
-    virtual void				callbackUserHostAdded( UserHostInfo * userHostInfo ){};
-    virtual void				callbackUserHostUpdated( UserHostInfo * userHostInfo ){};
-    virtual void				callbackUserHostRemoved( VxGUID& userHostId ){};
-    virtual void				callbackUserHostOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState ) {};
-    virtual void				callbackUserHostOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId ) {};
+    virtual void				callbackUserJoinAdded( UserJoinInfo * userJoinInfo ){};
+    virtual void				callbackUserJoinUpdated( UserJoinInfo * userHostInfo ){};
+    virtual void				callbackUserJoinRemoved( VxGUID& userHostId, EHostType hostType ){};
 };
 
