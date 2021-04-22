@@ -145,38 +145,6 @@ void HostJoinMgr::announceHostJoinRemoved( VxGUID& hostOnlineId )
 }
 
 //============================================================================
-void HostJoinMgr::announceHostJoinOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState )
-{
-	LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinXferState state %d start\n", userHostOfferState );
-	lockClientList();
-	std::vector<HostJoinCallbackInterface *>::iterator iter;
-	for( iter = m_HostJoinClients.begin();	iter != m_HostJoinClients.end(); ++iter )
-	{
-		HostJoinCallbackInterface * client = *iter;
-		client->callbackHostJoinOfferState( hostOnlineId, userHostOfferState );
-	}
-
-	unlockClientList();
-	LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinXferState state %d done\n", userHostOfferState );
-}
-
-//============================================================================
-void HostJoinMgr::announceHostJoinOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId )
-{
-    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinOnlineState state %d start\n", onlineState );
-    lockClientList();
-    std::vector<HostJoinCallbackInterface *>::iterator iter;
-    for( iter = m_HostJoinClients.begin();	iter != m_HostJoinClients.end(); ++iter )
-    {
-        HostJoinCallbackInterface * client = *iter;
-        client->callbackHostJoinOnlineState( hostOnlineId, onlineState, connectionId );
-    }
-
-    unlockClientList();
-    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinOnlineState state %d done\n", onlineState );
-}
-
-//============================================================================
 void HostJoinMgr::clearHostJoinInfoList( void )
 {
     for( auto iter = m_HostJoinInfoList.begin(); iter != m_HostJoinInfoList.end(); ++iter )
@@ -190,6 +158,86 @@ void HostJoinMgr::clearHostJoinInfoList( void )
 //============================================================================
 void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType )
 {
-    // TODO IMPLEMENT
-    vx_assert( false );
+    bool wasAdded = false;
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), pluginType );
+    if( !joinInfo )
+    {
+        joinInfo = new HostJoinInfo();
+        joinInfo->fillBaseInfo( netIdent, hostType );
+        joinInfo->setPluginType( pluginType );
+        joinInfo->setHostType( hostType );
+        wasAdded = true;
+    }
+
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( hostType ) );
+    joinInfo->setJoinState( eJoinStateJoinAccepted );
+    joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionId );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+
+    unlockResources();
+
+    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, pluginType );
+
+    if( wasAdded )
+    {
+        announceHostJoinAdded( joinInfo );
+    }
+    else
+    {
+        announceHostJoinUpdated( joinInfo );
+    }
+
+    saveToDatabase( joinInfo );
+
+}
+
+//============================================================================
+HostJoinInfo* HostJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EHostType hostType )
+{
+    HostJoinInfo* joinFoundInfo = nullptr;
+    for( auto joinInfo : m_HostJoinInfoList )
+    {
+        if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getHostType() == hostType )
+        {
+            joinFoundInfo = joinInfo;
+            break;
+        }
+    }
+
+    return joinFoundInfo;
+}
+
+//============================================================================
+HostJoinInfo* HostJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType )
+{
+    HostJoinInfo* joinFoundInfo = nullptr;
+    for( auto joinInfo : m_HostJoinInfoList )
+    {
+        if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getPluginType() == pluginType )
+        {
+            joinFoundInfo = joinInfo;
+            break;
+        }
+    }
+
+    return joinFoundInfo;
+}
+
+//============================================================================
+bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo )
+{
+    lockResources();
+
+    bool result = m_HostJoinInfoDb.addHostJoin( joinInfo );
+
+    unlockResources();
+    return result;
 }

@@ -38,6 +38,7 @@ UserJoinInfo::UserJoinInfo( const UserJoinInfo& rhs )
     , m_HostFlags( rhs.m_HostFlags )
     , m_HostUrl( rhs.m_HostUrl )
     , m_ConnectionId( rhs.m_ConnectionId )
+    , m_SessionId( rhs.m_SessionId )
 {
 }
 
@@ -50,6 +51,7 @@ UserJoinInfo& UserJoinInfo::operator=( const UserJoinInfo& rhs )
         m_HostFlags = rhs.m_HostFlags;
         m_HostUrl = rhs.m_HostUrl;
         m_ConnectionId = rhs.m_ConnectionId;
+        m_SessionId = rhs.m_SessionId;
     }
 
 	return *this;

@@ -36,8 +36,9 @@ HostJoinInfo::HostJoinInfo()
 HostJoinInfo::HostJoinInfo( const HostJoinInfo& rhs )
     : BaseJoinInfo( rhs )
     , m_HostFlags( rhs.m_HostFlags )
-    , m_HostUrl( rhs.m_HostUrl )
+    , m_UserUrl( rhs.m_UserUrl )
     , m_ConnectionId( rhs.m_ConnectionId )
+    , m_SessionId( rhs.m_SessionId )
 {
 }
 
@@ -48,8 +49,9 @@ HostJoinInfo& HostJoinInfo::operator=( const HostJoinInfo& rhs )
 	{
         BaseJoinInfo::operator = ( rhs );
         m_HostFlags = rhs.m_HostFlags;
-        m_HostUrl = rhs.m_HostUrl;
+        m_UserUrl = rhs.m_UserUrl;
         m_ConnectionId = rhs.m_ConnectionId;
+        m_SessionId = rhs.m_SessionId;
     }
 
 	return *this;

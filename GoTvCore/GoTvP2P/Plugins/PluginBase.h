@@ -35,9 +35,10 @@ class PluginMgr;
 class PluginSessionBase;
 class PluginSetting;
 class RxSession;
+class SearchParams;
+class ThumbMgr;
 class TxSession;
 class VxSktBase;
-class SearchParams;
 
 class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface
 {
@@ -88,6 +89,8 @@ public:
 	virtual	VxMutex&			getPluginMutex( void )									{ return m_PluginMutex; }					
 	virtual	EAppState			getPluginState( void );
 	virtual	void				setPluginState( EAppState ePluginState )				{ m_ePluginState = ePluginState;};
+
+    virtual ThumbMgr&			getThumbMgr( void )									    { return m_ThumbMgr;	}
 
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
@@ -179,6 +182,14 @@ public:
     virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
+    virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+
     // error handling for invalid packet
     virtual void				onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg = "" );
 
@@ -211,6 +222,7 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine;
 	PluginMgr&					m_PluginMgr;
+    ThumbMgr&                   m_ThumbMgr;
 	
 	VxNetIdent *				m_MyIdent = nullptr;
 

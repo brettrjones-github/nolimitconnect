@@ -17,18 +17,20 @@
 
 namespace
 {
-    std::string 		TABLE_USER_HOST	 				= "tblUserJoins";
+    std::string 		TABLE_USER_HOST	 				= "tblUserJoin";
 
-    std::string 		CREATE_COLUMNS_USER_HOST		= " (onlineId TEXT, thumbId TEXT, infoModMs BIGINT, hostType INTEGER, hostFlags INTEGER, hostUrl TEXT, lastConnMs BIGINT, lastJoinMs BIGINT) ";
+    std::string 		CREATE_COLUMNS_USER_HOST		= " (onlineId TEXT, thumbId TEXT, infoModMs BIGINT, pluginType INTEGER, hostType INTEGER, joinState INTEGER, lastConnMs BIGINT, lastJoinMs BIGINT, hostFlags INTEGER, hostUrl TEXT) ";
 
     const int			COLUMN_ONLINE_ID			    = 0;
     const int			COLUMN_HOST_THUMB_ID			= 1;
     const int			COLUMN_INFO_MOD_MS				= 2;
-    const int			COLUMN_HOST_TYPE			    = 3;
-    const int			COLUMN_HOST_FLAGS			    = 4;
-    const int			COLUMN_HOST_URL			        = 5;
+    const int			COLUMN_PLUGIN_TYPE			    = 3;
+    const int			COLUMN_HOST_TYPE			    = 4;
+    const int			COLUMN_JOIN_STATE			    = 5;
     const int			COLUMN_LAST_CONN_MS				= 6;
     const int			COLUMN_LAST_JOIN_MS			    = 7;
+    const int			COLUMN_HOST_FLAGS			    = 8;
+    const int			COLUMN_HOST_URL			        = 9;
 }
 
 //============================================================================
@@ -88,14 +90,16 @@ void UserJoinInfoDb::removeUserJoin( VxGUID& onlineId, EHostType hostType )
 }
 
 //============================================================================
-void UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId, 
+bool UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId, 
                                     VxGUID&			thumbId,
                                     uint64_t		infoModTime,
+                                    EPluginType     pluginType,
                                     EHostType       hostType,
-                                    uint32_t        hostFlags,
-                                    std::string     hostUrl,
+                                    EJoinState      joinState,
                                     uint64_t		lastConnectMs,
-                                    uint64_t		lastJoinMs
+                                    uint64_t		lastJoinMs,
+                                    uint32_t        hostFlags,
+                                    std::string     hostUrl
                                    )
 {
     removeUserJoin( onlineId, hostType );
@@ -106,63 +110,62 @@ void UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId,
     DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( thumbIdStr.c_str() );
     bindList.add( infoModTime );
+    bindList.add( (int)pluginType );
     bindList.add( (int)hostType );
+    bindList.add( (int)joinState );
+    bindList.add( lastConnectMs );
+    bindList.add( lastJoinMs ); 
     bindList.add( (int)hostFlags );
     bindList.add( hostUrl.c_str() );
-    bindList.add( lastConnectMs );
-    bindList.add( lastJoinMs );    
-
-    RCODE rc = sqlExec( "INSERT INTO tblUserJoins (onlineId, thumbId, infoModMs, hostType, hostFlags, hostUrl, lastConnMs, lastJoinMs) values(?,?,?,?,?,?,?,?)",
+   
+    RCODE rc = sqlExec( "INSERT INTO tblUserJoins (onlineId, thumbId, infoModMs, pluginType, hostType, joinState, lastConnMs, lastJoinMs, hostFlags, hostUrl) values(?,?,?,?,?,?,?,?,?,?)",
         bindList );
     vx_assert( 0 == rc );
     if( rc )
     {
         LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin error %d\n", rc );
     }
+
+    return ( 0 == rc );
 }
 
 //============================================================================
-void UserJoinInfoDb::addUserJoin( UserJoinInfo* hostInfo )
+bool UserJoinInfoDb::addUserJoin( UserJoinInfo* hostInfo )
 {
-    addUserJoin(	hostInfo->getOnlineId(),
-                    hostInfo->getThumbId(),
-                    hostInfo->getInfoModifiedTime(),                    
-                    hostInfo->getHostType(),
-                    hostInfo->getHostFlags(),			
-                    hostInfo->getHostUrl(),
-                    hostInfo->getLastConnectTime(),	
-                    hostInfo->getLastJoinTime()	
-                    );
+    return addUserJoin(	hostInfo->BaseInfo::getOnlineId(),
+                        hostInfo->BaseInfo::getThumbId(),
+                        hostInfo->BaseInfo::getInfoModifiedTime(),  
+                        hostInfo->BaseJoinInfo::getPluginType(),  
+                        hostInfo->BaseJoinInfo::getHostType(),
+                        hostInfo->BaseJoinInfo::getJoinState(),		
+                        hostInfo->BaseJoinInfo::getLastConnectTime(),	
+                        hostInfo->BaseJoinInfo::getLastJoinTime(),
+                        hostInfo->getHostFlags(),
+                        hostInfo->getHostUrl()
+                        );
 }
 
 //============================================================================
 void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJoinList )
 {
     lockUserJoinInfoDb();
-    DbCursor * cursor = startQuery( "SELECT * FROM tblUserJoins" ); // ORDER BY unique_id DESC  // BRJ don't know why ORDER BY quit working on android.. do in code
+    DbCursor * cursor = startQuery( "SELECT * FROM tblUserJoin" ); 
     if( NULL != cursor )
     {
         while( cursor->getNextRow() )
         {
             UserJoinInfo * hostInfo = new UserJoinInfo();
-            const int			COLUMN_ONLINE_ID			    = 0;
-            const int			COLUMN_HOST_THUMB_ID			= 1;
-            const int			COLUMN_INFO_MOD_MS				= 2;
-            const int			COLUMN_HOST_TYPE			    = 3;
-            const int			COLUMN_HOST_FLAGS			    = 4;
-            const int			COLUMN_HOST_URL			        = 5;
-            const int			COLUMN_LAST_CONN_MS				= 6;
-            const int			COLUMN_LAST_JOIN_MS			    = 7;
 
             hostInfo->setOnlineId( cursor->getString( COLUMN_ONLINE_ID ) );
             hostInfo->setThumbId( cursor->getString( COLUMN_HOST_THUMB_ID ) );
             hostInfo->setInfoModifiedTime( (uint64_t)cursor->getS64( COLUMN_INFO_MOD_MS ) );
+            hostInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_HOST_TYPE ) );
             hostInfo->setHostType( (EHostType)cursor->getS32( COLUMN_HOST_TYPE ) );
-            hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
-            hostInfo->setHostUrl( cursor->getString( COLUMN_HOST_URL ) );
-            
+            hostInfo->setJoinState( (EJoinState)cursor->getS32( COLUMN_JOIN_STATE ) );
             hostInfo->setLastConnectTime( (uint64_t)cursor->getS64( COLUMN_LAST_CONN_MS ) );
             hostInfo->setLastJoinTime(  (uint64_t)cursor->getS64( COLUMN_LAST_JOIN_MS ) ); 
+            hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
+            hostInfo->setHostUrl( cursor->getString( COLUMN_HOST_URL ) );
 
             vx_assert( hostInfo->isValid() );
 

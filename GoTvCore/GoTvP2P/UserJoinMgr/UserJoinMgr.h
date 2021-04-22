@@ -38,13 +38,13 @@ public:
     virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
     virtual void				announceUserJoinRemoved( VxGUID& hostOnlineId, EHostType hostType );
 
-
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType );
 
+    UserJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType );
     UserJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EHostType hostType );
 
 protected:
@@ -52,6 +52,8 @@ protected:
 
     void						lockClientList( void )						{ m_UserJoinClientMutex.lock(); }
     void						unlockClientList( void )					{ m_UserJoinClientMutex.unlock(); }
+
+    bool                        saveToDatabase( UserJoinInfo* joinInfo );
 
     P2PEngine&					m_Engine;
     UserJoinInfoDb              m_UserJoinInfoDb;

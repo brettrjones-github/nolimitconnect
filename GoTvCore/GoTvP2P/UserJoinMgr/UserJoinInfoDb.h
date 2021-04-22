@@ -32,23 +32,25 @@ public:
     void						lockUserJoinInfoDb( void ) { m_UserJoinInfoDbMutex.lock(); }
     void						unlockUserJoinInfoDb( void ) { m_UserJoinInfoDbMutex.unlock(); }
 
-    void						addUserJoin(    VxGUID&			onlineId, 
-                                                VxGUID&			thumbId,
-                                                uint64_t		infoModTime,
-                                                EHostType       hostType,
-                                                uint32_t        hostFlags,
-                                                std::string     hostUrl,
-                                                uint64_t		lastConnectMs,
-                                                uint64_t		lastJoinMs
-                                                );
-
-    void						addUserJoin( UserJoinInfo * hostInfo );
+    bool						addUserJoin( UserJoinInfo * hostInfo );
     void						removeUserJoin( VxGUID& onlineId, EHostType hostType );
 
     void						getAllUserJoins( std::vector<UserJoinInfo*>& userHostList );
     void						purgeAllUserJoins( void ); 
 
 protected:
+
+    bool						addUserJoin(    VxGUID&			onlineId, 
+                                                VxGUID&			thumbId,
+                                                uint64_t		infoModTime,
+                                                EPluginType     pluginType,
+                                                EHostType       hostType,
+                                                EJoinState      joinState,
+                                                uint64_t		lastConnectMs,
+                                                uint64_t		lastJoinMs,
+                                                uint32_t        hostFlags,
+                                                std::string     hostUrl
+                                            );
 
     virtual RCODE				onCreateTables( int iDbVersion );
     virtual RCODE				onDeleteTables( int iOldVersion );

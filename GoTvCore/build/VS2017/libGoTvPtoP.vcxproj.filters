@@ -868,6 +868,9 @@
     <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.cpp">
       <Filter>GoTvP2P\UserJoinMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBasePktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />

@@ -159,30 +159,32 @@ void UserJoinMgr::clearUserJoinInfoList( void )
 void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType )
 {
     bool wasAdded = false;
-    UserJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), hostType );
-    if( joinInfo )
-    {
-        if( netIdent->getThumbId( hostType ).isVxGUIDValid() && netIdent->getThumbId( hostType ) != joinInfo->getThumbId() )
-        {
-            joinInfo->setThumbId( netIdent->getThumbId( hostType ) );
-            // TODO query thumb id from Thumb manager
-        }
-    }
-    else
+    lockResources();
+    UserJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), pluginType );
+    if( !joinInfo )
     {
         joinInfo = new UserJoinInfo();
         joinInfo->fillBaseInfo( netIdent, hostType );
-        // TODO query thumb id from Thumb manager
-
         joinInfo->setPluginType( pluginType );
         joinInfo->setHostType( hostType );
         wasAdded = true;
     }
 
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( hostType ) );
     joinInfo->setJoinState( eJoinStateJoinAccepted );
-    joinInfo->setConnectionId( sktBase->getConnectionId() );
     joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
-    joinInfo->setInfoModifiedTime( GetTimeStampMs() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionId );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+
+    unlockResources();
+
+    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, pluginType );
 
     if( wasAdded )
     {
@@ -193,15 +195,13 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Vx
         announceUserJoinUpdated( joinInfo );
     }
 
-
-    // TODO save to db
+    saveToDatabase( joinInfo );
 }
 
 //============================================================================
 UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EHostType hostType )
 {
     UserJoinInfo* joinFoundInfo = nullptr;
-    lockResources();
     for( auto joinInfo : m_UserJoinInfoList )
     {
         if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getHostType() == hostType )
@@ -211,6 +211,32 @@ UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EHostType hos
         }
     }
 
-    unlockResources();
     return joinFoundInfo;
+}
+
+//============================================================================
+UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType )
+{
+    UserJoinInfo* joinFoundInfo = nullptr;
+    for( auto joinInfo : m_UserJoinInfoList )
+    {
+        if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getPluginType() == pluginType )
+        {
+            joinFoundInfo = joinInfo;
+            break;
+        }
+    }
+
+    return joinFoundInfo;
+}
+
+//============================================================================
+bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo )
+{
+    lockResources();
+
+    bool result = m_UserJoinInfoDb.addUserJoin( joinInfo );
+
+    unlockResources();
+    return result;
 }

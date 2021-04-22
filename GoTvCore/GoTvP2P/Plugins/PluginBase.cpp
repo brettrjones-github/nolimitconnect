@@ -28,6 +28,7 @@ PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * my
 : PktPluginHandlerBase()
 , m_Engine( engine )
 , m_PluginMgr( pluginMgr )
+, m_ThumbMgr( engine.getThumbMgr() )
 , m_MyIdent( myIdent )
 {
 }
@@ -164,108 +165,6 @@ bool PluginBase::isPluginEnabled( void )
 void PluginBase::onSessionStart( PluginSessionBase * poSession, bool pluginIsLocked )
 {
 	m_Engine.onSessionStart( poSession->getPluginType(), poSession->getIdent() );
-}
-
-//============================================================================
-void PluginBase::onInvalidRxedPacket( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent, const char * msg )
-{
-    // TODO proper invalid packet handling
-    LogMsg( LOG_INFO, "PluginBase::onInvalidRxedPacket plugin %s user %s", DescribePluginType( getPluginType() ), netIdent->getOnlineName() );
-}
-
-//============================================================================
-void PluginBase::onPktUserConnect( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "PluginBase::onPktUserConnect\n" );
-}
-
-//============================================================================
-void PluginBase::onPktUserDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_INFO, "PluginBase::onPktUserConnect\n" );
-}
-
-//============================================================================
-void PluginBase::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktPluginOfferReq" );
-}
-
-//============================================================================
-//! packet with remote users reply to offer
-void PluginBase::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktPluginOfferReply" );
-}
-
-//============================================================================
-void PluginBase::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktSessionStartReq" );
-}
-//============================================================================
-void PluginBase::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktSessionStartReply" );
-}
-//============================================================================
-void PluginBase::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktSessionStopReq" );
-}
-
-//============================================================================
-void PluginBase::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktSessionStopReply\n" );
-}
-
-//============================================================================
-void PluginBase::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktMyPicSendReq\n" );
-}
-
-//============================================================================
-void PluginBase::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktMyPicSendReply\n" );
-}
-
-//============================================================================
-void PluginBase::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktWebServerPicChunkTx\n" );
-}
-
-//============================================================================
-void PluginBase::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktWebServerPicChunkAck\n" );
-}
-
-//============================================================================
-void PluginBase::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktWebServerGetChunkTx\n" );
-}
-
-//============================================================================
-void PluginBase::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktWebServerGetChunkAck\n" );
-}
-
-//============================================================================
-void PluginBase::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktWebServerPutChunkTx\n" );
-}
-
-//============================================================================
-void PluginBase::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-	LogMsg( LOG_ERROR, "PluginBase::onPktWebServerPutChunkAck\n" );
 }
 
 //============================================================================

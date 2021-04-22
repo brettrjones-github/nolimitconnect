@@ -43,6 +43,8 @@ public:
     // temporaries
     virtual void				setConnectionId( VxGUID& connectionId )             { m_ConnectionId = connectionId; }
     virtual VxGUID&				getConnectionId( void )                             { return m_ConnectionId; }
+    virtual void				setSessionId( VxGUID& sessionId )                    { m_SessionId = sessionId; }
+    virtual VxGUID&				getSessionId( void )                                { return m_SessionId; }
 
 protected:
 	//=== vars ===//
@@ -51,4 +53,5 @@ protected:
 
     // temporaries
     VxGUID                      m_ConnectionId;
+    VxGUID                      m_SessionId;
 };

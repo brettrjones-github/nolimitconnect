@@ -37,18 +37,21 @@ public:
     void						setIsTemp( bool isTemp )	                        { if( isTemp ) m_HostFlags |= HOST_FLAG_IS_TEMP; else m_HostFlags &= ~HOST_FLAG_IS_TEMP; }
     bool						isTemp( void )				                        { return m_HostFlags & HOST_FLAG_IS_TEMP ? true : false; }
 
-    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
-    virtual std::string&	    getHostUrl( void )                                  { return m_HostUrl; }
+    virtual void			    setUserUrl( std::string userUrl )                   { m_UserUrl = userUrl; }
+    virtual std::string&	    getUserUrl( void )                                  { return m_UserUrl; }
 
     // temporaries
     virtual void				setConnectionId( VxGUID& connectionId )             { m_ConnectionId = connectionId; }
     virtual VxGUID&				getConnectionId( void )                             { return m_ConnectionId; }
+    virtual void				setSessionId( VxGUID& sessionId )                    { m_SessionId = sessionId; }
+    virtual VxGUID&				getSessionId( void )                                { return m_SessionId; }
 
 protected:
 	//=== vars ===//
     uint32_t                    m_HostFlags{ 0 };
-    std::string                 m_HostUrl{ "" };
+    std::string                 m_UserUrl{ "" };
 
     // temporaries
     VxGUID                      m_ConnectionId;
+    VxGUID                      m_SessionId;
 };

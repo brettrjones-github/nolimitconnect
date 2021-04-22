@@ -23,7 +23,7 @@ class FileToXfer
 {
 public:
 	FileToXfer( std::string		strFileName, 
-				uint64_t				u64FileOffset, 
+				uint64_t		u64FileOffset, 
 				VxGUID&			lclSessionId,
 				VxGUID&			rmtSessionId, 
 				VxSha1Hash		fileHashId,
@@ -41,7 +41,7 @@ public:
 
 	//=== vars ===//
     std::string					m_strFileName;
-	uint64_t							m_u64FileOffset;
+	uint64_t					m_u64FileOffset;
 	int							m_UserData;
 
 protected:

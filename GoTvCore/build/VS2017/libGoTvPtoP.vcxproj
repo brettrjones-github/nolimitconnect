@@ -691,6 +691,7 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostClient.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBasePktHandlers.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelay.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayPktHandlers.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayTests.cpp" />

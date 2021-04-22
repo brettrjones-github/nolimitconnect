@@ -27,8 +27,8 @@ public:
 	ThumbXferDb();
 	virtual ~ThumbXferDb();
 
-	void						lockThumbXferDb( void )			{ m_ThumbXferDbMutex.lock(); }
-	void						unlockThumbXferDb( void )			{ m_ThumbXferDbMutex.unlock(); }
+	void						lockThumbXferDb( void )			        { m_ThumbXferDbMutex.lock(); }
+	void						unlockThumbXferDb( void )			    { m_ThumbXferDbMutex.unlock(); }
 
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );

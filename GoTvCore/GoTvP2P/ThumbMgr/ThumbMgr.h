@@ -17,9 +17,8 @@
 #include "ThumbInfoDb.h"
 
 #include <GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.h>
+#include <GuiInterface/IDefs.h>
 
-#include <CoreLib/VxThread.h>
-#include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
 
 class PktFileListReply;
@@ -27,6 +26,9 @@ class PktFileListReply;
 class ThumbInfo;
 class ThumbHistoryMgr;
 class ThumbCallbackInterface;
+class VxNetIdent;
+class VxPktHdr;
+class VxSktBase;
 
 class ThumbMgr : public AssetBaseMgr
 {
@@ -45,6 +47,17 @@ public:
     virtual void				announceAssetUpdated( AssetBaseInfo * assetInfo ) override;
     virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo ) override;
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) override;
+
+    virtual void				queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
+
+    // packet handlers
+    virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;

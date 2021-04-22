@@ -198,3 +198,46 @@ bool ThumbMgr::fromGuiThumbUpdated( ThumbInfo& thumbInfo )
 {
     return updateAsset( thumbInfo );
 }
+
+//============================================================================
+void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
+{
+    // TODO implement
+    vx_assert( false );
+
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}

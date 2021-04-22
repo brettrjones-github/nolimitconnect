@@ -561,6 +561,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostClient.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseMultimedia.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBasePktHandlers.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelayPktHandlers.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelayTests.cpp \
