@@ -56,7 +56,7 @@ public:
 													VxPktHdr *		pktHdr, 				// packet to send
 													bool			bDisconnect = false );	// if true disconnect after send
 
-    virtual void                dumpSocketStats( const char *reason = nullptr ) override;
+    virtual void                dumpSocketStats( const char *reason = nullptr, bool fullDump = false ) override;
 
     virtual void                setSktLoopback( VxSktBase * sktLoopback ) override          { m_SktLoopback = sktLoopback; m_ClientMgr.setSktLoopback( sktLoopback ); }
 

@@ -1399,7 +1399,7 @@ bool VxSktBase::getPeerPktAnnCopy( PktAnnounce& peerAnn )
 }
 
 //============================================================================
-void VxSktBase::dumpSocketStats( const char* reason )
+void VxSktBase::dumpSocketStats( const char* reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
     LogModule( eLogSkt, LOG_DEBUG, "%s skt %d handle %d connected ? %d rmt %s last active %s", DescribeSktType(getSktType()), getSktId(), m_Socket, isConnected(), 

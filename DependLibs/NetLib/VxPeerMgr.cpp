@@ -209,9 +209,9 @@ bool VxPeerMgr::txPacketWithDestId(	VxSktBase *			sktBase,
 }
 
 //============================================================================
-void VxPeerMgr::dumpSocketStats( const char *reason )
+void VxPeerMgr::dumpSocketStats( const char *reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
-    VxSktBaseMgr::dumpSocketStats( std::string( reasonMsg + " server: " ).c_str() );
-    m_ClientMgr.dumpSocketStats( std::string( reasonMsg + " client: " ).c_str() );
+    VxSktBaseMgr::dumpSocketStats( std::string( reasonMsg + " server: " ).c_str(), fullDump );
+    m_ClientMgr.dumpSocketStats( std::string( reasonMsg + " client: " ).c_str(), fullDump );
 }

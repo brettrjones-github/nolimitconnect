@@ -37,9 +37,6 @@ public:
 	void						setWhichContactsToView( EFriendViewType eViewType );
 	EFriendViewType				getWhichContactsToView( void );
 
-	void						setExternalIp( std::string& strIpAddress );
-	void						getExternalIp( std::string& strIpAddress );
-
 	void						setTcpIpPort( uint16_t u16IpPort );
     uint16_t					getTcpIpPort( bool bGetRandomIfDoesntExist = true );
 
@@ -55,8 +52,11 @@ public:
 	void						setNetworkHostUrl( std::string& strWebsiteUrl );
 	void						getNetworkHostUrl( std::string& strWebsiteUrl );
 
-    void						setExternalIpAddr( std::string& externIp );
-    void						getExternalIpAddr( std::string& externIp );
+    //void						setExternalIpAddr( std::string& externIp );
+    //void						getExternalIpAddr( std::string& externIp );
+    void						setUserSpecifiedExternIpAddr( std::string& externIp );
+    void						getUserSpecifiedExternIpAddr( std::string& externIp );
+    std::string                 getUserSpecifiedExternIpAddr( void );
 
     void						setUseUpnp( bool useUpnp );
     bool						getUseUpnp( void );

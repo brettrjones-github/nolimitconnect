@@ -411,7 +411,7 @@ bool AccountDb::updateNetHostSetting( NetHostSetting& netSetting )
     bindList.add( netSetting.getRandomConnectUrl().c_str() );
     bindList.add( netSetting.getGroupHostUrl().c_str() );
     bindList.add( netSetting.getChatRoomHostUrl().c_str() );
-    bindList.add( netSetting.getExternIpAddr().c_str() );
+    bindList.add( netSetting.getUserSpecifiedExternIpAddr().c_str() );
 	bindList.add( netSetting.getPreferredNetworkAdapterIp().c_str() );
 
     bindList.add( netSetting.getUseUpnpPortForward() );
@@ -439,7 +439,7 @@ bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& netS
             netSetting.setRandomConnectUrl( cursor->getString( 4 ) );
             netSetting.setGroupHostUrl( cursor->getString( 5 ) );
             netSetting.setChatRoomHostUrl( cursor->getString( 6 ) );
-            netSetting.setExternIpAddr( cursor->getString( 7 ) );
+            netSetting.setUserSpecifiedExternIpAddr( cursor->getString( 7 ) );
             netSetting.setPreferredNetworkAdapterIp( cursor->getString( 8 ) );
 			netSetting.setUseUpnpPortForward( ( 0 == cursor->getS32( 9 ) ) ? false : true );
             netSetting.setTcpPort( cursor->getS32( 10 ) );
@@ -472,9 +472,10 @@ bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& netSettingLi
             netSetting.setRandomConnectUrl( cursor->getString( 4 ) );
             netSetting.setGroupHostUrl( cursor->getString( 5 ) );
             netSetting.setChatRoomHostUrl( cursor->getString( 6 ) );
-            netSetting.setExternIpAddr( cursor->getString( 7 ) );
 
+            netSetting.setUserSpecifiedExternIpAddr( cursor->getString( 7 ) );
             netSetting.setPreferredNetworkAdapterIp( cursor->getString( 8 ) );
+
             netSetting.setUseUpnpPortForward( ( 0 == cursor->getS32( 9 ) ) ? false : true );
             netSetting.setTcpPort( cursor->getS32( 10 ) );
             netSetting.setFirewallTestType( cursor->getS32( 11 ) );

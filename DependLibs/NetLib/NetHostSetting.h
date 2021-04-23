@@ -53,8 +53,8 @@ public:
     std::string&				getGroupHostUrl( void )								        { return m_GroupHostUrl; }
     void						setChatRoomHostUrl( const char * netServiceUrl )		    { m_ChatRoomHostUrl = netServiceUrl; }
     std::string&				getChatRoomHostUrl( void )								    { return m_ChatRoomHostUrl; }
-    void						setExternIpAddr( const char * ipAddr )		                { m_ExternIpAddr = ipAddr; }
-    std::string&				getExternIpAddr( void )								        { return m_ExternIpAddr; }
+    void						setUserSpecifiedExternIpAddr( const char * ipAddr )		    { m_ExternIpAddr = ipAddr; }
+    std::string&				getUserSpecifiedExternIpAddr( void )						{ return m_ExternIpAddr; }
     void                        setPreferredNetworkAdapterIp( const char * preferredAdaptIp ) { m_PreferredNetworkAdapterIp = preferredAdaptIp; }
     std::string&                getPreferredNetworkAdapterIp( void )                        { return m_PreferredNetworkAdapterIp; }
 

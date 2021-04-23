@@ -889,6 +889,24 @@ bool P2PEngine::getHasHostService( EHostServiceType hostService )
 }
 
 //============================================================================
+bool P2PEngine::getHasFixedIpAddress( void )
+{
+    if( FirewallSettings::eFirewallTestAssumeNoFirewall == getEngineSettings().getFirewallTestSetting() )
+    {
+        std::string externIp;
+        getEngineSettings().getUserSpecifiedExternIpAddr( externIp );
+        if( externIp.empty() )
+        {
+            LogMsg( LOG_WARN, "Firewall assume no Firewall set but external ip is empty" );
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
 void P2PEngine::fromGuiMuteMicrophone(	bool muteMic )
 {
 	m_MediaProcessor.muteMicrophone( muteMic );
@@ -1076,11 +1094,11 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
     if( origSettings != netHostSetting )
     {
         m_EngineSettings.setNetHostSettings( netHostSetting );
-        if( origSettings.getExternIpAddr() != netHostSetting.getExternIpAddr() )
+        if( origSettings.getUserSpecifiedExternIpAddr() != netHostSetting.getUserSpecifiedExternIpAddr() )
         {
-            if( !netHostSetting.getExternIpAddr().empty() && 1 == netHostSetting.getFirewallTestType() )
+            if( FirewallSettings::eFirewallTestAssumeNoFirewall == netHostSetting.getFirewallTestType() && !netHostSetting.getUserSpecifiedExternIpAddr().empty() )
             {
-                getMyPktAnnounce().setOnlineIpAddress( netHostSetting.getExternIpAddr().c_str() );
+                getMyPktAnnounce().setOnlineIpAddress( netHostSetting.getUserSpecifiedExternIpAddr().c_str() );
                 setPktAnnLastModTime( GetTimeStampMs() );
             }
         }

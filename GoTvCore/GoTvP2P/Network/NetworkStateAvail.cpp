@@ -105,8 +105,8 @@ void NetworkStateAvail::runNetworkState( void )
     FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
 	if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallTestType )
 	{
-		std::string externIp;
-		m_Engine.getEngineSettings().getExternalIp( externIp );
+		std::string externIp = m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr();
+		
 		InetAddress externAddr;
 		externAddr.setIp( externIp.c_str() );
 		if( false == externAddr.isValid() )

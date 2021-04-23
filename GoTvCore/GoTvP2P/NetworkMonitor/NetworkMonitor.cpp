@@ -28,14 +28,13 @@
 
 namespace
 {
-    const int NET_MONITOR_CHECK_INTERVAL_SEC = 4;
+    const int NET_MONITOR_CHECK_INTERVAL_SEC = 5;
     const int NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS = 8000;
 
     const int NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS = 10000;
     const int NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS = 55000;
 
     const char * NET_TEST_WEB_CONNECTION_HOST = "www.google.com";
-
 
     //============================================================================
     static void * NetworkMonitorThreadFunc( void * pvContext )
@@ -95,6 +94,43 @@ void NetworkMonitor::onOncePerSecond( void )
         return;
     }
 
+    if( 0 != m_iCheckInterval && NET_MONITOR_CHECK_INTERVAL_SEC >= m_iCheckInterval )
+    {
+        m_iCheckInterval++;
+        return;
+    }
+
+    m_iCheckInterval = 1;
+
+    bool assumeFixedIp = m_Engine.getHasFixedIpAddress();
+    if( assumeFixedIp )
+    {
+        std::string externIp;
+        m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr( externIp );
+        if( externIp != m_LastConnectedLclIp )
+        {
+            m_LastConnectedLclIp = externIp;
+            LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new fixed ip addr %s", externIp.c_str() );
+
+            setIsInternetAvailable( true );
+            m_Engine.fromGuiNetworkAvailable( externIp.c_str(), false );
+        }
+
+        if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
+        {
+            // also assume we can connect to network host because we are network host
+            m_Engine.getNetStatusAccum().setNetHostAvail( true );
+        }
+
+        return;
+    }
+
+    if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
+    {
+        // assume we can connect to network host because we are network host
+        m_Engine.getNetStatusAccum().setNetHostAvail( true );
+    }
+
     if( m_NetMonitorThread.isThreadRunning() )
     {
         // still trying to get ip from connection.. wait till next time
@@ -105,14 +141,6 @@ void NetworkMonitor::onOncePerSecond( void )
     bool foundCellIp		= false;
     bool foundPreferredAdapterIp	= false;
     std::vector<std::string> pickAddresss;
-
-    m_iCheckInterval++;
-    if( NET_MONITOR_CHECK_INTERVAL_SEC > m_iCheckInterval )
-    {
-        return;
-    }
-
-    m_iCheckInterval = 0;
 
     //LogMsg( LOG_INFO, "NetworkStateMachine::onOncePerSecond\n" );
     m_strPreferredAdapterIp = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
@@ -249,7 +277,7 @@ std::string NetworkMonitor::determineLocalIp( void )
 {
     std::string localIp;
     std::string externIp;
-    m_Engine.getEngineSettings().getExternalIp( externIp );
+    m_Engine.getEngineSettings().setUserSpecifiedExternIpAddr( externIp );
 
     VxSktConnectSimple sktConnect;
     static int connectAttemptCnt = 0;

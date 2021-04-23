@@ -368,22 +368,28 @@ void VxSktBaseMgr::moveToEraseList( VxSktBase * sktBase )
 }
 
 //============================================================================
-void VxSktBaseMgr::dumpSocketStats( const char* reason )
+void VxSktBaseMgr::dumpSocketStats( const char* reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
     LogModule( eLogSkt, LOG_DEBUG, "%s skt active %d to delete %d total in system %d", reasonMsg.c_str(), m_aoSkts.size(), m_aoSktsToDelete.size(), VxSktBase::getCurrentSktCount() );
-    uint64_t timeNow = GetTimeStampMs();
-    m_SktMgrMutex.lock( __FILE__, __LINE__ ); 
-    for( VxSktBase* sktBase : m_aoSkts )
+    if( fullDump )
     {
-        if( sktBase )
+        int sktCnt = 0;
+        uint64_t timeNow = GetTimeStampMs();
+        m_SktMgrMutex.lock( __FILE__, __LINE__ ); 
+        for( VxSktBase* sktBase : m_aoSkts )
         {
-            if( timeNow - sktBase->getLastActiveTimeMs() > SKT_ALIVE_TIMEOUT )
+            sktCnt++;
+            if( sktBase )
             {
-                sktBase->dumpSocketStats( reason );
+                std::string dmpReason = std::to_string( sktCnt ) + " - ";
+                if( timeNow - sktBase->getLastActiveTimeMs() > SKT_ALIVE_TIMEOUT )
+                {
+                    sktBase->dumpSocketStats( dmpReason.c_str(), fullDump );
+                }
             }
         }
-    }
 
-    m_SktMgrMutex.unlock( __FILE__, __LINE__ );
+        m_SktMgrMutex.unlock( __FILE__, __LINE__ );
+    }
 }

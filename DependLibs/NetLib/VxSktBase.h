@@ -247,7 +247,7 @@ public:
     // returns peer online id. caller should check VxGUID::isVxGUIDValid() for validity
     VxGUID                      getPeerOnlineId( void ) { return m_PeerOnlineId; }
 
-    virtual void                dumpSocketStats( const char* reason = nullptr );
+    virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 
 protected:
 	bool						toSocketAddrInfo(	int sockType, 

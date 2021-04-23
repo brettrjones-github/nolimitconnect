@@ -203,8 +203,8 @@ void AppletNetworkSettings::fillNetHostSettingFromEngine( NetHostSetting& netSet
     netSetting.setGroupHostUrl( strValue.c_str() );
 
     std::string externIP;
-    m_Engine.getEngineSettings().getExternalIp( externIP );
-    netSetting.setExternIpAddr( externIP.c_str() );
+    m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr( externIP );
+    netSetting.setUserSpecifiedExternIpAddr( externIP.c_str() );
 
     std::string preferredAdapterIP = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
     netSetting.setPreferredNetworkAdapterIp( preferredAdapterIP.c_str() );
@@ -247,9 +247,9 @@ void AppletNetworkSettings::slotApplySettingsButtonClick( void )
 //============================================================================
 void AppletNetworkSettings::applyEngineSettingsFromHostSetting( NetHostSetting& netHostSetting )
 {
-    if( 1 == netHostSetting.getFirewallTestType() && !netHostSetting.getExternIpAddr().empty() )
+    if( 1 == netHostSetting.getFirewallTestType() && !netHostSetting.getUserSpecifiedExternIpAddr().empty() )
     {
-        m_MyApp.getAppGlobals().getUserIdent()->setOnlineIpAddress( netHostSetting.getExternIpAddr().c_str() );
+        m_MyApp.getAppGlobals().getUserIdent()->setOnlineIpAddress( netHostSetting.getUserSpecifiedExternIpAddr().c_str() );
     }
 
     if( m_Engine.getMyNetIdent()->getMyOnlinePort() != netHostSetting.getTcpPort() )
@@ -345,12 +345,12 @@ void AppletNetworkSettings::populateNetHostSettingsFromDlg( NetHostSetting& netH
     std::string externIp = ui.m_ExternIpEdit->text().toUtf8().constData();
     if( externIp.length() )
     {
-        netHostSetting.setExternIpAddr( externIp.c_str() );
+        netHostSetting.setUserSpecifiedExternIpAddr( externIp.c_str() );
     }
     else
     {
         externIp = "";
-        netHostSetting.setExternIpAddr( externIp.c_str() );
+        netHostSetting.setUserSpecifiedExternIpAddr( externIp.c_str() );
     }
 
     FirewallSettings::EFirewallTestType eFirewallTestType = FirewallSettings::eFirewallTestUrlConnectionTest;
@@ -502,7 +502,7 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSe
     ui.m_RandomConnectUrlEdit->setText( netSetting.getRandomConnectUrl().c_str() );
     ui.m_GroupHostUrlEdit->setText( netSetting.getGroupHostUrl().c_str() );
     ui.m_DefaultChatRoomHostUrlEdit->setText( netSetting.getChatRoomHostUrl().c_str() );
-    ui.m_ExternIpEdit->setText( netSetting.getExternIpAddr().c_str() );
+    ui.m_ExternIpEdit->setText( netSetting.getUserSpecifiedExternIpAddr().c_str() );
 
     int32_t firewallType = netSetting.getFirewallTestType();
     switch( firewallType )

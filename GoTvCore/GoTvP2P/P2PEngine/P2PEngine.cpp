@@ -482,3 +482,15 @@ void P2PEngine::setHasSharedWebCam( int hasSharedWebCam )
 	}
 }
 
+//============================================================================
+void P2PEngine::onFirstPktAnnounce( PktAnnounce * pktAnn )
+{
+    if( pktAnn && pktAnn->getMyOnlineId() != getMyOnlineId() )
+    {
+        m_FirstPktAnnounce = false;
+        if( getHasFixedIpAddress() )
+        {
+            getNetStatusAccum().setDirectConnectTested( true, false, getEngineSettings().getUserSpecifiedExternIpAddr() );
+        }
+    }
+}

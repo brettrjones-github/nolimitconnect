@@ -123,6 +123,7 @@ public:
     bool                        isNetworkHostEnabled( void );    // true if netowrk host plugin is enabled
 
     bool                        getHasHostService( EHostServiceType hostService );
+    bool                        getHasFixedIpAddress( void );
 
     /// if skt exists in connection list then lock access to connection list
     bool						lockSkt( VxSktBase* sktBase );
@@ -654,6 +655,7 @@ protected:
 	virtual	void				attemptConnectionToRelayService( BigListInfo * poInfo );
 	void						handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	void						sendToGuiTheContactList( int maxContactsToSend );
+    void						onFirstPktAnnounce( PktAnnounce * pktAnn );
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
@@ -704,6 +706,7 @@ protected:
 	bool						m_AppIsPaused{ false };
 	bool						m_IsUserSpecificDirSet{ false };
     bool                        m_EngineInitialized{ false };
+    bool                        m_FirstPktAnnounce{ true };
 
 	PktImAliveReq				m_PktImAliveReq;
 

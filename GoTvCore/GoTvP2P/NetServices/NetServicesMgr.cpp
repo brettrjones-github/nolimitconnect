@@ -665,7 +665,7 @@ static int uint16_t = 0;
     FirewallSettings::EFirewallTestType testType = getEngineSettings().getFirewallTestSetting();
     if( FirewallSettings::eFirewallTestAssumeNoFirewall == testType )
     {
-        m_EngineSettings.getExternalIp( retMyExternalIp );
+        m_EngineSettings.getUserSpecifiedExternIpAddr( retMyExternalIp );
         if( !retMyExternalIp.empty() )
         {
             LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS ASSUMED OPEN :) IP is %s->%s in %3.3f sec thread 0x%x", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );

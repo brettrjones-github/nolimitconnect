@@ -85,8 +85,8 @@ void EngineSettings::getNetHostSettings( NetHostSetting& netSettings )
     uint16_t u16Port = getTcpIpPort();
     netSettings.setTcpPort( u16Port );
 
-    getExternalIp( strValue );
-    netSettings.setExternIpAddr( strValue.c_str() );
+    getUserSpecifiedExternIpAddr( strValue );
+    netSettings.setUserSpecifiedExternIpAddr( strValue.c_str() );
 
     strValue = getPreferredNetworkAdapterIp();
     netSettings.setPreferredNetworkAdapterIp( strValue.c_str() );
@@ -125,7 +125,7 @@ void EngineSettings::setNetHostSettings( NetHostSetting& netSettings )
     setGroupHostUrl( netSettings.getGroupHostUrl() );
     setChatRoomHostUrl( netSettings.getChatRoomHostUrl() );
     setTcpIpPort( netSettings.getTcpPort() );
-    setExternalIp( netSettings.getExternIpAddr() );
+    setUserSpecifiedExternIpAddr( netSettings.getUserSpecifiedExternIpAddr() );
     setPreferredNetworkAdapterIp( netSettings.getPreferredNetworkAdapterIp().c_str() );
     setUseUpnpPortForward( netSettings.getUseUpnpPortForward() );
 
@@ -197,6 +197,7 @@ void EngineSettings::setWhichContactsToView( EFriendViewType eViewType )
     m_SettingsDbMutex.unlock();
 }
 
+/*
 //============================================================================
 void EngineSettings::getExternalIp( std::string& strIpAddress )
 {
@@ -218,6 +219,7 @@ void EngineSettings::setExternalIp( std::string& strIpAddress )
 	setIniValue( MY_SETTINGS_KEY, "ExternalIp", strIpAddress );
     m_SettingsDbMutex.unlock();
 }
+*/
 
 //============================================================================
 uint16_t EngineSettings::getTcpIpPort( bool bGetRandomIfDoesntExist )
@@ -364,7 +366,7 @@ void EngineSettings::getChatRoomHostUrl( std::string& strWebsiteUrl )
 }
 
 //============================================================================
-void EngineSettings::setExternalIpAddr( std::string& externIp )
+void EngineSettings::setUserSpecifiedExternIpAddr( std::string& externIp )
 {
     m_SettingsDbMutex.lock();
     setIniValue( MY_SETTINGS_KEY, "ExternIpAddr", externIp );
@@ -372,11 +374,19 @@ void EngineSettings::setExternalIpAddr( std::string& externIp )
 }
 
 //============================================================================
-void EngineSettings::getExternalIpAddr( std::string& strWebsiteUrl )
+void EngineSettings::getUserSpecifiedExternIpAddr( std::string& externIp )
 {
     m_SettingsDbMutex.lock();
-    getIniValue( MY_SETTINGS_KEY, "ExternIpAddr", strWebsiteUrl, "" );
+    getIniValue( MY_SETTINGS_KEY, "ExternIpAddr", externIp, "" );
     m_SettingsDbMutex.unlock();
+}
+
+//============================================================================
+std::string EngineSettings::getUserSpecifiedExternIpAddr(  )
+{
+    std::string externIp;
+    getUserSpecifiedExternIpAddr( externIp );
+    return externIp;
 }
 
 //============================================================================

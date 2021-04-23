@@ -28,7 +28,7 @@ class NetworkMonitor
 public:
     NetworkMonitor() = delete;
 	NetworkMonitor( P2PEngine& engine );
-    ~NetworkMonitor();
+    ~NetworkMonitor() = default;
 
 	void						networkMonitorStartup( const char * preferredNetIp = "", const char * cellNetIp = "" );
 	void						networkMonitorShutdown( void );

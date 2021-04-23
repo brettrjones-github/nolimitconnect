@@ -157,6 +157,11 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 			getConnectList().onConnectionLost( sktBase );
 		}
 	}
+
+    if( m_FirstPktAnnounce )
+    {
+        onFirstPktAnnounce( pkt );
+    }
 }
 
 //============================================================================

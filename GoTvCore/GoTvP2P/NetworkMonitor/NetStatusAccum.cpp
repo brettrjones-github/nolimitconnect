@@ -53,7 +53,7 @@ void NetStatusAccum::onNetStatusChange( void )
             internetStatus = eInternetAssumeDirectConnect;
 
             std::string externIp;
-            m_Engine.getEngineSettings().getExternalIp( externIp );
+            m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr( externIp );
             setIpAddress( externIp );
         }
     }

@@ -786,6 +786,7 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 #endif // LINUX
 
 static int acceptErrCnt = 0;
+static int dumpSktStatsCnt = 0;
     if( INVALID_SOCKET == oAcceptSkt )
     {
 		rc = VxGetLastError();
@@ -795,12 +796,33 @@ static int acceptErrCnt = 0;
             rc = EAGAIN;
         }
 #endif // defined(TARGET_OS_WINDOWS)
-        acceptErrCnt++;
-        if( acceptErrCnt > 50 )
+
+        if( rc )
+        {
+            acceptErrCnt++;
+            if( acceptErrCnt > 100 )
+            {
+                acceptErrCnt = 0;
+                dumpSktStatsCnt++;
+                if( rc != EAGAIN )
+                {
+                    LogModule( eLogListen, LOG_DEBUG, "VxServerMgr::acceptConnection: listen port %d skt %d error %d thread 0x%x", m_u16ListenPort, oListenSkt, rc, VxGetCurrentThreadId() );
+                }
+
+                if( dumpSktStatsCnt > 10 )
+                {
+                    dumpSktStatsCnt = 0;
+                    dumpSocketStats("full dump", true);
+                }
+                else
+                {
+                    dumpSocketStats();
+                }
+            }
+        }
+        else
         {
             acceptErrCnt = 0;
-            LogModule( eLogListen, LOG_DEBUG, "VxServerMgr::acceptConnection: listen port %d skt %d error %d thread 0x%x", m_u16ListenPort, oListenSkt, rc, VxGetCurrentThreadId() );
-            dumpSocketStats();
         }
 
 		if( 0 == rc )

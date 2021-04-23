@@ -88,7 +88,7 @@ public:
     virtual bool				lockSkt( VxSktBase* sktBase );
     virtual void				unlockSkt( VxSktBase* sktBase );
 
-    virtual void                dumpSocketStats( const char* reason = nullptr );
+    virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 
     virtual void                setSktLoopback( VxSktBase * sktLoopback )       { m_SktLoopback = sktLoopback; }
 
