@@ -152,7 +152,8 @@ public:
 											int				iDataLen,						// length of data
 											bool			bDisconnectAfterSend = false );	// if true disconnect after data is sent
 
-	virtual void				closeSkt( int iInstance = 0,  bool bFlushThenClose = false );
+	virtual void				closeSkt( ESktCloseReason  closeReason,  bool bFlushThenClose = false );
+    virtual std::string		    describeSktConnection( void );
 
 	bool						bindSocket( struct addrinfo * poResultAddr );
 	bool						isIPv6Address (const char * addr );
@@ -263,66 +264,78 @@ protected:
 
 	void						doCloseThisSocketHandle( bool bFlushThenClose );
 
+    const std::string&          describeSktDirection( void );
+
 public:
-	SOCKET						m_Socket;				// handle to socket
-	int							m_iSktId;				// socket unique id
-    VxGUID                      m_ConnectionId;         // unique connection id 
+    SOCKET						m_Socket{ INVALID_SOCKET };	    // handle to socket
+    int							m_iSktId{ 0 };				    // socket unique id
+    VxGUID                      m_ConnectionId;                 // unique connection id 
 
-	InetAddrAndPort				m_LclIp;				// local ip address
-	std::string					m_strLclIp;				// local ip address in dotted form
+	InetAddrAndPort				m_LclIp;				        // local ip address
+    std::string					m_strLclIp{ "0.0.0.0" };		// local ip address in dotted form
 
-	InetAddrAndPort				m_RmtIp;				// remote (peer) ip address
-	std::string					m_strRmtIp;				// remote (peer) ip address in dotted form
+	InetAddrAndPort				m_RmtIp;				        // remote (peer) ip address
+    std::string					m_strRmtIp{ "0.0.0.0" };	    // remote (peer) ip address in dotted form
 
 	//=== state vars ===//
-	int64_t			    		m_LastActiveTimeGmtMs = 0;	// last time received data
-	int64_t		    			m_LastImAliveTimeGmtMs = 0; // last time received PktImAliveReply
-	int64_t	    				m_ToDeleteTimeGmtMs;
+    int64_t			    		m_LastActiveTimeGmtMs{ 0 };	    // last time received data
+	int64_t		    			m_LastImAliveTimeGmtMs{ 0 };    // last time received PktImAliveReply
+	int64_t	    				m_ToDeleteTimeGmtMs{ 0 };
 
-	VxThread					m_SktRxThread;			// thread for handling socket receive
-	VxThread					m_SktTxThread;			// thread for handling socket transmit
-	VxSemaphore					m_SktTxSemaphore;		// semaphore for tx 
-	VxMutex						m_SktMutex;				// mutex
-	VxMutex						m_CryptoMutex;			// mutex
-	bool						m_bClosingFromRxThread; // if true then call to close function was made by receive thread
-	bool						m_bClosingFromDestructor; // if true then call to close function was made by destructor
-	VxSktBaseMgr *				m_SktMgr;
-	int							m_iLastRxLen;			// size of last packet received
-	int							m_iLastTxLen;			// size of last packet sent
+	VxThread					m_SktRxThread;			        // thread for handling socket receive
+	VxThread					m_SktTxThread;			        // thread for handling socket transmit
+	VxSemaphore					m_SktTxSemaphore;		        // semaphore for tx 
+	VxMutex						m_SktMutex;				        // mutex
+	VxMutex						m_CryptoMutex;			        // mutex
+	bool						m_bClosingFromRxThread{ false };   // if true then call to close function was made by receive thread
+	bool						m_bClosingFromDestructor{ false };  // if true then call to close function was made by destructor
+	VxSktBaseMgr *				m_SktMgr{ nullptr };
+	int							m_iLastRxLen{ 0 };			    // size of last packet received
+    int							m_iLastTxLen{ 0 };			    // size of last packet sent
 
-	std::string					m_strMulticastGroupIp;
+	std::string					m_strMulticastGroupIp{ "" };
 
-	VxKey						m_RxKey;				// encryption key for receive
-	VxCrypto					m_RxCrypto;			    // encryption object for receive
-	VxKey						m_TxKey;				// encryption key for transmit
-	VxCrypto					m_TxCrypto;			    // encryption object for transmit
-    VxMutex                     m_TxMutex;              // tx thread mutex
-	uint8_t						m_u8TxSeqNum;			// sequence number used to thwart replay attacks
+	VxKey						m_RxKey;				        // encryption key for receive
+	VxCrypto					m_RxCrypto;			            // encryption object for receive
+	VxKey						m_TxKey;				        // encryption key for transmit
+	VxCrypto					m_TxCrypto;			            // encryption object for transmit
+    VxMutex                     m_TxMutex;                      // tx thread mutex
+	uint8_t						m_u8TxSeqNum; // not initialized on purpose	// sequence number used to thwart replay attacks
     
 	VxSemaphore					m_RelayEventSemaphore;
-	VX_SKT_CALLBACK				m_pfnReceive = nullptr;			// receive function must be set by user
+    VX_SKT_CALLBACK				m_pfnReceive{ nullptr };			// receive function must be set by user
 
 protected:
 
-    int							m_iConnectTimeout;		// how long to try to connect
-	bool						m_bIsConnected;			// return true if is connected
-	ESktType					m_eSktType;				// type of socket
-	static int					m_TotalCreatedSktCnt;	// total number of sockets created since program started
-	static int					m_CurrentSktCnt;		// current number of sockets exiting in memory
-	ESktCallbackReason			m_eSktCallbackReason;	// why callback is being performed
-	VX_SKT_CALLBACK				m_pfnTransmit;			// optional function for transmit statistics
-	void *						m_pvRxCallbackUserData;	// user defined rx callback data
-	void *						m_pvTxCallbackUserData;	// user defined tx callback data
-	void *						m_pvUserExtraData;		// user defined extra data
-	bool						m_bIsWebSkt;
-	bool						m_bIsPluginSpecificSkt;
-	uint8_t						m_u8PluginSpecificNum;
-	RCODE						m_rcLastSktError;			// last error that occurred
+    int							m_iConnectTimeout{ 0 };	            // how long to try to connect
+	bool						m_bIsConnected{ false };			// return true if is connected
+    ESktType					m_eSktType{ eSktTypeNone };			// type of socket
+    ESktCallbackReason			m_eSktCallbackReason{ eSktCallbackReasonUnknown };	// why callback is being performed
+    ESktCloseReason             m_SktCloseReason{ eSktCloseReasonUnknown };
+
+	VX_SKT_CALLBACK				m_pfnTransmit{ nullptr };			// optional function for transmit statistics
+	void *						m_pvRxCallbackUserData{ nullptr };  // user defined rx callback data
+	void *						m_pvTxCallbackUserData{ nullptr };  // user defined tx callback data
+	void *						m_pvUserExtraData{ nullptr };       // user defined extra data
+	bool						m_bIsWebSkt{ false };
+	bool						m_bIsPluginSpecificSkt{ false };
+	uint8_t						m_u8PluginSpecificNum{ 0 };
+    RCODE						m_rcLastSktError{ 0 };			    // last error that occurred
     bool                        m_InUseByRxThread{ false };
 
     bool                        m_IsPeerPktAnnSet{ false };
     PktAnnounce                 m_PeerPktAnn;
     VxGUID                      m_PeerOnlineId;
     VxMutex                     m_PeerAnnMutex;
+
+    static int					m_TotalCreatedSktCnt;	            // total number of sockets created since program started
+    static int					m_CurrentSktCnt;		            // current number of sockets exiting in memory
+
+    static std::string          m_SktDirConnect;
+    static std::string          m_SktDirAccept;
+    static std::string          m_SktDirUdp;
+    static std::string          m_SktDirBroadcast;
+    static std::string          m_SktDirLoopback;
+    static std::string          m_SktDirUnknown;
 };
 

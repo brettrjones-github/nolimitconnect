@@ -74,8 +74,8 @@ public:
 
 	bool						doConnectRequest( ConnectRequest& connectRequest, bool ignoreToSoonToConnectAgain = false );
 
-	void						closeIfAnnonymous( VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo = NULL );
-	void						closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo = NULL );
+	void						closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo = NULL );
+	void						closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo = NULL );
 	void						addConnectRequestToQue( VxConnectInfo& connectInfo, EConnectReason connectReason = eConnectReasonStayConnected, bool addToHeadOfQue = false, bool replaceExisting = true );
 
 	void						handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );

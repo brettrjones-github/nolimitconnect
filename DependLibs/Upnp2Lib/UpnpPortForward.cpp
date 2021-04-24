@@ -154,7 +154,7 @@ void UpnpPortForward::tcpPortForward( int port, const char * pServiceName, const
 //============================================================================
 void UpnpPortForward::upnpPortForwardShutdown( void )
 {
-	m_UpnpSearchResponseSocket.closeSkt();
+	m_UpnpSearchResponseSocket.closeSkt(eSktCloseUpnpDone);
 	m_PortForwardThread.abortThreadRun( true );
 	m_PortForwardThread.killThread();
 	removeAllRootDevices();
@@ -183,7 +183,7 @@ bool UpnpPortForward::shouldAbort( void )
 //============================================================================
 void UpnpPortForward::runPortForward( void )
 {
-	m_UpnpSearchResponseSocket.closeSkt( 88 );
+	m_UpnpSearchResponseSocket.closeSkt( eSktCloseUpnpStart );
 	m_UpnpSearchResponseSocket.udpOpen( m_LocalIpAddr, 0 );
 	m_UpnpSearchResponseSocket.joinMulticastGroup( m_LocalIpAddr, UPNP_GROUP_IP );
 
@@ -207,7 +207,7 @@ void UpnpPortForward::runPortForward( void )
 		VxSleep( 500 );
 	}
 
-	m_UpnpSearchResponseSocket.closeSkt( 439 );
+	m_UpnpSearchResponseSocket.closeSkt( eSktCloseUpnpDone );
 }
 
 //============================================================================

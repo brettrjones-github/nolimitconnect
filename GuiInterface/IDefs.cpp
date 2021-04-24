@@ -62,12 +62,33 @@ namespace
 
     const char * HackerLevelEnumStrings[] =
     {
-        "Hacker Level Unknown ",
-        "Hacker Level Suspicious ",
-        "Hacker Level Medium ",
-        "Hacker Level Severe ",
+        " >? Hacker Level Unknown ",
+        " >! Hacker Level Suspicious ",
+        " >!! Hacker Level Medium ",
+        " >!!! Hacker Level Severe ",
 
         "Max Hacker Level ",
+    };
+
+    const char * HackerReasonEnumStrings[] =
+    {
+        "Hacker Reason Unknown ",
+        "Reason Peer Name ",
+        "Reason Host By Name ",
+        "Reason No Host Ip Addr ",
+        "Reason Host Ip Options ",
+        "Reason Net Cmd Length ",
+        "Reason Net Cmd List Invalid ",
+        "Reason Net Srv Url Invalid",
+        "Reason Net Srv Plugin Invalid",
+        "Reason Net Srv Query Id Permission ",
+        "Reason Http Attack ",
+        "Reason Pkt Online Id Me From My Ip ",
+        "Reason Pkt Online Id Me From Another Ip ",
+        "Reason PktAnn Not First Packet ",
+        "Reason PktHdr Invalid ",
+
+        "Max Hacker Reason ",
     };
 
     const char * HostAnnounceStatusEnumStrings[] = 
@@ -407,6 +428,68 @@ namespace
         "MaxSearchNone"
     };
 
+    const char * SktCloseReasonEnumStrings[] =
+    {
+        "Skt Close Reason Unknown ",
+        "Skt Close Not Needed ",	   
+        "Skt Close Hack Level Unknown ",
+        "Skt Close Hack Level Suspicious ",	 
+        "Skt Close Hack Level Medium ",	
+        "Skt Close Hack Level Severe ",	 	
+        "Skt Close Accept Failed ",
+        "Skt Close Connection Lost ",
+        "Skt Close Connect Timeout ",
+        "Skt Close Skt Destroyed ",
+        "Skt Close All ",
+        "Skt Close Disconnect After Send ",
+        "Skt Close Send Complete ",
+        "Skt Close With Error ",
+        "Skt Close Crypto Null Data ",
+        "Skt Close Crypto Invalid Length ",
+        "Skt Close Crypto Invalid Key ",
+        "Skt Close Pkt Length Invalid ",
+        "Skt Close UDP Create ",
+        "Skt Close Upnp Start ",
+        "Skt Close Upnp Done ",
+        "Skt Close Multicast Listen Done ",
+        "Skt Close Web Browser ",
+        "Skt Close Im Alive Timeout ",
+        "Skt Close Ping Timeout ",
+        "Skt Close Invalid Handle ",
+        "Skt Close Net Cmd Length Invalid ",
+        "Skt Close Net Cmd List Invalid ",
+        "Skt Close Net Srv Url Invalid ",
+        "Skt Close Net Srv Plugin Invalid ",
+        "Skt Close Net Srv Query Id Permission ",
+        "Skt Close Net Srv Query Id Sent ",
+        "Skt Close Http Url Invalid ",
+        "Skt Close Http Plugin Invalid ",
+        "Skt Close Http Handle Error ",
+        "Skt Close Http Not Accept Skt ",
+        "Skt Close Http Close No Error ",
+        "Skt Close Http Close With Error ",
+        "Skt Close Http No Web Srv ",
+        "Skt Close Http Skt Destroy ",
+        "Skt Close Connect Reasons Empty ",
+        "Skt Close Big Info Find Fail ",
+        "Skt Close Connected Info Find Fail ",
+        "Skt Close PktAnn Send Fail ",
+        "Skt Close To Relay PktAnn Send Fail ",
+        "Skt Close Through Relay PktAnn Send Fail ",
+        "Skt Close Pkt Online Id Me From My Ip ",
+        "Skt Close Pkt Online Id Me From Another Ip ",
+        "Skt Close PktAnn Not First Packet ",
+        "Skt Close PktAnn Is Invalid ",
+        "Skt Close PktHdr Invalid ",
+        "Skt Close PktPingReq Send Fail ",
+        "Skt Close P2P Not Ready For Accept Skt ",
+        "Skt Close User Ignored ",
+        "Skt Close Relay Session Not Foune ",
+
+        "eMaxSktCloseReason "
+  
+    };
+
     const char * SktTypeEnumStrings[] =
     {
         "Unknown Socket ",
@@ -531,6 +614,17 @@ const char * DescribeHackerLevel( EHackerLevel hackLevel )
     }
 
     return HackerLevelEnumStrings[ hackLevel ];
+}
+
+//============================================================================
+const char * DescribeHackerReason( EHackerReason hackReason )
+{
+    if( hackReason < 0 || eMaxHackerReason <= hackReason )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return HackerReasonEnumStrings[ hackReason ];
 }
 
 //============================================================================
@@ -764,6 +858,18 @@ const char * DescribeSearchType( ESearchType searchType )
     }
 
     return SearchTypeEnumStrings[ searchType ]; 
+}
+
+//============================================================================
+//! Describe socket close reason
+const char * DescribeSktCloseReason( ESktCloseReason closeReason )
+{
+    if(  closeReason < 0 || eMaxSktCloseReason <= closeReason )
+    {
+        return ENUM_BAD_PARM;
+    }
+
+    return SktCloseReasonEnumStrings[ closeReason ]; 
 }
 
 //============================================================================

@@ -105,8 +105,8 @@ public:
 														int					pvUserData,			// plugin defined data
 														VxSktBase * *		ppoRetSkt, 			// returned Socket
 														EConnectReason		connectReason = eConnectReasonPlugin );	
-	virtual void				pluginApiSktClose( VxSktBase * sktBase );
-	virtual void				pluginApiSktCloseNow( VxSktBase * sktBase );
+	virtual void				pluginApiSktClose( ESktCloseReason closeReason, VxSktBase * sktBase );
+	virtual void				pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase * sktBase );
 	void						pluginApiToGuiSessionEnded(	EPluginType		ePluginType,		// plugin
 															VxNetIdent *	netIdent,			// identity of friend
 															int				pvUserData,			// plugin defined data

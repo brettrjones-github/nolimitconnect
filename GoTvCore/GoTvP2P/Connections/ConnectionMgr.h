@@ -134,7 +134,7 @@ protected:
                                           VxPktHdr *			poPkt );
 
     void                        handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );
-    void                        closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo );
+    void                        closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo );
     EConnectStatus              rmtUserRelayConnectTo(  VxConnectInfo&		connectInfo,
                                                         VxSktBase *&		ppoRetSkt,			// return pointer to socket if not null
                                                         int					iConnectTimeout );	// seconds before connect attempt times out

@@ -47,7 +47,7 @@ RcWebSkt::~RcWebSkt()
 	m_bClosingFromDestructor = true;
 	m_SktRxThread.abortThreadRun( true );
 	m_SktTxThread.abortThreadRun( true );
-	closeSkt( 555 );
+	closeSkt( eSktCloseHttpSktDestroy );
 	m_SktTxSemaphore.signal();
 	m_SktRxThread.killThread();
 	m_SktTxThread.killThread();

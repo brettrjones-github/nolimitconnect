@@ -45,52 +45,35 @@ namespace
 
 //============================================================================
 static void * VxSktBaseReceiveVxThreadFunc( void * pvContext );
-int VxSktBase::m_TotalCreatedSktCnt = 0;
-int VxSktBase::m_CurrentSktCnt = 0;
+int VxSktBase::m_TotalCreatedSktCnt{ 0 };
+int VxSktBase::m_CurrentSktCnt{ 0 };
+std::string VxSktBase::m_SktDirConnect{ " -> " };
+std::string VxSktBase::m_SktDirAccept{ " <- " };
+std::string VxSktBase::m_SktDirUdp{  " <-> " };
+std::string VxSktBase::m_SktDirBroadcast{ " ->> " };
+std::string VxSktBase::m_SktDirLoopback{ " <==> " };
+std::string VxSktBase::m_SktDirUnknown{ " <??> " };
 
 //============================================================================
 VxSktBase::VxSktBase()
 : VxSktBuf()
-, VxSktThrottle()
-, m_Socket( INVALID_SOCKET )		
+, VxSktThrottle()	
 , m_iSktId(0)
 , m_LclIp()
-, m_strLclIp("0.0.0.0")
 , m_RmtIp()
-, m_strRmtIp("0.0.0.0")
-, m_LastActiveTimeGmtMs(0)	// last time received data
 , m_LastImAliveTimeGmtMs( GetGmtTimeMs() )
-, m_ToDeleteTimeGmtMs(0)
 , m_SktRxThread()
 , m_SktTxThread()
 , m_SktTxSemaphore()
 , m_SktMutex()
 , m_CryptoMutex()
-, m_bClosingFromRxThread(false) 
-, m_bClosingFromDestructor(false) 
-, m_SktMgr(nullptr)
-, m_iLastRxLen(0)
-, m_iLastTxLen(0)
-, m_strMulticastGroupIp("")
+
 , m_RxKey()					// encryption key for receive
 , m_RxCrypto()				// encryption object for receive
 , m_TxKey()					// encryption key for transmit
 , m_TxCrypto()				// encryption object for transmit
 //, m_u8TxSeqNum;			// sequence number used to twart replay attacks ( do not set )
 , m_RelayEventSemaphore()
-, m_pfnReceive(nullptr)			// receive function must be set by user
-, m_iConnectTimeout(0)	
-, m_bIsConnected(false )	
-, m_eSktType( eSktTypeNone )            		
-, m_eSktCallbackReason( eSktCallbackReasonUnknown )	// why callback is being performed
-, m_pfnTransmit(nullptr)			// optional function for transmit statistics
-, m_pvRxCallbackUserData(nullptr)	// user defined rx callback data
-, m_pvTxCallbackUserData(nullptr)	// user defined tx callback data
-, m_pvUserExtraData(nullptr)		// user defined extra data
-, m_bIsWebSkt(false)
-, m_bIsPluginSpecificSkt(false)
-, m_u8PluginSpecificNum(0)
-, m_rcLastSktError(0)			// last error that occurred
 {
 	m_TotalCreatedSktCnt++;
 	m_iSktId = m_TotalCreatedSktCnt;
@@ -111,7 +94,7 @@ VxSktBase::~VxSktBase()
 	m_bClosingFromDestructor = true;
 	m_SktRxThread.abortThreadRun( true );
 	m_SktTxThread.abortThreadRun( true );
-	closeSkt( 1000 + m_iSktId, true );
+	closeSkt( eSktCloseSktDestroy, true );
 	m_SktTxSemaphore.signal();
 	m_SktRxThread.killThread();
 	m_SktTxThread.killThread();
@@ -134,7 +117,7 @@ bool VxSktBase::checkForImAliveTimeout( bool calledFromSktThread )
 		timedOut = true;
 		m_bClosingFromRxThread = calledFromSktThread;
 		LogMsg( LOG_INFO, "VxSktBase::checkForImAliveTimeout skt %d %s\n", m_iSktId, m_strRmtIp.c_str() );
-		closeSkt( 55555 );
+		closeSkt( eSktCloseImAliveTimeout );
 	}
 
 	return timedOut;
@@ -551,11 +534,26 @@ RCODE VxSktBase::doConnectTo( void )
 }
 
 //============================================================================
-void VxSktBase::closeSkt( int iInstance, bool bFlushThenClose )
+std::string	 VxSktBase::describeSktConnection( void )
 {
+    std::string sktDesc;
+    StdStringFormat( sktDesc, "%s id %d handle %d %s:%d %s %s:%d", DescribeSktType( getSktType() ), m_iSktId, m_Socket,
+        m_strLclIp.c_str(), m_LclIp.getPort(), describeSktDirection().c_str(), m_strRmtIp.c_str(), m_RmtIp.getPort() );
+    return sktDesc;
+}
+
+//============================================================================
+void VxSktBase::closeSkt( ESktCloseReason closeReason, bool bFlushThenClose )
+{
+    if( m_SktCloseReason == eSktCloseReasonUnknown )
+    {
+        m_SktCloseReason = closeReason;
+    }
+
+    LogModule( eLogConnect, LOG_VERBOSE, "%s %s", DescribeSktCloseReason( closeReason ), describeSktConnection().c_str() );
+
 	if( m_bClosingFromRxThread || m_bClosingFromDestructor )
 	{
-        LogModule( eLogConnect, LOG_VERBOSE, "%s skt id %d skt handle %d closeSkt instance %d to %s:%d\n", DescribeSktType(getSktType()), m_iSktId, m_Socket, iInstance, m_strRmtIp.c_str(), m_RmtIp.getPort() );
 		m_SktRxThread.abortThreadRun( true );
 		m_SktTxThread.abortThreadRun( true );
 		m_SktTxSemaphore.signal();
@@ -567,7 +565,7 @@ void VxSktBase::closeSkt( int iInstance, bool bFlushThenClose )
 				&& isRxCryptoKeySet()
 				&& ( 0 != getLastSktError() ) )
 			{
-                LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase::closeSkt: inst %d %s thread %d err %d %s\n", iInstance, describeSktType().c_str(), VxGetCurrentThreadId(), getLastSktError(), describeSktError( getLastSktError() ) );
+                LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase::closeSkt: reason %s %s thread %d err %d %s\n", DescribeSktCloseReason( closeReason ), describeSktType().c_str(), VxGetCurrentThreadId(), getLastSktError(), describeSktError( getLastSktError() ) );
 			}
 
 			doCloseThisSocketHandle( bFlushThenClose );
@@ -592,7 +590,7 @@ void VxSktBase::closeSkt( int iInstance, bool bFlushThenClose )
 			&& isRxCryptoKeySet()
 			&& ( 0 != getLastSktError() ) )
 		{
-            LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase::closeSkt: inst %d %s err %d %s\n", iInstance, describeSktType().c_str(), getLastSktError(), describeSktError( getLastSktError() ) );
+            LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase::closeSkt: reason %s %s err %d %s\n", DescribeSktCloseReason( closeReason ), describeSktType().c_str(), getLastSktError(), describeSktError( getLastSktError() ) );
 		}
 
 		doCloseThisSocketHandle( bFlushThenClose );
@@ -659,7 +657,7 @@ RCODE VxSktBase::sendData(	const char *	pData,					// data to send
 									VxDescribeSktError( m_rcLastSktError ) );
 				if( bDisconnectAfterSend )
 				{
-					closeSkt( 27460, true );
+					closeSkt( eSktCloseDisconnectAfterSend, true );
 				}
 
 				return getLastSktError();
@@ -679,7 +677,7 @@ RCODE VxSktBase::sendData(	const char *	pData,					// data to send
 				// all done
 				if( bDisconnectAfterSend )
 				{
-					closeSkt( 3298, true );
+					closeSkt( eSktCloseSendComplete, true );
 				}
 
 				return 0;
@@ -695,7 +693,7 @@ RCODE VxSktBase::sendData(	const char *	pData,					// data to send
 
 	if( bDisconnectAfterSend )
 	{
-		closeSkt( 3299, true );
+		closeSkt( eSktCloseDisconnectAfterSend, true );
 	}
 
 	return -1;
@@ -712,7 +710,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
         LogMsg( LOG_ERROR, "VxSktBase::txEncrypted null data");
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt( eSktCloseCryptoNullData );
         }
 
         vx_assert( pDataIn );
@@ -724,7 +722,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
         LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid data len %d", iDataLen);
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt( eSktCloseCryptoInvalidLength );
         }
 
         vx_assert( pDataIn );
@@ -736,7 +734,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
 		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt(eSktClosePktLengthInvalid);
         }
 
         vx_assert( 0 == (iDataLen & 0x0f) );
@@ -749,7 +747,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
         vx_assert( m_TxCrypto.isKeyValid() );
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt(eSktCloseCryptoInvalidKey);
         }
 
         return -4;
@@ -784,8 +782,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
 
 	if( bDisconnect )
 	{
-		VxSleep( 50 );
-		closeSkt();
+		closeSkt(eSktCloseDisconnectAfterSend, true);
 	}
 
 	return rc;
@@ -803,7 +800,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
         LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 null data");
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt( eSktCloseCryptoNullData );
         }
 
         vx_assert( pDataIn );
@@ -815,7 +812,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
         LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid data len %d", iDataLen);
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt( eSktCloseCryptoInvalidLength );
         }
 
         vx_assert( pDataIn );
@@ -827,11 +824,23 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
         LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );
         if( bDisconnect )
         {
-            closeSkt();
+            closeSkt( eSktClosePktLengthInvalid );
         }
 
         vx_assert( 0 == (iDataLen & 0x0f) );
         return -3;
+    }
+
+    if( !poKey || !poKey->isKeySet() )
+    {
+        LogMsg( LOG_ERROR, "VxSktBase::txEncrypted2 invalid crypto key");
+        vx_assert( m_TxCrypto.isKeyValid() );
+        if( bDisconnect )
+        {
+            closeSkt(eSktCloseCryptoInvalidKey);
+        }
+
+        return -4;
     }
 
 	// make copy of data so data is not destroyed
@@ -849,7 +858,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
 
 	if( bDisconnect )
 	{
-		closeSkt();
+		closeSkt(eSktCloseDisconnectAfterSend, true);
 	}
 
 	if( rc )
@@ -1275,7 +1284,14 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
             {
                 poVxThread->abortThreadRun( true );
                 sktBase->m_bClosingFromRxThread = true;
-                sktBase->closeSkt( 96295 );
+                if( sktBase->getLastSktError() )
+                {
+                    sktBase->closeSkt( eSktCloseSktWithError );
+                }
+                else
+                {
+                    sktBase->closeSkt( eSktCloseNotNeeded );
+                }
             }
 
             if( sktBase->m_SktMgr )
@@ -1402,6 +1418,23 @@ bool VxSktBase::getPeerPktAnnCopy( PktAnnounce& peerAnn )
 void VxSktBase::dumpSocketStats( const char* reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
-    LogModule( eLogSkt, LOG_DEBUG, "%s skt %d handle %d connected ? %d rmt %s last active %s", DescribeSktType(getSktType()), getSktId(), m_Socket, isConnected(), 
-               getRemoteIp().c_str(), ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
+    LogModule( eLogConnect, LOG_VERBOSE, "%s id %d handle connected ? %d %d %s:%d %s %s:%d %s last active %s",  DescribeSktType(getSktType()), m_iSktId, m_Socket, isConnected(), 
+        m_strLclIp.c_str(), m_LclIp.getPort(), describeSktDirection().c_str(), m_strRmtIp.c_str(), m_RmtIp.getPort(), reasonMsg.c_str(), 
+        ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
 }
+
+//============================================================================
+const std::string& VxSktBase::describeSktDirection( void )
+{
+    switch( m_eSktType )
+    {
+    case eSktTypeTcpConnect: return m_SktDirConnect;
+    case eSktTypeTcpAccept: return m_SktDirAccept;
+    case eSktTypeUdp: return m_SktDirUdp;
+    case eSktTypeUdpBroadcast: return m_SktDirBroadcast;
+    case eSktTypeLoopback: return m_SktDirLoopback;
+    case eSktTypeNone: return m_SktDirUnknown;
+    default: return m_SktDirUnknown;
+    }
+}
+

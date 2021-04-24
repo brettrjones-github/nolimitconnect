@@ -122,7 +122,7 @@ void PluginBaseRelay::onPktRelaySessionReply( VxSktBase * sktBase, VxPktHdr * pk
 			m_bTest = false;
 			m_bVerbose = false;
 		}
-		m_PluginMgr.pluginApiSktClose( sktBase );
+		m_PluginMgr.pluginApiSktClose( eSktCloseRelaySessionNotFound, sktBase );
 	}
 	else if( m_bTest && m_bVerbose )
 	{

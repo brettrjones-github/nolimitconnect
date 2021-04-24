@@ -519,7 +519,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 };
 
 //============================================================================
-RCODE VxReportHack(	VxSktBase *	sktBase, const char *	pDescription, ... )	
+RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, VxSktBase * sktBase, const char * pDescription, ... )	
 {
 	char as8Buf[ 2048 ];
 	va_list argList;
@@ -527,15 +527,14 @@ RCODE VxReportHack(	VxSktBase *	sktBase, const char *	pDescription, ... )
 	vsnprintf( as8Buf, sizeof( as8Buf ), pDescription, argList );
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
-	LogMsg( LOG_ERROR, "HACK ALERT: skt handle %d ip %s %s\n", 
-		sktBase->m_Socket, 
-        sktBase->getRemoteIp().c_str(),
+	LogMsg( LOG_ERROR, "%s %s %s %s",  DescribeHackerLevel( hackerLevel ), DescribeHackerReason( hackerReason ),
+        sktBase->describeSktConnection().c_str(),
 		as8Buf );
 	return 0;
 }
 
 //============================================================================
-RCODE VxReportHack(	SOCKET skt, const char * ipAddr, const char * pDescription, ... )
+RCODE VxReportHack(	EHackerLevel hackerLevel, EHackerReason hackerReason, SOCKET skt, const char * ipAddr, const char * pDescription, ... )
 {
 	char as8Buf[ 2048 ];
 	va_list argList;
@@ -543,7 +542,7 @@ RCODE VxReportHack(	SOCKET skt, const char * ipAddr, const char * pDescription, 
 	vsnprintf( as8Buf, sizeof( as8Buf ), pDescription, argList );
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
-	LogMsg( LOG_ERROR, "HACK ALERT: skt handle %d ip %s %s\n", 
+	LogMsg( LOG_ERROR, "%s %s handle %d ip %s %s", DescribeHackerLevel( hackerLevel ), DescribeHackerReason( hackerReason ),
 		skt, 
 		ipAddr, 
 		as8Buf );

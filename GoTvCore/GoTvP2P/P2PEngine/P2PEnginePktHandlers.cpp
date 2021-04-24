@@ -55,14 +55,14 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
         if( rmAddr.empty() || sktBase->getRemoteIpAddress() != ourAddr )
         {
             // remote attack.. serious
-            hackerOffense( pkt, eHackerLevelSevere, "rxed same as our online id from another " );
+            hackerOffense( eHackerLevelSevere, eHackerReasonPktOnlineIdMeFromAnotherIp, pkt, "rxed same as our online id from another " );
+            sktBase->closeSkt( eSktClosePktOnlineIdMeFromAnotherIp );
         }
         else
         {
-            hackerOffense( pkt, eHackerLevelSuspicious, "rxed same as our online from our address " );
+            hackerOffense( eHackerLevelSuspicious, eHackerReasonPktOnlineIdMeFromMyIp, pkt, "rxed same as our online from our address " );
+            sktBase->closeSkt( eSktClosePktOnlineIdMeFromMyIp );
         }
-
-        sktBase->closeSkt( 321 );
 
 		return;
 	}
@@ -83,11 +83,11 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 																&bigListInfo );		// return pointer to all we know about this contact
 	if( ePktAnnUpdateTypeIgnored == updateType )
 	{
-		LogMsg( LOG_INFO, "Ignoring %s ip %s id %s\n",
+		LogMsg( LOG_INFO, "Ignoring %s ip %s id %s",
 			pkt->getOnlineName(),
             sktBase->getRemoteIp().c_str(),
 			contactOnlineId.toHexString().c_str() );
-		m_NetConnector.closeConnection( contactOnlineId, sktBase );	
+		m_NetConnector.closeConnection( eSktCloseUserIgnored, contactOnlineId, sktBase );	
 		return;
 	}
 
@@ -139,13 +139,19 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		m_NetConnector.directConnectTo( pkt->getConnectInfo(), &poNewSkt );
 		if( poNewSkt )
 		{
-			LogMsg( LOG_INFO, "sendMyPktAnnounce 6\n" ); 
-			m_NetConnector.sendMyPktAnnounce(	pkt->getMyOnlineId(), 
-												sktBase,
-												true,
-												false,
-												false );
-			getConnectList().addConnection( poNewSkt, bigListInfo, ( ePktAnnUpdateTypeContactIsSame == updateType ) );
+			LogMsg( LOG_INFO, "sendMyPktAnnounce 6" ); 
+            if( m_NetConnector.sendMyPktAnnounce(   pkt->getMyOnlineId(),
+                                                    sktBase,
+                                                    true,
+                                                    false,
+                                                    false ) )
+            {
+                getConnectList().addConnection( poNewSkt, bigListInfo, ( ePktAnnUpdateTypeContactIsSame == updateType ) );
+            }
+            else
+            {
+                poNewSkt->closeSkt( eSktClosePktAnnSendFail );
+            }
 		}
 	}
 	else
@@ -155,6 +161,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		if( 0 != sktBase->txPacket( bigListInfo->getMyOnlineId(), &pktPingReq ) )
 		{
 			getConnectList().onConnectionLost( sktBase );
+            sktBase->closeSkt(eSktClosePktPingReqSendFail);
 		}
 	}
 

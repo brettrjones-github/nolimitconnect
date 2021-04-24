@@ -181,6 +181,28 @@ enum EHackerLevel
     eMaxHackerLevel
 };
 
+enum EHackerReason
+{
+    eHackerReasonUnknown,
+    eHackerReasonPeerName,
+    eHackerReasonHostByName,
+    eHackerReasonNoHostIpAddr,
+    eHackerReasonHostIpOptions,
+    eHackerReasonNetCmdLength,
+    eHackerReasonNetCmdListInvalid,
+    eHackerReasonNetSrvUrlInvalid,
+    eHackerReasonNetSrvPluginInvalid,
+    eHackerReasonNetSrvQueryIdPermission,
+    eHackerReasonHttpAttack,
+    eHackerReasonPktOnlineIdMeFromMyIp,
+    eHackerReasonPktOnlineIdMeFromAnotherIp,
+    eHackerReasonPktAnnNotFirstPacket,
+    eHackerReasonPktHdrInvalid,
+
+
+    eMaxHackerReason
+};
+
 enum EHostAnnounceStatus
 {
     eHostAnnounceUnknown = 0,
@@ -832,6 +854,68 @@ enum ESktType
     eMaxSktType			// always last
 };
 
+enum ESktCloseReason
+{
+    eSktCloseReasonUnknown				= 0,
+    eSktCloseNotNeeded                  = 1,
+    eSktCloseHackLevelUnknown           = 2,
+    eSktCloseHackLevelSuspicious        = 3,
+    eSktCloseHackLeveMedium             = 4,
+    eSktCloseHackLevetSevere            = 5,
+    eSktCloseAcceptFailed               = 6,
+    eSktCloseConnectionLost             = 7,
+    eSktCloseConnectTimeout             = 8,
+    eSktCloseSktDestroy                 = 9,
+    eSktCloseAll                        = 10,
+    eSktCloseDisconnectAfterSend        = 11,
+    eSktCloseSendComplete               = 12,
+    eSktCloseSktWithError               = 13,
+    eSktCloseCryptoNullData             = 14,
+    eSktCloseCryptoInvalidLength        = 15,
+    eSktCloseCryptoInvalidKey,
+    eSktClosePktLengthInvalid,
+    eSktCloseUdpCreate,
+    eSktCloseUpnpStart,
+    eSktCloseUpnpDone,
+    eSktCloseMulticastListenDone,
+    eSktCloseWebBrowser,
+    eSktCloseImAliveTimeout,
+    eSktClosePingTimeout,
+    eSktCloseSktHandleInvalid,
+    eSktCloseNetCmdLengthInvalid,
+    eSktCloseNetCmdListInvalid,
+    eSktCloseNetSrvUrlInvalid,
+    eSktCloseNetSrvPluginInvalid,
+    eSktCloseNetSrvQueryIdPermission,
+    eSktCloseNetSrvQueryIdSent,
+    eSktCloseHttpUrlInvalid,
+    eSktCloseHttpPluginInvalid,
+    eSktCloseHttpHandleError,
+    eSktCloseHttpNotAcceptSkt,
+    eSktCloseHttpCloseNoError,
+    eSktCloseHttpCloseWithError,
+    eSktCloseHttpNoWebSrv,
+    eSktCloseHttpSktDestroy,
+    eSktCloseConnectReasonsEmpty,
+    eSktCloseFindBigInfoFail,
+    eSktCloseFindConnectedInfoFail,
+    eSktClosePktAnnSendFail,
+    eSktCloseToRelayPktAnnSendFail,
+    eSktCloseThroughRelayPktAnnSendFail,
+    eSktClosePktOnlineIdMeFromMyIp,
+    eSktClosePktOnlineIdMeFromAnotherIp,
+    eSktClosePktAnnNotFirstPacket,
+    eSktClosePktAnnInvalid,
+    eSktClosePktHdrInvalid,
+    eSktClosePktPingReqSendFail,
+    eSktCloseP2PNotReadyForAcceptSkt,
+    eSktCloseUserIgnored,
+    eSktCloseRelaySessionNotFound,
+
+
+    eMaxSktCloseReason			// always last
+};
+
 enum ESubCatagory
 {
     eSubCatagoryUnspecified = 0,
@@ -878,6 +962,7 @@ const char * DescribeConnectStatus( EConnectStatus connectStatus );
 //! describe friend state
 const char * DescribeFriendState( EFriendState eFriendState );
 const char * DescribeHackerLevel( EHackerLevel hackLevel );
+const char * DescribeHackerReason( EHackerReason hackReason );
 //! Host announce status as text
 const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
 //! Host join status as text
@@ -920,6 +1005,8 @@ const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
 const char * DescribeScanType( EScanType scanType );
 //! Describe search type
 const char * DescribeSearchType( ESearchType searchType );
+//! Describe socket close reason
+const char * DescribeSktCloseReason( ESktCloseReason closeReason );
 //! Describe skt type
 const char * DescribeSktType( ESktType sktType );
 

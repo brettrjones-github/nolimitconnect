@@ -38,6 +38,9 @@ public:
 
     void                        resetNetStatus( void );
 
+    void                        setIsFixedIpAddress( bool fixedIpAddr ) { m_FixedIpAddr = fixedIpAddr; }
+    bool                        isFixedIpAddress( void )                { return m_FixedIpAddr; }
+
     void                        setInternetAvail( bool avail );
     void                        setNetHostAvail( bool avail );
     void                        setConnectionTestAvail( bool avail );
@@ -49,12 +52,12 @@ public:
     void                        setFirewallTestType( FirewallSettings::EFirewallTestType firewallTestType );
     void                        setWebsiteUrlsResolved( bool resolved );
 
-    bool                        isInternetAvailable( void )       { return m_InternetAvail; };
-    bool                        isNetHostAvailable( void )        { return m_NetworkHostAvail; };
+    bool                        isInternetAvailable( void )         { return m_InternetAvail; };
+    bool                        isNetHostAvailable( void )          { return m_NetworkHostAvail; };
     bool                        isNetHostOnlineIdAvailable( void )  { return m_NetHostIdAvail; };
-    bool                        isDirectConnectTested( void )     { return m_DirectConnectTested; };
-    bool                        isP2PAvailable( void )            { return m_DirectConnectTested && (!m_RequriesRelay || m_ConnectedToRelay); };
-    bool                        requiresRelay( void )             { return m_RequriesRelay; };
+    bool                        isDirectConnectTested( void )       { return m_DirectConnectTested; };
+    bool                        isP2PAvailable( void )              { return m_FixedIpAddr || ( m_DirectConnectTested && (!m_RequriesRelay || m_ConnectedToRelay) ); };
+    bool                        requiresRelay( void )               { return m_RequriesRelay; };
     void                        getNodeUrl( std::string& retNodeUrl );
 
     std::string                 getIpAddress( void );
@@ -70,6 +73,8 @@ protected:
     VxMutex                     m_AccumMutex;
     VxMutex                     m_AccumCallbackMutex;
     std::vector<NetAvailStatusCallbackInterface*> m_CallbackList;
+
+    bool                        m_FixedIpAddr{ false };
 
     bool                        m_InternetAvail{ false };
     bool                        m_NetworkHostAvail{ false };

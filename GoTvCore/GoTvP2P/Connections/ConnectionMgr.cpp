@@ -910,7 +910,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
                 //	rc, 
                 //	sktBase->describeSktError( rc ),
                 //	m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ) );
-                sktBase->closeSkt( 2154 );
+                sktBase->closeSkt( eSktClosePktAnnSendFail );
                 sktBase = nullptr;
             }
         }
@@ -1157,7 +1157,7 @@ void ConnectionMgr::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase 
 }
 
 //============================================================================
-void ConnectionMgr::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
+void ConnectionMgr::closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
 {
     if( nullptr == poInfo )
     {
@@ -1167,7 +1167,7 @@ void ConnectionMgr::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListI
     if( nullptr == poInfo )
     {
         LogMsg( LOG_ERROR, "Failed to find info for %s\n", onlineId.toHexString().c_str() );
-        skt->closeSkt( 235 );
+        skt->closeSkt( eSktCloseFindBigInfoFail );
         return;
     }
 
@@ -1188,11 +1188,13 @@ void ConnectionMgr::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListI
             skt->closeSkt( 236 );
         }
         */
+
+        skt->closeSkt( closeReason );
     }
     else
     {
         LogMsg( LOG_ERROR, "Failed to find ConnectedInfo for %s\n", onlineId.toHexString().c_str() );
-        skt->closeSkt( 237 );
+        skt->closeSkt( eSktCloseFindConnectedInfoFail );
     }
 }
 
@@ -1242,13 +1244,13 @@ EConnectStatus ConnectionMgr::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo
             {
                 RCODE rc = sktBase->getLastSktError();
                 LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact\n", rc, sktBase->describeSktError( rc ) );
-                sktBase->closeSkt( 2154 );
+                sktBase->closeSkt( eSktCloseThroughRelayPktAnnSendFail );
                 sktBase = nullptr;
             }
         }
         else
         {
-            sktBase->closeSkt( 2155 );
+            sktBase->closeSkt( eSktCloseToRelayPktAnnSendFail );
             sktBase = nullptr;
         }
 

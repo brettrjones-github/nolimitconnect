@@ -485,8 +485,8 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 				//	rc, 
 				//	sktBase->describeSktError( rc ),
 				//	m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ) );
-				sktBase->closeSkt( 2154 );
-				sktBase = NULL;
+				sktBase->closeSkt( eSktClosePktAnnSendFail );
+				sktBase = nullptr;
 			}
 		}
 		else
@@ -751,13 +751,13 @@ RCODE NetConnector::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo,
 			{
 				RCODE rc = sktBase->getLastSktError();
 				LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact\n", rc, sktBase->describeSktError( rc ) );
-				sktBase->closeSkt( 2154 );
+				sktBase->closeSkt( eSktCloseThroughRelayPktAnnSendFail );
 				sktBase = NULL;
 			}
 		}
 		else
 		{
-			sktBase->closeSkt( 2155 );
+			sktBase->closeSkt( eSktCloseToRelayPktAnnSendFail );
 			sktBase = NULL;
 		}
 
@@ -1072,7 +1072,7 @@ void NetConnector::handlePossibleRelayConnect(	VxConnectInfo&		connectInfo,
 }
 
 //============================================================================
-void NetConnector::closeIfAnnonymous( VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
+void NetConnector::closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
 {
 	bool isAnonymouse = true;
 	if( NULL == poInfo )
@@ -1092,12 +1092,12 @@ void NetConnector::closeIfAnnonymous( VxGUID& onlineId, VxSktBase * skt, BigList
 
 	if( isAnonymouse )
 	{
-		closeConnection( onlineId, skt, poInfo );
+		closeConnection( closeReason, onlineId, skt, poInfo );
 	}
 }
 
 //============================================================================
-void  NetConnector::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
+void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )
 {
 	if( NULL == poInfo )
 	{
@@ -1106,8 +1106,8 @@ void  NetConnector::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListI
 
 	if( NULL == poInfo )
 	{
-		LogMsg( LOG_ERROR, "Failed to find info for %s\n", onlineId.toHexString().c_str() );
-		skt->closeSkt( 235 );
+		LogMsg( LOG_ERROR, "Failed to find info for %s", onlineId.toOnlineIdString().c_str() );
+		skt->closeSkt( eSktCloseFindBigInfoFail );
 		return;
 	}
 
@@ -1124,12 +1124,12 @@ void  NetConnector::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListI
 		}
 		else 
 		{
-			skt->closeSkt( 236 );
+			skt->closeSkt( closeReason );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s\n", onlineId.toHexString().c_str() );
-		skt->closeSkt( 237 );
+		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s\n", onlineId.toOnlineIdString().c_str() );
+		skt->closeSkt( eSktCloseFindConnectedInfoFail );
 	}
 }

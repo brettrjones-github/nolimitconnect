@@ -407,9 +407,9 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 	if( 0 >= urlLen )
 	{
 		sktBase->sktBufAmountRead( 0 );
-		LogMsg( LOG_ERROR, "handleFirstNetServiceConnection: not valid\n" );
-		VxReportHack( sktBase, "handleFirstNetServiceConnection: invalid url\n" );
-		sktBase->closeSkt( 636 );
+		LogMsg( LOG_ERROR, "handleFirstNetServiceConnection: not valid" );
+		VxReportHack( eHackerLevelMedium, eHackerReasonNetSrvUrlInvalid, sktBase, "handleFirstNetServiceConnection: invalid url" );
+		sktBase->closeSkt( eSktCloseNetSrvUrlInvalid );
 		return;
 	}
 
@@ -437,23 +437,26 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
             {
                 std::string onlineId = m_Engine.getMyOnlineId().toHexString();
                 m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId );
+                // flush then close
+                sktBase->closeSkt( eSktCloseNetSrvQueryIdSent, true );
             }
             else
             {
-                m_Engine.hackerOffense( NULL, eHackerLevelSuspicious, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed", sktBase->getRemoteIp().c_str() );
+                m_Engine.hackerOffense( eHackerLevelSuspicious, eHackerReasonNetSrvQueryIdPermission, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed", sktBase->getRemoteIp().c_str() );
                 VxGUID nullGuid;
                 std::string onlineId = nullGuid.toHexString();
                 m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId, ( eFriendStateIgnore == poPlugin->getPluginPermission() ) ? eNetCmdErrorServiceDisabled : eNetCmdErrorPermissionLevel );
                 sktBase->dumpSocketStats();
+                // flush then close
+                sktBase->closeSkt( eSktCloseNetSrvQueryIdPermission, true );
             }
         }
         else
         {
-            m_Engine.hackerOffense( NULL, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s invalid plugin", sktBase->getRemoteIp().c_str() );
+            m_Engine.hackerOffense( eHackerLevelMedium, eHackerReasonNetSrvUrlInvalid, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s invalid plugin", sktBase->getRemoteIp().c_str() );
+            sktBase->closeSkt( eSktCloseNetSrvPluginInvalid, false );
         }
 
-        // flush then close
-        sktBase->closeSkt( 658, true );
         return;
     }
 
@@ -486,6 +489,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 			{
 				rc = poPlugin->handleHttpConnection( sktBase, netServiceHdr.m_Ident );
 			}
+
 			if( 0 == rc )
 			{
 				// socket was handled
@@ -494,20 +498,19 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "PluginMgr::handleFirstNetServiceConnection; unknown plugin type\n" );
-            m_Engine.hackerOffense( NULL, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Hacker http attack (unknown plugin)from ip %s\n", sktBase->getRemoteIp().c_str() );
+			LogMsg( LOG_INFO, "PluginMgr::handleFirstNetServiceConnection; unknown plugin type" );
+            m_Engine.hackerOffense( eHackerLevelMedium, eHackerReasonNetSrvPluginInvalid, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack (unknown plugin)from ip %s", sktBase->getRemoteIp().c_str() );
             sktBase->dumpSocketStats();
-			sktBase->closeSkt( 657 );
+			sktBase->closeSkt( eSktCloseHttpPluginInvalid );
 		}
 	}
 
 	if( false == httpConnectionWasHandled )
 	{
-        m_Engine.hackerOffense( NULL, eHackerLevelSevere, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s\n", sktBase->getRemoteIp().c_str() );
+        m_Engine.hackerOffense( eHackerLevelSevere, eHackerReasonHttpAttack, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s", sktBase->getRemoteIp().c_str() );
         sktBase->dumpSocketStats();
-		sktBase->closeSkt( 659 );
+		sktBase->closeSkt( eSktCloseHttpHandleError );
 	}
-
 }
 
 //============================================================================

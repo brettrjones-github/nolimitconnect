@@ -72,8 +72,8 @@ bool NetServiceUtils::verifyAllDataArrivedOfNetServiceUrl( VxSktBase * sktBase )
 	{
 		sktBase->sktBufAmountRead( 0 );
 		LogMsg( LOG_ERROR, "verifyAllDataArrivedOfNetServiceUrl: not valid\n" );
-		VxReportHack( sktBase, "parseHttpNetServiceUrl: not http prefix\n" );
-		sktBase->closeSkt( 633 );
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetSrvUrlInvalid, sktBase, "parseHttpNetServiceUrl: not http prefix\n" );
+		sktBase->closeSkt( eSktCloseNetSrvUrlInvalid );
 		return false;
 	}
 
@@ -255,9 +255,9 @@ EPluginType NetServiceUtils::parseHttpNetServiceUrl( VxSktBase * sktBase, NetSer
 	EPluginType pluginType = parseHttpNetServiceHdr( pSktBuf, iSktDataLen, netServiceHdr );
 	if( ePluginTypeInvalid == pluginType )
 	{
-		VxReportHack( sktBase, "Invalid Netservice URL\n" );
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetSrvUrlInvalid, sktBase, "Invalid Netservice URL\n" );
 		sktBase->sktBufAmountRead( 0 );
-		sktBase->closeSkt( 633 );
+		sktBase->closeSkt( eSktCloseNetSrvUrlInvalid );
 		return ePluginTypeInvalid;
 	}
 

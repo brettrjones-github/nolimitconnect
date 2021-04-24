@@ -154,7 +154,7 @@ RCODE RcWebServer::HandleWebData( RcWebSkt * sktBase )
 {
 	if( false == isWebServerAvailable() )
 	{
-		sktBase->closeSkt(8886);
+		sktBase->closeSkt(eSktCloseHttpNoWebSrv);
 		return -1;
 	}
 

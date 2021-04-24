@@ -66,8 +66,8 @@ RCODE NetServiceHost::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& n
 	if( ( 0 == netServiceHdr.m_ContentDataLen )
 		|| ( 0x0f & netServiceHdr.m_ContentDataLen ) )
 	{
-		VxReportHack( sktBase, "handleNetCmdHostReq: Invalid content len %d\n", netServiceHdr.m_ContentDataLen );
-		sktBase->closeSkt( 8776 );
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetCmdLength, sktBase, "handleNetCmdHostReq: Invalid content len %d", netServiceHdr.m_ContentDataLen );
+		sktBase->closeSkt( eSktCloseNetCmdLengthInvalid );
 		return -1;
 	}
 	
@@ -85,8 +85,8 @@ RCODE NetServiceHost::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& n
 
 	if( false == verifyHostList( anchorList, contentDataLen ) )
 	{
-		VxReportHack( sktBase, "handleNetCmdHostReq: Invalid list\n" );
-		sktBase->closeSkt( 8776 );
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetCmdListInvalid, sktBase, "handleNetCmdHostReq: Invalid list" );
+		sktBase->closeSkt( eSktCloseNetCmdListInvalid );
 		return -1;
 	}
 

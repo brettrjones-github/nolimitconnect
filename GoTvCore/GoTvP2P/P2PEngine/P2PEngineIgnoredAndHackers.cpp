@@ -21,8 +21,9 @@
 
 //============================================================================
 //! called if hacker offense is detected
-void P2PEngine::hackerOffense(	VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
-                                EHackerLevel	hackLevel,			    // 1=severe 2=medium 3=suspicious
+void P2PEngine::hackerOffense(	EHackerLevel	hackerLevel,			
+                                EHackerReason	hackerReason,	
+                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )                             
 								InetAddress		IpAddr,					// ip address if identity not known
 								const char *	pMsg, ... )				// message about the offense
 {
@@ -44,14 +45,15 @@ void P2PEngine::hackerOffense(	VxNetIdent *	poContactIdent,			// users identity 
     }
 
 	std::string strIp = oIpAddr.toStdString();
-	LogMsg( LOG_SEVERE, "Hacker Offense %s: ip %s %s\n", DescribeHackerLevel( hackLevel ), strIp.c_str(), szBuffer );
+	LogMsg( LOG_SEVERE, "%s %s: ip %s %s\n", DescribeHackerLevel( hackerLevel ), DescribeHackerReason( hackerReason ), strIp.c_str(), szBuffer );
 }
 
 
 //============================================================================
 //! called if hacker offense is detected
-void P2PEngine::hackerOffense(	VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
-                                EHackerLevel	hackLevel,			    // 1=severe 2=medium 3=suspicious
+void P2PEngine::hackerOffense(	EHackerLevel	hackerLevel,			    
+                                EHackerReason   hackerReason,
+                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )                           
                                 const char *	pMsg, ... )				// message about the offense
 {
     char szBuffer[4096];
@@ -65,5 +67,5 @@ void P2PEngine::hackerOffense(	VxNetIdent *	poContactIdent,			// users identity 
         va_end( argList );
     }
 
-    LogMsg( LOG_SEVERE, "Hacker Offense %s: %s\n", DescribeHackerLevel( hackLevel ), szBuffer );
+    LogMsg( LOG_SEVERE, "%s %s: %s\n", DescribeHackerLevel( hackerLevel ),  DescribeHackerReason( hackerReason ), szBuffer );
 }

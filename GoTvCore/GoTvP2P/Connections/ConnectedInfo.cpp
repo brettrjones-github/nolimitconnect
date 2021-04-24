@@ -121,7 +121,7 @@ void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallb
         if( shakeInfo.getSktBase() && shakeInfo.getSktBase()->isConnected() )
         {
             // let the normal socket disconnected code do the work of removing the connection
-            shakeInfo.getSktBase()->closeSkt( 9191 );
+            shakeInfo.getSktBase()->closeSkt( eSktCloseConnectReasonsEmpty );
         }
     }
 }

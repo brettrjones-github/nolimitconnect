@@ -1536,7 +1536,7 @@ std::string VxGetRmtHostName( SOCKET& skt )
 	if ( 0 > getpeername( skt, ( struct sockaddr * )&oSktAddr, &sktAddrlen ) )
 	{
 		strcpy( hostName, "UNKNOWN" );
-		VxReportHack( skt, hostName, "HACK ALERT:getpeername failed: %.100s",
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonPeerName, skt, hostName, "HACK ALERT:getpeername failed: %.100s",
 					  strerror( errno ) );
 	}
 	else
@@ -1559,7 +1559,7 @@ std::string VxGetRmtHostName( SOCKET& skt )
 			if ( !hp )
 			{
 				strcpy( hostName, inet_ntoa( oSktAddr.sin_addr ) );
-				VxReportHack( skt, hostName, "reverse mapping checking gethostbyname for %.700s failed",
+				VxReportHack( eHackerLevelSuspicious, eHackerReasonHostByName, skt, hostName, "reverse mapping checking gethostbyname for %.700s failed",
 							  hostName );
 			}
 			else
@@ -1573,7 +1573,7 @@ std::string VxGetRmtHostName( SOCKET& skt )
 				{
 					// address not found for the host name 
 					strcpy( hostName, inet_ntoa( oSktAddr.sin_addr ) );
-					VxReportHack( skt, hostName, "Address %.100s maps to %.600s, but does not map back to the address",
+					VxReportHack( eHackerLevelSuspicious, eHackerReasonNoHostIpAddr, skt, hostName, "Address %.100s maps to %.600s, but does not map back to the address",
 								  hostName );
 				}
 			}
@@ -1611,7 +1611,7 @@ std::string VxGetRmtHostName( SOCKET& skt )
 		//NOTE: buffer must be at least 3 times as big as options
 		for ( ucp = options; optionLen > 0; ucp++, optionLen--, cp += 3 )
 			sprintf( cp, " %2.2x", *ucp );
-		VxReportHack( skt, hostName, "Connection from %.100s with IP options:%.800s",
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonHostIpOptions, skt, hostName, "Connection from %.100s with IP options:%.800s",
 					  inet_ntoa( oSktAddr.sin_addr ), text );
 		VxCloseSktNow( skt );
 	}
@@ -2160,6 +2160,11 @@ uint16_t VxGetRmtPort( SOCKET skt )
 //============================================================================
 const char * VxDescribeSktError( int iErr )
 {
+    if( iErr == 0xFFFFFFFF )
+    {
+        return "Connection Dropped";
+    }
+
 	static char as8Buf[ 128 ];
 #ifdef TARGET_OS_WINDOWS
 	switch ( iErr )

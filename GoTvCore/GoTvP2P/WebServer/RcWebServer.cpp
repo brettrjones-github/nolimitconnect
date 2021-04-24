@@ -196,7 +196,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
         {
             LogMsg( LOG_ERROR, "ERROR skt %d SktWebReceiveThreadFunc is not an accept socket \n", sktBase->m_iSktId );
             sktBase->m_bClosingFromRxThread = true;
-            sktBase->closeSkt(8888);
+            sktBase->closeSkt( eSktCloseHttpNotAcceptSkt );
             poThread->threadAboutToExit();
             return nullptr;
         }
@@ -308,7 +308,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
         if( INVALID_SOCKET != sktBase->m_Socket )
         {
             sktBase->m_bClosingFromRxThread = true;
-            sktBase->closeSkt( 96296 );
+            sktBase->closeSkt( eSktCloseHttpCloseNoError );
         }
 
         sktBase->setCallbackReason( eSktCallbackReasonClosing );
@@ -317,7 +317,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
         {
             // we are closing due to error .. not because user called close
             sktBase->m_bClosingFromRxThread = true;
-            sktBase->closeSkt(88887);
+            sktBase->closeSkt( eSktCloseHttpCloseWithError );
         }
 
         sktBase->setCallbackReason( eSktCallbackReasonClosed );

@@ -894,7 +894,7 @@ static int dumpSktStatsCnt = 0;
     RCODE rcAccept = sktBase->doAccept( this, *(( struct sockaddr * )&acceptAddr) );
 	if( rcAccept || poVxThread->isAborted() || INVALID_SOCKET == oListenSkt )
 	{
-		sktBase->closeSkt(67823);
+		sktBase->closeSkt(eSktCloseAcceptFailed);
 		LogMsg( LOG_ERROR, "VxServerMgr: error %d doing accept skt %d skt id %d thread 0x%x", rc, sktBase->m_Socket, sktBase->getSktId(), VxGetCurrentThreadId() );
         moveToEraseList( sktBase );
 

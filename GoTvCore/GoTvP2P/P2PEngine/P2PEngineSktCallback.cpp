@@ -138,7 +138,8 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			//hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker no announcement attack from ip %s\n", sktBase->getRemoteIp() );
 			// release the mutex
 			sktBase->sktBufAmountRead( 0 );
-			sktBase->closeSkt( 658 );
+            hackerOffense( eHackerLevelMedium, eHackerReasonPktAnnNotFirstPacket, NULL, sktBase->getRemoteIpBinary(), "Hacker no announcement attack from ip %s\n", sktBase->getRemoteIp().c_str() );
+			sktBase->closeSkt( eSktClosePktAnnNotFirstPacket );
 			return;
 		}
 
@@ -147,7 +148,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		{
             LogMsg( LOG_INFO, "Not Online Yet so cannot accept skt id %d ip %s\n", sktBase->getSktId(), sktBase->getRemoteIp().c_str() );
 			sktBase->sktBufAmountRead( 0 );
-			sktBase->closeSkt( 659 );
+			sktBase->closeSkt( eSktCloseP2PNotReadyForAcceptSkt );
 			return;
 		}
 
@@ -166,7 +167,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			sktBase->sktBufAmountRead( 0 );
             LogMsg( LOG_ERROR, "Invalid Packet announce from ip %s\n", sktBase->getRemoteIp().c_str() );
 			// disconnect
-			sktBase->closeSkt( 659 );
+			sktBase->closeSkt( eSktClosePktAnnInvalid );
 		}
 
 		//NOTE: TODO check if is in our Ident ignore list
@@ -212,10 +213,10 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		if( false == pktHdr->isValidPkt() )
 		{
 			// invalid data
-			hackerOffense( 0, eHackerLevelMedium, sktBase->getRemoteIpBinary(), "Invalid VxPktHdr\n" );
+			hackerOffense( eHackerLevelMedium, eHackerReasonPktHdrInvalid, nullptr, sktBase->getRemoteIpBinary(), "Invalid VxPktHdr" );
 			// release the mutex
 			sktBase->sktBufAmountRead( 0 );
-			sktBase->closeSkt( 622 );
+			sktBase->closeSkt( eSktClosePktHdrInvalid );
 			return;
 		}
 

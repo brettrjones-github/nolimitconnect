@@ -45,16 +45,50 @@ void NetStatusAccum::resetNetStatus( void )
 //============================================================================
 void NetStatusAccum::onNetStatusChange( void )
 {
+    ENetAvailStatus netAvailStatus = eNetAvailNoInternet;
     EInternetStatus internetStatus = m_InternetAvail ? eInternetNoInternet : eInternetInternetAvailable;
     if( FirewallSettings::eFirewallTestAssumeNoFirewall == m_FirewallTestType )
     {
-        if( m_InternetAvail )
-        {
-            internetStatus = eInternetAssumeDirectConnect;
+        internetStatus = eInternetAssumeDirectConnect;
+        netAvailStatus = eNetAvailP2PAvail; // must be at least P2P available or will not accept incomming accept sockets
 
-            std::string externIp;
-            m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr( externIp );
-            setIpAddress( externIp );
+        if( m_IpAddr.empty() )
+        {
+            setIpAddress( m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr() );
+        }
+
+        if( isDirectConnectTested() )
+        {
+            // direct connect tested is set when first packet announce is recieved when have fixed ip
+            if( m_Engine.isNetworkHostEnabled() )
+            {
+                // we are the host
+                netAvailStatus = eNetAvailDirectGroupHost; // 7 bars green
+            }
+            else
+            {
+                m_NetAvailStatus = eNetAvailFullOnlineDirectConnect;  // 5 bars green
+                if( m_GroupHostAvail )
+                {
+                    netAvailStatus = eNetAvailDirectGroupHost; // 7 bars green
+                }
+            }
+        }
+        else
+        {
+            if( m_Engine.isNetworkHostEnabled() )
+            {
+                // we are the host
+                netAvailStatus = eNetAvailRelayGroupHost; // 6 bars orange
+            }
+            else
+            {
+                m_NetAvailStatus = eNetAvailFullOnlineWithRelay; // 4 bars orange
+                if( m_GroupHostAvail )
+                {
+                    netAvailStatus = eNetAvailRelayGroupHost; // 6 bars orange
+                }
+            }
         }
     }
     else if( FirewallSettings::eFirewallTestAssumeFirewalled == m_FirewallTestType )
@@ -121,46 +155,48 @@ void NetStatusAccum::onNetStatusChange( void )
         LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Internet Status %s", DescribeInternetStatus( internetStatus ) );
     }
 
-    ENetAvailStatus netAvailStatus = eNetAvailNoInternet;
-    if( m_NetworkHostAvail )
+    if( !( FirewallSettings::eFirewallTestAssumeNoFirewall == m_FirewallTestType ) )
     {
-        netAvailStatus = eNetAvailHostAvail;
-        if( m_DirectConnectTested )
+        if( m_NetworkHostAvail )
         {
-            netAvailStatus = eNetAvailP2PAvail;
-            if( requiresRelay() )
+            netAvailStatus = eNetAvailHostAvail;
+            if( m_DirectConnectTested )
             {
-                if( m_ConnectedToRelay )
+                netAvailStatus = eNetAvailP2PAvail;
+                if( requiresRelay() )
                 {
-                    netAvailStatus = eNetAvailFullOnlineWithRelay;
+                    if( m_ConnectedToRelay )
+                    {
+                        netAvailStatus = eNetAvailFullOnlineWithRelay;
+                    }
+                    else
+                    {
+                        netAvailStatus = eNetAvailOnlineButNoRelay;
+                    }
                 }
                 else
                 {
-                    netAvailStatus = eNetAvailOnlineButNoRelay;
+                    netAvailStatus = eNetAvailFullOnlineDirectConnect;
                 }
-            }
-            else
-            {
-                netAvailStatus = eNetAvailFullOnlineDirectConnect;
-            }
 
-            if( eNetAvailFullOnlineDirectConnect == netAvailStatus )
-            {
-                // fully connected
-                if( m_GroupHostAvail )
+                if( eNetAvailFullOnlineDirectConnect == netAvailStatus )
                 {
-                    netAvailStatus = eNetAvailDirectGroupHost;
+                    // fully connected
+                    if( m_GroupHostAvail )
+                    {
+                        netAvailStatus = eNetAvailDirectGroupHost;
+                    }
+                }
+
+                if( eNetAvailFullOnlineWithRelay == netAvailStatus )
+                {
+                    // fully connected
+                    if( m_GroupHostAvail )
+                    {
+                        netAvailStatus = eNetAvailRelayGroupHost;
+                    }
                 }
             }
-
-            if( eNetAvailFullOnlineWithRelay == netAvailStatus )
-            {
-                // fully connected
-                if( m_GroupHostAvail )
-                {
-                    netAvailStatus = eNetAvailRelayGroupHost;
-                }
-            }     
         }
     }
 

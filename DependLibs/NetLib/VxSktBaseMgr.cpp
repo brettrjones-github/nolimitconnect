@@ -255,7 +255,7 @@ void VxSktBaseMgr::closeAllSkts( void )
 	{
 		if( (*iter)->isConnected() )
 		{
-			(*iter)->closeSkt();
+			(*iter)->closeSkt(eSktCloseAll);
 		}
 	}
 
@@ -331,7 +331,7 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
                     LogModule( eLogSkt, LOG_DEBUG, "Closing due to alive timeout %s skt %d handle %d", DescribeSktType( sktBase->getSktType() ), sktBase->getSktId(), sktBase->getSktHandle() );
                     sktBase->dumpSocketStats();
 
-                    sktBase->closeSkt( 723 );
+                    sktBase->closeSkt( eSktCloseImAliveTimeout );
                 }
             }
         }

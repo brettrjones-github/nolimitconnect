@@ -469,13 +469,15 @@ public:
 	bool						shouldInfoBeInDatabase( BigListInfo * poInfo );
 
 	//! called if hacker offense is detected
-	void						hackerOffense(	VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
-												EHackerLevel	hackLevel,			    // 0=unknown 1=suspicious 2=medium 3=severe
+	void						hackerOffense(	EHackerLevel	hackerLevel,			    
+                                                EHackerReason   hackerReason,
+                                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
 												InetAddress		IpAddr,					// ip address if identity not known
 												const char *	pMsg, ... );			// message about the offense
 
-    void                        hackerOffense(  VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
-                                                EHackerLevel	hackLevel,			    // 1=severe 2=medium 3=suspicious
+    void                        hackerOffense(  EHackerLevel	hackerLevel,			    
+                                                EHackerReason   hackerReason,
+                                                VxNetIdent *	poContactIdent,			// users identity info ( may be null if not known then use ipAddress )
                                                 const char *	pMsg, ... );			// message about the offense
 
 	virtual void				onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );

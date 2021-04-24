@@ -61,7 +61,7 @@ int RcMulticastListen::beginListen( void )
 //============================================================================
 void RcMulticastListen::stopListen( void )
 {
-	m_SktUdp.closeSkt();
+	m_SktUdp.closeSkt( eSktCloseMulticastListenDone );
 }
 
 //============================================================================

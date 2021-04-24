@@ -145,7 +145,7 @@ RCODE VxSktUdp::createSocket( InetAddress& oLclIp, uint16_t u16Port, struct addr
 	m_rcLastSktError = 0;
 	if( isConnected() )
 	{
-		closeSkt();
+		closeSkt(eSktCloseUdpCreate);
 	}
 
 	m_LclIp = oLclIp;

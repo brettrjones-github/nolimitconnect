@@ -112,6 +112,7 @@ void NetworkMonitor::onOncePerSecond( void )
             m_LastConnectedLclIp = externIp;
             LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new fixed ip addr %s", externIp.c_str() );
 
+            m_Engine.getNetStatusAccum().setIsFixedIpAddress( true );
             setIsInternetAvailable( true );
             m_Engine.fromGuiNetworkAvailable( externIp.c_str(), false );
         }
@@ -123,6 +124,10 @@ void NetworkMonitor::onOncePerSecond( void )
         }
 
         return;
+    }
+    else
+    {
+        m_Engine.getNetStatusAccum().setIsFixedIpAddress( false );
     }
 
     if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )

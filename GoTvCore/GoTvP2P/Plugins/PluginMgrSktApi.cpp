@@ -39,16 +39,16 @@ bool PluginMgr::pluginApiSktConnectTo(		EPluginType			ePluginType,	// plugin id
 
 //============================================================================
 //! close socket connection
-void PluginMgr::pluginApiSktClose( VxSktBase * sktBase )
+void PluginMgr::pluginApiSktClose( ESktCloseReason closeReason, VxSktBase * sktBase )
 {
-	sktBase->closeSkt(888);
+	sktBase->closeSkt(closeReason);
 }
 
 //============================================================================
 //! close socket immediate.. don't bother to flush buffer
-void PluginMgr::pluginApiSktCloseNow( VxSktBase * sktBase )
+void PluginMgr::pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase * sktBase )
 {
-	sktBase->closeSkt(889,  false);
+	sktBase->closeSkt(closeReason,  false);
 }
 
 
