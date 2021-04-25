@@ -58,6 +58,7 @@ public:
     int							m_iMgrId = 0;									// unique id for this manager
 
 protected:
+    bool                        createListenSocket( std::string &preferredIp, SOCKET &listenSock, uint16_t listenPort, std::string &actualListenLocalIp );
     RCODE						internalStartListen( void );
     RCODE 						acceptConnection( VxThread * poVxThread, SOCKET oListenSkt );
     void                        closeListenSocket( void );

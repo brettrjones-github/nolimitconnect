@@ -694,7 +694,7 @@ void VxSetSktAllowReusePort( SOCKET skt )
 }
 
 //============================================================================
-SOCKET VxConnectTo( InetAddress& lclIp, InetAddress& rmtIp, uint16_t u16Port, int iConnectTimeoutMs, RCODE * retSktErr )
+SOCKET VxConnectTo( InetAddrAndPort& lclIp, InetAddrAndPort& rmtIp, uint16_t u16Port, int iConnectTimeoutMs, RCODE * retSktErr )
 {
 	if( 0 != retSktErr )
 	{
@@ -776,6 +776,10 @@ SOCKET VxConnectTo( InetAddress& lclIp, InetAddress& rmtIp, uint16_t u16Port, in
                 *retSktErr = rc;
             }
         }
+    }
+    else
+    {
+        VxGetLclAddress( sktHandle, lclIp );
     }
 
     return sktHandle;
@@ -1201,9 +1205,8 @@ connected:
 	}
 }
 
-
 //============================================================================
-SOCKET VxConnectTo(		InetAddress&		lclIp,
+SOCKET VxConnectTo(		InetAddrAndPort&	lclIp,
 						InetAddrAndPort&	rmtIp,
 						const char *		pIpAddr,				// remote ip
 						uint16_t			u16Port,				// port to connect to
@@ -1229,13 +1232,13 @@ SOCKET VxConnectTo(		InetAddress&		lclIp,
 	SOCKET sktHandle = VxConnectTo( lclIp, rmtIp, u16Port, iTimeoutMilliSeconds, retSktError );
 	if( INVALID_SOCKET == sktHandle )
 	{
-        LogModule( eLogConnect, LOG_DEBUG, "VxConnectTo: FAIL connect %3.3f sec lcl ip %s to %s:%d timeout %d error %d thread 0x%x",
-	               connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), rmtIp.toStdString().c_str(), u16Port, iTimeoutMilliSeconds, retSktError ? *retSktError : -1, VxGetCurrentThreadId() );
+        LogModule( eLogConnect, LOG_DEBUG, "VxConnectTo: FAIL connect %3.3f sec lcl ip %s:%d to %s:%d timeout %d error %d thread 0x%x",
+	               connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), lclIp.getPort(), rmtIp.toStdString().c_str(), u16Port, iTimeoutMilliSeconds, retSktError ? *retSktError : -1, VxGetCurrentThreadId() );
 	}
 	else
 	{
-        LogModule( eLogConnect, LOG_DEBUG, "VxConnectTo: SUCCESS connect %3.3f sec lcl ip %s to %s:%d thread 0x%x",
-			       connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), rmtIp.toStdString().c_str(), u16Port, VxGetCurrentThreadId());
+        LogModule( eLogConnect, LOG_DEBUG, "VxConnectTo: SUCCESS connect %3.3f sec lcl ip %s:%d to %s:%d thread 0x%x",
+			       connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), lclIp.getPort(), rmtIp.toStdString().c_str(), u16Port, VxGetCurrentThreadId());
 	}
 
 	return sktHandle;
@@ -1243,7 +1246,7 @@ SOCKET VxConnectTo(		InetAddress&		lclIp,
 
 //============================================================================
 // connects to website and returns socket.. if fails returns INVALID_SOCKET
-SOCKET VxConnectToWebsite(	InetAddress&		lclIp,			// ip of adapter to use
+SOCKET VxConnectToWebsite(	InetAddrAndPort&	lclIp,			// ip of adapter to use
 							InetAddrAndPort&	rmtIp,			// return ip and port url resolves to
 							const char *		pWebsiteUrl,
 							std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
@@ -1477,8 +1480,8 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 	// Get the IP address of the the local side of connection
 	RCODE rc = 0;
 	struct sockaddr oSktAddr;
-	socklen_t iSktAddrLen = sizeof( oSktAddr );
-	memset( &oSktAddr, 0, sizeof( oSktAddr ) );
+    memset( &oSktAddr, 0, sizeof( struct sockaddr ) );
+	socklen_t iSktAddrLen = sizeof( struct sockaddr );
 
     if( getsockname( sktHandle, ( struct sockaddr* )&oSktAddr, &iSktAddrLen ) )
 	{
@@ -1494,31 +1497,6 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 	}
 
 	return rc;
-}
-
-//============================================================================
-RCODE VxGetLclAddress( SOCKET sktHandle, InetAddress& retAddr )
-{
-    // Get the IP address of the the local side of connection
-    RCODE rc = 0;
-    struct sockaddr oSktAddr;
-    socklen_t iSktAddrLen = sizeof( oSktAddr );
-    memset( &oSktAddr, 0, sizeof( oSktAddr ) );
-
-    if( getsockname( sktHandle, ( struct sockaddr* )&oSktAddr, &iSktAddrLen ) )
-    {
-        // error occurred
-        retAddr.setToInvalid();
-        rc = VxGetLastError();
-        //if( IsLogEnabled( eLogSkt ) )
-            LogMsg( LOG_DEBUG, "VxGetRmtAddress: skt handle %d error %d %s\n", sktHandle, rc, VxDescribeSktError( rc ) );
-    }
-    else
-    {
-        retAddr.setIp( oSktAddr );
-    }
-
-    return rc;
 }
 
 //============================================================================

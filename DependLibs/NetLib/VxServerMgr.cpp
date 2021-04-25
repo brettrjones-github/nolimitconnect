@@ -146,11 +146,46 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 
 	m_LastWatchdogKickMs = GetTimeStampMs();    
 
-    std::string ipv4String;
+    std::string ipv4String("");
     if( ip && strlen(ip) )
     {
         ipv4String = ip;
     }
+
+    // TODO should be able to bind to a specific adapter but seams to have many issues
+    // Instead do the most generic listen socket
+    LogModule( eLogListen, LOG_INFO, "### NOT IN THREAD VxServerMgr::startListening prefered ip %s port %d", ipv4String.c_str(), u16ListenPort );
+
+    SOCKET listenSock = INVALID_SOCKET;
+    std::string actualListenLclIp;
+    if( createListenSocket( ipv4String, listenSock, u16ListenPort, actualListenLclIp ) )
+    {
+        // m_LclIp was set in call to createListenSocket
+        // m_LclIp.setIp( actualListenLclIp.c_str() );
+        // m_LclIp.setPort( u16ListenPort );
+
+        LogModule( eLogListen, LOG_INFO, "VxServerMgr::startListening create listen skt %d success lcl ip %s port %d", listenSock, actualListenLclIp.c_str(), u16ListenPort );
+
+        m_u16ListenPort = u16ListenPort;
+        m_aoListenSkts[ m_iActiveListenSktCnt ] = listenSock;
+        m_iActiveListenSktCnt++;
+        if( 0 != internalStartListen() )
+        {
+            LogModule( eLogListen, LOG_ERROR, "ipv4 listen() internalStartListen failed" );
+            closeListenSocket();
+            return false;
+        }
+        
+        return true;
+    }
+    else
+    {
+        LogModule( eLogListen, LOG_ERROR, "VxServerMgr::startListening create listen socket failed port %d for preferred ip %s", u16ListenPort, ipv4String.c_str() );
+        return false;
+    }
+
+    // TODO should be able to bind to a specific adapter but it seams to have many cross platform issues
+    return false;
 
     bool haveAdapterIp = !ipv4String.empty();
 	m_u16ListenPort = u16ListenPort;
@@ -689,6 +724,8 @@ void VxServerMgr::closeListenSocket( void )
 {
     if( m_iActiveListenSktCnt )
     {
+        m_ListenVxThread.abortThreadRun( true );
+
         m_ListenSktIsBoundToIp = false;
         m_IsReadyToAcceptConnections = false;
         LogModule( eLogListen, LOG_DEBUG, "### VxServerMgr: Mgr %d stop listening %d skt cnt %d thread 0x%x\n", m_iMgrId, m_u16ListenPort, m_iActiveListenSktCnt, VxGetCurrentThreadId() );
@@ -735,12 +772,13 @@ RCODE VxServerMgr::stopListening( void )
         return 0; // not listening
     }
 
+    closeListenSocket();
+
     m_ListenMutex.lock();
     m_u16ListenPort = 0;
     m_LclIp.setIpAndPort( "", m_u16ListenPort );
     m_ListenMutex.unlock();
 
-    closeListenSocket();
 	return 0;
 }
 
@@ -1011,4 +1049,61 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 
     LogModule( eLogConnect, LOG_INFO, "Listen Thread is exiting thread 0x%x", VxGetCurrentThreadId() );
 	m_IsReadyToAcceptConnections = false;
+}
+
+//============================================================================
+bool VxServerMgr::createListenSocket( std::string &preferredIp, SOCKET &listenSock, uint16_t listenPort, std::string &actualListenLocalIp )
+{
+    actualListenLocalIp = "";
+    if( listenPort < 80 )
+    {
+        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket invalid listen port %d", listenPort );
+        return false;
+    }
+
+    listenSock = INVALID_SOCKET;
+    struct sockaddr_in serverAddr;
+    memset( &serverAddr, 0, sizeof( struct sockaddr_in ) );
+
+    serverAddr.sin_family = AF_INET;                // sets listen socket protocol type
+    serverAddr.sin_addr.s_addr = htonl(INADDR_ANY); // sets our local IP address
+    serverAddr.sin_port = htons(listenPort);        // sets the listen port number 
+
+    listenSock = socket(AF_INET, SOCK_STREAM, 0);               // creates IP based TCP socket
+    if( listenSock < 0 ) 
+    { 
+        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket failed" );
+        return false;
+    }
+
+    // Bind Socket
+    int bindStatus = bind( listenSock, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr) );
+    int retryCnt = 0;
+    while( bindStatus < 0 )
+    {
+        retryCnt++;
+        if( retryCnt >= 3 )
+        {
+            LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket bind socket %d failed event after %d tries", listenSock, retryCnt );
+            return false;
+        }
+
+        VxSleep( 1000 );
+        bindStatus = bind( listenSock, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr) );
+    }
+
+    if( bindStatus >= 0 )
+    {
+        // unfortunately (At least in windows) getpeername is invalid and getsockname returns 0.0.0.0 if you bind to INADDR_ANY
+        // there seems to be no way to get the actual address of the adapter we will get the incomming connection on
+        struct sockaddr lclSockName;
+        memset( &lclSockName, 0, sizeof( struct sockaddr ) );
+        socklen_t sockNameLen = sizeof( struct sockaddr );
+        getsockname( listenSock, &lclSockName, &sockNameLen );
+
+        VxGetLclAddress( listenSock, m_LclIp );
+        actualListenLocalIp = m_LclIp.toStdString();
+    }
+
+    return bindStatus >= 0;
 }

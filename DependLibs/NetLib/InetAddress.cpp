@@ -1108,7 +1108,7 @@ uint16_t InetAddress::setIp( struct sockaddr_in& oIPv4Addr )
 //! returns port in host order
 uint16_t InetAddress::setIp( struct sockaddr_in6& oIPv6Addr )
 {
-	memcpy(this, &oIPv6Addr.sin6_addr, 16);
+	memcpy(this, &oIPv6Addr.sin6_addr, sizeof(struct sockaddr_in6) < sizeof( InetAddress ) ? sizeof(struct sockaddr_in6) : sizeof( InetAddress ) );
 	return ntohs( oIPv6Addr.sin6_port );
 }
 
@@ -1309,6 +1309,14 @@ InetAddrAndPort::InetAddrAndPort( const InetAddrAndPort& rhs )
     : InetAddress( rhs )
     , m_u16Port( rhs.m_u16Port )
 {
+}
+
+//============================================================================
+InetAddrAndPort::InetAddrAndPort( const InetAddress& rhs )
+    : InetAddress( rhs )
+    , m_u16Port( 0 )
+{
+
 }
 
 //============================================================================

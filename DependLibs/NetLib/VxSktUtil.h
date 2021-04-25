@@ -69,7 +69,7 @@ bool							VxResolveUrl( const char * pUrl, uint16_t u16Port, InetAddress& oRetA
 //! return true if ip is in list of local ips
 bool							VxLocalIpExists( std::string& strIpAddress );
 // connects to website and returns socket.. if fails returns INVALID_SOCKET
-SOCKET							VxConnectToWebsite( InetAddress&		oLclIp,			// ip of adapter to use
+SOCKET							VxConnectToWebsite( InetAddrAndPort&		oLclIp,			// ip of adapter to use
 													InetAddrAndPort&	oRmtIp,			// return ip and port url resolves to
 													const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
@@ -78,8 +78,8 @@ SOCKET							VxConnectToWebsite( InetAddress&		oLclIp,			// ip of adapter to use
 													int					iConnectTimeoutMs );
 
 bool							VxBindSkt( SOCKET sktHandle, InetAddress & oLclAddr, uint16_t u16Port );
-SOCKET							VxConnectTo( InetAddress& oLclIp, InetAddress& oRmtIp, uint16_t u16Port, int iTimeoutMs = SKT_CONNECT_TIMEOUT, RCODE * retSktErr = nullptr );
-SOCKET							VxConnectTo( InetAddress&		oLclIp,
+SOCKET							VxConnectTo( InetAddrAndPort& oLclIp, InetAddrAndPort& oRmtIp, uint16_t u16Port, int iTimeoutMs = SKT_CONNECT_TIMEOUT, RCODE * retSktErr = nullptr );
+SOCKET							VxConnectTo( InetAddrAndPort&	oLclIp,
 											 InetAddrAndPort&	oRmtIp,
 											 const char *		pIpOrUrl,				// remote ip or url
                                              uint16_t			u16Port,				// port to connect to
@@ -89,7 +89,6 @@ SOCKET                          VxConnectToAddr(SOCKET sktHandle, struct sockadd
 std::string                     VxSktAddrToString( struct sockaddr* sktAddr, int sktAddrLen );
 
 RCODE							VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
-RCODE                           VxGetLclAddress( SOCKET sktHandle, InetAddress& oRetAddr );
 RCODE							VxGetRmtAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
 
 bool							VxIsIPv6Address( const char *addr );

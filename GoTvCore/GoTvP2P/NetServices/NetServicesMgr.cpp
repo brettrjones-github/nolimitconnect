@@ -874,7 +874,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 	std::string strPayload = contentParts[0];
     int iIsOpen = atoi( contentParts[ 0 ].c_str() );
 
-    LogModule( eLogConnect, LOG_INFO, "NetActionIsMyPortOpen::doAction: can direct connect %s my ip %s:%d thread 0x%x", strPayload.c_str(), retMyExternalIp.c_str(), tcpListenPort, VxGetCurrentThreadId() );
+    LogModule( eLogConnect, LOG_INFO, "NetActionIsMyPortOpen::doAction: test can direct connect %s my ip %s:%d thread 0x%x", strPayload.c_str(), retMyExternalIp.c_str(), tcpListenPort, VxGetCurrentThreadId() );
 
 	return iIsOpen ? eAppErrNone : eAppErrPortIsClosed;
 }

@@ -47,12 +47,12 @@ namespace
 static void * VxSktBaseReceiveVxThreadFunc( void * pvContext );
 int VxSktBase::m_TotalCreatedSktCnt{ 0 };
 int VxSktBase::m_CurrentSktCnt{ 0 };
-std::string VxSktBase::m_SktDirConnect{ " -> " };
-std::string VxSktBase::m_SktDirAccept{ " <- " };
-std::string VxSktBase::m_SktDirUdp{  " <-> " };
-std::string VxSktBase::m_SktDirBroadcast{ " ->> " };
-std::string VxSktBase::m_SktDirLoopback{ " <==> " };
-std::string VxSktBase::m_SktDirUnknown{ " <??> " };
+std::string VxSktBase::m_SktDirConnect{ "->" };
+std::string VxSktBase::m_SktDirAccept{ "<-" };
+std::string VxSktBase::m_SktDirUdp{  "<->" };
+std::string VxSktBase::m_SktDirBroadcast{ "->>" };
+std::string VxSktBase::m_SktDirLoopback{ "<==>" };
+std::string VxSktBase::m_SktDirUnknown{ "<??>" };
 
 //============================================================================
 VxSktBase::VxSktBase()
@@ -502,7 +502,6 @@ RCODE VxSktBase::doConnectTo( void )
 
 	if( INVALID_SOCKET != m_Socket )
 	{
-		m_rcLastSktError = VxGetRmtAddress( m_Socket, m_RmtIp );
 		if( m_rcLastSktError )
 		{
 			//LogMsg( LOG_INFO, "VxSktBase::doConnectTo: skt %d handle %d connect to %s get remote ip error %s\n",
@@ -514,11 +513,10 @@ RCODE VxSktBase::doConnectTo( void )
 			m_rcLastSktError = 0;
 		}
 
-        LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase::doConnectTo: SUCCESS skt %d handle %d connect to %s port %d\n",
-			m_iSktId,
-			m_Socket,
-			m_strRmtIp.c_str(),
-			m_RmtIp.getPort() );
+        m_strLclIp = m_LclIp.toStdString();
+        m_strRmtIp = m_RmtIp.toStdString();
+
+        LogModule( eLogConnect, LOG_VERBOSE, "VxSktBase::doConnectTo: SUCCESS %s", describeSktConnection().c_str() );
 		m_bIsConnected = true;
 		return 0;
 	}
@@ -537,7 +535,7 @@ RCODE VxSktBase::doConnectTo( void )
 std::string	 VxSktBase::describeSktConnection( void )
 {
     std::string sktDesc;
-    StdStringFormat( sktDesc, "%s id %d handle %d %s:%d %s %s:%d", DescribeSktType( getSktType() ), m_iSktId, m_Socket,
+    StdStringFormat( sktDesc, "%sid %d handle %d %s:%d%s%s:%d", DescribeSktType( getSktType() ), m_iSktId, m_Socket,
         m_strLclIp.c_str(), m_LclIp.getPort(), describeSktDirection().c_str(), m_strRmtIp.c_str(), m_RmtIp.getPort() );
     return sktDesc;
 }
@@ -1418,9 +1416,8 @@ bool VxSktBase::getPeerPktAnnCopy( PktAnnounce& peerAnn )
 void VxSktBase::dumpSocketStats( const char* reason, bool fullDump )
 {
     std::string reasonMsg = reason ? reason : "";
-    LogModule( eLogConnect, LOG_VERBOSE, "%s id %d handle connected ? %d %d %s:%d %s %s:%d %s last active %s",  DescribeSktType(getSktType()), m_iSktId, m_Socket, isConnected(), 
-        m_strLclIp.c_str(), m_LclIp.getPort(), describeSktDirection().c_str(), m_strRmtIp.c_str(), m_RmtIp.getPort(), reasonMsg.c_str(), 
-        ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ) ).c_str() );
+    LogModule( eLogConnect, LOG_VERBOSE, "Dump %s connected ? %d last active %s", describeSktConnection().c_str(), isConnected(),
+        ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( GmtTimeMsToLocalTimeMs( getLastActiveTimeMs() ), true ).c_str() );
 }
 
 //============================================================================

@@ -34,8 +34,8 @@ Content-Length: %d\r\n\r\n%s"
 
 //============================================================================
 //! thread function to announce to web anchor
-static bool WhatsMyIP(	InetAddress& oLclAddr, 
-						InetAddress& oRmtAddr, 
+static bool WhatsMyIP(	InetAddrAndPort& oLclAddr, 
+                        InetAddrAndPort& oRmtAddr, 
 						uint16_t u16Port,
 						const char * pHost, 
 						const char * pWebPage, 
@@ -166,13 +166,14 @@ bool VxGetExternalIps( const char * pUrl, std::vector<std::string>& aoRetExterna
 	std::vector<InetAddress> aoIps; 
 	VxResolveHostToIps( strHost.c_str(), u16Port, aoIps );
 
-	InetAddress oLclIp;
+    InetAddrAndPort oLclIp;
 	std::string strExternalIp;
 	for( unsigned int i = 0; i < aoIps.size(); i++ )
 	{
+        InetAddrAndPort rmtIp( aoIps[i] );
 		strExternalIp = "";
 		WhatsMyIP(	oLclIp, 
-					aoIps[i], 
+                    rmtIp, 
 					u16Port,
 					strHost.c_str(),
 					strWebPage.c_str(), 
@@ -211,6 +212,5 @@ bool VxGetExternalIps( const char * pUrl, std::vector<std::string>& aoRetExterna
 		}
 	}
 	
-
 	return aoRetExternalIps.size() ? true : false;
 }

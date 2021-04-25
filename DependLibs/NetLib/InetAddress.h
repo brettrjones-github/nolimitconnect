@@ -68,7 +68,7 @@ public:
 	//! returns port in host order
     uint16_t                    setIp( struct sockaddr_storage& ipAddr );
 	//! returns port in host order
-	uint16_t                    setIp( struct sockaddr& ipAddr );
+    uint16_t                    setIp( struct sockaddr& ipAddr );
 	
 	//! fill address with this ip address and the given port.. returns struct len
     int                         fillAddress( struct sockaddr_storage& oAddr, uint16_t port );
@@ -84,7 +84,7 @@ public:
     static int				    getAllAddresses( std::vector<InetAddress>& retAddress );
     static void                 dumpAddresses( std::vector<InetAddress>& addressList );
 
-private:
+protected:
 	//! returns port in host order
     uint16_t                    setIp( struct sockaddr_in& oIPv4Addr );
 	//! returns port in host order
@@ -115,6 +115,7 @@ public:
 	InetAddrAndPort( const char * ipAddr );
 	InetAddrAndPort( const char * ipAddr, uint16_t port );
     InetAddrAndPort( const InetAddrAndPort& rhs );
+    InetAddrAndPort( const InetAddress& rhs );
     bool                        addToBlob( PktBlobEntry& blob );
     bool                        extractFromBlob( PktBlobEntry& blob );
 
@@ -124,12 +125,26 @@ public:
 	InetAddrAndPort&            operator=(const InetAddrIPv4& inetAddr);
 	InetAddrAndPort&            operator=(const InetAddrIPv4AndPort& inetAddr);
 
-    uint16_t                    getPort( void )	const			    { return m_u16Port; }
-    void                        setPort( uint16_t u16Port )			{ m_u16Port = u16Port; }
+    uint16_t                    getPort( void )	const			                    { return m_u16Port; }
+    void                        setPort( uint16_t u16Port )			                { m_u16Port = u16Port; }
 
     void                        setIpAndPort( struct sockaddr_storage& oAddr );
 	void                        setIpAndPort( struct sockaddr& oAddr );
     void                        setIpAndPort( const char * ipAddr, uint16_t port );
+
+    // these shadow InetAddress on purpose to avoid issues with override packet size change over internet
+    void                        setIp( const char * pIpAddress )                            { return InetAddress::setIp( pIpAddress ); };
+    // note.. u32IPv4Addr must be in host order
+    void                        setIp( uint32_t u32IPv4Addr, bool bIsHostOrder = false )    { return InetAddress::setIp( u32IPv4Addr, bIsHostOrder ); };
+    //! returns port in host order
+    uint16_t                    setIp( struct sockaddr_storage& ipAddr )                    { return InetAddress::setIp( ipAddr ); };
+    //! returns port in host order
+    uint16_t                    setIp( struct sockaddr& ipAddr )                            { return InetAddress::setIp( ipAddr ); };
+    //! returns port in host order
+    uint16_t                    setIp( struct sockaddr_in& oIPv4Addr )                      { m_u16Port = InetAddress::setIp( oIPv4Addr ); return m_u16Port; };
+    //! returns port in host order
+    uint16_t                    setIp( struct sockaddr_in6& oIPv6Addr )                     { m_u16Port = InetAddress::setIp( oIPv6Addr ); return m_u16Port; };
+
 
 	//=== vars ===//
     uint16_t                    m_u16Port{ 0 };
