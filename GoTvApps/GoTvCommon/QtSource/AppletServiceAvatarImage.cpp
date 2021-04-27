@@ -23,7 +23,7 @@
 AppletServiceAvatarImage::AppletServiceAvatarImage( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_AVATAR_IMAGE, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceAvatarImage, ePluginTypeAvatarImage );
+    setupServiceBaseApplet( eAppletServiceAvatarImage, ePluginTypeHostPeerUser );
 
     m_MyApp.activityStateChange( this, true );
 }

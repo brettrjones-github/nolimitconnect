@@ -28,7 +28,6 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
@@ -75,6 +74,7 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareWebCam.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientStoryboard.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAboutMe.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.h \
@@ -110,7 +110,6 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomConnectJoin.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomConnectJoinSearch.h \
-#    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletReplyFileOffer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSearchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAboutMe.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAvatarImage.h \
@@ -343,11 +342,10 @@ SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
@@ -360,9 +358,7 @@ SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityShowHelp.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySnapShot.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUploads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewLibraryFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewMySharedFiles.cpp \
@@ -396,6 +392,7 @@ SOURCES += $$PWD/app_precompiled_hdr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAboutMe.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAvatarImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.cpp \

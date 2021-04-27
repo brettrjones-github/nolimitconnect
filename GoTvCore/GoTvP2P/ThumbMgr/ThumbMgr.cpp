@@ -200,11 +200,38 @@ bool ThumbMgr::fromGuiThumbUpdated( ThumbInfo& thumbInfo )
 }
 
 //============================================================================
+void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType )
+{
+    if( netIdent->hasThumbId( hostType ) )
+    {
+        queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getThumbModifiedTime( hostType ) );
+    }   
+}
+
+//============================================================================
 void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 {
-    // TODO implement
-    vx_assert( false );
+ 
+}
 
+//============================================================================
+void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType, VxGUID &thumbId, int64_t thumbModifiedTime )
+{
+    if( !lookupThumbInfo( thumbId, thumbModifiedTime ) )
+    {
+        // TODO implement
+        vx_assert( false );
+    }
+}
+
+//============================================================================
+void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID &thumbId, int64_t thumbModifiedTime )
+{
+    if( !lookupThumbInfo( thumbId, thumbModifiedTime ) )
+    {
+        // TODO implement
+        vx_assert( false );
+    }
 }
 
 //============================================================================
@@ -240,4 +267,21 @@ void ThumbMgr::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 //============================================================================
 void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+}
+
+//============================================================================
+ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime )
+{
+    m_ThumbInfoMutex.lock();
+    for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
+    {
+        if( thumbInfo->getThumbId() == thumbId && ( 0 == thumbModifiedTime || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
+        {
+            m_ThumbInfoMutex.unlock();
+            return dynamic_cast<ThumbInfo*>(thumbInfo);
+        }
+    }
+
+    m_ThumbInfoMutex.unlock();
+    return nullptr;
 }

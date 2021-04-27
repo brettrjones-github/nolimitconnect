@@ -750,8 +750,12 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("About Me Page");
         break;
 
-    case ePluginTypeAvatarImage:
-        strPluginType = QObject::tr("Avatar Image");
+    case ePluginTypeClientPeerUser:
+        strPluginType = QObject::tr("Client Peer user");
+        break;
+
+    case ePluginTypeHostPeerUser:
+        strPluginType = QObject::tr("Host Peer user");
         break;
 
     case ePluginTypeFileXfer:	// file offer plugin
@@ -856,8 +860,11 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         }
         break;
 
-    case ePluginTypeAvatarImage:
-        strPluginDesc = QObject::tr( "Avatar Image Service" ).toUtf8().constData();
+    case ePluginTypeClientPeerUser:
+        strPluginDesc = QObject::tr( "Peer User Client" ).toUtf8().constData();
+        break;
+    case ePluginTypeHostPeerUser:
+        strPluginDesc = QObject::tr( "Peer User Host (me)" ).toUtf8().constData();
         break;
 
     case ePluginTypeCamServer:

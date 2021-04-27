@@ -48,7 +48,10 @@ public:
     virtual void				announceAssetRemoved( AssetBaseInfo * assetInfo ) override;
     virtual void				announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param ) override;
 
+    virtual void				queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType );
     virtual void				queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType );
+    virtual void				queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType, VxGUID& thumbId, int64_t thumbModifiedTime );
+    virtual void				queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId, int64_t thumbModifiedTime );
 
     // packet handlers
     virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -62,6 +65,7 @@ public:
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
+    ThumbInfo*                  lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime = 0 );
 
     ThumbInfoDb&                m_ThumbInfoDb;
     std::vector<AssetBaseInfo*>&	m_ThumbInfoList;

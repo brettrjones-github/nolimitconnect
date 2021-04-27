@@ -23,9 +23,10 @@
 #include <GoTvCore/GoTvP2P/Plugins/PluginInvalid.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMessenger.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginClientPeerUser.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginConnectionTestClient.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginConnectionTestHost.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginHostPeerUser.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginChatRoomHost.h>
@@ -110,8 +111,12 @@ void PluginMgr::pluginMgrStartup( void )
 	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create avatar image plugin\n" );
-    poPlugin = new PluginServiceAvatarImage( m_Engine, *this, &this->m_PktAnn );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create client peer user plugin" );
+    poPlugin = new PluginClientPeerUser( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host peer user plugin" );
+    poPlugin = new PluginHostPeerUser( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create connection test client plugin\n" );

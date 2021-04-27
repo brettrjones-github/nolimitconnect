@@ -29,6 +29,7 @@ public slots:
     void						onApplyMoodMsgClick( void );
     void						onApplyAgeClick( void );
     void						onApplyContentClick( void );
+    void						onApplyGenderClick( void );
 
     void						slotEditAboutMeButClick( void );
     void						slotEditAvatarButClick( void );

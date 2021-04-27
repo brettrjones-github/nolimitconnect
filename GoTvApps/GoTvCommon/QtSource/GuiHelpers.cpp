@@ -286,7 +286,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     switch( applet )
     {
     case eAppletClientAboutMe:              return ePluginTypeAboutMePage;
-    case eAppletClientAvatarImage:          return ePluginTypeAvatarImage;
+    case eAppletClientAvatarImage:          return ePluginTypeClientPeerUser;
     case eAppletClientConnectionTest:       return ePluginTypeClientConnectTest;
     case eAppletClientHostGroup:            return ePluginTypeHostGroup;
     case eAppletClientHostGroupListing:     return ePluginTypeNetworkSearchList;
@@ -299,7 +299,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientRelay:                return ePluginTypeRelay;
 
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePage;
-    case eAppletServiceAvatarImage:          return ePluginTypeAvatarImage;
+    case eAppletServiceAvatarImage:          return ePluginTypeHostPeerUser;
     case eAppletServiceConnectionTest:       return ePluginTypeHostConnectTest;
     case eAppletServiceHostGroup:            return ePluginTypeHostGroup;
     case eAppletServiceHostNetwork:          return ePluginTypeHostNetwork;
@@ -311,7 +311,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletServiceRelay:                return ePluginTypeRelay;
 
     case eAppletSettingsAboutMe:            return ePluginTypeAboutMePage;
-    case eAppletSettingsAvatarImage:        return ePluginTypeAvatarImage;
+    case eAppletSettingsAvatarImage:        return ePluginTypeHostPeerUser;
     case eAppletSettingsWebCamServer:       return ePluginTypeCamServer;
     case eAppletSettingsConnectTest:        return ePluginTypeHostConnectTest;
     case eAppletSettingsShareFiles:         return ePluginTypeFileServer;
@@ -347,7 +347,7 @@ EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
     switch( pluginType )
     {
     case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
-    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeHostPeerUser:           return eAppletEditAvatarImage;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
     case ePluginTypeHostConnectTest:        return eAppletSettingsConnectTest;
@@ -374,7 +374,7 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     switch( pluginType )
     {
     case ePluginTypeAboutMePage:            return eAppletSettingsAboutMe;
-    case ePluginTypeAvatarImage:            return eAppletSettingsAvatarImage;
+    case ePluginTypeHostPeerUser:           return eAppletSettingsAvatarImage;
     case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
     case ePluginTypeHostConnectTest:        return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletSettingsShareFiles;
@@ -409,7 +409,7 @@ EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
     switch( pluginType )
     {
     case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
-    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeHostPeerUser:           return eAppletEditAvatarImage;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
     case ePluginTypeHostConnectTest:        return eAppletSettingsConnectTest;
@@ -436,7 +436,7 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     switch( pluginType )
     {
     case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
-    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeHostPeerUser:           return eAppletEditAvatarImage;
     //case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
     // case ePluginTypeHostConnectTest:     return eAppletSettingsConnectTest;
     //case ePluginTypeFileServer:             return eAppletShareFiles;
@@ -471,7 +471,7 @@ EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
     switch( pluginType )
     {
     case ePluginTypeAboutMePage:            return eMyIconSettingsAboutMe;
-    case ePluginTypeAvatarImage:            return eMyIconSettingsAvatarImage;
+    case ePluginTypeHostPeerUser:           return eMyIconSettingsAvatarImage;
     case ePluginTypeCamServer:              return eMyIconSettingsShareWebCam;
     case ePluginTypeHostConnectTest:        return eMyIconSettingsConnectionTest;
     case ePluginTypeFileServer:             return eMyIconSettingsShareFiles;
@@ -862,9 +862,9 @@ bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
         return false;
     }
 
-    if( strUserName.length() > 23 )
+    if( strUserName.length() > 27 )
     {
-        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name is too long (maximum 23 chars)." ) );
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name is too long (maximum 27 chars)." ) );
         return false;
     }
 

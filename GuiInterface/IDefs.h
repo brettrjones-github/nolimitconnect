@@ -319,9 +319,9 @@ enum EHostType
     eHostTypeGroup = 1,
     eHostTypeChatRoom = 2,
     eHostTypeRandomConnect = 3,
-    eHostTypeNetwork = 4,
-    eHostTypeConnectTest = 5,
-    eHostTypePeerUser = 6,
+    eHostTypePeerUser = 4,
+    eHostTypeNetwork = 5,
+    eHostTypeConnectTest = 6,
 
     eMaxHostType
 };
@@ -565,34 +565,35 @@ enum EPluginType
 
     ePluginTypeAdmin			    = 1,	//!< Administration ( intended for updates but not currently used )
     ePluginTypeAboutMePage          = 2,	//!< about me page plugin ( using web page server )
-    ePluginTypeAvatarImage          = 3,	//!< handle users avatar image
-    ePluginTypeCamServer            = 4,	//!< Web cam broadcast plugin
-    ePluginTypeFileServer           = 5,	//!< Shared files server
-    ePluginTypeFileXfer             = 6,	//!< Offer/accept send a file person to person
-    ePluginTypeMessenger            = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeStoryboard           = 8,	//!< User editable story board web page server
-    ePluginTypeTruthOrDare          = 9,	//!< Video Chat Truth Or Dare game  
-    ePluginTypeVideoPhone           = 10,	//!< Video Chat with motion detect and stream recording
-    ePluginTypeVoicePhone           = 11,	//!< VOIP audio only phone call
+    ePluginTypeCamServer            = 3,	//!< Web cam broadcast plugin
+    ePluginTypeFileServer           = 4,	//!< Shared files server
+    ePluginTypeFileXfer             = 5,	//!< Offer/accept send a file person to person
+    ePluginTypeMessenger            = 6,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+    ePluginTypeStoryboard           = 7,	//!< User editable story board web page server
+    ePluginTypeTruthOrDare          = 8,	//!< Video Chat Truth Or Dare game  
+    ePluginTypeVideoPhone           = 9,	//!< Video Chat with motion detect and stream recording
+    ePluginTypeVoicePhone           = 10,	//!< VOIP audio only phone call
 
-    ePluginTypeClientGroup          = 12,	//!< group client
-    ePluginTypeClientChatRoom       = 13,	//!< chat room user client plugin
-    ePluginTypeClientRandomConnect  = 14,	//!< Random connect to another person client
+    ePluginTypeClientGroup          = 11,	//!< group client
+    ePluginTypeClientChatRoom       = 12,	//!< chat room user client plugin
+    ePluginTypeClientRandomConnect  = 13,	//!< Random connect to another person client
+    ePluginTypeClientPeerUser       = 14,	//!< mainly for avatar image
     ePluginTypeClientNetwork        = 15,	//!< network client
     ePluginTypeClientConnectTest    = 16,	//!< Connection Test Client
 
     ePluginTypeHostGroup            = 17,   //!< group hosting
     ePluginTypeHostChatRoom         = 18,	//!< chat room hosting plugin
     ePluginTypeHostRandomConnect    = 19,	//!< Random connect to another person hosting
-    ePluginTypeHostNetwork          = 20,	//!< master network hosting
-    ePluginTypeHostConnectTest      = 21,	//!< Connection Test Service
+    ePluginTypeHostPeerUser         = 20,	//!< mainly for avatar image
+    ePluginTypeHostNetwork          = 21,	//!< master network hosting
+    ePluginTypeHostConnectTest      = 22,	//!< Connection Test Service
 
-    ePluginTypeNetworkSearchList    = 22,	//!< group and chat room list for network search
+    ePluginTypeNetworkSearchList    = 23,	//!< group and chat room list for network search
 
-    ePluginTypeRelay                = 23,	//!< Relay services plugin
+    ePluginTypeRelay                = 24,	//!< Relay services plugin
 
-    // NOTE: plugin types 24 - 47 not implemented .. reserved for future use
-    eMaxImplementedPluginType	    = 24, 
+    // NOTE: plugin types 25 - 47 not implemented .. reserved for future use
+    eMaxImplementedPluginType	    = 25, 
     // plugins 0-47 are part of PktAnnounce
     // plugins after 47 are system plugins and do not go out in announcement pkt
     eMaxUserPluginType              = 48, // this marks end of announced permission
@@ -1021,3 +1022,9 @@ EConnectReason HostTypeToConnectJoinReason( EHostType hostType );
 //! convert Host Type to connect reason
 EConnectReason HostTypeToConnectSearchReason( EHostType hostType );
 
+//! convert Host Type to service plugin  type
+EPluginType HostTypeToHostPlugin( EHostType hostType );
+//! convert Host Type to client plugin type
+EPluginType HostTypeToClientPlugin( EHostType hostType );
+//! convert Plugin Type to host type
+EHostType PluginTypeToHostType( EPluginType pluginType );

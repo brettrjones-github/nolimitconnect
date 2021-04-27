@@ -701,11 +701,13 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServerPktHandlers.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomHost.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginClientPeerUser.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginConnectionTestClient.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginConnectionTestHost.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginFileXfer.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginGroupClient.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginGroupHost.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginInvalid.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMessenger.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMgr.cpp" />
@@ -716,7 +718,6 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRandomConnectClient.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRandomConnectHost.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAvatarImage.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.cpp" />
@@ -1034,11 +1035,13 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomHost.h" />
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginClientPeerUser.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginConnectionTestClient.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginConnectionTestHost.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginFileXfer.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginGroupClient.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginGroupHost.h" />
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginInvalid.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMessenger.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMgr.h" />
@@ -1048,7 +1051,6 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRandomConnectClient.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRandomConnectHost.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.h" />
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAvatarImage.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.h" />

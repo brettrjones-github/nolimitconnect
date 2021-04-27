@@ -816,7 +816,8 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeAboutMePage:
         return eMyIconSettingsAboutMe;
 
-    case ePluginTypeAvatarImage:
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeHostPeerUser:
         return eMyIconSettingsAvatarImage;
 
     case ePluginTypeCamServer:
@@ -921,7 +922,25 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeAvatarImage:
+    case ePluginTypeClientChatRoom:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessLocked:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceChatRoom;
+        }
+        break;
+
+    case ePluginTypeClientPeerUser:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -939,21 +958,21 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         }
         break;
 
-    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostPeerUser:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
-            return eMyIconServiceChatRoom;
+            return eMyIconAvatarImage;
         case ePluginAccessDisabled:
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
-            return eMyIconServiceChatRoom;
+            return eMyIconAvatarImage;
         case ePluginAccessLocked:
-            return eMyIconServiceChatRoom;
+            return eMyIconAvatarImage;
         case ePluginAccessIgnored:
         case ePluginAccessBusy:
-            return eMyIconServiceChatRoom;
+            return eMyIconAvatarImage;
         }
         break;
 
@@ -1258,7 +1277,8 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeAboutMePage:
         return eMyIconSettingsAboutMe;
 
-    case ePluginTypeAvatarImage:
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeHostPeerUser:
          return eMyIconSettingsAvatarImage;
 
     case ePluginTypeClientChatRoom:

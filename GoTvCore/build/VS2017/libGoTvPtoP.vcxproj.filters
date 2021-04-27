@@ -511,9 +511,6 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAvatarImage.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
@@ -869,6 +866,12 @@
       <Filter>GoTvP2P\UserJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBasePktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginClientPeerUser.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1492,9 +1495,6 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAvatarImage.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
@@ -1881,6 +1881,12 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.h">
       <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginClientPeerUser.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.h">
+      <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

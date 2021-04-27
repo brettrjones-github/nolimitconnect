@@ -45,7 +45,7 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
     setAppletType( eAppletEditAvatarImage );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-    ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeAvatarImage );
+    ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeHostPeerUser );
     ui.m_ServiceSettingsWidget->setViewServiceVisible( false );
 
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();

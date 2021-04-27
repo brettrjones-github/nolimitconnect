@@ -378,8 +378,29 @@ void VxConnectIdent::setOnlineDescription( const char * pUserDesc )
 }
 
 //============================================================================
+bool VxConnectIdent::hasThumbId( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        return m_ChatRoomThumbGuid.isVxGUIDValid();
+    case eHostTypeGroup:
+        return m_GroupThumbGuid.isVxGUIDValid();
+    case eHostTypeNetwork:
+        return m_NetHostThumbGuid.isVxGUIDValid();
+    case eHostTypeRandomConnect:
+        return m_RandomConnectThumbGuid.isVxGUIDValid();
+    case eHostTypePeerUser:
+        return m_AvatarGuid.isVxGUIDValid();
+    default:
+        return false;
+    }
+}
+
+//============================================================================
 VxGUID& VxConnectIdent::getThumbId( EHostType hostType )
 {
+    static VxGUID nullGuid;
     switch( hostType )
     {
     case eHostTypeChatRoom:
@@ -390,8 +411,30 @@ VxGUID& VxConnectIdent::getThumbId( EHostType hostType )
         return m_NetHostThumbGuid;
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbGuid;
-    default:
+    case eHostTypePeerUser:
         return m_AvatarGuid;
+    default:
+        return nullGuid;
+    }
+}
+
+//============================================================================
+int64_t VxConnectIdent::getThumbModifiedTime( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        return m_ChatRoomThumbModifiedTime;
+    case eHostTypeGroup:
+        return m_GroupThumbModifiedTime;
+    case eHostTypeNetwork:
+        return m_NetHostThumbModifiedTime;
+    case eHostTypeRandomConnect:
+        return m_RandomConnectThumbModifiedTime;
+    case eHostTypePeerUser:
+        return m_AvatarModifiedTime;
+    default:
+        return 0;
     }
 }
 

@@ -167,7 +167,6 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeMessenger, eFriendStateAnonymous );
 
     setPluginPermission( ePluginTypeAboutMePage, eFriendStateGuest );
-    setPluginPermission( ePluginTypeAvatarImage, eFriendStateGuest );
     setPluginPermission( ePluginTypeStoryboard, eFriendStateGuest );
     setPluginPermission( ePluginTypeTruthOrDare, eFriendStateGuest );
     setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
@@ -178,16 +177,21 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
 
     setPluginPermission( ePluginTypeClientChatRoom, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
-    setPluginPermission( ePluginTypeHostChatRoom, eFriendStateIgnore ); // gives guest permission to whoever is in chat room at the same time
-    setPluginPermission( ePluginTypeHostConnectTest, eFriendStateIgnore );
     setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeClientGroup, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeClientNetwork, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeClientRandomConnect, eFriendStateGuest );
+    setPluginPermission( ePluginTypeClientPeerUser, eFriendStateGuest );
+
+    setPluginPermission( ePluginTypeHostChatRoom, eFriendStateIgnore ); // gives guest permission to whoever is in chat room at the same time
+    setPluginPermission( ePluginTypeHostConnectTest, eFriendStateIgnore ); 
     setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
     setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeHostRandomConnect, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeHostPeerUser, eFriendStateGuest );
+
     setPluginPermission( ePluginTypeNetworkSearchList, eFriendStateIgnore );
 
-    setPluginPermission( ePluginTypeClientRandomConnect, eFriendStateGuest );
-    setPluginPermission( ePluginTypeHostRandomConnect, eFriendStateIgnore );
     setPluginPermission( ePluginTypeRelay, eFriendStateIgnore );
 } 
 
@@ -453,8 +457,10 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Invalid Plugin";
     case ePluginTypeAboutMePage:
         return "About Me Web Page";
-    case ePluginTypeAvatarImage:
-        return "User Avatar Image";
+    case ePluginTypeClientPeerUser:
+        return "Client User Avatar Image";
+    case ePluginTypeHostPeerUser:
+        return "Host User Avatar Image";
     case ePluginTypeCamServer:	// web cam broadcast plugin
         return "Shared Video Broadcast";
     case ePluginTypeFileServer:

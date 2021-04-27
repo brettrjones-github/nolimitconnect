@@ -227,6 +227,25 @@ void AppletUserIdentity::onApplyContentClick( void )
 }
 
 //============================================================================
+void AppletUserIdentity::onApplyGenderClick( void )
+{
+    if( ( ui.m_GenderComboBox->currentIndex() >= 0 ) && ( ui.m_GenderComboBox->currentIndex() < m_AccountList.size() ) )
+    {
+        VxNetIdent& ident = m_AccountList[ ui.m_GenderComboBox->currentIndex() ];
+        GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
+
+        m_MyApp.getAccountMgr().updateAccount( ident );
+        if( m_strOrigOnlineName == ident.getOnlineName() )
+        {
+            m_Engine.fromGuiIdentPersonalInfoChanged( ident.getAgeType(), ident.getGender(), ident.getPrimaryLanguage(), ident.getPreferredContent() );
+        }
+
+        QString msgText = QObject::tr( "Applied Gender Change " );
+        QMessageBox::information( this, QObject::tr( "Gender Change Success" ), msgText );
+    }
+}
+
+//============================================================================
 void AppletUserIdentity::slotEditAboutMeButClick( void )
 {
     m_MyApp.getAppletMgr().launchApplet( eAppletEditAboutMe, this );
