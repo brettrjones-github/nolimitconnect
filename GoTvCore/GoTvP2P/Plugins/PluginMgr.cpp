@@ -898,12 +898,19 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
     case ePluginTypeHostGroup:
         hostClientType = ePluginTypeClientGroup;
         break;
+    case ePluginTypeClientPeerUser:
+        hostClientType = ePluginTypeHostPeerUser;
+        break;
+    case ePluginTypeHostPeerUser:
+        hostClientType = ePluginTypeClientPeerUser;
+        break;
     case ePluginTypeClientRandomConnect:
         hostClientType = ePluginTypeHostRandomConnect;
         break;
     case ePluginTypeHostRandomConnect:
         hostClientType = ePluginTypeClientRandomConnect;
         break;
+
     default:
         break;
     }

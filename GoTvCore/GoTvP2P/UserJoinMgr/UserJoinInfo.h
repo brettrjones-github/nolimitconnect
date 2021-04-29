@@ -39,6 +39,8 @@ public:
 
     virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
     virtual std::string&	    getHostUrl( void )                                  { return m_HostUrl; }
+    virtual void			    setFriendState( EFriendState friendshipToHim )      { m_FriendState = friendshipToHim; }
+    virtual EFriendState	    getFriendState( void )                              { return m_FriendState; }
 
     // temporaries
     virtual void				setConnectionId( VxGUID& connectionId )             { m_ConnectionId = connectionId; }
@@ -48,6 +50,7 @@ public:
 
 protected:
 	//=== vars ===//
+    EFriendState                m_FriendState{ eFriendStateIgnore };
     uint32_t                    m_HostFlags{ 0 };
     std::string                 m_HostUrl{ "" };
 

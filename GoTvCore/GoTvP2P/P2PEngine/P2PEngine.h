@@ -31,8 +31,9 @@
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
-#include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
-#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+//#include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
+//#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+//#include <GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <GuiInterface/IDefs.h>
 #include <GuiInterface/IFromGui.h>
@@ -51,6 +52,7 @@ class BlobMgr;
 class ConnectMgr;
 class ConnectRequest;
 class FileShareSettings;
+class HostJoinMgr;
 class IToGui;
 class IGoTv;
 class IsPortOpenTest;
@@ -68,6 +70,8 @@ class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
 class RunUrlAction;
+class UserJoinMgr;
+class UserOnlineMgr;
 class VxPeerMgr;
 
 class P2PEngine :	public IFromGui,
@@ -115,6 +119,7 @@ public:
     OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
     HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
     UserJoinMgr&                getUserJoinMgr( void )                          { return m_UserJoinMgr; }
+    UserOnlineMgr&              getUserOnlineMgr( void )                        { return m_UserOnlineMgr; }
     VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
@@ -694,6 +699,7 @@ protected:
     RunUrlAction&			    m_RunUrlAction;
     HostJoinMgr&				m_HostJoinMgr;
     UserJoinMgr&				m_UserJoinMgr;
+    UserOnlineMgr&				m_UserOnlineMgr;
     VxSktLoopback               m_SktLoopback;
 
 	RcScan						m_RcScan;

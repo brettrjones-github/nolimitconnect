@@ -112,7 +112,10 @@ public:
     uint32_t                    m_LockRequestCnt{ 0 };
 
 protected:
-	virtual void				deleteAllSockets();
+    //! delete sockets that have expired
+    virtual void                doSktDeleteCleanup( void );
+	virtual void				deleteAllSockets( void );
+
     VxSktBase *                 m_SktLoopback{ nullptr };	        
 };
 

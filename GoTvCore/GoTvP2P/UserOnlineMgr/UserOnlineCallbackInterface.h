@@ -13,26 +13,23 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "User.h"
+#include <GuiInterface/IDefs.h>
 
-#include <CoreLib/VxMutex.h>
+class User;
+class VxGUID;
+class BaseSessionInfo;
 
-class UserList
+class UserOnlineCallbackInterface
 {
 public:
-    UserList() = default;
-    UserList( const UserList& rhs );
-	virtual ~UserList() = default;
+    virtual void				callbackUserOnlineState( User* user, bool online ){};
 
-    /*
-    User					    findUser( VxGUID& userId );
-    */
-    void 				        addOrUpdateUser( User& user );
-    void 				        removeUser( VxGUID& onlineId, VxGUID& sessionId );
+    virtual void				callbackUserOnlineAdded( User* user ){};
+    virtual void				callbackUserOnlineUpdated( User * user ){};
+    virtual void				callbackUserOnlineRemoved( VxGUID& user ){};
 
-protected:
-
-	//=== vars ===//
-    VxMutex                     m_UserListMutex;
-	std::vector<User>		    m_UserList;
+    virtual void				callbackUserSessionAdded( User* user, BaseSessionInfo& sessionInfo ){};
+    virtual void				callbackUserSessionUpdated( User * user, BaseSessionInfo& sessionInfo ){};
+    virtual void				callbackUserSessionRemoved( VxGUID& user, BaseSessionInfo& sessionInfo ){};
 };
+

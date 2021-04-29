@@ -17,6 +17,9 @@
 
 #include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <PktLib/PktHostAnnounce.h>
 #include <PktLib/VxCommon.h>
@@ -158,6 +161,7 @@ bool HostServerMgr::removeClient( VxGUID& onlineId )
 //============================================================================
 void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
-    onUserOnline( sktBase, netIdent, sessionId );
-    m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionId, m_Plugin.getPluginType(), hostType );
+    BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
+    m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
 }

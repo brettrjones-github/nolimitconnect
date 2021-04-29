@@ -35,6 +35,10 @@
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 
+#include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h>
+
 #include <NetLib/VxGetRandomPort.h>
 #include <NetLib/VxPeerMgr.h>
 #include <CoreLib/VxParse.h>
@@ -196,6 +200,9 @@ void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
 	m_AssetMgr.fromGuiUserLoggedOn();
     // m_BlobMgr.fromGuiUserLoggedOn();
     m_ThumbMgr.fromGuiUserLoggedOn();
+    m_HostJoinMgr.fromGuiUserLoggedOn();
+    m_UserJoinMgr.fromGuiUserLoggedOn();
+    m_UserOnlineMgr.fromGuiUserLoggedOn();
 
     // set network settings from saved settings
 

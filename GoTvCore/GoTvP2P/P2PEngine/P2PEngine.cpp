@@ -42,6 +42,10 @@
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 
+#include <GoTvCore/GoTvP2P/HostJoinMgr/HostJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h>
+
 #include <NetLib/VxSktUtil.h>
 #include <NetLib/VxPeerMgr.h>
 
@@ -103,6 +107,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_RcScan( *this, m_ConnectionList )
     , m_HostJoinMgr( *new HostJoinMgr( *this, "HostJoinMgrDb.db3", "HostJoinStateDb.db3" ) )
     , m_UserJoinMgr( *new UserJoinMgr( *this, "UserJoinMgrDb.db3", "UserJoinStateDb.db3" ) )
+    , m_UserOnlineMgr( *new UserOnlineMgr( *this, "UserOnlineMgrDb.db3", "UserOnlinetateDb.db3" ) )
     , m_SktLoopback( *this )
 {
     m_PeerMgr.setSktLoopback( &m_SktLoopback );

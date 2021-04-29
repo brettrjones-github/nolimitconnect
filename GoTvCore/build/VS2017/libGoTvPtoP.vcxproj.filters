@@ -874,6 +874,12 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineMgr.cpp">
+      <Filter>GoTvP2P\UserOnlineMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1888,6 +1894,15 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineMgr.h">
+      <Filter>GoTvP2P\UserOnlineMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineCallbackInterface.h">
+      <Filter>GoTvP2P\UserOnlineMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2018,6 +2033,9 @@
     </Filter>
     <Filter Include="GoTvP2P\UserJoinMgr">
       <UniqueIdentifier>{5e2fa986-b854-42bf-aa66-3f3e7c1b489d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\UserOnlineMgr">
+      <UniqueIdentifier>{561633c7-da30-44ae-8a97-6d77364bfe60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

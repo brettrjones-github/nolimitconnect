@@ -18,6 +18,7 @@
 #include <PktLib/PluginIdList.h>
 #include <PktLib/SearchParams.h>
 
+class BaseSessionInfo;
 class PktHostSearchReply;
 
 class HostClientMgr : public HostClientSearchMgr
@@ -37,7 +38,7 @@ protected:
     virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
-    virtual void                onUserJoinedHost( VxSktBase * sktBase,  VxNetIdent * netIdent, VxGUID& sessionId, EPluginType pluginType, EHostType hostType );
+    virtual void                onUserJoinedHost( VxSktBase * sktBase,  VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void                startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual void                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId );

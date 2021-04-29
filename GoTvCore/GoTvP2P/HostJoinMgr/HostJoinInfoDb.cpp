@@ -19,13 +19,13 @@ namespace
 {
     std::string 		TABLE_USER_HOST	 				= "tblHostJoins";
 
-    std::string 		CREATE_COLUMNS_USER_HOST		= " (onlineId TEXT, thumbId TEXT, infoModMs BIGINT, pluginType INTEGER, hostType INTEGER, joinState INTEGER, lastConnMs BIGINT, lastJoinMs BIGINT, hostFlags INTEGER, userUrl TEXT) ";
+    std::string 		CREATE_COLUMNS_USER_HOST		= " (onlineId TEXT, thumbId TEXT, infoModMs BIGINT, pluginType INTEGER, friendState INTEGER, joinState INTEGER, lastConnMs BIGINT, lastJoinMs BIGINT, hostFlags INTEGER, userUrl TEXT) ";
 
     const int			COLUMN_ONLINE_ID			    = 0;
     const int			COLUMN_HOST_THUMB_ID			= 1;
     const int			COLUMN_INFO_MOD_MS				= 2;
     const int			COLUMN_PLUGIN_TYPE			    = 3;
-    const int			COLUMN_HOST_TYPE			    = 4;
+    const int			COLUMN_FRIEND_STATE			    = 4;
     const int			COLUMN_JOIN_STATE			    = 5;
     const int			COLUMN_LAST_CONN_MS				= 6;
     const int			COLUMN_LAST_JOIN_MS			    = 7;
@@ -81,12 +81,12 @@ void HostJoinInfoDb::purgeAllHostJoins( void )
 }
 
 //============================================================================
-void HostJoinInfoDb::removeHostJoin( VxGUID& onlineId, EHostType hostType )
+void HostJoinInfoDb::removeHostJoin( VxGUID& onlineId, EPluginType pluginType )
 {
     std::string onlineIdStr = onlineId.toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
-    bindList.add( (int)hostType );
-    sqlExec( "DELETE FROM tblHostJoins WHERE onlineId=? AND hostType=?", bindList );
+    bindList.add( (int)pluginType );
+    sqlExec( "DELETE FROM tblHostJoins WHERE onlineId=? AND pluginType=?", bindList );
 }
 
 //============================================================================
@@ -94,15 +94,15 @@ bool HostJoinInfoDb::addHostJoin(   VxGUID&			onlineId,
                                     VxGUID&			thumbId,
                                     uint64_t		infoModTime,
                                     EPluginType     pluginType,
-                                    EHostType       hostType,
                                     EJoinState      joinState,
                                     uint64_t		lastConnectMs,
                                     uint64_t		lastJoinMs,
+                                    EFriendState    friendState,
                                     uint32_t        hostFlags,
                                     std::string     hostUrl
                                    )
 {
-    removeHostJoin( onlineId, hostType );
+    removeHostJoin( onlineId, pluginType );
 
     std::string onlineIdStr = onlineId.toHexString();
     std::string thumbIdStr = thumbId.toHexString();
@@ -111,14 +111,14 @@ bool HostJoinInfoDb::addHostJoin(   VxGUID&			onlineId,
     bindList.add( thumbIdStr.c_str() );
     bindList.add( infoModTime );
     bindList.add( (int)pluginType );
-    bindList.add( (int)hostType );
+    bindList.add( (int)friendState );
     bindList.add( (int)joinState );
     bindList.add( lastConnectMs );
     bindList.add( lastJoinMs ); 
     bindList.add( (int)hostFlags );
     bindList.add( hostUrl.c_str() );
 
-    RCODE rc = sqlExec( "INSERT INTO tblHostJoins (onlineId, thumbId, infoModMs, pluginType, hostType, joinState, lastConnMs, lastJoinMs, hostFlags, userUrl) values(?,?,?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblHostJoins (onlineId, thumbId, infoModMs, pluginType, friendState, joinState, lastConnMs, lastJoinMs, hostFlags, userUrl) values(?,?,?,?,?,?,?,?,?,?)",
         bindList );
     vx_assert( 0 == rc );
     if( rc )
@@ -136,10 +136,10 @@ bool HostJoinInfoDb::addHostJoin( HostJoinInfo* hostInfo )
                         hostInfo->BaseInfo::getThumbId(),
                         hostInfo->BaseInfo::getInfoModifiedTime(),  
                         hostInfo->BaseJoinInfo::getPluginType(),  
-                        hostInfo->BaseJoinInfo::getHostType(),
                         hostInfo->BaseJoinInfo::getJoinState(),		
                         hostInfo->BaseJoinInfo::getLastConnectTime(),	
                         hostInfo->BaseJoinInfo::getLastJoinTime(),
+                        hostInfo->getFriendState(),
                         hostInfo->getHostFlags(),
                         hostInfo->getUserUrl()
         );
@@ -159,8 +159,8 @@ void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJo
             hostInfo->setOnlineId( cursor->getString( COLUMN_ONLINE_ID ) );
             hostInfo->setThumbId( cursor->getString( COLUMN_HOST_THUMB_ID ) );
             hostInfo->setInfoModifiedTime( (uint64_t)cursor->getS64( COLUMN_INFO_MOD_MS ) );
-            hostInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_HOST_TYPE ) );
-            hostInfo->setHostType( (EHostType)cursor->getS32( COLUMN_HOST_TYPE ) );
+            hostInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_PLUGIN_TYPE ) );
+            hostInfo->setFriendState( (EFriendState)cursor->getS32( COLUMN_FRIEND_STATE ) );
             hostInfo->setJoinState( (EJoinState)cursor->getS32( COLUMN_JOIN_STATE ) );
             hostInfo->setLastConnectTime( (uint64_t)cursor->getS64( COLUMN_LAST_CONN_MS ) );
             hostInfo->setLastJoinTime(  (uint64_t)cursor->getS64( COLUMN_LAST_JOIN_MS ) ); 

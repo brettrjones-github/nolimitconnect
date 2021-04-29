@@ -47,10 +47,10 @@ void UserList::addOrUpdateUser( User& userIn )
 
     bool foundUser = false;
     VxGUID onlineId = userIn.getNetIdent()->getMyOnlineId();
-    VxGUID sessionId = userIn.getSessionId();
+    //VxGUID sessionId = userIn.getSessionId();
     for( User& user : m_UserList )
     {
-        if( user.getNetIdent() && user.getNetIdent()->getMyOnlineId() == onlineId && user.getSessionId() == sessionId )
+        if( user.getNetIdent() && user.getNetIdent()->getMyOnlineId() == onlineId ) // && user.getSessionId() == sessionId )
         {
             user = userIn;
             foundUser = true;
@@ -69,7 +69,7 @@ void UserList::removeUser( VxGUID& onlineId, VxGUID& sessionId )
 {
     for( auto iter = m_UserList.begin(); iter != m_UserList.end(); ++iter )
     {
-        if( iter->getNetIdent() && iter->getNetIdent()->getMyOnlineId() == onlineId && iter->getSessionId() == sessionId )
+        if( iter->getNetIdent() && iter->getNetIdent()->getMyOnlineId() == onlineId ) // && iter->getSessionId() == sessionId )
         {
             m_UserList.erase( iter );
             break;

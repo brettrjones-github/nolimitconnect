@@ -18,6 +18,8 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginBase.h>
+#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
@@ -736,10 +738,9 @@ void HostBaseMgr::sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, Vx
     vx_assert( nullptr != sktBase );
     LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr:: sendAnnounceRequest not done %s", DescribeConnectReason( connectReason ) );
     PktHostJoinReq pktJoin;
-    // temp for development
-    //pktJoin.setIsLoopback( true );
 
     pktJoin.setHostType( hostType );
+    pktJoin.setSessionId( sessionId );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
         m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceSendingJoinRequest );
@@ -756,15 +757,11 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
 {
     vx_assert( nullptr != sktBase );
     PktHostJoinReq pktJoin;
-    // temp for development
-    //pktJoin.setIsLoopback( true );
- 
+
+    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingJoinRequest );
     pktJoin.setHostType( hostType );
-    if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
-    {
-        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingJoinRequest );
-    }
-    else
+    pktJoin.setSessionId( sessionId );
+    if( !m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendJoinRequestFailed );
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
@@ -841,12 +838,19 @@ void HostBaseMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID
 {
     if( sktBase && netIdent )
     {
-        netIdent->setIsOnline( true );
         netIdent->upgradeToGuestFriendship();
-        User user( sktBase, netIdent, sessionId, true );
-        m_UserListMutex.lock();
-        m_UserList.addOrUpdateUser( user );
-        m_UserListMutex.unlock();
+        
+        BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
+        m_Engine.getUserOnlineMgr().onUserOnline( sktBase, netIdent, sessionInfo );
+
+        //User* user = m_Engine.getUserOnlineMgr().findUser( netIdent->getMyOnlineId() );
+        //if( user )
+        //{
+        //    m_UserListMutex.lock();
+        //    m_UserList.addOrUpdateUser( user );
+        //    m_UserListMutex.unlock();
+        //}
+
 
         m_Engine.getToGui().toGuiUserOnlineStatus( m_Plugin.getHostType(), netIdent, sessionId, true );
     }
@@ -859,7 +863,7 @@ void HostBaseMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID
 //============================================================================
 void HostBaseMgr::onUserOffline( VxGUID& onlineId, VxGUID& sessionId )
 {
-    m_UserListMutex.lock();
-    m_UserList.removeUser( onlineId, sessionId );
-    m_UserListMutex.unlock();
+    //m_UserListMutex.lock();
+    //m_UserList.removeUser( onlineId, sessionId );
+    //m_UserListMutex.unlock();
 }

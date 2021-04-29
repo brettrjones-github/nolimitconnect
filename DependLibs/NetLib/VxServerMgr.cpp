@@ -912,6 +912,7 @@ static int dumpSktStatsCnt = 0;
         // just close it immediately
         VxCloseSktNow( oAcceptSkt );
 
+        doSktDeleteCleanup();
 		// sleep awhile
 		VxSleep( 200 );
 		return 0; // keep running until number of connections clear up
@@ -944,6 +945,7 @@ static int dumpSktStatsCnt = 0;
         LogModule( eLogListen, LOG_INFO, "VxServerMgr: accept success skt %d skt id %d thread 0x%x", sktBase->m_Socket, sktBase->getSktId(), VxGetCurrentThreadId() );
     }
 
+    doSktDeleteCleanup();
 	return rc;
 }
 

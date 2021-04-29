@@ -33,7 +33,7 @@ public:
     void						unlockHostJoinInfoDb( void ) { m_HostJoinInfoDbMutex.unlock(); }
 
     bool						addHostJoin( HostJoinInfo * hostInfo );
-    void						removeHostJoin( VxGUID& onlineId, EHostType hostType );
+    void						removeHostJoin( VxGUID& onlineId, EPluginType pluginType );
 
     void						getAllHostJoins( std::vector<HostJoinInfo*>& userHostList );
     void						purgeAllHostJoins( void ); 
@@ -43,11 +43,11 @@ protected:
     bool						addHostJoin(    VxGUID&			onlineId, 
                                                 VxGUID&			thumbId,
                                                 uint64_t		infoModTime,
-                                                EPluginType     pluginType,
-                                                EHostType       hostType,
+                                                EPluginType     pluginType,                               
                                                 EJoinState      joinState,
                                                 uint64_t		lastConnectMs,
                                                 uint64_t		lastJoinMs,
+                                                EFriendState    friendState,
                                                 uint32_t        hostFlags,
                                                 std::string     hostUrl
                                             );

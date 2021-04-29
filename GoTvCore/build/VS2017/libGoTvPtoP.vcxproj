@@ -483,6 +483,7 @@
     <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseJoinInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\BigListLib\BigList.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -756,6 +757,7 @@
     <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\User\User.cpp" />
     <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.cpp" />
@@ -805,6 +807,7 @@
     <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseJoinInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigList.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListDb.h" />
     <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListInfo.h" />
@@ -1094,6 +1097,8 @@
     <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.h" />
     <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineCallbackInterface.h" />
+    <ClInclude Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\User\User.h" />
     <ClInclude Include="..\..\GoTvP2P\User\UserList.h" />
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.h" />

@@ -17,6 +17,9 @@
 
 #include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/BaseInfo/BaseSessionInfo.h>
+#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h>
+#include <GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <PktLib/PktsHostJoin.h>
 #include <PktLib/PktsHostSearch.h>
@@ -37,7 +40,8 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinSuccess );
-            onUserJoinedHost( sktBase, netIdent, hostReply->getSessionId(), m_Plugin.getPluginType(), hostReply->getHostType() );    
+            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );
+            onUserJoinedHost( sktBase, netIdent, sessionInfo );    
         }
         else if( ePluginAccessOk == hostReply->getAccessState() )
         {
@@ -93,10 +97,11 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void HostClientMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& sessionId, EPluginType pluginType, EHostType hostType )
+void HostClientMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
-    m_Engine.getUserJoinMgr().onUserJoinedHost( sktBase, netIdent, sessionId, pluginType, hostType );
+    m_Engine.getUserJoinMgr().onUserJoinedHost( sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onUserJoinedHost( sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================

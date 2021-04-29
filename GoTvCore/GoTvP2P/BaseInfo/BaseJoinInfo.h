@@ -29,9 +29,6 @@ public:
     virtual void			    setPluginType( EPluginType pluginType )             { m_PluginType = pluginType; }
     virtual EPluginType			getPluginType( void )                               { return m_PluginType; }
 
-    virtual void			    setHostType( EHostType hostType )                   { m_HostType = hostType; }
-    virtual EHostType			getHostType( void )                                 { return m_HostType; }
-
     virtual void			    setJoinState( EJoinState joinState )                { m_JoinState = joinState; }
     virtual EJoinState			getJoinState( void )                                { return m_JoinState; }
 
@@ -44,7 +41,6 @@ public:
 public:
 	//=== vars ===//
     EPluginType                 m_PluginType{ ePluginTypeInvalid };
-    EHostType                   m_HostType{ eHostTypeUnknown };
     EJoinState                  m_JoinState{ eJoinStateNone };
     int64_t						m_LastConnectMs{ 0 };
     int64_t						m_LastJoinMs{ 0 };

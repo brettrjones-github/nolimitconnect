@@ -17,6 +17,7 @@
 
 #include <CoreLib/VxMutex.h>
 
+class BaseSessionInfo;
 class HostJoinInfo;
 class HostJoinCallbackInterface;
 class P2PEngine;
@@ -42,10 +43,9 @@ public:
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
-    void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType );
+    void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
 
     HostJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType );
-    HostJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EHostType hostType );
 
 protected:
     void						clearHostJoinInfoList( void );

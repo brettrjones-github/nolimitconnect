@@ -48,6 +48,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseJoinInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseSessionInfo.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.h \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.h \
@@ -338,6 +339,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfoDb.h \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/UserOnlinMgr/UserOnlinCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/UserOnlinMgr/UserOnlineMgr.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
@@ -365,6 +368,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseHostInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseJoinInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/BaseInfo/BaseSessionInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigList.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/BigListLib/BigListInfo.cpp \
@@ -629,6 +633,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfoDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \

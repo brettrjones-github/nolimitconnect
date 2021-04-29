@@ -18,17 +18,10 @@
 #include "HostJoinCallbackInterface.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GuiInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/BaseInfo/BaseSessionInfo.h>
 
-#include <PktLib/PktAnnounce.h>
-#include <PktLib/PktsFileList.h>
-
-#include <CoreLib/VxFileUtil.h>
-#include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
-
-#include <time.h>
 
 //============================================================================
 HostJoinMgr::HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
@@ -156,27 +149,28 @@ void HostJoinMgr::clearHostJoinInfoList( void )
 }
 
 //============================================================================
-void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID sessionId, EPluginType pluginType, EHostType hostType )
+void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
     lockResources();
-    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), pluginType );
+    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), sessionInfo.getPluginType() );
     if( !joinInfo )
     {
         joinInfo = new HostJoinInfo();
-        joinInfo->fillBaseInfo( netIdent, hostType );
-        joinInfo->setPluginType( pluginType );
-        joinInfo->setHostType( hostType );
+        joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+        joinInfo->setPluginType( sessionInfo.getPluginType() );
+        joinInfo->setSessionId( sessionInfo.getSessionId() );
         wasAdded = true;
     }
 
     int64_t timeNowMs = GetTimeStampMs();
-    joinInfo->setThumbId( netIdent->getThumbId( hostType ) );
+    joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
     joinInfo->setJoinState( eJoinStateJoinAccepted );
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
+    joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
     joinInfo->setConnectionId( sktBase->getConnectionId() );
-    joinInfo->setSessionId( sessionId );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
 
     joinInfo->setInfoModifiedTime( timeNowMs );
     joinInfo->setLastConnectTime( timeNowMs );
@@ -184,7 +178,9 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
 
     unlockResources();
 
-    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, pluginType );
+    saveToDatabase( joinInfo );
+
+    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
 
     if( wasAdded )
     {
@@ -195,24 +191,7 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
         announceHostJoinUpdated( joinInfo );
     }
 
-    saveToDatabase( joinInfo );
-
-}
-
-//============================================================================
-HostJoinInfo* HostJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EHostType hostType )
-{
-    HostJoinInfo* joinFoundInfo = nullptr;
-    for( auto joinInfo : m_HostJoinInfoList )
-    {
-        if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getHostType() == hostType )
-        {
-            joinFoundInfo = joinInfo;
-            break;
-        }
-    }
-
-    return joinFoundInfo;
+    // saveToDatabase( joinInfo );
 }
 
 //============================================================================

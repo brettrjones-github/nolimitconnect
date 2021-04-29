@@ -39,15 +39,18 @@ public:
 
     virtual void			    setUserUrl( std::string userUrl )                   { m_UserUrl = userUrl; }
     virtual std::string&	    getUserUrl( void )                                  { return m_UserUrl; }
+    virtual void			    setFriendState( EFriendState friendshipToHim )      { m_FriendState = friendshipToHim; }
+    virtual EFriendState	    getFriendState( void )                              { return m_FriendState; }
 
     // temporaries
     virtual void				setConnectionId( VxGUID& connectionId )             { m_ConnectionId = connectionId; }
     virtual VxGUID&				getConnectionId( void )                             { return m_ConnectionId; }
-    virtual void				setSessionId( VxGUID& sessionId )                    { m_SessionId = sessionId; }
+    virtual void				setSessionId( VxGUID& sessionId )                   { m_SessionId = sessionId; }
     virtual VxGUID&				getSessionId( void )                                { return m_SessionId; }
 
 protected:
 	//=== vars ===//
+    EFriendState                m_FriendState{ eFriendStateIgnore };
     uint32_t                    m_HostFlags{ 0 };
     std::string                 m_UserUrl{ "" };
 

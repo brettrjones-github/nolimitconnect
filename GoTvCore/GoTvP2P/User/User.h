@@ -13,7 +13,11 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <CoreLib/VxGUID.h>
+#include <GoTvCore/GoTvP2P/BaseInfo/BaseSessionInfo.h>
+
+#include <CoreLib/VxMutex.h>
+
+#include <vector>
 
 class VxNetIdent;
 class VxSktBase;
@@ -22,23 +26,31 @@ class User
 {
 public:
     User() = default;
-    User( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& sessionId, bool online = false );
+    User( VxNetIdent * netIdent );
+    User( VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
     User(const User& rhs );
 	virtual ~User() = default;
 
-    void                        setNetIdent( VxNetIdent * netIdent )    { m_NetIdent = netIdent; }
+    User&				        operator=( const User& rhs ); 
+
+    VxMutex&					getUserMutex( void )					{ return m_UserMutex; }
+    void						lockUser( void )						{ m_UserMutex.lock(); }
+    void						unlockUser( void )						{ m_UserMutex.unlock(); }
+
+    void                        setNetIdent( VxNetIdent * netIdent );
     VxNetIdent *                getNetIdent( void )                     { return m_NetIdent; }
-    void                        setSktBase( VxSktBase * sktBase )       { m_SktBase = sktBase; }
-    VxSktBase *                 getSktBase( void )                      { return m_SktBase; }
-    void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void )                    { return m_SessionId; }
+    VxGUID&                     getMyOnlineId( void )                   { return m_MyOnlineId; }
 
     void                        setIsOnline( bool isOnline )            { m_IsOnline = isOnline; }
-    bool                        isOnline( void )                     { return m_IsOnline; }
+    bool                        isOnline( void )                        { return m_IsOnline; }
+
+    bool                        addSession( BaseSessionInfo& sessionInfo );
 
 protected:
+    VxMutex                     m_UserMutex;
+
     VxNetIdent *                m_NetIdent{ nullptr };
-    VxSktBase *                 m_SktBase{ nullptr };
-    VxGUID                      m_SessionId;
+    VxGUID                      m_MyOnlineId;
     bool                        m_IsOnline{ false };
+    std::vector<BaseSessionInfo> m_SessionList;
 };
