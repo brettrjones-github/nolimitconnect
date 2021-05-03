@@ -23,7 +23,7 @@
 class PluginBaseFileXfer : public PluginBase
 {
 public:
-	PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseFileXfer() = default;
 
 
@@ -65,7 +65,7 @@ protected:
 	void						onPktFileListReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	//override so can create FileXferPluginSession
-	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 	virtual	void				onConnectionLost( VxSktBase * sktBase );
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );

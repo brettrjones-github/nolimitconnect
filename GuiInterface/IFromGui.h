@@ -27,7 +27,7 @@
 
 class InetAddress;
 class FileShareSettings;
-class AssetInfo;
+class AssetBaseInfo;
 
 //! \public Plugin server state
 enum EPluginServerState
@@ -368,11 +368,11 @@ public:
 	/// Send Text Chat session assets of contact to GUI
 	virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) = 0;
 	/// Text Chat asset action such as remove
-	virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 = 0 ) = 0;
+	virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 = 0 ) = 0;
 	/// Text Chat asset action such as remove
 	virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 ) = 0;
 	/// Send Text Chat asset to contact
-	virtual bool				fromGuiSendAsset( AssetInfo& assetInfo ) = 0;
+	virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo ) = 0;
 	/// Text Chat session action such as start video chat session
 	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) = 0;
 	

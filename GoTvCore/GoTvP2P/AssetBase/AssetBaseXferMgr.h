@@ -18,6 +18,7 @@
 
 #include "AssetBaseXferDb.h"
 #include "AssetBaseInfo.h"
+#include "BaseXferInterface.h"
 
 #include <GuiInterface/IDefs.h>
 
@@ -46,10 +47,7 @@ class PktAssetListReply;
 class AssetBaseXferMgr
 {
 public:
-	typedef std::map<VxGUID, AssetBaseRxSession *>::iterator AssetBaseRxIter;
-	typedef std::vector<AssetBaseTxSession *>::iterator AssetBaseTxIter;
-
-	AssetBaseXferMgr( P2PEngine& engine, PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr, const char * stateDbName );
+	AssetBaseXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName );
 	virtual ~AssetBaseXferMgr();
 
 	VxMutex&					getAssetBaseQueMutex( void )					{ return m_AssetBaseSendQueMutex; }
@@ -58,7 +56,7 @@ public:
 
 	virtual void				fromGuiUserLoggedOn( void );
 
-	virtual void				fromGuiSendAssetBase( AssetBaseInfo& assetInfo );
+	virtual bool				fromGuiSendAssetBase( AssetBaseInfo& assetInfo );
 	virtual void				fromGuiCancelDownload( VxGUID& lclSessionId );
 	virtual void				fromGuiCancelUpload( VxGUID& lclSessionId );
 
@@ -67,13 +65,13 @@ public:
 	virtual void				onConnectionLost( VxSktBase * sktBase );
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 
-	virtual void				onPktAssetSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktAssetSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktAssetChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktAssetChunkReply		    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktAssetSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktAssetSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktAssetBaseXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseSendReq			    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseSendReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseChunkReq			    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseChunkReply		    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseSendCompleteReq	    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseSendCompleteReply	    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktAssetBaseXferErr			    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	//virtual void				onPktMultiSessionReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	//virtual void				onPktMultiSessionReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -124,15 +122,15 @@ protected:
 
     P2PEngine&					m_Engine;	
     AssetBaseMgr&				m_AssetBaseMgr;
+    BaseXferInterface&          m_XferInterface;
     PluginMgr&					m_PluginMgr;
-	PluginMessenger&			m_Plugin;	
-	PluginSessionMgr&			m_PluginSessionMgr;				
 	
 	AssetBaseXferDb				m_AssetBaseXferDb;
 
 	VxMutex						m_AssetBaseSendQueMutex;
 	std::vector<AssetBaseInfo>	m_AssetBaseSendQue;
 	VxThread					m_WorkerThread;
+    std::string                 m_WorkerThreadName;
 };
 
 

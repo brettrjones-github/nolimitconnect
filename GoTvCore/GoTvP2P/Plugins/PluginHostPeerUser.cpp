@@ -28,8 +28,8 @@
  
 
 //============================================================================
-PluginHostPeerUser::PluginHostPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-    : PluginBaseHostService( engine, pluginMgr, myIdent )
+PluginHostPeerUser::PluginHostPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+    : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostPeerUser );
 }

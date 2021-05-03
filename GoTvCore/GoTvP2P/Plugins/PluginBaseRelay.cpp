@@ -34,8 +34,8 @@
 #endif
  
 //============================================================================
-PluginBaseRelay::PluginBaseRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseService( engine, pluginMgr, myIdent )
+PluginBaseRelay::PluginBaseRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBaseService( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_TestTimer()
 {
@@ -292,7 +292,7 @@ RelaySession * PluginBaseRelay::requestRelayService( VxNetIdent * netIdent, Rela
 		if( bNewSession )
 		{
 			// make offer and keep copy
-			poSession = new RelayClientSession( sktBase, netIdent );
+			poSession = new RelayClientSession( sktBase, netIdent, m_ePluginType );
 		}
 
 		poSession->setSkt( sktBase );
@@ -371,7 +371,7 @@ RelayClientSession * PluginBaseRelay::findOrCreateRelayClient( VxSktBase * sktBa
 
 	if( NULL == poSession )
 	{
-		poSession = new RelayClientSession( sktBase, netIdent );
+		poSession = new RelayClientSession( sktBase, netIdent, getPluginType() );
 		m_PluginSessionMgr.addSession( netIdent->getMyOnlineId(), poSession, false );
 	}
 
@@ -405,7 +405,7 @@ RelayServerSession * PluginBaseRelay::findOrCreateRelayServer(  VxSktBase * sktB
 
 	if( NULL == poSession )
 	{
-		poSession = new RelayServerSession( sktBase, netIdent);
+		poSession = new RelayServerSession( sktBase, netIdent, getPluginType() );
 		m_PluginSessionMgr.addSession( netIdent->getMyOnlineId(), poSession, false );
 	}
 

@@ -23,12 +23,28 @@
 
 #include <CoreLib/VxFileUtil.h>
 
+std::string PluginBase::getThumbXferDbName( EPluginType pluginType )
+{
+    std::string thumbXferName( "ThumbXferDb" );
+    thumbXferName += std::to_string( (int)pluginType );
+    return thumbXferName + ".db3";
+}
+
+std::string PluginBase::getThumbXferThreadName( EPluginType pluginType )
+{
+    std::string thumbXferName( "ThumbXferDb" );
+    thumbXferName += std::to_string( (int)pluginType );
+    return thumbXferName + ".db3";
+}
+
 //============================================================================
-PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PktPluginHandlerBase()
 , m_Engine( engine )
 , m_PluginMgr( pluginMgr )
+, m_AssetMgr( engine.getAssetMgr() )
 , m_ThumbMgr( engine.getThumbMgr() )
+, m_ThumbXferMgr( engine, engine.getThumbMgr(), *this, getThumbXferDbName(pluginType).c_str(), getThumbXferThreadName(pluginType).c_str() )
 , m_MyIdent( myIdent )
 {
 }
@@ -254,49 +270,49 @@ EPluginAccess PluginBase::canAcceptNewSession( VxNetIdent * netIdent )
 }
 
 //============================================================================ 
-P2PSession * PluginBase::createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+P2PSession * PluginBase::createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	P2PSession * p2pSession = new P2PSession( sktBase, netIdent );
+	P2PSession * p2pSession = new P2PSession( sktBase, netIdent, pluginType );
 	p2pSession->setPluginType( m_ePluginType );
 	return p2pSession;
 }
 
 //============================================================================ 
-P2PSession * PluginBase::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+P2PSession * PluginBase::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	P2PSession * p2pSession = new P2PSession( lclSessionId, sktBase, netIdent );
+	P2PSession * p2pSession = new P2PSession( lclSessionId, sktBase, netIdent, pluginType );
 	p2pSession->setPluginType( m_ePluginType );
 	return p2pSession;
 }
 
 //============================================================================ 
-RxSession *	PluginBase::createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+RxSession *	PluginBase::createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	RxSession * rxSession = new RxSession( sktBase, netIdent );
+	RxSession * rxSession = new RxSession( sktBase, netIdent, pluginType );
 	rxSession->setPluginType( m_ePluginType );
 	return rxSession;
 }
 
 //============================================================================ 
-RxSession *	PluginBase::createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+RxSession *	PluginBase::createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	RxSession * rxSession =  new RxSession( lclSessionId, sktBase, netIdent );
+	RxSession * rxSession =  new RxSession( lclSessionId, sktBase, netIdent, pluginType );
 	rxSession->setPluginType( m_ePluginType );
 	return rxSession;
 }
 
 //============================================================================ 
-TxSession *	PluginBase::createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+TxSession *	PluginBase::createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	TxSession * txSession = new TxSession( sktBase, netIdent );
+	TxSession * txSession = new TxSession( sktBase, netIdent, pluginType );
 	txSession->setPluginType( m_ePluginType );
 	return txSession;
 }
 
 //============================================================================ 
-TxSession *	PluginBase::createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+TxSession *	PluginBase::createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	TxSession * txSession = new TxSession( lclSessionId, sktBase, netIdent );
+	TxSession * txSession = new TxSession( lclSessionId, sktBase, netIdent, pluginType );
 	txSession->setPluginType( m_ePluginType );
 	return txSession;
 }

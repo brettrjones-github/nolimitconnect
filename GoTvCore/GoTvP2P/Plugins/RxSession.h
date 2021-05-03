@@ -23,8 +23,8 @@ class PktVideoFeedPic;
 class RxSession : public PluginSessionBase
 {
 public:
-	RxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	RxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	RxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	RxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 	virtual ~RxSession();
 
 	bool						waitForResponse( int iTimeoutMs );

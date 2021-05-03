@@ -17,8 +17,8 @@
 class RelayClientTestSession : public RelayClientSession
 {
 public:
-	RelayClientTestSession( VxSktBase * skt, VxNetIdent * ident )
-		: RelayClientSession( skt, ident )
+	RelayClientTestSession( VxSktBase * skt, VxNetIdent * ident, EPluginType pluginType )
+		: RelayClientSession( skt, ident, pluginType )
 	{
 		setIsInTest(true);
 	}

@@ -108,7 +108,7 @@ protected:
 class PluginBaseWebServer : public PluginBase, public RcWebServer
 {
 public:
-	PluginBaseWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginBaseWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseWebServer();
 
 	virtual void				pluginShutdown( void );

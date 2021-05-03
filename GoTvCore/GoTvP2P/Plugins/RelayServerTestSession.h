@@ -17,8 +17,8 @@
 class RelayServerTestSession : public RelayServerSession
 {
 public:
-	RelayServerTestSession( VxSktBase * sktBase, VxNetIdent * netIdent )
-		: RelayServerSession(  sktBase, netIdent )
+	RelayServerTestSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+		: RelayServerSession(  sktBase, netIdent, pluginType )
 	{
 		setIsInTest(true);
 	}

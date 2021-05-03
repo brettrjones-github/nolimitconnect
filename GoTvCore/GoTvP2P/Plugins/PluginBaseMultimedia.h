@@ -22,7 +22,7 @@
 class PluginBaseMultimedia : public PluginBase
 {
 public:
-	PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseMultimedia() = default;
 
 	virtual void				fromGuiUserLoggedOn( void );
@@ -43,7 +43,7 @@ public:
     virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
     virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual void				fromGuiSendAsset( AssetInfo& assetInfo );
+	virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo ) override;
 	virtual bool				fromGuiMultiSessionAction( VxNetIdent *	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ); 
 
 	virtual bool				fromGuiSetGameValueVar(	VxNetIdent * netIdent, int32_t varId, int32_t varValue );
@@ -100,7 +100,7 @@ protected:
 	PluginSessionMgr			m_PluginSessionMgr;
 	VoiceFeedMgr				m_VoiceFeedMgr;
 	VideoFeedMgr				m_VideoFeedMgr;
-	AssetXferMgr				m_AssetXferMgr;
+    AssetXferMgr                m_AssetXferMgr;
 };
 
 

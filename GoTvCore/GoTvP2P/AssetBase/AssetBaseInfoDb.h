@@ -34,7 +34,7 @@ public:
 	void						lockAssetInfoDb( void )					{ m_AssetBaseInfoDbMutex.lock(); }
 	void						unlockAssetInfoDb( void )				{ m_AssetBaseInfoDbMutex.unlock(); }
 
-	void						addAsset(	VxGUID&			assetId, 
+    bool						addAsset(	VxGUID&			assetId, 
 											VxGUID&			creatorId, 
 											VxGUID&			historyId, 
                                             VxGUID&			thumbId, 
@@ -51,7 +51,7 @@ public:
 											const char *	assetTag = "", 
 											EAssetSendState sendState = eAssetSendStateNone);
 
-	void 						addAsset( AssetBaseInfo * assetInfo );
+	bool 						addAsset( AssetBaseInfo * assetInfo );
 
 	void						removeAsset( const char * assetName );
 	void						removeAsset( VxGUID& assetId );

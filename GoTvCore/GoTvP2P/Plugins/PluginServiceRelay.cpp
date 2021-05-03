@@ -23,8 +23,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginServiceRelay::PluginServiceRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseRelay( engine, pluginMgr, myIdent )
+PluginServiceRelay::PluginServiceRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBaseRelay( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeRelay );
 }

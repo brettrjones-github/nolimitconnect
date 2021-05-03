@@ -15,12 +15,14 @@
 //============================================================================
 
 #include <GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h>
 
 class AssetMgr : public AssetBaseMgr
 {
 public:
 	AssetMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
 	virtual ~AssetMgr() = default;
+
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;

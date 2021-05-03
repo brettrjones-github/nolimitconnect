@@ -30,7 +30,7 @@ class ConnectionMgr;
 class PluginChatRoomClient : public PluginBaseMultimedia
 {
 public:
-	PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginChatRoomClient() = default;
 
     //=== hosting ===//

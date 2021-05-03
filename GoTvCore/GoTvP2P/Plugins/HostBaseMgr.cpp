@@ -738,7 +738,7 @@ void HostBaseMgr::sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, Vx
     vx_assert( nullptr != sktBase );
     LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr:: sendAnnounceRequest not done %s", DescribeConnectReason( connectReason ) );
     PktHostJoinReq pktJoin;
-
+    pktJoin.setPluginType( m_Plugin.getPluginType() );
     pktJoin.setHostType( hostType );
     pktJoin.setSessionId( sessionId );
     if( m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
@@ -759,6 +759,7 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
     PktHostJoinReq pktJoin;
 
     m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingJoinRequest );
+    pktJoin.setPluginType( m_Plugin.getPluginType() );
     pktJoin.setHostType( hostType );
     pktJoin.setSessionId( sessionId );
     if( !m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )

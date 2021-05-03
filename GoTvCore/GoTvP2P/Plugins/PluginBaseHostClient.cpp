@@ -18,8 +18,8 @@
 #include <PktLib/SearchParams.h>
 
 //============================================================================
-PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-    : PluginBase( engine, pluginMgr, myIdent )
+PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+    : PluginBase( engine, pluginMgr, myIdent, pluginType )
     , m_ConnectionMgr(engine.getConnectionMgr())
     , m_HostClientMgr(engine, pluginMgr, myIdent, *this)
 {

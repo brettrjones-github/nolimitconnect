@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2021 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,16 +13,36 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBaseRelay.h"
+#include <config_gotvcore.h>
 
-class PluginServiceRelay : public PluginBaseRelay
+#include <CoreLib/VxMutex.h>
+
+class VxNetIdent;
+class VxPktHdr;
+class VxSktBase;
+
+class BaseXferInterface
 {
 public:
+    virtual VxMutex&            getAssetXferMutex( void ) = 0;
+    virtual EPluginType         getPluginType( void ) = 0;
+    virtual bool                txPacket( VxNetIdent* netIdent, VxSktBase* sktBase, VxPktHdr* pktHdr, bool bDisconnectAfterSend = false ) = 0;
 
-    PluginServiceRelay(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginServiceRelay() override = default;
+};
 
+class AutoXferLock
+{
+public:
+    AutoXferLock( VxMutex& mutex ) 
+        : m_Mutex(mutex)	
+    { 
+        m_Mutex.lock(); 
+    }
 
-protected:
+    ~AutoXferLock()
+    { 
+        m_Mutex.unlock(); 
+    }
 
+    VxMutex&						m_Mutex;
 };

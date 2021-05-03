@@ -19,6 +19,6 @@
 class RelayClientSession : public RelaySession
 {
 public:
-	RelayClientSession( VxSktBase * sktBase, VxNetIdent * netIdent );
+	RelayClientSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 	virtual ~RelayClientSession();
 };

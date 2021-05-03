@@ -19,7 +19,7 @@
 class PluginServiceStoryboard : public PluginBase
 {
 public:
-	PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginServiceStoryboard() = default;
 
 	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );

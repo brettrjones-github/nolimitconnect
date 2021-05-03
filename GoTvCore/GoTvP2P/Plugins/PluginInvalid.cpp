@@ -14,8 +14,8 @@
 //============================================================================
 #include "PluginInvalid.h"
 
-PluginInvalid::PluginInvalid( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+PluginInvalid::PluginInvalid( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
 	m_ePluginType = ePluginTypeInvalid;
 }

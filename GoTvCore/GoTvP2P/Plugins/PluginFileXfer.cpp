@@ -24,8 +24,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginFileXfer::PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseFileXfer( engine, pluginMgr, myIdent )
+PluginFileXfer::PluginFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBaseFileXfer( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeFileXfer );
 }

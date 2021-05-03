@@ -98,7 +98,7 @@ void PluginBaseRelay::onPktRelaySessionReq( VxSktBase * sktBase, VxPktHdr * pktH
 		&& ( 0 == oPkt.getTestOnly() ) )
 	{
 		// create session
-		RelayServerSession * poSession = new RelayServerSession( sktBase, netIdent );
+		RelayServerSession * poSession = new RelayServerSession( sktBase, netIdent, getPluginType() );
 		poSession->setOfferResponse( eOfferResponseAccept );
 		poSession->setRmtSessionId( poPkt->getLclSessionId() );
 		m_PluginSessionMgr.addSession( poSession->getLclSessionId(), poSession, false );

@@ -25,7 +25,7 @@ class PluginClientPeerUser : public PluginBaseHostClient
 {
 public:
 
-    PluginClientPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginClientPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginClientPeerUser() override = default;
 
     //=== hosting ===//

@@ -27,28 +27,28 @@
 #endif
 
 //============================================================================
-PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_FileXferMgr( engine, *this, m_PluginSessionMgr )
 {
 }
 
 //============================================================================ 
-P2PSession * PluginBaseFileXfer::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
+P2PSession * PluginBaseFileXfer::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
 {
-	P2PSession * pSession = new FileXferPluginSession( lclSessionId, sktBase, netIdent );
+	P2PSession * pSession = new FileXferPluginSession( lclSessionId, sktBase, netIdent, pluginType );
 	pSession->setPluginType( m_ePluginType );
 	return pSession;
 }
 
 //============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
-bool PluginBaseFileXfer::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,		
+bool PluginBaseFileXfer::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		
 													int				pvUserData,
 													const char *	pOfferMsg,		
 													const char *	pFileName,
-													uint8_t *			fileHashId,
+													uint8_t *		fileHashId,
 													VxGUID			lclSessionId )	
 {
 	return m_PluginSessionMgr.fromGuiMakePluginOffer(		false,

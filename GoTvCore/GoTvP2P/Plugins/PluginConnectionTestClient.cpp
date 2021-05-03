@@ -26,8 +26,8 @@
 
 
 //============================================================================
-PluginConnectionTestClient::PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseHostClient( engine, pluginMgr, myIdent )
+PluginConnectionTestClient::PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBaseHostClient( engine, pluginMgr, myIdent, pluginType )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 {
     setPluginType( ePluginTypeClientConnectTest );

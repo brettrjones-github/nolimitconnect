@@ -26,8 +26,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginClientPeerUser::PluginClientPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseHostClient( engine, pluginMgr, myIdent )
+PluginClientPeerUser::PluginClientPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBaseHostClient( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeClientPeerUser );
 }

@@ -19,7 +19,7 @@
 class PluginNetworkHost : public PluginBaseHostService
 {
 public:
-    PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginNetworkHost() override = default;
 
     virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent ) override;

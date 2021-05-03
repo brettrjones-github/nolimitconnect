@@ -17,10 +17,7 @@
 #include "BlobCallbackInterface.h"
 
 #include <GoTvCore/GoTvP2P/AssetBase/AssetBaseMgr.h>
-
-#include <CoreLib/VxThread.h>
-#include <CoreLib/VxSemaphore.h>
-#include <CoreLib/VxMutex.h>
+#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobXferMgr.h>
 
 class PktFileListReply;
 
@@ -33,6 +30,7 @@ class BlobMgr : public AssetBaseMgr, public BlobCallbackInterface
 public:
 	BlobMgr( P2PEngine& engine, const char * dbName, const char * stateDbName );
 	virtual ~BlobMgr() = default;
+
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;

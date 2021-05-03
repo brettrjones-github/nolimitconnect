@@ -184,25 +184,88 @@ void ThumbMgr::announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState as
 	}
 
 	unlockClientList();
-	LogMsg( LOG_INFO, "ThumbMgr::announceAssetXferState state %d done\n", assetSendState );
+	LogMsg( LOG_INFO, "ThumbMgr::announceAssetXferState state %d done", assetSendState );
+}
+
+//============================================================================
+void ThumbMgr::announceThumbAdded( ThumbInfo& thumbInfo )
+{
+    lockClientList();
+    std::vector<ThumbCallbackInterface *>::iterator iter;
+    for( iter = m_ThumbClients.begin();	iter != m_ThumbClients.end(); ++iter )
+    {
+        ThumbCallbackInterface * client = *iter;
+        client->callbackThumbAdded( &thumbInfo );
+    }
+
+    unlockClientList();
+}
+
+//============================================================================
+void ThumbMgr::announceThumbUpdated( ThumbInfo& thumbInfo )
+{
+    lockClientList();
+    std::vector<ThumbCallbackInterface *>::iterator iter;
+    for( iter = m_ThumbClients.begin();	iter != m_ThumbClients.end(); ++iter )
+    {
+        ThumbCallbackInterface * client = *iter;
+        client->callbackThumbUpdated( &thumbInfo );
+    }
+
+    unlockClientList();
+}
+
+//============================================================================
+ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime )
+{
+    m_ThumbInfoMutex.lock();
+    for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
+    {
+        if( thumbInfo->getThumbId() == thumbId && ( 0 == thumbModifiedTime || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
+        {
+            m_ThumbInfoMutex.unlock();
+            return dynamic_cast<ThumbInfo*>(thumbInfo);
+        }
+    }
+
+    m_ThumbInfoMutex.unlock();
+    return nullptr;
 }
 
 //============================================================================
 bool ThumbMgr::fromGuiThumbCreated( ThumbInfo& thumbInfo )
 {
-    return addAsset( thumbInfo );
+    if( AssetBaseMgr::addAsset( thumbInfo ) )
+    {
+        if( saveToDatabase( thumbInfo ) )
+        {
+            announceThumbAdded( thumbInfo );
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //============================================================================
 bool ThumbMgr::fromGuiThumbUpdated( ThumbInfo& thumbInfo )
 {
-    return updateAsset( thumbInfo );
+    if( AssetBaseMgr::updateAsset( thumbInfo ) )
+    {
+        if( saveToDatabase( thumbInfo ) )
+        {
+            announceThumbUpdated( thumbInfo );
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //============================================================================
 void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType )
 {
-    if( netIdent->hasThumbId( hostType ) )
+    if( eHostTypeUnknown != hostType && netIdent->hasThumbId( hostType ) )
     {
         queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getThumbModifiedTime( hostType ) );
     }   
@@ -211,7 +274,11 @@ void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHo
 //============================================================================
 void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType )
 {
- 
+    EHostType hostType = PluginTypeToHostType( pluginType );
+    if( eHostTypeUnknown != hostType && netIdent->hasThumbId( hostType ) )
+    {
+        queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getThumbModifiedTime( hostType ) );
+    }    
 }
 
 //============================================================================
@@ -219,8 +286,11 @@ void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHo
 {
     if( !lookupThumbInfo( thumbId, thumbModifiedTime ) )
     {
-        // TODO implement
-        vx_assert( false );
+        EPluginType pluginType = HostTypeToHostPlugin( hostType );
+        if( pluginType != ePluginTypeInvalid )
+        {
+            queryThumbIfNeeded( sktBase, netIdent, pluginType, thumbId, thumbModifiedTime );
+        }
     }
 }
 
@@ -232,6 +302,17 @@ void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPl
         // TODO implement
         vx_assert( false );
     }
+}
+
+//============================================================================
+bool ThumbMgr::saveToDatabase( ThumbInfo& thumbInfo )
+{
+    lockResources();
+
+    bool result = m_ThumbInfoDb.saveToDatabase( thumbInfo );
+
+    unlockResources();
+    return result;
 }
 
 //============================================================================
@@ -267,21 +348,4 @@ void ThumbMgr::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 //============================================================================
 void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-}
-
-//============================================================================
-ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime )
-{
-    m_ThumbInfoMutex.lock();
-    for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
-    {
-        if( thumbInfo->getThumbId() == thumbId && ( 0 == thumbModifiedTime || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
-        {
-            m_ThumbInfoMutex.unlock();
-            return dynamic_cast<ThumbInfo*>(thumbInfo);
-        }
-    }
-
-    m_ThumbInfoMutex.unlock();
-    return nullptr;
 }

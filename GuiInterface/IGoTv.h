@@ -582,9 +582,9 @@ public:
 
     virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile );
 
-    virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 = 0 );
+    virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 = 0 );
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 );
-    virtual bool				fromGuiSendAsset( AssetInfo& assetInfo );
+    virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo );
 
     virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName );
     virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName );

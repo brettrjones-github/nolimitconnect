@@ -128,7 +128,7 @@ public:
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
 	virtual void				onConnectionLost( VxSktBase * sktBase );	
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ); 
-	virtual void				fromGuiSendAsset( AssetInfo& assetInfo );
+	virtual void				fromGuiSendAsset( AssetBaseInfo& assetInfo );
 	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual EPluginAccess	canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );

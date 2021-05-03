@@ -795,6 +795,7 @@
     <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\BaseXferInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetCallbackInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfoDb.h" />

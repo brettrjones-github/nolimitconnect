@@ -66,6 +66,9 @@ protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
     ThumbInfo*                  lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime = 0 );
+    void				        announceThumbAdded( ThumbInfo& thumbInfo );
+    void				        announceThumbUpdated( ThumbInfo& thumbInfo );
+    bool                        saveToDatabase( ThumbInfo& thumbInfo );
 
     ThumbInfoDb&                m_ThumbInfoDb;
     std::vector<AssetBaseInfo*>&	m_ThumbInfoList;

@@ -18,15 +18,15 @@
 #include <NetLib/VxSktBase.h>
 
 //============================================================================
-RelaySession::RelaySession( VxSktBase * sktBase, VxNetIdent * netIdent )
-: PluginSessionBase( sktBase, netIdent )
+RelaySession::RelaySession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: PluginSessionBase( sktBase, netIdent, pluginType )
 {
 	m_ePluginType = ePluginTypeRelay;
 }
 
 //============================================================================
-RelaySession::RelaySession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
-: PluginSessionBase( lclSessionId, sktBase, netIdent )
+RelaySession::RelaySession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: PluginSessionBase( lclSessionId, sktBase, netIdent, pluginType )
 {
 	m_ePluginType = ePluginTypeRelay;
 }

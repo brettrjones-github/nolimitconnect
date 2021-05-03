@@ -19,7 +19,7 @@ class PluginNetworkSearchList : public PluginBaseHostService
 {
 public:
 
-    PluginNetworkSearchList( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginNetworkSearchList( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginNetworkSearchList() override = default;
 
 

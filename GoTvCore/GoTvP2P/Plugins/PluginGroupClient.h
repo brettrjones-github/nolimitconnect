@@ -25,7 +25,7 @@ class PluginGroupClient : public PluginBaseHostClient
 {
 public:
 
-    PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginGroupClient() override = default;
 
     //=== hosting ===//

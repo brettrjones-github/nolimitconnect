@@ -21,7 +21,7 @@
 class PluginBaseHostService : public PluginNetServices
 {
 public:
-    PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
     virtual ~PluginBaseHostService() override = default;
 
     void                        setHostType( EHostType hostType )   { m_HostType = hostType; }

@@ -35,8 +35,8 @@
 #endif
 
 //============================================================================
-PluginServiceFileShare::PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent ) 
+PluginServiceFileShare::PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType ) 
 , m_PluginSessionMgr( engine, *this, pluginMgr)
 , m_SharedFilesMgr( engine, *this)
 , m_FileLibraryMgr( engine, *this, m_SharedFilesMgr )

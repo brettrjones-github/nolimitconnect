@@ -19,8 +19,8 @@
 #include <PktLib/PktsStoryBoard.h>
 
 //============================================================================
-PluginServiceAboutMe::PluginServiceAboutMe( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+PluginServiceAboutMe::PluginServiceAboutMe( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
 	setPluginType( ePluginTypeAboutMePage );
 }

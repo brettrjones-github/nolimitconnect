@@ -14,6 +14,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/VxMutex.h>
 
 class P2PEngine;
@@ -41,6 +43,8 @@ public:
 	PluginMgr&					getPluginMgr( void )						{ return m_PluginMgr; }
     IToGui&						getToGui( void );
 	VxMutex&					getSessionMgrMutex( void )					{ return m_SessionMgrMutex; }
+
+    EPluginType                 getPluginType( void );
 
 	bool						isPluginSingleSession( void );
 

@@ -22,6 +22,8 @@
 
 #include <GuiInterface/IToGui.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h>
 
 #include <memory.h>
 
@@ -30,12 +32,12 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginBaseMultimedia::PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+PluginBaseMultimedia::PluginBaseMultimedia( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
 , m_VideoFeedMgr( engine, *this, m_PluginSessionMgr )
-, m_AssetXferMgr( engine, *this, m_PluginSessionMgr )
+, m_AssetXferMgr( engine, engine.getAssetMgr(), *this, "MessengerAssets.db3", "MessengerXfer.db3" )
 {
 }
 
@@ -107,10 +109,10 @@ void PluginBaseMultimedia::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * 
 }
 
 //============================================================================
-void PluginBaseMultimedia::fromGuiSendAsset( AssetInfo& assetInfo )
+bool PluginBaseMultimedia::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiSendAsset start\n" );
-	m_AssetXferMgr.fromGuiSendAsset( assetInfo );
+	return m_AssetXferMgr.fromGuiSendAssetBase( assetInfo );
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiSendAsset done\n" );
 }
 

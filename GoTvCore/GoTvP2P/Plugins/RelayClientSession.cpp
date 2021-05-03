@@ -15,8 +15,8 @@
 #include "RelayClientSession.h"
 
 //============================================================================
-RelayClientSession::RelayClientSession( VxSktBase * sktBase, VxNetIdent * netIdent )
-: RelaySession( sktBase, netIdent )
+RelayClientSession::RelayClientSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: RelaySession( sktBase, netIdent, pluginType )
 {
 	setSessionType(ePluginSessionTypeRelayClient);
 	setIsRmtInitiated( true );

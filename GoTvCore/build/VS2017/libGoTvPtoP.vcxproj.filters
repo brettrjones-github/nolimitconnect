@@ -1681,9 +1681,6 @@
     <ClInclude Include="..\..\GoTvP2P\User\UserList.h">
       <Filter>GoTvP2P\User</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseCallbackInterface.h">
-      <Filter>GoTvP2P\AssetBase</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.h">
       <Filter>GoTvP2P\AssetBase</Filter>
     </ClInclude>
@@ -1902,6 +1899,12 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.h">
       <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseCallbackInterface.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\BaseXferInterface.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

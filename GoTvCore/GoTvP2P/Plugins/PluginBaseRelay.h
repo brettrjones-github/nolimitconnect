@@ -32,7 +32,7 @@ class PktRelayServiceReply;
 class PluginBaseRelay : public PluginBaseService
 {
 public:
-	PluginBaseRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginBaseRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseRelay() = default;
 
 	bool						verboseLog( void )					{ return m_bVerbose; }

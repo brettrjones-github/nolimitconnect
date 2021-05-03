@@ -36,8 +36,8 @@ public:
     virtual void				setThumbId( const char * thumbId )              { m_ThumbId.fromVxGUIDHexString( thumbId ); }
     virtual VxGUID&				getThumbId( void )                              { return m_ThumbId; }
 
-    virtual void				setInfoModifiedTime( uint64_t timestamp )       { m_InfoModifiedTime = timestamp; }
-    virtual uint64_t			getInfoModifiedTime( void )                     { return m_InfoModifiedTime; }
+    virtual void				setInfoModifiedTime( int64_t timestamp )        { m_InfoModifiedTime = timestamp; }
+    virtual int64_t			    getInfoModifiedTime( void )                     { return m_InfoModifiedTime; }
 
     virtual void                fillBaseInfo( VxNetIdent* netIdent, EHostType hostType );
 

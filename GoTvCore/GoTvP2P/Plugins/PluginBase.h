@@ -18,12 +18,17 @@
 #include <PktLib/PktPluginHandlerBase.h>
 #include <PktLib/PktsPluginSetting.h>
 #include <PktLib/VxCommon.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
+#include <GoTvCore/GoTvP2P/AssetBase/BaseXferInterface.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbXferMgr.h>
 
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/MediaCallbackInterface.h>
 
+class AssetMgr;
+class AssetBaseInfo;
 class FileShareSettings;
 class IToGui;
 class NetServiceHdr;
@@ -40,7 +45,7 @@ class ThumbMgr;
 class TxSession;
 class VxSktBase;
 
-class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface
+class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface, public BaseXferInterface
 {
 public:
 	class AutoPluginLock
@@ -59,7 +64,7 @@ public:
 		VxMutex&						m_Mutex;
 	};
 
-	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBase() override = default;
 
     virtual void				pluginStartup( void );
@@ -80,13 +85,16 @@ public:
 	virtual P2PEngine&			getEngine( void )										{ return m_Engine; }
     virtual IToGui&			    getToGui( void );
     virtual void				setPluginType( EPluginType ePluginType );
-    virtual EPluginType			getPluginType( void )									{ return m_ePluginType; }
+    virtual EPluginType			getPluginType( void ) override							{ return m_ePluginType; }
     virtual bool                setPluginSetting( PluginSetting& pluginSetting );
     virtual PluginSetting&      getPluginSetting( void )                                { return m_PluginSetting; }
     virtual EHostType			getHostType( void );
 
 	virtual PluginMgr&			getPluginMgr( void )									{ return m_PluginMgr;	}
-	virtual	VxMutex&			getPluginMutex( void )									{ return m_PluginMutex; }					
+	virtual	VxMutex&			getPluginMutex( void )									{ return m_PluginMutex; }	
+
+    virtual	VxMutex&			getAssetXferMutex( void ) override						{ return m_PluginMutex; }					
+
 	virtual	EAppState			getPluginState( void );
 	virtual	void				setPluginState( EAppState ePluginState )				{ m_ePluginState = ePluginState;};
 
@@ -136,9 +144,9 @@ public:
 	virtual void				fromGuiAppPause( void );
 	virtual void				fromGuiAppResume( void );
 
-	virtual void				onSpeexData( uint16_t * pu16SpeexData, uint16_t u16SpeexDataLen )				{};
-	virtual void				fromGuiVideoData( uint8_t * pu8VidData, uint32_t u32VidDataLen, int iRotation )	{};
-	virtual void				fromGuiSendAsset( AssetInfo& assetInfo )							            {};
+	virtual void				onSpeexData( uint16_t * pu16SpeexData, uint16_t u16SpeexDataLen )				    {};
+	virtual void				fromGuiVideoData( uint8_t * pu8VidData, uint32_t u32VidDataLen, int iRotation )	    {};
+    virtual bool				fromGuiSendAsset( AssetBaseInfo& assetInfo )                                        { return false; };
 	virtual bool				fromGuiMultiSessionAction( VxNetIdent *	netIdent, EMSessionAction mSessionAction, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) { return false; }; 
 
     //=== hosting ===//
@@ -153,7 +161,7 @@ public:
 	virtual void				onConnectionLost( VxSktBase * sktBase ) = 0;
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) = 0;
 
-    bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
+    bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false ) override;
     bool						txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
 
     //=== maintenence ===//
@@ -201,12 +209,12 @@ public:
 
     virtual EPluginAccess	    canAcceptNewSession( VxNetIdent * netIdent );
 
-	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
-	virtual RxSession *			createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	virtual RxSession *			createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
-	virtual TxSession *			createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	virtual RxSession *			createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	virtual RxSession *			createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	virtual TxSession *			createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 
     //=== http ===//
 	virtual void				handlePluginSpecificSkt( VxSktBase * sktBase ) {};
@@ -219,10 +227,16 @@ protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
     virtual bool                generateSettingPkt( PluginSetting& pluginSetting );
 
+    static std::string          getThumbXferDbName( EPluginType pluginType );
+    static std::string          getThumbXferThreadName( EPluginType pluginType );
+
 	//=== vars ===//
 	P2PEngine&					m_Engine;
 	PluginMgr&					m_PluginMgr;
+    AssetMgr&                   m_AssetMgr;
     ThumbMgr&                   m_ThumbMgr;
+    ThumbXferMgr                m_ThumbXferMgr;
+    
 	
 	VxNetIdent *				m_MyIdent = nullptr;
 

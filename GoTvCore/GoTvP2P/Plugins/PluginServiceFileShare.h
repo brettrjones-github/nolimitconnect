@@ -39,7 +39,7 @@ class VxFileShredder;
 class PluginServiceFileShare : public PluginBase
 {
 public:
-	PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent  );
+	PluginServiceFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType  );
 	virtual ~PluginServiceFileShare() = default;
 
 	PluginSessionBase *			createPluginSession( VxSktBase * sktBase, VxNetIdent * netIdent );

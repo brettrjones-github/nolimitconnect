@@ -26,8 +26,8 @@ class VxPktHdr;
 class RelaySession : public PluginSessionBase
 {
 public:
-	RelaySession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	RelaySession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent ); 
+	RelaySession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	RelaySession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType ); 
 	virtual ~RelaySession();
 
 	bool proxySendPkt( VxPktHdr * poPkt, VxGUID& destOnlineId, bool bDisconnectAfterSend = false );

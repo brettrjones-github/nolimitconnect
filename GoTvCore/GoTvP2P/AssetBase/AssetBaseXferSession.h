@@ -34,27 +34,27 @@ public:
 	AssetBaseXferSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
 	virtual ~AssetBaseXferSession();
 
-	void						setIdent( VxNetIdent * ident )				{ m_Ident = ident; }
-	VxNetIdent *				getIdent( void )							{ return m_Ident; }
+	void						setIdent( VxNetIdent * ident )				    { m_Ident = ident; }
+	VxNetIdent *				getIdent( void )							    { return m_Ident; }
 
-	void						setAssetBaseInfo( AssetBaseInfo& assetInfo )	        { m_AssetBaseInfo = assetInfo; }
-	AssetBaseInfo&				getAssetBaseInfo( void )						    { return m_AssetBaseInfo; }
+	void						setAssetBaseInfo( AssetBaseInfo& assetInfo )	{ m_AssetBaseInfo = assetInfo; }
+	AssetBaseInfo&				getAssetBaseInfo( void )						{ return m_AssetBaseInfo; }
 
-	void						setSkt( VxSktBase * skt )					{ m_Skt = skt; }
-	VxSktBase *					getSkt( void )								{ return m_Skt; }
+	void						setSkt( VxSktBase * skt )					    { m_Skt = skt; }
+	VxSktBase *					getSkt( void )								    { return m_Skt; }
 
-	void						setLclSessionId( VxGUID& lclId )			{ m_FileXferInfo.setLclSessionId( lclId ); }
-	VxGUID&						getLclSessionId( void )						{ return m_FileXferInfo.getLclSessionId(); }
-	void						setRmtSessionId( VxGUID& rmtId )			{ m_FileXferInfo.setRmtSessionId( rmtId ); }
-	VxGUID&						getRmtSessionId( void )						{ return m_FileXferInfo.getRmtSessionId(); }
+	void						setLclSessionId( VxGUID& lclId )			    { m_FileXferInfo.setLclSessionId( lclId ); }
+	VxGUID&						getLclSessionId( void )						    { return m_FileXferInfo.getLclSessionId(); }
+	void						setRmtSessionId( VxGUID& rmtId )			    { m_FileXferInfo.setRmtSessionId( rmtId ); }
+	VxGUID&						getRmtSessionId( void )						    { return m_FileXferInfo.getRmtSessionId(); }
 
-	void						setFileHashId( uint8_t * fileHashId )		{ m_FileXferInfo.setFileHashId( fileHashId ); }
-	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileXferInfo.setFileHashId( fileHashId ); }
-	VxSha1Hash&					getFileHashId( void )						{ return m_FileXferInfo.getFileHashId(); }
+	void						setFileHashId( uint8_t * fileHashId )		    { m_FileXferInfo.setFileHashId( fileHashId ); }
+	void						setFileHashId( VxSha1Hash& fileHashId )		    { m_FileXferInfo.setFileHashId( fileHashId ); }
+	VxSha1Hash&					getFileHashId( void )						    { return m_FileXferInfo.getFileHashId(); }
 
-	VxFileXferInfo&				getXferInfo( void )							{ return m_FileXferInfo; }
-	void						setXferDirection( EXferDirection dir )		{ m_FileXferInfo.setXferDirection( dir ); }
-	EXferDirection				getXferDirection( void )					{ return m_FileXferInfo.getXferDirection(); }
+	VxFileXferInfo&				getXferInfo( void )							    { return m_FileXferInfo; }
+	void						setXferDirection( EXferDirection dir )		    { m_FileXferInfo.setXferDirection( dir ); }
+	EXferDirection				getXferDirection( void )					    { return m_FileXferInfo.getXferDirection(); }
 
 	void						reset( void );
 	bool						isXferingFile( void );

@@ -124,72 +124,57 @@ void UserOnlineMgr::announceUserOnlineRemoved( VxGUID& hostOnlineId, EHostType h
 }
 
 //============================================================================
+void UserOnlineMgr::announceUserOnlineState( User* user, bool isOnline )
+{
+    lockClientList();
+    std::vector<UserOnlineCallbackInterface *>::iterator iter;
+    for( iter = m_UserOnlineClients.begin(); iter != m_UserOnlineClients.end(); ++iter )
+    {
+        UserOnlineCallbackInterface * client = *iter;
+        client->callbackUserOnlineState( user, isOnline );
+    }
+
+    unlockClientList();
+}
+
+//============================================================================
 void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
-    bool wasAdded = false;
-    lockResources();
-    User* user = findUser( netIdent->getMyOnlineId() );
-    if( !user )
-    {
-        user = new User( netIdent, sessionInfo );
-        wasAdded = true;
-    }
-
-    user->addSession( sessionInfo );
-    unlockResources();
-
-    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
-
-    if( wasAdded )
-    {
-        announceUserOnlineAdded( user, sessionInfo );
-    }
-    else
-    {
-        announceUserOnlineUpdated( user, sessionInfo );
-    }
+    updateUserSession( sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================
 void UserOnlineMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
-    bool wasAdded = false;
-    lockResources();
-    User* user = findUser( netIdent->getMyOnlineId() );
-    if( !user )
-    {
-        user = new User( netIdent, sessionInfo );
-        wasAdded = true;
-    }
-
-    user->addSession( sessionInfo );
-    unlockResources();
-
-    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
-
-    if( wasAdded )
-    {
-        announceUserOnlineAdded( user, sessionInfo );
-    }
-    else
-    {
-        announceUserOnlineUpdated( user, sessionInfo );
-    }
+    updateUserSession( sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================
 void UserOnlineMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
+    updateUserSession( sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
+void UserOnlineMgr::updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+{
     bool wasAdded = false;
+    bool wasOnline = false;
+    bool isOnline = false;
     lockResources();
     User* user = findUser( netIdent->getMyOnlineId() );
     if( !user )
     {
-        user = new User( netIdent, sessionInfo );
+        user = new User( m_Engine, netIdent, sessionInfo );
         wasAdded = true;
     }
+    else
+    {
+        wasOnline = user->isOnline();
+        user->addSession( sessionInfo );
+        isOnline = user->isOnline();
+    }
 
-    user->addSession( sessionInfo );
     unlockResources();
 
     m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
@@ -201,6 +186,11 @@ void UserOnlineMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent
     else
     {
         announceUserOnlineUpdated( user, sessionInfo );
+    }
+
+    if( wasOnline != isOnline )
+    {
+        announceUserOnlineState( user, isOnline );
     }
 }
 

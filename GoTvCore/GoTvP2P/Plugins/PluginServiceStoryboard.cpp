@@ -19,8 +19,8 @@
 #include <PktLib/PktsStoryBoard.h>
 
 //============================================================================
-PluginServiceStoryboard::PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+PluginServiceStoryboard::PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
 	setPluginType( ePluginTypeStoryboard );
 }

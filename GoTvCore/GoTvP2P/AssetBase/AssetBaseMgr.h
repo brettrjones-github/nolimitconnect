@@ -38,6 +38,8 @@ class AssetBaseCallbackInterface;
 class AssetBaseInfo;
 class AssetBaseInfoDb;
 class AssetBaseHistoryMgr;
+class AssetBaseXferMgr;
+
 class IToGui;
 class P2PEngine;
 class PktFileListReply;
@@ -56,7 +58,7 @@ public:
         VxMutex&				m_Mutex;
     };
 
-    virtual AssetBaseInfoDb&    getAssetInfoDb( void ) { return m_AssetBaseInfoDb; }
+    virtual AssetBaseInfoDb&    getAssetInfoDb( void )                                  { return m_AssetBaseInfoDb; }
 
     virtual std::vector<AssetBaseInfo*>&	getAssetBaseInfoList( void )				{ return m_AssetBaseInfoList; }
 

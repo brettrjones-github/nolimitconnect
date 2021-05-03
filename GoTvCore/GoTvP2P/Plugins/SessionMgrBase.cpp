@@ -33,6 +33,12 @@ IToGui&	SessionMgrBase::getToGui( void )
 }
 
 //============================================================================
+EPluginType  SessionMgrBase::getPluginType( void )                       
+{ 
+    return m_Plugin.getPluginType(); 
+}
+
+//============================================================================
 bool SessionMgrBase::isPluginSingleSession( void )
 {
 	bool isSingleSessionPlugin = false;

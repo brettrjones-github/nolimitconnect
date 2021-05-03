@@ -100,7 +100,7 @@ bool SndReader::fromGuiIsMyP2PWebAudioFile( const char * fileName )
 }
 
 //============================================================================
-bool SndReader::fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000 )
+bool SndReader::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000 )
 {
 	bool result = false;
 	switch( assetAction )

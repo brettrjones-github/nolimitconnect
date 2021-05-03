@@ -19,8 +19,8 @@
 class RelayServerSession : public RelaySession
 {
 public:
-	RelayServerSession( VxSktBase * sktBase, VxNetIdent * netIdent );
-	RelayServerSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	RelayServerSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	RelayServerSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 	virtual ~RelayServerSession();
 
 };

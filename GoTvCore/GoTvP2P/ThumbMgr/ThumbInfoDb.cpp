@@ -39,3 +39,9 @@ AssetBaseInfo * ThumbInfoDb::createAssetInfo( AssetBaseInfo& assetInfo )
 {
     return new ThumbInfo( assetInfo );
 }
+
+//============================================================================
+bool ThumbInfoDb::saveToDatabase( ThumbInfo& thumbInfo )
+{
+    return AssetBaseInfoDb::addAsset( &thumbInfo );
+}

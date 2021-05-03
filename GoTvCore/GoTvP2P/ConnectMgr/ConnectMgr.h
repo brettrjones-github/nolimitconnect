@@ -52,7 +52,7 @@ protected:
     void						unlockClientList( void )					{ m_ConnectClientMutex.unlock(); }
 
     P2PEngine&					m_Engine;
-    ConnectInfoDb              m_ConnectInfoDb;
+    ConnectInfoDb               m_ConnectInfoDb;
     VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  

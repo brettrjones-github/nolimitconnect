@@ -74,7 +74,7 @@ bool MediaTools::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId
 }
 
 //============================================================================
-bool MediaTools::fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000 )
+bool MediaTools::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000 )
 {
 	bool result = false;
 	switch( assetAction )

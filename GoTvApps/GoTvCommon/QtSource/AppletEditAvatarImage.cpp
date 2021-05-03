@@ -80,6 +80,8 @@ void AppletEditAvatarImage::onApplyButClick( void )
                 // setup identity with updated avatar image
                 m_MyIdent->setAvatarGuid( existingAsset->getAssetUniqueId(), existingAsset->getModifiedTime() );
 
+                m_Engine.getThumbMgr().fromGuiThumbUpdated( *existingAsset );
+
                 // notify others of change to identity
                 m_MyApp.updateMyIdent( m_MyIdent );
 
@@ -100,6 +102,8 @@ void AppletEditAvatarImage::onApplyButClick( void )
         {
             // setup identity with new avatar image
             m_MyIdent->setAvatarGuid( thumbInfo.getAssetUniqueId(), thumbInfo.getModifiedTime() );
+
+            m_Engine.getThumbMgr().fromGuiThumbCreated( thumbInfo );
 
             // notify others of change to identity
             m_MyApp.updateMyIdent( m_MyIdent );

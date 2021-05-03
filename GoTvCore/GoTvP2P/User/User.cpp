@@ -14,11 +14,27 @@
 //============================================================================
 
 #include "UserList.h"
+
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <PktLib/VxCommon.h>
 
 //============================================================================
-User::User( VxNetIdent * netIdent )
-    : m_NetIdent( netIdent )
+User::User()
+    : m_Engine( GetPtoPEngine() )
+{
+}
+
+//============================================================================
+User::User( P2PEngine& engine )
+    : m_Engine( engine )
+{
+}
+
+//============================================================================
+User::User( P2PEngine& engine, VxNetIdent * netIdent )
+    : m_Engine( engine )
+    , m_NetIdent( netIdent )
 {
     if( m_NetIdent )
     {
@@ -27,8 +43,9 @@ User::User( VxNetIdent * netIdent )
 }
 
 //============================================================================
-User::User( VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
-    : m_NetIdent( netIdent )
+User::User( P2PEngine& engine, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+    : m_Engine( engine )
+    , m_NetIdent( netIdent )
 {
     if( m_NetIdent )
     {
@@ -40,9 +57,9 @@ User::User( VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 
 //============================================================================
 User::User( const User& rhs )
-    : m_NetIdent( rhs.m_NetIdent )
+    : m_Engine( rhs.m_Engine )
+    , m_NetIdent( rhs.m_NetIdent )
     , m_MyOnlineId( rhs.m_MyOnlineId )
-    , m_IsOnline( rhs.m_IsOnline )
     , m_SessionList( rhs.m_SessionList )
 {
 }
@@ -54,7 +71,6 @@ User& User::operator=( const User& rhs )
     {
         m_NetIdent = rhs.m_NetIdent;
         m_MyOnlineId = rhs.m_MyOnlineId;
-        m_IsOnline = rhs.m_IsOnline;
         m_SessionList = rhs.m_SessionList;   
     }
 

@@ -24,7 +24,7 @@ class PluginRandomConnectHost : public PluginBaseHostService, public IConnectReq
 {
 public:
 
-    PluginRandomConnectHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginRandomConnectHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginRandomConnectHost() override = default;
 
     virtual void				pluginStartup( void ) override;

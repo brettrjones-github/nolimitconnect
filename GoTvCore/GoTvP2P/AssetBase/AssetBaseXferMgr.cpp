@@ -46,10 +46,6 @@
 
 namespace
 {
-	//#define		MAX_ASSET_XFER_OUTSTANDING_PKTS 3
-	//#define		MAX_ASSET_XFER_TX_SESSIONS		5;
-	const char * ASSET_XFER_DB_NAME = "AssetBaseXferDb.db3";
-
 	//============================================================================
     static void * AssetBaseXferMgrThreadFunc( void * pvContext )
 	{
@@ -68,13 +64,13 @@ namespace
 
 
 //============================================================================
-AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, PluginMessenger&	plugin, PluginSessionMgr& pluginSessionMgr, const char * stateDbName )
+AssetBaseXferMgr::AssetBaseXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferInterface& xferInterface, const char * stateDbName, const char * workThreadName )
 : m_Engine( engine )
-, m_AssetBaseMgr( engine.getAssetMgr() )
+, m_AssetBaseMgr( assetMgr )
+, m_XferInterface( xferInterface )
 , m_PluginMgr( engine.getPluginMgr() )
-, m_Plugin( plugin )
-, m_PluginSessionMgr( pluginSessionMgr )
 , m_AssetBaseXferDb( stateDbName )
+, m_WorkerThreadName( workThreadName )
 {
 }
 
@@ -91,7 +87,7 @@ void AssetBaseXferMgr::fromGuiUserLoggedOn( void )
 	if( !m_Initialized )
 	{
 		m_Initialized = true;
-		m_WorkerThread.startThread( (VX_THREAD_FUNCTION_T)AssetBaseXferMgrThreadFunc, this, "OfferBaseXferThrd" );			
+		m_WorkerThread.startThread( (VX_THREAD_FUNCTION_T)AssetBaseXferMgrThreadFunc, this, m_WorkerThreadName.c_str() );			
 	}
 }
 
@@ -156,7 +152,7 @@ void AssetBaseXferMgr::fromGuiCancelDownload( VxGUID& lclSessionId )
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::fromGuiCancelDownload AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::fromGuiCancelDownload AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -183,12 +179,11 @@ void AssetBaseXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::fromGuiCancelUpload AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::fromGuiCancelUpload AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	AssetBaseTxIter iter;
-	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+	for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
 		AssetBaseTxSession * xferSession = ( *iter );
 		if( xferSession->getLclSessionId() == lclSessionId )
@@ -212,16 +207,14 @@ void AssetBaseXferMgr::fromGuiCancelUpload( VxGUID& lclSessionId )
 //============================================================================
 void AssetBaseXferMgr::clearRxSessionsList( void )
 {
-	std::map<VxGUID, AssetBaseRxSession *>::iterator iter;
-
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::clearRxSessionsList AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::clearRxSessionsList AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
+	for( auto iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
 		AssetBaseRxSession * xferSession = iter->second;
 		delete xferSession;
@@ -236,15 +229,14 @@ void AssetBaseXferMgr::clearRxSessionsList( void )
 //============================================================================
 void AssetBaseXferMgr::clearTxSessionsList( void )
 {
-	AssetBaseTxIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+	for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
 		AssetBaseTxSession * xferSession = (*iter);
 		delete xferSession;
@@ -262,12 +254,11 @@ void AssetBaseXferMgr::fileAboutToBeDeleted( std::string& fileName )
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::fileAboutToBeDeleted AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::fileAboutToBeDeleted AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	AssetBaseTxIter iter;
-	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+	for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
 		AssetBaseTxSession * xferSession = ( *iter );
 		if( xferSession->getXferInfo().getLclFileName() == fileName )
@@ -293,16 +284,15 @@ void AssetBaseXferMgr::onConnectionLost( VxSktBase * sktBase )
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onConnectionLost AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onConnectionLost AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	bool erasedSession = true;
-	AssetBaseTxIter iter;
 	while( erasedSession )
 	{
 		erasedSession = false;
-		for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+		for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 		{
 			AssetBaseTxSession * xferSession = ( *iter );
 			if( xferSession->getSkt() == sktBase )
@@ -317,11 +307,10 @@ void AssetBaseXferMgr::onConnectionLost( VxSktBase * sktBase )
 	}
 
 	erasedSession = true;
-	AssetBaseRxIter oRxIter; 
 	while( erasedSession )
 	{
 		erasedSession = false;
-		for( oRxIter = m_RxSessions.begin(); oRxIter != m_RxSessions.end(); ++oRxIter )
+		for( auto oRxIter = m_RxSessions.begin(); oRxIter != m_RxSessions.end(); ++oRxIter )
 		{
 			AssetBaseRxSession * xferSession = oRxIter->second;
 			if( xferSession->getSkt() == sktBase )
@@ -354,12 +343,12 @@ bool AssetBaseXferMgr::requireFileXfer( EAssetType assetType )
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq AutoPluginLock start\n");
 	#endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq AutoPluginLock done\n");
 	#endif // DEBUG_AUTOPLUGIN_LOCK
@@ -375,11 +364,11 @@ void AssetBaseXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 	pktReply.setRmtSessionId( poPkt->getLclSessionId() );
 	pktReply.setLclSessionId( poPkt->getRmtSessionId() );
 	pktReply.setUniqueId( assetUniqueId );
-	if( false == netIdent->isHisAccessAllowedFromMe( m_Plugin.getPluginType() ) )
+	if( false == netIdent->isHisAccessAllowedFromMe( m_XferInterface.getPluginType() ) )
 	{
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq: permission denied\n" );
 		pktReply.setError( eXferErrorPermission );
-		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
+        m_XferInterface.txPacket( netIdent, sktBase, &pktReply );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReq AutoPluginLock destroy\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -395,7 +384,7 @@ void AssetBaseXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 		assetInfo.setHistoryId( netIdent->getMyOnlineId() );
 		assetInfo.setAssetSendState( eAssetSendStateRxSuccess );
 		m_AssetBaseMgr.addAsset( assetInfo );
-		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
+		m_XferInterface.txPacket( netIdent, sktBase, &pktReply );
 		IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
 		IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
 	}
@@ -424,7 +413,7 @@ void AssetBaseXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr
 			LogMsg(LOG_ERROR, "PluginAssetBaseOffer::onPktAssetSendReq: Could not create session\n");
 			PktAssetSendReply pktReply;
 			pktReply.setError( eXferErrorBadParam );
-			m_Plugin.txPacket( netIdent, sktBase, &pktReply );
+			m_XferInterface.txPacket( netIdent, sktBase, &pktReply );
 		}
 	}
 
@@ -440,12 +429,12 @@ void AssetBaseXferMgr::assetSendComplete( AssetBaseTxSession * xferSession )
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReply AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendReply AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -515,7 +504,7 @@ void AssetBaseXferMgr::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	AssetBaseRxSession * xferSession = 0;
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReq\n");
@@ -524,7 +513,7 @@ void AssetBaseXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHd
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReq AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+        AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReq AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -544,7 +533,7 @@ void AssetBaseXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHd
 				pktReply.setRmtSessionId( poPkt->getLclSessionId() );
 				pktReply.setDataLen(0);
 				pktReply.setError( xferErr );
-				m_Plugin.txPacket( netIdent, sktBase, &pktReply );
+				m_XferInterface.txPacket( netIdent, sktBase, &pktReply );
 
 				IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, xferSession->getAssetBaseInfo().getAssetUniqueId(), xferErr );
 				endAssetBaseXferSession( xferSession, true );
@@ -558,7 +547,7 @@ void AssetBaseXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHd
 			pktReply.setRmtSessionId( poPkt->getLclSessionId() );
 			pktReply.setDataLen(0);
 			pktReply.setError( eXferErrorBadParam );
-			m_Plugin.txPacket( netIdent, sktBase, &pktReply );
+			m_XferInterface.txPacket( netIdent, sktBase, &pktReply );
 		}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -568,7 +557,7 @@ void AssetBaseXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktAssetChunkReply * poPkt = (PktAssetChunkReply *)pktHdr;
 	AssetBaseTxSession * xferSession = 0;
@@ -579,7 +568,7 @@ static int cnt = 0;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReply AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-		PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+        AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReply AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -610,12 +599,12 @@ static int cnt = 0;
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReq AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReq AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -634,12 +623,12 @@ void AssetBaseXferMgr::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr 
 }
 
 //============================================================================
-void AssetBaseXferMgr::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -674,7 +663,7 @@ void AssetBaseXferMgr::onPktAssetBaseXferErr( VxSktBase * sktBase, VxPktHdr * pk
 //============================================================================
 void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseRxSession * poSessionIn, bool pluginIsLocked )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -699,19 +688,19 @@ void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseRxSession * poSessionIn
 		VxFileUtil::deleteFile( fileName.c_str() );
 	}
 
-	AssetBaseRxIter oRxIter = m_RxSessions.begin();
-	while( oRxIter != m_RxSessions.end() )
+    auto rxIter = m_RxSessions.begin();
+	while( rxIter != m_RxSessions.end() )
 	{
-		AssetBaseRxSession * xferSession = oRxIter->second;
+		AssetBaseRxSession * xferSession = rxIter->second;
 		if( poSessionIn == xferSession )
 		{
-			m_RxSessions.erase( oRxIter );
+			m_RxSessions.erase( rxIter );
 			delete xferSession;
 			break;
 		}
 		else
 		{
-			++oRxIter;
+			++rxIter;
 		}
 	}
 
@@ -727,7 +716,7 @@ void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseRxSession * poSessionIn
 //============================================================================
 void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseTxSession * poSessionIn, bool pluginIsLocked, bool requeAsset )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -751,7 +740,7 @@ void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseTxSession * poSessionIn
 		xferInfo.m_hFile = NULL;
 	}
 
-	AssetBaseTxIter iter = m_TxSessions.begin();
+	auto iter = m_TxSessions.begin();
 	while( iter != m_TxSessions.end() )
 	{
 		AssetBaseTxSession * xferSession = (*iter);
@@ -779,7 +768,7 @@ void AssetBaseXferMgr::endAssetBaseXferSession( AssetBaseTxSession * poSessionIn
 //============================================================================
 AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxNetIdent * netIdent )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -791,8 +780,7 @@ AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxNet
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	AssetBaseRxIter iter;
-	for( iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
+	for( auto iter = m_RxSessions.begin(); iter != m_RxSessions.end(); ++iter )
 	{
 		AssetBaseRxSession * xferSession = iter->second;
 		if( xferSession->getIdent() == netIdent )
@@ -823,7 +811,7 @@ AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxNet
 //============================================================================
 AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUID& lclSessionId )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -835,7 +823,7 @@ AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	AssetBaseRxIter iter = m_RxSessions.find( lclSessionId );
+	auto iter = m_RxSessions.find( lclSessionId );
 	if( iter != m_RxSessions.end() )
 	{
 		AssetBaseRxSession * rxSession = iter->second;
@@ -864,7 +852,7 @@ AssetBaseRxSession * AssetBaseXferMgr::findRxSession( bool pluginIsLocked, VxGUI
 //============================================================================
 AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -901,7 +889,7 @@ AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 //============================================================================
 AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -943,7 +931,7 @@ AssetBaseRxSession *	AssetBaseXferMgr::findOrCreateRxSession( bool pluginIsLocke
 //============================================================================
 AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxNetIdent * netIdent )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -955,8 +943,7 @@ AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxNet
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	AssetBaseTxIter iter;
-	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+	for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
 		AssetBaseTxSession * txSession = ( *iter );
 		if( txSession->getIdent() == netIdent )
@@ -987,7 +974,7 @@ AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxNet
 //============================================================================
 AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxGUID& lclSessionId )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -999,8 +986,7 @@ AssetBaseTxSession * AssetBaseXferMgr::findTxSession( bool pluginIsLocked, VxGUI
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
 
-	AssetBaseTxIter iter;
-	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+	for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
 		AssetBaseTxSession * txSession = ( *iter );
 		if( txSession->getLclSessionId() == lclSessionId )
@@ -1038,7 +1024,7 @@ AssetBaseTxSession *	AssetBaseXferMgr::createTxSession( VxNetIdent * netIdent, V
 //============================================================================
 AssetBaseTxSession *	AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -1078,9 +1064,9 @@ AssetBaseTxSession *	AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocke
 }
 
 //============================================================================
-AssetBaseTxSession *	 AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
+AssetBaseTxSession* AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -1129,7 +1115,7 @@ AssetBaseTxSession *	 AssetBaseXferMgr::findOrCreateTxSession( bool pluginIsLock
 }
 
 //============================================================================
-void AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
+bool AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
 {
 	bool xferFailed = true;
 	BigListInfo * hisInfo = m_Engine.getBigListMgr().findBigListInfo( assetInfo.getHistoryId() );
@@ -1137,7 +1123,7 @@ void AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
 	{
 		// first try to connect and send.. if that fails then que and will send when next connected
 		VxSktBase * sktBase = 0;
-		m_PluginMgr.pluginApiSktConnectTo( m_Plugin.getPluginType(), hisInfo, 0, &sktBase );
+		m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), hisInfo, 0, &sktBase );
 		if( 0 != sktBase )
 		{
 			EXferError xferError = createAssetTxSessionAndSend( false, assetInfo, hisInfo, sktBase );
@@ -1160,6 +1146,8 @@ void AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
 	{
 		onTxFailed( assetInfo.getAssetUniqueId(), false );
 	}
+
+    return !xferFailed;
 }
 
 //============================================================================
@@ -1206,7 +1194,7 @@ void AssetBaseXferMgr::queAsset( AssetBaseInfo& assetInfo )
 //============================================================================
 EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase )
 {
-	VxMutex& pluginMutex = m_Plugin.getPluginMutex();
+	VxMutex& pluginMutex = m_XferInterface.getAssetXferMutex();
 	if( false == pluginIsLocked )
 	{
 #ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -1271,7 +1259,7 @@ EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, A
 	sendReq.fillPktFromAsset( assetInfo );
 	sendReq.setLclSessionId( xferInfo.getLclSessionId() );
 	sendReq.setRmtSessionId( xferInfo.getRmtSessionId() );
-	if( false == m_PluginMgr.pluginApiTxPacket( m_Plugin.getPluginType(), hisIdent->getMyOnlineId(), sktBase, &sendReq ) )
+	if( false == m_PluginMgr.pluginApiTxPacket( m_XferInterface.getPluginType(), hisIdent->getMyOnlineId(), sktBase, &sendReq ) )
 	{
 		xferErr = eXferErrorDisconnected;
 	}	
@@ -1534,7 +1522,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
 
 	pktReply.setError( xferErr );
 	pktReply.setAssetOffset( xferInfo.m_u64FileOffs );
-	if( false == m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &pktReply ) )
+	if( false == m_XferInterface.txPacket( xferSession->getIdent(), xferSession->getSkt(), &pktReply ) )
 	{
 		xferErr = eXferErrorDisconnected;
 	}
@@ -1576,7 +1564,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
 		oPkt.setLclSessionId( xferSession->getLclSessionId() );
 		oPkt.setRmtSessionId( xferSession->getRmtSessionId() );
 		oPkt.setAssetUniqueId( xferSession->getAssetBaseInfo().getAssetUniqueId() );
-		m_Plugin.txPacket(  xferSession->getIdent(), xferSession->getSkt(), &oPkt );
+		m_XferInterface.txPacket(  xferSession->getIdent(), xferSession->getSkt(), &oPkt );
 
 		LogMsg( LOG_ERROR, "AssetBaseXferMgr:: Done Sending file %s", xferInfo.getLclFileName().c_str() );
 		onAssetBaseSent( xferSession, xferSession->getAssetBaseInfo(), eXferErrorNone, pluginIsLocked );
@@ -1627,7 +1615,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
 
 	if( eXferErrorNone == xferErr )
 	{
-		if( false == m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt ) )
+		if( false == m_XferInterface.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt ) )
 		{
 			xferErr = eXferErrorDisconnected;
 		}
@@ -1692,7 +1680,7 @@ EXferError AssetBaseXferMgr::rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxS
 			oPkt.setLclSessionId( xferInfo.getLclSessionId() );
 			oPkt.setRmtSessionId( xferInfo.getRmtSessionId() );
 
-			if( false == m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt ) )
+			if( false == m_XferInterface.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt ) )
 			{
 				xferErr = eXferErrorDisconnected;
 			}
@@ -1736,7 +1724,7 @@ void AssetBaseXferMgr::finishAssetBaseReceive( AssetBaseRxSession * xferSession,
 	oPkt.setLclSessionId( xferInfo.getLclSessionId() );
 	oPkt.setRmtSessionId( xferInfo.getRmtSessionId() );
 	oPkt.setAssetUniqueId( xferSession->getAssetBaseInfo().getAssetUniqueId() );
-	m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt );
+	m_XferInterface.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPkt );
 	LogMsg( LOG_INFO,  "VxPktHandler: Done Receiving file %s", strAssetBaseName.c_str() );
 
 	xferSession->setErrorCode( poPkt->getError() );
@@ -1841,15 +1829,14 @@ void AssetBaseXferMgr::checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetId
 //============================================================================
 void AssetBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
-	AssetBaseTxIter iter;
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::replaceConnection AutoPluginLock start\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::replaceConnection AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	for( iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
+	for( auto iter = m_TxSessions.begin(); iter != m_TxSessions.end(); ++iter )
 	{
 		AssetBaseTxSession * xferSession = (*iter);
 		if( xferSession->getSkt() == poOldSkt )
@@ -1858,8 +1845,7 @@ void AssetBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poO
 		}
 	}
 
-	AssetBaseRxIter oRxIter;
-	for( oRxIter = m_RxSessions.begin(); oRxIter != m_RxSessions.end(); ++oRxIter )
+	for( auto oRxIter = m_RxSessions.begin(); oRxIter != m_RxSessions.end(); ++oRxIter )
 	{
 		AssetBaseRxSession * xferSession = oRxIter->second;
 		if( xferSession->getSkt() == poOldSkt )

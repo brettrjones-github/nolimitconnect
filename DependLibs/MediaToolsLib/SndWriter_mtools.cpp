@@ -54,7 +54,7 @@ SndWriter::~SndWriter()
 }
 
 //============================================================================
-bool SndWriter::fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000 )
+bool SndWriter::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000 )
 {
 	bool result = false;
 	switch( assetAction )

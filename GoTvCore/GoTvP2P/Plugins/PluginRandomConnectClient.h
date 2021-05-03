@@ -18,7 +18,7 @@
 class PluginRandomConnectClient : public PluginBaseHostClient
 {
 public:
-    PluginRandomConnectClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginRandomConnectClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginRandomConnectClient() override = default;
 
     //=== hosting ===//

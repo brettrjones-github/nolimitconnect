@@ -30,8 +30,8 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseMultimedia( engine, pluginMgr, myIdent )
+PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBaseMultimedia( engine, pluginMgr, myIdent, pluginType )
 , m_HostClientMgr(engine, pluginMgr, myIdent, *this)
 {
 	setPluginType( ePluginTypeClientChatRoom );

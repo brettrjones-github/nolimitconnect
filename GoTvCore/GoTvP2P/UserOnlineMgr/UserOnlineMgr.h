@@ -47,9 +47,13 @@ public:
     User*                       findUser( VxGUID& onlineId );
 
 protected:
+    void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+
     virtual void				announceUserOnlineAdded( User* userJoinInfo, BaseSessionInfo& sessionInfo );
     virtual void				announceUserOnlineUpdated( User* userJoinInfo, BaseSessionInfo& sessionInfo );
     virtual void				announceUserOnlineRemoved( VxGUID& hostOnlineId, EHostType hostType );
+
+    virtual void				announceUserOnlineState( User* userJoinInfo, bool isOnline );
 
     void						lockClientList( void )						{ m_UserOnlineClientMutex.lock(); }
     void						unlockClientList( void )					{ m_UserOnlineClientMutex.unlock(); }

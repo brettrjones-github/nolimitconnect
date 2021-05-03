@@ -485,7 +485,7 @@ bool P2PEngine::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, con
 }
 
 //============================================================================
-bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 )
+bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiAssetAction" );
 	if( eAssetActionAddToAssetMgr == assetAction )
@@ -1473,7 +1473,7 @@ void P2PEngine::fromGuiQuerySessionHistory( VxGUID& historyId )
 }
 
 //============================================================================
-bool P2PEngine::fromGuiSendAsset( AssetInfo& assetInfo )
+bool P2PEngine::fromGuiSendAsset( AssetBaseInfo& assetInfo )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSendAsset" );
 	m_PluginMgr.fromGuiSendAsset( assetInfo );

@@ -21,7 +21,7 @@
 class PluginNetServices : public PluginBaseService
 {
 public:
-	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginNetServices() = default;
     PluginNetServices() = delete; // don't allow default constructor
     PluginNetServices( const PluginNetServices& ) = delete; // don't allow copy constructor

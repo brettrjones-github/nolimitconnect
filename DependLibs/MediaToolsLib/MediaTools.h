@@ -44,7 +44,7 @@ public:
 	bool						fromGuiIsMyP2PWebAudioFile( const char * fileName );	
 	bool						fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName );
 	bool						fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName );
-	bool						fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000 );
+	bool						fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000 );
 
 protected:
 

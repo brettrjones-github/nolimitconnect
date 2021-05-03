@@ -22,7 +22,7 @@
 class PluginServiceWebCam : public PluginBase
 {
 public:
-	PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginServiceWebCam();
 
 

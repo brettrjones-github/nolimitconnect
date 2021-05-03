@@ -33,8 +33,8 @@ PluginSessionBase::PluginSessionBase()
 }
 
 //============================================================================
-PluginSessionBase::PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent )
-: m_ePluginType( ePluginTypeInvalid )
+PluginSessionBase::PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: m_ePluginType( pluginType )
 , m_Ident( netIdent )
 , m_Skt( sktBase )
 , m_bSessionStarted( false )
@@ -50,8 +50,8 @@ PluginSessionBase::PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent
 }
 
 //============================================================================
-PluginSessionBase::PluginSessionBase( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
-: m_ePluginType( ePluginTypeInvalid )
+PluginSessionBase::PluginSessionBase( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: m_ePluginType( pluginType )
 , m_Ident( netIdent )
 , m_Skt( sktBase )
 , m_bSessionStarted( false )

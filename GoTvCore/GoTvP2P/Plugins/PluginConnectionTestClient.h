@@ -20,7 +20,7 @@
 class PluginConnectionTestClient : public PluginBaseHostClient
 {
 public:
-    PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginConnectionTestClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginConnectionTestClient() override = default;
     PluginConnectionTestClient() = delete; // don't allow default constructor
     PluginConnectionTestClient( const PluginConnectionTestClient& ) = delete; // don't allow copy constructor

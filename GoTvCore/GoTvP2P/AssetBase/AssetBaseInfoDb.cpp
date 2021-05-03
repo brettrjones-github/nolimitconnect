@@ -115,7 +115,7 @@ void AssetBaseInfoDb::removeAsset( AssetBaseInfo * assetInfo )
 }
 
 //============================================================================
-void AssetBaseInfoDb::addAsset( VxGUID&			assetId,
+bool AssetBaseInfoDb::addAsset( VxGUID&			assetId,
                                 VxGUID&			creatorId,
                                 VxGUID&			historyId,
                                 VxGUID&			thumbId,
@@ -157,11 +157,13 @@ void AssetBaseInfoDb::addAsset( VxGUID&			assetId,
 
     RCODE rc = sqlExec( "INSERT INTO tblAssets (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         bindList );
-    vx_assert( 0 == rc );
     if( rc )
     {
-        LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d\n", rc );
+        LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d", rc );
     }
+
+    vx_assert( 0 == rc );
+    return 0 == rc;
 }
 
 //============================================================================
@@ -180,25 +182,25 @@ void AssetBaseInfoDb::updateAssetSendState( VxGUID& assetId, EAssetSendState sen
 }
 
 //============================================================================
-void AssetBaseInfoDb::addAsset( AssetBaseInfo* assetInfo )
+bool AssetBaseInfoDb::addAsset( AssetBaseInfo* assetInfo )
 {
-	addAsset(	assetInfo->getAssetUniqueId(),
-				assetInfo->getCreatorId(),
-				assetInfo->getHistoryId(),
-                assetInfo->getThumbId(),
-				assetInfo->getAssetName().c_str(),
-				assetInfo->getAssetLength(),
-				(uint32_t)assetInfo->getAssetType(),				
-				assetInfo->getAssetHashId(),
-				assetInfo->getLocationFlags(),
-                (uint32_t)assetInfo->getAttributeFlags(),
-                assetInfo->isTemporary(),
-                assetInfo->getCreationTime(),
-                assetInfo->getModifiedTime(),
-                assetInfo->getAccessedTime(),
-				assetInfo->getAssetTag().length() ? assetInfo->getAssetTag().c_str() : "",
-				assetInfo->getAssetSendState()
-                );
+	return addAsset(	assetInfo->getAssetUniqueId(),
+				        assetInfo->getCreatorId(),
+				        assetInfo->getHistoryId(),
+                        assetInfo->getThumbId(),
+				        assetInfo->getAssetName().c_str(),
+				        assetInfo->getAssetLength(),
+				        (uint32_t)assetInfo->getAssetType(),				
+				        assetInfo->getAssetHashId(),
+				        assetInfo->getLocationFlags(),
+                        (uint32_t)assetInfo->getAttributeFlags(),
+                        assetInfo->isTemporary(),
+                        assetInfo->getCreationTime(),
+                        assetInfo->getModifiedTime(),
+                        assetInfo->getAccessedTime(),
+				        assetInfo->getAssetTag().length() ? assetInfo->getAssetTag().c_str() : "",
+				        assetInfo->getAssetSendState()
+                        );
 }
 
 //============================================================================

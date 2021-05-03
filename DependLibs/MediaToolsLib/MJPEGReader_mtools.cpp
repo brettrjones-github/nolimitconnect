@@ -153,7 +153,7 @@ bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 }
 
 //============================================================================
-bool MJPEGReader::fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000  )
+bool MJPEGReader::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000  )
 {
 	bool result = false;
 	switch( assetAction )

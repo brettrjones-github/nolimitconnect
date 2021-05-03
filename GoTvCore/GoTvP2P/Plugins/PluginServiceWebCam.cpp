@@ -36,8 +36,8 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginServiceWebCam::PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+PluginServiceWebCam::PluginServiceWebCam( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+: PluginBase( engine, pluginMgr, myIdent, pluginType )
 , m_PluginSessionMgr( engine, *this, pluginMgr )
 , m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
 , m_VideoFeedMgr( engine, *this, m_PluginSessionMgr )
@@ -61,14 +61,14 @@ void PluginServiceWebCam::setIsPluginInSession( bool isInSession )
 // override this by plugin to create inherited RxSession
 RxSession * PluginServiceWebCam::createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	return new RxSession( sktBase, netIdent );
+	return new RxSession( sktBase, netIdent, getPluginType() );
 }
 
 //============================================================================
 // override this by plugin to create inherited TxSession
 TxSession * PluginServiceWebCam::createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	return new TxSession( sktBase, netIdent );
+	return new TxSession( sktBase, netIdent, getPluginType() );
 }
 
 //============================================================================

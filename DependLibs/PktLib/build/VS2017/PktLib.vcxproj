@@ -188,6 +188,7 @@
     <ClInclude Include="..\..\PktPluginHandlerBase.h" />
     <ClInclude Include="..\..\PktRequestErrors.h" />
     <ClInclude Include="..\..\PktsAssetXfer.h" />
+    <ClInclude Include="..\..\PktsBaseXfer.h" />
     <ClInclude Include="..\..\PktsBlobXfer.h" />
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="..\..\PktLogReq.cpp" />
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp" />
     <ClCompile Include="..\..\PktsAssetXfer.cpp" />
+    <ClCompile Include="..\..\PktsBaseXfer.cpp" />
     <ClCompile Include="..\..\PktsBlobXfer.cpp" />
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />

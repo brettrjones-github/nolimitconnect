@@ -28,7 +28,7 @@ class PluginBaseHostClient : public PluginBase, public IConnectRequestCallback
 {
 public:
 
-    PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseHostClient() override = default;
 
     //=== hosting ===//

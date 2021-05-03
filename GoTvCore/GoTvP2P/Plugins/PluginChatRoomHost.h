@@ -23,7 +23,7 @@
 class PluginChatRoomHost : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
-    PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginChatRoomHost() override = default;
 
     virtual void				pluginStartup( void ) override;

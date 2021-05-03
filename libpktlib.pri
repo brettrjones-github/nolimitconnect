@@ -6,7 +6,6 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.h \
-	$$PWD/DependLibs/PktLib/PktsBlobXfer.h \
     $$PWD/DependLibs/PktLib/PktChatReq.h \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.h \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.h \
@@ -21,11 +20,12 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktRequestErrors.h \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.h \
     $$PWD/DependLibs/PktLib/PktTcpPunch.h \
-    $$PWD/DependLibs/PktLib/PktsThumbXfer.h \
     $$PWD/DependLibs/PktLib/PktTypes.h \
     $$PWD/DependLibs/PktLib/PktVoiceReply.h \
     $$PWD/DependLibs/PktLib/PktVoiceReq.h \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.h \
+	$$PWD/DependLibs/PktLib/PktsBaseXfer.h \
+	$$PWD/DependLibs/PktLib/PktsBlobXfer.h \
     $$PWD/DependLibs/PktLib/PktsFileList.h \
     $$PWD/DependLibs/PktLib/PktsFileShare.h \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.h \
@@ -40,6 +40,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
 	$$PWD/DependLibs/PktLib/PktsSearch.h \
     $$PWD/DependLibs/PktLib/PktsSession.h \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.h \
+	$$PWD/DependLibs/PktLib/PktsThumbXfer.h \
     $$PWD/DependLibs/PktLib/PktsTodGame.h \
     $$PWD/DependLibs/PktLib/PktsVideoFeed.h \
     $$PWD/DependLibs/PktLib/PktsWebServer.h \
@@ -61,7 +62,6 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktAnnounce.cpp \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.cpp \
-	$$PWD/DependLibs/PktLib/PktsBlobXfer.cpp \
     $$PWD/DependLibs/PktLib/PktChatReq.cpp \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.cpp \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.cpp \
@@ -75,6 +75,8 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktVoiceReply.cpp \
     $$PWD/DependLibs/PktLib/PktVoiceReq.cpp \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.cpp \
+	$$PWD/DependLibs/PktLib/PktsBasefer.cpp \
+	$$PWD/DependLibs/PktLib/PktsBlobXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsFileList.cpp \
     $$PWD/DependLibs/PktLib/PktsFileShare.cpp \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.cpp \

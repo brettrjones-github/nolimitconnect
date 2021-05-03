@@ -42,8 +42,8 @@ class PluginSessionBase
 {
 public:
 	PluginSessionBase();
-	PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent );
-	PluginSessionBase( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
+	PluginSessionBase( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+	PluginSessionBase( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 	virtual ~PluginSessionBase();
 
 	virtual void				setPluginType( EPluginType ePluginType );

@@ -15,8 +15,8 @@
 #include "RelayServerSession.h"
 
 //============================================================================
-RelayServerSession::RelayServerSession( VxSktBase * sktBase, VxNetIdent * netIdent )
-: RelaySession( sktBase, netIdent )
+RelayServerSession::RelayServerSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: RelaySession( sktBase, netIdent, pluginType )
 {
 	setIsRmtInitiated( false );
 	setOfferResponse( eOfferResponseAccept );
@@ -24,8 +24,8 @@ RelayServerSession::RelayServerSession( VxSktBase * sktBase, VxNetIdent * netIde
 }
 
 //============================================================================
-RelayServerSession::RelayServerSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
-: RelaySession( lclSessionId, sktBase, netIdent )
+RelayServerSession::RelayServerSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+: RelaySession( lclSessionId, sktBase, netIdent, pluginType )
 {
 	setIsRmtInitiated( false );
 	setOfferResponse( eOfferResponseAccept );

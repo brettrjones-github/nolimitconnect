@@ -17,12 +17,15 @@
 #include <GoTvCore/GoTvP2P/AssetBase/AssetBaseInfoDb.h>
 
 class ThumbMgr;
+class ThumbInfo;
 
 class ThumbInfoDb : public AssetBaseInfoDb
 {
 public:
 	ThumbInfoDb( AssetBaseMgr& mgr, const char * dbname );
 	virtual ~ThumbInfoDb();
+
+    bool                        saveToDatabase( ThumbInfo& thumbInfo );
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;

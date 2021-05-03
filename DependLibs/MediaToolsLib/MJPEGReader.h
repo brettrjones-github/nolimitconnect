@@ -77,7 +77,7 @@ public:
 	bool						getIsPlayingPaused( void )					{ return m_IsPlayingPaused; }
 
 	bool						fromGuiIsMyP2PWebVideoFile( const char * fileName );	
-	bool						fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000  );
+	bool						fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000  );
 
 	bool						startVideoRead( const char * fileName, VxGUID& assetId, int pos0to100000 );
 	void						stopVideoRead( void );

@@ -21,13 +21,15 @@
 
 class VxNetIdent;
 class VxSktBase;
+class P2PEngine;
 
 class User
 {
 public:
-    User() = default;
-    User( VxNetIdent * netIdent );
-    User( VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    User();
+    User( P2PEngine& engine );
+    User( P2PEngine& engine, VxNetIdent * netIdent );
+    User( P2PEngine& engine,  VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
     User(const User& rhs );
 	virtual ~User() = default;
 
@@ -41,16 +43,15 @@ public:
     VxNetIdent *                getNetIdent( void )                     { return m_NetIdent; }
     VxGUID&                     getMyOnlineId( void )                   { return m_MyOnlineId; }
 
-    void                        setIsOnline( bool isOnline )            { m_IsOnline = isOnline; }
-    bool                        isOnline( void )                        { return m_IsOnline; }
+    bool                        isOnline( void )                        { return 0 != m_SessionList.size(); }
 
     bool                        addSession( BaseSessionInfo& sessionInfo );
 
 protected:
+    P2PEngine&                  m_Engine;
     VxMutex                     m_UserMutex;
 
     VxNetIdent *                m_NetIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
-    bool                        m_IsOnline{ false };
     std::vector<BaseSessionInfo> m_SessionList;
 };

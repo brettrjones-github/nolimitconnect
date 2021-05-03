@@ -21,8 +21,8 @@
 #include <PktLib/PktsHostSearch.h>
 
 //============================================================================
-PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-    : PluginNetServices( engine, pluginMgr, myIdent )
+PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+    : PluginNetServices( engine, pluginMgr, myIdent, pluginType )
     , m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
 }
@@ -92,6 +92,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
     if( joinReq->isValidPkt() )
     {
         joinReply.setHostType( joinReq->getHostType() );
+        joinReply.setPluginType( getPluginType() );
         joinReply.setSessionId( joinReq->getSessionId() );
         joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
         if( ePluginAccessOk == joinReply.getAccessState() )

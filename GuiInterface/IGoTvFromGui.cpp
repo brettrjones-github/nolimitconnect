@@ -714,7 +714,7 @@ int IGoTv::fromGuiDeleteFile( const char * fileName, bool shredFile )
 }
 
 //============================================================================
-bool IGoTv::fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 )
+bool IGoTv::fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 )
 {
     return getPtoP().fromGuiAssetAction( assetAction, assetInfo, pos0to100000 );
 }
@@ -726,7 +726,7 @@ bool IGoTv::fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int p
 }
 
 //============================================================================
-bool IGoTv::fromGuiSendAsset( AssetInfo& assetInfo )
+bool IGoTv::fromGuiSendAsset( AssetBaseInfo& assetInfo ) 
 {
     return getPtoP().fromGuiSendAsset( assetInfo );
 }
