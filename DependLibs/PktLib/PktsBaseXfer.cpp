@@ -28,17 +28,6 @@
 //  PktBaseSendReq
 //============================================================================
  PktBaseSendReq::PktBaseSendReq()
-: m_AssetType( (uint16_t)eAssetTypeUnknown ) 
-, m_u32Error(0)
-, m_s64AssetLen(0)
-, m_s64AssetOffs(0) 
-, m_CreationTime(0)
-, m_AssetNameLen(0)
-, m_AssetTagLen(0)
-, m_u32Res1(0)
-, m_u32Res2(0)
-, m_u32Res3(0)
-, m_u32Res4(0)
 { 
 	m_AssetNameAndTag[0] = 0;
 }
@@ -137,23 +126,12 @@ void  PktBaseSendReq::setAssetNameAndTag( const char * pAssetName, const char * 
 }
 
 //============================================================================
- PktBaseSendReply:: PktBaseSendReply()
-: m_u8RequiresFileXfer( 0 )
-, m_u8Res( 0 )
-, m_u16Res( 0 )
-, m_s64AssetOffs( 0 )
-, m_u32Error(0) 
-, m_u32Res1( 0 )
-, m_u32Res2(0)
+ PktBaseSendReply::PktBaseSendReply()
 { 
 }
 
 //============================================================================
- PktBaseChunkReq:: PktBaseChunkReq()
-: m_u16Res(0)
-, m_u16AssetChunkLen(0)
-, m_u32Error(0)
-, m_u32Res1(0) 
+ PktBaseChunkReq::PktBaseChunkReq()
 {
 }
 
@@ -177,36 +155,32 @@ uint16_t  PktBaseChunkReq::getChunkLen( void )
 }
 
 //============================================================================
- PktBaseChunkReply:: PktBaseChunkReply()
-: m_u16Res(0)
-, m_u16AssetChunkLen(0)
-, m_u32Error(0) 
+ PktBaseChunkReply::PktBaseChunkReply()
 {
 }
 
 //============================================================================
- PktBaseSendCompleteReq:: PktBaseSendCompleteReq()
-: m_u32Error( 0 )
-, m_u32Res1( 0 )
+ PktBaseSendCompleteReq::PktBaseSendCompleteReq()
 {
 }
 
 //============================================================================
- PktBaseSendCompleteReply:: PktBaseSendCompleteReply()
-: m_u32Error( 0 )
-, m_u32Res1( 0 )
+ PktBaseSendCompleteReply::PktBaseSendCompleteReply()
 {
 }
+
+ //============================================================================
+ PktBaseGetCompleteReq::PktBaseGetCompleteReq()
+ {
+ }
+
+ //============================================================================
+ PktBaseGetCompleteReply::PktBaseGetCompleteReply()
+ {
+ }
 
 //============================================================================
  PktBaseXferErr:: PktBaseXferErr()
-: m_u16Err(0xffff) 
-, m_u16Res1(0)
-, m_u32ResP1(0)
-, m_u32ResP2(0)
-, m_u32ResP3(0)
-, m_u32Res1(0) 
-, m_u32Res2(0)
 {
 }
 

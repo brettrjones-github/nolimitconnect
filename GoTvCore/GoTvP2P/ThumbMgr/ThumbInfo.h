@@ -22,6 +22,8 @@ public:
 	ThumbInfo();
 	ThumbInfo( const ThumbInfo& rhs );
     ThumbInfo( const AssetBaseInfo& rhs );
+    ThumbInfo( VxGUID& onlineId, int64_t modifiedTime = 0 );
+    ThumbInfo( VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
 	ThumbInfo( const std::string& fileName );
     ThumbInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
 

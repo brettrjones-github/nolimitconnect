@@ -540,10 +540,14 @@ public:
     virtual void				onPktFileGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktFileShareErr			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
+    virtual void				onPktAssetGetReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetChunkReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetGetCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAssetXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
@@ -627,10 +631,14 @@ public:
     virtual void				onPktFriendOfferReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktFriendOfferReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
+    virtual void				onPktThumbGetReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbGetCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktThumbGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;

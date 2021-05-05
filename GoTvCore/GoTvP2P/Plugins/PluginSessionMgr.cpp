@@ -360,10 +360,10 @@ bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent
 //! user wants to send offer to friend.. return false if cannot connect
 bool PluginSessionMgr::fromGuiMakePluginOffer(	bool			pluginIsLocked,
 												VxNetIdent *	netIdent,			 
-												int			pvUserData,
+												int			    pvUserData,
 												const char *	pOfferMsg,	 
 												const char *	pFileName,
-												uint8_t *			fileHashId,
+												uint8_t *		fileHashId,
 												VxGUID			lclSessionId )	 
 {
 	bool bOfferSent = false;
@@ -499,13 +499,13 @@ void PluginSessionMgr::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktH
 		}
 
 		IToGui::getToGui().toGuiRxedPluginOffer(	netIdent,				
-										m_Plugin.getPluginType(),	
-										poOffer->m_strOfferMsg.c_str(),	
-										0,				// plugin defined data
-										poOffer->getOfferFile().c_str(), // filename if any
-										0,
-										poOffer->getLclSessionId(),
-										poOffer->getRmtSessionId() );	
+										            m_Plugin.getPluginType(),	
+										            poOffer->m_strOfferMsg.c_str(),	
+										            0,				// plugin defined data
+										            poOffer->getOfferFile().c_str(), // filename if any
+										            0,
+										            poOffer->getLclSessionId(),
+										            poOffer->getRmtSessionId() );	
 	}
 	else
 	{
@@ -541,13 +541,13 @@ void PluginSessionMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pk
 		poOffer->setRmtSessionId( poPkt->getLclSessionId());
 		poOffer->setOfferResponse( poPkt->getOfferResponse() );
 		IToGui::getToGui().toGuiRxedOfferReply(	poOffer->getIdent(),		
-										m_Plugin.getPluginType(),			
-										0,				// plugin defined data
-										poOffer->getOfferResponse(),
-										poOffer->m_strOfferFile.c_str(),
-										0,
-										poOffer->getLclSessionId(),
-										poOffer->getRmtSessionId() );
+										        m_Plugin.getPluginType(),			
+										        0,				// plugin defined data
+										        poOffer->getOfferResponse(),
+										        poOffer->m_strOfferFile.c_str(),
+										        0,
+										        poOffer->getLclSessionId(),
+										        poOffer->getRmtSessionId() );
 		if( eOfferResponseAccept == poOffer->getOfferResponse() )
 		{
 			m_Plugin.onSessionStart( poOffer, true );
@@ -562,13 +562,13 @@ void PluginSessionMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pk
 		// session not started but still need to notify offer list so accept can be disabled
 		VxGUID nullGuid;
 		IToGui::getToGui().toGuiRxedOfferReply(	netIdent,		
-										m_Plugin.getPluginType(),			
-										0,				// plugin defined data
-										poPkt->getOfferResponse(),
-										0,
-										0,
-										nullGuid,
-										poPkt->getLclSessionId() );
+										        m_Plugin.getPluginType(),			
+										        0,				// plugin defined data
+										        poPkt->getOfferResponse(),
+										        0,
+										        0,
+										        nullGuid,
+										        poPkt->getLclSessionId() );
 	}
 }
 

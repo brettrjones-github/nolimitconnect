@@ -90,9 +90,9 @@ bool PluginBaseMultimedia::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 
 //============================================================================
 bool PluginBaseMultimedia::fromGuiOfferReply(	VxNetIdent *	netIdent,
-											int				pvUserData,				
-											EOfferResponse	eOfferResponse,
-											VxGUID			lclSessionId )
+											    int				pvUserData,				
+											    EOfferResponse	eOfferResponse,
+											    VxGUID			lclSessionId )
 {
 	//LogMsg( LOG_INFO, "PluginBaseMultimedia::fromGuiOfferReply start\n" );
 	bool result = m_PluginSessionMgr.fromGuiOfferReply( false,	netIdent, pvUserData, eOfferResponse, lclSessionId );

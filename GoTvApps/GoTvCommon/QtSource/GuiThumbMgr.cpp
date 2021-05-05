@@ -17,6 +17,7 @@
 #include "AppCommon.h"
 
 #include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
+#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
 
 //============================================================================
 GuiThumbMgr::GuiThumbMgr( AppCommon& app )
@@ -161,11 +162,18 @@ void GuiThumbMgr::onThumbRemoved( VxGUID& onlineId )
 //============================================================================
 bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EHostType hostType, QImage& retAvatarImage, bool requestFromUserIfValid )
 {
+    return requestAvatarImage( user, HostTypeToClientPlugin( hostType ), retAvatarImage, requestFromUserIfValid );
+}
+
+//============================================================================
+bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QImage& retAvatarImage, bool requestFromUserIfValid )
+{
     bool foundThumb = false;
     if( user && user->getNetIdent() )
     {
         VxNetIdent* netIdent = user->getNetIdent();
-        VxGUID thumbId = netIdent->getThumbId( hostType ).isVxGUIDValid() ? netIdent->getThumbId( hostType ) : netIdent->getAvatarGuid();
+        bool hostImageValid = netIdent->getThumbId( pluginType ).isVxGUIDValid();
+        VxGUID thumbId = hostImageValid ? netIdent->getThumbId( pluginType ) : netIdent->getAvatarGuid();
         if( thumbId.isVxGUIDValid() )
         {
             GuiThumb* thumb = m_ThumbList.findThumb( thumbId );
@@ -175,7 +183,7 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EHostType hostType, QImage&
             }
             else if( requestFromUserIfValid )
             {
-                // TODO
+                m_MyApp.getEngine().getThumbMgr().requestPluginThumb( user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeClientPeerUser, thumbId );
             }
         }
     }

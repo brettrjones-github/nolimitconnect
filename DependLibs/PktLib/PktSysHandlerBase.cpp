@@ -71,10 +71,14 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_INFO_REQ ]					= &PktHandlerBase::onPktFileInfoReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_SHARE_ERR ]					= &PktHandlerBase::onPktFileShareErr;
 
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_REQ ]					= &PktHandlerBase::onPktAssetGetReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_REPLY ]					= &PktHandlerBase::onPktAssetGetReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_REQ ]					= &PktHandlerBase::onPktAssetSendReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_REPLY ]					= &PktHandlerBase::onPktAssetSendReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_CHUNK_REQ ]					= &PktHandlerBase::onPktAssetChunkReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_CHUNK_REPLY ]				= &PktHandlerBase::onPktAssetChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_COMPLETE_REQ ]			= &PktHandlerBase::onPktAssetGetCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_COMPLETE_REPLY ]			= &PktHandlerBase::onPktAssetGetCompleteReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_COMPLETE_REQ ]			= &PktHandlerBase::onPktAssetSendCompleteReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_COMPLETE_REPLY ]		= &PktHandlerBase::onPktAssetSendCompleteReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_XFER_ERR ]					= &PktHandlerBase::onPktAssetXferErr;
@@ -155,10 +159,14 @@ PktHandlerBase::PktHandlerBase()
     m_aBaseSysPktFuncTable[ PKT_TYPE_FRIEND_OFFER_REQ ]                 = &PktHandlerBase::onPktFriendOfferReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_FRIEND_OFFER_REPLY ]               = &PktHandlerBase::onPktFriendOfferReply;
 
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_REQ ]					= &PktHandlerBase::onPktThumbGetReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_REPLY ]					= &PktHandlerBase::onPktThumbGetReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_REQ ]                   = &PktHandlerBase::onPktThumbSendReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_REPLY ]                 = &PktHandlerBase::onPktThumbSendReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_CHUNK_REQ ]                  = &PktHandlerBase::onPktThumbChunkReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_CHUNK_REPLY ]                = &PktHandlerBase::onPktThumbChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_COMPLETE_REQ ]			= &PktHandlerBase::onPktThumbGetCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_COMPLETE_REPLY ]			= &PktHandlerBase::onPktThumbGetCompleteReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_COMPLETE_REQ ]          = &PktHandlerBase::onPktThumbSendCompleteReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_COMPLETE_REPLY ]        = &PktHandlerBase::onPktThumbSendCompleteReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_XFER_ERR ]                   = &PktHandlerBase::onPktThumbXferErr;
@@ -357,6 +365,18 @@ void PktHandlerBase::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
+void PktHandlerBase::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
 void PktHandlerBase::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
@@ -378,6 +398,18 @@ void PktHandlerBase::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr 
 void PktHandlerBase::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================
@@ -819,6 +851,18 @@ void PktHandlerBase::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
+void PktHandlerBase::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
 void PktHandlerBase::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
@@ -838,6 +882,18 @@ void PktHandlerBase::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr 
 
 //============================================================================
 void PktHandlerBase::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }

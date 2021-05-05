@@ -188,6 +188,10 @@ public:
     VxGUID&                     getThumbId( EHostType hostType );
     int64_t                     getThumbModifiedTime( EHostType hostType );
 
+    bool                        hasThumbId( EPluginType pluginType );
+    VxGUID&                     getThumbId( EPluginType pluginType );
+    int64_t                     getThumbModifiedTime( EPluginType pluginType );
+
     void                        setAvatarGuid( VxGUID& guid, int64_t timeModified )     { m_AvatarGuid = guid; m_AvatarModifiedTime = timeModified; }
     VxGUID&                     getAvatarGuid( void )                                   { return m_AvatarGuid; }
     int64_t                     getAvatarModifiedTime( void )                           { return m_AvatarModifiedTime; }

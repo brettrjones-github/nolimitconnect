@@ -19,6 +19,18 @@
 #pragma pack(push) 
 #pragma pack(1)
 
+class PktThumbGetReq : public PktBaseGetReq
+{
+public:
+    PktThumbGetReq();
+};
+
+class PktThumbGetReply : public PktBaseGetReply
+{
+public:
+    PktThumbGetReply();
+};
+
 class  PktThumbSendReq : public PktBaseSendReq
 {
 public:
@@ -44,6 +56,21 @@ class  PktThumbChunkReply : public PktBaseChunkReply
 {
 public:
      PktThumbChunkReply();
+};
+
+//============================================================================
+// PktAssetGetComplete
+//============================================================================
+class PktThumbGetCompleteReq : public PktBaseGetCompleteReq
+{
+public:
+    PktThumbGetCompleteReq();
+};
+
+class PktThumbGetCompleteReply : public PktBaseGetCompleteReply
+{
+public:
+    PktThumbGetCompleteReply();
 };
 
 //============================================================================

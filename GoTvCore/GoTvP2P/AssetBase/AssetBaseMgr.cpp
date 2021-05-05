@@ -208,6 +208,31 @@ void AssetBaseMgr::generateHashIds( VxThread * genHashThread )
 }
 
 //============================================================================
+bool AssetBaseMgr::doesAssetExist( AssetBaseInfo& assetInfo ) // check if file still exists in directory or database
+{
+    if( assetInfo.isDeleted() )
+    {
+        return false;
+    }
+
+    if( assetInfo.hasFileName() )
+    {
+        if( !( assetInfo.getAssetLength() == VxFileUtil::getFileLen( assetInfo.getAssetName().c_str() ) ) )
+        {
+            LogMsg( LOG_WARN, "File %s no longer exists for asset %s", assetInfo.getAssetName().c_str(), assetInfo.getAssetUniqueId().toOnlineIdString().c_str() );
+            assetInfo.setIsDeleted( true );
+            updateDatabase( &assetInfo );
+            return false;
+        }
+
+        return true;
+    }
+
+    // TODO verify exists in database
+    return true;
+}
+
+//============================================================================
 AssetBaseInfo * AssetBaseMgr::findAsset( std::string& fileName )
 {
 	std::vector<AssetBaseInfo*>::iterator iter;

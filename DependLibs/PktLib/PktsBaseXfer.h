@@ -54,10 +54,91 @@ enum EAssetXferOption
 
 class AssetBaseInfo;
 
+
+class PktBaseGetReq : public VxPktHdr
+{
+public:
+    PktBaseGetReq() {};
+
+    void						setAssetType( uint16_t AssetType )				    { m_AssetType = htons( AssetType ); }
+    uint16_t					getAssetType( void )							    { return ntohs( m_AssetType ); }
+    void						setUniqueId( VxGUID& uniqueId )					    { m_UniqueId = uniqueId; }
+    VxGUID&						getUniqueId( void )								    { return m_UniqueId; }
+
+    void						setFileHashId( VxSha1Hash& fileHashId )			    { m_FileHashId = fileHashId; }
+    VxSha1Hash&					getFileHashId( void )							    { return m_FileHashId; }
+
+    void						setLclSessionId( VxGUID& lclId )			        { m_LclSessionId = lclId; }
+    VxGUID&						getLclSessionId( void )						        { return m_LclSessionId; }
+    void						setRmtSessionId( VxGUID& rmtId )			        { m_RmtSessionId = rmtId; }
+    VxGUID&						getRmtSessionId( void )						        { return m_RmtSessionId; }
+
+    void						setStartOffset( int64_t offset )				    { m_s64StartOffs = htonU64( offset ); }
+    int64_t						getStartOffset( void )							    { return ntohU64( m_s64StartOffs ); }
+    void						setEndOffset( int64_t offset )					    { m_s64EndOffs = htonU64( offset ); }
+    int64_t						getEndOffset( void )							    { return ntohU64( m_s64EndOffs ); }
+
+private:
+    uint16_t					m_AssetType{ 0 };
+    VxGUID						m_UniqueId;
+    VxGUID						m_LclSessionId;
+    VxGUID						m_RmtSessionId;
+    VxSha1Hash					m_FileHashId;
+    int64_t						m_s64StartOffs{ 0 };
+    int64_t						m_s64EndOffs{ 0 };	//if 0 then get all
+    uint32_t					m_u32Res1{ 0 };
+    uint32_t					m_u32Res2{ 0 };
+};
+
+class PktBaseGetReply : public VxPktHdr
+{
+public:
+    PktBaseGetReply() {};
+
+    void						setAssetType( uint16_t AssetType )				    { m_AssetType = htons( AssetType ); }
+    uint16_t					getAssetType( void )							    { return ntohs( m_AssetType ); }
+    void						setUniqueId( VxGUID& uniqueId )					    { m_UniqueId = uniqueId; }
+    VxGUID&						getUniqueId( void )								    { return m_UniqueId; }
+
+    void						setFileHashId( VxSha1Hash& fileHashId )			    { m_FileHashId = fileHashId; }
+    VxSha1Hash&					getFileHashId( void )							    { return m_FileHashId; }
+
+    void						setLclSessionId( VxGUID& lclId )			        { m_LclSessionId = lclId; }
+    VxGUID&						getLclSessionId( void )						        { return m_LclSessionId; }
+    void						setRmtSessionId( VxGUID& rmtId )			        { m_RmtSessionId = rmtId; }
+    VxGUID&						getRmtSessionId( void )						        { return m_RmtSessionId; }
+
+    void						setStartOffset( int64_t offset )					{ m_s64StartOffs = htonU64( offset ); }
+    int64_t						getStartOffset( void )							    { return ntohU64( m_s64StartOffs ); }
+    void						setEndOffset( int64_t offset )						{ m_s64EndOffs = htonU64( offset ); }
+    int64_t						getEndOffset( void )							    { return ntohU64( m_s64EndOffs ); }
+
+    void						setError( uint32_t error )							{ m_u32Error = htonl( error ); }
+    uint32_t					getError( void )							        { return ntohl( m_u32Error ); }
+
+private:
+    uint16_t					m_AssetType{ 0 };
+    VxGUID						m_UniqueId;
+    VxGUID						m_LclSessionId;
+    VxGUID						m_RmtSessionId;
+    VxSha1Hash					m_FileHashId;
+    int64_t						m_s64StartOffs{ 0 };
+    int64_t						m_s64EndOffs{ 0 };	//if 0 then get all
+    uint32_t					m_u32Error{ 0 };
+    uint32_t					m_u32Res2{ 0 };
+};
+
+
 class PktBaseSendReq : public VxPktHdr
 {
 public:
 	PktBaseSendReq();
+
+    void						setAssetType( uint16_t AssetType )				{ m_AssetType = htons( AssetType ); }
+    uint16_t					getAssetType( void )							{ return ntohs( m_AssetType ); }
+    void						setUniqueId( VxGUID& uniqueId )					{ m_UniqueId = uniqueId; }
+    VxGUID&						getUniqueId( void )								{ return m_UniqueId; }
+
 	void						setAssetNameAndTag( const char * pAssetName, const char * assetTag = 0 );
 	void						setAssetNameLen( uint16_t nameLen )				{ m_AssetNameLen = htons( nameLen ); }
 	uint16_t					getAssetNameLen( void )							{ return ntohs( m_AssetNameLen ); }
@@ -74,8 +155,6 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
-	void						setUniqueId( VxGUID& uniqueId )					{ m_UniqueId = uniqueId; }
-	VxGUID&						getUniqueId( void )								{ return m_UniqueId; }
 	void						setCreatorId( VxGUID& creatorId )				{ m_CreatorId = creatorId; }
 	VxGUID&						getCreatorId( void )							{ return m_CreatorId; }
 	void						setHistoryId( VxGUID& historyId )				{ m_HistoryId = historyId; }
@@ -89,9 +168,6 @@ public:
 	void						setAssetLen( int64_t len )						{ m_s64AssetLen = htonU64( len ); }
 	int64_t						getAssetLen( void )								{ return ntohU64( m_s64AssetLen ); }
 
-	void						setAssetType( uint16_t AssetType )				{ m_AssetType = htons( AssetType ); }
-	uint16_t					getAssetType( void )							{ return ntohs( m_AssetType ); }
-
 	void						setError( uint32_t error )						{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
@@ -99,24 +175,24 @@ public:
 	void						fillAssetFromPkt( AssetBaseInfo& assetInfo );
 
 private:
-	uint16_t					m_AssetType;
+	uint16_t					m_AssetType{ 0 };
 	VxGUID						m_UniqueId;
 	VxGUID						m_CreatorId;
 	VxGUID						m_HistoryId; 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_AssetHashId;
-	uint32_t					m_u32Error; 
-	int64_t						m_s64AssetLen;
-	int64_t						m_s64AssetOffs;
-	uint32_t					m_CreationTime;
-	uint16_t					m_AssetNameLen;
-	uint16_t					m_AssetTagLen;
+	uint32_t					m_u32Error{ 0 };
+	int64_t						m_s64AssetLen{ 0 };
+	int64_t						m_s64AssetOffs{ 0 };
+	uint32_t					m_CreationTime{ 0 };
+	uint16_t					m_AssetNameLen{ 0 };
+	uint16_t					m_AssetTagLen{ 0 };
 
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2; 
-	uint32_t					m_u32Res3; 
-	uint32_t					m_u32Res4; 
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
+	uint32_t					m_u32Res3{ 0 }; 
+	uint32_t					m_u32Res4{ 0 };
 	char						m_AssetNameAndTag[ PKT_TYPE_ASSET_MAX_NAME_AND_TAG_LEN ];
 };
 
@@ -143,16 +219,16 @@ public:
 	bool						getRequiresFileXfer( void )						{ return m_u8RequiresFileXfer ? true : false; }
 
 private:
-	uint8_t						m_u8RequiresFileXfer;
-	uint8_t						m_u8Res;
-	uint16_t					m_u16Res; 
-	int64_t						m_s64AssetOffs;
+	uint8_t						m_u8RequiresFileXfer{ 0 };
+	uint8_t						m_u8Res{ 0 };
+	uint16_t					m_u16Res{ 0 };
+	int64_t						m_s64AssetOffs{ 0 };
 	VxGUID						m_UniqueId;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1;
-	uint32_t					m_u32Res2; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 //============================================================================
@@ -178,12 +254,12 @@ public:
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t					m_u16Res;
-	uint16_t					m_u16AssetChunkLen;
+	uint16_t					m_u16Res{ 0 };
+	uint16_t					m_u16AssetChunkLen{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
 public:
 	uint8_t						m_au8AssetChunk[ PKT_TYPE_ASSET_MAX_DATA_LEN ];
 };
@@ -205,11 +281,11 @@ public:
 	uint32_t					getError( void )								{ return ntohl( m_u32Error ); }
 
 private:
-	uint16_t					m_u16Res;	
-	uint16_t					m_u16AssetChunkLen;
+	uint16_t					m_u16Res{ 0 };
+	uint16_t					m_u16AssetChunkLen{ 0 };
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
-	uint32_t					m_u32Error; 
+	uint32_t					m_u32Error{ 0 };
 };
 
 //============================================================================
@@ -235,8 +311,8 @@ private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_AssetUniqueId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
 };
 
 class PktBaseSendCompleteReply : public VxPktHdr
@@ -259,8 +335,54 @@ private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxGUID						m_AssetUniqueId;
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res1{ 0 };
+};
+
+class PktBaseGetCompleteReq : public VxPktHdr
+{
+public:
+    PktBaseGetCompleteReq();
+
+    void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
+    VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
+    void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
+    VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
+
+    void						setAssetUniqueId( VxGUID& uniqueId  )		{ m_AssetUniqueId = uniqueId; }
+    VxGUID&						getAssetUniqueId( void )					{ return m_AssetUniqueId; }
+
+    void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
+    uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
+
+private:
+    VxGUID						m_LclSessionId;
+    VxGUID						m_RmtSessionId;
+    VxGUID						m_AssetUniqueId;
+    uint32_t					m_u32Error{ 0 };
+};
+
+class PktBaseGetCompleteReply : public VxPktHdr
+{
+public:
+    PktBaseGetCompleteReply();
+
+    void						setLclSessionId( VxGUID& lclId )			{ m_LclSessionId = lclId; }
+    VxGUID&						getLclSessionId( void )						{ return m_LclSessionId; }
+    void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
+    VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
+
+    void						setAssetUniqueId( VxGUID& uniqueId  )		{ m_AssetUniqueId = uniqueId; }
+    VxGUID&						getAssetUniqueId( void )					{ return m_AssetUniqueId; }
+
+    void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
+    uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
+
+private:
+    VxGUID						m_LclSessionId;
+    VxGUID						m_RmtSessionId;
+    VxGUID						m_AssetUniqueId;
+    uint32_t					m_u32Error{ 0 };
 };
 
 //============================================================================
@@ -282,16 +404,16 @@ public:
 	uint16_t					getError( void )								{ return ntohs( m_u16Err ); }
 
 private:
-	uint16_t					m_u16Err;
-	uint16_t					m_u16Res1;
-	uint32_t					m_u32ResP1;
-	uint32_t					m_u32ResP2;
-	uint32_t					m_u32ResP3;
+	uint16_t					m_u16Err{ 0xffff };
+	uint16_t					m_u16Res1{ 0 };
+	uint32_t					m_u32ResP1{ 0 };
+	uint32_t					m_u32ResP2{ 0 };
+	uint32_t					m_u32ResP3{ 0 };
 
 	VxGUID						m_RxAssetInstance; 
 	VxGUID						m_TxAssetInstance; 
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2;
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 };
 
 #pragma pack(pop)

@@ -98,7 +98,8 @@ public:
 	virtual	EAppState			getPluginState( void );
 	virtual	void				setPluginState( EAppState ePluginState )				{ m_ePluginState = ePluginState;};
 
-    virtual ThumbMgr&			getThumbMgr( void )									    { return m_ThumbMgr;	}
+    virtual ThumbMgr&			getThumbMgr( void )									    { return m_ThumbMgr; }
+    virtual ThumbXferMgr&       getThumbXferMgr( void )							        { return m_ThumbXferMgr; }
 
 	virtual void				fromGuiUserLoggedOn( void )								{};
 

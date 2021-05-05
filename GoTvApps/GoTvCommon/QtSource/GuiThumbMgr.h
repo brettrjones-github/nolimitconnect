@@ -40,6 +40,7 @@ public:
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
     bool                        requestAvatarImage( GuiUser* user, EHostType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
+    bool                        requestAvatarImage( GuiUser* user, EPluginType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
 
     virtual void				callbackThumbAdded( ThumbInfo * thumbInfo ) override; 
     virtual void				callbackThumbUpdated( ThumbInfo * thumbInfo ) override; 

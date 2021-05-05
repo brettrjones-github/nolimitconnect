@@ -29,25 +29,39 @@
 
 //============================================================================
 ThumbInfo::ThumbInfo()
-    : AssetBaseInfo()
+: AssetBaseInfo()
 { 
 }
 
 //============================================================================
 ThumbInfo::ThumbInfo( const ThumbInfo& rhs )
+: AssetBaseInfo( rhs )
 {
-	*this = rhs;
 }
 
 //============================================================================
 ThumbInfo::ThumbInfo( const AssetBaseInfo& rhs )
+: AssetBaseInfo( rhs )
 {
-    *((AssetBaseInfo *)this) = rhs;
+}
+
+//============================================================================
+ThumbInfo::ThumbInfo( VxGUID& onlineId, int64_t modifiedTime )
+: AssetBaseInfo( onlineId, modifiedTime )
+{
+
+}
+
+//============================================================================
+ThumbInfo::ThumbInfo( VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime )
+: AssetBaseInfo( onlineId, assetId, modifiedTime )
+{
+
 }
 
 //============================================================================
 ThumbInfo::ThumbInfo( const std::string& fileName )
-    : AssetBaseInfo(fileName)
+    : AssetBaseInfo( fileName )
 { 
 }
 

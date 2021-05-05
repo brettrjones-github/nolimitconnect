@@ -24,10 +24,6 @@
 
 //============================================================================
 PktFileGetReq::PktFileGetReq()
-: m_s64StartOffs(0)
-, m_s64EndOffs(0)
-, m_u32Res1(0)
-, m_u32Res2(0)
 {
    setPktType( PKT_TYPE_FILE_GET_REQ );
 }
@@ -56,10 +52,6 @@ void PktFileGetReq::getFileName( std::string &csName )
 
 //============================================================================
 PktFileGetReply::PktFileGetReply()
-: m_s64StartOffs(0)
-, m_s64EndOffs(0)
-, m_u32Error(0) 
-, m_u32Res2(0)
 {
 	setPktType( PKT_TYPE_FILE_GET_REPLY );
 }

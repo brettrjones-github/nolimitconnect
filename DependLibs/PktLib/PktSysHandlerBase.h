@@ -74,10 +74,14 @@ public:
 	virtual void				onPktFileGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktFileShareErr			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+    virtual void				onPktAssetGetReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktAssetGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetChunkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetChunkReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktAssetGetCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktAssetGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetSendCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAssetXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr );
@@ -161,10 +165,14 @@ public:
     virtual void				onPktFriendOfferReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktFriendOfferReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+    virtual void				onPktThumbGetReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbGetReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbGetCompleteReq	( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbGetCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );

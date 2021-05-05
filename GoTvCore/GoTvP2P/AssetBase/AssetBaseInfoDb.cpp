@@ -177,13 +177,20 @@ void AssetBaseInfoDb::updateAssetSendState( VxGUID& assetId, EAssetSendState sen
     vx_assert( 0 == rc );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d\n", rc );
+		LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset error %d", rc );
 	}
 }
 
 //============================================================================
 bool AssetBaseInfoDb::addAsset( AssetBaseInfo* assetInfo )
 {
+    if( assetInfo->isDeleted() )
+    {
+        LogMsg( LOG_WARN, "AssetBaseInfoDb::addAsset removing deleted asset %s", assetInfo->getAssetName().c_str() );
+        removeAsset( assetInfo );
+        return true;
+    }
+
 	return addAsset(	assetInfo->getAssetUniqueId(),
 				        assetInfo->getCreatorId(),
 				        assetInfo->getHistoryId(),

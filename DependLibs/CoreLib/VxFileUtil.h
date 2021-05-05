@@ -137,7 +137,7 @@ public:
 														std::string &	strRetFile );	// return file name
 
 	//! separate Path and file name into separate strings
-	static RCODE				seperatePathAndFile(	std::string &	strFullPath,		// path and file name				
+	static RCODE				seperatePathAndFile(	std::string &	strFullPath,	// path and file name				
 														std::string &	strRetPath,		// return path to file
 														std::string &	strRetFile );	// return file name
 
@@ -147,13 +147,13 @@ public:
 																std::string &	strRetExtensionPart );	// return .ext part
 
 	//! remove the path and return just the file name
-	static void					getJustFileName(	const char *	pFullPath,	// file name may be full or just file name
+	static void					getJustFileName(	const char *	pFullPath,	                // file name may be full or just file name
 													std::string&	strRetJustFileName );		// return file name
     //! remove the file name and return just the path
     static std::string			getJustPath( std::string fullPath );	// file name and path
 
 	//! get the . extension of file name
-	static void					getFileExtension(	std::string&	strFileName,	// file name with extension
+	static void					getFileExtension(	std::string&	strFileName,	    // file name with extension
 													std::string&	strRetExt );		// return extension ( ie "myfile.etm" would return etm"
 	//! flip back slashes into forward slashes
 	static void					makeForwardSlashPath( std::string & csFilePath );

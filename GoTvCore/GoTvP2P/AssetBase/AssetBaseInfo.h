@@ -30,6 +30,7 @@
 
 #define ASSET_ATTRIB_FLAG_CIRCULAR			    0x0001
 #define ASSET_ATTRIB_TEMPORARY			        0x0002
+#define ASSET_ATTRIB_DELETED			        0x0004
 
 class VxThread;
 
@@ -38,8 +39,11 @@ class AssetBaseInfo : public BaseInfo
 public:
     AssetBaseInfo();
     AssetBaseInfo( const AssetBaseInfo& rhs );
+    AssetBaseInfo( VxGUID& onlineId, int64_t modifiedTime = 0 );
+    AssetBaseInfo( VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
     AssetBaseInfo( const std::string& fileName );
     AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
+    AssetBaseInfo( VxGUID& creatorId,  VxGUID& assetId, EAssetType assetType );
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
 
@@ -72,6 +76,8 @@ public:
     virtual void				setIsTemporary( bool isTemp )                   { if( isTemp ) m_AttributeFlags |= ASSET_ATTRIB_TEMPORARY; else m_AttributeFlags &= ~ASSET_ATTRIB_TEMPORARY; }
     virtual bool				isTemporary( void )                             { return m_AttributeFlags & ASSET_ATTRIB_TEMPORARY ? true : false; }
     virtual bool				isPermanent( void )                             { return !isTemporary(); }
+    virtual void				setIsDeleted( bool isDeleted )                  { if( isDeleted ) m_AttributeFlags |= ASSET_ATTRIB_DELETED; else m_AttributeFlags &= ~ASSET_ATTRIB_DELETED; }
+    virtual bool				isDeleted( void )                               { return m_AttributeFlags & ASSET_ATTRIB_DELETED ? true : false; }
 
     virtual void				setAssetName( const char * assetName );
     virtual void				setAssetName( std::string& assetName )          { m_AssetName = assetName; }
@@ -122,6 +128,9 @@ public:
     virtual void				setAccessedTime( uint64_t timestamp )           { m_AccessedTime = timestamp; }
     virtual uint64_t			getAccessedTime( void )                         { return m_AccessedTime; }
 
+    virtual void				setExpiresTime( uint64_t timestamp )            { m_ExpiresTime = timestamp; }
+    virtual uint64_t			getExpiresTime( void )                          { return m_ExpiresTime; }
+
     virtual void				setPlayPosition( int pos0to100000 )             { m_PlayPosition0to100000 = pos0to100000; }
     virtual int					getPlayPosition( void )                         { return m_PlayPosition0to100000; }
 
@@ -144,6 +153,7 @@ public:
 	uint32_t					m_LocationFlags{ 0 };
     int64_t						m_CreationTime{ 0 };
     int64_t						m_AccessedTime{ 0 };
+    int64_t						m_ExpiresTime{ 0 }; // time when will be removed. 0 = never
 	EAssetSendState			    m_AssetSendState{ eAssetSendStateNone };
     int						    m_PlayPosition0to100000{ 0 };
 };

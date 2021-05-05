@@ -62,6 +62,8 @@ public:
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
+    virtual bool                requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
+
 protected:
     virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;

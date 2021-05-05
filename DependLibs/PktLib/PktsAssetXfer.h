@@ -19,6 +19,18 @@
 #pragma pack(push) 
 #pragma pack(1)
 
+class PktAssetGetReq : public PktBaseGetReq
+{
+public:
+    PktAssetGetReq();
+};
+
+class PktAssetGetReply : public PktBaseGetReply
+{
+public:
+    PktAssetGetReply();
+};
+
 class PktAssetSendReq : public PktBaseSendReq
 {
 public:
@@ -44,6 +56,21 @@ class PktAssetChunkReply : public PktBaseChunkReply
 {
 public:
 	PktAssetChunkReply();
+};
+
+//============================================================================
+// PktAssetGetComplete
+//============================================================================
+class PktAssetGetCompleteReq : public PktBaseGetCompleteReq
+{
+public:
+    PktAssetGetCompleteReq();
+};
+
+class PktAssetGetCompleteReply : public PktBaseGetCompleteReply
+{
+public:
+    PktAssetGetCompleteReply();
 };
 
 //============================================================================

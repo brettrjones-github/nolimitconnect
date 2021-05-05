@@ -24,6 +24,23 @@ BaseInfo::BaseInfo()
 }
 
 //============================================================================
+BaseInfo::BaseInfo( VxGUID& onlineId, int64_t modifiedTime )
+    : m_OnlineId( onlineId )
+    , m_InfoModifiedTime( modifiedTime )
+{
+
+}
+
+//============================================================================
+BaseInfo::BaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime )
+    : m_OnlineId( creatorId )
+    , m_ThumbId( assetId )
+    , m_InfoModifiedTime( modifiedTime )
+{
+
+}
+
+//============================================================================
 BaseInfo::BaseInfo( const BaseInfo& rhs )
     : m_OnlineId( rhs.m_OnlineId )
     , m_ThumbId( rhs.m_ThumbId )

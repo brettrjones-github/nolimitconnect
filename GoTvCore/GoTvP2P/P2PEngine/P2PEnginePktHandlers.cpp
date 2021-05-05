@@ -424,6 +424,24 @@ void P2PEngine::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
+void P2PEngine::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetReq\n" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetReply\n" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
 void P2PEngine::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
@@ -457,6 +475,24 @@ void P2PEngine::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	LogMsg( LOG_INFO, "P2PEngine::onPktAssetChunkReply\n" );
 #endif // DEBUG_ENGINE_PKTS
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetCompleteReq\n" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetCompleteReply\n" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
@@ -1062,6 +1098,24 @@ void P2PEngine::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
+void P2PEngine::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetReq" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetReply" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
 void P2PEngine::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
@@ -1093,6 +1147,24 @@ void P2PEngine::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 #ifdef DEBUG_ENGINE_PKTS
     LogMsg( LOG_INFO, "P2PEngine::onPktThumbChunkReply" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetCompleteReq" );
+#endif // DEBUG_ENGINE_PKTS
+    m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetCompleteReply" );
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }

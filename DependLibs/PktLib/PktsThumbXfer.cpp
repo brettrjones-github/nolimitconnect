@@ -18,6 +18,26 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
+// PktAssetSendReq
+//============================================================================
+PktThumbGetReq::PktThumbGetReq()
+    : PktBaseGetReq() 
+{ 
+    setPktType( PKT_TYPE_THUMB_GET_REQ ); 
+    setPktLength( sizeof( PktThumbGetReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktThumbGetReply::PktThumbGetReply()
+    : PktBaseGetReply()
+{ 
+    setPktType( PKT_TYPE_THUMB_GET_REPLY ); 
+    setPktLength( sizeof( PktThumbGetReply ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
 //  PktThumbSendReq
 //============================================================================
  PktThumbSendReq:: PktThumbSendReq()
@@ -54,6 +74,23 @@
     setPktLength( (uint16_t)sizeof(  PktThumbChunkReply ) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
+
+ //============================================================================
+ PktThumbGetCompleteReq::PktThumbGetCompleteReq()
+     : PktBaseGetCompleteReq()
+ {
+     setPktType(  PKT_TYPE_THUMB_GET_COMPLETE_REQ );
+     setPktLength( (uint16_t)sizeof( PktThumbGetCompleteReq ) );
+     vx_assert( 0 == ( getPktLength() & 0x0f ) );}
+
+ //============================================================================
+ PktThumbGetCompleteReply::PktThumbGetCompleteReply()
+     : PktBaseGetCompleteReply()
+ {
+     setPktType( PKT_TYPE_THUMB_GET_COMPLETE_REPLY );
+     setPktLength( (uint16_t)sizeof( PktThumbGetCompleteReply ) );
+     vx_assert( 0 == ( getPktLength() & 0x0f ) );
+ }
 
 //============================================================================
  PktThumbSendCompleteReq:: PktThumbSendCompleteReq()

@@ -59,7 +59,6 @@ public:
     };
 
     virtual AssetBaseInfoDb&    getAssetInfoDb( void )                                  { return m_AssetBaseInfoDb; }
-
     virtual std::vector<AssetBaseInfo*>&	getAssetBaseInfoList( void )				{ return m_AssetBaseInfoList; }
 
     // startup when user specific directory has been set after user logs on
@@ -89,6 +88,7 @@ public:
     bool						getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId );
 	bool						getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName );
 
+    virtual bool				doesAssetExist( AssetBaseInfo& assetInfo ); // check if file still exists in directory or database
 
 	AssetBaseInfo *				findAsset( std::string& fileName );
 	AssetBaseInfo *				findAsset( VxSha1Hash& fileHashId );

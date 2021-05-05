@@ -439,6 +439,82 @@ int64_t VxConnectIdent::getThumbModifiedTime( EHostType hostType )
 }
 
 //============================================================================
+bool VxConnectIdent::hasThumbId( EPluginType pluginType )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
+        return m_ChatRoomThumbGuid.isVxGUIDValid();
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
+        return m_GroupThumbGuid.isVxGUIDValid();
+    case ePluginTypeClientNetwork:
+    case ePluginTypeHostNetwork:
+        return m_NetHostThumbGuid.isVxGUIDValid();
+    case ePluginTypeClientRandomConnect:
+    case ePluginTypeHostRandomConnect:
+        return m_RandomConnectThumbGuid.isVxGUIDValid();
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeHostPeerUser:
+        return m_AvatarGuid.isVxGUIDValid();
+    default:
+        return false;
+    }
+}
+
+//============================================================================
+VxGUID& VxConnectIdent::getThumbId( EPluginType pluginType  )
+{
+    static VxGUID nullGuid;
+    switch( pluginType )
+    {
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
+        return m_ChatRoomThumbGuid;
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
+        return m_GroupThumbGuid;
+    case ePluginTypeClientNetwork:
+    case ePluginTypeHostNetwork:
+        return m_NetHostThumbGuid;
+    case ePluginTypeClientRandomConnect:
+    case ePluginTypeHostRandomConnect:
+        return m_RandomConnectThumbGuid;
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeHostPeerUser:
+        return m_AvatarGuid;
+    default:
+        return nullGuid;
+    }
+}
+
+//============================================================================
+int64_t VxConnectIdent::getThumbModifiedTime( EPluginType pluginType  )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeHostChatRoom:
+        return m_ChatRoomThumbModifiedTime;
+    case ePluginTypeClientGroup:
+    case ePluginTypeHostGroup:
+        return m_GroupThumbModifiedTime;
+    case ePluginTypeClientNetwork:
+    case ePluginTypeHostNetwork:
+        return m_NetHostThumbModifiedTime;
+    case ePluginTypeClientRandomConnect:
+    case ePluginTypeHostRandomConnect:
+        return m_RandomConnectThumbModifiedTime;
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeHostPeerUser:
+        return m_AvatarModifiedTime;
+    default:
+        return 0;
+    }
+}
+
+//============================================================================
 /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
 std::string VxConnectIdent::getIdentFolderName( void )
 {

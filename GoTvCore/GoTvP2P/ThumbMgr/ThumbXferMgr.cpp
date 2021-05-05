@@ -48,6 +48,18 @@ ThumbXferMgr::ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferI
 }
 
 //============================================================================
+void ThumbXferMgr::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+
+}
+
+//============================================================================
+void ThumbXferMgr::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+
+}
+
+//============================================================================
 void ThumbXferMgr::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendReq( sktBase, pktHdr, netIdent );
@@ -72,6 +84,18 @@ void ThumbXferMgr::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr,
 }
 
 //============================================================================
+void ThumbXferMgr::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void ThumbXferMgr::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
 void ThumbXferMgr::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendCompleteReq( sktBase, pktHdr, netIdent );
@@ -90,3 +114,18 @@ void ThumbXferMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
     AssetBaseXferMgr::onPktAssetBaseXferErr( sktBase, pktHdr, netIdent );
 }
 
+//============================================================================
+bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId )
+{
+    if( !netIdent || !thumbId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "ThumbXferMgr::requestPluginThumb invalid param" );
+        vx_assert( false );
+        return false;
+    }
+
+
+    ThumbInfo thumbInfo( netIdent->getMyOnlineId(), thumbId, eAssetTypeThumbnail );
+
+    return fromGuiRequestAssetBase( netIdent, thumbInfo );
+}

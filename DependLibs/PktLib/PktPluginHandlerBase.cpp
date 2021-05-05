@@ -59,7 +59,6 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_SEND_REPLY ]					= &PktPluginHandlerBase::onPktFileSendReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_CHUNK_REQ ]					= &PktPluginHandlerBase::onPktFileChunkReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_CHUNK_REPLY ]					= &PktPluginHandlerBase::onPktFileChunkReply;
-
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_GET_COMPLETE_REQ ]			= &PktPluginHandlerBase::onPktFileGetCompleteReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_GET_COMPLETE_REPLY ]			= &PktPluginHandlerBase::onPktFileGetCompleteReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_SEND_COMPLETE_REQ ]			= &PktPluginHandlerBase::onPktFileSendCompleteReq;
@@ -72,10 +71,14 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_INFO_REQ ]					= &PktPluginHandlerBase::onPktFileInfoReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_FILE_SHARE_ERR ]					= &PktPluginHandlerBase::onPktFileShareErr;
 
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_REQ ]					= &PktPluginHandlerBase::onPktAssetGetReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_REPLY ]					= &PktPluginHandlerBase::onPktAssetGetReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_REQ ]					= &PktPluginHandlerBase::onPktAssetSendReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_REPLY ]					= &PktPluginHandlerBase::onPktAssetSendReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_CHUNK_REQ ]					= &PktPluginHandlerBase::onPktAssetChunkReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_CHUNK_REPLY ]				= &PktPluginHandlerBase::onPktAssetChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_COMPLETE_REQ ]			= &PktPluginHandlerBase::onPktAssetGetCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_GET_COMPLETE_REPLY ]			= &PktPluginHandlerBase::onPktAssetGetCompleteReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_COMPLETE_REQ ]			= &PktPluginHandlerBase::onPktAssetSendCompleteReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_COMPLETE_REPLY ]		= &PktPluginHandlerBase::onPktAssetSendCompleteReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_XFER_ERR ]					= &PktPluginHandlerBase::onPktAssetXferErr;
@@ -156,10 +159,14 @@ PktPluginHandlerBase::PktPluginHandlerBase()
     m_aBaseSysPktFuncTable[ PKT_TYPE_FRIEND_OFFER_REQ ]                 = &PktPluginHandlerBase::onPktFriendOfferReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_FRIEND_OFFER_REPLY ]               = &PktPluginHandlerBase::onPktFriendOfferReply;
 
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_REQ ]					= &PktPluginHandlerBase::onPktThumbGetReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_REPLY ]					= &PktPluginHandlerBase::onPktThumbGetReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_REQ ]                   = &PktPluginHandlerBase::onPktThumbSendReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_REPLY ]                 = &PktPluginHandlerBase::onPktThumbSendReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_CHUNK_REQ ]                  = &PktPluginHandlerBase::onPktThumbChunkReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_CHUNK_REPLY ]                = &PktPluginHandlerBase::onPktThumbChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_COMPLETE_REQ ]			= &PktPluginHandlerBase::onPktThumbGetCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_GET_COMPLETE_REPLY ]			= &PktPluginHandlerBase::onPktThumbGetCompleteReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_COMPLETE_REQ ]          = &PktPluginHandlerBase::onPktThumbSendCompleteReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_SEND_COMPLETE_REPLY ]        = &PktPluginHandlerBase::onPktThumbSendCompleteReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_XFER_ERR ]                   = &PktPluginHandlerBase::onPktThumbXferErr;
@@ -351,6 +358,18 @@ void PktPluginHandlerBase::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pk
 }	
 
 //============================================================================
+void PktPluginHandlerBase::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
 void PktPluginHandlerBase::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
@@ -373,6 +392,18 @@ void PktPluginHandlerBase::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr *
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }	
+
+//============================================================================
+void PktPluginHandlerBase::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
 
 //============================================================================
 void PktPluginHandlerBase::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
@@ -807,6 +838,18 @@ void PktPluginHandlerBase::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr 
 }
 
 //============================================================================
+void PktPluginHandlerBase::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
 void PktPluginHandlerBase::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
@@ -826,6 +869,18 @@ void PktPluginHandlerBase::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * p
 
 //============================================================================
 void PktPluginHandlerBase::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
 }

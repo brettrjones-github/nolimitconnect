@@ -23,7 +23,10 @@ class BaseInfo
 {
 public:
 	BaseInfo();
+    BaseInfo( VxGUID& creatorId, int64_t modifiedTime = 0 );
+    BaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime = 0 );
 	BaseInfo( const BaseInfo& rhs );
+
     virtual ~BaseInfo() = default;
 
 	BaseInfo&				    operator=( const BaseInfo& rhs ); 

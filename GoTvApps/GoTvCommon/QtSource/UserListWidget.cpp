@@ -545,26 +545,31 @@ void UserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, UserLis
     if( userSession && userItem && userSession->getUserIdent() )
     {
         EHostType hostType = eHostTypeUnknown;
+        EPluginType pluginType = ePluginTypeInvalid;
         switch( m_UserViewType )
         {
         case eUserViewTypeGroup:
             hostType = eHostTypeGroup;
+            pluginType = ePluginTypeClientGroup;
             break;
         case eUserViewTypeChatRoom:
             hostType = eHostTypeChatRoom;
+            pluginType = ePluginTypeClientChatRoom;
             break;
         case eUserViewTypeRandomConnect:
             hostType = eHostTypeRandomConnect;
+            pluginType = ePluginTypeClientRandomConnect;
             break;
         default:
             hostType = eHostTypePeerUser;
+            pluginType = ePluginTypeHostPeerUser;
         }
         
         VxPushButton* avatarButton = userItem->getAvatarButton();
         GuiUser* user = userSession->getUserIdent();
 
         QImage	avatarImage;
-        bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
+        bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, pluginType, avatarImage, true );
         if( havAvatarImage && avatarButton )
         {
             avatarButton->setIconOverrideImage( avatarImage );

@@ -343,6 +343,117 @@ bool AssetBaseXferMgr::requireFileXfer( EAssetType assetType )
 }
 
 //============================================================================
+void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+#ifdef DEBUG_AUTOPLUGIN_LOCK
+    LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetBaseGetReq AutoPluginLock start");
+#endif // DEBUG_AUTOPLUGIN_LOCK
+    AutoXferLock pluginMutexLock( m_XferInterface.getAssetXferMutex() );
+#ifdef DEBUG_AUTOPLUGIN_LOCK
+    LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetBaseGetReq AutoPluginLock done");
+#endif // DEBUG_AUTOPLUGIN_LOCK
+
+    EXferError xferErr = eXferErrorNone;
+    PktBaseGetReq * pktGetReq = (PktBaseGetReq *)pktHdr;
+
+    VxGUID assetUniqueId = pktGetReq->getUniqueId();
+    EAssetType assetType = (EAssetType)pktGetReq->getAssetType();
+    VxGUID rmtSessionId = pktGetReq->getLclSessionId();
+    VxGUID lclSessionId;
+    lclSessionId.initializeWithNewVxGUID();
+    int64_t startOffs = pktGetReq->getStartOffset();
+    int64_t	endOffs = pktGetReq->getEndOffset();	//if 0 then get all
+
+
+    PktBaseGetReply pktReply;
+    pktReply.setAssetType( pktGetReq->getAssetType() );
+    pktReply.setUniqueId( pktGetReq->getUniqueId() );
+    pktReply.setFileHashId( pktGetReq->getFileHashId() );
+    pktReply.setLclSessionId( lclSessionId );
+    pktReply.setRmtSessionId( rmtSessionId );
+    pktReply.setStartOffset( startOffs );
+
+    if( false == netIdent->isHisAccessAllowedFromMe( m_XferInterface.getPluginType() ) )
+    {      
+        pktReply.setError( eXferErrorPermission );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
+    if( !pktGetReq->isValidPkt() || !assetUniqueId.isVxGUIDValid() )
+    {
+        pktReply.setError( eXferErrorBadParam );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
+    AssetBaseInfo* assetInfo = m_AssetBaseMgr.findAsset( assetUniqueId );
+    if( !assetInfo )
+    {
+        pktReply.setError( eXferErrorFileNotFound );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
+    if( !m_AssetBaseMgr.doesAssetExist( *assetInfo ) )
+    {
+        pktReply.setError( eXferErrorFileNotFound );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
+    pktReply.setEndOffset( assetInfo->getAssetLength() );
+    AssetBaseTxSession* xferSession = findOrCreateTxSession( false, lclSessionId, netIdent, sktBase );
+    if( !xferSession )
+    {
+        pktReply.setError( eXferErrorBusy );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
+    std::string lclFileName = assetInfo->getAssetName();
+    std::string rmtFileName;
+    std::string rmtPath;
+    RCODE rc = VxFileUtil::seperatePathAndFile( lclFileName, rmtPath, rmtFileName );
+    if( rmtFileName.empty() )
+    {
+        LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetBaseGetReq Asset File Name Error" );
+        pktReply.setError( eXferErrorFileNotFound );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
+    VxFileXferInfo& xferInfo = xferSession->getXferInfo();
+    xferInfo.setRmtSessionId( lclSessionId );
+    xferInfo.setFileHashId( pktGetReq->getFileHashId() );
+    xferInfo.setFileOffset( pktGetReq->getStartOffset() );
+    xferInfo.setLclFileName( lclFileName.c_str() );
+    xferInfo.setRmtFileName(  rmtFileName.c_str() );
+    m_TxSessions.push_back( xferSession );
+
+    xferErr  = ( m_XferInterface.txPacket( netIdent, sktBase, &pktReply ) ) ? eXferErrorNone : eXferErrorDisconnected;
+    if( eXferErrorNone == xferErr )
+    {
+        xferErr = beginAssetBaseSend( xferSession );
+    }
+
+    if( eXferErrorNone != xferErr )
+    {
+        onAssetBaseUploadError( netIdent, *assetInfo, xferErr );
+        endAssetBaseXferSession( xferSession, true, false );
+    }
+    else
+    {
+        onAssetBaseBeginUpload( netIdent, *assetInfo );
+    }
+}
+
+//============================================================================
+void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
 void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
@@ -596,6 +707,16 @@ static int cnt = 0;
 		LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetChunkReply AutoPluginLock destroy\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 	}
+}
+
+//============================================================================
+void AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
 }
 
 //============================================================================
@@ -1151,6 +1272,61 @@ bool AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
+bool AssetBaseXferMgr::fromGuiRequestAssetBase( AssetBaseInfo& assetInfo )
+{
+    VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( assetInfo.getOnlineId() );
+    if( netIdent )
+    {
+        return fromGuiRequestAssetBase( netIdent, assetInfo );
+    }
+
+    return false;
+}
+
+//============================================================================
+bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBaseInfo& assetInfo )
+{
+    if( !netIdent || !assetInfo.getAssetUniqueId().isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "fromGuiRequestAssetBase invalid param" );
+        vx_assert( false );
+        return false;
+    }
+
+    bool xferFailed = true;
+    if( netIdent )
+    {
+        // first try to connect and send.. if that fails then que and will send when next connected
+        VxSktBase * sktBase = 0;
+        m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
+        if( sktBase )
+        {
+            EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
+            if( xferError == eXferErrorNone )
+            {
+                xferFailed = false;
+            }
+        }
+        else
+        {
+            queAsset( assetInfo );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiSendAssetBase NetIdent not found\n" );
+    }
+
+    if( xferFailed )
+    {
+        onTxFailed( assetInfo.getAssetUniqueId(), false );
+    }
+
+    return !xferFailed;
+
+}
+
+//============================================================================
 void AssetBaseXferMgr::onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked )
 {
 	updateAssetMgrSendState( assetUniqueId, eAssetSendStateTxFail, 0 );
@@ -1292,6 +1468,22 @@ EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, A
 }
 
 //============================================================================
+EXferError AssetBaseXferMgr::createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase )
+{
+    EXferError xferErr = eXferErrorNone;
+    PktAssetGetReq pktReq;
+    pktReq.setAssetType( assetInfo.getAssetType() );
+    pktReq.setUniqueId( assetInfo.getAssetUniqueId() );
+    pktReq.getLclSessionId().initializeWithNewVxGUID();
+    if( !m_XferInterface.txPacket(  hisIdent, sktBase, &pktReq ) )
+    {
+        xferErr = eXferErrorDisconnected;
+    }
+
+    return xferErr;
+}
+
+//============================================================================
 EXferError AssetBaseXferMgr::beginAssetBaseSend( AssetBaseTxSession * xferSession )
 {
 	EXferError xferErr = eXferErrorNone;
@@ -1428,8 +1620,6 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
     VxFileUtil::seperatePathAndFile(		xferInfo.getRmtFileName(),
                                             strRmtPath,
                                             strRmtAssetBaseNameOnly );
-
-
 	if( eXferErrorNone == xferErr )
 	{
 		// make full path

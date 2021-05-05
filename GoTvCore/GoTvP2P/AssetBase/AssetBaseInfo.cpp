@@ -48,9 +48,27 @@ AssetBaseInfo::AssetBaseInfo( const AssetBaseInfo& rhs )
 , m_LocationFlags( rhs.m_LocationFlags )
 , m_CreationTime( rhs.m_CreationTime )
 , m_AccessedTime( rhs.m_AccessedTime ) 
+, m_ExpiresTime( rhs.m_ExpiresTime )
 , m_AssetTag( rhs.m_AssetTag )
 , m_AssetSendState( rhs.m_AssetSendState )
 , m_PlayPosition0to100000( rhs.m_PlayPosition0to100000 )
+{
+}
+
+//============================================================================
+AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, int64_t modifiedTime )
+: BaseInfo( creatorId, modifiedTime )
+, m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
+, m_AccessedTime( m_CreationTime )
+{
+
+}
+
+//============================================================================
+AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime )
+: BaseInfo( creatorId, assetId, modifiedTime )
+, m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
+, m_AccessedTime( m_CreationTime )
 {
 }
 
@@ -75,6 +93,13 @@ AssetBaseInfo::AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t 
 }
 
 //============================================================================
+AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, VxGUID& assetId, EAssetType assetType )
+    : m_u16AssetType( (uint8_t) assetType )
+{
+
+}
+
+//============================================================================
 AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs ) 
 {	
 	if( this != &rhs )
@@ -90,6 +115,7 @@ AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs )
         m_LocationFlags				= rhs.m_LocationFlags;
 		m_CreationTime				= rhs.m_CreationTime;
         m_AccessedTime              = rhs.m_AccessedTime;
+        m_ExpiresTime               = rhs.m_ExpiresTime;
 		m_AssetTag					= rhs.m_AssetTag;
 		m_AssetSendState			= rhs.m_AssetSendState;
         m_PlayPosition0to100000     = rhs.m_PlayPosition0to100000;

@@ -48,6 +48,18 @@ AssetXferMgr::AssetXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferI
 }
 
 //============================================================================
+void AssetXferMgr::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    AssetBaseXferMgr::onPktAssetBaseGetReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void AssetXferMgr::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    AssetBaseXferMgr::onPktAssetBaseGetReply( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
 void AssetXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseSendReq( sktBase, pktHdr, netIdent );
@@ -69,6 +81,18 @@ void AssetXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, V
 void AssetXferMgr::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     AssetBaseXferMgr::onPktAssetBaseChunkReply( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void AssetXferMgr::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    AssetBaseXferMgr::onPktAssetBaseGetCompleteReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void AssetXferMgr::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    AssetBaseXferMgr::onPktAssetBaseGetCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================

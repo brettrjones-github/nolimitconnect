@@ -21,6 +21,26 @@
 //============================================================================
 // PktAssetSendReq
 //============================================================================
+PktAssetGetReq::PktAssetGetReq()
+    : PktBaseGetReq() 
+{ 
+    setPktType( PKT_TYPE_ASSET_GET_REQ ); 
+    setPktLength( sizeof( PktAssetGetReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktAssetGetReply::PktAssetGetReply()
+    : PktBaseGetReply()
+{ 
+    setPktType( PKT_TYPE_ASSET_GET_REPLY ); 
+    setPktLength( sizeof( PktAssetGetReply ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+// PktAssetSendReq
+//============================================================================
 PktAssetSendReq::PktAssetSendReq()
 : PktBaseSendReq() 
 { 
@@ -53,6 +73,23 @@ PktAssetChunkReply::PktAssetChunkReply()
 {
 	setPktType( PKT_TYPE_ASSET_CHUNK_REPLY );
 	setPktLength( (uint16_t)sizeof( PktAssetChunkReply ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktAssetGetCompleteReq::PktAssetGetCompleteReq()
+    : PktBaseGetCompleteReq()
+{
+    setPktType(  PKT_TYPE_ASSET_GET_COMPLETE_REQ );
+    setPktLength( (uint16_t)sizeof( PktAssetGetCompleteReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );}
+
+//============================================================================
+PktAssetGetCompleteReply::PktAssetGetCompleteReply()
+    : PktBaseGetCompleteReply()
+{
+    setPktType( PKT_TYPE_ASSET_GET_COMPLETE_REPLY );
+    setPktLength( (uint16_t)sizeof( PktAssetGetCompleteReply ) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 

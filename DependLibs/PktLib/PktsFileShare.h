@@ -52,10 +52,10 @@ private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	int64_t						m_s64StartOffs;
-	int64_t						m_s64EndOffs;	//if 0 then get all
-	uint32_t					m_u32Res1;
-	uint32_t					m_u32Res2;
+	int64_t						m_s64StartOffs{ 0 };
+	int64_t						m_s64EndOffs{ 0 };	//if 0 then get all
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	char						m_FileName[ VX_MAX_PATH + 16 ];
 };
 
@@ -87,10 +87,10 @@ private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	int64_t						m_s64StartOffs;
-	int64_t						m_s64EndOffs;	//if 0 then get all
-	uint32_t					m_u32Error; 
-	uint32_t					m_u32Res2; 
+	int64_t						m_s64StartOffs{ 0 };
+	int64_t						m_s64EndOffs{ 0 };	//if 0 then get all
+	uint32_t					m_u32Error{ 0 };
+	uint32_t					m_u32Res2{ 0 };
 	char						m_FileName[ VX_MAX_PATH + 16 ];
 };
 

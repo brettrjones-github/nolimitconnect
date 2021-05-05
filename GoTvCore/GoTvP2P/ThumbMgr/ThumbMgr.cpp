@@ -19,13 +19,13 @@
 #include "ThumbCallbackInterface.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBase.h>
 #include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>
 
-#include <CoreLib/VxFileUtil.h>
-#include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
 
@@ -348,4 +348,30 @@ void ThumbMgr::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktH
 //============================================================================
 void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+}
+
+//============================================================================
+bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
+{
+
+    if( !netIdent || ePluginTypeInvalid != pluginType )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid param " );
+        vx_assert( false );
+        return false;
+    }
+
+    PluginBase* plugin = m_Engine.getPluginMgr().getPlugin( pluginType );
+    if( plugin )
+    {
+        return plugin->getThumbXferMgr().requestPluginThumb( netIdent, thumbId );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid plugin " );
+        vx_assert( false );
+        return false;
+    }
+
+    return false;
 }
