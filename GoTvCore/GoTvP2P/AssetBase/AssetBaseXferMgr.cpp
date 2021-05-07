@@ -338,7 +338,9 @@ bool AssetBaseXferMgr::requireFileXfer( EAssetType assetType )
 		|| ( eAssetTypeDocument == assetType )
 		|| ( eAssetTypeArchives == assetType )
 		|| ( eAssetTypeExe == assetType )
-		|| ( eAssetTypeOtherFiles == assetType ) );
+		|| ( eAssetTypeOtherFiles == assetType )
+        || ( eAssetTypeThumbnail == assetType )
+        || ( eAssetTypeCamRecord == assetType ) );
 
 }
 
@@ -373,6 +375,14 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
     pktReply.setRmtSessionId( rmtSessionId );
     pktReply.setStartOffset( startOffs );
 
+    if( !pktGetReq->isValidPkt() )
+    {
+        LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetBaseGetReq Invalid Packet" );
+        pktReply.setError( eXferErrorBadParam );
+        m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+        return;
+    }
+
     if( false == netIdent->isHisAccessAllowedFromMe( m_XferInterface.getPluginType() ) )
     {      
         pktReply.setError( eXferErrorPermission );
@@ -403,7 +413,7 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
     }
 
     pktReply.setEndOffset( assetInfo->getAssetLength() );
-    AssetBaseTxSession* xferSession = findOrCreateTxSession( false, lclSessionId, netIdent, sktBase );
+    AssetBaseTxSession* xferSession = findOrCreateTxSession( true, lclSessionId, netIdent, sktBase );
     if( !xferSession )
     {
         pktReply.setError( eXferErrorBusy );
@@ -451,6 +461,19 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
 //============================================================================
 void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+    PktAssetGetReply * pktGetReply = (PktAssetGetReply *)pktHdr;
+    if( !pktGetReply->isValidPkt() )
+    {
+        LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetBaseGetReply Invalid Packet" );
+        return;
+    }
+
+    vx_assert( false ); // TODO
+    /*
+    IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
+    pktReply.setError( eXferErrorBadParam );
+    m_XferInterface.txPacket( netIdent, sktBase,  &pktReply );
+    */
 }
 
 //============================================================================
@@ -753,7 +776,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( VxSktBase * sktBase, VxP
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply AutoPluginLock done\n");
 #endif // DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply\n");
+	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply");
 	PktAssetSendCompleteReply * poPkt = (PktAssetSendCompleteReply *)pktHdr;
 	AssetBaseTxSession * xferSession = findTxSession( true, poPkt->getRmtSessionId() );
 	if( xferSession )
@@ -765,12 +788,12 @@ void AssetBaseXferMgr::onPktAssetBaseSendCompleteReply( VxSktBase * sktBase, VxP
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendCompleteReply failed to find session\n");
+		LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendCompleteReply failed to find session");
 		updateAssetMgrSendState( poPkt->getAssetUniqueId(), eAssetSendStateTxSuccess, 100 );
 	}
 
 #ifdef DEBUG_AUTOPLUGIN_LOCK
-	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply AutoPluginLock destroy\n");
+	LogMsg( LOG_INFO, "AssetBaseXferMgr::onPktAssetSendCompleteReply AutoPluginLock destroy");
 #endif // DEBUG_AUTOPLUGIN_LOCK
 }
 
@@ -1309,21 +1332,27 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
         }
         else
         {
-            queAsset( assetInfo );
+            LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase Not connected to user" );
         }
     }
     else
     {
-        LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiSendAssetBase NetIdent not found\n" );
+        LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase NetIdent not found" );
     }
 
     if( xferFailed )
     {
-        onTxFailed( assetInfo.getAssetUniqueId(), false );
+        onRequestAssetFailed( netIdent, assetInfo, false );
     }
 
     return !xferFailed;
 
+}
+
+//============================================================================
+void AssetBaseXferMgr::onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, bool pluginIsLocked )
+{
+    updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateRxFail, 0 );
 }
 
 //============================================================================
@@ -1471,15 +1500,23 @@ EXferError AssetBaseXferMgr::createAssetTxSessionAndSend( bool pluginIsLocked, A
 EXferError AssetBaseXferMgr::createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase )
 {
     EXferError xferErr = eXferErrorNone;
-    PktAssetGetReq pktReq;
-    pktReq.setAssetType( assetInfo.getAssetType() );
-    pktReq.setUniqueId( assetInfo.getAssetUniqueId() );
-    pktReq.getLclSessionId().initializeWithNewVxGUID();
-    if( !m_XferInterface.txPacket(  hisIdent, sktBase, &pktReq ) )
+    PktBaseGetReq* pktReq = createPktBaseGetReq();
+    if( pktReq )
     {
-        xferErr = eXferErrorDisconnected;
+        pktReq->setAssetType( assetInfo.getAssetType() );
+        pktReq->setUniqueId( assetInfo.getAssetUniqueId() );
+        pktReq->getLclSessionId().initializeWithNewVxGUID();
+        if( !m_XferInterface.txPacket(  hisIdent, sktBase, pktReq ) )
+        {
+            xferErr = eXferErrorDisconnected;
+        }
+    }
+    else
+    {
+        xferErr = eXferErrorBadParam;
     }
 
+    delete pktReq;
     return xferErr;
 }
 
@@ -1570,7 +1607,7 @@ EXferError AssetBaseXferMgr::beginAssetBaseSend( AssetBaseTxSession * xferSessio
 }
 
 //============================================================================
-EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSession, PktAssetSendReq * poPkt, PktAssetSendReply& pktReply )
+EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSession, PktBaseSendReq * poPkt, PktBaseSendReply& pktReply )
 {
 	if( NULL == xferSession )
 	{
@@ -1827,7 +1864,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
 }
 
 //============================================================================
-EXferError AssetBaseXferMgr::rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxSession * xferSession, PktAssetChunkReq * poPkt )
+EXferError AssetBaseXferMgr::rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxSession * xferSession, PktBaseChunkReq * poPkt )
 {
 	if( NULL == xferSession )
 	{
@@ -1893,7 +1930,7 @@ EXferError AssetBaseXferMgr::rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxS
 }
 
 //============================================================================
-void AssetBaseXferMgr::finishAssetBaseReceive( AssetBaseRxSession * xferSession, PktAssetSendCompleteReq * poPkt, bool pluginIsLocked )
+void AssetBaseXferMgr::finishAssetBaseReceive( AssetBaseRxSession * xferSession, PktBaseSendCompleteReq * poPkt, bool pluginIsLocked )
 {
 	// done receiving file
 	VxFileXferInfo& xferInfo = xferSession->getXferInfo();

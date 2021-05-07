@@ -880,6 +880,15 @@
     <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.cpp">
       <Filter>GoTvP2P\BaseInfo</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferPktCreate.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferPktCreate.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferPktCreate.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />

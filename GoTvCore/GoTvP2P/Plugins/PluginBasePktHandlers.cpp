@@ -119,43 +119,67 @@ void PluginBase::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktH
 }
 
 //============================================================================
+void PluginBase::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    m_ThumbXferMgr.onPktThumbGetReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginBase::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    m_ThumbXferMgr.onPktThumbGetReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
 void PluginBase::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbSendReq( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbSendReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void PluginBase::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbSendReq( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbSendReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void PluginBase::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbChunkReq( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbChunkReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void PluginBase::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbChunkReply( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbChunkReply( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginBase::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    m_ThumbXferMgr.onPktThumbGetCompleteReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginBase::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+    m_ThumbXferMgr.onPktThumbGetCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void PluginBase::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbSendCompleteReq( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbSendCompleteReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void PluginBase::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbSendCompleteReply( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbSendCompleteReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void PluginBase::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbMgr.onPktThumbXferErr( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbXferErr( sktBase, pktHdr, netIdent );
 }

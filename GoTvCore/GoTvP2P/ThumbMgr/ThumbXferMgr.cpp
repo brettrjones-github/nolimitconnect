@@ -50,13 +50,13 @@ ThumbXferMgr::ThumbXferMgr( P2PEngine& engine, AssetBaseMgr& assetMgr, BaseXferI
 //============================================================================
 void ThumbXferMgr::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-
+    AssetBaseXferMgr::onPktAssetBaseGetReq( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
 void ThumbXferMgr::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-
+    AssetBaseXferMgr::onPktAssetBaseGetReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
@@ -123,7 +123,6 @@ bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId )
         vx_assert( false );
         return false;
     }
-
 
     ThumbInfo thumbInfo( netIdent->getMyOnlineId(), thumbId, eAssetTypeThumbnail );
 

@@ -49,14 +49,12 @@ ThumbInfo::ThumbInfo( const AssetBaseInfo& rhs )
 ThumbInfo::ThumbInfo( VxGUID& onlineId, int64_t modifiedTime )
 : AssetBaseInfo( onlineId, modifiedTime )
 {
-
 }
 
 //============================================================================
 ThumbInfo::ThumbInfo( VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime )
 : AssetBaseInfo( onlineId, assetId, modifiedTime )
 {
-
 }
 
 //============================================================================

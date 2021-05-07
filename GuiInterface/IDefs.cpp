@@ -949,8 +949,8 @@ EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType )
     case eHostTypeRandomConnect:
         return eConnectReasonRandomConnectAnnounce;
     default:
-        vx_assert( false );
         LogMsg( LOG_ERROR, "HostTypeToConnectAnnounceReason unknown host type %d", hostType );
+        vx_assert( false );
         return eConnectReasonUnknown;
     }
 }
@@ -968,8 +968,8 @@ EConnectReason HostTypeToConnectJoinReason( EHostType hostType )
     case eHostTypeRandomConnect:
         return eConnectReasonRandomConnectJoin;
     default:
-        vx_assert( false );
         LogMsg( LOG_ERROR, "HostTypeToConnectJoinReason unknown host type %d", hostType );
+        vx_assert( false );
         return eConnectReasonUnknown;
     }
 }
@@ -987,8 +987,8 @@ EConnectReason HostTypeToConnectSearchReason( EHostType hostType )
     case eHostTypeRandomConnect:
         return eConnectReasonRandomConnectSearch;
     default:
-        vx_assert( false );
         LogMsg( LOG_ERROR, "HostTypeToConnectSearchReason unknown host type %d", hostType );
+        vx_assert( false );
         return eConnectReasonUnknown;
     }
 }
@@ -1013,8 +1013,8 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
         return ePluginTypeHostConnectTest;
     case eHostTypeUnknown:
     default:
-        vx_assert( false );
         LogMsg( LOG_ERROR, "HostTypeToHostPlugin unknown host type %d", hostType );
+        vx_assert( false );
         return ePluginTypeInvalid;
     }
 }
@@ -1039,8 +1039,8 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
         return ePluginTypeClientConnectTest;
     case eHostTypeUnknown:
     default:
-        vx_assert( false );
         LogMsg( LOG_ERROR, "HostTypeToClientPlugin unknown host type %d", hostType );
+        vx_assert( false );
         return ePluginTypeInvalid;
     }
 }
@@ -1077,8 +1077,116 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
 
     case ePluginTypeInvalid:
     default:
-        vx_assert( false );
         LogMsg( LOG_ERROR, "PluginTypeToHostType unknown plugin type %d", pluginType );
+        vx_assert( false );
         return eHostTypeUnknown;
+    }
+}
+
+//============================================================================
+// if host plugin return its client plugin else return pluginType param
+EPluginType HostPluginToClientPluginType( EPluginType pluginType )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeHostGroup:
+        return ePluginTypeClientGroup;
+
+    case ePluginTypeHostChatRoom:
+        return ePluginTypeClientChatRoom;
+
+    case ePluginTypeClientRandomConnect:
+        return ePluginTypeClientRandomConnect;
+
+    case ePluginTypeHostPeerUser:
+        return ePluginTypeClientPeerUser;
+
+    case ePluginTypeHostNetwork:
+        return ePluginTypeClientNetwork;
+
+    case ePluginTypeHostConnectTest:
+        return ePluginTypeClientConnectTest;
+
+    case ePluginTypeInvalid:
+        LogMsg( LOG_ERROR, "HostPluginToClientPluginType unknown plugin type %d", pluginType );
+    default:
+        return pluginType;
+    }
+}
+
+//============================================================================
+// if client plugin return its host plugin else return pluginType param
+EPluginType ClientPluginToHostPluginType( EPluginType pluginType )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeClientGroup:
+        return ePluginTypeHostGroup;
+
+    case ePluginTypeClientChatRoom:
+        return ePluginTypeHostChatRoom;
+
+    case ePluginTypeClientRandomConnect:
+        return ePluginTypeHostRandomConnect;
+
+    case ePluginTypeClientPeerUser:
+        return ePluginTypeHostPeerUser;
+
+    case ePluginTypeClientNetwork:
+        return ePluginTypeHostNetwork;
+
+    case ePluginTypeClientConnectTest:
+        return ePluginTypeHostConnectTest;
+
+    case ePluginTypeInvalid:
+        LogMsg( LOG_ERROR, "ClientPluginToHostPluginType unknown plugin type %d", pluginType );
+    default:
+        return pluginType;
+    }
+}
+
+//============================================================================
+//! return true if is a client plugin
+bool IsClientPluginType( EPluginType pluginType )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeClientGroup:
+    case ePluginTypeClientChatRoom:
+    case ePluginTypeClientRandomConnect:
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeClientNetwork:
+    case ePluginTypeClientConnectTest:
+        return true;
+
+    case ePluginTypeInvalid:
+        LogMsg( LOG_ERROR, "IsClientPluginType unknown plugin type %d", pluginType );
+        vx_assert( false );
+        return false;
+    default:
+        return false;
+    }
+}
+
+//============================================================================
+//! return true if is a host plugin
+bool IsHostPluginType( EPluginType pluginType )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeHostGroup:
+    case ePluginTypeHostChatRoom:
+    case ePluginTypeHostRandomConnect:
+    case ePluginTypeHostPeerUser:
+    case ePluginTypeHostNetwork:
+    case ePluginTypeHostConnectTest:
+        return true;
+
+    case ePluginTypeInvalid:
+        LogMsg( LOG_ERROR, "IsHostPluginType unknown plugin type %d", pluginType );
+        vx_assert( false );
+        return false;
+    default:
+        return false;
     }
 }

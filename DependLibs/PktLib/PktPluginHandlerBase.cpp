@@ -16,6 +16,8 @@
 #include "PktTypes.h"
 #include "PktPluginHandlerBase.h"
 
+#include <CoreLib/VxDebug.h>
+
 #include <memory.h>
 
 PktPluginHandlerBase::PktPluginHandlerBase()
@@ -189,16 +191,17 @@ void PktPluginHandlerBase::handlePkt( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 	return onPktInvalid(sktBase, pktHdr, netIdent);
 }
 
-
 //=== packet handlers ===//
 //============================================================================
 void PktPluginHandlerBase::onPktUnhandled( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+    LogMsg( LOG_WARN, "PktPluginHandlerBase::onPktUnhandled pkt type %d len %d", pktHdr->getPktType(), pktHdr->getPktLength() );
 }
 
 //============================================================================
 void PktPluginHandlerBase::onPktInvalid( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+    LogMsg( LOG_WARN, "PktPluginHandlerBase::onPktInvalid pkt type %d len %d", pktHdr->getPktType(), pktHdr->getPktLength() );
 }
 
 //============================================================================

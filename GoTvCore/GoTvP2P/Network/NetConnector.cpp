@@ -242,8 +242,9 @@ bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo,
 	retIsNewConnection	 = false;
 	if( connectInfo.getMyOnlineId() == m_PktAnn.getMyOnlineId() )
 	{
-		LogMsg( LOG_ERROR, "NetConnector::connectToContact: cannot connect to ourself\n" );  
-		return false;
+		LogMsg( LOG_WARN, "NetConnector::connectToContact: connecting to ourself" );  
+        *ppoRetSkt = m_Engine.getSktLoopback();
+		return true;
 	}
 
 #ifdef DEBUG_CONNECTIONS

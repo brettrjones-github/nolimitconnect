@@ -24,6 +24,18 @@
 
 #include <string.h>
 
+namespace
+{
+    typedef struct
+    {
+        uint8_t						m_FileHashData[20];
+        uint64_t					m_FileLen;
+        uint16_t					m_FileNameLen;
+        uint8_t						m_FileTypeFlags;
+        char						m_FileName[260];	
+    }PackedFileListEntry;
+}
+
 //============================================================================
 //  PktBaseSendReq
 //============================================================================
@@ -233,4 +245,106 @@ const char *  PktBaseXferErr::describeError( void )
 	}
 }
 
+//============================================================================
+PktBaseFindReq::PktBaseFindReq()
+{
+    m_MatchName[ 0 ] = 0;
+}
 
+//============================================================================
+bool PktBaseFindReq::setMatchName( std::string &csName )
+{
+    if( ( PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN - 1) > csName.size() )
+    {
+        strcpy( m_MatchName, (const char *)csName.c_str() );
+        setPktLength( ROUND_TO_16BYTE_BOUNDRY( getEmptyLen()  + csName.size() + 1 ) );
+        return true;
+    }
+    else
+    {
+        m_MatchName[ 0 ] = 0; 
+        setPktLength( getEmptyLen() );
+        return false;
+    }
+}
+
+//============================================================================
+bool PktBaseFindReq::getMatchName( std::string &csName )
+{
+    if( getEmptyLen() >= getPktLength() )
+    {
+        vx_assert( false );
+        csName = "";
+        return false;
+    }
+    else
+    {
+        char as8Buf[ PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN ];
+        VxUnchopStr( (unsigned char *)m_MatchName, as8Buf );
+        csName = as8Buf;
+        return true;
+    }
+}
+
+//============================================================================
+PktBaseListReply::PktBaseListReply()
+{
+    memset( m_as8FileList, 0, sizeof( m_as8FileList ) );
+    calcPktLen( 0 );
+}
+
+//============================================================================
+void PktBaseListReply::calcPktLen( uint16_t dataLen )
+{
+    setListDataLen( dataLen );
+    setPktLength( (uint16_t)ROUND_TO_16BYTE_BOUNDRY( sizeof( PktBaseListReply ) - PKT_BASE_MAX_SHARED_FILE_LIST_LEN  + dataLen ) );
+}
+
+//============================================================================
+void PktBaseListReply::getFileList( std::vector<VxFileInfo>& retFileList )
+{
+    uint16_t fileCnt = getFileCount();
+    uint32_t dataOffset = 0;
+
+    for( uint16_t cnt = 0; cnt < fileCnt; cnt++ )
+    {
+        PackedFileListEntry * entry = (PackedFileListEntry *)(&m_as8FileList[dataOffset]);
+
+        //char as8Buf[ VX_MAX_PATH ];
+        //VxUnchopStr( (unsigned char *)entry->m_FileName, as8Buf );
+        VxFileInfo fileInfo( entry->m_FileName );
+        fileInfo.setFileHashData( entry->m_FileHashData );
+        fileInfo.setFileLength( ntohU64( entry->m_FileLen ) );
+        fileInfo.setFileType( entry->m_FileTypeFlags );
+        dataOffset += ROUND_TO_4BYTE_BOUNDRY( sizeof( PackedFileListEntry ) - 260 + htons( entry->m_FileNameLen ) );
+
+        retFileList.push_back( fileInfo );
+    }
+}
+
+//============================================================================
+bool PktBaseListReply::canAddFile( int fileNameLenIncludingZero )
+{
+    uint32_t curLen = getListDataLen();
+    uint32_t addLen = sizeof( PackedFileListEntry ) - 260 + fileNameLenIncludingZero + 20;
+    return ( curLen + addLen ) < PKT_BASE_MAX_SHARED_FILE_LIST_LEN;
+}
+
+//============================================================================
+void PktBaseListReply::addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char * fileName )
+{
+    uint32_t curLen = getListDataLen();
+    PackedFileListEntry * entry = (PackedFileListEntry *)(&m_as8FileList[ curLen ]);
+    memcpy( entry->m_FileHashData, fileHashId.getHashData(), 20 );
+    entry->m_FileLen = htonU64( fileLen );
+    entry->m_FileTypeFlags = fileTypeFlags;
+    //(uint16_t)VxChopStr( fileName, (unsigned char *)entry->m_FileName );
+    uint16_t choppedLen = (uint16_t)(strlen( fileName ) + 1);
+    strcpy( entry->m_FileName, fileName );
+    entry->m_FileNameLen = htons( choppedLen );
+    // if we do not align will sometimes get illegal alignment error
+    uint16_t dataLen = (uint16_t)ROUND_TO_4BYTE_BOUNDRY( (curLen + sizeof( PackedFileListEntry ) - 260 + choppedLen ) );
+    setListDataLen( dataLen );
+    calcPktLen( dataLen );
+    setFileCount( getFileCount() + 1 );
+}

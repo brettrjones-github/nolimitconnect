@@ -171,6 +171,7 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
     bool foundThumb = false;
     if( user && user->getNetIdent() )
     {
+        pluginType = HostPluginToClientPluginType( pluginType );
         VxNetIdent* netIdent = user->getNetIdent();
         bool hostImageValid = netIdent->getThumbId( pluginType ).isVxGUIDValid();
         VxGUID thumbId = hostImageValid ? netIdent->getThumbId( pluginType ) : netIdent->getAvatarGuid();

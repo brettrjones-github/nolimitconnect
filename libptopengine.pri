@@ -356,12 +356,14 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseTxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferPktCreate.h \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetRxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetTxSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferPktCreate.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetXferSession.cpp \
@@ -627,6 +629,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbTxSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferPktCreate.cpp \
 	$$PWD/GoTvCore/GoTvP2P/ThumbMgr/ThumbXferSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/User.cpp \
 	$$PWD/GoTvCore/GoTvP2P/User/UserList.cpp \

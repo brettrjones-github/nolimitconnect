@@ -234,15 +234,15 @@ public:
 	uint16_t					getSizeLimitType( void )						{ return ntohs( m_u16SizeLimitType ); }
 
 private:
-	uint16_t					m_u16FileFlags;		// types of file to match ( SEE FILE_TYPE_MASK )
-	uint16_t					m_u16SizeLimitType;	// type of file size limit 0=any size 1=At Least 2=At Most 3=Exactly
-	uint32_t					m_u32ResP1;			// reserved
-	int64_t						m_s64FileLen;		// file size 
+    uint16_t					m_u16FileFlags{ 0 };		// types of file to match ( SEE FILE_TYPE_MASK )
+	uint16_t					m_u16SizeLimitType{ 0 };;	// type of file size limit 0=any size 1=At Least 2=At Most 3=Exactly
+	uint32_t					m_u32ResP1{ 0 };;			// reserved
+	int64_t						m_s64FileLen{ 0 };;		// file size 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	uint32_t					m_u32Res1; 
-	uint32_t					m_u32Res2; 
+	uint32_t					m_u32Res1{ 0 };; 
+	uint32_t					m_u32Res2{ 0 };; 
 	char						m_MatchName[ PKT_SHARE_FIND_FILE_MATCHNAME_MAX_LEN + 16 ];
 };
 

@@ -20,11 +20,18 @@
 
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxSha1Hash.h>
+#include <CoreLib/VxFileInfo.h>
 
 #define PKT_TYPE_ASSET_MAX_DATA_LEN		14320	// maximum length of chunk of Asset data
 #define PKT_TYPE_ASSET_MAX_NAME_AND_TAG_LEN		( 4096 * 2 + 48 )	// maximum length of chunk of Asset data
 
 #define MAX_ASSET_LIST_LEN				4096	// maximum length of list of Assets
+
+
+#define PKT_BASE_MAX_SHARED_FILE_LIST_LEN			12288
+#define PKT_BASE_ERR_NO_SHARED_FILES				0x0001
+#define PKT_BASE_ERR_FILE_LIST_IDX_OUT_OF_RANGE		0x0002
+#define PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN        128
 
 
 #pragma pack(push) 
@@ -80,12 +87,14 @@ public:
 
 private:
     uint16_t					m_AssetType{ 0 };
+    uint16_t					m_u16Res1{ 0 };
     VxGUID						m_UniqueId;
     VxGUID						m_LclSessionId;
     VxGUID						m_RmtSessionId;
     VxSha1Hash					m_FileHashId;
     int64_t						m_s64StartOffs{ 0 };
     int64_t						m_s64EndOffs{ 0 };	//if 0 then get all
+    int64_t						m_s64Res1{ 0 };
     uint32_t					m_u32Res1{ 0 };
     uint32_t					m_u32Res2{ 0 };
 };
@@ -118,12 +127,14 @@ public:
 
 private:
     uint16_t					m_AssetType{ 0 };
+    uint16_t					m_u16Res1{ 0 };
     VxGUID						m_UniqueId;
     VxGUID						m_LclSessionId;
     VxGUID						m_RmtSessionId;
     VxSha1Hash					m_FileHashId;
     int64_t						m_s64StartOffs{ 0 };
     int64_t						m_s64EndOffs{ 0 };	//if 0 then get all
+    int64_t						m_s64Res1{ 0 };
     uint32_t					m_u32Error{ 0 };
     uint32_t					m_u32Res2{ 0 };
 };
@@ -176,6 +187,7 @@ public:
 
 private:
 	uint16_t					m_AssetType{ 0 };
+    uint16_t					m_u16Res1{ 0 };
 	VxGUID						m_UniqueId;
 	VxGUID						m_CreatorId;
 	VxGUID						m_HistoryId; 
@@ -414,6 +426,97 @@ private:
 	VxGUID						m_TxAssetInstance; 
 	uint32_t					m_u32Res1{ 0 };
 	uint32_t					m_u32Res2{ 0 };
+};
+
+//============================================================================
+// File Find packets
+//============================================================================
+class PktBaseFindReq : public VxPktHdr
+{
+public:
+    PktBaseFindReq();
+
+    uint16_t					getEmptyLen( void ){ return (uint16_t)(sizeof( PktBaseFindReq )-PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN); };
+    bool						setMatchName( std::string & csMatchName );
+    bool						getMatchName( std::string & csRetMatchName );
+
+    void						setLclSessionId( VxGUID& lclId )				{ m_LclSessionId = lclId; }
+    VxGUID&						getLclSessionId( void )							{ return m_LclSessionId; }
+    void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
+    VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
+
+    void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
+    VxSha1Hash&					getFileHashId( void )							{ return m_FileHashId; }
+
+    void						setFileLen( int64_t len )						{ m_s64FileLen = htonU64( len ); }
+    int64_t						getFileLen( void )								{ return ntohU64( m_s64FileLen ); }
+
+    void						setFileFlags( uint16_t flags )					{ m_u16FileFlags = htons( flags ); }
+    uint16_t					getFileFlags( void )							{ return ntohs( m_u16FileFlags ); }
+    void						setSizeLimitType( uint16_t type )				{ m_u16SizeLimitType = htons( type ); }
+    uint16_t					getSizeLimitType( void )						{ return ntohs( m_u16SizeLimitType ); }
+
+private:
+    uint16_t					m_u16FileFlags{ 0 };		// types of file to match ( SEE FILE_TYPE_MASK )
+    uint16_t					m_u16SizeLimitType{ 0 };;	// type of file size limit 0=any size 1=At Least 2=At Most 3=Exactly
+    uint32_t					m_u32ResP1{ 0 };;			// reserved
+    int64_t						m_s64FileLen{ 0 };;		// file size 
+    VxGUID						m_LclSessionId;
+    VxGUID						m_RmtSessionId;
+    VxSha1Hash					m_FileHashId;
+    uint32_t					m_u32Res1{ 0 };; 
+    uint32_t					m_u32Res2{ 0 };; 
+    char						m_MatchName[ PKT_BASE_FIND_FILE_MATCHNAME_MAX_LEN + 16 ];
+};
+
+class PktBaseListReq : public VxPktHdr
+{
+public:
+    PktBaseListReq() = default;
+
+    void						setListIndex( uint32_t index )                  { m_u32Index = htonl( index ); }
+    uint32_t					getListIndex( void )                            { return ntohl( m_u32Index ); }
+
+private:
+    //=== vars ===//
+    uint32_t					m_u32Index{ 0 };	
+    uint32_t					m_u16Res{ 0 };
+};
+
+class PktBaseListReply : public VxPktHdr
+{
+public:
+    PktBaseListReply();
+
+    void						calcPktLen( uint16_t dataLen );
+
+    void						setIsListCompleted( bool isCompleted )			{ m_bListComplete = isCompleted ? 1 : 0; }
+    bool						getIsListCompleted( void )						{ return m_bListComplete ? true : false; }
+
+    void						setError( uint32_t u32Error )			        { m_u32Error = htonl( u32Error ); }
+    uint32_t					getError( void )						        { return  ntohl( m_u32Error ); }
+
+    void						setListDataLen( uint16_t dataLen )			    { m_u16DataLen =  htons( dataLen ); }
+    uint16_t					getListDataLen( void )		                    { return ntohs( m_u16DataLen ); }
+    void						setFileCount( uint16_t fileCount )			    { m_u16FileCnt =  htons(fileCount ); }
+    uint16_t					getFileCount( void )	                        { return ntohs( m_u16FileCnt ); }
+    void						setListIndex( uint32_t index )			        { m_u32ListIndex = htonl( index ); }
+    uint32_t					getListIndex( void )                            { return  ntohl( m_u32ListIndex ); }
+
+    void						getFileList( std::vector<VxFileInfo>& retList );
+    bool						canAddFile( int fileNameLenIncludingZero );
+    void						addFile( VxSha1Hash& fileHashId, uint64_t fileLen, uint8_t fileTypeFlags, const char * fileName );
+
+private:
+    //=== vars ===//
+    uint8_t						m_bListComplete{ false };		// if 1 then list has been completed
+    uint8_t						m_u8Res1{ 0 };
+    uint16_t					m_u16DataLen{ 0 };			    // length of data
+    uint16_t					m_u16FileCnt{ 0 };		        // number of files in this pkt
+    uint16_t					m_u16Res{ 0 };				
+    uint32_t					m_u32Error{ 0 };
+    uint32_t					m_u32ListIndex{ 0 };
+    char						m_as8FileList[ PKT_BASE_MAX_SHARED_FILE_LIST_LEN ];
 };
 
 #pragma pack(pop)

@@ -431,6 +431,7 @@
     <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferPktCreate.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetInfo.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -474,6 +475,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferPktCreate.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferSession.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -753,6 +755,7 @@
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferPktCreate.cpp" />
     <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.cpp" />

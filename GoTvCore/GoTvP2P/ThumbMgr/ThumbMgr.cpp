@@ -316,6 +316,16 @@ bool ThumbMgr::saveToDatabase( ThumbInfo& thumbInfo )
 }
 
 //============================================================================
+void ThumbMgr::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
 void ThumbMgr::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 }
@@ -332,6 +342,16 @@ void ThumbMgr::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNet
 
 //============================================================================
 void ThumbMgr::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+{
+}
+
+//============================================================================
+void ThumbMgr::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 }
 
@@ -354,9 +374,16 @@ void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetI
 bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
 {
 
-    if( !netIdent || ePluginTypeInvalid != pluginType )
+    if( !netIdent || ePluginTypeInvalid == pluginType )
     {
         LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid param " );
+        vx_assert( false );
+        return false;
+    }
+
+    if( IsHostPluginType( pluginType ) )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb You must request thumb using Client plugin instead of Host plugin %s ", DescribePluginType( pluginType ) );
         vx_assert( false );
         return false;
     }

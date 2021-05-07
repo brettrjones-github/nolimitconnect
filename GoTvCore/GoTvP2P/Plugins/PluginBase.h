@@ -191,10 +191,14 @@ public:
     virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
+    virtual void				onPktThumbGetReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbGetReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbSendReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbSendReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbChunkReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbChunkReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbGetCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktThumbGetCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;

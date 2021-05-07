@@ -119,3 +119,29 @@ PktAssetXferErr::PktAssetXferErr()
 	vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
+//============================================================================
+PktAssetFindReq:: PktAssetFindReq()
+    : PktBaseFindReq() 
+{
+    setPktType( PKT_TYPE_ASSET_FIND_REQ ); 
+    setPktLength( sizeof(  PktAssetFindReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktAssetListReq:: PktAssetListReq()
+    : PktBaseListReq() 
+{
+    setPktType( PKT_TYPE_ASSET_LIST_REQ ); 
+    setPktLength( sizeof(  PktAssetListReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktAssetListReply::PktAssetListReply()
+    : PktBaseListReply( )
+{
+    setPktType( PKT_TYPE_ASSET_LIST_REPLY ); 
+    setPktLength( sizeof(  PktAssetListReply ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}

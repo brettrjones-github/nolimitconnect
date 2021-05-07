@@ -39,6 +39,20 @@ public:
 	virtual void				onPktThumbSendCompleteReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktThumbXferErr			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
+    virtual PktBaseGetReq*			    createPktBaseGetReq( void ) override;
+    virtual PktBaseGetReply*			createPktBaseGetReply( void ) override;
+    virtual PktBaseSendReq*			    createPktBaseSendReq( void ) override;
+    virtual PktBaseSendReply*			createPktBaseSendReply( void ) override;
+    virtual PktBaseChunkReq*			createPktBaseChunkReq( void ) override;
+    virtual PktBaseChunkReq*			createPktBaseChunkReply( void ) override;
+    virtual PktBaseGetCompleteReq*		createPktBaseGetCompleteReq( void ) override;
+    virtual PktBaseGetCompleteReply*	createPktBaseGetCompleteReply( void ) override;
+    virtual PktBaseSendCompleteReq*		createPktBaseSendCompleteReq( void ) override;
+    virtual PktBaseSendCompleteReply*	createPktBaseSendCompleteReply( void ) override;
+    virtual PktBaseXferErr*			    createPktBaseXferErr( void ) override;
+    virtual PktBaseListReq*			    createPktBaseListReq( void ) override;
+    virtual PktBaseListReply*			createPktBaseListReply( void ) override;
+
     virtual bool				requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId );
 
 protected:

@@ -49,6 +49,7 @@ PktFileListReq::PktFileListReq()
 {
 	setPktType( PKT_TYPE_FILE_LIST_REQ );
 	setPktLength( sizeof( PktFileListReq ) );
+
 }
 
 //============================================================================

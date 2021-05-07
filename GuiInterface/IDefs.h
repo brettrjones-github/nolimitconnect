@@ -1044,3 +1044,11 @@ EPluginType HostTypeToHostPlugin( EHostType hostType );
 EPluginType HostTypeToClientPlugin( EHostType hostType );
 //! convert Plugin Type to host type
 EHostType PluginTypeToHostType( EPluginType pluginType );
+// if host plugin return its client plugin else return pluginType param
+EPluginType HostPluginToClientPluginType( EPluginType pluginType );
+// if client plugin return its host plugin else return pluginType param
+EPluginType ClientPluginToHostPluginType( EPluginType pluginType );
+//! return true if is a client plugin
+bool IsClientPluginType( EPluginType pluginType );
+//! return true if is a host plugin
+bool IsHostPluginType( EPluginType pluginType );

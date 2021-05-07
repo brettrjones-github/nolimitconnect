@@ -38,11 +38,19 @@ class IToGui;
 class P2PEngine;
 class VxSha1Hash;
 
-class PktAssetSendReq;
-class PktAssetSendReply;
-class PktAssetChunkReq;
-class PktAssetSendCompleteReq;
-class PktAssetListReply;
+class PktBaseGetReq;
+class PktBaseGetReply;
+class PktBaseSendReq;
+class PktBaseSendReply;
+class PktBaseChunkReq;
+class PktBaseChunkReply;
+class PktBaseGetCompleteReq;
+class PktBaseGetCompleteReply;
+class PktBaseSendCompleteReq;
+class PktBaseSendCompleteReply;
+class PktBaseXferErr;
+class PktBaseListReq;
+class PktBaseListReply;
 
 class AssetBaseXferMgr
 {
@@ -86,6 +94,7 @@ public:
 protected:
 	virtual void				onAssetBaseReceived( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onAssetBaseSent( AssetBaseTxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
+    virtual void				onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, bool pluginIsLocked );
 	virtual void				onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				updateAssetMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param );
@@ -100,49 +109,63 @@ protected:
 	virtual AssetBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
 	virtual AssetBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
 
-	virtual EXferError			beginAssetBaseReceive( AssetBaseRxSession * xferSession, PktAssetSendReq * poPkt, PktAssetSendReply& pktReply );
-	virtual EXferError			beginAssetBaseSend( AssetBaseTxSession * xferSession );
+	virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession * xferSession, PktBaseSendReq * poPkt, PktBaseSendReply& pktReply );
+	virtual EXferError			        beginAssetBaseSend( AssetBaseTxSession * xferSession );
 
-	virtual void				endAssetBaseXferSession( AssetBaseRxSession * xferSession, bool pluginIsLocked );
-	virtual void				endAssetBaseXferSession( AssetBaseTxSession * xferSession, bool pluginIsLocked, bool requeAsset );
+	virtual void				        endAssetBaseXferSession( AssetBaseRxSession * xferSession, bool pluginIsLocked );
+	virtual void				        endAssetBaseXferSession( AssetBaseTxSession * xferSession, bool pluginIsLocked, bool requeAsset );
 
-	virtual EXferError			rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxSession * xferSession, PktAssetChunkReq * poPkt );
-	virtual EXferError			txNextAssetBaseChunk( AssetBaseTxSession * xferSession, uint32_t remoteErr, bool pluginIsLocked );
+	virtual EXferError			        rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxSession * xferSession, PktBaseChunkReq * poPkt );
+	virtual EXferError			        txNextAssetBaseChunk( AssetBaseTxSession * xferSession, uint32_t remoteErr, bool pluginIsLocked );
 
-	virtual void				finishAssetBaseReceive( AssetBaseRxSession * xferSession, PktAssetSendCompleteReq * poPkt, bool pluginIsLocked );
+	virtual void				        finishAssetBaseReceive( AssetBaseRxSession * xferSession, PktBaseSendCompleteReq * poPkt, bool pluginIsLocked );
 
-	void						clearRxSessionsList( void );
-	void						clearTxSessionsList( void );
-	void						checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase * sktBase );
+	void						        clearRxSessionsList( void );
+	void						        clearTxSessionsList( void );
+	void						        checkQueForMoreAssetsToSend( bool pluginIsLocked, VxNetIdent * hisIdent, VxSktBase * sktBase );
 
-	void						assetSendComplete( AssetBaseTxSession * xferSession );
-	void						queAsset( AssetBaseInfo& assetInfo );
-	EXferError					createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase );
-    EXferError                  createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase );
+	void						        assetSendComplete( AssetBaseTxSession * xferSession );
+	void						        queAsset( AssetBaseInfo& assetInfo );
+	EXferError					        createAssetTxSessionAndSend( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase );
+    EXferError                          createAssetRxSessionAndReceive( bool pluginIsLocked, AssetBaseInfo& assetInfo, VxNetIdent * hisIdent, VxSktBase * sktBase );
 
-	bool						requireFileXfer( EAssetType assetType );
+	bool						        requireFileXfer( EAssetType assetType );
 
-    virtual void                onAssetBaseBeginUpload( VxNetIdent *netIdent, AssetBaseInfo& assetInfo ) {};
-    virtual void                onAssetBaseUploadError( VxNetIdent *netIdent, AssetBaseInfo& assetInfo, EXferError xferErr ) {};
+    virtual void                        onAssetBaseBeginUpload( VxNetIdent *netIdent, AssetBaseInfo& assetInfo ) {};
+    virtual void                        onAssetBaseUploadError( VxNetIdent *netIdent, AssetBaseInfo& assetInfo, EXferError xferErr ) {};
 
+    virtual PktBaseGetReq*			    createPktBaseGetReq( void );
+    virtual PktBaseGetReply*			createPktBaseGetReply( void );
+    virtual PktBaseSendReq*			    createPktBaseSendReq( void );
+    virtual PktBaseSendReply*			createPktBaseSendReply( void );
+    virtual PktBaseChunkReq*			createPktBaseChunkReq( void );
+    virtual PktBaseChunkReq*			createPktBaseChunkReply( void );
+    virtual PktBaseGetCompleteReq*		createPktBaseGetCompleteReq( void );
+    virtual PktBaseGetCompleteReply*	createPktBaseGetCompleteReply( void );
+    virtual PktBaseSendCompleteReq*		createPktBaseSendCompleteReq( void );
+    virtual PktBaseSendCompleteReply*	createPktBaseSendCompleteReply( void );
+    virtual PktBaseXferErr*			    createPktBaseXferErr( void );
+
+    virtual PktBaseListReq*			    createPktBaseListReq( void );
+    virtual PktBaseListReply*			createPktBaseListReply( void );
 
 	//=== vars ===//
-	bool						m_Initialized;
+	bool						        m_Initialized;
 	std::map<VxGUID, AssetBaseRxSession *>	m_RxSessions;
 	std::vector<AssetBaseTxSession *>		m_TxSessions;
-	VxMutex						m_TxSessionsMutex;
+	VxMutex						        m_TxSessionsMutex;
 
-    P2PEngine&					m_Engine;	
-    AssetBaseMgr&				m_AssetBaseMgr;
-    BaseXferInterface&          m_XferInterface;
-    PluginMgr&					m_PluginMgr;
+    P2PEngine&					        m_Engine;	
+    AssetBaseMgr&				        m_AssetBaseMgr;
+    BaseXferInterface&                  m_XferInterface;
+    PluginMgr&					        m_PluginMgr;
 	
-	AssetBaseXferDb				m_AssetBaseXferDb;
+	AssetBaseXferDb				        m_AssetBaseXferDb;
 
-	VxMutex						m_AssetBaseSendQueMutex;
-	std::vector<AssetBaseInfo>	m_AssetBaseSendQue;
-	VxThread					m_WorkerThread;
-    std::string                 m_WorkerThreadName;
+	VxMutex						        m_AssetBaseSendQueMutex;
+	std::vector<AssetBaseInfo>	        m_AssetBaseSendQue;
+	VxThread					        m_WorkerThread;
+    std::string                         m_WorkerThreadName;
 };
 
 

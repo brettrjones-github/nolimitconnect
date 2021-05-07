@@ -66,7 +66,8 @@ AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, int64_t modifiedTime )
 
 //============================================================================
 AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime )
-: BaseInfo( creatorId, assetId, modifiedTime )
+: BaseInfo( creatorId, modifiedTime )
+, m_UniqueId( assetId )
 , m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 {

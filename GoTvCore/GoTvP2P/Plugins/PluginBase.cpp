@@ -186,7 +186,7 @@ void PluginBase::onSessionStart( PluginSessionBase * poSession, bool pluginIsLoc
 //============================================================================
 bool PluginBase::txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend )
 {
-	if( NULL == sktBase )
+	if( nullptr == sktBase )
 	{
 		LogMsg( LOG_WARN, "PluginBase::txPacket NULL sktBase\n" );
 		return false;
@@ -198,7 +198,7 @@ bool PluginBase::txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr 
 //============================================================================
 bool PluginBase::txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend, EPluginType overridePlugin )
 {
-    if( NULL == sktBase )
+    if( nullptr == sktBase )
     {
         LogMsg( LOG_WARN, "PluginBase::txPacket NULL sktBase\n" );
         return false;

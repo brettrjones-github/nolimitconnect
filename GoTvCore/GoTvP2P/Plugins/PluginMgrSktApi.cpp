@@ -22,11 +22,11 @@
 bool PluginMgr::pluginApiSktConnectTo(		EPluginType			ePluginType,	// plugin id
 											VxNetIdentBase *	netIdent,		// identity of contact to connect to
 											int					pvUserData,		// plugin defined data
-											VxSktBase * *		ppoRetSkt, 		// returned Socket
+											VxSktBase **		ppoRetSkt, 		// returned Socket
 											EConnectReason		connectReason )
 {
-	VxSktBase * sktBase = NULL;
-	* ppoRetSkt = NULL;
+	VxSktBase * sktBase = nullptr;
+	* ppoRetSkt = nullptr;
 	bool newConnection = false;
 	if( true == m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, newConnection, connectReason ) )
 	{
