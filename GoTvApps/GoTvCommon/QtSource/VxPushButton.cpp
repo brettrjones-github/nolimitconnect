@@ -446,12 +446,13 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
         QImage resizedPicmap = m_IconOverrideImage.scaled( drawRect.size(), Qt::KeepAspectRatio );
         m_IconImage = QPixmap::fromImage( resizedPicmap );
         m_LastIconSize = drawRect.size();
+        m_LastIconColor = iconColor;
         m_IconOverrideImageWasDrawn = true;
     }
-	else if( ( m_LastIconColor != iconColor )
+	else if( !m_IconOverrideImageWasSet && (( m_LastIconColor != iconColor )
 		|| m_IconImage.isNull()
         || ( m_MyIconLast != m_MyIcon )
-		|| ( drawRect.size() != m_LastIconSize ) )
+		|| ( drawRect.size() != m_LastIconSize ) ) )
 	{
 		if( m_UseTheme )
 		{
@@ -761,10 +762,12 @@ void VxPushButton::mouseReleaseEvent( QMouseEvent * event )
 {
 	//qDebug() << "VxPushButton::mouseReleaseEvent " << event->pos();
 	m_InSlideLeftMode = false;
+    /* BRJ ???
 	if( !m_IsToggleButton )
 	{
 		setNotifyOnlineEnabled( false );
 	}
+    */
 
 	QPushButton::mouseReleaseEvent( event );
 }

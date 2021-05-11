@@ -524,6 +524,7 @@ std::string& VxGetAppTempDirectory(void) { return g_strAppTempDir; }
 std::string& VxGetAppLogsDirectory(void) { return g_strAppLogsDir; }
 std::string& VxGetAppGoTvDataDirectory(void) { return g_strAppGoTvDataDir; }
 std::string& VxGetAppKodiDataDirectory(void) { return g_strAppKodiDataDir; }
+std::string& VxGetAppThumbnailDirectory(void) { return g_strAppThumbsDir; }
 
 //============================================================================
 void VxSetRootUserDataDirectory( const char * rootUserDataDir )
@@ -535,8 +536,6 @@ void VxSetRootUserDataDirectory( const char * rootUserDataDir )
 
 //============================================================================
 std::string& VxGetRootUserDataDirectory( void ) { return g_strRootUserDataDir; }
-
-
 
 //============================================================================
 void VxSetUserSpecificDataDirectory( const char * userDataDir  )
@@ -550,6 +549,7 @@ void VxSetUserSpecificDataDirectory( const char * userDataDir  )
     g_strUserProfileDir = g_strUserSpecificDataDir + "profile/";
     VxFileUtil::makeDirectory( g_strUserProfileDir.c_str() );
 }
+
 //============================================================================
 std::string& VxGetUserSpecificDataDirectory( void ) { return g_strUserSpecificDataDir; }
 std::string& VxGetSettingsDirectory( void ) { return g_strSettingsDir; }

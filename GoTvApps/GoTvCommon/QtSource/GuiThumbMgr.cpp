@@ -113,7 +113,7 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo * thumbInfo )
     }
 
     m_ThumbListMutex.lock();
-    GuiThumb* guiThumb = findThumb( thumbInfo->getCreatorId() );
+    GuiThumb* guiThumb = findThumb( thumbInfo->getAssetUniqueId() );
     m_ThumbListMutex.unlock();
     if( guiThumb )
     {

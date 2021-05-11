@@ -113,6 +113,7 @@ std::string&	            VxGetAppTempDirectory( void );
 std::string&	            VxGetAppLogsDirectory( void );
 std::string&	            VxGetAppKodiDataDirectory( void );
 std::string&	            VxGetAppGoTvDataDirectory( void );
+std::string&	            VxGetAppThumbnailDirectory( void );
 
 void			            VxSetRootUserDataDirectory( const char * rootUserDataDir );
 std::string&	            VxGetRootUserDataDirectory( void );

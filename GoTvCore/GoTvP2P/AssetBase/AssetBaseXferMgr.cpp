@@ -477,7 +477,7 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
     if( eXferErrorNone != xferErr )
     {
         onAssetBaseUploadError( netIdent, *assetInfo, xferErr );
-        endAssetBaseXferSession( xferSession, false, false );
+        endAssetBaseXferSession( xferSession, true, false );
     }
     else
     {
@@ -2189,6 +2189,12 @@ void AssetBaseXferMgr::onAssetBaseReceived( AssetBaseRxSession * xferSession, As
 	{
 		std::string incompleteAsset = xferInfo.getDownloadIncompleteFileName();
 		std::string completedAssetBase = xferInfo.getDownloadCompleteFileName();
+        if( eAssetTypeThumbnail == assetInfo.getAssetType() )
+        {
+            // move to thumbnails instead of downloads folder
+            completedAssetBase = assetInfo.getAssetName();
+        }
+
 		RCODE rc = 0;
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteAsset.c_str(), completedAssetBase.c_str() ) ) )
 		{
@@ -2205,9 +2211,14 @@ void AssetBaseXferMgr::onAssetBaseReceived( AssetBaseRxSession * xferSession, As
 			}
 
 			m_AssetBaseMgr.addAsset( assetInfo );
-			m_Engine.fromGuiAddFileToLibrary( completedAssetBase.c_str(), true, xferInfo.getFileHashId().getHashData() );
+
 			if( eXferErrorNone == error )
 			{
+                if( eAssetTypeThumbnail != assetInfo.getAssetType() )
+                {
+                    m_Engine.fromGuiAddFileToLibrary( completedAssetBase.c_str(), true, xferInfo.getFileHashId().getHashData() );
+                }
+
 				IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, xferSession->getAssetBaseInfo().getAssetUniqueId(), 0 );
 			}
 			else
