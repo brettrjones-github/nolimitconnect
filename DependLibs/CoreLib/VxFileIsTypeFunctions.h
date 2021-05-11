@@ -29,6 +29,9 @@ bool VxIsArcOrCDImageFile( std::string& cs );
 bool VxIsArcOrCDImageFileExtention( const char * pExt );
 bool VxIsExecutableFile( std::string& cs );
 bool VxIsExecutableFileExtention( const char * pExt );
+bool VxIsThumbnailFile( std::string& cs );
+bool VxIsThumbnailFileExtention( const char * pExt );
+
 bool VxIsRecognizedFile( std::string& cs );
 bool VxIsRecognizedFileExtention( const char * pExt );
 

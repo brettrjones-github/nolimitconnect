@@ -47,7 +47,7 @@ public:
     virtual PktBaseSendReq*			    createPktBaseSendReq( void ) override;
     virtual PktBaseSendReply*			createPktBaseSendReply( void ) override;
     virtual PktBaseChunkReq*			createPktBaseChunkReq( void ) override;
-    virtual PktBaseChunkReq*			createPktBaseChunkReply( void ) override;
+    virtual PktBaseChunkReply*          createPktBaseChunkReply( void ) override;
     virtual PktBaseGetCompleteReq*		createPktBaseGetCompleteReq( void ) override;
     virtual PktBaseGetCompleteReply*	createPktBaseGetCompleteReply( void ) override;
     virtual PktBaseSendCompleteReq*		createPktBaseSendCompleteReq( void ) override;

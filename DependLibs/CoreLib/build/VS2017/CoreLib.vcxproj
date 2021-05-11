@@ -326,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp" />
+    <ClCompile Include="..\..\AssetDefs.cpp" />
     <ClCompile Include="..\..\BinaryBlob.cpp" />
     <ClCompile Include="..\..\Blowfish_corelib.cpp" />
     <ClCompile Include="..\..\DbBase_corelib.cpp" />

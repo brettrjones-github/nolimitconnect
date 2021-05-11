@@ -127,7 +127,7 @@ void PluginBase::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNet
 //============================================================================
 void PluginBase::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbXferMgr.onPktThumbGetReq( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbGetReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================
@@ -139,7 +139,7 @@ void PluginBase::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 //============================================================================
 void PluginBase::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    m_ThumbXferMgr.onPktThumbSendReq( sktBase, pktHdr, netIdent );
+    m_ThumbXferMgr.onPktThumbSendReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================

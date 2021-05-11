@@ -124,7 +124,7 @@ bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId )
         return false;
     }
 
-    ThumbInfo thumbInfo( netIdent->getMyOnlineId(), thumbId, eAssetTypeThumbnail );
+    ThumbInfo thumbInfo( netIdent->getMyOnlineId(), thumbId );
 
     return fromGuiRequestAssetBase( netIdent, thumbInfo );
 }

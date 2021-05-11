@@ -26,9 +26,9 @@ AssetInfoDb::AssetInfoDb( AssetBaseMgr& assetInfoMgr, const char * dbName )
 }
 
 //============================================================================
-AssetBaseInfo * AssetInfoDb::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+AssetBaseInfo * AssetInfoDb::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
 {
-    return new AssetInfo( assetName, assetLen, assetType );
+    return new AssetInfo( assetType, assetName, assetLen );
 }
 
 //============================================================================

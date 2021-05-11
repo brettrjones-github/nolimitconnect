@@ -33,6 +33,12 @@ AssetInfo::AssetInfo()
 }
 
 //============================================================================
+AssetInfo::AssetInfo( EAssetType assetType )
+    : AssetBaseInfo( assetType )
+{ 
+}
+
+//============================================================================
 AssetInfo::AssetInfo( const AssetInfo& rhs )
 {
 	*this = rhs;
@@ -44,14 +50,14 @@ AssetInfo::AssetInfo( const AssetBaseInfo& rhs )
 }
 
 //============================================================================
-AssetInfo::AssetInfo( const std::string& fileName )
-: AssetBaseInfo( fileName )
+AssetInfo::AssetInfo( EAssetType assetType, const std::string& fileName )
+: AssetBaseInfo( assetType, fileName )
 { 
 }
 
 //============================================================================
-AssetInfo::AssetInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
-: AssetBaseInfo( fileName, fileLen, assetType )
+AssetInfo::AssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+: AssetBaseInfo( assetType, fileName, fileLen )
 {
 }
 

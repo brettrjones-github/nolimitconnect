@@ -40,9 +40,14 @@ ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbState
 }
 
 //============================================================================
-AssetBaseInfo * ThumbMgr::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+AssetBaseInfo * ThumbMgr::createAssetInfo( EAssetType assetType, const char * fileName, uint64_t assetLen )
 {
-    return new ThumbInfo( assetName, assetLen, assetType );
+    if( eAssetTypeThumbnail == assetType )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::createAssetInfo creating thumbnail asset of asset type %s", DescribeAssetType( assetType ) );
+    }
+
+    return new ThumbInfo( fileName, assetLen );
 }
 
 //============================================================================

@@ -37,6 +37,117 @@ namespace
 }
 
 //============================================================================
+//  PktBaseGetReq
+//============================================================================
+
+//============================================================================
+PktBaseGetReply::PktBaseGetReply()
+{ 
+    m_AssetNameAndTag[0] = 0;
+}
+
+//============================================================================
+bool PktBaseGetReply::fillPktFromAsset( AssetBaseInfo& assetInfo )
+{
+    setAssetType( (uint16_t)assetInfo.getAssetType() );
+    setCreatorId( assetInfo.getCreatorId() );
+    setHistoryId( assetInfo.getHistoryId() );
+    setUniqueId( assetInfo.getAssetUniqueId() );
+    setAssetHashId( assetInfo.getAssetHashId() );
+    setAssetLen( assetInfo.getAssetLength() );
+    setCreationTime( assetInfo.getCreationTime() );
+    setModifiedTime( assetInfo.getModifiedTime() );
+
+    setAssetNameAndTag( assetInfo.getAssetName().c_str(), assetInfo.getAssetTag().c_str() );
+    return true;
+}
+
+//============================================================================
+bool PktBaseGetReply::fillAssetFromPkt( AssetBaseInfo& assetInfo )
+{
+    assetInfo.setAssetType( (EAssetType)getAssetType() );
+    assetInfo.setAssetUniqueId( getUniqueId() );
+    assetInfo.setCreatorId( getCreatorId() );
+    assetInfo.setHistoryId( getHistoryId() );
+    assetInfo.setAssetHashId( getAssetHashId() );
+    assetInfo.setAssetLength( getAssetLen() );
+    assetInfo.setCreationTime( getCreationTime() );
+    assetInfo.setModifiedTime( getModifiedTime() );
+
+    std::string assetName = getAssetName();
+    assetInfo.setAssetName( assetName );
+    if( getAssetTagLen() )
+    {
+        assetInfo.setAssetTag(  &m_AssetNameAndTag[ getAssetNameLen() ] );
+    }
+
+    return true;
+}
+
+//============================================================================
+std::string  PktBaseGetReply::getAssetName()
+{
+    return m_AssetNameAndTag;
+}
+
+//============================================================================
+std::string  PktBaseGetReply::getAssetTag()
+{
+    std::string strTag = "";
+    if( getAssetTagLen() )
+    {
+        strTag = &m_AssetNameAndTag[ getAssetNameLen() ];
+    }
+
+    return strTag;
+}
+
+//============================================================================
+void  PktBaseGetReply::setAssetNameAndTag( const char * pAssetName, const char * pAssetTag )
+{
+    int nameLen = (int)strlen( pAssetName );
+    if( nameLen > 4095 )
+    {
+        nameLen = 4095;
+        strncpy( m_AssetNameAndTag, pAssetName, nameLen );
+        m_AssetNameAndTag[ nameLen ] = 0;
+    }
+    else
+    {
+        strcpy( m_AssetNameAndTag, pAssetName );	
+    }
+
+    nameLen += 1;
+    setAssetNameLen( (uint16_t)nameLen );
+
+    int tagLen = 0;
+    if( pAssetTag )
+    {
+        tagLen = (int)strlen( pAssetTag );
+        if( tagLen > 0 )
+        {
+            if( tagLen > 4095 )
+            {
+                tagLen = 4095;
+                strncpy( &m_AssetNameAndTag[nameLen], pAssetTag, tagLen );
+                m_AssetNameAndTag[ nameLen = tagLen ] = 0;
+            }
+            else
+            {
+                strcpy( &m_AssetNameAndTag[nameLen], pAssetTag );	
+            }
+
+            tagLen += 1;
+            setAssetTagLen( (uint16_t)tagLen );
+        }
+    }
+
+    uint16_t u16PktLen = ( uint16_t )( ( sizeof(  PktBaseGetReply ) - sizeof( m_AssetNameAndTag ) ) + nameLen + tagLen );
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
+    vx_assert( 0 == ( 0x0F & getPktLength() ) );
+}
+
+//============================================================================
 //  PktBaseSendReq
 //============================================================================
  PktBaseSendReq::PktBaseSendReq()
@@ -45,7 +156,7 @@ namespace
 }
 
 //============================================================================
-void  PktBaseSendReq::fillPktFromAsset( AssetBaseInfo& assetInfo )
+bool PktBaseSendReq::fillPktFromAsset( AssetBaseInfo& assetInfo )
 {
 	setAssetType( (uint16_t)assetInfo.getAssetType() );
 	setCreatorId( assetInfo.getCreatorId() );
@@ -53,12 +164,15 @@ void  PktBaseSendReq::fillPktFromAsset( AssetBaseInfo& assetInfo )
 	setUniqueId( assetInfo.getAssetUniqueId() );
 	setAssetHashId( assetInfo.getAssetHashId() );
 	setAssetLen( assetInfo.getAssetLength() );
-	setCreationTime( (uint32_t) assetInfo.getCreationTime() );
+    setCreationTime( assetInfo.getCreationTime() );
+    setModifiedTime( assetInfo.getModifiedTime() );
+
 	setAssetNameAndTag( assetInfo.getAssetName().c_str(), assetInfo.getAssetTag().c_str() );
+    return true;
 }
 
 //============================================================================
-void  PktBaseSendReq::fillAssetFromPkt( AssetBaseInfo& assetInfo )
+bool PktBaseSendReq::fillAssetFromPkt( AssetBaseInfo& assetInfo )
 {
 	assetInfo.setAssetType( (EAssetType)getAssetType() );
 	assetInfo.setAssetUniqueId( getUniqueId() );
@@ -66,13 +180,17 @@ void  PktBaseSendReq::fillAssetFromPkt( AssetBaseInfo& assetInfo )
 	assetInfo.setHistoryId( getHistoryId() );
 	assetInfo.setAssetHashId( getAssetHashId() );
 	assetInfo.setAssetLength( getAssetLen() );
-	assetInfo.setCreationTime( (time_t)getCreationTime() );
+    assetInfo.setCreationTime( getCreationTime() );
+    assetInfo.setModifiedTime( getModifiedTime() );
+
 	std::string assetName = getAssetName();
 	assetInfo.setAssetName( assetName );
 	if( getAssetTagLen() )
 	{
 		assetInfo.setAssetTag(  &m_AssetNameAndTag[ getAssetNameLen() ] );
 	}
+
+    return true;
 }
 
 //============================================================================
@@ -135,6 +253,7 @@ void  PktBaseSendReq::setAssetNameAndTag( const char * pAssetName, const char * 
 
 	uint16_t u16PktLen = ( uint16_t )( ( sizeof(  PktBaseSendReq ) - sizeof( m_AssetNameAndTag ) ) + nameLen + tagLen );
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
+    vx_assert( 0 == ( 0x0F & getPktLength() ) );
 }
 
 //============================================================================

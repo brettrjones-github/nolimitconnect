@@ -82,7 +82,7 @@ bool ThumbnailEditWidget::generateThumbAsset( ThumbInfo& assetInfoOut )
     fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
     if( saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
     {
-        ThumbInfo assetInfo( ( const char * )fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ), ( uint16_t )eAssetTypeThumbnail );
+        ThumbInfo assetInfo( ( const char * )fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ) );
         assetInfo.setAssetUniqueId( assetGuid );
         assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
         assetInfo.setCreationTime( GetTimeStampMs() );

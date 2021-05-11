@@ -20,10 +20,11 @@ class AssetInfo : public AssetBaseInfo
 {
 public:
 	AssetInfo();
+    AssetInfo( EAssetType assetType );
 	AssetInfo( const AssetInfo& rhs );
     AssetInfo( const AssetBaseInfo& rhs );
-	AssetInfo( const std::string& fileName );
-    AssetInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
+	AssetInfo( EAssetType assetType, const std::string& fileName );
+    AssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
 
 	AssetInfo&					operator=( const AssetInfo& rhs ); 
 

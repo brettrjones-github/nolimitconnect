@@ -290,9 +290,9 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::addAssetFile( const char * fileName, uint64_t fileLen, uint16_t fileType )
+AssetBaseInfo * AssetBaseMgr::addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen )
 {
-    AssetBaseInfo * assetInfo = createAssetInfo( fileName, fileLen, fileType );
+    AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, fileLen );
     if( assetInfo )
     {
         if( insertNewInfo( assetInfo ) )
@@ -305,14 +305,15 @@ AssetBaseInfo * AssetBaseMgr::addAssetFile( const char * fileName, uint64_t file
 }
 
 //============================================================================
-bool AssetBaseMgr::addAssetFile(	const char *	fileName, 
+bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
+                                    const char *	fileName, 
 									VxGUID&			assetId,  
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
 									const char *	assetTag, 
                                     int64_t			timestamp )
 {
-	AssetBaseInfo * assetInfo = createAssetInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		return insertNewInfo( assetInfo );
@@ -322,7 +323,8 @@ bool AssetBaseMgr::addAssetFile(	const char *	fileName,
 }
 
 //============================================================================
-bool AssetBaseMgr::addAssetFile(	const char *	fileName, 
+bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
+                                    const char *	fileName, 
 									VxGUID&			assetId,  
 									VxGUID&		    creatorId, 
 									VxGUID&		    historyId, 
@@ -331,7 +333,7 @@ bool AssetBaseMgr::addAssetFile(	const char *	fileName,
 									const char *	assetTag, 
                                     int64_t			timestamp )
 {
-	AssetBaseInfo * assetInfo = createAssetInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		assetInfo->setCreatorId( creatorId );
@@ -351,9 +353,9 @@ bool AssetBaseMgr::addAsset( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType )
+AssetBaseInfo * AssetBaseMgr::createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
 {
-    AssetBaseInfo * assetInfo = new AssetBaseInfo( fileName, fileLen, fileType );
+    AssetBaseInfo * assetInfo = new AssetBaseInfo( assetType, fileName, fileLen );
     if( assetInfo )
     {
         assetInfo->getAssetUniqueId().initializeWithNewVxGUID();
@@ -363,7 +365,8 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( const char * fileName, uint64_t f
 }
 
 //============================================================================
-AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	const char *	fileName, 
+AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType, 
+                                                const char *	fileName, 
 										        VxGUID&			assetId,  
 										        uint8_t *	    hashId, 
 										        EAssetLocation	locationFlags, 
@@ -379,7 +382,7 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	const char *	fileName,
 		return NULL;
 	}
 
-	AssetBaseInfo * assetInfo = createAssetInfo( fileName, fileLen, fileType );
+	AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, fileLen );
 	assetInfo->setAssetUniqueId( assetId );
 	if( false == assetInfo->getAssetUniqueId().isVxGUIDValid() )
 	{
@@ -782,7 +785,7 @@ bool AssetBaseMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile,
 	{
 		// file is not currently AssetBase and should be
 		VxGUID guid;
-		AssetBaseInfo * assetInfo = createAssetInfo( fileName.c_str(), guid, fileHashId, eAssetLocShared );
+		AssetBaseInfo * assetInfo = createAssetInfo( VxFileNameToAssetType( fileName ), fileName.c_str(), guid, fileHashId, eAssetLocShared );
 		if( assetInfo )
 		{
 			insertNewInfo( assetInfo );

@@ -19,19 +19,14 @@
 
 //============================================================================
 BlobInfoDb::BlobInfoDb( AssetBaseMgr& hostListMgr, const char * dbName )
-: AssetBaseInfoDb( hostListMgr, "BlobInfoDb" )
+: AssetBaseInfoDb( hostListMgr, dbName )
 {
 }
 
 //============================================================================
-BlobInfoDb::~BlobInfoDb()
+AssetBaseInfo * BlobInfoDb::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
 {
-}
-
-//============================================================================
-AssetBaseInfo * BlobInfoDb::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
-{
-    return new BlobInfo( assetName, assetLen, assetType );
+    return new BlobInfo( assetType, assetName, assetLen );
 }
 
 //============================================================================

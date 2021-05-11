@@ -41,39 +41,16 @@ win32 {
 #}
 
 INCLUDEPATH += ../
-
-SOURCES += ./VxSktBuf.cpp \
-    VxUrl.cpp \
-    VxSktWaitingList.cpp \
-    VxSktUtil.cpp \
-    VxSktUdpBroadcast.cpp \
-    VxSktUdp.cpp \
-    VxSktThrottle.cpp \
-    VxSktCrypto.cpp \
-    VxSktConnectSimple.cpp \
-    VxSktConnect.cpp \
-    VxSktBaseMgr.cpp \
-    VxSktBase.cpp \
-    VxSktAccept.cpp \
-    VxServerMgr.cpp \
-    VxResolveHost.cpp \
-    VxProxy.cpp \
-    VxPeerMgr.cpp \
-    VxParseUrlComponents.cpp \
-    VxHttpValuePair.cpp \
-    VxHttpRequest.cpp \
-    VxHttpParse.cpp \
-    VxGetRandomPort.cpp \
-    VxGetExternalIps.cpp \
-    VxFileXferInfo.cpp \
-    VxClientMgr.cpp \
-    VxBaseSktInfo.cpp \
-	AnchorSetting.cpp \
-    NetSettings.cpp \
-    InetAddress.cpp
  
-HEADERS += ./VxSktBuf.h \
-    VxUrl.h \
+HEADERS += ./AnchorSetting.h \
+	InetAddress.h \
+	NetSettings.h \
+	VxAnyRandomPort.h \ 
+	VxBaseSktInfo.h \
+	VxClientMgr.h \
+	VxSktBase.h \
+	VxSktBaseMgr.h \
+	VxSktBuf.h \
     VxSktWaitingList.h \
     VxSktUtil.h \
     VxSktUdpBroadcast.h \
@@ -85,8 +62,6 @@ HEADERS += ./VxSktBuf.h \
     VxSktCrypto.h \
     VxSktConnectSimple.h \
     VxSktConnect.h \
-    VxSktBaseMgr.h \
-    VxSktBase.h \
     VxSktAccept.h \
     VxServerMgr.h \
     VxResolveHost.h \
@@ -99,11 +74,35 @@ HEADERS += ./VxSktBuf.h \
     VxGetRandomPort.h \
     VxGetExternalIps.h \
     VxFileXferInfo.h \
-    VxClientMgr.h \
-    VxBaseSktInfo.h \
-    VxAnyRandomPort.h \
-	AnchorSetting.h \
-    NetSettings.h \
-    InetAddress.h
- 
+	VxUrl.h
 
+SOURCES += ./AnchorSetting.cpp \
+    InetAddress.cpp \
+	NetSettings.cpp \
+	VxBaseSktInfo.cpp \
+    VxClientMgr.cpp \
+	VxFileXferInfo.cpp \
+	VxSktBase.cpp \
+	VxSktBaseMgr.cpp \
+	VxSktBuf.cpp \
+    VxSktWaitingList.cpp \
+    VxSktUtil.cpp \
+    VxSktUdpBroadcast.cpp \
+    VxSktUdp.cpp \
+    VxSktThrottle.cpp \
+    VxSktCrypto.cpp \
+    VxSktConnectSimple.cpp \
+    VxSktConnect.cpp \
+    VxSktAccept.cpp \
+    VxServerMgr.cpp \
+    VxResolveHost.cpp \
+    VxProxy.cpp \
+    VxPeerMgr.cpp \
+    VxParseUrlComponents.cpp \
+    VxHttpValuePair.cpp \
+    VxHttpRequest.cpp \
+    VxHttpParse.cpp \
+    VxGetRandomPort.cpp \
+    VxGetExternalIps.cpp \
+    VxFileXferInfo.cpp \
+	VxUrl.cpp

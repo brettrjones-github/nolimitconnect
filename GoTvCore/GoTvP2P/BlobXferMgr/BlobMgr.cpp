@@ -37,9 +37,9 @@ BlobMgr::BlobMgr( P2PEngine& engine, const char * dbName, const char * stateDbNa
 }
 
 //============================================================================
-AssetBaseInfo * BlobMgr::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+AssetBaseInfo * BlobMgr::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
 {
-    return new BlobInfo( assetName, assetLen, assetType );
+    return new BlobInfo( assetType, assetName, assetLen );
 }
 
 //============================================================================

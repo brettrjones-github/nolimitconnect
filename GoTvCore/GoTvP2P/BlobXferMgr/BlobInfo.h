@@ -22,8 +22,8 @@ public:
 	BlobInfo();
 	BlobInfo( const BlobInfo& rhs );
     BlobInfo( const AssetBaseInfo& rhs );
-	BlobInfo( const std::string& fileName );
-    BlobInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
+	BlobInfo( EAssetType assetType, const std::string& fileName );
+    BlobInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
 
 	BlobInfo&				    operator=( const BlobInfo& rhs ); 
 };

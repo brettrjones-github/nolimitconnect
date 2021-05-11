@@ -16,29 +16,13 @@
 
 #include <GoTvDependLibrariesConfig.h>
 
-enum EXferState
+enum EXferDirection
 {
-	eXferStateUnknown,
+    eXferDirectionNone,
+    eXferDirectionRx,
+    eXferDirectionTx,
 
-	eXferStateUploadNotStarted,
-	eXferStateWaitingOfferResponse,
-	eXferStateInUploadQue,
-	eXferStateBeginUpload,
-	eXferStateInUploadXfer,
-	eXferStateCompletedUpload,
-	eXferStateUserCanceledUpload,
-	eXferStateUploadOfferRejected,
-	eXferStateUploadError,
-
-	eXferStateDownloadNotStarted,
-	eXferStateInDownloadQue,
-	eXferStateBeginDownload,
-	eXferStateInDownloadXfer,
-	eXferStateCompletedDownload,
-	eXferStateUserCanceledDownload,
-	eXferStateDownloadError,
-
-	eMaxXferState
+    eMaxXferDirection
 };
 
 enum EXferError
@@ -65,8 +49,31 @@ enum EXferError
 	eMaxXferError
 };
 
-enum EXferDirection
+enum EXferState
 {
-	eXferDirectionRx,
-	eXferDirectionTx
+    eXferStateUnknown,
+
+    eXferStateUploadNotStarted,
+    eXferStateWaitingOfferResponse,
+    eXferStateInUploadQue,
+    eXferStateBeginUpload,
+    eXferStateInUploadXfer,
+    eXferStateCompletedUpload,
+    eXferStateUserCanceledUpload,
+    eXferStateUploadOfferRejected,
+    eXferStateUploadError,
+
+    eXferStateDownloadNotStarted,
+    eXferStateInDownloadQue,
+    eXferStateBeginDownload,
+    eXferStateInDownloadXfer,
+    eXferStateCompletedDownload,
+    eXferStateUserCanceledDownload,
+    eXferStateDownloadError,
+
+    eMaxXferState
 };
+
+const char * DescribeXferDirection( EXferDirection xferDir );
+const char * DescribeXferError( EXferError xferErr );
+const char * DescribeXferState( EXferState xferState );

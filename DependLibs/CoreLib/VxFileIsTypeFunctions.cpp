@@ -27,19 +27,8 @@
 #define DOCUMENT_FILE_EXTENTIONS		"doc,txt,htm,html,pdf"	
 #define EXECUTABLE_FILE_EXTENTIONS		"exe,com,bat,cmd"		
 #define CDIMAGE_OR_ARC_FILE_EXTENTIONS	"7z,zip,rar,tar,gz,iso,cue,ccd,img,sub,bin,mds,nrg,pdi,mds,vob"
-#define COMBINED_FILE_EXTENTIONS		"opus,jpg,jpeg,bmp,tga,png,gif,pcx,mp3,wav,wma,ogg,asf,mpg,mpeg,mp4,3gp,mov,avi,divx,mkv,wmv,rm,exe,com,bat,cmd,7z,zip,rar,tar,doc,txt,htm,html,pdf"	
-
-/*
-#define FILE_TYPE_PHOTO_STR				"Photo"		
-#define FILE_TYPE_AUDIO_STR				"Audio"		
-#define FILE_TYPE_VIDEO_STR				"Video"		
-#define FILE_TYPE_EXECUTABLE_STR		"Executable"	
-#define FILE_TYPE_ARCHIVE_OR_DOC_STR	"Archive or Document"
-#define FILE_TYPE_CD_IMAGE_STR			"CD or DVD Image"
-#define FILE_TYPE_OTHER_STR				"Other"
-#define FILE_TYPE_ANY_STR				"Any"
-*/
-
+#define THUMBNAIL_FILE_EXTENTIONS	    "nlt"
+#define COMBINED_FILE_EXTENTIONS		"opus,jpg,jpeg,bmp,tga,png,gif,pcx,mp3,wav,wma,ogg,asf,mpg,mpeg,mp4,3gp,mov,avi,divx,mkv,wmv,rm,exe,com,bat,cmd,7z,zip,rar,tar,doc,txt,htm,html,pdf,nlt"	
 
 //============================================================================
 bool VxIsPhotoFile( std::string & cs )
@@ -81,7 +70,6 @@ bool VxIsVideoFileExtention( const char * pExt )
 	return stristr( VIDEO_FILE_EXTENTIONS, pExt )?1:0;
 }
 
-
 //============================================================================
 bool VxIsDocumentFile( std::string &cs )
 {
@@ -97,7 +85,7 @@ bool VxIsDocumentFileExtention( const char * pExt )
 }
 
 //============================================================================
-bool VxIsArcOrCDImageFileFile( std::string &cs )
+bool VxIsArcOrCDImageFile( std::string &cs )
 {
 	std::string csExt;
 	VxFileUtil::getFileExtension( cs, csExt );
@@ -122,6 +110,20 @@ bool VxIsExecutableFile( std::string &cs )
 bool VxIsExecutableFileExtention( const char * pExt )
 {
 	return stristr( EXECUTABLE_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+//============================================================================
+bool VxIsThumbnailFile( std::string &cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsThumbnailFileExtention( csExt.c_str() );
+}
+
+//============================================================================
+bool VxIsThumbnailFileExtention( const char * pExt )
+{
+    return stristr( THUMBNAIL_FILE_EXTENTIONS, pExt )?1:0;
 }
 
 //============================================================================

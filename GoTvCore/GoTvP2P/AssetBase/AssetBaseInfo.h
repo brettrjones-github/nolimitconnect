@@ -39,11 +39,12 @@ class AssetBaseInfo : public BaseInfo
 public:
     AssetBaseInfo();
     AssetBaseInfo( const AssetBaseInfo& rhs );
-    AssetBaseInfo( VxGUID& onlineId, int64_t modifiedTime = 0 );
-    AssetBaseInfo( VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
-    AssetBaseInfo( const std::string& fileName );
-    AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
-    AssetBaseInfo( VxGUID& creatorId,  VxGUID& assetId, EAssetType assetType );
+    AssetBaseInfo( EAssetType assetType );
+    AssetBaseInfo( EAssetType assetType, VxGUID& onlineId, int64_t modifiedTime = 0 );
+    AssetBaseInfo( EAssetType assetType, VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
+    AssetBaseInfo( EAssetType assetType, const std::string& fileName );
+    AssetBaseInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
+    AssetBaseInfo( EAssetType assetType, VxGUID& creatorId,  VxGUID& assetId );
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
 
@@ -53,8 +54,7 @@ public:
     virtual bool				isDirectory( void );
     virtual bool				isUnknownAsset( void )                          { return ( 0 == m_u16AssetType ) ? true : false; }
     virtual bool				isChatTextAsset( void )                         { return ( eAssetTypeChatText & m_u16AssetType ) ? true : false; }
-    virtual bool				isChatFaceAsset( void )                         { return ( (eAssetTypeChatFace)& m_u16AssetType ) ? true : false; }
-    virtual bool				isChatAvatarAsset( void )                       { return ( ( eAssetTypeChatStockAvatar | eAssetTypeChatCustomAvatar ) & m_u16AssetType ) ? true : false; }
+    virtual bool				isChatFaceAsset( void )                         { return ( eAssetTypeChatFace & m_u16AssetType ) ? true : false; }
     virtual bool				isPhotoAsset( void )                            { return ( eAssetTypePhoto & m_u16AssetType ) ? true : false; }
     virtual bool				isThumbAsset( void )                            { return ( eAssetTypeThumbnail & m_u16AssetType ) ? true : false; }
     virtual bool				isAudioAsset( void )                            { return ( eAssetTypeAudio & m_u16AssetType ) ? true : false; }

@@ -16,6 +16,8 @@
 
 #include <config_gotvcore.h>
 
+#include <string>
+
 enum EAssetType
 {
 	eAssetTypeUnknown				= 0x00,
@@ -28,12 +30,10 @@ enum EAssetType
 	eAssetTypeOtherFiles			= 0x40,
 	eAssetTypeDirectory				= 0x80,
 	// these are specific to my p2p web
-	eAssetTypeChatText				= 0x100,
-	eAssetTypeChatFace				= 0x200,
-	eAssetTypeChatStockAvatar		= 0x400,
-	eAssetTypeChatCustomAvatar		= 0x800,
     eAssetTypeThumbnail             = 0x1000,
-    eAssetTypeCamRecord             = 0x2000
+    eAssetTypeChatText				= 0x2000,
+    eAssetTypeChatFace				= 0x4000,
+    eAssetTypeCamRecord             = 0x8000
 };
 
 enum EAssetLocation
@@ -112,3 +112,8 @@ enum EAssetSendState
 	eMaxAssetSendState	
 };
 
+bool VxIsValidAssetType( EAssetType assetType );
+EAssetType VxFileNameToAssetType( std::string fileName );
+EAssetType VxFileTypeToAssetType( uint8_t fileType );
+
+const char * DescribeAssetType( EAssetType assetType );

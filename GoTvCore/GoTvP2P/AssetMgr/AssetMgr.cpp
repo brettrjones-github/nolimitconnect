@@ -23,9 +23,9 @@ AssetMgr::AssetMgr( P2PEngine& engine, const char * dbName, const char * dbState
 }
 
 //============================================================================
-AssetBaseInfo * AssetMgr::createAssetInfo( const char * assetName, uint64_t assetLen, uint16_t assetType )
+AssetBaseInfo * AssetMgr::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
 {
-    return new AssetInfo( assetName, assetLen, assetType );
+    return new AssetInfo( assetType, assetName, assetLen );
 }
 
 //============================================================================

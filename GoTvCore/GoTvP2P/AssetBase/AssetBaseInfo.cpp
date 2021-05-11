@@ -36,6 +36,13 @@ AssetBaseInfo::AssetBaseInfo()
 }
 
 //============================================================================
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType )
+    : BaseInfo()
+    , m_u16AssetType( (uint16_t) assetType )
+{ 
+}
+
+//============================================================================
 AssetBaseInfo::AssetBaseInfo( const AssetBaseInfo& rhs )
 : BaseInfo( rhs )
 , m_AssetName( rhs.m_AssetName )
@@ -56,8 +63,9 @@ AssetBaseInfo::AssetBaseInfo( const AssetBaseInfo& rhs )
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, int64_t modifiedTime )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, int64_t modifiedTime )
 : BaseInfo( creatorId, modifiedTime )
+, m_u16AssetType( (uint16_t) assetType )
 , m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 {
@@ -65,8 +73,9 @@ AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, int64_t modifiedTime )
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime )
+AssetBaseInfo::AssetBaseInfo(EAssetType assetType,  VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime )
 : BaseInfo( creatorId, modifiedTime )
+, m_u16AssetType( (uint16_t) assetType )
 , m_UniqueId( assetId )
 , m_CreationTime( modifiedTime ? modifiedTime : GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
@@ -74,8 +83,10 @@ AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifi
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( const std::string& fileName )
-: m_AssetName( fileName )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const std::string& fileName )
+: BaseInfo()
+, m_u16AssetType( (uint16_t) assetType )
+, m_AssetName( fileName )
 , m_CreationTime( GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 { 
@@ -83,10 +94,11 @@ AssetBaseInfo::AssetBaseInfo( const std::string& fileName )
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
-: m_AssetName( fileName )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+: BaseInfo()
+, m_u16AssetType( (uint16_t) assetType )
+, m_AssetName( fileName )
 , m_s64AssetLen( fileLen )
-, m_u16AssetType( assetType )
 , m_CreationTime( GetTimeStampMs() )
 , m_AccessedTime( m_CreationTime )
 {
@@ -94,8 +106,12 @@ AssetBaseInfo::AssetBaseInfo( const char * fileName, uint64_t fileLen, uint16_t 
 }
 
 //============================================================================
-AssetBaseInfo::AssetBaseInfo( VxGUID& creatorId, VxGUID& assetId, EAssetType assetType )
-    : m_u16AssetType( (uint8_t) assetType )
+AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& assetId )
+: BaseInfo( creatorId )
+, m_u16AssetType( (uint8_t) assetType )
+, m_UniqueId( assetId )
+, m_CreationTime( GetTimeStampMs() )
+, m_AccessedTime( m_CreationTime )
 {
 
 }

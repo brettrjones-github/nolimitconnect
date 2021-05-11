@@ -79,6 +79,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 
 SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
+	$$PWD/DependLibs/CoreLib/AssetDefs.cpp \
 	$$PWD/DependLibs/CoreLib/BinaryBlob.cpp \
     $$PWD/DependLibs/CoreLib/VxBuffer.cpp \
     $$PWD/DependLibs/CoreLib/VxChop.cpp \

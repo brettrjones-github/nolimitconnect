@@ -25,7 +25,7 @@ public:
 
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
 };
 

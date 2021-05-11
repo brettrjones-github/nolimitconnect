@@ -569,18 +569,19 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
 {
     std::string fileNameStr = fileName;
     bool result = true;
-    if( !fileNameStr.empty() &&  fileLen && fileType )
+    EAssetType assetType = VxFileTypeToAssetType( fileType );
+    if( !fileNameStr.empty() &&  fileLen && eAssetTypeUnknown != assetType )
     {
         AssetInfo * assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().findAsset( fileNameStr ));
         if( 0 == assetInfo )
         {
-            assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().addAssetFile( fileName, fileLen, fileType ));
+            assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().addAssetFile( assetType, fileName, fileLen ));
             assetInfo->setPlayPosition( pos0to100000 );
         }
 
         if( 0 == assetInfo )
         {
-            LogMsg( LOG_ERROR, "P2PEngine::fromGuiPlayLocalMedia INVALID PARAM\n" );
+            LogMsg( LOG_ERROR, "P2PEngine::fromGuiPlayLocalMedia INVALID PARAM" );
             result = false;
         }
         else

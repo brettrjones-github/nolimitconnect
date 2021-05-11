@@ -93,7 +93,7 @@ public:
 	void						assetXferThreadWork( VxThread * workThread );
 protected:
 	virtual void				onAssetBaseReceived( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
-	virtual void				onAssetBaseSent( AssetBaseTxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
+	virtual void				onAssetBaseSent( VxNetIdent * netIdent, VxSktBase * sktBase, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
     virtual void				onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, bool pluginIsLocked );
 	virtual void				onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
@@ -109,7 +109,9 @@ protected:
 	virtual AssetBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxNetIdent * netIdent, VxSktBase * sktBase );
 	virtual AssetBaseTxSession *	    findOrCreateTxSession( bool pluginIsLocked, VxGUID& lclSessionId, VxNetIdent * netIdent, VxSktBase * sktBase );
 
-	virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession * xferSession, PktBaseSendReq * poPkt, PktBaseSendReply& pktReply );
+	virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, PktBaseSendReq * poPkt, PktBaseSendReply& pktReply );
+    virtual EXferError			        beginAssetBaseReceive( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, VxGUID& lclSessionId, int64_t startOffset = 0 );
+
 	virtual EXferError			        beginAssetBaseSend( AssetBaseTxSession * xferSession );
 
 	virtual void				        endAssetBaseXferSession( AssetBaseRxSession * xferSession, bool pluginIsLocked );
@@ -139,7 +141,7 @@ protected:
     virtual PktBaseSendReq*			    createPktBaseSendReq( void );
     virtual PktBaseSendReply*			createPktBaseSendReply( void );
     virtual PktBaseChunkReq*			createPktBaseChunkReq( void );
-    virtual PktBaseChunkReq*			createPktBaseChunkReply( void );
+    virtual PktBaseChunkReply*			createPktBaseChunkReply( void );
     virtual PktBaseGetCompleteReq*		createPktBaseGetCompleteReq( void );
     virtual PktBaseGetCompleteReply*	createPktBaseGetCompleteReply( void );
     virtual PktBaseSendCompleteReq*		createPktBaseSendCompleteReq( void );

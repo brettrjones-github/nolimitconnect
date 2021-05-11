@@ -46,14 +46,14 @@ BlobInfo::BlobInfo( const AssetBaseInfo& rhs )
 }
 
 //============================================================================
-BlobInfo::BlobInfo( const std::string& fileName )
-: AssetBaseInfo( fileName )
+BlobInfo::BlobInfo( EAssetType assetType, const std::string& fileName )
+: AssetBaseInfo( assetType, fileName )
 { 
 }
 
 //============================================================================
-BlobInfo::BlobInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
-: AssetBaseInfo( fileName, fileLen, assetType )
+BlobInfo::BlobInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
+: AssetBaseInfo( assetType, fileName, fileLen )
 {
 }
 

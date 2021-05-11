@@ -3,6 +3,8 @@
 
 namespace
 {
+    const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
+
     const char * CommErrEnumStrings[] =
     {
         "No Error ",
@@ -502,8 +504,6 @@ namespace
 
         "eMaxSktType"
     };
-
-    const char * ENUM_BAD_PARM = "ENUM BAD PARAM ";
 }
 
 //============================================================================

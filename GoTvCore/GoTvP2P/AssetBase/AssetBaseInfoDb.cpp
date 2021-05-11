@@ -214,7 +214,7 @@ bool AssetBaseInfoDb::addAsset( AssetBaseInfo* assetInfo )
 void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList )
 {
 	std::string assetName;
-	uint16_t assetType;
+	EAssetType assetType;
 	uint64_t assetLen;
 	std::string destasset;
 	std::string consoleId;
@@ -226,9 +226,9 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 		{
 			assetName = cursor->getString( COLUMN_ASSET_NAME );
 			assetLen =  (uint64_t)cursor->getS64( COLUMN_ASSET_LEN );
-			assetType = (uint16_t)cursor->getS32( COLUMN_ASSET_TYPE );
+			assetType = (EAssetType)cursor->getS32( COLUMN_ASSET_TYPE );
 
-			AssetBaseInfo * assetInfo = createAssetInfo( assetName.c_str(), assetLen, assetType );
+			AssetBaseInfo * assetInfo = createAssetInfo( assetType, assetName.c_str(), assetLen );
 			assetInfo->setAssetUniqueId( cursor->getString( COLUMN_ASSET_UNIQUE_ID ) );
 			assetInfo->setCreatorId( cursor->getString( COLUMN_ASSET_CREATOR_ID ) );
 			assetInfo->setHistoryId( cursor->getString( COLUMN_ASSET_HISTORY_ID ) );

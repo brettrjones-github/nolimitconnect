@@ -69,7 +69,7 @@ public:
     virtual bool                requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) override;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
     ThumbInfo*                  lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime = 0 );
     void				        announceThumbAdded( ThumbInfo& thumbInfo );

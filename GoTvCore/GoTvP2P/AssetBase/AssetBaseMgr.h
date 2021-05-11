@@ -102,16 +102,18 @@ public:
 	std::vector<PktFileListReply*>&	getFileListPackets( void )			{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
-    AssetBaseInfo * 			addAssetFile( const char * fileName, uint64_t fileLen, uint16_t fileType );
+    AssetBaseInfo * 			addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen );
 
-	bool						addAssetFile(	const char *	fileName, 
+	bool						addAssetFile(   EAssetType      assetType, 	
+                                                const char *	fileName, 
 												VxGUID&			assetId,  
 												uint8_t *		hashId = 0, 
 												EAssetLocation	locationFlags = eAssetLocUnknown, 
 												const char *	assetTag = "", 
 												int64_t		    timestamp = 0 );
 
-	bool						addAssetFile(	const char *	fileName, 
+	bool						addAssetFile(	EAssetType      assetType, 
+                                                const char *	fileName, 
 												VxGUID&			assetId,  
 												VxGUID&		    creatorId, 
 												VxGUID&		    historyId, 
@@ -131,7 +133,7 @@ public:
 	void						updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param = 0 );
 
 protected:
-    virtual AssetBaseInfo *     createAssetInfo( const char * fileName, uint64_t fileLen, uint16_t fileType ) = 0;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType asset, const char * fileName, uint64_t fileLen ) = 0;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }
@@ -144,7 +146,8 @@ protected:
 	void						generateHashIds( VxThread * thread );
 	void						clearAssetFileListPackets( void );
 	void						clearAssetInfoList( void );
-	AssetBaseInfo *				createAssetInfo(	const char *	fileName, 
+	AssetBaseInfo *				createAssetInfo(	EAssetType      asset, 
+                                                    const char *	fileName, 
 													VxGUID&			assetId,  
 													uint8_t *		hashId, 
 													EAssetLocation	locationFlags = eAssetLocUnknown, 

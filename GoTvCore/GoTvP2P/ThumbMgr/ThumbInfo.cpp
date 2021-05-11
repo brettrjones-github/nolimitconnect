@@ -47,25 +47,25 @@ ThumbInfo::ThumbInfo( const AssetBaseInfo& rhs )
 
 //============================================================================
 ThumbInfo::ThumbInfo( VxGUID& onlineId, int64_t modifiedTime )
-: AssetBaseInfo( onlineId, modifiedTime )
+: AssetBaseInfo( eAssetTypeThumbnail, onlineId, modifiedTime )
 {
 }
 
 //============================================================================
 ThumbInfo::ThumbInfo( VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime )
-: AssetBaseInfo( onlineId, assetId, modifiedTime )
+: AssetBaseInfo( eAssetTypeThumbnail, onlineId, assetId, modifiedTime )
 {
 }
 
 //============================================================================
 ThumbInfo::ThumbInfo( const std::string& fileName )
-    : AssetBaseInfo( fileName )
+    : AssetBaseInfo( eAssetTypeThumbnail, fileName )
 { 
 }
 
 //============================================================================
-ThumbInfo::ThumbInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
-: AssetBaseInfo( fileName, fileLen, assetType )
+ThumbInfo::ThumbInfo( const char * fileName, uint64_t fileLen )
+: AssetBaseInfo( eAssetTypeThumbnail, fileName, fileLen )
 {
 }
 
