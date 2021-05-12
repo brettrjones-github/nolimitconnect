@@ -137,8 +137,8 @@
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\lib\vs2015\x86_64\Release\</OutDir>
-    <IntDir>..\obj\vs2015\libopenmpt-full\x86_64\Release\</IntDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>libopenmpt-full</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>

@@ -93,6 +93,8 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>..\..\..\oncrpc-win32\win32\bin;$(LibraryPath)</LibraryPath>
     <ExecutablePath>..\..\..\oncrpc-win32\win32\bin;$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
