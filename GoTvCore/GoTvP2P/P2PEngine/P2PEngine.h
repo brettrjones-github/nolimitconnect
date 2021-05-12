@@ -77,7 +77,6 @@ class VxPeerMgr;
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
                     public AssetCallbackInterface,
-					public ThumbCallbackInterface,
                     public BlobCallbackInterface,
 					public MediaCallbackInterface,
                     public IAudioCallbacks
@@ -387,13 +386,13 @@ public:
 	// asset mgr callbacks
 	//========================================================================
     virtual void				callbackFileWasShredded( std::string& fileName ) override;
-    virtual void				callbackAssetAdded( AssetInfo * assetInfo ) override;
-    virtual void				callbackAssetRemoved( AssetInfo * assetInfo ) override;
+    virtual void				callbackAssetAdded( AssetBaseInfo * assetInfo ) override;
+    virtual void				callbackAssetRemoved( AssetBaseInfo * assetInfo ) override;
 
 	virtual void				callbackSharedFileTypesChanged( uint16_t fileTypes );
 	virtual void				callbackSharedPktFileListUpdated( void );
 
-    virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ) override;
+    virtual void				callbackAssetHistory( void * userData, AssetBaseInfo * assetInfo ) override;
     //========================================================================
     // host list mgr callbacks
     //========================================================================

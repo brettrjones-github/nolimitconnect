@@ -70,7 +70,7 @@ public:
     bool                        getIsAppModuleRunning( EAppModule appModule )                   { return m_IsRunning[appModule]; }
 
     //=== interface ===//
-    void 				        playGoTvMedia( AssetInfo * assetInfo ) override;
+    void 				        playGoTvMedia( AssetBaseInfo * assetInfo ) override;
 
     //============================================================================
     //=== to gotv events ===//
@@ -402,9 +402,9 @@ public:
                                                bool			isInLibrary,
                                                uint8_t *	fileHashId = 0 ) override;
 
-    virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) override;
+    virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
-    virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) override;
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
     virtual void				toGuiBlobAdded( BlobInfo * assetInfo ) override;

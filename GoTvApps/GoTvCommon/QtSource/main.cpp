@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 #endif // !defined(TARGET_OS_ANDROID)
 
     // initialize display scaling etc
-    GuiParams::initGuiParams();
+    GuiParams::initGuiParams(10);
 
     // chicken and egg kind of thing.. we need the storage path here
     QGuiApplication::setApplicationDisplayName( VxGetApplicationTitle() );

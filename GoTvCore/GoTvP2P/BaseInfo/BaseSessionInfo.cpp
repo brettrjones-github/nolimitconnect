@@ -24,7 +24,7 @@ BaseSessionInfo::BaseSessionInfo()
 }
 
 //============================================================================
-BaseSessionInfo::BaseSessionInfo( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId, VxGUID& connectionId )
+BaseSessionInfo::BaseSessionInfo( EPluginType pluginType, VxGUID onlineId, VxGUID sessionId, VxGUID connectionId )
     : m_PluginType( pluginType )
     , m_OnlineId( onlineId )
     , m_SessionId( sessionId )

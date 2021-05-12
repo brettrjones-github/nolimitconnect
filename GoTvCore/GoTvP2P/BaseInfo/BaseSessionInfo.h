@@ -23,7 +23,7 @@ class BaseSessionInfo
 {
 public:
     BaseSessionInfo();
-    BaseSessionInfo( EPluginType pluginType, VxGUID& onlineId, VxGUID& sessionId, VxGUID& connectionId );
+    BaseSessionInfo( EPluginType pluginType, VxGUID onlineId, VxGUID sessionId, VxGUID connectionId );
 	BaseSessionInfo( const BaseSessionInfo& rhs );
     virtual ~BaseSessionInfo() = default;
 

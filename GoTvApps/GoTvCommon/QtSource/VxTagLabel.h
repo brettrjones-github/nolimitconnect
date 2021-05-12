@@ -16,7 +16,7 @@
 
 #include "VxLabel.h"
 
-class AssetInfo;
+class AssetBaseInfo;
 
 class VxTagLabel : public VxLabel
 {
@@ -26,8 +26,8 @@ public:
 	VxTagLabel(const QString &text, QWidget *parent=0, Qt::WindowFlags f=0);
 	virtual ~VxTagLabel();
 
-	void						setAssetInfo( AssetInfo * assetInfo )			{ m_AssetInfo = assetInfo; }
-	AssetInfo *					getAssetInfo( void )							{ return m_AssetInfo; }
+    void						setAssetInfo( AssetBaseInfo * assetInfo )		{ m_AssetInfo = assetInfo; }
+    AssetBaseInfo *				getAssetInfo( void )							{ return m_AssetInfo; }
 
 protected slots:
 	void						slotOnClicked( void );
@@ -36,6 +36,6 @@ protected slots:
 protected:
 	void						setupQTagLabel( void );
 
-	AssetInfo *					m_AssetInfo;
+    AssetBaseInfo *				m_AssetInfo{ nullptr };
 };
 

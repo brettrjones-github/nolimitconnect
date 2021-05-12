@@ -488,7 +488,7 @@ bool IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
 }
 
 //============================================================================
-void IGoTv::toGuiAssetAdded( AssetInfo * assetInfo )
+void IGoTv::toGuiAssetAdded( AssetBaseInfo * assetInfo )
 {
     LogModule( eLogAssets, LOG_DEBUG, "IGoTv::toGuiAssetAdded\n" );
     getAppCommon().toGuiAssetAdded( assetInfo );
@@ -511,7 +511,7 @@ void IGoTv::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onl
 }
 
 //============================================================================
-void IGoTv::toGuiAssetSessionHistory( AssetInfo * assetInfo )
+void IGoTv::toGuiAssetSessionHistory( AssetBaseInfo * assetInfo )
 {
     getAppCommon().toGuiAssetSessionHistory( assetInfo );
 }

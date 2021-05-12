@@ -26,7 +26,7 @@
 class VxGUID;
 class GuiUser;
 class GuiOfferSession;
-class AssetInfo;
+class AssetBaseInfo;
 class BlobInfo;
 class ThumbInfo;
 
@@ -70,8 +70,8 @@ public:
 	virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ){};
 
 	virtual void				toGuiClientAssetAction( void * callbackData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
-	virtual void				toGuiAssetSessionHistory( void * userData, AssetInfo * assetInfo ){};
-	virtual void				toGuiAssetAdded( void * userData, AssetInfo * assetInfo ){};
+    virtual void				toGuiAssetSessionHistory( void * userData, AssetBaseInfo * assetInfo ){};
+    virtual void				toGuiAssetAdded( void * userData, AssetBaseInfo * assetInfo ){};
 
 	virtual void				toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ){};
 	virtual void				toGuiSetGameValueVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};

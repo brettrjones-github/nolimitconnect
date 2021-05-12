@@ -19,7 +19,7 @@
 #include <QDialog>
 #include "ui_DialogConfirmRemoveMessage.h"
 
-class AssetInfo;
+class AssetBaseInfo;
 class AppCommon;
 class MyIcons;
 
@@ -28,7 +28,7 @@ class DialogConfirmRemoveMessage : public QDialog
 	Q_OBJECT
 
 public:
-	DialogConfirmRemoveMessage( AssetInfo& assetInfo, QWidget * parent = NULL );
+    DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget * parent = NULL );
 	virtual ~DialogConfirmRemoveMessage() = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
@@ -44,7 +44,7 @@ protected slots:
 protected:
 	Ui::ConfirmRemoveMessageClass	ui;
 	AppCommon&					m_MyApp;
-	AssetInfo&					m_AssetInfo;
+    AssetBaseInfo&				m_AssetInfo;
 	EAssetAction				m_AssetAction;
 
 private:

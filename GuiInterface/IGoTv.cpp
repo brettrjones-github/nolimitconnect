@@ -268,7 +268,7 @@ void IGoTv::createUserDirs() const
 }
 
 //============================================================================
-void IGoTv::playGoTvMedia( AssetInfo * assetInfo ) 
+void IGoTv::playGoTvMedia( AssetBaseInfo * assetInfo )
 { 
 };
 

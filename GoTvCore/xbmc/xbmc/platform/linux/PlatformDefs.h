@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "config_kodi.h"
+#include <GoTvCore/xbmc/xbmc/config_kodi.h>
 
 #if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 

@@ -75,7 +75,7 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktVoiceReply.cpp \
     $$PWD/DependLibs/PktLib/PktVoiceReq.cpp \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.cpp \
-	$$PWD/DependLibs/PktLib/PktsBasefer.cpp \
+    $$PWD/DependLibs/PktLib/PktsBaseXfer.cpp \
 	$$PWD/DependLibs/PktLib/PktsBlobXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsFileList.cpp \
     $$PWD/DependLibs/PktLib/PktsFileShare.cpp \

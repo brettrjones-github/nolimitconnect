@@ -21,8 +21,8 @@ class AssetInfo;
 class AssetCallbackInterface
 {
 public:
-    virtual void				callbackAssetAdded( AssetInfo * assetInfo ){};
-    virtual void				callbackAssetRemoved( AssetInfo * assetInfo ){};
-    virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ){};
+    //virtual void				callbackAssetAdded( AssetInfo * assetInfo ){};
+    //virtual void				callbackAssetRemoved( AssetInfo * assetInfo ){};
+    //virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ){};
 };
 

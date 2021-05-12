@@ -21,14 +21,12 @@
 //============================================================================
 VxTagLabel::VxTagLabel(QWidget *parent, Qt::WindowFlags f) 
 : VxLabel(parent,f) 
-, m_AssetInfo( 0 )
 {
 }
 
 //============================================================================
 VxTagLabel::VxTagLabel(const QString &text, QWidget *parent, Qt::WindowFlags f) 
 : VxLabel(text,parent,f) 
-, m_AssetInfo( 0 )
 {
 	setupQTagLabel();
 }

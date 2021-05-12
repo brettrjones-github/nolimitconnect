@@ -26,7 +26,7 @@ public:
 	AssetVideoWidget( AppCommon& appCommon, QWidget * parent = 0 );
 	virtual ~AssetVideoWidget() = default;
 
-	virtual void				setAssetInfo( AssetInfo& assetInfo );
+    virtual void				setAssetInfo( AssetBaseInfo& assetInfo );
 	virtual void				onActivityStop( void );
 
 	virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );

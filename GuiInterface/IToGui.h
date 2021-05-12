@@ -22,7 +22,7 @@
 #include <PktLib/VxCommon.h>
 
 class VxNetIdent;
-class AssetInfo;
+class AssetBaseInfo;
 class BlobInfo;
 class OfferClientInfo;
 class OfferHostInfo;
@@ -37,7 +37,7 @@ public:
     static IToGui&              getToGui();
     static IAudioRequests&      getAudioRequests();
 
-    virtual void				playGoTvMedia( AssetInfo * assetInfo ) {};
+    virtual void				playGoTvMedia( AssetBaseInfo * assetInfo ) {};
 
 	/// Send log message to GUI
 	virtual void				toGuiLog( int logFlags, const char * pMsg ) = 0;
@@ -185,9 +185,9 @@ public:
 	virtual void				toGuiFileXferState( VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) = 0;
 
 	/// Video file or audio file or emote icon or text message asset info in result of request to get Text Chat session assets
-	virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) = 0;
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) = 0;
 	/// Video file or audio file or emote icon or text message has been added to Text Chat session
-	virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) = 0;
+    virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) = 0;
 	/// Asset state has changed ( like transfer has failed )
 	virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
 	/// Text Chat session action like video chat session requested

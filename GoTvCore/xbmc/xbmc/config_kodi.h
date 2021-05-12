@@ -163,7 +163,7 @@ typedef std::shared_ptr<CFileItem> CFileItemPtr;
 #elif defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 //# include <platform/overrides/android/PlatformAndroid.h>
 #elif defined(TARGET_OS_LINUX) || (defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI))
-# include <platform/linux/PlatformDefs.h>
+# include "platform/linux/PlatformDefs.h"
 #elif defined(TARGET_OS_APPLE)
 echo error APPLE os is not supported
 #endif

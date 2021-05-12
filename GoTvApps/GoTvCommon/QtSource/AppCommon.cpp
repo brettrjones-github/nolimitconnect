@@ -1020,6 +1020,9 @@ void AppCommon::slotNetworkStateChanged( ENetworkStateType eNetworkState )
 	case eNetworkStateTypeFailedResolveHostNetwork:
 		//ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateHostFail ) );
 		break;
+    case eNetworkStateTypeFailedResolveHostGroup:
+        //ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateHostFail ) );
+        break;
 	}
 }
 
@@ -1421,7 +1424,7 @@ void AppCommon::slotSetRelayHelpButtonVisibility( bool isVisible )
 }
 
 //============================================================================
-void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
+void AppCommon::toGuiAssetAdded( AssetBaseInfo * assetInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -1449,7 +1452,7 @@ void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
 }
 
 //============================================================================
-void AppCommon::toGuiAssetSessionHistory( AssetInfo * assetInfo )
+void AppCommon::toGuiAssetSessionHistory( AssetBaseInfo * assetInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{

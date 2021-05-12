@@ -51,7 +51,7 @@ public:
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
-    void						setPluginType( EPluginType pluginType ) { m_InfoType = eInfoTypePlugin; m_PluginType = pluginType; updateInformation(); }
+    void						setPluginType( EPluginType pluginType ) override { m_InfoType = eInfoTypePlugin; m_PluginType = pluginType; updateInformation(); }
     void						setInformationType( EInfoType infoType ) { m_InfoType = infoType; updateInformation(); }
 
     EPluginType                 getPluginType() override { return m_PluginType; }

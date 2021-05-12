@@ -356,7 +356,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseTxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferMgr.cpp \
-	$$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferPktCreate.h \
+    $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferPktCreate.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetBase/AssetBaseXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.cpp \

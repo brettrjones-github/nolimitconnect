@@ -22,7 +22,7 @@
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 
 //============================================================================
-DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetInfo& assetInfo, QWidget * parent )
+DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget * parent )
 : QDialog( parent, Qt::Popup )
 , m_MyApp( GetAppInstance() )
 , m_AssetInfo( assetInfo )

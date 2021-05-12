@@ -23,7 +23,7 @@ class AppCommon;
 class P2PEngine;
 class VxNetIdent;
 class AssetBaseWidget;
-class AssetInfo;
+class AssetBaseInfo;
 
 class HistoryListWidget : public QListWidget, public ToGuiActivityInterface
 {
@@ -38,13 +38,13 @@ public:
 
 signals:
 	void						signalToGuiClientAssetAction(EAssetAction, VxGUID, int);
-	void						signalToGuiAssetAdded( AssetInfo * assetInfo );
-	void						signalToGuiSessionHistory( AssetInfo * assetInfo );
+    void						signalToGuiAssetAdded( AssetBaseInfo * assetInfo );
+    void						signalToGuiSessionHistory( AssetBaseInfo * assetInfo );
 
 public slots:
 	void						slotToGuiClientAssetAction( EAssetAction assetAction, VxGUID assetId, int pos0to100000 );
-	void						slotToGuiAssetAdded( AssetInfo * assetInfo );
-	void						slotToGuiSessionHistory( AssetInfo * assetInfo );
+    void						slotToGuiAssetAdded( AssetBaseInfo * assetInfo );
+    void						slotToGuiSessionHistory( AssetBaseInfo * assetInfo );
 
 	void						slotShreddingAsset( AssetBaseWidget * assetWidget );
 
@@ -54,11 +54,11 @@ protected:
 	void						hideEvent( QHideEvent * ev );
 
 	virtual void				toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
-	virtual void				toGuiAssetSessionHistory( void * userData, AssetInfo * assetInfo );
-	virtual void				toGuiAssetAdded( void * userData, AssetInfo * assetInfo );
+    virtual void				toGuiAssetSessionHistory( void * userData, AssetBaseInfo * assetInfo );
+    virtual void				toGuiAssetAdded( void * userData, AssetBaseInfo * assetInfo );
 
-	AssetBaseWidget *			createAssetWidget( AssetInfo * assetInfo );
-	int							determinInsertIndex( AssetInfo * assetInfo );
+    AssetBaseWidget *			createAssetWidget( AssetBaseInfo * assetInfo );
+    int							determinInsertIndex( AssetBaseInfo * assetInfo );
 	void						clearHistoryList( void );
 
 	AppCommon&					m_MyApp;

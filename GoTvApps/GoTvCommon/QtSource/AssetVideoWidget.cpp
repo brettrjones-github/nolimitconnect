@@ -70,7 +70,7 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 }
 
 //============================================================================
-void AssetVideoWidget::setAssetInfo( AssetInfo& assetInfo )
+void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 {
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	ui.m_TagLabel->setAssetInfo( &getAssetInfo() );

@@ -556,8 +556,8 @@ public:
 																uint64_t		u64FileLen, 
                                                                 const char *	pFileName ) override;
 	//=== to gui asset ===//
-    virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) override;
-    virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) override;
+    virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;
+    virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 

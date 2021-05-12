@@ -38,8 +38,8 @@ public:
 	MyIcons&					getMyIcons( void );
 	P2PEngine&					getEngine( void )								{ return m_Engine; }
 
-	virtual void				setAssetInfo( AssetInfo& assetInfo )			{ m_AssetInfo = assetInfo; }
-	virtual AssetInfo&			getAssetInfo( void )							{ return m_AssetInfo; }
+    virtual void				setAssetInfo( AssetBaseInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
+    virtual AssetBaseInfo&			getAssetInfo( void )						{ return m_AssetInfo; }
 	virtual void				setXferBar( QProgressBar * xferProgressBar );
 	virtual QProgressBar *		getXferBar( void )								{ return m_XferProgressBar; }
 	virtual void				updateFromAssetInfo( void );
@@ -73,7 +73,7 @@ protected:
 
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
-	AssetInfo					m_AssetInfo;
+    AssetBaseInfo				m_AssetInfo;
 	int							m_AssetSendProgress;
 	bool						m_CallbacksRequested;
 	QProgressBar *				m_XferProgressBar;

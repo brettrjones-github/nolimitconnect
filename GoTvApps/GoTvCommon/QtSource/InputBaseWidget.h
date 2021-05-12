@@ -60,7 +60,7 @@ protected:
 	ChatEntryWidget *			m_ChatEntryWidget{ nullptr };
     GuiUser *				    m_MyIdent{ nullptr };
     GuiUser *				    m_HisIdent{ nullptr };
-	AssetInfo					m_AssetInfo;
+    AssetBaseInfo				m_AssetInfo;
 	std::string					m_FileName;
 	int64_t						m_TimeRecStart{ 0 };
     int64_t						m_TimeRecCurrent{ 0 };

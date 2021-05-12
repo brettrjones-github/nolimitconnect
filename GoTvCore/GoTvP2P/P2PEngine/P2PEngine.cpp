@@ -495,7 +495,8 @@ void P2PEngine::onFirstPktAnnounce( PktAnnounce * pktAnn )
         m_FirstPktAnnounce = false;
         if( getHasFixedIpAddress() )
         {
-            getNetStatusAccum().setDirectConnectTested( true, false, getEngineSettings().getUserSpecifiedExternIpAddr() );
+            std::string externAddr = getEngineSettings().getUserSpecifiedExternIpAddr();
+            getNetStatusAccum().setDirectConnectTested( true, false, externAddr );
         }
     }
 }

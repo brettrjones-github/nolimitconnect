@@ -103,14 +103,14 @@ void HistoryListWidget::toGuiClientAssetAction( void * userData, EAssetAction as
 }
 
 //============================================================================
-void HistoryListWidget::toGuiAssetSessionHistory( void * userData, AssetInfo * assetInfo )
+void HistoryListWidget::toGuiAssetSessionHistory( void * userData, AssetBaseInfo * assetInfo )
 {
 	Q_UNUSED( userData );
 	emit signalToGuiSessionHistory( assetInfo );
 }
 
 //============================================================================
-void HistoryListWidget::toGuiAssetAdded( void * userData, AssetInfo * assetInfo )
+void HistoryListWidget::toGuiAssetAdded( void * userData, AssetBaseInfo * assetInfo )
 {
 	Q_UNUSED( userData );
 	emit signalToGuiAssetAdded( assetInfo );
@@ -130,7 +130,7 @@ void HistoryListWidget::slotShreddingAsset( AssetBaseWidget * assetWidget )
 		if( ((AssetBaseWidget *)item) == assetWidget )
 		{
 			// found the widget being shredded;
-			AssetInfo&	assetInfo =		assetWidget->getAssetInfo();
+            AssetBaseInfo& assetInfo = assetWidget->getAssetInfo();
 			DialogConfirmRemoveMessage dlg( assetInfo, this );
 			dlg.exec();
 			EAssetAction removeAssetAction = dlg.getAssetActionResult();
@@ -162,13 +162,13 @@ void HistoryListWidget::slotShreddingAsset( AssetBaseWidget * assetWidget )
 }
 
 //============================================================================
-void HistoryListWidget::slotToGuiSessionHistory( AssetInfo * assetInfo )
+void HistoryListWidget::slotToGuiSessionHistory( AssetBaseInfo * assetInfo )
 {
 	slotToGuiAssetAdded( assetInfo );
 }
 
 //============================================================================
-void HistoryListWidget::slotToGuiAssetAdded( AssetInfo * assetInfo )
+void HistoryListWidget::slotToGuiAssetAdded( AssetBaseInfo * assetInfo )
 {
 	if( m_HisIdent 
 		&& ( m_HisIdent->getMyOnlineId() == assetInfo->getHistoryId() ) )
@@ -195,7 +195,7 @@ void HistoryListWidget::slotToGuiAssetAdded( AssetInfo * assetInfo )
 }
 
 //============================================================================
-int  HistoryListWidget::determinInsertIndex( AssetInfo * assetInfo )
+int  HistoryListWidget::determinInsertIndex( AssetBaseInfo * assetInfo )
 {
 	int insertIdx = -1;
 	for( int i = 0; i < this->count(); i++ )
@@ -212,7 +212,7 @@ int  HistoryListWidget::determinInsertIndex( AssetInfo * assetInfo )
 }
 
 //============================================================================
-AssetBaseWidget * HistoryListWidget::createAssetWidget( AssetInfo * assetInfo )
+AssetBaseWidget * HistoryListWidget::createAssetWidget( AssetBaseInfo * assetInfo )
 {
 	AssetBaseWidget * assetWidget = 0;
 	switch( assetInfo->getAssetType() )
