@@ -151,7 +151,7 @@
       <Optimization>MaxSpeed</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN32;NDEBUG;_WINDOWS;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\..\win32\tmp\Release_static\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\..\win32\tmp\Release_static\expat_static.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\..\win32\tmp\Release_static\</ObjectFileName>

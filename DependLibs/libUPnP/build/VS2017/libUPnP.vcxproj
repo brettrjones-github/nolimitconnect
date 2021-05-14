@@ -182,7 +182,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\Platinum\Source\Platinum;..\..\Platinum\Source\Core;..\..\Platinum\Source\Extras;..\..\Platinum\Source\Devices\MediaServer;..\..\Platinum\Source\Devices\MediaRenderer;..\..\Platinum\Source\Devices\MediaConnect;..\..\Neptune\Source\Core;..\..\Neptune\Source\System\Win32;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN64;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>

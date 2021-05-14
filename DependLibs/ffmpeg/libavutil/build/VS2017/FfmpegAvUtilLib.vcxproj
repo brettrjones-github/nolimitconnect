@@ -454,7 +454,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\sysheaders\;$(ProjectDir)..\..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\openssl-1.0.2p\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;HAVE_CONFIG_H;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN64;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>

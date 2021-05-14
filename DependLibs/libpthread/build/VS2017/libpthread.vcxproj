@@ -147,7 +147,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
-      <PreprocessorDefinitions>__CLEANUP_C;WIN32;NDEBUG;_WINDOWS;_USRDLL;PTW32_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__CLEANUP_C;WIN32;NDEBUG;_WINDOWS;_LIB;PTW32_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\.\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\.\pthread.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\.\</ObjectFileName>

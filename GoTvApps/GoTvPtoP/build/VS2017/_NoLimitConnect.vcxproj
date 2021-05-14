@@ -109,10 +109,6 @@
     <OutDir>$(ProjectDir)\..\..\..\..\bin-Windows\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -184,7 +180,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\GeneratedFiles\$(.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgetsConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -408,11 +404,6 @@
       <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
     </QtUic>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
