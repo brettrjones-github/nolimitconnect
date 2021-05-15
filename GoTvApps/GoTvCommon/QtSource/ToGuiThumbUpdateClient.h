@@ -20,7 +20,7 @@ class ToGuiThumbUpdateClient
 {
 public:
     ToGuiThumbUpdateClient( ToGuiThumbUpdateInterface * callback );
-    ToGuiThumbUpdateClient( const ToGuiThumbUpdateInterface &rhs );
+    ToGuiThumbUpdateClient( const ToGuiThumbUpdateClient &rhs );
 
     ToGuiThumbUpdateClient&	operator =( const ToGuiThumbUpdateClient &rhs );
 

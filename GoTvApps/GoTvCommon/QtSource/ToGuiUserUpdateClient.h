@@ -20,7 +20,7 @@ class ToGuiUserUpdateClient
 {
 public:
     ToGuiUserUpdateClient( ToGuiUserUpdateInterface * callback );
-    ToGuiUserUpdateClient( const ToGuiUserUpdateInterface &rhs );
+    ToGuiUserUpdateClient( const ToGuiUserUpdateClient &rhs );
 
     ToGuiUserUpdateClient&	operator =( const ToGuiUserUpdateClient &rhs );
 

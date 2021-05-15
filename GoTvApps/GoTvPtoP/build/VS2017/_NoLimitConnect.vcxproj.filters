@@ -792,9 +792,6 @@
     <ClCompile Include="Debug\moc_AppletBrowseFiles.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_AppletBrowseFiles.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -2093,6 +2090,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.h">
       <Filter>GoTvCommon\Source Files\GuiUserJoin</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\GoTvCommon\Resources\spheres.svg">
@@ -2688,6 +2688,9 @@
     </None>
     <None Include="..\..\..\GoTvCommon\Resources\call-list.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -3424,9 +3427,6 @@
   <ItemGroup>
     <CustomBuild Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui">
       <Filter>GoTvCommon\Forms</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

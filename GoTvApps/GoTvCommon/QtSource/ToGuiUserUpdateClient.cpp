@@ -22,9 +22,12 @@ ToGuiUserUpdateClient::ToGuiUserUpdateClient( ToGuiUserUpdateInterface * callbac
 }
 
 //============================================================================
-ToGuiUserUpdateClient::ToGuiUserUpdateClient( const ToGuiUserUpdateInterface &rhs )
+ToGuiUserUpdateClient::ToGuiUserUpdateClient( const ToGuiUserUpdateClient &rhs )
 {
-	*this = rhs;
+    if( !( this == &rhs ) )
+    {
+        m_Callback = rhs.m_Callback;
+    }
 }
 
 //============================================================================

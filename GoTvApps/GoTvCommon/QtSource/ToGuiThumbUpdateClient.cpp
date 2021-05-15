@@ -14,6 +14,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "ToGuiThumbUpdateClient.h"
+#include "ToGuiThumbUpdateInterface.h"
 
 //============================================================================
 ToGuiThumbUpdateClient::ToGuiThumbUpdateClient( ToGuiThumbUpdateInterface * callback )
@@ -22,9 +23,9 @@ ToGuiThumbUpdateClient::ToGuiThumbUpdateClient( ToGuiThumbUpdateInterface * call
 }
 
 //============================================================================
-ToGuiThumbUpdateClient::ToGuiThumbUpdateClient( const ToGuiThumbUpdateInterface &rhs )
+ToGuiThumbUpdateClient::ToGuiThumbUpdateClient( const ToGuiThumbUpdateClient &rhs )
+    : m_Callback(rhs.m_Callback)
 {
-	*this = rhs;
 }
 
 //============================================================================

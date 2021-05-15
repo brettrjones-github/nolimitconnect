@@ -413,9 +413,8 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <RuntimeTypeInfo>
-      </RuntimeTypeInfo>
-      <OpenMPSupport>true</OpenMPSupport>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
       <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
@@ -448,7 +447,8 @@
     </Manifest>
     <FxCompile />
     <PostBuildEvent>
-      <Command>copy "$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL" "$(TargetDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(OutDir)NoLimitConnectCore$(TargetExt)</OutputFile>

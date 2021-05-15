@@ -109,6 +109,10 @@
     <OutDir>$(ProjectDir)\..\..\..\..\bin-Windows\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)\..\..\..\..\bin-Windows\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -160,7 +164,7 @@
       <Define>WIN32;QT_NO_DEBUG;NDEBUG;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</IncludePath>
     </QtMoc>
     <QtRcc>
       <QTDIR>$(QTDIR)</QTDIR>
@@ -180,36 +184,40 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgets</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
-      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>None</DebugInformationFormat>
       <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>WIN64;QT_NO_DEBUG;NDEBUG;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_HAS_ITERATOR_DEBUGGING=0;_ITERATOR_DEBUG_LEVEL=0;CONSOLE;WIN64;QT_NO_DEBUG;NDEBUG;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeaderFile>app_precompiled_hdr.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(ProjectDir)/../../../app_precompiled_hdr.pch</PrecompiledHeaderOutputFile>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <AdditionalDependencies>NoLimitConnectCore.lib;glu32.lib;opengl32.lib;libpthread.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libkodi.lib;libopenmpt-full.lib;libnfs.lib;Vfw32.lib;Upnp2Lib.lib;VxVideoLib.lib;libcurl.lib;libexpat.lib;libcdio.lib;libzip.lib;libopencore-amr.lib;libcelt.lib;libfaac.lib;libxavs.lib;Secur32.lib;librtmp.lib;libbento4.lib;CoreLib.lib;FfmpegAvCodecLib.lib;FfmpegAvDeviceLib.lib;FfmpegAvFilterLib.lib;FfmpegAvFormatLib.lib;FfmpegAvResampleLib.lib;FfmpegAvUtilLib.lib;FfmpegPostProcLib.lib;FfmpegSwResampleLib.lib;FfmpegSwScaleLib.lib;glew64s.lib;libarmrwbenc.lib;libasprintf.lib;libass.lib;libbzip2.lib;libcpluff.lib;libcroco.lib;libcrossguid.lib;libcrystalhd.lib;libdnssd.lib;libexif.lib;libflac.lib;libfreetype.lib;libfribidi.lib;libgnu.lib;libgsm.lib;libiconv.lib;libilbc.lib;libjpg.lib;liblame.lib;liblzma.lib;liblzo.lib;libmicrohttpd.lib;libogg.lib;libopenjpeg.lib;libopus.lib;libp8-platform.lib;libpcre.lib;libpng.lib;python27.lib;libshairplay.lib;libshine.lib;libsnappy.lib;libspeex.lib;libssh.lib;libssl.lib;libtag.lib;libtheora.lib;libtinyxml.lib;libtwolame.lib;libUPnP.lib;libvorbis.lib;libvpx.lib;libwavepack.lib;libwebp.lib;libwelsdec.lib;libx264.lib;libx265.lib;libxml2.lib;libxslt.lib;libxvid.lib;libyajl.lib;libzlib.lib;libzvbi.lib;MediaToolsLib.lib;NetLib.lib;PktLib.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\qtmain.lib;shell32.lib;$(QTDIR)\lib\Qt5Svg.lib;$(QTDIR)\lib\Qt5OpenGL.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;$(QTDIR)\lib\Qt5QuickWidgets.lib;Qt5MultimediaWidgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\;$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win64' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <LinkIncremental>false</LinkIncremental>
       <OutputFile>$(OutDir)NoLimitConnect$(TargetExt)</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Midl>
       <DefaultCharType>Unsigned</DefaultCharType>
@@ -217,7 +225,7 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_NO_DEBUG;QT_SVG_LIB;QT_OPENGL_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN64;QT_SVG_LIB;QT_OPENGL_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <BuildLog>
       <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -226,10 +234,10 @@
       <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
       <OutputFile>.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
-      <Define>WIN64;QT_NO_DEBUG;NDEBUG;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+      <Define>_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_HAS_ITERATOR_DEBUGGING=0;_ITERATOR_DEBUG_LEVEL=0;CONSOLE;WIN64;QT_NO_DEBUG;NDEBUG;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
     </QtMoc>
     <QtRcc>
       <QTDIR>$(QTDIR)</QTDIR>
@@ -305,7 +313,7 @@
       <Define>_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;NOMINMAX;_USE_32BIT_TIME_T;__STDC_CONSTANT_MACROS;WIN32;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(ProjectDir);$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include;.\debug;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include;debug;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets;%(AdditionalIncludeDirectories)</IncludePath>
     </QtMoc>
     <QtRcc>
       <QTDIR>$(QTDIR)</QTDIR>
@@ -387,7 +395,7 @@
       <Define>_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_HAS_ITERATOR_DEBUGGING=0;_ITERATOR_DEBUG_LEVEL=0;CONSOLE;WIN64;_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgets;$(NOINHERIT)</IncludePath>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
     </QtMoc>
     <QtRcc>
       <InitFuncName>%(Filename)</InitFuncName>
@@ -1241,14 +1249,6 @@
     <ClCompile Include="..\..\AppSource\main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletBrowseFiles.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Release\moc_AppletBrowseFiles.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="..\..\..\GoTvCommon\gotvcommon.qrc">
@@ -1506,6 +1506,7 @@
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
     <None Include="..\..\..\..\GoTvPtoPAppLib.pro" />
     <None Include="..\..\..\..\GoTvPtoP_App.pro" />
+    <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
     <None Include="..\..\..\GoTvCommon\Resources\aligh-left.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\align-center.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\align-left.svg" />
@@ -2015,24 +2016,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.h" />
-    <CustomBuild Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AppletBrowseFiles.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DNOMINMAX -D_USE_32BIT_TIME_T -D__STDC_CONSTANT_MACROS -DWIN32 -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I$(ProjectDir)\." "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec" "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include" "-I.\debug" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtMultimediaWidgets"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing AppletBrowseFiles.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -DCONSOLE -DWIN64 -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtOpenGL" "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(NOINHERIT)\."</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AppletBrowseFiles.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I$(QTDIR)\include\QtMultimediaWidgets"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing AppletBrowseFiles.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN64 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIAWIDGETS_LIB -D_MBCS "-I.\GeneratedFiles\$(ConfigurationName)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtMultimediaWidgets"</Command>
-    </CustomBuild>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLog.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.h" />
@@ -2050,7 +2033,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMultiMessenger.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.h">
+      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
+    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerReplyFileOffer.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSelectFileToSend.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.h" />
@@ -2060,6 +2045,12 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(ProjectDir);$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include;.\debug;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgets;$(NOINHERIT)</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include\QtMultimediaWidgets;$(NOINHERIT)</IncludePath>
+    </QtMoc>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">
@@ -2288,8 +2279,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DynamicSource>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DynamicSource>
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.h">

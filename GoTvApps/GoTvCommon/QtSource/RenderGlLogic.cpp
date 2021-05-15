@@ -241,7 +241,7 @@ void  RenderGlLogic::VerifyGLStateQtDbg( const char* szfile, const char* szfunct
     }
 }
 #else
-void RenderGlBaseWidget::VerifyGLStateQt()
+void RenderGlLogic::VerifyGLStateQt()
 {
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )
