@@ -34,7 +34,7 @@
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -137,7 +137,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetExt>.lib</TargetExt>
     <TargetName>NoLimitConnectCore</TargetName>
-    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -208,7 +208,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCore\xbmc;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\DependLibs;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\win32;$(ProjectDir)..\..\xbmc\addons\library.GoTv.guilib;$(ProjectDir)..\..\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\xbmc\addons\library.GoTv.adsp;$(ProjectDir)..\..\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_HAS_ITERATOR_DEBUGGING=0;_ITERATOR_DEBUG_LEVEL=0;_DEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
       <ExceptionHandling>Sync</ExceptionHandling>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -390,17 +390,43 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCore\xbmc;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\DependLibs;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\win32;$(ProjectDir)..\..\xbmc\addons\library.GoTv.guilib;$(ProjectDir)..\..\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\xbmc\addons\library.GoTv.adsp;$(ProjectDir)..\..\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
-      <ExceptionHandling>Async</ExceptionHandling>
+      <PreprocessorDefinitions>_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_HAS_ITERATOR_DEBUGGING=0;_ITERATOR_DEBUG_LEVEL=0;NDEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
-      <StringPooling>false</StringPooling>
+      <StringPooling>
+      </StringPooling>
+      <PrecompiledHeaderOutputFile />
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo>
+      </RuntimeTypeInfo>
+      <OpenMPSupport>true</OpenMPSupport>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <BufferSecurityCheck>
+      </BufferSecurityCheck>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MinSpace</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <OmitFramePointers />
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat />
     </ClCompile>
     <Link>
       <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
@@ -424,6 +450,10 @@
     <PostBuildEvent>
       <Command>copy "$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL" "$(TargetDir)"</Command>
     </PostBuildEvent>
+    <Lib>
+      <OutputFile>$(OutDir)NoLimitConnectCore$(TargetExt)</OutputFile>
+      <LinkTimeCodeGeneration />
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.cpp" />

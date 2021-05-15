@@ -152,6 +152,7 @@
       <PrecompiledHeaderOutputFile>.\.\pthread.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\.\</ObjectFileName>
       <ProgramDataBaseFileName>.\.\</ProgramDataBaseFileName>
+      <DebugInformationFormat />
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>

@@ -1,4 +1,4 @@
-#include <app_precompiled_hdr.h>
+#include <CommonHdr.h>
 #include "IGoTv.h"
 #include "GoTvP2P/P2PEngine/P2PEngine.h"
 

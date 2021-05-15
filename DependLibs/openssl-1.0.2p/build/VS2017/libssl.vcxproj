@@ -174,13 +174,14 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\include;$(ProjectDir)..\..\crypto;$(ProjectDir)..\..\crypto\modes;$(ProjectDir)..\..\crypto\asn1;$(ProjectDir)..\..\crypto\evp;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WINDOWS;_LIB;WIN64;NDEBUG;MONOLITH;OPENSSL_THREADS;DSO_WIN_64;WIN32_LEAN_AND_MEAN;L_ENDIAN;CRT_SECURE_NO_DEPRECATE;OPENSSL_BN_ASM_PART_WORDS;OPENSSL_IA32_SSE2;OPENSSL_NO_RC5;OPENSSL_NO_MD2;OPENSSL_NO_KB5;OPENSSL_NO_JPAKE;OPENSSL_NO_DYNAMIC_ENGINE;DEBUG_VTPOOLUPLOAD;NOMINMAX;_CRT_SECURE_NO_WARNINGS;NO_WINDOWS_BRAINDEATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WINDOWS;_LIB;WIN64;NDEBUG;MONOLITH;OPENSSL_THREADS;DSO_WIN_64;WIN32_LEAN_AND_MEAN;L_ENDIAN;CRT_SECURE_NO_DEPRECATE;OPENSSL_BN_ASM_PART_WORDS;OPENSSL_IA32_SSE2;OPENSSL_NO_RC5;OPENSSL_NO_MD2;OPENSSL_NO_KB5;OPENSSL_NO_JPAKE;OPENSSL_NO_DYNAMIC_ENGINE;NOMINMAX;_CRT_SECURE_NO_WARNINGS;NO_WINDOWS_BRAINDEATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>

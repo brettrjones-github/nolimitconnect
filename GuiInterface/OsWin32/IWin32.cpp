@@ -19,7 +19,7 @@
  */
 
 // some of this code is copied from Kodi
-#include <app_precompiled_hdr.h>
+#include <CommonHdr.h>
 #include "IWin32.h"
 #ifdef TARGET_OS_WINDOWS
 

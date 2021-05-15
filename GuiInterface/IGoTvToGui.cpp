@@ -1,4 +1,4 @@
-#include <app_precompiled_hdr.h>
+#include <CommonHdr.h>
 
 #include "IGoTv.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"

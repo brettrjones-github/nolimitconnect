@@ -1,4 +1,4 @@
-#include <app_precompiled_hdr.h>
+#include <CommonHdr.h>
 #include "OsInterface.h"
 
 #include "GuiInterface/IGoTv.h"

@@ -72,6 +72,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <SDLCheck>false</SDLCheck>
+      <DebugInformationFormat />
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <BuildLog>
       <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>

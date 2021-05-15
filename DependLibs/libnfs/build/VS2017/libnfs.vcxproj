@@ -45,9 +45,9 @@
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
@@ -215,6 +215,7 @@
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <DebugInformationFormat />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -225,21 +226,8 @@
       <ModuleDefinitionFile>..\..\lib\libnfs-win32.def</ModuleDefinitionFile>
     </Link>
     <PreBuildEvent>
-      <Command>copy $(ProjectDir)..\..\nfs\nfs.x $(ProjectDir)..\..\nfs\libnfs-raw-nfs.x
-rpcgen.exe -h $(ProjectDir)..\..\nfs\libnfs-raw-nfs.x &gt;  $(ProjectDir)..\..\nfs\libnfs-raw-nfs.h
-rpcgen.exe -c $(ProjectDir)..\..\nfs\libnfs-raw-nfs.x &gt;  $(ProjectDir)..\..\nfs\libnfs-raw-nfs.c
-
-copy $(ProjectDir)..\..\rquota\rquota.x $(ProjectDir)..\..\rquota\libnfs-raw-rquota.x
-rpcgen.exe -h $(ProjectDir)..\..\rquota\libnfs-raw-rquota.x &gt;  $(ProjectDir)..\..\rquota\libnfs-raw-rquota.h
-rpcgen.exe -c $(ProjectDir)..\..\rquota\libnfs-raw-rquota.x &gt;  $(ProjectDir)..\..\rquota\libnfs-raw-rquota.c
-
-copy $(ProjectDir)..\..\portmap\portmap.x $(ProjectDir)..\..\portmap\libnfs-raw-portmap.x
-rpcgen.exe -h $(ProjectDir)..\..\portmap\libnfs-raw-portmap.x &gt;  $(ProjectDir)..\..\portmap\libnfs-raw-portmap.h
-rpcgen.exe -c $(ProjectDir)..\..\portmap\libnfs-raw-portmap.x &gt;  $(ProjectDir)..\..\portmap\libnfs-raw-portmap.c
-
-copy $(ProjectDir)..\..\mount\mount.x $(ProjectDir)..\..\mount\libnfs-raw-mount.x
-rpcgen.exe -h $(ProjectDir)..\..\mount\libnfs-raw-mount.x &gt;  $(ProjectDir)..\..\mount\libnfs-raw-mount.h
-rpcgen.exe -c $(ProjectDir)..\..\mount\libnfs-raw-mount.x &gt;  $(ProjectDir)..\..\mount\libnfs-raw-mount.c</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

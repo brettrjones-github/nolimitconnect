@@ -147,7 +147,8 @@
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)\..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -196,6 +197,9 @@
     <PostBuildEvent>
       <Command>copy /Y "$(TargetDir)$(TargetName).exe" "$(ProjectDir)\..\..\..\..\bin-Windows\$(TargetName).exe"</Command>
     </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>copy /Y "$(TargetDir)$(TargetName).exe" "$(SolutionDir)lib\$(TargetName).exe"</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

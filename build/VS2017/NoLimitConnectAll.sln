@@ -156,6 +156,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libxml2", "..\..\DependLibs\libxml2\build\VS2017\libxml2.vcxproj", "{EEC88CD2-C032-4C46-88F7-AB6053596DE0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libxslt", "..\..\DependLibs\libxslt\build\VS2017\libxslt.vcxproj", "{DC1FDBE4-0BC5-4DB9-8A65-19F9F7178BDF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEC88CD2-C032-4C46-88F7-AB6053596DE0} = {EEC88CD2-C032-4C46-88F7-AB6053596DE0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libxvid", "..\..\DependLibs\libxvid\build\VS2017\libxvid.vcxproj", "{64954A96-C813-4A92-87AD-DD733A5404AF}"
 EndProject
@@ -711,7 +714,8 @@ Global
 		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Debug|x86.ActiveCfg = Debug|Win32
 		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Debug|x86.Build.0 = Debug|Win32
 		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Release|Any CPU.ActiveCfg = Release|Win32
-		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Release|x64.ActiveCfg = Release|Win32
+		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Release|x64.ActiveCfg = Release|x64
+		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Release|x64.Build.0 = Release|x64
 		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Release|x86.ActiveCfg = Release|Win32
 		{58A821BC-E4AF-4DF4-9A54-2BAA22B92615}.Release|x86.Build.0 = Release|Win32
 		{9CC48C6E-92EB-4814-AD37-97AB3622AB65}.Debug|Any CPU.ActiveCfg = Debug|Win32
@@ -1411,7 +1415,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = 64BitVs2017Qt5.12.3
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = 64BitVs2017Qt5.12.3
 	EndGlobalSection
 EndGlobal

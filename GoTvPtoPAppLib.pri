@@ -1,10 +1,5 @@
 message("Building AppCommonLib")
 
-PRECOMPILED_HEADER = $$PWD/app_precompiled_hdr.h
-precompile_header:!isEmpty(PRECOMPILED_HEADER) {
-DEFINES += USING_PCH
-}
-
 unix:!android{
     INCLUDEPATH += $${UI_DIR}
     INCLUDEPATH += $${MOC_DIR}
@@ -17,7 +12,7 @@ INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore
 
-HEADERS += $$PWD/app_precompiled_hdr.h \
+HEADERS += \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountMgr.h \
@@ -330,7 +325,7 @@ HEADERS += $$PWD/app_precompiled_hdr.h \
     $$PWD/GuiInterface/OsLinux/ILinux.h \
     $$PWD/GuiInterface/OsAndroid/IAndroid.h
 
-SOURCES += $$PWD/app_precompiled_hdr.cpp \
+SOURCES += \
     $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.cpp \
