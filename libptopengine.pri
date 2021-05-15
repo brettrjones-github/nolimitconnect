@@ -150,7 +150,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/wav_header.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.h \
-    $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
 	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinCallbackInterface.h \
 	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/HostJoinMgr/HostJoinInfoDb.h \
@@ -339,8 +338,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinInfoDb.h \
 	$$PWD/GoTvCore/GoTvP2P/UserJoinMgr/UserJoinMgr.h \
-	$$PWD/GoTvCore/GoTvP2P/UserOnlinMgr/UserOnlinCallbackInterface.h \
-	$$PWD/GoTvCore/GoTvP2P/UserOnlinMgr/UserOnlineMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/UserOnlineMgr/UserOnlineMgr.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageBuilder.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
