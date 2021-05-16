@@ -86,7 +86,7 @@ void AppletSettingsHostRandomConnect::slotApplyServiceSettings()
     m_PluginSetting.setLastUpdateTimestamp( GetGmtTimeMs() );
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
     EFriendState newPermissionLevel = getPluginSettingsWidget()->getPermissionWidget()->getPermissionLevel();
-    EFriendState newGroupListPermission = getGroupListingWidget()->getPermissionLevel();
+    // EFriendState newGroupListPermission = getGroupListingWidget()->getPermissionLevel();
     EFriendState newConnectionTestPermission = getConnectionTestWidget()->getPermissionLevel();
     if( newPermissionLevel != m_OrigPermissionLevel )
     {

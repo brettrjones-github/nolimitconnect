@@ -226,7 +226,6 @@ void AppletRandomConnectJoinSearch::infoMsg( const char* errMsg, ... )
 //============================================================================
 void AppletRandomConnectJoinSearch::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
-    VxNetIdent* netIdent = new VxNetIdent( hostIdent );
     ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
 }
 

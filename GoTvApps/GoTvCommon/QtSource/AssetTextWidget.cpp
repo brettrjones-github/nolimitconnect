@@ -74,7 +74,7 @@ void AssetTextWidget::slotShredAsset( void )
 }
 
 //============================================================================
-void AssetTextWidget::setAssetInfo( AssetInfo& assetInfo )
+void AssetTextWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 {
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	if( false == m_AssetInfo.isValid() )

@@ -53,7 +53,7 @@ void AssetPhotoWidget::initAssetPhotoWidget( void )
 }
 
 //============================================================================
-void AssetPhotoWidget::setAssetInfo( AssetInfo& assetInfo )
+void AssetPhotoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 {
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	this->setSizeHint( QSize( 100, 224 - 16 ) );

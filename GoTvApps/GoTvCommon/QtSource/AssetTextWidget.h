@@ -37,7 +37,7 @@ protected slots:
 
 protected:
 	void						initAssetTextWidget( void );
-	void						setAssetInfo( AssetInfo& assetInfo );
+    void						setAssetInfo( AssetBaseInfo& assetInfo ) override;
 	void 						calculateHint( void );
 
 	//=== vars ===//

@@ -25,7 +25,7 @@ public:
 	AssetPhotoWidget( QWidget * parent = 0 );
 	AssetPhotoWidget( AppCommon& appCommon, QWidget * parent = 0 );
 
-	virtual void				setAssetInfo( AssetInfo& assetInfo );
+    virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
 	virtual void				showSendFail( bool show, bool permissionErr = false );
 	virtual void				showResendButton( bool show );
 	virtual void				showShredder( bool show );

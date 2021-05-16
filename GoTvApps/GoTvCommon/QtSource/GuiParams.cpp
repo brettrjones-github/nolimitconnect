@@ -298,39 +298,41 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         case ePluginAccessOk:			// plugin access allowed
             if( netIdent->requiresRelay() )
             {
-                strAction = "Cannot be a relay (firewalled)";
+                strAction = QObject::tr("Cannot be a relay (firewalled)");
             }
             else if( netIdent->isMyPreferedRelay() )
             {
-                strAction = "Is my preferred relay";
+                strAction = QObject::tr("Is my preferred relay");
             }
             else
             {
-                strAction = "Can be preferred relay";
+                strAction = QObject::tr("Can be preferred relay");
             }
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Relay Requires ";
+            strAction = QObject::tr("Relay Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeRelay ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Relay is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Relay is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Relay unavailable due to ignore status";
+            strAction = QObject::tr("Relay unavailable due to ignore status");
             break;
         case ePluginAccessInactive:		// access denied because busy
-            strAction = "Relay unavailable because is inactive";
+            strAction = QObject::tr("Relay unavailable because is inactive");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Relay unavailable because is busy";
+            strAction = QObject::tr("Relay unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connection to be a relay";
+            strAction = QObject::tr("Contact must have direct connection to be a relay");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Contact must be online be a relay";
+            strAction = QObject::tr("Contact must be online be a relay");
             break;
         }
         break;
@@ -339,30 +341,32 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "View About Me Page";
+            strAction = QObject::tr("View About Me Page");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "View About Me Requires ";
+            strAction = QObject::tr("View About Me Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeWebServer ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "About Me Page is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("About Me Page is disabled");
             break;
         case ePluginAccessInactive:		// plugin inactive
-            strAction = "About Me Page is inactive";
+            strAction = QObject::tr("About Me Page is inactive");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "About Me Page unavailable due to ignore status";
+            strAction = QObject::tr("About Me Page unavailable due to ignore status");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "About Me Page unavailable because is busy";
+            strAction = QObject::tr("About Me Page unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect to provide About Me Page";
+            strAction = QObject::tr("Contact must have direct connect to provide About Me Page");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "About Me Page unavailable because contact is offline";
+            strAction = QObject::tr("About Me Page unavailable because contact is offline");
             break;
         }
         break;
@@ -371,30 +375,32 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "View Story Board";
+            strAction = QObject::tr("View Story Board");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "View Story Board Requires ";
+            strAction = QObject::tr("View Story Board Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeStoryboard ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Story Board is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Story Board is disabled");
             break;
         case ePluginAccessInactive:		// plugin inactive
-            strAction = "Story Board is inactive";
+            strAction = QObject::tr("Story Board is inactive");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Story Board unavailable due to ignore status";
+            strAction = QObject::tr("Story Board unavailable due to ignore status");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Story Board unavailable because is busy";
+            strAction = QObject::tr("Story Board unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect to provide Story Board Page";
+            strAction = QObject::tr("Contact must have direct connect to provide Story Board Page");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Story Board unavailable because contact is offline";
+            strAction = QObject::tr("Story Board unavailable because contact is offline");
             break;
         }
         break;
@@ -404,32 +410,34 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         {
 
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "Send A File";
+            strAction = QObject::tr("Send A File");
             break;
 
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Send A File Requires ";
+            strAction = QObject::tr("Send A File Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeFileXfer ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
 
         case ePluginAccessDisabled:		// plugin disabled 
-            strAction = "Shared Files is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Shared Files is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Send File unavailable due to ignore status";
+            strAction = QObject::tr("Send File unavailable due to ignore status");
             break;
         case ePluginAccessInactive:		// access denied because busy
-            strAction = "Send File unavailable because is inactive";
+            strAction = QObject::tr("Send File unavailable because is inactive");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Send File unavailable because is busy";
+            strAction = QObject::tr("Send File unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect to receive Send File";
+            strAction = QObject::tr("Contact must have direct connect to receive Send File");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Send File unavailable because contact is offline";
+            strAction = QObject::tr("Send File unavailable because contact is offline");
             break;
         }
         break;
@@ -438,30 +446,32 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "View Shared Files";
+            strAction = QObject::tr("View Shared Files");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Shared Files Requires ";
+            strAction = QObject::tr("Shared Files Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeFileServer ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessInactive:		// no shared files
-            strAction = "No Shared Files";
+            strAction = QObject::tr("No Shared Files");
             break;
         case ePluginAccessDisabled:		// plugin disabled 
-            strAction = "Shared Files is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Shared Files is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Shared Files unavailable due to ignore status";
+            strAction = QObject::tr("Shared Files unavailable due to ignore status");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Shared Files unavailable because is busy";
+            strAction = QObject::tr("Shared Files unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect to Share Files";
+            strAction = QObject::tr("Contact must have direct connect to Share Files");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Shared Files unavailable because contact is offline";
+            strAction = QObject::tr("Shared Files unavailable because contact is offline");
             break;
         }
         break;
@@ -470,30 +480,32 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "View Shared Web Cam";
+            strAction = QObject::tr("View Shared Web Cam");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Shared Web Cam Requires ";
+            strAction = QObject::tr("Shared Web Cam Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeCamServer ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Shared Web Cam is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Shared Web Cam is disabled");
             break;
         case ePluginAccessInactive:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Shared Web Cam is not active";
+            strAction = QObject::tr("Shared Web Cam is not active");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Shared Web Cam unavailable due to ignore status";
+            strAction = QObject::tr("Shared Web Cam unavailable due to ignore status");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Shared Web Cam unavailable because is busy";
+            strAction = QObject::tr("Shared Web Cam unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect to Share Web Cam";
+            strAction = QObject::tr("Contact must have direct connect to Share Web Cam");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Shared Web Cam unavailable because contact is offline";
+            strAction = QObject::tr("Shared Web Cam unavailable because contact is offline");
             break;
         }
         break;
@@ -502,30 +514,32 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "Voice Call";
+            strAction = QObject::tr("Voice Call");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Voice Call Requires ";
+            strAction = QObject::tr("Voice Call Requires ");
             strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeVoicePhone ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Voice Call is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Voice Call is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Voice Call unavailable due to ignore status";
+            strAction = QObject::tr("Voice Call unavailable due to ignore status");
             break;
         case ePluginAccessInactive:
-            strAction = "Voice Call unavailable because is Inactive";
+            strAction = QObject::tr("Voice Call unavailable because is Inactive");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Voice Call unavailable because is busy";
+            strAction = QObject::tr("Voice Call unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect for Voice Call";
+            strAction = QObject::tr("Contact must have direct connect for Voice Call");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Voice Call unavailable because contact is offline";
+            strAction = QObject::tr("Voice Call unavailable because contact is offline");
             break;
         }
         break;
@@ -534,30 +548,32 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "Offer To Play Truth Or Dare";
+            strAction = QObject::tr("Offer To Play Truth Or Dare");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Truth Or Dare Requires ";
+            strAction = QObject::tr("Truth Or Dare Requires ");
             strAction += describeFriendState( netIdent->getPluginPermission( ePluginTypeTruthOrDare ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Truth Or Dare is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Truth Or Dare is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
-            strAction = "Truth Or Dare unavailable due to ignore status";
+            strAction = QObject::tr("Truth Or Dare unavailable due to ignore status");
             break;
         case ePluginAccessInactive:
-            strAction = "Truth Or Dare unavailable because is Inactive";
+            strAction = QObject::tr("Truth Or Dare unavailable because is Inactive");
             break;
         case ePluginAccessBusy:		// access denied because busy
-            strAction = "Truth Or Dare unavailable because is busy";
+            strAction = QObject::tr("Truth Or Dare unavailable because is busy");
             break;
         case ePluginAccessRequiresDirectConnect:		
-            strAction = "Contact must have direct connect for Truth Or Dare";
+            strAction = QObject::tr("Contact must have direct connect for Truth Or Dare");
             break;
         case ePluginAccessRequiresOnline:		
-            strAction = "Truth Or Dare unavailable because contact is offline";
+            strAction = QObject::tr("Truth Or Dare unavailable because contact is offline");
             break;
         }
         break;
@@ -566,15 +582,17 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "Offer Chat Session";
+            strAction = QObject::tr("Offer Chat Session");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
-            strAction = "Text Chat Requires ";
+            strAction = QObject::tr("Text Chat Requires ");
             strAction += describeFriendState( netIdent->getPluginPermission( ePluginTypeMessenger ) );
-            strAction += " permission";
+            strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
-            strAction = "Text Chat is disabled";
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
+            strAction = QObject::tr("Text Chat is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
             strAction = "Text Chat unavailable due to ignore status";
@@ -599,7 +617,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
-            strAction = "Offer Video Chat";
+            strAction = QObject::tr("Offer Video Chat");
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("Video Chat Requires ");

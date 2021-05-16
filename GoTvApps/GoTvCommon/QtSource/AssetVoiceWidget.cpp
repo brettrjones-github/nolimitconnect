@@ -67,7 +67,7 @@ void AssetVoiceWidget::initAssetVoiceWidget( void )
 }
 
 //============================================================================
-void AssetVoiceWidget::setAssetInfo( AssetInfo& assetInfo )
+void AssetVoiceWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 {
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	ui.m_TagLabel->setAssetInfo( &getAssetInfo() );

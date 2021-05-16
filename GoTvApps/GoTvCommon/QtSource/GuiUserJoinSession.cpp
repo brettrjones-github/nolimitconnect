@@ -42,8 +42,8 @@ GuiUserJoinSession::GuiUserJoinSession( GuiUserJoin* hostIdent, QWidget* parent 
 GuiUserJoinSession::GuiUserJoinSession( EHostType hostType, VxGUID& sessionId, GuiUserJoin* hostIdent, QWidget* parent )
     : QWidget( parent )
     , m_HostType( hostType )
-    , m_SessionId( sessionId )
     , m_UserJoin( hostIdent )
+    , m_SessionId( sessionId )
 {
     setUserJoin( m_UserJoin );
 }
@@ -52,8 +52,8 @@ GuiUserJoinSession::GuiUserJoinSession( EHostType hostType, VxGUID& sessionId, G
 GuiUserJoinSession::GuiUserJoinSession( const GuiUserJoinSession &rhs )
     : QWidget()
     , m_HostType( rhs.m_HostType )
-    , m_SessionId( rhs.m_SessionId )
     , m_UserJoin( rhs.m_UserJoin )
+    , m_SessionId( rhs.m_SessionId )
     , m_OnlineId( rhs.m_OnlineId )
 {
 }

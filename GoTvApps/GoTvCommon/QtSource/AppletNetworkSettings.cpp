@@ -125,7 +125,7 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     ui.AutoDetectProxyRadioButton->setChecked( false );
     ui.AssumeNoProxyRadioButton->setChecked( false );
     ui.AssumeProxyRadioButton->setChecked( false );
-    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
+//    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
 
     bool hasPrevSetttings = false;
     bool validDbSettings = false;

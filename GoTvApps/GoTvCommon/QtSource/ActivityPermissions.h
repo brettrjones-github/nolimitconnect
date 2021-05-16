@@ -34,7 +34,7 @@ public:
 
 	//=== helpers ===//
 	//! Set plugin to set permissions on   
-	void						setPluginType( EPluginType ePluginType );
+    void						setPluginType( EPluginType ePluginType ) override;
 	//! Set plugin icon based on permission level
 	void						setPluginIcon( EPluginType ePluginType, EFriendState ePluginPermission );
 	//! get current permission selection

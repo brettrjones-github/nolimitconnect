@@ -56,7 +56,7 @@ void AssetFaceWidget::initAssetFaceWidget( void )
 }
 
 //============================================================================
-void AssetFaceWidget::setAssetInfo( AssetInfo& assetInfo )
+void AssetFaceWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 {
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	if( false == m_AssetInfo.isValid() )

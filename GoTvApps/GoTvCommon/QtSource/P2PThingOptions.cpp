@@ -132,17 +132,8 @@ void AppCommon::onEditPermissionsSelected( int iMenuId, PopupMenu * senderPopupM
 	Q_UNUSED( senderPopupMenu );
 	if( iMenuId > 0 )
 	{
-		if( ePluginTypeRelay == iMenuId )
-		{
-			ActivityPermissionsRelay oDlg( *this, this );
-			oDlg.setPluginType( (EPluginType) iMenuId );
-			oDlg.exec();
-		}
-		else
-		{
-			ActivityPermissions oDlg( *this, this );
-			oDlg.setPluginType( (EPluginType) iMenuId );
-			oDlg.exec();
-		}
+        ActivityPermissions oDlg( *this, this );
+        oDlg.setPluginType( (EPluginType) iMenuId );
+        oDlg.exec();
 	}
 }

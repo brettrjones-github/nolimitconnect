@@ -39,7 +39,7 @@ public:
 	P2PEngine&					getEngine( void )								{ return m_Engine; }
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
-    virtual AssetBaseInfo&			getAssetInfo( void )						{ return m_AssetInfo; }
+    virtual AssetBaseInfo&		getAssetInfo( void )                            { return m_AssetInfo; }
 	virtual void				setXferBar( QProgressBar * xferProgressBar );
 	virtual QProgressBar *		getXferBar( void )								{ return m_XferProgressBar; }
 	virtual void				updateFromAssetInfo( void );

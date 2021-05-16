@@ -207,7 +207,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	}
 
     QWidget * launchFrame = m_MyApp.getHomePage().getLaunchPageFrame();
-    QWidget * messengerFrame = m_MyApp.getHomePage().getMessengerParentFrame();
+    // QWidget * messengerFrame = m_MyApp.getHomePage().getMessengerParentFrame();
 
 	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )

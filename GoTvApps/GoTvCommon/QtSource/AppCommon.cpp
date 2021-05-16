@@ -1023,6 +1023,9 @@ void AppCommon::slotNetworkStateChanged( ENetworkStateType eNetworkState )
     case eNetworkStateTypeFailedResolveHostGroup:
         //ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateHostFail ) );
         break;
+    case eNetworkStateTypeFailedResolveHostGroupList:
+        //ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateHostFail ) );
+        break;
 	}
 }
 

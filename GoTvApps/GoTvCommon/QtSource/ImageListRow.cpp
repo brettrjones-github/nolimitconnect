@@ -24,8 +24,8 @@
 
 //============================================================================
 ImageListRow::ImageListRow( QListWidget * parent  )
-: QListWidgetItem( parent )
-, QWidget( 0 )
+: QWidget( 0 )
+, QListWidgetItem( parent )
 , m_SizeHint( ( GuiParams::getThumbnailSize().width() + 20 ) * 2, GuiParams::getThumbnailSize().height() + 30 )
 {
     ui.setupUi( this );

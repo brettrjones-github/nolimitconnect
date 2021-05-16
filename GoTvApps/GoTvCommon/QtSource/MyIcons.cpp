@@ -899,6 +899,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessIgnored:
 		case ePluginAccessBusy:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconAdministratorDisabled;
 		}
 
@@ -913,6 +915,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconProfileDisabled;
         case ePluginAccessLocked:
             return eMyIconProfileLocked;
@@ -931,6 +935,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconServiceChatRoom;
         case ePluginAccessLocked:
             return eMyIconServiceChatRoom;
@@ -949,6 +955,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconAvatarImage;
         case ePluginAccessLocked:
             return eMyIconAvatarImage;
@@ -967,6 +975,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconAvatarImage;
         case ePluginAccessLocked:
             return eMyIconAvatarImage;
@@ -985,6 +995,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconServiceConnectionTest;
         case ePluginAccessLocked:
             return eMyIconServiceConnectionTest;
@@ -1003,6 +1015,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconServiceConnectionTest;
         case ePluginAccessLocked:
             return eMyIconServiceConnectionTest;
@@ -1021,6 +1035,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconServiceRandomConnect;
         case ePluginAccessLocked:
             return eMyIconServiceRandomConnect;
@@ -1039,6 +1055,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconServiceRandomConnectRelay;
         case ePluginAccessLocked:
             return eMyIconServiceRandomConnectRelay;
@@ -1057,6 +1075,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconRelayDisabled;
 		case ePluginAccessLocked:            
 			return eMyIconRelayLocked;
@@ -1075,6 +1095,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconStoryBoardDisabled;
 		case ePluginAccessLocked:
 			return eMyIconStoryBoardLocked;
@@ -1093,6 +1115,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconProfileDisabled;
 		case ePluginAccessLocked:
 			return eMyIconProfileLocked;
@@ -1111,6 +1135,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconSendFileDisabled;
 		case ePluginAccessLocked:
 			return eMyIconSendFileLocked;
@@ -1129,6 +1155,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconShareFilesDisabled;
 		case ePluginAccessLocked:
 			return eMyIconShareFilesCancel;
@@ -1147,6 +1175,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconWebCamServerDisabled;
 		case ePluginAccessLocked:
 			return eMyIconWebCamServerLocked;
@@ -1165,6 +1195,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconVoicePhoneDisabled;
 		case ePluginAccessLocked:
 			return eMyIconVoicePhoneLocked;
@@ -1183,6 +1215,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconVideoPhoneDisabled;
 		case ePluginAccessLocked:
 			return eMyIconVideoPhoneLocked;
@@ -1201,6 +1235,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconTruthOrDareDisabled;
 		case ePluginAccessLocked:
 			return eMyIconTruthOrDareLocked;
@@ -1220,6 +1256,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
 		case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
 			return eMyIconMultiSessionDisabled;
 		case ePluginAccessLocked:
 			return eMyIconMultiSessionLocked;
@@ -1238,6 +1276,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         case ePluginAccessInactive:
         case ePluginAccessRequiresDirectConnect:
         case ePluginAccessRequiresOnline:
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             return eMyIconServiceChatRoom;
         case ePluginAccessLocked:
             return eMyIconServiceChatRoom;
