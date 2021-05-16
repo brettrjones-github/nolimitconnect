@@ -529,6 +529,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineConnections.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineContact.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineFromGui.cpp \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineHostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineIgnoredAndHackers.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineMediaProcessorCallbacks.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEnginePktAnnChanged.cpp \

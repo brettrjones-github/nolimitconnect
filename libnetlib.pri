@@ -65,5 +65,6 @@ SOURCES += 	$$PWD/DependLibs/NetLib/NetHostSetting.cpp \
     $$PWD/DependLibs/NetLib/VxSktUdp.cpp \
     $$PWD/DependLibs/NetLib/VxSktUdpBroadcast.cpp \
     $$PWD/DependLibs/NetLib/VxSktUtil.cpp \
-    $$PWD/DependLibs/NetLib/VxSktWaitingList.cpp
+    $$PWD/DependLibs/NetLib/VxSktWaitingList.cpp \
+    $$PWD/DependLibs/NetLib/VxXferDefs.cpp
 

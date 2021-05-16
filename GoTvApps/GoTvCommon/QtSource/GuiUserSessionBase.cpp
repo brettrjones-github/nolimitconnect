@@ -42,8 +42,8 @@ GuiUserSessionBase::GuiUserSessionBase( GuiUser* hostIdent, QWidget* parent )
 GuiUserSessionBase::GuiUserSessionBase( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent, QWidget* parent )
     : QWidget( parent )
     , m_HostType( hostType )
-    , m_SessionId( sessionId )
     , m_Userdent( hostIdent )
+    , m_SessionId( sessionId )
 {
     setUserIdent( m_Userdent );
 }
@@ -52,8 +52,8 @@ GuiUserSessionBase::GuiUserSessionBase( EHostType hostType, VxGUID& sessionId, G
 GuiUserSessionBase::GuiUserSessionBase( const GuiUserSessionBase &rhs )
     : QWidget()
     , m_HostType( rhs.m_HostType )
-    , m_SessionId( rhs.m_SessionId )
     , m_Userdent( rhs.m_Userdent )
+    , m_SessionId( rhs.m_SessionId )
     , m_OnlineId( rhs.m_OnlineId )
 {
 }

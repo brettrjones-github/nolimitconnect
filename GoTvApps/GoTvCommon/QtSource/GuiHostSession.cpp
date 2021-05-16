@@ -34,9 +34,9 @@ GuiHostSession::GuiHostSession( EHostType hostType, VxGUID& sessionId, VxNetIden
     : QWidget( parent )
     , m_HostType( hostType )
     , m_SessionId( sessionId )
+    , m_OnlineId( hostIdent.getMyOnlineId() )
     , m_HostIdent( hostIdent )
     , m_PluginSetting( pluginSetting )
-    , m_OnlineId( hostIdent.getMyOnlineId() )
 {
 }
 
@@ -45,9 +45,9 @@ GuiHostSession::GuiHostSession( const GuiHostSession &rhs )
     : QWidget()
     , m_HostType( rhs.m_HostType )
     , m_SessionId( rhs.m_SessionId )
+    , m_OnlineId( rhs.m_OnlineId )
     , m_HostIdent( rhs.m_HostIdent )
     , m_PluginSetting( rhs.m_PluginSetting )
-    , m_OnlineId( rhs.m_OnlineId )
 {
 }
 

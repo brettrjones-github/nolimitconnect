@@ -26,17 +26,17 @@ public:
 	AssetVoiceWidget( AppCommon& appCommon, QWidget * parent = 0 );
 
     virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
-	virtual void				onActivityStop( void );
+    virtual void				onActivityStop( void ) override;
 
-	virtual void				showSendFail( bool show, bool permissionErr = false );
-	virtual void				showResendButton( bool show );
-	virtual void				showShredder( bool show );
-	virtual void				showXferProgress( bool show );
-	virtual void				setXferProgress( int sendProgress );
+    virtual void				showSendFail( bool show, bool permissionErr = false ) override;
+    virtual void				showResendButton( bool show ) override;
+    virtual void				showShredder( bool show ) override;
+    virtual void				showXferProgress( bool show ) override;
+    virtual void				setXferProgress( int sendProgress ) override;
 
 protected slots:
 	void						slotPlayButtonClicked( void );
-	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 );
+    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 ) override;
 	void						slotSliderPressed( void );
 	void						slotSliderReleased( void );
 

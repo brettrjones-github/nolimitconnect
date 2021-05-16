@@ -625,6 +625,8 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
+        case ePluginAccessNotSet:
+        case eMaxPluginAccessState:
             strAction = QObject::tr("Video Chat is disabled");
             break;
         case ePluginAccessIgnored:		// access denied because you are being ignored
@@ -1270,9 +1272,9 @@ QString GuiParams::describeStatus( EHostJoinStatus hostStatus )
         return QObject::tr( "Host Join Query Id Failed" );
     case eHostJoinConnecting:
         return QObject::tr( "Host Join Connecting" );
-    case eHostAnnounceHandshaking:
+    case eHostJoinHandshaking:
         return QObject::tr( "Host Join Handshaking" );
-    case eHostAnnounceHandshakeTimeout:
+    case eHostJoinHandshakeTimeout:
         return QObject::tr( "Host Join Handshake Timeout" );
     case eHostJoinConnectSuccess:
         return QObject::tr( "Host Join Connect Success" );

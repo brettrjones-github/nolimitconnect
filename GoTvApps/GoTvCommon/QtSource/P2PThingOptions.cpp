@@ -18,7 +18,6 @@
 #include "PopupMenu.h"
 #include "ActivitySoundOptions.h"
 #include "ActivityPermissions.h"
-#include "ActivityPermissionsRelay.h"
 #include "ActivityNetworkSettings.h"
 #include "ActivityVideoOptions.h"
 #include "AppletMultiMessenger.h"

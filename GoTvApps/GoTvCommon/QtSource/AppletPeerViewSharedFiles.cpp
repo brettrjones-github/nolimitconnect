@@ -606,7 +606,7 @@ void AppletPeerViewSharedFiles::moveUpOneFolder( void )
 			pTemp[0] = 0;
 		}
 		m_strCurrentDirectory = pBuf;
-        delete pBuf[];
+        delete[] pBuf;
 	}
 }
 

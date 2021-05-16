@@ -42,8 +42,8 @@ public:
     int							getNewOffersCount( void )					{ return 0; }
     size_t						getTotalOffersCount( void )					{ return m_aoOffersList.size(); }
 
-    std::map<VxGUID, GuiOfferSession*> getCallList( void ) { return m_CallOfferCache; }
-    std::map<VxGUID, GuiOfferSession*> getOfferList( void ) { return m_OfferListCache; }
+    std::map<VxGUID, GuiOfferSession*>& getCallList( void ) { return m_CallOfferCache; }
+    std::map<VxGUID, GuiOfferSession*>& getOfferList( void ) { return m_OfferListCache; }
 
     void						toGuiRxedPluginOffer( GuiOfferSession * offerSession ) {};
     void						toGuiRxedOfferReply( GuiOfferSession * offerSession ) {};

@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include "ui_AppletSnapShot.h"
+#include "ui_AppletSnapshot.h"
 
 #include <CoreLib/MediaCallbackInterface.h>
 

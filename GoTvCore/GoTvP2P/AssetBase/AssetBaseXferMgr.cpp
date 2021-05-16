@@ -509,7 +509,7 @@ void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * p
     EXferError xferErr = (EXferError)pktGetReply->getError();
     if( xferErr != eXferErrorNone )
     {
-        LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetBaseGetReply Xfer Error %s", DescribeXferError( xferErr ) );
+        LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetBaseGetReply Xfer Error %d\n", xferErr );// %s, DescribeXferError( xferErr ) );
         vx_assert( false );
         return;
     }
