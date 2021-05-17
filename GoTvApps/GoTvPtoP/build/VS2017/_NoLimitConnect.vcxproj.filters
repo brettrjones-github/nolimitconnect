@@ -243,9 +243,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissions.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanPeopleSearch.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
@@ -788,9 +785,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletBrowseFiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -1380,9 +1374,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPermissions.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityScanPeopleSearch.h">
