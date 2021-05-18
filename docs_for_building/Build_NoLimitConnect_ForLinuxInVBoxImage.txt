@@ -1,8 +1,11 @@
 === Build No Limit Connect For Linux in Virtual Box Image ===
 1.) Follow the instructions in
         Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint19_2.txt
-2.) Open BuildX_XXX and build it in the order of the build number
-3.) if you get mv/copy errors the build the projects one by one ( may have to build twice )  
-5.) after all is built you can avoid extreme long rebuild times by buiding/debuging with
-    Build6_AppAndCore_Optional as it contains the most likely to be modified
+2.) Open console
+3.) cd ~/NoLimitConnectLinux
+4.) git pull (to update if desired)
+5.) Open Qt Creator
+6.) Rebuild by build number
+7.) Open BuildX_XXX and build it in the order of the build number
+8.) if you get mv/copy errors you may have to build Build1_PythonDepends.pro and Build2_PythonLib many times so the libraries copy to correct folder. This is copy lib bug in the build for Build2_PythonLib.pro
 

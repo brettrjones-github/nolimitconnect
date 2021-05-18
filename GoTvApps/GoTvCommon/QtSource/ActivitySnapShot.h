@@ -17,7 +17,7 @@
 #include "ActivityBase.h"
 
 #include <QDialog>
-#include "ui_ActivitySnapshot.h"
+#include "ui_ActivitySnapShot.h"
 
 #include <CoreLib/VxDefs.h>
 
