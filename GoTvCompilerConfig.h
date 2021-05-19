@@ -1782,9 +1782,6 @@ safe for multithreaded apps. */
 # define DECLARE_UNUSED(a,b) a b;
 
 #define D3D_DEBUG_INFO
-#if defined(NDEBUG) || defined(RELEASE)
-# define _ITERATOR_DEBUG_LEVEL 0 
-#endif
 
 #define HAVE_STD__U16_STRING 1 
 #define HAVE_STD__U32_STRING 1 
