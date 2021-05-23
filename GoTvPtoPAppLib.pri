@@ -56,6 +56,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
@@ -155,6 +156,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CallListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CallListWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/CamTitleBarPreview.h \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CamLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.h \
@@ -213,6 +215,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MenuDefs.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/MenuBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/MenuCam.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
@@ -377,6 +381,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \
@@ -477,6 +482,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CallListItem.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CallListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CamLogic.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/CamTitleBarPreview.cpp \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp \
@@ -533,6 +539,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/MenuBase.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/MenuCam.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.cpp \
@@ -688,6 +696,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCallList.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCamSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoin.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \

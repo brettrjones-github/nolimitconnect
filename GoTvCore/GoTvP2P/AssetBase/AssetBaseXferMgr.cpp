@@ -351,13 +351,13 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
 
     VxGUID assetUniqueId = pktGetReq->getUniqueId();
     EAssetType assetType = (EAssetType)pktGetReq->getAssetType();
-    bool needFileXfer = requireFileXfer( assetType );
+    //bool needFileXfer = requireFileXfer( assetType );
 
     VxGUID rmtSessionId = pktGetReq->getLclSessionId();
     VxGUID lclSessionId;
     lclSessionId.initializeWithNewVxGUID();
     int64_t startOffs = pktGetReq->getAssetOffset();
-    int64_t	endOffs = pktGetReq->getAssetLen();	//if 0 then get all
+    //int64_t	endOffs = pktGetReq->getAssetLen();	//if 0 then get all
 
     PktBaseGetReply* pktReply = createPktBaseGetReply();
     pktReply->setAssetType( pktGetReq->getAssetType() );

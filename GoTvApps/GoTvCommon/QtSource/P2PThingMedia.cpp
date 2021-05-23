@@ -42,31 +42,35 @@ void AppCommon::toGuiWantVideoCapture( bool wantVidCapture )
 //============================================================================
 void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
 {
-    m_CamLogic.toGuiWantVideoCapture( enableVidCapture );
-	if( enableVidCapture )
-	{
-		static bool bFirstTimeVideoCaptureStarted = true;
-		if( bFirstTimeVideoCaptureStarted )
-		{
-			if( !m_CamLogic.isCamCaptureRunning() )
-			{
-				QMessageBox::warning(this, tr("Web Cam Video"), tr("No Video Capture Devices Found" ) );
-				return;
-			}
-			
-			m_CamSourceId = m_CamLogic.getCamSourceId();
+    if( m_VidCaptureEnabled != enableVidCapture )
+    {
+        m_VidCaptureEnabled = enableVidCapture;
+        m_CamLogic.toGuiWantVideoCapture( enableVidCapture );
 
-			setCamCaptureRotation( m_AppSettings.getCamRotation( m_CamSourceId ) );
+        if( enableVidCapture )
+        {
+            static bool bFirstTimeVideoCaptureStarted = true;
+            if( bFirstTimeVideoCaptureStarted )
+            {
+                if( !m_CamLogic.isCamCaptureRunning() )
+                {
+                    QMessageBox::warning( this, QObject::tr( "Web Cam Video" ), QObject::tr( "No Video Capture Devices Found" ) );
+                    return;
+                }
 
-			bFirstTimeVideoCaptureStarted = false;
-		}
-	}
-	else
-	{
-        LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture\n" );
-	}
+                m_CamSourceId = m_CamLogic.getCamSourceId();
 
-	m_VidCaptureEnabled = enableVidCapture;
+                setCamCaptureRotation( m_AppSettings.getCamRotation( m_CamSourceId ) );
+
+                bFirstTimeVideoCaptureStarted = false;
+            }
+        }
+        else
+        {
+            LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture\n" );
+        }
+    }
+	
 	std::vector<ToGuiHardwareCtrlClient>::iterator hardwareIter;
 	for( hardwareIter = m_ToGuiHardwareCtrlList.begin(); hardwareIter != m_ToGuiHardwareCtrlList.end(); ++hardwareIter )
 	{
@@ -112,21 +116,20 @@ void AppCommon::toGuiPlayVideoFrame(  VxGUID& onlineId, uint8_t * pu8Jpg, uint32
 {
 	if( false == VxIsAppShuttingDown() )
 	{
-		//LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d\n", ePluginType, u32JpgDataLen );
+		//LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d", ePluginType, u32JpgDataLen );
 
 		std::vector<ToGuiActivityClient>::iterator iter;
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
-		LogMsg( LOG_INFO, "toGuiPlayVideoFrame: toGuiActivityClientsLock\n" );
+		LogMsg( LOG_INFO, "toGuiPlayVideoFrame: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
 		toGuiActivityClientsLock();
-		for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+		for( ToGuiActivityClient& toGuiClient : m_ToGuiActivityClientList )
 		{
-			ToGuiActivityClient& toGuiClient = *iter;
 			toGuiClient.m_Callback->toGuiClientPlayVideoFrame(	toGuiClient.m_UserData, 
 																onlineId,
 																pu8Jpg,
 																u32JpgDataLen,
-																motion0To100000 );
+	     														motion0To100000 );
 		}
 
 		toGuiActivityClientsUnlock();

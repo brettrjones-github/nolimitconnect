@@ -293,6 +293,7 @@ void TitleBarWidget::slotCameraSnapshotButtonClicked( void )
 void TitleBarWidget::slotCamPreviewClicked( void )
 {
 	emit signalCamPreviewClicked();
+    m_MyApp.getAppletMgr().launchApplet( eAppletCamSettings );
 }
 
 //============================================================================

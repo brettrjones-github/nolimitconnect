@@ -25,16 +25,16 @@ public:
     PluginConnectionTestClient() = delete; // don't allow default constructor
     PluginConnectionTestClient( const PluginConnectionTestClient& ) = delete; // don't allow copy constructor
 
-    virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+    virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr ) override;
 
     void						testIsMyPortOpen( void );
 
 protected:
     RCODE						internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
-    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )	{};
-    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
-    virtual void				onConnectionLost( VxSktBase * sktBase )	{};
+    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override	{};
+    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override	{};
+    virtual void				onConnectionLost( VxSktBase * sktBase ) override {};
 
     //=== vars ===//
     NetServicesMgr&				m_NetServicesMgr;

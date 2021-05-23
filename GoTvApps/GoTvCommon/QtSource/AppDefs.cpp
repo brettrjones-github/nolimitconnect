@@ -170,6 +170,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );
     case eAppletBrowseFiles:			    return QObject::tr( "Browse Files" );
     case eAppletCallList:                   return QObject::tr( "Calls" );
+    case eAppletCamSettings:                return QObject::tr( "Cam Settings" );
     case eAppletChatRoomJoin:               return QObject::tr( "Join Chat Room" );
     case eAppletChatRoomJoinSearch:			return QObject::tr( "Search For Chat Room To Join" );
     case eAppletChooseThumbnail:		    return QObject::tr( "Choose Thumbnail" );

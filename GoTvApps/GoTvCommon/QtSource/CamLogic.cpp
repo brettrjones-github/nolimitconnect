@@ -23,13 +23,14 @@ Q_DECLARE_METATYPE( QCameraInfo )
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-
 //============================================================================
 CamLogic::CamLogic( AppCommon& myApp )
     : QWidget(nullptr)
     , m_MyApp( myApp )
     , m_SnapshotTimer( new QTimer( this ))
 {
+    connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
+    m_SnapshotTimer->setInterval( 60 );
 }
 
 //============================================================================
@@ -178,9 +179,6 @@ void CamLogic::setCamera( const QCameraInfo &cameraInfo )
     QImageEncoderSettings settings = imagecapture->encodingSettings();
     settings.setResolution( QSize( 320, 240 ) );
     m_imageCapture->setEncodingSettings( settings );
-
-    connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
-    m_SnapshotTimer->setInterval( 60 );
     m_CamInitiated = true;
 }
 
@@ -399,7 +397,6 @@ void CamLogic::startCamera()
     {
         m_CamIsStarted = true;
         m_camera->start();
-        m_SnapshotTimer->start();
         if( !m_ViewFinder )
         {
             m_ViewFinder = new QCameraViewfinder();
@@ -407,6 +404,8 @@ void CamLogic::startCamera()
             m_camera->setViewfinder( m_ViewFinder );
             m_ViewFinder->hide();
         }
+
+        m_SnapshotTimer->start();
     }
 }
 
@@ -428,8 +427,10 @@ void CamLogic::updateCaptureMode(int)
     //QCamera::CaptureModes captureMode = tabIndex == 0 ? QCamera::CaptureStillImage : QCamera::CaptureVideo;
     QCamera::CaptureModes captureMode = QCamera::CaptureStillImage;
 
-    if( m_camera->isCaptureModeSupported( captureMode ) )
+    if( m_camera && m_camera->isCaptureModeSupported( captureMode ) )
+    {
         m_camera->setCaptureMode( captureMode );
+    }
 }
 
 //============================================================================

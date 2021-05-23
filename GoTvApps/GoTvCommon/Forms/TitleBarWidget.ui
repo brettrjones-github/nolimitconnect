@@ -451,7 +451,7 @@
        </widget>
       </item>
       <item>
-       <widget class="VxLabel" name="m_CamPreviewScreen">
+       <widget class="CamTitleBarPreview" name="m_CamPreviewScreen">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -666,11 +666,6 @@
    <header>VxPushButton.h</header>
   </customwidget>
   <customwidget>
-   <class>VxLabel</class>
-   <extends>QLabel</extends>
-   <header>VxLabel.h</header>
-  </customwidget>
-  <customwidget>
    <class>OfferBarWidget</class>
    <extends>QWidget</extends>
    <header>OfferBarWidget.h</header>
@@ -691,6 +686,11 @@
    <class>VxProgressBar</class>
    <extends>QProgressBar</extends>
    <header>VxProgressBar.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CamTitleBarPreview</class>
+   <extends>QLabel</extends>
+   <header>CamTitleBarPreview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -62,7 +62,7 @@ public:
 	virtual void				toGuiSearchResultError( void * callbackData, EScanType eScanType, GuiUser * netIdent, int errCode ){};
 	virtual void				toGuiSearchResultProfilePic( void * callbackData, GuiUser * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ){};
 	virtual void				toGuiSearchResultFileSearch(	void *			callbackData, 
-																GuiUser *	netIdent, 		
+																GuiUser *	    netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 

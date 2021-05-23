@@ -121,6 +121,7 @@ enum EApplet
     eAppletApplicationInfo,
     eActivityAppSetup,	            // application initialize
     eAppletBrowseFiles,             // file directory browser
+    eAppletCamSettings,  
 
     eAppletPlayerVideo,
 

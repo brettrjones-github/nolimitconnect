@@ -78,8 +78,8 @@ enum EMediaInputType
 	eMediaInputAudioPcm,
 
 	eMediaInputVideoPkts,
-	eMediaInputVideoJpgSmall,
-	eMediaInputVideoJpgBig,
+	eMediaInputVideoJpgSmall,   // 320x240 jpg video
+	eMediaInputVideoJpgBig,     // really for photos only
 
 	eMediaInputMixer,
 

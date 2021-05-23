@@ -55,11 +55,10 @@ void testJpgSpeed( void );
 
 namespace
 {
-
-	const int VIDEO_DATA_BYTE_CNT					= (320*240*3);
+	const int VIDEO_DATA_BYTE_CNT					    = (320*240*3);
 	//const int VIDEO_TOTAL_CHANGE_RANGE				= (320*240*3*128);
-	const int VIDEO_SENSITIVITY_DIVISOR				= (320*240*3*64);
-	const int VIDEO_MAX_MOTION_VALUE				= 100000;
+	const int VIDEO_SENSITIVITY_DIVISOR				    = (320*240*3*64);
+	const int VIDEO_MAX_MOTION_VALUE				    = 100000;
 	const int32_t MAX_DATA_PAYLOAD_PIC_PKT				= MAX_PKT_LEN - ( sizeof(PktVideoFeedPic) + 16 );
 	const int32_t MAX_TOTAL_PIC_CHUNKS_PAYLOAD			= VIDEO_DATA_BYTE_CNT - MAX_DATA_PAYLOAD_PIC_PKT;
 	const int32_t MAX_PIC_CHUNK_PKTS_REQUIRED			= MAX_TOTAL_PIC_CHUNKS_PAYLOAD / MAX_PIC_CHUNK_LEN + (MAX_TOTAL_PIC_CHUNKS_PAYLOAD % MAX_PIC_CHUNK_LEN) ? 1 : 0;
@@ -160,27 +159,27 @@ void MediaProcessor::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 {
 	std::vector<MediaClient>::iterator iter;
 	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock start\n" );
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock start" );
 	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_MixerClientsMutex.lock();
 	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock done\n" );
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.lock done" );
 	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	doMixerClientRemovals( m_MixerClientRemoveList );
 
 	for( iter = m_MixerList.begin(); iter != m_MixerList.end(); ++iter )
 	{
 		MediaClient& client = (*iter);
-		//LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail callbackAudioOutSpaceAvail %d\n", iClientIdx );
+		//LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail callbackAudioOutSpaceAvail %d", iClientIdx );
 		client.m_Callback->callbackAudioOutSpaceAvail( MIXER_CHUNK_LEN_BYTES );
 	}
 
 	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.unlock\n" );
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerClientsMutex.unlock" );
 	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_MixerClientsMutex.unlock();
 	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.lock()\n" );
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.lock()" );
 	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_MixerBufferMutex.lock();
 	if( !m_MixerBufUsed || m_MuteSpeaker )
@@ -201,7 +200,7 @@ void MediaProcessor::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 	m_MixerBufUsed = false;
 
 	//#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.unlock()\n" );
+	//	LogMsg( LOG_INFO, "fromGuiAudioOutSpaceAvail m_MixerBufferMutex.unlock()" );
 	//#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_MixerBufferMutex.unlock();
 }
@@ -212,7 +211,7 @@ void MediaProcessor::playAudio( int16_t * pcmData, int dataLenInBytes )
 	if( MIXER_CHUNK_LEN_BYTES == dataLenInBytes )
 	{
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "MediaProcessor::playAudio m_MixerBufferMutex.lock()\n" );
+			LogMsg( LOG_INFO, "MediaProcessor::playAudio m_MixerBufferMutex.lock()" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		m_MixerBufferMutex.lock();
 		if( m_MixerBufUsed )
@@ -243,13 +242,13 @@ void MediaProcessor::playAudio( int16_t * pcmData, int dataLenInBytes )
 		}
 		
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "MediaProcessor::playAudio m_MixerBufferMutex.unlock()\n" );
+			LogMsg( LOG_INFO, "MediaProcessor::playAudio m_MixerBufferMutex.unlock()" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		m_MixerBufferMutex.unlock();
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "MediaProcessor::playAudio wrong length %d\n", dataLenInBytes );
+		LogMsg( LOG_ERROR, "MediaProcessor::playAudio wrong length %d", dataLenInBytes );
 	}
 }
 
@@ -261,7 +260,7 @@ void MediaProcessor::processAudioIn( void )
 		m_AudioSemaphore.wait();
 		if( m_ProcessAudioThread.isAborted() )
 		{
-			LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting1\n" );
+			LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting1" );
 			break;
 		}
 
@@ -277,19 +276,19 @@ void MediaProcessor::processAudioIn( void )
 
 			if( m_ProcessAudioThread.isAborted() )
 			{
-				LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting2\n" );
+				LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting2" );
 				break;
 			}
 		}
 
 		if( m_ProcessAudioThread.isAborted() )
 		{
-			LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting3\n" );
+			LogMsg( LOG_INFO, "MediaProcessor::processAudioIn aborting3" );
 			break;
 		}
 	}
 		
-	LogMsg( LOG_INFO, "MediaProcessor::processAudioIn leaving function\n" );
+	LogMsg( LOG_INFO, "MediaProcessor::processAudioIn leaving function" );
 }
 
 //============================================================================
@@ -326,12 +325,12 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 	{
 		std::vector<MediaClient>::iterator iter;
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList AudioProcessorLock\n" );
+		LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList AudioProcessorLock" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		AudioProcessorLock mgrMutexLock( this );
 		doAudioClientRemovals( m_AudioClientRemoveList );
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList begin\n" );
+			LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList begin" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		for( iter = m_AudioPcmList.begin(); iter != m_AudioPcmList.end(); ++iter )
 		{
@@ -340,7 +339,7 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 		}
 
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList done\n" );
+			LogMsg( LOG_INFO, "processRawAudioIn m_AudioPcmList done" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	}
 
@@ -353,12 +352,12 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 		{
 			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList AudioProcessorLock\n" );
+			LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList AudioProcessorLock" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 			AudioProcessorLock mgrMutexLock( this );
 			doAudioClientRemovals( m_AudioClientRemoveList );
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-						LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList start\n" );
+						LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList start" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 
 			for( iter = m_AudioOpusList.begin(); iter != m_AudioOpusList.end(); ++iter )
@@ -368,7 +367,7 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 			}
 
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList done\n" );
+				LogMsg( LOG_INFO, "processRawAudioIn m_AudioOpusList done" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		}
 
@@ -381,12 +380,12 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 
 			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList AudioProcessorLock callbackOpusPkt\n" );
+				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList AudioProcessorLock callbackOpusPkt" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 			AudioProcessorLock mgrMutexLock( this );
 			doAudioClientRemovals( m_AudioClientRemoveList );
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList start\n" );
+				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList start" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 			for( iter = m_AudioPktsList.begin(); iter != m_AudioPktsList.end(); ++iter )
 			{
@@ -395,7 +394,7 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 			}
 
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList done\n" );
+				LogMsg( LOG_INFO, "processRawAudioIn m_AudioPktsList done" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		}
 	}
@@ -434,11 +433,11 @@ void MediaProcessor::processFriendAudioFeed( VxGUID& onlineId, int16_t * pcmData
 		if( !dontLock )
 		{
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processFriendAudioFeed m_AudioMutex.lock()\n" );
+				LogMsg( LOG_INFO, "processFriendAudioFeed m_AudioMutex.lock()" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 			m_AudioMutex.lock();
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processFriendAudioFeed begin\n" );
+				LogMsg( LOG_INFO, "processFriendAudioFeed begin" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		}
 
@@ -451,7 +450,7 @@ void MediaProcessor::processFriendAudioFeed( VxGUID& onlineId, int16_t * pcmData
 		if( !dontLock )
 		{
 			#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processFriendAudioFeed m_AudioMutex.unlock()\n" );
+				LogMsg( LOG_INFO, "processFriendAudioFeed m_AudioMutex.unlock()" );
 			#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 			m_AudioMutex.unlock();
 		}
@@ -558,12 +557,12 @@ void MediaProcessor::fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataI
 										iRotation,
 										bConvert );
 	#ifdef DEBUG_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "fromGuiVideoData m_VideoQueInMutex.lock()\n" );
+		LogMsg( LOG_INFO, "fromGuiVideoData m_VideoQueInMutex.lock()" );
 	#endif // DEBUG_PROCESSOR_LOCK
 	m_VideoQueInMutex.lock();
 	m_ProcessVideoQue.push_back( rawVideo );
 	#ifdef DEBUG_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "fromGuiVideoData m_VideoQueInMutex.unlock()\n" );
+		LogMsg( LOG_INFO, "fromGuiVideoData m_VideoQueInMutex.unlock()" );
 	#endif // DEBUG_PROCESSOR_LOCK
 	m_VideoQueInMutex.unlock();
 	m_VideoSemaphore.signal();
@@ -669,7 +668,7 @@ void testJpgSpeed( void )
 #ifdef TARGET_OS_WINDOWS
 	if( 0 != VxFileUtil::readWholeFile( "f:\\rawBmp1.raw", &retBuf, &lenOfData ) )
 	{
-		LogMsg( LOG_INFO, "Fail read raw bmp \n" );
+		LogMsg( LOG_INFO, "Fail read raw bmp " );
 		return;
 	}
 #else
@@ -677,14 +676,14 @@ void testJpgSpeed( void )
 	rawFile += "rawBmp1.raw";
 	if( 0 != VxFileUtil::readWholeFile( rawFile.c_str(), &retBuf, &lenOfData ) )
 	{
-		LogMsg( LOG_INFO, "Fail read raw bmp %s \n", rawFile.c_str() );
+		LogMsg( LOG_INFO, "Fail read raw bmp %s ", rawFile.c_str() );
 		return;
 	}
 #endif
 
 	if( 0 == lenOfData )
 	{
-		LogMsg( LOG_INFO, "Fail read raw bmp \n" );
+		LogMsg( LOG_INFO, "Fail read raw bmp " );
 		return;
 	}
 
@@ -709,7 +708,7 @@ void testJpgSpeed( void )
 			&s32JpgDataLen );			// return length of jpeg image
 		if( 0 != rc )
 		{
-			LogMsg( LOG_INFO, "VxBmp2Jpg ERROR %d\n", rc );
+			LogMsg( LOG_INFO, "VxBmp2Jpg ERROR %d", rc );
 			break;
 		}
 
@@ -736,9 +735,9 @@ void testJpgSpeed( void )
 
 	double elapsedSec = compressTimer.elapsedSec();
 	//elapsedSec+= 1.0;
-	LogMsg( LOG_INFO, "Jpg convert time sec %3.3f size %d \n", elapsedSec, s32JpgDataLen );
+	LogMsg( LOG_INFO, "Jpg convert time sec %3.3f size %d ", elapsedSec, s32JpgDataLen );
 	//elapsedSec = (elapsedSec -1.0) * 1000;
-	LogMsg( LOG_INFO, "Jpg convert time millisec %3.3f \n", elapsedSec / 1000, s32JpgDataLen );
+	LogMsg( LOG_INFO, "Jpg convert time millisec %3.3f ", elapsedSec / 1000, s32JpgDataLen );
 
 }
 
@@ -749,12 +748,12 @@ void MediaProcessor::processVideoIn( void )
 	while( false == m_ProcessVideoThread.isAborted() )
 	{
 		#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "processVideoIn wait for video semaphore\n" );
+			LogMsg( LOG_INFO, "processVideoIn wait for video semaphore" );
 		#endif // DEBUG_PROCESSOR_LOCK
 		m_VideoSemaphore.wait();
 		if( m_ProcessVideoThread.isAborted() )
 		{
-			LogMsg( LOG_INFO, "MediaProcessor::processVideoIn aborting1\n" );
+			LogMsg( LOG_INFO, "MediaProcessor::processVideoIn aborting1" );
 			break;
 		}
 		else
@@ -766,13 +765,13 @@ void MediaProcessor::processVideoIn( void )
 		while( m_ProcessVideoQue.size() )
 		{
 			#ifdef DEBUG_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processVideoIn m_VideoQueInMutex.lock()\n" );
+				LogMsg( LOG_INFO, "processVideoIn m_VideoQueInMutex.lock()" );
 			#endif // DEBUG_PROCESSOR_LOCK
 			m_VideoQueInMutex.lock();
 			RawVideo * rawVideo = m_ProcessVideoQue[0];
 			m_ProcessVideoQue.erase( m_ProcessVideoQue.begin() );
 			#ifdef DEBUG_PROCESSOR_LOCK
-				LogMsg( LOG_INFO, "processVideoIn m_VideoQueInMutex.unlock()\n" );
+				LogMsg( LOG_INFO, "processVideoIn m_VideoQueInMutex.unlock()" );
 			#endif // DEBUG_PROCESSOR_LOCK
 			m_VideoQueInMutex.unlock();
 
@@ -781,14 +780,14 @@ void MediaProcessor::processVideoIn( void )
 
 			if( m_ProcessVideoThread.isAborted() )
 			{
-				LogMsg( LOG_INFO, "MediaProcessor::processVideoIn aborting2\n" );
+				LogMsg( LOG_INFO, "MediaProcessor::processVideoIn aborting2" );
 				break;
 			}
 		}
 
 		if( m_ProcessVideoThread.isAborted() )
 		{
-			LogMsg( LOG_INFO, "MediaProcessor::processVideoIn aborting3\n" );
+			LogMsg( LOG_INFO, "MediaProcessor::processVideoIn aborting3" );
 			break;
 		}
 	}
@@ -798,8 +797,8 @@ void MediaProcessor::processVideoIn( void )
 
 //============================================================================
 void MediaProcessor::processFriendVideoFeed(	VxGUID&			onlineId, 
-												uint8_t *			pu8Jpg, 
-												uint32_t				jpgDataLen,
+												uint8_t *		pu8Jpg, 
+												uint32_t		jpgDataLen,
 												int				motion0To100000 )
 {
 	m_Engine.callbackVideoJpgSmall( 0, onlineId, pu8Jpg, jpgDataLen, motion0To100000 );
@@ -811,7 +810,7 @@ void MediaProcessor::processFriendVideoFeed(	VxGUID&			onlineId,
 		#endif // DEBUG_PROCESSOR_LOCK
 		VideoProcessorLock mgrMutexLock( this );
 		#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "processFriendVideoFeed VideoProcessorLock done\n" );
+			LogMsg( LOG_INFO, "processFriendVideoFeed VideoProcessorLock done" );
 		#endif // DEBUG_PROCESSOR_LOCK
 		doVideoClientRemovals( m_VideoClientRemoveList );
 
@@ -822,7 +821,7 @@ void MediaProcessor::processFriendVideoFeed(	VxGUID&			onlineId,
 		}
 
 		#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "processFriendVideoFeed VideoProcessorLock callbacks done\n" );
+			LogMsg( LOG_INFO, "processFriendVideoFeed VideoProcessorLock callbacks done" );
 		#endif // DEBUG_PROCESSOR_LOCK
 	}
 };
@@ -858,17 +857,17 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 
 		uint8_t * pu8JpgData = new uint8_t[ iMaxJpgSize ];
         VxBmp2Jpg(	24,						// number of bits each pixel..(For now must be 24)
-								pu8VidData,				// bits of bmp to convert
-								iWidth,					// width of image in pixels
-								iHeight,				// height of image in pixels
-								75,					// quality of image
-								iMaxJpgSize,			// maximum length of pu8RetJpg
-								pu8JpgData,				// buffer to return Jpeg image
-								&s32JpgDataLen );		// return length of jpeg image
+					pu8VidData,				// bits of bmp to convert
+					iWidth,					// width of image in pixels
+					iHeight,				// height of image in pixels
+					75,					    // quality of image
+					iMaxJpgSize,			// maximum length of pu8RetJpg
+					pu8JpgData,				// buffer to return Jpeg image
+					&s32JpgDataLen );		// return length of jpeg image
 
 		std::vector<MediaClient>::iterator iter;
 		#ifdef DEBUG_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "VxBmp2Jpg AutoProcessorLock\n" );
+		LogMsg( LOG_INFO, "VxBmp2Jpg AutoProcessorLock" );
 		#endif // DEBUG_PROCESSOR_LOCK
 		VideoProcessorLock mgrMutexLock( this );
 		doVideoClientRemovals( m_VideoClientRemoveList );
@@ -909,11 +908,11 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 		// need to rotate
 		unsigned char * pu8DataToDelete = pu8VidData;
 		pu8VidData = VxResizeRgbImage(	pu8VidData, 
-			iWidth, 
-			iHeight, 
-			320, 
-			240,
-			iRotation );
+			                            iWidth, 
+			                            iHeight, 
+			                            320, 
+			                            240,
+			                            iRotation );
 		delete[] pu8DataToDelete;
 	}
 
@@ -934,13 +933,13 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 	// take a guess at what size the jpg will be
 	int iMaxJpgSize = VIDEO_DATA_BYTE_CNT;
 	RCODE rc = VxBmp2Jpg(	24,							// number of bits each pixel..(For now must be 24)
-						 pu8VidData,					// bits of bmp to convert
-						 iWidth,						// width of image in pixels
-						 iHeight,						// height of image in pixels
-						 m_VideoJpgBigList.size() ? 100 : 75,							// quality of image
-						 iMaxJpgSize,					// maximum length of pu8RetJpg
-						 m_PktVideoFeedPic->getDataPayload(),	// buffer to return Jpeg image
-						 &s32JpgDataLen );				// return length of jpeg image
+						     pu8VidData,					// bits of bmp to convert
+						     iWidth,						// width of image in pixels
+						     iHeight,						// height of image in pixels
+						     m_VideoJpgBigList.size() ? 100 : 75,							// quality of image
+						     iMaxJpgSize,					// maximum length of pu8RetJpg
+						     m_PktVideoFeedPic->getDataPayload(),	// buffer to return Jpeg image
+						     &s32JpgDataLen );				// return length of jpeg image
 	delete[] pu8VidData;
 	if( 0 == rc )
 	{
@@ -951,7 +950,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 			// clients wanted large but the video capture was small so we have to give them small
 			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoJpgBigList VideoProcessorLock\n" );
+			LogMsg( LOG_INFO, "m_VideoJpgBigList VideoProcessorLock" );
 			#endif // DEBUG_PROCESSOR_LOCK
 			VideoProcessorLock mgrMutexLock( this );
 			doVideoClientRemovals( m_VideoClientRemoveList );
@@ -967,13 +966,13 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 		{
 			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoJpgSmallList VideoProcessorLock start\n" );
+			LogMsg( LOG_INFO, "m_VideoJpgSmallList VideoProcessorLock start" );
 			#endif // DEBUG_PROCESSOR_LOCK
 			VideoProcessorLock mgrMutexLock( this );
 			doVideoClientRemovals( m_VideoClientRemoveList );
 
 			#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoJpgSmallList VideoProcessorLock done\n" );
+			LogMsg( LOG_INFO, "m_VideoJpgSmallList VideoProcessorLock done" );
 			#endif // DEBUG_PROCESSOR_LOCK
 			for( iter = m_VideoJpgSmallList.begin(); iter != m_VideoJpgSmallList.end(); ++iter )
 			{
@@ -982,7 +981,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 			}
 
 			#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoJpgSmallList VideoProcessorLock callbacks done\n" );
+			LogMsg( LOG_INFO, "m_VideoJpgSmallList VideoProcessorLock callbacks done" );
 			#endif // DEBUG_PROCESSOR_LOCK
 		}
 
@@ -1001,7 +1000,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 
 			std::vector<MediaClient>::iterator iter;
 			#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoPktsList VideoProcessorLock\n" );
+			LogMsg( LOG_INFO, "m_VideoPktsList VideoProcessorLock" );
 			#endif // DEBUG_PROCESSOR_LOCK
 			VideoProcessorLock mgrMutexLock( this );
 			doVideoClientRemovals( m_VideoClientRemoveList );
@@ -1036,13 +1035,13 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 			}
 
 #ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoPktsList callbacks done\n" );
+			LogMsg( LOG_INFO, "m_VideoPktsList callbacks done" );
 #endif // DEBUG_PROCESSOR_LOCK
 		}
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginMgr::fromGuiVideoData: JPEG Conversion error %d\n", rc );
+		LogMsg( LOG_ERROR, "PluginMgr::fromGuiVideoData: JPEG Conversion error %d", rc );
 	}
 
 	//LogMsg( LOG_INFO, "PluginMgr::fromGuiVideoData done\n" );
@@ -1053,11 +1052,11 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 {
 	if( bWantAppIdle )
 	{
-		LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle anding want idle plugin %d\n", ePluginType );
+		LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle anding want idle plugin %d", ePluginType );
 		m_aoWantAppIdle.push_back( m_PluginMgr.getPlugin( ePluginType ) );
 		if( 1 == m_aoWantAppIdle.size() )
 		{
-			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to start idle\n" );
+			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to start idle" );
 			// BRJ idle runs all the time
 			//IToGui::getToGui().toGuiStartAppIdle();
 		}
@@ -1075,7 +1074,7 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 		}
 		if( 0 == m_aoWantAppIdle.size() )
 		{
-			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to stop idle\n" );
+			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to stop idle" );
 			//IToGui::getToGui().toGuiStopAppIdle();
 		}
 	}
@@ -1212,18 +1211,18 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 	}
 
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "wantAudioMediaInput m_MixerClientsMutex.lock start\n" );
+		LogMsg( LOG_INFO, "wantAudioMediaInput m_MixerClientsMutex.lock start" );
 	#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_MixerClientsMutex.lock();
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "wantAudioMediaInput m_MixerClientsMutex.lock done\n" );
+		LogMsg( LOG_INFO, "wantAudioMediaInput m_MixerClientsMutex.lock done" );
 	#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 
 	if( clientExistsInList( m_MixerList, mediaType, callback, userData ) )
 	{
-		LogMsg( LOG_INFO, "WARNING. Ignoring New Mixer Media Client because already in list\n" );
+		LogMsg( LOG_INFO, "WARNING. Ignoring New Mixer Media Client because already in list" );
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_MixerClientsMutex.unlock\n" );
+			LogMsg( LOG_INFO, "m_MixerClientsMutex.unlock" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		m_MixerClientsMutex.unlock();
 		return;
@@ -1241,13 +1240,13 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 	}
 
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "m_MixerClientsMutex.unlock\n" );
+		LogMsg( LOG_INFO, "m_MixerClientsMutex.unlock" );
 	#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_MixerClientsMutex.unlock();
 
 	if( startSpeakerOutput )
 	{
-		LogMsg( LOG_INFO, "starting speaker output\n" );
+		LogMsg( LOG_INFO, "starting speaker output" );
 		IToGui::getAudioRequests().toGuiWantSpeakerOutput( eAppModulePtoP, true );	
 	}
 }
@@ -1289,7 +1288,7 @@ void MediaProcessor::doMixerClientRemovals( std::vector<ClientToRemove>& clientR
 			break;
 
 		default:
-			LogMsg( LOG_ERROR, "MediaProcessor::doClientRemovals UNKNOWN TYPE\n");
+			LogMsg( LOG_ERROR, "MediaProcessor::doClientRemovals UNKNOWN TYPE");
 			continue;
 		}
 
@@ -1311,7 +1310,7 @@ void MediaProcessor::doMixerClientRemovals( std::vector<ClientToRemove>& clientR
 		if( stopSpeakerOutput )
 		{
 			m_SpeakerOutputEnabled = false;
-			LogMsg( LOG_INFO, "stopping speaker output\n" );
+			LogMsg( LOG_INFO, "stopping speaker output" );
 			IToGui::getAudioRequests().toGuiWantSpeakerOutput( eAppModulePtoP, false );
 		}
 	}
@@ -1350,11 +1349,11 @@ void MediaProcessor::wantAudioMediaInput(	EMediaInputType				mediaType,
 	}
 
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "wantAudioMediaInput m_AudioMutex.lock start\n" );
+		LogMsg( LOG_INFO, "wantAudioMediaInput m_AudioMutex.lock start" );
 	#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_AudioMutex.lock();
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "wantAudioMediaInput m_AudioMutex.lock done\n" );
+		LogMsg( LOG_INFO, "wantAudioMediaInput m_AudioMutex.lock done" );
 	#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 
 	std::vector<MediaClient> * clientList = 0;
@@ -1371,9 +1370,9 @@ void MediaProcessor::wantAudioMediaInput(	EMediaInputType				mediaType,
 		break;
 
 	default:
-		LogMsg( LOG_ERROR, "wantAudioMediaInput unknown mediaType type %d\n", mediaType );
+		LogMsg( LOG_ERROR, "wantAudioMediaInput unknown mediaType type %d", mediaType );
 	#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_AudioMutex.unlock\n" );
+			LogMsg( LOG_INFO, "m_AudioMutex.unlock" );
 	#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		m_AudioMutex.unlock();
 		return;
@@ -1381,9 +1380,9 @@ void MediaProcessor::wantAudioMediaInput(	EMediaInputType				mediaType,
 
 	if( clientExistsInList( *clientList, mediaType, callback, userData ) )
 	{
-		LogMsg( LOG_INFO, "WARNING. Ignoring New Audio Media Client because already in list\n" );
+		LogMsg( LOG_INFO, "WARNING. Ignoring New Audio Media Client because already in list" );
 		#ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_AudioMutex.unlock\n" );
+			LogMsg( LOG_INFO, "m_AudioMutex.unlock" );
 		#endif // DEBUG_AUDIO_PROCESSOR_LOCK
 		m_AudioMutex.unlock();
 		return;
@@ -1401,13 +1400,13 @@ void MediaProcessor::wantAudioMediaInput(	EMediaInputType				mediaType,
 	}
 
 #ifdef DEBUG_AUDIO_PROCESSOR_LOCK
-	LogMsg( LOG_INFO, "m_AudioMutex.unlock\n" );
+	LogMsg( LOG_INFO, "m_AudioMutex.unlock" );
 #endif // DEBUG_AUDIO_PROCESSOR_LOCK
 	m_AudioMutex.unlock();
 
 	if( startMicInput )
 	{
-		LogMsg( LOG_INFO, "starting microphone input\n" );
+		LogMsg( LOG_INFO, "starting microphone input" );
 		IToGui::getAudioRequests().toGuiWantMicrophoneRecording( eAppModulePtoP, true );
 	}
 }
@@ -1449,7 +1448,7 @@ void MediaProcessor::doAudioClientRemovals( std::vector<ClientToRemove>& clientR
 			break;
 
 		default:
-			LogMsg( LOG_ERROR, "MediaProcessor::doClientRemovals UNKNOWN TYPE\n");
+			LogMsg( LOG_ERROR, "MediaProcessor::doClientRemovals UNKNOWN TYPE");
 			continue;
 		}
 
@@ -1471,7 +1470,7 @@ void MediaProcessor::doAudioClientRemovals( std::vector<ClientToRemove>& clientR
 		if( stopMicInput )
 		{
 			m_MicCaptureEnabled = false;
-			LogMsg( LOG_INFO, "stopping microphone input\n" );
+			LogMsg( LOG_INFO, "stopping microphone input" );
 			IToGui::getAudioRequests().toGuiWantMicrophoneRecording( eAppModulePtoP, false );
 		}
 	}
@@ -1510,11 +1509,11 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 	}
 
 	#ifdef DEBUG_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "wantVideoMediaInput m_VideoMutex.lock start\n" );
+		LogMsg( LOG_INFO, "wantVideoMediaInput m_VideoMutex.lock start" );
 	#endif // DEBUG_PROCESSOR_LOCK
 		m_VideoMutex.lock();
 	#ifdef DEBUG_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "wantVideoMediaInput m_VideoMutex.lock done\n" );
+		LogMsg( LOG_INFO, "wantVideoMediaInput m_VideoMutex.lock done" );
 	#endif // DEBUG_PROCESSOR_LOCK
 
 	std::vector<MediaClient> * clientList = 0;
@@ -1531,9 +1530,9 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 		break;
 
 	default:
-		LogMsg( LOG_ERROR, "wantVideoMediaInput unknown mediaType type %d\n", mediaType );
+		LogMsg( LOG_ERROR, "wantVideoMediaInput unknown mediaType type %d", mediaType );
 		#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoMutex.unlock\n" );
+			LogMsg( LOG_INFO, "m_VideoMutex.unlock" );
 		#endif // DEBUG_PROCESSOR_LOCK
 		m_VideoMutex.unlock();
 		return;
@@ -1541,9 +1540,9 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 
 	if( clientExistsInList( *clientList, mediaType, callback, userData ) )
 	{
-		LogMsg( LOG_INFO, "WARNING. Ignoring New Video Media Client because already in list\n" );
+		LogMsg( LOG_INFO, "WARNING. Ignoring New Video Media Client because already in list" );
 		#ifdef DEBUG_PROCESSOR_LOCK
-			LogMsg( LOG_INFO, "m_VideoMutex.unlock\n" );
+			LogMsg( LOG_INFO, "m_VideoMutex.unlock" );
 		#endif // DEBUG_PROCESSOR_LOCK
 		m_VideoMutex.unlock();
 		return;
@@ -1554,7 +1553,7 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 
 	int idsInVidPktListCnt = myIdInVidPktListCount(); // this also updates m_VidPktListContainsMyId
 	#ifdef DEBUG_PROCESSOR_LOCK
-		LogMsg( LOG_INFO, "m_VideoMutex.unlock\n" );
+		LogMsg( LOG_INFO, "m_VideoMutex.unlock" );
 	#endif // DEBUG_PROCESSOR_LOCK
 	bool startVidCapture = ( false == m_VidCaptureEnabled ) && ( 1 == ( m_VideoJpgSmallList.size() + idsInVidPktListCnt + m_VideoJpgBigList.size() ) );
 	m_VideoMutex.unlock();
@@ -1564,7 +1563,7 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 			testJpgSpeed();
 		#endif // TEST_JPG_SPEED
 		m_VidCaptureEnabled = true;
-		LogMsg( LOG_INFO, "starting video capture\n" );
+		LogMsg( LOG_INFO, "starting video capture" );
 		IToGui::getToGui().toGuiWantVideoCapture( true );
 	}
 }
@@ -1606,7 +1605,7 @@ void MediaProcessor::doVideoClientRemovals( std::vector<ClientToRemove>& clientR
 			break;
 
 		default:
-			LogMsg( LOG_ERROR, "MediaProcessor::doClientRemovals UNKNOWN TYPE\n");
+			LogMsg( LOG_ERROR, "MediaProcessor::doClientRemovals UNKNOWN TYPE");
 			continue;
 		}
 
@@ -1628,7 +1627,7 @@ void MediaProcessor::doVideoClientRemovals( std::vector<ClientToRemove>& clientR
 		if( stopVidCapture )
 		{
 			m_VidCaptureEnabled = false;
-			LogMsg( LOG_INFO, "stopping video capture\n" );
+			LogMsg( LOG_INFO, "stopping video capture" );
 			IToGui::getToGui().toGuiWantVideoCapture( false );
 		}
 	}
