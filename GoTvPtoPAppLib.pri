@@ -191,6 +191,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/HelpBrowser.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.h \
@@ -517,6 +518,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/HelpBrowser.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.cpp \
