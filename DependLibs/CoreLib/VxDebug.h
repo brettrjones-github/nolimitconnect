@@ -76,6 +76,7 @@ enum ELogModule
     eLogRunTest         = 0x00400000, // 23
     eLogHostConnect     = 0x00800000, // 24
     eLogHostSearch      = 0x01000000, // 25
+    eLogVideo           = 0x02000000, // 26
 
     eMaxLogModule
 };

@@ -41,11 +41,10 @@ private:
     PluginId                    m_PluginId;         // 17 bytes 
     uint8_t					    m_HostType{ 0 };    // 1 byte
     // 74 bytes to here
-    uint8_t					    m_CommError{ 0 };		
-    uint16_t					m_TotalMatches{ 0 };
-    uint8_t					    m_PluginType{ 0 };		
-    uint8_t					    m_Res1{ 0 };
-    uint16_t                    m_Res2{ 0 };
+    uint16_t					m_TotalMatches{ 0 };	
+    uint8_t					    m_PluginType{ 0 };	
+    uint8_t					    m_CommError{ 0 };
+    uint16_t					m_Res1{ 0 };	
     // 80 bytes to here
 };
 
@@ -79,14 +78,13 @@ private:
     VxGUID                      m_SessionId;        // 16 bytes
     PluginId                    m_PluginId;         // 17 bytes 
     uint8_t					    m_HostType{ 0 };    // 1 byte
-                                                    // 74 bytes to here
-    uint8_t					    m_CommError{ 0 };		
+                                                    // 74 bytes to here	
     uint16_t					m_TotalMatches{ 0 };	
-    uint8_t					    m_PluginType{ 0 };		
-    uint8_t					    m_Res1{ 0 };
-    uint16_t                    m_Res2{ 0 };
+    uint8_t					    m_PluginType{ 0 };	
+    uint8_t					    m_CommError{ 0 };
+    uint16_t					m_Res1{ 0 };	
     // 80 bytes to here
-    PktBlobEntry                m_BlobEntry;	
+    PktBlobEntry                m_BlobEntry;	//size 14352
 };
 
 #pragma pack(pop)

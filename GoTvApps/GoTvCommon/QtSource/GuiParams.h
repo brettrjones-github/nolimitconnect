@@ -18,6 +18,7 @@
 #include <QColor>
 #include <QRect>
 #include <QSize>
+#include <QCamera>
 
 enum EButtonSize
 {
@@ -64,6 +65,9 @@ public:
 
     static QString				describeAge( EAgeType gender );
     static QString				describeAge( int age );
+    static QString              describeCamStatus( QCamera::Status camStatus );
+    static QString              describeCamState( QCamera::State camState );
+
     static QString				describeCommError( ECommErr commErr );
     static QString				describeContentCatagory( EContentCatagory content );
     static QString				describeContentRating( EContentRating content );

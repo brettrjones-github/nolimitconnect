@@ -56,6 +56,7 @@ QString describeLogModule( ELogModule logModule )
     case eLogRunTest: return QObject::tr( "Log Run Test" );
     case eLogHostConnect: return QObject::tr( "Log Host Connect" );
     case eLogHostSearch: return QObject::tr( "Log Host Search" );
+    case eLogVideo: return QObject::tr( "Log Cam And Video" );
     default:
         return QObject::tr( "Invalid Log Module" );
     }

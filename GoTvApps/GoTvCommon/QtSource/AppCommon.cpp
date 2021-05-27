@@ -199,6 +199,8 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 {
     g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
 
+    m_ElapsedTimer.start();
+
     connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OfferMgr, SLOT( slotOncePerSecond() ) );
     connect( m_CheckSetupTimer, SIGNAL( timeout() ), this, SLOT( slotCheckSetupTimer() ) );
 }
@@ -212,7 +214,7 @@ IFromGui& AppCommon::getFromGuiInterface( void )
 //============================================================================
 void AppCommon::loadWithoutThread( void )
 {
-    uint64_t startMs = GetApplicationAliveMs();
+    uint64_t startMs = elapsedMilliseconds();
 
     registerMetaData();
     m_UserMgr.onAppCommonCreated();

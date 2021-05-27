@@ -73,6 +73,7 @@ namespace
                     | eLogRunTest
                     | eLogHostConnect
                     | eLogHostSearch
+                    | eLogVideo
                     );
 #else
     uint32_t g_ModuleEnableLoggingFlags = 0;

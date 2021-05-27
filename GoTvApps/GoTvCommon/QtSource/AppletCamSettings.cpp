@@ -57,13 +57,6 @@ AppletCamSettings::AppletCamSettings( AppCommon& app, QWidget * parent )
         return;
     }
 
-    connect( this, SIGNAL(finished(int)), this, SLOT(onAboutToDestroyDialog()));
-
-    connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),		this, SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );
-    connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this, SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
-    connect( this, SIGNAL(signalToGuiContactOffline(VxNetIdent *)),				this, SLOT(slotToGuiContactOffline(VxNetIdent *)) );
-
-
     if( m_HisIdent && m_HisIdent->getNetIdent() )
     {
         setupCamFeed( m_HisIdent->getNetIdent() );
@@ -83,7 +76,6 @@ AppletCamSettings::~AppletCamSettings()
 {
     m_MyApp.activityStateChange( this, false );
 }
-
 
 //============================================================================
 void AppletCamSettings::setupCamFeed( VxNetIdent* feedNetIdent )
@@ -241,11 +233,6 @@ void AppletCamSettings::setCameraButtonVisibility( bool visible )
 //{
 //	m_Engine.fromGuiMuteSpeaker( muteSpeaker );
 //}
-
-//============================================================================
-void AppletCamSettings::onAboutToDestroyDialog( void )
-{
-}
 
 //============================================================================
 void AppletCamSettings::resizeBitmapToFitScreen( QLabel * VideoScreen, QImage& oPicBitmap )

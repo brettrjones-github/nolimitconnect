@@ -46,6 +46,7 @@
 #include <QMessageBox>
 #include <QDialog>
 #include <QObject>
+#include <QElapsedTimer>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -93,6 +94,9 @@ public:
 				AccountMgr&     myDataHelper,
 				IGoTv&		    gotv );
 	virtual ~AppCommon() override = default;
+
+    int64_t                     elapsedMilliseconds( void )                 { return static_cast<int64_t>(m_ElapsedTimer.elapsed()); }
+    int64_t                     elapsedSeconds( void )                      { return static_cast<int64_t>(m_ElapsedTimer.elapsed()) / 1000; }
 
     // load profile and icons etc without using thread to avoid linux crash
     void                        loadWithoutThread( void );
@@ -799,6 +803,7 @@ private:
     bool                        m_AppInitialized = false;
     QTimer *                    m_CheckSetupTimer = nullptr;
     ActivityAppSetup *          m_AppSetupDlg = nullptr;
+    QElapsedTimer               m_ElapsedTimer;
 
 //    KodiThread *                m_KodiThread;
 };

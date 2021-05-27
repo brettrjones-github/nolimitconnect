@@ -21,6 +21,7 @@
 PktPluginSettingReq::PktPluginSettingReq()
 {
     setPktType( PKT_TYPE_PLUGIN_SETTING_REQ );
+    LogMsg( LOG_DEBUG, "sizeof( PktPluginSettingReq ) %d", sizeof( PktPluginSettingReq ));
     setPktLength( sizeof( PktPluginSettingReq ) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }

@@ -45,7 +45,6 @@ signals:
 protected slots:
     //void						slotMuteMicButtonClicked( bool muteMicrophone );
     //void						slotMuteSpeakerButtonClicked( bool muteSpeaker );
-    void						onAboutToDestroyDialog( void ); 
     void						slotToGuiRxedOfferReply( GuiOfferSession * offerSession );
     void						slotToGuiSessionEnded( GuiOfferSession * offerSession );
     void						slotToGuiContactOffline( VxNetIdent * hisIdent );

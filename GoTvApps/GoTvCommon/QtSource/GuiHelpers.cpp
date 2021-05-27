@@ -999,46 +999,6 @@ bool GuiHelpers::setAge( QComboBox * comboBox, EAgeType ageType)
 }
 
 //============================================================================
-QString GuiParams::describeAge( EAgeType gender )
-{
-    switch( gender )
-    {
-    case eAgeTypeUnspecified:
-        return QObject::tr( "Any" );
-    case eAgeTypeUnder21:
-        return QObject::tr( "Under 21" );
-    case eAgeType21OrOlder:
-        return QObject::tr( "21 Or Older" );
-    default:
-        return QObject::tr( "Unknown" );
-    }
-}
-
-//============================================================================
-QString GuiParams::describeAge( int age )
-{
-    QString ageStr( age );
-    if( ( age >= 80 ) || ( age < 0 ) )
-    {
-        ageStr = "Old";
-    }
-    else if( age == 0 )
-    {
-        ageStr = "Any";
-    }
-    else if( age < 21 )
-    {
-        ageStr = "Young";
-    }
-    else if( age >= 21 && age < 80 )
-    {
-        ageStr = "Middle Age";
-    }
-
-    return ageStr;
-}
-
-//============================================================================
 uint8_t GuiHelpers::ageToIndex( EAgeType age )
 {
     if( ( age >= 0 ) && ( age < eMaxAgeType ) )

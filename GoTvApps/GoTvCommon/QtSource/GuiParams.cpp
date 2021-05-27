@@ -123,6 +123,105 @@ QSize GuiParams::getSnapshotSize( void )
 }
 
 //============================================================================
+QString GuiParams::describeAge( EAgeType gender )
+{
+    switch( gender )
+    {
+    case eAgeTypeUnspecified:
+        return QObject::tr( "Any" );
+    case eAgeTypeUnder21:
+        return QObject::tr( "Under 21" );
+    case eAgeType21OrOlder:
+        return QObject::tr( "21 Or Older" );
+    default:
+        return QObject::tr( "Unknown" );
+    }
+}
+
+//============================================================================
+QString GuiParams::describeAge( int age )
+{
+    QString ageStr( age );
+    if( ( age >= 80 ) || ( age < 0 ) )
+    {
+        ageStr = QObject::tr( "Old" );
+    }
+    else if( age == 0 )
+    {
+        ageStr = QObject::tr( "Any" );
+    }
+    else if( age < 21 )
+    {
+        ageStr = QObject::tr( "Young" );
+    }
+    else if( age >= 21 && age < 80 )
+    {
+        ageStr = QObject::tr( "Middle Age" );
+    }
+
+    return ageStr;
+}
+
+//============================================================================
+QString GuiParams::describeCamStatus( QCamera::Status camStatus )
+{
+    QString camDesc = QObject::tr( "Unknown Cam Status" );
+    switch(camStatus)
+    {
+
+    case QCamera::Status::UnavailableStatus:
+        camDesc =  QObject::tr( "Cam Status Unavailable" );
+        break;
+    case QCamera::Status::UnloadedStatus:
+        camDesc =  QObject::tr( "Cam Status Unloaded" );
+        break;
+    case QCamera::Status::LoadingStatus:
+        camDesc =  QObject::tr( "Cam Status Loading" );
+        break;
+    case QCamera::Status::UnloadingStatus:
+        camDesc =  QObject::tr( "Cam Status Unloading" );
+        break;
+    case QCamera::Status::LoadedStatus:
+        camDesc =  QObject::tr( "Cam Status Loaded" );
+        break;
+    case QCamera::Status::StandbyStatus:
+        camDesc =  QObject::tr( "Cam Status Standby" );
+        break;
+    case QCamera::Status::StartingStatus:
+        camDesc =  QObject::tr( "Cam Status Starting" );
+        break;
+    case QCamera::Status::StoppingStatus:
+        camDesc =  QObject::tr( "Cam Status Stopping" );
+        break;
+    case QCamera::Status::ActiveStatus:
+        camDesc =  QObject::tr( "Cam Status Active" );
+        break;
+    }
+
+    return camDesc;
+}
+
+//============================================================================
+QString GuiParams::describeCamState( QCamera::State camState )
+{
+    QString camDesc = QObject::tr( "Unknown Cam State" );
+    switch(camState)
+    {
+    case QCamera::State::UnloadedState:
+        camDesc =  QObject::tr( "Cam State Unloaded" );
+        break;
+    case QCamera::State::LoadedState:
+        camDesc =  QObject::tr( "Cam State Loaded" );
+        break;
+    case QCamera::State::ActiveState:
+        camDesc =  QObject::tr( "Cam State Active" );
+        break;
+    }
+
+    return camDesc;
+}
+
+//============================================================================
 QString GuiParams::describeCommError( ECommErr commErr )
 {
     switch( commErr )

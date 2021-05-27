@@ -19,13 +19,16 @@
 
 class PktBlobEntry;
 
+#pragma pack(push)
+#pragma pack(1)
+
 class PluginId
 {
 public:
 	PluginId() = default;
     PluginId( VxGUID& onlineId, EPluginType pluginType );
     PluginId( const PluginId& rhs );
-	virtual ~PluginId() = default;
+    //do not use virtuals because this object is packed in packets
 	PluginId&				    operator =( const PluginId& rhs );
     bool						operator == ( const PluginId& rhs ) const;
     bool						operator != ( const PluginId& rhs ) const;
@@ -34,8 +37,8 @@ public:
     bool						operator > ( const PluginId& rhs ) const;
     bool						operator >= ( const PluginId& rhs ) const;
 
-    virtual bool                addToBlob( PktBlobEntry& blob );
-    virtual bool                extractFromBlob( PktBlobEntry& blob );
+    bool                        addToBlob( PktBlobEntry& blob );
+    bool                        extractFromBlob( PktBlobEntry& blob );
 
     void						setOnlineId( VxGUID& onlineId )             { m_OnlineId = onlineId; }
     VxGUID&					    getOnlineId( void )                         { return m_OnlineId; }
@@ -56,4 +59,4 @@ protected:
     uint8_t					    m_PluginType{ 0 };
 };
 
-
+#pragma pack(pop)

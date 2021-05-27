@@ -90,7 +90,8 @@ public slots:
 
     void updateCameraDevice( QAction *action );
 
-    void updateCameraState( QCamera::State );
+    void cameraStateChanged( QCamera::State camState );
+    void cameraStatusChanged( QCamera::Status camStatus );
     void updateCaptureMode( int );
     void updateRecorderState( QMediaRecorder::State state );
     void setExposureCompensation( int index );
@@ -131,10 +132,12 @@ private:
     QAudioEncoderSettings       m_audioSettings;
     QVideoEncoderSettings       m_videoSettings;
     QString                     m_videoContainerFormat;
-    bool                        m_isCapturingImage = false;
-    bool                        m_applicationExiting = false;
-    bool                        m_CamIsStarted = false;
-
+    bool                        m_isCapturingImage{ false };
+    bool                        m_applicationExiting{ false };
+    bool                        m_CamIsStarted{ false };
+    QCamera::Status             m_CamStatus{QCamera::Status::UnavailableStatus };
+    QCamera::State              m_CamState{QCamera::State::UnloadedState };
+    bool                        m_ReadyForCapture{ false };
 };
 
 
