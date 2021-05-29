@@ -1,0 +1,950 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\base64.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\byteswap.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dirent.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dlfcn.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\langinfo.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netdb.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\pwd.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\strings.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\syslog.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\unistd.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\utime.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AviDefs.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MediaTools.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MJPEGReader.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MJPEGWriter.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MyOpusHeader.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OggBuffer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OggStream.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusAudioDecoder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusAudioEncoder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusCallbackInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusFileDecoder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusFileEncoder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SndDefs.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SndReader.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SndWriter.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\arch.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\cpusupport.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\diag_range.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\flac.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\lpc.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\opus_header.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\opusenc.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\os_support.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\picture.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\resample_sse.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\speex_resampler.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\stack_alloc.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\wav_io.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\wave_out.h">
+      <Filter>Source\OpusTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\win32\config.h">
+      <Filter>Source\OpusTools\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\win32\opus_version.h">
+      <Filter>Source\OpusTools\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\win32\unicode_support.h">
+      <Filter>Source\OpusTools\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\OpusTools\include\getopt.h">
+      <Filter>Source\OpusTools\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus_config.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus_custom.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus_defines.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus_multistream.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus_types.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\opus_version.h">
+      <Filter>Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogg\ogg.h">
+      <Filter>Source\include\ogg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogg\os_types.h">
+      <Filter>Source\include\ogg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\x86\pitch_sse.h">
+      <Filter>Source\opus\celt\x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arm\armcpu.h">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arm\fixed_armv4.h">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arm\fixed_armv5e.h">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arm\kiss_fft_armv4.h">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arm\kiss_fft_armv5e.h">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arm\pitch_arm.h">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\win32\config.h">
+      <Filter>Source\opus\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\win32\opus_version.h">
+      <Filter>Source\opus\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\src\analysis.h">
+      <Filter>Source\opus\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\src\mlp.h">
+      <Filter>Source\opus\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\src\opus_private.h">
+      <Filter>Source\opus\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\src\tansig_table.h">
+      <Filter>Source\opus\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\API.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\control.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\debug.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\define.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\errors.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\Inlines.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\MacroCount.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\MacroDebug.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\macros.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\main.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\pitch_est_defines.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\PLC.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\resampler_private.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\resampler_rom.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\resampler_structs.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\SigProc_FIX.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\structs.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\tables.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\tuning_parameters.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\typedef.h">
+      <Filter>Source\opus\silk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\float\main_FLP.h">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\float\SigProc_FLP.h">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\silk\float\structs_FLP.h">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\_kiss_fft_guts.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arch_celt.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\bands.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\celt.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\celt_lpc.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\cpu_support.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\cwrs.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\ecintrin.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\entcode.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\entdec.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\entenc.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\fixed_debug.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\fixed_generic.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\float_cast.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\kiss_fft.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\laplace.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\mathops.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\mdct.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\mfrngcod.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\modes.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\os_support.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\pitch.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\quant_bands.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\rate.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\stack_alloc.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\static_modes_fixed.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\static_modes_float.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\vq.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{18a31a93-354f-41f9-9a88-b9cda646c962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{dae72059-a7f3-42ac-b07f-82632d178e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\include">
+      <UniqueIdentifier>{9badb465-f663-4ecb-9935-39ef292c14c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ogg">
+      <UniqueIdentifier>{2c74fb66-3e15-4839-87e8-365bfa5f2b02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\OpusTools">
+      <UniqueIdentifier>{b5a99192-cac0-4a80-8c7f-65ee3237d739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\OpusTools\win32">
+      <UniqueIdentifier>{140d3573-fefd-4b65-bea0-b4b4e9eed8c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\OpusTools\include">
+      <UniqueIdentifier>{a8274514-7469-47d8-9805-847db717bdd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\include\ogg">
+      <UniqueIdentifier>{3af97c2f-557e-4a91-9cee-ea8755b1d7ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus">
+      <UniqueIdentifier>{b780c63e-664f-431e-8eb0-1c0b58284673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\celt">
+      <UniqueIdentifier>{896c0d9e-c901-428b-8bc4-053451cf5498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\silk">
+      <UniqueIdentifier>{f69ffadb-20bf-4a8b-800b-0333f4ae79a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\src">
+      <UniqueIdentifier>{e091db24-3116-48dd-af69-a0f2da7f479d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\win32">
+      <UniqueIdentifier>{8414db37-14e1-435d-ab1c-0bbb32b819d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\celt\x86">
+      <UniqueIdentifier>{d3dc04b3-1b25-468c-a196-1bc39bc344f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\celt\arm">
+      <UniqueIdentifier>{a647874a-a9c5-4e4d-bfea-1f544d2ead27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\silk\arm">
+      <UniqueIdentifier>{10e5f740-2c68-4b6f-ba63-c5a7b9a398b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\opus\silk\float">
+      <UniqueIdentifier>{696e40c1-09a4-4f1a-9b88-28c41c0971cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtPri">
+      <UniqueIdentifier>{b1beb1bb-846c-4a0f-a905-c9cd7d3fac13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\AviDefs_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MediaTools_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MJPEGReader_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MJPEGWriter_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MyOpusHeader_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OggBuffer_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OggStream_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusAudioDecoder_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusAudioEncoder_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusFileDecoder_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusFileEncoder_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SndDefs_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SndReader_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SndWriter_mtools.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\audio-in_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\diag_range_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\flac_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\lpc_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\opus_header_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\opusdec_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\opusenc_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\picture_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\resample_mediatools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\wav_io_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\wave_out_mtools.c">
+      <Filter>Source\OpusTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\OpusTools\win32\unicode_support_mtools.c">
+      <Filter>Source\OpusTools\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ogg\bitwise_mtools.c">
+      <Filter>Source\ogg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ogg\framing_mtools.c">
+      <Filter>Source\ogg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\arm\arm_celt_map_mtools.c">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\arm\armcpu_mtools.c">
+      <Filter>Source\opus\celt\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\analysis_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\mlp_data_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\mlp_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\opus_decoder_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\opus_encoder_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\opus_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\opus_multistream_decoder_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\opus_multistream_encoder_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\opus_multistream_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\src\repacketizer_mtools.c">
+      <Filter>Source\opus\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\A2NLSF_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\ana_filt_bank_1_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\biquad_alt_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\bwexpander_32.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\bwexpander_mtools_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\check_control_input_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\CNG_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\code_signs_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\control_audio_bandwidth_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\control_codec_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\control_SNR_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\debug_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\dec_API_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decode_core_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decode_frame_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decode_indices_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decode_parameters_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decode_pitch_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decode_pulses_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\decoder_set_fs_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\enc_API_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\encode_indices_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\encode_pulses_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\gain_quant_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\HP_variable_cutoff_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\init_decoder_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\init_encoder_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\inner_prod_aligned_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\interpolate_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\lin2log_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\log2lin_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\LP_variable_cutoff_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\LPC_analysis_filter_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\LPC_inv_pred_gain_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_decode_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_del_dec_quant_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_encode_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_stabilize_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_unpack_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_VQ_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF_VQ_weights_laroia_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NLSF2A_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NSQ_del_dec.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\NSQ_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\pitch_est_tables_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\PLC_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\process_NLSFs_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\quant_LTP_gains_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_down2_3.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_down2_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_private_AR2_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_private_down_FIR_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_private_IIR_FIR_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_private_up2_HQ_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\resampler_rom_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\shell_coder_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\sigm_Q15_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\sort_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\stereo_decode_pred_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\stereo_encode_pred_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\stereo_find_predictor_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\stereo_LR_to_MS_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\stereo_MS_to_LR_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\stereo_quant_pred_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\sum_sqr_shift_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\table_LSF_cos_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_gain_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_LTP_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_NLSF_CB_NB_MB_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_NLSF_CB_WB_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_other_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_pitch_lag_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\tables_pulses_per_block_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\VAD_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\VQ_WMat_EC_mtools.c">
+      <Filter>Source\opus\silk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\apply_sine_window_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\autocorrelation_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\burg_modified_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\bwexpander_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\corrMatrix_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\encode_frame_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\energy_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\find_LPC_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\find_LTP_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\find_pitch_lags_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\find_pred_coefs_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\inner_product_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\k2a_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\levinsondurbin_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\LPC_analysis_filter_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\LPC_inv_pred_gain_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\LTP_analysis_filter_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\LTP_scale_ctrl_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\noise_shape_analysis_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\pitch_analysis_core_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\prefilter_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\process_gains_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\regularize_correlations_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\residual_energy_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\scale_copy_vector_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\scale_vector_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\schur_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\solve_LS_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\sort_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\warped_autocorrelation_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\silk\float\wrappers_FLP_mtools.c">
+      <Filter>Source\opus\silk\float</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\bands_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_decoder_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_encoder_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_lpc_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\cwrs_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\entcode_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\entdec_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\entenc_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\kiss_fft_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\laplace_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\mathops_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\mdct_mediatools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\modes_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\pitch_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\quant_bands_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\rate_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\vq_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\MediaToolsLib.pro">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\opus\celt\arm\arm2gnu.pl">
+      <Filter>Source\opus\celt\arm</Filter>
+    </None>
+    <None Include="..\..\opus\celt\arm\armopts.s.in">
+      <Filter>Source\opus\celt\arm</Filter>
+    </None>
+    <None Include="..\..\opus\celt\arm\celt_pitch_xcorr_arm.s">
+      <Filter>Source\opus\celt\arm</Filter>
+    </None>
+    <None Include="..\..\opus\win32\genversion.bat">
+      <Filter>Source\opus\win32</Filter>
+    </None>
+    <None Include="..\..\..\..\libmediatools.pri">
+      <Filter>QtPri</Filter>
+    </None>
+    <None Include="..\..\..\..\libmediatools.pro">
+      <Filter>QtPri</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{288ac997-5587-4a2a-ab5f-59b6678448f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\sys">
+      <UniqueIdentifier>{b52b5442-5e90-445f-9be4-60ea884c0a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\arpa">
+      <UniqueIdentifier>{03cb8346-a93d-4b18-9d47-fea9f7a3a93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\netinet">
+      <UniqueIdentifier>{d2a82878-4e0c-4116-bb7a-d8aa7e038010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\asm">
+      <UniqueIdentifier>{4f308cd2-fb74-4022-8762-873eec794453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\linux">
+      <UniqueIdentifier>{bee2905c-d0fb-4512-b494-54911986b5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\api">
+      <UniqueIdentifier>{cd961d2d-c48e-416a-9e66-21009832e17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\check">
+      <UniqueIdentifier>{9c0eedb5-e7ca-4d36-827d-674f427951db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{3d816f88-5deb-40fa-bb4a-86d01cac1402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\delta">
+      <UniqueIdentifier>{4faf6ad1-a51b-4e9c-a431-8e510e1fd97c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lz">
+      <UniqueIdentifier>{20280879-ae50-45e7-894d-0b9454c53aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lzma">
+      <UniqueIdentifier>{5346188e-ad3f-45d3-ae47-c0b693eef6b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rangecoder">
+      <UniqueIdentifier>{c4e1ca92-4ff7-40cb-bd6d-2fda37e8cad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\simple">
+      <UniqueIdentifier>{8b327196-222c-4737-842b-ea1a21824b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\api\lzma">
+      <UniqueIdentifier>{ba21989b-d04e-42d3-a233-194e1fc37637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{0788204e-74e3-47ce-b422-fbfcfa2a1f7c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\arpa\inet.h">
+      <Filter>GoTvConfig\arpa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netinet\in.h">
+      <Filter>GoTvConfig\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netinet\tcp.h">
+      <Filter>GoTvConfig\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\ioctl.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\mman.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\param.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\signal.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\socket.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\un.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\utsname.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dirent.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dlfcn.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netdb.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\strings.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\syslog.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\unistd.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\syslog.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\time.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\select.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\asm\types.h">
+      <Filter>GoTvConfig\asm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\times.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\byteswap.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\langinfo.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\linux\ioctl.h">
+      <Filter>GoTvConfig\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\linux\param.h">
+      <Filter>GoTvConfig\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\fastpos.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\lzma_common.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\lzma_decoder.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\lzma_encoder.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\lzma_encoder_private.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\lzma2_decoder.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lzma\lzma2_encoder.h">
+      <Filter>Source Files\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma.h">
+      <Filter>Source Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\base.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\bcj.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\block.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\check.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\container.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\delta.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\filter.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\hardware.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\index.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\index_hash.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\lzma.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\stream_flags.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\version.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api\lzma\vli.h">
+      <Filter>Source Files\api\lzma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lz\lz_decoder.h">
+      <Filter>Source Files\lz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lz\lz_encoder.h">
+      <Filter>Source Files\lz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lz\lz_encoder_hash.h">
+      <Filter>Source Files\lz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lz\lz_encoder_hash_table.h">
+      <Filter>Source Files\lz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\config_liblzma.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\delta\delta_common.h">
+      <Filter>Source Files\delta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\delta\delta_decoder.h">
+      <Filter>Source Files\delta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\delta\delta_encoder.h">
+      <Filter>Source Files\delta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\delta\delta_private.h">
+      <Filter>Source Files\delta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\alone_decoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\block_decoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\block_encoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\easy_preset.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\filter_common.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\filter_decoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\filter_encoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\index.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\index_encoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stream_decoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stream_encoder.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stream_flags_common.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sysdefs_lzma.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\tuklib_integer.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\check\check.h">
+      <Filter>Source Files\check</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\check\crc_macros.h">
+      <Filter>Source Files\check</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\check\crc32_table_be.h">
+      <Filter>Source Files\check</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\check\crc32_table_le.h">
+      <Filter>Source Files\check</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\check\crc64_table_be.h">
+      <Filter>Source Files\check</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\check\crc64_table_le.h">
+      <Filter>Source Files\check</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\common_lzma.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\simple\simple_coder.h">
+      <Filter>Source Files\simple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\simple\simple_decoder.h">
+      <Filter>Source Files\simple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\simple\simple_encoder.h">
+      <Filter>Source Files\simple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\simple\simple_private.h">
+      <Filter>Source Files\simple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\rangecoder\price.h">
+      <Filter>Source Files\rangecoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\rangecoder\range_common.h">
+      <Filter>Source Files\rangecoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\rangecoder\range_decoder.h">
+      <Filter>Source Files\rangecoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\rangecoder\range_encoder.h">
+      <Filter>Source Files\rangecoder</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\lzma\fastpos_table.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\fastpos_tablegen.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma_decoder.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma_encoder.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma_encoder_optimum_fast.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma_encoder_optimum_normal.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma_encoder_presets.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma2_decoder.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lzma\lzma2_encoder.c">
+      <Filter>Source Files\lzma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lz\lz_decoder.c">
+      <Filter>Source Files\lz</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lz\lz_encoder.c">
+      <Filter>Source Files\lz</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lz\lz_encoder_mf.c">
+      <Filter>Source Files\lz</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\delta\delta_common.c">
+      <Filter>Source Files\delta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\delta\delta_decoder.c">
+      <Filter>Source Files\delta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\delta\delta_encoder.c">
+      <Filter>Source Files\delta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\alone_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\alone_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\auto_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_buffer_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_buffer_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_header_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_header_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\block_util.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\easy_buffer_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\easy_decoder_memusage.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\easy_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\easy_encoder_memusage.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\easy_preset.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_buffer_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_buffer_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_common.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_flags_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\filter_flags_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\hardware_physmem.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\index.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\index_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\index_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\index_hash.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_buffer_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_buffer_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_flags_common.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_flags_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stream_flags_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\vli_decoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\vli_encoder.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\vli_size.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\check.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc32_fast.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc32_small.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc32_table.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc32_tablegen.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc64_fast.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc64_small.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc64_table.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\crc64_tablegen.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\check\sha256.c">
+      <Filter>Source Files\check</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\common_lzma.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\arm.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\armthumb.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\ia64.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\powerpc.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\simple_coder.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\simple_decoder.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\simple_encoder.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\sparc.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\simple\x86.c">
+      <Filter>Source Files\simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\rangecoder\price_table.c">
+      <Filter>Source Files\rangecoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\rangecoder\price_tablegen.c">
+      <Filter>Source Files\rangecoder</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\check\crc32_x86.S">
+      <Filter>Source Files\check</Filter>
+    </None>
+    <None Include="..\..\check\crc64_x86.S">
+      <Filter>Source Files\check</Filter>
+    </None>
+    <None Include="..\..\..\..\liblzma.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+  </ItemGroup>
+</Project>

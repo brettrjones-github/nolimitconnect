@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="external">
+      <UniqueIdentifier>{05c8137e-659d-44ac-9fd7-42763d09ef82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="threads">
+      <UniqueIdentifier>{c6f6a011-5a74-4eb9-b733-ce4eab24b292}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\external\bcrypt_pbkdf_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\blowfish_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\curve25519_ref_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\ed25519_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\fe25519_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\ge25519_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\sc25519_ssh.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\threads\pthread_ssh.c">
+      <Filter>threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libssh_string_ssh.c" />
+    <ClCompile Include="..\..\agent_ssh.c" />
+    <ClCompile Include="..\..\auth_ssh.c" />
+    <ClCompile Include="..\..\auth1_ssh.c" />
+    <ClCompile Include="..\..\base64_ssh.c" />
+    <ClCompile Include="..\..\bignum_ssh.c" />
+    <ClCompile Include="..\..\bind_ssh.c" />
+    <ClCompile Include="..\..\buffer_ssh.c" />
+    <ClCompile Include="..\..\callbacks_ssh.c" />
+    <ClCompile Include="..\..\channels_ssh.c" />
+    <ClCompile Include="..\..\channels1_ssh.c" />
+    <ClCompile Include="..\..\client_ssh.c" />
+    <ClCompile Include="..\..\config_ssh.c" />
+    <ClCompile Include="..\..\connect_ssh.c" />
+    <ClCompile Include="..\..\crc32_ssh.c" />
+    <ClCompile Include="..\..\curve25519_ssh.c" />
+    <ClCompile Include="..\..\dh_ssh.c" />
+    <ClCompile Include="..\..\ecdh_ssh.c" />
+    <ClCompile Include="..\..\error_ssh.c" />
+    <ClCompile Include="..\..\gcrypt_missing_ssh.c" />
+    <ClCompile Include="..\..\getpass_ssh.c" />
+    <ClCompile Include="..\..\gssapi_ssh.c" />
+    <ClCompile Include="..\..\gzip_ssh.c" />
+    <ClCompile Include="..\..\init_ssh.c" />
+    <ClCompile Include="..\..\kex_ssh.c" />
+    <ClCompile Include="..\..\kex1_ssh.c" />
+    <ClCompile Include="..\..\known_hosts_ssh.c" />
+    <ClCompile Include="..\..\legacy_ssh.c" />
+    <ClCompile Include="..\..\libcrypto_ssh.c" />
+    <ClCompile Include="..\..\libgcrypt_ssh.c" />
+    <ClCompile Include="..\..\log_ssh.c" />
+    <ClCompile Include="..\..\match_ssh.c" />
+    <ClCompile Include="..\..\messages_ssh.c" />
+    <ClCompile Include="..\..\misc_ssh.c" />
+    <ClCompile Include="..\..\options_ssh.c" />
+    <ClCompile Include="..\..\packet_ssh.c" />
+    <ClCompile Include="..\..\packet1_ssh.c" />
+    <ClCompile Include="..\..\packet_cb_ssh.c" />
+    <ClCompile Include="..\..\packet_crypt_ssh.c" />
+    <ClCompile Include="..\..\pcap_ssh.c" />
+    <ClCompile Include="..\..\pki_ssh.c" />
+    <ClCompile Include="..\..\pki_container_openssh_ssh.c" />
+    <ClCompile Include="..\..\pki_crypto_ssh.c" />
+    <ClCompile Include="..\..\pki_ed25519_ssh.c" />
+    <ClCompile Include="..\..\pki_gcrypt_ssh.c" />
+    <ClCompile Include="..\..\poll_ssh.c" />
+    <ClCompile Include="..\..\scp_ssh.c" />
+    <ClCompile Include="..\..\server_ssh.c" />
+    <ClCompile Include="..\..\session_ssh.c" />
+    <ClCompile Include="..\..\sftp_ssh.c" />
+    <ClCompile Include="..\..\sftpserver_ssh.c" />
+    <ClCompile Include="..\..\socket_ssh.c" />
+    <ClCompile Include="..\..\threads_ssh.c" />
+    <ClCompile Include="..\..\wrapper_ssh.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\external\ge25519_base.data">
+      <Filter>external</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\libssh_priv.h" />
+    <ClInclude Include="..\..\libssh_string.h" />
+    <ClInclude Include="..\..\agent.h" />
+    <ClInclude Include="..\..\auth.h" />
+    <ClInclude Include="..\..\bignum.h" />
+    <ClInclude Include="..\..\bind.h" />
+    <ClInclude Include="..\..\blf.h" />
+    <ClInclude Include="..\..\buffer.h" />
+    <ClInclude Include="..\..\callbacks.h" />
+    <ClInclude Include="..\..\channels.h" />
+    <ClInclude Include="..\..\crc32.h" />
+    <ClInclude Include="..\..\crypto.h" />
+    <ClInclude Include="..\..\curve25519.h" />
+    <ClInclude Include="..\..\dh.h" />
+    <ClInclude Include="..\..\ecdh.h" />
+    <ClInclude Include="..\..\ed25519.h" />
+    <ClInclude Include="..\..\fe25519.h" />
+    <ClInclude Include="..\..\ge25519.h" />
+    <ClInclude Include="..\..\gssapi.h" />
+    <ClInclude Include="..\..\kex.h" />
+    <ClInclude Include="..\..\keys.h" />
+    <ClInclude Include="..\..\knownhosts.h" />
+    <ClInclude Include="..\..\legacy.h" />
+    <ClInclude Include="..\..\libcrypto.h" />
+    <ClInclude Include="..\..\libgcrypt.h" />
+    <ClInclude Include="..\..\libssh.h" />
+    <ClInclude Include="..\..\libsshpp.hpp" />
+    <ClInclude Include="..\..\messages.h" />
+    <ClInclude Include="..\..\misc.h" />
+    <ClInclude Include="..\..\options.h" />
+    <ClInclude Include="..\..\packet.h" />
+    <ClInclude Include="..\..\pcap.h" />
+    <ClInclude Include="..\..\pki.h" />
+    <ClInclude Include="..\..\pki_priv.h" />
+    <ClInclude Include="..\..\poll.h" />
+    <ClInclude Include="..\..\sc25519.h" />
+    <ClInclude Include="..\..\scp.h" />
+    <ClInclude Include="..\..\server.h" />
+    <ClInclude Include="..\..\session.h" />
+    <ClInclude Include="..\..\sftp.h" />
+    <ClInclude Include="..\..\socket.h" />
+    <ClInclude Include="..\..\ssh1.h" />
+    <ClInclude Include="..\..\ssh2.h" />
+    <ClInclude Include="..\..\threads.h" />
+    <ClInclude Include="..\..\wrapper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\CMakeLists.txt" />
+  </ItemGroup>
+</Project>

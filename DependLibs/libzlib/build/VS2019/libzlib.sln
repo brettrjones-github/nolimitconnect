@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libzlib", "libzlib.vcxproj", "{02F9F231-31D5-4989-9863-F757B20FCBAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02F9F231-31D5-4989-9863-F757B20FCBAA}.Debug|x86.ActiveCfg = Debug|Win32
+		{02F9F231-31D5-4989-9863-F757B20FCBAA}.Debug|x86.Build.0 = Debug|Win32
+		{02F9F231-31D5-4989-9863-F757B20FCBAA}.Release|x86.ActiveCfg = Release|Win32
+		{02F9F231-31D5-4989-9863-F757B20FCBAA}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

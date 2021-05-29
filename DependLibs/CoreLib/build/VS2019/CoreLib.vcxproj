@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{56462B02-59B7-4672-8F89-30A674E802FE}</ProjectGuid>
+    <RootNamespace>VxUtilLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+    <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\;..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;_USE_32BIT_TIME_T;__STDC_CONSTANT_MACROS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeaderOutputFile>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>true</OpenMPSupport>
+      <PrecompiledHeaderFile>config_corelib.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;TARGET_OS_WINDOWS;WIN64;LIB_STATIC;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeaderOutputFile>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>true</OpenMPSupport>
+      <PrecompiledHeaderFile>config_corelib.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;NHAVE_CONFIG_H;WIN32;_LIB;_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(TargetName).lib</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;TARGET_OS_WINDOWS;WIN64;LIB_STATIC;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\arpa\inet.h" />
+    <ClInclude Include="..\..\..\..\asm\types.h" />
+    <ClInclude Include="..\..\..\..\byteswap.h" />
+    <ClInclude Include="..\..\..\..\dirent.h" />
+    <ClInclude Include="..\..\..\..\dlfcn.h" />
+    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\..\langinfo.h" />
+    <ClInclude Include="..\..\..\..\linux\ioctl.h" />
+    <ClInclude Include="..\..\..\..\linux\param.h" />
+    <ClInclude Include="..\..\..\..\netdb.h" />
+    <ClInclude Include="..\..\..\..\netinet\in.h" />
+    <ClInclude Include="..\..\..\..\netinet\tcp.h" />
+    <ClInclude Include="..\..\..\..\strings.h" />
+    <ClInclude Include="..\..\..\..\syslog.h" />
+    <ClInclude Include="..\..\..\..\sys\ioctl.h" />
+    <ClInclude Include="..\..\..\..\sys\mman.h" />
+    <ClInclude Include="..\..\..\..\sys\param.h" />
+    <ClInclude Include="..\..\..\..\sys\select.h" />
+    <ClInclude Include="..\..\..\..\sys\signal.h" />
+    <ClInclude Include="..\..\..\..\sys\socket.h" />
+    <ClInclude Include="..\..\..\..\sys\syslog.h" />
+    <ClInclude Include="..\..\..\..\sys\time.h" />
+    <ClInclude Include="..\..\..\..\sys\times.h" />
+    <ClInclude Include="..\..\..\..\sys\un.h" />
+    <ClInclude Include="..\..\..\..\sys\utsname.h" />
+    <ClInclude Include="..\..\..\..\unistd.h" />
+    <ClInclude Include="..\..\AppDefines.h" />
+    <ClInclude Include="..\..\AppErr.h" />
+    <ClInclude Include="..\..\AssetDefs.h" />
+    <ClInclude Include="..\..\BinaryBlob.h" />
+    <ClInclude Include="..\..\Blowfish.h" />
+    <ClInclude Include="..\..\config_corelib.h" />
+    <ClInclude Include="..\..\DbBase.h" />
+    <ClInclude Include="..\..\DbDataset.h" />
+    <ClInclude Include="..\..\DbQueryData.h" />
+    <ClInclude Include="..\..\dirent_sim.h" />
+    <ClInclude Include="..\..\IsBigEndianCpu.h" />
+    <ClInclude Include="..\..\md5.h" />
+    <ClInclude Include="..\..\MediaCallbackInterface.h" />
+    <ClInclude Include="..\..\ObjectCommon.h" />
+    <ClInclude Include="..\..\OsDetect.h" />
+    <ClInclude Include="..\..\rsa.h" />
+    <ClInclude Include="..\..\SHA1.h" />
+    <ClInclude Include="..\..\sqlite3.h" />
+    <ClInclude Include="..\..\sqlite3ext.h" />
+    <ClInclude Include="..\..\sqlitedataset.h" />
+    <ClInclude Include="..\..\StdMinMaxForWindows.h" />
+    <ClInclude Include="..\..\StdOutRedirect.h" />
+    <ClInclude Include="..\..\StringListBinary.h" />
+    <ClInclude Include="..\..\VarToString.h" />
+    <ClInclude Include="..\..\VxAppInfo.h" />
+    <ClInclude Include="..\..\VxBuffer.h" />
+    <ClInclude Include="..\..\VxChop.h" />
+    <ClInclude Include="..\..\VxChopMap.h" />
+    <ClInclude Include="..\..\VxColorUtil.h" />
+    <ClInclude Include="..\..\VxCrypto.h" />
+    <ClInclude Include="..\..\VxDebug.h" />
+    <ClInclude Include="..\..\VxDefs.h" />
+    <ClInclude Include="..\..\VxFileCopier.h" />
+    <ClInclude Include="..\..\VxFileCrc32.h" />
+    <ClInclude Include="..\..\VxFileInfo.h" />
+    <ClInclude Include="..\..\VxFileIsTypeFunctions.h" />
+    <ClInclude Include="..\..\VxFileLists.h" />
+    <ClInclude Include="..\..\VxFileShredder.h" />
+    <ClInclude Include="..\..\VxFileShredderDb.h" />
+    <ClInclude Include="..\..\VxFileTypeMasks.h" />
+    <ClInclude Include="..\..\VxFileUtil.h" />
+    <ClInclude Include="..\..\VxGlobals.h" />
+    <ClInclude Include="..\..\VxGUID.h" />
+    <ClInclude Include="..\..\VxGUIDList.h" />
+    <ClInclude Include="..\..\VxJava.h" />
+    <ClInclude Include="..\..\VxKeyDefs.h" />
+    <ClInclude Include="..\..\VxLinuxOnly.h" />
+    <ClInclude Include="..\..\VxMacros.h" />
+    <ClInclude Include="..\..\VxMathDef.h" />
+    <ClInclude Include="..\..\VxMathVec2f.h" />
+    <ClInclude Include="..\..\VxMathVec3f.h" />
+    <ClInclude Include="..\..\VxMathVec4f.h" />
+    <ClInclude Include="..\..\VxMutex.h" />
+    <ClInclude Include="..\..\VxParse.h" />
+    <ClInclude Include="..\..\VxProfile.h" />
+    <ClInclude Include="..\..\VxRefCount.h" />
+    <ClInclude Include="..\..\VxSemaphore.h" />
+    <ClInclude Include="..\..\VxSettings.h" />
+    <ClInclude Include="..\..\VxSha1Hash.h" />
+    <ClInclude Include="..\..\VxShortcut.h" />
+    <ClInclude Include="..\..\VxSingleton.h" />
+    <ClInclude Include="..\..\VxSupportedFiles.h" />
+    <ClInclude Include="..\..\VxTextStreamReader.h" />
+    <ClInclude Include="..\..\VxThread.h" />
+    <ClInclude Include="..\..\VxTime.h" />
+    <ClInclude Include="..\..\VxTimeDefs.h" />
+    <ClInclude Include="..\..\VxTimer.h" />
+    <ClInclude Include="..\..\VxTimeUtil.h" />
+    <ClInclude Include="..\..\VxUrl.h" />
+    <ClInclude Include="..\..\VxValuePair.h" />
+    <ClInclude Include="..\..\VxXml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\AppErr_corelib.cpp" />
+    <ClCompile Include="..\..\AssetDefs.cpp" />
+    <ClCompile Include="..\..\BinaryBlob.cpp" />
+    <ClCompile Include="..\..\Blowfish_corelib.cpp" />
+    <ClCompile Include="..\..\DbBase_corelib.cpp" />
+    <ClCompile Include="..\..\DbDataset_corelib.cpp" />
+    <ClCompile Include="..\..\DbQueryData_corelib.cpp" />
+    <ClCompile Include="..\..\dirent_sim.cpp" />
+    <ClCompile Include="..\..\md5_corelib.cpp" />
+    <ClCompile Include="..\..\ObjectCommon_corelib.cpp" />
+    <ClCompile Include="..\..\OsDetect_corelib.cpp" />
+    <ClCompile Include="..\..\rsa_eay_corelib.c" />
+    <ClCompile Include="..\..\rsa_gen_corelib.c" />
+    <ClCompile Include="..\..\SHA1_corelib.cpp" />
+    <ClCompile Include="..\..\sqlite3_corelib.c" />
+    <ClCompile Include="..\..\sqlitedataset_corelib.cpp" />
+    <ClCompile Include="..\..\StdOutRedirect_corelib.cpp" />
+    <ClCompile Include="..\..\StringListBinary.cpp" />
+    <ClCompile Include="..\..\VxAppInfo.cpp" />
+    <ClCompile Include="..\..\VxBuffer.cpp" />
+    <ClCompile Include="..\..\VxChop.cpp" />
+    <ClCompile Include="..\..\VxChopMap.cpp" />
+    <ClCompile Include="..\..\VxColorUtil.cpp" />
+    <ClCompile Include="..\..\VxCrypto.cpp" />
+    <ClCompile Include="..\..\VxDebug.cpp" />
+    <ClCompile Include="..\..\VxDefs.cpp" />
+    <ClCompile Include="..\..\VxFileCopier.cpp" />
+    <ClCompile Include="..\..\VxFileCrc32.cpp" />
+    <ClCompile Include="..\..\VxFileInfo.cpp" />
+    <ClCompile Include="..\..\VxFileIsTypeFunctions.cpp" />
+    <ClCompile Include="..\..\VxFileLists.cpp" />
+    <ClCompile Include="..\..\VxFileShredder.cpp" />
+    <ClCompile Include="..\..\VxFileShredderDb.cpp" />
+    <ClCompile Include="..\..\VxFileUtil.cpp" />
+    <ClCompile Include="..\..\VxFunctionsMissingInAndroid.cpp" />
+    <ClCompile Include="..\..\VxFunctionsMissingInPosix.cpp" />
+    <ClCompile Include="..\..\VxFunctionsMissingInWindows.cpp" />
+    <ClCompile Include="..\..\VxGlobals.cpp" />
+    <ClCompile Include="..\..\VxGUID.cpp" />
+    <ClCompile Include="..\..\VxGUIDList.cpp" />
+    <ClCompile Include="..\..\VxJava.cpp" />
+    <ClCompile Include="..\..\VxLinuxOnly.cpp" />
+    <ClCompile Include="..\..\VxMathDef.cpp" />
+    <ClCompile Include="..\..\VxMathVec3f.cpp" />
+    <ClCompile Include="..\..\VxMutex.cpp" />
+    <ClCompile Include="..\..\VxParse.cpp" />
+    <ClCompile Include="..\..\VxProfile.cpp" />
+    <ClCompile Include="..\..\VxRefCount.cpp" />
+    <ClCompile Include="..\..\VxSemaphore.cpp" />
+    <ClCompile Include="..\..\VxSettings.cpp" />
+    <ClCompile Include="..\..\VxSha1Hash.cpp" />
+    <ClCompile Include="..\..\VxShortcut.cpp" />
+    <ClCompile Include="..\..\VxTextStreamReader.cpp" />
+    <ClCompile Include="..\..\VxThread.cpp" />
+    <ClCompile Include="..\..\VxTime.cpp" />
+    <ClCompile Include="..\..\VxTimer.cpp" />
+    <ClCompile Include="..\..\VxTimeUtil.cpp" />
+    <ClCompile Include="..\..\VxUrl.cpp" />
+    <ClCompile Include="..\..\VxValuePair.cpp" />
+    <ClCompile Include="..\..\VxXml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libcorelib.pri" />
+    <None Include="..\..\..\..\libcorelib.pro" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

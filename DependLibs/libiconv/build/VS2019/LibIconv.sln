@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libiconv", "libiconv.vcxproj", "{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		DebugStatic|Win32 = DebugStatic|Win32
+		DebugStatic|x64 = DebugStatic|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+		ReleaseStatic|Win32 = ReleaseStatic|Win32
+		ReleaseStatic|x64 = ReleaseStatic|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Debug|Win32.Build.0 = Debug|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Debug|x64.ActiveCfg = Debug|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Debug|x64.Build.0 = Debug|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.DebugStatic|Win32.Build.0 = DebugStatic|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.DebugStatic|x64.ActiveCfg = DebugStatic|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.DebugStatic|x64.Build.0 = DebugStatic|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Release|Win32.ActiveCfg = Release|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Release|Win32.Build.0 = Release|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Release|x64.ActiveCfg = Release|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.Release|x64.Build.0 = Release|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.ReleaseStatic|Win32.ActiveCfg = ReleaseStatic|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.ReleaseStatic|Win32.Build.0 = ReleaseStatic|Win32
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.ReleaseStatic|x64.ActiveCfg = ReleaseStatic|x64
+		{2CC244B4-D8E5-4376-961D-B7FA7656FD9C}.ReleaseStatic|x64.Build.0 = ReleaseStatic|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{c5053096-65b4-4cfd-8c3e-c2f371644c7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\yajl.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_alloc.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_buf.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_encode.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_gen.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_lex.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_parser.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_tree.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\yajl_version.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\yajl_alloc.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\yajl_buf.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\yajl_bytestack.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\yajl_encode.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\yajl_lex.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\yajl_parser.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\c14n_xml2.c" />
+    <ClCompile Include="..\..\catalog_xml2.c" />
+    <ClCompile Include="..\..\chvalid_xml2.c" />
+    <ClCompile Include="..\..\debugXML_xml2.c" />
+    <ClCompile Include="..\..\dict_xml2.c" />
+    <ClCompile Include="..\..\DOCBparser_xml2.c" />
+    <ClCompile Include="..\..\encoding_xml2.c" />
+    <ClCompile Include="..\..\entities_xml2.c" />
+    <ClCompile Include="..\..\error_xml2.c" />
+    <ClCompile Include="..\..\globals_xml2.c" />
+    <ClCompile Include="..\..\hash_xml2.c" />
+    <ClCompile Include="..\..\HTMLparser_xml2.c" />
+    <ClCompile Include="..\..\HTMLtree_xml2.c" />
+    <ClCompile Include="..\..\legacy_xml2.c" />
+    <ClCompile Include="..\..\list_xml2.c" />
+    <ClCompile Include="..\..\nanoftp_xml2.c" />
+    <ClCompile Include="..\..\nanohttp_xml2.c" />
+    <ClCompile Include="..\..\parser_xml2.c" />
+    <ClCompile Include="..\..\parserInternals_xml2.c" />
+    <ClCompile Include="..\..\pattern_xml2.c" />
+    <ClCompile Include="..\..\relaxng_xml2.c" />
+    <ClCompile Include="..\..\SAX_xml2.c" />
+    <ClCompile Include="..\..\SAX2_xml2.c" />
+    <ClCompile Include="..\..\schematron_xml2.c" />
+    <ClCompile Include="..\..\threads_xml2.c" />
+    <ClCompile Include="..\..\tree_xml2.c" />
+    <ClCompile Include="..\..\trio_xml2.c" />
+    <ClCompile Include="..\..\triostr_xml2.c" />
+    <ClCompile Include="..\..\uri_xml2.c" />
+    <ClCompile Include="..\..\valid_xml2.c" />
+    <ClCompile Include="..\..\xinclude_xml2.c" />
+    <ClCompile Include="..\..\xlink_xml2.c" />
+    <ClCompile Include="..\..\xmlIO_xml2.c" />
+    <ClCompile Include="..\..\xmlmemory_xml2.c" />
+    <ClCompile Include="..\..\xmlmodule_xml2.c" />
+    <ClCompile Include="..\..\xmlreader_xml2.c" />
+    <ClCompile Include="..\..\xmlregexp_xml2.c" />
+    <ClCompile Include="..\..\xmlsave_xml2.c" />
+    <ClCompile Include="..\..\xmlschemas_xml2.c" />
+    <ClCompile Include="..\..\xmlschemastypes_xml2.c" />
+    <ClCompile Include="..\..\xmlstring_xml2.c" />
+    <ClCompile Include="..\..\xmlunicode_xml2.c" />
+    <ClCompile Include="..\..\xmlwriter_xml2.c" />
+    <ClCompile Include="..\..\xpath_xml2.c" />
+    <ClCompile Include="..\..\xpointer_xml2.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\acconfig.h" />
+    <ClInclude Include="..\..\c14n.h" />
+    <ClInclude Include="..\..\catalog.h" />
+    <ClInclude Include="..\..\chvalid.h" />
+    <ClInclude Include="..\..\config.h" />
+    <ClInclude Include="..\..\debugXML.h" />
+    <ClInclude Include="..\..\dict.h" />
+    <ClInclude Include="..\..\DOCBparser.h" />
+    <ClInclude Include="..\..\elfgcchack.h" />
+    <ClInclude Include="..\..\encoding.h" />
+    <ClInclude Include="..\..\entities.h" />
+    <ClInclude Include="..\..\globals.h" />
+    <ClInclude Include="..\..\hash.h" />
+    <ClInclude Include="..\..\HTMLparser.h" />
+    <ClInclude Include="..\..\HTMLtree.h" />
+    <ClInclude Include="..\..\libxml.h" />
+    <ClInclude Include="..\..\libxml2_config.h" />
+    <ClInclude Include="..\..\libxml2_config_android.h" />
+    <ClInclude Include="..\..\libxml2_config_linux.h" />
+    <ClInclude Include="..\..\libxml2_config_windows.h" />
+    <ClInclude Include="..\..\list.h" />
+    <ClInclude Include="..\..\nanoftp.h" />
+    <ClInclude Include="..\..\nanohttp.h" />
+    <ClInclude Include="..\..\parser.h" />
+    <ClInclude Include="..\..\parserInternals.h" />
+    <ClInclude Include="..\..\pattern.h" />
+    <ClInclude Include="..\..\relaxng.h" />
+    <ClInclude Include="..\..\SAX.h" />
+    <ClInclude Include="..\..\SAX2.h" />
+    <ClInclude Include="..\..\schemasInternals.h" />
+    <ClInclude Include="..\..\schematron.h" />
+    <ClInclude Include="..\..\threads.h" />
+    <ClInclude Include="..\..\tree.h" />
+    <ClInclude Include="..\..\trio.h" />
+    <ClInclude Include="..\..\triodef.h" />
+    <ClInclude Include="..\..\trionan.h" />
+    <ClInclude Include="..\..\triop.h" />
+    <ClInclude Include="..\..\triostr.h" />
+    <ClInclude Include="..\..\uri.h" />
+    <ClInclude Include="..\..\valid.h" />
+    <ClInclude Include="..\..\win32config.h" />
+    <ClInclude Include="..\..\wsockcompat.h" />
+    <ClInclude Include="..\..\xinclude.h" />
+    <ClInclude Include="..\..\xlink.h" />
+    <ClInclude Include="..\..\xmlautomata.h" />
+    <ClInclude Include="..\..\xmlerror.h" />
+    <ClInclude Include="..\..\xmlexports.h" />
+    <ClInclude Include="..\..\xmlIO.h" />
+    <ClInclude Include="..\..\xmlmemory.h" />
+    <ClInclude Include="..\..\xmlmodule.h" />
+    <ClInclude Include="..\..\xmlreader.h" />
+    <ClInclude Include="..\..\xmlregexp.h" />
+    <ClInclude Include="..\..\xmlsave.h" />
+    <ClInclude Include="..\..\xmlschemas.h" />
+    <ClInclude Include="..\..\xmlschemastypes.h" />
+    <ClInclude Include="..\..\xmlstring.h" />
+    <ClInclude Include="..\..\xmlunicode.h" />
+    <ClInclude Include="..\..\xmlversion.h" />
+    <ClInclude Include="..\..\xmlwriter.h" />
+    <ClInclude Include="..\..\xpath.h" />
+    <ClInclude Include="..\..\xpathInternals.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libxml2.pri" />
+    <None Include="..\..\..\..\libxml2.pro" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libxml2</ProjectName>
+    <ProjectGuid>{EEC88CD2-C032-4C46-88F7-AB6053596DE0}</ProjectGuid>
+    <RootNamespace>GoTv</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\..\lib\Win32\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LIBXML_STATIC;TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <BrowseInformationFile>$(IntDir)$(ProjectName).bsc</BrowseInformationFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LIBXML_STATIC;TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <BrowseInformationFile>$(IntDir)$(ProjectName).bsc</BrowseInformationFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\;..\..\..\;..\..\..\PlatformLib\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LIBXML_STATIC;TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;NHAVE_CONFIG_H;_LIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LIBXML_STATIC;TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

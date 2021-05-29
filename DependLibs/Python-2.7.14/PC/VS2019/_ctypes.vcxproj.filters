@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d8b459f1-dc11-4462-a1dd-4564b6bdb222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{485174df-40ac-4845-b26f-9d16f90b1c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\arm">
+      <UniqueIdentifier>{91f8b66f-ba3c-43c4-97d5-f7e44ae295b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x86">
+      <UniqueIdentifier>{442660ab-368d-4986-92b0-3e26c7b0740d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\msvc">
+      <UniqueIdentifier>{9bf9eb82-e6dc-49b9-98ed-2594e48ff880}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Modules\_ctypes\ctypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\ctypes_dlfcn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\ffi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\ffi_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\fficonfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\ffitarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\libffi\src\arm\ffitarget.h">
+      <Filter>Source Files\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Modules\_ctypes\libffi\src\x86\ffitarget.h">
+      <Filter>Source Files\x86</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Modules\_ctypes\_ctypes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\callbacks.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\callproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\cfield.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\malloc_closure.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\stgdict.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\ffi_msvc.c">
+      <Filter>Source Files\msvc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\prep_cif_msvc.c">
+      <Filter>Source Files\msvc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\types_msvc.c">
+      <Filter>Source Files\msvc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi\src\arm\ffi_arm.c">
+      <Filter>Source Files\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi\src\x86\ffi_x86.c">
+      <Filter>Source Files\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\_ctypes\libffi\src\x86\ffi64_x86.c">
+      <Filter>Source Files\x86</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\Modules\_ctypes\libffi_msvc\win64.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Modules\_ctypes\libffi\src\arm\gentramp.sh">
+      <Filter>Source Files\arm</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\arm\sysv.S">
+      <Filter>Source Files\arm</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\arm\trampoline.S">
+      <Filter>Source Files\arm</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi_msvc\LICENSE">
+      <Filter>Source Files\msvc</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi_msvc\README">
+      <Filter>Source Files\msvc</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi_msvc\README.ctypes">
+      <Filter>Source Files\msvc</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\darwin.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\darwin64.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\freebsd.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\sysv.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\unix64.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\win32.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\win64.S">
+      <Filter>Source Files\x86</Filter>
+    </None>
+  </ItemGroup>
+</Project>

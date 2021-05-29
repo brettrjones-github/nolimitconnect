@@ -1,0 +1,2070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetInfo.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetInfoDb.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetMgr.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetRxSession.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetTxSession.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferDb.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferMgr.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferSession.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BigListLib\BigList.cpp">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BigListLib\BigListDb.cpp">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BigListLib\BigListInfo.cpp">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BigListLib\BigListMgr.cpp">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_core.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_core_mips.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_core_neon.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_core_sse2.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_logging_file_handling.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_rdft.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_rdft_mips.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_rdft_neon.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_rdft_sse2.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\aec_resampler.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\atomic32_posix.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\atomic32_win.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\audio_device_buffer.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\audio_device_generic.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\audio_util.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\base64.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\block_mean_calculator.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\checks.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\common_types.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\cpu_features.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\criticalsection.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\delay_estimator.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\delay_estimator_wrapper.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\echo_cancellation.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\event.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\event_timer_posix.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\event_timer_win.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\event_wrapper.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\fileutils.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\fine_audio_buffer.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\logging.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\pathutils.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\platform_file.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\platform_thread.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\random.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\stringencode.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\stringutils.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\thread_checker_impl.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\tick_util.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\timeutils.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\urlencode.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\wav_file.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\wav_header.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32filesystem.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.cpp">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.cpp">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\MediaProcessor\MediaProcessor.cpp">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionAnnounce.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionBase.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIdle.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServicesMgr.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceUtils.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\ConnectRequest.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\DirectConnectTester.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\Firewall.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetConnector.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetPortForward.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkEventAvail.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkEventBase.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkEventLost.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkMgr.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateAnnounce.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateAvail.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateBase.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateGetRelayList.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateLost.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateMachine.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateOnlineDirect.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateOnlineThroughRelay.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateRelaySearch.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\NetworkStateTestConnection.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\RcMulticastBase.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\RcMulticastBroadcast.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Network\RcMulticastListen.cpp">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.cpp">
+      <Filter>GoTvP2P\NetworkMonitor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\BrowserHttpConnection.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\ContactList.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\EngineParams.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\EngineSettings.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\FileShareSettings.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PConnectList.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngine.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineAssetMgrCallbacks.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineConnect.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineConnections.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineContact.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineFromGui.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineIgnoredAndHackers.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineMediaProcessorCallbacks.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEnginePktAnnChanged.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEnginePktHandlers.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineRelay.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineScan.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSearch.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSktCallback.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileLibraryDb.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileLibraryMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileRxSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileShareXferMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileShareXferSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileToXfer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileTxSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileXferBaseMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileXferMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\FileXferPluginSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\LibraryFileInfo.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\P2PSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBase.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginInvalid.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMgrSktApi.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginNetServices.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginSessionBase.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginSessionMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginTruthOrDare.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginVideoPhone.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginVoicePhone.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\RcWebProxy.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\Relay.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\RelayClientSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\RelayServerSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\RelaySession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\RxSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\SessionMgrBase.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\SharedFileInfo.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\SharedFilesDb.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\SharedFilesFinder.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\SharedFilesMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\TodGameSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\TxSession.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\VideoFeedMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\VoiceFeedMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Search\RcScan.cpp">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Search\RcScanAction.cpp">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Search\RcScanMatchedConnection.cpp">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.cpp">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebPageSettings.cpp">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebServer.cpp">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebServerHttp.cpp">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\WebServer\RcWebSkt.cpp">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\ring_buffer.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\randomization_functions.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\cpu_features_linux.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\EchoCancel\cpu_features_android.cpp">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelay.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseService.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceWebCam.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseFileXfer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginFileXfer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseFileXferPktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMessenger.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServerFiles.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServerPktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayPktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayTests.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp">
+      <Filter>GoTvP2P\NetworkMonitor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineHostList.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSetting.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.cpp">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\IsPortOpenTest.cpp">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\PingResponseServer.cpp">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.cpp">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDefs.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.cpp">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectionMgr.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListBase.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedInfo.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\IConnectedCallback.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\IConnectRequest.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectedListAll.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginConnectionTestClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginConnectionTestHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginGroupClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginNetworkHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRandomConnectClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRandomConnectHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginGroupHost.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginNetworkSearchList.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostClientMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostBaseMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostServerMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\ConnectReqInfo.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostServerSearchMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostClientSearchMgr.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\HostSearchEntry.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostedEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\JoinedEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobInfo.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobInfoDb.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobRxSession.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferDb.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferSession.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobMgr.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobXferMgr.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.cpp">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\HandshakeInfo.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Connections\HandshakeList.cpp">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\User\User.cpp">
+      <Filter>GoTvP2P\User</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\User\UserList.cpp">
+      <Filter>GoTvP2P\User</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseInfoDb.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseMgr.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseRxSession.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbInfo.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbInfoDb.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbMgr.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbRxSession.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseInfo.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseInfoDb.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseMgr.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseRxSession.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseTxSession.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseXferDb.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseXferMgr.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferBase\OfferBaseXferSession.cpp">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfo.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfoDb.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientMgr.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientRxSession.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientTxSession.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferDb.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferMgr.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferSession.cpp">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfo.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfoDb.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostMgr.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostRxSession.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostTxSession.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferDb.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferMgr.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferSession.cpp">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ConnectMgr\ConnectInfo.cpp">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ConnectMgr\ConnectInfoDb.cpp">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ConnectMgr\ConnectMgr.cpp">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\VxSktLoopback.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfo.cpp">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfoDb.cpp">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostJoinMgr\HostJoinMgr.cpp">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseJoinInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.cpp">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.cpp">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.cpp">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBasePktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginClientPeerUser.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineMgr.cpp">
+      <Filter>GoTvP2P\UserOnlineMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.cpp">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetBase\AssetBaseXferPktCreate.cpp">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\ThumbMgr\ThumbXferPktCreate.cpp">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetXferPktCreate.cpp">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\config_gotvcore.h" />
+    <ClInclude Include="..\..\..\GoTvCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetCallbackInterface.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfo.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfoDb.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetMgr.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetRxSession.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetTxSession.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferDb.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferMgr.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetXferSession.h">
+      <Filter>GoTvP2P\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BigListLib\BigList.h">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListDb.h">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListInfo.h">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListLib.h">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BigListLib\BigListMgr.h">
+      <Filter>GoTvP2P\BigListLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_common.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_core.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_core_internal.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_logging.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_logging_file_handling.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_rdft.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\aec_resampler.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\array_view.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\arraysize.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\atomic32.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\atomicops.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_device.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_device_buffer.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_device_config.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_device_defines.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_device_generic.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_processing.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\audio_util.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\base64.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\basictypes.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\block_mean_calculator.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\byteorder.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\checks.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\common_types.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\constructormagic.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\cpu_features_wrapper.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\critical_section_wrapper.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\criticalsection.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\delay_estimator.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\delay_estimator_internal.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\delay_estimator_wrapper.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\echo_cancellation.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\echo_cancellation_internal.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\echo_common.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\event.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\event_timer_posix.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\event_timer_win.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\event_wrapper.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\fake_audio_device.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\fileutils.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\fine_audio_buffer.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\format_macros.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\logging.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\module.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\module_common_types.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\pathutils.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\platform_file.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\platform_thread.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\platform_thread_types.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\random.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\real_fft.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\ring_buffer.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\safe_conversions.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\safe_conversions_impl.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\scoped_ptr.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\scoped_ref_ptr.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\scopedptrcollection.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\sec_buffer.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\signal_processing_library.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\spl_inl.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\spl_inl_armv7.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\spl_inl_mips.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\stringencode.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\stringutils.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\template_util.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\thread_annotations.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\thread_checker.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\thread_checker_impl.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\tick_util.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\timeutils.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\urlencode.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\wav_file.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\wav_header.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\WebRtcTypeDefs.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32filesystem.h">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.h">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.h">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\MediaProcessor\MediaClient.h">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\MediaProcessor\MediaProcessor.h">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\MediaProcessor\RawAudio.h">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\MediaProcessor\RawVideo.h">
+      <Filter>GoTvP2P\MediaProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionAnnounce.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionBase.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIdle.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceDefs.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHdr.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServicesMgr.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceUtils.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\ConnectRequest.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\DirectConnectTester.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\Firewall.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetConnector.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetPortForward.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkDefs.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkEventAvail.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkEventBase.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkEventLost.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkMgr.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateAnnounce.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateAvail.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateBase.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateGetRelayList.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateLost.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateMachine.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateOnlineDirect.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateOnlineThroughRelay.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateRelaySearch.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\NetworkStateTestConnection.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\RcMulticastBase.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\RcMulticastBroadcast.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Network\RcMulticastListen.h">
+      <Filter>GoTvP2P\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.h">
+      <Filter>GoTvP2P\NetworkMonitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\BrowserHttpConnection.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\ContactList.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\EngineParams.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\EngineSettings.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\EngineSettingsDefaultValues.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\FileShareSettings.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PConnectList.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PEngine.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileLibraryDb.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileLibraryMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileRxSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileShareXferMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileShareXferSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileToXfer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileTxSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileXferBaseMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileXferMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\FileXferPluginSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\LibraryFileInfo.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\P2PSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBase.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginInvalid.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginNetServices.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginSessionBase.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginSessionMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginTruthOrDare.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginVideoPhone.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginVoicePhone.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RcWebProxy.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\Relay.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RelayClientSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RelayClientTestSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RelayServerSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RelayServerTestSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RelaySession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\RxSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\SessionMgrBase.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\SharedFileInfo.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\SharedFilesDb.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\SharedFilesFinder.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\SharedFilesMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\TodGameSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\TxSession.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\VideoFeedMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\VoiceFeedMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Search\RcScan.h">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Search\RcScanAction.h">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Search\RcScanMatchedConnection.h">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Search\RcScanPic.h">
+      <Filter>GoTvP2P\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageBuilder.h">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebPageSettings.h">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebServer.h">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebServerLib.h">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebSkt.h">
+      <Filter>GoTvP2P\WebServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTv.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IDefs.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IFromGui.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvLib.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\ILog.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IScan.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IToGui.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseRelay.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseService.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseFileXfer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginFileXfer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceWebCam.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMessenger.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h">
+      <Filter>GoTvP2P\NetworkMonitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.h">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\IsPortOpenTest.h">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\PingResponseServer.h">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.h">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\RunUrlAction.h">
+      <Filter>GoTvP2P\NetworkTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectionMgr.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListBase.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedInfo.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\IConnectedCallback.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\IConnectRequest.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectedListAll.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginConnectionTestClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginConnectionTestHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginGroupClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginNetworkHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRandomConnectClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRandomConnectHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseHostClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginGroupHost.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginNetworkSearchList.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostBaseMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostClientMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostServerMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\ConnectReqInfo.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostServerSearchMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostClientSearchMgr.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\HostSearchEntry.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostedEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\JoinedEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobCallbackInterface.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobInfo.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobInfoDb.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobRxSession.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobTxSession.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferDb.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferSession.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobMgr.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BlobXferMgr\BlobXferMgr.h">
+      <Filter>GoTvP2P\BlobXferMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\HandshakeInfo.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Connections\HandshakeList.h">
+      <Filter>GoTvP2P\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\User\User.h">
+      <Filter>GoTvP2P\User</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\User\UserList.h">
+      <Filter>GoTvP2P\User</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfo.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseInfoDb.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseMgr.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseRxSession.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseTxSession.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferDb.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferMgr.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseXferSession.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbCallbackInterface.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbInfo.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbInfoDb.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbMgr.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbRxSession.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbTxSession.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferDb.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferMgr.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ThumbMgr\ThumbXferSession.h">
+      <Filter>GoTvP2P\ThumbMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseInfo.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseInfoDb.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseMgr.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseRxSession.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseTxSession.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseXferDb.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseXferMgr.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseXferSession.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientCallbackInterface.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfo.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientInfoDb.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientMgr.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientRxSession.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientTxSession.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferDb.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferMgr.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferClientMgr\OfferClientXferSession.h">
+      <Filter>GoTvP2P\OfferClientMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostCallbackInterface.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfo.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostInfoDb.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostMgr.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostRxSession.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostTxSession.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferDb.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferMgr.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferHostMgr\OfferHostXferSession.h">
+      <Filter>GoTvP2P\OfferHostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\OfferBase\OfferBaseCallbackInterface.h">
+      <Filter>GoTvP2P\OfferBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ConnectMgr\ConnectCallbackInterface.h">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ConnectMgr\ConnectInfo.h">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ConnectMgr\ConnectInfoDb.h">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\ConnectMgr\ConnectMgr.h">
+      <Filter>GoTvP2P\ConnectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvEvents.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvGeometry.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvRender.h">
+      <Filter>GuiInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\OsWin32\IWin32.h">
+      <Filter>GuiInterface\OsWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh">
+      <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h">
+      <Filter>GuiInterface\OsInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\VxSktLoopback.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseHostInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinCallbackInterface.h">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfo.h">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinInfoDb.h">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostJoinMgr\HostJoinMgr.h">
+      <Filter>GoTvP2P\HostJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseJoinInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinCallbackInterface.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfo.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinInfoDb.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserJoinMgr\UserJoinMgr.h">
+      <Filter>GoTvP2P\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginClientPeerUser.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginHostPeerUser.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineMgr.h">
+      <Filter>GoTvP2P\UserOnlineMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\UserOnlineMgr\UserOnlineCallbackInterface.h">
+      <Filter>GoTvP2P\UserOnlineMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\BaseInfo\BaseSessionInfo.h">
+      <Filter>GoTvP2P\BaseInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\AssetBaseCallbackInterface.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\AssetBase\BaseXferInterface.h">
+      <Filter>GoTvP2P\AssetBase</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="system">
+      <UniqueIdentifier>{9f51ef4d-9f96-46e9-8baa-1fe55d6aafad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system\shaders">
+      <UniqueIdentifier>{1899668d-13b8-49b8-9cf9-f4ebf8b32a22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{2433938b-0e6b-4d84-837d-2b29cf9a7a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{28d49eb3-4aa9-4364-b6fc-263e03d17c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\codegenerator">
+      <UniqueIdentifier>{baa4d4a1-7f59-43c5-92ed-3f96f49c49b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\windows">
+      <UniqueIdentifier>{16628d55-e49a-4f48-a48a-c8506c589ef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{d7ad3967-add1-4a19-9bb0-41db4ec79fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build">
+      <UniqueIdentifier>{26c997f8-11de-4098-abdd-c9a7a68e65b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build\Qt">
+      <UniqueIdentifier>{7883f807-8169-423d-917d-cdaa181a3534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P">
+      <UniqueIdentifier>{4ec8ff0d-76a6-4311-89b3-1305b2840f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\AssetMgr">
+      <UniqueIdentifier>{d695dc88-9f47-48f0-9a5b-e4bc8a13199a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\BigListLib">
+      <UniqueIdentifier>{7c212114-33f1-4d7b-8bbb-a6c70525bc4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\EchoCancel">
+      <UniqueIdentifier>{98ef5ad3-76a5-49e3-8990-32714e2ead7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\MediaProcessor">
+      <UniqueIdentifier>{7502e55c-5a94-4545-81cf-481112095776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\NetServices">
+      <UniqueIdentifier>{ec6ca72a-ea81-4adb-998b-76b54936e9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\Network">
+      <UniqueIdentifier>{802cfdd5-8c6a-47f9-a68d-cc5b138113c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\NetworkMonitor">
+      <UniqueIdentifier>{c908196f-369b-47a6-bb2b-5097fb0d3570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\P2PEngine">
+      <UniqueIdentifier>{153fa2e1-3837-4693-b311-aeef7be2cfcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\Plugins">
+      <UniqueIdentifier>{cf562f1b-4f74-4a52-b52b-705d9b17025f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\Search">
+      <UniqueIdentifier>{c0217daa-8641-440a-bf64-9fbed6a04b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\WebServer">
+      <UniqueIdentifier>{caa85f20-2991-480c-8d7d-78d5db3ecf35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface">
+      <UniqueIdentifier>{a7d7cf01-9fe8-4738-89a1-b8f9e2826363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\HostMgr">
+      <UniqueIdentifier>{5d9a321a-319e-43d0-941b-9e189c002499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\PluginSettings">
+      <UniqueIdentifier>{79d61f45-dfd4-45b2-aff4-e88593f636a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\NetworkTest">
+      <UniqueIdentifier>{0f4e0e33-86c3-4f87-9a0e-ca56a6210b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\Connections">
+      <UniqueIdentifier>{43bc1941-42bb-4aa6-8541-8c04a3f317c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\BlobXferMgr">
+      <UniqueIdentifier>{68c61962-7aad-4927-bc06-08d952dcc131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\User">
+      <UniqueIdentifier>{d8b95c40-fa5a-4e3e-b03e-5a33c754d6b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\ThumbMgr">
+      <UniqueIdentifier>{85ae1a80-8839-4ec0-8992-1e2098f01c0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\AssetBase">
+      <UniqueIdentifier>{9f3693fb-5343-4243-af51-b0ed6fb60a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\OfferBase">
+      <UniqueIdentifier>{df8389e0-0bdd-4773-9dfe-9ba516d0d026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\OfferClientMgr">
+      <UniqueIdentifier>{910c7eeb-e37d-4ff4-9de5-f7b01e4f1292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\OfferHostMgr">
+      <UniqueIdentifier>{f8868528-d130-4a76-81b0-d74ac433ab10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\ConnectMgr">
+      <UniqueIdentifier>{26c521ac-2eac-49e1-b3c7-1edef2efe660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\BaseInfo">
+      <UniqueIdentifier>{019f1a11-04eb-4df7-a4e1-77d4aee987f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsAndroid">
+      <UniqueIdentifier>{4081e437-7215-437e-991e-b897737cac6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsApple">
+      <UniqueIdentifier>{e6bae512-40cb-4671-8f41-a2253a4ad19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsInterface">
+      <UniqueIdentifier>{e837defc-6b40-4d1a-a09c-13ce9d0a5057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsLinux">
+      <UniqueIdentifier>{144cdece-b4b9-416a-80ca-d5870fd2e442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiInterface\OsWin32">
+      <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\HostJoinMgr">
+      <UniqueIdentifier>{ac65286f-e7a8-467f-b13c-c685c20ff0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\UserJoinMgr">
+      <UniqueIdentifier>{5e2fa986-b854-42bf-aa66-3f3e7c1b489d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\UserOnlineMgr">
+      <UniqueIdentifier>{561633c7-da30-44ae-8a97-6d77364bfe60}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\GoTvVersion.txt" />
+    <Text Include="..\..\GoTvP2P\EchoCancel\WEBRTC_LICENSE.txt">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </Text>
+    <Text Include="..\..\GoTvP2P\EchoCancel\WEBRTC_LICENSE_THIRD_PARTY.txt">
+      <Filter>GoTvP2P\EchoCancel</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\libptopengine.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\libptopengine.pro">
+      <Filter>QtBuild</Filter>
+    </None>
+  </ItemGroup>
+</Project>

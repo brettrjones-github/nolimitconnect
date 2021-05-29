@@ -1,0 +1,5 @@
+git clone https://github.com/xbmc/xbmc.git
+build windows 32 version
+I:
+cd KodiBuildsVS/xbmc/xbmc
+The 32 bit build is located in the folder- tools\buildsteps\windows\win32

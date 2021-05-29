@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)..\..\xbmc\CMakeLists.txt" />
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\285f09a8b163978435be917519de654d\dvdnav-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\9d6021ebf41f327892ea7a06745e4314\dvdnav-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="$(ProjectDir)..\..\CMakeFiles\bb73ed4812b62fe3c075101eaa6f2fe9\dvdnav.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(ProjectDir)..\..\CMakeFiles\dvdnav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B07FBB13-E166-3C14-9CFA-C6215B171AEA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
