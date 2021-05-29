@@ -254,7 +254,7 @@ echo GoTv CPU Arch Defines error no cpu target defined
 #  define TARGET_CPU_X86 1
 #  define ARCH_32_BITS 0
 #  define ARCH_64_BITS 1
-# else
+# elif !defined(ARCH_64_BITS) // if not previously defined for TARGET_OS_ANDROID
 #  define ARCH_32_BITS 1
 #  define ARCH_64_BITS 0
 # endif // defined(TARGET_CPU_X86)
