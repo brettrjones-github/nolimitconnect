@@ -179,18 +179,18 @@ int __strverscmp( const char *s1, const char *s2 )
 	}
 }
 
-
+/* this is not missing when using ndk 22b
 //============================================================================
 int ffs( int i )
 {
 #if __GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 4)
 	return __builtin_ffs( i );
 #else
-	/* http://graphics.stanford.edu/~seander/bithacks.html#ZerosOnRightMultLookup
-	gives this deBruijn constant for a branch-less computation, although
-	that table counted trailing zeros rather than bit position.  This
-	requires 32-bit int, we fall back to a naive algorithm on the rare
-	platforms where that assumption is not true.  */
+    // http://graphics.stanford.edu/~seander/bithacks.html#ZerosOnRightMultLookup
+    // gives this deBruijn constant for a branch-less computation, although
+    // that table counted trailing zeros rather than bit position.  This
+    // requires 32-bit int, we fall back to a naive algorithm on the rare
+    // platforms where that assumption is not true.
 	if( CHAR_BIT * sizeof i == 32 )
 	{
 		static unsigned int table[] = {
@@ -211,6 +211,7 @@ int ffs( int i )
 	}
 #endif
 }
+*/
 
 #ifdef weak_alias
 weak_alias( __strverscmp, strverscmp )
