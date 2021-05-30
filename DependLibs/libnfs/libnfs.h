@@ -61,11 +61,13 @@ struct statvfs {
 	uint32_t	f_namemax;
 };
 
-
+#if defined(TARGET_OS_WINDOWS) && (_MSC_VER < 1900)
 struct utimbuf {
 	time_t actime;
 	time_t modtime;
 };
+#endif // defined(TARGET_OS_WINDOWS) && (_MSC_VER < 1900)
+
 #define R_OK	4
 #define W_OK	2
 #define X_OK	1

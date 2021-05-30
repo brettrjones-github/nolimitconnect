@@ -24,6 +24,7 @@
  * Interface to libfaac for aac encoding.
  */
 
+#include <ffmpeg/config_ffmpeg.h>
 #include <libfaac/include/faac.h>
 
 #include "libavutil/channel_layout.h"

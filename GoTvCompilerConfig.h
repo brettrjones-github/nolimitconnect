@@ -386,7 +386,6 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 #define ftello64			_ftelli64
 #define fseeko64			_fseeki64
 #define fsync				_commit
-#define ftime				_ftime // requires include  <sys/types.h> and <sys/timeb.h>
 #define ftruncate			_chsize_s
 #define fcntl				_fctrl
 #define fdopen				_fdopen
@@ -431,11 +430,15 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 #define strtok_r			strtok_s
 #define strtoll				_strtoi64
 #define strtoull			_strtoui64
+
+#if defined(TARGET_OS_WINDOWS) && defined(_MSC_VER) && (_MSC_VER < 1900)
+#define ftime				_ftime // requires include  <sys/types.h> and <sys/timeb.h>
 #if ARCH_64_BITS
 # define timeb				__timeb64
 #else // ARCH_32_BITS
 # define timeb				__timeb32
 #endif // ARCH_64_BITS
+#endif // defined(TARGET_OS_WINDOWS) && defined(_MSC_VER) && (_MSC_VER < 1900)
 
 #define unlink				_unlink
 //#define umask				_unmask	// requires #include <io.h>, <sys/stat.h>, <sys/types.h> 

@@ -1,0 +1,1642 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\libavfilter\lavfutils.c" />
+    <ClCompile Include="..\..\012v.c" />
+    <ClCompile Include="..\..\4xm.c" />
+    <ClCompile Include="..\..\8bps.c" />
+    <ClCompile Include="..\..\8svx.c" />
+    <ClCompile Include="..\..\a64multienc.c" />
+    <ClCompile Include="..\..\aaccoder.c" />
+    <ClCompile Include="..\..\aacdec_fixed.c" />
+    <ClCompile Include="..\..\aacdec_float.c" />
+    <ClCompile Include="..\..\aacenc.c" />
+    <ClCompile Include="..\..\aacenctab.c" />
+    <ClCompile Include="..\..\aacenc_is.c" />
+    <ClCompile Include="..\..\aacenc_ltp.c" />
+    <ClCompile Include="..\..\aacenc_pred.c" />
+    <ClCompile Include="..\..\aacenc_tns.c" />
+    <ClCompile Include="..\..\aacps.c" />
+    <ClCompile Include="..\..\aacpsdata.c" />
+    <ClCompile Include="..\..\aacpsdsp_fixed.c" />
+    <ClCompile Include="..\..\aacpsdsp_float.c" />
+    <ClCompile Include="..\..\aacpsdsp_template.c" />
+    <ClCompile Include="..\..\aacpsy.c" />
+    <ClCompile Include="..\..\aacps_fixed.c" />
+    <ClCompile Include="..\..\aacps_fixed_tablegen.c" />
+    <ClCompile Include="..\..\aacps_float.c" />
+    <ClCompile Include="..\..\aacps_tablegen.c" />
+    <ClCompile Include="..\..\aacps_tablegen_template.c" />
+    <ClCompile Include="..\..\aacsbr.c" />
+    <ClCompile Include="..\..\aacsbr_fixed.c" />
+    <ClCompile Include="..\..\aacsbr_template.c" />
+    <ClCompile Include="..\..\aactab.c" />
+    <ClCompile Include="..\..\aac_ac3_parser.c" />
+    <ClCompile Include="..\..\aac_adtstoasc_bsf.c" />
+    <ClCompile Include="..\..\aac_parser.c" />
+    <ClCompile Include="..\..\aandcttab.c" />
+    <ClCompile Include="..\..\aasc.c" />
+    <ClCompile Include="..\..\ac3.c" />
+    <ClCompile Include="..\..\ac3dec.c" />
+    <ClCompile Include="..\..\ac3dec_data.c" />
+    <ClCompile Include="..\..\ac3dec_fixed.c" />
+    <ClCompile Include="..\..\ac3dec_float.c" />
+    <ClCompile Include="..\..\ac3dsp.c" />
+    <ClCompile Include="..\..\ac3enc.c" />
+    <ClCompile Include="..\..\ac3enc_fixed.c" />
+    <ClCompile Include="..\..\ac3enc_float.c" />
+    <ClCompile Include="..\..\ac3enc_opts_template.c" />
+    <ClCompile Include="..\..\ac3enc_template.c" />
+    <ClCompile Include="..\..\ac3tab.c" />
+    <ClCompile Include="..\..\ac3_parser.c" />
+    <ClCompile Include="..\..\acelp_filters.c" />
+    <ClCompile Include="..\..\acelp_pitch_delay.c" />
+    <ClCompile Include="..\..\acelp_vectors.c" />
+    <ClCompile Include="..\..\adpcm.c" />
+    <ClCompile Include="..\..\adpcmenc.c" />
+    <ClCompile Include="..\..\adpcm_data.c" />
+    <ClCompile Include="..\..\adts_header.c" />
+    <ClCompile Include="..\..\adts_parser.c" />
+    <ClCompile Include="..\..\adx.c" />
+    <ClCompile Include="..\..\adxdec.c" />
+    <ClCompile Include="..\..\adxenc.c" />
+    <ClCompile Include="..\..\adx_parser.c" />
+    <ClCompile Include="..\..\aic.c" />
+    <ClCompile Include="..\..\alac.c" />
+    <ClCompile Include="..\..\alacdsp.c" />
+    <ClCompile Include="..\..\alacenc.c" />
+    <ClCompile Include="..\..\alac_data.c" />
+    <ClCompile Include="..\..\aliaspixdec.c" />
+    <ClCompile Include="..\..\aliaspixenc.c" />
+    <ClCompile Include="..\..\allcodecs.c" />
+    <ClCompile Include="..\..\alsdec.c" />
+    <ClCompile Include="..\..\amrnbdec.c" />
+    <ClCompile Include="..\..\amrwbdec.c" />
+    <ClCompile Include="..\..\anm.c" />
+    <ClCompile Include="..\..\ansi.c" />
+    <ClCompile Include="..\..\apedec.c" />
+    <ClCompile Include="..\..\aptx.c" />
+    <ClCompile Include="..\..\ass.c" />
+    <ClCompile Include="..\..\assdec.c" />
+    <ClCompile Include="..\..\assenc.c" />
+    <ClCompile Include="..\..\ass_split.c" />
+    <ClCompile Include="..\..\asv.c" />
+    <ClCompile Include="..\..\asvdec.c" />
+    <ClCompile Include="..\..\asvenc.c" />
+    <ClCompile Include="..\..\atrac.c" />
+    <ClCompile Include="..\..\atrac1.c" />
+    <ClCompile Include="..\..\atrac3.c" />
+    <ClCompile Include="..\..\atrac3plus.c" />
+    <ClCompile Include="..\..\atrac3plusdec.c" />
+    <ClCompile Include="..\..\atrac3plusdsp.c" />
+    <ClCompile Include="..\..\audiodsp.c" />
+    <ClCompile Include="..\..\audiotoolboxdec.c" />
+    <ClCompile Include="..\..\audiotoolboxenc.c" />
+    <ClCompile Include="..\..\audio_frame_queue.c" />
+    <ClCompile Include="..\..\aura.c" />
+    <ClCompile Include="..\..\avdct.c" />
+    <ClCompile Include="..\..\avfft.c" />
+    <ClCompile Include="..\..\avpacket.c" />
+    <ClCompile Include="..\..\avpicture.c" />
+    <ClCompile Include="..\..\avrndec.c" />
+    <ClCompile Include="..\..\avs.c" />
+    <ClCompile Include="..\..\avuidec.c" />
+    <ClCompile Include="..\..\avuienc.c" />
+    <ClCompile Include="..\..\bethsoftvideo.c" />
+    <ClCompile Include="..\..\bfi.c" />
+    <ClCompile Include="..\..\bgmc.c" />
+    <ClCompile Include="..\..\bink.c" />
+    <ClCompile Include="..\..\binkaudio.c" />
+    <ClCompile Include="..\..\binkdsp.c" />
+    <ClCompile Include="..\..\bintext.c" />
+    <ClCompile Include="..\..\bitpacked.c" />
+    <ClCompile Include="..\..\bitstream.c" />
+    <ClCompile Include="..\..\bitstream_filter.c" />
+    <ClCompile Include="..\..\bitstream_filters.c" />
+    <ClCompile Include="..\..\bit_depth_template.c" />
+    <ClCompile Include="..\..\blockdsp.c" />
+    <ClCompile Include="..\..\bmp.c" />
+    <ClCompile Include="..\..\bmpenc.c" />
+    <ClCompile Include="..\..\bmp_parser.c" />
+    <ClCompile Include="..\..\bmvaudio.c" />
+    <ClCompile Include="..\..\bmvvideo.c" />
+    <ClCompile Include="..\..\brenderpix.c" />
+    <ClCompile Include="..\..\bsf.c" />
+    <ClCompile Include="..\..\bsf_list.c" />
+    <ClCompile Include="..\..\bswapdsp.c" />
+    <ClCompile Include="..\..\c93.c" />
+    <ClCompile Include="..\..\cabac.c" />
+    <ClCompile Include="..\..\canopus.c" />
+    <ClCompile Include="..\..\cavs.c" />
+    <ClCompile Include="..\..\cavsdata.c" />
+    <ClCompile Include="..\..\cavsdec.c" />
+    <ClCompile Include="..\..\cavsdsp.c" />
+    <ClCompile Include="..\..\cavs_parser.c" />
+    <ClCompile Include="..\..\cbrt_data.c" />
+    <ClCompile Include="..\..\cbrt_data_fixed.c" />
+    <ClCompile Include="..\..\cbrt_fixed_tablegen.c" />
+    <ClCompile Include="..\..\cbrt_tablegen.c" />
+    <ClCompile Include="..\..\cbrt_tablegen_template.c" />
+    <ClCompile Include="..\..\ccaption_dec.c" />
+    <ClCompile Include="..\..\cdgraphics.c" />
+    <ClCompile Include="..\..\cdxl.c" />
+    <ClCompile Include="..\..\celp_filters.c" />
+    <ClCompile Include="..\..\celp_math.c" />
+    <ClCompile Include="..\..\cfhd.c" />
+    <ClCompile Include="..\..\cfhddata.c" />
+    <ClCompile Include="..\..\cga_data.c" />
+    <ClCompile Include="..\..\chomp_bsf.c" />
+    <ClCompile Include="..\..\cinepak.c" />
+    <ClCompile Include="..\..\cinepakenc.c" />
+    <ClCompile Include="..\..\clearvideo.c" />
+    <ClCompile Include="..\..\cljrdec.c" />
+    <ClCompile Include="..\..\cljrenc.c" />
+    <ClCompile Include="..\..\cllc.c" />
+    <ClCompile Include="..\..\cngdec.c" />
+    <ClCompile Include="..\..\cngenc.c" />
+    <ClCompile Include="..\..\codec2utils.c" />
+    <ClCompile Include="..\..\codec_desc.c" />
+    <ClCompile Include="..\..\codec_list.c" />
+    <ClCompile Include="..\..\cook.c" />
+    <ClCompile Include="..\..\cook_parser.c" />
+    <ClCompile Include="..\..\cos_tablegen.c" />
+    <ClCompile Include="..\..\cpia.c" />
+    <ClCompile Include="..\..\crystalhd.c" />
+    <ClCompile Include="..\..\cscd.c" />
+    <ClCompile Include="..\..\cuvid.c" />
+    <ClCompile Include="..\..\cyuv.c" />
+    <ClCompile Include="..\..\d3d11va.c" />
+    <ClCompile Include="..\..\dca.c" />
+    <ClCompile Include="..\..\dcaadpcm.c" />
+    <ClCompile Include="..\..\dcadata.c" />
+    <ClCompile Include="..\..\dcadct.c" />
+    <ClCompile Include="..\..\dcadec.c" />
+    <ClCompile Include="..\..\dcadsp.c" />
+    <ClCompile Include="..\..\dcaenc.c" />
+    <ClCompile Include="..\..\dcahuff.c" />
+    <ClCompile Include="..\..\dca_core.c" />
+    <ClCompile Include="..\..\dca_core_bsf.c" />
+    <ClCompile Include="..\..\dca_exss.c" />
+    <ClCompile Include="..\..\dca_lbr.c" />
+    <ClCompile Include="..\..\dca_parser.c" />
+    <ClCompile Include="..\..\dca_xll.c" />
+    <ClCompile Include="..\..\dct.c" />
+    <ClCompile Include="..\..\dct32_fixed.c" />
+    <ClCompile Include="..\..\dct32_float.c" />
+    <ClCompile Include="..\..\dct32_template.c" />
+    <ClCompile Include="..\..\dctref.c" />
+    <ClCompile Include="..\..\dds.c" />
+    <ClCompile Include="..\..\decode.c" />
+    <ClCompile Include="..\..\dfa.c" />
+    <ClCompile Include="..\..\dirac.c" />
+    <ClCompile Include="..\..\diracdec.c" />
+    <ClCompile Include="..\..\diracdsp.c" />
+    <ClCompile Include="..\..\diractab.c" />
+    <ClCompile Include="..\..\dirac_arith.c" />
+    <ClCompile Include="..\..\dirac_dwt.c" />
+    <ClCompile Include="..\..\dirac_dwt_template.c" />
+    <ClCompile Include="..\..\dirac_parser.c" />
+    <ClCompile Include="..\..\dirac_vlc.c" />
+    <ClCompile Include="..\..\dnxhddata.c" />
+    <ClCompile Include="..\..\dnxhddec.c" />
+    <ClCompile Include="..\..\dnxhdenc.c" />
+    <ClCompile Include="..\..\dnxhd_parser.c" />
+    <ClCompile Include="..\..\dolby_e.c" />
+    <ClCompile Include="..\..\dpcm.c" />
+    <ClCompile Include="..\..\dpx.c" />
+    <ClCompile Include="..\..\dpxenc.c" />
+    <ClCompile Include="..\..\dpx_parser.c" />
+    <ClCompile Include="..\..\dsd.c" />
+    <ClCompile Include="..\..\dsddec.c" />
+    <ClCompile Include="..\..\dsicinaudio.c" />
+    <ClCompile Include="..\..\dsicinvideo.c" />
+    <ClCompile Include="..\..\dss_sp.c" />
+    <ClCompile Include="..\..\dstdec.c" />
+    <ClCompile Include="..\..\dump_extradata_bsf.c" />
+    <ClCompile Include="..\..\dv.c" />
+    <ClCompile Include="..\..\dvaudiodec.c" />
+    <ClCompile Include="..\..\dvaudio_parser.c" />
+    <ClCompile Include="..\..\dvbsub.c" />
+    <ClCompile Include="..\..\dvbsubdec.c" />
+    <ClCompile Include="..\..\dvbsub_parser.c" />
+    <ClCompile Include="..\..\dvdata.c" />
+    <ClCompile Include="..\..\dvdec.c" />
+    <ClCompile Include="..\..\dvdsubdec.c" />
+    <ClCompile Include="..\..\dvdsubenc.c" />
+    <ClCompile Include="..\..\dvdsub_parser.c" />
+    <ClCompile Include="..\..\dvd_nav_parser.c" />
+    <ClCompile Include="..\..\dvenc.c" />
+    <ClCompile Include="..\..\dv_profile.c" />
+    <ClCompile Include="..\..\dv_tablegen.c" />
+    <ClCompile Include="..\..\dxa.c" />
+    <ClCompile Include="..\..\dxtory.c" />
+    <ClCompile Include="..\..\dxv.c" />
+    <ClCompile Include="..\..\dxva2.c" />
+    <ClCompile Include="..\..\dxva2_h264.c" />
+    <ClCompile Include="..\..\dxva2_hevc.c" />
+    <ClCompile Include="..\..\dxva2_mpeg2.c" />
+    <ClCompile Include="..\..\dxva2_vc1.c" />
+    <ClCompile Include="..\..\dxva2_vp9.c" />
+    <ClCompile Include="..\..\eac3dec.c" />
+    <ClCompile Include="..\..\eac3enc.c" />
+    <ClCompile Include="..\..\eac3_data.c" />
+    <ClCompile Include="..\..\eacmv.c" />
+    <ClCompile Include="..\..\eaidct.c" />
+    <ClCompile Include="..\..\eamad.c" />
+    <ClCompile Include="..\..\eatgq.c" />
+    <ClCompile Include="..\..\eatgv.c" />
+    <ClCompile Include="..\..\eatqi.c" />
+    <ClCompile Include="..\..\elbg.c" />
+    <ClCompile Include="..\..\elsdec.c" />
+    <ClCompile Include="..\..\encode.c" />
+    <ClCompile Include="..\..\error_resilience.c" />
+    <ClCompile Include="..\..\escape124.c" />
+    <ClCompile Include="..\..\escape130.c" />
+    <ClCompile Include="..\..\evrcdec.c" />
+    <ClCompile Include="..\..\exif.c" />
+    <ClCompile Include="..\..\exr.c" />
+    <ClCompile Include="..\..\exrdsp.c" />
+    <ClCompile Include="..\..\extract_extradata_bsf.c" />
+    <ClCompile Include="..\..\faandct.c" />
+    <ClCompile Include="..\..\faanidct.c" />
+    <ClCompile Include="..\..\faxcompr.c" />
+    <ClCompile Include="..\..\fdctdsp.c" />
+    <ClCompile Include="..\..\ffjni.c" />
+    <ClCompile Include="..\..\fft_fixed.c" />
+    <ClCompile Include="..\..\fft_fixed_32.c" />
+    <ClCompile Include="..\..\fft_float.c" />
+    <ClCompile Include="..\..\fft_init_table.c" />
+    <ClCompile Include="..\..\fft_template.c" />
+    <ClCompile Include="..\..\ffv1.c" />
+    <ClCompile Include="..\..\ffv1dec.c" />
+    <ClCompile Include="..\..\ffv1dec_template.c" />
+    <ClCompile Include="..\..\ffv1enc.c" />
+    <ClCompile Include="..\..\ffv1enc_template.c" />
+    <ClCompile Include="..\..\ffv1_template.c" />
+    <ClCompile Include="..\..\ffwavesynth.c" />
+    <ClCompile Include="..\..\fic.c" />
+    <ClCompile Include="..\..\file_open.c" />
+    <ClCompile Include="..\..\fits.c" />
+    <ClCompile Include="..\..\fitsdec.c" />
+    <ClCompile Include="..\..\fitsenc.c" />
+    <ClCompile Include="..\..\flac.c" />
+    <ClCompile Include="..\..\flacdata.c" />
+    <ClCompile Include="..\..\flacdec.c" />
+    <ClCompile Include="..\..\flacdsp.c" />
+    <ClCompile Include="..\..\flacdsp_lpc_template.c" />
+    <ClCompile Include="..\..\flacdsp_template.c" />
+    <ClCompile Include="..\..\flacenc.c" />
+    <ClCompile Include="..\..\flac_parser.c" />
+    <ClCompile Include="..\..\flashsv.c" />
+    <ClCompile Include="..\..\flashsv2enc.c" />
+    <ClCompile Include="..\..\flashsvenc.c" />
+    <ClCompile Include="..\..\flicvideo.c" />
+    <ClCompile Include="..\..\flvdec.c" />
+    <ClCompile Include="..\..\flvenc.c" />
+    <ClCompile Include="..\..\fmtconvert.c" />
+    <ClCompile Include="..\..\fmvc.c" />
+    <ClCompile Include="..\..\frame_thread_encoder.c" />
+    <ClCompile Include="..\..\fraps.c" />
+    <ClCompile Include="..\..\frwu.c" />
+    <ClCompile Include="..\..\g2meet.c" />
+    <ClCompile Include="..\..\g722.c" />
+    <ClCompile Include="..\..\g722dec.c" />
+    <ClCompile Include="..\..\g722dsp.c" />
+    <ClCompile Include="..\..\g722enc.c" />
+    <ClCompile Include="..\..\g723_1.c" />
+    <ClCompile Include="..\..\g723_1dec.c" />
+    <ClCompile Include="..\..\g723_1enc.c" />
+    <ClCompile Include="..\..\g726.c" />
+    <ClCompile Include="..\..\g729dec.c" />
+    <ClCompile Include="..\..\g729postfilter.c" />
+    <ClCompile Include="..\..\g729_parser.c" />
+    <ClCompile Include="..\..\gdv.c" />
+    <ClCompile Include="..\..\gif.c" />
+    <ClCompile Include="..\..\gifdec.c" />
+    <ClCompile Include="..\..\golomb.c" />
+    <ClCompile Include="..\..\gsmdec.c" />
+    <ClCompile Include="..\..\gsmdec_data.c" />
+    <ClCompile Include="..\..\gsmdec_template.c" />
+    <ClCompile Include="..\..\gsm_parser.c" />
+    <ClCompile Include="..\..\h261.c" />
+    <ClCompile Include="..\..\h261data.c" />
+    <ClCompile Include="..\..\h261dec.c" />
+    <ClCompile Include="..\..\h261enc.c" />
+    <ClCompile Include="..\..\h261_parser.c" />
+    <ClCompile Include="..\..\h263.c" />
+    <ClCompile Include="..\..\h263data.c" />
+    <ClCompile Include="..\..\h263dec.c" />
+    <ClCompile Include="..\..\h263dsp.c" />
+    <ClCompile Include="..\..\h263_parser.c" />
+    <ClCompile Include="..\..\h2645_parse.c" />
+    <ClCompile Include="..\..\h264addpx_template.c" />
+    <ClCompile Include="..\..\h264chroma.c" />
+    <ClCompile Include="..\..\h264chroma_template.c" />
+    <ClCompile Include="..\..\h264data.c" />
+    <ClCompile Include="..\..\h264dec.c" />
+    <ClCompile Include="..\..\h264dsp.c" />
+    <ClCompile Include="..\..\h264dsp_template.c" />
+    <ClCompile Include="..\..\h264idct.c" />
+    <ClCompile Include="..\..\h264idct_template.c" />
+    <ClCompile Include="..\..\h264pred.c" />
+    <ClCompile Include="..\..\h264pred_template.c" />
+    <ClCompile Include="..\..\h264qpel.c" />
+    <ClCompile Include="..\..\h264qpel_template.c" />
+    <ClCompile Include="..\..\h264_cabac.c" />
+    <ClCompile Include="..\..\h264_cavlc.c" />
+    <ClCompile Include="..\..\h264_direct.c" />
+    <ClCompile Include="..\..\h264_loopfilter.c" />
+    <ClCompile Include="..\..\h264_mb.c" />
+    <ClCompile Include="..\..\h264_mb_template.c" />
+    <ClCompile Include="..\..\h264_mc_template.c" />
+    <ClCompile Include="..\..\h264_mp4toannexb_bsf.c" />
+    <ClCompile Include="..\..\h264_parse.c" />
+    <ClCompile Include="..\..\h264_parser.c" />
+    <ClCompile Include="..\..\h264_picture.c" />
+    <ClCompile Include="..\..\h264_ps.c" />
+    <ClCompile Include="..\..\h264_refs.c" />
+    <ClCompile Include="..\..\h264_sei.c" />
+    <ClCompile Include="..\..\h264_slice.c" />
+    <ClCompile Include="..\..\hap.c" />
+    <ClCompile Include="..\..\hapdec.c" />
+    <ClCompile Include="..\..\hapenc.c" />
+    <ClCompile Include="..\..\hevcdec.c" />
+    <ClCompile Include="..\..\hevcdsp.c" />
+    <ClCompile Include="..\..\hevcdsp_template.c" />
+    <ClCompile Include="..\..\hevcpred.c" />
+    <ClCompile Include="..\..\hevcpred_template.c" />
+    <ClCompile Include="..\..\hevc_cabac.c" />
+    <ClCompile Include="..\..\hevc_data.c" />
+    <ClCompile Include="..\..\hevc_filter.c" />
+    <ClCompile Include="..\..\hevc_mp4toannexb_bsf.c" />
+    <ClCompile Include="..\..\hevc_mvs.c" />
+    <ClCompile Include="..\..\hevc_parse.c" />
+    <ClCompile Include="..\..\hevc_parser.c" />
+    <ClCompile Include="..\..\hevc_ps.c" />
+    <ClCompile Include="..\..\hevc_ps_enc.c" />
+    <ClCompile Include="..\..\hevc_refs.c" />
+    <ClCompile Include="..\..\hevc_sei.c" />
+    <ClCompile Include="..\..\hnm4video.c" />
+    <ClCompile Include="..\..\hpeldsp.c" />
+    <ClCompile Include="..\..\hpel_template.c" />
+    <ClCompile Include="..\..\hqx.c" />
+    <ClCompile Include="..\..\hqxdsp.c" />
+    <ClCompile Include="..\..\hqxvlc.c" />
+    <ClCompile Include="..\..\hq_hqa.c" />
+    <ClCompile Include="..\..\hq_hqadata.c" />
+    <ClCompile Include="..\..\hq_hqadsp.c" />
+    <ClCompile Include="..\..\htmlsubtitles.c" />
+    <ClCompile Include="..\..\huffman.c" />
+    <ClCompile Include="..\..\huffyuv.c" />
+    <ClCompile Include="..\..\huffyuvdec.c" />
+    <ClCompile Include="..\..\huffyuvdsp.c" />
+    <ClCompile Include="..\..\huffyuvenc.c" />
+    <ClCompile Include="..\..\huffyuvencdsp.c" />
+    <ClCompile Include="..\..\idcinvideo.c" />
+    <ClCompile Include="..\..\idctdsp.c" />
+    <ClCompile Include="..\..\iff.c" />
+    <ClCompile Include="..\..\iirfilter.c" />
+    <ClCompile Include="..\..\imc.c" />
+    <ClCompile Include="..\..\imdct15.c" />
+    <ClCompile Include="..\..\imgconvert.c" />
+    <ClCompile Include="..\..\imx_dump_header_bsf.c" />
+    <ClCompile Include="..\..\indeo2.c" />
+    <ClCompile Include="..\..\indeo3.c" />
+    <ClCompile Include="..\..\indeo4.c" />
+    <ClCompile Include="..\..\indeo5.c" />
+    <ClCompile Include="..\..\intelh263dec.c" />
+    <ClCompile Include="..\..\interplayacm.c" />
+    <ClCompile Include="..\..\interplayvideo.c" />
+    <ClCompile Include="..\..\intrax8.c" />
+    <ClCompile Include="..\..\intrax8dsp.c" />
+    <ClCompile Include="..\..\ituh263dec.c" />
+    <ClCompile Include="..\..\ituh263enc.c" />
+    <ClCompile Include="..\..\ivi.c" />
+    <ClCompile Include="..\..\ivi_dsp.c" />
+    <ClCompile Include="..\..\j2kenc.c" />
+    <ClCompile Include="..\..\jacosubdec.c" />
+    <ClCompile Include="..\..\jfdctfst.c" />
+    <ClCompile Include="..\..\jfdctint.c" />
+    <ClCompile Include="..\..\jfdctint_template.c" />
+    <ClCompile Include="..\..\jni.c" />
+    <ClCompile Include="..\..\jpeg2000.c" />
+    <ClCompile Include="..\..\jpeg2000dec.c" />
+    <ClCompile Include="..\..\jpeg2000dsp.c" />
+    <ClCompile Include="..\..\jpeg2000dwt.c" />
+    <ClCompile Include="..\..\jpegls.c" />
+    <ClCompile Include="..\..\jpeglsdec.c" />
+    <ClCompile Include="..\..\jpeglsenc.c" />
+    <ClCompile Include="..\..\jpegtables.c" />
+    <ClCompile Include="..\..\jrevdct.c" />
+    <ClCompile Include="..\..\jvdec.c" />
+    <ClCompile Include="..\..\kbdwin.c" />
+    <ClCompile Include="..\..\kgv1dec.c" />
+    <ClCompile Include="..\..\kmvc.c" />
+    <ClCompile Include="..\..\lagarith.c" />
+    <ClCompile Include="..\..\lagarithrac.c" />
+    <ClCompile Include="..\..\latm_parser.c" />
+    <ClCompile Include="..\..\lcldec.c" />
+    <ClCompile Include="..\..\lclenc.c" />
+    <ClCompile Include="..\..\libcelt_dec.c" />
+    <ClCompile Include="..\..\libfaac.c" />
+    <ClCompile Include="..\..\libgsmdec.c" />
+    <ClCompile Include="..\..\libgsmenc.c" />
+    <ClCompile Include="..\..\libilbc.c" />
+    <ClCompile Include="..\..\libkvazaar.c" />
+    <ClCompile Include="..\..\libmp3lame.c" />
+    <ClCompile Include="..\..\libopencore-amr.c" />
+    <ClCompile Include="..\..\libopenh264.c" />
+    <ClCompile Include="..\..\libopenh264dec.c" />
+    <ClCompile Include="..\..\libopenh264enc.c" />
+    <ClCompile Include="..\..\libopenjpegdec.c" />
+    <ClCompile Include="..\..\libopenjpegenc.c" />
+    <ClCompile Include="..\..\libopus.c" />
+    <ClCompile Include="..\..\libopusdec.c" />
+    <ClCompile Include="..\..\libopusenc.c" />
+    <ClCompile Include="..\..\librsvgdec.c" />
+    <ClCompile Include="..\..\libschroedinger.c" />
+    <ClCompile Include="..\..\libschroedingerdec.c" />
+    <ClCompile Include="..\..\libschroedingerenc.c" />
+    <ClCompile Include="..\..\libshine.c" />
+    <ClCompile Include="..\..\libspeexdec.c" />
+    <ClCompile Include="..\..\libspeexenc.c" />
+    <ClCompile Include="..\..\libtheoraenc.c" />
+    <ClCompile Include="..\..\libtwolame.c" />
+    <ClCompile Include="..\..\libvo-amrwbenc.c" />
+    <ClCompile Include="..\..\libvorbisdec.c" />
+    <ClCompile Include="..\..\libvorbisenc.c" />
+    <ClCompile Include="..\..\libvpx.c" />
+    <ClCompile Include="..\..\libvpxdec.c" />
+    <ClCompile Include="..\..\libvpxenc.c" />
+    <ClCompile Include="..\..\libwavpackenc.c" />
+    <ClCompile Include="..\..\libwebpenc.c" />
+    <ClCompile Include="..\..\libwebpenc_animencoder.c" />
+    <ClCompile Include="..\..\libwebpenc_common.c" />
+    <ClCompile Include="..\..\libx264.c" />
+    <ClCompile Include="..\..\libx265.c" />
+    <ClCompile Include="..\..\libxavs.c" />
+    <ClCompile Include="..\..\libxvid.c" />
+    <ClCompile Include="..\..\libxvid_rc.c" />
+    <ClCompile Include="..\..\libzvbi-teletextdec.c" />
+    <ClCompile Include="..\..\ljpegenc.c" />
+    <ClCompile Include="..\..\loco.c" />
+    <ClCompile Include="..\..\log2_tab.c" />
+    <ClCompile Include="..\..\lossless_audiodsp.c" />
+    <ClCompile Include="..\..\lossless_videodsp.c" />
+    <ClCompile Include="..\..\lossless_videoencdsp.c" />
+    <ClCompile Include="..\..\lpc.c" />
+    <ClCompile Include="..\..\lsp.c" />
+    <ClCompile Include="..\..\lzf.c" />
+    <ClCompile Include="..\..\lzw.c" />
+    <ClCompile Include="..\..\lzwenc.c" />
+    <ClCompile Include="..\..\m101.c" />
+    <ClCompile Include="..\..\mace.c" />
+    <ClCompile Include="..\..\magicyuv.c" />
+    <ClCompile Include="..\..\magicyuvenc.c" />
+    <ClCompile Include="..\..\mathtables.c" />
+    <ClCompile Include="..\..\mdct15.c" />
+    <ClCompile Include="..\..\mdct_fixed.c" />
+    <ClCompile Include="..\..\mdct_fixed_32.c" />
+    <ClCompile Include="..\..\mdct_float.c" />
+    <ClCompile Include="..\..\mdct_template.c" />
+    <ClCompile Include="..\..\mdec.c" />
+    <ClCompile Include="..\..\mediacodec.c" />
+    <ClCompile Include="..\..\mediacodecdec.c" />
+    <ClCompile Include="..\..\mediacodecdec_common.c" />
+    <ClCompile Include="..\..\mediacodecdec_h264.c" />
+    <ClCompile Include="..\..\mediacodec_surface.c" />
+    <ClCompile Include="..\..\mediacodec_sw_buffer.c" />
+    <ClCompile Include="..\..\mediacodec_wrapper.c" />
+    <ClCompile Include="..\..\metasound.c" />
+    <ClCompile Include="..\..\metasound_data.c" />
+    <ClCompile Include="..\..\me_cmp.c" />
+    <ClCompile Include="..\..\microdvddec.c" />
+    <ClCompile Include="..\..\mimic.c" />
+    <ClCompile Include="..\..\mjpeg2jpeg_bsf.c" />
+    <ClCompile Include="..\..\mjpega_dump_header_bsf.c" />
+    <ClCompile Include="..\..\mjpegbdec.c" />
+    <ClCompile Include="..\..\mjpegdec.c" />
+    <ClCompile Include="..\..\mjpegenc.c" />
+    <ClCompile Include="..\..\mjpegenc_common.c" />
+    <ClCompile Include="..\..\mjpegenc_huffman.c" />
+    <ClCompile Include="..\..\mjpeg_parser.c" />
+    <ClCompile Include="..\..\mlp.c" />
+    <ClCompile Include="..\..\mlpdec.c" />
+    <ClCompile Include="..\..\mlpdsp.c" />
+    <ClCompile Include="..\..\mlpenc.c" />
+    <ClCompile Include="..\..\mlp_parser.c" />
+    <ClCompile Include="..\..\mlz.c" />
+    <ClCompile Include="..\..\mmaldec.c" />
+    <ClCompile Include="..\..\mmvideo.c" />
+    <ClCompile Include="..\..\motionpixels.c" />
+    <ClCompile Include="..\..\motionpixels_tablegen.c" />
+    <ClCompile Include="..\..\motion_est.c" />
+    <ClCompile Include="..\..\motion_est_template.c" />
+    <ClCompile Include="..\..\movsub_bsf.c" />
+    <ClCompile Include="..\..\movtextdec.c" />
+    <ClCompile Include="..\..\movtextenc.c" />
+    <ClCompile Include="..\..\mp3_header_decompress_bsf.c" />
+    <ClCompile Include="..\..\mpc.c" />
+    <ClCompile Include="..\..\mpc7.c" />
+    <ClCompile Include="..\..\mpc8.c" />
+    <ClCompile Include="..\..\mpeg12.c" />
+    <ClCompile Include="..\..\mpeg12data.c" />
+    <ClCompile Include="..\..\mpeg12dec.c" />
+    <ClCompile Include="..\..\mpeg12enc.c" />
+    <ClCompile Include="..\..\mpeg12framerate.c" />
+    <ClCompile Include="..\..\mpeg4audio.c" />
+    <ClCompile Include="..\..\mpeg4video.c" />
+    <ClCompile Include="..\..\mpeg4videodec.c" />
+    <ClCompile Include="..\..\mpeg4videoenc.c" />
+    <ClCompile Include="..\..\mpeg4video_parser.c" />
+    <ClCompile Include="..\..\mpeg4_unpack_bframes_bsf.c" />
+    <ClCompile Include="..\..\mpegaudio.c" />
+    <ClCompile Include="..\..\mpegaudiodata.c" />
+    <ClCompile Include="..\..\mpegaudiodecheader.c" />
+    <ClCompile Include="..\..\mpegaudiodec_fixed.c" />
+    <ClCompile Include="..\..\mpegaudiodec_float.c" />
+    <ClCompile Include="..\..\mpegaudiodec_template.c" />
+    <ClCompile Include="..\..\mpegaudiodsp.c" />
+    <ClCompile Include="..\..\mpegaudiodsp_data.c" />
+    <ClCompile Include="..\..\mpegaudiodsp_fixed.c" />
+    <ClCompile Include="..\..\mpegaudiodsp_float.c" />
+    <ClCompile Include="..\..\mpegaudiodsp_template.c" />
+    <ClCompile Include="..\..\mpegaudioenc_fixed.c" />
+    <ClCompile Include="..\..\mpegaudioenc_float.c" />
+    <ClCompile Include="..\..\mpegaudioenc_template.c" />
+    <ClCompile Include="..\..\mpegaudio_parser.c" />
+    <ClCompile Include="..\..\mpegaudio_tablegen.c" />
+    <ClCompile Include="..\..\mpegpicture.c" />
+    <ClCompile Include="..\..\mpegutils.c" />
+    <ClCompile Include="..\..\mpegvideo.c" />
+    <ClCompile Include="..\..\mpegvideodata.c" />
+    <ClCompile Include="..\..\mpegvideodsp.c" />
+    <ClCompile Include="..\..\mpegvideoencdsp.c" />
+    <ClCompile Include="..\..\mpegvideo_enc.c" />
+    <ClCompile Include="..\..\mpegvideo_motion.c" />
+    <ClCompile Include="..\..\mpegvideo_parser.c" />
+    <ClCompile Include="..\..\mpegvideo_xvmc.c" />
+    <ClCompile Include="..\..\mpeg_er.c" />
+    <ClCompile Include="..\..\mpl2dec.c" />
+    <ClCompile Include="..\..\mqc.c" />
+    <ClCompile Include="..\..\mqcdec.c" />
+    <ClCompile Include="..\..\mqcenc.c" />
+    <ClCompile Include="..\..\mscc.c" />
+    <ClCompile Include="..\..\msgsmdec.c" />
+    <ClCompile Include="..\..\msmpeg4.c" />
+    <ClCompile Include="..\..\msmpeg4data.c" />
+    <ClCompile Include="..\..\msmpeg4dec.c" />
+    <ClCompile Include="..\..\msmpeg4enc.c" />
+    <ClCompile Include="..\..\msrle.c" />
+    <ClCompile Include="..\..\msrledec.c" />
+    <ClCompile Include="..\..\mss1.c" />
+    <ClCompile Include="..\..\mss12.c" />
+    <ClCompile Include="..\..\mss2.c" />
+    <ClCompile Include="..\..\mss2dsp.c" />
+    <ClCompile Include="..\..\mss3.c" />
+    <ClCompile Include="..\..\mss34dsp.c" />
+    <ClCompile Include="..\..\mss4.c" />
+    <ClCompile Include="..\..\msvideo1.c" />
+    <ClCompile Include="..\..\msvideo1enc.c" />
+    <ClCompile Include="..\..\mvcdec.c" />
+    <ClCompile Include="..\..\mxpegdec.c" />
+    <ClCompile Include="..\..\nellymoser.c" />
+    <ClCompile Include="..\..\nellymoserdec.c" />
+    <ClCompile Include="..\..\nellymoserenc.c" />
+    <ClCompile Include="..\..\noise_bsf.c" />
+    <ClCompile Include="..\..\null_bsf.c" />
+    <ClCompile Include="..\..\nuv.c" />
+    <ClCompile Include="..\..\nvenc.c" />
+    <ClCompile Include="..\..\nvenc_h264.c" />
+    <ClCompile Include="..\..\nvenc_hevc.c" />
+    <ClCompile Include="..\..\omx.c" />
+    <ClCompile Include="..\..\on2avc.c" />
+    <ClCompile Include="..\..\on2avcdata.c" />
+    <ClCompile Include="..\..\options.c" />
+    <ClCompile Include="..\..\opus.c" />
+    <ClCompile Include="..\..\opusdec.c" />
+    <ClCompile Include="..\..\opusenc.c" />
+    <ClCompile Include="..\..\opusenc_psy.c" />
+    <ClCompile Include="..\..\opustab.c" />
+    <ClCompile Include="..\..\opus_celt.c" />
+    <ClCompile Include="..\..\opus_parser.c" />
+    <ClCompile Include="..\..\opus_pvq.c" />
+    <ClCompile Include="..\..\opus_rc.c" />
+    <ClCompile Include="..\..\opus_silk.c" />
+    <ClCompile Include="..\..\pafaudio.c" />
+    <ClCompile Include="..\..\pafvideo.c" />
+    <ClCompile Include="..\..\pamenc.c" />
+    <ClCompile Include="..\..\parser.c" />
+    <ClCompile Include="..\..\pcm-bluray.c" />
+    <ClCompile Include="..\..\pcm-dvd.c" />
+    <ClCompile Include="..\..\pcm.c" />
+    <ClCompile Include="..\..\pcm_tablegen.c" />
+    <ClCompile Include="..\..\pcx.c" />
+    <ClCompile Include="..\..\pcxenc.c" />
+    <ClCompile Include="..\..\pel_template.c" />
+    <ClCompile Include="..\..\pgssubdec.c" />
+    <ClCompile Include="..\..\pictordec.c" />
+    <ClCompile Include="..\..\pixblockdsp.c" />
+    <ClCompile Include="..\..\pixlet.c" />
+    <ClCompile Include="..\..\png.c" />
+    <ClCompile Include="..\..\pngdec.c" />
+    <ClCompile Include="..\..\pngdsp.c" />
+    <ClCompile Include="..\..\pngenc.c" />
+    <ClCompile Include="..\..\png_parser.c" />
+    <ClCompile Include="..\..\pnm.c" />
+    <ClCompile Include="..\..\pnmdec.c" />
+    <ClCompile Include="..\..\pnmenc.c" />
+    <ClCompile Include="..\..\pnm_parser.c" />
+    <ClCompile Include="..\..\profiles.c" />
+    <ClCompile Include="..\..\proresdata.c" />
+    <ClCompile Include="..\..\proresdec2.c" />
+    <ClCompile Include="..\..\proresdec_lgpl.c" />
+    <ClCompile Include="..\..\proresdsp.c" />
+    <ClCompile Include="..\..\proresenc_anatoliy.c" />
+    <ClCompile Include="..\..\proresenc_kostya.c" />
+    <ClCompile Include="..\..\psd.c" />
+    <ClCompile Include="..\..\psymodel.c" />
+    <ClCompile Include="..\..\pthread.c" />
+    <ClCompile Include="..\..\pthread_frame.c" />
+    <ClCompile Include="..\..\pthread_slice.c" />
+    <ClCompile Include="..\..\ptx.c" />
+    <ClCompile Include="..\..\qcelpdec.c" />
+    <ClCompile Include="..\..\qdm2.c" />
+    <ClCompile Include="..\..\qdm2_tablegen.c" />
+    <ClCompile Include="..\..\qdmc.c" />
+    <ClCompile Include="..\..\qdrw.c" />
+    <ClCompile Include="..\..\qpeg.c" />
+    <ClCompile Include="..\..\qpeldsp.c" />
+    <ClCompile Include="..\..\qpel_template.c" />
+    <ClCompile Include="..\..\qsv.c" />
+    <ClCompile Include="..\..\qsvdec.c" />
+    <ClCompile Include="..\..\qsvdec_h2645.c" />
+    <ClCompile Include="..\..\qsvdec_mpeg2.c" />
+    <ClCompile Include="..\..\qsvdec_other.c" />
+    <ClCompile Include="..\..\qsvdec_vc1.c" />
+    <ClCompile Include="..\..\qsvenc.c" />
+    <ClCompile Include="..\..\qsvenc_h264.c" />
+    <ClCompile Include="..\..\qsvenc_hevc.c" />
+    <ClCompile Include="..\..\qsvenc_mpeg2.c" />
+    <ClCompile Include="..\..\qsv_api.c" />
+    <ClCompile Include="..\..\qtrle.c" />
+    <ClCompile Include="..\..\qtrleenc.c" />
+    <ClCompile Include="..\..\r210dec.c" />
+    <ClCompile Include="..\..\r210enc.c" />
+    <ClCompile Include="..\..\ra144.c" />
+    <ClCompile Include="..\..\ra144dec.c" />
+    <ClCompile Include="..\..\ra144enc.c" />
+    <ClCompile Include="..\..\ra288.c" />
+    <ClCompile Include="..\..\ralf.c" />
+    <ClCompile Include="..\..\rangecoder.c" />
+    <ClCompile Include="..\..\ratecontrol.c" />
+    <ClCompile Include="..\..\raw.c" />
+    <ClCompile Include="..\..\rawdec.c" />
+    <ClCompile Include="..\..\rawenc.c" />
+    <ClCompile Include="..\..\rdft.c" />
+    <ClCompile Include="..\..\realtextdec.c" />
+    <ClCompile Include="..\..\remove_extradata_bsf.c" />
+    <ClCompile Include="..\..\reverse.c" />
+    <ClCompile Include="..\..\rkmppdec.c" />
+    <ClCompile Include="..\..\rl.c" />
+    <ClCompile Include="..\..\rl2.c" />
+    <ClCompile Include="..\..\rle.c" />
+    <ClCompile Include="..\..\roqaudioenc.c" />
+    <ClCompile Include="..\..\roqvideo.c" />
+    <ClCompile Include="..\..\roqvideodec.c" />
+    <ClCompile Include="..\..\roqvideoenc.c" />
+    <ClCompile Include="..\..\rpza.c" />
+    <ClCompile Include="..\..\rscc.c" />
+    <ClCompile Include="..\..\rtjpeg.c" />
+    <ClCompile Include="..\..\rv10.c" />
+    <ClCompile Include="..\..\rv10enc.c" />
+    <ClCompile Include="..\..\rv20enc.c" />
+    <ClCompile Include="..\..\rv30.c" />
+    <ClCompile Include="..\..\rv30dsp.c" />
+    <ClCompile Include="..\..\rv34.c" />
+    <ClCompile Include="..\..\rv34dsp.c" />
+    <ClCompile Include="..\..\rv34_parser.c" />
+    <ClCompile Include="..\..\rv40.c" />
+    <ClCompile Include="..\..\rv40dsp.c" />
+    <ClCompile Include="..\..\s302m.c" />
+    <ClCompile Include="..\..\s302menc.c" />
+    <ClCompile Include="..\..\samidec.c" />
+    <ClCompile Include="..\..\sanm.c" />
+    <ClCompile Include="..\..\sbc.c" />
+    <ClCompile Include="..\..\sbcdec.c" />
+    <ClCompile Include="..\..\sbcdec_data.c" />
+    <ClCompile Include="..\..\sbcdsp.c" />
+    <ClCompile Include="..\..\sbcdsp_data.c" />
+    <ClCompile Include="..\..\sbcenc.c" />
+    <ClCompile Include="..\..\sbc_parser.c" />
+    <ClCompile Include="..\..\sbrdsp.c" />
+    <ClCompile Include="..\..\sbrdsp_fixed.c" />
+    <ClCompile Include="..\..\sbrdsp_template.c" />
+    <ClCompile Include="..\..\scpr.c" />
+    <ClCompile Include="..\..\screenpresso.c" />
+    <ClCompile Include="..\..\sgidec.c" />
+    <ClCompile Include="..\..\sgienc.c" />
+    <ClCompile Include="..\..\sgirledec.c" />
+    <ClCompile Include="..\..\sheervideo.c" />
+    <ClCompile Include="..\..\shorten.c" />
+    <ClCompile Include="..\..\simple_idct.c" />
+    <ClCompile Include="..\..\simple_idct_template.c" />
+    <ClCompile Include="..\..\sinewin.c" />
+    <ClCompile Include="..\..\sinewin_fixed.c" />
+    <ClCompile Include="..\..\sinewin_fixed_tablegen.c" />
+    <ClCompile Include="..\..\sinewin_tablegen.c" />
+    <ClCompile Include="..\..\sinewin_tablegen_template.c" />
+    <ClCompile Include="..\..\sipr.c" />
+    <ClCompile Include="..\..\sipr16k.c" />
+    <ClCompile Include="..\..\sipr_parser.c" />
+    <ClCompile Include="..\..\smacker.c" />
+    <ClCompile Include="..\..\smc.c" />
+    <ClCompile Include="..\..\smvjpegdec.c" />
+    <ClCompile Include="..\..\snappy.c" />
+    <ClCompile Include="..\..\snow.c" />
+    <ClCompile Include="..\..\snowdec.c" />
+    <ClCompile Include="..\..\snowenc.c" />
+    <ClCompile Include="..\..\snow_dwt.c" />
+    <ClCompile Include="..\..\sonic.c" />
+    <ClCompile Include="..\..\sp5xdec.c" />
+    <ClCompile Include="..\..\speedhq.c" />
+    <ClCompile Include="..\..\srtdec.c" />
+    <ClCompile Include="..\..\srtenc.c" />
+    <ClCompile Include="..\..\startcode.c" />
+    <ClCompile Include="..\..\subviewerdec.c" />
+    <ClCompile Include="..\..\sunrast.c" />
+    <ClCompile Include="..\..\sunrastenc.c" />
+    <ClCompile Include="..\..\svq1.c" />
+    <ClCompile Include="..\..\svq13.c" />
+    <ClCompile Include="..\..\svq1dec.c" />
+    <ClCompile Include="..\..\svq1enc.c" />
+    <ClCompile Include="..\..\svq3.c" />
+    <ClCompile Include="..\..\synth_filter.c" />
+    <ClCompile Include="..\..\tak.c" />
+    <ClCompile Include="..\..\takdec.c" />
+    <ClCompile Include="..\..\takdsp.c" />
+    <ClCompile Include="..\..\tak_parser.c" />
+    <ClCompile Include="..\..\targa.c" />
+    <ClCompile Include="..\..\targaenc.c" />
+    <ClCompile Include="..\..\targa_y216dec.c" />
+    <ClCompile Include="..\..\tdsc.c" />
+    <ClCompile Include="..\..\textdec.c" />
+    <ClCompile Include="..\..\texturedsp.c" />
+    <ClCompile Include="..\..\texturedspenc.c" />
+    <ClCompile Include="..\..\tiertexseqv.c" />
+    <ClCompile Include="..\..\tiff.c" />
+    <ClCompile Include="..\..\tiffenc.c" />
+    <ClCompile Include="..\..\tiff_common.c" />
+    <ClCompile Include="..\..\tiff_data.c" />
+    <ClCompile Include="..\..\tmv.c" />
+    <ClCompile Include="..\..\tpeldsp.c" />
+    <ClCompile Include="..\..\truemotion1.c" />
+    <ClCompile Include="..\..\truemotion2.c" />
+    <ClCompile Include="..\..\truemotion2rt.c" />
+    <ClCompile Include="..\..\truespeech.c" />
+    <ClCompile Include="..\..\tscc.c" />
+    <ClCompile Include="..\..\tscc2.c" />
+    <ClCompile Include="..\..\tta.c" />
+    <ClCompile Include="..\..\ttadata.c" />
+    <ClCompile Include="..\..\ttadsp.c" />
+    <ClCompile Include="..\..\ttaenc.c" />
+    <ClCompile Include="..\..\ttaencdsp.c" />
+    <ClCompile Include="..\..\twinvq.c" />
+    <ClCompile Include="..\..\twinvqdec.c" />
+    <ClCompile Include="..\..\txd.c" />
+    <ClCompile Include="..\..\ulti.c" />
+    <ClCompile Include="..\..\utils.c" />
+    <ClCompile Include="..\..\utvideo.c" />
+    <ClCompile Include="..\..\utvideodec.c" />
+    <ClCompile Include="..\..\utvideodsp.c" />
+    <ClCompile Include="..\..\utvideoenc.c" />
+    <ClCompile Include="..\..\v210dec.c" />
+    <ClCompile Include="..\..\v210enc.c" />
+    <ClCompile Include="..\..\v210x.c" />
+    <ClCompile Include="..\..\v308dec.c" />
+    <ClCompile Include="..\..\v308enc.c" />
+    <ClCompile Include="..\..\v408dec.c" />
+    <ClCompile Include="..\..\v408enc.c" />
+    <ClCompile Include="..\..\v410dec.c" />
+    <ClCompile Include="..\..\v410enc.c" />
+    <ClCompile Include="..\..\v4l2_buffers.c" />
+    <ClCompile Include="..\..\v4l2_context.c" />
+    <ClCompile Include="..\..\v4l2_fmt.c" />
+    <ClCompile Include="..\..\v4l2_m2m.c" />
+    <ClCompile Include="..\..\v4l2_m2m_dec.c" />
+    <ClCompile Include="..\..\v4l2_m2m_enc.c" />
+    <ClCompile Include="..\..\vaapi.c" />
+    <ClCompile Include="..\..\vaapi_decode.c" />
+    <ClCompile Include="..\..\vaapi_encode.c" />
+    <ClCompile Include="..\..\vaapi_encode_h264.c" />
+    <ClCompile Include="..\..\vaapi_encode_h265.c" />
+    <ClCompile Include="..\..\vaapi_encode_h26x.c" />
+    <ClCompile Include="..\..\vaapi_encode_mjpeg.c" />
+    <ClCompile Include="..\..\vaapi_encode_mpeg2.c" />
+    <ClCompile Include="..\..\vaapi_encode_vp8.c" />
+    <ClCompile Include="..\..\vaapi_encode_vp9.c" />
+    <ClCompile Include="..\..\vaapi_h264.c" />
+    <ClCompile Include="..\..\vaapi_hevc.c" />
+    <ClCompile Include="..\..\vaapi_mpeg2.c" />
+    <ClCompile Include="..\..\vaapi_mpeg4.c" />
+    <ClCompile Include="..\..\vaapi_vc1.c" />
+    <ClCompile Include="..\..\vaapi_vp9.c" />
+    <ClCompile Include="..\..\vb.c" />
+    <ClCompile Include="..\..\vble.c" />
+    <ClCompile Include="..\..\vc1.c" />
+    <ClCompile Include="..\..\vc1data.c" />
+    <ClCompile Include="..\..\vc1dec.c" />
+    <ClCompile Include="..\..\vc1dsp.c" />
+    <ClCompile Include="..\..\vc1_block.c" />
+    <ClCompile Include="..\..\vc1_loopfilter.c" />
+    <ClCompile Include="..\..\vc1_mc.c" />
+    <ClCompile Include="..\..\vc1_parser.c" />
+    <ClCompile Include="..\..\vc1_pred.c" />
+    <ClCompile Include="..\..\vc2enc.c" />
+    <ClCompile Include="..\..\vc2enc_dwt.c" />
+    <ClCompile Include="..\..\vcr1.c" />
+    <ClCompile Include="..\..\vda.c" />
+    <ClCompile Include="..\..\vda_h264.c" />
+    <ClCompile Include="..\..\vda_h264_dec.c" />
+    <ClCompile Include="..\..\vdpau.c" />
+    <ClCompile Include="..\..\vdpau_h264.c" />
+    <ClCompile Include="..\..\vdpau_hevc.c" />
+    <ClCompile Include="..\..\vdpau_mpeg12.c" />
+    <ClCompile Include="..\..\vdpau_mpeg4.c" />
+    <ClCompile Include="..\..\vdpau_vc1.c" />
+    <ClCompile Include="..\..\videodsp.c" />
+    <ClCompile Include="..\..\videodsp_template.c" />
+    <ClCompile Include="..\..\videotoolbox.c" />
+    <ClCompile Include="..\..\videotoolboxenc.c" />
+    <ClCompile Include="..\..\vima.c" />
+    <ClCompile Include="..\..\vmdaudio.c" />
+    <ClCompile Include="..\..\vmdvideo.c" />
+    <ClCompile Include="..\..\vmnc.c" />
+    <ClCompile Include="..\..\vorbis.c" />
+    <ClCompile Include="..\..\vorbisdec.c" />
+    <ClCompile Include="..\..\vorbisdsp.c" />
+    <ClCompile Include="..\..\vorbisenc.c" />
+    <ClCompile Include="..\..\vorbis_data.c" />
+    <ClCompile Include="..\..\vorbis_parser.c" />
+    <ClCompile Include="..\..\vp3.c" />
+    <ClCompile Include="..\..\vp3dsp.c" />
+    <ClCompile Include="..\..\vp3_parser.c" />
+    <ClCompile Include="..\..\vp5.c" />
+    <ClCompile Include="..\..\vp56.c" />
+    <ClCompile Include="..\..\vp56data.c" />
+    <ClCompile Include="..\..\vp56dsp.c" />
+    <ClCompile Include="..\..\vp56rac.c" />
+    <ClCompile Include="..\..\vp6.c" />
+    <ClCompile Include="..\..\vp6dsp.c" />
+    <ClCompile Include="..\..\vp8.c" />
+    <ClCompile Include="..\..\vp8dsp.c" />
+    <ClCompile Include="..\..\vp8_parser.c" />
+    <ClCompile Include="..\..\vp9.c" />
+    <ClCompile Include="..\..\vp9block.c" />
+    <ClCompile Include="..\..\vp9data.c" />
+    <ClCompile Include="..\..\vp9dsp.c" />
+    <ClCompile Include="..\..\vp9dsp_10bpp.c" />
+    <ClCompile Include="..\..\vp9dsp_12bpp.c" />
+    <ClCompile Include="..\..\vp9dsp_8bpp.c" />
+    <ClCompile Include="..\..\vp9dsp_template.c" />
+    <ClCompile Include="..\..\vp9lpf.c" />
+    <ClCompile Include="..\..\vp9mvs.c" />
+    <ClCompile Include="..\..\vp9prob.c" />
+    <ClCompile Include="..\..\vp9recon.c" />
+    <ClCompile Include="..\..\vp9_mc_template.c" />
+    <ClCompile Include="..\..\vp9_parser.c" />
+    <ClCompile Include="..\..\vp9_raw_reorder_bsf.c" />
+    <ClCompile Include="..\..\vp9_superframe_bsf.c" />
+    <ClCompile Include="..\..\vp9_superframe_split_bsf.c" />
+    <ClCompile Include="..\..\vqavideo.c" />
+    <ClCompile Include="..\..\wavpack.c" />
+    <ClCompile Include="..\..\wavpackenc.c" />
+    <ClCompile Include="..\..\webp.c" />
+    <ClCompile Include="..\..\webvttdec.c" />
+    <ClCompile Include="..\..\webvttenc.c" />
+    <ClCompile Include="..\..\wma.c" />
+    <ClCompile Include="..\..\wmadec.c" />
+    <ClCompile Include="..\..\wmaenc.c" />
+    <ClCompile Include="..\..\wmalosslessdec.c" />
+    <ClCompile Include="..\..\wmaprodec.c" />
+    <ClCompile Include="..\..\wmavoice.c" />
+    <ClCompile Include="..\..\wma_common.c" />
+    <ClCompile Include="..\..\wma_freqs.c" />
+    <ClCompile Include="..\..\wmv2.c" />
+    <ClCompile Include="..\..\wmv2data.c" />
+    <ClCompile Include="..\..\wmv2dec.c" />
+    <ClCompile Include="..\..\wmv2dsp.c" />
+    <ClCompile Include="..\..\wmv2enc.c" />
+    <ClCompile Include="..\..\wnv1.c" />
+    <ClCompile Include="..\..\wrapped_avframe.c" />
+    <ClCompile Include="..\..\ws-snd1.c" />
+    <ClCompile Include="..\..\xan.c" />
+    <ClCompile Include="..\..\xbmdec.c" />
+    <ClCompile Include="..\..\xbmenc.c" />
+    <ClCompile Include="..\..\xface.c" />
+    <ClCompile Include="..\..\xfacedec.c" />
+    <ClCompile Include="..\..\xfaceenc.c" />
+    <ClCompile Include="..\..\xiph.c" />
+    <ClCompile Include="..\..\xl.c" />
+    <ClCompile Include="..\..\xma_parser.c" />
+    <ClCompile Include="..\..\xpmdec.c" />
+    <ClCompile Include="..\..\xsubdec.c" />
+    <ClCompile Include="..\..\xsubenc.c" />
+    <ClCompile Include="..\..\xvididct.c" />
+    <ClCompile Include="..\..\xwddec.c" />
+    <ClCompile Include="..\..\xwdenc.c" />
+    <ClCompile Include="..\..\xxan.c" />
+    <ClCompile Include="..\..\y41pdec.c" />
+    <ClCompile Include="..\..\y41penc.c" />
+    <ClCompile Include="..\..\ylc.c" />
+    <ClCompile Include="..\..\yop.c" />
+    <ClCompile Include="..\..\yuv4dec.c" />
+    <ClCompile Include="..\..\yuv4enc.c" />
+    <ClCompile Include="..\..\zerocodec.c" />
+    <ClCompile Include="..\..\zmbv.c" />
+    <ClCompile Include="..\..\zmbvenc.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\GoTvCompilerConfig.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\..\GoTvDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\..\CoreLib\CompileConfig.h" />
+    <ClInclude Include="..\..\..\config_ffmpeg.h" />
+    <ClInclude Include="..\..\a64colors.h" />
+    <ClInclude Include="..\..\a64tables.h" />
+    <ClInclude Include="..\..\aac.h" />
+    <ClInclude Include="..\..\aaccoder_trellis.h" />
+    <ClInclude Include="..\..\aaccoder_twoloop.h" />
+    <ClInclude Include="..\..\aacdectab.h" />
+    <ClInclude Include="..\..\aacenc.h" />
+    <ClInclude Include="..\..\aacenctab.h" />
+    <ClInclude Include="..\..\aacenc_is.h" />
+    <ClInclude Include="..\..\aacenc_ltp.h" />
+    <ClInclude Include="..\..\aacenc_pred.h" />
+    <ClInclude Include="..\..\aacenc_quantization.h" />
+    <ClInclude Include="..\..\aacenc_quantization_misc.h" />
+    <ClInclude Include="..\..\aacenc_tns.h" />
+    <ClInclude Include="..\..\aacenc_utils.h" />
+    <ClInclude Include="..\..\aacps.h" />
+    <ClInclude Include="..\..\aacpsdsp.h" />
+    <ClInclude Include="..\..\aacps_fixed_tablegen.h" />
+    <ClInclude Include="..\..\aacps_tablegen.h" />
+    <ClInclude Include="..\..\aacps_tables.h" />
+    <ClInclude Include="..\..\aacsbr.h" />
+    <ClInclude Include="..\..\aacsbrdata.h" />
+    <ClInclude Include="..\..\aacsbr_fixed_tablegen.h" />
+    <ClInclude Include="..\..\aacsbr_tablegen.h" />
+    <ClInclude Include="..\..\aacsbr_tablegen_common.h" />
+    <ClInclude Include="..\..\aactab.h" />
+    <ClInclude Include="..\..\aac_ac3_parser.h" />
+    <ClInclude Include="..\..\aac_defines.h" />
+    <ClInclude Include="..\..\aandcttab.h" />
+    <ClInclude Include="..\..\ac3.h" />
+    <ClInclude Include="..\..\ac3dec.h" />
+    <ClInclude Include="..\..\ac3dec_data.h" />
+    <ClInclude Include="..\..\ac3dsp.h" />
+    <ClInclude Include="..\..\ac3enc.h" />
+    <ClInclude Include="..\..\ac3tab.h" />
+    <ClInclude Include="..\..\ac3_parser.h" />
+    <ClInclude Include="..\..\acelp_filters.h" />
+    <ClInclude Include="..\..\acelp_pitch_delay.h" />
+    <ClInclude Include="..\..\acelp_vectors.h" />
+    <ClInclude Include="..\..\adpcm.h" />
+    <ClInclude Include="..\..\adpcm_data.h" />
+    <ClInclude Include="..\..\adx.h" />
+    <ClInclude Include="..\..\alacdsp.h" />
+    <ClInclude Include="..\..\alac_data.h" />
+    <ClInclude Include="..\..\amr.h" />
+    <ClInclude Include="..\..\amrnbdata.h" />
+    <ClInclude Include="..\..\amrwbdata.h" />
+    <ClInclude Include="..\..\apng.h" />
+    <ClInclude Include="..\..\ass.h" />
+    <ClInclude Include="..\..\ass_split.h" />
+    <ClInclude Include="..\..\asv.h" />
+    <ClInclude Include="..\..\atrac.h" />
+    <ClInclude Include="..\..\atrac1data.h" />
+    <ClInclude Include="..\..\atrac3data.h" />
+    <ClInclude Include="..\..\atrac3plus.h" />
+    <ClInclude Include="..\..\atrac3plus_data.h" />
+    <ClInclude Include="..\..\audiodsp.h" />
+    <ClInclude Include="..\..\audio_frame_queue.h" />
+    <ClInclude Include="..\..\avcodec.h" />
+    <ClInclude Include="..\..\avcodec_internal.h" />
+    <ClInclude Include="..\..\avdct.h" />
+    <ClInclude Include="..\..\avfft.h" />
+    <ClInclude Include="..\..\bethsoftvideo.h" />
+    <ClInclude Include="..\..\bgmc.h" />
+    <ClInclude Include="..\..\binkdata.h" />
+    <ClInclude Include="..\..\binkdsp.h" />
+    <ClInclude Include="..\..\bintext.h" />
+    <ClInclude Include="..\..\blockdsp.h" />
+    <ClInclude Include="..\..\bmp.h" />
+    <ClInclude Include="..\..\bsf.h" />
+    <ClInclude Include="..\..\bswapdsp.h" />
+    <ClInclude Include="..\..\bytestream.h" />
+    <ClInclude Include="..\..\cabac.h" />
+    <ClInclude Include="..\..\cabac_functions.h" />
+    <ClInclude Include="..\..\canopus.h" />
+    <ClInclude Include="..\..\cavs.h" />
+    <ClInclude Include="..\..\cavsdsp.h" />
+    <ClInclude Include="..\..\cbrt_data.h" />
+    <ClInclude Include="..\..\cbrt_tablegen.h" />
+    <ClInclude Include="..\..\cbrt_tables.h" />
+    <ClInclude Include="..\..\celp_filters.h" />
+    <ClInclude Include="..\..\celp_math.h" />
+    <ClInclude Include="..\..\cfhd.h" />
+    <ClInclude Include="..\..\cga_data.h" />
+    <ClInclude Include="..\..\cookdata.h" />
+    <ClInclude Include="..\..\copy_block.h" />
+    <ClInclude Include="..\..\cos_table.h" />
+    <ClInclude Include="..\..\d3d11va.h" />
+    <ClInclude Include="..\..\dca.h" />
+    <ClInclude Include="..\..\dcaadpcm.h" />
+    <ClInclude Include="..\..\dcadata.h" />
+    <ClInclude Include="..\..\dcadct.h" />
+    <ClInclude Include="..\..\dcadec.h" />
+    <ClInclude Include="..\..\dcadsp.h" />
+    <ClInclude Include="..\..\dcaenc.h" />
+    <ClInclude Include="..\..\dcahuff.h" />
+    <ClInclude Include="..\..\dcamath.h" />
+    <ClInclude Include="..\..\dca_core.h" />
+    <ClInclude Include="..\..\dca_exss.h" />
+    <ClInclude Include="..\..\dca_lbr.h" />
+    <ClInclude Include="..\..\dca_syncwords.h" />
+    <ClInclude Include="..\..\dca_xll.h" />
+    <ClInclude Include="..\..\dct.h" />
+    <ClInclude Include="..\..\dct32.h" />
+    <ClInclude Include="..\..\dctref.h" />
+    <ClInclude Include="..\..\decode.h" />
+    <ClInclude Include="..\..\dirac.h" />
+    <ClInclude Include="..\..\diracdsp.h" />
+    <ClInclude Include="..\..\diractab.h" />
+    <ClInclude Include="..\..\dirac_arith.h" />
+    <ClInclude Include="..\..\dirac_dwt.h" />
+    <ClInclude Include="..\..\dirac_vlc.h" />
+    <ClInclude Include="..\..\dnxhddata.h" />
+    <ClInclude Include="..\..\dnxhdenc.h" />
+    <ClInclude Include="..\..\dolby_e.h" />
+    <ClInclude Include="..\..\dsd.h" />
+    <ClInclude Include="..\..\dsd_tablegen.h" />
+    <ClInclude Include="..\..\dv.h" />
+    <ClInclude Include="..\..\dvaudio.h" />
+    <ClInclude Include="..\..\dvbtxt.h" />
+    <ClInclude Include="..\..\dvdata.h" />
+    <ClInclude Include="..\..\dv_profile.h" />
+    <ClInclude Include="..\..\dv_profile_internal.h" />
+    <ClInclude Include="..\..\dv_tablegen.h" />
+    <ClInclude Include="..\..\dv_tables.h" />
+    <ClInclude Include="..\..\dxva2.h" />
+    <ClInclude Include="..\..\dxva2_internal.h" />
+    <ClInclude Include="..\..\eac3enc.h" />
+    <ClInclude Include="..\..\eac3_data.h" />
+    <ClInclude Include="..\..\eaidct.h" />
+    <ClInclude Include="..\..\elbg.h" />
+    <ClInclude Include="..\..\elsdec.h" />
+    <ClInclude Include="..\..\error_resilience.h" />
+    <ClInclude Include="..\..\evrcdata.h" />
+    <ClInclude Include="..\..\exif.h" />
+    <ClInclude Include="..\..\exrdsp.h" />
+    <ClInclude Include="..\..\faandct.h" />
+    <ClInclude Include="..\..\faanidct.h" />
+    <ClInclude Include="..\..\faxcompr.h" />
+    <ClInclude Include="..\..\fdctdsp.h" />
+    <ClInclude Include="..\..\ffjni.h" />
+    <ClInclude Include="..\..\fft-internal.h" />
+    <ClInclude Include="..\..\fft.h" />
+    <ClInclude Include="..\..\fft_table.h" />
+    <ClInclude Include="..\..\ffv1.h" />
+    <ClInclude Include="..\..\fits.h" />
+    <ClInclude Include="..\..\flac.h" />
+    <ClInclude Include="..\..\flacdata.h" />
+    <ClInclude Include="..\..\flacdsp.h" />
+    <ClInclude Include="..\..\flv.h" />
+    <ClInclude Include="..\..\fmtconvert.h" />
+    <ClInclude Include="..\..\frame_thread_encoder.h" />
+    <ClInclude Include="..\..\g722.h" />
+    <ClInclude Include="..\..\g722dsp.h" />
+    <ClInclude Include="..\..\g723_1.h" />
+    <ClInclude Include="..\..\g729.h" />
+    <ClInclude Include="..\..\g729data.h" />
+    <ClInclude Include="..\..\g729postfilter.h" />
+    <ClInclude Include="..\..\get_bits.h" />
+    <ClInclude Include="..\..\gif.h" />
+    <ClInclude Include="..\..\golomb.h" />
+    <ClInclude Include="..\..\gsm.h" />
+    <ClInclude Include="..\..\gsmdec_data.h" />
+    <ClInclude Include="..\..\h261.h" />
+    <ClInclude Include="..\..\h263.h" />
+    <ClInclude Include="..\..\h263data.h" />
+    <ClInclude Include="..\..\h263dsp.h" />
+    <ClInclude Include="..\..\h263_parser.h" />
+    <ClInclude Include="..\..\h264.h" />
+    <ClInclude Include="..\..\h2645_parse.h" />
+    <ClInclude Include="..\..\h264chroma.h" />
+    <ClInclude Include="..\..\h264data.h" />
+    <ClInclude Include="..\..\h264dec.h" />
+    <ClInclude Include="..\..\h264dsp.h" />
+    <ClInclude Include="..\..\h264idct.h" />
+    <ClInclude Include="..\..\h264pred.h" />
+    <ClInclude Include="..\..\h264qpel.h" />
+    <ClInclude Include="..\..\h264_mvpred.h" />
+    <ClInclude Include="..\..\h264_parse.h" />
+    <ClInclude Include="..\..\h264_ps.h" />
+    <ClInclude Include="..\..\h264_sei.h" />
+    <ClInclude Include="..\..\hap.h" />
+    <ClInclude Include="..\..\hevc.h" />
+    <ClInclude Include="..\..\hevcdec.h" />
+    <ClInclude Include="..\..\hevcdsp.h" />
+    <ClInclude Include="..\..\hevcpred.h" />
+    <ClInclude Include="..\..\hevc_data.h" />
+    <ClInclude Include="..\..\hevc_parse.h" />
+    <ClInclude Include="..\..\hevc_ps.h" />
+    <ClInclude Include="..\..\hevc_sei.h" />
+    <ClInclude Include="..\..\hpeldsp.h" />
+    <ClInclude Include="..\..\hqx.h" />
+    <ClInclude Include="..\..\hqxdsp.h" />
+    <ClInclude Include="..\..\hq_hqa.h" />
+    <ClInclude Include="..\..\hq_hqadsp.h" />
+    <ClInclude Include="..\..\htmlsubtitles.h" />
+    <ClInclude Include="..\..\huffman.h" />
+    <ClInclude Include="..\..\huffyuv.h" />
+    <ClInclude Include="..\..\huffyuvdsp.h" />
+    <ClInclude Include="..\..\huffyuvencdsp.h" />
+    <ClInclude Include="..\..\hwaccel.h" />
+    <ClInclude Include="..\..\idctdsp.h" />
+    <ClInclude Include="..\..\iirfilter.h" />
+    <ClInclude Include="..\..\imcdata.h" />
+    <ClInclude Include="..\..\imdct15.h" />
+    <ClInclude Include="..\..\indeo2data.h" />
+    <ClInclude Include="..\..\indeo3data.h" />
+    <ClInclude Include="..\..\indeo4data.h" />
+    <ClInclude Include="..\..\indeo5data.h" />
+    <ClInclude Include="..\..\intrax8.h" />
+    <ClInclude Include="..\..\intrax8dsp.h" />
+    <ClInclude Include="..\..\intrax8huf.h" />
+    <ClInclude Include="..\..\ivi.h" />
+    <ClInclude Include="..\..\ivi_dsp.h" />
+    <ClInclude Include="..\..\jacosub.h" />
+    <ClInclude Include="..\..\jni.h" />
+    <ClInclude Include="..\..\jpeg2000.h" />
+    <ClInclude Include="..\..\jpeg2000dsp.h" />
+    <ClInclude Include="..\..\jpeg2000dwt.h" />
+    <ClInclude Include="..\..\jpegls.h" />
+    <ClInclude Include="..\..\jpeglsdec.h" />
+    <ClInclude Include="..\..\jpegtables.h" />
+    <ClInclude Include="..\..\kbdwin.h" />
+    <ClInclude Include="..\..\lagarithrac.h" />
+    <ClInclude Include="..\..\lcl.h" />
+    <ClInclude Include="..\..\libopenh264.h" />
+    <ClInclude Include="..\..\libopus.h" />
+    <ClInclude Include="..\..\libschroedinger.h" />
+    <ClInclude Include="..\..\libvpx.h" />
+    <ClInclude Include="..\..\libwebpenc_common.h" />
+    <ClInclude Include="..\..\libxvid.h" />
+    <ClInclude Include="..\..\lossless_audiodsp.h" />
+    <ClInclude Include="..\..\lossless_videodsp.h" />
+    <ClInclude Include="..\..\lossless_videoencdsp.h" />
+    <ClInclude Include="..\..\lpc.h" />
+    <ClInclude Include="..\..\lsp.h" />
+    <ClInclude Include="..\..\lzf.h" />
+    <ClInclude Include="..\..\lzw.h" />
+    <ClInclude Include="..\..\mathops.h" />
+    <ClInclude Include="..\..\mdct15.h" />
+    <ClInclude Include="..\..\mediacodec.h" />
+    <ClInclude Include="..\..\mediacodecdec.h" />
+    <ClInclude Include="..\..\mediacodecdec_common.h" />
+    <ClInclude Include="..\..\mediacodec_surface.h" />
+    <ClInclude Include="..\..\mediacodec_sw_buffer.h" />
+    <ClInclude Include="..\..\mediacodec_wrapper.h" />
+    <ClInclude Include="..\..\metasound_data.h" />
+    <ClInclude Include="..\..\me_cmp.h" />
+    <ClInclude Include="..\..\mjpeg.h" />
+    <ClInclude Include="..\..\mjpegdec.h" />
+    <ClInclude Include="..\..\mjpegenc.h" />
+    <ClInclude Include="..\..\mjpegenc_common.h" />
+    <ClInclude Include="..\..\mjpegenc_huffman.h" />
+    <ClInclude Include="..\..\mlp.h" />
+    <ClInclude Include="..\..\mlpdsp.h" />
+    <ClInclude Include="..\..\mlp_parser.h" />
+    <ClInclude Include="..\..\mlz.h" />
+    <ClInclude Include="..\..\motionpixels_tablegen.h" />
+    <ClInclude Include="..\..\motionpixels_tables.h" />
+    <ClInclude Include="..\..\motion_est.h" />
+    <ClInclude Include="..\..\mpc.h" />
+    <ClInclude Include="..\..\mpc7data.h" />
+    <ClInclude Include="..\..\mpc8data.h" />
+    <ClInclude Include="..\..\mpc8huff.h" />
+    <ClInclude Include="..\..\mpcdata.h" />
+    <ClInclude Include="..\..\mpeg12.h" />
+    <ClInclude Include="..\..\mpeg12data.h" />
+    <ClInclude Include="..\..\mpeg12vlc.h" />
+    <ClInclude Include="..\..\mpeg4audio.h" />
+    <ClInclude Include="..\..\mpeg4data.h" />
+    <ClInclude Include="..\..\mpeg4video.h" />
+    <ClInclude Include="..\..\mpeg4video_parser.h" />
+    <ClInclude Include="..\..\mpegaudio.h" />
+    <ClInclude Include="..\..\mpegaudiodata.h" />
+    <ClInclude Include="..\..\mpegaudiodecheader.h" />
+    <ClInclude Include="..\..\mpegaudiodectab.h" />
+    <ClInclude Include="..\..\mpegaudiodsp.h" />
+    <ClInclude Include="..\..\mpegaudiotab.h" />
+    <ClInclude Include="..\..\mpegaudio_tablegen.h" />
+    <ClInclude Include="..\..\mpegaudio_tables.h" />
+    <ClInclude Include="..\..\mpegpicture.h" />
+    <ClInclude Include="..\..\mpegutils.h" />
+    <ClInclude Include="..\..\mpegvideo.h" />
+    <ClInclude Include="..\..\mpegvideodata.h" />
+    <ClInclude Include="..\..\mpegvideodsp.h" />
+    <ClInclude Include="..\..\mpegvideoencdsp.h" />
+    <ClInclude Include="..\..\mpeg_er.h" />
+    <ClInclude Include="..\..\mqc.h" />
+    <ClInclude Include="..\..\msgsmdec.h" />
+    <ClInclude Include="..\..\msmpeg4.h" />
+    <ClInclude Include="..\..\msmpeg4data.h" />
+    <ClInclude Include="..\..\msrledec.h" />
+    <ClInclude Include="..\..\mss12.h" />
+    <ClInclude Include="..\..\mss2dsp.h" />
+    <ClInclude Include="..\..\mss34dsp.h" />
+    <ClInclude Include="..\..\nellymoser.h" />
+    <ClInclude Include="..\..\nvenc.h" />
+    <ClInclude Include="..\..\on2avcdata.h" />
+    <ClInclude Include="..\..\options_table.h" />
+    <ClInclude Include="..\..\opus.h" />
+    <ClInclude Include="..\..\opusenc.h" />
+    <ClInclude Include="..\..\opusenc_psy.h" />
+    <ClInclude Include="..\..\opusenc_utils.h" />
+    <ClInclude Include="..\..\opustab.h" />
+    <ClInclude Include="..\..\opus_celt.h" />
+    <ClInclude Include="..\..\opus_pvq.h" />
+    <ClInclude Include="..\..\opus_rc.h" />
+    <ClInclude Include="..\..\paf.h" />
+    <ClInclude Include="..\..\parser.h" />
+    <ClInclude Include="..\..\pcm_tablegen.h" />
+    <ClInclude Include="..\..\pcm_tables.h" />
+    <ClInclude Include="..\..\pixblockdsp.h" />
+    <ClInclude Include="..\..\pixels.h" />
+    <ClInclude Include="..\..\png.h" />
+    <ClInclude Include="..\..\pngdsp.h" />
+    <ClInclude Include="..\..\pnm.h" />
+    <ClInclude Include="..\..\profiles.h" />
+    <ClInclude Include="..\..\proresdata.h" />
+    <ClInclude Include="..\..\proresdec.h" />
+    <ClInclude Include="..\..\proresdsp.h" />
+    <ClInclude Include="..\..\psymodel.h" />
+    <ClInclude Include="..\..\pthread_internal.h" />
+    <ClInclude Include="..\..\put_bits.h" />
+    <ClInclude Include="..\..\qcelpdata.h" />
+    <ClInclude Include="..\..\qdm2data.h" />
+    <ClInclude Include="..\..\qdm2_tabels.h" />
+    <ClInclude Include="..\..\qdm2_tablegen.h" />
+    <ClInclude Include="..\..\qpeldsp.h" />
+    <ClInclude Include="..\..\qsv.h" />
+    <ClInclude Include="..\..\qsvdec.h" />
+    <ClInclude Include="..\..\qsvenc.h" />
+    <ClInclude Include="..\..\qsv_internal.h" />
+    <ClInclude Include="..\..\ra144.h" />
+    <ClInclude Include="..\..\ra288.h" />
+    <ClInclude Include="..\..\ralfdata.h" />
+    <ClInclude Include="..\..\rangecoder.h" />
+    <ClInclude Include="..\..\ratecontrol.h" />
+    <ClInclude Include="..\..\raw.h" />
+    <ClInclude Include="..\..\rdft.h" />
+    <ClInclude Include="..\..\rectangle.h" />
+    <ClInclude Include="..\..\rl.h" />
+    <ClInclude Include="..\..\rle.h" />
+    <ClInclude Include="..\..\rnd_avg.h" />
+    <ClInclude Include="..\..\roqvideo.h" />
+    <ClInclude Include="..\..\rtjpeg.h" />
+    <ClInclude Include="..\..\rv10.h" />
+    <ClInclude Include="..\..\rv30data.h" />
+    <ClInclude Include="..\..\rv34.h" />
+    <ClInclude Include="..\..\rv34data.h" />
+    <ClInclude Include="..\..\rv34dsp.h" />
+    <ClInclude Include="..\..\rv34vlc.h" />
+    <ClInclude Include="..\..\rv40data.h" />
+    <ClInclude Include="..\..\rv40vlc2.h" />
+    <ClInclude Include="..\..\sbr.h" />
+    <ClInclude Include="..\..\sbrdsp.h" />
+    <ClInclude Include="..\..\sgi.h" />
+    <ClInclude Include="..\..\simple_idct.h" />
+    <ClInclude Include="..\..\sinewin.h" />
+    <ClInclude Include="..\..\sinewin_tablegen.h" />
+    <ClInclude Include="..\..\sinwin_table.h" />
+    <ClInclude Include="..\..\sipr.h" />
+    <ClInclude Include="..\..\sipr16kdata.h" />
+    <ClInclude Include="..\..\siprdata.h" />
+    <ClInclude Include="..\..\snappy.h" />
+    <ClInclude Include="..\..\snow.h" />
+    <ClInclude Include="..\..\snowdata.h" />
+    <ClInclude Include="..\..\snow_dwt.h" />
+    <ClInclude Include="..\..\sp5x.h" />
+    <ClInclude Include="..\..\startcode.h" />
+    <ClInclude Include="..\..\sunrast.h" />
+    <ClInclude Include="..\..\svq1.h" />
+    <ClInclude Include="..\..\svq1enc.h" />
+    <ClInclude Include="..\..\svq1enc_cb.h" />
+    <ClInclude Include="..\..\svq1_cb.h" />
+    <ClInclude Include="..\..\svq1_vlc.h" />
+    <ClInclude Include="..\..\synth_filter.h" />
+    <ClInclude Include="..\..\tableprint.h" />
+    <ClInclude Include="..\..\tableprint_vlc.h" />
+    <ClInclude Include="..\..\tak.h" />
+    <ClInclude Include="..\..\takdsp.h" />
+    <ClInclude Include="..\..\targa.h" />
+    <ClInclude Include="..\..\texturedsp.h" />
+    <ClInclude Include="..\..\thread.h" />
+    <ClInclude Include="..\..\tiff.h" />
+    <ClInclude Include="..\..\tiff_common.h" />
+    <ClInclude Include="..\..\tiff_data.h" />
+    <ClInclude Include="..\..\tpeldsp.h" />
+    <ClInclude Include="..\..\truemotion1data.h" />
+    <ClInclude Include="..\..\truespeech_data.h" />
+    <ClInclude Include="..\..\tscc2data.h" />
+    <ClInclude Include="..\..\ttadata.h" />
+    <ClInclude Include="..\..\ttadsp.h" />
+    <ClInclude Include="..\..\ttaencdsp.h" />
+    <ClInclude Include="..\..\twinvq.h" />
+    <ClInclude Include="..\..\twinvq_data.h" />
+    <ClInclude Include="..\..\ulti_cb.h" />
+    <ClInclude Include="..\..\unary.h" />
+    <ClInclude Include="..\..\utvideo.h" />
+    <ClInclude Include="..\..\utvideodsp.h" />
+    <ClInclude Include="..\..\v210dec.h" />
+    <ClInclude Include="..\..\v210enc.h" />
+    <ClInclude Include="..\..\v4l2_buffers.h" />
+    <ClInclude Include="..\..\v4l2_context.h" />
+    <ClInclude Include="..\..\v4l2_fmt.h" />
+    <ClInclude Include="..\..\v4l2_m2m.h" />
+    <ClInclude Include="..\..\vaapi.h" />
+    <ClInclude Include="..\..\vaapi_decode.h" />
+    <ClInclude Include="..\..\vaapi_encode.h" />
+    <ClInclude Include="..\..\vaapi_encode_h26x.h" />
+    <ClInclude Include="..\..\vaapi_internal.h" />
+    <ClInclude Include="..\..\vc1.h" />
+    <ClInclude Include="..\..\vc1acdata.h" />
+    <ClInclude Include="..\..\vc1data.h" />
+    <ClInclude Include="..\..\vc1dsp.h" />
+    <ClInclude Include="..\..\vc1_common.h" />
+    <ClInclude Include="..\..\vc1_pred.h" />
+    <ClInclude Include="..\..\vc2enc_dwt.h" />
+    <ClInclude Include="..\..\vda.h" />
+    <ClInclude Include="..\..\vda_vt_internal.h" />
+    <ClInclude Include="..\..\vdpau.h" />
+    <ClInclude Include="..\..\vdpau_compat.h" />
+    <ClInclude Include="..\..\vdpau_internal.h" />
+    <ClInclude Include="..\..\version.h" />
+    <ClInclude Include="..\..\videodsp.h" />
+    <ClInclude Include="..\..\videotoolbox.h" />
+    <ClInclude Include="..\..\vlc.h" />
+    <ClInclude Include="..\..\vorbis.h" />
+    <ClInclude Include="..\..\vorbisdsp.h" />
+    <ClInclude Include="..\..\vorbis_enc_data.h" />
+    <ClInclude Include="..\..\vorbis_parser.h" />
+    <ClInclude Include="..\..\vorbis_parser_internal.h" />
+    <ClInclude Include="..\..\vp3data.h" />
+    <ClInclude Include="..\..\vp3dsp.h" />
+    <ClInclude Include="..\..\vp56.h" />
+    <ClInclude Include="..\..\vp56data.h" />
+    <ClInclude Include="..\..\vp56dsp.h" />
+    <ClInclude Include="..\..\vp5data.h" />
+    <ClInclude Include="..\..\vp6data.h" />
+    <ClInclude Include="..\..\vp8.h" />
+    <ClInclude Include="..\..\vp8data.h" />
+    <ClInclude Include="..\..\vp8dsp.h" />
+    <ClInclude Include="..\..\vp9.h" />
+    <ClInclude Include="..\..\vp9data.h" />
+    <ClInclude Include="..\..\vp9dec.h" />
+    <ClInclude Include="..\..\vp9dsp.h" />
+    <ClInclude Include="..\..\vp9shared.h" />
+    <ClInclude Include="..\..\wavpack.h" />
+    <ClInclude Include="..\..\wavpackenc.h" />
+    <ClInclude Include="..\..\wma.h" />
+    <ClInclude Include="..\..\wmadata.h" />
+    <ClInclude Include="..\..\wmaprodata.h" />
+    <ClInclude Include="..\..\wmavoice_data.h" />
+    <ClInclude Include="..\..\wma_common.h" />
+    <ClInclude Include="..\..\wma_freqs.h" />
+    <ClInclude Include="..\..\wmv2.h" />
+    <ClInclude Include="..\..\wmv2data.h" />
+    <ClInclude Include="..\..\wmv2dsp.h" />
+    <ClInclude Include="..\..\xface.h" />
+    <ClInclude Include="..\..\xiph.h" />
+    <ClInclude Include="..\..\xvididct.h" />
+    <ClInclude Include="..\..\xvmc.h" />
+    <ClInclude Include="..\..\xvmc_internal.h" />
+    <ClInclude Include="..\..\xwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\libavcodec.pri" />
+    <None Include="..\..\..\..\..\libavcodec.pro" />
+    <None Include="..\..\libavcodec.v" />
+    <None Include="..\..\Makefile" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>FfmpegAvCodecLib</ProjectName>
+    <ProjectGuid>{A46F1201-A1FB-4321-9C4F-8721F7B4E355}</ProjectGuid>
+    <RootNamespace>GoTv</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\..\lib\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)\..\..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\..\..\lib\Win32\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)\..\..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\sysheaders;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\.openssl-1.0.2o\include\;$(ProjectDir)..\..\..\..\xbmc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <PrecompiledHeaderOutputFile>$(IntDir)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\sysheaders\;$(ProjectDir)..\..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\openssl-1.0.2p\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN64;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <PrecompiledHeaderOutputFile>$(IntDir)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\P2PCoreLibs\PlatformLib\win32\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\xbmc\;$(ProjectDir)..\..\..\..\..\..\P2PCoreLibs\;$(ProjectDir)..\..\..\..\..\..\P2PCoreLibs\openssl-1.0.2o\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;NHAVE_CONFIG_H;WIN32;_LIB;_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\sysheaders\;$(ProjectDir)..\..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\openssl-1.0.2p\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN64;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

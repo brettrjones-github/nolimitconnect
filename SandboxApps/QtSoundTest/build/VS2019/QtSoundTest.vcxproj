@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  
+  
+  
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" /><ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')"><Import Project="$(QtMsBuild)\qt_defaults.props" /></ImportGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"><OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir></PropertyGroup><PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><QtInstall>64BitVs2017Qt5.12.3</QtInstall><QtModules>core;network;gui;svg;multimedia;widgets</QtModules></PropertyGroup><PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"><QtInstall>64BitVs2017Qt5.12.3</QtInstall><QtModules>core;network;gui;svg;multimedia;widgets</QtModules></PropertyGroup><ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')"><Import Project="$(QtMsBuild)\qt.props" /></ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(ProjectDir)..\..\QtSoundTest;$(ProjectDir)..\..\;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      
+      
+    <QtMocDir>.\GeneratedFiles\$(ConfigurationName)</QtMocDir><QtMocFileName>moc_%(Filename).cpp</QtMocFileName></QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      
+    <QtUicDir>.\GeneratedFiles</QtUicDir><QtUicFileName>ui_%(Filename).h</QtUicFileName></QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      
+    <QtRccDir>.\GeneratedFiles</QtRccDir><QtRccFileName>qrc_%(Filename).cpp</QtRccFileName></QtRcc>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      
+      
+    <QtMocDir>.\GeneratedFiles\$(ConfigurationName)</QtMocDir><QtMocFileName>moc_%(Filename).cpp</QtMocFileName></QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      
+    <QtUicDir>.\GeneratedFiles</QtUicDir><QtUicFileName>ui_%(Filename).h</QtUicFileName></QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      
+    <QtRccDir>.\GeneratedFiles</QtRccDir><QtRccFileName>qrc_%(Filename).cpp</QtRccFileName></QtRcc>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\QtSoundTest\AudioDefs.h" />
+    <QtMoc Include="..\..\QtSoundTest\AudioOutThread.h">
+      
+      
+    </QtMoc>
+    <QtMoc Include="..\..\QtSoundTest\AudioInThread.h">
+      
+      
+    </QtMoc>
+    <ClInclude Include="..\..\QtSoundTest\IAudioInterface.h" />
+    <QtMoc Include="..\..\QtSoundTest\LogWidget.h">
+      
+      
+    </QtMoc>
+    <QtMoc Include="..\..\QtSoundTest\AudioMixer.h">
+      
+      
+    </QtMoc>
+    <ClInclude Include="..\..\QtSoundTest\AudioUtils.h" />
+    <ClInclude Include="..\..\QtSoundTest\IGoTvDefs.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxDebug.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxDefs.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxFileUtil.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxParse.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxTime.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxTimer.h" />
+    <ClInclude Include="..\..\QtSoundTest\VxTimeUtil.h" />
+    <QtMoc Include="..\..\QtSoundTest\WaveForm.h" />
+    <QtMoc Include="..\..\QtSoundTest\SoundTestThread.h" />
+    <QtMoc Include="..\..\QtSoundTest\SoundTestLogic.h" />
+    <QtMoc Include="..\..\QtSoundTest\mainwindow.h" />
+    <QtMoc Include="..\..\QtSoundTest\AudioTestGenerator.h" />
+    <QtMoc Include="..\..\QtSoundTest\AudioOutIo.h" />
+    <QtMoc Include="..\..\QtSoundTest\AudioIoMgr.h" />
+    <QtMoc Include="..\..\QtSoundTest\AudioInIo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\QtSoundTest\AudioInIo.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioInThread.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioIoMgr.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioMixer.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioOutIo.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioOutThread.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioTestGenerator.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\AudioUtils.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\LogWidget.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\main.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\mainwindow.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\SoundTestLogic.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\SoundTestThread.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\VxDebug.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\VxFileUtil.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\VxParse.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\VxTime.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\VxTimer.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\VxTimeUtil.cpp" />
+    <ClCompile Include="..\..\QtSoundTest\WaveForm.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="..\..\Forms\mainwindow.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="..\..\Resources\QtSoundTest.qrc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
