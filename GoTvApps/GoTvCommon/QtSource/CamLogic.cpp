@@ -120,8 +120,8 @@ void CamLogic::slotTakeSnapshot( void )
     notReadyCnt = 0;
     if( !m_isCapturingImage )
     {
-        //m_isCapturingImage = true;
-        //m_imageCapture->capture();
+        m_isCapturingImage = true;
+        m_imageCapture->capture();
     }
 }
 
