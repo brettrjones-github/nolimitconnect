@@ -69,11 +69,6 @@ android:{
     ANDROID_x86 = 0
     ANDROID_x86_64 = 0
 
-    DEST_EXE_DIR = $$PWD/bin-Android/lib/
-    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/lib/
-    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7/
-    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7/
-
     message(ANDROID_TARGET $${ANDROID_TARGET_ARCH})
 
     contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
@@ -130,8 +125,8 @@ android:{
     DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
     DEST_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
     DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
-    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7/
-    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7/
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7/$${TARGET_ARCH_NAME}/
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7/$${TARGET_ARCH_NAME}/
 
 #    contains(QMAKE_HOST.os,Windows):{
 #        DEST_EXE_DIR ~= s,/,\\,g # replace / with \
