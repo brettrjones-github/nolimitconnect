@@ -21,6 +21,8 @@
 
 #if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS) && !defined(__APPLE__)
 # include <unistd.h>
+# include <termios.h>
+# include <sys/termios.h>
 #endif // !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS) && !defined(__APPLE__)
 
 #ifdef __APPLE__
@@ -4004,7 +4006,7 @@ posix_openpty(PyObject *self, PyObject *noargs)
     slave_fd = open(slave_name, O_RDWR | O_NOCTTY); /* open slave */
     if (slave_fd < 0)
         return posix_error();
-#if !defined(__CYGWIN__) && !defined(HAVE_DEV_PTC) && !defined(TARGET_OS_ANDROID)
+#if defined(HAVE_STROPTS_H) && !defined(__CYGWIN__) && !defined(HAVE_DEV_PTC) && !defined(TARGET_OS_ANDROID)
     ioctl(slave_fd, I_PUSH, "ptem"); /* push ptem */
     ioctl(slave_fd, I_PUSH, "ldterm"); /* push ldterm */
 #ifndef __hpux
