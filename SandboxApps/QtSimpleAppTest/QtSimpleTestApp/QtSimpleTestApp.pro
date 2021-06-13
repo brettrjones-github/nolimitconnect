@@ -50,12 +50,15 @@ LIBS += -L$${BUILD_STATIC_LIBS_DIR} -lqtsimpleteststaticlib$${STATIC_LIB_EXTENTI
 
 
 #shared libs
+
 android:{
-message(OUT_PWD directory $${OUT_PWD})
+    message(OUT_PWD directory $${OUT_PWD})
     message(shared lib directory $$OUT_PWD/../QtSimpleTestSharedLib)
-    DEPENDPATH += $${DEST_SHARED_LIBS_DIR}
+    DEPENDPATH += $${BUILD_SHARED_LIBS_DIR}
+     message(shared depend path $${BUILD_SHARED_LIB_DIR})
     #DEPENDPATH += $${OUT_PWD}/../QtSimpleTestSharedLib
-    LIBS += -lQtSharedLibTest$${TARGET_ARCH_APPEND}
+    message(shared lib name QtSimpleTestSharedLib_$${TARGET_ARCH_NAME})
+    LIBS += -L$${BUILD_SHARED_LIB_DIR} -lQtSimpleTestSharedLib_$${TARGET_ARCH_NAME}
 }
 
 !android:{
