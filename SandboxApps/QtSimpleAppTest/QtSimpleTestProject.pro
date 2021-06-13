@@ -1,9 +1,10 @@
 requires(qtHaveModule(gui))
 
 TEMPLATE     = subdirs
-QT_FOR_CONFIG += gui
-CONFIG += no_docs_target
 
-
-SUBDIRS += QtSimpleTestSharedLib
+SUBDIRS += QtSimpleTestApp
 SUBDIRS += QtSimpleTestStaticLib
+SUBDIRS += QtSimpleTestSharedLib
+
+# what subproject depends on others
+QtSimpleTestApp.depends = QtSimpleTestStaticLib QtSimpleTestSharedLib

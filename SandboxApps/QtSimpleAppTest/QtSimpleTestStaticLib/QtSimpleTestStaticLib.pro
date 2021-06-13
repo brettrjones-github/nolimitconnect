@@ -1,8 +1,21 @@
+QT       += core gui svg widgets
 
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG -= sharedlib
+CONFIG += no_docs_target
+CONFIG += c++11
 
-TARGET=qtsimpleteststaticlib
+TARGET = qtsimpleteststaticlib
+TARGET_NAME=qtsimpleteststaticlib
+
+include(../config_detect_os.pri)
+
+!android:{
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+}
+
+DESTDIR = $${BUILD_STATIC_LIBS_DIR}
 
 SOURCES += \
         $$PWD/qtteststaticlib3.cpp
@@ -11,21 +24,7 @@ HEADERS += \
         $$PWD/qtteststaticlib3.h
 
 
-android:{
-    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.a $$PWD/../build-staticlibs/armeabi-v7a/
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
-}
 
 
-win32:{
-    copydata.commands = $(COPY_DIR)  $$shell_path($$OUT_PWD/*.lib) $$shell_path($$PWD/../../build-staticlibs/Windows/x64/)
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
-}
-
-
+message(qtsimpleteststaticlib OUT_PWD $$OUT_PWD)
+message(qtsimpleteststaticlib DESTDIR $$DESTDIR)

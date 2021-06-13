@@ -1,15 +1,20 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2019-01-20T11:11:14
-#
-#-------------------------------------------------
 
 QT       += core gui svg widgets
 
-TARGET = QtSimpleTestApp
 TEMPLATE = app
-
+CONFIG += no_docs_target
 CONFIG += c++11
+
+TARGET = QtSimpleTestApp
+TARGET_NAME=QtSimpleTestApp
+
+include(../config_detect_os.pri)
+
+!android:{
+#    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+}
+
+DESTDIR=$${DEST_EXE_DIR}
 
 INCLUDEPATH += $$PWD/../QtSimpleTestStaticLib
 INCLUDEPATH += $$PWD/../QtSimpleTestSharedLib
@@ -24,15 +29,40 @@ HEADERS += \
 FORMS += \
         $$PWD/mainwindow.ui
 
-CONFIG += mobility
-MOBILITY = 
+android:{
+    CONFIG += mobility
+    MOBILITY =
 
+    # NOTE: cannont substitute QtHellowWorldWithConfig with $${TARGET_NAME} becouse it causes "Cannot find android sources" error
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../../android_qt_manifest/QtSimpleTestApp/android
+
+    LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
+}
+
+message(qt bin directory $$[QT_INSTALL_BINS])
 
 #static libs
-LIBS += -lqtsimpleteststaticlibAndroidD
+message(static libs directory $${BUILD_STATIC_LIBS_DIR})
+message(static lib Name qtsimpleteststaticlib$${STATIC_LIB_EXTENTION})
+
+DEPENDPATH += $${BUILD_STATIC_LIBS_DIR}
+LIBS += -L$${BUILD_STATIC_LIBS_DIR} -lqtsimpleteststaticlib$${STATIC_LIB_EXTENTION}
+
 
 #shared libs
-LIBS += -lqtsimpletestsharedlibAndroid
+android:{
+message(OUT_PWD directory $${OUT_PWD})
+    message(shared lib directory $$OUT_PWD/../QtSimpleTestSharedLib)
+    DEPENDPATH += $${DEST_SHARED_LIBS_DIR}
+    #DEPENDPATH += $${OUT_PWD}/../QtSimpleTestSharedLib
+    LIBS += -lQtSharedLibTest$${TARGET_ARCH_APPEND}
+}
 
-#os libs
-LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
+!android:{
+    DEPENDPATH += $${DEST_EXE_DIR}/
+    message(shared lib directory $${DEST_EXE_DIR})
+    LIBS += -L$${DEST_EXE_DIR} -lQtSimpleTestSharedLib
+}
+
+
+

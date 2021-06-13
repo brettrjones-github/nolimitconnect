@@ -1,15 +1,19 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2019-01-20T11:11:14
-#
-#-------------------------------------------------
-
 QT       += core gui svg widgets
 
-TARGET = QtHelloWorld
 TEMPLATE = app
-
+CONFIG += no_docs_target
 CONFIG += c++11
+
+TARGET = QtHelloWorld
+TARGET_NAME=QtHelloWorld
+
+include(../config_detect_os.pri)
+
+!android:{
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+}
+
+DESTDIR=$${DEST_EXE_DIR}
 
 SOURCES += \
         $$PWD/QtHelloWorld/main.cpp \
@@ -22,27 +26,15 @@ FORMS += \
         $$PWD/QtHelloWorld/mainwindow.ui
 
 android:{
-CONFIG += mobility
-MOBILITY = 
+    CONFIG += mobility
+    MOBILITY =
 
-#os libs
-LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
+    # NOTE: cannont substitute QtHellowWorldWithConfig with $${TARGET_NAME} becouse it causes "Cannot find android sources" error
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../android_qt_manifest/QtHellowWorld/android
 
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+    LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
 }
 
-message($$[QT_INSTALL_BINS])
+message(qt bin directory $$[QT_INSTALL_BINS])
 
-DISTFILES += \
-    androidhelloworld/AndroidManifest.xml \
-    androidhelloworld/build.gradle \
-    androidhelloworld/gradle.properties \
-    androidhelloworld/gradlew \
-    androidhelloworld/gradlew.bat \
-    androidhelloworld/local.properties \
-    androidhelloworld/res/drawable/icon.png \
-    androidhelloworld/res/values/strings.xml
+
