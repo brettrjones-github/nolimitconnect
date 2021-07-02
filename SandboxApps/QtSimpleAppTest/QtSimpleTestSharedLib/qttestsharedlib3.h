@@ -12,6 +12,7 @@
 
 #if !defined(TARGET_OS_WINDOWS)
 # define IMPORT_EXPORT
+
 #endif
 
 // absolutely must have Q_DECL_EXPORT defined when building or .lib is not generated because of empty export table

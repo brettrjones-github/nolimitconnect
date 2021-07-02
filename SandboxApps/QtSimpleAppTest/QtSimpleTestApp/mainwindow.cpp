@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "qttestsharedlib3.h"
-#include "qtteststaticlib3.h"
+#include "../QtSimpleTestSharedLib/qttestsharedlib3.h"
+#include "../QtSimpleTestStaticLib/qtteststaticlib3.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
