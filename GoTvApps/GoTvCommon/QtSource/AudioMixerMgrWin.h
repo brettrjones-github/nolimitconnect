@@ -11,9 +11,9 @@
 #ifndef WEBRTC_AUDIO_DEVICE_AUDIO_MIXER_MANAGER_WIN_H
 #define WEBRTC_AUDIO_DEVICE_AUDIO_MIXER_MANAGER_WIN_H
 
-#include <GoTvCore/GoTvP2P/EchoCancel/WebRtcTypeDefs.h>
-#include <GoTvCore/GoTvP2P/EchoCancel/audio_device.h>
-#include <GoTvCore/GoTvP2P/EchoCancel/critical_section_wrapper.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/WebRtcTypeDefs.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/audio_device.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/critical_section_wrapper.h>
 #ifdef TARGET_OS_WINDOWS
 #include <Windows.h>
 #include <mmsystem.h>

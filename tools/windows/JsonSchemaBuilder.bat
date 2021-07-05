@@ -8,7 +8,7 @@ SET builddeps_dir=%base_dir%\tools\BuildDependencies
 SET bin_dir=%base_dir%\tools\bin\Win32
 SET msys_bin_dir=%builddeps_dir%\msys64
 IF NOT EXIST %msys_bin_dir% SET msys_bin_dir=%builddeps_dir%\msys32
-SET jsonrpc_path=%base_dir%\GoTvCore\xbmc\xbmc\interfaces\json-rpc
+SET jsonrpc_path=%base_dir%\kodi_src\xbmc\xbmc\interfaces\json-rpc
 SET jsonrpc_schema_path=%jsonrpc_path%\schema
 SET jsonrpc_output=ServiceDescription.h
 
@@ -18,7 +18,7 @@ rem echo " JASON bin_dir %bin_dir%"
 rem echo " JASON msys_bin_dir %msys_bin_dir%" 
 rem echo " JASON jsonrpc_path %msys_jsonrpc_path%" 
 rem echo " JASON jsonrpc_schema_path %jsonrpc_schema_path%" 
-SET xbmc_json_path=%base_dir%\GoTvCore\xbmc\addons\xbmc.json
+SET xbmc_json_path=%base_dir%\kodi_src\xbmc\addons\xbmc.json
 SET xbmc_json_output=addon.xml
 rem echo " JASON xbmc_json_path %xbmc_json_path%" 
 

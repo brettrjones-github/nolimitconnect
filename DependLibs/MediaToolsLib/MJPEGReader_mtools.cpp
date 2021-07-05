@@ -15,10 +15,10 @@
 
 #include "MJPEGReader.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IToGui.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
-#include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
 #include <CoreLib/VxFileUtil.h>
 

@@ -44,7 +44,7 @@
 #endif
 
 
-#include "GoTvCore/xbmc/xbmc/addons/kodi-addon-dev-kit/include/kodi/libXBMC_addon.h"
+#include "kodi_src/xbmc/xbmc/addons/kodi-addon-dev-kit/include/kodi/libXBMC_addon.h"
 
 extern ADDON::CHelper_libXBMC_addon * xbmc;
 

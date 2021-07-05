@@ -1,5 +1,5 @@
 #include "rar.hpp"
-#include <GoTvCore/xbmc/xbmc/GoTvCoreUtil.h>
+#include <kodi_src/xbmc/xbmc/GoTvCoreUtil.h>
 #include <utils/URIUtils.h>
 
 

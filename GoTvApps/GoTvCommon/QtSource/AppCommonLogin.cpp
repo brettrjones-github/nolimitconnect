@@ -25,7 +25,7 @@
 #include "AccountMgr.h"
 
 #include <GuiInterface/IGoTv.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxParse.h>

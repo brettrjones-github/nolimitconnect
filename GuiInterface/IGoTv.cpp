@@ -2,7 +2,7 @@
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
-#include <GoTvCore/xbmc/xbmc/utils/StringUtils.h>
+#include <kodi_src/xbmc/xbmc/utils/StringUtils.h>
 #include <libavutil/log.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -15,7 +15,7 @@
 #elif TARGET_OS_ANDROID
 # include "GuiInterface/OsAndroid/IAndroid.h"
 # include "CoreLib/VxJava.h"
-# include "GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h"
+# include "kodi_src/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h"
 #else 
 echo traget os is not defined
 #endif 
@@ -27,7 +27,7 @@ echo traget os is not defined
 #include "platform/Environment.h"
 #include "utils/log.h"
 
-#include "GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h"
+#include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
 
 #include <CoreLib/VxGlobals.h>

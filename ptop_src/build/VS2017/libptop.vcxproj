@@ -1,0 +1,1139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3A68081D-E8F9-4523-9436-530DE9E5530A}</ProjectGuid>
+    <RootNamespace>XBMC_PC</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>libptop</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">GoTvPtoP\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">GoTvPtoP\$(Configuration)\objs\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|x64'">$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;C:\Program Files %28x86%29\Visual Leak Detector\lib\Win64;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;C:\Program Files %28x86%29\Visual Leak Detector\lib\Win64;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|x64'">$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">$(ProjectName)-test</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|x64'">$(ProjectName)-test</TargetName>
+    <CustomBuildBeforeTargets Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    </CustomBuildBeforeTargets>
+    <CustomBuildBeforeTargets Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>NoLimitConnectCoreD</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetExt>.lib</TargetExt>
+    <TargetName>NoLimitConnectCore</TargetName>
+    <OutDir>$(ProjectDir)..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\libgotvptop;$(ProjectDir)..\..\..\kodi_src\xbmc;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\DependLibs;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\win32;$(ProjectDir)..\..\xbmc\addons\library.GoTv.guilib;$(ProjectDir)..\..\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\xbmc\addons\library.GoTv.adsp;$(ProjectDir)..\..\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>CoreLibD.lib;Upnp2LibD.lib;VxVideoLibD.lib;libcurlD.lib;libexpatD.lib;libcdioD.lib;libzipD.lib;libunrarxD.lib;libopencore-amrD.lib;libceltD.lib;libfaacD.lib;libxavsD.lib;Secur32.lib;librtmpD.lib;libbento4D.lib;CoreLibD.lib;Effects11D.lib;FfmpegAvCodecLibD.lib;FfmpegAvDeviceLibD.lib;FfmpegAvFilterLibD.lib;FfmpegAvFormatLibD.lib;FfmpegAvResampleLibD.lib;FfmpegAvUtilLibD.lib;FfmpegPostProcLibD.lib;FfmpegSwResampleLibD.lib;FfmpegSwScaleLibD.lib;libglewD.lib;libarmrwbencD.lib;libasprintfD.lib;libassD.lib;libbzip2D.lib;libcpluffD.lib;libcrocoD.lib;libcrossguidD.lib;libcrystalhdD.lib;libcurlD.lib;libdnssdD.lib;libexifD.lib;libfdk-aacD.lib;libflacD.lib;libfreetypeD.lib;libfribidiD.lib;libgnuD.lib;libgsmD.lib;libiconvD.lib;libilbcD.lib;libjpgD.lib;libkvazaarD.lib;liblameD.lib;liblzmaD.lib;liblzoD.lib;libmicrohttpdD.lib;libogg.lib;libopenjpegD.lib;libopusD.lib;libp8-platformD.lib;libpcreD.lib;libpngD.lib;libpthreadD.lib;libpythonD.lib;libshairplayD.lib;libshineD.lib;libsnappyD.lib;libspeexD.lib;libsshD.lib;libsslD.lib;libtagD.lib;libtheoraD.lib;libtinyxmlD.lib;libtwolameD.lib;libUPnPD.lib;libvorbisD.lib;libvpxD.lib;libwavepackD.lib;libwebpD.lib;libwelsdecD.lib;libx264D.lib;libx265D.lib;libxml2D.lib;libxsltD.lib;libxvidD.lib;libyajlD.lib;libzlibD.lib;libzvbiD.lib;MediaToolsLibD.lib;NetLibD.lib;PktLibD.lib;PlatformLibD.lib;d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+      <ProgramDatabaseFile>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDatabaseFile>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <FullProgramDatabaseFile>false</FullProgramDatabaseFile>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+    <FxCompile />
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\libgotvptop;$(ProjectDir)..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\kodi_src\xbmc;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\DependLibs;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\win32;$(ProjectDir)..\..\xbmc\addons\library.GoTv.guilib;$(ProjectDir)..\..\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\xbmc\addons\library.GoTv.adsp;$(ProjectDir)..\..\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>CoreLibD.lib;Upnp2LibD.lib;VxVideoLibD.lib;libcurlD.lib;libexpatD.lib;libcdioD.lib;libzipD.lib;libunrarxD.lib;libopencore-amrD.lib;libceltD.lib;libfaacD.lib;libxavsD.lib;Secur32.lib;librtmpD.lib;libbento4D.lib;CoreLibD.lib;Effects11D.lib;FfmpegAvCodecLibD.lib;FfmpegAvDeviceLibD.lib;FfmpegAvFilterLibD.lib;FfmpegAvFormatLibD.lib;FfmpegAvResampleLibD.lib;FfmpegAvUtilLibD.lib;FfmpegPostProcLibD.lib;FfmpegSwResampleLibD.lib;FfmpegSwScaleLibD.lib;libglewD.lib;libarmrwbencD.lib;libasprintfD.lib;libassD.lib;libbzip2D.lib;libcpluffD.lib;libcrocoD.lib;libcrossguidD.lib;libcrystalhdD.lib;libcurlD.lib;libdnssdD.lib;libexifD.lib;libfdk-aacD.lib;libflacD.lib;libfreetypeD.lib;libfribidiD.lib;libgnuD.lib;libgsmD.lib;libiconvD.lib;libilbcD.lib;libjpgD.lib;libkvazaarD.lib;liblameD.lib;liblzmaD.lib;liblzoD.lib;libmicrohttpdD.lib;libogg.lib;libopenjpegD.lib;libopusD.lib;libp8-platformD.lib;libpcreD.lib;libpngD.lib;libpthreadD.lib;libpythonD.lib;libshairplayD.lib;libshineD.lib;libsnappyD.lib;libspeexD.lib;libsshD.lib;libsslD.lib;libtagD.lib;libtheoraD.lib;libtinyxmlD.lib;libtwolameD.lib;libUPnPD.lib;libvorbisD.lib;libvpxD.lib;libwavepackD.lib;libwebpD.lib;libwelsdecD.lib;libx264D.lib;libx265D.lib;libxml2D.lib;libxsltD.lib;libxvidD.lib;libyajlD.lib;libzlibD.lib;libzvbiD.lib;MediaToolsLibD.lib;NetLibD.lib;PktLibD.lib;PlatformLibD.lib;d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+      <ProgramDatabaseFile>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDatabaseFile>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <FullProgramDatabaseFile>false</FullProgramDatabaseFile>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+    <FxCompile />
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <Lib>
+      <OutputFile>$(OutDir)NoLimitConnectCoreD$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\;..\..\xbmc\;..\..\xbmc\cores\VideoPlayer;..\..\xbmc\win32;..\..\lib;..\..\lib\win32\ffmpeg;..\..\lib\libUPnP;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Platinum\Source\Extras;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\lib\win32\pcre;..\..\lib\win32\Effects11\inc;..\..\lib\win32;..\..\xbmc\cores\AudioEngine\;..\..\addons\library.GoTv.guilib;..\..\addons\library.xbmc.addon;..\..\addons\library.xbmc.pvr;..\..\addons\library.xbmc.codec;shaders;..\..\lib\gtest\include;..\..\tools\depends\native\libsquish-native\src;%(AdditionalIncludeDirectories);GoTvCore\$(Configuration);..\..\addons\library.xbmc.adsp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;D3D_DEBUG_INFO;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ObjectFileName>$(IntDir)\a\a\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;CrossGuidd.lib;ws2_32.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;strmiids.lib;dxguid.lib;mfuuid.lib;comctl32.lib;yajl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)-test.exe</OutputFile>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc;msvcrt;libcmt;msvcrtd;msvcprtd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <DelayLoadDLLs>libxslt.dll;dnssd.dll;dwmapi.dll;ssh.dll;sqlite3.dll;avcodec-56.dll;avfilter-5.dll;avformat-56.dll;avutil-54.dll;postproc-53.dll;swresample-1.dll;swscale-3.dll;d3dcompiler_47.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <AdditionalLibraryDirectories>..\..\lib\win32\ffmpeg\.libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;win81.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+    <FxCompile />
+    <PostBuildEvent>
+      <Command>copy “$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL” “$(TargetDir)”</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Testsuite|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\;..\..\xbmc\;..\..\xbmc\cores\VideoPlayer;..\..\xbmc\win32;..\..\lib;..\..\lib\win32\ffmpeg;..\..\lib\libUPnP;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Platinum\Source\Extras;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\lib\win32\pcre;..\..\lib\win32\Effects11\inc;..\..\lib\win32;..\..\xbmc\cores\AudioEngine\;..\..\addons\library.GoTv.guilib;..\..\addons\library.xbmc.addon;..\..\addons\library.xbmc.pvr;..\..\addons\library.xbmc.codec;shaders;..\..\lib\gtest\include;..\..\tools\depends\native\libsquish-native\src;%(AdditionalIncludeDirectories);GoTvCore\$(Configuration);..\..\addons\library.xbmc.adsp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;D3D_DEBUG_INFO;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ObjectFileName>$(IntDir)\a\a\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;CrossGuidd.lib;ws2_32.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;strmiids.lib;dxguid.lib;mfuuid.lib;comctl32.lib;yajl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)-test.exe</OutputFile>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc;msvcrt;libcmt;msvcrtd;msvcprtd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <DelayLoadDLLs>libxslt.dll;dnssd.dll;dwmapi.dll;ssh.dll;sqlite3.dll;avcodec-56.dll;avfilter-5.dll;avformat-56.dll;avutil-54.dll;postproc-53.dll;swresample-1.dll;swscale-3.dll;d3dcompiler_47.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <AdditionalLibraryDirectories>..\..\lib\win32\ffmpeg\.libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;win81.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+    <FxCompile />
+    <PostBuildEvent>
+      <Command>copy “$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL” “$(TargetDir)”</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\P2PCoreLibs\PlatformLib\win32;..\..\;..\..\DependLibs\;..\..\DependLibs\python\;..\..\xbmc\;..\..\xbmc\cores\VideoPlayer;..\..\xbmc\win32;..\..\DependLibs;..\..\DependLibs\ffmpeg;..\..\DependLibs\win32\ffmpeg;..\..\DependLibs\libUPnP;..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;..\..\DependLibs\libUPnP\Platinum\Source\Platinum;..\..\DependLibs\libUPnP\Platinum\Source\Core;..\..\DependLibs\libUPnP\Platinum\Source\Extras;..\..\DependLibs\libUPnP\Neptune\Source\Core;..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;..\..\DependLibs\win32\pcre;..\..\DependLibs\Effects11\inc;..\..\DependLibs\win32;..\..\xbmc\cores\AudioEngine\;..\..\addons\library.GoTv.guilib;..\..\addons\library.xbmc.addon;..\..\addons\library.xbmc.pvr;..\..\addons\library.xbmc.codec;shaders;..\..\tools\depends\native\libsquish-native\src;%(AdditionalIncludeDirectories);GoTvCore\$(Configuration);..\..\addons\library.xbmc.adsp;../../xbmc/platform/win32/;$(ProjectDir)..\..\..\P2PCoreLibs;$(ProjectDir)..\..\..\P2PCoreLibs\FreeTypeLib\include;$(ProjectDir)..\..\..\P2PCoreLibs\PlatformLib\win32</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NOMINMAX;_USE_32BIT_TIME_T;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <StringPooling>false</StringPooling>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Mpr.lib;Iphlpapi.lib;PowrProf.lib;d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;setupapi.lib;dwmapi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <DelayLoadDLLs>dwmapi.dll;;avcodec-56.dll;avfilter-5.dll;avformat-56.dll;avutil-54.dll;postproc-53.dll;swresample-1.dll;swscale-3.dll;d3dcompiler_47.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)..\..\..\lib\$(Platform)\%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;win81.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+    <FxCompile />
+    <PostBuildEvent>
+      <Command>copy "$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL" "$(TargetDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\libgotvptop;$(ProjectDir)..\..\..\kodi_src\xbmc;$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\DependLibs;$(ProjectDir)..\..\xbmc\xbmc;$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\DependLibs\PlatformLib\win32;$(ProjectDir)..\..\xbmc\addons\library.GoTv.guilib;$(ProjectDir)..\..\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\xbmc\addons\library.GoTv.adsp;$(ProjectDir)..\..\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_HAS_ITERATOR_DEBUGGING=0;_ITERATOR_DEBUG_LEVEL=0;NDEBUG;TARGET_OS_WINDOWS;_LIB;LIB_STATIC;NOMINMAX;__STDC_CONSTANT_MACROS;</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <StringPooling>
+      </StringPooling>
+      <PrecompiledHeaderOutputFile />
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <BufferSecurityCheck>
+      </BufferSecurityCheck>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MinSpace</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <OmitFramePointers />
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat />
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Mpr.lib;Iphlpapi.lib;PowrProf.lib;d3d11.lib;DInput8.lib;DSound.lib;winmm.lib;setupapi.lib;dwmapi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)NoLimitConnectCore$(TargetExt)</OutputFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <DelayLoadDLLs>dwmapi.dll;;avcodec-56.dll;avfilter-5.dll;avformat-56.dll;avutil-54.dll;postproc-53.dll;swresample-1.dll;swscale-3.dll;d3dcompiler_47.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)..\..\..\lib\$(Platform)\%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;win81.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+    <FxCompile />
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <Lib>
+      <OutputFile>$(OutDir)NoLimitConnectCore$(TargetExt)</OutputFile>
+      <LinkTimeCodeGeneration />
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferPktCreate.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetInfo.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetInfoDb.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetMgr.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetRxSession.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetTxSession.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetXferDb.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetXferMgr.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetXferPktCreate.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\AssetMgr\AssetXferSession.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\BaseInfo\BaseHostInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BaseInfo\BaseInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BaseInfo\BaseJoinInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BaseInfo\BaseSessionInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BigListLib\BigList.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\BigListLib\BigListDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BigListLib\BigListInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BigListLib\BigListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobXferDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\BlobXferMgr\BlobXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\ConnectedInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\ConnectedListAll.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\ConnectedListBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\ConnectionMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\ConnectReqInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\HandshakeInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\HandshakeList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\IConnectedCallback.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Connections\IConnectRequest.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ConnectMgr\ConnectInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ConnectMgr\ConnectInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ConnectMgr\ConnectMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_core.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_core_mips.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_core_neon.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_core_sse2.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_logging_file_handling.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_rdft.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_rdft_mips.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_rdft_neon.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_rdft_sse2.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\aec_resampler.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\atomic32_posix.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\atomic32_win.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\audio_device_buffer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\audio_device_generic.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\audio_util.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\base64.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\block_mean_calculator.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\checks.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\common_types.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\cpu_features.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\cpu_features_android.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\cpu_features_linux.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\criticalsection.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\delay_estimator.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\delay_estimator_wrapper.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\echo_cancellation.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\event.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\event_timer_posix.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\event_timer_win.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\event_wrapper.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\fileutils.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\fine_audio_buffer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\logging.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\pathutils.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\platform_file.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\platform_thread.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\random.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\randomization_functions.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\ring_buffer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\stringencode.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\stringutils.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\thread_checker_impl.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\tick_util.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\timeutils.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\urlencode.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\wav_file.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\wav_header.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\win32.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\EchoCancel\win32filesystem.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostConnectInterface.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostDefs.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostedEntry.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostListEntry.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\HostSettingBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\JoinedEntry.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\HostMgr\RandomConnectEntry.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\MediaProcessor\AudioUtil.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\MediaProcessor\EchoCancel.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\MediaProcessor\MediaProcessor.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetActionAnnounce.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetActionBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetActionIdle.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetActionIsMyPortOpen.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetActionRandomConnect.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetServiceHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetServicesMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetServices\NetServiceUtils.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkMonitor\NetStatusAccum.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkMonitor\NetworkMonitor.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkTest\IsPortOpenTest.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkTest\NetworkTestBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkTest\PingResponseServer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkTest\QueryHostIdTest.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\NetworkTest\RunUrlAction.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\ConnectRequest.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\DirectConnectTester.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\Firewall.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetConnector.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetPortForward.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkEventAvail.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkEventBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkEventLost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateAnnounce.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateAvail.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateGetRelayList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateLost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateMachine.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateOnlineDirect.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateOnlineThroughRelay.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateRelaySearch.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\NetworkStateTestConnection.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\RcMulticastBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\RcMulticastBroadcast.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Network\RcMulticastListen.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseXferDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferBase\OfferBaseXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientXferDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostXferDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\BrowserHttpConnection.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\ContactList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\EngineParams.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\EngineSettings.cpp">
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\FileShareSettings.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PConnectList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngine.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineAssetMgrCallbacks.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineConnect.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineConnections.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineContact.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineFromGui.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineHostList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineIgnoredAndHackers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineMediaProcessorCallbacks.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEnginePktAnnChanged.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEnginePktHandlers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineRelay.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineScan.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineSearch.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineSktCallback.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\P2PEngineTimerThread.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\P2PEngine\VxSktLoopback.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\PluginSettings\PluginSetting.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\PluginSettings\PluginSettingDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\PluginSettings\PluginSettingMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\AudioJitterBuffer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileLibraryDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileLibraryMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileShareXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileShareXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileToXfer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileXferBaseMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\FileXferPluginSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\HostBaseMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\HostClientMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\HostClientSearchMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\HostSearchEntry.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\HostServerMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\HostServerSearchMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\LibraryFileInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\P2PSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseFileXfer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseFileXferPktHandlers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseHostClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseHostService.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseMultimedia.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBasePktHandlers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseRelay.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseRelayPktHandlers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseRelayTests.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseService.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseWebServer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseWebServerFiles.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBaseWebServerPktHandlers.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginChatRoomClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginChatRoomHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginClientPeerUser.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginConnectionTestClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginConnectionTestHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginFileXfer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginGroupClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginGroupHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginHostPeerUser.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginInvalid.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginMessenger.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginMgrSktApi.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginNetServices.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginNetworkHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginNetworkSearchList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginRandomConnectClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginRandomConnectHost.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginServiceAboutMe.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginServiceFileShare.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginServiceRelay.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginServiceStoryboard.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginServiceWebCam.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginSessionBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginSessionMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginTruthOrDare.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginVideoPhone.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginVoicePhone.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\RcWebProxy.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\Relay.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\RelayClientSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\RelayServerSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\RelaySession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\RxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\SessionMgrBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\SharedFileInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\SharedFilesDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\SharedFilesFinder.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\SharedFilesMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\TodGameSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\TxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\VideoFeedMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\VoiceFeedMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Search\RcScan.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Search\RcScanAction.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\Search\RcScanMatchedConnection.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbRxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbTxSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferPktCreate.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinInfoDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\UserOnlineMgr\UserOnlineMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\User\User.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\User\UserList.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\WebServer\RcWebPageBuilder.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\WebServer\RcWebPageSettings.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\WebServer\RcWebServer.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\WebServer\RcWebServerHttp.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\\WebServer\RcWebSkt.cpp" />
+    <ClInclude Include="..\..\..\GoTvCompilerConfig.h" />
+    <ClInclude Include="..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\GoTvDependLibrariesConfig.h" />
+    <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h" />
+    <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IDefs.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IFromGui.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IGoTv.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvEvents.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvGeometry.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvLib.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IGoTvRender.h" />
+    <ClInclude Include="..\..\..\GuiInterface\ILog.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IScan.h" />
+    <ClInclude Include="..\..\..\GuiInterface\IToGui.h" />
+    <ClInclude Include="..\..\..\GoTvTargetOsConfig.h" />
+    <ClInclude Include="..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh" />
+    <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h" />
+    <ClInclude Include="..\..\..\GuiInterface\OsWin32\IWin32.h" />
+    <ClInclude Include="..\..\config_gotvcore.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\AssetBaseXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetBase\BaseXferInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\AssetMgr\AssetXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BaseInfo\BaseHostInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BaseInfo\BaseInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BaseInfo\BaseJoinInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BaseInfo\BaseSessionInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BigListLib\BigList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BigListLib\BigListDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BigListLib\BigListInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BigListLib\BigListLib.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BigListLib\BigListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\BlobXferMgr\BlobXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\ConnectedInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\ConnectedListAll.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\ConnectedListBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\ConnectionMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\ConnectReqInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\HandshakeInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\HandshakeList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\IConnectedCallback.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Connections\IConnectRequest.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ConnectMgr\ConnectCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ConnectMgr\ConnectInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ConnectMgr\ConnectInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ConnectMgr\ConnectMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_common.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_core.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_core_internal.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_logging.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_logging_file_handling.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_rdft.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\aec_resampler.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\arraysize.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\array_view.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\atomic32.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\atomicops.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_device.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_device_buffer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_device_config.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_device_defines.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_device_generic.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_processing.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\audio_util.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\base64.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\basictypes.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\block_mean_calculator.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\byteorder.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\checks.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\common_types.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\constructormagic.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\cpu_features_wrapper.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\criticalsection.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\critical_section_wrapper.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\delay_estimator.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\delay_estimator_internal.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\delay_estimator_wrapper.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\echo_cancellation.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\echo_cancellation_internal.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\echo_common.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\event.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\event_timer_posix.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\event_timer_win.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\event_wrapper.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\fake_audio_device.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\fileutils.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\fine_audio_buffer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\format_macros.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\logging.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\module.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\module_common_types.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\pathutils.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\platform_file.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\platform_thread.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\platform_thread_types.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\random.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\real_fft.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\ring_buffer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\safe_conversions.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\safe_conversions_impl.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\scopedptrcollection.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\scoped_ptr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\scoped_ref_ptr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\sec_buffer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\signal_processing_library.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\spl_inl.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\spl_inl_armv7.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\spl_inl_mips.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\stringencode.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\stringutils.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\template_util.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\thread_annotations.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\thread_checker.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\thread_checker_impl.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\tick_util.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\timeutils.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\urlencode.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\wav_file.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\wav_header.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\WebRtcTypeDefs.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\win32.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\EchoCancel\win32filesystem.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostJoinMgr\HostJoinMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostConnectInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostDefs.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostedEntry.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostListEntry.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\HostSettingBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\JoinedEntry.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\HostMgr\RandomConnectEntry.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\MediaProcessor\AudioUtil.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\MediaProcessor\EchoCancel.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\MediaProcessor\MediaClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\MediaProcessor\MediaProcessor.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\MediaProcessor\RawAudio.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\MediaProcessor\RawVideo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetActionAnnounce.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetActionBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetActionIdle.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetActionIsMyPortOpen.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetActionRandomConnect.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetServiceDefs.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetServiceHdr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetServiceHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetServicesMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetServices\NetServiceUtils.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkMonitor\NetStatusAccum.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkMonitor\NetworkMonitor.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkTest\IsPortOpenTest.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkTest\NetworkTestBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkTest\PingResponseServer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkTest\QueryHostIdTest.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\NetworkTest\RunUrlAction.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\ConnectRequest.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\DirectConnectTester.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\Firewall.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetConnector.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetPortForward.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkDefs.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkEventAvail.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkEventBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkEventLost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateAnnounce.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateAvail.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateGetRelayList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateLost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateMachine.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateOnlineDirect.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateOnlineThroughRelay.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateRelaySearch.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\NetworkStateTestConnection.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\RcMulticastBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\RcMulticastBroadcast.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Network\RcMulticastListen.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferBase\OfferBaseXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferClientMgr\OfferClientXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\OfferHostMgr\OfferHostXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\BrowserHttpConnection.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\ContactList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\EngineParams.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\EngineSettings.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\EngineSettingsDefaultValues.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\FileShareSettings.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\P2PConnectList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\P2PEngine.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\P2PEngine\VxSktLoopback.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\PluginSettings\PluginSetting.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\PluginSettings\PluginSettingDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\PluginSettings\PluginSettingMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\AudioJitterBuffer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileLibraryDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileLibraryMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileShareXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileShareXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileToXfer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileXferBaseMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\FileXferPluginSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\HostBaseMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\HostClientMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\HostClientSearchMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\HostSearchEntry.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\HostServerMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\HostServerSearchMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\LibraryFileInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\P2PSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseFileXfer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseHostClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseHostService.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseMultimedia.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseRelay.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseService.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginBaseWebServer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginChatRoomClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginChatRoomHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginClientPeerUser.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginConnectionTestClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginConnectionTestHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginFileXfer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginGroupClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginGroupHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginHostPeerUser.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginInvalid.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginMessenger.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginNetServices.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginNetworkHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginNetworkSearchList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginRandomConnectClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginRandomConnectHost.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginServiceAboutMe.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginServiceFileShare.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginServiceRelay.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginServiceStoryboard.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginServiceWebCam.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginSessionBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginSessionMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginTruthOrDare.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginVideoPhone.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginVoicePhone.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RcWebProxy.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\Relay.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RelayClientSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RelayClientTestSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RelayServerSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RelayServerTestSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RelaySession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\RxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\SessionMgrBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\SharedFileInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\SharedFilesDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\SharedFilesFinder.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\SharedFilesMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\TodGameSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\TxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\VideoFeedMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\VoiceFeedMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Search\RcScan.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Search\RcScanAction.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Search\RcScanMatchedConnection.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\Search\RcScanPic.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbRxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbTxSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\ThumbMgr\ThumbXferSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinInfoDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\UserOnlineMgr\UserOnlineCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\UserOnlineMgr\UserOnlineMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\User\User.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\User\UserList.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\WebServer\RcWebPageBuilder.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\WebServer\RcWebPageSettings.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\WebServer\RcWebServer.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\WebServer\RcWebServerLib.h" />
+    <ClInclude Include="..\..\ptop_engine_src\\WebServer\RcWebSkt.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\GoTvVersion.txt" />
+    <Text Include="..\..\ptop_engine_src\\EchoCancel\WEBRTC_LICENSE.txt" />
+    <Text Include="..\..\ptop_engine_src\\EchoCancel\WEBRTC_LICENSE_THIRD_PARTY.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\libptopengine.pri" />
+    <None Include="..\..\..\libptopengine.pro" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="XBMC_PC.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\$(ProjectFileName).targets.user" Condition="Exists('$(SolutionDir)\$(ProjectFileName).targets.user')" />
+</Project>

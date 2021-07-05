@@ -10,7 +10,7 @@ SET bin_dir=%base_dir%\tools\bin\Win32
 SET java_exe=java.exe
 echo " SWIG base_dir %base_dir%" 
 
-SET python_dir=%base_dir%\GoTvCore\xbmc\xbmc\interfaces\python
+SET python_dir=%base_dir%\kodi_src\xbmc\xbmc\interfaces\python
 echo " SWIG python_dir %python_dir%" 
 
 rem go into xbmc/interfaces/python
@@ -36,9 +36,9 @@ echo " running doxygen dir %doxygen_dir%"
 rem run doxygen
 "%bin_dir%\doxygen\doxygen.exe" > NUL 2>&1
 
-echo " running swig including %base_dir%\GoTvCore\xbmc\xbmc\"
+echo " running swig including %base_dir%\kodi_src\xbmc\xbmc\"
 rem run swig to generate the XML used by groovy to generate the python bindings
-"%bin_dir%\swig\swig.exe" -w401 -c++ -outdir "%python_generated_dir%" -o "%python_generated_dir%\%2.xml" -xml -I"%base_dir%\GoTvCore\xbmc\xbmc" -xmllang python "%swig_dir%\%2.i"
+"%bin_dir%\swig\swig.exe" -w401 -c++ -outdir "%python_generated_dir%" -o "%python_generated_dir%\%2.xml" -xml -I"%base_dir%\kodi_src\xbmc\xbmc" -xmllang python "%swig_dir%\%2.i"
 echo " running groovy "
 rem run groovy to generate the python bindings
 "%java_exe%" -cp "%groovy_dir%\groovy-all-2.4.4.jar;%groovy_dir%\commons-lang-2.6.jar;%generator_dir%;%python_dir%" groovy.ui.GroovyMain "%generator_dir%\Generator.groovy" "%python_generated_dir%\%2.xml" "%python_dir%\PythonSwig.cpp.template" "%python_generated_dir%\%2.cpp" "%doxygen_dir%"

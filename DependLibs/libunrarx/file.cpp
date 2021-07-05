@@ -2,9 +2,9 @@
 
 // BE WARNED THIS FILE IS HEAVILY MODIFIED TO BE USED WITH XBMC
 
-#include <GoTvCore/xbmc/xbmc/filesystem/Directory.h>
-#include <GoTvCore/xbmc/xbmc/filesystem/File.h>
-#include <GoTvCore/xbmc/xbmc/GoTvCoreUtil.h>
+#include <kodi_src/xbmc/xbmc/filesystem/Directory.h>
+#include <kodi_src/xbmc/xbmc/filesystem/File.h>
+#include <kodi_src/xbmc/xbmc/GoTvCoreUtil.h>
 #include <utils/URIUtils.h>
 
 //static File *CreatedFiles[32];

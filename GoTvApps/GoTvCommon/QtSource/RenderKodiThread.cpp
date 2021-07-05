@@ -1,7 +1,7 @@
 
 #include <app_precompiled_hdr.h>
 #include <GuiInterface/IGoTv.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>

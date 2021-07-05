@@ -30,7 +30,7 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <PktLib/VxSearchDefs.h>
 #include <NetLib/VxFileXferInfo.h>
 #include <CoreLib/VxFileInfo.h>

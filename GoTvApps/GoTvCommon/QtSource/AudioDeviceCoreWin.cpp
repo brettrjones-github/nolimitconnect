@@ -23,7 +23,7 @@
 #pragma message(">> INFO: Windows Core Audio is not supported in VS 2003")
 #endif
 
-#include <GoTvCore/GoTvP2P/EchoCancel/audio_device_config.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/audio_device_config.h>
 
 #ifdef WEBRTC_WINDOWS_CORE_AUDIO_BUILD
 
@@ -47,8 +47,8 @@
 #pragma comment( lib, "wmcodecdspuuid.lib" )
 #pragma comment(lib, "strmiids.lib")
 
-#include <GoTvCore/GoTvP2P/EchoCancel/platform_thread.h>
-//#include <GoTvCore/GoTvP2P/EchoCancel/sleep.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/platform_thread.h>
+//#include <ptop_src/ptop_engine_src/EchoCancel/sleep.h>
 //#include "webrtc/system_wrappers/include/trace.h"
 #include <CoreLib/VxDebug.h>
 

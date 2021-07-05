@@ -1,6 +1,6 @@
 #pragma once
 #include "GoTvDependLibrariesConfig.h"
-//#include "GoTvCore/xbmc/xbmc/config_kodi.h"
+//#include "kodi_src/xbmc/xbmc/config_kodi.h"
 #if 0
 
 #ifndef NPT_CONFIG_ENABLE_LOGGING

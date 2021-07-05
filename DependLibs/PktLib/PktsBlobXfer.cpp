@@ -14,7 +14,7 @@
 
 #include "PktTypes.h"
 #include "PktsBlobXfer.h"
-#include <GoTvCore/GoTvP2P/BlobXferMgr/BlobInfo.h>
+#include <ptop_src/ptop_engine_src/BlobXferMgr/BlobInfo.h>
 
 #include <CoreLib/VxChop.h>
 #include <CoreLib/VxDebug.h>

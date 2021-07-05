@@ -15,7 +15,7 @@
 
 #include "AppletBase.h"
 #include <GuiInterface/IToGui.h>
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
+#include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 
 #include "ui_AppletServiceBase.h"
 

@@ -17,7 +17,7 @@
 #include "GuiThumbMgr.h"
 #include "GuiParams.h"
 
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 
 //============================================================================
 GuiThumb::GuiThumb( AppCommon& app )

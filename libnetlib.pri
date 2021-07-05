@@ -1,5 +1,5 @@
 
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 
 HEADERS += 	$$PWD/DependLibs/NetLib/NetHostSetting.h \
     $$PWD/DependLibs/NetLib/InetAddress.h \

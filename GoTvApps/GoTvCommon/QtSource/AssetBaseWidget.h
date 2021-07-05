@@ -16,7 +16,7 @@
 
 #include "ToGuiActivityInterface.h"
 
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
 
 #include <QWidget>
 #include <QListWidgetItem>

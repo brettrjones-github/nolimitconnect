@@ -16,8 +16,8 @@
 #include "MJPEGWriter.h"
 #include "SndDefs.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
 #include <PktLib/PktVoiceReq.h>
 #include <PktLib/PktVoiceReply.h>

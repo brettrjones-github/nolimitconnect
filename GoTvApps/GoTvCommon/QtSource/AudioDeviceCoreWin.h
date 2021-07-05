@@ -15,7 +15,7 @@
 
 #if (_MSC_VER >= 1400)  // only include for VS 2005 and higher
 
-#include <GoTvCore/GoTvP2P/EchoCancel/audio_device_generic.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/audio_device_generic.h>
 
 #include <wmcodecdsp.h>      // CLSID_CWMAudioAEC
                              // (must be before audioclient.h)
@@ -27,7 +27,7 @@
 #include <mediaobj.h>        // IMediaObject
 
 //#include "webrtc/base/scoped_ref_ptr.h"
-#include <GoTvCore/GoTvP2P/EchoCancel/critical_section_wrapper.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/critical_section_wrapper.h>
 
 // Use Multimedia Class Scheduler Service (MMCSS) to boost the thread priority
 #pragma comment( lib, "avrt.lib" )

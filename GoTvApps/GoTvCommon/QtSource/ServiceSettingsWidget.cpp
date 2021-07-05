@@ -24,7 +24,7 @@
 #include "ActivityInformation.h"
 #include "GuiHelpers.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
 ServiceSettingsWidget::ServiceSettingsWidget( QWidget * parent )

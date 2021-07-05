@@ -22,11 +22,11 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileUtil.h>

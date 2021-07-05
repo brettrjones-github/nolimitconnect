@@ -24,7 +24,7 @@
 #include "AssetVoiceWidget.h"
 #include "AssetVideoWidget.h"
 
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================

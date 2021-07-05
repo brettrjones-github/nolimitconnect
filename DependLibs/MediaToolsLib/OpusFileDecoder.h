@@ -16,7 +16,7 @@
 
 #include <config_gotvcore.h>
 
-#include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 #include "OpusCallbackInterface.h"
 #include "SndDefs.h"
 #include "MyOpusHeader.h"

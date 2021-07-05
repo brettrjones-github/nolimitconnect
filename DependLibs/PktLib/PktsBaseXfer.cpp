@@ -15,8 +15,8 @@
 
 #include "PktTypes.h"
 #include "PktsBaseXfer.h"
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
-#include <GoTvCore/GoTvP2P/AssetBase/AssetBaseInfo.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
+#include <ptop_src/ptop_engine_src/AssetBase/AssetBaseInfo.h>
 
 #include <CoreLib/VxChop.h>
 #include <CoreLib/VxDebug.h>

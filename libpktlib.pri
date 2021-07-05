@@ -1,5 +1,5 @@
 INCLUDEPATH += $$PWD/DependLibs
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 
 HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/MatchParams.h \

@@ -4,7 +4,7 @@
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
-#include <GoTvCore/xbmc/xbmc/utils/StringUtils.h>
+#include <kodi_src/xbmc/xbmc/utils/StringUtils.h>
 #include <libavutil/log.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>

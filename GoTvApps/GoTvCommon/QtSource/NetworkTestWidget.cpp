@@ -18,9 +18,9 @@
 #include "AppCommon.h"
 #include "ActivityChooseTestWebsiteUrl.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 #include <NetLib/VxSktUtil.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>

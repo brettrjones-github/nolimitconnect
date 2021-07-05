@@ -784,8 +784,8 @@ set_property(TARGET _NoLimitConnectApp
     F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\libgotvptop;
     F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\GoTvCommon\QtSource;
     F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\GoTvCore\xbmc\xbmc;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine\;
+    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc;
+    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;
     F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\ffmpeg;
     F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\openssl-1.0.2p\include;
     F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP;

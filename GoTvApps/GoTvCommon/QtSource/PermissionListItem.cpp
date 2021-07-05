@@ -21,8 +21,8 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
 
 //============================================================================
 PermissionListItem::PermissionListItem( QListWidget * parent, AppletBase *parentApplet )

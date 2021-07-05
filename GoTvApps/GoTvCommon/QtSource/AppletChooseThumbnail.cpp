@@ -26,8 +26,8 @@
 #include <QUuid>
 #include <QFileDialog>
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxDebug.h>

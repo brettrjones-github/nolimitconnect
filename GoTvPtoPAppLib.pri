@@ -8,7 +8,7 @@ unix:!android{
 
 INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
 INCLUDEPATH += $$PWD/GoTvApps
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore
 

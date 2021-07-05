@@ -17,7 +17,7 @@
 #include "ActivityBase.h"
 #include "ui_ActivityNetworkSettings.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 
 #include <QDialog>
 

@@ -25,9 +25,9 @@
 #include "FileActionMenu.h"
 #include "GuiHelpers.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbInfo.h>
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbMgr.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
 
 #include <PktLib/VxSearchDefs.h>
 #include <NetLib/VxFileXferInfo.h>

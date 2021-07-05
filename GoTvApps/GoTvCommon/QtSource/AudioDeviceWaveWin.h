@@ -13,8 +13,8 @@
 
 #include <memory>
 
-#include <GoTvCore/GoTvP2P/EchoCancel/platform_thread.h>
-#include <GoTvCore/GoTvP2P/EchoCancel/audio_device_generic.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/platform_thread.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/audio_device_generic.h>
 #include "AudioMixerMgrWin.h"
 
 #pragma comment( lib, "winmm.lib" )

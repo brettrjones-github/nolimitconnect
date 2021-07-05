@@ -18,7 +18,7 @@
 #include <CoreLib/VxTimer.h>
 
 //#include <MediaToolsLib/SndDefs.h>
-//#include <GoTvCore/GoTvP2P/EchoCancel/ring_buffer.h>
+//#include <ptop_src/ptop_engine_src/EchoCancel/ring_buffer.h>
 
 namespace webrtc
 {

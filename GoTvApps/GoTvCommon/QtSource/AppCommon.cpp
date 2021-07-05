@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 
 #include "LogMgr.h"
 
@@ -52,9 +51,9 @@
 #include "FileListReplySession.h"
 #include "VxPushButton.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
-#include <GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h>
 
 #include <PktLib/VxCommon.h>
 

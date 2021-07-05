@@ -11,11 +11,11 @@
 #include <config_gotvapps.h>
 #ifdef TARGET_OS_WINDOWS
 
-#include <GoTvCore/GoTvP2P/EchoCancel/audio_device_config.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/audio_device_config.h>
 #include "AudioDeviceWaveWin.h"
 
-#include <GoTvCore/GoTvP2P/EchoCancel/event_wrapper.h>
-#include <GoTvCore/GoTvP2P/EchoCancel/tick_util.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/event_wrapper.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/tick_util.h>
 #include <CoreLib/VxDebug.h>
 
 #include <WinSock2.h>

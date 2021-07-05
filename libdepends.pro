@@ -7,7 +7,7 @@ INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/DependLibs/libcurl/include
 INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 
 include(config_static_dependlib.pri)
 

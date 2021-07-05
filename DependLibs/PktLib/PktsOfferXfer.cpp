@@ -14,7 +14,7 @@
 
 #include "PktTypes.h"
 #include "PktsOfferXfer.h"
-#include <GoTvCore/GoTvP2P/OfferBase/OfferBaseInfo.h>
+#include <ptop_src/ptop_engine_src/OfferBase/OfferBaseInfo.h>
 
 #include <GuiInterface/IDefs.h>
 #include <CoreLib/VxChop.h>

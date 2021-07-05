@@ -22,7 +22,7 @@
 
 #include <PktLib/PktAnnounce.h>
 
-#include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
+#include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
 class P2PEngine : public IFromGui, public MediaCallbackInterface
 {

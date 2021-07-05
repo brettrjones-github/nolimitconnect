@@ -15,7 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "AppSettings.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettingsDefaultValues.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettingsDefaultValues.h>
 
 #include <NetLib/VxGetRandomPort.h>
 #include <CoreLib/VxParse.h>

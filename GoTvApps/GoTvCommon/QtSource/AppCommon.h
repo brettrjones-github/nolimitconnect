@@ -48,7 +48,7 @@
 #include <QObject>
 #include <QElapsedTimer>
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 class AccountMgr;
 class AppSettings;

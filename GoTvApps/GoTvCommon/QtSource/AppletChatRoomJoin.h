@@ -15,7 +15,7 @@
 
 #include "AppletClientBase.h"
 
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
+#include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
 
 #include "ui_AppletChatRoomJoin.h"
 

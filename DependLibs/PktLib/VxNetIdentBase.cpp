@@ -17,7 +17,7 @@
 #include "VxNetIdentBase.h"
 #include "PktBlobEntry.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>

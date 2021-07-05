@@ -90,7 +90,7 @@ set_property(TARGET FfmpegAvDeviceLib
     J:\NlcJunk\DependLibs\ffmpeg\libavdevice\build\VS2017\..\..\..\..\;
     J:\NlcJunk\DependLibs\ffmpeg\libavdevice\build\VS2017\..\..\..\..\..\;
     J:\NlcJunk\DependLibs\ffmpeg\libavdevice\build\VS2017\..\..\..\..\..\sysheaders\;
-    J:\NlcJunk\DependLibs\ffmpeg\libavdevice\build\VS2017\..\..\..\..\..\GoTvCore\xbmc\xbmc;
+    J:\NlcJunk\DependLibs\ffmpeg\libavdevice\build\VS2017\..\..\..\..\..\kodi_src\xbmc\xbmc;
     J:\NlcJunk\DependLibs\ffmpeg\libavdevice\build\VS2017\..\..\..\..\openssl-1.0.2p\include\>
 )
 

@@ -16,7 +16,7 @@
 #include "ActivityChooseTestWebsiteUrl.h"
 #include "AppCommon.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 
 #include <QMessageBox>
 

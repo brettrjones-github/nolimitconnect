@@ -19,7 +19,7 @@
 #include "AppCommon.h"
 #include "GuiParams.h"
 
-#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
 
 //============================================================================
 DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetBaseInfo& assetInfo, QWidget * parent )

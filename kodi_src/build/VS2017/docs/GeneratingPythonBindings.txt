@@ -393,6 +393,6 @@ These were orignally part of libGoTvPtoP.vcxproj file to generate bindings..
     <None Include="..\..\..\tools\windows\CompileInfo.bat" />
     <None Include="..\..\..\tools\windows\JsonSchemaBuilder.bat" />
     <None Include="..\..\..\tools\windows\prepare-binary-addons-dev.bat" />
-    <None Include="..\..\GoTvP2P\P2PEngine\P2PEngine.pro" />
+    <None Include="..\..\ptop_src\P2PEngine\P2PEngine.pro" />
     <None Include="..\Qt\libGoTvCore.pri" />
   </ItemGroup>

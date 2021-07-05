@@ -15,7 +15,7 @@
 
 #include "GuiUserJoin.h"
 
-#include <GoTvCore/GoTvP2P/UserJoinMgr/UserJoinCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinCallbackInterface.h>
 
 #include <CoreLib/VxMutex.h>
 

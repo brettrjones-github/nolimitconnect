@@ -16,7 +16,7 @@
 #include "GuiThumb.h"
 #include "GuiThumbList.h"
 
-#include <GoTvCore/GoTvP2P/ThumbMgr/ThumbCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbCallbackInterface.h>
 
 #include <CoreLib/VxMutex.h>
 

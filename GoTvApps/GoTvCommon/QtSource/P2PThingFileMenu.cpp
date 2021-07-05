@@ -26,8 +26,8 @@
 #include "ActivityViewLibraryFiles.h"
 #include "AppletPersonalRecorder.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxGlobals.h>
 
 /*

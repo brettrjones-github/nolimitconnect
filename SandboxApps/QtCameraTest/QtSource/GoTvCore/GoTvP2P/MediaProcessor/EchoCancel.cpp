@@ -25,9 +25,9 @@
 #include "EchoCancel.h"
 #include "AudioUtil.h"
 
-#include <GoTvCore/GoTvP2P/EchoCancel/aec_core.h>
-#include <GoTvCore/GoTvP2P/EchoCancel/aec_resampler.h>
-#include <GoTvCore/GoTvP2P/EchoCancel/signal_processing_library.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/aec_core.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/aec_resampler.h>
+#include <ptop_src/ptop_engine_src/EchoCancel/signal_processing_library.h>
 
 namespace
 {

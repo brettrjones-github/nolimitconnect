@@ -19,8 +19,8 @@
 #include "GuiOfferSession.h"
 #include "AppGlobals.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
 
 #include <CoreLib/VxGlobals.h>
 

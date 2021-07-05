@@ -14,7 +14,7 @@
 //============================================================================
 #include <app_precompiled_hdr.h>
 #include <PktLib/VxSearchDefs.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include "ActivityScanProfiles.h"
 #include "AppGlobals.h"
