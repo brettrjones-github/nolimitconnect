@@ -20,7 +20,7 @@
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "MyIcons.h"
-#include "PopupMenu.h"
+//#include "PopupMenu.h"
 
 namespace
 {
@@ -308,6 +308,7 @@ void ActivityScanProfiles::onCountdownTimer( void )
 //============================================================================
 void ActivityScanProfiles::slotFriendClicked( void )
 {
+	/*
 	if( m_Ident )
 	{
 		PopupMenu popupMenu( m_MyApp, this );
@@ -319,5 +320,6 @@ void ActivityScanProfiles::slotFriendClicked( void )
 
         popupMenu.showFriendMenu( m_Ident );
 	}
+	*/
 }
 

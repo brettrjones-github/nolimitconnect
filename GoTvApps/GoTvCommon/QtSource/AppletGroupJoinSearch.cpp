@@ -15,7 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "PopupMenu.h"
+//#include "PopupMenu.h"
 #include "AppletGroupJoinSearch.h"
 #include "ActivityMessageBox.h"
 #include "GuiHostSession.h"

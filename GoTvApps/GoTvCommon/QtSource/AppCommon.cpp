@@ -27,20 +27,26 @@
 
 #include "HomeWindow.h"
 
-#include "ActivityTimedMessage.h"
 #include "ActivityCreateAccount.h"
+#include "ActivityMessageBox.h"
+#include "ActivityPermissions.h"
+#include "ActivitySoundOptions.h"
+#include "ActivityShowHelp.h"
+#include "ActivityTimedMessage.h"
+#include "ActivityViewLibraryFiles.h"
+
 #include "AppletDownloads.h"
 #include "AppletMultiMessenger.h"
 #include "AppletUploads.h"
-#include "ActivityShowHelp.h"
-#include "ActivityWebCamClient.h"
+
+//#include "ActivityWebCamClient.h"
 //#include "ActivityReplyFileOffer.h"
 #include "AppletPeerSessionFileOffer.h"
+
 //#include "ActivityToFriendTodGame.h"
 //#include "ActivityToFriendVoicePhone.h"
 //#include "ActivityToFriendVideoPhone.h"
-#include "ActivityMessageBox.h"
-#include "ActivityViewLibraryFiles.h"
+
 
 #include "GuiOfferSession.h"
 
@@ -2056,45 +2062,153 @@ void AppCommon::refreshFriend( VxGUID& onlineId )
 	emit signalRefreshFriend( friendId );
 }
 
+/*
 //============================================================================
-void  AppCommon::registerMetaData( void )
+void AppCommon::slotOptionsButtonClick( void )
 {
-	qRegisterMetaType<EAppErr>( "EAppErr" );
-    qRegisterMetaType<EApplet>( "EApplet" );
-    qRegisterMetaType<EAssetAction>( "EAssetAction" );
-    qRegisterMetaType<EAssetType>( "EAssetType" );
-    qRegisterMetaType<EConnectReason>( "EConnectReason" );
-    qRegisterMetaType<EConnectStatus>( "EConnectStatus" );
-    qRegisterMetaType<EContentCatagory>( "EContentCatagory" );
-    qRegisterMetaType<EContentRating>( "EContentRating" );
-    qRegisterMetaType<EFileFilterType>( "EFileFilterType" );
-    qRegisterMetaType<EFriendState>( "EFriendState" );
-    qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
-    qRegisterMetaType<EGenderType>( "EGenderType" );
-    qRegisterMetaType<EHostAnnounceStatus>( "EHostAnnounceStatus" );
-    qRegisterMetaType<EHostJoinStatus>( "EHostJoinStatus" );
-    qRegisterMetaType<EHostSearchStatus>( "EHostSearchStatus" );
-    qRegisterMetaType<EHostServiceType>( "EHostServiceType" );
-    qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
-    qRegisterMetaType<EHostType>( "EHostType" );
-    qRegisterMetaType<EInternetStatus>( "EInternetStatus" );
-    qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
-    qRegisterMetaType<ERunTestStatus>( "ERunTestStatus" );
-    qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );
-    qRegisterMetaType<ENetAvailStatus>( "ENetAvailStatus" );
-    qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
-    qRegisterMetaType<EOfferResponse>( "EOfferResponse" );
-    qRegisterMetaType<EOfferState>( "EOfferState" );
-    qRegisterMetaType<EOfferType>( "EOfferType" );
-    qRegisterMetaType<EPluginAccess>( "EPluginAccess" );
-    qRegisterMetaType<EPluginType>( "EPluginType" );
-    qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
-	qRegisterMetaType<EMSessionAction>( "EMSessionAction" );
-	qRegisterMetaType<ESndDef>( "ESndDef" );
-    qRegisterMetaType<EXferError>( "EXferError" );
-    qRegisterMetaType<EXferState>( "EXferState" );
-    qRegisterMetaType<PluginSetting>( "PluginSetting" );
-    qRegisterMetaType<VxGUID>( "VxGUID" );
-    qRegisterMetaType<VxNetIdent>( "VxNetIdent" );
-    qRegisterMetaType<uint32_t>( "uint32_t" );
+	PopupMenu popupMenu( *this, this );
+	popupMenu.setTitle( "Options");
+	popupMenu.addMenuItem( 1, getMyIcons().getIcon( eMyIconPermissions),  QObject::tr( "Edit Plugin Permissions" ) );
+	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconSpeakerOn ),  QObject::tr( "Sound Options" ) );
+	//popupMenu.addMenuItem( 6, getMyIcons().getIcon( eMyIconDebug ),  QObject::tr( "Debug Only" ) );
+	//popupMenu.addMenuItem( 8, getMyIcons().getIcon( eMyIconFolder ), "Setup file share" );
+	//popupMenu.addMenuItem( 12, getMyIcons().getIcon( eMyIconDebug ), "Debug Settings" );
+
+	connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onMenuOptionsSelected(int, PopupMenu *, ActivityBase *)));
+	popupMenu.exec();
+}*/
+
+//============================================================================
+void AppCommon::addPermissionMenuEntry(PopupMenu* poPopupMenu,
+	EPluginType		ePluginType,
+	EMyIcons		eIconType,
+	const char* pText)
+{
+	int iPluginPermission = m_Engine.getPluginPermission((int)ePluginType);
+
+	char as8Buf[255];
+	sprintf(as8Buf, pText, GuiParams::describePluginPermission((EFriendState)iPluginPermission).toUtf8().constData());
+	poPopupMenu->addMenuItem(ePluginType, getMyIcons().getIcon(eIconType), as8Buf);
+}
+
+//============================================================================
+void AppCommon::onMenuOptionsSelected(int iMenuId, PopupMenu* senderPopupMenu, ActivityBase* activityBase)
+{
+	std::string strTmp;
+	PopupMenu popupMenu(*this, activityBase);
+	switch (iMenuId)
+	{
+
+	case 1: // edit permissions
+	{
+		popupMenu.setTitle("Edit Access Permissions");
+		// file share plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeFileServer, eMyIconShareFilesNormal, "(%s) Who can access shared files");
+		// file offer plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeFileXfer, eMyIconSendFileNormal, "(%s) Who can offer to send a file");
+		// web cam broadcast plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeCamServer, eMyIconWebCamServer, "(%s) Who can access web cam broadcast");
+		// instant message p2p plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeMessenger, eMyIconMultiSession, "(%s) Who can offer chat session");
+		// VOIP p2p plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeVoicePhone, eMyIconVoicePhoneNormal, "(%s) Who can offer voice phone call");
+		// Video phone p2p plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeVideoPhone, eMyIconVideoPhoneNormal, "(%s) Who can offer video chat");
+		// Web Cam Truth Or Dare game p2p plugin
+		addPermissionMenuEntry(&popupMenu, ePluginTypeTruthOrDare, eMyIconTruthOrDareNormal, "(%s) Who can offer to play truth or dare");
+		// Relay
+		addPermissionMenuEntry(&popupMenu, ePluginTypeRelay, eMyIconRelay, "(%s) Who can use my device as a relay");
+		// Profile 
+		addPermissionMenuEntry(&popupMenu, ePluginTypeWebServer, eMyIconProfile, "(%s) Who can view my profile");
+		// Storyboard
+		addPermissionMenuEntry(&popupMenu, ePluginTypeStoryboard, eMyIconStoryBoardNormal, "(%s) Who can view my storyboard");
+		connect(&popupMenu, SIGNAL(menuItemClicked(int, PopupMenu*, ActivityBase*)), this, SLOT(onEditPermissionsSelected(int, PopupMenu*, ActivityBase*)));
+
+		popupMenu.exec();
+		break;
+	}
+
+	case 2: //Sound Options
+	{
+		ActivitySoundOptions oDlg(*this, this);
+		oDlg.exec();
+		break;
+	}
+
+	//case 7: //eTestParamSoundDelayTest
+	//	{
+	//		m_Engine.fromGuiTestCmd( IFromGui::eTestParamSoundDelayTest );
+	//	}
+	//	break;
+
+	//case 12: //Debug settings
+	//	{
+	//		//m_DebugSettingsDlg->show();
+	//		senderPopupMenu->setVisible( false );
+	//		ActivitySelectFileToSend selectFileDlg(	*this,
+	//												GetAppGlobals()->getUserIdent(), 
+	//												getCentralWidget() );
+	//		selectFileDlg.exec();
+	//	}
+	//	break;
+
+	default:
+		LogMsg(LOG_INFO, "onMenuServerSelected: unknown id %d\n", iMenuId);
+	}
+}
+
+//============================================================================
+//! user selected permission to edit
+void AppCommon::onEditPermissionsSelected(int iMenuId, PopupMenu* senderPopupMenu, ActivityBase*)
+{
+	Q_UNUSED(senderPopupMenu);
+	if (iMenuId > 0)
+	{
+		ActivityPermissions oDlg(*this, this);
+		oDlg.setPluginType((EPluginType)iMenuId);
+		oDlg.exec();
+	}
+}
+
+//============================================================================
+void  AppCommon::registerMetaData(void)
+{
+	qRegisterMetaType<EAppErr>("EAppErr");
+	qRegisterMetaType<EApplet>("EApplet");
+	qRegisterMetaType<EAssetAction>("EAssetAction");
+	qRegisterMetaType<EAssetType>("EAssetType");
+	qRegisterMetaType<EConnectReason>("EConnectReason");
+	qRegisterMetaType<EConnectStatus>("EConnectStatus");
+	qRegisterMetaType<EContentCatagory>("EContentCatagory");
+	qRegisterMetaType<EContentRating>("EContentRating");
+	qRegisterMetaType<EFileFilterType>("EFileFilterType");
+	qRegisterMetaType<EFriendState>("EFriendState");
+	qRegisterMetaType<EFriendViewType>("EFriendViewType");
+	qRegisterMetaType<EGenderType>("EGenderType");
+	qRegisterMetaType<EHostAnnounceStatus>("EHostAnnounceStatus");
+	qRegisterMetaType<EHostJoinStatus>("EHostJoinStatus");
+	qRegisterMetaType<EHostSearchStatus>("EHostSearchStatus");
+	qRegisterMetaType<EHostServiceType>("EHostServiceType");
+	qRegisterMetaType<EHostTestStatus>("EHostTestStatus");
+	qRegisterMetaType<EHostType>("EHostType");
+	qRegisterMetaType<EInternetStatus>("EInternetStatus");
+	qRegisterMetaType<EIsPortOpenStatus>("EIsPortOpenStatus");
+	qRegisterMetaType<ERunTestStatus>("ERunTestStatus");
+	qRegisterMetaType<EMyRelayStatus>("EMyRelayStatus");
+	qRegisterMetaType<ENetAvailStatus>("ENetAvailStatus");
+	qRegisterMetaType<ENetworkStateType>("ENetworkStateType");
+	qRegisterMetaType<EOfferResponse>("EOfferResponse");
+	qRegisterMetaType<EOfferState>("EOfferState");
+	qRegisterMetaType<EOfferType>("EOfferType");
+	qRegisterMetaType<EPluginAccess>("EPluginAccess");
+	qRegisterMetaType<EPluginType>("EPluginType");
+	qRegisterMetaType<ERandomConnectStatus>("ERandomConnectStatus");
+	qRegisterMetaType<EMSessionAction>("EMSessionAction");
+	qRegisterMetaType<ESndDef>("ESndDef");
+	qRegisterMetaType<EXferError>("EXferError");
+	qRegisterMetaType<EXferState>("EXferState");
+	qRegisterMetaType<PluginSetting>("PluginSetting");
+	qRegisterMetaType<VxGUID>("VxGUID");
+	qRegisterMetaType<VxNetIdent>("VxNetIdent");
+	qRegisterMetaType<uint32_t>("uint32_t");
 }

@@ -20,7 +20,6 @@
 #include "GuiOfferSession.h"
 #include "ActivityMessageBox.h"
 #include "IdentWidget.h"
-#include "PopupMenu.h"
 
 #include "GuiHelpers.h"
 #include "GuiParams.h"
@@ -1214,13 +1213,14 @@ void ActivityBase::slotAppIconSpecialClick( void )
 void ActivityBase::onAppIconSpecialClick( ActivityBase * activityBase )
 {
     LogMsg( LOG_DEBUG, "onAppIconSpecialClick" );
+	/*
     PopupMenu popupMenu( m_MyApp, this );
     popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
     popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
     popupMenu.setContentItemsFrame( this->getContentItemsFrame() );
     connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu*, ActivityBase *) ), &popupMenu, SLOT( slotAppSystemMenuSelected( int, PopupMenu*, ActivityBase *) ) );
 
-    popupMenu.showAppSystemMenu();
+    popupMenu.showAppSystemMenu();*/
 }
 
 

@@ -13,9 +13,9 @@
 #include <QCommandLineOption>
 #include <QStringList>
 #include <QStandardPaths>
-#ifndef QT_NO_OPENGL
-#include <QGLFormat>
-#endif
+//#ifndef QT_NO_OPENGL
+//#include <QGLFormat>
+//#endif
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>

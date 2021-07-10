@@ -15,10 +15,10 @@
 
 #include <app_precompiled_hdr.h>
 
-#include "PopupMenu.h"
+//#include "PopupMenu.h"
 #include "ActivitySoundOptions.h"
 #include "ActivityPermissions.h"
-#include "ActivityNetworkSettings.h"
+//#include "ActivityNetworkSettings.h"
 #include "ActivityVideoOptions.h"
 #include "AppletMultiMessenger.h"
 #include "AppletPeerSelectFileToSend.h"

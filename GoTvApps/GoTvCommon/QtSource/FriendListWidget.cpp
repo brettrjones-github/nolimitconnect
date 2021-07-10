@@ -18,7 +18,7 @@
 #include "FriendListWidget.h"
 
 #include "MyIcons.h"
-#include "PopupMenu.h"
+//#include "PopupMenu.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 
@@ -198,6 +198,7 @@ void FriendListWidget::slotFriendListItemClicked( FriendListEntryWidget* item )
 //============================================================================
 void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item )
 {
+	/*
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
 		return;
@@ -218,7 +219,7 @@ void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item 
 
             popupMenu.showFriendMenu( m_SelectedFriend );
         }
-	}
+	}*/
 }
 
 //============================================================================

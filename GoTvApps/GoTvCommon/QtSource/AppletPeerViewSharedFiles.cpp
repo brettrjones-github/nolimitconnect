@@ -25,7 +25,7 @@
 
 #include "FileXferWidget.h"
 #include "MyIcons.h"
-#include "PopupMenu.h"
+//#include "PopupMenu.h"
 #include "AppGlobals.h"
 #include "GuiFileXferSession.h"
 #include "FileListReplySession.h"
@@ -534,6 +534,7 @@ bool AppletPeerViewSharedFiles::confirmDeleteFile( bool shredFile )
 //============================================================================
 void AppletPeerViewSharedFiles::promptForDownload( GuiFileXferSession * poInfo )
 {
+	/*
 	m_SelectedFileInfo = poInfo;
 	PopupMenu popupMenu( m_MyApp, this );
     popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
@@ -543,7 +544,7 @@ void AppletPeerViewSharedFiles::promptForDownload( GuiFileXferSession * poInfo )
     popupMenu.addMenuItem( 2, getMyIcons().getIcon(getMyIcons().getFileIcon(poInfo->getFileType())), poInfo->getJustFileName() );
     connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(slotDownloadFileSelected(int, PopupMenu *, ActivityBase *)));
 
-    popupMenu.exec();
+    popupMenu.exec();*/
 }
 
 //============================================================================

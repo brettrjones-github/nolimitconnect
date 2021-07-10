@@ -15,7 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "ActivityScanWebCams.h"
 #include "MyIcons.h"
-#include "PopupMenu.h"
+//#include "PopupMenu.h"
 #include "AppCommon.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
@@ -395,6 +395,7 @@ void ActivityScanWebCams::onCountdownTimer( void )
 //============================================================================
 void ActivityScanWebCams::slotFriendClicked( void )
 {
+	/*
 	if( 0 != m_HisIdent )
 	{
 		PopupMenu popupMenu( m_MyApp, this );
@@ -403,6 +404,6 @@ void ActivityScanWebCams::slotFriendClicked( void )
         connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), &popupMenu, SLOT(onFriendActionSelected(int, PopupMenu *, ActivityBase *)) );
 
         popupMenu.showFriendMenu( m_HisIdent );
-	}
+	}*/
 }
 

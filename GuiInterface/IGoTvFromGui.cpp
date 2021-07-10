@@ -1,6 +1,6 @@
 #include <CommonHdr.h>
 #include "IGoTv.h"
-#include "GoTvP2P/P2PEngine/P2PEngine.h"
+#include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
 
 #include <CoreLib/VxGlobals.h>
 

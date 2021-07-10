@@ -15,7 +15,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "Application.h"
-#include "GoTvP2P/P2PEngine/P2PEngine.h"
+#include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
 
 #include <CoreLib/VxGlobals.h>

@@ -1,0 +1,947 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{14347A1B-2425-4619-9F37-4B5EBB4476BE}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>64BitVx2019Qt5.15.2</QtInstall>
+    <QtModules>core;gui;widgets;multimediawidgets;opengl;quickwidgets;svg</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>64BitVx2019Qt5.15.2</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutDir>$(ProjectDir)..\..\..\..\bin-Windows\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.codec;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CONSOLE;WIN64;_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\;$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libptopD.lib;glu32.lib;opengl32.lib;libpthreadD.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libkodiD.lib;libopenmpt-fullD.lib;libnfsD.lib;Vfw32.lib;Upnp2LibD.lib;VxVideoLibD.lib;libcurlD.lib;libexpatD.lib;libcdioD.lib;libzipD.lib;libopencore-amrD.lib;libceltD.lib;libfaacD.lib;libxavsD.lib;Secur32.lib;librtmpD.lib;libbento4D.lib;CoreLibD.lib;FfmpegAvCodecLibD.lib;FfmpegAvDeviceLibD.lib;FfmpegAvFilterLibD.lib;FfmpegAvFormatLibD.lib;FfmpegAvResampleLibD.lib;FfmpegAvUtilLibD.lib;FfmpegPostProcLibD.lib;FfmpegSwResampleLibD.lib;FfmpegSwScaleLibD.lib;glew64sd.lib;libarmrwbencD.lib;libasprintfD.lib;libassD.lib;libbzip2D.lib;libcpluffD.lib;libcrocoD.lib;libcrossguidD.lib;libcrystalhdD.lib;libdnssdD.lib;libexifD.lib;libflacD.lib;libfreetypeD.lib;libfribidiD.lib;libgnuD.lib;libgsmD.lib;libiconvD.lib;libilbcD.lib;libjpgD.lib;liblameD.lib;liblzmaD.lib;liblzoD.lib;libmicrohttpdD.lib;liboggD.lib;libopenjpegD.lib;libopusD.lib;libp8-platformD.lib;libpcreD.lib;libpngD.lib;python27.lib;libshairplayD.lib;libshineD.lib;libsnappyD.lib;libspeexD.lib;libsshD.lib;libsslD.lib;libtagD.lib;libtheoraD.lib;libtinyxmlD.lib;libtwolameD.lib;libUPnPD.lib;libvorbisD.lib;libvpxD.lib;libwavepackD.lib;libwebpD.lib;libwelsdecD.lib;libx264D.lib;libx265D.lib;libxml2D.lib;libxsltD.lib;libxvidD.lib;libyajlD.lib;libzlibD.lib;libzvbiD.lib;MediaToolsLibD.lib;NetLibD.lib;PktLibD.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>CONSOLE;WIN64;NDEBUG;TARGET_OS_WINDOWS;LIB_STATIC;QT_MULTIMEDIAWIDGETS_LIB;$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>libptop.lib;glu32.lib;opengl32.lib;libpthread.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libkodi.lib;libopenmpt-full.lib;libnfs.lib;Vfw32.lib;Upnp2Lib.lib;VxVideoLib.lib;libcurl.lib;libexpat.lib;libcdio.lib;libzip.lib;libopencore-amr.lib;libcelt.lib;libfaac.lib;libxavs.lib;Secur32.lib;librtmp.lib;libbento4.lib;CoreLib.lib;FfmpegAvCodecLib.lib;FfmpegAvDeviceLib.lib;FfmpegAvFilterLib.lib;FfmpegAvFormatLib.lib;FfmpegAvResampleLib.lib;FfmpegAvUtilLib.lib;FfmpegPostProcLib.lib;FfmpegSwResampleLib.lib;FfmpegSwScaleLib.lib;glew64s.lib;libarmrwbenc.lib;libasprintf.lib;libass.lib;libbzip2.lib;libcpluff.lib;libcroco.lib;libcrossguid.lib;libcrystalhd.lib;libdnssd.lib;libexif.lib;libflac.lib;libfreetype.lib;libfribidi.lib;libgnu.lib;libgsm.lib;libiconv.lib;libilbc.lib;libjpg.lib;liblame.lib;liblzma.lib;liblzo.lib;libmicrohttpd.lib;libogg.lib;libopenjpeg.lib;libopus.lib;libp8-platform.lib;libpcre.lib;libpng.lib;python27_d.lib;libshairplay.lib;libshine.lib;libsnappy.lib;libspeex.lib;libssh.lib;libssl.lib;libtag.lib;libtheora.lib;libtinyxml.lib;libtwolame.lib;libUPnP.lib;libvorbis.lib;libvpx.lib;libwavepack.lib;libwebp.lib;libwelsdec.lib;libx264.lib;libx265.lib;libxml2.lib;libxslt.lib;libxvid.lib;libyajl.lib;libzlib.lib;libzvbi.lib;MediaToolsLib.lib;NetLib.lib;PktLib.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\GuiInterface\GoTvRenderFrame.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IDefs.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTv.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvFromGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvRender.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IGoTvToGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\ILog.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp" />
+    <ClCompile Include="..\..\..\..\GuiInterface\OsWin32\IWin32.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountDb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAddRemoveLibraryFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBrowseFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissions.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanPeopleSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanProfiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanStoryBoards.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanWebCams.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySessionOptions.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityStoryBoard.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommon.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonAudio.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonEvents.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonLogin.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonRender.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppDefs.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppGlobals.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAboutApp.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletApplicationInfo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientAvatarImage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomConnect.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareWebCam.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientStoryboard.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAboutMe.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAvatarImage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchPage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLibrary.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLog.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogView.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMultiMessenger.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerChangeFriendship.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerReplyFileOffer.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerSelectFileToSend.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerTodGame.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerVideoPhone.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerViewSharedFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerVoicePhone.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAboutMe.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAvatarImage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBaseSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceChatRoom.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceConnectionTest.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostGroup.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostNetwork.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnect.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnectRelay.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareWebCam.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceStoryboard.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAboutMe.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAvatarImage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsConnectionTest.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsFileXfer.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostGroup.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostNetwork.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsMessenger.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsPage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnect.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnectRelay.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareFiles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareWebCam.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsStoryboard.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsTruthOrDare.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVideoPhone.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVoicePhone.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTheme.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUploads.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppProfile.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSetup.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppTranslate.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetBaseWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetFaceWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetPhotoWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetTextWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVideoWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVoiceWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AvatarBar.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CallListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CallListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamTitleBarPreview.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionMenu.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemInfo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileListReplySession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiConnectMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HelpBrowser.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HomeWindow.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListRow.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImagePickBar.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputAllWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputBaseWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputFaceWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputPhotoWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputTextWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVideoWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MenuBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MenuCam.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MessengerPage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyIcons.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MySndMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetHostGuiLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileShare.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFriend.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingMedia.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingNotify.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOfferToFriend.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingScan.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingServers.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingToEngine.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetFonts.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetRender.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaderInterface.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetTextures.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioIoMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioMixer.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutIo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutThread.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioUtils.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameLogic.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserJoinListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserJoinListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VidWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppDisplay.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBox.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxContextMenu.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFrame.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxLabel.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButton.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonBottom.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonTop.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMyFileInfo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPushButton.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxShredderButton.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSndInstance.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSpinProgress.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTagLabel.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.cpp" />
+    <ClCompile Include="..\..\AppSource\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\GuiInterface\config_libgotvptop.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\GoTvRenderFrame.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IAudioInterface.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTv.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvEvents.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvGeometry.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IGoTvRender.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\ILog.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IScan.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh" />
+    <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.h" />
+    <ClInclude Include="..\..\..\..\GuiInterface\OsWin32\IWin32.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioBuffer.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioDefs.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\CommonHdr.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\FileItemInfo.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendList.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\HelpBrowser.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIcons.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\SoundDefs.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\AudioDefs.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioIoMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioMixer.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutIo.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutThread.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\AudioUtils.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareControlInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiOfferInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiThumbUpdateInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\UserProfile.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxTagLabel.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxSpinProgress.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxSndInstance.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxShredderButton.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxPushButton.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMyFileInfo.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonTop.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonBottom.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenuButton.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxMenu.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxLabel.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxFrame.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxContextMenu.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxComboBox.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxAppDisplay.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VidWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserJoinListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\UserJoinListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TodGameLogic.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\StoryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SessionWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetHostGuiLogic.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MySndMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MessengerPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MenuCam.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MenuBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputVideoWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputTextWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputPhotoWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputFaceWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputBaseWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputAllWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ImagePickBar.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ImageListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ImageListRow.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\IdentWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserListEntryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiConnectMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListEntryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileListReplySession.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileItemWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileActionMenu.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ChatEntryWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CamTitleBarPreview.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CamLogic.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CallListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CallListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AvatarBar.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AssetVoiceWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AssetVideoWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AssetTextWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AssetPhotoWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AssetFaceWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AssetBaseWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppSetup.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUploads.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletTheme.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVoicePhone.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVideoPhone.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsTruthOrDare.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsStoryboard.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareWebCam.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnectRelay.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnect.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsMessenger.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostRandomConnect.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostNetwork.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostGroupListing.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostGroup.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsFileXfer.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsConnectionTest.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAvatarImage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAboutMe.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceStoryboard.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareWebCam.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnectRelay.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnect.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostNetwork.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostGroup.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceConnectionTest.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceChatRoom.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceBaseSettings.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceAvatarImage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceAboutMe.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoinSearch.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomConnectJoin.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerVoicePhone.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerViewSharedFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerVideoPhone.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerTodGame.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSessionFileOffer.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerSelectFileToSend.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerReplyFileOffer.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerChangeFriendship.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMultiMessenger.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLogView.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLogSettings.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLog.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLibrary.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLaunchPage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletKodi.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletEditAvatarImage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletEditAboutMe.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletDownloads.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientStoryboard.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientShareWebCam.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientShareFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomConnect.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientAvatarImage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletApplicationInfo.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAboutApp.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppCommon.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityStoryBoard.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySessionOptions.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityScanWebCams.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityScanStoryBoards.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityScanProfiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityScanPeopleSearch.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPermissions.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityBrowseFiles.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityAddRemoveLibraryFiles.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="..\..\..\GoTvCommon\NoLimitConnect.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AcceptCancelWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityAddRemoveLibraryFiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityAppSetup.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityBase.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityBrowseFiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityChooseTestWebsiteUrl.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityConnectionOptions.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityCreateAccount.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloadItemMenu.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityFileSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityIsPortOpenTest.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityMessageBox.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkSettings.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStartupTest.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStatus.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkTest.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPermissions.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPermissionsRelay.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPersonalRecorder.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPhoneShake.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityReplyFileOffer.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityScanPeopleSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityScanProfiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityScanStoryBoards.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityScanWebCams.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivitySessionOptions.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityShowHelp.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivitySnapShot.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivitySoundOptions.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityStoryBoard.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityTimedMessage.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityVideoOptions.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewAudioFile.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewLibraryFiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewLog.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewMySharedFiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewVideoFile.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityWebCamClient.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityYesNo.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletAboutApp.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletApplicationInfo.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamSettings.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomClient.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoin.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoinSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChooseThumbnail.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletClientRandomConnect.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletDownloads.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditAboutMe.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditAvatarImage.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditStoryBoard.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryImage.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryThumb.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGoTvPtoPNetworkHost.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoin.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletKodi.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLaunchWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLibrary.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLog.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLogSettings.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLogView.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletMultiMessenger.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkKey.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkSettings.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletOfferList.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerChangeFriendship.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerReplyOfferFile.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerSelectFileToSend.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerSessionFileOffer.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerTodGame.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerVideoPhone.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerViewSharedFiles.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerVoicePhone.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPermissionList.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonalRecorder.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPlayerVideo.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoin.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoinSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBase.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBaseSettings.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceChatRoom.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceConnectionTest.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceGroupHost.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceGroupListingHost.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceNetworkHost.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostChatRoom.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostGroup.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostNetwork.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSharedContent.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSnapshot.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTestAndDebug.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTheme.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUploads.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUserIdentity.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AssetFaceWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AssetPhotoWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AssetTextWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AssetVideoWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AssetVoiceWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AvatarBarWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\BottomBarWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\CallListItem.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\CentralFrame.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\CentralWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ChatEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ChatRoomWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\DialogConfirmRemoveMessage.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FileActionBarWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FileActionMenu.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FileDisplayWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FileItemWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FileShareItemWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FileXferWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListDlg.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HomeWindow.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HostListItem.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\IdentWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ImageListEntry.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ImageListRow.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ImageListWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ImagePickBar.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InformationWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InputAllWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InputFaceWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InputPhotoWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InputTextWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InputVideoWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InputVoiceWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InstMsgWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\LogWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkKeyWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkTestWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferBarWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferListItem.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionListItemWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PluginSettingsWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PopupMenuWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\RelayServiceWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ServiceSettingsWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\SessionWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\SoundCtrlWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\StoryWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ThumbnailChooseWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ThumbnailEditWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\TitleBarWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\TodGameWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserJoinListItem.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListItem.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

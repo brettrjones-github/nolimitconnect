@@ -4,9 +4,9 @@
 #include "GoTvAppConfig.h"
 #ifdef BUILD_GOTV_APP
 
-#include <GoTvCommon/QtSource/AppCommon.h>
-#include <GoTvCommon/QtSource/HomeWindow.h>
-#include <GoTvCommon/QtSource/GuiParams.h>
+#include <GoTvApps/GoTvCommon/QtSource/AppCommon.h>
+#include <GoTvApps/GoTvCommon/QtSource/HomeWindow.h>
+#include <GoTvApps/GoTvCommon/QtSource/GuiParams.h>
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -147,7 +147,7 @@ int main(int argc, char **argv)
     // send command line parameters to Kodi
 	static CAppParamParser appParamParser;
     appParamParser.Parse( argv, argc );
-    GetIGoTv().initRun( appParamParser );
+    IGoTv::getIGoTv().initRun( appParamParser );
 
 	int result = 0;
 

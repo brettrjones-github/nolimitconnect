@@ -66,7 +66,7 @@
 #include "AppletServiceChatRoom.h"
 #include "AppletServiceConnectionTest.h"
 #include "AppletServiceHostGroup.h"
-#include "AppletServiceHostGroupListing.h"
+//#include "AppletServiceHostGroupListing.h"
 #include "AppletServiceHostNetwork.h"
 #include "AppletServiceShareFiles.h"
 #include "AppletServiceShareWebCam.h"
@@ -103,7 +103,6 @@
 
 #include "AppletTestAndDebug.h"
 #include "AppletTheme.h"
-#include "AppletRemoteControl.h"
 #include "AppletUploads.h"
 #include "AppletUserIdentity.h"
 

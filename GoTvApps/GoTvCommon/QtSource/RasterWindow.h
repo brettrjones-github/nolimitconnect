@@ -52,7 +52,7 @@
 #define RASTERWINDOW_H
 
 #include <GoTvDependLibrariesConfig.h>
-#include <QtGui>
+#include <QWindow>
 
 class RasterWindow : public QWindow
 {

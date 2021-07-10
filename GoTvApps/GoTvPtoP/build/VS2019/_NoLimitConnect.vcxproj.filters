@@ -759,9 +759,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -3042,12 +3039,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\app_precompiled_hdr.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_AppletBrowseFiles.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
@@ -3449,8 +3440,8 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui">
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui">
       <Filter>GoTvCommon\Forms</Filter>
-    </CustomBuild>
+    </QtUic>
   </ItemGroup>
 </Project>

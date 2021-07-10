@@ -15,7 +15,6 @@
 #include <app_precompiled_hdr.h>
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "PopupMenu.h"
 #include "ActivityScanPeopleSearch.h"
 #include "ActivityMessageBox.h"
 
