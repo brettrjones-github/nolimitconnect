@@ -2,12 +2,12 @@ QT       += core gui svg widgets
 
 TEMPLATE = app
 CONFIG += no_docs_target
-CONFIG += c++11
+
 
 TARGET = QtHelloWorld
 TARGET_NAME=QtHelloWorld
 
-include(../config_detect_os.pri)
+include(../../config_os_detect.pri)
 
 !android:{
     OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
@@ -36,5 +36,10 @@ android:{
 }
 
 message(qt bin directory $$[QT_INSTALL_BINS])
+
+DISTFILES += \
+    ../android_qt_manifest/QtHellowWorld/android/AndroidManifest.xml \
+    ../android_qt_manifest/QtHellowWorld/android/gradle/wrapper/gradle-wrapper.jar \
+    ../android_qt_manifest/QtHellowWorld/android/gradle/wrapper/gradle-wrapper.properties
 
 
