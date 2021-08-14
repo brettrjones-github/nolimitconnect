@@ -1,25 +1,23 @@
-include(ConfigQt)
-find_package(Qt5 COMPONENTS Widgets Core REQUIRED)
 
-set ( HEADER_FILE_ONLY
-	qtteststaticlib3.h
+
+set(LIB_NAME "QtSimpleTestStaticLib")
+# Enable C++17
+SET(CMAKE_CXX_STANDARD 17)
+
+include(FindPkgConfig)
+
+include_directories(${Qt6Core_INCLUDE_DIRS})
+
+
+set(SOURCES
+   ${CMAKE_CURRENT_LIST_DIR}/qtteststaticlib3.cpp
 )
 
-set ( SOURCES
-	qtteststaticlib3.cpp
+set(HEADERS
+   ${CMAKE_CURRENT_LIST_DIR}/qtteststaticlib3.h 
 )
 
-add_library("QtSimpleTestStaticLib" STATIC ${SOURCES})
-target_link_libraries("QtSimpleTestStaticLib" Qt5::Core)
+#target_include_directories(staticLibA INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+add_library(${LIB_NAME} STATIC ${SOURCES})
 
-#if(NOT BUILD_SHARED_LIBS)
-# set(STATIC_POSTFIX "-s")
-#endif()
 
-#append library type 
-#set_target_properties("QtSimpleTestStaticLib" PROPERTIES
-#  DEBUG_POSTFIX "${STATIC_POSTFIX}-d"
-#  RELEASE_POSTFIX "${STATIC_POSTFIX}"
-#  MINSIZEREL_POSTFIX "${STATIC_POSTFIX}-mr"
-#  RELWITHDEBINFO_POSTFIX "${STATIC_POSTFIX}-rd"
-#)

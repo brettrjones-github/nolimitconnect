@@ -1,3 +1,0 @@
-set(CMAKE_PREFIX_PATH "F:/Qt/5.15.2/msvc2019_64/lib/cmake")
-message("${CMAKE_PREFIX_PATH}")
-set(TARGET_OS_WINDOWS ON)
