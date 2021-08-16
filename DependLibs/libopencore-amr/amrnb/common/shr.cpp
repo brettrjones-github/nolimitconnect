@@ -157,9 +157,9 @@ Word16 shr_std (Word16 var1, Word16 var2)
 /*----------------------------------------------------------------------------
 ; FUNCTION CODE
 ----------------------------------------------------------------------------*/
-OSCL_EXPORT_REF Word16 shr(register Word16 var1, register Word16 var2, Flag *pOverflow)
+OSCL_EXPORT_REF Word16 shr(Word16 var1, Word16 var2, Flag *pOverflow)
 {
-    register Word16 result;
+    Word16 result;
 
     if (var2 != 0)
     {

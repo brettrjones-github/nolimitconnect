@@ -178,7 +178,7 @@ static unsigned int
 transform ( void *ctx, const unsigned char *data )
 {
   RMD160_CONTEXT *hd = ctx;
-  register uint32_t a,b,c,d,e;
+  uint32_t a,b,c,d,e;
   uint32_t aa,bb,cc,dd,ee,t;
   uint32_t x[16];
   int i;

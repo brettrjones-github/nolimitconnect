@@ -2,7 +2,11 @@
 TEMPLATE = app
 CONFIG += qt thread silent
 
-QT += multimedia multimediawidgets widgets
+QT += widgets
+versionAtMost(QT_VERSION, 5.15.2){
+    QT += multimedia
+    QT += multimediawidgets
+}
 
 # keep it all lowercase to match program naming convention on *nix systems
 PROJECT_NAME = gotvcoreapp

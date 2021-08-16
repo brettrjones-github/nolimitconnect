@@ -198,7 +198,7 @@ des_weak_p(const uint8_t *key)
 int
 des_set_key(struct des_ctx *ctx, const uint8_t *key)
 {
-  register uint32_t n, w;
+  uint32_t n, w;
   register char * b0, * b1;
   char bits0[56], bits1[56];
   uint32_t *method;

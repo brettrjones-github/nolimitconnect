@@ -266,7 +266,7 @@ static inline void RENAME(rgb16to15)(const uint8_t *src, uint8_t *dst, int src_s
     __asm__ volatile(EMMS:::"memory");
     mm_end = end - 3;
     while (s < mm_end) {
-        register uint32_t x= *((const uint32_t*)s);
+        uint32_t x= *((const uint32_t*)s);
         *((uint32_t *)d) = ((x>>1)&0x7FE07FE0) | (x&0x001F001F);
         s+=4;
         d+=4;

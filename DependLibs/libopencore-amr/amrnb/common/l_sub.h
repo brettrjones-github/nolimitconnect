@@ -93,8 +93,8 @@ extern "C"
 
     __inline Word32 L_sub(Word32 L_var1, Word32 L_var2, Flag *pOverflow)
     {
-        register Word32 ra = L_var1;
-        register Word32 rb = L_var2;
+        Word32 ra = L_var1;
+        Word32 rb = L_var2;
         Word32 result;
 
         OSCL_UNUSED_ARG(pOverflow);
@@ -109,7 +109,7 @@ extern "C"
 
 #else /* C EQUIVALENT */
 
-    static inline Word32 L_sub(register Word32 L_var1, register Word32 L_var2,
+    static inline Word32 L_sub(Word32 L_var1, Word32 L_var2,
                                register Flag *pOverflow)
     {
         Word32 L_diff;

@@ -90,10 +90,10 @@ transform ( void *c, const unsigned char *data )
 {
   MD5_CONTEXT *ctx = c;
   uint32_t correct_words[16];
-  register uint32_t A = ctx->A;
-  register uint32_t B = ctx->B;
-  register uint32_t C = ctx->C;
-  register uint32_t D = ctx->D;
+  uint32_t A = ctx->A;
+  uint32_t B = ctx->B;
+  uint32_t C = ctx->C;
+  uint32_t D = ctx->D;
   uint32_t *cwp = correct_words;
   int i;
 

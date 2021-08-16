@@ -1,7 +1,9 @@
 
 
 android {
-    QT += androidextras
+    versionAtMost(QT_VERSION, 5.15.2) {
+        QT += androidextras
+    }
 
     # Default rules for deployment.
     include(config_deploy.pri)

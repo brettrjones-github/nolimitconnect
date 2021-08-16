@@ -128,8 +128,8 @@ _transform (void *ctx, const unsigned char *data)
 {
   SHA1_CONTEXT *hd = ctx;
   const uint32_t *idata = (const void *)data;
-  register uint32_t a, b, c, d, e; /* Local copies of the chaining variables.  */
-  register uint32_t tm;            /* Helper.  */
+  uint32_t a, b, c, d, e; /* Local copies of the chaining variables.  */
+  uint32_t tm;            /* Helper.  */
   uint32_t x[16];                  /* The array we work on. */
 
 #define I(i) (x[i] = buf_get_be32(idata + i))

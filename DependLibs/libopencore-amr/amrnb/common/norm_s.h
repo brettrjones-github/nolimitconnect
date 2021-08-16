@@ -91,8 +91,8 @@ extern "C"
 #if   ((PV_CPU_ARCH_VERSION >=5) && (PV_COMPILER == EPV_ARM_GNUC))
     static inline Word16 norm_s(Word16 var1)
     {
-        register Word32 var_out = 0;
-        register Word32 ra = var1 << 16;
+        Word32 var_out = 0;
+        Word32 ra = var1 << 16;
         if (ra)
         {
             ra ^= (ra << 1);

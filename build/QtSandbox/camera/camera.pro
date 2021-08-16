@@ -1,7 +1,10 @@
 TEMPLATE = app
 TARGET = camera
 
-QT += multimedia multimediawidgets
+versionAtMost(QT_VERSION, 5.15.2){
+    QT += multimedia
+    QT += multimediawidgets
+}
 
 HEADERS = \
     camera.h \

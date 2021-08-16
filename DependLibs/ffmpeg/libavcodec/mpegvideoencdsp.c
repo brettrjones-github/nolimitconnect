@@ -98,7 +98,7 @@ static int pix_norm1_c(uint8_t *pix, int line_size)
             s += sq[(x >> 48) & 0xff];
             s += sq[(x >> 56) & 0xff];
 #else
-            register uint32_t x = *(uint32_t *) pix;
+            uint32_t x = *(uint32_t *) pix;
             s += sq[x         & 0xff];
             s += sq[(x >>  8) & 0xff];
             s += sq[(x >> 16) & 0xff];

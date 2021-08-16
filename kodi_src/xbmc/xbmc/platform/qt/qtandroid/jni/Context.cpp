@@ -56,6 +56,7 @@
 #include "AudioDeviceInfo.h"
 #include "MediaSync.h"
 
+#if 0
 #include <qtandroid/native_activity.h>
 #include <QAndroidJniObject>
 #include <QtAndroid>
@@ -348,3 +349,4 @@ CJNIWindow CJNIContext::getWindow()
   return call_method<jhobject>(m_context,
     "getWindow", "()Landroid/view/Window;");
 }
+#endif

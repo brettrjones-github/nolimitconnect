@@ -90,9 +90,9 @@ extern "C"
 
     static inline Word32 L_mac(Word32 L_var3, Word16 var1, Word16 var2, Flag *pOverflow)
     {
-        register Word32 ra = L_var3;
-        register Word32 rb = var1;
-        register Word32 rc = var2;
+        Word32 ra = L_var3;
+        Word32 rb = var1;
+        Word32 rc = var2;
         Word32 result;
 
         OSCL_UNUSED_ARG(pOverflow);

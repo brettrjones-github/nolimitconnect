@@ -160,7 +160,7 @@ Word16 shr_r (Word16 var1, Word16 var2)
 /*----------------------------------------------------------------------------
 ; FUNCTION CODE
 ----------------------------------------------------------------------------*/
-OSCL_EXPORT_REF Word16 shr_r(register Word16 var1, register Word16 var2, Flag *pOverflow)
+OSCL_EXPORT_REF Word16 shr_r(Word16 var1, Word16 var2, Flag *pOverflow)
 {
     /*----------------------------------------------------------------------------
     ; Define all local variables

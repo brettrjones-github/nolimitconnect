@@ -141,7 +141,7 @@ Word16 pv_round (Word32 L_var1)
 /*----------------------------------------------------------------------------
 ; FUNCTION CODE
 ----------------------------------------------------------------------------*/
-OSCL_EXPORT_REF Word16 pv_round(register Word32 L_var1, Flag *pOverflow)
+OSCL_EXPORT_REF Word16 pv_round(Word32 L_var1, Flag *pOverflow)
 {
     Word16  result;
 

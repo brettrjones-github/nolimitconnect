@@ -155,13 +155,13 @@ Word16 norm_s (Word16 var1)
 ----------------------------------------------------------------------------*/
 #if !((PV_CPU_ARCH_VERSION >=5) && ((PV_COMPILER == EPV_ARM_GNUC) || (PV_COMPILER == EPV_ARM_RVCT)))
 
-OSCL_EXPORT_REF Word16 norm_s(register Word16 var1)
+OSCL_EXPORT_REF Word16 norm_s(Word16 var1)
 {
     /*----------------------------------------------------------------------------
     ; Define all local variables
     ----------------------------------------------------------------------------*/
 
-    register Word16 var_out = 0;
+    Word16 var_out = 0;
 
     /*----------------------------------------------------------------------------
     ; Function body here

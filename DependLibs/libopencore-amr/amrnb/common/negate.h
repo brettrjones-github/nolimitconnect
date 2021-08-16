@@ -86,7 +86,7 @@ extern "C"
     ; GLOBAL FUNCTION DEFINITIONS
     ; Function Prototype declaration
     ----------------------------------------------------------------------------*/
-    Word16 negate(register Word16 var1);
+    Word16 negate(Word16 var1);
 
     /*----------------------------------------------------------------------------
     ; END

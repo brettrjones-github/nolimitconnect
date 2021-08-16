@@ -1,5 +1,8 @@
 # Global
 TEMPLATE = lib
+QT       -= gui
+CONFIG += staticlib
+CONFIG -= sharedlib
 
 TARGET_NAME = gnu
 

@@ -128,8 +128,8 @@
 #define	LS2(z)	k1 & z
 #define	LS3(z)	k2 & z
 #define	REGQUICK				\
-	register uint32_t k0, k1;		\
-	register uint32_t *m0, *m1, *m2, *m3;
+	uint32_t k0, k1;		\
+	uint32_t *m0, *m1, *m2, *m3;
 #define	SETQUICK				\
 	; k0 = 0xFCFC				\
 	; k1 = 16				\
@@ -139,8 +139,8 @@
 	; m2 = m1 + 64				\
 	; m3 = m2 + 64
 #define	REGSMALL				\
-	register uint32_t k0, k1, k2;		\
-	register uint32_t *m0, *m1, *m2, *m3;
+	uint32_t k0, k1, k2;		\
+	uint32_t *m0, *m1, *m2, *m3;
 #define	SETSMALL				\
 	; k0 = 0x01000100L			\
 	; k1 = 0x0FC				\
@@ -185,8 +185,8 @@
 #define	LS2(z)	0xFC & z
 #define	LS3(z)	0xFC & z
 #define	REGQUICK				\
-	register uint32_t k0;			\
-	register uint32_t *m0, *m1, *m2, *m3;
+	uint32_t k0;			\
+	uint32_t *m0, *m1, *m2, *m3;
 #define	SETQUICK				\
 	; k0 = 0xFCFC				\
 	; m0 = des_bigmap			\
@@ -194,7 +194,7 @@
 	; m2 = m1 + 64				\
 	; m3 = m2 + 64
 #define	REGSMALL				\
-	register uint32_t *m0, *m1, *m2, *m3, *m4, *m5, *m6, *m7;
+	uint32_t *m0, *m1, *m2, *m3, *m4, *m5, *m6, *m7;
 #define	SETSMALL				\
 	; m0 = des_keymap			\
 	; m1 = m0 + 64				\
@@ -345,7 +345,7 @@ NAME(REGISTER BYTE *D,				\
      REGISTER const uint32_t *r,		\
      REGISTER const uint8_t *s)			\
 {						\
-	register uint32_t x, y, z;		\
+	uint32_t x, y, z;		\
 						\
 	/* declare temps & load data */		\
 	TEMP(LOAD);				\
@@ -381,7 +381,7 @@ NAME(REGISTER BYTE *D,				\
      REGISTER const uint32_t *r,		\
      REGISTER const uint8_t *s)			\
 {						\
-	register uint32_t x, y, z;		\
+	uint32_t x, y, z;		\
 						\
 	/* declare temps & load data */		\
 	TEMP(LOAD);				\

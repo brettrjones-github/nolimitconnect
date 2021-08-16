@@ -7,9 +7,17 @@ PROJECT_NAME = nolimitconnect
 
 TARGET_NAME = nolimitconnect
 
-QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets multimediawidgets
+QT += gui core concurrent widgets network opengl xml svg quickwidgets
+
+versionAtMost(QT_VERSION, 5.15.2){
+    QT += multimedia
+    QT += multimediawidgets
+}
+
 android:{
-    QT += androidextras
+    versionAtMost(QT_VERSION, 5.15.2){
+        QT += androidextras
+    }
 }
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
@@ -36,7 +44,7 @@ MOBILITY =
 QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
 }
 
-RESOURCES += $$PWD/GoTvApps/GoTvCommon/gotvcommon.qrc
+RESOURCES += $$PWD/GoTvApps/GoTvCommon/NoLimitConnect.qrc
 
 
 # Translations

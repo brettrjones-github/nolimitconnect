@@ -1,0 +1,144 @@
+Warning: Getting the perfect enviroment to build android with Qt on windowws can be very frustrating.
+You might be better off developing in linux because it seems better supported.
+
+
+NOTE: all instructions assume F:\Qt for qt installs and F:\Android for android installs.
+Your paths may be different
+Most instructions come from
+
+
+1.) Install open jdk 8
+	From https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=openj9
+	select OpenJDK 8 (LTS) and OpenJ9
+	install to F:\Android\jdk-8.0.292.10-openj9
+	be sure to select JAVA_HOME during the install or will have to set it later in windows enviroment
+	
+2.) Install Android Studio
+	https://developer.android.com/studio
+	or older versions from
+	https://developer.android.com/studio/archive
+	see release notes at
+	https://developer.android.com/studio/releases/platform-tools
+	and install ro
+	F:\android\AndroidStudio
+	NOTE: For Qt and Android Studio to work together you need
+	Android Platform Tools 29.0.2 (July 2019) and Platform API 29
+	Get Older version of Android Studio 3.4.2 at
+	https://developer.android.com/studio/archive
+	see release notes at
+	https://developer.android.com/studio/releases/platform-tools
+	
+	Build tools as stand alone downloads can be found at
+	https://androidsdkmanager.azurewebsites.net/Buildtools
+
+
+	NOTE: do not use a space between Android and Studio as it may cause issues later
+	NOTE: at time of this writing the version was android-studio-2020.3.1.22-windows.exe this contains changes incompatible with Qt 6.1.2
+	Sdk location I used was F:\Android\android-sdk
+	you can change this location in project structure (A folder with squares button in top right)
+	Upgrade at your own risk
+	
+	If you need to completely uninstall AndroidStudio and reinstall then
+	1.) copy android studio projects to somewhere safe if want to keep them
+	2.) uninstall android studio from control panel
+	3.) delete following folders
+		a.) c:/user/<your system name>/androidstudioproject
+		b.) c:/user/<your system name>/.android
+		c.) c:/user/<your system name>/.gradle
+		d.) c/user/<your system name>/AppData/Local/Android (keep hidden files on)
+		e.) F:/Android/AndroidStudio
+	4.) rerun android studio install
+
+	When setup wizard is run select custom install
+	select Do not import settings
+	In SDK Componenets Setup change Android SDK Location to
+	F:\Android\android-sdk
+	After install go to Tools->Appearance & Behavior->System Settings->Android Sdk
+	In tab SDK Platforms uncheck Android 11 and check Android 9+ (Q) API 29 and click Apply
+	In SDK Tools check 
+	Android SDK Build-Tools
+	NDK (Side by Side)
+	Android Emulator
+	Android SDK Platform Tools
+	Google USB Driver
+	NDK 22.1.7171670 
+	
+3.) Setup Command line sdk tools
+	from instructions at https://doc.qt.io/qt-6/android-getting-started.html
+	From command line using command icon -> Run As Administrator
+	F:
+	cd F:/Android/android-sdk/tools/bin/
+	sdkmanager.bat --sdk_root=F:/Android/android-sdk --install "cmdline-tools;latest"	
+	sdkmanager.bat --sdk_root=F:/Android/android-sdk --install "platform-tools" "platforms;android-30" "build-tools;30.0.2" "ndk;21.3.6528147"
+	sdkmanager.bat --sdk_root=F:/Android/android-sdk --install "extras;google;usb_driver"
+		
+	gradle version will be 5.6.4
+	for android-30 build-tools;30.0.2" "ndk;21.3.6528147
+	for android-29 build-tools;30.0.2" "ndk;21.3.6528147
+		
+4.) Install CMake 3.19.2 from https://cmake.org/files/v3.19/
+	select Add Cmake to system path
+	change path to F:\Android\CMake3.19.2
+		
+5.) Install Qt
+	a.) Download and run Qt online installer 
+	b.) Install Qt 6.1.2 and Additional Libraries Qt Image Formats
+	
+6.) Verify or Add enviroment variables
+	These instructions are mainly from
+	https://www.software-testing-tutorials-automation.com/2015/09/set-androidhome-and-path-environment.html
+	a.) Open Windows Button->Settings->System->About
+	b.) Click link Advanced System Settings on right hand side
+	c.) Click Enviroment Variables
+	d.) Add or verify the following in System Variables
+	ANDROID_HOME F:/Android/android-sdk
+	ANDROID_SDK_ROOT F:/Android/android-sdk
+	JAVA_HOME F:/Android/jdk-8.0.292.10-openj9
+	JRE_HOME F:/Android/jdk-8.0.292.10-openj9/jre1.8.0_131
+	
+	e.) PATH should include	F:\android\jdk-8.0.292.10-openj9\bin;F:\Android\jdk-8.0.292.10-openj9\jre1.8.0_131;F:\Android\CMake3.19.2\bin;F:\Android\android-sdk\tools;F:\Android\android-sdk\platform-tools;
+	
+	you may need to reboot to make sure the changes take effect
+	
+	
+7.) Setup and test qt example without NDK
+	a.) copy F:\Qt\Examples\Qt-6.1.2\opengl\hellogl2 to F:\SetupTestExampleApps
+	b.) open  F:\SetupTestExampleApps\hellogl2\hellogl2.pro
+	c.) In Tools->Options->Devices->Android Tab Install any missing android packages
+	d.) Uninstall any SDKS that are higher than 30
+	d.) Verify builds and runs
+	e.) generate template as described at https://amin-ahmadi.com/2019/06/21/how-to-create-androidmanifest-xml-using-qt-creator/
+	Projects Button select Android XXX Build
+	Click Create Templates
+	Check Copy the Gradle files to Android Directory
+	These files can be compared to other project templates for debugging issues
+	
+
+8.) Setup and test nolimitconnect sandbox app with no NDK
+	a.) checkout nolimitconnect from https://github.com/brettrjones-github/nolimitconnect.git origin
+	to F:\nolimitconnect
+	=== test using qmake ===
+	a.) Open F:\nolimitconnect\SandboxApp\QtHelloWorld\QtHelloWorld.pro
+	b.) Configure for the android cpu of your target device
+	c.) Confirm build sdk is set to andoid-29 in Projects (Button with wrench)->Build And Run->Android Qt6.1.2 Clang XXX->Build Android APK->Details 
+	d.) build and run
+	=== test using cmake ===
+	a.) Open F:\nolimitconnect\SandboxApps\QtHelloWorld\build\cmake\android\CMakeList.txt
+	b.) Configure for the android cpu of your target device
+	c.) Open Projects (Button with wrench)->Build And Run->Android Qt6.1.2 Clang XXX->Build
+		d.) confirm Applicatin is set to android-29
+		e.) Press Re-configure with Initial Parameters
+	f.) build and run
+	
+9.) Setup and test nolimitconnect sandbox app with NDK and shared library and static library
+	a.) Open F:\nolimitconnect\SandboxApps\QtSimpleAppTest\build\cmake\android\CMakeList.txt
+	b.) Configure for the android cpu of your target device
+	c.) Open Projects (Button with wrench)->Build And Run->Android Qt6.1.2 Clang XXX->Build
+	d.) confirm Applicatin is set to android-29
+	e.) Press Re-configure with Initial Parameters
+	f.) build and run
+	
+	
+	
+	
+	

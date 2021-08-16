@@ -96,13 +96,13 @@ extern "C"
     Word16 L_var2_lo,
     Flag   *pOverflow)
     {
-        register Word32 product32;
-        register Word32 L_sum;
-        register Word32 L_product, result;
-        register Word32 ra = L_var1_hi;
-        register Word32 rb = L_var1_lo;
-        register Word32 rc = L_var2_hi;
-        register Word32 rd = L_var2_lo;
+        Word32 product32;
+        Word32 L_sum;
+        Word32 L_product, result;
+        Word32 ra = L_var1_hi;
+        Word32 rb = L_var1_lo;
+        Word32 rc = L_var2_hi;
+        Word32 rd = L_var2_lo;
 
 
 

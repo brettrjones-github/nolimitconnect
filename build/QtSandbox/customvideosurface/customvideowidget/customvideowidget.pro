@@ -1,7 +1,11 @@
 TEMPLATE = app
 TARGET = customvideowidget
 
-QT += multimedia multimediawidgets widgets
+QT += widgets
+versionAtMost(QT_VERSION, 5.15.2){
+    QT += multimedia
+    QT += multimediawidgets
+}
 
 HEADERS = \
     videoplayer.h \

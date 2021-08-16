@@ -96,9 +96,9 @@ extern "C"
     Flag *pOverflow)
     {
 
-        register Word32 ra = L_var1_hi;
-        register Word32 rb = L_var1_lo;
-        register Word32 rc = var2;
+        Word32 ra = L_var1_hi;
+        Word32 rb = L_var1_lo;
+        Word32 rc = var2;
         Word32 result, L_product;
 
         OSCL_UNUSED_ARG(pOverflow);

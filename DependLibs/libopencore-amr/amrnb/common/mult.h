@@ -89,8 +89,8 @@ extern "C"
 
     __inline Word16 mult(Word16 var1, Word16 var2, Flag *pOverflow)
     {
-        register Word32 ra = var1;
-        register Word32 rb = var2;
+        Word32 ra = var1;
+        Word32 rb = var2;
         Word32 product;
         Word32 temp = 0x7FFF;
 
@@ -120,7 +120,7 @@ extern "C"
 
     static inline Word16 mult(Word16 var1, Word16 var2, Flag *pOverflow)
     {
-        register Word32 product;
+        Word32 product;
 
         product = ((Word32) var1 * var2) >> 15;
 

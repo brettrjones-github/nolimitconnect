@@ -918,7 +918,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 
 	static int8_t motionBuf[ VIDEO_DATA_BYTE_CNT ];
 	int8_t * cmpData = (int8_t *)pu8VidData;
-	register int32_t vidDiff = 0;
+    int32_t vidDiff = 0;
 	for( int i = 0; i < VIDEO_DATA_BYTE_CNT; i++ )
 	{
 		vidDiff += cmpData[i] > motionBuf[i] ? ( cmpData[i] - motionBuf[i] ) : ( motionBuf[i] - cmpData[i] ); 

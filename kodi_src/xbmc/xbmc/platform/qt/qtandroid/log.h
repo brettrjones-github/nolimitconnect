@@ -66,13 +66,14 @@
  *
  * NOTE: These functions MUST be implemented by /system/lib/liblog.so
  */
-
+#if 0
 #include <stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#if !defined(ANDROID_LOG_UNKNOWN)
 /*
  * Android log priority values, in ascending priority order.
  */
@@ -87,7 +88,7 @@ typedef enum android_LogPriority {
     ANDROID_LOG_FATAL,
     ANDROID_LOG_SILENT,     /* only for SetMinPriority(); must be last */
 } android_LogPriority;
-
+#endif
 /*
  * Send a simple string to the log.
  */
@@ -124,5 +125,6 @@ void __android_log_assert(const char *cond, const char *tag,
 #ifdef __cplusplus
 }
 #endif
+#endif //0
 
 #endif /* _ANDROID_LOG_H */

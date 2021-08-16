@@ -185,8 +185,8 @@ static void Get_lsp_pol(
     Word32 *f,
     Flag   *pOverflow)
 {
-    register Word16 i;
-    register Word16 j;
+    Word16 i;
+    Word16 j;
 
     Word16 hi;
     Word16 lo;
@@ -332,8 +332,8 @@ OSCL_EXPORT_REF void Lsp_Az(
     Flag  *pOverflow     /* (o)  : overflow flag                        */
 )
 {
-    register Word16 i;
-    register Word16 j;
+    Word16 i;
+    Word16 j;
 
     Word32 f1[6];
     Word32 f2[6];

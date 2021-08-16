@@ -177,7 +177,7 @@ void dec_10i40_35bits(
     const Word16* dgray_ptr /* i : ptr to read-only tbl                       */
 )
 {
-    register Word16 i, j, pos1, pos2;
+    Word16 i, j, pos1, pos2;
     Word16 sign, tmp;
 
     for (i = 0; i < L_CODE; i++)

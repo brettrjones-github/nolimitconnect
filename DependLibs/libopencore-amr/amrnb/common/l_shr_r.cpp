@@ -159,7 +159,7 @@ Word32 L_shr_r (Word32 L_var1, Word16 var2)
 /*----------------------------------------------------------------------------
 ; FUNCTION CODE
 ----------------------------------------------------------------------------*/
-OSCL_EXPORT_REF Word32 L_shr_r(register Word32 L_var1, register Word16 var2, Flag *pOverflow)
+OSCL_EXPORT_REF Word32 L_shr_r(Word32 L_var1, Word16 var2, Flag *pOverflow)
 {
     Word32 result;
 

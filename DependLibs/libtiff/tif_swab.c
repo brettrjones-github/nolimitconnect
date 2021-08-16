@@ -102,7 +102,7 @@ TIFFSwabArrayOfTriples(register uint8_t* tp, tmsize_t n)
 
 #ifndef TIFFSwabArrayOfLong
 void
-TIFFSwabArrayOfLong(register uint32_t* lp, tmsize_t n)
+TIFFSwabArrayOfLong(uint32_t* lp, tmsize_t n)
 {
 	register unsigned char *cp;
 	register unsigned char t;

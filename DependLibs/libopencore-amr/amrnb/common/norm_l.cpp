@@ -153,12 +153,12 @@ Word16 norm_l (Word32 L_var1)
 ; FUNCTION CODE
 ----------------------------------------------------------------------------*/
 #if !((PV_CPU_ARCH_VERSION >=5) && ((PV_COMPILER == EPV_ARM_GNUC) || (PV_COMPILER == EPV_ARM_RVCT)))
-OSCL_EXPORT_REF Word16 norm_l(register Word32 L_var1)
+OSCL_EXPORT_REF Word16 norm_l(Word32 L_var1)
 {
     /*----------------------------------------------------------------------------
     ; Define all local variables
     ----------------------------------------------------------------------------*/
-    register Word16 var_out = 0;
+    Word16 var_out = 0;
 
     /*----------------------------------------------------------------------------
     ; Function body here

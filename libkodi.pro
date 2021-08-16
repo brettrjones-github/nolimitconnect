@@ -9,7 +9,9 @@ TARGET_NAME = kodi
 include(config_static_dependlib.pri)
 
 android:{
-    QT += androidextras
+    versionAtMost(QT_VERSION, 5.15.2){
+        QT += androidextras
+    }
 }
 
 #kodi fails because command line limit in windoz is 32,768.. so

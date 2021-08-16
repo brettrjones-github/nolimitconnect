@@ -48,7 +48,7 @@
 void
 _nettle_ripemd160_compress(uint32_t *state, const uint8_t *data)
 {
-  register uint32_t a,b,c,d,e;
+  uint32_t a,b,c,d,e;
   uint32_t aa,bb,cc,dd,ee,t;
   uint32_t x[16];
 

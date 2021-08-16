@@ -1,7 +1,11 @@
 TEMPLATE = app
 TARGET = customvideoitem
 
-QT += multimedia multimediawidgets widgets
+QT += widgets
+versionAtMost(QT_VERSION, 5.15.2){
+    QT += multimedia
+    QT += multimediawidgets
+}
 
 qtHaveModule(opengl): QT += opengl
 

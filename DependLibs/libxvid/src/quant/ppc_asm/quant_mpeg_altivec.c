@@ -222,7 +222,7 @@ dequant_mpeg_inter_altivec_c(int16_t * data,
 					 const uint32_t quant,
 					 const uint16_t * mpeg_quant_matrices)
 {
-	register uint32_t sum;
+	uint32_t sum;
 	register const uint16_t *inter_matrix = get_inter_matrix(mpeg_quant_matrices);
 	
 	register vec_sint16_t ox00;

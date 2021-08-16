@@ -6,7 +6,9 @@
 
 QT       += core gui svg widgets
 android:{
-    QT += androidextras
+    versionAtMost(QT_VERSION, 5.15.2) {
+        QT += androidextras
+    }
 #    QT += gui-private
     DEFINES += TARGET_OS_ANDROID
 }

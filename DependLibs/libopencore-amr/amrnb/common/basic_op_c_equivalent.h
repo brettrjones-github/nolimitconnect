@@ -109,7 +109,7 @@ extern "C"
      Returns:
         L_sum = 32-bit sum of L_var1 and L_var2 (Word32)
     */
-    static inline Word32 L_add(register Word32 L_var1, register Word32 L_var2, Flag *pOverflow)
+    static inline Word32 L_add( Word32 L_var1, Word32 L_var2, Flag *pOverflow)
     {
         Word32 L_sum;
 
@@ -148,8 +148,8 @@ extern "C"
      Returns:
         L_diff = 32-bit difference of L_var1 and L_var2 (Word32)
     */
-    static inline Word32 L_sub(register Word32 L_var1, register Word32 L_var2,
-                               register Flag *pOverflow)
+    static inline Word32 L_sub( Word32 L_var1, Word32 L_var2,
+                                Flag *pOverflow)
     {
         Word32 L_diff;
 
@@ -240,7 +240,7 @@ extern "C"
     */
     static inline Word32 L_mult(Word16 var1, Word16 var2, Flag *pOverflow)
     {
-        register Word32 L_product;
+        Word32 L_product;
 
         L_product = (Word32) var1 * var2;
 
@@ -446,7 +446,7 @@ extern "C"
     */
     static inline Word16 mult(Word16 var1, Word16 var2, Flag *pOverflow)
     {
-        register Word32 product;
+        Word32 product;
 
         product = ((Word32) var1 * var2) >> 15;
 
@@ -459,7 +459,6 @@ extern "C"
             *pOverflow = 1;
             product = (Word32) MAX_16;
         }
-
 
         /* Return the product as a 16 bit value by type casting Word32 to Word16 */
 
