@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+//#include <GoTvCompilerConfig.h>
 #include "VxLabel.h"
 
 #include <CoreLib/VxDebug.h>
@@ -116,7 +116,11 @@ void VxLabel::setTextBreakAnywhere( QString text, int maxLines )
 		for( int textLen = remainingText.length(); textLen > 0; textLen-- )
 		{
 			testText = remainingText.left( textLen );
-			if( fm.width(testText) <= myRect.width() )
+            #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                if (fm.horizontalAdvance(testText) <= myRect.width())
+            #else
+			    if( fm.width(testText) <= myRect.width() )
+            #endif
 			{
 				// fits5
 				foundFit = true;
@@ -266,7 +270,11 @@ void VxLabel::slotPlayVideoFrame( QImage picBitmap, int iRotate )
             QImage resizedPicmap = picBitmap.scaled( screenSize, Qt::KeepAspectRatio );
             if( iRotate )
             {
-                QMatrix rm;
+                #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                    QTransform rm;
+                #else
+                    QMatrix rm; 
+                #endif
                 rm.rotate( iRotate );
                 QPixmap pixmap = QPixmap::fromImage( resizedPicmap ).transformed( rm );
                 if( !pixmap.isNull() )
