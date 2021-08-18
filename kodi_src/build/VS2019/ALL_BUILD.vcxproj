@@ -1,9 +1,17 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -13,9 +21,17 @@
       <Configuration>MinSizeRel</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="RelWithDebInfo|Win32">
       <Configuration>RelWithDebInfo</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -33,7 +49,19 @@
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
@@ -45,7 +73,19 @@
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
@@ -58,14 +98,28 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-    <PropertyGroup>
-      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    </PropertyGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
@@ -85,7 +139,27 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
@@ -105,9 +179,20 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
@@ -117,10 +202,23 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
@@ -130,10 +228,23 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
@@ -143,10 +254,23 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule $(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
@@ -156,9 +280,21 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -H$(ProjectDir)../../dvdread-prefix/src/dvdread -B$(ProjectDir)../../dvdread-prefix/src/dvdread-build --check-stamp-file $(ProjectDir)../../dvdread-prefix/src/dvdread-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(ProjectDir)../../dvdread-prefix/src/dvdread/CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\3.8.2\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckFunctionExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\TestLargeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckHeadersSTDC.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckFileOffsetBits.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config-version.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-config.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss.cmake;$(ProjectDir)..\..\build\libdvd\lib\cmake\dvdcss\dvdcss-debug.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFiles.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\cmake\CheckDIRSymbolExists.cmake;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\config.h.cm;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\src\dvdread\version.h.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\WriteBasicConfigVersionFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;$(ProjectDir)..\..\dvdread-prefix\src\dvdread\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(ProjectDir)..\..\dvdread-prefix\src\dvdread-build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

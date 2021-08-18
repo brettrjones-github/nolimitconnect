@@ -1811,7 +1811,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CD6D0111-ED27-4E68-8162-FE9787468457}</ProjectGuid>
     <RootNamespace>CrossGuid</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>libgnu</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

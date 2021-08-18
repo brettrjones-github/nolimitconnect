@@ -22,7 +22,7 @@
     <ProjectGuid>{B537825F-4324-4942-8A5C-04CE2B8C677C}</ProjectGuid>
     <RootNamespace>VxUtilLib</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>libarmrwbenc</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

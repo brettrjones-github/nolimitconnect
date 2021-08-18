@@ -159,7 +159,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9EAF6F13-4D30-44A4-9353-83EFC4C3CE58}</ProjectGuid>
     <RootNamespace>WelsDecCore</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

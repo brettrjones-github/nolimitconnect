@@ -9,10 +9,8 @@ TARGET_NAME = nolimitconnect
 
 QT += gui core concurrent widgets network opengl xml svg quickwidgets
 
-versionAtMost(QT_VERSION, 5.15.2){
-    QT += multimedia
-    QT += multimediawidgets
-}
+QT += multimedia
+QT += multimediawidgets
 
 android:{
     versionAtMost(QT_VERSION, 5.15.2){

@@ -42,7 +42,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4038B225-2FD1-4104-A87D-156DA529C2BD}</ProjectGuid>
     <ProjectName>libbzip2</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
