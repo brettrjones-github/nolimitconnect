@@ -149,14 +149,24 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
 
     if( m_bUserPickedImage || m_bUsingDefaultImage )
     {
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
         // save image to web page
-        const QPixmap * bitmap = ui.m_PictureOfMeFrame->pixmap();
-        if( bitmap )
+        QPixmap bitmap = ui.m_PictureOfMeFrame->pixmap();
+        if( !bitmap.isNull())
         {
             QString picPath = strUserProfileDir.c_str();
             picPath += "me.jpg";
+            bool isOk = bitmap.save( picPath, "JPG" );
+#else
+        // save image to web page
+        const QPixmap* bitmap = ui.m_PictureOfMeFrame->pixmap();
+        if (bitmap)
+        {
+            QString picPath = strUserProfileDir.c_str();
+            picPath += "me.jpg";
+            bool isOk = bitmap->save(picPath, "JPG");
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 
-            bool isOk = bitmap->save( picPath, "JPG" );
             if( !isOk )
             {
                 QString msgText = QObject::tr( "Failed to write into " ) + picPath;

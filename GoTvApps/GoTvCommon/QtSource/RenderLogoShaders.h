@@ -3,8 +3,10 @@
 
 #include "config_gotvapps.h"
 
-#include <QtGui/qopenglshaderprogram.h>
 #include <QtGui/qopenglfunctions.h>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#include <QtGui/qopenglshaderprogram.h>
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 #include "RenderGlShaders.h"
 

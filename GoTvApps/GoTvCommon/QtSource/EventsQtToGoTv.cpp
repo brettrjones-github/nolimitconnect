@@ -604,9 +604,13 @@ int TranslateMouseButtonQt( int mouseButton )
     {
     case Qt::RightButton:
         return XBMC_BUTTON_RIGHT;
-
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    case Qt::MiddleButton:
+        return XBMC_BUTTON_MIDDLE;
+#else
     case Qt::MidButton:
         return XBMC_BUTTON_MIDDLE;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
     case Qt::LeftButton:
     default:

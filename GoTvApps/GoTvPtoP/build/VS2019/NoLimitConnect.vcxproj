@@ -31,7 +31,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.1.2_msvc2019_64</QtInstall>
+    <QtInstall>6.2.0_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets;opengl;quickwidgets;svg;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -66,6 +66,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.codec;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CONSOLE;WIN64;_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\;$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

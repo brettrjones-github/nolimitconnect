@@ -3,19 +3,32 @@
 
 #include <QAudioFormat>
 #include "AudioUtils.h"
+#include <CoreLib/IsBigEndianCpu.h>
 
 qint64 AudioUtils::audioDuration(const QAudioFormat &format, qint64 bytes)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    return (bytes * 1000000) /
+        (format.sampleRate() * format.channelCount() * format.bytesPerSample());
+#else
     return (bytes * 1000000) /
         (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8));
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 qint64 AudioUtils::audioLength(const QAudioFormat &format, qint64 microSeconds)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    qint64 result = (format.sampleRate() * format.channelCount() * format.bytesPerSample())
+        * microSeconds / 1000000;
+    result -= result % (format.channelCount() * format.bytesPerSample() * 8);
+    return result;
+#else
    qint64 result = (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8))
        * microSeconds / 1000000;
    result -= result % (format.channelCount() * format.sampleSize());
    return result;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 qreal AudioUtils::nyquistFrequency(const QAudioFormat &format)
@@ -25,6 +38,53 @@ qreal AudioUtils::nyquistFrequency(const QAudioFormat &format)
 
 QString AudioUtils::formatToString(const QAudioFormat &format)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QString result;
+
+    if (QAudioFormat() != format) {
+
+        Q_ASSERT(format.sampleFormat() == QAudioFormat::Int16);
+
+        const QString formatEndian = !IsBigEndianCpu()
+            ? QString("LE") : QString("BE");
+
+        QString formatType;
+        switch (format.sampleFormat()) {
+        case QAudioFormat::Int16:
+        case QAudioFormat::Int32:
+            formatType = "signed";
+            break;
+        case QAudioFormat::UInt8:
+            formatType = "unsigned";
+            break;
+        case QAudioFormat::Float:
+            formatType = "float";
+            break;
+        case QAudioFormat::Unknown:
+            formatType = "unknown";
+            break;
+        }
+
+        QString formatChannels = QString("%1 channels").arg(format.channelCount());
+        switch (format.channelCount()) {
+        case 1:
+            formatChannels = "mono";
+            break;
+        case 2:
+            formatChannels = "stereo";
+            break;
+        }
+
+        result = QString("%1 Hz %2 bytes %3 %4 %5")
+            .arg(format.sampleRate())
+            .arg(format.bytesPerSample())
+            .arg(formatType)
+            .arg(formatEndian)
+            .arg(formatChannels);
+    }
+
+    return result;
+#else
     QString result;
 
     if (QAudioFormat() != format) {
@@ -72,20 +132,29 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
     }
 
     return result;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 bool AudioUtils::isPCM(const QAudioFormat &format)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    return format.sampleFormat() == QAudioFormat::Int16;
+#else
     return (format.codec() == "audio/pcm");
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 
 bool AudioUtils::isPCMS16LE(const QAudioFormat &format)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    return isPCM(format) && !IsBigEndianCpu();
+#else
     return isPCM(format) &&
            format.sampleType() == QAudioFormat::SignedInt &&
            format.sampleSize() == 16 &&
            format.byteOrder() == QAudioFormat::LittleEndian;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 const qint16  PCMS16MaxValue     =  32767;

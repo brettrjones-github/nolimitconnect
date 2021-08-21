@@ -91,7 +91,11 @@ void LogMgr::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
         || ( u32LogFlags & ~LOG_VERBOSE ) )
     {
         QString logStr( logMsg );
-        logStr.remove( QRegExp( "[\\n\\r]" ) );
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+        logStr.remove(QRegularExpression("[\\n\\r]"));
+#else
+        logStr.remove(QRegExp("[\\n\\r]"));
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
         emit signalLogMsg( u32LogFlags, logStr );
     }
 }

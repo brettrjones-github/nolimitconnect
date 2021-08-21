@@ -13,7 +13,7 @@
 #include <QCommandLineOption>
 #include <QStringList>
 #include <QStandardPaths>
-#ifndef QT_NO_OPENGL
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QGLFormat>
 #endif
 

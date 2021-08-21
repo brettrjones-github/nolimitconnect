@@ -22,8 +22,8 @@ class VxTagLabel : public VxLabel
 {
 	Q_OBJECT
 public:
-	VxTagLabel(QWidget *parent=0, Qt::WindowFlags f=0);
-	VxTagLabel(const QString &text, QWidget *parent=0, Qt::WindowFlags f=0);
+	VxTagLabel(QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
+	VxTagLabel(const QString &text, QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
 	virtual ~VxTagLabel();
 
     void						setAssetInfo( AssetBaseInfo * assetInfo )		{ m_AssetInfo = assetInfo; }

@@ -1,0 +1,8 @@
+=== enable c++17 standard in visual studio 2019 ===
+In NolimitConnect->properties
+Configuration Properties->C/C++->Command Line
+In Additional Options add /Zc:__cplusplus 
+
+In Configuration Properties->C/C++->Language
+Set C++ Language Standard to ISO C++17 Standard (/std:c++17)
+Set C Language Standard to ISO C17 (2018) Standard (/std:c17)

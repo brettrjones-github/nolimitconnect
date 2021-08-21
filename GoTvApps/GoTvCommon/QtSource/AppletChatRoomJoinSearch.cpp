@@ -208,7 +208,11 @@ void AppletChatRoomJoinSearch::slotHostSearchResult( EHostType hostType, VxGUID 
 void AppletChatRoomJoinSearch::toGuiInfoMsg( char * infoMsg )
 {
     QString infoStr( infoMsg );
-    infoStr.remove( QRegExp( "[\\n\\r]" ) );
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    infoStr.remove(QRegularExpression("[\\n\\r]"));
+#else
+    infoStr.remove(QRegExp("[\\n\\r]"));
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
     emit signalInfoMsg( infoStr );
 }
 

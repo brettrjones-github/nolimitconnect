@@ -20,6 +20,7 @@
 #include <CoreLib/VxDebug.h> // needed for ILogCallbackInterface
 
 #include <QMutex>
+#include <QFile>
 
 class VxUrl;
 

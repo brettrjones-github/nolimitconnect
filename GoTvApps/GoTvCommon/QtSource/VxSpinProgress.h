@@ -23,8 +23,8 @@ class VxSpinProgress : public QLabel
 {
 	Q_OBJECT
 public:
-	VxSpinProgress(QWidget *parent=0, Qt::WindowFlags f=0);
-	VxSpinProgress(const QString &text, QWidget *parent=0, Qt::WindowFlags f=0);
+	VxSpinProgress(QWidget *parent=0, Qt::WindowFlags f=Qt::Widget);
+	VxSpinProgress(const QString &text, QWidget *parent=0, Qt::WindowFlags f=Qt::Widget);
 	virtual ~VxSpinProgress() = default;
 
 	QSize						sizeHint() const;

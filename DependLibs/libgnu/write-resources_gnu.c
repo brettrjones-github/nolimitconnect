@@ -172,7 +172,7 @@ but the C# .resources format doesn't support plural handling\n")));
            necessary for running the testsuite before "make install".  */
         gettextexedir = getenv ("GETTEXTCSHARPEXEDIR");
         if (gettextexedir == NULL || gettextexedir[0] == '\0')
-          gettextexedir = relocate (LIBDIR "/gettext");
+          gettextexedir = relocate_gnu(LIBDIR "/gettext");
 
         assembly_path =
           xconcatenated_filename (gettextexedir, "msgfmt.net", ".exe");

@@ -126,7 +126,7 @@ relocate_libdirs ()
   size_t i;
 
   for (i = 0; i < sizeof (libdirs) / sizeof (libdirs[0]) - 1; i++)
-    libdirs[i] = relocate (libdirs[i]);
+    libdirs[i] = relocate_gnu(libdirs[i]);
 }
 
 /* Activate the list of directories in the LIBPATHVAR.  */

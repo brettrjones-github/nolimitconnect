@@ -54,7 +54,18 @@ bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat )
     if( !m_initialized )
     {
         m_AudioFormat = audioFormat;
-        m_initialized = setAudioDevice( QAudioDeviceInfo::defaultOutputDevice() );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        m_AudioOutputDevice = new QAudioSink(m_AudioFormat, this);
+        m_initialized = m_AudioOutputDevice != nullptr;
+        // qt seems to ignore setBufferSize but try for smaller faster calls anyway
+        m_AudioOutputDevice->setBufferSize(AUDIO_BUF_SIZE_48000_2_S16 * 2); // must be called before start
+        m_AudioOutBufferSize = m_AudioOutputDevice->bufferSize();
+
+        connect(m_AudioOutputDevice, SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
+#else
+        m_initialized = setAudioDevice(QAudioDeviceInfo::defaultOutputDevice());
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
     }
 
     m_AudioOutThread.setThreadShouldRun( true );
@@ -62,6 +73,7 @@ bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat )
     return m_initialized;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
 bool AudioOutIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
 {
@@ -84,6 +96,7 @@ bool AudioOutIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
 //    this->reinit();
     return true;
 }
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 void AudioOutIo::reinit()
@@ -373,9 +386,14 @@ void AudioOutIo::slotCheckForBufferUnderun()
                 m_AudioOutputDevice->start( this );
 			}
 			break;
-		case QAudio::InterruptedState:
-            LogMsg( LOG_DEBUG, "Interrupted state.. how to handle?" );
-			break;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+        case QAudio::InterruptedState:
+            LogMsg(LOG_DEBUG, "Interrupted state.. how to handle?");
+            break;
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+        default:
+            LogMsg(LOG_DEBUG, "Unknown AudioOut State");
+            break;
 		};
 	}
 }

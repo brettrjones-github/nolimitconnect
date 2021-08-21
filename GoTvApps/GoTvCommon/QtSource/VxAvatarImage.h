@@ -24,8 +24,8 @@ class VxAvatarImage : public QLabel
 {
 	Q_OBJECT
 public:
-	VxAvatarImage(QWidget *parent=0, Qt::WindowFlags f=0);
-	VxAvatarImage(const QString &text, QWidget *parent=0, Qt::WindowFlags f=0);
+	VxAvatarImage(QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
+	VxAvatarImage(const QString &text, QWidget *parent=0, Qt::WindowFlags f= Qt::Widget);
 	virtual ~VxAvatarImage();
 
 	QSize						sizeHint() const;

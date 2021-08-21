@@ -403,7 +403,7 @@ get_shared_library_fullname ()
    The returned string is either PATHNAME unmodified or a freshly allocated
    string that you can free with free() after casting it to 'char *'.  */
 const char *
-relocate (const char *pathname)
+relocate_gnu(const char *pathname)
 {
 #if defined PIC && defined INSTALLDIR
   static int initialized;

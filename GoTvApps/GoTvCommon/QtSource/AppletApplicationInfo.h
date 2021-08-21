@@ -18,6 +18,7 @@
 #include "ui_AppletApplicationInfo.h"
 
 #include <QMutex>
+#include <QFile>
 
 #include <CoreLib/VxDebug.h>
 

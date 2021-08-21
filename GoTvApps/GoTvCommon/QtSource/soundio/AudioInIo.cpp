@@ -23,7 +23,6 @@
 #include <QtEndian>
 #include <math.h>
 
-
 //============================================================================
 AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 : QIODevice( parent )
@@ -48,14 +47,22 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
     if( !m_initialized )
     {
         m_AudioFormat = audioFormat;
-        m_initialized = setAudioDevice( QAudioDeviceInfo::defaultInputDevice() );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        m_AudioInputDevice = new QAudioSource(m_AudioFormat, this);
+        m_initialized = m_AudioInputDevice != nullptr;
+        // Set constant values to new audio output
+        connect(m_AudioInputDevice, SIGNAL(notify()), SLOT(slotAudioNotified()));
+        connect(m_AudioInputDevice, SIGNAL(stateChanged(QAudio::State)), SLOT(onAudioDeviceStateChanged(QAudio::State)));
+#else
+        m_initialized = setAudioDevice(QAudioDeviceInfo::defaultInputDevice());
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
         m_AudioInThread.setThreadShouldRun( true );
         m_AudioInThread.startAudioInThread();
     }
 
     return m_initialized;
 }
-
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
 bool AudioInIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
 {
@@ -75,6 +82,7 @@ bool AudioInIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
 
     return true;
 }
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 void AudioInIo::reinit()
@@ -91,6 +99,7 @@ void AudioInIo::startAudio()
 
     this->open( QIODevice::WriteOnly );
     m_AudioInputDevice->start( this );
+
     //LogMsg( LOG_DEBUG, "AudioInIo default buffer size %d periodic size %d", m_AudioInputDevice->bufferSize(), m_AudioInputDevice->periodSize() );
 }
 
@@ -106,6 +115,7 @@ void AudioInIo::flush()
     // Flushing buffers is a bit tricky...
     // Don't modify this unless you're sure
     this->stopAudio();
+
     if( m_AudioInputDevice )
 	{
         m_AudioInputDevice->reset();
@@ -268,9 +278,14 @@ void AudioInIo::slotCheckForBufferUnderun()
  //               m_AudioInputDevice->start( this );
 			}
 			break;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 		case QAudio::InterruptedState:
             LogMsg( LOG_DEBUG, "Interrupted state.. how to handle?" );
 			break;
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+        default:
+            LogMsg(LOG_DEBUG, "Unknown AudioIn State");
+            break;
 		};
 	}
 }

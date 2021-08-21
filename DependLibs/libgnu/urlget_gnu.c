@@ -105,7 +105,7 @@ main (int argc, char *argv[])
 #endif
 
   /* Set the text message domain.  */
-  bindtextdomain (PACKAGE, relocate (LOCALEDIR));
+  bindtextdomain (PACKAGE, relocate_gnu(LOCALEDIR));
   textdomain (PACKAGE);
 
   /* Ensure that write errors on stdout are detected.  */
@@ -278,7 +278,7 @@ fetch (const char *url, const char *file)
        necessary for running the testsuite before "make install".  */
     gettextjexedir = getenv ("GETTEXTJEXEDIR");
     if (gettextjexedir == NULL || gettextjexedir[0] == '\0')
-      gettextjexedir = relocate (GETTEXTJEXEDIR);
+      gettextjexedir = relocate_gnu(GETTEXTJEXEDIR);
 # else
     gettextjexedir = NULL;
 # endif
@@ -287,7 +287,7 @@ fetch (const char *url, const char *file)
        necessary for running the testsuite before "make install".  */
     gettextjar = getenv ("GETTEXTJAR");
     if (gettextjar == NULL || gettextjar[0] == '\0')
-      gettextjar = relocate (GETTEXTJAR);
+      gettextjar = relocate_gnu(GETTEXTJAR);
 
     /* Prepare arguments.  */
     args[0] = url;

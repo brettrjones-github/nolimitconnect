@@ -73,7 +73,7 @@
 #if ENABLE_RELOCATABLE
 # include "relocatable.h"
 #else
-# define relocate(pathname) (pathname)
+# define relocate_gnu(pathname) (pathname)
 #endif
 
 /* Get LIBDIR.  */
@@ -136,7 +136,7 @@ get_charset_aliases (void)
          necessary for running the testsuite before "make install".  */
       dir = getenv ("CHARSETALIASDIR");
       if (dir == NULL || dir[0] == '\0')
-        dir = relocate (LIBDIR);
+        dir = relocate_gnu (LIBDIR);
 
       /* Concatenate dir and base into freshly allocated file_name.  */
       {

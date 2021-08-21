@@ -35,7 +35,11 @@ public:
     bool                        getThumbnailIsCircular( void )                  { return m_ThumbnailIsCircular; }
 
     void                        setThumbnailImage( QPixmap pixmap )         { cropAndUpdateImage( pixmap ); }
-    const QPixmap *             getThumbnailImage( void )                   { return pixmap(); }
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    QPixmap                     getThumbnailImage( void )                   { return pixmap(); }
+#else
+    const QPixmap*              getThumbnailImage(void) { return pixmap(); }
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 
     void                        setThumbnailId( VxGUID& id )                { m_ThumbnailId = id; }
     VxGUID&                     getThumbnailId( void )                      { return m_ThumbnailId; }

@@ -173,7 +173,7 @@ qint64 AudioMixer::readDataFromMixer( char *data, qint64 maxlen )
     }
 
     m_MixerMutex.lock();
-    int toReadByteCnt = std::min( (int)maxlen, m_AudioBuffer.size() );
+    int toReadByteCnt = std::min( (int)maxlen, (int)m_AudioBuffer.size() );
  //   LogMsg( LOG_DEBUG, "readDataFromMixer in que %d at %lld ms", toReadByteCnt, m_ElapsedTimer.elapsed() );
     if( toReadByteCnt != maxlen )
     {

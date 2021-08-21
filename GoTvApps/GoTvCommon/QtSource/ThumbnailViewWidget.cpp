@@ -209,10 +209,17 @@ void ThumbnailViewWidget::browseForImage( void )
 bool ThumbnailViewWidget::saveToPngFile( QString pngFileName )
 {
     bool isOk = false;
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    const QPixmap bitmap = pixmap();
+    if (!bitmap.isNull())
+    {
+        isOk = bitmap.save(pngFileName, "PNG");
+#else
     const QPixmap * bitmap = pixmap();
     if( bitmap )
     {
         isOk = bitmap->save( pngFileName, "PNG" );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
         if( !isOk )
         {
             QString msgText = QObject::tr( "Failed to write into " ) + pngFileName;

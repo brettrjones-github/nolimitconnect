@@ -106,13 +106,13 @@ read_resources_file (message_list_ty *mlp, const char *filename)
      necessary for running the testsuite before "make install".  */
   gettextexedir = getenv ("GETTEXTCSHARPEXEDIR");
   if (gettextexedir == NULL || gettextexedir[0] == '\0')
-    gettextexedir = relocate (LIBDIR "/gettext");
+    gettextexedir = relocate_gnu(LIBDIR "/gettext");
 
   /* Make it possible to override the .dll location.  This is
      necessary for running the testsuite before "make install".  */
   gettextlibdir = getenv ("GETTEXTCSHARPLIBDIR");
   if (gettextlibdir == NULL || gettextlibdir[0] == '\0')
-    gettextlibdir = relocate (LIBDIR);
+    gettextlibdir = relocate_gnu(LIBDIR);
 
   /* Dump the resource and retrieve the resulting output.  */
   assembly_path =

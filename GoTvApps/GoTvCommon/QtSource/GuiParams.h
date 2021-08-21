@@ -65,8 +65,6 @@ public:
 
     static QString				describeAge( EAgeType gender );
     static QString				describeAge( int age );
-    static QString              describeCamStatus( QCamera::Status camStatus );
-    static QString              describeCamState( QCamera::State camState );
 
     static QString				describeCommError( ECommErr commErr );
     static QString				describeContentCatagory( EContentCatagory content );
@@ -97,6 +95,11 @@ public:
     static QString              describeStatus( EHostSearchStatus hostStatus );
     static QString				describeResponse( EOfferResponse eOfferResponse );
     static QString				describeFriendship( EFriendState friendState );
+
+    #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    static QString              describeCamStatus(QCamera::Status camStatus);
+    static QString              describeCamState(QCamera::State camState);
+    #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 protected:
 

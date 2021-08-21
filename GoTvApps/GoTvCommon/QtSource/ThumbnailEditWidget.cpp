@@ -214,7 +214,12 @@ void ThumbnailEditWidget::slotMakeCircleButClick( void )
 {
     if( !m_ThumbnailIsCircular )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        m_SquarePixmap = ui.m_ThumbnailViewWidget->getThumbnailImage();
+#else
         m_SquarePixmap = *ui.m_ThumbnailViewWidget->getThumbnailImage();
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        
         if( !m_SquarePixmap.isNull() )
         {
             m_ThumbnailIsCircular = true;

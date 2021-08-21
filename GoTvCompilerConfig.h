@@ -579,7 +579,7 @@ int								ffs( int );// implemented in VxFuntionsMissingInWindows
 uint32_t						getpagesize( void );
 // Find the first occurrence of the byte string s in byte string
 const void *					memmem( const void *l, size_t l_len, const void *s, size_t s_len );
-size_t							getline( char **lineptr, size_t *n, FILE *stream );
+//size_t							getline( char **lineptr, size_t *n, FILE *stream );
 GOTV_INLINE uint32_t			setuid( uint32_t id ) { return id; } // windows does not have user id's so fake it for now
 char *							strchrnul( const char *s, int c_in ); // implemented in libgnu/strchrnul.c
 char *							stpcpy( char *a, const char *b );
@@ -1827,7 +1827,7 @@ it. */
 
 
 /* By default, we use the hardwired pathnames.  */
-# define relocate(pathname) (pathname)
+# define relocate_gnu(pathname)_gnu (pathname) // renamed relocate to relocate_gnu because of name clash
 # define GETTEXTDATADIR						".textdata/"
 # define GETTEXTJAR							".textjar/"
 # define PACKAGE_SUFFIX						".gnu"

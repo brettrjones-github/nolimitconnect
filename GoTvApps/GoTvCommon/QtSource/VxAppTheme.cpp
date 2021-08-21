@@ -359,7 +359,9 @@ void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundCo
 
     QPalette widgetPalette = widget->palette();
 	widgetPalette.setColor( QPalette::Base, backgroundColor );
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	widgetPalette.setColor( QPalette::Background, backgroundColor );
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	widgetPalette.setColor( QPalette::Window, backgroundColor );
 	widget->setPalette( widgetPalette );
 
@@ -373,7 +375,9 @@ void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColo
 
     QPalette framePalette = frame->palette();
 	framePalette.setColor( QPalette::Base, backgroundColor );
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	framePalette.setColor( QPalette::Background, backgroundColor );
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	framePalette.setColor( QPalette::Window, backgroundColor );
 	frame->setPalette( framePalette );
 
@@ -772,8 +776,13 @@ void VxAppTheme::updateWindowTheme( void )
 
     palette.setColor( QPalette::Light, windowTextColor );                       // Light
     palette.setColor( QPalette::Midlight, windowTextColor.darker() );           // Midlight.. mostly for 
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    palette.setColor(QPalette::Mid, windowTextColor.darker().darker());
+    palette.setColor(QPalette::Dark, windowTextColor.darker().darker().darker());
+#else
     palette.setColor( QPalette::Mid, windowTextColor.dark() );                  // Mid
     palette.setColor( QPalette::Dark, windowTextColor.dark().darker() );        // Dark .. mostly for frame shadow and radio button outline
+#endif .. QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
     palette.setColor( QPalette::AlternateBase, QColor( COLOR_PINK_LIGHT ) );     // AlternateBase ( for alternating row color )
 

@@ -43,7 +43,7 @@ const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
 ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, bool isDialog, bool isPopup, bool fullWindowSize )
-: QDialog( parent, 0 )
+: QDialog( parent, Qt::Widget )
 , ObjectCommon( objName )
 , m_MyApp( app )
 , m_UserMgr( app.getUserMgr() )

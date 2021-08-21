@@ -1824,10 +1824,10 @@ it. */
 
 
 /* By default, we use the hardwired pathnames.  */
-# define relocate(pathname) (pathname)
+# define relocate_gnu(pathname) (pathname) // renamed relocate to relocate_gnu because of name clash
 # define GETTEXTDATADIR						".textdata/"
 # define GETTEXTJAR							".textjar/"
 # define PACKAGE_SUFFIX						".gnu"
-# define PROJECTSDIR						".gotvp2p/"
+# define PROJECTSDIR						".nolimitconnect/"
 
 

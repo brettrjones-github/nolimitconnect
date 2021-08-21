@@ -347,7 +347,10 @@ const char * AppProfile::getLocalHostIp()
 //============================================================================
 std::string& AppProfile::getOsSpecificAppDataDir( void )
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	QStringList paths = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+	QString dataLocation = paths[0];
+#elif QT_VERSION >= QT_VERSION_CHECK(5,0,0)
     QStringList paths = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
     QString dataLocation = paths[0];
 #else

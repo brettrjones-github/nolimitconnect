@@ -66,7 +66,7 @@ msgdomain_read_tcl (const char *locale_name, const char *directory)
      necessary for running the testsuite before "make install".  */
   gettextdatadir = getenv ("GETTEXTDATADIR");
   if (gettextdatadir == NULL || gettextdatadir[0] == '\0')
-    gettextdatadir = relocate (GETTEXTDATADIR);
+    gettextdatadir = relocate_gnu(GETTEXTDATADIR);
 
   tclscript = xconcatenated_filename (gettextdatadir, "msgunfmt.tcl", NULL);
 

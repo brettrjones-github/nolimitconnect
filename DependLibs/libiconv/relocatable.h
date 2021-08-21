@@ -52,7 +52,7 @@ extern RELOCATABLE_DLL_EXPORTED void
    directory.
    The returned string is either PATHNAME unmodified or a freshly allocated
    string that you can free with free() after casting it to 'char *'.  */
-extern const char * relocate (const char *pathname);
+extern const char * relocate_gnu(const char *pathname);
 
 /* Memory management: relocate() potentially allocates memory, because it has
    to construct a fresh pathname.  If this is a problem because your program
@@ -71,7 +71,7 @@ extern char * compute_curr_prefix (const char *orig_installprefix,
 #else
 
 /* By default, we use the hardwired pathnames.  */
-#define relocate(pathname) (pathname)
+#define relocate_gnu(pathname) (pathname)
 
 #endif
 

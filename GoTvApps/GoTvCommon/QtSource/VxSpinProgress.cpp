@@ -114,7 +114,11 @@ void VxSpinProgress::slotAnimationTickTock( void )
 
 	m_Angle = ( m_Angle + 6 ) % 360;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	QTransform rm;
+#else
 	QMatrix rm;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 	rm.rotate( m_Angle );
 	QPixmap pixmap = QPixmap::fromImage( m_ProgressPixmap ).transformed(rm);
 	setPixmap( pixmap );

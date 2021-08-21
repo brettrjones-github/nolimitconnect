@@ -16,7 +16,11 @@
 #include <QFontDatabase>
 //#include <QPrintDialog>
 //#include <QPrinter>
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+//#include <QTextDecoder>
+#else
 #include <QTextCodec>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 #include <QTextEdit>
 #include <QToolBar>
 #include <QTextCursor>
@@ -260,10 +264,16 @@ void StoryWidget::setupTextActions()
 static QUrl guessUrlFromString(const QString &string)
 {
 	QString urlStr = string.trimmed();
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+	QRegularExpression test(QLatin1String("^[a-zA-Z]+\\:.*"));
+	QRegularExpressionMatch match = test.match(urlStr);
+	bool hasSchema = match.hasMatch(); // true
+#else
 	QRegExp test(QLatin1String("^[a-zA-Z]+\\:.*"));
+	bool hasSchema = test.exactMatch(urlStr);
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)	
 
 	// Check if it looks like a qualified URL. Try parsing it and see.
-	bool hasSchema = test.exactMatch(urlStr);
 	if (hasSchema) {
 		QUrl url(urlStr, QUrl::TolerantMode);
 		if (url.isValid())
@@ -321,8 +331,14 @@ bool StoryWidget::load( const QString &fileName )
 	}
 
     QByteArray data = file.readAll();
-    QTextCodec *codec = Qt::codecForHtml( data );
-    QString strText = codec->toUnicode( data );
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	QString strText = QString::fromUtf8( data );
+#else
+	QTextCodec *codec = Qt::codecForHtml( data );
+	QString strText = codec->toUnicode( data );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
     if( Qt::mightBeRichText( strText ) ) 
 	{
         m_TextEdit->setHtml( strText );

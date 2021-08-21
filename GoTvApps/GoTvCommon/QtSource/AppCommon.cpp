@@ -862,7 +862,11 @@ void AppCommon::toGuiLog( int logFlags, const char * pMsg )
 	}
 
     QString strMsg = pMsg;
-    strMsg.remove(QRegExp("[\\n\\r]"));
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+	strMsg.remove(QRegularExpression("[\\n\\r]"));
+#else
+	strMsg.remove(QRegExp("[\\n\\r]"));
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 
 #ifdef TARGET_OS_WINDOWS
     qDebug() << strMsg;

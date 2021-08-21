@@ -79,9 +79,6 @@ QString AppTranslate::describeLanguage( ELanguageType langType )
     case eLangLithuanian:
         lang = "Lithuanian";
         break;
-    case eLangNorwegian:
-        lang = "Norwegian";
-        break;
     case eLangPolish:
         lang = "Polish";
         break;
@@ -182,9 +179,6 @@ QLocale AppTranslate::getLocale( ELanguageType langType )
         break;
     case eLangLithuanian:
         locale = QLocale::Lithuanian;
-        break;
-    case eLangNorwegian:
-        locale = QLocale::Norwegian;
         break;
     case eLangPolish:
         locale = QLocale::Polish;

@@ -98,7 +98,7 @@ msgdomain_read_java (const char *resource_name, const char *locale_name)
      necessary for running the testsuite before "make install".  */
   gettextjexedir = getenv ("GETTEXTJEXEDIR");
   if (gettextjexedir == NULL || gettextjexedir[0] == '\0')
-    gettextjexedir = relocate (GETTEXTJEXEDIR);
+    gettextjexedir = relocate_gnu(GETTEXTJEXEDIR);
 #else
   gettextjexedir = NULL;
 #endif
@@ -107,7 +107,7 @@ msgdomain_read_java (const char *resource_name, const char *locale_name)
      necessary for running the testsuite before "make install".  */
   gettextjar = getenv ("GETTEXTJAR");
   if (gettextjar == NULL || gettextjar[0] == '\0')
-    gettextjar = relocate (GETTEXTJAR);
+    gettextjar = relocate_gnu(GETTEXTJAR);
 
   /* Assign a default value to the resource name.  */
   if (resource_name == NULL)

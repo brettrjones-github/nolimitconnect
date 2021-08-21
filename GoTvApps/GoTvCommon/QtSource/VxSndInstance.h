@@ -19,7 +19,12 @@
 
 #include <QObject>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+class QSoundEffect;
+#else
 class QSound;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
 class QTimer;
 
 class VxSndInstance : public QObject
@@ -48,7 +53,12 @@ protected:
 
 	//=== vars ===//
 	ESndDef						m_SndDef;
-	QSound *					m_QSound;
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	QSoundEffect*				m_QSound;
+#else
+	QSound*						m_QSound;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
 	QTimer *					m_CheckFinishTimer;
 	bool						m_IsPlaying;
 	bool						m_IsInitialized;

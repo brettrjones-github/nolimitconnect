@@ -116,7 +116,7 @@ get_search_path (const char *sub)
     /* Make it possible to override the locator file location.  This
        is necessary for running the testsuite before "make
        install".  */
-    gettextdatadir = relocate (GETTEXTDATADIR);
+    gettextdatadir = relocate_gnu(GETTEXTDATADIR);
 
   /* Append element from GETTEXTDATADIR.  */
   if (sub == NULL)

@@ -29,7 +29,9 @@
 #include <QClipboard>
 #include <QScrollBar>
 #include <QApplication>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QDesktopWidget>
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 namespace
 {
@@ -84,7 +86,11 @@ void AppletApplicationInfo::onLogEvent( uint32_t u32LogFlags, const char * logMs
         || ( u32LogFlags & ~LOG_VERBOSE ) )
     {
         QString logStr( logMsg );
-        logStr.remove( QRegExp( "[\\n\\r]" ) );
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+        logStr.remove(QRegularExpression("[\\n\\r]"));
+#else
+        logStr.remove(QRegExp("[\\n\\r]"));
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
         emit signalLogMsg( logStr );
     }
 
@@ -97,7 +103,11 @@ void AppletApplicationInfo::toGuiInfoMsg( char * infoMsg )
     m_LogMutex.lock();
 
     QString infoStr( infoMsg );
-    infoStr.remove( QRegExp( "[\\n\\r]" ) );
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    infoStr.remove(QRegularExpression("[\\n\\r]"));
+#else
+    infoStr.remove(QRegExp("[\\n\\r]"));
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
     emit signalInfoMsg( infoStr );
 
     m_LogMutex.unlock();
@@ -188,12 +198,21 @@ void AppletApplicationInfo::fillBasicInfo( void )
 //============================================================================
 void AppletApplicationInfo::fillExtraInfo( void )
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QRect rec = QApplication::primaryScreen()->availableGeometry();
+    int screenHeight = rec.height();
+    int screenWidth = rec.width();
+    int xDpi = QApplication::primaryScreen()->physicalDotsPerInchX();
+    int yDpi = QApplication::primaryScreen()->physicalDotsPerInchY();
+    int ratioDpi = QApplication::primaryScreen()->devicePixelRatio();
+#else
     QRect rec = QApplication::desktop()->screenGeometry();
     int screenHeight = rec.height();
     int screenWidth = rec.width();
     int xDpi = QApplication::desktop()->physicalDpiX();
     int yDpi = QApplication::desktop()->physicalDpiY();
     int ratioDpi = QApplication::desktop()->devicePixelRatio();
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
     infoMsg( "screen size: width %d heigth %d", screenWidth, screenHeight );
     infoMsg( "screen dpi: x %d y %d ratio %d", xDpi, yDpi, ratioDpi );

@@ -7,13 +7,19 @@
 #include <QtGui/QOffscreenSurface>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QResizeEvent>
-#include <QtGui/QOpenGLPaintDevice>
 #include <QtGui/QOpenGLFunctions>
 #include <QtGui/QOpenGLExtraFunctions>
-#include <QtGui/QOpenGLFramebufferObject>
 #include <QtGui/QSurfaceFormat>
 #include <QtWidgets/QWidget>
 #include <QOpenGLShaderProgram>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#include <QOpenGLFramebufferObject>
+#include <QOpenGLPaintDevice>
+#else
+#include <QtGui/QOpenGLPaintDevice>
+#include <QtGui/QOpenGLFramebufferObject>
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 
 #include <atomic>

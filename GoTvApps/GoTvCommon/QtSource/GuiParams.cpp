@@ -17,8 +17,10 @@
 #include "GuiParams.h"
 
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QScreen>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#include <QDesktopWidget>
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 #include <CoreLib/VxDebug.h>
 
@@ -141,7 +143,7 @@ QString GuiParams::describeAge( EAgeType gender )
 //============================================================================
 QString GuiParams::describeAge( int age )
 {
-    QString ageStr( age );
+    QString ageStr = QString::number( age );
     if( ( age >= 80 ) || ( age < 0 ) )
     {
         ageStr = QObject::tr( "Old" );
@@ -162,6 +164,7 @@ QString GuiParams::describeAge( int age )
     return ageStr;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
 QString GuiParams::describeCamStatus( QCamera::Status camStatus )
 {
@@ -220,6 +223,8 @@ QString GuiParams::describeCamState( QCamera::State camState )
 
     return camDesc;
 }
+
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 QString GuiParams::describeCommError( ECommErr commErr )

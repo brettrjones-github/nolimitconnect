@@ -22,8 +22,8 @@ class VxWidgetBase : public QWidget, public ObjectCommon
 {
 	Q_OBJECT
 public:
-    VxWidgetBase( QWidget * parent = 0, Qt::WindowFlags f = 0 );
-	VxWidgetBase( const char * objName, QWidget * parent = 0, Qt::WindowFlags f = 0 );
+    VxWidgetBase( QWidget * parent = 0, Qt::WindowFlags f = Qt::Widget );
+	VxWidgetBase( const char * objName, QWidget * parent = 0, Qt::WindowFlags f = Qt::Widget);
 	virtual ~VxWidgetBase();
 
 signals:

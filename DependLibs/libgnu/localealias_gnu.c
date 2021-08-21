@@ -62,7 +62,7 @@ char *alloca();
 #ifdef ENABLE_RELOCATABLE
 # include "relocatable.h"
 #else
-# define relocate(pathname) (pathname)
+# define relocate_gnu(pathname) (pathname)
 #endif
 
 /* @@ end of prolog @@ */
@@ -232,9 +232,9 @@ read_alias_file( const char *fname, int fname_len )
 #ifdef _LIBC
 	/* Note the file is opened with cancellation in the I/O functions
 	   disabled.  */
-	fp = fopen( relocate( full_fname ), "rce" );
+	fp = fopen( relocate_gnu( full_fname ), "rce" );
 #else
-	fp = fopen( relocate( full_fname ), "r" );
+	fp = fopen( relocate_gnu( full_fname ), "r" );
 #endif
 	freea( full_fname );
 	if( fp == NULL )

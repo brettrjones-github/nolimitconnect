@@ -154,10 +154,17 @@ void HomeWindow::restoreHomeWindowGeometry()
     QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
     if( restoreGeom.isEmpty() )
     {
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+        const QRect availableGeometry = QApplication::primaryScreen()->availableGeometry();
+        resize(availableGeometry.width() / 3, availableGeometry.height() / 2);
+        move((availableGeometry.width() - width()) / 2,
+            (availableGeometry.height() - height()) / 2);
+#else
         const QRect availableGeometry = QApplication::desktop()->availableGeometry( this );
         resize( availableGeometry.width() / 3, availableGeometry.height() / 2 );
         move( ( availableGeometry.width() - width() ) / 2,
             ( availableGeometry.height() - height() ) / 2 );
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
     }
     else
     {
@@ -193,7 +200,11 @@ void HomeWindow::initializeGoTvDynamicLayout( void )
 	m_MainLayout = new QGridLayout();
 	m_MainLayout->setSizeConstraint( QLayout::SetNoConstraint );
 	m_MainLayout->setSpacing( 1 );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    m_MainLayout->setContentsMargins(0,0,0,0);
+#else
 	m_MainLayout->setMargin( 0 );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
 	// make a frame for each possible layout area and we will show/hide/ re-parent based on the layout type
 	m_HomeFrameUpperLeft->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );

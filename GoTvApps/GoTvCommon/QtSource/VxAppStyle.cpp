@@ -238,11 +238,12 @@ void VxAppStyle::drawPrimitive( PrimitiveElement		primativeElem,
     {
         // allow default
     }
-
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     if( primativeElem == PE_IndicatorViewItemCheck )
     {
         // allow default
     }
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     QCommonStyle::drawPrimitive( primativeElem, option, painter, widget );
 }
@@ -405,7 +406,11 @@ void VxAppStyle::drawControl(   ControlElement			element,
                 br = QBrush( option->palette.light().color(), Qt::Dense4Pattern );
             }
 
-            painter->setBackground( option->palette.background().color() );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+            painter->setBackground(option->palette.base().color());
+#else
+            painter->setBackground(option->palette.background());
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
             painter->setBrush( br );
         }
 
@@ -600,7 +605,12 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             else
             {
                 painter->setPen( opt->palette.text().color() );
-                painter->setBackground( opt->palette.background() );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+                painter->setBackground(opt->palette.base().color());
+#else
+                painter->setBackground(opt->palette.background());
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+                
             }
 
             if( opt->state & State_HasFocus && !opt->editable )

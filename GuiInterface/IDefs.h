@@ -687,7 +687,6 @@ enum ELanguageType
     eLangJapanese,      //	(jp) Japanese
     eLangLatvian,       //	(lv) Latvian
     eLangLithuanian,    //	(lt) Lithuanian
-    eLangNorwegian,     //	(no) Norwegian
     eLangPolish,        //	(pl) Polish
     eLangPortuguese,    //	(pt) Portuguese
     eLangRomanian,      //	(ro) Romanian

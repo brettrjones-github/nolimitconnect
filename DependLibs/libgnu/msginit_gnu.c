@@ -167,8 +167,8 @@ main (int argc, char **argv)
 #endif
 
   /* Set the text message domain.  */
-  bindtextdomain (PACKAGE, relocate (LOCALEDIR));
-  bindtextdomain ("bison-runtime", relocate (BISON_LOCALEDIR));
+  bindtextdomain (PACKAGE, relocate_gnu(LOCALEDIR));
+  bindtextdomain ("bison-runtime", relocate_gnu(BISON_LOCALEDIR));
   textdomain (PACKAGE);
 
   /* Ensure that write errors on stdout are detected.  */
@@ -877,7 +877,7 @@ project_id (const char *header)
 
   gettextlibdir = getenv ("GETTEXTLIBDIR");
   if (gettextlibdir == NULL || gettextlibdir[0] == '\0')
-    gettextlibdir = relocate (LIBDIR "/gettext");
+    gettextlibdir = relocate_gnu(LIBDIR "/gettext");
 
   prog = xconcatenated_filename (gettextlibdir, "project-id", NULL);
 
@@ -951,7 +951,7 @@ project_id_version (const char *header)
 
   gettextlibdir = getenv ("GETTEXTLIBDIR");
   if (gettextlibdir == NULL || gettextlibdir[0] == '\0')
-    gettextlibdir = relocate (LIBDIR "/gettext");
+    gettextlibdir = relocate_gnu(LIBDIR "/gettext");
 
   prog = xconcatenated_filename (gettextlibdir, "project-id", NULL);
 
@@ -1102,7 +1102,7 @@ get_user_fullname ()
 static const char *
 get_user_email ()
 {
-  const char *prog = relocate (LIBDIR "/gettext/user-email");
+  const char *prog = relocate_gnu(LIBDIR "/gettext/user-email");
   char *argv[4];
   pid_t child;
   int fd[1];
@@ -1201,7 +1201,7 @@ language_team_englishname ()
 static const char *
 language_team_address ()
 {
-  const char *prog = relocate (PROJECTSDIR "/team-address");
+  const char *prog = relocate_gnu(PROJECTSDIR "/team-address");
   char *argv[7];
   pid_t child;
   int fd[1];
@@ -1214,8 +1214,8 @@ language_team_address ()
   /* Call the team-address shell script.  */
   argv[0] = "/bin/sh";
   argv[1] = (char *) prog;
-  argv[2] = (char *) relocate (PROJECTSDIR);
-  argv[3] = (char *) relocate (LIBDIR "/gettext");
+  argv[2] = (char *) relocate_gnu(PROJECTSDIR);
+  argv[3] = (char *) relocate_gnu(LIBDIR "/gettext");
   argv[4] = (char *) catalogname;
   argv[5] = (char *) language;
   argv[6] = NULL;
@@ -1362,7 +1362,7 @@ plural_forms ()
 
       gettextlibdir = getenv ("GETTEXTLIBDIR");
       if (gettextlibdir == NULL || gettextlibdir[0] == '\0')
-        gettextlibdir = relocate (LIBDIR "/gettext");
+        gettextlibdir = relocate_gnu(LIBDIR "/gettext");
 
       prog = xconcatenated_filename (gettextlibdir, "cldr-plurals", NULL);
 

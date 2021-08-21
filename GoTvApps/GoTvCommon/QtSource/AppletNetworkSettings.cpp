@@ -441,8 +441,7 @@ void AppletNetworkSettings::setFirewallTest( FirewallSettings::EFirewallTestType
 void AppletNetworkSettings::slotRandomPortButtonClick( void )
 {
     uint16_t u16TcpPort = VxGetRandomTcpPort();
-    QString strPort;
-    strPort.sprintf( "%d", u16TcpPort );
+    QString strPort(u16TcpPort);
     ui.PortEdit->setText( strPort );
     updateSettingsFromDlg();
 }

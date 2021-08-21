@@ -752,7 +752,7 @@ msgdomain_write_csharp (message_list_ty *mlp, const char *canon_encoding,
      necessary for running the testsuite before "make install".  */
   gettextlibdir = getenv ("GETTEXTCSHARPLIBDIR");
   if (gettextlibdir == NULL || gettextlibdir[0] == '\0')
-    gettextlibdir = relocate (LIBDIR);
+    gettextlibdir = relocate_gnu(LIBDIR);
 
   /* Compile the C# file to a .dll file.  */
   csharp_sources[0] = csharp_file_name;

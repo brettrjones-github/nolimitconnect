@@ -387,7 +387,11 @@ void AppletBrowseFiles::slotBrowseButtonClicked( void )
 	QString selectedDir = "";
 	QString curDir = m_CurBrowseDirectory.c_str();
 	QFileDialog dialog( (QWidget *)this->parent(), QObject::tr("Open Directory"), curDir );
-	dialog.setFileMode( QFileDialog::DirectoryOnly );
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+	dialog.setFileMode( QFileDialog::Directory );
+#else
+	dialog.setFileMode(QFileDialog::DirectoryOnly);
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 	dialog.setOptions( QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
 	dialog.setDirectory( curDir );
 	QStringList fileNames;

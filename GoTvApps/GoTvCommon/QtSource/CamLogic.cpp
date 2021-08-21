@@ -18,8 +18,9 @@
 #include "AppCommon.h"
 
 #include <CoreLib/VxDebug.h>
-
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 Q_DECLARE_METATYPE( QCameraInfo )
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
@@ -90,6 +91,7 @@ void CamLogic::slotTakeSnapshot( void )
 {
     //LogModule(eLogVideo, LOG_DEBUG, "Cam Error %d Status %s", m_camera->error(), GuiParams::describeCamStatus(m_CamStatus).toUtf8().constData());
     static int notReadyCnt = 0;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     if( QCamera::Status::ActiveStatus != m_CamStatus || QCamera::State::ActiveState != m_CamState || QMultimedia::Available != m_imageCapture->availability())
     {
         // camera system not ready
@@ -123,33 +125,9 @@ void CamLogic::slotTakeSnapshot( void )
         m_isCapturingImage = true;
         m_imageCapture->capture();
     }
+
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
-
-//============================================================================
-//void CamLogic::initCamLogic( void ) //: ui(new Ui::Camera)
-//{
-    //ui->setupUi(this);
-
-    //CamLogic devices:
-
-    //QActionGroup *videoDevicesGroup = new QActionGroup( this );
-    //videoDevicesGroup->setExclusive( true );
-    //const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
-    //for( const QCameraInfo &cameraInfo : availableCameras ) {
-    //    QAction *videoDeviceAction = new QAction( cameraInfo.description(), videoDevicesGroup );
-    //    videoDeviceAction->setCheckable( true );
-    //    videoDeviceAction->setData( QVariant::fromValue( cameraInfo ) );
-    //    if( cameraInfo == QCameraInfo::defaultCamera() )
-    //        videoDeviceAction->setChecked( true );
-
-    //    //ui->menuDevices->addAction(videoDeviceAction);
-    //}
-
-    //connect( videoDevicesGroup, &QActionGroup::triggered, this, &CamLogic::updateCameraDevice );
-    ////connect(ui->captureWidget, &QTabWidget::currentChanged, this, &CamLogic::updateCaptureMode);
-
-    //setCamera( QCameraInfo::defaultCamera() );
-//}
 
 //============================================================================
 // set application is exiting.. returt true if cam is busy with capture
@@ -160,26 +138,21 @@ bool CamLogic::setAppIsExiting( bool isExiting )
 }
 
 //============================================================================
-void CamLogic::setViewfinder( QCameraViewfinder *viewfinder )
-{
-    //m_ViewFinder = viewfinder;
-    //if( m_ViewFinder && !m_camera.isNull() )
-    //{
-    //    m_camera->setViewfinder( viewfinder );
-    //}
-}
-
-//============================================================================
 bool CamLogic::assureCamInitiated( void )
 {
     if( !m_CamInitiated )
     {
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
         setCamera( QCameraInfo::defaultCamera() );
+#else
+        m_camera.reset(new QCamera());
+#endif  QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     }
 
     return  !m_camera.isNull() && m_camera->isAvailable();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
 void CamLogic::setCamera( const QCameraInfo &cameraInfo )
 {
@@ -212,6 +185,7 @@ void CamLogic::setCamera( const QCameraInfo &cameraInfo )
     m_imageCapture->setEncodingSettings( settings );
     m_CamInitiated = true;
 }
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 void CamLogic::keyPressEvent( QKeyEvent * event )
@@ -293,6 +267,7 @@ void CamLogic::processCapturedImage( int requestId, const QImage& img )
 //============================================================================
 void CamLogic::configureCaptureSettings()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     switch( m_camera->captureMode() ) {
     case QCamera::CaptureStillImage:
         configureImageSettings();
@@ -303,6 +278,7 @@ void CamLogic::configureCaptureSettings()
     default:
         break;
     }
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
 
 //============================================================================
@@ -373,6 +349,7 @@ void CamLogic::setMuted( bool muted )
 //============================================================================
 void CamLogic::toggleLock()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     switch( m_camera->lockStatus() ) {
     case QCamera::Searching:
     case QCamera::Locked:
@@ -381,36 +358,10 @@ void CamLogic::toggleLock()
     case QCamera::Unlocked:
         m_camera->searchAndLock();
     }
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
 
-//============================================================================
-void CamLogic::updateLockStatus( QCamera::LockStatus status, QCamera::LockChangeReason reason )
-{
-    //QColor indicationColor = Qt::black;
-
-    //switch (status) {
-    //case QCamera::Searching:
-    //    indicationColor = Qt::yellow;
-    //    ui->statusbar->showMessage(tr("Focusing..."));
-    //    ui->lockButton->setText(tr("Focusing..."));
-    //    break;
-    //case QCamera::Locked:
-    //    indicationColor = Qt::darkGreen;
-    //    ui->lockButton->setText(tr("Unlock"));
-    //    ui->statusbar->showMessage(tr("Focused"), 2000);
-    //    break;
-    //case QCamera::Unlocked:
-    //    indicationColor = reason == QCamera::LockFailed ? Qt::red : Qt::black;
-    //    ui->lockButton->setText(tr("Focus"));
-    //    if (reason == QCamera::LockFailed)
-    //        ui->statusbar->showMessage(tr("Focus Failed"), 2000);
-    //}
-
-    //QPalette palette = ui->lockButton->palette();
-    //palette.setColor(QPalette::ButtonText, indicationColor);
-    //ui->lockButton->setPalette(palette);
-}
-
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
 void CamLogic::displayCaptureError( int id, const QCameraImageCapture::Error error, const QString &errorString )
 {
@@ -425,6 +376,7 @@ void CamLogic::displayCaptureError( int id, const QCameraImageCapture::Error err
         QMessageBox::warning( this, QObject::tr( "Image Capture Error" ), errorString );
     }
 }
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 void CamLogic::startCamera()
@@ -432,6 +384,7 @@ void CamLogic::startCamera()
     if( assureCamInitiated() && !m_camera.isNull() && !m_CamIsStarted )
     {
         m_CamIsStarted = true;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
         if( !m_ViewFinder )
         {
             m_ViewFinder = new QCameraViewfinder();
@@ -439,6 +392,7 @@ void CamLogic::startCamera()
             m_camera->setViewfinder( m_ViewFinder );
             m_ViewFinder->hide();
         }
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
         m_camera->start();
         m_SnapshotTimer->start();
@@ -466,16 +420,17 @@ void CamLogic::stopCamera()
 //============================================================================
 void CamLogic::updateCaptureMode(int)
 {
-    //int tabIndex = ui->captureWidget->currentIndex();
-    //QCamera::CaptureModes captureMode = tabIndex == 0 ? QCamera::CaptureStillImage : QCamera::CaptureVideo;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     QCamera::CaptureModes captureMode = QCamera::CaptureStillImage;
 
     if( m_camera && m_camera->isCaptureModeSupported( captureMode ) )
     {
         m_camera->setCaptureMode( captureMode );
     }
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 //============================================================================
 void CamLogic::cameraStateChanged( QCamera::State camState )
 {
@@ -541,11 +496,14 @@ void CamLogic::updateRecorderState( QMediaRecorder::State state )
     //    break;
     //}
 }
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 //============================================================================
 void CamLogic::setExposureCompensation( int index )
 {
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     m_camera->exposure()->setExposureCompensation( index*0.5 );
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
 
 //============================================================================
@@ -566,7 +524,9 @@ void CamLogic::displayCameraError()
 //============================================================================
 void CamLogic::updateCameraDevice( QAction *action )
 {
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     setCamera( qvariant_cast< QCameraInfo >( action->data() ) );
+#endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
 
 //============================================================================

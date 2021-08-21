@@ -81,7 +81,7 @@ main (int argc, char *argv[])
 #endif
 
   /* Set the text message domain.  */
-  bindtextdomain (PACKAGE, relocate (LOCALEDIR));
+  bindtextdomain (PACKAGE, relocate_gnu(LOCALEDIR));
   textdomain (PACKAGE);
 
   /* Ensure that write errors on stdout are detected.  */

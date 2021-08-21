@@ -18,18 +18,25 @@
 
 #include <QTimer>
 #include <QKeyEvent>
-#include <QCameraInfo>
-#include <QMediaService>
-#include <QMediaRecorder>
-#include <QCameraViewfinder>
 #include <QMediaMetaData>
 
 #include <QMessageBox>
 #include <QPalette>
-
 #include <QtWidgets>
-#include <QCameraImageCapture>
-#include <QMediaService>
+#include <QMediaRecorder>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#include <QCamera>
+#include <QCameraDevice>
+#include <QCameraFormat>
+#include <QImageCapture>
+#else
+# include <QCameraInfo>
+# include <QMediaService>
+# include <QCameraViewfinder>
+# include <QCameraImageCapture>
+# include <QMediaService>
+#endif //  QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
 class AppCommon;
 
@@ -50,8 +57,6 @@ public:
     bool                        setAppIsExiting( bool isExiting );
     bool                        getAppIsExiting( void )                             { return m_applicationExiting; }
 
-    void                        setViewfinder( QCameraViewfinder *viewfinder );
-
     /// TODO implement option to select cam hardware
     void						setCamSourceId( uint32_t camId )                        { m_CamId = camId; }
     uint32_t					getCamSourceId( void )                                  { return m_CamId; }
@@ -68,7 +73,9 @@ public:
     void                        toGuiWantVideoCapture( bool wantVidCapture );
 
 public slots:
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     void setCamera( const QCameraInfo &cameraInfo );
+#endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     void startCamera();
     void stopCamera();
@@ -79,8 +86,7 @@ public slots:
     void setMuted( bool );
 
     void toggleLock();
-    void displayCaptureError( int, QCameraImageCapture::Error, const QString &errorString );
-
+ 
     void configureCaptureSettings();
     void configureVideoSettings();
     void configureImageSettings();
@@ -89,17 +95,19 @@ public slots:
     void displayCameraError();
 
     void updateCameraDevice( QAction *action );
-
-    void cameraStateChanged( QCamera::State camState );
-    void cameraStatusChanged( QCamera::Status camStatus );
+;
     void updateCaptureMode( int );
-    void updateRecorderState( QMediaRecorder::State state );
     void setExposureCompensation( int index );
 
     void updateRecordTime();
 
     void processCapturedImage( int requestId, const QImage &img );
-    void updateLockStatus( QCamera::LockStatus, QCamera::LockChangeReason );
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    void cameraStateChanged(QCamera::State camState);
+    void cameraStatusChanged(QCamera::Status camStatus)
+    void updateRecorderState(QMediaRecorder::State state);
+    void displayCaptureError(int, QCameraImageCapture::Error, const QString& errorString);
+#endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     void displayViewfinder();
     void displayCapturedImage();
@@ -125,19 +133,22 @@ private:
     QTimer *                    m_SnapshotTimer{ nullptr };
 
     QScopedPointer<QCamera>     m_camera;
-    QCameraViewfinder *         m_ViewFinder{ nullptr };
+
+    QString                     m_videoContainerFormat;
+    bool                        m_isCapturingImage{ false };
+    bool                        m_applicationExiting{ false };
+    bool                        m_CamIsStarted{ false };
+    bool                        m_ReadyForCapture{ false };
+
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    QCamera::Status             m_CamStatus{ QCamera::Status::UnavailableStatus };
+    QCamera::State              m_CamState{ QCamera::State::UnloadedState };
     QScopedPointer<QCameraImageCapture> m_imageCapture;
 
     QImageEncoderSettings       m_imageSettings;
     QAudioEncoderSettings       m_audioSettings;
     QVideoEncoderSettings       m_videoSettings;
-    QString                     m_videoContainerFormat;
-    bool                        m_isCapturingImage{ false };
-    bool                        m_applicationExiting{ false };
-    bool                        m_CamIsStarted{ false };
-    QCamera::Status             m_CamStatus{QCamera::Status::UnavailableStatus };
-    QCamera::State              m_CamState{QCamera::State::UnloadedState };
-    bool                        m_ReadyForCapture{ false };
+#endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 };
 
 

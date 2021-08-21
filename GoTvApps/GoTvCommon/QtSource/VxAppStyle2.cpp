@@ -336,8 +336,11 @@ void VxAppStyle2::drawControl( ControlElement			element,
             {
                 br = QBrush( option->palette.light().color(), Qt::Dense4Pattern );
             }
-
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+            painter->setBackground(option->palette.base().color());
+#else
             painter->setBackground( option->palette.background().color() );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
             painter->setBrush( br );
         }
 
@@ -600,7 +603,11 @@ void VxAppStyle2::drawComplexControl( ComplexControl				control,
             else
             {
                 painter->setPen( opt->palette.text().color() );
-                painter->setBackground( opt->palette.background() );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+                painter->setBackground(opt->palette.base().color());
+#else
+                painter->setBackground(opt->palette.background().color());
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
             }
 
             if( opt->state & State_HasFocus && !opt->editable )

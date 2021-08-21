@@ -346,12 +346,12 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 
 #if HAVE_SSE && !defined(__SSE__)
 /* Enable SSE functions, if compiled with SSE/SSE2 (All intel/AMD x86 cpus since 2003) */
-# define __SSE__
+# define __SSE__ 1
 #endif // HAVE_SSE
 
 #if HAVE_SSE2 && !defined(__SSE2__)
 /* Enable SSE functions, if compiled with SSE/SSE2 (All intel/AMD x86 cpus since 2003) */
-# define __SSE2__
+# define __SSE2__ 1
 #endif // HAVE_SSE
 
 // size of native types 
