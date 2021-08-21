@@ -153,7 +153,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(OutDir);..\..\;..\..\..\;..\..\inc32;..\..\crypto;..\..\crypto\modes;..\..\crypto\asn1;..\..\crypto\evp;..\..\..\..\..\P2PCoreLibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\include;$(ProjectDir)..\..\crypto;$(ProjectDir)..\..\crypto\modes;$(ProjectDir)..\..\crypto\asn1;$(ProjectDir)..\..\crypto\evp;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;WINDOWS;_LIB;WIN32;MONOLITH;OPENSSL_THREADS;DSO_WIN32;OPENSSL_SYSNAME_WIN32;WIN32_LEAN_AND_MEAN;L_ENDIAN;CRT_SECURE_NO_DEPRECATE;OPENSSL_BN_ASM_PART_WORDS;OPENSSL_IA32_SSE2;OPENSSL_BN_ASM_MONT;OPENSSL_BN_ASM_GF2m;SHA1_ASM;SHA256_ASM;SHA512_ASM;MD5_ASM;RMD_160_ASM;VPAES_ASM;WHIRLPOOL_ASM;GHASH_ASM;OPENSSL_NO_RC5;OPENSSL_NO_MD2;OPENSSL_NO_KB5;OPENSSL_NO_JPAKE;OPENSSL_NO_DYNAMIC_ENGINE;DEBUG_VTPOOLUPLOAD;NOMINMAX;_CRT_SECURE_NO_WARNINGS;NO_WINDOWS_BRAINDEATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

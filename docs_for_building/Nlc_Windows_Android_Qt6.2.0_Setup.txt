@@ -33,7 +33,7 @@ Most instructions come from
 
 
 	NOTE: do not use a space between Android and Studio as it may cause issues later
-	NOTE: at time of this writing the version was android-studio-2020.3.1.22-windows.exe this contains changes incompatible with Qt 6.1.2
+	NOTE: at time of this writing the version was android-studio-2020.3.1.22-windows.exe this contains changes incompatible with Qt 6.2.0
 	Sdk location I used was F:\Android\android-sdk
 	you can change this location in project structure (A folder with squares button in top right)
 	Upgrade at your own risk
@@ -82,7 +82,7 @@ Most instructions come from
 		
 5.) Install Qt
 	a.) Download and run Qt online installer 
-	b.) Install Qt 6.1.2 and Additional Libraries Qt Image Formats
+	b.) Install Qt 6.2.0 and Additional Libraries Qt Image Formats
 	
 6.) Verify or Add enviroment variables
 	These instructions are mainly from
@@ -102,7 +102,7 @@ Most instructions come from
 	
 	
 7.) Setup and test qt example without NDK
-	a.) copy F:\Qt\Examples\Qt-6.1.2\opengl\hellogl2 to F:\SetupTestExampleApps
+	a.) copy F:\Qt\Examples\Qt-6.2.0\opengl\hellogl2 to F:\SetupTestExampleApps
 	b.) open  F:\SetupTestExampleApps\hellogl2\hellogl2.pro
 	c.) In Tools->Options->Devices->Android Tab Install any missing android packages
 	d.) Uninstall any SDKS that are higher than 30
@@ -120,12 +120,12 @@ Most instructions come from
 	=== test using qmake ===
 	a.) Open F:\nolimitconnect\SandboxApp\QtHelloWorld\QtHelloWorld.pro
 	b.) Configure for the android cpu of your target device
-	c.) Confirm build sdk is set to andoid-29 in Projects (Button with wrench)->Build And Run->Android Qt6.1.2 Clang XXX->Build Android APK->Details 
+	c.) Confirm build sdk is set to andoid-29 in Projects (Button with wrench)->Build And Run->Android Qt6.2.0 Clang XXX->Build Android APK->Details 
 	d.) build and run
 	=== test using cmake ===
 	a.) Open F:\nolimitconnect\SandboxApps\QtHelloWorld\build\cmake\android\CMakeList.txt
 	b.) Configure for the android cpu of your target device
-	c.) Open Projects (Button with wrench)->Build And Run->Android Qt6.1.2 Clang XXX->Build
+	c.) Open Projects (Button with wrench)->Build And Run->Android Qt6.2.0 Clang XXX->Build
 		d.) confirm Applicatin is set to android-29
 		e.) Press Re-configure with Initial Parameters
 	f.) build and run
@@ -133,7 +133,7 @@ Most instructions come from
 9.) Setup and test nolimitconnect sandbox app with NDK and shared library and static library
 	a.) Open F:\nolimitconnect\SandboxApps\QtSimpleAppTest\build\cmake\android\CMakeList.txt
 	b.) Configure for the android cpu of your target device
-	c.) Open Projects (Button with wrench)->Build And Run->Android Qt6.1.2 Clang XXX->Build
+	c.) Open Projects (Button with wrench)->Build And Run->Android Qt6.2.0 Clang XXX->Build
 	d.) confirm Applicatin is set to android-29
 	e.) Press Re-configure with Initial Parameters
 	f.) build and run
