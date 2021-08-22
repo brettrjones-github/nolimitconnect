@@ -34,6 +34,11 @@ public:
 	void						setThreadShouldRun(bool shouldRun)      { m_ShouldRun = shouldRun; }
     void                        releaseAudioInThread()                  { m_AudioSemaphore.release(); }
 
+    void                        setDivideSamplesCount( int cnt )
+    {
+        m_DivideCnt = cnt;
+    }
+
 protected:
     virtual void                run() override;
 
@@ -42,4 +47,6 @@ protected:
     QSemaphore                  m_AudioSemaphore;
 
 	bool						m_ShouldRun = true;
+    int                         m_DivideCnt{ 1 };
+    int                         m_AudioChunkRxedCnt{ 0 };
 };

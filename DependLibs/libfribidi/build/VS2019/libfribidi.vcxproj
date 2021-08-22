@@ -206,7 +206,7 @@
       <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Lib>
-      <OutputFile>$(OutDir)\$(ProjectName)D.lib</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
     <BuildLog>
       <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>

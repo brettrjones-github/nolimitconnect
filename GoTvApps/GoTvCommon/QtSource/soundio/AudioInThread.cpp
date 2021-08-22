@@ -60,13 +60,18 @@ void AudioInThread::run()
                 IAudioCallbacks& audioCallbacks = m_AudioIoMgr.getAudioCallbacks();
                 while( audioByteLen >= AUDIO_BUF_SIZE_8000_1_S16 )
                 {
-                    if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
+                    m_AudioChunkRxedCnt++;
+                    if( m_AudioChunkRxedCnt == m_DivideCnt )
                     {
-                        audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getMicSilence(), AUDIO_BUF_SIZE_8000_1_S16, true, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
-                    }
-                    else
-                    {
-                        audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getAudioBuffer().data(), AUDIO_BUF_SIZE_8000_1_S16, false, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
+                        m_AudioChunkRxedCnt = 0;
+                        if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
+                        {
+                            audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getMicSilence(), AUDIO_BUF_SIZE_8000_1_S16, true, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
+                        }
+                        else
+                        {
+                            audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getAudioBuffer().data(), AUDIO_BUF_SIZE_8000_1_S16, false, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
+                        }
                     }
 
                     m_AudioInIo.getAudioBuffer().remove( 0, AUDIO_BUF_SIZE_8000_1_S16 ); //pop front what is written

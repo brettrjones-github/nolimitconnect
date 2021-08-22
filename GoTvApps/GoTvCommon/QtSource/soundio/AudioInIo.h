@@ -27,6 +27,7 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 #include <QAudioSource>
+#include <QMediaDevices>
 #else
 #include <QAudioDeviceInfo>
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -80,6 +81,12 @@ public:
     bool                        setAudioDevice(QAudioDeviceInfo deviceInfo);
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
+    void                        setDivideSamplesCount( int cnt )
+    {
+        m_DivideCnt = cnt;
+        m_AudioInThread.setDivideSamplesCount( cnt );
+    }
+
 signals:
     void						signalCheckForBufferUnderun();
 
@@ -110,8 +117,10 @@ private:
     char                        m_MicSilence[ AUDIO_BUF_SIZE_8000_1_S16 ];
     AudioInThread               m_AudioInThread;
     QAtomicInt                  m_AtomicBufferSize;
+    int                         m_DivideCnt{ 1 };
 
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QMediaDevices*              m_MediaDevices = nullptr;
     QAudioSource*               m_AudioInputDevice = nullptr;
 #else
     QAudioInput*                m_AudioInputDevice = nullptr;

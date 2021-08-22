@@ -43,6 +43,7 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
     m_AudioOutFormat.setChannelCount( 2 );
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
+    m_AudioOutFormat.setChannelConfig( QAudioFormat::ChannelConfigMono );
 #else
     m_AudioOutFormat.setBytesPerSample(2);
 
@@ -68,7 +69,8 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
     m_AudioInFormat.setSampleRate( 8000 );
     m_AudioInFormat.setChannelCount( 1 );
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-    m_AudioInFormat.setSampleFormat(QAudioFormat::Int16);
+    m_AudioInFormat.setSampleFormat( QAudioFormat::Int16 );
+    m_AudioInFormat.setChannelConfig( QAudioFormat::ChannelConfigMono );
 #else
     m_AudioInFormat.setSampleSize( 16 );
     m_AudioInFormat.setCodec( QStringLiteral("audio/pcm") );
