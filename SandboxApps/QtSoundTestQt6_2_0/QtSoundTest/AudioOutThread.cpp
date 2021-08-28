@@ -45,7 +45,7 @@ void AudioOutThread::stopAudioOutThread()
 //============================================================================
 void AudioOutThread::run()
 {
-    LogMsg( LOG_DEBUG, "AudioOutThread thread start %u", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioOutThread thread start 0x%x", currentThreadId() );
     while( m_ShouldRun )
     {
         m_AudioSemaphore.acquire();
@@ -55,5 +55,5 @@ void AudioOutThread::run()
         }
     }
  
-    LogMsg( LOG_DEBUG, "AudioOutThread thread done %u", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioOutThread thread done 0x%x", currentThreadId() );
 }

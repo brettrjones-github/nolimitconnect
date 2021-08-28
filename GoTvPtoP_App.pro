@@ -297,41 +297,16 @@ android:{
     CONFIG += mobility
     MOBILITY =
 
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/bin-Android
+
     #shared libs
-#    SHARED_LIB_PREFIX = $$PWD/bin-Android/lib/armeabi-v7a/
-#    ANDROID_EXTRA_LIBS = \
-#            $${SHARED_LIB_PREFIX}libpythoncore$${SHARED_PYTHON_LIB_SUFFIX}
-#            $${SHARED_LIB_PREFIX}libssl$${SHARED_PYTHON_LIB_SUFFIX}
     ANDROID_LIBS = $$PWD/bin-Android/libs/armeabi-v7a
-#    ANDROID_EXTRA_LIBS += \
-#        $${ANDROID_LIBS}/libpythoncore$${SHARED_PYTHON_LIB_SUFFIX} \
- #       $${ANDROID_LIBS}/libssl$${SHARED_PYTHON_LIB_SUFFIX}
 
     LIBS += -l$${ANDROID_LIBS}/libssl_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
     LIBS += -l$${ANDROID_LIBS}/libpythoncore_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
 
-#    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
     LIBS +=  -ldl -lm -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics -landroid
 
-    # Default rules for deployment.
-    qnx: target.path = /tmp/$${TARGET}/bin
-    else: unix:!android: target.path = /opt/$${TARGET}/bin
-    !isEmpty(target.path): INSTALLS += target
-
-versionAtMost(QT_VERSION, 5.15.2){
-
-ANDROID_PACKAGE_SOURCE_DIR = \
-        $$PWD/bin-Android
-
-DISTFILES += \
-    bin-Android/AndroidManifest.xml \
-    bin-Android/gradle/wrapper/gradle-wrapper.jar \
-    bin-Android/gradlew \
-    bin-Android/res/values/libs.xml \
-    bin-Android/build.gradle \
-    bin-Android/gradle/wrapper/gradle-wrapper.properties \
-    bin-Android/gradlew.bat \
-    bin-Android/res/values/strings.xml
-    }
 }
+
 

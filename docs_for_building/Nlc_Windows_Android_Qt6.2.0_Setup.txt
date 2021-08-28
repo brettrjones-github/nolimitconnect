@@ -89,7 +89,7 @@ Most instructions come from
 		
 4.) Install Qt
 	a.) Download and run Qt online installer and install to F:\Qt
-	b.) Install Qt 6.2.0-betaX (Preview All) and All Additional Libraries
+	b.) Install Qt 6.2.0-betaX (Preview All) and NO Additional Libraries should be installed
 
 5.) Test Qt Setup	
 	a.) Open Qt example F:\Qt\Examples\Qt-6.2.0\gui\analogclock

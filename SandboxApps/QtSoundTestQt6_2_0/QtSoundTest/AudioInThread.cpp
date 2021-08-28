@@ -46,7 +46,7 @@ void AudioInThread::stopAudioInThread()
 //============================================================================
 void AudioInThread::run()
 {
-    LogMsg( LOG_DEBUG, "AudioInThread thread start %u", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioInThread thread start 0x%x", currentThreadId() );
     while( m_ShouldRun )
     {
         m_AudioSemaphore.acquire();
@@ -59,6 +59,10 @@ void AudioInThread::run()
                 IAudioCallbacks& audioCallbacks = m_AudioIoMgr.getAudioCallbacks();
                 while( audioByteLen >= AUDIO_BUF_SIZE_8000_1_S16 )
                 {
+                    m_AudioChunkRxedCnt++;
+                    if( m_AudioChunkRxedCnt == m_DivideCnt )
+                    {
+                        m_AudioChunkRxedCnt = 0;
                     if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
                     {
                         audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getMicSilence(), AUDIO_BUF_SIZE_8000_1_S16, true, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
@@ -66,6 +70,7 @@ void AudioInThread::run()
                     else
                     {
                         audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioInIo.getAudioBuffer().data(), AUDIO_BUF_SIZE_8000_1_S16, false, m_AudioInIo.calculateMicrophonDelayMs(), 0 );
+                    }
                     }
 
                     m_AudioInIo.getAudioBuffer().remove( 0, AUDIO_BUF_SIZE_8000_1_S16 ); //pop front what is written
@@ -78,5 +83,5 @@ void AudioInThread::run()
         }
     }
  
-    LogMsg( LOG_DEBUG, "AudioInThread done thread %u", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioInThread done thread 0x%x", currentThreadId() );
 }

@@ -130,11 +130,13 @@ private:
 
     QAudioFormat                m_AudioOutFormat;
     AudioOutIo                  m_AudioOutIo;
-    QAudioDeviceInfo            m_AudioOutDeviceInfo;
 
     QAudioFormat                m_AudioInFormat;
     AudioInIo                   m_AudioInIo;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    QAudioDeviceInfo            m_AudioOutDeviceInfo;
     QAudioDeviceInfo            m_AudioInDeviceInfo;
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     bool                        m_IsOutPaused = false;
     bool                        m_IsTestMode = true;

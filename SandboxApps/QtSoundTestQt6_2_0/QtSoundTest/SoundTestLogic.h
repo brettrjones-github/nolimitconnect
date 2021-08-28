@@ -1,8 +1,6 @@
 #ifndef SoundTestLOGIC_H
 #define SoundTestLOGIC_H
 
-
-#include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLExtraFunctions>
 
@@ -15,7 +13,6 @@
 #include <QWaitCondition>
 #include <QElapsedTimer>
 #include <QWindow>
-#include <QOpenGLWidget>
 
 #include "SoundTestThread.h"
 #include "AudioIoMgr.h"

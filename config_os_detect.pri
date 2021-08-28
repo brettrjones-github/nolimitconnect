@@ -195,6 +195,7 @@ CONFIG(release, debug|release){
 }
 
 SRC_CODE_ROOT_DIR=$$PWD
+message(SRC_CODE_ROOT_DIR is $${SRC_CODE_ROOT_DIR})
 
 #message(host os is $${HOST_OS} target os is $${TARGET_OS_NAME})
 

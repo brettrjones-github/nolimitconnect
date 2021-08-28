@@ -48,10 +48,20 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="LogWidget" name="m_LogWidget"/>
+    </item>
    </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>LogWidget</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">LogWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

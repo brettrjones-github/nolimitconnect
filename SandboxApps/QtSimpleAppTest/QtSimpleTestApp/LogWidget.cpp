@@ -16,8 +16,10 @@
 #include "LogWidget.h"
 #include "VxDebug.h"
 
-
 #include <QScrollBar>
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+# include <QRegularExpression>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
 namespace
 {
@@ -43,12 +45,16 @@ LogWidget::LogWidget( QWidget * parent )
 }
 
 //============================================================================
-void LogWidget::toGuiLog( uint32_t u32LogFlags, char * logMsg )
+void LogWidget::toGuiLog( uint32_t /*u32LogFlags*/, char * logMsg )
 {
     m_LogMutex.lock();
 
     QString logStr( logMsg );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    logStr.remove( QRegularExpression( "[\\n\\r]" ) );
+#else
     logStr.remove( QRegExp( "[\\n\\r]" ) );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     emit signalLogMsg( logStr );
 
     m_LogMutex.unlock();

@@ -27,9 +27,11 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 , m_AudioCallbacks( audioCallbacks )
 , m_AudioOutMixer( *this, audioCallbacks, this )
 , m_AudioOutIo( *this, m_AudioOutMutex, this )
-, m_AudioOutDeviceInfo( QAudioDeviceInfo::defaultOutputDevice() )
 , m_AudioInIo( *this, m_AudioInMutex, this )
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+, m_AudioOutDeviceInfo( QAudioDeviceInfo::defaultOutputDevice() )
 , m_AudioInDeviceInfo( QAudioDeviceInfo::defaultInputDevice() )
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 {
     memset( m_MyLastAudioOutSample, 0, sizeof( m_MyLastAudioOutSample ) );
     memset( m_MicrophoneEnable, 0, sizeof( m_MicrophoneEnable ) );
@@ -37,6 +39,11 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
 
     m_AudioOutFormat.setSampleRate( 48000 );
     m_AudioOutFormat.setChannelCount( 2 );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    m_AudioOutFormat.setSampleFormat(QAudioFormat::Int16);
+    m_AudioOutFormat.setChannelConfig( QAudioFormat::ChannelConfigMono );
+#else
+    m_AudioOutFormat.setBytesPerSample(2);
     m_AudioOutFormat.setSampleSize( 16 );
     m_AudioOutFormat.setCodec( "audio/pcm" );
     m_AudioOutFormat.setByteOrder( QAudioFormat::LittleEndian );
@@ -54,15 +61,20 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
             LogMsg( LOG_DEBUG, "No Speakers available" );
         }
     }
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    m_MicrophoneAvailable = true;
 
     m_AudioInFormat.setSampleRate( 8000 );
     m_AudioInFormat.setChannelCount( 1 );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    m_AudioInFormat.setSampleFormat( QAudioFormat::Int16 );
+    m_AudioInFormat.setChannelConfig( QAudioFormat::ChannelConfigMono );
+#else
     m_AudioInFormat.setSampleSize( 16 );
     m_AudioInFormat.setCodec( QStringLiteral("audio/pcm") );
     m_AudioInFormat.setByteOrder( QAudioFormat::LittleEndian );
     m_AudioInFormat.setSampleType( QAudioFormat::SignedInt );
 
-    m_MicrophoneAvailable = true;
     QAudioDeviceInfo infoIn( m_AudioInDeviceInfo );
     if( !infoIn.isFormatSupported( m_AudioInFormat ) )
     {
@@ -74,6 +86,7 @@ AudioIoMgr::AudioIoMgr( IAudioCallbacks& audioCallbacks, QWidget * parent )
             LogMsg( LOG_DEBUG, "No Microphone available" );
         }
     }
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 //============================================================================
@@ -262,7 +275,9 @@ void AudioIoMgr::pauseAudioOut()
         else if( m_AudioOutIo.getState() == QAudio::ActiveState )
         {
             m_IsOutPaused = true;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
             m_AudioOutIo.suspend();
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
         }
         else if( m_AudioOutIo.getState() == QAudio::StoppedState )
         {
@@ -283,7 +298,9 @@ void AudioIoMgr::resumeAudioOut()
         if( m_AudioOutIo.getState() == QAudio::SuspendedState )
         {
             m_IsOutPaused = false;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
             m_AudioOutIo.resume();
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
         }
         else if( m_AudioOutIo.getState() == QAudio::ActiveState )
         {
@@ -292,7 +309,9 @@ void AudioIoMgr::resumeAudioOut()
         else if( m_AudioOutIo.getState() == QAudio::StoppedState )
         {
             m_IsOutPaused = false;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
             m_AudioOutIo.resume();
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
         }
         else if( m_AudioOutIo.getState() == QAudio::IdleState )
         {
@@ -481,8 +500,10 @@ const char * AudioIoMgr::describeAudioState( QAudio::State state )
         return " StoppedState ";
     case QAudio::State::IdleState:
         return " IdleState ";
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     case QAudio::State::InterruptedState:
         return " InterruptedState ";
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
     default:
         return " Unknown State ";
     }

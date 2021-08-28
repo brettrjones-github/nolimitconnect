@@ -21,10 +21,14 @@ INCLUDEPATH += $$PWD/../QtSimpleTestSharedLib
 
 SOURCES += \
         $$PWD/main.cpp \
-        $$PWD/mainwindow.cpp
+        $$PWD/mainwindow.cpp \
+        $$PWD/VxDebug.cpp \
+        $$PWD/LogWidget.cpp
 
 HEADERS += \
-        $$PWD/mainwindow.h
+        $$PWD/mainwindow.h \
+        $$PWD/VxDebug.h \
+        $$PWD/LogWidget.h
 
 FORMS += \
         $$PWD/mainwindow.ui

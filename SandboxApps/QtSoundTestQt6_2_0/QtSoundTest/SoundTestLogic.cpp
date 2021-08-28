@@ -21,10 +21,15 @@ SoundTestLogic::SoundTestLogic( Waveform * waveForm, QWidget *parent )
     QAudioFormat kodiSpeakerFormat;
     kodiSpeakerFormat.setSampleRate( 48000 );
     kodiSpeakerFormat.setChannelCount( 2 );
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    kodiSpeakerFormat.setSampleFormat(QAudioFormat::Float);
+    kodiSpeakerFormat.setChannelConfig( QAudioFormat::ChannelConfigStereo );
+#else
     kodiSpeakerFormat.setSampleSize( sizeof(float) * 8 );
     kodiSpeakerFormat.setCodec( QStringLiteral( "audio/pcm" ) );
     kodiSpeakerFormat.setByteOrder( QAudioFormat::LittleEndian );
     kodiSpeakerFormat.setSampleType( QAudioFormat::Float );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
     m_AudioGenOut = new AudioTestGenerator( kodiSpeakerFormat, AUDIO_MS_KODI * 1000, 100, this );
  

@@ -19,14 +19,17 @@
 #include <QIODevice>
 #include <QByteArray>
 #include <QAudioFormat>
-#include <QAudioDeviceInfo>
 #include <QAudioOutput>
 #include <QIODevice>
 #include <QMutex>
 #include <QElapsedTimer>
 
-//#include <CoreLib/VxMutex.h>
 #include "VxTimer.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+# include <QAudioSink>
+#else
+# include <QAudioDeviceInfo>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 #include "AudioOutThread.h"
 
 class AudioIoMgr;
@@ -44,18 +47,22 @@ public:
     void                        stopAudio();
     void                        startAudio();
 
-    void                        suspend()           { if( m_AudioOutputDevice ) m_AudioOutputDevice->suspend(); }
-    void                        resume()            { if( m_AudioOutputDevice ) m_AudioOutputDevice->resume(); }
  
-    bool                        setAudioDevice( QAudioDeviceInfo deviceInfo );
 
     void                        setVolume( float volume );
     void                        flush();
 
     QAudio::State               getState()      { return ( m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
     QAudio::Error               getError()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
+    void                        suspend() { if (m_AudioOutputDevice) m_AudioOutputDevice->suspend(); }
+    void                        resume() { if (m_AudioOutputDevice) m_AudioOutputDevice->resume(); }
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QAudioSink*                 getAudioOut() { return m_AudioOutputDevice; }
+#else
 
     QAudioOutput *              getAudioOut( )  { return m_AudioOutputDevice; }
+    bool                        setAudioDevice(QAudioDeviceInfo deviceInfo);
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 signals:
     void						signalCheckForBufferUnderun();
@@ -83,13 +90,17 @@ private:
 
     bool                        m_initialized = 0;
     QAudioFormat                m_AudioFormat;
-    QAudioDeviceInfo            m_deviceInfo;
-    QAudioOutput*               m_AudioOutputDevice = nullptr;
     qint64                      m_ProccessedMs = 0;
     float                       m_volume = 1.0f;
     QTimer *                    m_PeriodicTimer;
     QElapsedTimer               m_ElapsedTimer;
-    QAudio::State               m_AudioOutState = QAudio::State::StoppedState;
+    QAudio::State               m_AudioOutState{ QAudio::State::StoppedState };
     AudioOutThread              m_AudioOutThread;
     int                         m_AudioOutBufferSize = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QAudioSink*                 m_AudioOutputDevice = nullptr;
+#else
+    QAudioOutput*               m_AudioOutputDevice = nullptr;
+    QAudioDeviceInfo            m_deviceInfo;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 };

@@ -4,11 +4,16 @@
 #
 #-------------------------------------------------
 
-TARGET = QtSoundTest2
+TARGET = QtSoundTest3
 TEMPLATE = app
+versionAtLeast(QT_VERSION, 6.0.0){
+    CONFIG += c++17
+}
+versionAtMost(QT_VERSION, 5.15.2){
+    CONFIG += c++11
+}
 
 QT += gui core concurrent widgets network multimedia
-
 
 android:{
     DEFINES += TARGET_OS_ANDROID
@@ -22,13 +27,7 @@ win32:{
     DEFINES += TARGET_OS_WINDOWS
 }
 
-versionAtMost(QT_VERSION, 5.15.2){
-    CONFIG += c++11
-}
-
-versionAtLeast(QT_VERSION, 6.0.0){
-    CONFIG += c++17
-}
+include(../../config_os_detect.pri)
 
 INCLUDEPATH += $$PWD/QtSoundTest
 INCLUDEPATH += $$PWD/Forms
@@ -84,24 +83,21 @@ FORMS += \
         $$PWD/Forms/mainwindow.ui
 
 android:{
+    CONFIG += mobility
+    MOBILITY =
 
-    CONFIG(debug, debug|release){
-        QMAKE_CXXFLAGS += -O0
-        QMAKE_CFLAGS += -O0
-        DEFINES += DEBUG
-    }
+    # NOTE: cannont substitute QtHellowWorldWithConfig with $${TARGET_NAME} becouse it causes "Cannot find android sources" error
+    #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../../android_qt_manifest/QtSimpleTestApp/android
 
-#os libs
     LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
-
-# Default rules for deployment.
-    qnx: target.path = /tmp/$${TARGET}/bin
-    else: unix:!android: target.path = /opt/$${TARGET}/bin
-    !isEmpty(target.path): INSTALLS += target
 }
 
-message($$[QT_INSTALL_BINS])
+message(QT_INSTALL_BINS $$[QT_INSTALL_BINS])
+message(QT_INSTALL_EXAMPLES DIR $$[QT_INSTALL_EXAMPLES])
+SND_TEST3_INSTALL_PATH = $${SRC_CODE_ROOT_DIR}/SandboxApps/QtSoundTestQt6_2_0
+message(SRC_CODE_ROOT_DIR3 is $${SRC_CODE_ROOT_DIR})
+message(SND_TEST3_INSTALL_PATH is $${SND_TEST3_INSTALL_PATH})
 
-DISTFILES += \
-    androidsoundtest/res/drawable/icon.png \
-    androidsoundtest/res/values/strings.xml
+#target.path = $$[SND_TEST3_INSTALL_PATH]
+#INSTALLS += target
+
