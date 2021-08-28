@@ -844,8 +844,14 @@ void AppCommon::insertKeystroke( int keyCode )
 		return;
 	}
 
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    Qt::KeyboardModifiers keyFlags = 0;
+#else
+    Qt::KeyboardModifiers keyFlags;
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
 	QString keyText = "";
-	Qt::KeyboardModifiers keyFlags = 0;
+
 	QKeyEvent * qtKeyEvent = new QKeyEvent( QEvent::KeyPress, keyCode, keyFlags, keyText );
 	QCoreApplication::postEvent( receiver, qtKeyEvent );
 	qtKeyEvent = new QKeyEvent( QEvent::KeyRelease, keyCode, keyFlags, keyText );

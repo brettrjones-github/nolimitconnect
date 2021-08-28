@@ -2,15 +2,14 @@
 TEMPLATE = lib
 TARGET_NAME = _hashlib
 
+include(config_python_core_link.pri)
+
 include(config_python_lib.pri)
 
 include(config_opensslp_include.pri)
 
 include(python_hashlib.pri)
 
-include(config_link.pri)
-
-include(config_python_core_link.pri)
 include(config_ssl_link.pri)
 
 LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}

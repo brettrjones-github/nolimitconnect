@@ -1,5 +1,14 @@
 message("Building AppCommonLib")
 
+# C++11 support
+versionAtMost(QT_VERSION, 5.15.2){
+    CONFIG += c++11
+}
+
+versionAtLeast(QT_VERSION, 6.0.0)){
+    CONFIG += c++17
+}
+
 unix:!android{
     INCLUDEPATH += $${UI_DIR}
     INCLUDEPATH += $${MOC_DIR}
@@ -562,7 +571,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFriend.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingNotify.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOfferToFriend.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingScan.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingServers.cpp \

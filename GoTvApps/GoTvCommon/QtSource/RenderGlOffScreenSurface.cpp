@@ -420,10 +420,11 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
         m_GlfExtra->glReadBuffer( GL_COLOR_ATTACHMENT0 );
     }
 #endif // 0
-
     GLenum internalFormat = fbo->format().internalTextureFormat();
-    bool hasAlpha = internalFormat == GL_RGBA || internalFormat == GL_BGRA
-        || internalFormat == GL_RGBA8;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    // qt no longer supports GL_BGRA
+    bool hasAlpha = internalFormat == GL_RGBA || internalFormat == GL_RGBA8 || internalFormat == GL_BGRA;
+
     if( internalFormat == GL_BGRA )
     {
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_ARGB32 : QImage::Format_RGB32 );
@@ -431,6 +432,10 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
                                    fbo->size().height(), GL_BGRA, GL_UNSIGNED_BYTE, image.bits() );
     }
     else if( ( internalFormat == GL_RGBA ) || ( internalFormat == GL_RGBA8 ) )
+#else
+    bool hasAlpha = internalFormat == GL_RGBA || internalFormat == GL_RGBA8;
+    if( ( internalFormat == GL_RGBA ) || ( internalFormat == GL_RGBA8 ) )
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
     {
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_RGBA8888 : QImage::Format_RGBX8888 );
         m_Glf->glReadPixels( 0, 0, fbo->size().width(),

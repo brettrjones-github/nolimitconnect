@@ -11,10 +11,10 @@ unix:!android{
 android{
     QMAKE_CXXFLAGS += -fPIC
     QMAKE_CFLAGS += -fPIC
-    #!contains(COMPILE_HOST_OS,Windows){
-        #part of workaround for QTBUG-69255 .. do not define DESTDIR because uses $$PWD_OUT as root of path
-        DESTDIR = $$PWD/build-pythonlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
-    #}
+    #part of workaround for QTBUG-69255 .. do not define DESTDIR because uses $$PWD_OUT as root of path
+    !contains(COMPILE_HOST_OS,Windows){
+        DESTDIR = $$PWD/build-pythonlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}
+    }
 }
 
 #do not append os name to name so can have standard python name

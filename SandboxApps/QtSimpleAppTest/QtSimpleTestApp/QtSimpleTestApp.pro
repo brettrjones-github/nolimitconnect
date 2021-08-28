@@ -34,7 +34,7 @@ android:{
     MOBILITY =
 
     # NOTE: cannont substitute QtHellowWorldWithConfig with $${TARGET_NAME} becouse it causes "Cannot find android sources" error
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../../android_qt_manifest/QtSimpleTestApp/android
+    #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../../android_qt_manifest/QtSimpleTestApp/android
 
     LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
 }

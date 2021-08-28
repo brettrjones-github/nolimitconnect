@@ -1,4 +1,5 @@
-
+#NOTE: this project should be built before Build_NolimitConnect.pro
+#if Build_NolimitConnect.pro is built first the only symptom will be that kodi will not run correctly
 
 TEMPLATE     = subdirs
 CONFIG += no_docs_target

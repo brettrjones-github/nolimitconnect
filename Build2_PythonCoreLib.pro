@@ -1,4 +1,5 @@
 
+
 TEMPLATE     = subdirs
 CONFIG += no_docs_target
 
@@ -10,13 +11,5 @@ CONFIG(debug, debug|release){
 CONFIG += ordered
 
 include(config_os_detect.pri)
-
-SUBDIRS += $$PWD/libpktlib.pro
-SUBDIRS += $$PWD/libdepends.pro
-SUBDIRS += $$PWD/libgnu.pro
-SUBDIRS += $$PWD/libbz2.pro
-SUBDIRS += $$PWD/libcurl.pro
-SUBDIRS += $$PWD/libcorelib.pro
-SUBDIRS += $$PWD/libcrossguid.pro
-
-SUBDIRS += $$PWD/libssl.pro
+#NOTE: be sure you have build Build1_PythonDepends first
+SUBDIRS += $$PWD/python_pythoncore.pro

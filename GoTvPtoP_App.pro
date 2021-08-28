@@ -21,11 +21,6 @@ android:{
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
 DEFINES += LIB_STATIC _LIB
 
-
-#CONFIG += qt thread silent
-# C++11 support
-CONFIG += c++11
-
 CONFIG += mobility
 MOBILITY =
 
@@ -65,36 +60,6 @@ nolimitconnect.depends += $$PWD/libnetlib.pro
 nolimitconnect.depends += $$PWD/libpktlib.pro
 nolimitconnect.depends += $$PWD/libcorelib.pro
 nolimitconnect.depends += $$PWD/libcrossguid.pro
-
-
-#DESTDIR = $$PWD/bin/
-#gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
-#gotvptop.depends += $$PWD/GoTvCoreLibs.pro
-#gotvptop.depends += $$PWD/GoTvPythonLib.pro
-#gotvptop.depends += $$PWD/GoTvDependLibs.pro
-
-#gotvptop.depends += $$PWD/libcurl.pro
-#gotvptop.depends += $$PWD/python_pythoncore.pro
-#gotvptop.depends += $$PWD/python_bz2.pro
-#gotvptop.depends += $$PWD/python_ctypes.pro
-#gotvptop.depends += $$PWD/python_ctypes_test.pro
-#gotvptop.depends += $$PWD/python_elementtree.pro
-#gotvptop.depends += $$PWD/python_hashlib.pro
-#gotvptop.depends += $$PWD/python_sqlite3.pro
-#gotvptop.depends += $$PWD/python_socket.pro
-#gotvptop.depends += $$PWD/python_ssl.pro
-#gotvptop.depends += $$PWD/python_testcapi.pro
-#gotvptop.depends += $$PWD/python_pyexpat.pro
-#gotvptop.depends += $$PWD/python_select.pro
-#gotvptop.depends += $$PWD/python_unicodedata.pro
-
-#gotvptop.depends += $$PWD/GoTvOpenSslLib.pro
-
-#gotvptop.depends += $$PWD/libgnu.pro
-#gotvptop.depends += $$PWD/libnetlib.pro
-#gotvptop.depends += $$PWD/libpktlib.pro
-#gotvptop.depends += $$PWD/libcorelib.pro
-#gotvptop.depends += $$PWD/libcrossguid.pro
 
 
 OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
@@ -288,11 +253,10 @@ unix:!android{
         LIBS +=  -lpythoncore
         LIBS +=  -lssl
     }
-}
+
     LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 
-unix:!android:{
     LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
@@ -343,8 +307,8 @@ android:{
 #        $${ANDROID_LIBS}/libpythoncore$${SHARED_PYTHON_LIB_SUFFIX} \
  #       $${ANDROID_LIBS}/libssl$${SHARED_PYTHON_LIB_SUFFIX}
 
-    LIBS += -l$${ANDROID_LIBS}/libssl$${SHARED_PYTHON_LIB_SUFFIX}
-    LIBS += -l$${ANDROID_LIBS}/libpythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+    LIBS += -l$${ANDROID_LIBS}/libssl_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
+    LIBS += -l$${ANDROID_LIBS}/libpythoncore_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
 
 #    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
     LIBS +=  -ldl -lm -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics -landroid
@@ -353,6 +317,8 @@ android:{
     qnx: target.path = /tmp/$${TARGET}/bin
     else: unix:!android: target.path = /opt/$${TARGET}/bin
     !isEmpty(target.path): INSTALLS += target
+
+versionAtMost(QT_VERSION, 5.15.2){
 
 ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/bin-Android
@@ -366,5 +332,6 @@ DISTFILES += \
     bin-Android/gradle/wrapper/gradle-wrapper.properties \
     bin-Android/gradlew.bat \
     bin-Android/res/values/strings.xml
+    }
 }
 

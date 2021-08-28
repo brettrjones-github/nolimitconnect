@@ -13,9 +13,6 @@
 #include <QCommandLineOption>
 #include <QStringList>
 #include <QStandardPaths>
-//#ifndef QT_NO_OPENGL
-//#include <QGLFormat>
-//#endif
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
@@ -54,7 +51,9 @@ namespace{
 }
 
 #if defined (Q_OS_ANDROID)
-#include <QtAndroid>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+# include <QtAndroid>
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
                                     "android.permission.WRITE_EXTERNAL_STORAGE",
                                     "android.permission.INTERNET",
@@ -73,7 +72,8 @@ int main(int argc, char **argv)
     // for some reason QApplication must be newed or does not initialize
     QApplication* myApp = new QApplication( argc, argv );
 
-#if defined (Q_OS_ANDROID)
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+# if defined(Q_OS_ANDROID)
     //Request requiered permissions at runtime
     for(const QString &permission : permissions)
     {
@@ -92,7 +92,8 @@ int main(int argc, char **argv)
             LogMsg( LOG_DEBUG, "ACCEPTED permission %s", permission.toUtf8().constData() );
         }
     }
-#endif
+# endif
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     LogMsg( LOG_DEBUG, "permission done" );
     QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );

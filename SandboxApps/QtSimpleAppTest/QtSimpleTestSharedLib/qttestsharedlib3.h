@@ -1,5 +1,5 @@
 #pragma once
-
+#include <QLocale>
 #if defined(TARGET_OS_WINDOWS)
 // Q_DECL_EXPORT is just the same (under Windows) as __declspec(dllexport) pragma
 # include <QObject>

@@ -70,21 +70,27 @@ android{
 #    }
 
     contains(QMAKE_HOST.os,Windows){
-        #this actually works on Windows.. TODO: find a way to commonize copy or move commands
+        #this used to actually work on Windows.. TODO: find a way to commonize copy or move commands
         #because we cannot define DESTDIR.  Due to Qt bug we copy twice.. once to build directory and once to dest dir
-        SRCDIR_WIN = $${OUT_PWD}/$${PYTHON_SRC_NAME}
+        #newer versions of qt broke the QMAKE_POST_LINK so they have been commented out
+        #and a manual step of copy and rename the python dlls has been added
+        SRCDIR_WIN = $${PYTHON_SRC_NAME}
         SRCDIR_WIN ~= s,/,\\,g
         DESTDIR_WIN1 = $${DEST_PYTHON_DLL_DIR}$${PYTHON_DEST_NAME}
         DESTDIR_WIN1 ~= s,/,\\,g
 
         PYTHON_LIB_COPY_CMD1 = copy /y $${SRCDIR_WIN} $${DESTDIR_WIN1}
-        QMAKE_POST_LINK += $$quote(cmd /c $${PYTHON_LIB_COPY_CMD1}$$escape_expand(\n\t))
         message(**python dll first copy cmd  $$quote(cmd /c $${PYTHON_LIB_COPY_CMD1}$$escape_expand(\n\t)))
+        #QMAKE_POST_LINK += $$quote(cmd /c $${PYTHON_LIB_COPY_CMD1}$$escape_expand(\n\t))
+
 
         DESTDIR_WIN2 = $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME}
         DESTDIR_WIN2 ~= s,/,\\,g
         PYTHON_LIB_COPY_CMD2 = cmd /c copy /y $${SRCDIR_WIN} $${DESTDIR_WIN2}
-        QMAKE_POST_LINK += $$quote(cmd /c $${PYTHON_LIB_COPY_CMD2}$$escape_expand(\n\t))
+        #QMAKE_POST_LINK += $$quote(cmd /c $${PYTHON_LIB_COPY_CMD2}$$escape_expand(\n\t))
+
+        #instead of attempting to move/rename the dll we now make its destination in the build-pythonlibs directory
+        # and manually move/rename after build
     }
 
     !contains(QMAKE_HOST.os,Windows){

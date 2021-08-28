@@ -56,10 +56,15 @@
 #include "AudioDeviceInfo.h"
 #include "MediaSync.h"
 
-#if 0
 #include <qtandroid/native_activity.h>
-#include <QAndroidJniObject>
-#include <QtAndroid>
+#include <QtGlobal>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+# include <QAndroidJniObject>
+# include <QtAndroid>
+#else
+# include <QCoreApplication>
+# include <QJniObject>
+#endif // QT_VERSION < QT_VERSION_CHECK(6.0.0)
 #include <QDebug>
 
 #include <CoreLib/VxJava.h>
@@ -112,10 +117,13 @@ void CJNIContext::initJavaContext( JavaVM * jvm, JNIEnv * env )
 
   // attach thread may be needed if created in different thread
   //m_JniJvm->AttachCurrentThread(&m_JniEnv, NULL);
-
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
   QAndroidJniObject mainActivity = QtAndroid::androidActivity();
-  if ( mainActivity.isValid() )
-  {
+#else
+    auto mainActivity = QJniObject(QNativeInterface::QAndroidApplication::context());
+#endif // QT_VERSION < QT_VERSION_CHECK(6.0.0)
+    if ( mainActivity.isValid() )
+    {
       jobject activityObj = mainActivity.object();
       if( activityObj )
       {
@@ -160,11 +168,11 @@ void CJNIContext::initJavaContext( JavaVM * jvm, JNIEnv * env )
       {
           qWarning() << "activity object is invalid";
       }
-  }
-  else
-  {
-      qWarning()<<"main activity is invalid";
-  }
+    }
+    else
+    {
+        qWarning()<<"main activity is invalid";
+    }
 }
 
 int CJNIContext::attachThread()
@@ -349,4 +357,4 @@ CJNIWindow CJNIContext::getWindow()
   return call_method<jhobject>(m_context,
     "getWindow", "()Landroid/view/Window;");
 }
-#endif
+

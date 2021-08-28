@@ -1,7 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QLocale>
 #include <QMainWindow>
+
 
 namespace Ui {
 class MainWindow;

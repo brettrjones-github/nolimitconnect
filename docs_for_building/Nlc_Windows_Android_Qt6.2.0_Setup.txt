@@ -23,8 +23,11 @@ Most instructions come from
 	F:\android\AndroidStudio
 	NOTE: For Qt and Android Studio to work together you need
 	Android Platform Tools 29.0.2 (July 2019) and Platform API 29
-	Get Older version of Android Studio 3.4.2 at
+	Get Older version of Android Studio 3.3.1 .. later than that like 3.4.2 or 4.4.2 will cause you issues
 	https://developer.android.com/studio/archive
+	windows android studio install name for 3.3.1 is android-studio-ide-182.5264788-windows.exe
+	windows android studio install name for 3.4.2 is android-studio-ide-183.5692245-windows.exe
+	windows android studio install name for 4.4.2 is android-studio-ide-202.7486908-windows.exe
 	see release notes at
 	https://developer.android.com/studio/releases/platform-tools
 	
@@ -44,24 +47,32 @@ Most instructions come from
 	3.) delete following folders
 		a.) c:/user/<your system name>/androidstudioproject
 		b.) c:/user/<your system name>/.android
-		c.) c:/user/<your system name>/.gradle
-		d.) c/user/<your system name>/AppData/Local/Android (keep hidden files on)
-		e.) F:/Android/AndroidStudio
+		c.) c:/user/<your system name>/.AndroidStudio3.4
+		d.) c:/user/<your system name>/.gradle
+		e.) c/user/<your system name>/AppData/Local/Android (keep hidden files on)
+		f.) F:/Android/AndroidStudio
 	4.) rerun android studio install
 
 	When setup wizard is run select custom install
 	select Do not import settings
 	In SDK Componenets Setup change Android SDK Location to
 	F:\Android\android-sdk
-	After install go to Tools->Appearance & Behavior->System Settings->Android Sdk
-	In tab SDK Platforms uncheck Android 11 and check Android 9+ (Q) API 29 and click Apply
+	After install go to Tools->Appearance & Behavior->System Settings->Android Sdk or use the setting option button on startup screen
+	In tab SDK Platforms 
+	    uncheck Android 11 (Or Android API 31) 
+		check Android API 30
+	    check Android 9+ (Q) API 29 
+		and click Apply
 	In SDK Tools check 
 	Android SDK Build-Tools
-	NDK (Side by Side)
 	Android Emulator
 	Android SDK Platform Tools
 	Google USB Driver
-	NDK 22.1.7171670 
+	if  Android Studio 3.3.1
+		NDK 21.3.6528147
+	if  Android Studio 3.4.2
+		NDK (Side by Side)
+		NDK 22.1.7171670
 	
 3.) Setup Command line sdk tools
 	from instructions at https://doc.qt.io/qt-6/android-getting-started.html
@@ -69,21 +80,27 @@ Most instructions come from
 	F:
 	cd F:/Android/android-sdk/tools/bin/
 	sdkmanager.bat --sdk_root=F:/Android/android-sdk --install "cmdline-tools;latest"	
-	sdkmanager.bat --sdk_root=F:/Android/android-sdk --install "platform-tools" "platforms;android-30" "build-tools;30.0.2" "ndk;21.3.6528147"
+	If you get a warning ".android\repositories.cfg could not be loaded." then just create an empty file repositories.cfg
+	sdkmanager.bat --sdk_root=F:/Android/android-sdk  --install "platform-tools" "platforms;android-29" "build-tools;29.0.2" "ndk;21.3.6528147"
 	sdkmanager.bat --sdk_root=F:/Android/android-sdk --install "extras;google;usb_driver"
 		
-	gradle version will be 5.6.4
-	for android-30 build-tools;30.0.2" "ndk;21.3.6528147
-	for android-29 build-tools;30.0.2" "ndk;21.3.6528147
+	gradle version will be gradle-6.8.3-bin
 		
-4.) Install CMake 3.19.2 from https://cmake.org/files/v3.19/
-	select Add Cmake to system path
-	change path to F:\Android\CMake3.19.2
 		
-5.) Install Qt
-	a.) Download and run Qt online installer 
-	b.) Install Qt 6.2.0 and Additional Libraries Qt Image Formats
+4.) Install Qt
+	a.) Download and run Qt online installer and install to F:\Qt
+	b.) Install Qt 6.2.0-betaX (Preview All) and All Additional Libraries
+
+5.) Test Qt Setup	
+	a.) Open Qt example F:\Qt\Examples\Qt-6.2.0\gui\analogclock
+	b.) Go To Tools->Options->Devices Tab Android
+	c.) Install the recommended Android Sdks and accept licences
+	d.) Build and run
+	e.) If you get > Installed Build Tools revision 31.0.0 is corrupted. Remove Android SDK Build-Tools 31 using Android Studio SDK 
+	then make sure the Build Settings in Kit Name ->build->Buid Steps is set to android-30
+	also recheck android options in tools->Options and make sure Android 12 (API 31) is not installed in SDK Manager Tab
 	
+	 
 6.) Verify or Add enviroment variables
 	These instructions are mainly from
 	https://www.software-testing-tutorials-automation.com/2015/09/set-androidhome-and-path-environment.html

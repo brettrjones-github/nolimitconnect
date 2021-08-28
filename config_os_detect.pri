@@ -1,7 +1,7 @@
 
 COMPILE_HOST_OS = UNKNOWN_HOST
-COPY_KEYWORD = cp
-MOVE_KEYWORD = mv
+#COPY_KEYWORD = cp
+#MOVE_KEYWORD = mv
 
 COMPILE_HOST_NAME=$${QMAKE_HOST.os}
 message(target $${TARGET_NAME} compile host is $${COMPILE_HOST_NAME})
@@ -9,8 +9,8 @@ message(target $${TARGET_NAME} compile host is $${COMPILE_HOST_NAME})
 #NOTE .. the { must come right after the contains() or will alwayse execute what is in the brackes
 contains( COMPILE_HOST_NAME, Windows ){
     COMPILE_HOST_OS = Windows
-    COPY_KEYWORD = copy
-    MOVE_KEYWORD = move
+#    COPY_KEYWORD = copy
+#    MOVE_KEYWORD = move
 
     DETECTED_BUILD_DATE=$$system(date /t)
     BUILD_DATE
@@ -194,6 +194,8 @@ CONFIG(release, debug|release){
     BUILD_TYPE=Release
 }
 
+SRC_CODE_ROOT_DIR=$$PWD
+
 #message(host os is $${HOST_OS} target os is $${TARGET_OS_NAME})
 
 #contains( TARGET_CPU_BITS, 64 ) {
@@ -204,6 +206,6 @@ CONFIG(release, debug|release){
 #    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 32 bit $${TARGET_ARCH_NAME}  )
 #}
 
-DEST_STATIC_LIBS_DIR=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
+DEST_STATIC_LIBS_DIR=$${SRC_CODE_ROOT_DIR}/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
 
-SHARED_LIB_BUILD_DIR=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
+SHARED_LIB_BUILD_DIR=$${SRC_CODE_ROOT_DIR}/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/

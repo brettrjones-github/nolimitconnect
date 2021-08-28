@@ -627,7 +627,7 @@ GOTV_END_CDECLARES
 
 typedef struct _stat64 structStatOsDef;
 
-#else 
+#else
 //================= EVERY OS THAT IS NOT WINDOWS ===================//
 #define HAVE_WINDOWS_H			0  // only windows has <windows.h>
 #define HAVE_WS2TCPIP_H			0  // only windows has <ws2tcpip.h>
@@ -735,8 +735,6 @@ typedef LPCSTR				LPCTSTR;
 typedef uint64_t            ULONGLONG;
 typedef unsigned long		ULONG_PTR;
 typedef ULONG_PTR			DWORD_PTR;
-
-//typedef intptr_t( *FARPROC )( void );
 
 #define MAXWORD   0xffff
 
@@ -1720,14 +1718,6 @@ typedef int64_t              time64_t;
 # define TAGLIB_STATIC
 #endif // TAGLIB_STATIC
 
-#ifndef __PRETTY_FUNCTION__
-# ifdef TARGET_OS_WINDOWS
-#  define __PRETTY_FUNCTION__ __FUNCTION__
-# else
-#  define __PRETTY_FUNCTION__ __ROUTINE__
-# endif // TARGET_OS_WINDOWS
-#endif // __PRETTY_FUNCTION__
-
 #if !defined(SIG_BLOCK)
 # define SIG_BLOCK 0
 #endif /* SIG_BLOCK */
@@ -1825,12 +1815,22 @@ it. */
 #define SAFE_DELETE_ARRAY(p)  { delete [](p); p = nullptr; }
 #define SAFE_DELETE(p)        { delete (p); p = nullptr;  }
 
-
 /* By default, we use the hardwired pathnames.  */
 # define relocate_gnu(pathname)_gnu (pathname) // renamed relocate to relocate_gnu because of name clash
 # define GETTEXTDATADIR						".textdata/"
 # define GETTEXTJAR							".textjar/"
 # define PACKAGE_SUFFIX						".gnu"
-# define PROJECTSDIR						".gotvp2p/"
+# define PROJECTSDIR						".nolimitconnect/"
 
+// QT Android does not like user defining __PRETTY_FUNCTION__ when including Qt headers
+// give odd error initializer of 'xxx' is not a constant expression in qmetatype.h in Qt 6.2.0
+#ifndef __PRETTY_FUNCTION__
+# ifdef TARGET_OS_WINDOWS
+#  define __PRETTY_FUNCTION__ __FUNCTION__
+# elif defined(TARGET_OS_LINUX)
+#  define __PRETTY_FUNCTION__ __ROUTINE__
+# else
+// do nothing
+# endif // TARGET_OS_WINDOWS
+#endif // __PRETTY_FUNCTION__
 

@@ -3,7 +3,13 @@ TEMPLATE = app
 CONFIG += qt thread silent
 
 # C++11 support
-CONFIG += c++11
+versionAtMost(QT_VERSION, 5.15.2){
+    CONFIG += c++11
+}
+
+versionAtLeast(QT_VERSION, 6.0.0){
+    CONFIG += c++17
+}
 DEFINES += BOOST_NO_CXX11_RVALUE_REFERENCES
 
 # Windows specific configuration

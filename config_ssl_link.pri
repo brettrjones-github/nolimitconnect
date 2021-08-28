@@ -1,9 +1,20 @@
 
-
-CONFIG(debug, debug|release){
-    LIBS +=  $${DEST_SHARED_LIBS_DIR}/libssl_d.so
+android:{
+include(config_version.pri)
+include(config_os_detect.pri)
+include(config_compiler.pri)
+include(config_link.pri)
+    message(ssl link $${SHARED_LIB_BIN_DIR}libssl_$${TARGET_ARCH_NAME}.so)
+    LIBS +=  $${SHARED_LIB_BIN_DIR}libssl_$${TARGET_ARCH_NAME}.so
 }
 
-CONFIG(release, debug|release){
-    LIBS +=  $${DEST_SHARED_LIBS_DIR}/libssl.so
+!android:{
+    message(ssl link not android)
+    CONFIG(debug, debug|release){
+        LIBS +=  $${SHARED_LIB_BIN_DIR}libssl_d.so
+    }
+
+    CONFIG(release, debug|release){
+        LIBS +=  $${SHARED_LIB_BIN_DIR}/libssl_d.so
+    }
 }

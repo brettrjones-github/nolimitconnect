@@ -2,12 +2,17 @@
 TEMPLATE = lib
 TARGET_NAME = pythoncore
 
+
+CONFIG(debug, debug|release){
+    message(ERROR Only Build Python In Release Mode.. Debug Not Supported)
+}
+
 include(config_os_detect.pri)
 include(config_openssl_lib.pri)
 include(config_opensslp_include.pri)
+include(config_link.pri)
 
 include(python_pythoncore.pri)
-DESTDIR = $${DEST_SHARED_LIBS_DIR}
 
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
@@ -23,12 +28,14 @@ $${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libdepends.pro
 $${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libgnu.pro
 
 
-$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libgnu.pro
-$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libbz2.pro
-$${DEST_SHARED_LIBS_DIR}libssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libcorelib.pro
-$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libssl.pro
+#$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libgnu.pro
+#$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libbz2.pro
+#$${DEST_SHARED_LIBS_DIR}libssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libcorelib.pro
+#$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libssl.pro
 
-PRE_TARGETDEPS +=  $${DEST_SHARED_LIBS_DIR}libssl$${SHARED_PYTHON_LIB_SUFFIX}
+message(link to shared ssl lib is $${DEST_SHARED_LIBS_DIR}libssl$${SHARED_SSL_LIB_SUFFIX})
+
+PRE_TARGETDEPS +=  $${DEST_SHARED_LIBS_DIR}libssl$${SHARED_SSL_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
@@ -36,9 +43,8 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
-message( ssl lib $${DEST_SHARED_LIBS_DIR}libssl$${SHARED_PYTHON_LIB_SUFFIX})
 
-LIBS +=  $${DEST_SHARED_LIBS_DIR}libssl$${SHARED_PYTHON_LIB_SUFFIX}
+LIBS +=  $${DEST_SHARED_LIBS_DIR}libssl$${SHARED_SSL_LIB_SUFFIX}
 
 LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
@@ -48,6 +54,10 @@ LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
 OBJECTS_DIR=.objs/$${TARGET_NAME}/$${BUILD_TYPE}
+
+DESTDIR = $${DEST_EXE_DIR}
+message(DESTDIR is $${DEST_EXE_DIR})
+
 
 #copy to local directory so can easily be linked to
 

@@ -11,6 +11,10 @@ TARGET_NAME=qtsimpleteststaticlib
 
 include(../config_detect_os.pri)
 
+INCLUDEPATH += $$PWD/../../../
+INCLUDEPATH += $$PWD/../../../DependLibs
+INCLUDEPATH += $$PWD/../../sysheaders
+
 !android:{
     OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 }

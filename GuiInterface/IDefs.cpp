@@ -516,11 +516,11 @@ const char * DescribeAge( EAgeType ageType )
 
     switch( ageType )
     {
-    case eAppModuleInvalid:
+    case eAgeTypeUnspecified:
         return "Any";
-    case eAppModuleAll:
+    case eAgeTypeUnder21:
         return "Under 21 ";
-    case eAppModuleKodi:
+    case eAgeType21OrOlder:
         return "21 Or Older ";
 
     default:

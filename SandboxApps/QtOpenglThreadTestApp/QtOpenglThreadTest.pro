@@ -17,7 +17,13 @@ DEFINES += TARGET_OS_ANDROID
 TARGET = QtOpenglThreadTestApp
 TEMPLATE = app
 
-CONFIG += c++11
+versionAtMost(QT_VERSION, 5.15.2){
+    CONFIG += c++11
+}
+
+versionAtLeast(QT_VERSION, 6.0.0){
+    CONFIG += c++17
+}
 
 INCLUDEPATH += $$PWD/QtOpenglThreadTest
 

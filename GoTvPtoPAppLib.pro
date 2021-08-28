@@ -10,7 +10,13 @@ DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MUL
 
 #CONFIG += qt thread silent
 # C++11 support
-CONFIG += c++11
+versionAtMost(QT_VERSION, 5.15.2){
+    CONFIG += c++11
+}
+
+versionAtLeast(QT_VERSION, 6.0.0){
+    CONFIG += c++17
+}
 
 CONFIG += mobility
 MOBILITY =

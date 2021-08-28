@@ -53,7 +53,9 @@
 
 #include <QtGui/qvector3d.h>
 #include <QtGui/qmatrix4x4.h>
-#include <QtGui/qopenglshaderprogram.h>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+# include <QtGui/qopenglshaderprogram.h>
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QtGui/qopenglfunctions.h>
 
 #include <QTime>

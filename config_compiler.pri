@@ -30,6 +30,7 @@ android{
 CONFIG(debug, debug|release){
 # message(Link in DEBUG mode.)
     android{
+    versionAtMost(QT_VERSION, 5.15.2){
         #if do not turn off optimization then android NDK std::string values will get optimized out and not viewable
         # sigh if optimization is turned off then the debugger gets hung up so may have to live with not being able to view strings.. also ndk strings sometimes are still optimized out
         QMAKE_CXXFLAGS -= -O1
@@ -38,6 +39,7 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS -= -O4
         QMAKE_CXXFLAGS += -O0
     #message(cxx flasgs $${QMAKE_CXXFLAGS})
+    }
     }
 }
 
@@ -52,7 +54,14 @@ win32{
 #nasm.commands = yasm $$NASMEXTRAFLAGS -o ${QMAKE_FILE_BASE}.o ${QMAKE_FILE_NAME}
 #nasm.input = NASM_SOURCES
 
-unix:QMAKE_CXXFLAGS += -std=c++11
+#versionAtMost(QT_VERSION, 5.15.2){
+#    unix:QMAKE_CXXFLAGS += c++11
+#}
+
+#versionAtLeast(QT_VERSION, 6.0.0){
+#    QMAKE_CXXFLAGS += -std=c++1z
+#}
+
 unix:QMAKE_CXXFLAGS += -fpermissive
 unix:QMAKE_CXXFLAGS += -Wno-unused-variable
 unix:QMAKE_CXXFLAGS += -Wno-unused-function

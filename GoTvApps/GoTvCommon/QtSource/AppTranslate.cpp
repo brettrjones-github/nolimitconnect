@@ -12,7 +12,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+// #include <PktLib/VxCommon.h>
+// #include <CoreLib/VxGUID.h>
+
 #include "AppTranslate.h"
+
+#include <QLocale>
 
 // for reference
 // QT_TRANSLATE_NOOP( "QObject","Greek" ),      "el", QLocale::Greek );
