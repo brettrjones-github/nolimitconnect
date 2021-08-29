@@ -264,8 +264,10 @@ void AppCommon::loadWithoutThread( void )
     uint64_t iconsMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Load Icons %lld ms alive ms %lld", iconsMs - loadingMs, iconsMs );
 
-    // TODO: finish VxAppStyle..
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+	// QT 6.2.0 has broken scroll bars.. TODO fix when 6.2.0 is no longer beta
     getQApplication().setStyle( &m_AppStyle );
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     // load sounds to play and sound hardware
     m_MySndMgr.sndMgrStartup();

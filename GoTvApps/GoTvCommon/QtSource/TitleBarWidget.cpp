@@ -169,7 +169,7 @@ void TitleBarWidget::slotCamPlaying( bool isPlaying )
 //============================================================================
 void TitleBarWidget::slotCamTimeout()
 {
-    if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 1000)
+    if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 1000 )
     {
         m_CamTimer->stop();
         emit signalCamPlaying( false );

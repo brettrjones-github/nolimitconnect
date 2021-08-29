@@ -84,11 +84,6 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
         //m_WindowFlags = Qt::Popup;
         m_WindowFlags = Qt::Dialog | Qt::WindowStaysOnTopHint;
         setWindowFlags( m_WindowFlags );
-   /*     m_MyApp.getAppTheme().applyTheme( this );
-        if( !m_ParentWidget )
-        {
-            m_ParentWidget = getParentPageFrame();
-        }*/
 
         connect( &m_MyApp, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotRepositionToParent() ) );
 

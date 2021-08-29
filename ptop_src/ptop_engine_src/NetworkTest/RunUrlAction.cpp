@@ -279,8 +279,8 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 		u16Port, 
 		NETSERVICE_CONNECT_TIMEOUT ) )
 	{
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectFail, "Could not connected to %s..Please check settings thread 0x%x",
-            nodeUrl.c_str(), VxGetCurrentThreadId() );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectFail, "Could not connected to %s..Please check settings",
+            nodeUrl.c_str() );
 
 		doRunTestFailed( urlAction, actionName, eRunTestStatusConnectFail );
 

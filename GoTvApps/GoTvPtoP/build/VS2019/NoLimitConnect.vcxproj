@@ -408,7 +408,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VidWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppDisplay.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.cpp" />
@@ -516,7 +515,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\UserProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.h" />
@@ -936,10 +934,10 @@
     <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.ico" />
+    <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.rc" />
+    <Image Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

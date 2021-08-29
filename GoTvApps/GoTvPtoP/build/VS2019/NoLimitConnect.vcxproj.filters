@@ -1636,9 +1636,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1930,9 +1927,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h">
@@ -2493,13 +2487,13 @@
     <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.rc">
+    <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

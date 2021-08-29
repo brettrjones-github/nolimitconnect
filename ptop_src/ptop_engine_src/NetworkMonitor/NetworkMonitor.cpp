@@ -330,7 +330,9 @@ std::string NetworkMonitor::determineLocalIp( void )
 
     if( localIp.empty() )
     {
-        LogModule( eLogNetworkState, LOG_WARNING, "Failed verify No Limit Hosted internet conection to %s:%d", VxGetNetworkHostName(), VxGetNetworkHostPort() );
+        LogModule( eLogNetworkState, LOG_WARNING, "Failed verify No Limit Hosted internet conection to ptop://%s:%d", VxGetNetworkHostName(), VxGetNetworkHostPort() );
+
+        LogModule( eLogNetworkState, LOG_WARNING, "Attempting conection to http://%s:%d", NET_TEST_WEB_CONNECTION_HOST, 80 );
 
         // try using google.. a really bad idea but since we have no official site we can connect to this should be reliable
         SOCKET skt = sktConnect.connectTo( NET_TEST_WEB_CONNECTION_HOST,		// remote ip or url
@@ -367,11 +369,15 @@ std::string NetworkMonitor::determineLocalIp( void )
                 m_strLastFoundIp.clear();
             }
             */
-        }
 
-        if( localIp.empty() )
-        {
-            LogModule( eLogNetworkState, LOG_WARNING, "Failed verify internet conection to %s:%d", NET_TEST_WEB_CONNECTION_HOST, VxGetNetworkHostName(), 80 );
+            if( localIp.empty() )
+            {
+                LogModule( eLogNetworkState, LOG_WARNING, "Failed verify internet conection to http://%s:%d", NET_TEST_WEB_CONNECTION_HOST, 80 );
+            }
+            else
+            {
+                LogModule( eLogNetworkState, LOG_WARNING, "Internet connection available. Local IP Address %s", localIp.c_str() );
+            }
         }
     }
 

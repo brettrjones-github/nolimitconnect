@@ -24,7 +24,9 @@ BottomBarWidget::BottomBarWidget( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-    m_MyApp.getAppTheme().applyTheme( this );
+	setFixedHeight( GuiParams::getButtonSize().height() + 6 );
+
+    // m_MyApp.getAppTheme().applyTheme( this );
 
 	setArrowLeftButtonIcon();
 	set30SecBackwardButtonIcon();
@@ -37,24 +39,6 @@ BottomBarWidget::BottomBarWidget( QWidget * parent )
 	setMediaRepeatButtonIcon();
 	setMenuBottomButtonIcon();
 	setExpandWindowButtonIcon();
-
-	//QFrame *m_PlayProgressFrame;
-	//QLabel *m_PlayCurentTime;
-	//QProgressBar *m_PlayProgressBar;
-	//QLabel *m_PlayTotalTime;
-	//QFrame *BottomBarFrame;
-
-	//VxPushButton *m_ArrowLeftButton;
-	//VxPushButton *m_30SecBackButton;
-	//VxPushButton *m_MediaPlayButton;
-	//VxPushButton *m_MediaTrashButton;
-	//VxPushButton *m_MediaFileShareButton;
-	//VxPushButton *m_MediaLibraryButton;
-	//VxPushButton *m_30SecForwardButton;
-	//VxPushButton *m_ArrowRightButton;
-	//VxPushButton *m_MediaRepeatButton;
-	//VxPushButton *m_MenuBottomButton;
-	//VxPushButton *m_ExpandButton;
 
 	setPlayProgressBarVisibility( false );
 	setArrowLeftVisibility( false );

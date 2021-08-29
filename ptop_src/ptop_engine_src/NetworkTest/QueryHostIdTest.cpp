@@ -103,8 +103,8 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 		u16Port, 
 		NETSERVICE_CONNECT_TIMEOUT ) )
 	{
-        sendRunTestStatus( eRunTestStatusConnectFail, "%s Could not connected to %s..Please check settings thread 0x%x",
-                        getTestName().c_str(), nodeUrl.c_str(), VxGetCurrentThreadId() );
+        sendRunTestStatus( eRunTestStatusConnectFail, "%s Could not connected to %s..Please check settings",
+                        getTestName().c_str(), nodeUrl.c_str() );
 
 		doRunTestFailed();
 

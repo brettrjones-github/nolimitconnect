@@ -153,13 +153,6 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="m_PingButton">
-        <property name="text">
-         <string>Ping Test</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="m_IsMyPortOpenButton">
         <property name="text">
          <string>Test Is My Port Open</string>

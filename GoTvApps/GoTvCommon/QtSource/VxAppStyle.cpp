@@ -212,12 +212,10 @@ void VxAppStyle::drawPrimitive( PrimitiveElement		primativeElem,
         return;
     }
 
-
     if( primativeElem == PE_FrameDefaultButton )
     {
         // do we need a default indicator ?
     }
-
 
     if( primativeElem == PE_PanelButtonCommand )
     {
@@ -227,7 +225,7 @@ void VxAppStyle::drawPrimitive( PrimitiveElement		primativeElem,
     if( primativeElem == PE_PanelLineEdit )
     {
         // allow default
-      }
+    }
 
     if( primativeElem == PE_IndicatorCheckBox )
     {
@@ -265,6 +263,20 @@ void VxAppStyle::drawControl(   ControlElement			element,
     }
 #endif // defined(TARGET_OS_ANDROID)
 
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    // QT 6.2.0 has broken scroll bars.. TODO fix when 6.2.0 is no longer beta
+    if( element == CE_ScrollBarAddLine ||
+        element == CE_ScrollBarAddLine ||
+        element == CE_ScrollBarSubLine ||
+        element == CE_ScrollBarAddPage ||
+        element == CE_ScrollBarSubPage ||
+        element == CE_ScrollBarSlider ||
+        element == CE_ScrollBarFirst ||
+        element == CE_ScrollBarLast)
+    QCommonStyle::drawControl( element, option, painter, widget );
+    painter->restore();
+    return;
+#else
     if( element == CE_ScrollBarSubLine || element == CE_ScrollBarAddLine )
     {
         if( ( option->state & State_Sunken ) )
@@ -322,6 +334,10 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
     if( element == CE_ScrollBarSlider )
     {
+        // allow default
+        QCommonStyle::drawControl( element, option, painter, widget );
+        painter->restore();
+        return;
         /*
         QStyleOption opt = *option;
         QColor bkgColor( COLOR_GREEN );
@@ -407,7 +423,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
             }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-            painter->setBackground(option->palette.base().color());
+            painter->setBackground(option->palette.window().color());
 #else
             painter->setBackground(option->palette.background());
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -420,6 +436,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
         painter->restore();
         return;
     }
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     if( element == CE_CheckBox )
     {
@@ -606,7 +623,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             {
                 painter->setPen( opt->palette.text().color() );
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-                painter->setBackground(opt->palette.base().color());
+                painter->setBackground(opt->palette.window().color());
 #else
                 painter->setBackground(opt->palette.background());
 #endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
@@ -657,6 +674,11 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
     if( control == CC_ScrollBar )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        QCommonStyle::drawComplexControl( control, option, painter, widget );
+        painter->restore();
+        return;
+#else
         if( const QStyleOptionSlider *scrollbar = qstyleoption_cast<const QStyleOptionSlider *>( option ) )
         {
             QStyleOptionSlider newScrollbar = *scrollbar;
@@ -744,10 +766,16 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
         painter->restore();
         return;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     }
 
     if( control == CC_Slider )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        QCommonStyle::drawComplexControl( control, option, painter, widget );
+        painter->restore();
+        return;
+#else
         const QStyleOptionSlider *slider = qstyleoption_cast<const QStyleOptionSlider *>( option );
         if( slider )
         {
@@ -1029,6 +1057,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
         painter->restore();
         return;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     }
 
     if( control == CC_SpinBox )
@@ -1165,9 +1194,6 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
     case PM_FocusFrameHMargin:
         return focusFrameBoarderWidth();
 
-    case PM_ScrollBarExtent:
-        return 2 * GetGuiParams().getControlIndicatorWidth();
-
     case PM_ProgressBarChunkWidth:
         return 1;
 
@@ -1175,6 +1201,10 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
     case PM_ButtonShiftHorizontal:
     case PM_ButtonShiftVertical:
         break;
+
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    case PM_ScrollBarExtent:
+        return 2 * GetGuiParams().getControlIndicatorWidth();
 
     case PM_SliderThickness: // height of slider handle
         return widget->geometry().height() < widget->geometry().width() ? widget->geometry().height() : widget->geometry().width();
@@ -1193,6 +1223,7 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
     case PM_SliderTickmarkOffset: // ticks not supported
         return 0;
         break;
+#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     case PM_ButtonIconSize:
         break;
