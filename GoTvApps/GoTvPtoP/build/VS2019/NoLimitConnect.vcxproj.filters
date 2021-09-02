@@ -800,6 +800,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -1777,6 +1780,9 @@
     <ClCompile Include="..\..\..\..\GuiInterface\OsWin32\IWin32.cpp">
       <Filter>Source Files\GuiInterface\OsWin32</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
@@ -2480,6 +2486,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamTest.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

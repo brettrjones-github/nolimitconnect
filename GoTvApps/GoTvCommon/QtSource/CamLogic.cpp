@@ -18,7 +18,9 @@
 #include "AppCommon.h"
 
 #include <CoreLib/VxDebug.h>
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+#include <QMediaDevices>
+#else
 Q_DECLARE_METATYPE( QCameraInfo )
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
@@ -91,7 +93,43 @@ void CamLogic::slotTakeSnapshot( void )
 {
     //LogModule(eLogVideo, LOG_DEBUG, "Cam Error %d Status %s", m_camera->error(), GuiParams::describeCamStatus(m_CamStatus).toUtf8().constData());
     static int notReadyCnt = 0;
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    /*
+    if( QCamera::Status::ActiveStatus != m_CamStatus || QCamera::State::ActiveState != m_CamState || QMultimedia::Available != m_imageCapture->availability() )
+    {
+        // camera system not ready
+        notReadyCnt++;
+        if( notReadyCnt > 2 )
+        {
+            static int64_t lastMsgTime = 0;
+            int64_t elapsedNow = m_MyApp.elapsedSeconds();
+            if( elapsedNow != lastMsgTime )
+            {
+                lastMsgTime = elapsedNow;
+                //LogModule(eLogVideo, LOG_DEBUG, "Cam Status %s", GuiParams::describeCamStatus(m_CamStatus).toUtf8().constData());
+                LogMsg( LOG_DEBUG, "Cam Error %d Status %s State %s capture available %d error %d", m_camera->error(),
+                    GuiParams::describeCamStatus( m_CamStatus ).toUtf8().constData(),
+                    GuiParams::describeCamState( m_CamState ).toUtf8().constData(), m_imageCapture->availability(), m_imageCapture->error() );
+            }
+        }
+
+        return;
+    }
+    */
+
+    if( !m_imageCapture->isReadyForCapture() )
+    {
+        // Calling capture() while readyForCapture is false is not permitted and results in an error.
+        return;
+    }
+
+    notReadyCnt = 0;
+    if( !m_isCapturingImage )
+    {
+        m_isCapturingImage = true;
+        m_imageCapture->capture();
+    }
+#else
     if( QCamera::Status::ActiveStatus != m_CamStatus || QCamera::State::ActiveState != m_CamState || QMultimedia::Available != m_imageCapture->availability())
     {
         // camera system not ready
@@ -126,7 +164,7 @@ void CamLogic::slotTakeSnapshot( void )
         m_imageCapture->capture();
     }
 
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 }
 
 //============================================================================
@@ -145,14 +183,57 @@ bool CamLogic::assureCamInitiated( void )
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
         setCamera( QCameraInfo::defaultCamera() );
 #else
-        m_camera.reset(new QCamera());
+        setCamera( QMediaDevices::defaultVideoInput() );
 #endif  QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     }
 
     return  !m_camera.isNull() && m_camera->isAvailable();
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+//============================================================================
+void CamLogic::setCamera( const QCameraDevice& cameraDevice )
+{
+    m_camera.reset( new QCamera( cameraDevice ) );
+    m_captureSession.setCamera( m_camera.data() );
+
+    connect( m_camera.data(), &QCamera::activeChanged, this, &CamLogic::updateCameraActive );
+    connect( m_camera.data(), &QCamera::errorOccurred, this, &CamLogic::displayCameraError );
+
+    m_mediaRecorder.reset( new QMediaRecorder );
+    m_captureSession.setRecorder( m_mediaRecorder.data() );
+    connect( m_mediaRecorder.data(), &QMediaRecorder::recorderStateChanged, this, &CamLogic::updateRecorderState );
+
+
+    m_imageCapture = new QImageCapture( m_mediaRecorder.data() );
+    m_captureSession.setImageCapture( m_imageCapture );
+
+    connect( m_mediaRecorder.data(), &QMediaRecorder::durationChanged, this, &CamLogic::updateRecordTime );
+    connect( m_mediaRecorder.data(), &QMediaRecorder::errorChanged, this, &CamLogic::displayRecorderError );
+
+    //m_captureSession.setVideoOutput( ui->viewfinder );
+    //m_imageCapture->setCaptureDestination( QImageCapture::CaptureToBuffer );
+
+    updateCameraActive( m_camera->isActive() );
+    updateRecorderState( m_mediaRecorder->recorderState() );
+
+    connect( m_imageCapture, &QImageCapture::readyForCaptureChanged, this, &CamLogic::readyForCapture );
+    connect( m_imageCapture, &QImageCapture::imageCaptured, this, &CamLogic::processCapturedImage );
+    connect( m_imageCapture, &QImageCapture::imageSaved, this, &CamLogic::imageSaved );
+    connect( m_imageCapture, &QImageCapture::errorOccurred, this, &CamLogic::displayCaptureError );
+
+    readyForCapture( m_imageCapture->isReadyForCapture() );
+
+    updateCaptureMode( 0 );
+
+    //m_imageCapture->setFileFormat( boxValue( ui->imageCodecBox ).value<QImageCapture::FileFormat>() );
+    //m_imageCapture->setQuality( QImageCapture::Quality( ui->imageQualitySlider->value() ) );
+    m_imageCapture->setResolution( QSize( 320, 240 ) );
+
+    m_CamInitiated = true;
+}
+
+#else
 //============================================================================
 void CamLogic::setCamera( const QCameraInfo &cameraInfo )
 {
@@ -361,7 +442,47 @@ void CamLogic::toggleLock()
 #endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+void CamLogic::updateCameraActive( bool active )
+{
+    if( active ) 
+    {
+        LogMsg( LOG_VERBOSE, "updateCameraActive is active " );
+    }
+    else 
+    {
+        LogMsg( LOG_VERBOSE, "updateCameraActive is NOT active " );
+    }
+}
+
+void CamLogic::updateRecorderState( QMediaRecorder::RecorderState state )
+{
+    switch( state ) {
+    case QMediaRecorder::StoppedState:
+        LogMsg( LOG_VERBOSE, "QMediaRecorder stopped " );
+        break;
+    case QMediaRecorder::PausedState:
+        LogMsg( LOG_VERBOSE, "QMediaRecorder paused " );
+        break;
+    case QMediaRecorder::RecordingState:
+        LogMsg( LOG_VERBOSE, "QMediaRecorder recording " );
+        break;
+    }
+}
+void CamLogic::displayCaptureError( int id, const QImageCapture::Error error, const QString& errorString )
+{
+    Q_UNUSED( id );
+    //m_ReadyForCapture = false;
+    //m_isCapturingImage = false;
+
+    //LogModule(eLogVideo, LOG_VERBOSE, "displayCaptureError %d %s", error, errorString.toUtf8().constData());
+    LogMsg( LOG_VERBOSE, "displayCaptureError %d %s", error, errorString.toUtf8().constData() );
+    if( QImageCapture::NotReadyError != error )
+    {
+        QMessageBox::warning( this, QObject::tr( "Image Capture Error" ), errorString );
+    }
+}
+#else
 //============================================================================
 void CamLogic::displayCaptureError( int id, const QCameraImageCapture::Error error, const QString &errorString )
 {

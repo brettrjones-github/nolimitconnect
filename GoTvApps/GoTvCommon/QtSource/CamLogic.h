@@ -26,10 +26,11 @@
 #include <QMediaRecorder>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-#include <QCamera>
-#include <QCameraDevice>
-#include <QCameraFormat>
-#include <QImageCapture>
+# include <QCamera>
+# include <QCameraDevice>
+# include <QCameraFormat>
+# include <QImageCapture>
+# include <QMediaCaptureSession>
 #else
 # include <QCameraInfo>
 # include <QMediaService>
@@ -73,7 +74,9 @@ public:
     void                        toGuiWantVideoCapture( bool wantVidCapture );
 
 public slots:
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    void setCamera( const QCameraDevice& cameraDevice );
+#else
     void setCamera( const QCameraInfo &cameraInfo );
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
@@ -102,7 +105,12 @@ public slots:
     void updateRecordTime();
 
     void processCapturedImage( int requestId, const QImage &img );
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    void updateCameraActive( bool active );
+    void updateRecorderState( QMediaRecorder::RecorderState state );
+    void displayCaptureError( int, QImageCapture::Error, const QString& errorString );
+#else
     void cameraStateChanged(QCamera::State camState);
     void cameraStatusChanged(QCamera::Status camStatus)
     void updateRecorderState(QMediaRecorder::State state);
@@ -140,7 +148,11 @@ private:
     bool                        m_CamIsStarted{ false };
     bool                        m_ReadyForCapture{ false };
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
+    QImageCapture*              m_imageCapture;
+    QMediaCaptureSession        m_captureSession;
+    QScopedPointer<QMediaRecorder> m_mediaRecorder;
+#else
     QCamera::Status             m_CamStatus{ QCamera::Status::UnavailableStatus };
     QCamera::State              m_CamState{ QCamera::State::UnloadedState };
     QScopedPointer<QCameraImageCapture> m_imageCapture;

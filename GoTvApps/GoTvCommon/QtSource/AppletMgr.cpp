@@ -30,6 +30,7 @@
 #include "AppletBrowseFiles.h"
 
 #include "AppletCamSettings.h"
+#include "AppletCamTest.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "AppletChooseThumbnail.h"
 #include "AppletChatRoomClient.h"
@@ -249,6 +250,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
 
     case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
+    case eAppletCamTest:                    appletDialog = new AppletCamTest( m_MyApp, parent ); break;
     case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
     case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;

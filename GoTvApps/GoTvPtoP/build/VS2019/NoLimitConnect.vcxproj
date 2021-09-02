@@ -164,6 +164,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.cpp" />
@@ -458,6 +459,7 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -813,6 +815,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamSettings.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoin.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoinSearch.ui" />

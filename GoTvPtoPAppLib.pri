@@ -66,6 +66,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
@@ -392,6 +393,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \
@@ -707,6 +709,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCallList.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCamSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoin.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \

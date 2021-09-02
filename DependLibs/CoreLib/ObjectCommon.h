@@ -66,6 +66,7 @@
 #define OBJNAME_APPLET_BROWSE_FILES					    "AppletBrowseFiles"
 #define OBJNAME_APPLET_CALL_LIST			            "AppletCallList"
 #define OBJNAME_APPLET_CAM_SETTINGS		                "AppletCamSettings"
+#define OBJNAME_APPLET_CAM_TEST							"AppletCamTest"
 #define OBJNAME_APPLET_CHAT_ROOM_JOIN			        "AppletChatRoomJoin"
 #define OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH			"AppletChatRoomJoinSearch"
 #define OBJNAME_APPLET_CHOOSE_THUMBNAIL					"AppletChooseThumbnail"

@@ -68,11 +68,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F-B370-40FE-9B2A-901555E8E928}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\Build1_PythonDepends.pro = ..\..\Build1_PythonDepends.pro
-		..\..\Build2_PythonLib.pro = ..\..\Build2_PythonLib.pro
-		..\..\Build3_DependLibs.pro = ..\..\Build3_DependLibs.pro
-		..\..\Build4_Core.pro = ..\..\Build4_Core.pro
-		..\..\Build5_AppOnly.pro = ..\..\Build5_AppOnly.pro
-		..\..\Build6_AppAndCore_Optional.pro = ..\..\Build6_AppAndCore_Optional.pro
+		..\..\Build2_PythonCoreLib.pro = ..\..\Build2_PythonCoreLib.pro
+		..\..\Build3_PythonDllLibs.pro = ..\..\Build3_PythonDllLibs.pro
+		..\..\Build4_MovePythonDlls.pro = ..\..\Build4_MovePythonDlls.pro
+		..\..\Build5_NlcDependLibs.pro = ..\..\Build5_NlcDependLibs.pro
+		..\..\Build6_NlcCore.pro = ..\..\Build6_NlcCore.pro
+		..\..\Build7_NlcAppOnly.pro = ..\..\Build7_NlcAppOnly.pro
+		..\..\Build7_NlcAppOnly.pro.user = ..\..\Build7_NlcAppOnly.pro.user
+		..\..\BuildA_Python.pro = ..\..\BuildA_Python.pro
+		..\..\BuildB_NoLimitConnectCore.pro = ..\..\BuildB_NoLimitConnectCore.pro
+		..\..\BuildC_NoLimitConnectApp.pro = ..\..\BuildC_NoLimitConnectApp.pro
 		..\..\config_compiler.pri = ..\..\config_compiler.pri
 		..\..\config_copy_shared_lib.pri = ..\..\config_copy_shared_lib.pri
 		..\..\config_deploy.pri = ..\..\config_deploy.pri
@@ -352,7 +357,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = 64BitVs2017Qt5.15.2
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = 64BitVs2017Qt5.15.2
 	EndGlobalSection
 EndGlobal
