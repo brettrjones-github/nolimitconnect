@@ -47,6 +47,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletApplicationInfo:	        return eMyIconUnknown;
     case eAppletBrowseFiles:	            return eMyIconFileOpen;
     case eAppletCamTest:	                return eMyIconCameraNormal;
+    case eAppletCamClipPlayer:	            return eMyIconVideo;
     case eAppletChatRoomJoinSearch:	        return eMyIconSearchJoinChatRoom;
     case eAppletChatRoomJoin:	            return eMyIconClientChatRoom;
     case eAppletClientAvatarImage:          return eMyIconAvatarImage;
@@ -171,6 +172,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );
     case eAppletBrowseFiles:			    return QObject::tr( "Browse Files" );
     case eAppletCallList:                   return QObject::tr( "Calls" );
+    case eAppletCamClipPlayer:              return QObject::tr( "Cam Video Player" );
     case eAppletCamSettings:                return QObject::tr( "Cam Settings" );
     case eAppletCamTest:                    return QObject::tr( "Camera Test" );
     case eAppletChatRoomJoin:               return QObject::tr( "Join Chat Room" );

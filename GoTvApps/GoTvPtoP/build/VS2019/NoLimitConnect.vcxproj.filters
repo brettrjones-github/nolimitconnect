@@ -36,6 +36,9 @@
     <Filter Include="Source Files\GuiInterface\OsInterface">
       <UniqueIdentifier>{6aa468e6-16d3-4219-a88a-a23ba00507e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{251e4b5e-0d25-4ac9-9161-afc8277d76dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.h">
@@ -332,16 +335,10 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.h">
@@ -803,6 +800,12 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -886,16 +889,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.cpp">
@@ -1783,6 +1777,15 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
@@ -2104,19 +2107,10 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityVideoOptions.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewAudioFile.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewLibraryFiles.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewLog.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewMySharedFiles.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewVideoFile.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityWebCamClient.ui">
@@ -2491,9 +2485,15 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamTest.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamClipPlayer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
+    <None Include="..\..\..\..\GoTvPtoPAppLib.pri">
+      <Filter>QtBuild</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.rc">

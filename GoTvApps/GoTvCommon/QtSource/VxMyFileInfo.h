@@ -15,6 +15,7 @@
 //============================================================================
 
 #include <CoreLib/VxFileInfo.h>
+#include <CoreLib/VxGUID.h>
 
 #include <QObject>
 
@@ -27,8 +28,8 @@ public:
 	VxMyFileInfo(QWidget *parent = 0 );
 	VxMyFileInfo( const VxFileInfo& rhs );
 	VxMyFileInfo( const VxMyFileInfo& rhs );
-	VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxSha1Hash& fileHashId );
-	VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, uint8_t * fileHashData );
+	VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxGUID& assetId, VxSha1Hash& fileHashId );
+	VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxGUID& assetId, uint8_t * fileHashData );
 	virtual ~VxMyFileInfo();
 
 	void						setFullFileName( QString fileName );
@@ -40,6 +41,9 @@ public:
 	void						setFileHashId( VxSha1Hash& id )			{ m_FileHashId = id; }
 	void						setFileHashId( uint8_t * fileHashData )	{ m_FileHashId.setHashData( fileHashData ); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
+
+	void						setAssetId( VxGUID& assetId )			{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )						{ return m_AssetId; }
 
 	void						setIsInLibrary( bool inLibaray )		{ m_IsInLibrary = inLibaray; }
 	bool						getIsInLibrary( void ) const			{ return m_IsInLibrary; }
@@ -67,14 +71,16 @@ public:
 
 private:
 	void						updateJustFileName( void );
+	void						generateAssetId( bool ifNotValid = true );
 
 	QString						m_FullFileName;
 	uint8_t						m_FileType;
-	uint64_t					m_FileLen;
+	uint64_t					m_FileLen{ 0 };
 	VxSha1Hash					m_FileHashId;
 	QString						m_JustFileName;
 	QString						m_FilePath;
-	bool						m_IsInLibrary;
-	bool						m_IsShared;
+	bool						m_IsInLibrary{ false };
+	bool						m_IsShared{ false };
+	VxGUID						m_AssetId;
 };
 

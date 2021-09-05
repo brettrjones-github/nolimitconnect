@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppletAboutAppClass</class>
- <widget class="QWidget" name="AppletAboutAppClass">
+ <class>AppletAboutAppUi</class>
+ <widget class="QWidget" name="AppletAboutAppUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -70,7 +70,6 @@
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -85,7 +84,7 @@
       <item>
        <widget class="QLabel" name="labelCopywrite">
         <property name="text">
-         <string>(c) Brett R. Jones 2013,2020</string>
+         <string>(c) Brett R. Jones 2013,2022</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -133,6 +132,13 @@
         </property>
         <property name="text">
          <string>go to http://www.nolimitconnect.com</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_ShowAppInfo">
+        <property name="text">
+         <string>Show Application Information</string>
         </property>
        </widget>
       </item>

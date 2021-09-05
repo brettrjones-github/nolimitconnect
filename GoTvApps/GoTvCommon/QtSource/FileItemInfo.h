@@ -26,7 +26,7 @@ class VxNetIdent;
 class FileItemInfo
 {
 public:
-    FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxNetIdent * netIdent = 0, uint8_t * fileHashId = 0 );
+    FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, VxNetIdent * netIdent = 0, uint8_t * fileHashId = 0 );
 	FileItemInfo( VxMyFileInfo& fileInfo, VxNetIdent * netIdent = 0, bool isShared = false, bool isInLibrary = false );
 
 	void						setIsShared( bool isShared )			{ m_IsShared = isShared; }
@@ -41,6 +41,9 @@ public:
     uint8_t						getFileType( void )						{ return m_FileInfo.getFileType(); }
     uint64_t					getFileLength( void )					{ return m_FileInfo.getFileLength(); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileInfo.getFileHashId(); }
+
+	void 						setAssetId( VxGUID& assetId )			{ m_FileInfo.setAssetId( assetId ); }
+	VxGUID						getAssetId( void )						{ return m_FileInfo.getAssetId(); }
 
 	bool						toggleIsShared( void );
 	bool						toggleIsInLibrary( void );

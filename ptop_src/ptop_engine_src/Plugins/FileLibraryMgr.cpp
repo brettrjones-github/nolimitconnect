@@ -333,8 +333,8 @@ bool FileLibraryMgr::fromGuiAddFileToLibrary( const char * fileName, bool addFil
 
 //============================================================================
 void FileLibraryMgr::addFileToLibrary(	std::string		fileName,
-										uint64_t				fileLen, 
-										uint8_t				fileType,
+										uint64_t		fileLen, 
+										uint8_t			fileType,
 										VxSha1Hash&		fileHashId )
 {
 	removeFromLibrary( fileName );
@@ -405,6 +405,36 @@ bool FileLibraryMgr::isFileInLibrary( VxSha1Hash& fileHashId )
 }
 
 //============================================================================
+bool FileLibraryMgr::isFileInLibrary( VxGUID& assetId )
+{
+	bool isInLib = false;
+	std::string fileName( "" );
+	lockFileLibrary();
+	std::vector<LibraryFileInfo*>::iterator iter;
+	for( iter = m_LibraryFileList.begin(); iter != m_LibraryFileList.end(); ++iter )
+	{
+		if( assetId == (*iter)->getAssetId() )
+		{
+			isInLib = true;
+			fileName = (*iter)->getFileName();
+			break;
+		}
+	}
+
+	unlockFileLibrary();
+	if( isInLib && fileName.size() )
+	{
+		if( 0 == VxFileUtil::fileExists( fileName.c_str() ) )
+		{
+			removeFromLibrary( fileName );
+			isInLib = false;
+		}
+	}
+
+	return isInLib;
+}
+
+//============================================================================
 void FileLibraryMgr::removeFromLibrary( std::string& fileName )
 {
 	lockFileLibrary();
@@ -432,17 +462,19 @@ void FileLibraryMgr::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 		LibraryFileInfo * fileInfo = (*iter);
 		if( 0 != ( fileTypeFilter & fileInfo->getFileType() ) )
 		{
-			IToGui::getToGui().toGuiFileList(	fileInfo->getFileName().c_str(), 
-									fileInfo->getFileLength(), 
-									fileInfo->getFileType(), 
-									m_SharedFilesMgr.isFileShared( fileInfo->getLocalFileName() ),
-									true,
-									fileInfo->getFileHashId().getHashData() );
+			IToGui::getToGui().toGuiFileList( fileInfo->getFileName().c_str(),
+											fileInfo->getFileLength(),
+											fileInfo->getFileType(),
+											m_SharedFilesMgr.isFileShared( fileInfo->getLocalFileName() ),
+											true,
+											fileInfo->getAssetId(),
+											fileInfo->getFileHashId().getHashData()
+											);
 		}
 	}
 
 	unlockFileLibrary();
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
 }
 
 /*

@@ -29,6 +29,7 @@ void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent,
 									uint8_t			u8FileType, 
 									uint64_t		u64FileLen, 
 									const char *	pFileName,
+									VxGUID			assetId,
 									uint8_t *		fileHashData )
 {
 	if( VxIsAppShuttingDown() )
@@ -36,7 +37,8 @@ void AppCommon::toGuiFileListReply(	VxNetIdent *	netIdent,
 		return;
 	}
 
-	FileListReplySession * replySession = new FileListReplySession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), u8FileType, u64FileLen, pFileName, fileHashData );
+	FileListReplySession * replySession = new FileListReplySession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), 
+																	u8FileType, u64FileLen, pFileName, assetId, fileHashData );
 
 	toGuiFileXferClientsLock();
 	std::vector<ToGuiFileXferClient>::iterator iter;
@@ -57,6 +59,7 @@ void AppCommon::toGuiStartUpload(	VxNetIdent *	netIdent,
 									uint8_t			fileType, 
 									uint64_t		fileLen, 
 									const char *	fileName,
+									VxGUID			assetId,
 									uint8_t *		fileHashData )
 {
 	if( VxIsAppShuttingDown() )
@@ -65,7 +68,8 @@ void AppCommon::toGuiStartUpload(	VxNetIdent *	netIdent,
 	}
 
 	VxGUID lclSession( lclSessionId );
-	GuiFileXferSession * fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), lclSession, fileType, fileLen, fileName, fileHashData );
+	GuiFileXferSession * fileXferSession =  new GuiFileXferSession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), lclSession, 
+																	fileType, fileLen, fileName, assetId, fileHashData );
 	toGuiFileXferClientsLock();
 	std::vector<ToGuiFileXferClient>::iterator iter;
 	for( iter = m_ToGuiFileXferClientList.begin(); iter != m_ToGuiFileXferClientList.end(); ++iter )
@@ -85,6 +89,7 @@ void AppCommon::toGuiStartDownload(	VxNetIdent *	netIdent,
 									uint8_t			u8FileType, 
 									uint64_t		u64FileLen, 
 									const char *	pFileName,
+									VxGUID			assetId,
 									uint8_t *		fileHashData )
 {
 	if( VxIsAppShuttingDown() )
@@ -93,7 +98,8 @@ void AppCommon::toGuiStartDownload(	VxNetIdent *	netIdent,
 	}
 
 	VxGUID lclSession( lclSessionId );
-	GuiFileXferSession * fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), lclSession, u8FileType, u64FileLen, pFileName, fileHashData );
+	GuiFileXferSession * fileXferSession = new GuiFileXferSession( ePluginType, m_UserMgr.getUser( netIdent->getMyOnlineId() ), 
+																	lclSession, u8FileType, u64FileLen, pFileName, assetId, fileHashData );
 	toGuiFileXferClientsLock();
 	std::vector<ToGuiFileXferClient>::iterator iter;
 	for( iter = m_ToGuiFileXferClientList.begin(); iter != m_ToGuiFileXferClientList.end(); ++iter )
@@ -169,6 +175,7 @@ void AppCommon::toGuiFileList(	const char *	fileName,
 								uint8_t			fileType, 
 								bool			isShared,
 								bool			isInLibrary,
+								VxGUID          assetId,
 								uint8_t *		fileHashId )
 {
 	if( VxIsAppShuttingDown() )
@@ -176,7 +183,7 @@ void AppCommon::toGuiFileList(	const char *	fileName,
 		return;
 	}
 
-	VxMyFileInfo fileInfo( fileName, fileType, fileLen, fileHashId );
+	VxMyFileInfo fileInfo( fileName, fileType, fileLen, assetId, fileHashId );
 	fileInfo.setIsInLibrary( isInLibrary );
 	fileInfo.setIsShared( isShared );
 

@@ -25,11 +25,23 @@ AssetMgr::AssetMgr( P2PEngine& engine, const char * dbName, const char * dbState
 //============================================================================
 AssetBaseInfo * AssetMgr::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
 {
-    return new AssetInfo( assetType, assetName, assetLen );
+    AssetInfo* assetInfo = new AssetInfo( assetType, assetName, assetLen );
+    assetInfo->assureHasCreatorId();
+    return assetInfo;
+}
+
+//============================================================================
+AssetBaseInfo* AssetMgr::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen, VxGUID& assetId )
+{
+    AssetInfo* assetInfo = new AssetInfo( assetType, assetName, assetLen, assetId );
+    assetInfo->assureHasCreatorId();
+    return assetInfo;
 }
 
 //============================================================================
 AssetBaseInfo * AssetMgr::createAssetInfo( AssetBaseInfo& assetInfo )
 {
-    return new AssetInfo( assetInfo );
+    AssetInfo* assetInfoNew = new AssetInfo( assetInfo );
+    assetInfoNew->assureHasCreatorId();
+    return assetInfoNew;
 }

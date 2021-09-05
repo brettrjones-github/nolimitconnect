@@ -842,13 +842,14 @@ bool OfferBaseMgr::fromGuiGetOfferBaseInfo( uint8_t fileTypeFilter )
 										            assetInfo->getOfferType(), 
 										            assetInfo->isSharedFileOffer(),
 										            assetInfo->isInLibary(),
+													assetInfo->getOfferId(),
 										            assetInfo->getOfferHashId().getHashData() );
 			}
 		}
 	}
 
 	unlockResources();
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
 	return true;
 }
 

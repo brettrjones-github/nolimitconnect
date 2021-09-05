@@ -37,6 +37,7 @@ public:
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
 						const char *	pFileName,
+						VxGUID			assetId,
 						VxSha1Hash&		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
@@ -45,6 +46,7 @@ public:
 						uint8_t			u8FileType, 
 						uint64_t		u64FileLen, 
 						const char *	pFileName,
+						VxGUID			assetId,
 						uint8_t *		fileHashId );
 
 	GuiFileXferSession(	EPluginType		ePluginType, 
@@ -82,6 +84,8 @@ public:
 	void						setFileHashId( VxSha1Hash& id )				{ m_FileInfo.getFileHashId() = id; }
 	void						setFileHashId( uint8_t * fileHashData )		{ m_FileInfo.setFileHashId( fileHashData ); }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileInfo.getFileHashId(); }
+
+	VxGUID						getAssetId( void )							{ return m_FileInfo.getAssetId(); }
 
 	void						setIsShared( bool isShared )				{ m_FileInfo.setIsShared( isShared ); }
 	bool						getIsShared( void )							{ return m_FileInfo.getIsShared(); }

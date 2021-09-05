@@ -21,7 +21,7 @@
 namespace
 {
 	std::string 		TABLE_LIBRARY_FILES	 				= "library_files";
-	std::string 		CREATE_COLUMNS_LIBRARY_FILES		= " (file_name TEXT PRIMARY KEY, file_length BIGINT, file_type INTEGER, file_hash BLOB ) ";
+	std::string 		CREATE_COLUMNS_LIBRARY_FILES		= " (file_name TEXT PRIMARY KEY, file_length BIGINT, file_type INTEGER, asset_id TEXT, file_hash BLOB ) ";
 }
 
 //============================================================================
@@ -82,16 +82,17 @@ void FileLibraryDb::removeFile( const char * fileName )
 }
 
 //============================================================================
-void FileLibraryDb::addFile( const char * fileName, int64_t fileLen, uint8_t fileType, uint8_t * fileHashId )
+void FileLibraryDb::addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId )
 {
 	removeFile( fileName );
 
 	DbBindList bindList( fileName );
 	bindList.add( fileLen );
 	bindList.add( (int)fileType );
+	bindList.add( assetId.toHexString().c_str() );
 	bindList.add( (void *)fileHashId, 20 );
 
-	RCODE rc  = sqlExec( "INSERT INTO library_files (file_name,file_length,file_type,file_hash) values(?,?,?,?)",
+	RCODE rc  = sqlExec( "INSERT INTO library_files (file_name,file_length,file_type,asset_id,file_hash) values(?,?,?,?,?)",
 		bindList );
 	if( rc )
 	{
@@ -105,7 +106,9 @@ void FileLibraryDb::addFile( LibraryFileInfo* libFileInfo )
 	addFile(	libFileInfo->getFileName().c_str(),
 				libFileInfo->getFileLength(),
 				libFileInfo->getFileType(),
-				libFileInfo->getFileHashId().getHashData() );
+				libFileInfo->getAssetId(),
+				libFileInfo->getFileHashId().getHashData()
+				 );
 }
 
 //============================================================================
@@ -115,7 +118,8 @@ void FileLibraryDb::getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList )
 	uint8_t fileType;
 	int64_t fileLen;
 	std::string destfile;
-	std::string consoleId;
+	std::string assetIdStr;
+	VxGUID assetId;
 	lockFileLibraryDb();
 	std::vector<std::string> deletedFiles; 
 	DbCursor * cursor = startQuery( "SELECT * FROM library_files" );
@@ -126,10 +130,12 @@ void FileLibraryDb::getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList )
 			fileName = cursor->getString( 0 );
 			fileLen =  cursor->getS64( 1 );
 			fileType = (uint8_t)cursor->getS32( 2 );
+			assetIdStr = cursor->getString( 0 );
+			assetId.fromVxGUIDHexString( assetIdStr.c_str() );
 			uint64_t realFileLen = VxFileUtil::fileExists( fileName.c_str() );
 			if( 0 != realFileLen )
 			{
-				LibraryFileInfo * libFileInfo = new LibraryFileInfo( fileName, realFileLen, fileType );
+				LibraryFileInfo * libFileInfo = new LibraryFileInfo( fileName, realFileLen, fileType, assetId );
 				libFileInfo->setFileHashId( (uint8_t *)cursor->getBlob( 3 ) );
 
 				sharedFileList.push_back( libFileInfo );

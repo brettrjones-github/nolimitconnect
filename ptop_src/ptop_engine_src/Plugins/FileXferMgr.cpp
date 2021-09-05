@@ -161,6 +161,7 @@ EXferError FileXferMgr::beginFileSend( bool pluginIsLocked, VxSktBase * sktBase,
 	oPktReq.setRmtSessionId( xferInfo.getRmtSessionId() );
 	oPktReq.setFileName( xferInfo.getRmtFileName().c_str() );
 	oPktReq.setFileOffset( xferInfo.getFileOffset() );
+	oPktReq.setAssetId( xferInfo.getAssetId() );
 	oPktReq.setFileHashId( xferInfo.getFileHashId() );
 
 	if( false == m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPktReq ) )
@@ -178,12 +179,13 @@ EXferError FileXferMgr::beginFileSend( bool pluginIsLocked, VxSktBase * sktBase,
 	if( eXferErrorNone == xferErr )
 	{
 		IToGui::getToGui().toGuiStartUpload(	xferSession->getIdent(), 
-			m_Plugin.getPluginType(), 
-			xferInfo.getLclSessionId(), 
-			u8FileType, 
-			xferInfo.m_u64FileLen, 
-			xferInfo.getLclFileName().c_str(),
-			xferInfo.getFileHashId().getHashData() );
+												m_Plugin.getPluginType(), 
+												xferInfo.getLclSessionId(), 
+												u8FileType, 
+												xferInfo.m_u64FileLen, 
+												xferInfo.getLclFileName().c_str(),
+												xferInfo.getAssetId(),
+												xferInfo.getFileHashId().getHashData() );
 
 		// file is open and setup so send first chunk of data
 		return txNextFileChunk( xferSession, eXferErrorNone, pluginIsLocked );
@@ -489,6 +491,7 @@ EXferError FileXferMgr::beginFileReceive( bool pluginIsLocked, VxSktBase * sktBa
 	xferInfo.setRmtFileName( poPkt->getFileName() );
 	xferInfo.m_u64FileLen = poPkt->getFileLen();
 	xferInfo.m_u64FileOffs = poPkt->getFileOffset();
+	xferInfo.m_AssetId = poPkt->getAssetId();
 
 	EXferError xferErr = setupFileDownload( xferInfo );
 
@@ -503,6 +506,7 @@ EXferError FileXferMgr::beginFileReceive( bool pluginIsLocked, VxSktBase * sktBa
 									poPkt->getFileType(), 
 									xferInfo.m_u64FileLen, 
 									xferInfo.getRmtFileName().c_str(),
+									xferInfo.getAssetId(),
 									xferInfo.getFileHashId().getHashData() );
 	}
 

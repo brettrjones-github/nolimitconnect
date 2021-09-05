@@ -13,25 +13,24 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AssetBaseWidget.h"
+#include "AppletAssetPlayerBase.h"
 #include "AppCommon.h"
 
 #include <CoreLib/VxGlobals.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
 
 #include <QProgressBar>
 
 //============================================================================
-AssetBaseWidget::AssetBaseWidget( AppCommon& appCommon, QWidget *parent)
-: QWidget( parent )
-, m_MyApp( appCommon )
+AppletAssetPlayerBase::AppletAssetPlayerBase( const char* ObjName, AppCommon& appCommon, QWidget *parent)
+: AppletBase( ObjName, appCommon, parent )
 , m_Engine( appCommon.getEngine() )
-, m_AssetInfo()
 {
 	connect( this, SIGNAL(signalToGuiAssetAction(EAssetAction, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, int)) );
 }
 
 //============================================================================
-AssetBaseWidget::~AssetBaseWidget()
+AppletAssetPlayerBase::~AppletAssetPlayerBase()
 {
 	if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
 	{
@@ -41,13 +40,13 @@ AssetBaseWidget::~AssetBaseWidget()
 }
 
 //============================================================================
-MyIcons& AssetBaseWidget::getMyIcons( void )
+MyIcons& AppletAssetPlayerBase::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void AssetBaseWidget::setXferBar( QProgressBar * xferProgressBar )	
+void AppletAssetPlayerBase::setXferBar( QProgressBar * xferProgressBar )	
 { 
 	m_XferProgressBar = xferProgressBar; 
 	if( 0 != m_XferProgressBar )
@@ -58,40 +57,54 @@ void AssetBaseWidget::setXferBar( QProgressBar * xferProgressBar )
 }
 
 //============================================================================
-void AssetBaseWidget::showEvent(QShowEvent * showEvent)
+void AppletAssetPlayerBase::showEvent(QShowEvent * showEvent)
 {
-	QWidget::showEvent(showEvent);
-	if( ( false == VxIsAppShuttingDown() )
-		&& m_AssetInfo.isValid()
-		&& ( false == m_CallbacksRequested ) )
-	{
-		m_CallbacksRequested = true;
-		m_MyApp.wantToGuiActivityCallbacks( this, this, true );
-	}
-
-	updateProgressBarVisibility();
+	AppletBase::showEvent(showEvent);
+	updateWantCallbacks( true );
 }
 
 //============================================================================
-void AssetBaseWidget::hideEvent( QHideEvent * ev )
+void AppletAssetPlayerBase::updateWantCallbacks( bool wantCallbacks )
 {
-	if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
+	if( wantCallbacks )
 	{
-		m_MyApp.wantToGuiActivityCallbacks( this, this, false );
-		m_CallbacksRequested = false;
-	}
+		if( (false == VxIsAppShuttingDown())
+			&& isAssetInfoSet()
+			&& m_AssetInfo.isValid()
+			&& (false == m_CallbacksRequested) )
+		{
+			m_CallbacksRequested = true;
+			m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+		}
 
-	QWidget::hideEvent( ev );
+		updateProgressBarVisibility();
+	}
+	else
+	{
+		if( m_CallbacksRequested && (false == VxIsAppShuttingDown()) )
+		{
+			m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+			m_CallbacksRequested = false;
+		}
+	}
 }
 
 //============================================================================
-void AssetBaseWidget::toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
+void AppletAssetPlayerBase::hideEvent( QHideEvent * ev )
+{
+	updateWantCallbacks( false );
+
+	AppletBase::hideEvent( ev );
+}
+
+//============================================================================
+void AppletAssetPlayerBase::toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
 	if( assetId == m_AssetInfo.getAssetUniqueId() )
 	{
 		if( eAssetActionTxError == assetAction )
 		{
-			LogMsg( LOG_ERROR, "toGuiClientAssetAction txError %s ", m_AssetInfo.getAssetUniqueId().toHexString().c_str() );
+			LogMsg( LOG_ERROR, "toGuiClientAssetAction txError %s\n ", m_AssetInfo.getAssetUniqueId().toHexString().c_str() );
 		}
 
 		emit signalToGuiAssetAction( assetAction, pos0to100000 );
@@ -99,7 +112,7 @@ void AssetBaseWidget::toGuiClientAssetAction( void * userData, EAssetAction asse
 }
 
 //============================================================================
-void AssetBaseWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
+void AppletAssetPlayerBase::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
 {
 	bool needUpdate = false;
 	switch( assetAction )
@@ -212,7 +225,7 @@ void AssetBaseWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0to
 }
 
 //============================================================================
-void AssetBaseWidget::updateProgressBarVisibility( void )
+void AppletAssetPlayerBase::updateProgressBarVisibility( void )
 {
 	if( 0 != m_XferProgressBar )
 	{
@@ -226,7 +239,7 @@ void AssetBaseWidget::updateProgressBarVisibility( void )
 }
 
 //============================================================================
-void AssetBaseWidget::slotShredAsset( void )
+void AppletAssetPlayerBase::slotShredAsset( void )
 {
 	// don't do this.. history list will call it
 	//this->m_Engine.fromGuiAssetAction( eAssetActionShreadFile, m_AssetInfo.getAssetUniqueId(), 0 );
@@ -234,14 +247,14 @@ void AssetBaseWidget::slotShredAsset( void )
 }
 
 //============================================================================
-void AssetBaseWidget::slotResendAsset( void )
+void AppletAssetPlayerBase::slotResendAsset( void )
 {
 	m_Engine.fromGuiAssetAction( eAssetActionAssetResend, m_AssetInfo.getAssetUniqueId(), 0 );
 	m_MyApp.playSound( eSndDefButtonClick );
 }
 
 //============================================================================
-void AssetBaseWidget::doShowProgress( bool showProgress )
+void AppletAssetPlayerBase::doShowProgress( bool showProgress )
 {
 	m_ProgressBarShouldBeVisible = showProgress;
 	updateProgressBarVisibility();
@@ -249,7 +262,7 @@ void AssetBaseWidget::doShowProgress( bool showProgress )
 }
 
 //============================================================================
-void AssetBaseWidget::doSetProgress(  int xferProgress )
+void AppletAssetPlayerBase::doSetProgress(  int xferProgress )
 {
 	if( 0 != m_XferProgressBar )
 	{
@@ -261,7 +274,7 @@ void AssetBaseWidget::doSetProgress(  int xferProgress )
 
 
 //============================================================================
-void AssetBaseWidget::updateFromAssetInfo( void )
+void AppletAssetPlayerBase::updateFromAssetInfo( void )
 {
 	switch( m_AssetInfo.getAssetSendState() )
 	{
@@ -318,5 +331,28 @@ void AssetBaseWidget::updateFromAssetInfo( void )
 		showShredder( true );
 		break;
 
+	}
+}
+
+
+//============================================================================
+void AppletAssetPlayerBase::setPlayerAssetId( VxGUID& feedId )
+{
+	if( feedId.isVxGUIDValid() )
+	{
+		AssetBaseInfo* baseInfo = m_Engine.getAssetMgr().findAsset( feedId );
+		if( baseInfo )
+		{
+			setAssetInfo( *baseInfo );
+			updateWantCallbacks( true );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "AppletAssetPlayerBase::setPlayerAssetId asset Not Found %s ", feedId.toHexString().c_str() );
+		}
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "AppletAssetPlayerBase::setPlayerAssetId invalid feed id " );
 	}
 }

@@ -71,7 +71,7 @@ PlayerGlWidget::PlayerGlWidget(QWidget *parent)
 	ui.m_VidFilesButton->setEnabled( false );
 	ui.m_PictureSnapshotButton->setIcon( eMyIconCameraNormal );
 	ui.m_MotionRecordButton->setIcon( eMyIconRecordMotionNormal );
-	ui.m_NormalRecordButton->setIcon( eMyIconCamcorderNormal );
+	ui.m_NormalRecordButton->setIcon( eMyIconRecordMovieNormal );
 	ui.m_MotionAlarmButton->setIcon( eMyIconMotionAlarmWhite );
 
 	ui.m_MotionBar->setMaximum( 100000 );
@@ -650,7 +650,7 @@ void PlayerGlWidget::slotRecNormalButtonClicked( void )
 		{
 			if( m_InNormalRecord )
 			{
-				ui.m_NormalRecordButton->setIcon( eMyIconCamcorderNormal );
+				ui.m_NormalRecordButton->setIcon( eMyIconRecordMovieNormal );
 				m_InNormalRecord = false;
 
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStopRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );

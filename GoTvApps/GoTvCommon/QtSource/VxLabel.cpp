@@ -267,6 +267,7 @@ void VxLabel::slotPlayVideoFrame( QImage picBitmap, int iRotate )
             m_behindFrameCnt--;
         if( m_behindFrameCnt < 3 && this->width() > 10 && this->height() > 10 && isVisible() )
         {
+            m_PreResizeImage = picBitmap; // for camera snapshot
             QSize screenSize( this->width(), this->height() );
             QImage resizedPicmap = picBitmap.scaled( screenSize, Qt::KeepAspectRatio );
             if( iRotate )

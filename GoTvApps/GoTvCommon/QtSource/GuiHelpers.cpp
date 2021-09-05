@@ -177,7 +177,36 @@ bool GuiHelpers::copyResourceToOnDiskFile( QString resourcePath, QString fileNam
 }
 
 //============================================================================
+EApplet GuiHelpers::getAppletThatPlaysFile( AppCommon& myApp, uint8_t fileType, QString fullFileName, VxGUID& assetId )
+{
+    EApplet applet = eAppletUnknown;
+    if( fileType & VXFILE_TYPE_VIDEO )
+    {
+        if( myApp.getFromGuiInterface().fromGuiIsMyP2PWebVideoFile( fullFileName.toUtf8().constData() ) )
+        {
+            applet = eAppletCamClipPlayer;
+        }
+        else
+        {
+            applet = eAppletPlayerVideo;
+        }
+ 
+    }
+
+    // TODO: Photo player
+    // TODO: BRJ Vlc style audio player  
+
+    return applet;
+}
+
+//============================================================================
 bool GuiHelpers::playFile( AppCommon& myApp, QString fullFileName, int pos0to100000 )
+{
+    return playFile( myApp, fullFileName, VxGUID::nullVxGUID(), pos0to100000 );
+}
+
+//============================================================================
+bool GuiHelpers::playFile( AppCommon& myApp, QString fullFileName, VxGUID& assetId, int pos0to100000 )
 {
     if( fullFileName.isEmpty() )
     {
@@ -209,7 +238,7 @@ bool GuiHelpers::playFile( AppCommon& myApp, QString fullFileName, int pos0to100
             if( fileType & ( VXFILE_TYPE_AUDIO | VXFILE_TYPE_VIDEO ) )
             {
                 // can be played
-                return myApp.getFromGuiInterface().fromGuiPlayLocalMedia( fullFileName.toUtf8().constData(), fileLen, fileType, pos0to100000 );
+                return myApp.getFromGuiInterface().fromGuiPlayLocalMedia( fullFileName.toUtf8().constData(), fileLen, fileType, assetId, pos0to100000 );
             }
 
 #ifdef TARGET_OS_WINDOWS

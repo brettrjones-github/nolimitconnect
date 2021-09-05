@@ -399,12 +399,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconFolderDisabled:
 		return ":/AppRes/Resources/file-folder-normal.svg";
 
-	case eMyIconRecordNormalDisabled:
+	case eMyIconRecordMovieNormal:
 		return ":/AppRes/Resources/videocam-record.svg";
-	case eMyIconRecordNormalCancel:
-		return ":/AppRes/Resources/videocam-record.svg";
-	case eMyIconRecordNormalYellow:
-		return ":/AppRes/Resources/videocam-record.svg";
+	case eMyIconRecordMovieDisabled:
+		return ":/AppRes/Resources/videocam-disabled.svg";
 
 	case eMyIconRecordMotionDisabled:
 		return ":/AppRes/Resources/video-motion-record.svg";

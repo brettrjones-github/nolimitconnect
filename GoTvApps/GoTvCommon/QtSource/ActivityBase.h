@@ -24,6 +24,7 @@
 #include "OfferSessionCallbackInterface.h"
 
 #include <CoreLib/ObjectCommon.h>
+#include <CoreLib/VxGUID.h>
 
 #include <QDialog>
 
@@ -288,6 +289,7 @@ protected:
 	virtual void				repositionToParent( void );
 	void						playSound( ESndDef sndDef );
 	bool						playFile( QString fileName, int pos0to100000 = 0 );
+	bool						playFile( QString fileName, VxGUID& assetId, int pos0to100000 = 0 );
 	bool						confirmDeleteFile( QString fileName, bool shredFile );
     void                        fillMyNodeUrl( QLabel * myUrlLabel );
 

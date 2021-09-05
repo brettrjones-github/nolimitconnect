@@ -702,7 +702,7 @@ void FileShareXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHd
 	if( 0 != rc )
 	{
 		LogMsg( LOG_ERROR, "FileShareXferMgr::onPktFileListReply error %d\n", rc );
-		IToGui::getToGui().toGuiFileListReply( netIdent, m_Plugin.getPluginType(), 0, 0, "", 0 );
+		IToGui::getToGui().toGuiFileListReply( netIdent, m_Plugin.getPluginType(), 0, 0, "", VxGUID::nullVxGUID(), 0 );
 		return;
 	}
 
@@ -725,13 +725,14 @@ void FileShareXferMgr::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHd
 									fileInfo.getFileType(), 
 									fileInfo.getFileLength(),
 									fileInfo.getFileName().c_str(),
+									VxGUID::nullVxGUID(),
 									fileInfo.getFileHashId().getHashData() );
 	}
 
 	if( poPkt->getIsListCompleted() 
 		|| ( 0 == poPkt->getFileCount() ) )
 	{
-		IToGui::getToGui().toGuiFileListReply( netIdent, m_Plugin.getPluginType(), 0, 0, "", 0 );
+		IToGui::getToGui().toGuiFileListReply( netIdent, m_Plugin.getPluginType(), 0, 0, "", VxGUID::nullVxGUID(), 0 );
 		endFileXferSession( xferSession );
 	}
 }
@@ -1079,6 +1080,7 @@ EXferError FileShareXferMgr::beginFileSend( FileTxSession * xferSession )
 	oPktReq.setRmtSessionId( xferInfo.getRmtSessionId() );
 	oPktReq.setFileName( xferInfo.getRmtFileName().c_str() );
 	oPktReq.setFileOffset( xferInfo.getFileOffset() );
+	oPktReq.setAssetId( xferInfo.getAssetId() );
 	oPktReq.setFileHashId( xferInfo.getFileHashId() );
 
 	if( false == m_Plugin.txPacket( xferSession->getIdent(), xferSession->getSkt(), &oPktReq ) )
@@ -1101,6 +1103,7 @@ EXferError FileShareXferMgr::beginFileSend( FileTxSession * xferSession )
 													u8FileType, 
 													xferInfo.m_u64FileLen, 
 													xferInfo.getRmtFileName().c_str(),
+													xferInfo.getAssetId(),
 													xferInfo.getFileHashId().getHashData() );
 
 		// file is open and setup so send first chunk of data
@@ -1153,6 +1156,7 @@ EXferError FileShareXferMgr::beginFileReceive( FileRxSession * rxSession, PktFil
 													u8FileType, 
 													xferInfo.m_u64FileLen, 
 													xferInfo.getRmtFileName().c_str(),
+													xferInfo.getAssetId(),
 													xferInfo.getFileHashId().getHashData() );
 	}
 

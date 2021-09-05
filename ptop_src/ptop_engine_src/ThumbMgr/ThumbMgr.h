@@ -70,6 +70,7 @@ public:
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
+    virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId ) override;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) override;
     ThumbInfo*                  lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime = 0 );
     void				        announceThumbAdded( ThumbInfo& thumbInfo );

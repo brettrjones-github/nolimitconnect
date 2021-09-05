@@ -64,8 +64,20 @@ ThumbInfo::ThumbInfo( const std::string& fileName )
 }
 
 //============================================================================
+ThumbInfo::ThumbInfo( const std::string& fileName, VxGUID& assetId )
+	: AssetBaseInfo( eAssetTypeThumbnail, fileName, assetId )
+{
+}
+
+//============================================================================
 ThumbInfo::ThumbInfo( const char * fileName, uint64_t fileLen )
 : AssetBaseInfo( eAssetTypeThumbnail, fileName, fileLen )
+{
+}
+
+//============================================================================
+ThumbInfo::ThumbInfo( const char* fileName, uint64_t fileLen, VxGUID& assetId )
+	: AssetBaseInfo( eAssetTypeThumbnail, fileName, fileLen, assetId )
 {
 }
 

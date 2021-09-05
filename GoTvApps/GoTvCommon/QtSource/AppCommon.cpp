@@ -577,9 +577,15 @@ QFrame * AppCommon::getAppletFrame( EApplet applet )
 }
 
 //============================================================================
-void AppCommon::launchApplet( EApplet applet, QWidget * parent )
+ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget * parent )
 {
-	m_AppletMgr.launchApplet( applet, parent );
+	return m_AppletMgr.launchApplet( applet, parent );
+}
+
+//============================================================================
+ActivityBase* AppCommon::launchApplet( EApplet applet, QWidget* parent, VxGUID& assetId )
+{
+	return m_AppletMgr.launchApplet( applet, parent, 0, assetId );
 }
 
 //============================================================================

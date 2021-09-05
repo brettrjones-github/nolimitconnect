@@ -26,11 +26,12 @@ public:
 
 protected slots:
     void						gotoWebsite( void );
+    void                        slotShowAppInfo( void );
 
 protected:
     void						setupAboutMe( void );
 
-    Ui::AppletAboutAppClass     ui;
+    Ui::AppletAboutAppUi        ui;
 };
 
 

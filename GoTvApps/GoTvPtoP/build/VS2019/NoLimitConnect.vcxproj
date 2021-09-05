@@ -146,10 +146,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityStoryBoard.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommon.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonAudio.cpp" />
@@ -160,9 +158,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppGlobals.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAboutApp.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletApplicationInfo.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp" />
@@ -460,6 +460,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -736,10 +738,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAboutApp.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppCommon.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityStoryBoard.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.h" />
@@ -803,17 +803,15 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityStoryBoard.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityTimedMessage.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityVideoOptions.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewAudioFile.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewLibraryFiles.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewLog.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewMySharedFiles.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityViewVideoFile.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityWebCamClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityYesNo.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletAboutApp.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletApplicationInfo.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamClipPlayer.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomClient.ui" />
@@ -934,6 +932,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
     <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
   </ItemGroup>
   <ItemGroup>

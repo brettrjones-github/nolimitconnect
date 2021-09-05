@@ -47,13 +47,30 @@ AssetBaseInfo * ThumbMgr::createAssetInfo( EAssetType assetType, const char * fi
         LogMsg( LOG_ERROR, "ThumbMgr::createAssetInfo creating thumbnail asset of asset type %s", DescribeAssetType( assetType ) );
     }
 
-    return new ThumbInfo( fileName, assetLen );
+    ThumbInfo* assetInfo = new ThumbInfo( fileName, assetLen );
+    assetInfo->assureHasCreatorId();
+    return assetInfo;
+}
+
+//============================================================================
+AssetBaseInfo* ThumbMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t assetLen, VxGUID& assetId )
+{
+    if( eAssetTypeThumbnail == assetType )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::createAssetInfo creating thumbnail asset of asset type %s", DescribeAssetType( assetType ) );
+    }
+
+    ThumbInfo* assetInfo = new ThumbInfo( fileName, assetLen, assetId );
+    assetInfo->assureHasCreatorId();
+    return assetInfo;
 }
 
 //============================================================================
 AssetBaseInfo * ThumbMgr::createAssetInfo( AssetBaseInfo& assetInfo )
 {
-    return new ThumbInfo( assetInfo );
+    ThumbInfo* assetInfoNew = new ThumbInfo( assetInfo );
+    assetInfoNew->assureHasCreatorId();
+    return assetInfoNew;
 }
 
 //============================================================================

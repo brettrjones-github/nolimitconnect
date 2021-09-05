@@ -47,11 +47,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUploads.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewLibraryFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewMySharedFiles.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewVideoFile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityYesNoMsgBox.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.h \
@@ -62,9 +59,11 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAssetPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamClipPlayer.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoin.h \
@@ -154,6 +153,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUploads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppTranslate.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.h \
@@ -372,10 +372,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewAudioFile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewLibraryFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewMySharedFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewVideoFile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityYesNoMsgBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonAudio.cpp \
@@ -389,9 +387,11 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAssetPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamClipPlayer.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
@@ -695,11 +695,8 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityStoryBoard.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTimedMessage.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityVideoOptions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewAudioFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLibraryFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLog.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewMySharedFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewVideoFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityWebCamClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityYesNo.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBase.ui \
@@ -708,6 +705,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCallList.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamClipPlayer.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCamSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \

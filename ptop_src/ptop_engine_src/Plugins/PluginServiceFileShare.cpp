@@ -128,6 +128,7 @@ bool PluginServiceFileShare::fromGuiBrowseFiles( const char * dir, bool lookupSh
 					fileInfo.getFileType(), 
 					isFileShared( fileInfo.getFileName() ),
 					isFileInLibrary( fileInfo.getFileName() ),
+					VxGUID::nullVxGUID(),
 					0 );
 			}
 			else
@@ -148,7 +149,7 @@ bool PluginServiceFileShare::fromGuiBrowseFiles( const char * dir, bool lookupSh
 		}
 	}
 
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
 	return isPluginEnabled();
 }
 

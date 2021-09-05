@@ -191,6 +191,11 @@ bool AssetBaseInfoDb::addAsset( AssetBaseInfo* assetInfo )
         return true;
     }
 
+	if( !assetInfo->isValid() )
+	{
+		LogMsg( LOG_ERROR, "AssetBaseInfoDb::addAsset is INVALID %s", assetInfo->getAssetName().c_str() );
+	}
+
 	return addAsset(	assetInfo->getAssetUniqueId(),
 				        assetInfo->getCreatorId(),
 				        assetInfo->getHistoryId(),

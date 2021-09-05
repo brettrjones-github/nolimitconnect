@@ -20,6 +20,7 @@
 
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxSha1Hash.h>
+#include <CoreLib/VxGUID.h>
 
 #include <string>
 
@@ -42,14 +43,17 @@ public:
 	void						setProgress( int percentProgress )			{ m_PercentProgress = percentProgress; }
 	int							getProgress( void )							{ return ( m_PercentProgress < 0 ) ? 0 : m_PercentProgress; }
 
-	void						setFileHashId( uint8_t * fileHashId )			{ m_FileHashId.setHashData( fileHashId ); }
+	void						setFileHashId( uint8_t * fileHashId )		{ m_FileHashId.setHashData( fileHashId ); }
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
-	void						setFileOffset( uint64_t fileOffs )				{ m_u64FileOffs = fileOffs; }
-	uint64_t							getFileOffset( void )						{ return m_u64FileOffs; }
-	void						setFileLength( uint64_t fileLen )				{ m_u64FileLen = fileLen; }
-	uint64_t							getFileLength( void )						{ return m_u64FileLen; }
+	void						setAssetId( VxGUID& fileHashId )			{ m_AssetId = fileHashId; }
+	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+
+	void						setFileOffset( uint64_t fileOffs )			{ m_u64FileOffs = fileOffs; }
+	uint64_t					getFileOffset( void )						{ return m_u64FileOffs; }
+	void						setFileLength( uint64_t fileLen )			{ m_u64FileLen = fileLen; }
+	uint64_t					getFileLength( void )						{ return m_u64FileLen; }
 
 	void						setXferDirection( EXferDirection dir )		{ m_XferDirection = dir; }
 	EXferDirection				getXferDirection( void )					{ return m_XferDirection; }
@@ -69,8 +73,9 @@ public:
 
 	//=== vars ===//
 	FILE *						m_hFile;						
-	uint64_t							m_u64FileOffs;					// current offset into file we are at
-	uint64_t							m_u64FileLen;					// total file length
+	uint64_t					m_u64FileOffs;					// current offset into file we are at
+	uint64_t					m_u64FileLen;					// total file length
+	VxGUID						m_AssetId;
 
 protected:
 	VxGUID						m_LclSessionId;

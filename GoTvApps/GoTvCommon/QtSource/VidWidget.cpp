@@ -24,6 +24,7 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>
+#include <CoreLib/VxTime.h>
 
 #include <QDebug>
 #include <QTimer>
@@ -77,7 +78,7 @@ VidWidget::VidWidget(QWidget *parent)
 	ui.m_VidFilesButton->setEnabled( false );
 	ui.m_PictureSnapshotButton->setIcon( eMyIconCameraNormal );
 	ui.m_MotionRecordButton->setIcon( eMyIconRecordMotionNormal );
-	ui.m_NormalRecordButton->setIcon( eMyIconCamcorderNormal );
+	ui.m_NormalRecordButton->setIcon( eMyIconRecordMovieNormal );
 	ui.m_MotionAlarmButton->setIcon( eMyIconMotionAlarmWhite );
 
 	ui.m_MotionBar->setMaximum( 100000 );
@@ -106,6 +107,9 @@ VidWidget::VidWidget(QWidget *parent)
     showUserMsgLabel( false );
 	showOfflineImage();
 	updateVidFeedImageRotation();
+
+	// BRJ temp for testing
+	ui.m_VidFilesButton->setEnabled( true );
 }
 
 //============================================================================
@@ -511,7 +515,7 @@ void VidWidget::slotVidFilesButtonClicked( void )
 	if( !m_MotionRecordOn
 		&& !m_InNormalRecord )
 	{
-		m_MyApp.launchLibraryActivity( VXFILE_TYPE_VIDEO );
+		m_MyApp.getAppletMgr().launchApplet( eAppletLibrary, m_MyApp.getCentralWidget(), VXFILE_TYPE_VIDEO );
 	}
 	else
 	{
@@ -532,8 +536,7 @@ void VidWidget::slotPictureSnapshotButton( void )
 	else
 	{
 		m_MyApp.playSound( eSndDefCameraClick );
-		time_t timeNow = time( 0 );
-		QString photoFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( timeNow ).c_str();
+		QString photoFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( GetLocalTimeMs() ).c_str();
 		photoFileName += ".png";
 		QFile photoFile(photoFileName);
 		photoFile.open(QIODevice::WriteOnly);
@@ -612,8 +615,7 @@ void VidWidget::slotRecMotionButtonClicked( void )
 				enableVidFilesButton( false );
 				m_MotionRecordDetected = false;
 				m_MotionRecordOn = true;
-				time_t timeNow = time( 0 );
-				m_RecFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( timeNow ).c_str();
+				m_RecFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( GetLocalTimeMs() ).c_str();
 				m_RecFileName += ".avi";
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStartRecordingInPausedState, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
 				ui.m_MotionRecordButton->setNotifyOnlineEnabled( true );
@@ -651,7 +653,8 @@ void VidWidget::slotRecNormalButtonClicked( void )
 		{
 			if( m_InNormalRecord )
 			{
-				ui.m_NormalRecordButton->setIcon( eMyIconCamcorderNormal );
+				ui.m_NormalRecordButton->setIcon( eMyIconRecordMovieNormal );
+				ui.m_NormalRecordButton->setNotifyOnlineEnabled( false );
 				m_InNormalRecord = false;
 
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStopRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
@@ -674,8 +677,7 @@ void VidWidget::slotRecNormalButtonClicked( void )
 			{
 				enableVidFilesButton( false );
 				m_InNormalRecord = true;
-				time_t timeNow = time( 0 );
-				m_RecFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( timeNow ).c_str();
+				m_RecFileName = m_RecFilePath + m_RecFriendName + VxTimeUtil::getFileNameCompatibleDateAndTime( GetLocalTimeMs() ).c_str();
 				m_RecFileName += ".avi";
 				m_Engine.fromGuiVideoRecord( eVideoRecordStateStartRecording, m_VideoFeedId, m_RecFileName.toUtf8().constData() );
 				ui.m_NormalRecordButton->setNotifyOnlineEnabled( true );

@@ -43,11 +43,12 @@ FileListReplySession::FileListReplySession(	 EPluginType	ePluginType,
 											 uint8_t		u8FileType, 
 											 uint64_t		u64FileLen, 
 											 const char *	pFileName,
+											 VxGUID			assetId,
 											 uint8_t *		fileHashData )
 : QObject()
 , m_ePluginType(ePluginType)
 , m_Ident(netIdent)
-, m_FileInfo( pFileName, u8FileType, u64FileLen, fileHashData )
+, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashData )
 {
 }
 

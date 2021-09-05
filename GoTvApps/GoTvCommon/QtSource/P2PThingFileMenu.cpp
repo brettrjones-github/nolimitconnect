@@ -57,8 +57,7 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 	{
 	case 1:
 		{
-			AppletPersonalRecorder * dlg = new AppletPersonalRecorder(	*this,
-				getCentralWidget() );
+			AppletPersonalRecorder * dlg = new AppletPersonalRecorder(	*this, getCentralWidget() );
 			dlg->show();
 			break;
 		}

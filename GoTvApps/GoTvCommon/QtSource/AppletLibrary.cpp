@@ -25,7 +25,6 @@
 
 #include "FileShareItemWidget.h"
 #include "MyIcons.h"
-//#include "PopupMenu.h"
 #include "AppGlobals.h"
 #include "FileItemInfo.h"
 #include "FileActionMenu.h"
@@ -33,6 +32,7 @@
 #include "GuiParams.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
 #include <PktLib/VxSearchDefs.h>
 #include <NetLib/VxFileXferInfo.h>
 #include <CoreLib/VxFileInfo.h>
@@ -52,6 +52,31 @@ AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent, int launchParam 
     , m_eFileFilterType( eFileFilterAll )
     , m_FileFilterMask( VXFILE_TYPE_ALLNOTEXE )
 {
+    if( launchParam )
+    {
+        switch( launchParam )
+        {
+        case VXFILE_TYPE_PHOTO:
+            m_eFileFilterType = eFileFilterPhoto;
+            break;
+        case VXFILE_TYPE_AUDIO:
+            m_eFileFilterType = eFileFilterAudio;
+            break;
+        case VXFILE_TYPE_VIDEO:
+            m_eFileFilterType = eFileFilterVideo;
+            break;
+        case VXFILE_TYPE_DOC:
+            m_eFileFilterType = eFileFilterDocuments;
+            break;
+        case VXFILE_TYPE_ARCHIVE_OR_CDIMAGE:
+            m_eFileFilterType = eFileFilterArchive;
+            break;
+        case VXFILE_TYPE_OTHER:
+            m_eFileFilterType = eFileFilterOther;
+            break;
+        }
+    }
+
     setAppletType( eAppletLibrary );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
@@ -248,8 +273,24 @@ void AppletLibrary::slotListPlayIconClicked( QListWidgetItem * item )
         }
         else
         {
-            // play file
-            this->playFile( poInfo->getFullFileName() );
+            // determine asset id for this file.. may be different than the one given
+            VxGUID assetId = poInfo->getAssetId();
+            std::string assetFileName = poInfo->getFullFileName().toUtf8().constData();
+            AssetBaseInfo* assetInfo = m_MyApp.getEngine().getAssetMgr().findAsset( assetFileName );
+            if( assetInfo && assetInfo->getAssetUniqueId().isVxGUIDValid() )
+            {
+                assetId = assetInfo->getAssetUniqueId();
+                poInfo->setAssetId( assetId );
+            }
+
+            EApplet appletType = GuiHelpers::getAppletThatPlaysFile( m_MyApp, poInfo->getFileType(), poInfo->getFullFileName(), assetId );
+            if( appletType != eAppletUnknown && assetId.isVxGUIDValid() )
+            {
+                // launch the applet that plays this file
+                m_MyApp.launchApplet( appletType, m_MyApp.getCentralWidget(), assetId );
+            }
+
+            this->playFile( poInfo->getFullFileName(), assetId );
         }
     }
 }

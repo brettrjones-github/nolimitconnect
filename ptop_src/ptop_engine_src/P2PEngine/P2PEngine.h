@@ -220,7 +220,7 @@ public:
     virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
     virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
     virtual bool				fromGuiPlayLocalMedia( const char * fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 = 0 ) override;
-
+    virtual bool				fromGuiPlayLocalMedia( const char* fileName, uint64_t fileLen, uint8_t fileType, VxGUID assetId, int pos0to100000 = 0 ) override;
 
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 = 0 ) override;
     virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 ) override;

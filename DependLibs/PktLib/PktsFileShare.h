@@ -130,6 +130,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )					{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )								{ return m_AssetId; }
+
 	void						setFileOffset( int64_t offset )					{ m_s64FileOffs = htonU64( offset ); }
 	int64_t						getFileOffset( void )							{ return ntohU64( m_s64FileOffs ); }
 	void						setFileLen( int64_t len )						{ m_s64FileLen = htonU64( len ); }
@@ -154,6 +157,7 @@ private:
 	int64_t						m_s64FileLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Error; 
 	uint32_t					m_u32Res2; 
@@ -179,6 +183,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )					{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )								{ return m_AssetId; }
+
 	void						setFileOffset( int64_t offset )					{ m_s64FileOffs = htonU64( offset ); }
 	int64_t						xgetFileOffset( void )							{ return ntohU64( m_s64FileOffs ); }
 	void						setFileLen( int64_t len )						{ m_s64FileLen = htonU64( len ); }
@@ -199,6 +206,7 @@ private:
 	int64_t						m_s64FileLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Error; 
 	uint32_t					m_u32Res2; 
@@ -222,6 +230,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )					{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )								{ return m_AssetId; }
+
 	void						setFileHashId( VxSha1Hash& fileHashId )			{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )							{ return m_FileHashId; }
 
@@ -240,6 +251,7 @@ private:
 	int64_t						m_s64FileLen{ 0 };;		// file size 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Res1{ 0 };; 
 	uint32_t					m_u32Res2{ 0 };; 
@@ -262,6 +274,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )					{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )								{ return m_AssetId; }
+
 	void						setDataLen( uint16_t len )						{ m_u16FileChunkLen = htons( len ); }
 	uint16_t					getDataLen( void )								{ return ntohs( m_u16FileChunkLen ); }
 
@@ -273,6 +288,7 @@ private:
 	uint16_t					m_u16FileChunkLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	uint32_t					m_u32Error; 
 	uint32_t					m_u32Res1; 
 public:
@@ -289,6 +305,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )				{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )							{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )					{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )								{ return m_AssetId; }
+
 	void						setDataLen( uint16_t len )						{ m_u16FileChunkLen = htons( len ); }
 	uint16_t					getDataLen( void )								{ return ntohs( m_u16FileChunkLen ); }
 
@@ -300,6 +319,7 @@ private:
 	uint16_t					m_u16FileChunkLen;
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	uint32_t					m_u32Error; 
 };
 
@@ -316,6 +336,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )				{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
@@ -325,6 +348,7 @@ public:
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Error; 
 };
@@ -339,6 +363,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )				{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
@@ -348,6 +375,7 @@ public:
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Error; 
 };
@@ -362,6 +390,9 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_RmtSessionId = rmtId; }
 	VxGUID&						getRmtSessionId( void )						{ return m_RmtSessionId; }
 
+	void						setAssetId( VxGUID& assetId )				{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
@@ -371,6 +402,7 @@ public:
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Error; 
 };
@@ -388,12 +420,16 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
+	void						setAssetId( VxGUID& assetId )				{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+
 	void						setError( uint32_t error )					{ m_u32Error = htonl( error ); }
 	uint32_t					getError( void )							{ return ntohl( m_u32Error ); }
 
 private:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
+	VxGUID						m_AssetId;
 	VxSha1Hash					m_FileHashId;
 	uint32_t					m_u32Error; 
 };
@@ -415,6 +451,9 @@ public:
 	void						setTxInstance( VxGUID& instanceGuid )			{ m_TxFileInstance = instanceGuid; }
 	VxGUID&						getTxInstance( void )							{ return m_TxFileInstance; }
 
+	void						setAssetId( VxGUID& assetId )					{ m_AssetId = assetId; }
+	VxGUID&						getAssetId( void )								{ return m_AssetId; }
+
 	void						setError( uint16_t error )						{ m_u16Err = htons( error ); }
 	uint16_t					getError( void )								{ return ntohs( m_u16Err ); }
 
@@ -427,6 +466,7 @@ private:
 
 	VxGUID						m_RxFileInstance; 
 	VxGUID						m_TxFileInstance; 
+	VxGUID						m_AssetId;
 	uint32_t					m_u32Res1; 
 	uint32_t					m_u32Res2;
 };

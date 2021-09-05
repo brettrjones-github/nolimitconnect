@@ -103,6 +103,7 @@ public:
 	void						updateFileListPackets( void );
 
     AssetBaseInfo * 			addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen );
+	AssetBaseInfo *				addAssetFile( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
 
 	bool						addAssetFile(   EAssetType      assetType, 	
                                                 const char *	fileName, 
@@ -134,6 +135,7 @@ public:
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( EAssetType asset, const char * fileName, uint64_t fileLen ) = 0;
+	virtual AssetBaseInfo *		createAssetInfo( EAssetType asset, const char* fileName, uint64_t fileLen, VxGUID& assetId ) = 0;
     virtual AssetBaseInfo *     createAssetInfo( AssetBaseInfo& assetInfo ) = 0;
 
     void						lockClientList( void )						{ m_ClientListMutex.lock(); }

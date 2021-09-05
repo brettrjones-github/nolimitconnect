@@ -503,16 +503,17 @@ bool SharedFilesMgr::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 		if( 0 != ( fileTypeFilter & fileInfo->getFileType() ) )
 		{
 			IToGui::getToGui().toGuiFileList(	fileInfo->getFileName().c_str(), 
-									fileInfo->getFileLength(), 
-									fileInfo->getFileType(), 
-									 true,
-									 m_Plugin.isFileInLibrary( fileInfo->getFileName() ),
-									 fileInfo->getFileHashId().getHashData() );
+										fileInfo->getFileLength(), 
+										fileInfo->getFileType(), 
+										true,
+										m_Plugin.isFileInLibrary( fileInfo->getFileName() ),
+										fileInfo->getAssetId(),
+										fileInfo->getFileHashId().getHashData() );
 		}
 	}
 
 	unlockSharedFiles();
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
 	return true;
 }
 

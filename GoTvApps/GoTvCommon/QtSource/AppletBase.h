@@ -23,8 +23,10 @@ public:
 	AppletBase( const char * ObjName, AppCommon& app, QWidget * parent );
 	virtual ~AppletBase(){};
 
-	virtual void				setAssetInfo( AssetInfo& assetInfo ) { m_AssetInfo = assetInfo; }
-	virtual AssetInfo&			getAssetInfo( void ) { return m_AssetInfo; }
+	virtual void				setAssetInfo( AssetInfo& assetInfo )	{ m_AssetInfo = assetInfo; }
+	virtual void				setAssetInfo( AssetBaseInfo& assetInfo );
+	virtual bool				isAssetInfoSet( void );
+	virtual AssetInfo&			getAssetInfo( void )					{ return m_AssetInfo; }
 
 signals:
 	void						signalPlayProgress( int pos );

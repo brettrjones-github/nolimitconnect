@@ -18,6 +18,7 @@
 #include "ui_ActivityAddRemoveLibraryFiles.h"
 
 #include <CoreLib/VxDefs.h>
+#include <CoreLib/VxGUID.h>
 
 class AppCommon;
 class FileShareItemWidget;
@@ -41,13 +42,13 @@ public:
 
 	void						setTitle( QString strTitle );
 
-	FileShareItemWidget *		fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, bool isShared );
+	FileShareItemWidget *		fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, bool isShared );
 	void						updateListEntryWidget( FileShareItemWidget * item );
 
 protected slots:
     void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
-	void						slotFileList( const char * fileName, uint8_t fileType, int64_t dataLen, int done, bool isShared );
+	void						slotFileList( const char * fileName, uint8_t fileType, int64_t dataLen, VxGUID assetId, int done, bool isShared );
 	void						slotBrowseButtonClicked( void );
 
 	void						slotListItemClicked( QListWidgetItem * item );
@@ -59,9 +60,10 @@ protected:
 	void						fromListWidgetRequestFileList( void );
 	void						setCurrentBrowseDir( QString browseDir );
 	void						setActionEnable( bool enable );
-	void						addFile(	uint8_t				u8FileType, 
-											uint64_t				u64FileLen, 
+	void						addFile(	uint8_t			u8FileType, 
+											uint64_t		u64FileLen, 
 											const char *	pFileName,
+											VxGUID			assetId,
 											bool			isShared );
 
 	void						updateListEntryWidget( FileShareItemWidget * item, FileItemInfo * poSession );

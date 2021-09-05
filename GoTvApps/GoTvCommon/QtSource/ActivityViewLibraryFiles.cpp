@@ -36,7 +36,7 @@
 #include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget *	parent, bool isSelectAFileMode )
+ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget * parent, bool isSelectAFileMode )
 : ActivityBase( OBJNAME_ACTIVITY_VIEW_LIBRARY_FILES, app, parent, eAppletMessenger, true )
 , m_ePluginType( ePluginTypeInvalid )
 , m_IsSelectAFileMode( isSelectAFileMode )

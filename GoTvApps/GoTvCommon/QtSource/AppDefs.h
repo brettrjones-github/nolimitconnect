@@ -197,6 +197,7 @@ enum EApplet
     eAppletCallList,	
     eAppletOfferList,	
 
+    eAppletCamClipPlayer,
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,
     //	eAppletStreamViewerVideo,

@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2020 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -14,23 +13,29 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AssetBaseWidget.h"
-#include "ui_AssetVideoWidget.h"
+#include "AppletAssetPlayerBase.h"
+#include "ui_AppletCamClipPlayer.h"
 
-class AssetVideoWidget : public AssetBaseWidget
+#include <CoreLib/MediaCallbackInterface.h>
+
+class ThumbnailViewWidget;
+class AssetMgr;
+class IVxVidCap;
+
+class AppletCamClipPlayer : public AppletAssetPlayerBase, public MediaCallbackInterface
 {
 	Q_OBJECT
-
 public:
-	AssetVideoWidget( QWidget * parent = 0 );
-	AssetVideoWidget( AppCommon& appCommon, QWidget * parent = 0 );
-	virtual ~AssetVideoWidget() = default;
+	AppletCamClipPlayer( AppCommon& app, QWidget * parent = NULL, VxGUID assetId = VxGUID::nullVxGUID() );
+	virtual ~AppletCamClipPlayer() override;
 
-    virtual void				setAssetInfo( AssetBaseInfo& assetInfo );
+	virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
+	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
+	virtual void				updateAssetInfo( void );
 	virtual void				onActivityStop( void );
 
-	virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-    virtual int				    toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+	virtual void				toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
+	virtual int				    toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight );
 
 	virtual void				showSendFail( bool show, bool permissionErr = false );
 	virtual void				showResendButton( bool show );
@@ -54,10 +59,10 @@ protected slots:
 
 
 protected:
-	void						initAssetVideoWidget( void );
+	void						initAppletCamClipPlayer( void );
 
-	void						showEvent( QShowEvent * ev );
-	void						resizeEvent( QResizeEvent * ev );
+	void						showEvent( QShowEvent* ev );
+	void						resizeEvent( QResizeEvent* ev );
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );
@@ -69,5 +74,6 @@ protected:
 	bool						m_IsPlaying{ false };
 	bool						m_SliderIsPressed{ false };
 
-	Ui::AssetVideoWidget		ui;
+    //=== vars ===//
+    Ui::AppletCamClipPlayerUi	ui;
 };

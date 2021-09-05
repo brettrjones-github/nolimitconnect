@@ -33,6 +33,19 @@ AppletBase::AppletBase( const char * ObjName, AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
+void AppletBase::setAssetInfo( AssetBaseInfo& assetBaseInfo )
+{
+    AssetInfo assetInfo( assetBaseInfo );
+    m_AssetInfo = assetInfo;
+}
+
+//============================================================================
+bool AppletBase::isAssetInfoSet( void )
+{
+    return m_AssetInfo.getAssetUniqueId().isVxGUIDValid();
+}
+
+//============================================================================
 void AppletBase::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
 {
 }

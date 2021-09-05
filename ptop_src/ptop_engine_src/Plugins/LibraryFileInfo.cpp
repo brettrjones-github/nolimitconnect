@@ -33,6 +33,7 @@ LibraryFileInfo::LibraryFileInfo()
 , m_ContainedInDir("")
 , m_IsDirty( true )
 { 
+	generateAssetId();
 }
 
 //============================================================================
@@ -45,6 +46,7 @@ LibraryFileInfo::LibraryFileInfo( const std::string& str )
 { 
 	*this = str;
 	determineSharedDir();
+	generateAssetId();
 }
 
 //============================================================================
@@ -57,8 +59,23 @@ LibraryFileInfo::LibraryFileInfo( const std::string& str, uint64_t fileLen, uint
 { 
 	*this = str;
 	determineSharedDir();
+	generateAssetId();
 }
 
+
+//============================================================================
+LibraryFileInfo::LibraryFileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType, VxGUID& assetId )
+	: m_s64FileLen( fileLen )
+	, m_u32Attributes( 0 )
+	, m_u8FileType( fileType )
+	, m_ContainedInDir( "" )
+	, m_IsDirty( true )
+	, m_AssetId( assetId )
+{
+	*this = str;
+	determineSharedDir();
+	generateAssetId();
+}
 
 //============================================================================
 LibraryFileInfo& LibraryFileInfo::operator=( const LibraryFileInfo& rhs ) 
@@ -67,7 +84,8 @@ LibraryFileInfo& LibraryFileInfo::operator=( const LibraryFileInfo& rhs )
 	m_u32Attributes			= rhs.m_u32Attributes;
 	m_s64FileLen			= rhs.m_s64FileLen;
 	m_u8FileType			= rhs.m_u8FileType;
-	m_ContainedInDir				= rhs.m_ContainedInDir;
+	m_ContainedInDir		= rhs.m_ContainedInDir;
+	m_AssetId				= rhs.m_AssetId;
 	return *this;
 }
 
@@ -152,4 +170,13 @@ std::string LibraryFileInfo::getRemoteFileName( void )
 void LibraryFileInfo::updateFileInfo( VxThread * callingThread )
 {
 	return;
+}
+
+//============================================================================
+void LibraryFileInfo::generateAssetId( void )
+{
+	if( !m_AssetId.isVxGUIDValid() )
+	{
+		m_AssetId.initializeWithNewVxGUID();
+	}
 }

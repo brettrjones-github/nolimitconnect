@@ -357,6 +357,12 @@ bool ActivityBase::playFile( QString fileName, int pos0to100000 )
 }
 
 //============================================================================
+bool ActivityBase::playFile( QString fileName, VxGUID& assetId, int pos0to100000 )
+{
+	return GuiHelpers::playFile( m_MyApp, fileName, assetId, pos0to100000 );
+}
+
+//============================================================================
 void ActivityBase::playSound( ESndDef sndDef )
 {
 	m_MyApp.playSound( sndDef );

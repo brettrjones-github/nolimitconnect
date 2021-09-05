@@ -17,6 +17,7 @@
 #include "config_gotvapps.h"
 #include "AppDefs.h"
 
+#include <CoreLib/VxGUID.h>
 #include <NetLib/VxXferDefs.h>
 #include <PktLib/VxCommon.h>
 
@@ -46,7 +47,10 @@ public:
     static int					calculateTextHeight( QFontMetrics& fontMetrics, QString textStr );
     static bool					copyResourceToOnDiskFile( QString resourcePath, QString fileNameAndPath );
 
+    static EApplet              getAppletThatPlaysFile( AppCommon& myApp, uint8_t fileType, QString fullFileName, VxGUID& assetId );
+
 	static bool				    playFile( AppCommon& myApp, QString fullFileName, int pos0to100000 );
+    static bool				    playFile( AppCommon& myApp, QString fullFileName, VxGUID& assetId, int pos0to100000 );
     static void					splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath );
 
     static bool                 isAppletAService( EApplet applet );

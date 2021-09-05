@@ -29,8 +29,6 @@
 //============================================================================
 VxMyFileInfo::VxMyFileInfo(QWidget *parent)
 : QObject(parent)
-, m_IsInLibrary( false )
-, m_IsShared( false )
 {
     setObjectName( "VxMyFileInfo" );
 }
@@ -43,7 +41,7 @@ VxMyFileInfo::VxMyFileInfo( const VxFileInfo &rhs )
 }
 
 //============================================================================
-VxMyFileInfo::VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxSha1Hash& fileHashId )
+VxMyFileInfo::VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxGUID& assetId, VxSha1Hash& fileHashId )
 : QObject()
 , m_FullFileName( fileName )
 , m_FileType( fileType )
@@ -51,12 +49,14 @@ VxMyFileInfo::VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen
 , m_FileHashId( fileHashId )
 , m_IsInLibrary( false )
 , m_IsShared( false )
+, m_AssetId( assetId )
 {
 	updateJustFileName();
+	generateAssetId();
 }
 
 //============================================================================
-VxMyFileInfo::VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, uint8_t * fileHashData )
+VxMyFileInfo::VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen, VxGUID& assetId, uint8_t * fileHashData )
 : QObject()
 , m_FullFileName( fileName )
 , m_FileType( fileType )
@@ -64,8 +64,10 @@ VxMyFileInfo::VxMyFileInfo( QString fileName, uint8_t fileType, uint64_t fileLen
 , m_FileHashId( fileHashData )
 , m_IsInLibrary( false )
 , m_IsShared( false )
+, m_AssetId( assetId )
 {
 	updateJustFileName();
+	generateAssetId();
 }
 
 //============================================================================
@@ -110,6 +112,7 @@ VxMyFileInfo& VxMyFileInfo::operator =( const VxFileInfo& rhs )
 	m_IsShared			= rhs.getIsShared();
 	m_FileHashId		= ((VxFileInfo&)rhs).getFileHashId();
 	updateJustFileName();
+	generateAssetId();
 	return *this;
 }
 
@@ -124,6 +127,7 @@ VxMyFileInfo& VxMyFileInfo::operator =( const VxMyFileInfo &rhs )
 		m_FileHashId		= rhs.m_FileHashId;
 		m_IsInLibrary		= rhs.m_IsInLibrary;
 		m_IsShared			= rhs.m_IsShared;
+		m_AssetId			= rhs.m_AssetId;
 		updateJustFileName();
 	}
 
@@ -225,3 +229,11 @@ void VxMyFileInfo::playFile( AppCommon& myApp )
     GuiHelpers::playFile( myApp, getFullFileName(), 0 );
 }
 
+//============================================================================
+void VxMyFileInfo::generateAssetId( bool ifNotValid )
+{
+	if( !ifNotValid || (ifNotValid && !m_AssetId.isVxGUIDValid()) )
+	{
+		m_AssetId.initializeWithNewVxGUID();
+	}
+}

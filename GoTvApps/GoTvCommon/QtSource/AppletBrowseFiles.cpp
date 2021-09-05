@@ -236,6 +236,13 @@ void AppletBrowseFiles::slotToGuiFileList( VxMyFileInfo& fileInfo )
 }
 
 //============================================================================
+void AppletBrowseFiles::setCurrentDirectory( QString browseDir )
+{
+	setCurrentBrowseDir( browseDir );
+	slotRequestFileList();
+}
+
+//============================================================================
 void AppletBrowseFiles::setCurrentBrowseDir( QString browseDir )
 {
 	if( !browseDir.isEmpty() )

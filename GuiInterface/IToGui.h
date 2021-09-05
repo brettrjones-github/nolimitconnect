@@ -153,6 +153,7 @@ public:
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
 													const char *	pFileName,
+													VxGUID			assetId,
 													uint8_t *		fileHashData ) = 0;
 	//! Send list of files to GUI.. used to send directory listing or shared files or files that are in library
 	virtual void				toGuiFileList(	const char *	fileName, 
@@ -160,6 +161,7 @@ public:
 												uint8_t			fileType, 
 												bool			isShared,
 												bool			isInLibrary,
+												VxGUID          assetId,
 												uint8_t *		fileHashId = 0 ) = 0;
 	//! Upload a file started
 	virtual void				toGuiStartUpload(	VxNetIdent *	netIdent, 
@@ -168,6 +170,7 @@ public:
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
 													const char *	pFileName,
+													VxGUID          assetId,
 													uint8_t *		fileHashData ) = 0;
 	/// Upload a file completed
 	virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) = 0;
@@ -178,6 +181,7 @@ public:
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
 													const char *	pFileName,
+													VxGUID          assetId,
 													uint8_t *		fileHashData ) = 0;
 	/// Download a file completed
 	virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError ) = 0;
@@ -232,7 +236,8 @@ public:
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
-																const char *	pFileName ) = 0;
+																const char *	pFileName,
+																VxGUID          assetId ) = 0;
 
     //virtual void				toGuiOfferAction( EOfferAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
 

@@ -22,6 +22,7 @@
 #include <GuiInterface/IGoTvRender.h>
 #include <GuiInterface/IGoTvEvents.h>
 #include <GuiInterface/IAudioInterface.h>
+#include <CoreLib/VxGUID.h>
 
 #include <string>
 
@@ -347,6 +348,7 @@ public:
                                                     uint8_t			u8FileType,
                                                     uint64_t		u64FileLen,
                                                     const char *	pFileName,
+                                                    VxGUID          assetId,
                                                     uint8_t *		fileHashData ) override;
 
     virtual void				toGuiStartUpload( VxNetIdent *	    netIdent,
@@ -355,6 +357,7 @@ public:
                                                   uint8_t			u8FileType,
                                                   uint64_t			u64FileLen,
                                                   const char *	    pFileName,
+                                                  VxGUID            assetId,
                                                   uint8_t *			fileHashData ) override;
 
     virtual void				toGuiStartDownload( VxNetIdent *	netIdent,
@@ -363,6 +366,7 @@ public:
                                                     uint8_t			u8FileType,
                                                     uint64_t		u64FileLen,
                                                     const char *	pFileName,
+                                                    VxGUID            assetId,
                                                     uint8_t *		fileHashData ) override;
 
     virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError ) override;
@@ -383,7 +387,8 @@ public:
                                                              VxGUID&        fileInstanceId,
                                                              uint8_t		u8FileType,
                                                              uint64_t       u64FileLen,
-                                                             const char *	pFileName ) override;
+                                                             const char *	pFileName,
+                                                             VxGUID         assetId ) override;
 
     virtual bool				toGuiSetGameValueVar( EPluginType	    ePluginType,
                                                       VxGUID&	        oOnlineId,
@@ -400,6 +405,7 @@ public:
                                                uint8_t		fileType,
                                                bool			isShared,
                                                bool			isInLibrary,
+                                               VxGUID       assetId,
                                                uint8_t *	fileHashId = 0 ) override;
 
     virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;

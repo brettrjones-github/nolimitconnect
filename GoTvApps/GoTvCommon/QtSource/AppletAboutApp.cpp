@@ -35,12 +35,13 @@ AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
     ui.m_AppNameLabel->setText( VxGetApplicationTitle() );
-    ui.m_AppVersionLabel->setText( VxGetAppVersionString() );
+    
 
 
 	m_MyApp.activityStateChange( this, true );
 
     connect( ui.gotoWebsiteButton, SIGNAL( clicked() ), this, SLOT( gotoWebsite() ) );
+    connect( ui.m_ShowAppInfo, SIGNAL( clicked() ), this, SLOT( slotShowAppInfo() ) );
 
     setupAboutMe();
 }
@@ -48,9 +49,13 @@ AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
 //============================================================================
 void AppletAboutApp::setupAboutMe( void )
 {
+    QString versionLabel = VxGetApplicationTitle();
+    versionLabel += QObject::tr( " Version " );
+    versionLabel += VxGetAppVersionString();
+    ui.m_AppVersionLabel->setText( versionLabel );
+
     fillMyNodeUrl( ui.m_NodeUrlLabel );
     ui.m_AvailSpace->setText( GuiHelpers::getAvailableStorageSpaceText() );
-    LogMsg( LOG_INFO, "htonl 4 = 0x%x\n", ntohl( 4L ) );
     VxNetIdent oMyIdent;
     m_FromGui.fromGuiQueryMyIdent( &oMyIdent );
     std::string strOnlineIp = oMyIdent.getOnlineIpAddress().toStdString();
@@ -60,12 +65,18 @@ void AppletAboutApp::setupAboutMe( void )
     ui.labelMeLine2->setText( QString( "Id: %1" ).arg( strMyId.c_str() ) );
     ui.labelMeLine3->setText( QString( "My Node Url:%1" ).arg( oMyIdent.getMyOnlineUrl().c_str() ) );
     std::string strRelayId = oMyIdent.m_RelayConnectId.describeVxGUID();
-    ui.labelMeLine4->setText( QString( "Relay Id: %1" ).arg( strRelayId.c_str() ) );
+    ui.labelMeLine4->setText( QString( "Group Id: %1" ).arg( strRelayId.c_str() ) );
     std::string strRelayIp = oMyIdent.getRelayIpAddress().toStdString();
-    ui.labelMeLine5->setText( QString( "Relay Ip: %1:%2" ).arg( strRelayIp.c_str() ).arg( oMyIdent.m_RelayConnectId.getPort() ) );
+    ui.labelMeLine5->setText( QString( "Group Ip: %1:%2" ).arg( strRelayIp.c_str() ).arg( oMyIdent.m_RelayConnectId.getPort() ) );
     ui.labelMeLine6->setText( QString( "Requires Relay?: %1 Has Relay?: %2" ).arg( oMyIdent.requiresRelay() ).arg( oMyIdent.hasRelay() ) );
     ui.labelMeLine7->setText( QString( "Has Profile Pic?: %1" ).arg( oMyIdent.hasProfilePicture() ) );
     ui.labelMeLine9->setText( QString( "Is Big Endian CPU ?: %1" ).arg( IsBigEndianCpu() ? "true" : "false" ) );
+}
+
+//============================================================================
+void  AppletAboutApp::slotShowAppInfo( void )
+{
+    m_MyApp.launchApplet( eAppletApplicationInfo, getContentFrameOfOppositePageFrame() );
 }
 
 //============================================================================

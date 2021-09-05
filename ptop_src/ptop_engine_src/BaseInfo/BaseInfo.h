@@ -22,7 +22,7 @@ class VxNetIdent;
 class BaseInfo
 {
 public:
-	BaseInfo();
+    BaseInfo();
     BaseInfo( VxGUID& creatorId, int64_t modifiedTime = 0 );
     BaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime = 0 );
 	BaseInfo( const BaseInfo& rhs );
@@ -44,6 +44,7 @@ public:
 
     virtual void                fillBaseInfo( VxNetIdent* netIdent, EHostType hostType );
 
+    virtual void                assureHasCreatorId( void );
 public:
 	//=== vars ===//
     VxGUID						m_OnlineId; 

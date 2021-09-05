@@ -316,7 +316,7 @@ void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
                 }
             }
 
-            LogMsg( LOG_INFO, "mic peak %d", micPeakVal );
+            // LogMsg( LOG_INFO, "mic peak %d", micPeakVal );
             m_Engine.getToGui().toGuiMicrophonePeak( eAppModuleAll, micPeakVal );
         }
     }
@@ -1174,7 +1174,6 @@ bool MediaProcessor::clientToRemoveRemoveFromList(	std::vector<ClientToRemove>&	
 			&& ( client.m_UserData == userData )
 			&& ( client.m_MediaType == mediaType ) )
 		{
-			delete &client;
 			clientRemoveList.erase( iter );
 			return true;
 		}

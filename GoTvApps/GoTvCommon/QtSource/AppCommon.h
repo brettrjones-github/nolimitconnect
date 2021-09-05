@@ -187,7 +187,8 @@ public:
 
 	void						loadAccountSpecificSettings( const char * userName );
 
-	void						launchApplet( EApplet applet, QWidget * parent );
+    ActivityBase*               launchApplet( EApplet applet, QWidget * parent );
+    ActivityBase*               launchApplet( EApplet applet, QWidget* parent, VxGUID& assetId );
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 	void						startActivity( EPluginType ePluginType, GuiUser * friendIdent, QWidget * parent = 0 );
@@ -519,6 +520,7 @@ public:
 														uint8_t			u8FileType, 
 														uint64_t		u64FileLen, 
 														const char *	pFileName,
+                                                        VxGUID			assetId,
                                                         uint8_t *		fileHashData ) override;
 
 	virtual void				toGuiStartUpload(	VxNetIdent *	netIdent, 
@@ -527,6 +529,7 @@ public:
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
 													const char *	pFileName,
+                                                    VxGUID			assetId,
                                                     uint8_t *		fileHashData ) override;
 
 	virtual void				toGuiStartDownload(	VxNetIdent *	netIdent, 
@@ -535,6 +538,7 @@ public:
 													uint8_t			u8FileType, 
 													uint64_t		u64FileLen, 
 													const char *	pFileName,
+                                                    VxGUID			assetId,
                                                     uint8_t *		fileHashData ) override;
 
     virtual void				toGuiFileXferState( VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
@@ -547,6 +551,7 @@ public:
 												uint8_t			fileType, 
 												bool			isShared,
 												bool			isInLibrary,
+                                                VxGUID          assetId,
                                                 uint8_t *		fileHashId = 0 ) override;
 	//=== to gui search ===//
     virtual void				toGuiScanResultSuccess( EScanType eScanType, VxNetIdent * netIdent ) override;
@@ -557,8 +562,9 @@ public:
 	virtual void				toGuiSearchResultFileSearch(	VxNetIdent *	netIdent, 		
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
-																uint64_t		u64FileLen, 
-                                                                const char *	pFileName ) override;
+																uint64_t		u64FileLen,                                                   
+                                                                const char *	pFileName,
+                                                                VxGUID			assetId ) override;
 	//=== to gui asset ===//
     virtual void				toGuiAssetAdded( AssetBaseInfo * assetInfo ) override;
     virtual void				toGuiAssetSessionHistory( AssetBaseInfo * assetInfo ) override;
@@ -593,7 +599,8 @@ public:
 
 	void						viewWebServerPage( GuiUser * netIdent, const char * webPageFileName );
 
-	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, EAgeType age, int primaryLanguage, int contentType );
+	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, 
+                                                        EAgeType age, int primaryLanguage, int contentType );
     void                        setupAccountResources( VxNetIdent& userAccountIdent );
     // updates my ident in database and engine and global ident
     void                        updateMyIdent( VxNetIdent * myIdent, bool permissionAndStateOnly = false );

@@ -112,6 +112,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QPushButton" name="m_BrowseStorageButton">
+        <property name="text">
+         <string>Browse App Storage (Do Not Delete)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPlainTextEdit" name="m_InfoPlainTextEdit"/>
       </item>
       <item>

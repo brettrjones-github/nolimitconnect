@@ -292,7 +292,9 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
 //============================================================================
 AssetBaseInfo * AssetBaseMgr::addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen )
 {
-    AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, fileLen );
+	VxGUID assetId;
+	assetId.initializeWithNewVxGUID();
+    AssetBaseInfo * assetInfo = createAssetInfo( assetType, fileName, fileLen, assetId );
     if( assetInfo )
     {
         if( insertNewInfo( assetInfo ) )
@@ -302,6 +304,21 @@ AssetBaseInfo * AssetBaseMgr::addAssetFile( EAssetType assetType, const char * f
     }
 
     return NULL;
+}
+
+//============================================================================
+AssetBaseInfo* AssetBaseMgr::addAssetFile( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId )
+{
+	AssetBaseInfo* assetInfo = createAssetInfo( assetType, fileName, fileLen, assetId );
+	if( assetInfo )
+	{
+		if( insertNewInfo( assetInfo ) )
+		{
+			return assetInfo;
+		}
+	}
+
+	return NULL;
 }
 
 //============================================================================
@@ -337,7 +354,7 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 	if( assetInfo )
 	{
 		assetInfo->setCreatorId( creatorId );
-		assetInfo->setCreatorId( historyId );
+		assetInfo->setHistoryId( historyId );
 		return insertNewInfo( assetInfo );
 	}
 	
@@ -361,7 +378,16 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( EAssetType assetType, const char 
         assetInfo->getAssetUniqueId().initializeWithNewVxGUID();
     }
 
+	assetInfo->assureHasCreatorId();
     return assetInfo;
+}
+
+//============================================================================
+AssetBaseInfo* AssetBaseMgr::createAssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId )
+{
+	AssetBaseInfo* assetInfo = new AssetBaseInfo( assetType, fileName, fileLen, assetId );
+	assetInfo->assureHasCreatorId();
+	return assetInfo;
 }
 
 //============================================================================
@@ -393,6 +419,7 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType,
 	assetInfo->setLocationFlags( locationFlags );
 	assetInfo->setAssetTag( assetTag );
 	assetInfo->setCreationTime( timestamp ? timestamp : GetTimeStampMs() );
+	assetInfo->assureHasCreatorId();
 
 	return assetInfo;
 }
@@ -857,13 +884,14 @@ bool AssetBaseMgr::fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter )
 										            assetInfo->getAssetType(), 
 										            assetInfo->isSharedFileAsset(),
 										            assetInfo->isInLibary(),
+													assetInfo->getAssetUniqueId(),
 										            assetInfo->getAssetHashId().getHashData() );
 			}
 		}
 	}
 
 	unlockResources();
-	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false, VxGUID::nullVxGUID() );
 	return true;
 }
 

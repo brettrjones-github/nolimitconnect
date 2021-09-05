@@ -337,6 +337,7 @@ void IGoTv::toGuiFileList(  const char *	fileName,
                             uint8_t			fileType,
                             bool			isShared,
                             bool			isInLibrary,
+                            VxGUID          assetId,
                             uint8_t *		fileHashId )
 {
     getAppCommon().toGuiFileList( fileName,
@@ -344,6 +345,7 @@ void IGoTv::toGuiFileList(  const char *	fileName,
                                    fileType,
                                    isShared,
                                    isInLibrary,
+                                   assetId,
                                    fileHashId );
 }
 
@@ -353,6 +355,7 @@ void IGoTv::toGuiFileListReply( VxNetIdent *	netIdent,
                                 uint8_t			u8FileType,
                                 uint64_t		u64FileLen,
                                 const char *	pFileName,
+                                VxGUID          assetId,
                                 uint8_t *		fileHashData )
 {
     getAppCommon().toGuiFileListReply( netIdent,
@@ -360,6 +363,7 @@ void IGoTv::toGuiFileListReply( VxNetIdent *	netIdent,
                                         u8FileType,
                                         u64FileLen,
                                         pFileName,
+                                        assetId,
                                         fileHashData );
 }
 
@@ -370,15 +374,17 @@ void IGoTv::toGuiStartUpload(   VxNetIdent *	netIdent,
                                 uint8_t			u8FileType,
                                 uint64_t		u64FileLen,
                                 const char *	pFileName,
+                                VxGUID          assetId,
                                 uint8_t *		fileHashData )
 {
     getAppCommon().toGuiStartUpload( netIdent,
-                          ePluginType,
-                          fileInstanceId,
-                          u8FileType,
-                          u64FileLen,
-                          pFileName,
-                          fileHashData );
+                                      ePluginType,
+                                      fileInstanceId,
+                                      u8FileType,
+                                      u64FileLen,
+                                      pFileName,
+                                      assetId,
+                                      fileHashData );
 }
 
 //============================================================================
@@ -388,6 +394,7 @@ void IGoTv::toGuiStartDownload(     VxNetIdent *	netIdent,
                                     uint8_t			u8FileType,
                                     uint64_t		u64FileLen,
                                     const char *	pFileName,
+                                    VxGUID          assetId,
                                     uint8_t *		fileHashData )
 {
     getAppCommon().toGuiStartDownload( netIdent,
@@ -396,6 +403,7 @@ void IGoTv::toGuiStartDownload(     VxNetIdent *	netIdent,
                                         u8FileType,
                                         u64FileLen,
                                         pFileName,
+                                        assetId,
                                         fileHashData );
 }
 
@@ -448,13 +456,15 @@ void IGoTv::toGuiSearchResultFileSearch(    VxNetIdent *	netIdent,
                                             VxGUID&			fileInstanceId,
                                             uint8_t			u8FileType,
                                             uint64_t		u64FileLen,
-                                            const char *	pFileName )
+                                            const char *	pFileName,
+                                            VxGUID          assetId)
 {
     getAppCommon().toGuiSearchResultFileSearch( netIdent,
                                                 fileInstanceId,
                                                 u8FileType,
                                                 u64FileLen,
-                                                pFileName );
+                                                pFileName,
+                                                assetId );
 }
 
 //============================================================================

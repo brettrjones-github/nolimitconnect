@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppDefs.h"
+#include <CoreLib/VxGUID.h>
 
 #include <QWidget>
 
@@ -33,8 +34,7 @@ public:
 	virtual ~AppletMgr(){}
 
     QFrame *					getAppletFrame( EApplet applet );
-    ActivityBase *				launchApplet( EApplet applet );
-    ActivityBase *				launchApplet( EApplet applet, QWidget * parent );
+    ActivityBase *				launchApplet( EApplet applet, QWidget * parent = nullptr, int launchParam = 0, VxGUID assetId = VxGUID::nullVxGUID() );
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 
     RenderGlWidget *            getRenderConsumer( void );

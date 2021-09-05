@@ -133,7 +133,8 @@ void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn,
 												VxGUID&			lclSessionId, 
 												uint8_t			u8FileType, 
 												uint64_t		u64FileLen, 
-												const char *	pFileName )
+												const char *	pFileName,
+												VxGUID			assetId )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -149,7 +150,7 @@ void AppCommon::toGuiSearchResultFileSearch(	VxNetIdent *	netIdentIn,
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& toGuiClient = *iter;
-		toGuiClient.m_Callback->toGuiSearchResultFileSearch( toGuiClient.m_UserData, netIdent, lclSessionId, u8FileType, u64FileLen, pFileName );
+		toGuiClient.m_Callback->toGuiSearchResultFileSearch( toGuiClient.m_UserData, netIdent, lclSessionId, u8FileType, u64FileLen, pFileName, assetId );
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX

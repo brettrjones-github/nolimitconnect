@@ -18,6 +18,7 @@
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxSha1Hash.h>
+#include <CoreLib/VxGUID.h>
 
 #include <QObject>
 
@@ -38,7 +39,9 @@ public:
 							uint8_t			u8FileType, 
 							uint64_t		u64FileLen, 
 							const char *	pFileName,
+                            VxGUID          assetId,
 							uint8_t *		fileHashData );
+
     FileListReplySession(	EPluginType		ePluginType,
                             GuiUser *	    netIdent,
                             VxMyFileInfo&   fileInfo );

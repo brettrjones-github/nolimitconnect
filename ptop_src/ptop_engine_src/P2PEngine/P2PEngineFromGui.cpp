@@ -565,7 +565,13 @@ bool P2PEngine::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId,
 
 //! play video or audio file
 //============================================================================
-bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000  )
+bool P2PEngine::fromGuiPlayLocalMedia( const char* fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 )
+{
+	return fromGuiPlayLocalMedia( fileName, fileLen, fileType, VxGUID::nullVxGUID(), pos0to100000 );
+}
+
+//============================================================================
+bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen, uint8_t fileType, VxGUID assetId, int pos0to100000  )
 {
     std::string fileNameStr = fileName;
     bool result = true;
@@ -575,7 +581,15 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
         AssetInfo * assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().findAsset( fileNameStr ));
         if( 0 == assetInfo )
         {
-            assetInfo =  dynamic_cast<AssetInfo*>(getAssetMgr().addAssetFile( assetType, fileName, fileLen ));
+			if( assetId.isVxGUIDValid() )
+			{
+				assetInfo = dynamic_cast<AssetInfo*>(getAssetMgr().addAssetFile( assetType, fileName, fileLen, assetId ));
+			}
+			else
+			{
+				assetInfo = dynamic_cast<AssetInfo*>(getAssetMgr().addAssetFile( assetType, fileName, fileLen ));
+			}
+
             assetInfo->setPlayPosition( pos0to100000 );
         }
 

@@ -93,12 +93,12 @@ void ActivityAddRemoveLibraryFiles::setCurrentBrowseDir( QString browseDir )
 }
 
 //============================================================================
-FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, bool isShared )
+FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxGUID assetId, bool isShared )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
 	item->setSizeHint(QSize(200, GuiParams::getButtonSize().height() + 4));
 
-	FileItemInfo * poItemInfo = new FileItemInfo( u8FileType, pFileName, u64FileLen );
+	FileItemInfo * poItemInfo = new FileItemInfo( u8FileType, pFileName, u64FileLen, assetId );
 	poItemInfo->setIsShared( isShared );
 	item->setFileItemInfo( poItemInfo );
 
@@ -124,9 +124,10 @@ FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8Fil
 void ActivityAddRemoveLibraryFiles::addFile(uint8_t			u8FileType,
 										    uint64_t		u64FileLen, 
 										    const char *	pFileName,
+											VxGUID			assetId,
 										    bool			isShared )
 {
-	FileShareItemWidget * item = fileToWidget( u8FileType, pFileName, u64FileLen, isShared );
+	FileShareItemWidget * item = fileToWidget( u8FileType, pFileName, u64FileLen, assetId, isShared );
 	if( item )
 	{
         LogMsg( LOG_INFO, "ActivityAddRemoveLibraryFiles::addFile: adding widget\n");
@@ -275,7 +276,7 @@ void ActivityAddRemoveLibraryFiles::slotRequestFileList( void )
 }
 
 //============================================================================
-void ActivityAddRemoveLibraryFiles::slotFileList( const char * fileName, uint8_t fileType, int64_t dataLen, int done, bool isShared )
+void ActivityAddRemoveLibraryFiles::slotFileList( const char * fileName, uint8_t fileType, int64_t dataLen, VxGUID assetId, int done, bool isShared )
 {
 	if( done )
 	{
@@ -283,7 +284,7 @@ void ActivityAddRemoveLibraryFiles::slotFileList( const char * fileName, uint8_t
 	}
 	else
 	{
-		addFile( fileType, dataLen, fileName, isShared );
+		addFile( fileType, dataLen, fileName, assetId, isShared );
 	}
 }
 

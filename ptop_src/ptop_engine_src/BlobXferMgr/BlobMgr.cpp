@@ -39,11 +39,23 @@ BlobMgr::BlobMgr( P2PEngine& engine, const char * dbName, const char * stateDbNa
 //============================================================================
 AssetBaseInfo * BlobMgr::createAssetInfo( EAssetType assetType, const char * assetName, uint64_t assetLen )
 {
-    return new BlobInfo( assetType, assetName, assetLen );
+    BlobInfo* assetInfo = new BlobInfo( assetType, assetName, assetLen );
+    assetInfo->assureHasCreatorId();
+    return assetInfo;
+}
+
+//============================================================================
+AssetBaseInfo* BlobMgr::createAssetInfo( EAssetType assetType, const char* assetName, uint64_t assetLen, VxGUID& assetId )
+{
+    BlobInfo* assetInfo = new BlobInfo( assetType, assetName, assetLen, assetId );
+    assetInfo->assureHasCreatorId();
+    return assetInfo;
 }
 
 //============================================================================
 AssetBaseInfo * BlobMgr::createAssetInfo( AssetBaseInfo& assetInfo )
 {
-    return new BlobInfo( assetInfo );
+    BlobInfo* assetInfoNew = new BlobInfo( assetInfo );
+    assetInfoNew->assureHasCreatorId();
+    return assetInfoNew;
 }

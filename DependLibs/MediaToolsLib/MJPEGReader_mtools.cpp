@@ -67,8 +67,15 @@ MJPEGReader::MJPEGReader( P2PEngine& engine, MediaProcessor& mediaProcessor )
 }
 
 //============================================================================
+MJPEGReader::~MJPEGReader()
+{
+	LogMsg( LOG_DEBUG, "MJPEGReader::~MJPEGReader" );
+}
+
+//============================================================================
 void MJPEGReader::resetVariables( void )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:resetVariables start" );
 	m_IsPlaying							= false;
 	m_IsPlayingPaused					= false;
 	m_FileLen							= 0;
@@ -100,23 +107,32 @@ void MJPEGReader::resetVariables( void )
 	m_IsStartThreadCommanded			= false;
 	m_IsVidThreadRunning				= false;
 	cleanupReadChunks();
+	LogMsg( LOG_DEBUG, "MJPEGReader:resetVariables done" );
 }
 
 //============================================================================
 void MJPEGReader::setIsVidThreadRunning( bool isRunning )
 {
-	LogMsg( LOG_INFO, "MJPEGReader::stopVideoRead wantMediaInput start %d\n", isRunning );
+	LogMsg( LOG_INFO, "MJPEGReader::stopVideoRead wantMediaInput start %d", isRunning );
 	m_Engine.getMediaProcesser().wantMediaInput( eMediaInputMixer, this, (void *)ePluginTypeMJPEGReader, isRunning );
-	LogMsg( LOG_INFO, "MJPEGReader::stopVideoRead wantMediaInput end\n" );
+	LogMsg( LOG_INFO, "MJPEGReader::stopVideoRead wantMediaInput end" );
 	m_IsVidThreadRunning = isRunning; 
 }
 
 //============================================================================
 bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:fromGuiIsMyP2PWebVideoFile start" );
+	if( !fileName )
+	{
+		LogMsg( LOG_ERROR, "MJPEGReader:fromGuiIsMyP2PWebVideoFile null file name" );
+		return false;
+	}
+
 	uint64_t fileLen = VxFileUtil::getFileLen( fileName );
 	if( fileLen < 4000 )
 	{
+		LogMsg( LOG_DEBUG, "MJPEGReader:fromGuiIsMyP2PWebVideoFile file length too short" );
 		return false;
 	}
 
@@ -149,12 +165,15 @@ bool MJPEGReader::fromGuiIsMyP2PWebVideoFile( const char * fileName )
 		return false;
 	}
 
+	LogMsg( LOG_DEBUG, "MJPEGReader:fromGuiIsMyP2PWebVideoFile done" );
+
 	return true;
 }
 
 //============================================================================
 bool MJPEGReader::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction assetAction, int pos0to100000  )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:fromGuiAssetAction start" );
 	bool result = false;
 	switch( assetAction )
 	{
@@ -198,12 +217,20 @@ bool MJPEGReader::fromGuiAssetAction( AssetBaseInfo& assetInfo, EAssetAction ass
 		break;
 	}
 
+	LogMsg( LOG_DEBUG, "MJPEGReader:fromGuiAssetAction done" );
 	return result;
 }
 
 //============================================================================
 bool MJPEGReader::startVideoRead( const char * fileName, VxGUID& assetId, int pos0to100000 )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:startVideoRead start" );
+	if( !fileName )
+	{
+		LogMsg( LOG_ERROR, "MJPEGReader:startVideoRead null file name" );
+		return false;
+	}
+
 	stopVideoRead();
 	resetVariables();
 	m_FileName = fileName;
@@ -265,12 +292,14 @@ bool MJPEGReader::startVideoRead( const char * fileName, VxGUID& assetId, int po
 	setIsPlayingPaused( false );
 	setIsPlaying( true );
 	startVideoThread();
+	LogMsg( LOG_DEBUG, "MJPEGReader:startVideoRead done" );
 	return true;
 }
 
 //============================================================================
 void MJPEGReader::stopVideoRead( void )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:stopVideoRead start" );
 	if( getIsPlaying() )
 	{
 		m_VidThread.abortThreadRun( true );	
@@ -280,20 +309,30 @@ void MJPEGReader::stopVideoRead( void )
 		closeAviFile();
 		m_AssetId.clearVxGUID();
 	}
+
+	LogMsg( LOG_DEBUG, "MJPEGReader:stopVideoRead done" );
 }
 
 //============================================================================
 bool MJPEGReader::playOneFrame( const char * fileName, VxGUID& assetId )
 {
+	if( !fileName )
+	{
+		LogMsg( LOG_ERROR, "MJPEGReader:playOneFrame null file name" );
+		return false;
+	}
+
+	LogMsg( LOG_DEBUG, "MJPEGReader:playOneFrame start" );
 	FILE * fileHandle = VxFileUtil::fileOpen( fileName, "rb" );
 	if( 0 == fileHandle )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::playOneFrame could not open file %s\n", fileName );
+		LogMsg( LOG_ERROR, "MJPEGReader::playOneFrame could not open file %s", fileName );
 		return false;
 	}
 
 	bool result = readFirstVidFrameFromFile( fileHandle, fileName, assetId );
 	fclose( fileHandle );
+	LogMsg( LOG_DEBUG, "MJPEGReader:playOneFrame done" );
 	return result;
 }
 
@@ -301,6 +340,7 @@ bool MJPEGReader::playOneFrame( const char * fileName, VxGUID& assetId )
 bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fileName, VxGUID& assetId )
 {
 	// first see if already loaded.. if so read from chunk list
+	LogMsg( LOG_DEBUG, "MJPEGReader:readFirstVidFrameFromFile start" );
 	lockResources();
 	if( m_Initialized
 		&& ( assetId == m_AssetId )
@@ -318,6 +358,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 					if( false == readChunkFromDisk( fileHandle, &listChunk ) )
 					{
 						unlockResources();
+						LogMsg( LOG_DEBUG, "MJPEGReader:readFirstVidFrameFromFile failed read chunk exit" );
 						return false;
 					}
 				}
@@ -329,6 +370,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 				}
 			
 				unlockResources();
+				LogMsg( LOG_DEBUG, "MJPEGReader:readFirstVidFrameFromFile played frame exit" );
 				return true;
 			}
 		}
@@ -344,7 +386,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 	{
 		if( 8 != fread( &aviChunk, 1, 8, fileHandle ) )
 		{
-			LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+			LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 			return false;
 		}
 
@@ -352,7 +394,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 		if( ( 0 == aviChunk.m_PayloadDataSize )
 			|| ( aviChunk.m_PayloadDataSize % 1 ) )
 		{
-			LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error invalid chunk size %d reading file %s\n", aviChunk.m_PayloadDataSize, fileName );
+			LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error invalid chunk size %d reading file %s", aviChunk.m_PayloadDataSize, fileName );
 			return false;
 		}
 
@@ -362,7 +404,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 			totalRead += aviChunk.m_PayloadDataSize;
 			if( 0 != VxFileUtil::fileSeek( fileHandle, totalRead ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile could not seek to %d in file %s\n", totalRead, fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile could not seek to %d in file %s", totalRead, fileName );
 				return false;
 			}
 
@@ -375,7 +417,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 		AviFourCC listTypeId;
 		if( 4 != fread( &listTypeId, 1, 4, fileHandle ) )
 		{
-			LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+			LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 			return false;
 		}
 
@@ -385,26 +427,26 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 			// all streams header
 			if( 8 != fread( &aviChunk, 1, 8, fileHandle ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 				return false;
 			}
 
 			totalRead += 8;
 			if( false == aviChunk.m_Id.isIdEqual( "AVIH" ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error NOT A AVI HEADER file %s\n", fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error NOT A AVI HEADER file %s", fileName );
 				return false;
 			}
 
 			if( sizeof( AviAllStreamsHdr ) != aviChunk.m_PayloadDataSize )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error wrong hdr size %d file %s\n", aviChunk.m_PayloadDataSize, fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error wrong hdr size %d file %s", aviChunk.m_PayloadDataSize, fileName );
 				return false;
 			}
 
 			if( sizeof( AviAllStreamsHdr ) != fread( &allStreamsHdr, 1, sizeof( AviAllStreamsHdr ), fileHandle ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 				return false;
 			}
 
@@ -415,14 +457,14 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 			// possibly contains auds or vids we are interested in
 			if( 8 != fread( &aviChunk, 1, 8, fileHandle ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 				return false;
 			}
 
 			AviFourCC audsOrVidsId;
 			if( 4 != fread( &audsOrVidsId, 1, 4, fileHandle ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 				return false;
 			}
 
@@ -434,7 +476,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 				totalRead = listBeginOffset + listTotalLen;
 				if( 0 != VxFileUtil::fileSeek( fileHandle, totalRead ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile could not seek to %d in file %s\n", totalRead, fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile could not seek to %d in file %s", totalRead, fileName );
 					return false;
 				}
 
@@ -449,13 +491,13 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 
 				if( sizeof( AviStreamHdr ) - 4 != fread( vidHdrPlus4, 1, sizeof( AviStreamHdr ) - 4, fileHandle ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 					return false;
 				}
 
 				if( false == vidStreamHdr.m_CodecId.isIdEqual( "MJPG" ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile unknown video codec file %s\n", fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile unknown video codec file %s", fileName );
 					return false;
 				}
 
@@ -469,13 +511,13 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 
 				if( sizeof( AviStreamHdr ) - 4 != fread( audHdrPlus4, 1, sizeof( AviStreamHdr ) - 4, fileHandle ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 					return false;
 				}
 
 				if( 8000 != audStreamHdr.m_Rate )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile unknown audio codec file %s\n", fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile unknown audio codec file %s", fileName );
 					return false;
 				}
 			}
@@ -484,7 +526,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 			totalRead = listBeginOffset + listTotalLen;
 			if( 0 != VxFileUtil::fileSeek( fileHandle, totalRead ) )
 			{
-				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile could not seek to %d in file %s\n", totalRead, fileName );
+				LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile could not seek to %d in file %s", totalRead, fileName );
 				return false;
 			}
 		}
@@ -495,20 +537,20 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 			{
 				if( 8 != fread( &aviChunk, 1, 8, fileHandle ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 					return false;
 				}
 				
 				if( aviChunk.m_PayloadDataSize > 10000000 )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile chunk size too large reading file %s\n", fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile chunk size too large reading file %s", fileName );
 					return false;
 				}
 
 				uint8_t * payloadData = new uint8_t[ aviChunk.m_PayloadDataSize ];
 				if( aviChunk.m_PayloadDataSize != fread( payloadData, 1, aviChunk.m_PayloadDataSize, fileHandle ) )
 				{
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s\n", VxGetLastError(), fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile error %d reading file %s", VxGetLastError(), fileName );
 					return false;
 				}
 
@@ -529,7 +571,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 				{
 					// unknown type
 					delete[] payloadData;
-					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile UNKNOWN CHUNK TYPE reading file %s\n", fileName );
+					LogMsg( LOG_ERROR, "MJPEGReader::readFirstVidFrameFromFile UNKNOWN CHUNK TYPE reading file %s", fileName );
 					return false;
 				}
 			}
@@ -548,12 +590,14 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 		}
 	}
 
+	LogMsg( LOG_DEBUG, "MJPEGReader:readFirstVidFrameFromFile done" );
 	return false;
 }
 
 //============================================================================
 void MJPEGReader::setIsPlayingPaused( bool pause )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:setIsPlayingPaused start" );
 	if( pause )
 	{
 		if( getIsPlaying() )
@@ -571,24 +615,29 @@ void MJPEGReader::setIsPlayingPaused( bool pause )
 		m_IsFirstFrameAfterResumePlaying = true;
 		m_IsPlayingPaused = false;
 	}
+
+	LogMsg( LOG_DEBUG, "MJPEGReader:setIsPlayingPaused done" );
 }
 
 //============================================================================
 bool MJPEGReader::readRiffHeader( FILE * fileHandle )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:readRiffHeader start" );
 	AviRiffHeader riffHdr;
 	if( sizeof( AviRiffHeader ) != fread( &riffHdr, 1, sizeof( AviRiffHeader ), fileHandle ) )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::readRiffHeader error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGReader::readRiffHeader error %d writing file %s", VxGetLastError(), m_FileName.c_str() );
 		return false;
 	}
 
+	LogMsg( LOG_DEBUG, "MJPEGReader:readRiffHeader done" );
 	return true;
 }
 
 //============================================================================
 bool MJPEGReader::readVideoHeader( void )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:readVideoHeader start" );
 	AviDataChunk aviChunk;
 	uint32_t totalRead = 12; // already read the riff header
 	while( true )
@@ -779,12 +828,14 @@ bool MJPEGReader::readVideoHeader( void )
 		}
 	}
 
+	LogMsg( LOG_DEBUG, "MJPEGReader:readVideoHeader done" );
 	return true;
 }
 
 //============================================================================
 bool MJPEGReader::parseChunkOffsets( void )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:parseChunkOffsets start" );
 	m_AviChunkList.clear();
 	AviDataChunk aviChunk;
 	if( 8 != fread( &aviChunk, 1, 8, m_FileHandle ) )
@@ -832,7 +883,7 @@ bool MJPEGReader::parseChunkOffsets( void )
 		idxDataLen -= amtToRead;
 	}
 
-	LogMsg( LOG_INFO, "MJPEGReader audio frame count %d\n", audioChunkCnt );
+	LogMsg( LOG_INFO, "MJPEGReader audio frame count %d", audioChunkCnt );
 	return true;
 }
 
@@ -849,18 +900,21 @@ void MJPEGReader::closeAviFile( void )
 //============================================================================
 void MJPEGReader::startVideoThread( void )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:startVideoThread start" );
 	if( ( false == m_IsStartThreadCommanded )
 		&& ( false == m_IsVidThreadRunning ) )
 	{
 		m_IsStartThreadCommanded = true;
 		m_VidThread.startThread( (VX_THREAD_FUNCTION_T)MJPEGReaderThreadFunc, this, "MJPEGReaderThread" );
 	}
+
+	LogMsg( LOG_DEBUG, "MJPEGReader:startVideoThread done" );
 }
 
 //============================================================================
 void MJPEGReader::stopVideoThread( void )
 {
-	LogMsg( LOG_INFO, "MJPEGReader::stopVideoThread start\n" );
+	LogMsg( LOG_INFO, "MJPEGReader::stopVideoThread start" );
 	int killThreadTryCnt = 0;
 	while( m_IsStartThreadCommanded || m_IsVidThreadRunning )
 	{
@@ -870,12 +924,12 @@ void MJPEGReader::stopVideoThread( void )
 		killThreadTryCnt++;
 		if( m_IsStartThreadCommanded || m_IsVidThreadRunning )
 		{
-			LogMsg( LOG_INFO, "MJPEGReader::stopVideoThread wait thread die cnt %d\n", killThreadTryCnt );
+			LogMsg( LOG_INFO, "MJPEGReader::stopVideoThread wait thread die cnt %d", killThreadTryCnt );
 		}
 
 		if( killThreadTryCnt > 5 )
 		{
-			LogMsg( LOG_ERROR, "MJPEGReader::stopVideoThread wait thread die TIMEOUT cnt %d\n", killThreadTryCnt );
+			LogMsg( LOG_ERROR, "MJPEGReader::stopVideoThread wait thread die TIMEOUT cnt %d", killThreadTryCnt );
 			break;
 		}
 	}
@@ -887,12 +941,13 @@ void MJPEGReader::stopVideoThread( void )
 	}
 
 	cleanupReadChunks();
-	LogMsg( LOG_INFO, "MJPEGReader::stopVideoThread end\n" );
+	LogMsg( LOG_INFO, "MJPEGReader::stopVideoThread end" );
 }
 
 //============================================================================
 void MJPEGReader::cleanupReadChunks( void )
 {
+	LogMsg( LOG_INFO, "MJPEGReader::cleanupReadChunks start " );
 	std::vector<AviChunkOffs>::iterator iter;
 	for( iter = m_AviChunkList.begin(); iter != m_AviChunkList.end(); ++iter )
 	{
@@ -900,11 +955,13 @@ void MJPEGReader::cleanupReadChunks( void )
 	}
 
 	m_AviChunkList.clear();
+	LogMsg( LOG_INFO, "MJPEGReader::cleanupReadChunks done " );
 }
 
 //============================================================================
 void MJPEGReader::readerThread( void )
 {
+	LogMsg( LOG_DEBUG, "MJPEGReader:readerThread start" );
 	VxTimer	vidTimer;
 	m_MilliSecPerFrame = 80.0;
 	bool allChunksSent = false;
@@ -1038,9 +1095,9 @@ void MJPEGReader::readerThread( void )
 			&& aviChunk->isVideoChunk()
 			&& aviChunk->hasData() )
 		{
-			LogMsg( LOG_INFO, "MJPEGReader vid chunk %d start\n", m_VidWriteIdx );
+			LogMsg( LOG_INFO, "MJPEGReader vid chunk %d start", m_VidWriteIdx );
 			IToGui::getToGui().toGuiPlayVideoFrame( m_AssetId, &aviChunk->m_DataPtr[8], aviChunk->m_ChunkLen, 0 );
-			LogMsg( LOG_INFO, "MJPEGReader vid chunk %d end\n", m_VidWriteIdx );
+			LogMsg( LOG_INFO, "MJPEGReader vid chunk %d end", m_VidWriteIdx );
 			m_VidChunksInMemory--;
 			aviChunk->deleteDataPtr();
 		}
@@ -1048,9 +1105,9 @@ void MJPEGReader::readerThread( void )
 		int progress = ( m_VidWriteIdx * 100000 ) / m_AviChunkList.size();
 		//LogMsg( LOG_INFO, "readerThread::unlockResources\n" );
 		unlockResources();
-		LogMsg( LOG_INFO, "MJPEGReader progress %d start\n", progress );
+		LogMsg( LOG_INFO, "MJPEGReader progress %d start", progress );
 		IToGui::getToGui().toGuiAssetAction(  eAssetActionPlayProgress, m_AssetId, progress );
-		LogMsg( LOG_INFO, "MJPEGReader progress %d done\n", progress );
+		LogMsg( LOG_INFO, "MJPEGReader progress %d done", progress );
 		if( ( 0 == m_VidChunksInMemory )
 			&& ( m_VidWriteIdx >= m_AviChunkList.size() ) )
 		{
@@ -1073,9 +1130,9 @@ void MJPEGReader::readerThread( void )
 	if( m_VidThread.isAborted() )
 		return;
 
-	//LogMsg( LOG_INFO, "MJPEGReader eAssetActionPlayEnd start\n" );
+	LogMsg( LOG_INFO, "MJPEGReader eAssetActionPlayEnd start" );
 	IToGui::getToGui().toGuiAssetAction( eAssetActionPlayEnd, m_AssetId, 0 );
-	//LogMsg( LOG_INFO, "MJPEGReader eAssetActionPlayEnd end\n" );
+	LogMsg( LOG_INFO, "MJPEGReader eAssetActionPlayEnd end" );
 }
 
 
@@ -1087,7 +1144,7 @@ void MJPEGReader::callbackAudioOutSpaceAvail( int freeSpaceLen )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "MJPEGReader callbackAudioOutSpaceAvail start\n" );
+	LogMsg( LOG_INFO, "MJPEGReader callbackAudioOutSpaceAvail start" );
 	//LogMsg( LOG_INFO, "callbackAudioOutSpaceAvail::lockResources start\n" );
 	lockResources();
 	//LogMsg( LOG_INFO, "callbackAudioOutSpaceAvail::lockResources end\n" );
@@ -1143,6 +1200,7 @@ void MJPEGReader::callbackAudioOutSpaceAvail( int freeSpaceLen )
 //============================================================================
 void MJPEGReader::calculateNewMilliSecPerFrame( unsigned int audChunkIdx )
 {
+	LogMsg( LOG_INFO, "MJPEGReader calculateNewMilliSecPerFrame start" );
 	int vidFrameCnt = 0;
 	audChunkIdx++;
 	AviChunkOffs * aviChunk = 0;
@@ -1168,27 +1226,31 @@ void MJPEGReader::calculateNewMilliSecPerFrame( unsigned int audChunkIdx )
 		// 1 sec / 8000 samples per sec = 0.0000125 per sample * 640 samples = 0.08 sec or 80 millisec
 		m_MilliSecPerFrame = ( 80.0f / ( (float)vidFrameCnt + 1.0f ) );
 	}
+
+	LogMsg( LOG_INFO, "MJPEGReader calculateNewMilliSecPerFrame done" );
 }
 
 //============================================================================
 bool MJPEGReader::readChunkFromDisk( FILE * fileHandle, AviChunkOffs * chunk )
 {
+	LogMsg( LOG_INFO, "MJPEGReader readChunkFromDisk start" );
 	chunk->deleteDataPtr();
 	chunk->m_DataPtr = new uint8_t[ chunk->m_ChunkLen + 8 ];
 	if( chunk->m_ChunkLen + 8 != fread( chunk->m_DataPtr, 1, chunk->m_ChunkLen + 8, fileHandle ) )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::readChunkFromDisk error %d reading file %s\n", VxGetLastError(), m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGReader::readChunkFromDisk error %d reading file %s", VxGetLastError(), m_FileName.c_str() );
 		chunk->deleteDataPtr();
 		return false;
 	}
 
+	LogMsg( LOG_INFO, "MJPEGReader readChunkFromDisk done" );
 	return true;
 }
 
 //============================================================================
 void MJPEGReader::waitForAudio( void )
 {
-	//LogMsg( LOG_INFO, "MJPEGReader::waitForAudio start in mem %d\n", m_AudioChunksInMemory  );
+	LogMsg( LOG_INFO, "MJPEGReader::waitForAudio start in mem %d", m_AudioChunksInMemory  );
 	m_VidSemaphore.wait();
-	//LogMsg( LOG_INFO, "MJPEGReader::waitForAudio done in mem %d\n", m_AudioChunksInMemory  );
+	LogMsg( LOG_INFO, "MJPEGReader::waitForAudio done in mem %d", m_AudioChunksInMemory  );
 }

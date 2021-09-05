@@ -196,7 +196,6 @@
        <widget class="QListWidget" name="FileItemList">
         <property name="font">
          <font>
-          <family>MS Shell Dlg 2</family>
           <pointsize>8</pointsize>
          </font>
         </property>
@@ -249,7 +248,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../gotvcommon.qrc"/>
+  <include location="../NoLimitConnect.qrc"/>
  </resources>
  <connections/>
 </ui>

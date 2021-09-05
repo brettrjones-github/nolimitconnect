@@ -33,15 +33,16 @@ GuiFileActionSession::GuiFileActionSession()
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
 												VxNetIdent *	netIdent, 
-												VxGUID&		lclSessionId, 
-												uint8_t				u8FileType, 
-												uint64_t				u64FileLen, 
+												VxGUID&			lclSessionId, 
+												uint8_t			u8FileType, 
+												uint64_t		u64FileLen, 
 												const char *	pFileName,
+												VxGUID			assetId,
 												VxSha1Hash&		fileHashId )
 : m_ePluginType( ePluginType )
 , m_Ident( netIdent )
 , m_LclSessionId( lclSessionId )
-, m_FileInfo( pFileName, u8FileType, u64FileLen, fileHashId )
+, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
 , m_Widget(0)
 , m_IsShared( false )
 , m_IsInLibrary( false )
@@ -51,15 +52,16 @@ GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType,
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
 												VxNetIdent *	netIdent, 
-												VxGUID&		lclSessionId, 
-												uint8_t				u8FileType, 
-												uint64_t				u64FileLen, 
+												VxGUID&			lclSessionId, 
+												uint8_t			u8FileType, 
+												uint64_t		u64FileLen, 
 												const char *	pFileName,
-												uint8_t *			fileHashId )
+												VxGUID			assetId,
+												uint8_t *		fileHashId )
 : m_ePluginType( ePluginType )
 , m_Ident( netIdent )
 , m_LclSessionId( lclSessionId )
-, m_FileInfo( pFileName, u8FileType, u64FileLen, fileHashId )
+, m_FileInfo( pFileName, u8FileType, u64FileLen, assetId, fileHashId )
 , m_Widget(0)
 , m_IsShared( false )
 , m_IsInLibrary( false )
@@ -69,8 +71,8 @@ GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType,
 //============================================================================
 GuiFileActionSession::GuiFileActionSession(		EPluginType		ePluginType, 
 												VxNetIdent *	netIdent, 
-												VxGUID&		lclSessionId, 
-												VxMyFileInfo&		fileInfo )
+												VxGUID&			lclSessionId, 
+												VxMyFileInfo&	fileInfo )
 : m_ePluginType( ePluginType )
 , m_Ident( netIdent )
 , m_LclSessionId( lclSessionId )

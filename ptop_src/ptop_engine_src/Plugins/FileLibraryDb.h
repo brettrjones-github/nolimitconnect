@@ -16,6 +16,7 @@
 
 
 #include <CoreLib/DbBase.h>
+#include <CoreLib/VxGUID.h>
 
 class LibraryFileInfo;
 
@@ -31,7 +32,7 @@ public:
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
 
-	void 						addFile( const char * fileName, int64_t fileLen, uint8_t fileType, uint8_t * fileHashId );
+	void 						addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId );
 	void 						addFile( LibraryFileInfo* libFileInfo );
 	void						removeFile( const char * fileName );
 

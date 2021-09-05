@@ -46,6 +46,7 @@ protected slots:
     void                        slotInfoMsg( const QString& text );
 
     void                        slotCopyToClipboardClicked( void );
+    void                        slotBrowseStorage( void );
 
 protected:
     void						setupApplet( void );

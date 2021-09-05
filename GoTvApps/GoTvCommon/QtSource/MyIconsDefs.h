@@ -162,9 +162,8 @@ enum EMyIcons
 	eMyIconSendFileLocked,
 	eMyIconSendFileIgnored,
 
-	eMyIconRecordNormalDisabled,
-	eMyIconRecordNormalCancel,
-	eMyIconRecordNormalYellow,
+	eMyIconRecordMovieDisabled,
+	eMyIconRecordMovieNormal,
 
 	eMyIconRecordMotionDisabled,
 	eMyIconRecordMotionCancel,

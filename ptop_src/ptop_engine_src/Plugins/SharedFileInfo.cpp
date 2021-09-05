@@ -149,3 +149,12 @@ void SharedFileInfo::updateFileInfo( VxThread * callingThread )
 {
 	return;
 }
+
+//============================================================================
+void SharedFileInfo::generateAssetId( void )
+{
+	if( !m_AssetId.isVxGUIDValid() )
+	{
+		m_AssetId.initializeWithNewVxGUID();
+	}
+}

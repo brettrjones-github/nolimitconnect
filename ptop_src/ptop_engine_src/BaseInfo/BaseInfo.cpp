@@ -17,6 +17,8 @@
 
 #include <CoreLib/VxDebug.h>
 #include <PktLib/VxCommon.h>
+#include <GuiInterface/IGoTv.h>
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
 BaseInfo::BaseInfo()
@@ -28,7 +30,7 @@ BaseInfo::BaseInfo( VxGUID& onlineId, int64_t modifiedTime )
     : m_OnlineId( onlineId )
     , m_InfoModifiedTime( modifiedTime )
 {
-
+    assureHasCreatorId();
 }
 
 //============================================================================
@@ -37,7 +39,7 @@ BaseInfo::BaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime )
     , m_ThumbId( assetId )
     , m_InfoModifiedTime( modifiedTime )
 {
-
+    assureHasCreatorId();
 }
 
 //============================================================================
@@ -46,6 +48,7 @@ BaseInfo::BaseInfo( const BaseInfo& rhs )
     , m_ThumbId( rhs.m_ThumbId )
     , m_InfoModifiedTime( rhs.m_InfoModifiedTime )
 {
+    assureHasCreatorId();
 }
 
 //============================================================================
@@ -68,4 +71,13 @@ void BaseInfo::fillBaseInfo( VxNetIdent* netIdent, EHostType hostType )
     m_OnlineId = netIdent->getMyOnlineId();
     m_ThumbId = netIdent->getThumbId( hostType );
     m_InfoModifiedTime = GetTimeStampMs();
+}
+
+//============================================================================
+void BaseInfo::assureHasCreatorId( void )
+{
+    if( !m_OnlineId.isVxGUIDValid() )
+    {
+        m_OnlineId = GetPtoPEngine().getMyOnlineId();
+    }
 }

@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,32 +12,57 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AssetVideoWidget.h"
-#include "AppCommon.h"
+#include "AppCommon.h"	
+#include "AppSettings.h"
+
+#include "AppletCamClipPlayer.h"
+
+#include "FileShareItemWidget.h"
+#include "MyIcons.h"
+//#include "PopupMenu.h"
+#include "AppGlobals.h"
+#include "FileItemInfo.h"
+#include "FileActionMenu.h"
+#include "GuiHelpers.h"
 #include "GuiParams.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
 
+#include <PktLib/VxSearchDefs.h>
+#include <NetLib/VxFileXferInfo.h>
+#include <CoreLib/VxFileInfo.h>
 #include <CoreLib/VxGlobals.h>
+#include <VxVideoLib/VxVideoLib.h>
+
+#include <QResizeEvent>
+#include <QMessageBox>
+#include <QTimer>
 
 //============================================================================
-AssetVideoWidget::AssetVideoWidget( QWidget * parent )
-	: AssetBaseWidget( GetAppInstance(), parent )
+AppletCamClipPlayer::AppletCamClipPlayer( AppCommon& app, QWidget * parent, VxGUID assetId )
+: AppletAssetPlayerBase( OBJNAME_APPLET_CAM_CLIP_PLAYER, app, parent )
 {
-	initAssetVideoWidget();
+    setAppletType( eAppletCamClipPlayer );
+    setPluginType( ePluginTypeCamServer );
+	initAppletCamClipPlayer();
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
+
+	setPlayerAssetId( assetId );
+
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AssetVideoWidget::AssetVideoWidget( AppCommon& appCommon, QWidget * parent )
-	: AssetBaseWidget( appCommon, parent )
+AppletCamClipPlayer::~AppletCamClipPlayer()
 {
-	initAssetVideoWidget();
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AssetVideoWidget::initAssetVideoWidget( void )
+void AppletCamClipPlayer::initAppletCamClipPlayer( void )
 {
-	ui.setupUi( this );
+	ui.setupUi( getContentItemsFrame() );
 	setXferBar( ui.m_XferProgressBar );
 	ui.m_TagFrame->setVisible( false );
 
@@ -50,23 +74,51 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 	ui.m_PlayPauseButton->setPressedSound( eSndDefNone );
 	ui.m_PlayPosSlider->setRange( 0, 100000 );
 
-	connect( ui.m_PlayPauseButton,	SIGNAL(clicked()),						this, SLOT(slotPlayButtonClicked()) );
-	connect( ui.m_LeftAvatarBar,	SIGNAL(signalShredAsset()),				this, SLOT(slotShredAsset()) );
-	connect( ui.m_RightAvatarBar,	SIGNAL(signalShredAsset()),				this, SLOT(slotShredAsset()) );
+	connect( ui.m_PlayPauseButton, SIGNAL( clicked() ), this, SLOT( slotPlayButtonClicked() ) );
+	connect( ui.m_LeftAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
+	connect( ui.m_RightAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
 	//connect( &m_MyApp,				SIGNAL(signalAssetAction(EAssetAction, VxGUID, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGUID, int)) );
-	connect( ui.m_PlayPosSlider,	SIGNAL(sliderPressed()),				this, SLOT(slotSliderPressed()) );
-	connect( ui.m_PlayPosSlider,	SIGNAL(sliderReleased()),				this, SLOT(slotSliderReleased()) );
+	connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
+	connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
 
-	connect( this,					SIGNAL(signalPlayProgress(int)),		this, SLOT(slotPlayProgress(int)) );
-	connect( this,					SIGNAL(signalPlayEnd()),				this, SLOT(slotPlayEnd()) );
-	connect( ui.m_LeftAvatarBar,	SIGNAL( signalResendAsset() ),			this, SLOT( slotResendAsset() ) );
-    ui.m_VidWidget->setVidImageRotation( 0 );
+	connect( this, SIGNAL( signalPlayProgress( int ) ), this, SLOT( slotPlayProgress( int ) ) );
+	connect( this, SIGNAL( signalPlayEnd() ), this, SLOT( slotPlayEnd() ) );
+	connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
+	ui.m_VidWidget->setVidImageRotation( 0 );
+
+	// should not need this
+	repositionToParent();
 }
 
 //============================================================================
-void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
+void AppletCamClipPlayer::setAssetInfo( AssetBaseInfo& assetInfo )
 {
-	AssetBaseWidget::setAssetInfo( assetInfo );
+	// files may not have a valid creator.. use ours
+	if( !assetInfo.getCreatorId().isVxGUIDValid() )
+	{
+		assetInfo.setCreatorId( m_Engine.getMyOnlineId() );
+	}
+
+	AppletAssetPlayerBase::setAssetInfo( assetInfo );
+	updateAssetInfo();
+}
+
+//============================================================================
+void AppletCamClipPlayer::setAssetInfo( AssetInfo& assetInfo )
+{
+	// files may not have a valid creator.. use ours
+	if( !assetInfo.getCreatorId().isVxGUIDValid() )
+	{
+		assetInfo.setCreatorId( m_Engine.getMyOnlineId() );
+	}
+
+	AppletAssetPlayerBase::setAssetInfo( assetInfo );
+	updateAssetInfo();
+}
+
+//============================================================================
+void AppletCamClipPlayer::updateAssetInfo( void )
+{
 	ui.m_TagLabel->setAssetInfo( &getAssetInfo() );
 	ui.m_FileNameLabel->setText( getAssetInfo().getRemoteAssetName().c_str() );
 
@@ -75,16 +127,14 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 	{
 		ui.m_TagLabel->setVisible( false );
 		ui.m_TagTitleLabel->setVisible( false );
-		this->setSizeHint( QSize( 100 * GuiParams::getGuiScale(), 224 * GuiParams::getGuiScale() - 16 ) );
 	}
 	else
 	{
 		ui.m_TagLabel->setVisible( true );
 		ui.m_TagTitleLabel->setVisible( true );
-		this->setSizeHint( QSize( 100 * GuiParams::getGuiScale(), 224 * GuiParams::getGuiScale() ) );
 	}
 
-	if( assetInfo.isMine() )
+	if( getAssetInfo().isMine() )
 	{
 		ui.m_LeftAvatarBar->setTime( m_AssetInfo.getCreationTime() );
 	}
@@ -93,10 +143,10 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 		ui.m_RightAvatarBar->setTime( m_AssetInfo.getCreationTime() );
 	}
 
-	if( assetInfo.isFileAsset() )
+	if( getAssetInfo().isFileAsset() )
 	{
-		ui.m_LeftAvatarBar->setShredButtonIcon( eMyIconShredderNormal  );
-		ui.m_RightAvatarBar->setShredButtonIcon( eMyIconShredderNormal  );
+		ui.m_LeftAvatarBar->setShredButtonIcon( eMyIconShredderNormal );
+		ui.m_RightAvatarBar->setShredButtonIcon( eMyIconShredderNormal );
 	}
 	else
 	{
@@ -108,10 +158,11 @@ void AssetVideoWidget::setAssetInfo( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-void AssetVideoWidget::showEvent(QShowEvent * showEvent)
+void AppletCamClipPlayer::showEvent( QShowEvent* showEvent )
 {
-	AssetBaseWidget::showEvent(showEvent);
-	if( ( false == VxIsAppShuttingDown() )
+	AppletAssetPlayerBase::showEvent( showEvent );
+	if( (false == VxIsAppShuttingDown())
+		&& isAssetInfoSet()
 		&& m_AssetInfo.isValid()
 		&& !m_IsPlaying )
 	{
@@ -121,10 +172,11 @@ void AssetVideoWidget::showEvent(QShowEvent * showEvent)
 }
 
 //============================================================================
-void AssetVideoWidget::resizeEvent( QResizeEvent * ev )
+void AppletCamClipPlayer::resizeEvent( QResizeEvent* ev )
 {
-	AssetBaseWidget::resizeEvent( ev );
-	if( ( false == VxIsAppShuttingDown() )
+	AppletAssetPlayerBase::resizeEvent( ev );
+	if( (false == VxIsAppShuttingDown())
+		&& isAssetInfoSet()
 		&& m_AssetInfo.isValid()
 		&& !m_IsPlaying
 		&& isVisible() )
@@ -135,9 +187,9 @@ void AssetVideoWidget::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AssetVideoWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
+void AppletCamClipPlayer::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
 {
-	AssetBaseWidget::slotToGuiAssetAction( assetAction, pos0to100000 );
+	AppletAssetPlayerBase::slotToGuiAssetAction( assetAction, pos0to100000 );
 	switch( assetAction )
 	{
 	case eAssetActionPlayProgress:
@@ -163,13 +215,13 @@ void AssetVideoWidget::slotToGuiAssetAction( EAssetAction assetAction, int pos0t
 }
 
 //============================================================================
-void AssetVideoWidget::slotSliderPressed( void )
+void AppletCamClipPlayer::slotSliderPressed( void )
 {
 	m_SliderIsPressed = true;
 }
 
 //============================================================================
-void AssetVideoWidget::slotSliderReleased( void )
+void AppletCamClipPlayer::slotSliderReleased( void )
 {
 	m_SliderIsPressed = false;
 	int posVal = ui.m_PlayPosSlider->value();
@@ -177,7 +229,7 @@ void AssetVideoWidget::slotSliderReleased( void )
 }
 
 //============================================================================
-void AssetVideoWidget::slotPlayButtonClicked( void )
+void AppletCamClipPlayer::slotPlayButtonClicked( void )
 {
 	if( m_IsPlaying )
 	{
@@ -190,8 +242,8 @@ void AssetVideoWidget::slotPlayButtonClicked( void )
 }
 
 //========================================================================
-void AssetVideoWidget::startMediaPlay( int startPos )
-{	
+void AppletCamClipPlayer::startMediaPlay( int startPos )
+{
 	bool playStarted = m_Engine.fromGuiAssetAction( eAssetActionPlayBegin, m_AssetInfo, startPos );
 	updateGuiPlayControls( playStarted );
 	if( false == playStarted )
@@ -201,8 +253,8 @@ void AssetVideoWidget::startMediaPlay( int startPos )
 }
 
 //========================================================================
-void AssetVideoWidget::updateGuiPlayControls( bool isPlaying )
-{	
+void AppletCamClipPlayer::updateGuiPlayControls( bool isPlaying )
+{
 	if( m_IsPlaying != isPlaying )
 	{
 		m_IsPlaying = isPlaying;
@@ -222,14 +274,14 @@ void AssetVideoWidget::updateGuiPlayControls( bool isPlaying )
 }
 
 //============================================================================
-void AssetVideoWidget::onActivityStop( void )
+void AppletCamClipPlayer::onActivityStop( void )
 {
 	setReadyForCallbacks( false );
 	stopMediaIfPlaying();
 }
 
 //============================================================================
-void AssetVideoWidget::stopMediaIfPlaying( void )
+void AppletCamClipPlayer::stopMediaIfPlaying( void )
 {
 	if( m_IsPlaying )
 	{
@@ -241,7 +293,7 @@ void AssetVideoWidget::stopMediaIfPlaying( void )
 }
 
 //============================================================================
-void AssetVideoWidget::setReadyForCallbacks( bool isReady )
+void AppletCamClipPlayer::setReadyForCallbacks( bool isReady )
 {
 	if( m_ActivityCallbacksEnabled != isReady )
 	{
@@ -251,43 +303,43 @@ void AssetVideoWidget::setReadyForCallbacks( bool isReady )
 }
 
 //============================================================================
-void AssetVideoWidget::slotShredAsset( void )
+void AppletCamClipPlayer::slotShredAsset( void )
 {
 	onActivityStop();
 	emit signalShreddingAsset( this );
 }
 
 //============================================================================
-void AssetVideoWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
+void AppletCamClipPlayer::toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
 {
 	Q_UNUSED( userData );
 	ui.m_VidWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgLen, motion0To100000 );
 }
 
 //============================================================================
-int AssetVideoWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight )
+int AppletCamClipPlayer::toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight )
 {
-    Q_UNUSED( userData );
-    return ui.m_VidWidget->playVideoFrame( onlineId, picBuf, picBufLen, picWidth, picHeight );
+	Q_UNUSED( userData );
+	return ui.m_VidWidget->playVideoFrame( onlineId, picBuf, picBufLen, picWidth, picHeight );
 }
 
 //============================================================================
-void AssetVideoWidget::slotPlayProgress( int pos0to100000 )
+void AppletCamClipPlayer::slotPlayProgress( int pos0to100000 )
 {
-	if( m_IsPlaying && ( false == m_SliderIsPressed ) )
+	if( m_IsPlaying && (false == m_SliderIsPressed) )
 	{
 		ui.m_PlayPosSlider->setValue( pos0to100000 );
 	}
 }
 
 //============================================================================
-void AssetVideoWidget::slotPlayEnd( void )
+void AppletCamClipPlayer::slotPlayEnd( void )
 {
 	//updateGuiPlayControls( false );
 }
 
 //============================================================================
-void AssetVideoWidget::showSendFail( bool show, bool permissionErr )
+void AppletCamClipPlayer::showSendFail( bool show, bool permissionErr )
 {
 	if( m_AssetInfo.isMine() )
 	{
@@ -302,7 +354,7 @@ void AssetVideoWidget::showSendFail( bool show, bool permissionErr )
 }
 
 //============================================================================
-void AssetVideoWidget::showResendButton( bool show )
+void AppletCamClipPlayer::showResendButton( bool show )
 {
 	if( m_AssetInfo.isMine() )
 	{
@@ -315,7 +367,7 @@ void AssetVideoWidget::showResendButton( bool show )
 }
 
 //============================================================================
-void AssetVideoWidget::showShredder( bool show )
+void AppletCamClipPlayer::showShredder( bool show )
 {
 	if( m_AssetInfo.isMine() )
 	{
@@ -328,7 +380,7 @@ void AssetVideoWidget::showShredder( bool show )
 }
 
 //============================================================================
-void AssetVideoWidget::showXferProgress( bool show )
+void AppletCamClipPlayer::showXferProgress( bool show )
 {
 	if( m_AssetInfo.isMine() )
 	{
@@ -341,7 +393,7 @@ void AssetVideoWidget::showXferProgress( bool show )
 }
 
 //============================================================================
-void AssetVideoWidget::setXferProgress( int xferProgress )
+void AppletCamClipPlayer::setXferProgress( int xferProgress )
 {
 	if( m_AssetInfo.isMine() )
 	{

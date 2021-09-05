@@ -50,9 +50,6 @@ public:
 	void						assureTrailingDirectorySlash( void );
 	static const char *			describeFileType( uint8_t fileType );
 
-
-
-
 protected:
 	//=== vars ===//
 	int64_t						m_s64FileLen;

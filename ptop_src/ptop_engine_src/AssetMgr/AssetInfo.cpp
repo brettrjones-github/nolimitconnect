@@ -56,8 +56,20 @@ AssetInfo::AssetInfo( EAssetType assetType, const std::string& fileName )
 }
 
 //============================================================================
+AssetInfo::AssetInfo( EAssetType assetType, const std::string& fileName, VxGUID& assetId )
+	: AssetBaseInfo( assetType, fileName, assetId )
+{
+}
+
+//============================================================================
 AssetInfo::AssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen )
 : AssetBaseInfo( assetType, fileName, fileLen )
+{
+}
+
+//============================================================================
+AssetInfo::AssetInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId )
+	: AssetBaseInfo( assetType, fileName, fileLen, assetId )
 {
 }
 

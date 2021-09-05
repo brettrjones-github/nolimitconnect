@@ -38,6 +38,7 @@ public:
 
 public:
 	void						setFileFilter( EFileFilterType eFileFilter );
+	void						setCurrentDirectory( QString browseDir );
 
 	FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
 	void						updateListEntryWidget( FileShareItemWidget * item );
@@ -75,7 +76,6 @@ protected:
     virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ) override;
 
 	void						fromListWidgetRequestFileList( void );
-	void						setCurrentBrowseDir( QString browseDir );
 	void						setActionEnable( bool enable );
 	void						addFile(	VxMyFileInfo&	fileInfo,
 											bool			isShared,
@@ -85,6 +85,7 @@ protected:
 	void						clearFileList( void );
 	void						setDefaultCurrentDir( EFileFilterType eFileFilterType );
 	std::string					getDefaultDir( int eFileFilterType );
+	void						setCurrentBrowseDir( QString browseDir );
 
 	Ui::AppletBrowseFilesUi		ui;
 

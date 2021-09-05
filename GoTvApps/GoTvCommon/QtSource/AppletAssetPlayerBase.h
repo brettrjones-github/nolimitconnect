@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "ToGuiActivityInterface.h"
+#include "AppletBase.h"
 
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetInfo.h>
 
@@ -26,20 +27,20 @@ class P2PEngine;
 class QProgressBar;
 class MyIcons;
 
-class AssetBaseWidget : public QWidget, public QListWidgetItem, public ToGuiActivityInterface
+class AppletAssetPlayerBase : public AppletBase
 {
 	Q_OBJECT
 
 public:
-	AssetBaseWidget( AppCommon& appCommon, QWidget *parent=0 );
-	virtual ~AssetBaseWidget();
+	AppletAssetPlayerBase( const char* ObjName, AppCommon& appCommon, QWidget *parent=0 );
+	virtual ~AppletAssetPlayerBase();
 
 	AppCommon&					getMyApp( void )								{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 	P2PEngine&					getEngine( void )								{ return m_Engine; }
 
-    virtual void				setAssetInfo( AssetBaseInfo& assetInfo )		{ m_AssetInfo = assetInfo; }
-    virtual AssetBaseInfo&		getAssetInfo( void )                            { return m_AssetInfo; }
+	virtual void				setPlayerAssetId( VxGUID& feedId );
+
 	virtual void				setXferBar( QProgressBar * xferProgressBar );
 	virtual QProgressBar *		getXferBar( void )								{ return m_XferProgressBar; }
 	virtual void				updateFromAssetInfo( void );
@@ -55,7 +56,7 @@ public:
 	virtual void				onActivityStop( void ) {};
 
 signals:
-	void						signalShreddingAsset( AssetBaseWidget * assetWidget );
+	void						signalShreddingAsset( AppletAssetPlayerBase * assetWidget );
 	void						signalToGuiAssetAction( EAssetAction assetAction, int pos0to100000 );
 
 protected slots:
@@ -70,13 +71,12 @@ protected:
 
 	void						doShowProgress( bool showProgress );
 	void						doSetProgress(  int xferProgress );
+	void						updateWantCallbacks( bool wantCallbacks );
 
-	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;
-    AssetBaseInfo				m_AssetInfo;
 	int							m_AssetSendProgress{ 0 };
 	bool						m_CallbacksRequested{ false };
-	QProgressBar *				m_XferProgressBar{ nullptr };
+	QProgressBar*				m_XferProgressBar{ nullptr };
 	bool						m_ProgressBarShouldBeVisible{ false };
 	bool						m_ProgressBarIsVisible{ false };
 };

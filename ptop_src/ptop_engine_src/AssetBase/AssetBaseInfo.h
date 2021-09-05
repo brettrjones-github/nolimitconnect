@@ -43,8 +43,10 @@ public:
     AssetBaseInfo( EAssetType assetType, VxGUID& onlineId, int64_t modifiedTime = 0 );
     AssetBaseInfo( EAssetType assetType, VxGUID& onlineId, VxGUID& assetId, int64_t modifiedTime = 0 );
     AssetBaseInfo( EAssetType assetType, const std::string& fileName );
+    AssetBaseInfo( EAssetType assetType, const std::string& fileName, VxGUID& assetId );
     AssetBaseInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
-    AssetBaseInfo( EAssetType assetType, VxGUID& creatorId,  VxGUID& assetId );
+    AssetBaseInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
+    AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& assetId );
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
 
@@ -100,7 +102,7 @@ public:
     virtual void				setAssetUniqueId( VxGUID& uniqueId )            { m_UniqueId = uniqueId; }
     virtual void				setAssetUniqueId( const char * guid )           { m_UniqueId.fromVxGUIDHexString( guid ); }
     virtual VxGUID&				getAssetUniqueId( void )                        { return m_UniqueId; }
-    virtual VxGUID&				generateNewUniqueId( void ); // generates unique id, assigns it to asset and returns reference to it
+    virtual VxGUID&				generateNewUniqueId( bool ifNotValid = false ); // generates unique id, assigns it to asset and returns reference to it
 
     virtual void				setCreatorId( VxGUID creatorId )                { BaseInfo::setOnlineId( creatorId ); }
     virtual void				setCreatorId( const char * creatorId )          { BaseInfo::setOnlineId( creatorId ); }

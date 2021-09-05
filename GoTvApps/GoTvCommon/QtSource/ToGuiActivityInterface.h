@@ -17,6 +17,7 @@
 #include "config_gotvapps.h"
 #include <CoreLib/VxDefs.h>
 #include <CoreLib/AssetDefs.h>
+#include <CoreLib/VxGUID.h>
 #include <PktLib/VxCommon.h>
 
 #include <GuiInterface/IDefs.h>
@@ -66,7 +67,8 @@ public:
 																VxGUID&			lclSessionId, 
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
-																const char *	pFileName ){};
+																const char *	pFileName,
+                                                                VxGUID          assetId ){};
 	virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ){};
 
 	virtual void				toGuiClientAssetAction( void * callbackData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};

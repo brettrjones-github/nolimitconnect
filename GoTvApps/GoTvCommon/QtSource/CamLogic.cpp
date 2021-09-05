@@ -211,8 +211,6 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     connect( m_mediaRecorder.data(), &QMediaRecorder::durationChanged, this, &CamLogic::updateRecordTime );
     connect( m_mediaRecorder.data(), &QMediaRecorder::errorChanged, this, &CamLogic::displayRecorderError );
 
-    //m_captureSession.setVideoOutput( ui->viewfinder );
-    //m_imageCapture->setCaptureDestination( QImageCapture::CaptureToBuffer );
 
     updateCameraActive( m_camera->isActive() );
     updateRecorderState( m_mediaRecorder->recorderState() );
@@ -227,7 +225,7 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     updateCaptureMode( 0 );
 
     //m_imageCapture->setFileFormat( boxValue( ui->imageCodecBox ).value<QImageCapture::FileFormat>() );
-    //m_imageCapture->setQuality( QImageCapture::Quality( ui->imageQualitySlider->value() ) );
+    m_imageCapture->setQuality( QImageCapture::HighQuality );
     m_imageCapture->setResolution( QSize( 320, 240 ) );
 
     m_CamInitiated = true;

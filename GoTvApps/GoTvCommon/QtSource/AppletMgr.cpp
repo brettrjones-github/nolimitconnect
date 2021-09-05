@@ -29,6 +29,7 @@
 
 #include "AppletBrowseFiles.h"
 
+#include "AppletCamClipPlayer.h"
 #include "AppletCamSettings.h"
 #include "AppletCamTest.h"
 #include "AppletChatRoomJoinSearch.h"
@@ -144,13 +145,6 @@ RenderGlWidget * AppletMgr::getRenderConsumer( void )
     return renderConsumer;
 }
 
-
-//============================================================================
-ActivityBase * AppletMgr::launchApplet( EApplet applet )
-{
-	return launchApplet( applet, getActiveWindow() );
-}
-
 //============================================================================
 QWidget * AppletMgr::getActiveWindow( void )
 {
@@ -170,7 +164,7 @@ QFrame * AppletMgr::getAppletFrame( EApplet applet )
 }
 
 //============================================================================
-ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
+ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int launchParam, VxGUID assetId )
 {
     // these are permanent applets
     if( eAppletMultiMessenger == applet )
@@ -194,6 +188,14 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	if( appletDialog )
 	{
 		bringAppletToFront( appletDialog );
+        if( applet == eAppletCamClipPlayer )
+        {
+            AppletCamClipPlayer* player = dynamic_cast<AppletCamClipPlayer*>(appletDialog);
+            if( player )
+            {
+                player->setPlayerAssetId( assetId );
+            }          
+        }
         // TODO figure out why on button click and attemp to launch the applet is done multiple times
 //#ifdef DEBUG
 //        m_MyApp.errMessageBox2( QObject::tr( "AppletMgr::launchApplet" ).toUtf8().constData(), QObject::tr( "Applet enum %d already launched\n" ).toUtf8().constData(), applet );
@@ -232,7 +234,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
 
     case eAppletKodi:                       appletDialog = new AppletKodi( m_MyApp, parent ); break;
-    case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent ); break;
+    case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent, launchParam ); break;
     case eAppletLogSettings:                appletDialog = new AppletLogSettings( m_MyApp, parent ); break;
     case eAppletLogView:                    appletDialog = new AppletLogView( m_MyApp, parent ); break;
 
@@ -249,6 +251,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletScanSharedFiles:            appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
     case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
 
+    case eAppletCamClipPlayer:              appletDialog = new AppletCamClipPlayer( m_MyApp, parent, assetId ); break;
     case eAppletCamSettings:                appletDialog = new AppletCamSettings( m_MyApp, parent ); break;
     case eAppletCamTest:                    appletDialog = new AppletCamTest( m_MyApp, parent ); break;
     case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
