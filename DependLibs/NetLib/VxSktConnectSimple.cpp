@@ -197,22 +197,41 @@ void VxSktConnectSimple::closeSkt( int iInstance )
 }
 
 //============================================================================
-bool VxSktConnectSimple::connectToWebsite( 	const char *		pWebsiteUrl,
+bool VxSktConnectSimple::connectToWebsite(	const char*			pWebsiteUrl,
+											std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
+											std::string&		strFile,		// return file name.. images/me.jpg
+											uint16_t& u16Port,
+											int					iConnectTimeoutMs )
+{
+	std::string strResolveIpAddr;
+	return connectToWebsite( pWebsiteUrl,
+							strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
+							strFile,		// return file name.. images/me.jpg
+							u16Port,
+							strResolveIpAddr,
+							iConnectTimeoutMs );
+
+}
+
+//============================================================================
+bool VxSktConnectSimple::connectToWebsite( const char*			pWebsiteUrl,
 											std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 											std::string&		strFile,		// return file name.. images/me.jpg
 											uint16_t&			u16Port,
+											std::string&		strResolveIpAddr,
 											int					iConnectTimeoutMs )
 {
 	closeSkt( 99 );
 	m_bIsConnected	= false;
 	m_Socket = VxConnectToWebsite( m_LclIp, m_RmtIp, pWebsiteUrl, strHost, strFile, u16Port, iConnectTimeoutMs );
+	strResolveIpAddr = m_RmtIp.toStdString();
 	if( INVALID_SOCKET != m_Socket )
 	{
 		m_bIsConnected = true;
 		VxGetLclAddress( m_Socket, m_LclIp );
 		VxGetRmtAddress( m_Socket, m_RmtIp );
 #ifdef DEBUG_SKT
-		LogMsg( LOG_INFO, "VxSktConnectSimple::connectToWebsite Lcl port %d (0x%4.4x) Rmt port %d (0x%4.4x)\n", 
+		LogMsg( LOG_INFO, "VxSktConnectSimple::connectToWebsite Lcl port %d (0x%4.4x) Rmt port %d (0x%4.4x)", 
 			m_LclIp.getPort(),
 			m_LclIp.getPort(),
 			m_RmtIp.getPort(),

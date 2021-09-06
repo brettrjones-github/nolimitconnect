@@ -69,7 +69,7 @@ bool							VxResolveUrl( const char * pUrl, uint16_t u16Port, InetAddress& oRetA
 //! return true if ip is in list of local ips
 bool							VxLocalIpExists( std::string& strIpAddress );
 // connects to website and returns socket.. if fails returns INVALID_SOCKET
-SOCKET							VxConnectToWebsite( InetAddrAndPort&		oLclIp,			// ip of adapter to use
+SOCKET							VxConnectToWebsite( InetAddrAndPort&	oLclIp,			// ip of adapter to use
 													InetAddrAndPort&	oRmtIp,			// return ip and port url resolves to
 													const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com

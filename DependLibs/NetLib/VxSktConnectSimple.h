@@ -50,6 +50,13 @@ public:
 													uint16_t&			u16Port,
 													int					iConnectTimeoutMs = WEBSITE_CONNECT_TIMEOUT );
 
+	virtual bool				connectToWebsite(	const char* pWebsiteUrl,
+													std::string& strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
+													std::string& strFile,		// return file name.. images/me.jpg
+													uint16_t& u16Port,
+													std::string& strResolveIpAddr,
+													int					iConnectTimeoutMs = WEBSITE_CONNECT_TIMEOUT );
+
 	virtual RCODE				sendData(	const char *	pData,							// data to send
 											int				iDataLen,						// length of data	
 											int				iTimeoutMilliSeconds = SKT_SEND_TIMEOUT );	// timeout attempt to send ( 0 = don't timeout )

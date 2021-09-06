@@ -273,14 +273,16 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 
     LogModule( eLogRunTest, LOG_INFO, "RunUrlAction: sec %3.3f : connecting to %s thread 0x%x", 
                testTimer.elapsedSec(), nodeUrl.c_str(), VxGetCurrentThreadId() );
+    std::string resolveIp("");
 	if( false == netServConn.connectToWebsite(	nodeUrl.c_str(), 
-		strHost, 
-		strFile, 
-		u16Port, 
-		NETSERVICE_CONNECT_TIMEOUT ) )
+		                                        strHost, 
+		                                        strFile, 
+		                                        u16Port, 
+                                                resolveIp,
+		                                        NETSERVICE_CONNECT_TIMEOUT ) )
 	{
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectFail, "Could not connected to %s..Please check settings",
-            nodeUrl.c_str() );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectFail, "Could not connected to %s IP %s..Please check settings",
+                            nodeUrl.c_str(), resolveIp.c_str() );
 
 		doRunTestFailed( urlAction, actionName, eRunTestStatusConnectFail );
 
