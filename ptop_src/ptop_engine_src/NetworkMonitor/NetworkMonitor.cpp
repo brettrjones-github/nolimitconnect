@@ -39,13 +39,13 @@ namespace
     //============================================================================
     static void * NetworkMonitorThreadFunc( void * pvContext )
     {
-        LogMsg( LOG_INFO, " NetworkMonitorThreadFunc start" );
+        // LogMsg( LOG_INFO, " NetworkMonitorThreadFunc start" );
         VxThread * poThread = ( VxThread * )pvContext;
         poThread->setIsThreadRunning( true );
         NetworkMonitor * netMonitor = ( NetworkMonitor * )poThread->getThreadUserParam();
         netMonitor->doNetworkConnectTestThread( poThread );
         poThread->threadAboutToExit();
-        LogMsg( LOG_INFO, " NetworkMonitorThreadFunc done" );
+        // LogMsg( LOG_INFO, " NetworkMonitorThreadFunc done" );
         return nullptr;
     }
 }
@@ -90,18 +90,18 @@ void NetworkMonitor::setIsInternetAvailable( bool isAvail )
 //============================================================================
 void NetworkMonitor::onOncePerSecond( void )
 {
-    LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond start" );
+    // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond start" );
     if( ( false == m_bIsStarted )
         || VxIsAppShuttingDown() )
     {
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond not started exit" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond not started exit" );
         return;
     }
 
     if( 0 != m_iCheckInterval && NET_MONITOR_CHECK_INTERVAL_SEC >= m_iCheckInterval )
     {
         m_iCheckInterval++;
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond check interval exit" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond check interval exit" );
         return;
     }
 
@@ -115,7 +115,7 @@ void NetworkMonitor::onOncePerSecond( void )
         if( externIp != m_LastConnectedLclIp )
         {
             m_LastConnectedLclIp = externIp;
-            LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new fixed ip addr %s", externIp.c_str() );
+            // LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new fixed ip addr %s", externIp.c_str() );
 
             m_Engine.getNetStatusAccum().setIsFixedIpAddress( true );
             setIsInternetAvailable( true );
@@ -124,7 +124,7 @@ void NetworkMonitor::onOncePerSecond( void )
 
         if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
         {
-            LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond setNetHostAvail" );
+            // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond setNetHostAvail" );
             // also assume we can connect to network host because we are network host
             m_Engine.getNetStatusAccum().setNetHostAvail( true );
         }
@@ -139,14 +139,14 @@ void NetworkMonitor::onOncePerSecond( void )
     if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
     {
         // assume we can connect to network host because we are network host
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond setNetHostAvail2" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond setNetHostAvail2" );
         m_Engine.getNetStatusAccum().setNetHostAvail( true );
     }
 
     if( m_NetMonitorThread.isThreadRunning() )
     {
         // still trying to get ip from connection.. wait till next time
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond isThreadRunning exit" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond isThreadRunning exit" );
         return;
     }
 
@@ -162,7 +162,7 @@ void NetworkMonitor::onOncePerSecond( void )
     InetAddress	netAddr;
     netAddr.getAllAddresses( aipAddresses );
 
-    LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond for each address" );
+    // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond for each address" );
     for( InetAddress& inetAddr : aipAddresses )
     {
         if( ( false == inetAddr.isIPv4() )
@@ -193,7 +193,7 @@ void NetworkMonitor::onOncePerSecond( void )
     if( foundSameAsLastIp && getIsInternetAvailable() )
     {
         // LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundSameAsLastIp" );
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond same exit" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond same exit" );
         return;
     }
 
@@ -203,7 +203,7 @@ void NetworkMonitor::onOncePerSecond( void )
         LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundPreferredAdapterIp %s", m_strLastFoundIp.c_str() );
         setIsInternetAvailable( true );
         m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), false );
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond foundPreferredAdapterIp exit" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond foundPreferredAdapterIp exit" );
         return;
     }
 
@@ -213,7 +213,7 @@ void NetworkMonitor::onOncePerSecond( void )
         LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundCellIp %s", m_strLastFoundIp.c_str() );
         setIsInternetAvailable( true );
         m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), true );
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond foundCellIp exit" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond foundCellIp exit" );
         return;
     }
 
@@ -234,7 +234,7 @@ void NetworkMonitor::onOncePerSecond( void )
                 m_LastConnectedLclIp = m_ConnectedLclIp;
                 LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new ip %s", m_ConnectedLclIp.c_str() );
                 setIsInternetAvailable( true );
-                LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond fromGuiNetworkAvailable" );
+                // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond fromGuiNetworkAvailable" );
                 m_Engine.fromGuiNetworkAvailable( m_ConnectedLclIp.c_str(), false );
              }
         }
@@ -246,7 +246,7 @@ void NetworkMonitor::onOncePerSecond( void )
                 LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
                 m_Engine.getNetStatusAccum().setNetHostAvail( false );
                 setIsInternetAvailable( false );
-                LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond fromGuiNetworkLost" );
+                // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond fromGuiNetworkLost" );
                 m_Engine.fromGuiNetworkLost();
             }
         }
@@ -266,11 +266,11 @@ void NetworkMonitor::onOncePerSecond( void )
         // netAddr.dumpAddresses( aipAddresses );
 
         // start thread that will run ping/pong is port open test
-        LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond triggerDetermineIp" );
+        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond triggerDetermineIp" );
         triggerDetermineIp();
     }
 
-    LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond done" );
+    // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond done" );
 }
 
 //============================================================================
