@@ -806,6 +806,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h">
       <Filter>Source Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -1786,6 +1789,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
@@ -2486,6 +2492,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamClipPlayer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

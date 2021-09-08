@@ -79,6 +79,7 @@ enum EApplet
     eAppletNetworkSettings,
     eAppletPermissionList,          // list of all users plugin permission levels
     eAppletCamTest,
+    eAppletHostGroupStatus,
     eAppletTestAndDebug,
 
     eMaxSettingsApplets,            // marker.. end of settings applets.. past here is search applets

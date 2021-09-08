@@ -84,6 +84,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
@@ -412,6 +413,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
@@ -723,6 +725,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoin.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostGroupStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLibrary.ui \

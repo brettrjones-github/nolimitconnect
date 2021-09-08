@@ -73,6 +73,7 @@
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
 #define OBJNAME_APPLET_GROUP_JOIN_SEARCH			    "AppletGroupJoinSearch"
+#define OBJNAME_APPLET_HOST_GROUP_STATUS				"AppletHostGroupStatus"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"

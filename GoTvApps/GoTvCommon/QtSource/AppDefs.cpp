@@ -57,6 +57,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletCreateAccount:			    return eMyIconUserIdentity;
     case eAppletGroupJoin:                  return eMyIconClientGroup;
     case eAppletHomePage:				    return eMyIconHome;
+    case eAppletHostGroupStatus:	        return eMyIconServiceHostGroup;
     case eAppletKodi:				        return eMyIconKodi;
     case eAppletLibrary:				    return eMyIconLibraryNormal;
     case eAppletLog:	                    return eMyIconDebug;
@@ -187,6 +188,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
+    case eAppletHostGroupStatus:            return QObject::tr( "Host A Group Status" );
     case eAppletRandomConnectJoin:          return QObject::tr( "Join Random Connect" );
     case eAppletRandomConnectJoinSearch:	return QObject::tr( "Search For Random Connect Host To Join" );
     case eAppletSnapshot:				    return QObject::tr( "Take Snapshot" );

@@ -26,10 +26,10 @@
 
 namespace
 {
-    static const int            TINY_PUSHBUTTON_SIZE = 16;
-    static const int            SMALL_PUSHBUTTON_SIZE = 30;
-    static const int            MEDIUM_PUSHBUTTON_SIZE = 46;
-    static const int            LARGE_PUSHBUTTON_SIZE = 54;
+    static const int            TINY_PUSHBUTTON_SIZE = 18;
+    static const int            SMALL_PUSHBUTTON_SIZE = 34;
+    static const int            MEDIUM_PUSHBUTTON_SIZE = 40;
+    static const int            LARGE_PUSHBUTTON_SIZE = 46;
 }
 
 //============================================================================

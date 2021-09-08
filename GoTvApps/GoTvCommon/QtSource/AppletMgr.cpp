@@ -47,6 +47,7 @@
 #include "AppletGalleryThumb.h"
 #include "AppletGroupJoin.h"
 #include "AppletGroupJoinSearch.h"
+#include "AppletHostGroupStatus.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
 #include "AppletLog.h"
@@ -257,6 +258,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
     case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
+
+    case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
     case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
