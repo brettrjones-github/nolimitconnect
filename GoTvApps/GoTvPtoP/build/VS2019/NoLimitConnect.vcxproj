@@ -184,7 +184,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchPage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.cpp" />
@@ -464,6 +466,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -832,6 +836,8 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoin.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostNetworkStatus.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletJoinGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletKodi.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLaunchWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLibrary.ui" />

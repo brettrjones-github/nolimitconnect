@@ -48,6 +48,8 @@
 #include "AppletGroupJoin.h"
 #include "AppletGroupJoinSearch.h"
 #include "AppletHostGroupStatus.h"
+#include "AppletHostNetworkStatus.h"
+#include "AppletJoinGroupStatus.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
 #include "AppletLog.h"
@@ -91,7 +93,6 @@
 #include "AppletSettingsMessenger.h"
 #include "AppletSettingsRandomConnect.h"
 #include "AppletSettingsRandomConnectRelay.h"
-// #include "AppletSettingsRelay.h"
 #include "AppletSettingsShareFiles.h"
 #include "AppletSettingsShareWebCam.h"
 #include "AppletSettingsStoryboard.h"
@@ -260,6 +261,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
 
     case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
+    case eAppletHostNetworkStatus:          appletDialog = new AppletHostNetworkStatus( m_MyApp, parent ); break;
+    case eAppletJoinGroupStatus:            appletDialog = new AppletJoinGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
     case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
