@@ -1502,3 +1502,8 @@ bool P2PEngine::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUI
 	return m_PluginMgr.fromGuiMultiSessionAction( mSessionAction, onlineId, pos0to100000, lclSessionId );
 }
 
+//============================================================================
+int P2PEngine::fromGuiGetJoinedListCount( EPluginType pluginType )
+{
+	return getHostJoinMgr().fromGuiGetJoinedListCount( pluginType );
+}

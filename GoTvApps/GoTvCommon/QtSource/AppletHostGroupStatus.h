@@ -22,25 +22,25 @@
 
 #include "ui_AppletHostGroupStatus.h"
  
-class AppletHostGroupStatus : public AppletSettingsHostBase
+class AppletHostGroupStatus : public AppletBase
 {
 	Q_OBJECT
 public:
     AppletHostGroupStatus( AppCommon& app, QWidget * parent );
 	virtual ~AppletHostGroupStatus();
 
-    PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
-    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
+    PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_GroupHostPermissionWidget; }
+    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissionWidget; }
+    PermissionWidget*           getRandomConnectPermissionWidget()  { return ui.m_RandomConnectPermissionWidget; }
 
 protected slots:
-    void                        slotApplyServiceSettings();
+    void                        slotHostRequirementsButtonClicked();
+    void                        slotUpdateStatusTimeout();
 
 protected:
-    void                        connectServiceWidgets();
-    void                        loadPluginSetting();
-    void                        savePluginSetting();
-
     Ui::AppletHostGroupStatusUi     ui;
+
+    QTimer*                     m_UpdateStatusTimer;
 };
 
 

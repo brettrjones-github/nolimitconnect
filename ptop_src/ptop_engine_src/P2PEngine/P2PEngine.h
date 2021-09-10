@@ -360,6 +360,7 @@ public:
 
     virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) override;
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual int					fromGuiGetJoinedListCount( EPluginType pluginType ) override;
 
 	//========================================================================
 	// to gui

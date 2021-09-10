@@ -45,7 +45,7 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     m_CameraSourceAvail = GuiHelpers::isCameraSourceAvailable();
     ui.setupUi( this );
-    QSize frameSize( GuiParams::getThumbnailSize().width() + 30, GuiParams::getThumbnailSize().height() + 30 );
+    QSize frameSize( GuiParams::getThumbnailSize().width() + 20, GuiParams::getThumbnailSize().height() + 20 );
     ui.m_ThumbnailFrame->setFixedSize( frameSize );
 
     connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( slotSnapShotButClick() ) );

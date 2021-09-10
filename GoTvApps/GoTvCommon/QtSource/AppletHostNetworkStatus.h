@@ -22,25 +22,25 @@
 
 #include "ui_AppletHostNetworkStatus.h"
  
-class AppletHostNetworkStatus : public AppletSettingsHostBase
+class AppletHostNetworkStatus : public AppletBase
 {
 	Q_OBJECT
 public:
     AppletHostNetworkStatus( AppCommon& app, QWidget * parent );
 	virtual ~AppletHostNetworkStatus();
 
-    PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
-    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
+    PermissionWidget*           getNetworkHostPermissionWidget()    { return ui.m_NetworkHostPermissionWidget; }
+    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissionWidget; }
+    PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_GroupPermissionWidget; }
 
 protected slots:
-    void                        slotApplyServiceSettings();
+    void                        slotHostRequirementsButtonClicked();
+    void                        slotUpdateStatusTimeout();
 
 protected:
-    void                        connectServiceWidgets();
-    void                        loadPluginSetting();
-    void                        savePluginSetting();
-
     Ui::AppletHostNetworkStatusUi     ui;
+
+    QTimer*                     m_UpdateStatusTimer;
 };
 
 

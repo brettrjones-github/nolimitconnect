@@ -19,23 +19,20 @@
   <property name="windowTitle">
    <string>Host A Group</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
-   <item>
+   <item row="0" column="0">
     <widget class="QGroupBox" name="ItemsGroupBox">
      <property name="minimumSize">
       <size>
@@ -46,7 +43,22 @@
      <property name="title">
       <string/>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
        <widget class="QPushButton" name="m_HostingRequirementsButton">
         <property name="text">
@@ -55,24 +67,128 @@
        </widget>
       </item>
       <item>
-       <widget class="PluginSettingsWidget" name="m_PluginSettingsWidget" native="true"/>
+       <widget class="PermissionWidget" name="m_NetworkHostPermissionWidget" native="true"/>
       </item>
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Other Services Required To Host A Group</string>
+         <string>Other Services Required To Host A Network</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Recommend Anybody permission level</string>
+         <string>Recommend Connection Test Permission Anybody</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PermissionWidget" name="m_ConnectTestPermissinWidget" native="true"/>
+       <widget class="PermissionWidget" name="m_ConnectTestPermissionWidget" native="true"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>If your network host does not have many groups</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>You might want to host a group on the same device</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PermissionWidget" name="m_GroupPermissionWidget" native="true"/>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_OpenPortCheckBox">
+        <property name="text">
+         <string>Has open port to recieve connections</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_NetworkHostPermissionCheckBox">
+        <property name="text">
+         <string>Network Host Is Enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_ConnectionTestPermissionCheckBox">
+        <property name="text">
+         <string>Connection Test Is Enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Group Listing Count:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_GroupListCountLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Status:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_HostingStatusText">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Url:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_UrlText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="FriendListWidget" name="friendListWidget" native="true">
@@ -100,12 +216,6 @@
    <class>FriendListWidget</class>
    <extends>QWidget</extends>
    <header>FriendListWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>PluginSettingsWidget</class>
-   <extends>QWidget</extends>
-   <header>PluginSettingsWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -2,892 +2,892 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetInfo.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetInfoDb.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetMgr.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetRxSession.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetTxSession.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetXferDb.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetXferMgr.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetXferSession.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BigListLib\BigList.cpp">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BigListLib\BigListDb.cpp">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BigListLib\BigListInfo.cpp">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BigListLib\BigListMgr.cpp">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_core.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_core_mips.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_core_neon.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_core_sse2.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_logging_file_handling.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_rdft.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_rdft_mips.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_rdft_neon.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_rdft_sse2.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\aec_resampler.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\atomic32_posix.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\atomic32_win.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\audio_device_buffer.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\audio_device_generic.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\audio_util.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\base64.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\block_mean_calculator.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\checks.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\common_types.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\cpu_features.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\criticalsection.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\delay_estimator.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\delay_estimator_wrapper.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\echo_cancellation.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\event.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\event_timer_posix.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\event_timer_win.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\event_wrapper.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\fileutils.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\fine_audio_buffer.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\logging.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\pathutils.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\platform_file.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\platform_thread.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\random.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\stringencode.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\stringutils.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\thread_checker_impl.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\tick_util.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\timeutils.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\urlencode.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\wav_file.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\wav_header.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionAnnounce.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionBase.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionIdle.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionIsMyPortOpen.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetServicesMgr.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetServiceUtils.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\ConnectRequest.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\DirectConnectTester.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\Firewall.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetConnector.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetPortForward.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkEventAvail.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkEventBase.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkEventLost.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkMgr.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateAnnounce.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateAvail.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateBase.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateGetRelayList.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateLost.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateMachine.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateOnlineDirect.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateOnlineThroughRelay.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateRelaySearch.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastBase.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastBroadcast.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastListen.cpp">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkMonitor\NetworkMonitor.cpp">
-      <Filter>ptop\NetworkMonitor</Filter>
+      <Filter>Source Files\NetworkMonitor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\BrowserHttpConnection.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\ContactList.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\EngineParams.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\EngineSettings.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\FileShareSettings.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PConnectList.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngine.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineAssetMgrCallbacks.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineConnect.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineConnections.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineContact.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineFromGui.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineIgnoredAndHackers.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineMediaProcessorCallbacks.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEnginePktAnnChanged.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEnginePktHandlers.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineRelay.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineScan.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineSearch.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineSktCallback.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\AudioJitterBuffer.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileLibraryDb.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileLibraryMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileRxSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileToXfer.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileTxSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferBaseMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileXferPluginSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\P2PSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBase.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginInvalid.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMgrSktApi.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginNetServices.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginTruthOrDare.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RcWebProxy.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\Relay.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayClientSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RelayServerSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RelaySession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\RxSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesDb.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesFinder.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\SharedFilesMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\TodGameSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\TxSession.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\VideoFeedMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\VoiceFeedMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScan.cpp">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanAction.cpp">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.cpp">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.cpp">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.cpp">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServer.cpp">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebServerHttp.cpp">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\WebServer\RcWebSkt.cpp">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\ring_buffer.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\randomization_functions.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\cpu_features_linux.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\cpu_features_android.cpp">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseService.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXferPktHandlers.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMessenger.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceAboutMe.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerFiles.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerPktHandlers.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayPktHandlers.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayTests.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostDb.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionRandomConnect.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetServiceHost.cpp">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkMonitor\NetStatusAccum.cpp">
-      <Filter>ptop\NetworkMonitor</Filter>
+      <Filter>Source Files\NetworkMonitor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineHostList.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\PluginSettings\PluginSetting.cpp">
-      <Filter>ptop\PluginSettings</Filter>
+      <Filter>Source Files\PluginSettings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\PluginSettings\PluginSettingDb.cpp">
-      <Filter>ptop\PluginSettings</Filter>
+      <Filter>Source Files\PluginSettings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\PluginSettings\PluginSettingMgr.cpp">
-      <Filter>ptop\PluginSettings</Filter>
+      <Filter>Source Files\PluginSettings</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineTimerThread.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkTest\QueryHostIdTest.cpp">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkTest\IsPortOpenTest.cpp">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkTest\PingResponseServer.cpp">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkTest\NetworkTestBase.cpp">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostDefs.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostConnectInterface.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkTest\RunUrlAction.cpp">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectionMgr.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectedListBase.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectedInfo.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\IConnectedCallback.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\IConnectRequest.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectedListAll.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginChatRoomHost.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestClient.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestHost.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginGroupClient.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginNetworkHost.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginGroupHost.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginNetworkSearchList.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostList.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostListEntry.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostClientMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostBaseMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostServerMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\ConnectReqInfo.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostServerSearchMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostClientSearchMgr.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostSearchEntry.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostedEntry.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.cpp">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobInfo.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobInfoDb.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobRxSession.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferDb.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferSession.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobMgr.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferMgr.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobTxSession.cpp">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\HandshakeInfo.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Connections\HandshakeList.cpp">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\User\User.cpp">
-      <Filter>ptop\User</Filter>
+      <Filter>Source Files\User</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\User\UserList.cpp">
-      <Filter>ptop\User</Filter>
+      <Filter>Source Files\User</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfo.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfoDb.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseMgr.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseRxSession.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseTxSession.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferDb.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferMgr.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferSession.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfo.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfoDb.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbMgr.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbRxSession.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbTxSession.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferDb.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferMgr.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferSession.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfo.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfoDb.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseMgr.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseRxSession.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseTxSession.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferDb.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferMgr.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferSession.cpp">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfo.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfoDb.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientMgr.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientRxSession.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientTxSession.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferDb.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferMgr.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferSession.cpp">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfo.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfoDb.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostMgr.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostRxSession.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostTxSession.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferDb.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferMgr.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferSession.cpp">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ConnectMgr\ConnectInfo.cpp">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ConnectMgr\ConnectInfoDb.cpp">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ConnectMgr\ConnectMgr.cpp">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BaseInfo\BaseInfo.cpp">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\P2PEngine\VxSktLoopback.cpp">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BaseInfo\BaseHostInfo.cpp">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.cpp">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.cpp">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.cpp">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BaseInfo\BaseJoinInfo.cpp">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfo.cpp">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfoDb.cpp">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinMgr.cpp">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBasePktHandlers.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginClientPeerUser.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginHostPeerUser.cpp">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineMgr.cpp">
-      <Filter>ptop\UserOnlineMgr</Filter>
+      <Filter>Source Files\UserOnlineMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BaseInfo\BaseSessionInfo.cpp">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferPktCreate.cpp">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferPktCreate.cpp">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetXferPktCreate.cpp">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -905,556 +905,556 @@
       <Filter>GoTvConfig</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetCallbackInterface.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetInfo.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetInfoDb.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetMgr.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetRxSession.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetTxSession.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetXferDb.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetXferMgr.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetMgr\AssetXferSession.h">
-      <Filter>ptop\AssetMgr</Filter>
+      <Filter>Source Files\AssetMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BigListLib\BigList.h">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BigListLib\BigListDb.h">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BigListLib\BigListInfo.h">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BigListLib\BigListLib.h">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BigListLib\BigListMgr.h">
-      <Filter>ptop\BigListLib</Filter>
+      <Filter>Source Files\BigListLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_common.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_core.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_core_internal.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_logging.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_logging_file_handling.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_rdft.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\aec_resampler.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\array_view.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\arraysize.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\atomic32.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\atomicops.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_device.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_device_buffer.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_device_config.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_device_defines.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_device_generic.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_processing.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\audio_util.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\base64.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\basictypes.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\block_mean_calculator.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\byteorder.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\checks.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\common_types.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\constructormagic.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\cpu_features_wrapper.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\critical_section_wrapper.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\criticalsection.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\delay_estimator.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\delay_estimator_internal.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\delay_estimator_wrapper.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\echo_cancellation.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\echo_cancellation_internal.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\echo_common.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\event.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\event_timer_posix.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\event_timer_win.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\event_wrapper.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\fake_audio_device.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\fileutils.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\fine_audio_buffer.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\format_macros.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\logging.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\module.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\module_common_types.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\pathutils.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\platform_file.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\platform_thread.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\platform_thread_types.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\random.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\real_fft.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\ring_buffer.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\safe_conversions.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\safe_conversions_impl.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\scoped_ptr.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\scoped_ref_ptr.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\scopedptrcollection.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\sec_buffer.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\signal_processing_library.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\spl_inl.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\spl_inl_armv7.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\spl_inl_mips.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\stringencode.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\stringutils.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\template_util.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\thread_annotations.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\thread_checker.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\thread_checker_impl.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\tick_util.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\timeutils.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\urlencode.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\wav_file.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\wav_header.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\WebRtcTypeDefs.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.h">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaClient.h">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.h">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\RawAudio.h">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\RawVideo.h">
-      <Filter>ptop\MediaProcessor</Filter>
+      <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionAnnounce.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionBase.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionIdle.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionIsMyPortOpen.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetServiceDefs.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetServiceHdr.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetServicesMgr.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetServiceUtils.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\ConnectRequest.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\DirectConnectTester.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\Firewall.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetConnector.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetPortForward.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkDefs.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkEventAvail.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkEventBase.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkEventLost.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkMgr.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateAnnounce.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateAvail.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateBase.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateGetRelayList.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateLost.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateMachine.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateOnlineDirect.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateOnlineThroughRelay.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateRelaySearch.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastBase.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastBroadcast.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastListen.h">
-      <Filter>ptop\Network</Filter>
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkMonitor\NetworkMonitor.h">
-      <Filter>ptop\NetworkMonitor</Filter>
+      <Filter>Source Files\NetworkMonitor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\BrowserHttpConnection.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\ContactList.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\EngineParams.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\EngineSettings.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\EngineSettingsDefaultValues.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\FileShareSettings.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\P2PConnectList.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\P2PEngine.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\AudioJitterBuffer.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileLibraryDb.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileLibraryMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileRxSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileShareXferSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileToXfer.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileTxSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferBaseMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileXferPluginSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\P2PSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBase.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginInvalid.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginNetServices.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginTruthOrDare.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RcWebProxy.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\Relay.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayClientTestSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelayServerTestSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RelaySession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\RxSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SessionMgrBase.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFileInfo.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesDb.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesFinder.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\SharedFilesMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\TodGameSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\TxSession.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\VideoFeedMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\VoiceFeedMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScan.h">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanAction.h">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.h">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanPic.h">
-      <Filter>ptop\Search</Filter>
+      <Filter>Source Files\Search</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageBuilder.h">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebPageSettings.h">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServer.h">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebServerLib.h">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebSkt.h">
-      <Filter>ptop\WebServer</Filter>
+      <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h">
       <Filter>GuiInterface</Filter>
@@ -1481,361 +1481,361 @@
       <Filter>GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseService.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostService.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginFileXfer.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceAboutMe.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostDb.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostDefs.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionRandomConnect.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetServiceHost.h">
-      <Filter>ptop\NetServices</Filter>
+      <Filter>Source Files\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkMonitor\NetStatusAccum.h">
-      <Filter>ptop\NetworkMonitor</Filter>
+      <Filter>Source Files\NetworkMonitor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\PluginSettings\PluginSetting.h">
-      <Filter>ptop\PluginSettings</Filter>
+      <Filter>Source Files\PluginSettings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\PluginSettings\PluginSettingDb.h">
-      <Filter>ptop\PluginSettings</Filter>
+      <Filter>Source Files\PluginSettings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\PluginSettings\PluginSettingMgr.h">
-      <Filter>ptop\PluginSettings</Filter>
+      <Filter>Source Files\PluginSettings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkTest\QueryHostIdTest.h">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkTest\IsPortOpenTest.h">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkTest\PingResponseServer.h">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkTest\NetworkTestBase.h">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostConnectInterface.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkTest\RunUrlAction.h">
-      <Filter>ptop\NetworkTest</Filter>
+      <Filter>Source Files\NetworkTest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectionMgr.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectedListBase.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectedInfo.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\IConnectedCallback.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\IConnectRequest.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectedListAll.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomHost.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestClient.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginConnectionTestHost.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginGroupClient.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginNetworkHost.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginGroupHost.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginNetworkSearchList.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostList.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostListEntry.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostBaseMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostClientMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostServerMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\ConnectReqInfo.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostServerSearchMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostClientSearchMgr.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostSearchEntry.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostedEntry.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.h">
-      <Filter>ptop\HostMgr</Filter>
+      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobCallbackInterface.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobInfo.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobInfoDb.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobRxSession.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobTxSession.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferDb.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferSession.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobMgr.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobXferMgr.h">
-      <Filter>ptop\BlobXferMgr</Filter>
+      <Filter>Source Files\BlobXferMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\HandshakeInfo.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Connections\HandshakeList.h">
-      <Filter>ptop\Connections</Filter>
+      <Filter>Source Files\Connections</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\User\User.h">
-      <Filter>ptop\User</Filter>
+      <Filter>Source Files\User</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\User\UserList.h">
-      <Filter>ptop\User</Filter>
+      <Filter>Source Files\User</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfo.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseInfoDb.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseMgr.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseRxSession.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseTxSession.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferDb.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferMgr.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseXferSession.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbCallbackInterface.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfo.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfoDb.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbMgr.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbRxSession.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbTxSession.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferDb.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferMgr.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferSession.h">
-      <Filter>ptop\ThumbMgr</Filter>
+      <Filter>Source Files\ThumbMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfo.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfoDb.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseMgr.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseRxSession.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseTxSession.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferDb.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferMgr.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseXferSession.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientCallbackInterface.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfo.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientInfoDb.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientMgr.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientRxSession.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientTxSession.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferDb.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferMgr.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferClientMgr\OfferClientXferSession.h">
-      <Filter>ptop\OfferClientMgr</Filter>
+      <Filter>Source Files\OfferClientMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostCallbackInterface.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfo.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostInfoDb.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostMgr.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostRxSession.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostTxSession.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferDb.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferMgr.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferHostMgr\OfferHostXferSession.h">
-      <Filter>ptop\OfferHostMgr</Filter>
+      <Filter>Source Files\OfferHostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseCallbackInterface.h">
-      <Filter>ptop\OfferBase</Filter>
+      <Filter>Source Files\OfferBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ConnectMgr\ConnectCallbackInterface.h">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ConnectMgr\ConnectInfo.h">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ConnectMgr\ConnectInfoDb.h">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\ConnectMgr\ConnectMgr.h">
-      <Filter>ptop\ConnectMgr</Filter>
+      <Filter>Source Files\ConnectMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BaseInfo\BaseInfo.h">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h">
       <Filter>GuiInterface</Filter>
@@ -1862,58 +1862,58 @@
       <Filter>GuiInterface\OsInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\VxSktLoopback.h">
-      <Filter>ptop\P2PEngine</Filter>
+      <Filter>Source Files\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BaseInfo\BaseHostInfo.h">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinCallbackInterface.h">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.h">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.h">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.h">
-      <Filter>ptop\HostJoinMgr</Filter>
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BaseInfo\BaseJoinInfo.h">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinCallbackInterface.h">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfo.h">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfoDb.h">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinMgr.h">
-      <Filter>ptop\UserJoinMgr</Filter>
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginClientPeerUser.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginHostPeerUser.h">
-      <Filter>ptop\Plugins</Filter>
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineMgr.h">
-      <Filter>ptop\UserOnlineMgr</Filter>
+      <Filter>Source Files\UserOnlineMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineCallbackInterface.h">
-      <Filter>ptop\UserOnlineMgr</Filter>
+      <Filter>Source Files\UserOnlineMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BaseInfo\BaseSessionInfo.h">
-      <Filter>ptop\BaseInfo</Filter>
+      <Filter>Source Files\BaseInfo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\AssetBaseCallbackInterface.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\BaseXferInterface.h">
-      <Filter>ptop\AssetBase</Filter>
+      <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1965,98 +1965,98 @@
     <Filter Include="GuiInterface\OsWin32">
       <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop">
+    <Filter Include="Source Files">
       <UniqueIdentifier>{4ec8ff0d-76a6-4311-89b3-1305b2840f0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\AssetMgr">
+    <Filter Include="Source Files\AssetMgr">
       <UniqueIdentifier>{d695dc88-9f47-48f0-9a5b-e4bc8a13199a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\BigListLib">
+    <Filter Include="Source Files\BigListLib">
       <UniqueIdentifier>{7c212114-33f1-4d7b-8bbb-a6c70525bc4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\EchoCancel">
+    <Filter Include="Source Files\EchoCancel">
       <UniqueIdentifier>{98ef5ad3-76a5-49e3-8990-32714e2ead7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\MediaProcessor">
+    <Filter Include="Source Files\MediaProcessor">
       <UniqueIdentifier>{7502e55c-5a94-4545-81cf-481112095776}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\NetServices">
+    <Filter Include="Source Files\NetServices">
       <UniqueIdentifier>{ec6ca72a-ea81-4adb-998b-76b54936e9f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\Network">
+    <Filter Include="Source Files\Network">
       <UniqueIdentifier>{802cfdd5-8c6a-47f9-a68d-cc5b138113c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\NetworkMonitor">
+    <Filter Include="Source Files\NetworkMonitor">
       <UniqueIdentifier>{c908196f-369b-47a6-bb2b-5097fb0d3570}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\P2PEngine">
+    <Filter Include="Source Files\P2PEngine">
       <UniqueIdentifier>{153fa2e1-3837-4693-b311-aeef7be2cfcd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\Plugins">
+    <Filter Include="Source Files\Plugins">
       <UniqueIdentifier>{cf562f1b-4f74-4a52-b52b-705d9b17025f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\Search">
+    <Filter Include="Source Files\Search">
       <UniqueIdentifier>{c0217daa-8641-440a-bf64-9fbed6a04b7a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\WebServer">
+    <Filter Include="Source Files\WebServer">
       <UniqueIdentifier>{caa85f20-2991-480c-8d7d-78d5db3ecf35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\HostMgr">
+    <Filter Include="Source Files\HostMgr">
       <UniqueIdentifier>{5d9a321a-319e-43d0-941b-9e189c002499}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\PluginSettings">
+    <Filter Include="Source Files\PluginSettings">
       <UniqueIdentifier>{79d61f45-dfd4-45b2-aff4-e88593f636a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\NetworkTest">
+    <Filter Include="Source Files\NetworkTest">
       <UniqueIdentifier>{0f4e0e33-86c3-4f87-9a0e-ca56a6210b54}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\Connections">
+    <Filter Include="Source Files\Connections">
       <UniqueIdentifier>{43bc1941-42bb-4aa6-8541-8c04a3f317c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\BlobXferMgr">
+    <Filter Include="Source Files\BlobXferMgr">
       <UniqueIdentifier>{68c61962-7aad-4927-bc06-08d952dcc131}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\User">
+    <Filter Include="Source Files\User">
       <UniqueIdentifier>{d8b95c40-fa5a-4e3e-b03e-5a33c754d6b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\ThumbMgr">
+    <Filter Include="Source Files\ThumbMgr">
       <UniqueIdentifier>{85ae1a80-8839-4ec0-8992-1e2098f01c0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\AssetBase">
+    <Filter Include="Source Files\AssetBase">
       <UniqueIdentifier>{9f3693fb-5343-4243-af51-b0ed6fb60a55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\OfferBase">
+    <Filter Include="Source Files\OfferBase">
       <UniqueIdentifier>{df8389e0-0bdd-4773-9dfe-9ba516d0d026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\OfferClientMgr">
+    <Filter Include="Source Files\OfferClientMgr">
       <UniqueIdentifier>{910c7eeb-e37d-4ff4-9de5-f7b01e4f1292}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\OfferHostMgr">
+    <Filter Include="Source Files\OfferHostMgr">
       <UniqueIdentifier>{f8868528-d130-4a76-81b0-d74ac433ab10}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\ConnectMgr">
+    <Filter Include="Source Files\ConnectMgr">
       <UniqueIdentifier>{26c521ac-2eac-49e1-b3c7-1edef2efe660}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\BaseInfo">
+    <Filter Include="Source Files\BaseInfo">
       <UniqueIdentifier>{019f1a11-04eb-4df7-a4e1-77d4aee987f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\HostJoinMgr">
+    <Filter Include="Source Files\HostJoinMgr">
       <UniqueIdentifier>{ac65286f-e7a8-467f-b13c-c685c20ff0d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\UserJoinMgr">
+    <Filter Include="Source Files\UserJoinMgr">
       <UniqueIdentifier>{5e2fa986-b854-42bf-aa66-3f3e7c1b489d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ptop\UserOnlineMgr">
+    <Filter Include="Source Files\UserOnlineMgr">
       <UniqueIdentifier>{561633c7-da30-44ae-8a97-6d77364bfe60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\GoTvVersion.txt" />
     <Text Include="..\..\ptop_engine_src\EchoCancel\WEBRTC_LICENSE.txt">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </Text>
     <Text Include="..\..\ptop_engine_src\EchoCancel\WEBRTC_LICENSE_THIRD_PARTY.txt">
-      <Filter>ptop\EchoCancel</Filter>
+      <Filter>Source Files\EchoCancel</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

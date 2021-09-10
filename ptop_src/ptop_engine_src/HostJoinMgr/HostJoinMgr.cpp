@@ -220,3 +220,22 @@ bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo )
     unlockResources();
     return result;
 }
+
+//============================================================================
+int HostJoinMgr::fromGuiGetJoinedListCount( EPluginType pluginType )
+{
+    int joinedCnt = 0;
+    lockResources();
+
+    HostJoinInfo* joinFoundInfo = nullptr;
+    for( auto joinInfo : m_HostJoinInfoList )
+    {
+        if( joinInfo->getPluginType() == pluginType )
+        {
+            joinedCnt++;
+        }
+    }
+
+    unlockResources();
+    return joinedCnt;
+}

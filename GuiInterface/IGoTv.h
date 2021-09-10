@@ -598,6 +598,9 @@ public:
     virtual void				fromGuiQuerySessionHistory( VxGUID& historyId );
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 );
 
+    /// return number of items currently in list
+    virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
+
   
     //============================================================================
     //=== utilities ===//

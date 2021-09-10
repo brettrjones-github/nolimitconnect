@@ -1,4 +1,4 @@
-#pragma onceAppletJoinGroupStatus
+#pragma
 //============================================================================
 // Copyright (C) 2020 Brett R. Jones
 //

@@ -32,6 +32,7 @@ public:
 	virtual ~HostJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
+    virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
 

@@ -415,4 +415,6 @@ public:
 	virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL ) = 0;
 	/// Debug only send capture of log messages to GUI
 	virtual void				fromGuiSendLog( uint32_t u32LogFlags ) = 0;
+
+	virtual int					fromGuiGetJoinedListCount( EPluginType pluginType ) = 0;
 };

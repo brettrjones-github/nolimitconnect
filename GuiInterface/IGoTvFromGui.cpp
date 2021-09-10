@@ -754,3 +754,9 @@ bool IGoTv::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& o
 {
     return getPtoP().fromGuiMultiSessionAction( mSessionAction, onlineId, pos0to100000 );
 }
+
+//============================================================================
+int IGoTv::fromGuiGetJoinedListCount( EPluginType pluginType )
+{
+    return getPtoP().fromGuiGetJoinedListCount( pluginType );
+}
