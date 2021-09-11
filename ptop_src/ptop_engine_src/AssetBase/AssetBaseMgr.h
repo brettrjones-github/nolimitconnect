@@ -123,7 +123,7 @@ public:
 												const char *	assetTag = "", 
                                                 int64_t			timestamp = 0 );
 
-	bool						addAsset( AssetBaseInfo& assetInfo );
+	bool						addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset );
 
     bool						updateAsset( AssetBaseInfo& assetInfo );
 	bool						removeAsset( std::string fileName );

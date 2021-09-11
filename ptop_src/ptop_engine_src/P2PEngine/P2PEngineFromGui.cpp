@@ -488,20 +488,24 @@ bool P2PEngine::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, con
 bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& assetInfo, int pos0to100000 )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiAssetAction" );
+	AssetBaseInfo* createdAssetInfo = nullptr;
 	if( eAssetActionAddToAssetMgr == assetAction )
 	{
-		return m_AssetMgr.addAsset( assetInfo );
+		return m_AssetMgr.addAsset( assetInfo, createdAssetInfo );
 	}
 	else if( eAssetActionAddAssetAndSend == assetAction )
 	{
 		assetInfo.setAssetSendState( eAssetSendStateTxProgress );
-		bool result = m_AssetMgr.addAsset( assetInfo );
+		bool result = m_AssetMgr.addAsset( assetInfo, createdAssetInfo );
         if( false == result )
         {
             LogMsg( LOG_ERROR, "PEngine::fromGuiAssetAction failed to add asset\n" );
         }
 
-		fromGuiSendAsset( assetInfo );
+		if( createdAssetInfo )
+		{
+			fromGuiSendAsset( *createdAssetInfo );
+		}	
 	}
 	else if( eAssetActionAssetResend == assetAction )
 	{

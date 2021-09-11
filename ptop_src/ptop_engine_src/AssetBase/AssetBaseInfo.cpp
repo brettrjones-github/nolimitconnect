@@ -147,6 +147,12 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& a
 }
 
 //============================================================================
+AssetBaseInfo::~AssetBaseInfo()
+{
+	// LogMsg( LOG_DEBUG, "~AssetBaseInfo %p %s", this, m_UniqueId.toHexString().c_str() );
+}
+
+//============================================================================
 AssetBaseInfo& AssetBaseInfo::operator=( const AssetBaseInfo& rhs ) 
 {	
 	if( this != &rhs )

@@ -52,6 +52,12 @@ BaseInfo::BaseInfo( const BaseInfo& rhs )
 }
 
 //============================================================================
+BaseInfo::~BaseInfo()
+{
+    // LogMsg( LOG_DEBUG, "~BaseInfo %p %s", this, m_ThumbId.toHexString().c_str() );
+}
+
+//============================================================================
 BaseInfo& BaseInfo::operator=( const BaseInfo& rhs )
 {
     if( this != &rhs )

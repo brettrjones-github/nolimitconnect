@@ -27,8 +27,8 @@
 namespace
 {
     static const int            TINY_PUSHBUTTON_SIZE = 18;
-    static const int            SMALL_PUSHBUTTON_SIZE = 34;
-    static const int            MEDIUM_PUSHBUTTON_SIZE = 40;
+    static const int            SMALL_PUSHBUTTON_SIZE = 30;
+    static const int            MEDIUM_PUSHBUTTON_SIZE = 38;
     static const int            LARGE_PUSHBUTTON_SIZE = 46;
 }
 
@@ -115,7 +115,7 @@ QSize GuiParams::getButtonSize( EButtonSize buttonSize )
 //============================================================================
 QSize GuiParams::getThumbnailSize( void )
 {
-    return QSize( 240, 240 ); 
+    return QSize( 120, 120 ); 
 }
 
 //============================================================================

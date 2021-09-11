@@ -257,13 +257,31 @@ ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime
 //============================================================================
 bool ThumbMgr::fromGuiThumbCreated( ThumbInfo& thumbInfo )
 {
-    if( AssetBaseMgr::addAsset( thumbInfo ) )
+    // thumbInfo will be destroyed.. only use the object created by addAsset
+    AssetBaseInfo* createdThumbInfo = nullptr;
+    if( AssetBaseMgr::addAsset( thumbInfo, createdThumbInfo ) && createdThumbInfo )
     {
-        if( saveToDatabase( thumbInfo ) )
+        ThumbInfo* newThumbInfo = dynamic_cast<ThumbInfo*>(createdThumbInfo);
+        if( newThumbInfo )
         {
-            announceThumbAdded( thumbInfo );
-            return true;
+            if( saveToDatabase( *newThumbInfo ) )
+            {
+                announceThumbAdded( *newThumbInfo );
+                return true;
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "ThumbMgr::fromGuiThumbCreated failed save to db" );
+            }
         }
+        else
+        {
+            LogMsg( LOG_ERROR, "ThumbMgr::fromGuiThumbCreated failed cast to ThumbInfo" );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::fromGuiThumbCreated failed add asset" );
     }
 
     return false;
