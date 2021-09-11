@@ -632,6 +632,8 @@ void AppletNetworkSettings::onSaveButtonClick( void )
 
         m_MyApp.getEngine().getEngineSettings().setNetworkKey( keyString );
         updateSettingsFromDlg();
+        // need to apply settings also or what is used in ptop engine may not be what is shown in dialog which is confusing
+        slotApplySettingsButtonClick();
         QMessageBox::information( this, QObject::tr( "Network Setting" ), QObject::tr( "Network setting was saved." ) );
         //QMessageBox::warning( this, QObject::tr( "Network Key" ), QObject::tr( "You may need to restart application to avoid connection problems." ) );
     }
