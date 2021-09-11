@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
+    <width>296</width>
     <height>512</height>
    </rect>
   </property>
@@ -87,9 +87,19 @@
        <widget class="PermissionWidget" name="m_ConnectTestPermissionWidget" native="true"/>
       </item>
       <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Optional: Provide Random Connect Service</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PermissionWidget" name="m_RandomConnectPermissionWidget" native="true"/>
+      </item>
+      <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>If your network host does not have many groups</string>
+         <string>If your network does not have many group hosts</string>
         </property>
        </widget>
       </item>

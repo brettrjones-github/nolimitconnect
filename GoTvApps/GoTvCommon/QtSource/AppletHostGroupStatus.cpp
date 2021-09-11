@@ -33,7 +33,6 @@ AppletHostGroupStatus::AppletHostGroupStatus( AppCommon& app, QWidget * parent )
     ui.m_HostingRequirementsButton->setVisible( false );
     getGroupHostPermissionWidget()->setPluginType( ePluginTypeHostGroup );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
-    getRandomConnectPermissionWidget()->setPluginType( ePluginTypeHostRandomConnect );
 
     ui.m_OpenPortCheckBox->setEnabled( false );
     ui.m_GroupHostPermissionCheckBox->setEnabled( false );

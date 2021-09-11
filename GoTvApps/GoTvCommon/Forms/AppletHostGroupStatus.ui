@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
+    <width>299</width>
     <height>512</height>
    </rect>
   </property>
@@ -85,16 +85,6 @@
       </item>
       <item>
        <widget class="PermissionWidget" name="m_ConnectTestPermissionWidget" native="true"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>You might want to host random connect service also</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PermissionWidget" name="m_RandomConnectPermissionWidget" native="true"/>
       </item>
       <item>
        <widget class="QCheckBox" name="m_OpenPortCheckBox">

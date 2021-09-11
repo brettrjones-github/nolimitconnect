@@ -33,6 +33,7 @@ AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * pare
     ui.m_HostingRequirementsButton->setVisible( false );
     getNetworkHostPermissionWidget()->setPluginType( ePluginTypeHostNetwork );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
+    getRandomConnectPermissionWidget()->setPluginType( ePluginTypeHostRandomConnect );
     getGroupHostPermissionWidget()->setPluginType( ePluginTypeHostGroup );
 
     ui.m_OpenPortCheckBox->setEnabled( false );

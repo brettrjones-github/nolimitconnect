@@ -31,7 +31,6 @@ public:
 
     PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_GroupHostPermissionWidget; }
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissionWidget; }
-    PermissionWidget*           getRandomConnectPermissionWidget()  { return ui.m_RandomConnectPermissionWidget; }
 
 protected slots:
     void                        slotHostRequirementsButtonClicked();
