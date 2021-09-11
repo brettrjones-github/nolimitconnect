@@ -29,6 +29,9 @@ PluginSettingsWidget::PluginSettingsWidget( QWidget * parent )
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );
     connect( ui.m_ThumbnailChooseWidget, SIGNAL( signalThumbnailAssetChanged() ), this, SLOT( slotThumbnailAssetChanged() ) );
+    ui.m_DescriptionEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
+    ui.m_GreetingEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
+    ui.m_RejectEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
 }
 
 //============================================================================

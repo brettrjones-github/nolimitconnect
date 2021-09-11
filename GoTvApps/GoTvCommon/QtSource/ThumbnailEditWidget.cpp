@@ -75,8 +75,17 @@ bool ThumbnailEditWidget::loadFromAsset( ThumbInfo * thumbAsset )
 bool ThumbnailEditWidget::generateThumbAsset( ThumbInfo& assetInfoOut )
 {
     bool assetGenerated = false;
-    VxGUID assetGuid;
-    VxGUID::generateNewVxGUID( assetGuid );
+    if( !m_AsssetId.isVxGUIDValid() )
+    {
+        m_AsssetId.initializeWithNewVxGUID();
+    }
+
+    VxGUID assetGuid = m_AsssetId;
+    if( !assetGuid.isVxGUIDValid() )
+    {
+        VxGUID::generateNewVxGUID( assetGuid );
+    }
+
     QString fileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
     fileName += assetGuid.toHexString().c_str();
     fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc

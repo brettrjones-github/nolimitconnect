@@ -362,11 +362,12 @@ bool AssetBaseMgr::addAssetFile(	EAssetType      assetType,
 }
 
 //============================================================================
-bool AssetBaseMgr::addAsset( AssetBaseInfo& assetInfo )
+bool AssetBaseMgr::addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset )
 {
 	AssetBaseInfo * newAssetBaseInfo = createAssetInfo( assetInfo );
 	LogMsg( LOG_INFO, "AssetBaseMgr::addAsset" );
-	return insertNewInfo( newAssetBaseInfo );
+	retCreatedAsset = newAssetBaseInfo;
+	return newAssetBaseInfo != nullptr && insertNewInfo( newAssetBaseInfo );
 }
 
 //============================================================================

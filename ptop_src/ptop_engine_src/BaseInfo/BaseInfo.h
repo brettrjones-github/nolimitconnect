@@ -27,7 +27,7 @@ public:
     BaseInfo( VxGUID& creatorId, VxGUID& assetId, int64_t modifiedTime = 0 );
 	BaseInfo( const BaseInfo& rhs );
 
-    virtual ~BaseInfo() = default;
+    virtual ~BaseInfo();
 
 	BaseInfo&				    operator=( const BaseInfo& rhs ); 
 

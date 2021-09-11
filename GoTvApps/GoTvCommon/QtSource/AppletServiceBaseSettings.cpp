@@ -47,6 +47,8 @@ void AppletServiceBaseSettings::setupServiceBaseApplet( EApplet applet, EPluginT
     }
 
     connectServiceWidgets();
+
+    ui.m_DescriptionEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeMedium ).height() );
 }
 
 //============================================================================

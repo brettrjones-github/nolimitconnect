@@ -558,7 +558,12 @@ void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * p
         // make history id his id
         assetInfo.setHistoryId( netIdent->getMyOnlineId() );
         assetInfo.setAssetSendState( eAssetSendStateRxSuccess );
-        m_AssetBaseMgr.addAsset( assetInfo );
+		AssetBaseInfo* createdAsset = nullptr;
+		if( !m_AssetBaseMgr.addAsset( assetInfo, createdAsset ) )
+		{
+			LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendReq: failed add asset" );
+		}
+
         IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
         IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
     }
@@ -643,7 +648,12 @@ void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase * sktBase, VxPktHdr * pk
 		// make history id his id
 		assetInfo.setHistoryId( netIdent->getMyOnlineId() );
 		assetInfo.setAssetSendState( eAssetSendStateRxSuccess );
-		m_AssetBaseMgr.addAsset( assetInfo );
+		AssetBaseInfo* createdAsset = nullptr;
+		if( !m_AssetBaseMgr.addAsset( assetInfo, createdAsset ) )
+		{
+			LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendReq: failed add asset" );
+		}
+
 		m_XferInterface.txPacket( netIdent, sktBase, pktReply );
 		IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
 		IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
@@ -2210,7 +2220,11 @@ void AssetBaseXferMgr::onAssetBaseReceived( AssetBaseRxSession * xferSession, As
 				assetInfo.setAssetSendState(  eAssetSendStateRxFail );
 			}
 
-			m_AssetBaseMgr.addAsset( assetInfo );
+			AssetBaseInfo* createdAsset = nullptr;
+			if( !m_AssetBaseMgr.addAsset( assetInfo, createdAsset ) )
+			{
+				LogMsg( LOG_ERROR, "AssetBaseXferMgr::onAssetBaseReceived: failed add asset" );
+			}
 
 			if( eXferErrorNone == error )
 			{

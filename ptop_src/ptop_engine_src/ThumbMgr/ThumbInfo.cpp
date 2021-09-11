@@ -82,6 +82,12 @@ ThumbInfo::ThumbInfo( const char* fileName, uint64_t fileLen, VxGUID& assetId )
 }
 
 //============================================================================
+ThumbInfo::~ThumbInfo()
+{
+	// LogMsg( LOG_DEBUG, "~ThumbInfo %p %s", this, m_UniqueId.toHexString().c_str() );
+}
+
+//============================================================================
 ThumbInfo& ThumbInfo::operator=( const ThumbInfo& rhs ) 
 {	
 	if( this != &rhs )
