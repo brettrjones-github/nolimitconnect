@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GroupJoinUi</class>
- <widget class="QWidget" name="GroupJoinUi">
+ <class>AppletGroupJoinUi</class>
+ <widget class="QWidget" name="AppletGroupJoinUi">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>269</width>
-    <height>702</height>
+    <width>283</width>
+    <height>626</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,20 +74,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="m_NetworkHostButton">
-        <property name="text">
-         <string>Choose Network Host</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_NetHostLabel">
-        <property name="text">
-         <string>Network Host Not Selected</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="m_GroupHostButton">
         <property name="text">
          <string>Choose Group Host</string>
@@ -133,7 +119,21 @@
        </widget>
       </item>
       <item>
-       <widget class="FriendListWidget" name="friendListWidget" native="true">
+       <widget class="QPushButton" name="m_RefreshListButton">
+        <property name="text">
+         <string>Refresh Group List</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Group Host List From Network Host</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="HostListWidget" name="m_HostListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -149,14 +149,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FriendListWidget</class>
+   <class>HostListWidget</class>
    <extends>QWidget</extends>
-   <header>FriendListWidget.h</header>
+   <header location="global">HostListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../gotvcommon.qrc"/>
+  <include location="../NoLimitConnect.qrc"/>
  </resources>
  <connections/>
 </ui>
