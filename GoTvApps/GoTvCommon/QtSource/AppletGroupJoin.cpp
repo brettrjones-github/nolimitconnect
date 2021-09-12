@@ -23,6 +23,7 @@
 AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_GROUP_JOIN, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletGroupJoin );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );

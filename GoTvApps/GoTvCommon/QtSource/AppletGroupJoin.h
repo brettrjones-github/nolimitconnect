@@ -24,7 +24,7 @@ public:
 	virtual ~AppletGroupJoin();
 
 protected:
-    Ui::GroupJoinUi          ui;
+    Ui::AppletGroupJoinUi          ui;
 };
 
 
