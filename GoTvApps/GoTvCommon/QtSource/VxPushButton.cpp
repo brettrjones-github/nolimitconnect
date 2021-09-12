@@ -443,7 +443,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 
     if( m_IconOverrideImageWasSet && ( !m_IconOverrideImageWasDrawn || m_IconImage.isNull() || ( drawRect.size() != m_LastIconSize ) ) )
     {
-        QImage resizedPicmap = m_IconOverrideImage.scaled( drawRect.size(), Qt::KeepAspectRatio );
+        QImage resizedPicmap = m_IconOverrideImage.scaled( drawRect.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
         m_IconImage = QPixmap::fromImage( resizedPicmap );
         m_LastIconSize = drawRect.size();
         m_LastIconColor = iconColor;

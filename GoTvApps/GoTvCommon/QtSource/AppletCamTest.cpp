@@ -238,7 +238,7 @@ void AppletCamTest::setCameraButtonVisibility( bool visible )
 void AppletCamTest::resizeBitmapToFitScreen( QLabel * VideoScreen, QImage& oPicBitmap )
 {
     QSize screenSize( VideoScreen->width(), VideoScreen->height() );
-    oPicBitmap = oPicBitmap.scaled(screenSize, Qt::KeepAspectRatio);
+    oPicBitmap = oPicBitmap.scaled( screenSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
 }
 
 //============================================================================

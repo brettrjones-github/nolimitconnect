@@ -113,7 +113,7 @@ InputFaceWidget::InputFaceWidget( QWidget * parent )
         }
 
 		QPixmap faceImage( resBuf );
-		QPixmap picPixmap = faceImage.scaled(imageSize, Qt::KeepAspectRatio);
+		QPixmap picPixmap = faceImage.scaled(imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
 		faceLabel->setPixmap( picPixmap );
 	}
 

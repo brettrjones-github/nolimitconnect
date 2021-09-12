@@ -87,7 +87,7 @@ void VxLabel::showScaledImage( QImage& picBitmap )
 		float picScale = ( scaleWidth < scaleHeight ) ? scaleWidth : scaleHeight;
 
 		QSize newPicSize( picWidth * picScale, picHeight * picScale );
-		QImage scaledBitmap = picBitmap.scaled( newPicSize, Qt::KeepAspectRatio );
+		QImage scaledBitmap = picBitmap.scaled( newPicSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
 		if( ! scaledBitmap.isNull() )
 		{
 			setPixmap( QPixmap::fromImage( scaledBitmap ) );
@@ -323,5 +323,5 @@ void VxLabel::slotPlayVideoFrame( QImage picBitmap, int iRotate )
 void VxLabel::resizeBitmapToFitScreen( QImage& picBitmap )
 {
 	QSize screenSize( this->width(), this->height() );
-	picBitmap = picBitmap.scaled(screenSize, Qt::KeepAspectRatio);
+	picBitmap = picBitmap.scaled(screenSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
 }

@@ -115,7 +115,7 @@ QSize GuiParams::getButtonSize( EButtonSize buttonSize )
 //============================================================================
 QSize GuiParams::getThumbnailSize( void )
 {
-    return QSize( 120, 120 ); 
+    return QSize( 240, 240 ); 
 }
 
 //============================================================================

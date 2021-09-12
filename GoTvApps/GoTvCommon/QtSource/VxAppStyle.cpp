@@ -101,7 +101,7 @@ bool VxAppStyle::event( QEvent* e )
         if( focusedWidget
             && !( focusedWidget->property( "NoFocusFrame" ) == true ) )
         {
-            if( true == focusedWidget->property( "GoTvIcon" ) )
+            if( true == focusedWidget->property( "NoLimitConnectIcon" ) )
             {
                 m_MyApp.switchWindowFocus( focusedWidget );
             }

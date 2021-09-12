@@ -47,7 +47,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     ui.m_OfferListButton->setIcon( eMyIconOfferList );
 
 	ui.m_GoTvButton->setUseTheme( false );
-	ui.m_GoTvButton->setProperty("GoTvIcon", true);
+	ui.m_GoTvButton->setProperty("NoLimitConnectIcon", true);
 	ui.m_GoTvButton->setAppIcon( eMyIconApp, parent );
     if( parent )
     {
