@@ -59,6 +59,9 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     ui.m_DefaultGroupHostButton->setIcon( eMyIconServiceHostGroup );
     ui.m_DefaultChatRoomHostButton->setIcon( eMyIconServiceChatRoom );
 
+    // probably could remove this button
+    ui.m_ApplySettingsButton->setVisible( false );
+
     updateDlgFromSettings(true);
 
     connectSignals();
@@ -125,7 +128,6 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     ui.AutoDetectProxyRadioButton->setChecked( false );
     ui.AssumeNoProxyRadioButton->setChecked( false );
     ui.AssumeProxyRadioButton->setChecked( false );
-//    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
 
     bool hasPrevSetttings = false;
     bool validDbSettings = false;
@@ -181,7 +183,6 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
 //============================================================================
 void AppletNetworkSettings::fillNetHostSettingFromEngine( NetHostSetting& netSetting )
 {
-
     std::string strValue;
 
     m_Engine.getEngineSettings().getNetworkHostUrl( strValue );
@@ -233,7 +234,6 @@ void AppletNetworkSettings::fillNetHostSettingFromEngine( NetHostSetting& netSet
 
     bool useUpnp = m_Engine.getEngineSettings().getUseUpnpPortForward();
     netSetting.setUseUpnpPortForward( useUpnp );
-
 }
 
 //============================================================================
@@ -461,7 +461,7 @@ void AppletNetworkSettings::slotTestIsMyPortOpenButtonClick( void )
     }
     else
     {
-        QMessageBox::information( this, tr( "Error" ), tr( "TCP Port cannot be zero." ) );
+        QMessageBox::information( this, tr( "Error" ), tr( "TCP Listen Port cannot be zero." ) );
     }
 }
 
@@ -497,6 +497,7 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSe
 
     ui.m_NetworkHostUrlEdit->setText( netSetting.getNetworkHostUrl().c_str() );
     ui.m_NetworkKeyEdit->setText( netSetting.getNetworkKey().c_str() );
+    m_OriginalNetworkKey = ui.m_NetworkKeyEdit->text();
     ui.m_ConnectTestUrlEdit->setText( netSetting.getConnectTestUrl().c_str() );
     ui.m_RandomConnectUrlEdit->setText( netSetting.getRandomConnectUrl().c_str() );
     ui.m_GroupHostUrlEdit->setText( netSetting.getGroupHostUrl().c_str() );
@@ -556,7 +557,6 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& netSe
 //============================================================================
 void AppletNetworkSettings::closeEvent( QCloseEvent * event )
 {
-    //updateSettingsFromDlg();
     QWidget::closeEvent( event );
 }
 
@@ -723,6 +723,16 @@ bool AppletNetworkSettings::verifyNetworkKey( QString& keyVal )
     {
         isValid = false;
         QMessageBox::warning( this, QObject::tr( "Network Key" ), QObject::tr( "Network Key must be at least 6 characters ( 8 or more characters recommended )." ) );
+    }
+
+    if( keyVal != m_OriginalNetworkKey )
+    {
+        if( QMessageBox::Yes != QMessageBox::question( this, QObject::tr( "Network Key" ),
+            QObject::tr( "Are you sure you want to change the netowrk key?\n All users of your network will need to have the same key or cannot connect." ),
+            QMessageBox::Yes | QMessageBox::No ) )
+        {
+            return false;
+        }
     }
 
     return isValid;
