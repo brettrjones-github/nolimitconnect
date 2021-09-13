@@ -15,7 +15,8 @@
 #include <app_precompiled_hdr.h>
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "AppletGroupJoinSearch.h"
+//#include "PopupMenu.h"
+#include "AppletGroupListLocalView.h"
 #include "ActivityMessageBox.h"
 #include "GuiHostSession.h"
 #include "GuiParams.h"
@@ -30,11 +31,11 @@ namespace
 }
 
 //============================================================================
-AppletGroupJoinSearch::AppletGroupJoinSearch(	AppCommon&		    app, 
-												QWidget *			parent )
-: AppletClientBase( OBJNAME_APPLET_GROUP_JOIN_SEARCH, app, parent )
+AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app, 
+												    QWidget *			parent )
+: AppletClientBase( OBJNAME_APPLET_GROUP_LIST_LOCAL_VIEW, app, parent )
 {
-    setAppletType( eAppletGroupJoinSearch );
+    setAppletType( eAppletGroupListLocalView );
     setHostType( eHostTypeGroup );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
@@ -43,7 +44,7 @@ AppletGroupJoinSearch::AppletGroupJoinSearch(	AppCommon&		    app,
     connectBarWidgets();
 
     connect( this,					    SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
-    connect( ui.m_SearchsParamWidget,	SIGNAL(signalSearchState(bool)),		    this, SLOT(slotStartSearchState(bool)) );
+    connect( ui.m_RefreshButton,	    SIGNAL(clicked()),		                    this, SLOT(slotRefreshGroupList()) );
     connect( this,					    SIGNAL(signalSearchComplete()),				this, SLOT(slotSearchComplete()) );
     connect( this,					    SIGNAL(signalSearchResult(VxNetIdent*)),	this, SLOT(slotSearchResult(VxNetIdent*)) ); 
 
@@ -62,128 +63,83 @@ AppletGroupJoinSearch::AppletGroupJoinSearch(	AppCommon&		    app,
     connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
     connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
 
-    setStatusLabel( QObject::tr( "Search For Group Host To Join" ) );
-    std::string lastHostSearchText;
-    m_MyApp.getAppSettings().getLastHostSearchText( getSearchType(), lastHostSearchText ); 
-    if( !lastHostSearchText.empty() )
-    {
-        ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
-    }
+    setStatusLabel( QObject::tr( "Groups Announced To Network Host" ) );
+    slotRefreshGroupList();
 }
 
 //============================================================================
-void AppletGroupJoinSearch::setStatusLabel( QString strMsg )
+void AppletGroupListLocalView::setStatusLabel( QString strMsg )
 {
     ui.m_StatusLabel->setText( strMsg );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::setInfoLabel( QString strMsg )
+void AppletGroupListLocalView::setInfoLabel( QString strMsg )
 {
     ui.m_InfoLabel->setText( strMsg );
     ui.m_InfoLabel->update();
 }
 
 //============================================================================
-void AppletGroupJoinSearch::showEvent( QShowEvent * ev )
+void AppletGroupListLocalView::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, this, true );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::hideEvent( QHideEvent * ev )
+void AppletGroupListLocalView::hideEvent( QHideEvent * ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, this, false );
     ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotHomeButtonClicked( void )
+void AppletGroupListLocalView::slotHomeButtonClicked( void )
 {
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotStartSearchState(bool startSearch)
+void AppletGroupListLocalView::slotRefreshGroupList( void )
 {
-    if( startSearch && !m_SearchStarted )
-    {
-        m_SearchStarted = true;
-        clearPluginSettingToList();
-        clearStatus();
+    clearPluginSettingToList();
+    clearStatus();
 
-        QString strSearch = getSearchText();
-        if( 3 > strSearch.length() )
-        {
-            ui.m_SearchsParamWidget->slotSearchCancel();
-            ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
-            errMsgBox.exec();
-        }
-        else
-        {
-            if( ui.m_SearchsParamWidget->toSearchParams( m_SearchParams ) )
-            {
-                m_SearchParams.setHostType( getHostType() );
-                m_SearchParams.setSearchType( getSearchType() );
-                m_SearchParams.createNewSessionId();
-                m_SearchParams.updateSearchStartTime();
-                setStatusLabel( QObject::tr( "Search Started" ) );
-                m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
-                if( !m_SearchParams.getSearchText().empty() )
-                {
-                    m_MyApp.getAppSettings().setLastHostSearchText( m_SearchParams.getSearchType(), m_SearchParams.getSearchText() );
-                    m_MyApp.getAppSettings().setLastHostSearchAgeType( m_SearchParams.getSearchType(), m_SearchParams.getAgeType() );
-                    m_MyApp.getAppSettings().setLastHostSearchGender( m_SearchParams.getSearchType(), m_SearchParams.getGender() );
-                    m_MyApp.getAppSettings().setLastHostSearchLanguage( m_SearchParams.getSearchType(), m_SearchParams.getLanguage() );
-                    m_MyApp.getAppSettings().setLastHostSearchContentRating( m_SearchParams.getSearchType(), m_SearchParams.getContentRating() );
-                }
-            }
-            else
-            {
-                setStatusLabel( QObject::tr( "Search Params Invalid" ) );
-            }
-        }
-    }
-    else if( !startSearch && m_SearchStarted )
-    {
-        m_SearchStarted = false;
-        m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, false );
-        setStatusLabel( QObject::tr( "Search Stopped" ) );
-    }
+    m_MyApp.getFromGuiInterface().fromGuiSendAnnouncedList( eHostTypeGroup );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotSearchComplete( void )
+void AppletGroupListLocalView::slotSearchComplete( void )
 {
-    ui.m_SearchsParamWidget->slotSearchComplete();
+    //ui.m_SearchsParamWidget->slotSearchComplete();
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotInfoMsg( const QString& text )
+void AppletGroupListLocalView::slotInfoMsg( const QString& text )
 {
     setStatusLabel( text ); // Adds the message to the widget                                                                                              //m_LogFile.write( text ); // Logs to file
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString text )
+void AppletGroupListLocalView::slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString text )
 {
     setInfoLabel( GuiParams::describeStatus(hostStatus) + text);
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString text )
+void AppletGroupListLocalView::slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString text )
 {
     setInfoLabel( GuiParams::describeStatus(hostStatus) + text);
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
+void AppletGroupListLocalView::slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
 {
     if( hostStatus == eHostSearchCompleted )
     {
         m_SearchStarted = false;
         setStatusLabel( strMsg );
-        ui.m_SearchsParamWidget->slotSearchComplete();
+        //ui.m_SearchsParamWidget->slotSearchComplete();
     }
     else
     {
@@ -192,7 +148,7 @@ void AppletGroupJoinSearch::slotHostSearchStatus( EHostType hostType, VxGUID ses
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
+void AppletGroupListLocalView::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
 {
     LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
         DescribePluginType( pluginSetting.getPluginType() ) );
@@ -204,7 +160,7 @@ void AppletGroupJoinSearch::slotHostSearchResult( EHostType hostType, VxGUID ses
 }
 
 //============================================================================
-void AppletGroupJoinSearch::toGuiInfoMsg( char * infoMsg )
+void AppletGroupListLocalView::toGuiInfoMsg( char * infoMsg )
 {
     QString infoStr( infoMsg );
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
@@ -216,7 +172,7 @@ void AppletGroupJoinSearch::toGuiInfoMsg( char * infoMsg )
 }
 
 //============================================================================
-void AppletGroupJoinSearch::infoMsg( const char* errMsg, ... )
+void AppletGroupListLocalView::infoMsg( const char* errMsg, ... )
 {
     char as8Buf[ MAX_INFO_MSG_SIZE ];
     va_list argList;
@@ -229,38 +185,38 @@ void AppletGroupJoinSearch::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletGroupJoinSearch::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
+void AppletGroupListLocalView::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
     ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::clearPluginSettingToList( void )
+void AppletGroupListLocalView::clearPluginSettingToList( void )
 {
     ui.m_HostListWidget->clearHostList();
 }
 
 //============================================================================
-void AppletGroupJoinSearch::clearStatus( void )
+void AppletGroupListLocalView::clearStatus( void )
 {
     setInfoLabel( "" );
     setStatusLabel( "" );
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListLocalView::slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListLocalView::slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletGroupJoinSearch::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListLocalView::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
 }

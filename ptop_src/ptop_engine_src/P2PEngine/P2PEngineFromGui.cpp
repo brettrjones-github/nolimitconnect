@@ -1375,6 +1375,20 @@ void P2PEngine::fromGuiSearchHost( EHostType hostType, SearchParams& searchParam
 }
 
 //============================================================================
+void P2PEngine::fromGuiSendAnnouncedList( EHostType hostType )
+{
+	PluginBase* plugin = m_PluginMgr.findPlugin( ePluginTypeHostNetwork );
+	if( plugin )
+	{
+		plugin->fromGuiSendAnnouncedList( hostType );
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "Plugin not found for host %d", hostType );
+	}
+}
+
+//============================================================================
 void P2PEngine::fromGuiRunIsPortOpenTest( uint16_t port )
 {
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiRunIsPortOpenTest" );

@@ -362,6 +362,12 @@ void IGoTv::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, b
 }
 
 //============================================================================
+void IGoTv::fromGuiSendAnnouncedList( EHostType hostType )
+{
+    getPtoP().fromGuiSendAnnouncedList( hostType );
+}
+
+//============================================================================
 void IGoTv::fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType )
 {
     getPtoP().fromGuiRunUrlAction( sessionId, myUrl, ptopUrl, testType );

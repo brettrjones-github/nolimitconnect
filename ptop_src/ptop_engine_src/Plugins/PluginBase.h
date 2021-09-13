@@ -155,6 +155,7 @@ public:
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	            {};
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )            {};
     virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )  {};
+	virtual void				fromGuiSendAnnouncedList( EHostType hostType ) {};
 
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};

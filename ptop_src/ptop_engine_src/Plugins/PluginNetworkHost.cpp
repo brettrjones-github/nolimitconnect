@@ -71,3 +71,9 @@ void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostAnnounc
 {
     m_HostServerMgr.updateHostSearchList( hostType, hostAnn, netIdent );
 }
+
+//============================================================================
+void PluginNetworkHost::fromGuiSendAnnouncedList( EHostType hostType )
+{
+    m_HostServerMgr.fromGuiSendAnnouncedList( hostType );
+}

@@ -73,6 +73,7 @@
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
 #define OBJNAME_APPLET_GROUP_JOIN_SEARCH			    "AppletGroupJoinSearch"
+#define OBJNAME_APPLET_GROUP_LIST_LOCAL_VIEW			"AppletGroupListLocalView"
 #define OBJNAME_APPLET_HOST_GROUP_STATUS				"AppletHostGroupStatus"
 #define OBJNAME_APPLET_HOST_NETWORK_STATUS				"AppletHostNetworkStatus"
 #define OBJNAME_APPLET_JOIN_GROUP_STATUS				"AppletJoinGroupStatus"

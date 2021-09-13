@@ -22,6 +22,7 @@ enum EMyIcons
 	eMyIconFileServer,
 
     eMyIconEyeAll,
+	eMyIconEyeAnnouncedGroups,
     eMyIconEyeChatRoom,
     eMyIconEyeFriends,
     eMyIconEyeGroup,

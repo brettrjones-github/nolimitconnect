@@ -183,6 +183,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp" />
@@ -468,6 +469,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -835,6 +837,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoin.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListLocalView.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostNetworkStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletJoinGroupStatus.ui" />

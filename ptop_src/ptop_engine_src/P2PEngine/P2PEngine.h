@@ -241,6 +241,7 @@ public:
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) override;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) override;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) override;
+    virtual void				fromGuiSendAnnouncedList( EHostType hostType ) override;
 
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
     virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType ) override;

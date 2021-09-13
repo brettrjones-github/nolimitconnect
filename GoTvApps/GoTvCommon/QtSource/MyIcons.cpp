@@ -174,6 +174,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
     case eMyIconEyeAll:
         return ":/AppRes/Resources/eye-all.svg";
+	case eMyIconEyeAnnouncedGroups:
+		return ":/AppRes/Resources/eye-announced-groups.svg";
     case eMyIconEyeChatRoom:
         return ":/AppRes/Resources/eye-chat-room.svg";
     case eMyIconEyeFriends:
