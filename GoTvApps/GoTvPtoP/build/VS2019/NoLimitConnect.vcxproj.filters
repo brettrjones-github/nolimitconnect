@@ -815,6 +815,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.h">
       <Filter>Source Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -1804,6 +1807,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
@@ -2513,6 +2519,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletJoinGroupStatus.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListLocalView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

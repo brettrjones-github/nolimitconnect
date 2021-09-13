@@ -487,6 +487,7 @@ public:
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
+    virtual void				fromGuiSendAnnouncedList( EHostType hostType );
 
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
     virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType );

@@ -296,5 +296,6 @@
         <file>Resources/call-list.svg</file>
         <file>Resources/notify-join.svg</file>
         <file>Resources/question-mark.svg</file>
+        <file>Resources/eye-announced-groups.svg</file>
     </qresource>
 </RCC>

@@ -220,3 +220,24 @@ EPluginType HostServerSearchMgr::getSearchPluginType( EHostType hostType )
         return ePluginTypeInvalid;
     }
 }
+
+
+//============================================================================
+void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
+{
+    LogMsg( LOG_DEBUG, "HostServerMgr fromGuiSendAnnouncedList" );
+
+    uint64_t timeNow = GetGmtTimeMs();
+    m_SearchMutex.lock();
+    std::map<PluginId, HostSearchEntry>& searchMap = getSearchList( hostType );
+    for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+    {
+        // if currently active
+        if( timeNow - iter->second.m_LastRxTime <= MIN_HOST_RX_UPDATE_TIME_MS )
+        {
+            m_Engine.getToGui().toGuiHostSearchResult( hostType, iter->second.m_Ident.getMyOnlineId(), iter->second.m_Ident, iter->second.m_PluginSetting );
+        }
+    }
+
+    m_SearchMutex.unlock();
+}

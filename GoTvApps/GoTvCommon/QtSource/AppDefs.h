@@ -109,6 +109,7 @@ enum EApplet
 
     eAppletServiceRandomConnect,     // connect to random person service
     eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
+    eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
 
     eMaxHostApplets,                // marker.. end of hosting applets.. start of user share services
 

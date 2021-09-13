@@ -23,6 +23,7 @@ public:
 	virtual ~PluginNetworkHost() override = default;
 
     virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent ) override;
+    virtual void				fromGuiSendAnnouncedList( EHostType hostType ) override;
 
 protected:
     virtual void				onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
