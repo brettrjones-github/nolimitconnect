@@ -58,8 +58,25 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
         // create launchers for the basic applets
         for( int i = int( eAppletHomePage + 1 ); i < eMaxBasicApplets; i++ )
         {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
-            m_AppletList.push_back( applet );
+            bool shouldShow = true;
+            if( eAppletKodi == i && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureKodi ) )
+            {
+                shouldShow = false;
+            }
+            else if( eAppletChatRoomJoin == i && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
+            {
+                shouldShow = false;
+            }
+            else if( eAppletRandomConnectJoin == i && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
+            {
+                shouldShow = false;
+            }
+
+            if( shouldShow )
+            {
+                AppletLaunchWidget* applet = new AppletLaunchWidget( m_MyApp, (EApplet)i, this );
+                m_AppletList.push_back( applet );
+            }
         }
 
         m_IsInitialized = true;

@@ -32,10 +32,10 @@ enum EDefaultAppMode
 enum EAppFeatures
 {
 	eAppFeatureUnknown,
-	eAppFeatureViewer,
-	eAppFeatureProvider,
-	eAppFeatureStation,
-	eAppFeatureNetworkHost,
+	eAppFeatureKodi,
+    eAppFeatureChatRoom,
+    eAppFeatureRandomConnect,
+    eAppFeatureStoryboard,
 
 	eMaxAppFeatures
 };

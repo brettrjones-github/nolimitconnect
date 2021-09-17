@@ -22,14 +22,12 @@ const char * DescribeAppFeature( EAppFeatures appFeature )
 	// do NOT translate
 	switch( appFeature )
 	{
-	case eAppFeatureViewer:
-		return "FeatureViewer";
-	case eAppFeatureProvider:
-		return "FeatureProvider";
-	case eAppFeatureStation:
-		return "FeatureStation";
-	case eAppFeatureNetworkHost:
-		return "FeatureNetworkHost";
+	case eAppFeatureKodi:
+		return "FeatureKodi";
+	case eAppFeatureChatRoom:
+		return "FeatureChatRoom";
+	case eAppFeatureRandomConnect:
+		return "FeatureRandomConnnect";
 
 	case eAppFeatureUnknown:
 	default:
