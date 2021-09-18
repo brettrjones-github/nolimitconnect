@@ -114,6 +114,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPopupMenu.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomConnectJoin.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomConnectJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSearchPage.h \
@@ -446,6 +447,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPopupMenu.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomConnectJoin.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomConnectJoinSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSearchPage.cpp \
@@ -756,6 +758,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPermissionList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPopupMenu.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletRandomConnectJoin.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletRandomConnectJoinSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBase.ui \

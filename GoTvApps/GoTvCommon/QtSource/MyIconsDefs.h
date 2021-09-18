@@ -378,6 +378,12 @@ enum EMyIcons
     eMyIconOfferVoicePhone,
 
     eMyIconCallList,
+	eMyIconFriendJoined,
+	eMyIconPersonAdd,
+	eMyIconGroupJoined,
+
+	eMyIconDirectConnected,
+	eMyIconDirectConnectedOverlay,
 
 	eMaxMyIcon	// must be last
 };

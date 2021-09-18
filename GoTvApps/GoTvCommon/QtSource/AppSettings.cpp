@@ -86,6 +86,10 @@ void AppSettings::setFeatureEnable( EAppFeatures appFeature, bool enable )
 //============================================================================
 bool AppSettings::getFeatureEnable( EAppFeatures appFeature )
 {
+	// BRJ for now app features are used for disable
+	// in the future if features are enabled then should let this code work
+	return false;
+
 	if( m_AppFeatureIsCached[appFeature] )
 	{
 		// pull from cache
@@ -471,26 +475,26 @@ void AppSettings::setupAppModeSettings( EDefaultAppMode appDefaultMode )
 		setFeatureEnable( (EAppFeatures)i, false );
 	}
 
-	// enable app mode specific features
-	switch( appDefaultMode )
-	{
-    case eAppModeGoTvViewer:
-		setFeatureEnable( eAppFeatureViewer, true );
-		break;
-    case eAppModeGoTvProvider:
-		setFeatureEnable( eAppFeatureProvider, true );
-		break;
-    case eAppModeGoTvStation:
-		setFeatureEnable( eAppFeatureStation, true );
-		break;
-    case eAppModeGoTvNetworkHost:
-		setFeatureEnable( eAppFeatureNetworkHost, true );
-		break;
-    default:
-        break;
-	}
+	//// enable app mode specific features
+	//switch( appDefaultMode )
+	//{
+ //   case eAppModeGoTvViewer:
+	//	// setFeatureEnable( eAppFeatureViewer, true );
+	//	break;
+ //   case eAppModeGoTvProvider:
+	//	// setFeatureEnable( eAppFeatureProvider, true );
+	//	break;
+ //   case eAppModeGoTvStation:
+	//	// setFeatureEnable( eAppFeatureStation, true );
+	//	break;
+ //   case eAppModeGoTvNetworkHost:
+	//	// setFeatureEnable( eAppFeatureNetworkHost, true );
+	//	break;
+ //   default:
+ //       break;
+	//}
 
-	// mare database as intialized with app mode settings
+	// mark database as intialized with app mode settings
 	uint32_t u32Value = 1;
 	setIniValue( getAppShortName(), "AppDefaultInited", u32Value );
 }

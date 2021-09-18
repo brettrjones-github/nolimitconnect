@@ -817,3 +817,15 @@ void VxPushButton::setSquareButtonSize( EButtonSize buttonSize )
     m_SquareButtonSize = buttonSize; 
     setFixedSize( GuiParams::getButtonSize( m_SquareButtonSize ) );
 }
+
+//============================================================================
+void VxPushButton::setOverlayIcon( EMyIcons myIcon )
+{
+    m_OverlayIcon = myIcon;
+}
+
+//============================================================================
+void VxPushButton::setOverlayColor( QColor iconColor )
+{
+    m_OverlayLastIconColor = iconColor;
+}

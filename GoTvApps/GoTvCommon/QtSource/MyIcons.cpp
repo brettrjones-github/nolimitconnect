@@ -770,6 +770,16 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
     case eMyIconCallList:
         return ":/AppRes/Resources/call-list.svg";
+	case eMyIconFriendJoined:
+		return ":/AppRes/Resources/friend-joined.svg";
+	case eMyIconPersonAdd:
+		return ":/AppRes/Resources/person-add.svg";
+	case eMyIconGroupJoined:
+		return ":/AppRes/Resources/group-joined.svg";
+	case eMyIconDirectConnected:
+		return ":/AppRes/Resources/direct-connected.svg";
+	case eMyIconDirectConnectedOverlay:
+		return ":/AppRes/Resources/direct-connected-overlay.svg";
 
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark

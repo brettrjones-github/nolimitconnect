@@ -297,5 +297,11 @@
         <file>Resources/notify-join.svg</file>
         <file>Resources/question-mark.svg</file>
         <file>Resources/eye-announced-groups.svg</file>
+        <file>Resources/friend-joined.svg</file>
+        <file>Resources/person-add.svg</file>
+        <file>Resources/group-joined.svg</file>
+        <file>Resources/offer-truth-or-dare.svg</file>
+        <file>Resources/direct-connected.svg</file>
+        <file>Resources/direct-connected-overlay.svg</file>
     </qresource>
 </RCC>

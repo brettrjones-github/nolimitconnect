@@ -59,13 +59,13 @@
 
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
+#include "AppletPeerSelectFileToSend.h"
+#include "AppletPeerSessionFileOffer.h"
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
+#include "AppletPopupMenu.h"
 #include "AppletRandomConnectJoinSearch.h"
-
-#include "AppletPeerSelectFileToSend.h"
-#include "AppletPeerSessionFileOffer.h"
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
@@ -267,6 +267,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletJoinGroupStatus:            appletDialog = new AppletJoinGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
+    case eAppletPopupMenu:                  appletDialog = new AppletPopupMenu( m_MyApp, parent ); break;
     case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
 
     case eAppletServiceAboutMe:             appletDialog = new AppletServiceAboutMe( m_MyApp, parent ); break;

@@ -32,10 +32,11 @@ enum EDefaultAppMode
 enum EAppFeatures
 {
 	eAppFeatureUnknown,
-	eAppFeatureViewer,
-	eAppFeatureProvider,
-	eAppFeatureStation,
-	eAppFeatureNetworkHost,
+	eAppFeatureKodi,
+    eAppFeatureChatRoom,
+    eAppFeatureRandomConnect,
+    eAppFeatureStoryboard,
+    eAppFeatureTheme,
 
 	eMaxAppFeatures
 };
@@ -202,6 +203,8 @@ enum EApplet
     eAppletOfferList,	
 
     eAppletCamClipPlayer,
+    eAppletPopupMenu,
+
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,
     //	eAppletStreamViewerVideo,

@@ -49,6 +49,8 @@ client-chat-room-settings.svg (modified)
 client-group.svg
 client-random-connect.svg (modified)
 client-webcam.svg (modified)
+direct-connected.svg (modified)
+direct-connected-overlay.svg (modified)
 earth-globe.svg
 edit-print.svg
 edit-cut.svg
@@ -71,10 +73,13 @@ file-save-as.svg (modified)
 file-xfer.svg (modified)
 file-xfer-settings.svg (modified)
 friend.svg
+friend-joined.svg
 flask.svg
+group-joined.svg
 image-rotate.svg (modified)
 key-disabled.svg
 key-enabled.svg
+linked.svg
 mediatype-audio.svg
 mediatype-video.svg
 messenger-settings.svg (modified)
@@ -97,6 +102,7 @@ overlay-plus.svg (modified)
 person.svg (modified) 
 person-round.svg (modified) 
 person-unknown-round.svg (modified) 
+person-add.svg
 pin-pinned.svg
 pin-unpinned.svg
 plugin.svg

@@ -22,14 +22,16 @@ const char * DescribeAppFeature( EAppFeatures appFeature )
 	// do NOT translate
 	switch( appFeature )
 	{
-	case eAppFeatureViewer:
-		return "FeatureViewer";
-	case eAppFeatureProvider:
-		return "FeatureProvider";
-	case eAppFeatureStation:
-		return "FeatureStation";
-	case eAppFeatureNetworkHost:
-		return "FeatureNetworkHost";
+	case eAppFeatureKodi:
+		return "FeatureKodi";
+	case eAppFeatureChatRoom:
+		return "FeatureChatRoom";
+	case eAppFeatureRandomConnect:
+		return "FeatureRandomConnnect";
+    case eAppFeatureStoryboard:
+        return "FeatureStoryboard";
+    case eAppFeatureTheme:
+        return "FeatureTheme";
 
 	case eAppFeatureUnknown:
 	default:
@@ -148,6 +150,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletUploads:                    return eMyIconSendFileNormal;
     case eAppletCallList:                   return eMyIconVoicePhoneNormal;
     case eAppletOfferList:                  return eMyIconOfferList;
+    case eAppletPopupMenu:	                return eMyIconMenu;
 
     // case eAppletPlayerMusic:			return eMyIconMusic;
     // case eAppletPlayerPhoto:			return eMyIconGallery;
@@ -227,7 +230,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletNetHostingPage:             return QObject::tr( "Hosting Services" );
     case eAppletPermissionList:             return QObject::tr( "Share Permission List" );
 
-    case eAppletShareServicesPage:          return QObject::tr( "Share with others sevices" );
+    case eAppletShareServicesPage:          return QObject::tr( "Share With Others Sevices" );
     case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
     case eAppletServiceAvatarImage:         return QObject::tr( "Share Your Avatar Image For Contact List" );
     case eAppletServiceChatRoom:            return QObject::tr( "View My Hosted Chat Room" );
@@ -281,6 +284,8 @@ QString DescribeApplet( EApplet applet )
 
     case eAppletDownloads:                  return QObject::tr( "Downloads" );
     case eAppletUploads:                    return QObject::tr( "Uploads" );
+
+    case eAppletPopupMenu:                  return QObject::tr( "Menu" );
 
         //case eAppletPlayerMusic:			return QObject::tr( "Music Player" );
 //case eAppletPlayerPhoto:			return QObject::tr( "Image Gallery" );

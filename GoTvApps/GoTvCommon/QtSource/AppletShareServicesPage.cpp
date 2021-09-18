@@ -64,8 +64,17 @@ void AppletShareServicesPage::setupAppletShareServicesPage( void )
         // create launchers for the basic applets
         for( int i = int( eMaxHostApplets + 1 ); i < eMaxSharedServicesApplets; i++ )
         {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
-            m_AppletList.push_back( applet );
+            bool shouldShow = true;
+            if( eAppletServiceStoryboard == i && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
+            {
+                shouldShow = false;
+            }
+
+            if( shouldShow )
+            {
+                AppletLaunchWidget* applet = new AppletLaunchWidget( m_MyApp, (EApplet)i, this );
+                m_AppletList.push_back( applet );
+            }
         }
 
         m_IsInitialized = true;
