@@ -20,6 +20,7 @@
 #include "ActivityHelpSignal.h"
 #include "MyIcons.h"
 #include "OfferMgr.h"
+#include "AppletPopupMenu.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
@@ -45,6 +46,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
     ui.m_CallListButton->setIcon( eMyIconCallList );
     ui.m_OfferListButton->setIcon( eMyIconOfferList );
+    ui.m_MenuButton->setIcon( eMyIconMenu );
 
 	ui.m_GoTvButton->setUseTheme( false );
 	ui.m_GoTvButton->setProperty("NoLimitConnectIcon", true);
@@ -96,6 +98,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
     connect( &m_OfferMgr,              SIGNAL( signalCallOfferCount( int ) ), this, SLOT( slotCallOfferCount( int ) ) );
     connect( &m_OfferMgr,              SIGNAL( signalOfferListCount( int ) ), this, SLOT( slotOfferListCount( int ) ) );
+    connect( ui.m_MenuButton,          SIGNAL( clicked() ),                   this, SLOT( slotTitleBarMenuButtonClicked() ) );
 }
 
 //============================================================================
@@ -525,4 +528,16 @@ void TitleBarWidget::slotCallListButtonClicked( void )
 void TitleBarWidget::slotOfferListButtonClicked( void )
 {
 
+}
+
+
+//============================================================================
+void TitleBarWidget::slotTitleBarMenuButtonClicked( void )
+{
+    LogMsg( LOG_DEBUG, "slotTitleBarMenuButtonClicked" );
+    AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.getAppletMgr().launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(parent())));
+    if( popupMenu )
+    {
+        popupMenu->showTitleBarMenu();
+    }
 }

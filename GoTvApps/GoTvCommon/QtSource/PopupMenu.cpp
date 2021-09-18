@@ -55,6 +55,7 @@ void PopupMenu::addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText 
 	QListWidgetItem * poMenuItem = new QListWidgetItem( strMenuItemText );
 	poMenuItem->setIcon( oIcon );
 	poMenuItem->setData( Qt::UserRole, iItemId );
+	poMenuItem->setSizeHint( QSize( 200, GuiParams::getButtonSize( eButtonSizeMedium ).height() + 4 ) );
 	ui.menuItemList->addItem( poMenuItem );
 }
 

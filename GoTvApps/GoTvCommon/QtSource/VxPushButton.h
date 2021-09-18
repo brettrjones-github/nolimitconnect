@@ -61,13 +61,15 @@ public:
     void						setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOfferOverlay );
     bool						getNotifyOfferEnabled( void )						{ return m_NotifyOfferEnabled; }
     void						setNotifyForbiddenEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyForbbidenOverlay );
-    bool						getNotifyForbiddenEnabled( void )						{ return m_NotifyOfferEnabled; }
+    bool						getNotifyForbiddenEnabled( void )					{ return m_NotifyOfferEnabled; }
     void						setNotifyErrorEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyErrorOverlay );
     bool						getNotifyErrorEnabled( void )						{ return m_NotifyOfferEnabled; }
 
 	void						setIcon( EMyIcons myIcon );
 	void						setIconOverrideColor( QColor iconColor );
     void						setIconOverrideImage( QImage& iconImage );
+    void						setOverlayIcon( EMyIcons myIcon );
+    void						setOverlayColor( QColor iconColor );
 
 	void						setDrawButtonBorder( bool drawBoarder )				{ m_DrawButtonBorder = drawBoarder; }
 	bool						getDrawButtonBorder( void )							{ return m_DrawButtonBorder; }

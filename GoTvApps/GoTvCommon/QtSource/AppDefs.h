@@ -36,6 +36,7 @@ enum EAppFeatures
     eAppFeatureChatRoom,
     eAppFeatureRandomConnect,
     eAppFeatureStoryboard,
+    eAppFeatureTheme,
 
 	eMaxAppFeatures
 };
@@ -202,6 +203,8 @@ enum EApplet
     eAppletOfferList,	
 
     eAppletCamClipPlayer,
+    eAppletPopupMenu,
+
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,
     //	eAppletStreamViewerVideo,

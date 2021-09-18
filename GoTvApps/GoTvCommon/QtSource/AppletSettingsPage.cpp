@@ -46,6 +46,10 @@ void AppletSettingsPage::setupAppletSettingsgPage( void )
         for( int i = int( eMaxBasicApplets + 1 ); i < eMaxSettingsApplets; i++ )
         {
             bool shouldShow = true;
+            if( i == eAppletTheme && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
+            {
+                shouldShow = false;
+            }
 
             if( shouldShow )
             {

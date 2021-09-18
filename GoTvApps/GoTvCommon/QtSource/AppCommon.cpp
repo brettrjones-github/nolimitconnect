@@ -256,7 +256,10 @@ void AppCommon::loadWithoutThread( void )
     uint64_t loadingMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "LoadSettings %lld ms alive ms %lld", loadingMs - startMs, loadingMs );
 
-    getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
+	if( getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
+	{
+		getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
+	}
 
     // load icons from resources
     m_MyIcons.myIconsStartup();
@@ -266,7 +269,10 @@ void AppCommon::loadWithoutThread( void )
 
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	// QT 6.2.0 has broken scroll bars.. TODO fix when 6.2.0 is no longer beta
-    getQApplication().setStyle( &m_AppStyle );
+	if( getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
+	{
+		getQApplication().setStyle( &m_AppStyle );
+	}
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     // load sounds to play and sound hardware

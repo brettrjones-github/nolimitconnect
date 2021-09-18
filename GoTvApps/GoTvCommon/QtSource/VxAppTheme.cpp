@@ -60,7 +60,7 @@ VxAppTheme::VxAppTheme( AppCommon& appCommon )
 //============================================================================
 void VxAppTheme::applyTheme( QWidget * widget )
 {
-    if( widget )
+    if( widget && m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
     {
         // make a copy so original is not disturbed
         QPalette widPalette( m_BasePalette );

@@ -129,6 +129,8 @@ public slots:
     virtual void				slotCallOfferCount( int activeCnt );
     virtual void				slotOfferListCount( int activeCnt );
 
+	virtual void				slotTitleBarMenuButtonClicked( void );
+
 protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
