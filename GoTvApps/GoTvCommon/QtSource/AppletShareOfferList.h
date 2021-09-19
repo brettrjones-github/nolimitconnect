@@ -16,7 +16,7 @@
 
 #include "AppletPeerBase.h"
 #include "ToGuiFileXferInterface.h"
-#include "ui_AppletOfferList.h"
+#include "ui_AppletCallList.h"
 
 #include <PktLib/VxCommon.h>
 
@@ -24,16 +24,17 @@ class FileXferWidget;
 class P2PEngine;
 class GuiFileXferSession;
 
-class AppletOfferList : public AppletPeerBase, public ToGuiFileXferInterface
+class AppletShareOfferList : public AppletPeerBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
-	AppletOfferList(	AppCommon&	app, 
+	AppletShareOfferList(	AppCommon&	app, 
 						QWidget *		parent = NULL );
-	virtual ~AppletOfferList() override;
+	virtual ~AppletShareOfferList() override;
 
-	//bool						isXferInProgress( VxGUID fileInstance );
-	//FileXferWidget *			addDownload( GuiFileXferSession * poSession );
+    /*
+	bool						isXferInProgress( VxGUID fileInstance );
+	FileXferWidget *			addDownload( GuiFileXferSession * poSession );
 
 signals:
 	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
@@ -41,7 +42,6 @@ signals:
 	void						signalToGuiFileDownloadComplete( VxGUID lclSession, QString newFileName, EXferError xferError );
 
 private slots:
-    /*
 	void						slotToGuiStartDownload(	GuiFileXferSession * poSession );
 	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
 	void						slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
@@ -78,5 +78,5 @@ protected:
     */
 
 	//=== vars ===//
-	Ui::AppletOfferListUi		ui;
+	Ui::AppletCallListUi		ui;
 };

@@ -146,8 +146,10 @@ enum EApplet
     eAppletClientStoryboard,
 
     eAppletChooseThumbnail,
+    eAppletFriendListClient,
     eAppletGalleryImage,
     eAppletGalleryThumb,
+    eAppletGroupListClient,
     eAppletSnapshot,
 
     eAppletServiceSettings,
@@ -199,8 +201,8 @@ enum EApplet
     eAppletPeerSessionFileOffer,
 
     eAppletMessenger,
-    eAppletCallList,	
-    eAppletOfferList,	
+    eAppletShareOfferList,
+    eAppletPersonsOfferList,	
 
     eAppletCamClipPlayer,
     eAppletPopupMenu,

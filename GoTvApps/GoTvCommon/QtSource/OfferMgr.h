@@ -70,8 +70,8 @@ public:
 	void						removePluginSessionOffer( VxGUID& offerSessionId );
 
 signals:
-    void                        signalCallOfferCount( int activeCnt );
-    void                        signalOfferListCount( int activeCnt );
+    void                        signalShareOfferCount( int activeCnt );
+    void                        signalPersonsOfferListCount( int activeCnt );
 
 	void						signalToGuiRxedPluginOffer( GuiOfferSession * offerSession );
 	void						signalToGuiRxedOfferReply( GuiOfferSession * offerSession );

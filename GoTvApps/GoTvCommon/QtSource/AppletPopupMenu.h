@@ -52,6 +52,7 @@ signals:
 
 public slots:
 	void						onFriendActionSelected( int iMenuId );
+	void						onTitleBarActionSelected( int iMenuId );
 
 private slots:
 	//! user clicked the upper right x button

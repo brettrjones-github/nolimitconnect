@@ -123,11 +123,11 @@ public slots:
     virtual void				slotCamTimeout( void );
     virtual void				slotSignalHelpClick( void );
 
-    virtual void				slotCallListButtonClicked( void );
-    virtual void				slotOfferListButtonClicked( void );
+    virtual void				slotPersonsOfferListButtonClicked( void );
+    virtual void				slotShareOfferListButtonClicked( void );
 
-    virtual void				slotCallOfferCount( int activeCnt );
-    virtual void				slotOfferListCount( int activeCnt );
+    virtual void				slotShareOfferListCount( int activeCnt );
+    virtual void				slotPersonsOfferListCount( int activeCnt );
 
 	virtual void				slotTitleBarMenuButtonClicked( void );
 

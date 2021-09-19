@@ -377,9 +377,9 @@ enum EMyIcons
     eMyIconOfferVideoChat,
     eMyIconOfferVoicePhone,
 
-    eMyIconCallList,
 	eMyIconFriendJoined,
 	eMyIconPersonAdd,
+	eMyIconPersonsOfferList,
 	eMyIconGroupJoined,
 
 	eMyIconDirectConnected,

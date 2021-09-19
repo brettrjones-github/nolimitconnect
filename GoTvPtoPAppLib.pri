@@ -62,7 +62,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAssetPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareOfferList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamClipPlayer.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.h \
@@ -80,10 +80,12 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAboutMe.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletFriendListClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListLocalView.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.h \
@@ -100,7 +102,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletOfferList.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonsOfferList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerReplyFileOffer.h \
@@ -186,7 +188,9 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileListReplySession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendOfferListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiConnectMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
@@ -226,7 +230,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
@@ -251,6 +254,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.h \
@@ -395,7 +399,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAssetPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCallList.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareOfferList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamClipPlayer.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.cpp \
@@ -409,14 +413,16 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareWebCam.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientStoryboard.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAboutMe.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAvatarImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletDownloads.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletFriendListClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListLocalView.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.cpp \
@@ -433,7 +439,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMultiMessenger.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletOfferList.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonsOfferList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerReplyFileOffer.cpp \
@@ -519,6 +525,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendOfferListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiConnectMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.cpp \
@@ -589,6 +596,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingMedia.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.cpp \
@@ -714,7 +722,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCallList.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletShareOfferList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamClipPlayer.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCamSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamTest.ui \
@@ -727,12 +735,14 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAvatarImage.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditStoryBoard.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletFriendListClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryImage.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryThumb.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoin.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupListClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupListLocalView.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostGroupStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostNetworkStatus.ui \
@@ -746,7 +756,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletMultiMessenger.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletOfferList.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonsOfferList.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerChangeFriendship.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerReplyOfferFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSelectFileToSend.ui \

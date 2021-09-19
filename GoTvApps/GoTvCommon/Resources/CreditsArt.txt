@@ -101,8 +101,10 @@ overlay-minus.svg (modified)
 overlay-plus.svg (modified)
 person.svg (modified) 
 person-round.svg (modified) 
+person-solid.svg
 person-unknown-round.svg (modified) 
 person-add.svg
+persons-offer-list.svg (modified) 
 pin-pinned.svg
 pin-unpinned.svg
 plugin.svg

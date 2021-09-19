@@ -43,10 +43,12 @@
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
 #include "AppletEditStoryboard.h"
+#include "AppletFriendListClient.h"
 #include "AppletGalleryImage.h"
 #include "AppletGalleryThumb.h"
 #include "AppletGroupJoin.h"
 #include "AppletGroupJoinSearch.h"
+#include "AppletGroupListClient.h"
 #include "AppletGroupListLocalView.h"
 #include "AppletHostGroupStatus.h"
 #include "AppletHostNetworkStatus.h"
@@ -63,6 +65,7 @@
 #include "AppletPeerSessionFileOffer.h"
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
+#include "AppletPersonsOfferList.h"
 #include "AppletPlayerVideo.h"
 #include "AppletPopupMenu.h"
 #include "AppletRandomConnectJoinSearch.h"
@@ -103,6 +106,7 @@
 
 #include "AppletSettingsPage.h"
 #include "AppletSearchPage.h"
+#include "AppletShareOfferList.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSnapshot.h"
 
@@ -262,11 +266,15 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
 
+    case eAppletFriendListClient:           appletDialog = new AppletFriendListClient( m_MyApp, parent ); break;
+    case eAppletGroupListClient:            appletDialog = new AppletGroupListClient( m_MyApp, parent ); break;
+
     case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
     case eAppletHostNetworkStatus:          appletDialog = new AppletHostNetworkStatus( m_MyApp, parent ); break;
     case eAppletJoinGroupStatus:            appletDialog = new AppletJoinGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
+    case eAppletPersonsOfferList:           appletDialog = new AppletPersonsOfferList( m_MyApp, parent ); break;
     case eAppletPopupMenu:                  appletDialog = new AppletPopupMenu( m_MyApp, parent ); break;
     case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
 
@@ -303,6 +311,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletSettingsVideoPhone:         appletDialog = new AppletSettingsVideoPhone( m_MyApp, parent ); break;
     case eAppletSettingsVoicePhone:         appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
     case eAppletSettingsWebCamServer:       appletDialog = new AppletSettingsShareWebCam( m_MyApp, parent ); break;
+    case eAppletShareOfferList:             appletDialog = new AppletShareOfferList( m_MyApp, parent ); break;
     case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
 
     case eAppletTestAndDebug:               appletDialog = new AppletTestAndDebug( m_MyApp, parent ); break;
