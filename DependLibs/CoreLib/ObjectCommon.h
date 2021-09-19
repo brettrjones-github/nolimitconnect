@@ -61,7 +61,6 @@
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
 #define OBJNAME_APPLET_BROWSE_FILES					    "AppletBrowseFiles"
-#define OBJNAME_APPLET_CALL_LIST			            "AppletCallList"
 #define OBJNAME_APPLET_CAM_CLIP_PLAYER		            "AppletCamClipPlayer"
 #define OBJNAME_APPLET_CAM_SETTINGS		                "AppletCamSettings"
 #define OBJNAME_APPLET_CAM_TEST							"AppletCamTest"
@@ -71,7 +70,9 @@
 #define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
+#define OBJNAME_APPLET_FRIEND_LIST_CLIENT			    "AppletFriendListClient"
 #define OBJNAME_APPLET_GROUP_JOIN_SEARCH			    "AppletGroupJoinSearch"
+#define OBJNAME_APPLET_GROUP_LIST_CLIENT			    "AppletGroupListClient"
 #define OBJNAME_APPLET_GROUP_LIST_LOCAL_VIEW			"AppletGroupListLocalView"
 #define OBJNAME_APPLET_HOST_GROUP_STATUS				"AppletHostGroupStatus"
 #define OBJNAME_APPLET_HOST_NETWORK_STATUS				"AppletHostNetworkStatus"
@@ -102,9 +103,9 @@
 #define OBJNAME_APPLET_NET_HOSTING_PAGE					"AppletNetHosting"
 #define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
-#define OBJNAME_APPLET_OFFER_LIST				        "AppletOfferList"
 #define OBJNAME_APPLET_PERMISSION_LIST				    "AppletPermissionList"
 #define OBJNAME_APPLET_PERSONAL_RECORDER				"AppletPersonalRecorder"
+#define OBJNAME_APPLET_PERSONS_OFFER_LIST				"AppletPersonsOfferList"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
 #define OBJNAME_APPLET_POPUP_MENU						"AppletPopupMenu"
 #define OBJNAME_APPLET_RANDOM_CONNECT_JOIN_SEARCH	    "AppletRandomConnectJoinSearch"
@@ -149,6 +150,7 @@
 #define OBJNAME_APPLET_SETTINGS_VIDEO_PHONE			    "AppletSettingsVideoPhone"
 #define OBJNAME_APPLET_SETTINGS_VOICE_PHONE			    "AppletSettingsVoicePhone"
 
+#define OBJNAME_APPLET_SHARE_OFFER_LIST			        "AppletShareOfferList"
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
 
 #define OBJNAME_APPLET_TEST_AND_DEBUG				    "AppletTestAndDebug"

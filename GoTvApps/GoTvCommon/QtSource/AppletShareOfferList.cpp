@@ -14,7 +14,7 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "AppletCallList.h"
+#include "AppletShareOfferList.h"
 #include "ActivityYesNoMsgBox.h"
 
 #include "AppCommon.h"
@@ -33,10 +33,10 @@
 #include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-AppletCallList::AppletCallList( AppCommon& app,  QWidget* parent )
-: AppletPeerBase( OBJNAME_APPLET_CALL_LIST, app, parent ) 
+AppletShareOfferList::AppletShareOfferList( AppCommon& app,  QWidget* parent )
+: AppletPeerBase( OBJNAME_APPLET_SHARE_OFFER_LIST, app, parent )
 {
-    setAppletType( eAppletCallList );
+    setAppletType( eAppletShareOfferList );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
@@ -55,40 +55,40 @@ AppletCallList::AppletCallList( AppCommon& app,  QWidget* parent )
 }
 
 //============================================================================
-AppletCallList::~AppletCallList()
+AppletShareOfferList::~AppletShareOfferList()
 {
 	m_MyApp.wantToGuiFileXferCallbacks( this, this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletCallList::showEvent( QShowEvent * ev )
+void AppletShareOfferList::showEvent( QShowEvent * ev )
 {
     AppletPeerBase::showEvent( ev );
 }
 
 //============================================================================
-void AppletCallList::hideEvent( QHideEvent * ev )
+void AppletShareOfferList::hideEvent( QHideEvent * ev )
 {
     AppletPeerBase::hideEvent( ev );
 }
 
 /*
 //============================================================================
-void AppletCallList::slotHomeButtonClicked( void )
+void AppletShareOfferList::slotHomeButtonClicked( void )
 {
 	hide();
 }
 
 // override default behavior of closing dialog when back button is clicked
 //============================================================================
-void AppletCallList::onBackButtonClicked( void )
+void AppletShareOfferList::onBackButtonClicked( void )
 {
     hide();
 }
 
 ////============================================================================
-//void AppletCallList::slotItemClicked(QListWidgetItem * item)
+//void AppletShareOfferList::slotItemClicked(QListWidgetItem * item)
 //{
 //	GuiFileXferSession * poSession = (GuiFileXferSession *)item->data( Qt::UserRole + 1).toULongLong();
 //	if( poSession )
@@ -104,7 +104,7 @@ void AppletCallList::onBackButtonClicked( void )
 //}
 
 //============================================================================
-FileXferWidget * AppletCallList::sessionToWidget( GuiFileXferSession * poSession )
+FileXferWidget * AppletShareOfferList::sessionToWidget( GuiFileXferSession * poSession )
 {
 	FileXferWidget * item = new FileXferWidget(ui.m_FileItemList);
     item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
@@ -126,20 +126,20 @@ FileXferWidget * AppletCallList::sessionToWidget( GuiFileXferSession * poSession
 }
 
 //============================================================================
-void AppletCallList::updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession )
+void AppletShareOfferList::updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession )
 {
 	poSession->setWidget( item );
 	item->updateWidgetFromInfo();
 }
 
 //============================================================================
-GuiFileXferSession * AppletCallList::widgetToSession( FileXferWidget * item )
+GuiFileXferSession * AppletShareOfferList::widgetToSession( FileXferWidget * item )
 {
 	return item->getFileItemInfo();
 }
 
 //============================================================================
-GuiFileXferSession * AppletCallList::findSession( VxGUID lclSessionId )
+GuiFileXferSession * AppletShareOfferList::findSession( VxGUID lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -156,7 +156,7 @@ GuiFileXferSession * AppletCallList::findSession( VxGUID lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * AppletCallList::findListEntryWidget( VxGUID lclSessionId )
+FileXferWidget * AppletShareOfferList::findListEntryWidget( VxGUID lclSessionId )
 {
 	int iCnt = ui.m_FileItemList->count();
 	for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -176,7 +176,7 @@ FileXferWidget * AppletCallList::findListEntryWidget( VxGUID lclSessionId )
 }
 
 //============================================================================
-FileXferWidget * AppletCallList::addDownload( GuiFileXferSession * poSession )
+FileXferWidget * AppletShareOfferList::addDownload( GuiFileXferSession * poSession )
 {
 	FileXferWidget * item = findListEntryWidget( poSession->getLclSessionId() );
 	if( item )
@@ -199,7 +199,7 @@ FileXferWidget * AppletCallList::addDownload( GuiFileXferSession * poSession )
 }
 
 //============================================================================
-bool AppletCallList::isXferInProgress( VxGUID lclSessionId )
+bool AppletShareOfferList::isXferInProgress( VxGUID lclSessionId )
 {
 	if( findSession( lclSessionId ) )
 	{
@@ -210,7 +210,7 @@ bool AppletCallList::isXferInProgress( VxGUID lclSessionId )
 }
 
 //============================================================================
-void AppletCallList::slotToGuiStartDownload( GuiFileXferSession * poSession )
+void AppletShareOfferList::slotToGuiStartDownload( GuiFileXferSession * poSession )
 {
 	GuiFileXferSession * newSession = new GuiFileXferSession( *poSession );
 	newSession->setXferDirection( eXferDirectionRx );
@@ -220,7 +220,7 @@ void AppletCallList::slotToGuiStartDownload( GuiFileXferSession * poSession )
 }
 
 //============================================================================
-void AppletCallList::slotToGuiFileXferState(	VxGUID		lclSessionId, 
+void AppletShareOfferList::slotToGuiFileXferState(	VxGUID		lclSessionId, 
 												EXferState		eXferState, 
 												int				param1, 
 												int				param2  )
@@ -233,7 +233,7 @@ void AppletCallList::slotToGuiFileXferState(	VxGUID		lclSessionId,
 }
 
 //============================================================================
-void AppletCallList::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, QString newFileName, EXferError xferError )
+void AppletShareOfferList::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, QString newFileName, EXferError xferError )
 {
 	GuiFileXferSession * xferSession = findSession( lclSessionId );
 	if( xferSession )
@@ -253,14 +253,14 @@ void AppletCallList::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, QString
 }
 
 //============================================================================
-void AppletCallList::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
+void AppletShareOfferList::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
 {
 	Q_UNUSED( userData );
 	emit signalToGuiStartDownload( xferSession );
 }
 
 //============================================================================
-void AppletCallList::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
+void AppletShareOfferList::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
 {
 	Q_UNUSED( userData );
 	VxGUID myLclSession( lclSessionId );
@@ -268,7 +268,7 @@ void AppletCallList::toGuiFileXferState( void * userData, VxGUID& lclSessionId, 
 }
 
 //============================================================================
-void AppletCallList::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
+void AppletShareOfferList::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
 {
 	Q_UNUSED( userData );
 	VxGUID myLclSession( lclSession );
@@ -276,12 +276,12 @@ void AppletCallList::toGuiFileDownloadComplete( void * userData, VxGUID& lclSess
 }
 
 //============================================================================
-void AppletCallList::slotFileXferItemClicked(QListWidgetItem * item)
+void AppletShareOfferList::slotFileXferItemClicked(QListWidgetItem * item)
 {
 }
 
 //============================================================================
-void AppletCallList::slotFileIconButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotFileIconButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -291,7 +291,7 @@ void AppletCallList::slotFileIconButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletCallList::slotCancelButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotCancelButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -308,7 +308,7 @@ void AppletCallList::slotCancelButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletCallList::slotPlayButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotPlayButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -318,7 +318,7 @@ void AppletCallList::slotPlayButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletCallList::slotLibraryButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotLibraryButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -332,7 +332,7 @@ void AppletCallList::slotLibraryButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletCallList::slotFileShareButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotFileShareButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -346,7 +346,7 @@ void AppletCallList::slotFileShareButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-void AppletCallList::slotShredButtonClicked( QListWidgetItem * item )
+void AppletShareOfferList::slotShredButtonClicked( QListWidgetItem * item )
 {
 	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 	if( xferSession )
@@ -361,7 +361,7 @@ void AppletCallList::slotShredButtonClicked( QListWidgetItem * item )
 }
 
 //============================================================================
-bool AppletCallList::confirmDeleteFile( bool shredFile )
+bool AppletShareOfferList::confirmDeleteFile( bool shredFile )
 {
 	bool acceptAction = true;
 	bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();

@@ -44,8 +44,8 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	m_MuteMic			= GetAppInstance().getEngine().fromGuiIsMicrophoneMuted();
 	m_MuteSpeaker		= GetAppInstance().getEngine().fromGuiIsSpeakerMuted();
 	m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
-    ui.m_CallListButton->setIcon( eMyIconCallList );
-    ui.m_OfferListButton->setIcon( eMyIconOfferList );
+    ui.m_PersonsOfferListButton->setIcon( eMyIconPersonsOfferList );
+    ui.m_ShareOfferListButton->setIcon( eMyIconOfferList );
     ui.m_MenuButton->setIcon( eMyIconMenu );
 
 	ui.m_GoTvButton->setUseTheme( false );
@@ -81,8 +81,8 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
     connect( ui.m_PowerOffButton,       SIGNAL( clicked() ), this, SLOT( slotPowerButtonClicked() ) );
     connect( ui.m_HomeButton,           SIGNAL( clicked() ), this, SLOT( slotHomeButtonClicked() ) );
-    connect( ui.m_CallListButton,       SIGNAL( clicked() ), this, SLOT( slotCallListButtonClicked() ) );
-    connect( ui.m_OfferListButton,      SIGNAL( clicked() ), this, SLOT( slotOfferListButtonClicked() ) );
+    connect( ui.m_PersonsOfferListButton,    SIGNAL( clicked() ), this, SLOT( slotPersonsOfferListButtonClicked() ) );
+    connect( ui.m_ShareOfferListButton,      SIGNAL( clicked() ), this, SLOT( slotShareOfferListButtonClicked() ) );
     connect( ui.m_BackDlgButton,        SIGNAL( clicked() ), this, SLOT( slotBackButtonClicked() ) );
     connect( ui.m_MuteMicButton,        SIGNAL( clicked() ), this, SLOT( slotMuteMicButtonClicked() ) );
     connect( ui.m_MuteSpeakerButton,    SIGNAL( clicked() ), this, SLOT( slotMuteSpeakerButtonClicked() ) );
@@ -96,8 +96,8 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( this,                      SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
     connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
 
-    connect( &m_OfferMgr,              SIGNAL( signalCallOfferCount( int ) ), this, SLOT( slotCallOfferCount( int ) ) );
-    connect( &m_OfferMgr,              SIGNAL( signalOfferListCount( int ) ), this, SLOT( slotOfferListCount( int ) ) );
+    connect( &m_OfferMgr,              SIGNAL( signalShareOfferCount( int ) ), this, SLOT( slotShareOfferListCount( int ) ) );
+    connect( &m_OfferMgr,              SIGNAL( signalPersonsOfferListCount( int ) ), this, SLOT( slotPersonsOfferListCount( int ) ) );
     connect( ui.m_MenuButton,          SIGNAL( clicked() ),                   this, SLOT( slotTitleBarMenuButtonClicked() ) );
 }
 
@@ -507,29 +507,28 @@ void TitleBarWidget::slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus )
 }
 
 //============================================================================
-void TitleBarWidget::slotCallOfferCount( int activeCnt )
+void TitleBarWidget::slotShareOfferListCount( int activeCnt )
 {
-    ui.m_CallListButton->setNotifyOnlineEnabled( activeCnt > 0 );
+    ui.m_ShareOfferListButton->setNotifyOnlineEnabled( activeCnt > 0 );
 }
 
 //============================================================================
-void TitleBarWidget::slotOfferListCount( int activeCnt )
+void TitleBarWidget::slotPersonsOfferListCount( int activeCnt )
 {
-    ui.m_OfferListButton->setNotifyOnlineEnabled( activeCnt > 0 );
+    ui.m_PersonsOfferListButton->setNotifyOnlineEnabled( activeCnt > 0 );
 }
 
 //============================================================================
-void TitleBarWidget::slotCallListButtonClicked( void )
+void TitleBarWidget::slotPersonsOfferListButtonClicked( void )
 {
-
+    m_MyApp.getAppletMgr().launchApplet( eAppletPersonsOfferList, dynamic_cast<QWidget*>(parent()) );
 }
 
 //============================================================================
-void TitleBarWidget::slotOfferListButtonClicked( void )
+void TitleBarWidget::slotShareOfferListButtonClicked( void )
 {
-
+    m_MyApp.getAppletMgr().launchApplet( eAppletShareOfferList, dynamic_cast<QWidget*>(parent()));
 }
-
 
 //============================================================================
 void TitleBarWidget::slotTitleBarMenuButtonClicked( void )

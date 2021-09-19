@@ -161,7 +161,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.cpp" />
@@ -179,10 +178,12 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAboutMe.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAvatarImage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
@@ -199,7 +200,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMultiMessenger.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerChangeFriendship.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerReplyFileOffer.cpp" />
@@ -211,6 +211,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerVoicePhone.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonsOfferList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.cpp" />
@@ -252,6 +253,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsTruthOrDare.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVideoPhone.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVoicePhone.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTestAndDebug.cpp" />
@@ -472,6 +474,10 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonsOfferList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -709,7 +715,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerReplyFileOffer.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerChangeFriendship.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMultiMessenger.h" />
@@ -741,7 +746,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoin.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBase.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletApplicationInfo.h" />
@@ -820,7 +824,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletAboutApp.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletApplicationInfo.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamClipPlayer.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamTest.ui" />
@@ -833,12 +836,14 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditAboutMe.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditAvatarImage.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditStoryBoard.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletFriendListClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryImage.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryThumb.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGoTvPtoPNetworkHost.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoin.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListLocalView.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostNetworkStatus.ui" />
@@ -852,7 +857,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletMultiMessenger.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkKey.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkSettings.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletOfferList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerChangeFriendship.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerReplyOfferFile.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerSelectFileToSend.ui" />
@@ -863,6 +867,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerVoicePhone.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPermissionList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonalRecorder.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonsOfferList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPlayerVideo.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPopupMenu.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoin.ui" />
@@ -878,6 +883,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostGroup.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostNetwork.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSharedContent.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletShareOfferList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSnapshot.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTestAndDebug.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletTheme.ui" />

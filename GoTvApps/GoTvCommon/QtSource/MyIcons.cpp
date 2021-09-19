@@ -768,8 +768,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconOfferVoicePhone:
         return ":/AppRes/Resources/offer-voice-phone.svg";
 
-    case eMyIconCallList:
-        return ":/AppRes/Resources/call-list.svg";
+    case eMyIconPersonsOfferList:
+        return ":/AppRes/Resources/persons-offer-list.svg";
 	case eMyIconFriendJoined:
 		return ":/AppRes/Resources/friend-joined.svg";
 	case eMyIconPersonAdd:

@@ -293,7 +293,6 @@
         <file>Resources/offer-voice-phone.svg</file>
         <file>Resources/notify-offer.svg</file>
         <file>Resources/offer-list.svg</file>
-        <file>Resources/call-list.svg</file>
         <file>Resources/notify-join.svg</file>
         <file>Resources/question-mark.svg</file>
         <file>Resources/eye-announced-groups.svg</file>
@@ -303,5 +302,6 @@
         <file>Resources/offer-truth-or-dare.svg</file>
         <file>Resources/direct-connected.svg</file>
         <file>Resources/direct-connected-overlay.svg</file>
+        <file>Resources/persons-offer-list.svg</file>
     </qresource>
 </RCC>

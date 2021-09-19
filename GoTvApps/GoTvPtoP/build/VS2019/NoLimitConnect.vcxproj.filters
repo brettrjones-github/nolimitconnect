@@ -218,9 +218,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -312,9 +309,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCallList.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.h">
@@ -821,6 +815,18 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.h">
       <Filter>Source Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonsOfferList.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -943,9 +949,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBrowseFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCallList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletCamSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1037,9 +1040,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletOfferList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerBase.cpp">
@@ -1816,6 +1816,18 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonsOfferList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
@@ -2158,9 +2170,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletBrowseFiles.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCallList.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletCamSettings.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2234,9 +2243,6 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkSettings.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletOfferList.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerChangeFriendship.ui">
@@ -2531,6 +2537,18 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPopupMenu.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListClient.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletFriendListClient.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonsOfferList.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletShareOfferList.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

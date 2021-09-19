@@ -101,6 +101,10 @@ void AppletPopupMenu::itemClicked( QListWidgetItem* item )
 	{
 		onFriendActionSelected( iItemId );
 	}
+	else if( getMenuType() == EPopupMenuType::ePopupMenuTitleBar )
+	{
+		onTitleBarActionSelected( iItemId );
+	}
 	else
 	{
 		emit menuItemClicked( iItemId, this, m_ParentActivity );
@@ -271,9 +275,28 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 		break;
 
 	default:
-		LogMsg( LOG_ERROR, "Unknown Menu id\n" );
+		LogMsg( LOG_ERROR, "Unknown Menu id" );
 	}
 
 	close();
 }
 
+
+//============================================================================
+//! user selected friend action
+void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
+{
+	switch( iMenuId )
+	{
+	case 0: // friends listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		break;
+
+	case 1: // group listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		break;
+
+	default:
+		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
+	}
+}
