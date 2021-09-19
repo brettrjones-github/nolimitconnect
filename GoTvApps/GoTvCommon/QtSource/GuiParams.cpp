@@ -356,6 +356,10 @@ QString GuiParams::describeHostSearchStatus( EHostSearchStatus searchStatus )
         return QObject::tr("Host Search Connect Success ");
     case eHostSearchConnectFailed:
         return QObject::tr("Host Search Connect Failed ");
+    case eHostSearchHandshaking:
+        return QObject::tr( "Host Search Handshaking " );
+    case eHostSearchHandshakeTimeout:
+        return QObject::tr( "Host Search Handshake Timeout " );
 
     case eHostSearchSendingSearchRequest:
         return QObject::tr("Host Search Sending Request ");

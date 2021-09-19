@@ -117,7 +117,7 @@ void AppletGroupListClient::slotStartSearchState(bool startSearch)
         clearStatus();
 
         QString strSearch = getSearchText();
-        if( !m_SearchParams.getSearchListAll() && 3 > strSearch.length() )
+        if( !ui.m_SearchsParamWidget->getSearchListAll() && 3 > strSearch.length() )
         {
             ui.m_SearchsParamWidget->slotSearchCancel();
             ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );

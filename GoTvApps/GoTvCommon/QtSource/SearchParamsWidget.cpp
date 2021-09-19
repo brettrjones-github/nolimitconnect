@@ -107,6 +107,7 @@ bool SearchParamsWidget::toSearchParams( SearchParams& params )
     params.setLanguage( GuiHelpers::getLanguage( ui.m_LanguageComboBox ) );
     params.setContentRating( GuiHelpers::getContentRating( ui.m_ContentRatingComboBox ) );
     std::string searchText = ui.m_SearchTextEdit->text().isEmpty() ? "" : ui.m_SearchTextEdit->text().toUtf8().constData();
+    params.setSearchListAll( m_SearchParams.getSearchListAll() );
     params.setSearchText( searchText );
     VxGUID::generateNewVxGUID(params.getSearchSessionId());
     return true;

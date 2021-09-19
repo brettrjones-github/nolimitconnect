@@ -75,7 +75,6 @@ protected:
     bool                        m_PermissionsConnected{ false };
     SearchParams                m_SearchParams;
     bool                        m_SearchStarted{ false };
-    bool                        m_SearchListAll{ false };
 };
 
 
