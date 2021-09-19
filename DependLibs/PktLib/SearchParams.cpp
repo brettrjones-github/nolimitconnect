@@ -27,6 +27,7 @@ SearchParams::SearchParams( const SearchParams& rhs )
     , m_SearchIdentGuid(rhs.m_SearchIdentGuid )
     , m_SearchUrl( rhs.m_SearchUrl )
     , m_SearchText( rhs.m_SearchText )
+    , m_SearchListAll( rhs.m_SearchListAll )
 {
 }
 
@@ -44,6 +45,7 @@ SearchParams& SearchParams::operator =( const SearchParams& rhs )
         m_SearchIdentGuid       = rhs.m_SearchIdentGuid;
         m_SearchUrl		        = rhs.m_SearchUrl;
         m_SearchText		    = rhs.m_SearchText;
+        m_SearchListAll         = rhs.m_SearchListAll;
 	}
 
 	return *this;
@@ -60,6 +62,7 @@ bool SearchParams::addToBlob( PktBlobEntry& blob )
     result &= blob.setValue( m_SearchIdentGuid );
     result &= blob.setValue( m_SearchUrl );
     result &= blob.setValue( m_SearchText );
+    result &= blob.setValue( m_SearchListAll );
     return result;
 }
 
@@ -74,6 +77,7 @@ bool SearchParams::extractFromBlob( PktBlobEntry& blob )
     result &= blob.getValue( m_SearchIdentGuid );
     result &= blob.getValue( m_SearchUrl );
     result &= blob.getValue( m_SearchText );
+    result &= blob.getValue( m_SearchListAll );
     return result;
 }
 

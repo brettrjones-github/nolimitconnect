@@ -47,6 +47,9 @@ public:
 	void						setSearchText( std::string& text )							{ m_SearchText = text; }
     std::string&				getSearchText( void )									    { return m_SearchText; }
 
+    virtual void                setSearchListAll( bool listAll )                            { m_SearchListAll = listAll; }
+    virtual bool                getSearchListAll( void )                                    { return m_SearchListAll; }
+
     virtual bool                addToBlob( PktBlobEntry& blob ) override;
     virtual bool                extractFromBlob( PktBlobEntry& blob ) override;
 
@@ -59,6 +62,7 @@ protected:
     VxGUID					    m_SearchIdentGuid;
     std::string					m_SearchUrl;
 	std::string					m_SearchText;
+    bool                        m_SearchListAll{ false };
 };
 
 

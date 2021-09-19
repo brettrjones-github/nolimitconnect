@@ -131,7 +131,7 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
             searchReply.setSearchSessionId( searchParams.getSearchSessionId() );
             
             std::string searchText = searchParams.getSearchText();
-            if( searchText.size() < MIN_SEARCH_TEXT_LEN )
+            if( !searchParams.getSearchListAll() && searchText.size() < MIN_SEARCH_TEXT_LEN )
             {
                 LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService search text too short" );
                 searchReply.setCommError( eCommErrSearchTextToShort );

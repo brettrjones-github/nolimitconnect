@@ -46,6 +46,9 @@ public:
     virtual bool                toSearchParams( SearchParams& params );
     virtual bool                fromSearchParams( SearchParams& params );
 
+    virtual void                setSearchListAll( bool listAll )    { m_SearchParams.setSearchListAll( listAll ); }
+    virtual bool                getSearchListAll( void )            { return m_SearchParams.getSearchListAll(); }
+
 signals:
     void                        signalSearchState(bool searchStarted);
 
@@ -72,6 +75,7 @@ protected:
     bool                        m_PermissionsConnected{ false };
     SearchParams                m_SearchParams;
     bool                        m_SearchStarted{ false };
+    bool                        m_SearchListAll{ false };
 };
 
 

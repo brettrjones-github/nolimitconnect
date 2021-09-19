@@ -62,13 +62,17 @@ AppletGroupListClient::AppletGroupListClient(	AppCommon&		    app,
     connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
     connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
 
-    setStatusLabel( QObject::tr( "Search For Group Host To Join" ) );
+    setStatusLabel( QObject::tr( "Fetch Group Host List" ) );
     std::string lastHostSearchText;
     m_MyApp.getAppSettings().getLastHostSearchText( getSearchType(), lastHostSearchText ); 
     if( !lastHostSearchText.empty() )
     {
         ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
     }
+
+    ui.m_SearchsParamWidget->setVisible( false );
+    ui.m_SearchsParamWidget->setSearchListAll( true );
+    slotStartSearchState( true );
 }
 
 //============================================================================
@@ -113,7 +117,7 @@ void AppletGroupListClient::slotStartSearchState(bool startSearch)
         clearStatus();
 
         QString strSearch = getSearchText();
-        if( 3 > strSearch.length() )
+        if( !m_SearchParams.getSearchListAll() && 3 > strSearch.length() )
         {
             ui.m_SearchsParamWidget->slotSearchCancel();
             ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
