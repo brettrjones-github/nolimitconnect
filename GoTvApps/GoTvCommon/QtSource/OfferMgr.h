@@ -27,7 +27,6 @@ class VxGUID;
 class GuiOfferSession;
 class OfferSessionState;
 class GuiUser;
-class OfferWidget;
 class QListWidgetItem;
 class QTimer;
 
@@ -86,29 +85,10 @@ protected slots:
 	void						slotToGuiContactOffline( GuiUser * netIdent ); // connected to app signal
 
 protected:
-	//GuiOfferSession *			findOffer( void * pvUserData );
-	//GuiOfferSession *			findOffer( GuiUser * netIdent, EPluginType ePluginType );
 
 	void						recievedOffer( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent );
 	void						recievedOfferReply( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
 	void						recievedSessionEnd( EPluginType ePluginType, VxGUID offerSessionId, GuiUser * hisIdent, EOfferResponse eOfferResponse );
-
-	//bool						isPhonePlugin( EPluginType ePluginType );
-	//bool						isOfferBasedPlugin( EPluginType ePluginType );
-	//!	fill offer into new QListWidgetItem *
-	//QListWidgetItem *			offerToWidget( GuiOfferSession * poOffer );
-	//!	get offer from QListWidgetItem data
-	//GuiOfferSession *			widgetToOffer( OfferWidget * item );
-
-	bool						handleOfferResponse(  OfferWidget * item, GuiOfferSession * poOffer );
-	void						handleMissedCall( GuiOfferSession * offerSession );
-
-	bool						isMatch( OfferWidget * poOfferWidget, EPluginType ePluginType, GuiUser * netIdent );
-
-	void						setOnlineState( GuiOfferSession * offerSession, bool isOnline );
-	void						enableNotifyIconFlash( bool enable );
-	void						updateNotifyStatus( void );
-	void						playNotifySound( bool playSnd );
 
 	void						changeOfferState( OfferSessionState * sessionState, EOfferState newOfferState );
 	void						forceToNotInSession( OfferSessionState * sessionState );

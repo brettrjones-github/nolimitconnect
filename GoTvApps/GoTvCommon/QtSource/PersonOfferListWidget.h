@@ -27,12 +27,12 @@ class AppCommon;
 class MyIcons;
 class P2PEngine;
 
-class FriendListWidget : public QListWidget
+class PersonOfferListWidget : public QListWidget
 {
 	Q_OBJECT
 
 public:
-	FriendListWidget( QWidget * parent );
+	PersonOfferListWidget( QWidget * parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );

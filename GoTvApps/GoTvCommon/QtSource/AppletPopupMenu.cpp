@@ -281,10 +281,37 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 	close();
 }
 
+//============================================================================
+void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
+{
+	switch( iMenuId )
+	{
+	case 0: // friends listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		break;
+
+	case 1: // group listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		break;
+
+	default:
+		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
+	}
+}
 
 //============================================================================
-//! user selected friend action
-void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
+void AppletPopupMenu::showPersonOfferMenu( GuiUser* poSelectedFriend )
+{
+	m_SelectedFriend = poSelectedFriend;
+	setMenuType( EPopupMenuType::ePopupMenuOfferFriendship );
+	setTitle( QObject::tr( "Offer Friendship" ) );
+	addMenuItem( 0, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Friendship" ) );
+	addMenuItem( 1, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Join Group" ) );
+}
+
+
+//============================================================================
+void AppletPopupMenu::onPersonActionActionSelected( int iMenuId )
 {
 	switch( iMenuId )
 	{

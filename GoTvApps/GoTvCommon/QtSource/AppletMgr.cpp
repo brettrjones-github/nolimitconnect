@@ -65,7 +65,7 @@
 #include "AppletPeerSessionFileOffer.h"
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
-#include "AppletPersonsOfferList.h"
+#include "AppletPersonOfferList.h"
 #include "AppletPlayerVideo.h"
 #include "AppletPopupMenu.h"
 #include "AppletRandomConnectJoinSearch.h"
@@ -274,7 +274,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletJoinGroupStatus:            appletDialog = new AppletJoinGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
-    case eAppletPersonsOfferList:           appletDialog = new AppletPersonsOfferList( m_MyApp, parent ); break;
+    case eAppletPersonOfferList:           appletDialog = new AppletPersonOfferList( m_MyApp, parent ); break;
     case eAppletPopupMenu:                  appletDialog = new AppletPopupMenu( m_MyApp, parent ); break;
     case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
 

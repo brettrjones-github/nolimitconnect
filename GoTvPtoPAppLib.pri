@@ -102,7 +102,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonsOfferList.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonOfferList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerReplyFileOffer.h \
@@ -156,6 +156,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsTruthOrDare.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareOfferList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.h \
@@ -171,8 +172,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetBaseWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AvatarBar.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/CallListItem.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/CallListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/CamTitleBarPreview.h \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CamLogic.h \
@@ -245,15 +244,13 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferListItem.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferMgr.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.h \
@@ -269,6 +266,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/SearchParamsWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ShareOfferListItem.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ShareOfferListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioDefs.h \
@@ -439,7 +438,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMultiMessenger.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonsOfferList.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonOfferList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerChangeFriendship.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPeerReplyFileOffer.cpp \
@@ -507,8 +506,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVideoWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVoiceWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AvatarBar.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/CallListItem.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/CallListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/CamLogic.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/CamTitleBarPreview.cpp \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.cpp \
@@ -582,9 +579,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/OfferMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferListItem.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferListWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileShare.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFriend.cpp \
@@ -596,6 +590,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingMedia.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListItem.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.cpp \
@@ -617,6 +612,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/SearchParamsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ShareOfferListItem.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ShareOfferListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.cpp \
@@ -756,7 +753,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletMultiMessenger.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonsOfferList.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonOfferList.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerChangeFriendship.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerReplyOfferFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPeerSelectFileToSend.ui \
@@ -778,6 +775,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostGroup.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostNetwork.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletShareOfferList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSnapshot.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletTestAndDebug.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
@@ -825,16 +823,16 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkKeyWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/NetworkTestWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/OfferListItem.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/OfferWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PermissionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/PersonOfferListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PluginSettingsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PopupMenuWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/SearchParamsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ServiceSettingsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SessionWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ShareOfferListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SoundCtrlWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/StoryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailEditWidget.ui \

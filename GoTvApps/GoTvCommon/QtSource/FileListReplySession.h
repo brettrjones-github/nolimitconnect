@@ -25,7 +25,6 @@
 #include <string>
 
 class GuiUser;
-class OfferWidget;
 class P2PEngine;
 class VxNetIdent;
 

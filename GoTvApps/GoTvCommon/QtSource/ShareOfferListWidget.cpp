@@ -13,8 +13,8 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "OfferListItem.h"
-#include "OfferListWidget.h"
+#include "ShareOfferListItem.h"
+#include "ShareOfferListWidget.h"
 #include "OfferMgr.h"
 #include "GuiOfferSession.h"
 
@@ -27,7 +27,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-OfferListWidget::OfferListWidget( QWidget * parent )
+ShareOfferListWidget::ShareOfferListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_OfferMgr( m_MyApp.getOfferMgr() )
@@ -53,16 +53,16 @@ OfferListWidget::OfferListWidget( QWidget * parent )
 }
 
 //============================================================================
-OfferListItem* OfferListWidget::sessionToWidget( GuiOfferSession* userSession )
+ShareOfferListItem* ShareOfferListWidget::sessionToWidget( GuiOfferSession* userSession )
 {
-    OfferListItem* userItem = new OfferListItem(this);
+    ShareOfferListItem* userItem = new ShareOfferListItem(this);
     userItem->setOfferSession( userSession );
     userItem->setSizeHint( userItem->calculateSizeHint() );
 
-    connect( userItem, SIGNAL(signalOfferListItemClicked(QListWidgetItem *)),	    this, SLOT(slotOfferListItemClicked(QListWidgetItem *)) );
-    connect( userItem, SIGNAL(signalAvatarButtonClicked(OfferListItem *)),	        this, SLOT(slotAvatarButtonClicked(OfferListItem *)) );
-    connect( userItem, SIGNAL(signalMenuButtonClicked(OfferListItem *)),	            this, SLOT(slotMenuButtonClicked(OfferListItem *)) );
-    connect( userItem, SIGNAL(signalFriendshipButtonClicked(OfferListItem *)),		this, SLOT(slotFriendshipButtonClicked(OfferListItem *)) );
+    connect( userItem, SIGNAL(signalShareOfferListItemClicked(QListWidgetItem *)),	    this, SLOT(slotShareOfferListItemClicked(QListWidgetItem *)) );
+    connect( userItem, SIGNAL(signalAvatarButtonClicked(ShareOfferListItem *)),	        this, SLOT(slotAvatarButtonClicked(ShareOfferListItem *)) );
+    connect( userItem, SIGNAL(signalMenuButtonClicked(ShareOfferListItem *)),	            this, SLOT(slotMenuButtonClicked(ShareOfferListItem *)) );
+    connect( userItem, SIGNAL(signalFriendshipButtonClicked(ShareOfferListItem *)),		this, SLOT(slotFriendshipButtonClicked(ShareOfferListItem *)) );
 
     userItem->updateWidgetFromInfo();
 
@@ -70,24 +70,24 @@ OfferListItem* OfferListWidget::sessionToWidget( GuiOfferSession* userSession )
 }
 
 //============================================================================
-GuiOfferSession* OfferListWidget::widgetToSession( OfferListItem * item )
+GuiOfferSession* ShareOfferListWidget::widgetToSession( ShareOfferListItem * item )
 {
     return item->getOfferSession();
 }
 
 //============================================================================
-MyIcons&  OfferListWidget::getMyIcons( void )
+MyIcons&  ShareOfferListWidget::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-GuiOfferSession * OfferListWidget::findSession( VxGUID& lclSessionId )
+GuiOfferSession * ShareOfferListWidget::findSession( VxGUID& lclSessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        OfferListItem* listItem =  (OfferListItem*)item( iRow );
+        ShareOfferListItem* listItem =  (ShareOfferListItem*)item( iRow );
         if( listItem )
         {
             GuiOfferSession * userSession = listItem->getOfferSession();
@@ -102,12 +102,12 @@ GuiOfferSession * OfferListWidget::findSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-OfferListItem* OfferListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
+ShareOfferListItem* ShareOfferListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        OfferListItem*  userItem = (OfferListItem*)item( iRow );
+        ShareOfferListItem*  userItem = (ShareOfferListItem*)item( iRow );
         if( userItem )
         {
             GuiOfferSession * userSession = userItem->getOfferSession();
@@ -122,12 +122,12 @@ OfferListItem* OfferListWidget::findListEntryWidgetBySessionId( VxGUID& sessionI
 }
 
 //============================================================================
-OfferListItem* OfferListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
+ShareOfferListItem* ShareOfferListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        OfferListItem*  userItem = (OfferListItem*)item( iRow );
+        ShareOfferListItem*  userItem = (ShareOfferListItem*)item( iRow );
         if( userItem )
         {
             GuiOfferSession * userSession = userItem->getOfferSession();
@@ -142,7 +142,7 @@ OfferListItem* OfferListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId 
 }
 
 //============================================================================
-void OfferListWidget::slotOfferListItemClicked( OfferListItem* userItem )
+void ShareOfferListWidget::slotShareOfferListItemClicked( ShareOfferListItem* userItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -150,11 +150,11 @@ void OfferListWidget::slotOfferListItemClicked( OfferListItem* userItem )
 	}
 
 	m_ClickEventTimer.startTimer();
-    onOfferListItemClicked(userItem);
+    onShareOfferListItemClicked(userItem);
 }
 
 //============================================================================
-void OfferListWidget::slotAvatarButtonClicked( OfferListItem* userItem )
+void ShareOfferListWidget::slotAvatarButtonClicked( ShareOfferListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
     {
@@ -166,7 +166,7 @@ void OfferListWidget::slotAvatarButtonClicked( OfferListItem* userItem )
 }
 
 //============================================================================
-void OfferListWidget::slotMenuButtonClicked( OfferListItem* userItem )
+void ShareOfferListWidget::slotMenuButtonClicked( ShareOfferListItem* userItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -178,7 +178,7 @@ void OfferListWidget::slotMenuButtonClicked( OfferListItem* userItem )
 }
 
 //============================================================================
-void OfferListWidget::slotFriendshipButtonClicked( OfferListItem* userItem )
+void ShareOfferListWidget::slotFriendshipButtonClicked( ShareOfferListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
     {
@@ -190,7 +190,7 @@ void OfferListWidget::slotFriendshipButtonClicked( OfferListItem* userItem )
 }
 
 //============================================================================
-void OfferListWidget::addOfferToList( EHostType userType, VxGUID& sessionId, GuiOffer * userIdent )
+void ShareOfferListWidget::addOfferToList( EHostType userType, VxGUID& sessionId, GuiOffer * userIdent )
 {
     /*
     GuiOfferSession* userSession = new GuiOfferSession( userType, sessionId, userIdent, this );
@@ -200,9 +200,9 @@ void OfferListWidget::addOfferToList( EHostType userType, VxGUID& sessionId, Gui
 }
 
 //============================================================================
-OfferListItem* OfferListWidget::addOrUpdateOfferSession( GuiOfferSession* userSession )
+ShareOfferListItem* ShareOfferListWidget::addOrUpdateOfferSession( GuiOfferSession* userSession )
 {
-    OfferListItem* userItem = findListEntryWidgetBySessionId( userSession->getSessionId() );
+    ShareOfferListItem* userItem = findListEntryWidgetBySessionId( userSession->getSessionId() );
     if( userItem )
     {
         GuiOfferSession* userOldSession = userItem->getOfferSession();
@@ -238,22 +238,22 @@ OfferListItem* OfferListWidget::addOrUpdateOfferSession( GuiOfferSession* userSe
 }
 
 //============================================================================
-void OfferListWidget::onOfferListItemClicked( OfferListItem* userItem )
+void ShareOfferListWidget::onShareOfferListItemClicked( ShareOfferListItem* userItem )
 {
-    LogMsg( LOG_DEBUG, "onOfferListItemClicked" );
+    LogMsg( LOG_DEBUG, "onShareOfferListItemClicked" );
     if( userItem )
     {
         GuiOfferSession* userSession = userItem->getOfferSession();
         if( userSession )
         {
-            emit signalOfferListItemClicked( userSession, userItem );
+            emit signalShareOfferListItemClicked( userSession, userItem );
         }
     }
-    onOfferListItemClicked( userItem );
+    onShareOfferListItemClicked( userItem );
 }
 
 //============================================================================
-void OfferListWidget::onAvatarButtonClicked( OfferListItem* userItem )
+void ShareOfferListWidget::onAvatarButtonClicked( ShareOfferListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
     if( userItem )
@@ -267,7 +267,7 @@ void OfferListWidget::onAvatarButtonClicked( OfferListItem* userItem )
 }
 
 //============================================================================
-void OfferListWidget::onMenuButtonClicked( OfferListItem* userItem )
+void ShareOfferListWidget::onMenuButtonClicked( ShareOfferListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
     if( userItem )
@@ -300,7 +300,7 @@ void OfferListWidget::onMenuButtonClicked( OfferListItem* userItem )
 }
 
 //============================================================================
-void OfferListWidget::onFriendshipButtonClicked( OfferListItem* userItem )
+void ShareOfferListWidget::onFriendshipButtonClicked( ShareOfferListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
     if( userItem )
@@ -318,32 +318,32 @@ void OfferListWidget::onFriendshipButtonClicked( OfferListItem* userItem )
 
 
 //============================================================================
-void OfferListWidget::slotOfferAdded( GuiOffer* user )
+void ShareOfferListWidget::slotOfferAdded( GuiOffer* user )
 {
     updateOffer( user );
 }
 
 //============================================================================
-void OfferListWidget::slotOfferRemoved( VxGUID onlineId )
+void ShareOfferListWidget::slotOfferRemoved( VxGUID onlineId )
 {
     removeOffer( onlineId );
 }
 
 //============================================================================
-void OfferListWidget::slotOfferUpdated( GuiOffer* user )
+void ShareOfferListWidget::slotOfferUpdated( GuiOffer* user )
 {
     updateOffer( user );
 }
 
 //============================================================================
-void OfferListWidget::slotOfferOnlineStatus( GuiOffer* user, bool isOnline )
+void ShareOfferListWidget::slotOfferOnlineStatus( GuiOffer* user, bool isOnline )
 {
     updateOffer( user );
 }
 */
 
 //============================================================================
-void OfferListWidget::setOfferViewType( EOfferViewType viewType )
+void ShareOfferListWidget::setOfferViewType( EOfferViewType viewType )
 {
     if( viewType != m_OfferViewType )
     {
@@ -353,7 +353,7 @@ void OfferListWidget::setOfferViewType( EOfferViewType viewType )
 }
 
 //============================================================================
-void OfferListWidget::refreshList( void )
+void ShareOfferListWidget::refreshList( void )
 {
     clearOfferList();
     std::vector<GuiOfferSession *> userList;
@@ -377,20 +377,20 @@ void OfferListWidget::refreshList( void )
 
 
 //============================================================================
-void OfferListWidget::clearOfferList( void )
+void ShareOfferListWidget::clearOfferList( void )
 {
     m_OfferCache.clear();
     for(int i = 0; i < count(); ++i)
     {
         QListWidgetItem* userItem = item(i);
-        delete ((OfferListItem *)userItem);
+        delete ((ShareOfferListItem *)userItem);
     }
 
     clear();
 }
 
 //============================================================================
-bool OfferListWidget::isListViewMatch( GuiOfferSession * user )
+bool ShareOfferListWidget::isListViewMatch( GuiOfferSession * user )
 {
     /*
     if( user && !user->isIgnored())
@@ -435,7 +435,7 @@ bool OfferListWidget::isListViewMatch( GuiOfferSession * user )
 }
 
 //============================================================================
-void OfferListWidget::updateOffer( GuiOfferSession * userSession )
+void ShareOfferListWidget::updateOffer( GuiOfferSession * userSession )
 {
     if( isListViewMatch( userSession ) )
     {
@@ -447,7 +447,7 @@ void OfferListWidget::updateOffer( GuiOfferSession * userSession )
             if( userSession )
             {
             */
-                OfferListItem* userItem = sessionToWidget( userSession );
+                ShareOfferListItem* userItem = sessionToWidget( userSession );
                 if( 0 == count() )
                 {
                     LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName() );
@@ -465,7 +465,7 @@ void OfferListWidget::updateOffer( GuiOfferSession * userSession )
         }
         else
         {
-            OfferListItem* userItem = findListEntryWidgetByOnlineId( userSession->getMyOnlineId() );
+            ShareOfferListItem* userItem = findListEntryWidgetByOnlineId( userSession->getMyOnlineId() );
             if( userItem )
             {
                 userItem->update();
@@ -475,13 +475,13 @@ void OfferListWidget::updateOffer( GuiOfferSession * userSession )
 }
 
 //============================================================================
-void OfferListWidget::removeOffer( VxGUID& onlineId )
+void ShareOfferListWidget::removeOffer( VxGUID& onlineId )
 {
     auto iter = m_OfferCache.find( onlineId );
     if( iter != m_OfferCache.end() )
     {
         m_OfferCache.erase( iter );
-        OfferListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
+        ShareOfferListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
         if( userItem )
         {
             GuiOfferSession * userSession = userItem->getOfferSession();

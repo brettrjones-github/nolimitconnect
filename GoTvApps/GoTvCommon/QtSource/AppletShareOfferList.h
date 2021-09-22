@@ -16,7 +16,7 @@
 
 #include "AppletPeerBase.h"
 #include "ToGuiFileXferInterface.h"
-#include "ui_AppletCallList.h"
+#include "ui_AppletShareOfferList.h"
 
 #include <PktLib/VxCommon.h>
 
@@ -78,5 +78,5 @@ protected:
     */
 
 	//=== vars ===//
-	Ui::AppletCallListUi		ui;
+	Ui::AppletShareOfferListUi		ui;
 };

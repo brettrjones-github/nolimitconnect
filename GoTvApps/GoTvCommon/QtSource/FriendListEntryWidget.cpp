@@ -15,6 +15,8 @@
 
 #include <app_precompiled_hdr.h>
 #include "FriendListEntryWidget.h"
+#include "AppCommon.h"
+#include "AppletPopupMenu.h"
 
 //============================================================================
 FriendListEntryWidget::FriendListEntryWidget( QListWidget * parent, int type  )
@@ -59,6 +61,12 @@ void FriendListEntryWidget::slotMenuButtonPressed()
 {
 	SubWidget->setDown(true);
 	emit signalMenuButtonClicked( this );
+	AppletPopupMenu *applet = dynamic_cast<AppletPopupMenu *>( GetAppInstance().getAppletMgr().launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(parent()) ));
+	if( applet )
+	{
+		GuiUser* selectedFriend = (GuiUser*)data( Qt::UserRole + 2 ).toULongLong();
+		applet->showPersonOfferMenu( selectedFriend );
+	}
 }
 
 //============================================================================

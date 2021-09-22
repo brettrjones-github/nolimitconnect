@@ -25,6 +25,7 @@ enum class EPopupMenuType
 	ePopupMenuAppSystem,
 	ePopupMenuTitleBar,
 	ePopupMenuListOptions1,
+	ePopupMenuOfferFriendship,
 
 	eMaxPopupMenu
 };
@@ -46,6 +47,7 @@ public:
 	void						showFriendMenu( GuiUser* poSelectedFriend );
 	void						showAppSystemMenu( void );
 	void						showTitleBarMenu( void );
+	void						showPersonOfferMenu( GuiUser* poSelectedFriend );
 
 signals:
 	void						menuItemClicked( int iItemId, AppletPopupMenu* popupMenu, AppletBase* );
@@ -53,6 +55,7 @@ signals:
 public slots:
 	void						onFriendActionSelected( int iMenuId );
 	void						onTitleBarActionSelected( int iMenuId );
+	void						onPersonActionActionSelected( int iMenuId );
 
 private slots:
 	//! user clicked the upper right x button

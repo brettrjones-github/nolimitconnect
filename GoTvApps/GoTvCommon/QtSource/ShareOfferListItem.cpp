@@ -13,12 +13,12 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "OfferListItem.h"
+#include "ShareOfferListItem.h"
 #include "GuiOfferSession.h"
 #include "GuiParams.h"
 
 //============================================================================
-OfferListItem::OfferListItem(QWidget *parent  )
+ShareOfferListItem::ShareOfferListItem(QWidget *parent  )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 {
@@ -36,7 +36,7 @@ OfferListItem::OfferListItem(QWidget *parent  )
 }
 
 //============================================================================
-OfferListItem::~OfferListItem()
+ShareOfferListItem::~ShareOfferListItem()
 {
     GuiOfferSession * hostSession = (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
@@ -46,77 +46,77 @@ OfferListItem::~OfferListItem()
 }
 
 //============================================================================
-QSize OfferListItem::calculateSizeHint( void )
+QSize ShareOfferListItem::calculateSizeHint( void )
 {
     return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize().height() + 8 ) );
 }
 
 //============================================================================
-MyIcons& OfferListItem::getMyIcons( void )
+MyIcons& ShareOfferListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void OfferListItem::resizeEvent(QResizeEvent* resizeEvent)
+void ShareOfferListItem::resizeEvent(QResizeEvent* resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
     updateWidgetFromInfo();
 }
 
 //============================================================================
-void OfferListItem::mousePressEvent(QMouseEvent * event)
+void ShareOfferListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
-    emit signalOfferListItemClicked( this );
+    emit signalShareOfferListItemClicked( this );
 }
 
 //============================================================================
-void OfferListItem::setOfferSession( GuiOfferSession* hostSession )
+void ShareOfferListItem::setOfferSession( GuiOfferSession* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
 }
 
 //============================================================================
-GuiOfferSession * OfferListItem::getOfferSession( void )
+GuiOfferSession * ShareOfferListItem::getOfferSession( void )
 {
     return (GuiOfferSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-void OfferListItem::slotAvatarButtonClicked()
+void ShareOfferListItem::slotAvatarButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "OfferListItem::slotIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "ShareOfferListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void OfferListItem::slotFriendshipButtonClicked()
+void ShareOfferListItem::slotFriendshipButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "OfferListItem::slotFriendshipButtonClicked" );
+    LogMsg( LOG_DEBUG, "ShareOfferListItem::slotFriendshipButtonClicked" );
     emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void OfferListItem::slotMenuButtonClicked( void )
+void ShareOfferListItem::slotMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void OfferListItem::updateWidgetFromInfo( void )
+void ShareOfferListItem::updateWidgetFromInfo( void )
 {
     GuiOfferSession* hostSession = getOfferSession();
     if( nullptr == hostSession )
     {
-        LogMsg( LOG_DEBUG, "OfferListItem::updateWidgetFromInfo null user session" );
+        LogMsg( LOG_DEBUG, "ShareOfferListItem::updateWidgetFromInfo null user session" );
         return;
     }
 
     GuiUser * hostIdent = hostSession->getHisIdent();
     if( nullptr == hostIdent )
     {
-        LogMsg( LOG_DEBUG, "OfferListItem::updateWidgetFromInfo null gui user" );
+        LogMsg( LOG_DEBUG, "ShareOfferListItem::updateWidgetFromInfo null gui user" );
         return;
     }
 

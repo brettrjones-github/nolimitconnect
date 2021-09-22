@@ -24,7 +24,6 @@
 
 class AppCommon;
 class GuiUser;
-class OfferWidget;
 class OfferSessionState;
 class P2PEngine;
 

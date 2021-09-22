@@ -202,7 +202,7 @@ enum EApplet
 
     eAppletMessenger,
     eAppletShareOfferList,
-    eAppletPersonsOfferList,	
+    eAppletPersonOfferList,	
 
     eAppletCamClipPlayer,
     eAppletPopupMenu,

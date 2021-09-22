@@ -38,26 +38,26 @@ class GuiOffer;
 class GuiOfferMgr;
 class GuiOfferSession;
 class MyIcons;
-class OfferListItem;
+class ShareOfferListItem;
 class P2PEngine;
 
-class OfferListWidget : public QListWidget
+class ShareOfferListWidget : public QListWidget
 {
 	Q_OBJECT
 
 public:
-	OfferListWidget( QWidget * parent );
+	ShareOfferListWidget( QWidget * parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
     void                        clearOfferList( void );
 
     void                        addOfferToList( EHostType hostType, VxGUID& sessionId,  GuiOffer * userIdent );
-    OfferListItem*              addOrUpdateOfferSession( GuiOfferSession* hostSession );
+    ShareOfferListItem*              addOrUpdateOfferSession( GuiOfferSession* hostSession );
 
     GuiOfferSession*            findSession( VxGUID& lclSessionId );
-    OfferListItem*              findListEntryWidgetBySessionId( VxGUID& sessionId );
-    OfferListItem*              findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    ShareOfferListItem*              findListEntryWidgetBySessionId( VxGUID& sessionId );
+    ShareOfferListItem*              findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
     void                        updateOffer( GuiOfferSession * user );
     void                        removeOffer( VxGUID& onlineId );
@@ -69,11 +69,11 @@ public:
     EOfferViewType              getOfferViewType( void )                     { return m_OfferViewType; }
 
 signals:
-    void                        signalOfferListItemClicked( GuiOfferSession* hostSession, OfferListItem* hostItem );
+    void                        signalShareOfferListItemClicked( GuiOfferSession* hostSession, ShareOfferListItem* hostItem );
 
-    void                        signalAvatarButtonClicked( GuiOfferSession* hostSession, OfferListItem* hostItem );
-    void                        signalMenuButtonClicked( GuiOfferSession* hostSession, OfferListItem* hostItem );
-    void                        signalFriendshipButtonClicked( GuiOfferSession* hostSession, OfferListItem* hostItem );
+    void                        signalAvatarButtonClicked( GuiOfferSession* hostSession, ShareOfferListItem* hostItem );
+    void                        signalMenuButtonClicked( GuiOfferSession* hostSession, ShareOfferListItem* hostItem );
+    void                        signalFriendshipButtonClicked( GuiOfferSession* hostSession, ShareOfferListItem* hostItem );
 
 protected slots:
 
@@ -84,19 +84,19 @@ protected slots:
     void                        slotOfferOnlineStatus( GuiOffer* user, bool isOnline );
     */
 
-    void                        slotOfferListItemClicked( OfferListItem* hostItem );
-    void                        slotAvatarButtonClicked( OfferListItem* hostItem );
-    void                        slotMenuButtonClicked( OfferListItem* hostItem );
-    void                        slotFriendshipButtonClicked( OfferListItem* hostItem );
+    void                        slotShareOfferListItemClicked( ShareOfferListItem* hostItem );
+    void                        slotAvatarButtonClicked( ShareOfferListItem* hostItem );
+    void                        slotMenuButtonClicked( ShareOfferListItem* hostItem );
+    void                        slotFriendshipButtonClicked( ShareOfferListItem* hostItem );
 
 protected:
-    OfferListItem*              sessionToWidget( GuiOfferSession* hostSession );
-    GuiOfferSession*		    widgetToSession( OfferListItem* hostItem );
+    ShareOfferListItem*              sessionToWidget( GuiOfferSession* hostSession );
+    GuiOfferSession*		    widgetToSession( ShareOfferListItem* hostItem );
 
-    virtual void                onOfferListItemClicked( OfferListItem* hostItem );
-    virtual void                onAvatarButtonClicked( OfferListItem* hostItem );
-    virtual void                onFriendshipButtonClicked( OfferListItem* hostItem );
-    virtual void                onMenuButtonClicked( OfferListItem* hostItem );
+    virtual void                onShareOfferListItemClicked( ShareOfferListItem* hostItem );
+    virtual void                onAvatarButtonClicked( ShareOfferListItem* hostItem );
+    virtual void                onFriendshipButtonClicked( ShareOfferListItem* hostItem );
+    virtual void                onMenuButtonClicked( ShareOfferListItem* hostItem );
 
     void                        refreshList( void );
     bool                        isListViewMatch( GuiOfferSession * user );

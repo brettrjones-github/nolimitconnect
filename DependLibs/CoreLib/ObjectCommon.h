@@ -105,7 +105,7 @@
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
 #define OBJNAME_APPLET_PERMISSION_LIST				    "AppletPermissionList"
 #define OBJNAME_APPLET_PERSONAL_RECORDER				"AppletPersonalRecorder"
-#define OBJNAME_APPLET_PERSONS_OFFER_LIST				"AppletPersonsOfferList"
+#define OBJNAME_APPLET_PERSONS_OFFER_LIST				"AppletPersonOfferList"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
 #define OBJNAME_APPLET_POPUP_MENU						"AppletPopupMenu"
 #define OBJNAME_APPLET_RANDOM_CONNECT_JOIN_SEARCH	    "AppletRandomConnectJoinSearch"

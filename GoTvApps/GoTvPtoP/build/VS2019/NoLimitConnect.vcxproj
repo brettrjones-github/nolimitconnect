@@ -211,7 +211,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPeerVoicePhone.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonsOfferList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonOfferList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.cpp" />
@@ -345,12 +345,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListItem.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileShare.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFriend.cpp" />
@@ -363,6 +360,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingToEngine.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PersonOfferListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PersonOfferListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp" />
@@ -386,6 +385,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SearchParamsWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ShareOfferListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ShareOfferListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.cpp" />
@@ -477,7 +478,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonsOfferList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonOfferList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -507,10 +508,14 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PersonOfferListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PersonOfferListWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ShareOfferListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ShareOfferListWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\SoundDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\AudioDefs.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.h" />
@@ -588,10 +593,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferMgr.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListWidget.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferListItem.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.h" />
@@ -867,7 +869,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPeerVoicePhone.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPermissionList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonalRecorder.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonsOfferList.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPersonOfferList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPlayerVideo.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletPopupMenu.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomConnectJoin.ui" />
@@ -931,10 +933,9 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkKeyWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkTestWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\OfferBarWidget.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferListItem.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\OfferWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionListItemWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PersonOfferListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PluginSettingsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PopupMenuWidget.ui" />
@@ -942,6 +943,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ServiceSettingsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\SessionWidget.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ShareOfferListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\SoundCtrlWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\StoryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ThumbnailChooseWidget.ui" />

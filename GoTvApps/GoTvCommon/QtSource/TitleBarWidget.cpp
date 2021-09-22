@@ -521,7 +521,7 @@ void TitleBarWidget::slotPersonsOfferListCount( int activeCnt )
 //============================================================================
 void TitleBarWidget::slotPersonsOfferListButtonClicked( void )
 {
-    m_MyApp.getAppletMgr().launchApplet( eAppletPersonsOfferList, dynamic_cast<QWidget*>(parent()) );
+    m_MyApp.getAppletMgr().launchApplet( eAppletPersonOfferList, dynamic_cast<QWidget*>(parent()) );
 }
 
 //============================================================================

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppletCallListUi</class>
- <widget class="QWidget" name="AppletCallListUi">
+ <class>AppletShareOfferListUi</class>
+ <widget class="QWidget" name="AppletShareOfferListUi">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -84,7 +84,7 @@
        <number>0</number>
       </property>
       <item row="1" column="0">
-       <widget class="CallListWidget" name="m_CalltemList">
+       <widget class="ShareOfferListWidget" name="m_ShareItemList">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -132,9 +132,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CallListWidget</class>
+   <class>ShareOfferListWidget</class>
    <extends>QListWidget</extends>
-   <header>CallListWidget.h</header>
+   <header>ShareOfferListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

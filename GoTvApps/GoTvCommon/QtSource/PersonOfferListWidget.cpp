@@ -15,7 +15,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "FriendListEntryWidget.h"
-#include "FriendListWidget.h"
+#include "PersonOfferListWidget.h"
 
 #include "MyIcons.h"
 //#include "PopupMenu.h"
@@ -25,7 +25,7 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-FriendListWidget::FriendListWidget( QWidget * parent )
+PersonOfferListWidget::PersonOfferListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_Engine( m_MyApp.getEngine() )
@@ -56,13 +56,13 @@ FriendListWidget::FriendListWidget( QWidget * parent )
 }
 
 //============================================================================
-MyIcons&  FriendListWidget::getMyIcons( void )
+MyIcons&  PersonOfferListWidget::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void FriendListWidget::slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineIdIn, int pos0to100000 )
+void PersonOfferListWidget::slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID onlineIdIn, int pos0to100000 )
 {
 	VxGUID onlineId;
 	uint64_t hiPart = onlineIdIn.getVxGUIDHiPart();
@@ -96,7 +96,7 @@ void FriendListWidget::slotAssetViewMsgAction( EAssetAction eAssetAction, VxGUID
 }
 
 //============================================================================
-void FriendListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool hasTextMsgs )
+void PersonOfferListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool hasTextMsgs )
 {
 	FriendListEntryWidget * poWidget;
 	int iIdx = 0;
@@ -121,26 +121,26 @@ void FriendListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, bool 
 }
 
 //============================================================================
-void FriendListWidget::setFriendViewType( EFriendViewType eWhichFriendsToShow )
+void PersonOfferListWidget::setFriendViewType( EFriendViewType eWhichFriendsToShow )
 {
 	m_eFriendViewType = eWhichFriendsToShow;
 }
 
 //============================================================================
-EFriendViewType FriendListWidget::getFriendViewType( void )
+EFriendViewType PersonOfferListWidget::getFriendViewType( void )
 {
 	return m_eFriendViewType;
 }
 
 //============================================================================
-void FriendListWidget::refreshFriendList( EFriendViewType eWhichFriendsToShow )
+void PersonOfferListWidget::refreshFriendList( EFriendViewType eWhichFriendsToShow )
 {
 	this->clear();
 	emit signalRefreshFriendList( eWhichFriendsToShow );
 }
 
 //============================================================================
-void FriendListWidget::slotRefreshFriendList( EFriendViewType eWhichFriendsToShow )
+void PersonOfferListWidget::slotRefreshFriendList( EFriendViewType eWhichFriendsToShow )
 {
 	this->clear();
 	this->setFriendViewType( eWhichFriendsToShow );
@@ -148,13 +148,13 @@ void FriendListWidget::slotRefreshFriendList( EFriendViewType eWhichFriendsToSho
 }
 
 //============================================================================
-void FriendListWidget::updateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
+void PersonOfferListWidget::updateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
 {
 	emit signalUpdateFriend( netIdent, sessionTimeChange );
 }
 
 //============================================================================
-void FriendListWidget::slotItemClicked(QListWidgetItem * item )
+void PersonOfferListWidget::slotItemClicked(QListWidgetItem * item )
 {
 	if( 300 < m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -163,7 +163,7 @@ void FriendListWidget::slotItemClicked(QListWidgetItem * item )
 }
 
 //============================================================================
-void FriendListWidget::slotFriendListItemClicked( FriendListEntryWidget* item )
+void PersonOfferListWidget::slotFriendListItemClicked( FriendListEntryWidget* item )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -196,7 +196,7 @@ void FriendListWidget::slotFriendListItemClicked( FriendListEntryWidget* item )
 }
 
 //============================================================================
-void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item )
+void PersonOfferListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item )
 {
 	/*
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
@@ -223,13 +223,13 @@ void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item 
 }
 
 //============================================================================
-void FriendListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
+void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeChange ) 
 {
-	LogMsg( LOG_INFO, "FriendListWidget::slotUpdateFriend  %d\n", this->count() );
+	LogMsg( LOG_INFO, "PersonOfferListWidget::slotUpdateFriend  %d\n", this->count() );
 	FriendListEntryWidget * poWidget = findListEntryWidget( netIdent );
 	if( poWidget )
 	{
-		LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->isOnline() );
+		LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->isOnline() );
 		updateListEntryWidget( poWidget, netIdent );
 	}
 	else
@@ -239,7 +239,7 @@ void FriendListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeCha
 		if( 0 == this->count() )
 		{
 			insertItem( this->count(), poFriendItem );
-			LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
+			LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
 			//addItem( poFriendItem );
 		}
 		else
@@ -258,7 +258,7 @@ void FriendListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeCha
 						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
 						if( listSessionTime < hisSessionTime )
 						{
-							LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), rowIdx, hisSessionTime  );
+							LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), rowIdx, hisSessionTime  );
 							insertItem( rowIdx, poFriendItem );
 							wasInserted = true;
 							break;
@@ -272,7 +272,7 @@ void FriendListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeCha
 			if( false == wasInserted )
 			{
 				//addItem( poFriendItem );
-				LogMsg( LOG_INFO, "FriendListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count(), hisSessionTime );
+				LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count(), hisSessionTime );
 				insertItem( this->count(), poFriendItem );
 			}
 		}
@@ -286,7 +286,7 @@ void FriendListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTimeCha
 }
 
 //============================================================================
-void FriendListWidget::slotRefreshFriend( VxGUID friendId )
+void PersonOfferListWidget::slotRefreshFriend( VxGUID friendId )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -312,7 +312,7 @@ void FriendListWidget::slotRefreshFriend( VxGUID friendId )
 
 //============================================================================
 //! called when friend in list is removed
-void FriendListWidget::removeFriend( GuiUser * netIdent )
+void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -335,7 +335,7 @@ void FriendListWidget::removeFriend( GuiUser * netIdent )
 }
 
 //============================================================================
-void FriendListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, FriendListEntryWidget * poWidget )
+void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, FriendListEntryWidget * poWidget )
 {
 	if( netIdent->isNearby() )
 	{
@@ -353,7 +353,7 @@ void FriendListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, Frien
 
 //============================================================================
 //!	fill friend into new QListWidgetItem *
-FriendListEntryWidget * FriendListWidget::friendToWidget( GuiUser * poFriend )
+FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser * poFriend )
 {
 	FriendListEntryWidget * item = new FriendListEntryWidget( this );
     item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
@@ -366,7 +366,7 @@ FriendListEntryWidget * FriendListWidget::friendToWidget( GuiUser * poFriend )
 }
 
 //============================================================================
-void FriendListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent )
+void PersonOfferListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent )
 {
 	QString strName = netIdent->getOnlineName();
 	strName += " - ";
@@ -391,13 +391,13 @@ void FriendListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiU
 
 //============================================================================
 //!	get friend from QListWidgetItem data
-GuiUser * FriendListWidget::widgetToFriend( FriendListEntryWidget * item )
+GuiUser * PersonOfferListWidget::widgetToFriend( FriendListEntryWidget * item )
 {
 	return (GuiUser *)item->data( Qt::UserRole + 2 ).toULongLong();
 }
 
 //============================================================================
-FriendListEntryWidget * FriendListWidget::findListEntryWidget( GuiUser * netIdent )
+FriendListEntryWidget * PersonOfferListWidget::findListEntryWidget( GuiUser * netIdent )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;

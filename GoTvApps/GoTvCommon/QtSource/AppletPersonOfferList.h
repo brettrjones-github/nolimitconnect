@@ -16,7 +16,7 @@
 
 #include "AppletPeerBase.h"
 #include "ToGuiFileXferInterface.h"
-#include "ui_AppletOfferList.h"
+#include "ui_AppletPersonOfferList.h"
 
 #include <PktLib/VxCommon.h>
 
@@ -24,13 +24,13 @@ class FileXferWidget;
 class P2PEngine;
 class GuiFileXferSession;
 
-class AppletPersonsOfferList : public AppletPeerBase, public ToGuiFileXferInterface
+class AppletPersonOfferList : public AppletPeerBase, public ToGuiFileXferInterface
 {
 	Q_OBJECT
 public:
-	AppletPersonsOfferList(	AppCommon&	app, 
+	AppletPersonOfferList(	AppCommon&	app, 
 						QWidget *		parent = NULL );
-	virtual ~AppletPersonsOfferList() override;
+	virtual ~AppletPersonOfferList() override;
 
 	//bool						isXferInProgress( VxGUID fileInstance );
 	//FileXferWidget *			addDownload( GuiFileXferSession * poSession );
@@ -78,5 +78,5 @@ protected:
     */
 
 	//=== vars ===//
-	Ui::AppletOfferListUi		ui;
+	Ui::AppletPersonOfferListUi		ui;
 };

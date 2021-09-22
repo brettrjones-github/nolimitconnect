@@ -14,19 +14,19 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_OfferListItem.h"
+#include "ui_ShareOfferListItem.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
 
 class GuiOfferSession;
 
-class OfferListItem : public QWidget, public QListWidgetItem
+class ShareOfferListItem : public QWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	OfferListItem( QWidget *parent=0 );
-	virtual ~OfferListItem();
+	ShareOfferListItem( QWidget *parent=0 );
+	virtual ~ShareOfferListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
@@ -38,10 +38,10 @@ public:
     QSize                       calculateSizeHint( void );
 
 signals:
-    void						signalOfferListItemClicked( OfferListItem * poItemWidget );
-	void						signalAvatarButtonClicked( OfferListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( OfferListItem* listEntryWidget );
-	void						signalMenuButtonClicked( OfferListItem* listEntryWidget );
+    void						signalShareOfferListItemClicked( ShareOfferListItem * poItemWidget );
+	void						signalAvatarButtonClicked( ShareOfferListItem* listEntryWidget );
+    void						signalFriendshipButtonClicked( ShareOfferListItem* listEntryWidget );
+	void						signalMenuButtonClicked( ShareOfferListItem* listEntryWidget );
 
 public slots:
 	void						slotAvatarButtonClicked( void );
@@ -53,7 +53,7 @@ protected:
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::OfferListItemUi	        ui;
+    Ui::ShareOfferListItemUi	        ui;
     AppCommon&					m_MyApp;
 };
 
