@@ -18,7 +18,7 @@
 #include "PersonOfferListWidget.h"
 
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 

@@ -19,7 +19,7 @@
 #include "GuiUserSessionBase.h"
 
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "GuiParams.h"
@@ -277,7 +277,20 @@ void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
         GuiUserSessionBase* userSession = userItem->getUserSession();
         if( userSession )
         {
-            emit signalMenuButtonClicked( userSession, userItem );
+            // emit signalMenuButtonClicked( userSession, userItem );
+            AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+            // emit signalFriendClicked( m_SelectedFriend );
+            if( popupMenu )
+            {
+                if( getAppletType() == eAppletMessenger )
+                {
+                    popupMenu->showFriendMenu( userSession->getUserIdent() );
+                }
+                else
+                {
+                    popupMenu->showUserSessionMenu( getAppletType(), userSession );
+                }            
+            }
         }
     }
 

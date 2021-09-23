@@ -16,7 +16,7 @@
 #include <app_precompiled_hdr.h>
 #include "AppCommon.h"
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppGlobals.h"
 
 #include "ActivityPermissions.h"

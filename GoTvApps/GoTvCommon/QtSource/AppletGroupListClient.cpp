@@ -132,7 +132,6 @@ void AppletGroupListClient::slotStartSearchState(bool startSearch)
                 m_SearchParams.createNewSessionId();
                 m_SearchParams.updateSearchStartTime();
                 setStatusLabel( QObject::tr( "Search Started" ) );
-                m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
                 if( !m_SearchParams.getSearchText().empty() )
                 {
                     m_MyApp.getAppSettings().setLastHostSearchText( m_SearchParams.getSearchType(), m_SearchParams.getSearchText() );
@@ -141,6 +140,8 @@ void AppletGroupListClient::slotStartSearchState(bool startSearch)
                     m_MyApp.getAppSettings().setLastHostSearchLanguage( m_SearchParams.getSearchType(), m_SearchParams.getLanguage() );
                     m_MyApp.getAppSettings().setLastHostSearchContentRating( m_SearchParams.getSearchType(), m_SearchParams.getContentRating() );
                 }
+
+                m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
             }
             else
             {

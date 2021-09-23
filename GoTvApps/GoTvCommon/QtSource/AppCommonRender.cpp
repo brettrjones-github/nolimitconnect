@@ -16,7 +16,7 @@
 #include "AppGlobals.h"
 #include "VxAppDisplay.h"
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "ToGuiActivityInterface.h"
 #include "OfferMgr.h"
 #include "MySndMgr.h"

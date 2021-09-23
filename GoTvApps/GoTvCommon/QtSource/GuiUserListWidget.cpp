@@ -19,7 +19,7 @@
 #include "GuiUserSessionBase.h"
 
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "GuiParams.h"

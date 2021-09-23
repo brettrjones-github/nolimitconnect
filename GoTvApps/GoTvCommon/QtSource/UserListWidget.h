@@ -14,6 +14,7 @@
 //============================================================================
 
 #include <GuiInterface/IDefs.h>
+#include "AppDefs.h"
 
 #include <CoreLib/VxTimer.h>
 #include <CoreLib/VxGUID.h>
@@ -52,6 +53,9 @@ public:
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
+    void						setAppletType( EApplet appletType ) { m_AppletType = appletType; };
+    EApplet						getAppletType( void ) { return m_AppletType; };
+
     void                        clearUserList( void );
 
     void                        addUserToList( EHostType hostType, VxGUID& sessionId,  GuiUser * userIdent );
@@ -120,5 +124,6 @@ protected:
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;
     bool                        m_ShowMyself{ true };
     EUserViewType               m_UserViewType{ eUserViewTypeNone };
+    EApplet						m_AppletType{ eAppletUnknown };
 };
 

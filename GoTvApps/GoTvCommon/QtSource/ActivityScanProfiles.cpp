@@ -20,7 +20,7 @@
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 
 namespace
 {

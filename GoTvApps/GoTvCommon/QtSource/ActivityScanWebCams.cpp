@@ -15,7 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "ActivityScanWebCams.h"
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppCommon.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>

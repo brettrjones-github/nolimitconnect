@@ -175,39 +175,47 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
         return;
     }
 
-    EConnectReason connectReason = eConnectReasonUnknown;
-    bool isJoinSearch = false;
-    switch( searchParams.getSearchType() )
-    {
-    case eSearchChatRoomHost:	        //!< Search for Chat Room to Join
-        isJoinSearch = true;
-        connectReason = eConnectReasonChatRoomSearch;
-        break;
-    case eSearchGroupHost:	            //!< Search for Group to Join
-        isJoinSearch = true;
-        connectReason = eConnectReasonGroupSearch;
-        break;
-    case eSearchRandomConnectHost:	    //!< Search for Random Connect Server to Join
-        isJoinSearch = true;
-        connectReason = eConnectReasonRandomConnectSearch;
-        break;
-
-    default:
-        LogMsg( LOG_VERBOSE, "HostBaseMgr Unknown search type" );
-        m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidParam );
-        return;
-    }
-
     searchParams.setHostType( hostType );
-    if( !enable )
+    if( m_Engine.isNetworkHostEnabled() )
     {
-        stopHostSearch( hostType, searchParams );
+        // I am network host so search myself
+        m_Engine.fromGuiSendAnnouncedList( hostType );
     }
     else
     {
-        if( addSearchSession( searchParams.getSearchSessionId(), searchParams ) )
+        EConnectReason connectReason = eConnectReasonUnknown;
+        bool isJoinSearch = false;
+        switch( searchParams.getSearchType() )
         {
-            connectToHost( hostType, searchParams.getSearchSessionId(), url, connectReason );
+        case eSearchChatRoomHost:	        //!< Search for Chat Room to Join
+            isJoinSearch = true;
+            connectReason = eConnectReasonChatRoomSearch;
+            break;
+        case eSearchGroupHost:	            //!< Search for Group to Join
+            isJoinSearch = true;
+            connectReason = eConnectReasonGroupSearch;
+            break;
+        case eSearchRandomConnectHost:	    //!< Search for Random Connect Server to Join
+            isJoinSearch = true;
+            connectReason = eConnectReasonRandomConnectSearch;
+            break;
+
+        default:
+            LogMsg( LOG_VERBOSE, "HostBaseMgr Unknown search type" );
+            m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidParam );
+            return;
+        }
+
+        if( !enable )
+        {
+            stopHostSearch( hostType, searchParams );
+        }
+        else
+        {
+            if( addSearchSession( searchParams.getSearchSessionId(), searchParams ) )
+            {
+                connectToHost( hostType, searchParams.getSearchSessionId(), url, connectReason );
+            }
         }
     }
 }

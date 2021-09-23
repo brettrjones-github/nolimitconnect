@@ -37,6 +37,8 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
     setTitleBarText( DescribeApplet( m_EAppletType ) );
     setBackButtonVisibility( false );
 
+	ui.m_UserListWidget->setAppletType( eAppletMultiMessenger );
+
     ui.m_HostViewFrame->setFixedHeight( GuiParams::getButtonSize().height() + 4 );
     ui.m_FriendsView->setIcon( eMyIconEyeFriends );
     ui.m_GroupHosts->setIcon( eMyIconEyeGroup );

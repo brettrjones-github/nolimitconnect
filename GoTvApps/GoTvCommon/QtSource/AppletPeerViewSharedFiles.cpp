@@ -25,7 +25,7 @@
 
 #include "FileXferWidget.h"
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppGlobals.h"
 #include "GuiFileXferSession.h"
 #include "FileListReplySession.h"

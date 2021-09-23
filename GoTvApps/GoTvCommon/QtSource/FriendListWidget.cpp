@@ -18,7 +18,7 @@
 #include "FriendListWidget.h"
 
 #include "MyIcons.h"
-//#include "PopupMenu.h"
+#include "AppletPopupMenu.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 
@@ -198,7 +198,6 @@ void FriendListWidget::slotFriendListItemClicked( FriendListEntryWidget* item )
 //============================================================================
 void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item )
 {
-	/*
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
 		return;
@@ -208,18 +207,13 @@ void FriendListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item 
 	m_SelectedFriend = widgetToFriend( item );
 	if( m_SelectedFriend )
 	{
-		emit signalFriendClicked( m_SelectedFriend );
-        ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
-        if( activityBase )
+		AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet(eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent())));
+		// emit signalFriendClicked( m_SelectedFriend );
+        if( popupMenu )
         {
-            PopupMenu popupMenu( m_MyApp, activityBase );
-            popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
-            popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-            connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
-
-            popupMenu.showFriendMenu( m_SelectedFriend );
+            popupMenu->showFriendMenu( m_SelectedFriend );
         }
-	}*/
+	}
 }
 
 //============================================================================

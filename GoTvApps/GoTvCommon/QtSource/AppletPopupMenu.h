@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
+#include "AppDefs.h"
 #include "ui_AppletPopupMenu.h"
 
 #include <CoreLib/MediaCallbackInterface.h>
@@ -26,6 +27,7 @@ enum class EPopupMenuType
 	ePopupMenuTitleBar,
 	ePopupMenuListOptions1,
 	ePopupMenuOfferFriendship,
+	ePopupMenuUserSession,
 
 	eMaxPopupMenu
 };
@@ -40,6 +42,8 @@ public:
 	void						setTitle( QString strTitle );
 	void						setMenuType( EPopupMenuType menuType )		{ m_MenuType = menuType; };
 	EPopupMenuType				getMenuType( void )							{ return m_MenuType; };
+	void						setAppletType( EApplet appletType )			{ m_AppletType = appletType; };
+	EApplet						getAppletType( void )						{ return m_AppletType; };
 
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 
@@ -48,6 +52,7 @@ public:
 	void						showAppSystemMenu( void );
 	void						showTitleBarMenu( void );
 	void						showPersonOfferMenu( GuiUser* poSelectedFriend );
+	void						showUserSessionMenu( EApplet appletType, GuiUserSessionBase* userSession );
 
 signals:
 	void						menuItemClicked( int iItemId, AppletPopupMenu* popupMenu, AppletBase* );
@@ -55,7 +60,8 @@ signals:
 public slots:
 	void						onFriendActionSelected( int iMenuId );
 	void						onTitleBarActionSelected( int iMenuId );
-	void						onPersonActionActionSelected( int iMenuId );
+	void						onPersonActionSelected( int iMenuId );
+	void						onUserSessionActionSelected( int iMenuId );
 
 private slots:
 	//! user clicked the upper right x button
@@ -74,6 +80,8 @@ protected:
 	AppletBase*					m_ParentActivity{ nullptr };
 	int							m_iMenuItemHeight{ 48 };
 	GuiUser*					m_SelectedFriend{ nullptr };
+	GuiUserSessionBase*			m_UserSession{ nullptr };
 	QFrame*						m_ContentItemsFrame{ nullptr };
 	EPopupMenuType				m_MenuType{ EPopupMenuType::ePopupMenuUnknown };
+	EApplet						m_AppletType{ eAppletUnknown };
 };

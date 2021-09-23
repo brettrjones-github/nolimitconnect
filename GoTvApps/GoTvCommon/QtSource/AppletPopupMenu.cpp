@@ -105,6 +105,14 @@ void AppletPopupMenu::itemClicked( QListWidgetItem* item )
 	{
 		onTitleBarActionSelected( iItemId );
 	}
+	else if( getMenuType() == EPopupMenuType::ePopupMenuOfferFriendship )
+	{
+		onPersonActionSelected( iItemId );
+	}
+	else if( getMenuType() == EPopupMenuType::ePopupMenuUserSession )
+	{
+		onPersonActionSelected( iItemId );
+	}
 	else
 	{
 		emit menuItemClicked( iItemId, this, m_ParentActivity );
@@ -144,6 +152,41 @@ void AppletPopupMenu::showTitleBarMenu( void )
 	setTitle( QObject::tr( "Show List" ) );
 	addMenuItem( 0, getMyIcons().getIcon( eMyIconFriendJoined ), QObject::tr( "Friends List" ) );
 	addMenuItem( 1, getMyIcons().getIcon( eMyIconGroupJoined ), QObject::tr( "Groups List" ) );
+	if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
+	{
+		addMenuItem( 2, getMyIcons().getIcon( eMyIconServiceChatRoom ), QObject::tr( "Chat Room List" ) );
+	}
+
+	if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
+	{
+		addMenuItem( 3, getMyIcons().getIcon( eMyIconServiceRandomConnect ), QObject::tr( "Random Connect List" ) );
+	}
+}
+
+//============================================================================
+void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
+{
+	switch( iMenuId )
+	{
+	case 0: // friends listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		break;
+
+	case 1: // group listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		break;
+
+	case 2: // chat room listing
+		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		break;
+
+	case 3: // random connect listing
+		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		break;
+
+	default:
+		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
+	}
 }
 
 //============================================================================
@@ -160,47 +203,96 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend )
 	EPluginAccess ePluginAccess;
 	QString strAction;
 
-	addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Change Friendship" ) );
+	if( !m_SelectedFriend->isIgnored() )
+	{
+		if( poSelectedFriend->getMyFriendshipToHim() >= eFriendStateFriend )
+		{
+			addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Remove Friend" ) );
+		}
+		else
+		{
+			addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Add Friend" ) );
+		}
+	}
+	
+	if( poSelectedFriend->isIgnored() )
+	{
+		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Unblock" ) );
+	}
+	else
+	{
+		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Block" ) );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeWebServer );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeWebServer, ePluginAccess );
-	addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeWebServer, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeWebServer ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeWebServer );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeWebServer, ePluginAccess );
+		addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeWebServer, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryboard );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeStoryboard, ePluginAccess );
-	addMenuItem( (int)ePluginTypeStoryboard, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeStoryboard, ePluginAccess ) ), strAction );
+	if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
+	{
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboard ) )
+		{
+			ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryboard );
+			strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeStoryboard, ePluginAccess );
+			addMenuItem( (int)ePluginTypeStoryboard, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeStoryboard, ePluginAccess ) ), strAction );
+		}
+	}
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeMessenger );
 	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeMessenger, ePluginAccess );
 	addMenuItem( (int)ePluginTypeMessenger, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeMessenger, ePluginAccess ) ), strAction );
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeVideoPhone );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeVideoPhone, ePluginAccess );
-	addMenuItem( (int)ePluginTypeVideoPhone, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeVideoPhone, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeVideoPhone ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeVideoPhone );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeVideoPhone, ePluginAccess );
+		addMenuItem( (int)ePluginTypeVideoPhone, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeVideoPhone, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeVoicePhone );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeVoicePhone, ePluginAccess );
-	addMenuItem( (int)ePluginTypeVoicePhone, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeVoicePhone, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeVoicePhone ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeVoicePhone );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeVoicePhone, ePluginAccess );
+		addMenuItem( (int)ePluginTypeVoicePhone, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeVoicePhone, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeTruthOrDare );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeTruthOrDare, ePluginAccess );
-	addMenuItem( (int)ePluginTypeTruthOrDare, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeTruthOrDare, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeTruthOrDare ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeTruthOrDare );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeTruthOrDare, ePluginAccess );
+		addMenuItem( (int)ePluginTypeTruthOrDare, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeTruthOrDare, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeCamServer );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeCamServer, ePluginAccess );
-	addMenuItem( (int)ePluginTypeCamServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeCamServer, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeCamServer ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeCamServer );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeCamServer, ePluginAccess );
+		addMenuItem( (int)ePluginTypeCamServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeCamServer, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileXfer );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileXfer, ePluginAccess );
-	addMenuItem( (int)ePluginTypeFileXfer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileXfer, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileXfer );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileXfer, ePluginAccess );
+		addMenuItem( (int)ePluginTypeFileXfer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileXfer, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileServer );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileServer, ePluginAccess );
-	addMenuItem( (int)ePluginTypeFileServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileServer, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileServer ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeFileServer );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeFileServer, ePluginAccess );
+		addMenuItem( (int)ePluginTypeFileServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeFileServer, ePluginAccess ) ), strAction );
+	}
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeRelay );
-	strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeRelay, ePluginAccess );
-	addMenuItem( (int)ePluginTypeRelay, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeRelay, ePluginAccess ) ), strAction );
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeRelay ) )
+	{
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeRelay );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeRelay, ePluginAccess );
+		addMenuItem( (int)ePluginTypeRelay, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeRelay, ePluginAccess ) ), strAction );
+	}
 
 	exec();
 }
@@ -274,6 +366,20 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 		m_MyApp.offerToFriendChangeFriendship( m_SelectedFriend );
 		break;
 
+	case eMaxPluginType + 2: // block / unblock
+		if( m_SelectedFriend->isIgnored() )
+		{
+			// unblock
+			m_MyApp.offerToFriendChangeFriendship( m_SelectedFriend );
+		}
+		else
+		{
+			// block
+			m_MyApp.offerToFriendChangeFriendship( m_SelectedFriend );
+		}
+		
+		break;
+
 	default:
 		LogMsg( LOG_ERROR, "Unknown Menu id" );
 	}
@@ -282,7 +388,17 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 }
 
 //============================================================================
-void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
+void AppletPopupMenu::showPersonOfferMenu( GuiUser* poSelectedFriend )
+{
+	m_SelectedFriend = poSelectedFriend;
+	setMenuType( EPopupMenuType::ePopupMenuOfferFriendship );
+	setTitle( QObject::tr( "Offer Friendship" ) );
+	addMenuItem( 0, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Friendship" ) );
+	addMenuItem( 1, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Join Group" ) );
+}
+
+//============================================================================
+void AppletPopupMenu::onPersonActionSelected( int iMenuId )
 {
 	switch( iMenuId )
 	{
@@ -299,19 +415,20 @@ void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
 	}
 }
 
+
 //============================================================================
-void AppletPopupMenu::showPersonOfferMenu( GuiUser* poSelectedFriend )
+void AppletPopupMenu::showUserSessionMenu( EApplet appletType, GuiUserSessionBase* userSession )
 {
-	m_SelectedFriend = poSelectedFriend;
-	setMenuType( EPopupMenuType::ePopupMenuOfferFriendship );
+	m_AppletType = appletType;
+	m_UserSession = userSession;
+	setMenuType( EPopupMenuType::ePopupMenuUserSession );
 	setTitle( QObject::tr( "Offer Friendship" ) );
 	addMenuItem( 0, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Friendship" ) );
 	addMenuItem( 1, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Offer Join Group" ) );
 }
 
-
 //============================================================================
-void AppletPopupMenu::onPersonActionActionSelected( int iMenuId )
+void AppletPopupMenu::onUserSessionActionSelected( int iMenuId )
 {
 	switch( iMenuId )
 	{
