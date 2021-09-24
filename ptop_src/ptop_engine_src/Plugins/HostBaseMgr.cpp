@@ -180,6 +180,7 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
     {
         // I am network host so search myself
         m_Engine.fromGuiSendAnnouncedList( hostType );
+        m_Engine.getToGui().toGuiHostSearchStatus( hostType, m_Engine.getMyOnlineId(), eHostSearchCompleted );
     }
     else
     {

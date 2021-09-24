@@ -25,7 +25,7 @@
 
 //============================================================================
 PopupMenu::PopupMenu( AppCommon& app, ActivityBase * parent )
-: ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessenger, true, false )
+: ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessengerFrame, true, false )
 , m_ParentActivity( parent )
 , m_iMenuItemHeight( GuiParams::getButtonSize().height() )
 {

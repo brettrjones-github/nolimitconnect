@@ -28,7 +28,7 @@
 //============================================================================
 ActivitySoundOptions::	ActivitySoundOptions(	AppCommon& app, 
 												QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_SOUND_OPTIONS, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_SOUND_OPTIONS, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Sound Options"));

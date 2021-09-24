@@ -34,7 +34,7 @@
 
 //============================================================================
 ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_ADD_REMOVE_LIB_FILES, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_ADD_REMOVE_LIB_FILES, app, parent, eAppletMessengerFrame, true )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
 {

@@ -71,6 +71,7 @@ public:
     static QString				describeContentRating( EContentRating content );
     static QString				describeFriendState( EFriendState eFriendState );
     static QString				describeGender( EGenderType gender );
+    static QString				describeHostType( EHostType hostType );
     static QString				describeHostSearchStatus( EHostSearchStatus searchStatus );
     static QString				describeLanguage( ELanguageType language );
     //! Describe permission level ( and/or friend state )

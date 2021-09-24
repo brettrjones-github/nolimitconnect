@@ -34,7 +34,7 @@
 
 //============================================================================
 ActivityViewMySharedFiles::ActivityViewMySharedFiles(	AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_VIEW_MY_SHARED_FILES, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_VIEW_MY_SHARED_FILES, app, parent, eAppletMessengerFrame, true )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
 {

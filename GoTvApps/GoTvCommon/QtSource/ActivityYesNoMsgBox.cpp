@@ -27,7 +27,7 @@ ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app,
 											QWidget *		parent, 
 											QString			title, 
 											QString			bodyText ) 
-: ActivityBase( OBJNAME_ACTIVITY_YES_NO_MSG_BOX, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_YES_NO_MSG_BOX, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);
     connectBarWidgets();

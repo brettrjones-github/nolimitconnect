@@ -47,7 +47,7 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 {
 	Q_OBJECT
 public:
-	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessenger, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
+	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessengerFrame, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
 	virtual ~ActivityBase() override = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
@@ -63,6 +63,8 @@ public:
     virtual EApplet				getAppletType( void )				{ return m_EAppletType; }
     void						setIsAppletLaunchWidget( bool isLaunchWidget ) { m_IsAppletLaunchWidget = isLaunchWidget; }
     bool						getIsAppletLaunchWidget( void )     { return m_IsAppletLaunchWidget; }
+
+	bool                        isHomeFrame( void );
     bool                        isMessagerFrame( void );
 
     virtual TitleBarWidget *	getTitleBarWidget( void );

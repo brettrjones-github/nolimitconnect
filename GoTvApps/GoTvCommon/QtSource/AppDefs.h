@@ -200,7 +200,6 @@ enum EApplet
     eAppletPeerSelectFileToSend,
     eAppletPeerSessionFileOffer,
 
-    eAppletMessenger,
     eAppletShareOfferList,
     eAppletPersonOfferList,	
 
@@ -214,6 +213,9 @@ enum EApplet
     //	eAppletStreamViewerMusic,
     //  eAppletRemoteControl,
         //eAppletPlugins,
+
+    eAppletHomeFrame, // left or top frame
+    eAppletMessengerFrame, // right or bottom frame
 
 	eMaxApplets // must be last
 };

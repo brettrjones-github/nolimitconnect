@@ -68,7 +68,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletKodi:				        return eMyIconKodi;
     case eAppletLibrary:				    return eMyIconLibraryNormal;
     case eAppletLog:	                    return eMyIconDebug;
-    case eAppletMessenger:				    return eMyIconMessenger;
+    case eAppletMessengerFrame:				return eMyIconMessenger;
+    case eAppletMultiMessenger:				return eMyIconMessenger;
     case eAppletNetHostingPage:             return eMyIconServiceHostNetwork;
     case eAppletNetworkSettings:	        return eMyIconNetworkSettings;
     case eAppletPlayerVideo:			    return eMyIconVideoPhoneNormal;
@@ -138,7 +139,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletLogView:                    return eMyIconDebug;
 
     case eAppletPermissionList:             return eMyIconKeyEnabled;
-    case eAppletMultiMessenger:             return eMyIconMessenger;
     case eAppletPeerChangeFriendship:       return eMyIconKeyEnabled;
     case eAppletPeerReplyOfferFile:         return eMyIconDebug;
     case eAppletPeerTodGame:                return eMyIconDebug;
@@ -152,7 +152,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletDownloads:                  return eMyIconFileDownloadNormal;
     case eAppletUploads:                    return eMyIconSendFileNormal;
     case eAppletShareOfferList:             return eMyIconOfferList;
-    case eAppletPersonOfferList:           return eMyIconPersonsOfferList;
+    case eAppletPersonOfferList:            return eMyIconPersonsOfferList;
     case eAppletPopupMenu:	                return eMyIconMenu;
 
     // case eAppletPlayerMusic:			return eMyIconMusic;
@@ -211,10 +211,10 @@ QString DescribeApplet( EApplet applet )
     case eAppletLog:                        return QObject::tr( "Application Log" );
     case eAppletLogSettings:		        return QObject::tr( "Log Settings" );
     case eAppletLogView:	                return QObject::tr( "View Log" );
-	case eAppletMessenger:				    return QObject::tr( "Messenger" );
+	case eAppletMessengerFrame:				return QObject::tr( "Messenger" );
     case eAppletMultiMessenger:				return QObject::tr( "Messenger" );
     case eAppletNetworkSettings:		    return QObject::tr( "Network Settings" );
-    case eAppletPersonOfferList:           return QObject::tr( "Persons Offers" );
+    case eAppletPersonOfferList:            return QObject::tr( "Persons Offers" );
 	case eAppletPlayerVideo:			    return QObject::tr( "Video Player" );
     case eAppletPersonalRecorder:		    return QObject::tr( "Personal Notes And Records" );
 

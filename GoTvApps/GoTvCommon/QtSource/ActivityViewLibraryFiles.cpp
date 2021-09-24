@@ -37,7 +37,7 @@
 
 //============================================================================
 ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget * parent, bool isSelectAFileMode )
-: ActivityBase( OBJNAME_ACTIVITY_VIEW_LIBRARY_FILES, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_VIEW_LIBRARY_FILES, app, parent, eAppletMessengerFrame, true )
 , m_ePluginType( ePluginTypeInvalid )
 , m_IsSelectAFileMode( isSelectAFileMode )
 , m_FileWasSelected( false )

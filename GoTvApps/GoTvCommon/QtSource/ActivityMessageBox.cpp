@@ -25,7 +25,7 @@
 
 //============================================================================
 ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, false, true )
+: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, false, true )
 , m_OkButtonClicked( false )
 {
 	ui.setupUi(this);
@@ -40,7 +40,7 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent )
 
 //============================================================================
 ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, const char * msgFormat, ... )
-: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, true )
 , m_OkButtonClicked( false )
 {
 	ui.setupUi(this);
@@ -71,7 +71,7 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int in
 
 //============================================================================
 ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, QString msg )
-: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessengerFrame, true )
 , m_OkButtonClicked( false )
 {
 	ui.setupUi(this);

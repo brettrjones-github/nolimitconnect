@@ -119,4 +119,5 @@ void HostListItem::updateWidgetFromInfo( void )
     ui.TitlePart1->setText( strName );
     ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );
+    ui.m_MenuButton->setIcon( eMyIconMenu );
 }

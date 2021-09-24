@@ -43,6 +43,7 @@ cam-rotate.svg (modified)
 cam-preview.svg (modified)
 cancel.svg
 check-mark.svg
+connect.svg
 connection-test.svg (modified)
 client-chat-room.svg
 client-chat-room-settings.svg (modified)
@@ -51,6 +52,7 @@ client-random-connect.svg (modified)
 client-webcam.svg (modified)
 direct-connected.svg (modified)
 direct-connected-overlay.svg (modified)
+disconnect.svg (modified)
 earth-globe.svg
 edit-print.svg
 edit-cut.svg

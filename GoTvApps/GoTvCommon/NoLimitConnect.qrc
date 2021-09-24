@@ -303,5 +303,7 @@
         <file>Resources/direct-connected.svg</file>
         <file>Resources/direct-connected-overlay.svg</file>
         <file>Resources/persons-offer-list.svg</file>
+        <file>Resources/connect.svg</file>
+        <file>Resources/disconnect.svg</file>
     </qresource>
 </RCC>

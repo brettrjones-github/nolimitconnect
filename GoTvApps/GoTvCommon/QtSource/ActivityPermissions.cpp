@@ -22,7 +22,7 @@
 
 //============================================================================
 ActivityPermissions::ActivityPermissions( AppCommon& app, QWidget * parent )
-	: ActivityBase( OBJNAME_ACTIVITY_PERMISSIONS, app, parent, eAppletMessenger, true )
+	: ActivityBase( OBJNAME_ACTIVITY_PERMISSIONS, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);
 

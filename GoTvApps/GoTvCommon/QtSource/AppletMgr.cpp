@@ -246,7 +246,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletLogSettings:                appletDialog = new AppletLogSettings( m_MyApp, parent ); break;
     case eAppletLogView:                    appletDialog = new AppletLogView( m_MyApp, parent ); break;
 
-    case eAppletMessenger:                  makeMessengerFullSized(); return appletDialog;
+    case eAppletMessengerFrame:                  makeMessengerFullSized(); return appletDialog;
     case eAppletNetworkSettings:            appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
     case eAppletPersonalRecorder:           appletDialog = new AppletPersonalRecorder( m_MyApp, parent ); break;
     case eAppletSettingsPage:               appletDialog = new AppletSettingsPage( m_MyApp, parent ); break;

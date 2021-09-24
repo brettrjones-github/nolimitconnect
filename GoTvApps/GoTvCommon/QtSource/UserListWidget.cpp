@@ -271,7 +271,7 @@ void UserListWidget::onAvatarButtonClicked( UserListItem* userItem )
 //============================================================================
 void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
 {
-    LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
+    LogMsg( LOG_DEBUG, " UserListWidget::onMenuButtonClicked" );
     if( userItem )
     {
         GuiUserSessionBase* userSession = userItem->getUserSession();
@@ -282,7 +282,7 @@ void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
             // emit signalFriendClicked( m_SelectedFriend );
             if( popupMenu )
             {
-                if( getAppletType() == eAppletMessenger )
+                if( getAppletType() == eAppletMultiMessenger )
                 {
                     popupMenu->showFriendMenu( userSession->getUserIdent() );
                 }

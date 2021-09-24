@@ -22,15 +22,18 @@
 enum class EPopupMenuType
 {
 	ePopupMenuUnknown,
-	ePopupMenuFriend,
 	ePopupMenuAppSystem,
-	ePopupMenuTitleBar,
+	ePopupMenuFriend,
+	ePopupMenuHostSession,
 	ePopupMenuListOptions1,
 	ePopupMenuOfferFriendship,
+	ePopupMenuTitleBar,
 	ePopupMenuUserSession,
 
 	eMaxPopupMenu
 };
+
+class GuiHostSession;
 
 class AppletPopupMenu : public AppletBase, public MediaCallbackInterface
 {
@@ -48,10 +51,12 @@ public:
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 
 	void						showRefreshMenu();
-	void						showFriendMenu( GuiUser* poSelectedFriend );
+
 	void						showAppSystemMenu( void );
-	void						showTitleBarMenu( void );
+	void						showFriendMenu( GuiUser* poSelectedFriend );
+	void						showHostSessionMenu( GuiHostSession* hostSession );
 	void						showPersonOfferMenu( GuiUser* poSelectedFriend );
+	void						showTitleBarMenu( void );
 	void						showUserSessionMenu( EApplet appletType, GuiUserSessionBase* userSession );
 
 signals:
@@ -59,8 +64,9 @@ signals:
 
 public slots:
 	void						onFriendActionSelected( int iMenuId );
-	void						onTitleBarActionSelected( int iMenuId );
+	void						onHostSessionActionSelected( int iMenuId );
 	void						onPersonActionSelected( int iMenuId );
+	void						onTitleBarActionSelected( int iMenuId );
 	void						onUserSessionActionSelected( int iMenuId );
 
 private slots:
@@ -79,6 +85,7 @@ protected:
     Ui::AppletPopupMenuUi		ui;
 	AppletBase*					m_ParentActivity{ nullptr };
 	int							m_iMenuItemHeight{ 48 };
+	GuiHostSession*				m_HostSession{ nullptr };
 	GuiUser*					m_SelectedFriend{ nullptr };
 	GuiUserSessionBase*			m_UserSession{ nullptr };
 	QFrame*						m_ContentItemsFrame{ nullptr };

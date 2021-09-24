@@ -25,6 +25,7 @@
 #include "FileActionMenu.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
+#include "GuiHostSession.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
@@ -101,13 +102,17 @@ void AppletPopupMenu::itemClicked( QListWidgetItem* item )
 	{
 		onFriendActionSelected( iItemId );
 	}
-	else if( getMenuType() == EPopupMenuType::ePopupMenuTitleBar )
+	else if( getMenuType() == EPopupMenuType::ePopupMenuHostSession )
 	{
-		onTitleBarActionSelected( iItemId );
+		onHostSessionActionSelected( iItemId );
 	}
 	else if( getMenuType() == EPopupMenuType::ePopupMenuOfferFriendship )
 	{
 		onPersonActionSelected( iItemId );
+	}
+	else if( getMenuType() == EPopupMenuType::ePopupMenuTitleBar )
+	{
+		onTitleBarActionSelected( iItemId );
 	}
 	else if( getMenuType() == EPopupMenuType::ePopupMenuUserSession )
 	{
@@ -388,6 +393,55 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 }
 
 //============================================================================
+void AppletPopupMenu::showHostSessionMenu( GuiHostSession* hostSession )
+{
+	if( !hostSession )
+	{
+		LogMsg( LOG_ERROR, "AppletPopupMenu::showHostSessionMenu null session" );
+		return;
+	}
+
+	setMenuType( EPopupMenuType::ePopupMenuHostSession );
+	m_HostSession = hostSession;
+
+	setTitle( GuiParams::describeHostType( hostSession->getHostType() ) );
+	if( hostSession->getHostType() == eHostTypeGroup )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceHostGroup ), QObject::tr( "Join" ) );
+	}
+	else if( hostSession->getHostType() == eHostTypeChatRoom )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceChatRoom ), QObject::tr( "Join" ) );
+	}
+	else if( hostSession->getHostType() == eHostTypeRandomConnect )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceRandomConnect ), QObject::tr( "Join" ) );
+	}
+
+	addMenuItem( 1, getMyIcons().getIcon( eMyIconCancelNormal ), QObject::tr( "Unjoin" ) );
+	addMenuItem( 2, getMyIcons().getIcon( eMyIconConnect ), QObject::tr( "Connect To Host" ) );
+	addMenuItem( 3, getMyIcons().getIcon( eMyIconDisconnect ), QObject::tr( "Disconnect From Host" ) );
+}
+
+//============================================================================
+void AppletPopupMenu::onHostSessionActionSelected( int iMenuId )
+{
+	switch( iMenuId )
+	{
+	case 0: // friends listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		break;
+
+	case 1: // group listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		break;
+
+	default:
+		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
+	}
+}
+
+//============================================================================
 void AppletPopupMenu::showPersonOfferMenu( GuiUser* poSelectedFriend )
 {
 	m_SelectedFriend = poSelectedFriend;
@@ -415,10 +469,15 @@ void AppletPopupMenu::onPersonActionSelected( int iMenuId )
 	}
 }
 
-
 //============================================================================
 void AppletPopupMenu::showUserSessionMenu( EApplet appletType, GuiUserSessionBase* userSession )
 {
+	if( !userSession )
+	{
+		LogMsg( LOG_ERROR, "AppletPopupMenu::showUserSessionMenu null session" );
+		return;
+	}
+
 	m_AppletType = appletType;
 	m_UserSession = userSession;
 	setMenuType( EPopupMenuType::ePopupMenuUserSession );

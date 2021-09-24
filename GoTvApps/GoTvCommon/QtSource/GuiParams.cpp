@@ -336,6 +336,28 @@ QString GuiParams::describeGender( EGenderType gender )
 }
 
 //============================================================================
+QString GuiParams::describeHostType( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        return QObject::tr( "Group Host " );
+    case eHostTypeChatRoom:		
+        return QObject::tr( "Chat Room Host " );
+    case eHostTypeRandomConnect:	
+        return QObject::tr( "Random Connect Host " );
+    case eHostTypePeerUser:		
+        return QObject::tr( "Peer User Host " );
+    case eHostTypeNetwork:
+        return QObject::tr( "Network Host " );
+    case eHostTypeConnectTest:
+        return QObject::tr( "Connect Test Host " );
+    default:
+        return QObject::tr( "Unknown Host Type " );
+    }
+}
+
+//============================================================================
 QString GuiParams::describeHostSearchStatus( EHostSearchStatus searchStatus )
 {
     switch( searchStatus )

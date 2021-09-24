@@ -385,5 +385,8 @@ enum EMyIcons
 	eMyIconDirectConnected,
 	eMyIconDirectConnectedOverlay,
 
+	eMyIconConnect,
+	eMyIconDisconnect,
+
 	eMaxMyIcon	// must be last
 };

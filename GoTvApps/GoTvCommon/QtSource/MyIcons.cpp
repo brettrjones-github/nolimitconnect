@@ -781,6 +781,11 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconDirectConnectedOverlay:
 		return ":/AppRes/Resources/direct-connected-overlay.svg";
 
+	case eMyIconConnect:
+		return ":/AppRes/Resources/connect.svg";
+	case eMyIconDisconnect:
+		return ":/AppRes/Resources/disconnect.svg";
+
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}

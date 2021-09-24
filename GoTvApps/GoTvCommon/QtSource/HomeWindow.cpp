@@ -131,7 +131,7 @@ static bool firstShow = true;
     if( firstShow )
     {
         firstShow = false;
-        m_MyApp.startupAppCommon( getAppletFrame( eAppletHomePage ), getAppletFrame( eAppletMessenger ) );
+        m_MyApp.startupAppCommon( getAppletFrame( eAppletHomePage ), getAppletFrame( eAppletMessengerFrame ) );
     }
 }
 
@@ -287,7 +287,7 @@ void HomeWindow::switchWindowFocus(  QWidget * goTvButton )
 //============================================================================
 QFrame *  HomeWindow::getAppletFrame( EApplet applet )
 {
-	if( eAppletMessenger == applet || eAppletMultiMessenger == applet )
+	if( eAppletMessengerFrame == applet || eAppletMultiMessenger == applet )
 	{
 		return getMessengerParentFrame();
 	}

@@ -28,7 +28,7 @@ ActivityStoryBoard * g_poStoryBoardActivity = NULL;
 //============================================================================
 ActivityStoryBoard::ActivityStoryBoard(	AppCommon&	app, 
 										QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_STORYBOARD, app, parent, eAppletMessenger, true ) 
+: ActivityBase( OBJNAME_ACTIVITY_STORYBOARD, app, parent, eAppletMessengerFrame, true ) 
 {
 	ui.setupUi(this);
 

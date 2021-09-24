@@ -29,7 +29,7 @@ namespace
 
 //============================================================================
 ActivityNetworkState::ActivityNetworkState( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_NETWORK_STATE, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_NETWORK_STATE, app, parent, eAppletMessengerFrame, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Network State" ) );

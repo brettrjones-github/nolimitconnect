@@ -34,7 +34,7 @@ FileActionMenu::FileActionMenu( AppCommon&	app,
 								bool			isShared, 
 								bool			isInLibrary,
 								VxNetIdent *	selectedFriend )
-: ActivityBase( OBJNAME_FILE_ACTION_MENU, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_FILE_ACTION_MENU, app, parent, eAppletMessengerFrame, true )
 , m_FileInfo( fileInfo )
 , m_IsShared( isShared )
 , m_IsInLibrary( isInLibrary )

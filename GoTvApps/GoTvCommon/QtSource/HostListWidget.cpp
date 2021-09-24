@@ -269,11 +269,19 @@ void HostListWidget::onIconButtonClicked( HostListItem* hostItem )
 //============================================================================
 void HostListWidget::onMenuButtonClicked( HostListItem* hostItem )
 {
-    LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
-    GuiHostSession* hostSession = hostItem->getHostSession();
-    if( hostSession )
+    LogMsg( LOG_DEBUG, "HostListWidget::onMenuButtonClicked" );
+    if( hostItem )
     {
-        emit signalMenuButtonClicked( hostSession, hostItem );
+        GuiHostSession* hostSession = hostItem->getHostSession();
+        if( hostSession )
+        {
+            // emit signalMenuButtonClicked( hostSession, hostItem );
+            AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+            if( popupMenu )
+            {
+                popupMenu->showHostSessionMenu( hostSession );
+            }
+        }
     }
 
     /*
