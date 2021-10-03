@@ -43,7 +43,7 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
             BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );
             onUserJoinedHost( sktBase, netIdent, sessionInfo );    
         }
-        else if( ePluginAccessOk == hostReply->getAccessState() )
+        else if( ePluginAccessLocked == hostReply->getAccessState() )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinFailPermission );
             m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, HostTypeToConnectJoinReason( hostReply->getHostType() ) );
@@ -102,6 +102,7 @@ void HostClientMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent
     m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
     m_Engine.getUserJoinMgr().onUserJoinedHost( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onUserJoinedHost( sktBase, netIdent, sessionInfo );
+    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
 }
 
 //============================================================================

@@ -23,6 +23,8 @@ class UserJoinCallbackInterface
 public:
     virtual void				callbackUserJoinAdded( UserJoinInfo * userJoinInfo ){};
     virtual void				callbackUserJoinUpdated( UserJoinInfo * userHostInfo ){};
+    virtual void				callbackUserJoinRequested( UserJoinInfo* userHostInfo ) {};
+    virtual void				callbackUserJoinRequestUpdated( UserJoinInfo* userHostInfo ) {};
     virtual void				callbackUserJoinRemoved( VxGUID& userHostId, EHostType hostType ){};
 };
 

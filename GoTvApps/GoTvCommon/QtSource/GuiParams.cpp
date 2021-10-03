@@ -1635,3 +1635,25 @@ QString GuiParams::describeFriendship( EFriendState friendState )
         return  QObject::tr( "Ignore " );
     }
 }
+
+//============================================================================
+QString GuiParams::describeJoinState( EJoinState joinState )
+{
+    switch( joinState )
+    {
+    case eJoinStateSending:
+        return QObject::tr( "Sending Join Request " );
+    case eJoinStateSendFail:
+        return QObject::tr( "Send Join Failed " );
+    case eJoinStateSendAcked:
+        return  QObject::tr( "Send Join Acked " );
+    case eJoinStateJoinRequested:
+        return  QObject::tr( "Join Requested " );
+    case eJoinStateJoinAccepted:
+        return  QObject::tr( "Join Accepted " );
+    case eJoinStateJoinDenied:
+        return  QObject::tr( "Join Denied " );
+    default:
+        return  QObject::tr( "Unknown Join State " );
+    }
+}

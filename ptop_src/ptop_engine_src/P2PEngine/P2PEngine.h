@@ -275,7 +275,7 @@ public:
 														int				pvUserData,
 														const char *	pOfferMsg, 
 														const char *	pFileName = NULL,
-														uint8_t *			fileHashId = 0,
+														uint8_t *		fileHashId = 0,
                                                         VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiToPluginOfferReply(	EPluginType		ePluginType,
@@ -288,9 +288,9 @@ public:
 														VxGUID&			onlineId, 
 														const char *	pControl, 
 														const char *	pAction,
-														uint32_t				u32ActionData,
+														uint32_t		u32ActionData,
 														VxGUID&			fileId = VxGUID::nullVxGUID(),
-                                                        uint8_t *			fileHashId = 0 ) override;
+                                                        uint8_t *		fileHashId = 0 ) override;
 
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 
@@ -362,6 +362,9 @@ public:
     virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) override;
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType ) override;
+
+    virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
+
 
 	//========================================================================
 	// to gui

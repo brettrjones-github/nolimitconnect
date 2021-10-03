@@ -26,6 +26,15 @@ HostListItem::HostListItem(QWidget *parent  )
     connect( ui.m_IconButton,       SIGNAL(clicked()),  this, SLOT(slotIconButtonClicked()) );
 	connect( ui.m_MenuButton,       SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
     connect( ui.m_JoinButton,		SIGNAL(pressed()),	this, SLOT(slotJoinButtonPressed()) );
+    connect( ui.m_ConnectButton,    SIGNAL( pressed() ), this, SLOT( slotConnectButtonPressed() ) );
+   
+    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
+    ui.m_MenuButton->setIcon( eMyIconMenu );
+    ui.m_JoinButton->setIcon( eMyIconPersonAdd );
+    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_ConnectButton->setIcon( eMyIconConnect );
+    ui.m_ConnectButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    showConnectButton( false );
 }
 
 //============================================================================
@@ -89,12 +98,6 @@ void HostListItem::slotMenuButtonReleased( void )
 }
 
 //============================================================================
-void HostListItem::slotJoinButtonPressed( void )
-{
-    emit signalJoinButtonClicked( this );
-}
-
-//============================================================================
 void HostListItem::updateWidgetFromInfo( void )
 {
     GuiHostSession* hostSession = getHostSession();
@@ -106,18 +109,96 @@ void HostListItem::updateWidgetFromInfo( void )
     VxNetIdent& hostIdent = hostSession->getHostIdent();
     QString strName = hostIdent.getOnlineName();
     strName += " - ";
-    QString strDesc = hostIdent.getOnlineDescription();
+    ui.TitlePart1->setText( strName );
 
-    // updateListEntryBackgroundColor( netIdent, item );
-
-    ui.m_IconButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent.getMyFriendshipToHim() ) );
+    if( m_MyApp.getEngine().getMyOnlineId() == hostIdent.getMyOnlineId() )
+    {
+        ui.TitlePart2->setText( QObject::tr( "Hosted By Me") );
+        ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
+    }
+    else
+    {
+        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent.getMyFriendshipToHim() ) );
+        ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
+    }
+    
+    /*
     QPalette pal = ui.m_IconButton->palette();
     pal.setColor(QPalette::Button, QColor( hostIdent.getHasTextOffers() ? Qt::yellow : Qt::white ));
     ui.m_IconButton->setAutoFillBackground(true);
     ui.m_IconButton->setPalette(pal);
     ui.m_IconButton->update();
-    ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
-    ui.DescPart2->setText( strDesc );
-    ui.m_MenuButton->setIcon( eMyIconMenu );
+    */
+
+    if( !ui.m_IconButton->hasImage() )
+    {
+        VxGUID thumbId = hostSession->getHostThumbId();
+        if( !thumbId.isVxGUIDValid() )
+        {
+            thumbId = hostIdent.getHostThumbId( hostSession->getHostType(), true );
+        }
+       
+        if( thumbId.isVxGUIDValid() )
+        {
+            QImage thumbImage;
+            if( m_MyApp.getThumbMgr().getThumbImage( thumbId, thumbImage ) )
+            {
+                ui.m_IconButton->setIconOverrideImage( thumbImage );
+            }
+        }
+    }
+
+    // set text of line 2
+    std::string strDesc = hostSession->getHostDescription();
+    if( strDesc.empty() )
+    {
+        strDesc = hostIdent.getOnlineDescription();
+    }
+
+    if( !strDesc.empty() )
+    {
+        ui.DescPart2->setText( strDesc.c_str() );
+    }
+}
+
+//============================================================================
+void HostListItem::setJoinedState( EJoinState joinState )
+{
+    // todo update join 
+    switch( joinState )
+    {
+    case eJoinStateJoinAccepted:
+        showConnectButton( true );
+        break;
+    case eJoinStateSending:
+    case eJoinStateSendFail:
+    case eJoinStateSendAcked:
+    case eJoinStateJoinRequested:
+    case eJoinStateJoinDenied:
+    case eJoinStateNone:
+    default:
+        showConnectButton( false );
+        break;
+    }
+}
+
+//============================================================================
+void HostListItem::showConnectButton( bool isAccepted )
+{
+    ui.m_JoinButton->setVisible( !isAccepted );
+    ui.m_JoinLabel->setVisible( !isAccepted );
+    ui.m_ConnectButton->setVisible( isAccepted );
+    ui.m_ConnectLabel->setVisible( isAccepted );
+}
+
+//============================================================================
+void HostListItem::slotJoinButtonPressed( void )
+{
+    emit signalJoinButtonClicked( this );
+}
+
+//============================================================================
+void HostListItem::slotConnectButtonPressed( void )
+{
+    emit signalConnectButtonClicked( this );
 }

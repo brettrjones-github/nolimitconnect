@@ -42,6 +42,7 @@ public:
     void                        fromGuiUserLoggedOn( void ) override;
     bool				        fromGuiThumbCreated( ThumbInfo& thumbInfo );
     bool				        fromGuiThumbUpdated( ThumbInfo& thumbInfo );
+    std::string				    fromGuiGetThumbFile( VxGUID& thumbId );
 
     virtual void				announceAssetAdded( AssetBaseInfo * assetInfo ) override;
     virtual void				announceAssetUpdated( AssetBaseInfo * assetInfo ) override;

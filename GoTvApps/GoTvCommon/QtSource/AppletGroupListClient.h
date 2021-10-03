@@ -66,6 +66,7 @@ private slots:
     virtual void                slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
     virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
     virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
+    virtual void                slotConnectButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;

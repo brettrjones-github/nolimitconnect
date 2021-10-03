@@ -53,7 +53,8 @@ public:
     void                        lockThumbMgr( void )             { m_ThumbListMutex.lock(); }
     void                        unlockThumbMgr( void )           { m_ThumbListMutex.unlock(); }
 
-    GuiThumb*                   getThumb( VxGUID& thumbId);
+    GuiThumb*                   getThumb( VxGUID& thumbId );
+    bool                        getThumbImage( VxGUID& thumbId, QImage& image );
     GuiThumbList&               getThumbList( void )             { return m_ThumbList; }
 
 signals:

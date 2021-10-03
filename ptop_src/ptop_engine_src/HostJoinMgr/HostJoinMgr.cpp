@@ -149,6 +149,50 @@ void HostJoinMgr::clearHostJoinInfoList( void )
 }
 
 //============================================================================
+void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    bool wasAdded = false;
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), sessionInfo.getPluginType() );
+    if( !joinInfo )
+    {
+        joinInfo = new HostJoinInfo();
+        joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+        joinInfo->setPluginType( sessionInfo.getPluginType() );
+        joinInfo->setSessionId( sessionInfo.getSessionId() );
+        wasAdded = true;
+    }
+
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
+    joinInfo->setJoinState( eJoinStateJoinRequested );
+    joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
+    joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+
+    unlockResources();
+
+    saveToDatabase( joinInfo );
+
+    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
+
+    if( wasAdded )
+    {
+        announceHostJoinRequested( joinInfo );
+    }
+    else
+    {
+        announceHostJoinRequestUpdated( joinInfo );
+    }
+}
+
+//============================================================================
 void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
@@ -190,8 +234,6 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
     {
         announceHostJoinUpdated( joinInfo );
     }
-
-    // saveToDatabase( joinInfo );
 }
 
 //============================================================================
@@ -238,4 +280,80 @@ int HostJoinMgr::fromGuiGetJoinedListCount( EPluginType pluginType )
 
     unlockResources();
     return joinedCnt;
+}
+
+//============================================================================
+EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent )
+{
+    EJoinState hostJoinState = eJoinStateNone;
+
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent.getMyOnlineId(), HostTypeToHostPlugin( hostType ) );
+    if( joinInfo )
+    {
+        hostJoinState = joinInfo->getJoinState();
+    }
+    else if( netIdent.getMyOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // if we are host we can always join our own hosted servers
+
+        // commented out temporarily for development
+        // hostJoinState = eJoinStateJoinAccepted;
+    }
+
+    unlockResources();
+    return hostJoinState;
+}
+
+//============================================================================
+void HostJoinMgr::announceHostJoinRequested( HostJoinInfo* assetInfo )
+{
+    HostJoinInfo* userHostInfo = dynamic_cast<HostJoinInfo*>(assetInfo);
+    if( userHostInfo )
+    {
+        LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested start" );
+
+        lockClientList();
+        std::vector<HostJoinCallbackInterface*>::iterator iter;
+        for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
+        {
+            HostJoinCallbackInterface* client = *iter;
+            client->callbackHostJoinRequested( userHostInfo );
+        }
+
+        unlockClientList();
+        LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested done" );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinRequested dynamic_cast failed" );
+    }
+}
+
+//============================================================================
+void HostJoinMgr::announceHostJoinRequestUpdated( HostJoinInfo* assetInfo )
+{
+    HostJoinInfo* userHostInfo = dynamic_cast<HostJoinInfo*>(assetInfo);
+    if( userHostInfo )
+    {
+        lockClientList();
+        std::vector<HostJoinCallbackInterface*>::iterator iter;
+        for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
+        {
+            HostJoinCallbackInterface* client = *iter;
+            client->announceHostJoinRequestUpdated( userHostInfo );
+        }
+
+        unlockClientList();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinRequestUpdated dynamic_cast failed" );
+    }
+}
+
+//============================================================================
+void HostJoinMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId )
+{
+    // TODO BRJ handle disconnect
 }

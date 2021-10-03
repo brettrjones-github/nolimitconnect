@@ -1525,3 +1525,9 @@ int P2PEngine::fromGuiGetJoinedListCount( EPluginType pluginType )
 {
 	return getHostJoinMgr().fromGuiGetJoinedListCount( pluginType );
 }
+
+//============================================================================
+EJoinState P2PEngine::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent )
+{
+	return getHostJoinMgr().fromGuiQueryJoinState( hostType, netIdent );
+}

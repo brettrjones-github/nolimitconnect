@@ -20,6 +20,9 @@
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
+#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
+#include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <PktLib/PktsRelay.h>
 #include <PktLib/PktsPing.h>
@@ -48,7 +51,11 @@ void P2PEngine::onConnectionLost( VxSktBase * sktBase )
 {
 #ifdef DEBUG_CONNECTIONS
 	LogMsg( LOG_INFO, "P2PEngine::connectionLost: skt %d\n", sktBase->m_iSktId );
-#endif // DEBUG_CONNECTIONS
+#endif // 
+	getHostJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
+	getUserOnlineMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
+	getUserJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
+	
 	m_RcScan.onConnectionLost( sktBase );
 	m_ConnectionList.onConnectionLost( sktBase );
     if( sktBase->getIsPeerPktAnnSet() )

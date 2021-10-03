@@ -186,6 +186,7 @@ public:
 
     bool                        hasThumbId( EHostType hostType );
     VxGUID&                     getThumbId( EHostType hostType );
+    VxGUID                      getHostThumbId( EHostType hostType, bool defaultToAvatarThumbId );
     int64_t                     getThumbModifiedTime( EHostType hostType );
 
     bool                        hasThumbId( EPluginType pluginType );

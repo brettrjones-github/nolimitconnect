@@ -19,6 +19,8 @@
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
 
+#include <CoreLib/VxFileUtil.h>
+
 //============================================================================
 GuiThumbMgr::GuiThumbMgr( AppCommon& app )
     : QObject( &app )
@@ -194,4 +196,29 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
     }
 
     return foundThumb;
+}
+
+//============================================================================
+bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
+{
+    bool result = false;
+    if( thumbId.isVxGUIDValid() )
+    {
+        GuiThumb* thumb = m_ThumbList.findThumb( thumbId );
+        if( thumb )
+        {
+            result = thumb->createImage( image );
+        }
+        else
+        {
+            // try the raw file name
+            std::string thumbFile = m_MyApp.getEngine().getThumbMgr().fromGuiGetThumbFile( thumbId );
+            if( !thumbFile.empty() && VxFileUtil::fileExists( thumbFile.c_str() ) )
+            {
+                result = image.load( thumbFile.c_str() ) && !image.isNull();
+            }
+        }
+    }
+
+    return result;
 }

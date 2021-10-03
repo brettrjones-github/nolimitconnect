@@ -174,6 +174,8 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
     joinInfo->setLastConnectTime( timeNowMs );
     joinInfo->setLastJoinTime( timeNowMs );
 
+    saveToDatabase( joinInfo, true );
+
     unlockResources();
 
     m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
@@ -185,9 +187,7 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
     else
     {
         announceUserJoinUpdated( joinInfo );
-    }
-
-    // saveToDatabase( joinInfo );
+    } 
 }
 
 //============================================================================
@@ -207,12 +207,72 @@ UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType p
 }
 
 //============================================================================
-bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo )
+bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo, bool isLocked )
 {
-    lockResources();
+    if( !isLocked )
+    {
+        lockResources();
+    }
 
     bool result = m_UserJoinInfoDb.addUserJoin( joinInfo );
 
-    unlockResources();
+    if( !isLocked )
+    {
+        unlockResources();
+    }
+
     return result;
+}
+
+//============================================================================
+void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
+{
+    UserJoinInfo* userHostInfo = dynamic_cast<UserJoinInfo*>(joinInfo);
+    if( userHostInfo )
+    {
+        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested start" );
+
+        lockClientList();
+        std::vector<UserJoinCallbackInterface*>::iterator iter;
+        for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
+        {
+            UserJoinCallbackInterface* client = *iter;
+            client->callbackUserJoinRequested( userHostInfo );
+        }
+
+        unlockClientList();
+        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested done" );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRequested dynamic_cast failed" );
+    }
+}
+
+//============================================================================
+void UserJoinMgr::announceUserJoinRequestUpdated( UserJoinInfo* joinInfo )
+{
+    UserJoinInfo* userHostInfo = dynamic_cast<UserJoinInfo*>(joinInfo);
+    if( userHostInfo )
+    {
+        lockClientList();
+        std::vector<UserJoinCallbackInterface*>::iterator iter;
+        for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
+        {
+            UserJoinCallbackInterface* client = *iter;
+            client->callbackUserJoinRequestUpdated( userHostInfo );
+        }
+
+        unlockClientList();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRequestUpdated dynamic_cast failed" );
+    }
+}
+
+//============================================================================
+void UserJoinMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId )
+{
+    // TODO BRJ handle disconnect
 }

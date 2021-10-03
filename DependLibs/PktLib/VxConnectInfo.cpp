@@ -419,6 +419,40 @@ VxGUID& VxConnectIdent::getThumbId( EHostType hostType )
 }
 
 //============================================================================
+VxGUID VxConnectIdent::getHostThumbId( EHostType hostType, bool defaultToAvatarThumbId )
+{
+    VxGUID thumbId;
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        if( isGroupThumbValid() ) { thumbId = getGroupThumbGuid(); }
+        break;
+
+    case eHostTypeChatRoom:
+        if( isChatRoomThumbValid() ) { thumbId = getChatRoomThumbGuid(); }
+        break;
+
+    case eHostTypeRandomConnect:
+        if( isRandomConnectThumbValid() ) { thumbId = getRandomConnectThumbGuid(); }
+        break;
+
+    case eHostTypeNetwork:
+        if( isNetHostThumbValid() ) { thumbId = getNetHostThumbGuid(); }
+        break;
+
+    default:
+        break;
+    }
+
+    if( defaultToAvatarThumbId && !thumbId.isVxGUIDValid() )
+    {
+        thumbId = getAvatarGuid();
+    }
+
+    return thumbId;
+}
+
+//============================================================================
 int64_t VxConnectIdent::getThumbModifiedTime( EHostType hostType )
 {
     switch( hostType )

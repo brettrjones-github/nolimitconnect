@@ -37,15 +37,17 @@ public:
 
     void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
     virtual void				announceUserJoinAdded( UserJoinInfo * userJoinInfo );
     virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
+    virtual void				announceUserJoinRequested( UserJoinInfo* userHostInfo );
+    virtual void				announceUserJoinRequestUpdated( UserJoinInfo* userHostInfo );
     virtual void				announceUserJoinRemoved( VxGUID& hostOnlineId, EHostType hostType );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
-
 
     UserJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType );
 
@@ -55,7 +57,7 @@ protected:
     void						lockClientList( void )						{ m_UserJoinClientMutex.lock(); }
     void						unlockClientList( void )					{ m_UserJoinClientMutex.unlock(); }
 
-    bool                        saveToDatabase( UserJoinInfo* joinInfo );
+    bool                        saveToDatabase( UserJoinInfo* joinInfo, bool isLocked = false );
 
     P2PEngine&					m_Engine;
     UserJoinInfoDb              m_UserJoinInfoDb;

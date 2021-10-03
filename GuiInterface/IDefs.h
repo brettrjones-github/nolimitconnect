@@ -361,6 +361,7 @@ enum EJoinState
     eJoinStateSending,
     eJoinStateSendFail,
     eJoinStateSendAcked,
+    eJoinStateJoinRequested,
     eJoinStateJoinAccepted,
     eJoinStateJoinDenied,
 

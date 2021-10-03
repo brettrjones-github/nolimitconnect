@@ -47,10 +47,11 @@ HostListItem* HostListWidget::sessionToWidget( GuiHostSession* hostSession )
 
     hostItem->setHostSession( hostSession );
 
-    connect( hostItem, SIGNAL(signalHostListItemClicked(QListWidgetItem *)),	    this, SLOT(slotHostListItemClicked(QListWidgetItem *)) );
-    connect( hostItem, SIGNAL(signalIconButtonClicked(HostListItem *)),	    this, SLOT(slotIconButtonClicked(HostListItem *)) );
-    connect( hostItem, SIGNAL(signalMenuButtonClicked(HostListItem *)),	    this, SLOT(slotMenuButtonClicked(HostListItem *)) );
-    connect( hostItem, SIGNAL(signalJoinButtonClicked(HostListItem *)),		this, SLOT(slotJoinButtonClicked(HostListItem *)) );
+    connect( hostItem, SIGNAL( signalHostListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotHostListItemClicked( QListWidgetItem * ) ) );
+    connect( hostItem, SIGNAL( signalIconButtonClicked( HostListItem * ) ),	        this, SLOT( slotIconButtonClicked( HostListItem * ) ) );
+    connect( hostItem, SIGNAL( signalMenuButtonClicked( HostListItem * ) ),	        this, SLOT( slotMenuButtonClicked( HostListItem * ) ) );
+    connect( hostItem, SIGNAL( signalJoinButtonClicked( HostListItem * ) ),		    this, SLOT( slotJoinButtonClicked( HostListItem * ) ) );
+    connect( hostItem, SIGNAL( signalConnectButtonClicked( HostListItem* ) ),       this, SLOT( slotConnectButtonClicked( HostListItem* ) ) );
 
     hostItem->updateWidgetFromInfo();
 
@@ -191,6 +192,18 @@ void HostListWidget::slotJoinButtonClicked( HostListItem* hostItem )
 }
 
 //============================================================================
+void HostListWidget::slotConnectButtonClicked( HostListItem* hostItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onConnectButtonClicked( hostItem );
+}
+
+//============================================================================
 void HostListWidget::addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
     GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, hostIdent, pluginSetting, this );
@@ -219,18 +232,37 @@ HostListItem* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSessio
     else
     {
         hostItem = sessionToWidget( hostSession );
-        if( 0 == count() )
+        if( hostItem )
         {
-            LogMsg( LOG_INFO, "add host %s\n", hostSession->getHostIdent().getOnlineName() );
-            addItem( hostItem );
-        }
-        else
-        {
-            LogMsg( LOG_INFO, "insert host %s\n", hostSession->getHostIdent().getOnlineName() );
-            insertItem( 0, (QListWidgetItem *)hostItem );
-        }
+            if( 0 == count() )
+            {
+                LogMsg( LOG_INFO, "add host %s\n", hostSession->getHostIdent().getOnlineName() );
+                addItem( hostItem );
+            }
+            else
+            {
+                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getHostIdent().getOnlineName() );
+                insertItem( 0, (QListWidgetItem*)hostItem );
+            }
 
-        setItemWidget( (QListWidgetItem *)hostItem, (QWidget *)hostItem );
+            setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
+            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( hostSession->getHostIdent().getThumbId( hostSession->getHostType() ) );
+            if( thumb )
+            {
+                QImage hostIconImage;
+                thumb->createImage( hostIconImage );
+                VxPushButton* hostImageButton = hostItem->getAvatarButton();
+                if( hostImageButton && !hostIconImage.isNull() )
+                {
+                    hostImageButton->setIconOverrideImage( hostIconImage );
+                }
+            }           
+        }
+    }
+
+    if( hostItem )
+    {
+        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getHostIdent() ) );
     }
 
     return hostItem;
@@ -311,5 +343,16 @@ void HostListWidget::onJoinButtonClicked( HostListItem* hostItem )
     if( hostSession )
     {
         emit signalJoinButtonClicked( hostSession, hostItem );
+    }
+}
+
+//============================================================================
+void HostListWidget::onConnectButtonClicked( HostListItem* hostItem )
+{
+    LogMsg( LOG_DEBUG, "onConnectButtonClicked" );
+    GuiHostSession* hostSession = hostItem->getHostSession();
+    if( hostSession )
+    {
+        emit signalConnectButtonClicked( hostSession, hostItem );
     }
 }

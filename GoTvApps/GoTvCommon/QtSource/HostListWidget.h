@@ -50,6 +50,7 @@ signals:
     void                        signalIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
     void                        signalMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
     void                        signalJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
+    void                        signalConnectButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
 
 protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
@@ -57,6 +58,7 @@ protected slots:
     void                        slotIconButtonClicked( HostListItem* hostItem );
     void                        slotMenuButtonClicked( HostListItem* hostItem );
     void                        slotJoinButtonClicked( HostListItem* hostItem );
+    void                        slotConnectButtonClicked( HostListItem* hostItem );
 
 protected:
     HostListItem*               sessionToWidget( GuiHostSession* hostSession );
@@ -66,6 +68,7 @@ protected:
     virtual void                onIconButtonClicked( HostListItem* hostItem );
     virtual void                onMenuButtonClicked( HostListItem* hostItem );
     virtual void                onJoinButtonClicked( HostListItem* hostItem );
+    virtual void                onConnectButtonClicked( HostListItem* hostItem );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;

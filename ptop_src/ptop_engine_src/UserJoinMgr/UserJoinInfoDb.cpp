@@ -86,7 +86,7 @@ void UserJoinInfoDb::removeUserJoin( VxGUID& onlineId, EPluginType pluginType )
     std::string onlineIdStr = onlineId.toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( (int)pluginType );
-    sqlExec( "DELETE FROM tblUserJoins WHERE onlineId=? AND pluginType=?", bindList );
+    sqlExec( "DELETE FROM tblUserJoin WHERE onlineId=? AND pluginType=?", bindList );
 }
 
 //============================================================================
@@ -118,7 +118,7 @@ bool UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId,
     bindList.add( (int)hostFlags );
     bindList.add( hostUrl.c_str() );
    
-    RCODE rc = sqlExec( "INSERT INTO tblUserJoins (onlineId, thumbId, infoModMs, pluginType, friendState, joinState, lastConnMs, lastJoinMs, hostFlags, hostUrl) values(?,?,?,?,?,?,?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblUserJoin (onlineId, thumbId, infoModMs, pluginType, friendState, joinState, lastConnMs, lastJoinMs, hostFlags, hostUrl) values(?,?,?,?,?,?,?,?,?,?)",
         bindList );
     vx_assert( 0 == rc );
     if( rc )

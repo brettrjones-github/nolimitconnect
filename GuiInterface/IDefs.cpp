@@ -172,13 +172,14 @@ namespace
 
     const char * HostTypeEnumStrings[] =
     {
+        // must sync with EHostType
         "Host Unknown ",
-        "Host Chat Room ",
-        "Host Connect Test ",
         "Host Group ",
-        "Host Network ",
+        "Host Chat Room ",
         "Host Random Connect ",
         "Host Peer User ",
+        "Host Connect Test ",
+        "Host Network ",
 
         "Max Host Type ",
     };
@@ -201,6 +202,7 @@ namespace
         "Join: Sending ",
         "Join: Send Failed ",
         "Join: Send Acknowleged ",
+        "Join: Requested ",
         "Join: Accepted ",
         "Join: Denied ",
         "Join: Max JoinState ",

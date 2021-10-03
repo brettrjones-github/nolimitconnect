@@ -97,6 +97,8 @@ public:
     static QString				describeResponse( EOfferResponse eOfferResponse );
     static QString				describeFriendship( EFriendState friendState );
 
+    static QString				describeJoinState( EJoinState joinState );
+
     #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     static QString              describeCamStatus(QCamera::Status camStatus);
     static QString              describeCamState(QCamera::State camState);

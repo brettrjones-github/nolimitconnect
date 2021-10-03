@@ -33,20 +33,25 @@ public:
 
     void                        fromGuiUserLoggedOn( void );
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
+    virtual EJoinState	        fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
 
     virtual void				announceHostJoinAdded( HostJoinInfo * userHostInfo );
     virtual void				announceHostJoinUpdated( HostJoinInfo * userHostInfo );
+    virtual void				announceHostJoinRequested( HostJoinInfo* userHostInfo );
+    virtual void				announceHostJoinRequestUpdated( HostJoinInfo* userHostInfo );
     virtual void				announceHostJoinRemoved( VxGUID& hostOnlineId );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
+    void                        onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
-    HostJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType );
+    HostJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType ); 
 
 protected:
     void						clearHostJoinInfoList( void );

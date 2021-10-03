@@ -61,6 +61,7 @@ AppletGroupListClient::AppletGroupListClient(	AppCommon&		    app,
     connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListItem* ) ) );
     connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
     connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
+    connect( ui.m_HostListWidget,      SIGNAL( signalConnectButtonClicked( GuiHostSession*, HostListItem* ) ), this, SLOT( slotConnectButtonClicked( GuiHostSession*, HostListItem* ) ) );
 
     setStatusLabel( QObject::tr( "Fetch Group Host List" ) );
     std::string lastHostSearchText;
@@ -266,6 +267,12 @@ void AppletGroupListClient::slotMenuButtonClicked( GuiHostSession* hostSession, 
 
 //============================================================================
 void AppletGroupListClient::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+{
+    onJointButtonClicked( hostSession );
+}
+
+//============================================================================
+void AppletGroupListClient::slotConnectButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
 }

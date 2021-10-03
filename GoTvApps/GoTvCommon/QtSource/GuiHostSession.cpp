@@ -71,3 +71,22 @@ std::string GuiHostSession::getHostUrl( void )
 {
     return m_HostIdent.getMyOnlineUrl();
 }
+
+//============================================================================
+std::string GuiHostSession::getHostDescription( void )
+{
+    if( !m_PluginSetting.getDescription().empty() )
+    {
+        return m_PluginSetting.getDescription();
+    }
+    else
+    {
+        return getHostUrl();
+    }
+}
+
+//============================================================================
+VxGUID GuiHostSession::getHostThumbId( void )
+{
+    return m_PluginSetting.getThumnailId();
+}

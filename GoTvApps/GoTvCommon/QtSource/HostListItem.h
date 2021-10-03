@@ -35,6 +35,12 @@ public:
     void                        setHostSession( GuiHostSession* hostSession );
     GuiHostSession*             getHostSession( void );
 
+    VxPushButton*               getAvatarButton( void )         { return ui.m_IconButton; }
+    //VxPushButton*               getFriendshipButton( void )     { return ui.m_FriendshipButton; }
+    VxPushButton*               getMenuButton( void )           { return ui.m_MenuButton; }
+
+    void                        setJoinedState( EJoinState joinState );
+
     void						updateWidgetFromInfo( void );
 
 signals:
@@ -42,16 +48,19 @@ signals:
 	void						signalIconButtonClicked( HostListItem* listEntryWidget );
 	void						signalMenuButtonClicked( HostListItem* listEntryWidget );
     void						signalJoinButtonClicked( HostListItem* listEntryWidget );
+    void						signalConnectButtonClicked( HostListItem* listEntryWidget );
 
 public slots:
 	void						slotIconButtonClicked( void );
 	void						slotMenuButtonPressed( void );
 	void						slotMenuButtonReleased( void );
     void						slotJoinButtonPressed( void );
+    void						slotConnectButtonPressed( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
+    virtual void                showConnectButton( bool isAccepted );
 
 	//=== vars ===//
     Ui::HostListItemUi	        ui;

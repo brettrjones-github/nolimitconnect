@@ -44,6 +44,9 @@ public:
     void						setWidget( QWidget * widget )				{ m_Widget = widget; }
     QWidget *					getWidget( void )							{ return m_Widget; }
 
+    std::string                 getHostDescription( void );
+    VxGUID                      getHostThumbId( void );
+
 protected:
 	//=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };

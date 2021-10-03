@@ -23,7 +23,10 @@ class HostJoinCallbackInterface
 public:
     virtual void				callbackHostJoinAdded( HostJoinInfo * userHostInfo ){};
     virtual void				callbackHostJoinUpdated( HostJoinInfo * userHostInfo ){};
+    virtual void				callbackHostJoinRequested( HostJoinInfo* userHostInfo ) {};
+    virtual void				announceHostJoinRequestUpdated( HostJoinInfo* userHostInfo ) {};
     virtual void				callbackHostJoinRemoved( VxGUID& userHostId ){};
+
     virtual void				callbackHostJoinOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState ) {};
     virtual void				callbackHostJoinOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId ) {};
 };

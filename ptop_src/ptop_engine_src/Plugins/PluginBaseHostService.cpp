@@ -86,7 +86,7 @@ void PluginBaseHostService::onConnectionLost( VxSktBase * sktBase )
 //============================================================================
 void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join request" );
+    LogMsg( LOG_DEBUG, "PluginBaseHostService %s got join request", DescribeHostType( getHostType() ) );
     PktHostJoinReq * joinReq = (PktHostJoinReq *)pktHdr;
     PktHostJoinReply joinReply;
     if( joinReq->isValidPkt() )
@@ -98,6 +98,21 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
         if( ePluginAccessOk == joinReply.getAccessState() )
         {
             m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
+        }
+        else if( ePluginAccessLocked == joinReply.getAccessState() )
+        {
+            // add to join request list
+            m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
+        }
+        else if( ePluginAccessDisabled == joinReply.getAccessState() )
+        {
+            // join request sent to disabled plugin.. this should not happen
+            LogMsg( LOG_ERROR, "PluginBaseHostService %s got join request to disabled plugin from %s", DescribeHostType( getHostType() ), netIdent->getMyOnlineUrl().c_str() );
+        }
+        else if( ePluginAccessIgnored == joinReply.getAccessState() )
+        {
+            // TODO .. should we drop the connection of ignored person?
+            LogMsg( LOG_ERROR, "PluginBaseHostService %s got join request from ignored person %s", DescribeHostType( getHostType() ), netIdent->getMyOnlineUrl().c_str() );
         }
 
         txPacket( netIdent, sktBase, &joinReply );

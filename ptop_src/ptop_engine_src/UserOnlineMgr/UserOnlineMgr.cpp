@@ -144,6 +144,12 @@ void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, Ba
 }
 
 //============================================================================
+void UserOnlineMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    updateUserSession( sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
 void UserOnlineMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     updateUserSession( sktBase, netIdent, sessionInfo );
@@ -206,4 +212,10 @@ User* UserOnlineMgr::findUser( VxGUID& onlineId )
     }
 
     return nullptr;
+}
+
+//============================================================================
+void UserOnlineMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId )
+{
+    // TODO BRJ handle disconnect
 }

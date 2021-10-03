@@ -302,6 +302,24 @@ bool ThumbMgr::fromGuiThumbUpdated( ThumbInfo& thumbInfo )
     return false;
 }
 
+//===========================================================================
+std::string ThumbMgr::fromGuiGetThumbFile( VxGUID& thumbId )
+{
+    std::string fileName;
+    m_ThumbInfoMutex.lock();
+    for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
+    {
+        if( thumbInfo->getThumbId() == thumbId )
+        {
+            fileName = thumbInfo->getAssetName();
+            break;
+        }
+    }
+
+    m_ThumbInfoMutex.unlock();
+    return fileName;
+}
+
 //============================================================================
 void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHostType hostType )
 {
