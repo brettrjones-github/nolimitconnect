@@ -21,7 +21,9 @@
 #include "HomeWindow.h"
 #include "FriendList.h"
 #include "GuiConnectMgr.h"
-#include "GuiOfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
+#include "GuiHostJoinMgr.h"
 #include "GuiUserJoinMgr.h"
 #include "GuiUserMgr.h"
 #include "GuiThumbMgr.h"
@@ -131,7 +133,8 @@ public:
     VxNetIdent *				getMyIdentity( void );
     VxGUID				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
-    GuiOfferMgr&				getOfferMgr( void )						    { return m_OfferMgr; }
+    GuiOfferClientMgr&			getOfferClientMgr( void )				    { return m_OfferClientMgr; }
+    GuiOfferHostMgr&            getOfferHostMgr( void )                     { return m_OfferHostMgr; }
     VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
     RenderGlWidget *            getRenderConsumer( void );
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
@@ -737,11 +740,14 @@ private:
     AccountMgr&				    m_AccountMgr;
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
-    GuiConnectMgr				m_ConnectMgr;
-    GuiOfferMgr				    m_OfferMgr;
-    GuiUserMgr					m_UserMgr;
-    GuiUserJoinMgr				m_UserJoinMgr;
     GuiThumbMgr					m_ThumbMgr;
+    GuiOfferClientMgr		    m_OfferClientMgr;
+    GuiOfferHostMgr		        m_OfferHostMgr;
+    GuiUserMgr					m_UserMgr;
+    GuiHostJoinMgr				m_HostJoinMgr;
+    GuiUserJoinMgr				m_UserJoinMgr;
+    GuiConnectMgr				m_ConnectMgr;
+
 
 	MyIcons					    m_MyIcons;
 	VxAppTheme					m_AppTheme;

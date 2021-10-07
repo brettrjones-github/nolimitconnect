@@ -12,17 +12,18 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GuiOfferMgr.h"
+#include "GuiConnectMgr.h"
 #include "AppCommon.h"
 
 //============================================================================
-GuiOfferMgr::GuiOfferMgr( AppCommon& app )
+GuiConnectMgr::GuiConnectMgr( AppCommon& app )
     : QObject( &app )
     , m_MyApp( app )
 {
 }
 
 //============================================================================
-void GuiOfferMgr::onAppCommonCreated( void )
+void GuiConnectMgr::onAppCommonCreated( void )
 {
+    m_MyApp.getEngine().getConnectMgr().addConnectMgrClient( this, true );
 }

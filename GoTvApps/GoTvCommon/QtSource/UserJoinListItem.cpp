@@ -22,7 +22,7 @@ UserJoinListItem::UserJoinListItem(QWidget *parent  )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ConnectMgr( m_MyApp.getConnectMgr() )
-, m_OfferMgr( m_MyApp.getOfferMgr() )
+, m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_UserMgr( m_MyApp.getUserMgr() )
 , m_UserJoinMgr( m_MyApp.getUserJoinMgr() )
 {

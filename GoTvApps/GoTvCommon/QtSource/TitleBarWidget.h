@@ -25,7 +25,7 @@
 #include <CoreLib/VxGUID.h>
 
 class AppCommon;
-class GuiOfferMgr;
+class GuiOfferClientMgr;
 class GuiOfferSession;
 class GuiUser;
 class MyIcons;
@@ -142,7 +142,7 @@ protected:
                                                            int				motion0To100000 ) override;
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
-    GuiOfferMgr&                m_OfferMgr;
+    GuiOfferClientMgr&          m_OfferClientMgr;
 	bool						m_MuteMic{ false };
 	bool						m_MuteSpeaker{ false };
 	bool						m_EchoCancelEnabled{ false };

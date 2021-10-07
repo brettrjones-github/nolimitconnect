@@ -194,8 +194,13 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoin.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinList.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostSession.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgr.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgrBase.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferClientMgr.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferHostMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.h \
@@ -244,7 +249,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \
@@ -527,8 +531,13 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoin.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinList.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostSession.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgr.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgrBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferClientMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferHostMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.cpp \
@@ -576,7 +585,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/OfferMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileMenu.cpp \

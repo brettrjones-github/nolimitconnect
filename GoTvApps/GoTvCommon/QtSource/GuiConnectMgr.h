@@ -13,11 +13,13 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <ptop_src/ptop_engine_src/ConnectMgr/ConnectCallbackInterface.h>
+
 #include <QObject>
 
 class AppCommon;
 
-class GuiConnectMgr : public QObject
+class GuiConnectMgr : public QObject, public ConnectCallbackInterface
 {
     Q_OBJECT
 public:
@@ -26,7 +28,7 @@ public:
     GuiConnectMgr( const GuiConnectMgr& rhs ) = delete;
 	virtual ~GuiConnectMgr() = default;
 
-    void                        onAppCommonCreated( void );
+    virtual void                onAppCommonCreated( void );
 
 protected:
     

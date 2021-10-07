@@ -19,7 +19,8 @@
 #include "GuiParams.h"
 #include "PopupMenu.h"
 #include "ToGuiActivityInterface.h"
-#include "OfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
 #include "MySndMgr.h"
 #include "MyIcons.h"
 
@@ -173,7 +174,9 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
 , m_ConnectMgr( *this )
-, m_OfferMgr( *this )
+, m_OfferClientMgr( *this )
+, m_OfferHostMgr( *this )
+, m_HostJoinMgr( *this )
 , m_UserMgr( *this )
 , m_UserJoinMgr( *this )
 , m_ThumbMgr( *this )
@@ -206,7 +209,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 
     m_ElapsedTimer.start();
 
-    connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OfferMgr, SLOT( slotOncePerSecond() ) );
+    connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OfferClientMgr, SLOT( slotOncePerSecond() ) );
     connect( m_CheckSetupTimer, SIGNAL( timeout() ), this, SLOT( slotCheckSetupTimer() ) );
 }
 
@@ -222,8 +225,6 @@ void AppCommon::loadWithoutThread( void )
     uint64_t startMs = elapsedMilliseconds();
 
     registerMetaData();
-    m_UserMgr.onAppCommonCreated();
-    m_ThumbMgr.onAppCommonCreated();
 
     // set application short name used for directory paths
     VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
@@ -281,20 +282,30 @@ void AppCommon::loadWithoutThread( void )
     uint64_t styleMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Setup Style %lld ms alive ms %lld", styleMs - iconsMs, styleMs );
 
+	m_ThumbMgr.onAppCommonCreated();
+	m_UserMgr.onAppCommonCreated();
+	m_OfferClientMgr.onAppCommonCreated();
+	m_OfferHostMgr.onAppCommonCreated();
+	m_HostJoinMgr.onAppCommonCreated();
+	m_UserJoinMgr.onAppCommonCreated();
+	m_ConnectMgr.onAppCommonCreated();
+
     m_HomePage.initializeHomePage();
     connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT( slotMainWindowResized() ) );
     m_HomePage.show();
 
+
     uint64_t homePageMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Initialize Home Page %lld ms alive ms %lld", homePageMs - styleMs, homePageMs );
+
+
 }
 
 //============================================================================
 void AppCommon::slotStartLoadingFromThread( void )
 {
 	registerMetaData();
-    m_UserMgr.onAppCommonCreated();
-    m_ThumbMgr.onAppCommonCreated();
+
 	QObject::connect( this, SIGNAL( signalFinishedLoadingGui() ), this, SLOT( slotFinishedLoadingGui() ) );
 	QObject::connect( this, SIGNAL( signalFinishedLoadingEngine() ), this, SLOT( slotFinishedLoadingEngine() ) );
 
@@ -329,6 +340,14 @@ void AppCommon::slotStartLoadingFromThread( void )
 	m_MyIcons.myIconsStartup();
 	// load sounds to play and sound hardware
 	m_MySndMgr.sndMgrStartup(); 
+
+	m_ThumbMgr.onAppCommonCreated();
+	m_UserMgr.onAppCommonCreated();
+	m_OfferClientMgr.onAppCommonCreated();
+	m_OfferHostMgr.onAppCommonCreated();
+	m_HostJoinMgr.onAppCommonCreated();
+	m_UserJoinMgr.onAppCommonCreated();
+	m_ConnectMgr.onAppCommonCreated();
 
 	// should have enough to show home page
 	emit signalFinishedLoadingGui();

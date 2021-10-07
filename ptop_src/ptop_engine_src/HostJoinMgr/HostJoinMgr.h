@@ -59,7 +59,7 @@ protected:
     void						lockClientList( void )						{ m_HostJoinClientMutex.lock(); }
     void						unlockClientList( void )					{ m_HostJoinClientMutex.unlock(); }
 
-    bool                        saveToDatabase( HostJoinInfo* joinInfo );
+    bool                        saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked = false );
 
     P2PEngine&					m_Engine;
     HostJoinInfoDb              m_HostJoinInfoDb;

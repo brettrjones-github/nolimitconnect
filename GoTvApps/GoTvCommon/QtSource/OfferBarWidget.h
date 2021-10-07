@@ -20,7 +20,7 @@
 #include <QListWidgetItem>
 
 class AppCommon;
-class GuiOfferMgr;
+class GuiOfferClientMgr;
 class GuiOfferSession;
 class GuiUser;
 class MyIcons;
@@ -61,7 +61,7 @@ protected:
 
 	Ui::OfferBarWidgetClass		ui;
 	AppCommon&				    m_MyApp;
-	GuiOfferMgr&				m_OfferMgr;
+	GuiOfferClientMgr&			m_OfferClientMgr;
 	VxGUID						m_OfferSessionId;
 	GuiUser *				    m_HisIdent;
 	EPluginType					m_ePluginType;

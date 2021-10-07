@@ -20,7 +20,7 @@
 #include <QWidget>
 
 class GuiConnectMgr;
-class GuiOfferMgr;
+class GuiOfferClientMgr;
 class GuiUserJoinSession;
 class GuiUser;
 class GuiUserJoin;
@@ -69,7 +69,7 @@ protected:
     Ui::UserJoinListItemUi	    ui;
     AppCommon&					m_MyApp;
     GuiConnectMgr&				m_ConnectMgr;
-    GuiOfferMgr&				m_OfferMgr;
+    GuiOfferClientMgr&			m_OfferClientMgr;
     GuiUserMgr&					m_UserMgr;
     GuiUserJoinMgr&				m_UserJoinMgr;
 };

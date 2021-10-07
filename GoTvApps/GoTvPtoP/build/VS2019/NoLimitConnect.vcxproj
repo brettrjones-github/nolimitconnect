@@ -295,8 +295,13 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoin.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinList.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferClientMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferHostMgr.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgrBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumb.cpp" />
@@ -345,7 +350,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp" />
@@ -491,7 +495,13 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinMgr.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostJoin.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgrBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferClientMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferHostMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h" />
@@ -593,7 +603,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferMgr.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.h" />
@@ -632,7 +641,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgr.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiConnectMgr.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.h" />

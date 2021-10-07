@@ -176,11 +176,8 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     joinInfo->setLastConnectTime( timeNowMs );
     joinInfo->setLastJoinTime( timeNowMs );
 
+    saveToDatabase( joinInfo, true );
     unlockResources();
-
-    saveToDatabase( joinInfo );
-
-    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
 
     if( wasAdded )
     {
@@ -253,13 +250,19 @@ HostJoinInfo* HostJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType p
 }
 
 //============================================================================
-bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo )
+bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked )
 {
-    lockResources();
+    if( !resourcesLocked )
+    {
+        lockResources();
+    }
 
     bool result = m_HostJoinInfoDb.addHostJoin( joinInfo );
+    if( !resourcesLocked )
+    {
+        unlockResources();
+    }
 
-    unlockResources();
     return result;
 }
 

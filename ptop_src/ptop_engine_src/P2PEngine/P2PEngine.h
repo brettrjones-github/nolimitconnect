@@ -119,6 +119,7 @@ public:
     HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
     UserJoinMgr&                getUserJoinMgr( void )                          { return m_UserJoinMgr; }
     UserOnlineMgr&              getUserOnlineMgr( void )                        { return m_UserOnlineMgr; }
+
     VxSktBase*                  getSktLoopback( void )                          { return &m_SktLoopback; }
 
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }

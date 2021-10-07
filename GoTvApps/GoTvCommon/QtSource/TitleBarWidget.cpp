@@ -19,7 +19,8 @@
 #include "AppCommon.h"
 #include "ActivityHelpSignal.h"
 #include "MyIcons.h"
-#include "OfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
 #include "AppletPopupMenu.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -29,7 +30,7 @@
 TitleBarWidget::TitleBarWidget( QWidget * parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
-, m_OfferMgr( m_MyApp.getOfferMgr() )
+, m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_CamTimer(new QTimer(this))
 {
 	ui.setupUi( this );
@@ -96,9 +97,9 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( this,                      SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
     connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
 
-    connect( &m_OfferMgr,              SIGNAL( signalShareOfferCount( int ) ), this, SLOT( slotShareOfferListCount( int ) ) );
-    connect( &m_OfferMgr,              SIGNAL( signalPersonsOfferListCount( int ) ), this, SLOT( slotPersonsOfferListCount( int ) ) );
-    connect( ui.m_MenuButton,          SIGNAL( clicked() ),                   this, SLOT( slotTitleBarMenuButtonClicked() ) );
+    connect( &m_OfferClientMgr,         SIGNAL( signalShareOfferCount( int ) ), this, SLOT( slotShareOfferListCount( int ) ) );
+    connect( &m_OfferClientMgr,         SIGNAL( signalPersonsOfferListCount( int ) ), this, SLOT( slotPersonsOfferListCount( int ) ) );
+    connect( ui.m_MenuButton,           SIGNAL( clicked() ),                   this, SLOT( slotTitleBarMenuButtonClicked() ) );
 }
 
 //============================================================================

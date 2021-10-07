@@ -15,7 +15,8 @@
 #include <app_precompiled_hdr.h>
 #include "CallListItem.h"
 #include "CallListWidget.h"
-#include "OfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
 #include "GuiOfferSession.h"
 
 #include "MyIcons.h"
@@ -30,7 +31,7 @@
 CallListWidget::CallListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
-, m_OfferMgr( m_MyApp.getOfferMgr() )
+, m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_Engine( m_MyApp.getEngine() )
 {
 	QListWidget::setSortingEnabled( true );
@@ -365,9 +366,9 @@ void CallListWidget::refreshList( void )
 {
     clearCallList();
     std::vector<GuiOfferSession *> userList;
-    m_OfferMgr.lockOfferMgr();
+    m_OfferClientMgr.lockOfferMgr();
 
-    std::map<VxGUID, GuiOfferSession*>& mgrList = m_OfferMgr.getCallList();
+    std::map<VxGUID, GuiOfferSession*>& mgrList = m_OfferClientMgr.getCallList();
     for( auto iter = mgrList.begin(); iter != mgrList.end(); ++iter )
     {
         if( isListViewMatch( iter->second ) )
@@ -376,7 +377,7 @@ void CallListWidget::refreshList( void )
         }
     }
 
-    m_OfferMgr.unlockOfferMgr();
+    m_OfferClientMgr.unlockOfferMgr();
     for( auto user : userList )
     {
         updateCall( user );

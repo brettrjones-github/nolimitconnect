@@ -17,7 +17,8 @@
 #include "GuiOfferSession.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "OfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
 
 #include "ToGuiActivityInterface.h"
 #include "ActivityNetworkState.h"
@@ -84,7 +85,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 		break;
 	}
 
-	getOfferMgr().toGuiRxedPluginOffer( poOffer );
+	getOfferClientMgr().toGuiRxedPluginOffer( poOffer );
 }
 
 //============================================================================
@@ -129,7 +130,7 @@ void AppCommon::toGuiRxedOfferReply(	VxNetIdent *	netIdent,
 	poOffer->setLclSessionId( lclSessionId );
 	poOffer->assuredValidLclSessionId();
 
-	getOfferMgr().toGuiRxedOfferReply( poOffer );
+	getOfferClientMgr().toGuiRxedOfferReply( poOffer );
 }
 
 //============================================================================
@@ -167,7 +168,7 @@ void AppCommon::toGuiPluginSessionEnded(	VxNetIdent *	netIdent,
 	poOffer->setLclSessionId( lclSessionId );
 	poOffer->assuredValidLclSessionId();
 
-	getOfferMgr().toGuiPluginSessionEnded( poOffer );
+	getOfferClientMgr().toGuiPluginSessionEnded( poOffer );
 }
 
 //============================================================================

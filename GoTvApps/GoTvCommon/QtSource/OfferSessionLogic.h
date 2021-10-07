@@ -46,7 +46,7 @@ enum ESessionState
 class ActivityBase;
 class AppCommon;
 class AppletBase;
-class GuiOfferMgr;
+class m_OfferClientMgr;
 class GuiOfferSession;
 class OfferSessionCallbackInterface;
 class VxNetIdent;
@@ -120,7 +120,7 @@ public:
 
 private:
 	AppCommon& 				    m_MyApp;
-    GuiOfferMgr& 				m_OfferMgr;
+    GuiOfferClientMgr& 			m_OfferClientMgr;
     AppletBase*				    m_AppletBase{ nullptr };
 	OfferSessionCallbackInterface* m_OfferCallback;
     EPluginType					m_ePluginType{ ePluginTypeInvalid };

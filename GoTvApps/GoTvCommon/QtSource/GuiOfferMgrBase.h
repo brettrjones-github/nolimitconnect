@@ -30,11 +30,11 @@ class GuiUser;
 class QListWidgetItem;
 class QTimer;
 
-class OfferMgr : public QWidget, public FromGuiOfferInterface
+class GuiOfferMgrBase : public QWidget, public FromGuiOfferInterface
 {
 	Q_OBJECT
 public:
-	OfferMgr( AppCommon& myApp );
+	GuiOfferMgrBase( AppCommon& myApp );
 
 	void						lockOfferMgr( void )						{ m_OfferMgrMutex.lock(); }
 	void						unlockOfferMgr( void )						{ m_OfferMgrMutex.unlock(); }
@@ -43,6 +43,8 @@ public:
 
     std::map<VxGUID, GuiOfferSession*> getCallList( void ) { return m_CallOfferCache; }
     std::map<VxGUID, GuiOfferSession*> getOfferList( void ) { return m_OfferListCache; }
+
+	virtual void                onAppCommonCreated( void ) = 0;
 
 // from gui interface
 	virtual OfferSessionState *	getTopGuiOfferSession( void ); // returns null if no session offers

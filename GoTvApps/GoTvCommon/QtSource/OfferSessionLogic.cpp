@@ -19,7 +19,8 @@
 #include "OfferSessionLogic.h"
 #include "GuiOfferSession.h"
 #include "OfferSessionCallbackInterface.h"
-#include "OfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
 #include "OfferSessionState.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
@@ -31,7 +32,7 @@
 //======================================================================== 
 OfferSessionLogic::OfferSessionLogic( AppletBase* appletBase, OfferSessionCallbackInterface * callbackInterface, AppCommon& myApp )
 : m_MyApp( myApp )
-, m_OfferMgr( myApp.getOfferMgr() )
+, m_OfferClientMgr( myApp.getOfferClientMgr() )
 , m_AppletBase( appletBase )
 , m_OfferCallback( callbackInterface )
 , m_MyIdent( myApp.getMyIdentity() )
@@ -110,7 +111,7 @@ void OfferSessionLogic::onInSession( bool isInSession )
 	m_MyApp.toGuiStatusMessage( sessionMsg.c_str() );
 
 	m_OfferCallback->onInSession( isInSession );
-	m_OfferMgr.onIsInSession( m_ePluginType, m_OfferSessionId, m_HisIdent, isInSession );
+	m_OfferClientMgr.onIsInSession( m_ePluginType, m_OfferSessionId, m_HisIdent, isInSession );
 }
 
 //======================================================================== 
@@ -128,7 +129,7 @@ void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 					m_OfferSessionId = offerSession->getOfferSessionId();
 				}
 
-				m_OfferMgr.removePluginSessionOffer( m_ePluginType, m_HisIdent );
+				m_OfferClientMgr.removePluginSessionOffer( m_ePluginType, m_HisIdent );
 				// already in session with this user
 				m_MyApp.getEngine().fromGuiToPluginOfferReply( 	m_ePluginType, 
 																m_HisIdent->getMyOnlineId(), 
@@ -156,7 +157,7 @@ void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 						eOfferResponseBusy,
 						offerSession->getHisIdent()->getMyOnlineId() );	
 
-					m_OfferMgr.sentOfferReply( m_ePluginType, offerSession->getHisIdent()->getMyOnlineId(), offerSession->getHisIdent(), eOfferResponseBusy );
+					m_OfferClientMgr.sentOfferReply( m_ePluginType, offerSession->getHisIdent()->getMyOnlineId(), offerSession->getHisIdent(), eOfferResponseBusy );
 				}
 				else
 				{
@@ -165,7 +166,7 @@ void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 						offerSession->getUserData(), 
 						eOfferResponseBusy,
 						offerSession->getOfferSessionId() );									
-					m_OfferMgr.sentOfferReply( m_ePluginType, offerSession->getOfferSessionId(), offerSession->getHisIdent(), eOfferResponseBusy );					
+					m_OfferClientMgr.sentOfferReply( m_ePluginType, offerSession->getOfferSessionId(), offerSession->getHisIdent(), eOfferResponseBusy );
 				}
 			}
 		}
@@ -200,7 +201,7 @@ void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 						eOfferResponseBusy,
 						offerSession->getHisIdent()->getMyOnlineId() );	
 
-					m_OfferMgr.sentOfferReply( m_ePluginType, offerSession->getHisIdent()->getMyOnlineId(), offerSession->getHisIdent(), eOfferResponseBusy );
+					m_OfferClientMgr.sentOfferReply( m_ePluginType, offerSession->getHisIdent()->getMyOnlineId(), offerSession->getHisIdent(), eOfferResponseBusy );
 				}
 				else
 				{
@@ -209,7 +210,7 @@ void OfferSessionLogic::doToGuiRxedPluginOffer( GuiOfferSession * offerSession )
 						offerSession->getUserData(), 
 						eOfferResponseBusy,
 						offerSession->getOfferSessionId() );									
-					m_OfferMgr.sentOfferReply( m_ePluginType, offerSession->getOfferSessionId(), offerSession->getHisIdent(), eOfferResponseBusy );					
+					m_OfferClientMgr.sentOfferReply( m_ePluginType, offerSession->getOfferSessionId(), offerSession->getHisIdent(), eOfferResponseBusy );
 				}
 			}
 		}
@@ -237,7 +238,7 @@ void OfferSessionLogic::doToGuiRxedOfferReply( GuiOfferSession * offerSession )
 					m_MyApp.getEngine().fromGuiStartPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(),
 						offerSession->getUserData(),
 						offerSessionId );
-					m_OfferMgr.startedSessionInReply( m_ePluginType, offerSessionId, m_HisIdent );
+					m_OfferClientMgr.startedSessionInReply( m_ePluginType, offerSessionId, m_HisIdent );
 					onInSession( true );
 				}
 			}
@@ -248,7 +249,7 @@ void OfferSessionLogic::doToGuiRxedOfferReply( GuiOfferSession * offerSession )
 
 			if( GuiHelpers::isPluginSingleSession( m_ePluginType ) )
 			{
-				m_OfferMgr.removePluginSessionOffer( m_ePluginType, m_HisIdent );
+				m_OfferClientMgr.removePluginSessionOffer( m_ePluginType, m_HisIdent );
 			}
 		}
 	}
@@ -336,7 +337,7 @@ bool OfferSessionLogic::sendOfferOrResponse()
 			}
 			else
 			{
-				m_OfferMgr.sentOffer( m_ePluginType, m_OfferSessionId, m_HisIdent );
+				m_OfferClientMgr.sentOffer( m_ePluginType, m_OfferSessionId, m_HisIdent );
 				postStatusMsg( "Waiting Reply Offer %s From %s", describePlugin().c_str(),  getHisOnlineName().c_str() );
 			}
 		}
@@ -379,7 +380,7 @@ void OfferSessionLogic::onStop()
 	if( false == m_IsOnStopCalled && m_HisIdent )
 	{
 		m_IsOnStopCalled = true;
-		m_OfferMgr.onSessionExit( m_ePluginType, m_OfferSessionId, m_HisIdent );
+		m_OfferClientMgr.onSessionExit( m_ePluginType, m_OfferSessionId, m_HisIdent );
 		if( false == getIsServerSession() )
 		{
 			setCallState( eCallStateHangedUp );
@@ -396,7 +397,7 @@ void OfferSessionLogic::onStop()
 							0, 
 							eOfferResponseEndSession, 
 							m_OfferSessionId );
-						m_OfferMgr.sentOfferReply( m_ePluginType, m_OfferSessionId, m_HisIdent, eOfferResponseEndSession );
+						m_OfferClientMgr.sentOfferReply( m_ePluginType, m_OfferSessionId, m_HisIdent, eOfferResponseEndSession );
 					}
 				}
 			}
@@ -433,7 +434,7 @@ bool OfferSessionLogic::startPluginSessionIfIsSessionOffer()
 														m_HisIdent->getMyOnlineId(),
 														getUserData(),
 														m_OfferSessionId );
-		m_OfferMgr.startedSessionInReply( m_ePluginType, m_OfferSessionId, m_HisIdent );
+		m_OfferClientMgr.startedSessionInReply( m_ePluginType, m_OfferSessionId, m_HisIdent );
 		onInSession( true );
 		return true;
 	}

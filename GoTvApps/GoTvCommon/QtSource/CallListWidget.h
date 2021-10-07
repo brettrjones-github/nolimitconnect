@@ -37,7 +37,7 @@ class AppCommon;
 class CallListItem;
 class GuiCall;
 class GuiOfferSession;
-class GuiOfferMgr;
+class GuiOfferClientMgr;
 class MyIcons;
 class P2PEngine;
 
@@ -107,7 +107,7 @@ protected:
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
-    GuiOfferMgr&				m_OfferMgr;
+    GuiOfferClientMgr&			m_OfferClientMgr;
 	P2PEngine&					m_Engine;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     bool                        m_ShowMyself{ true };

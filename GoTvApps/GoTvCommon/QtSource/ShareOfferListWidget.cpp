@@ -15,7 +15,8 @@
 #include <app_precompiled_hdr.h>
 #include "ShareOfferListItem.h"
 #include "ShareOfferListWidget.h"
-#include "OfferMgr.h"
+#include "GuiOfferClientMgr.h"
+#include "GuiOfferHostMgr.h"
 #include "GuiOfferSession.h"
 
 #include "MyIcons.h"
@@ -30,7 +31,7 @@
 ShareOfferListWidget::ShareOfferListWidget( QWidget * parent )
 : QListWidget( parent )
 , m_MyApp( GetAppInstance() )
-, m_OfferMgr( m_MyApp.getOfferMgr() )
+, m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_Engine( m_MyApp.getEngine() )
 {
 	QListWidget::setSortingEnabled( true );
@@ -357,9 +358,9 @@ void ShareOfferListWidget::refreshList( void )
 {
     clearOfferList();
     std::vector<GuiOfferSession *> userList;
-    m_OfferMgr.lockOfferMgr();
+    m_OfferClientMgr.lockOfferMgr();
 
-    std::map<VxGUID, GuiOfferSession*>& mgrList = m_OfferMgr.getOfferList();
+    std::map<VxGUID, GuiOfferSession*>& mgrList = m_OfferClientMgr.getOfferList();
     for( auto iter = mgrList.begin(); iter != mgrList.end(); ++iter )
     {
         if( isListViewMatch( iter->second ) )
@@ -368,7 +369,7 @@ void ShareOfferListWidget::refreshList( void )
         }
     }
 
-    m_OfferMgr.unlockOfferMgr();
+    m_OfferClientMgr.unlockOfferMgr();
     for( auto user : userList )
     {
         updateOffer( user );

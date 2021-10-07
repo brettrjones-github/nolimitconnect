@@ -35,7 +35,7 @@ enum EOfferViewType
 
 class AppCommon;
 class GuiOffer;
-class GuiOfferMgr;
+class GuiOfferClientMgr;
 class GuiOfferSession;
 class MyIcons;
 class ShareOfferListItem;
@@ -53,11 +53,11 @@ public:
     void                        clearOfferList( void );
 
     void                        addOfferToList( EHostType hostType, VxGUID& sessionId,  GuiOffer * userIdent );
-    ShareOfferListItem*              addOrUpdateOfferSession( GuiOfferSession* hostSession );
+    ShareOfferListItem*         addOrUpdateOfferSession( GuiOfferSession* hostSession );
 
     GuiOfferSession*            findSession( VxGUID& lclSessionId );
-    ShareOfferListItem*              findListEntryWidgetBySessionId( VxGUID& sessionId );
-    ShareOfferListItem*              findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    ShareOfferListItem*         findListEntryWidgetBySessionId( VxGUID& sessionId );
+    ShareOfferListItem*         findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
     void                        updateOffer( GuiOfferSession * user );
     void                        removeOffer( VxGUID& onlineId );
@@ -103,7 +103,7 @@ protected:
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
-    GuiOfferMgr&				m_OfferMgr;
+    GuiOfferClientMgr&          m_OfferClientMgr;
 	P2PEngine&					m_Engine;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     bool                        m_ShowMyself{ true };
