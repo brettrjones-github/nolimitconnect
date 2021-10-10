@@ -27,8 +27,13 @@ public:
 
 	HostJoinInfo&				operator=( const HostJoinInfo& rhs ); 
 
-    bool                        isValid( void ) { return true;  }
+    bool                        isValid( void )                                     { return m_NetIdent != nullptr;  }
 
+    virtual void			    setNetIdent( VxNetIdent* netIdent )                 { m_NetIdent = netIdent; }
+    virtual VxNetIdent*         getNetIdent( void )                                 { return m_NetIdent; }
+
+    virtual void			    setPluginType( EPluginType pluginType )             { m_PluginType = pluginType; }
+    virtual EPluginType			getPluginType( void )                               { return m_PluginType; }
     virtual void			    setHostFlags( uint32_t hostFlags )                  { m_HostFlags = hostFlags; }
     virtual uint32_t			getHostFlags( void )                                { return m_HostFlags; }
 
@@ -50,6 +55,8 @@ public:
 
 protected:
 	//=== vars ===//
+    VxNetIdent*                 m_NetIdent{ nullptr };
+    EPluginType                 m_PluginType{ ePluginTypeInvalid };
     EFriendState                m_FriendState{ eFriendStateIgnore };
     uint32_t                    m_HostFlags{ 0 };
     std::string                 m_UserUrl{ "" };

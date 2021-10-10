@@ -21,3 +21,9 @@ void GuiOfferHostMgr::onAppCommonCreated( void )
 {
     m_MyApp.getEngine().getOfferHostMgr().addOfferHostMgrClient( this, true );
 }
+
+//============================================================================
+bool GuiOfferHostMgr::isMessengerReady( void )
+{
+    return m_MyApp.isMessengerReady();
+}

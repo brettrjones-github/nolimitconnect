@@ -613,8 +613,11 @@ public:
 
 	void						refreshFriend( VxGUID& onlineId ); // called to emit signalRefreshFriend
     bool						loadLastUserAccount( void );
+    void                        onMessengerReady( bool isReady );
+    bool                        isMessengerReady( void ) { return m_IsMessengerReady; }
 
 signals:
+    void						signalMessengerReady( bool isReady );    // emitted when messenger ready state changes
     void						signalMainWindowResized( void );    // emitted if main window is resized
     void						signalMainWindowMoved( void );      // emitted if main window is moved
 
@@ -817,6 +820,7 @@ private:
     QTimer *                    m_CheckSetupTimer = nullptr;
     ActivityAppSetup *          m_AppSetupDlg = nullptr;
     QElapsedTimer               m_ElapsedTimer;
+    bool                        m_IsMessengerReady{ false };
 
 //    KodiThread *                m_KodiThread;
 };

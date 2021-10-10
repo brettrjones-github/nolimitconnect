@@ -29,5 +29,6 @@ public:
     virtual ~GuiOfferClientMgr() override = default;
 
     virtual void                onAppCommonCreated( void ) override;
-
+    virtual void                onMessengerReady( bool ready ) override { }
+    virtual bool                isMessengerReady( void ) override;
 };

@@ -77,27 +77,27 @@ void HostJoinMgr::addHostJoinMgrClient( HostJoinCallbackInterface * client, bool
 }
 
 //============================================================================
-void HostJoinMgr::announceHostJoinAdded( HostJoinInfo * assetInfo )
+void HostJoinMgr::announceHostJoinRequested( HostJoinInfo * assetInfo )
 {
     HostJoinInfo * userHostInfo = dynamic_cast<HostJoinInfo *>( assetInfo );
     if( userHostInfo )
     {
-	    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinAdded start" );
+	    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested start" );
 	
 	    lockClientList();
 	    std::vector<HostJoinCallbackInterface *>::iterator iter;
 	    for( iter = m_HostJoinClients.begin();	iter != m_HostJoinClients.end(); ++iter )
 	    {
 		    HostJoinCallbackInterface * client = *iter;
-		    client->callbackHostJoinAdded( userHostInfo );
+		    client->callbackHostJoinRequested( userHostInfo );
 	    }
 
 	    unlockClientList();
-	    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinAdded done" );
+	    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested done" );
     }
     else
     {
-        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinAdded dynamic_cast failed" );
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinRequested dynamic_cast failed" );
     }
 }
 
@@ -119,19 +119,19 @@ void HostJoinMgr::announceHostJoinUpdated( HostJoinInfo * assetInfo )
     }
     else
     {
-        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinRemoved dynamic_cast failed" );
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinUpdated dynamic_cast failed" );
     }
 }
 
 //============================================================================
-void HostJoinMgr::announceHostJoinRemoved( VxGUID& hostOnlineId )
+void HostJoinMgr::announceHostJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
 {
 	lockClientList();
 	std::vector<HostJoinCallbackInterface *>::iterator iter;
 	for( iter = m_HostJoinClients.begin();	iter != m_HostJoinClients.end(); ++iter )
 	{
 		HostJoinCallbackInterface * client = *iter;
-		client->callbackHostJoinRemoved( hostOnlineId );
+		client->callbackHostJoinRemoved( hostOnlineId, pluginType );
 	}
 
 	unlockClientList();
@@ -160,6 +160,7 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
         joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
         joinInfo->setPluginType( sessionInfo.getPluginType() );
         joinInfo->setSessionId( sessionInfo.getSessionId() );
+        joinInfo->setNetIdent( netIdent );
         wasAdded = true;
     }
 
@@ -175,6 +176,7 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     joinInfo->setInfoModifiedTime( timeNowMs );
     joinInfo->setLastConnectTime( timeNowMs );
     joinInfo->setLastJoinTime( timeNowMs );
+    
 
     saveToDatabase( joinInfo, true );
     unlockResources();
@@ -185,7 +187,7 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     }
     else
     {
-        announceHostJoinRequestUpdated( joinInfo );
+        announceHostJoinUpdated( joinInfo );
     }
 }
 
@@ -201,6 +203,7 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
         joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
         joinInfo->setPluginType( sessionInfo.getPluginType() );
         joinInfo->setSessionId( sessionInfo.getSessionId() );
+        joinInfo->setNetIdent( netIdent );
         wasAdded = true;
     }
 
@@ -225,7 +228,7 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
 
     if( wasAdded )
     {
-        announceHostJoinAdded( joinInfo );
+        announceHostJoinRequested( joinInfo );
     }
     else
     {
@@ -306,53 +309,6 @@ EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& n
 
     unlockResources();
     return hostJoinState;
-}
-
-//============================================================================
-void HostJoinMgr::announceHostJoinRequested( HostJoinInfo* assetInfo )
-{
-    HostJoinInfo* userHostInfo = dynamic_cast<HostJoinInfo*>(assetInfo);
-    if( userHostInfo )
-    {
-        LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested start" );
-
-        lockClientList();
-        std::vector<HostJoinCallbackInterface*>::iterator iter;
-        for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
-        {
-            HostJoinCallbackInterface* client = *iter;
-            client->callbackHostJoinRequested( userHostInfo );
-        }
-
-        unlockClientList();
-        LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested done" );
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinRequested dynamic_cast failed" );
-    }
-}
-
-//============================================================================
-void HostJoinMgr::announceHostJoinRequestUpdated( HostJoinInfo* assetInfo )
-{
-    HostJoinInfo* userHostInfo = dynamic_cast<HostJoinInfo*>(assetInfo);
-    if( userHostInfo )
-    {
-        lockClientList();
-        std::vector<HostJoinCallbackInterface*>::iterator iter;
-        for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
-        {
-            HostJoinCallbackInterface* client = *iter;
-            client->announceHostJoinRequestUpdated( userHostInfo );
-        }
-
-        unlockClientList();
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinRequestUpdated dynamic_cast failed" );
-    }
 }
 
 //============================================================================

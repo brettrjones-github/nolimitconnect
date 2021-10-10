@@ -29,6 +29,8 @@ public:
 	virtual ~GuiConnectMgr() = default;
 
     virtual void                onAppCommonCreated( void );
+    virtual void                onMessengerReady( bool ready ) { }
+    virtual bool                isMessengerReady( void );
 
 protected:
     

@@ -20,3 +20,9 @@ void GuiOfferClientMgr::onAppCommonCreated( void )
 {
     m_MyApp.getEngine().getOfferClientMgr().addOfferClientMgrClient( this, true );
 }
+
+//============================================================================
+bool GuiOfferClientMgr::isMessengerReady( void )
+{
+    return m_MyApp.isMessengerReady();
+}

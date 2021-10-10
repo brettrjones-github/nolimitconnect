@@ -64,6 +64,7 @@ public:
     void						setIsAppletLaunchWidget( bool isLaunchWidget ) { m_IsAppletLaunchWidget = isLaunchWidget; }
     bool						getIsAppletLaunchWidget( void )     { return m_IsAppletLaunchWidget; }
 
+	bool                        isMessengerReady( void );
 	bool                        isHomeFrame( void );
     bool                        isMessagerFrame( void );
 

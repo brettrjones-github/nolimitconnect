@@ -30,10 +30,10 @@ public:
     GuiUserMgr( AppCommon& app );
     GuiUserMgr( const GuiUserMgr& rhs ) = delete;
 	virtual ~GuiUserMgr() = default;
-    void                        onAppCommonCreated( void );
+    virtual void                onAppCommonCreated( void );
+    virtual void                onMessengerReady( bool ready ) { }
+    virtual bool                isMessengerReady( void );
 
-    void                        setMessengerReady( bool ready )             { m_MessengerReady = ready; }
-    bool                        isMessengerReady( void )                    { return m_MessengerReady; }
     GuiUser *                   getMyIdent( void )                          { return m_MyIdent; }  
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
@@ -96,7 +96,6 @@ protected:
     VxMutex                     m_UserListMutex;
     // map of online id to GuiUser
     std::map<VxGUID, GuiUser*>  m_UserList;
-    bool                        m_MessengerReady{ false };
     GuiUser*                    m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
 };

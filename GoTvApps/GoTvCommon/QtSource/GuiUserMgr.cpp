@@ -34,6 +34,13 @@ void GuiUserMgr::onAppCommonCreated( void )
 }
 
 //============================================================================
+bool GuiUserMgr::isMessengerReady( void )
+{
+    return m_MyApp.isMessengerReady();
+}
+
+
+//============================================================================
 void GuiUserMgr::toGuiContactAdded( VxNetIdent * netIdent )
 {
     emit signalInternalUpdateUser( netIdent, eHostTypeUnknown );

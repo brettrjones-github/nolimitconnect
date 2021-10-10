@@ -39,6 +39,12 @@ void GuiThumbMgr::onAppCommonCreated( void )
 }
 
 //============================================================================
+bool GuiThumbMgr::isMessengerReady( void )
+{
+    return m_MyApp.isMessengerReady();
+}
+
+//============================================================================
 void GuiThumbMgr::callbackThumbAdded( ThumbInfo *  thumb )
 {
     emit signalInternalThumbAdded( thumb );

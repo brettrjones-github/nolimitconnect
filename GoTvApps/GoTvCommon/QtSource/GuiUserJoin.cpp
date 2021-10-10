@@ -114,3 +114,49 @@ void GuiUserJoin::addHostType( EHostType hostType )
         m_HostSet.insert( hostType );
     }
 }
+
+//============================================================================
+EJoinState GuiUserJoin::getJoinState( EHostType hostType )
+{
+    EJoinState joinState = eJoinStateNone;
+    for( auto& statePair : m_JoinStateList )
+    {
+        if( statePair.first == hostType )
+        {
+            joinState = statePair.second;
+            break;
+        }
+    }
+
+    return joinState;
+}
+
+//============================================================================
+bool GuiUserJoin::setJoinState( EHostType hostType, EJoinState joinState )
+{
+    bool stateChanged = false;
+    bool foundState = false;
+    for( auto& statePair : m_JoinStateList )
+    {
+        if( statePair.first == hostType )
+        {
+            foundState = true;
+            if( statePair.second != joinState )
+            {
+                statePair.second = joinState;
+                stateChanged = true;
+            }
+
+            break;
+        }
+    }
+
+    if( !foundState )
+    {
+        m_JoinStateList.push_back( std::make_pair( hostType, joinState ) );
+        stateChanged = true;
+    }
+
+    return stateChanged;
+}
+

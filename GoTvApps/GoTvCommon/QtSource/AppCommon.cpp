@@ -2214,6 +2214,22 @@ void AppCommon::onEditPermissionsSelected(int iMenuId, PopupMenu* senderPopupMen
 }
 
 //============================================================================
+void AppCommon::onMessengerReady( bool isReady )
+{
+	if( isReady != m_IsMessengerReady )
+	{
+		m_IsMessengerReady = isReady;
+		m_ThumbMgr.onMessengerReady( isReady );
+		m_UserMgr.onMessengerReady( isReady );
+		m_OfferClientMgr.onMessengerReady( isReady );
+		m_OfferHostMgr.onMessengerReady( isReady );
+		m_HostJoinMgr.onMessengerReady( isReady );
+		m_UserJoinMgr.onMessengerReady( isReady );
+		m_ConnectMgr.onMessengerReady( isReady );
+	}
+}
+
+//============================================================================
 void  AppCommon::registerMetaData(void)
 {
 	qRegisterMetaType<EAppErr>("EAppErr");
@@ -2254,4 +2270,6 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<VxGUID>("VxGUID");
 	qRegisterMetaType<VxNetIdent>("VxNetIdent");
 	qRegisterMetaType<uint32_t>("uint32_t");
+	qRegisterMetaType<uint32_t>( "UserJoinInfo" );
+	qRegisterMetaType<uint32_t>( "HostJoinInfo" );
 }

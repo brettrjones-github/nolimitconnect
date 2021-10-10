@@ -381,7 +381,6 @@ void UserJoinListWidget::refreshList( void )
 {
     clearUserJoinList();
     std::vector<GuiUserJoin *> userList;
-    m_UserJoinMgr.lockUserJoinMgr();
 
     if( isListViewMatch( m_UserJoinMgr.getMyIdent() ) )
     {
@@ -397,7 +396,6 @@ void UserJoinListWidget::refreshList( void )
         }
     }
 
-    m_UserJoinMgr.unlockUserJoinMgr();
     for( auto user : userList )
     {
         updateUserJoin( user );

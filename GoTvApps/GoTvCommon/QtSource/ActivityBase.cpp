@@ -187,6 +187,12 @@ void ActivityBase::connectBottomBarWidget( BottomBarWidget * bottomBar )
 }
 
 //============================================================================
+bool ActivityBase::isMessengerReady( void )
+{
+	return m_MyApp.isMessengerReady();
+}
+
+//============================================================================
 bool ActivityBase::isMessagerFrame( void )
 {
     return ( eAppletMessengerFrame == m_EAppletType );

@@ -33,10 +33,11 @@ public:
     GuiThumbMgr( AppCommon& app );
     GuiThumbMgr( const GuiThumbMgr& rhs ) = delete;
 	virtual ~GuiThumbMgr() = default;
-    void                        onAppCommonCreated( void );
 
-    void                        setMessengerReady( bool ready )             { m_MessengerReady = ready; }
-    bool                        isMessengerReady( void )                    { return m_MessengerReady; }
+    virtual void                onAppCommonCreated( void );
+    virtual void                onMessengerReady( bool ready )              { }
+    virtual bool                isMessengerReady( void );
+
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
     bool                        requestAvatarImage( GuiUser* user, EHostType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
@@ -79,7 +80,6 @@ protected:
     AppCommon&                  m_MyApp;
     VxMutex                     m_ThumbListMutex;
     GuiThumbList                m_ThumbList;
-    bool                        m_MessengerReady{ false };
     GuiThumb*                   m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
 };

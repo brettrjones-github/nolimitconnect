@@ -87,17 +87,10 @@ void GuiHostJoin::setNetIdent( VxNetIdent* netIdent )
 //============================================================================
 void GuiHostJoin::setOnlineStatus( bool isOnline )
 {
-    /*
     if( isOnline != m_IsOnline )
     {
         m_IsOnline = isOnline;
-        m_GuiUserMgr.onUserJoinOnlineStatusChange( this, m_IsOnline );
-        if( !m_IsOnline )
-        {
-            m_SessionId.clearVxGUID();
-        }
     }
-    */
 }
 
 //============================================================================
@@ -113,4 +106,49 @@ void GuiHostJoin::addHostType( EHostType hostType )
     {
         m_HostSet.insert( hostType );
     }
+}
+
+//============================================================================
+EJoinState GuiHostJoin::getJoinState( EHostType hostType )
+{
+    EJoinState joinState = eJoinStateNone;
+    for( auto& statePair : m_JoinStateList )
+    {
+        if( statePair.first == hostType )
+        {
+            joinState = statePair.second;
+            break;
+        }
+    }
+
+    return joinState;
+}
+
+//============================================================================
+bool GuiHostJoin::setJoinState( EHostType hostType, EJoinState joinState )
+{
+    bool stateChanged = false;
+    bool foundState = false;
+    for( auto& statePair : m_JoinStateList )
+    {
+        if( statePair.first == hostType )
+        {
+            foundState = true;
+            if( statePair.second != joinState )
+            {
+                statePair.second = joinState;
+                stateChanged = true;
+            }
+            
+            break;
+        }
+    }
+
+    if( !foundState )
+    {
+        m_JoinStateList.push_back( std::make_pair(hostType, joinState ) );
+        stateChanged = true;
+    }
+
+    return stateChanged;
 }

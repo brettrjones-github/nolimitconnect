@@ -77,27 +77,27 @@ void UserJoinMgr::addUserJoinMgrClient( UserJoinCallbackInterface * client, bool
 }
 
 //============================================================================
-void UserJoinMgr::announceUserJoinAdded( UserJoinInfo * joinInfo )
+void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
 {
-    UserJoinInfo * userHostInfo = dynamic_cast<UserJoinInfo *>( joinInfo );
+    UserJoinInfo* userHostInfo = dynamic_cast<UserJoinInfo*>(joinInfo);
     if( userHostInfo )
     {
-	    LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinAdded start" );
-	
-	    lockClientList();
-	    std::vector<UserJoinCallbackInterface *>::iterator iter;
-	    for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )
-	    {
-		    UserJoinCallbackInterface * client = *iter;
-		    client->callbackUserJoinAdded( userHostInfo );
-	    }
+        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested start" );
 
-	    unlockClientList();
-	    LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinAdded done" );
+        lockClientList();
+        std::vector<UserJoinCallbackInterface*>::iterator iter;
+        for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
+        {
+            UserJoinCallbackInterface* client = *iter;
+            client->callbackUserJoinRequested( userHostInfo );
+        }
+
+        unlockClientList();
+        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested done" );
     }
     else
     {
-        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinAdded dynamic_cast failed" );
+        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRequested dynamic_cast failed" );
     }
 }
 
@@ -124,14 +124,14 @@ void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * joinInfo )
 }
 
 //============================================================================
-void UserJoinMgr::announceUserJoinRemoved( VxGUID& hostOnlineId, EHostType hostType )
+void UserJoinMgr::announceUserJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
 {
 	lockClientList();
 	std::vector<UserJoinCallbackInterface *>::iterator iter;
 	for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )
 	{
 		UserJoinCallbackInterface * client = *iter;
-		client->callbackUserJoinRemoved( hostOnlineId, hostType );
+		client->callbackUserJoinRemoved( hostOnlineId, pluginType );
 	}
 
 	unlockClientList();
@@ -182,7 +182,7 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
 
     if( wasAdded )
     {
-        announceUserJoinAdded( joinInfo );
+        announceUserJoinRequested( joinInfo );
     }
     else
     {
@@ -222,53 +222,6 @@ bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo, bool isLocked )
     }
 
     return result;
-}
-
-//============================================================================
-void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
-{
-    UserJoinInfo* userHostInfo = dynamic_cast<UserJoinInfo*>(joinInfo);
-    if( userHostInfo )
-    {
-        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested start" );
-
-        lockClientList();
-        std::vector<UserJoinCallbackInterface*>::iterator iter;
-        for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
-        {
-            UserJoinCallbackInterface* client = *iter;
-            client->callbackUserJoinRequested( userHostInfo );
-        }
-
-        unlockClientList();
-        LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested done" );
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRequested dynamic_cast failed" );
-    }
-}
-
-//============================================================================
-void UserJoinMgr::announceUserJoinRequestUpdated( UserJoinInfo* joinInfo )
-{
-    UserJoinInfo* userHostInfo = dynamic_cast<UserJoinInfo*>(joinInfo);
-    if( userHostInfo )
-    {
-        lockClientList();
-        std::vector<UserJoinCallbackInterface*>::iterator iter;
-        for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
-        {
-            UserJoinCallbackInterface* client = *iter;
-            client->callbackUserJoinRequestUpdated( userHostInfo );
-        }
-
-        unlockClientList();
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRequestUpdated dynamic_cast failed" );
-    }
 }
 
 //============================================================================

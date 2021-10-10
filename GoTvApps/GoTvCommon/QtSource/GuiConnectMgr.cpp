@@ -27,3 +27,9 @@ void GuiConnectMgr::onAppCommonCreated( void )
 {
     m_MyApp.getEngine().getConnectMgr().addConnectMgrClient( this, true );
 }
+
+//============================================================================
+bool GuiConnectMgr::isMessengerReady( void )
+{ 
+    return m_MyApp.isMessengerReady(); 
+}

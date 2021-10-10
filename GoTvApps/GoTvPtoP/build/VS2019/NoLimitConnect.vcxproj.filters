@@ -824,9 +824,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonOfferList.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinMgr.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgrBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -834,6 +831,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferHostMgr.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -2065,10 +2065,10 @@
       <Filter>Source Files\GuiInterface\OsWin32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostJoin.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinList.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

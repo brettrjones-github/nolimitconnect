@@ -16,6 +16,7 @@
 #include "GuiUserJoin.h"
 
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.h>
 
 #include <CoreLib/VxMutex.h>
 
@@ -32,9 +33,9 @@ public:
     GuiUserJoinMgr( const GuiUserJoinMgr& rhs ) = delete;
 	virtual ~GuiUserJoinMgr() = default;
     void                        onAppCommonCreated( void );
+    void                        onMessengerReady( bool ready ) { }
+    bool                        isMessengerReady( void );
 
-    void                        setMessengerReady( bool ready )             { m_MessengerReady = ready; }
-    bool                        isMessengerReady( void )                    { return m_MessengerReady; }
     GuiUserJoin *               getMyIdent( void )                          { return m_MyIdent; }  
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
@@ -42,47 +43,55 @@ public:
     void                        setUserJoinOffline( VxGUID& onlineId );
 
     void                        onUserJoinAdded( GuiUserJoin* user );
-    void                        onUserJoinRemoved( VxGUID& onlineId );
+    void                        onUserJoinRemoved( VxGUID& onlineId, EHostType hostType );
     void                        onUserJoinUpdated( GuiUserJoin* user );
     void                        onUserJoinOnlineStatusChange( GuiUserJoin* user, bool isOnline );
     void                        onMyIdentUpdated( GuiUserJoin* user );
 
-    void                        lockUserJoinMgr( void )             { m_UserJoinListMutex.lock(); }
-    void                        unlockUserJoinMgr( void )           { m_UserJoinListMutex.unlock(); }
     GuiUserJoin*                    getUserJoin( VxGUID& onlineId );
     std::map<VxGUID, GuiUserJoin*>& getUserJoinList( void )             { return m_UserJoinList; }
 
     void                        updateMyIdent( VxNetIdent* myIdent );
 
+
 signals:
     void				        signalMyIdentUpdated( GuiUserJoin* user ); 
 
-    void				        signalUserJoinAdded( GuiUserJoin* user ); 
-    void				        signalUserJoinRemoved( VxGUID onlineId ); 
+    void				        signalUserJoinRequested( GuiUserJoin* user ); 
     void                        signalUserJoinUpdated( GuiUserJoin* user );
+    void				        signalUserJoinRemoved( VxGUID onlineId, EHostType hostType );
+    void                        signalUserJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
     void                        signalUserJoinOnlineStatus( GuiUserJoin* user, bool isOnline );
 
-    void                        signalInternalUpdateUserJoin( VxNetIdent* netIdent, EHostType hostType );
-    void                        signalInternalUpdateMyIdent( VxNetIdent* netIdent );
-    void                        signalInternalUserJoinRemoved( VxGUID onlineId );
-    void                        signalInternalUserJoinOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
+    void                        signalInternalUserJoinRequested( UserJoinInfo userJoinInfo );
+    void                        signalInternalUserJoinUpdated( UserJoinInfo userJoinInfo );
+    void                        signalInternalUserJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
+    void                        signalInternalUserJoinOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState hostOfferState );
+    void                        signalInternalUserJoinOnlineState( VxGUID hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
 
 private slots:
-    void                        slotInternalUpdateUserJoin( VxNetIdent* netIdent, EHostType hostType );
-    void                        slotInternalUpdateMyIdent( VxNetIdent* netIdent );
-    void                        slotInternalUserJoinRemoved( VxGUID onlineId );
-    void                        slotInternalUserJoinOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
+    void                        slotInternalUserJoinRequested( UserJoinInfo userJoinInfo );
+    void                        slotInternalUserJoinUpdated( UserJoinInfo userJoinInfo );
+    void                        slotInternalUserJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
+    void                        slotInternalUserJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState );
+    void                        slotInternalUserJoinOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
 
 protected:
     void                        removeUserJoin( VxGUID& onlineId );
     GuiUserJoin*                findUserJoin( VxGUID& onlineId );
     GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
+    GuiUserJoin*                updateUserJoin( UserJoinInfo& userJoinInfo );
     
+    virtual void				callbackUserJoinRequested( UserJoinInfo* userJoinInfo ) override;
+    virtual void				callbackUserJoinUpdated( UserJoinInfo* userJoinInfo ) override;
+    virtual void				callbackUserJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) override;
+    virtual void				callbackUserJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userOfferState ) override;
+    virtual void				callbackUserJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
+
     AppCommon&                  m_MyApp;
-    VxMutex                     m_UserJoinListMutex;
+    VxNetIdent*                 m_NetIdent{ nullptr };
     // map of online id to GuiUserJoin
     std::map<VxGUID, GuiUserJoin*>  m_UserJoinList;
-    bool                        m_MessengerReady{ false };
     GuiUserJoin*                m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
 };

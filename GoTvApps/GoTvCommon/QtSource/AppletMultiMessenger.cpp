@@ -102,13 +102,13 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
 	m_IsInitialized = true;
     */
     m_MyApp.activityStateChange( this, true ); 
-    m_MyApp.getUserMgr().setMessengerReady( true );
-    m_MyApp.getThumbMgr().setMessengerReady( true );
+    m_MyApp.onMessengerReady( true );
 }
 
 //============================================================================
 AppletMultiMessenger::~AppletMultiMessenger()
 {
+	m_MyApp.onMessengerReady( false );
     m_MyApp.activityStateChange( this, false );
 }
 

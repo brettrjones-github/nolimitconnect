@@ -15,6 +15,7 @@
 
 #include "GuiUserJoinMgr.h"
 #include "AppCommon.h"
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.h>
 
 //============================================================================
 GuiUserJoinMgr::GuiUserJoinMgr( AppCommon& app )
@@ -26,44 +27,117 @@ GuiUserJoinMgr::GuiUserJoinMgr( AppCommon& app )
 //============================================================================
 void GuiUserJoinMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalUpdateUserJoin(VxNetIdent*,EHostType) ),	                this, SLOT( slotInternalUpdateUserJoin(VxNetIdent*,EHostType) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalUserJoinRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserJoinRemoved(VxGUID) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalUserJoinOnlineStatus( VxNetIdent*, EHostType, bool ) ),    this, SLOT( slotInternalUserJoinOnlineStatus( VxNetIdent*, EHostType, bool ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinRequested( UserJoinInfo ) ), this, SLOT( slotInternalUserJoinRequested( UserJoinInfo ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinUpdated( UserJoinInfo ) ), this, SLOT( slotInternalUserJoinUpdated( UserJoinInfo ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinRemoved( VxGUID, EPluginType ) ), this, SLOT( slotInternalUserJoinRemoved( VxGUID, EPluginType ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinOfferState( VxGUID, EPluginType, EJoinState ) ), this, SLOT( slotInternalUserJoinOfferState( VxGUID, EPluginType, EJoinState ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), this, SLOT( slotInternalUserJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
 }
 
 //============================================================================
-void GuiUserJoinMgr::slotInternalUpdateUserJoin( VxNetIdent* netIdent, EHostType hostType )
+bool GuiUserJoinMgr::isMessengerReady( void )
 {
-    updateUserJoin( netIdent, hostType );
+    return m_MyApp.isMessengerReady();
 }
 
 //============================================================================
-void GuiUserJoinMgr::slotInternalUpdateMyIdent( VxNetIdent* netIdent )
+void GuiUserJoinMgr::callbackUserJoinRequested( UserJoinInfo* userJoinInfo )
 {
-    updateMyIdent( netIdent );
-}
-
-//============================================================================
-void GuiUserJoinMgr::slotInternalUserJoinRemoved( VxGUID onlineId )
-{
-    m_UserJoinListMutex.lock();
-    GuiUserJoin* guiUserJoin = findUserJoin( onlineId );
-    m_UserJoinListMutex.unlock();
-    if( guiUserJoin )
+    if( !userJoinInfo )
     {
-        onUserJoinRemoved( onlineId );
+        LogMsg( LOG_ERROR, "GuiUserJoinMgr::callbackUserJoinAdded null userJoinInfo" );
+        return;
     }
 
-    removeUserJoin( onlineId );
+    emit signalInternalUserJoinRequested( *userJoinInfo );
 }
 
 //============================================================================
-void GuiUserJoinMgr::slotInternalUserJoinOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online )
+void GuiUserJoinMgr::callbackUserJoinUpdated( UserJoinInfo* userJoinInfo )
 {
-    GuiUserJoin* guiUserJoin = updateUserJoin( netIdent, hostType );
-    if( guiUserJoin )
+    if( !userJoinInfo )
     {
-        guiUserJoin->setOnlineStatus( online );
+        LogMsg( LOG_ERROR, "GuiUserJoinMgr::callbackUserJoinAdded null userJoinInfo" );
+        return;
+    }
+
+    emit signalInternalUserJoinUpdated( *userJoinInfo );
+}
+
+//============================================================================
+void GuiUserJoinMgr::callbackUserJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
+{
+    emit signalInternalUserJoinRemoved( hostOnlineId, pluginType );
+}
+
+//============================================================================
+void GuiUserJoinMgr::callbackUserJoinOfferState( VxGUID& hostOnlineId, EPluginType pluginType, EJoinState userOfferState )
+{
+    emit signalInternalUserJoinOfferState( hostOnlineId, pluginType, userOfferState );
+}
+
+//============================================================================
+void GuiUserJoinMgr::callbackUserJoinOnlineState( VxGUID& hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId )
+{
+    emit signalInternalUserJoinOnlineState( hostOnlineId, pluginType, onlineState, connectionId );
+}
+
+//============================================================================
+void GuiUserJoinMgr::slotInternalUserJoinRequested( UserJoinInfo userJoinInfo )
+{
+    updateUserJoin( userJoinInfo );
+}
+
+//============================================================================
+void GuiUserJoinMgr::slotInternalUserJoinUpdated( UserJoinInfo userJoinInfo )
+{
+    updateUserJoin( userJoinInfo );
+}
+
+//============================================================================
+void GuiUserJoinMgr::slotInternalUserJoinRemoved( VxGUID onlineId, EPluginType pluginType )
+{
+    EHostType hostType = PluginTypeToHostType( pluginType );
+    auto iter = m_UserJoinList.find( onlineId );
+    GuiUserJoin* joinInfo = nullptr;
+    if( iter != m_UserJoinList.end() && hostType != eHostTypeUnknown )
+    {
+        emit signalUserJoinRemoved( onlineId, hostType );
+        joinInfo = iter->second;
+        joinInfo->removeHostType( hostType );
+        if( !joinInfo->hostTypeCount() )
+        {
+            m_UserJoinList.erase( iter );
+            joinInfo->deleteLater();
+        }
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::slotInternalUserJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState )
+{
+    EHostType hostType = PluginTypeToHostType( pluginType );
+    GuiUserJoin* joinInfo = findUserJoin( userOnlineId );
+    if( joinInfo && hostType != eHostTypeUnknown && hostOfferState != eOfferStateNone )
+    {
+        if( joinInfo->getJoinState( hostType ) != hostOfferState )
+        {
+            joinInfo->setJoinState( hostType, hostOfferState );
+            emit signalUserJoinOfferStateChange( userOnlineId, hostType, hostOfferState );
+        }
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::slotInternalUserJoinOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId )
+{
+    EHostType hostType = PluginTypeToHostType( pluginType );
+    GuiUserJoin* joinInfo = findUserJoin( userOnlineId );
+    bool isOnline = onlineState == eOnlineStateOnline ? true : false;
+    if( joinInfo && hostType != eHostTypeUnknown && isOnline != joinInfo->isOnline() )
+    {
+        joinInfo->setOnlineStatus( isOnline );
+        emit signalUserJoinOnlineStatus( joinInfo, isOnline );
     }
 }
 
@@ -83,32 +157,25 @@ GuiUserJoin* GuiUserJoinMgr::findUserJoin( VxGUID& onlineId )
 //============================================================================
 void GuiUserJoinMgr::removeUserJoin( VxGUID& onlineId )
 {
-    m_UserJoinListMutex.lock();
     auto iter = m_UserJoinList.find( onlineId );
     if( iter != m_UserJoinList.end() )
     {
         iter->second->deleteLater();
         m_UserJoinList.erase( iter );
     }
-
-    m_UserJoinListMutex.unlock();
 }
 
 //============================================================================
 bool GuiUserJoinMgr::isUserJoinInSession( VxGUID& onlineId )
 {
-    m_UserJoinListMutex.lock();
     GuiUserJoin* guiUserJoin = findUserJoin( onlineId );
-    m_UserJoinListMutex.unlock();
     return guiUserJoin && guiUserJoin->isInSession();
 }
 
 //============================================================================
 GuiUserJoin* GuiUserJoinMgr::getUserJoin( VxGUID& onlineId )
 {
-    m_UserJoinListMutex.lock();
     GuiUserJoin* guiUserJoin = findUserJoin( onlineId );
-    m_UserJoinListMutex.unlock();
     return guiUserJoin;
 }
 
@@ -121,9 +188,7 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( VxNetIdent* hisIdent, EHostType hos
         return nullptr;
     }
 
-    m_UserJoinListMutex.lock();
     GuiUserJoin* guiUserJoin = findUserJoin( hisIdent->getMyOnlineId() );
-    m_UserJoinListMutex.unlock();
     if( guiUserJoin && guiUserJoin->getMyOnlineId() == hisIdent->getMyOnlineId() )
     {
         guiUserJoin->addHostType( hostType );
@@ -134,9 +199,31 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( VxNetIdent* hisIdent, EHostType hos
         guiUserJoin = new GuiUserJoin( m_MyApp );
         guiUserJoin->setNetIdent( hisIdent );
         guiUserJoin->addHostType( hostType );
-        m_UserJoinListMutex.lock();
         m_UserJoinList[guiUserJoin->getMyOnlineId()] = guiUserJoin;
-        m_UserJoinListMutex.unlock();
+        onUserJoinAdded( guiUserJoin );
+    }
+
+    return guiUserJoin;
+}
+
+
+//============================================================================
+GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo& hostJoinInfo )
+{
+    EHostType hostType = PluginTypeToHostType( hostJoinInfo.getPluginType() );
+    GuiUserJoin* guiUserJoin = findUserJoin( hostJoinInfo.getOnlineId() );
+    if( guiUserJoin )
+    {
+        guiUserJoin->addHostType( hostType );
+        guiUserJoin->setJoinState( hostType, hostJoinInfo.getJoinState() );
+        onUserJoinUpdated( guiUserJoin );
+    }
+    else
+    {
+        guiUserJoin = new GuiUserJoin( m_MyApp );
+        guiUserJoin->setNetIdent( hostJoinInfo.getNetIdent() );
+        guiUserJoin->addHostType( hostType );
+        m_UserJoinList[guiUserJoin->getMyOnlineId()] = guiUserJoin;
         onUserJoinAdded( guiUserJoin );
     }
 
@@ -150,10 +237,8 @@ void GuiUserJoinMgr::updateMyIdent( VxNetIdent* myIdent )
     {
         GuiUserJoin* guiUserJoin = new GuiUserJoin( m_MyApp );
         guiUserJoin->setNetIdent( myIdent );
-        m_UserJoinListMutex.lock();
         m_MyIdent = guiUserJoin;
         m_MyOnlineId = m_MyIdent->getMyOnlineId();
-        m_UserJoinListMutex.unlock();
     }
 
     emit signalMyIdentUpdated( m_MyIdent );
@@ -162,9 +247,7 @@ void GuiUserJoinMgr::updateMyIdent( VxNetIdent* myIdent )
 //============================================================================
 void GuiUserJoinMgr::setUserJoinOffline( VxGUID& onlineId )
 {
-    m_UserJoinListMutex.lock();
     GuiUserJoin* guiUserJoin = findUserJoin( onlineId );
-    m_UserJoinListMutex.unlock();
     if( guiUserJoin )
     {
         guiUserJoin->setOnlineStatus( false );
@@ -176,16 +259,16 @@ void GuiUserJoinMgr::onUserJoinAdded( GuiUserJoin* user )
 {
     if( isMessengerReady() )
     {
-        emit signalUserJoinAdded( user );
+        emit signalUserJoinRequested( user );
     }
 }
 
 //============================================================================
-void GuiUserJoinMgr::onUserJoinRemoved( VxGUID& onlineId )
+void GuiUserJoinMgr::onUserJoinRemoved( VxGUID& onlineId, EHostType hostType )
 {
     if( isMessengerReady() )
     {
-        emit signalUserJoinRemoved( onlineId );
+        emit signalUserJoinRemoved( onlineId, hostType );
     }
 }
 

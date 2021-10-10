@@ -39,11 +39,9 @@ public:
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
-    virtual void				announceUserJoinAdded( UserJoinInfo * userJoinInfo );
-    virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
     virtual void				announceUserJoinRequested( UserJoinInfo* userHostInfo );
-    virtual void				announceUserJoinRequestUpdated( UserJoinInfo* userHostInfo );
-    virtual void				announceUserJoinRemoved( VxGUID& hostOnlineId, EHostType hostType );
+    virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
+    virtual void				announceUserJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }

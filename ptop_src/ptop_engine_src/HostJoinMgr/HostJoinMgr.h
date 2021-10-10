@@ -37,11 +37,9 @@ public:
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
 
-    virtual void				announceHostJoinAdded( HostJoinInfo * userHostInfo );
-    virtual void				announceHostJoinUpdated( HostJoinInfo * userHostInfo );
     virtual void				announceHostJoinRequested( HostJoinInfo* userHostInfo );
-    virtual void				announceHostJoinRequestUpdated( HostJoinInfo* userHostInfo );
-    virtual void				announceHostJoinRemoved( VxGUID& hostOnlineId );
+    virtual void				announceHostJoinUpdated( HostJoinInfo* userHostInfo );
+    virtual void				announceHostJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }

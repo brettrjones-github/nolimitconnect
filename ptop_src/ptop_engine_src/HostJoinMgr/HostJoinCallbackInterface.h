@@ -21,13 +21,11 @@ class VxGUID;
 class HostJoinCallbackInterface
 {
 public:
-    virtual void				callbackHostJoinAdded( HostJoinInfo * userHostInfo ){};
-    virtual void				callbackHostJoinUpdated( HostJoinInfo * userHostInfo ){};
-    virtual void				callbackHostJoinRequested( HostJoinInfo* userHostInfo ) {};
-    virtual void				announceHostJoinRequestUpdated( HostJoinInfo* userHostInfo ) {};
-    virtual void				callbackHostJoinRemoved( VxGUID& userHostId ){};
+    virtual void				callbackHostJoinRequested( HostJoinInfo* hostJoinInfo ) {};
+    virtual void				callbackHostJoinUpdated( HostJoinInfo* hostJoinInfo ){};
+    virtual void				callbackHostJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ){};
 
-    virtual void				callbackHostJoinOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState ) {};
-    virtual void				callbackHostJoinOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId ) {};
+    virtual void				callbackHostJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userHostOfferState ) {};
+    virtual void				callbackHostJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) {};
 };
 

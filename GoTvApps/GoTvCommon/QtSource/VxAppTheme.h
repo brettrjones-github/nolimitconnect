@@ -165,7 +165,6 @@ class VxFlatButton;
 class VxProgressBar;
 class QProgressBar;
 
-class QWidget;
 class QPalette;
 class QBrush;
 class QFrame;

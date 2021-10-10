@@ -34,6 +34,8 @@ public:
     GuiUserJoin( const GuiUserJoin& rhs );
 	virtual ~GuiUserJoin() = default;
 
+    bool                        isValid( void )                         { return m_NetIdent != nullptr; }
+
     void                        setNetIdent( VxNetIdent* netIdent );
     VxNetIdent*                 getNetIdent( void )                     { return m_NetIdent; }
     bool                        isIdentValid( void )                    { return m_NetIdent ? m_NetIdent->isIdentValid() : false; }
@@ -82,6 +84,12 @@ public:
     bool                        isMyAccessAllowedFromHim( EPluginType pluginType ) { return m_NetIdent ? m_NetIdent->isMyAccessAllowedFromHim( pluginType ) : false; }
     
     void                        addHostType( EHostType hostType );
+    bool                        hasHostType( EHostType hostType ) { return m_HostSet.find( hostType ) != m_HostSet.end(); }
+    void                        removeHostType( EHostType hostType ) { m_HostSet.erase( hostType ); }
+    int                         hostTypeCount( void ) { return m_HostSet.size(); }
+
+    EJoinState                  getJoinState( EHostType hostType );
+    bool                        setJoinState( EHostType hostType, EJoinState joinState ); // return true if state changed
 
 protected:
     AppCommon&                  m_MyApp;
@@ -91,4 +99,5 @@ protected:
     VxGUID                      m_SessionId;
     bool                        m_IsOnline{ false };
     std::set<EHostType>         m_HostSet;
+    std::vector<std::pair<EHostType, EJoinState>>  m_JoinStateList;
 };

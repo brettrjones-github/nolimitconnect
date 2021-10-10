@@ -43,6 +43,12 @@ GuiOfferMgrBase::GuiOfferMgrBase( AppCommon&  myApp )
 }
 
 //========================================================================
+bool GuiOfferMgrBase::isMessengerReady( void )
+{ 
+	return m_MyApp.isMessengerReady(); 
+}
+
+//========================================================================
 void GuiOfferMgrBase::toGuiRxedPluginOffer( GuiOfferSession * offerSession )
 {
 	emit signalToGuiRxedPluginOffer( offerSession );
