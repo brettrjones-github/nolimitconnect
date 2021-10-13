@@ -162,6 +162,7 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
         wasAdded = true;
     }
 
+    joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
     joinInfo->setJoinState( eJoinStateJoinAccepted );

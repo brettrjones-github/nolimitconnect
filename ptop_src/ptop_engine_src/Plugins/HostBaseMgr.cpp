@@ -877,3 +877,10 @@ void HostBaseMgr::onUserOffline( VxGUID& onlineId, VxGUID& sessionId )
     //m_UserList.removeUser( onlineId, sessionId );
     //m_UserListMutex.unlock();
 }
+
+//============================================================================
+EJoinState	HostBaseMgr::getJoinState( VxNetIdent* netIdent, EHostType hostType )
+{
+    // BRJ TODO if has been accepted to host then should return eJoinStateJoinAccepted
+    return getPluginAccessState( netIdent ) == ePluginAccessOk ? eJoinStateJoinAccepted : eJoinStateJoinRequested;
+}

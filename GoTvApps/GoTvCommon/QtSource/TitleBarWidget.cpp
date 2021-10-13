@@ -97,9 +97,9 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( this,                      SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
     connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
 
-    connect( &m_OfferClientMgr,         SIGNAL( signalShareOfferCount( int ) ), this, SLOT( slotShareOfferListCount( int ) ) );
-    connect( &m_OfferClientMgr,         SIGNAL( signalPersonsOfferListCount( int ) ), this, SLOT( slotPersonsOfferListCount( int ) ) );
-    connect( ui.m_MenuButton,           SIGNAL( clicked() ),                   this, SLOT( slotTitleBarMenuButtonClicked() ) );
+    connect( &m_OfferClientMgr,             SIGNAL( signalShareOfferCount( int ) ),      this, SLOT( slotShareOfferListCount( int ) ) );
+    connect( &m_MyApp.getHostJoinMgr(),     SIGNAL( signalHostJoinRequestCount( int ) ), this, SLOT( slotHostJoinRequestCount( int ) ) );
+    connect( ui.m_MenuButton,               SIGNAL( clicked() ),                         this, SLOT( slotTitleBarMenuButtonClicked() ) );
 }
 
 //============================================================================
@@ -514,7 +514,7 @@ void TitleBarWidget::slotShareOfferListCount( int activeCnt )
 }
 
 //============================================================================
-void TitleBarWidget::slotPersonsOfferListCount( int activeCnt )
+void TitleBarWidget::slotHostJoinRequestCount( int activeCnt )
 {
     ui.m_PersonsOfferListButton->setNotifyOnlineEnabled( activeCnt > 0 );
 }

@@ -88,6 +88,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListLocalView.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostJoinRequestList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinGroupStatus.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinBase.h \
@@ -217,6 +218,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HelpBrowser.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HostJoinRequestListItem.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HostJoinRequestListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HostListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
@@ -427,6 +430,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListLocalView.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostJoinRequestList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinGroupStatus.cpp \
@@ -551,6 +555,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumb.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiThumbMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HostJoinRequestListItem.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HostJoinRequestListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HelpBrowser.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
@@ -749,6 +755,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupListClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupListLocalView.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostJoinRequestList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostGroupStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostNetworkStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletJoinGroupStatus.ui \
@@ -811,6 +818,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/FriendListEntryWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/GuiUserListEntryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/HostJoinRequestListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/HostListItem.ui \

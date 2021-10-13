@@ -200,6 +200,7 @@ enum EApplet
     eAppletPeerSelectFileToSend,
     eAppletPeerSessionFileOffer,
 
+    eAppletHostJoinRequestList,
     eAppletShareOfferList,
     eAppletPersonOfferList,	
 

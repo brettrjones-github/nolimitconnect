@@ -152,6 +152,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletDownloads:                  return eMyIconFileDownloadNormal;
     case eAppletUploads:                    return eMyIconSendFileNormal;
     case eAppletShareOfferList:             return eMyIconOfferList;
+    case eAppletHostJoinRequestList:            return eMyIconPersonsOfferList;
     case eAppletPersonOfferList:            return eMyIconPersonsOfferList;
     case eAppletPopupMenu:	                return eMyIconMenu;
 
@@ -214,6 +215,7 @@ QString DescribeApplet( EApplet applet )
 	case eAppletMessengerFrame:				return QObject::tr( "Messenger" );
     case eAppletMultiMessenger:				return QObject::tr( "Messenger" );
     case eAppletNetworkSettings:		    return QObject::tr( "Network Settings" );
+    case eAppletHostJoinRequestList:        return QObject::tr( "Join Host Requests" );
     case eAppletPersonOfferList:            return QObject::tr( "Persons Offers" );
 	case eAppletPlayerVideo:			    return QObject::tr( "Video Player" );
     case eAppletPersonalRecorder:		    return QObject::tr( "Personal Notes And Records" );

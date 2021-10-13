@@ -140,6 +140,7 @@ public:
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
     GuiConnectMgr&              getConnectMgr( void )						{ return m_ConnectMgr; }
+    GuiHostJoinMgr&             getHostJoinMgr( void )                      { return m_HostJoinMgr; }
     GuiUserJoinMgr&             getUserJoinMgr( void )						{ return m_UserJoinMgr; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }

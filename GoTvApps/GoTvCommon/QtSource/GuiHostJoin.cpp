@@ -16,6 +16,7 @@
 #include "GuiHostJoin.h"
 #include "GuiUserMgr.h"
 #include "GuiParams.h"
+#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h>
 
 //============================================================================
 GuiHostJoin::GuiHostJoin( AppCommon& app )
@@ -151,4 +152,25 @@ bool GuiHostJoin::setJoinState( EHostType hostType, EJoinState joinState )
     }
 
     return stateChanged;
+}
+
+//============================================================================
+int GuiHostJoin::getHostRequestCount( void )
+{
+    return geRequestStateCount( eJoinStateJoinRequested );
+}
+
+//============================================================================
+int GuiHostJoin::geRequestStateCount( EJoinState joinState )
+{
+    int stateCnt = 0;
+    for( auto& joinPair : m_JoinStateList )
+    {
+        if( joinPair.second == joinState )
+        {
+            stateCnt++;
+        }
+    }
+
+    return stateCnt;
 }

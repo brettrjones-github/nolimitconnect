@@ -14,23 +14,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletPeerBase.h"
-#include "ToGuiFileXferInterface.h"
-#include "ui_AppletPersonOfferList.h"
+#include "AppletBase.h"
+#include "ui_AppletHostJoinRequestList.h"
 
 #include <PktLib/VxCommon.h>
 
-class FileXferWidget;
 class P2PEngine;
 class GuiFileXferSession;
 
-class AppletPersonOfferList : public AppletPeerBase, public ToGuiFileXferInterface
+class AppletHostJoinRequestList : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletPersonOfferList(	AppCommon&	app, 
-							QWidget *		parent = NULL );
-	virtual ~AppletPersonOfferList() override;
+	AppletHostJoinRequestList( AppCommon& app, QWidget* parent = NULL );
+	virtual ~AppletHostJoinRequestList() override;
 
 	//bool						isXferInProgress( VxGUID fileInstance );
 	//FileXferWidget *			addDownload( GuiFileXferSession * poSession );
@@ -78,5 +75,5 @@ protected:
     */
 
 	//=== vars ===//
-	Ui::AppletPersonOfferListUi		ui;
+	Ui::AppletHostJoinRequestListUi		ui;
 };

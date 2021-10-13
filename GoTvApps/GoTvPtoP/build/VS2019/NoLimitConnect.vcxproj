@@ -186,6 +186,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.cpp" />
@@ -320,6 +321,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HomeWindow.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListItem.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp" />
@@ -483,6 +486,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonOfferList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -511,6 +515,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\HelpBrowser.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListItem.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListWidget.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIcons.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />
@@ -856,6 +862,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListLocalView.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostJoinRequestList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostNetworkStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletJoinGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletKodi.ui" />
@@ -923,6 +930,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HomeWindow.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\HostJoinRequestListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HostListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\IdentWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ImageListEntry.ui" />

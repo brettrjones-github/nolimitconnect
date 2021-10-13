@@ -157,13 +157,13 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     if( !joinInfo )
     {
         joinInfo = new HostJoinInfo();
-        joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
-        joinInfo->setPluginType( sessionInfo.getPluginType() );
-        joinInfo->setSessionId( sessionInfo.getSessionId() );
-        joinInfo->setNetIdent( netIdent );
         wasAdded = true;
     }
 
+    joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+    joinInfo->setPluginType( sessionInfo.getPluginType() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+    joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
     joinInfo->setJoinState( eJoinStateJoinRequested );
@@ -200,13 +200,13 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
     if( !joinInfo )
     {
         joinInfo = new HostJoinInfo();
-        joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
-        joinInfo->setPluginType( sessionInfo.getPluginType() );
-        joinInfo->setSessionId( sessionInfo.getSessionId() );
-        joinInfo->setNetIdent( netIdent );
         wasAdded = true;
     }
 
+    joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+    joinInfo->setPluginType( sessionInfo.getPluginType() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+    joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
     joinInfo->setJoinState( eJoinStateJoinAccepted );

@@ -63,15 +63,15 @@ signals:
     void                        signalUserJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
     void                        signalUserJoinOnlineStatus( GuiUserJoin* user, bool isOnline );
 
-    void                        signalInternalUserJoinRequested( UserJoinInfo userJoinInfo );
-    void                        signalInternalUserJoinUpdated( UserJoinInfo userJoinInfo );
+    void                        signalInternalUserJoinRequested( UserJoinInfo* userJoinInfo );
+    void                        signalInternalUserJoinUpdated( UserJoinInfo* userJoinInfo );
     void                        signalInternalUserJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
     void                        signalInternalUserJoinOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState hostOfferState );
     void                        signalInternalUserJoinOnlineState( VxGUID hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
 
 private slots:
-    void                        slotInternalUserJoinRequested( UserJoinInfo userJoinInfo );
-    void                        slotInternalUserJoinUpdated( UserJoinInfo userJoinInfo );
+    void                        slotInternalUserJoinRequested( UserJoinInfo* userJoinInfo );
+    void                        slotInternalUserJoinUpdated( UserJoinInfo* userJoinInfo );
     void                        slotInternalUserJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
     void                        slotInternalUserJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState );
     void                        slotInternalUserJoinOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
@@ -80,7 +80,7 @@ protected:
     void                        removeUserJoin( VxGUID& onlineId );
     GuiUserJoin*                findUserJoin( VxGUID& onlineId );
     GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
-    GuiUserJoin*                updateUserJoin( UserJoinInfo& userJoinInfo );
+    GuiUserJoin*                updateUserJoin( UserJoinInfo* userJoinInfo );
     
     virtual void				callbackUserJoinRequested( UserJoinInfo* userJoinInfo ) override;
     virtual void				callbackUserJoinUpdated( UserJoinInfo* userJoinInfo ) override;

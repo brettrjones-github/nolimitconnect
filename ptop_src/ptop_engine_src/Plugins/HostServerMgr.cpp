@@ -173,3 +173,9 @@ void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGU
     m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
 }
+
+//============================================================================
+EJoinState HostServerMgr::getJoinState( VxNetIdent* netIdent, EHostType hostType )
+{
+    return m_Engine.getHostJoinMgr().fromGuiQueryJoinState( hostType, *netIdent );
+}

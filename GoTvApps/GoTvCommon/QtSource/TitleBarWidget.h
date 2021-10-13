@@ -127,7 +127,7 @@ public slots:
     virtual void				slotShareOfferListButtonClicked( void );
 
     virtual void				slotShareOfferListCount( int activeCnt );
-    virtual void				slotPersonsOfferListCount( int activeCnt );
+    virtual void				slotHostJoinRequestCount( int activeCnt );
 
 	virtual void				slotTitleBarMenuButtonClicked( void );
 

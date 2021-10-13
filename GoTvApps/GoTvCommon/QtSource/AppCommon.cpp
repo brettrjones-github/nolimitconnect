@@ -2270,6 +2270,4 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<VxGUID>("VxGUID");
 	qRegisterMetaType<VxNetIdent>("VxNetIdent");
 	qRegisterMetaType<uint32_t>("uint32_t");
-	qRegisterMetaType<uint32_t>( "UserJoinInfo" );
-	qRegisterMetaType<uint32_t>( "HostJoinInfo" );
 }

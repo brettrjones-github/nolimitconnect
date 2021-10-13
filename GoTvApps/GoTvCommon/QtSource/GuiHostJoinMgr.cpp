@@ -16,6 +16,7 @@
 #include "GuiHostJoinMgr.h"
 #include "AppCommon.h"
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h>
+#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
 
 //============================================================================
 GuiHostJoinMgr::GuiHostJoinMgr( AppCommon& app )
@@ -32,12 +33,23 @@ void GuiHostJoinMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalHostJoinRemoved( VxGUID, EPluginType ) ),	                            this, SLOT( slotInternalHostJoinRemoved( VxGUID, EPluginType ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinOfferState( VxGUID, EPluginType, EOfferState ) ),              this, SLOT( slotInternalHostJoinOfferState( VxGUID, EPluginType, EOfferState ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ),    this, SLOT( slotInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
+
+    m_MyApp.getEngine().getHostJoinMgr().addHostJoinMgrClient( this, true );
 }
 
 //============================================================================
 bool GuiHostJoinMgr::isMessengerReady( void )
 {
     return m_MyApp.isMessengerReady();
+}
+
+//============================================================================
+void GuiHostJoinMgr::onMessengerReady( bool ready )
+{
+    if( ready )
+    {
+        updateHostRequestCount( true );
+    }
 }
 
 //============================================================================
@@ -49,7 +61,9 @@ void GuiHostJoinMgr::callbackHostJoinRequested( HostJoinInfo* hostJoinInfo )
         return;
     }
 
-    emit signalInternalHostJoinRequested( *hostJoinInfo );
+    HostJoinInfo* hostJoin = new HostJoinInfo( *hostJoinInfo );
+
+    emit signalInternalHostJoinRequested( hostJoin );
 }
 
 //============================================================================
@@ -61,7 +75,10 @@ void GuiHostJoinMgr::callbackHostJoinUpdated( HostJoinInfo* hostJoinInfo )
         return;
     }
 
-    emit signalInternalHostJoinUpdated( *hostJoinInfo );
+    // there is a possiblility of the hostJoinInfo delete while in signal queue so make copy and delete in slot
+    HostJoinInfo* hostJoin = new HostJoinInfo( *hostJoinInfo );
+
+    emit signalInternalHostJoinUpdated( hostJoin );
 }
 
 //============================================================================
@@ -83,15 +100,19 @@ void GuiHostJoinMgr::callbackHostJoinOnlineState( VxGUID& hostOnlineId, EPluginT
 }
 
 //============================================================================
-void GuiHostJoinMgr::slotInternalHostJoinRequested( HostJoinInfo hostJoinInfo )
+void GuiHostJoinMgr::slotInternalHostJoinRequested( HostJoinInfo* hostJoinInfo )
 {
     updateHostJoin( hostJoinInfo );
+    updateHostRequestCount();
+    delete hostJoinInfo; // was created new on callback
 }
 
 //============================================================================
-void GuiHostJoinMgr::slotInternalHostJoinUpdated( HostJoinInfo hostJoinInfo )
+void GuiHostJoinMgr::slotInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo )
 {
     updateHostJoin( hostJoinInfo );
+    updateHostRequestCount();
+    delete hostJoinInfo;
 }
 
 //============================================================================
@@ -111,6 +132,8 @@ void GuiHostJoinMgr::slotInternalHostJoinRemoved( VxGUID onlineId, EPluginType p
             joinInfo->deleteLater();
         }
     }
+
+    updateHostRequestCount();
 }
 
 //============================================================================
@@ -126,6 +149,8 @@ void GuiHostJoinMgr::slotInternalHostJoinOfferState( VxGUID userOnlineId, EPlugi
             emit signalHostJoinOfferStateChange( userOnlineId, hostType, hostOfferState );
         }
     }
+
+    updateHostRequestCount();
 }
 
 //============================================================================
@@ -139,6 +164,8 @@ void GuiHostJoinMgr::slotInternalHostJoinOnlineState( VxGUID userOnlineId, EPlug
         joinInfo->setOnlineStatus( isOnline );
         emit signalHostJoinOnlineStatus( joinInfo, isOnline );
     }
+
+    updateHostRequestCount();
 }
 
 //============================================================================
@@ -168,20 +195,20 @@ GuiHostJoin* GuiHostJoinMgr::getHostJoin( VxGUID& onlineId )
 }
 
 //============================================================================
-GuiHostJoin* GuiHostJoinMgr::updateHostJoin( HostJoinInfo& hostJoinInfo )
+GuiHostJoin* GuiHostJoinMgr::updateHostJoin( HostJoinInfo* hostJoinInfo )
 {
-    EHostType hostType = PluginTypeToHostType( hostJoinInfo.getPluginType() );
-    GuiHostJoin* guiHostJoin = findHostJoin( hostJoinInfo.getOnlineId() );
+    EHostType hostType = PluginTypeToHostType( hostJoinInfo->getPluginType() );
+    GuiHostJoin* guiHostJoin = findHostJoin( hostJoinInfo->getOnlineId() );
     if( guiHostJoin )
     {
         guiHostJoin->addHostType( hostType );
-        guiHostJoin->setJoinState( hostType, hostJoinInfo.getJoinState() );
+        guiHostJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
         onHostJoinUpdated( guiHostJoin );
     }
     else
     {
         guiHostJoin = new GuiHostJoin( m_MyApp );
-        guiHostJoin->setNetIdent( hostJoinInfo.getNetIdent() );
+        guiHostJoin->setNetIdent( hostJoinInfo->getNetIdent() );
         guiHostJoin->addHostType( hostType );
         m_HostJoinList[guiHostJoin->getMyOnlineId()] = guiHostJoin;
         onHostJoinAdded( guiHostJoin );
@@ -224,5 +251,22 @@ void GuiHostJoinMgr::onHostJoinUpdated( GuiHostJoin* user )
     if( isMessengerReady() )
     {
         emit signalHostJoinUpdated( user );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::updateHostRequestCount( bool forceEmit )
+{
+    int hostRequestCount = 0;
+    for( auto& item : m_HostJoinList )
+    {
+        GuiHostJoin* joinInfo = item.second;
+        hostRequestCount += joinInfo->getHostRequestCount();
+    }
+
+    if( hostRequestCount != m_HostRequestCount || forceEmit )
+    {
+        m_HostRequestCount = hostRequestCount;
+        emit signalHostJoinRequestCount( m_HostRequestCount );
     }
 }

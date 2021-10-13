@@ -16,6 +16,7 @@
 #include "GuiUserJoinMgr.h"
 #include "AppCommon.h"
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.h>
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 
 //============================================================================
 GuiUserJoinMgr::GuiUserJoinMgr( AppCommon& app )
@@ -32,6 +33,8 @@ void GuiUserJoinMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalUserJoinRemoved( VxGUID, EPluginType ) ), this, SLOT( slotInternalUserJoinRemoved( VxGUID, EPluginType ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserJoinOfferState( VxGUID, EPluginType, EJoinState ) ), this, SLOT( slotInternalUserJoinOfferState( VxGUID, EPluginType, EJoinState ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), this, SLOT( slotInternalUserJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
+
+    m_MyApp.getEngine().getUserJoinMgr().addUserJoinMgrClient( this, true );
 }
 
 //============================================================================
@@ -49,7 +52,7 @@ void GuiUserJoinMgr::callbackUserJoinRequested( UserJoinInfo* userJoinInfo )
         return;
     }
 
-    emit signalInternalUserJoinRequested( *userJoinInfo );
+    emit signalInternalUserJoinRequested( new UserJoinInfo( *userJoinInfo ) );
 }
 
 //============================================================================
@@ -61,7 +64,7 @@ void GuiUserJoinMgr::callbackUserJoinUpdated( UserJoinInfo* userJoinInfo )
         return;
     }
 
-    emit signalInternalUserJoinUpdated( *userJoinInfo );
+    emit signalInternalUserJoinUpdated( new UserJoinInfo(*userJoinInfo) );
 }
 
 //============================================================================
@@ -83,15 +86,17 @@ void GuiUserJoinMgr::callbackUserJoinOnlineState( VxGUID& hostOnlineId, EPluginT
 }
 
 //============================================================================
-void GuiUserJoinMgr::slotInternalUserJoinRequested( UserJoinInfo userJoinInfo )
+void GuiUserJoinMgr::slotInternalUserJoinRequested( UserJoinInfo* userJoinInfo )
 {
     updateUserJoin( userJoinInfo );
+    delete userJoinInfo;
 }
 
 //============================================================================
-void GuiUserJoinMgr::slotInternalUserJoinUpdated( UserJoinInfo userJoinInfo )
+void GuiUserJoinMgr::slotInternalUserJoinUpdated( UserJoinInfo* userJoinInfo )
 {
     updateUserJoin( userJoinInfo );
+    delete userJoinInfo;
 }
 
 //============================================================================
@@ -208,20 +213,20 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( VxNetIdent* hisIdent, EHostType hos
 
 
 //============================================================================
-GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo& hostJoinInfo )
+GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* hostJoinInfo )
 {
-    EHostType hostType = PluginTypeToHostType( hostJoinInfo.getPluginType() );
-    GuiUserJoin* guiUserJoin = findUserJoin( hostJoinInfo.getOnlineId() );
+    EHostType hostType = PluginTypeToHostType( hostJoinInfo->getPluginType() );
+    GuiUserJoin* guiUserJoin = findUserJoin( hostJoinInfo->getOnlineId() );
     if( guiUserJoin )
     {
         guiUserJoin->addHostType( hostType );
-        guiUserJoin->setJoinState( hostType, hostJoinInfo.getJoinState() );
+        guiUserJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
         onUserJoinUpdated( guiUserJoin );
     }
     else
     {
         guiUserJoin = new GuiUserJoin( m_MyApp );
-        guiUserJoin->setNetIdent( hostJoinInfo.getNetIdent() );
+        guiUserJoin->setNetIdent( hostJoinInfo->getNetIdent() );
         guiUserJoin->addHostType( hostType );
         m_UserJoinList[guiUserJoin->getMyOnlineId()] = guiUserJoin;
         onUserJoinAdded( guiUserJoin );

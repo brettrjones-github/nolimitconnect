@@ -42,6 +42,7 @@ public:
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
 
     virtual EPluginAccess	    getPluginAccessState( VxNetIdent * netIdent );
+    virtual EJoinState	        getJoinState( VxNetIdent* netIdent, EHostType hostType );
     virtual EConnectReason      getSearchConnectReason( EHostType hostType );
 
     virtual void                connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason );

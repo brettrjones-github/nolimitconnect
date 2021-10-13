@@ -101,8 +101,23 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
         }
         else if( ePluginAccessLocked == joinReply.getAccessState() )
         {
-            // add to join request list
-            m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
+            if( !netIdent->isIgnored() )
+            {
+                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinAccepted )
+                {
+                    // even though friendship not high enough if admin has accepted then send accepted
+                    joinReply.setAccessState( ePluginAccessOk );
+                }
+                else
+                {
+                    // add to join request list
+                    m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
+                }
+            }
+            else
+            {
+                // TODO .. should we drop the connection?
+            }
         }
         else if( ePluginAccessDisabled == joinReply.getAccessState() )
         {

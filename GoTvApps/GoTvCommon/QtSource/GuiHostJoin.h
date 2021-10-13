@@ -24,6 +24,7 @@ class AppCommon;
 class GuiUserMgr;
 class VxNetIdent;
 class VxSktBase;
+class HostJoinInfo;
 
 class GuiHostJoin : public QWidget
 {
@@ -88,6 +89,8 @@ public:
 
     EJoinState                  getJoinState( EHostType hostType );
     bool                        setJoinState( EHostType hostType, EJoinState joinState ); // return true if state changed
+    int                         getHostRequestCount( void );
+    int                         geRequestStateCount( EJoinState joinState );
 
 protected:
     AppCommon&                  m_MyApp;
