@@ -99,25 +99,26 @@ void GuiUserListEntryWidget::slotJoinButtonPressed( void )
 void GuiUserListEntryWidget::updateWidgetFromInfo( void )
 {
     GuiHostSession* hostSession = getHostSession();
-    if( nullptr == hostSession )
+    if( !hostSession || !hostSession->getUserIdent() )
     {
+        LogMsg( LOG_ERROR, "GuiUserListEntryWidget::updateWidgetFromInfo null ident" );
         return;
     }
 
-    VxNetIdent& hostIdent = hostSession->getHostIdent();
-    QString strName = hostIdent.getOnlineName();
+    GuiUser* hostIdent = hostSession->getUserIdent();
+    QString strName = hostIdent->getOnlineName();
     strName += " - ";
-    QString strDesc = hostIdent.getOnlineDescription();
+    QString strDesc = hostIdent->getOnlineDescription();
 
     // updateListEntryBackgroundColor( netIdent, item );
 
-    ui.m_IconButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent.getMyFriendshipToHim() ) );
+    ui.m_IconButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
     QPalette pal = ui.m_IconButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent.getHasTextOffers() ? Qt::yellow : Qt::white ));
+    pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
     ui.m_IconButton->setAutoFillBackground(true);
     ui.m_IconButton->setPalette(pal);
     ui.m_IconButton->update();
     ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
+    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
     ui.DescPart2->setText( strDesc );
 }

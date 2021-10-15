@@ -27,9 +27,7 @@
  
 //============================================================================
 HostListWidget::HostListWidget( QWidget * parent )
-: QListWidget( parent )
-, m_MyApp( GetAppInstance() )
-, m_Engine( m_MyApp.getEngine() )
+: ListWidgetBase( parent )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -62,12 +60,6 @@ HostListItem* HostListWidget::sessionToWidget( GuiHostSession* hostSession )
 GuiHostSession* HostListWidget::widgetToSession( HostListItem * item )
 {
     return item->getHostSession();
-}
-
-//============================================================================
-MyIcons&  HostListWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
@@ -120,7 +112,7 @@ HostListItem* HostListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
         if( hostItem )
         {
             GuiHostSession * hostSession = hostItem->getHostSession();
-            if( hostSession && hostSession->getHostIdent().getMyOnlineId() == onlineId )
+            if( hostSession && hostSession->getUserIdent()->getMyOnlineId() == onlineId )
             {
                 return hostItem;
             }
@@ -206,9 +198,17 @@ void HostListWidget::slotConnectButtonClicked( HostListItem* hostItem )
 //============================================================================
 void HostListWidget::addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
-    GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, hostIdent, pluginSetting, this );
+    GuiUser* guiUser = getUserMgr().getUser( hostIdent.getMyOnlineId() );
+    if( guiUser )
+    {
+        GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, guiUser, pluginSetting, this );
 
-    addOrUpdateHostSession( hostSession );
+        addOrUpdateHostSession( hostSession );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostListWidget::addHostAndSettingsToList user not found" );
+    }
 }
 
 //============================================================================
@@ -223,7 +223,7 @@ HostListItem* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSessio
             hostItem->setHostSession( hostSession );
             if( !hostOldSession->parent() )
             {
-                delete hostOldSession;
+                hostOldSession->deleteLater();
             }
         }
 
@@ -236,17 +236,17 @@ HostListItem* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSessio
         {
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s\n", hostSession->getHostIdent().getOnlineName() );
+                LogMsg( LOG_INFO, "add host %s\n", hostSession->getUserIdent()->getOnlineName() );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getHostIdent().getOnlineName() );
+                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getUserIdent()->getOnlineName() );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( hostSession->getHostIdent().getThumbId( hostSession->getHostType() ) );
+            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), true ) );
             if( thumb )
             {
                 QImage hostIconImage;
@@ -262,7 +262,7 @@ HostListItem* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSessio
 
     if( hostItem )
     {
-        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getHostIdent() ) );
+        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getUserIdent()->getNetIdent() ) );
     }
 
     return hostItem;

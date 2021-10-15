@@ -30,11 +30,11 @@ GuiHostSession::GuiHostSession( QWidget* parent )
 }
 
 //============================================================================
-GuiHostSession::GuiHostSession( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting, QWidget* parent )
+GuiHostSession::GuiHostSession( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent, PluginSetting& pluginSetting, QWidget* parent )
     : QWidget( parent )
     , m_HostType( hostType )
     , m_SessionId( sessionId )
-    , m_OnlineId( hostIdent.getMyOnlineId() )
+    , m_OnlineId( hostIdent->getMyOnlineId() )
     , m_HostIdent( hostIdent )
     , m_PluginSetting( pluginSetting )
 {
@@ -69,7 +69,7 @@ GuiHostSession& GuiHostSession::operator =( const GuiHostSession &rhs )
 //============================================================================
 std::string GuiHostSession::getHostUrl( void )
 {
-    return m_HostIdent.getMyOnlineUrl();
+    return m_HostIdent->getMyOnlineUrl();
 }
 
 //============================================================================

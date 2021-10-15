@@ -13,12 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
-
-#include <QListWidget>
+#include "ListWidgetBase.h"
 
 enum EOfferViewType
 {
@@ -33,23 +28,18 @@ enum EOfferViewType
     eMaxOfferViewTypeNone,
 };
 
-class AppCommon;
 class GuiOffer;
 class GuiOfferClientMgr;
 class GuiOfferSession;
-class MyIcons;
 class ShareOfferListItem;
-class P2PEngine;
 
-class ShareOfferListWidget : public QListWidget
+class ShareOfferListWidget : public ListWidgetBase
 {
 	Q_OBJECT
 
 public:
 	ShareOfferListWidget( QWidget * parent );
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
     void                        clearOfferList( void );
 
     void                        addOfferToList( EHostType hostType, VxGUID& sessionId,  GuiOffer * userIdent );
@@ -90,7 +80,7 @@ protected slots:
     void                        slotFriendshipButtonClicked( ShareOfferListItem* hostItem );
 
 protected:
-    ShareOfferListItem*              sessionToWidget( GuiOfferSession* hostSession );
+    ShareOfferListItem*         sessionToWidget( GuiOfferSession* hostSession );
     GuiOfferSession*		    widgetToSession( ShareOfferListItem* hostItem );
 
     virtual void                onShareOfferListItemClicked( ShareOfferListItem* hostItem );
@@ -102,10 +92,7 @@ protected:
     bool                        isListViewMatch( GuiOfferSession * user );
 
 	//=== vars ===//
-	AppCommon&					m_MyApp;
     GuiOfferClientMgr&          m_OfferClientMgr;
-	P2PEngine&					m_Engine;
-	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     bool                        m_ShowMyself{ true };
     EOfferViewType              m_OfferViewType{ eOfferViewTypeNone };
 

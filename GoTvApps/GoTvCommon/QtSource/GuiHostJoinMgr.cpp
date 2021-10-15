@@ -237,7 +237,7 @@ void GuiHostJoinMgr::onHostJoinAdded( GuiHostJoin* user )
 }
 
 //============================================================================
-void GuiHostJoinMgr::onHostJoinOnlineStatusChange( GuiHostJoin* user, bool isOnline )
+void GuiHostJoinMgr::onUserOnlineStatusChange( GuiHostJoin* user, bool isOnline )
 {
     if( isMessengerReady() )
     {

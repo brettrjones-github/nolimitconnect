@@ -278,7 +278,7 @@ void GuiUserJoinMgr::onUserJoinRemoved( VxGUID& onlineId, EHostType hostType )
 }
 
 //============================================================================
-void GuiUserJoinMgr::onUserJoinOnlineStatusChange( GuiUserJoin* user, bool isOnline )
+void GuiUserJoinMgr::onUserOnlineStatusChange( GuiUserJoin* user, bool isOnline )
 {
     if( isMessengerReady() )
     {

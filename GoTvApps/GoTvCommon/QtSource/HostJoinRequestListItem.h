@@ -35,9 +35,11 @@ public:
     void                        setHostSession( GuiHostSession* hostSession );
     GuiHostSession*             getHostSession( void );
 
-    VxPushButton*               getAvatarButton( void )         { return ui.m_IconButton; }
-    //VxPushButton*               getFriendshipButton( void )     { return ui.m_FriendshipButton; }
+    VxPushButton*               getAvatarButton( void )         { return ui.m_AvatarButton; }
+    VxPushButton*               getFriendshipButton( void )     { return ui.m_FriendshipButton; }
     VxPushButton*               getMenuButton( void )           { return ui.m_MenuButton; }
+    VxPushButton*               getAcceptButton( void )         { return ui.m_AcceptButton; }
+    VxPushButton*               getRejectButton( void )         { return ui.m_RejectButton; }
 
     void                        setJoinedState( EJoinState joinState );
 
@@ -45,22 +47,25 @@ public:
 
 signals:
     void						signalHostJoinRequestListItemClicked( QListWidgetItem * poItemWidget );
-	void						signalIconButtonClicked( HostJoinRequestListItem* listEntryWidget );
+	void						signalAvatarButtonClicked( HostJoinRequestListItem* listEntryWidget );
+    void						signalFriendshipButtonClicked( HostJoinRequestListItem* listEntryWidget );
 	void						signalMenuButtonClicked( HostJoinRequestListItem* listEntryWidget );
-    void						signalJoinButtonClicked( HostJoinRequestListItem* listEntryWidget );
-    void						signalConnectButtonClicked( HostJoinRequestListItem* listEntryWidget );
+    void						signalAcceptButtonClicked( HostJoinRequestListItem* listEntryWidget );
+    void						signalRejectButtonClicked( HostJoinRequestListItem* listEntryWidget );
 
 public slots:
-	void						slotIconButtonClicked( void );
+	void						slotAvatarButtonClicked( void );
+    void						slotFriendshipButtonClicked( void );
 	void						slotMenuButtonPressed( void );
 	void						slotMenuButtonReleased( void );
-    void						slotJoinButtonPressed( void );
-    void						slotConnectButtonPressed( void );
+    void						slotAcceptButtonPressed( void );
+    void						slotRejectButtonPressed( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
-    virtual void                showConnectButton( bool isAccepted );
+    virtual void                showAcceptButton( bool makeVisible );
+    virtual void                showRejectButton( bool makeVisible );
 
 	//=== vars ===//
     Ui::HostJoinRequestListItemUi	        ui;

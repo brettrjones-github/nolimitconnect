@@ -18,6 +18,7 @@
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
 #include "GuiOfferSession.h"
+#include "AppletPeerChangeFriendship.h"
 
 #include "MyIcons.h"
 #include "AppletPopupMenu.h"
@@ -29,10 +30,8 @@
  
 //============================================================================
 CallListWidget::CallListWidget( QWidget * parent )
-: QListWidget( parent )
-, m_MyApp( GetAppInstance() )
+: ListWidgetBase( parent )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
-, m_Engine( m_MyApp.getEngine() )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -73,12 +72,6 @@ CallListItem* CallListWidget::sessionToWidget( GuiOfferSession* userSession )
 GuiOfferSession* CallListWidget::widgetToSession( CallListItem * item )
 {
     return item->getCallSession();
-}
-
-//============================================================================
-MyIcons&  CallListWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
@@ -308,9 +301,9 @@ void CallListWidget::onFriendshipButtonClicked( CallListItem* userItem )
     if( userItem )
     {
         GuiOfferSession* userSession = userItem->getCallSession();
-        if( userSession )
+        if( userSession && userSession->getUserIdent() )
         {
-            emit signalFriendshipButtonClicked( userSession, userItem );
+            launchChangeFriendship( userSession->getUserIdent() );
         }
     }
 }

@@ -26,12 +26,12 @@ class GuiHostSession : public QWidget
 {
 public:
 	GuiHostSession( QWidget* parent = nullptr );
-	GuiHostSession(	EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting, QWidget* parent = nullptr );
+	GuiHostSession(	EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent, PluginSetting& pluginSetting, QWidget* parent = nullptr );
 	GuiHostSession( const GuiHostSession &rhs );
 
 	GuiHostSession&			    operator =( const GuiHostSession &rhs );
 
-    VxNetIdent&					getHostIdent( void )                        { return m_HostIdent; }
+    GuiUser*                    getUserIdent( void )                        { return m_HostIdent; }
     EHostType                   getHostType( void )                         { return m_HostType; }
     std::string                 getHostUrl( void );
 
@@ -52,7 +52,7 @@ protected:
     EHostType                   m_HostType{ eHostTypeUnknown };
 	VxGUID					    m_SessionId;
     VxGUID					    m_OnlineId;
-    VxNetIdent			    	m_HostIdent;
+    GuiUser*			    	m_HostIdent{ nullptr };
     PluginSetting               m_PluginSetting;
     QWidget*					m_Widget{ nullptr };
 };

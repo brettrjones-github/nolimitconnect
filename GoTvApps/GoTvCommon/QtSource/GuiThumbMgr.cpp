@@ -177,12 +177,12 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EHostType hostType, QImage&
 bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QImage& retAvatarImage, bool requestFromUserIfValid )
 {
     bool foundThumb = false;
-    if( user && user->getNetIdent() )
+    if( user )
     {
         pluginType = HostPluginToClientPluginType( pluginType );
-        VxNetIdent* netIdent = user->getNetIdent();
-        bool hostImageValid = netIdent->getThumbId( pluginType ).isVxGUIDValid();
-        VxGUID thumbId = hostImageValid ? netIdent->getThumbId( pluginType ) : netIdent->getAvatarGuid();
+        VxNetIdent& netIdent = user->getNetIdent();
+        bool hostImageValid = netIdent.getThumbId( pluginType ).isVxGUIDValid();
+        VxGUID thumbId = hostImageValid ? netIdent.getThumbId( pluginType ) : netIdent.getAvatarGuid();
         if( thumbId.isVxGUIDValid() )
         {
             GuiThumb* thumb = m_ThumbList.findThumb( thumbId );
@@ -192,7 +192,7 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
             }
             else if( requestFromUserIfValid )
             {
-                m_MyApp.getEngine().getThumbMgr().requestPluginThumb( user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeClientPeerUser, thumbId );
+                m_MyApp.getEngine().getThumbMgr().requestPluginThumb( &user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeClientPeerUser, thumbId );
             }
         }
     }

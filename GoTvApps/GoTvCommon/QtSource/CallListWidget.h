@@ -13,12 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
-
-#include <QListWidget>
+#include "ListWidgetBase.h"
 
 enum ECallViewType
 {
@@ -33,23 +28,18 @@ enum ECallViewType
     eMaxCallViewTypeNone,
 };
 
-class AppCommon;
 class CallListItem;
 class GuiCall;
 class GuiOfferSession;
 class GuiOfferClientMgr;
-class MyIcons;
-class P2PEngine;
 
-class CallListWidget : public QListWidget
+class CallListWidget : public ListWidgetBase
 {
 	Q_OBJECT
 
 public:
 	CallListWidget( QWidget * parent );
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
     void                        clearCallList( void );
 
     std::map<VxGUID, GuiOfferSession*>& getCallList( void )             { return m_CallCache; }
@@ -106,10 +96,7 @@ protected:
     bool                        isListViewMatch( GuiOfferSession * user );
 
 	//=== vars ===//
-	AppCommon&					m_MyApp;
     GuiOfferClientMgr&			m_OfferClientMgr;
-	P2PEngine&					m_Engine;
-	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     bool                        m_ShowMyself{ true };
     ECallViewType               m_CallViewType{ eCallViewTypeNone };
 

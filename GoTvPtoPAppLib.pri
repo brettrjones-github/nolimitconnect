@@ -87,6 +87,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListLocalView.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostJoinRequestList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.h \
@@ -205,6 +206,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserListWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoin.h \
@@ -237,6 +239,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ListWidgetBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
@@ -430,6 +433,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupListLocalView.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostJoinRequestList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.cpp \
@@ -545,6 +549,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUser.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoin.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiUserJoinMgr.cpp \
@@ -578,6 +583,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ListWidgetBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \

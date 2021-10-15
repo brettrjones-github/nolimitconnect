@@ -30,10 +30,7 @@
  
 //============================================================================
 GuiUserListWidget::GuiUserListWidget( QWidget * parent )
-: QListWidget( parent )
-, m_MyApp( GetAppInstance() )
-, m_UserMgr( m_MyApp.getUserMgr() )
-, m_Engine( m_MyApp.getEngine() )
+: ListWidgetBase( parent )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -162,7 +159,6 @@ void GuiUserListWidget::refreshUserList( void )
 {
     clearUserList();
     std::vector<GuiUser*> updateUserList;
-    m_UserMgr.lockUserMgr();
     std::map<VxGUID, GuiUser*>& userList = m_UserMgr.getUserList();
     for( auto iter = userList.begin(); iter != userList.end(); ++iter )
     {
@@ -180,7 +176,6 @@ void GuiUserListWidget::refreshUserList( void )
         }
     }
 
-    m_UserMgr.unlockUserMgr();
     for( auto user : updateUserList )
     {
         updateUser( user );
@@ -291,12 +286,6 @@ void GuiUserListWidget::removeUser( VxGUID& onlineId )
             delete listItem; // Qt documentation warnings you to destroy item to effectively remove it from QListWidget.
         }  
     }
-}
-
-//============================================================================
-MyIcons&  GuiUserListWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
@@ -515,9 +504,9 @@ void GuiUserListWidget::onFriendshipButtonClicked( UserListItem* userItem )
     if( userItem )
     {
         GuiUserSessionBase* userSession = userItem->getUserSession();
-        if( userSession )
+        if( userSession && userSession->getUserIdent() )
         {
-            emit signalFriendshipButtonClicked( userSession, userItem );
+            launchChangeFriendship( userSession->getUserIdent() );
         }
     }
 }

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
-    <height>404</height>
+    <width>372</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -84,7 +84,7 @@
        <number>0</number>
       </property>
       <item row="1" column="0">
-       <widget class="PersonOfferListWidget" name="m_PersonOfferItemList">
+       <widget class="HostJoinRequestListWidget" name="m_HostJoinRequestList">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -111,19 +111,15 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="m_AcceptAllButton">
         <property name="text">
-         <string>PushButton</string>
+         <string>Accept All</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
+      <item row="0" column="0">
+       <widget class="QComboBox" name="m_RequestStateComboBox"/>
       </item>
      </layout>
     </widget>
@@ -132,9 +128,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PersonOfferListWidget</class>
+   <class>HostJoinRequestListWidget</class>
    <extends>QListWidget</extends>
-   <header>PersonOfferListWidget.h</header>
+   <header>HostJoinRequestListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

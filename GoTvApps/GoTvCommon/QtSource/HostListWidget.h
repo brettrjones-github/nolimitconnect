@@ -13,30 +13,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
-
-#include <QListWidget>
+#include "ListWidgetBase.h"
 
 class HostListItem;
 class VxNetIdent;
-class AppCommon;
-class MyIcons;
-class P2PEngine;
 class GuiHostSession;
 class PluginSetting;
 
-class HostListWidget : public QListWidget
+class HostListWidget : public ListWidgetBase
 {
 	Q_OBJECT
 
 public:
 	HostListWidget( QWidget * parent );
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
     void                        clearHostList( void );
 
     void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
@@ -71,8 +61,5 @@ protected:
     virtual void                onConnectButtonClicked( HostListItem* hostItem );
 
 	//=== vars ===//
-	AppCommon&					m_MyApp;
-	P2PEngine&					m_Engine;
-	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
 };
 

@@ -13,13 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
+#include "ListWidgetBase.h"
 #include "AppDefs.h"
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
-
-#include <QListWidget>
 
 enum EUserViewType
 {
@@ -35,24 +30,15 @@ enum EUserViewType
 };
 
 class UserListItem;
-class GuiUser;
-class AppCommon;
-class MyIcons;
-class P2PEngine;
 class GuiUserSessionBase;
-class GuiUserMgr;
-class GuiThumb;
-class GuiThumbMgr;
 
-class UserListWidget : public QListWidget
+class UserListWidget : public ListWidgetBase
 {
 	Q_OBJECT
 
 public:
 	UserListWidget( QWidget * parent );
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
     void						setAppletType( EApplet appletType ) { m_AppletType = appletType; };
     EApplet						getAppletType( void ) { return m_AppletType; };
 
@@ -116,11 +102,6 @@ protected:
     void                        updateThumb( GuiThumb* thumb );
  
 	//=== vars ===//
-	AppCommon&					m_MyApp;
-    P2PEngine&					m_Engine;
-    GuiUserMgr&					m_UserMgr;
-    GuiThumbMgr&				m_ThumbMgr;
-	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;
     bool                        m_ShowMyself{ true };
     EUserViewType               m_UserViewType{ eUserViewTypeNone };

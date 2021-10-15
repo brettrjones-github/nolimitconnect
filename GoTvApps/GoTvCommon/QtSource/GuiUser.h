@@ -13,81 +13,23 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <PktLib/VxCommon.h>
-#include <CoreLib/VxGUID.h>
+#include "GuiUserBase.h"
 
-#include <set>
-
-#include <QWidget>
-
-class AppCommon;
 class GuiUserMgr;
-class VxNetIdent;
-class VxSktBase;
 
-class GuiUser : public QWidget
+class GuiUser : public GuiUserBase
 {
 public:
     GuiUser() = delete;
     GuiUser( AppCommon& app );
     GuiUser( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online = false );
     GuiUser( const GuiUser& rhs );
-	virtual ~GuiUser() = default;
+	virtual ~GuiUser() override = default;
 
-    void                        setNetIdent( VxNetIdent* netIdent );
-    VxNetIdent*                 getNetIdent( void )                     { return m_NetIdent; }
-    bool                        isIdentValid( void )                    { return m_NetIdent ? m_NetIdent->isIdentValid() : false; }
-    void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
-    VxGUID&                     getSessionId( void )                    { return m_SessionId; }
+    GuiUserMgr&                 getUserMgr( void )                          { return m_UserMgr; }
 
-    void                        setOnlineStatus( bool isOnline );
-    bool                        isOnline( void )                        { return m_IsOnline; }
-    VxGUID&                     getMyOnlineId( void )                   { return m_OnlineId; }
-    const char *                getOnlineName( void )                   { return m_NetIdent ? m_NetIdent->getOnlineName() : ""; }
-    const char *                getOnlineDescription( void )            { return m_NetIdent ? m_NetIdent->getOnlineDescription() : ""; }
-
-    void                        setMyFriendshipToHim( EFriendState friendState ) { if( m_NetIdent ) m_NetIdent->setMyFriendshipToHim( friendState ); }
-    EFriendState                getMyFriendshipToHim( void )            { return m_NetIdent ? m_NetIdent->getMyFriendshipToHim() : eFriendStateIgnore; }
-    EFriendState                getHisFriendshipToMe( void )            { return m_NetIdent ? m_NetIdent->getHisFriendshipToMe() : eFriendStateIgnore; }
-    EPluginAccess               getMyAccessPermissionFromHim( EPluginType pluginType ) { return m_NetIdent ? m_NetIdent->getMyAccessPermissionFromHim( pluginType ) : ePluginAccessIgnored; }
-    EFriendState                getPluginPermission( EPluginType pluginType ) { return m_NetIdent ? m_NetIdent->getPluginPermission( pluginType ) : eFriendStateIgnore; }
-    int64_t					    getLastSessionTimeMs( void )            { return m_NetIdent ? m_NetIdent->getLastSessionTimeMs() : 0; }
-
-    QString				        describeMyFriendshipToHim( void );
-    QString				        describeHisFriendshipToMe( void );
-
-    bool                        isAdmin( void )                         { return m_NetIdent ? m_NetIdent->isAdministrator() : false; }
-    bool                        isFriend( void )                        { return m_NetIdent ? m_NetIdent->isFriend() : false; }
-    bool                        isGuest( void )                         { return m_NetIdent ? m_NetIdent->isGuest() : false; }
-    bool                        isAnonymous( void )                     { return m_NetIdent ? m_NetIdent->isAnonymous() : false; }
-    bool                        isIgnored( void )                       { return m_NetIdent ? m_NetIdent->isIgnored() : true; }
-    bool                        isMyself( void );
-
-    bool                        isGroupHosted( void )                   { return m_HostSet.find( eHostTypeGroup ) != m_HostSet.end(); }
-    bool                        isChatRoomHosted( void )                { return m_HostSet.find( eHostTypeChatRoom ) != m_HostSet.end(); }
-    bool                        isRandomConnectHosted( void )           { return m_HostSet.find( eHostTypeRandomConnect ) != m_HostSet.end(); }
-    bool                        isPeerHosted( void )                    { return m_HostSet.find( eHostTypePeerUser ) != m_HostSet.end(); }
-
-    bool                        isInSession( void );
-    bool                        isNearby( void )                        { return m_NetIdent ? m_NetIdent->isNearby() : false; }
-    bool                        requiresRelay( void )                   { return m_NetIdent ? m_NetIdent->requiresRelay() : true; }
-    bool                        isMyPreferedRelay( void )               { return m_NetIdent ? m_NetIdent->isMyPreferedRelay() : false; }
-
-
-    uint32_t                    getTruthCount( void )                   { return m_NetIdent ? m_NetIdent->getTruthCount() : 0; }
-    uint32_t                    getDareCount( void )                    { return m_NetIdent ? m_NetIdent->getDareCount() : 0; }
-    void		                setHasTextOffers( bool hasOffers )	    { if( m_NetIdent ) m_NetIdent->setHasTextOffers( hasOffers ); }
-    bool		                getHasTextOffers( void )				{ return m_NetIdent ? m_NetIdent->getHasTextOffers() : false; }
-    bool                        isMyAccessAllowedFromHim( EPluginType pluginType ) { return m_NetIdent ? m_NetIdent->isMyAccessAllowedFromHim( pluginType ) : false; }
-    
-    void                        addHostType( EHostType hostType );
+    virtual bool                setOnlineStatus( bool isOnline ) override;
 
 protected:
-    AppCommon&                  m_MyApp;
-    GuiUserMgr&                 m_GuiUserMgr;
-    VxNetIdent*                 m_NetIdent;
-    VxGUID                      m_OnlineId;
-    VxGUID                      m_SessionId;
-    bool                        m_IsOnline{ false };
-    std::set<EHostType>         m_HostSet;
+    GuiUserMgr&                 m_UserMgr;
 };

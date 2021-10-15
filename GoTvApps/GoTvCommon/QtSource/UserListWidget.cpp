@@ -28,11 +28,7 @@
  
 //============================================================================
 UserListWidget::UserListWidget( QWidget * parent )
-: QListWidget( parent )
-, m_MyApp( GetAppInstance() )
-, m_Engine( m_MyApp.getEngine() )
-, m_UserMgr( m_MyApp.getUserMgr() )
-, m_ThumbMgr( m_MyApp.getThumbMgr() )
+: ListWidgetBase( parent )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -76,12 +72,6 @@ UserListItem* UserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
 GuiUserSessionBase* UserListWidget::widgetToSession( UserListItem * item )
 {
     return item->getUserSession();
-}
-
-//============================================================================
-MyIcons&  UserListWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
@@ -293,25 +283,6 @@ void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
             }
         }
     }
-
-
-    /*
-    m_SelectedFriend = widgetToUser( item );
-    if( m_SelectedFriend )
-    {
-    emit signalFriendClicked( m_SelectedFriend );
-    ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
-    if( activityBase )
-    {
-    PopupMenu popupMenu( m_MyApp, activityBase );
-    popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
-    popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-    connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
-
-    popupMenu.showFriendMenu( m_SelectedFriend );
-    }
-    }
-    */
 }
 
 //============================================================================
@@ -321,9 +292,9 @@ void UserListWidget::onFriendshipButtonClicked( UserListItem* userItem )
     if( userItem )
     {
         GuiUserSessionBase* userSession = userItem->getUserSession();
-        if( userSession )
+        if( userSession && userSession->getUserIdent() )
         {
-            emit signalFriendshipButtonClicked( userSession, userItem );
+            launchChangeFriendship( userSession->getUserIdent() );
         }
     }
 }
@@ -394,7 +365,6 @@ void UserListWidget::refreshList( void )
 {
     clearUserList();
     std::vector<GuiUser *> userList;
-    m_UserMgr.lockUserMgr();
 
     if( isListViewMatch( m_UserMgr.getMyIdent() ) )
     {
@@ -410,7 +380,6 @@ void UserListWidget::refreshList( void )
         }
     }
 
-    m_UserMgr.unlockUserMgr();
     for( auto user : userList )
     {
         updateUser( user );

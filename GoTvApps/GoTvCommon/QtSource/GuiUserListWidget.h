@@ -13,12 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
-
-#include <QListWidget>
+#include "ListWidgetBase.h"
 
 enum EUserListViewType
 {
@@ -31,36 +26,30 @@ enum EUserListViewType
     eMaxUserListViewType
 };
 
-class AppCommon;
-class GuiUser;
 class GuiUserMgr;
 class GuiUserSessionBase;
 class UserListItem;
-class MyIcons;
-class P2PEngine;
 class PluginSetting;
 class VxNetIdent;
 
-class GuiUserListWidget : public QListWidget
+class GuiUserListWidget : public ListWidgetBase
 {
 	Q_OBJECT
 
 public:
 	GuiUserListWidget( QWidget * parent );
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
     void                        clearUserList( void );
 
     void                        setShowMyself( bool showMe )        { m_ShowMyself = showMe; }
     bool                        getShowMyself( void )                  { return m_ShowMyself; }
 
     void                        addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent );
-    UserListItem*        addOrUpdateSession( GuiUserSessionBase* hostSession );
+    UserListItem*               addOrUpdateSession( GuiUserSessionBase* hostSession );
 
     GuiUserSessionBase*         findSession( VxGUID& lclSessionId );
-    UserListItem*        findListEntryWidgetBySessionId( VxGUID& sessionId );
-    UserListItem*        findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    UserListItem*               findListEntryWidgetBySessionId( VxGUID& sessionId );
+    UserListItem*               findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
     void                        setUserListViewType( EUserListViewType viewType );
 
@@ -91,7 +80,7 @@ protected:
 
     bool                        isUserAListMatch( GuiUser* user );
 
-    UserListItem*        sessionToWidget( GuiUserSessionBase* hostSession );
+    UserListItem*               sessionToWidget( GuiUserSessionBase* hostSession );
     GuiUserSessionBase*			widgetToSession( UserListItem* hostItem );
 
     virtual void                onUserListItemClicked( UserListItem* hostItem );
@@ -105,10 +94,6 @@ protected:
     void                        removeUser( VxGUID& onlineId );
 
 	//=== vars ===//
-	AppCommon&					m_MyApp;
-    GuiUserMgr&					m_UserMgr;
-	P2PEngine&					m_Engine;
-	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     EUserListViewType           m_ViewType{ eUserListViewTypeNone };
     bool                        m_ShowMyself{ false };
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;

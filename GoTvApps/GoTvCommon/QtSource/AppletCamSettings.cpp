@@ -57,9 +57,9 @@ AppletCamSettings::AppletCamSettings( AppCommon& app, QWidget * parent )
         return;
     }
 
-    if( m_HisIdent && m_HisIdent->getNetIdent() )
+    if( m_HisIdent  )
     {
-        setupCamFeed( m_HisIdent->getNetIdent() );
+        setupCamFeed( &m_HisIdent->getNetIdent() );
     }
     else
     {

@@ -45,7 +45,7 @@ public:
     void                        onUserJoinAdded( GuiUserJoin* user );
     void                        onUserJoinRemoved( VxGUID& onlineId, EHostType hostType );
     void                        onUserJoinUpdated( GuiUserJoin* user );
-    void                        onUserJoinOnlineStatusChange( GuiUserJoin* user, bool isOnline );
+    void                        onUserOnlineStatusChange( GuiUserJoin* user, bool isOnline );
     void                        onMyIdentUpdated( GuiUserJoin* user );
 
     GuiUserJoin*                    getUserJoin( VxGUID& onlineId );

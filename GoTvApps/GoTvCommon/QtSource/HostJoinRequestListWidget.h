@@ -13,30 +13,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
-
-#include <QListWidget>
+#include "ListWidgetBase.h"
 
 class HostJoinRequestListItem;
 class VxNetIdent;
-class AppCommon;
-class MyIcons;
-class P2PEngine;
 class GuiHostSession;
 class PluginSetting;
 
-class HostJoinRequestListWidget : public QListWidget
+class HostJoinRequestListWidget : public ListWidgetBase
 {
 	Q_OBJECT
 
 public:
 	HostJoinRequestListWidget( QWidget * parent );
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
     void                        clearHostJoinRequestList( void );
 
     void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
@@ -47,32 +37,33 @@ public:
     HostJoinRequestListItem*    findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
 signals:
-    void                        signalIconButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalAvatarButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalFrienshipButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
     void                        signalMenuButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
-    void                        signalJoinButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
-    void                        signalConnectButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalAcceptButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalRejectButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
 
 protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotHostJoinRequestListItemClicked( QListWidgetItem* hostItem );
-    void                        slotIconButtonClicked( HostJoinRequestListItem* hostItem );
+    void                        slotAvatarButtonClicked( HostJoinRequestListItem* hostItem );
+    void                        slotlFriendshipButtonClicked( HostJoinRequestListItem* hostItem );
     void                        slotMenuButtonClicked( HostJoinRequestListItem* hostItem );
-    void                        slotJoinButtonClicked( HostJoinRequestListItem* hostItem );
-    void                        slotConnectButtonClicked( HostJoinRequestListItem* hostItem );
+    void                        slotAcceptButtonClicked( HostJoinRequestListItem* hostItem );
+    void                        slotRejectButtonClicked( HostJoinRequestListItem* hostItem );
 
 protected:
-    HostJoinRequestListItem*               sessionToWidget( GuiHostSession* hostSession );
+    HostJoinRequestListItem*    sessionToWidget( GuiHostSession* hostSession );
     GuiHostSession*				widgetToSession( HostJoinRequestListItem* hostItem );
 
     virtual void                onHostJoinRequestListItemClicked( HostJoinRequestListItem* hostItem );
-    virtual void                onIconButtonClicked( HostJoinRequestListItem* hostItem );
+    virtual void                onAvatarButtonClicked( HostJoinRequestListItem* hostItem );
+    virtual void                onFriendshipButtonClicked( HostJoinRequestListItem* hostItem );
     virtual void                onMenuButtonClicked( HostJoinRequestListItem* hostItem );
-    virtual void                onJoinButtonClicked( HostJoinRequestListItem* hostItem );
-    virtual void                onConnectButtonClicked( HostJoinRequestListItem* hostItem );
+    virtual void                onAcceptButtonClicked( HostJoinRequestListItem* hostItem );
+    virtual void                onRejectButtonClicked( HostJoinRequestListItem* hostItem );
 
 	//=== vars ===//
-	AppCommon&					m_MyApp;
-	P2PEngine&					m_Engine;
-	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
+
 };
 

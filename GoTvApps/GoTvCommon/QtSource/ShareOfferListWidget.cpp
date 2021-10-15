@@ -29,10 +29,8 @@
  
 //============================================================================
 ShareOfferListWidget::ShareOfferListWidget( QWidget * parent )
-: QListWidget( parent )
-, m_MyApp( GetAppInstance() )
+: ListWidgetBase( parent )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
-, m_Engine( m_MyApp.getEngine() )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -74,12 +72,6 @@ ShareOfferListItem* ShareOfferListWidget::sessionToWidget( GuiOfferSession* user
 GuiOfferSession* ShareOfferListWidget::widgetToSession( ShareOfferListItem * item )
 {
     return item->getOfferSession();
-}
-
-//============================================================================
-MyIcons&  ShareOfferListWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
@@ -309,7 +301,10 @@ void ShareOfferListWidget::onFriendshipButtonClicked( ShareOfferListItem* userIt
         GuiOfferSession* userSession = userItem->getOfferSession();
         if( userSession )
         {
-            emit signalFriendshipButtonClicked( userSession, userItem );
+            if( userSession && userSession->getUserIdent() )
+            {
+                launchChangeFriendship( userSession->getUserIdent() );
+            }
         }
     }
 }

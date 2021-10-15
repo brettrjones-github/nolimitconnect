@@ -13,106 +13,41 @@
 //============================================================================
 
 #include "AppCommon.h"
-#include "GuiUserJoin.h"
-#include "GuiUserMgr.h"
+#include "GuiUserJoinMgr.h"
 #include "GuiParams.h"
 
 //============================================================================
 GuiUserJoin::GuiUserJoin( AppCommon& app )
-    : QWidget( &app )
-    , m_MyApp( app )
-    , m_GuiUserMgr( app.getUserMgr() )
+    : GuiUserBase( app )
+    , m_UserJoinMgr( app.getUserJoinMgr() )
 {
 }
 
 //============================================================================
 GuiUserJoin::GuiUserJoin( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online )
-    : QWidget( &app )
-    , m_MyApp( app )
-    , m_GuiUserMgr( m_MyApp.getUserMgr() )
-    , m_NetIdent( netIdent )
-    , m_OnlineId( netIdent->getMyOnlineId() )
-    , m_SessionId( sessionId )
+    : GuiUserBase( app, netIdent, sessionId, online )
+    , m_UserJoinMgr( app.getUserJoinMgr() )
 {
-    setOnlineStatus( online );
 }
 
 //============================================================================
 GuiUserJoin::GuiUserJoin( const GuiUserJoin& rhs )
-    : m_MyApp( rhs.m_MyApp )
-    , m_GuiUserMgr( m_MyApp.getUserMgr() )
-    , m_NetIdent( rhs.m_NetIdent )
-    , m_OnlineId( rhs.m_OnlineId )
-    , m_SessionId( rhs.m_SessionId )
-    , m_IsOnline( rhs.m_IsOnline )
-    , m_HostSet( rhs.m_HostSet )
+    : GuiUserBase( rhs )
+    , m_UserJoinMgr( rhs.m_UserJoinMgr )
+    , m_JoinStateList( rhs.m_JoinStateList )
 {
 }
 
 //============================================================================
-bool GuiUserJoin::isMyself( void )
+bool GuiUserJoin::setOnlineStatus( bool isOnline )
 {
-    return getMyOnlineId() == m_GuiUserMgr.getMyOnlineId();
-}
-
-//============================================================================
-QString GuiUserJoin::describeMyFriendshipToHim( void )
-{
-    return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getMyFriendshipToHim() : eFriendStateIgnore );
-}
-
-//============================================================================
-QString GuiUserJoin::describeHisFriendshipToMe( void )
-{
-    return GuiParams::describeFriendship( m_NetIdent ? m_NetIdent->getHisFriendshipToMe() : eFriendStateIgnore );
-}
-
-//============================================================================
-void GuiUserJoin::setNetIdent( VxNetIdent* netIdent )
-{ 
-    if( netIdent )
+    if( GuiUserBase::setOnlineStatus( isOnline ) )
     {
-        if( netIdent != m_NetIdent )
-        {
-            m_NetIdent = netIdent; 
-            m_OnlineId = m_NetIdent->getMyOnlineId();
-        }
+        m_UserJoinMgr.onUserOnlineStatusChange( this, m_IsOnline );
+        return true;
     }
-    else
-    {
-        LogMsg( LOG_ERROR, "GuiUserJoin::setNetIdent null ident" );
-    }
-}
 
-//============================================================================
-void GuiUserJoin::setOnlineStatus( bool isOnline )
-{
-    /*
-    if( isOnline != m_IsOnline )
-    {
-        m_IsOnline = isOnline;
-        m_GuiUserMgr.onUserJoinOnlineStatusChange( this, m_IsOnline );
-        if( !m_IsOnline )
-        {
-            m_SessionId.clearVxGUID();
-        }
-    }
-    */
-}
-
-//============================================================================
-bool GuiUserJoin::isInSession( void )
-{
-    return m_IsOnline && m_SessionId.isVxGUIDValid();
-}
-
-//============================================================================
-void GuiUserJoin::addHostType( EHostType hostType )
-{
-    if( hostType > eHostTypeUnknown && hostType < eMaxHostType )
-    {
-        m_HostSet.insert( hostType );
-    }
+    return false;
 }
 
 //============================================================================

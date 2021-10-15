@@ -185,6 +185,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
@@ -309,6 +310,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiThumbMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUser.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinMgr.cpp" />
@@ -339,6 +341,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVideoWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ListWidgetBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MenuBase.cpp" />
@@ -487,6 +490,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -510,6 +514,7 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUser.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.h" />
@@ -517,6 +522,7 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\HelpBrowser.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListItem.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListWidget.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ListWidgetBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIcons.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />

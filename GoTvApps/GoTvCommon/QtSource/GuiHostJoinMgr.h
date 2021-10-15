@@ -44,7 +44,7 @@ public:
 
     void                        onHostJoinAdded( GuiHostJoin* user );
     void                        onHostJoinUpdated( GuiHostJoin* user );
-    void                        onHostJoinOnlineStatusChange( GuiHostJoin* user, bool isOnline );
+    void                        onUserOnlineStatusChange( GuiHostJoin* user, bool isOnline );
 
     GuiHostJoin*                    getHostJoin( VxGUID& onlineId );
     std::map<VxGUID, GuiHostJoin*>& getHostJoinList( void )             { return m_HostJoinList; }

@@ -64,23 +64,23 @@ void AppCommon::offerToFriendViewStoryboard( GuiUser * poFriend )
 //============================================================================
 void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName )
 {
-    VxNetIdent * netIdent = user->getNetIdent();
-    if( netIdent )
+    if( user )
     {
+        VxNetIdent& netIdent = user->getNetIdent();
         std::string uri;
         std::string myExternIp;
-        if( ( netIdent->getMyOnlineIPv4() == m_Engine.getMyPktAnnounce().getMyOnlineIPv4() )
-            && netIdent->getLanIPv4().isValid() )
+        if( ( netIdent.getMyOnlineIPv4() == m_Engine.getMyPktAnnounce().getMyOnlineIPv4() )
+            && netIdent.getLanIPv4().isValid() )
         {
             // is on same sub network as us.. use LAN ip
-            myExternIp = netIdent->getLanIPv4().toStdString();
+            myExternIp = netIdent.getLanIPv4().toStdString();
         }
         else
         {
-            myExternIp = netIdent->getMyOnlineIPv4().toStdString();
+            myExternIp = netIdent.getMyOnlineIPv4().toStdString();
         }
 
-        if( netIdent->getMyOnlineId() == m_Engine.getMyPktAnnounce().getMyOnlineId() )
+        if( netIdent.getMyOnlineId() == m_Engine.getMyPktAnnounce().getMyOnlineId() )
         {
             if( m_Engine.getMyPktAnnounce().getLanIPv4().isValid() )
             {
@@ -88,7 +88,7 @@ void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName 
             }
         }
 
-        netIdent->getProfileUri( uri, myExternIp.c_str(), webPageFileName );
+        netIdent.getProfileUri( uri, myExternIp.c_str(), webPageFileName );
         getAppGlobals().launchWebBrowser( uri.c_str() );
     }
 }

@@ -83,7 +83,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="VxPushButton" name="m_IconButton">
+       <widget class="VxPushButton" name="m_AvatarButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -162,7 +162,6 @@
             <property name="font">
              <font>
               <pointsize>8</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -231,14 +230,14 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="VxPushButton" name="m_JoinButton">
+           <widget class="VxPushButton" name="m_AcceptButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="m_JoinLabel">
+           <widget class="QLabel" name="m_AcceptLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -246,19 +245,19 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Join</string>
+             <string>Accept</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="VxPushButton" name="m_ConnectButton">
+           <widget class="VxPushButton" name="m_RejectButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="m_ConnectLabel">
+           <widget class="QLabel" name="m_RejectLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -266,7 +265,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Connect</string>
+             <string>Reject</string>
             </property>
            </widget>
           </item>

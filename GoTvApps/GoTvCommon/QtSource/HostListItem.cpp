@@ -106,20 +106,20 @@ void HostListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    VxNetIdent& hostIdent = hostSession->getHostIdent();
-    QString strName = hostIdent.getOnlineName();
+    GuiUser* hostIdent = hostSession->getUserIdent();
+    QString strName = hostIdent->getOnlineName();
     strName += " - ";
     ui.TitlePart1->setText( strName );
 
-    if( m_MyApp.getEngine().getMyOnlineId() == hostIdent.getMyOnlineId() )
+    if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getMyOnlineId() )
     {
         ui.TitlePart2->setText( QObject::tr( "Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
     else
     {
-        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent.getMyFriendshipToHim() ) );
-        ui.TitlePart2->setText( hostIdent.describeMyFriendshipToHim() );
+        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
+        ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
     }
     
     /*
@@ -135,7 +135,7 @@ void HostListItem::updateWidgetFromInfo( void )
         VxGUID thumbId = hostSession->getHostThumbId();
         if( !thumbId.isVxGUIDValid() )
         {
-            thumbId = hostIdent.getHostThumbId( hostSession->getHostType(), true );
+            thumbId = hostIdent->getHostThumbId( hostSession->getHostType(), true );
         }
        
         if( thumbId.isVxGUIDValid() )
@@ -152,7 +152,7 @@ void HostListItem::updateWidgetFromInfo( void )
     std::string strDesc = hostSession->getHostDescription();
     if( strDesc.empty() )
     {
-        strDesc = hostIdent.getOnlineDescription();
+        strDesc = hostIdent->getOnlineDescription();
     }
 
     if( !strDesc.empty() )

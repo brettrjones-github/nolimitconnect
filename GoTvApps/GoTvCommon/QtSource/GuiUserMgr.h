@@ -61,8 +61,6 @@ public:
     void                        onUserOnlineStatusChange( GuiUser* user, bool isOnline );
     void                        onMyIdentUpdated( GuiUser* user );
 
-    void                        lockUserMgr( void )             { m_UserListMutex.lock(); }
-    void                        unlockUserMgr( void )           { m_UserListMutex.unlock(); }
     GuiUser*                    getUser( VxGUID& onlineId );
     std::map<VxGUID, GuiUser*>& getUserList( void )             { return m_UserList; }
 
@@ -93,7 +91,6 @@ protected:
     GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
     
     AppCommon&                  m_MyApp;
-    VxMutex                     m_UserListMutex;
     // map of online id to GuiUser
     std::map<VxGUID, GuiUser*>  m_UserList;
     GuiUser*                    m_MyIdent{ nullptr };

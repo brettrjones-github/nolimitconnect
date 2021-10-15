@@ -27,9 +27,7 @@
  
 //============================================================================
 HostJoinRequestListWidget::HostJoinRequestListWidget( QWidget * parent )
-: QListWidget( parent )
-, m_MyApp( GetAppInstance() )
-, m_Engine( m_MyApp.getEngine() )
+: ListWidgetBase( parent )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
@@ -48,10 +46,11 @@ HostJoinRequestListItem* HostJoinRequestListWidget::sessionToWidget( GuiHostSess
     hostItem->setHostSession( hostSession );
 
     connect( hostItem, SIGNAL( signalHostJoinRequestListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotHostJoinRequestListItemClicked( QListWidgetItem * ) ) );
-    connect( hostItem, SIGNAL( signalIconButtonClicked( HostJoinRequestListItem * ) ),	        this, SLOT( slotIconButtonClicked( HostJoinRequestListItem * ) ) );
+    connect( hostItem, SIGNAL( signalAvatarButtonClicked( HostJoinRequestListItem * ) ),	        this, SLOT( slotAvatarButtonClicked( HostJoinRequestListItem * ) ) );
+    connect( hostItem, SIGNAL( signalFrienshipButtonClicked( HostJoinRequestListItem* ) ), this, SLOT( slotlFriendshipButtonClicked( HostJoinRequestListItem* ) ) );
     connect( hostItem, SIGNAL( signalMenuButtonClicked( HostJoinRequestListItem * ) ),	        this, SLOT( slotMenuButtonClicked( HostJoinRequestListItem * ) ) );
-    connect( hostItem, SIGNAL( signalJoinButtonClicked( HostJoinRequestListItem * ) ),		    this, SLOT( slotJoinButtonClicked( HostJoinRequestListItem * ) ) );
-    connect( hostItem, SIGNAL( signalConnectButtonClicked( HostJoinRequestListItem* ) ),       this, SLOT( slotConnectButtonClicked( HostJoinRequestListItem* ) ) );
+    connect( hostItem, SIGNAL( signalAcceptButtonClicked( HostJoinRequestListItem * ) ),		    this, SLOT( slotAcceptButtonClicked( HostJoinRequestListItem * ) ) );
+    connect( hostItem, SIGNAL( signalRejectButtonClicked( HostJoinRequestListItem* ) ),       this, SLOT( slotRejectButtonClicked( HostJoinRequestListItem* ) ) );
 
     hostItem->updateWidgetFromInfo();
 
@@ -62,12 +61,6 @@ HostJoinRequestListItem* HostJoinRequestListWidget::sessionToWidget( GuiHostSess
 GuiHostSession* HostJoinRequestListWidget::widgetToSession( HostJoinRequestListItem * item )
 {
     return item->getHostSession();
-}
-
-//============================================================================
-MyIcons&  HostJoinRequestListWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
 }
 
 //============================================================================
@@ -120,7 +113,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::findListEntryWidgetByOnlineI
         if( hostItem )
         {
             GuiHostSession * hostSession = hostItem->getHostSession();
-            if( hostSession && hostSession->getHostIdent().getMyOnlineId() == onlineId )
+            if( hostSession && hostSession->getUserIdent()->getMyOnlineId() == onlineId )
             {
                 return hostItem;
             }
@@ -156,7 +149,7 @@ void HostJoinRequestListWidget::slotHostJoinRequestListItemClicked( QListWidgetI
 }
 
 //============================================================================
-void HostJoinRequestListWidget::slotIconButtonClicked( HostJoinRequestListItem* hostItem )
+void HostJoinRequestListWidget::slotAvatarButtonClicked( HostJoinRequestListItem* hostItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
     {
@@ -164,7 +157,19 @@ void HostJoinRequestListWidget::slotIconButtonClicked( HostJoinRequestListItem* 
     }
 
     m_ClickEventTimer.startTimer();
-    slotIconButtonClicked(hostItem);
+    onAvatarButtonClicked(hostItem);
+}
+
+//============================================================================
+void HostJoinRequestListWidget::slotlFriendshipButtonClicked( HostJoinRequestListItem* hostItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onFriendshipButtonClicked( hostItem );
 }
 
 //============================================================================
@@ -180,7 +185,7 @@ void HostJoinRequestListWidget::slotMenuButtonClicked( HostJoinRequestListItem* 
 }
 
 //============================================================================
-void HostJoinRequestListWidget::slotJoinButtonClicked( HostJoinRequestListItem* hostItem )
+void HostJoinRequestListWidget::slotAcceptButtonClicked( HostJoinRequestListItem* hostItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
     {
@@ -188,11 +193,11 @@ void HostJoinRequestListWidget::slotJoinButtonClicked( HostJoinRequestListItem* 
     }
 
     m_ClickEventTimer.startTimer();
-    onJoinButtonClicked( hostItem );
+    onAcceptButtonClicked( hostItem );
 }
 
 //============================================================================
-void HostJoinRequestListWidget::slotConnectButtonClicked( HostJoinRequestListItem* hostItem )
+void HostJoinRequestListWidget::slotRejectButtonClicked( HostJoinRequestListItem* hostItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
     {
@@ -200,15 +205,24 @@ void HostJoinRequestListWidget::slotConnectButtonClicked( HostJoinRequestListIte
     }
 
     m_ClickEventTimer.startTimer();
-    onConnectButtonClicked( hostItem );
+    onRejectButtonClicked( hostItem );
 }
 
 //============================================================================
 void HostJoinRequestListWidget::addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
 {
-    GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, hostIdent, pluginSetting, this );
+    GuiUser *guiUser = getUserMgr().getUser( hostIdent.getMyOnlineId() );
+    if( guiUser )
+    {
+        GuiHostSession* hostSession = new GuiHostSession( hostType, sessionId, guiUser, pluginSetting, this );
 
-    addOrUpdateHostSession( hostSession );
+        addOrUpdateHostSession( hostSession );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostJoinRequestListWidget::addHostAndSettingsToList user not found" );
+    }
+
 }
 
 //============================================================================
@@ -236,17 +250,17 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostSession( GuiH
         {
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s\n", hostSession->getHostIdent().getOnlineName() );
+                LogMsg( LOG_INFO, "add host %s\n", hostSession->getUserIdent()->getOnlineName() );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getHostIdent().getOnlineName() );
+                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getUserIdent()->getOnlineName() );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( hostSession->getHostIdent().getThumbId( hostSession->getHostType() ) );
+            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), false ) );
             if( thumb )
             {
                 QImage hostIconImage;
@@ -262,7 +276,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostSession( GuiH
 
     if( hostItem )
     {
-        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getHostIdent() ) );
+        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getUserIdent()->getNetIdent() ) );
     }
 
     return hostItem;
@@ -284,19 +298,34 @@ void HostJoinRequestListWidget::clearHostJoinRequestList( void )
 void HostJoinRequestListWidget::onHostJoinRequestListItemClicked( HostJoinRequestListItem* hostItem )
 {
     LogMsg( LOG_DEBUG, "onHostJoinRequestListItemClicked" );
-    onJoinButtonClicked( hostItem );
+    onAcceptButtonClicked( hostItem );
 }
 
 //============================================================================
-void HostJoinRequestListWidget::onIconButtonClicked( HostJoinRequestListItem* hostItem )
+void HostJoinRequestListWidget::onAvatarButtonClicked( HostJoinRequestListItem* hostItem )
 {
-    LogMsg( LOG_DEBUG, "onIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
     GuiHostSession* hostSession = hostItem->getHostSession();
     if( hostSession )
     {
-        emit signalIconButtonClicked( hostSession, hostItem );
+        emit signalAvatarButtonClicked( hostSession, hostItem );
     }
 }
+
+//============================================================================
+void HostJoinRequestListWidget::onFriendshipButtonClicked( HostJoinRequestListItem* hostItem )
+{
+    LogMsg( LOG_DEBUG, "HostJoinRequestListWidget::onFriendshipButtonClicked" );
+    if( hostItem )
+    {
+        GuiHostSession* hostSession = hostItem->getHostSession();
+        if( hostSession )
+        {
+            launchChangeFriendship( hostSession->getUserIdent() );
+        }
+    }
+}
+
 
 //============================================================================
 void HostJoinRequestListWidget::onMenuButtonClicked( HostJoinRequestListItem* hostItem )
@@ -315,44 +344,26 @@ void HostJoinRequestListWidget::onMenuButtonClicked( HostJoinRequestListItem* ho
             }
         }
     }
-
-    /*
-    m_SelectedFriend = widgetToHost( item );
-    if( m_SelectedFriend )
-    {
-    emit signalFriendClicked( m_SelectedFriend );
-    ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
-    if( activityBase )
-    {
-    PopupMenu popupMenu( m_MyApp, activityBase );
-    popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
-    popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-    connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
-
-    popupMenu.showFriendMenu( m_SelectedFriend );
-    }
-    }
-    */
 }
 
 //============================================================================
-void HostJoinRequestListWidget::onJoinButtonClicked( HostJoinRequestListItem* hostItem )
+void HostJoinRequestListWidget::onAcceptButtonClicked( HostJoinRequestListItem* hostItem )
 {
-    LogMsg( LOG_DEBUG, "onJoinButtonClicked" );
+    LogMsg( LOG_DEBUG, "onAcceptButtonClicked" );
     GuiHostSession* hostSession = hostItem->getHostSession();
     if( hostSession )
     {
-        emit signalJoinButtonClicked( hostSession, hostItem );
+        emit signalAcceptButtonClicked( hostSession, hostItem );
     }
 }
 
 //============================================================================
-void HostJoinRequestListWidget::onConnectButtonClicked( HostJoinRequestListItem* hostItem )
+void HostJoinRequestListWidget::onRejectButtonClicked( HostJoinRequestListItem* hostItem )
 {
-    LogMsg( LOG_DEBUG, "onConnectButtonClicked" );
+    LogMsg( LOG_DEBUG, "onRejectButtonClicked" );
     GuiHostSession* hostSession = hostItem->getHostSession();
     if( hostSession )
     {
-        emit signalConnectButtonClicked( hostSession, hostItem );
+        emit signalRejectButtonClicked( hostSession, hostItem );
     }
 }
