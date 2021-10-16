@@ -82,6 +82,9 @@ void AppletEditAvatarImage::onApplyButClick( void )
 
                 m_Engine.getThumbMgr().fromGuiThumbUpdated( *existingAsset );
 
+                // technically this should have resource lock but because there is no damage if read wrong by another thread during write it is ok to set directly
+                m_Engine.getMyNetIdent()->setAvatarGuid( existingAsset->getAssetUniqueId(), existingAsset->getModifiedTime() );
+
                 // notify others of change to identity
                 m_MyApp.updateMyIdent( m_MyIdent );
 
@@ -104,6 +107,9 @@ void AppletEditAvatarImage::onApplyButClick( void )
             m_MyIdent->setAvatarGuid( thumbInfo.getAssetUniqueId(), thumbInfo.getModifiedTime() );
 
             m_Engine.getThumbMgr().fromGuiThumbCreated( thumbInfo );
+
+            // technically this should have resource lock but because there is no damage if read wrong by another thread during write it is ok to set directly
+            m_Engine.getMyNetIdent()->setAvatarGuid( thumbInfo.getAssetUniqueId(), thumbInfo.getModifiedTime() );
 
             // notify others of change to identity
             m_MyApp.updateMyIdent( m_MyIdent );

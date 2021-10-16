@@ -665,6 +665,24 @@ void ActivityBase::setHomeButtonVisibility( bool visible )
 }
 
 //============================================================================
+void ActivityBase::setNetStatusVisibility( bool visible )
+{
+	ui.m_TitleBarWidget->setNetStatusVisibility( visible );
+}
+
+//============================================================================
+void ActivityBase::setPersonsOfferListButtonVisibility( bool visible )
+{
+	ui.m_TitleBarWidget->setPersonsOfferListButtonVisibility( visible );
+}
+
+//============================================================================
+void ActivityBase::setShareOfferListButtonVisibility( bool visible )
+{
+	ui.m_TitleBarWidget->setShareOfferListButtonVisibility( visible );
+}
+
+//============================================================================
 void ActivityBase::setMuteSpeakerVisibility( bool visible )
 {
 	ui.m_TitleBarWidget->setMuteSpeakerVisibility( visible );
@@ -674,6 +692,12 @@ void ActivityBase::setMuteSpeakerVisibility( bool visible )
 void ActivityBase::setMuteMicrophoneVisibility( bool visible )
 {
 	ui.m_TitleBarWidget->setMuteMicrophoneVisibility( visible );
+}
+
+//============================================================================
+void ActivityBase::setMicrophoneVolumeVisibility( bool visible )
+{
+	ui.m_TitleBarWidget->setMicrophoneVolumeVisibility( visible );
 }
 
 //============================================================================
@@ -710,6 +734,12 @@ void ActivityBase::setShareButtonVisibility( bool visible )
 void ActivityBase::setMenuTopButtonVisibility( bool visible )
 {
 	ui.m_TitleBarWidget->setMenuTopButtonVisibility( visible );
+}
+
+//============================================================================
+void ActivityBase::setMenuListButtonVisibility( bool visible )
+{
+	ui.m_TitleBarWidget->setMenuListButtonVisibility( visible );
 }
 
 //============================================================================

@@ -140,14 +140,19 @@ public:
 	//=== title bar button visiblility ====//
 	void						setPowerButtonVisibility( bool visible );
 	void						setHomeButtonVisibility( bool visible );
+	void						setNetStatusVisibility( bool visible );
+	void						setPersonsOfferListButtonVisibility( bool visible );
+	void						setShareOfferListButtonVisibility( bool visible );
 	void						setMuteSpeakerVisibility( bool visible );
 	void						setMuteMicrophoneVisibility( bool visible );
+	void						setMicrophoneVolumeVisibility( bool visible );
 	void						setCameraButtonVisibility( bool visible );
 	void						setCamPreviewVisibility( bool visible );
 	void						setCamViewerCountVisibility( bool visible );
 	void						setTrashButtonVisibility( bool visible );
 	void						setShareButtonVisibility( bool visible );
 	void						setMenuTopButtonVisibility( bool visible );
+	void						setMenuListButtonVisibility( bool visible );
 	void						setBackButtonVisibility( bool visible );
 	//=== bottom bar button visibility ===// 
 	void						setPlayProgressBarVisibility( bool visible );

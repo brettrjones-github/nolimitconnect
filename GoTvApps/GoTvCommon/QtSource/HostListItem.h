@@ -46,12 +46,14 @@ public:
 signals:
     void						signalHostListItemClicked( QListWidgetItem * poItemWidget );
 	void						signalIconButtonClicked( HostListItem* listEntryWidget );
+    void						signalFriendshipButtonClicked( HostListItem* listEntryWidget );
 	void						signalMenuButtonClicked( HostListItem* listEntryWidget );
     void						signalJoinButtonClicked( HostListItem* listEntryWidget );
     void						signalConnectButtonClicked( HostListItem* listEntryWidget );
 
 public slots:
 	void						slotIconButtonClicked( void );
+    void                        slotFrienshipButtonClicked( void );
 	void						slotMenuButtonPressed( void );
 	void						slotMenuButtonReleased( void );
     void						slotJoinButtonPressed( void );

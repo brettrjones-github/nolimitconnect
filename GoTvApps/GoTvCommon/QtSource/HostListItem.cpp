@@ -24,6 +24,7 @@ HostListItem::HostListItem(QWidget *parent  )
 {
 	ui.setupUi( this );
     connect( ui.m_IconButton,       SIGNAL(clicked()),  this, SLOT(slotIconButtonClicked()) );
+    connect( ui.m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotFrienshipButtonClicked() ) );
 	connect( ui.m_MenuButton,       SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
     connect( ui.m_JoinButton,		SIGNAL(pressed()),	this, SLOT(slotJoinButtonPressed()) );
     connect( ui.m_ConnectButton,    SIGNAL( pressed() ), this, SLOT( slotConnectButtonPressed() ) );
@@ -84,6 +85,13 @@ void HostListItem::slotIconButtonClicked()
 {
     LogMsg( LOG_DEBUG, "HostListItem::slotIconButtonClicked" );
 	emit signalIconButtonClicked( this );
+}
+
+//============================================================================
+void HostListItem::slotFrienshipButtonClicked()
+{
+    LogMsg( LOG_DEBUG, "HostListItem::slotFrienshipButtonClicked" );
+    emit signalFriendshipButtonClicked( this );
 }
 
 //============================================================================

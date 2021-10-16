@@ -47,17 +47,18 @@ AppletPopupMenu::AppletPopupMenu( AppCommon& app, QWidget * parent, VxGUID asset
     setAppletType( eAppletPopupMenu );
 	initAppletPopupMenu();
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+	getTitleBarWidget()->setVisible( false );
 
     connect( ui.m_ExitPopupButton, SIGNAL( clicked() ), this, SLOT( close() ) );
     connect( ui.m_MenuItemList, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( itemClicked( QListWidgetItem* ) ) );
 
-    m_MyApp.activityStateChange( this, true );
+    // m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
 AppletPopupMenu::~AppletPopupMenu()
 {
-    m_MyApp.activityStateChange( this, false );
+    // m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================

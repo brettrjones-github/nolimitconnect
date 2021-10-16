@@ -91,7 +91,7 @@ private:
 // +    2 bytes m_NetIdentRes1;	
 // +    1 bytes m_NetIdentRes2;
 // +    1 bytes m_NetIdentRes3;
-// +    8 bytes m_NetIdentRes3;	
+// +    8 bytes m_NetIdentRes4;	
 // +    8 bytes m_LastSessionTime;
 // =   48 bytes
 // +  384 bytes VxNetIdentBase   

@@ -94,7 +94,7 @@ void UserListItem::slotAvatarButtonClicked()
 void UserListItem::slotFriendshipButtonClicked()
 {
     LogMsg( LOG_DEBUG, "UserListItem::slotFriendshipButtonClicked" );
-    emit signalAvatarButtonClicked( this );
+    emit signalFriendshipButtonClicked( this );
 }
 
 //============================================================================

@@ -247,6 +247,11 @@ void GuiUserMgr::updateMyIdent( VxNetIdent* myIdent )
         m_MyIdent = guiUser;
         m_MyOnlineId = m_MyIdent->getMyOnlineId();
     }
+    else
+    {
+        m_MyIdent->setNetIdent( myIdent );
+        m_MyOnlineId = m_MyIdent->getMyOnlineId();
+    }
 
     emit signalMyIdentUpdated( m_MyIdent );
 }

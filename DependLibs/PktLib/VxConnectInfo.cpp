@@ -314,6 +314,7 @@ VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
 {
     if( this != &rhs )
     {
+        *((VxConnectBaseInfo*)this) = *((VxConnectBaseInfo*)&rhs);
         SafeStrCopy( m_OnlineName, rhs.m_OnlineName, MAX_ONLINE_NAME_LEN );
         SafeStrCopy( m_OnlineDesc, rhs.m_OnlineDesc, MAX_ONLINE_DESC_LEN );
 
@@ -324,7 +325,6 @@ VxConnectIdent& VxConnectIdent::operator =( const VxConnectIdent& rhs )
         m_u8Gender = rhs.m_u8Gender;
         m_IdentRes1 = rhs.m_IdentRes1;
         m_IdentRes2 = rhs.m_IdentRes2;
-        m_AvatarGuid = rhs.m_AvatarGuid;
 
         m_NetHostGuid = rhs.m_NetHostGuid;
         m_ChatRoomHostGuid = rhs.m_ChatRoomHostGuid;

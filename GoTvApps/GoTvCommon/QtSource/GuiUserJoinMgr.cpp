@@ -245,6 +245,11 @@ void GuiUserJoinMgr::updateMyIdent( VxNetIdent* myIdent )
         m_MyIdent = guiUserJoin;
         m_MyOnlineId = m_MyIdent->getMyOnlineId();
     }
+    else
+    {
+        m_MyIdent->setNetIdent( myIdent );
+        m_MyOnlineId = m_MyIdent->getMyOnlineId();
+    }
 
     emit signalMyIdentUpdated( m_MyIdent );
 }

@@ -54,15 +54,22 @@ public:
 	void						enableVideoControls( bool enable );
 
 	//=== button visiblility ====//
+	void						setPopupVisibility( void );// for popup dialogs
+
     void				        setBackButtonVisibility( bool visible );
 	void						setCamPreviewVisibility( bool visible );
 	void						setCamViewerCountVisibility( bool visible );
 	void						setCameraButtonVisibility( bool visible );
     void						setHomeButtonVisibility( bool visible );
+	void						setNetStatusVisibility( bool visible );
     void						setMuteSpeakerVisibility( bool visible );
     void						setMuteMicrophoneVisibility( bool visible );
+	void						setMicrophoneVolumeVisibility( bool visible );
     void						setMenuTopButtonVisibility( bool visible );
+	void						setMenuListButtonVisibility( bool visible );
     void						setPowerButtonVisibility( bool visible );
+	void						setPersonsOfferListButtonVisibility( bool visible );
+	void						setShareOfferListButtonVisibility( bool visible );
 	void						setShareButtonVisibility( bool visible );
     void						setTrashButtonVisibility( bool visible );
 
@@ -87,6 +94,7 @@ public:
 	virtual void				setShareButtonColor( QColor iconColor );
 	virtual void				setTopMenuButtonColor( QColor iconColor );
 	virtual void				setBackButtonColor( QColor iconColor );
+
 
 signals:
 	void						signalPowerButtonClicked( void );

@@ -46,6 +46,7 @@ protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotHostListItemClicked( QListWidgetItem* hostItem );
     void                        slotIconButtonClicked( HostListItem* hostItem );
+    void                        slotFriendshipButtonClicked( HostListItem* hostItem );
     void                        slotMenuButtonClicked( HostListItem* hostItem );
     void                        slotJoinButtonClicked( HostListItem* hostItem );
     void                        slotConnectButtonClicked( HostListItem* hostItem );
@@ -56,6 +57,7 @@ protected:
 
     virtual void                onHostListItemClicked( HostListItem* hostItem );
     virtual void                onIconButtonClicked( HostListItem* hostItem );
+    virtual void                onFriendshipButtonClicked( HostListItem* hostItem );
     virtual void                onMenuButtonClicked( HostListItem* hostItem );
     virtual void                onJoinButtonClicked( HostListItem* hostItem );
     virtual void                onConnectButtonClicked( HostListItem* hostItem );

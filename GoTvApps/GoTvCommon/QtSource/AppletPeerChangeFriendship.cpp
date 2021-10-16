@@ -25,9 +25,17 @@ AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget 
     setAppletType( eAppletPeerChangeFriendship );
 	ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+	ui.OkButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
+	ui.OkButton->setIcon( eMyIconCheckMark );
+	ui.CancelButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
+	ui.CancelButton->setIcon( eMyIconRedX );
+
+	getTitleBarWidget()->setPopupVisibility();
+	getBottomBarWidget()->setVisible( false );
 
     connectBarWidgets();
 
+	connect( ui.ToAdministratorButton, SIGNAL( clicked() ), this, SLOT( onPermissionClick() ) );
 	connect( ui.ToFriendButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.ToGuestButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.ToAnonymousButton,	SIGNAL(clicked()), this, SLOT(onPermissionClick()) );

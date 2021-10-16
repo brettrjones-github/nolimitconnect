@@ -326,6 +326,21 @@ void TitleBarWidget::slotBackButtonClicked( void )
 
 //======= button visibility ====//
 //============================================================================
+void TitleBarWidget::setPopupVisibility( void )
+{
+    setNetStatusVisibility( false );
+    setPersonsOfferListButtonVisibility( false );
+    setShareOfferListButtonVisibility( false );
+    setShareButtonVisibility( false );
+
+    enableAudioControls( false );
+    setMicrophoneVolumeVisibility( false );
+    enableVideoControls( false );
+    setMenuTopButtonVisibility( false );
+    setMenuListButtonVisibility( false );
+}
+
+//============================================================================
 void TitleBarWidget::setBackButtonVisibility( bool visible )
 {
     ui.m_BackDlgButton->setVisible( visible );
@@ -356,9 +371,28 @@ void TitleBarWidget::setHomeButtonVisibility( bool visible )
 }
 
 //============================================================================
+void TitleBarWidget::setNetStatusVisibility( bool visible )
+{
+    ui.m_NetAvailStatusWidget->setVisible( visible );
+}
+
+
+//============================================================================
 void TitleBarWidget::setTrashButtonVisibility( bool visible )
 {
 	ui.m_TrashButton->setVisible( visible );
+}
+
+//============================================================================
+void TitleBarWidget::setPersonsOfferListButtonVisibility( bool visible )
+{
+    ui.m_PersonsOfferListButton->setVisible( visible );
+}
+
+//============================================================================
+void TitleBarWidget::setShareOfferListButtonVisibility( bool visible )
+{
+    ui.m_ShareOfferListButton->setVisible( visible );
 }
 
 //============================================================================
@@ -374,6 +408,12 @@ void TitleBarWidget::setMenuTopButtonVisibility( bool visible )
 }
 
 //============================================================================
+void TitleBarWidget::setMenuListButtonVisibility( bool visible )
+{
+    ui.m_MenuButton->setVisible( visible );
+}
+
+//============================================================================
 void TitleBarWidget::setMuteSpeakerVisibility( bool visible )
 {
 	ui.m_MuteSpeakerButton->setVisible( visible );
@@ -383,6 +423,12 @@ void TitleBarWidget::setMuteSpeakerVisibility( bool visible )
 void TitleBarWidget::setMuteMicrophoneVisibility( bool visible )
 {
 	ui.m_MuteMicButton->setVisible( visible );
+}
+
+//============================================================================
+void TitleBarWidget::setMicrophoneVolumeVisibility( bool visible )
+{
+    ui.m_MicVolPeakBar->setVisible( visible );
 }
 
 //============================================================================

@@ -47,6 +47,7 @@ HostListItem* HostListWidget::sessionToWidget( GuiHostSession* hostSession )
 
     connect( hostItem, SIGNAL( signalHostListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotHostListItemClicked( QListWidgetItem * ) ) );
     connect( hostItem, SIGNAL( signalIconButtonClicked( HostListItem * ) ),	        this, SLOT( slotIconButtonClicked( HostListItem * ) ) );
+    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( HostListItem* ) ), this, SLOT( slotFriendshipButtonClicked( HostListItem* ) ) );
     connect( hostItem, SIGNAL( signalMenuButtonClicked( HostListItem * ) ),	        this, SLOT( slotMenuButtonClicked( HostListItem * ) ) );
     connect( hostItem, SIGNAL( signalJoinButtonClicked( HostListItem * ) ),		    this, SLOT( slotJoinButtonClicked( HostListItem * ) ) );
     connect( hostItem, SIGNAL( signalConnectButtonClicked( HostListItem* ) ),       this, SLOT( slotConnectButtonClicked( HostListItem* ) ) );
@@ -156,7 +157,19 @@ void HostListWidget::slotIconButtonClicked( HostListItem* hostItem )
     }
 
     m_ClickEventTimer.startTimer();
-    slotIconButtonClicked(hostItem);
+    onIconButtonClicked(hostItem);
+}
+
+//============================================================================
+void HostListWidget::slotFriendshipButtonClicked( HostListItem* hostItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onFriendshipButtonClicked( hostItem );
 }
 
 //============================================================================
@@ -295,6 +308,23 @@ void HostListWidget::onIconButtonClicked( HostListItem* hostItem )
     if( hostSession )
     {
         emit signalIconButtonClicked( hostSession, hostItem );
+    }
+}
+
+//============================================================================
+void HostListWidget::onFriendshipButtonClicked( HostListItem* hostItem )
+{
+    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
+    if( hostItem )
+    {
+        GuiHostSession* hostSession = hostItem->getHostSession();
+        if( hostSession )
+        {
+            if( hostSession && hostSession->getUserIdent() )
+            {
+                launchChangeFriendship( hostSession->getUserIdent() );
+            }
+        }
     }
 }
 
