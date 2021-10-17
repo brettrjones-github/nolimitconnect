@@ -115,6 +115,8 @@ public:
     static QWidget *            findAppletContentFrame( QWidget * widget );
     static ActivityBase *       findLaunchWindow( QWidget * widget );
     static AppletBase *         findParentApplet( QWidget * widget );
+    static QWidget*             findParentPage( QWidget* parent ); // this should return home or messenger page
+    static QWidget*             findParentContentFrame( QWidget* parent );
 
     static bool                 widgetToPluginSettings( EPluginType pluginType, PluginSettingsWidget* settingsWidget, PluginSetting& pluginSetting );
     static bool                 pluginSettingsToWidget( EPluginType pluginType, PluginSetting& pluginSetting, PluginSettingsWidget* settingsWidget );

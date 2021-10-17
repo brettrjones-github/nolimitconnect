@@ -18,13 +18,16 @@
 
 #include "AppCommon.h"
 #include "ActivityHelpSignal.h"
+#include "AppletPopupMenu.h"
 #include "MyIcons.h"
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
-#include "AppletPopupMenu.h"
+
+#include "GuiHelpers.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
+#include <QFrame>
 
 //============================================================================
 TitleBarWidget::TitleBarWidget( QWidget * parent )
@@ -568,22 +571,48 @@ void TitleBarWidget::slotHostJoinRequestCount( int activeCnt )
 //============================================================================
 void TitleBarWidget::slotPersonsOfferListButtonClicked( void )
 {
-    m_MyApp.getAppletMgr().launchApplet( eAppletPersonOfferList, dynamic_cast<QWidget*>(parent()) );
+    m_MyApp.getAppletMgr().launchApplet( eAppletPersonOfferList, getTitleBarParentPage()  );
 }
 
 //============================================================================
 void TitleBarWidget::slotShareOfferListButtonClicked( void )
 {
-    m_MyApp.getAppletMgr().launchApplet( eAppletShareOfferList, dynamic_cast<QWidget*>(parent()));
+    m_MyApp.getAppletMgr().launchApplet( eAppletShareOfferList, getTitleBarParentPage() );
 }
 
 //============================================================================
 void TitleBarWidget::slotTitleBarMenuButtonClicked( void )
 {
     LogMsg( LOG_DEBUG, "slotTitleBarMenuButtonClicked" );
-    AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.getAppletMgr().launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(parent())));
+    AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.getAppletMgr().launchApplet( eAppletPopupMenu, getTitleBarParentFrame() ) );
     if( popupMenu )
     {
         popupMenu->showTitleBarMenu();
     }
+}
+
+//============================================================================
+QWidget* TitleBarWidget::getTitleBarParentFrame( void )
+{
+    QWidget* parentWdiget = dynamic_cast<QWidget*>(parent());
+    QWidget* frame = GuiHelpers::findParentContentFrame( parentWdiget );
+    if( frame )
+    {
+        parentWdiget = frame;
+    }
+
+    return parentWdiget;
+}
+
+//============================================================================
+QWidget* TitleBarWidget::getTitleBarParentPage( void )
+{
+    QWidget* parentWdiget = dynamic_cast<QWidget*>(parent());
+    QWidget* page = GuiHelpers::findParentPage( parentWdiget );
+    if( page )
+    {
+        parentWdiget = page;
+    }
+
+    return parentWdiget;
 }

@@ -830,7 +830,6 @@ QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
     return pageFrame;
 }
 
-
 //============================================================================
 AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
 {
@@ -1292,6 +1291,77 @@ QWidget * GuiHelpers::findAppletContentFrame( QWidget * widget )
     if( actBase )
     {
         return actBase->getContentItemsFrame();
+    }
+
+    return nullptr;
+}
+
+//============================================================================
+QWidget* GuiHelpers::findParentPage( QWidget* parent ) // this should return home or messenger page
+{
+    // from title bar find the Home page or messenger
+    QFrame* pageFrame = nullptr;
+    QObject* curParent = parent;
+
+    QString launchPageObjName;
+    QString messengerPageObjName;
+
+    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+
+    while( curParent )
+    {
+        QString objName = curParent->objectName();
+        if( (objName == launchPageObjName) || (objName == messengerPageObjName) )
+        {
+            bool foundParentFrame = false;
+            QWidget* baseFrame = dynamic_cast<QWidget*>(curParent->parent());
+            if( baseFrame )
+            {
+                QObjectList childList = baseFrame->children();
+                for( auto iter = childList.begin(); iter != childList.end(); ++iter )
+                {
+                    QFrame* childFrame = dynamic_cast<QFrame*>(*iter);
+                    if( childFrame && (childFrame->objectName() == launchPageObjName || childFrame->objectName() == messengerPageObjName) )
+                    {
+                        pageFrame = childFrame;
+                        foundParentFrame = true;
+                        break;
+                    }
+                }
+            }
+
+            if( foundParentFrame )
+            {
+                break;
+            }
+        }
+
+        if( !curParent->parent() )
+        {
+            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
+            break;
+        }
+        else
+        {
+            curParent = curParent->parent();
+        }
+    }
+
+    return pageFrame;
+}
+
+//============================================================================
+QWidget* GuiHelpers::findParentContentFrame( QWidget* parent )
+{
+    ActivityBase* actBase = findParentActivity( parent );
+    if( actBase )
+    {
+        return actBase->getContentItemsFrame();
+    }
+    else
+    {
+        return findParentPage( parent );
     }
 
     return nullptr;

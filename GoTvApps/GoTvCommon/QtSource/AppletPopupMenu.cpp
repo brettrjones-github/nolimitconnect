@@ -430,11 +430,11 @@ void AppletPopupMenu::onHostSessionActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentContext() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentContext() );
 		break;
 
 	default:
@@ -458,11 +458,11 @@ void AppletPopupMenu::onPersonActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentContext() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentContext() );
 		break;
 
 	default:
@@ -493,14 +493,27 @@ void AppletPopupMenu::onUserSessionActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentContext() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentContext() );
 		break;
 
 	default:
 		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
 	}
+}
+
+//============================================================================
+QWidget* AppletPopupMenu::getParentContext( void )
+{
+	QWidget* parentWdiget = dynamic_cast<QWidget*>(parent());
+	QWidget* page = GuiHelpers::findParentPage( parentWdiget );
+	if( page )
+	{
+		parentWdiget = page;
+	}
+
+	return parentWdiget;
 }

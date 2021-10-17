@@ -80,6 +80,7 @@ private slots:
 
 protected:
 	void						initAppletPopupMenu( void );
+	QWidget*					getParentContext( void );
 
     //=== vars ===//
     Ui::AppletPopupMenuUi		ui;

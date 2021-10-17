@@ -140,6 +140,8 @@ public slots:
 	virtual void				slotTitleBarMenuButtonClicked( void );
 
 protected:
+	QWidget*					getTitleBarParentFrame( void );
+	QWidget*					getTitleBarParentPage( void );
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
 
@@ -148,6 +150,7 @@ protected:
                                                            uint8_t *		pu8Jpg,
                                                            uint32_t		    u32JpgDataLen,
                                                            int				motion0To100000 ) override;
+
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
     GuiOfferClientMgr&          m_OfferClientMgr;
