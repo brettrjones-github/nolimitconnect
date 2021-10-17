@@ -136,7 +136,7 @@ void OfferBarWidget::updateOfferBar( OfferSessionState * offerState )
 			strName = "To ";
 		}
 
-		strName += offerSession->getHisIdent()->getOnlineName();
+		strName += offerSession->getHisIdent()->getOnlineName().c_str();
 		ui.m_FriendButton->setIcon( getMyIcons().getPluginIcon( offerSession->getPluginType() ) );
 
 		QString strFrienshipDescription = offerSession->getHisIdent()->describeMyFriendshipToHim();

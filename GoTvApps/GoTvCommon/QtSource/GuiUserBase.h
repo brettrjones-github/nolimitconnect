@@ -45,9 +45,9 @@ public:
 
     bool                        isOnline( void )                        { return m_IsOnline; }
     VxGUID&                     getMyOnlineId( void )                   { return m_OnlineId; }
-    const char *                getOnlineName( void )                   { return m_NetIdent.getOnlineName(); }
-    const char *                getOnlineDescription( void )            { return m_NetIdent.getOnlineDescription(); }
-    const char*                 getMyOnlineUrl( void )                  { return m_NetIdent.getMyOnlineUrl().c_str(); }
+    std::string                 getOnlineName( void )                   { return std::string( m_NetIdent.getOnlineName() ); }
+    std::string                 getOnlineDescription( void )            { return std::string( m_NetIdent.getOnlineDescription() ); }
+    std::string                 getMyOnlineUrl( void )                  { return m_NetIdent.getMyOnlineUrl(); }
     VxGUID                      getHostThumbId( EHostType hostType, bool defaultToAvatarThumbId ) { return m_NetIdent.getHostThumbId( hostType, defaultToAvatarThumbId ); } 
 
     void                        setMyFriendshipToHim( EFriendState friendState ) { m_NetIdent.setMyFriendshipToHim( friendState ); }

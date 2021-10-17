@@ -45,7 +45,7 @@ public:
     VxGUID&					    getSessionId( void )                        { return m_SessionId; }
 
     VxGUID&					    getMyOnlineId( void )                       { return m_OnlineId; }
-    const char *                getOnlineName( void )                       { return m_UserJoin ? m_UserJoin->getOnlineName() : ""; }
+    std::string                 getOnlineName( void )                       { return m_UserJoin ? m_UserJoin->getOnlineName() : ""; }
 
     bool                        setIsOnline( bool isOnline )
     {

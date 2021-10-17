@@ -362,9 +362,9 @@ FriendListEntryWidget * FriendListWidget::friendToWidget( GuiUser * poFriend )
 //============================================================================
 void FriendListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent )
 {
-	QString strName = netIdent->getOnlineName();
+	QString strName = netIdent->getOnlineName().c_str();
 	strName += " - ";
-	QString strDesc = netIdent->getOnlineDescription();
+	QString strDesc = netIdent->getOnlineDescription().c_str();
     // display in seconds
 	QVariant dispValue( (uint)( netIdent->getLastSessionTimeMs() / 1000 ) );
 	item->setData( Qt::DisplayRole, dispValue );

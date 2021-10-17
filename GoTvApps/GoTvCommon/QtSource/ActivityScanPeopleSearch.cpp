@@ -161,7 +161,7 @@ void ActivityScanPeopleSearch::slotSearchComplete()
 //============================================================================
 void ActivityScanPeopleSearch::slotSearchResult( GuiUser * netIdent )
 {
-	setStatusLabel( QString("Found Match %1").arg( netIdent->getOnlineName() ) );
+	setStatusLabel( QString("Found Match %1").arg( netIdent->getOnlineName().c_str() ) );
 	ui.friendListWidget->updateFriend( netIdent, false );
 }
 

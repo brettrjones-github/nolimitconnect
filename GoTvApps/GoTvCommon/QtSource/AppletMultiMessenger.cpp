@@ -120,7 +120,7 @@ void AppletMultiMessenger::setupMultiSessionActivity( GuiUser * hisIdent )
 	m_VidChatWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 	m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 
-	m_VidChatWidget->setRecordFriendName( m_HisIdent->getOnlineName() );
+	m_VidChatWidget->setRecordFriendName( m_HisIdent->getOnlineName().c_str() );
 
 	ui.m_SessionWidget->setIdents( m_UserMgr.getMyIdent(), hisIdent );
 
@@ -205,7 +205,7 @@ void AppletMultiMessenger::showReasonAccessNotAllowed( void )
 	EPluginAccess accessState = m_HisIdent->getMyAccessPermissionFromHim( m_ePluginType );
 	QString accessDesc = DescribePluginType( m_ePluginType );
 	accessDesc += QObject::tr( " with " );
-	accessDesc += m_HisIdent->getOnlineName();
+	accessDesc += m_HisIdent->getOnlineName().c_str();
 	accessDesc +=  " ";
 
 	if( ePluginAccessOk != accessState )
@@ -234,7 +234,7 @@ void AppletMultiMessenger::slotUserOnlineStatus( GuiUser* user, bool isOnline )
 
     if( m_UserMgr.isUserInSession( user->getMyOnlineId() ) || user->isFriend() )
 	{
-		QString statMsg = user->getOnlineName();
+		QString statMsg = user->getOnlineName().c_str();
 		statMsg += isOnline ? QObject::tr( " is online" ) : QObject::tr( " went offline" );
 		setStatusMsg( statMsg );
 
@@ -273,7 +273,7 @@ bool AppletMultiMessenger::checkForSendAccess( bool sendOfferIfPossible )
 	if( m_CanSend && sendOfferIfPossible && ( false == m_OfferOrResponseIsSent ) )
 	{
 		QString offMsg = QObject::tr( "Requested Text Chat Session with " );
-		offMsg += m_HisIdent->getOnlineName();
+		offMsg += m_HisIdent->getOnlineName().c_str();
 		m_MyApp.toGuiStatusMessage( offMsg.toUtf8().constData() );
 		//m_Engine.fromGuiMultiSessionAction( eMSessionActionChatSessionReq, m_HisIdent->getMyOnlineId(), 0, m_OfferSessionLogic.getOfferSessionId() );
 		if( m_OfferSessionLogic.sendOfferOrResponse() )

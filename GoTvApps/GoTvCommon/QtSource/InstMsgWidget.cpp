@@ -128,7 +128,7 @@ void InstMsgWidget::slotToGuiInstMsg( QString instMsg )
 	}
 
 	// echo back with what was sent to our own screen
-	QString strMsg = m_HisIdent->getOnlineName();
+	QString strMsg = m_HisIdent->getOnlineName().c_str();
 	strMsg += VxTimeUtil::getChatHourMinTimeStamp().c_str();
 	strMsg += ": ";
 	strMsg += instMsg;

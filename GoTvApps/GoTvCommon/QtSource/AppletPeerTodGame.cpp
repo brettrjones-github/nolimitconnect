@@ -71,7 +71,7 @@ void AppletPeerTodGame::setupAppletPeerTodGame( void )
 
 	ui.m_TodGameWidget->getVidWidget()->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 	ui.m_TodGameWidget->getVidWidget()->setRecordFilePath( VxGetDownloadsDirectory().c_str() );
-	ui.m_TodGameWidget->getVidWidget()->setRecordFriendName( m_HisIdent->getOnlineName() );
+	ui.m_TodGameWidget->getVidWidget()->setRecordFriendName( m_HisIdent->getOnlineName().c_str() );
 
 	setVidCamWidget( ui.m_TodGameWidget->getVidWidget() );
 	connect( this, SIGNAL(signalToGuiSetGameValueVar(long,long)),	&m_TodGameLogic,	SLOT(slotToGuiSetGameValueVar(long,long)) );

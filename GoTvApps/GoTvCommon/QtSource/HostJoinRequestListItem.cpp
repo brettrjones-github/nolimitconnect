@@ -120,7 +120,7 @@ void HostJoinRequestListItem::updateWidgetFromInfo( void )
     }
 
     GuiUser* hostIdent = hostSession->getUserIdent();
-    QString strName = hostIdent->getOnlineName();
+    QString strName = hostIdent->getOnlineName().c_str();
     strName += " - ";
     ui.TitlePart1->setText( strName );
 

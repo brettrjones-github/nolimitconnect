@@ -61,7 +61,7 @@ void AppletPeerChangeFriendship::setFriend( GuiUser * poFriend )
 void AppletPeerChangeFriendship::setHisPermissionToMe( EFriendState hisFriendshipToMe )
 {
 	ui.HisPermissionButton->setIcon( getMyIcons().getFriendshipIcon( hisFriendshipToMe ) );
-	QString strHisFriendship = m_Friend->getOnlineName();
+	QString strHisFriendship = m_Friend->getOnlineName().c_str();
 	strHisFriendship += QObject::tr("\'s Friendship To Me-");
 	strHisFriendship += DescribeFriendState(hisFriendshipToMe);
 	ui.HisPermissionLabel->setText(strHisFriendship);
@@ -71,7 +71,7 @@ void AppletPeerChangeFriendship::setHisPermissionToMe( EFriendState hisFriendshi
 void AppletPeerChangeFriendship::setMyPermissionToHim( EFriendState myFriendshipToHim )
 {
 	ui.MyPermissionButton->setIcon( getMyIcons().getFriendshipIcon( myFriendshipToHim ) );
-	QString strHisName = m_Friend->getOnlineName();
+	QString strHisName = m_Friend->getOnlineName().c_str();
 	QString strMyFriendship =   QObject::tr("My Friendship To ");
 	strMyFriendship += strHisName + "-" + DescribeFriendState( myFriendshipToHim );
 	ui.MyPermissionLabel->setText(strMyFriendship);

@@ -262,7 +262,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		m_MyApp.playSound( eSndDefUserBellMessage );
 		enableGameButton( eGameButtonDare, false );
 		enableGameButton( eGameButtonTruth, false );
-		setTodStatusMsg( m_HisIdent->getOnlineName() + QObject::tr(" Dares You"));
+		setTodStatusMsg( m_HisIdent->getOnlineName().c_str() + QObject::tr(" Dares You"));
 		setGameButtonText( eGameButtonDare, QObject::tr("Perform Dare") );
 		setGameButtonText( eGameButtonTruth, QObject::tr("Perform Dare") );
 		m_TodGameStats.m_MyPlayerStats.m_s32DareChallengeCnt++;
@@ -279,7 +279,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		setGameButtonText( eGameButtonDare, QObject::tr("Send Challenge Dare") );
 		enableGameButton( eGameButtonTruth, true );
 		setGameButtonText( eGameButtonTruth, QObject::tr("Send Challenge Truth") );
-		setTodStatusMsg( m_HisIdent->getOnlineName() + QObject::tr(" has given you 1 Dare Point"));
+		setTodStatusMsg( m_HisIdent->getOnlineName().c_str() + QObject::tr(" has given you 1 Dare Point"));
 		m_TodGameStats.m_MyPlayerStats.m_s32DareAcceptedCnt++;
 		updateMyStats();
 		sendGameStats();
@@ -293,7 +293,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		setGameButtonText( eGameButtonDare, QObject::tr("Challenge Dare") );
 		enableGameButton( eGameButtonTruth, true );
 		setGameButtonText( eGameButtonTruth, QObject::tr("Challenge Truth") );
-		setTodStatusMsg( m_HisIdent->getOnlineName() + QObject::tr( " REJECTED your Dare performance" ) );
+		setTodStatusMsg( m_HisIdent->getOnlineName().c_str() + QObject::tr( " REJECTED your Dare performance" ) );
 		m_TodGameStats.m_MyPlayerStats.m_s32DareRejectedCnt++;
 		updateMyStats();
 		sendGameStats();
@@ -306,7 +306,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		m_MyApp.playSound( eSndDefUserBellMessage );
 		enableGameButton( eGameButtonDare, false );
 		enableGameButton( eGameButtonTruth, false );
-		setTodStatusMsg(  m_HisIdent->getOnlineName() + QObject::tr( " Says tell truth" ) );
+		setTodStatusMsg(  m_HisIdent->getOnlineName().c_str() + QObject::tr( " Says tell truth" ) );
 		setGameButtonText( eGameButtonDare, QObject::tr("Tell Truth") );
 		setGameButtonText( eGameButtonTruth, QObject::tr("Tell Truth") );
 		m_TodGameStats.m_MyPlayerStats.m_s32TruthChallengeCnt++;
@@ -323,7 +323,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		setGameButtonText( eGameButtonDare, QObject::tr("Send Challenge Dare") );
 		enableGameButton( eGameButtonTruth, true );
 		setGameButtonText( eGameButtonTruth, QObject::tr("Send Challenge Truth") );
-		setTodStatusMsg( m_HisIdent->getOnlineName() + QObject::tr(" has given you 1 Truth Point" ));
+		setTodStatusMsg( m_HisIdent->getOnlineName().c_str() + QObject::tr(" has given you 1 Truth Point" ));
 		m_TodGameStats.m_MyPlayerStats.m_s32TruthAcceptedCnt++;
 		updateMyStats();
 		sendGameStats();
@@ -337,7 +337,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		setGameButtonText( eGameButtonDare, tr("Challenge Dare") );
 		enableGameButton( eGameButtonTruth, true );
 		setGameButtonText( eGameButtonTruth, tr("Challenge Truth") );
-		setTodStatusMsg( m_HisIdent->getOnlineName() + QObject::tr(" REJECTED your Truth speech") );
+		setTodStatusMsg( m_HisIdent->getOnlineName().c_str() + QObject::tr(" REJECTED your Truth speech") );
 		m_TodGameStats.m_MyPlayerStats.m_s32TruthRejectedCnt++;
 		updateMyStats();
 		sendGameStats();
@@ -347,7 +347,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 
 		//TXed
 	case eTxedDareChallenge:
-		setTodStatusMsg( QString(" Daring ") + m_HisIdent->getOnlineName() );
+		setTodStatusMsg( QString(" Daring ") + m_HisIdent->getOnlineName().c_str() );
 		enableGameButton( eGameButtonTruth, true );
 		setGameButtonText( eGameButtonTruth, QObject::tr("Dare Performed")  );
 		enableGameButton( eGameButtonDare, true );
@@ -356,7 +356,7 @@ void TodGameLogic::setGameStatus( EGameStatus eGameStatus )
 		break;
 
 	case eTxedTruthChallenge:
-		setTodStatusMsg( QString(" Challenging ") + m_HisIdent->getOnlineName() + QObject::tr(" to tell truth") );
+		setTodStatusMsg( QString(" Challenging ") + m_HisIdent->getOnlineName().c_str() + QObject::tr(" to tell truth") );
 		enableGameButton( eGameButtonTruth, true );
 		setGameButtonText( eGameButtonTruth, QObject::tr("User Told Truth") );
 		enableGameButton( eGameButtonDare, true );
@@ -431,13 +431,13 @@ void TodGameLogic::updateMyStats( void )
 void TodGameLogic::updateFriendStats( void )
 {
 	m_TodGameWidget->ui.FriendDaresLabel->setText(QString( tr(" %1 Dares Accepted %2 Rejected %3 Challenges %4") ).
-		arg(m_HisIdent->getOnlineName()).
+		arg(m_HisIdent->getOnlineName().c_str() ).
 		arg(m_TodGameStats.m_FriendPlayerStats.getVar(eTodGameVarIdDareChallengeCnt)).
 		arg(m_TodGameStats.m_FriendPlayerStats.getVar(eTodGameVarIdDareAcceptedCnt)).
 		arg(m_TodGameStats.m_FriendPlayerStats.getVar(eTodGameVarIdDareRejectedCnt)) );
 
 	m_TodGameWidget->ui.FriendTruthsLabel->setText(QString( tr(" %1 Truths Accepted %2 Rejected %3 Challenges %4") ).
-		arg(m_HisIdent->getOnlineName()).
+		arg(m_HisIdent->getOnlineName().c_str() ).
 		arg(m_TodGameStats.m_FriendPlayerStats.getVar(eTodGameVarIdTruthAcceptedCnt)).
 		arg(m_TodGameStats.m_FriendPlayerStats.getVar(eTodGameVarIdTruthRejectedCnt)).
 		arg(m_TodGameStats.m_FriendPlayerStats.getVar(eTodGameVarIdTruthChallengeCnt)) );

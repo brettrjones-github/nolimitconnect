@@ -39,8 +39,8 @@ void IdentWidget::updateGuiFromData( GuiUser * netIdent )
 {
 	setOnlineState( netIdent->isOnline() );
 	this->FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
-	this->FriendNameLabel->setText( netIdent->getOnlineName() );
-	this->DescTextLabel->setText( netIdent->getOnlineDescription() );
+	this->FriendNameLabel->setText( netIdent->getOnlineName().c_str() );
+	this->DescTextLabel->setText( netIdent->getOnlineDescription().c_str() );
 	this->m_FriendIconButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
 	this->m_TodLabel->setText( QString("Truths: %1 Dares: %2").arg(netIdent->getTruthCount()).arg(netIdent->getDareCount()) );
 }

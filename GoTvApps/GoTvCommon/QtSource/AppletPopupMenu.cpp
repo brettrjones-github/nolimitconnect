@@ -203,7 +203,7 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend )
 	// populate title
 	QString strTitle = poSelectedFriend->describeMyFriendshipToHim();
 	strTitle += ": ";
-	strTitle += poSelectedFriend->getOnlineName();
+	strTitle += poSelectedFriend->getOnlineName().c_str();
 	setTitle( strTitle );
 	// populate menu
 	EPluginAccess ePluginAccess;

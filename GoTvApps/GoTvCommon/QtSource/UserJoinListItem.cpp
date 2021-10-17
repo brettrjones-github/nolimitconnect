@@ -124,9 +124,9 @@ void UserJoinListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    QString strName = hostIdent->getOnlineName();
+    QString strName = hostIdent->getOnlineName().c_str();
     strName += " - ";
-    QString strDesc = hostIdent->getOnlineDescription();
+    QString strDesc = hostIdent->getOnlineDescription().c_str();
 
     if( hostIdent->isMyself() )
     {

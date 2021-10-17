@@ -116,7 +116,7 @@ void AppletClientRandomConnect::slotSearchResult( GuiUser * netIdent )
 {
     m_MyApp.playSound( eSndDefUserBellMessage );
     QString foundMatch = QObject::tr( "Search Complete " );
-    foundMatch += netIdent->getOnlineName();
+    foundMatch += netIdent->getOnlineName().c_str();
     m_MyApp.toGuiUserMessage( foundMatch.toUtf8().constData(), netIdent->getOnlineName() );
     ui.m_FriendListWidget->updateFriend( netIdent, false );
 }
