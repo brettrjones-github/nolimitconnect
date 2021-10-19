@@ -192,6 +192,8 @@ void AppCommon::completeLogin( void )
     {
         m_AppletMgr.launchApplet( lastLaunchedApplet, m_AppletMgr.getAppletFrame( lastLaunchedApplet ) );
     }
+
+    onUserLoggedOn();
 }
 
 //============================================================================

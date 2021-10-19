@@ -47,6 +47,7 @@ public:
 	virtual void                onAppCommonCreated( void ) = 0;
 	virtual void                onMessengerReady( bool ready )				{ }
 	virtual bool                isMessengerReady( void );
+	virtual void                onSystemReady( bool ready ) { }
 
 // from gui interface
 	virtual OfferSessionState *	getTopGuiOfferSession( void ); // returns null if no session offers

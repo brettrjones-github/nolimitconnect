@@ -56,6 +56,7 @@ protected:
     void						unlockClientList( void )					{ m_UserJoinClientMutex.unlock(); }
 
     bool                        saveToDatabase( UserJoinInfo* joinInfo, bool isLocked = false );
+    void                        removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked );
 
     P2PEngine&					m_Engine;
     UserJoinInfoDb              m_UserJoinInfoDb;

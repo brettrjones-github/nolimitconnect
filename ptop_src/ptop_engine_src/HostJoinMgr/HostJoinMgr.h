@@ -34,6 +34,7 @@ public:
     void                        fromGuiUserLoggedOn( void );
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
     virtual EJoinState	        fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
+    void                        fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList );
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
 
@@ -58,6 +59,7 @@ protected:
     void						unlockClientList( void )					{ m_HostJoinClientMutex.unlock(); }
 
     bool                        saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked = false );
+    void                        removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked );
 
     P2PEngine&					m_Engine;
     HostJoinInfoDb              m_HostJoinInfoDb;

@@ -35,6 +35,7 @@ public:
     void                        onAppCommonCreated( void );
     void                        onMessengerReady( bool ready );
     bool                        isMessengerReady( void );
+    virtual void                onSystemReady( bool ready );
 
     GuiHostJoin *               getMyIdent( void )                          { return m_MyIdent; }  
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  

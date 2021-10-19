@@ -616,6 +616,9 @@ public:
     bool						loadLastUserAccount( void );
     void                        onMessengerReady( bool isReady );
     bool                        isMessengerReady( void ) { return m_IsMessengerReady; }
+    void                        onUserLoggedOn( void );
+    void                        checkSystemReady( void );
+    void                        onSystemReady( void );
 
 signals:
     void						signalMessengerReady( bool isReady );    // emitted when messenger ready state changes
@@ -822,6 +825,8 @@ private:
     ActivityAppSetup *          m_AppSetupDlg = nullptr;
     QElapsedTimer               m_ElapsedTimer;
     bool                        m_IsMessengerReady{ false };
+    bool                        m_IsLoggedOn{ false };
+    bool                        m_IsSystemReady{ false };
 
 //    KodiThread *                m_KodiThread;
 };

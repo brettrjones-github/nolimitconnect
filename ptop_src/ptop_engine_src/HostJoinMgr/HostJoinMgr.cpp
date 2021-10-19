@@ -18,6 +18,7 @@
 #include "HostJoinCallbackInterface.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseSessionInfo.h>
 
 #include <CoreLib/VxGlobals.h>
@@ -46,6 +47,22 @@ void HostJoinMgr::fromGuiUserLoggedOn( void )
 
         clearHostJoinInfoList();
         m_HostJoinInfoDb.getAllHostJoins( m_HostJoinInfoList );
+        for( auto* joinInfo : m_HostJoinInfoList )
+        {
+            if( !joinInfo->getNetIdent() )
+            {
+                VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( joinInfo->getOnlineId() );
+                if( netIdent )
+                {
+                    joinInfo->setNetIdent( netIdent );
+                }
+                else if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isIdentValid() )
+                {
+                    // is myself
+                    joinInfo->setNetIdent( m_Engine.getMyNetIdent() );
+                }
+            }
+        }
 
         m_HostJoinListInitialized = true;
         unlockResources();
@@ -77,9 +94,9 @@ void HostJoinMgr::addHostJoinMgrClient( HostJoinCallbackInterface * client, bool
 }
 
 //============================================================================
-void HostJoinMgr::announceHostJoinRequested( HostJoinInfo * assetInfo )
+void HostJoinMgr::announceHostJoinRequested( HostJoinInfo * hostInfo )
 {
-    HostJoinInfo * userHostInfo = dynamic_cast<HostJoinInfo *>( assetInfo );
+    HostJoinInfo * userHostInfo = dynamic_cast<HostJoinInfo *>(hostInfo);
     if( userHostInfo )
     {
 	    LogMsg( LOG_INFO, "HostJoinMgr::announceHostJoinRequested start" );
@@ -102,9 +119,9 @@ void HostJoinMgr::announceHostJoinRequested( HostJoinInfo * assetInfo )
 }
 
 //============================================================================
-void HostJoinMgr::announceHostJoinUpdated( HostJoinInfo * assetInfo )
+void HostJoinMgr::announceHostJoinUpdated( HostJoinInfo * hostInfo )
 {
-    HostJoinInfo * userHostInfo = dynamic_cast<HostJoinInfo *>( assetInfo );
+    HostJoinInfo * userHostInfo = dynamic_cast<HostJoinInfo *>(hostInfo);
     if( userHostInfo )
     {
         lockClientList();
@@ -126,6 +143,7 @@ void HostJoinMgr::announceHostJoinUpdated( HostJoinInfo * assetInfo )
 //============================================================================
 void HostJoinMgr::announceHostJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
 {
+    removeFromDatabase( hostOnlineId, pluginType, false );
 	lockClientList();
 	std::vector<HostJoinCallbackInterface *>::iterator iter;
 	for( iter = m_HostJoinClients.begin();	iter != m_HostJoinClients.end(); ++iter )
@@ -176,8 +194,11 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     joinInfo->setInfoModifiedTime( timeNowMs );
     joinInfo->setLastConnectTime( timeNowMs );
     joinInfo->setLastJoinTime( timeNowMs );
+    if( wasAdded )
+    {
+        m_HostJoinInfoList.push_back( joinInfo );
+    }
     
-
     saveToDatabase( joinInfo, true );
     unlockResources();
 
@@ -267,6 +288,35 @@ bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked )
     }
 
     return result;
+}
+
+//============================================================================
+void HostJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked )
+{
+    if( !resourcesLocked )
+    {
+        lockResources();
+    }
+
+    m_HostJoinInfoDb.removeHostJoin( hostOnlineId, pluginType );
+    if( !resourcesLocked )
+    {
+        unlockResources();
+    }
+}
+
+//============================================================================
+void HostJoinMgr::fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList )
+{
+    // NOTE: assumes resources have been locked
+    HostJoinInfo* joinFoundInfo = nullptr;
+    for( auto* joinInfo : m_HostJoinInfoList )
+    {
+        if( joinInfo->getPluginType() == pluginType && joinInfo->getJoinState() == joinState )
+        {
+            hostJoinList.push_back(joinInfo);
+        }
+    }
 }
 
 //============================================================================

@@ -28,8 +28,8 @@ GuiHostJoinMgr::GuiHostJoinMgr( AppCommon& app )
 //============================================================================
 void GuiHostJoinMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalHostJoinRequested( HostJoinInfo ) ),	                                this, SLOT( slotInternalHostJoinRequested( HostJoinInfo ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinUpdated( HostJoinInfo ) ),                                     this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinRequested( HostJoinInfo* ) ),	                                this, SLOT( slotInternalHostJoinRequested( HostJoinInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinUpdated( HostJoinInfo* ) ),                                     this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinRemoved( VxGUID, EPluginType ) ),	                            this, SLOT( slotInternalHostJoinRemoved( VxGUID, EPluginType ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinOfferState( VxGUID, EPluginType, EOfferState ) ),              this, SLOT( slotInternalHostJoinOfferState( VxGUID, EPluginType, EOfferState ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ),    this, SLOT( slotInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
@@ -46,8 +46,22 @@ bool GuiHostJoinMgr::isMessengerReady( void )
 //============================================================================
 void GuiHostJoinMgr::onMessengerReady( bool ready )
 {
+}
+
+//============================================================================
+void GuiHostJoinMgr::onSystemReady( bool ready )
+{
     if( ready )
     {
+        std::vector<HostJoinInfo*> hostJoinList;
+        m_MyApp.getEngine().getHostJoinMgr().lockResources();
+        m_MyApp.getEngine().getHostJoinMgr().fromGuiGetJoinedStateList( ePluginTypeHostGroup, eJoinStateJoinRequested, hostJoinList );
+        for( auto hostJoinInfo : hostJoinList )
+        {
+            updateHostJoin( hostJoinInfo );
+        }
+
+        m_MyApp.getEngine().getHostJoinMgr().unlockResources();
         updateHostRequestCount( true );
     }
 }
@@ -197,22 +211,41 @@ GuiHostJoin* GuiHostJoinMgr::getHostJoin( VxGUID& onlineId )
 //============================================================================
 GuiHostJoin* GuiHostJoinMgr::updateHostJoin( HostJoinInfo* hostJoinInfo )
 {
+    if( !hostJoinInfo )
+    {
+        LogMsg( LOG_ERROR, "GuiHostJoinMgr::updateHostJoin invalid hostJoinInfo param" );
+        return nullptr;
+    }
+
+    if( !hostJoinInfo->getNetIdent() )
+    {
+        LogMsg( LOG_ERROR, "GuiHostJoinMgr::updateHostJoin hostJoinInfo does not contain a net ident" );
+        return nullptr;
+    }
+
     EHostType hostType = PluginTypeToHostType( hostJoinInfo->getPluginType() );
     GuiHostJoin* guiHostJoin = findHostJoin( hostJoinInfo->getOnlineId() );
-    if( guiHostJoin )
+    bool wasAdded = false;
+    if( !guiHostJoin )
     {
-        guiHostJoin->addHostType( hostType );
-        guiHostJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
-        onHostJoinUpdated( guiHostJoin );
+        guiHostJoin = new GuiHostJoin( m_MyApp );
+        m_HostJoinList[guiHostJoin->getMyOnlineId()] = guiHostJoin;
+        wasAdded = true;
+    }
+
+    guiHostJoin->setNetIdent( hostJoinInfo->getNetIdent() );
+    guiHostJoin->addHostType( hostType );
+    guiHostJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
+        
+    if( wasAdded )
+    {
+        onHostJoinAdded( guiHostJoin );
     }
     else
     {
-        guiHostJoin = new GuiHostJoin( m_MyApp );
-        guiHostJoin->setNetIdent( hostJoinInfo->getNetIdent() );
-        guiHostJoin->addHostType( hostType );
-        m_HostJoinList[guiHostJoin->getMyOnlineId()] = guiHostJoin;
-        onHostJoinAdded( guiHostJoin );
+        onHostJoinUpdated( guiHostJoin );
     }
+
 
     return guiHostJoin;
 }

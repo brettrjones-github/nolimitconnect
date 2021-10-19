@@ -18,6 +18,7 @@
 #include "UserJoinCallbackInterface.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseSessionInfo.h>
 
 #include <CoreLib/VxGlobals.h>
@@ -46,6 +47,22 @@ void UserJoinMgr::fromGuiUserLoggedOn( void )
 
         clearUserJoinInfoList();
         m_UserJoinInfoDb.getAllUserJoins( m_UserJoinInfoList );
+        for( auto* joinInfo : m_UserJoinInfoList )
+        {
+            if( !joinInfo->getNetIdent() )
+            {
+                VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( joinInfo->getOnlineId() );
+                if( netIdent )
+                {
+                    joinInfo->setNetIdent( netIdent );
+                }
+                else if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isIdentValid() )
+                {
+                    // is myself
+                    joinInfo->setNetIdent( m_Engine.getMyNetIdent() );
+                }
+            }
+        }
 
         m_UserJoinListInitialized = true;
         unlockResources();
@@ -126,6 +143,8 @@ void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * joinInfo )
 //============================================================================
 void UserJoinMgr::announceUserJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
 {
+    removeFromDatabase( hostOnlineId, pluginType, false );
+
 	lockClientList();
 	std::vector<UserJoinCallbackInterface *>::iterator iter;
 	for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )
@@ -174,6 +193,10 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
     joinInfo->setInfoModifiedTime( timeNowMs );
     joinInfo->setLastConnectTime( timeNowMs );
     joinInfo->setLastJoinTime( timeNowMs );
+    if( wasAdded )
+    {
+        m_UserJoinInfoList.push_back( joinInfo );
+    }
 
     saveToDatabase( joinInfo, true );
 
@@ -223,6 +246,21 @@ bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo, bool isLocked )
     }
 
     return result;
+}
+
+//============================================================================
+void UserJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked )
+{
+    if( !resourcesLocked )
+    {
+        lockResources();
+    }
+
+    m_UserJoinInfoDb.removeUserJoin( hostOnlineId, pluginType );
+    if( !resourcesLocked )
+    {
+        unlockResources();
+    }
 }
 
 //============================================================================

@@ -2226,7 +2226,44 @@ void AppCommon::onMessengerReady( bool isReady )
 		m_HostJoinMgr.onMessengerReady( isReady );
 		m_UserJoinMgr.onMessengerReady( isReady );
 		m_ConnectMgr.onMessengerReady( isReady );
+		checkSystemReady();
 	}
+}
+
+//============================================================================
+void AppCommon::onUserLoggedOn( void )
+{
+	if( !m_IsLoggedOn )
+	{
+		m_IsLoggedOn = true;
+		checkSystemReady();
+	}
+}
+
+//============================================================================
+void AppCommon::checkSystemReady( void )
+{
+	if( !m_IsSystemReady && m_IsMessengerReady && m_IsLoggedOn )
+	{
+		// one time only each application and user ready at startup
+		m_IsSystemReady = true;
+		
+		m_ThumbMgr.onSystemReady( m_IsSystemReady );
+		m_UserMgr.onSystemReady( m_IsSystemReady );
+		m_OfferClientMgr.onSystemReady( m_IsSystemReady );
+		m_OfferHostMgr.onSystemReady( m_IsSystemReady );
+		m_HostJoinMgr.onSystemReady( m_IsSystemReady );
+		m_UserJoinMgr.onSystemReady( m_IsSystemReady );
+		m_ConnectMgr.onSystemReady( m_IsSystemReady );
+
+		onSystemReady();
+	}
+}
+
+//============================================================================
+void AppCommon::onSystemReady( void )
+{
+
 }
 
 //============================================================================
