@@ -50,12 +50,15 @@ public:
     GuiHostJoin*                    getHostJoin( VxGUID& onlineId );
     std::map<VxGUID, GuiHostJoin*>& getHostJoinList( void )             { return m_HostJoinList; }
 
+    void                        joinAccepted( GuiHostJoin* hostJoin, EHostType hostType );
+    void                        joinRejected( GuiHostJoin* hostJoin, EHostType hostType );
+
 signals:
     void                        signalHostJoinRequestCount( int requestCnt );
 
     void                        signalHostJoinRequested( GuiHostJoin* user );
     void				        signalHostJoinUpdated( GuiHostJoin* user );
-    void				        signalHostJoinRemoved( VxGUID onlineId, EHostType hostType );
+    void				        signalHostJoinRemoved( VxGUID& onlineId, EHostType hostType );
     void                        signalHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
     void                        signalHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline );
 

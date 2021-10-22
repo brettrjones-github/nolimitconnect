@@ -1214,6 +1214,43 @@ int GuiHelpers::friendStateToComboIdx( EFriendState friendState )
 }
 
 //============================================================================
+void GuiHelpers::fillJoinRequest( QComboBox* comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinRequested ) );
+        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinAccepted ) );
+        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinDenied ) );
+    }
+}
+
+//============================================================================
+EJoinState GuiHelpers::comboIdxToJoinState( int comboIdx )
+{
+    switch( comboIdx )
+    {
+    case 0: return eJoinStateJoinRequested;
+    case 1: return eJoinStateJoinAccepted;
+    default: return  eJoinStateJoinDenied;
+    }
+}
+
+//============================================================================
+uint8_t GuiHelpers::joinRequestToIndex( EJoinState joinState )
+{
+    switch( joinState )
+    {
+    case eJoinStateJoinRequested:
+        return 0;
+    case eJoinStateJoinAccepted:
+        return 1;
+    default:
+        return 2;
+    }
+}
+
+//============================================================================
 void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox *  age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
     if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )

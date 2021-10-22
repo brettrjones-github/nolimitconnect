@@ -618,7 +618,6 @@ public:
     bool                        isMessengerReady( void ) { return m_IsMessengerReady; }
     void                        onUserLoggedOn( void );
     void                        checkSystemReady( void );
-    void                        onSystemReady( void );
 
 signals:
     void						signalMessengerReady( bool isReady );    // emitted when messenger ready state changes
@@ -661,6 +660,7 @@ signals:
 	void						signalMultiSessionAction( VxGUID idPro, EMSessionAction mSessionAction, int pos0to100000 );
 
 	void						signalToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
+    void                        signalSystemReady( bool isReady );
 
 protected slots:
 

@@ -45,9 +45,6 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
 	ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
 
-	m_MuteMic			= GetAppInstance().getEngine().fromGuiIsMicrophoneMuted();
-	m_MuteSpeaker		= GetAppInstance().getEngine().fromGuiIsSpeakerMuted();
-	m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
     ui.m_PersonsOfferListButton->setIcon( eMyIconPersonsOfferList );
     ui.m_ShareOfferListButton->setIcon( eMyIconOfferList );
     ui.m_MenuButton->setIcon( eMyIconMenu );
@@ -103,6 +100,27 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( &m_OfferClientMgr,             SIGNAL( signalShareOfferCount( int ) ),      this, SLOT( slotShareOfferListCount( int ) ) );
     connect( &m_MyApp.getHostJoinMgr(),     SIGNAL( signalHostJoinRequestCount( int ) ), this, SLOT( slotHostJoinRequestCount( int ) ) );
     connect( ui.m_MenuButton,               SIGNAL( clicked() ),                         this, SLOT( slotTitleBarMenuButtonClicked() ) );
+
+    updateTitleBar();
+    connect( &m_MyApp,                      SIGNAL( signalSystemReady( bool ) ),         this, SLOT( slotSystemReady( bool ) ) );
+}
+
+//============================================================================
+void TitleBarWidget::updateTitleBar( void )
+{
+    m_MuteMic = GetAppInstance().getEngine().fromGuiIsMicrophoneMuted();
+    m_MuteSpeaker = GetAppInstance().getEngine().fromGuiIsSpeakerMuted();
+    m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
+    update();
+}
+
+//============================================================================
+void TitleBarWidget::slotSystemReady( bool isReady )
+{
+    if( isReady )
+    {
+        updateTitleBar();
+    }
 }
 
 //============================================================================
@@ -571,7 +589,7 @@ void TitleBarWidget::slotHostJoinRequestCount( int activeCnt )
 //============================================================================
 void TitleBarWidget::slotPersonsOfferListButtonClicked( void )
 {
-    m_MyApp.getAppletMgr().launchApplet( eAppletPersonOfferList, getTitleBarParentPage()  );
+    m_MyApp.getAppletMgr().launchApplet( eAppletHostJoinRequestList, getTitleBarParentPage()  );
 }
 
 //============================================================================

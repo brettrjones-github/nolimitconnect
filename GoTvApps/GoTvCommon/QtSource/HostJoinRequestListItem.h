@@ -20,7 +20,7 @@
 #include <QListWidgetItem>
 #include <QWidget>
 
-class GuiHostSession;
+class GuiHostJoinSession;
 
 class HostJoinRequestListItem : public QWidget, public QListWidgetItem
 {
@@ -32,8 +32,8 @@ public:
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
 
-    void                        setHostSession( GuiHostSession* hostSession );
-    GuiHostSession*             getHostSession( void );
+    void                        setHostSession( GuiHostJoinSession* hostSession );
+    GuiHostJoinSession*         getHostSession( void );
 
     VxPushButton*               getAvatarButton( void )         { return ui.m_AvatarButton; }
     VxPushButton*               getFriendshipButton( void )     { return ui.m_FriendshipButton; }

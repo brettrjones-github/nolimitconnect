@@ -14,7 +14,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "HostJoinRequestListItem.h"
-#include "GuiHostSession.h"
+#include "GuiHostJoinSession.h"
 #include "GuiParams.h"
 
 //============================================================================
@@ -29,23 +29,26 @@ HostJoinRequestListItem::HostJoinRequestListItem(QWidget *parent  )
     connect( ui.m_AcceptButton,		  SIGNAL(pressed()),	this, SLOT(slotAcceptButtonPressed()) );
     connect( ui.m_RejectButton,       SIGNAL( pressed() ), this, SLOT( slotRejectButtonPressed() ) );
    
-    ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
+    ui.m_AvatarButton->setFixedSize( eButtonSizeMedium );
     ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
-    ui.m_FriendshipButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
+    ui.m_FriendshipButton->setFixedSize( eButtonSizeMedium );
     ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
-    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
+    ui.m_MenuButton->setFixedSize( eButtonSizeMedium );
     ui.m_MenuButton->setIcon( eMyIconMenu );
 
-    ui.m_AcceptButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_AcceptButton->setFixedSize( eButtonSizeTiny );
     ui.m_AcceptButton->setIcon( eMyIconAcceptNormal );
-    ui.m_RejectButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_RejectButton->setFixedSize( eButtonSizeTiny );
     ui.m_RejectButton->setIcon( eMyIconCancelNormal );
+    QSize sizeHint( 200, GuiParams::getButtonSize( eButtonSizeMedium ).height() + 4 );
+    setSizeHint( sizeHint );
+    setFixedHeight( sizeHint.height() );
 }
 
 //============================================================================
 HostJoinRequestListItem::~HostJoinRequestListItem()
 {
-    GuiHostSession * hostSession = (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiHostJoinSession * hostSession = (GuiHostJoinSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -73,15 +76,15 @@ void HostJoinRequestListItem::mousePressEvent(QMouseEvent * event)
 }
 
 //============================================================================
-void HostJoinRequestListItem::setHostSession( GuiHostSession* hostSession )
+void HostJoinRequestListItem::setHostSession( GuiHostJoinSession* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
 }
 
 //============================================================================
-GuiHostSession * HostJoinRequestListItem::getHostSession( void )
+GuiHostJoinSession * HostJoinRequestListItem::getHostSession( void )
 {
-    return (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    return (GuiHostJoinSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
@@ -112,14 +115,14 @@ void HostJoinRequestListItem::slotMenuButtonReleased( void )
 //============================================================================
 void HostJoinRequestListItem::updateWidgetFromInfo( void )
 {
-    GuiHostSession* hostSession = getHostSession();
+    GuiHostJoinSession* hostSession = getHostSession();
     if( !hostSession || !hostSession->getUserIdent() )
     {
         LogMsg( LOG_ERROR, "HostJoinRequestListItem::updateWidgetFromInfo null ident" );
         return;
     }
 
-    GuiUser* hostIdent = hostSession->getUserIdent();
+    GuiHostJoin* hostIdent = hostSession->getUserIdent();
     QString strName = hostIdent->getOnlineName().c_str();
     strName += " - ";
     ui.TitlePart1->setText( strName );
@@ -177,23 +180,28 @@ void HostJoinRequestListItem::updateWidgetFromInfo( void )
 //============================================================================
 void HostJoinRequestListItem::setJoinedState( EJoinState joinState )
 {
-    // todo update join 
     switch( joinState )
     {
     case eJoinStateJoinAccepted:
         showAcceptButton( false );
         showRejectButton( true );
         break;
-    case eJoinStateSending:
-    case eJoinStateSendFail:
-    case eJoinStateSendAcked:
     case eJoinStateJoinRequested:
+        showAcceptButton( true );
+        showRejectButton( true );
+        break;
+    case eJoinStateJoinDenied:
         showAcceptButton( true );
         showRejectButton( false );
         break;
-    case eJoinStateJoinDenied:
+
+    case eJoinStateSending:
+    case eJoinStateSendFail:
+    case eJoinStateSendAcked:
     case eJoinStateNone:
     default:
+        showAcceptButton( true );
+        showRejectButton( true );
         break;
     }
 }
@@ -203,7 +211,6 @@ void HostJoinRequestListItem::showAcceptButton( bool makeVisible )
 {
     ui.m_AcceptButton->setVisible( makeVisible );
     ui.m_AcceptLabel->setVisible( makeVisible );
-
 }
 
 //============================================================================

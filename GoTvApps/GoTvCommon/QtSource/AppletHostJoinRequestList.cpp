@@ -15,44 +15,42 @@
 
 #include <app_precompiled_hdr.h>
 #include "AppletHostJoinRequestList.h"
-#include "ActivityYesNoMsgBox.h"
+#include "GuiHostJoinMgr.h"
+#include "GuiHostJoin.h"
+#include "GuiHostJoinSession.h"
 
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "GuiHelpers.h"	
 #include "GuiParams.h"
 
-#include "FileXferWidget.h"
-#include "GuiFileXferSession.h"
 #include "MyIcons.h"
-#include "ActivityDownloadItemMenu.h"
 
-#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-#include <PktLib/VxSearchDefs.h>
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxFileInfo.h>
 
 //============================================================================
 AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* parent )
 : AppletBase( OBJNAME_APPLET_PERSONS_OFFER_LIST, app, parent )
+, m_HostJoinMgr( app.getHostJoinMgr() )
 {
     setAppletType( eAppletHostJoinRequestList );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+	GuiHelpers::fillJoinRequest( ui.m_RequestStateComboBox );
 
-    //connectBarWidgets();
+	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
+	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );
+	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRemoved( VxGUID&, EHostType ) ), this, SLOT( slotHostJoinRemoved( VxGUID&, EHostType ) ) );
+	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinOfferStateChange( VxGUID&, EHostType, EJoinState ) ), this, SLOT( slotHostJoinOfferStateChange( VxGUID&, EHostType, EJoinState ) ) );
+	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinOnlineStatus( GuiHostJoin *, bool ) ), this, SLOT( slotHostJoinOnlineStatus( GuiHostJoin*, bool ) ) );
 
-    /*
-    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		                this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
-    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	            this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+	connect( ui.m_HostJoinRequestList, SIGNAL( signalAcceptButtonClicked( GuiHostJoinSession *, HostJoinRequestListItem * ) ), this, SLOT( slotAcceptButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ) );
+	connect( ui.m_HostJoinRequestList, SIGNAL( signalRejectButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ), this, SLOT( slotRejectButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ) );
 
-	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
-	connect( this, SIGNAL(signalToGuiFileXferState(VxGUID,EXferState,int,int)),			    this, SLOT(slotToGuiFileXferState(VxGUID,EXferState,int,int)) );
-	connect( this, SIGNAL(signalToGuiFileDownloadComplete(VxGUID,QString,EXferError)),	    this, SLOT(slotToGuiFileDownloadComplete(VxGUID,QString,EXferError)) );
+	connect( ui.m_RequestStateComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotJoinComboBoxSelectionChange( int ) ) );
 
-	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
-	checkDiskSpace();
-    */
+	updateJoinList();
+
     m_MyApp.activityStateChange( this, true );
 }
 
@@ -63,341 +61,89 @@ AppletHostJoinRequestList::~AppletHostJoinRequestList()
 }
 
 //============================================================================
-void AppletHostJoinRequestList::showEvent( QShowEvent * ev )
+void AppletHostJoinRequestList::updateJoinList( void )
 {
-	AppletBase::showEvent( ev );
-}
-
-//============================================================================
-void AppletHostJoinRequestList::hideEvent( QHideEvent * ev )
-{
-	AppletBase::hideEvent( ev );
-}
-
-/*
-//============================================================================
-void AppletHostJoinRequestList::slotHomeButtonClicked( void )
-{
-	hide();
-}
-
-// override default behavior of closing dialog when back button is clicked
-//============================================================================
-void AppletHostJoinRequestList::onBackButtonClicked( void )
-{
-    hide();
-}
-*/
-
-////============================================================================
-//void AppletHostJoinRequestList::slotItemClicked(QListWidgetItem * item)
-//{
-//	GuiFileXferSession * poSession = (GuiFileXferSession *)item->data( Qt::UserRole + 1).toULongLong();
-//	if( poSession )
-//	{
-//		ActivityDownloadItemMenu oDlg( m_MyApp, poSession, this );
-//		if( QDialog::Rejected == oDlg.exec() )
-//		{
-//			m_FromGui.fromGuiCancelDownload( poSession->getLclSessionId() );
-//			ui.m_FileItemList->removeItemWidget( item );
-//			delete poSession;
-//		}
-//	}
-//}
-/*
-//============================================================================
-FileXferWidget * AppletHostJoinRequestList::sessionToWidget( GuiFileXferSession * poSession )
-{
-
-	FileXferWidget * item = new FileXferWidget(ui.m_FileItemList);
-    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
-
-    item->setFileItemInfo( poSession );
-
-	connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem *)),	this, SLOT(slotCancelButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalPlayButtonClicked(QListWidgetItem *)),		this, SLOT(slotPlayButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalLibraryButtonClicked(QListWidgetItem *)),	this, SLOT(slotLibraryButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalFileShareButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileShareButtonClicked(QListWidgetItem *)) );
-	connect( item, SIGNAL(signalShredButtonClicked(QListWidgetItem *)),		this, SLOT(slotShredButtonClicked(QListWidgetItem *)) );
-
-	updateListEntryWidget( item, poSession );
-
-	return item;
-
-    return nullptr;
-}
-*/
-
-/*
-//============================================================================
-void AppletHostJoinRequestList::updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession )
-{
-	poSession->setWidget( item );
-	item->updateWidgetFromInfo();
-}
-
-//============================================================================
-GuiFileXferSession * AppletHostJoinRequestList::widgetToSession( FileXferWidget * item )
-{
-	//return item->getFileItemInfo();
-}
-
-//============================================================================
-GuiFileXferSession * AppletHostJoinRequestList::findSession( VxGUID lclSessionId )
-{
-	int iCnt = ui.m_FileItemList->count();
-	for( int iRow = 0; iRow < iCnt; iRow++ )
+	ui.m_HostJoinRequestList->clear();
+	std::map<VxGUID, GuiHostJoin*>& joinList = m_HostJoinMgr.getHostJoinList();
+	for( auto& iter : joinList )
 	{
-		QListWidgetItem * item =  ui.m_FileItemList->item( iRow );
-		GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->data( Qt::UserRole + 1).toULongLong();
-		if( poCurInfo->getLclSessionId() == lclSessionId )
+		GuiHostJoin* user = iter.second;
+		if( !user->isIgnored() && m_JoinState == user->getJoinState( m_HostType ) )
 		{
-			return poCurInfo;
-		}
-	}
-
-	return nullptr;
-}
-
-//============================================================================
-FileXferWidget * AppletHostJoinRequestList::findListEntryWidget( VxGUID lclSessionId )
-{
-	int iCnt = ui.m_FileItemList->count();
-	for( int iRow = 0; iRow < iCnt; iRow++ )
-	{
-		QListWidgetItem * item =  ui.m_FileItemList->item( iRow );
-		if( item )
-		{
-			GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-			if( poCurInfo && ( poCurInfo->getLclSessionId() == lclSessionId ) )
-			{
-				return (FileXferWidget *)item;
-			}
-		}
-	}
-
-	return nullptr;
-}
-
-//============================================================================
-FileXferWidget * AppletHostJoinRequestList::addDownload( GuiFileXferSession * poSession )
-{
-	FileXferWidget * item = findListEntryWidget( poSession->getLclSessionId() );
-	if( item )
-	{
-		GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-		delete poCurInfo;
-        item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (qint64)poSession ) );
-		updateListEntryWidget( item, poSession );
-	}
-	else
-	{
-		item = sessionToWidget( poSession );
-        item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (qint64)poSession ) );
-
-		ui.m_FileItemList->addItem( item );
-		ui.m_FileItemList->setItemWidget( item, item );
-	}
-
-	return item;
-}
-
-//============================================================================
-bool AppletHostJoinRequestList::isXferInProgress( VxGUID lclSessionId )
-{
-	if( findSession( lclSessionId ) )
-	{
-		return true;
-	}
-
-	return false;
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotToGuiStartDownload( GuiFileXferSession * poSession )
-{
-	GuiFileXferSession * newSession = new GuiFileXferSession( *poSession );
-	newSession->setXferDirection( eXferDirectionRx );
-
-	FileXferWidget * item = addDownload( newSession );
-	item->setXferState( eXferStateInDownloadXfer, 0, 0 );
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotToGuiFileXferState(	VxGUID		lclSessionId, 
-												EXferState		eXferState, 
-												int				param1, 
-												int				param2  )
-{
-	FileXferWidget * item = findListEntryWidget( lclSessionId );
-	if( item )
-	{
-		item->setXferState( eXferState, param1, param2 );
-	}
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotToGuiFileDownloadComplete(	VxGUID lclSessionId, QString newFileName, EXferError xferError )
-{
-	GuiFileXferSession * xferSession = findSession( lclSessionId );
-	if( xferSession )
-	{
-		if( !newFileName.isEmpty() )
-		{
-			xferSession->setFullFileName( newFileName );
-		}
-
-		xferSession->setXferState( eXferStateCompletedDownload, xferError, 0 );
-		FileXferWidget * item = findListEntryWidget( lclSessionId );
-		if( item )
-		{
-			item->updateWidgetFromInfo();
+			updateHostJoinRequest( user );
 		}
 	}
 }
 
 //============================================================================
-void AppletHostJoinRequestList::toGuiStartDownload( void * userData, GuiFileXferSession * xferSession )
+void AppletHostJoinRequestList::slotHostJoinRequested( GuiHostJoin* user )
 {
-	Q_UNUSED( userData );
-	emit signalToGuiStartDownload( xferSession );
+	updateHostJoinRequest( user );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::toGuiFileXferState( void * userData, VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 )
+void AppletHostJoinRequestList::slotlHostJoinUpdated( GuiHostJoin* user )
 {
-	Q_UNUSED( userData );
-	VxGUID myLclSession( lclSessionId );
-	emit signalToGuiFileXferState( myLclSession, eXferState, param1, param2 );
+	updateHostJoinRequest( user );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError )
+void AppletHostJoinRequestList::slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType )
 {
-	Q_UNUSED( userData );
-	VxGUID myLclSession( lclSession );
-	emit signalToGuiFileDownloadComplete( myLclSession, newFileName, xferError );
+	ui.m_HostJoinRequestList->removeHostJoinRequest( onlineId, hostType );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotFileXferItemClicked(QListWidgetItem * item)
+void AppletHostJoinRequestList::slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState )
 {
+	updateJoinList();
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotFileIconButtonClicked( QListWidgetItem * item )
+void AppletHostJoinRequestList::slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline )
 {
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-	if( xferSession )
+	updateJoinList();
+}
+
+//============================================================================
+void AppletHostJoinRequestList::updateHostJoinRequest( GuiHostJoin* user )
+{
+	vx_assert( user );
+	VxGUID& onlineId = user->getMyOnlineId();
+	std::vector<EHostType> hostRequests;
+	user->getRequestStateHosts( m_JoinState, hostRequests );
+	for( int hostEnum = eHostTypeUnknown; hostEnum < eMaxHostType; hostEnum++ )
 	{
-
-	}	
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotCancelButtonClicked( QListWidgetItem * item )
-{
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-	if( xferSession )
-	{
-		if( eXferStateCompletedDownload != xferSession->getXferState() )
+		EHostType hostType = (EHostType)hostEnum;
+		if( std::find( hostRequests.begin(), hostRequests.end(), hostType ) != hostRequests.end() )
 		{
-			xferSession->setXferState( eXferStateUserCanceledDownload, 0, 0 );
-			((FileXferWidget *)item)->setXferState( eXferStateUserCanceledDownload, 0, 0 );
-			m_Engine.fromGuiCancelDownload( xferSession->getLclSessionId() );
-		}
-	}
-
-	ui.m_FileItemList->removeItemWidget( item );
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotPlayButtonClicked( QListWidgetItem * item )
-{
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-	if( xferSession )
-	{
-		this->playFile( xferSession->getFullFileName() );
-	}
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotLibraryButtonClicked( QListWidgetItem * item )
-{
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-	if( xferSession )
-	{
-		bool inLibary = xferSession->getIsInLibrary();
-		inLibary = !inLibary;
-		xferSession->setIsInLibrary( inLibary );
-		m_Engine.fromGuiAddFileToLibrary( xferSession->getFullFileName().toUtf8().constData(), inLibary, xferSession->getFileHashId().getHashData() );
-		((FileXferWidget *)item)->updateWidgetFromInfo();
-	}	
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotFileShareButtonClicked( QListWidgetItem * item )
-{
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-	if( xferSession )
-	{
-		bool isShared = xferSession->getIsShared();
-		isShared = !isShared;
-		xferSession->setIsShared( isShared );
-		m_Engine.fromGuiSetFileIsShared( xferSession->getFullFileName().toUtf8().constData(), isShared, xferSession->getFileHashId().getHashData() );
-		((FileXferWidget *)item)->updateWidgetFromInfo();
-	}	
-}
-
-//============================================================================
-void AppletHostJoinRequestList::slotShredButtonClicked( QListWidgetItem * item )
-{
-	GuiFileXferSession * xferSession = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
-	if( xferSession )
-	{
-		QString fileName = xferSession->getFullFileName();
-		if( confirmDeleteFile( true ) )
-		{
-			ui.m_FileItemList->removeItemWidget( item );
-			m_Engine.fromGuiDeleteFile( fileName.toUtf8().constData(), true );
-		}
-	}	
-}
-
-//============================================================================
-bool AppletHostJoinRequestList::confirmDeleteFile( bool shredFile )
-{
-	bool acceptAction = true;
-	bool isConfirmDisabled = m_MyApp.getAppSettings().getIsConfirmDeleteDisabled();
-	if( false == isConfirmDisabled )
-	{
-		QString title = shredFile ?  "Confirm Shred File" : "Confirm Delete File";
-		QString bodyText = "";
-		if( shredFile )
-		{
-			bodyText = "Are You Sure You Want To Write Random Data Into The File Then Delete From The Device?";
+			ui.m_HostJoinRequestList->addOrUpdateHostRequest( hostType, user );
 		}
 		else
 		{
-			bodyText = "Are You Sure To Delete The File From The Device?";
-		}
-
-		ActivityYesNoMsgBox dlg( m_MyApp, &m_MyApp, title, bodyText );
-		dlg.makeNeverShowAgainVisible( true );
-		if( false == (QDialog::Accepted == dlg.exec()))
-		{
-			acceptAction = false;
-		}
-
-		if( dlg.wasNeverShowAgainChecked() )
-		{
-			m_MyApp.getAppSettings().setIsConfirmDeleteDisabled( true );
+			ui.m_HostJoinRequestList->removeHostJoinRequest( onlineId, hostType );
 		}
 	}
-
-	return acceptAction;
 }
-*/
+
+//============================================================================
+void AppletHostJoinRequestList::slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
+{
+	if( joinSession && joinSession->getUserIdent() )
+	{
+		m_HostJoinMgr.joinAccepted( joinSession->getUserIdent(), joinSession->getHostType() );
+	}
+}
+
+//============================================================================
+void AppletHostJoinRequestList::slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
+{
+	m_HostJoinMgr.joinRejected( joinSession->getUserIdent(), joinSession->getHostType() );
+}
+
+//============================================================================
+void AppletHostJoinRequestList::slotJoinComboBoxSelectionChange( int comboIdx )
+{
+	m_JoinState = GuiHelpers::comboIdxToJoinState( comboIdx );
+	updateJoinList();
+}

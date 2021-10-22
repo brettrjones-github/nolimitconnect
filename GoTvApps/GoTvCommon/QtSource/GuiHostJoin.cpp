@@ -100,11 +100,11 @@ bool GuiHostJoin::setJoinState( EHostType hostType, EJoinState joinState )
 //============================================================================
 int GuiHostJoin::getHostRequestCount( void )
 {
-    return geRequestStateCount( eJoinStateJoinRequested );
+    return getRequestStateCount( eJoinStateJoinRequested );
 }
 
 //============================================================================
-int GuiHostJoin::geRequestStateCount( EJoinState joinState )
+int GuiHostJoin::getRequestStateCount( EJoinState joinState )
 {
     int stateCnt = 0;
     for( auto& joinPair : m_JoinStateList )
@@ -116,4 +116,18 @@ int GuiHostJoin::geRequestStateCount( EJoinState joinState )
     }
 
     return stateCnt;
+}
+
+
+//============================================================================
+void GuiHostJoin::getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests )
+{
+    hostRequests.clear();
+    for( auto& joinPair : m_JoinStateList )
+    {
+        if( joinPair.second == joinState )
+        {
+            hostRequests.push_back( joinPair.first );
+        }
+    }
 }

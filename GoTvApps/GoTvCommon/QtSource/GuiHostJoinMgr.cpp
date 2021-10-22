@@ -303,3 +303,23 @@ void GuiHostJoinMgr::updateHostRequestCount( bool forceEmit )
         emit signalHostJoinRequestCount( m_HostRequestCount );
     }
 }
+
+//============================================================================
+void GuiHostJoinMgr::joinAccepted( GuiHostJoin* user, EHostType hostType )
+{
+    if( user && user->setJoinState( hostType, eJoinStateJoinAccepted ) )
+    {
+        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( user->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinAccepted );
+        emit signalHostJoinUpdated( user );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::joinRejected( GuiHostJoin* user, EHostType hostType )
+{
+    if( user && user->setJoinState( hostType, eJoinStateJoinDenied ) )
+    {
+        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( user->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinDenied );
+        emit signalHostJoinUpdated( user );
+    }
+}

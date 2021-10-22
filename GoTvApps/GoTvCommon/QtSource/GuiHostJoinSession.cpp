@@ -13,45 +13,40 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "GuiHostSession.h"
+#include "GuiHostJoinSession.h"
+#include "GuiHostJoin.h"
 
 //============================================================================
-GuiHostSession::GuiHostSession( QWidget* parent )
-    : QWidget( parent )
+GuiHostJoinSession::GuiHostJoinSession( QWidget* parentWidget )
+    : QWidget( parentWidget )
 {
 }
 
 //============================================================================
-GuiHostSession::GuiHostSession( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent, PluginSetting& pluginSetting, QWidget* parent )
-    : QWidget( parent )
+GuiHostJoinSession::GuiHostJoinSession( EHostType hostType, GuiHostJoin* hostJoinIdent, QWidget* parentWidget )
+    : QWidget( parentWidget )
     , m_HostType( hostType )
-    , m_SessionId( sessionId )
-    , m_OnlineId( hostIdent->getMyOnlineId() )
-    , m_HostIdent( hostIdent )
-    , m_PluginSetting( pluginSetting )
+    , m_OnlineId( hostJoinIdent->getMyOnlineId() )
+    , m_HostIdent( hostJoinIdent )
 {
 }
 
 //============================================================================
-GuiHostSession::GuiHostSession( const GuiHostSession &rhs )
+GuiHostJoinSession::GuiHostJoinSession( const GuiHostJoinSession &rhs )
     : QWidget()
     , m_HostType( rhs.m_HostType )
-    , m_SessionId( rhs.m_SessionId )
     , m_OnlineId( rhs.m_OnlineId )
     , m_HostIdent( rhs.m_HostIdent )
-    , m_PluginSetting( rhs.m_PluginSetting )
 {
 }
 
 //============================================================================
-GuiHostSession& GuiHostSession::operator =( const GuiHostSession &rhs )
+GuiHostJoinSession& GuiHostJoinSession::operator =( const GuiHostJoinSession &rhs )
 {
 	if( this != &rhs )   
 	{
         m_HostType		        = rhs.m_HostType;
-        m_SessionId				= rhs.m_SessionId;
         m_HostIdent		        = rhs.m_HostIdent;
-        m_PluginSetting			= rhs.m_PluginSetting;
         m_OnlineId			    = rhs.m_OnlineId;
 	}
 
@@ -59,17 +54,17 @@ GuiHostSession& GuiHostSession::operator =( const GuiHostSession &rhs )
 }
 
 //============================================================================
-std::string GuiHostSession::getHostUrl( void )
+std::string GuiHostJoinSession::getHostUrl( void )
 {
     return m_HostIdent->getMyOnlineUrl();
 }
 
 //============================================================================
-std::string GuiHostSession::getHostDescription( void )
+std::string GuiHostJoinSession::getHostDescription( void )
 {
-    if( !m_PluginSetting.getDescription().empty() )
+    if( !m_HostIdent->getOnlineDescription().empty() )
     {
-        return m_PluginSetting.getDescription();
+        return m_HostIdent->getOnlineDescription();
     }
     else
     {
@@ -78,7 +73,7 @@ std::string GuiHostSession::getHostDescription( void )
 }
 
 //============================================================================
-VxGUID GuiHostSession::getHostThumbId( void )
+VxGUID GuiHostJoinSession::getHostThumbId( void )
 {
-    return m_PluginSetting.getThumnailId();
+    return m_HostIdent->getAvatarThumbId();
 }

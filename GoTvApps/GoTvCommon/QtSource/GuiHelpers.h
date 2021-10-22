@@ -111,6 +111,10 @@ public:
     static void                 fillContentCatagory( QComboBox * comboBox );
     static uint8_t              contentCatagoryToIndex( EContentCatagory content );
 
+    static void                 fillJoinRequest( QComboBox* comboBox );
+    static EJoinState           comboIdxToJoinState( int comboIdx );
+    static uint8_t              joinRequestToIndex( EJoinState joinState );
+
     static ActivityBase *       findParentActivity( QWidget * widget );
     static QWidget *            findAppletContentFrame( QWidget * widget );
     static ActivityBase *       findLaunchWindow( QWidget * widget );

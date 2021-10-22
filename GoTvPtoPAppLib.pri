@@ -199,6 +199,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoin.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinMgr.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostSession.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgrBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferClientMgr.h \
@@ -542,6 +543,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostSession.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgrBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferClientMgr.cpp \

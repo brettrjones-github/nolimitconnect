@@ -17,10 +17,8 @@
 #include "AppletBase.h"
 #include "ui_AppletHostJoinRequestList.h"
 
-#include <PktLib/VxCommon.h>
-
-class P2PEngine;
-class GuiFileXferSession;
+class GuiHostJoin;
+class GuiHostJoinMgr;
 
 class AppletHostJoinRequestList : public AppletBase
 {
@@ -29,51 +27,25 @@ public:
 	AppletHostJoinRequestList( AppCommon& app, QWidget* parent = NULL );
 	virtual ~AppletHostJoinRequestList() override;
 
-	//bool						isXferInProgress( VxGUID fileInstance );
-	//FileXferWidget *			addDownload( GuiFileXferSession * poSession );
+protected slots:
+	void				        slotHostJoinRequested( GuiHostJoin* user );
+	void				        slotlHostJoinUpdated( GuiHostJoin* user );
+	void				        slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType );
+	void                        slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
+	void                        slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline );
 
-signals:
-	void						signalToGuiStartDownload( GuiFileXferSession * xferSession );
-	void						signalToGuiFileXferState( VxGUID lclSession, EXferState eXferState, int param1, int param2 );
-	void						signalToGuiFileDownloadComplete( VxGUID lclSession, QString newFileName, EXferError xferError );
+	void                        slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem );
+	void                        slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem );
 
-private slots:
-    /*
-	void						slotToGuiStartDownload(	GuiFileXferSession * poSession );
-	void						slotToGuiFileXferState( VxGUID lclSessionId, EXferState eXferState, int param1, int param2 );
-	void						slotToGuiFileDownloadComplete( VxGUID lclSessionId, QString newFileName, EXferError xferError );
-
-    void						slotHomeButtonClicked( void ) override;
-	void						slotFileXferItemClicked( QListWidgetItem * item );
-
-	void						slotFileIconButtonClicked( QListWidgetItem * item );
-	void						slotCancelButtonClicked( QListWidgetItem * item );
-	void						slotPlayButtonClicked( QListWidgetItem * item );
-	void						slotLibraryButtonClicked( QListWidgetItem * item );
-	void						slotFileShareButtonClicked( QListWidgetItem * item );
-	void						slotShredButtonClicked( QListWidgetItem * item );
-    */
+	void                        slotJoinComboBoxSelectionChange( int comboIdx );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev ) override;
-    virtual void				hideEvent( QHideEvent * ev ) override;
-
-    /*
-    // override default behavior of closing dialog when back button is clicked
-    void                        onBackButtonClicked( void ) override;
-
-    virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
-    virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
-    virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
-
-	FileXferWidget *			sessionToWidget( GuiFileXferSession * poSession );
-	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession );
-	GuiFileXferSession *		widgetToSession( FileXferWidget * item );
-	GuiFileXferSession *		findSession( VxGUID lclSessionId );
-	FileXferWidget *			findListEntryWidget( VxGUID lclSessionId );
-	bool						confirmDeleteFile( bool shredFile );
-    */
+	void						updateJoinList( void );
+	void						updateHostJoinRequest( GuiHostJoin* user );
 
 	//=== vars ===//
 	Ui::AppletHostJoinRequestListUi		ui;
+	GuiHostJoinMgr&				m_HostJoinMgr;
+	EHostType					m_HostType{ eHostTypeGroup };
+	EJoinState					m_JoinState{ eJoinStateJoinRequested };
 };

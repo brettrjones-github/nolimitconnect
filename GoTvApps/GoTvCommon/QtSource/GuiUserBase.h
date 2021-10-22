@@ -49,6 +49,7 @@ public:
     std::string                 getOnlineDescription( void )            { return std::string( m_NetIdent.getOnlineDescription() ); }
     std::string                 getMyOnlineUrl( void )                  { return m_NetIdent.getMyOnlineUrl(); }
     VxGUID                      getHostThumbId( EHostType hostType, bool defaultToAvatarThumbId ) { return m_NetIdent.getHostThumbId( hostType, defaultToAvatarThumbId ); } 
+    VxGUID                      getAvatarThumbId( void )                { return m_NetIdent.getAvatarGuid(); }
 
     void                        setMyFriendshipToHim( EFriendState friendState ) { m_NetIdent.setMyFriendshipToHim( friendState ); }
     EFriendState                getMyFriendshipToHim( void )            { return  m_NetIdent.getMyFriendshipToHim(); }

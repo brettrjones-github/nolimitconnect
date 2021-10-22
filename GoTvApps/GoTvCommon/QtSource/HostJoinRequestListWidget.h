@@ -16,8 +16,8 @@
 #include "ListWidgetBase.h"
 
 class HostJoinRequestListItem;
-class VxNetIdent;
-class GuiHostSession;
+class GuiHostJoin;
+class GuiHostJoinSession;
 class PluginSetting;
 
 class HostJoinRequestListWidget : public ListWidgetBase
@@ -29,19 +29,19 @@ public:
 
     void                        clearHostJoinRequestList( void );
 
-    void                        addHostAndSettingsToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
-    HostJoinRequestListItem*    addOrUpdateHostSession( GuiHostSession* hostSession );
+    void                        addOrUpdateHostRequest( EHostType hostType, GuiHostJoin* hostJoin );
+    HostJoinRequestListItem*    addOrUpdateHostRequestSession( GuiHostJoinSession* hostSession );
 
-    GuiHostSession*             findSession( VxGUID& lclSessionId );
     HostJoinRequestListItem*    findListEntryWidgetByHostId( EHostType hostType, VxGUID& onlineId );
     HostJoinRequestListItem*    findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    void                        removeHostJoinRequest( VxGUID& onlineId, EHostType hostType );
 
 signals:
-    void                        signalAvatarButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
-    void                        signalFrienshipButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
-    void                        signalMenuButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
-    void                        signalAcceptButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
-    void                        signalRejectButtonClicked( GuiHostSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalAvatarButtonClicked( GuiHostJoinSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalFrienshipButtonClicked( GuiHostJoinSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalMenuButtonClicked( GuiHostJoinSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalAcceptButtonClicked( GuiHostJoinSession* hostSession, HostJoinRequestListItem* hostItem );
+    void                        signalRejectButtonClicked( GuiHostJoinSession* hostSession, HostJoinRequestListItem* hostItem );
 
 protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
@@ -53,8 +53,8 @@ protected slots:
     void                        slotRejectButtonClicked( HostJoinRequestListItem* hostItem );
 
 protected:
-    HostJoinRequestListItem*    sessionToWidget( GuiHostSession* hostSession );
-    GuiHostSession*				widgetToSession( HostJoinRequestListItem* hostItem );
+    HostJoinRequestListItem*    sessionToWidget( GuiHostJoinSession* hostSession );
+    GuiHostJoinSession*				widgetToSession( HostJoinRequestListItem* hostItem );
 
     virtual void                onHostJoinRequestListItemClicked( HostJoinRequestListItem* hostItem );
     virtual void                onAvatarButtonClicked( HostJoinRequestListItem* hostItem );
@@ -62,6 +62,7 @@ protected:
     virtual void                onMenuButtonClicked( HostJoinRequestListItem* hostItem );
     virtual void                onAcceptButtonClicked( HostJoinRequestListItem* hostItem );
     virtual void                onRejectButtonClicked( HostJoinRequestListItem* hostItem );
+
 
 	//=== vars ===//
 

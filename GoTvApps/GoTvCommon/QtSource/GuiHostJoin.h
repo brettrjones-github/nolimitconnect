@@ -26,14 +26,15 @@ public:
     GuiHostJoin( const GuiHostJoin& rhs );
 	virtual ~GuiHostJoin() = default;
 
-    GuiHostJoinMgr&             getHostJoineMgr( void ) { return m_HostJoinMgr; }
+    GuiHostJoinMgr&             getHostJoinMgr( void ) { return m_HostJoinMgr; }
 
     virtual bool                setOnlineStatus( bool isOnline ) override;
 
     EJoinState                  getJoinState( EHostType hostType );
     bool                        setJoinState( EHostType hostType, EJoinState joinState ); // return true if state changed
     int                         getHostRequestCount( void );
-    int                         geRequestStateCount( EJoinState joinState );
+    int                         getRequestStateCount( EJoinState joinState );
+    void                        getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests );
 
 protected:
     GuiHostJoinMgr&             m_HostJoinMgr;

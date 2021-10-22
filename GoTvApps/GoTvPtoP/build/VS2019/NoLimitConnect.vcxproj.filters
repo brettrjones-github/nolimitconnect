@@ -1885,6 +1885,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiUserBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
@@ -2104,6 +2107,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinSession.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

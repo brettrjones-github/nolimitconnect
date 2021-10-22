@@ -176,6 +176,13 @@ void VxPushButton::setFixedSize( const QSize & fixedSize )
 }
 
 //============================================================================
+void VxPushButton::setFixedSize( EButtonSize buttonSize )
+{
+    m_SquareButtonSize = buttonSize;
+    QPushButton::setFixedSize( GuiParams::getButtonSize( m_SquareButtonSize ) );
+}
+
+//============================================================================
 void VxPushButton::setFixedSize( int width, int height )
 {
     if( width == height )

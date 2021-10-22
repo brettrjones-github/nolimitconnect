@@ -111,6 +111,8 @@ signals:
     void                        signalCamPlaying( bool isPlaying );
 
 public slots:
+	virtual void				updateTitleBar( void );
+	virtual void				slotSystemReady( bool isReady );
 	virtual void				slotPowerButtonClicked( void );
 	virtual void				slotHomeButtonClicked( void );
     virtual void				slotMicrophonePeak( int peekVal0to32768 );

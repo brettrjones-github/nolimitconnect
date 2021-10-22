@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>534</width>
-    <height>92</height>
+    <height>65</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -58,7 +58,7 @@
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -85,7 +85,7 @@
       <item>
        <widget class="VxPushButton" name="m_AvatarButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -116,7 +116,7 @@
       <item>
        <widget class="VxPushButton" name="m_FriendshipButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -147,7 +147,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
-         <number>1</number>
+         <number>0</number>
         </property>
         <item>
          <layout class="QHBoxLayout" name="TitleHorizontalLayout">
@@ -159,9 +159,16 @@
           </property>
           <item>
            <widget class="QLabel" name="TitlePart1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <pointsize>8</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -173,6 +180,12 @@
           </item>
           <item>
            <widget class="QLabel" name="TitlePart2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -186,7 +199,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>40</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -200,6 +213,12 @@
           </property>
           <item>
            <widget class="QLabel" name="DescPart1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -207,6 +226,12 @@
           </item>
           <item>
            <widget class="QLabel" name="DescPart2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -220,7 +245,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>40</width>
-              <height>20</height>
+              <height>10</height>
              </size>
             </property>
            </spacer>
@@ -232,7 +257,7 @@
           <item>
            <widget class="VxPushButton" name="m_AcceptButton">
             <property name="text">
-             <string/>
+             <string notr="true"/>
             </property>
            </widget>
           </item>
@@ -252,7 +277,7 @@
           <item>
            <widget class="VxPushButton" name="m_RejectButton">
             <property name="text">
-             <string/>
+             <string notr="true"/>
             </property>
            </widget>
           </item>
@@ -276,7 +301,7 @@
       <item>
        <widget class="VxPushButton" name="m_MenuButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>

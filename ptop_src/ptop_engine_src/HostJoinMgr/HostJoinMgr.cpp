@@ -366,3 +366,21 @@ void HostJoinMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, Vx
 {
     // TODO BRJ handle disconnect
 }
+
+//============================================================================
+void HostJoinMgr::changeJoinState( VxGUID& onlineId, EPluginType pluginType, EJoinState joinState )
+{
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( onlineId, pluginType );
+    if( joinInfo && joinInfo->setJoinState( joinState ) )
+    {
+        if( onlineId != m_Engine.getMyOnlineId() )
+        {
+            saveToDatabase( joinInfo, true );
+        }
+
+        announceHostJoinUpdated( joinInfo );
+    }
+
+    unlockResources();
+}

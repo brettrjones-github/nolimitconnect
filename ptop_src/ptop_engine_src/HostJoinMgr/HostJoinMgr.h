@@ -52,6 +52,8 @@ public:
 
     HostJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType ); 
 
+    void                        changeJoinState( VxGUID& onlineId, EPluginType pluginType, EJoinState joinState );
+
 protected:
     void						clearHostJoinInfoList( void );
 

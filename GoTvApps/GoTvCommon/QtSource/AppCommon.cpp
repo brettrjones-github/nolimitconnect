@@ -2256,14 +2256,8 @@ void AppCommon::checkSystemReady( void )
 		m_UserJoinMgr.onSystemReady( m_IsSystemReady );
 		m_ConnectMgr.onSystemReady( m_IsSystemReady );
 
-		onSystemReady();
+		emit signalSystemReady( m_IsSystemReady );
 	}
-}
-
-//============================================================================
-void AppCommon::onSystemReady( void )
-{
-
 }
 
 //============================================================================
