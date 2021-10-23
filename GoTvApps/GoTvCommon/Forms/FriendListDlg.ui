@@ -33,9 +33,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

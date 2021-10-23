@@ -525,6 +525,12 @@ border-radius: 4px;
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>FriendListWidget</class>
+   <extends>QWidget</extends>
+   <header>FriendListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>VidWidget</class>
    <extends>QWidget</extends>
    <header location="global">VidWidget.h</header>
@@ -536,15 +542,7 @@ border-radius: 4px;
    <header>TodGameWidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>FriendListWidget</class>
-   <extends>QWidget</extends>
-   <header>FriendListWidget.h</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -252,17 +252,18 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostRequestSessio
         {
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s\n", hostSession->getUserIdent()->getOnlineName() );
+                LogMsg( LOG_INFO, "add host %s\n", hostSession->getUserIdent()->getOnlineName().c_str() );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getUserIdent()->getOnlineName() );
+                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getUserIdent()->getOnlineName().c_str() );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), false ) );
+            VxGUID thumbId = hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), false );
+            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
             if( thumb )
             {
                 QImage hostIconImage;

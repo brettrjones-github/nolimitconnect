@@ -204,6 +204,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>ThumbnailEditWidget</class>
+   <extends>QWidget</extends>
+   <header>ThumbnailEditWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>PermissionWidget</class>
    <extends>QWidget</extends>
    <header>PermissionWidget.h</header>
@@ -215,15 +221,7 @@
    <header>InformationWidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>ThumbnailEditWidget</class>
-   <extends>QWidget</extends>
-   <header>ThumbnailEditWidget.h</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

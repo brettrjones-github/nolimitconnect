@@ -41,8 +41,8 @@ public:
 	int							getNewOffersCount( void )					{ return m_iNewRmtOffersCount; }
 	size_t						getTotalOffersCount( void )					{ return m_aoOffersList.size(); }
 
-    std::map<VxGUID, GuiOfferSession*> getCallList( void )					{ return m_CallOfferCache; }
-    std::map<VxGUID, GuiOfferSession*> getOfferList( void )					{ return m_OfferListCache; }
+    virtual std::map<VxGUID, GuiOfferSession*>& getCallList( void )					{ return m_CallOfferCache; }
+    virtual std::map<VxGUID, GuiOfferSession*>& getOfferList( void )				{ return m_OfferListCache; }
 
 	virtual void                onAppCommonCreated( void ) = 0;
 	virtual void                onMessengerReady( bool ready )				{ }

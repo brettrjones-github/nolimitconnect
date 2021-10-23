@@ -217,12 +217,12 @@ CallListItem* CallListWidget::addOrUpdateCallSession( GuiOfferSession* userSessi
         userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName() );
+            LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName().c_str() );
             addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName() );
+            LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 

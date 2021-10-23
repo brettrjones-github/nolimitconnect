@@ -223,8 +223,6 @@
    <header>VxComboBoxFileFilter.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

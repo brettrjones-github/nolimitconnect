@@ -246,7 +246,7 @@ public:
     bool                        getPeerPktAnnCopy( PktAnnounce &peerAnn );
 
     // returns peer online id. caller should check VxGUID::isVxGUIDValid() for validity
-    VxGUID                      getPeerOnlineId( void ) { return m_PeerOnlineId; }
+    VxGUID&                      getPeerOnlineId( void ) { return m_PeerOnlineId; }
 
     virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 

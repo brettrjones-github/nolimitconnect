@@ -31,5 +31,5 @@ public:
     virtual void                onAppCommonCreated( void ) override;
     virtual void                onMessengerReady( bool ready ) override { }
     virtual bool                isMessengerReady( void ) override;
-    virtual void                onSystemReady( bool ready ) { }
+    virtual void                onSystemReady( bool ready ) override { }
 };

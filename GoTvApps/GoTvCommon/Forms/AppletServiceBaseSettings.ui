@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>301</width>
-    <height>339</height>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,7 +125,7 @@
     </widget>
    </item>
    <item>
-    <widget class="LogWidget" name="m_LogWidget" native="true">
+    <widget class="LogWidget" name="m_LogWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -137,6 +137,12 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>LogWidget</class>
+   <extends>QPlainTextEdit</extends>
+   <header>LogWidget.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>ThumbnailEditWidget</class>
    <extends>QWidget</extends>
@@ -155,15 +161,7 @@
    <header>InformationWidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>LogWidget</class>
-   <extends>QWidget</extends>
-   <header>LogWidget.h</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -197,7 +197,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../gotvcommon.qrc"/>
+  <include location="../NoLimitConnect.qrc"/>
  </resources>
  <connections/>
 </ui>

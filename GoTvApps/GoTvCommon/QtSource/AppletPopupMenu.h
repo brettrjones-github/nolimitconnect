@@ -45,8 +45,8 @@ public:
 	void						setTitle( QString strTitle );
 	void						setMenuType( EPopupMenuType menuType )		{ m_MenuType = menuType; };
 	EPopupMenuType				getMenuType( void )							{ return m_MenuType; };
-	void						setAppletType( EApplet appletType )			{ m_AppletType = appletType; };
-	EApplet						getAppletType( void )						{ return m_AppletType; };
+    void						setAppletType( EApplet appletType ) override			{ m_AppletType = appletType; };
+    EApplet						getAppletType( void ) override						{ return m_AppletType; };
 
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 

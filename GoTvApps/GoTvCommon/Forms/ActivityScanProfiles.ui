@@ -350,10 +350,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
-  <include location="../gotvcommon.qrc"/>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

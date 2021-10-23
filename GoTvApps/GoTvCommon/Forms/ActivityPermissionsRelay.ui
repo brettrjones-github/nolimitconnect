@@ -308,6 +308,11 @@ to pass the data. Relay sevice uses bandwidth.</string>
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VxPushButton</class>
+   <extends>QPushButton</extends>
+   <header>VxPushButton.h</header>
+  </customwidget>
+  <customwidget>
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
@@ -319,14 +324,9 @@ to pass the data. Relay sevice uses bandwidth.</string>
    <header location="global">BottomBarWidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>VxPushButton</class>
-   <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
-  </customwidget>
  </customwidgets>
  <resources>
-  <include location="../gotvcommon.qrc"/>
+  <include location="../NoLimitConnect.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -304,7 +304,7 @@ bool OfferSessionLogic::sendOfferOrResponse()
 				}
 				else
 				{
-					postStatusMsg( "%s is offline-chat disabled", m_HisIdent->getOnlineName() );
+                    postStatusMsg( "%s is offline-chat disabled", m_HisIdent->getOnlineName().c_str() );
 				}
 
 				sentOk = false;
@@ -330,7 +330,7 @@ bool OfferSessionLogic::sendOfferOrResponse()
 				}
 				else
 				{
-					postStatusMsg( "%s is offline-chat disabled", m_HisIdent->getOnlineName() );
+                    postStatusMsg( "%s is offline-chat disabled", m_HisIdent->getOnlineName().c_str() );
 				}
 
 				sentOk = false;

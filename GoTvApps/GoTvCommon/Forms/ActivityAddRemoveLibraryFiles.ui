@@ -383,6 +383,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VxPushButton</class>
+   <extends>QPushButton</extends>
+   <header>VxPushButton.h</header>
+  </customwidget>
+  <customwidget>
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
@@ -395,18 +400,11 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>VxPushButton</class>
-   <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
-  </customwidget>
-  <customwidget>
    <class>VxLabel</class>
    <extends>QLabel</extends>
    <header>VxLabel.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

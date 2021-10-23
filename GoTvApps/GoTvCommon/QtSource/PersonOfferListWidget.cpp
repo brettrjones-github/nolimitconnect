@@ -229,7 +229,7 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 	FriendListEntryWidget * poWidget = findListEntryWidget( netIdent );
 	if( poWidget )
 	{
-		LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->isOnline() );
+        LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s online ? %d widget exists\n", netIdent->getOnlineName().c_str(), netIdent->isOnline() );
 		updateListEntryWidget( poWidget, netIdent );
 	}
 	else
@@ -239,7 +239,7 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 		if( 0 == this->count() )
 		{
 			insertItem( this->count(), poFriendItem );
-			LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
+            LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName().c_str(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
 			//addItem( poFriendItem );
 		}
 		else
@@ -258,7 +258,7 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
 						if( listSessionTime < hisSessionTime )
 						{
-							LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), rowIdx, hisSessionTime  );
+                            LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName().c_str(), netIdent->isOnline(), rowIdx, hisSessionTime  );
 							insertItem( rowIdx, poFriendItem );
 							wasInserted = true;
 							break;
@@ -272,7 +272,7 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 			if( false == wasInserted )
 			{
 				//addItem( poFriendItem );
-				LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count(), hisSessionTime );
+                LogMsg( LOG_INFO, "PersonOfferListWidget::onFriendUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName().c_str(), netIdent->isOnline(), this->count(), hisSessionTime );
 				insertItem( this->count(), poFriendItem );
 			}
 		}
@@ -324,7 +324,7 @@ void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
             GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
-				LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName(), iIdx );
+                LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName().c_str(), iIdx );
 				takeItem( iIdx );
 				return;
 			}

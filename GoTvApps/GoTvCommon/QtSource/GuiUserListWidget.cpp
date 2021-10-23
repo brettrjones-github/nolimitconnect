@@ -217,7 +217,7 @@ void GuiUserListWidget::updateUser( GuiUser* user )
         auto iter = m_UserCache.find( user->getMyOnlineId() );
         if( iter == m_UserCache.end() )
         {
-            LogMsg( LOG_DEBUG, "GuiUserListWidget::updateUser new user %s", user->getOnlineName() );
+            LogMsg( LOG_DEBUG, "GuiUserListWidget::updateUser new user %s", user->getOnlineName().c_str() );
             userSession = makeSession( user );
             if( userSession )
             {
@@ -225,12 +225,12 @@ void GuiUserListWidget::updateUser( GuiUser* user )
                 UserListItem* entryWidget = sessionToWidget( userSession );
                 if( 0 == count() )
                 {
-                    LogMsg( LOG_INFO, "add host %s\n", user->getOnlineName() );
+                    LogMsg( LOG_INFO, "add host %s\n", user->getOnlineName().c_str() );
                     addItem( entryWidget );
                 }
                 else
                 {
-                    LogMsg( LOG_INFO, "insert host %s\n", user->getOnlineName() );
+                    LogMsg( LOG_INFO, "insert host %s\n", user->getOnlineName().c_str() );
                     insertItem( 0, (QListWidgetItem *)entryWidget );
                 }
 
@@ -238,7 +238,7 @@ void GuiUserListWidget::updateUser( GuiUser* user )
             }
             else
             {
-                LogMsg( LOG_ERROR, "GuiUserListWidget::updateUser failed create session for user %s", user->getOnlineName() );
+                LogMsg( LOG_ERROR, "GuiUserListWidget::updateUser failed create session for user %s", user->getOnlineName().c_str() );
             }
         }
         else
@@ -274,7 +274,7 @@ void GuiUserListWidget::removeUser( VxGUID& onlineId )
     auto iter = m_UserCache.find( onlineId );
     if( iter != m_UserCache.end() )
     {
-        LogMsg( LOG_DEBUG, "GuiUserListWidget::removeUser %s", iter->second->getOnlineName() );
+        LogMsg( LOG_DEBUG, "GuiUserListWidget::removeUser %s", iter->second->getOnlineName().c_str() );
         m_UserCache.erase( iter );
 
         UserListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
@@ -439,12 +439,12 @@ UserListItem* GuiUserListWidget::addOrUpdateSession( GuiUserSessionBase* userSes
         userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add user %s\n", userSession->getUserIdent()->getOnlineName() );
+            LogMsg( LOG_INFO, "add user %s\n", userSession->getUserIdent()->getOnlineName().c_str() );
             addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert user %s\n", userSession->getUserIdent()->getOnlineName() );
+            LogMsg( LOG_INFO, "insert user %s\n", userSession->getUserIdent()->getOnlineName().c_str() );
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 

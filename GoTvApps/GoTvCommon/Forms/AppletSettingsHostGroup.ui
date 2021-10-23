@@ -91,15 +91,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PermissionWidget</class>
-   <extends>QWidget</extends>
-   <header>PermissionWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>FriendListWidget</class>
    <extends>QWidget</extends>
    <header>FriendListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PermissionWidget</class>
+   <extends>QWidget</extends>
+   <header>PermissionWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -109,8 +109,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../gotvcommon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

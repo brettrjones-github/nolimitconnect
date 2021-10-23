@@ -191,7 +191,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendOfferListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiConnectMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
@@ -363,7 +362,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GuiInterface/OsLinux/ILinux.h \
     $$PWD/GuiInterface/OsAndroid/IAndroid.h
 
-SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
+SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountMgr.cpp \
@@ -535,7 +534,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendOfferListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiConnectMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.cpp \

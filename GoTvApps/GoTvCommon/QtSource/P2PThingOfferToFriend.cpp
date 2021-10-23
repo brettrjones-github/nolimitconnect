@@ -41,7 +41,7 @@ bool AppCommon::offerToFriendPluginSession( GuiUser * poFriend, EPluginType ePlu
 	else
 	{
 		EPluginAccess ePluginAccess = poFriend->getMyAccessPermissionFromHim( ePluginType );
-        ActivityMessageBox errMsgBox( GetAppInstance(), this, LOG_INFO, "%s's %s", poFriend->getOnlineName(), GuiParams::describePluginAction( poFriend, ePluginType, ePluginAccess ).toStdString().c_str() );
+        ActivityMessageBox errMsgBox( GetAppInstance(), this, LOG_INFO, "%s's %s", poFriend->getOnlineName().c_str(), GuiParams::describePluginAction( poFriend, ePluginType, ePluginAccess ).toStdString().c_str() );
 		errMsgBox.exec();
 	}
 

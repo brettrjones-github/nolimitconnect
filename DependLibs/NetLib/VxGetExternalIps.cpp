@@ -45,7 +45,6 @@ static bool WhatsMyIP(	InetAddrAndPort& oLclAddr,
 	{
 		return false;
 	}
-	InetAddress oLclIp;
 
 	SOCKET oSkt = VxConnectTo(	oLclAddr, 
 								oRmtAddr,					// remote ip or url
