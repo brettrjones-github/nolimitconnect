@@ -47,13 +47,44 @@
 //#define  HAVE___MALLOC_HOOK	0
 
 #ifdef TARGET_CPU_ARM
+# if defined(TARGET_CPU_64BIT)
+/* Make use of ARM asm optimization */
+//# define  OPUS_ARM_ASM
+/* Use generic ARMv4 GOTV_INLINE asm optimizations */
+//# define  OPUS_ARM_INLINE_ASM
+/* Use ARMv5E INLINE asm optimizations */
+//# define  OPUS_ARM_INLINE_EDSP
+/* Use ARMv6 INLINE asm optimizations */
+//# define  OPUS_ARM_INLINE_MEDIA	0
+/* Use ARM NEON INLINE asm optimizations */
+//# define  OPUS_ARM_INLINE_NEON	0
+/* Define if assembler supports EDSP instructions */
+//# define  OPUS_ARM_MAY_HAVE_EDSP	0
+/* Define if assembler supports ARMv6 media instructions */
+//# define  OPUS_ARM_MAY_HAVE_MEDIA	0
+/* Define if compiler supports NEON instructions */
+# define  OPUS_ARM_MAY_HAVE_NEON	1
+/* Compiler supports ARMv7/Aarch64 Neon Intrinsics */
+# define  OPUS_ARM_MAY_HAVE_NEON_INTR	1
+/* Define if binary requires Aarch64 Neon Intrinsics */
+# define  OPUS_ARM_PRESUME_AARCH64_NEON_INTR	1
+/* Define if binary requires EDSP instruction support */
+//# define  OPUS_ARM_PRESUME_EDSP	0
+/* Define if binary requires ARMv6 media instruction support */
+//# define  OPUS_ARM_PRESUME_MEDIA	0
+/* Define if binary requires NEON instruction support */
+//# define  OPUS_ARM_PRESUME_NEON	0
+/* Define if binary requires NEON intrinsics support */
+//# define  OPUS_ARM_PRESUME_NEON_INTR	0
+
+# else
 /* Make use of ARM asm optimization */
 # define  OPUS_ARM_ASM
-/* Use generic ARMv4 GOTV_INLINE asm optimizations */
+/* Use generic ARMv4 INLINE asm optimizations */
 # define  OPUS_ARM_INLINE_ASM
-/* Use ARMv5E GOTV_INLINE asm optimizations */
+/* Use ARMv5E INLINE asm optimizations */
 # define  OPUS_ARM_INLINE_EDSP
-/* Use ARMv6 GOTV_INLINE asm optimizations */
+/* Use ARMv6 INLINE asm optimizations */
 # define  OPUS_ARM_INLINE_MEDIA	0
 /* Use ARM NEON GOTV_INLINE asm optimizations */
 //# define  OPUS_ARM_INLINE_NEON	0
@@ -75,6 +106,9 @@
 //# define  OPUS_ARM_PRESUME_NEON	0
 /* Define if binary requires NEON intrinsics support */
 //# define  OPUS_ARM_PRESUME_NEON_INTR	0
+
+# endif // if !defined(TARGET_CPU_64BIT)
+
 #endif // TARGET_CPU_ARM
 
 #ifdef TARGET_CPU_X86
@@ -193,39 +227,6 @@ implies SSE4.1) */
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 //#define  LT_OBJDIR	""
-
-#ifdef TARGET_CPU_ARM
-/* Make use of ARM asm optimization */
-# define  OPUS_ARM_ASM
-/* Use generic ARMv4 GOTV_INLINE asm optimizations */
-# define  OPUS_ARM_INLINE_ASM
-/* Use ARMv5E GOTV_INLINE asm optimizations */
-# define  OPUS_ARM_INLINE_EDSP
-/* Use ARMv6 GOTV_INLINE asm optimizations */
-# define  OPUS_ARM_INLINE_MEDIA	0
-/* Use ARM NEON GOTV_INLINE asm optimizations */
-# define  OPUS_ARM_INLINE_NEON	0
-/* Define if assembler supports EDSP instructions */
-# define  OPUS_ARM_MAY_HAVE_EDSP	0
-/* Define if assembler supports ARMv6 media instructions */
-# define  OPUS_ARM_MAY_HAVE_MEDIA	0
-/* Define if compiler supports NEON instructions */
-#if defined(HAVE_ARM_NEON)
-# define  OPUS_ARM_MAY_HAVE_NEON		1
-#endif // defined(HAVE_ARM_NEON)
-/* Compiler supports ARMv7/Aarch64 Neon Intrinsics */
-//# define  OPUS_ARM_MAY_HAVE_NEON_INTR	0
-/* Define if binary requires Aarch64 Neon Intrinsics */
-//# define  OPUS_ARM_PRESUME_AARCH64_NEON_INTR	0
-/* Define if binary requires EDSP instruction support */
-//# define  OPUS_ARM_PRESUME_EDSP	0
-/* Define if binary requires ARMv6 media instruction support */
-//# define  OPUS_ARM_PRESUME_MEDIA	0
-/* Define if binary requires NEON instruction support */
-//# define  OPUS_ARM_PRESUME_NEON	0
-/* Define if binary requires NEON intrinsics support */
-//# define  OPUS_ARM_PRESUME_NEON_INTR	0
-#endif // TARGET_CPU_ARM
 
 #ifdef TARGET_CPU_X86
 /* Compiler supports X86 AVX Intrinsics */

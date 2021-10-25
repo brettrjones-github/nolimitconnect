@@ -82,7 +82,7 @@ bool CShoutcastFile::Open(const GoTvUrl& url)
   return result;
 }
 
-ssize_t CShoutcastFile::Read(void* lpBuf, size_t uiBufSize)
+int64_t CShoutcastFile::Read(void* lpBuf, size_t uiBufSize)
 {
   if (uiBufSize > SSIZE_MAX)
     uiBufSize = SSIZE_MAX;
@@ -104,11 +104,11 @@ ssize_t CShoutcastFile::Read(void* lpBuf, size_t uiBufSize)
     m_currint = 0;
   }
 
-  ssize_t toRead;
+  int64_t toRead;
   if (m_metaint > 0)
-    toRead = std::min<size_t>(uiBufSize,m_metaint-m_currint);
+    toRead = std::min<int64_t>(uiBufSize,m_metaint-m_currint);
   else
-    toRead = std::min<size_t>(uiBufSize,16*255);
+    toRead = std::min<int64_t>(uiBufSize,16*255);
   toRead = m_file.Read(lpBuf,toRead);
   if (toRead > 0)
     m_currint += toRead;

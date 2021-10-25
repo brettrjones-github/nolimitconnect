@@ -20,6 +20,7 @@ INCLUDEPATH += $$PWD/../../sysheaders
 }
 
 DESTDIR = $${BUILD_STATIC_LIBS_DIR}
+DLLDESTDIR = $${BUILD_STATIC_LIBS_DIR}
 
 SOURCES += \
         $$PWD/qtteststaticlib3.cpp
@@ -27,8 +28,6 @@ SOURCES += \
 HEADERS += \
         $$PWD/qtteststaticlib3.h
 
-
-
-
 message(qtsimpleteststaticlib OUT_PWD $$OUT_PWD)
 message(qtsimpleteststaticlib DESTDIR $$DESTDIR)
+message(Static Lib DEST_DIR $${DESTDIR})

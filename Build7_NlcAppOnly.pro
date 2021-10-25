@@ -10,7 +10,6 @@ CONFIG += ordered
 
 #SUBDIRS += $$PWD/GoTvOpenSslLib.pro
 
-#SUBDIRS += $$PWD/libcrossguid.pro
 SUBDIRS += $$PWD/GoTvPtoP_App.pro
 
 

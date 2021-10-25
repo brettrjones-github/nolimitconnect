@@ -46,9 +46,11 @@ message(QtSimpleTestSharedLib OUT_PWD $$OUT_PWD)
 #    QMAKE_EXTRA_TARGETS += copyfiles
 #    POST_TARGETDEPS += copyfiles
 #}
-
 android: {
-    DESTDIR=$${BUILD_SHARED_LIB_DIR}
+#    DEPENDPATH=$${SRC_CODE_ROOT_DIR}/bin-Android/libs/$${TARGET_ARCH_NAME}
+#    DLLDESTDIR=$${SRC_CODE_ROOT_DIR}/bin-Android/libs/$${TARGET_ARCH_NAME}
+#    DESTDIR=$${SRC_CODE_ROOT_DIR}/bin-Android/libs/$${TARGET_ARCH_NAME}
+    message(Shared Lib DEST_DIR $${DESTDIR})
 }
 
 !android: {

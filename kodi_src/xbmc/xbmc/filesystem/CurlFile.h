@@ -48,8 +48,8 @@ namespace XFILE
       int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
       void Close() override;
       bool ReadString(char *szLine, int iLineLength) override { return m_state->ReadString(szLine, iLineLength); }
-      ssize_t Read(void* lpBuf, size_t uiBufSize) override { return m_state->Read(lpBuf, uiBufSize); }
-      ssize_t Write(const void* lpBuf, size_t uiBufSize) override;
+      int64_t Read(void* lpBuf, size_t uiBufSize) override { return m_state->Read(lpBuf, uiBufSize); }
+      int64_t Write(const void* lpBuf, size_t uiBufSize) override;
       const std::string GetProperty(XFILE::FileProperty type, const std::string &name = "") const override;
       const std::vector<std::string> GetPropertyValues(XFILE::FileProperty type, const std::string &name = "") const override;
       int IoControl(EIoControl request, void* param) override;

@@ -1,14 +1,15 @@
 # Global
 TARGET = nolimitconnect
 TEMPLATE = app
+CONFIG += no_docs_target
+CONFIG += c++11
 
 # keep it all lowercase to match program naming convention on *nix systems
-PROJECT_NAME = nolimitconnect
 
+PROJECT_NAME = nolimitconnect
 TARGET_NAME = nolimitconnect
 
 QT += gui core concurrent widgets network opengl xml svg quickwidgets
-
 QT += multimedia
 QT += multimediawidgets
 
@@ -21,28 +22,15 @@ android:{
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
 DEFINES += LIB_STATIC _LIB
 
-CONFIG += mobility
-MOBILITY =
-
-#win32: DEFINES += NOMINMAX
-
-#strace_win {
-#    DEFINES += STACKTRACE_WIN
-#    DEFINES += STACKTRACE_WIN_PROJECT_PATH=$$PWD
-#    DEFINES += STACKTRACE_WIN_MAKEFILE_PATH=$$OUT_PWD
-#}
-
 # Resource files
 !android:{
-QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
+    QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
 }
 
 RESOURCES += $$PWD/GoTvApps/GoTvCommon/NoLimitConnect.qrc
 
-
 # Translations
-# TRANSLATIONS += $$files(lang/gotvptop_*.ts)
-
+# TRANSLATIONS += $$files(lang/nolimitconnect_*.ts)
 
 include(config_version.pri)
 include(config_os_detect.pri)
@@ -60,7 +48,6 @@ nolimitconnect.depends += $$PWD/libnetlib.pro
 nolimitconnect.depends += $$PWD/libpktlib.pro
 nolimitconnect.depends += $$PWD/libcorelib.pro
 nolimitconnect.depends += $$PWD/libcrossguid.pro
-
 
 OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
@@ -107,7 +94,7 @@ include(GoTvPtoPAppLib.pri)
 
 # look in same directory as executable for shared libraries
 unix:{
-QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
+    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
 }
 
 #QMAKE_CFLAGS_YACC   = -Wno-unused -Wno-parentheses
@@ -117,8 +104,6 @@ QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
 
 #### for static linked qt libs only
 #### QMAKE_LFLAGS += -static
-
-
 
 #link dependent librarys
 include(config_link.pri)
@@ -223,7 +208,6 @@ include(config_link.pri)
 
 #    LIBS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX} // shared lib
     LIBS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
-#    LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}png$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}tinyxml$${STATIC_LIB_SUFFIX}
@@ -298,15 +282,48 @@ android:{
     MOBILITY =
 
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/bin-Android
+    #shared libs   
+#    ANDROID_LIBS = $$PWD/bin-Android/libs/armeabi-v7a
 
-    #shared libs
-    ANDROID_LIBS = $$PWD/bin-Android/libs/armeabi-v7a
+#    LIBS += -l$${ANDROID_LIBS}/libssl_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}#
+#    LIBS += -l$${ANDROID_LIBS}/libpythoncore_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
+    ANDROID_LIBS_DIR = $${SRC_CODE_ROOT_DIR}/bin-Android/libs/$${ANDROID_TARGET_ARCH}
+    message(android libs $${ANDROID_LIBS_DIR})
 
-    LIBS += -l$${ANDROID_LIBS}/libssl_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
-    LIBS += -l$${ANDROID_LIBS}/libpythoncore_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
+
+    message(loading python lib  $${ANDROID_LIBS_DIR}/libpythoncore_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX})
+
+    DEPENDPATH += $${ANDROID_LIBS_DIR}/
+    LOAD_PYTHON_LIB_FILE=$${ANDROID_LIBS_DIR}/libssl_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
+    message(loading python lib  $${LOAD_PYTHON_LIB_FILE})
+
+    ANDROID_EXTRA_LIBS  += -L$${LOAD_PYTHON_LIB_FILE}
+    LIBS += -L$${LOAD_PYTHON_LIB_FILE}
+
+    LOAD_SSL_LIB_FILE=$${ANDROID_LIBS_DIR}/libssl_$${ANDROID_TARGET_ARCH}$${SHARED_PYTHON_LIB_SUFFIX}
+    message(loading ssl lib  $${LOAD_SSL_LIB_FILE})
+
+    ANDROID_EXTRA_LIBS  += -L$${LOAD_SSL_LIB_FILE}
+    LIBS += -L$${LOAD_SSL_LIB_FILE}
 
     LIBS +=  -ldl -lm -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics -landroid
 
+    DESTDIR = $${DEST_EXE_DIR}
+
+#    versionAtMost(QT_VERSION, 5.15.2){
+#        ANDROID_PACKAGE_SOURCE_DIR = \
+#            $$PWD/bin-Android
+
+#        DISTFILES += \
+#        bin-Android/AndroidManifest.xml \
+#        bin-Android/gradle/wrapper/gradle-wrapper.jar \
+#        bin-Android/gradlew \
+#        bin-Android/res/values/libs.xml \
+#        bin-Android/build.gradle \
+#        bin-Android/gradle/wrapper/gradle-wrapper.properties \
+#        bin-Android/gradlew.bat \
+#        bin-Android/res/values/strings.xml
+#    }
 }
 
 

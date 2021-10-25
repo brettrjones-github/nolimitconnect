@@ -86,7 +86,7 @@ android:{
         DEFINES += TARGET_CPU_64BIT
         DEFINES += TARGET_CPU_ARM
         ANDROID_ARM64 = 1
-        TARGET_ARCH_NAME=armeabi-v8a
+        TARGET_ARCH_NAME=arm64-v8a
         TARGET_CPU_BITS=64
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
@@ -168,3 +168,5 @@ contains( TARGET_CPU_BITS, 32 ) {
     message(Building $${BUILD_TYPE} $${TARGET_OS_NAME} 32 bit $${TARGET_ARCH_NAME} )
 }
 
+SRC_CODE_ROOT_DIR=$$PWD
+message(SRC_CODE_ROOT_DIR is $${SRC_CODE_ROOT_DIR})

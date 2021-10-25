@@ -1039,10 +1039,15 @@
 #define SIZEOF_FPOS_T 8
 
 /* The size of `int', as computed by sizeof. */
+#if defined(TARGET_CPU_64BIT) && defined(TARGET_CPU_ARM)
+# define SIZEOF_INT 4
+/* The size of `long', as computed by sizeof. */
+# define SIZEOF_LONG 8
+#else
 #define SIZEOF_INT 4
-
 /* The size of `long', as computed by sizeof. */
 #define SIZEOF_LONG 4
+#endif // defined(TARGET_CPU_64BIT) && defined(TARGET_CPU_ARM)
 
 /* The size of `long double', as computed by sizeof. */
 #define SIZEOF_LONG_DOUBLE 8

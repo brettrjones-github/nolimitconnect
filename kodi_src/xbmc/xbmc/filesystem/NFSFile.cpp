@@ -638,12 +638,12 @@ int CNFSFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
   return ret;
 }
 
-ssize_t CNFSFile::Read(void *lpBuf, size_t uiBufSize)
+int64_t CNFSFile::Read(void *lpBuf, size_t uiBufSize)
 {
   if (uiBufSize > SSIZE_MAX)
     uiBufSize = SSIZE_MAX;
 
-  ssize_t numberOfBytesRead = 0;
+  int64_t numberOfBytesRead = 0;
   CSingleLock lock(gNfsConnection);
   
   if (m_pFileHandle == NULL || m_pNfsContext == NULL )
@@ -724,13 +724,13 @@ void CNFSFile::Close()
 //this was a bitch!
 //for nfs write to work we have to write chunked
 //otherwise this could crash on big files
-ssize_t CNFSFile::Write(const void* lpBuf, size_t uiBufSize)
+int64_t CNFSFile::Write(const void* lpBuf, size_t uiBufSize)
 {
-  size_t numberOfBytesWritten = 0;
+  int64_t numberOfBytesWritten = 0;
   int writtenBytes = 0;
-  size_t leftBytes = uiBufSize;
+  int64_t leftBytes = uiBufSize;
   //clamp max write chunksize to 32kb - fixme - this might be superfluous with future libnfs versions
-  size_t chunkSize = gNfsConnection.GetMaxWriteChunkSize() > 32768 ? 32768 : (size_t)gNfsConnection.GetMaxWriteChunkSize();
+  int64_t chunkSize = gNfsConnection.GetMaxWriteChunkSize() > 32768 ? 32768 : (size_t)gNfsConnection.GetMaxWriteChunkSize();
   
   CSingleLock lock(gNfsConnection);
   

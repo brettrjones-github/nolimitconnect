@@ -62,7 +62,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAssetPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareOfferList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamClipPlayer.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.h \
@@ -408,7 +407,6 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAssetPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletBrowseFiles.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareOfferList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamClipPlayer.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletCamTest.cpp \
@@ -503,6 +501,7 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsTruthOrDare.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareOfferList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletTestAndDebug.cpp \
@@ -739,7 +738,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletBrowseFiles.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletShareOfferList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamClipPlayer.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletCamSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletCamTest.ui \

@@ -71,21 +71,11 @@ android:{
 
     message(ANDROID_TARGET $${ANDROID_TARGET_ARCH})
 
-    contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
-        DEFINES += TARGET_CPU_64BIT
-        DEFINES += TARGET_CPU_ARM
-        ANDROID_ARM64 = 1
-        TARGET_ARCH_NAME=armeabi-v8a
-        TARGET_CPU_BITS=64
-        TARGET_ENDIAN_LITTLE=1
-        TARGET_ENDIAN_BIG=0
-    }
-
     contains(ANDROID_TARGET_ARCH,arm64-v8a) {
         DEFINES += TARGET_CPU_64BIT
         DEFINES += TARGET_CPU_ARM
         ANDROID_ARM64 = 1
-        TARGET_ARCH_NAME=armeabi-v8a
+        TARGET_ARCH_NAME=arm64-v8a
         TARGET_CPU_BITS=64
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0

@@ -32,25 +32,25 @@ public:
 	virtual void				setAssetInfo( AssetBaseInfo& assetInfo ) override;
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
 	virtual void				updateAssetInfo( void );
-	virtual void				onActivityStop( void );
+    virtual void				onActivityStop( void ) override;
 
-	virtual void				toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-	virtual int				    toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+    virtual void				toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
+    virtual int				    toGuiClientPlayVideoFrame( void* userData, VxGUID& onlineId, uint8_t* picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
-	virtual void				showSendFail( bool show, bool permissionErr = false );
-	virtual void				showResendButton( bool show );
-	virtual void				showShredder( bool show );
-	virtual void				showXferProgress( bool show );
-	virtual void				setXferProgress( int sendProgress );
+    virtual void				showSendFail( bool show, bool permissionErr = false ) override;
+    virtual void				showResendButton( bool show ) override;
+    virtual void				showShredder( bool show ) override;
+    virtual void				showXferProgress( bool show ) override;
+    virtual void				setXferProgress( int sendProgress ) override;
 
 signals:
 	void						signalPlayProgress( int pos );
 	void						signalPlayEnd( void );
 
 protected slots:
-	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos );
+    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos ) override;
 	void						slotPlayButtonClicked( void );
-	void						slotShredAsset( void );
+    void						slotShredAsset( void ) override;
 	void						slotSliderPressed( void );
 	void						slotSliderReleased( void );
 
@@ -61,8 +61,8 @@ protected slots:
 protected:
 	void						initAppletCamClipPlayer( void );
 
-	void						showEvent( QShowEvent* ev );
-	void						resizeEvent( QResizeEvent* ev );
+    void						showEvent( QShowEvent* ev ) override;
+    void						resizeEvent( QResizeEvent* ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );

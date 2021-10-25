@@ -45,7 +45,7 @@ public:
 	virtual QProgressBar *		getXferBar( void )								{ return m_XferProgressBar; }
 	virtual void				updateFromAssetInfo( void );
 
-	virtual void				toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
+    virtual void				toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
 
 	virtual void				showSendFail( bool show, bool permissionErr = false ) = 0;
 	virtual void				showResendButton( bool show ) = 0;
@@ -53,20 +53,20 @@ public:
 	virtual void				showXferProgress( bool show ) = 0;
 	virtual void				setXferProgress( int xferProgress ) = 0;
 
-	virtual void				onActivityStop( void ) {};
+    virtual void				onActivityStop( void ) {};
 
 signals:
 	void						signalShreddingAsset( AppletAssetPlayerBase * assetWidget );
 	void						signalToGuiAssetAction( EAssetAction assetAction, int pos0to100000 );
 
 protected slots:
-	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 );
+    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 ) override;
 	virtual void				slotShredAsset( void );
 	virtual void				slotResendAsset( void );
 
 protected:
-	void						showEvent( QShowEvent * ev );
-	void						hideEvent( QHideEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
 	void						updateProgressBarVisibility( void );
 
 	void						doShowProgress( bool showProgress );

@@ -45,21 +45,24 @@ SUBDIRS += $$PWD/libasprintf.pro
 SUBDIRS += $$PWD/libvorbis.pro
 
 SUBDIRS += $$PWD/libmicrohttpd.pro
-#SUBDIRS += $$PWD/libgnu.pro
-#SUBDIRS += $$PWD/libdepends.pro
 SUBDIRS += $$PWD/libogg.pro
-#SUBDIRS += $$PWD/libcurl.pro
 SUBDIRS += $$PWD/libssh.pro
-#SUBDIRS += $$PWD/libssl.pro
-#SUBDIRS += $$PWD/libpktlib.pro
 SUBDIRS += $$PWD/libfribidi.pro
 SUBDIRS += $$PWD/libfreetype.pro
-#SUBDIRS += $$PWD/libiconv.pro
 SUBDIRS += $$PWD/libpng.pro
 SUBDIRS += $$PWD/libtinyxml.pro
 SUBDIRS += $$PWD/libxml2.pro
 SUBDIRS += $$PWD/libcompress.pro
-#SUBDIRS += $$PWD/libcorelib.pro
-#SUBDIRS += $$PWD/libcrossguid.pro
-#SUBDIRS += $$PWD/libbz2.pro
 SUBDIRS += $$PWD/libzlib.pro
+
+# these are built in Build1_PythonDepends.pro but do again here because Build1 is release only and we my be doing a debug build
+SUBDIRS += $$PWD/libpktlib.pro
+SUBDIRS += $$PWD/libdepends.pro
+SUBDIRS += $$PWD/libgnu.pro
+SUBDIRS += $$PWD/libbz2.pro
+SUBDIRS += $$PWD/libcurl.pro
+SUBDIRS += $$PWD/libcorelib.pro
+SUBDIRS += $$PWD/libcrossguid.pro
+
+#SUBDIRS += $$PWD/libssl.pro
+

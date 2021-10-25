@@ -1170,7 +1170,7 @@ bool CCurlFile::OpenForWrite(const GoTvUrl& url, bool bOverWrite)
   return true;
 }
 
-ssize_t CCurlFile::Write(const void* lpBuf, size_t uiBufSize)
+int64_t CCurlFile::Write(const void* lpBuf, size_t uiBufSize)
 {
   if (!(m_opened && m_forWrite) || m_inError)
     return -1;
@@ -1574,7 +1574,7 @@ int CCurlFile::Stat(const GoTvUrl& url, struct __stat64* buffer)
   return 0;
 }
 
-ssize_t CCurlFile::CReadState::Read(void* lpBuf, size_t uiBufSize)
+int64_t CCurlFile::CReadState::Read(void* lpBuf, size_t uiBufSize)
 {
   /* only request 1 byte, for truncated reads (only if not eof) */
   if (m_fileSize == 0 || m_filePos < m_fileSize)

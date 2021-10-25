@@ -53,7 +53,7 @@ namespace{
     }
 }
 
-#if defined (Q_OS_ANDROID)
+#if defined (Q_OS_ANDROID) && QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QtAndroid>
 const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
                                     "android.permission.WRITE_EXTERNAL_STORAGE",
@@ -70,10 +70,11 @@ const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
 
 int main(int argc, char **argv)
 {
+    LogMsg( LOG_DEBUG, "Creating QApplication" );
     // for some reason QApplication must be newed or does not initialize
     QApplication* myApp = new QApplication( argc, argv );
 
-#if defined (Q_OS_ANDROID)
+#if defined (Q_OS_ANDROID)  && QT_VERSION < QT_VERSION_CHECK(6,0,0)
     //Request requiered permissions at runtime
     for(const QString &permission : permissions)
     {

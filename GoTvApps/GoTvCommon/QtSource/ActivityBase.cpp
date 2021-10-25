@@ -266,7 +266,7 @@ BottomBarWidget * ActivityBase::getBottomBarWidget( void )
 }
 
 //============================================================================
-void ActivityBase::setupStyledDlg(	GuiUser *		poFriend,
+void ActivityBase::setupStyledDlg(	GuiUser *           poFriend,
 									IdentWidget *		poIdentWidget,
 									EPluginType			ePluginType,
 									VxPushButton *		poPermissionButton,

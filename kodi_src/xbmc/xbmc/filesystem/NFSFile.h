@@ -124,14 +124,14 @@ namespace XFILE
     ~CNFSFile() override;
     void Close() override;
     int64_t Seek(int64_t iFilePosition, int iWhence = SEEK_SET) override;
-    ssize_t Read(void* lpBuf, size_t uiBufSize) override;
+    int64_t Read(void* lpBuf, size_t uiBufSize) override;
     bool Open(const GoTvUrl& url) override;
     bool Exists(const GoTvUrl& url) override;
     int Stat(const GoTvUrl& url, struct __stat64* buffer) override;
     int Stat(struct __stat64* buffer) override;
     int64_t GetLength() override;
     int64_t GetPosition() override;
-    ssize_t Write(const void* lpBuf, size_t uiBufSize) override;
+    int64_t Write(const void* lpBuf, size_t uiBufSize) override;
     int Truncate(int64_t iSize) override;
 
     //implement iocontrol for seek_possible for preventing the stat in File class for
