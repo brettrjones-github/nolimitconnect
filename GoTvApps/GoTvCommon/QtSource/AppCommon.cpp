@@ -173,13 +173,13 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AccountMgr( accountMgr )
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
-, m_ConnectMgr( *this )
+, m_ThumbMgr( *this )
 , m_OfferClientMgr( *this )
 , m_OfferHostMgr( *this )
-, m_HostJoinMgr( *this )
 , m_UserMgr( *this )
+, m_HostJoinMgr( *this )
 , m_UserJoinMgr( *this )
-, m_ThumbMgr( *this )
+, m_ConnectMgr( *this )
 
 , m_MyIcons( *this )
 , m_AppTheme( *this )
@@ -1748,7 +1748,6 @@ void AppCommon::toGuiActivityClientsLock( void )
 		return;
 	}
 
-	std::vector<ToGuiActivityClient>::iterator removeIter;
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 	LogMsg( LOG_INFO, "m_ToGuiActivityClientMutex.lock() start\n");
 #endif // DEBUG_TOGUI_CLIENT_MUTEX

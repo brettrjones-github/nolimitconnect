@@ -475,6 +475,9 @@ void AppSettings::setupAppModeSettings( EDefaultAppMode appDefaultMode )
 		setFeatureEnable( (EAppFeatures)i, false );
 	}
 
+#if ENABLE_KODI
+	setFeatureEnable( eAppFeatureKodi, true );
+#endif // ENABLE_KODI
 	//// enable app mode specific features
 	//switch( appDefaultMode )
 	//{

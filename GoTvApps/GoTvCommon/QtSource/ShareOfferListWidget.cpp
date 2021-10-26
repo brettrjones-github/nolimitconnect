@@ -242,7 +242,6 @@ void ShareOfferListWidget::onShareOfferListItemClicked( ShareOfferListItem* user
             emit signalShareOfferListItemClicked( userSession, userItem );
         }
     }
-    onShareOfferListItemClicked( userItem );
 }
 
 //============================================================================

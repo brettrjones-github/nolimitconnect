@@ -22,6 +22,7 @@
 #include "RenderShaderQt.h"
 #include "RenderGlWidget.h"
 
+#if ENABLE_KODI
 #include "ServiceBroker.h"
 #include "utils/log.h"
 #include "rendering/RenderSystem.h"
@@ -29,6 +30,7 @@
 #include "windowing/GraphicContext.h"
 #include "cores/VideoPlayer/VideoRenderers/VideoShaders/YUVMatrix.h"
 #include "cores/VideoPlayer/VideoRenderers/VideoShaders/ConvolutionKernels.h"
+#endif // ENABLE_KODI
 
 #include <CoreLib/VxDebug.h>
 
@@ -40,6 +42,7 @@ static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
                                     , float         contrast
                                     , bool          limited )
 {
+#if ENABLE_KODI
     TransformMatrix matrix;
     CalculateYUVMatrix( matrix, flags, format, black, contrast, limited );
 
@@ -51,6 +54,7 @@ static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
     res[ 1 ][ 3 ] = 0.0f;
     res[ 2 ][ 3 ] = 0.0f;
     res[ 3 ][ 3 ] = 1.0f;
+#endif // ENABLE_KODI
 }
 
 //============================================================================
@@ -510,6 +514,7 @@ void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, con
 //============================================================================
 void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
 {
+#if ENABLE_KODI
     m_hVertex = glf->glGetAttribLocation( programId(), "m_attrpos" );
     verifyValidValue( m_hVertex, "m_hVertex" );
     m_hcoord = glf->glGetAttribLocation( programId(), "m_attrcord" );
@@ -594,6 +599,7 @@ void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, con
     default:
         break;
     }
+#endif // ENABLE_KODI
 }
 
 //============================================================================
@@ -626,6 +632,7 @@ bool RenderShaderQt::onEnabled()
 //============================================================================
 bool RenderShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
 {
+#if ENABLE_KODI
     const GLfloat *projMatrix = glMatrixProject.Get();
     const GLfloat *modelMatrix = glMatrixModview.Get();
     verifyValidValue( m_hProj, "m_hProj" );
@@ -721,6 +728,7 @@ bool RenderShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
         glf->glUniform1f( m_hContrast, 1.0f );
     }
 
+#endif // ENABLE_KODI
     return true;
 }
 

@@ -229,6 +229,7 @@ void AppCommon::lastEnd( CGUIFontTTFQt * font )
     }
 }
 
+#if ENABLE_KODI
 //============================================================================
 CVertexBuffer AppCommon::createVertexBuffer( CGUIFontTTFQt * font, const std::vector<SVertex>& vertices )
 {
@@ -242,6 +243,7 @@ CVertexBuffer AppCommon::createVertexBuffer( CGUIFontTTFQt * font, const std::ve
     CVertexBuffer vertBuf;
     return vertBuf;
 }
+#endif // ENABLE_KODI
 
 //============================================================================
 void AppCommon::destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer & vertBuffer )

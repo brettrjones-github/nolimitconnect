@@ -61,6 +61,7 @@ QString AudioUtils::formatToString(const QAudioFormat &format)
             formatType = "float";
             break;
         case QAudioFormat::Unknown:
+        default:
             formatType = "unknown";
             break;
         }

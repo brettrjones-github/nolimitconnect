@@ -25,8 +25,9 @@
 #ifdef TARGET_OS_ANDROID
 
 #include "GuiInterface/IGoTv.h" 
+#include <CoreLib/VxDebug.h>
 
-
+#if ENABLE_KODI
 #include "CompileInfo.h"
 #include "threads/Thread.h"
 #include "platform/xbmc.h"
@@ -35,16 +36,15 @@
 #include "platform/Environment.h"
 #include "utils/CharsetConverter.h" // Required to initialize converters before usage
 
-
 #include "filesystem/Directory.h"
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "GoTvCoreUtil.h"
 
-#include <CoreLib/VxDebug.h>
-
 using namespace XFILE;
+#endif // ENABLE_KODI
+
 
 IAndroid::IAndroid( IGoTv& gotv )
     : OsInterface( gotv )

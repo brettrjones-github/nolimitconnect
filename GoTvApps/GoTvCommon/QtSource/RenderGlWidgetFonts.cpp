@@ -23,10 +23,10 @@
 
 #include "GuiInterface/GoTvRenderFrame.h"
 
-
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>
 
+#if ENABLE_KODI
 #include "guilib/TextureQt.h"
 #include "guilib/GUITextureQt.h"
 #include "utils/GLUtils.h"
@@ -37,6 +37,7 @@
 
 #include "windowing/WinSystem.h"
 #include "windowing/GraphicContext.h"
+#endif // ENABLE_KODI
 
 
 #define ELEMENT_ARRAY_MAX_CHAR_INDEX (1000)
@@ -45,6 +46,7 @@
 //============================================================================
 bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
 {
+#if ENABLE_KODI
     VerifyGLStateQt();
 
     GLenum pixformat = GL_ALPHA; // deprecated
@@ -85,6 +87,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
         font->m_updateY1 = font->m_updateY2 = 0;
         font->m_textureStatus = CGUIFontTTFQt::TEXTURE_READY;
     }
+#endif // ENABLE_KODI
 
     VerifyGLStateQt();
 
@@ -92,8 +95,9 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
     getGlFunctions()->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
     getGlFunctions()->glEnable( GL_BLEND );
     getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
+#if ENABLE_KODI
     getGlFunctions()->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
-
+#endif // ENABLE_KODI
     VerifyGLStateQt();
 
     return true;
@@ -103,7 +107,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
 void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
 {
     VerifyGLStateQt();
-
+#if ENABLE_KODI
     // GLES 2.0 version.
     CRenderSystemQt * renderSystem = dynamic_cast< CRenderSystemQt* >( CServiceBroker::GetRenderSystem() );
     renderSystem->EnableGUIShader( SM_FONTS );
@@ -211,11 +215,13 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
     getGlFunctions()->glDisableVertexAttribArray( tex0Loc );
 
     renderSystem->DisableGUIShader();
+#endif // ENABLE_KODI
 
     VerifyGLStateQt();
 
 }
 
+#if ENABLE_KODI
 //============================================================================
 CVertexBuffer RenderGlWidget::createVertexBuffer( CGUIFontTTFQt * font, const std::vector<SVertex>& vertices )
 {
@@ -237,21 +243,25 @@ CVertexBuffer RenderGlWidget::createVertexBuffer( CGUIFontTTFQt * font, const st
 
     return CVertexBuffer( (unsigned int)bufferHandle, vertices.size() / 4, font );
 }
+#endif .. ENABLE_KODI
 
 //============================================================================
 void RenderGlWidget::destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer& vertBuffer )
 {
+#if ENABLE_KODI
     if( vertBuffer.bufferHandle != 0 )
     {
         // Release the buffer name for reuse
         getGlFunctions()->glDeleteBuffers( 1, ( GLuint * )&vertBuffer.bufferHandle );
         vertBuffer.bufferHandle = 0;
     }
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::deleteHardwareTexture( CGUIFontTTFQt * font )
 {
+#if ENABLE_KODI
     if( font->m_textureStatus != CGUIFontTTFQt::TEXTURE_VOID )
     {
         if( getGlFunctions()->glIsTexture( font->m_nTexture ) )
@@ -260,11 +270,13 @@ void RenderGlWidget::deleteHardwareTexture( CGUIFontTTFQt * font )
         font->m_textureStatus = CGUIFontTTFQt::TEXTURE_VOID;
         font->m_updateY1 = font->m_updateY2 = 0;
     }
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
 {
+#if ENABLE_KODI
     VerifyGLStateQt();
 
     // Bind a new buffer to the OpenGL context's GL_ELEMENT_ARRAY_BUFFER binding point
@@ -286,12 +298,14 @@ void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
     getGlFunctions()->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
     font->m_staticVertexBufferCreated = true;
     VerifyGLStateQt();
-
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::destroyStaticVertexBuffers( CGUIFontTTFQt * font )
 {
+#if ENABLE_KODI
     getGlFunctions()->glDeleteBuffers( 1, &font->m_elementArrayHandle );
     font->m_staticVertexBufferCreated = false;
+#endif // ENABLE_KODI
 }

@@ -25,6 +25,7 @@ INCLUDEPATH += $$PWD/DependLibs
 android{
     # not needed with QT 5.15.2 DEFINES +=__ANDROID_API__=22
     DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
+    # QMAKE_CXXFLAGS += -Xlint
 }
 
 CONFIG(debug, debug|release){

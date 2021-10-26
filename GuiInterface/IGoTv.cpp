@@ -12,6 +12,7 @@
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxMutex.h>
+#include <CoreLib/VxStringUtils.h>
 
 #include <NetLib/VxPeerMgr.h>
 
@@ -39,8 +40,6 @@ echo traget os is not defined
 #include "utils/log.h"
 
 using namespace XFILE;
-#else
-#include <DependLibs/libp8platform/src/util/StringUtils.h>
 #endif // ENABLE_KODI
 
 //============================================================================
@@ -164,7 +163,7 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
         return;
     }
 
-    std::string message = StringUtils::FormatV( format, va );
+    std::string message = VxStringUtils::FormatV( format, va );
     if( message.empty() )
     {
         logMutex.unlock();
@@ -172,7 +171,7 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
     }
 
     static std::string buffer;
-    std::string prefix = StringUtils::Format( "ffmpeg[%lX]: ", threadId );
+    std::string prefix = VxStringUtils::Format( "ffmpeg[%lX]: ", threadId );
     if( avc )
     {
         if( avc->item_name )
@@ -321,7 +320,9 @@ bool IGoTv::doPreStartup()
 {
     LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::doPreStartup");
 #ifdef TARGET_OS_ANDROID
+# if ENABLE_KODI
     CJNIContext::createJniContext( GetJavaEnvCache().getJavaVM(),  GetJavaEnvCache().getJavaEnv() );
+# endif // ENABLE_KODI
 #endif // TARGET_OS_ANDROID
 
 #ifdef DEBUG_KODI_ENABLE_DEBUG_LOGGING

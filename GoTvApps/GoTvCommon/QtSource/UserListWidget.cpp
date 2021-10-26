@@ -241,7 +241,6 @@ void UserListWidget::onUserListItemClicked( UserListItem* userItem )
             emit signalUserListItemClicked( userSession, userItem );
         }
     }
-    onUserListItemClicked( userItem );
 }
 
 //============================================================================

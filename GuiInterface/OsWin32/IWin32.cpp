@@ -25,6 +25,13 @@
 
 #include "GuiInterface/IGoTv.h" 
 
+#include <dbghelp.h>
+#include <mmsystem.h>
+#include <Objbase.h>
+#include <shellapi.h>
+#include <WinSock2.h>
+
+#if ENABLE_KODI
 #include "CompileInfo.h"
 #include "threads/Thread.h"
 #include "threads/platform/win/Win32Exception.h"
@@ -35,12 +42,6 @@
 #include "platform/Environment.h"
 #include "utils/CharsetConverter.h" // Required to initialize converters before usage
 
-#include <dbghelp.h>
-#include <mmsystem.h>
-#include <Objbase.h>
-#include <shellapi.h>
-#include <WinSock2.h>
-
 #include "filesystem/Directory.h"
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
@@ -50,9 +51,11 @@
 
 #include "ServiceBroker.h"
 #include "settings/SettingsComponent.h"
+#endif // ENABLE_KODI
 
 #include <CoreLib/VxDebug.h>
 
+#if ENABLE_KODI
 using namespace XFILE;
 
 //============================================================================
@@ -63,6 +66,7 @@ LONG WINAPI CreateMiniDump( EXCEPTION_POINTERS* pEp )
     win32_exception::write_minidump( pEp );
     return pEp->ExceptionRecord->ExceptionCode;
 }
+#endif // ENABLE_KODI
 
 //============================================================================
 IWin32::IWin32( IGoTv& gotv )
@@ -76,6 +80,7 @@ IWin32::IWin32( IGoTv& gotv )
 bool IWin32::doPreStartup()
 {
     LogModule( eLogStartup, LOG_VERBOSE, "IWin32::doPreStartup" );
+#if ENABLE_KODI
     using KODI::PLATFORM::WINDOWS::ToW;
     // this fixes crash if OPENSSL_CONF is set to existed openssl.cfg  
     // need to set it as soon as possible  
@@ -98,7 +103,8 @@ bool IWin32::doPreStartup()
 
     // check if application is already running
     std::string appName = CCompileInfo::GetAppName();
-    m_AppRunningMutex = CreateMutexW( nullptr, FALSE, ToW( appName + " GoTvPtoP" ).c_str() );
+
+    m_AppRunningMutex = CreateMutexW( nullptr, FALSE, ToW( appName + " NoLimitConnect" ).c_str() );
     if( GetLastError() == ERROR_ALREADY_EXISTS )
     {
         auto appNameW = ToW( appName );
@@ -122,6 +128,7 @@ bool IWin32::doPreStartup()
        return 0;
     }
 
+#endif // ENABLE_KODI
     //Initialize COM
     CoInitializeEx( nullptr, COINIT_MULTITHREADED );
 

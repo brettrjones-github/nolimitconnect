@@ -103,11 +103,13 @@ void IGoTv::lastEnd( CGUIFontTTFQt * font )
     getAppCommon().lastEnd( font );
 }
 
+#if ENABLE_KODI
 //============================================================================
 CVertexBuffer IGoTv::createVertexBuffer( CGUIFontTTFQt * font, const std::vector<SVertex>& vertices )
 {
     return getAppCommon().createVertexBuffer( font, vertices );
 }
+#endif // ENABLE_KODI
 
 //============================================================================
 void IGoTv::destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer & vertBuffer )

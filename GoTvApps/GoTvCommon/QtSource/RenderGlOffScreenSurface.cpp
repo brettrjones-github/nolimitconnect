@@ -208,7 +208,7 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
         //glEnable( GL_DEPTH_TEST );
         getGlFunctions()->glEnable( GL_TEXTURE_2D );
 
-        if( m_TestTexure1 == -1 )
+        if( (int)m_TestTexure1 == -1 )
         {
             m_TestTexure1 = 0;
             getGlFunctions()->glGenTextures( 1, &m_TestTexure1 );

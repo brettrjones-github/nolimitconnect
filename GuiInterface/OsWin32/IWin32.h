@@ -15,7 +15,9 @@
 
 #include "GuiInterface/OsInterface/OsInterface.h"
 #ifdef TARGET_OS_WINDOWS
+#if ENABLE_KODI
 #include "config_kodi.h"
+#endif // ENABLE_KODI
 
 class IWin32 : public OsInterface
 {

@@ -251,7 +251,6 @@ void UserJoinListWidget::onUserJoinListItemClicked( UserJoinListItem* userItem )
             emit signalUserJoinListItemClicked( userSession, userItem );
         }
     }
-    onUserJoinListItemClicked( userItem );
 }
 
 //============================================================================

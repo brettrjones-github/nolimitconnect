@@ -118,7 +118,6 @@ void AppCommon::toGuiPlayVideoFrame(  VxGUID& onlineId, uint8_t * pu8Jpg, uint32
 	{
 		//LogMsg( LOG_INFO, "toGuiPlayVideoFrame %d len %d", ePluginType, u32JpgDataLen );
 
-		std::vector<ToGuiActivityClient>::iterator iter;
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 		LogMsg( LOG_INFO, "toGuiPlayVideoFrame: toGuiActivityClientsLock" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX

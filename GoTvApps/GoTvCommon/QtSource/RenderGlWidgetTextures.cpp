@@ -22,13 +22,14 @@
 #include "MyIcons.h"
 
 #include "GuiInterface/GoTvRenderFrame.h"
-
+#if ENABLE_KODI
 #include "guilib/TextureQt.h"
 #include "guilib/GUITextureQt.h"
 
 #include "ServiceBroker.h"
 #include "rendering/RenderSystem.h"
 #include "windowing/WinSystem.h"
+#endif // ENABLE_KODI
 
  //=== textures ===//
 
@@ -144,10 +145,12 @@ void RenderGlWidget::setActiveGlTexture( unsigned int activeTextureNum )
  //============================================================================
 void RenderGlWidget::createTextureObject( CQtTexture * texture )
 {
+#if ENABLE_KODI
     getGlFunctions()->glGenTextures( 1, ( GLuint* )&texture->m_texture );
 
     getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
     //getGlFunctions()->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
@@ -158,6 +161,7 @@ void RenderGlWidget::destroyTextureObject( CQtTexture * texture )
 //============================================================================
 bool RenderGlWidget::loadToGPU( CQtTexture * texture )
 {
+#if ENABLE_KODI
     if( !texture || !texture->m_pixels )
     {
         // nothing to load - probably same image (no change)
@@ -323,22 +327,24 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     }
 
     texture->m_loadedToGPU = true;
-
+#endif // ENABLE_KODI
     return true;
 }
 
 //============================================================================
 void RenderGlWidget::bindToUnit( CQtTexture * texture, unsigned int unit )
 {
+#if ENABLE_KODI
       getGlFunctions()->glActiveTexture( GL_TEXTURE0 + unit );
       getGlFunctions()->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color )
 {
     VerifyGLStateQt();
-
+#if ENABLE_KODI
     CBaseTexture* texture = guiTexture->m_texture.m_textures[ guiTexture->m_currentFrame ];
     texture->LoadToGPU();
     if( guiTexture->m_diffuse.size() )
@@ -402,14 +408,14 @@ void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor colo
     }
 
     VerifyGLStateQt();
-
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const GoTvRect& textureRect, const GoTvRect& diffuse, int orientation )
 {
     VerifyGLStateQt();
-
+#if ENABLE_KODI
     PackedVertex vertices[ 4 ];
 
     // Setup texture coordinates
@@ -494,6 +500,7 @@ void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, floa
     }
 
     VerifyGLStateQt();
+#endif // ENABLE_KODI
 }
 
 
@@ -501,7 +508,7 @@ void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, floa
 void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
 {
     VerifyGLStateQt();
-
+#if ENABLE_KODI
     if( guiTexture->m_packedVertices.size() )
     {
         GLint posLoc = shaderGetPos();
@@ -538,14 +545,14 @@ void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
         getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
    getGlFunctions()-> glEnable( GL_BLEND );
    VerifyGLStateQt();
-
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords )
 {
     VerifyGLStateQt();
-
+#if ENABLE_KODI
     if( texture )
     {
         texture->LoadToGPU();
@@ -612,11 +619,13 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     }
 
     VerifyGLStateQt();
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void RenderGlWidget::initTextures()
 {
+#if ENABLE_KODI
     if( !m_TexturesInited )
     {
         for( unsigned i = 0; i < MAX_RENDER_PLANES; ++i ) {
@@ -685,4 +694,5 @@ void RenderGlWidget::initTextures()
 # endif // defined(GL_UNPACK_ROW_LENGTH)
 #endif
     }
+#endif // ENABLE_KODI
 }

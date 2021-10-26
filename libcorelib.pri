@@ -58,6 +58,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxSha1Hash.h \
     $$PWD/DependLibs/CoreLib/VxShortcut.h \
     $$PWD/DependLibs/CoreLib/VxSingleton.h \
+    $$PWD/DependLibs/CoreLib/VxStringUtils.h \
     $$PWD/DependLibs/CoreLib/VxSupportedFiles.h \
     $$PWD/DependLibs/CoreLib/VxTextStreamReader.h \
     $$PWD/DependLibs/CoreLib/VxThread.h \
@@ -112,6 +113,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxSettings.cpp \
     $$PWD/DependLibs/CoreLib/VxSha1Hash.cpp \
     $$PWD/DependLibs/CoreLib/VxShortcut.cpp \
+    $$PWD/DependLibs/CoreLib/VxStringUtils.cpp \
     $$PWD/DependLibs/CoreLib/VxTextStreamReader.cpp \
     $$PWD/DependLibs/CoreLib/VxThread.cpp \
     $$PWD/DependLibs/CoreLib/VxTimeUtil.cpp \

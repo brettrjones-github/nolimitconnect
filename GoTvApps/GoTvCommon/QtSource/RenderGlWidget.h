@@ -131,7 +131,9 @@ public:
 
     bool                        firstBegin( CGUIFontTTFQt * font )  override;
     void                        lastEnd( CGUIFontTTFQt * font ) override;
+#if ENABLE_KODI
     CVertexBuffer               createVertexBuffer( CGUIFontTTFQt * font, const std::vector<SVertex>& vertices )  override;
+#endif // ENABLE_KODI
     void                        destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer& vertBuffer )  override;
 
     virtual void                deleteHardwareTexture( CGUIFontTTFQt * font )  override;

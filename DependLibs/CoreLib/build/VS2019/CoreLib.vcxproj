@@ -315,6 +315,7 @@
     <ClInclude Include="..\..\VxSha1Hash.h" />
     <ClInclude Include="..\..\VxShortcut.h" />
     <ClInclude Include="..\..\VxSingleton.h" />
+    <ClInclude Include="..\..\VxStringUtils.h" />
     <ClInclude Include="..\..\VxSupportedFiles.h" />
     <ClInclude Include="..\..\VxTextStreamReader.h" />
     <ClInclude Include="..\..\VxThread.h" />
@@ -379,6 +380,7 @@
     <ClCompile Include="..\..\VxSettings.cpp" />
     <ClCompile Include="..\..\VxSha1Hash.cpp" />
     <ClCompile Include="..\..\VxShortcut.cpp" />
+    <ClCompile Include="..\..\VxStringUtils.cpp" />
     <ClCompile Include="..\..\VxTextStreamReader.cpp" />
     <ClCompile Include="..\..\VxThread.cpp" />
     <ClCompile Include="..\..\VxTime.cpp" />
