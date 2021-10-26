@@ -3,6 +3,12 @@
 
 #include "GuiInterface/IGoTv.h"
 
+#include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxTimer.h>
+
+#if ENABLE_KODI
 #include "CompileInfo.h"
 #include "threads/Thread.h"
 #include "platform/xbmc.h"
@@ -42,16 +48,10 @@
 
 #include "ServiceBroker.h"
 #include "settings/SettingsComponent.h"
-
-#include <CoreLib/VxGlobals.h>
-#include <CoreLib/VxFileUtil.h>
-#include <CoreLib/VxDebug.h>
-#include <CoreLib/VxTimer.h>
-
 using namespace XFILE;
 
+extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser & params );
 
-extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser &params );
 
 #if defined( TARGET_OS_ANDROID )
 
@@ -221,6 +221,7 @@ bool CopyIfRequiredAssetDirectory( std::string assetFileDir, std::string destDir
 }
 
 #endif // defined( TARGET_OS_ANDROID )
+#endif // ENABLE_KODI
 
 //============================================================================
 OsInterface::OsInterface( IGoTv& gotv )
@@ -244,6 +245,7 @@ bool OsInterface::doRun( EAppModule appModule )
     if( !m_IGoTv.getIsAppModuleRunning( appModule ) )
     {
         m_IGoTv.setIsAppModuleRunning( appModule, true );
+#if ENABLE_KODI
         if( eAppModuleKodi == appModule )
         {
 			if( m_CmdLineParams )
@@ -262,6 +264,7 @@ bool OsInterface::doRun( EAppModule appModule )
 				LogMsg( LOG_SEVERE, "Command Line Params are not set" );
 			}
         }
+#endif // ENABLE_KODI
     }
 
     return true;
@@ -276,6 +279,8 @@ bool OsInterface::initUserPaths()
 #ifdef DEBUG
     VxTimer loadTimer;
 #endif // DEBUG
+
+#if ENABLE_KODI
     std::string exePath = CUtil::ResolveExecutablePath( true );
     std::string appExePath = exePath;
     VxFileUtil::makeForwardSlashPath( appExePath );
@@ -284,35 +289,6 @@ bool OsInterface::initUserPaths()
 
 #if defined(TARGET_OS_WINDOWS)
 	std::string strHomePath = exePath;
-    /* Not needed i think ??
-	// strip off exe name
-	size_t last_sep = strHomePath.find_last_of(PATH_SEPARATOR_CHAR);
-	if (last_sep != std::string::npos)
-		exePath = strHomePath.substr(0, last_sep);
-	else
-		exePath = strHomePath;
-	// make into full path by removing relative ..
-	if (exePath.find("..") != std::string::npos)
-	{
-		//expand potential relative path to full path
-		std::wstring strPathW;
-		g_charsetConverter.utf8ToW(exePath, strPathW, false);
-		CWIN32Util::AddExtraLongPathPrefix(strPathW);
-		const unsigned int bufSize = GetFullPathNameW(strPathW.c_str(), 0, NULL, NULL);
-		if (bufSize != 0)
-		{
-			wchar_t * buf = new wchar_t[bufSize];
-			if (GetFullPathNameW(strPathW.c_str(), bufSize, buf, NULL) <= bufSize - 1)
-			{
-				std::wstring expandedPathW(buf);
-				CWIN32Util::RemoveExtraLongPathPrefix(expandedPathW);
-				g_charsetConverter.wToUTF8(expandedPathW, exePath);
-			}
-
-			delete[] buf;
-		}
-	}
-    */
 #elif defined(TARGET_OS_ANDROID)
     CJNIContext& jniContext = CJNIContext::getJniContext();
     AAssetManager* assetMgr = jniContext.getAssetManager();
@@ -692,7 +668,7 @@ bool OsInterface::initUserPaths()
     CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), gotvDir.c_str() );
     LogMsg( LOG_VERBOSE, "master profile path %s", gotvDir.c_str() );
 #endif //  defined(TARGET_OS_ANDROID)
-
+#endif // ENABLE_KODI
 #ifdef DEBUG
     LogMsg( LOG_VERBOSE, "Initalize directories took %3.3f sec", loadTimer.elapsedSec() );
 #endif // DEBUG
@@ -703,6 +679,7 @@ bool OsInterface::initUserPaths()
 
 bool OsInterface::initDirectories()
 {
+#if ENABLE_KODI
     LogModule(eLogStartup, LOG_VERBOSE, "OsInterface::initDirectories");
 	//=== relative to executable paths ===//
     // do not call this until user logs on so that eAppDirUserSpecific is set
@@ -734,7 +711,7 @@ bool OsInterface::initDirectories()
    
 	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserXfer ).c_str() ); // Documents Directory/GoTvPtoP/hashnum/userId/   where transfer directories are
 	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( gotvDir, "gotvxfer" ) );
-    
+#endif // ENABLE_KODI  
 
     m_IGoTv.createUserDirs();
 

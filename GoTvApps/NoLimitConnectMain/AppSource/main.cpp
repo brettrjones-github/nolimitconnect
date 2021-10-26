@@ -145,10 +145,12 @@ int main(int argc, char **argv)
     appCommon.loadWithoutThread();
 #endif // 0
 
+#if ENABLE_KODI
     // send command line parameters to Kodi
 	static CAppParamParser appParamParser;
     appParamParser.Parse( argv, argc );
     IGoTv::getIGoTv().initRun( appParamParser );
+#endif // ENABLE_KODI
 
 	int result = 0;
 

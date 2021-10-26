@@ -2,30 +2,10 @@
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
-#include <kodi_src/xbmc/xbmc/utils/StringUtils.h>
 #include <libavutil/log.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavfilter/avfilter.h>
-
-#ifdef TARGET_OS_WINDOWS
-# include "GuiInterface/OsWin32/IWin32.h"
-#elif TARGET_OS_LINUX
-# include "GuiInterface/OsLinux/ILinux.h"
-#elif TARGET_OS_ANDROID
-# include "GuiInterface/OsAndroid/IAndroid.h"
-# include "CoreLib/VxJava.h"
-# include "kodi_src/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h"
-#else 
-echo traget os is not defined
-#endif 
-
-#include "Application.h"
-#include "filesystem/Directory.h"
-#include "filesystem/SpecialProtocol.h"
-#include "filesystem/File.h"
-#include "platform/Environment.h"
-#include "utils/log.h"
 
 #include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
@@ -35,7 +15,33 @@ echo traget os is not defined
 
 #include <NetLib/VxPeerMgr.h>
 
+#ifdef TARGET_OS_WINDOWS
+# include "GuiInterface/OsWin32/IWin32.h"
+#elif TARGET_OS_LINUX
+# include "GuiInterface/OsLinux/ILinux.h"
+#elif TARGET_OS_ANDROID
+# include "GuiInterface/OsAndroid/IAndroid.h"
+# include "CoreLib/VxJava.h"
+#if ENABLE_KODI
+# include "kodi_src/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h"
+#endif // ENABLE_KODI
+#else 
+echo traget os is not defined
+#endif 
+
+#if ENABLE_KODI
+#include <kodi_src/xbmc/xbmc/utils/StringUtils.h>
+#include "Application.h"
+#include "filesystem/Directory.h"
+#include "filesystem/SpecialProtocol.h"
+#include "filesystem/File.h"
+#include "platform/Environment.h"
+#include "utils/log.h"
+
 using namespace XFILE;
+#else
+#include <DependLibs/libp8platform/src/util/StringUtils.h>
+#endif // ENABLE_KODI
 
 //============================================================================
 VxPeerMgr& GetVxPeerMgr( void )
@@ -206,7 +212,9 @@ IGoTv::IGoTv()
 , m_OsInterface( *new IAndroid( *this ) )
 #endif 
 , m_VxPeerMgr( GetVxPeerMgr() )
+#if ENABLE_KODI
 , m_Kodi( GetKodiInstance() )
+#endif // ENABLE_KODI
 {
     memset( m_IsRunning, 0, sizeof( m_IsRunning  ) );
 }
@@ -227,6 +235,7 @@ bool IGoTv::initDirectories()
 //============================================================================
 void IGoTv::createUserDirs() const
 {
+#if ENABLE_KODI
     LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::createUserDirs");
     CDirectory::Create( "special://home/" );
     CDirectory::Create( "special://home/addons" );
@@ -239,24 +248,6 @@ void IGoTv::createUserDirs() const
     CDirectory::Create( "special://logpath" );
     CDirectory::Create( "special://temp/temp" ); // temp directory for python and dllGetTempPathA
 
-	// for PtoP
-    /* TODO: implement for kodi integration
-    CDirectory::Create( "special://gotvassets" );
-    CDirectory::Create( "special://gotvassets/gui" );
-    CDirectory::Create( "special://gotvassets/shaders" );
-    CDirectory::Create( "special://gotvassets/profile" );
-
-	CDirectory::Create( "special://gotvdata" );
-	CDirectory::Create( "special://gotvaccounts" );
-    CDirectory::Create( "special://gotvsettings" );
-
-    CDirectory::Create( "special://gotvxfer" );
-	CDirectory::Create( "special://gotvxfer/downloads" );
-	CDirectory::Create( "special://gotvxfer/uploads" );
-	CDirectory::Create( "special://gotvxfer/incomplete" );
-	CDirectory::Create( "special://gotvxfer/me" );
-    */
-
 
       //Let's clear our archive cache before starting up anything more
     auto archiveCachePath = CSpecialProtocol::TranslatePath( "special://temp/archive_cache/" );
@@ -264,7 +255,7 @@ void IGoTv::createUserDirs() const
         if( !CDirectory::RemoveRecursive( archiveCachePath ) )
             CLog::Log( LOGWARNING, "Failed to remove the archive cache at %s", archiveCachePath.c_str() );
     CDirectory::Create( archiveCachePath );
-
+#endif ENABLE_KODI
 }
 
 //============================================================================
@@ -315,9 +306,9 @@ void IGoTv::setSslCertFile( std::string certFile )
     m_SslCertFile = certFile;
     if( !m_SslCertFile.empty() )
     {
-        if( XFILE::CFile::Exists( certFile ) )
+        if( VxFileUtil::fileExists( certFile.c_str() ) )
         {
-            CEnvironment::setenv( "SSL_CERT_FILE", certFile.c_str(), 1 );
+            setenv( "SSL_CERT_FILE", certFile.c_str(), 1 );
         }
 
         // TODO: anything special for linux?
@@ -336,11 +327,12 @@ bool IGoTv::doPreStartup()
 #ifdef DEBUG_KODI_ENABLE_DEBUG_LOGGING
     CLog::SetLogLevel( LOG_LEVEL_DEBUG );
 #endif //   DEBUG_KODI_ENABLE_DEBUG_LOGGING
-
+    const int FFMPEG_LOG_LEVEL_DEBUG = 1; // shows all
+    const int FFMPEG_LOG_LEVEL_NORMAL = 0; // shows notice, error, severe and fatal
 #ifdef DEBUG_FFMPEG_ENABLE_LOGGING
-    getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
+    getILog().setFfmpegLogLevel( FFMPEG_LOG_LEVEL_DEBUG );
 #else
-    getILog().setFfmpegLogLevel( LOG_LEVEL_NORMAL );
+    getILog().setFfmpegLogLevel( FFMPEG_LOG_LEVEL_NORMAL );
 #endif
 
     bool result = m_OsInterface.doPreStartup();
@@ -392,59 +384,79 @@ void IGoTv::doShutdown()
 //============================================================================
 void IGoTv::fromGuiKeyPressEvent( int moduleNum, int key, int mod )
 {
+#if ENABLE_KODI
     getKodi().fromGuiKeyPressEvent( moduleNum, key, mod );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiKeyReleaseEvent( int moduleNum, int key, int mod )
 {
+#if ENABLE_KODI
     getKodi().fromGuiKeyReleaseEvent( moduleNum, key, mod );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
+#if ENABLE_KODI
     getKodi().fromGuiMousePressEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
+#if ENABLE_KODI
     getKodi().fromGuiMouseReleaseEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
 {
+#if ENABLE_KODI
     getKodi().fromGuiMouseMoveEvent( moduleNum, mouseXPos, mouseYPos );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight )
 {
+#if ENABLE_KODI
 	getKodi().fromGuiResizeBegin( moduleNum, winWidth, winHeight );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
+#if ENABLE_KODI
     getKodi().fromGuiResizeEvent( moduleNum, winWidth, winHeight );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight )
 {
+#if ENABLE_KODI
 	getKodi().fromGuiResizeEnd( moduleNum, winWidth, winHeight );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiCloseEvent( int moduleNum )
 {
+#if ENABLE_KODI
     getKodi().fromGuiCloseEvent( moduleNum );
+#endif // ENABLE_KODI
 }
 
 //============================================================================
 void IGoTv::fromGuiVisibleEvent( int moduleNum, bool isVisible )
 {
+#if ENABLE_KODI
     getKodi().fromGuiVisibleEvent( moduleNum, isVisible );
+#endif // ENABLE_KODI
 }

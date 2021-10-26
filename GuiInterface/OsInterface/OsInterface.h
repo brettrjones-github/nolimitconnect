@@ -2,8 +2,9 @@
 
 #include "GuiInterface/IDefs.h"
 #include "GuiInterface/IGoTvEvents.h"
-
+#if ENABLE_KODI
 #include "AppParamParser.h"
+#endif // ENABLE_KODI
 
 class IGoTv;
 class CAppParamParser;

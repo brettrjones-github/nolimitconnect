@@ -46,8 +46,11 @@ public:
     OsInterface&                getOsInterface()        { return m_OsInterface; }
     VxPeerMgr&                  getPeerMgr()            { return m_VxPeerMgr; }
     P2PEngine&                  getPtoP();
-    CApplication&               getKodi()               { return m_Kodi; }
     AppCommon&                  getAppCommon();
+#if ENABLE_KODI
+    CApplication&               getKodi()               { return m_Kodi; }
+#endif // ENABLE_KODI
+
 
     //============================================================================
     //=== starup/shutdown ===//
@@ -624,8 +627,9 @@ private:
     ILog                        m_ILog; // must be first in initializer list
     OsInterface&                m_OsInterface;
     VxPeerMgr&	                m_VxPeerMgr;
+#if ENABLE_KODI
     CApplication&               m_Kodi;   
-
+#endif // ENABLE_KODI
     bool                        m_IsRunning[ eMaxAppModule ];
 
     std::string                 m_SslCertFile;

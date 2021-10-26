@@ -213,7 +213,6 @@ std::string VxFileUtil::makeKodiPath( const char * path )
 	makeForwardSlashPath( kodiPath );
 #endif // defined(TARGET_OS_WINDOWS)
 
-	//std::string strPath = CEnvironment::getenv( CCompileInfo::GetHomeEnvName() );
 	removeTrailingDirectorySlash( kodiPath );
 
 	return kodiPath;
