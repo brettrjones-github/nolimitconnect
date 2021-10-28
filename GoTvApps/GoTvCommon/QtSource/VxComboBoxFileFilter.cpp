@@ -146,10 +146,13 @@ EFileFilterType VxComboBoxFileFilter::getFileFilterTypeFromIndex( int selectionI
 //============================================================================
 void VxComboBoxFileFilter::handleSelectionChanged( int idx )
 {
-    EFileFilterType filterType = getFileFilterTypeFromIndex( idx );
-	m_CurFileMask = getMaskFromFileFilterType( filterType );
-	emit signalApplyFileFilter( m_CurFileMask );
-	emit signalFileFilterSelectionChanged( filterType);
+    if( 0 <= idx )
+    {
+        EFileFilterType filterType = getFileFilterTypeFromIndex( idx );
+        m_CurFileMask = getMaskFromFileFilterType( filterType );
+        emit signalApplyFileFilter( m_CurFileMask );
+        emit signalFileFilterSelectionChanged( filterType);
+    }
 }
 
 //============================================================================

@@ -35,6 +35,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_CamTimer(new QTimer(this))
+, m_MicrophonePeekTimer( new QTimer( this ) )
 {
 	ui.setupUi( this );
 
@@ -80,6 +81,14 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     setHomeButtonVisibility( false );
     setBackButtonVisibility( true );
 
+    // will show when have microphone peek signal
+    setMuteMicrophoneVisibility( false );
+    setMicrophoneVolumeVisibility( false );
+
+    // will show when have cam frames signal
+    enableVideoControls( false );
+
+
     connect( ui.m_PowerOffButton,       SIGNAL( clicked() ), this, SLOT( slotPowerButtonClicked() ) );
     connect( ui.m_HomeButton,           SIGNAL( clicked() ), this, SLOT( slotHomeButtonClicked() ) );
     connect( ui.m_PersonsOfferListButton,    SIGNAL( clicked() ), this, SLOT( slotPersonsOfferListButtonClicked() ) );
@@ -92,9 +101,14 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( &m_MyApp,                  SIGNAL( signalStatusMsg( QString ) ), this, SLOT( slotTitleStatusBarMsg( QString ) ) );
     connect( &m_MyApp,                  SIGNAL( signalToGuiPluginStatus( EPluginType, int, int ) ), this, SLOT( slotToGuiPluginStatus( EPluginType, int, int ) ) );
     connect( &m_MyApp,                  SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
-    connect( &m_MyApp,                  SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
+
     connect( m_CamTimer,                SIGNAL( timeout() ), this, SLOT( slotCamTimeout() ) );
     connect( this,                      SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
+
+    connect( &m_MyApp,                  SIGNAL( signalMicrophonePeak( int ) ),      this, SLOT( slotMicrophonePeak( int ) ) );
+    connect( m_MicrophonePeekTimer,     SIGNAL( timeout() ),                        this, SLOT( slotMicrophonePeekTimeout() ) );
+    connect( this,                      SIGNAL( signalMicrophonePlaying( bool ) ),  this, SLOT( slotMicrophonePlaying( bool ) ) );
+
     connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
 
     connect( &m_OfferClientMgr,             SIGNAL( signalShareOfferCount( int ) ),      this, SLOT( slotShareOfferListCount( int ) ) );
@@ -111,6 +125,8 @@ void TitleBarWidget::updateTitleBar( void )
     m_MuteMic = GetAppInstance().getEngine().fromGuiIsMicrophoneMuted();
     m_MuteSpeaker = GetAppInstance().getEngine().fromGuiIsSpeakerMuted();
     m_EchoCancelEnabled = GetAppInstance().getEngine().fromGuiIsEchoCancelEnabled();
+    checkTitleBarIconsFit();
+
     update();
 }
 
@@ -180,21 +196,28 @@ void TitleBarWidget::hideEvent( QHideEvent * ev )
 //============================================================================
 void TitleBarWidget::slotCamPlaying( bool isPlaying )
 {
-    if( isPlaying )
+    if( m_CamPlaying != isPlaying )
     {
-        m_CamTimer->start( 1500 );
-    }
-    else
-    {
-        m_CamTimer->stop();
-        ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+        m_CamPlaying = isPlaying;
+        enableVideoControls( isPlaying );
+        if( isPlaying )
+        {
+            m_CamTimer->start( 1500 );
+        }
+        else
+        {
+            m_CamTimer->stop();
+            ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+        }
+
+        checkTitleBarIconsFit();
     }
 }
 
 //============================================================================
 void TitleBarWidget::slotCamTimeout()
 {
-    if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 1000 )
+    if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 3000 )
     {
         m_CamTimer->stop();
         emit signalCamPlaying( false );
@@ -297,6 +320,7 @@ void TitleBarWidget::slotMuteMicButtonClicked( void )
 void TitleBarWidget::slotMicrophonePeak( int peekVal0to32768 )
 {
     ui.m_MicVolPeakBar->setValue( peekVal0to32768 );
+
 }
 
 //============================================================================
@@ -633,4 +657,69 @@ QWidget* TitleBarWidget::getTitleBarParentPage( void )
     }
 
     return parentWdiget;
+}
+
+
+//============================================================================
+void TitleBarWidget::slotMicrophonePlaying( bool isPlaying )
+{
+    if( m_MicrophonePlaying != isPlaying )
+    {
+        m_MicrophonePlaying = isPlaying;
+        if( isPlaying )
+        {
+            m_MicrophonePeekTimer->start( 1500 );
+            ui.m_MuteMicButton->setVisible( true );
+            ui.m_MicVolPeakBar->setVisible( true );
+        }
+        else
+        {
+            m_MicrophonePeekTimer->stop();
+            ui.m_MuteMicButton->setVisible( false );
+            ui.m_MicVolPeakBar->setVisible( false );
+        }
+
+        checkTitleBarIconsFit();
+    }
+}
+
+//============================================================================
+void TitleBarWidget::slotMicrophonePeekTimeout()
+{
+    if( GetApplicationAliveMs() - m_LastMicrophonePeekTimeMs > 3000 )
+    {
+        m_MicrophonePeekTimer->stop();
+        emit signalMicrophonePlaying( false );
+    }
+}
+
+//============================================================================
+void TitleBarWidget::checkTitleBarIconsFit( void )
+{
+    int iconCnt = 5;
+    if( ui.m_PowerOffButton->isVisible() )
+    {
+        iconCnt++;
+    }
+
+    if( ui.m_BackDlgButton->isVisible() )
+    {
+        iconCnt++;
+    }
+
+    if( ui.m_MuteMicButton->isVisible() )
+    {
+        iconCnt += 2;
+    }
+
+    if( ui.m_CamPreviewScreen->isVisible() )
+    {
+        iconCnt += 2;
+    }
+
+    if( !GuiParams::canFitIcons( eButtonSizeSmall, iconCnt, geometry().width() ) )
+    {
+        ui.m_GoTvButton->setVisible( false );
+        ui.m_MuteSpeakerButton->setVisible( false );
+    }
 }

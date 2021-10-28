@@ -63,6 +63,8 @@ public:
     /// @brief camera video size mulitiplied by display scale
     static QSize                getSnapshotSize( void );
 
+    static bool                 canFitIcons( EButtonSize buttonSize, int iconCnt, int sizeWidth );
+
     static QString				describeAge( EAgeType gender );
     static QString				describeAge( int age );
 

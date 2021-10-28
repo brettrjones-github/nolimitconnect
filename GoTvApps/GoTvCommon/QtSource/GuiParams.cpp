@@ -52,41 +52,27 @@ GuiParams::GuiParams()
 void GuiParams::initGuiParams(int defaultFontHeight)
 {
     m_DefaultFontHeight = defaultFontHeight;
-    m_SmallPushButtonSize = m_DefaultFontHeight * 3 + 2;
+    m_SmallPushButtonSize = m_DefaultFontHeight * 2 + 4;
     m_DisplayScale = (float)m_SmallPushButtonSize / (float)SMALL_PUSHBUTTON_SIZE;
     m_TinyPushButtonSize = getScaled(TINY_PUSHBUTTON_SIZE);
     m_MediumPushButtonSize = getScaled(MEDIUM_PUSHBUTTON_SIZE);
     m_LargePushButtonSize = getScaled(LARGE_PUSHBUTTON_SIZE);
 
-
-    /*
     QScreen *screen = QGuiApplication::primaryScreen();
     if( screen )
     {
         float dpi = screen->physicalDotsPerInch();
         QRect  screenGeometry = screen->availableGeometry();
-        float iconSizeInches = ( 48.0f / dpi );
-        float maxPixels = screenGeometry.width() > screenGeometry.height() ? screenGeometry.width() : screenGeometry.height();
-        float screenSizeInches = maxPixels / dpi;
-        float normalPercentOfScreenForIcon = 48.0f/1280.0f;
-        float curPercentOfScreenForIcon = 48.0f/maxPixels;
+        float maxPixels = screenGeometry.width() < screenGeometry.height() ? screenGeometry.width() : screenGeometry.height();
 
-        if( iconSizeInches < 0.3 )
-        {
-            // 48 pixel icons are less than a quarter inch wide
-            // scale up
-            m_DisplayScale = 2;
-        }
-        else if( ( screenSizeInches > 17 ) && ( curPercentOfScreenForIcon < normalPercentOfScreenForIcon ) )
-        {
-            m_DisplayScale = 2;
-        }
+        float smallIconSizePixels = m_SmallPushButtonSize;
+        float smallIconSizeInches = m_SmallPushButtonSize / dpi;
+        LogMsg( LOG_VERBOSE, "Screen dpi %1.0f width pixels %d inches %1.0f height pixels %d inches %1.0f can fit %1.0f small icons",
+            dpi, screenGeometry.width(), screenGeometry.width() / dpi, screenGeometry.height(), screenGeometry.height() / dpi, maxPixels / smallIconSizePixels );
 
-        LogMsg( LOG_VERBOSE, "Screen dpi %3.0f pixels %3.0f screen size %3.0f icon size 0x%3f scale %d",
-                dpi, maxPixels, screenSizeInches, iconSizeInches, m_DisplayScale );
-                
+        LogMsg( LOG_VERBOSE, "Screen small icon pixels %1.0f inches %1.0f scale %3.1f icon pixels tiny %d small %d medium %d large %d",
+            smallIconSizePixels, smallIconSizeInches, m_DisplayScale, m_TinyPushButtonSize, m_SmallPushButtonSize, m_MediumPushButtonSize, m_LargePushButtonSize );
     }
-    */
 }
 
 //============================================================================
@@ -122,6 +108,12 @@ QSize GuiParams::getThumbnailSize( void )
 QSize GuiParams::getSnapshotSize( void )
 {
     return QSize( getScaled(320), getScaled(240) );
+}
+
+//============================================================================
+bool GuiParams::canFitIcons( EButtonSize buttonSize, int iconCnt, int sizeWidth )
+{
+    return getButtonSize( buttonSize ).width() * iconCnt < sizeWidth;
 }
 
 //============================================================================

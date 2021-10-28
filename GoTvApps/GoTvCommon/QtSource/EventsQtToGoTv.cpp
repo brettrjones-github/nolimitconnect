@@ -137,6 +137,7 @@
 
 #endif // TARGET_OS_WINDOWS
 
+#if ENABLE_KODI
 //============================================================================
 namespace KODI
 {
@@ -617,6 +618,7 @@ int TranslateMouseButtonQt( int mouseButton )
         return XBMC_BUTTON_LEFT;
     }
 }
+#endif // ENABLE_KODI
 
 //============================================================================
 EventsQtToGoTv::EventsQtToGoTv( AppCommon& myApp )
@@ -627,70 +629,90 @@ EventsQtToGoTv::EventsQtToGoTv( AppCommon& myApp )
 //============================================================================
 bool EventsQtToGoTv::fromGuiKeyPressEvent( int key )
 {
+    #if ENABLE_KODI
     int mod = 0;
     int kodiKey = TranslateKeyQt( key, mod );
 
     m_MyApp.fromGuiKeyPressEvent( (int)eAppModuleKodi, kodiKey, mod );
+    #endif // ENABLE_KODI
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiKeyReleaseEvent( int key )
 {
+    #if ENABLE_KODI
     int mod = 0;
     int kodiKey = TranslateKeyQt( key, mod );
 
     m_MyApp.fromGuiKeyPressEvent( (int)eAppModuleKodi, kodiKey, mod );
+    #endif // ENABLE_KODI
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiMousePressEvent( int mouseXPos, int mouseyPos, int mouseButton )
 {
+    #if ENABLE_KODI
     m_MyApp.fromGuiMousePressEvent( ( int )eAppModuleKodi, mouseXPos, mouseyPos, TranslateMouseButtonQt( mouseButton ) );
+    #endif // ENABLE_KODI
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiMouseReleaseEvent( int mouseXPos, int mouseyPos, int mouseButton )
 {
+    #if ENABLE_KODI
     m_MyApp.fromGuiMouseReleaseEvent( ( int )eAppModuleKodi, mouseXPos, mouseyPos, TranslateMouseButtonQt( mouseButton ) );
+    #endif // ENABLE_KODI
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiMouseMoveEvent( int mouseXPos, int mouseyPos )
 {
+    #if ENABLE_KODI
     m_MyApp.fromGuiMouseMoveEvent( ( int )eAppModuleKodi, mouseXPos, mouseyPos );
+    #endif // ENABLE_KODI
     return false;
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiResizeBegin( int winWidth, int winHeight )
 {
+    #if ENABLE_KODI
 	m_MyApp.fromGuiResizeBegin( (int)eAppModuleKodi, winWidth, winHeight );
+    #endif // ENABLE_KODI
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiResizeEvent( int winWidth, int winHeight )
 {
+    #if ENABLE_KODI
     m_MyApp.fromGuiResizeEvent( ( int )eAppModuleKodi, winWidth, winHeight );
+    #endif // ENABLE_KODI
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiResizeEnd( int winWidth, int winHeight )
 {
+    #if ENABLE_KODI
 	m_MyApp.fromGuiResizeEnd( (int)eAppModuleKodi, winWidth, winHeight );
+    #endif // ENABLE_KODI
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiCloseEvent( )
 {
+    #if ENABLE_KODI
     m_MyApp.fromGuiCloseEvent( ( int )eAppModuleKodi );
+    #endif // ENABLE_KODI
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiVisibleEvent( bool isVisible )
 {
+    #if ENABLE_KODI
     m_MyApp.fromGuiVisibleEvent( ( int )eAppModuleKodi, isVisible );
+    #endif // ENABLE_KODI
 }

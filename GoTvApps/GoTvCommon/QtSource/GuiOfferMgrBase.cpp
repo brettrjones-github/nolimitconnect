@@ -31,7 +31,7 @@ GuiOfferMgrBase::GuiOfferMgrBase( AppCommon&  myApp )
 , m_LastOfferUpdateTime( 0 )
 //, m_OncePerSecTimer( new QTimer( this ) )
 {
-	connect( &myApp, SIGNAL(signalContactOffline(GuiUser*)),					this,		SLOT(slotToGuiContactOffline(GuiUser*)));
+    //connect( &myApp, SIGNAL(signalContactOffline(GuiUser*)),					this,		SLOT(slotToGuiContactOffline(GuiUser*)));
 
 	connect( this, SIGNAL(signalToGuiRxedPluginOffer(GuiOfferSession *)),		this,		SLOT(slotToGuiRxedPluginOffer(GuiOfferSession *)) );
 	connect( this, SIGNAL(signalToGuiRxedOfferReply(GuiOfferSession *)),		this,		SLOT(slotToGuiRxedOfferReply(GuiOfferSession *)) );

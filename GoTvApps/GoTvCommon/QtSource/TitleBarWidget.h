@@ -109,6 +109,7 @@ signals:
 	void						signalMenuTopButtonClicked( void );
 	void						signalBackButtonClicked( void );
     void                        signalCamPlaying( bool isPlaying );
+	void                        signalMicrophonePlaying( bool isPlaying );
 
 public slots:
 	virtual void				updateTitleBar( void );
@@ -141,6 +142,9 @@ public slots:
 
 	virtual void				slotTitleBarMenuButtonClicked( void );
 
+	virtual void				slotMicrophonePlaying( bool isPlaying );
+	virtual void				slotMicrophonePeekTimeout( void );
+
 protected:
 	QWidget*					getTitleBarParentFrame( void );
 	QWidget*					getTitleBarParentPage( void );
@@ -152,6 +156,7 @@ protected:
                                                            uint8_t *		pu8Jpg,
                                                            uint32_t		    u32JpgDataLen,
                                                            int				motion0To100000 ) override;
+	void						checkTitleBarIconsFit( void );
 
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
@@ -160,8 +165,13 @@ protected:
 	bool						m_MuteSpeaker{ false };
 	bool						m_EchoCancelEnabled{ false };
     VxGUID                      m_MyOnlineId;
+	bool                        m_CallbacksRequested{ false };
+
     QTimer*                     m_CamTimer;
-    bool                        m_CallbacksRequested{ false };
     bool                        m_CamPlaying{ false };
     uint64_t                    m_LastCamFrameTimeMs{ 0 };
+
+	QTimer*						m_MicrophonePeekTimer;
+	bool                        m_MicrophonePlaying{ false };
+	uint64_t                    m_LastMicrophonePeekTimeMs{ 0 };
 };

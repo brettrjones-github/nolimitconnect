@@ -71,11 +71,24 @@ const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
 int main(int argc, char **argv)
 {
     LogMsg( LOG_DEBUG, "Creating QApplication" );
+    QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
+    QApplication::setAttribute( Qt::AA_DontCheckOpenGLContextThreadAffinity );
+#if !defined(TARGET_OS_ANDROID) // on android AA_EnableHighDpiScaling causes main page to be quarter size
+    //if( myApp->screens().at( 0 )->geometry().width() > 1090 )
+    //{
+    //    QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+    //}
+    //else 
+    //{
+    //    QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, false );
+    //}
+#endif // !defined(TARGET_OS_ANDROID)
+
     // for some reason QApplication must be newed or does not initialize
     QApplication* myApp = new QApplication( argc, argv );
 
 #if defined (Q_OS_ANDROID)  && QT_VERSION < QT_VERSION_CHECK(6,0,0)
-    //Request requiered permissions at runtime
+    //Request requiered permissions at runtime.. does not seem to work with Qt 6.2.0
     for(const QString &permission : permissions)
     {
         LogMsg( LOG_DEBUG, "requesting permission %s", permission.toUtf8().constData() );
@@ -93,24 +106,9 @@ int main(int argc, char **argv)
             LogMsg( LOG_DEBUG, "ACCEPTED permission %s", permission.toUtf8().constData() );
         }
     }
-#endif
 
     LogMsg( LOG_DEBUG, "permission done" );
-    QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
-    QApplication::setAttribute( Qt::AA_DontCheckOpenGLContextThreadAffinity );
-
-
-
-#if !defined(TARGET_OS_ANDROID) // on android it causes main page to be quarter size
-    //if( myApp->screens().at( 0 )->geometry().width() > 1090 )
-    //{
-    //    QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
-    //}
-    //else 
-    //{
-    //    QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, false );
-    //}
-#endif // !defined(TARGET_OS_ANDROID)
+#endif
 
     // initialize display scaling etc
     // the best method I have found to scale the gui is to use the default font height as the scaling factor
@@ -135,8 +133,9 @@ int main(int argc, char **argv)
 
     AppCommon& appCommon = CreateAppInstance( gotv, myApp );
 
-	// create a thread to do application init and loading .. causes issues with QThreadDataStorage on linux so just load directly
-#if 0
+	// create a thread to do application init and loading
+    // causes issues with QThreadDataStorage on linux so just load directly instead of using a thread
+#if 0 
 	//QThread * loaderThread = new QThread();
 	//appCommon.moveToThread( loaderThread );
 	//QObject::connect( loaderThread, SIGNAL( started() ), &appCommon, SLOT( slotStartLoadingFromThread() ) );

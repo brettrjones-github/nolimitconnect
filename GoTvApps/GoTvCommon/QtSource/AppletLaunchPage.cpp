@@ -38,6 +38,7 @@ AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget * parent, EApplet eA
         setPowerButtonVisibility( true );
         setExpandWindowVisibility( true );
         connect( this, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
+        getTitleBarWidget()->updateTitleBar();
     }
 }
 
