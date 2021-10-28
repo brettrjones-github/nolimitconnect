@@ -194,6 +194,13 @@ void TitleBarWidget::hideEvent( QHideEvent * ev )
 }
 
 //============================================================================
+void TitleBarWidget::resizeEvent( QResizeEvent* ev )
+{
+    checkTitleBarIconsFit();
+    QWidget::resizeEvent( ev );
+}
+
+//============================================================================
 void TitleBarWidget::slotCamPlaying( bool isPlaying )
 {
     if( m_CamPlaying != isPlaying )
@@ -721,5 +728,12 @@ void TitleBarWidget::checkTitleBarIconsFit( void )
     {
         ui.m_GoTvButton->setVisible( false );
         ui.m_MuteSpeakerButton->setVisible( false );
+        ui.m_NetAvailStatusWidget->setVisible( false );
+    }
+    else
+    {
+        ui.m_GoTvButton->setVisible( true );
+        ui.m_MuteSpeakerButton->setVisible( true );
+        ui.m_NetAvailStatusWidget->setVisible( true );
     }
 }

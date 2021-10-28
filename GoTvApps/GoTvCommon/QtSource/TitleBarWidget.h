@@ -150,6 +150,7 @@ protected:
 	QWidget*					getTitleBarParentPage( void );
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
+	void						resizeEvent( QResizeEvent* ev ) override;
 
     virtual void				toGuiClientPlayVideoFrame( void *			userData,
                                                            VxGUID&          onlineId,
