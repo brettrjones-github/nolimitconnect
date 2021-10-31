@@ -395,15 +395,10 @@ void ActivityScanWebCams::onCountdownTimer( void )
 //============================================================================
 void ActivityScanWebCams::slotFriendClicked( void )
 {
-	/*
-	if( 0 != m_HisIdent )
+	AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+	if( popupMenu )
 	{
-		PopupMenu popupMenu( m_MyApp, this );
-        popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
-        popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
-        connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), &popupMenu, SLOT(onFriendActionSelected(int, PopupMenu *, ActivityBase *)) );
-
-        popupMenu.showFriendMenu( m_HisIdent );
-	}*/
+		popupMenu->showFriendMenu( m_HisIdent );
+	}
 }
 

@@ -122,6 +122,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/notify-join.svg";
 	case eMyIconNotifyOnlineOverlay:		
 		return ":/AppRes/Resources/notify-dot.svg";
+	case eMyIconNotifyOfflineOverlay:
+		return ":/AppRes/Resources/notify-offline.svg";
     case eMyIconNotifyOfferOverlay:		
         return ":/AppRes/Resources/notify-offer.svg";
     case eMyIconNotifyForbbidenOverlay:		
@@ -169,6 +171,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 	case eMyIconServers:
 		return ":/AppRes/Resources/radio-tower.svg";
+	case eMyIconEmoticonSmile:
+		return ":/AppRes/Resources/emoticon-smile.svg";
 	case eMyIconFileServer:
 		return ":/AppRes/Resources/file-folder-share.svg";
 
@@ -208,13 +212,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/client-random-connect.svg";
     case eMyIconClientWebCam:
 		return ":/AppRes/Resources/client-webcam.svg";
-
-	case eMyIconRelay:
-		return ":/AppRes/Resources/question-mark.svg";
-	case eMyIconRelayLocked:
-	case eMyIconRelayIgnored:
-	case eMyIconRelayDisabled:
-		return ":/AppRes/Resources/question-mark.svg";
 
 	case eMyIconProfile:
 		return ":/AppRes/Resources/magnifier-on-a-user.svg";
@@ -477,12 +474,12 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/image-gallery.svg";
 
 	case eMyIconFaceSelectDisabled:
-		return ":/AppRes/Resources/emoj01.svg";
+		return ":/AppRes/Resources/emoticon-smile.svg";
 	case eMyIconFaceSelectNormal:
-		return ":/AppRes/Resources/emoj01.svg";
+		return ":/AppRes/Resources/emoticon-smile.svg";
 
 	case eMyIconFaceCancelNormal:
-		return ":/AppRes/Resources/emoj01.svg";
+		return ":/AppRes/Resources/emoticon-smile.svg";
 
 	case eMyIconCamPreviewNormal:
 		return ":/AppRes/Resources/cam-preview.svg";
@@ -1082,23 +1079,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
         break;
 
 	case ePluginTypeRelay:
-		switch( ePluginAccess )
-		{
-		case ePluginAccessOk:
-			return eMyIconRelay;
-		case ePluginAccessDisabled:
-		case ePluginAccessInactive:
-		case ePluginAccessRequiresDirectConnect:
-		case ePluginAccessRequiresOnline:
-        case ePluginAccessNotSet:
-        case eMaxPluginAccessState:
-			return eMyIconRelayDisabled;
-		case ePluginAccessLocked:            
-			return eMyIconRelayLocked;
-		case ePluginAccessIgnored:
-        case ePluginAccessBusy:
-			return eMyIconRelayIgnored;
-		}
+		return eMyIconUnknown;
 		break;
 
 	case ePluginTypeStoryboard:

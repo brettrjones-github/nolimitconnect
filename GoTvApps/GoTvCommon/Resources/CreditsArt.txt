@@ -90,6 +90,7 @@ microphone-muted.svg (modified)
 notify-dot.svg (modified)
 notify-join.svg (modified)
 notify-offer.svg (modified)
+notify-offline.svg (modified)
 notepad.svg
 offer-file.svg (modified)
 offer-friendship.svg (modified)
@@ -126,6 +127,7 @@ share-services.svg
 share-storyboard.svg ( modified )
 share-webcam.svg ( modified )
 share-with-person.svg ( modified )
+smile-emoticon.svg
 speech-bubble.svg
 speech-bubble-disabled.svg
 star-empty.svg

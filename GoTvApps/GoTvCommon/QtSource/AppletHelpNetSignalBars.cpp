@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include "app_precompiled_hdr.h"
-#include "ActivityHelpSignal.h"
+#include "AppletHelpNetSignalBars.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 
@@ -21,18 +21,28 @@
 #include <QClipboard>
 
 //============================================================================
-ActivityHelpSignal::ActivityHelpSignal( AppCommon& app, QWidget * parent )
-    : ActivityBase( OBJNAME_ACTIVITY_HELP_SIGNAL, app, parent, eAppletActivityDialog )
+AppletHelpNetSignalBars::AppletHelpNetSignalBars( AppCommon& app, QWidget * parent )
+    : AppletBase( OBJNAME_APPLET_HELP_NET_SIGNAL_BARS, app, parent )
 {
-    initActivityHelpSignal();
+    ui.setupUi( getContentItemsFrame() );
+    setAppletType( eAppletHelpNetSignalBars );
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
+    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+
+    m_MyApp.activityStateChange( this, true );
+    initAppletHelpNetSignalBars();
 }
 
 //============================================================================
-void ActivityHelpSignal::initActivityHelpSignal( void )
+AppletHelpNetSignalBars::~AppletHelpNetSignalBars()
+{
+    m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletHelpNetSignalBars::initAppletHelpNetSignalBars( void )
 {
     ui.setupUi( this );
-    ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Information " ) );
-    ui.m_TitleBarWidget->setHomeButtonVisibility( false );
 
     ui.m_Pic_1->setResourceImage( ":/AppRes/Resources/bars_1_internet.png", true );
     ui.m_Pic_2->setResourceImage( ":/AppRes/Resources/bars_2_test_avail.png", true );
@@ -48,21 +58,21 @@ void ActivityHelpSignal::initActivityHelpSignal( void )
 
 /*
 //============================================================================
-void ActivityHelpSignal::showEvent( QShowEvent * ev )
+void AppletHelpNetSignalBars::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
     updateInformation();
 }
 
 //============================================================================
-void ActivityHelpSignal::slotCopyToClipboardButtonClicked( void )
+void AppletHelpNetSignalBars::slotCopyToClipboardButtonClicked( void )
 {
     QClipboard * clipboard = QApplication::clipboard();
     clipboard->setText( ui.m_InfoText->toPlainText() );
 }
 
 //============================================================================
-void ActivityHelpSignal::updateInformation( void )
+void AppletHelpNetSignalBars::updateInformation( void )
 {
     ui.m_PictureLabel->setVisible( false );
 
@@ -111,9 +121,9 @@ void ActivityHelpSignal::updateInformation( void )
     ui.m_InfoText->appendPlainText( getInfoText() );
 }
 
-QString ActivityHelpSignal::m_NoInfoAvailable( QObject::tr( "No Information is local available. please visit http://wwww.nolimitconnect.com for latest infomation and help" ) );
+QString AppletHelpNetSignalBars::m_NoInfoAvailable( QObject::tr( "No Information is local available. please visit http://wwww.nolimitconnect.com for latest infomation and help" ) );
 
-QString ActivityHelpSignal::m_NetworkDesign( QObject::tr(
+QString AppletHelpNetSignalBars::m_NetworkDesign( QObject::tr(
     "=== NETWORK DESIGN ===\n"
     "NOTE1: For anyone hosting services I suggest using good anti-virus/anti-malware and a service like PeerBlock to avoid bandwidth useage by those who make money spying on others.\n"
     "NOTE2: For anyone not hosting a NoLimitConnect Hosting Service a VPN is also suggested ( A VPN is not recommended when hosting a NoLimitConnect Network because of the requirement of a fixed ip address )\n"
@@ -171,7 +181,7 @@ QString ActivityHelpSignal::m_NetworkDesign( QObject::tr(
     "\n"
 ) );
 
-QString ActivityHelpSignal::m_PluginDefinitions( QObject::tr(
+QString AppletHelpNetSignalBars::m_PluginDefinitions( QObject::tr(
     "\n"
 "DEFINITIONS:\n"
 " *ABOUT PAGE SERVICE - Provide a information page about a host or person\n"
@@ -193,7 +203,7 @@ QString ActivityHelpSignal::m_PluginDefinitions( QObject::tr(
 " *VIDEO CHAT PLUGIN: Provides user video chat to others using the NoLimitConnect app and internet.\n"
 ) );
 
-QString ActivityHelpSignal::m_Permissions( QObject::tr(
+QString AppletHelpNetSignalBars::m_Permissions( QObject::tr(
     "=== PERMISSION LEVELS ===\n"
     " Permission Levels are used for setting either what level of permission is required to access a plugin or"
     " the permission level granted to another person to control what that person has access to."
@@ -239,7 +249,7 @@ QString ActivityHelpSignal::m_Permissions( QObject::tr(
     "\n"
 ) );
 
-QString ActivityHelpSignal::m_NetworkKey( QObject::tr(
+QString AppletHelpNetSignalBars::m_NetworkKey( QObject::tr(
     "=== NETWORK KEY ===\n"
     "The network key is a text string used for person to person network encryption.\n"
     "The network key should only be changed if connecting to or hosting a private network seperate from NoLimitConnect.\n"
@@ -254,7 +264,7 @@ QString ActivityHelpSignal::m_NetworkKey( QObject::tr(
     "Use of a VPN is recommended to improve your privacy."
 ) );
 
-QString ActivityHelpSignal::m_NetworkHost( QObject::tr(
+QString AppletHelpNetSignalBars::m_NetworkHost( QObject::tr(
     "=== NETWORK HOST ===\n"
     "The network host provides group host listing and connection test services for a PtoP Network.\n"
     "The network host URL should only be changed if connecting to or hosting a private network seperate from NoLimitConnect.\n"
@@ -271,7 +281,7 @@ QString ActivityHelpSignal::m_NetworkHost( QObject::tr(
     " that can be resolved to a IP using DNS ( Domain Name Service ).\n"
 ) );
 
-QString ActivityHelpSignal::m_ConnectTestUrl( QObject::tr(
+QString AppletHelpNetSignalBars::m_ConnectTestUrl( QObject::tr(
     "=== CONNECTION TEST URL ===\n"
     "The connection test service provides services to test if your device's port is open.\n"
     "If your port is open then others can connect directly to your device.\n"
@@ -286,7 +296,7 @@ QString ActivityHelpSignal::m_ConnectTestUrl( QObject::tr(
     "\n"
 ) );
 
-QString ActivityHelpSignal::m_ConnectTestSettings( QObject::tr(
+QString AppletHelpNetSignalBars::m_ConnectTestSettings( QObject::tr(
     "=== Enable UPNP check box ===\n"
     "If enabled then UPNP protocol will be used to attempt to open a port to your devcice\n"
     "Because of the various implementations of router firmware this only sometimes is succesfull in opening your port  \n"
@@ -309,7 +319,7 @@ QString ActivityHelpSignal::m_ConnectTestSettings( QObject::tr(
     "\n"
 ) );
 //============================================================================
-QString ActivityHelpSignal::getInfoText( void )
+QString AppletHelpNetSignalBars::getInfoText( void )
 {
     if( m_PluginType != ePluginTypeInvalid )
     {

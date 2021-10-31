@@ -51,7 +51,6 @@ public:
 	AppCommon&					getMyApp( void )                                    { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
-	void						setEnabled( bool enabled );
 	void						setUseTheme( bool useTheme )						{ m_UseTheme = useTheme; }
 	bool						getUseTheme( void )									{ return m_UseTheme; }
 
@@ -123,7 +122,6 @@ protected:
     bool                        m_IconOverrideImageWasDrawn{ false };
     QSize						m_LastOverrideImageSize;
 
-    bool						m_ButtonEnabled{ true };
 	bool						m_DrawButtonBorder{ false };
 	bool						m_UseTheme{ true };
 

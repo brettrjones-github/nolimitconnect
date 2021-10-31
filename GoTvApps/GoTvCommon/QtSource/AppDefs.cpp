@@ -58,6 +58,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletClientStoryboard:           return eMyIconStoryBoardNormal;
     case eAppletCreateAccount:			    return eMyIconUserIdentity;
     case eAppletFriendListClient:	        return eMyIconFriendJoined;
+    case eAppletGetStarted:                 return eMyIconInformation;
     case eAppletGroupJoin:                  return eMyIconClientGroup;
     case eAppletGroupListClient:	        return eMyIconGroupJoined;
 
@@ -152,7 +153,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletDownloads:                  return eMyIconFileDownloadNormal;
     case eAppletUploads:                    return eMyIconSendFileNormal;
     case eAppletShareOfferList:             return eMyIconOfferList;
-    case eAppletHostJoinRequestList:            return eMyIconPersonsOfferList;
+    case eAppletHostJoinRequestList:        return eMyIconPersonsOfferList;
     case eAppletPersonOfferList:            return eMyIconPersonsOfferList;
     case eAppletPopupMenu:	                return eMyIconMenu;
 
@@ -197,10 +198,12 @@ QString DescribeApplet( EApplet applet )
     case eAppletFriendListClient:	        return QObject::tr( "Friend List" );
     case eAppletGalleryImage:			    return QObject::tr( "Image Gallery" );
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
+    case eAppletGetStarted:			        return QObject::tr( "Get Started" );
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
     case eAppletGroupListClient:	        return QObject::tr( "Group List" );
     case eAppletGroupListLocalView:			return QObject::tr( "View Groups Announced To This Network Host" );
+    case eAppletHelpNetSignalBars:			return QObject::tr( "Network Signal Bars" );
     case eAppletHostGroupStatus:            return QObject::tr( "Host A Group Status" );
     case eAppletHostNetworkStatus:          return QObject::tr( "Host A Network Status" );
     case eAppletJoinGroupStatus:            return QObject::tr( "Join Group Status" );

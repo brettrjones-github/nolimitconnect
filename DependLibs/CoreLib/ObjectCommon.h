@@ -24,7 +24,6 @@
 #define OBJNAME_ACTIVITY_DOWNLOADS						"AppletDownloads"
 #define OBJNAME_ACTIVITY_EDIT_ACCOUNT					"ActivityEditAccount"
 #define OBJNAME_ACTIVITY_FILE_SEARCH					"ActivityFileSearch"
-#define OBJNAME_ACTIVITY_HELP_SIGNAL					"ActivityHelpSignal"
 #define OBJNAME_ACTIVITY_INFORMATION					"ActivityInformation"
 #define OBJNAME_ACTIVITY_IS_PORT_OPEN_TEST		        "ActivityIsPortOpenTest"
 #define OBJNAME_ACTIVITY_MESSAGE_BOX					"ActivityMessageBox"
@@ -95,7 +94,9 @@
 
 #define OBJNAME_APPLET_GALLERY_IMAGE				    "AppletGalleryImage"
 #define OBJNAME_APPLET_GALLERY_THUMB				    "AppletGalleryThumb"
+#define OBJNAME_APPLET_GET_STARTED						"AppletGetStarted"
 #define OBJNAME_APPLET_GROUP_JOIN						"AppletGroupJoin"
+#define OBJNAME_APPLET_HELP_NET_SIGNAL_BARS				"AppletHelpNetSignalBars"
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LIBRARY					        "AppletLibrary"
 #define OBJNAME_APPLET_LOG				                "AppletLog"
@@ -163,7 +164,6 @@
 #define OBJNAME_FRAME_LAUNCH_PAGE						"FrameLaunchPage" // layout frame for launch page
 #define OBJNAME_FRAME_MESSAGER_PAGE						"FrameMessengerPage" // layout frame for messenger page
 #define OBJNAME_FILE_ACTION_MENU						"FileActionMenu"
-#define OBJNAME_POPUP_MENU							    "PopupMenu"
 
 #define OBJNAME_UNKNOWN							        "OBJNAME_UNKNOWN"
 

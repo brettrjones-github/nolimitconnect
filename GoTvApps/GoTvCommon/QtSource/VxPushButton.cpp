@@ -274,19 +274,6 @@ void VxPushButton::setMaximumSize( int maxw, int maxh )
 }
 
 //============================================================================
-void VxPushButton::setEnabled( bool enabled )
-{
-	QPushButton::setEnabled( enabled );
-    if( enabled != m_ButtonEnabled )
-    {
-
-    }
-
-
-	update();
-}
-
-//============================================================================
 void VxPushButton::setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon )
 {
 	m_NotifyOnlineEnabled = enabled;

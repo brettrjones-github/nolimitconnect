@@ -7,6 +7,7 @@ enum EMyIcons
     eMyIconAvatarImage,
     eMyIconNotifyJoinOverlay,		// joined overlay
     eMyIconNotifyOnlineOverlay,		// online dot
+	eMyIconNotifyOfflineOverlay,	// offline dot
     eMyIconNotifyOfferOverlay,		// hand offer overlay
     eMyIconNotifyForbbidenOverlay,	// permission denied
     eMyIconNotifyErrorOverlay,		// error
@@ -53,11 +54,6 @@ enum EMyIcons
     eMyIconClientGroup,
     eMyIconClientRandomConnect,
     eMyIconClientWebCam,
-
-	eMyIconRelay,
-	eMyIconRelayLocked,
-	eMyIconRelayDisabled,
-	eMyIconRelayIgnored,
 
 	eMyIconProfile,
 	eMyIconProfileLocked,
@@ -214,9 +210,10 @@ enum EMyIcons
 	eMyIconGalleryNormal,
 	eMyIconGalleryCancel,
 
+	eMyIconEmoticonSmile,
+
 	eMyIconFaceSelectDisabled,
 	eMyIconFaceSelectNormal,
-
 	eMyIconFaceCancelNormal,
 
 	eMyIconCamPreviewNormal,

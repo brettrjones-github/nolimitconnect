@@ -137,9 +137,7 @@ void AppletPopupMenu::showRefreshMenu()
 	addMenuItem( 2, getMyIcons().getIcon( eMyIconAnonymous ), QObject::tr( "Anonymous" ) );
 	addMenuItem( 3, getMyIcons().getIcon( eMyIconAdministrator ), QObject::tr( "Administrators" ) );
 	addMenuItem( 4, getMyIcons().getIcon( eMyIconIgnored ), QObject::tr( "Ignored" ) );
-	addMenuItem( 5, getMyIcons().getIcon( eMyIconRelay ), QObject::tr( "My Relays" ) );
-	addMenuItem( 6, getMyIcons().getIcon( eMyIconRelay ), QObject::tr( "All Possible Relays" ) );
-	addMenuItem( 7, getMyIcons().getIcon( eMyIconRefreshNormal ), QObject::tr( "Refresh List" ) );
+	addMenuItem( 5, getMyIcons().getIcon( eMyIconRefreshNormal ), QObject::tr( "Refresh List" ) );
 }
 
 //============================================================================

@@ -266,9 +266,9 @@ void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
         GuiUserSessionBase* userSession = userItem->getUserSession();
         if( userSession )
         {
-            // emit signalMenuButtonClicked( userSession, userItem );
-            AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
             // emit signalFriendClicked( m_SelectedFriend );
+
+            AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
             if( popupMenu )
             {
                 if( getAppletType() == eAppletMultiMessenger )

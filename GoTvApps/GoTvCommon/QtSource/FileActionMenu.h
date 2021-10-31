@@ -79,9 +79,6 @@ public:
 	void						setTitle( QString strTitle );
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 
-signals:
-	void						menuItemClicked( int iItemId, PopupMenu * popupMenu, ActivityBase *);
-
 private slots:
     void						slotHomeButtonClicked( void ) override;
 	void						itemClicked(QListWidgetItem *item);
@@ -93,7 +90,7 @@ protected:
 
 	//=== vars ===//
 	Ui::FileActionMenuClass		ui;
-	VxMyFileInfo					m_FileInfo;
+	VxMyFileInfo				m_FileInfo;
 	bool						m_IsShared;
 	bool						m_IsInLibrary;
 	VxNetIdent *				m_SelectedFriend;

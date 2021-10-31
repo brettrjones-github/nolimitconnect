@@ -686,14 +686,10 @@ protected slots:
 	void						onMenuFileSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 	void						onMenuSearchSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 	void						onMenuServerSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
-	void						onMenuOptionsSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
-	// void						onMenuNotifySelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 
 	void						onVidCapTimer( void );
 	void						onIdleTimer( void );
 	void						onOncePerSecond( void );
-
-	void						onEditPermissionsSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 
 	void						onEngineStatusMsg( QString );
 
@@ -716,10 +712,6 @@ private:
 
 	void						removePluginSessionOffer( EPluginType ePluginType, GuiUser * poFriend );
 
-	void						addPermissionMenuEntry( PopupMenu *		poPopupMenu, 
-														EPluginType		ePluginType, 
-														EMyIcons		eIconType, 
-														const char *	pText );
 	void						connectSignals( void );
 	void						updateFriendList( GuiUser * netIdent, bool sessionTimeChange = false );
 

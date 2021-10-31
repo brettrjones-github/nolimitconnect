@@ -46,10 +46,12 @@
 #include "AppletFriendListClient.h"
 #include "AppletGalleryImage.h"
 #include "AppletGalleryThumb.h"
+#include "AppletGetStarted.h"
 #include "AppletGroupJoin.h"
 #include "AppletGroupJoinSearch.h"
 #include "AppletGroupListClient.h"
 #include "AppletGroupListLocalView.h"
+#include "AppletHelpNetSignalBars.h"
 #include "AppletHostJoinRequestList.h"
 #include "AppletHostGroupStatus.h"
 #include "AppletHostNetworkStatus.h"
@@ -234,9 +236,11 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
+    case eAppletGetStarted:                 appletDialog = new AppletGetStarted( m_MyApp, parent ); break;
     case eAppletGroupJoin:                  appletDialog = new AppletGroupJoin( m_MyApp, parent ); break;
     case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
     case eAppletGroupListLocalView:         appletDialog = new AppletGroupListLocalView( m_MyApp, parent ); break;
+    case eAppletHelpNetSignalBars:          appletDialog = new AppletHelpNetSignalBars( m_MyApp, parent ); break;
     case eAppletRandomConnectJoinSearch:    appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
     case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 

@@ -34,7 +34,6 @@ class GuiUserMgr;
 class GuiOfferSession;
 class IdentWidget;
 class MyIcons;
-class PopupMenu;
 class P2PEngine;
 class TitleBarWidget;
 
@@ -270,7 +269,6 @@ protected slots:
 	virtual void				slotMenuTopButtonClicked( void );
 	virtual void				slotBackButtonClicked( void );
     virtual void				slotAppIconSpecialClick( void );
-    virtual void                slotAppSystemMenuSelected( int menuId, PopupMenu* popupMenu, ActivityBase * parentActivity );
 
 	//=== bottom bar slots ===// 
 	virtual void				slotArrowLeftButtonClicked( void );

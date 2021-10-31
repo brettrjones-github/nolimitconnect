@@ -17,7 +17,6 @@
 #include "TitleBarWidget.h"
 
 #include "AppCommon.h"
-#include "ActivityHelpSignal.h"
 #include "AppletPopupMenu.h"
 #include "MyIcons.h"
 #include "GuiOfferClientMgr.h"
@@ -142,8 +141,7 @@ void TitleBarWidget::slotSystemReady( bool isReady )
 //============================================================================
 void TitleBarWidget::slotSignalHelpClick( void )
 {
-    ActivityHelpSignal * activityHelpSignal = new ActivityHelpSignal( m_MyApp, this );
-    activityHelpSignal->show();
+    m_MyApp.getAppletMgr().launchApplet( eAppletHelpNetSignalBars, getTitleBarParentPage() );
 }
 
 //============================================================================

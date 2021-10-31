@@ -520,24 +520,15 @@ void GuiUserListWidget::onMenuButtonClicked( UserListItem* userItem )
         if( userSession )
         {
             emit signalMenuButtonClicked( userSession, userItem );
+
+            if( userSession->getUserIdent() )
+            {
+                AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+                if( popupMenu )
+                {
+                    popupMenu->showFriendMenu( userSession->getUserIdent() );
+                }
+            }
         }
     }
-
-    /*
-    m_SelectedFriend = widgetToHost( item );
-    if( m_SelectedFriend )
-    {
-    emit signalFriendClicked( m_SelectedFriend );
-    ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
-    if( activityBase )
-    {
-    PopupMenu popupMenu( m_MyApp, activityBase );
-    popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
-    popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-    connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
-
-    popupMenu.showFriendMenu( m_SelectedFriend );
-    }
-    }
-    */
 }

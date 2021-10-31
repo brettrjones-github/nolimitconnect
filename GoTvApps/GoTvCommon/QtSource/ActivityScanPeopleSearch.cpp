@@ -149,13 +149,18 @@ void ActivityScanPeopleSearch::slotSearchComplete()
 ////============================================================================
 //void ActivityScanPeopleSearch::slotFriendClicked( VxNetIdent * netIdent )
 //{
-//	PopupMenu oPopupMenu( (QWidget *)this->parent() );
-//	if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), &oPopupMenu, SLOT(onFriendActionSelected(int)) ) )
+//AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+//if( popupMenu )
+//{
+//	if( getAppletType() == eAppletMultiMessenger )
 //	{
-//		LogMsg( LOG_ERROR, "FriendListWidget::findListEntryWidget failed connect\n" );
+//		popupMenu->showFriendMenu( userSession->getUserIdent() );
 //	}
-//
-//	oPopupMenu.showFriendMenu( netIdent );
+//	else
+//	{
+//		popupMenu->showUserSessionMenu( getAppletType(), userSession );
+//	}
+//}
 //}
 
 //============================================================================

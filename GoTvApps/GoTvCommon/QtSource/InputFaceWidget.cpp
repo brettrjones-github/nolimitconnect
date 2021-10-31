@@ -117,7 +117,7 @@ InputFaceWidget::InputFaceWidget( QWidget * parent )
 		faceLabel->setPixmap( picPixmap );
 	}
 
-	ui.m_CancelFaceButton->setIcons( eMyIconFaceCancelNormal);
+	ui.m_CancelFaceButton->setIcons( eMyIconEmoticonSmile );
 	connect( ui.m_CancelFaceButton,		SIGNAL(clicked()),							this, SLOT(slotCancelFaceButtonClicked()) );
 }
 

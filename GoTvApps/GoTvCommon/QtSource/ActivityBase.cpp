@@ -1256,36 +1256,4 @@ void ActivityBase::slotAppIconSpecialClick( void )
 void ActivityBase::onAppIconSpecialClick( ActivityBase * activityBase )
 {
     LogMsg( LOG_DEBUG, "onAppIconSpecialClick" );
-	/*
-    PopupMenu popupMenu( m_MyApp, this );
-    popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
-    popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
-    popupMenu.setContentItemsFrame( this->getContentItemsFrame() );
-    connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu*, ActivityBase *) ), &popupMenu, SLOT( slotAppSystemMenuSelected( int, PopupMenu*, ActivityBase *) ) );
-
-    popupMenu.showAppSystemMenu();*/
-}
-
-
-//============================================================================
-//! user selected app icon system menu
-void ActivityBase::slotAppSystemMenuSelected( int menuId, PopupMenu *, ActivityBase * activityBase )
-{
-    ActivityBase *parentActivity = activityBase ? activityBase : this;
-    LogMsg( LOG_DEBUG, "slotAppSystemMenuSelected menu id %d", menuId );
-    switch( menuId )
-    {
-    case 0: // debug settings
-        LogMsg( LOG_DEBUG, "slotAppSystemMenuSelected debug settings menu id %d", menuId );
-        m_MyApp.launchApplet( eAppletLogSettings, parentActivity );
-        break;
-
-    case 1: // debug log
-        LogMsg( LOG_DEBUG, "slotAppSystemMenuSelected debug log menu id %d", menuId );
-        m_MyApp.launchApplet( eAppletLogView, parentActivity );
-        break;
-
-    default:
-        break;
-    }
 }

@@ -305,5 +305,7 @@
         <file>Resources/persons-offer-list.svg</file>
         <file>Resources/connect.svg</file>
         <file>Resources/disconnect.svg</file>
+        <file>Resources/notify-offline.svg</file>
+        <file>Resources/emoticon-smile.svg</file>
     </qresource>
 </RCC>

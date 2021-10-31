@@ -308,18 +308,10 @@ void ActivityScanProfiles::onCountdownTimer( void )
 //============================================================================
 void ActivityScanProfiles::slotFriendClicked( void )
 {
-	/*
-	if( m_Ident )
+	AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+	if( popupMenu )
 	{
-		PopupMenu popupMenu( m_MyApp, this );
-        popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
-        popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
-        popupMenu.setContentItemsFrame( this->getContentItemsFrame() );
-
-        connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu*, ActivityBase*)), &popupMenu, SLOT(onFriendActionSelected(int, PopupMenu*, ActivityBase*)) );
-
-        popupMenu.showFriendMenu( m_Ident );
+		popupMenu->showFriendMenu( m_Ident );
 	}
-	*/
 }
 

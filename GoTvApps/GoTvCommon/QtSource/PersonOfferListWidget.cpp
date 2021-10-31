@@ -198,7 +198,6 @@ void PersonOfferListWidget::slotFriendListItemClicked( FriendListEntryWidget* it
 //============================================================================
 void PersonOfferListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* item )
 {
-	/*
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
 		return;
@@ -209,17 +208,13 @@ void PersonOfferListWidget::slotFriendMenuButtonClicked( FriendListEntryWidget* 
 	if( m_SelectedFriend )
 	{
 		emit signalFriendClicked( m_SelectedFriend );
-        ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
-        if( activityBase )
-        {
-            PopupMenu popupMenu( m_MyApp, activityBase );
-            popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
-            popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-            connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
 
-            popupMenu.showFriendMenu( m_SelectedFriend );
-        }
-	}*/
+		AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+		if( popupMenu )
+		{
+			popupMenu->showFriendMenu( m_SelectedFriend );
+		}
+	}
 }
 
 //============================================================================

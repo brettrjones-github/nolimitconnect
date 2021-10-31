@@ -13,10 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ActivityBase.h"
+#include "AppletBase.h"
 #include <GuiInterface/IDefs.h>
 
-#include "ui_ActivityHelpSignal.h"
+#include "ui_AppletHelpNetSignalBars.h"
 
 enum EInfoType
 {
@@ -28,44 +28,24 @@ enum EInfoType
     eInfoTypeConnectTestUrl,
     eInfoTypeConnectTestSettings,
 
-
     eMaxInfoType // must be last
 };
 
 class AppCommon;
 
-class ActivityHelpSignal : public ActivityBase
+class AppletHelpNetSignalBars : public AppletBase
 {
 	Q_OBJECT
 public:
-    ActivityHelpSignal( AppCommon& app, QWidget * parent );
-	virtual ~ActivityHelpSignal() override = default;
+    AppletHelpNetSignalBars( AppCommon& app, QWidget * parent );
+	virtual ~AppletHelpNetSignalBars() override;
 
-    // overrides required for dialogs with there own title bar and bottom bar widgets
-    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
-    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
-
-    /*
-    void						setPluginType( EPluginType pluginType ) { m_InfoType = eInfoTypePlugin; m_PluginType = pluginType; updateInformation(); }
-    void						setInformationType( EInfoType infoType ) { m_InfoType = infoType; updateInformation(); }
-
-    EPluginType                 getPluginType() { return m_PluginType; }
-
-protected slots:
-	void						slotCopyToClipboardButtonClicked( void );
-    */
 
 protected:
-    // virtual void				showEvent( QShowEvent * ev ) override;
-
-    void						initActivityHelpSignal( void );
-    //void						updateInformation( void );
-    //QString                     getInfoText( void );
+    void						initAppletHelpNetSignalBars( void );
 
 	//=== vars ===//
-	Ui::HelpSignalUi		    ui;
-    //EInfoType                   m_InfoType = eInfoTypeInvalid;
-    //EPluginType                 m_PluginType = ePluginTypeInvalid;
+	Ui::AppletHelpNetSignalBarsUi		    ui;
 
     static QString              m_NoInfoAvailable;
     static QString              m_NetworkDesign;
