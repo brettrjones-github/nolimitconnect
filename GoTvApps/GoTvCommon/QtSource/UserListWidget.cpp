@@ -58,7 +58,7 @@ UserListItem* UserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
     userItem->setUserSession( userSession );
     userItem->setSizeHint( userItem->calculateSizeHint() );
 
-    connect( userItem, SIGNAL(signalUserListItemClicked(QListWidgetItem *)),	    this, SLOT(slotUserListItemClicked(QListWidgetItem *)) );
+    connect( userItem, SIGNAL(signalUserListItemClicked(UserListItem *)),           this, SLOT(slotUserListItemClicked(UserListItem *)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(UserListItem *)),	        this, SLOT(slotAvatarButtonClicked(UserListItem *)) );
     connect( userItem, SIGNAL(signalMenuButtonClicked(UserListItem *)),	            this, SLOT(slotMenuButtonClicked(UserListItem *)) );
     connect( userItem, SIGNAL(signalFriendshipButtonClicked(UserListItem *)),		this, SLOT(slotFriendshipButtonClicked(UserListItem *)) );

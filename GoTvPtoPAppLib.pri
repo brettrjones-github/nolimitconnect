@@ -31,7 +31,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.h \

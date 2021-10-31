@@ -21,14 +21,13 @@
 class VxJava
 {
 public:
-    VxJava();
+    VxJava() = default;
 
     static JavaVM *             getJavaVM( void )                       { return m_JavaVM; }
-    static JNIEnv *             getJavaEnv( void )                      { return m_JavaEnv; }
+    static JNIEnv *             getJavaEnv( void );
 
 
     static JavaVM *             m_JavaVM;
-    static JNIEnv *             m_JavaEnv;
 };
 
 

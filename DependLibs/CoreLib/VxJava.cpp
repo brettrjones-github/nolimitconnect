@@ -7,10 +7,9 @@
 
 #define FROM_NATIVE_LOG_TAG "NativeFromJava:"
 
-JavaVM *             VxJava::m_JavaVM = nullptr;
-JNIEnv *             VxJava::m_JavaEnv = nullptr;
+JavaVM *                        VxJava::m_JavaVM = nullptr;
 
-VxMutex						g_FromJavaAccessMutex;
+VxMutex                         g_FromJavaAccessMutex;
 
 namespace
 {
@@ -19,15 +18,66 @@ namespace
     VxJava                      g_VxJava;
 }
 
+//============================================================================
 VxJava& GetJavaEnvCache()
 {
     return g_VxJava;
 }
 
 //============================================================================
+JNIEnv * VxJava::getJavaEnv( void )
+{
+    if( GetJavaEnvCache().getJavaVM() )
+    {
+        g_FromJavaAccessMutex.lock();
+        JNIEnv* env;
+        jint res = GetJavaEnvCache().getJavaVM()->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6);
+        if (res == JNI_EDETACHED)
+        {
+            res = GetJavaEnvCache().getJavaVM()->AttachCurrentThread(&env, nullptr);
+            assert(res == JNI_OK);
+            LogMsg( LOG_ERROR, "Android ThreadStartCallbackFunction FAILED AttachCurrentThread" );
+        }
+
+        g_FromJavaAccessMutex.unlock();
+
+        return env;
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "VxJava::getJavaEnv FAILED getJavaVM" );
+        return nullptr;
+    }
+}
+
+//============================================================================
 void ThreadStartCallbackFunction( unsigned int uiThreadId, const char * threadName )
 {
-    //MyAndroidPrint( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "ThreadStartCallbackFunction Thread %d %s\n", uiThreadId, threadName );
+//    char buf[1024];
+//    sprintf(buf, "Android ThreadStartCallbackFunction Thread %d %s\n", uiThreadId, threadName);
+//    __android_log_write( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, buf );
+
+    LogMsg( LOG_DEBUG, "ThreadStartCallbackFunction Thread %d %s\n", uiThreadId, threadName );
+    if( GetJavaEnvCache().getJavaVM() )
+    {
+        g_FromJavaAccessMutex.lock();
+        JNIEnv* env;
+        jint res = GetJavaEnvCache().getJavaVM()->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6);
+
+        if (res == JNI_EDETACHED)
+        {
+            res = GetJavaEnvCache().getJavaVM()->AttachCurrentThread(&env, nullptr);
+            assert(res == JNI_OK);
+            LogMsg( LOG_ERROR, "Android ThreadStartCallbackFunction SUCESS AttachCurrentThread %s", threadName);
+            // pthread_setspecific(threadKey, env);
+        }
+
+        g_FromJavaAccessMutex.unlock();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Android ThreadStartCallbackFunction FAILED getJavaVM" );
+    }
 }
 
 //============================================================================
@@ -38,37 +88,34 @@ void ThreadExitCallbackFunction( unsigned int uiThreadId, bool isExitCallbackLoc
         g_FromJavaAccessMutex.lock();
     }
 
-    //LogMsg( LOG_ERROR, "ThreadExitCallbackFunction Thread %d %s detaching\n", uiThreadId, threadName );
+    LogMsg( LOG_ERROR, "Android ThreadExitCallbackFunction Thread %d %s detaching", uiThreadId, threadName );
+    if( GetJavaEnvCache().getJavaVM() )
+    {
+        GetJavaEnvCache().getJavaVM()->DetachCurrentThread();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Android ThreadExitCallbackFunction FAILED getJavaVM" );
+    }
 
-    GetJavaEnvCache().getJavaVM()->DetachCurrentThread();
+
     if ( false == isExitCallbackLocked )
     {
         g_FromJavaAccessMutex.unlock();
     }
 }
 
-VxJava::VxJava()
-{
-
-}
-
 //============================================================================
 jint JNI_OnLoad( JavaVM * vm, void * reserved )
 {
-    //__android_log_write( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "JNI_OnLoad start" );
+    LogMsg( LOG_DEBUG, "JNI_OnLoad start" );
     g_JniLoadCalledCnt++;
     VxJava::m_JavaVM = vm;
     JNIEnv * env;
     if( vm->GetEnv( ( void** ) &env, JNI_VERSION_1_6 ) )
     {
-        //__android_log_write( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "JNI_OnLoad FAIL Get Env" );
+        LogMsg( LOG_DEBUG, "JNI_OnLoad FAIL Get Env" );
         return -1;
-    }
-
-    VxJava::m_JavaEnv = env;
-    if( 0 == env )
-    {
-        //__android_log_write( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "JNI_OnLoad NULL Get Env" );
     }
 
     g_FromJavaAccessMutex.lock();
@@ -91,7 +138,7 @@ void JNI_OnUnload(JavaVM *vm, void *reserved)
 {
     VxSetAppIsShuttingDown( true );
     //GetEngineImp().getEngine().getPeerMgr().stopListening();
-    //__android_log_write( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "JNI_OnUnload" );
+    LogMsg( LOG_DEBUG, "JNI_OnUnload" );
 }
 
 #endif // TARGET_OS_ANDROID
