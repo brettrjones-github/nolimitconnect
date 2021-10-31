@@ -370,6 +370,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/check-mark.svg";
 	case eMyIconAcceptDisabled:
 		return ":/AppRes/Resources/check-mark.svg";
+
 	case eMyIconCancelNormal:
 		//return ":/AppRes/Resources/x-mark.svg";
 		return ":/AppRes/Resources/x-overlay.svg";
@@ -382,7 +383,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconRedX:
 		return ":/AppRes/Resources/x-overlay.svg";
 
-    case eMyIconCancel:
+    case eMyIconCancelRecord:
         return ":/AppRes/Resources/cancel.svg";
 
 	case eMyIconTrash:
@@ -406,14 +407,14 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconRecordMotionDisabled:
 		return ":/AppRes/Resources/video-motion-record.svg";
 	case eMyIconRecordMotionCancel:
-		return ":/AppRes/Resources/video-motion-record.svg";
+		return ":/AppRes/Resources/x-overlay.svg";
 	case eMyIconRecordMotionNormal:
 		return ":/AppRes/Resources/video-motion-record.svg";
 
 	case eMyIconMotionAlarmDisabled:
 		return ":/AppRes/Resources/motion-alarm.svg";
 	case eMyIconMotionAlarmCancel:
-		return ":/AppRes/Resources/motion-alarm.svg";
+		return ":/AppRes/Resources/x-overlay.svg";
 	case eMyIconMotionAlarmRed:
 		return ":/AppRes/Resources/motion-alarm.svg";
 	case eMyIconMotionAlarmWhite:
@@ -421,17 +422,17 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconMotionAlarmYellow:
 		return ":/AppRes/Resources/motion-alarm.svg";
 
+	case eMyIconSendArrowNormal:
+		return ":/AppRes/Resources/send.svg";
 	case eMyIconSendArrowDisabled:
 		return ":/AppRes/Resources/send.svg";
 	case eMyIconSendArrowCancel:
-		return ":/AppRes/Resources/send.svg";;
-	case eMyIconSendArrowNormal:
-		return ":/AppRes/Resources/send.svg";
+		return ":/AppRes/Resources/x-overlay.svg";;
 
 	case eMyIconCameraDisabled:
 		return ":/AppRes/Resources/camera.svg";
 	case eMyIconCameraCancel:
-		return ":/AppRes/Resources/camera.svg";
+		return ":/AppRes/Resources/x-overlay.svg";
 	case eMyIconCameraNormal:
 		return ":/AppRes/Resources/camera.svg";
 
@@ -452,14 +453,14 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconCameraFlashNormal:
 		return ":/AppRes/Resources/camera-flash.svg";
 	case eMyIconCameraFlashCancelNormal:
-		return ":/AppRes/Resources/camera-flash.svg";
+		return ":/AppRes/Resources/x-overlay.svg";
 
 	case eMyIconSnapshotDisabled:
 		return ":/AppRes/Resources/camera-snapshot.svg";
 	case eMyIconSnapshotNormal:
 		return ":/AppRes/Resources/camera-snapshot.svg";
 	case eMyIconSnapshotCancelNormal:
-		return ":/AppRes/Resources/camera-snapshot.svg";
+		return ":/AppRes/Resources/x-overlay.svg";
 
 	case eMyIconNotepadDisabled:
 		return ":/AppRes/Resources/notepad.svg";
@@ -471,7 +472,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconGalleryNormal:
 		return ":/AppRes/Resources/image-gallery.svg";
 	case eMyIconGalleryCancel:
-		return ":/AppRes/Resources/image-gallery.svg";
+		return ":/AppRes/Resources/x-overlay.svg";
 
 	case eMyIconFaceSelectDisabled:
 		return ":/AppRes/Resources/emoticon-smile.svg";

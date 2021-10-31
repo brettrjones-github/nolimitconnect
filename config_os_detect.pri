@@ -112,6 +112,7 @@ android:{
         TARGET_ENDIAN_BIG=0
     }
 
+    DEPLOY_BIN_DIR = $$PWD/bin-Android
     DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
     DEST_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
     DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
@@ -138,6 +139,7 @@ win32:{
     TARGET_ENDIAN_LITTLE=1
     TARGET_ENDIAN_BIG=0
 
+    DEPLOY_BIN_DIR = $$PWD/bin-Windows
     DEST_SHARED_LIBS_DIR = $$PWD/bin-Windows/
     DEST_EXE_DIR = $$PWD/bin-Windows/
     DEST_PYTHON_EXE_DIR = $$PWD/bin-Windows/
@@ -155,6 +157,7 @@ unix:!android:{
     TARGET_ENDIAN_LITTLE=1
     TARGET_ENDIAN_BIG=0
 
+    DEPLOY_BIN_DIR = $$PWD/bin-Linux
     DEST_SHARED_LIBS_DIR = $$PWD/bin-Linux/
     DEST_EXE_DIR = $$PWD/bin-Linux/
     DEST_PYTHON_EXE_DIR = $$PWD/bin-Linux/

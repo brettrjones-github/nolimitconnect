@@ -260,6 +260,28 @@ android:{
 #        bin-Android/gradlew.bat \
 #        bin-Android/res/values/strings.xml
 #    }
+
+### Qt 6.2.0 All Changes should be done in Projects->Build And Run->Android XXX->Build->Build Android APK
+### Create Template will use the directory specified by ANDROID_PACKAGE_SOURCE_DIR
+    ANDROID_PACKAGE_SOURCE_DIR = $$DEPLOY_BIN_DIR
+#DISTFILES += \
+#    AndroidManifest.xml \
+#    build.gradle \
+#    gradle.properties \
+#    wrapper/gradle-wrapper.jar \
+#    gradle/wrapper/gradle-wrapper.properties \
+#    gradlew \
+#    gradlew.bat \
+#    res/values/libs.xml
+
 }
 
+DISTFILES += \
+    bin-Android/AndroidManifest.xml \
+    bin-Android/build.gradle \
+    bin-Android/gradle.properties \
+    bin-Android/gradle/wrapper/gradle-wrapper.jar \
+    bin-Android/gradle/wrapper/gradle-wrapper.properties \
+    bin-Android/gradlew \
+    bin-Android/gradlew.bat
 

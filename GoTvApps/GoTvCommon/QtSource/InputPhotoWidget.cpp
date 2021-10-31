@@ -38,6 +38,7 @@ InputPhotoWidget::InputPhotoWidget( QWidget * parent )
     ui.m_RotateCamButton->setSquareButtonSize( eButtonSizeTiny );
     ui.m_SelectCamButton->setSquareButtonSize( eButtonSizeTiny );
     ui.m_CancelPhotoButton->setSquareButtonSize( eButtonSizeTiny );
+	ui.m_BackButton->setSquareButtonSize( eButtonSizeTiny );
 
 	ui.m_SnapShotButton->setIcons( eMyIconCameraNormal );
 	ui.m_RotateCamButton->setIcons( eMyIconCamRotateNormal );

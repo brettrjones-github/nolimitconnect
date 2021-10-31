@@ -751,7 +751,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletFriendListClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryImage.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryThumb.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGetStarted.ui 
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGetStarted.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoin.ui \

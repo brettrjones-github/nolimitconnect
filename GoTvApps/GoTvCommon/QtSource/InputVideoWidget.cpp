@@ -39,7 +39,7 @@ InputVideoWidget::InputVideoWidget( QWidget * parent )
     ui.m_SelectVidSrcButton->setSquareButtonSize( eButtonSizeTiny );
     ui.m_BackButton->setSquareButtonSize( eButtonSizeTiny );
 
-	ui.m_CancelRecordButton->setIcons( eMyIconCancel );
+	ui.m_CancelRecordButton->setIcons( eMyIconCancelRecord );
     ui.m_CancelRecordButton->setVisible( false );
 
     ui.m_BackButton->setIcons( eMyIconBack );

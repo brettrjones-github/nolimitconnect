@@ -38,7 +38,7 @@ InputVoiceWidget::InputVoiceWidget( QWidget * parent )
 	ui.m_RecVoiceButton->setIcons( eMyIconMicrophoneOn );
 	ui.m_RecVoiceButton->setIsSlideLeftButton( true );
 	ui.m_RecVoiceButton->setPressedSound( eSndDefNone );
-	ui.m_CancelRecordButton->setIcons( eMyIconCancel );
+	ui.m_CancelRecordButton->setIcons( eMyIconCancelRecord );
 	ui.m_CancelRecordButton->setPressedSound( eSndDefCancel );
 	ui.m_CancelRecordButton->setVisible( false );
     //ui.m_SlideToCancleLabel->setIcons( eMyIconMicrophoneOn );

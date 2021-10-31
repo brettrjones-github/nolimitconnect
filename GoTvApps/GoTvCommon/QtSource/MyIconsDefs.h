@@ -143,7 +143,7 @@ enum EMyIcons
 	eMyIconRedX,
 	eMyIconCheckMark,
 
-    eMyIconCancel,
+    eMyIconCancelRecord,
 	eMyIconTrash,
 
 	eMyIconShredderDisabled,

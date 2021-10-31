@@ -307,5 +307,6 @@
         <file>Resources/disconnect.svg</file>
         <file>Resources/notify-offline.svg</file>
         <file>Resources/emoticon-smile.svg</file>
+        <file>Resources/emoj16.svg</file>
     </qresource>
 </RCC>
