@@ -123,12 +123,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NoLimitConnect", "..\..\GoTvApps\GoTvPtoP\build\VS2019\NoLimitConnect.vcxproj", "{14347A1B-2425-4619-9F37-4B5EBB4476BE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3A68081D-E8F9-4523-9436-530DE9E5530A} = {3A68081D-E8F9-4523-9436-530DE9E5530A}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libptop", "..\..\ptop_src\build\VS2019\libptop.vcxproj", "{3A68081D-E8F9-4523-9436-530DE9E5530A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NoLimitConnect", "..\..\GoTvApps\NoLimitConnectMain\build\VS2019\NoLimitConnect.vcxproj", "{14347A1B-2425-4619-9F37-4B5EBB4476BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -278,26 +275,6 @@ Global
 		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{EC55288D-B5DE-4065-A6E0-EEE790DF2E78}.RelWithDebInfo|x86.Build.0 = Release|Win32
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x64.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x64.Build.0 = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x86.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|Any CPU.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|Any CPU.Build.0 = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x64.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x64.Build.0 = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x86.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x86.Build.0 = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|Any CPU.ActiveCfg = Release|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x64.ActiveCfg = Release|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x64.Build.0 = Release|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x86.ActiveCfg = Release|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|Any CPU.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|Any CPU.Build.0 = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x64.ActiveCfg = Release|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x64.Build.0 = Release|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x86.ActiveCfg = Debug|x64
-		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x86.Build.0 = Debug|x64
 		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|x64.ActiveCfg = Debug|x64
 		{3A68081D-E8F9-4523-9436-530DE9E5530A}.Debug|x64.Build.0 = Debug|x64
@@ -320,12 +297,32 @@ Global
 		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{3A68081D-E8F9-4523-9436-530DE9E5530A}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x64.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x64.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Debug|x86.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|Any CPU.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|Any CPU.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x64.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x64.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x86.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.MinSizeRel|x86.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|Any CPU.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x64.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x64.Build.0 = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.Release|x86.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|Any CPU.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|Any CPU.Build.0 = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x86.ActiveCfg = Debug|x64
+		{14347A1B-2425-4619-9F37-4B5EBB4476BE}.RelWithDebInfo|x86.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = 64BitVs2017Qt5.15.2
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = 64BitVs2017Qt5.15.2
 	EndGlobalSection
 EndGlobal

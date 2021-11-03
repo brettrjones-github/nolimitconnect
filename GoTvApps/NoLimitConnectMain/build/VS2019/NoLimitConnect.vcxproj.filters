@@ -27,9 +27,6 @@
     <Filter Include="Source Files\GuiInterface">
       <UniqueIdentifier>{7560e09d-d619-4988-bf97-40f32706d396}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\AppSource">
-      <UniqueIdentifier>{c566a0d6-f705-4d52-a22f-ff8c59bef879}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GuiInterface\OsWin32">
       <UniqueIdentifier>{653a5893-9497-4fbb-ad2d-e5063957cfa7}</UniqueIdentifier>
     </Filter>
@@ -38,6 +35,9 @@
     </Filter>
     <Filter Include="QtBuild">
       <UniqueIdentifier>{251e4b5e-0d25-4ac9-9161-afc8277d76dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NoLimitConnectMain">
+      <UniqueIdentifier>{c566a0d6-f705-4d52-a22f-ff8c59bef879}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -378,9 +378,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.h">
@@ -773,9 +770,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.h">
       <Filter>Source Files\soundio</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -851,6 +845,18 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ListWidgetBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletInviteCreate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -884,9 +890,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp">
@@ -1780,16 +1783,7 @@
     <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp">
       <Filter>Source Files\GuiInterface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\main.cpp">
-      <Filter>Source Files\AppSource</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GuiInterface\OsInterface\OsInterface.cpp">
@@ -1886,6 +1880,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NoLimitConnectMain\AppSource\main.cpp">
+      <Filter>Source Files\NoLimitConnectMain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteCreate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2088,9 +2097,6 @@
     <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h">
       <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh">
       <Filter>Source Files\GuiInterface\OsInterface</Filter>
     </ClInclude>
@@ -2147,9 +2153,6 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityFileSearch.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui">
@@ -2542,9 +2545,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\PluginSettingsWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\PopupMenuWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\RelayServiceWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2627,6 +2627,18 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostJoinRequestList.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGetStarted.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHelpNetSignalBars.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteCreate.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteAccept.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

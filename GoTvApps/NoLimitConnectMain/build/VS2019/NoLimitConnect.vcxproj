@@ -71,7 +71,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\;$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libptopD.lib;glu32.lib;opengl32.lib;libpthreadD.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libopenmpt-fullD.lib;libnfsD.lib;Vfw32.lib;Upnp2LibD.lib;VxVideoLibD.lib;libcurlD.lib;libexpatD.lib;libcdioD.lib;libzipD.lib;libopencore-amrD.lib;libceltD.lib;libfaacD.lib;libxavsD.lib;Secur32.lib;librtmpD.lib;libbento4D.lib;CoreLibD.lib;FfmpegAvCodecLibD.lib;FfmpegAvDeviceLibD.lib;FfmpegAvFilterLibD.lib;FfmpegAvFormatLibD.lib;FfmpegAvResampleLibD.lib;FfmpegAvUtilLibD.lib;FfmpegPostProcLibD.lib;FfmpegSwResampleLibD.lib;FfmpegSwScaleLibD.lib;glew64sd.lib;libarmrwbencD.lib;libasprintfD.lib;libassD.lib;libbzip2D.lib;libcpluffD.lib;libcrocoD.lib;libcrossguidD.lib;libcrystalhdD.lib;libdnssdD.lib;libexifD.lib;libflacD.lib;libfreetypeD.lib;libfribidiD.lib;libgnuD.lib;libgsmD.lib;libiconvD.lib;libilbcD.lib;libjpgD.lib;liblameD.lib;liblzmaD.lib;liblzoD.lib;libmicrohttpdD.lib;liboggD.lib;libopenjpegD.lib;libopusD.lib;libp8-platformD.lib;libpcreD.lib;libpngD.lib;libshairplayD.lib;libshineD.lib;libsnappyD.lib;libspeexD.lib;libsshD.lib;libsslD.lib;libtagD.lib;libtheoraD.lib;libtinyxmlD.lib;libtwolameD.lib;libUPnPD.lib;libvorbisD.lib;libvpxD.lib;libwavepackD.lib;libwebpD.lib;libwelsdecD.lib;libx264D.lib;libx265D.lib;libxml2D.lib;libxsltD.lib;libxvidD.lib;libyajlD.lib;libzlibD.lib;libzvbiD.lib;MediaToolsLibD.lib;NetLibD.lib;PktLibD.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libptopD.lib;glu32.lib;opengl32.lib;libpthreadD.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libkodiD.lib;libopenmpt-fullD.lib;libnfsD.lib;Vfw32.lib;Upnp2LibD.lib;VxVideoLibD.lib;libcurlD.lib;libexpatD.lib;libcdioD.lib;libzipD.lib;libopencore-amrD.lib;libceltD.lib;libfaacD.lib;libxavsD.lib;Secur32.lib;librtmpD.lib;libbento4D.lib;CoreLibD.lib;FfmpegAvCodecLibD.lib;FfmpegAvDeviceLibD.lib;FfmpegAvFilterLibD.lib;FfmpegAvFormatLibD.lib;FfmpegAvResampleLibD.lib;FfmpegAvUtilLibD.lib;FfmpegPostProcLibD.lib;FfmpegSwResampleLibD.lib;FfmpegSwScaleLibD.lib;glew64sd.lib;libarmrwbencD.lib;libasprintfD.lib;libassD.lib;libbzip2D.lib;libcpluffD.lib;libcrocoD.lib;libcrossguidD.lib;libcrystalhdD.lib;libdnssdD.lib;libexifD.lib;libflacD.lib;libfreetypeD.lib;libfribidiD.lib;libgnuD.lib;libgsmD.lib;libiconvD.lib;libilbcD.lib;libjpgD.lib;liblameD.lib;liblzmaD.lib;liblzoD.lib;libmicrohttpdD.lib;liboggD.lib;libopenjpegD.lib;libopusD.lib;libp8-platformD.lib;libpcreD.lib;libpngD.lib;python27_d.lib;libshairplayD.lib;libshineD.lib;libsnappyD.lib;libspeexD.lib;libsshD.lib;libsslD.lib;libtagD.lib;libtheoraD.lib;libtinyxmlD.lib;libtwolameD.lib;libUPnPD.lib;libvorbisD.lib;libvpxD.lib;libwavepackD.lib;libwebpD.lib;libwelsdecD.lib;libx264D.lib;libx265D.lib;libxml2D.lib;libxsltD.lib;libxvidD.lib;libyajlD.lib;libzlibD.lib;libzvbiD.lib;MediaToolsLibD.lib;NetLibD.lib;PktLibD.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,7 +130,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.cpp" />
@@ -181,14 +180,18 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteCreate.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp" />
@@ -375,8 +378,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PersonOfferListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp" />
@@ -453,7 +454,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTagLabel.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.cpp" />
-    <ClCompile Include="..\..\AppSource\main.cpp" />
+    <ClCompile Include="..\..\..\NoLimitConnectMain\AppSource\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.h" />
@@ -478,6 +479,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletInviteCreate.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h" />
@@ -492,6 +495,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPersonOfferList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -531,10 +536,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PersonOfferListItem.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PersonOfferListWidget.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h" />
@@ -793,7 +796,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.h" />
@@ -817,7 +819,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityCreateAccount.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityDownloadItemMenu.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityFileSearch.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityIsPortOpenTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityMessageBox.ui" />
@@ -863,15 +864,19 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletFriendListClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryImage.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryThumb.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGetStarted.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGoTvPtoPNetworkHost.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoin.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListClient.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListLocalView.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHelpNetSignalBars.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostJoinRequestList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostNetworkStatus.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteAccept.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteCreate.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletJoinGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletKodi.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLaunchWidget.ui" />
@@ -962,7 +967,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\PersonOfferListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PluginSettingsWidget.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\PopupMenuWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\RelayServiceWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ServiceSettingsWidget.ui" />
