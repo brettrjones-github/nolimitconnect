@@ -385,5 +385,7 @@ enum EMyIcons
 	eMyIconConnect,
 	eMyIconDisconnect,
 
+	eMyIconInvite,
+
 	eMaxMyIcon	// must be last
 };

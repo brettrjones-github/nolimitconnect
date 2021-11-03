@@ -308,5 +308,6 @@
         <file>Resources/notify-offline.svg</file>
         <file>Resources/emoticon-smile.svg</file>
         <file>Resources/emoj16.svg</file>
+        <file>Resources/invite.svg</file>
     </qresource>
 </RCC>

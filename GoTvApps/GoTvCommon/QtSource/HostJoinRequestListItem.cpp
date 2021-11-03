@@ -29,18 +29,18 @@ HostJoinRequestListItem::HostJoinRequestListItem(QWidget *parent  )
     connect( ui.m_AcceptButton,		  SIGNAL(pressed()),	this, SLOT(slotAcceptButtonPressed()) );
     connect( ui.m_RejectButton,       SIGNAL( pressed() ), this, SLOT( slotRejectButtonPressed() ) );
    
-    ui.m_AvatarButton->setFixedSize( eButtonSizeMedium );
+    ui.m_AvatarButton->setFixedSize( eButtonSizeLarge );
     ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
-    ui.m_FriendshipButton->setFixedSize( eButtonSizeMedium );
+    ui.m_FriendshipButton->setFixedSize( eButtonSizeLarge );
     ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
-    ui.m_MenuButton->setFixedSize( eButtonSizeMedium );
+    ui.m_MenuButton->setFixedSize( eButtonSizeLarge );
     ui.m_MenuButton->setIcon( eMyIconMenu );
 
     ui.m_AcceptButton->setFixedSize( eButtonSizeTiny );
     ui.m_AcceptButton->setIcon( eMyIconAcceptNormal );
     ui.m_RejectButton->setFixedSize( eButtonSizeTiny );
     ui.m_RejectButton->setIcon( eMyIconCancelNormal );
-    QSize sizeHint( 200, GuiParams::getButtonSize( eButtonSizeMedium ).height() + 4 );
+    QSize sizeHint( 200, GuiParams::getButtonSize( eButtonSizeLarge ).height() + 4 );
     setSizeHint( sizeHint );
     setFixedHeight( sizeHint.height() );
 }

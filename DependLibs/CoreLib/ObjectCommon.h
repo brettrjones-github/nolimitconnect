@@ -97,6 +97,8 @@
 #define OBJNAME_APPLET_GET_STARTED						"AppletGetStarted"
 #define OBJNAME_APPLET_GROUP_JOIN						"AppletGroupJoin"
 #define OBJNAME_APPLET_HELP_NET_SIGNAL_BARS				"AppletHelpNetSignalBars"
+#define OBJNAME_APPLET_INVITE_CREATE					"AppletInviteCreate"
+#define OBJNAME_APPLET_INVITE_ACCEPT					"AppletInviteAccepte"
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LIBRARY					        "AppletLibrary"
 #define OBJNAME_APPLET_LOG				                "AppletLog"

@@ -24,9 +24,18 @@ BottomBarWidget::BottomBarWidget( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-	setFixedHeight( GuiParams::getButtonSize().height() + 6 );
-
-    // m_MyApp.getAppTheme().applyTheme( this );
+	setFixedHeight( GuiParams::getButtonSize(eButtonSizeSmall).height() + 6 );
+	ui.m_ArrowLeftButton->setFixedSize( eButtonSizeSmall );
+	ui.m_30SecBackButton->setFixedSize( eButtonSizeSmall );
+	ui.m_MediaPlayButton->setFixedSize( eButtonSizeSmall );
+	ui.m_MediaTrashButton->setFixedSize( eButtonSizeSmall );
+	ui.m_MediaFileShareButton->setFixedSize( eButtonSizeSmall );
+	ui.m_MediaLibraryButton->setFixedSize( eButtonSizeSmall );
+	ui.m_30SecForwardButton->setFixedSize( eButtonSizeSmall );
+	ui.m_ArrowRightButton->setFixedSize( eButtonSizeSmall );
+	ui.m_MediaRepeatButton->setFixedSize( eButtonSizeSmall );
+	ui.m_MenuBottomButton->setFixedSize( eButtonSizeSmall );
+	ui.m_ExpandButton->setFixedSize( eButtonSizeSmall );
 
 	setArrowLeftButtonIcon();
 	set30SecBackwardButtonIcon();

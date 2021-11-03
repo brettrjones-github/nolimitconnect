@@ -784,6 +784,9 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconDisconnect:
 		return ":/AppRes/Resources/disconnect.svg";
 
+	case eMyIconInvite:
+		return ":/AppRes/Resources/invite.svg";
+
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}

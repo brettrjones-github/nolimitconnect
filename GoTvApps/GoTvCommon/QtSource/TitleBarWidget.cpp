@@ -38,7 +38,26 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 {
 	ui.setupUi( this );
 
-    setFixedHeight( GuiParams::getButtonSize().height() + 4 );
+    setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() + 4 );
+    ui.m_GoTvButton->setFixedSize( eButtonSizeSmall );
+    ui.m_PowerOffButton->setFixedSize( eButtonSizeSmall );
+    ui.m_HomeButton->setFixedSize( eButtonSizeSmall );
+    ui.m_PersonsOfferListButton->setFixedSize( eButtonSizeSmall );
+    ui.m_ShareOfferListButton->setFixedSize( eButtonSizeSmall );
+    ui.m_MuteMicButton->setFixedSize( eButtonSizeSmall );
+    ui.m_MuteSpeakerButton->setFixedSize( eButtonSizeSmall );
+    ui.m_CameraButton->setFixedSize( eButtonSizeSmall );
+    ui.m_TrashButton->setFixedSize( eButtonSizeSmall );
+    ui.m_ShareButton->setFixedSize( eButtonSizeSmall );
+    ui.m_MenuTopButton->setFixedSize( eButtonSizeSmall );
+    ui.m_MenuButton->setFixedSize( eButtonSizeSmall );
+    ui.m_BackDlgButton->setFixedSize( eButtonSizeSmall );
+
+    ui.m_NetAvailStatusWidget->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+
+    ui.m_MicVolPeakBar->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ).width() / 6 + 1, GuiParams::getButtonSize( eButtonSizeSmall ).height() );
+    float aspectRatio = 320.0f / 240.0f;
+    ui.m_CamPreviewScreen->setFixedSize( (int)(GuiParams::getButtonSize( eButtonSizeSmall ).height() * aspectRatio + 1), GuiParams::getButtonSize( eButtonSizeSmall ).height() );
 
 	ui.m_StatusLabel->setVisible( false );
     ui.m_OfferBarWidget->setVisible( false );

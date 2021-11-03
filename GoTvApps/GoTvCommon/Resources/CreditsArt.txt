@@ -79,6 +79,7 @@ friend-joined.svg
 flask.svg
 group-joined.svg
 image-rotate.svg (modified)
+invite.svg
 key-disabled.svg
 key-enabled.svg
 linked.svg

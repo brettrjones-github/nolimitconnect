@@ -37,6 +37,8 @@ AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* 
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 	GuiHelpers::fillJoinRequest( ui.m_RequestStateComboBox );
+	ui.m_CreateInviteButton->setFixedSize( eButtonSizeSmall );
+	ui.m_CreateInviteButton->setIcon( eMyIconInvite );
 
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );
@@ -48,6 +50,7 @@ AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* 
 	connect( ui.m_HostJoinRequestList, SIGNAL( signalRejectButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ), this, SLOT( slotRejectButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ) );
 
 	connect( ui.m_RequestStateComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotJoinComboBoxSelectionChange( int ) ) );
+	connect( ui.m_CreateInviteButton, SIGNAL( clicked() ), this, SLOT( slotCreateInviteButtonClicked() ) );
 
 	updateJoinList();
 
@@ -146,4 +149,10 @@ void AppletHostJoinRequestList::slotJoinComboBoxSelectionChange( int comboIdx )
 {
 	m_JoinState = GuiHelpers::comboIdxToJoinState( comboIdx );
 	updateJoinList();
+}
+
+//============================================================================
+void AppletHostJoinRequestList::slotCreateInviteButtonClicked( void )
+{
+	m_MyApp.getAppletMgr().launchApplet( eAppletInviteCreate, this );
 }

@@ -52,6 +52,8 @@
 #include "AppletGroupListClient.h"
 #include "AppletGroupListLocalView.h"
 #include "AppletHelpNetSignalBars.h"
+#include "AppletInviteAccept.h"
+#include "AppletInviteCreate.h"
 #include "AppletHostJoinRequestList.h"
 #include "AppletHostGroupStatus.h"
 #include "AppletHostNetworkStatus.h"
@@ -276,6 +278,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
 
     case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
     case eAppletHostNetworkStatus:          appletDialog = new AppletHostNetworkStatus( m_MyApp, parent ); break;
+    case eAppletInviteAccept:               appletDialog = new AppletInviteAccept( m_MyApp, parent ); break;
+    case eAppletInviteCreate:               appletDialog = new AppletInviteCreate( m_MyApp, parent ); break;
     case eAppletJoinGroupStatus:            appletDialog = new AppletJoinGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;

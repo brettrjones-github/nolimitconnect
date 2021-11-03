@@ -27,9 +27,9 @@
 namespace
 {
     static const int            TINY_PUSHBUTTON_SIZE = 18;
-    static const int            SMALL_PUSHBUTTON_SIZE = 30;
-    static const int            MEDIUM_PUSHBUTTON_SIZE = 38;
-    static const int            LARGE_PUSHBUTTON_SIZE = 46;
+    static const int            SMALL_PUSHBUTTON_SIZE = 24;
+    static const int            MEDIUM_PUSHBUTTON_SIZE = 30;
+    static const int            LARGE_PUSHBUTTON_SIZE = 42;
 }
 
 //============================================================================
@@ -52,10 +52,10 @@ GuiParams::GuiParams()
 void GuiParams::initGuiParams(int defaultFontHeight)
 {
     m_DefaultFontHeight = defaultFontHeight;
-    m_SmallPushButtonSize = m_DefaultFontHeight * 2 + 4;
-    m_DisplayScale = (float)m_SmallPushButtonSize / (float)SMALL_PUSHBUTTON_SIZE;
+    m_MediumPushButtonSize = m_DefaultFontHeight * 2 + 4;
+    m_DisplayScale = (float)m_MediumPushButtonSize / (float)MEDIUM_PUSHBUTTON_SIZE;
     m_TinyPushButtonSize = getScaled(TINY_PUSHBUTTON_SIZE);
-    m_MediumPushButtonSize = getScaled(MEDIUM_PUSHBUTTON_SIZE);
+    m_SmallPushButtonSize = getScaled( SMALL_PUSHBUTTON_SIZE );
     m_LargePushButtonSize = getScaled(LARGE_PUSHBUTTON_SIZE);
 
     QScreen *screen = QGuiApplication::primaryScreen();
@@ -65,13 +65,13 @@ void GuiParams::initGuiParams(int defaultFontHeight)
         QRect  screenGeometry = screen->availableGeometry();
         float maxPixels = screenGeometry.width() < screenGeometry.height() ? screenGeometry.width() : screenGeometry.height();
 
-        float smallIconSizePixels = m_SmallPushButtonSize;
-        float smallIconSizeInches = m_SmallPushButtonSize / dpi;
+        float mediumIconSizePixels = m_MediumPushButtonSize;
+        float mediumIconSizeInches = m_MediumPushButtonSize / dpi;
         LogMsg( LOG_VERBOSE, "Screen dpi %1.0f width pixels %d inches %1.0f height pixels %d inches %1.0f can fit %1.0f small icons",
-            dpi, screenGeometry.width(), screenGeometry.width() / dpi, screenGeometry.height(), screenGeometry.height() / dpi, maxPixels / smallIconSizePixels );
+            dpi, screenGeometry.width(), screenGeometry.width() / dpi, screenGeometry.height(), screenGeometry.height() / dpi, maxPixels / mediumIconSizePixels );
 
-        LogMsg( LOG_VERBOSE, "Screen small icon pixels %1.0f inches %1.0f scale %3.1f icon pixels tiny %d small %d medium %d large %d",
-            smallIconSizePixels, smallIconSizeInches, m_DisplayScale, m_TinyPushButtonSize, m_SmallPushButtonSize, m_MediumPushButtonSize, m_LargePushButtonSize );
+        LogMsg( LOG_VERBOSE, "Screen medium icon pixels %1.0f inches %1.0f scale %3.1f icon pixels tiny %d small %d medium %d large %d",
+            mediumIconSizePixels, mediumIconSizeInches, m_DisplayScale, m_TinyPushButtonSize, m_SmallPushButtonSize, m_MediumPushButtonSize, m_LargePushButtonSize );
     }
 }
 

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppletHostJoinRequestListUi</class>
- <widget class="QWidget" name="AppletHostJoinRequestListUi">
-  <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
-  </property>
+ <class>AppletInviteAcceptUi</class>
+ <widget class="QWidget" name="AppletInviteAcceptUi">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>516</height>
+    <width>303</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,6 +16,12 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
     <width>16777215</width>
@@ -26,13 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string notr="true">Offer List</string>
-  </property>
-  <property name="windowOpacity">
-   <double>1.000000000000000</double>
-  </property>
-  <property name="toolTip">
-   <string/>
+   <string>Create Invite</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -69,11 +66,71 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QCheckBox" name="m_MyUrlCheckBox">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_MyUrlLabel">
+          <property name="text">
+           <string>My URL:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="m_MyUrlEdit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_CopyMyUrlButton">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="m_GroupUrlCheckBox">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_GroupUrlLabel">
+          <property name="text">
+           <string>Group  URL:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="m_TestUrlEdit"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_GroupUrlButton">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="VxPushButton" name="m_CreateInviteButton">
+         <widget class="QPushButton" name="m_CopyInviteToClipboardButton">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -84,7 +141,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="m_CopyInviteLabel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -92,67 +149,20 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Create Invite To Group</string>
+           <string>Copy Invite To Clipboard</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QComboBox" name="m_RequestStateComboBox"/>
-      </item>
-      <item>
-       <widget class="HostJoinRequestListWidget" name="m_HostJoinRequestList">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-        <property name="verticalScrollMode">
-         <enum>QAbstractItemView::ScrollPerPixel</enum>
-        </property>
-        <property name="resizeMode">
-         <enum>QListView::Adjust</enum>
-        </property>
-        <property name="uniformItemSizes">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_AcceptAllButton">
-        <property name="text">
-         <string>Accept All</string>
-        </property>
-       </widget>
+       <widget class="QPlainTextEdit" name="m_InfoPlainTextEdit"/>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>VxPushButton</class>
-   <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>HostJoinRequestListWidget</class>
-   <extends>QListWidget</extends>
-   <header>HostJoinRequestListWidget.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -209,6 +209,9 @@ enum EApplet
     eAppletPopupMenu,
     eAppletHelpNetSignalBars,
 
+    eAppletInviteAccept,
+    eAppletInviteCreate,
+
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,
     //	eAppletStreamViewerVideo,
