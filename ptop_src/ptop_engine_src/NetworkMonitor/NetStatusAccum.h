@@ -17,11 +17,56 @@
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/VxGUID.h>
 
+#include <map>
+
 class NetAvailStatusCallbackInterface
 {
 public:
     virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) = 0;
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) = 0;
+};
+
+
+class HostConnection
+{
+public:
+    HostConnection() = delete;
+    HostConnection( EHostType hostType, std::string hostUrl, VxGUID& connectId )
+        : m_HostType( hostType )
+        , m_HostUrl( hostUrl )
+        , m_ConnectId( connectId )
+    {
+    }
+
+    HostConnection( const HostConnection& rhs )
+        : m_HostType( rhs.m_HostType )
+        , m_HostUrl( rhs.m_HostUrl )
+        , m_ConnectId( rhs.m_ConnectId )
+    {
+    }
+
+    HostConnection& operator =( const HostConnection& rhs )
+    {
+        if( this != &rhs )
+        {
+            m_HostType = rhs.m_HostType;
+            m_HostUrl = rhs.m_HostUrl;
+            m_ConnectId = rhs.m_ConnectId;
+        }
+
+        return *this;
+    }
+
+    void                        setConnectionId( VxGUID&  connectId )           { m_ConnectId = connectId; }
+    VxGUID&                     getConnectionId( void )                         { return m_ConnectId; }
+    void                        clearConnectionId( void )                       { m_ConnectId.clearVxGUID(); }
+
+    std::string&                getHostUrl( void )                              { return m_HostUrl; }
+
+protected:
+    EHostType                   m_HostType{ eHostTypeUnknown };
+    std::string                 m_HostUrl;
+    VxGUID&                     m_ConnectId;
 };
 
 class P2PEngine;
@@ -67,6 +112,11 @@ public:
     EInternetStatus             getInternetStatus( void ) { return m_InternetStatus; }
     ENetAvailStatus             getNetAvailStatus( void ) { m_AccumMutex.lock(); ENetAvailStatus status = m_NetAvailStatus;  m_AccumMutex.unlock(); return status;  }
 
+    void                        setJoinedHost( EHostType hostType, std::string hostUrl, VxGUID& connectId );
+    bool                        isConnectedToHost( EHostType hostType );
+    std::string                 getConnectedHostUrl( EHostType hostType );
+    void                        onConnectionLost( VxGUID& connectId );
+
 protected:
     void                        onNetStatusChange( void );
 
@@ -95,4 +145,5 @@ protected:
     EInternetStatus             m_InternetStatus{ eInternetNoInternet };
     ENetAvailStatus             m_NetAvailStatus{ eNetAvailNoInternet };
     bool                        m_WebsiteUrlsResolved{ false };
+    std::map<EHostType, HostConnection> m_HostConnectionMap;
 };

@@ -16,8 +16,6 @@
 #include "AppletBase.h"
 #include "ui_AppletInviteCreate.h"
 
-class VxUrl;
-
 class AppletInviteCreate : public AppletBase
 {
     Q_OBJECT
@@ -32,19 +30,21 @@ signals:
     void                        signalInfoMsg( const QString& logMsg );
 
 protected slots:
-    void                        slotCopyMyUrlButtonClick( void );
-    void                        slotCopyGroupUrlButtonClick( void );
     void                        slotCopyInviteButtonClicked( void );
-    void                        slotCopyNetworkSettingsButtonClicked( void );
-    void                        slotCopyNetworkSettingsInfoButtonClicked( void );
+    void                        slotNetworkSettingsInfoButtonClicked( void );
+    void                        slotSelectGroupHostButtonClicked( void );
+    void                        slotGroupHostSelected( QString hostUrl );
+
+    void                        slotUpdateInvite( void );
 
 protected:
-    void						setupApplet( void );
     QPlainTextEdit *            getInviteMessageEdit( void )    { return ui.m_InviteMessageTextEdit; }
     QPlainTextEdit*             getInviteTextEdit( void )       { return ui.m_InviteTextEdit; }
+    void                        addInviteText( QString text );
+    void                        updateUrls( void );
+    bool                        populateNetSettingUrl( EHostType hostType, std::string& ptopUrl );
 
-    Ui::AppletInviteCreateUi ui;
-
+    Ui::AppletInviteCreateUi    ui;
 };
 
 

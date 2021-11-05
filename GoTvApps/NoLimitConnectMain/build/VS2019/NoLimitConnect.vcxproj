@@ -190,6 +190,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostJoinRequestList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostSelect.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteCreate.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletJoinBase.cpp" />
@@ -497,6 +498,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostBase.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostSelect.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -875,6 +877,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostGroupStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostJoinRequestList.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostNetworkStatus.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostSelect.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteAccept.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteCreate.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletJoinGroupStatus.ui" />

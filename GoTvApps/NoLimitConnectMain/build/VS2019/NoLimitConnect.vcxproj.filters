@@ -773,31 +773,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.h">
       <Filter>Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h">
@@ -845,9 +821,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ListWidgetBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -855,6 +828,36 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostSelect.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListClient.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupListLocalView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostGroupStatus.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostNetworkStatus.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletJoinGroupStatus.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamClipPlayer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -1897,14 +1900,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletInviteAccept.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletHostSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2116,6 +2116,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2639,6 +2645,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletInviteAccept.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostSelect.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

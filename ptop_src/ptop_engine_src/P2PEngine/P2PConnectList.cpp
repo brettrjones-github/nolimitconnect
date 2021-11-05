@@ -280,6 +280,7 @@ void P2PConnectList::onConnectionLost( VxSktBase * sktBase )
 #ifdef DEBUG_MUTEXES
 	LogMsg( LOG_INFO, "P2PConnectList::onConnectionLost connectListLock\n" );
 #endif // DEBUG_MUTEXES
+	m_Engine.getNetStatusAccum().onConnectionLost( sktBase->getConnectionId() );
 	connectListLock();
 #ifdef TARGET_OS_WINDOWS
 	RcConnectInfo * poInfo = NULL;

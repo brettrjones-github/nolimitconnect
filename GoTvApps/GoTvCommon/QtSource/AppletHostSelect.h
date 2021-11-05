@@ -15,17 +15,20 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include "ui_AppletHostJoinRequestList.h"
+#include "ui_AppletHostSelect.h"
 
 class GuiHostJoin;
 class GuiHostJoinMgr;
 
-class AppletHostJoinRequestList : public AppletBase
+class AppletHostSelect : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletHostJoinRequestList( AppCommon& app, QWidget* parent = NULL );
-	virtual ~AppletHostJoinRequestList() override;
+	AppletHostSelect( AppCommon& app, QWidget* parent = NULL, int launchParam = 0 );
+	virtual ~AppletHostSelect() override;
+
+signals:
+	void                        signalGroupHostSelected( QString hostUrl );
 
 protected slots:
 	void				        slotHostJoinRequested( GuiHostJoin* user );
@@ -45,7 +48,7 @@ protected:
 	void						updateHostJoinRequest( GuiHostJoin* user );
 
 	//=== vars ===//
-	Ui::AppletHostJoinRequestListUi		ui;
+	Ui::AppletHostSelectUi		ui;
 	GuiHostJoinMgr&				m_HostJoinMgr;
 	EHostType					m_HostType{ eHostTypeGroup };
 	EJoinState					m_JoinState{ eJoinStateJoinRequested };

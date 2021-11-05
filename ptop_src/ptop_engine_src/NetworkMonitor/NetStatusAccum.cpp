@@ -415,3 +415,71 @@ uint16_t NetStatusAccum::getIpPort( void )
     m_AccumMutex.unlock();
     return port;
 }
+
+//============================================================================
+void NetStatusAccum::setJoinedHost( EHostType hostType, std::string hostUrl, VxGUID& connectId )
+{
+    m_AccumMutex.lock();
+    auto item = m_HostConnectionMap.find( hostType );
+    if( item != m_HostConnectionMap.end() ) 
+    {
+        item->second = HostConnection( hostType, hostUrl, connectId );
+    }
+    else 
+    {
+        m_HostConnectionMap.emplace( std::make_pair( hostType, HostConnection( hostType, hostUrl, connectId ) ) );
+    }
+
+    m_AccumMutex.unlock();
+}
+
+//============================================================================
+bool NetStatusAccum::isConnectedToHost( EHostType hostType )
+{
+    bool isConnected = false;
+    m_AccumMutex.lock();
+    auto item = m_HostConnectionMap.find( hostType );
+    if( item != m_HostConnectionMap.end() )
+    {
+        if( item->second.getConnectionId().isVxGUIDValid() )
+        {
+            isConnected = true;
+        }
+    }
+
+    m_AccumMutex.unlock();
+    return isConnected;
+}
+
+//============================================================================
+void NetStatusAccum::onConnectionLost( VxGUID& connectId )
+{
+    m_AccumMutex.lock();
+    for( auto& hostConn : m_HostConnectionMap )
+    {
+        if( hostConn.second.getConnectionId() == connectId )
+        {
+            hostConn.second.clearConnectionId();
+        }
+    }
+    
+    m_AccumMutex.unlock();
+}
+
+//============================================================================
+std::string NetStatusAccum::getConnectedHostUrl( EHostType hostType )
+{
+    std::string hostUrl;
+    m_AccumMutex.lock();
+    auto item = m_HostConnectionMap.find( hostType );
+    if( item != m_HostConnectionMap.end() )
+    {
+        if( item->second.getConnectionId().isVxGUIDValid() )
+        {
+            hostUrl = item->second.getHostUrl();
+        }
+    }
+
+    m_AccumMutex.unlock();
+    return hostUrl;
+}

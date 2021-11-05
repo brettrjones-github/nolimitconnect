@@ -91,6 +91,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostJoinRequestList.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostSelect.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletInviteAccept.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletInviteCreate.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinGroupStatus.h \
@@ -437,6 +438,7 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostJoinRequestList.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostGroupStatus.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostNetworkStatus.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletHostSelect.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletInviteAccept.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletInviteCreate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletJoinGroupStatus.cpp \
@@ -765,6 +767,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostJoinRequestList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostGroupStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostNetworkStatus.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletHostSelect.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletInviteAccept.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletInviteCreate.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletJoinGroupStatus.ui \

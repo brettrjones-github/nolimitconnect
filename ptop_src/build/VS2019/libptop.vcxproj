@@ -583,6 +583,7 @@
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Invite\Invite.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp" />
@@ -935,6 +936,7 @@
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Invite\Invite.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaClient.h" />

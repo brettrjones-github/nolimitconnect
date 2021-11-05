@@ -43,6 +43,9 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
 	ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
+    // opening a port in network router using upnp rarely works.. just make invisible for now
+    ui.m_UseUpnpCheckBox->setVisible( false );
+
     ui.m_NetworkHostInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkHostButton->setIcon( eMyIconServiceHostNetwork );
     ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );

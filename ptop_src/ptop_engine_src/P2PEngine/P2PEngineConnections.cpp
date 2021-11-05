@@ -106,6 +106,7 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 {
 	if( false == VxIsAppShuttingDown() )
 	{
+		getNetStatusAccum().onConnectionLost( poInfo->getSkt()->getConnectionId() );
 		poInfo->m_BigListInfo->setIsOnline( false );
 		poInfo->m_BigListInfo->setIsConnected( false );
 		if( poInfo->m_BigListInfo->getMyOnlineId() == m_PktAnn.getRelayOnlineId() )

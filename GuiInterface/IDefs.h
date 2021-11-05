@@ -332,12 +332,12 @@ enum EHostTestStatus
 enum EHostType
 {
     eHostTypeUnknown = 0,
-    eHostTypeGroup = 1,
-    eHostTypeChatRoom = 2,
-    eHostTypeRandomConnect = 3,
-    eHostTypePeerUser = 4,
-    eHostTypeNetwork = 5,
-    eHostTypeConnectTest = 6,
+    eHostTypeNetwork = 1,
+    eHostTypeConnectTest = 2,
+    eHostTypeGroup = 3,
+    eHostTypeChatRoom = 4,
+    eHostTypeRandomConnect = 5,
+    eHostTypePeerUser = 6,
 
     eMaxHostType
 };

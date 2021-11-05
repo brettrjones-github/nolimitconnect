@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2021 Brett R. Jones
+// Copyright (C) 2013 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
@@ -14,7 +14,7 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "AppletHostJoinRequestList.h"
+#include "AppletHostSelect.h"
 #include "GuiHostJoinMgr.h"
 #include "GuiHostJoin.h"
 #include "GuiHostJoinSession.h"
@@ -29,11 +29,11 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* parent )
-: AppletBase( OBJNAME_APPLET_HOST_JOIN_REQUEST_LIST, app, parent )
+AppletHostSelect::AppletHostSelect( AppCommon& app,  QWidget* parent, int launchParam )
+: AppletBase( OBJNAME_APPLET_HOST_SELECT, app, parent )
 , m_HostJoinMgr( app.getHostJoinMgr() )
 {
-    setAppletType( eAppletHostJoinRequestList );
+    setAppletType( eAppletHostSelect );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 	GuiHelpers::fillJoinRequest( ui.m_RequestStateComboBox );
@@ -58,13 +58,13 @@ AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* 
 }
 
 //============================================================================
-AppletHostJoinRequestList::~AppletHostJoinRequestList()
+AppletHostSelect::~AppletHostSelect()
 {
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::updateJoinList( void )
+void AppletHostSelect::updateJoinList( void )
 {
 	ui.m_HostJoinRequestList->clear();
 	std::map<VxGUID, GuiHostJoin*>& joinList = m_HostJoinMgr.getHostJoinList();
@@ -79,37 +79,37 @@ void AppletHostJoinRequestList::updateJoinList( void )
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinRequested( GuiHostJoin* user )
+void AppletHostSelect::slotHostJoinRequested( GuiHostJoin* user )
 {
 	updateHostJoinRequest( user );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotlHostJoinUpdated( GuiHostJoin* user )
+void AppletHostSelect::slotlHostJoinUpdated( GuiHostJoin* user )
 {
 	updateHostJoinRequest( user );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType )
+void AppletHostSelect::slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType )
 {
 	ui.m_HostJoinRequestList->removeHostJoinRequest( onlineId, hostType );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState )
+void AppletHostSelect::slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState )
 {
 	updateJoinList();
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline )
+void AppletHostSelect::slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline )
 {
 	updateJoinList();
 }
 
 //============================================================================
-void AppletHostJoinRequestList::updateHostJoinRequest( GuiHostJoin* user )
+void AppletHostSelect::updateHostJoinRequest( GuiHostJoin* user )
 {
 	vx_assert( user );
 	VxGUID& onlineId = user->getMyOnlineId();
@@ -130,7 +130,7 @@ void AppletHostJoinRequestList::updateHostJoinRequest( GuiHostJoin* user )
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
+void AppletHostSelect::slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
 {
 	if( joinSession && joinSession->getUserIdent() )
 	{
@@ -139,20 +139,20 @@ void AppletHostJoinRequestList::slotAcceptButtonClicked( GuiHostJoinSession* joi
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
+void AppletHostSelect::slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
 {
 	m_HostJoinMgr.joinRejected( joinSession->getUserIdent(), joinSession->getHostType() );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotJoinComboBoxSelectionChange( int comboIdx )
+void AppletHostSelect::slotJoinComboBoxSelectionChange( int comboIdx )
 {
 	m_JoinState = GuiHelpers::comboIdxToJoinState( comboIdx );
 	updateJoinList();
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotCreateInviteButtonClicked( void )
+void AppletHostSelect::slotCreateInviteButtonClicked( void )
 {
 	m_MyApp.getAppletMgr().launchApplet( eAppletInviteCreate, this );
 }

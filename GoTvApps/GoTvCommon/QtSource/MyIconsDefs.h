@@ -387,5 +387,7 @@ enum EMyIcons
 
 	eMyIconInvite,
 
+	eMyIconArrowUpRight,
+
 	eMaxMyIcon	// must be last
 };

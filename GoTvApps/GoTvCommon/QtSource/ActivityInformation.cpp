@@ -341,6 +341,15 @@ QString ActivityInformation::m_DefaultChatRoomHostUrl( QObject::tr(
     "If connect fails or no url is provided then you can search for a Chat Room to join\n"
 ) );
 
+QString ActivityInformation::m_NetworkSettingsInvite( QObject::tr(
+    "=== Network Settings Invite ===\n"
+    "Accepting A Network Settings Invite that changes the Network Host URL\n"
+    "Or If user changes the Network Key then\n"
+    "The user will no longer be able to connect to No Limit Connect Network.\n"
+    "You should only change the Network Host URL and Network Key if you have\n"
+    "A private network with a private Network Host server\n"
+) );
+
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -379,6 +388,8 @@ QString ActivityInformation::getInfoText( void )
         return m_DefaultGroupHostUrl;
     case eInfoTypeDefaultChatRoomHostUrl:
         return m_DefaultChatRoomHostUrl;
+    case eInfoTypeNetworkSettingsInvite:
+        return m_NetworkSettingsInvite;
     default:
         return m_NoInfoAvailable;
     }
