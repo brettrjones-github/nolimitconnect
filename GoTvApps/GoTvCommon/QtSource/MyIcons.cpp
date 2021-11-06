@@ -786,6 +786,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 	case eMyIconInvite:
 		return ":/AppRes/Resources/invite.svg";
+	case eMyIconInviteAccept:
+		return ":/AppRes/Resources/invite-accept.svg";
+	case eMyIconInviteCreate:
+		return ":/AppRes/Resources/invite-create.svg";
 	case eMyIconArrowUpRight:
 		return ":/AppRes/Resources/arrow-up-right.svg";
 

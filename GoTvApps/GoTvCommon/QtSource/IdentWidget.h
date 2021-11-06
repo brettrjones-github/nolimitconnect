@@ -21,6 +21,7 @@
 class VxNetIdent;
 class AppCommon;
 class MyIcons;
+class VxGUID;
 
 class IdentWidget : public QPushButton, public Ui::IdentWidget
 {
@@ -32,15 +33,33 @@ public:
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
+	void						setIdentWidgetSize( EButtonSize buttonSize );
+
 	void						setOnlineState( bool isOnline );
+	void						setAvatarButtonVisible( bool visible );
+	void						setFriendshipButtonVisible( bool visible );
+	void						setOfferButtonVisible( bool visible );
 	void						setMenuButtonVisible( bool visible );
+
+	void						setAvatarThumbnail( VxGUID& thumbId );
+	void						setAvatarIcon( EMyIcons myIcon );
+	void						setFriendshipIcon( EMyIcons myIcon );
+	void						setOfferIcon( EMyIcons myIcon );
+	void						setMenuIcon( EMyIcons myIcon );
+
 	//! fill gui widgets from friend data
 	void						updateGuiFromData( GuiUser * poFriend );
 
 signals:
-	void						signalFriendMenuClicked( void );
+	void						signalAvatarButtonClicked( void );
+	void						signalOfferButtonClicked( void );
+	void						signalFriendMenuButtonClicked( void );
+
+protected slots:
+	void						slotFrienshipButtonClicked( void );
 
 protected:
 	Ui::IdentWidget				ui;
 	AppCommon&					m_MyApp;
+	GuiUser*					m_NetIdent{ nullptr };
 };

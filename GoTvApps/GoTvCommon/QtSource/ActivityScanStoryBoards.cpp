@@ -70,10 +70,10 @@ void ActivityScanStoryBoards::setupIdentWidget( VxNetIdent * netIdent )
 	if( poIdentWidget )
 	{
 		poIdentWidget->m_FriendMenuButton->setVisible( false );
-		poIdentWidget->FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
-		poIdentWidget->FriendNameLabel->setText( netIdent->getOnlineName() );
-		poIdentWidget->DescTextLabel->setText( netIdent->getOnlineDescription() );
-		poIdentWidget->m_FriendIconButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
+		poIdentWidget->m_FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
+		poIdentWidget->m_FriendNameLabel->setText( netIdent->getOnlineName() );
+		poIdentWidget->m_DescTextLabel->setText( netIdent->getOnlineDescription() );
+		poIdentWidget->m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
 	}
 }
 

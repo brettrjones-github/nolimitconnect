@@ -65,8 +65,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletHomePage:				    return eMyIconHome;
     case eAppletHostGroupStatus:	        return eMyIconServiceHostGroup;
     case eAppletHostNetworkStatus:	        return eMyIconServiceHostNetwork;
-    case eAppletInviteAccept:	            return eMyIconInvite;
-    case eAppletInviteCreate:	            return eMyIconInvite;
+    case eAppletInviteAccept:	            return eMyIconInviteAccept;
+    case eAppletInviteCreate:	            return eMyIconInviteCreate;
     case eAppletJoinGroupStatus:	        return eMyIconSearchJoinGroup;
     case eAppletKodi:				        return eMyIconKodi;
     case eAppletLibrary:				    return eMyIconLibraryNormal;

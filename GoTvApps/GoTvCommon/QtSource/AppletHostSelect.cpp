@@ -38,7 +38,7 @@ AppletHostSelect::AppletHostSelect( AppCommon& app,  QWidget* parent, int launch
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 	GuiHelpers::fillJoinRequest( ui.m_RequestStateComboBox );
 	ui.m_CreateInviteButton->setFixedSize( eButtonSizeSmall );
-	ui.m_CreateInviteButton->setIcon( eMyIconInvite );
+	ui.m_CreateInviteButton->setIcon( eMyIconInviteCreate );
 
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );

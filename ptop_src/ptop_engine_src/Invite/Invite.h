@@ -24,18 +24,20 @@ public:
     static const char * INVITE_HDR_MSG;
     static const char * INVITE_HDR_NET_SETTING;
     static const char * INVITE_END;
-    static const char SUFFIX_CHAR_PERSON; // P
-    static const char SUFFIX_CHAR_GROUP; // G
-    static const char SUFFIX_CHAR_CHAT_ROOM; // C
+    static const char * PTOP_URL_PREFIX;        // ptop://
+    static const char SUFFIX_CHAR_PERSON;       // P
+    static const char SUFFIX_CHAR_GROUP;        // G
+    static const char SUFFIX_CHAR_CHAT_ROOM;    // C
     static const char SUFFIX_CHAR_RANDOM_CONNECT; // R
     static const char SUFFIX_CHAR_NETWORK_HOST; // N
     static const char SUFFIX_CHAR_CONNECT_TEST; // T
-    static const char SUFFIX_CHAR_UNKNOWN; // ' '
+    static const char SUFFIX_CHAR_UNKNOWN;      // ' '
 
     bool                        setInviteText( std::string inviteText );
     std::string&                getInviteText( void )                       { return m_InviteText; }
 
     bool                        canDirectConnect( void )                    { return m_CanDirectConnect; }
+    bool                        setInviteUrl( EHostType hostType, std::string& url );
     std::string                 getInviteUrl( EHostType hostType );
     std::string                 getNetSettingUrl( EHostType hostType );
 
@@ -44,6 +46,7 @@ public:
 
 protected:
     bool                        parseInviteText( void );
+    void                        clearInvite( void );
 
     bool                        m_CanDirectConnect{ false };
     std::string                 m_InviteText;

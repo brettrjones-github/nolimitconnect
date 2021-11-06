@@ -15,6 +15,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "IdentWidget.h"
+#include "AppletPeerChangeFriendship.h"
 #include "GuiUser.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
@@ -25,7 +26,13 @@ IdentWidget::IdentWidget(QWidget *parent)
 , m_MyApp( GetAppInstance() )
 {
 	setupUi(this);
-	connect( m_FriendMenuButton, SIGNAL(clicked()), this, SIGNAL(signalFriendMenuClicked()) );
+	setIdentWidgetSize( eButtonSizeMedium );
+	this->m_OfferButton->setVisible( false );
+	connect( m_AvatarButton, SIGNAL( clicked() ), this, SIGNAL( signalAvatarButtonClicked() ) );
+	connect( m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotFrienshipButtonClicked() ) );
+	connect( m_OfferButton, SIGNAL( clicked() ), this, SIGNAL( signalOfferButtonClicked() ) );
+	connect( m_FriendMenuButton, SIGNAL(clicked()), this, SIGNAL(signalFriendMenuButtonClicked()) );
+	m_MyApp.getAppTheme().applyTheme( this );
 }
 
 //============================================================================
@@ -35,37 +42,120 @@ MyIcons&  IdentWidget::getMyIcons( void )
 }
 
 //============================================================================
+void IdentWidget::setIdentWidgetSize( EButtonSize buttonSize )
+{
+	QSize butSize = GuiParams::getButtonSize( buttonSize );
+	if( buttonSize < eButtonSizeMedium )
+	{
+		// wont fit the third line
+		this->m_TodLabel->setVisible( false );
+	}
+	else
+	{
+		this->m_TodLabel->setVisible( true );
+	}
+
+	this->setFixedHeight( butSize.height() + 4 );
+	this->m_AvatarButton->setFixedSize( buttonSize );
+	setAvatarIcon( eMyIconAvatarImage );
+	this->m_FriendshipButton->setFixedSize( buttonSize );
+	setFriendshipIcon( eMyIconAnonymous );
+	this->m_OfferButton->setFixedSize( buttonSize );
+	this->m_FriendMenuButton->setFixedSize( buttonSize );
+	setMenuIcon( eMyIconMenu );
+}
+
+//============================================================================
 void IdentWidget::updateGuiFromData( GuiUser * netIdent )
 {
-	setOnlineState( netIdent->isOnline() );
-	this->FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
-	this->FriendNameLabel->setText( netIdent->getOnlineName().c_str() );
-	this->DescTextLabel->setText( netIdent->getOnlineDescription().c_str() );
-	this->m_FriendIconButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-	this->m_TodLabel->setText( QString("Truths: %1 Dares: %2").arg(netIdent->getTruthCount()).arg(netIdent->getDareCount()) );
+	m_NetIdent = netIdent;
+	if( m_NetIdent )
+	{
+		setOnlineState( netIdent->isOnline() );
+		this->m_FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
+		this->m_FriendNameLabel->setText( netIdent->getOnlineName().c_str() );
+		this->m_DescTextLabel->setText( netIdent->getOnlineDescription().c_str() );
+		this->m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
+		QString truths = QObject::tr( "Truths: " );
+		QString dares = QObject::tr( " Dares: " );
+		this->m_TodLabel->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
+		setAvatarThumbnail( netIdent->getAvatarThumbId() );
+	}
+}
+
+//============================================================================
+void IdentWidget::setAvatarButtonVisible( bool visible )
+{
+	this->m_AvatarButton->setVisible( visible );
+}
+
+//============================================================================
+void IdentWidget::setFriendshipButtonVisible( bool visible )
+{
+	this->m_FriendshipButton->setVisible( visible );
+}
+
+//============================================================================
+void IdentWidget::setOfferButtonVisible( bool visible )
+{
+	this->m_OfferButton->setVisible( visible );
 }
 
 //============================================================================
 void IdentWidget::setMenuButtonVisible( bool visible )
 {
-	if( 0 != m_FriendMenuButton )
-	{
-		this->m_FriendMenuButton->setVisible( visible );
-	}
+	this->m_FriendMenuButton->setVisible( visible );
 }
-
 
 //============================================================================
 void IdentWidget::setOnlineState( bool isOnline )
 {
-	if( isOnline )
+	this->m_AvatarButton->setNotifyOnlineEnabled( isOnline );
+}
+
+//============================================================================
+void IdentWidget::setAvatarThumbnail( VxGUID& thumbId )
+{
+	QImage thumbImage;
+	if( m_MyApp.getThumbMgr().getThumbImage( thumbId, thumbImage ) )
 	{
-		this->setStyleSheet("border-image: 0; background-color: rgb(184, 231, 249); color: rgb(0, 0, 0); font: 14px;\n");
-		m_FriendMenuButton->setIcon( eMyIconMenuNormal );
+		this->m_AvatarButton->setIconOverrideImage( thumbImage );
 	}
-	else
+}
+
+//============================================================================
+void IdentWidget::setAvatarIcon( EMyIcons myIcon )
+{
+	this->m_AvatarButton->setIcon( myIcon );
+}
+
+//============================================================================
+void IdentWidget::setFriendshipIcon( EMyIcons myIcon )
+{
+	this->m_FriendshipButton->setIcon( myIcon );
+}
+
+//============================================================================
+void IdentWidget::setOfferIcon( EMyIcons myIcon )
+{
+	this->m_OfferButton->setIcon( myIcon );
+}
+
+//============================================================================
+void IdentWidget::setMenuIcon( EMyIcons myIcon )
+{
+	this->m_FriendMenuButton->setIcon( myIcon );
+}
+
+//============================================================================
+void IdentWidget::slotFrienshipButtonClicked( void )
+{
+	if( m_NetIdent )
 	{
-		this->setStyleSheet("border-image: 0; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0); font: 14px;\n");
-		m_FriendMenuButton->setIcon( eMyIconMenuDisabled );
+		AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, dynamic_cast<QWidget*>(this->parent()) ));
+		if( applet )
+		{
+			applet->setFriend( m_NetIdent );
+		}
 	}
 }

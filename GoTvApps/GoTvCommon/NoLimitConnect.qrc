@@ -310,5 +310,7 @@
         <file>Resources/emoj16.svg</file>
         <file>Resources/invite.svg</file>
         <file>Resources/arrow-up-right.svg</file>
+        <file>Resources/invite-accept.svg</file>
+        <file>Resources/invite-create.svg</file>
     </qresource>
 </RCC>

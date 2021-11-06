@@ -37,8 +37,10 @@ AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* 
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 	GuiHelpers::fillJoinRequest( ui.m_RequestStateComboBox );
-	ui.m_CreateInviteButton->setFixedSize( eButtonSizeSmall );
-	ui.m_CreateInviteButton->setIcon( eMyIconInvite );
+	ui.m_InviteCreateButton->setFixedSize( eButtonSizeSmall );
+	ui.m_InviteCreateButton->setIcon( eMyIconInviteCreate );
+	ui.m_InviteAcceptButton->setFixedSize( eButtonSizeSmall );
+	ui.m_InviteAcceptButton->setIcon( eMyIconInvite );
 
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );
@@ -50,7 +52,8 @@ AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* 
 	connect( ui.m_HostJoinRequestList, SIGNAL( signalRejectButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ), this, SLOT( slotRejectButtonClicked( GuiHostJoinSession*, HostJoinRequestListItem* ) ) );
 
 	connect( ui.m_RequestStateComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotJoinComboBoxSelectionChange( int ) ) );
-	connect( ui.m_CreateInviteButton, SIGNAL( clicked() ), this, SLOT( slotCreateInviteButtonClicked() ) );
+	connect( ui.m_InviteCreateButton, SIGNAL( clicked() ), this, SLOT( slotInviteCreateButtonClicked() ) );
+	connect( ui.m_InviteAcceptButton, SIGNAL( clicked() ), this, SLOT( slotInviteAcceptButtonClicked() ) );
 
 	updateJoinList();
 
@@ -152,7 +155,13 @@ void AppletHostJoinRequestList::slotJoinComboBoxSelectionChange( int comboIdx )
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotCreateInviteButtonClicked( void )
+void AppletHostJoinRequestList::slotInviteCreateButtonClicked( void )
 {
 	m_MyApp.getAppletMgr().launchApplet( eAppletInviteCreate, this );
+}
+
+//============================================================================
+void AppletHostJoinRequestList::slotInviteAcceptButtonClicked( void )
+{
+	m_MyApp.getAppletMgr().launchApplet( eAppletInviteAccept, this );
 }

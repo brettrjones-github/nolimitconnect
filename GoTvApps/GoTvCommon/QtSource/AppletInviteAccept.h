@@ -32,17 +32,14 @@ signals:
     void                        signalInfoMsg( const QString& logMsg );
 
 protected slots:
-    void						gotoWebsite( void );
-
-    void                        slotCopyMyUrlToClipboardClicked( void );
-    void                        slotCopyTestUrlToClipboardClicked( void );
-    void                        slotCopyResultToClipboardClicked( void );
+    void                        slotCopyInviteFromClipboardButtonClicked( void );
+    void                        slotAcceptInviteButtonClicked( void );
+    void                        slotRejectInviteButtonClicked( void );
 
 protected:
     void						setupApplet( void );
-    QPlainTextEdit *            getInfoEdit( void )     { return ui.m_InfoPlainTextEdit; }
-    void                        fillBasicInfo( void );
-    void                        fillExtraInfo( void );
+    QPlainTextEdit *            getInviteEdit( void )     { return ui.m_InviteTextEdit; }
+    void                        updateInvite( void );
 
     Ui::AppletInviteAcceptUi    ui;
 

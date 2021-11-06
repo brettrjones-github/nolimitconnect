@@ -38,7 +38,8 @@ protected slots:
 	void                        slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem );
 
 	void                        slotJoinComboBoxSelectionChange( int comboIdx );
-	void                        slotCreateInviteButtonClicked( void );
+	void                        slotInviteCreateButtonClicked( void );
+	void                        slotInviteAcceptButtonClicked( void );
 
 protected:
 	void						updateJoinList( void );

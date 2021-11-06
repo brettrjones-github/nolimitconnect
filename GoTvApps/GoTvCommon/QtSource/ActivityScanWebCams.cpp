@@ -131,7 +131,7 @@ void ActivityScanWebCams::setupIdentWidget( GuiUser * netIdent )
 		if( false == m_bIconConnected )
 		{
 			m_bIconConnected = true;
-			connect( poIdentWidget->m_FriendIconButton, SIGNAL(clicked()), this, SLOT(slotFriendClicked()));
+			connect( poIdentWidget->m_FriendshipButton, SIGNAL(clicked()), this, SLOT(slotFriendClicked()));
 		}
 	}
 }

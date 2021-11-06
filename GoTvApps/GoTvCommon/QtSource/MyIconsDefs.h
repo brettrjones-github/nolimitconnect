@@ -386,6 +386,8 @@ enum EMyIcons
 	eMyIconDisconnect,
 
 	eMyIconInvite,
+	eMyIconInviteAccept,
+	eMyIconInviteCreate,
 
 	eMyIconArrowUpRight,
 

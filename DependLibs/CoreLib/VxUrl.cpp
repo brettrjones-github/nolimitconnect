@@ -323,7 +323,7 @@ const char * VxUrl::getPath()
 //============================================================================
 void VxUrl::setPath( const char * pPathAndFileName )
 {
-	if( strstr(  pPathAndFileName, "http://" ) )
+	if( strstr( pPathAndFileName, "http://" ) || strstr( pPathAndFileName, "ptop://" ) )
 	{
 		setUrl( pPathAndFileName );
 	}
