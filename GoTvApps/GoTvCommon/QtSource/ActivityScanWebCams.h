@@ -68,7 +68,7 @@ public slots:
 	void						slotNextScanClicked( void );
 
 	void						onCountdownTimer( void );
-	void						slotFriendClicked( void );
+	void						slotIdentMenuClicked( void );
 
 protected:
     void						showEvent( QShowEvent * ev ) override;

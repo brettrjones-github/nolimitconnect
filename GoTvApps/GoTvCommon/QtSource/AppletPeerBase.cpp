@@ -96,7 +96,7 @@ void AppletPeerBase::setupBaseWidgets( IdentWidget*	friendIdentWidget, VxPushBut
 {
 	if( friendIdentWidget )
 	{
-		friendIdentWidget->updateGuiFromData( m_HisIdent );
+		friendIdentWidget->updateIdentity( m_HisIdent );
 	}
 
 	if( 0 != permissionButton && m_HisIdent )

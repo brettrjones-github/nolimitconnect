@@ -446,7 +446,7 @@ VxGUID VxConnectIdent::getHostThumbId( EHostType hostType, bool defaultToAvatarT
 
     if( defaultToAvatarThumbId && !thumbId.isVxGUIDValid() )
     {
-        thumbId = getAvatarGuid();
+        thumbId = getAvatarThumbGuid();
     }
 
     return thumbId;

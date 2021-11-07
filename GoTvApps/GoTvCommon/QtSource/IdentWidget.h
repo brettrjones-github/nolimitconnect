@@ -16,14 +16,14 @@
 
 #include "config_gotvapps.h"
 #include "ui_IdentWidget.h"
-#include <QPushButton>
+#include <QWidget>
 
 class VxNetIdent;
 class AppCommon;
 class MyIcons;
 class VxGUID;
 
-class IdentWidget : public QPushButton, public Ui::IdentWidget
+class IdentWidget : public QWidget
 {
 	Q_OBJECT
 
@@ -35,28 +35,41 @@ public:
 
 	void						setIdentWidgetSize( EButtonSize buttonSize );
 
-	void						setOnlineState( bool isOnline );
-	void						setAvatarButtonVisible( bool visible );
-	void						setFriendshipButtonVisible( bool visible );
-	void						setOfferButtonVisible( bool visible );
-	void						setMenuButtonVisible( bool visible );
+	void						setIdentOnlineState( bool isOnline );
 
-	void						setAvatarThumbnail( VxGUID& thumbId );
-	void						setAvatarIcon( EMyIcons myIcon );
-	void						setFriendshipIcon( EMyIcons myIcon );
-	void						setOfferIcon( EMyIcons myIcon );
-	void						setMenuIcon( EMyIcons myIcon );
+	void						setIdentAvatarButtonVisible( bool visible );
+	void						setIdentFriendshipButtonVisible( bool visible );
+	void						setIdentOfferButtonVisible( bool visible );
+	void						setIdentMenuButtonVisible( bool visible );
+
+	void						setIdentAvatarThumbnail( VxGUID& thumbId );
+	void						setIdentAvatarIcon( EMyIcons myIcon );
+	void						setIdentFriendshipIcon( EMyIcons myIcon );
+	void						setIdentOfferIcon( EMyIcons myIcon );
+	void						setIdentMenuIcon( EMyIcons myIcon );
 
 	//! fill gui widgets from friend data
-	void						updateGuiFromData( GuiUser * poFriend );
+	void						updateIdentity( GuiUser * guiUser );
+	void						updateIdentity( VxNetIdent * netIdent );
+
+	virtual void				onIdentWidgetSetup( void ){};
+
+	virtual void				onIdentAvatarButtonClicked( void );
+	virtual void				onIdentFriendshipButtonClicked( void );
+	virtual void				onIdentOfferButtonClicked( void );
+	virtual void				onIdentMenuButtonClicked( void );
+
 
 signals:
-	void						signalAvatarButtonClicked( void );
-	void						signalOfferButtonClicked( void );
-	void						signalFriendMenuButtonClicked( void );
+	void						signalIdentAvatarButtonClicked( void );
+	void						signalIdentOfferButtonClicked( void );
+	void						signalIdentMenuButtonClicked( void );
 
 protected slots:
-	void						slotFrienshipButtonClicked( void );
+	void						slotIdentAvatarButtonClicked( void );
+	void						slotIdentFrienshipButtonClicked( void );
+	void						slotIdentOfferButtonClicked( void );
+	void						slotIdentMenuButtonClicked( void );
 
 protected:
 	Ui::IdentWidget				ui;

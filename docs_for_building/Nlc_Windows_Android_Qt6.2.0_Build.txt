@@ -5,7 +5,8 @@
 	QML debugging and profiling can be left at Enable
 	Android build SDK should be set to android-30
 	If it is set wrong you will get a blank error in Issues and application will crash
-	
-	It is no longer desired to link os libs in the .pro file
+
+	for projects with only libraries you can get rid of the Error ""Cannot set up Android, not building an APK.""
+	by disabling the Build Android APK step in Projects->Build & Run->Build
 	
 	

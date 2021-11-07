@@ -61,7 +61,7 @@ ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app,
 	connect( ui.m_NextScanButton, SIGNAL(clicked()), this, SLOT(slotNextScanClicked()));
 	connect( this, SIGNAL(signalSearchComplete()), this, SLOT(slotSearchComplete()) );
 
-	connect( ui.FriendIdentWidget, SIGNAL(clicked()), this, SLOT(slotFriendClicked()));
+	connect( ui.FriendIdentWidget, SIGNAL( signalIdentMenuButtonClicked()), this, SLOT(slotFriendMenuClicked()));
 
 	ui.FriendIdentWidget->setVisible( false );
 
@@ -112,11 +112,11 @@ void ActivityScanProfiles::setupIdentWidget( GuiUser * netIdent )
 	if( poIdentWidget )
 	{
 		poIdentWidget->setVisible( true );
-		poIdentWidget->updateGuiFromData( netIdent );
+		poIdentWidget->updateIdentity( netIdent );
 		if( false == m_bIconConnected )
 		{
 			m_bIconConnected = true;
-			connect( poIdentWidget->m_FriendshipButton, SIGNAL(clicked()), this, SLOT(slotFriendClicked()));
+			connect( poIdentWidget, SIGNAL( signalIdentMenuButtonClicked()), this, SLOT(slotFriendMenuClicked()));
 		}
 	}
 }
@@ -306,7 +306,7 @@ void ActivityScanProfiles::onCountdownTimer( void )
 }
 
 //============================================================================
-void ActivityScanProfiles::slotFriendClicked( void )
+void ActivityScanProfiles::slotFriendMenuClicked( void )
 {
 	AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
 	if( popupMenu )

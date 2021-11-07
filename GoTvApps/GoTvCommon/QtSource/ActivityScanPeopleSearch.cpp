@@ -147,7 +147,7 @@ void ActivityScanPeopleSearch::slotSearchComplete()
 }
 
 ////============================================================================
-//void ActivityScanPeopleSearch::slotFriendClicked( VxNetIdent * netIdent )
+//void ActivityScanPeopleSearch::slotIdentMenuClicked( VxNetIdent * netIdent )
 //{
 //AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
 //if( popupMenu )

@@ -194,8 +194,8 @@ public:
     int64_t                     getThumbModifiedTime( EPluginType pluginType );
 
     void                        setAvatarGuid( VxGUID& guid, int64_t timeModified )     { m_AvatarGuid = guid; m_AvatarModifiedTime = timeModified; }
-    VxGUID&                     getAvatarGuid( void )                                   { return m_AvatarGuid; }
-    int64_t                     getAvatarModifiedTime( void )                           { return m_AvatarModifiedTime; }
+    VxGUID&                     getAvatarThumbGuid( void )                              { return m_AvatarGuid; }
+    int64_t                     getAvatarThumbModifiedTime( void )                      { return m_AvatarModifiedTime; }
     bool                        isAvatarValid( void )                                   { return m_AvatarModifiedTime && m_AvatarGuid.isVxGUIDValid(); }
 
     // if hosts a network

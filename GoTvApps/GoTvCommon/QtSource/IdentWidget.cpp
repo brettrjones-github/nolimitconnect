@@ -22,17 +22,18 @@
 
 //============================================================================
 IdentWidget::IdentWidget(QWidget *parent)
-: QPushButton(parent)
+: QWidget(parent)
 , m_MyApp( GetAppInstance() )
 {
-	setupUi(this);
+	ui.setupUi(this);
 	setIdentWidgetSize( eButtonSizeMedium );
-	this->m_OfferButton->setVisible( false );
-	connect( m_AvatarButton, SIGNAL( clicked() ), this, SIGNAL( signalAvatarButtonClicked() ) );
-	connect( m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotFrienshipButtonClicked() ) );
-	connect( m_OfferButton, SIGNAL( clicked() ), this, SIGNAL( signalOfferButtonClicked() ) );
-	connect( m_FriendMenuButton, SIGNAL(clicked()), this, SIGNAL(signalFriendMenuButtonClicked()) );
+	ui.m_OfferButton->setVisible( false );
+	connect( ui.m_AvatarButton, SIGNAL( clicked() ), this, SLOT( slotIdentAvatarButtonClicked() ) );
+	connect( ui.m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotIdentFrienshipButtonClicked() ) );
+	connect( ui.m_OfferButton, SIGNAL( clicked() ), this, SLOT( slotIdentOfferButtonClicked() ) );
+	connect( ui.m_FriendMenuButton, SIGNAL(clicked()), this, SLOT( slotIdentMenuButtonClicked()) );
 	m_MyApp.getAppTheme().applyTheme( this );
+	onIdentWidgetSetup();
 }
 
 //============================================================================
@@ -48,114 +49,165 @@ void IdentWidget::setIdentWidgetSize( EButtonSize buttonSize )
 	if( buttonSize < eButtonSizeMedium )
 	{
 		// wont fit the third line
-		this->m_TodLabel->setVisible( false );
+		ui.m_TodLabel->setVisible( false );
 	}
 	else
 	{
-		this->m_TodLabel->setVisible( true );
+		ui.m_TodLabel->setVisible( true );
 	}
 
-	this->setFixedHeight( butSize.height() + 4 );
-	this->m_AvatarButton->setFixedSize( buttonSize );
-	setAvatarIcon( eMyIconAvatarImage );
-	this->m_FriendshipButton->setFixedSize( buttonSize );
-	setFriendshipIcon( eMyIconAnonymous );
-	this->m_OfferButton->setFixedSize( buttonSize );
-	this->m_FriendMenuButton->setFixedSize( buttonSize );
-	setMenuIcon( eMyIconMenu );
+	setFixedHeight( butSize.height() + 4 );
+	ui.m_AvatarButton->setFixedSize( buttonSize );
+	setIdentAvatarIcon( eMyIconAvatarImage );
+	ui.m_FriendshipButton->setFixedSize( buttonSize );
+	setIdentFriendshipIcon( eMyIconAnonymous );
+	ui.m_OfferButton->setFixedSize( buttonSize );
+	ui.m_FriendMenuButton->setFixedSize( buttonSize );
+	setIdentMenuIcon( eMyIconMenu );
 }
 
 //============================================================================
-void IdentWidget::updateGuiFromData( GuiUser * netIdent )
+void IdentWidget::updateIdentity( GuiUser * netIdent )
 {
 	m_NetIdent = netIdent;
 	if( m_NetIdent )
 	{
-		setOnlineState( netIdent->isOnline() );
-		this->m_FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
-		this->m_FriendNameLabel->setText( netIdent->getOnlineName().c_str() );
-		this->m_DescTextLabel->setText( netIdent->getOnlineDescription().c_str() );
-		this->m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-		QString truths = QObject::tr( "Truths: " );
-		QString dares = QObject::tr( " Dares: " );
-		this->m_TodLabel->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
-		setAvatarThumbnail( netIdent->getAvatarThumbId() );
+		updateIdentity( &netIdent->getNetIdent() );
 	}
 }
 
 //============================================================================
-void IdentWidget::setAvatarButtonVisible( bool visible )
+void IdentWidget::updateIdentity( VxNetIdent* netIdent )
 {
-	this->m_AvatarButton->setVisible( visible );
+	if( netIdent )
+	{
+		setIdentOnlineState( netIdent->isOnline() );
+		ui.m_FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
+		ui.m_FriendNameLabel->setText( netIdent->getOnlineName() );
+		ui.m_DescTextLabel->setText( netIdent->getOnlineDescription() );
+		ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
+		QString truths = QObject::tr( "Truths: " );
+		QString dares = QObject::tr( " Dares: " );
+		ui.m_TodLabel->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
+		setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
+	}
 }
 
 //============================================================================
-void IdentWidget::setFriendshipButtonVisible( bool visible )
+void IdentWidget::setIdentAvatarButtonVisible( bool visible )
 {
-	this->m_FriendshipButton->setVisible( visible );
+	ui.m_AvatarButton->setVisible( visible );
 }
 
 //============================================================================
-void IdentWidget::setOfferButtonVisible( bool visible )
+void IdentWidget::setIdentFriendshipButtonVisible( bool visible )
 {
-	this->m_OfferButton->setVisible( visible );
+	ui.m_FriendshipButton->setVisible( visible );
 }
 
 //============================================================================
-void IdentWidget::setMenuButtonVisible( bool visible )
+void IdentWidget::setIdentOfferButtonVisible( bool visible )
 {
-	this->m_FriendMenuButton->setVisible( visible );
+	ui.m_OfferButton->setVisible( visible );
 }
 
 //============================================================================
-void IdentWidget::setOnlineState( bool isOnline )
+void IdentWidget::setIdentMenuButtonVisible( bool visible )
 {
-	this->m_AvatarButton->setNotifyOnlineEnabled( isOnline );
+	ui.m_FriendMenuButton->setVisible( visible );
 }
 
 //============================================================================
-void IdentWidget::setAvatarThumbnail( VxGUID& thumbId )
+void IdentWidget::setIdentOnlineState( bool isOnline )
+{
+	ui.m_AvatarButton->setNotifyOnlineEnabled( isOnline );
+}
+
+//============================================================================
+void IdentWidget::setIdentAvatarThumbnail( VxGUID& thumbId )
 {
 	QImage thumbImage;
 	if( m_MyApp.getThumbMgr().getThumbImage( thumbId, thumbImage ) )
 	{
-		this->m_AvatarButton->setIconOverrideImage( thumbImage );
+		ui.m_AvatarButton->setIconOverrideImage( thumbImage );
 	}
 }
 
 //============================================================================
-void IdentWidget::setAvatarIcon( EMyIcons myIcon )
+void IdentWidget::setIdentAvatarIcon( EMyIcons myIcon )
 {
-	this->m_AvatarButton->setIcon( myIcon );
+	ui.m_AvatarButton->setIcon( myIcon );
 }
 
 //============================================================================
-void IdentWidget::setFriendshipIcon( EMyIcons myIcon )
+void IdentWidget::setIdentFriendshipIcon( EMyIcons myIcon )
 {
-	this->m_FriendshipButton->setIcon( myIcon );
+	ui.m_FriendshipButton->setIcon( myIcon );
 }
 
 //============================================================================
-void IdentWidget::setOfferIcon( EMyIcons myIcon )
+void IdentWidget::setIdentOfferIcon( EMyIcons myIcon )
 {
-	this->m_OfferButton->setIcon( myIcon );
+	ui.m_OfferButton->setIcon( myIcon );
 }
 
 //============================================================================
-void IdentWidget::setMenuIcon( EMyIcons myIcon )
+void IdentWidget::setIdentMenuIcon( EMyIcons myIcon )
 {
-	this->m_FriendMenuButton->setIcon( myIcon );
+	ui.m_FriendMenuButton->setIcon( myIcon );
 }
 
 //============================================================================
-void IdentWidget::slotFrienshipButtonClicked( void )
+void IdentWidget::slotIdentAvatarButtonClicked( void )
+{
+	onIdentAvatarButtonClicked();
+}
+
+//============================================================================
+void IdentWidget::slotIdentFrienshipButtonClicked( void )
+{
+	onIdentFriendshipButtonClicked();
+}
+
+//============================================================================
+void IdentWidget::slotIdentOfferButtonClicked( void )
+{
+	onIdentOfferButtonClicked();
+}
+
+//============================================================================
+void IdentWidget::slotIdentMenuButtonClicked( void )
+{
+	onIdentMenuButtonClicked();
+}
+
+//============================================================================
+void IdentWidget::onIdentAvatarButtonClicked( void )
+{
+	emit signalIdentAvatarButtonClicked();
+}
+
+//============================================================================
+void IdentWidget::onIdentFriendshipButtonClicked( void )
 {
 	if( m_NetIdent )
 	{
-		AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, dynamic_cast<QWidget*>(this->parent()) ));
+		AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, dynamic_cast<QWidget*>(parent()) ));
 		if( applet )
 		{
 			applet->setFriend( m_NetIdent );
 		}
 	}
+}
+
+//============================================================================
+void IdentWidget::onIdentOfferButtonClicked( void )
+{
+	emit signalIdentOfferButtonClicked();
+}
+
+//============================================================================
+void IdentWidget::onIdentMenuButtonClicked( void )
+{
+	emit signalIdentMenuButtonClicked();
 }

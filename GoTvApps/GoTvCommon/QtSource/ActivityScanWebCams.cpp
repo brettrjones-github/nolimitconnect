@@ -126,12 +126,12 @@ void ActivityScanWebCams::setupIdentWidget( GuiUser * netIdent )
 	if( poIdentWidget )
 	{
 		poIdentWidget->setVisible( true );
-		poIdentWidget->setMenuButtonVisible( false );
-		poIdentWidget->updateGuiFromData( netIdent );
+		poIdentWidget->setIdentMenuButtonVisible( false );
+		poIdentWidget->updateIdentity( netIdent );
 		if( false == m_bIconConnected )
 		{
 			m_bIconConnected = true;
-			connect( poIdentWidget->m_FriendshipButton, SIGNAL(clicked()), this, SLOT(slotFriendClicked()));
+			connect( poIdentWidget, SIGNAL( signalIdentMenuButtonClicked()), this, SLOT( slotIdentMenuClicked()));
 		}
 	}
 }
@@ -393,7 +393,7 @@ void ActivityScanWebCams::onCountdownTimer( void )
 }
 
 //============================================================================
-void ActivityScanWebCams::slotFriendClicked( void )
+void ActivityScanWebCams::slotIdentMenuClicked( void )
 {
 	AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
 	if( popupMenu )

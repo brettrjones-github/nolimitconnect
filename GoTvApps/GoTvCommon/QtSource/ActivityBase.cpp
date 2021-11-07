@@ -274,11 +274,8 @@ void ActivityBase::setupStyledDlg(	GuiUser *           poFriend,
 {
 	if( poIdentWidget )
 	{
-		poIdentWidget->m_FriendMenuButton->setVisible( false );
-		poIdentWidget->m_FriendPrefixLabel->setText( poFriend->describeMyFriendshipToHim() );
-		poIdentWidget->m_FriendNameLabel->setText( poFriend->getOnlineName().c_str() );
-		poIdentWidget->m_DescTextLabel->setText( poFriend->getOnlineDescription().c_str() );
-		poIdentWidget->m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( poFriend->getMyFriendshipToHim() ) );
+		poIdentWidget->setIdentMenuButtonVisible( false );
+		poIdentWidget->updateIdentity( poFriend );
 	}
 
 	if( poPermissionButton )

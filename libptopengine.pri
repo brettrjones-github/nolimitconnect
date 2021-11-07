@@ -455,7 +455,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/HostSettingBase.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostMgr/JoinedEntry.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/RandomConnectEntry.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Invite/Invite.h \
+    $$PWD/ptop_src/ptop_engine_src/Invite/Invite.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.cpp \

@@ -66,15 +66,7 @@ void ActivityScanStoryBoards::setTitle( QString strTitle )
 //============================================================================
 void ActivityScanStoryBoards::setupIdentWidget( VxNetIdent * netIdent )
 {
-	IdentWidget * poIdentWidget = ui.FriendIdentWidget;
-	if( poIdentWidget )
-	{
-		poIdentWidget->m_FriendMenuButton->setVisible( false );
-		poIdentWidget->m_FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
-		poIdentWidget->m_FriendNameLabel->setText( netIdent->getOnlineName() );
-		poIdentWidget->m_DescTextLabel->setText( netIdent->getOnlineDescription() );
-		poIdentWidget->m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-	}
+	ui.FriendIdentWidget->updateIdentity( netIdent );
 }
 
 //============================================================================

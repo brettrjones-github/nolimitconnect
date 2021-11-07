@@ -182,7 +182,7 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
         pluginType = HostPluginToClientPluginType( pluginType );
         VxNetIdent& netIdent = user->getNetIdent();
         bool hostImageValid = netIdent.getThumbId( pluginType ).isVxGUIDValid();
-        VxGUID thumbId = hostImageValid ? netIdent.getThumbId( pluginType ) : netIdent.getAvatarGuid();
+        VxGUID thumbId = hostImageValid ? netIdent.getThumbId( pluginType ) : netIdent.getAvatarThumbGuid();
         if( thumbId.isVxGUIDValid() )
         {
             GuiThumb* thumb = m_ThumbList.findThumb( thumbId );
