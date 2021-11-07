@@ -84,15 +84,21 @@ int VxAppStyle::focusFrameBoarderWidth()
 }
 
 //============================================================================
+void VxAppStyle::clearFocusFrameWidget( void )
+{
+    if( !g_FocusFrame.isNull() )
+    {
+        g_FocusFrame->setWidget( nullptr );
+    }
+}
+
+//============================================================================
 bool VxAppStyle::event( QEvent* e )
 {
-    bool result = QCommonStyle::event( e );
+    bool result = QProxyStyle::event( e );
     if( ( e->type() == QEvent::Close ) || ( e->type() == QEvent::Quit ) || ( e->type() == QEvent::FocusAboutToChange ) )
     {
-        if( g_FocusFrame )
-        {
-            g_FocusFrame->setWidget( NULL );
-        }
+        clearFocusFrameWidget();
     }
     else if( e->type() == QEvent::FocusIn )
     {
@@ -201,12 +207,12 @@ void VxAppStyle::drawPrimitive( PrimitiveElement		primativeElem,
         // allow default
     }
 
-    if( primativeElem == QStyle::PE_FrameWindow )
+    if( primativeElem == QProxyStyle::PE_FrameWindow )
     {
         // allow default
     }
 
-    if( primativeElem == QStyle::PE_FrameFocusRect )
+    if( primativeElem == QProxyStyle::PE_FrameFocusRect )
     {
         // focus frame drawn in filter
         return;
@@ -243,7 +249,7 @@ void VxAppStyle::drawPrimitive( PrimitiveElement		primativeElem,
     }
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
-    QCommonStyle::drawPrimitive( primativeElem, option, painter, widget );
+    QProxyStyle::drawPrimitive( primativeElem, option, painter, widget );
 }
 
 //============================================================================
@@ -263,20 +269,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
     }
 #endif // defined(TARGET_OS_ANDROID)
 
-#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
-    // QT 6.2.0 has broken scroll bars.. TODO fix when 6.2.0 is no longer beta
-    if( element == CE_ScrollBarAddLine ||
-        element == CE_ScrollBarAddLine ||
-        element == CE_ScrollBarSubLine ||
-        element == CE_ScrollBarAddPage ||
-        element == CE_ScrollBarSubPage ||
-        element == CE_ScrollBarSlider ||
-        element == CE_ScrollBarFirst ||
-        element == CE_ScrollBarLast)
-    QCommonStyle::drawControl( element, option, painter, widget );
-    painter->restore();
-    return;
-#else
+
     if( element == CE_ScrollBarSubLine || element == CE_ScrollBarAddLine )
     {
         if( ( option->state & State_Sunken ) )
@@ -326,7 +319,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
         QStyleOption arrowOpt = *option;
         arrowOpt.rect = option->rect.adjusted( 2, 2, -2, -2 );
-        QCommonStyle::drawPrimitive( arrow, &arrowOpt, painter, widget );
+        QProxyStyle::drawPrimitive( arrow, &arrowOpt, painter, widget );
         painter->restore();
 
         return;
@@ -335,7 +328,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
     if( element == CE_ScrollBarSlider )
     {
         // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QProxyStyle::drawControl( element, option, painter, widget );
         painter->restore();
         return;
         /*
@@ -343,7 +336,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
         QColor bkgColor( COLOR_GREEN );
         QColor fgdColor( COLOR_ORANGE_BURNT );
         m_AppTheme.setEveryColorPossible( opt.palette, bkgColor, fgdColor );
-        QCommonStyle::drawControl( element, &opt, painter, widget );
+        QProxyStyle::drawControl( element, &opt, painter, widget );
         qDrawWinButton( painter, opt.rect, opt.palette, false, &option->palette.brush( QPalette::Button ) );
         painter->restore();
         return;
@@ -436,17 +429,16 @@ void VxAppStyle::drawControl(   ControlElement			element,
         painter->restore();
         return;
     }
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     if( element == CE_CheckBox )
     {
         // draw the default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QProxyStyle::drawControl( element, option, painter, widget );
 
         // draw custom check mark if checked
         if( const QStyleOptionButton * butOpt = qstyleoption_cast<const QStyleOptionButton  *>( option ) )
         {
-            if( butOpt->state & QStyle::State_On )
+            if( butOpt->state & QProxyStyle::State_On )
             {
                 painter->save();
                 painter->setClipRect( option->rect );
@@ -476,48 +468,110 @@ void VxAppStyle::drawControl(   ControlElement			element,
         return;
     }
 
-    if( element == QStyle::CE_ProgressBar )
+    if( element == QProxyStyle::CE_ProgressBar )
     {
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QProxyStyle::drawControl( element, option, painter, widget );
         painter->restore();
         return;
     }
-    else if( element == QStyle::CE_ProgressBarLabel )
+    else if( element == QProxyStyle::CE_ProgressBarLabel )
     {
-        // allow default
-        // would be nice to draw percentage in middle of bar instead of at end
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QProxyStyle::drawControl( element, option, painter, widget );
         painter->restore();
         return;
     }
-    else if( element == QStyle::CE_ProgressBarGroove )
+    else if( element == QProxyStyle::CE_ProgressBarGroove )
     {
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QStyleOptionProgressBar* progressOption = const_cast<QStyleOptionProgressBar*>(qstyleoption_cast<const QStyleOptionProgressBar*>(option));
+        if( progressOption )
+        {
+            QColor bkgColor = m_AppTheme.getColor( eProgressBarColor );
+            QBrush editBrush( bkgColor );
+            painter->setBrush( editBrush );
+
+            painter->fillRect( progressOption->rect, editBrush );
+            painter->restore();
+        }
+        else
+        {
+            QProxyStyle::drawControl( element, option, painter, widget );
+            painter->restore();
+            return;
+        }
+    }
+    else if( element == QProxyStyle::CE_ProgressBarContents )
+    {
+        QProgressBar* progressBar = dynamic_cast<QProgressBar*>(const_cast<QWidget*>(widget));
+        QStyleOptionProgressBar* progressOption = const_cast<QStyleOptionProgressBar*>(qstyleoption_cast<const QStyleOptionProgressBar*>(option));
+
+        if( progressBar && progressOption )
+        {
+            QColor bkgColor = m_AppTheme.getColor( eButtonBackgroundNormal );
+            QBrush editBrush( bkgColor );
+            painter->setBrush( editBrush );
+
+            painter->fillRect( progressOption->rect, editBrush );
+
+            float progressPercent = progressOption->progress ? (progressOption->maximum - progressOption->minimum) / progressOption->progress : 0;
+            bool isVertical = progressOption->rect.height() > progressOption->rect.width();
+            float progressPixels = 0;
+            if( progressPercent > 0 )
+            {
+                progressPixels = isVertical ? progressOption->rect.height() : progressOption->rect.width() / progressPercent;
+            }
+
+            QRect progressRect( progressOption->rect );
+            if( isVertical )
+            {
+                progressRect.setHeight( progressPixels );
+            }
+            else
+            {
+                progressRect.setWidth( progressPixels );
+            }
+
+            QColor bkgContentColor = m_AppTheme.getColor( eProgressBarColor );
+            QBrush contentBrush( bkgContentColor );
+            painter->setBrush( contentBrush );
+
+            painter->fillRect( progressRect, contentBrush );
+            painter->restore();
+            return;
+        }
+        else
+        {
+            QProxyStyle::drawControl( element, option, painter, widget );
+            painter->restore();
+            return;
+        }
+    }
+    else if( element == QProxyStyle::CE_PushButton )
+    {
+        QProxyStyle::drawControl( element, option, painter, widget );
         painter->restore();
         return;
     }
-    else if( element == QStyle::CE_ProgressBarContents )
+    else if( element == QProxyStyle::CE_PushButtonBevel )
     {
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QPushButton* pushButton = dynamic_cast<QPushButton*>(const_cast<QWidget *>(widget));
+        QStyleOptionButton* buttonOption = const_cast<QStyleOptionButton*>(qstyleoption_cast<const QStyleOptionButton*>(option));
+        if( pushButton && buttonOption )
+        {
+            m_AppTheme.drawButton( pushButton, *painter );
+
+            painter->restore();
+            return;
+        }
+        else
+        {
+            QProxyStyle::drawControl( element, option, painter, widget );
+            painter->restore();
+            return;
+        }
         painter->restore();
         return;
     }
-    else if( element == QStyle::CE_PushButton )
-    {
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
-    }
-    else if( element == QStyle::CE_PushButtonBevel )
-    {
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
-    }
-    else if( element == QStyle::CE_PushButtonLabel )
+    else if( element == QProxyStyle::CE_PushButtonLabel )
     {
         if( widget && !widget->isEnabled() )
         {
@@ -536,18 +590,18 @@ void VxAppStyle::drawControl(   ControlElement			element,
                 myButtonOption = *buttonOption;
                 myButtonOption.palette = palette;
 
-                QCommonStyle::drawControl( element, &myButtonOption, painter, widget );
+                QProxyStyle::drawControl( element, &myButtonOption, painter, widget );
                 painter->restore();
                 return;
             }
         }
 
-        QCommonStyle::drawControl( element, option, painter, widget );
+        QProxyStyle::drawControl( element, option, painter, widget );
         painter->restore();
         return;
     }
 
-    QCommonStyle::drawControl( element, option, painter, widget );
+    QProxyStyle::drawControl( element, option, painter, widget );
     painter->restore();
 }
 
@@ -580,8 +634,8 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
     {
         QStyleOptionComboBox* opt = (QStyleOptionComboBox*)option;
 
-        QStyle::State state = opt->state;
-        opt->state &= ~QStyle::State_HasFocus;
+        QProxyStyle::State state = opt->state;
+        opt->state &= ~QProxyStyle::State_HasFocus;
 
         bool drawArrow = opt->subControls & SC_ComboBoxArrow;
 
@@ -674,11 +728,6 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
     if( control == CC_ScrollBar )
     {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        QCommonStyle::drawComplexControl( control, option, painter, widget );
-        painter->restore();
-        return;
-#else
         if( const QStyleOptionSlider *scrollbar = qstyleoption_cast<const QStyleOptionSlider *>( option ) )
         {
             QStyleOptionSlider newScrollbar = *scrollbar;
@@ -766,16 +815,10 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
         painter->restore();
         return;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     }
 
     if( control == CC_Slider )
     {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        QCommonStyle::drawComplexControl( control, option, painter, widget );
-        painter->restore();
-        return;
-#else
         const QStyleOptionSlider *slider = qstyleoption_cast<const QStyleOptionSlider *>( option );
         if( slider )
         {
@@ -850,7 +893,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             {
                 QStyleOptionSlider tmpSlider = *slider;
                 tmpSlider.subControls = SC_SliderTickmarks;
-                QCommonStyle::drawComplexControl( control, &tmpSlider, painter, widget );
+                QProxyStyle::drawComplexControl( control, &tmpSlider, painter, widget );
                 return;
             }
 
@@ -1057,7 +1100,6 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
         painter->restore();
         return;
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
     }
 
     if( control == CC_SpinBox )
@@ -1171,7 +1213,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
         // allow default
     }
 
-    QCommonStyle::drawComplexControl( control, option, painter, widget );
+    QProxyStyle::drawComplexControl( control, option, painter, widget );
     painter->restore();
 }
 
@@ -1202,7 +1244,6 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
     case PM_ButtonShiftVertical:
         break;
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     case PM_ScrollBarExtent:
         return 2 * GetGuiParams().getControlIndicatorWidth();
 
@@ -1223,7 +1264,6 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
     case PM_SliderTickmarkOffset: // ticks not supported
         return 0;
         break;
-#endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
     case PM_ButtonIconSize:
         break;
@@ -1232,7 +1272,7 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
         break;
     }
 
-    int metricVal = QCommonStyle::pixelMetric( metric, option, widget );
+    int metricVal = QProxyStyle::pixelMetric( metric, option, widget );
     //LogMsg( LOG_DEBUG, "Metric Val %d for case %d", metricVal, metric );
     return metricVal;
 }
@@ -1242,7 +1282,7 @@ QSize VxAppStyle::sizeFromContents( ContentsType type,
     const QStyleOption* option, const QSize& contentsSize,
     const QWidget* widget ) const
 {
-    return QCommonStyle::sizeFromContents( type, option, contentsSize, widget );
+    return QProxyStyle::sizeFromContents( type, option, contentsSize, widget );
 }
 
 //============================================================================
@@ -1250,30 +1290,30 @@ int VxAppStyle::styleHint( StyleHint hint, const QStyleOption* option,
                             const QWidget* widget, QStyleHintReturn* returnData ) const
 {
 
-    if( hint == QStyle::SH_FocusFrame_AboveWidget )
+    if( hint == QProxyStyle::SH_FocusFrame_AboveWidget )
     {
         // we do our own focus frame
         return true;
     }
 
-    if( hint == QStyle::SH_ItemView_ShowDecorationSelected )
+    if( hint == QProxyStyle::SH_ItemView_ShowDecorationSelected )
     {
         //return true;
     }
 
-    if( hint == QStyle::SH_GroupBox_TextLabelColor )
+    if( hint == QProxyStyle::SH_GroupBox_TextLabelColor )
     {
         // Qt does not seem to set the right color for groupbox text
         return  int( m_AppTheme.getColor( eTitleBarTextText ).rgba() );
     }
 
-    return QCommonStyle::styleHint( hint, option, widget, returnData );
+    return QProxyStyle::styleHint( hint, option, widget, returnData );
 }
 
 //============================================================================
 void VxAppStyle::drawItemPixmap( QPainter* painter, const QRect& rectangle, int alignment, const QPixmap& pixmap ) const
 {
-    QCommonStyle::drawItemPixmap( painter, rectangle, alignment, pixmap );
+    QProxyStyle::drawItemPixmap( painter, rectangle, alignment, pixmap );
 }
 
 //============================================================================
@@ -1281,7 +1321,7 @@ void VxAppStyle::drawItemText(  QPainter* painter,
                                 const QRect& rectangle, int alignment, const QPalette& palette,
                                 bool enabled, const QString& text, QPalette::ColorRole textRole ) const
 {
-    QCommonStyle::drawItemText( painter, rectangle, alignment, palette, enabled, text, textRole );
+    QProxyStyle::drawItemText( painter, rectangle, alignment, palette, enabled, text, textRole );
 }
 
 //============================================================================
@@ -1291,7 +1331,7 @@ QPixmap VxAppStyle::generatedIconPixmap( QIcon::Mode iconMode, const QPixmap& pi
 }
 
 //============================================================================
-QStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				control,
+QProxyStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				control,
                                                         const QStyleOptionComplex*	option,
                                                         const QPoint&				position,
                                                         const QWidget*				widget ) const
@@ -1306,10 +1346,10 @@ QStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				contro
             uint ctrl = SC_ScrollBarAddLine;
             while( ctrl <= SC_ScrollBarGroove )
             {
-                r = subControlRect( control, scrollbar, QStyle::SubControl( ctrl ), widget );
+                r = subControlRect( control, scrollbar, QProxyStyle::SubControl( ctrl ), widget );
                 if( r.isValid() && r.contains( position ) )
                 {
-                    subControl = QStyle::SubControl( ctrl );
+                    subControl = QProxyStyle::SubControl( ctrl );
                     break;
                 }
 
@@ -1326,10 +1366,10 @@ QStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				contro
             QRect r;
             while( ctrl <= SC_SliderTickmarks )
             {
-                r = subControlRect( control, slider, QStyle::SubControl( ctrl ), widget );
+                r = subControlRect( control, slider, QProxyStyle::SubControl( ctrl ), widget );
                 if( r.isValid() && r.contains( position ) )
                 {
-                    subControl = QStyle::SubControl( ctrl );
+                    subControl = QProxyStyle::SubControl( ctrl );
                     break;
                 }
 
@@ -1343,13 +1383,13 @@ QStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				contro
         break;
     }
 
-    return QCommonStyle::hitTestComplexControl( control, option, position, widget );
+    return QProxyStyle::hitTestComplexControl( control, option, position, widget );
 }
 
 //============================================================================
 QRect VxAppStyle::itemPixmapRect( const QRect& rectangle, int alignment, const QPixmap&	pixmap ) const
 {
-    return QCommonStyle::itemPixmapRect( rectangle, alignment, (QPixmap&)pixmap );
+    return QProxyStyle::itemPixmapRect( rectangle, alignment, (QPixmap&)pixmap );
 }
 
 //============================================================================
@@ -1359,19 +1399,19 @@ QRect VxAppStyle::itemTextRect(     const QFontMetrics&		metrics,
                                     bool					enabled,
                                     const QString&			text ) const
 {
-    return QCommonStyle::itemTextRect( metrics, rectangle, alignment, enabled, text );
+    return QProxyStyle::itemTextRect( metrics, rectangle, alignment, enabled, text );
 }
 
 //============================================================================
 QPalette VxAppStyle::standardPalette() const
 {
-    return m_AppTheme.getBasePalette(); //QCommonStyle::standardPalette();
+    return m_AppTheme.getBasePalette(); //QProxyStyle::standardPalette();
 }
 
 //============================================================================
 QPixmap VxAppStyle::standardPixmap( StandardPixmap pm, const QStyleOption* option, const QWidget* widget ) const
 {
-    return QCommonStyle::standardPixmap( pm, option, widget );
+    return QProxyStyle::standardPixmap( pm, option, widget );
 }
 
 //============================================================================
@@ -1528,7 +1568,7 @@ QRect VxAppStyle::subControlRect(   ComplexControl control,
                 break;
 
             default:
-                return QCommonStyle::subControlRect( control, option, subControl, widget );
+                return QProxyStyle::subControlRect( control, option, subControl, widget );
                 break;
             }
 
@@ -1541,7 +1581,7 @@ QRect VxAppStyle::subControlRect(   ComplexControl control,
         // allow default
     }
 
-    return QCommonStyle::subControlRect( control, option, subControl, widget );
+    return QProxyStyle::subControlRect( control, option, subControl, widget );
 }
 
 //============================================================================
@@ -1563,5 +1603,5 @@ QRect VxAppStyle::subElementRect( SubElement element,
         break;
     }
 
-    return QCommonStyle::subElementRect( element, option, widget );
+    return QProxyStyle::subElementRect( element, option, widget );
 }

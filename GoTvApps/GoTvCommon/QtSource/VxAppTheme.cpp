@@ -71,7 +71,6 @@ void VxAppTheme::applyTheme( QWidget * widget )
 //============================================================================
 void VxAppTheme::updateButton( QPushButton * button )
 {
-
 }
 
 //============================================================================
@@ -202,7 +201,6 @@ QString  VxAppTheme::getResourceFullFileName( QString resourceName )
 //============================================================================
 void VxAppTheme::drawButton( QPushButton * button, QPainter& painter )
 {
-
     painter.save();
 	QRect drawAreaRect( BUTTON_BKG_PADDING, BUTTON_BKG_PADDING, button->width() - ( BUTTON_BKG_PADDING * 2 ), button->height() - ( BUTTON_BKG_PADDING * 2 ) );
 
@@ -220,7 +218,6 @@ void VxAppTheme::drawButton( QPushButton * button, QPainter& painter )
 //============================================================================
 void VxAppTheme::drawFocusRect( QPainter& painter, const QRect& focusRect, int lineWidth )
 {
-
     painter.save();
 	QColor bkgColor( getTransparentColor() );
 	QColor fgdColor( getColor( eFocusRect ) );
@@ -317,7 +314,6 @@ QColor VxAppTheme::getButtonColor( QPushButton * button, EColorLayerType colorLa
 //============================================================================
 void VxAppTheme::drawBitmapOnWidget( QPainter& painter, QPixmap& widgetPixmap, QSize sizeOfWidget )
 {
-
     int xOffset = 0;
 	int yOffset = 0;
 	int least = sizeOfWidget.width() < sizeOfWidget.height() ? sizeOfWidget.width() : sizeOfWidget.height();
@@ -356,7 +352,6 @@ void VxAppTheme::setHighlightColor( QWidget* widget, const QColor highlightColor
 //============================================================================
 void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundColor )
 {
-
     QPalette widgetPalette = widget->palette();
 	widgetPalette.setColor( QPalette::Base, backgroundColor );
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
@@ -364,15 +359,11 @@ void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundCo
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	widgetPalette.setColor( QPalette::Window, backgroundColor );
 	widget->setPalette( widgetPalette );
-
-	//QString styleSheet = QString( "QWidget { background-color %1; }" ).arg( getColorValueAsText( backgroundColor ) );
-	//widget->setStyleSheet( styleSheet );
 }
 
 //============================================================================
 void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColor )
 {
-
     QPalette framePalette = frame->palette();
 	framePalette.setColor( QPalette::Base, backgroundColor );
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
@@ -380,15 +371,11 @@ void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColo
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	framePalette.setColor( QPalette::Window, backgroundColor );
 	frame->setPalette( framePalette );
-
-//	QString styleSheet = QString( "QFrame { background-color %1; }" ).arg( getColorValueAsText( backgroundColor ) );
-//	frame->setStyleSheet( styleSheet );
 }
 
 //============================================================================
 void VxAppTheme::setWidgetBackgroundToTransparent( QWidget * widget )
 {
-
     QColor transparentColor( Qt::transparent );
 	QPalette transparentPalette = widget->palette();
 	transparentPalette.setColor( QPalette::Base, transparentColor );
@@ -398,7 +385,6 @@ void VxAppTheme::setWidgetBackgroundToTransparent( QWidget * widget )
 //============================================================================
 void VxAppTheme::setPainterPen( QPainter& painter, QColor penColor )
 {
-
     QPen painterPen( penColor );
 	painterPen.setStyle( Qt::SolidLine );
 	painter.setPen( painterPen );
@@ -407,7 +393,6 @@ void VxAppTheme::setPainterPen( QPainter& painter, QColor penColor )
 //============================================================================
 void VxAppTheme::setPainterBrush( QPainter& painter, QColor brushColor )
 {
-
     QBrush brush( brushColor );
 	brush.setStyle( Qt::SolidPattern );
 	painter.setBrush( brush );
@@ -737,6 +722,62 @@ void VxAppTheme::setEveryColorPossible( QPalette& palette, const QColor& bkgColo
     palette.setColor( QPalette::Inactive, QPalette::NoRole, fgdColor );
     palette.setColor( QPalette::Disabled, QPalette::NoRole, fgdColor );
     palette.setColor( QPalette::Normal, QPalette::NoRole, fgdColor );
+
+//#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    for( int i = QPalette::Active; i <= QPalette::All; i++ )
+    {
+        QPalette::ColorGroup colorGroup = (QPalette::ColorGroup)i;
+        palette.setColor( colorGroup, QPalette::WindowText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Button, fgdColor );
+        palette.setColor( colorGroup, QPalette::Light, fgdColor );
+        palette.setColor( colorGroup, QPalette::Midlight, fgdColor );
+        palette.setColor( colorGroup, QPalette::Dark, fgdColor );
+        palette.setColor( colorGroup, QPalette::Mid, fgdColor );
+        palette.setColor( colorGroup, QPalette::Text, fgdColor );
+        palette.setColor( colorGroup, QPalette::BrightText, fgdColor );
+        palette.setColor( colorGroup, QPalette::ButtonText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Base, fgdColor );
+        palette.setColor( colorGroup, QPalette::Window, fgdColor );
+        palette.setColor( colorGroup, QPalette::Shadow, fgdColor );
+        palette.setColor( colorGroup, QPalette::Highlight, fgdColor );
+        palette.setColor( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Link, fgdColor );
+        palette.setColor( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setColor( colorGroup, QPalette::Link, fgdColor );
+        palette.setColor( colorGroup, QPalette::LinkVisited, fgdColor );
+        palette.setColor( colorGroup, QPalette::AlternateBase, fgdColor );
+        palette.setColor( colorGroup, QPalette::NoRole, fgdColor );
+        palette.setColor( colorGroup, QPalette::ToolTipBase, fgdColor );
+        palette.setColor( colorGroup, QPalette::ToolTipText, fgdColor );
+        palette.setColor( colorGroup, QPalette::PlaceholderText, fgdColor );
+
+        palette.setBrush( colorGroup, QPalette::WindowText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Button, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Light, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Midlight, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Dark, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Mid, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Text, fgdColor );
+        palette.setBrush( colorGroup, QPalette::BrightText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::ButtonText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Base, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Window, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Shadow, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Highlight, fgdColor );
+        palette.setBrush( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Link, fgdColor );
+        palette.setBrush( colorGroup, QPalette::HighlightedText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::Link, fgdColor );
+        palette.setBrush( colorGroup, QPalette::LinkVisited, fgdColor );
+        palette.setBrush( colorGroup, QPalette::AlternateBase, fgdColor );
+
+        palette.setBrush( colorGroup, QPalette::NoRole, fgdColor );
+        palette.setBrush( colorGroup, QPalette::ToolTipBase, fgdColor );
+        palette.setBrush( colorGroup, QPalette::ToolTipText, fgdColor );
+        palette.setBrush( colorGroup, QPalette::PlaceholderText, fgdColor );
+    }  
+
+//#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 }
 
 //============================================================================

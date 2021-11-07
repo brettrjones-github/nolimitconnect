@@ -10,7 +10,7 @@ public:
 	AcceptCancelWidget( QWidget *parent = 0 );
 	virtual ~AcceptCancelWidget() {};
 
-
+	void							setAcceptCancelWidgetSize( EButtonSize buttonSize );
 
 signals:
 	void							signalAccepted( void );

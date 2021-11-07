@@ -21,7 +21,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="leftMargin">
     <number>5</number>
@@ -57,7 +57,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <property name="spacing">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
        <number>5</number>
@@ -88,7 +88,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="m_ExampleButton">
         <property name="text">
          <string>Push Button</string>
         </property>
@@ -116,7 +116,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
        <number>5</number>
@@ -133,7 +133,7 @@
       <item>
        <widget class="QLabel" name="m_StatusLabel">
         <property name="text">
-         <string notr="true"/>
+         <string notr="true">Some Status Message For QLable</string>
         </property>
        </widget>
       </item>
@@ -176,7 +176,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QProgressBar" name="progressBar">
+       <widget class="QProgressBar" name="m_ExampleProgressBar">
         <property name="value">
          <number>24</number>
         </property>

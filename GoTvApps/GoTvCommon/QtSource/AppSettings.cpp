@@ -88,6 +88,16 @@ bool AppSettings::getFeatureEnable( EAppFeatures appFeature )
 {
 	// BRJ for now app features are used for disable
 	// in the future if features are enabled then should let this code work
+	if( eAppFeatureTheme == appFeature )
+	{
+		return true;
+	}
+
+	if( eAppFeatureTheme == appFeature )
+	{
+		return true;
+	}
+
 	return false;
 
 	if( m_AppFeatureIsCached[appFeature] )

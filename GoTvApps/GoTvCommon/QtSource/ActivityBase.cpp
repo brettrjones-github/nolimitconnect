@@ -49,12 +49,9 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 , m_UserMgr( app.getUserMgr() )
 , m_Engine( app.getEngine() )
 , m_FromGui( m_Engine.getFromGuiInterface() )
-//, m_WindowFlags( 0 )
 , m_ParentWidget( parent )
 , m_EAppletType( eAppletType )
-//, m_StatusMsgLabel( 0 )
 , m_ePluginType( ePluginTypeInvalid )
-//, m_HisIdent( 0 )
 , m_ResizingTimer( new QTimer(this) )
 , m_IsDialog( isDialog )
 , m_IsPopup( isPopup )
@@ -62,13 +59,13 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 {
     vx_assert( objName );
     setObjectName( objName );
+	VxAppStyle::clearFocusFrameWidget();
 
 	if( 0xcdcdcdcdcdcdcdcd == (uint64_t)parent )
 	{
 		vx_assert( false );
-		LogMsg( LOG_FATAL, "ActivityBase::ActivityBase: Bad Param\n");
+		LogMsg( LOG_FATAL, "ActivityBase::ActivityBase: Bad Param");
 	}
-
 
     m_IsDialog = isDialog 
                 || ( eAppletUnknown == eAppletType ) 

@@ -18,14 +18,15 @@
 
 #include <QtGlobal>
 #include <QProxyStyle>
-#include <QCommonStyle>
+#include <QProxyStyle>
 
 class AppCommon;
 class VxAppTheme;
 class AppFocusFrame;
 class QRect;
 
-class VxAppStyle : public QCommonStyle
+// QT 6.2.0 had bugs in QCommonStyle.. derive from QProxyStyle instead of QCommonStye
+class VxAppStyle : public QProxyStyle
 {
 public:
 	VxAppStyle( AppCommon& appCommon, VxAppTheme& appTheme );
@@ -33,7 +34,8 @@ public:
 
     enum GuiDrawDirection { eGuiDirUp, eGuiDirDown, eGuiDirLeft, eGuiDirRight };
 
-    static int					focusFrameBoarderWidth(); // line width of focus frame
+    static int					focusFrameBoarderWidth( void ); // get line width of focus frame
+    static void					clearFocusFrameWidget( void ); // clear focus frame widget so no focus frame is drawn until new widget gains focus
 
     void						drawFocusFrame( QPainter& painter, const QRect& focusRect ) const;
     void					    drawArrow( QPainter*, const QRect& rect, QColor arrowColor, GuiDrawDirection drawDir ) const;

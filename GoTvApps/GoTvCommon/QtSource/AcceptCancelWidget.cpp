@@ -16,7 +16,7 @@
 #include "app_precompiled_hdr.h"
 #include "AcceptCancelWidget.h"
 #include "VxAppTheme.h"
-
+#include "GuiParams.h"
 
 //============================================================================
 AcceptCancelWidget::AcceptCancelWidget( QWidget *parent )
@@ -29,6 +29,7 @@ AcceptCancelWidget::AcceptCancelWidget( QWidget *parent )
 	ui.m_CancelButton->setIcon( eMyIconRedX );
 	connect( ui.m_AcceptButton, SIGNAL( clicked() ), this, SLOT( slotAccepted() ) );
 	connect( ui.m_CancelButton, SIGNAL( clicked() ), this, SLOT( slotCanceled() ) );
+	setAcceptCancelWidgetSize( eButtonSizeMedium );
 }
 
 //============================================================================
@@ -41,4 +42,14 @@ void AcceptCancelWidget::slotAccepted( void )
 void AcceptCancelWidget::slotCanceled( void )
 {
 	emit signalCanceled();
+}
+
+//============================================================================
+void AcceptCancelWidget::setAcceptCancelWidgetSize( EButtonSize buttonSize )
+{
+	QSize butSize = GuiParams::getButtonSize( buttonSize );
+
+	setFixedHeight( butSize.height() + 4 );
+	ui.m_AcceptButton->setFixedSize( buttonSize );
+	ui.m_CancelButton->setFixedSize( buttonSize );
 }

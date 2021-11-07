@@ -32,7 +32,6 @@ IdentWidget::IdentWidget(QWidget *parent)
 	connect( ui.m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotIdentFrienshipButtonClicked() ) );
 	connect( ui.m_OfferButton, SIGNAL( clicked() ), this, SLOT( slotIdentOfferButtonClicked() ) );
 	connect( ui.m_FriendMenuButton, SIGNAL(clicked()), this, SLOT( slotIdentMenuButtonClicked()) );
-	m_MyApp.getAppTheme().applyTheme( this );
 	onIdentWidgetSetup();
 }
 
