@@ -125,6 +125,7 @@ enum EThemeColorRole
     eLayerNotifyErrorColor, 
 	
 	eProgressBarColor,
+	eProgressBarBackgroundColor,
 
     eShadowColor,
     ePlaceholderText,
@@ -186,7 +187,6 @@ public:
     virtual bool				isWhiteOnBlack( void ) { return eContrastTypeWhiteOnBlack == m_ContrastType; }
 
 	virtual void				updateWindowTheme( void );
-	virtual void				updateButton( QPushButton * button );
 	virtual void				updateProgressBar( QProgressBar * progressBar );
 
 	// draw background of button

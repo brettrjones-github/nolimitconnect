@@ -69,11 +69,6 @@ void VxAppTheme::applyTheme( QWidget * widget )
 }
 
 //============================================================================
-void VxAppTheme::updateButton( QPushButton * button )
-{
-}
-
-//============================================================================
 void VxAppTheme::updateProgressBar( QProgressBar * progressBar )
 {
     setHighlightColor( progressBar, getColor( eProgressBarColor ) );
@@ -966,6 +961,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eProgressBarColor,
+        m_ThemeColors.push_back( QColor( COLOR_GREY_VERY_LIGHT ) ); //eProgressBarBackgroundColor,
 
         m_ThemeColors.push_back( QColor( COLOR_GREEN_DARK ) ); //eShadowColor,
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
@@ -1000,6 +996,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eProgressBarColor,
+        m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eProgressBarBackgroundColor,
 
         m_ThemeColors.push_back( QColor( COLOR_BLUE_DARK ) ); //eShadowColor,
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
@@ -1035,6 +1032,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
+        m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eProgressBarBackgroundColor,
 
         m_ThemeColors.push_back( QColor( COLOR_GREEN_MEDIUM ) ); //eShadowColor,
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
@@ -1071,6 +1069,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
+        m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eProgressBarBackgroundColor,
 
         m_ThemeColors.push_back( QColor( COLOR_GREEN_MEDIUM ) ); //eShadowColor,
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,

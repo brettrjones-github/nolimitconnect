@@ -506,7 +506,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
         if( progressBar && progressOption )
         {
-            QColor bkgColor = m_AppTheme.getColor( eButtonBackgroundNormal );
+            QColor bkgColor = m_AppTheme.getColor( eProgressBarBackgroundColor );
             QBrush editBrush( bkgColor );
             painter->setBrush( editBrush );
 
