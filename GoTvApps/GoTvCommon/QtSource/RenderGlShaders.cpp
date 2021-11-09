@@ -18,7 +18,6 @@
 #include "RenderGlWidget.h"
 
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
 
 #include <QDebug>
 #include <QTimer>

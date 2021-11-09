@@ -48,17 +48,18 @@ AppletPopupMenu::AppletPopupMenu( AppCommon& app, QWidget * parent, VxGUID asset
 	initAppletPopupMenu();
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 	getTitleBarWidget()->setVisible( false );
+	getBottomBarWidget()->setVisible( false );
 
     connect( ui.m_ExitPopupButton, SIGNAL( clicked() ), this, SLOT( close() ) );
     connect( ui.m_MenuItemList, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( itemClicked( QListWidgetItem* ) ) );
 
-    // m_MyApp.activityStateChange( this, true );
+    // NOT USED FOR POPUP  m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
 AppletPopupMenu::~AppletPopupMenu()
 {
-    // m_MyApp.activityStateChange( this, false );
+    // NOT USED FOR POPUP  m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
@@ -67,8 +68,6 @@ void AppletPopupMenu::initAppletPopupMenu( void )
 	ui.setupUi( getContentItemsFrame() );
 	ui.m_ExitPopupButton->setIcons( eMyIconBack );
 	ui.m_ExitPopupButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
-	ui.m_ExitPopupButton->setOverlayIcon( eMyIconDirectConnectedOverlay );
-	ui.m_ExitPopupButton->setOverlayColor( QColor(COLOR_GREEN) );
 }
 
 //============================================================================
@@ -76,6 +75,20 @@ void AppletPopupMenu::setTitle( QString strTitle )
 {
 	ui.m_PopupTitleLabel->setText( strTitle );
 }
+
+//============================================================================
+void AppletPopupMenu::setMenuType( EPopupMenuType menuType ) 
+{ 
+	m_MenuType = menuType; 
+	clearMenulList();
+	m_MyApp.getAppStyle().clearFocusFrameWidget();
+};
+
+//============================================================================
+void AppletPopupMenu::clearMenulList( void )
+{
+	ui.m_MenuItemList->clear();
+};
 
 //============================================================================
 void AppletPopupMenu::addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText )
@@ -91,6 +104,7 @@ void AppletPopupMenu::addMenuItem( int iItemId, QIcon& oIcon, QString strMenuIte
 void AppletPopupMenu::slotBackButtonClicked( void )
 {
 	emit signalBackButtonClicked();
+	m_MyApp.getAppStyle().clearFocusFrameWidget();
 }
 
 //============================================================================
@@ -173,19 +187,19 @@ void AppletPopupMenu::onTitleBarActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentPageFrame() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentPageFrame() );
 		break;
 
 	case 2: // chat room listing
-		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, dynamic_cast<QWidget *>(parent()) );
 		break;
 
 	case 3: // random connect listing
-		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient );
+		//m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, dynamic_cast<QWidget *>(parent()) );
 		break;
 
 	default:
@@ -428,11 +442,11 @@ void AppletPopupMenu::onHostSessionActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentContext() );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentPageFrame() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentContext() );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentPageFrame() );
 		break;
 
 	default:
@@ -456,11 +470,11 @@ void AppletPopupMenu::onPersonActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentContext() );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentPageFrame() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentContext() );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentPageFrame() );
 		break;
 
 	default:
@@ -491,27 +505,14 @@ void AppletPopupMenu::onUserSessionActionSelected( int iMenuId )
 	switch( iMenuId )
 	{
 	case 0: // friends listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentContext() );
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentPageFrame() );
 		break;
 
 	case 1: // group listing
-		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentContext() );
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentPageFrame() );
 		break;
 
 	default:
 		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
 	}
-}
-
-//============================================================================
-QWidget* AppletPopupMenu::getParentContext( void )
-{
-	QWidget* parentWdiget = dynamic_cast<QWidget*>(parent());
-	QWidget* page = GuiHelpers::findParentPage( parentWdiget );
-	if( page )
-	{
-		parentWdiget = page;
-	}
-
-	return parentWdiget;
 }

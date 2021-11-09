@@ -956,6 +956,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eLayerNotifyOfflineColor, 
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
         m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
@@ -991,6 +992,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eLayerNotifyOfflineColor, 
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
         m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
@@ -1027,6 +1029,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eLayerNotifyOfflineColor, 
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
         m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 
@@ -1064,6 +1067,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOnlineColor, 
+        m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eLayerNotifyOfflineColor, 
         m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eLayerNotifyOfferColor, 
         m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eLayerNotifyForbiddenColor, 
         m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyErrorColor, 

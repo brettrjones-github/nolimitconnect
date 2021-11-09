@@ -1,0 +1,1 @@
+#include "FriendListMgr.h"

@@ -89,6 +89,19 @@ void IdentWidget::updateIdentity( VxNetIdent* netIdent )
 		QString dares = QObject::tr( " Dares: " );
 		ui.m_TodLabel->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
 		setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
+		
+		if( !netIdent->requiresRelay() )
+		{
+			ui.m_AvatarButton->setOverlayIcon( eMyIconDirectConnectedOverlay );
+			if( netIdent->isOnline() )
+			{
+				ui.m_AvatarButton->setOverlayColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+			}
+			else
+			{
+				ui.m_AvatarButton->setOverlayColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
+			}
+		}
 	}
 }
 

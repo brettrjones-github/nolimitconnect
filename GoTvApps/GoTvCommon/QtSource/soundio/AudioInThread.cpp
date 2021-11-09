@@ -16,8 +16,6 @@
 #include "AudioInThread.h"
 #include "AudioIoMgr.h"
 #include <QDebug>
-#include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
 #include "AudioDefs.h"
 
 //============================================================================

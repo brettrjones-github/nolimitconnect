@@ -26,7 +26,6 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>
-#include <CoreLib/VxThread.h>
 
 #include "rendering/MatrixGL.h"
 

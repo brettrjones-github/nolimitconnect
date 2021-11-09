@@ -1,7 +1,6 @@
 #include <CommonHdr.h>
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
 #include <libavutil/log.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>

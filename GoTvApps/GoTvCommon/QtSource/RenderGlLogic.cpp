@@ -21,7 +21,6 @@
 #include <QOpenGLFunctions>
 
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
 
 # if defined(TARGET_OS_APPLE)
 #  include <OpenGLES/ES2/gl.h>

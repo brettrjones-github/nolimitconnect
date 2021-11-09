@@ -4,7 +4,6 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
 #include <CoreLib/VxGlobals.h>
 
 #include "RenderKodiThread.h"

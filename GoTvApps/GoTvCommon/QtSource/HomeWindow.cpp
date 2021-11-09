@@ -193,6 +193,7 @@ void HomeWindow::saveHomeWindowGeometry()
 //============================================================================
 void HomeWindow::initializeGoTvDynamicLayout( void )
 {
+    const char* NLC_FRAME = "NlcFram";
 #if !defined(TARGET_OS_ANDROID)
     setMinimumSize( (int)( 400.0f * GuiParams::getGuiScale() ), (int)( 400.0f * GuiParams::getGuiScale()     ) );
 #endif // !defined(TARGET_OS_ANDROID)
@@ -210,7 +211,7 @@ void HomeWindow::initializeGoTvDynamicLayout( void )
 	m_HomeFrameUpperLeft->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 	m_HomeFrameUpperLeft->setFrameShape( QFrame::Shape::Box );
 	m_HomeFrameUpperLeft->setLineWidth( 1 );
-	m_HomeFrameUpperLeft->setProperty( "GoTvFrame", true );
+	m_HomeFrameUpperLeft->setProperty( NLC_FRAME, true );
 	//m_HomeFrameUpperLeft->setFocusPolicy( Qt::FocusPolicy::TabFocus );
 	m_HomeFrameUpperLeft->setProperty( "FrameFocus", true );
 	m_MainLayout->addWidget( m_HomeFrameUpperLeft, 0, 0 );
@@ -218,14 +219,14 @@ void HomeWindow::initializeGoTvDynamicLayout( void )
 	m_HomeFrameRight->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 	m_HomeFrameRight->setFrameShape( QFrame::Shape::Box );
 	m_HomeFrameRight->setLineWidth( 1 );
-	m_HomeFrameRight->setProperty( "GoTvFrame", true );
+	m_HomeFrameRight->setProperty( NLC_FRAME, true );
 	//m_HomeFrameRight->setFocusPolicy( Qt::FocusPolicy::TabFocus );
 	m_MainLayout->addWidget( m_HomeFrameRight, 0, 1 );
 
 	m_HomeFrameBottom->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 	m_HomeFrameBottom->setFrameShape( QFrame::Shape::Box );
 	m_HomeFrameBottom->setLineWidth( 1 );
-	m_HomeFrameBottom->setProperty( "GoTvFrame", true );
+	m_HomeFrameBottom->setProperty( NLC_FRAME, true );
 	//m_HomeFrameBottom->setFocusPolicy( Qt::FocusPolicy::TabFocus );
 	m_MainLayout->addWidget( m_HomeFrameBottom, 1, 0 );
 

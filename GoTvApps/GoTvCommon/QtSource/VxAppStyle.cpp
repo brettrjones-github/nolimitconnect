@@ -111,7 +111,8 @@ bool VxAppStyle::event( QEvent* e )
             {
                 m_MyApp.switchWindowFocus( focusedWidget );
             }
-            if( true == focusedWidget->property( "GoTvFrame" ) )
+
+            if( true == focusedWidget->property( "NlcFrame" ) || !focusedWidget->isVisible() )
             {
                 focusedWidget->nextInFocusChain();
             }

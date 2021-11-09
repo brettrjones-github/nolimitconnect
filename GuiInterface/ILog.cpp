@@ -2,8 +2,6 @@
 #include "ILog.h"
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>
-#include <CoreLib/VxThread.h>
-
 
 //============================================================================
 ILog::ILog()

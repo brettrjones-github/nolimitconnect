@@ -773,9 +773,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletCamTest.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareOfferList.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -858,6 +855,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletAssetPlayerBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPopupMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
