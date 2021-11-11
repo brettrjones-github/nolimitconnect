@@ -815,7 +815,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AssetVoiceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AvatarBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/CallListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/CentralFrame.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/CentralWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ChatEntryWidget.ui \
@@ -828,7 +827,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FileShareItemWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FileXferWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/FriendListEntryWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/GuiUserListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HostJoinRequestListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
@@ -866,8 +864,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailChooseWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/UserJoinListItem.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/UserListItem.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui
 
 

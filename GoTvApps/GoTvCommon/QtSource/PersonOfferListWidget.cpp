@@ -105,7 +105,7 @@ void PersonOfferListWidget::setFriendHasUnviewedTextMessages( VxGUID& onlineId, 
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-			GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+			GuiUser * poFriend = poWidget->getUser();
 			if( poFriend
 				&& ( poFriend->getMyOnlineId() == onlineId ) )
 			{
@@ -247,7 +247,7 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 				listEntryWidget = (FriendListEntryWidget *)this->item( rowIdx );
 				if( listEntryWidget )
 				{
-                    GuiUser * listEntryFriend = (GuiUser *)listEntryWidget->data( Qt::UserRole + 2 ).toULongLong();
+                    GuiUser * listEntryFriend =listEntryWidget->getUser();
 					if( listEntryFriend )
 					{
 						int64_t listSessionTime = listEntryFriend->getLastSessionTimeMs();
@@ -272,9 +272,9 @@ void PersonOfferListWidget::slotUpdateFriend( GuiUser * netIdent, bool sessionTi
 			}
 		}
 
-		poFriendItem->setSizeHint( poFriendItem->getSubWidget()->size() );
+		//poFriendItem->setSizeHint( poFriendItem->getSubWidget()->size() );
 
-		setItemWidget( poFriendItem, poFriendItem->getSubWidget() );
+		//setItemWidget( poFriendItem, poFriendItem->getSubWidget() );
 
 		updateListEntryWidget( poFriendItem, netIdent );
 	}
@@ -290,7 +290,7 @@ void PersonOfferListWidget::slotRefreshFriend( VxGUID friendId )
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-            GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+            GuiUser * poFriend = poWidget->getUser();
 			if( poFriend
 				&& ( poFriend->getMyOnlineId().getVxGUIDHiPart() == friendId.getVxGUIDHiPart() )
 				&& ( poFriend->getMyOnlineId().getVxGUIDLoPart() == friendId.getVxGUIDLoPart() ) )
@@ -316,7 +316,7 @@ void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-            GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+            GuiUser * poFriend = poWidget->getUser();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
                 LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName().c_str(), iIdx );
@@ -332,17 +332,13 @@ void PersonOfferListWidget::removeFriend( GuiUser * netIdent )
 //============================================================================
 void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, FriendListEntryWidget * poWidget )
 {
-	if( netIdent->isNearby() )
+	if(  netIdent->isOnline() )
 	{
-		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuNormal ) );
-	}
-	else if(  netIdent->isOnline() )
-	{
-		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuNormal ) );
+		poWidget->getIdentMenuButton()->setIcons( eMyIconMenuNormal );
 	}
 	else
 	{
-		poWidget->getMenuButton()->setIcon( getMyIcons().getIcon( eMyIconMenuDisabled ) );
+		poWidget->getIdentMenuButton()->setIcons( eMyIconMenuDisabled );
 	}
 }
 
@@ -351,7 +347,6 @@ void PersonOfferListWidget::updateListEntryBackgroundColor( GuiUser * netIdent, 
 FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser * poFriend )
 {
 	FriendListEntryWidget * item = new FriendListEntryWidget( this );
-    item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
     item->setData( Qt::UserRole + 2, QVariant((quint64)(poFriend)) );
     connect( item, SIGNAL(listButtonClicked(FriendListEntryWidget*)), this, SLOT(slotFriendListItemClicked(FriendListEntryWidget*)));
 
@@ -363,32 +358,17 @@ FriendListEntryWidget * PersonOfferListWidget::friendToWidget( GuiUser * poFrien
 //============================================================================
 void PersonOfferListWidget::updateListEntryWidget( FriendListEntryWidget * item, GuiUser * netIdent )
 {
-	QString strName = netIdent->getOnlineName().c_str();
-	strName += " - ";
-	QString strDesc = netIdent->getOnlineDescription().c_str();
+	item->updateIdentity( netIdent );
     // display in seconds
 	QVariant dispValue( (uint)( netIdent->getLastSessionTimeMs() / 1000 ) );
 	item->setData( Qt::DisplayRole, dispValue );
-
-	updateListEntryBackgroundColor( netIdent, item );
-
-	item->ui.m_IconButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-	QPalette pal = item->ui.m_IconButton->palette();
-	pal.setColor(QPalette::Button, QColor( netIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
-	item->ui.m_IconButton->setAutoFillBackground(true);
-	item->ui.m_IconButton->setPalette(pal);
-	item->ui.m_IconButton->update();
-	item->ui.TitlePart1->setText( strName );
-	item->ui.TitlePart2->setText( netIdent->describeMyFriendshipToHim() );
-	item->ui.DescPart2->setText( strDesc );
-	item->ui.TodLabel->setText( QString("Truths: %1 Dares: %2").arg(netIdent->getTruthCount()).arg(netIdent->getDareCount()) );
 }
 
 //============================================================================
 //!	get friend from QListWidgetItem data
 GuiUser * PersonOfferListWidget::widgetToFriend( FriendListEntryWidget * item )
 {
-	return (GuiUser *)item->data( Qt::UserRole + 2 ).toULongLong();
+	return item->getUser();
 }
 
 //============================================================================
@@ -401,7 +381,7 @@ FriendListEntryWidget * PersonOfferListWidget::findListEntryWidget( GuiUser * ne
 		poWidget = (FriendListEntryWidget *)this->item(iIdx);
 		if( poWidget )
 		{
-            GuiUser * poFriend = (GuiUser *)poWidget->data( Qt::UserRole + 2 ).toULongLong();
+            GuiUser * poFriend = poWidget->getUser();
 			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
 			{
 				return poWidget;

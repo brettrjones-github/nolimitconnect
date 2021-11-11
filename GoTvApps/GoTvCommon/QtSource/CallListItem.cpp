@@ -19,20 +19,9 @@
 
 //============================================================================
 CallListItem::CallListItem(QWidget *parent  )
-: QWidget( parent )
+: IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 {
-	ui.setupUi( this );
-    ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
-    ui.m_FriendshipButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
-    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_MenuButton->setIcon( eMyIconMenu );
-
-    connect( ui.m_AvatarButton,     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
-    connect( ui.m_FriendshipButton, SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
-	connect( ui.m_MenuButton,       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
 }
 
 //============================================================================
@@ -68,7 +57,7 @@ void CallListItem::resizeEvent(QResizeEvent* resizeEvent)
 void CallListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
-    emit signalCallListItemClicked( this );
+    //emit signalCallListItemClicked( this );
 }
 
 //============================================================================
@@ -84,21 +73,14 @@ GuiOfferSession * CallListItem::getCallSession( void )
 }
 
 //============================================================================
-void CallListItem::slotAvatarButtonClicked()
+void CallListItem::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "CallListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void CallListItem::slotFriendshipButtonClicked()
-{
-    LogMsg( LOG_DEBUG, "CallListItem::slotFriendshipButtonClicked" );
-    emit signalAvatarButtonClicked( this );
-}
-
-//============================================================================
-void CallListItem::slotMenuButtonClicked( void )
+void CallListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
@@ -120,21 +102,5 @@ void CallListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    QString strDesc = hostIdent->getOnlineDescription().c_str();
-
-    // updateListEntryBackgroundColor( netIdent, item );
-
-    ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-    /*
-    QPalette pal = ui.m_FriendshipButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
-    ui.m_FriendshipButton->setAutoFillBackground(true);
-    ui.m_FriendshipButton->setPalette(pal);
-    ui.m_FriendshipButton->update();
-    */
-    ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-    ui.DescPart2->setText( strDesc );
+    updateIdentity( hostIdent );
 }

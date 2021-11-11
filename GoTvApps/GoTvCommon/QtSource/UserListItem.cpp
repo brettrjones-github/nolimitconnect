@@ -19,20 +19,14 @@
 
 //============================================================================
 UserListItem::UserListItem(QWidget *parent  )
-: QWidget( parent )
+: IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 {
-	ui.setupUi( this );
-    ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
-    ui.m_FriendshipButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
-    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_MenuButton->setIcon( eMyIconMenu );
+    setIdentWidgetSize( eButtonSizeSmall );
 
-    connect( ui.m_AvatarButton,     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
-    connect( ui.m_FriendshipButton, SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
-	connect( ui.m_MenuButton,       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
+    connect( getIdentAvatarButton(),     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
+    connect( getIdentFriendshipButton(), SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
+	connect( getIdentMenuButton(),       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
 }
 
 //============================================================================
@@ -120,24 +114,7 @@ void UserListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    QString strDesc = hostIdent->getOnlineDescription().c_str();
-
-    if( hostIdent->isMyself() )
-    {
-        ui.m_FriendshipButton->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
-        ui.m_AvatarButton->setNotifyOnlineEnabled( true );
-    }
-    else
-    {
-        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-        ui.m_AvatarButton->setNotifyOnlineEnabled( hostIdent->isOnline() );
-    }
-
-    ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-    ui.DescPart2->setText( strDesc );
+    updateIdentity( hostIdent );
 }
 
 //============================================================================

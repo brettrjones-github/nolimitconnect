@@ -33,9 +33,17 @@ public:
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
 
+	void						setDisableFriendshipChange( bool disable )		{ m_DisableFriendshipChange = disable;  }
 	void						setIdentWidgetSize( EButtonSize buttonSize );
 
 	void						setIdentOnlineState( bool isOnline );
+	void						setIdentGroupState( bool isInGroup );
+	void						setIdentDirectConnectState( bool canDirectConnect );
+
+	VxPushButton*				getIdentAvatarButton( void );
+	VxPushButton*				getIdentFriendshipButton( void );
+	VxPushButton*				getIdentOfferButton( void );
+	VxPushButton*				getIdentMenuButton( void );
 
 	void						setIdentAvatarButtonVisible( bool visible );
 	void						setIdentFriendshipButtonVisible( bool visible );
@@ -75,4 +83,5 @@ protected:
 	Ui::IdentWidget				ui;
 	AppCommon&					m_MyApp;
 	GuiUser*					m_NetIdent{ nullptr };
+	bool						m_DisableFriendshipChange{ false };
 };

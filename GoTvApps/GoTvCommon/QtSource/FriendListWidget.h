@@ -70,8 +70,6 @@ protected:
 
 	FriendListEntryWidget *		findListEntryWidget( GuiUser * netIdent );
 
-	void						updateListEntryBackgroundColor( GuiUser * netIdent, FriendListEntryWidget * poWidget );
-
 	//=== vars ===//
 	AppCommon&					m_MyApp;
 	P2PEngine&					m_Engine;

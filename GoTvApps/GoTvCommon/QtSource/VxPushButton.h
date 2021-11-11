@@ -57,7 +57,12 @@ public:
     void						setNotifyJoinEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyJoinOverlay );
     bool						getNotifyJoinEnabled( void )						{ return m_NotifyJoinEnabled; }
 	void						setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOnlineOverlay );
+    void						setNotifyOnlineColor( QColor onlineColor )          { m_NotifyIconOnlineColor = onlineColor; }
 	bool						getNotifyOnlineEnabled( void )						{ return m_NotifyOnlineEnabled; }
+    void						setNotifyDirectConnectEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyDirectConnectOverlay );
+    bool						getNotifyDirectConnectEnabled( void )               { return m_NotifyDirectConnectEnabled; }
+    void						setNotifyInGroupEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyInGroupOverlay );
+    bool						getNotifyInGroupEnabled( void )                     { return m_NotifyInGroupEnabled; }
     void						setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOfferOverlay );
     bool						getNotifyOfferEnabled( void )						{ return m_NotifyOfferEnabled; }
     void						setNotifyForbiddenEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyForbbidenOverlay );
@@ -135,8 +140,23 @@ protected:
 	EMyIcons					m_NotifyOnlineIcon{ eMyIconNone };
 	EMyIcons					m_LastNotifyOnlineIcon{ eMyIconNone };
 	QPixmap						m_NotifyIconOnlineImage;
+    QColor						m_NotifyIconOnlineColor;
 	QColor						m_NotifyLastIconOnlineColor;
 	QSize						m_NotifyLastIconOnlineSize{ 0, 0 };
+
+    bool						m_NotifyDirectConnectEnabled{ false };
+    EMyIcons					m_NotifyDirectConnectIcon{ eMyIconNone };
+    EMyIcons					m_LastNotifyDirectConnectIcon{ eMyIconNone };
+    QPixmap						m_NotifyIconDirectConnectImage;
+    QColor						m_NotifyLastIconDirectConnectColor;
+    QSize						m_NotifyLastIconDirectConnectSize{ 0, 0 };
+
+    bool						m_NotifyInGroupEnabled{ false };
+    EMyIcons					m_NotifyInGroupIcon{ eMyIconNone };
+    EMyIcons					m_LastNotifyInGroupIcon{ eMyIconNone };
+    QPixmap						m_NotifyIconInGroupImage;
+    QColor						m_NotifyLastIconInGroupColor;
+    QSize						m_NotifyLastIconInGroupSize{ 0, 0 };
 
     bool						m_NotifyJoinEnabled{ false };
     EMyIcons					m_NotifyJoinIcon{ eMyIconNone };

@@ -145,18 +145,6 @@ UserJoinListItem* UserJoinListWidget::findListEntryWidgetByOnlineId( VxGUID& onl
 }
 
 //============================================================================
-void UserJoinListWidget::slotUserJoinListItemClicked( UserJoinListItem* userItem )
-{
-	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-	{
-		return;
-	}
-
-	m_ClickEventTimer.startTimer();
-    onUserJoinListItemClicked(userItem);
-}
-
-//============================================================================
 void UserJoinListWidget::slotAvatarButtonClicked( UserJoinListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
@@ -178,18 +166,6 @@ void UserJoinListWidget::slotMenuButtonClicked( UserJoinListItem* userItem )
 
 	m_ClickEventTimer.startTimer();
     onMenuButtonClicked( userItem );
-}
-
-//============================================================================
-void UserJoinListWidget::slotFriendshipButtonClicked( UserJoinListItem* userItem )
-{
-    if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-    {
-        return;
-    }
-
-    m_ClickEventTimer.startTimer();
-    onFriendshipButtonClicked( userItem );
 }
 
 //============================================================================
@@ -240,20 +216,6 @@ UserJoinListItem* UserJoinListWidget::addOrUpdateUserJoinSession( GuiUserJoinSes
 }
 
 //============================================================================
-void UserJoinListWidget::onUserJoinListItemClicked( UserJoinListItem* userItem )
-{
-    LogMsg( LOG_DEBUG, "onUserJoinListItemClicked" );
-    if( userItem )
-    {
-        GuiUserJoinSession* userSession = userItem->getUserJoinSession();
-        if( userSession )
-        {
-            emit signalUserJoinListItemClicked( userSession, userItem );
-        }
-    }
-}
-
-//============================================================================
 void UserJoinListWidget::onAvatarButtonClicked( UserJoinListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
@@ -286,20 +248,6 @@ void UserJoinListWidget::onMenuButtonClicked( UserJoinListItem* userItem )
                     popupMenu->showFriendMenu( userSession->getUserIdent() );
                 }
             }
-        }
-    }
-}
-
-//============================================================================
-void UserJoinListWidget::onFriendshipButtonClicked( UserJoinListItem* userItem )
-{
-    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
-    if( userItem )
-    {
-        GuiUserJoinSession* userSession = userItem->getUserJoinSession();
-        if( userSession )
-        {
-            emit signalFriendshipButtonClicked( userSession, userItem );
         }
     }
 }
@@ -547,14 +495,16 @@ void UserJoinListWidget::onListItemUpdated( GuiUserJoinSession* userSession, Use
             hostType = eHostTypePeerUser;
         }
         
-        VxPushButton* avatarButton = userItem->getAvatarButton();
+        VxPushButton* avatarButton = userItem->getIdentAvatarButton();
         GuiUser* user = userSession->getUserIdent();
-
-        QImage	avatarImage;
-        bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
-        if( havAvatarImage && avatarButton )
+        if( avatarButton && user )
         {
-            avatarButton->setIconOverrideImage( avatarImage );
+            QImage	avatarImage;
+            bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
+            if( havAvatarImage && avatarButton )
+            {
+                avatarButton->setIconOverrideImage( avatarImage );
+            }
         }
     }
 }

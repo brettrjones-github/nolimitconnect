@@ -62,10 +62,8 @@ public:
     ECallViewType               getCallViewType( void )                     { return m_CallViewType; }
 
 signals:
-    void                        signalCallListItemClicked( GuiOfferSession* hostSession, CallListItem* hostItem );
     void                        signalAvatarButtonClicked( GuiOfferSession* hostSession, CallListItem* hostItem );
     void                        signalMenuButtonClicked( GuiOfferSession* hostSession, CallListItem* hostItem );
-    void                        signalFriendshipButtonClicked( GuiOfferSession* hostSession, CallListItem* hostItem );
 
 protected slots:
     /*
@@ -78,18 +76,14 @@ protected slots:
     void                        slotCallOnlineStatus( GuiCall* user, bool isOnline );
     */
 
-    void                        slotCallListItemClicked( CallListItem* hostItem );
     void                        slotAvatarButtonClicked( CallListItem* hostItem );
     void                        slotMenuButtonClicked( CallListItem* hostItem );
-    void                        slotFriendshipButtonClicked( CallListItem* hostItem );
 
 protected:
     CallListItem*               sessionToWidget( GuiOfferSession* hostSession );
     GuiOfferSession*			widgetToSession( CallListItem* hostItem );
 
-    virtual void                onCallListItemClicked( CallListItem* hostItem );
     virtual void                onAvatarButtonClicked( CallListItem* hostItem );
-    virtual void                onFriendshipButtonClicked( CallListItem* hostItem );
     virtual void                onMenuButtonClicked( CallListItem* hostItem );
 
     void                        refreshList( void );

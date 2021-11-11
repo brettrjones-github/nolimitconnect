@@ -58,10 +58,8 @@ CallListItem* CallListWidget::sessionToWidget( GuiOfferSession* userSession )
     userItem->setCallSession( userSession );
     userItem->setSizeHint( userItem->calculateSizeHint() );
 
-    connect( userItem, SIGNAL(signalCallListItemClicked(QListWidgetItem *)),	    this, SLOT(slotCallListItemClicked(QListWidgetItem *)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(CallListItem *)),	        this, SLOT(slotAvatarButtonClicked(CallListItem *)) );
     connect( userItem, SIGNAL(signalMenuButtonClicked(CallListItem *)),	            this, SLOT(slotMenuButtonClicked(CallListItem *)) );
-    connect( userItem, SIGNAL(signalFriendshipButtonClicked(CallListItem *)),		this, SLOT(slotFriendshipButtonClicked(CallListItem *)) );
 
     userItem->updateWidgetFromInfo();
 
@@ -135,18 +133,6 @@ CallListItem* CallListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 }
 
 //============================================================================
-void CallListWidget::slotCallListItemClicked( CallListItem* userItem )
-{
-	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-	{
-		return;
-	}
-
-	m_ClickEventTimer.startTimer();
-    onCallListItemClicked(userItem);
-}
-
-//============================================================================
 void CallListWidget::slotAvatarButtonClicked( CallListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
@@ -168,18 +154,6 @@ void CallListWidget::slotMenuButtonClicked( CallListItem* userItem )
 
 	m_ClickEventTimer.startTimer();
     onMenuButtonClicked( userItem );
-}
-
-//============================================================================
-void CallListWidget::slotFriendshipButtonClicked( CallListItem* userItem )
-{
-    if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-    {
-        return;
-    }
-
-    m_ClickEventTimer.startTimer();
-    onFriendshipButtonClicked( userItem );
 }
 
 /*
@@ -233,21 +207,6 @@ CallListItem* CallListWidget::addOrUpdateCallSession( GuiOfferSession* userSessi
 }
 
 //============================================================================
-void CallListWidget::onCallListItemClicked( CallListItem* userItem )
-{
-    LogMsg( LOG_DEBUG, "onCallListItemClicked" );
-    if( userItem )
-    {
-        GuiOfferSession* userSession = userItem->getCallSession();
-        if( userSession )
-        {
-            emit signalCallListItemClicked( userSession, userItem );
-        }
-    }
-    onCallListItemClicked( userItem );
-}
-
-//============================================================================
 void CallListWidget::onAvatarButtonClicked( CallListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
@@ -279,20 +238,6 @@ void CallListWidget::onMenuButtonClicked( CallListItem* userItem )
                     popupMenu->showFriendMenu( userSession->getHisIdent() );
                 }
             }
-        }
-    }
-}
-
-//============================================================================
-void CallListWidget::onFriendshipButtonClicked( CallListItem* userItem )
-{
-    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
-    if( userItem )
-    {
-        GuiOfferSession* userSession = userItem->getCallSession();
-        if( userSession && userSession->getUserIdent() )
-        {
-            launchChangeFriendship( userSession->getUserIdent() );
         }
     }
 }

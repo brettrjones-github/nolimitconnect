@@ -46,11 +46,9 @@ VxPushButton::VxPushButton( QWidget *parent )
 , m_LastIconColor( COLOR_TRANSPARENT)
 , m_LastIconSize( 0, 0 )
 
-, m_NotifyOnlineIcon( eMyIconNone )
-, m_LastNotifyOnlineIcon( eMyIconNone )
-, m_NotifyIconOnlineImage()
 , m_NotifyLastIconOnlineColor( COLOR_TRANSPARENT)
-, m_NotifyLastIconOnlineSize( 0, 0 )
+, m_NotifyLastIconDirectConnectColor( COLOR_TRANSPARENT )
+, m_NotifyLastIconInGroupColor( COLOR_TRANSPARENT )
 
 , m_NotifyIconOfferImage()
 , m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)
@@ -126,6 +124,7 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 , m_BlinkTimer( new QTimer( this ) )
 , m_BlinkState( 0 )
 {
+    m_NotifyIconOnlineColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
 	initQButtonPro();
 }
 
@@ -286,6 +285,36 @@ void VxPushButton::setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon )
 	}
 
 	update();
+}
+
+//============================================================================
+void VxPushButton::setNotifyDirectConnectEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+    m_NotifyDirectConnectEnabled = enabled;
+    if( enabled )
+    {
+        if( eMyIconNone != eNotifyIcon )
+        {
+            m_NotifyDirectConnectIcon = eNotifyIcon;
+        }
+    }
+
+    update();
+}
+
+//============================================================================
+void VxPushButton::setNotifyInGroupEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+    m_NotifyInGroupEnabled = enabled;
+    if( enabled )
+    {
+        if( eMyIconNone != eNotifyIcon )
+        {
+            m_NotifyInGroupIcon = eNotifyIcon;
+        }
+    }
+
+    update();
 }
 
 //============================================================================
@@ -523,7 +552,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 	if( m_NotifyOnlineEnabled && ( eMyIconNone != m_NotifyOnlineIcon ) )
 	{
 		// draw online notify dot
-		iconColor = appTheme.getButtonColor( this, eColorLayerNotifyOnline );
+        iconColor = m_NotifyIconOnlineColor; 
 
 		if( ( m_NotifyLastIconOnlineColor != iconColor )
 			|| m_NotifyIconOnlineImage.isNull()
@@ -544,6 +573,56 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 			painter.drawPixmap( drawRect, m_NotifyIconOnlineImage );
 		}
 	}
+
+    if( m_NotifyDirectConnectEnabled && (eMyIconNone != m_NotifyDirectConnectIcon) )
+    {
+        // draw online notify dot
+        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyOnline );
+
+        if( (m_NotifyLastIconDirectConnectColor != iconColor)
+            || m_NotifyIconDirectConnectImage.isNull()
+            || (drawRect.size() != m_NotifyLastIconDirectConnectSize)
+            || (m_NotifyDirectConnectIcon != m_LastNotifyDirectConnectIcon) )
+        {
+            m_NotifyIconDirectConnectImage = getMyIcons().getIconPixmap( m_NotifyDirectConnectIcon, drawRect.size(), iconColor );
+            if( !m_IconImage.isNull() )
+            {
+                m_LastNotifyDirectConnectIcon = m_NotifyDirectConnectIcon;
+                m_NotifyLastIconDirectConnectColor = iconColor;
+                m_NotifyLastIconDirectConnectSize = drawRect.size();
+            }
+        }
+
+        if( !m_NotifyIconDirectConnectImage.isNull() )
+        {
+            painter.drawPixmap( drawRect, m_NotifyIconDirectConnectImage );
+        }
+    }
+
+    if( m_NotifyInGroupEnabled && (eMyIconNone != m_NotifyInGroupIcon) )
+    {
+        // draw online notify dot
+        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyOnline );
+
+        if( (m_NotifyLastIconInGroupColor != iconColor)
+            || m_NotifyIconInGroupImage.isNull()
+            || (drawRect.size() != m_NotifyLastIconInGroupSize)
+            || (m_NotifyInGroupIcon != m_LastNotifyInGroupIcon) )
+        {
+            m_NotifyIconInGroupImage = getMyIcons().getIconPixmap( m_NotifyInGroupIcon, drawRect.size(), iconColor );
+            if( !m_IconImage.isNull() )
+            {
+                m_LastNotifyInGroupIcon = m_NotifyInGroupIcon;
+                m_NotifyLastIconInGroupColor = iconColor;
+                m_NotifyLastIconInGroupSize = drawRect.size();
+            }
+        }
+
+        if( !m_NotifyIconInGroupImage.isNull() )
+        {
+            painter.drawPixmap( drawRect, m_NotifyIconInGroupImage );
+        }
+    }
 
     if( m_NotifyOfferEnabled && ( eMyIconNone != m_NotifyOfferIcon ) )
     {

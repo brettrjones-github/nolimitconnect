@@ -16,6 +16,7 @@
 #include <app_precompiled_hdr.h>
 #include "IdentWidget.h"
 #include "AppletPeerChangeFriendship.h"
+#include "GuiHelpers.h"
 #include "GuiUser.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
@@ -45,7 +46,7 @@ MyIcons&  IdentWidget::getMyIcons( void )
 void IdentWidget::setIdentWidgetSize( EButtonSize buttonSize )
 {
 	QSize butSize = GuiParams::getButtonSize( buttonSize );
-	if( buttonSize < eButtonSizeMedium )
+	if( buttonSize < eButtonSizeLarge )
 	{
 		// wont fit the third line
 		ui.m_TodLabel->setVisible( false );
@@ -89,21 +90,39 @@ void IdentWidget::updateIdentity( VxNetIdent* netIdent )
 		QString dares = QObject::tr( " Dares: " );
 		ui.m_TodLabel->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
 		setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
-		
-		if( !netIdent->requiresRelay() )
+
+		bool isMyself = netIdent->getMyOnlineId() == m_MyApp.getMyOnlineId();
+		if( isMyself )
 		{
-			ui.m_AvatarButton->setOverlayIcon( eMyIconDirectConnectedOverlay );
-			if( netIdent->isOnline() )
-			{
-				ui.m_AvatarButton->setOverlayColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-			}
-			else
-			{
-				ui.m_AvatarButton->setOverlayColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
-			}
+			ui.m_FriendshipButton->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
+		}
+		
+		if( isMyself || !netIdent->requiresRelay() )
+		{
+			ui.m_FriendshipButton->setNotifyDirectConnectEnabled( true );
+		}
+
+		if( isMyself || netIdent->isOnline() )
+		{
+			ui.m_FriendshipButton->setNotifyOnlineEnabled( true );
+			ui.m_FriendshipButton->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+		}
+		else
+		{
+			ui.m_FriendshipButton->setNotifyOnlineEnabled( true, eMyIconNotifyOfflineOverlay );
+			ui.m_FriendshipButton->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
 		}
 	}
 }
+
+//============================================================================
+VxPushButton* IdentWidget::getIdentAvatarButton( void ) { return ui.m_AvatarButton; }
+//============================================================================
+VxPushButton* IdentWidget::getIdentFriendshipButton( void ) { return ui.m_FriendshipButton; }
+//============================================================================
+VxPushButton* IdentWidget::getIdentOfferButton( void ) { return ui.m_OfferButton; }
+//============================================================================
+VxPushButton* IdentWidget::getIdentMenuButton( void ) { return ui.m_FriendMenuButton; }
 
 //============================================================================
 void IdentWidget::setIdentAvatarButtonVisible( bool visible )
@@ -132,7 +151,19 @@ void IdentWidget::setIdentMenuButtonVisible( bool visible )
 //============================================================================
 void IdentWidget::setIdentOnlineState( bool isOnline )
 {
-	ui.m_AvatarButton->setNotifyOnlineEnabled( isOnline );
+	ui.m_FriendMenuButton->setNotifyOnlineEnabled( isOnline );
+}
+
+//============================================================================
+void IdentWidget::setIdentGroupState( bool isInGroup )
+{
+	ui.m_FriendMenuButton->setNotifyInGroupEnabled( isInGroup );
+}
+
+//============================================================================
+void IdentWidget::setIdentDirectConnectState( bool canDirectConnect )
+{
+	ui.m_FriendMenuButton->setNotifyDirectConnectEnabled( canDirectConnect );
 }
 
 //============================================================================
@@ -202,12 +233,16 @@ void IdentWidget::onIdentAvatarButtonClicked( void )
 //============================================================================
 void IdentWidget::onIdentFriendshipButtonClicked( void )
 {
-	if( m_NetIdent )
+	if( m_NetIdent && !m_DisableFriendshipChange )
 	{
-		AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, dynamic_cast<QWidget*>(parent()) ));
-		if( applet )
+		QWidget *parentPage = GuiHelpers::findParentPage( dynamic_cast<QWidget*>(parent()) );
+		if( parentPage )
 		{
-			applet->setFriend( m_NetIdent );
+			AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, parentPage ) );
+			if( applet )
+			{
+				applet->setFriend( m_NetIdent );
+			}
 		}
 	}
 }

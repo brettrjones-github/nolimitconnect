@@ -624,11 +624,8 @@ QFrame * GuiHelpers::getParentPageFrame( QWidget * curWidget )
     QFrame * pageFrame = nullptr;
     QObject * curParent = curWidget;
 
-    QString launchPageObjName;
-    QString messengerPageObjName;
-
-    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
-    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+    QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
 
     while( curParent )
     {
@@ -659,11 +656,8 @@ QFrame * GuiHelpers::getMessengerPageFrame( QWidget * curWidget )
     QFrame * pageFrame = nullptr;
     QObject * curParent = curWidget;
 
-    QString launchPageObjName;
-    QString messengerPageObjName;
-
-    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
-    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+    QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
 
     while( curParent )
     {
@@ -721,11 +715,8 @@ QFrame* GuiHelpers::getLaunchPageFrame( QWidget * curWidget )
     QFrame * pageFrame = nullptr;
     QObject * curParent = curWidget;
 
-    QString launchPageObjName;
-    QString messengerPageObjName;
-
-    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
-    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+    QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
 
     while (curParent)
     {
@@ -783,11 +774,8 @@ QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
     QFrame * pageFrame = nullptr;
     QObject * curParent = curWidget;
 
-    QString launchPageObjName;
-    QString messengerPageObjName;
-
-    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
-    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+    QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
 
     while (curParent)
     {
@@ -1340,35 +1328,16 @@ QWidget* GuiHelpers::findParentPage( QWidget* parent ) // this should return hom
     QFrame* pageFrame = nullptr;
     QObject* curParent = parent;
 
-    QString launchPageObjName;
-    QString messengerPageObjName;
-
-    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
-    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+    QString launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
 
     while( curParent )
     {
         QString objName = curParent->objectName();
         if( (objName == launchPageObjName) || (objName == messengerPageObjName) )
         {
-            bool foundParentFrame = false;
-            QWidget* baseFrame = dynamic_cast<QWidget*>(curParent->parent());
-            if( baseFrame )
-            {
-                QObjectList childList = baseFrame->children();
-                for( auto iter = childList.begin(); iter != childList.end(); ++iter )
-                {
-                    QFrame* childFrame = dynamic_cast<QFrame*>(*iter);
-                    if( childFrame && (childFrame->objectName() == launchPageObjName || childFrame->objectName() == messengerPageObjName) )
-                    {
-                        pageFrame = childFrame;
-                        foundParentFrame = true;
-                        break;
-                    }
-                }
-            }
-
-            if( foundParentFrame )
+            pageFrame = dynamic_cast<QFrame*>(curParent);
+            if( pageFrame )
             {
                 break;
             }

@@ -17,72 +17,43 @@
 #include "FriendListEntryWidget.h"
 #include "AppCommon.h"
 #include "AppletPopupMenu.h"
+#include "GuiUser.h"
 
 //============================================================================
 FriendListEntryWidget::FriendListEntryWidget( QListWidget * parent, int type  )
-: QListWidgetItem( parent, type )
+: IdentWidget( parent )
+, QListWidgetItem( parent, type )
 {
-	SubWidget = new QPushButton( parent );
-	ui.setupUi( SubWidget );
-	m_MenuButton = ui.m_MenuButton;
-	connect( ui.m_IconButton, SIGNAL(pressed()), this, SLOT(iconButtonPressed()) );
-	connect( ui.m_IconButton, SIGNAL(released()), this, SLOT(iconButtonReleased()) );
-	connect( m_MenuButton, SIGNAL(pressed()), this, SLOT(slotMenuButtonPressed()) );
-	connect( m_MenuButton, SIGNAL(released()), this, SLOT(slotMenuButtonReleased()) );
-	connect( SubWidget, SIGNAL(pressed()), this, SLOT(listButtonPressed()) );
-	connect( SubWidget, SIGNAL(released()), this, SLOT(listButtonReleased()) );
 }
 
 //============================================================================
-FriendListEntryWidget::~FriendListEntryWidget()
+GuiUser* FriendListEntryWidget::getUser( void )
 {
-   // GuiHostSession * hostSession = (GuiHostSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
-    //if( hostSession && !hostSession->parent() )
-    //{
-    //    delete hostSession;
-    //}
+	return (GuiUser*)QListWidgetItem::data( Qt::UserRole + 2 ).toULongLong();
 }
 
 //============================================================================
-void FriendListEntryWidget::iconButtonPressed()
+void FriendListEntryWidget::onIdentAvatarButtonClicked()
 {
-	SubWidget->setDown(true);
 	emit listButtonClicked( this );
 }
 
 //============================================================================
-void FriendListEntryWidget::iconButtonReleased()
+void FriendListEntryWidget::onIdentOfferButtonClicked()
 {
-	SubWidget->setDown(false);
+	emit listButtonClicked( this );
 }
 
 //============================================================================
-void FriendListEntryWidget::slotMenuButtonPressed()
+void FriendListEntryWidget::onIdentMenuButtonClicked()
 {
-	SubWidget->setDown(true);
-	emit signalMenuButtonClicked( this );
-	AppletPopupMenu *applet = dynamic_cast<AppletPopupMenu *>( GetAppInstance().getAppletMgr().launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(parent()) ));
-	if( applet )
+	GuiUser* selectedFriend = getUser();
+	if( selectedFriend )
 	{
-		GuiUser* selectedFriend = (GuiUser*)data( Qt::UserRole + 2 ).toULongLong();
-		applet->showPersonOfferMenu( selectedFriend );
+		AppletPopupMenu* applet = dynamic_cast<AppletPopupMenu*>(GetAppInstance().getAppletMgr().launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(parent()) ));
+		if( applet )
+		{
+			applet->showPersonOfferMenu( selectedFriend );
+		}
 	}
-}
-
-//============================================================================
-void FriendListEntryWidget::slotMenuButtonReleased()
-{
-	SubWidget->setDown(false);
-}
-
-//============================================================================
-void FriendListEntryWidget::listButtonPressed()
-{
-	emit listButtonClicked( this );
-}
-
-//============================================================================
-void FriendListEntryWidget::listButtonReleased()
-{
-
 }

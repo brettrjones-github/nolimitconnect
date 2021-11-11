@@ -15,38 +15,31 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_FriendListEntryWidget.h"
+#include "IdentWidget.h"
 
 #include <QListWidgetItem>
 #include <QObject>
 
-class FriendListEntryWidget : public QObject, public QListWidgetItem
+class FriendListEntryWidget : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
 	FriendListEntryWidget( QListWidget * parent = 0, int type = Type );
-	virtual ~FriendListEntryWidget();
+	virtual ~FriendListEntryWidget() = default;
 
-	QPushButton *				getSubWidget( void )		{ return SubWidget; }
-	QPushButton *				getMenuButton( void )		{ return m_MenuButton; }
+	GuiUser*					getUser( void );
 
 signals:
 	void						listButtonClicked( FriendListEntryWidget* listEntryWidget );
 	void						signalMenuButtonClicked( FriendListEntryWidget* listEntryWidget );
 
 public slots:
-	void						iconButtonPressed( void );
-	void						iconButtonReleased( void );
-	void						listButtonPressed( void );
-	void						listButtonReleased( void );
-	void						slotMenuButtonPressed( void );
-	void						slotMenuButtonReleased( void );
+	virtual void				onIdentAvatarButtonClicked( void ) override;
+	virtual void				onIdentOfferButtonClicked( void ) override;
+	virtual void				onIdentMenuButtonClicked( void ) override;
 
 public:
 	//=== vars ===//
-    Ui::FriendListEntryWidgetUi	ui;
-	QPushButton *				SubWidget;
-	QPushButton *				m_MenuButton;
 };
 
 

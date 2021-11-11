@@ -59,6 +59,131 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
+      <item>
+       <widget class="IdentWidget" name="m_IdentWidget" native="true"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="VxPushButton" name="m_MakeFriendButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>10</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>10</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_MakeFriendLabel">
+          <property name="text">
+           <string>Make Friend</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="VxPushButton" name="m_IgnoreButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_IgnoreLabel">
+          <property name="text">
+           <string>Ignore</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
       <item>
        <widget class="QLabel" name="m_StatusLabel">
         <property name="text">
@@ -69,7 +194,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="VxPushButton" name="HisPermissionButton">
+         <widget class="VxPushButton" name="m_HisPermissionButton">
           <property name="minimumSize">
            <size>
             <width>48</width>
@@ -94,7 +219,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="HisPermissionLabel">
+         <widget class="QLabel" name="m_HisPermissionLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>TextLabel</string>
           </property>
@@ -105,7 +236,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="VxPushButton" name="MyPermissionButton">
+         <widget class="VxPushButton" name="m_MyPermissionButton">
           <property name="minimumSize">
            <size>
             <width>48</width>
@@ -130,7 +261,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="MyPermissionLabel">
+         <widget class="QLabel" name="m_MyPermissionLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>TextLabel</string>
           </property>
@@ -143,7 +280,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>32</height>
+          <height>0</height>
          </size>
         </property>
         <property name="text">
@@ -156,7 +293,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>32</height>
+          <height>0</height>
          </size>
         </property>
         <property name="text">
@@ -169,7 +306,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>32</height>
+          <height>0</height>
          </size>
         </property>
         <property name="text">
@@ -182,7 +319,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>32</height>
+          <height>0</height>
          </size>
         </property>
         <property name="text">
@@ -195,26 +332,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>32</height>
+          <height>0</height>
          </size>
         </property>
         <property name="text">
          <string>Ignore This Person</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>81</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -225,7 +349,20 @@
          <number>5</number>
         </property>
         <item>
-         <widget class="VxPushButton" name="OkButton">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="VxPushButton" name="m_OkButton">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -245,7 +382,20 @@
          </widget>
         </item>
         <item>
-         <widget class="VxPushButton" name="CancelButton">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="VxPushButton" name="m_CancelButton">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -264,7 +414,33 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>81</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -276,6 +452,12 @@
    <class>VxPushButton</class>
    <extends>QPushButton</extends>
    <header>VxPushButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>IdentWidget</class>
+   <extends>QWidget</extends>
+   <header>IdentWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

@@ -14,15 +14,15 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_UserListItem.h"
+#include "IdentWidget.h"
 
 #include <QListWidgetItem>
-#include <QWidget>
+
 
 class GuiUserSessionBase;
 class GuiThumb;
 
-class UserListItem : public QWidget, public QListWidgetItem
+class UserListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -35,9 +35,9 @@ public:
     void                        setUserSession( GuiUserSessionBase* hostSession );
     GuiUserSessionBase*         getUserSession( void );
 
-    VxPushButton *              getAvatarButton( void )                 { return ui.m_AvatarButton; }
-    VxPushButton *              getFriendshipButton( void )             { return ui.m_FriendshipButton; }
-    VxPushButton *              getMenuButton( void )                   { return ui.m_MenuButton; }
+    VxPushButton *              getAvatarButton( void )                 { return getIdentAvatarButton(); }
+    VxPushButton *              getFriendshipButton( void )             { return getIdentFriendshipButton(); }
+    VxPushButton *              getMenuButton( void )                   { return getIdentMenuButton(); }
 
     void						updateWidgetFromInfo( void );
     void                        updateThumb( GuiThumb* thumb );
@@ -60,7 +60,6 @@ protected:
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::UserListItemUi	        ui;
     AppCommon&					m_MyApp;
 };
 

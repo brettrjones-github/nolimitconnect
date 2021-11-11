@@ -17,6 +17,7 @@
 #include "VxAppTheme.h"
 
 #include "AppletPopupMenu.h"
+#include "AppletPeerChangeFriendship.h"
 
 #include "FileShareItemWidget.h"
 #include "MyIcons.h"
@@ -221,25 +222,14 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend )
 	EPluginAccess ePluginAccess;
 	QString strAction;
 
-	if( !m_SelectedFriend->isIgnored() )
+	if( m_SelectedFriend->isIgnored() )
 	{
-		if( poSelectedFriend->getMyFriendshipToHim() >= eFriendStateFriend )
-		{
-			addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Remove Friend" ) );
-		}
-		else
-		{
-			addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Add Friend" ) );
-		}
-	}
-	
-	if( poSelectedFriend->isIgnored() )
-	{
-		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Unblock" ) );
+		addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Unblock" ) );
 	}
 	else
 	{
-		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconPermissions ), QObject::tr( "Block" ) );
+		addMenuItem( (int)eMaxPluginType + 1, getMyIcons().getIcon( eMyIconIgnored ), QObject::tr( "Block" ) );
+		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Change Friendship" ) );
 	}
 
 	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeWebServer ) )
@@ -311,8 +301,6 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend )
 		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeRelay, ePluginAccess );
 		addMenuItem( (int)ePluginTypeRelay, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeRelay, ePluginAccess ) ), strAction );
 	}
-
-	exec();
 }
 
 //============================================================================
@@ -381,22 +369,16 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 		break;
 
 	case eMaxPluginType + 1: // change friendship
-		m_MyApp.offerToFriendChangeFriendship( m_SelectedFriend );
-		break;
-
 	case eMaxPluginType + 2: // block / unblock
-		if( m_SelectedFriend->isIgnored() )
+	{
+		AppletPeerChangeFriendship * applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, getParentPageFrame() ));
+		if( applet )
 		{
-			// unblock
-			m_MyApp.offerToFriendChangeFriendship( m_SelectedFriend );
+			applet->setFriend( m_SelectedFriend );
 		}
-		else
-		{
-			// block
-			m_MyApp.offerToFriendChangeFriendship( m_SelectedFriend );
-		}
-		
 		break;
+	}
+
 
 	default:
 		LogMsg( LOG_ERROR, "Unknown Menu id" );

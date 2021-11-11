@@ -312,5 +312,6 @@
         <file>Resources/arrow-up-right.svg</file>
         <file>Resources/invite-accept.svg</file>
         <file>Resources/invite-create.svg</file>
+        <file>Resources/notify-in-group.svg</file>
     </qresource>
 </RCC>

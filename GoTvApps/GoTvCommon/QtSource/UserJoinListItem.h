@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_UserJoinListItem.h"
+#include "IdentWidget.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
@@ -28,7 +28,7 @@ class GuiUserJoinMgr;
 class GuiUserMgr;
 class GuiThumb;
 
-class UserJoinListItem : public QWidget, public QListWidgetItem
+class UserJoinListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -41,32 +41,23 @@ public:
     void                        setUserJoinSession( GuiUserJoinSession* hostSession );
     GuiUserJoinSession*         getUserJoinSession( void );
 
-    VxPushButton *              getAvatarButton( void )                 { return ui.m_AvatarButton; }
-    VxPushButton *              getFriendshipButton( void )             { return ui.m_FriendshipButton; }
-    VxPushButton *              getMenuButton( void )                   { return ui.m_MenuButton; }
-
     void						updateWidgetFromInfo( void );
     void                        updateThumb( GuiThumb* thumb );
 
     QSize                       calculateSizeHint( void );
 
 signals:
-    void						signalUserJoinListItemClicked( UserJoinListItem * poItemWidget );
 	void						signalAvatarButtonClicked( UserJoinListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( UserJoinListItem* listEntryWidget );
 	void						signalMenuButtonClicked( UserJoinListItem* listEntryWidget );
 
-public slots:
-	void						slotAvatarButtonClicked( void );
-    void						slotFriendshipButtonClicked( void );
-	void						slotMenuButtonClicked( void );
-
 protected:
+    void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentMenuButtonClicked( void ) override;
+
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::UserJoinListItemUi	    ui;
     AppCommon&					m_MyApp;
     GuiConnectMgr&				m_ConnectMgr;
     GuiOfferClientMgr&			m_OfferClientMgr;

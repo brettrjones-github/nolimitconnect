@@ -8,6 +8,8 @@ enum EMyIcons
     eMyIconNotifyJoinOverlay,		// joined overlay
     eMyIconNotifyOnlineOverlay,		// online dot
 	eMyIconNotifyOfflineOverlay,	// offline dot
+	eMyIconNotifyDirectConnectOverlay, // direct connect overlay
+	eMyIconNotifyInGroupOverlay,	// in group overlay
     eMyIconNotifyOfferOverlay,		// hand offer overlay
     eMyIconNotifyForbbidenOverlay,	// permission denied
     eMyIconNotifyErrorOverlay,		// error
@@ -380,7 +382,6 @@ enum EMyIcons
 	eMyIconGroupJoined,
 
 	eMyIconDirectConnected,
-	eMyIconDirectConnectedOverlay,
 
 	eMyIconConnect,
 	eMyIconDisconnect,

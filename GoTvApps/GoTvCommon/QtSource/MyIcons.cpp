@@ -122,6 +122,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/notify-join.svg";
 	case eMyIconNotifyOnlineOverlay:		
 		return ":/AppRes/Resources/notify-dot.svg";
+	case eMyIconNotifyDirectConnectOverlay:
+		return ":/AppRes/Resources/direct-connected-overlay.svg";
+	case eMyIconNotifyInGroupOverlay:
+		return ":/AppRes/Resources/notify-in-group.svg";
 	case eMyIconNotifyOfflineOverlay:
 		return ":/AppRes/Resources/notify-offline.svg";
     case eMyIconNotifyOfferOverlay:		
@@ -776,8 +780,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/group-joined.svg";
 	case eMyIconDirectConnected:
 		return ":/AppRes/Resources/direct-connected.svg";
-	case eMyIconDirectConnectedOverlay:
-		return ":/AppRes/Resources/direct-connected-overlay.svg";
 
 	case eMyIconConnect:
 		return ":/AppRes/Resources/connect.svg";

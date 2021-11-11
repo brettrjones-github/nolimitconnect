@@ -25,23 +25,33 @@ AppletPeerChangeFriendship::AppletPeerChangeFriendship( AppCommon& app, QWidget 
     setAppletType( eAppletPeerChangeFriendship );
 	ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-	ui.OkButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
-	ui.OkButton->setIcon( eMyIconCheckMark );
-	ui.CancelButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
-	ui.CancelButton->setIcon( eMyIconRedX );
+	ui.m_OkButton->setIcon( eMyIconCheckMark );
+	ui.m_OkButton->setFixedSize( eButtonSizeLarge );
 
-	getTitleBarWidget()->setPopupVisibility();
-	getBottomBarWidget()->setVisible( false );
+	ui.m_CancelButton->setIcon( eMyIconRedX );
+	ui.m_CancelButton->setFixedSize( eButtonSizeLarge );
 
-    connectBarWidgets();
+	ui.m_MakeFriendButton->setIcon( getMyIcons().getFriendshipIcon( eFriendStateFriend ) );
+	ui.m_MakeFriendButton->setFixedSize(eButtonSizeLarge );
+
+	ui.m_IgnoreButton->setIcon( getMyIcons().getFriendshipIcon( eFriendStateIgnore ) );
+	ui.m_IgnoreButton->setFixedSize( eButtonSizeLarge );
+
+	ui.m_HisPermissionButton->setFixedSize( eButtonSizeLarge );
+	ui.m_MyPermissionButton->setFixedSize( eButtonSizeLarge );
+
+	ui.m_IdentWidget->setDisableFriendshipChange( true );
+	ui.m_IdentWidget->setIdentWidgetSize( eButtonSizeLarge );
 
 	connect( ui.ToAdministratorButton, SIGNAL( clicked() ), this, SLOT( onPermissionClick() ) );
 	connect( ui.ToFriendButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.ToGuestButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.ToAnonymousButton,	SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.ToIgnoreButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
-	connect( ui.OkButton,			SIGNAL(clicked()), this, SLOT(onOkButClick()) );
-	connect( ui.CancelButton,		SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
+	connect( ui.m_OkButton,			SIGNAL(clicked()), this, SLOT(onOkButClick()) );
+	connect( ui.m_CancelButton,		SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
+	connect( ui.m_MakeFriendButton, SIGNAL( clicked() ), this, SLOT( onMakeFriendButClick() ) );
+	connect( ui.m_IgnoreButton,		SIGNAL( clicked() ), this, SLOT( onIgnoreButClick() ) );
 }
 
 //============================================================================
@@ -50,6 +60,7 @@ void AppletPeerChangeFriendship::setFriend( GuiUser * poFriend )
 {
 	vx_assert( poFriend );
 	m_Friend = poFriend;
+	ui.m_IdentWidget->updateIdentity( m_Friend );
 	EFriendState hisPermissionToMe = m_Friend->getHisFriendshipToMe();
 	setHisPermissionToMe( hisPermissionToMe );
 	EFriendState myPermissionToHim = m_Friend->getMyFriendshipToHim();
@@ -60,21 +71,22 @@ void AppletPeerChangeFriendship::setFriend( GuiUser * poFriend )
 //============================================================================
 void AppletPeerChangeFriendship::setHisPermissionToMe( EFriendState hisFriendshipToMe )
 {
-	ui.HisPermissionButton->setIcon( getMyIcons().getFriendshipIcon( hisFriendshipToMe ) );
+	ui.m_HisPermissionButton->setIcon( getMyIcons().getFriendshipIcon( hisFriendshipToMe ) );
 	QString strHisFriendship = m_Friend->getOnlineName().c_str();
-	strHisFriendship += QObject::tr("\'s Friendship To Me-");
+	strHisFriendship += QObject::tr("\'s Friendship To Me -");
 	strHisFriendship += DescribeFriendState(hisFriendshipToMe);
-	ui.HisPermissionLabel->setText(strHisFriendship);
+	ui.m_HisPermissionLabel->setText(strHisFriendship);
 }
 
 //============================================================================
 void AppletPeerChangeFriendship::setMyPermissionToHim( EFriendState myFriendshipToHim )
 {
-	ui.MyPermissionButton->setIcon( getMyIcons().getFriendshipIcon( myFriendshipToHim ) );
+	ui.m_IdentWidget->getIdentFriendshipButton()->setIcon( getMyIcons().getFriendshipIcon( myFriendshipToHim ) );
+	ui.m_MyPermissionButton->setIcon( getMyIcons().getFriendshipIcon( myFriendshipToHim ) );
 	QString strHisName = m_Friend->getOnlineName().c_str();
 	QString strMyFriendship =   QObject::tr("My Friendship To ");
 	strMyFriendship += strHisName + "-" + DescribeFriendState( myFriendshipToHim );
-	ui.MyPermissionLabel->setText(strMyFriendship);
+	ui.m_MyPermissionLabel->setText(strMyFriendship);
 }
 
 //============================================================================
@@ -120,8 +132,7 @@ void AppletPeerChangeFriendship::onOkButClick( void )
 	accept();
 }
 
-//============================================================================
-//! Implement the OnClickListener callback    
+//============================================================================   
 void AppletPeerChangeFriendship::onCancelButClick( void )
 {
 	reject();
@@ -186,5 +197,18 @@ void AppletPeerChangeFriendship::setCheckedPermission( EFriendState myFriendship
     default:
         break;
     }
+
+	setMyPermissionToHim( myFriendshipToHim );
 }
 
+//============================================================================   
+void AppletPeerChangeFriendship::onMakeFriendButClick( void )
+{
+	setCheckedPermission( eFriendStateFriend );
+}
+
+//============================================================================   
+void AppletPeerChangeFriendship::onIgnoreButClick( void )
+{
+	setCheckedPermission( eFriendStateIgnore );
+}

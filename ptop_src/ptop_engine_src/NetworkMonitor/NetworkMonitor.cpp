@@ -298,57 +298,89 @@ void NetworkMonitor::doNetworkConnectTestThread( VxThread * startupThread )
 std::string NetworkMonitor::determineLocalIp( void )
 {
     std::string localIp;
-    std::string externIp;
-    m_Engine.getEngineSettings().setUserSpecifiedExternIpAddr( externIp );
+    static std::string lastLocalIp;
+
+    FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
+    if( firewallTestType == FirewallSettings::eFirewallTestAssumeNoFirewall )
+    {
+        // if user specified his external ip then the local ip address should not change
+        if( !lastLocalIp.empty() )
+        {
+            return lastLocalIp;
+        }
+    }
+
+    static int determineIpAttemptCnt = 0;
+    determineIpAttemptCnt++;
+    bool isNetworkHost = m_Engine.getHasHostService( eHostServiceNetworkHost );
+    if( !lastLocalIp.empty() && ( isNetworkHost || firewallTestType == FirewallSettings::eFirewallTestAssumeFirewalled ) )
+    {
+        // if we are network host but have not specified a external ip 
+        // we assume network ip will almost never change
+        if( determineIpAttemptCnt < 100 )
+        {
+            return lastLocalIp;
+        }
+        else
+        {
+            determineIpAttemptCnt = 0;
+        }
+    }
 
     VxSktConnectSimple sktConnect;
     static int connectAttemptCnt = 0;
     connectAttemptCnt++;
 
-    // only attempt connect to network host if we are not the host
-    if( !m_Engine.getHasHostService( eHostServiceNetworkHost )
-        || ( VxIsIPv4Address( VxGetNetworkHostName() ) && !( !externIp.empty() && ( externIp == VxGetNetworkHostName() ) ) ) )
+    // try network host 
+    SOCKET skt = sktConnect.connectTo( VxGetNetworkHostName(),		// remote ip or url
+                                       VxGetNetworkHostPort(),		// port to connect to
+                                       NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
+    if( INVALID_SOCKET != skt )
     {
-        SOCKET skt = sktConnect.connectTo( VxGetNetworkHostName(),		// remote ip or url
-                                           VxGetNetworkHostPort(),		// port to connect to
-                                           NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
-        if( INVALID_SOCKET != skt )
+        connectAttemptCnt = 0;
+        m_Engine.getNetStatusAccum().setInternetAvail( true );
+        // get local address
+        InetAddrAndPort lclAddr;
+        if( 0 == VxGetLclAddress( skt, lclAddr ) )
         {
-            connectAttemptCnt = 0;
-            m_Engine.getNetStatusAccum().setInternetAvail( true );
-            // get local address
-            InetAddrAndPort lclAddr;
-            if( 0 == VxGetLclAddress( skt, lclAddr ) )
+            localIp = lclAddr.toStdString();
+            if( localIp == "0.0.0.0" )
             {
-                localIp = lclAddr.toStdString();
-                if( localIp == "0.0.0.0" )
-                {
-                    LogModule( eLogNetworkState, LOG_INFO, "determineLocalIp sktConnect.connectTo invalid local ip" );
-                    localIp = "";
-                    m_Engine.getNetStatusAccum().setNetHostAvail( false );
-                }
-                else
-                {
-                    m_Engine.getNetStatusAccum().setNetHostAvail( true );
-                }
+                LogModule( eLogNetworkState, LOG_INFO, "determineLocalIp sktConnect.connectTo invalid local ip %s", VxGetNetworkHostName() );
+                localIp = "";
+                m_Engine.getNetStatusAccum().setNetHostAvail( false );
             }
             else
             {
+                lastLocalIp = localIp;
                 m_Engine.getNetStatusAccum().setNetHostAvail( true );
             }
-
-            VxCloseSkt( skt );
         }
         else
         {
-            m_Engine.getNetStatusAccum().setNetHostAvail( false );
+            m_Engine.getNetStatusAccum().setNetHostAvail( true );
         }
+
+        VxCloseSkt( skt );
     }
+    else
+    {
+        m_Engine.getNetStatusAccum().setNetHostAvail( false );
+    }
+
 
     if( localIp.empty() )
     {
         LogModule( eLogNetworkState, LOG_WARNING, "Failed verify No Limit Hosted internet conection to ptop://%s:%d", VxGetNetworkHostName(), VxGetNetworkHostPort() );
+        static int connectToGoogleCnt = 0;
+        connectToGoogleCnt++;
+        if( connectToGoogleCnt < 100 && !lastLocalIp.empty() )
+        {
+            // only use google as last resort..
+            return lastLocalIp;
+        }
 
+        connectToGoogleCnt = 0;
         LogModule( eLogNetworkState, LOG_WARNING, "Attempting conection to http://%s:%d", NET_TEST_WEB_CONNECTION_HOST, 80 );
 
         // try using google.. a really bad idea but since we have no official site we can connect to this should be reliable
@@ -368,6 +400,10 @@ std::string NetworkMonitor::determineLocalIp( void )
                 {
                     LogModule( eLogNetworkState, LOG_INFO, "determineLocalIp sktConnect.connectTo invalid local ip" );
                     localIp = "";
+                }
+                else
+                {
+                    lastLocalIp = localIp;
                 }
             }
 

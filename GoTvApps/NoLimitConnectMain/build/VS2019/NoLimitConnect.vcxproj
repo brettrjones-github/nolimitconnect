@@ -929,7 +929,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AssetVoiceWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AvatarBarWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\BottomBarWidget.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\CallListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\CentralFrame.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\CentralWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ChatEntryWidget.ui" />
@@ -942,7 +941,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileShareItemWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileXferWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListDlg.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\HomeWindow.ui" />
@@ -981,8 +979,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ThumbnailEditWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\TitleBarWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\TodGameWidget.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\UserJoinListItem.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\UserListItem.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui" />
   </ItemGroup>
   <ItemGroup>

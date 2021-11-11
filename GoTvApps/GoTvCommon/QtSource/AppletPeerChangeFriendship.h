@@ -42,6 +42,8 @@ public slots:
 	void						onOkButClick( void );
 	void						onCancelButClick( void ); 
 	void						onPermissionClick( void );
+	void						onMakeFriendButClick( void );
+	void						onIgnoreButClick( void );
 
 protected:
 	void						setHisPermissionToMe( EFriendState hisFriendshipToMe );

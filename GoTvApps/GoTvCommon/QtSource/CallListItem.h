@@ -14,14 +14,14 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_CallListItem.h"
+#include "IdentWidget.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
 
 class GuiOfferSession;
 
-class CallListItem : public QWidget, public QListWidgetItem
+class CallListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -38,22 +38,17 @@ public:
     QSize                       calculateSizeHint( void );
 
 signals:
-    void						signalCallListItemClicked( CallListItem * poItemWidget );
 	void						signalAvatarButtonClicked( CallListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( CallListItem* listEntryWidget );
 	void						signalMenuButtonClicked( CallListItem* listEntryWidget );
 
-public slots:
-	void						slotAvatarButtonClicked( void );
-    void						slotFriendshipButtonClicked( void );
-	void						slotMenuButtonClicked( void );
-
 protected:
+    void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentMenuButtonClicked( void ) override;
+
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::CallListItemUi	        ui;
     AppCommon&					m_MyApp;
 };
 

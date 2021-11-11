@@ -19,24 +19,13 @@
 
 //============================================================================
 UserJoinListItem::UserJoinListItem(QWidget *parent  )
-: QWidget( parent )
+: IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ConnectMgr( m_MyApp.getConnectMgr() )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_UserMgr( m_MyApp.getUserMgr() )
 , m_UserJoinMgr( m_MyApp.getUserJoinMgr() )
 {
-	ui.setupUi( this );
-    ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
-    ui.m_FriendshipButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
-    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_MenuButton->setIcon( eMyIconMenu );
-
-    connect( ui.m_AvatarButton,     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
-    connect( ui.m_FriendshipButton, SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
-	connect( ui.m_MenuButton,       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
 }
 
 //============================================================================
@@ -72,7 +61,7 @@ void UserJoinListItem::resizeEvent(QResizeEvent* resizeEvent)
 void UserJoinListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
-    emit signalUserJoinListItemClicked( this );
+    // emit signalUserJoinListItemClicked( this );
 }
 
 //============================================================================
@@ -88,21 +77,14 @@ GuiUserJoinSession * UserJoinListItem::getUserJoinSession( void )
 }
 
 //============================================================================
-void UserJoinListItem::slotAvatarButtonClicked()
+void UserJoinListItem::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "UserJoinListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserJoinListItem::slotFriendshipButtonClicked()
-{
-    LogMsg( LOG_DEBUG, "UserJoinListItem::slotFriendshipButtonClicked" );
-    emit signalAvatarButtonClicked( this );
-}
-
-//============================================================================
-void UserJoinListItem::slotMenuButtonClicked( void )
+void UserJoinListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
@@ -124,24 +106,7 @@ void UserJoinListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    QString strDesc = hostIdent->getOnlineDescription().c_str();
-
-    if( hostIdent->isMyself() )
-    {
-        ui.m_FriendshipButton->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
-        ui.m_AvatarButton->setNotifyOnlineEnabled( true );
-    }
-    else
-    {
-        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-        ui.m_AvatarButton->setNotifyOnlineEnabled( hostIdent->isOnline() );
-    }
-
-    ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-    ui.DescPart2->setText( strDesc );
+    updateIdentity( hostIdent );
 }
 
 //============================================================================

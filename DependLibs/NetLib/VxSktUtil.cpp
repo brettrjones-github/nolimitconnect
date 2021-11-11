@@ -1488,8 +1488,7 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 		// error occurred
 		oRetAddr.setToInvalid();
 		rc = VxGetLastError();
-        //if( IsLogEnabled( eLogSkt ) )
-            LogMsg( LOG_DEBUG, "VxGetRmtAddress: skt handle %d error %d %s\n", sktHandle, rc, VxDescribeSktError( rc ) );
+        LogMsg( LOG_DEBUG, "VxGetRmtAddress: skt handle %d error %d %s\n", sktHandle, rc, VxDescribeSktError( rc ) );
 	}
 	else
 	{
