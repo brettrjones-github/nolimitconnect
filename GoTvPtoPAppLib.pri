@@ -228,6 +228,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/HostListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HostListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/IdentLogicInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.h \
@@ -585,6 +586,7 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputTextWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/IdentLogicInterface.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListEntryWidget.cpp \

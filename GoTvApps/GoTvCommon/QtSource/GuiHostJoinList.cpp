@@ -14,6 +14,7 @@
 
 #include "GuiHostJoinList.h"
 #include "GuiHostJoin.h"
+#include "GuiUser.h"
 
 //============================================================================
 GuiHostJoinList::GuiHostJoinList()
@@ -75,7 +76,7 @@ GuiHostJoin* GuiHostJoinList::findUserJoin( VxGUID& thumbId )
 {
     for( auto iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
     {
-        if( (*iter)->getMyOnlineId() == thumbId )
+        if( (*iter)->getUser()->getMyOnlineId() == thumbId )
         {
             return *iter;
         }
@@ -89,7 +90,7 @@ bool GuiHostJoinList::removeUserJoin( GuiHostJoin* GuiHostJoin )
 {
     if( GuiHostJoin )
     {
-        return removeUserJoin( GuiHostJoin->getMyOnlineId() );
+        return removeUserJoin( GuiHostJoin->getUser()->getMyOnlineId() );
     }
 
     return false;
@@ -102,7 +103,7 @@ bool GuiHostJoinList::removeUserJoin( VxGUID& thumbId )
     std::vector<GuiHostJoin*>::iterator iter;
     for( iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
     {
-        if( (*iter)->getMyOnlineId() == thumbId )
+        if( (*iter)->getUser()->getMyOnlineId() == thumbId )
         {
             joinExisted = true;
             m_UserJoinList.erase( iter );

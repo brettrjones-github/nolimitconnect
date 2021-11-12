@@ -19,15 +19,13 @@
 
 //============================================================================
 HostJoinRequestListItem::HostJoinRequestListItem(QWidget *parent  )
-: QWidget( parent )
+: IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-    connect( ui.m_AvatarButton,       SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
-    connect( ui.m_FriendshipButton,   SIGNAL( clicked() ), this, SLOT( slotFriendshipButtonClicked() ) );
-	connect( ui.m_MenuButton,         SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
-    connect( ui.m_AcceptButton,		  SIGNAL(pressed()),	this, SLOT(slotAcceptButtonPressed()) );
-    connect( ui.m_RejectButton,       SIGNAL( pressed() ), this, SLOT( slotRejectButtonPressed() ) );
+    setupIdentLogic();
+    connect( ui.m_AcceptButton,		  SIGNAL( clicked() ),	this, SLOT(slotAcceptButtonPressed()) );
+    connect( ui.m_RejectButton,       SIGNAL( clicked() ), this, SLOT( slotRejectButtonPressed() ) );
    
     ui.m_AvatarButton->setFixedSize( eButtonSizeLarge );
     ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
@@ -88,28 +86,17 @@ GuiHostJoinSession * HostJoinRequestListItem::getHostSession( void )
 }
 
 //============================================================================
-void HostJoinRequestListItem::slotAvatarButtonClicked()
+void HostJoinRequestListItem::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "HostJoinRequestListItem::slotAvatarButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
-//============================================================================
-void HostJoinRequestListItem::slotFriendshipButtonClicked()
-{
-    LogMsg( LOG_DEBUG, "HostJoinRequestListItem::slotAvatarButtonClicked" );
-    emit signalFriendshipButtonClicked( this );
-}
 
 //============================================================================
-void HostJoinRequestListItem::slotMenuButtonPressed( void )
+void HostJoinRequestListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
-}
-
-//============================================================================
-void HostJoinRequestListItem::slotMenuButtonReleased( void )
-{
 }
 
 //============================================================================
@@ -123,35 +110,23 @@ void HostJoinRequestListItem::updateWidgetFromInfo( void )
     }
 
     GuiHostJoin* hostIdent = hostSession->getUserIdent();
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    ui.TitlePart1->setText( strName );
-
-    if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getMyOnlineId() )
+    if( hostIdent )
     {
-        ui.TitlePart2->setText( QObject::tr( "Hosted By Me") );
+        updateIdentity( hostIdent );
+    }
+
+    if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getUser()->getMyOnlineId() )
+    {
+        ui.m_TitlePart2->setText( QObject::tr( "Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
-    else
-    {
-        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-        ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-    }
-    
-    /*
-    QPalette pal = ui.m_AvatarButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent.getHasTextOffers() ? Qt::yellow : Qt::white ));
-    ui.m_AvatarButton->setAutoFillBackground(true);
-    ui.m_AvatarButton->setPalette(pal);
-    ui.m_AvatarButton->update();
-    */
 
     if( !ui.m_AvatarButton->hasImage() )
     {
         VxGUID thumbId = hostSession->getHostThumbId();
         if( !thumbId.isVxGUIDValid() )
         {
-            thumbId = hostIdent->getHostThumbId( hostSession->getHostType(), true );
+            thumbId = hostIdent->getUser()->getHostThumbId( hostSession->getHostType(), true );
         }
        
         if( thumbId.isVxGUIDValid() )
@@ -168,12 +143,12 @@ void HostJoinRequestListItem::updateWidgetFromInfo( void )
     std::string strDesc = hostSession->getHostDescription();
     if( strDesc.empty() )
     {
-        strDesc = hostIdent->getOnlineDescription();
+        strDesc = hostIdent->getUser()->getOnlineDescription();
     }
 
     if( !strDesc.empty() )
     {
-        ui.DescPart2->setText( strDesc.c_str() );
+        ui.m_DescPart2->setText( strDesc.c_str() );
     }
 }
 

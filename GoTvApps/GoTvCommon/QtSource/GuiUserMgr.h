@@ -65,7 +65,8 @@ public:
     GuiUser*                    getUser( VxGUID& onlineId );
     std::map<VxGUID, GuiUser*>& getUserList( void )             { return m_UserList; }
 
-    void                        updateMyIdent( VxNetIdent* myIdent );
+    GuiUser*                    updateMyIdent( VxNetIdent* myIdent );
+    GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
 signals:
     void				        signalMyIdentUpdated( GuiUser* user ); 
@@ -89,7 +90,6 @@ private slots:
 protected:
     void                        removeUser( VxGUID& onlineId );
     GuiUser*                    findUser( VxGUID& onlineId );
-    GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
     
     AppCommon&                  m_MyApp;
     // map of online id to GuiUser

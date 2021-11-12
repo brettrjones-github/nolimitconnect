@@ -39,6 +39,9 @@ public:
     VxPushButton *              getFriendshipButton( void )             { return getIdentFriendshipButton(); }
     VxPushButton *              getMenuButton( void )                   { return getIdentMenuButton(); }
 
+    void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentMenuButtonClicked( void ) override;
+
     void						updateWidgetFromInfo( void );
     void                        updateThumb( GuiThumb* thumb );
 
@@ -47,13 +50,7 @@ public:
 signals:
     void						signalUserListItemClicked( UserListItem * poItemWidget );
 	void						signalAvatarButtonClicked( UserListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( UserListItem* listEntryWidget );
 	void						signalMenuButtonClicked( UserListItem* listEntryWidget );
-
-public slots:
-	void						slotAvatarButtonClicked( void );
-    void						slotFriendshipButtonClicked( void );
-	void						slotMenuButtonClicked( void );
 
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;

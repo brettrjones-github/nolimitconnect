@@ -12,20 +12,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "HostListItem.h"
 #include "GuiHostSession.h"
 #include "GuiParams.h"
+#include "AppCommon.h"
+
+#include <CoreLib/VxDebug.h>
 
 //============================================================================
 HostListItem::HostListItem(QWidget *parent  )
-: QWidget( parent )
+: IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-    connect( ui.m_IconButton,       SIGNAL(clicked()),  this, SLOT(slotIconButtonClicked()) );
-    connect( ui.m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotFrienshipButtonClicked() ) );
-	connect( ui.m_MenuButton,       SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
+    setupIdentLogic();
     connect( ui.m_JoinButton,		SIGNAL(pressed()),	this, SLOT(slotJoinButtonPressed()) );
     connect( ui.m_ConnectButton,    SIGNAL( pressed() ), this, SLOT( slotConnectButtonPressed() ) );
    
@@ -81,28 +81,16 @@ GuiHostSession * HostListItem::getHostSession( void )
 }
 
 //============================================================================
-void HostListItem::slotIconButtonClicked()
+void HostListItem::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "HostListItem::slotIconButtonClicked" );
 	emit signalIconButtonClicked( this );
 }
 
 //============================================================================
-void HostListItem::slotFrienshipButtonClicked()
-{
-    LogMsg( LOG_DEBUG, "HostListItem::slotFrienshipButtonClicked" );
-    emit signalFriendshipButtonClicked( this );
-}
-
-//============================================================================
-void HostListItem::slotMenuButtonPressed( void )
+void HostListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
-}
-
-//============================================================================
-void HostListItem::slotMenuButtonReleased( void )
-{
 }
 
 //============================================================================
@@ -115,28 +103,16 @@ void HostListItem::updateWidgetFromInfo( void )
     }
 
     GuiUser* hostIdent = hostSession->getUserIdent();
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    ui.TitlePart1->setText( strName );
+    if( hostIdent )
+    {
+        updateIdentity( hostIdent );
+    }
 
     if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getMyOnlineId() )
     {
-        ui.TitlePart2->setText( QObject::tr( "Hosted By Me") );
+        ui.m_TitlePart2->setText( QObject::tr( "Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
-    else
-    {
-        ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-        ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-    }
-    
-    /*
-    QPalette pal = ui.m_IconButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent.getHasTextOffers() ? Qt::yellow : Qt::white ));
-    ui.m_IconButton->setAutoFillBackground(true);
-    ui.m_IconButton->setPalette(pal);
-    ui.m_IconButton->update();
-    */
 
     if( !ui.m_IconButton->hasImage() )
     {
@@ -165,7 +141,7 @@ void HostListItem::updateWidgetFromInfo( void )
 
     if( !strDesc.empty() )
     {
-        ui.DescPart2->setText( strDesc.c_str() );
+        ui.m_DescPart2->setText( strDesc.c_str() );
     }
 }
 

@@ -16,13 +16,14 @@
 
 #include "config_gotvapps.h"
 #include "ui_HostJoinRequestListItem.h"
+#include "IdentLogicInterface.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
 
 class GuiHostJoinSession;
 
-class HostJoinRequestListItem : public QWidget, public QListWidgetItem
+class HostJoinRequestListItem : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -35,11 +36,17 @@ public:
     void                        setHostSession( GuiHostJoinSession* hostSession );
     GuiHostJoinSession*         getHostSession( void );
 
-    VxPushButton*               getAvatarButton( void )         { return ui.m_AvatarButton; }
-    VxPushButton*               getFriendshipButton( void )     { return ui.m_FriendshipButton; }
-    VxPushButton*               getMenuButton( void )           { return ui.m_MenuButton; }
-    VxPushButton*               getAcceptButton( void )         { return ui.m_AcceptButton; }
-    VxPushButton*               getRejectButton( void )         { return ui.m_RejectButton; }
+    VxPushButton*               getIdentAvatarButton( void ) override        { return ui.m_AvatarButton; }
+    VxPushButton*               getIdentFriendshipButton( void ) override    { return ui.m_FriendshipButton; }
+    VxPushButton*               getIdentMenuButton( void )  override         { return ui.m_MenuButton; }
+    VxPushButton*               getAcceptButton( void )                     { return ui.m_AcceptButton; }
+    VxPushButton*               getRejectButton( void )                     { return ui.m_RejectButton; }
+
+    virtual QLabel*             getIdentLine1( void ) override { return ui.m_TitlePart1; }
+    virtual QLabel*             getIdentLine2( void ) override { return ui.m_DescPart1; }
+
+    void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentMenuButtonClicked( void ) override;
 
     void                        setJoinedState( EJoinState joinState );
 
@@ -54,10 +61,6 @@ signals:
     void						signalRejectButtonClicked( HostJoinRequestListItem* listEntryWidget );
 
 public slots:
-	void						slotAvatarButtonClicked( void );
-    void						slotFriendshipButtonClicked( void );
-	void						slotMenuButtonPressed( void );
-	void						slotMenuButtonReleased( void );
     void						slotAcceptButtonPressed( void );
     void						slotRejectButtonPressed( void );
  

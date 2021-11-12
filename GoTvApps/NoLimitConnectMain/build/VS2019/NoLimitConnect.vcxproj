@@ -332,6 +332,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HostListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentLogicInterface.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListRow.cpp" />
@@ -532,6 +533,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListItem.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ListWidgetBase.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\IdentLogicInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIcons.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\MyIconsDefs.h" />

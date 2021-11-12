@@ -219,26 +219,33 @@ GuiUser* GuiUserMgr::updateUser( VxNetIdent* hisIdent, EHostType hostType )
         return nullptr;
     }
 
-    GuiUser* guiUser = findUser( hisIdent->getMyOnlineId() );
-    if( guiUser && guiUser->getMyOnlineId() == hisIdent->getMyOnlineId() )
+    if( hisIdent->getMyOnlineId() == m_MyApp.getMyOnlineId() )
     {
-        guiUser->addHostType( hostType );
-        onUserUpdated( guiUser );
+        return updateMyIdent( hisIdent );
     }
     else
     {
-        guiUser = new GuiUser( m_MyApp );
-        guiUser->setNetIdent( hisIdent );
-        guiUser->addHostType( hostType );
-        m_UserList[guiUser->getMyOnlineId()] = guiUser;
-        onUserAdded( guiUser );
-    }
+        GuiUser* guiUser = findUser( hisIdent->getMyOnlineId() );
+        if( guiUser && guiUser->getMyOnlineId() == hisIdent->getMyOnlineId() )
+        {
+            guiUser->addHostType( hostType );
+            onUserUpdated( guiUser );
+        }
+        else
+        {
+            guiUser = new GuiUser( m_MyApp );
+            guiUser->setNetIdent( hisIdent );
+            guiUser->addHostType( hostType );
+            m_UserList[guiUser->getMyOnlineId()] = guiUser;
+            onUserAdded( guiUser );
+        }
 
-    return guiUser;
+        return guiUser;
+    }
 }
 
 //============================================================================
-void GuiUserMgr::updateMyIdent( VxNetIdent* myIdent )
+GuiUser* GuiUserMgr::updateMyIdent( VxNetIdent* myIdent )
 {
     if( !m_MyIdent )
     {
@@ -254,6 +261,7 @@ void GuiUserMgr::updateMyIdent( VxNetIdent* myIdent )
     }
 
     emit signalMyIdentUpdated( m_MyIdent );
+    return m_MyIdent;
 }
 
 //============================================================================

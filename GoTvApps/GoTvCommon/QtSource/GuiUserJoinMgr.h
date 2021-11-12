@@ -37,9 +37,6 @@ public:
     bool                        isMessengerReady( void );
     virtual void                onSystemReady( bool ready ) { }
 
-    GuiUserJoin *               getMyIdent( void )                          { return m_MyIdent; }  
-    VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
-
     bool                        isUserJoinInSession( VxGUID& onlineId );
     void                        setUserJoinOffline( VxGUID& onlineId );
 
@@ -49,11 +46,9 @@ public:
     void                        onUserOnlineStatusChange( GuiUserJoin* user, bool isOnline );
     void                        onMyIdentUpdated( GuiUserJoin* user );
 
-    GuiUserJoin*                    getUserJoin( VxGUID& onlineId );
+    GuiUserJoin*                getUserJoin( VxGUID& onlineId );
     std::map<VxGUID, GuiUserJoin*>& getUserJoinList( void )             { return m_UserJoinList; }
-
-    void                        updateMyIdent( VxNetIdent* myIdent );
-
+    GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
 signals:
     void				        signalMyIdentUpdated( GuiUserJoin* user ); 
@@ -80,7 +75,6 @@ private slots:
 protected:
     void                        removeUserJoin( VxGUID& onlineId );
     GuiUserJoin*                findUserJoin( VxGUID& onlineId );
-    GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
     GuiUserJoin*                updateUserJoin( UserJoinInfo* userJoinInfo );
     
     virtual void				callbackUserJoinRequested( UserJoinInfo* userJoinInfo ) override;
@@ -90,9 +84,6 @@ protected:
     virtual void				callbackUserJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
 
     AppCommon&                  m_MyApp;
-    VxNetIdent*                 m_NetIdent{ nullptr };
     // map of online id to GuiUserJoin
     std::map<VxGUID, GuiUserJoin*>  m_UserJoinList;
-    GuiUserJoin*                m_MyIdent{ nullptr };
-    VxGUID                      m_MyOnlineId;
 };

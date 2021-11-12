@@ -20,13 +20,15 @@
 
 //============================================================================
 GuiUserListEntryWidget::GuiUserListEntryWidget(QWidget *parent  )
-: QWidget( parent )
+: IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-    connect( ui.m_IconButton,       SIGNAL(clicked()),  this, SLOT(slotIconButtonClicked()) );
-	connect( ui.m_MenuButton,       SIGNAL(pressed()),  this, SLOT(slotMenuButtonPressed()) );
-    connect( ui.m_JoinButton,		SIGNAL(pressed()),	this, SLOT(slotJoinButtonPressed()) );
+    setupIdentLogic();
+    getIdentAvatarButton()->setFixedSize( eButtonSizeLarge );
+    getIdentFriendshipButton()->setFixedSize( eButtonSizeLarge );
+    getIdentMenuButton()->setFixedSize( eButtonSizeLarge );
+    connect( ui.m_JoinButton, SIGNAL( clicked() ), this, SLOT( slotJoinButtonPressed() ) );
 }
 
 //============================================================================
@@ -72,21 +74,16 @@ GuiHostSession * GuiUserListEntryWidget::getHostSession( void )
 }
 
 //============================================================================
-void GuiUserListEntryWidget::slotIconButtonClicked()
+void GuiUserListEntryWidget::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "GuiUserListEntryWidget::slotIconButtonClicked" );
 	emit signalIconButtonClicked( this );
 }
 
 //============================================================================
-void GuiUserListEntryWidget::slotMenuButtonPressed( void )
+void GuiUserListEntryWidget::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
-}
-
-//============================================================================
-void GuiUserListEntryWidget::slotMenuButtonReleased( void )
-{
 }
 
 //============================================================================
@@ -106,19 +103,8 @@ void GuiUserListEntryWidget::updateWidgetFromInfo( void )
     }
 
     GuiUser* hostIdent = hostSession->getUserIdent();
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    QString strDesc = hostIdent->getOnlineDescription().c_str();
-
-    // updateListEntryBackgroundColor( netIdent, item );
-
-    ui.m_IconButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-    QPalette pal = ui.m_IconButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
-    ui.m_IconButton->setAutoFillBackground(true);
-    ui.m_IconButton->setPalette(pal);
-    ui.m_IconButton->update();
-    ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-    ui.DescPart2->setText( strDesc );
+    if( hostIdent )
+    {
+        updateIdentity( hostIdent );
+    }
 }

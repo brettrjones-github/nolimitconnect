@@ -16,13 +16,13 @@
 
 #include "config_gotvapps.h"
 #include "ui_HostListItem.h"
+#include "IdentLogicInterface.h"
 
 #include <QListWidgetItem>
-#include <QWidget>
 
 class GuiHostSession;
 
-class HostListItem : public QWidget, public QListWidgetItem
+class HostListItem : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -35,9 +35,15 @@ public:
     void                        setHostSession( GuiHostSession* hostSession );
     GuiHostSession*             getHostSession( void );
 
-    VxPushButton*               getAvatarButton( void )         { return ui.m_IconButton; }
-    //VxPushButton*               getFriendshipButton( void )     { return ui.m_FriendshipButton; }
-    VxPushButton*               getMenuButton( void )           { return ui.m_MenuButton; }
+    VxPushButton*               getIdentAvatarButton( void ) override         { return ui.m_IconButton; }
+    VxPushButton*               getIdentFriendshipButton( void ) override { return ui.m_FriendshipButton; }
+    VxPushButton*               getIdentMenuButton( void ) override { return ui.m_MenuButton; }
+
+    virtual QLabel*             getIdentLine1( void ) override { return ui.m_TitlePart1; }
+    virtual QLabel*             getIdentLine2( void ) override { return ui.m_DescPart1; }
+
+    void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentMenuButtonClicked( void ) override;
 
     void                        setJoinedState( EJoinState joinState );
 
@@ -52,10 +58,6 @@ signals:
     void						signalConnectButtonClicked( HostListItem* listEntryWidget );
 
 public slots:
-	void						slotIconButtonClicked( void );
-    void                        slotFrienshipButtonClicked( void );
-	void						slotMenuButtonPressed( void );
-	void						slotMenuButtonReleased( void );
     void						slotJoinButtonPressed( void );
     void						slotConnectButtonPressed( void );
  

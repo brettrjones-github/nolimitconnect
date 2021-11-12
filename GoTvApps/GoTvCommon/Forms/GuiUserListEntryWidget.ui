@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>534</width>
-    <height>85</height>
+    <height>92</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -83,7 +83,7 @@
        <number>2</number>
       </property>
       <item>
-       <widget class="VxPushButton" name="m_IconButton">
+       <widget class="VxPushButton" name="m_AvatarButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -114,6 +114,13 @@
        </widget>
       </item>
       <item>
+       <widget class="VxPushButton" name="m_FriendshipButton">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="ButtonTextVerticalLayout">
         <property name="spacing">
          <number>0</number>
@@ -136,10 +143,10 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="TitlePart1">
+           <widget class="QLabel" name="m_TitlePart1">
             <property name="font">
              <font>
-              <weight>50</weight>
+              <pointsize>8</pointsize>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -150,7 +157,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="TitlePart2">
+           <widget class="QLabel" name="m_TitlePart2">
             <property name="text">
              <string/>
             </property>
@@ -177,14 +184,14 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="DescPart1">
+           <widget class="QLabel" name="m_DescPart1">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="DescPart2">
+           <widget class="QLabel" name="m_DescPart2">
             <property name="text">
              <string/>
             </property>
@@ -206,7 +213,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="TodLabel">
+         <widget class="QLabel" name="m_TodLabel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -215,7 +222,7 @@
           </property>
           <property name="font">
            <font>
-            <weight>50</weight>
+            <pointsize>8</pointsize>
             <italic>false</italic>
             <bold>false</bold>
            </font>

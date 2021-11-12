@@ -139,8 +139,8 @@ void GuiHostJoinMgr::slotInternalHostJoinRemoved( VxGUID onlineId, EPluginType p
     {
         emit signalHostJoinRemoved( onlineId, hostType );
         joinInfo = iter->second;
-        joinInfo->removeHostType( hostType );
-        if( !joinInfo->hostTypeCount() )
+        joinInfo->getUser()->removeHostType( hostType );
+        if( !joinInfo->getUser()->hostTypeCount() )
         {
             m_HostJoinList.erase( iter );
             joinInfo->deleteLater();
@@ -225,25 +225,25 @@ GuiHostJoin* GuiHostJoinMgr::updateHostJoin( HostJoinInfo* hostJoinInfo )
 
     EHostType hostType = PluginTypeToHostType( hostJoinInfo->getPluginType() );
     GuiHostJoin* guiHostJoin = findHostJoin( hostJoinInfo->getOnlineId() );
-    bool wasAdded = false;
-    if( !guiHostJoin )
+    GuiUser* user = m_MyApp.getUserMgr().updateUser( hostJoinInfo->getNetIdent(), hostType );
+    if( user )
     {
-        guiHostJoin = new GuiHostJoin( m_MyApp );
-        m_HostJoinList[guiHostJoin->getMyOnlineId()] = guiHostJoin;
-        wasAdded = true;
-    }
-
-    guiHostJoin->setNetIdent( hostJoinInfo->getNetIdent() );
-    guiHostJoin->addHostType( hostType );
-    guiHostJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
-        
-    if( wasAdded )
-    {
-        onHostJoinAdded( guiHostJoin );
-    }
-    else
-    {
-        onHostJoinUpdated( guiHostJoin );
+        if( guiHostJoin )
+        {
+            guiHostJoin->getUser()->addHostType( hostType );
+            guiHostJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
+            onHostJoinUpdated( guiHostJoin );
+        }
+        else
+        {
+            guiHostJoin = new GuiHostJoin( m_MyApp );
+            guiHostJoin->setUser( user );
+            guiHostJoin->getUser()->setNetIdent( hostJoinInfo->getNetIdent() );
+            guiHostJoin->getUser()->addHostType( hostType );
+            guiHostJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
+            m_HostJoinList[guiHostJoin->getUser()->getMyOnlineId()] = guiHostJoin;
+            onHostJoinAdded( guiHostJoin );
+        }
     }
 
 
@@ -305,21 +305,21 @@ void GuiHostJoinMgr::updateHostRequestCount( bool forceEmit )
 }
 
 //============================================================================
-void GuiHostJoinMgr::joinAccepted( GuiHostJoin* user, EHostType hostType )
+void GuiHostJoinMgr::joinAccepted( GuiHostJoin* hostJoin, EHostType hostType )
 {
-    if( user && user->setJoinState( hostType, eJoinStateJoinAccepted ) )
+    if( hostJoin && hostJoin->setJoinState( hostType, eJoinStateJoinAccepted ) )
     {
-        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( user->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinAccepted );
-        emit signalHostJoinUpdated( user );
+        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( hostJoin->getUser()->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinAccepted );
+        emit signalHostJoinUpdated( hostJoin );
     }
 }
 
 //============================================================================
-void GuiHostJoinMgr::joinRejected( GuiHostJoin* user, EHostType hostType )
+void GuiHostJoinMgr::joinRejected( GuiHostJoin* hostJoin, EHostType hostType )
 {
-    if( user && user->setJoinState( hostType, eJoinStateJoinDenied ) )
+    if( hostJoin && hostJoin->setJoinState( hostType, eJoinStateJoinDenied ) )
     {
-        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( user->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinDenied );
-        emit signalHostJoinUpdated( user );
+        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( hostJoin->getUser()->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinDenied );
+        emit signalHostJoinUpdated( hostJoin );
     }
 }

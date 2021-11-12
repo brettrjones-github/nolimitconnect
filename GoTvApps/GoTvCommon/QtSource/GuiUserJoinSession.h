@@ -45,18 +45,9 @@ public:
     VxGUID&					    getSessionId( void )                        { return m_SessionId; }
 
     VxGUID&					    getMyOnlineId( void )                       { return m_OnlineId; }
-    std::string                 getOnlineName( void )                       { return m_UserJoin ? m_UserJoin->getOnlineName() : ""; }
+    std::string                 getOnlineName( void );
 
-    bool                        setIsOnline( bool isOnline )
-    {
-        if( m_UserJoin && m_UserJoin->isOnline() != isOnline )
-        {
-            m_UserJoin->setOnlineStatus( isOnline );
-            return true;
-        }
-
-        return false;
-    }
+    bool                        setIsOnline( bool isOnline );
 
 protected:
 	//=== vars ===//

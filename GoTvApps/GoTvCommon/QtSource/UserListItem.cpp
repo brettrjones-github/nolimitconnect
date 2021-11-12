@@ -78,21 +78,14 @@ GuiUserSessionBase * UserListItem::getUserSession( void )
 }
 
 //============================================================================
-void UserListItem::slotAvatarButtonClicked()
+void UserListItem::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "UserListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserListItem::slotFriendshipButtonClicked()
-{
-    LogMsg( LOG_DEBUG, "UserListItem::slotFriendshipButtonClicked" );
-    emit signalFriendshipButtonClicked( this );
-}
-
-//============================================================================
-void UserListItem::slotMenuButtonClicked( void )
+void UserListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }

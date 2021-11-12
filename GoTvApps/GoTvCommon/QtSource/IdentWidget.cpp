@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "IdentWidget.h"
 #include "AppletPeerChangeFriendship.h"
 #include "GuiHelpers.h"
@@ -23,96 +22,10 @@
 
 //============================================================================
 IdentWidget::IdentWidget(QWidget *parent)
-: QWidget(parent)
-, m_MyApp( GetAppInstance() )
+: IdentLogicInterface(parent)
 {
 	ui.setupUi(this);
-	setIdentWidgetSize( eButtonSizeMedium );
-	ui.m_OfferButton->setVisible( false );
-	connect( ui.m_AvatarButton, SIGNAL( clicked() ), this, SLOT( slotIdentAvatarButtonClicked() ) );
-	connect( ui.m_FriendshipButton, SIGNAL( clicked() ), this, SLOT( slotIdentFrienshipButtonClicked() ) );
-	connect( ui.m_OfferButton, SIGNAL( clicked() ), this, SLOT( slotIdentOfferButtonClicked() ) );
-	connect( ui.m_FriendMenuButton, SIGNAL(clicked()), this, SLOT( slotIdentMenuButtonClicked()) );
-	onIdentWidgetSetup();
-}
-
-//============================================================================
-MyIcons&  IdentWidget::getMyIcons( void )
-{
-	return m_MyApp.getMyIcons();
-}
-
-//============================================================================
-void IdentWidget::setIdentWidgetSize( EButtonSize buttonSize )
-{
-	QSize butSize = GuiParams::getButtonSize( buttonSize );
-	if( buttonSize < eButtonSizeLarge )
-	{
-		// wont fit the third line
-		ui.m_TodLabel->setVisible( false );
-	}
-	else
-	{
-		ui.m_TodLabel->setVisible( true );
-	}
-
-	setFixedHeight( butSize.height() + 4 );
-	ui.m_AvatarButton->setFixedSize( buttonSize );
-	setIdentAvatarIcon( eMyIconAvatarImage );
-	ui.m_FriendshipButton->setFixedSize( buttonSize );
-	setIdentFriendshipIcon( eMyIconAnonymous );
-	ui.m_OfferButton->setFixedSize( buttonSize );
-	ui.m_FriendMenuButton->setFixedSize( buttonSize );
-	setIdentMenuIcon( eMyIconMenu );
-}
-
-//============================================================================
-void IdentWidget::updateIdentity( GuiUser * netIdent )
-{
-	m_NetIdent = netIdent;
-	if( m_NetIdent )
-	{
-		updateIdentity( &netIdent->getNetIdent() );
-	}
-}
-
-//============================================================================
-void IdentWidget::updateIdentity( VxNetIdent* netIdent )
-{
-	if( netIdent )
-	{
-		setIdentOnlineState( netIdent->isOnline() );
-		ui.m_FriendPrefixLabel->setText( netIdent->describeMyFriendshipToHim() );
-		ui.m_FriendNameLabel->setText( netIdent->getOnlineName() );
-		ui.m_DescTextLabel->setText( netIdent->getOnlineDescription() );
-		ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
-		QString truths = QObject::tr( "Truths: " );
-		QString dares = QObject::tr( " Dares: " );
-		ui.m_TodLabel->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
-		setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
-
-		bool isMyself = netIdent->getMyOnlineId() == m_MyApp.getMyOnlineId();
-		if( isMyself )
-		{
-			ui.m_FriendshipButton->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
-		}
-		
-		if( isMyself || !netIdent->requiresRelay() )
-		{
-			ui.m_FriendshipButton->setNotifyDirectConnectEnabled( true );
-		}
-
-		if( isMyself || netIdent->isOnline() )
-		{
-			ui.m_FriendshipButton->setNotifyOnlineEnabled( true );
-			ui.m_FriendshipButton->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
-		}
-		else
-		{
-			ui.m_FriendshipButton->setNotifyOnlineEnabled( true, eMyIconNotifyOfflineOverlay );
-			ui.m_FriendshipButton->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
-		}
-	}
+	setupIdentLogic( eButtonSizeMedium );
 }
 
 //============================================================================
@@ -125,136 +38,8 @@ VxPushButton* IdentWidget::getIdentOfferButton( void ) { return ui.m_OfferButton
 VxPushButton* IdentWidget::getIdentMenuButton( void ) { return ui.m_FriendMenuButton; }
 
 //============================================================================
-void IdentWidget::setIdentAvatarButtonVisible( bool visible )
-{
-	ui.m_AvatarButton->setVisible( visible );
-}
-
+QLabel* IdentWidget::getIdentLine1( void ) { return ui.m_FriendNameLabel; }
 //============================================================================
-void IdentWidget::setIdentFriendshipButtonVisible( bool visible )
-{
-	ui.m_FriendshipButton->setVisible( visible );
-}
-
+QLabel* IdentWidget::getIdentLine2( void ) { return ui.m_DescTextLabel; }
 //============================================================================
-void IdentWidget::setIdentOfferButtonVisible( bool visible )
-{
-	ui.m_OfferButton->setVisible( visible );
-}
-
-//============================================================================
-void IdentWidget::setIdentMenuButtonVisible( bool visible )
-{
-	ui.m_FriendMenuButton->setVisible( visible );
-}
-
-//============================================================================
-void IdentWidget::setIdentOnlineState( bool isOnline )
-{
-	ui.m_FriendMenuButton->setNotifyOnlineEnabled( isOnline );
-}
-
-//============================================================================
-void IdentWidget::setIdentGroupState( bool isInGroup )
-{
-	ui.m_FriendMenuButton->setNotifyInGroupEnabled( isInGroup );
-}
-
-//============================================================================
-void IdentWidget::setIdentDirectConnectState( bool canDirectConnect )
-{
-	ui.m_FriendMenuButton->setNotifyDirectConnectEnabled( canDirectConnect );
-}
-
-//============================================================================
-void IdentWidget::setIdentAvatarThumbnail( VxGUID& thumbId )
-{
-	QImage thumbImage;
-	if( m_MyApp.getThumbMgr().getThumbImage( thumbId, thumbImage ) )
-	{
-		ui.m_AvatarButton->setIconOverrideImage( thumbImage );
-	}
-}
-
-//============================================================================
-void IdentWidget::setIdentAvatarIcon( EMyIcons myIcon )
-{
-	ui.m_AvatarButton->setIcon( myIcon );
-}
-
-//============================================================================
-void IdentWidget::setIdentFriendshipIcon( EMyIcons myIcon )
-{
-	ui.m_FriendshipButton->setIcon( myIcon );
-}
-
-//============================================================================
-void IdentWidget::setIdentOfferIcon( EMyIcons myIcon )
-{
-	ui.m_OfferButton->setIcon( myIcon );
-}
-
-//============================================================================
-void IdentWidget::setIdentMenuIcon( EMyIcons myIcon )
-{
-	ui.m_FriendMenuButton->setIcon( myIcon );
-}
-
-//============================================================================
-void IdentWidget::slotIdentAvatarButtonClicked( void )
-{
-	onIdentAvatarButtonClicked();
-}
-
-//============================================================================
-void IdentWidget::slotIdentFrienshipButtonClicked( void )
-{
-	onIdentFriendshipButtonClicked();
-}
-
-//============================================================================
-void IdentWidget::slotIdentOfferButtonClicked( void )
-{
-	onIdentOfferButtonClicked();
-}
-
-//============================================================================
-void IdentWidget::slotIdentMenuButtonClicked( void )
-{
-	onIdentMenuButtonClicked();
-}
-
-//============================================================================
-void IdentWidget::onIdentAvatarButtonClicked( void )
-{
-	emit signalIdentAvatarButtonClicked();
-}
-
-//============================================================================
-void IdentWidget::onIdentFriendshipButtonClicked( void )
-{
-	if( m_NetIdent && !m_DisableFriendshipChange )
-	{
-		QWidget *parentPage = GuiHelpers::findParentPage( dynamic_cast<QWidget*>(parent()) );
-		if( parentPage )
-		{
-			AppletPeerChangeFriendship* applet = dynamic_cast<AppletPeerChangeFriendship*>(m_MyApp.launchApplet( eAppletPeerChangeFriendship, parentPage ) );
-			if( applet )
-			{
-				applet->setFriend( m_NetIdent );
-			}
-		}
-	}
-}
-
-//============================================================================
-void IdentWidget::onIdentOfferButtonClicked( void )
-{
-	emit signalIdentOfferButtonClicked();
-}
-
-//============================================================================
-void IdentWidget::onIdentMenuButtonClicked( void )
-{
-	emit signalIdentMenuButtonClicked();
-}
+QLabel* IdentWidget::getIdentLine3( void ) { return ui.m_TodLabel; }

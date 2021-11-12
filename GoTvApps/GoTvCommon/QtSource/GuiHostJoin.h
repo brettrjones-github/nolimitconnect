@@ -13,22 +13,35 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GuiUserBase.h"
+#include <GuiInterface/IDefs.h>
 
+#include <CoreLib/VxGUID.h>
+
+#include <QWidget>
+
+#include <vector>
+
+class AppCommon;
+class GuiUser;
 class GuiHostJoinMgr;
 
-class GuiHostJoin : public GuiUserBase
+class GuiHostJoin : public QWidget
 {
 public:
     GuiHostJoin() = delete;
     GuiHostJoin( AppCommon& app );
-    GuiHostJoin( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online = false );
+    GuiHostJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, bool online = false );
     GuiHostJoin( const GuiHostJoin& rhs );
 	virtual ~GuiHostJoin() = default;
 
-    GuiHostJoinMgr&             getHostJoinMgr( void ) { return m_HostJoinMgr; }
+    GuiHostJoinMgr&             getHostJoinMgr( void )      { return m_HostJoinMgr; }
 
-    virtual bool                setOnlineStatus( bool isOnline ) override;
+    void                        setUser( GuiUser* user )    { m_GuiUser = user; }
+    GuiUser*                    getUser( void )             { return m_GuiUser; }
+
+    virtual bool                setOnlineStatus( bool isOnline );
+    bool                        isOnline( void )            { return m_IsOnline; }
+    bool                        isInSession( void )         { return m_IsOnline && m_SessionId.isVxGUIDValid(); }
 
     EJoinState                  getJoinState( EHostType hostType );
     bool                        setJoinState( EHostType hostType, EJoinState joinState ); // return true if state changed
@@ -37,6 +50,11 @@ public:
     void                        getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests );
 
 protected:
+    AppCommon&                  m_MyApp;
     GuiHostJoinMgr&             m_HostJoinMgr;
+
+    GuiUser*                    m_GuiUser{ nullptr };
+    VxGUID                      m_SessionId;
+    bool                        m_IsOnline{ false };
     std::vector<std::pair<EHostType, EJoinState>>  m_JoinStateList;
 };

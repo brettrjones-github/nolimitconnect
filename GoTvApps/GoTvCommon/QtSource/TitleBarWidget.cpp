@@ -53,7 +53,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     ui.m_MenuButton->setFixedSize( eButtonSizeSmall );
     ui.m_BackDlgButton->setFixedSize( eButtonSizeSmall );
 
-    ui.m_NetAvailStatusWidget->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_NetAvailStatusWidget->setFixedSizeAbsolute( GuiParams::getButtonSize( eButtonSizeSmall ) );
 
     ui.m_MicVolPeakBar->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ).width() / 6 + 1, GuiParams::getButtonSize( eButtonSizeSmall ).height() );
     float aspectRatio = 320.0f / 240.0f;

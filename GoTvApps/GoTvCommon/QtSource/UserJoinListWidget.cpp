@@ -199,12 +199,12 @@ UserJoinListItem* UserJoinListWidget::addOrUpdateUserJoinSession( GuiUserJoinSes
         userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName().c_str() );
+            LogMsg( LOG_INFO, "add user %s", userSession->getOnlineName().c_str() );
             addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
+            LogMsg( LOG_INFO, "insert user %s", userSession->getOnlineName().c_str() );
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 
@@ -319,15 +319,17 @@ void UserJoinListWidget::refreshList( void )
     clearUserJoinList();
     std::vector<GuiUserJoin *> userList;
 
-    if( isListViewMatch( m_UserJoinMgr.getMyIdent() ) )
+    if( isListViewMatch( m_MyApp.getUserMgr().getMyIdent() ) )
     {
-        userList.push_back( m_UserJoinMgr.getMyIdent() );
+        // temporary for dev.. add ourself
+        GuiUserJoin* myself = m_UserJoinMgr.updateUserJoin( &m_MyApp.getUserMgr().getMyIdent()->getNetIdent() );
+        userList.push_back( myself );
     }
 
     std::map<VxGUID, GuiUserJoin*>& mgrList = m_UserJoinMgr.getUserJoinList();
     for( auto iter = mgrList.begin(); iter != mgrList.end(); ++iter )
     {
-        if( isListViewMatch( iter->second ) )
+        if( isListViewMatch( iter->second->getUser() ) )
         {
             userList.push_back( iter->second );
         }
@@ -354,7 +356,7 @@ void UserJoinListWidget::clearUserJoinList( void )
 }
 
 //============================================================================
-bool UserJoinListWidget::isListViewMatch( GuiUserJoin * user )
+bool UserJoinListWidget::isListViewMatch( GuiUser* user )
 {
     if( user && !user->isIgnored())
     {
@@ -397,36 +399,36 @@ bool UserJoinListWidget::isListViewMatch( GuiUserJoin * user )
 }
 
 //============================================================================
-void UserJoinListWidget::updateUserJoin( GuiUserJoin * user )
+void UserJoinListWidget::updateUserJoin( GuiUserJoin * userJoin )
 {
-    if( isListViewMatch( user ) )
+    if( isListViewMatch( userJoin->getUser() ) )
     {
-        auto iter = m_UserJoinCache.find( user->getMyOnlineId() );
+        auto iter = m_UserJoinCache.find( userJoin->getUser()->getMyOnlineId() );
         if( iter == m_UserJoinCache.end() )
         {
-            GuiUserJoinSession * userSession = new GuiUserJoinSession( user, this );
+            GuiUserJoinSession * userSession = new GuiUserJoinSession( userJoin, this );
             if( userSession )
             {
                 UserJoinListItem* userItem = sessionToWidget( userSession );
                 if( 0 == count() )
                 {
-                    LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName().c_str() );
+                    LogMsg( LOG_INFO, "add user %s", userSession->getOnlineName().c_str() );
                     addItem( userItem );
                 }
                 else
                 {
-                    LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
+                    LogMsg( LOG_INFO, "insert user %s", userSession->getOnlineName().c_str() );
                     insertItem( 0, (QListWidgetItem *)userItem );
                 }
 
                 setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
-                m_UserJoinCache[user->getMyOnlineId()] = userSession;
+                m_UserJoinCache[userJoin->getUser()->getMyOnlineId()] = userSession;
                 onListItemAdded( userSession, userItem );
             }
         }
         else
         {
-            UserJoinListItem* userItem = findListEntryWidgetByOnlineId( user->getMyOnlineId() );
+            UserJoinListItem* userItem = findListEntryWidgetByOnlineId( userJoin->getUser()->getMyOnlineId() );
             if( userItem )
             {
                 GuiUserJoinSession * userSession = userItem->getUserJoinSession();

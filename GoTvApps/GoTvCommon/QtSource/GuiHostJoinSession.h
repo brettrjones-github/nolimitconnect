@@ -15,8 +15,11 @@
 
 #include <GuiInterface/IDefs.h>
 
+#include "GuiUser.h"
+
 #include <QWidget>
 
+class GuiHostJoin;
 class P2PEngine;
 class VxGUID;
 class VxNetIdent;

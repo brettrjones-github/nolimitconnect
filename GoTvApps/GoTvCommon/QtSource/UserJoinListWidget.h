@@ -38,6 +38,7 @@ class GuiUserJoin;
 class AppCommon;
 class MyIcons;
 class P2PEngine;
+class GuiUser;
 class GuiUserJoinSession;
 class GuiUserJoinMgr;
 class GuiThumb;
@@ -100,18 +101,18 @@ protected:
     virtual void                onMenuButtonClicked( UserJoinListItem* hostItem );
 
     void                        refreshList( void );
-    bool                        isListViewMatch( GuiUserJoin * user );
+    bool                        isListViewMatch( GuiUser * user );
 
     void                        updateThumb( GuiThumb* thumb );
  
 	//=== vars ===//
 	AppCommon&					m_MyApp;
     P2PEngine&					m_Engine;
-    GuiUserJoinMgr&					m_UserJoinMgr;
+    GuiUserJoinMgr&				m_UserJoinMgr;
     GuiThumbMgr&				m_ThumbMgr;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
     std::map<VxGUID, GuiUserJoinSession*> m_UserJoinCache;
     bool                        m_ShowMyself{ true };
-    EUserJoinViewType               m_UserJoinViewType{ eUserJoinViewTypeNone };
+    EUserJoinViewType           m_UserJoinViewType{ eUserJoinViewTypeNone };
 };
 

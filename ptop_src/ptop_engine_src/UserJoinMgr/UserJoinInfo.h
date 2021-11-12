@@ -15,6 +15,7 @@
 
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseJoinInfo.h>
 #include <GuiInterface/IDefs.h>
+#include <CoreLib/VxGUID.h>
 
 #define HOST_FLAG_DEFAULT_HOST			0x0001
 #define HOST_FLAG_IS_TEMP			    0x0002

@@ -14,15 +14,15 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
 #include "ui_GuiUserListEntryWidget.h"
+#include "IdentLogicInterface.h"
 
 #include <QListWidgetItem>
 #include <QWidget>
 
 class GuiHostSession;
 
-class GuiUserListEntryWidget : public QWidget, public QListWidgetItem
+class GuiUserListEntryWidget : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -37,17 +37,25 @@ public:
 
     void						updateWidgetFromInfo( void );
 
+	VxPushButton*				getIdentAvatarButton( void ) override { return ui.m_AvatarButton; }
+	VxPushButton*				getIdentFriendshipButton( void ) override { return ui.m_FriendshipButton; }
+	VxPushButton*				getIdentMenuButton( void ) override { return ui.m_MenuButton; }
+
+	virtual QLabel*				getIdentLine1( void ) override { return ui.m_TitlePart1; }
+	virtual QLabel*				getIdentLine2( void ) override { return ui.m_DescPart1; }
+	virtual QLabel*				getIdentLine3( void ) override { return ui.m_TodLabel; }
+
+	void						onIdentAvatarButtonClicked( void ) override;
+	void						onIdentMenuButtonClicked( void ) override;
+
 signals:
-    void						signalHostListItemClicked( QListWidgetItem * poItemWidget );
+	void						signalHostListItemClicked( GuiUserListEntryWidget* listEntryWidget );
 	void						signalIconButtonClicked( GuiUserListEntryWidget* listEntryWidget );
 	void						signalMenuButtonClicked( GuiUserListEntryWidget* listEntryWidget );
     void						signalJoinButtonClicked( GuiUserListEntryWidget* listEntryWidget );
 
-public slots:
-	void						slotIconButtonClicked( void );
-	void						slotMenuButtonPressed( void );
-	void						slotMenuButtonReleased( void );
-    void						slotJoinButtonPressed( void );
+protected slots:
+	void						slotJoinButtonPressed( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;

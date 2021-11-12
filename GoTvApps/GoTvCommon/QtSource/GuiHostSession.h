@@ -14,13 +14,14 @@
 //============================================================================
 
 #include <GuiInterface/IDefs.h>
+#include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
+
+#include <CoreLib/VxGUID.h>
 
 #include <QWidget>
 
 class P2PEngine;
-class VxGUID;
 class VxNetIdent;
-class PluginSetting;
 
 class GuiHostSession : public QWidget
 {

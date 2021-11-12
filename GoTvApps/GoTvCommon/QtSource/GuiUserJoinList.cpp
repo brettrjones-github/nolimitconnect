@@ -14,6 +14,7 @@
 
 #include "GuiUserJoinList.h"
 #include "GuiUserJoin.h"
+#include "GuiUser.h"
 
 //============================================================================
 GuiUserJoinList::GuiUserJoinList()
@@ -75,7 +76,7 @@ GuiUserJoin* GuiUserJoinList::findUserJoin( VxGUID& thumbId )
 {
     for( auto iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
     {
-        if( (*iter)->getMyOnlineId() == thumbId )
+        if( (*iter)->getUser()->getMyOnlineId() == thumbId )
         {
             return *iter;
         }
@@ -89,7 +90,7 @@ bool GuiUserJoinList::removeUserJoin( GuiUserJoin* guiUserJoin )
 {
     if( guiUserJoin )
     {
-        return removeUserJoin( guiUserJoin->getMyOnlineId() );
+        return removeUserJoin( guiUserJoin->getUser()->getMyOnlineId() );
     }
 
     return false;
@@ -102,7 +103,7 @@ bool GuiUserJoinList::removeUserJoin( VxGUID& thumbId )
     std::vector<GuiUserJoin*>::iterator iter;
     for( iter = m_UserJoinList.begin(); iter != m_UserJoinList.end(); ++iter )
     {
-        if( (*iter)->getMyOnlineId() == thumbId )
+        if( (*iter)->getUser()->getMyOnlineId() == thumbId )
         {
             thumbExisted = true;
             m_UserJoinList.erase( iter );

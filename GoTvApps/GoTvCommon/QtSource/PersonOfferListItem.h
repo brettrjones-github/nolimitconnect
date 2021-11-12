@@ -15,13 +15,13 @@
 
 #include "config_gotvapps.h"
 #include "ui_PersonOfferListItem.h"
+#include "IdentLogicInterface.h"
 
 #include <QListWidgetItem>
-#include <QWidget>
 
 class GuiOfferSession;
 
-class PersonOfferListItem : public QWidget, public QListWidgetItem
+class PersonOfferListItem : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -37,23 +37,29 @@ public:
     void						updateWidgetFromInfo( void );
     QSize                       calculateSizeHint( void );
 
+    VxPushButton*               getIdentAvatarButton( void ) override       { return ui.m_AvatarButton; }
+    VxPushButton*               getIdentFriendshipButton( void ) override   { return ui.m_FriendshipButton; }
+    VxPushButton*               getIdentMenuButton( void )  override        { return ui.m_MenuButton; }
+    VxPushButton*               getAcceptButton( void )                     { return ui.m_AcceptButton; }
+    VxPushButton*               getRejectButton( void )                     { return ui.m_RejectButton; }
+
+    virtual QLabel*             getIdentLine1( void ) override              { return ui.m_TitlePart1; }
+    virtual QLabel*             getIdentLine2( void ) override              { return ui.m_Line2Label; }
+
+    void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentMenuButtonClicked( void ) override;
+
 signals:
     void						signalPersonOfferListItemClicked( PersonOfferListItem * poItemWidget );
 	void						signalAvatarButtonClicked( PersonOfferListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( PersonOfferListItem* listEntryWidget );
 	void						signalMenuButtonClicked( PersonOfferListItem* listEntryWidget );
-
-public slots:
-	void						slotAvatarButtonClicked( void );
-    void						slotFriendshipButtonClicked( void );
-	void						slotMenuButtonClicked( void );
 
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
 
 	//=== vars ===//
-    Ui::PersonOfferListItemUi	        ui;
+    Ui::PersonOfferListItemUi	ui;
     AppCommon&					m_MyApp;
 };
 

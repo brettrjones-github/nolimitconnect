@@ -14,74 +14,25 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
 #include "ui_IdentWidget.h"
-#include <QWidget>
+#include "IdentLogicInterface.h"
 
-class VxNetIdent;
-class AppCommon;
-class MyIcons;
-class VxGUID;
-
-class IdentWidget : public QWidget
+class IdentWidget :  public IdentLogicInterface
 {
 	Q_OBJECT
 
 public:
 	IdentWidget(QWidget *parent=0);
 
-	AppCommon&					getMyApp( void ) { return m_MyApp; }
-	MyIcons&					getMyIcons( void );
+	VxPushButton*				getIdentAvatarButton( void ) override;
+	VxPushButton*				getIdentFriendshipButton( void ) override;
+	VxPushButton*				getIdentOfferButton( void ) override;
+	VxPushButton*				getIdentMenuButton( void ) override;
 
-	void						setDisableFriendshipChange( bool disable )		{ m_DisableFriendshipChange = disable;  }
-	void						setIdentWidgetSize( EButtonSize buttonSize );
-
-	void						setIdentOnlineState( bool isOnline );
-	void						setIdentGroupState( bool isInGroup );
-	void						setIdentDirectConnectState( bool canDirectConnect );
-
-	VxPushButton*				getIdentAvatarButton( void );
-	VxPushButton*				getIdentFriendshipButton( void );
-	VxPushButton*				getIdentOfferButton( void );
-	VxPushButton*				getIdentMenuButton( void );
-
-	void						setIdentAvatarButtonVisible( bool visible );
-	void						setIdentFriendshipButtonVisible( bool visible );
-	void						setIdentOfferButtonVisible( bool visible );
-	void						setIdentMenuButtonVisible( bool visible );
-
-	void						setIdentAvatarThumbnail( VxGUID& thumbId );
-	void						setIdentAvatarIcon( EMyIcons myIcon );
-	void						setIdentFriendshipIcon( EMyIcons myIcon );
-	void						setIdentOfferIcon( EMyIcons myIcon );
-	void						setIdentMenuIcon( EMyIcons myIcon );
-
-	//! fill gui widgets from friend data
-	void						updateIdentity( GuiUser * guiUser );
-	void						updateIdentity( VxNetIdent * netIdent );
-
-	virtual void				onIdentWidgetSetup( void ){};
-
-	virtual void				onIdentAvatarButtonClicked( void );
-	virtual void				onIdentFriendshipButtonClicked( void );
-	virtual void				onIdentOfferButtonClicked( void );
-	virtual void				onIdentMenuButtonClicked( void );
-
-
-signals:
-	void						signalIdentAvatarButtonClicked( void );
-	void						signalIdentOfferButtonClicked( void );
-	void						signalIdentMenuButtonClicked( void );
-
-protected slots:
-	void						slotIdentAvatarButtonClicked( void );
-	void						slotIdentFrienshipButtonClicked( void );
-	void						slotIdentOfferButtonClicked( void );
-	void						slotIdentMenuButtonClicked( void );
+	virtual QLabel*				getIdentLine1( void ) override;
+	virtual QLabel*				getIdentLine2( void ) override;
+	virtual QLabel*				getIdentLine3( void ) override;
 
 protected:
 	Ui::IdentWidget				ui;
-	AppCommon&					m_MyApp;
-	GuiUser*					m_NetIdent{ nullptr };
-	bool						m_DisableFriendshipChange{ false };
 };

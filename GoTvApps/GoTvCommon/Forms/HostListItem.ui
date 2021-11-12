@@ -158,7 +158,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="TitlePart1">
+           <widget class="QLabel" name="m_TitlePart1">
             <property name="font">
              <font>
               <pointsize>8</pointsize>
@@ -172,7 +172,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="TitlePart2">
+           <widget class="QLabel" name="m_TitlePart2">
             <property name="text">
              <string/>
             </property>
@@ -199,14 +199,14 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="DescPart1">
+           <widget class="QLabel" name="m_DescPart1">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="DescPart2">
+           <widget class="QLabel" name="m_DescPart2">
             <property name="text">
              <string/>
             </property>

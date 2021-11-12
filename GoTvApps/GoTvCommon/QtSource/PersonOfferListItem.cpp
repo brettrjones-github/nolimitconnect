@@ -19,20 +19,14 @@
 
 //============================================================================
 PersonOfferListItem::PersonOfferListItem(QWidget *parent  )
-: QWidget( parent )
+: IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
-    ui.m_AvatarButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_AvatarButton->setIcon( eMyIconAvatarImage );
-    ui.m_FriendshipButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_FriendshipButton->setIcon( eMyIconAnonymous );
-    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize() );
-    ui.m_MenuButton->setIcon( eMyIconMenu );
-
-    connect( ui.m_AvatarButton,     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
-    connect( ui.m_FriendshipButton, SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
-	connect( ui.m_MenuButton,       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
+    setupIdentLogic();
+    ui.m_AvatarButton->setFixedSize( eButtonSizeLarge );
+    ui.m_FriendshipButton->setFixedSize( eButtonSizeLarge );
+    ui.m_MenuButton->setFixedSize( eButtonSizeLarge );
 }
 
 //============================================================================
@@ -84,21 +78,14 @@ GuiOfferSession * PersonOfferListItem::getOfferSession( void )
 }
 
 //============================================================================
-void PersonOfferListItem::slotAvatarButtonClicked()
+void PersonOfferListItem::onIdentAvatarButtonClicked()
 {
     LogMsg( LOG_DEBUG, "PersonOfferListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void PersonOfferListItem::slotFriendshipButtonClicked()
-{
-    LogMsg( LOG_DEBUG, "PersonOfferListItem::slotFriendshipButtonClicked" );
-    emit signalAvatarButtonClicked( this );
-}
-
-//============================================================================
-void PersonOfferListItem::slotMenuButtonClicked( void )
+void PersonOfferListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
@@ -120,21 +107,5 @@ void PersonOfferListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    QString strName = hostIdent->getOnlineName().c_str();
-    strName += " - ";
-    QString strDesc = hostIdent->getOnlineDescription().c_str();
-
-    // updateListEntryBackgroundColor( netIdent, item );
-
-    ui.m_FriendshipButton->setIcon( getMyIcons().getFriendshipIcon( hostIdent->getMyFriendshipToHim() ) );
-    /*
-    QPalette pal = ui.m_FriendshipButton->palette();
-    pal.setColor(QPalette::Button, QColor( hostIdent->getHasTextOffers() ? Qt::yellow : Qt::white ));
-    ui.m_FriendshipButton->setAutoFillBackground(true);
-    ui.m_FriendshipButton->setPalette(pal);
-    ui.m_FriendshipButton->update();
-    */
-    ui.TitlePart1->setText( strName );
-    ui.TitlePart2->setText( hostIdent->describeMyFriendshipToHim() );
-
+    updateIdentity( hostIdent );
 }

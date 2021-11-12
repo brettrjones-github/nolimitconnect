@@ -17,6 +17,7 @@
 #include "AppCommon.h"
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.h>
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
+#include <PktLib/VxCommon.h>
 
 //============================================================================
 GuiUserJoinMgr::GuiUserJoinMgr( AppCommon& app )
@@ -109,11 +110,15 @@ void GuiUserJoinMgr::slotInternalUserJoinRemoved( VxGUID onlineId, EPluginType p
     {
         emit signalUserJoinRemoved( onlineId, hostType );
         joinInfo = iter->second;
-        joinInfo->removeHostType( hostType );
-        if( !joinInfo->hostTypeCount() )
+        GuiUser* user = joinInfo->getUser();
+        if( user )
         {
-            m_UserJoinList.erase( iter );
-            joinInfo->deleteLater();
+            user->removeHostType( hostType );
+            if( !user->hostTypeCount() )
+            {
+                m_UserJoinList.erase( iter );
+                joinInfo->deleteLater();
+            }
         }
     }
 }
@@ -194,64 +199,55 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( VxNetIdent* hisIdent, EHostType hos
     }
 
     GuiUserJoin* guiUserJoin = findUserJoin( hisIdent->getMyOnlineId() );
-    if( guiUserJoin && guiUserJoin->getMyOnlineId() == hisIdent->getMyOnlineId() )
+    GuiUser * user = m_MyApp.getUserMgr().updateUser( hisIdent, hostType );
+    if( user )
     {
-        guiUserJoin->addHostType( hostType );
-        onUserJoinUpdated( guiUserJoin );
-    }
-    else
-    {
-        guiUserJoin = new GuiUserJoin( m_MyApp );
-        guiUserJoin->setNetIdent( hisIdent );
-        guiUserJoin->addHostType( hostType );
-        m_UserJoinList[guiUserJoin->getMyOnlineId()] = guiUserJoin;
-        onUserJoinAdded( guiUserJoin );
+        if( guiUserJoin && guiUserJoin->getUser()->getMyOnlineId() == hisIdent->getMyOnlineId() )
+        {
+            guiUserJoin->getUser()->addHostType( hostType );
+            onUserJoinUpdated( guiUserJoin );
+        }
+        else
+        {
+            guiUserJoin = new GuiUserJoin( m_MyApp );
+            guiUserJoin->setUser( user );
+            guiUserJoin->getUser()->setNetIdent( hisIdent );
+            guiUserJoin->getUser()->addHostType( hostType );
+            m_UserJoinList[guiUserJoin->getUser()->getMyOnlineId()] = guiUserJoin;
+            onUserJoinAdded( guiUserJoin );
+        }
     }
 
     return guiUserJoin;
 }
-
 
 //============================================================================
 GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* hostJoinInfo )
 {
     EHostType hostType = PluginTypeToHostType( hostJoinInfo->getPluginType() );
     GuiUserJoin* guiUserJoin = findUserJoin( hostJoinInfo->getOnlineId() );
-    if( guiUserJoin )
+    GuiUser* user = m_MyApp.getUserMgr().updateUser( hostJoinInfo->getNetIdent(), hostType );
+    if( user )
     {
-        guiUserJoin->addHostType( hostType );
-        guiUserJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
-        onUserJoinUpdated( guiUserJoin );
-    }
-    else
-    {
-        guiUserJoin = new GuiUserJoin( m_MyApp );
-        guiUserJoin->setNetIdent( hostJoinInfo->getNetIdent() );
-        guiUserJoin->addHostType( hostType );
-        m_UserJoinList[guiUserJoin->getMyOnlineId()] = guiUserJoin;
-        onUserJoinAdded( guiUserJoin );
+        if( guiUserJoin )
+        {
+            guiUserJoin->getUser()->addHostType( hostType );
+            guiUserJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
+            onUserJoinUpdated( guiUserJoin );
+        }
+        else
+        {
+            guiUserJoin = new GuiUserJoin( m_MyApp );
+            guiUserJoin->setUser( user );
+            guiUserJoin->getUser()->setNetIdent( hostJoinInfo->getNetIdent() );
+            guiUserJoin->getUser()->addHostType( hostType );
+            guiUserJoin->setJoinState( hostType, hostJoinInfo->getJoinState() );
+            m_UserJoinList[guiUserJoin->getUser()->getMyOnlineId()] = guiUserJoin;
+            onUserJoinAdded( guiUserJoin );
+        }
     }
 
     return guiUserJoin;
-}
-
-//============================================================================
-void GuiUserJoinMgr::updateMyIdent( VxNetIdent* myIdent )
-{
-    if( !m_MyIdent )
-    {
-        GuiUserJoin* guiUserJoin = new GuiUserJoin( m_MyApp );
-        guiUserJoin->setNetIdent( myIdent );
-        m_MyIdent = guiUserJoin;
-        m_MyOnlineId = m_MyIdent->getMyOnlineId();
-    }
-    else
-    {
-        m_MyIdent->setNetIdent( myIdent );
-        m_MyOnlineId = m_MyIdent->getMyOnlineId();
-    }
-
-    emit signalMyIdentUpdated( m_MyIdent );
 }
 
 //============================================================================

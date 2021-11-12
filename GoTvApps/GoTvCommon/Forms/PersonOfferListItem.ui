@@ -152,11 +152,10 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="TitlePart1">
+           <widget class="QLabel" name="m_TitlePart1">
             <property name="font">
              <font>
               <pointsize>8</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -167,7 +166,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="TitlePart2">
+           <widget class="QLabel" name="m_TitlePart2">
             <property name="text">
              <string/>
             </property>
@@ -187,6 +186,13 @@
            </spacer>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_Line2Label">
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">

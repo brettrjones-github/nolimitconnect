@@ -13,16 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "GuiUserJoinSession.h"
-#include "GuiHelpers.h"
-#include "GuiParams.h"
-
-#include <PktLib/VxSearchDefs.h>
-#include <CoreLib/VxParse.h>
-#include <CoreLib/VxFileInfo.h>
-
-#include <QObject>
+#include "GuiUserJoin.h"
 
 //============================================================================
 GuiUserJoinSession::GuiUserJoinSession( QWidget* parent )
@@ -73,11 +65,29 @@ GuiUserJoinSession& GuiUserJoinSession::operator =( const GuiUserJoinSession &rh
 }
 
 //============================================================================
+std::string GuiUserJoinSession::getOnlineName( void )
+{ 
+    return m_UserJoin ? m_UserJoin->getUser()->getOnlineName() : ""; 
+}
+
+//============================================================================
+bool GuiUserJoinSession::setIsOnline( bool isOnline )
+{
+    if( m_UserJoin && m_UserJoin->isOnline() != isOnline )
+    {
+        m_UserJoin->setOnlineStatus( isOnline );
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
 void GuiUserJoinSession::setUserJoin( GuiUserJoin* user )
 { 
     m_UserJoin = user; 
     if( m_UserJoin )
     {
-        m_OnlineId = m_UserJoin->getMyOnlineId();
+        m_OnlineId = m_UserJoin->getUser()->getMyOnlineId();
     }
 }

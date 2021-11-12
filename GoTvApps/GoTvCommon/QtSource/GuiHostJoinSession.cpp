@@ -12,9 +12,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "GuiHostJoinSession.h"
 #include "GuiHostJoin.h"
+#include "GuiUser.h"
 
 //============================================================================
 GuiHostJoinSession::GuiHostJoinSession( QWidget* parentWidget )
@@ -26,7 +26,7 @@ GuiHostJoinSession::GuiHostJoinSession( QWidget* parentWidget )
 GuiHostJoinSession::GuiHostJoinSession( EHostType hostType, GuiHostJoin* hostJoinIdent, QWidget* parentWidget )
     : QWidget( parentWidget )
     , m_HostType( hostType )
-    , m_OnlineId( hostJoinIdent->getMyOnlineId() )
+    , m_OnlineId( hostJoinIdent->getUser()->getMyOnlineId() )
     , m_HostIdent( hostJoinIdent )
 {
 }
@@ -56,15 +56,15 @@ GuiHostJoinSession& GuiHostJoinSession::operator =( const GuiHostJoinSession &rh
 //============================================================================
 std::string GuiHostJoinSession::getHostUrl( void )
 {
-    return m_HostIdent->getMyOnlineUrl();
+    return m_HostIdent->getUser()->getMyOnlineUrl();
 }
 
 //============================================================================
 std::string GuiHostJoinSession::getHostDescription( void )
 {
-    if( !m_HostIdent->getOnlineDescription().empty() )
+    if( !m_HostIdent->getUser()->getOnlineDescription().empty() )
     {
-        return m_HostIdent->getOnlineDescription();
+        return m_HostIdent->getUser()->getOnlineDescription();
     }
     else
     {
@@ -75,5 +75,5 @@ std::string GuiHostJoinSession::getHostDescription( void )
 //============================================================================
 VxGUID GuiHostJoinSession::getHostThumbId( void )
 {
-    return m_HostIdent->getAvatarThumbId();
+    return m_HostIdent->getUser()->getAvatarThumbId();
 }

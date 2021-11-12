@@ -212,7 +212,7 @@ void HostJoinRequestListWidget::slotRejectButtonClicked( HostJoinRequestListItem
 void HostJoinRequestListWidget::addOrUpdateHostRequest( EHostType hostType, GuiHostJoin* hostJoin )
 {
     GuiHostJoinSession* hostSession = nullptr;
-    HostJoinRequestListItem* hostItem = findListEntryWidgetByHostId( hostType, hostJoin->getMyOnlineId() );
+    HostJoinRequestListItem* hostItem = findListEntryWidgetByHostId( hostType, hostJoin->getUser()->getMyOnlineId() );
     if( hostItem )
     {
         hostSession = hostItem->getHostSession();
@@ -252,23 +252,23 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostRequestSessio
         {
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s\n", hostSession->getUserIdent()->getOnlineName().c_str() );
+                LogMsg( LOG_INFO, "add host %s", hostSession->getUserIdent()->getUser()->getOnlineName().c_str() );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getUserIdent()->getOnlineName().c_str() );
+                LogMsg( LOG_INFO, "insert host %s", hostSession->getUserIdent()->getUser()->getOnlineName().c_str() );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            VxGUID thumbId = hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), false );
+            VxGUID thumbId = hostSession->getUserIdent()->getUser()->getHostThumbId( hostSession->getHostType(), false );
             GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
             if( thumb )
             {
                 QImage hostIconImage;
                 thumb->createImage( hostIconImage );
-                VxPushButton* hostImageButton = hostItem->getAvatarButton();
+                VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
                 if( hostImageButton && !hostIconImage.isNull() )
                 {
                     hostImageButton->setIconOverrideImage( hostIconImage );
@@ -279,7 +279,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostRequestSessio
 
     if( hostItem )
     {
-        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getUserIdent()->getNetIdent() ) );
+        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getUserIdent()->getUser()->getNetIdent() ) );
     }
 
     return hostItem;

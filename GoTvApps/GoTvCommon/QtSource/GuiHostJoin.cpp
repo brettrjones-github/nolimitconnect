@@ -20,22 +20,31 @@
 
 //============================================================================
 GuiHostJoin::GuiHostJoin( AppCommon& app )
-    : GuiUserBase( app )
+    : QWidget( &app )
+    , m_MyApp( app )
     , m_HostJoinMgr( app.getHostJoinMgr() )
 {
 }
 
 //============================================================================
-GuiHostJoin::GuiHostJoin( AppCommon& app, VxNetIdent* netIdent, VxGUID& sessionId, bool online )
-    : GuiUserBase( app, netIdent, sessionId, online )
+GuiHostJoin::GuiHostJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, bool online )
+    : QWidget( &app )
+    , m_MyApp( app )
     , m_HostJoinMgr( app.getHostJoinMgr() )
+    , m_GuiUser( guiUser )
+    , m_SessionId( sessionId )
+    , m_IsOnline( online )
 {
 }
 
 //============================================================================
 GuiHostJoin::GuiHostJoin( const GuiHostJoin& rhs )
-    : GuiUserBase( rhs )
+    : QWidget( &rhs.m_MyApp )
+    , m_MyApp( rhs.m_MyApp )
     , m_HostJoinMgr( rhs.m_HostJoinMgr )
+    , m_GuiUser( rhs.m_GuiUser )
+    , m_SessionId( rhs.m_SessionId )
+    , m_IsOnline( rhs.m_IsOnline )
     , m_JoinStateList( rhs.m_JoinStateList )
 {
 }
@@ -43,13 +52,15 @@ GuiHostJoin::GuiHostJoin( const GuiHostJoin& rhs )
 //============================================================================
 bool GuiHostJoin::setOnlineStatus( bool isOnline )
 {
-    if( GuiUserBase::setOnlineStatus( isOnline ) )
+    if( m_IsOnline != isOnline )
     {
-        m_HostJoinMgr.onUserOnlineStatusChange( this, m_IsOnline );
-        return true;
+        m_IsOnline = isOnline;
+        if( m_GuiUser && m_GuiUser->setOnlineStatus( isOnline ) )
+        {
+            m_HostJoinMgr.onUserOnlineStatusChange( this, m_IsOnline );
+            return true;
+        }
     }
-
-    return false;
 }
 
 //============================================================================

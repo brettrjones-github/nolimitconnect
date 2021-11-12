@@ -265,7 +265,7 @@ HostListItem* HostListWidget::addOrUpdateHostSession( GuiHostSession* hostSessio
             {
                 QImage hostIconImage;
                 thumb->createImage( hostIconImage );
-                VxPushButton* hostImageButton = hostItem->getAvatarButton();
+                VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
                 if( hostImageButton && !hostIconImage.isNull() )
                 {
                     hostImageButton->setIconOverrideImage( hostIconImage );

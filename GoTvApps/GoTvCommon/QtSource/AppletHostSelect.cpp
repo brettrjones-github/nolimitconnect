@@ -71,7 +71,7 @@ void AppletHostSelect::updateJoinList( void )
 	for( auto& iter : joinList )
 	{
 		GuiHostJoin* user = iter.second;
-		if( !user->isIgnored() && m_JoinState == user->getJoinState( m_HostType ) )
+		if( !user->getUser()->isIgnored() && m_JoinState == user->getJoinState( m_HostType ) )
 		{
 			updateHostJoinRequest( user );
 		}
@@ -112,7 +112,7 @@ void AppletHostSelect::slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnlin
 void AppletHostSelect::updateHostJoinRequest( GuiHostJoin* user )
 {
 	vx_assert( user );
-	VxGUID& onlineId = user->getMyOnlineId();
+	VxGUID& onlineId = user->getUser()->getMyOnlineId();
 	std::vector<EHostType> hostRequests;
 	user->getRequestStateHosts( m_JoinState, hostRequests );
 	for( int hostEnum = eHostTypeUnknown; hostEnum < eMaxHostType; hostEnum++ )
