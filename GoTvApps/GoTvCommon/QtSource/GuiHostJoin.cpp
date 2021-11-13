@@ -101,7 +101,7 @@ bool GuiHostJoin::setJoinState( EHostType hostType, EJoinState joinState )
 
     if( !foundState )
     {
-        m_JoinStateList.push_back( std::make_pair(hostType, joinState ) );
+        m_JoinStateList.push_back( std::make_pair( hostType, joinState ) );
         stateChanged = true;
     }
 

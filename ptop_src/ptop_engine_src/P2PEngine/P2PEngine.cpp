@@ -77,9 +77,12 @@ namespace
 }
 
 //============================================================================
-P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
+P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
     : m_PeerMgr( peerMgr )
-    , m_BigListMgr( bigListMgr )
+	, m_IgnoreListMgr( *this )
+	, m_FriendListMgr( *this )
+	, m_GroupListMgr( *this )
+    , m_BigListMgr( *this )
     , m_EngineSettings()
     , m_EngineParams()
     , m_NetStatusAccum( *this )
@@ -191,34 +194,34 @@ void P2PEngine::iniitializePtoPEngine( void )
 void P2PEngine::shutdownEngine( void )
 {
 	VxSetAppIsShuttingDown( true );
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: stop listening\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: stop listening" );
 	m_PeerMgr.stopListening();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: remove asset client\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: remove asset client" );
 	//m_AssetMgr.addAssetMgrClient( this, false );
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: shutdown media processor\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: shutdown media processor" );
 	m_MediaProcessor.shutdownMediaProcessor();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: shutdown IsPortOpen\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: shutdown IsPortOpen" );
 	m_IsPortOpenTest.isPortOpenShutdown();
 	//VxUpdateSystemTime();
 	//m_NetworkMgr.networkMgrShutdown();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: m_PeerMgr.sktMgrShutdown\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: m_PeerMgr.sktMgrShutdown" );
 	m_PeerMgr.sktMgrShutdown();
 
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: m_PluginMgr.onAppShutdown\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: m_PluginMgr.onAppShutdown" );
 	m_PluginMgr.onAppShutdown();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: m_NetworkStateMachine.stateMachineShutdown\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: m_NetworkStateMachine.stateMachineShutdown" );
 	m_NetworkStateMachine.stateMachineShutdown();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: m_PluginMgr.pluginMgrShutdown\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: m_PluginMgr.pluginMgrShutdown" );
 	m_PluginMgr.pluginMgrShutdown();
 	//m_RcScan.scanShutdown();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: databases shutdown\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: databases shutdown" );
 	getEngineSettings().engineSettingsShutdown();
 	getEngineParams().engineParamsShutdown();
 	m_BigListMgr.bigListMgrShutdown();
 	m_AssetMgr.assetInfoMgrShutdown();
 
 	//g_oHttpConnection.httpConnectionShutdown();
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: waiting threads exit\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: waiting threads exit" );
 	//delete (IsPortOpenTest *)&m_IsPortOpenTest;
 	//delete (PluginNetServices *)&m_PluginNetServices;
 	//delete (PluginServiceFileShare *)&m_PluginServiceFileShare;
@@ -248,7 +251,7 @@ void P2PEngine::shutdownEngine( void )
 	m_PluginServiceRelay			= 0;
 	m_PluginServiceFileShare		= 0;
 	m_PluginNetServices		= 0;
-	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: done\n" );
+	LogMsg( LOG_VERBOSE, "P2PEngine::shutdownEngine: done" );
 }
 
 //============================================================================
@@ -309,8 +312,7 @@ bool P2PEngine::shouldInfoBeInDatabase( BigListInfo * poInfo )
 //============================================================================
 void P2PEngine::onBigListInfoRestored( BigListInfo * poInfo )
 {
-	//LogMsg( LOG_INFO, "onBigListInfoRestored\n");
-	//poInfo->debugDumpIdent();
+	updateIdentLists( poInfo, poInfo->getLastSessionTimeMs() );
 	if( poInfo->isMyRelay() )
 	{
 		m_ConnectionList.getPreferredRelayList().addContactInfo( poInfo->getConnectInfo() );
@@ -499,4 +501,33 @@ void P2PEngine::onFirstPktAnnounce( PktAnnounce * pktAnn )
             getNetStatusAccum().setDirectConnectTested( true, false, externAddr );
         }
     }
+}
+
+//============================================================================
+void P2PEngine::updateIdentLists( BigListInfo* bigListInfo, int64_t timestampMs )
+{
+	int64_t timestamp;
+	if( timestampMs )
+	{
+		timestamp = timestampMs;
+	}
+	else
+	{
+		timestamp = GetTimeStampMs();
+	}
+
+	if( bigListInfo->isIgnored() )
+	{
+		m_IgnoreListMgr.updateIdent( bigListInfo->getMyOnlineId(), timestamp );
+		m_FriendListMgr.removeIdent( bigListInfo->getMyOnlineId() );
+	}
+	else
+	{
+		m_IgnoreListMgr.removeIdent( bigListInfo->getMyOnlineId() );
+		m_FriendListMgr.removeIdent( bigListInfo->getMyOnlineId() );
+		if( bigListInfo->isAdministrator() || bigListInfo->isFriend() )
+		{
+			m_FriendListMgr.updateIdent( bigListInfo->getMyOnlineId(), timestamp );
+		}
+	}
 }

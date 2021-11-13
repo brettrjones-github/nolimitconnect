@@ -22,9 +22,12 @@
 #include "VxSktLoopback.h"
 
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/BlobXferMgr/BlobCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/Connections/ConnectionMgr.h>
 #include <ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.h>
-#include <ptop_src/ptop_engine_src/BlobXferMgr/BlobCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
+#include <ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h>
+#include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
 #include <ptop_src/ptop_engine_src/OfferClientMgr/OfferClientMgr.h>
 #include <ptop_src/ptop_engine_src/OfferHostMgr/OfferHostMgr.h>
@@ -82,7 +85,7 @@ class P2PEngine :	public IFromGui,
                     public IAudioCallbacks
 {
 public:
-	P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr );
+	P2PEngine( VxPeerMgr& peerMgr );
 	virtual ~P2PEngine() override;
 
 	void						startupEngine( void );
@@ -99,6 +102,9 @@ public:
     BlobMgr&				    getBlobMgr( void )							    { return m_BlobMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
+    FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
+    GroupListMgr&               getGroupListMgr( void )                         { return m_GroupListMgr; }
+    IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
     NetStatusAccum&             getNetStatusAccum( void )                       { return m_NetStatusAccum; }
     NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; }
@@ -676,10 +682,14 @@ protected:
 	void						handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	void						sendToGuiTheContactList( int maxContactsToSend );
     void						onFirstPktAnnounce( PktAnnounce * pktAnn );
+    void                        updateIdentLists( BigListInfo* poInfo, int64_t timestampMs = 0 );
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
-    BigListMgr&					m_BigListMgr;
+    IgnoreListMgr               m_IgnoreListMgr;
+    FriendListMgr               m_FriendListMgr;
+    GroupListMgr                m_GroupListMgr;
+    BigListMgr					m_BigListMgr;
 	PktAnnounce					m_PktAnn;
     int64_t                     m_PktAnnLastModTime{ 0 };
     VxGUID                      m_MyOnlineId;

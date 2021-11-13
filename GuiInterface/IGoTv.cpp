@@ -49,16 +49,9 @@ VxPeerMgr& GetVxPeerMgr( void )
 }
 
 //============================================================================
-BigListMgr& GetBigListMgr( void )
-{
-    static BigListMgr g_BigListMgr;
-    return  g_BigListMgr;
-}
-
-//============================================================================
 P2PEngine& GetPtoPEngine()
 {
-    static P2PEngine g_P2PEngine( GetVxPeerMgr(), GetBigListMgr() );
+    static P2PEngine g_P2PEngine( GetVxPeerMgr() );
     return g_P2PEngine;
 }
 

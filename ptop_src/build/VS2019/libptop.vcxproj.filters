@@ -892,17 +892,17 @@
     <ClCompile Include="..\..\ptop_engine_src\Invite\Invite.cpp">
       <Filter>Source Files\Invite</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrBase\IdentListMgrBase.cpp">
-      <Filter>Source Files\IdentListMgrBase</Filter>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\IgnoreListMgr\IgnoreListMgr.cpp">
-      <Filter>Source Files\IgnoreListMgr</Filter>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\FriendListMgr\FriendListMgr.cpp">
-      <Filter>Source Files\FriendListMgr</Filter>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\GroupListMgr\GroupListMgr.cpp">
-      <Filter>Source Files\GroupListMgr</Filter>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1933,17 +1933,17 @@
     <ClInclude Include="..\..\ptop_engine_src\Invite\Invite.h">
       <Filter>Source Files\Invite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrBase\IdentListMgrBase.h">
-      <Filter>Source Files\IdentListMgrBase</Filter>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IgnoreListMgr\IgnoreListMgr.h">
-      <Filter>Source Files\IgnoreListMgr</Filter>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\FriendListMgr\FriendListMgr.h">
-      <Filter>Source Files\FriendListMgr</Filter>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\GroupListMgr\GroupListMgr.h">
-      <Filter>Source Files\GroupListMgr</Filter>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2082,17 +2082,8 @@
     <Filter Include="Source Files\Invite">
       <UniqueIdentifier>{f4416758-6cbd-4c72-88c2-b32685c48253}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\FriendListMgr">
-      <UniqueIdentifier>{9b18e5f8-f00b-4f72-868d-190c89ffbea6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\IgnoreListMgr">
-      <UniqueIdentifier>{13133fbf-de5d-41aa-92e6-b9640764edd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\IdentListMgrBase">
-      <UniqueIdentifier>{74a27aeb-c842-40bc-872c-072e777a5dd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GroupListMgr">
-      <UniqueIdentifier>{91c14ba4-bc80-416d-bfd4-073e1c883963}</UniqueIdentifier>
+    <Filter Include="Source Files\IdentListMgrs">
+      <UniqueIdentifier>{2cde1acc-ffb6-4ce6-aafc-fa8155b40dab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -999,16 +999,27 @@ void P2PEngine::fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaTy
 }
 
 //============================================================================
-bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			oOnlineId, 
+bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
 											   EFriendState		eMyFriendshipToHim,
 											   EFriendState		eHisFriendshipToMe )
 {
 	if( false == VxIsAppShuttingDown() )
 	{
+		if( !onlineId.isVxGUIDValid() )
+		{
+			LogMsg( LOG_ERROR, "IgnoreListMgr::updateIgnoreIdent invalid id" );
+			return false;
+		}
+
 		//assureUserSpecificDirIsSet( "P2PEngine::fromGuiChangeMyFriendshipToHim" );
-		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( oOnlineId );
+		BigListInfo * poInfo = m_BigListMgr.findBigListInfo( onlineId );
 		if( poInfo )
 		{
+			if( onlineId != getMyOnlineId() )
+			{
+				updateIdentLists( poInfo );
+			}
+			
 			EFriendState eOldFriendship = poInfo->getMyFriendshipToHim();
 			poInfo->setMyFriendshipToHim( eMyFriendshipToHim );
 			m_BigListMgr.updateVectorList( eOldFriendship, poInfo );
@@ -1016,7 +1027,7 @@ bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			oOnlineId,
 			LogMsg(LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: SUCCESS changed %s friendship to %s\n", 
 				poInfo->getOnlineName(),
 				poInfo->describeMyFriendshipToHim());
-			m_ConnectionList.fromGuiChangeMyFriendshipToHim(	oOnlineId, 
+			m_ConnectionList.fromGuiChangeMyFriendshipToHim( onlineId,
 																eMyFriendshipToHim,
 																eHisFriendshipToMe );
 			return true;
@@ -1024,8 +1035,8 @@ bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			oOnlineId,
 		else
 		{
 			LogMsg(LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: FAILED find friend 0x%llX 0x%llX\n",
-				oOnlineId.getVxGUIDHiPart(),
-				oOnlineId.getVxGUIDLoPart() );
+				onlineId.getVxGUIDHiPart(),
+				onlineId.getVxGUIDLoPart() );
 		}
 	}
 

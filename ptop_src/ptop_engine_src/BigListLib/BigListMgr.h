@@ -35,7 +35,8 @@ class P2PEngine;
 class BigListMgr : public BigListDb
 {
 public:
-	BigListMgr();
+	BigListMgr() = delete;
+	BigListMgr( P2PEngine& engine );
 	virtual ~BigListMgr() override;
 
 	RCODE						bigListMgrStartup( const char * pDbFileName );

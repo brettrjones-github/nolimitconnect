@@ -150,8 +150,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/EchoCancel/wav_header.h \
     $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32.h \
     $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32filesystem.h \
-    $$PWD/ptop_src/ptop_engine_src/FriendListMgr/FriendListMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/GroupListMgr/GroupListMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinCallbackInterface.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.h \
@@ -165,8 +163,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/HostSettingBase.h \
 	$$PWD/ptop_src/ptop_engine_src/HostMgr/JoinedEntry.h \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/RandomConnectEntry.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrBase/IdentListMgrBase.h \
-    $$PWD/ptop_src/ptop_engine_src/IgnoreListMgr/IgnoreListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Invite/Invite.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.h \
@@ -446,8 +446,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/EchoCancel/wav_header.cpp \
     $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32.cpp \
     $$PWD/ptop_src/ptop_engine_src/EchoCancel/win32filesystem.cpp \
-    $$PWD/ptop_src/ptop_engine_src/FriendListMgr/FriendListMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/GroupListMgr/GroupListMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.cpp \
@@ -461,8 +459,10 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/HostSettingBase.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostMgr/JoinedEntry.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/RandomConnectEntry.cpp \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrBase/IdentListMgrBase.cpp \
-    $$PWD/ptop_src/ptop_engine_src/IgnoreListMgr/IgnoreListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Invite/Invite.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.cpp \

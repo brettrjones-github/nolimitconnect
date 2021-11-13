@@ -571,8 +571,6 @@
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\FriendListMgr\FriendListMgr.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\GroupListMgr\GroupListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.cpp" />
@@ -585,8 +583,10 @@
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrBase\IdentListMgrBase.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\IgnoreListMgr\IgnoreListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Invite\Invite.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp" />
@@ -927,8 +927,6 @@
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\WebRtcTypeDefs.h" />
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32.h" />
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.h" />
-    <ClInclude Include="..\..\ptop_engine_src\FriendListMgr\FriendListMgr.h" />
-    <ClInclude Include="..\..\ptop_engine_src\GroupListMgr\GroupListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.h" />
@@ -942,8 +940,10 @@
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.h" />
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrBase\IdentListMgrBase.h" />
-    <ClInclude Include="..\..\ptop_engine_src\IgnoreListMgr\IgnoreListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Invite\Invite.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h" />

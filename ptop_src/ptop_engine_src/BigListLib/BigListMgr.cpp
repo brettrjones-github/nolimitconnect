@@ -36,8 +36,8 @@
 #endif //_MSC_VER
 
 //============================================================================
-BigListMgr::BigListMgr( )
-: BigListDb( *this )
+BigListMgr::BigListMgr( P2PEngine& engine )
+: BigListDb( engine, *this )
 {	
 }
 
@@ -77,7 +77,7 @@ RCODE BigListMgr::updateBigListDatabase( BigListInfo * poInfo, const char * netw
 		return rc;
 	}
 
-	if( GetPtoPEngine().shouldInfoBeInDatabase( poInfo ))
+	if( m_Engine.shouldInfoBeInDatabase( poInfo ))
 	{
 		// insert into database
 		rc = dbUpdateBigListInfo( poInfo, networkName );
@@ -92,7 +92,7 @@ RCODE BigListMgr::updateBigListDatabase( BigListInfo * poInfo, const char * netw
 }
 
 //============================================================================
-bool BigListMgr::getFriendships( 	VxGUID&		hisOnlineId,
+bool BigListMgr::getFriendships( 	VxGUID&			hisOnlineId,
 									EFriendState&	retMyFriendshipToHim,
 									EFriendState&	retHisFriendshipToMe )
 {

@@ -54,9 +54,10 @@ static void * BigListLoadThreadFunction( void * pvParam )
 
 
 //============================================================================
-BigListDb::BigListDb( BigListMgr& bigListMgr )
+BigListDb::BigListDb( P2PEngine& engine, BigListMgr& bigListMgr )
 : DbBase( "BigListDb" )
 , BigList()
+, m_Engine( engine )
 , m_BigListMgr( bigListMgr )
 , m_NetworkName( "" )
 , m_BigListDbInitialized( false )

@@ -26,7 +26,8 @@ class P2PEngine;
 class BigListDb : public DbBase, public BigList
 {
 public:
-	BigListDb( BigListMgr& bigListMgr );
+	BigListDb() = delete;
+	BigListDb( P2PEngine& engine, BigListMgr& bigListMgr );
 	virtual ~BigListDb() override = default;
 
 	bool						isBigListInitialized( void )			{ return m_BigListDbInitialized; }
@@ -64,6 +65,7 @@ protected:
 	RCODE						restoreBigListInfoFromBlob( uint8_t * pu8Data, int iDataLen, BigListInfo * poInfo, uint64_t lastSessionTime );
 
 	//=== vars ===//
+	P2PEngine&					m_Engine;
 	VxMutex						m_DbMutex;						// mutex for database access
 	VxThread					m_BigListLoadThread;			// thread to load nodes from database
 	BigListMgr&					m_BigListMgr;
