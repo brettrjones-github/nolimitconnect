@@ -197,6 +197,8 @@ QString  VxAppTheme::getResourceFullFileName( QString resourceName )
 void VxAppTheme::drawButton( QPushButton * button, QPainter& painter )
 {
     painter.save();
+    const QPalette& originalPallete = button->palette();
+    button->setPalette( getBasePalette() );
 	QRect drawAreaRect( BUTTON_BKG_PADDING, BUTTON_BKG_PADDING, button->width() - ( BUTTON_BKG_PADDING * 2 ), button->height() - ( BUTTON_BKG_PADDING * 2 ) );
 
 	painter.setRenderHint( QPainter::Antialiasing );
@@ -207,6 +209,7 @@ void VxAppTheme::drawButton( QPushButton * button, QPainter& painter )
 	painter.setPen( QPen( fgdColor, BUTTON_BORDER_WIDTH ) );
 	painter.setBrush( initBrush( bkgColor ) );
 	painter.drawRoundedRect( drawAreaRect, BUTTON_ROUNDING_RADIUS, BUTTON_ROUNDING_RADIUS );
+    button->setPalette( originalPallete );
     painter.restore();
 }
 

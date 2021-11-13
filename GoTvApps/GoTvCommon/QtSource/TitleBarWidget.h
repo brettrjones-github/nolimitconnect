@@ -95,8 +95,8 @@ public:
 	virtual void				setTopMenuButtonColor( QColor iconColor );
 	virtual void				setBackButtonColor( QColor iconColor );
 
-
 signals:
+	void						signalApplicationIconClicked( void );
 	void						signalPowerButtonClicked( void );
 	void						signalHomeButtonClicked( void );
 	void						signalMuteMicButtonClicked( bool muteMic );
@@ -114,6 +114,8 @@ signals:
 public slots:
 	virtual void				updateTitleBar( void );
 	virtual void				slotSystemReady( bool isReady );
+
+	virtual void				slotApplicationIconClicked( void );
 	virtual void				slotPowerButtonClicked( void );
 	virtual void				slotHomeButtonClicked( void );
     virtual void				slotMicrophonePeak( int peekVal0to32768 );

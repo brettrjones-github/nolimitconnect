@@ -71,10 +71,6 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	ui.m_GoTvButton->setUseTheme( false );
 	ui.m_GoTvButton->setProperty("NoLimitConnectIcon", true);
 	ui.m_GoTvButton->setAppIcon( eMyIconApp, parent );
-    if( parent )
-    {
-        connect( ui.m_GoTvButton, SIGNAL( signalAppIconSpecialClick() ), parent, SLOT( slotAppIconSpecialClick() ) );
-    }
 
 	setPowerButtonIcon();
 	setHomeButtonIcon();
@@ -106,6 +102,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     // will show when have cam frames signal
     enableVideoControls( false );
 
+    connect( ui.m_GoTvButton,           SIGNAL( clicked() ), this, SLOT( slotApplicationIconClicked() ) );
 
     connect( ui.m_PowerOffButton,       SIGNAL( clicked() ), this, SLOT( slotPowerButtonClicked() ) );
     connect( ui.m_HomeButton,           SIGNAL( clicked() ), this, SLOT( slotHomeButtonClicked() ) );
@@ -649,7 +646,7 @@ void TitleBarWidget::slotShareOfferListButtonClicked( void )
 //============================================================================
 void TitleBarWidget::slotTitleBarMenuButtonClicked( void )
 {
-    LogMsg( LOG_DEBUG, "slotTitleBarMenuButtonClicked" );
+    LogMsg( LOG_VERBOSE, "slotTitleBarMenuButtonClicked" );
     AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.getAppletMgr().launchApplet( eAppletPopupMenu, getTitleBarParentFrame() ) );
     if( popupMenu )
     {
@@ -753,4 +750,14 @@ void TitleBarWidget::checkTitleBarIconsFit( void )
         ui.m_MuteSpeakerButton->setVisible( true );
         ui.m_NetAvailStatusWidget->setVisible( true );
     }
+}
+
+//============================================================================
+void TitleBarWidget::slotApplicationIconClicked( void )
+{
+    LogMsg( LOG_VERBOSE, "slotApplicationIconClicked" );
+
+    // BRJ TODO slotApplicationIconClicked ? visit website ?
+
+    emit signalApplicationIconClicked();
 }

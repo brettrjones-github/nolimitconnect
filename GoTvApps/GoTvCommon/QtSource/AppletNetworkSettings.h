@@ -31,8 +31,6 @@ public:
 	virtual ~AppletNetworkSettings();
 
 protected slots:
-	void						slotNetworkSettingsSelectionChanged( int idx );
-
     void						slotExitButtonClick( void );
     void						slotGoToNetHostSettingsButtonClick( void );
     void						slotRandomPortButtonClick( void );
@@ -46,7 +44,7 @@ protected slots:
     void						onSaveButtonClick( void );
     void						onDeleteButtonClick( void );
     void						slotApplySettingsButtonClick( void );
-    void						onComboBoxSelectionChange( const QString& anchorSettingName );
+    void						onComboBoxSelectionChange( int );
     void						onComboBoxTextChanged( const QString & text );
 
     void                        slotShowNetworkHostInformation( void );

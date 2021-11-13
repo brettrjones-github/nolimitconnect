@@ -45,6 +45,25 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
 
     // opening a port in network router using upnp rarely works.. just make invisible for now
     ui.m_UseUpnpCheckBox->setVisible( false );
+    // using an specific network adapter ip for outgoing connections has some issues with vpn on some systems.. hide for not
+    ui.m_LclIpListComboBox->setVisible(false);
+    ui.m_LocalAdapterIpLabel->setVisible(false);
+    // hide features not yet available
+    if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
+    {
+        ui.m_DefaultChatRoomHostButton->setVisible( false );
+        ui.m_DefaultChatRoomHostUrlLabel->setVisible( false );
+        ui.m_DefaultChatRoomHostUrlEdit->setVisible( false );
+        ui.m_ChatRoomUrlInfoButton->setVisible( false );
+    }
+
+    if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
+    {
+        ui.m_RandomConnectButton->setVisible( false );
+        ui.m_RandomConnectUrlLabel->setVisible( false );
+        ui.m_RandomConnectUrlEdit->setVisible( false );
+        ui.m_RandomConnectUrlInfoButton->setVisible( false );
+    }
 
     ui.m_NetworkHostInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkHostButton->setIcon( eMyIconServiceHostNetwork );
@@ -65,7 +84,7 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     // probably could remove this button
     ui.m_ApplySettingsButton->setVisible( false );
 
-    updateDlgFromSettings(true);
+    updateDlgFromSettings( true );
 
     connectSignals();
 
@@ -113,15 +132,10 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_RandomConnectButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultGroupHostUrlInformation() ) );
     connect( ui.m_RandomConnectUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowDefaultGroupHostUrlInformation() ) );
 
-    connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( currentIndexChanged( const QString& ) ), this, SLOT( onComboBoxSelectionChange( const QString& ) ) );
+    connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( onComboBoxSelectionChange( int ) ) );
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( editTextChanged( const QString& ) ), this, SLOT( onComboBoxTextChanged( const QString& ) ) );
 
     connect( m_UpdateTimer, SIGNAL( timeout() ), this, SLOT( slotUpdateTimer() ) );
-}
-
-//============================================================================
-void AppletNetworkSettings::slotNetworkSettingsSelectionChanged( int idx )
-{
 }
 
 //============================================================================
@@ -180,6 +194,11 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
         NetHostSetting engineHostSetting;
         fillNetHostSettingFromEngine( engineHostSetting );
         populateDlgFromNetHostSetting( engineHostSetting );        
+    }
+
+    if( origSettings )
+    {
+        m_OriginalNetworkKey = ui.m_NetworkKeyEdit->text();
     }
 }
 
@@ -480,8 +499,9 @@ void AppletNetworkSettings::onComboBoxTextChanged( const QString & text )
 }
 
 //============================================================================
-void AppletNetworkSettings::onComboBoxSelectionChange( const QString& netSettingName )
+void AppletNetworkSettings::onComboBoxSelectionChange( int )
 {
+    QString netSettingName = ui.m_NetworkSettingsNameComboBox->currentText();
     AccountMgr& dataHelper = m_MyApp.getAccountMgr();
     NetHostSetting netSetting;
     if( dataHelper.getNetHostSettingByName( netSettingName.toUtf8(), netSetting ) )
@@ -728,12 +748,13 @@ bool AppletNetworkSettings::verifyNetworkKey( QString& keyVal )
         QMessageBox::warning( this, QObject::tr( "Network Key" ), QObject::tr( "Network Key must be at least 6 characters ( 8 or more characters recommended )." ) );
     }
 
-    if( keyVal != m_OriginalNetworkKey )
+    if( keyVal != m_OriginalNetworkKey && !m_OriginalNetworkKey.isEmpty() )
     {
         if( QMessageBox::Yes != QMessageBox::question( this, QObject::tr( "Network Key" ),
-            QObject::tr( "Are you sure you want to change the netowrk key?\n All users of your network will need to have the same key or cannot connect." ),
+            QObject::tr( "Are you sure you want to change the network key?\n All users of your network will need to have the same key or cannot connect." ),
             QMessageBox::Yes | QMessageBox::No ) )
         {
+            ui.m_NetworkKeyEdit->setText( m_OriginalNetworkKey );
             return false;
         }
     }

@@ -428,7 +428,7 @@
           <item>
            <widget class="QLabel" name="m_GroupHostUrlLabel">
             <property name="text">
-             <string>Default Group Host URL (Optional)</string>
+             <string>Default Group Host URL</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -675,7 +675,7 @@
            <item>
             <widget class="QRadioButton" name="AutoDetectProxyRadioButton">
              <property name="text">
-              <string>Use Connection Test Service To Test For Firewall ( recommended )</string>
+              <string>Use Connection Test Service To Test For Firewall (Recommended)</string>
              </property>
             </widget>
            </item>
@@ -763,9 +763,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="WirelessIpLabel">
+         <widget class="QLabel" name="m_LocalAdapterIpLabel">
           <property name="text">
-           <string>Local Network Adapter IP (recommend default)</string>
+           <string>Local Network Adapter IP (Recommend Default)</string>
           </property>
          </widget>
         </item>
