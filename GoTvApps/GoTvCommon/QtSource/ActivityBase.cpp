@@ -192,13 +192,13 @@ bool ActivityBase::isMessengerReady( void )
 //============================================================================
 bool ActivityBase::isMessagerFrame( void )
 {
-    return ( eAppletMessengerFrame == m_EAppletType );
+    return GuiHelpers::isMessagerFrame( this );
 }
 
 //============================================================================
 bool ActivityBase::isHomeFrame( void )
 {
-	return (eAppletHomeFrame == m_EAppletType || !isMessagerFrame());
+	return !GuiHelpers::isMessagerFrame( this );
 }
 
 //============================================================================

@@ -68,6 +68,8 @@ public:
     static bool                 isPluginAPrimaryService( EPluginType ePluginType );
     static bool                 getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginType> secondaryPlugins );
 
+    static bool                 isMessagerFrame( QWidget* curWidget );
+
     /// @brief get home or messenger topmost widget
     static QFrame *             getParentPageFrame( QWidget * curWidget );
     /// @brief messenger frame topmost widget

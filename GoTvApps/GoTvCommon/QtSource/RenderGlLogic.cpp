@@ -118,7 +118,7 @@ void RenderGlLogic::initRenderGlContext()
     m_ThreadGlContext->create();
     //m_ThreadGlContext->blockSignals( true );
 
-    m_RenderThreadSurface = new RenderGlOffScreenSurface( this, &m_RenderWidget, m_ThreadGlContext ); // BRJ geometry not set at this point nullptr, geometry().size() );
+    m_RenderThreadSurface = new RenderGlOffScreenSurface( this, &m_RenderWidget, m_ThreadGlContext ); // geometry not set at this point 
     m_RenderThreadSurface->setFormat( surfaceFormat );
     m_RenderThreadSurface->create();
 

@@ -163,7 +163,7 @@ public:
     void						setAppletUploads( AppletUploads* applet )               { m_AppletUploads = applet; }
     AppletUploads*		        getAppletUploads( void )                                { return m_AppletUploads; };
 
-	void						switchWindowFocus( QWidget * goTvButton );
+	void						switchWindowFocus( QWidget * appIconButton );
 
 	void						applySoundSettings( bool useDefaultsInsteadOfSettings = false );
 	void						playSound( ESndDef sndDef );

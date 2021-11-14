@@ -62,7 +62,7 @@ extern "C" {
 /** @cond OPUS_INTERNAL_DOC */
 /**Export control for opus functions */
 
-#define OPUS_EXPORT //BRJ GoTv Static Lib
+#define OPUS_EXPORT // Not defined because we build a Static Lib
 
 //#ifndef OPUS_EXPORT
 //# if defined(WIN32)

@@ -36,6 +36,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 , m_CamTimer(new QTimer(this))
 , m_MicrophonePeekTimer( new QTimer( this ) )
 {
+    //getMessengerParentFrame()->setVisible( true );
 	ui.setupUi( this );
 
     setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() + 4 );
@@ -762,4 +763,19 @@ void TitleBarWidget::slotApplicationIconClicked( void )
     {
         m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getTitleBarParentPage() );
     }
+
+    // for testing orientation on devices that do not have changing orientation
+    /*
+    static Qt::Orientation orientation{ Qt::Horizontal };
+    if( orientation == Qt::Horizontal )
+    {
+        orientation = Qt::Vertical;
+    }
+    else
+    {
+        orientation = Qt::Horizontal;
+    }
+
+    m_MyApp.getAppDisplay().setOrientation( orientation );
+    */
 }

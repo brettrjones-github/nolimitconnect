@@ -28,9 +28,11 @@ public:
 
     bool						isVerticalOrientation( void )                   { return ( m_Orientation == Qt::Orientation::Vertical ); }
 
+    void                        setOrientation( Qt::Orientation orientation );
     Qt::Orientation             getCurrentOrientation( void );
     Qt::Orientation             forceOrientationUpdate( void );
 
+    void                        initializeAppDisplay( void );
 signals:
     void						signalDeviceOrientationChanged( int qtOrientation );
 
@@ -38,8 +40,6 @@ protected slots:
     void						slotCheckOrientationTimer( void );
 
 protected:
-    void                        initializeAppDisplay( void );
-
     AppCommon &					m_MyApp;
     bool                        m_Initialized{ false };
     QTimer *                    m_OrientationCheckTimer{ nullptr };

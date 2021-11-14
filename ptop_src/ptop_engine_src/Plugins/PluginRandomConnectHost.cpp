@@ -67,7 +67,6 @@ void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& plu
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setHostType( eHostTypeRandomConnect );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    // m_PktHostAnnounce.setIsLoopback( true ); // BRJ temp for testing
     m_HostAnnounceBuilt = true;
     m_AnnMutex.unlock();
 }

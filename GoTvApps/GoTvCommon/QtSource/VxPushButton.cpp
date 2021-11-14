@@ -825,7 +825,6 @@ void VxPushButton::mousePressEvent( QMouseEvent * event )
 //============================================================================
 void VxPushButton::slotBlinkTimeout( void )
 {
-	//qDebug() << "VxPushButton::slotBlinkTimeout ";
 	m_BlinkState = m_BlinkState ? 0 : 1;
 	update();
 }
@@ -833,14 +832,7 @@ void VxPushButton::slotBlinkTimeout( void )
 //============================================================================
 void VxPushButton::mouseReleaseEvent( QMouseEvent * event )
 {
-	//qDebug() << "VxPushButton::mouseReleaseEvent " << event->pos();
 	m_InSlideLeftMode = false;
-    /* BRJ ???
-	if( !m_IsToggleButton )
-	{
-		setNotifyOnlineEnabled( false );
-	}
-    */
 
 	QPushButton::mouseReleaseEvent( event );
 }
@@ -848,7 +840,6 @@ void VxPushButton::mouseReleaseEvent( QMouseEvent * event )
 //============================================================================
 void VxPushButton::mouseMoveEvent( QMouseEvent * event )
 {
-	//qDebug() << "VxPushButton::mouseMoveEvent " << event->pos();
 	m_MouseCurPoint = event->pos();
 	QPushButton::mouseMoveEvent( event );
 	if( m_InSlideLeftMode )

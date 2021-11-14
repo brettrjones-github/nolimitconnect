@@ -501,9 +501,9 @@ bool AppCommon::getIsMaxScreenSize( bool isMessagerFrame )
 }
 
 //============================================================================
-void AppCommon::switchWindowFocus( QWidget * goTvButton )
+void AppCommon::switchWindowFocus( QWidget * appIconButton )
 {
-	m_HomePage.switchWindowFocus( goTvButton );
+	m_HomePage.switchWindowFocus( appIconButton );
 }
 
 //============================================================================

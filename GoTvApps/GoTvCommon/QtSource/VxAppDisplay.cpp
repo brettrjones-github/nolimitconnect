@@ -48,7 +48,7 @@ void VxAppDisplay::initializeAppDisplay( void )
         }
 
         connect( m_OrientationCheckTimer, SIGNAL(timeout()), this, SLOT(slotCheckOrientationTimer()) );
-        m_OrientationCheckTimer->setInterval( 1500 );
+        m_OrientationCheckTimer->setInterval( 2400 );
         m_OrientationCheckTimer->start();
         forceOrientationUpdate();
     }
@@ -63,6 +63,14 @@ void VxAppDisplay::slotCheckOrientationTimer( void )
         m_Orientation = curOrientation;
         emit signalDeviceOrientationChanged( (int) m_Orientation );
     }
+}
+
+//============================================================================
+void VxAppDisplay::setOrientation( Qt::Orientation orientation )
+{
+    m_Orientation = orientation; 
+
+    emit signalDeviceOrientationChanged( ( int )m_Orientation );
 }
 
 //============================================================================

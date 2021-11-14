@@ -619,6 +619,36 @@ bool GuiHelpers::getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginTy
 }
 
 //============================================================================
+bool GuiHelpers::isMessagerFrame( QWidget* curWidget )
+{
+    bool isMessengerFrame{ false };
+    
+    QFrame * pageFrame = nullptr;
+    QObject * curParent = curWidget;
+    QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+
+    while( curParent )
+    {
+        QString objName = curParent->objectName();
+        if( objName == messengerPageObjName )
+        {
+            isMessengerFrame = true;
+            break;
+        }
+
+
+        curParent = dynamic_cast<QObject *>( curParent->parent() );
+        if( !curParent )
+        {
+            break;
+        }
+    }
+
+    return isMessengerFrame;
+
+}
+
+//============================================================================
 QFrame * GuiHelpers::getParentPageFrame( QWidget * curWidget )
 {
     QFrame * pageFrame = nullptr;

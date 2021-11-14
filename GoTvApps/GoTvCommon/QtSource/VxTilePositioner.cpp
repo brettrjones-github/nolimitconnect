@@ -116,8 +116,6 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
             widget->update();
 #endif // defined(TARGET_OS_ANDROID)
 
-            //LogMsg( LOG_ERROR, "BRJ reposition tile %d width %d  pos %d %d\n", tilesDisplayed, tileWidthAfterPadding, iXPos, tileRowOffs );
-
 			tilesDisplayed++;
 			iXPos += optimumTileSize;
 		}

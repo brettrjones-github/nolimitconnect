@@ -36,7 +36,7 @@ public:
     void                        saveHomeWindowGeometry( void );
 
 	void						launchApplet( EApplet applet );
-	void						switchWindowFocus( QWidget * goTvButton );
+	void						switchWindowFocus( QWidget * appIconButton );
 
     void						setIsMaxScreenSize( bool isMessagerFrame, bool isFullSizeWindow );
     bool						getIsMaxScreenSize( bool isMessagerFrame );

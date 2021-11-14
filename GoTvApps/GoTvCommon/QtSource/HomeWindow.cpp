@@ -144,6 +144,7 @@ void HomeWindow::initializeHomePage()
 	connect( &m_AppDisplay, SIGNAL( signalDeviceOrientationChanged( int ) ), this, SLOT( slotDeviceOrientationChanged( int ) ) );
     connect( this, SIGNAL( signalMainWindowResized() ), &m_MyApp, SLOT( slotMainWindowResized() ) );
     connect( this, SIGNAL( signalMainWindowMoved() ), &m_MyApp, SLOT( slotMainWindowMoved() ) );
+    m_AppDisplay.initializeAppDisplay();
 	m_AppDisplay.forceOrientationUpdate();
 }
 
@@ -242,23 +243,23 @@ void HomeWindow::initializeGoTvDynamicLayout( void )
 }
 
 //============================================================================
-void HomeWindow::switchWindowFocus(  QWidget * goTvButton )
+void HomeWindow::switchWindowFocus(  QWidget * appIconButton )
 {
 	if( ( false == m_HomeFrameUpperLeft->isVisible() )
 		|| ( false == getMessengerParentFrame()->isVisible() ) )
 	{
 		// no window to switch to
-		goTvButton->nextInFocusChain();
+		appIconButton->nextInFocusChain();
 		return;
 	}
 	else
 	{
-		if( true == goTvButton->property( "FocusNext" ) )
+		if( true == appIconButton->property( "FocusNext" ) )
 		{
-			//LogMsg( LOG_DEBUG, "GoTv Button %d focus next true\n", goTvButton );
-			goTvButton->setProperty( "FocusNext", false );
-			goTvButton->nextInFocusChain();
-			goTvButton->clearFocus();
+			//LogMsg( LOG_DEBUG, "GoTv Button %d focus next true\n", appIconButton );
+			appIconButton->setProperty( "FocusNext", false );
+			appIconButton->nextInFocusChain();
+			appIconButton->clearFocus();
 			if( true == m_HomeFrameUpperLeft->property( "FrameFocus" ) )
 			{
 				m_HomeFrameUpperLeft->setProperty( "FrameFocus", false );
@@ -278,9 +279,8 @@ void HomeWindow::switchWindowFocus(  QWidget * goTvButton )
 		}
 		else
 		{
-			//LogMsg( LOG_DEBUG, "GoTv Button %d focus next false\n", goTvButton );
-			goTvButton->setProperty( "FocusNext", true );
-			goTvButton->nextInFocusChain();
+			appIconButton->setProperty( "FocusNext", true );
+			appIconButton->nextInFocusChain();
 		}
 	}
 }
@@ -329,7 +329,11 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
 
     LogMsg( LOG_ERROR, "HomeWindow::slotDeviceOrientationChanged %s", GuiParams::describeOrientation(m_Orientation).toUtf8().constData() );
 
-    getMessengerParentFrame()->setVisible( false );
+    bool isFrameBottomVisible = m_HomeFrameRight->isVisible();
+    bool isFrameRightVisible = m_HomeFrameBottom->isVisible();
+    m_HomeFrameRight->setVisible( false );
+    m_HomeFrameBottom->setVisible( false );
+
 	if( Qt::Vertical == m_Orientation )
 	{
 		m_MessengerPage->setNewParent( m_HomeFrameBottom );
@@ -339,11 +343,9 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
 		m_MessengerPage->setNewParent( m_HomeFrameRight );
 	}
 
-    if( ! getIsMaxScreenSize( false ) )
-    {
-        // if not home frame max size ( messenger is not visible )
-        getMessengerParentFrame()->setVisible( true );
-    }
+    // force back to normal 2 part not maximized config .. might be annoying for android users who constantly change device orientation
+    setIsMaxScreenSize( false, false );
+    setIsMaxScreenSize( true, false );
 
     updateAndroidGeomety();
 
@@ -434,7 +436,7 @@ void HomeWindow::createMessengerPage( void )
 {
 	m_MessengerPage = new MessengerPage( getMyApp(), m_HomeFrameRight );
 	connect( m_MessengerPage, SIGNAL( signalBackButtonClicked() ), this, SLOT( help() ) );
-    m_AppletMultiMessenger = new AppletMultiMessenger( getMyApp(),m_HomeFrameRight );
+    m_AppletMultiMessenger = new AppletMultiMessenger( getMyApp(), m_MessengerPage );
     m_MyApp.setAppletMultiMessenger( m_AppletMultiMessenger );
 }
 
