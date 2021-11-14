@@ -66,6 +66,10 @@ void AppletPeerChangeFriendship::setFriend( GuiUser * poFriend )
 	EFriendState myPermissionToHim = m_Friend->getMyFriendshipToHim();
 	setMyPermissionToHim( myPermissionToHim );
 	setCheckedPermission( myPermissionToHim );
+	ui.m_AgeTextLabel->setText( GuiParams::describeAge( m_Friend->getNetIdent().getAgeType() ) );
+	ui.m_ContentTextLabel->setText( GuiParams::describeContentRating( ( EContentRating)m_Friend->getNetIdent().getPreferredContent() ) );
+	ui.m_GenderTextLabel->setText( GuiParams::describeGender( ( EGenderType )m_Friend->getNetIdent().getGender() ) );
+	ui.m_LanguageTextLabel->setText( GuiParams::describeLanguage( ( ELanguageType )m_Friend->getNetIdent().getPrimaryLanguage() ) );
 }
 
 //============================================================================

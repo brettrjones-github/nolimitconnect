@@ -91,11 +91,11 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 , m_LastIconColor( COLOR_TRANSPARENT )
 , m_LastIconSize( 0, 0 )
 
-, m_NotifyIconJoinImage()
-, m_NotifyLastIconJoinColor( COLOR_TRANSPARENT)
-
 , m_NotifyIconOnlineImage()
 , m_NotifyLastIconOnlineColor( COLOR_TRANSPARENT)
+
+, m_NotifyIconJoinImage()
+, m_NotifyLastIconJoinColor( COLOR_TRANSPARENT)
 
 , m_NotifyIconOfferImage()
 , m_NotifyLastIconOfferColor( COLOR_TRANSPARENT)

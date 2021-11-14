@@ -96,7 +96,6 @@ public:
 	virtual void				setBackButtonColor( QColor iconColor );
 
 signals:
-	void						signalApplicationIconClicked( void );
 	void						signalPowerButtonClicked( void );
 	void						signalHomeButtonClicked( void );
 	void						signalMuteMicButtonClicked( bool muteMic );

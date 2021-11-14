@@ -25,7 +25,7 @@ public:
     virtual ~FriendListMgr() = default;
 
     bool                        isFriend( VxGUID& onlineId );
-    void                        updateIdent( VxGUID& onlineId, int64_t timestamp );
+    void                        updateIdent( VxGUID& onlineId, int64_t timestamp ) override;
     void                        removeIdent( VxGUID& onlineId ) override;
 
     std::vector<std::pair<VxGUID, int64_t>>& getIdentList() { return m_FriendIdentList; };

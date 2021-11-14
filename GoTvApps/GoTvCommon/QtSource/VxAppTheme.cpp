@@ -821,7 +821,7 @@ void VxAppTheme::updateWindowTheme( void )
 #else
     palette.setColor( QPalette::Mid, windowTextColor.dark() );                  // Mid
     palette.setColor( QPalette::Dark, windowTextColor.dark().darker() );        // Dark .. mostly for frame shadow and radio button outline
-#endif .. QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
     palette.setColor( QPalette::AlternateBase, QColor( COLOR_PINK_LIGHT ) );     // AlternateBase ( for alternating row color )
 

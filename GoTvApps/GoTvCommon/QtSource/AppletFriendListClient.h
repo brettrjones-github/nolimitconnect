@@ -65,6 +65,9 @@ private slots:
     //virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
     //virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
 
+    void                        onShowFriendList( void );
+    void                        onShowIgnoreList( void );
+
 protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;

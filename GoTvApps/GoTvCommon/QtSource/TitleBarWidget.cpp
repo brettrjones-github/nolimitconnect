@@ -757,7 +757,9 @@ void TitleBarWidget::slotApplicationIconClicked( void )
 {
     LogMsg( LOG_VERBOSE, "slotApplicationIconClicked" );
 
-    // BRJ TODO slotApplicationIconClicked ? visit website ?
-
-    emit signalApplicationIconClicked();
+    // bring up friends list unless is already active
+    if( !m_MyApp.getAppletMgr().findAppletDialog( eAppletFriendListClient ) )
+    {
+        m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getTitleBarParentPage() );
+    }
 }

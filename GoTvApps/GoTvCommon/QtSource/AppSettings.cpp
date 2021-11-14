@@ -93,7 +93,12 @@ bool AppSettings::getFeatureEnable( EAppFeatures appFeature )
 		return true;
 	}
 
-	if( eAppFeatureTheme == appFeature )
+	if( eAppFeatureLanguageChoice == appFeature )
+	{
+		return true;
+	}
+
+	if( eAppFeaturePreferredContent == appFeature )
 	{
 		return true;
 	}

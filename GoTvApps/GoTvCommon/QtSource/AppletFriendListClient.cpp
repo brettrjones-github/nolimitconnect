@@ -19,6 +19,7 @@
 #include "ActivityMessageBox.h"
 #include "GuiHostSession.h"
 #include "GuiParams.h"
+#include "GuiHelpers.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
@@ -38,6 +39,7 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     setHostType( eHostTypeGroup );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+    // GuiHelpers::fillFriendListType( )
     setSearchType( eSearchGroupHost );
 
     connectBarWidgets();
@@ -62,13 +64,15 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     connect( ui.m_FriendListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, FriendListItem* ) ) );
     connect( ui.m_FriendListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, FriendListItem* ) ) );
 
-    setStatusLabel( QObject::tr( "Search For Group Host To Join" ) );
+    // setStatusLabel( QObject::tr( "Search For Group Host To Join" ) );
     std::string lastHostSearchText;
     m_MyApp.getAppSettings().getLastHostSearchText( getSearchType(), lastHostSearchText ); 
     if( !lastHostSearchText.empty() )
     {
         //ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
     }
+
+    onShowFriendList();
 }
 
 //============================================================================
@@ -264,3 +268,31 @@ void AppletFriendListClient::clearStatus( void )
 //{
 //    onJointButtonClicked( hostSession );
 //}
+
+//============================================================================
+void AppletFriendListClient::onShowFriendList( void )
+{
+    std::vector<std::pair<VxGUID, int64_t>> friendList;
+    FriendListMgr& friendMgr = m_Engine.getFriendListMgr();
+    // make a copy to avoid pausing engine and to avoid threading issues
+    friendMgr.lockList();
+    friendList = friendMgr.getIdentList();
+    friendMgr.unlockList();
+    
+    // for each see if we already have that ident as gui user else request it
+
+
+}
+
+//============================================================================
+void AppletFriendListClient::onShowIgnoreList( void )
+{
+    std::vector<std::pair<VxGUID, int64_t>> ignoreList;
+    IgnoreListMgr& ignoreMgr = m_Engine.getIgnoreListMgr();
+    // make a copy to avoid pausing engine and to avoid threading issues
+    ignoreMgr.lockList();
+    ignoreList = ignoreMgr.getIdentList();
+    ignoreMgr.unlockList();
+
+    // for each see if we already have that ident as gui user else request it
+}

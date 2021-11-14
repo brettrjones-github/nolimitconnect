@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
+    <width>445</width>
     <height>686</height>
    </rect>
   </property>
@@ -20,6 +20,21 @@
    <string>User Identity</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="m_OnlineIdentityGroupBox">
      <property name="title">
@@ -120,14 +135,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="m_LanguageLabel">
           <property name="text">
-           <string>Preferred Content:</string>
+           <string>Language:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="m_ContentComboBox">
+         <widget class="QComboBox" name="m_LanguageComboBox">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -165,14 +180,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Primary Language:</string>
+           <string>Preferred Content:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="m_LanguageComboBox">
+         <widget class="QComboBox" name="m_ContentComboBox">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -205,6 +220,21 @@
       <string>Avatar Image</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
        <widget class="VxPushButton" name="m_EditAvatarImageButton">
         <property name="minimumSize">
@@ -252,6 +282,21 @@
       <string>About Me Page</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
        <widget class="VxPushButton" name="m_EditAboutMeButton">
         <property name="minimumSize">
@@ -299,6 +344,21 @@
       <string>Story Board Page (Blog)</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
        <widget class="VxPushButton" name="m_EditStoryboardButton">
         <property name="minimumSize">

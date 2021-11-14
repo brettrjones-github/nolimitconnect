@@ -36,7 +36,10 @@ enum EAppFeatures
     eAppFeatureChatRoom,
     eAppFeatureRandomConnect,
     eAppFeatureStoryboard,
+    eAppFeatureAboutMePage,
     eAppFeatureTheme,
+    eAppFeatureLanguageChoice,
+    eAppFeaturePreferredContent,
 
 	eMaxAppFeatures
 };

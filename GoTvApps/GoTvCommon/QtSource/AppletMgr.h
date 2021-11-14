@@ -37,6 +37,8 @@ public:
     ActivityBase *				launchApplet( EApplet applet, QWidget * parent = nullptr, int launchParam = 0, VxGUID assetId = VxGUID::nullVxGUID() );
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 
+	ActivityBase*				findAppletDialog( EApplet applet );
+
     RenderGlWidget *            getRenderConsumer( void );
 
 protected:
@@ -45,7 +47,6 @@ protected:
     void						removeApplet( ActivityBase * activity );
 
 	void						bringAppletToFront( ActivityBase * appletDialog );
-	ActivityBase *				findAppletDialog( EApplet applet );
     ActivityBase *              findAppletDialog( ActivityBase * activity );
 
     void                        makeMessengerFullSized( void );

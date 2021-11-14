@@ -65,6 +65,26 @@ void AppletPermissionList::initializePermissionList( void )
         if( GuiHelpers::isPluginAPrimaryService( ( EPluginType )i ) )
         {
             EPluginType pluginType = ( EPluginType )i;
+            if( pluginType == ePluginTypeHostChatRoom && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
+            {
+                continue;
+            }
+
+            if( pluginType == ePluginTypeHostRandomConnect && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
+            {
+                continue;
+            }
+
+            if( pluginType == ePluginTypeStoryboard && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
+            {
+                continue;
+            }
+
+            if( pluginType == ePluginTypeAboutMePage && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureAboutMePage ) )
+            {
+                continue;
+            }
+
             m_PluginList.push_back( pluginType );
             createPermissionItem( pluginType );
         }

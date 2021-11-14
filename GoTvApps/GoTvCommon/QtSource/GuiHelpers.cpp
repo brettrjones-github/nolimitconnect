@@ -1239,11 +1239,11 @@ uint8_t GuiHelpers::joinRequestToIndex( EJoinState joinState )
 }
 
 //============================================================================
-void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox *  age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QComboBox *  ageCombo, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
 {
-    if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
+    if( curWidget && ident && ageCombo && genderCombo && languageCombo && contentCombo )
     {
-        genderCombo->setCurrentIndex( ident->getAgeType() );
+        ageCombo->setCurrentIndex( ident->getAgeType() );
         genderCombo->setCurrentIndex( ident->getGender() );
         languageCombo->setCurrentIndex( ident->getPrimaryLanguage() );
         contentCombo->setCurrentIndex( ident->getPreferredContent() );

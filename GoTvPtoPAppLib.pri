@@ -718,7 +718,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityInformation.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityIsPortOpenTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStartupTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStatus.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkTest.ui \

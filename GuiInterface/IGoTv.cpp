@@ -246,7 +246,7 @@ void IGoTv::createUserDirs() const
         if( !CDirectory::RemoveRecursive( archiveCachePath ) )
             CLog::Log( LOGWARNING, "Failed to remove the archive cache at %s", archiveCachePath.c_str() );
     CDirectory::Create( archiveCachePath );
-#endif ENABLE_KODI
+#endif // ENABLE_KODI
 }
 
 //============================================================================

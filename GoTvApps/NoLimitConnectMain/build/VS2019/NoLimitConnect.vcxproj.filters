@@ -2176,9 +2176,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityMessageBox.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkSettings.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStartupTest.ui">
       <Filter>Form Files</Filter>
     </QtUic>

@@ -826,7 +826,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityIsPortOpenTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityMessageBox.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkSettings.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStartupTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkStatus.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkTest.ui" />

@@ -448,7 +448,6 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
                 QPalette palette( option->palette );
                 QColor checkColor = widget->isEnabled() ? palette.buttonText().color() : palette.mid().color();
-                QColor bkgColor = palette.window().color();
                 m_MyApp.getMyIcons().drawIcon( eMyIconCheckMark, painter, checkRect, checkColor );
 
                 painter->restore();
@@ -836,25 +835,21 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
             painter->setBrush( handleBrush );
 
-            int thickness = pixelMetric( PM_SliderControlThickness, option, widget ); // total slider thickness
-            int len = pixelMetric( PM_SliderLength, option, widget );           // total length of slider
-            int grooveLen = pixelMetric( PM_SliderSpaceAvailable, option, widget );   // available space for slider to move
-            int ticks = slider->tickPosition; // ticks not supoorted
+            // int thickness = pixelMetric( PM_SliderControlThickness, option, widget ); // total slider thickness
+            // int len = pixelMetric( PM_SliderLength, option, widget );           // total length of slider
+            // int grooveLen = pixelMetric( PM_SliderSpaceAvailable, option, widget );   // available space for slider to move
+            // int ticks = slider->tickPosition; // ticks not supoorted
 
             QRect grooveRect = subControlRect( CC_Slider, option, SC_SliderGroove, widget );
             QRect handleRect = subControlRect( CC_Slider, option, SC_SliderHandle, widget );
 
             if( grooveRect.isValid() )
             {
-                QColor groveColor( COLOR_PINK_LIGHT );
-                QColor handleColor( COLOR_ORANGE );
                 qDrawWinPanel( painter, grooveRect.x(), grooveRect.y(), grooveRect.width(), 8, option->palette, true, &handleGroove );
             }
 
             if( handleRect.isValid() )
             {
-                QColor groveColor( COLOR_PINK_LIGHT );
-                QColor handleColor( COLOR_ORANGE );
                 qDrawWinPanel( painter, handleRect.x(), handleRect.y(), handleRect.width(), handleRect.height(), option->palette, true, &handleBrush );
             }
 

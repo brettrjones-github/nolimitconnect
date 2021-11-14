@@ -11,7 +11,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "ActivitySnapShot.h"
 #include "ActivityCreateAccount.h"
 #include "AppletMgr.h"
@@ -83,6 +83,15 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
     connect( ui.m_AccountComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotAccountSelectionChanged( int ) ) );
 
     resetComboIdxToOriginalAccount();
+    if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureAboutMePage ) )
+    {
+        ui.m_AboutMeGroupBox->setVisible( false );
+    }
+
+    if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
+    {
+        ui.m_StoryBoardGroupBox->setVisible( false );
+    }
 
 	m_MyApp.activityStateChange( this, true );
 }
