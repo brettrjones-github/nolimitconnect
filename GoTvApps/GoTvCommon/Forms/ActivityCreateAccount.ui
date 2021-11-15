@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>298</width>
-    <height>400</height>
+    <width>234</width>
+    <height>291</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,17 +26,20 @@
    <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
    <property name="leftMargin">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="rightMargin">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>5</number>
+    <number>2</number>
    </property>
    <item>
     <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
@@ -62,6 +65,12 @@
    </item>
    <item>
     <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>No Registration Required.</string>
      </property>
@@ -69,13 +78,25 @@
    </item>
    <item>
     <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
-      <string>Just Enter A Online User Name and Log In!</string>
+      <string>Enter A User Name and Log In!</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="m_UserNameLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>User Name: (4 to 27 characters)</string>
      </property>
@@ -96,6 +117,12 @@
    </item>
    <item>
     <widget class="QLabel" name="m_MoodMessageLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Mood Message: (Up to 31 characters)</string>
      </property>
@@ -119,17 +146,26 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <property name="spacing">
+      <number>1</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Age:</string>
+        <string>Age</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QComboBox" name="m_AgeComboBox">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -138,8 +174,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Preferred Content:</string>
+        <string>Content</string>
        </property>
       </widget>
      </item>
@@ -160,17 +202,26 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>1</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Gender:</string>
+        <string>Gender</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QComboBox" name="m_GenderComboBox">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -179,8 +230,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Primary Language:</string>
+        <string>Language</string>
        </property>
       </widget>
      </item>
@@ -198,6 +255,12 @@
    </item>
    <item>
     <widget class="QPushButton" name="m_LoginButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Login!</string>
      </property>
@@ -226,7 +289,7 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>30</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>

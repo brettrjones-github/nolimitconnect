@@ -39,20 +39,41 @@ AppletMultiMessenger::AppletMultiMessenger(	AppCommon& app, QWidget* parent )
 
 	ui.m_UserListWidget->setAppletType( eAppletMultiMessenger );
 
-    ui.m_HostViewFrame->setFixedHeight( GuiParams::getButtonSize().height() + 4 );
+    ui.m_HostViewFrame->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() + 4 );
+	ui.m_FriendsView->setFixedSize( eButtonSizeSmall );
     ui.m_FriendsView->setIcon( eMyIconEyeFriends );
+	ui.m_GroupHosts->setFixedSize( eButtonSizeSmall );
     ui.m_GroupHosts->setIcon( eMyIconEyeGroup );
+	ui.m_ChatRoomHosts->setFixedSize(eButtonSizeSmall);
     ui.m_ChatRoomHosts->setIcon( eMyIconEyeChatRoom );
+	ui.m_RandomConnectHosts->setFixedSize( eButtonSizeSmall );
     ui.m_RandomConnectHosts->setIcon( eMyIconEyeRandomConnect );
+	ui.m_EverybodyView->setFixedSize( eButtonSizeSmall );
     ui.m_EverybodyView->setIcon( eMyIconEyeAll );
+	if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
+	{
+		ui.m_ChatRoomHosts->setVisible( false );
+	}
 
+	if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
+	{
+		ui.m_RandomConnectHosts->setVisible( false );
+	}
+
+	ui.m_EyeHosts->setFixedSize( eButtonSizeSmall );
     ui.m_EyeHosts->setIcon( eMyIconEyeShow );
+	ui.m_EyeSession->setFixedSize( eButtonSizeSmall );
     ui.m_EyeSession->setIcon( eMyIconEyeShow );
 
+	ui.m_VideoChatButton->setFixedSize( eButtonSizeSmall );
     ui.m_VideoChatButton->setIcon( eMyIconVideoPhoneNormal );
+	ui.m_VoipButton->setFixedSize( eButtonSizeSmall );
     ui.m_VoipButton->setIcon( eMyIconVoicePhoneNormal );
+	ui.m_TrueOrDareButton->setFixedSize( eButtonSizeSmall );
     ui.m_TrueOrDareButton->setIcon( eMyIconTruthOrDareNormal );
+	ui.m_OfferFileButton->setFixedSize( eButtonSizeSmall );
     ui.m_OfferFileButton->setIcon( eMyIconFileServer );
+	ui.m_OptionsButton->setFixedSize( eButtonSizeSmall );
     ui.m_OptionsButton->setIcon( eMyIconSettingsGear );
 
     m_OffersFrame			= ui.m_OffersFrame;
