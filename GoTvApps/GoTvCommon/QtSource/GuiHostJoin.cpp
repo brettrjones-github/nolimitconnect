@@ -61,6 +61,8 @@ bool GuiHostJoin::setOnlineStatus( bool isOnline )
             return true;
         }
     }
+
+    return false;
 }
 
 //============================================================================

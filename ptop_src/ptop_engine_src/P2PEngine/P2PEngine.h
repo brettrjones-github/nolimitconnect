@@ -85,6 +85,9 @@ class P2PEngine :	public IFromGui,
                     public IAudioCallbacks
 {
 public:
+    P2PEngine() = delete; // don't allow default constructor
+    P2PEngine( const P2PEngine& ) = delete; // don't allow copy constructor
+
 	P2PEngine( VxPeerMgr& peerMgr );
 	virtual ~P2PEngine() override;
 
@@ -742,10 +745,6 @@ protected:
 	PktImAliveReq				m_PktImAliveReq;
 
     VxThread                    m_TimerThread;
-
-private:
-	P2PEngine() = delete; // don't allow default constructor
-	P2PEngine( const P2PEngine& ) = delete; // don't allow copy constructor
 };
 
 extern P2PEngine& GetPtoPEngine();
