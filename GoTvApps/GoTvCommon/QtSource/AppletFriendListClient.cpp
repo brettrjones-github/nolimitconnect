@@ -72,7 +72,16 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
         //ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
     }
 
+    m_MyApp.activityStateChange( this, true );
+    m_UserMgr.wantGuiUserMggGuiUserUpdateCallbacks( this, true );
     onShowFriendList();
+}
+
+//============================================================================
+AppletFriendListClient::~AppletFriendListClient()
+{
+    m_UserMgr.wantGuiUserMggGuiUserUpdateCallbacks( this, false );
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
@@ -280,8 +289,15 @@ void AppletFriendListClient::onShowFriendList( void )
     friendMgr.unlockList();
     
     // for each see if we already have that ident as gui user else request it
+    for( auto identTime : friendList )
+    {
+        GuiUser* guiUser = m_MyApp.getUserMgr().getOrQueryUser( identTime.first );
+        if( guiUser->isAdmin() || guiUser->isFriend() )
+        {
+            
+        }
 
-
+    }
 }
 
 //============================================================================
@@ -295,4 +311,22 @@ void AppletFriendListClient::onShowIgnoreList( void )
     ignoreMgr.unlockList();
 
     // for each see if we already have that ident as gui user else request it
+}
+
+//============================================================================
+void AppletFriendListClient::callbackOnUserAdded( GuiUser* guiUser )
+{
+
+}
+
+//============================================================================
+void AppletFriendListClient::callbackOnUserUpdated( GuiUser* guiUser )
+{
+
+}
+
+//============================================================================
+void AppletFriendListClient::callbackOnUserRemoved( VxGUID& onlineId )
+{
+
 }

@@ -21,6 +21,7 @@ class IToGui;
 class P2PEngine;
 class PktAnnList;
 class PktAnnounce;
+class VxNetIdent;
 
 enum EPktAnnUpdateType
 {
@@ -64,6 +65,8 @@ public:
 												bool bIncludeThisNode = false );
 
 	void						LimitListSize( void );
+
+	bool						queryIdent( VxGUID& onlineId, VxNetIdent& netIdent );
 
 protected:
 

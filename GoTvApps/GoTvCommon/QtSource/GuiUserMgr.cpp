@@ -15,6 +15,10 @@
 
 #include "GuiUserMgr.h"
 #include "AppCommon.h"
+#include "GuiUserMgrGuiUserUpdateClient.h"
+#include "GuiUserMgrGuiUserUpdateInterface.h"
+
+#include <CoreLib/VxGlobals.h>
 
 //============================================================================
 GuiUserMgr::GuiUserMgr( AppCommon& app )
@@ -211,6 +215,22 @@ GuiUser* GuiUserMgr::getUser( VxGUID& onlineId )
 }
 
 //============================================================================
+GuiUser* GuiUserMgr::getOrQueryUser( VxGUID& onlineId )
+{
+    GuiUser* guiUser = getUser( onlineId );
+    if( !guiUser )
+    {
+        VxNetIdent userIdent;
+        if( m_MyApp.getEngine().getBigListMgr().queryIdent( onlineId, userIdent ) )
+        {
+            guiUser = updateUser( &userIdent );
+        }
+    }
+
+    return guiUser;
+}
+
+//============================================================================
 GuiUser* GuiUserMgr::updateUser( VxNetIdent* hisIdent, EHostType hostType )
 {
     if( !hisIdent )
@@ -275,11 +295,26 @@ void GuiUserMgr::setUserOffline( VxGUID& onlineId )
 }
 
 //============================================================================
-void GuiUserMgr::onUserAdded( GuiUser* user )
+void GuiUserMgr::onUserAdded( GuiUser* guiUser )
 {
-    if( isMessengerReady() )
+    if( isMessengerReady() && guiUser )
     {
-        emit signalUserAdded( user );
+        emit signalUserAdded( guiUser );
+        guiUserUpdateClientsLock();
+        for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+        {
+            GuiUserMgrGuiUserUpdateClient& client = *iter;
+            if( client.m_Callback )
+            {
+                client.m_Callback->callbackOnUserAdded( guiUser );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "GuiUserMgr::onUserAdded invalid callback" );
+            }
+        }
+
+        guiUserUpdateClientsUnlock();
     }
 }
 
@@ -289,15 +324,31 @@ void GuiUserMgr::onUserRemoved( VxGUID& onlineId )
     if( isMessengerReady() )
     {
         emit signalUserRemoved( onlineId );
+        guiUserUpdateClientsLock();
+        for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+        {
+            GuiUserMgrGuiUserUpdateClient& client = *iter;
+            if( client.m_Callback )
+            {
+                client.m_Callback->callbackOnUserRemoved( onlineId );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "GuiUserMgr::onUserRemoved invalid callback" );
+            }
+        }
+
+        guiUserUpdateClientsUnlock();
     }
 }
 
 //============================================================================
-void GuiUserMgr::onUserOnlineStatusChange( GuiUser* user, bool isOnline )
+void GuiUserMgr::onUserOnlineStatusChange( GuiUser* user )
 {
     if( isMessengerReady() )
     {
-        emit signalUserOnlineStatus( user, isOnline );
+        emit signalUserOnlineStatusChange( user );
+        sendUserUpdatedToCallbacks( user );
     }
 }
 
@@ -307,6 +358,7 @@ void GuiUserMgr::onUserUpdated( GuiUser* user )
     if( isMessengerReady() )
     {
         emit signalUserUpdated( user );
+        sendUserUpdatedToCallbacks( user );
     }
 }
 
@@ -316,5 +368,113 @@ void GuiUserMgr::onMyIdentUpdated( GuiUser* user )
     if( isMessengerReady() )
     {
         emit signalMyIdentUpdated( user );
+    }
+}
+
+//============================================================================
+void GuiUserMgr::guiUserUpdateClientsLock( void )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    m_GuiUserUpdateClientMutex.lock();
+}
+
+//============================================================================
+void GuiUserMgr::guiUserUpdateClientsUnlock( void )
+{
+    m_GuiUserUpdateClientMutex.unlock();
+}
+
+//============================================================================
+void GuiUserMgr::wantGuiUserMggGuiUserUpdateCallbacks( GuiUserMgrGuiUserUpdateInterface* callback, bool wantCallback )
+{
+    static bool userCallbackShutdownComplete = false;
+    if( VxIsAppShuttingDown() )
+    {
+        if( userCallbackShutdownComplete )
+        {
+            return;
+        }
+
+        userCallbackShutdownComplete = true;
+        clearGuiUserUpdateClientList();
+        return;
+    }
+
+    guiUserUpdateClientsLock();
+
+    if( wantCallback )
+    {
+        for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+        {
+            GuiUserMgrGuiUserUpdateClient& client = *iter;
+            if( client.m_Callback == callback )
+            {
+                LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiUserUpdateCallbacks because already in list" );
+                guiUserUpdateClientsUnlock();
+                return;
+            }
+        }
+
+        GuiUserMgrGuiUserUpdateClient newClient( callback );
+        m_GuiUserUpdateClientList.push_back( newClient );
+        guiUserUpdateClientsUnlock();
+        return;
+    }
+
+    for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+    {
+        GuiUserMgrGuiUserUpdateClient& client = *iter;
+        if( client.m_Callback == callback )
+        {
+            m_GuiUserUpdateClientList.erase( iter );
+            guiUserUpdateClientsUnlock();
+            return;
+        }
+    }
+
+    LogMsg( LOG_INFO, "WARNING. ToGuiUserUpdateClient remove not found in list" );
+    guiUserUpdateClientsUnlock();
+    return;
+}
+
+//============================================================================
+void GuiUserMgr::clearGuiUserUpdateClientList( void )
+{
+    if( m_GuiUserUpdateClientList.size() )
+    {
+        guiUserUpdateClientsLock();
+        m_GuiUserUpdateClientList.clear();
+        guiUserUpdateClientsUnlock();
+    }
+}
+
+//============================================================================
+void GuiUserMgr::sendUserUpdatedToCallbacks( GuiUser* guiUser )
+{
+    if( guiUser )
+    {
+        guiUserUpdateClientsLock();
+        for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+        {
+            GuiUserMgrGuiUserUpdateClient& client = *iter;
+            if( client.m_Callback )
+            {
+                client.m_Callback->callbackOnUserUpdated( guiUser );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "GuiUserMgr::sendUserUpdatedToCallbacks invalid callback" );
+            }
+        }
+
+        guiUserUpdateClientsUnlock();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiUserMgr::sendUserUpdatedToCallbacks invalid guiUser" );
     }
 }

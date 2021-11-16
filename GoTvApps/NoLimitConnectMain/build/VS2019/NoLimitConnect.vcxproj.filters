@@ -2130,6 +2130,12 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserMgrGuiUserUpdateInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserMgrGuiUserUpdateClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="..\..\..\GoTvCommon\NoLimitConnect.qrc">

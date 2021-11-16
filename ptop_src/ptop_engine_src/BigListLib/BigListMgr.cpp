@@ -375,3 +375,25 @@ void BigListMgr::LimitListSize( void )
 		}
 	}
 }
+
+//============================================================================
+bool BigListMgr::queryIdent( VxGUID& onlineId, VxNetIdent& netIdent )
+{
+	bool foundIdent = false;
+	if( onlineId.isVxGUIDValid() )
+	{
+		BigListAutoLock bigListAutoLock( *this );
+		auto iter = m_BigList.find( onlineId );
+		if( iter != m_BigList.end() )
+		{
+			BigListInfo* bigListInfo = iter->second;
+			if( bigListInfo )
+			{
+				netIdent = *bigListInfo;
+				foundIdent = true;
+			}
+		}
+	}
+
+	return foundIdent;
+}

@@ -13,14 +13,16 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ToGuiUserUpdateInterface.h"
 #include "GuiUser.h"
+#include "GuiUserMgrGuiUserUpdateClient.h"
+#include "ToGuiUserUpdateInterface.h"
 
 #include <CoreLib/VxMutex.h>
 
 #include <QObject>
 
 class AppCommon;
+class GuiUserMgrGuiUserUpdateInterface;
 
 class GuiUserMgr : public QObject, public ToGuiUserUpdateInterface
 {
@@ -59,22 +61,26 @@ public:
     void                        onUserAdded( GuiUser* user );
     void                        onUserRemoved( VxGUID& onlineId );
     void                        onUserUpdated( GuiUser* user );
-    void                        onUserOnlineStatusChange( GuiUser* user, bool isOnline );
+    void                        onUserOnlineStatusChange( GuiUser* user );
     void                        onMyIdentUpdated( GuiUser* user );
 
     GuiUser*                    getUser( VxGUID& onlineId );
+    GuiUser*                    getOrQueryUser( VxGUID& onlineId );
+    
     std::map<VxGUID, GuiUser*>& getUserList( void )             { return m_UserList; }
 
     GuiUser*                    updateMyIdent( VxNetIdent* myIdent );
     GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
-signals:
-    void				        signalMyIdentUpdated( GuiUser* user ); 
+    void                        wantGuiUserMggGuiUserUpdateCallbacks( GuiUserMgrGuiUserUpdateInterface* callback, bool wantCallback );
 
-    void				        signalUserAdded( GuiUser* user ); 
+signals:
+    void				        signalMyIdentUpdated( GuiUser* guiUser );
+
+    void				        signalUserAdded( GuiUser* guiUser ); 
     void				        signalUserRemoved( VxGUID onlineId ); 
-    void                        signalUserUpdated( GuiUser* user );
-    void                        signalUserOnlineStatus( GuiUser* user, bool isOnline );
+    void                        signalUserUpdated( GuiUser* guiUser );
+    void                        signalUserOnlineStatusChange( GuiUser* user);
 
     void                        signalInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
     void                        signalInternalUpdateMyIdent( VxNetIdent* netIdent );
@@ -90,10 +96,20 @@ private slots:
 protected:
     void                        removeUser( VxGUID& onlineId );
     GuiUser*                    findUser( VxGUID& onlineId );
+
+    void                        guiUserUpdateClientsLock( void );
+    void                        guiUserUpdateClientsUnlock( void );
+    void                        clearGuiUserUpdateClientList( void );
+
+    void                        sendUserUpdatedToCallbacks( GuiUser* guiUser );
     
     AppCommon&                  m_MyApp;
+    VxMutex                     m_GuiUserUpdateClientMutex;
+    std::vector<GuiUserMgrGuiUserUpdateClient> m_GuiUserUpdateClientList;
+
     // map of online id to GuiUser
     std::map<VxGUID, GuiUser*>  m_UserList;
     GuiUser*                    m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
+
 };

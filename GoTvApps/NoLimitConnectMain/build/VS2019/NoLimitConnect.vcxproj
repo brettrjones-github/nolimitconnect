@@ -528,6 +528,8 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoin.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinList.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserJoinSession.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserMgrGuiUserUpdateClient.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserMgrGuiUserUpdateInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserSessionBase.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\HelpBrowser.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HostJoinRequestListItem.h" />

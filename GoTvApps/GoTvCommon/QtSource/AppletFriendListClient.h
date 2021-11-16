@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "AppletClientBase.h"
+#include "GuiUserMgrGuiUserUpdateInterface.h"
 
 #include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
@@ -27,13 +28,13 @@
 class VxNetIdent;
 class GuiHostSession;
 
-class AppletFriendListClient : public AppletClientBase
+class AppletFriendListClient : public AppletClientBase, public GuiUserMgrGuiUserUpdateInterface
 {
 	Q_OBJECT
 public:
 	AppletFriendListClient(	AppCommon&		    app, 
 							QWidget *			parent = NULL );
-	virtual ~AppletFriendListClient() = default;
+	virtual ~AppletFriendListClient() override;
 
     void                        infoMsg( const char * infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
@@ -69,6 +70,10 @@ private slots:
     void                        onShowIgnoreList( void );
 
 protected:
+    virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
+    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
+    virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override;
+
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
 

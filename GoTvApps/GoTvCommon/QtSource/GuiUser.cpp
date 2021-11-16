@@ -43,7 +43,7 @@ bool GuiUser::setOnlineStatus( bool isOnline )
 {
     if( GuiUserBase::setOnlineStatus( isOnline ) )
     {
-        m_UserMgr.onUserOnlineStatusChange( this, m_IsOnline );
+        m_UserMgr.onUserOnlineStatusChange( this );
         return true;
     }
 
