@@ -313,5 +313,6 @@
         <file>Resources/invite-accept.svg</file>
         <file>Resources/invite-create.svg</file>
         <file>Resources/notify-in-group.svg</file>
+        <file>Resources/friend-broadcast.svg</file>
     </qresource>
 </RCC>

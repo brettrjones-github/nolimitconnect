@@ -10,6 +10,16 @@ Instructions to create a virtual box Linux Mint 19.2 Image for NoLimitConnect de
 	c.) exit qt, restart virtual box with 3d acceleration turned on.
 4.) This issue seems to have been fixed in in the Mint 19.2 version and latest Qt tools
 
+=== after install you might need to give user write access to files if they were installed as root ===
+cd ~/nolimitdev
+sudo chown -hR nolimit *
+sudo chgrp -hR nolimit *
+cd ~/Qt
+sudo chown -hR nolimit *
+sudo chgrp -hR nolimit *
+can verify change with ll -a
+
+
 === setup linux mint ===
 
 1.) Download linux mint 20.2 - 64 Bit ( cannot use 32 Bit because of android build requirements )

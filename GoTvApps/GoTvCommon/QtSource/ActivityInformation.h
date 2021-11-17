@@ -32,6 +32,10 @@ enum EInfoType
     eInfoTypeDefaultChatRoomHostUrl,
     eInfoTypeNetworkSettingsInvite,
 
+    eInfoTypeFriendsList,
+    eInfoTypeIgnoredList,
+    eInfoTypeNearbyList,
+
     eMaxInfoType // must be last
 };
 
@@ -84,4 +88,8 @@ protected:
     static QString              m_DefaultGroupHostUrl;
     static QString              m_DefaultChatRoomHostUrl;
     static QString              m_NetworkSettingsInvite;
+
+    static QString              m_FriendList;
+    static QString              m_IgnoredList;
+    static QString              m_NearbyList;
 };

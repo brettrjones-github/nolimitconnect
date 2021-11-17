@@ -141,6 +141,16 @@ enum EContentCatagory
     eMaxContentCatagory
 };
 
+enum EFriendListType
+{
+    eFriendListTypeUnknown,
+    eFriendListTypeFriend,
+    eFriendListTypeIgnore,
+    eFriendListTypeNearby,
+
+    eMaxShowFriendType
+};
+
 //! \public Enumeration of friendship type. NOTE: also used as plugin permission type
 enum EFriendState
 {

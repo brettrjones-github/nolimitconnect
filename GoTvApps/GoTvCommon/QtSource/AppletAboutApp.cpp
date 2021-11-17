@@ -36,8 +36,6 @@ AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
     ui.m_AppNameLabel->setText( VxGetApplicationTitle() );
     
-
-
 	m_MyApp.activityStateChange( this, true );
 
     connect( ui.gotoWebsiteButton, SIGNAL( clicked() ), this, SLOT( gotoWebsite() ) );

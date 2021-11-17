@@ -53,6 +53,7 @@ void NetAvailStatusWidget::paintEvent( QPaintEvent* ev )
 {
     QPainter painter( this );
     painter.save();
+    painter.setRenderHint( QPainter::Antialiasing, true );
     drawNetBars( painter );
     painter.restore();
     painter.end();
@@ -77,23 +78,25 @@ void NetAvailStatusWidget::drawNetBars( QPainter& painter )
 //============================================================================
 void NetAvailStatusWidget::drawNetBar( QPainter& painter, QRect& widgetRect, int barNum )
 {
+    const int gapBetweenBars = 1;
+    const int margin = 1;
     int totalBarCnt = ( int )(eMaxNetAvailStatus - 1);
-    int marginBetweenBars = 1;
-    int margin = 3;
-    if( ( widgetRect.width() > margin * 2 ) && ( widgetRect.height() > margin * 2 ) )
+    int barPlusGapWidth = ( widgetRect.width() - margin * 2 ) / totalBarCnt;
+    int barWidth = barPlusGapWidth - gapBetweenBars;
+
+    if( barWidth >= 1 && ( widgetRect.width() > margin * 2 ) && ( widgetRect.height() > margin * 2 ) )
     {
         QRect contentRect;
         contentRect.setCoords( widgetRect.left() + margin, widgetRect.top() + margin, widgetRect.right() - margin, widgetRect.bottom() -  margin );
-        if( ( totalBarCnt * marginBetweenBars < contentRect.width() ) &&
-            ( ( totalBarCnt + 1 ) * marginBetweenBars < contentRect.height() ) )
+        if( ( totalBarCnt * gapBetweenBars < contentRect.width() ) &&
+            ( ( totalBarCnt + 1 ) * gapBetweenBars < contentRect.height() ) )
         {
-            int barWidth = contentRect.width() / totalBarCnt;
             int barSegHeight = contentRect.height() / totalBarCnt;
             QColor barColor = determineBarColor( barNum );
-            int leftPos = contentRect.left() + barNum * barWidth;
+            int leftPos = contentRect.left() + barNum * barPlusGapWidth;
             int topPos = contentRect.bottom() - ( ( barNum + 1 ) * barSegHeight );
 
-            QRect barRect( leftPos, topPos, barWidth - marginBetweenBars, ( ( barNum + 1 ) * barSegHeight ) );
+            QRect barRect( leftPos, topPos, barWidth, ( ( barNum + 1 ) * barSegHeight ) );
 
             painter.fillRect( barRect, barColor );
         }

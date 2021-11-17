@@ -93,6 +93,8 @@ public:
     static QString				describeOfferType( EOfferType offerType );
     static QString				describeOrientation( Qt::Orientation qtOrientation );
 
+    static QString              describeFriendListType( EFriendListType showFriendType );
+
     static QString              describeStatus( EHostAnnounceStatus hostStatus );
     static QString              describeStatus( EHostJoinStatus hostStatus );
     static QString              describeStatus( EHostSearchStatus hostStatus );

@@ -52,6 +52,9 @@ enum EMyIcons
 	eMyIconAnonymous,
 	eMyIconIgnored,
 
+	eMyIconFriendBroadcast,
+	eMyIconFriendJoined,
+
     eMyIconClientChatRoom,
     eMyIconClientGroup,
     eMyIconClientRandomConnect,
@@ -376,7 +379,6 @@ enum EMyIcons
     eMyIconOfferVideoChat,
     eMyIconOfferVoicePhone,
 
-	eMyIconFriendJoined,
 	eMyIconPersonAdd,
 	eMyIconPersonsOfferList,
 	eMyIconGroupJoined,

@@ -44,6 +44,7 @@ public:
 	//! update friend in list
 	void						updateFriend( GuiUser * netIdent, bool sessionTimeChange = false );
 	void						removeFriend( GuiUser * netIdent );
+	void						removeFriend( VxGUID& onlineId );
 	void						refreshFriendList( EFriendViewType eWhichFriendsToShow );
 
 signals:

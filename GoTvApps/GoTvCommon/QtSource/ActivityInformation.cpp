@@ -42,6 +42,8 @@ void ActivityInformation::initActivityInformation( void )
     ui.setupUi( this );
     ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Information " ) );
     ui.m_TitleBarWidget->setHomeButtonVisibility( false );
+    connect( ui.m_ClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyToClipboardButtonClicked() ) );
+    connect( ui.m_ClipboardIconButton, SIGNAL( clicked() ), this, SLOT( slotCopyToClipboardButtonClicked() ) );
 
     connectBarWidgets();
 }
@@ -58,12 +60,17 @@ void ActivityInformation::slotCopyToClipboardButtonClicked( void )
 {
     QClipboard * clipboard = QApplication::clipboard();
     clipboard->setText( ui.m_InfoText->toPlainText() );
+    okMessageBox( QObject::tr( "Clipboard" ), QObject::tr( "Text was copied to clipboard" ) );
 }
 
 //============================================================================
 void ActivityInformation::updateInformation( void )
 {
     ui.m_PictureLabel->setVisible( false );
+    ui.m_ServiceInfoButton->setFixedSize( eButtonSizeLarge );
+    ui.m_ClipboardIconButton->setFixedSize( eButtonSizeMedium );
+    ui.m_ClipboardIconButton->setIcon( eMyIconEditCopy );
+    ui.m_WebsiteUrlLabel->setText( "http://www.nolimitconnect.com" );
 
     if( m_PluginType != ePluginTypeInvalid )
     {
@@ -114,6 +121,7 @@ void ActivityInformation::updateInformation( void )
         ui.m_ServiceInfoButton->setIcon( eMyIconSettingsChatRoom );
         break;
     default:
+        ui.m_ServiceInfoButton->setIcon( eMyIconInformation );
         break;
     }
 
@@ -121,7 +129,7 @@ void ActivityInformation::updateInformation( void )
     ui.m_InfoText->appendPlainText( getInfoText() );
 }
 
-QString ActivityInformation::m_NoInfoAvailable( QObject::tr( "No Information is local available. please visit http://wwww.nolimitconnect.com for latest infomation and help" ) );
+QString ActivityInformation::m_NoInfoAvailable( QObject::tr( "No Information is localy available. please visit http://wwww.nolimitconnect.com for latest infomation and help" ) );
 
 QString ActivityInformation::m_NetworkDesign( QObject::tr(
     "=== NETWORK DESIGN ===\n"
@@ -350,6 +358,23 @@ QString ActivityInformation::m_NetworkSettingsInvite( QObject::tr(
     "A private network with a private Network Host server\n"
 ) );
 
+QString ActivityInformation::m_FriendList( QObject::tr(
+    "=== Friends List ===\n"
+    "A list showing users set to friend or administrator permission level.\n"
+) );
+
+QString ActivityInformation::m_IgnoredList( QObject::tr(
+    "=== Ignored List ===\n"
+    "A list showing ignored (blocked) users.\n"
+    "You can unblock a user by clicking the friendship icon or select Change Friendship from the menue button on right side of list entry.\n"
+) );
+
+QString ActivityInformation::m_NearbyList( QObject::tr(
+    "=== Nearby Users List ===\n"
+    "A list showing users on the same Wireless or LAN network that are also showing the nearby list.\n"
+    "An easy way to get connected without being in the same group is to connect his/her device on your home Wireless or LAN network.\n"
+) );
+
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -390,6 +415,13 @@ QString ActivityInformation::getInfoText( void )
         return m_DefaultChatRoomHostUrl;
     case eInfoTypeNetworkSettingsInvite:
         return m_NetworkSettingsInvite;
+
+    case eInfoTypeFriendsList:
+        return m_FriendList;
+    case eInfoTypeIgnoredList:
+        return m_IgnoredList;
+    case eInfoTypeNearbyList:
+        return m_NearbyList;
     default:
         return m_NoInfoAvailable;
     }

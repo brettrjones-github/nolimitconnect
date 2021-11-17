@@ -12,10 +12,13 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
+#include "AppletFriendListClient.h"
+#include "ActivityInformation.h"
+
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "AppletFriendListClient.h"
+
 #include "ActivityMessageBox.h"
 #include "GuiHostSession.h"
 #include "GuiParams.h"
@@ -39,7 +42,22 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     setHostType( eHostTypeGroup );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    // GuiHelpers::fillFriendListType( )
+
+    ui.m_FriendsButton->setFixedSize( eButtonSizeSmall );
+    ui.m_FriendsButton->setIcon( eMyIconFriend );
+    ui.m_FriendsInfoButton->setFixedSize( eButtonSizeSmall );
+    ui.m_FriendsInfoButton->setIcon( eMyIconInformation );
+
+    ui.m_IgnoredButton->setFixedSize( eButtonSizeSmall );
+    ui.m_IgnoredButton->setIcon( eMyIconIgnored );
+    ui.m_IgnoredInfoButton->setFixedSize( eButtonSizeSmall );
+    ui.m_IgnoredInfoButton->setIcon( eMyIconInformation );
+
+    ui.m_NearbyButton->setFixedSize( eButtonSizeSmall );
+    ui.m_NearbyButton->setIcon( eMyIconFriendBroadcast );
+    ui.m_NearbyInfoButton->setFixedSize( eButtonSizeSmall );
+    ui.m_NearbyInfoButton->setIcon( eMyIconInformation );
+
     setSearchType( eSearchGroupHost );
 
     connectBarWidgets();
@@ -64,23 +82,22 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     connect( ui.m_FriendListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, FriendListItem* ) ) );
     connect( ui.m_FriendListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, FriendListItem* ) ) );
 
-    // setStatusLabel( QObject::tr( "Search For Group Host To Join" ) );
-    std::string lastHostSearchText;
-    m_MyApp.getAppSettings().getLastHostSearchText( getSearchType(), lastHostSearchText ); 
-    if( !lastHostSearchText.empty() )
-    {
-        //ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
-    }
+    connect( ui.m_FriendsButton, SIGNAL( clicked() ), this, SLOT( slotFriendsButtonClicked() ) );
+    connect( ui.m_FriendsInfoButton, SIGNAL( clicked() ), this, SLOT( slotFriendsInfoButtonClicked() ) );
+    connect( ui.m_IgnoredButton, SIGNAL( clicked() ), this, SLOT( slotIgnoredButtonClicked() ) );
+    connect( ui.m_IgnoredInfoButton, SIGNAL( clicked() ), this, SLOT( slotIgnoredInfoButtonClicked() ) );
+    connect( ui.m_NearbyButton, SIGNAL( clicked() ), this, SLOT( slotNearbyButtonClicked() ) );
+    connect( ui.m_NearbyInfoButton, SIGNAL( clicked() ), this, SLOT( slotNearbyInfoButtonClicked() ) );
 
     m_MyApp.activityStateChange( this, true );
-    m_UserMgr.wantGuiUserMggGuiUserUpdateCallbacks( this, true );
+    m_UserMgr.wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
     onShowFriendList();
 }
 
 //============================================================================
 AppletFriendListClient::~AppletFriendListClient()
 {
-    m_UserMgr.wantGuiUserMggGuiUserUpdateCallbacks( this, false );
+    m_UserMgr.wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -88,13 +105,6 @@ AppletFriendListClient::~AppletFriendListClient()
 void AppletFriendListClient::setStatusLabel( QString strMsg )
 {
     ui.m_StatusLabel->setText( strMsg );
-}
-
-//============================================================================
-void AppletFriendListClient::setInfoLabel( QString strMsg )
-{
-    ui.m_InfoLabel->setText( strMsg );
-    ui.m_InfoLabel->update();
 }
 
 //============================================================================
@@ -109,111 +119,6 @@ void AppletFriendListClient::hideEvent( QHideEvent * ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, this, false );
     ActivityBase::hideEvent( ev );
-}
-
-//============================================================================
-void AppletFriendListClient::slotHomeButtonClicked( void )
-{
-}
-
-//============================================================================
-void AppletFriendListClient::slotStartSearchState(bool startSearch)
-{
-    //if( startSearch && !m_SearchStarted )
-    //{
-    //    m_SearchStarted = true;
-    //    clearPluginSettingToList();
-    //    clearStatus();
-
-    //    QString strSearch = getSearchText();
-    //    if( 3 > strSearch.length() )
-    //    {
-    //        //ui.m_SearchsParamWidget->slotSearchCancel();
-    //        ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
-    //        errMsgBox.exec();
-    //    }
-    //    else
-    //    {
-    //        //if( ui.m_SearchsParamWidget->toSearchParams( m_SearchParams ) )
-    //        {
-    //            m_SearchParams.setHostType( getHostType() );
-    //            m_SearchParams.setSearchType( getSearchType() );
-    //            m_SearchParams.createNewSessionId();
-    //            m_SearchParams.updateSearchStartTime();
-    //            setStatusLabel( QObject::tr( "Search Started" ) );
-    //            m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, true );
-    //            if( !m_SearchParams.getSearchText().empty() )
-    //            {
-    //                m_MyApp.getAppSettings().setLastHostSearchText( m_SearchParams.getSearchType(), m_SearchParams.getSearchText() );
-    //                m_MyApp.getAppSettings().setLastHostSearchAgeType( m_SearchParams.getSearchType(), m_SearchParams.getAgeType() );
-    //                m_MyApp.getAppSettings().setLastHostSearchGender( m_SearchParams.getSearchType(), m_SearchParams.getGender() );
-    //                m_MyApp.getAppSettings().setLastHostSearchLanguage( m_SearchParams.getSearchType(), m_SearchParams.getLanguage() );
-    //                m_MyApp.getAppSettings().setLastHostSearchContentRating( m_SearchParams.getSearchType(), m_SearchParams.getContentRating() );
-    //            }
-    //        }
-    //        //else
-    //        //{
-    //        //    setStatusLabel( QObject::tr( "Search Params Invalid" ) );
-    //        //}
-    //    }
-    //}
-    //else if( !startSearch && m_SearchStarted )
-    //{
-    //    m_SearchStarted = false;
-    //    m_FromGui.fromGuiSearchHost( getHostType(), m_SearchParams, false );
-    //    setStatusLabel( QObject::tr( "Search Stopped" ) );
-    //}
-}
-
-//============================================================================
-void AppletFriendListClient::slotSearchComplete( void )
-{
-    //ui.m_SearchsParamWidget->slotSearchComplete();
-}
-
-//============================================================================
-void AppletFriendListClient::slotInfoMsg( const QString& text )
-{
-    setStatusLabel( text ); // Adds the message to the widget                                                                                              //m_LogFile.write( text ); // Logs to file
-}
-
-//============================================================================
-void AppletFriendListClient::slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString text )
-{
-    setInfoLabel( GuiParams::describeStatus(hostStatus) + text);
-}
-
-//============================================================================
-void AppletFriendListClient::slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString text )
-{
-    setInfoLabel( GuiParams::describeStatus(hostStatus) + text);
-}
-
-//============================================================================
-void AppletFriendListClient::slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg )
-{
-    if( hostStatus == eHostSearchCompleted )
-    {
-        m_SearchStarted = false;
-        setStatusLabel( strMsg );
-        //ui.m_SearchsParamWidget->slotSearchComplete();
-    }
-    else
-    {
-        setInfoLabel( strMsg );
-    }
-}
-
-//============================================================================
-void AppletFriendListClient::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
-{
-    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
-        DescribePluginType( pluginSetting.getPluginType() ) );
-
-    QString strMsg = QObject::tr( "Match found: " );
-    strMsg += hostIdent.getOnlineName();
-    setInfoLabel( strMsg );
-    addPluginSettingToList( hostType, sessionId, hostIdent, pluginSetting );
 }
 
 //============================================================================
@@ -242,45 +147,21 @@ void AppletFriendListClient::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletFriendListClient::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
+void AppletFriendListClient::clearList( void )
 {
-    //ui.m_FriendListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
-}
-
-//============================================================================
-void AppletFriendListClient::clearPluginSettingToList( void )
-{
-    //ui.m_FriendListWidget->clearFriendList();
+    ui.m_FriendListWidget->clear();
 }
 
 //============================================================================
 void AppletFriendListClient::clearStatus( void )
 {
-    setInfoLabel( "" );
     setStatusLabel( "" );
 }
-
-////============================================================================
-//void AppletFriendListClient::slotIconButtonClicked( GuiHostSession* hostSession, FriendListItem* hostItem )
-//{
-//
-//}
-//
-////============================================================================
-//void AppletFriendListClient::slotMenuButtonClicked( GuiHostSession* hostSession, FriendListItem* hostItem )
-//{
-//
-//}
-//
-////============================================================================
-//void AppletFriendListClient::slotJoinButtonClicked( GuiHostSession* hostSession, FriendListItem* hostItem )
-//{
-//    onJointButtonClicked( hostSession );
-//}
 
 //============================================================================
 void AppletFriendListClient::onShowFriendList( void )
 {
+    clearList();
     std::vector<std::pair<VxGUID, int64_t>> friendList;
     FriendListMgr& friendMgr = m_Engine.getFriendListMgr();
     // make a copy to avoid pausing engine and to avoid threading issues
@@ -294,15 +175,15 @@ void AppletFriendListClient::onShowFriendList( void )
         GuiUser* guiUser = m_MyApp.getUserMgr().getOrQueryUser( identTime.first );
         if( guiUser->isAdmin() || guiUser->isFriend() )
         {
-            
+            updateUser( guiUser );
         }
-
     }
 }
 
 //============================================================================
 void AppletFriendListClient::onShowIgnoreList( void )
 {
+    clearList();
     std::vector<std::pair<VxGUID, int64_t>> ignoreList;
     IgnoreListMgr& ignoreMgr = m_Engine.getIgnoreListMgr();
     // make a copy to avoid pausing engine and to avoid threading issues
@@ -311,22 +192,147 @@ void AppletFriendListClient::onShowIgnoreList( void )
     ignoreMgr.unlockList();
 
     // for each see if we already have that ident as gui user else request it
+    for( auto identTime : ignoreList )
+    {
+        GuiUser* guiUser = m_MyApp.getUserMgr().getOrQueryUser( identTime.first );
+        if( guiUser->isAdmin() || guiUser->isFriend() )
+        {
+            updateUser( guiUser );
+        }
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::onShowNearbyList( void )
+{
+    clearList();
+    /*
+    std::vector<std::pair<VxGUID, int64_t>> ignoreList;
+    IgnoreListMgr& ignoreMgr = m_Engine.getIgnoreListMgr();
+    // make a copy to avoid pausing engine and to avoid threading issues
+    ignoreMgr.lockList();
+    ignoreList = ignoreMgr.getIdentList();
+    ignoreMgr.unlockList();
+
+    // for each see if we already have that ident as gui user else request it
+    for( auto identTime : friendList )
+    {
+        GuiUser* guiUser = m_MyApp.getUserMgr().getOrQueryUser( identTime.first );
+        if( guiUser->isAdmin() || guiUser->isFriend() )
+        {
+            updateUser( guiUser );
+        }
+    }
+    */
 }
 
 //============================================================================
 void AppletFriendListClient::callbackOnUserAdded( GuiUser* guiUser )
 {
-
+    updateUser( guiUser );
 }
 
 //============================================================================
 void AppletFriendListClient::callbackOnUserUpdated( GuiUser* guiUser )
 {
-
+    updateUser( guiUser );
 }
 
 //============================================================================
 void AppletFriendListClient::callbackOnUserRemoved( VxGUID& onlineId )
 {
+    removeUser( onlineId );
+}
 
+//============================================================================
+void AppletFriendListClient::onShowFriendTypeChanged( void )
+{
+    setStatusLabel( GuiParams::describeFriendListType( m_ShowFriendType ) + QObject::tr( "List" ) );
+    switch( m_ShowFriendType )
+    {
+    case eFriendListTypeIgnore:
+        onShowIgnoreList();
+        break;
+
+    case eFriendListTypeNearby:
+        onShowNearbyList();
+        break;
+
+    case eFriendListTypeFriend:
+    default:
+        onShowFriendList();
+        break;
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::slotFriendsButtonClicked( void )
+{
+    if( m_ShowFriendType != eFriendListTypeFriend )
+    {
+        m_ShowFriendType = eFriendListTypeFriend;
+        onShowFriendTypeChanged();
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::slotIgnoredButtonClicked( void )
+{
+    if( m_ShowFriendType != eFriendListTypeIgnore )
+    {
+        m_ShowFriendType = eFriendListTypeIgnore;
+        onShowFriendTypeChanged();
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::slotNearbyButtonClicked( void )
+{
+    if( m_ShowFriendType != eFriendListTypeNearby )
+    {
+        m_ShowFriendType = eFriendListTypeNearby;
+        onShowFriendTypeChanged();
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::slotIgnoredInfoButtonClicked( void )
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeIgnoredList );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::slotFriendsInfoButtonClicked( void )
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeFriendsList );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::slotNearbyInfoButtonClicked( void )
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeNearbyList );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::updateUser( GuiUser* guiUser )
+{
+    ui.m_FriendListWidget->updateFriend( guiUser );
+}
+
+//============================================================================
+void AppletFriendListClient::removeUser( VxGUID& onlineId )
+{
+    ui.m_FriendListWidget->removeFriend( onlineId );
 }

@@ -107,6 +107,12 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent )
 		getIdentLine1()->setText( netIdent->getOnlineName() );
 		getIdentLine2()->setText( netIdent->getOnlineDescription() );
 		getIdentFriendshipButton()->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
+
+		if( netIdent->getMyFriendshipToHim() == eFriendStateFriend && netIdent->getHisFriendshipToMe() == eFriendStateFriend )
+		{
+			getIdentFriendshipButton()->setIcon( eMyIconFriendJoined );		
+		}
+
 		if( getIdentLine3() )
 		{
 			QString truths = QObject::tr( "Truths: " );

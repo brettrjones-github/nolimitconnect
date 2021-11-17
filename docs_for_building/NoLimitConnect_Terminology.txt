@@ -26,7 +26,7 @@ Friendship Level - although named differently for "Users" and "Group Host" etc. 
     5.) Admin - allow access to user granted "Admin" permission to group or user resources with
          Permission Level Admin or Friend or Guest or Annonymous  
 
-GoTvPtoP - This application including Kodi as a "Applet" and "Person to Person" sharing of video chat, media, etc
+NoLimitConnect - This application including Kodi as a "Applet" and "Person to Person" sharing of video chat, media, etc
 
 GroupHost - services for a group of users.
     1.) Admin of permissions to join hosted group or remove user from group

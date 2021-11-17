@@ -40,10 +40,8 @@ public:
     void                        toGuiInfoMsg( char * logMsg );
 
     void						setStatusLabel( QString strMsg );
-    void                        setInfoLabel( QString strMsg );
 
-    void						addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
-    void                        clearPluginSettingToList( void );
+    void                        clearList( void );
     void                        clearStatus( void );
 
 signals:
@@ -53,21 +51,18 @@ signals:
     void                        signalInfoMsg( const QString& logMsg );
 
 private slots:
-    void                        slotInfoMsg( const QString& text );
-    void						slotSearchComplete( void );
-    void						slotHomeButtonClicked( void ) override;
-    void						slotStartSearchState( bool startSearch );
-    void						slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
-    void						slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
-    void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
-    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
-    //virtual void                slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
-    //virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
-    //virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
+    void                        slotFriendsButtonClicked( void );
+    void                        slotFriendsInfoButtonClicked( void );
+    void                        slotIgnoredButtonClicked( void );
+    void                        slotIgnoredInfoButtonClicked( void );
+    void                        slotNearbyButtonClicked( void );
+    void                        slotNearbyInfoButtonClicked( void );
 
+    void                        onShowFriendTypeChanged( void );
     void                        onShowFriendList( void );
     void                        onShowIgnoreList( void );
+    void                        onShowNearbyList( void );
 
 protected:
     virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
@@ -77,7 +72,11 @@ protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
 
+    void                        updateUser( GuiUser* guiUser );
+    void                        removeUser( VxGUID& onlineId );
+
     //=== vars ===//
     Ui::AppletFriendListClientUi ui;
     bool                        m_SearchStarted{ false };
+    EFriendListType             m_ShowFriendType{ eFriendListTypeFriend };
 };

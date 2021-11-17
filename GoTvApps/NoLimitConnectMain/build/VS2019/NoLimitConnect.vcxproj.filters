@@ -2611,9 +2611,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupListClient.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletFriendListClient.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletShareOfferList.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2645,6 +2642,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletHostSelect.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletFriendListClient.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

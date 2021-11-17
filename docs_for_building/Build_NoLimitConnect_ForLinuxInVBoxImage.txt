@@ -1,4 +1,5 @@
 === Build No Limit Connect For Linux in Virtual Box Image ===
+NOTE: Qt 6.2.1 does not yet have libQt6Multimedia so Linux is not yet supported
 1.) Follow the instructions in
         Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint20_2.txt
 2.) Open console

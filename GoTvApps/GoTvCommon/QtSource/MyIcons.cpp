@@ -208,6 +208,9 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconIgnored:
 		return ":/AppRes/Resources/forbidden.svg";
 
+	case eMyIconFriendBroadcast:
+		return ":/AppRes/Resources/friend-broadcast.svg";
+
     case eMyIconClientChatRoom:
         return ":/AppRes/Resources/client-chat-room.svg";
     case eMyIconClientGroup:

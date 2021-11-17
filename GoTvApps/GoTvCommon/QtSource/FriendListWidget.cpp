@@ -305,8 +305,16 @@ void FriendListWidget::slotRefreshFriend( VxGUID friendId )
 }
 
 //============================================================================
-//! called when friend in list is removed
-void FriendListWidget::removeFriend( GuiUser * netIdent )
+void FriendListWidget::removeFriend( GuiUser* guiUser )
+{
+	if( guiUser )
+	{
+		removeFriend( guiUser->getMyOnlineId() );
+	}
+}
+
+//============================================================================
+void FriendListWidget::removeFriend( VxGUID& onlineId )
 {
 	int iIdx = 0;
 	FriendListEntryWidget * poWidget;
@@ -316,9 +324,9 @@ void FriendListWidget::removeFriend( GuiUser * netIdent )
 		if( poWidget )
 		{
             GuiUser * poFriend = poWidget->getUser();
-			if( poFriend && ( poFriend->getMyOnlineId() == netIdent->getMyOnlineId() ) )
+			if( poFriend && ( poFriend->getMyOnlineId() == onlineId ) )
 			{
-                LogMsg( LOG_INFO, "AppCommon::onFriendRemoved %s removing widget idx %d\n", netIdent->getOnlineName().c_str(), iIdx );
+                LogMsg( LOG_INFO, "FriendListWidget::removeFriend %s removing widget idx %d", poFriend->getOnlineName().c_str(), iIdx );
 				takeItem( iIdx );
 				return;
 			}

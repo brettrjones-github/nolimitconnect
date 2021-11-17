@@ -75,6 +75,7 @@ file-save-as.svg (modified)
 file-xfer.svg (modified)
 file-xfer-settings.svg (modified)
 friend.svg
+friend-broadcast.svg (modified)
 friend-joined.svg
 flask.svg
 group-joined.svg
