@@ -99,7 +99,7 @@ const char * P2PEngine::fromGuiGetAppNameNoSpaces( void )
 void P2PEngine::fromGuiAppStartup( const char * assetsDir, const char * rootDataDir  )
 {
 	VxSetAppIsShuttingDown( false );
-    enableTimerThread(true);
+	enableTimerThread( true );
 
 	LogMsg( LOG_INFO, "P2PEngine::fromGuiAppStartup %s %s\n", assetsDir, rootDataDir  );
 }
@@ -342,19 +342,19 @@ void P2PEngine::fromGuiAppResume( void )
 //! idle
 void P2PEngine::fromGuiAppIdle( void )
 {
-	static int64_t lclSysTime = 0;
-	int64_t curMs = GetGmtTimeMs( );
-	if( false == m_IsUserSpecificDirSet )
-	{
-		// wait until some things are started
-		return;	
-	}
+	//static int64_t lclSysTime = 0;
+	//int64_t curMs = GetGmtTimeMs( );
+	//if( false == m_IsUserSpecificDirSet )
+	//{
+	//	// wait until some things are started
+	//	return;	
+	//}
 
-	if( lclSysTime / 1000 != curMs / 1000 )
-	{
-		lclSysTime = curMs;
-		onOncePerSecond();
-	}
+	//if( lclSysTime / 1000 != curMs / 1000 )
+	//{
+	//	lclSysTime = curMs;
+	//	onOncePerSecond();
+	//}
 	//else // NOTE: currently have no plugins use fromGuiAppIdle
 	//{
 	//	m_PluginMgr.fromGuiAppIdle();
@@ -1336,10 +1336,17 @@ ENetAvailStatus P2PEngine::fromGuiGetNetAvailStatus( void )
 #ifdef TARGET_OS_ANDROID
 int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 {
-	LogMsg( LOG_INFO, "fromGuiMulitcastPkt len %d\n", len );
+	LogMsg( LOG_INFO, "fromGuiMulitcastPkt len %d", len );
 	return 0;
 }
 #endif // TARGET_OS_ANDROID
+
+//============================================================================
+bool P2PEngine::fromGuiNearbyBroadcastEnable( bool enable )
+{
+	LogMsg( LOG_INFO, "fromGuiNearbyBroadcastEnable %d", enable );
+	return false;
+}
 
 //============================================================================
 void P2PEngine::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )

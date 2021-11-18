@@ -16,6 +16,9 @@
 #include "P2PEngine.h"
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
+#include <ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h>
+#include <ptop_src/ptop_engine_src/Network/NetworkStateMachine.h>
+#include <ptop_src/ptop_engine_src/Network/NetworkMgr.h>
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxParse.h>
@@ -55,6 +58,7 @@ void P2PEngine::enableTimerThread( bool enable )
     }
     else
     {
+        m_TimerThreadSemaphore.signal();
         m_TimerThread.killThread();
     }
 }
@@ -62,31 +66,37 @@ void P2PEngine::enableTimerThread( bool enable )
 //============================================================================
 void P2PEngine::executeTimerThreadFunctions( void )
 {
-    static uint64_t timeLast = GetGmtTimeMs();
     while( !m_TimerThread.isAborted() && !VxIsAppShuttingDown() )
     {
-        uint64_t timeNow = GetGmtTimeMs();
-        if( timeNow - timeLast >= 1000 )
+        m_TimerThreadSemaphore.wait();
+        if( !m_TimerThread.isAborted() && !VxIsAppShuttingDown() )
         {
-            timeNow = timeLast;
-            onThreadOncePerSecond();
+            onOncePerSecond();
         }
-
-        VxSleep( 400 );
+        else
+        {
+            break;
+        }
     }
 }
 
 //============================================================================
-void P2PEngine::onThreadOncePerSecond( void )
+void P2PEngine::fromGuiOncePerSecond( void )
+{
+    m_TimerThreadSemaphore.signal();
+}
+
+//============================================================================
+void P2PEngine::onOncePerSecond( void )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-//    m_NetworkMonitor.onOncePerSecond();
-//    m_NetworkMgr.onOncePerSecond();
-//    m_PluginMgr.onOncePerSecond();
+    m_NetworkMonitor.onOncePerSecond();
+    m_NetworkMgr.onOncePerSecond();
+    m_PluginMgr.onOncePerSecond();
 
     //static int announceCntInSeconds = 60;
     //	announceCntInSeconds--;
@@ -103,8 +113,8 @@ void P2PEngine::onThreadOncePerSecond( void )
     if( 0 >= thirtySecCntInSeconds )
     {
         thirtySecCntInSeconds = 30;
-        onThreadOncePer30Seconds();
-        onThreadOncePer15Minutes();
+        onOncePer30Seconds();
+        onOncePer15Minutes();
     }
 
     static int minuteCntInSeconds = 62;
@@ -112,7 +122,7 @@ void P2PEngine::onThreadOncePerSecond( void )
     if( 0 >= minuteCntInSeconds )
     {
         minuteCntInSeconds = 60;
-        onThreadOncePerMinute();
+        onOncePerMinute();
     }
 
     static int minute15CntSeconds = 60 * 15 + 3;
@@ -120,7 +130,7 @@ void P2PEngine::onThreadOncePerSecond( void )
     if( 0 >= minute15CntSeconds )
     {
         minute15CntSeconds = 60 * 15;
-        onThreadOncePer15Minutes();
+        onOncePer15Minutes();
     }
 
     static int minute30CntSeconds = 60 * 30 + 4;
@@ -128,28 +138,30 @@ void P2PEngine::onThreadOncePerSecond( void )
     if( 0 >= minute30CntSeconds )
     {
         minute30CntSeconds = 60 * 30;
-        onThreadOncePer30Minutes();
+        onOncePer30Minutes();
     }
-
 
     static int hourCntInSeconds = 3606;
     hourCntInSeconds--;
     if( 0 >= hourCntInSeconds )
     {
         hourCntInSeconds = 3600;
-        onThreadOncePerHour();
+        onOncePerHour();
     }
 }
 
 //============================================================================
-void P2PEngine::onThreadOncePer30Seconds( void )
+void P2PEngine::onOncePer30Seconds( void )
 {
-    //m_RcScan.onOncePer30Seconds();
+    m_RcScan.onOncePer30Seconds();
 }
 
 //============================================================================
-void P2PEngine::onThreadOncePerMinute( void )
+void P2PEngine::onOncePerMinute( void )
 {
+    m_ConnectionList.broadcastSystemPkt( &m_PktImAliveReq, false );
+    m_RcScan.onOncePerMinute();
+
     //m_ConnectionList.broadcastSystemPkt( &m_PktImAliveReq, false );
     //m_RcScan.onOncePerMinute();
     //LogMsg( LOG_INFO, "Sockets current in memory %d total created %d\n", VxSktBase::getCurrentSktCount(), VxSktBase::getTotalCreatedSktCount() );
@@ -160,20 +172,19 @@ void P2PEngine::onThreadOncePerMinute( void )
 }
 
 //============================================================================
-void P2PEngine::onThreadOncePer15Minutes( void )
+void P2PEngine::onOncePer15Minutes( void )
 {
     //m_RcScan.onOncePer30Seconds();
     m_PluginMgr.onThreadOncePer15Minutes();
 }
 
 //============================================================================
-void P2PEngine::onThreadOncePer30Minutes( void )
+void P2PEngine::onOncePer30Minutes( void )
 {
-    //m_RcScan.onOncePer30Seconds();
 }
 
 //============================================================================
-void P2PEngine::onThreadOncePerHour( void )
+void P2PEngine::onOncePerHour( void )
 {
-    //getNetworkStateMachine().onOncePerHour();
+    getNetworkStateMachine().onOncePerHour();
 }

@@ -577,6 +577,7 @@ public:
                                                 int							testParam2 = 0,
                                                 const char *				testParam3 = NULL );
     virtual void				fromGuiMulitcastPkt( uint8_t * pktData, int dataLen );
+    virtual bool				fromGuiNearbyBroadcastEnable( bool enable );
     virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL );
     virtual void				fromGuiSendLog( uint32_t u32LogFlags );
 

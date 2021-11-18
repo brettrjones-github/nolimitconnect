@@ -642,6 +642,12 @@ void IGoTv::fromGuiMulitcastPkt( uint8_t * pktData, int dataLen )
 }
 
 //============================================================================
+bool IGoTv::fromGuiNearbyBroadcastEnable( bool enable )
+{
+    return getPtoP().fromGuiNearbyBroadcastEnable( enable );
+}
+
+//============================================================================
 void IGoTv::fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName )
 {
     getPtoP().fromGuiDebugSettings( u32LogFlags, pLogFileName );

@@ -1365,7 +1365,7 @@ void AppCommon::onOncePerSecond( void )
 
         if( getLoginCompleted() )
         {
-            getEngine().onOncePerSecond();
+            getEngine().fromGuiOncePerSecond();
         }
     }
     else

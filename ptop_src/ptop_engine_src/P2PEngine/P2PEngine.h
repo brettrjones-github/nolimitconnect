@@ -353,6 +353,8 @@ public:
 #ifdef TARGET_OS_ANDROID
     virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) override;
 #endif // TARGET_OS_ANDROID
+    virtual bool				fromGuiNearbyBroadcastEnable( bool enable ) override;
+
     virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL ) override;
     virtual void				fromGuiSendLog( uint32_t u32LogFlags ) override;
     virtual bool				fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
@@ -423,21 +425,16 @@ public:
 
 	//========================================================================
 	//========================================================================
+    void                        enableTimerThread( bool enable );
+    void                        executeTimerThreadFunctions( void );
+
+    void						fromGuiOncePerSecond( void ); // from qt gui thread triggers release of engine thread timed events.. allows better gui performance
 	void						onOncePerSecond( void );
 	void						onOncePer30Seconds( void );
 	void						onOncePerMinute( void );
+    void						onOncePer15Minutes( void );
+    void						onOncePer30Minutes( void );
 	void						onOncePerHour( void );
-
-    // called by timer thread to conserve main thread cpu time
-    void                        enableTimerThread( bool enable );
-
-    void                        executeTimerThreadFunctions( void );
-    void						onThreadOncePerSecond( void );
-    void						onThreadOncePer30Seconds( void );
-    void						onThreadOncePerMinute( void );
-    void						onThreadOncePer15Minutes( void );
-    void						onThreadOncePer30Minutes( void );
-    void						onThreadOncePerHour( void );
 
 	void						onBigListInfoRestored( BigListInfo * poInfo ); 
 	void						onBigListLoadComplete( RCODE rc );
@@ -744,6 +741,7 @@ protected:
 
 	PktImAliveReq				m_PktImAliveReq;
 
+    VxSemaphore                 m_TimerThreadSemaphore;
     VxThread                    m_TimerThread;
 };
 

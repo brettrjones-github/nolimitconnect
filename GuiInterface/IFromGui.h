@@ -392,8 +392,10 @@ public:
     virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) = 0;
 #ifdef TARGET_OS_ANDROID
 	/// Not used.. in android multicast for discovery of contact on same LAN is done in Jave code
-	virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) = 0;
+	virtual int					fromGuiMulitcastPkt( uint8_t * data, int len ) = 0;
 #endif // TARGET_OS_ANDROID
+
+	virtual bool				fromGuiNearbyBroadcastEnable( bool enable ) = 0;
 
 	enum ETestParam1
 	{
