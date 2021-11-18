@@ -41,7 +41,7 @@ public:
     std::string                 getInviteUrl( EHostType hostType );
     std::string                 getNetSettingUrl( EHostType hostType );
 
-    static const char           getHostTypeSuffix( EHostType hostType );
+    static char                 getHostTypeSuffix( EHostType hostType );
     static EHostType            getHostTypeFromSuffix( const char suffix );
 
 protected:

@@ -259,5 +259,6 @@ DISTFILES += \
     bin-Android/gradle/wrapper/gradle-wrapper.jar \
     bin-Android/gradle/wrapper/gradle-wrapper.properties \
     bin-Android/gradlew \
-    bin-Android/gradlew.bat
+    bin-Android/gradlew.bat \
+    bin-Android/res/values/libs.xml
 

@@ -24,10 +24,10 @@ public:
 	PktPingReq();
 
 	void						setTimestamp( uint64_t timeStamp );
-	uint64_t							getTimestamp( void );
+	uint64_t					getTimestamp( void );
 
 private:
-	uint64_t							m_Timestamp;								
+	uint64_t					m_Timestamp{ 0 };
 };
 
 class PktPingReply : public VxPktHdr
@@ -36,10 +36,10 @@ public:
 	PktPingReply();
 
 	void						setTimestamp( uint64_t timeStamp );
-	uint64_t							getTimestamp( void );
+	uint64_t					getTimestamp( void );
 
 private:
-	uint64_t							m_Timestamp;								
+	uint64_t					m_Timestamp{ 0 };
 };
 
 #pragma pack()

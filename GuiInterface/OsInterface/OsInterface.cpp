@@ -323,7 +323,7 @@ bool OsInterface::initUserPaths()
     std::string kodiBinStoragePath = kodiCachedAssetsPath + "/libs";
 
     std::string kodiStoragePath = storageDir + "/kodi";
-    std::string gotvStorageDir = storageDir + "/gotv";
+    std::string gotvStorageDir = storageDir + "/nolimit";
     std::string tempDir = storageDir + "/temp";
     std::string logsDir = storageDir + "/logs";
     std::string pythonPath = kodiCachedAssetsPath + "/python2.7/lib/python2.7";

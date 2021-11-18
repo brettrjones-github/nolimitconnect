@@ -19,10 +19,8 @@
 #define MAX_PKT_LEN						16384	// some routers wont route pkts greater than this
 #define MAX_PKT_ERR_MSG_LEN				1023	// maximum length of pkt error message
 #define MAX_ARG_LEN						255		// maximum length of command argument
-#define HTTP_ASCII_SIG	                0x48545450 // HTTP = 0x48545450
 
 #define BASE_PKT_TYPE								0 // packet type 0 is not allowed
-
 
 #define PKT_TYPE_ANNOUNCE							( BASE_PKT_TYPE	+ 1 )					        // 1
 #define PKT_TYPE_ANN_LIST							( PKT_TYPE_ANNOUNCE	+ 1 )				        // 2 ( 0x02 )
@@ -212,9 +210,11 @@
 #define PKT_TYPE_RELAY_CONNECT_TO_USER_REPLY		( PKT_TYPE_RELAY_CONNECT_TO_USER_REQ + 1 )	
 #define PKT_TYPE_RELAY_USER_DISCONNECT				( PKT_TYPE_RELAY_CONNECT_TO_USER_REPLY + 1 )	
 #define PKT_TYPE_RELAY_TEST_REQ						( PKT_TYPE_RELAY_USER_DISCONNECT	+ 1 )		
-#define PKT_TYPE_RELAY_TEST_REPLY					( PKT_TYPE_RELAY_TEST_REQ	+ 1 )				
+#define PKT_TYPE_RELAY_TEST_REPLY					( PKT_TYPE_RELAY_TEST_REQ	+ 1 )		
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_FRIEND_OFFER_REPLY + 1)
+#define PKT_TYPE_NEARBY_REQ					        ( PKT_TYPE_RELAY_TEST_REQ	+ 1 )	
+
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_NEARBY_REQ + 1)
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

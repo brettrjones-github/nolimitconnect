@@ -31,7 +31,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.2.0_msvc2019_64</QtInstall>
+    <QtInstall>F:\Qt\6.2.1\msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets;opengl;quickwidgets;svg;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>

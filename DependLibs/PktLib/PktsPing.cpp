@@ -19,7 +19,6 @@
 
 //============================================================================
 PktPingReq::PktPingReq()
-: m_Timestamp(0)
 {
 	setPktType( PKT_TYPE_PING_REQ );
 	setPktLength( sizeof( PktPingReq ) );
@@ -39,7 +38,6 @@ uint64_t PktPingReq::getTimestamp( void )
 
 //============================================================================
 PktPingReply::PktPingReply()
-: m_Timestamp(0)
 {
 	setPktType( PKT_TYPE_PING_REPLY );
 	setPktLength( sizeof( PktPingReq ) );
