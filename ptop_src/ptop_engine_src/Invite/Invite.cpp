@@ -139,7 +139,7 @@ std::string Invite::getNetSettingUrl( EHostType hostType )
 }
 
 //============================================================================
-const char Invite::getHostTypeSuffix( EHostType hostType )
+char Invite::getHostTypeSuffix( EHostType hostType )
 {
     switch( hostType )
     {
