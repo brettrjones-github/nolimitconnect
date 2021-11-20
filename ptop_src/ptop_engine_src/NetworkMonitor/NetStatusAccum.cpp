@@ -272,6 +272,11 @@ void NetStatusAccum::setInternetAvail( bool avail )
     {
         m_InternetAvail = avail;
         LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Internet available %d", avail );
+        if( !avail )
+        {
+            setNearbyAvailable( false );
+        }
+
         onNetStatusChange();
     }
 }

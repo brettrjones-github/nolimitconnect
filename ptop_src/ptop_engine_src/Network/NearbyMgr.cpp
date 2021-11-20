@@ -258,6 +258,7 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
 //============================================================================
 void NearbyMgr::onPktAnnUpdated( void )
 {
+    m_MulticastBroadcast.onPktAnnUpdated();
 }
 
 //============================================================================

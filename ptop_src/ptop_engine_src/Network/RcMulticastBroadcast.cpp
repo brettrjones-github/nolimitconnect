@@ -63,39 +63,46 @@ void RcMulticastBroadcast::setBroadcastEnable( bool enable )
 //============================================================================
 void RcMulticastBroadcast::onPktAnnUpdated( void )
 {
-	m_MulticastMutex.lock();
-	m_Engine.copyMyPktAnnounce(m_PktAnnEncrypted);
-	m_PktAnnEncrypted.setMyFriendshipToHim(eFriendStateGuest);
-	m_PktAnnEncrypted.setHisFriendshipToMe(eFriendStateGuest);
-
-	std::string networkName;
-	m_Engine.getEngineSettings().getNetworkKey( networkName );
-
-	if( networkName.length() )
+	if( m_Engine.getNetStatusAccum().getNearbyAvailable() && !m_Engine.getNetStatusAccum().getLanIpAddr().empty() )
 	{
-		setMulticastKey( networkName.c_str() );
-		RCODE rc =	m_SktUdp.m_TxCrypto.encrypt( (unsigned char *)&m_PktAnnEncrypted, (int)sizeof( PktAnnounce ) );
-		if( 0 != rc )
+		m_MulticastMutex.lock();
+		m_Engine.copyMyPktAnnounce( m_PktAnnEncrypted );
+		m_PktAnnEncrypted.setMyFriendshipToHim( eFriendStateGuest );
+		m_PktAnnEncrypted.setHisFriendshipToMe( eFriendStateGuest );
+		// normally it is a bad idea to announce our lan ip but do in multicast so can connect on local network
+		InetAddrIPv4 ipV4;
+		ipV4.setIp( m_Engine.getNetStatusAccum().getLanIpAddr().c_str() );
+		m_PktAnnEncrypted.setLanIPv4( ipV4 );
+
+		std::string networkName;
+		m_Engine.getEngineSettings().getNetworkKey( networkName );
+
+		if( networkName.length() )
 		{
-			LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated error %d encrypting pkt announce\n", rc );
+			setMulticastKey( networkName.c_str() );
+			RCODE rc = m_SktUdp.m_TxCrypto.encrypt( ( unsigned char* )&m_PktAnnEncrypted, ( int )sizeof( PktAnnounce ) );
+			if( 0 != rc )
+			{
+				LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated error %d encrypting pkt announce\n", rc );
+			}
+			else
+			{
+				m_bPktAnnUpdated = true;
+			}
 		}
 		else
 		{
-			m_bPktAnnUpdated = true;
+			LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated COULD NOT GET NETWORK NAME\n" );
 		}
-	}
-	else
-	{
-		LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated COULD NOT GET NETWORK NAME\n" );
-	}
 
-	m_MulticastMutex.unlock();
+		m_MulticastMutex.unlock();
+	}
 }
 
 //============================================================================
 void RcMulticastBroadcast::onOncePerSecond( void )
 {
-	if( m_bBroadcastEnabled && m_bPktAnnUpdated )
+	if( m_bBroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
 	{
 		m_iBroadcastCountSec++;
 		if( m_iBroadcastCountSec >= MULTICAST_BROADCAST_INTERVAL_SEC )
@@ -116,9 +123,12 @@ void RcMulticastBroadcast::sendMulticast( void )
 	}
 	
 	LogModule( eLogMulticast, LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn len %d", sizeof( m_PktAnnEncrypted ) );
+	m_MulticastMutex.lock();
 	RCODE rc = getUdpSkt().sendToMulticast( (const char *)&m_PktAnnEncrypted, sizeof( m_PktAnnEncrypted ), m_strMulticastIp.c_str(), m_u16MulticastPort );
 	if( rc )
 	{
 		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast error %d", rc );
 	}
+
+	m_MulticastMutex.unlock();
 }

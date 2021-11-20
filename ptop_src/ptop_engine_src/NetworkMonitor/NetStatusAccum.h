@@ -109,8 +109,13 @@ public:
     std::string                 getIpAddress( void );
     uint16_t                    getIpPort( void );
 
-    EInternetStatus             getInternetStatus( void ) { return m_InternetStatus; }
-    ENetAvailStatus             getNetAvailStatus( void ) { m_AccumMutex.lock(); ENetAvailStatus status = m_NetAvailStatus;  m_AccumMutex.unlock(); return status;  }
+    EInternetStatus             getInternetStatus( void )           { return m_InternetStatus; }
+    ENetAvailStatus             getNetAvailStatus( void )           { m_AccumMutex.lock(); ENetAvailStatus status = m_NetAvailStatus;  m_AccumMutex.unlock(); return status;  }
+
+    void                        setNearbyAvailable( bool avail )    { m_NearbyAvailable = avail; }
+    bool                        getNearbyAvailable( void )          { return m_NearbyAvailable; }
+    void                        setLanIpAddr( std::string ip )      { m_LanIpAddr = ip; }
+    std::string                 getLanIpAddr( void )                { return m_LanIpAddr; }
 
     void                        setJoinedHost( EHostType hostType, std::string hostUrl, VxGUID& connectId );
     bool                        isConnectedToHost( EHostType hostType );
@@ -124,6 +129,9 @@ protected:
     VxMutex                     m_AccumMutex;
     VxMutex                     m_AccumCallbackMutex;
     std::vector<NetAvailStatusCallbackInterface*> m_CallbackList;
+
+    bool                        m_NearbyAvailable{ false };
+    std::string                 m_LanIpAddr;
 
     bool                        m_FixedIpAddr{ false };
 

@@ -353,6 +353,7 @@ std::string NetworkMonitor::determineLocalIp( void )
             else
             {
                 lastLocalIp = localIp;
+                m_Engine.getNetStatusAccum().setLanIpAddr( localIp );
                 m_Engine.getNetStatusAccum().setNetHostAvail( true );
             }
         }
@@ -404,6 +405,7 @@ std::string NetworkMonitor::determineLocalIp( void )
                 else
                 {
                     lastLocalIp = localIp;
+                    m_Engine.getNetStatusAccum().setLanIpAddr( localIp );
                 }
             }
 

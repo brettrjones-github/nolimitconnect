@@ -109,6 +109,7 @@ public:
 	InetAddrIPv4&				getMyOnlineIPv4( void );
 	InetAddress&				getMyOnlineIPv6( void );
 
+    void                        setLanIPv4( InetAddrIPv4& ipV4 )    { m_LanIPv4 = ipV4; }
 	InetAddrIPv4&				getLanIPv4( void )					{ return m_LanIPv4; }
 
 	InetAddress					getOnlineIpAddress( void );
