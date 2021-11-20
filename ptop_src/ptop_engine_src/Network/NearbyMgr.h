@@ -1,0 +1,70 @@
+#pragma once
+//============================================================================
+// Copyright (C) 2021 Brett R. Jones 
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.nolimitconnect.com
+//============================================================================
+
+#include "RcMulticastBroadcast.h"
+#include "RcMulticastListen.h"
+#include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
+
+#include <CoreLib/VxGUID.h>
+
+#include <vector>
+
+class NearbyMgr : public IMulticastListenCallback, public NetAvailStatusCallbackInterface
+{
+public:
+    NearbyMgr() = delete;
+    NearbyMgr( P2PEngine& engine, NetworkMgr& networkMgr );
+    virtual ~NearbyMgr() = default;
+
+    void                        lockList( void ) { m_ListMutex.lock(); }
+    void                        unlockList( void ) { m_ListMutex.unlock(); }
+
+    void						networkMgrStartup( void );
+    void						networkMgrShutdown( void );
+
+    virtual bool                fromGuiNearbyBroadcastEnable( bool enable );
+    virtual void				fromGuiNetworkAvailable( const char* lclIp, bool isCellularNetwork = false );
+    virtual void				fromGuiNetworkLost( void );
+
+    virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) override;
+    virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) override;
+
+    bool                        isNearby( VxGUID& onlineId );
+    virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp );
+    virtual void                removeIdent( VxGUID& onlineId );
+
+    std::vector<std::pair<VxGUID, int64_t>>& getIdentList()         { return m_NearbyIdentList; };
+
+    virtual void				onPktAnnUpdated( void );
+    virtual void				onOncePerSecond( void );
+
+    virtual	void				handleMulticastSktCallback( VxSktBase* sktBase );
+
+protected:
+    void						setBroadcastPort( uint16_t u16Port );
+    void						setBroadcastEnable( bool enable );
+
+    virtual void				multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnounce ) override;
+
+    P2PEngine&                  m_Engine;
+    NetworkMgr&                 m_NetworkMgr;
+    VxMutex                     m_ListMutex;
+
+    std::vector<std::pair<VxGUID, int64_t>> m_NearbyIdentList;
+
+    RcMulticastBroadcast		m_MulticastBroadcast;
+    RcMulticastListen			m_MulticastListen;
+};
+
