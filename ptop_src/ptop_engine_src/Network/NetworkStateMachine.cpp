@@ -134,20 +134,8 @@ void NetworkStateMachine::stateMachineStartup( void )
 //============================================================================
 void NetworkStateMachine::startupNetworkModules( void )
 {
-#ifdef DEBUG_PTOP_NETWORK_STATE
-    LogMsg( LOG_INFO, "NetworkStateMachine::startupNetworkModules 1\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
+	LogModule( eLogNetworkState, LOG_DEBUG, "NetworkStateMachine::startupNetworkModules" );
 	m_NetworkMgr.networkMgrStartup();
-	uint16_t u16MulticastPort;
-#ifdef DEBUG_PTOP_NETWORK_STATE
-    LogMsg( LOG_INFO, "NetworkStateMachine::startupNetworkModules 2\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
-	m_Engine.getEngineSettings().getMulticastPort( u16MulticastPort );
-	m_NetworkMgr.setBroadcastPort( u16MulticastPort );
-
-	bool multicastEnable = false;
-	m_Engine.getEngineSettings().getMulticastEnable( multicastEnable );
-	m_NetworkMgr.setBroadcastEnable( multicastEnable );
 
 	m_NetServicesMgr.netServicesStartup();
 	m_NetConnector.netConnectorStartup();
@@ -265,9 +253,7 @@ void NetworkStateMachine::changeNetworkState( ENetworkStateType eNetworkStateTyp
 
 	if( curNetworkStateType != eNetworkStateType )
 	{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-		LogMsg( LOG_INFO, "changeNetworkState %s to %s\n", DescribeNetworkState( curNetworkStateType ), DescribeNetworkState( eNetworkStateType ) );
-#endif // DEBUG_PTOP_NETWORK_STATE
+		LogModule( eLogNetworkState, LOG_DEBUG, "changeNetworkState %s to %s\n", DescribeNetworkState( curNetworkStateType ), DescribeNetworkState( eNetworkStateType ) );
 		m_NetworkStateMutex.lock();
 		m_CurNetworkState = findNetworkState( eNetworkStateType );
 		m_NetworkStateMutex.unlock();
@@ -387,7 +373,7 @@ void NetworkStateMachine::restartNetwork( void )
 {
 	bool isCell		= m_bIsCellNetwork;
 	std::string ip	= m_LocalNetworkIp;
-    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::restartNetwork" );
+    LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::restartNetwork" );
 
     static bool lastIsCell = false;
     static std::string lastIpFound;
@@ -418,7 +404,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
         LogModule( eLogNetworkState, LOG_INFO, " fromGuiNetworkAvailable hasChanged %s", m_LocalNetworkIp.c_str() );
     }
 
-    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkAvailable creating network available event %s", lclIp );
+    LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiNetworkAvailable creating network available event %s", lclIp );
 
 	m_NetworkStateMutex.lock();
 	m_NetworkEventList.push_back( new NetworkEventAvail( *this, lclIp, isCellularNetwork ) );
@@ -429,7 +415,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
 //============================================================================
 void NetworkStateMachine::fromGuiNetworkLost( void )
 {
-    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkLost" );
+    LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiNetworkLost" );
 	m_Engine.getPeerMgr().stopListening();
 	m_LocalNetworkIp = "";
 	m_NetworkStateMutex.lock();
@@ -442,7 +428,7 @@ ENetLayerState NetworkStateMachine::fromGuiGetNetLayerState( ENetLayerType netLa
 {
     ENetLayerState netState = eNetLayerStateUndefined;
 
-    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiGetNetLayerState" );
+    LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiGetNetLayerState" );
     if( netLayer == eNetLayerTypeInternet )
     {
         netState = getNetworkMgr().fromGuiGetNetLayerState( netLayer );
@@ -465,7 +451,7 @@ void NetworkStateMachine::setNetLayerState( ENetLayerType layerType, ENetLayerSt
     }
     else
     {
-        LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+        LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::setNetLayerState invalid param" );
     }
 }
 
@@ -485,7 +471,7 @@ ENetLayerState NetworkStateMachine::getNetLayerState( ENetLayerType netLayer )
     }
     else
     {
-        LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+        LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::setNetLayerState invalid param" );
         return eNetLayerStateWrongType;
     }
 }
@@ -499,7 +485,7 @@ void NetworkStateMachine::fromGuiNetworkSettingsChanged( void )
 	{
 		bool isCell = isCellularNetwork();
 		std::string ip = m_LocalNetworkIp;
-        LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkSettingsChanged" );
+        LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiNetworkSettingsChanged" );
 		fromGuiNetworkLost();
 		m_PktAnn.getLanIPv4().setIp( ip.c_str() );
 		fromGuiNetworkAvailable( ip.c_str(), isCell );

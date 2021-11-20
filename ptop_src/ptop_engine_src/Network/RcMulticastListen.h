@@ -32,13 +32,15 @@ public:
 	RcMulticastListen(  NetworkMgr& networkMgr, IMulticastListenCallback& multicastListenCallback );
 	virtual ~RcMulticastListen();
 
-	int 						beginListen( void );
-	void 						stopListen( void );
+	bool 						enableListen( bool enable );
 	void						doUdpDataCallback( VxSktBase * skt );
 
 protected:
+	int 						startListen( void );
+	void 						stopListen( void );
 	void						attemptDecodePktAnnounce( VxSktBase * skt, unsigned char * data, int dataLen );
 
+	bool						m_ListenEnabled{ false };
 	VxSktUdp					m_SktUdp;
 	IMulticastListenCallback&	m_ListenCallback;
 };

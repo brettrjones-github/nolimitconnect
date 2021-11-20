@@ -80,7 +80,6 @@ void IdentLogicInterface::setIdentWidgetSize( EButtonSize buttonSize )
 	setIdentMenuIcon( eMyIconMenu );
 }
 
-
 //============================================================================
 void IdentLogicInterface::updateIdentity( GuiUser* netIdent )
 {

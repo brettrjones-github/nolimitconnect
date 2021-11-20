@@ -16,8 +16,7 @@
 //============================================================================
 
 #include "NetworkDefs.h"
-#include "RcMulticastBroadcast.h"
-#include "RcMulticastListen.h"
+#include "NearbyMgr.h"
 
 #include <CoreLib/VxDefs.h>
 #include <PktLib/VxFriendMatch.h>
@@ -34,7 +33,7 @@ class VxGUID;
 class InetAddress;
 class PktAnnounce;
 
-class NetworkMgr : public IMulticastListenCallback
+class NetworkMgr
 {
 public:
 	NetworkMgr( P2PEngine&		engine, 
@@ -45,6 +44,7 @@ public:
 
 	P2PEngine&					getEngine( void )											{ return m_Engine; }
 	VxPeerMgr&					getPeerMgr( void )											{ return m_PeerMgr; }
+	NearbyMgr&					getNearbyMgr( void )										{ return m_NearbyMgr; }
 	std::string					getLocalIpAddress( void )									{ return m_strLocalIpAddr; }
 	void						setNetworkKey( const char * networkName )					{ m_NetworkName = networkName; }
 	const char *				getNetworkKey( void )										{ return m_NetworkName.c_str(); }
@@ -61,16 +61,10 @@ public:
 	virtual bool				isNetworkAvailable( void )									{ return m_bNetworkAvailable; }
 	virtual bool				isCellularNetwork( void )									{ return m_bIsCellularNetwork; }
 
-	void						setBroadcastPort( uint16_t u16Port );
-	void						setBroadcastEnable( bool enable );
-
-	virtual	void				multicastPktAnnounceAvail( VxSktBase * skt, PktAnnounce * pktAnnounce );
-
 	virtual void				onPktAnnUpdated( void );
 	virtual void				onOncePerSecond( void );
 
 	virtual	void				handleTcpSktCallback( VxSktBase * sktBase );
-	virtual	void				handleMulticastSktCallback( VxSktBase * sktBase );
 
 protected:
 	P2PEngine&					m_Engine;
@@ -78,10 +72,8 @@ protected:
     VxPeerMgr&					m_PeerMgr;
 	BigListMgr&					m_BigListMgr;
 	P2PConnectList&				m_ConnectList;
-#ifdef ENABLE_MULTICAST
-	RcMulticastBroadcast		m_MulticastBroadcast;
-	RcMulticastListen			m_MulticastListen;
-#endif // ENABLE_MULTICAST
+	NearbyMgr					m_NearbyMgr;
+
 	std::string					m_NetworkName;
 
     bool						m_bNetworkAvailable{ false };

@@ -904,6 +904,12 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Network\NearbyMgr.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1944,6 +1950,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h">
       <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Network\NearbyMgr.h">
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

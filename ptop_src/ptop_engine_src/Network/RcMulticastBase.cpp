@@ -21,7 +21,7 @@
 namespace
 {
 	const char *	RC_DEFAULT_MULTICAST_ADDR	= "224.255.255.38";
-	uint16_t				RC_DEFAULT_MULTICAST_PORT	= 45124;
+	uint16_t		RC_DEFAULT_MULTICAST_PORT	= 45124;
 }
 
 //============================================================================

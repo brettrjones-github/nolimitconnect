@@ -47,9 +47,50 @@ RcMulticastListen::~RcMulticastListen()
 }
 
 //============================================================================
-int RcMulticastListen::beginListen( void )
+bool RcMulticastListen::enableListen( bool enable )
 {
-	RCODE rc = m_SktUdp.udpOpen( m_LclIp, m_u16MulticastPort );
+	bool result = false;
+	if( enable != m_ListenEnabled )
+	{
+		if( enable )
+		{
+			if( m_u16MulticastPort > 0 )
+			{
+				int err = startListen();
+				if( err )
+				{
+					LogMsg( LOG_ERROR, "RcMulticastListen::enableListen failed error %d %d", err, VxGetLastError() );
+				}
+				else
+				{
+					result = true;
+					m_ListenEnabled = true;
+				}
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "RcMulticastListen::enableListen invalid port" );
+			}
+		}
+		else
+		{
+			stopListen();
+			result = true;
+			m_ListenEnabled = false;
+		}
+	}
+	else
+	{
+		result = true;
+	}
+
+	return result;
+}
+
+//============================================================================
+int RcMulticastListen::startListen( void )
+{
+	RCODE rc = m_SktUdp.udpOpen( m_LclIp, m_u16MulticastPort, true );
 	if( 0 == rc )
 	{
 		rc = m_SktUdp.joinMulticastGroup( m_LclIp,  m_strMulticastIp.c_str() );
@@ -93,7 +134,7 @@ void RcMulticastListen::attemptDecodePktAnnounce( VxSktBase * skt, unsigned char
 	PktAnnounce * pktAnnounce = (PktAnnounce *)data;
 	if( false == pktAnnounce->isValidPktAnn() )
 	{
-		LogMsg( LOG_INFO, "attemptDecodePktAnnounce invalid PktAnn\n" );
+		LogMsg( LOG_INFO, "attemptDecodePktAnnounce invalid PktAnn" );
 		return;
 	}
 

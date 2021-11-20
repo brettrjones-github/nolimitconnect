@@ -167,6 +167,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Invite/Invite.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.h \
@@ -187,6 +188,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Network/ConnectRequest.h \
     $$PWD/ptop_src/ptop_engine_src/Network/DirectConnectTester.h \
     $$PWD/ptop_src/ptop_engine_src/Network/Firewall.h \
+    $$PWD/ptop_src/ptop_engine_src/Network/NearbyMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetConnector.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetPortForward.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkDefs.h \
@@ -463,6 +465,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Invite/Invite.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.cpp \
@@ -478,6 +481,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Network/ConnectRequest.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/DirectConnectTester.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/Firewall.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Network/NearbyMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetConnector.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetPortForward.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkEventAvail.cpp \

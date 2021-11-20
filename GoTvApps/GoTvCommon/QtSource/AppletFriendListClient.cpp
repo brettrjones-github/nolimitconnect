@@ -70,6 +70,7 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
+    /*
     connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )),
         this, SLOT(slotHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )) );
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
@@ -81,6 +82,7 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     connect( ui.m_FriendListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, FriendListItem* ) ) );
     connect( ui.m_FriendListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, FriendListItem* ) ) );
     connect( ui.m_FriendListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, FriendListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, FriendListItem* ) ) );
+    */
 
     connect( ui.m_FriendsButton, SIGNAL( clicked() ), this, SLOT( slotFriendsButtonClicked() ) );
     connect( ui.m_FriendsInfoButton, SIGNAL( clicked() ), this, SLOT( slotFriendsInfoButtonClicked() ) );
@@ -97,6 +99,7 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
 //============================================================================
 AppletFriendListClient::~AppletFriendListClient()
 {
+    m_Engine.fromGuiNearbyBroadcastEnable( false );
     m_UserMgr.wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
@@ -150,6 +153,7 @@ void AppletFriendListClient::infoMsg( const char* errMsg, ... )
 void AppletFriendListClient::clearList( void )
 {
     ui.m_FriendListWidget->clear();
+    setStatusLabel( GuiParams::describeFriendListType( m_ShowFriendType ) + QObject::tr( "List" ) );
 }
 
 //============================================================================
@@ -162,6 +166,7 @@ void AppletFriendListClient::clearStatus( void )
 void AppletFriendListClient::onShowFriendList( void )
 {
     clearList();
+
     std::vector<std::pair<VxGUID, int64_t>> friendList;
     FriendListMgr& friendMgr = m_Engine.getFriendListMgr();
     // make a copy to avoid pausing engine and to avoid threading issues
@@ -247,7 +252,6 @@ void AppletFriendListClient::callbackOnUserRemoved( VxGUID& onlineId )
 //============================================================================
 void AppletFriendListClient::onShowFriendTypeChanged( void )
 {
-    setStatusLabel( GuiParams::describeFriendListType( m_ShowFriendType ) + QObject::tr( "List" ) );
     switch( m_ShowFriendType )
     {
     case eFriendListTypeIgnore:
@@ -268,6 +272,7 @@ void AppletFriendListClient::onShowFriendTypeChanged( void )
 //============================================================================
 void AppletFriendListClient::slotFriendsButtonClicked( void )
 {
+    m_Engine.fromGuiNearbyBroadcastEnable( false );
     if( m_ShowFriendType != eFriendListTypeFriend )
     {
         m_ShowFriendType = eFriendListTypeFriend;
@@ -278,6 +283,7 @@ void AppletFriendListClient::slotFriendsButtonClicked( void )
 //============================================================================
 void AppletFriendListClient::slotIgnoredButtonClicked( void )
 {
+    m_Engine.fromGuiNearbyBroadcastEnable( false );
     if( m_ShowFriendType != eFriendListTypeIgnore )
     {
         m_ShowFriendType = eFriendListTypeIgnore;
@@ -288,6 +294,7 @@ void AppletFriendListClient::slotIgnoredButtonClicked( void )
 //============================================================================
 void AppletFriendListClient::slotNearbyButtonClicked( void )
 {
+    m_Engine.fromGuiNearbyBroadcastEnable( true );
     if( m_ShowFriendType != eFriendListTypeNearby )
     {
         m_ShowFriendType = eFriendListTypeNearby;

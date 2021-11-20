@@ -40,9 +40,7 @@ void NetworkStateGetRelayList::runNetworkState( void )
 		return;
 	}
 
-#ifdef DEBUG_PTOP_NETWORK_STATE
-    LogMsg( LOG_INFO, "NetworkStateGetRelayList anchor ip %s", m_NetworkStateMachine.getHostIp().c_str() );
-#endif // DEBUG_PTOP_NETWORK_STATE
+	LogModule( eLogNetworkState, LOG_DEBUG, "NetworkStateGetRelayList anchor ip %s", m_NetworkStateMachine.getHostIp().c_str() );
 	if( 0 == m_NetworkStateMachine.getHostIp().length() )
 	{
 #ifdef DEBUG_PTOP_NETWORK_STATE

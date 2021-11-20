@@ -37,12 +37,12 @@ namespace
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
-		LogMsg( LOG_ERROR, "SharedFilesMgr UpdateSharedFiles thread run\n" );
+		LogModule( eLogThread, LOG_VERBOSE, "SharedFilesMgr UpdateSharedFiles thread run" );
 		SharedFilesMgr * poMgr = (SharedFilesMgr *)poThread->getThreadUserParam();
         if( poMgr && false == poThread->isAborted() )
         {
             poMgr->updateFilesListFromDb( poThread );
-            LogMsg( LOG_ERROR, "SharedFilesMgr UpdateSharedFiles thread exit\n" );
+			LogModule( eLogThread, LOG_VERBOSE, "SharedFilesMgr UpdateSharedFiles thread exit" );
         }
 
 		poThread->threadAboutToExit();
@@ -54,12 +54,12 @@ namespace
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
-		LogMsg( LOG_ERROR, "SharedFilesMgr GenHashIds thread run\n" );
+		LogModule( eLogThread, LOG_VERBOSE, "SharedFilesMgr GenHashIds thread run" );
 		SharedFilesMgr * poMgr = (SharedFilesMgr *)poThread->getThreadUserParam();
         if( poMgr && false == poThread->isAborted() )
         {
             poMgr->generateHashIds( poThread );
-            LogMsg( LOG_ERROR, "SharedFilesMgr GenHashIds thread exit\n" );
+			LogModule( eLogThread, LOG_VERBOSE, "SharedFilesMgr GenHashIds thread exit" );
         }
 
 		poThread->threadAboutToExit();
@@ -98,7 +98,7 @@ void SharedFilesMgr::fromGuiUserLoggedOn( void )
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "SharedFilesMgr::updateFilesList: Thread Still Running\n" );
+		LogModule( eLogThread, LOG_VERBOSE, "SharedFilesMgr::fromGuiUserLoggedOn: Thread Still Running" );
 	}
 }
 

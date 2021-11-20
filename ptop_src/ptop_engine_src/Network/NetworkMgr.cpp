@@ -48,14 +48,6 @@ namespace
             netMgr->handleTcpSktCallback( sktBase );
 		}
 	}
-
-	//void NetworkMulticastCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
-	//{
-	//	if( pvUserCallbackData )
-	//	{
-	//		((NetworkMgr *)pvUserCallbackData)->handleMulticastSktCallback( sktBase );
-	//	}
-	//}
 }
 
 //============================================================================
@@ -69,31 +61,23 @@ NetworkMgr::NetworkMgr( P2PEngine&		engine,
 , m_PeerMgr( peerMgr )
 , m_BigListMgr( bigListMgr )
 , m_ConnectList( connectionList )
-#ifdef ENABLE_MULTICAST
-, m_MulticastBroadcast( *this )
-, m_MulticastListen( *this, *this )
-#endif // ENABLE_MULTICAST
+, m_NearbyMgr( engine, *this )
 {
 	VxSetNetworkLoopbackAllowed( false );
 
 	m_PeerMgr.setReceiveCallback( NetworkPeerSktCallbackHandler, this );
-#ifdef ENABLE_MULTICAST
-	m_MulticastListen.getUdpSkt().setReceiveCallback( NetworkMulticastCallbackHandler, this );
-#endif // ENABLE_MULTICAST
 }
 
 //============================================================================
 void NetworkMgr::networkMgrStartup( void )
 {
+	m_NearbyMgr.networkMgrStartup();
 }
 
 //============================================================================
 void NetworkMgr::networkMgrShutdown( void )
 {
-#ifdef ENABLE_MULTICAST
-	m_MulticastBroadcast.getUdpSkt().closeSkt();
-	m_MulticastListen.stopListen();	
-#endif // ENABLE_MULTICAST
+	m_NearbyMgr.networkMgrShutdown();
 	m_PeerMgr.sktMgrShutdown();
 }
 
@@ -127,10 +111,6 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
     m_bNetworkAvailable = true;
 
 	m_PeerMgr.setLocalIp( m_LocalIp );
-//#ifdef ENABLE_MULTICAST // do not specify local address .. does not work with vpn
-//	m_MulticastListen.setLocalIp( m_LocalIp );
-//	m_MulticastBroadcast.setLocalIp( m_LocalIp );
-//#endif // ENABLE_MULTICAST
 
 	if( m_LocalIp.isIPv4() && m_LocalIp.isValid() )
 	{
@@ -141,23 +121,14 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
 		m_Engine.getMyPktAnnounce().getLanIPv4().setToInvalid();
 	}
 
-    // no need for this .. NetworkEventAvail will start listening to network
-	// m_PeerMgr.startListening( lclIp, m_Engine.getMyPktAnnounce().getOnlinePort() );
-#ifdef ENABLE_MULTICAST
-	m_MulticastListen.beginListen();	
-#endif // ENABLE_MULTICAST
+	m_NearbyMgr.fromGuiNetworkAvailable( lclIp, isCellularNetwork );
 }
 
 //============================================================================
 void NetworkMgr::fromGuiNetworkLost( void )
 {
 	m_bNetworkAvailable =  false ;
-
-    // no need for this .. NetworkEventLost will stop listening
-	// m_PeerMgr.stopListening();
-#ifdef ENABLE_MULTICAST
-	m_MulticastListen.stopListen();
-#endif // ENABLE_MULTICAST
+	m_NearbyMgr.fromGuiNetworkLost();;
 }
 
 //============================================================================
@@ -182,47 +153,20 @@ ENetLayerState NetworkMgr::fromGuiGetNetLayerState( ENetLayerType netLayer )
 }
 
 //============================================================================
-void NetworkMgr::setBroadcastPort( uint16_t u16Port )
-{
-#ifdef ENABLE_MULTICAST
-	m_MulticastBroadcast.setMulticastPort( u16Port );
-	m_MulticastListen.setMulticastPort( u16Port );
-#endif // ENABLE_MULTICAST
-}
-
-//============================================================================
-void NetworkMgr::setBroadcastEnable( bool enable )
-{
-#ifdef ENABLE_MULTICAST
-	m_MulticastBroadcast.setBroadcastEnable( enable );
-#endif // ENABLE_MULTICAST
-}
-
-//============================================================================
-void NetworkMgr::multicastPktAnnounceAvail( VxSktBase * skt, PktAnnounce * pktAnnounce )
-{
-	//BRJ TODO handle multicast
-}
-
-//============================================================================
 void NetworkMgr::onPktAnnUpdated( void )
 {
-#ifdef ENABLE_MULTICAST
-	m_MulticastBroadcast.onPktAnnUpdated();
-#endif // ENABLE_MULTICAST
+	m_NearbyMgr.onPktAnnUpdated();
 }
 
 //============================================================================
 void NetworkMgr::onOncePerSecond( void )
 {
-#ifdef ENABLE_MULTICAST
 	if ( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 	
-	m_MulticastBroadcast.onOncePerSecond();
-#endif // ENABLE_MULTICAST
+	m_NearbyMgr.onOncePerSecond();
 }
 
 //============================================================================
@@ -273,64 +217,6 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 	default:
 		LogMsg( LOG_ERROR, "NetworkMgrTCP: UNKNOWN CallbackReason %d skt %d skt id %d error %s thread 0x%x", 
                 sktBase->getCallbackReason(), sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
-		break;
-	}
-}
-
-//============================================================================
-void NetworkMgr::handleMulticastSktCallback( VxSktBase * sktBase )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-	switch( sktBase->getCallbackReason() )
-	{
-	case eSktCallbackReasonConnectError:
-        if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
-		break;
-
-	case eSktCallbackReasonConnected:
-        if( IsLogEnabled( eLogMulticast ) )
-            LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp().c_str(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
-		break;
-
-	case eSktCallbackReasonData:
-		if( 16 > sktBase->getSktBufDataLen() )
-		{
-			// don't even bother.. not enough to decrypt
-			break;
-		}
-
-        if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Data Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
-		m_Engine.handleMulticastData( sktBase );
-		break;
-
-	case eSktCallbackReasonClosed:
-        if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d closed %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
-		break;
-
-	case eSktCallbackReasonError:
-        if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
-		break;
-
-	case eSktCallbackReasonClosing:
-        if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
-		break;
-
-	case eSktCallbackReasonConnecting:
-        if( IsLogEnabled( eLogMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
-		break;
-
-	default:
-		LogMsg( LOG_ERROR, "NetworkMgr:Multicast: Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 	}
 }

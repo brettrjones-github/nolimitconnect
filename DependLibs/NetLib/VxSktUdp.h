@@ -21,10 +21,10 @@ class VxSktUdp : public VxSktBase
 {
 public:
 	VxSktUdp();	
-	virtual ~VxSktUdp();
+	virtual ~VxSktUdp() = default;
 
 	//! open a udp port
-	virtual long				udpOpen(	InetAddress& oLclIp, uint16_t u16Port = 54321, bool enableReceive = true );			// udp port to listen on
+	virtual long				udpOpen( InetAddress& oLclIp, uint16_t u16Port = 54321, bool enableReceive = true );			// udp port to listen on
 	virtual long				udpOpenMulticastListen( InetAddress& oLclIp, uint16_t u16Port, const char * pIPMulticastGroup = "239.255.255.250" );
 	virtual long				udpOpenUnicast( InetAddress& oLclIp, uint16_t u16Port );
 
@@ -32,21 +32,20 @@ public:
 	virtual long				sendTo(	const char *	pData,			// data to send
 										int				iDataLen,		// data length
 										InetAddress&	u32RmpIp,		// destination ip
-										uint16_t	u16Port = 0 );	// port to send to ( if 0 then port specified when opened )
+										uint16_t		u16Port = 0 );	// port to send to ( if 0 then port specified when opened )
 
 	//! send data to given ip 
 	virtual long				sendTo(	const char *	pData,			// data to send
 										int				iDataLen,		// data length
 										const char *	pRmpIp,			// destination ip in dotted format
-										uint16_t	u16Port = 0 );	// port to send to ( if 0 then port specified when opened )
+										uint16_t		u16Port = 0 );	// port to send to ( if 0 then port specified when opened )
 
 	//! send data to given ip 
-	virtual long				sendToMulticast(	const char *	pData,			// data to send
-													int				iDataLen,		// data length
-													const char *	pRmpIp,			// destination ip in dotted format
-													uint16_t	u16Port = 0 );	// port to send to ( if 0 then port specified when opened )
-private:
-
+	virtual long				sendToMulticast(	const char *	pData,				// data to send
+													int				iDataLen,			// data length
+													const char *	muliticastGroupIp,	// destination multicast group ip in dotted format
+													uint16_t		u16Port = 0 );		// port to send to ( if 0 then port specified when opened )
+protected:
 	long						createSocket( InetAddress& oLclIp, uint16_t u16Port, struct addrinfo ** ppoResultAddr );
 	void						startReceive( void );
 };

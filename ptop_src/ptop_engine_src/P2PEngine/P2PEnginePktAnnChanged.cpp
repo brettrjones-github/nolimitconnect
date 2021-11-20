@@ -29,7 +29,6 @@ void P2PEngine::doPktAnnHasChanged( bool connectionListIsLocked )
 	//LogMsg( LOG_ERROR, "P2PEngine::doPktAnnHasChanged start\n" );
     setPktAnnLastModTime( GetTimeStampMs() );
 	m_ConnectionList.setIsRelayRequired( m_PktAnn.requiresRelay() );
-	m_NetworkMgr.onPktAnnUpdated();
 	// announce to all our new announce
 	if( false == isP2POnline() )
 	{
@@ -37,14 +36,15 @@ void P2PEngine::doPktAnnHasChanged( bool connectionListIsLocked )
 		return;
 	}
 
+	m_NetworkMgr.onPktAnnUpdated();
 	PktAnnounce oPktAnn;
 	BigListInfo * poBigInfo;
 
 	if( false == connectionListIsLocked )
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::doPktAnnHasChanged m_ConnectListMutex attempt lock\n" );
+		LogMsg( LOG_ERROR, "P2PEngine::doPktAnnHasChanged m_ConnectListMutex attempt lock" );
 		m_ConnectionList.connectListLock();
-		LogMsg( LOG_ERROR, "P2PEngine::doPktAnnHasChanged m_ConnectListMutex lock success\n" );
+		LogMsg( LOG_ERROR, "P2PEngine::doPktAnnHasChanged m_ConnectListMutex lock success" );
 	}
 
 	// make copy of pkt announce 

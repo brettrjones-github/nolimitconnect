@@ -32,16 +32,11 @@ VxSktUdp::VxSktUdp()
 }
 
 //============================================================================
-VxSktUdp::~VxSktUdp()
-{
-}
-
-//============================================================================
 RCODE VxSktUdp::udpOpen( InetAddress& oLclIp, uint16_t u16Port, bool enableReceive )	
 {
 	struct addrinfo * poResultAddr = 0;
 #ifdef DEBUG_VXSKT_UDP
-	LogMsg( LOG_INFO, "udpOpen port %d\n", u16Port );
+	LogMsg( LOG_INFO, "udpOpen port %d", u16Port );
 #endif // DEBUG_VXSKT_UDP
 	RCODE rc = createSocket( oLclIp, u16Port, &poResultAddr );
 	if( 0 == rc )
@@ -50,14 +45,12 @@ RCODE VxSktUdp::udpOpen( InetAddress& oLclIp, uint16_t u16Port, bool enableRecei
 		VxSetSktAllowReusePort( m_Socket );
 		if( false == VxBindSkt( m_Socket, oLclIp, u16Port ) )
 		{
-#endif // #if USE_BIND_LOCAL_IP
 			m_rcLastSktError = VxGetLastError();
 			if( 0 == m_rcLastSktError )
 			{
 				m_rcLastSktError = -1;
 			}
 			rc = m_rcLastSktError;
-#if USE_BIND_LOCAL_IP
 		}
 #endif // #if USE_BIND_LOCAL_IP
 	}
@@ -177,12 +170,21 @@ RCODE VxSktUdp::createSocket( InetAddress& oLclIp, uint16_t u16Port, struct addr
 		// create socket error
 		m_eSktCallbackReason = eSktCallbackReasonConnectError;
 		m_rcLastSktError = VxGetLastError();
-		LogMsg( LOG_ERROR, "VxSktBase::udpOpen: socket create error %s\n", VxDescribeSktError( m_rcLastSktError ) );
+		LogMsg( LOG_ERROR, "VxSktBase::udpOpen: socket create error %s", VxDescribeSktError( m_rcLastSktError ) );
 		if( m_pfnReceive )
 		{
 			m_pfnReceive( this, getRxCallbackUserData() );
 		}
+
 		return m_rcLastSktError;
+	}
+	else
+	{
+		u_int yes = 1;
+		if( 0 > setsockopt( m_Socket, SOL_SOCKET, SO_REUSEADDR, ( char* )&yes, sizeof( yes ) ) )
+		{
+			LogMsg( LOG_ERROR, "VxSktBase::udpOpen: Reusing ADDR failed error %s", VxDescribeSktError( m_rcLastSktError ) );
+		}
 	}
 
 #ifdef DEBUG_VXSKT_UDP
@@ -214,7 +216,7 @@ void VxSktUdp::startReceive( void )
 RCODE  VxSktUdp::sendTo(	const char *	pData,		// data to send
 							int				iDataLen,	// data len
 							const char *	pRmtIp, 	// destination ip in dotted format
-							uint16_t				u16Port )	// port to send to ( if 0 then port specified when opened )
+							uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )
 {
 	InetAddress oAddr( pRmtIp );
 	return sendTo( pData, iDataLen, oAddr, u16Port );
@@ -222,20 +224,19 @@ RCODE  VxSktUdp::sendTo(	const char *	pData,		// data to send
 
 //============================================================================
 //! send data to given ip 
-RCODE  VxSktUdp::sendToMulticast(	const char *	pData,		// data to send
-									int				iDataLen,	// data len
-									const char *	pRmtIp, 	// destination ip in dotted format
-									uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )
+RCODE  VxSktUdp::sendToMulticast(	const char *	pData,				// data to send
+									int				iDataLen,			// data len
+									const char *	muliticastGroupIp, 	// destination multicast group ip in dotted format
+									uint16_t		u16Port )			// port to send to ( if 0 then port specified when opened )
 {
-	InetAddress oAddr( pRmtIp );
-	struct ip_mreq mreq;
-	mreq.imr_multiaddr.s_addr = inet_addr( m_strMulticastGroupIp.c_str() );
-	mreq.imr_interface.s_addr = inet_addr( pRmtIp );
+	InetAddress oAddr( muliticastGroupIp );
+	struct ip_mreq mreq = {};
+	mreq.imr_multiaddr.s_addr = inet_addr( muliticastGroupIp );
+	mreq.imr_interface.s_addr = htonl( INADDR_ANY );
 	if( setsockopt( m_Socket, IPPROTO_IP, IP_ADD_MEMBERSHIP,(char*)&mreq, sizeof(mreq)) < 0)
 	{
 		m_rcLastSktError = VxGetLastError();
-        if( IsLogEnabled( eLogSkt ) )
-		    LogMsg( LOG_ERROR, "VxSktUdp::sendToMulticast setsockopt mreq failed %s\n", VxDescribeSktError( m_rcLastSktError ) );
+		LogModule( eLogMulticast, LOG_ERROR, "VxSktUdp::sendToMulticast setsockopt mreq failed %s", VxDescribeSktError( m_rcLastSktError ) );
 	}
 
 	return sendTo( pData, iDataLen, oAddr, u16Port );

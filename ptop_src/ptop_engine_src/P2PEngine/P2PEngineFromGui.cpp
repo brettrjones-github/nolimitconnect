@@ -1344,8 +1344,7 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 //============================================================================
 bool P2PEngine::fromGuiNearbyBroadcastEnable( bool enable )
 {
-	LogMsg( LOG_INFO, "fromGuiNearbyBroadcastEnable %d", enable );
-	return false;
+	return m_NetworkMgr.getNearbyMgr().fromGuiNearbyBroadcastEnable( enable );
 }
 
 //============================================================================

@@ -587,6 +587,7 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Invite\Invite.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp" />
@@ -609,6 +610,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\ConnectRequest.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\DirectConnectTester.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\Firewall.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Network\NearbyMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetConnector.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetPortForward.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkEventAvail.cpp" />
@@ -944,6 +946,7 @@
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Invite\Invite.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h" />
@@ -971,6 +974,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\ConnectRequest.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\DirectConnectTester.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\Firewall.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Network\NearbyMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetConnector.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetPortForward.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkDefs.h" />

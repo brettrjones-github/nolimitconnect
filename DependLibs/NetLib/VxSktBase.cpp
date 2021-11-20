@@ -330,10 +330,14 @@ RCODE VxSktBase::joinMulticastGroup( InetAddress& oLclAddress, const char *mcast
 		if( 0 != setsockopt( m_Socket, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char *)&ipmr, sizeof(ipmr) ) )
 		{
 			setLastSktError( VxGetLastError() );
-            LogModule( eLogMulticast, LOG_ERROR, "VxSktBase::joinGroup set add membership error %d\n", getLastSktError() );
+            LogModule( eLogMulticast, LOG_ERROR, "VxSktBase::joinGroup set add membership error %d", getLastSktError() );
+		}
+		else
+		{
+			setLastSktError( 0 );
 		}
 
-        LogModule( eLogMulticast, LOG_INFO, "joinMulticastGroup: local ip %s group %s error if any %d\n",
+        LogModule( eLogMulticast, LOG_INFO, "joinMulticastGroup: local ip %s group %s error if any %d",
 				strLclIp.c_str(), 
 				mcastAddr,
 				getLastSktError()

@@ -27,22 +27,37 @@ namespace
 //============================================================================
 RcMulticastBroadcast::RcMulticastBroadcast( NetworkMgr& networkMgr )
 : RcMulticastBase( networkMgr )
-, m_bBroadcastEnabled( true )
-, m_iBroadcastCountSec( 0 )
-, m_bPktAnnUpdated( false )
-, m_bOnline( false )
 {
 }
 
 //============================================================================
 RcMulticastBroadcast::~RcMulticastBroadcast()
 {
+	m_SktUdp.closeSkt( eSktCloseConnectReasonsEmpty, false );
 }
 
 //============================================================================
 void RcMulticastBroadcast::setBroadcastEnable( bool enable )
 {
-	m_bBroadcastEnabled = enable;
+	if( enable != m_bBroadcastEnabled )
+	{
+		if( enable )
+		{
+			RCODE rc = m_SktUdp.udpOpen( m_LclIp, m_u16MulticastPort, false );
+			if( 0 == rc )
+			{
+				m_bBroadcastEnabled = enable;
+			}
+			else
+			{
+				LogModule( eLogMulticast, LOG_ERROR, "RcMulticastBroadcast::setBroadcastEnable failed %d", rc );
+			}
+		}
+		else
+		{
+			m_SktUdp.closeSkt( eSktCloseConnectReasonsEmpty, false );
+		}
+	}
 }
 
 //============================================================================
@@ -80,7 +95,7 @@ void RcMulticastBroadcast::onPktAnnUpdated( void )
 //============================================================================
 void RcMulticastBroadcast::onOncePerSecond( void )
 {
-	if( m_bBroadcastEnabled && m_bOnline )
+	if( m_bBroadcastEnabled && m_bPktAnnUpdated )
 	{
 		m_iBroadcastCountSec++;
 		if( m_iBroadcastCountSec >= MULTICAST_BROADCAST_INTERVAL_SEC )
@@ -96,14 +111,14 @@ void RcMulticastBroadcast::sendMulticast( void )
 {
 	if( false == m_bPktAnnUpdated )
 	{
-		//LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn HAS NOT BEEN UPDATED\n" );
+		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn HAS NOT BEEN UPDATED" );
 		return;
 	}
-	// TODO send
-}
-
-//============================================================================
-void RcMulticastBroadcast::goOnline( bool online )
-{
-	m_bOnline = online;
+	
+	LogModule( eLogMulticast, LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn len %d", sizeof( m_PktAnnEncrypted ) );
+	RCODE rc = getUdpSkt().sendToMulticast( (const char *)&m_PktAnnEncrypted, sizeof( m_PktAnnEncrypted ), m_strMulticastIp.c_str(), m_u16MulticastPort );
+	if( rc )
+	{
+		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast error %d", rc );
+	}
 }

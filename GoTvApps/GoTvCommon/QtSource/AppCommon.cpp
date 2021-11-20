@@ -1013,7 +1013,7 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 	}
 
 	emit signalNetworkStateChanged( eNetworkState );
-
+	/*
     if( IsLogEnabled( eLogNetworkState ) )
     {
         const char * networkState = DescribeNetworkState( eNetworkState );
@@ -1029,6 +1029,7 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 
         emit signalStatusMsg( formatedMsg.c_str() );
     }
+	*/
 }
 
 //============================================================================

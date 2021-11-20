@@ -1,6 +1,4 @@
-#ifndef MULTICAST_BROADCAST_H
-#define MULTICAST_BROADCAST_H
-
+#pragma once
 //============================================================================
 // Copyright (C) 2014 Brett R. Jones 
 // Issued to MIT style license by Brett R. Jones in 2017
@@ -29,17 +27,12 @@ public:
 	void 						setBroadcastEnable( bool enable );
 	void						onOncePerSecond( void );
 	virtual void				onPktAnnUpdated( void );
-	virtual void				goOnline( bool online );
 
 protected:
 	void						sendMulticast( void );
 
-
-	bool						m_bBroadcastEnabled;
-	int							m_iBroadcastCountSec;
-	bool						m_bPktAnnUpdated;
+	bool						m_bBroadcastEnabled{ false };
+	int							m_iBroadcastCountSec{ 0 };
+	bool						m_bPktAnnUpdated{ false };
 	PktAnnounce					m_PktAnnEncrypted;
-	bool						m_bOnline;
 };
-
-#endif // MULTICAST_BROADCAST_H

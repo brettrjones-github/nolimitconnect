@@ -434,7 +434,7 @@ void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * a
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "NetServicesMgr::netActionResultRandomConnect ERROR %d\n", eAppErr );
+		LogMsg( LOG_INFO, "NetServicesMgr::netActionResultRandomConnect ERROR %d", eAppErr );
 	}
 }
 
@@ -443,14 +443,14 @@ void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& 
 {
     if( eAppErr == eAppErrNone )
     {
-        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen CAN DIRECT CONNECT extern ip %s\n", myExternalIp.c_str() );
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen CAN DIRECT CONNECT extern ip %s", myExternalIp.c_str() );
         // tested and can direct connect
         m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, myExternalIp );
     }
     else if( eAppErr == eAppErrPortIsClosed )
     {
         // tested but cannot direct connect
-        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen REQUIRES RELAY extern ip %s\n", myExternalIp.c_str() );
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen REQUIRES RELAY extern ip %s", myExternalIp.c_str() );
         m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, myExternalIp );
     }
     else
@@ -734,15 +734,15 @@ static int uint16_t = 0;
 
 		if( eAppErrNone == portOpenTestError )
 		{
-            LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP is %s to connect test %s result %s in %3.3f sec thread 0x%x", 
-                tcpListenPort, lclIP.c_str(), netSrvUrl.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
-            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :)", tcpListenPort );
+            LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s sec %3.3f thread 0x%x", 
+                tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
+            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
             m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, retMyExternalIp );
 		}
 		else
 		{
-            LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s in %3.3f sec thread 0x%x", tcpListenPort, lclIP.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
-            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP is lcl ip %s to connect test %s (%3.3f sec)", tcpListenPort, lclIP.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec() );
+            LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s->%s sec %3.3f thread 0x%x", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
+            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
             m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
             portOpenTestError = eAppErrPortIsClosed;
 		}

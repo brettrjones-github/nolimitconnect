@@ -1,6 +1,4 @@
-#ifndef MULTICAST_CRYPTO_H
-#define MULTICAST_CRYPTO_H
-
+#pragma once
 //============================================================================
 // Copyright (C) 2014 Brett R. Jones 
 // Issued to MIT style license by Brett R. Jones in 2017
@@ -39,9 +37,9 @@ protected:
 	P2PEngine&					m_Engine;
 	VxSktUdp					m_SktUdp;
 	InetAddress					m_LclIp;
-	uint16_t							m_u16MulticastPort;
+	uint16_t					m_u16MulticastPort;
 	std::string					m_strMulticastIp;
 	VxMutex						m_MulticastMutex;
 };
 
-#endif // MULTICAST_CRYPTO_H
+
