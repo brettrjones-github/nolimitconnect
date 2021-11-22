@@ -30,12 +30,9 @@ namespace
 
 //============================================================================
 NearbyMgr::NearbyMgr( P2PEngine& engine, NetworkMgr& networkMgr )
-    : m_Engine( engine )
-    , m_NetworkMgr( networkMgr )
-    , m_MulticastBroadcast( networkMgr )
-    , m_MulticastListen( networkMgr, *this )
+    : RcMulticast( networkMgr, *this )
 {
-    m_MulticastListen.getUdpSkt().setReceiveCallback( NetworkMulticastCallbackHandler, this );
+    getUdpSkt().setReceiveCallback( NetworkMulticastCallbackHandler, this );
 }
 
 //============================================================================
@@ -49,8 +46,7 @@ void NearbyMgr::networkMgrShutdown( void )
 {
     m_Engine.getNetStatusAccum().removeNetStatusCallback( this );
     setBroadcastEnable( false );
-    m_MulticastBroadcast.getUdpSkt().closeSkt( eSktCloseSktDestroy, false );
-    m_MulticastListen.getUdpSkt().closeSkt( eSktCloseSktDestroy, false );
+    getUdpSkt().closeSkt( eSktCloseSktDestroy, false );
 }
 
 //============================================================================
@@ -193,15 +189,24 @@ void NearbyMgr::removeIdent( VxGUID& onlineId )
 //============================================================================
 void NearbyMgr::setBroadcastPort( uint16_t u16Port )
 {
-    m_MulticastBroadcast.setMulticastPort( u16Port );
-    m_MulticastListen.setMulticastPort( u16Port );
+    setMulticastPort( u16Port );
 }
 
 //============================================================================
-void NearbyMgr::setBroadcastEnable( bool enable )
+bool NearbyMgr::setBroadcastEnable( bool enable )
 {
-    m_MulticastBroadcast.setBroadcastEnable( enable );
-    m_MulticastListen.enableListen( enable );
+    bool result = enableListen( enable );
+    if( result )
+    {
+        m_bBroadcastEnabled = true;
+    }
+    else
+    {
+        LogModule( eLogMulticast, LOG_ERROR, "setBroadcastEnable %d failed", enable);
+        m_bBroadcastEnabled = false;
+    }
+
+    return result;
 }
 
 //============================================================================
@@ -223,14 +228,7 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
         break;
 
     case eSktCallbackReasonData:
-        if( 16 > sktBase->getSktBufDataLen() )
-        {
-            // don't even bother.. not enough to decrypt
-            break;
-        }
-
-        LogModule( eLogMulticast, LOG_INFO, "NetworkMgr:Multicast Data Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
-        m_Engine.handleMulticastData( sktBase );
+        doUdpDataCallback( sktBase );
         break;
 
     case eSktCallbackReasonClosed:
@@ -256,24 +254,6 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
 }
 
 //============================================================================
-void NearbyMgr::onPktAnnUpdated( void )
-{
-    m_MulticastBroadcast.onPktAnnUpdated();
-}
-
-//============================================================================
-void NearbyMgr::onOncePerSecond( void )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
-
-    m_MulticastBroadcast.onOncePerSecond();
-}
-
-
-//============================================================================
 void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnounce )
 {
     //BRJ TODO handle multicast
@@ -295,6 +275,6 @@ void NearbyMgr::callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus )
             return;
         }
 
-        m_MulticastBroadcast.onPktAnnUpdated();
+        onPktAnnUpdated();
     }
 }

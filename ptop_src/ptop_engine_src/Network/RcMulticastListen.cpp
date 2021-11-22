@@ -14,12 +14,18 @@
 //============================================================================
 
 #include "RcMulticastListen.h"
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
+#include <NetLib/VxSktUtil.h>
 #include <PktLib/PktAnnounce.h>
 #include <CoreLib/VxGlobals.h>
 
 namespace
 {
+
+	const int MULTICAST_BROADCAST_INTERVAL_SEC = 5;
+
+
 	void RcMulticastListenSktCallbackHandler( VxSktBase *  sktBase, void * pvRxCallbackUserData )
 	{
 		if( eSktCallbackReasonData == sktBase->getCallbackReason() )
@@ -43,40 +49,45 @@ RcMulticastListen::RcMulticastListen(  NetworkMgr& networkMgr, IMulticastListenC
 //============================================================================
 RcMulticastListen::~RcMulticastListen()
 {
-	stopListen();
+	m_SktUdp.closeSkt( eSktCloseSktDestroy );
 }
 
 //============================================================================
 bool RcMulticastListen::enableListen( bool enable )
 {
+	if( VxIsAppShuttingDown() )
+	{
+		return false;
+	}
+
 	bool result = false;
-	if( enable != m_ListenEnabled )
+	if( enable != m_ListenEnabled || enable && !m_SktUdp.isConnected() )
 	{
 		if( enable )
 		{
-			if( m_u16MulticastPort > 0 )
+			RCODE rc = m_SktUdp.udpOpenMulticast( m_MulticastGroupIp, m_MulticastPort, true );
+			if( 0 == rc )
 			{
-				int err = startListen();
-				if( err )
-				{
-					LogMsg( LOG_ERROR, "RcMulticastListen::enableListen failed error %d %d", err, VxGetLastError() );
-				}
-				else
-				{
-					result = true;
-					m_ListenEnabled = true;
-				}
+
+				LogModule( eLogMulticast, LOG_VERBOSE, "RcMulticastListen::enableListen success %s %d", m_MulticastGroupIp.c_str(), m_MulticastPort );
+				result = true;
+				m_ListenEnabled = true;
+				m_bBroadcastEnabled = true;
+				m_SktUdp.setIsConnected( true );
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "RcMulticastListen::enableListen invalid port" );
+				LogModule( eLogMulticast, LOG_ERROR, "RcMulticastListen::enableListen failed error %d %d", rc, VxDescribeSktError( rc ) );
+				m_SktUdp.setIsConnected( false );
 			}
 		}
 		else
 		{
-			stopListen();
+			m_SktUdp.closeSkt( eSktCloseMulticastListenDone );
 			result = true;
 			m_ListenEnabled = false;
+			m_bBroadcastEnabled = false;
+			m_SktUdp.setIsConnected( false );
 		}
 	}
 	else
@@ -88,32 +99,17 @@ bool RcMulticastListen::enableListen( bool enable )
 }
 
 //============================================================================
-int RcMulticastListen::startListen( void )
-{
-	RCODE rc = m_SktUdp.udpOpen( m_LclIp, m_u16MulticastPort, true );
-	if( 0 == rc )
-	{
-		rc = m_SktUdp.joinMulticastGroup( m_LclIp,  m_strMulticastIp.c_str() );
-	}
-
-	return rc;
-}
-
-//============================================================================
-void RcMulticastListen::stopListen( void )
-{
-	m_SktUdp.closeSkt( eSktCloseMulticastListenDone );
-}
-
-//============================================================================
 void RcMulticastListen::doUdpDataCallback( VxSktBase * skt )
 {
-	unsigned char *	data = skt->getSktReadBuf();
-	int dataLen = skt->getSktBufDataLen();
-	
-	attemptDecodePktAnnounce( skt, data, dataLen );
-	
-	skt->sktBufAmountRead( dataLen );
+	if( !VxIsAppShuttingDown() )
+	{
+		unsigned char* data = skt->getSktReadBuf();
+		int dataLen = skt->getSktBufDataLen();
+
+		attemptDecodePktAnnounce( skt, data, dataLen );
+
+		skt->sktBufAmountRead( dataLen );
+	}
 }
 
 //============================================================================
@@ -139,4 +135,92 @@ void RcMulticastListen::attemptDecodePktAnnounce( VxSktBase * skt, unsigned char
 	}
 
 	m_ListenCallback.multicastPktAnnounceAvail( skt, pktAnnounce );
+}
+
+
+//============================================================================
+void RcMulticastListen::onPktAnnUpdated( void )
+{
+	if( m_Engine.getNetStatusAccum().getNearbyAvailable() && !m_Engine.getNetStatusAccum().getLanIpAddr().empty() )
+	{
+		m_MulticastMutex.lock();
+		m_Engine.copyMyPktAnnounce( m_PktAnnEncrypted );
+		m_PktAnnEncrypted.setMyFriendshipToHim( eFriendStateGuest );
+		m_PktAnnEncrypted.setHisFriendshipToMe( eFriendStateGuest );
+		// normally it is a bad idea to announce our lan ip but do in multicast so can connect on local network
+		InetAddrIPv4 ipV4;
+		ipV4.setIp( m_Engine.getNetStatusAccum().getLanIpAddr().c_str() );
+		m_PktAnnEncrypted.setLanIPv4( ipV4 );
+
+		std::string networkName;
+		m_Engine.getEngineSettings().getNetworkKey( networkName );
+
+		if( networkName.length() )
+		{
+			m_SktUdp.m_TxCrypto.setPassword( networkName.c_str(), networkName.length() );
+			setMulticastKey( networkName.c_str() );
+			RCODE rc = m_SktUdp.m_TxCrypto.encrypt( ( unsigned char* )&m_PktAnnEncrypted, ( int )sizeof( PktAnnounce ) );
+			if( 0 != rc )
+			{
+				LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated error %d encrypting pkt announce\n", rc );
+			}
+			else
+			{
+				m_bPktAnnUpdated = true;
+			}
+		}
+		else
+		{
+			LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated COULD NOT GET NETWORK NAME\n" );
+		}
+
+		m_MulticastMutex.unlock();
+	}
+}
+
+//============================================================================
+void RcMulticastListen::onOncePerSecond( void )
+{
+	if( m_bBroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
+	{
+		m_iBroadcastCountSec++;
+		if( m_iBroadcastCountSec >= MULTICAST_BROADCAST_INTERVAL_SEC )
+		{
+			m_iBroadcastCountSec = 0;
+			sendMulticast();
+		}
+	}
+}
+
+//============================================================================
+void RcMulticastListen::sendMulticast( void )
+{
+	if( false == m_bPktAnnUpdated )
+	{
+		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn HAS NOT BEEN UPDATED" );
+		return;
+	}
+
+	if( m_bPktAnnUpdated && m_bBroadcastEnabled )
+	{
+		getUdpSkt().setIsConnected( true );
+	}
+
+	if( getUdpSkt().isConnected() )
+	{
+		LogModule( eLogMulticast, LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn len %d", sizeof( m_PktAnnEncrypted ) );
+		m_MulticastMutex.lock();
+		RCODE rc = getUdpSkt().sendToMulticast( ( const char* )&m_PktAnnEncrypted, sizeof( m_PktAnnEncrypted ), m_MulticastGroupIp.c_str(), getUdpSkt().getMulticastPort() );
+		if( rc )
+		{
+			LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast error %d", rc );
+		}
+
+		m_MulticastMutex.unlock();
+	}
+	else
+	{
+		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast socket not open" );
+
+	}
 }

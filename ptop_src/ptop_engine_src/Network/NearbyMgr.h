@@ -13,15 +13,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "RcMulticastBroadcast.h"
-#include "RcMulticastListen.h"
+#include "RcMulticast.h"
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
 
 #include <CoreLib/VxGUID.h>
 
 #include <vector>
 
-class NearbyMgr : public IMulticastListenCallback, public NetAvailStatusCallbackInterface
+class NearbyMgr : public IMulticastListenCallback, public NetAvailStatusCallbackInterface, public RcMulticast
 {
 public:
     NearbyMgr() = delete;
@@ -47,24 +46,16 @@ public:
 
     std::vector<std::pair<VxGUID, int64_t>>& getIdentList()         { return m_NearbyIdentList; };
 
-    virtual void				onPktAnnUpdated( void );
-    virtual void				onOncePerSecond( void );
-
     virtual	void				handleMulticastSktCallback( VxSktBase* sktBase );
 
 protected:
     void						setBroadcastPort( uint16_t u16Port );
-    void						setBroadcastEnable( bool enable );
+    bool						setBroadcastEnable( bool enable );
 
     virtual void				multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnounce ) override;
 
-    P2PEngine&                  m_Engine;
-    NetworkMgr&                 m_NetworkMgr;
     VxMutex                     m_ListMutex;
 
     std::vector<std::pair<VxGUID, int64_t>> m_NearbyIdentList;
-
-    RcMulticastBroadcast		m_MulticastBroadcast;
-    RcMulticastListen			m_MulticastListen;
 };
 

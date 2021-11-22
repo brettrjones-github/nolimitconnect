@@ -688,7 +688,7 @@ void VxSetSktAllowReusePort( SOCKET skt )
 	int reusePort = 1;
 	if( SOCKET_ERROR == setsockopt( skt, SOL_SOCKET, SO_REUSEADDR, &reusePort, sizeof(int)) ) 
 	{
-		LogMsg( LOG_ERROR,  "VxSktBase::setReuseSocket error %d\n", VxGetLastError() );
+		LogMsg( LOG_ERROR,  "VxSktBase::setReuseSocket error %d", VxGetLastError() );
 	}
 #endif // TARGET_OS_WINDOWS 
 }

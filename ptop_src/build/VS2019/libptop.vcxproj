@@ -627,9 +627,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateOnlineThroughRelay.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateRelaySearch.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastBase.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastBroadcast.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastListen.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticast.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\OfferBase\OfferBaseMgr.cpp" />
@@ -992,9 +990,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateOnlineThroughRelay.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateRelaySearch.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastBase.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastBroadcast.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastListen.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticast.h" />
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\OfferBase\OfferBaseInfoDb.h" />

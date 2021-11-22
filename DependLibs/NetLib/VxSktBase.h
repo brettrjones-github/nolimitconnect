@@ -250,6 +250,15 @@ public:
 
     virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 
+	bool 					    getIsMulticastSkt( void )							{ return m_IsMulticastSkt; }
+
+	void						setMulticastPort( uint16_t multicastPort )			{ m_MulticastPort = multicastPort; }
+	uint16_t					getMulticastPort( void )							{ return m_MulticastPort; }
+	void 						setMulticastGroupIp( std::string groupIpAddr)		{ m_MulticastGroupIp = groupIpAddr; }
+	std::string 				getMulticastGroupIp( void )							{ return m_MulticastGroupIp; }
+	struct sockaddr_in&			getMulticastRxAddr( void )							{ return m_MulticastRxAddr; }
+	socklen_t					getMulticastRxAddrLen( void )						{ return sizeof( m_MulticastRxAddr ); }
+
 protected:
 	bool						toSocketAddrInfo(	int sockType, 
 													const char *addr, 
@@ -267,6 +276,11 @@ protected:
     const std::string&          describeSktDirection( void );
 
 public:
+	bool						m_IsMulticastSkt{ false };
+	uint16_t					m_MulticastPort{ 0 };
+	std::string					m_MulticastGroupIp{ "" };
+	struct sockaddr_in			m_MulticastRxAddr;
+
     SOCKET						m_Socket{ INVALID_SOCKET };	    // handle to socket
     int							m_iSktId{ 0 };				    // socket unique id
     VxGUID                      m_ConnectionId;                 // unique connection id 
@@ -292,8 +306,6 @@ public:
 	VxSktBaseMgr *				m_SktMgr{ nullptr };
 	int							m_iLastRxLen{ 0 };			    // size of last packet received
     int							m_iLastTxLen{ 0 };			    // size of last packet sent
-
-	std::string					m_strMulticastGroupIp{ "" };
 
 	VxKey						m_RxKey;				        // encryption key for receive
 	VxCrypto					m_RxCrypto;			            // encryption object for receive

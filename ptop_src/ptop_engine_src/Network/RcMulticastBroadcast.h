@@ -24,7 +24,7 @@ public:
 	RcMulticastBroadcast( NetworkMgr& networkMgr );
 	virtual ~RcMulticastBroadcast();
 
-	void 						setBroadcastEnable( bool enable );
+    bool 						setBroadcastEnable( bool enable );
 	void						onOncePerSecond( void );
 	virtual void				onPktAnnUpdated( void );
 

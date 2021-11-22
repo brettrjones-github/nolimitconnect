@@ -35,14 +35,22 @@ public:
 	bool 						enableListen( bool enable );
 	void						doUdpDataCallback( VxSktBase * skt );
 
+	// bool 						setBroadcastEnable( bool enable );
+	void						onOncePerSecond( void );
+	virtual void				onPktAnnUpdated( void );
+
 protected:
-	int 						startListen( void );
-	void 						stopListen( void );
+	void						sendMulticast( void );
+
 	void						attemptDecodePktAnnounce( VxSktBase * skt, unsigned char * data, int dataLen );
 
 	bool						m_ListenEnabled{ false };
-	VxSktUdp					m_SktUdp;
 	IMulticastListenCallback&	m_ListenCallback;
+
+	bool						m_bBroadcastEnabled{ false };
+	int							m_iBroadcastCountSec{ 0 };
+	bool						m_bPktAnnUpdated{ false };
+	PktAnnounce					m_PktAnnEncrypted;
 };
 
 #endif // MULTICAST_LISTEN_H

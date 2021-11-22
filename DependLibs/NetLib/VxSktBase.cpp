@@ -266,11 +266,21 @@ const char *VxSktBase::stripIPv6ScopeID( const char *addr, std::string &buf )
 }
 
 //============================================================================
-RCODE VxSktBase::joinMulticastGroup( InetAddress& oLclAddress, const char *mcastAddr )
+RCODE VxSktBase::joinMulticastGroup( InetAddress& oLclAddress, const char * muliticastGroupIp )
 {
 	setLastSktError( 0 );
 	std::string strLclIp = oLclAddress.toStdString();
 
+	struct ip_mreq mreq = {};
+	mreq.imr_multiaddr.s_addr = inet_addr( muliticastGroupIp );
+	mreq.imr_interface.s_addr = htonl( INADDR_ANY );
+	if( setsockopt( m_Socket, IPPROTO_IP, IP_ADD_MEMBERSHIP, ( char* )&mreq, sizeof( mreq ) ) < 0 )
+	{
+		m_rcLastSktError = VxGetLastError();
+		LogModule( eLogMulticast, LOG_ERROR, "VxSktUdp::joinMulticastGroup setsockopt mreq failed %s", VxDescribeSktError( m_rcLastSktError ) );
+	}
+
+	/*
 	struct addrinfo hints;
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_flags= AI_NUMERICHOST | AI_PASSIVE;
@@ -343,11 +353,12 @@ RCODE VxSktBase::joinMulticastGroup( InetAddress& oLclAddress, const char *mcast
 				getLastSktError()
 				);
 	}
+	*/
 
 	setTTL( 4 );
 	setAllowLoopback( true );
-	freeaddrinfo(mcastAddrInfo);
-	freeaddrinfo(lclAddrInfo);
+	//freeaddrinfo(mcastAddrInfo);
+	//freeaddrinfo(lclAddrInfo);
 	return getLastSktError();
 }
 
@@ -1084,55 +1095,114 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 
                 if( bIsUdpSkt )
                 {
-                    memset( &oAddr, 0, sizeof( struct sockaddr_storage ) );
-                    socklen_t iSktAddrLen = sizeof( struct sockaddr_storage );
-                    if(  sktBase->m_LclIp.isIPv4() )
+					LogModule( eLogUdpData, LOG_VERBOSE, "udp wait for rx attempt len %d on skt %d skt id %d lcl ip %s thread 0x%x",
+						iAttemptLen, sktBase->getSktHandle(), sktBase->getSktId(), sktBase->m_strLclIp.c_str(), VxGetCurrentThreadId() );
+
+					if( INVALID_SOCKET == sktBase->m_Socket )
+					{
+						// has been closed by outside thread
+						sktBase->setCallbackReason( eSktCallbackReasonClosing );
+						goto closed_skt_exit;
+					}
+
+					if( sktBase->getIsMulticastSkt() )
+					{
+						socklen_t sktAddrLen = sktBase->getMulticastRxAddrLen();
+
+						iDataLen = recvfrom( sktBase->m_Socket,	// socket
+							as8Buf,				// buffer to read into
+							iAttemptLen,		// length of buffer space
+							0,					// flags
+							( struct sockaddr* )&sktBase->getMulticastRxAddr(), // source address
+							&sktAddrLen );		// size of address structure
+					}
+					else
+					{
+						memset( &oAddr, 0, sizeof( struct sockaddr_storage ) );
+						socklen_t iSktAddrLen = sizeof( struct sockaddr_storage );
+						if( sktBase->m_LclIp.isIPv4() )
+						{
+							struct sockaddr_in addr;
+							memset( &addr, 0, sizeof( addr ) );
+							addr.sin_family = AF_INET;
+							addr.sin_addr.s_addr = htonl( INADDR_ANY ); // differs from sender
+							addr.sin_port = htons( sktBase->getMulticastPort() );
+
+							iSktAddrLen = sizeof( addr );
+
+							iDataLen = recvfrom( sktBase->m_Socket,	// socket
+								as8Buf,				// buffer to read into
+								iAttemptLen / 2,		// length of buffer space
+								0,					// flags
+								( struct sockaddr* )&addr, // source address
+								&iSktAddrLen );		// size of address structure
+						}
+						else
+						{
+							LogModule( eLogUdpData, LOG_INFO, "udp recvfrom IPV6" );
+							iSktAddrLen = sizeof( struct sockaddr_in6 );
+							( ( struct sockaddr_in6* )&oAddr )->sin6_family = AF_INET6;
+							iDataLen = recvfrom( sktBase->m_Socket,	// socket
+								as8Buf,				// buffer to read into
+								iAttemptLen,		// length of buffer space
+								0,					// flags
+								( struct sockaddr* )&oAddr, // source address
+								&iSktAddrLen );		// size of address structure
+						}
+					}
+
+					if( poVxThread->isAborted() || !sktBase->isConnected() )
+					{
+						LogModule( eLogUdpData, LOG_VERBOSE, "udp recvfrom skt %d skt id close from thread",
+								   sktBase->getSktHandle(), sktBase->getSktId() );
+						goto closed_skt_exit;
+					}
+
+					if( iDataLen < 0 )
+					{
+						RCODE rc = VxGetLastError();
+						LogModule( eLogUdpData, LOG_VERBOSE, "udp recvfrom skt %d skt id %d port %d error %d",
+							sktBase->getSktHandle(), sktBase->getSktId(), sktBase->m_RmtIp.getPort(), rc );
+						VxSleep( 500 );
+						continue;
+					}
+                    else if( iDataLen > 0 )
                     {
-                        iSktAddrLen = sizeof( struct sockaddr_in );
-                        ((struct sockaddr_in *)&oAddr)->sin_family = AF_INET;
-                    }
-                    else
-                    {
-                        LogModule( eLogUdpData, LOG_INFO, "udp recvfrom IPV6\n" );
-                        iSktAddrLen = sizeof( struct sockaddr_in6 );
-                        ((struct sockaddr_in6 *)&oAddr)->sin6_family = AF_INET6;
-                    }
+						if( sktBase->getIsMulticastSkt() )
+						{
+							// dont decode.. multicast handler will do that
+							sktBase->RxedPkt( iDataLen );
+							// call back user with the good news.. we have data
+							LogModule( eLogTcpData, LOG_VERBOSE, "VxSktBaseReceiveVxThreadFunc: multicast skt %d skt Id %d receiving len %d thread 0x%x",
+								sktBase->getSktHandle(), sktBase->getSktId(), iDataLen, VxGetCurrentThreadId() );
 
-                    LogModule( eLogUdpData, LOG_VERBOSE, "udp wait for rx attempt len %d on skt %d skt id %d lcl ip %s thread 0x%x",
-                               iAttemptLen, sktBase->getSktHandle(), sktBase->getSktId(), sktBase->m_strLclIp.c_str(), VxGetCurrentThreadId() );
+							sktBase->m_iLastRxLen = iDataLen;
+							memcpy( sktBase->getSktWriteBuf(), as8Buf, iDataLen );
+							sktBase->sktBufAmountWrote( iDataLen );
+							sktBase->updateLastActiveTime();
+							sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+							sktBase->setLastSktError( 0 );
+							continue;
+						}
+						else
+						{
+							sktBase->m_RmtIp.m_u16Port = sktBase->m_RmtIp.setIp( oAddr );
+							sktBase->m_strRmtIp = sktBase->m_RmtIp.toStdString();
 
-                    iDataLen = recvfrom(	sktBase->m_Socket,	// socket
-                                            as8Buf,				// buffer to read into
-                                            iAttemptLen,		// length of buffer space
-                                            0,					// flags
-                                            (struct sockaddr *)&oAddr, // source address
-                                            &iSktAddrLen );		// size of address structure
-
-                    if( INVALID_SOCKET == sktBase->m_Socket )
-                    {
-                        // has been closed by outside thread
-                        sktBase->setCallbackReason( eSktCallbackReasonClosing );
-                        goto closed_skt_exit;
-                    }
-
-                    if( iDataLen > 0 )
-                    {
-                        sktBase->m_RmtIp.m_u16Port = sktBase->m_RmtIp.setIp( oAddr );
-                        sktBase->m_strRmtIp = sktBase->m_RmtIp.toStdString();
-
-                        LogModule( eLogUdpData, LOG_VERBOSE, "udp recvfrom skt %d skt id %d len %d port %d thread 0x%x",
-                                   sktBase->getSktHandle(), sktBase->getSktId(), iDataLen, sktBase->m_RmtIp.getPort(), VxGetCurrentThreadId() );
-                        if( sktBase->m_RxKey.isKeySet() )
-                        {
-                            if( false == sktBase->m_RxKey.isValidDataLen( iDataLen ) )
-                            {
-                                // throw away the data because not valid length
-                                LogMsg( LOG_INFO, "udp recvfrom not valid data length\n" );
-                                continue;
-                            }
-                            // set encryption context
-                            sktBase->m_RxCrypto.importKey( &sktBase->m_RxKey );
-                        }
+							LogModule( eLogUdpData, LOG_VERBOSE, "udp recvfrom skt %d skt id %d len %d port %d thread 0x%x",
+								sktBase->getSktHandle(), sktBase->getSktId(), iDataLen, sktBase->m_RmtIp.getPort(), VxGetCurrentThreadId() );
+							if( sktBase->m_RxKey.isKeySet() )
+							{
+								if( false == sktBase->m_RxKey.isValidDataLen( iDataLen ) )
+								{
+									// throw away the data because not valid length
+									LogMsg( LOG_INFO, "udp recvfrom not valid data length\n" );
+									continue;
+								}
+								// set encryption context
+								sktBase->m_RxCrypto.importKey( &sktBase->m_RxKey );
+							}
+						}
                     }
                     else
                     {

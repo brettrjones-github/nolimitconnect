@@ -41,8 +41,19 @@ RCODE VxSktUdp::udpOpen( InetAddress& oLclIp, uint16_t u16Port, bool enableRecei
 	RCODE rc = createSocket( oLclIp, u16Port, &poResultAddr );
 	if( 0 == rc )
 	{
+		// for udp always allow reuse
+		int reusePort = 1;
+		if( 0 != setsockopt( m_Socket, SOL_SOCKET, SO_REUSEADDR, (char *)&reusePort, sizeof( int ) ) )
+		{
+			LogMsg( LOG_ERROR, "VxSktUdp::udpOpen setReuseSocket error %d", VxGetLastError() );
+		}
+
+		if( 0 != bind( m_Socket, ( sockaddr* )&poResultAddr, sizeof( struct addrinfo ) ) )
+		{
+			LogMsg( LOG_ERROR, "VxSktUdp::udpOpen bind error %d", VxGetLastError() );
+		}
+
 #if USE_BIND_LOCAL_IP
-		VxSetSktAllowReusePort( m_Socket );
 		if( false == VxBindSkt( m_Socket, oLclIp, u16Port ) )
 		{
 			m_rcLastSktError = VxGetLastError();
@@ -62,7 +73,7 @@ RCODE VxSktUdp::udpOpen( InetAddress& oLclIp, uint16_t u16Port, bool enableRecei
 
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "ERROR udpOpen error %d\n", rc );
+		LogMsg( LOG_ERROR, "ERROR udpOpen error %d", rc );
 	}
 	else if( false == enableReceive )
 	{
@@ -101,35 +112,109 @@ RCODE VxSktUdp::udpOpenUnicast( InetAddress& oLclIp, uint16_t u16Port )
 }
 
 //============================================================================
-RCODE VxSktUdp::udpOpenMulticastListen( InetAddress& oLclIp, uint16_t u16Port, const char * pIPv4MulticastGroup )	
+RCODE VxSktUdp::udpOpenMulticast( std::string multicastGroupIp, uint16_t u16Port, bool enableReceiveThread )
 {
-	m_strMulticastGroupIp = pIPv4MulticastGroup;
-	struct addrinfo * poResultAddr = 0;
-
-	RCODE rc = createSocket( oLclIp, u16Port, &poResultAddr );
-	if( 0 == rc )
+	m_rcLastSktError = 0;
+	if( isConnected() )
 	{
-		VxSetSktAllowReusePort( m_Socket );
-#if USE_BIND_LOCAL_IP
-		if( false == VxBindSkt( m_Socket, oLclIp, u16Port ) )
+		closeSkt( eSktCloseUdpCreate );
+	}
+
+	// only ipV4 supported
+	m_LclIp;
+	m_strLclIp = m_LclIp.toStdString();
+	setMulticastGroupIp( multicastGroupIp );
+	setMulticastPort( u16Port );
+
+	m_LclIp.setPort( u16Port );
+	m_RmtIp.setPort( u16Port );
+	m_strRmtIp = "";
+	m_eSktCallbackReason = eSktCallbackReasonConnecting;
+	if( m_pfnReceive )
+	{
+		m_pfnReceive( this, getRxCallbackUserData() );
+	}
+
+	m_Socket = socket( AF_INET, SOCK_DGRAM, 0 );
+	if( INVALID_SOCKET == m_Socket )
+	{
+		// create socket error
+		m_rcLastSktError = VxGetLastError();
+		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: socket create error %s", VxDescribeSktError( m_rcLastSktError ) );
+
+		m_eSktCallbackReason = eSktCallbackReasonConnectError;
+		if( m_pfnReceive )
 		{
-			rc = -1;
+			m_pfnReceive( this, getRxCallbackUserData() );
 		}
-#endif // USE_BIND_LOCAL_IP
+
+		return m_rcLastSktError;
 	}
 
-	if( false == joinMulticastGroup( oLclIp, m_strMulticastGroupIp.c_str() ) )
+	// allow multiple sockets to use the same PORT number
+	u_int yes = 1;
+	if( 0 > setsockopt( m_Socket, SOL_SOCKET, SO_REUSEADDR, ( char* )&yes, sizeof( yes ) ) )
 	{
-		rc = -1;
+		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: Reusing ADDR failed error %s", VxDescribeSktError( m_rcLastSktError ) );
+	}
+	
+	// set up destination address
+	memset( &m_MulticastRxAddr, 0, sizeof( m_MulticastRxAddr ) );
+	m_MulticastRxAddr.sin_family = AF_INET;
+	m_MulticastRxAddr.sin_addr.s_addr = htonl( INADDR_ANY ); // differs from sender
+	m_MulticastRxAddr.sin_port = htons( u16Port );
+
+	// bind to receive address
+	if( bind( m_Socket, ( struct sockaddr* )&m_MulticastRxAddr, sizeof( m_MulticastRxAddr ) ) < 0 ) 
+	{
+		m_rcLastSktError = VxGetLastError();
+		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: socket bind error %s", VxDescribeSktError( m_rcLastSktError ) );
+
+		m_eSktCallbackReason = eSktCallbackReasonConnectError;
+		if( m_pfnReceive )
+		{
+			m_pfnReceive( this, getRxCallbackUserData() );
+		}
+
+		closeSkt( eSktCloseUdpCreate );
+		return m_rcLastSktError;
 	}
 
+	// use setsockopt to request that the kernel join a multicast group
+	struct ip_mreq mreq;
+	mreq.imr_multiaddr.s_addr = inet_addr( m_MulticastGroupIp.c_str() );
+	mreq.imr_interface.s_addr = htonl( INADDR_ANY );
+	if( 0 > setsockopt( m_Socket, IPPROTO_IP, IP_ADD_MEMBERSHIP, ( char* )&mreq, sizeof( mreq ) ) )
+	{
+		m_rcLastSktError = VxGetLastError();
+		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: join group %s error %s", m_MulticastGroupIp.c_str(), VxDescribeSktError( m_rcLastSktError ) );
+
+		m_eSktCallbackReason = eSktCallbackReasonConnectError;
+		if( m_pfnReceive )
+		{
+			m_pfnReceive( this, getRxCallbackUserData() );
+		}
+
+		closeSkt( eSktCloseUdpCreate );
+		return m_rcLastSktError;
+	}
+
+	m_rcLastSktError = VxGetLastError();
 	setAllowLoopback( true );
-	if( 0 == rc )
+	m_IsMulticastSkt = true;
+	if( 0 == m_rcLastSktError )
 	{
-		startReceive();
+		if( enableReceiveThread )
+		{
+			startReceive();
+		}
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: join %s completed with error %s", m_MulticastGroupIp.c_str(), VxDescribeSktError( m_rcLastSktError ) );
 	}
 
-	return rc;
+	return m_rcLastSktError;
 }
 
 //============================================================================
@@ -230,6 +315,8 @@ RCODE  VxSktUdp::sendToMulticast(	const char *	pData,				// data to send
 									uint16_t		u16Port )			// port to send to ( if 0 then port specified when opened )
 {
 	InetAddress oAddr( muliticastGroupIp );
+	// it does not seem necessary to join a group to send to it.. just the send has to be to the group address
+	/*
 	struct ip_mreq mreq = {};
 	mreq.imr_multiaddr.s_addr = inet_addr( muliticastGroupIp );
 	mreq.imr_interface.s_addr = htonl( INADDR_ANY );
@@ -238,6 +325,7 @@ RCODE  VxSktUdp::sendToMulticast(	const char *	pData,				// data to send
 		m_rcLastSktError = VxGetLastError();
 		LogModule( eLogMulticast, LOG_ERROR, "VxSktUdp::sendToMulticast setsockopt mreq failed %s", VxDescribeSktError( m_rcLastSktError ) );
 	}
+	*/
 
 	return sendTo( pData, iDataLen, oAddr, u16Port );
 }

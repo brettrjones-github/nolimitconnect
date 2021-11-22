@@ -256,15 +256,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastBase.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastBroadcast.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticastListen.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkMonitor\NetworkMonitor.cpp">
       <Filter>Source Files\NetworkMonitor</Filter>
     </ClCompile>
@@ -910,6 +901,9 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NearbyMgr.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticast.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1295,15 +1289,6 @@
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.h">
-      <Filter>Source Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastBase.h">
-      <Filter>Source Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastBroadcast.h">
-      <Filter>Source Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticastListen.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkMonitor\NetworkMonitor.h">
@@ -1955,6 +1940,9 @@
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NearbyMgr.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticast.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>

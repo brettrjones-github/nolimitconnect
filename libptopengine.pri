@@ -206,9 +206,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineThroughRelay.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateTestConnection.h \
-    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticastBase.h \
-    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticastBroadcast.h \
-    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticastListen.h \
+    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticast.h \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h \
 	$$PWD/ptop_src/ptop_engine_src/NetworkTest/IsPortOpenTest.h \
@@ -498,9 +496,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineThroughRelay.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateTestConnection.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticastBase.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticastBroadcast.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticastListen.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Network/RcMulticast.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.cpp \
 	$$PWD/ptop_src/ptop_engine_src/NetworkTest/IsPortOpenTest.cpp \

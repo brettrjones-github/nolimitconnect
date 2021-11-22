@@ -13,66 +13,151 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "RcMulticastBroadcast.h"
-
+#include "RcMulticast.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include "NetworkMgr.h"
 
-#include <memory.h>
+#include <NetLib/VxSktUtil.h>
+#include <PktLib/PktAnnounce.h>
+#include <CoreLib/VxGlobals.h>
+
+#include <string.h>
 
 namespace
 {
 	const int MULTICAST_BROADCAST_INTERVAL_SEC = 5;
+
+
+	void RcMulticastListenSktCallbackHandler( VxSktBase* sktBase, void* pvRxCallbackUserData )
+	{
+		if( eSktCallbackReasonData == sktBase->getCallbackReason() )
+		{
+			if( pvRxCallbackUserData )
+			{
+				( ( RcMulticast* )pvRxCallbackUserData )->doUdpDataCallback( sktBase );
+			}
+		}
+	}
 }
 
 //============================================================================
-RcMulticastBroadcast::RcMulticastBroadcast( NetworkMgr& networkMgr )
-: RcMulticastBase( networkMgr )
+RcMulticast::RcMulticast( NetworkMgr& networkMgr, IMulticastListenCallback& multicastListenCallback )
+: m_NetworkMgr( networkMgr )
+, m_Engine( networkMgr.getEngine() )
+, m_ListenCallback( multicastListenCallback )
+, m_SktUdp()
+, m_MulticastMutex()
 {
+	m_SktUdp.setReceiveCallback( RcMulticastListenSktCallbackHandler, this );
 }
 
 //============================================================================
-RcMulticastBroadcast::~RcMulticastBroadcast()
+RcMulticast::~RcMulticast()
 {
-	m_SktUdp.closeSkt( eSktCloseConnectReasonsEmpty, false );
+	m_SktUdp.closeSkt( eSktCloseSktDestroy );
 }
 
 //============================================================================
-bool RcMulticastBroadcast::setBroadcastEnable( bool enable )
+void RcMulticast::setLocalIp( InetAddress& newLocalIp )
 {
-    bool result{ false };
-	return result;
-	if( enable != m_bBroadcastEnabled )
+	m_LclIp = newLocalIp;
+}
+
+//============================================================================
+void RcMulticast::setMulticastKey( const char * networkName )
+{
+	m_SktUdp.m_TxCrypto.setPassword( networkName, ( int )strlen(networkName ));
+	m_SktUdp.m_RxCrypto.setPassword( networkName, ( int )strlen(networkName ));
+}
+
+//============================================================================
+bool RcMulticast::enableListen( bool enable )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return false;
+	}
+
+	bool result = false;
+	if( enable != m_ListenEnabled || enable && !m_SktUdp.isConnected() )
 	{
 		if( enable )
 		{
-            RCODE rc = m_SktUdp.udpOpen( m_LclIp, m_MulticastPort, false );
+			RCODE rc = m_SktUdp.udpOpenMulticast( m_MulticastGroupIp, m_MulticastPort, true );
 			if( 0 == rc )
 			{
-				m_bBroadcastEnabled = enable;
-                result = true;
+
+				LogModule( eLogMulticast, LOG_VERBOSE, "RcMulticast::enableListen success %s %d", m_MulticastGroupIp.c_str(), m_MulticastPort );
+				result = true;
+				m_ListenEnabled = true;
+				m_bBroadcastEnabled = true;
+				m_SktUdp.setIsConnected( true );
 			}
 			else
 			{
-				LogModule( eLogMulticast, LOG_ERROR, "RcMulticastBroadcast::setBroadcastEnable failed %d", rc );
+				LogModule( eLogMulticast, LOG_ERROR, "RcMulticast::enableListen failed error %d %d", rc, VxDescribeSktError( rc ) );
+				m_SktUdp.setIsConnected( false );
 			}
 		}
 		else
 		{
-			m_SktUdp.closeSkt( eSktCloseConnectReasonsEmpty, false );
+			m_SktUdp.closeSkt( eSktCloseMulticastListenDone );
+			result = true;
+			m_ListenEnabled = false;
 			m_bBroadcastEnabled = false;
-            result = true;
+			m_SktUdp.setIsConnected( false );
 		}
 	}
-    else
-    {
-        result = true;
-    }
+	else
+	{
+		result = true;
+	}
 
-    return result;
+	return result;
 }
 
 //============================================================================
-void RcMulticastBroadcast::onPktAnnUpdated( void )
+void RcMulticast::doUdpDataCallback( VxSktBase* skt )
+{
+	if( !VxIsAppShuttingDown() )
+	{
+		unsigned char* data = skt->getSktReadBuf();
+		int dataLen = skt->getSktBufDataLen();
+
+		attemptDecodePktAnnounce( skt, data, dataLen );
+
+		skt->sktBufAmountRead( dataLen );
+	}
+}
+
+//============================================================================
+void RcMulticast::attemptDecodePktAnnounce( VxSktBase* skt, unsigned char* data, int dataLen )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	if( dataLen != sizeof( PktAnnounce ) )
+	{
+		return;
+	}
+
+	skt->decryptReceiveData();
+
+	PktAnnounce* pktAnnounce = ( PktAnnounce* )data;
+	if( false == pktAnnounce->isValidPktAnn() )
+	{
+		LogMsg( LOG_INFO, "attemptDecodePktAnnounce invalid PktAnn" );
+		return;
+	}
+
+	m_ListenCallback.multicastPktAnnounceAvail( skt, pktAnnounce );
+}
+
+
+//============================================================================
+void RcMulticast::onPktAnnUpdated( void )
 {
 	if( m_Engine.getNetStatusAccum().getNearbyAvailable() && !m_Engine.getNetStatusAccum().getLanIpAddr().empty() )
 	{
@@ -90,6 +175,7 @@ void RcMulticastBroadcast::onPktAnnUpdated( void )
 
 		if( networkName.length() )
 		{
+			m_SktUdp.m_TxCrypto.setPassword( networkName.c_str(), networkName.length() );
 			setMulticastKey( networkName.c_str() );
 			RCODE rc = m_SktUdp.m_TxCrypto.encrypt( ( unsigned char* )&m_PktAnnEncrypted, ( int )sizeof( PktAnnounce ) );
 			if( 0 != rc )
@@ -111,7 +197,7 @@ void RcMulticastBroadcast::onPktAnnUpdated( void )
 }
 
 //============================================================================
-void RcMulticastBroadcast::onOncePerSecond( void )
+void RcMulticast::onOncePerSecond( void )
 {
 	if( m_bBroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
 	{
@@ -125,14 +211,19 @@ void RcMulticastBroadcast::onOncePerSecond( void )
 }
 
 //============================================================================
-void RcMulticastBroadcast::sendMulticast( void )
+void RcMulticast::sendMulticast( void )
 {
 	if( false == m_bPktAnnUpdated )
 	{
 		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn HAS NOT BEEN UPDATED" );
 		return;
 	}
-	
+
+	if( m_bPktAnnUpdated && m_bBroadcastEnabled )
+	{
+		getUdpSkt().setIsConnected( true );
+	}
+
 	if( getUdpSkt().isConnected() )
 	{
 		LogModule( eLogMulticast, LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn len %d", sizeof( m_PktAnnEncrypted ) );
