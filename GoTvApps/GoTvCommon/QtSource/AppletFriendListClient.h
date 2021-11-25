@@ -75,8 +75,9 @@ protected:
     void                        updateUser( GuiUser* guiUser );
     void                        removeUser( VxGUID& onlineId );
 
+    void                        updateFriendList( EFriendListType listType, std::vector<std::pair<VxGUID, int64_t>> idList );
+
     //=== vars ===//
     Ui::AppletFriendListClientUi ui;
-    bool                        m_SearchStarted{ false };
-    EFriendListType             m_ShowFriendType{ eFriendListTypeFriend };
+    EFriendListType             m_FriendListType{ eFriendListTypeFriend };
 };

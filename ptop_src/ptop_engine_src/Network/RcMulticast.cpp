@@ -86,23 +86,37 @@ bool RcMulticast::multicastEnable( bool enable )
 	}
 
 	bool result = false;
-	if( enable != m_ListenEnabled || enable && !m_SktUdp.isConnected() )
+	if( enable != m_BroadcastEnabled || ( enable && !m_SktUdp.isConnected() ) )
 	{
 		if( enable )
 		{
-			RCODE rc = m_SktUdp.udpOpenMulticast( m_MulticastGroupIp, m_MulticastPort, true );
-			if( 0 == rc )
-			{
+			// multicast does not work.. use broadcast instead
+			// RCODE rc = m_SktUdp.udpOpenMulticast( m_MulticastGroupIp, m_MulticastPort, true );
 
-				LogModule( eLogMulticast, LOG_VERBOSE, "RcMulticast::enableListen success %s %d", m_MulticastGroupIp.c_str(), m_MulticastPort );
-				result = true;
-				m_ListenEnabled = true;
-				m_bBroadcastEnabled = true;
-				m_SktUdp.setIsConnected( true );
+			// get local ip and use 255 as last part for broadcast
+			std::string localIp = m_Engine.getNetStatusAccum().getLanIpAddr();
+			std::string broadcastIp;
+			if( VxMakeBroadcastIp( localIp, broadcastIp ) )
+			{
+				setMulticastGroupIp( broadcastIp );
+				RCODE rc = m_SktUdp.udpOpenBroadcast( broadcastIp, m_MulticastPort, true );
+				if( 0 == rc )
+				{
+
+					LogModule( eLogMulticast, LOG_VERBOSE, "RcMulticast::multicastEnable success %s %d", m_MulticastGroupIp.c_str(), m_MulticastPort );
+					result = true;
+					m_BroadcastEnabled = true;
+					m_SktUdp.setIsConnected( true );
+				}
+				else
+				{
+					LogModule( eLogMulticast, LOG_ERROR, "RcMulticast::multicastEnable failed error %d %d", rc, VxDescribeSktError( rc ) );
+					m_SktUdp.setIsConnected( false );
+				}
 			}
 			else
 			{
-				LogModule( eLogMulticast, LOG_ERROR, "RcMulticast::enableListen failed error %d %d", rc, VxDescribeSktError( rc ) );
+				LogModule( eLogMulticast, LOG_ERROR, "RcMulticast::multicastEnable could not create broadcast ip" );
 				m_SktUdp.setIsConnected( false );
 			}
 		}
@@ -110,8 +124,7 @@ bool RcMulticast::multicastEnable( bool enable )
 		{
 			m_SktUdp.closeSkt( eSktCloseMulticastListenDone );
 			result = true;
-			m_ListenEnabled = false;
-			m_bBroadcastEnabled = false;
+			m_BroadcastEnabled = false;
 			m_SktUdp.setIsConnected( false );
 		}
 	}
@@ -150,7 +163,7 @@ void RcMulticast::attemptDecodePktAnnounce( VxSktBase* skt, unsigned char* data,
 		return;
 	}
 
-	if( !m_bBroadcastEnabled || !m_RxCrypto.isKeyValid() )
+	if( !m_BroadcastEnabled || !m_RxCrypto.isKeyValid() )
 	{
 		return;
 	}
@@ -204,7 +217,7 @@ void RcMulticast::onPktAnnUpdated( void )
 			RCODE rc = m_TxCrypto.encrypt( ( unsigned char* )&m_PktAnnEncrypted, ( int )sizeof( PktAnnounce ) );
 			if( 0 != rc )
 			{
-				LogMsg( LOG_INFO, "RcMulticast::onPktAnnUpdated error %d encrypting pkt announce\n", rc );
+				LogMsg( LOG_INFO, "RcMulticast::onPktAnnUpdated error %d encrypting pkt announce", rc );
 			}
 			else
 			{
@@ -213,7 +226,7 @@ void RcMulticast::onPktAnnUpdated( void )
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "RcMulticast::onPktAnnUpdated COULD NOT GET NETWORK NAME\n" );
+			LogMsg( LOG_INFO, "RcMulticast::onPktAnnUpdated COULD NOT GET NETWORK NAME" );
 		}
 
 		m_MulticastMutex.unlock();
@@ -224,7 +237,7 @@ void RcMulticast::onPktAnnUpdated( void )
 void RcMulticast::onOncePerSecond( void )
 {
 	LogMsg( LOG_DEBUG, "RcMulticast::onOncePerSecond skt id %d", m_SktUdp.m_iSktId );
-	if( m_bBroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
+	if( m_BroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
 	{
 		m_iBroadcastCountSec++;
 		if( m_iBroadcastCountSec >= MULTICAST_BROADCAST_INTERVAL_SEC )

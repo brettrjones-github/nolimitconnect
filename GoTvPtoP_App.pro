@@ -4,8 +4,11 @@ TEMPLATE = app
 CONFIG += no_docs_target
 CONFIG += c++11
 
-# keep it all lowercase to match program naming convention on *nix systems
+# work around for Build Tools revision 31.0.0 is corrupted
+# appears to be caused by gradle plugin not new enough
+ANDROID_SDK_BUILD_TOOLS_REVISION = 30.0.3
 
+# keep names all lowercase to match program naming convention on *nix systems
 PROJECT_NAME = nolimitconnect
 TARGET_NAME = nolimitconnect
 

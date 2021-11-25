@@ -56,6 +56,7 @@ bool NearbyMgr::fromGuiNearbyBroadcastEnable( bool enable )
     bool result = false;
     if( enable )
     {
+        /*
         uint16_t u16MulticastPort;
         m_Engine.getEngineSettings().getMulticastPort( u16MulticastPort );
         if( u16MulticastPort )
@@ -68,6 +69,9 @@ bool NearbyMgr::fromGuiNearbyBroadcastEnable( bool enable )
         {
             LogMsg( LOG_ERROR, "fromGuiNearbyBroadcastEnable enabled %d INVALID PORT", enable );
         }
+        */
+
+        result = setBroadcastEnable( enable );
     }
     else
     {

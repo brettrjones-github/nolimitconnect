@@ -985,6 +985,10 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\bin-Android\build.gradle" />
+    <None Include="..\..\..\..\bin-Android\gradle.properties" />
+    <None Include="..\..\..\..\bin-Android\gradlew" />
+    <None Include="..\..\..\..\bin-Android\gradlew.bat" />
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
     <None Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.aps" />
   </ItemGroup>
@@ -993,6 +997,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\..\..\bin-Android\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

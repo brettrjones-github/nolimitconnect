@@ -1782,6 +1782,39 @@ bool VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr )
 }
 
 //============================================================================
+bool VxMakeBroadcastIp( std::string localIp, std::string& retBroadcastIp )
+{
+	retBroadcastIp = "";
+	if( VxIsIpValid( localIp ) )
+	{
+		if( std::string::npos == localIp.find_first_of( ':' ) )
+		{
+			std::string::size_type lastQuad = localIp.find_last_of( '.' );
+			if( std::string::npos != lastQuad )
+			{
+				retBroadcastIp = localIp;
+				retBroadcastIp.replace( retBroadcastIp.begin() + lastQuad, retBroadcastIp.end(), ".255" );
+				return true;
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "VxMakeBroadcastIp last quad not found" );
+			}
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "VxMakeBroadcastIp only works for iPv4" );
+		}
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "VxMakeBroadcastIp empty localIp" );
+	}
+
+	return false;
+}
+
+//============================================================================
 // C functions
 //============================================================================
 GOTV_BEGIN_CDECLARES
@@ -2128,8 +2161,6 @@ uint16_t VxGetRmtPort( SOCKET skt )
 
 	return 0;
 }
-
-
 
 //============================================================================
 //=== socket errors ===//

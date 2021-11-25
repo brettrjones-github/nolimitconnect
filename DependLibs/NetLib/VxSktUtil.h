@@ -110,6 +110,8 @@ RCODE							VxReceiveSktData( SOCKET&			oSkt,
 
 bool							VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr );
 bool							VxIsIpPortInUse( uint16_t u16Port, const char * pLocalIp = nullptr, bool useBind = false);
+
+bool							VxMakeBroadcastIp( std::string localIp, std::string& retBroadcastIp );
 #endif // __cplusplus
 
 //============================================================================

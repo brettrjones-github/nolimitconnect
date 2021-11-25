@@ -63,10 +63,9 @@ protected:
 	VxCrypto					m_TxCrypto;			            // encryption object for transmit
 	std::string					m_NetworkNameKey{ "" };
 
-	bool						m_ListenEnabled{ false };
 	IMulticastListenCallback&	m_ListenCallback;
 
-	bool						m_bBroadcastEnabled{ false };
+	bool						m_BroadcastEnabled{ false };
 	int							m_iBroadcastCountSec{ 0 };
 	bool						m_bPktAnnUpdated{ false };
 	PktAnnounce					m_PktAnnEncrypted;

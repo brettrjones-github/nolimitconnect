@@ -39,6 +39,9 @@
     <Filter Include="Source Files\NoLimitConnectMain">
       <UniqueIdentifier>{c566a0d6-f705-4d52-a22f-ff8c59bef879}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Android Files">
+      <UniqueIdentifier>{a4d97f58-12d7-4abf-bcfe-f658f7eb17d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.h">
@@ -2653,6 +2656,18 @@
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri">
       <Filter>QtBuild</Filter>
     </None>
+    <None Include="..\..\..\..\bin-Android\build.gradle">
+      <Filter>Android Files</Filter>
+    </None>
+    <None Include="..\..\..\..\bin-Android\gradle.properties">
+      <Filter>Android Files</Filter>
+    </None>
+    <None Include="..\..\..\..\bin-Android\gradlew">
+      <Filter>Android Files</Filter>
+    </None>
+    <None Include="..\..\..\..\bin-Android\gradlew.bat">
+      <Filter>Android Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.rc">
@@ -2663,5 +2678,10 @@
     <Image Include="..\..\..\GoTvCommon\QtSource\NoLimitConnect.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\..\..\bin-Android\AndroidManifest.xml">
+      <Filter>Android Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
