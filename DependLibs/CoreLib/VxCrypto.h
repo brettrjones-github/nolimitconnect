@@ -59,11 +59,11 @@ public:
 	//! make encryption key from password
 	RCODE						setKeyFromPassword( const char *	pPassword,			// password
 													int				iPasswordLen,		// length of password
-													const char *	pSalt = "GoTv" );	// salt
-											//! make encryption key from user name and password 
+													const char *	pSalt = "NoLm" );	// salt
+	//! make encryption key from user name and password 
 	RCODE						setKeyFromPassword( const char *	pUserName,			// user name
 													const char *	pPassword,			// password
-													const char *	pSalt = "GoTv" );	// salt
+													const char *	pSalt = "NoLm" );	// salt
 											//=== vars ===//
 	uint32_t					m_au32Key[ CHEEZY_SYM_KEY_LEN / sizeof( uint32_t ) ];
 	bool						m_bIsSet;		// true if key has been set	

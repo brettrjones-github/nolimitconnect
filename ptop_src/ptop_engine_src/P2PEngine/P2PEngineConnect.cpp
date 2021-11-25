@@ -40,7 +40,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 									bool&				retIsNewConnection,
 									EConnectReason		connectReason )
 {
-	bool result = m_NetConnector.connectToContact( connectInfo, ppoRetSkt, retIsNewConnection );
+	bool result = m_NetConnector.connectToContact( connectInfo, ppoRetSkt, retIsNewConnection, connectReason );
 	if(  true == result )
 	{
 		if( eConnectReasonRelaySearch == connectReason )
@@ -65,7 +65,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 				}
 			}
 
-			if( 0 != bigListInfo )
+			if( bigListInfo )
 			{
 #ifdef DEBUG_CONNECTIONS
 				LogMsg( LOG_INFO, "P2PEngine::connectToContact: success  %s\n", bigListInfo->getOnlineName() );
@@ -207,14 +207,14 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 //============================================================================
 void P2PEngine::attemptConnectionToRelayService( BigListInfo * poInfo )
 {
-	VxSktBase * sktBase = NULL;
-	m_NetConnector.directConnectTo( poInfo->getConnectInfo(), &sktBase, MY_PROXY_CONNECT_TIMEOUT );
+	VxSktBase * sktBase = nullptr;
+	m_NetConnector.directConnectTo( poInfo->getConnectInfo(), &sktBase, eConnectReasonRelayService );
 }
 
 //============================================================================
 bool P2PEngine::isContactConnected( VxGUID& oOnlineId )
 {
-	return (NULL != m_ConnectionList.findConnection( oOnlineId )) ? true : false;
+	return (nullptr != m_ConnectionList.findConnection( oOnlineId )) ? true : false;
 }
 
 //============================================================================

@@ -82,6 +82,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_IgnoreListMgr( *this )
 	, m_FriendListMgr( *this )
 	, m_GroupListMgr( *this )
+	, m_NearbyListMgr( *this )
     , m_BigListMgr( *this )
     , m_EngineSettings()
     , m_EngineParams()
@@ -530,4 +531,56 @@ void P2PEngine::updateIdentLists( BigListInfo* bigListInfo, int64_t timestampMs 
 			m_FriendListMgr.updateIdent( bigListInfo->getMyOnlineId(), timestamp );
 		}
 	}
+}
+
+//============================================================================
+bool validateArrayString( const char* str, int minStrLen, int maxStrLen )
+{
+	int strLen = 0;
+	bool nullTerminatorFound = false;
+	for( int i = 0; i < maxStrLen; ++i )
+	{
+		if( 0 == str[i] )
+		{
+			nullTerminatorFound = true;
+			break;
+		}
+
+		if( isascii( str[i] ) )
+		{
+			strLen++;
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "validateArrayString invalid char 0x%X", str[i] );
+			return false;
+		}
+	}
+
+	return strLen >= minStrLen && nullTerminatorFound;
+}
+
+//============================================================================
+bool P2PEngine::validateIdent( VxNetIdent* netIdent )
+{
+	// validate port is reasonable value
+	if( 80 > netIdent->getOnlinePort() )
+	{
+		return false;
+	}
+
+	// validate online name
+	if( !validateArrayString( netIdent->getOnlineName(), 4, MAX_ONLINE_NAME_LEN ) )
+	{
+		LogMsg( LOG_ERROR, "validateIdent invalid name");
+		return false;
+	}
+
+	if( !validateArrayString( netIdent->getOnlineDescription(), 4, MAX_ONLINE_DESC_LEN ) )
+	{
+		LogMsg( LOG_ERROR, "validateIdent invalid description" );
+		return false;
+	}
+
+	return netIdent->getMyOnlinePort() > 0;
 }

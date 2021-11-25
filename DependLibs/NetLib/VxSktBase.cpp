@@ -33,7 +33,6 @@
 #ifdef TARGET_OS_WINDOWS
 	#include "Mswsock.h"
 #else
-	//#include <fcntl.h>
 	#include <sys/ioctl.h>
 #endif // TARGET_OS_WINDOWS
 

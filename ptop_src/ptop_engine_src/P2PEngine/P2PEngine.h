@@ -28,6 +28,7 @@
 #include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
+#include <ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h>
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
 #include <ptop_src/ptop_engine_src/OfferClientMgr/OfferClientMgr.h>
 #include <ptop_src/ptop_engine_src/OfferHostMgr/OfferHostMgr.h>
@@ -108,6 +109,7 @@ public:
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
     GroupListMgr&               getGroupListMgr( void )                         { return m_GroupListMgr; }
     IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
+    NearbyListMgr&              getNearbyListMgr( void )                        { return m_NearbyListMgr; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
     NetStatusAccum&             getNetStatusAccum( void )                       { return m_NetStatusAccum; }
     NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; }
@@ -662,6 +664,8 @@ public:
     virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
+    bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
+
 protected:
     //========================================================================
     //========================================================================
@@ -689,6 +693,7 @@ protected:
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
     GroupListMgr                m_GroupListMgr;
+    NearbyListMgr               m_NearbyListMgr;
     BigListMgr					m_BigListMgr;
 	PktAnnounce					m_PktAnn;
     int64_t                     m_PktAnnLastModTime{ 0 };

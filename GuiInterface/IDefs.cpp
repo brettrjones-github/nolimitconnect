@@ -40,6 +40,12 @@ namespace
         "Connect Reason Plugin ",  
         "Connect Reason Other Search ",
 
+        "Connect Reason Nearby LAN "
+        "Connect Reason Same External Ip ",
+        "Connect Reason Reverse Connect Requested "
+        "Connect Reason Pkt Tcp Punch "
+        "Connect Reason Relay Service "
+
         "Max Connect Reason ",
     };
 

@@ -780,13 +780,13 @@ bool NetworkStateRelaySearch::connectRelayService( ConnectRequest& connectReques
 	VxSktBase * sktBase = NULL;
 	if( connectInfo.requiresRelay() )
 	{
-		LogMsg( LOG_ERROR, "NetworkStateRelaySearch::connectRelayService: id %s requires relay\n", onlineId.c_str());
+		LogMsg( LOG_ERROR, "NetworkStateRelaySearch::connectRelayService: id %s requires relay", onlineId.c_str());
 		return false;
 	}
 
 	bool relayServiceConnected		= false;
 	bool isNewConnection			= false;
-	if( true == m_Engine.getNetConnector().connectToContact( connectInfo, &sktBase, isNewConnection ) )
+	if( true == m_Engine.getNetConnector().connectToContact( connectInfo, &sktBase, isNewConnection, connectRequest.getConnectReason() ) )
 	{
 		relayServiceConnected = handlePossibleRelayConnect(	connectInfo, 
 															sktBase,

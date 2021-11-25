@@ -49,13 +49,12 @@ public:
 
 	bool						connectToContact(	VxConnectInfo&		connectInfo, 
 													VxSktBase **		ppoRetSkt,
-													bool&				retIsNewConnection );
+													bool&				retIsNewConnection,
+													EConnectReason		connectReason );
 
 	RCODE						directConnectTo(	VxConnectInfo&			connectInfo,		 
 													VxSktBase **			ppoRetSkt,		 
-													int						iConnectTimeout = DIRECT_CONNECT_TIMEOUT,	 
-													bool					useUdpIp = false,
-													bool					useLanIp = false );	 
+													EConnectReason			connectReason );
 												
 	bool						sendMyPktAnnounce(  VxGUID&					destinationId,
 													VxSktBase *				sktBase, 
@@ -86,7 +85,8 @@ public:
 
 protected:
 	bool						connectUsingTcp(	VxConnectInfo&		connectInfo, 
-													VxSktBase **		ppoRetSkt );
+													VxSktBase **		ppoRetSkt,
+													EConnectReason		connectReason );
 
 	bool						tryIPv6Connect(	VxConnectInfo&		connectInfo, 
 												VxSktBase **		ppoRetSkt );

@@ -14,6 +14,7 @@
 
 #include "NearbyMgr.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
 #include <CoreLib/VxGlobals.h>
 
@@ -60,9 +61,8 @@ bool NearbyMgr::fromGuiNearbyBroadcastEnable( bool enable )
         if( u16MulticastPort )
         {
             setBroadcastPort( u16MulticastPort );
-            setBroadcastEnable( enable );
-            LogModule( eLogMulticast, LOG_INFO, "fromGuiNearbyBroadcastEnable enabled on port %d", enable, u16MulticastPort );
-            result = true;
+            result = setBroadcastEnable( enable );
+            LogModule( eLogMulticast, LOG_INFO, "fromGuiNearbyBroadcastEnable enable %d port %d", enable, u16MulticastPort );
         }
         else
         {
@@ -71,9 +71,11 @@ bool NearbyMgr::fromGuiNearbyBroadcastEnable( bool enable )
     }
     else
     {
-        setBroadcastEnable( enable );
+        result = setBroadcastEnable( enable );
         LogMsg( LOG_INFO, "fromGuiNearbyBroadcastEnable disabled" );
-        result = true;
+        m_MulticastIdentMutex.lock();
+        m_MulticastIdentList.clear();
+        m_MulticastIdentMutex.unlock();
     }
 
     return result;
@@ -125,8 +127,9 @@ void NearbyMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
 
     if( onlineId == m_Engine.getMyOnlineId() )
     {
-        LogMsg( LOG_ERROR, "NearbyMgr::updateNearbyIdent cannot ignore myself" );
-        return;
+        LogMsg( LOG_ERROR, "NearbyMgr::updateNearbyIdent cannot nearby myself" );
+        // BRJ temprory disable myself check for testing
+        // return;
     }
 
     bool wasInserted = false;
@@ -195,15 +198,10 @@ void NearbyMgr::setBroadcastPort( uint16_t u16Port )
 //============================================================================
 bool NearbyMgr::setBroadcastEnable( bool enable )
 {
-    bool result = enableListen( enable );
-    if( result )
-    {
-        m_bBroadcastEnabled = true;
-    }
-    else
+    bool result = multicastEnable( enable );
+    if( !result )
     {
         LogModule( eLogMulticast, LOG_ERROR, "setBroadcastEnable %d failed", enable);
-        m_bBroadcastEnabled = false;
     }
 
     return result;
@@ -224,7 +222,7 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
         break;
 
     case eSktCallbackReasonConnected:
-        LogModule( eLogMulticast, LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp().c_str(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp().c_str(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonData:
@@ -232,7 +230,7 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
         break;
 
     case eSktCallbackReasonClosed:
-        LogModule( eLogMulticast, LOG_INFO, "NetworkMgr:Multicast Skt %d closed %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast Skt %d closed %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonError:
@@ -240,24 +238,17 @@ void NearbyMgr::handleMulticastSktCallback( VxSktBase* sktBase )
         break;
 
     case eSktCallbackReasonClosing:
-        LogModule( eLogMulticast, LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
         break;
 
     case eSktCallbackReasonConnecting:
-        LogModule( eLogMulticast, LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
+        LogModule( eLogMulticast, LOG_VERBOSE, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
         break;
 
     default:
         LogMsg( LOG_ERROR, "NetworkMgr:Multicast: Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
         break;
     }
-}
-
-//============================================================================
-void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnounce )
-{
-    //BRJ TODO handle multicast
-    LogMsg( LOG_DEBUG, "NearbyMgr::multicastPktAnnounceAvail" );
 }
 
 //============================================================================
@@ -276,5 +267,153 @@ void NearbyMgr::callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus )
         }
 
         onPktAnnUpdated();
+    }
+}
+
+//============================================================================
+void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnounce )
+{
+    LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr::multicastPktAnnounceAvail" );
+    if( !pktAnnounce->getMyOnlineId().isVxGUIDValid() )
+    {
+        LogModule( eLogMulticast, LOG_ERROR, "NearbyMgr multicast pktAnnounce invalid " );
+    }
+
+    if( pktAnnounce->getMyOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr multicast pktAnnounce cannot nearby myself" );
+        return;
+    }
+
+    VxNetIdent* netIdent = ( VxNetIdent* )pktAnnounce;
+    // ignore duplicates 
+    m_MulticastIdentMutex.lock();
+    auto iter = m_MulticastIdentList.find( netIdent->getMyOnlineId() );
+    if( iter != m_MulticastIdentList.end() )
+    {
+        if( 0 == memcmp( &iter->second, netIdent, sizeof( VxNetIdent ) ) )
+        {
+            LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr multicast pktAnnounce is duplicate" );
+            m_MulticastIdentMutex.unlock();
+            return;
+        }
+        else
+        {
+            memcpy( &iter->second, netIdent, sizeof( VxNetIdent ) );
+        }
+    }
+    else
+    {
+        m_MulticastIdentList.emplace( netIdent->getMyOnlineId(), *netIdent );
+    }
+
+    m_MulticastIdentMutex.unlock();
+
+    if( !netIdent->getLanIPv4().isIPv4() || 80 > netIdent->getOnlinePort() )
+    {
+        // not valid to connect to across lan
+        return;
+    }
+
+    if( !m_Engine.validateIdent( netIdent ) )
+    {
+        LogModule( eLogMulticast, LOG_ERROR, "NearbyMgr multicast pktAnnounce ident invalid " );
+        return;
+    }
+
+    int64_t timeNowMs = GetGmtTimeMs();
+    bool isConnected = m_Engine.isContactConnected( netIdent->getMyOnlineId() );
+    bool isIgnored = false;
+    // see if we have big list info already
+    BigListInfo* hisInfo = m_Engine.getBigListMgr().findBigListInfo( netIdent->getMyOnlineId() );
+    if( hisInfo )
+    {
+        isIgnored = hisInfo->isIgnored();
+        if( isIgnored )
+        {
+            LogModule( eLogMulticast, LOG_ERROR, "NearbyMgr multicast pktAnnounce ignoring %s ", netIdent->getOnlineName() );
+            return;
+        }
+
+        if( isConnected )
+        {
+            if( !hisInfo->isNearby() )
+            {
+                hisInfo->setIsNearby( true );
+                onNearbyUserUpdated( hisInfo, timeNowMs );
+            }
+        }
+    }
+
+    if( !isConnected )
+    {
+        if( hisInfo )
+        {
+            if( timeNowMs - hisInfo->getTimeLastConnectAttemptMs() < MIN_TIME_MULTICAST_CONNECT_ATTEMPT )
+            {
+                // too early to try again
+                return;
+            }
+            else
+            {
+                hisInfo->setTimeLastConnectAttemptMs( timeNowMs );
+            }
+        }
+
+        VxSktBase* sktBase = nullptr;
+        bool newConnection = false;
+        if( true == m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, newConnection, eConnectReasonNearbyLan ) )
+        {
+            LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr SUCCESS connect on lan to %s ", netIdent->getOnlineName() );
+        }
+        else
+        {
+            LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr FAILED to connect on lan to %s ", netIdent->getOnlineName() );
+        }
+    }
+}
+
+//============================================================================
+void NearbyMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId )
+{
+    bool isIgnored = false;
+    BigListInfo* hisInfo = m_Engine.getBigListMgr().findBigListInfo( peerOnlineId );
+    if( hisInfo )
+    {
+        isIgnored = hisInfo->isIgnored();
+        hisInfo->setIsNearby( false );
+    }
+
+    m_Engine.getNearbyListMgr().removeIdent( peerOnlineId );
+    if( !isIgnored )
+    {
+        // remove from list so will get multicast updates again
+        m_MulticastIdentMutex.lock();
+        auto iter = m_MulticastIdentList.find( peerOnlineId );
+        if( iter != m_MulticastIdentList.end() )
+        {
+            m_MulticastIdentList.erase( peerOnlineId );
+        }
+        m_MulticastIdentMutex.unlock();
+    }
+}
+
+//============================================================================
+void NearbyMgr::onNearbyUserUpdated( VxNetIdent* netIdent, int64_t timestamp )
+{
+    m_Engine.getNearbyListMgr().updateIdent( netIdent->getMyOnlineId(), timestamp ? timestamp : GetGmtTimeMs() );
+}
+
+//============================================================================
+void NearbyMgr::handleTcpLanConnectSuccess( BigListInfo* bigListInfo, VxSktBase* sktBase, bool isNewConnection, EConnectReason connectReason )
+{
+    if( bigListInfo )
+    {
+        bigListInfo->setIsNearby( true );
+        if( !bigListInfo->isIgnored() )
+        {
+            LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr connected to to %s ", bigListInfo->getOnlineName() );
+            onNearbyUserUpdated( bigListInfo, GetGmtTimeMs() );
+        }
     }
 }

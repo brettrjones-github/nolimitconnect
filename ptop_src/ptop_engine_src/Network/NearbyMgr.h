@@ -20,9 +20,13 @@
 
 #include <vector>
 
+class BigListInfo;
+
 class NearbyMgr : public IMulticastListenCallback, public NetAvailStatusCallbackInterface, public RcMulticast
 {
 public:
+    const int                   MIN_TIME_MULTICAST_CONNECT_ATTEMPT = 60000;
+
     NearbyMgr() = delete;
     NearbyMgr( P2PEngine& engine, NetworkMgr& networkMgr );
     virtual ~NearbyMgr() = default;
@@ -47,6 +51,10 @@ public:
     std::vector<std::pair<VxGUID, int64_t>>& getIdentList()         { return m_NearbyIdentList; };
 
     virtual	void				handleMulticastSktCallback( VxSktBase* sktBase );
+    void						handleTcpLanConnectSuccess( BigListInfo* bigListInfo, VxSktBase* skt, bool isNewConnection, EConnectReason connectReason );
+
+    virtual void                onNearbyUserUpdated( VxNetIdent* netIdent, int64_t timestamp = 0);
+    void                        onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
 protected:
     void						setBroadcastPort( uint16_t u16Port );
@@ -55,7 +63,9 @@ protected:
     virtual void				multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnounce ) override;
 
     VxMutex                     m_ListMutex;
-
     std::vector<std::pair<VxGUID, int64_t>> m_NearbyIdentList;
+
+    VxMutex                     m_MulticastIdentMutex;
+    std::map<VxGUID, VxNetIdent> m_MulticastIdentList;
 };
 

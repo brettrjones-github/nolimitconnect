@@ -236,7 +236,8 @@ void NetConnector::addConnectRequestToQue( ConnectRequest& connectRequest, bool 
 //============================================================================
 bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo, 
 										VxSktBase **		ppoRetSkt,
-										bool&				retIsNewConnection )
+										bool&				retIsNewConnection,
+										EConnectReason		connectReason )
 {
 	bool gotConnected	= false;
 	retIsNewConnection	 = false;
@@ -277,7 +278,7 @@ bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo,
 	else
 	{
 		m_ConnectList.connectListUnlock();
-		if( connectUsingTcp( connectInfo, ppoRetSkt ) )
+		if( connectUsingTcp( connectInfo, ppoRetSkt, connectReason ) )
 		{
 			gotConnected		= true;
 			retIsNewConnection	= true;
@@ -289,7 +290,8 @@ bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo,
 
 //============================================================================
 bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo, 
-									VxSktBase **		ppoRetSkt )
+									VxSktBase **		ppoRetSkt,
+									EConnectReason		connectReason )
 {
 	* ppoRetSkt = NULL;
 	if( false == connectInfo.m_DirectConnectId.isVxGUIDValid() )
@@ -301,25 +303,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 	std::string strDirectConnectIp;
 	VxSktBase * sktBase = NULL;
 
-	//if( 8319 == connectInfo.getOnlinePort() ) // Tarzan's port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "Connecting to Tarzan's port\n" );
-	//}
-
-	//if( 30200 == connectInfo.getOnlinePort() ) // Core8's port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "Connecting to Core8's port\n" );
-	//}
-
-	//if( 7771 == connectInfo.getOnlinePort() ) 
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "Connecting to Mary's port\n" );
-	//}
-
-	if( ( connectInfo.getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() )
+	if( ( connectInfo.getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() ) // uses same external ip
 		&& connectInfo.getMyOnlineIPv4().isValid()
 		&& connectInfo.getLanIPv4().isValid() )
 	{
@@ -332,9 +316,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 		// probably on same network so use local ip
 		if( 0 == directConnectTo(	connectInfo, 
 									&sktBase, 
-									LAN_CONNECT_TIMEOUT,
-									false, 
-									true ) )
+									eConnectReasonSameExternalIp ) )
 		{
 #ifdef DEBUG_CONNECTIONS
 			connectInfo.getLanIPv4().toStdString( strDirectConnectIp );
@@ -408,7 +390,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 			strDirectConnectIp.c_str(),
 			connectInfo.m_DirectConnectId.getPort() );
 #endif // DEBUG_CONNECTIONS
-		if( 0 == directConnectTo( connectInfo, &sktBase, DIRECT_CONNECT_TIMEOUT ) )
+		if( 0 == directConnectTo( connectInfo, &sktBase, connectReason ) )
 		{
 			//LogMsg( LOG_INFO, "P2PEngine::connectUsingTcp: success\n" );
 			// direct connection success
@@ -630,62 +612,44 @@ bool NetConnector::sendRequestConnectionThroughRelay(	VxSktBase *			sktBase,
 //============================================================================-
 RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 										VxSktBase **		ppoRetSkt,		// return pointer to socket if not null
-										int					iConnectTimeout,// how long to attempt connect
-										bool				bUseUdpIp,
-										bool				bUseLanIp )
+										EConnectReason		connectReason )
 {
 	RCODE rc = -1;
-	* ppoRetSkt = NULL;
+	* ppoRetSkt = nullptr;
+	int	iConnectTimeout = DIRECT_CONNECT_TIMEOUT; // how long to attempt connect
 
-	std::string strIpAddress;
+	std::string connectIpAddress;
 
-	if( bUseLanIp 
-			&& connectInfo.getLanIPv4().isValid() )
+	if( ( connectReason == eConnectReasonNearbyLan || connectReason == eConnectReasonSameExternalIp )
+		&& connectInfo.getLanIPv4().isValid() )
 	{
-		strIpAddress = connectInfo.getLanIPv4().toStdString();
+		connectIpAddress = connectInfo.getLanIPv4().toStdString();
+		iConnectTimeout = LAN_CONNECT_TIMEOUT;
 	}
 	else
 	{
-		connectInfo.m_DirectConnectId.getIpAddress( strIpAddress );
+		connectInfo.m_DirectConnectId.getIpAddress( connectIpAddress );
+		if( eConnectReasonRelayService == connectReason )
+		{
+			iConnectTimeout = MY_PROXY_CONNECT_TIMEOUT;
+		}
 	}
 
-	//if( 32522 ==  connectInfo.getOnlinePort() ) // joes port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "Connecting to Joe's port\n" );
-	//}
-
-	//if( 7771 ==  connectInfo.getOnlinePort() ) 
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "Connecting to Mary's port\n" );
-	//}
-
-	VxSktConnect * sktBase = m_PeerMgr.connectTo(	strIpAddress.c_str(),			// remote ip or url 
+	VxSktConnect * sktBase = m_PeerMgr.connectTo( connectIpAddress.c_str(),			// remote ip or url 
 													connectInfo.getOnlinePort(),	// port to connect to
 													iConnectTimeout );				// seconds before connect attempt times out
 	if( sktBase )
 	{
-		//LogMsg( LOG_INFO, "NetConnector::directConnectTo: connect SUCCESS to %s:%d\n", strIpAddress.c_str(), connectInfo.getOnlinePort() );
+		LogModule( eLogConnect,  LOG_VERBOSE, "NetConnector::directConnectTo: connect SUCCESS to %s:%d", connectIpAddress.c_str(), connectInfo.getOnlinePort() );
+		
 		// generate encryption keys
-#ifdef DEBUG_SKTS
-		LogMsg( LOG_SKT, "NetworkMgr::DirectConnectTo: connect success.. generating tx key\n" );
-#endif // DEBUG_SKTS
-
 		GenerateTxConnectionKey( sktBase, &connectInfo.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
-#ifdef DEBUG_SKTS
-		LogMsg( LOG_SKT, "NetworkMgr::DirectConnectTo: connect success.. generating rx key\n" );
-#endif // DEBUG_SKTS
 
 		GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
-#ifdef DEBUG_SKTS
-		LogMsg( LOG_SKT, "NetworkMgr::DirectConnectTo: connect success.. sending announce\n" );
-#endif // DEBUG_SKTS
 
-		//LogMsg( LOG_INFO, "sendMyPktAnnounce 2\n" ); 
 		if( false == sendMyPktAnnounce( connectInfo.getMyOnlineId(), sktBase, true, getShouldRequestTop10() ) )
 		{
-            LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
+            LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce" );
 			return -1;
 		}
 
@@ -697,9 +661,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 	}
 	else
 	{
-
-		//LogMsg( LOG_INFO, "NetConnector::directConnectTo: connect FAIL to %s:%d\n", strIpAddress.c_str(), connectInfo.getOnlinePort() );
-        LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed\n" );
+        LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed to %s:%d", connectIpAddress.c_str(), connectInfo.getOnlinePort() );
 	}
 
     LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: done\n" );
@@ -1033,9 +995,9 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 }
 
 //============================================================================
-void NetConnector::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason )
+void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * sktBase, bool isNewConnection, EConnectReason connectReason )
 {
-	if( 0 != bigListInfo )
+	if( bigListInfo )
 	{
 		int64_t timeNow = GetGmtTimeMs();
 		bigListInfo->setTimeLastConnectAttemptMs( timeNow );
@@ -1044,6 +1006,10 @@ void NetConnector::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase *
 		if( eConnectReasonRandomConnectJoin == connectReason )
 		{
 			m_Engine.getToGui().toGuiScanResultSuccess( eScanTypeRandomConnect, bigListInfo );
+		}
+		else if( eConnectReasonNearbyLan == connectReason || eConnectReasonSameExternalIp == connectReason )
+		{
+			m_Engine.getNetworkMgr().getNearbyMgr().handleTcpLanConnectSuccess( bigListInfo, sktBase, isNewConnection, connectReason );
 		}
 	}
 }

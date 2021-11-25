@@ -132,7 +132,7 @@ RCODE VxSktUdp::udpOpenMulticast( std::string multicastGroupIp, uint16_t u16Port
 	m_eSktCallbackReason = eSktCallbackReasonConnecting;
 	if( m_pfnReceive )
 	{
-		m_pfnReceive( this, getRxCallbackUserData() );
+        // m_pfnReceive( this, getRxCallbackUserData() );
 	}
 
 	m_Socket = socket( AF_INET, SOCK_DGRAM, 0 );
@@ -145,7 +145,7 @@ RCODE VxSktUdp::udpOpenMulticast( std::string multicastGroupIp, uint16_t u16Port
 		m_eSktCallbackReason = eSktCallbackReasonConnectError;
 		if( m_pfnReceive )
 		{
-			m_pfnReceive( this, getRxCallbackUserData() );
+            // m_pfnReceive( this, getRxCallbackUserData() );
 		}
 
 		return m_rcLastSktError;

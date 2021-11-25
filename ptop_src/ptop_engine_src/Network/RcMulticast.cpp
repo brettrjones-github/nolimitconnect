@@ -64,14 +64,21 @@ void RcMulticast::setLocalIp( InetAddress& newLocalIp )
 }
 
 //============================================================================
-void RcMulticast::setMulticastKey( const char * networkName )
+void RcMulticast::setMulticastKey( std::string networkNameKey )
 {
-	m_SktUdp.m_TxCrypto.setPassword( networkName, ( int )strlen(networkName ));
-	m_SktUdp.m_RxCrypto.setPassword( networkName, ( int )strlen(networkName ));
+	m_MulticastMutex.lock();
+	if( !networkNameKey.empty() )
+	{
+		m_NetworkNameKey = networkNameKey;
+		m_TxCrypto.setPassword( m_NetworkNameKey.c_str(), ( int )m_NetworkNameKey.length() );
+		m_RxCrypto.setPassword( m_NetworkNameKey.c_str(), ( int )m_NetworkNameKey.length() );
+	}
+
+	m_MulticastMutex.unlock();
 }
 
 //============================================================================
-bool RcMulticast::enableListen( bool enable )
+bool RcMulticast::multicastEnable( bool enable )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -143,24 +150,45 @@ void RcMulticast::attemptDecodePktAnnounce( VxSktBase* skt, unsigned char* data,
 		return;
 	}
 
-	skt->decryptReceiveData();
-
-	PktAnnounce* pktAnnounce = ( PktAnnounce* )data;
-	if( false == pktAnnounce->isValidPktAnn() )
+	if( !m_bBroadcastEnabled || !m_RxCrypto.isKeyValid() )
 	{
-		LogMsg( LOG_INFO, "attemptDecodePktAnnounce invalid PktAnn" );
 		return;
 	}
 
-	m_ListenCallback.multicastPktAnnounceAvail( skt, pktAnnounce );
-}
+	// we have to reset the crypto each time because is not a stream
+	// treat m_RxCrypto like a cache object to avoid generating crypto context each time
+	m_MulticastMutex.lock();
+	VxCrypto udpCrypto = m_RxCrypto;
+	m_MulticastMutex.unlock();
 
+	udpCrypto.decrypt( data, dataLen );
+
+	PktAnnounce* pktAnnounce = ( PktAnnounce* )data;
+	if( pktAnnounce->isValidPktAnn() )
+	{
+		m_ListenCallback.multicastPktAnnounceAvail( skt, pktAnnounce );
+	}
+	else
+	{
+		LogMsg( LOG_INFO, "attemptDecodePktAnnounce invalid PktAnn" );
+	}
+}
 
 //============================================================================
 void RcMulticast::onPktAnnUpdated( void )
 {
 	if( m_Engine.getNetStatusAccum().getNearbyAvailable() && !m_Engine.getNetStatusAccum().getLanIpAddr().empty() )
 	{
+		if( m_NetworkNameKey.empty() )
+		{
+			std::string networkName;
+			m_Engine.getEngineSettings().getNetworkKey( networkName );
+			if( !networkName.empty() )
+			{
+				setMulticastKey( networkName );
+			}
+		}
+
 		m_MulticastMutex.lock();
 		m_Engine.copyMyPktAnnounce( m_PktAnnEncrypted );
 		m_PktAnnEncrypted.setMyFriendshipToHim( eFriendStateGuest );
@@ -170,17 +198,13 @@ void RcMulticast::onPktAnnUpdated( void )
 		ipV4.setIp( m_Engine.getNetStatusAccum().getLanIpAddr().c_str() );
 		m_PktAnnEncrypted.setLanIPv4( ipV4 );
 
-		std::string networkName;
-		m_Engine.getEngineSettings().getNetworkKey( networkName );
-
-		if( networkName.length() )
+		if( !m_NetworkNameKey.empty() )
 		{
-			m_SktUdp.m_TxCrypto.setPassword( networkName.c_str(), networkName.length() );
-			setMulticastKey( networkName.c_str() );
-			RCODE rc = m_SktUdp.m_TxCrypto.encrypt( ( unsigned char* )&m_PktAnnEncrypted, ( int )sizeof( PktAnnounce ) );
+			m_TxCrypto.setPassword( m_NetworkNameKey.c_str(), m_NetworkNameKey.length() );
+			RCODE rc = m_TxCrypto.encrypt( ( unsigned char* )&m_PktAnnEncrypted, ( int )sizeof( PktAnnounce ) );
 			if( 0 != rc )
 			{
-				LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated error %d encrypting pkt announce\n", rc );
+				LogMsg( LOG_INFO, "RcMulticast::onPktAnnUpdated error %d encrypting pkt announce\n", rc );
 			}
 			else
 			{
@@ -189,7 +213,7 @@ void RcMulticast::onPktAnnUpdated( void )
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "RcMulticastBroadcast::onPktAnnUpdated COULD NOT GET NETWORK NAME\n" );
+			LogMsg( LOG_INFO, "RcMulticast::onPktAnnUpdated COULD NOT GET NETWORK NAME\n" );
 		}
 
 		m_MulticastMutex.unlock();
@@ -199,6 +223,7 @@ void RcMulticast::onPktAnnUpdated( void )
 //============================================================================
 void RcMulticast::onOncePerSecond( void )
 {
+	LogMsg( LOG_DEBUG, "RcMulticast::onOncePerSecond skt id %d", m_SktUdp.m_iSktId );
 	if( m_bBroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
 	{
 		m_iBroadcastCountSec++;
@@ -215,30 +240,24 @@ void RcMulticast::sendMulticast( void )
 {
 	if( false == m_bPktAnnUpdated )
 	{
-		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn HAS NOT BEEN UPDATED" );
+		LogMsg( LOG_INFO, "RcMulticast::sendMulticast PktAnn HAS NOT BEEN UPDATED" );
 		return;
-	}
-
-	if( m_bPktAnnUpdated && m_bBroadcastEnabled )
-	{
-		getUdpSkt().setIsConnected( true );
 	}
 
 	if( getUdpSkt().isConnected() )
 	{
-		LogModule( eLogMulticast, LOG_INFO, "RcMulticastBroadcast::sendMulticast PktAnn len %d", sizeof( m_PktAnnEncrypted ) );
+		LogModule( eLogMulticast, LOG_INFO, "RcMulticast::sendMulticast PktAnn len %d", sizeof( m_PktAnnEncrypted ) );
 		m_MulticastMutex.lock();
 		RCODE rc = getUdpSkt().sendToMulticast( ( const char* )&m_PktAnnEncrypted, sizeof( m_PktAnnEncrypted ), m_MulticastGroupIp.c_str(), getUdpSkt().getMulticastPort() );
 		if( rc )
 		{
-			LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast error %d", rc );
+			LogMsg( LOG_INFO, "RcMulticast::sendMulticast error %d", rc );
 		}
 
 		m_MulticastMutex.unlock();
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "RcMulticastBroadcast::sendMulticast socket not open" );
-
+		LogMsg( LOG_INFO, "RcMulticast::sendMulticast socket not open" );
 	}
 }

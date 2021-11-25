@@ -23,6 +23,7 @@
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
+#include <ptop_src/ptop_engine_src/Network/NetworkMgr.h>
 
 #include <PktLib/PktsRelay.h>
 #include <PktLib/PktsPing.h>
@@ -55,6 +56,7 @@ void P2PEngine::onConnectionLost( VxSktBase * sktBase )
 	getHostJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
 	getUserOnlineMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
 	getUserJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
+	getNetworkMgr().getNearbyMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
 	
 	m_RcScan.onConnectionLost( sktBase );
 	m_ConnectionList.onConnectionLost( sktBase );

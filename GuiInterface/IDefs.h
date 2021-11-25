@@ -93,6 +93,12 @@ enum EConnectReason
     eConnectReasonPlugin,
     eConnectReasonOtherSearch,
 
+    eConnectReasonNearbyLan,
+    eConnectReasonSameExternalIp,
+    eConnectReasonReverseConnectRequested,
+    eConnectReasonPktTcpPunch,
+    eConnectReasonRelayService,
+
     eMaxConnectReason
 };
 

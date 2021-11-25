@@ -134,9 +134,9 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsPktAnnRevConnectRequested() )
 	{
-        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested\n", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		VxSktBase * poNewSkt = 0;
-		m_NetConnector.directConnectTo( pkt->getConnectInfo(), &poNewSkt );
+		m_NetConnector.directConnectTo( pkt->getConnectInfo(), &poNewSkt, eConnectReasonReverseConnectRequested );
 		if( poNewSkt )
 		{
 			LogMsg( LOG_INFO, "sendMyPktAnnounce 6" ); 
@@ -746,7 +746,7 @@ void P2PEngine::onPktTcpPunch( VxSktBase * sktBase, VxPktHdr * pktHdr )
 //#endif // DEBUG_ENGINE_PKTS
 	PktTcpPunch * pktPunch = ( PktTcpPunch * )pktHdr;
 	VxSktBase * poNewSkt = 0;
-	if( 0 == m_NetConnector.directConnectTo( pktPunch->m_ConnectInfo, &poNewSkt ) )
+	if( 0 == m_NetConnector.directConnectTo( pktPunch->m_ConnectInfo, &poNewSkt, eConnectReasonPktTcpPunch ) )
 	{
 		LogMsg( LOG_INFO, "P2PEngine:: TcpPunch SUCCESS\n" );
 		if( 0 != poNewSkt )

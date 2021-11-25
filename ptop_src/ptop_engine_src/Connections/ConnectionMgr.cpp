@@ -618,10 +618,10 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
         connectStatus = eConnectStatusConnectFailed;
 
         //LogMsg( LOG_INFO, "NetConnector::directConnectTo: connect FAIL to %s:%d\n", strIpAddress.c_str(), connectInfo.getOnlinePort() );
-        LogModule( eLogConnect, LOG_DEBUG, "ConnectionMgr::DirectConnectTo: failed\n" );
+        LogModule( eLogConnect, LOG_DEBUG, "ConnectionMgr::DirectConnectTo: failed" );
     }
 
-    LogModule( eLogConnect, LOG_DEBUG, "ConnectionMgr::DirectConnectTo: done\n" );
+    LogModule( eLogConnect, LOG_DEBUG, "ConnectionMgr::DirectConnectTo: done" );
 
     m_ConnectionMutex.unlock();
     return connectStatus;
