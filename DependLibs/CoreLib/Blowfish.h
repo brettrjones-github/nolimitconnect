@@ -19,8 +19,8 @@ extern "C" {
 #define NUM_ENTRIES  256
 
 typedef struct {
-  unsigned long PA[16 + 2];
-  unsigned long SB[NUM_S_BOXES][NUM_ENTRIES];
+  uint32_t PA[16 + 2];
+  uint32_t SB[NUM_S_BOXES][NUM_ENTRIES];
 }BlowCtx;
 
 

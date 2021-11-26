@@ -336,7 +336,9 @@ void NetworkStateAvail::runNetworkState( void )
 	}
 
     m_Engine.getNetStatusAccum().setNearbyAvailable( true );
+
     m_NetworkStateMachine.getNetworkMgr().getNearbyMgr().onPktAnnUpdated();
+
     /*
     if( !testConnectHadError )
     {

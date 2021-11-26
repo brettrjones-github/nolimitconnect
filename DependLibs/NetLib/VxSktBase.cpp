@@ -1086,6 +1086,11 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
                 }
 
                 int iAttemptLen = sktBase->getSktBufFreeSpace();
+                if( iAttemptLen <= 0 )
+                {
+                    LogMsg( LOG_VERBOSE, "skt %d handle %d buffer is full ", sktBase->getSktId(), sktBase->getSktHandle() );
+                }
+
                 vx_assert( iAttemptLen >= 0 );
                 if( iAttemptLen >= (int)sizeof( as8Buf ) )
                 {
@@ -1099,6 +1104,7 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 
 					if( INVALID_SOCKET == sktBase->m_Socket )
 					{
+						LogModule( eLogUdpData, LOG_VERBOSE, "udp closing with invalid socket" );
 						// has been closed by outside thread
 						sktBase->setCallbackReason( eSktCallbackReasonClosing );
 						goto closed_skt_exit;
@@ -1371,6 +1377,11 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
             }
         }
     }
+
+	if( sktBase && sktBase->isUdpSocket() )
+	{
+		LogModule( eLogUdpData, LOG_VERBOSE, "udp skt id %d handle %d exit thread last error %d", sktBase->getSktId(), sktBase->getSktHandle(), sktBase->getLastSktError() );;
+	}
 
     poVxThread->abortThreadRun( true );
 	poVxThread->threadAboutToExit();

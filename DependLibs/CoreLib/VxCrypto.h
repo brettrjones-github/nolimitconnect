@@ -37,7 +37,7 @@ class VxGUID;
 class VxKey
 {
 public:
-	VxKey();
+	VxKey() = default;
 	~VxKey();
 
 	//! return true if key has been set
@@ -66,13 +66,13 @@ public:
 													const char *	pSalt = "NoLm" );	// salt
 											//=== vars ===//
 	uint32_t					m_au32Key[ CHEEZY_SYM_KEY_LEN / sizeof( uint32_t ) ];
-	bool						m_bIsSet;		// true if key has been set	
+	bool						m_bIsSet{ false };		// true if key has been set	
 };
 
 class VxCrypto
 {
 public:
-	VxCrypto();
+	VxCrypto() = default;
 
 	//! return true if key set and context generated
 	bool						isKeyValid( void ) { return m_bIsKeyValid; }
@@ -108,9 +108,9 @@ public:
 	RCODE						VerifyKnownString( unsigned char * pu8Data, int iDataLen );
 
 	//=== vars ===//
-	BlowCtx						m_BlowCtx;			// context of blowfish
-	VxKey						m_Key;				// encryption key
-	bool						m_bIsKeyValid;		// if true encryption key has been set
+	BlowCtx						m_BlowCtx;				// context of blowfish
+	VxKey						m_Key;					// encryption key
+	bool						m_bIsKeyValid{ 0 };		// if true encryption key has been set
 };
 
 //============================================================================

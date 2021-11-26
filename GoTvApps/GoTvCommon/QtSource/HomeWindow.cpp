@@ -329,8 +329,6 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
 
     LogMsg( LOG_ERROR, "HomeWindow::slotDeviceOrientationChanged %s", GuiParams::describeOrientation(m_Orientation).toUtf8().constData() );
 
-    bool isFrameBottomVisible = m_HomeFrameRight->isVisible();
-    bool isFrameRightVisible = m_HomeFrameBottom->isVisible();
     m_HomeFrameRight->setVisible( false );
     m_HomeFrameBottom->setVisible( false );
 

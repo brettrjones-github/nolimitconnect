@@ -64,13 +64,13 @@ protected:
 	std::string					m_NetworkNameKey{ "" };
 
 	IMulticastListenCallback&	m_ListenCallback;
+    VxSktUdp					m_SktUdp;
 
 	bool						m_BroadcastEnabled{ false };
 	int							m_iBroadcastCountSec{ 0 };
 	bool						m_bPktAnnUpdated{ false };
 	PktAnnounce					m_PktAnnEncrypted;
 
-	VxSktUdp					m_SktUdp;
 	InetAddress					m_LclIp;
 	uint16_t					m_MulticastPort{ RC_DEFAULT_MULTICAST_PORT };
 	std::string					m_MulticastGroupIp{ RC_DEFAULT_MULTICAST_ADDR };

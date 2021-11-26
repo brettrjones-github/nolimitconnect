@@ -124,16 +124,16 @@ void GuiUserJoinMgr::slotInternalUserJoinRemoved( VxGUID onlineId, EPluginType p
 }
 
 //============================================================================
-void GuiUserJoinMgr::slotInternalUserJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState )
+void GuiUserJoinMgr::slotInternalUserJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState joinOfferState )
 {
     EHostType hostType = PluginTypeToHostType( pluginType );
     GuiUserJoin* joinInfo = findUserJoin( userOnlineId );
-    if( joinInfo && hostType != eHostTypeUnknown && hostOfferState != eOfferStateNone )
+    if( joinInfo && hostType != eHostTypeUnknown && joinOfferState != eJoinStateNone )
     {
-        if( joinInfo->getJoinState( hostType ) != hostOfferState )
+        if( joinInfo->getJoinState( hostType ) != joinOfferState )
         {
-            joinInfo->setJoinState( hostType, hostOfferState );
-            emit signalUserJoinOfferStateChange( userOnlineId, hostType, hostOfferState );
+            joinInfo->setJoinState( hostType, joinOfferState );
+            emit signalUserJoinOfferStateChange( userOnlineId, hostType, joinOfferState );
         }
     }
 }

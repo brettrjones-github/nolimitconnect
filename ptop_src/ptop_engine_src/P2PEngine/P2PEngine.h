@@ -51,6 +51,9 @@
 #include <PktLib/PktSysHandlerBase.h>
 #include <PktLib/PktsImAlive.h>
 
+// a handy debug function with access to almost everything
+void EngineCheck( int val = 0 );
+
 class AssetMgr;
 class BlobMgr;
 class ConnectMgr;

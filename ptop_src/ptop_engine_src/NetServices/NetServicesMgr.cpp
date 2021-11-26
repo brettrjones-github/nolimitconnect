@@ -746,7 +746,7 @@ static int uint16_t = 0;
             m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
             portOpenTestError = eAppErrPortIsClosed;
 		}
-
+;
 		return portOpenTestError; // messages sent and result set and no sense in retying because all ports blocked on cell network
 	}
 

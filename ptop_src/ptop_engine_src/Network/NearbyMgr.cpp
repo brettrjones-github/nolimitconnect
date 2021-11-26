@@ -54,6 +54,10 @@ void NearbyMgr::networkMgrShutdown( void )
 bool NearbyMgr::fromGuiNearbyBroadcastEnable( bool enable )
 {
     bool result = false;
+    lockList();
+    m_NearbyIdentList.clear();
+    unlockList();
+
     if( enable )
     {
         /*

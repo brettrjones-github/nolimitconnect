@@ -32,57 +32,57 @@ public:
 														const char *	pOfferMsg,				
 														const char *	pFileName = 0,
 														uint8_t *		fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
+                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
 													int			    pvUserdata,
 													EOfferResponse	eOfferResponse,
-													VxGUID			lclSessionId );
+                                                    VxGUID			lclSessionId ) override;
 
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = nullptr, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = nullptr,  int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
-	virtual bool				fromGuiInstMsg( VxNetIdent * netIdent, const char * pMsg ); 
+    virtual bool				fromGuiInstMsg( VxNetIdent * netIdent, const char * pMsg ) override;
 
-	virtual bool				fromGuiSetGameValueVar(	VxNetIdent * netIdent, int32_t varId, int32_t varValue );
-	virtual bool				fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t	actionId, int32_t actionValue );
+    virtual bool				fromGuiSetGameValueVar(	VxNetIdent * netIdent, int32_t varId, int32_t varValue ) override;
+    virtual bool				fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t	actionId, int32_t actionValue ) override;
 
 protected:
-	virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktChatReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktChatReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktVideoFeedReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedStatus		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedPic			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedPicChunk		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVideoFeedPicAck		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktVideoFeedReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktVideoFeedStatus		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktVideoFeedPic			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktVideoFeedPicChunk		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktVideoFeedPicAck		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktSessionStopReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktSessionStopReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktTodGameStats		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktTodGameAction		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktTodGameValue		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktTodGameStats		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktTodGameAction		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktTodGameValue		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
-	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
+    virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio ) override;
+    virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen ) override;
 
-	virtual void				callbackVideoPktPic( void * userData, VxGUID& onlineId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum );
-	virtual void				callbackVideoPktPicChunk( void * userData, VxGUID& onlineId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum );
+    virtual void				callbackVideoPktPic( void * userData, VxGUID& onlineId, PktVideoFeedPic * pktVid, int pktsInSequence, int thisPktNum ) override;
+    virtual void				callbackVideoPktPicChunk( void * userData, VxGUID& onlineId, PktVideoFeedPicChunk * pktVid, int pktsInSequence, int thisPktNum ) override;
 
-	virtual void				onSessionStart( PluginSessionBase * session, bool pluginIsLocked );
-	virtual void				onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse );
+    virtual void				onSessionStart( PluginSessionBase * session, bool pluginIsLocked ) override;
+    virtual void				onSessionEnded( PluginSessionBase * session, bool pluginIsLocked, EOfferResponse eOfferResponse ) override;
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onConnectionLost( VxSktBase * sktBase );
+    virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+    virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
+    virtual void				onConnectionLost( VxSktBase * sktBase ) override;
 
-	P2PSession *				createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );	
+    P2PSession *				createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	bool						sendGameStats( VxNetIdent *	netIdent );
 
 	//=== vars ===//

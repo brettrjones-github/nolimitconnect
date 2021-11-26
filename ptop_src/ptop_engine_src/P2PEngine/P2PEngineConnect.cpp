@@ -50,6 +50,10 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 		}
 		else if( retIsNewConnection )
 		{
+			if( eConnectReasonRelaySearch == connectReason )
+			{
+			}
+
 			// handle success connect
 			BigListInfo * bigListInfo = 0;
 			int retryCnt = 0;

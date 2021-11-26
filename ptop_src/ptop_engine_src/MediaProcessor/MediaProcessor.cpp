@@ -1017,7 +1017,7 @@ void MediaProcessor::processRawVideoIn( RawVideo * rawVideo )
 				for( int i = 0; i < chunkPktsRequired; i++ )
 				{
 					PktVideoFeedPicChunk * pktChunk = m_VidChunkList[i];
-					int32_t dataThisChunk = dataLeftToSend > MAX_PIC_CHUNK_LEN ? MAX_PIC_CHUNK_LEN : dataLeftToSend;
+                    int32_t dataThisChunk = dataLeftToSend > (int)MAX_PIC_CHUNK_LEN ? (int)MAX_PIC_CHUNK_LEN : dataLeftToSend;
 					memcpy( pktChunk->getDataPayload(), &(m_PktVideoFeedPic->getDataPayload()[curDataIdx]), dataThisChunk );
 					pktChunk->setThisDataLen( dataThisChunk );
 					pktChunk->setPktSeqNum( 2 + i );

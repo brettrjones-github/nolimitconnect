@@ -21,7 +21,7 @@ class VxSktUdp : public VxSktBase
 {
 public:
 	VxSktUdp();	
-	virtual ~VxSktUdp() = default;
+    virtual ~VxSktUdp();
 
 	//! open a udp port
 	virtual long				udpOpen( InetAddress& oLclIp, uint16_t u16Port = 54321, bool enableReceiveThread = true );

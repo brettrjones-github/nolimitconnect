@@ -302,54 +302,44 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 
 	std::string strDirectConnectIp;
 	VxSktBase * sktBase = NULL;
+	bool requiresRelay = connectInfo.requiresRelay();
 
-	if( ( connectInfo.getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() ) // uses same external ip
+	if( ( connectInfo.getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() // uses same external ip
+		|| connectReason == eConnectReasonNearbyLan ) // on same lan network
 		&& connectInfo.getMyOnlineIPv4().isValid()
 		&& connectInfo.getLanIPv4().isValid() )
 	{
-		if( connectInfo.getMyOnlinePort() == m_PktAnn.getMyOnlinePort() )
-		{
-			LogMsg( LOG_ERROR, "ERROR connectUsingTcp: attempting connect to our ip and port for different id %s\n", connectInfo.getOnlineName() );
-			return false;
-		}
-
-		// probably on same network so use local ip
+		strDirectConnectIp = connectInfo.getLanIPv4().toStdString();
+		// probably on same LAN network
 		if( 0 == directConnectTo(	connectInfo, 
 									&sktBase, 
 									eConnectReasonSameExternalIp ) )
-		{
-#ifdef DEBUG_CONNECTIONS
-			connectInfo.getLanIPv4().toStdString( strDirectConnectIp );
-			LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS skt %d LAN connect to %s ip %s port %d\n",
+		{		
+			LogModule( eLogConnect, LOG_VERBOSE, "connectUsingTcp: SUCCESS skt %d LAN connect to %s ip %s port %d",
 				sktBase->m_iSktId,
 				connectInfo.getOnlineName(),
 				strDirectConnectIp.c_str(),
 				connectInfo.m_DirectConnectId.getPort() );
-#endif // DEBUG_CONNECTIONS
+
+			requiresRelay = false;
 			* ppoRetSkt = sktBase;
 			return true;
 		}
-#ifdef DEBUG_CONNECTIONS
 		else
 		{
-			LogMsg( LOG_SKT, "connectUsingTcp: FAIL LAN connect to %s ip %s port %d\n",
-				connectInfo.getOnlineName(),
-				strDirectConnectIp.c_str(),
-				connectInfo.m_DirectConnectId.getPort() );
+			LogModule( eLogConnect, LOG_VERBOSE, "connectUsingTcp: FAIL LAN connect to %s ip %s port %d",
+						connectInfo.getOnlineName(),
+						strDirectConnectIp.c_str(),
+						connectInfo.m_DirectConnectId.getPort() );
 		}
-#endif // DEBUG_CONNECTIONS
 	}
 
-#ifdef DEBUG_CONNECTIONS
 	std::string debugClientOnlineId;
 	connectInfo.getMyOnlineId(debugClientOnlineId);
-	LogMsg( LOG_INFO, "connectUsingTcp %s id %s \n", 
-		connectInfo.getOnlineName(),
-		debugClientOnlineId.c_str() );
-#endif // DEBUG_CONNECTIONS
+	LogModule( eLogConnect, LOG_VERBOSE, "connectUsingTcp %s id %s ip %s", connectInfo.getOnlineName(),
+				debugClientOnlineId.c_str(), strDirectConnectIp.c_str() );
 
 	// verify proxy if proxy required
-	bool requiresRelay = connectInfo.requiresRelay();
 	if( requiresRelay )
 	{
 		if( connectInfo.m_RelayConnectId.isVxGUIDValid() )
@@ -358,9 +348,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 			{
 				// we are this persons proxy
 				// dont attempt to connect.. he has to connect to us
-#ifdef DEBUG_CONNECTIONS
-				LogMsg( LOG_INFO, "We are Users proxy must wait for them to connect to me\n" );
-#endif // DEBUG_CONNECTIONS
+				LogModule( eLogConnect, LOG_VERBOSE, "We are Users proxy must wait for them to connect to me" );
 				// try ipv6 if available
 				return tryIPv6Connect( connectInfo, ppoRetSkt );
 			}
@@ -921,7 +909,7 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 	{
 		if( eConnectReasonRelaySearch != connectRequest.getConnectReason() )
 		{
-			LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online\n" );
+			LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online" );
 		}
 	}
 

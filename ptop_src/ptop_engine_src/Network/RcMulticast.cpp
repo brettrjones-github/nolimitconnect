@@ -46,7 +46,6 @@ RcMulticast::RcMulticast( NetworkMgr& networkMgr, IMulticastListenCallback& mult
 , m_Engine( networkMgr.getEngine() )
 , m_ListenCallback( multicastListenCallback )
 , m_SktUdp()
-, m_MulticastMutex()
 {
 	m_SktUdp.setReceiveCallback( RcMulticastListenSktCallbackHandler, this );
 }
@@ -130,7 +129,10 @@ bool RcMulticast::multicastEnable( bool enable )
 	}
 	else
 	{
-		result = true;
+        m_SktUdp.closeSkt( eSktCloseMulticastListenDone );
+        result = true;
+        m_BroadcastEnabled = false;
+        m_SktUdp.setIsConnected( false );
 	}
 
 	return result;
@@ -204,9 +206,11 @@ void RcMulticast::onPktAnnUpdated( void )
 
 		m_MulticastMutex.lock();
 		m_Engine.copyMyPktAnnounce( m_PktAnnEncrypted );
+
 		m_PktAnnEncrypted.setMyFriendshipToHim( eFriendStateGuest );
 		m_PktAnnEncrypted.setHisFriendshipToMe( eFriendStateGuest );
-		// normally it is a bad idea to announce our lan ip but do in multicast so can connect on local network
+
+		// normally it is a bad idea to announce our lan ip but we do in multicast so can connect on local network
 		InetAddrIPv4 ipV4;
 		ipV4.setIp( m_Engine.getNetStatusAccum().getLanIpAddr().c_str() );
 		m_PktAnnEncrypted.setLanIPv4( ipV4 );
@@ -236,7 +240,6 @@ void RcMulticast::onPktAnnUpdated( void )
 //============================================================================
 void RcMulticast::onOncePerSecond( void )
 {
-	LogMsg( LOG_DEBUG, "RcMulticast::onOncePerSecond skt id %d", m_SktUdp.m_iSktId );
 	if( m_BroadcastEnabled && m_bPktAnnUpdated && m_Engine.getNetStatusAccum().getNearbyAvailable() )
 	{
 		m_iBroadcastCountSec++;

@@ -18,7 +18,7 @@ namespace
         "Max Comm Error ",
     };
 
-    const char * ConnectReasonEnumStrings[] = 
+    const char * ConnectReasonEnumStrings[] =
     { 
         "Connect Reason Unknown ",
         "Connect Reason Chat RoomAnnounce ",
@@ -49,7 +49,7 @@ namespace
         "Max Connect Reason ",
     };
 
-    const char * ConnectStatusEnumStrings[] = 
+    const char * ConnectStatusEnumStrings[] =
     { 
         "Connect Status Unknown ",
 
@@ -99,7 +99,7 @@ namespace
         "Max Hacker Reason ",
     };
 
-    const char * HostAnnounceStatusEnumStrings[] = 
+    const char * HostAnnounceStatusEnumStrings[] =
     { 
         "Host Announce Status Unknown ",
         "Host Announce Invalid Url ",
@@ -124,7 +124,7 @@ namespace
         "Max Host Announce Status ",
     };
 
-    const char * HostJoinStatusEnumStrings[] = 
+    const char * HostJoinStatusEnumStrings[] =
     { 
         "Host Join Status Unknown ",
         "Host Join Invalid Url ",
@@ -149,7 +149,7 @@ namespace
         "Max Host Join Status ",
     };
 
-    const char * HostSearchStatusEnumStrings[] = 
+    const char * HostSearchStatusEnumStrings[] =
     { 
         "Host Search Status Unknown ",
         "Host Search Invalid Url ",
@@ -251,34 +251,36 @@ namespace
 
     const char * NetworkStateEnumStrings[] = 
     { 
-        "State Unknown ",
-        "Init ",
-        "Test ", // eNetworkStateTypeAvail
-        "Testing Connection ",
-        "Relay Search ",
-        "Announce To Network ",
-        "Online Direct Connect",
-        "Online Through Relay",
-        "Get Relay List ",
-        "No Internet Connection ",
-        "Failed Resolve Host URL ",
+        "Network State Unknown ",   // 0
+        "Network State Lost ",      // 1
+        "Network State Available ", // 2 eNetworkStateTypeAvail
+        "Network State Testing Connection ",        // 3 eNetworkStateTypeTestConnection
+        "Network State Relay Search ",              // 4 eNetworkStateTypeRelaySearch
+        "Network State Announce To Network ",       // 5 eNetworkStateTypeAnnounce
+        "Network State Online Direct Connect",      // 6 eNetworkStateTypeAnnounce
+        "Network State Online Through Relay",       // 7 eNetworkStateTypeOnlineThroughRelay
+        "Network State Get Relay List ",            // 8 eNetworkStateTypeGetRelayList
+        "Network State No Internet Connection ",    // 9 eNetworkStateTypeNoInternetConnection
+        "Network State Failed Resolve Network Host URL ", // 10 eNetworkStateTypeFailedResolveHostNetwork
+        "Network State Failed Resolve Group List Host URL ", // 11 eNetworkStateTypeFailedResolveHostGroupList
+        "Network State Failed Resolve Group Host URL ", // 12 eNetworkStateTypeFailedResolveHostGroup
         "Max Network State "
     };
 
-    const char * RelayStatusEnumStrings[] = 
+    const char * RelayStatusEnumStrings[] =
     { 
-        "Relay Disconnected ",
-        "Relay Connected ",
-        "Searching For Relay ",
-        "No Relays Listed ",
-        "Relay Search ",
-        "Relay List Exhausted ",
-        "Relay Assume Firewalled ",
-        "Relay Assume Can Direct Connect ",
+        "Relay Status Disconnected ",   // 0 eMyRelayStatusDisconnected
+        "Relay Status Connected ",      // 1 eMyRelayStatusConnected
+        "Searching For Relay ",         // 2 eMyRelayStatusSearching
+        "Requesting Relay Service ",    // 3 eMyRelayStatusRequestService
+        "No Relays Listed ",            // 4 eMyRelayStatusNoRelaysListed
+        "Relay List Exhausted ",        // 5 eMyRelayStatusRelayListExhasted
+        "Relay Assume Firewalled ",     // 6 eMyRelayStatusAssumeFirewalled
+        "Relay Assume Can Direct Connect ", // 7 eMyRelayStatusAssumeCanDirectConnect
         "Max Relay Status "
     };
 
-    const char * OfferStateEnumStrings[] = 
+    const char * OfferStateEnumStrings[] =
     {
         "No Offer ",
         "Sending Offer ",
@@ -296,7 +298,7 @@ namespace
         "Max Offer State ",
     };
 
-    const char * OfferTypeEnumStrings[] = 
+    const char * OfferTypeEnumStrings[] =
     {
         "Offer Type: None ",
         "Offer Type: Join Group ",
@@ -318,7 +320,7 @@ namespace
         "Max Offer Type ",
     };
 
-    const char * PluginAccessStateEnumStrings[] = 
+    const char * PluginAccessStateEnumStrings[] =
     {
         "Access: Unknown ",
         "Access: Granted ",
@@ -332,7 +334,7 @@ namespace
         "Max Plugin Access ",
     };
 
-    const char * PluginTypeEnumStrings[] = 
+    const char * PluginTypeEnumStrings[] =
     {
         "Unknown Plugin ",
         "Admin ",
@@ -362,7 +364,7 @@ namespace
         "Max Public Plugin ",
     };
 
-    const char * PortOpenStatusEnumStrings[] = 
+    const char * PortOpenStatusEnumStrings[] =
     { 
         "Port Open: Status Unknown",
         "Port Open: LogMsg",
@@ -398,7 +400,7 @@ namespace
         "Max Run Test Status",
     };
 
-    const char * RandomConnectStatusEnumStrings[] = 
+    const char * RandomConnectStatusEnumStrings[] =
     { 
         "Phone Shake: Status Unknown ",
         "Phone Shake: Contact Host Failed ",
@@ -413,7 +415,7 @@ namespace
         "Max Phone Shake Status ",
     };
 
-    const char * ScanTypeEnumStrings[] = 
+    const char * ScanTypeEnumStrings[] =
     { 
         "Scan None ",
         "Chat Room Host Join Search ",

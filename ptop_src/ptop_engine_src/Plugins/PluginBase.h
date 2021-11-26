@@ -215,12 +215,12 @@ public:
 
     virtual EPluginAccess	    canAcceptNewSession( VxNetIdent * netIdent );
 
-	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	virtual RxSession *			createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	virtual RxSession *			createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	virtual TxSession *			createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
-	virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+    virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+    virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+    virtual RxSession *			createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+    virtual RxSession *			createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+    virtual TxSession *			createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
+    virtual TxSession *			createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType );
 
     //=== http ===//
 	virtual void				handlePluginSpecificSkt( VxSktBase * sktBase ) {};

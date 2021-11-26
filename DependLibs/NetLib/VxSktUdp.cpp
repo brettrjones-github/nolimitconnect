@@ -32,6 +32,15 @@ VxSktUdp::VxSktUdp()
 }
 
 //============================================================================
+VxSktUdp::~VxSktUdp()
+{
+    if( INVALID_SOCKET != m_Socket )
+    {
+        closeSkt( eSktCloseSktDestroy );
+    }
+}
+
+//============================================================================
 RCODE VxSktUdp::udpOpen( InetAddress& oLclIp, uint16_t u16Port, bool enableReceive )	
 {
 	struct addrinfo * poResultAddr = 0;
@@ -152,12 +161,7 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	}
 
 	// allow multiple sockets to use the same PORT number
-	u_int yes = 1;
-	if( 0 > setsockopt( m_Socket, SOL_SOCKET, SO_REUSEADDR, ( char* )&yes, sizeof( yes ) ) )
-	{
-		m_rcLastSktError = VxGetLastError();
-		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: Reusing ADDR failed error %s", VxDescribeSktError( m_rcLastSktError ) );
-	}
+    VxSetSktAllowReusePort( m_Socket );
 
 	// set up destination address
 	memset( &m_MulticastRxAddr, 0, sizeof( m_MulticastRxAddr ) );
@@ -170,9 +174,22 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	{
 		m_rcLastSktError = VxGetLastError();
 		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: socket bind error %s", VxDescribeSktError( m_rcLastSktError ) );
-	}
+    }
 
 	m_rcLastSktError = VxGetLastError();
+    if( m_rcLastSktError && INVALID_SOCKET != m_Socket)
+    {
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: last socket error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
+        if( 11 == m_rcLastSktError )
+        {
+            // not sure why this happens on android
+            // try anyway .. it is a try again error
+            m_rcLastSktError = 0;
+        }
+
+        m_rcLastSktError = 0;
+    }
+
 	setAllowLoopback( true );
 	m_IsMulticastSkt = true;
 	if( 0 == m_rcLastSktError )
@@ -184,7 +201,7 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: join %s completed with error %s", m_MulticastGroupIp.c_str(), VxDescribeSktError( m_rcLastSktError ) );
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: %s completed with error %d %s", m_MulticastGroupIp.c_str(), m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
 	}
 
 	return m_rcLastSktError;
@@ -419,7 +436,7 @@ RCODE VxSktUdp::sendTo(		const char *	pData,		// data to send
 							uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )
 {
 	if(	( false == isConnected()) 
-		|| ( m_pfnReceive && ( false == m_SktRxThread.isThreadCreated()) ) )
+        || ( m_pfnReceive && !( m_SktRxThread.isThreadCreated() || m_SktRxThread.isThreadRunning() ) ) )
 	{
 		LogMsg( LOG_ERROR, "VxSktUdp::sendTo: NOT CONNECTED OR INVALID\n" );
 		return -1;

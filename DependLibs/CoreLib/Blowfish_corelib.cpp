@@ -13,25 +13,12 @@
 
 #include <stdlib.h>
 
-namespace
-{
-//	uint32_t htonl2( uint32_t xVal )
-//	{
-//        if( IsBigEndianCpu() )
-//		{
-//			return xVal;
-//		}
-
-//		return ((((xVal) & 0xffL) << 24) | (((xVal) & 0xff00L) <<  8) | (((xVal) & 0xff0000L) >>  8) | (((xVal) & 0xff000000L) >> 24));
-//	}
-}
-
 typedef struct 
 {
-	unsigned int zero:8;
-	unsigned int one:8;
-	unsigned int two:8;
-	unsigned int three:8;
+	uint32_t zero:8;
+	uint32_t one:8;
+	uint32_t two:8;
+	uint32_t three:8;
 
 }WordByteBigEndian;
 
@@ -39,22 +26,22 @@ typedef struct
 //little endian
 typedef struct 
 {
-	unsigned int three:8;
-	unsigned int two:8;
-	unsigned int one:8;
-	unsigned int zero:8;
+	uint32_t three:8;
+	uint32_t two:8;
+	uint32_t one:8;
+	uint32_t zero:8;
 
 }WordByteLittleEndian;
 
 union WordBigEndian
 {
-	unsigned long word;
+	uint32_t word;
 	WordByteBigEndian byte;
 };
 
 union WordLittleEndian
 {
-	unsigned long word;
+	uint32_t word;
 	WordByteLittleEndian byte;
 };
 
@@ -70,7 +57,7 @@ struct DWordLittleEndian
 	union WordLittleEndian word1;
 };
 
-unsigned long GetPa0( void );
+uint32_t GetPa0( void );
 void DumpCtx( BlowCtx * pgBlowCtx )
 {
 	LogMsg( LOG_INFO, "BlowPA  %2.2x%2.2x%2.2x%2.2x %2.2x%2.2x%2.2x%2.2x %2.2x%2.2x%2.2x%2.2x %2.2x%2.2x%2.2x%2.2x\n",
@@ -174,8 +161,8 @@ void BlowReset( BlowCtx * pgBlowCtx );
 //============================================================================
 void BlowsetKey( BlowCtx * pgBlowCtx, unsigned char * pPasswd, int len )
 {
-	unsigned int i;
-	unsigned int j;
+	uint32_t i;
+	uint32_t j;
 
 	if (len > 0)
 	{
@@ -345,7 +332,7 @@ void BlowDeSubLittleEndian(BlowCtx * pgBlowCtx, union WordLittleEndian *x1,union
 	*x2 = w1;
 }
 
-static const unsigned int PA_Init[NUM_SUBKEYS] =
+static const uint32_t PA_Init[NUM_SUBKEYS] =
 {
 	0x243f6a88, 0x85a308d3, 0x13198a2e, 0x03707344,
 	0xa4093822, 0x299f31d0, 0x082efa98, 0xec4e6c89,
@@ -354,7 +341,7 @@ static const unsigned int PA_Init[NUM_SUBKEYS] =
 	0x9216d5d9, 0x8979fb1b
 };
 
-static const unsigned int SB_Init[NUM_S_BOXES][NUM_ENTRIES] =
+static const uint32_t SB_Init[NUM_S_BOXES][NUM_ENTRIES] =
 {
 	0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7,
 	0xb8e1afed, 0x6a267e96, 0xba7c9045, 0xf12c7f99,
@@ -617,7 +604,7 @@ static const unsigned int SB_Init[NUM_S_BOXES][NUM_ENTRIES] =
 //============================================================================
 void BlowReset(BlowCtx * pgBlowCtx)
 {
-	unsigned int i,j;
+	uint32_t i,j;
   
 	for (i=0;i<NUM_SUBKEYS;i++)
 		pgBlowCtx->PA[i] = PA_Init[i];
@@ -628,7 +615,7 @@ void BlowReset(BlowCtx * pgBlowCtx)
 }
 
 //============================================================================
-unsigned long GetPa0( void )
+uint32_t GetPa0( void )
 {
 	return PA_Init[0];
 }
@@ -641,7 +628,7 @@ void ReverseEndianess( unsigned char *Ptr, int N_Bytes )
     if( IsBigEndianCpu() )
 	{
 		int longCnt = N_Bytes >> 2;
-		unsigned long * longPtr = (unsigned long *) Ptr;
+		uint32_t * longPtr = (uint32_t *) Ptr;
 		for(int i = 0; i < longCnt; i++ )
 		{
 			*longPtr = RevereOrder(*longPtr);
@@ -657,7 +644,7 @@ void BlowEncrypt(BlowCtx * pgBlowCtx, unsigned char *Ptr, int N_Bytes)
 	int nBytes = N_Bytes;
 	if (N_Bytes%8)
 	{
-		LogMsg( LOG_ERROR, "\aBlowfish requires the input to be a multiple of 8 bytes (64bits) to work.\n" );
+		LogMsg( LOG_ERROR, "Blowfish requires the input to be a multiple of 8 bytes (64bits) to work." );
 		return;
 	}
 
@@ -700,7 +687,7 @@ void BlowDecrypt(BlowCtx * pgBlowCtx, unsigned char *Ptr, int N_Bytes)
 	
 	if (N_Bytes%8)
 	{
-		LogMsg( LOG_ERROR, "\aBlowfish requires the input to be a multiple of 8 bytes (64bits) to work.\n" );
+		LogMsg( LOG_ERROR, "Blowfish requires the input to be a multiple of 8 bytes (64bits) to work." );
 		return;
 	}
 

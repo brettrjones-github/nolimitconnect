@@ -151,16 +151,16 @@ void GuiHostJoinMgr::slotInternalHostJoinRemoved( VxGUID onlineId, EPluginType p
 }
 
 //============================================================================
-void GuiHostJoinMgr::slotInternalHostJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState )
+void GuiHostJoinMgr::slotInternalHostJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState joinOfferState )
 {
     EHostType hostType = PluginTypeToHostType( pluginType );
     GuiHostJoin* joinInfo = findHostJoin( userOnlineId );
-    if( joinInfo && hostType != eHostTypeUnknown && hostOfferState != eOfferStateNone )
+    if( joinInfo && hostType != eHostTypeUnknown && joinOfferState != eJoinStateNone )
     {
-        if( joinInfo->getJoinState( hostType ) != hostOfferState )
+        if( joinInfo->getJoinState( hostType ) != joinOfferState )
         {
-            joinInfo->setJoinState( hostType, hostOfferState );
-            emit signalHostJoinOfferStateChange( userOnlineId, hostType, hostOfferState );
+            joinInfo->setJoinState( hostType, joinOfferState );
+            emit signalHostJoinOfferStateChange( userOnlineId, hostType, joinOfferState );
         }
     }
 

@@ -623,7 +623,6 @@ bool GuiHelpers::isMessagerFrame( QWidget* curWidget )
 {
     bool isMessengerFrame{ false };
     
-    QFrame * pageFrame = nullptr;
     QObject * curParent = curWidget;
     QString messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
 

@@ -253,7 +253,7 @@ void NetworkStateMachine::changeNetworkState( ENetworkStateType eNetworkStateTyp
 
 	if( curNetworkStateType != eNetworkStateType )
 	{
-		LogModule( eLogNetworkState, LOG_DEBUG, "changeNetworkState %s to %s\n", DescribeNetworkState( curNetworkStateType ), DescribeNetworkState( eNetworkStateType ) );
+		LogModule( eLogNetworkState, LOG_DEBUG, "changeNetworkState %s to %s", DescribeNetworkState( curNetworkStateType ), DescribeNetworkState( eNetworkStateType ) );
 		m_NetworkStateMutex.lock();
 		m_CurNetworkState = findNetworkState( eNetworkStateType );
 		m_NetworkStateMutex.unlock();

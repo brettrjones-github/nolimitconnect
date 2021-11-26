@@ -31,22 +31,15 @@
 #include "VxParse.h"
 #include <PktLib/VxCommon.h>
 
-
+//===========================================//
 //=== cheezy crypto with known weeknesses ===//
 // issued to public domain year 2006
 //===========================================//
 
-
-//============================================================================
-//============================================================================
-VxKey::VxKey()
-	: m_bIsSet( 0 )
-{
-}
-
 //============================================================================
 VxKey::~VxKey()
 {
+	m_bIsSet = false;
 	memset( m_au32Key, 0xa5, sizeof( m_au32Key ) );
 }
 
@@ -54,6 +47,13 @@ VxKey::~VxKey()
 //! set key from data..
 RCODE VxKey::importKey( unsigned char * pu8Data, int iLen )
 {
+	if( !pu8Data || 1 > iLen )
+	{
+		LogMsg( LOG_ERROR, "VxKey::importKey invalid param" );
+		vx_assert( false );
+		return -1;
+	}
+
 	//vx_assert( iLen == sizeof( m_au8Key ) );
 	if ( iLen == sizeof( m_au32Key ) )
 	{
@@ -61,6 +61,7 @@ RCODE VxKey::importKey( unsigned char * pu8Data, int iLen )
 		m_bIsSet = true;
 		return 0;
 	}
+
 	return -1;
 }
 
@@ -128,17 +129,20 @@ RCODE VxKey::setKeyFromPassword( const char *	pUserName,			// user name
 //============================================================================
 //! make encryption key from password
 RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
-	int				iPasswordLen,		// length of password	int iPasswordLen )
-	const char *	pSalt )	// salt
+								 int			iPasswordLen,		// length of password	int iPasswordLen )
+								 const char *	pSalt )	// salt
 {
 	//vx_assert( pPassword );
 	//vx_assert( (iPasswordLen > 0) && (iPasswordLen < 256) );
 	struct MD5Context   md5c;
 
-	if ( ( pPassword == NULL ) || ( 0 == iPasswordLen ) )
+	if( !pPassword || 1 > iPasswordLen || !pSalt || 4 > strlen( pSalt ) )
 	{
+		LogMsg( LOG_ERROR, "VxKey::setKeyFromPassword invalid param" );
+		vx_assert( false );
 		return -1;
 	}
+
 	MD5Init( &md5c );
 	MD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
 	MD5Final( (unsigned char *)m_au32Key, &md5c );
@@ -149,11 +153,6 @@ RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
 //============================================================================
 //============================================================================
 //============================================================================
-VxCrypto::VxCrypto()
-	: m_bIsKeyValid( 0 )
-{
-}
-
 
 //============================================================================
 //! generate key from password and set encryption key in one function call
@@ -163,10 +162,13 @@ RCODE VxCrypto::setPassword( const char * pPassword, int iPasswordLen )
 	struct MD5Context   md5c;
 	unsigned char       bfvec[ CHEEZY_SYM_KEY_LEN ];
 
-	if ( pPassword == NULL )
+    if ( !pPassword || 1 > iPasswordLen )
 	{
+		LogMsg( LOG_ERROR, "VxCrypto::setPassword invalid param" );
+		vx_assert( false );
 		return -1;
 	}
+
 	MD5Init( &md5c );
 	MD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
 	MD5Final( bfvec, &md5c );
@@ -333,9 +335,9 @@ void CheezyFillRandom( void * pvData, int iLen )
 //============================================================================
 //! encrypt data with VxCryptoo
 RCODE VxSymEncrypt( VxKey *		poKey,			// Symmetric key must be 16 bytes long
-	char *			pDataIn,		// buffer to encrypt
-	int				iDataLen,		// data length ( must be multiple of key length )
-	char *			pRetBuf )		// if null then encrypted data put in pData
+					char *			pDataIn,		// buffer to encrypt
+					int				iDataLen,		// data length ( must be multiple of key length )
+					char *			pRetBuf )		// if null then encrypted data put in pData
 {
 	vx_assert( poKey );
 	vx_assert( pDataIn );

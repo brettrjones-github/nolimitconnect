@@ -16,6 +16,7 @@
 #include "VxSktUtil.h"
 #include "VxSktAccept.h"
 #include "VxServerMgr.h"
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
@@ -45,9 +46,7 @@ namespace
             if( poMgr )
             {
                 LogModule( eLogListen, LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started thread 0x%x", poMgr->m_iMgrId, poMgr->getListenPort(), VxGetCurrentThreadId() );
-
                 poMgr->listenForConnectionsToAccept( poVxThread );
-
                 // quitting
                 LogModule( eLogListen, LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread 0x%x tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), VxGetCurrentThreadId(), poVxThread->getThreadTid() );
             }

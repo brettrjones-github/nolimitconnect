@@ -59,13 +59,13 @@
 
 namespace
 {
-	void LogHandler( void * userData, uint32_t u32LogFlags, char * logMsg )
-	{
-		if( userData )
-		{
-			((P2PEngine *)userData)->getToGui().toGuiLog( u32LogFlags, logMsg );
-		}
-	}
+	//void LogHandler( void * userData, uint32_t u32LogFlags, char * logMsg )
+	//{
+	//	if( userData )
+	//	{
+	//		((P2PEngine *)userData)->getToGui().toGuiLog( u32LogFlags, logMsg );
+	//	}
+	//}
 
 	void AppErrHandler( void * userData, EAppErr eAppErr, char * errMsg )
 	{
@@ -108,11 +108,11 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
     , m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn, ePluginTypeNetServices ) )
     , m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RunUrlAction( *new RunUrlAction( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
-    , m_RcScan( *this, m_ConnectionList )
     , m_HostJoinMgr( *new HostJoinMgr( *this, "HostJoinMgrDb.db3", "HostJoinStateDb.db3" ) )
     , m_UserJoinMgr( *new UserJoinMgr( *this, "UserJoinMgrDb.db3", "UserJoinStateDb.db3" ) )
     , m_UserOnlineMgr( *new UserOnlineMgr( *this, "UserOnlineMgrDb.db3", "UserOnlinetateDb.db3" ) )
     , m_SktLoopback( *this )
+    , m_RcScan( *this, m_ConnectionList )
 {
     m_PeerMgr.setSktLoopback( &m_SktLoopback );
     m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
@@ -583,4 +583,11 @@ bool P2PEngine::validateIdent( VxNetIdent* netIdent )
 	}
 
 	return netIdent->getMyOnlinePort() > 0;
+}
+
+//============================================================================
+// a handy debug function with access to almost everything
+void EngineCheck( int val )
+{
+	// LogMsg( LOG_VERBOSE, "Engine Check %d skt id %d", val, GetPtoPEngine().getNetworkMgr().getNearbyMgr().getUdpSkt().getSktId() );
 }

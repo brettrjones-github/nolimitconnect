@@ -255,7 +255,7 @@ EPluginType NetServiceUtils::parseHttpNetServiceUrl( VxSktBase * sktBase, NetSer
 	EPluginType pluginType = parseHttpNetServiceHdr( pSktBuf, iSktDataLen, netServiceHdr );
 	if( ePluginTypeInvalid == pluginType )
 	{
-		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetSrvUrlInvalid, sktBase, "Invalid Netservice URL\n" );
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetSrvUrlInvalid, sktBase, "Invalid Netservice URL" );
 		sktBase->sktBufAmountRead( 0 );
 		sktBase->closeSkt( eSktCloseNetSrvUrlInvalid );
 		return ePluginTypeInvalid;

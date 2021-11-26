@@ -184,7 +184,7 @@ bool CamLogic::assureCamInitiated( void )
         setCamera( QCameraInfo::defaultCamera() );
 #else
         setCamera( QMediaDevices::defaultVideoInput() );
-#endif  QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     }
 
     return  !m_camera.isNull() && m_camera->isAvailable();
