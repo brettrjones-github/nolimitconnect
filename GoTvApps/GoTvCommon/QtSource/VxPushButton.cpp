@@ -818,7 +818,7 @@ void VxPushButton::mousePressEvent( QMouseEvent * event )
             }
         }
 
-        LogMsg( LOG_DEBUG, "VxPushButton::mousePressEvent cnt %d elapsedMs %lld", m_AppClickCount, elapsedMs );
+        LogMsg( LOG_DEBUG, "VxPushButton::mousePressEvent cnt %d elapsedMs " PRId64 "", m_AppClickCount, elapsedMs );
     }
 }
 

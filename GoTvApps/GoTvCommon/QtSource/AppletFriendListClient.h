@@ -41,6 +41,7 @@ public:
 
     void						setStatusLabel( QString strMsg );
 
+    EFriendListType             getListType( void )             { return m_FriendListType; }
     void                        clearList( void );
     void                        clearStatus( void );
 
@@ -65,6 +66,9 @@ private slots:
     void                        onShowNearbyList( void );
 
 protected:
+    virtual void				callbackIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) override;
+    virtual void				callbackIndentListRemove( EFriendListType listType, VxGUID& onlineId ) override;
+
     virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override;
@@ -72,6 +76,7 @@ protected:
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
 
+    void                        updateUser( EFriendListType listType, VxGUID& onlineId );
     void                        updateUser( GuiUser* guiUser );
     void                        removeUser( VxGUID& onlineId );
 

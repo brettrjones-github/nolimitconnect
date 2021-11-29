@@ -596,7 +596,7 @@ void PlayerGlWidget::slotRecMotionButtonClicked( void )
 				{
 					// not long enough to be a recording
 					VxFileUtil::deleteFile( m_RecFileName.toUtf8().constData() );
-					LogMsg( LOG_ERROR, "PlayerGlWidget::videoMotionRecord file %s has to short len %lld\n", m_RecFileName.toUtf8().constData(), fileLen );
+					LogMsg( LOG_ERROR, "PlayerGlWidget::videoMotionRecord file %s has to short len " PRId64 "", m_RecFileName.toUtf8().constData(), fileLen );
 					m_MyApp.toGuiUserMessage( "ERROR: Motion video record file was too short" );
 				}
 				else
@@ -659,7 +659,7 @@ void PlayerGlWidget::slotRecNormalButtonClicked( void )
 				{
 					// not long enough to be a recording
 					VxFileUtil::deleteFile( m_RecFileName.toUtf8().constData() );
-					LogMsg( LOG_ERROR, "PlayerGlWidget::videoRecord file %s has to short len %lld\n", m_RecFileName.toUtf8().constData(), fileLen );
+					LogMsg( LOG_ERROR, "PlayerGlWidget::videoRecord file %s has to short len " PRId64 "", m_RecFileName.toUtf8().constData(), fileLen );
 					m_MyApp.toGuiUserMessage( "ERROR: Video record file was too short" );
 				}
 				else

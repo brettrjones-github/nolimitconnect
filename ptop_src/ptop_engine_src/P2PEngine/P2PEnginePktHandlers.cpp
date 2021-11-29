@@ -32,13 +32,13 @@
 //============================================================================
 void P2PEngine::onPktUnhandled( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	LogMsg( LOG_INFO, "onPktUnhandled pkt type %d\n", pktHdr->getPktType() );
+	LogMsg( LOG_INFO, "onPktUnhandled pkt type %d", pktHdr->getPktType() );
 }
 
 //============================================================================
 void P2PEngine::onPktInvalid( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	LogMsg( LOG_INFO, "onPktInvalid pkt type %d\n", pktHdr->getPktType() );
+	LogMsg( LOG_INFO, "onPktInvalid pkt type %d", pktHdr->getPktType() );
 }
 
 //============================================================================
@@ -78,22 +78,33 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 
 	pkt->reversePermissions();
+	if( pkt->getLanIPv4().isIPv4() )
+	{
+		// TODO validate if really nearby
+	}
+
+
 	BigListInfo * bigListInfo = 0;
 	EPktAnnUpdateType updateType = m_BigListMgr.updatePktAnn(	pkt,				// announcement pkt received
 																&bigListInfo );		// return pointer to all we know about this contact
 	if( ePktAnnUpdateTypeIgnored == updateType )
 	{
-		LogMsg( LOG_INFO, "Ignoring %s ip %s id %s",
+		LogModule( eLogConnect, LOG_VERBOSE, "Ignoring %s ip %s id %s",
 			pkt->getOnlineName(),
             sktBase->getRemoteIp().c_str(),
 			contactOnlineId.toHexString().c_str() );
-		m_NetConnector.closeConnection( eSktCloseUserIgnored, contactOnlineId, sktBase );	
+		// TODO do not close connection if is our group relay connection
+		// if( !m_PktAnn.requiresRelay() )
+		{
+			m_NetConnector.closeConnection( eSktCloseUserIgnored, contactOnlineId, sktBase );
+		}
+
 		return;
 	}
 
 	if( isFirstAnnounce )
 	{
-		LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s myFriendship %d hisFriendship %d\n",
+		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s myFriendship %d hisFriendship %d",
 			pkt->getOnlineName(),
             sktBase->getRemoteIp().c_str(),
 			bigListInfo->getMyFriendshipToHim(),
@@ -103,24 +114,31 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsPktAnnReplyRequested() )
 	{
-        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reply requested\n", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
-		m_NetConnector.sendMyPktAnnounce( pkt->getMyOnlineId(), 
-											sktBase,
-											false,
-											false,
-											false );
+        LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+		if( !m_NetConnector.sendMyPktAnnounce( pkt->getMyOnlineId(),
+				sktBase,
+				false,
+				false,
+				false ) )
+		{
+			LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::sendMyPktAnnounce failed ti %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+			sktBase->closeSkt( eSktClosePktAnnSendFail );
+		}
 	}
 
     if( sktBase->setPeerPktAnn( *pkt ) )
     {
+		getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
         getConnectionMgr().onSktConnectedWithPktAnn( sktBase, bigListInfo );
     }
-
-	getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
+	else
+	{
+		getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
+	}
 
 	if( pkt->getIsTopTenRequested() )
 	{
-        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s top ten requested\n", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s top ten requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		pkt->setIsTopTenRequested( false );
 		m_ConnectionList.sendMyTop10( sktBase, pkt->getSrcOnlineId() );
 	}
@@ -134,19 +152,27 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsPktAnnRevConnectRequested() )
 	{
-        LogMsg( LOG_INFO, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s reverse connect requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 		VxSktBase * poNewSkt = 0;
 		m_NetConnector.directConnectTo( pkt->getConnectInfo(), &poNewSkt, eConnectReasonReverseConnectRequested );
 		if( poNewSkt )
 		{
-			LogMsg( LOG_INFO, "sendMyPktAnnounce 6" ); 
+			LogModule( eLogConnect, LOG_VERBOSE, "sendMyPktAnnounce 6" );
             if( m_NetConnector.sendMyPktAnnounce(   pkt->getMyOnlineId(),
-                                                    sktBase,
+													poNewSkt,
                                                     true,
                                                     false,
                                                     false ) )
             {
-                getConnectList().addConnection( poNewSkt, bigListInfo, ( ePktAnnUpdateTypeContactIsSame == updateType ) );
+				if( poNewSkt->setPeerPktAnn( *pkt ) )
+				{
+					getConnectList().addConnection( poNewSkt, bigListInfo, ( ePktAnnUpdateTypeContactIsSame == updateType ) );
+					getConnectionMgr().onSktConnectedWithPktAnn( sktBase, bigListInfo );
+				}
+				else
+				{
+					getConnectList().addConnection( poNewSkt, bigListInfo, ( ePktAnnUpdateTypeContactIsSame == updateType ) );
+				}
             }
             else
             {
@@ -167,6 +193,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
     if( m_FirstPktAnnounce )
     {
+		updateOnFirstConnect( sktBase, bigListInfo, false );
         onFirstPktAnnounce( pkt );
     }
 }

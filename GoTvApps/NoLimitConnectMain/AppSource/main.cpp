@@ -14,7 +14,17 @@
 #include <QStringList>
 #include <QStandardPaths>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-#include <QGLFormat>
+# include <QGLFormat>
+# if defined (Q_OS_ANDROID)
+#  include <QtAndroid>
+# endif
+#else
+# if defined (Q_OS_ANDROID)
+#include <QCoreApplication>
+#include <QtCore/QLoggingCategory>
+#include <QtCore/QJniEnvironment>
+#include <QtCore/private/qandroidextras_p.h>
+# endif
 #endif
 
 #include <CoreLib/VxGlobals.h>
@@ -67,6 +77,7 @@ const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
                                     "android.permission.VIBRATE",
                                     "android.permission.READ_PHONE_STATE",
                                     "android.permission.KILL_BACKGROUND_PROCESSES"});
+
 #endif
 
 int main(int argc, char **argv)
@@ -88,7 +99,7 @@ int main(int argc, char **argv)
     // for some reason QApplication must be newed or does not initialize
     QApplication* myApp = new QApplication( argc, argv );
 
-#if defined (Q_OS_ANDROID)  && QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if defined (Q_OS_ANDROID) && QT_VERSION < QT_VERSION_CHECK(6,0,0)
     //Request requiered permissions at runtime.. does not seem to work with Qt 6.2.0
     for(const QString &permission : permissions)
     {
@@ -110,6 +121,19 @@ int main(int argc, char **argv)
 
     LogMsg( LOG_DEBUG, "permission done" );
 #endif
+#if defined (Q_OS_ANDROID)
+
+    const QString externStoragePemission(QLatin1String ("android.permission.WRITE_EXTERNAL_STORAGE"));
+    auto storagePermissionResult = QtAndroidPrivate::checkPermission(externStoragePemission).result();
+    if( storagePermissionResult != QtAndroidPrivate::Authorized )
+    {
+        if( QtAndroidPrivate::Authorized !=  QtAndroidPrivate::requestPermission(externStoragePemission).result() )
+        {
+            LogMsg(LOG_INFO, "Cannot Proceed without external storage permission");
+            return 0;
+        }
+    }
+#endif // defined (Q_OS_ANDROID)
 
     // initialize display scaling etc
     // the best method I have found to scale the gui is to use the default font height as the scaling factor

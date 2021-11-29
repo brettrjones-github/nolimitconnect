@@ -942,6 +942,7 @@
     <ClInclude Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.h" />

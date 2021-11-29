@@ -165,6 +165,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/HostMgr/RandomConnectEntry.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h \

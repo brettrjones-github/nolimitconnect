@@ -133,12 +133,12 @@ RCODE RcWebSkt::doSendFile( const char * pFileName )
 	{
 		// browser knows how to handle these
 		bBinary = false;
-		sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %lld\r\nContent-Type:\r\nConnection: Keep-Alive\r\n\r\n", m_u64FileLen );
+        sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: " PRId64 "\r\nContent-Type:\r\nConnection: Keep-Alive\r\n\r\n", m_u64FileLen );
 	}
 	else
 	{
 		bBinary = true;
-		sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %lld\r\nContent-disposition: attachment; filename=%s\r\nConnection: Keep-Alive\r\n\r\n", 
+		sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %lld\r\nContent-disposition: attachment; filename=%s\r\nConnection: Keep-Alive\r\n\r\n",
 						m_u64FileLen,
 						strJustFileName.c_str() );
 	}

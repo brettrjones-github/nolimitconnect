@@ -1621,6 +1621,8 @@ QString GuiParams::describeFriendListType( EFriendListType showFriendType )
         return QObject::tr( "Ignored " );
     case eFriendListTypeNearby:
         return  QObject::tr( "Nearby " );
+    case eFriendListTypeGroup:
+        return  QObject::tr( "Group " );
 
     case eFriendListTypeUnknown:
     default:

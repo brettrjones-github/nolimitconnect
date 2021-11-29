@@ -21,6 +21,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <GuiInterface/IToGui.h>
 
 #include <PktLib/PktAnnounce.h>
@@ -458,5 +459,49 @@ bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType,
         return false;
     }
 
+    return false;
+}
+
+//============================================================================
+bool ThumbMgr::requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo )
+{
+    if( !sktBase || !poInfo || poInfo->isIgnored() )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestThumbs invalid param " );
+        return false;
+    }
+
+    for( int i = eHostTypeNetwork; i < eMaxHostType; i++ )
+    {
+        EHostType hostType = ( EHostType )i;
+        if( poInfo->hasThumbId( hostType ) )
+        {
+            VxGUID thumbId = poInfo->getHostThumbId( hostType, false );
+            int64_t thumbTimestamp = poInfo->getThumbModifiedTime( hostType );
+            if( thumbId.isVxGUIDValid() && thumbTimestamp && !isThumbUpToDate( thumbId, thumbTimestamp ) )
+            {
+                EPluginType pluginType = HostTypeToClientPlugin( hostType );
+                requestPluginThumb( poInfo, pluginType, thumbId );
+            }
+        }
+    }
+   
+    return true;
+}
+
+//============================================================================
+bool ThumbMgr::isThumbUpToDate( VxGUID& thumbId, int64_t thumbModifiedTime )
+{
+    m_ThumbInfoMutex.lock();
+    for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
+    {
+        if( thumbInfo->getThumbId() == thumbId && thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) 
+        {
+            m_ThumbInfoMutex.unlock();
+            return true;
+        }
+    }
+
+    m_ThumbInfoMutex.unlock();
     return false;
 }

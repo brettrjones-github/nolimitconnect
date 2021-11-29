@@ -249,7 +249,7 @@ bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo,
 	}
 
 #ifdef DEBUG_CONNECTIONS
-	LogMsg( LOG_SKT, "connectToContact: id %s %s\n",  
+	LogMsg( LOG_SKT, "connectToContact: id %s %s",  
 		connectInfo.getOnlineName(),
 		connectInfo.getMyOnlineId().describeVxGUID().c_str() );
 #endif // DEBUG_CONNECTIONS
@@ -305,7 +305,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 	bool requiresRelay = connectInfo.requiresRelay();
 
 	if( ( connectInfo.getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() // uses same external ip
-		|| connectReason == eConnectReasonNearbyLan ) // on same lan network
+		|| connectReason == eConnectReasonNearbyLan || eConnectReasonSameExternalIp == connectReason ) // on same lan network
 		&& connectInfo.getMyOnlineIPv4().isValid()
 		&& connectInfo.getLanIPv4().isValid() )
 	{
@@ -323,7 +323,16 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 
 			requiresRelay = false;
 			* ppoRetSkt = sktBase;
-			return true;
+
+			m_PktAnn.setAppAliveTimeSec( GetApplicationAliveSec() );
+			PktAnnounce pktAnn;
+			m_Engine.copyMyPktAnnounce( pktAnn );
+
+			pktAnn.setMyFriendshipToHim( eFriendStateGuest );
+			pktAnn.setHisFriendshipToMe( eFriendStateGuest );
+            pktAnn.setIsNearby( true );
+
+			return txPacket( connectInfo.getMyOnlineId(), sktBase, &pktAnn );
 		}
 		else
 		{
@@ -652,7 +661,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
         LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed to %s:%d", connectIpAddress.c_str(), connectInfo.getOnlinePort() );
 	}
 
-    LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: done\n" );
+    LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: done" );
 
 	return rc;
 }
@@ -732,7 +741,7 @@ bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
 {
 	m_PktAnn.setAppAliveTimeSec( GetApplicationAliveSec() );
 	PktAnnounce pktAnn;
-	memcpy( &pktAnn, &m_PktAnn, sizeof(PktAnnounce) );
+	m_Engine.copyMyPktAnnounce( pktAnn );
 	pktAnn.setIsPktAnnReplyRequested( requestAnnReply );
 	pktAnn.setIsTopTenRequested( requestTop10 );
 	pktAnn.setIsPktAnnRevConnectRequested( requestReverseConnection );
@@ -934,9 +943,8 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 	if( ( false == ignoreToSoonToConnectAgain )
 		&& connectRequest.isTooSoonToAttemptConnectAgain() )
 	{
-		#ifdef DEBUG_CONNECTIONS
-			LogMsg( LOG_INFO, "NetConnector::doConnectRequest: to soon to connect again %s\n", m_Engine.describeContact( connectRequest ).c_str() );
-		#endif // DEBUG_CONNECTIONS
+        LogModule( eLogConnect,  LOG_VERBOSE, "NetConnector::doConnectRequest: to soon to connect again %s\n", m_Engine.describeContact( connectRequest ).c_str() );
+
 		return false;
 	}
 
@@ -952,9 +960,8 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 	if( m_Engine.connectToContact( connectInfo, &retSktBase, isNewConnection, connectRequest.getConnectReason() ) )
 	{
 		// handle success connect
-		#ifdef DEBUG_CONNECTIONS
-			LogMsg( LOG_INFO, "NetConnector::doConnectRequest: success  %s\n", m_Engine.describeContact( connectInfo ).c_str() );
-		#endif // DEBUG_CONNECTIONS
+        LogModule( eLogConnect,  LOG_VERBOSE, "NetConnector::doConnectRequest: success  %s\n", m_Engine.describeContact( connectInfo ).c_str() );
+
 		if( 0 == bigListInfo )
 		{
 			// when connected should have created a big list entry when got back a packet announce
@@ -965,20 +972,17 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 		{
 			handleConnectSuccess( bigListInfo, retSktBase, isNewConnection, connectRequest.getConnectReason() );
 		}
-#ifdef DEBUG_CONNECTIONS
 		else
 		{
-			LogMsg( LOG_INFO, "NetConnector::doConnectRequest: No BigList for connected  %s\n", m_Engine.describeContact( connectInfo ).c_str() );
+            LogModule( eLogConnect,  LOG_VERBOSE, "NetConnector::doConnectRequest: No BigList for connected  %s\n", m_Engine.describeContact( connectInfo ).c_str() );
 		}
-#endif // DEBUG_CONNECTIONS
 
 		return true;
 	}
 
 	// handle fail connect
-#ifdef DEBUG_CONNECTIONS
-	LogMsg( LOG_INFO, "NetConnector::doConnectRequest: connect fail  %s\n", m_Engine.describeContact( connectInfo ).c_str() );
-#endif // DEBUG_CONNECTIONS
+    LogModule( eLogConnect,  LOG_VERBOSE, "NetConnector::doConnectRequest: connect fail  %s\n", m_Engine.describeContact( connectInfo ).c_str() );
+
 	return false;
 }
 

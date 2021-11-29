@@ -153,6 +153,7 @@ enum EFriendListType
     eFriendListTypeFriend,
     eFriendListTypeIgnore,
     eFriendListTypeNearby,
+    eFriendListTypeGroup,
 
     eMaxShowFriendType
 };

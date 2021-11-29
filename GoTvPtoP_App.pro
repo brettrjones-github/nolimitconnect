@@ -20,6 +20,13 @@ android:{
     versionAtMost(QT_VERSION, 5.15.2){
         QT += androidextras
     }
+
+    versionAtLeast(QT_VERSION, 6.2.0){
+        # temporary crap while qt 6.2 is being developed
+        # still broken in 6.2.1
+        QT += core-private
+        CONFIG += future
+    }
 }
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB

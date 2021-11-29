@@ -277,7 +277,6 @@ AssetBaseInfo * AssetBaseMgr::findAsset( VxGUID& assetId )
         return nullptr;
 	}
 
-	std::vector<AssetBaseInfo*>::iterator iter;
 	for( AssetBaseInfo * assetInfo : m_AssetBaseInfoList )
 	{
 		if( assetInfo->getAssetUniqueId() == assetId )
@@ -401,7 +400,6 @@ AssetBaseInfo * AssetBaseMgr::createAssetInfo( 	EAssetType      assetType,
                                                 int64_t			timestamp )
 {
 	uint64_t  fileLen = VxFileUtil::getFileLen( fileName );
-	uint8_t	fileType = VxFileExtensionToFileTypeFlag( fileName );
 	if( ( false == isAllowedFileOrDir( fileName ) )
 		|| ( 0 == fileLen ) )
 	{

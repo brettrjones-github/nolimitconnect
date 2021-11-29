@@ -157,7 +157,7 @@ void AppCommon::doAccountStartup( void )
     LogModule( eLogStartup, LOG_DEBUG, "completed Login" );
 
     uint64_t endMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Applied settings ms %lld alive ms %lld", endMs - startMs, endMs );
+    LogMsg( LOG_DEBUG, "Applied settings ms " PRId64 " alive ms " PRId64 "", endMs - startMs, endMs );
 }
 
 //============================================================================
@@ -353,7 +353,7 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     getEngine().setPktAnnLastModTime( GetTimeStampMs() );
 
     uint64_t aliveMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Account Loaded ms %lld alive ms %lld", aliveMs - loadStartMs, aliveMs );
+    LogMsg( LOG_DEBUG, "Account Loaded ms " PRId64 " alive ms " PRId64 "", aliveMs - loadStartMs, aliveMs );
     setIsAppInitialized( true );
     getEngine().getNetStatusAccum().setIpPort( tcpPort );
 }

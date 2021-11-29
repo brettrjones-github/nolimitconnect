@@ -19,4 +19,5 @@
 GroupListMgr::GroupListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
 {
+    setIdentListType( eFriendListTypeGroup );
 }

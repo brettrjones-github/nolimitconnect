@@ -136,8 +136,7 @@ void NearbyMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
     if( onlineId == m_Engine.getMyOnlineId() )
     {
         LogMsg( LOG_ERROR, "NearbyMgr::updateNearbyIdent cannot nearby myself" );
-        // BRJ temprory disable myself check for testing
-        // return;
+        return;
     }
 
     bool wasInserted = false;
@@ -195,6 +194,7 @@ void NearbyMgr::removeIdent( VxGUID& onlineId )
     }
 
     unlockList();
+    m_Engine.getNearbyListMgr().removeIdent( onlineId );
 }
 
 //============================================================================
@@ -368,6 +368,8 @@ void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnou
             }
         }
 
+        LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr attempting connect on lan to %s ", netIdent->getOnlineName() );
+#ifndef TARGET_OS_WINDOWS // BRJ temp for debugging
         VxSktBase* sktBase = nullptr;
         bool newConnection = false;
         if( true == m_Engine.connectToContact( netIdent->getConnectInfo(), &sktBase, newConnection, eConnectReasonNearbyLan ) )
@@ -378,6 +380,7 @@ void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnou
         {
             LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr FAILED to connect on lan to %s ", netIdent->getOnlineName() );
         }
+#endif // TARGET_OS_ANDROID
     }
 }
 
@@ -402,6 +405,7 @@ void NearbyMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGU
         {
             m_MulticastIdentList.erase( peerOnlineId );
         }
+
         m_MulticastIdentMutex.unlock();
     }
 }

@@ -57,7 +57,7 @@ void AudioTestGenerator::generateData( const QAudioFormat &format, qint64 durati
     const int sampleBytes = format.channelCount() * channelBytes;
 
     qint64 length = ( ( format.sampleRate() * format.channelCount() * channelBytes ) * durationUs ) / 1000000;
-    LogMsg( LOG_DEBUG, "generate audio len %lld rate %d channels %d channel bytes %d ms %lld", length, format.sampleRate(), format.channelCount(), channelBytes, durationUs / 1000 );
+    LogMsg( LOG_DEBUG, "generate audio len " PRId64 " rate %d channels %d channel bytes %d ms " PRId64 "", length, format.sampleRate(), format.channelCount(), channelBytes, durationUs / 1000 );
 
 
     Q_ASSERT( length % sampleBytes == 0 );
@@ -143,7 +143,7 @@ void AudioTestGenerator::generateData( const QAudioFormat &format, qint64 durati
     const int sampleBytes = format.channelCount() * channelBytes;
 
     qint64 length = ((format.sampleRate() * format.channelCount() * channelBytes) * durationUs) / 1000000;
-    LogMsg(LOG_DEBUG, "generate audio len %lld rate %d channels %d channel bytes %d ms %lld", length, format.sampleRate(), format.channelCount(), channelBytes, durationUs / 1000);
+    LogMsg(LOG_DEBUG, "generate audio len " PRId64 " rate %d channels %d channel bytes %d ms " PRId64 "", length, format.sampleRate(), format.channelCount(), channelBytes, durationUs / 1000);
 
 
     Q_ASSERT(length % sampleBytes == 0);

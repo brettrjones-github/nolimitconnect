@@ -19,6 +19,7 @@
 IgnoreListMgr::IgnoreListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
 {
+    setIdentListType( eFriendListTypeIgnore );
 }
 
 //============================================================================
@@ -56,6 +57,7 @@ void IgnoreListMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
 
     bool wasInserted = false;
     bool wasErased = false;
+    bool timestampUpdated = false;
     lockList();
     for( auto iter = m_IgnoreIdentList.begin(); iter != m_IgnoreIdentList.end(); )
     {
@@ -69,6 +71,7 @@ void IgnoreListMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
             if( timestamp > iter->second )
             {
                 iter = m_IgnoreIdentList.insert( iter, std::make_pair( onlineId, timestamp ) );
+                timestampUpdated = true;
                 wasInserted = true;
             }
             else
@@ -93,20 +96,32 @@ void IgnoreListMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
     }
 
     unlockList();
+
+    if( timestampUpdated || ( wasInserted && !wasErased ) )
+    {
+        onUpdateIdent( onlineId, timestamp );
+    }
 }
 
 //============================================================================
 void IgnoreListMgr::removeIdent( VxGUID& onlineId )
 {
+    bool wasRemoved = false;
     lockList();
     for( auto iter = m_IgnoreIdentList.begin(); iter != m_IgnoreIdentList.end(); ++iter )
     {
         if( iter->first == onlineId )
         {
             m_IgnoreIdentList.erase( iter );
+            wasRemoved = true;
             break;
         }
     }
 
     unlockList();
+
+    if( wasRemoved )
+    {
+        onRemoveIdent( onlineId );
+    }
 }

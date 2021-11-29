@@ -122,28 +122,3 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 		m_PluginMgr.onContactWentOffline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
 	}
 }
-
-//============================================================================
-void P2PEngine::onContactNearby( BigListInfo * poBigListInfo )
-{
-	if( false == VxIsAppShuttingDown() )
-	{
-		if( shouldNotifyGui( poBigListInfo ) )
-		{
-			IToGui::getToGui().toGuiContactNearby( (VxNetIdent *)poBigListInfo );
-		}
-	}
-}
-
-//============================================================================
-void P2PEngine::onContactNotNearby( BigListInfo * poBigListInfo )
-{
-	if( false == VxIsAppShuttingDown() )
-	{
-		if( shouldNotifyGui( poBigListInfo ) )
-		{
-			IToGui::getToGui().toGuiContactNotNearby( (VxNetIdent *)poBigListInfo );
-		}
-	}
-}
-

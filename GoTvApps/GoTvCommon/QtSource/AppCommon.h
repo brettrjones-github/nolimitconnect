@@ -457,13 +457,14 @@ public:
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
     // user update interface
+    virtual void				toGuiIndentListUpdate( EFriendListType listType,  VxGUID& onlineId, uint64_t timestamp ) override;
+    virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) override;
+
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
 
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType , bool newContact = false ) override;
-    virtual void				toGuiContactNearby( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) override;
 
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override;

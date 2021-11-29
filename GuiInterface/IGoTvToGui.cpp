@@ -162,6 +162,18 @@ void IGoTv::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus,
 }
 
 //============================================================================
+void IGoTv::toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+{
+    getAppCommon().toGuiIndentListUpdate( listType, onlineId, timestamp );
+}
+
+//============================================================================
+void IGoTv::toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+{
+    getAppCommon().toGuiIndentListRemove( listType, onlineId );
+}
+
+//============================================================================
 void IGoTv::toGuiContactAdded( VxNetIdent * netIdent )
 {
     getAppCommon().toGuiContactAdded( netIdent );
@@ -183,18 +195,6 @@ void IGoTv::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool 
 void IGoTv::toGuiContactOffline( VxNetIdent * netIdent )
 {
     getAppCommon().toGuiContactOffline( netIdent );
-}
-
-//============================================================================
-void IGoTv::toGuiContactNearby( VxNetIdent * netIdent )
-{
-    getAppCommon().toGuiContactNearby( netIdent );
-}
-
-//============================================================================
-void IGoTv::toGuiContactNotNearby( VxNetIdent * netIdent )
-{
-    getAppCommon().toGuiContactNotNearby( netIdent );
 }
 
 //============================================================================

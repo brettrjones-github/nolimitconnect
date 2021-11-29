@@ -141,7 +141,7 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	m_eSktCallbackReason = eSktCallbackReasonConnecting;
 	if( m_pfnReceive )
 	{
-		// m_pfnReceive( this, getRxCallbackUserData() );
+		m_pfnReceive( this, getRxCallbackUserData() );
 	}
 
 	m_Socket = socket( AF_INET, SOCK_DGRAM, 0 );
@@ -149,19 +149,41 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	{
 		// create socket error
 		m_rcLastSktError = VxGetLastError();
-		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: socket create error %s", VxDescribeSktError( m_rcLastSktError ) );
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: socket create error %s", VxDescribeSktError( m_rcLastSktError ) );
 
 		m_eSktCallbackReason = eSktCallbackReasonConnectError;
 		if( m_pfnReceive )
 		{
-			// m_pfnReceive( this, getRxCallbackUserData() );
+			m_pfnReceive( this, getRxCallbackUserData() );
 		}
 
 		return m_rcLastSktError;
 	}
 
+    m_rcLastSktError = VxGetLastError();
+    if( m_rcLastSktError)
+    {
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: after create socket error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
+    }
+
+
 	// allow multiple sockets to use the same PORT number
     VxSetSktAllowReusePort( m_Socket );
+    m_rcLastSktError = VxGetLastError();
+    if( m_rcLastSktError)
+    {
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: after set allow reuse socket error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
+    }
+
+    // enable broadcast
+#ifndef TARGET_OS_WINDOWS
+    int broadcastEnable = 1;
+    if( 0 != setsockopt(m_Socket, SOL_SOCKET, SO_BROADCAST, (const char *)&broadcastEnable, sizeof(broadcastEnable)) )
+    {
+        m_rcLastSktError = VxGetLastError();
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: failed enable broadcast error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
+    }
+#endif // TARGET_OS_WINDOWS
 
 	// set up destination address
 	memset( &m_MulticastRxAddr, 0, sizeof( m_MulticastRxAddr ) );
@@ -169,17 +191,17 @@ RCODE VxSktUdp::udpOpenBroadcast( std::string broadcastIp, uint16_t u16Port, boo
 	m_MulticastRxAddr.sin_addr.s_addr = htonl( INADDR_ANY );
 	m_MulticastRxAddr.sin_port = htons( u16Port );
 
-	// bind to receive address
+	// bind to receive address ( a must for udp recvfrom )
 	if( bind( m_Socket, ( struct sockaddr* )&m_MulticastRxAddr, sizeof( m_MulticastRxAddr ) ) < 0 )
 	{
 		m_rcLastSktError = VxGetLastError();
-		LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: socket bind error %s", VxDescribeSktError( m_rcLastSktError ) );
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: socket bind error %s", VxDescribeSktError( m_rcLastSktError ) );
     }
 
 	m_rcLastSktError = VxGetLastError();
     if( m_rcLastSktError && INVALID_SOCKET != m_Socket)
     {
-        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenMulticast: last socket error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
+        LogMsg( LOG_ERROR, "VxSktUdp::udpOpenBroadcast: last socket error %d %s", m_rcLastSktError, VxDescribeSktError( m_rcLastSktError ) );
         if( 11 == m_rcLastSktError )
         {
             // not sure why this happens on android

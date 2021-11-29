@@ -112,7 +112,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			vx_assert( false );
 		}
 
-		if( false == sktBase->isRxEncryptionKeySet() )
+        if( false == sktBase->isRxEncryptionKeySet() )
 		{
 			// this data has not been decrypted.. set encryption key and
 			// decrypt it
@@ -124,7 +124,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		}
 
 		if( ( PKT_TYPE_ANNOUNCE != pktHdr->getPktType() ) ||
-			 ( pktHdr->getPktLength() < 288 ) ||  // currently length of pkt announce
+			 ( pktHdr->getPktLength() < sizeof( PktAnnounce ) - 100 ) ||  
 			 ( pktHdr->getPktLength() > sizeof( PktAnnounce ) + 100 ) ) // leave room for expanding pkt announce in the future
 		{
 			// somebody tried to send crap .. this may be a hack attack or it may be that our ip and port is same as someone else or network key has changed
@@ -138,17 +138,8 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			//hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker no announcement attack from ip %s\n", sktBase->getRemoteIp() );
 			// release the mutex
 			sktBase->sktBufAmountRead( 0 );
-            hackerOffense( eHackerLevelMedium, eHackerReasonPktAnnNotFirstPacket, NULL, sktBase->getRemoteIpBinary(), "Hacker no announcement attack from ip %s\n", sktBase->getRemoteIp().c_str() );
+            hackerOffense( eHackerLevelMedium, eHackerReasonPktAnnNotFirstPacket, NULL, sktBase->getRemoteIpBinary(), "Hacker no announcement attack from ip %s", sktBase->getRemoteIp().c_str() );
 			sktBase->closeSkt( eSktClosePktAnnNotFirstPacket );
-			return;
-		}
-
-		if( ( true == sktBase->isAcceptSocket() ) 
-			&& ( false == this->isP2POnline() ) )
-		{
-            LogMsg( LOG_INFO, "Not Online Yet so cannot accept skt id %d ip %s\n", sktBase->getSktId(), sktBase->getRemoteIp().c_str() );
-			sktBase->sktBufAmountRead( 0 );
-			sktBase->closeSkt( eSktCloseP2PNotReadyForAcceptSkt );
 			return;
 		}
 
@@ -159,18 +150,20 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		}
 
 		// pkt announce has arrived
-		if( false == pktHdr->isValidPkt() )
+		PktAnnounce* pktAnn = ( PktAnnounce* )pktHdr;
+		if( !pktHdr->isValidPkt() || !validateIdent( (VxNetIdent *)pktAnn ) )
 		{
 			// invalid announcement packet
 			sktBase->setIsFirstRxPacket( false ); 
 			// release the mutex
 			sktBase->sktBufAmountRead( 0 );
-            LogMsg( LOG_ERROR, "Invalid Packet announce from ip %s\n", sktBase->getRemoteIp().c_str() );
+            LogMsg( LOG_ERROR, "Invalid Packet announce from ip %s", sktBase->getRemoteIp().c_str() );
+			hackerOffense( eHackerLevelMedium, eHackerReasonPktAnnNotFirstPacket, NULL, sktBase->getRemoteIpBinary(), "Hacker invalid announcement attack from ip %s", sktBase->getRemoteIp().c_str() );
 			// disconnect
 			sktBase->closeSkt( eSktClosePktAnnInvalid );
 		}
 
-		//NOTE: TODO check if is in our Ident ignore list
+		// NOTE: TODO check if is in our Ident ignore list
 
 		//LogMsg( LOG_INFO, "Got Ann on Skt %d\n", sktBase->m_iSktId );
 
@@ -292,7 +285,7 @@ void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr
 
 	if( false == dataWasRelayed )
 	{
-		LogMsg( LOG_INFO, "Not Relayed data pkt type %d len %d relayAvail %d\n", pktHdr->getPktType(), pktHdr->getPktLength(), relayAvailable );
+		LogMsg( LOG_INFO, "Not Relayed data pkt type %d len %d relayAvail %d", pktHdr->getPktType(), pktHdr->getPktLength(), relayAvailable );
 		PktRelayUserDisconnect		relayReply;
 		relayReply.m_UserId			= pktHdr->getDestOnlineId();
 		relayReply.setSrcOnlineId( m_PktAnn.getMyOnlineId() );

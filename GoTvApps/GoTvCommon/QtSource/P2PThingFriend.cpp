@@ -29,6 +29,44 @@ void AppCommon::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 }
 
 //============================================================================
+void AppCommon::toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    LogMsg( LOG_INFO, "AppCommon::toGuiIndentListUpdate %d", listType );
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
+    {
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiIndentListUpdate( listType, onlineId, timestamp );
+    }
+
+    toGuiUserUpdateClientsUnlock();;
+}
+
+//============================================================================
+void AppCommon::toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    LogMsg( LOG_INFO, "AppCommon::toGuiIndentListRemove %d", listType );
+    toGuiUserUpdateClientsLock();
+    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
+    {
+        ToGuiUserUpdateClient& client = *iter;
+        client.m_Callback->toGuiIndentListRemove( listType, onlineId);
+    }
+
+    toGuiUserUpdateClientsUnlock();;
+}
+
+//============================================================================
 void AppCommon::toGuiContactAdded( VxNetIdent * netIdent )
 {
     if( VxIsAppShuttingDown() )
@@ -111,47 +149,6 @@ void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, b
 	}
 
 	toGuiActivityClientsUnlock();
-}
-
-//============================================================================
-//! called when friend is nearby
-void AppCommon::toGuiContactNearby( VxNetIdent * netIdent )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactNearby %s", netIdent->getOnlineName());
-    // don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
-    toGuiUserUpdateClientsLock();
-    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
-    {
-        ToGuiUserUpdateClient& client = *iter;
-        client.m_Callback->toGuiContactNearby( netIdent );
-    }
-
-    toGuiUserUpdateClientsUnlock();
-}
-
-//============================================================================
-//! called when friend leaves udp network
-void AppCommon::toGuiContactNotNearby( VxNetIdent * netIdent )
-{
-    if( VxIsAppShuttingDown() )
-    {
-        return;
-    }
-
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactNotNearby %s", netIdent->getOnlineName());
-    toGuiUserUpdateClientsLock();
-    for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
-    {
-        ToGuiUserUpdateClient& client = *iter;
-        client.m_Callback->toGuiContactNotNearby( netIdent );
-    }
-
-    toGuiUserUpdateClientsUnlock();
 }
 
 //============================================================================

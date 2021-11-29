@@ -19,6 +19,9 @@ class GuiUser;
 class GuiUserMgrGuiUserUpdateInterface
 {
 public:
+    virtual void				callbackIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
+    virtual void				callbackIndentListRemove( EFriendListType listType, VxGUID& onlineId ) = 0;
+
     virtual void				callbackOnUserAdded( GuiUser* guiUser ) = 0;
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) = 0;
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) = 0;

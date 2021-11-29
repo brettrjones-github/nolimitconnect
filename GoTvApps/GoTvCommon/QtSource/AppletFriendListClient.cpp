@@ -28,6 +28,16 @@
 
 #include <CoreLib/VxGlobals.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+# if defined (Q_OS_ANDROID)
+#  include <QtAndroid>
+# endif
+#else
+# if defined (Q_OS_ANDROID)
+#  include <QtCore/6.2.1/QtCore/private/qandroidextras_p.h>
+# endif
+#endif
+
 namespace
 {
     const int MAX_INFO_MSG_SIZE = 2048;
@@ -182,6 +192,24 @@ void AppletFriendListClient::onShowNearbyList( void )
 }
 
 //============================================================================
+void AppletFriendListClient::callbackIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+{
+    if( listType == getListType() )
+    {
+        removeUser( onlineId );
+    }
+}
+
+//============================================================================
+void AppletFriendListClient::callbackIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+{
+    if( listType == getListType() )
+    {
+        removeUser( onlineId );
+    }
+}
+
+//============================================================================
 void AppletFriendListClient::callbackOnUserAdded( GuiUser* guiUser )
 {
     updateUser( guiUser );
@@ -244,6 +272,20 @@ void AppletFriendListClient::slotIgnoredButtonClicked( void )
 //============================================================================
 void AppletFriendListClient::slotNearbyButtonClicked( void )
 {
+#if defined (Q_OS_ANDROID)
+    const QString broadcastPemission(QLatin1String ("android.permission.CHANGE_WIFI_MULTICAST_STATE"));
+    if( QtAndroidPrivate::Authorized != QtAndroidPrivate::checkPermission(broadcastPemission).result() )
+    {
+        if( QtAndroidPrivate::Authorized != QtAndroidPrivate::requestPermission(broadcastPemission).result() )
+        {
+            okMessageBox(QObject::tr("Broadcast Permission"), QObject::tr("Cannot discover nearby users without Broadcast Permission"));
+            ui.m_FriendsButton->setFocus();
+            slotFriendsButtonClicked();
+            return;
+        }
+    }
+#endif // defined (Q_OS_ANDROID)
+
     m_Engine.fromGuiNearbyBroadcastEnable( true );
     if( m_FriendListType != eFriendListTypeNearby )
     {
@@ -283,13 +325,22 @@ void AppletFriendListClient::slotNearbyInfoButtonClicked( void )
 }
 
 //============================================================================
+void AppletFriendListClient::updateUser( EFriendListType listType, VxGUID& onlineId )
+{
+    updateUser( m_MyApp.getUserMgr().getOrQueryUser( onlineId ) );
+}
+
+//============================================================================
 void AppletFriendListClient::updateUser( GuiUser* guiUser )
 {
-    if( ( eFriendListTypeFriend == m_FriendListType && guiUser->isFriend() )
-        || ( eFriendListTypeIgnore == m_FriendListType && guiUser->isIgnored() )
-        || ( eFriendListTypeNearby == m_FriendListType && guiUser->isNearby() ) )
+    if( guiUser )
     {
-        ui.m_FriendListWidget->updateFriend( guiUser );
+        if( ( eFriendListTypeFriend == m_FriendListType && guiUser->isFriend() )
+            || ( eFriendListTypeIgnore == m_FriendListType && guiUser->isIgnored() )
+            || ( eFriendListTypeNearby == m_FriendListType && guiUser->isNearby() ) )
+        {
+            ui.m_FriendListWidget->updateFriend( guiUser );
+        }
     }
 }
 
@@ -308,10 +359,6 @@ void AppletFriendListClient::updateFriendList( EFriendListType listType, std::ve
     // for each see if we already have that ident as gui user else request it
     for( auto identTime : idList )
     {
-        GuiUser* guiUser = m_MyApp.getUserMgr().getOrQueryUser( identTime.first );
-        if( guiUser->isAdmin() || guiUser->isFriend() )
-        {
-            updateUser( guiUser );
-        }
+        updateUser( listType, identTime.first );
     }
 }

@@ -19,6 +19,7 @@
 NearbyListMgr::NearbyListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
 {
+    setIdentListType( eFriendListTypeNearby );
 }
 
 //============================================================================
@@ -56,6 +57,7 @@ void NearbyListMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
 
     bool wasInserted = false;
     bool wasErased = false;
+    bool timestampUpdated = false;
     lockList();
     for( auto iter = m_NearbyIdentList.begin(); iter != m_NearbyIdentList.end(); )
     {
@@ -69,6 +71,7 @@ void NearbyListMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
             if( timestamp > iter->second )
             {
                 iter = m_NearbyIdentList.insert( iter, std::make_pair( onlineId, timestamp ) );
+                timestampUpdated = true;
                 wasInserted = true;
             }
             else
@@ -90,23 +93,36 @@ void NearbyListMgr::updateIdent( VxGUID& onlineId, int64_t timestamp )
     if( !wasInserted )
     {
         m_NearbyIdentList.push_back( std::make_pair( onlineId, timestamp ) );
+        wasInserted = true;
     }
 
     unlockList();
+
+    if( timestampUpdated || ( wasInserted && !wasErased ) )
+    {
+        onUpdateIdent( onlineId, timestamp );
+    }
 }
 
 //============================================================================
 void NearbyListMgr::removeIdent( VxGUID& onlineId )
 {
+    bool wasRemoved = false;
     lockList();
     for( auto iter = m_NearbyIdentList.begin(); iter != m_NearbyIdentList.end(); ++iter )
     {
         if( iter->first == onlineId )
         {
             m_NearbyIdentList.erase( iter );
+            wasRemoved = true;
             break;
         }
     }
 
     unlockList();
+
+    if( wasRemoved )
+    {
+        onRemoveIdent( onlineId );
+    }
 }

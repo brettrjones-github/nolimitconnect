@@ -341,7 +341,18 @@ void VxSktBaseMgr::doSktDeleteCleanup()
             {
                 if( sktToDelete->getInUseByRxThread() )
                 {
-                    LogMsg( LOG_ERROR, "socket still in use by thread after delete timeout %s", sktToDelete->describeSktConnection().c_str() );
+                    LogMsg( LOG_ERROR, "socket id %d handle %d type %s still in use by thread after delete timeout %s", sktToDelete->getSktId(), 
+                        sktToDelete->getSktHandle(),
+                        DescribeSktType( sktToDelete->getSktType() ),
+                        sktToDelete->describeSktConnection().c_str() );
+
+                    if( INVALID_SOCKET != sktToDelete->getSktHandle() )
+                    {
+                        sktToDelete->doCloseThisSocketHandle( false );
+                    }
+
+                    ++iter;
+                    break;
                 }
                 else
                 {

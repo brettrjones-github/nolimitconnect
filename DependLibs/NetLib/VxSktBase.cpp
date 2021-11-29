@@ -1074,7 +1074,7 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
                     ( INVALID_SOCKET != sktBase->m_Socket ) &&
                     ( eSktCallbackReasonData == sktBase->getCallbackReason() ) )
             {
-                if(  false == sktBase->isConnected() )
+                if( !sktBase->isConnected() )
                 {
                     if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTimeMs() ) )
                     {
@@ -1137,7 +1137,7 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 
 							iDataLen = recvfrom( sktBase->m_Socket,	// socket
 								as8Buf,				// buffer to read into
-								iAttemptLen / 2,		// length of buffer space
+								iAttemptLen,		// length of buffer space
 								0,					// flags
 								( struct sockaddr* )&addr, // source address
 								&iSktAddrLen );		// size of address structure
@@ -1187,6 +1187,14 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 							sktBase->updateLastActiveTime();
 							sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
 							sktBase->setLastSktError( 0 );
+							if( poVxThread->isAborted() || !sktBase->isConnected() )
+							{
+								LogModule( eLogUdpData, LOG_VERBOSE, "udp recvfrom skt %d skt id close from thread",
+									sktBase->getSktHandle(), sktBase->getSktId() );
+								sktBase->setCallbackReason( eSktCallbackReasonClosing );
+								goto closed_skt_exit;
+							}
+
 							continue;
 						}
 						else

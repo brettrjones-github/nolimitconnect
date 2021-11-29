@@ -291,13 +291,14 @@ public:
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
 
+    virtual void				toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) override;
+    virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) override;
+
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
 
     virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact = false ) override;
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactNearby( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) override;
 
     //! called when contact changes
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override;
@@ -531,9 +532,9 @@ public:
 
     virtual int					fromGuiPluginControl( EPluginType		ePluginType,
                                                       VxGUID&			oOnlineId,
-                                                      const char *	pControl,
-                                                      const char *	pAction,
-                                                      uint32_t				u32ActionData,
+                                                      const char *      pControl,
+                                                      const char *      pAction,
+                                                      uint32_t			u32ActionData,
                                                       VxGUID&			lclSessionId,
                                                       uint8_t *			fileHashData );
 

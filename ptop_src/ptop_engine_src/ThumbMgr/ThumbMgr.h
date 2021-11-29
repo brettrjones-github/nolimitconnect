@@ -29,6 +29,7 @@ class ThumbCallbackInterface;
 class VxNetIdent;
 class VxPktHdr;
 class VxSktBase;
+class BigListInfo;
 
 class ThumbMgr : public AssetBaseMgr
 {
@@ -68,6 +69,7 @@ public:
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
     virtual bool                requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
+    virtual bool                requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo );
 
 protected:
     virtual AssetBaseInfo *     createAssetInfo( EAssetType assetType, const char * fileName, uint64_t fileLen ) override;
@@ -77,6 +79,7 @@ protected:
     void				        announceThumbAdded( ThumbInfo& thumbInfo );
     void				        announceThumbUpdated( ThumbInfo& thumbInfo );
     bool                        saveToDatabase( ThumbInfo& thumbInfo );
+    bool                        isThumbUpToDate( VxGUID& thumbId, int64_t thumbModifiedTime );
 
     ThumbInfoDb&                m_ThumbInfoDb;
     std::vector<AssetBaseInfo*>&	m_ThumbInfoList;

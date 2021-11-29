@@ -25,7 +25,7 @@ PktHostOfferReq::PktHostOfferReq()
     setPktType( PKT_TYPE_HOST_OFFER_REQ );
     m_au8Data[0] = 0;
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostOfferReq ) - sizeof(m_au8Data) + 1) ); 
-    vx_assert( 0 == getPktLength() & 0x0f );
+    vx_assert( ( 0 == getPktLength() ) & 0x0f );
 }
 
 //============================================================================
@@ -37,7 +37,7 @@ void PktHostOfferReq::setOfferMsg( const char * msg )
     strcpy( (char *)m_au8Data, msg );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostOfferReq ) - sizeof(m_au8Data) + msgLen + 1) ); 
     m_StrLen = htons( msgLen );
-    vx_assert( 0 == getPktLength() & 0x0f );
+    vx_assert( ( 0 == getPktLength() ) & 0x0f );
 }
 
 //============================================================================

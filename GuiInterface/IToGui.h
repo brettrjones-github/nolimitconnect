@@ -78,6 +78,9 @@ public:
     /// Send state/status to GUI (currently just query host id)
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) = 0;
 
+	virtual void				toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
+	virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) = 0;
+
     /// contact added to engine
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0;
     /// contact removed from engine
@@ -87,10 +90,6 @@ public:
 	virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact = false ) = 0;
 	/// Update contact to offline state GUI
 	virtual void				toGuiContactOffline( VxNetIdent * netIdent ) = 0;
-	/// Not currently used. Notify GUI if contact is on same LAN network or is nearby
-	virtual void				toGuiContactNearby( VxNetIdent * netIdent ) = 0;
-	/// Not currently used. Notify GUI if contact is no longer nearby
-	virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) = 0;
 
 	/// Notify GUI that contact changed his/her online name
 	virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) = 0;

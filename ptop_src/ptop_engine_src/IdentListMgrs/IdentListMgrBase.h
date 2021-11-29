@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxMutex.h>
 
 class VxGUID;
@@ -29,8 +30,14 @@ public:
     virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp ) {};
     virtual void                removeIdent( VxGUID& onlineId ) {};
 
+    void                        setIdentListType( EFriendListType listType ) { m_ListType = listType; }
+
 protected:
+    virtual void                onUpdateIdent( VxGUID& onlineId, int64_t timestamp );
+    virtual void                onRemoveIdent( VxGUID& onlineId );
+
     P2PEngine&                  m_Engine;
     VxMutex                     m_ListMutex;
+    EFriendListType             m_ListType{ eFriendListTypeUnknown };
 };
 

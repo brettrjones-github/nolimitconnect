@@ -271,11 +271,12 @@ protected:
 													struct sockaddr_in *sockaddr, 
 													bool isBindAddr );
 
-	void						doCloseThisSocketHandle( bool bFlushThenClose );
 
     const std::string&          describeSktDirection( void );
 
 public:
+	void						doCloseThisSocketHandle( bool bFlushThenClose );
+
 	bool						m_IsMulticastSkt{ false };
 	uint16_t					m_MulticastPort{ 0 };
 	std::string					m_MulticastGroupIp{ "" };

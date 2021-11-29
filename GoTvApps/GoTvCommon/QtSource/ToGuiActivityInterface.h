@@ -38,13 +38,14 @@ public:
 	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ){}; 
 	virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ){}; 
 
+    virtual void				toGuiIndentListUpdate( void* callbackData, EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) {};
+    virtual void				toGuiIndentListRemove( void* callbackData, EFriendListType listType, VxGUID& onlineId ) {};
+
     virtual void				toGuiContactAdded( void * callbackData, VxNetIdent * netIdent ){}; 
     virtual void				toGuiContactRemoved( void * callbackData, VxGUID& onlineId ) {}; 
 
 	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, EHostType hostType, bool newContact ){}; 
 	virtual void				toGuiContactOffline( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactNearby( void * callbackData, GuiUser * netIdent ){}; 
-    virtual void				toGuiContactNotNearby( void * callbackData, GuiUser * netIdent ){}; 
     virtual void				toGuiContactNameChange( void * callbackData, GuiUser * netIdent ){}; 
     virtual void				toGuiContactDescChange( void * callbackData, GuiUser * netIdent ){}; 
     virtual void				toGuiContactMyFriendshipChange( void * callbackData, GuiUser * netIdent ){}; 

@@ -778,7 +778,7 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 										int				pvUserData,
 										const char *	pOfferMsg, 
 										const char *	pFileName,
-										uint8_t *			fileHashId,
+                                        uint8_t *		fileHashId,
 										VxGUID			lclSessionId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiMakePluginOffer" );

@@ -1945,6 +1945,9 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\RcMulticast.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListCallbackInterface.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">

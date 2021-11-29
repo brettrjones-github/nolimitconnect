@@ -40,12 +40,13 @@ public:
     GuiUser *                   getMyIdent( void )                          { return m_MyIdent; }  
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
+    virtual void				toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) override;
+    virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) override;
+
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override; 
     virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact ) override; 
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactNearby( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) override; 
@@ -77,10 +78,14 @@ public:
 signals:
     void				        signalMyIdentUpdated( GuiUser* guiUser );
 
+
     void				        signalUserAdded( GuiUser* guiUser ); 
     void				        signalUserRemoved( VxGUID onlineId ); 
     void                        signalUserUpdated( GuiUser* guiUser );
     void                        signalUserOnlineStatusChange( GuiUser* user);
+
+    void				        signalInternalIndentListUpdate( EFriendListType listType, VxGUID onlineId, uint64_t timestamp );
+    void				        signalInternalIndentListRemove( EFriendListType listType, VxGUID onlineId );
 
     void                        signalInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
     void                        signalInternalUpdateMyIdent( VxNetIdent* netIdent );
@@ -88,6 +93,9 @@ signals:
     void                        signalInternalUserOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
 
 private slots:
+    void				        slotInternalIndentListUpdate( EFriendListType listType, VxGUID onlineId, uint64_t timestamp );
+    void				        slotInternalIndentListRemove( EFriendListType listType, VxGUID onlineId );
+
     void                        slotInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
     void                        slotInternalUpdateMyIdent( VxNetIdent* netIdent );
     void                        slotInternalUserRemoved( VxGUID onlineId );

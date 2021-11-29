@@ -447,8 +447,6 @@ public:
 
 	virtual	void				onContactConnected		( RcConnectInfo * poInfo, bool connectionListLocked, bool newContact = false );
 	virtual	void				onContactDisconnected	( RcConnectInfo * poInfo, bool connectionListLocked );
-	virtual	void				onContactNearby			( BigListInfo * poBigListInfo );
-	virtual	void				onContactNotNearby		( BigListInfo * poBigListInfo );
 
 	void						onConnectionLost( VxSktBase * sktBase );
 	void						onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent );
@@ -690,6 +688,7 @@ protected:
 	void						sendToGuiTheContactList( int maxContactsToSend );
     void						onFirstPktAnnounce( PktAnnounce * pktAnn );
     void                        updateIdentLists( BigListInfo* poInfo, int64_t timestampMs = 0 );
+    void                        updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected );
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;

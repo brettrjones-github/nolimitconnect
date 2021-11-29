@@ -168,16 +168,16 @@ qint64 AudioMixer::readDataFromMixer( char *data, qint64 maxlen )
 {
     if( ( maxlen <= 0 ) || !m_AudioIoMgr.isAudioInitialized() )
     {
-//        LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
+//        LogMsg( LOG_DEBUG, "readDataFromMixer " PRId64 " bytes ", maxlen );
         return 0;
     }
 
     m_MixerMutex.lock();
     int toReadByteCnt = std::min( (int)maxlen, (int)m_AudioBuffer.size() );
- //   LogMsg( LOG_DEBUG, "readDataFromMixer in que %d at %lld ms", toReadByteCnt, m_ElapsedTimer.elapsed() );
+ //   LogMsg( LOG_DEBUG, "readDataFromMixer in que %d at " PRId64 " ms", toReadByteCnt, m_ElapsedTimer.elapsed() );
     if( toReadByteCnt != maxlen )
     {
-        LogMsg( LOG_DEBUG, "** readDataFromMixer avail %d of %lld bytes ", toReadByteCnt, maxlen );
+        LogMsg( LOG_DEBUG, "** readDataFromMixer avail %d of " PRId64 " bytes ", toReadByteCnt, maxlen );
     }
 
     if( toReadByteCnt )

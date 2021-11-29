@@ -29,7 +29,7 @@ uint64_t GetTickCount64()
     static int64_t lastTime = 0;
     if( timeNow < lastTime )
     {
-        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetTickCount64() Went backwards from %lld to %lld", lastTime, timeNow);
+        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetTickCount64() Went backwards from " PRId64 " to " PRId64 "", lastTime, timeNow);
     }
 
     lastTime = timeNow;
@@ -46,7 +46,7 @@ uint64_t GetTickCount64()
     static int64_t lastTime = 0;
     if( timeNow < lastTime )
     {
-        LogMsg(LOG_ERROR, "ERROR GetTickCount64() Went backwards from %lld to %lld", lastTime, timeNow);
+        LogMsg(LOG_ERROR, "ERROR GetTickCount64() Went backwards from " PRId64 " to " PRId64 "", lastTime, timeNow);
         lastTime = timeNow;
     }
 
@@ -128,7 +128,7 @@ int64_t	GetApplicationAliveMs( void )
     static int64_t lastTime = 0;
     if( tickCnt < lastTime )
     {
-        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetApplicationAliveMs() Went backwards from %lld to %lld", lastTime, tickCnt);
+        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetApplicationAliveMs() Went backwards from " PRId64 " to " PRId64 "", lastTime, tickCnt);
     }
 
     lastTime = tickCnt;
@@ -144,7 +144,7 @@ int64_t	GetGmtTimeMs( void )
     static int64_t lastTime = 0;
     if( tickCnt < lastTime )
     {
-        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetGmtTimeMs() Went backwards from %lld to %lld", lastTime, tickCnt);
+        LogMsg(LOG_ERROR, "ERROR MONOTONIC GetGmtTimeMs() Went backwards from " PRId64 " to " PRId64 "", lastTime, tickCnt);
     }
 
     lastTime = tickCnt;

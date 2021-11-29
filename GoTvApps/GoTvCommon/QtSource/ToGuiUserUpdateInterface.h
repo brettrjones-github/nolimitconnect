@@ -21,13 +21,15 @@ class VxNetIdent;
 class ToGuiUserUpdateInterface
 {
 public:
+    virtual void				toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
+    virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) = 0;
+
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) = 0; 
 
 	virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact ) = 0; 
 	virtual void				toGuiContactOffline( VxNetIdent * netIdent ) = 0; 
-    virtual void				toGuiContactNearby( VxNetIdent * netIdent ) = 0; 
-    virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) = 0; 
+
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) = 0; 
     virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) = 0; 
     virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) = 0; 

@@ -50,14 +50,10 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 		}
 		else if( retIsNewConnection )
 		{
-			if( eConnectReasonRelaySearch == connectReason )
-			{
-			}
-
 			// handle success connect
 			BigListInfo * bigListInfo = 0;
 			int retryCnt = 0;
-			while( ( 0 == bigListInfo )
+			while( ( nullptr == bigListInfo )
 					&& ( retryCnt < 3 ) )
 			{
 				// wait for announce packet that was sent when connected to be rxed so we get big list info
@@ -71,17 +67,17 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 
 			if( bigListInfo )
 			{
-#ifdef DEBUG_CONNECTIONS
-				LogMsg( LOG_INFO, "P2PEngine::connectToContact: success  %s\n", bigListInfo->getOnlineName() );
-#endif // DEBUG_CONNECTIONS
+                LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectToContact: success  %s", bigListInfo->getOnlineName() );
 				m_NetConnector.handleConnectSuccess( bigListInfo, *ppoRetSkt, retIsNewConnection, connectReason );
+
+                // nearby elevate to guest permission
+                updateOnFirstConnect( *ppoRetSkt, bigListInfo, eConnectReasonNearbyLan == connectReason
+                                    || eConnectReasonSameExternalIp == connectReason );
 			}
-#ifdef DEBUG_CONNECTIONS
 			else
 			{
-				LogMsg( LOG_INFO, "NetConnector::doConnectRequest: No BigList for connected  %s\n", netIdent->getOnlineName() );
+                LogModule( eLogConnect, LOG_VERBOSE, "NetConnector::doConnectRequest: No BigList for connected" );
 			}
-#endif // DEBUG_CONNECTIONS
 		}
 	}
 
@@ -176,7 +172,7 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 	bool bSendSuccess = false;
 	if( 0 == (poPkt->getPktLength() & 0xf ) )
 	{
-		LogModule( eLogPkt, LOG_VERBOSE, "skt %d txPluginPkt\n", sktBase->m_iSktId );
+        LogModule( eLogPkt, LOG_VERBOSE, "skt %d txPluginPkt", sktBase->m_iSktId );
 		if( sktBase->isConnected() && sktBase->isTxEncryptionKeySet() )
 		{
 			poPkt->setSrcOnlineId( m_PktAnn.getMyOnlineId() );
@@ -190,17 +186,17 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "P2PEngine::txPluginPkt: error %d\n", rc );
+                LogMsg( LOG_ERROR, "P2PEngine::txPluginPkt: error %d", rc );
 			}
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "skt %d P2PEngine::txPluginPkt: ERROR disconnected or no TxEncryption key\n", sktBase->m_iSktId );
+            LogMsg( LOG_ERROR, "skt %d P2PEngine::txPluginPkt: ERROR disconnected or no TxEncryption key", sktBase->m_iSktId );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::txPluginPkt: Invalid Packet length %d type %d from plugin %s\n", 
+        LogMsg( LOG_ERROR, "P2PEngine::txPluginPkt: Invalid Packet length %d type %d from plugin %s",
 			poPkt->getPktLength(),
 			poPkt->getPktType(),
 			DescribePluginLclName( ePluginType ));
@@ -285,4 +281,49 @@ std::string P2PEngine::describeContact( VxConnectInfo& connectInfo )
 std::string P2PEngine::describeContact( ConnectRequest& connectRequest )
 {
 	return describeContact( connectRequest.getConnectInfo() );
+}
+
+//============================================================================
+void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected )
+{
+	poInfo->setIsOnline( true );
+	int64_t timestamp = GetGmtTimeMs();
+	if( poInfo->isIgnored() )
+	{
+		getIgnoreListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
+		return;
+	}
+
+	// determine if is nearby
+	bool isNearby = false;
+	if( poInfo->getMyOnlineIPv4().isValid() && poInfo->getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() ) // uses same external ip
+	{
+		isNearby = true;
+	}
+	else if( poInfo->getLanIPv4().isValid() )
+	{
+		// see if broadcast addresses match
+		std::string hisLanIp = poInfo->getLanIPv4().toStdString();
+		std::string myLanIp = getNetStatusAccum().getLanIpAddr();
+		std::string hisBroadcast;
+		std::string myBroadcast;
+		if( VxMakeBroadcastIp( hisLanIp, hisBroadcast ) && VxMakeBroadcastIp( myLanIp, myBroadcast )
+			&& !myBroadcast.empty() && myBroadcast == hisBroadcast )
+		{
+			isNearby = true;
+		}
+	}
+
+	poInfo->setIsNearby( isNearby );
+	if( isNearby )
+	{
+		getNearbyListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
+	}
+
+	if( poInfo->isFriend() || poInfo->isAdministrator() )
+	{
+		getFriendListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
+	}
+
+	getThumbMgr().requestThumbs( sktBase, poInfo );
 }

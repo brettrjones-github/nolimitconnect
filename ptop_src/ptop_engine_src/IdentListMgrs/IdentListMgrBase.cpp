@@ -13,9 +13,22 @@
 //============================================================================
 
 #include "IdentListMgrBase.h"
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
 IdentListMgrBase::IdentListMgrBase( P2PEngine& engine )
     : m_Engine( engine )
 {
+}
+
+//============================================================================
+void IdentListMgrBase::onUpdateIdent( VxGUID& onlineId, int64_t timestamp )
+{
+    m_Engine.getToGui().toGuiIndentListUpdate( m_ListType, onlineId, timestamp );
+}
+
+//============================================================================
+void IdentListMgrBase::onRemoveIdent( VxGUID& onlineId )
+{
+    m_Engine.getToGui().toGuiIndentListRemove( m_ListType, onlineId );
 }
