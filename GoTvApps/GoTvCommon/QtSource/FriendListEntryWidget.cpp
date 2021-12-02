@@ -27,6 +27,12 @@ FriendListEntryWidget::FriendListEntryWidget( QListWidget * parent, int type  )
 }
 
 //============================================================================
+void FriendListEntryWidget::setUser( GuiUser* user )
+{
+	QListWidgetItem::setData( Qt::UserRole + 2, QVariant( ( qulonglong )( user ) ) );
+}
+
+//============================================================================
 GuiUser* FriendListEntryWidget::getUser( void )
 {
 	return (GuiUser*)QListWidgetItem::data( Qt::UserRole + 2 ).toULongLong();

@@ -29,8 +29,9 @@ public:
 
     virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp ) {};
     virtual void                removeIdent( VxGUID& onlineId ) {};
+    virtual void                removeAll( void ) {};
 
-    void                        setIdentListType( EFriendListType listType ) { m_ListType = listType; }
+    virtual void                setIdentListType( EUserViewType listType ) { m_ListType = listType; }
 
 protected:
     virtual void                onUpdateIdent( VxGUID& onlineId, int64_t timestamp );
@@ -38,6 +39,6 @@ protected:
 
     P2PEngine&                  m_Engine;
     VxMutex                     m_ListMutex;
-    EFriendListType             m_ListType{ eFriendListTypeUnknown };
+    EUserViewType               m_ListType{ eUserViewTypeNone };
 };
 

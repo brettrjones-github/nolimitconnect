@@ -30,8 +30,8 @@ GuiUserMgr::GuiUserMgr( AppCommon& app )
 //============================================================================
 void GuiUserMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalIndentListUpdate( EFriendListType, VxGUID, uint64_t ) ), this, SLOT( slotInternalIndentListUpdate( EFriendListType, VxGUID, uint64_t ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalIndentListRemove( EFriendListType, VxGUID ) ),         this, SLOT( slotInternalIndentListRemove( EFriendListType, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalIndentListUpdate( EUserViewType, VxGUID, uint64_t ) ), this, SLOT( slotInternalIndentListUpdate( EUserViewType, VxGUID, uint64_t ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalIndentListRemove( EUserViewType, VxGUID ) ),         this, SLOT( slotInternalIndentListRemove( EUserViewType, VxGUID ) ), Qt::QueuedConnection );
 
     connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*,EHostType) ),	                this, SLOT( slotInternalUpdateUser(VxNetIdent*,EHostType) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserRemoved(VxGUID) ), Qt::QueuedConnection );
@@ -47,13 +47,13 @@ bool GuiUserMgr::isMessengerReady( void )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+void GuiUserMgr::toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
 {
     emit signalInternalIndentListUpdate( listType, onlineId, timestamp );
 }
 
 //============================================================================
-void GuiUserMgr::toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+void GuiUserMgr::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 {
     emit signalInternalIndentListRemove( listType, onlineId );
 }
@@ -131,48 +131,87 @@ void GuiUserMgr::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::slotInternalIndentListUpdate( EFriendListType listType, VxGUID onlineId, uint64_t timestamp )
+void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp )
 {
-    if( isMessengerReady() && onlineId.isVxGUIDValid() )
+    GuiUser* user = getOrQueryUser( onlineId );
+    if( user )
     {
-        guiUserUpdateClientsLock();
-        for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+        switch( listType )
         {
-            GuiUserMgrGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback )
+        case eUserViewTypeNearby:
+            if( !user->getNetIdent().isNearby() )
             {
-                client.m_Callback->callbackIndentListUpdate( listType, onlineId, timestamp );
+                user->getNetIdent().setIsNearby( true );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate nearby" );
             }
-            else
-            {
-                LogMsg( LOG_ERROR, "GuiUserMgr::slotInternalIndentListUpdate invalid callback" );
-            }
+            break;
+
+        default:
+            break;
         }
 
-        guiUserUpdateClientsUnlock();
+        user->setLastUpdateTime( timestamp );
+        if( isMessengerReady() && onlineId.isVxGUIDValid() )
+        {
+            guiUserUpdateClientsLock();
+            for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+            {
+                GuiUserMgrGuiUserUpdateClient& client = *iter;
+                if( client.m_Callback )
+                {
+                    client.m_Callback->callbackIndentListUpdate( listType, onlineId, timestamp );
+                    client.m_Callback->callbackOnUserUpdated( user );
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "GuiUserMgr::slotInternalIndentListUpdate invalid callback" );
+                }
+            }
+
+            guiUserUpdateClientsUnlock();
+        }
     }
 }
 
 //============================================================================
-void GuiUserMgr::slotInternalIndentListRemove( EFriendListType listType, VxGUID onlineId )
+void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID onlineId )
 {
-    if( isMessengerReady() && onlineId.isVxGUIDValid() )
+    GuiUser* user = getOrQueryUser( onlineId );
+    if( user )
     {
-        guiUserUpdateClientsLock();
-        for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+        switch( listType )
         {
-            GuiUserMgrGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback )
+        case eUserViewTypeNearby:
+            if( user->getNetIdent().isNearby() )
             {
-                client.m_Callback->callbackIndentListRemove( listType, onlineId );
+                user->getNetIdent().setIsNearby( false );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT nearby" );
             }
-            else
-            {
-                LogMsg( LOG_ERROR, "GuiUserMgr::slotInternalIndentListRemove invalid callback" );
-            }
+            break;
+
+        default:
+            break;
         }
 
-        guiUserUpdateClientsUnlock();
+        if( isMessengerReady() && onlineId.isVxGUIDValid() )
+        {
+            guiUserUpdateClientsLock();
+            for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
+            {
+                GuiUserMgrGuiUserUpdateClient& client = *iter;
+                if( client.m_Callback )
+                {
+                    client.m_Callback->callbackIndentListRemove( listType, onlineId );
+                    client.m_Callback->callbackOnUserUpdated( user );
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "GuiUserMgr::slotInternalIndentListRemove invalid callback" );
+                }
+            }
+
+            guiUserUpdateClientsUnlock();
+        }
     }
 }
 

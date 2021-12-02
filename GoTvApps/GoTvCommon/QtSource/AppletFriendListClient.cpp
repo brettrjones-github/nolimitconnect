@@ -142,8 +142,8 @@ void AppletFriendListClient::infoMsg( const char* errMsg, ... )
 //============================================================================
 void AppletFriendListClient::clearList( void )
 {
-    ui.m_FriendListWidget->clear();
-    setStatusLabel( GuiParams::describeFriendListType( m_FriendListType ) + QObject::tr( "List" ) );
+    ui.m_UserListWidget->clear();
+    setStatusLabel( GuiParams::describeUserViewType( m_FriendListType ) + QObject::tr( "List" ) );
 }
 
 //============================================================================
@@ -162,7 +162,7 @@ void AppletFriendListClient::onShowFriendList( void )
     friendList = friendMgr.getIdentList();
     friendMgr.unlockList();
     
-    updateFriendList( eFriendListTypeFriend, friendList );
+    updateFriendList( eUserViewTypeFriends, friendList );
 }
 
 //============================================================================
@@ -175,7 +175,7 @@ void AppletFriendListClient::onShowIgnoreList( void )
     ignoreList = ignoreMgr.getIdentList();
     ignoreMgr.unlockList();
 
-    updateFriendList( eFriendListTypeIgnore, ignoreList );
+    updateFriendList( eUserViewTypeIgnored, ignoreList );
 }
 
 //============================================================================
@@ -188,20 +188,16 @@ void AppletFriendListClient::onShowNearbyList( void )
     nearbyList = nearbyMgr.getIdentList();
     nearbyMgr.unlockList();
 
-    updateFriendList( eFriendListTypeNearby, nearbyList );
+    updateFriendList( eUserViewTypeNearby, nearbyList );
 }
 
 //============================================================================
-void AppletFriendListClient::callbackIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+void AppletFriendListClient::callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
 {
-    if( listType == getListType() )
-    {
-        removeUser( onlineId );
-    }
 }
 
 //============================================================================
-void AppletFriendListClient::callbackIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+void AppletFriendListClient::callbackIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 {
     if( listType == getListType() )
     {
@@ -232,15 +228,15 @@ void AppletFriendListClient::onShowFriendTypeChanged( void )
 {
     switch( m_FriendListType )
     {
-    case eFriendListTypeIgnore:
+    case eUserViewTypeIgnored:
         onShowIgnoreList();
         break;
 
-    case eFriendListTypeNearby:
+    case eUserViewTypeNearby:
         onShowNearbyList();
         break;
 
-    case eFriendListTypeFriend:
+    case eUserViewTypeFriends:
     default:
         onShowFriendList();
         break;
@@ -251,9 +247,9 @@ void AppletFriendListClient::onShowFriendTypeChanged( void )
 void AppletFriendListClient::slotFriendsButtonClicked( void )
 {
     m_Engine.fromGuiNearbyBroadcastEnable( false );
-    if( m_FriendListType != eFriendListTypeFriend )
+    if( m_FriendListType != eUserViewTypeFriends )
     {
-        m_FriendListType = eFriendListTypeFriend;
+        m_FriendListType = eUserViewTypeFriends;
         onShowFriendTypeChanged();
     }
 }
@@ -262,9 +258,9 @@ void AppletFriendListClient::slotFriendsButtonClicked( void )
 void AppletFriendListClient::slotIgnoredButtonClicked( void )
 {
     m_Engine.fromGuiNearbyBroadcastEnable( false );
-    if( m_FriendListType != eFriendListTypeIgnore )
+    if( m_FriendListType != eUserViewTypeIgnored )
     {
-        m_FriendListType = eFriendListTypeIgnore;
+        m_FriendListType = eUserViewTypeIgnored;
         onShowFriendTypeChanged();
     }
 }
@@ -287,9 +283,9 @@ void AppletFriendListClient::slotNearbyButtonClicked( void )
 #endif // defined (Q_OS_ANDROID)
 
     m_Engine.fromGuiNearbyBroadcastEnable( true );
-    if( m_FriendListType != eFriendListTypeNearby )
+    if( m_FriendListType != eUserViewTypeNearby )
     {
-        m_FriendListType = eFriendListTypeNearby;
+        m_FriendListType = eUserViewTypeNearby;
         onShowFriendTypeChanged();
     }
 }
@@ -325,9 +321,13 @@ void AppletFriendListClient::slotNearbyInfoButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::updateUser( EFriendListType listType, VxGUID& onlineId )
+void AppletFriendListClient::updateUser( EUserViewType listType, VxGUID& onlineId )
 {
-    updateUser( m_MyApp.getUserMgr().getOrQueryUser( onlineId ) );
+    GuiUser* user = m_MyApp.getUserMgr().getOrQueryUser( onlineId );
+    if( user )
+    {
+        updateUser( user );
+    }  
 }
 
 //============================================================================
@@ -335,11 +335,11 @@ void AppletFriendListClient::updateUser( GuiUser* guiUser )
 {
     if( guiUser )
     {
-        if( ( eFriendListTypeFriend == m_FriendListType && guiUser->isFriend() )
-            || ( eFriendListTypeIgnore == m_FriendListType && guiUser->isIgnored() )
-            || ( eFriendListTypeNearby == m_FriendListType && guiUser->isNearby() ) )
+        if( ( eUserViewTypeFriends == m_FriendListType && ( guiUser->isFriend() || guiUser->isAdmin() ) )
+            || ( eUserViewTypeIgnored == m_FriendListType && guiUser->isIgnored() )
+            || ( eUserViewTypeNearby == m_FriendListType && guiUser->isNearby() ) )
         {
-            ui.m_FriendListWidget->updateFriend( guiUser );
+            ui.m_UserListWidget->updateUser( guiUser );
         }
     }
 }
@@ -347,14 +347,15 @@ void AppletFriendListClient::updateUser( GuiUser* guiUser )
 //============================================================================
 void AppletFriendListClient::removeUser( VxGUID& onlineId )
 {
-    ui.m_FriendListWidget->removeFriend( onlineId );
+    ui.m_UserListWidget->removeUser( onlineId );
 }
 
 //============================================================================
-void AppletFriendListClient::updateFriendList( EFriendListType listType, std::vector<std::pair<VxGUID, int64_t>> idList )
+void AppletFriendListClient::updateFriendList( EUserViewType listType, std::vector<std::pair<VxGUID, int64_t>> idList )
 {
     clearList();
     m_FriendListType = listType;
+    ui.m_UserListWidget->setUserViewType( listType );
 
     // for each see if we already have that ident as gui user else request it
     for( auto identTime : idList )

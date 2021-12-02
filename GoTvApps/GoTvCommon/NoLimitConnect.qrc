@@ -301,7 +301,6 @@
         <file>Resources/group-joined.svg</file>
         <file>Resources/offer-truth-or-dare.svg</file>
         <file>Resources/direct-connected.svg</file>
-        <file>Resources/direct-connected-overlay.svg</file>
         <file>Resources/persons-offer-list.svg</file>
         <file>Resources/connect.svg</file>
         <file>Resources/disconnect.svg</file>
@@ -314,5 +313,6 @@
         <file>Resources/invite-create.svg</file>
         <file>Resources/notify-in-group.svg</file>
         <file>Resources/friend-broadcast.svg</file>
+        <file>Resources/overlay-direct-connected.svg</file>
     </qresource>
 </RCC>

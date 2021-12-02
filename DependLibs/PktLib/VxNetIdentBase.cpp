@@ -95,8 +95,14 @@ bool VxNetIdentBase::isMyself( void )
 }
 
 //============================================================================
+bool VxNetIdentBase::canDirectConnectToUser( void )
+{
+    return isNearby() || !requiresRelay();
+}
+
+//============================================================================
 //! return true if identity matches
-bool	VxNetIdentBase::isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) const
+bool VxNetIdentBase::isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) const
 {
 	return ( *((VxGUID *)&oOtherIdent.m_DirectConnectId) == *((VxGUID *)&m_DirectConnectId));
 }

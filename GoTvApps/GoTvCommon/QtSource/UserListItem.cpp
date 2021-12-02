@@ -23,16 +23,12 @@ UserListItem::UserListItem(QWidget *parent  )
 , m_MyApp( GetAppInstance() )
 {
     setIdentWidgetSize( eButtonSizeSmall );
-
-    connect( getIdentAvatarButton(),     SIGNAL(clicked()),  this, SLOT(slotAvatarButtonClicked()) );
-    connect( getIdentFriendshipButton(), SIGNAL(clicked()),  this, SLOT(slotFriendshipButtonClicked()) );
-	connect( getIdentMenuButton(),       SIGNAL(clicked()),  this, SLOT(slotMenuButtonClicked()) );
 }
 
 //============================================================================
 UserListItem::~UserListItem()
 {
-    GuiUserSessionBase * hostSession = (GuiUserSessionBase *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
+    GuiUserSessionBase * hostSession = getUserSession();
     if( hostSession && !hostSession->parent() )
     {
         delete hostSession;
@@ -68,7 +64,7 @@ void UserListItem::mousePressEvent(QMouseEvent * event)
 //============================================================================
 void UserListItem::setUserSession( GuiUserSessionBase* hostSession )
 {
-    QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
+    QListWidgetItem::setData( Qt::UserRole + 1, QVariant((qulonglong)hostSession) );
 }
 
 //============================================================================

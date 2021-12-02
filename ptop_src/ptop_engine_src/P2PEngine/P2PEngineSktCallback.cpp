@@ -37,6 +37,18 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		return;
 	}
 
+    if( sktBase->isUdpSocket() )
+    {
+        LogMsg( LOG_ERROR, "P2PEngine::handleTcpData: attempted handle UDP data" );
+        return;
+    }
+
+    if( !sktBase->isConnected() )
+    {
+        LogModule( eLogTcpData, LOG_INFO, "P2PEngine::handleTcpData: callback was for data but socket is not connected" );
+        return;
+    }
+
 	// NOTE: TODO check if is in our ip address ignore list
 	int	iDataLen =	sktBase->getSktBufDataLen();
 	if( iDataLen < 16 )
@@ -175,7 +187,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		// fall thru in case there are more packets
 	}
 
-	while( true )
+    while( !VxIsAppShuttingDown() )
 	{
 		//LogMsg( LOG_INFO, "AppRcpCallback.. 3 Skt %d num %d Total Len %d Used Len %d decrypted Len %d\n", 
 		//	sktBase->GetSocketId(),
@@ -186,7 +198,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		if( false == sktBase->isConnected() )
 		{
 			//socket has been closed
-			LogMsg( LOG_INFO, "P2PEngine::handleTcpData: callback was for data but socket is not connected\n" );
+            LogModule( eLogTcpData, LOG_INFO, "P2PEngine::handleTcpData: callback was for data but socket is not connected" );
 			return;
 		}
 

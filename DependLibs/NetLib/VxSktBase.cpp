@@ -1304,7 +1304,6 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
                     //		sktBase->m_RmtIp.getPort() );
                     //}
 
-                    sktBase->setLastActiveTimeMs( GetGmtTimeMs() );
                     sktBase->m_iLastRxLen = iDataLen;
 
                     memcpy( sktBase->getSktWriteBuf(), as8Buf, iDataLen );

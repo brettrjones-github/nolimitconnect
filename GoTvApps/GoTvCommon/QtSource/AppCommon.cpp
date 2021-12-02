@@ -279,6 +279,20 @@ void AppCommon::loadWithoutThread( void )
     uint64_t styleMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Setup Style " PRId64 " ms alive ms " PRId64 "", styleMs - iconsMs, styleMs );
 
+	// make sure the engine has been created
+	int retryCnt = 0;
+	while( !getEngine().isEngineCreated() )
+	{
+		retryCnt++;
+		if( retryCnt > 10 )
+		{
+			LogMsg( LOG_FATAL, "Engine failed to be created" );
+			break;
+		}
+
+		VxSleep( 200 );	
+	}
+
 	m_ThumbMgr.onAppCommonCreated();
 	m_UserMgr.onAppCommonCreated();
 	m_OfferClientMgr.onAppCommonCreated();
@@ -2191,6 +2205,6 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<VxNetIdent>("VxNetIdent");
 	qRegisterMetaType<uint32_t>("uint32_t");
 	qRegisterMetaType<uint64_t>( "uint64_t" );
-	qRegisterMetaType<EFriendListType>( "EFriendListType" );
+	qRegisterMetaType<EUserViewType>( "EUserViewType" );
 }
 

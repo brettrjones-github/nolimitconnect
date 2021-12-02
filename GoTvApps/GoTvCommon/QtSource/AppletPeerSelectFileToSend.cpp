@@ -115,7 +115,7 @@ void AppletPeerSelectFileToSend::onSendButClick()
 
 		if( false == m_FromGui.fromGuiMakePluginOffer(	m_ePluginType, 
 														m_HisIdent->getMyOnlineId(), 
-														NULL,
+                                                        0,
 														ui.m_OfferMsgEdit->toPlainText().toUtf8().constData(), 
 														ui.m_FileNameEdit->text().toUtf8().constData(),
 														0,

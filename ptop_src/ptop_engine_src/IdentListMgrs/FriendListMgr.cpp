@@ -19,7 +19,7 @@
 FriendListMgr::FriendListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
 {
-    setIdentListType( eFriendListTypeFriend );
+    setIdentListType( eUserViewTypeFriends );
 }
 
 //============================================================================

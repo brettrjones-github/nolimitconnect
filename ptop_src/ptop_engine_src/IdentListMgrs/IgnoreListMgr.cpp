@@ -19,7 +19,7 @@
 IgnoreListMgr::IgnoreListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
 {
-    setIdentListType( eFriendListTypeIgnore );
+    setIdentListType( eUserViewTypeIgnored );
 }
 
 //============================================================================

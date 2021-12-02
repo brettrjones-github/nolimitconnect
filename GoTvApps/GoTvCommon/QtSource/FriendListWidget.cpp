@@ -338,10 +338,10 @@ void FriendListWidget::removeFriend( VxGUID& onlineId )
 
 //============================================================================
 //!	fill friend into new QListWidgetItem *
-FriendListEntryWidget * FriendListWidget::friendToWidget( GuiUser * poFriend )
+FriendListEntryWidget * FriendListWidget::friendToWidget( GuiUser * user )
 {
 	FriendListEntryWidget * item = new FriendListEntryWidget( this );
-    item->setData( Qt::UserRole + 2, QVariant((quint64)(poFriend)) );
+    item->setUser( user );
     connect( item, SIGNAL(listButtonClicked(FriendListEntryWidget*)), this, SLOT(slotFriendListItemClicked(FriendListEntryWidget*)));
 
     connect( item, SIGNAL(signalMenuButtonClicked(FriendListEntryWidget*)), this, SLOT(slotFriendMenuButtonClicked(FriendListEntryWidget*)));

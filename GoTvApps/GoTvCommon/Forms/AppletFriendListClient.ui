@@ -211,7 +211,7 @@
        </layout>
       </item>
       <item>
-       <widget class="FriendListWidget" name="m_FriendListWidget" native="true">
+       <widget class="UserListWidget" name="m_UserListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -227,15 +227,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FriendListWidget</class>
-   <extends>QWidget</extends>
-   <header>FriendListWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>
    <header location="global">VxPushButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>UserListWidget</class>
+   <extends>QWidget</extends>
+   <header>UserListWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

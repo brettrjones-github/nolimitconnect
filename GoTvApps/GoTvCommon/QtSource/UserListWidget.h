@@ -16,19 +16,6 @@
 #include "ListWidgetBase.h"
 #include "AppDefs.h"
 
-enum EUserViewType
-{
-    eUserViewTypeNone,
-    eUserViewTypeFriends,
-    eUserViewTypeGroup,
-    eUserViewTypeChatRoom,
-    eUserViewTypeRandomConnect,
-    eUserViewTypeEverybody,
-    eUserViewTypeIgnored,
-
-    eMaxUserViewTypeNone,
-};
-
 class UserListItem;
 class GuiUserSessionBase;
 

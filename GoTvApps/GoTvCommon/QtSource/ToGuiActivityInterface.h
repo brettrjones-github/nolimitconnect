@@ -38,8 +38,8 @@ public:
 	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ){}; 
 	virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ){}; 
 
-    virtual void				toGuiIndentListUpdate( void* callbackData, EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) {};
-    virtual void				toGuiIndentListRemove( void* callbackData, EFriendListType listType, VxGUID& onlineId ) {};
+    virtual void				toGuiIndentListUpdate( void* callbackData, EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
+    virtual void				toGuiIndentListRemove( void* callbackData, EUserViewType listType, VxGUID& onlineId ) {};
 
     virtual void				toGuiContactAdded( void * callbackData, VxNetIdent * netIdent ){}; 
     virtual void				toGuiContactRemoved( void * callbackData, VxGUID& onlineId ) {}; 

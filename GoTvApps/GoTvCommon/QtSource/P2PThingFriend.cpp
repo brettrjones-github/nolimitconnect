@@ -29,7 +29,7 @@ void AppCommon::updateFriendList( GuiUser * netIdent, bool sessionTimeChange )
 }
 
 //============================================================================
-void AppCommon::toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+void AppCommon::toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
 {
     if( VxIsAppShuttingDown() )
     {
@@ -48,7 +48,7 @@ void AppCommon::toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineI
 }
 
 //============================================================================
-void AppCommon::toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+void AppCommon::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 {
     if( VxIsAppShuttingDown() )
     {

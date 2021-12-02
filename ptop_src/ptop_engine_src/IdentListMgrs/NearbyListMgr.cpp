@@ -14,12 +14,13 @@
 
 #include "NearbyListMgr.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
 //============================================================================
 NearbyListMgr::NearbyListMgr( P2PEngine& engine )
     : IdentListMgrBase( engine )
 {
-    setIdentListType( eFriendListTypeNearby );
+    setIdentListType( eUserViewTypeNearby );
 }
 
 //============================================================================
@@ -124,5 +125,26 @@ void NearbyListMgr::removeIdent( VxGUID& onlineId )
     if( wasRemoved )
     {
         onRemoveIdent( onlineId );
+    }
+}
+
+//============================================================================
+void NearbyListMgr::removeAll( void )
+{
+    lockList();
+    // make copy
+    std::vector<std::pair<VxGUID, int64_t>> nearbyIdentList = m_NearbyIdentList;
+    unlockList();
+
+    for( auto iter = nearbyIdentList.begin(); iter != nearbyIdentList.end(); ++iter )
+    {
+        VxGUID onlineId = iter->first;
+        BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( onlineId );
+        if( bigListInfo )
+        {
+            bigListInfo->setIsNearby( false );
+        }
+
+        removeIdent( onlineId );
     }
 }

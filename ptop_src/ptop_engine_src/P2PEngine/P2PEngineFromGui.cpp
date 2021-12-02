@@ -211,6 +211,7 @@ void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
 	m_PluginMgr.fromGuiUserLoggedOn();
 	m_NetworkStateMachine.fromGuiUserLoggedOn();
 	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn done" );
+	m_IsEngineReady = true;
 }
 
 //============================================================================

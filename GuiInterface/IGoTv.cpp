@@ -320,7 +320,7 @@ bool IGoTv::doPreStartup()
 #ifdef DEBUG_KODI_ENABLE_DEBUG_LOGGING
     CLog::SetLogLevel( LOG_LEVEL_DEBUG );
 #endif //   DEBUG_KODI_ENABLE_DEBUG_LOGGING
-    const int FFMPEG_LOG_LEVEL_DEBUG = 1; // shows all
+    // const int FFMPEG_LOG_LEVEL_DEBUG = 1; // shows all
     const int FFMPEG_LOG_LEVEL_NORMAL = 0; // shows notice, error, severe and fatal
 #ifdef DEBUG_FFMPEG_ENABLE_LOGGING
     getILog().setFfmpegLogLevel( FFMPEG_LOG_LEVEL_DEBUG );

@@ -27,6 +27,7 @@ public:
 	FriendListEntryWidget( QListWidget * parent = 0, int type = Type );
 	virtual ~FriendListEntryWidget() = default;
 
+	void						setUser( GuiUser* user );
 	GuiUser*					getUser( void );
 
 signals:

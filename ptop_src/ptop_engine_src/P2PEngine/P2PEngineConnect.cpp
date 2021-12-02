@@ -286,6 +286,11 @@ std::string P2PEngine::describeContact( ConnectRequest& connectRequest )
 //============================================================================
 void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected )
 {
+	if( sktBase || !poInfo )
+	{
+
+	}
+
 	poInfo->setIsOnline( true );
 	int64_t timestamp = GetGmtTimeMs();
 	if( poInfo->isIgnored() )
@@ -293,6 +298,10 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		getIgnoreListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
 		return;
 	}
+
+	poInfo->setLastSessionTimeMs( timestamp );
+	poInfo->setConnectSuccessCnt( poInfo->getConnectSuccessCnt() + 1 );
+	poInfo->setConnectErrCnt( 0 );
 
 	// determine if is nearby
 	bool isNearby = false;

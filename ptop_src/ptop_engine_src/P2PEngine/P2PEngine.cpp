@@ -116,6 +116,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 {
     m_PeerMgr.setSktLoopback( &m_SktLoopback );
     m_NetStatusAccum.addNetStatusCallback( &m_ConnectionMgr );
+	m_IsEngineCreated = true;
 }
 
 //============================================================================

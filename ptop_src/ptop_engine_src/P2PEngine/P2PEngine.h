@@ -97,6 +97,8 @@ public:
 
 	void						startupEngine( void );
 	void						shutdownEngine( void );
+    bool                        isEngineCreated( void )                         { return m_IsEngineCreated; }
+    bool                        isEngineReady( void )                           { return m_IsEngineReady; }
 
     IToGui&						getToGui( void );
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
@@ -743,8 +745,10 @@ protected:
     bool						m_AppStartupCalled{ false };
 	bool						m_AppIsPaused{ false };
 	bool						m_IsUserSpecificDirSet{ false };
-    bool                        m_EngineInitialized{ false };
     bool                        m_FirstPktAnnounce{ true };
+    bool                        m_EngineInitialized{ false };
+    bool                        m_IsEngineCreated{ false };
+    bool                        m_IsEngineReady{ false };
 
 	PktImAliveReq				m_PktImAliveReq;
 

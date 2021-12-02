@@ -115,7 +115,7 @@ void AppletUserIdentity::resetComboIdxToOriginalAccount()
 //============================================================================
 void AppletUserIdentity::slotAccountSelectionChanged( int idx )
 {
-    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
+    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < (int)m_AccountList.size() ) )
     {
         VxNetIdent& netIdent = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
         LogMsg( LOG_DEBUG, "AppletUserIdentity selected account %s", netIdent.getOnlineName() );
@@ -180,7 +180,7 @@ void AppletUserIdentity::onApplyMoodMsgClick( void )
 
     if( moodMsg != m_strOrigMoodMessage )
     {
-        if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
+        if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < (int)m_AccountList.size() ) )
         {
             VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
             std::string strOnlineDesc = moodMsg.toUtf8().constData();
@@ -200,7 +200,7 @@ void AppletUserIdentity::onApplyMoodMsgClick( void )
 //============================================================================
 void AppletUserIdentity::onApplyAgeClick( void )
 {
-    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
+    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < (int)m_AccountList.size() ) )
     {
         VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
         GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
@@ -219,7 +219,7 @@ void AppletUserIdentity::onApplyAgeClick( void )
 //============================================================================
 void AppletUserIdentity::onApplyContentClick( void )
 {
-    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < m_AccountList.size() ) )
+    if( ( ui.m_AccountComboBox->currentIndex() >= 0 ) && ( ui.m_AccountComboBox->currentIndex() < (int)m_AccountList.size() ) )
     {
         VxNetIdent& ident = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
         GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );
@@ -238,7 +238,7 @@ void AppletUserIdentity::onApplyContentClick( void )
 //============================================================================
 void AppletUserIdentity::onApplyGenderClick( void )
 {
-    if( ( ui.m_GenderComboBox->currentIndex() >= 0 ) && ( ui.m_GenderComboBox->currentIndex() < m_AccountList.size() ) )
+    if( ( ui.m_GenderComboBox->currentIndex() >= 0 ) && ( ui.m_GenderComboBox->currentIndex() < (int)m_AccountList.size() ) )
     {
         VxNetIdent& ident = m_AccountList[ ui.m_GenderComboBox->currentIndex() ];
         GuiHelpers::setIdentityFromValues( this, &ident, ui.m_AgeComboBox, ui.m_GenderComboBox, ui.m_LanguageComboBox, ui.m_ContentComboBox );

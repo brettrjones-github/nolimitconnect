@@ -127,7 +127,7 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent )
 			getIdentFriendshipButton()->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
 		}
 
-		if( isMyself || !netIdent->requiresRelay() )
+		if( isMyself || netIdent->canDirectConnectToUser() )
 		{
 			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( true );
 		}

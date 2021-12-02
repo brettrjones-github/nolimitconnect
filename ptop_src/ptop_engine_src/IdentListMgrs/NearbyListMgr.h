@@ -31,6 +31,7 @@ public:
     bool                        isNearby( VxGUID& onlineId );
     virtual void                updateIdent( VxGUID& onlineId, int64_t timestamp ) override;
     virtual void                removeIdent( VxGUID& onlineId ) override;
+    virtual void                removeAll( void ) override;
 
     std::vector<std::pair<VxGUID, int64_t>>& getIdentList()         { return m_NearbyIdentList; };
 

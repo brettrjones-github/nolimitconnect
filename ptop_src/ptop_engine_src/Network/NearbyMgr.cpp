@@ -84,6 +84,8 @@ bool NearbyMgr::fromGuiNearbyBroadcastEnable( bool enable )
         m_MulticastIdentMutex.lock();
         m_MulticastIdentList.clear();
         m_MulticastIdentMutex.unlock();
+
+        m_Engine.getNearbyListMgr().removeAll();
     }
 
     return result;

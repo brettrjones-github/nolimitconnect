@@ -1611,20 +1611,26 @@ QString GuiParams::describeOrientation( Qt::Orientation qtOrientation )
 }
 
 //============================================================================
-QString GuiParams::describeFriendListType( EFriendListType showFriendType )
+QString GuiParams::describeUserViewType( EUserViewType showFriendType )
 {
     switch( showFriendType )
     {
-    case eFriendListTypeFriend:
+    case eUserViewTypeFriends:
         return QObject::tr( "Friends " );
-    case eFriendListTypeIgnore:	// friend user
+    case eUserViewTypeChatRoom:
+        return QObject::tr( "Chat Room " );
+    case eUserViewTypeRandomConnect:
+        return QObject::tr( "Random Connect " );
+    case eUserViewTypeEverybody:
+        return QObject::tr( "Everybody " );
+    case eUserViewTypeIgnored:	// friend user
         return QObject::tr( "Ignored " );
-    case eFriendListTypeNearby:
+    case eUserViewTypeNearby:
         return  QObject::tr( "Nearby " );
-    case eFriendListTypeGroup:
+    case eUserViewTypeGroup:
         return  QObject::tr( "Group " );
 
-    case eFriendListTypeUnknown:
+    case eUserViewTypeNone:
     default:
         return  QObject::tr( "Unknown " );
     }

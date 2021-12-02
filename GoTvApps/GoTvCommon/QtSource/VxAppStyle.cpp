@@ -1438,7 +1438,7 @@ QRect VxAppStyle::subControlRect(   ComplexControl control,
             case SC_SliderHandle:
             {
                 int sliderPos = 0;
-                int sliderLen = pixelMetric( PM_SliderLength, option, widget );
+                // int sliderLen = pixelMetric( PM_SliderLength, option, widget );
                 int grooveLen = pixelMetric( PM_SliderSpaceAvailable, option, widget );
                 int grooveOffs = 0;// ( sliderLen - grooveLen ) / 2;
                 bool horizontal = slider->orientation == Qt::Horizontal;

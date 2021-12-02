@@ -162,13 +162,13 @@ void IGoTv::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus,
 }
 
 //============================================================================
-void IGoTv::toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp )
+void IGoTv::toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
 {
     getAppCommon().toGuiIndentListUpdate( listType, onlineId, timestamp );
 }
 
 //============================================================================
-void IGoTv::toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId )
+void IGoTv::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 {
     getAppCommon().toGuiIndentListRemove( listType, onlineId );
 }

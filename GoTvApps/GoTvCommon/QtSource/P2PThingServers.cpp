@@ -69,7 +69,7 @@ void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 		{
 		case ePluginServerStateStarted:	// app has started
 			m_Engine.setHasSharedWebCam(false);
-			m_Engine.fromGuiStopPluginSession( ePluginTypeCamServer, m_UserMgr.getMyOnlineId(), NULL );
+            m_Engine.fromGuiStopPluginSession( ePluginTypeCamServer, m_UserMgr.getMyOnlineId(), 0 );
 			break;
 		case ePluginServerStateStopped:
 			startActivity( ePluginTypeCamServer, m_UserMgr.getMyIdent() );

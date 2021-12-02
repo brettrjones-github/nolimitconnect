@@ -21,8 +21,8 @@ class VxNetIdent;
 class ToGuiUserUpdateInterface
 {
 public:
-    virtual void				toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
-    virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) = 0;
+    virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
+    virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) = 0;
 
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) = 0; 

@@ -84,6 +84,9 @@ public:
     bool		                getHasTextOffers( void )				{ return m_NetIdent.getHasTextOffers(); }
     bool                        isMyAccessAllowedFromHim( EPluginType pluginType ) { return m_NetIdent.isMyAccessAllowedFromHim( pluginType ); }
     
+    void                        setLastUpdateTime( uint64_t updateTimeMs ) { m_LastUpdateTime = updateTimeMs; }
+    uint64_t                    getLastUpdateTime( void )               { return m_LastUpdateTime; }
+
     void                        addHostType( EHostType hostType );
     bool                        hasHostType( EHostType hostType )       { return m_HostSet.find( hostType ) != m_HostSet.end(); }
     void                        removeHostType( EHostType hostType )    { m_HostSet.erase( hostType ); }
@@ -94,6 +97,7 @@ protected:
     VxNetIdent                  m_NetIdent;
     VxGUID                      m_OnlineId;
     VxGUID                      m_SessionId;
+    uint64_t                    m_LastUpdateTime{ 0 };
     bool                        m_IsOnline{ false };
     std::set<EHostType>         m_HostSet;
 };

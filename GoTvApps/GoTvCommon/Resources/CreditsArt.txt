@@ -51,7 +51,7 @@ client-group.svg
 client-random-connect.svg (modified)
 client-webcam.svg (modified)
 direct-connected.svg (modified)
-direct-connected-overlay.svg (modified)
+overlay-direct-connected.svg (modified)
 disconnect.svg (modified)
 earth-globe.svg
 edit-print.svg

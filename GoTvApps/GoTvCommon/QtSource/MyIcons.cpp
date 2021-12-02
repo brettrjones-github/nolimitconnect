@@ -123,7 +123,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconNotifyOnlineOverlay:		
 		return ":/AppRes/Resources/notify-dot.svg";
 	case eMyIconNotifyDirectConnectOverlay:
-		return ":/AppRes/Resources/direct-connected-overlay.svg";
+		return ":/AppRes/Resources/overlay-direct-connected.svg";
 	case eMyIconNotifyInGroupOverlay:
 		return ":/AppRes/Resources/notify-in-group.svg";
 	case eMyIconNotifyOfflineOverlay:

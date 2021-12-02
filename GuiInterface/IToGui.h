@@ -78,8 +78,8 @@ public:
     /// Send state/status to GUI (currently just query host id)
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) = 0;
 
-	virtual void				toGuiIndentListUpdate( EFriendListType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
-	virtual void				toGuiIndentListRemove( EFriendListType listType, VxGUID& onlineId ) = 0;
+	virtual void				toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
+	virtual void				toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId ) = 0;
 
     /// contact added to engine
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0;

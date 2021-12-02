@@ -213,12 +213,12 @@ UserListItem* UserListWidget::addOrUpdateUserSession( GuiUserSessionBase* userSe
         userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName().c_str() );
+            LogMsg( LOG_INFO, "add user %s", userSession->getOnlineName().c_str() );
             addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
+            LogMsg( LOG_INFO, "insert user %s", userSession->getOnlineName().c_str() );
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 
@@ -260,7 +260,7 @@ void UserListWidget::onAvatarButtonClicked( UserListItem* userItem )
 //============================================================================
 void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
 {
-    LogMsg( LOG_DEBUG, " UserListWidget::onMenuButtonClicked" );
+    LogMsg( LOG_DEBUG, "UserListWidget::onMenuButtonClicked" );
     if( userItem )
     {
         GuiUserSessionBase* userSession = userItem->getUserSession();
@@ -428,6 +428,10 @@ bool UserListWidget::isListViewMatch( GuiUser * user )
         {
             return user->isRandomConnectHosted() && !user->isAnonymous();
         }
+        else if( eUserViewTypeNearby == getUserViewType() )
+        {
+            return user->isNearby();
+        }
 
         if( user->isPeerHosted() && user->isFriend() )
         {
@@ -456,12 +460,12 @@ void UserListWidget::updateUser( GuiUser * user )
                 UserListItem* userItem = sessionToWidget( userSession );
                 if( 0 == count() )
                 {
-                    LogMsg( LOG_INFO, "add user %s\n", userSession->getOnlineName().c_str() );
+                    LogMsg( LOG_INFO, "add user %s", userSession->getOnlineName().c_str() );
                     addItem( userItem );
                 }
                 else
                 {
-                    LogMsg( LOG_INFO, "insert user %s\n", userSession->getOnlineName().c_str() );
+                    LogMsg( LOG_INFO, "insert user %s", userSession->getOnlineName().c_str() );
                     insertItem( 0, (QListWidgetItem *)userItem );
                 }
 
