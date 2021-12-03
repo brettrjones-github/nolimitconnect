@@ -205,6 +205,18 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
 }
 
 //============================================================================
+bool GuiThumbMgr::getAvatarImage( VxGUID& thumbId, QImage& image )
+{
+    bool result = getThumbImage( thumbId, image );
+    if( result && !image.isNull() )
+    {
+        result = makeCircleImage( image );
+    }
+
+    return result;
+}
+
+//============================================================================
 bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
 {
     bool result = false;
@@ -227,4 +239,21 @@ bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
     }
 
     return result;
+}
+
+//============================================================================
+bool GuiThumbMgr::makeCircleImage( QImage& image )
+{
+    QPixmap target( image.width(), image.height() );
+    target.fill( Qt::transparent );
+
+    QPainter painter( &target );
+
+    // Set clipped region (circle) in the center of the target image
+    QRegion clipRegion( QRect( 0, 0, image.width(), image.height() ), QRegion::Ellipse );
+    painter.setClipRegion( clipRegion );
+
+    painter.drawImage( 0, 0, image );
+    image = target.toImage();
+    return !image.isNull();
 }

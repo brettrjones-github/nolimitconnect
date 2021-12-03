@@ -56,8 +56,11 @@ public:
     void                        unlockThumbMgr( void )           { m_ThumbListMutex.unlock(); }
 
     GuiThumb*                   getThumb( VxGUID& thumbId );
+    bool                        getAvatarImage( VxGUID& thumbId, QImage& image ); // get rounded image for avatar
     bool                        getThumbImage( VxGUID& thumbId, QImage& image );
     GuiThumbList&               getThumbList( void )             { return m_ThumbList; }
+
+    static bool                 makeCircleImage( QImage& image );
 
 signals:
     void				        signalThumbAdded( GuiThumb* thumb ); 

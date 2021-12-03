@@ -51,7 +51,7 @@ std::string VxSktBase::m_SktDirAccept{ "<-" };
 std::string VxSktBase::m_SktDirUdp{  "<->" };
 std::string VxSktBase::m_SktDirBroadcast{ "->>" };
 std::string VxSktBase::m_SktDirLoopback{ "<==>" };
-std::string VxSktBase::m_SktDirUnknown{ "<??>" };
+std::string VxSktBase::m_SktDirUnknown{ "<?\?>" }; // use \? instead of just ? to avoid warning: trigraph ignored
 
 //============================================================================
 VxSktBase::VxSktBase()
@@ -1391,12 +1391,12 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 	}
 
     poVxThread->abortThreadRun( true );
-	poVxThread->threadAboutToExit();
     if( sktBase )
     {
         sktBase->setInUseByRxThread( false );
     }
 
+	poVxThread->threadAboutToExit();
     return nullptr;
 }
 

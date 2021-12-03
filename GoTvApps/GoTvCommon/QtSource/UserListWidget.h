@@ -90,7 +90,7 @@ protected:
  
 	//=== vars ===//
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;
-    bool                        m_ShowMyself{ true };
+    bool                        m_ShowMyself{ false };
     EUserViewType               m_UserViewType{ eUserViewTypeNone };
     EApplet						m_AppletType{ eAppletUnknown };
 };

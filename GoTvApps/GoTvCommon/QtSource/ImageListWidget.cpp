@@ -75,13 +75,17 @@ void ImageListWidget::clearItems( void )
 void ImageListWidget::resizeEvent( QResizeEvent * ev )
 {
     QListWidget::resizeEvent( ev );
-    LogMsg( LOG_DEBUG, "ImageListWidget Resize w %d h %d\n", ev->size().width(), ev->size().height() );
+    LogMsg( LOG_DEBUG, "ImageListWidget Resize w %d h %d", ev->size().width(), ev->size().height() );
     ImageListRow * listRow;
     int iIdx = 0;
     while( iIdx < this->count() )
     {
         listRow = dynamic_cast< ImageListRow * >( this->item( iIdx ) );
-        listRow->recalculateSizeHint( width(), GuiParams::getGuiScale() );
+        if( listRow )
+        {
+            listRow->recalculateSizeHint( width(), GuiParams::getGuiScale() );
+        }
+
         iIdx++;
     }
 
@@ -168,14 +172,19 @@ ImageListRow * ImageListWidget::getRowWithRoomForThumbnail( void )
 
     listRow = new ImageListRow( this );
     QListWidgetItem * lineItem = dynamic_cast< QListWidgetItem * >( listRow );
-    QWidget * lineWidget = dynamic_cast< QWidget * >( listRow );
+    if( lineItem )
+    {
+        QWidget* lineWidget = dynamic_cast< QWidget* >( listRow );
+        if( lineWidget )
+        {
+            addItem( lineItem );
+            listRow->recalculateSizeHint( width(), GuiParams::getGuiScale() );
+            listRow->setRowNum( count() );
 
-    addItem( lineItem );
-    listRow->recalculateSizeHint( width(), GuiParams::getGuiScale() );
-    listRow->setRowNum( count() );
-
-    setItemWidget( lineItem, lineWidget );
-    connect( listRow, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
+            setItemWidget( lineItem, lineWidget );
+            connect( listRow, SIGNAL( signalImageClicked( ThumbnailViewWidget* ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget* ) ) );
+        }
+    }
 
     return listRow;
 }

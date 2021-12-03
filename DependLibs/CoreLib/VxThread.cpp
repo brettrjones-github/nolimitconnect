@@ -66,7 +66,7 @@ public:
     //============================================================================
     void                        dumpThreadInfo( void )
     {
-        LogMsg( LOG_INFO, "ThreadsInfo id 0x%X thread name %s\n", m_ThreadId, m_ThreadName.c_str() );
+        LogMsg( LOG_INFO, "ThreadsInfo id 0x%X thread name %s", m_ThreadId, m_ThreadName.c_str() );
     }
 
 protected:
@@ -218,7 +218,7 @@ void VxThread::dumpRunningThreads( void )
 void VxThread::dumpThreadInfo( void )
 {
 	std::string timeStart = VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( m_ThreadStartTimeGmtMs, true );
-    LogModule( eLogThread, LOG_INFO, "Thrd: tid %d id 0x%x %s started %s\n", m_ThreadTid, m_uiThreadId, m_strThreadName.c_str(), timeStart.c_str() );
+    LogModule( eLogThread, LOG_INFO, "Thrd: tid %d id 0x%x %s started %s", m_ThreadTid, m_uiThreadId, m_strThreadName.c_str(), timeStart.c_str() );
 }
 
 //============================================================================
@@ -271,7 +271,7 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 {
     if( this->isThreadRunning() )
     {
-        LogMsg( LOG_FATAL, "ERROR VxThread::startThread thread %s still running\n", m_strThreadName.c_str() );
+        LogMsg( LOG_FATAL, "ERROR VxThread::startThread thread %s still running", m_strThreadName.c_str() );
         vx_assert( false == this->isThreadRunning() );
         return -1;
     }
@@ -309,14 +309,14 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 		}
 
         setIsThreadCreated( true );
-        LogModule( eLogThread, LOG_INFO, "VxThread:Created Thread %s thread id 0x%x\n", m_strThreadName.c_str(), m_uiThreadId );
+        LogModule( eLogThread, LOG_INFO, "VxThread:Created Thread %s thread id 0x%x", m_strThreadName.c_str(), m_uiThreadId );
 
 	#else // LINUX
 
 		int iErr;
 		if( 0 != ( iErr = pthread_attr_init( &m_ThreadAttr ) ) )
 		{
-			AppErr( eAppErrThreadCreateFailed, "VxThread:pthread_attr_init FAILED %d %d\n", VxGetLastError(), iErr );
+            AppErr( eAppErrThreadCreateFailed, "VxThread:pthread_attr_init FAILED %d %d", VxGetLastError(), iErr );
 		}
 		else
 		{
@@ -326,7 +326,7 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 				iErr = pthread_attr_getstacksize( &m_ThreadAttr, &sizetStackSize );
 				if( iErr )
 				{
-					LogMsg( LOG_FATAL, "VxThread:pthread_attr_getstacksize error %d\n", iErr );
+                    LogMsg( LOG_FATAL, "VxThread:pthread_attr_getstacksize error %d", iErr );
 				}
 				else
 				{
@@ -337,7 +337,7 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 					iErr = pthread_attr_setstacksize( &m_ThreadAttr, sizetStackSize );
 					if( iErr )
 					{
-						LogMsg( LOG_FATAL, "VxThread:pthread_attr_setstacksize error %d\n", iErr );
+                        LogMsg( LOG_FATAL, "VxThread:pthread_attr_setstacksize error %d", iErr );
 					}
 				}
 			}
@@ -345,7 +345,7 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 			iErr = pthread_attr_setdetachstate( &m_ThreadAttr, PTHREAD_CREATE_DETACHED );
 			if( iErr )
 			{
-				LogMsg( LOG_FATAL, "VxThread:pthread_attr_setdetachstate error %d\n", iErr );
+                LogMsg( LOG_FATAL, "VxThread:pthread_attr_setdetachstate error %d", iErr );
 			}
 		}
 
@@ -356,7 +356,7 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 											(void *)this) ) )	// parameter to pass to thread function
 		{
 			m_u8ThreadFlags = 0;
-			AppErr( eAppErrThreadCreateFailed, "VxThread:pthread_create FAILED %d %d\n", VxGetLastError(), iErr );
+            AppErr( eAppErrThreadCreateFailed, "VxThread:pthread_create FAILED %d %d", VxGetLastError(), iErr );
 #ifdef TARGET_OS_ANDROID
 			// android doesn't seem to have a abort
 			exit(99);
@@ -443,7 +443,7 @@ void VxThread::setIsThreadRunning( bool bIsRunning, bool calledFromStartedThread
 		m_ThreadStartTimeGmtMs	= GetGmtTimeMs();
 
         LogModule( eLogThread, LOG_ERROR,
-            "setIsThreadRunning started ? %d Thread %s id 0x%X tid %d total running %d created %d\n",
+            "setIsThreadRunning started ? %d Thread %s id 0x%X tid %d total running %d created %d",
 			(uint32_t)calledFromStartedThread,
 			m_strThreadName.c_str(),
 		    m_uiThreadId,
@@ -458,7 +458,7 @@ void VxThread::setIsThreadRunning( bool bIsRunning, bool calledFromStartedThread
 #ifdef TARGET_OS_ANDROID
 		else
 		{
-			LogMsg( LOG_ERROR, "setIsThreadRunning %s MUST HAVE CALLBACK\n", m_strThreadName.c_str() );
+            LogMsg( LOG_ERROR, "setIsThreadRunning %s MUST HAVE CALLBACK", m_strThreadName.c_str() );
 		}
 #endif // TARGET_OS_ANDROID
 
@@ -506,7 +506,7 @@ void VxThread::setIsThreadEndCallbackLocked( bool bIsLocked )
 void VxThread::threadAboutToExit( bool bExitThreadNow )  
 {
 	unsigned int thisThreadId = getThreadTid();
-    LogModule( eLogThread, LOG_DEBUG, "threadAboutToExit %s tid %d start\n", m_strThreadName.c_str(), thisThreadId );
+    LogModule( eLogThread, LOG_DEBUG, "threadAboutToExit %s tid %d start", m_strThreadName.c_str(), thisThreadId );
 
 #ifdef ENABLE_THREAD_INFO
 	//if ( false == VxIsAppShuttingDown() )
@@ -537,7 +537,7 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
 	
 	if ( m_funcExitCallback )
 	{
-       LogModule( eLogThread, LOG_ERROR, "Thread %s 0x%x tid %d exiting with callback total running %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid(), g_RuningThreadList.size() );
+       LogModule( eLogThread, LOG_ERROR, "Thread %s 0x%x tid %d exiting with callback total running %d", m_strThreadName.c_str(), m_uiThreadId, getThreadTid(), g_RuningThreadList.size() );
 
 		// if android cannot log after thread is detached in exit callback 
 		m_funcExitCallback( m_ThreadTid, m_bIsExitCallbackLocked, m_strThreadName.c_str() );
@@ -545,10 +545,10 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
 	else
 	{
 
-        LogModule( eLogThread, LOG_VERBOSE, "threadAboutToExit %s %u tid %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid() );
+        LogModule( eLogThread, LOG_VERBOSE, "threadAboutToExit %s %u tid %d", m_strThreadName.c_str(), m_uiThreadId, getThreadTid() );
 
         #ifdef TARGET_OS_ANDROID
-            LogMsg( LOG_ERROR, "threadAboutToExit %s tid %d MUST HAVE CALLBACK\n", m_strThreadName.c_str(), getThreadTid() );
+            LogMsg( LOG_ERROR, "threadAboutToExit %s tid %d MUST HAVE CALLBACK", m_strThreadName.c_str(), getThreadTid() );
         #endif // TARGET_OS_ANDROID
     }
 
@@ -557,12 +557,12 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
     m_u8ThreadFlags &= ~VX_FLAG_THREAD_RUNNING;
     m_u8ThreadFlags |= VX_FLAG_THREAD_DONE;
 
-   LogModule( eLogThread, LOG_DEBUG, "threadAboutToExit %s tid %d done\n", m_strThreadName.c_str(), thisThreadId );
+   LogModule( eLogThread, LOG_DEBUG, "threadAboutToExit %s tid %d done", m_strThreadName.c_str(), thisThreadId );
 
-	#ifndef TARGET_OS_WINDOWS
+    #ifndef TARGET_OS_WINDOWS
 		if( bExitThreadNow )
 		{
-			// linux exit thread
+            // thread about to exit really is thread exit in linux and android
 			// cannot log at this point because would require access to native java class
             pthread_exit(0);
 		}
@@ -578,7 +578,7 @@ RCODE VxThread::killThread( void )
 		return 0;
 	}
 
-    LogModule( eLogThread, LOG_ERROR, "VxThread: killThread %s id 0x%x tid %d\n", getThreadName(), getThreadId(), getThreadTid() );
+    LogModule( eLogThread, LOG_ERROR, "VxThread: killThread %s id 0x%x tid %d", getThreadName(), getThreadId(), getThreadTid() );
 
     abortThreadRun( true ); // tell thread to abort
 	if( ( m_u8ThreadFlags & VX_FLAG_THREAD_RUNNING ) 
@@ -592,7 +592,7 @@ RCODE VxThread::killThread( void )
 			if( iCnt > 600 )
 			{
 				// timeout and exit
-                LogMsg( LOG_ERROR, "VxThread: timeout of Thread %s tid %d\n", getThreadName(), getThreadTid() );
+                LogMsg( LOG_ERROR, "VxThread: timeout of Thread %s tid %d", getThreadName(), getThreadTid() );
 				return -1;
 			}
         }

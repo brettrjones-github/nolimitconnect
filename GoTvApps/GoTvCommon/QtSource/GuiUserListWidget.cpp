@@ -34,7 +34,6 @@ GuiUserListWidget::GuiUserListWidget( QWidget * parent )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
-    setShowMyself( true );
 
     connect( &m_UserMgr, SIGNAL(signalMyIdentUpdated(GuiUser *)),	            this, SLOT(slotMyIdentUpdated(GuiUser *)) );
 

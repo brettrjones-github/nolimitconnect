@@ -41,8 +41,8 @@ public:
 
     void                        clearUserList( void );
 
-    void                        setShowMyself( bool showMe )        { m_ShowMyself = showMe; }
-    bool                        getShowMyself( void )                  { return m_ShowMyself; }
+    void                        setShowMyself( bool showMe )            { m_ShowMyself = showMe; }
+    bool                        getShowMyself( void )                   { return m_ShowMyself; }
 
     void                        addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent );
     UserListItem*               addOrUpdateSession( GuiUserSessionBase* hostSession );
