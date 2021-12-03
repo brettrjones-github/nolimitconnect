@@ -24,7 +24,7 @@
 //! size
 //!   368 bytes VxConnectInfo
 // +    1 byte  VxOnlineStatusFlags
-// +    1 byte  m_u8ResBase
+// +    1 byte  m_IsOnline
 // +    1 byte  m_u8OfferCnt
 // +    1 byte  m_u8ReplyCnt
 // +    4 bytes m_u32TruthCnt;		
@@ -44,8 +44,10 @@ public:
 	bool                        operator != ( const VxNetIdentBase &rhs ) const;
 
 	VxConnectInfo&				getConnectInfo( void )					{ return *this; }
+
     void						setIsOnline( bool isOnline )		    { m_IsOnline = (uint8_t)isOnline; }
     bool						isOnline( void )					    { return (bool)m_IsOnline;  }
+
     bool                        isMyself( void );
 	bool						canDirectConnectToUser( void );
 

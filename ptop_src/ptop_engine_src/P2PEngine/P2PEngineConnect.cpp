@@ -76,7 +76,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 			}
 			else
 			{
-                LogModule( eLogConnect, LOG_VERBOSE, "NetConnector::doConnectRequest: No BigList for connected" );
+                LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectToContact: No BigList for connected" );
 			}
 		}
 	}
@@ -286,12 +286,12 @@ std::string P2PEngine::describeContact( ConnectRequest& connectRequest )
 //============================================================================
 void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected )
 {
-	if( sktBase || !poInfo )
+	if( !sktBase || !poInfo )
 	{
-
+		LogMsg( LOG_ERROR, "P2PEngine::updateOnFirstConnect: Invalid Param" );
+		return;
 	}
 
-	poInfo->setIsOnline( true );
 	int64_t timestamp = GetGmtTimeMs();
 	if( poInfo->isIgnored() )
 	{
@@ -299,13 +299,15 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		return;
 	}
 
+	poInfo->setIsOnline( true );
+
 	poInfo->setLastSessionTimeMs( timestamp );
 	poInfo->setConnectSuccessCnt( poInfo->getConnectSuccessCnt() + 1 );
 	poInfo->setConnectErrCnt( 0 );
 
 	// determine if is nearby
 	bool isNearby = false;
-	if( poInfo->getMyOnlineIPv4().isValid() && poInfo->getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() ) // uses same external ip
+	if( nearbyLanConnected || ( poInfo->getMyOnlineIPv4().isValid() && poInfo->getMyOnlineIPv4() == m_PktAnn.getMyOnlineIPv4() ) ) // uses same external ip
 	{
 		isNearby = true;
 	}
@@ -324,6 +326,20 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 	}
 
 	poInfo->setIsNearby( isNearby );
+	if( poInfo->isNearby() && poInfo->getMyFriendshipToHim() == eFriendStateAnonymous )
+	{
+		// elevate nearby to guest 
+		poInfo->setMyFriendshipToHim( eFriendStateGuest );
+	}
+
+	if( isNearby || !poInfo->requiresRelay() )
+	{
+		getDirectConnectListMgr().updateDirectConnectIdent( poInfo->getMyOnlineId(), sktBase->getConnectionId(), timestamp );
+	}
+
+	getOnlineListMgr().updateOnlineIdent( poInfo->getMyOnlineId(), sktBase->getConnectionId(), timestamp );
+
+	
 	if( isNearby )
 	{
 		getNearbyListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
@@ -334,5 +350,6 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		getFriendListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
 	}
 
+	
 	getThumbMgr().requestThumbs( sktBase, poInfo );
 }

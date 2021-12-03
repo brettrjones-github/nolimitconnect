@@ -27,7 +27,6 @@
 #include <memory.h>
 #include <stdio.h>
 
-
 //============================================================================
 //! thread function to load all nodes in big list
 static void * BigListLoadThreadFunction( void * pvParam )
@@ -95,10 +94,10 @@ RCODE BigListDb::bigListDbStartup(  const char * pDbFileName )
 #ifdef DEBUG_BIGLIST_DB
     if( 0 == rc )
 	{
-		LogMsg( LOG_INFO, "bigListDbStartup  before Restore All\n");
+		LogMsg( LOG_INFO, "bigListDbStartup  before Restore All");
 	}
 
-	LogMsg( LOG_INFO, "bigListDbStartup  result %d\n", rc );
+	LogMsg( LOG_INFO, "bigListDbStartup  result %d", rc );
 #endif // DEBUG_BIGLIST_DB
     m_BigListLoadThread.startThread( (VX_THREAD_FUNCTION_T)BigListLoadThreadFunction, &m_BigListMgr );
 
@@ -132,7 +131,7 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 	if( getNetworkKey() != networkName )
 	{
 #ifdef DEBUG_BIGLIST_DB
-        LogMsg( LOG_INFO, "BigListDb::dbRestoreAll changing networks %s to %s\n", getNetworkKey().c_str(), networkName );
+        LogMsg( LOG_INFO, "BigListDb::dbRestoreAll changing networks %s to %s", getNetworkKey().c_str(), networkName );
 #endif // DEBUG_BIGLIST_DB
 		m_NetworkName = strNetworkName;
 	}
@@ -153,6 +152,7 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 				{
 					// clear temporary flags
 					poInfo->m_u32BigListTempFlags = 0;
+					poInfo->setIsDirectConnect( false );
 					poInfo->setIsNearby(false);
 					poInfo->setIsOnline(false);
 					poInfo->setIsInDatabase( true );
@@ -191,7 +191,7 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 	retval = sqlite3_prepare( m_Db, SQL_Statement, (int)strlen(SQL_Statement), &pStatement, NULL );
 	if( !( SQLITE_OK == retval ) )
 	{
-		LogMsg( LOG_ERROR, "BigListDb::dbUpdateSessionTime:sqlite3_prepare:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR, "BigListDb::dbUpdateSessionTime:sqlite3_prepare:%s", sqlite3_errmsg( m_Db ) );
 		dbClose();
 		return -1;
 	}
@@ -199,7 +199,7 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 	retval = sqlite3_step( pStatement );
 	if( SQLITE_ERROR == retval )
 	{
-		LogMsg( LOG_ERROR, "BigListDb::dbUpdateSessionTime:sqlite3_step:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR, "BigListDb::dbUpdateSessionTime:sqlite3_step:%s", sqlite3_errmsg( m_Db ) );
 		sqlite3_finalize( pStatement );
 		dbClose();
 		return -1;
@@ -251,7 +251,7 @@ RCODE BigListDb::dbRemoveBigListInfo( VxGUID& onlineId )
 	retval = sqlite3_prepare(m_Db,SQL_Statement,(int)strlen(SQL_Statement),&pStatement, NULL);
 	if (!(SQLITE_OK == retval))
 	{
-		LogMsg( LOG_ERROR, "BigListDb::removeFriendFromDb:sqlite3_prepare:%s\n",sqlite3_errmsg(m_Db));
+		LogMsg( LOG_ERROR, "BigListDb::removeFriendFromDb:sqlite3_prepare:%s", sqlite3_errmsg(m_Db) );
 		dbClose();
 		vx_assert( false );
 		return -1;
@@ -260,7 +260,7 @@ RCODE BigListDb::dbRemoveBigListInfo( VxGUID& onlineId )
 	retval = sqlite3_step(pStatement);
 	if (SQLITE_ERROR == retval)
 	{
-		LogMsg( LOG_ERROR, "BigListDb::removeFriendFromDb:sqlite3_step:%s\n",sqlite3_errmsg(m_Db));
+		LogMsg( LOG_ERROR, "BigListDb::removeFriendFromDb:sqlite3_step:%s", sqlite3_errmsg(m_Db) );
 		sqlite3_finalize(pStatement);
 		dbClose();
 		vx_assert( false );
@@ -289,7 +289,7 @@ RCODE BigListDb::dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char * n
 	RCODE rc = saveBigListInfoIntoBlob( poInfo, &pu8Blob, &iBlobLen );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:Make Blob Error:%d\n",rc);
+		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:Make Blob Error:%d", rc );
 		vx_assert( false );
 		poInfo->setIsInDatabase( false );
 		return -1;
@@ -311,38 +311,38 @@ RCODE BigListDb::dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char * n
     retval = sqlite3_prepare( m_Db, SQL_Statement, -1, &pStatement, NULL);
     if( !(SQLITE_OK == retval) )
     {
-        LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_prepare:%s\n", sqlite3_errmsg( m_Db ) );
+        LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_prepare:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
     }
 
 	if( SQLITE_OK != sqlite3_bind_text( pStatement, 1, strOnlineIdHex.c_str(), -1, SQLITE_TRANSIENT ) )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	if( SQLITE_OK != sqlite3_bind_text( pStatement, 2, networkName, -1, SQLITE_TRANSIENT ) )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	s64LastContactMs = poInfo->getLastSessionTimeMs();
 	if( SQLITE_OK != sqlite3_bind_int64( pStatement, 3, s64LastContactMs ) ) 
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	if( SQLITE_OK != sqlite3_bind_blob( pStatement, 4, pu8Blob, iBlobLen, SQLITE_TRANSIENT ) )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_bind:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	if( SQLITE_DONE != sqlite3_step( pStatement ) )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_step:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbInsertBigListInfoIntoDb:sqlite3_step:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
@@ -371,7 +371,7 @@ RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * net
 	RCODE rc = saveBigListInfoIntoBlob( poInfo, &pu8Blob, &iBlobLen );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::InsertBlob:Make Blob Error:%d\n",rc);
+		LogMsg( LOG_ERROR,"BigListDb::InsertBlob:Make Blob Error:%d", rc );
 		vx_assert( false );
 		return -1;
 	}
@@ -398,26 +398,26 @@ RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * net
 	retval = sqlite3_prepare( m_Db, SQL_Statement,(int)strlen(SQL_Statement),&pStatement, NULL);
 	if (!(SQLITE_OK == retval))
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_prepare:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_prepare:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	s64LastContact = poInfo->getLastSessionTimeMs();
 	if( SQLITE_OK != sqlite3_bind_int64( pStatement, 1, s64LastContact ) ) 
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_bind:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_bind:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	if( SQLITE_OK != sqlite3_bind_blob( pStatement, 2, pu8Blob, iBlobLen, SQLITE_TRANSIENT) )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_bind:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_bind:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 
 	if (SQLITE_DONE != sqlite3_step( pStatement ))
 	{
-		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_step:%s\n", sqlite3_errmsg( m_Db ) );
+		LogMsg( LOG_ERROR,"BigListDb::dbUpdateBigListInfoInDb:sqlite3_step:%s", sqlite3_errmsg( m_Db ) );
 		goto error_exit;
 	}
 	
@@ -453,7 +453,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 	// read all we can with memcpy
     if( iDataLen < (int)sizeof( BigListInfoBase ) )
 	{
-		LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid BigListInfoBase length\n");
+		LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid BigListInfoBase length" );
 		rc = -1;
 	}
 	else
@@ -469,7 +469,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 			(iCnt > 1000) || 
 			((iCnt * 16) > iDataLen ) )
 		{
-			LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid incoming packet que length\n");
+			LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid incoming packet que length" );
 			rc = -2;
 		}
 		else
@@ -487,7 +487,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 				iDataLen -= iDataLen;
 				if( iDataLen < 0 )
 				{
-					LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid incoming packet length\n");
+					LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid incoming packet length" );
 					rc = -3;
 					break;
 				}
@@ -502,7 +502,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 					(iCnt > 1000) || 
 					((iCnt * 16) > iDataLen ) )
 				{
-					LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid outgoing packet que length\n");
+					LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid outgoing packet que length" );
 					rc = -4;
 				}
 				else
@@ -520,7 +520,7 @@ RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, Bi
 						iDataLen -= iDataLen;
 						if( iDataLen < 0 )
 						{
-							LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid outgoing packet length\n");
+							LogMsg( LOG_ERROR, "restoreBigListInfoFromBlob: invalid outgoing packet length" );
 							rc = -5;
 							break;
 						}

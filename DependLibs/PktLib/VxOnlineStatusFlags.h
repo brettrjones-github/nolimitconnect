@@ -32,6 +32,9 @@ public:
 
 	void						setIsNearby( bool bIsNearby );
 	bool						isNearby( void );
+	void						setIsDirectConnect( bool isDirectConnect );
+	bool						isDirectConnect( void );
+
 	void						setHasTextOffers( bool hasOffers );
 	bool						getHasTextOffers( void );
 

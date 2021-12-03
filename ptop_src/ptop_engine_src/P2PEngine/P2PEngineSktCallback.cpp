@@ -51,7 +51,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 
 	// NOTE: TODO check if is in our ip address ignore list
 	int	iDataLen =	sktBase->getSktBufDataLen();
-	if( iDataLen < 16 )
+	if( iDataLen < 32 )
 	{
 		return;
 	}

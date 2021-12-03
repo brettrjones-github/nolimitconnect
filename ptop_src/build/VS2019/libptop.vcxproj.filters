@@ -904,6 +904,12 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticast.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\DirectConnectListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1946,6 +1952,12 @@
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListCallbackInterface.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListMgr.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\DirectConnectListMgr.h">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
   </ItemGroup>

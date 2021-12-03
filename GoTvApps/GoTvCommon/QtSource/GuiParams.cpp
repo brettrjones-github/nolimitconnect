@@ -1629,6 +1629,10 @@ QString GuiParams::describeUserViewType( EUserViewType showFriendType )
         return  QObject::tr( "Nearby " );
     case eUserViewTypeGroup:
         return  QObject::tr( "Group " );
+    case eUserViewTypeOnline:
+        return  QObject::tr( "Online " );
+    case eUserViewTypeDirectConnect:
+        return  QObject::tr( "Direct Connect " );
 
     case eUserViewTypeNone:
     default:

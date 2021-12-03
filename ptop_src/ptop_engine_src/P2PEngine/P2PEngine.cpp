@@ -79,10 +79,12 @@ namespace
 //============================================================================
 P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
     : m_PeerMgr( peerMgr )
+	, m_DirectConnectListMgr( *this )
 	, m_IgnoreListMgr( *this )
 	, m_FriendListMgr( *this )
 	, m_GroupListMgr( *this )
 	, m_NearbyListMgr( *this )
+	, m_OnlineListMgr( *this )
     , m_BigListMgr( *this )
     , m_EngineSettings()
     , m_EngineParams()

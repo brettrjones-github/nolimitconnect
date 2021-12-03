@@ -36,12 +36,11 @@
 //============================================================================
 void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
-#ifdef DEBUG_CONNECTIONS
-	LogMsg( LOG_INFO, "P2PEngine::replaceConnection: %s old skt %d new skt %d\n", 
-		knownContactNameFromId( netIdent ),
-		poOldSkt->m_iSktId,
-		poNewSkt->m_iSktId );
-#endif // DEBUG_CONNECTIONS
+	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::replaceConnection: old skt %d new skt %d handle %d",
+				poOldSkt->m_iSktId,
+				poNewSkt->m_iSktId,
+				poNewSkt->m_Socket );
+
 	m_RcScan.replaceConnection( netIdent, poOldSkt, poNewSkt );
 	m_PluginMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
@@ -50,9 +49,10 @@ void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, 
 //! socket became disconnected
 void P2PEngine::onConnectionLost( VxSktBase * sktBase )								
 {
-#ifdef DEBUG_CONNECTIONS
-	LogMsg( LOG_INFO, "P2PEngine::connectionLost: skt %d\n", sktBase->m_iSktId );
-#endif // 
+	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectionLost: skt %d", sktBase->m_iSktId );
+	getDirectConnectListMgr().removeConnection( sktBase->getConnectionId() );
+	getOnlineListMgr().removeConnection( sktBase->getConnectionId() );
+
 	getHostJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
 	getUserOnlineMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
 	getUserJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );

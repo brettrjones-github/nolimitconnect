@@ -138,11 +138,24 @@ void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID on
     {
         switch( listType )
         {
+        case eUserViewTypeDirectConnect:
+            if( !user->getNetIdent().isDirectConnect() )
+            {
+                user->getNetIdent().setIsDirectConnect( true );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate direct connect" );
+            }
         case eUserViewTypeNearby:
             if( !user->getNetIdent().isNearby() )
             {
                 user->getNetIdent().setIsNearby( true );
                 LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate nearby" );
+            }
+            break;
+        case eUserViewTypeOnline:
+            if( !user->getNetIdent().isOnline() )
+            {
+                user->getNetIdent().setIsOnline( true );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate online" );
             }
             break;
 
@@ -181,11 +194,27 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
     {
         switch( listType )
         {
+        case eUserViewTypeDirectConnect:
+            if( user->getNetIdent().isDirectConnect() )
+            {
+                user->getNetIdent().setIsDirectConnect( false );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT direct connect" );
+            }
+            break;
+
         case eUserViewTypeNearby:
             if( user->getNetIdent().isNearby() )
             {
                 user->getNetIdent().setIsNearby( false );
                 LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT nearby" );
+            }
+            break;
+
+        case eUserViewTypeOnline:
+            if( user->getNetIdent().isOnline() )
+            {
+                user->getNetIdent().setIsOnline( false );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT online" );
             }
             break;
 

@@ -154,6 +154,7 @@ bool AssetBaseInfoDb::addAsset( VxGUID&			assetId,
     bindList.add( (uint64_t)accessedTimeStamp );
     bindList.add( assetTag );
     bindList.add( (int)sendState );
+    bindList.add( (int)isTemp );
 
     RCODE rc = sqlExec( "INSERT INTO tblAssets (unique_id,creatorId,historyId,thumbId,assetName,length,type,hashId,locFlags,attribFlags,creationTime,modifiedTime,accessedTime,assetTag,sendState,isTemp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         bindList );

@@ -157,6 +157,8 @@ enum EUserViewType
     eUserViewTypeEverybody,
     eUserViewTypeIgnored,
     eUserViewTypeNearby,
+    eUserViewTypeOnline,
+    eUserViewTypeDirectConnect,
 
     eMaxUserViewTypeNone,
 };
