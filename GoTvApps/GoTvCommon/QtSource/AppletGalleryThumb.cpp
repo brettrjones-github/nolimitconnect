@@ -80,12 +80,17 @@ void AppletGalleryThumb::showEvent( QShowEvent * ev )
 //============================================================================
 void AppletGalleryThumb::loadAssets( void )
 {
+    std::vector<VxGUID>& emoticonIdList = m_ThumbMgr.getEmoticonIdList();
     std::vector<AssetBaseInfo*>& assetList = m_ThumbMgr.getAssetBaseInfoList();
     for( AssetBaseInfo* assetInfo : assetList )
     {
         if( assetInfo && eAssetTypeThumbnail == assetInfo->getAssetType() )
         {
-            ui.m_ImageListWidget->addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
+            // dont include emoticons
+            if( emoticonIdList.end() == std::find( emoticonIdList.begin(), emoticonIdList.end(), assetInfo->getAssetUniqueId() ) )
+            {
+                ui.m_ImageListWidget->addAsset( dynamic_cast< ThumbInfo* >( assetInfo ) );
+            }
         }
     }
 }

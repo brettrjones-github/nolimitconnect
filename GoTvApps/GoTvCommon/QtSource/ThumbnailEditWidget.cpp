@@ -244,7 +244,7 @@ void ThumbnailEditWidget::slotThumbGalleryClick( void )
 //============================================================================
 void ThumbnailEditWidget::slotEmoticonGalleryClick( void )
 {
-    AppletGalleryEmoticon * galleryEmoticon = dynamic_cast< AppletGalleryEmoticon* >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryThumb, m_ParentApplet ) );
+    AppletGalleryEmoticon * galleryEmoticon = dynamic_cast< AppletGalleryEmoticon* >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryEmoticon, m_ParentApplet ) );
     if( galleryEmoticon )
     {
         connect( galleryEmoticon, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );

@@ -244,6 +244,7 @@ bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
 //============================================================================
 void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
 {
+    const int emoteMargin = 20;
     ThumbMgr& thumbMgr = m_MyApp.getEngine().getThumbMgr();
     std::vector<VxGUID>& emoticonIdList = thumbMgr.getEmoticonIdList();
     int emoticonNum = 0;
@@ -252,6 +253,7 @@ void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
         if( assetGuid.isVxGUIDValid() )
         {
             bool assetExists = false;
+
             thumbMgr.lockResources();
             ThumbInfo* thumbInfo = dynamic_cast< ThumbInfo* >( thumbMgr.findAsset( assetGuid ) );
             if( thumbInfo )
@@ -272,14 +274,19 @@ void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
             if( GuiHelpers::createThumbFileName( assetGuid, fileName ) )
             {
                 QPixmap image;
-                QSize imageSize( GuiParams::getThumbnailSize().width() - 10, GuiParams::getThumbnailSize().height() - 10 );
+                QSize imageSize( GuiParams::getThumbnailSize().width() - emoteMargin * 2, GuiParams::getThumbnailSize().height() - emoteMargin * 2 );
                 if( m_MyApp.getThumbMgr().getEmoticonImage( emoticonNum, imageSize, image ) )
                 {
-                    QPixmap fullThumbnail( GuiParams::getThumbnailSize() );
-                    //QPainter painter( &fullThumbnail );
-                    // painter.drawPixmap( 5, 5, image.width(), image.height(), image );
+                    QPixmap finalThumbnail( GuiParams::getThumbnailSize() );
+                    finalThumbnail.fill( QColor( COLOR_TRANSPARENT ) );
+                    QPainter painter( &finalThumbnail );
+                    painter.setRenderHint( QPainter::Antialiasing, true );
+                    painter.setRenderHint( QPainter::TextAntialiasing, true );
+                    painter.setRenderHint( QPainter::SmoothPixmapTransform, true );
 
-                    uint64_t fileLen = GuiHelpers::saveToPngFile( image, fileName );
+                    painter.drawPixmap( emoteMargin, emoteMargin, image.width(), image.height(), image );
+
+                    uint64_t fileLen = GuiHelpers::saveToPngFile( finalThumbnail, fileName );
                     if( fileLen )
                     {
                         ThumbInfo assetInfo( ( const char* )fileName.toUtf8().constData(), fileLen );
