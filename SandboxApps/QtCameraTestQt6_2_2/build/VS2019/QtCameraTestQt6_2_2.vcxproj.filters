@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\QtSource\camera.cpp" />
+    <ClCompile Include="..\..\QtSource\imagesettings.cpp" />
+    <ClCompile Include="..\..\QtSource\main.cpp" />
+    <ClCompile Include="..\..\QtSource\metadatadialog.cpp" />
+    <ClCompile Include="..\..\QtSource\videosettings.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\..\QtSource\camera.h" />
+    <QtMoc Include="..\..\QtSource\imagesettings.h" />
+    <QtMoc Include="..\..\QtSource\metadatadialog.h" />
+    <QtMoc Include="..\..\QtSource\videosettings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\QtSource\camera.pro" />
+    <None Include="..\..\QtSource\camera.pro.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="..\..\QtSource\camera.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="..\..\QtSource\camera.ui" />
+    <QtUic Include="..\..\QtSource\camera_mobile.ui" />
+    <QtUic Include="..\..\QtSource\imagesettings.ui" />
+    <QtUic Include="..\..\QtSource\videosettings.ui" />
+    <QtUic Include="..\..\QtSource\videosettings_mobile.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\QtSource\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="android">
+      <UniqueIdentifier>{3113a673-03d6-486a-8f17-a7cbe80ef9ec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\QtSource\android\AndroidManifest.xml">
+      <Filter>android</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
