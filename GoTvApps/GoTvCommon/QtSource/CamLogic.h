@@ -40,12 +40,15 @@
 #endif //  QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
 class AppCommon;
+class QVideoWidget;
 
 class CamLogic : public QWidget
 {
     Q_OBJECT
 
 public:
+    const int CAM_SNAPSHOT_INTERVAL_MS = 60;
+
     CamLogic( AppCommon& myApp );
     virtual ~CamLogic() = default;
 
@@ -73,6 +76,11 @@ public:
 
     void                        toGuiWantVideoCapture( bool wantVidCapture );
 
+    QString                     getCamDescription( void )                               { return m_CamDescription; }
+
+signals:
+    void                        signalCameraDescription( QString camDescription );
+
 public slots:
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
     void setCamera( const QCameraDevice& cameraDevice );
@@ -80,31 +88,34 @@ public slots:
     void setCamera( const QCameraInfo &cameraInfo );
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
-    void startCamera();
-    void stopCamera();
+    void                        startCamera();
+    void                        stopCamera();
 
-    void record();
-    void pause();
-    void stop();
-    void setMuted( bool );
+    void                        nextCamera( void );
 
-    void toggleLock();
+    void                        record();
+    void                        pause();
+    void                        stop();
+    void                        setMuted( bool );
+
+    void                        toggleLock();
  
-    void configureCaptureSettings();
-    void configureVideoSettings();
-    void configureImageSettings();
+    void                        configureCaptureSettings();
+    void                        configureVideoSettings();
+    void                        configureImageSettings();
 
-    void displayRecorderError();
-    void displayCameraError();
+    void                        displayRecorderError();
+    void                        displayCameraError();
 
-    void updateCameraDevice( QAction *action );
+    void                        updateCameraDevice( QAction *action );
 ;
-    void updateCaptureMode( int );
-    void setExposureCompensation( int index );
+    void                        updateCaptureMode( int );
+    void                        setExposureCompensation( int index );
 
-    void updateRecordTime();
+    void                        updateRecordTime();
 
-    void processCapturedImage( int requestId, const QImage &img );
+    void                        processCapturedImage( int requestId, const QImage &img );
+    void                        imageAvailable(int id, const QVideoFrame &vidFrame );
 
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
     void updateCameraActive( bool active );
@@ -117,23 +128,27 @@ public slots:
     void displayCaptureError(int, QCameraImageCapture::Error, const QString& errorString);
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
-    void displayViewfinder();
-    void displayCapturedImage();
+    void                        displayViewfinder();
+    void                        displayCapturedImage();
 
-    void readyForCapture( bool ready );
-    void imageSaved( int id, const QString &fileName );
+    void                        readyForCapture( bool ready );
+    void                        imageSaved( int id, const QString &fileName );
 
-    void slotTakeSnapshot( void );
+    void                        slotTakeSnapshot( void );
 
 protected:
-    void keyPressEvent( QKeyEvent *event ) override;
-    void keyReleaseEvent( QKeyEvent *event ) override;
-    void closeEvent( QCloseEvent *event ) override;
+    void                        keyPressEvent( QKeyEvent *event ) override;
+    void                        keyReleaseEvent( QKeyEvent *event ) override;
+    void                        closeEvent( QCloseEvent *event ) override;
 
-private:
+    void                        selectVideoFormat( const QCameraDevice& cameraDevice );
+
+    QVideoWidget *              getViewFinderWidget( void );
+
     AppCommon&                  m_MyApp;
     uint32_t                    m_CamId{ 1 };
-    bool                        m_CamInitiated = false;
+    bool                        m_CamsEnumerated{ false };
+    bool                        m_CamInitiated{ false };
     bool                        m_ShowPreview{ false };
     uint32_t                    m_CamRotation{ 0 };
     uint32_t                    m_FeedRotation{ 0 };
@@ -161,6 +176,8 @@ private:
     QAudioEncoderSettings       m_audioSettings;
     QVideoEncoderSettings       m_videoSettings;
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    QString                     m_CamDescription;
+    QVideoWidget *              m_VideoWidget{nullptr};
 };
 
 

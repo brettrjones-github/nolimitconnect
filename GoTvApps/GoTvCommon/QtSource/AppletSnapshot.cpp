@@ -48,11 +48,21 @@ AppletSnapshot::AppletSnapshot(	AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    ui.m_ImageScreen->setFixedSize( 320, 240 );
-    ui.m_SnapshotScreen->setFixedSize( 320, 240 );
+    ui.m_ImageScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
+    ui.m_SnapshotScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
+
+    ui.m_CamStopStartButton->setVisible( false );
+    ui.m_CamStopStartButton->setFixedSize( eButtonSizeMedium );
+
+    ui.m_CamFrontBackButton->setFixedSize( eButtonSizeMedium );
+    ui.m_CamFrontBackButton->setIcon( eMyIconSelectCameraNormal );
 
     connect( ui.snapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapShotButClick() ) );
     connect( ui.m_DoneButton, SIGNAL( clicked() ), this, SLOT( onDoneButClick() ) );
+    connect( ui.m_CamFrontBackButton, SIGNAL( clicked() ), this, SLOT( onCamFrontBackButClick() ) );
+    connect( &m_MyApp.getCamLogic(), SIGNAL( signalCameraDescription(QString) ), this, SLOT( slotCameraDescription( QString ) ) );
+
+    ui.m_CamNameLabel->setText( m_MyApp.getCamLogic().getCamDescription() );
 
     if( m_MyApp.getCamLogic().isCamAvailable() )
     {
@@ -126,6 +136,12 @@ void AppletSnapshot::onDoneButClick( void )
     onBackButtonClicked();
 }
 
+//============================================================================ 
+void AppletSnapshot::onCamFrontBackButClick( void )
+{
+    m_MyApp.getCamLogic().nextCamera();
+}
+
 //============================================================================
 void AppletSnapshot::onCloseEvent( void )
 {
@@ -133,3 +149,8 @@ void AppletSnapshot::onCloseEvent( void )
     AppletBase::onCloseEvent();
 }
 
+//============================================================================
+void AppletSnapshot::slotCameraDescription( QString camDescription )
+{
+    ui.m_CamNameLabel->setText( camDescription );
+}

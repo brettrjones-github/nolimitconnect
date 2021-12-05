@@ -143,6 +143,7 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -174,6 +175,7 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -205,6 +207,7 @@
         <property name="font">
          <font>
           <pointsize>11</pointsize>
+          <weight>50</weight>
           <bold>false</bold>
          </font>
         </property>
@@ -417,7 +420,7 @@
        </widget>
       </item>
       <item>
-       <widget class="VxPushButton" name="m_CameraButton">
+       <widget class="VxPushButton" name="m_CameraStartStopButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -505,6 +508,7 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -536,6 +540,7 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -567,6 +572,7 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -623,6 +629,7 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>

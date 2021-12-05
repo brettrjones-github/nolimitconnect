@@ -60,8 +60,10 @@ public:
     static int                  getControlIndicatorWidth( void );
     /// @brief thumbnails are square so this is both width and height
     static QSize                getThumbnailSize( void );
+    /// @brief camera video size desired for processing
+    static QSize                getSnapshotDesiredSize( void );
     /// @brief camera video size mulitiplied by display scale
-    static QSize                getSnapshotSize( void );
+    static QSize                getSnapshotScaledSize( void );
 
     static bool                 canFitIcons( EButtonSize buttonSize, int iconCnt, int sizeWidth );
 

@@ -24,6 +24,9 @@
 Q_DECLARE_METATYPE( QCameraInfo )
 #else
 # include <QMediaDevices>
+# include <QVideoWidget>
+# include <QAudioInput>
+# include <QAudioOutput>
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
@@ -36,12 +39,12 @@ namespace
 
 //============================================================================
 CamLogic::CamLogic( AppCommon& myApp )
-    : QWidget(nullptr)
+    : QWidget(&myApp)
     , m_MyApp( myApp )
     , m_SnapshotTimer( new QTimer( this ))
 {
     connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
-    m_SnapshotTimer->setInterval( 60 );
+    m_SnapshotTimer->setInterval( CAM_SNAPSHOT_INTERVAL_MS );
 }
 
 //============================================================================
@@ -202,6 +205,8 @@ bool CamLogic::assureCamInitiated( void )
 //============================================================================
 void CamLogic::setCamera( const QCameraDevice& cameraDevice )
 {
+    bool isStarted = m_CamIsStarted;
+    cameraEnable( false );
     m_camera.reset( new QCamera( cameraDevice ) );
     m_captureSession.setCamera( m_camera.data() );
 
@@ -219,6 +224,10 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     connect( m_mediaRecorder.data(), &QMediaRecorder::durationChanged, this, &CamLogic::updateRecordTime );
     connect( m_mediaRecorder.data(), &QMediaRecorder::errorChanged, this, &CamLogic::displayRecorderError );
 
+    // HACK ALERT
+    // some devices require the video output to be set even if invisible.. some do not
+    // set video output to an invisible widget or we will never get the capture ready event
+    m_captureSession.setVideoOutput(getViewFinderWidget());
 
     updateCameraActive( m_camera->isActive() );
     updateRecorderState( m_mediaRecorder->recorderState() );
@@ -228,15 +237,36 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     connect( m_imageCapture, &QImageCapture::imageSaved, this, &CamLogic::imageSaved );
     connect( m_imageCapture, &QImageCapture::errorOccurred, this, &CamLogic::displayCaptureError );
 
+    connect( m_imageCapture, &QImageCapture::imageAvailable, this, &CamLogic::imageAvailable );
+
     readyForCapture( m_imageCapture->isReadyForCapture() );
+
+    selectVideoFormat( cameraDevice );
 
     updateCaptureMode( 0 );
 
+    if( m_captureSession.audioInput() )
+    {
+        m_captureSession.audioInput()->setMuted(true);
+    }
+
+    if( m_captureSession.audioOutput() )
+    {
+        m_captureSession.audioOutput()->setMuted(true);
+    }
+
     //m_imageCapture->setFileFormat( boxValue( ui->imageCodecBox ).value<QImageCapture::FileFormat>() );
-    m_imageCapture->setQuality( QImageCapture::HighQuality );
-    m_imageCapture->setResolution( QSize( 320, 240 ) );
+    //m_imageCapture->setQuality( QImageCapture::HighQuality );
+    //m_imageCapture->setResolution( GuiParams::getSnapshotDesiredSize() );
+
+    m_CamDescription = cameraDevice.description();
+    emit signalCameraDescription( m_CamDescription );
 
     m_CamInitiated = true;
+    if( isStarted )
+    {
+        cameraEnable( true );
+    }
 }
 
 #else
@@ -268,11 +298,77 @@ void CamLogic::setCamera( const QCameraInfo &cameraInfo )
 
     QCameraImageCapture *imagecapture = m_imageCapture.data();
     QImageEncoderSettings settings = imagecapture->encodingSettings();
-    settings.setResolution( QSize( 320, 240 ) );
+    settings.setResolution( GuiParams::getSnapshotSize() );
     m_imageCapture->setEncodingSettings( settings );
     m_CamInitiated = true;
 }
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
+
+//============================================================================
+void CamLogic::selectVideoFormat( const QCameraDevice& cameraDevice )
+{
+    if( m_camera->cameraFormat().isNull() ) 
+    {
+        // Setting default settings.
+        // The biggest resolution and the max framerate
+        QSize targetSize( GuiParams::getSnapshotDesiredSize() );
+        auto formats = cameraDevice.videoFormats();
+        if( !formats.isEmpty() ) 
+        {
+            auto defaultFormat = formats.first();
+            bool defaultFormatInvalid = true;
+            LogMsg( LOG_VERBOSE, "Default camera resolution w %d h %d min fps %3.1f max fps %3.1f", defaultFormat.resolution().width(),
+                defaultFormat.resolution().height(), defaultFormat.minFrameRate(), defaultFormat.maxFrameRate() );
+            if( defaultFormat.resolution().width() >= targetSize.width() && defaultFormat.resolution().height() >= targetSize.height() )
+            {
+                defaultFormatInvalid = false;
+            }
+
+            int formatNum = 0;
+            int defaultFormatNum = 0;
+            for( const auto& format : formats ) 
+            {
+                formatNum++;
+                LogMsg( LOG_VERBOSE, "Format %d camera resolution w %d h %d min fps %3.1f max fps %3.1f", formatNum, format.resolution().width(),
+                    format.resolution().height(), format.minFrameRate(), format.maxFrameRate() );
+                if( format.resolution().width() >= targetSize.width() && format.resolution().height() >= targetSize.height() )
+                {
+                    if( defaultFormatInvalid || ( format.resolution().width() - targetSize.width() < defaultFormat.resolution().width() - targetSize.width() )
+                        || ( format.resolution().height() - targetSize.height() < defaultFormat.resolution().height() - targetSize.height() ) )
+                    {
+                        LogMsg( LOG_VERBOSE, "Found better camera resolution %d w %d h %d min fps %3.1f max fps %3.1f", formatNum, format.resolution().width(),
+                            format.resolution().height(), format.minFrameRate(), format.maxFrameRate() );
+                        defaultFormat = format;
+                        if( defaultFormat.resolution().width() >= targetSize.width() && defaultFormat.resolution().height() >= targetSize.height() )
+                        {
+                            defaultFormatInvalid = false;
+                            defaultFormatNum = formatNum;
+                        }
+                    }
+                }
+            }
+
+            float desiredFps = 1000 / ( CAM_SNAPSHOT_INTERVAL_MS / 2 ); // request frame rate toughly twice as fast a snapshot interval
+            LogMsg( LOG_VERBOSE, "Seting Format %d resolution w %d h %d min fps %3.1f max fps %3.1f desired fps %3.1f", formatNum, defaultFormat.resolution().width(),
+                defaultFormat.resolution().height(), defaultFormat.minFrameRate(), defaultFormat.maxFrameRate(), desiredFps);
+
+            m_camera->setCameraFormat( defaultFormat );
+
+            if( desiredFps >= defaultFormat.minFrameRate() && desiredFps <= defaultFormat.maxFrameRate() )
+            {
+                m_mediaRecorder->setVideoFrameRate( desiredFps );
+            }
+            else if( desiredFps >= defaultFormat.maxFrameRate() )
+            {
+                m_mediaRecorder->setVideoFrameRate( defaultFormat.maxFrameRate() );
+            }
+            else if( desiredFps <= defaultFormat.minFrameRate()  )
+            {
+                m_mediaRecorder->setVideoFrameRate( defaultFormat.minFrameRate() );
+            }
+        }
+    }
+}
 
 //============================================================================
 void CamLogic::keyPressEvent( QKeyEvent * event )
@@ -461,9 +557,11 @@ void CamLogic::updateCameraActive( bool active )
     }
 }
 
+//============================================================================
 void CamLogic::updateRecorderState( QMediaRecorder::RecorderState state )
 {
-    switch( state ) {
+    switch( state ) 
+    {
     case QMediaRecorder::StoppedState:
         LogMsg( LOG_VERBOSE, "QMediaRecorder stopped " );
         break;
@@ -475,6 +573,8 @@ void CamLogic::updateRecorderState( QMediaRecorder::RecorderState state )
         break;
     }
 }
+
+//============================================================================
 void CamLogic::displayCaptureError( int id, const QImageCapture::Error error, const QString& errorString )
 {
     Q_UNUSED( id );
@@ -672,6 +772,7 @@ void CamLogic::displayCapturedImage()
 void CamLogic::readyForCapture( bool ready )
 {
     m_ReadyForCapture = ready;
+    LogMsg( LOG_ERROR, "CamLogic::readyForCapture ? %d", ready );
 }
 
 //============================================================================
@@ -696,4 +797,62 @@ void CamLogic::closeEvent( QCloseEvent *event )
     else {
         event->accept();
     }
+}
+
+//============================================================================
+void CamLogic::nextCamera( void )
+{
+    const QList<QCameraDevice> availableCameras = QMediaDevices::videoInputs();
+    bool foundDevice = false;
+    bool setNewDevice = false;
+    if( availableCameras.size() > 1 )
+    {
+        for( const QCameraDevice& cameraDevice : availableCameras )
+        {
+            if( cameraDevice.description() == m_CamDescription )
+            {
+                foundDevice = true;
+            }
+
+            if( foundDevice && !( m_CamDescription == cameraDevice.description() ) )
+            {
+                setCamera( cameraDevice );
+                setNewDevice = true;
+                return;
+            }
+        }
+
+        if( !foundDevice || !setNewDevice )
+        {
+            setCamera( availableCameras.front() );
+        }
+    }
+}
+
+//============================================================================
+QVideoWidget * CamLogic::getViewFinderWidget( void )
+{
+    if( !m_VideoWidget )
+    {
+        m_VideoWidget = new QVideoWidget( this );
+        m_VideoWidget->setFixedSize( GuiParams::getSnapshotDesiredSize() );
+        m_VideoWidget->setVisible( false );
+        m_VideoWidget->setEnabled( true );
+    }
+
+    return m_VideoWidget;
+}
+
+//============================================================================
+void CamLogic::imageAvailable(int id, const QVideoFrame &vidFrame )
+{
+    static int64_t lastTimeMs = 0;
+    int64_t timeMs = GetTimeStampMs();
+    if( lastTimeMs == 0 )
+    {
+        lastTimeMs = timeMs;
+    }
+
+    LogMsg( LOG_VERBOSE, "CamLogic::imageAvailable id %d elapsed ms %lld", id, timeMs - lastTimeMs );
+    lastTimeMs = timeMs;
 }

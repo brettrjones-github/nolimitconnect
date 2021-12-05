@@ -105,7 +105,13 @@ QSize GuiParams::getThumbnailSize( void )
 }
 
 //============================================================================
-QSize GuiParams::getSnapshotSize( void )
+QSize GuiParams::getSnapshotDesiredSize( void )
+{
+    return QSize( 320, 240 );
+}
+
+//============================================================================
+QSize GuiParams::getSnapshotScaledSize( void )
 {
     return QSize( getScaled(320), getScaled(240) );
 }

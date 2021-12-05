@@ -119,6 +119,7 @@ void Camera::setCamera(const QCameraDevice &cameraDevice)
 
     connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &Camera::setExposureCompensation);
 
+    // ui->viewfinder->setVisible( false );
     m_captureSession.setVideoOutput(ui->viewfinder);
 
     updateCameraActive(m_camera->isActive());

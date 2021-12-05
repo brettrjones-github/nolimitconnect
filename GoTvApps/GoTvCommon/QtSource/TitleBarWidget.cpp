@@ -47,7 +47,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     ui.m_ShareOfferListButton->setFixedSize( eButtonSizeSmall );
     ui.m_MuteMicButton->setFixedSize( eButtonSizeSmall );
     ui.m_MuteSpeakerButton->setFixedSize( eButtonSizeSmall );
-    ui.m_CameraButton->setFixedSize( eButtonSizeSmall );
+    ui.m_CameraStartStopButton->setFixedSize( eButtonSizeSmall );
     ui.m_TrashButton->setFixedSize( eButtonSizeSmall );
     ui.m_ShareButton->setFixedSize( eButtonSizeSmall );
     ui.m_MenuTopButton->setFixedSize( eButtonSizeSmall );
@@ -112,7 +112,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
     connect( ui.m_BackDlgButton,        SIGNAL( clicked() ), this, SLOT( slotBackButtonClicked() ) );
     connect( ui.m_MuteMicButton,        SIGNAL( clicked() ), this, SLOT( slotMuteMicButtonClicked() ) );
     connect( ui.m_MuteSpeakerButton,    SIGNAL( clicked() ), this, SLOT( slotMuteSpeakerButtonClicked() ) );
-    connect( ui.m_CameraButton,         SIGNAL( clicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
+    connect( ui.m_CameraStartStopButton,         SIGNAL( clicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
     connect( ui.m_CamPreviewScreen,     SIGNAL( clicked() ), this, SLOT( slotCamPreviewClicked() ) );
     connect( &m_MyApp,                  SIGNAL( signalStatusMsg( QString ) ), this, SLOT( slotTitleStatusBarMsg( QString ) ) );
     connect( &m_MyApp,                  SIGNAL( signalToGuiPluginStatus( EPluginType, int, int ) ), this, SLOT( slotToGuiPluginStatus( EPluginType, int, int ) ) );
@@ -501,7 +501,7 @@ void TitleBarWidget::setMicrophoneVolumeVisibility( bool visible )
 //============================================================================
 void TitleBarWidget::setCameraButtonVisibility( bool visible )
 {
-	ui.m_CameraButton->setVisible( visible );
+	ui.m_CameraStartStopButton->setVisible( visible );
 }
 
 //============ set button icon ============//
@@ -532,7 +532,7 @@ void TitleBarWidget::setSpeakerIcon( EMyIcons myIcon )
 //============================================================================
 void TitleBarWidget::setCameraIcon( EMyIcons myIcon )
 {
-	ui.m_CameraButton->setIcon( myIcon );
+	ui.m_CameraStartStopButton->setIcon( myIcon );
 }
 
 //============================================================================
@@ -587,7 +587,7 @@ void TitleBarWidget::setSpeakerColor( QColor iconColor )
 //============================================================================
 void TitleBarWidget::setCameraColor( QColor iconColor )
 {
-	ui.m_CameraButton->setIconOverrideColor( iconColor );
+	ui.m_CameraStartStopButton->setIconOverrideColor( iconColor );
 }
 
 //============================================================================

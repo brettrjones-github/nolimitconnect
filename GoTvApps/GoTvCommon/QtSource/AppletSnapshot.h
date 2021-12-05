@@ -36,6 +36,8 @@ public slots:
     void						onSnapShotButClick( void );
     void						onCancelButClick( void );
     void                        onDoneButClick( void );
+    void                        onCamFrontBackButClick( void );
+    void                        slotCameraDescription( QString camDescription );
 
 protected:
     virtual void				callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 ) override;
