@@ -27,7 +27,7 @@ public:
 	virtual ~PluginConnectionTestHost() override = default;
 
     void                        testIsMyPortOpen( void );
-    RCODE                       handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+    RCODE                       handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr ) override;
     RCODE                       internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 protected:

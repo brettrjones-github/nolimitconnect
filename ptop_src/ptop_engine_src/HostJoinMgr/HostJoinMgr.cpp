@@ -309,7 +309,6 @@ void HostJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginTy
 void HostJoinMgr::fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList )
 {
     // NOTE: assumes resources have been locked
-    HostJoinInfo* joinFoundInfo = nullptr;
     for( auto* joinInfo : m_HostJoinInfoList )
     {
         if( joinInfo->getPluginType() == pluginType && joinInfo->getJoinState() == joinState )
@@ -325,7 +324,6 @@ int HostJoinMgr::fromGuiGetJoinedListCount( EPluginType pluginType )
     int joinedCnt = 0;
     lockResources();
 
-    HostJoinInfo* joinFoundInfo = nullptr;
     for( auto joinInfo : m_HostJoinInfoList )
     {
         if( joinInfo->getPluginType() == pluginType )

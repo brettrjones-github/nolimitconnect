@@ -69,6 +69,7 @@ public:
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
     virtual bool                requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
+    virtual bool                requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
     virtual bool                requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo );
 
 protected:

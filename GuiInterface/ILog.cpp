@@ -1,4 +1,5 @@
-#include <CommonHdr.h>
+#include <QPushButton>
+
 #include "ILog.h"
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>

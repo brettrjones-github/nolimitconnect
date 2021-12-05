@@ -36,7 +36,7 @@ public:
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 
-    void                        loadAssets( void );
+    void                        loadThumbAssets( void );
     void                        clearImages( void );
     void                        clearItems( void );
 

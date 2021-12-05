@@ -243,7 +243,7 @@ CVertexBuffer RenderGlWidget::createVertexBuffer( CGUIFontTTFQt * font, const st
 
     return CVertexBuffer( (unsigned int)bufferHandle, vertices.size() / 4, font );
 }
-#endif .. ENABLE_KODI
+#endif // ENABLE_KODI
 
 //============================================================================
 void RenderGlWidget::destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer& vertBuffer )

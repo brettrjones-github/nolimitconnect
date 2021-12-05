@@ -59,7 +59,8 @@ public:
     };
 
     virtual AssetBaseInfoDb&    getAssetInfoDb( void )                                  { return m_AssetBaseInfoDb; }
-    virtual std::vector<AssetBaseInfo*>&	getAssetBaseInfoList( void )				{ return m_AssetBaseInfoList; }
+    virtual std::vector<AssetBaseInfo*>& getAssetBaseInfoList( void )					{ return m_AssetBaseInfoList; }
+	virtual std::vector<VxGUID>& getEmoticonIdList( void )								{ return m_EmoticonIdList; }
 
     // startup when user specific directory has been set after user logs on
     virtual void				fromGuiUserLoggedOn( void );
@@ -97,9 +98,9 @@ public:
 	uint16_t					getAssetBaseFileTypes( void )				{ return m_u16AssetBaseFileTypes; }
 	void						updateAssetFileTypes( void );
 
-	void						lockFileListPackets( void )				{ m_FileListPacketsMutex.lock(); }
-	void						unlockFileListPackets( void )			{ m_FileListPacketsMutex.unlock(); }
-	std::vector<PktFileListReply*>&	getFileListPackets( void )			{ return m_FileListPackets; }
+	void						lockFileListPackets( void )					{ m_FileListPacketsMutex.lock(); }
+	void						unlockFileListPackets( void )				{ m_FileListPacketsMutex.unlock(); }
+	std::vector<PktFileListReply*>&	getFileListPackets( void )				{ return m_FileListPackets; }
 	void						updateFileListPackets( void );
 
     AssetBaseInfo * 			addAssetFile( EAssetType assetType, const char * fileName, uint64_t fileLen );
@@ -183,5 +184,6 @@ private:
     bool						m_AssetBaseListInitialized{ false };
     AssetBaseInfoDb&			m_AssetBaseInfoDb;
     std::vector<AssetBaseInfo*>	m_AssetBaseInfoList;
+	static std::vector<VxGUID>	m_EmoticonIdList;
 };
 

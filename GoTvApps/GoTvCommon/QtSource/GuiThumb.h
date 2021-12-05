@@ -16,14 +16,12 @@
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxGUID.h>
 
-#include <set>
-
 #include <QWidget>
 
 class AppCommon;
 class GuiThumbMgr;
 class ThumbInfo;
-class VxSktBase;
+class QImage;
 
 class GuiThumb : public QWidget
 {

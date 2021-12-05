@@ -141,16 +141,16 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QPushButton" name="cancelButton">
+      <widget class="QPushButton" name="snapshotButton">
        <property name="text">
-        <string>Cancel</string>
+        <string>Take Snap Shot</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="snapshotButton">
+      <widget class="QPushButton" name="m_DoneButton">
        <property name="text">
-        <string>Take Snap Shot</string>
+        <string>Done</string>
        </property>
       </widget>
      </item>

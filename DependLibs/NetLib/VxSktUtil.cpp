@@ -2171,12 +2171,18 @@ uint16_t VxGetRmtPort( SOCKET skt )
 //============================================================================
 const char * VxDescribeSktError( int iErr )
 {
-    if( iErr == 0xFFFFFFFF )
+	static char as8Buf[128];
+
+    if( iErr < 0 )
     {
-        return "Connection Dropped";
+        return "Connection Dropped (negative error value)";
     }
 
-	static char as8Buf[ 128 ];
+	if( iErr == 0 )
+	{
+		return "Socket Error 0 Unknown";
+	}
+
 #ifdef TARGET_OS_WINDOWS
 	switch ( iErr )
 	{
@@ -2221,7 +2227,7 @@ const char * VxDescribeSktError( int iErr )
 	default:				return "Windows Unknown socket error";
 	}
 #else
-	LogMsg( LOG_ERROR, "VxDescribeSktError Linux %d\n", iErr );
+	LogMsg( LOG_ERROR, "VxDescribeSktError Linux %d", iErr );
 	switch ( iErr )
 	{
 	case 1: // EPERM

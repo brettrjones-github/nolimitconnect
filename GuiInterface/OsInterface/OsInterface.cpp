@@ -500,7 +500,7 @@ bool OsInterface::initUserPaths()
 
     std::string kodiStoragePath = storageDir + "kodi";
     VxFileUtil::makeDirectory( kodiStoragePath );
-    std::string gotvStorageDir = storageDir + "gotv";
+    std::string gotvStorageDir = storageDir + "nolimit";
     VxFileUtil::makeDirectory( gotvStorageDir );
     std::string tempDir = storageDir + "temp";
     VxFileUtil::makeDirectory( gotvStorageDir );
@@ -522,7 +522,7 @@ bool OsInterface::initUserPaths()
     VxSetPythonLibDirectory( pythonLibs.c_str() );
 
 #ifdef DEBUG
-    LogMsg( LOG_VERBOSE, "storage (%s) kodi (%s) gotv (%s) log (%s) ", storageDir.c_str(), kodiStoragePath.c_str(), gotvStorageDir.c_str(), logsDir.c_str() );
+    LogMsg( LOG_VERBOSE, "storage (%s) kodi (%s) nolimit (%s) log (%s) ", storageDir.c_str(), kodiStoragePath.c_str(), gotvStorageDir.c_str(), logsDir.c_str() );
 #endif // DEBUG
 
     // home of install distrubuted assets ( for android this is cached asset in storage/apk/assets/kodi )
@@ -575,7 +575,7 @@ bool OsInterface::initUserPaths()
     VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
 
     // copy profile files for gotv
-    CopyIfRequiredAssetDirectory( exePath + "assets/gotv/profile", gotvStorageDir + "/profile", false );
+    CopyIfRequiredAssetDirectory( exePath + "assets/nolimit/profile", gotvStorageDir + "/profile", false );
 
     // set paths so accessable outside of kodi
     VxFileUtil::makeForwardSlashPath( kodiBinStoragePath );
@@ -704,13 +704,13 @@ bool OsInterface::initDirectories()
 
 
     std::string gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserSpecific ).c_str() );
-	CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( gotvDir, "gotvaccount" ) );	// /storage/GoTvPtoP/hashnum/accounts/userId/
+	CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( gotvDir, "nolimitaccount" ) );	// /storage/GoTvPtoP/hashnum/accounts/userId/
 
 	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirSettings ).c_str() );
-	CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( gotvDir, "gotvsettings" ) ); // /storage/GoTvPtoP/hashnum/accounts/userId/settings
+	CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( gotvDir, "nolimitsettings" ) ); // /storage/GoTvPtoP/hashnum/accounts/userId/settings
    
 	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserXfer ).c_str() ); // Documents Directory/GoTvPtoP/hashnum/userId/   where transfer directories are
-	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( gotvDir, "gotvxfer" ) );
+	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( gotvDir, "nolimitxfer" ) );
 #endif // ENABLE_KODI  
 
     m_IGoTv.createUserDirs();

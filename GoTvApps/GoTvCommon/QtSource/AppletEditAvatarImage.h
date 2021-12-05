@@ -27,6 +27,9 @@ public:
     AppletEditAvatarImage( AppCommon& app, QWidget * parent );
 	virtual ~AppletEditAvatarImage() = default;
 
+signals:
+    void                        signalAvatarImageChanged( ThumbInfo* avatarThumb );
+
 public slots:
     void						onApplyButClick( void );
 

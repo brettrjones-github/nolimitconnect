@@ -44,6 +44,7 @@
 #include "AppletEditAvatarImage.h"
 #include "AppletEditStoryboard.h"
 #include "AppletFriendListClient.h"
+#include "AppletGalleryEmoticon.h"
 #include "AppletGalleryImage.h"
 #include "AppletGalleryThumb.h"
 #include "AppletGetStarted.h"
@@ -237,6 +238,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
+    case eAppletGalleryEmoticon:            appletDialog = new AppletGalleryEmoticon( m_MyApp, parent ); break;
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
     case eAppletGetStarted:                 appletDialog = new AppletGetStarted( m_MyApp, parent ); break;

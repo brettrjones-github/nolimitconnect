@@ -24,6 +24,7 @@
 
 class AppCommon;
 class GuiUser;
+class AppletBase;
 
 class GuiThumbMgr : public QObject, public ThumbCallbackInterface
 {
@@ -40,6 +41,9 @@ public:
     virtual void                onSystemReady( bool ready ) { }
 
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
+
+    void                        generateEmoticonsIfNeeded( AppletBase* applet );
+    bool                        getEmoticonImage( int emoticonNum, QSize imageSize, QPixmap& retImage );
 
     bool                        requestAvatarImage( GuiUser* user, EHostType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
     bool                        requestAvatarImage( GuiUser* user, EPluginType requestedThumbType, QImage& retAvatarImage, bool requestFromUserIfValid = false );
@@ -59,8 +63,6 @@ public:
     bool                        getAvatarImage( VxGUID& thumbId, QImage& image ); // get rounded image for avatar
     bool                        getThumbImage( VxGUID& thumbId, QImage& image );
     GuiThumbList&               getThumbList( void )             { return m_ThumbList; }
-
-    static bool                 makeCircleImage( QImage& image );
 
 signals:
     void				        signalThumbAdded( GuiThumb* thumb ); 

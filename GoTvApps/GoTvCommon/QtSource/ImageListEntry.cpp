@@ -15,7 +15,6 @@
 
 #include <app_precompiled_hdr.h>
 #include "ImageListEntry.h"
-#include "ActivitySnapShot.h"
 #include "AppCommon.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"

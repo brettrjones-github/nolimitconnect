@@ -52,7 +52,7 @@ AppletSnapshot::AppletSnapshot(	AppCommon& app, QWidget * parent )
     ui.m_SnapshotScreen->setFixedSize( 320, 240 );
 
     connect( ui.snapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapShotButClick() ) );
-    connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( onCancelButClick() ) );
+    connect( ui.m_DoneButton, SIGNAL( clicked() ), this, SLOT( onDoneButClick() ) );
 
     if( m_MyApp.getCamLogic().isCamAvailable() )
     {
@@ -116,6 +116,12 @@ void AppletSnapshot::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, 
 //============================================================================
 //! Implement the OnClickListener callback    
 void AppletSnapshot::onCancelButClick( void )
+{
+    onBackButtonClicked();
+}
+
+//============================================================================ 
+void AppletSnapshot::onDoneButClick( void )
 {
     onBackButtonClicked();
 }

@@ -28,16 +28,6 @@
 
 #include <CoreLib/VxGlobals.h>
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-# if defined (Q_OS_ANDROID)
-#  include <QtAndroid>
-# endif
-#else
-# if defined (Q_OS_ANDROID)
-#  include <QtCore/6.2.1/QtCore/private/qandroidextras_p.h>
-# endif
-#endif
-
 namespace
 {
     const int MAX_INFO_MSG_SIZE = 2048;
@@ -268,19 +258,13 @@ void AppletFriendListClient::slotIgnoredButtonClicked( void )
 //============================================================================
 void AppletFriendListClient::slotNearbyButtonClicked( void )
 {
-#if defined (Q_OS_ANDROID)
-    const QString broadcastPemission(QLatin1String ("android.permission.CHANGE_WIFI_MULTICAST_STATE"));
-    if( QtAndroidPrivate::Authorized != QtAndroidPrivate::checkPermission(broadcastPemission).result() )
+    if( !GuiHelpers::checkUserPermission("android.permission.CHANGE_WIFI_MULTICAST_STATE") )
     {
-        if( QtAndroidPrivate::Authorized != QtAndroidPrivate::requestPermission(broadcastPemission).result() )
-        {
-            okMessageBox(QObject::tr("Broadcast Permission"), QObject::tr("Cannot discover nearby users without Broadcast Permission"));
-            ui.m_FriendsButton->setFocus();
-            slotFriendsButtonClicked();
-            return;
-        }
+        okMessageBox(QObject::tr("Broadcast Permission"), QObject::tr("Cannot discover nearby users without Broadcast Permission"));
+        ui.m_FriendsButton->setFocus();
+        slotFriendsButtonClicked();
+        return;
     }
-#endif // defined (Q_OS_ANDROID)
 
     m_Engine.fromGuiNearbyBroadcastEnable( true );
     if( m_FriendListType != eUserViewTypeNearby )

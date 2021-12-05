@@ -1,8 +1,4 @@
 #pragma once
-// Add C includes here
-
-#if defined __cplusplus
-// Add C++ includes here
 
 #include "AppCommon.h"	
 #include "AppSettings.h"
@@ -31,4 +27,3 @@
 #include <QDialog>
 #include <QObject>
 
-#endif

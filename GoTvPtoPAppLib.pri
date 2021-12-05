@@ -42,7 +42,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanWebCams.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySessionOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityShowHelp.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySnapShot.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.h \
@@ -80,6 +79,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletFriendListClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryEmoticon.h \  
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGetStarted.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
@@ -387,7 +387,6 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanWebCams.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySessionOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityShowHelp.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySnapShot.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivitySoundOptions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityStoryBoard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityTimedMessage.cpp \
@@ -428,6 +427,7 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletFriendListClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryEmoticon.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGetStarted.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoin.cpp \
@@ -728,7 +728,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanWebCams.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityShowHelp.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySnapshot.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySoundOptions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityStoryBoard.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTimedMessage.ui \
@@ -756,6 +755,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditStoryBoard.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletFriendListClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryImage.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryEmoticon.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryThumb.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGetStarted.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \

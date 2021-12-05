@@ -32,8 +32,6 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <VxVideoLib/VxVideoLib.h>
-#include <VxVideoLib/VxVidCap.h>
-
 
 #include <QDesktopServices>
 #include <QComboBox>
@@ -44,26 +42,15 @@
 #include <QLineEdit>
 #include <QUrl>
 
-
-//============================================================================
-bool GuiHelpers::isCameraSourceAvailable()
-{
-    bool cameraAvail = false;
-#ifdef TARGET_OS_WINDOWS
-    IVxVidCap * vidCap = VxGetVidCapInterface();
-    if( vidCap )
-    {
-        if( 0 != vidCap->startupVidCap() )
-        {
-            cameraAvail = true;
-        }
-
-        vidCap->shutdownVidCap();
-    }
-#endif // TARGET_OS_WINDOWS
-
-    return cameraAvail;
-}
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+# if defined (Q_OS_ANDROID)
+#  include <QtAndroid>
+# endif
+#else
+# if defined (Q_OS_ANDROID)
+#  include <QtCore/6.2.2/QtCore/private/qandroidextras_p.h>
+# endif
+#endif
 
 //============================================================================
 QString GuiHelpers::getJustFileName( QString& fileNameAndPath )
@@ -1478,4 +1465,128 @@ bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& 
     }
 
     return result;
+}
+
+//============================================================================
+bool GuiHelpers::createThumbFileName( VxGUID& assetGuid, QString& retFileName )
+{
+    bool validFileName = false;
+    if( assetGuid.isVxGUIDValid() )
+    {
+        retFileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
+        if( !retFileName.isEmpty() )
+        {
+            retFileName += assetGuid.toHexString().c_str();
+            retFileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
+            validFileName = true;
+        }
+    }
+
+    return validFileName;
+}
+
+//============================================================================
+bool GuiHelpers::makeCircleImage( QImage& image )
+{
+    QPixmap target( image.width(), image.height() );
+    target.fill( Qt::transparent );
+
+    QPainter painter( &target );
+
+    // Set clipped region (circle) in the center of the target image
+    QRegion clipRegion( QRect( 0, 0, image.width(), image.height() ), QRegion::Ellipse );
+    painter.setClipRegion( clipRegion );
+
+    painter.drawImage( 0, 0, image );
+    image = target.toImage();
+    return !image.isNull();
+}
+
+//============================================================================
+bool GuiHelpers::makeCircleImage( QPixmap& targetPixmap )
+{
+    QPixmap target( targetPixmap.width(), targetPixmap.height() );
+    target.fill( Qt::transparent );
+
+    QPainter painter( &target );
+
+    // Set clipped region (circle) in the center of the target image
+    QRegion clipRegion( QRect( 0, 0, targetPixmap.width(), targetPixmap.height() ), QRegion::Ellipse );
+    painter.setClipRegion( clipRegion );
+
+    painter.drawPixmap( 0, 0, targetPixmap );
+    targetPixmap = target;
+    return !targetPixmap.isNull();
+}
+
+//============================================================================
+uint64_t GuiHelpers::saveToPngFile( QImage& image, QString& fileName ) // returns file length
+{
+    bool result = !image.isNull() && !fileName.isEmpty();
+    if( result )
+    {
+        result = image.save( fileName, "PNG" );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiHelpers::saveToPngFile Invalid Param" );
+        return 0;
+    }
+
+    if( result )
+    {
+        return VxFileUtil::fileExists( fileName.toUtf8().constData() );
+    }
+
+    return 0;
+}
+
+//============================================================================
+uint64_t GuiHelpers::saveToPngFile( QPixmap& bitmap, QString& fileName ) // returns file length
+{
+    bool result = !bitmap.isNull() && !fileName.isEmpty();
+    if( result )
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        if( !bitmap.isNull() )
+        {
+            result = bitmap.save( fileName, "PNG" );
+#else
+        const QPixmap* bitmap = m_ThumbPixmap;
+        if( bitmap )
+        {
+            result = bitmap->save( fileName, "PNG" );
+#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiHelpers::saveToPngFile Invalid Param" );
+        return 0;
+    }
+
+    if( result )
+    {
+        return VxFileUtil::fileExists( fileName.toUtf8().constData() );
+    }  
+
+    return 0;
+}
+
+//============================================================================
+bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false if user denies permission to use android hardware
+{
+#if defined (Q_OS_ANDROID)
+    if( QtAndroidPrivate::Authorized != QtAndroidPrivate::checkPermission(permissionName).result() )
+    {
+        if( QtAndroidPrivate::Authorized != QtAndroidPrivate::requestPermission(permissionName).result() )
+        {
+            return false;
+        }
+    }
+
+    return true;
+#else
+    return true;
+#endif // defined (Q_OS_ANDROID)
 }

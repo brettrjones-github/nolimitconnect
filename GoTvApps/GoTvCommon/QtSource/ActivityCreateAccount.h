@@ -40,6 +40,8 @@ public:
 	bool						accountValidate( void );
     bool						wasLoginNameEntered( void );
 
+	virtual void				onBackButtonClicked( void ) override;
+
 private slots:
 	//! login was clicked
 	void						slotButtonLoginClicked( void );

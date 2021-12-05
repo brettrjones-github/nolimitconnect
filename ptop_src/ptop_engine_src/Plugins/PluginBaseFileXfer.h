@@ -31,18 +31,18 @@ public:
 														int				pvUserData,
 														const char *	pOfferMsg,				
 														const char *	pFileName = NULL,
-														uint8_t *			fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() );		
+                                                        uint8_t *		fileHashId = 0,
+                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiOfferReply(	VxNetIdent *	netIdent,
 													int				pvUserdata,				
 													EOfferResponse	eOfferResponse,
-													VxGUID			lclSessionId );
+                                                    VxGUID			lclSessionId ) override;
 
-	virtual	void				fromGuiStartPluginSession( PluginSessionBase * poOffer );
-	virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile );
-	virtual void				fromGuiCancelDownload( VxGUID& lclSessionId );
-	virtual void				fromGuiCancelUpload( VxGUID& lclSessionId );
+    virtual	void				fromGuiStartPluginSession( PluginSessionBase * poOffer ) override;
+    virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile ) override;
+    virtual void				fromGuiCancelDownload( VxGUID& lclSessionId ) override;
+    virtual void				fromGuiCancelUpload( VxGUID& lclSessionId ) override;
 
 protected:
     virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
@@ -65,7 +65,7 @@ protected:
     void						onPktFileListReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 	//override so can create FileXferPluginSession
-    virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType ) override;
+    virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent ) override;
     virtual	void				onConnectionLost( VxSktBase * sktBase ) override;
     virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
     virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;

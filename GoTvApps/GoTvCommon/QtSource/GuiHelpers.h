@@ -25,21 +25,18 @@
 
 #define SUPPORTED_IMAGE_FILES "Image files (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)"
 
-class AppCommon;
-class QWidget;
-class QFontMetrics;
-class QComboBox;
-class QLineEdit;
-class VxNetIdent;
 class ActivityBase;
+class AppCommon;
 class AppletBase;
+class PluginSetting;
 class PluginSettingsWidget;
+class VxNetIdent;
+class QFrame;
+class QComboBox;
 
 class GuiHelpers
 {
 public:
-    static bool				    isCameraSourceAvailable();
-
     static QString				getAvailableStorageSpaceText();
     static QString				getJustFileName( QString& fileNameAndPath );
 
@@ -126,5 +123,13 @@ public:
 
     static bool                 widgetToPluginSettings( EPluginType pluginType, PluginSettingsWidget* settingsWidget, PluginSetting& pluginSetting );
     static bool                 pluginSettingsToWidget( EPluginType pluginType, PluginSetting& pluginSetting, PluginSettingsWidget* settingsWidget );
+
+    static bool                 createThumbFileName( VxGUID& assetGuid, QString& retFileName );
+    static bool                 makeCircleImage( QImage& image );
+    static bool                 makeCircleImage( QPixmap& targetPixmap );
+    static uint64_t             saveToPngFile( QImage& image, QString& fileName ); // returns file length
+    static uint64_t             saveToPngFile( QPixmap& pixmap, QString& fileName ); // returns file length
+
+    static bool                 checkUserPermission( QString permissionName ); // returns false if user denies permission to use android hardware
 };
 

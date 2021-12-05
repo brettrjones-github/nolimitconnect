@@ -88,24 +88,15 @@ void ImageListWidget::resizeEvent( QResizeEvent * ev )
 
         iIdx++;
     }
-
-    //clearImages();
-    //clearItems();
-//    loadAssets();
-//    update();
-//    repaint();
-
-//}
-    //refresh();
 }
 
 //============================================================================
-void ImageListWidget::loadAssets( void )
+void ImageListWidget::loadThumbAssets( void )
 {
     std::vector<AssetBaseInfo*>& assetList = m_ThumbMgr.getAssetBaseInfoList();
     for( AssetBaseInfo* assetInfo : assetList )
     {
-        if( eAssetTypeThumbnail == assetInfo->getAssetType() )
+        if( assetInfo && eAssetTypeThumbnail == assetInfo->getAssetType() )
         {
             addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
         }

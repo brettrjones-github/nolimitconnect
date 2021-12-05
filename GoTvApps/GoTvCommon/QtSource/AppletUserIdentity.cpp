@@ -12,10 +12,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ActivitySnapShot.h"
 #include "ActivityCreateAccount.h"
 #include "AppletMgr.h"
 #include "AppletUserIdentity.h"
+#include "AppletEditAvatarImage.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
 #include "AppSettings.h"
@@ -29,6 +29,7 @@
 #include <QFileDialog>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
@@ -75,6 +76,7 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
 
     connect( ui.m_EditAboutMeButton, SIGNAL( clicked() ), this, SLOT( slotEditAboutMeButClick() ) );
     connect( ui.m_EditAvatarImageButton, SIGNAL( clicked() ), this, SLOT( slotEditAvatarButClick() ) );
+    connect( ui.m_AvatarImageButton, SIGNAL( clicked() ), this, SLOT( slotEditAvatarButClick() ) );
     connect( ui.m_EditStoryboardButton, SIGNAL( clicked() ), this, SLOT( slotEditStoryboardButClick() ) );
 
     connect( ui.m_CreateNewAccountButton, SIGNAL( clicked() ), this, SLOT( slotCreateNewAccount() ) );
@@ -92,6 +94,8 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
     {
         ui.m_StoryBoardGroupBox->setVisible( false );
     }
+
+    loadIdentity( *curIdent );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -119,6 +123,7 @@ void AppletUserIdentity::slotAccountSelectionChanged( int idx )
     {
         VxNetIdent& netIdent = m_AccountList[ ui.m_AccountComboBox->currentIndex() ];
         LogMsg( LOG_DEBUG, "AppletUserIdentity selected account %s", netIdent.getOnlineName() );
+        updateAvatarImage( netIdent.getAvatarThumbGuid(), netIdent.getAvatarThumbModifiedTime() );
         if( netIdent.getOnlineName() != m_strOrigOnlineName )
         {
             QString title = QObject::tr( "Confirm Login To Account" );
@@ -136,7 +141,8 @@ void AppletUserIdentity::slotAccountSelectionChanged( int idx )
                     m_MyApp.getAccountMgr().updateLastLogin( myIdent->getOnlineName() );
                     m_MyApp.setupAccountResources( *myIdent );
                     m_MyApp.loadAccountSpecificSettings( myIdent->getOnlineName() );
-                    m_Engine.fromGuiUserLoggedOn( myIdent );
+                    m_Engine.fromGuiUserLoggedOn( myIdent );  
+                    loadIdentity( *myIdent );
                 }
                 else
                 {
@@ -158,13 +164,14 @@ void AppletUserIdentity::loadIdentity( VxNetIdent& ident )
 {
     QString strMoodMessage = ident.getOnlineDescription();
     ui.m_MoodMessageEdit->setText( strMoodMessage );
+    updateAvatarImage( ident.getAvatarThumbGuid(), ident.getAvatarThumbModifiedTime() );
 }
 
 //============================================================================
 void AppletUserIdentity::saveIdentity( VxNetIdent& ident )
 {
-    QString strMoodMessage = ident.getOnlineDescription();
-    ui.m_MoodMessageEdit->setText( strMoodMessage );
+    QString strMoodMessage = ui.m_MoodMessageEdit->text();
+    ident.setOnlineDescription( strMoodMessage.toUtf8().constData() );
 }
 
 //============================================================================
@@ -263,7 +270,11 @@ void AppletUserIdentity::slotEditAboutMeButClick( void )
 //============================================================================
 void AppletUserIdentity::slotEditAvatarButClick( void )
 {
-    m_MyApp.getAppletMgr().launchApplet( eAppletEditAvatarImage, this );
+    AppletEditAvatarImage * editAvatarImage = dynamic_cast< AppletEditAvatarImage * >( m_MyApp.getAppletMgr().launchApplet( eAppletEditAvatarImage, this ) );
+    if( editAvatarImage )
+    {
+        connect( editAvatarImage, SIGNAL( signalAvatarImageChanged( ThumbInfo * ) ), this, SLOT( slotAvatarImageChanged( ThumbInfo * ) ) );
+    }
 }
 
 //============================================================================
@@ -346,4 +357,21 @@ bool AppletUserIdentity::validateMoodMessage( void )
 {
     QString strMoodMsg = ui.m_MoodMessageEdit->text();
     return GuiHelpers::validateMoodMessage( this, strMoodMsg );
+}
+
+//============================================================================
+void AppletUserIdentity::updateAvatarImage( VxGUID& thumbId, int64_t thumbModifiedTime )
+{
+    QImage thumbImage;
+    m_MyApp.getThumbMgr().getAvatarImage( thumbId, thumbImage );
+    if( !thumbImage.isNull() )
+    {
+        ui.m_AvatarImageButton->setIconOverrideImage( thumbImage );
+    }
+}
+
+//============================================================================
+void AppletUserIdentity::slotAvatarImageChanged( ThumbInfo* avatarThumb )
+{
+    updateAvatarImage( avatarThumb->getAssetUniqueId(), avatarThumb->getModifiedTime() );
 }

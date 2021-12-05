@@ -41,23 +41,16 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QPushButton" name="m_PickThumbButton">
+      <widget class="QPushButton" name="m_ThumbGalleryButton">
        <property name="text">
         <string>Thumbnail Gallery</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="m_BrowsePictureButton">
+      <widget class="QPushButton" name="m_EmoticonGalleryButton">
        <property name="text">
-        <string>Browse</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_TakeSnapshotButton">
-       <property name="text">
-        <string>Take Snapshot</string>
+        <string>Emoticon Gallery</string>
        </property>
       </widget>
      </item>
@@ -81,23 +74,16 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QPushButton" name="m_ClearImageButton">
+      <widget class="QPushButton" name="m_TakeSnapshotButton">
        <property name="text">
-        <string>Clear Image</string>
+        <string>Take Snapshot</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="m_MakeCircleButton">
+      <widget class="QPushButton" name="m_BrowsePictureButton">
        <property name="text">
-        <string>Make Circle</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_UndoCircleButton">
-       <property name="text">
-        <string>Undo Circle</string>
+        <string>Browse</string>
        </property>
       </widget>
      </item>

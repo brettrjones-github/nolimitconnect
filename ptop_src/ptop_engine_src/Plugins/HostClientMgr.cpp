@@ -231,7 +231,7 @@ void HostClientMgr::startHostDetailSession( PktHostSearchReply* hostReply, VxSkt
     if( eCommErrNone != commErr )
     {
         LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::startHostDetailSession comm error %s", DescribeCommError( commErr ) );
-        if( commErr = eCommErrPluginNotEnabled )
+        if( eCommErrPluginNotEnabled == commErr )
         {
             m_Engine.getToGui().toGuiHostSearchStatus( hostType, netIdent->getMyOnlineId(), eHostSearchPluginDisabled );
         }

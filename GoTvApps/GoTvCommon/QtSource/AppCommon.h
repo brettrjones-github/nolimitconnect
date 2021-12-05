@@ -43,24 +43,23 @@
 #include "GuiInterface/IGoTvEvents.h"
 #include "GuiInterface/IAudioInterface.h"
 
-#include <QPushButton>
 #include <QComboBox>
 #include <QMessageBox>
 #include <QDialog>
-#include <QObject>
 #include <QElapsedTimer>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 class AccountMgr;
 class AppSettings;
-class ActivityCreateAccount;
-class ActivityOfferListDlg;
 class AppletDownloads;
 class AppletUploads;
+
 class ActivityAbout;
 class ActivityAppSetup;
+class ActivityCreateAccount;
 class ActivityShowHelp;
+class ActivityOfferListDlg;
 
 class AppletMultiMessenger;
 class AppletDownloads;
@@ -764,8 +763,8 @@ private:
 
 	HomeWindow					m_HomePage;
 
-	ActivityCreateAccount *		m_CreateAccountDlg{ nullptr };
-	ActivityShowHelp *			m_ActivityShowHelpDlg{ nullptr };
+    ActivityCreateAccount *		m_CreateAccountDlg{ nullptr };
+    ActivityShowHelp *			m_ActivityShowHelpDlg{ nullptr };
 
     AppletMultiMessenger*       m_AppletMultiMessenger{ nullptr };
     AppletDownloads *			m_AppletDownloads{ nullptr };

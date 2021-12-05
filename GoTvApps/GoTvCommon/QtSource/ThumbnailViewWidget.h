@@ -31,14 +31,14 @@ public:
     void                        setIsUserPickedImage( bool userPicked )     { m_bUserPickedImage = userPicked;  }
     bool                        getIsUserPickedImage( void )                { return m_bUserPickedImage; }
 
-    void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
-    bool                        getThumbnailIsCircular( void )                  { return m_ThumbnailIsCircular; }
+    void                        setThumnailIsCircular( bool isCircle )      { m_ThumbnailIsCircular = isCircle; }
+    bool                        getThumbnailIsCircular( void )              { return m_ThumbnailIsCircular; }
 
     void                        setThumbnailImage( QPixmap pixmap )         { cropAndUpdateImage( pixmap ); }
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
     QPixmap                     getThumbnailImage( void )                   { return pixmap(); }
 #else
-    const QPixmap*              getThumbnailImage(void) { return pixmap(); }
+    const QPixmap*              getThumbnailImage(void)                     { return pixmap(); }
 #endif // QT_VERSION > QT_VERSION_CHECK(6,0,0)
 
     void                        setThumbnailId( VxGUID& id )                { m_ThumbnailId = id; }
@@ -50,7 +50,7 @@ public:
     bool                        saveToPngFile( QString pngFileName );
     void                        browseForImage( void );
 
-    void                        updateImage( VxGUID& thumbGuid, bool isCircle );
+    void                        updateAssetImage( ThumbInfo* thumbAsset );
 
 signals:
     void                        clicked( void );

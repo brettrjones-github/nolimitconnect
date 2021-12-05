@@ -14,7 +14,7 @@
 
 #include <app_precompiled_hdr.h>
 #include "ThumbnailEditWidget.h"
-#include "ActivitySnapShot.h"
+#include "AppletGalleryEmoticon.h"
 #include "AppletGalleryThumb.h"
 #include "AppletSnapshot.h"
 #include "AppletMgr.h"
@@ -43,16 +43,16 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
     , m_ThumbMgr( m_MyApp.getEngine().getThumbMgr() )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
-    m_CameraSourceAvail = GuiHelpers::isCameraSourceAvailable();
     ui.setupUi( this );
     QSize frameSize( GuiParams::getThumbnailSize().width() + 20, GuiParams::getThumbnailSize().height() + 20 );
     ui.m_ThumbnailFrame->setFixedSize( frameSize );
 
+    connect( ui.m_ThumbGalleryButton, SIGNAL( clicked() ), this, SLOT( slotThumbGalleryClick() ) );
+    connect( ui.m_EmoticonGalleryButton, SIGNAL( clicked() ), this, SLOT( slotEmoticonGalleryClick() ) );
     connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( slotSnapShotButClick() ) );
     connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( slotBrowseButClick() ) );
-    connect( ui.m_MakeCircleButton, SIGNAL( clicked() ), this, SLOT( slotMakeCircleButClick() ) );
-    connect( ui.m_UndoCircleButton, SIGNAL( clicked() ), this, SLOT( slotUndoCircleClick() ) );
-    connect( ui.m_PickThumbButton, SIGNAL( clicked() ), this, SLOT( slotThumbGalleryClick() ) );
+
+    m_CameraSourceAvail = m_MyApp.getCamLogic().isCamAvailable();
 }
 
 //============================================================================
@@ -95,7 +95,6 @@ bool ThumbnailEditWidget::generateThumbAsset( ThumbInfo& assetInfoOut )
         assetInfo.setAssetUniqueId( assetGuid );
         assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
         assetInfo.setCreationTime( GetTimeStampMs() );
-        assetInfo.setIsCircular( m_ThumbnailIsCircular );
         if( m_ThumbMgr.fromGuiThumbCreated( assetInfo ) )
         {
             assetGenerated = true;
@@ -127,16 +126,15 @@ bool ThumbnailEditWidget::updateThumbAsset( ThumbInfo& thumbInfo )
         QString fileName = thumbInfo.getAssetName().c_str();
         if( !VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
         {
-            fileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
-            fileName += assetGuid.toHexString().c_str();
-            fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
-            thumbInfo.setAssetName( fileName.toUtf8().constData() );
+            if( GuiHelpers::createThumbFileName( assetGuid, fileName ) )
+            {
+                thumbInfo.setAssetName( fileName.toUtf8().constData() );
+            }
         }
 
         if( saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
         {
             thumbInfo.setModifiedTime( GetTimeStampMs() );
-            thumbInfo.setIsCircular( m_ThumbnailIsCircular );
             if( m_ThumbMgr.fromGuiThumbUpdated( thumbInfo ) )
             {
                 assetUpdated = true;
@@ -211,40 +209,8 @@ void ThumbnailEditWidget::slotImageSnapshot( QImage snapshotImage )
 void ThumbnailEditWidget::slotBrowseButClick( void )
 {
     ui.m_ThumbnailViewWidget->browseForImage();
-    m_ThumbnailIsCircular = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
     if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
     {
-        emit signalImageChanged();
-    }
-}
-
-//============================================================================
-void ThumbnailEditWidget::slotMakeCircleButClick( void )
-{
-    if( !m_ThumbnailIsCircular )
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        m_SquarePixmap = ui.m_ThumbnailViewWidget->getThumbnailImage();
-#else
-        m_SquarePixmap = *ui.m_ThumbnailViewWidget->getThumbnailImage();
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        
-        if( !m_SquarePixmap.isNull() )
-        {
-            m_ThumbnailIsCircular = true;
-            ui.m_ThumbnailViewWidget->setThumbnailImage( makeCircleImage( m_SquarePixmap ) );
-            emit signalImageChanged();
-        }
-    }
-}
-
-//============================================================================
-void ThumbnailEditWidget::slotUndoCircleClick( void )
-{
-    if( m_ThumbnailIsCircular && !m_SquarePixmap.isNull() )
-    {
-        m_ThumbnailIsCircular = false;
-        ui.m_ThumbnailViewWidget->setThumbnailImage( m_SquarePixmap );
         emit signalImageChanged();
     }
 }
@@ -272,6 +238,16 @@ void ThumbnailEditWidget::slotThumbGalleryClick( void )
     if( galleryThumb )
     {
         connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
+    }
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotEmoticonGalleryClick( void )
+{
+    AppletGalleryEmoticon * galleryEmoticon = dynamic_cast< AppletGalleryEmoticon* >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryThumb, m_ParentApplet ) );
+    if( galleryEmoticon )
+    {
+        connect( galleryEmoticon, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
     }
 }
 

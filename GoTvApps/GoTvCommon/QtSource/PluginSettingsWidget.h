@@ -60,7 +60,7 @@ signals:
 
 protected slots:
     virtual void                slotApplyServiceSettings();
-    virtual void                slotThumbnailAssetChanged();
+    virtual void                slotThumbnailAssetChanged( ThumbInfo* thumbAsset );
 
 protected:
     EPluginType                 getPluginType() { return m_PluginType; }

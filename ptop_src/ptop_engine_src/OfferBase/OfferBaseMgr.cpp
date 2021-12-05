@@ -249,7 +249,6 @@ OfferBaseInfo * OfferBaseMgr::findOffer( VxGUID& assetId )
         return nullptr;
 	}
 
-	std::vector<OfferBaseInfo*>::iterator iter;
 	for( OfferBaseInfo * assetInfo : m_OfferBaseInfoList )
 	{
 		if( assetInfo->getOfferId() == assetId )

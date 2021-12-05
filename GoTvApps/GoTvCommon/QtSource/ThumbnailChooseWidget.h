@@ -54,7 +54,7 @@ public:
     bool                        loadThumbnail( VxGUID& assetGuid, bool isCircle );
 
 signals:
-    void                        signalThumbnailAssetChanged( void );
+    void                        signalThumbnailAssetChanged( ThumbInfo* thumbAsset );
 
 protected slots:
     void                        slotChooseThumb();

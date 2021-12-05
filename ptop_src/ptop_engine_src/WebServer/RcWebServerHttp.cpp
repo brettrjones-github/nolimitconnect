@@ -341,7 +341,7 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 		}
 
 		iTokenLen = (int)strlen( cpToken );
-		if( ( 1 < iTokenLen ) && ( sizeof( as8Buf ) > iTokenLen ) )
+        if( ( 1 < iTokenLen ) && ( (int)sizeof( as8Buf ) > iTokenLen ) )
 		{
 			int iFileNameIdx = 0;
 			as8Buf[ iFileNameIdx ] = 0;

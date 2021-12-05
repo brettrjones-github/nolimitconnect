@@ -16,7 +16,6 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
-#include "ActivitySnapShot.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "AccountMgr.h"
@@ -47,6 +46,7 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
     ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeHostPeerUser );
     ui.m_ServiceSettingsWidget->setViewServiceVisible( false );
+    ui.m_ThumbnailEditWidget->setThumnailIsCircular( true );
 
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
@@ -87,6 +87,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
 
                 // notify others of change to identity
                 m_MyApp.updateMyIdent( m_MyIdent );
+                emit signalAvatarImageChanged( existingAsset );
 
                 QString msgText = QObject::tr( "Applied Avatar Image Changes " );
                 QMessageBox::information( this, QObject::tr( "Applied Avatar Image Success" ), msgText );

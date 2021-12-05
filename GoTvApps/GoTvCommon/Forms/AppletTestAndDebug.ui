@@ -167,6 +167,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="m_GenerateGuidButton">
+        <property name="text">
+         <string>Generate A GUID</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="m_CopyResultToClipboardButton">
         <property name="text">
          <string>Copy Results To Clipboard</string>

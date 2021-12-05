@@ -57,6 +57,7 @@ protected slots:
     void                        slotPingTestButtonClicked( void );
     void                        slotIsMyPortOpenButtonClicked( void );
     void                        slotQueryHostIdButtonClicked( void );
+    void                        slotGenerateGuidButtonClicked( void );
 
     void                        slotNewUrlSelected( const QString &newUrl );
 

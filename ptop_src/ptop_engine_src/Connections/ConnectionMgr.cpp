@@ -1291,7 +1291,6 @@ void ConnectionMgr::doStayConnectedThread( void )
     int iSize;
     BigListInfo * poInfo;
 
-    std::vector< BigListInfo * >::iterator iter;
     VxSktBase * sktBase;
     while( ( false == m_StayConnectedThread.isAborted() )
         && ( false == VxIsAppShuttingDown() ) )

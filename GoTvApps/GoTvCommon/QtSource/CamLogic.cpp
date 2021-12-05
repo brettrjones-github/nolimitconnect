@@ -16,12 +16,14 @@
 #include <app_precompiled_hdr.h>
 #include "CamLogic.h"
 #include "AppCommon.h"
+#include "GuiHelpers.h"
 
 #include <CoreLib/VxDebug.h>
-#if QT_VERSION > QT_VERSION_CHECK(6,0,0)
-#include <QMediaDevices>
-#else
+
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 Q_DECLARE_METATYPE( QCameraInfo )
+#else
+# include <QMediaDevices>
 #endif // QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
@@ -51,6 +53,12 @@ void CamLogic::toGuiWantVideoCapture( bool wantVidCapture )
 //============================================================================
 bool CamLogic::isCamAvailable( void )
 {
+    if( !GuiHelpers::checkUserPermission("android.permission.CAMERA"))
+    {
+        QMessageBox( QMessageBox::Information, QObject::tr("Camera Permission"), QObject::tr("Cannot use camera without user permission"), QMessageBox::Ok);
+        return false;
+    }
+
     assureCamInitiated();
     return !m_camera.isNull() && m_camera->isAvailable();
 }

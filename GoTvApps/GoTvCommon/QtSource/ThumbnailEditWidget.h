@@ -33,8 +33,8 @@ public:
     void                        setIsUserPickedImage( bool userPicked )         { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }
     bool                        getIsUserPickedImage( void )                    { return ui.m_ThumbnailViewWidget->getIsUserPickedImage(); }
 
-    void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle; }
-    bool                        getThumbnailIsCircular( void )                   { return m_ThumbnailIsCircular; }
+    void                        setThumnailIsCircular( bool isCircle )          { m_ThumbnailIsCircular = isCircle;  ui.m_ThumbnailViewWidget->setThumnailIsCircular( isCircle ); }
+    bool                        getThumbnailIsCircular( void )                  { return m_ThumbnailIsCircular; }
 
     bool                        loadFromAsset( ThumbInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
@@ -54,11 +54,12 @@ signals:
     void                        signalImageChanged();
 
 protected slots:
+    void                        slotEmoticonGalleryClick( void );
     void                        slotThumbGalleryClick( void );
     void                        slotSnapShotButClick( void );
     void                        slotBrowseButClick( void );
-    void                        slotMakeCircleButClick( void );
-    void                        slotUndoCircleClick( void );
+//    void                        slotMakeCircleButClick( void );
+//    void                        slotUndoCircleClick( void );
     void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb );
     void                        slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
     void                        slotImageSnapshot( QImage snapshotImage );
@@ -70,8 +71,7 @@ protected:
     AppCommon&					m_MyApp;
     ThumbMgr&                   m_ThumbMgr;
     AppletBase*                 m_ParentApplet{ nullptr };
-    IVxVidCap *					m_VidCap = nullptr;
-    bool 					    m_CameraSourceAvail = false;
+    bool 					    m_CameraSourceAvail{ false };
     bool 					    m_ThumbnailIsCircular = false;
     QPixmap                     m_SquarePixmap;
     VxGUID                      m_AsssetId;

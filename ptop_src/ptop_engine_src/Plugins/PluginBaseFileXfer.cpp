@@ -35,9 +35,9 @@ PluginBaseFileXfer::PluginBaseFileXfer( P2PEngine& engine, PluginMgr& pluginMgr,
 }
 
 //============================================================================ 
-P2PSession * PluginBaseFileXfer::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+P2PSession * PluginBaseFileXfer::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	P2PSession * pSession = new FileXferPluginSession( lclSessionId, sktBase, netIdent, pluginType );
+    P2PSession * pSession = new FileXferPluginSession( lclSessionId, sktBase, netIdent, m_ePluginType );
 	pSession->setPluginType( m_ePluginType );
 	return pSession;
 }

@@ -39,6 +39,7 @@ public:
     OfferBaseInfo( const OfferBaseInfo& rhs );
     OfferBaseInfo( const std::string& fileName );
     OfferBaseInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
+    virtual ~OfferBaseInfo() = default;
 
     OfferBaseInfo&				operator=( const OfferBaseInfo& rhs );
 

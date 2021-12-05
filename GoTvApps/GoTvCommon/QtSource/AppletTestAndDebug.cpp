@@ -22,6 +22,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxGUID.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxUrl.h>
 
@@ -128,6 +129,7 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_BrowseFilesButton, SIGNAL( clicked() ), this, SLOT( slotBrowseFilesButtonClicked() ) );
     connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsMyPortOpenButtonClicked() ) );
     connect( ui.m_QueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostIdButtonClicked() ) );
+    connect( ui.m_GenerateGuidButton, SIGNAL( clicked() ), this, SLOT( slotGenerateGuidButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -413,3 +415,11 @@ void AppletTestAndDebug::fillExtraInfo( void )
     infoMsg( "thumbnail size: %d", GuiParams().getThumbnailSize().width() );
 }
 
+//============================================================================
+void AppletTestAndDebug::slotGenerateGuidButtonClicked( void )
+{
+    VxGUID guid;
+    guid.initializeWithNewVxGUID();
+    infoMsg( "{ %llu, %llu }, ", guid.getVxGUIDHiPart(), guid.getVxGUIDLoPart() );
+    infoMsg( "%s", guid.toOnlineIdString().c_str() );
+}

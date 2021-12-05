@@ -82,7 +82,7 @@ protected:
     virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
     virtual void				onConnectionLost( VxSktBase * sktBase ) override;
 
-    P2PSession *				createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
+    P2PSession *				createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent ) override;
 	bool						sendGameStats( VxNetIdent *	netIdent );
 
 	//=== vars ===//

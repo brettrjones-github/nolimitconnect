@@ -13,7 +13,7 @@
 //============================================================================
 
 #include "GuiThumbMgr.h"
-#include "GuiThumb.h"
+#include "GuiHelpers.h"
 #include "AppCommon.h"
 
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
@@ -210,7 +210,7 @@ bool GuiThumbMgr::getAvatarImage( VxGUID& thumbId, QImage& image )
     bool result = getThumbImage( thumbId, image );
     if( result && !image.isNull() )
     {
-        result = makeCircleImage( image );
+        result = GuiHelpers::makeCircleImage( image );
     }
 
     return result;
@@ -242,18 +242,110 @@ bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
 }
 
 //============================================================================
-bool GuiThumbMgr::makeCircleImage( QImage& image )
+void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
 {
-    QPixmap target( image.width(), image.height() );
-    target.fill( Qt::transparent );
+    ThumbMgr& thumbMgr = m_MyApp.getEngine().getThumbMgr();
+    std::vector<VxGUID>& emoticonIdList = thumbMgr.getEmoticonIdList();
+    int emoticonNum = 0;
+    for( auto& assetGuid : emoticonIdList )
+    {
+        if( assetGuid.isVxGUIDValid() )
+        {
+            bool assetExists = false;
+            thumbMgr.lockResources();
+            ThumbInfo* thumbInfo = dynamic_cast< ThumbInfo* >( thumbMgr.findAsset( assetGuid ) );
+            if( thumbInfo )
+            {
+                if( VxFileUtil::fileExists( thumbInfo->getAssetName().c_str() ) )
+                {
+                    thumbMgr.unlockResources();
+                    emoticonNum++;
+                    continue;
+                }
 
-    QPainter painter( &target );
+                assetExists = true;
+            }
 
-    // Set clipped region (circle) in the center of the target image
-    QRegion clipRegion( QRect( 0, 0, image.width(), image.height() ), QRegion::Ellipse );
-    painter.setClipRegion( clipRegion );
+            thumbMgr.unlockResources();
 
-    painter.drawImage( 0, 0, image );
-    image = target.toImage();
-    return !image.isNull();
+            QString fileName;
+            if( GuiHelpers::createThumbFileName( assetGuid, fileName ) )
+            {
+                QPixmap image;
+                QSize imageSize( GuiParams::getThumbnailSize().width() - 10, GuiParams::getThumbnailSize().height() - 10 );
+                if( m_MyApp.getThumbMgr().getEmoticonImage( emoticonNum, imageSize, image ) )
+                {
+                    QPixmap fullThumbnail( GuiParams::getThumbnailSize() );
+                    //QPainter painter( &fullThumbnail );
+                    // painter.drawPixmap( 5, 5, image.width(), image.height(), image );
+
+                    uint64_t fileLen = GuiHelpers::saveToPngFile( image, fileName );
+                    if( fileLen )
+                    {
+                        ThumbInfo assetInfo( ( const char* )fileName.toUtf8().constData(), fileLen );
+                        assetInfo.setAssetUniqueId( assetGuid );
+                        assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
+                        assetInfo.setCreationTime( GetTimeStampMs() );
+                        bool assetUpdated = false;
+                        if( assetExists )
+                        {
+                            assetUpdated = thumbMgr.fromGuiThumbUpdated( assetInfo );;
+                        }
+                        else
+                        {
+                            assetUpdated = thumbMgr.fromGuiThumbCreated( assetInfo );
+                        }
+
+                        if( !assetUpdated )
+                        {
+                            QString msgText = QObject::tr( "Could not create thumbnail asset" );
+                            QMessageBox::warning( ( QWidget* )applet, QObject::tr( "Error occured creating thumbnail asset " ) + fileName, msgText, QMessageBox::Ok );
+                        }
+                    }
+                    else
+                    {
+                        QString msgText = QObject::tr( "Could create thumbnail png file" );
+                        QMessageBox::warning( ( QWidget* )applet, QObject::tr( "Error occured creating thumbnail file " ) + fileName, msgText, QMessageBox::Ok );
+                    }
+                }
+                else
+                {
+                    QString msgText = QObject::tr( "Could create emoticon image" );
+                    QMessageBox::warning( ( QWidget* )applet, QObject::tr( "Error occured creating emoticon image %1" ).arg( emoticonNum ), msgText, QMessageBox::Ok );
+                }
+            }
+            else
+            {
+                QString msgText = QObject::tr( "Could create emoticon file name" );
+                QMessageBox::warning( ( QWidget* )applet, QObject::tr( "Error occured creating emoticon file %1" ).arg( emoticonNum ), msgText, QMessageBox::Ok );
+            }
+        }
+
+        emoticonNum++;
+    }
+}
+
+//============================================================================
+bool GuiThumbMgr::getEmoticonImage( int emoticonNum, QSize imageSize, QPixmap& retImage )
+{
+    char resBuf[128];
+    if( emoticonNum > 0 && emoticonNum <= 40)
+    {
+        if( emoticonNum > 9 )
+        {
+            sprintf( resBuf, ":/AppRes/Resources/emoj%d.svg", emoticonNum );
+        }
+        else
+        {
+            sprintf( resBuf, ":/AppRes/Resources/emoj0%d.svg", emoticonNum );
+        }
+
+        QPixmap faceImage( resBuf );
+        retImage = faceImage.scaled( imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+        return !retImage.isNull();
+    }
+    else
+    {
+        return false;
+    }   
 }

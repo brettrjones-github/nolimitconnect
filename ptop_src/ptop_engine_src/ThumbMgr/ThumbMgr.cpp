@@ -32,6 +32,8 @@
 
 #include <time.h>
 
+
+
 //============================================================================
 ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
 : AssetBaseMgr( engine, dbName, dbStateName,  eAssetMgrTypeThumb )
@@ -429,10 +431,42 @@ void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetI
 {
 }
 
+
 //============================================================================
 bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
 {
+    if( !netIdent || ePluginTypeInvalid == pluginType )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid param " );
+        vx_assert( false );
+        return false;
+    }
 
+    if( IsHostPluginType( pluginType ) )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb You must request thumb using Client plugin instead of Host plugin %s ", DescribePluginType( pluginType ) );
+        vx_assert( false );
+        return false;
+    }
+
+    PluginBase* plugin = m_Engine.getPluginMgr().getPlugin( pluginType );
+    if( plugin )
+    {
+        return plugin->getThumbXferMgr().requestPluginThumb( netIdent, thumbId );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid plugin " );
+        vx_assert( false );
+        return false;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool ThumbMgr::requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
+{
     if( !netIdent || ePluginTypeInvalid == pluginType )
     {
         LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid param " );
@@ -481,7 +515,7 @@ bool ThumbMgr::requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo )
             if( thumbId.isVxGUIDValid() && thumbTimestamp && !isThumbUpToDate( thumbId, thumbTimestamp ) )
             {
                 EPluginType pluginType = HostTypeToClientPlugin( hostType );
-                requestPluginThumb( poInfo, pluginType, thumbId );
+                requestPluginThumb( sktBase, poInfo, pluginType, thumbId );
             }
         }
     }

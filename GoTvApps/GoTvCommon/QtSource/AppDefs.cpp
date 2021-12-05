@@ -199,6 +199,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletClientStoryboard:           return QObject::tr( "Share story (Blog)" );
     case eAppletCreateAccount:			    return QObject::tr( "Create Account" );
     case eAppletFriendListClient:	        return QObject::tr( "Friend List" );
+    case eAppletGalleryEmoticon:			return QObject::tr( "Emoticon Gallery" );
     case eAppletGalleryImage:			    return QObject::tr( "Image Gallery" );
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
     case eAppletGetStarted:			        return QObject::tr( "Get Started" );

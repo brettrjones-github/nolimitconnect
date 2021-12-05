@@ -62,10 +62,9 @@ bool ThumbnailViewWidget::loadFromAsset( ThumbInfo * asset )
 }
 
 //============================================================================
-void ThumbnailViewWidget::updateImage( VxGUID& thumbGuid, bool isCircle )
+void ThumbnailViewWidget::updateAssetImage( ThumbInfo* thumbAsset )
 {
-    m_ThumbnailIsCircular = isCircle;
-    cropAndUpdateImage( m_ThumbPixmap );
+    loadFromAsset( thumbAsset );
 }
 
 //============================================================================
@@ -142,6 +141,7 @@ void ThumbnailViewWidget::cropAndUpdateImage( QPixmap& pixmap )
         QPixmap scaledPixmap = cropped.scaled( GuiParams::getThumbnailSize() );
         if( !scaledPixmap.isNull() )
         {
+            m_ThumbPixmap = pixmap;
             if( m_ThumbnailIsCircular )
             {
                 setPixmap( makeCircleImage( scaledPixmap ) );
@@ -208,29 +208,5 @@ void ThumbnailViewWidget::browseForImage( void )
 //============================================================================
 bool ThumbnailViewWidget::saveToPngFile( QString pngFileName )
 {
-    bool isOk = false;
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-    const QPixmap bitmap = pixmap();
-    if (!bitmap.isNull())
-    {
-        isOk = bitmap.save(pngFileName, "PNG");
-#else
-    const QPixmap * bitmap = pixmap();
-    if( bitmap )
-    {
-        isOk = bitmap->save( pngFileName, "PNG" );
-#endif // QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        if( !isOk )
-        {
-            QString msgText = QObject::tr( "Failed to write into " ) + pngFileName;
-            QMessageBox::warning( this, QObject::tr( "Error Writing" ), msgText );
-        }
-    }
-    else
-    {
-        QString msgText = QObject::tr( "Failed to save to file " ) + pngFileName;
-        QMessageBox::warning( this, QObject::tr( "Error Writing" ), msgText );
-    }
-
-    return isOk;
+    return GuiHelpers::saveToPngFile( m_ThumbPixmap, pngFileName );
 }

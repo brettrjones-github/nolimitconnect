@@ -15,7 +15,7 @@
 #include "AppCommon.h"	
 #include "AppSettings.h"
 
-#include "AppletGalleryThumb.h"
+#include "AppletGalleryEmoticon.h"
 
 #include "FileShareItemWidget.h"
 #include "MyIcons.h"
@@ -37,14 +37,13 @@
 #include <QResizeEvent>
 
 //============================================================================
-AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_GALLERY_THUMB, app, parent )
+AppletGalleryEmoticon::AppletGalleryEmoticon(	AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_GALLERY_EMOTICON, app, parent )
 , m_ThumbMgr( app.getEngine().getThumbMgr() )
 {
-    setAppletType( eAppletGalleryThumb );
+    setAppletType( eAppletGalleryEmoticon );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    ui.m_ThumbDirLabel->setText( VxGetAppDirectory( eAppDirThumbs ).c_str() );
 
     connect( ui.m_ImageListWidget, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
 
@@ -52,16 +51,16 @@ AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-AppletGalleryThumb::~AppletGalleryThumb()
+AppletGalleryEmoticon::~AppletGalleryEmoticon()
 {
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletGalleryThumb::resizeEvent( QResizeEvent * ev )
+void AppletGalleryEmoticon::resizeEvent( QResizeEvent * ev )
 {
     AppletBase::resizeEvent( ev );
-    //LogMsg( LOG_DEBUG, "AppletGalleryThumb Resize w %d h %d\n", ev->size().width(), ev->size().height() );
+    //LogMsg( LOG_DEBUG, "AppletGalleryEmoticon Resize w %d h %d\n", ev->size().width(), ev->size().height() );
     if( m_isShown && !m_isLoaded )
     {
         m_isLoaded = true;
@@ -70,19 +69,21 @@ void AppletGalleryThumb::resizeEvent( QResizeEvent * ev )
 }
 
 //============================================================================
-void AppletGalleryThumb::showEvent( QShowEvent * ev )
+void AppletGalleryEmoticon::showEvent( QShowEvent * ev )
 {
-    //LogMsg( LOG_DEBUG, "AppletGalleryThumb show event\n" );
+    //LogMsg( LOG_DEBUG, "AppletGalleryEmoticon show event\n" );
     m_isShown = true;
     AppletBase::showEvent( ev );
 }
 
 //============================================================================
-void AppletGalleryThumb::loadAssets( void )
+void AppletGalleryEmoticon::loadAssets( void )
 {
-    std::vector<AssetBaseInfo*>& assetList = m_ThumbMgr.getAssetBaseInfoList();
-    for( AssetBaseInfo* assetInfo : assetList )
+    m_MyApp.getThumbMgr().generateEmoticonsIfNeeded( this );
+    std::vector<VxGUID>& emoticonIdList = m_ThumbMgr.getEmoticonIdList();
+    for( auto &assetId : emoticonIdList )
     {
+        AssetBaseInfo* assetInfo = m_ThumbMgr.findAsset( assetId );
         if( assetInfo && eAssetTypeThumbnail == assetInfo->getAssetType() )
         {
             ui.m_ImageListWidget->addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
@@ -91,7 +92,7 @@ void AppletGalleryThumb::loadAssets( void )
 }
 
 //============================================================================
-void AppletGalleryThumb::slotImageClicked( ThumbnailViewWidget * thumb )
+void AppletGalleryEmoticon::slotImageClicked( ThumbnailViewWidget * thumb )
 {
     if( thumb )
     {

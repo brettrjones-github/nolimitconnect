@@ -151,6 +151,7 @@ enum EApplet
 
     eAppletChooseThumbnail,
     eAppletFriendListClient,
+    eAppletGalleryEmoticon,
     eAppletGalleryImage,
     eAppletGalleryThumb,
     eAppletGroupListClient,

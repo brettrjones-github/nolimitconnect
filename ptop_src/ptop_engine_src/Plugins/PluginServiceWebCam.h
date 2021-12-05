@@ -43,14 +43,14 @@ public:
 	void						sendVidPkt( VxPktHdr * vidPkt, bool requiresAck );
 
 protected:
-	virtual EPluginAccess	canAcceptNewSession( VxNetIdent * netIdent );
+    virtual EPluginAccess       canAcceptNewSession     ( VxNetIdent * netIdent );
 
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-	virtual void				onConnectionLost( VxSktBase * sktBase );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
+    virtual void				replaceConnection       ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
+    virtual void				onConnectionLost        ( VxSktBase * sktBase );
+    virtual void				onContactWentOffline    ( VxNetIdent * netIdent, VxSktBase * sktBase );
 
-	virtual void				onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktPluginOfferReq     ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktPluginOfferReply   ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	virtual void				onPktSessionStartReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktSessionStartReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

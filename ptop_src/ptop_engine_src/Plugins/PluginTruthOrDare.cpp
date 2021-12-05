@@ -42,9 +42,9 @@ PluginTruthOrDare::PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, V
 }
 
 //============================================================================
-P2PSession * PluginTruthOrDare::createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent )
+P2PSession * PluginTruthOrDare::createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent)
 {
-	return new TodGameSession( sktBase, netIdent, getPluginType() );
+    return new TodGameSession( sktBase, netIdent, getPluginType() );
 }
 
 //============================================================================

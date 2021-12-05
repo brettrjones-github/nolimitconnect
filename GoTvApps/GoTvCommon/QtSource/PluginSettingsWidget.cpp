@@ -28,7 +28,7 @@ PluginSettingsWidget::PluginSettingsWidget( QWidget * parent )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );
-    connect( ui.m_ThumbnailChooseWidget, SIGNAL( signalThumbnailAssetChanged() ), this, SLOT( slotThumbnailAssetChanged() ) );
+    connect( ui.m_ThumbnailChooseWidget, SIGNAL( signalThumbnailAssetChanged( ThumbInfo * ) ), this, SLOT( slotThumbnailAssetChanged( ThumbInfo * ) ) );
     ui.m_DescriptionEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
     ui.m_GreetingEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
     ui.m_RejectEdit->setFixedHeight( GuiParams::getButtonSize( eButtonSizeSmall ).height() );
@@ -139,10 +139,10 @@ void PluginSettingsWidget::slotApplyServiceSettings()
 }
 
 //============================================================================
-void PluginSettingsWidget::slotThumbnailAssetChanged()
+void PluginSettingsWidget::slotThumbnailAssetChanged( ThumbInfo* thumbAsset )
 {
     VxGUID thumbGuid = ui.m_ThumbnailChooseWidget->getAssetId();
     LogMsg( LOG_DEBUG, "slotThumbnailAssetChanged %s", thumbGuid.toGUIDStandardFormatedString().c_str() );
     m_PluginSetting.setThumnailId( thumbGuid, ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
-    ui.m_ThumbnailChooseWidget->getThumbnailViewWidget()->updateImage( thumbGuid, ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
+    ui.m_ThumbnailChooseWidget->getThumbnailViewWidget()->updateAssetImage( thumbAsset );
 }

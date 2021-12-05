@@ -683,7 +683,7 @@ P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithSessionId( VxGUID& sess
 
 		if( 0 != sktBase )
 		{
-			session = m_Plugin.createP2PSession( sessionId, sktBase, netIdent, getPluginType() );
+            session = m_Plugin.createP2PSession( sessionId, sktBase, netIdent );
 			addSession( session->getLclSessionId(), session, pluginIsLocked );
 		}
 	}
@@ -708,7 +708,7 @@ P2PSession * PluginSessionMgr::findOrCreateP2PSessionWithOnlineId( VxGUID& onlin
 
 		if( 0 != sktBase )
 		{
-			session = m_Plugin.createP2PSession( sktBase, netIdent, getPlugin().getPluginType() );
+            session = m_Plugin.createP2PSession( sktBase, netIdent );
 			if( false == lclSessionId.isVxGUIDValid() )
 			{
 				lclSessionId.initializeWithNewVxGUID();
@@ -828,7 +828,7 @@ TxSession * PluginSessionMgr::findOrCreateTxSessionWithSessionId( VxGUID& sessio
 	TxSession * session = findTxSessionBySessionId( pluginIsLocked, sessionId );
 	if( NULL == session )
 	{
-		session = m_Plugin.createTxSession( sessionId, sktBase, netIdent, getPlugin().getPluginType() );
+        session = m_Plugin.createTxSession( sessionId, sktBase, netIdent );
 		addSession( sessionId, session, pluginIsLocked );
 	}
 	else
@@ -845,7 +845,7 @@ TxSession * PluginSessionMgr::findOrCreateTxSessionWithOnlineId( VxGUID& onlineI
 	TxSession * session = findTxSessionByOnlineId( pluginIsLocked, onlineId );
 	if( NULL == session )
 	{
-		session = m_Plugin.createTxSession( sktBase, netIdent, getPluginType() );
+        session = m_Plugin.createTxSession( sktBase, netIdent );
 		if( ( false == lclSessionId.isVxGUIDValid() ) && ( false == isPluginSingleSession() ) )
 		{
 			addSession( session->getLclSessionId(), session, pluginIsLocked );
@@ -986,7 +986,7 @@ RxSession * PluginSessionMgr::findOrCreateRxSessionWithSessionId( VxGUID& sessio
 	RxSession * session = findRxSessionBySessionId( sessionId, pluginIsLocked );
 	if( NULL == session )
 	{
-		session = m_Plugin.createRxSession( sessionId, sktBase, netIdent, getPlugin().getPluginType() );
+        session = m_Plugin.createRxSession( sessionId, sktBase, netIdent );
 		addSession( sessionId, session, pluginIsLocked );
 	}
 
@@ -999,7 +999,7 @@ RxSession * PluginSessionMgr::findOrCreateRxSessionWithOnlineId( VxGUID& onlineI
 	RxSession * session = findRxSessionByOnlineId( onlineId, pluginIsLocked );
 	if( NULL == session )
 	{
-		session = m_Plugin.createRxSession( sktBase, netIdent, getPlugin().getPluginType() );
+        session = m_Plugin.createRxSession( sktBase, netIdent );
 		if( false == lclSessionId.isVxGUIDValid() )
 		{
 			addSession( session->getLclSessionId(), session, pluginIsLocked );

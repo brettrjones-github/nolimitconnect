@@ -28,12 +28,6 @@
 
 #include <algorithm>
 
-namespace
-{
-    const uint64_t HOST_ACTION_TIMEOUT_MS = 30000;
-    const uint64_t HOST_CONNECT_ATTEMPT_TIMEOUT_MS = 60000;
-}
-
 //============================================================================
 ConnectedInfo::ConnectedInfo( P2PEngine& engine, BigListInfo* bigListInfo )
     : m_Engine( engine )

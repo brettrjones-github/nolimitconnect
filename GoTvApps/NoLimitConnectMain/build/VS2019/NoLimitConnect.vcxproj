@@ -31,7 +31,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>F:\Qt\6.2.1\msvc2019_64</QtInstall>
+    <QtInstall>F:\Qt\6.2.2\msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets;opengl;quickwidgets;svg;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -65,7 +65,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\;$(ProjectDir);$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc;$(ProjectDir)..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\..\kodi_src\xbmc\addons\library.xbmc.codec;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CONSOLE;WIN64;_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -141,7 +141,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanWebCams.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySessionOptions.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityStoryBoard.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp" />
@@ -178,6 +177,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAvatarImage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletFriendListClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryEmoticon.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.cpp" />
@@ -479,6 +479,7 @@
     <ClInclude Include="..\..\..\..\GuiInterface\OsWin32\IWin32.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletInviteCreate.h" />
@@ -500,6 +501,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGetStarted.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHelpNetSignalBars.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletHostSelect.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGalleryEmoticon.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppTranslate.h" />
@@ -790,7 +792,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityStoryBoard.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivitySessionOptions.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityScanWebCams.h" />
@@ -804,7 +805,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityBrowseFiles.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityBase.h" />
@@ -842,7 +842,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityScanWebCams.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivitySessionOptions.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityShowHelp.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivitySnapShot.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivitySoundOptions.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityStoryBoard.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityTimedMessage.ui" />
@@ -867,6 +866,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditAvatarImage.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditStoryBoard.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletFriendListClient.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryEmoticon.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryImage.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGalleryThumb.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGetStarted.ui" />

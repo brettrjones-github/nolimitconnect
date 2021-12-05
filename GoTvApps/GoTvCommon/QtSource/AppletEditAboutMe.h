@@ -33,7 +33,7 @@ public slots:
     //! Implement the OnClickListener callback    
     void						onApplyAboutMeButClick( void );
     //! slot called when user takes snapshot
-    void						onSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
+    void                        slotImageSnapshot( QImage snapshotImage );
 
 protected:
     //! load user about me data from database
@@ -60,7 +60,7 @@ protected:
     std::string					m_strUserSepecificDataDir;
     bool						m_bUserPickedImage = false;
     bool						m_bUsingDefaultImage = true;
-    bool						m_HaveCameraSource = false;
+    bool 					    m_CameraSourceAvail{ false };
 };
 
 

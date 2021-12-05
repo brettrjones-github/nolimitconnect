@@ -120,16 +120,16 @@ const char *    VxGetNetworkHostUrl( void )                         { return g_s
 // /exe/assets/kodi/system/Python/Lib	python libs path
 // /exe/assets/kodi/system/Python/DLLs	python dlls path
 // /exe/assets/kodi		kodi exe assets path
-//            /gotv		gotv assets path
+//            /nolimit  no limit connect assets path
 
 // data storage paths linux      /home/user/.local/share/nolimitconnect
 //                    windows    C:\Users\user\AppData\Roaming\NoLimitConnect
 //                    android ?
 // /storage/nolimitconnect/temp/		temporary files path
 //                  /logs/		log files path
-//                  /gotv/		ShredFilesDb.db3 and app generated files
+//                  /nolimit/		ShredFilesDb.db3 and app generated files
 //                  /kodi/		kodi plugins and writable data directory
-//                  /gotv/gui/	gui assets
+//                  /nolimit/gui/	gui assets
 //						 /shaders/ opengl shaders
 //                       /profile/ profile default files
 //                       /thumbs/ thumbnail assets directory
@@ -477,7 +477,7 @@ void VxSetKodiExeDirectory(const char * exeDir)
     g_strExeDirPythonLib = g_strExeDirPythonLib + "Lib/";
 
 	g_strExeKodiAssetsDir = g_strKodiExeDir + "assets/kodi/";
-	g_strExeGoTvAssetsDir = g_strKodiExeDir + "assets/gotv/";
+	g_strExeGoTvAssetsDir = g_strKodiExeDir + "assets/nolimit/";
 }
 
 //============================================================================
@@ -506,10 +506,10 @@ void VxSetRootDataStorageDirectory(const char * rootDataDir)
 	g_strAppLogsDir = g_strRootDataStorageDir + "logs/";
 	VxFileUtil::makeDirectory(g_strAppTempDir.c_str());
 
-	g_strAppGoTvDataDir = g_strRootDataStorageDir + "gotv/";
+	g_strAppGoTvDataDir = g_strRootDataStorageDir + "nolimit/";
 	VxFileUtil::makeDirectory(g_strAppGoTvDataDir.c_str());
 
-    g_strAppThumbsDir = g_strRootDataStorageDir + "gotv/thumbs/";
+    g_strAppThumbsDir = g_strRootDataStorageDir + "nolimit/thumbs/";
     VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
 
 	g_strAppKodiDataDir = g_strRootDataStorageDir + "kodi/";

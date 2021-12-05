@@ -270,49 +270,49 @@ EPluginAccess PluginBase::canAcceptNewSession( VxNetIdent * netIdent )
 }
 
 //============================================================================ 
-P2PSession * PluginBase::createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+P2PSession * PluginBase::createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	P2PSession * p2pSession = new P2PSession( sktBase, netIdent, pluginType );
+    P2PSession * p2pSession = new P2PSession( sktBase, netIdent, m_ePluginType );
 	p2pSession->setPluginType( m_ePluginType );
 	return p2pSession;
 }
 
 //============================================================================ 
-P2PSession * PluginBase::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+P2PSession * PluginBase::createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	P2PSession * p2pSession = new P2PSession( lclSessionId, sktBase, netIdent, pluginType );
+    P2PSession * p2pSession = new P2PSession( lclSessionId, sktBase, netIdent, m_ePluginType );
 	p2pSession->setPluginType( m_ePluginType );
 	return p2pSession;
 }
 
 //============================================================================ 
-RxSession *	PluginBase::createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+RxSession *	PluginBase::createRxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	RxSession * rxSession = new RxSession( sktBase, netIdent, pluginType );
+    RxSession * rxSession = new RxSession( sktBase, netIdent, m_ePluginType );
 	rxSession->setPluginType( m_ePluginType );
 	return rxSession;
 }
 
 //============================================================================ 
-RxSession *	PluginBase::createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+RxSession *	PluginBase::createRxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	RxSession * rxSession =  new RxSession( lclSessionId, sktBase, netIdent, pluginType );
+    RxSession * rxSession =  new RxSession( lclSessionId, sktBase, netIdent, m_ePluginType );
 	rxSession->setPluginType( m_ePluginType );
 	return rxSession;
 }
 
 //============================================================================ 
-TxSession *	PluginBase::createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+TxSession *	PluginBase::createTxSession( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	TxSession * txSession = new TxSession( sktBase, netIdent, pluginType );
+    TxSession * txSession = new TxSession( sktBase, netIdent, m_ePluginType );
 	txSession->setPluginType( m_ePluginType );
 	return txSession;
 }
 
 //============================================================================ 
-TxSession *	PluginBase::createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent, EPluginType pluginType )
+TxSession *	PluginBase::createTxSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent )
 {
-	TxSession * txSession = new TxSession( lclSessionId, sktBase, netIdent, pluginType );
+    TxSession * txSession = new TxSession( lclSessionId, sktBase, netIdent, m_ePluginType );
 	txSession->setPluginType( m_ePluginType );
 	return txSession;
 }

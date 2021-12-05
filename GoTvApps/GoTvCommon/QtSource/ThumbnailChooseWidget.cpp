@@ -93,7 +93,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
             if( loadFromAsset( thumbAsset ) )
             {
                 setAssetId( assetGuid, thumb->getThumbnailIsCircular() );
-                emit signalThumbnailAssetChanged();
+                emit signalThumbnailAssetChanged( thumbAsset );
             }
         }
 

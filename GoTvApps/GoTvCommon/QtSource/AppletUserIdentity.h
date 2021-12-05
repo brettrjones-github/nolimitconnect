@@ -18,6 +18,7 @@
 
 #include "ui_AppletUserIdentity.h"
 
+class ThumbInfo;
 class AppletUserIdentity : public AppletBase
 {
 	Q_OBJECT
@@ -38,11 +39,14 @@ public slots:
     void						slotDeleteAccount( void );
 
     void                        slotAccountSelectionChanged( int idx );
+    void                        slotAvatarImageChanged( ThumbInfo* avatarThumb );
 
 protected:
 
     void                        loadIdentity( VxNetIdent& ident );
     void                        saveIdentity( VxNetIdent& ident );
+    void                        updateAvatarImage( VxGUID& thumbId, int64_t thumbModifiedTime );
+
     //! validate user input
     QString						validateString( QString charSeq );
     bool                        validateMoodMessage( void );

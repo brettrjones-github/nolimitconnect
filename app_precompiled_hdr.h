@@ -31,4 +31,4 @@
 #include <QDialog>
 #include <QObject>
 
-#endif
+#endif // defined __cplusplus

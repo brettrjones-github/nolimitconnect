@@ -16,7 +16,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
-#include "ActivitySnapShot.h"
+#include "AppletSnapshot.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "AccountMgr.h"
@@ -84,6 +84,8 @@ AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
     connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapshotButClick() ) );
     connect( ui.m_ApplyAboutMeButton, SIGNAL( clicked() ), this, SLOT( onApplyAboutMeButClick() ) );
 
+    m_CameraSourceAvail = m_MyApp.getCamLogic().isCamAvailable();
+
 	m_MyApp.activityStateChange( this, true );
 }
 
@@ -132,9 +134,38 @@ void AppletEditAboutMe::onBrowseButClick( void )
 //! Implement the OnClickListener callback    
 void AppletEditAboutMe::onSnapshotButClick( void )
 {
-    ActivitySnapShot oDlg( m_MyApp, this );
-    connect( &oDlg, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), this, SLOT( onSnapshot( uint8_t*, uint32_t, int, int ) ) );
-    oDlg.exec();
+    if( m_CameraSourceAvail )
+    {
+        AppletSnapshot* appletSnapshot = dynamic_cast< AppletSnapshot* >( m_MyApp.getAppletMgr().launchApplet( eAppletSnapshot, this ) );
+        if( appletSnapshot )
+        {
+            //connect( appletSnapshot, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), this, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
+            connect( appletSnapshot, SIGNAL( signalSnapshotImage( QImage ) ), this, SLOT( slotImageSnapshot( QImage ) ) );
+        }
+    }
+    else
+    {
+        QMessageBox::warning( this, QObject::tr( "Camera Capture" ), QObject::tr( "No Camera Source Available." ) );
+    }
+}
+
+//============================================================================
+void AppletEditAboutMe::slotImageSnapshot( QImage snapshotImage )
+{
+    if( !snapshotImage.isNull() )
+    {
+        QPixmap bitmap = QPixmap::fromImage( snapshotImage );
+        LogMsg( LOG_VERBOSE, "AppletEditAboutMe::slotImageSnapshot w %d h %d" );
+        if( !bitmap.isNull() )
+        {
+            updateSnapShot( bitmap );
+        }
+        else
+        {
+            QString msgText = QObject::tr( "Failed to read snapshot " );
+            QMessageBox::critical( this, QObject::tr( "Error Reading snapshot" ), msgText );
+        }
+    }
 }
 
 //============================================================================
@@ -181,7 +212,7 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
         }
         else
         {
-            LogMsg( LOG_ERROR, "Failed to save picture of me\n" );
+            LogMsg( LOG_ERROR, "Failed to save picture of me" );
         }
     }
 
@@ -194,22 +225,6 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
                                           m_UserProfile.m_strDonation.toUtf8() );
     QString msgText = QObject::tr( "Applied About Me Changes " );
     QMessageBox::information( this, QObject::tr( "About Me Change Success" ), msgText );
-}
-
-//============================================================================
-//! slot called when user takes snapshot
-void AppletEditAboutMe::onSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight )
-{
-    QPixmap bitmap;
-    if( bitmap.loadFromData( pu8JpgData, u32DataLen, "JPG" ) )
-    {
-        updateSnapShot( bitmap );
-    }
-    else
-    {
-        QString msgText = QObject::tr( "Failed to read snapshot " );
-        QMessageBox::critical( this, QObject::tr( "Error Reading snapshot" ), msgText );
-    }
 }
 
 //============================================================================

@@ -25,7 +25,7 @@ public:
     virtual ~PluginBaseHostService() override = default;
 
     void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
-    EHostType                   getHostType(  void )                { return m_HostType; }
+    EHostType                   getHostType(  void ) override       { return m_HostType; }
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
