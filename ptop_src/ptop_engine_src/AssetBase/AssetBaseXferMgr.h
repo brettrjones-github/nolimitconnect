@@ -65,8 +65,8 @@ public:
 	virtual void				fromGuiUserLoggedOn( void );
 
 	virtual bool				fromGuiSendAssetBase( AssetBaseInfo& assetInfo );
-    virtual bool				fromGuiRequestAssetBase( AssetBaseInfo& assetInfo );
-    virtual bool				fromGuiRequestAssetBase(  VxNetIdent * netIdent, AssetBaseInfo& assetInfo );
+    virtual bool				fromGuiRequestAssetBase( AssetBaseInfo& assetInfo, VxSktBase * sktBase = nullptr );
+    virtual bool				fromGuiRequestAssetBase(  VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxSktBase* sktBase = nullptr );
 	virtual void				fromGuiCancelDownload( VxGUID& lclSessionId );
 	virtual void				fromGuiCancelUpload( VxGUID& lclSessionId );
 

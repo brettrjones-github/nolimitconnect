@@ -25,20 +25,20 @@ class PluginSessionMgr;
 class VxNetIdent;
 class VxSktBase;
 class VxPktHdr;
-class PktVoiceReq;
+class PktPushToTalkReq;
 
-class VoiceFeedMgr
+class PushToTalkFeedMgr
 {
 public:
-	VoiceFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
+	PushToTalkFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 
 	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
 	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
 
-	virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktPushToTalkReq					( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktPushToTalkReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-	virtual void				callbackOpusPkt( void * userData, PktVoiceReq * pktOpusAudio );
+	virtual void				callbackOpusPkt( void * userData, PktPushToTalkReq * pktOpusAudio );
 	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
 
 protected:

@@ -185,6 +185,9 @@ public:
     /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
     std::string	    			getIdentFolderName( void );
 
+    bool                        getThumbnailIdList( std::vector<VxGUID>& thumbIdList );
+    bool                        getThumbnailPairList( std::vector<std::pair<VxGUID, int64_t>>& thumbPairList );
+
     bool                        hasThumbId( EHostType hostType );
     VxGUID&                     getThumbId( EHostType hostType );
     VxGUID                      getHostThumbId( EHostType hostType, bool defaultToAvatarThumbId );

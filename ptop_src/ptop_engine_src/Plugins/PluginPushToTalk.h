@@ -16,15 +16,15 @@
 
 #include "PluginSessionMgr.h"
 #include "PluginBase.h"
-#include "VoiceFeedMgr.h"
+#include "PushToTalkFeedMgr.h"
 
 #include <PktLib/VxCommon.h>
 
-class PluginVoicePhone : public PluginBase
+class PluginPushToTalk : public PluginBase
 {
 public:
-	PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginVoicePhone() = default;
+	PluginPushToTalk( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	virtual ~PluginPushToTalk() = default;
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				
 														int				pvUserData,
@@ -53,8 +53,8 @@ protected:
 
 	virtual void				onPktChatReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-	virtual void				onPktVoiceReq				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktVoiceReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktPushToTalkReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktPushToTalkReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	
 	virtual void				onPktSessionStopReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
@@ -65,11 +65,11 @@ protected:
 	virtual void				onSessionEnded				( PluginSessionBase * poSession, bool pluginIsLocked, EOfferResponse eOfferResponse );
 
 protected:
-	virtual void				callbackOpusPkt				( void * userData, PktVoiceReq * pktOpusAudio );
-	virtual void				callbackAudioOutSpaceAvail( int freeSpaceLen );
+	virtual void				callbackOpusPkt				( void * userData, PktPushToTalkReq * pktOpusAudio );
+	virtual void				callbackAudioOutSpaceAvail	( int freeSpaceLen );
 
 	PluginSessionMgr			m_PluginSessionMgr;
-	VoiceFeedMgr				m_VoiceFeedMgr;
+	PushToTalkFeedMgr			m_PushToTalkFeedMgr;
 };
 
 

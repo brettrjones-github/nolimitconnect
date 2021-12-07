@@ -85,6 +85,12 @@ enum EMyIcons
 	eMyIconVoicePhoneLocked,
 	eMyIconVoicePhoneIgnored,
 
+	eMyIconPushToTalkCancel,
+	eMyIconPushToTalkNormal,
+	eMyIconPushToTalkDisabled,
+	eMyIconPushToTalkLocked,
+	eMyIconPushToTalkIgnored,
+
 	eMyIconVideoPhoneCancel,
 	eMyIconVideoPhoneNormal,
 	eMyIconVideoPhoneDisabled,

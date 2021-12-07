@@ -299,6 +299,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceAboutMe.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h \
@@ -310,6 +311,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RcWebProxy.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/Relay.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientSession.h \
@@ -607,6 +609,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkHost.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkSearchList.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceAboutMe.cpp \
@@ -619,6 +622,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PushToTalkFeedMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RcWebProxy.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/Relay.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/RelayClientSession.cpp \

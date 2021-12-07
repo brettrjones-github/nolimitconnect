@@ -98,8 +98,6 @@ std::vector<VxGUID>	AssetBaseMgr::m_EmoticonIdList{
 { 12632410285504908102, 4294383552542830217 },  // 39 !AF4F5639AC82CB463B98B716A2986E89!
 { 15438663251370106147, 5292085521134278792 } };  // 40 !D641266DF8CADD23497143BE28325888!
 
-
-
 //============================================================================
 AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName, const char * dbStateName, EAssetMgrType assetMgrType )
 : m_Engine( engine )
@@ -112,6 +110,12 @@ AssetBaseMgr::AssetBaseMgr( P2PEngine& engine, const char * dbName, const char *
 AssetBaseMgr::~AssetBaseMgr()
 {
 	delete &m_AssetBaseInfoDb;
+}
+
+//============================================================================
+bool AssetBaseMgr::isEmoticonThumbnail( VxGUID& thumbId )
+{
+	return thumbId.isVxGUIDValid() && std::find( m_EmoticonIdList.begin(), m_EmoticonIdList.end(), thumbId ) != m_EmoticonIdList.end();
 }
 
 //============================================================================
@@ -607,7 +611,7 @@ void AssetBaseMgr::announceAssetXferState( VxGUID& assetUniqueId, EAssetSendStat
 }
 
 //============================================================================
-bool AssetBaseMgr::removeAsset( std::string fileName )
+bool AssetBaseMgr::removeAsset( std::string fileName, bool deleteFile )
 {
 	bool assetRemoved = false;
 	std::vector<AssetBaseInfo*>::iterator iter;
@@ -619,6 +623,11 @@ bool AssetBaseMgr::removeAsset( std::string fileName )
 			m_AssetBaseInfoList.erase( iter );
 			m_AssetBaseInfoDb.removeAsset( fileName.c_str() );
 			announceAssetRemoved( assetInfo );
+			if( deleteFile && assetInfo->isThumbAsset() || assetInfo->isFileAsset() )
+			{
+				VxFileUtil::deleteFile( assetInfo->getAssetName().c_str() );
+			}
+
 			delete assetInfo;
 			assetRemoved = true;
 			break;
@@ -629,7 +638,7 @@ bool AssetBaseMgr::removeAsset( std::string fileName )
 }
 
 //============================================================================
-bool AssetBaseMgr::removeAsset( VxGUID& assetUniqueId )
+bool AssetBaseMgr::removeAsset( VxGUID& assetUniqueId, bool deleteFile )
 {
 	bool assetRemoved = false;
 	std::vector<AssetBaseInfo*>::iterator iter;
@@ -641,6 +650,11 @@ bool AssetBaseMgr::removeAsset( VxGUID& assetUniqueId )
 			m_AssetBaseInfoList.erase( iter );
 			m_AssetBaseInfoDb.removeAsset( assetInfo );
 			announceAssetRemoved( assetInfo );
+			if( deleteFile && assetInfo->isThumbAsset() || assetInfo->isFileAsset() )
+			{
+				VxFileUtil::deleteFile( assetInfo->getAssetName().c_str() );
+			}
+
 			delete assetInfo;
 			assetRemoved = true;
 			break;

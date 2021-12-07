@@ -222,6 +222,8 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[PKT_TYPE_RELAY_TEST_REQ]						= &PktHandlerBase::onPktRelayTestReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_RELAY_TEST_REPLY]					= &PktHandlerBase::onPktRelayTestReply;
 
+	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REQ]					= &PktHandlerBase::onPktPushToTalkReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REPLY]					= &PktHandlerBase::onPktPushToTalkReply;
 }
 
 //============================================================================
@@ -1010,4 +1012,16 @@ void PktHandlerBase::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr 
 void PktHandlerBase::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
 }

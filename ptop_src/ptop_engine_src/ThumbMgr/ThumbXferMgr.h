@@ -53,10 +53,7 @@ public:
     virtual PktBaseListReq*			    createPktBaseListReq( void ) override;
     virtual PktBaseListReply*			createPktBaseListReply( void ) override;
 
-    virtual bool				        requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId );
-
-protected:
-
+    virtual bool				requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, VxSktBase* sktBase = nullptr );
 };
 
 

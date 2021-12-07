@@ -441,6 +441,7 @@ public:
     virtual void				fromGuiSetUserXferDir( const char * userDir );
     virtual void				fromGuiSetUserSpecificDir( const char * userDir );
     virtual uint64_t			fromGuiGetDiskFreeSpace( void );
+    virtual uint64_t			fromGuiClearCache( ECacheType cacheType );
     virtual void				fromGuiAppShutdown( void );
 
     virtual void				fromGuiAppIdle( void );

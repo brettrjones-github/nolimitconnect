@@ -277,6 +277,15 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconVoicePhoneDisabled:
 		return ":/AppRes/Resources/lock.svg";
 
+	case eMyIconPushToTalkCancel:
+		return ":/AppRes/Resources/lock.svg";
+	case eMyIconPushToTalkNormal:
+		return ":/AppRes/Resources/push-to-talk.svg";
+	case eMyIconPushToTalkLocked:
+	case eMyIconPushToTalkIgnored:
+	case eMyIconPushToTalkDisabled:
+		return ":/AppRes/Resources/lock.svg";
+
 	case eMyIconMicrophoneOn:
 		return ":/AppRes/Resources/microphone.svg";
 	case eMyIconMicrophoneOff:
@@ -1217,6 +1226,26 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		}
 		break;
 
+	case ePluginTypePushToTalk:	
+		switch( ePluginAccess )
+		{
+		case ePluginAccessOk:
+			return eMyIconPushToTalkNormal;
+		case ePluginAccessDisabled:
+		case ePluginAccessInactive:
+		case ePluginAccessRequiresDirectConnect:
+		case ePluginAccessRequiresOnline:
+		case ePluginAccessNotSet:
+		case eMaxPluginAccessState:
+			return eMyIconPushToTalkDisabled;
+		case ePluginAccessLocked:
+			return eMyIconPushToTalkLocked;
+		case ePluginAccessIgnored:
+		case ePluginAccessBusy:
+			return eMyIconPushToTalkIgnored;
+		}
+		break;
+
 	case ePluginTypeVideoPhone:	// Video phone p2p plugin
 		switch( ePluginAccess )
 		{
@@ -1419,6 +1448,8 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 		return eMyIconTruthOrDareDisabled;
 	case 	ePluginTypeMessenger:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconMultiSessionDisabled;
+	case 	ePluginTypePushToTalk:
+		return eMyIconPushToTalkDisabled;
 	default:		
 		return eMyIconUnknown;
 	}
@@ -1446,6 +1477,8 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 		return eMyIconTruthOrDareLocked;
 	case 	ePluginTypeMessenger:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconMultiSessionLocked;
+	case 	ePluginTypePushToTalk:
+		return eMyIconPushToTalkLocked;
 	default:		
 		return eMyIconUnknown;
 	}
@@ -1469,8 +1502,10 @@ EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
 		return eMyIconVideoPhoneIgnored;
 	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconTruthOrDareIgnored;
-	case 	ePluginTypeMessenger:	// Web Cam Truth Or Dare game p2p plugin
+	case 	ePluginTypeMessenger:	
 		return eMyIconMultiSessionIgnored;
+	case 	ePluginTypePushToTalk:	
+		return eMyIconPushToTalkIgnored;
 	default:		
 		return eMyIconUnknown;
 	}

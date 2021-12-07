@@ -148,9 +148,15 @@ AssetBaseInfo::AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& a
 }
 
 //============================================================================
-AssetBaseInfo::~AssetBaseInfo()
+bool AssetBaseInfo::validateAssetExist( void )
 {
-	// LogMsg( LOG_DEBUG, "~AssetBaseInfo %p %s", this, m_UniqueId.toHexString().c_str() );
+	bool exists = true;
+	if( ( isFileAsset() || isThumbAsset() )  && !VxFileUtil::fileExists( m_AssetName.c_str() ) )
+	{
+		exists = false;
+	}
+
+	return exists;
 }
 
 //============================================================================
@@ -206,7 +212,7 @@ VxGUID& AssetBaseInfo::generateNewUniqueId( bool ifNotValid )
 //============================================================================
 bool AssetBaseInfo::isFileAsset( void )
 {
-	return (0 != (m_u16AssetType & ( eAssetTypePhoto | eAssetTypeAudio | eAssetTypeVideo | eAssetTypeDocument | eAssetTypeArchives | eAssetTypeExe | eAssetTypeOtherFiles	)) );
+	return (0 != ( m_u16AssetType & ( eAssetTypePhoto | eAssetTypeAudio | eAssetTypeVideo | eAssetTypeDocument | eAssetTypeArchives | eAssetTypeExe | eAssetTypeOtherFiles ) ) );
 }
 
 //============================================================================

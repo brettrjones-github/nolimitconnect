@@ -1286,3 +1286,21 @@ void P2PEngine::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 #endif // DEBUG_ENGINE_PKTS
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
+
+//============================================================================
+void P2PEngine::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+	LogMsg( LOG_INFO, "P2PEngine::onPktPushToTalkReq" );
+#endif // DEBUG_ENGINE_PKTS
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+	LogMsg( LOG_INFO, "P2PEngine::onPktPushToTalkReply" );
+#endif // DEBUG_ENGINE_PKTS
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}

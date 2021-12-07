@@ -200,6 +200,7 @@ public:
     virtual void				fromGuiSetUserSpecificDir( const char * userSpecificDir  ) override;
     virtual void				fromGuiSetUserXferDir( const char * userXferDir  ) override;
     virtual uint64_t			fromGuiGetDiskFreeSpace( void  ) override;
+    virtual uint64_t			fromGuiClearCache( ECacheType cacheType ) override;
     virtual void				fromGuiAppShutdown( void  ) override;
     virtual void				fromGuiAppIdle( void  ) override;
     virtual void				fromGuiAppPause( void ) override;
@@ -670,6 +671,9 @@ public:
     virtual void				onPktOfferSendCompleteReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+
+    virtual void				onPktPushToTalkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktPushToTalkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
 

@@ -224,9 +224,12 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 	uint64_t assetLen;
 	std::string destasset;
 	std::string consoleId;
+
+	std::vector<AssetBaseInfo*> toRemoveList;
+
 	lockAssetInfoDb();
 	DbCursor * cursor = startQuery( "SELECT * FROM tblAssets" ); // ORDER BY unique_id DESC  // BRJ don't know why ORDER BY quit working on android.. do in code
-	if( NULL != cursor )
+	if( cursor )
 	{
 		while( cursor->getNextRow() )
 		{
@@ -249,11 +252,25 @@ void AssetBaseInfoDb::getAllAssets( std::vector<AssetBaseInfo*>& AssetAssetList 
 			assetInfo->setAssetSendState( ( EAssetSendState )cursor->getS32( COLUMN_ASSET_SEND_STATE ) );
 
             vx_assert( assetInfo->isValid() );
-			
-			insertAssetInTimeOrder( assetInfo, AssetAssetList );
+
+			if( assetInfo->validateAssetExist() )
+			{
+				insertAssetInTimeOrder( assetInfo, AssetAssetList );
+			}
+			else
+			{
+				toRemoveList.push_back( assetInfo );
+			}
 		}
 
 		cursor->close();
+	}
+
+	// clear out any that do not exist anymore
+	for( auto asset : toRemoveList )
+	{
+		removeAsset( asset );
+		delete asset;
 	}
 
 	unlockAssetInfoDb();

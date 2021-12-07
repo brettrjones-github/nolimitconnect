@@ -73,13 +73,13 @@ namespace
     std::string			g_strExeDirPythonDlls			= "";
     std::string			g_strExeDirPythonLib			= "";
     std::string			g_strExeKodiAssetsDir           = "";
-	std::string			g_strExeGoTvAssetsDir           = "";
+	std::string			g_strExeNoLimitAssetsDir        = "";
 
 	// user writeable paths
 	std::string			g_strRootDataStorageDir         = "";
 	std::string			g_strAppTempDir                 = "";
 	std::string			g_strAppLogsDir                 = "";
-	std::string			g_strAppGoTvDataDir             = "";
+	std::string			g_strAppNoLimitDataDir          = "";
 	std::string			g_strAppKodiDataDir             = "";
 
 	// user specific writable paths
@@ -161,8 +161,8 @@ void VxSetAppDirectory( EAppDir appDir, const char * setDir )
         case eAppDirExeKodiAssets:
             g_strExeKodiAssetsDir = setDir;
             break;
-        case eAppDirExeGoTvAssets:
-            g_strExeGoTvAssetsDir = setDir;
+        case eAppDirExeNoLimitAssets:
+            g_strExeNoLimitAssetsDir = setDir;
             break;
         case eAppDirExePython:
             g_strExeDirPython = setDir;
@@ -186,8 +186,8 @@ void VxSetAppDirectory( EAppDir appDir, const char * setDir )
         case eAppDirAppKodiData:
             g_strAppKodiDataDir = setDir;
             break;
-        case eAppDirAppGoTvData:
-            g_strAppGoTvDataDir = setDir;
+        case eAppDirAppNoLimitData:
+            g_strAppNoLimitDataDir = setDir;
             break;
 
         case eAppDirRootUserData:
@@ -248,8 +248,8 @@ std::string& VxGetAppDirectory( EAppDir appDir )
 		return g_strKodiExeDir;
 	case eAppDirExeKodiAssets:
 		return g_strExeKodiAssetsDir;
-	case eAppDirExeGoTvAssets:
-		return g_strExeGoTvAssetsDir;
+	case eAppDirExeNoLimitAssets:
+		return g_strExeNoLimitAssetsDir;
 
 	case eAppDirExePython:
         return g_strExeDirPython;
@@ -266,8 +266,8 @@ std::string& VxGetAppDirectory( EAppDir appDir )
 		return g_strAppLogsDir;
 	case eAppDirAppKodiData:
 		return g_strAppKodiDataDir;
-	case eAppDirAppGoTvData:
-		return g_strAppGoTvDataDir;
+	case eAppDirAppNoLimitData:
+		return g_strAppNoLimitDataDir;
 
 	case eAppDirRootUserData:
 		return g_strRootUserDataDir;
@@ -477,7 +477,7 @@ void VxSetKodiExeDirectory(const char * exeDir)
     g_strExeDirPythonLib = g_strExeDirPythonLib + "Lib/";
 
 	g_strExeKodiAssetsDir = g_strKodiExeDir + "assets/kodi/";
-	g_strExeGoTvAssetsDir = g_strKodiExeDir + "assets/nolimit/";
+	g_strExeNoLimitAssetsDir = g_strKodiExeDir + "assets/nolimit/";
 }
 
 //============================================================================
@@ -487,8 +487,8 @@ std::string& VxGetKodiExeDirectory(void) { return g_strKodiExeDir; }
 void VxSetExeKodiAssetsDirectory(const char * assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
 
-void VxSetExeGoTvAssetsDirectory(const char * assetsDir){ g_strExeGoTvAssetsDir = assetsDir; }
-std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeGoTvAssetsDir; }
+void VxSetExeGoTvAssetsDirectory(const char * assetsDir){ g_strExeNoLimitAssetsDir = assetsDir; }
+std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeNoLimitAssetsDir; }
 
 void VxSetPythonExeDirectory( const char * pythonDir ){ g_strExeDirPython = pythonDir; }
 void VxSetPythonDllDirectory( const char * pythonDir ){ g_strExeDirPythonDlls = pythonDir; }
@@ -506,8 +506,8 @@ void VxSetRootDataStorageDirectory(const char * rootDataDir)
 	g_strAppLogsDir = g_strRootDataStorageDir + "logs/";
 	VxFileUtil::makeDirectory(g_strAppTempDir.c_str());
 
-	g_strAppGoTvDataDir = g_strRootDataStorageDir + "nolimit/";
-	VxFileUtil::makeDirectory(g_strAppGoTvDataDir.c_str());
+	g_strAppNoLimitDataDir = g_strRootDataStorageDir + "nolimit/";
+	VxFileUtil::makeDirectory(g_strAppNoLimitDataDir.c_str());
 
     g_strAppThumbsDir = g_strRootDataStorageDir + "nolimit/thumbs/";
     VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
@@ -515,14 +515,14 @@ void VxSetRootDataStorageDirectory(const char * rootDataDir)
 	g_strAppKodiDataDir = g_strRootDataStorageDir + "kodi/";
 	VxFileUtil::makeDirectory( g_strAppKodiDataDir.c_str());
 
-	GetVxFileShredder().initShredder( g_strAppGoTvDataDir );
+	GetVxFileShredder().initShredder( g_strAppNoLimitDataDir );
 }
 
 //============================================================================
 std::string& VxGetRootDataStorageDirectory(void) { return g_strRootDataStorageDir; }
 std::string& VxGetAppTempDirectory(void) { return g_strAppTempDir; }
 std::string& VxGetAppLogsDirectory(void) { return g_strAppLogsDir; }
-std::string& VxGetAppGoTvDataDirectory(void) { return g_strAppGoTvDataDir; }
+std::string& VxGetAppNoLimitDataDirectory(void) { return g_strAppNoLimitDataDir; }
 std::string& VxGetAppKodiDataDirectory(void) { return g_strAppKodiDataDir; }
 std::string& VxGetAppThumbnailDirectory(void) { return g_strAppThumbsDir; }
 
@@ -552,8 +552,8 @@ void VxSetUserSpecificDataDirectory( const char * userDataDir  )
 
 //============================================================================
 std::string& VxGetUserSpecificDataDirectory( void ) { return g_strUserSpecificDataDir; }
-std::string& VxGetSettingsDirectory( void ) { return g_strSettingsDir; }
-std::string& VxGetUserProfileDirectory( void ) { return g_strUserProfileDir; }
+std::string& VxGetSettingsDirectory( void )			{ return g_strSettingsDir; }
+std::string& VxGetUserProfileDirectory( void )		{ return g_strUserProfileDir; }
 
 //============================================================================
 void VxSetRootXferDirectory( const char * rootXferDir  )

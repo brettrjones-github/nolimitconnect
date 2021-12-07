@@ -34,6 +34,8 @@
 
 #define MIN_SEARCH_TEXT_LEN     3
 
+// NOTE: if you add or remove a enum then must update corresponding DescribeXXX( enumXXX )
+
 enum EAppModule
 {
     eAppModuleInvalid = 0,
@@ -52,6 +54,14 @@ enum EAgeType
     eAgeType21OrOlder,
 
     eMaxAgeType
+};
+
+enum ECacheType
+{
+    eCacheTypeNone = 0,
+    eCacheTypeThumbnail,
+
+    eMaxCacheType
 };
 
 enum ECommErr
@@ -612,27 +622,28 @@ enum EPluginType
     ePluginTypeTruthOrDare          = 8,	//!< Video Chat Truth Or Dare game  
     ePluginTypeVideoPhone           = 9,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone           = 10,	//!< VOIP audio only phone call
+    ePluginTypePushToTalk           = 11,	//!< VOIP audio push to talk
 
-    ePluginTypeClientGroup          = 11,	//!< group client
-    ePluginTypeClientChatRoom       = 12,	//!< chat room user client plugin
-    ePluginTypeClientRandomConnect  = 13,	//!< Random connect to another person client
-    ePluginTypeClientPeerUser       = 14,	//!< mainly for avatar image
-    ePluginTypeClientNetwork        = 15,	//!< network client
-    ePluginTypeClientConnectTest    = 16,	//!< Connection Test Client
+    ePluginTypeClientGroup          = 12,	//!< group client
+    ePluginTypeClientChatRoom       = 13,	//!< chat room user client plugin
+    ePluginTypeClientRandomConnect  = 14,	//!< Random connect to another person client
+    ePluginTypeClientPeerUser       = 15,	//!< mainly for avatar image
+    ePluginTypeClientNetwork        = 16,	//!< network client
+    ePluginTypeClientConnectTest    = 17,	//!< Connection Test Client
 
-    ePluginTypeHostGroup            = 17,   //!< group hosting
-    ePluginTypeHostChatRoom         = 18,	//!< chat room hosting plugin
-    ePluginTypeHostRandomConnect    = 19,	//!< Random connect to another person hosting
-    ePluginTypeHostPeerUser         = 20,	//!< mainly for avatar image
-    ePluginTypeHostNetwork          = 21,	//!< master network hosting
-    ePluginTypeHostConnectTest      = 22,	//!< Connection Test Service
+    ePluginTypeHostGroup            = 18,   //!< group hosting
+    ePluginTypeHostChatRoom         = 19,	//!< chat room hosting plugin
+    ePluginTypeHostRandomConnect    = 20,	//!< Random connect to another person hosting
+    ePluginTypeHostPeerUser         = 21,	//!< mainly for avatar image
+    ePluginTypeHostNetwork          = 22,	//!< master network hosting
+    ePluginTypeHostConnectTest      = 23,	//!< Connection Test Service
 
-    ePluginTypeNetworkSearchList    = 23,	//!< group and chat room list for network search
+    ePluginTypeNetworkSearchList    = 24,	//!< group and chat room list for network search
 
-    ePluginTypeRelay                = 24,	//!< Relay services plugin
+    ePluginTypeRelay                = 25,	//!< Relay services plugin
 
     // NOTE: plugin types 25 - 47 not implemented .. reserved for future use
-    eMaxImplementedPluginType	    = 25, 
+    eMaxImplementedPluginType	    = 26, 
     // plugins 0-47 are part of PktAnnounce
     // plugins after 47 are system plugins and do not go out in announcement pkt
     eMaxUserPluginType              = 48, // this marks end of announced permission

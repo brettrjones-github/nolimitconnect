@@ -229,6 +229,8 @@ public:
 
     virtual EPluginType         getDestinationPluginOverride( EHostType hostType );
 
+	virtual bool				requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, VxSktBase* sktBase = nullptr );
+
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
     virtual bool                generateSettingPkt( PluginSetting& pluginSetting );

@@ -131,7 +131,7 @@ void P2PEngine::fromGuiSetUserSpecificDir( const char * userSpecificDir  )
 	RCODE rc = m_BigListMgr.bigListMgrStartup( strDbFileName.c_str() );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::startupEngine error %d bigListMgrStartup\n", rc );
+		LogMsg( LOG_ERROR, "P2PEngine::startupEngine error %d bigListMgrStartup", rc );
 	}
 
 	strDbFileName = VxGetSettingsDirectory();
@@ -151,6 +151,17 @@ uint64_t P2PEngine::fromGuiGetDiskFreeSpace( void  )
 {
 	std::string incompleteDir =	VxGetIncompleteDirectory();
 	return VxFileUtil::getDiskFreeSpace( incompleteDir.c_str() );
+}
+
+//============================================================================
+uint64_t P2PEngine::fromGuiClearCache( ECacheType cacheType )
+{
+	if( eCacheTypeThumbnail == cacheType )
+	{
+		return m_ThumbMgr.fromGuiClearCache( cacheType );
+	}
+
+	return 0;
 }
 
 //============================================================================
@@ -524,7 +535,7 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetBaseInfo& ass
 			fromGuiAddFileToLibrary( fileName.c_str(), false );	
 		}
 
-		m_AssetMgr.removeAsset( assetInfo.getAssetUniqueId() );
+		m_AssetMgr.removeAsset( assetInfo.getAssetUniqueId(), false );
 		if( isFileAsset )
 		{
 			GetVxFileShredder().shredFile( fileName );

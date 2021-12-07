@@ -106,18 +106,18 @@ uint64_t IGoTv::fromGuiGetDiskFreeSpace( void )
 }
 
 //============================================================================
+uint64_t IGoTv::fromGuiClearCache( ECacheType cacheType )
+{
+    return getPtoP().fromGuiClearCache( cacheType );
+}
+
+//============================================================================
 void IGoTv::fromGuiAppShutdown( void )
 {
-    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "---fromGuiAppShutdown start.. doing audio shutdown\n" );
+    LogMsg( LOG_INFO, "fromGuiAppShutdown" );
     VxSetAppIsShuttingDown( true );
-//    if( 0 != m_AudioMgr )
-//    {
-//        m_AudioMgr->Close();
-//    }
 
-    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "---fromGuiAppShutdown doing engine shutdown\n" );
     getPtoP().fromGuiAppShutdown();
-    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "---fromGuiAppShutdown done\n" );
 }
 
 //============================================================================

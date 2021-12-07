@@ -15,6 +15,7 @@
 #include "ThumbXferMgr.h"
 
 #include <PktLib/PktsThumbXfer.h>
+#include <NetLib/VxSktBase.h>
 
 //============================================================================
 PktBaseGetReq* ThumbXferMgr::createPktBaseGetReq( void )
@@ -94,4 +95,3 @@ PktBaseListReply* ThumbXferMgr::createPktBaseListReply( void )
 {
     return new PktThumbListReply();
 }
-

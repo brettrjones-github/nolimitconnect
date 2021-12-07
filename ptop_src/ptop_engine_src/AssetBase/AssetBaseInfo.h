@@ -47,12 +47,13 @@ public:
     AssetBaseInfo( EAssetType assetType, const char * fileName, uint64_t fileLen );
     AssetBaseInfo( EAssetType assetType, const char* fileName, uint64_t fileLen, VxGUID& assetId );
     AssetBaseInfo( EAssetType assetType, VxGUID& creatorId, VxGUID& assetId );
-    virtual ~AssetBaseInfo();
+    virtual ~AssetBaseInfo() = default;
 
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
 
     virtual bool				isValid( void );
     virtual bool				isMine( void );
+    virtual bool                validateAssetExist( void );
 
     virtual bool				isDirectory( void );
     virtual bool				isUnknownAsset( void )                          { return ( 0 == m_u16AssetType ) ? true : false; }

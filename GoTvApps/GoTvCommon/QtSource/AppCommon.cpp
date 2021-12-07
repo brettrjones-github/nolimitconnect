@@ -239,7 +239,7 @@ void AppCommon::loadWithoutThread( void )
     VxSetRootXferDirectory( m_AppSettings.m_strRootXferDir.c_str() );
 
     // create settings database appshortname_settings.db3 in /appshortName/data/
-    QString strSettingsDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_settings.db3";
+    QString strSettingsDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_settings.db3";
     m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
 
     // Now that settings are set up we can enable logging with log settings
@@ -247,7 +247,7 @@ void AppCommon::loadWithoutThread( void )
 
     // database of multiple accounts
     // create accounts database appshortname_accounts.db3 in /appshortName/data/
-    QString strAccountDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
+    QString strAccountDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
     m_AccountMgr.startupAccountMgr( strAccountDbFileName.toUtf8().constData() );
 
     // asset database and user specific setting database will be created in sub directory of account login
@@ -334,12 +334,12 @@ void AppCommon::slotStartLoadingFromThread( void )
 	VxSetRootXferDirectory( m_AppSettings.m_strRootXferDir.c_str() );
 
 	// create settings database appshortname_settings.db3 in /appshortName/data/
-	QString strSettingsDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_settings.db3";
+	QString strSettingsDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_settings.db3";
 	m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
 
 	// database of multiple accounts
 	// create accounts database appshortname_accounts.db3 in /appshortName/data/
-	QString strAccountDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
+	QString strAccountDbFileName = VxGetAppNoLimitDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
 	m_AccountMgr.startupAccountMgr( strAccountDbFileName.toUtf8().constData() );
 
 	// asset database and user specific setting database will be created in sub directory of account login
@@ -688,6 +688,21 @@ void AppCommon::startActivity( EPluginType ePluginType, GuiUser * netIdent, QWid
 
 		break;
 
+	case ePluginTypePushToTalk:
+		{
+			/*
+				if( false == getIsPluginVisible( ePluginTypePushToTalk ) )
+				{
+					ActivityToFriendVoicePhone * poDlg;
+					haveExistingOffer ? poDlg = new ActivityToFriendVoicePhone( *this, exitingOffer, parent )
+										: poDlg = new ActivityToFriendVoicePhone( *this, netIdent, parent );
+					poDlg->show();
+				}
+				*/
+		}
+
+		break;
+
 	case ePluginTypeVideoPhone:
 		{
         /*
@@ -795,7 +810,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 		break;
 
 	default:
-		ActivityMessageBox errMsgBox( *this, this, LOG_ERROR, "AppCommon::executeActivity UNKNOWN plugin type %d\n", offer->getPluginType() );
+		ActivityMessageBox errMsgBox( *this, this, LOG_ERROR, "AppCommon::executeActivity UNKNOWN plugin type %d", offer->getPluginType() );
 		errMsgBox.exec();
 	}
 }

@@ -185,6 +185,9 @@ public:
     virtual void				onPktOfferSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktOfferXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+	virtual void				onPktPushToTalkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktPushToTalkReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

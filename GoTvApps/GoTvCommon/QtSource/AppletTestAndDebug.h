@@ -58,6 +58,7 @@ protected slots:
     void                        slotIsMyPortOpenButtonClicked( void );
     void                        slotQueryHostIdButtonClicked( void );
     void                        slotGenerateGuidButtonClicked( void );
+    void                        slotPurgeCacheButtonClicked( void );
 
     void                        slotNewUrlSelected( const QString &newUrl );
 
@@ -68,6 +69,8 @@ protected:
     QPlainTextEdit *            getInfoEdit( void )     { return ui.m_InfoPlainTextEdit; }
     void                        fillBasicInfo( void );
     void                        fillExtraInfo( void );
+    void                        fillCpuInfo( void );
+
     void                        startUrlTest( ENetCmdType netCmdType );
 
     QFile                       m_LogFile;

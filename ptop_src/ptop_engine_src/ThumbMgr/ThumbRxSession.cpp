@@ -42,11 +42,6 @@ ThumbRxSession::ThumbRxSession( P2PEngine& engine, VxGUID& lclSessionId, VxSktBa
 }
 
 //============================================================================
-ThumbRxSession::~ThumbRxSession()
-{
-}
-
-//============================================================================
 void ThumbRxSession::cancelDownload( VxGUID& lclSessionId )
 {
 	VxFileXferInfo& xferInfo = getXferInfo();
@@ -56,5 +51,4 @@ void ThumbRxSession::cancelDownload( VxGUID& lclSessionId )
 	}
 
 	VxFileUtil::deleteFile( xferInfo.getLclFileName().c_str() );
-
 }

@@ -518,6 +518,7 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 	switch(ePluginType)
 	{
 	case ePluginTypeVoicePhone:
+    case ePluginTypePushToTalk:
 	case ePluginTypeVideoPhone:
 	case ePluginTypeTruthOrDare:
 	case ePluginTypeMessenger:

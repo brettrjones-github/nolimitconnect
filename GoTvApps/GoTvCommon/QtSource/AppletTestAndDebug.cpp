@@ -73,6 +73,7 @@ void AppletTestAndDebug::setupApplet( void )
 
     //fillBasicInfo();
     //fillExtraInfo();
+    fillCpuInfo();
     std::string strValue;
     m_MyApp.getAppSettings().getLastUsedTestUrl( strValue );
     if( !strValue.empty() )
@@ -130,6 +131,7 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsMyPortOpenButtonClicked() ) );
     connect( ui.m_QueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostIdButtonClicked() ) );
     connect( ui.m_GenerateGuidButton, SIGNAL( clicked() ), this, SLOT( slotGenerateGuidButtonClicked() ) );
+    connect( ui.m_PurgeCacheButton, SIGNAL( clicked() ), this, SLOT( slotPurgeThumbnailsButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -307,18 +309,30 @@ void AppletTestAndDebug::slotRunTestStatus( QString testName, ERunTestStatus tes
 //============================================================================
 void  AppletTestAndDebug::gotoWebsite( void )
 {
+    fillBasicInfo();
+    fillExtraInfo();
+    fillCpuInfo();
+
     QDesktopServices::openUrl( QUrl( VxGetCompanyWebsite() ) );
 }
 
 //============================================================================
 void AppletTestAndDebug::slotShowLogButtonClick( void )
 {
+    fillBasicInfo();
+    fillExtraInfo();
+    fillCpuInfo();
+
     m_MyApp.launchApplet( eAppletLog, getContentFrameOfOppositePageFrame() );
 }
 
 //============================================================================
 void AppletTestAndDebug::slotShowAppInfoButtonClick( void )
 {
+    fillBasicInfo();
+    fillExtraInfo();
+    fillCpuInfo();
+
     m_MyApp.launchApplet( eAppletApplicationInfo, getContentFrameOfOppositePageFrame() );
 }
 
@@ -374,20 +388,30 @@ void AppletTestAndDebug::fillBasicInfo( void )
 {
     infoMsg( "website: %s", VxGetCompanyWebsite() );
     infoMsg( "app: %s version %s", VxGetApplicationTitle(), VxGetAppVersionString() );
+    infoMsg( "disk space available: %s", GuiParams::describeFileLength( m_MyApp.getFromGuiInterface().fromGuiGetDiskFreeSpace() ).toUtf8().constData() );
+
+    infoMsg( "directories:" );
     std::string strExePathAndFileName;
     if( 0 == VxFileUtil::getExecuteFullPathAndName( strExePathAndFileName ) )
     {
-        infoMsg( "app exe: %s", strExePathAndFileName.c_str() );
+        infoMsg( "app exe 1: %s", strExePathAndFileName.c_str() );
     }
-
-    infoMsg( "directories:" );
-    infoMsg( "app: %s", VxGetAppDirectory( eAppDirAppExe ).c_str() );
+    infoMsg( "app exe 2: %s", VxGetAppDirectory( eAppDirAppExe ).c_str() );
     infoMsg( "storage: %s", VxGetAppDirectory( eAppDirRootDataStorage ).c_str() );
-    infoMsg( "user: %s", VxGetAppDirectory( eAppDirUserSpecific ).c_str() );
-    infoMsg( "kodi: %s", VxGetAppDirectory( eAppDirExeKodiAssets ).c_str() );
+    infoMsg( "personal records: %s", VxGetAppDirectory( eAppDirPersonalRecords ).c_str() );
+    infoMsg( "downloads: %s", VxGetAppDirectory( eAppDirDownloads ).c_str() );
+    infoMsg( "user account specific: %s", VxGetAppDirectory( eAppDirUserSpecific ).c_str() );
+    infoMsg( "kodi assets: %s", VxGetAppDirectory( eAppDirExeKodiAssets ).c_str() );
+    infoMsg( "nolimit assets: %s", VxGetAppDirectory( eAppDirExeNoLimitAssets ).c_str() );
     infoMsg( "python exe: %s", VxGetAppDirectory( eAppDirExePython ).c_str() );
     infoMsg( "python dlls: %s", VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
     infoMsg( "python libs: %s", VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
+}
+
+//============================================================================
+void AppletTestAndDebug::fillCpuInfo( void )
+{
+    infoMsg( "C++ value sizes: int %d long %d long long %d int64_t %d", sizeof( int ), sizeof( long ), sizeof( long long ), sizeof( int64_t ) );
 }
 
 //============================================================================
@@ -422,4 +446,14 @@ void AppletTestAndDebug::slotGenerateGuidButtonClicked( void )
     guid.initializeWithNewVxGUID();
     infoMsg( "{ %llu, %llu }, ", guid.getVxGUIDHiPart(), guid.getVxGUIDLoPart() );
     infoMsg( "%s", guid.toOnlineIdString().c_str() );
+}
+
+//============================================================================
+void AppletTestAndDebug::slotPurgeCacheButtonClicked( void )
+{
+    if( yesNoMessageBox( QObject::tr( "Are you sure?" ), QObject::tr( "This will delete all thumbnail images not currently in use by application" ) ) )
+    {
+        int64_t bytesPurged = m_MyApp.getEngine().fromGuiClearCache( eCacheTypeThumbnail );
+        infoMsg( QString( GuiParams::describeFileLength( bytesPurged ) + QObject::tr( " of disk space freed by deleting cached thumbnails" ) ).toUtf8().constData() );
+    }
 }

@@ -32,8 +32,6 @@
 
 #include <time.h>
 
-
-
 //============================================================================
 ThumbMgr::ThumbMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
 : AssetBaseMgr( engine, dbName, dbStateName,  eAssetMgrTypeThumb )
@@ -176,7 +174,7 @@ void ThumbMgr::announceAssetRemoved( AssetBaseInfo * assetInfo )
 {
     AssetBaseMgr::announceAssetRemoved( assetInfo );
     ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
-    if( thumbInfo )
+    if( thumbInfo && thumbInfo->isThumbAsset() )
     {
 	    lockClientList();
 	    std::vector<ThumbCallbackInterface *>::iterator iter;
@@ -199,7 +197,7 @@ void ThumbMgr::announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState as
 {
     AssetBaseMgr::announceAssetXferState( assetUniqueId, assetSendState, param );
 
-	LogMsg( LOG_INFO, "ThumbMgr::announceAssetXferState state %d start\n", assetSendState );
+	LogMsg( LOG_INFO, "ThumbMgr::announceAssetXferState state %d start", assetSendState );
 	lockClientList();
 	std::vector<ThumbCallbackInterface *>::iterator iter;
 	for( iter = m_ThumbClients.begin();	iter != m_ThumbClients.end(); ++iter )
@@ -433,7 +431,7 @@ void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetI
 
 
 //============================================================================
-bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
+bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId, VxSktBase* sktBase )
 {
     if( !netIdent || ePluginTypeInvalid == pluginType )
     {
@@ -452,7 +450,7 @@ bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType,
     PluginBase* plugin = m_Engine.getPluginMgr().getPlugin( pluginType );
     if( plugin )
     {
-        return plugin->getThumbXferMgr().requestPluginThumb( netIdent, thumbId );
+        return plugin->requestPluginThumb( netIdent, thumbId, sktBase );
     }
     else
     {
@@ -467,14 +465,14 @@ bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType,
 //============================================================================
 bool ThumbMgr::requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
 {
-    if( !netIdent || ePluginTypeInvalid == pluginType )
+    if( !netIdent || ePluginTypeInvalid == pluginType || !thumbId.isVxGUIDValid() )
     {
         LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid param " );
         vx_assert( false );
         return false;
     }
 
-    if( IsHostPluginType( pluginType ) )
+    if( ePluginTypeHostPeerUser != pluginType && IsHostPluginType( pluginType ) )
     {
         LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb You must request thumb using Client plugin instead of Host plugin %s ", DescribePluginType( pluginType ) );
         vx_assert( false );
@@ -484,7 +482,7 @@ bool ThumbMgr::requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPl
     PluginBase* plugin = m_Engine.getPluginMgr().getPlugin( pluginType );
     if( plugin )
     {
-        return plugin->getThumbXferMgr().requestPluginThumb( netIdent, thumbId );
+        return plugin->requestPluginThumb( netIdent, thumbId, sktBase );
     }
     else
     {
@@ -526,10 +524,12 @@ bool ThumbMgr::requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo )
 //============================================================================
 bool ThumbMgr::isThumbUpToDate( VxGUID& thumbId, int64_t thumbModifiedTime )
 {
+    bool isEmoteThumb = isEmoticonThumbnail( thumbId );
+
     m_ThumbInfoMutex.lock();
     for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
     {
-        if( thumbInfo->getThumbId() == thumbId && thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) 
+        if( thumbInfo->getThumbId() == thumbId && ( isEmoteThumb || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
         {
             m_ThumbInfoMutex.unlock();
             return true;
@@ -538,4 +538,19 @@ bool ThumbMgr::isThumbUpToDate( VxGUID& thumbId, int64_t thumbModifiedTime )
 
     m_ThumbInfoMutex.unlock();
     return false;
+}
+
+//============================================================================
+uint64_t ThumbMgr::fromGuiClearCache( ECacheType cacheType )
+{
+    uint64_t cacheDeletedAmt{ 0 };
+    if( eCacheTypeThumbnail == cacheType )
+    {
+        // delete every thumbnail not in use by identity or plugin
+        std::vector<VxGUID> inUseList;
+        // TODO implement
+
+    }
+
+    return cacheDeletedAmt;
 }

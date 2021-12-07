@@ -113,6 +113,7 @@ persons-offer-list.svg (modified)
 pin-pinned.svg
 pin-unpinned.svg
 plugin.svg
+push-to-talk.svg (modified) 
 question-mark.svg
 question-mark-outlined.svg (modified)
 radio-tower.svg

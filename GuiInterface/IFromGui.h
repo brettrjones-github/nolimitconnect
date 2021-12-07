@@ -124,6 +124,8 @@ public:
 	virtual void				fromGuiAppShutdown( void ) = 0;
 	/// Returns disk space available in incomplete downloads directory
 	virtual uint64_t			fromGuiGetDiskFreeSpace( void ) = 0; 
+	/// deletes cached files and returns amount of disk space deleted
+	virtual uint64_t			fromGuiClearCache( ECacheType cacheType ) = 0;
 
 	/// Periodic call to engine for game and application updates
 	virtual void				fromGuiAppIdle( void  ) = 0;  

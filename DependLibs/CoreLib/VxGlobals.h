@@ -28,7 +28,7 @@ enum EAppDir
 	eAppDirAppExe,
     eAppDirKodiExe,
 	eAppDirExeKodiAssets,
-	eAppDirExeGoTvAssets,
+	eAppDirExeNoLimitAssets,
 	eAppDirExePython,
 	eAppDirExePythonDlls,
 	eAppDirExePythonLibs,
@@ -37,7 +37,7 @@ enum EAppDir
 	eAppDirAppTempData,
 	eAppDirAppLogs,
 	eAppDirAppKodiData,
-	eAppDirAppGoTvData,
+	eAppDirAppNoLimitData,
 
 	eAppDirRootUserData,
 
@@ -59,91 +59,91 @@ enum EAppDir
 };
 
 //============================================================================
-void			            VxSetAppIsShuttingDown( bool bIsShuttingDown );
-bool			            VxIsAppShuttingDown( void );
+void							VxSetAppIsShuttingDown( bool bIsShuttingDown );
+bool							VxIsAppShuttingDown( void );
 
-const char *	            VxGetCompanyDomain( void );
-const char *                VxGetOrginizationName( void );
-const char *	            VxGetCompanyWebsite( void );
+const char *					VxGetCompanyDomain( void );
+const char *					VxGetOrginizationName( void );
+const char *					VxGetCompanyWebsite( void );
 
-void	                    VxSetNetworkHostName( const char * netHostName );
-const char *	            VxGetNetworkHostName( void );
-void	                    VxSetNetworkHostPort( uint16_t netHostPort );
-uint16_t	                VxGetNetworkHostPort( void );
-void	                    VxSetNetworkHostUrl( const char * netHostUrl );
-const char *	            VxGetNetworkHostUrl( void );
+void							VxSetNetworkHostName( const char * netHostName );
+const char *					VxGetNetworkHostName( void );
+void							VxSetNetworkHostPort( uint16_t netHostPort );
+uint16_t						VxGetNetworkHostPort( void );
+void							VxSetNetworkHostUrl( const char * netHostUrl );
+const char *					VxGetNetworkHostUrl( void );
 
-const char *	            VxGetApplicationTitle( void );
-void			            VxSetApplicationNameNoSpaces( const char * pAppName );
-const char *	            VxGetApplicationNameNoSpaces( void );
-const char *	            VxGetApplicationNameNoSpacesLowerCase( void );
-void			            VxSetIsApplicationCommercial( bool isCommercial );
-bool			            VxGetIsApplicationCommercial( void );
+const char *					VxGetApplicationTitle( void );
+void							VxSetApplicationNameNoSpaces( const char * pAppName );
+const char *					VxGetApplicationNameNoSpaces( void );
+const char *					VxGetApplicationNameNoSpacesLowerCase( void );
+void							VxSetIsApplicationCommercial( bool isCommercial );
+bool							VxGetIsApplicationCommercial( void );
 
-void			            VxSetAppVersion( uint16_t u16AppVersion );
-uint16_t				    VxGetAppVersion( void );
-const char *	            VxGetAppVersionString( void );
+void							VxSetAppVersion( uint16_t u16AppVersion );
+uint16_t						VxGetAppVersion( void );
+const char *					VxGetAppVersionString( void );
 
 //============================================================================
-void			            VxSetAppDirectory( EAppDir appDir, const char * setDir );
-std::string& 	            VxGetAppDirectory( EAppDir appDir );
+void							VxSetAppDirectory( EAppDir appDir, const char * setDir );
+std::string& 					VxGetAppDirectory( EAppDir appDir );
 
-// exe and app resource paths
-void			            VxSetAppExeDirectory( const char * exeDir );
-std::string&	            VxGetAppExeDirectory( void );
+// exe and app resource path	s
+void							VxSetAppExeDirectory( const char * exeDir );
+std::string&					VxGetAppExeDirectory( void );
 
-void			            VxSetKodiExeDirectory( const char * exeDir );
-std::string&	            VxGetKodiExeDirectory( void );
+void							VxSetKodiExeDirectory( const char * exeDir );
+std::string&					VxGetKodiExeDirectory( void );
 
-void			            VxSetExeKodiAssetsDirectory( const char * assetsDir );
-std::string&	            VxGetExeKodiAssetsDirectory( void );
+void							VxSetExeKodiAssetsDirectory( const char * assetsDir );
+std::string&					VxGetExeKodiAssetsDirectory( void );
 
-void			            VxSetExeGoTvAssetsDirectory( const char * assetsDir );
-std::string&	            VxGetExeGoTvAssetsDirectory(void);
+void							VxSetExeGoTvAssetsDirectory( const char * assetsDir );
+std::string&					VxGetExeGoTvAssetsDirectory(void);
 
-void                        VxSetPythonExeDirectory( const char * pythonDir );
-void                        VxSetPythonDllDirectory( const char * pythonDir );
-void                        VxSetPythonLibDirectory( const char * pythonDir );
+void							VxSetPythonExeDirectory( const char * pythonDir );
+void							VxSetPythonDllDirectory( const char * pythonDir );
+void							VxSetPythonLibDirectory( const char * pythonDir );
 
-// user writable directories
-void			            VxSetRootDataStorageDirectory( const char * rootDataDir );
-std::string&	            VxGetRootDataStorageDirectory( void );
+// user writable directories	
+void							VxSetRootDataStorageDirectory( const char * rootDataDir );
+std::string&					VxGetRootDataStorageDirectory( void );
 
-std::string&	            VxGetAppTempDirectory( void );
-std::string&	            VxGetAppLogsDirectory( void );
-std::string&	            VxGetAppKodiDataDirectory( void );
-std::string&	            VxGetAppGoTvDataDirectory( void );
-std::string&	            VxGetAppThumbnailDirectory( void );
+std::string&					VxGetAppTempDirectory( void );
+std::string&					VxGetAppLogsDirectory( void );
+std::string&					VxGetAppKodiDataDirectory( void );
+std::string&					VxGetAppNoLimitDataDirectory( void );
+std::string&					VxGetAppThumbnailDirectory( void );
 
-void			            VxSetRootUserDataDirectory( const char * rootUserDataDir );
-std::string&	            VxGetRootUserDataDirectory( void );
+void							VxSetRootUserDataDirectory( const char * rootUserDataDir );
+std::string&					VxGetRootUserDataDirectory( void );
 
-void			            VxSetUserSpecificDataDirectory( const char * userDataDir  );
-std::string&	            VxGetUserSpecificDataDirectory( void  );
-std::string&	            VxGetSettingsDirectory( void );
-std::string&	            VxGetUserProfileDirectory( void ); // storyboard is same as profile directory
+void							VxSetUserSpecificDataDirectory( const char * userDataDir  );
+std::string&					VxGetUserSpecificDataDirectory( void  );
+std::string&					VxGetSettingsDirectory( void );
+std::string&					VxGetUserProfileDirectory( void ); // storyboard is same as profile directory
 
-void			            VxSetRootXferDirectory( const char * rootXferDir  );
-std::string&	            VxGetRootXferDirectory( void ) ;
+void							VxSetRootXferDirectory( const char * rootXferDir  );
+std::string&					VxGetRootXferDirectory( void ) ;
 
-void			            VxSetUserXferDirectory( const char * userXferDir  );
-std::string&	            VxGetUserXferDirectory( void  );
-std::string&	            VxGetDownloadsDirectory( void );
-std::string&	            VxGetUploadsDirectory( void );
-std::string&	            VxGetIncompleteDirectory( void );
-std::string&	            VxGetPersonalRecordDirectory( void );
+void							VxSetUserXferDirectory( const char * userXferDir  );
+std::string&					VxGetUserXferDirectory( void  );
+std::string&					VxGetDownloadsDirectory( void );
+std::string&					VxGetUploadsDirectory( void );
+std::string&					VxGetIncompleteDirectory( void );
+std::string&					VxGetPersonalRecordDirectory( void );
 
 //============================================================================
 //=== miscellaneous ===//
 //============================================================================
-void			VxSetNetworkLoopbackAllowed( bool bIsLoopbackAllowed );
-bool			VxIsNetworkLoopbackAllowed( void );
+void							VxSetNetworkLoopbackAllowed( bool bIsLoopbackAllowed );
+bool							VxIsNetworkLoopbackAllowed( void );
 
-void			VxSetDebugEnable( bool enableDebug );
-bool			VxIsDebugEnabled( void );
+void							VxSetDebugEnable( bool enableDebug );
+bool							VxIsDebugEnabled( void );
 
-int 			VxGlobalAccessLock( void );
-int 			VxGlobalAccessUnlock( void );
+int 							VxGlobalAccessLock( void );
+int 							VxGlobalAccessUnlock( void );
 
-void			VxSetLclIpAddress( const char * lclIpAddress );
-std::string		VxGetLclIpAddress( void );
+void							VxSetLclIpAddress( const char * lclIpAddress );
+std::string						VxGetLclIpAddress( void );

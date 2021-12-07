@@ -314,5 +314,6 @@
         <file>Resources/notify-in-group.svg</file>
         <file>Resources/friend-broadcast.svg</file>
         <file>Resources/overlay-direct-connected.svg</file>
+        <file>Resources/push-to-talk.svg</file>
     </qresource>
 </RCC>

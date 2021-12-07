@@ -35,6 +35,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktsPing.h \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.h \
     $$PWD/DependLibs/PktLib/PktsPluginSetting.h \
+    $$PWD/DependLibs/PktLib/PktsPushToTalk.h \
     $$PWD/DependLibs/PktLib/PktsRelay.h \
 	$$PWD/DependLibs/PktLib/PktsScan.h \
 	$$PWD/DependLibs/PktLib/PktsSearch.h \
@@ -86,6 +87,7 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktsPing.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginSetting.cpp \
+    $$PWD/DependLibs/PktLib/PktsPushToTalk.cpp \
     $$PWD/DependLibs/PktLib/PktsRelay.cpp \
 	$$PWD/DependLibs/PktLib/PktsScan.cpp \
 	$$PWD/DependLibs/PktLib/PktsSearch.cpp \

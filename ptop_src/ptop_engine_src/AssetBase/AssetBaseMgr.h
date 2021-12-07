@@ -62,6 +62,8 @@ public:
     virtual std::vector<AssetBaseInfo*>& getAssetBaseInfoList( void )					{ return m_AssetBaseInfoList; }
 	virtual std::vector<VxGUID>& getEmoticonIdList( void )								{ return m_EmoticonIdList; }
 
+	static bool                 isEmoticonThumbnail( VxGUID& thumbId );
+
     // startup when user specific directory has been set after user logs on
     virtual void				fromGuiUserLoggedOn( void );
     virtual bool				fromGuiGetAssetBaseInfo( uint8_t fileTypeFilter );
@@ -127,8 +129,8 @@ public:
 	bool						addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset );
 
     bool						updateAsset( AssetBaseInfo& assetInfo );
-	bool						removeAsset( std::string fileName );
-	bool						removeAsset( VxGUID& assetUniqueId );
+	bool						removeAsset( std::string fileName, bool deleteFile = false );
+	bool						removeAsset( VxGUID& assetUniqueId, bool deleteFile = false );
 	void						queryHistoryAssets( VxGUID& historyId );
 
 	void						generateHashForFile( std::string fileName );

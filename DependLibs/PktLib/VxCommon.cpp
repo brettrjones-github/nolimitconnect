@@ -171,6 +171,7 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeTruthOrDare, eFriendStateGuest );
     setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
     setPluginPermission( ePluginTypeVoicePhone, eFriendStateGuest );
+	setPluginPermission( ePluginTypePushToTalk, eFriendStateFriend );
 
     setPluginPermission( ePluginTypeCamServer, eFriendStateIgnore );
     setPluginPermission( ePluginTypeFileServer, eFriendStateFriend );
@@ -477,6 +478,8 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Video Phone";
     case ePluginTypeVoicePhone:
         return "VOIP Voice Phone";
+	case ePluginTypePushToTalk:
+		return "Push To Talk Walkie Talkie ";
     case ePluginTypeClientChatRoom:
         return "Chat Room Client";
     case ePluginTypeHostChatRoom:

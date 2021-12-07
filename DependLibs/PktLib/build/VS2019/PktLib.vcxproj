@@ -204,6 +204,7 @@
     <ClInclude Include="..\..\PktsPing.h" />
     <ClInclude Include="..\..\PktsPluginOffer.h" />
     <ClInclude Include="..\..\PktsPluginSetting.h" />
+    <ClInclude Include="..\..\PktsPushToTalk.h" />
     <ClInclude Include="..\..\PktsRelay.h" />
     <ClInclude Include="..\..\PktsScan.h" />
     <ClInclude Include="..\..\PktsSearch.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="..\..\PktsPing.cpp" />
     <ClCompile Include="..\..\PktsPluginOffer.cpp" />
     <ClCompile Include="..\..\PktsPluginSetting.cpp" />
+    <ClCompile Include="..\..\PktsPushToTalk.cpp" />
     <ClCompile Include="..\..\PktsRelay.cpp" />
     <ClCompile Include="..\..\PktsScan.cpp" />
     <ClCompile Include="..\..\PktsSearch.cpp" />

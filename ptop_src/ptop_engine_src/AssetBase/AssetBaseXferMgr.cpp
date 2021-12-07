@@ -1424,19 +1424,19 @@ bool AssetBaseXferMgr::fromGuiSendAssetBase( AssetBaseInfo& assetInfo )
 }
 
 //============================================================================
-bool AssetBaseXferMgr::fromGuiRequestAssetBase( AssetBaseInfo& assetInfo )
+bool AssetBaseXferMgr::fromGuiRequestAssetBase( AssetBaseInfo& assetInfo, VxSktBase* sktBase )
 {
     VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( assetInfo.getOnlineId() );
     if( netIdent )
     {
-        return fromGuiRequestAssetBase( netIdent, assetInfo );
+        return fromGuiRequestAssetBase( netIdent, assetInfo, sktBase );
     }
 
     return false;
 }
 
 //============================================================================
-bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBaseInfo& assetInfo )
+bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxSktBase* sktBaseIn )
 {
     if( !netIdent || !assetInfo.getAssetUniqueId().isVxGUIDValid() )
     {
@@ -1448,21 +1448,32 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
     bool xferFailed = true;
     if( netIdent )
     {
-        // first try to connect and send.. if that fails then que and will send when next connected
-        VxSktBase * sktBase = 0;
-        m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
-        if( sktBase )
-        {
-            EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
-            if( xferError == eXferErrorNone )
-            {
-                xferFailed = false;
-            }
-        }
-        else
-        {
-            LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase Not connected to user" );
-        }
+		if( sktBaseIn && sktBaseIn->isConnected() )
+		{
+			EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBaseIn );
+			if( xferError == eXferErrorNone )
+			{
+				xferFailed = false;
+			}
+		}
+		else
+		{
+			// first try to connect and send.. if that fails then que and will send when next connected
+			VxSktBase* sktBase = 0;
+			m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
+			if( sktBase )
+			{
+				EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
+				if( xferError == eXferErrorNone )
+				{
+					xferFailed = false;
+				}
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase Not connected to user" );
+			}
+		}
     }
     else
     {

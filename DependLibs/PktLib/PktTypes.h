@@ -210,9 +210,11 @@
 #define PKT_TYPE_RELAY_USER_DISCONNECT				( PKT_TYPE_RELAY_CONNECT_TO_USER_REPLY + 1 )	// 153 ( 0x99 )
 #define PKT_TYPE_RELAY_TEST_REQ						( PKT_TYPE_RELAY_USER_DISCONNECT	+ 1 )		// 154 ( 0x9A )
 #define PKT_TYPE_RELAY_TEST_REPLY					( PKT_TYPE_RELAY_TEST_REQ	+ 1 )               // 155 ( 0x9B )
-// 156 ( 0x9C )                                                                                   
+// 156 ( 0x9C )      
+#define PKT_TYPE_PUSH_TO_TALK_REQ				    ( PKT_TYPE_RELAY_TEST_REPLY	+ 1 )		        // 156 ( 0x9C )
+#define PKT_TYPE_PUSH_TO_TALK_REPLY					( PKT_TYPE_PUSH_TO_TALK_REQ	+ 1 )               // 157 ( 0x9D )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_RELAY_TEST_REPLY + 1) // 156
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_PUSH_TO_TALK_REPLY + 1) // 158
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

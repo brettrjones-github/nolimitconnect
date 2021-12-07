@@ -910,6 +910,12 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\DirectConnectListMgr.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1959,6 +1965,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\DirectConnectListMgr.h">
       <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.h">
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

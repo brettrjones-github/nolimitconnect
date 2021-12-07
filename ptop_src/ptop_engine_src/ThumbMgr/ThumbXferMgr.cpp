@@ -115,7 +115,7 @@ void ThumbXferMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 }
 
 //============================================================================
-bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId )
+bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, VxSktBase* sktBase )
 {
     if( !netIdent || !thumbId.isVxGUIDValid() )
     {
@@ -126,5 +126,5 @@ bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId )
 
     ThumbInfo thumbInfo( netIdent->getMyOnlineId(), thumbId );
 
-    return fromGuiRequestAssetBase( netIdent, thumbInfo );
+    return fromGuiRequestAssetBase( netIdent, thumbInfo, sktBase );
 }

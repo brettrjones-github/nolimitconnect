@@ -180,6 +180,9 @@ PktPluginHandlerBase::PktPluginHandlerBase()
     m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_SEND_COMPLETE_REQ ]          = &PktPluginHandlerBase::onPktOfferSendCompleteReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_SEND_COMPLETE_REPLY ]        = &PktPluginHandlerBase::onPktOfferSendCompleteReply;
     m_aBaseSysPktFuncTable[ PKT_TYPE_OFFER_XFER_ERR ]                   = &PktPluginHandlerBase::onPktOfferXferErr;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REQ]					= &PktPluginHandlerBase::onPktPushToTalkReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REPLY]					= &PktPluginHandlerBase::onPktPushToTalkReply;
 }
 
 //============================================================================
@@ -947,4 +950,16 @@ void PktPluginHandlerBase::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxP
 void PktPluginHandlerBase::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
 }

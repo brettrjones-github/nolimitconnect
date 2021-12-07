@@ -378,6 +378,70 @@ void VxConnectIdent::setOnlineDescription( const char * pUserDesc )
 }
 
 //============================================================================
+bool VxConnectIdent::getThumbnailIdList( std::vector<VxGUID>& thumbIdList )
+{
+    thumbIdList.clear();
+    if( getAvatarThumbGuid().isVxGUIDValid() )
+    {
+        thumbIdList.push_back( getAvatarThumbGuid() );
+    }
+
+    if( getNetHostThumbGuid().isVxGUIDValid() )
+    {
+        thumbIdList.push_back( getNetHostThumbGuid() );
+    }
+
+    if( getChatRoomThumbGuid().isVxGUIDValid() )
+    {
+        thumbIdList.push_back( getChatRoomThumbGuid() );
+    }
+
+    if( getGroupThumbGuid().isVxGUIDValid() )
+    {
+        thumbIdList.push_back( getGroupThumbGuid() );
+    }
+
+    if( getGroupThumbGuid().isVxGUIDValid() )
+    {
+        thumbIdList.push_back( getGroupThumbGuid() );
+    }
+
+    return !thumbIdList.empty();
+}
+
+//============================================================================
+bool VxConnectIdent::getThumbnailPairList( std::vector<std::pair<VxGUID, int64_t>>& thumbPairList )
+{
+    thumbPairList.clear();
+    if( isAvatarValid() )
+    {
+        thumbPairList.push_back( std::make_pair( getAvatarThumbGuid(), getAvatarThumbModifiedTime() ) );
+    }
+
+    if( isNetHostThumbValid() )
+    {
+        thumbPairList.push_back( std::make_pair( getNetHostThumbGuid(), getNetHostThumbModifiedTime() ) );
+    }
+
+    if( isChatRoomThumbValid() )
+    {
+        thumbPairList.push_back( std::make_pair( getChatRoomHostGuid(), getChatRoomThumbModifiedTime() ) );
+    }
+
+    if( isGroupThumbValid() )
+    {
+        thumbPairList.push_back( std::make_pair( getGroupHostGuid(), getGroupThumbModifiedTime() ) );
+    }
+
+    if( isRandomConnectThumbValid() )
+    {
+        thumbPairList.push_back( std::make_pair( getRandomConnectGuid(), getRandomdConnectThumbModifiedTime() ) );
+    }
+
+    return !thumbPairList.empty();
+}
+
+//============================================================================
 bool VxConnectIdent::hasThumbId( EHostType hostType )
 {
     switch( hostType )
