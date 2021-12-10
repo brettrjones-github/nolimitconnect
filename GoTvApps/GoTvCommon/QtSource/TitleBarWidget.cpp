@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+#include "AppletMgr.h"
 #include "TitleBarWidget.h"
 
 #include "AppCommon.h"

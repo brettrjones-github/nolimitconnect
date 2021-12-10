@@ -11,7 +11,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "RenderGlLogic.h"
 #include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
@@ -21,6 +21,7 @@
 #include <QOpenGLFunctions>
 
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxThread.h>
 
 # if defined(TARGET_OS_APPLE)
 #  include <OpenGLES/ES2/gl.h>

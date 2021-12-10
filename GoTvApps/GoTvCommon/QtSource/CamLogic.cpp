@@ -13,10 +13,11 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "CamLogic.h"
 #include "AppCommon.h"
+
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -42,9 +43,12 @@ CamLogic::CamLogic( AppCommon& myApp )
     : QWidget(&myApp)
     , m_MyApp( myApp )
     , m_SnapshotTimer( new QTimer( this ))
+    , m_VideoSinkGrabber( this )
 {
-    connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
-    m_SnapshotTimer->setInterval( CAM_SNAPSHOT_INTERVAL_MS );
+    // connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
+    // m_SnapshotTimer->setInterval( CAM_SNAPSHOT_INTERVAL_MS );
+    m_VideoSinkGrabber.setFps( 15 );
+    connect( &m_VideoSinkGrabber, SIGNAL( signalSinkFrameAvailable( QImage& ) ), this, SLOT( slotSinkFrameAvailable( QImage& ) ) );
 }
 
 //============================================================================
@@ -227,7 +231,7 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     // HACK ALERT
     // some devices require the video output to be set even if invisible.. some do not
     // set video output to an invisible widget or we will never get the capture ready event
-    m_captureSession.setVideoOutput(getViewFinderWidget());
+    m_captureSession.setVideoOutput(&m_VideoSinkGrabber);
 
     updateCameraActive( m_camera->isActive() );
     updateRecorderState( m_mediaRecorder->recorderState() );
@@ -236,8 +240,6 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     connect( m_imageCapture, &QImageCapture::imageCaptured, this, &CamLogic::processCapturedImage );
     connect( m_imageCapture, &QImageCapture::imageSaved, this, &CamLogic::imageSaved );
     connect( m_imageCapture, &QImageCapture::errorOccurred, this, &CamLogic::displayCaptureError );
-
-    connect( m_imageCapture, &QImageCapture::imageAvailable, this, &CamLogic::imageAvailable );
 
     readyForCapture( m_imageCapture->isReadyForCapture() );
 
@@ -427,21 +429,26 @@ void CamLogic::processCapturedImage( int requestId, const QImage& img )
     }
 
     // LogMsg( LOG_DEBUG, "processCapturedImage x%d y%d ", img.width(), img.height() );
-
-    QImage toSendImage;
-    if( img.format() == QImage::Format_RGB888 )
+    QSize desiredSize = GuiParams::getSnapshotDesiredSize();
+    if( !img.isNull() && img.format() == QImage::Format_RGB888 && img.size() == desiredSize )
     {
-        toSendImage = img;
+        uint32_t imageLen = img.bytesPerLine() * img.height();
+        m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, (uint8_t *)img.bits(), img.width(), img.height(), imageLen, m_MyApp.getCamCaptureRotation() );
     }
     else
     {
-        toSendImage = img.convertToFormat( QImage::Format_RGB888 );
-    }
-
-    if( !toSendImage.isNull() )
-    {
-        uint32_t imageLen = toSendImage.bytesPerLine() * toSendImage.height();
-        m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, toSendImage.bits(), toSendImage.width(), toSendImage.height(), imageLen, m_MyApp.getCamCaptureRotation() );
+        QImage scaledImage = img.size() == desiredSize ? img : img.scaled( desiredSize );
+        if( !scaledImage.isNull() && scaledImage.format() == QImage::Format_RGB888 )
+        {
+            uint32_t imageLen = scaledImage.bytesPerLine() * scaledImage.height();
+            m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, scaledImage.bits(), scaledImage.width(), scaledImage.height(), imageLen, m_MyApp.getCamCaptureRotation() );
+        }
+        else if( !scaledImage.isNull() )
+        {
+            QImage toSendImage = scaledImage.convertToFormat( QImage::Format_RGB888 );
+            uint32_t imageLen = toSendImage.bytesPerLine() * toSendImage.height();
+            m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, toSendImage.bits(), toSendImage.width(), toSendImage.height(), imageLen, m_MyApp.getCamCaptureRotation() );
+        }
     }
 
     m_isCapturingImage = false;
@@ -620,7 +627,7 @@ void CamLogic::startCamera()
             m_ViewFinder->hide();
         }
 #endif // #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-
+        m_VideoSinkGrabber.enableGrab( true );
         m_camera->start();
         m_SnapshotTimer->start();
     }
@@ -635,6 +642,7 @@ void CamLogic::stopCamera()
 {
     if( m_CamIsStarted )
     {
+        m_VideoSinkGrabber.enableGrab( false );
         m_SnapshotTimer->stop();
         m_CamIsStarted = false;
         if( !m_camera.isNull() )
@@ -830,29 +838,9 @@ void CamLogic::nextCamera( void )
 }
 
 //============================================================================
-QVideoWidget * CamLogic::getViewFinderWidget( void )
+void CamLogic::slotSinkFrameAvailable( QImage& frame )
 {
-    if( !m_VideoWidget )
-    {
-        m_VideoWidget = new QVideoWidget( this );
-        m_VideoWidget->setFixedSize( GuiParams::getSnapshotDesiredSize() );
-        m_VideoWidget->setVisible( false );
-        m_VideoWidget->setEnabled( true );
-    }
-
-    return m_VideoWidget;
-}
-
-//============================================================================
-void CamLogic::imageAvailable(int id, const QVideoFrame &vidFrame )
-{
-    static int64_t lastTimeMs = 0;
-    int64_t timeMs = GetTimeStampMs();
-    if( lastTimeMs == 0 )
-    {
-        lastTimeMs = timeMs;
-    }
-
-    LogMsg( LOG_VERBOSE, "CamLogic::imageAvailable id %d elapsed ms %lld", id, timeMs - lastTimeMs );
-    lastTimeMs = timeMs;
+    static int frameNum = 0;
+    frameNum++;
+    processCapturedImage( frameNum, frame );
 }

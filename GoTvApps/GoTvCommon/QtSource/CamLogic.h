@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
+#include "VideoSinkGrabber.h"
 
 #include <QTimer>
 #include <QKeyEvent>
@@ -88,6 +88,8 @@ public slots:
     void setCamera( const QCameraInfo &cameraInfo );
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
+    void                        slotSinkFrameAvailable( QImage& frame );
+
     void                        startCamera();
     void                        stopCamera();
 
@@ -115,7 +117,6 @@ public slots:
     void                        updateRecordTime();
 
     void                        processCapturedImage( int requestId, const QImage &img );
-    void                        imageAvailable(int id, const QVideoFrame &vidFrame );
 
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
     void updateCameraActive( bool active );
@@ -142,8 +143,6 @@ protected:
     void                        closeEvent( QCloseEvent *event ) override;
 
     void                        selectVideoFormat( const QCameraDevice& cameraDevice );
-
-    QVideoWidget *              getViewFinderWidget( void );
 
     AppCommon&                  m_MyApp;
     uint32_t                    m_CamId{ 1 };
@@ -177,7 +176,7 @@ protected:
     QVideoEncoderSettings       m_videoSettings;
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
     QString                     m_CamDescription;
-    QVideoWidget *              m_VideoWidget{nullptr};
+    VideoSinkGrabber            m_VideoSinkGrabber;
 };
 
 

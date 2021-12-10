@@ -12,9 +12,10 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "AppCommon.h"
 #include "AppGlobals.h"
+#include "AppSettings.h"
 #include "AppletPopupMenu.h"
 #include "AppletChatRoomJoinSearch.h"
 #include "ActivityMessageBox.h"

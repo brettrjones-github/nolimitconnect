@@ -315,6 +315,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListItem.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VideoSinkGrabber.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.h \
@@ -666,6 +667,7 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserJoinListWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListItem.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/UserListWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VideoSinkGrabber.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.cpp \

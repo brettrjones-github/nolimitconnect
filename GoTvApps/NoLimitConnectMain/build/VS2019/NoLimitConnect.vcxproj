@@ -300,7 +300,12 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiConnectMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinList.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinMgr.cpp" />
@@ -428,6 +433,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserJoinListWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\UserListWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VideoSinkGrabber.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VidWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppDisplay.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp" />
@@ -574,6 +580,7 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateClient.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ToGuiUserUpdateInterface.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\UserProfile.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VideoSinkGrabber.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.h" />

@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
 #include "AppDefs.h"
 
 #include <CoreLib/VxGUID.h>
@@ -31,8 +30,13 @@ class AppletBase;
 class PluginSetting;
 class PluginSettingsWidget;
 class VxNetIdent;
-class QFrame;
+
 class QComboBox;
+class QFrame;
+class QFontMetrics;
+class QImage;
+class QPixmap;
+class QWidget;
 
 class GuiHelpers
 {

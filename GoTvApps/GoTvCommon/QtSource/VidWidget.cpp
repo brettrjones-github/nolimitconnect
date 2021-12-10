@@ -13,10 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "VidWidget.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
+#include "AppletMgr.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
 #include "GuiHelpers.h"

@@ -12,8 +12,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "GuiHostSession.h"
+#include "GuiUser.h"
 
 //============================================================================
 GuiHostSession::GuiHostSession( QWidget* parent )

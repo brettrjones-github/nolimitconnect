@@ -22,6 +22,7 @@
 #include "FileShareItemWidget.h"
 #include "MyIcons.h"
 #include "AppGlobals.h"
+#include "AppletMgr.h"
 #include "FileItemInfo.h"
 #include "FileActionMenu.h"
 #include "GuiHelpers.h"

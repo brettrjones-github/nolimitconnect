@@ -13,8 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "AppletHostJoinRequestList.h"
+#include "AppletMgr.h"
 #include "GuiHostJoinMgr.h"
 #include "GuiHostJoin.h"
 #include "GuiHostJoinSession.h"

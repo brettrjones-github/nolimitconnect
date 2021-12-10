@@ -12,10 +12,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+#include "AppCommon.h"
 #include "UserListItem.h"
 #include "GuiUserSessionBase.h"
 #include "GuiParams.h"
+
+#include <CoreLib/VxDebug.h>
 
 //============================================================================
 UserListItem::UserListItem(QWidget *parent  )

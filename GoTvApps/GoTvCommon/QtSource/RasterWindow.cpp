@@ -48,8 +48,11 @@
 **
 ****************************************************************************/
 
-#include <app_precompiled_hdr.h>
 #include "RasterWindow.h"
+
+#include <qbackingstore.h>
+#include <QPainter>
+#include <QResizeEvent>
 
 //! [1]
 RasterWindow::RasterWindow(QWindow *parent)

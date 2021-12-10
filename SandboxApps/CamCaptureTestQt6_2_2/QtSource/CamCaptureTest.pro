@@ -1,0 +1,57 @@
+TEMPLATE = app
+TARGET = camcapturetest
+CONFIG += no_docs_target
+CONFIG += c++11
+
+QT += gui core concurrent widgets network opengl xml svg quickwidgets
+QT += multimedia
+QT += multimediawidgets
+
+INCLUDEPATH += $$PWD/../../../
+INCLUDEPATH += $$PWD/../../../DependLibs
+INCLUDEPATH += $$PWD/../../../../Qt/6.2.2/android_arm64_v8a/include/QtCore/6.2.2
+
+include($$PWD/../../../config_os_detect.pri)
+
+HEADERS = \
+    CamCaptureTest.h \
+    CamLogic.h \
+	VideoSinkGrabber.h \
+	VxLabel.h \
+    GuiHelpers.h \
+    GuiParams.h
+
+SOURCES = \
+    main.cpp \
+    CamCaptureTest.cpp \
+    CamLogic.cpp \
+	VideoSinkGrabber.cpp \
+	VxLabel.cpp \
+    GuiHelpers.cpp \
+    GuiParams.cpp
+
+FORMS += \
+    CamCaptureTest.ui
+
+
+
+QT += widgets
+
+
+    PRE_TARGETDEPS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}CoreLib$${STATIC_LIB_SUFFIX}
+    PRE_TARGETDEPS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+
+    LIBS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}CoreLib$${STATIC_LIB_SUFFIX}
+    LIBS +=  $$PWD/../../../build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/$${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+OTHER_FILES +=  $$PWD/android/AndroidManifest.xml
+
+DISTFILES += \
+     $$PWD/android/build.gradle \
+     $$PWD/android/gradle.properties \
+     $$PWD/android/gradle/wrapper/gradle-wrapper.jar \
+     $$PWD/android/gradle/wrapper/gradle-wrapper.properties \
+     $$PWD/android/gradlew \
+     $$PWD/android/gradlew.bat \
+     $$PWD/android/res/values/libs.xml

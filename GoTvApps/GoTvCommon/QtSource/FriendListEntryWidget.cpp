@@ -13,9 +13,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "FriendListEntryWidget.h"
 #include "AppCommon.h"
+#include "AppletMgr.h"
 #include "AppletPopupMenu.h"
 #include "GuiUser.h"
 

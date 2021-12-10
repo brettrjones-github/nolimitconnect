@@ -11,10 +11,10 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
 
 #include "AppTranslate.h"
 #include "GuiParams.h"
+#include "GuiUser.h"
 
 #include <QApplication>
 #include <QScreen>

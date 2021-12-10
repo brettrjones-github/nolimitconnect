@@ -21,6 +21,7 @@
 
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "AppletMgr.h"
 #include "GuiHelpers.h"	
 #include "GuiParams.h"
 

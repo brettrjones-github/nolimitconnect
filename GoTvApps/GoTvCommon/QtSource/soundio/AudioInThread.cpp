@@ -18,6 +18,9 @@
 #include <QDebug>
 #include "AudioDefs.h"
 
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxThread.h>
+
 //============================================================================
 AudioInThread::AudioInThread( AudioIoMgr& audioIoMgr, AudioInIo& audioInIo )
 : QThread()

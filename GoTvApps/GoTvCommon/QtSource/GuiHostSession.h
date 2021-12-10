@@ -22,6 +22,7 @@
 
 class P2PEngine;
 class VxNetIdent;
+class GuiUser;
 
 class GuiHostSession : public QWidget
 {

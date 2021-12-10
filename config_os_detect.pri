@@ -1,4 +1,9 @@
 
+win32:TARGET_OS_NAME = Windows
+unix:!android: TARGET_OS_NAME = Linux
+android: TARGET_OS_NAME = Android
+macx: TARGET_OS_NAME = Apple
+
 COMPILE_HOST_OS = UNKNOWN_HOST
 #COPY_KEYWORD = cp
 #MOVE_KEYWORD = mv
@@ -61,6 +66,13 @@ android:{
 #        QMAKE_MOVE = $${PRO_DIR_WIN}\qt_fix_move.bat
 #    }
 
+    STATIC_LIB_PREFIX=lib
+    if(CONFIG(debug, debug|release)){
+      STATIC_LIB_SUFFIX=AndroidD.a
+    }
+    if(CONFIG(release, debug|release)){
+      STATIC_LIB_SUFFIX=Android.a
+    }
 
     DEFINES += TARGET_OS_ANDROID
     DEFINES += TARGET_POSIX
@@ -129,6 +141,15 @@ android:{
 }
 
 win32:{
+    STATIC_LIB_PREFIX=
+    TARGET_ARCH_NAME = Windows
+    if(CONFIG(debug, debug|release)){
+      STATIC_LIB_SUFFIX=D.lib
+    }
+    if(CONFIG(release, debug|release)){
+      STATIC_LIB_SUFFIX=.lib
+    }
+
     DEFINES += TARGET_OS_WINDOWS
     DEFINES += WIN64
     DEFINES += _WIN64
@@ -148,6 +169,15 @@ win32:{
 }
 
 unix:!android:{
+    STATIC_LIB_PREFIX=lib
+    TARGET_ARCH_NAME = Linux
+    if(CONFIG(debug, debug|release)){
+      STATIC_LIB_SUFFIX=LinuxD.a
+    }
+    if(CONFIG(release, debug|release)){
+      STATIC_LIB_SUFFIX=Linux.a
+    }
+
     DEFINES += TARGET_OS_LINUX
     DEFINES += TARGET_POSIX
     DEFINES += TARGET_CPU_64BIT
@@ -174,10 +204,6 @@ macx{
     TARGET_ENDIAN_BIG=1
 }
 
-win32:TARGET_OS_NAME = Windows
-unix:!android: TARGET_OS_NAME = Linux
-android: TARGET_OS_NAME = Android
-macx: TARGET_OS_NAME = Apple
 
 CONFIG(debug, debug|release){
     BUILD_TYPE=Debug

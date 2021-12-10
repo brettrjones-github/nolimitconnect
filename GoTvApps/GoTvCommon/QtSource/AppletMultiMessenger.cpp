@@ -12,7 +12,8 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
+#include "AppSettings.h"
 #include "AppletMultiMessenger.h"
 #include "ActivityMessageBox.h"
 #include "GuiOfferSession.h"

@@ -12,9 +12,10 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "GuiHelpers.h"
 #include "GuiParams.h"
+#include "GuiUser.h"
 
 #include "ActivityBase.h"
 #include "AppletBase.h"
@@ -29,6 +30,7 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/ObjectCommon.h>
+#include <CoreLib/VxDebug.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <VxVideoLib/VxVideoLib.h>
@@ -40,6 +42,8 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QLineEdit>
+#include <QMessageBox>
+#include <QPainter>
 #include <QUrl>
 
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
@@ -1590,4 +1594,26 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
 #else
     return true;
 #endif // defined (Q_OS_ANDROID)
+}
+
+int convertToRgb()
+{
+    QImage image( 100, 100, QImage::Format_RGB888 );
+    image.fill( QColor( 50, 100, 200 ) );
+
+    if( image.format() == QImage::Format_Invalid )
+        return EXIT_FAILURE;
+    QVideoFrameFormat video_frame_format( image.size(), QVideoFrameFormat::Format_RGBX8888 );
+    QImage rgbx = image.convertToFormat( QVideoFrameFormat::imageFormatFromPixelFormat( video_frame_format.pixelFormat() ) );
+    QVideoFrame video_frame( video_frame_format );
+    if( !video_frame.isValid() || !video_frame.map( QVideoFrame::WriteOnly ) ) {
+        qWarning() << "QVideoFrame is not valid or not writable";
+        return EXIT_FAILURE;
+    }
+    int plane = 0;
+    std::memcpy( video_frame.bits( plane ), rgbx.bits(), video_frame.mappedBytes( plane ) );
+    video_frame.unmap();
+
+    qDebug() << video_frame << rgbx.format();
+    return 0;
 }
