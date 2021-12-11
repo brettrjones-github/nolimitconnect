@@ -12,7 +12,7 @@ ANDROID_SDK_BUILD_TOOLS_REVISION = 30.0.3
 PROJECT_NAME = nolimitconnect
 TARGET_NAME = nolimitconnect
 
-QT += gui core concurrent widgets network opengl xml svg quickwidgets
+QT += gui core concurrent widgets network opengl xml svg
 QT += multimedia
 QT += multimediawidgets
 

@@ -266,7 +266,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.h \
@@ -621,7 +620,6 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListItem.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PersonOfferListWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlMatrix.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidget.cpp \
@@ -855,7 +853,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PermissionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PersonOfferListItem.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PluginSettingsWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/SearchParamsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ServiceSettingsWidget.ui \

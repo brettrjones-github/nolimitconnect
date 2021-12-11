@@ -32,7 +32,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>F:\Qt\6.2.2\msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;opengl;quickwidgets;svg;multimedia;multimediawidgets</QtModules>
+    <QtModules>core;gui;widgets;opengl;svg;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -383,7 +383,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PersonOfferListItem.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PersonOfferListWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp" />
@@ -632,7 +631,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.h" />
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.h" />
@@ -976,7 +974,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionListItemWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PersonOfferListItem.ui" />
-    <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\PluginSettingsWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\RelayServiceWidget.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\SearchParamsWidget.ui" />
