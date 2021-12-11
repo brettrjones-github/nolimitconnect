@@ -62,6 +62,8 @@
 
 #include <QMainWindow>
 
+#include "VideoSinkGrabber.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Camera; }
 class QActionGroup;
@@ -121,11 +123,15 @@ private slots:
 
     void showMetaDataDialog();
 
+    void slotSinkFrameAvailable( int frameNum, QImage& frameImage );
+
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
 
+    VideoSinkGrabber m_VidGrabber;
+    QVideoSink* m_RawVideoSink{nullptr};
 private:
     Ui::Camera *ui;
 

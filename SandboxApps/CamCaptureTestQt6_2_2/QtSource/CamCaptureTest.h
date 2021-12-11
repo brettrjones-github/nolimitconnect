@@ -47,8 +47,10 @@ public slots:
     void						onCancelButClick( void );
     void                        onDoneButClick( void );
     void                        onCamFrontBackButClick( void );
+    void                        onCamStopStartButClick( void );
+
     void                        slotCameraDescription( QString camDescription );
-    void                        slotSinkFrameAvailable( QImage& image );
+    void                        slotSinkFrameAvailable( int frameNum, QImage& image );
 
 protected:
 

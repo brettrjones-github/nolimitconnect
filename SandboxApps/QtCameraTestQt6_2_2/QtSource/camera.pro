@@ -7,6 +7,7 @@ HEADERS = \
     camera.h \
     imagesettings.h \
     videosettings.h \
+    VideoSinkGrabber.h \
     metadatadialog.h
 
 SOURCES = \
@@ -14,6 +15,7 @@ SOURCES = \
     camera.cpp \
     imagesettings.cpp \
     videosettings.cpp \
+    VideoSinkGrabber.cpp \
     metadatadialog.cpp
 
 FORMS += \

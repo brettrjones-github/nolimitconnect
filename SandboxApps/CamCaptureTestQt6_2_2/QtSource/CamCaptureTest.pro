@@ -3,7 +3,7 @@ TARGET = camcapturetest
 CONFIG += no_docs_target
 CONFIG += c++11
 
-QT += gui core concurrent widgets network opengl xml svg quickwidgets
+QT += gui core concurrent widgets network opengl xml svg
 QT += multimedia
 QT += multimediawidgets
 

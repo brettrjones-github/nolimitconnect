@@ -28,7 +28,7 @@ public:
     void                        enableGrab( bool enable );
 
 signals:
-    void                        signalSinkFrameAvailable( int frameNum, QImage& frameImage );
+    void                        signalSinkFrameAvailable( int frameNum, QImage& frame );
 
 protected slots:
     void                        slotVideoFrameChanged( const QVideoFrame& frame );

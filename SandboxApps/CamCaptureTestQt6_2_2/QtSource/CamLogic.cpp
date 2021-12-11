@@ -106,6 +106,7 @@ void CamLogic::cameraEnable( bool wantVidCapture )
 void CamLogic::slotTakeSnapshot( void )
 {
     //LogModule(eLogVideo, LOG_DEBUG, "Cam Error %d Status %s", m_camera->error(), GuiParams::describeCamStatus(m_CamStatus).toUtf8().constData());
+    return;
     static int notReadyCnt = 0;
 
     /*
@@ -165,6 +166,15 @@ bool CamLogic::assureCamInitiated( void )
     return  !m_camera.isNull() && m_camera->isAvailable();
 }
 
+//============================================================================
+void CamLogic::setVideoPreviewWidget( QVideoWidget* vidWidget )
+{
+    m_VidPreviewWidget = vidWidget;
+    if( m_VidPreviewWidget )
+    {
+        m_captureSession.setVideoOutput( m_VidPreviewWidget );
+    }
+}
 
 //============================================================================
 void CamLogic::setCamera( const QCameraDevice& cameraDevice )
@@ -173,16 +183,19 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     cameraEnable( false );
     m_camera.reset( new QCamera( cameraDevice ) );
     m_captureSession.setCamera( m_camera.data() );
+    m_camera->setExposureCompensation(50);
 
     connect( m_camera.data(), &QCamera::activeChanged, this, &CamLogic::updateCameraActive );
     connect( m_camera.data(), &QCamera::errorOccurred, this, &CamLogic::displayCameraError );
 
-    m_mediaRecorder.reset( new QMediaRecorder );
-    m_captureSession.setRecorder( m_mediaRecorder.data() );
-    connect( m_mediaRecorder.data(), &QMediaRecorder::recorderStateChanged, this, &CamLogic::updateRecorderState );
+    if (!m_mediaRecorder)
+    {
+        m_mediaRecorder.reset( new QMediaRecorder );
+        m_captureSession.setRecorder( m_mediaRecorder.data() );
+        connect( m_mediaRecorder.data(), &QMediaRecorder::recorderStateChanged, this, &CamLogic::updateRecorderState );
+    }
 
-
-    m_imageCapture = new QImageCapture( m_mediaRecorder.data() );
+    m_imageCapture = new QImageCapture;
     m_captureSession.setImageCapture( m_imageCapture );
 
     connect( m_mediaRecorder.data(), &QMediaRecorder::durationChanged, this, &CamLogic::updateRecordTime );
@@ -191,32 +204,29 @@ void CamLogic::setCamera( const QCameraDevice& cameraDevice )
     // HACK ALERT
     // some devices require the video output to be set even if invisible.. some do not
     // set video output to an invisible widget or we will never get the capture ready event
-    //m_captureSession.setVideoOutput( getCapturePreviewWidget() );
-    m_captureSession.setVideoOutput( &m_VideoSinkGrabber );
+    if( m_VidPreviewWidget )
+    {
+        m_captureSession.setVideoOutput( m_VidPreviewWidget );
+    }
+
+    m_captureSession.setVideoSink( &m_VideoSinkGrabber );
 
     updateCameraActive( m_camera->isActive() );
     updateRecorderState( m_mediaRecorder->recorderState() );
 
     connect( m_imageCapture, &QImageCapture::readyForCaptureChanged, this, &CamLogic::readyForCapture );
-    //connect( m_imageCapture, &QImageCapture::imageCaptured, this, &CamLogic::processCapturedImage );
-    //connect( m_imageCapture, &QImageCapture::imageSaved, this, &CamLogic::imageSaved );
+    connect( m_imageCapture, &QImageCapture::imageCaptured, this, &CamLogic::processCapturedImage );
+    connect( m_imageCapture, &QImageCapture::imageSaved, this, &CamLogic::imageSaved );
     connect( m_imageCapture, &QImageCapture::errorOccurred, this, &CamLogic::displayCaptureError );
-
-    readyForCapture( m_imageCapture->isReadyForCapture() );
 
     selectVideoFormat( cameraDevice );
 
     updateCaptureMode( 0 );
 
-    if( m_captureSession.audioInput() )
-    {
-        m_captureSession.audioInput()->setMuted(true);
-    }
+    m_captureSession.setAudioInput( nullptr );
+    m_captureSession.setAudioOutput( nullptr );
 
-    if( m_captureSession.audioOutput() )
-    {
-        m_captureSession.audioOutput()->setMuted(true);
-    }
+    readyForCapture( m_imageCapture->isReadyForCapture() );
 
     //m_imageCapture->setFileFormat( boxValue( ui->imageCodecBox ).value<QImageCapture::FileFormat>() );
     //m_imageCapture->setQuality( QImageCapture::HighQuality );
@@ -277,23 +287,31 @@ void CamLogic::selectVideoFormat( const QCameraDevice& cameraDevice )
             }
 
             float desiredFps = 1000 / ( CAM_SNAPSHOT_INTERVAL_MS / 2 ); // request frame rate toughly twice as fast a snapshot interval
-            LogMsg( LOG_VERBOSE, "Setting Format %d resolution w %d h %d min fps %3.1f max fps %3.1f desired fps %3.1f", formatNum, defaultFormat.resolution().width(),
-                defaultFormat.resolution().height(), defaultFormat.minFrameRate(), defaultFormat.maxFrameRate(), desiredFps);
+            float actualFps = desiredFps;
 
             m_camera->setCameraFormat( defaultFormat );
+            m_imageCapture->setResolution( defaultFormat.resolution() );
 
+            /*
+            m_mediaRecorder->setMediaFormat(defaultFormat);
             if( desiredFps >= defaultFormat.minFrameRate() && desiredFps <= defaultFormat.maxFrameRate() )
             {
                 m_mediaRecorder->setVideoFrameRate( desiredFps );
             }
             else if( desiredFps >= defaultFormat.maxFrameRate() )
             {
+                actualFps = defaultFormat.maxFrameRate();
                 m_mediaRecorder->setVideoFrameRate( defaultFormat.maxFrameRate() );
             }
             else if( desiredFps <= defaultFormat.minFrameRate()  )
             {
+                actualFps = defaultFormat.minFrameRate();
                 m_mediaRecorder->setVideoFrameRate( defaultFormat.minFrameRate() );
             }
+            */
+
+            LogMsg( LOG_VERBOSE, "Setting Format %d resolution w %d h %d min fps %3.1f max fps %3.1f desired fps %3.1f", formatNum, defaultFormat.resolution().width(),
+                defaultFormat.resolution().height(), defaultFormat.minFrameRate(), defaultFormat.maxFrameRate(), actualFps);
         }
     }
 }

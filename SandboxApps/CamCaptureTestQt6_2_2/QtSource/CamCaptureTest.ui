@@ -135,6 +135,9 @@
     </widget>
    </item>
    <item>
+    <widget class="QVideoWidget" name="m_VideoPreviewWidget" native="true"/>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -307,6 +310,12 @@
    <class>VxLabel</class>
    <extends>QLabel</extends>
    <header>VxLabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QVideoWidget</class>
+   <extends>QWidget</extends>
+   <header>QVideoWidget</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

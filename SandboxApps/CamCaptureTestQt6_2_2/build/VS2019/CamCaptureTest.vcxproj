@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\QtSource\CamCaptureTest.cpp" />
-    <ClCompile Include="..\..\QtSource\CamFrameGrabber.cpp" />
     <ClCompile Include="..\..\QtSource\CamLogic.cpp" />
     <ClCompile Include="..\..\QtSource\GuiHelpers.cpp" />
     <ClCompile Include="..\..\QtSource\GuiParams.cpp" />
@@ -22,9 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="..\..\QtSource\CamCaptureTest.ui" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="..\..\QtSource\CamFrameGrabber.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\QtSource\CamLogic.h" />

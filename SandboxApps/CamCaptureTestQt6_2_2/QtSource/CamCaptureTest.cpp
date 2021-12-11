@@ -33,11 +33,17 @@ CamCaptureTest::CamCaptureTest( QWidget * parent )
     ui.m_ImageScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
     ui.m_SnapshotScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
 
+    // in order for capture to work on android the parent of VideoSinkGrabber must be a application parented widget
+    m_CamLogic.setVideoPreviewWidget( ui.m_VideoPreviewWidget );
+    m_CamLogic.getVideoSinkGrabber().setParent( ui.m_ImageScreen );
+
     connect( ui.snapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapShotButClick() ) );
     connect( ui.m_DoneButton, SIGNAL( clicked() ), this, SLOT( onDoneButClick() ) );
     connect( ui.m_CamFrontBackButton, SIGNAL( clicked() ), this, SLOT( onCamFrontBackButClick() ) );
+    connect( ui.m_CamStopStartButton, SIGNAL( clicked() ), this, SLOT( onCamStopStartButClick() ) );
+
     connect( &getCamLogic(), SIGNAL( signalCameraDescription(QString) ), this, SLOT( slotCameraDescription( QString ) ) );
-    connect( &getCamLogic().getVideoSinkGrabber(), SIGNAL( signalSinkFrameAvailable( QImage & ) ), this, SLOT( slotSinkFrameAvailable( QImage & ) ) );
+    connect( &getCamLogic().getVideoSinkGrabber(), SIGNAL( signalSinkFrameAvailable( int, QImage & ) ), this, SLOT( slotSinkFrameAvailable( int, QImage & ) ) );
 
 
     ui.m_CamNameLabel->setText( getCamLogic().getCamDescription() );
@@ -75,6 +81,12 @@ void CamCaptureTest::onCamFrontBackButClick( void )
     getCamLogic().nextCamera();
 }
 
+//============================================================================ 
+void CamCaptureTest::onCamStopStartButClick( void )
+{
+    getCamLogic().cameraEnable( !getCamLogic().isCamStarted() );
+}
+
 //============================================================================
 void CamCaptureTest::slotCameraDescription( QString camDescription )
 {
@@ -88,17 +100,12 @@ void CamCaptureTest::fromGuiVideoData( uint32_t u32FourCc, uint8_t* pu8VidDataIn
 }
 
 //============================================================================
-void CamCaptureTest::slotSinkFrameAvailable( QImage& pixmap )
+void CamCaptureTest::slotSinkFrameAvailable( int frameNum, QImage& pixmap )
 {
     if( !pixmap.isNull() )
     {
         LogMsg( LOG_WARNING, "CamCaptureTest::slotSinkFrameAvailable pixmap w %d h %d", pixmap.width(), pixmap.height() );
-        ui.m_ImageScreen->showScaledImage( pixmap );
-        if( m_SnapShotPending )
-        {
-            m_SnapShotPending = false;
-            ui.m_SnapshotScreen->showScaledImage( pixmap );
-        }
+        ui.m_SnapshotScreen->showScaledImage( pixmap );
     }
     else
     {

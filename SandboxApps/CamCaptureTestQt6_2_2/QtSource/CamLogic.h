@@ -55,10 +55,13 @@ public:
     CamLogic( CamCaptureTest& myApp );
     virtual ~CamLogic() = default;
 
+    void                        setVideoPreviewWidget( QVideoWidget* vidWidget );
+
     void                        cameraEnable( bool wantVidCapture );
     bool                        assureCamInitiated( void );
     bool                        isCamAvailable( void );
     bool                        isCamCaptureRunning( void );
+    bool                        isCamStarted( void )                                { return m_CamIsStarted; }
 
     // set application is exiting.. return true if cam is busy with capture
     bool                        setAppIsExiting( bool isExiting );
@@ -179,6 +182,7 @@ protected:
     QVideoEncoderSettings       m_videoSettings;
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
     QString                     m_CamDescription;
+    QVideoWidget*               m_VidPreviewWidget{ nullptr };
 
     VideoSinkGrabber            m_VideoSinkGrabber;
 };

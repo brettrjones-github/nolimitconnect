@@ -6,12 +6,14 @@
     <ClCompile Include="..\..\QtSource\main.cpp" />
     <ClCompile Include="..\..\QtSource\metadatadialog.cpp" />
     <ClCompile Include="..\..\QtSource\videosettings.cpp" />
+    <ClCompile Include="..\..\QtSource\VideoSinkGrabber.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\QtSource\camera.h" />
     <QtMoc Include="..\..\QtSource\imagesettings.h" />
     <QtMoc Include="..\..\QtSource\metadatadialog.h" />
     <QtMoc Include="..\..\QtSource\videosettings.h" />
+    <QtMoc Include="..\..\QtSource\VideoSinkGrabber.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\QtSource\camera.pro" />

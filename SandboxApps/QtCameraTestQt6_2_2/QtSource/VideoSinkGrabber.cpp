@@ -46,11 +46,9 @@ void VideoSinkGrabber::slotVideoFrameChanged( const QVideoFrame& frame )
     int64_t elapsedMs = m_ElapsedTimer.elapsed();
     qDebug() << "slotVideoFrameChanged elapsed " << elapsedMs;
     // do toImage every time because if is not done every frame on android then it will stop working
-    // toImage is broken on Android version 11 on Galaxy Tab A7 model SM-T500
-    // QTBUG-99135 Qt 6.2.2 QVideoFrame.toImage unsupported format or has no image.. just white color
     QImage image = frame.toImage();
     if( elapsedMs >= m_MinFrameIntervalMs && !image.isNull() )
-    {
+    {    
         static int frameNum = 0;
         frameNum++;
         qDebug() << "slotVideoFrameChanged valid frame  w " << image.width() << " h " << image.height() << " f " << frameNum << " elapsed " << elapsedMs;

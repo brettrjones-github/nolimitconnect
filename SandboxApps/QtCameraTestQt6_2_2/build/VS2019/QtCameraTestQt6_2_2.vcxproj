@@ -16,6 +16,7 @@
     <ClCompile Include="..\..\QtSource\main.cpp" />
     <ClCompile Include="..\..\QtSource\metadatadialog.cpp" />
     <ClCompile Include="..\..\QtSource\videosettings.cpp" />
+    <ClCompile Include="..\..\QtSource\VideoSinkGrabber.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\QtSource\camera.h" />
@@ -48,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\QtSource\android\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\..\QtSource\VideoSinkGrabber.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4D643C59-5132-4239-AC23-E778BB01D160}</ProjectGuid>

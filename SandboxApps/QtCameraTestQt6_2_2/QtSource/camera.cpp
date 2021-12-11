@@ -74,10 +74,15 @@
 #include <QMediaDevices>
 #include <QMediaFormat>
 
+
+
 Camera::Camera()
     : ui(new Ui::Camera)
+    , m_VidGrabber( this )
 {
     ui->setupUi(this);
+    m_VidGrabber.setParent( ui->m_CaptureSurface );
+    connect( &m_VidGrabber, SIGNAL( signalSinkFrameAvailable( int, QImage & ) ), this, SLOT( slotSinkFrameAvailable( int, QImage & ) ) );
 
     m_audioInput.reset(new QAudioInput);
     m_captureSession.setAudioInput(m_audioInput.get());
@@ -107,7 +112,7 @@ void Camera::setCamera(const QCameraDevice &cameraDevice)
 
     if (!m_mediaRecorder) {
         m_mediaRecorder.reset(new QMediaRecorder);
-        m_captureSession.setRecorder(m_mediaRecorder.data());
+        //m_captureSession.setRecorder(m_mediaRecorder.data());
         connect(m_mediaRecorder.data(), &QMediaRecorder::recorderStateChanged, this, &Camera::updateRecorderState);
     }
 
@@ -119,8 +124,18 @@ void Camera::setCamera(const QCameraDevice &cameraDevice)
 
     connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &Camera::setExposureCompensation);
 
+    // toImage is broken on Android version 11 on Galaxy Tab A7 model SM-T500
+    // QTBUG-99135 Qt 6.2.2 QVideoFrame.toImage unsupported format or has no image.. just white color
     // ui->viewfinder->setVisible( false );
     m_captureSession.setVideoOutput(ui->viewfinder);
+    //m_captureSession.setVideoSink(&m_VidGrabber);
+
+    m_RawVideoSink = ui->viewfinder->videoSink();
+    if( m_RawVideoSink )
+    {
+        connect( m_RawVideoSink, SIGNAL( videoFrameChanged( const QVideoFrame& ) ), &m_VidGrabber, SLOT( slotVideoFrameChanged( const QVideoFrame& ) ) );
+        connect( ui->viewfinder->videoSink(), SIGNAL( videoFrameChanged( const QVideoFrame& ) ), &m_VidGrabber, SLOT( slotVideoFrameChanged( const QVideoFrame& ) ) );
+    }
 
     updateCameraActive(m_camera->isActive());
     updateRecorderState(m_mediaRecorder->recorderState());
@@ -433,3 +448,33 @@ void Camera::saveMetaData()
     m_mediaRecorder->setMetaData(data);
 }
 
+
+//============================================================================
+void Camera::slotSinkFrameAvailable( int frameNum, QImage& picBitmap )
+{
+    Q_UNUSED(frameNum);
+    if( picBitmap.isNull() )
+    {
+        float picWidth = picBitmap.width();
+        float picHeight = picBitmap.height();
+        float thisWidth = this->geometry().width() - 2;
+        float thisHeight = this->geometry().height() - 2;
+        if( ( thisWidth > 0 ) && ( thisHeight > 0 ) )
+        {
+            float scaleWidth = thisWidth / picWidth;
+            float scaleHeight = thisHeight / picHeight;
+            float picScale = ( scaleWidth < scaleHeight ) ? scaleWidth : scaleHeight;
+
+            QSize newPicSize( picWidth * picScale, picHeight * picScale );
+            QImage scaledBitmap = picBitmap.scaled( newPicSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+            if( ! scaledBitmap.isNull() )
+            {
+                 ui->m_CaptureSurface->setPixmap( QPixmap::fromImage( scaledBitmap ) );
+            }
+        }
+    }
+    else
+    {
+        qDebug() <<  "Camera::slotSinkFrameAvailable null pixmap";
+    }
+}
