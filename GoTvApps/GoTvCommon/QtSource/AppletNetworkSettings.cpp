@@ -235,19 +235,19 @@ void AppletNetworkSettings::fillNetHostSettingFromEngine( NetHostSetting& netSet
     uint16_t u16Port = m_Engine.getEngineSettings().getTcpIpPort();
     netSetting.setTcpPort( u16Port );
 
-    FirewallSettings::EFirewallTestType eFirewallType = m_Engine.getEngineSettings().getFirewallTestSetting();
+    EFirewallTestType eFirewallType = m_Engine.getEngineSettings().getFirewallTestSetting();
     int32_t fireWallType = 0;
     switch( eFirewallType )
     {
-    case  FirewallSettings::eFirewallTestAssumeNoFirewall:
+    case  eFirewallTestAssumeNoFirewall:
         fireWallType = 1;
         break;
 
-    case FirewallSettings::eFirewallTestAssumeFirewalled:
+    case eFirewallTestAssumeFirewalled:
         fireWallType = 2;
         break;
 
-    case FirewallSettings::eFirewallTestUrlConnectionTest:
+    case eFirewallTestUrlConnectionTest:
     default:
         fireWallType = 0;
     }
@@ -375,27 +375,27 @@ void AppletNetworkSettings::populateNetHostSettingsFromDlg( NetHostSetting& netH
         netHostSetting.setUserSpecifiedExternIpAddr( externIp.c_str() );
     }
 
-    FirewallSettings::EFirewallTestType eFirewallTestType = FirewallSettings::eFirewallTestUrlConnectionTest;
+    EFirewallTestType eFirewallTestType = eFirewallTestUrlConnectionTest;
     if( ui.AssumeNoProxyRadioButton->isChecked() )
     {
-        eFirewallTestType = FirewallSettings::eFirewallTestAssumeNoFirewall;
+        eFirewallTestType = eFirewallTestAssumeNoFirewall;
     }
     else if( ui.AssumeProxyRadioButton->isChecked() )
     {
-        eFirewallTestType = FirewallSettings::eFirewallTestAssumeFirewalled;
+        eFirewallTestType = eFirewallTestAssumeFirewalled;
     }
 
     switch( eFirewallTestType )
     {
-    case FirewallSettings::eFirewallTestAssumeNoFirewall:
+    case eFirewallTestAssumeNoFirewall:
         netHostSetting.setFirewallTestType( 1 );
         break;
  
-    case FirewallSettings::eFirewallTestAssumeFirewalled:
+    case eFirewallTestAssumeFirewalled:
         netHostSetting.setFirewallTestType( 2 );
         break;
 
-    case FirewallSettings::eFirewallTestUrlConnectionTest:
+    case eFirewallTestUrlConnectionTest:
     default:
         netHostSetting.setFirewallTestType( 0 );
     }
@@ -419,23 +419,23 @@ void AppletNetworkSettings::slotGoToNetHostSettingsButtonClick()
 //============================================================================
 void AppletNetworkSettings::slotAutoDetectProxyClick( void )
 {
-    setFirewallTest( FirewallSettings::eFirewallTestUrlConnectionTest );
+    setFirewallTest( eFirewallTestUrlConnectionTest );
 }
 
 //============================================================================
 void AppletNetworkSettings::slotNoProxyClick( void )
 {
-    setFirewallTest( FirewallSettings::eFirewallTestAssumeNoFirewall );
+    setFirewallTest( eFirewallTestAssumeNoFirewall );
 }
 
 //============================================================================
 void AppletNetworkSettings::slotYesProxyClick( void )
 {
-    setFirewallTest( FirewallSettings::eFirewallTestAssumeFirewalled );
+    setFirewallTest( eFirewallTestAssumeFirewalled );
 }
 
 //============================================================================
-void AppletNetworkSettings::setFirewallTest( FirewallSettings::EFirewallTestType eFirewallType )
+void AppletNetworkSettings::setFirewallTest( EFirewallTestType eFirewallType )
 {
     ui.AutoDetectProxyRadioButton->setChecked( false );
     ui.AssumeNoProxyRadioButton->setChecked( false );
@@ -443,16 +443,16 @@ void AppletNetworkSettings::setFirewallTest( FirewallSettings::EFirewallTestType
 
     switch( eFirewallType )
     {
-    case FirewallSettings::eFirewallTestAssumeFirewalled:
+    case eFirewallTestAssumeFirewalled:
         ui.AssumeProxyRadioButton->setChecked( true );
         break;
 
-    case FirewallSettings::eFirewallTestAssumeNoFirewall:
+    case eFirewallTestAssumeNoFirewall:
         ui.AssumeNoProxyRadioButton->setChecked( true );
         break;
 
-    case FirewallSettings::eFirewallTestUrlConnectionTest:
-    case FirewallSettings::eMaxFirewallTestType:
+    case eFirewallTestUrlConnectionTest:
+    case eMaxFirewallTestType:
     default:
         ui.AutoDetectProxyRadioButton->setChecked( true );
         break;

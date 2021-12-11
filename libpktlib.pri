@@ -31,6 +31,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.h \
 	$$PWD/DependLibs/PktLib/PktsHostJoin.h \
     $$PWD/DependLibs/PktLib/PktsImAlive.h \
+    $$PWD/DependLibs/PktLib/PktsMembership.h \
     $$PWD/DependLibs/PktLib/PktsMultiSession.h \
     $$PWD/DependLibs/PktLib/PktsPing.h \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.h \
@@ -83,6 +84,7 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.cpp \
 	$$PWD/DependLibs/PktLib/PktsHostJoin.cpp \
     $$PWD/DependLibs/PktLib/PktsImAlive.cpp \
+    $$PWD/DependLibs/PktLib/PktsMembership.cpp \
     $$PWD/DependLibs/PktLib/PktsMultiSession.cpp \
     $$PWD/DependLibs/PktLib/PktsPing.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.cpp \

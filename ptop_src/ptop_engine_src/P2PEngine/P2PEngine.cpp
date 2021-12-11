@@ -397,7 +397,7 @@ bool P2PEngine::addMyIdentToBlob( PktBlobEntry& blobEntry )
 bool P2PEngine::isDirectConnectReady( void )
 {
     bool directConnectReady = false;
-    if( FirewallSettings::eFirewallTestAssumeNoFirewall == m_EngineSettings.getFirewallTestSetting() )
+    if( eFirewallTestAssumeNoFirewall == m_EngineSettings.getFirewallTestSetting() )
     {
         directConnectReady = m_NetStatusAccum.isInternetAvailable();
     }

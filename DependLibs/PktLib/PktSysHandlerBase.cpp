@@ -1025,3 +1025,15 @@ void PktHandlerBase::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr 
 {
 	onPktUnhandled( sktBase, pktHdr );
 }
+
+//============================================================================
+void PktHandlerBase::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}

@@ -188,6 +188,9 @@ public:
 	virtual void				onPktPushToTalkReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktPushToTalkReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
+	virtual void				onPktMembershipReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktMembershipReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

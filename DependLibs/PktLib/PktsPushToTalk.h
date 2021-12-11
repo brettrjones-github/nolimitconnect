@@ -40,12 +40,12 @@ public:
 
 private:
 	//=== vars ===//
-	uint16_t					m_u8CompressionType;
-	uint16_t					m_u8CompressionVersion;
-	int64_t					    m_s64TimeMs;
-	uint16_t					m_u16Frame1DataLen;
-	uint16_t					m_u16Frame2DataLen;
-	uint32_t					m_u32Res;
+	uint16_t					m_u8CompressionType{ 1 };
+	uint16_t					m_u8CompressionVersion{ 1 };
+	int64_t					    m_s64TimeMs{ 0 };
+	uint16_t					m_u16Frame1DataLen{ 0 };
+	uint16_t					m_u16Frame2DataLen{ 0 };
+	uint32_t					m_u32Res{ 0 };
 	uint8_t						m_CompressedData[PUSH_TO_TALK_PACKET_MAX_COMPRESSED_LEN];
 };
 
@@ -54,13 +54,16 @@ class PktPushToTalkReply : public VxPktHdr
 public:
 	PktPushToTalkReply();
 
+	void						setTimeMs( int64_t time ) { m_s64TimeMs = htonU64( time ); }
+	int64_t 					getTimeMs( void ) { return ntohU64( m_s64TimeMs ); }
+
 private:
 	//=== vars ===//
-	uint16_t							m_u16Res1;
-	uint32_t							m_u32TimeMs;
-	uint32_t							m_u32Res2;
-	uint32_t							m_u32Res3;
-	uint32_t							m_u32Res4;
+	uint16_t					m_u16Res1{ 0 };
+	int64_t						m_s64TimeMs{ 0 };
+	uint32_t					m_u32Res1{ 0 };
+	uint32_t					m_u32Res2{ 0 };
+	uint32_t					m_u32Res3{ 0 };
 };
 
 #pragma pack(pop)

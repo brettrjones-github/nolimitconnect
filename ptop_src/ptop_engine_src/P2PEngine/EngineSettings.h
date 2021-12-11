@@ -81,8 +81,8 @@ public:
 	void						setUseNatPortForward( bool bUseNatPortForward );
 	bool						getUseNatPortForward( void );
 
-	void						setFirewallTestSetting( FirewallSettings::EFirewallTestType eFirewallTestType );
-    FirewallSettings::EFirewallTestType           getFirewallTestSetting( void );
+    void						setFirewallTestSetting( EFirewallTestType eFirewallTestType );
+    EFirewallTestType           getFirewallTestSetting( void );
 
 	void						setPreferredNetworkAdapterIp( const char * wirelessIpAddress );
 	std::string					getPreferredNetworkAdapterIp( void );

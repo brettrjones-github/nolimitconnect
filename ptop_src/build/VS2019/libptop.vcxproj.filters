@@ -916,6 +916,12 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\SktLists\SktListMgr.cpp">
+      <Filter>Source Files\SktLists</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\SktLists\SktListMgrBase.cpp">
+      <Filter>Source Files\SktLists</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1972,6 +1978,15 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PushToTalkFeedMgr.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListCallbackInterface.h">
+      <Filter>Source Files\SktLists</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListMgr.h">
+      <Filter>Source Files\SktLists</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListMgrBase.h">
+      <Filter>Source Files\SktLists</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2111,6 +2126,9 @@
     </Filter>
     <Filter Include="Source Files\IdentListMgrs">
       <UniqueIdentifier>{2cde1acc-ffb6-4ce6-aafc-fa8155b40dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SktLists">
+      <UniqueIdentifier>{f409edf1-aaed-4aeb-b380-02f4638df9ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -183,6 +183,9 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REQ]					= &PktPluginHandlerBase::onPktPushToTalkReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REPLY]					= &PktPluginHandlerBase::onPktPushToTalkReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_MEMBERSHIP_REQ]						= &PktPluginHandlerBase::onPktMembershipReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_MEMBERSHIP_REPLY]					= &PktPluginHandlerBase::onPktMembershipReply;
 }
 
 //============================================================================
@@ -960,6 +963,18 @@ void PktPluginHandlerBase::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pkt
 
 //============================================================================
 void PktPluginHandlerBase::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }

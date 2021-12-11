@@ -300,8 +300,8 @@ std::string NetworkMonitor::determineLocalIp( void )
     std::string localIp;
     static std::string lastLocalIp;
 
-    FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
-    if( firewallTestType == FirewallSettings::eFirewallTestAssumeNoFirewall )
+    EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
+    if( firewallTestType == eFirewallTestAssumeNoFirewall )
     {
         // if user specified his external ip then the local ip address should not change
         if( !lastLocalIp.empty() )
@@ -313,7 +313,7 @@ std::string NetworkMonitor::determineLocalIp( void )
     static int determineIpAttemptCnt = 0;
     determineIpAttemptCnt++;
     bool isNetworkHost = m_Engine.getHasHostService( eHostServiceNetworkHost );
-    if( !lastLocalIp.empty() && ( isNetworkHost || firewallTestType == FirewallSettings::eFirewallTestAssumeFirewalled ) )
+    if( !lastLocalIp.empty() && ( isNetworkHost || firewallTestType == eFirewallTestAssumeFirewalled ) )
     {
         // if we are network host but have not specified a external ip 
         // we assume network ip will almost never change

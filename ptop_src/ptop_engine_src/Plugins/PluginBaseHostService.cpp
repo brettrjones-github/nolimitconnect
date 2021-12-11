@@ -47,7 +47,7 @@ void PluginBaseHostService::buildHostAnnounce( PluginSetting& pluginSetting )
 void PluginBaseHostService::sendHostAnnounce( void )
 {
     if( !m_HostAnnounceBuilt && 
-        ( m_Engine.getEngineSettings().getFirewallTestSetting() == FirewallSettings::eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
+        ( m_Engine.getEngineSettings().getFirewallTestSetting() == eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
             m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
     {
         PluginSetting pluginSetting;

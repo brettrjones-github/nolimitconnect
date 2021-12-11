@@ -74,6 +74,6 @@ enum EXferState
     eMaxXferState
 };
 
-const char * DescribeXferDirection( EXferDirection xferDir );
-const char * DescribeXferError( EXferError xferErr );
-const char * DescribeXferState( EXferState xferState );
+const char * DescribeXferDirection( enum EXferDirection xferDir );
+const char * DescribeXferError( enum EXferError xferErr );
+const char * DescribeXferState( enum EXferState xferState );

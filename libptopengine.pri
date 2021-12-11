@@ -333,6 +333,9 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanAction.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanMatchedConnection.h \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanPic.h \
+    $$PWD/ptop_src/ptop_engine_src/SktLists/SktListCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/SktLists/SktListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/SktLists/SktListMgrBase.h \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbCallbackInterface.h \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h \
     $$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbInfoDb.h \
@@ -641,6 +644,9 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScan.cpp \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanAction.cpp \
     $$PWD/ptop_src/ptop_engine_src/Search/RcScanMatchedConnection.cpp \
+    $$PWD/ptop_src/ptop_engine_src/SktLists/SktListCallbackInterface.cpp \
+    $$PWD/ptop_src/ptop_engine_src/SktLists/SktListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/SktLists/SktListMgrBase.cpp \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbInfoDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.cpp \

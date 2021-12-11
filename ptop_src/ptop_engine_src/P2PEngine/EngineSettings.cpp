@@ -95,18 +95,18 @@ void EngineSettings::getNetHostSettings( NetHostSetting& netSettings )
     netSettings.setUseUpnpPortForward( useUpnp );
 
     int32_t firewallType = 0;
-    FirewallSettings::EFirewallTestType firewallEnum = getFirewallTestSetting();
+    EFirewallTestType firewallEnum = getFirewallTestSetting();
     switch( firewallEnum )
     {
-    case FirewallSettings::eFirewallTestAssumeNoFirewall:
+    case eFirewallTestAssumeNoFirewall:
         firewallType = 1;
         break;
 
-    case FirewallSettings::eFirewallTestAssumeFirewalled:
+    case eFirewallTestAssumeFirewalled:
         firewallType = 2;
         break;
 
-    case FirewallSettings::eFirewallTestUrlConnectionTest:
+    case eFirewallTestUrlConnectionTest:
     default:
         firewallType = 0;
         break;
@@ -130,15 +130,15 @@ void EngineSettings::setNetHostSettings( NetHostSetting& netSettings )
     setUseUpnpPortForward( netSettings.getUseUpnpPortForward() );
 
     int32_t firewallType = netSettings.getFirewallTestType();
-    FirewallSettings::EFirewallTestType firewallEnum =  FirewallSettings::eFirewallTestUrlConnectionTest;
+    EFirewallTestType firewallEnum =  eFirewallTestUrlConnectionTest;
     switch( firewallType )
     {
     case 1:
-        firewallEnum = FirewallSettings::eFirewallTestAssumeNoFirewall;
+        firewallEnum = eFirewallTestAssumeNoFirewall;
         break;
 
     case 2:
-        firewallType = FirewallSettings::eFirewallTestAssumeFirewalled;
+        firewallType = eFirewallTestAssumeFirewalled;
         break;
 
     default:
@@ -202,8 +202,8 @@ void EngineSettings::setWhichContactsToView( EFriendViewType eViewType )
 void EngineSettings::getExternalIp( std::string& strIpAddress )
 {
     strIpAddress = "";
-    //FirewallSettings::EFirewallTestType firewallType = getFirewallTestSetting();
-    //if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallType )
+    //EFirewallTestType firewallType = getFirewallTestSetting();
+    //if( eFirewallTestAssumeNoFirewall == firewallType )
     //{
         // only get extern ip if set to assume can connect directly
         m_SettingsDbMutex.lock();
@@ -488,15 +488,15 @@ void EngineSettings::setUseNatPortForward( bool bUseNatPortForward )
 }
 
 //============================================================================
-FirewallSettings::EFirewallTestType EngineSettings::getFirewallTestSetting( void )
+EFirewallTestType EngineSettings::getFirewallTestSetting( void )
 {
 	uint16_t u16Setting;
 	getIniValue( MY_SETTINGS_KEY, "FirewallTest", u16Setting, 0 );
-	return ( FirewallSettings::EFirewallTestType)u16Setting;
+	return ( EFirewallTestType)u16Setting;
 }
 
 //============================================================================
-void EngineSettings::setFirewallTestSetting( FirewallSettings::EFirewallTestType eFirewallTestType )
+void EngineSettings::setFirewallTestSetting( EFirewallTestType eFirewallTestType )
 {
 	uint16_t u16Setting = (uint16_t)eFirewallTestType;
     m_SettingsDbMutex.lock();

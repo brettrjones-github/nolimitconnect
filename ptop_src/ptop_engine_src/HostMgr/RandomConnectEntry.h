@@ -27,8 +27,8 @@ public:
 
 	void						setHostListEntry( HostListEntry& entry );
 	void						setPostTimeMs( int64_t postTimeMs )			{ m_PostTimeMs = postTimeMs; }
-	int64_t						getPostTimeMs( void )					{ return m_PostTimeMs; }
-	HostListEntry *			    getHostListEntry( void )				{ return (HostListEntry *)this; }
+	int64_t						getPostTimeMs( void )						{ return m_PostTimeMs; }
+	HostListEntry *			    getHostListEntry( void )					{ return (HostListEntry *)this; }
 
 private:
 	int64_t						m_PostTimeMs = 0;

@@ -929,7 +929,7 @@ bool P2PEngine::getHasHostService( EHostServiceType hostService )
 //============================================================================
 bool P2PEngine::getHasFixedIpAddress( void )
 {
-    if( FirewallSettings::eFirewallTestAssumeNoFirewall == getEngineSettings().getFirewallTestSetting() )
+    if( eFirewallTestAssumeNoFirewall == getEngineSettings().getFirewallTestSetting() )
     {
         std::string externIp;
         getEngineSettings().getUserSpecifiedExternIpAddr( externIp );
@@ -1145,7 +1145,7 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
         m_EngineSettings.setNetHostSettings( netHostSetting );
         if( origSettings.getUserSpecifiedExternIpAddr() != netHostSetting.getUserSpecifiedExternIpAddr() )
         {
-            if( FirewallSettings::eFirewallTestAssumeNoFirewall == netHostSetting.getFirewallTestType() && !netHostSetting.getUserSpecifiedExternIpAddr().empty() )
+            if( eFirewallTestAssumeNoFirewall == netHostSetting.getFirewallTestType() && !netHostSetting.getUserSpecifiedExternIpAddr().empty() )
             {
                 getMyPktAnnounce().setOnlineIpAddress( netHostSetting.getUserSpecifiedExternIpAddr().c_str() );
                 setPktAnnLastModTime( GetTimeStampMs() );

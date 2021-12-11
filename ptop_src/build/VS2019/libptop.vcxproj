@@ -764,6 +764,8 @@
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScan.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanAction.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\SktLists\SktListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\SktLists\SktListMgrBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbMgr.cpp" />
@@ -1114,6 +1116,9 @@
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanAction.h" />
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanMatchedConnection.h" />
     <ClInclude Include="..\..\ptop_engine_src\Search\RcScanPic.h" />
+    <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbInfoDb.h" />

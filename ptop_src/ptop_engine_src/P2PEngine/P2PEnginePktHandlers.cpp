@@ -24,6 +24,7 @@
 
 #include <PktLib/PktTcpPunch.h>
 #include <PktLib/PktsPing.h>
+#include <PktLib/PktsMembership.h>
 
 #include <memory.h>
 
@@ -1303,4 +1304,75 @@ void P2PEngine::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 	LogMsg( LOG_INFO, "P2PEngine::onPktPushToTalkReply" );
 #endif // DEBUG_ENGINE_PKTS
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+
+//============================================================================
+void P2PEngine::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+	LogMsg( LOG_INFO, "P2PEngine::onPktMembershipReq" );
+#endif // DEBUG_ENGINE_PKTS
+	VxNetIdent* netIdent = pktHdr->getSrcOnlineId() == getMyOnlineId() ? getMyNetIdent() : m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+	if( netIdent && !netIdent->isIgnored() && sktBase && sktBase->isConnected() )
+	{
+		PktAnnounce pktAnn;
+		copyMyPktAnnounce( pktAnn );
+		EFriendState myFriendshipToHim = netIdent->getMyFriendshipToHim();
+		PktMembershipReply pktReply;
+		pktReply.setCanPushToTalk( pktAnn.getPluginPermission( ePluginTypePushToTalk ) != eFriendStateIgnore && myFriendshipToHim >= pktAnn.getPluginPermission( ePluginTypePushToTalk ) );
+		pktReply.setHostMembership( eHostTypeNetwork, getMembershipState( pktAnn, ePluginTypeHostNetwork, myFriendshipToHim ) );
+		pktReply.setHostMembership( eHostTypeConnectTest, getMembershipState( pktAnn, ePluginTypeHostConnectTest, myFriendshipToHim ) );
+		pktReply.setHostMembership( eHostTypeGroup, getMembershipState( pktAnn, ePluginTypeHostGroup, myFriendshipToHim ) );
+		pktReply.setHostMembership( eHostTypeChatRoom, getMembershipState( pktAnn, ePluginTypeHostChatRoom, myFriendshipToHim ) );
+        pktReply.setHostMembership( eHostTypeRandomConnect, getMembershipState( pktAnn, ePluginTypeHostRandomConnect, myFriendshipToHim ) );
+
+        sktBase->txPacket( netIdent->getMyOnlineId(), &pktReply );
+	}
+}
+
+//============================================================================
+void P2PEngine::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+#ifdef DEBUG_ENGINE_PKTS
+	LogMsg( LOG_INFO, "P2PEngine::onPktMembershipReply" );
+#endif // DEBUG_ENGINE_PKTS
+	VxNetIdent* netIdent = pktHdr->getSrcOnlineId() == getMyOnlineId() ? getMyNetIdent() : m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
+	if( netIdent && !netIdent->isIgnored() && sktBase && sktBase->isConnected() )
+	{
+		// do skt lists
+
+	}
+}
+
+//============================================================================
+EMembershipState P2PEngine::getMembershipState( PktAnnounce& myPktAnn, EPluginType pluginType, EFriendState myFriendshipToHim )
+{
+	EMembershipState membershipState{ eMembershipStateNone };
+	if( myFriendshipToHim == eFriendStateIgnore )
+	{
+		membershipState = eMembershipStateJoinDenied;
+	}
+	else if( myPktAnn.getPluginPermission( ePluginTypeHostConnectTest ) != eFriendStateIgnore )
+	{
+		if( ePluginTypeHostGroup == pluginType )
+		{
+			// TODO look up joined state from group manager
+		}
+		else if( ePluginTypeHostChatRoom == pluginType )
+		{
+			// TODO look up joined state from chat room manager
+		}
+
+		if( myFriendshipToHim >= myPktAnn.getPluginPermission( pluginType ) )
+		{
+			membershipState = eMembershipStateJoined;
+		}
+		else
+		{
+			membershipState = eMembershipStateCanBeRequested;
+		}
+	}
+
+	return membershipState;
 }

@@ -70,7 +70,7 @@ protected:
     void						updateDlgFromSettings( bool initialSettings );
     void						updateSettingsFromDlg( void );
     void						populateDlgFromNetHostSetting( NetHostSetting& netSettings );
-    void						setFirewallTest( FirewallSettings::EFirewallTestType eFirewallType );
+    void						setFirewallTest( EFirewallTestType eFirewallType );
     void                        populateNetHostSettingsFromDlg( NetHostSetting& netHostSetting );
     void                        applyEngineSettingsFromHostSetting( NetHostSetting& netHostSetting );
 

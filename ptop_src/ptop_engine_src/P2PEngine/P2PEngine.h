@@ -675,6 +675,9 @@ public:
     virtual void				onPktPushToTalkReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktPushToTalkReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
+    virtual void				onPktMembershipReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktMembershipReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
 
 protected:
@@ -699,6 +702,8 @@ protected:
     void						onFirstPktAnnounce( PktAnnounce * pktAnn );
     void                        updateIdentLists( BigListInfo* poInfo, int64_t timestampMs = 0 );
     void                        updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected );
+
+    EMembershipState            getMembershipState( PktAnnounce& myPktAnn, EPluginType pluginType, EFriendState myFriendshipToHim );
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;

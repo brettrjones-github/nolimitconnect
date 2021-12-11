@@ -102,8 +102,8 @@ void NetworkStateAvail::runNetworkState( void )
         return;
     }
 
-    FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
-	if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallTestType )
+    EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
+	if( eFirewallTestAssumeNoFirewall == firewallTestType )
 	{
 		std::string externIp = m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr();
 		
@@ -222,7 +222,7 @@ void NetworkStateAvail::runNetworkState( void )
 
         if( IsLogEnabled( eLogNetworkState ) )
         {
-            if( FirewallSettings::eFirewallTestUrlConnectionTest == firewallTestType )
+            if( eFirewallTestUrlConnectionTest == firewallTestType )
             {
                 if( eAppErrRxError == directConnectTestResults.m_eAppErr )
                 {
@@ -289,7 +289,7 @@ void NetworkStateAvail::runNetworkState( void )
 
         m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, availMsg.c_str() );
 		
-		if( FirewallSettings::eFirewallTestAssumeFirewalled == firewallTestType )
+		if( eFirewallTestAssumeFirewalled == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState eFirewallTestAssumeFirewalled %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
@@ -306,13 +306,13 @@ void NetworkStateAvail::runNetworkState( void )
 	}
 	else
 	{
-		if( FirewallSettings::eFirewallTestUrlConnectionTest == firewallTestType )
+		if( eFirewallTestUrlConnectionTest == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState relay search %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
 		}
-		else if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallTestType )
+		else if( eFirewallTestAssumeNoFirewall == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState assume no firewall %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
@@ -320,7 +320,7 @@ void NetworkStateAvail::runNetworkState( void )
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
             canDirectConnect = true;
 		}
-		else if( FirewallSettings::eFirewallTestAssumeFirewalled == firewallTestType )
+		else if( eFirewallTestAssumeFirewalled == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState assume firewall %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );

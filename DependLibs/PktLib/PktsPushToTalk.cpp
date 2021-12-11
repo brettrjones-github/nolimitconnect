@@ -16,12 +16,10 @@
 #include "PktTypes.h"
 #include "PktsPushToTalk.h"
 
+#include <CoreLib/VxDebug.h>
+
 //============================================================================
 PktPushToTalkReq::PktPushToTalkReq()
-: m_u8CompressionType(1)
-, m_u8CompressionVersion(1)
-, m_s64TimeMs(0)
-, m_u32Res(0)
 {
 	setPktType( PKT_TYPE_PUSH_TO_TALK_REQ );
 }
@@ -32,13 +30,10 @@ void PktPushToTalkReq::calcPktLen( void )
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( (sizeof( PktPushToTalkReq ) - ( sizeof( m_CompressedData ) ) + (getFrame1Len() + getFrame2Len()) ) ) );
 }
 
+//============================================================================
 PktPushToTalkReply::PktPushToTalkReply()
-	: m_u16Res1( 0 )
-	, m_u32TimeMs( 0 )
-	, m_u32Res2( 0 )
-	, m_u32Res3( 0 )
-	, m_u32Res4( 0 )
 {
+	vx_assert( 0 == sizeof( PktPushToTalkReply ) & 0x0f );
 	setPktType( PKT_TYPE_PUSH_TO_TALK_REPLY );
 	setPktLength( sizeof( PktPushToTalkReply ) );
 }

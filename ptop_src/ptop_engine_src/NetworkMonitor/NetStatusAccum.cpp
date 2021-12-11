@@ -47,7 +47,7 @@ void NetStatusAccum::onNetStatusChange( void )
 {
     ENetAvailStatus netAvailStatus = eNetAvailNoInternet;
     EInternetStatus internetStatus = m_InternetAvail ? eInternetNoInternet : eInternetInternetAvailable;
-    if( FirewallSettings::eFirewallTestAssumeNoFirewall == m_FirewallTestType )
+    if( eFirewallTestAssumeNoFirewall == m_FirewallTestType )
     {
         internetStatus = eInternetAssumeDirectConnect;
         netAvailStatus = eNetAvailP2PAvail; // must be at least P2P available or will not accept incomming accept sockets
@@ -91,14 +91,14 @@ void NetStatusAccum::onNetStatusChange( void )
             }
         }
     }
-    else if( FirewallSettings::eFirewallTestAssumeFirewalled == m_FirewallTestType )
+    else if( eFirewallTestAssumeFirewalled == m_FirewallTestType )
     {
         if( m_InternetAvail )
         {
             internetStatus = eInternetRequiresRelay;
         }
     }
-    else if( FirewallSettings::eFirewallTestUrlConnectionTest == m_FirewallTestType )
+    else if( eFirewallTestUrlConnectionTest == m_FirewallTestType )
     {
         if( m_InternetAvail )
         {
@@ -155,7 +155,7 @@ void NetStatusAccum::onNetStatusChange( void )
         LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Internet Status %s", DescribeInternetStatus( internetStatus ) );
     }
 
-    if( !( FirewallSettings::eFirewallTestAssumeNoFirewall == m_FirewallTestType ) )
+    if( !( eFirewallTestAssumeNoFirewall == m_FirewallTestType ) )
     {
         if( m_NetworkHostAvail )
         {
@@ -365,7 +365,7 @@ void NetStatusAccum::setIpPort( uint16_t ipPort )
 }
 
 //============================================================================
-void NetStatusAccum::setFirewallTestType( FirewallSettings::EFirewallTestType firewallTestType )
+void NetStatusAccum::setFirewallTestType( EFirewallTestType firewallTestType )
 {
     if( firewallTestType != m_FirewallTestType )
     {
