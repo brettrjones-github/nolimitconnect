@@ -542,6 +542,7 @@ public:
     virtual bool				fromGuiInstMsg( EPluginType		ePluginType,
                                                 VxGUID&			oOnlineId,
                                                 const char *	pMsg );
+    virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk );
 
     virtual bool				fromGuiChangeMyFriendshipToHim( VxGUID&			oOnlineId,
                                                                 EFriendState	eMyFriendshipToHim,

@@ -31,6 +31,8 @@
 #include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/OnlineListMgr.h>
+#include <ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.h>
+#include <ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.h>
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
 #include <ptop_src/ptop_engine_src/OfferClientMgr/OfferClientMgr.h>
 #include <ptop_src/ptop_engine_src/OfferHostMgr/OfferHostMgr.h>
@@ -117,6 +119,8 @@ public:
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
     GroupListMgr&               getGroupListMgr( void )                         { return m_GroupListMgr; }
     IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
+    MembershipAvailableMgr&     getMembershipAvailableMgr( void )               { return m_MembershipAvailableMgr; }
+    MembershipHostedMgr&        getMembershipHostedMgr( void )                  { return m_MembershipHostedMgr; }
     NearbyListMgr&              getNearbyListMgr( void )                        { return m_NearbyListMgr; }
     OnlineListMgr&              getOnlineListMgr( void )                        { return m_OnlineListMgr; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
@@ -317,6 +321,7 @@ public:
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 
                                                     const char *	pMsg ) override;
+    virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) override;
 
 	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
 																EFriendState	eMyFriendshipToHim,
@@ -703,7 +708,7 @@ protected:
     void                        updateIdentLists( BigListInfo* poInfo, int64_t timestampMs = 0 );
     void                        updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected );
 
-    EMembershipState            getMembershipState( PktAnnounce& myPktAnn, EPluginType pluginType, EFriendState myFriendshipToHim );
+    EMembershipState            getMembershipState( PktAnnounce& myPktAnn, VxNetIdent* netIdent, EPluginType pluginType, EFriendState myFriendshipToHim );
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
@@ -730,6 +735,8 @@ protected:
     ConnectMgr&                 m_ConnectMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;
+    MembershipAvailableMgr      m_MembershipAvailableMgr;
+    MembershipHostedMgr         m_MembershipHostedMgr;
     NetworkMgr&					m_NetworkMgr;
 	NetworkMonitor&				m_NetworkMonitor;
 	NetServicesMgr&				m_NetServicesMgr;

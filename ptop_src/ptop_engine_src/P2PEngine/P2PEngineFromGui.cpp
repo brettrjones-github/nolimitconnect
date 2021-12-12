@@ -883,7 +883,23 @@ bool P2PEngine::fromGuiInstMsg(	EPluginType		ePluginType,
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiInstMsg invalid plugin\n" );
+		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiInstMsg invalid plugin" );
+		return false;
+	}
+}
+
+//============================================================================
+bool P2PEngine::fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk )
+{
+	BigListInfo* poInfo = m_BigListMgr.findBigListInfo( onlineId );
+	PluginBase* poPlugin = m_PluginMgr.getPlugin( ePluginTypePushToTalk );
+	if( 0 != poPlugin )
+	{
+		return poPlugin->fromGuiPushToTalk( poInfo, enableTalk );
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "ERROR P2PEngine::fromGuiPushToTalk invalid plugin" );
 		return false;
 	}
 }

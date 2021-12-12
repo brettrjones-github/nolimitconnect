@@ -298,6 +298,8 @@ public:
 													VxGUID&			onlineId, 
 													const char *	pMsg ) = 0; 
 
+	virtual bool				fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk ) = 0;
+
 	/// If true then network direct connect test failed and communication requires relay service from another node
 	virtual void				fromGuiRequireRelay( bool bRequireRelay ) = 0;
 	/// Set contact as preferred provider of relay service ( relay search will attempt relay service from this contact first ) 

@@ -114,3 +114,14 @@ void PluginChatRoomHost::onPluginSettingChange( PluginSetting& pluginSetting )
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostChatRoomAnnounce( pluginSetting );
 }
+
+//============================================================================
+EMembershipState PluginChatRoomHost::getMembershipState( VxNetIdent* netIdent )
+{
+    if( eFriendStateIgnore == getPluginPermission() )
+    {
+        return eMembershipStateJoinDenied;
+    }
+
+    return m_HostServerMgr.getMembershipState( netIdent, PluginTypeToHostType( getPluginType() ) );
+}

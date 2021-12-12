@@ -29,6 +29,8 @@ public:
     virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
 
     virtual EJoinState	        getJoinState( VxNetIdent* netIdent, EHostType hostType ) override;
+    virtual EMembershipState	getMembershipState( VxNetIdent* netIdent, EHostType hostType ) override;
+
     virtual void				onJoinRequested( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType );
     virtual void				onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType );
 

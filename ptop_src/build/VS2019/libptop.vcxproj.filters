@@ -922,6 +922,18 @@
     <ClCompile Include="..\..\ptop_engine_src\SktLists\SktListMgrBase.cpp">
       <Filter>Source Files\SktLists</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Membership\Membership.cpp">
+      <Filter>Source Files\Membership</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipMgrBase.cpp">
+      <Filter>Source Files\Membership</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipAvailableMgr.cpp">
+      <Filter>Source Files\Membership</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipHostedMgr.cpp">
+      <Filter>Source Files\Membership</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1987,6 +1999,24 @@
     <ClInclude Include="..\..\ptop_engine_src\SktLists\SktListMgrBase.h">
       <Filter>Source Files\SktLists</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Membership\Membership.h">
+      <Filter>Source Files\Membership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipMgrBase.h">
+      <Filter>Source Files\Membership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipAvailableMgr.h">
+      <Filter>Source Files\Membership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipAvailableCallbackInterface.h">
+      <Filter>Source Files\Membership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipHostedCallbackInterface.h">
+      <Filter>Source Files\Membership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipHostedMgr.h">
+      <Filter>Source Files\Membership</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2129,6 +2159,9 @@
     </Filter>
     <Filter Include="Source Files\SktLists">
       <UniqueIdentifier>{f409edf1-aaed-4aeb-b380-02f4638df9ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Membership">
+      <UniqueIdentifier>{6a8cbc11-9cb6-40dc-9d8c-d9f4efe32988}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

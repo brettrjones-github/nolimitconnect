@@ -68,6 +68,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4996;26812</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\;$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -311,6 +312,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostJoinSession.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHostSession.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiMembershipAvailableMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferClientMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferHostMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgrBase.cpp" />
@@ -527,6 +529,8 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferMgrBase.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferClientMgr.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiOfferHostMgr.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiMembershipAvailableMgr.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiMembershipAvailableCallback.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumb.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiThumbList.h" />

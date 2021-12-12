@@ -43,6 +43,7 @@ public:
 
     virtual EPluginAccess	    getPluginAccessState( VxNetIdent * netIdent );
     virtual EJoinState	        getJoinState( VxNetIdent* netIdent, EHostType hostType );
+    virtual EMembershipState	getMembershipState( VxNetIdent* netIdent, EHostType hostType );
     virtual EConnectReason      getSearchConnectReason( EHostType hostType );
 
     virtual void                connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason );

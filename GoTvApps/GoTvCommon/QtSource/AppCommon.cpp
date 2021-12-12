@@ -173,6 +173,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
 , m_ThumbMgr( *this )
+, m_MembershipAvailableMgr( *this )
 , m_OfferClientMgr( *this )
 , m_OfferHostMgr( *this )
 , m_UserMgr( *this )
@@ -2159,7 +2160,7 @@ void AppCommon::onUserLoggedOn( void )
 }
 
 //============================================================================
-void AppCommon::checkSystemReady( void )
+bool AppCommon::checkSystemReady( void )
 {
 	if( !m_IsSystemReady && m_IsMessengerReady && m_IsLoggedOn )
 	{
@@ -2176,6 +2177,8 @@ void AppCommon::checkSystemReady( void )
 
 		emit signalSystemReady( m_IsSystemReady );
 	}
+
+	return m_IsSystemReady;
 }
 
 //============================================================================

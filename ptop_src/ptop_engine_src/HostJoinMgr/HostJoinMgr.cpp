@@ -350,13 +350,48 @@ EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& n
     else if( netIdent.getMyOnlineId() == m_Engine.getMyOnlineId() )
     {
         // if we are host we can always join our own hosted servers
-
-        // commented out temporarily for development
-        // hostJoinState = eJoinStateJoinAccepted;
+        hostJoinState = eJoinStateJoinAccepted;
     }
 
     unlockResources();
     return hostJoinState;
+}
+
+
+//============================================================================
+EMembershipState HostJoinMgr::fromGuiQueryMembership( EHostType hostType, VxNetIdent& netIdent )
+{
+    EMembershipState membershipState{ eMembershipStateNone };
+
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent.getMyOnlineId(), HostTypeToHostPlugin( hostType ) );
+    if( joinInfo )
+    {
+        EJoinState hostJoinState = joinInfo->getJoinState();
+        switch( hostJoinState )
+        {
+        case eJoinStateNone:
+        case eJoinStateSending:
+        case eJoinStateSendFail:
+        case eJoinStateSendAcked:
+        case eJoinStateJoinRequested:
+            return eMembershipStateCanBeRequested;
+
+        case eJoinStateJoinAccepted:
+            return eMembershipStateJoined;
+
+        case eJoinStateJoinDenied:
+            return eMembershipStateJoinDenied;
+        }
+    }
+    else if( netIdent.getMyOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // if we are host we can always join our own hosted servers
+        membershipState = eMembershipStateCanBeRequested;
+    }
+
+    unlockResources();
+    return membershipState;
 }
 
 //============================================================================

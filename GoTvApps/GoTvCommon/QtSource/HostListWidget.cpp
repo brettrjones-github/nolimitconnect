@@ -47,7 +47,7 @@ HostListItem* HostListWidget::sessionToWidget( GuiHostSession* hostSession )
 
     connect( hostItem, SIGNAL( signalHostListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotHostListItemClicked( QListWidgetItem * ) ) );
     connect( hostItem, SIGNAL( signalIconButtonClicked( HostListItem * ) ),	        this, SLOT( slotIconButtonClicked( HostListItem * ) ) );
-    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( HostListItem* ) ), this, SLOT( slotFriendshipButtonClicked( HostListItem* ) ) );
+    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( HostListItem* ) ),    this, SLOT( slotFriendshipButtonClicked( HostListItem* ) ) );
     connect( hostItem, SIGNAL( signalMenuButtonClicked( HostListItem * ) ),	        this, SLOT( slotMenuButtonClicked( HostListItem * ) ) );
     connect( hostItem, SIGNAL( signalJoinButtonClicked( HostListItem * ) ),		    this, SLOT( slotJoinButtonClicked( HostListItem * ) ) );
     connect( hostItem, SIGNAL( signalConnectButtonClicked( HostListItem* ) ),       this, SLOT( slotConnectButtonClicked( HostListItem* ) ) );

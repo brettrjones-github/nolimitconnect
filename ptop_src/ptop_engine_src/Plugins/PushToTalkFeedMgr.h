@@ -32,6 +32,8 @@ class PushToTalkFeedMgr
 public:
 	PushToTalkFeedMgr( P2PEngine& engine, PluginBase& plugin, PluginSessionMgr& sessionMgr );
 
+	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
+
 	virtual void				fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
 	virtual void				fromGuiStopPluginSession( bool pluginIsLocked, VxNetIdent * netIdent = NULL );
 

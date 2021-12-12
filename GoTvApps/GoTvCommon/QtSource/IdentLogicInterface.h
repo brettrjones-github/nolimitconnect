@@ -41,12 +41,13 @@ public:
 
 	virtual VxPushButton*		getIdentAvatarButton( void ) = 0;
 	virtual VxPushButton*		getIdentFriendshipButton( void ) = 0;
-	virtual VxPushButton*		getIdentOfferButton( void )				{ return nullptr; }
+	virtual VxPushButton*		getIdentOfferButton( void )					{ return nullptr; }
+	virtual VxPushButton*		getIdentPushToTalkButton( void )			{ return nullptr; }
 	virtual VxPushButton*		getIdentMenuButton( void ) = 0;
 
 	virtual QLabel*				getIdentLine1( void ) = 0;
 	virtual QLabel*				getIdentLine2( void ) = 0;
-	virtual QLabel*				getIdentLine3( void )					{ return nullptr; }
+	virtual QLabel*				getIdentLine3( void )						{ return nullptr; }
 
 	virtual void				updateIdentity( GuiUser* guiUser );
 	virtual void				updateIdentity( GuiHostJoin* hostIdent );
@@ -73,17 +74,23 @@ public:
 	virtual void				onIdentFriendshipButtonClicked( void );
 	virtual void				onIdentOfferButtonClicked( void )		{};
 	virtual void				onIdentMenuButtonClicked( void )		{};
+	virtual void				onIdentPushToTalkButtonPressed( void );
+	virtual void				onIdentPushToTalkButtonReleased( void );
 
 signals:
 	void						signalIdentAvatarButtonClicked( void );
 	void						signalIdentOfferButtonClicked( void );
 	void						signalIdentMenuButtonClicked( void );
+	void						signalIdentPushToTalkButtonPressed( void );
+	void						signalIdentPushToTalkButtonReleased( void );
 
 protected slots:
 	void						slotIdentAvatarButtonClicked( void );
 	void						slotIdentFrienshipButtonClicked( void );
 	void						slotIdentOfferButtonClicked( void );
 	void						slotIdentMenuButtonClicked( void );
+	void						slotIdentPushToTalkButtonPressed( void );
+	void						slotIdentPushToTalkButtonReleased( void );
 
 protected:
 	AppCommon&					m_MyApp;

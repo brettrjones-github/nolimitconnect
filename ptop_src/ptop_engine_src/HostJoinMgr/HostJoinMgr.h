@@ -34,6 +34,7 @@ public:
     void                        fromGuiUserLoggedOn( void );
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
     virtual EJoinState	        fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
+    EMembershipState            fromGuiQueryMembership( EHostType hostType, VxNetIdent& netIdent );
     void                        fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList );
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );

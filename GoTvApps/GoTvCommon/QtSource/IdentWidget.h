@@ -27,6 +27,7 @@ public:
 	VxPushButton*				getIdentAvatarButton( void ) override;
 	VxPushButton*				getIdentFriendshipButton( void ) override;
 	VxPushButton*				getIdentOfferButton( void ) override;
+	VxPushButton*				getIdentPushToTalkButton( void ) override;
 	VxPushButton*				getIdentMenuButton( void ) override;
 
 	virtual QLabel*				getIdentLine1( void ) override;

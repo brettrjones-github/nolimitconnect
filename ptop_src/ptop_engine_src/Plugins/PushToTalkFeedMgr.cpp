@@ -46,6 +46,13 @@ PushToTalkFeedMgr::PushToTalkFeedMgr( P2PEngine& engine, PluginBase& plugin, Plu
 }
 
 //============================================================================
+bool PushToTalkFeedMgr::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk )
+{
+	enableAudioCapture( enableTalk, netIdent );
+	return true;
+}
+
+//============================================================================
 void PushToTalkFeedMgr::fromGuiStartPluginSession( bool pluginIsLocked, VxNetIdent * netIdent )
 {
 	enableAudioCapture( true, netIdent );
@@ -109,7 +116,7 @@ void PushToTalkFeedMgr::enableAudioCapture( bool enable, VxNetIdent * netIdent )
 			}
 			else
 			{
-                LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::enableCapture true GUID already in list %s\n", netIdent->getOnlineName() );
+                LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::enableCapture true GUID already in list %s", netIdent->getOnlineName() );
 			}
 		}
 		else

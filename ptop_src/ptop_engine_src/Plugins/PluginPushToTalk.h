@@ -44,6 +44,7 @@ public:
 
 	virtual bool				fromGuiInstMsg(		VxNetIdent *	netIdent, 
 													const char *	pMsg ); 
+	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
 
 	virtual void				replaceConnection			( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 

@@ -31,6 +31,8 @@ public:
     virtual bool                setPluginSetting( PluginSetting& pluginSetting ) override;
     virtual void				onThreadOncePer15Minutes( void ) override;
 
+    virtual EMembershipState	getMembershipState( VxNetIdent* netIdent ) override;
+
 protected:
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting ) override;
     /// return true if have use for this connection

@@ -128,6 +128,12 @@ bool PluginPushToTalk::fromGuiInstMsg(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
+bool PluginPushToTalk::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk )
+{
+	return m_PushToTalkFeedMgr.fromGuiPushToTalk( netIdent, enableTalk );
+}
+
+//============================================================================
 void PluginPushToTalk::callbackOpusPkt( void * userData, PktPushToTalkReq * pktOpusAudio )
 {
 	m_PushToTalkFeedMgr.callbackOpusPkt( userData, pktOpusAudio );

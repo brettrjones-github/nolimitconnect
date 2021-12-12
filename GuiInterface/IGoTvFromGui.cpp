@@ -498,6 +498,12 @@ bool IGoTv::fromGuiInstMsg( EPluginType		ePluginType,
 }
 
 //============================================================================
+bool IGoTv::fromGuiPushToTalk( VxGUID& onlineId, bool enableTalk )
+{
+    return getPtoP().fromGuiPushToTalk( onlineId, enableTalk );
+}
+
+//============================================================================
 bool IGoTv::fromGuiChangeMyFriendshipToHim( VxGUID&			oOnlineId,
                                                 EFriendState	eMyFriendshipToHim,
                                                 EFriendState	eHisFriendshipToMe )

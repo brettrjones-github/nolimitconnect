@@ -879,8 +879,15 @@ void HostBaseMgr::onUserOffline( VxGUID& onlineId, VxGUID& sessionId )
 }
 
 //============================================================================
-EJoinState	HostBaseMgr::getJoinState( VxNetIdent* netIdent, EHostType hostType )
+EJoinState HostBaseMgr::getJoinState( VxNetIdent* netIdent, EHostType hostType )
 {
     // BRJ TODO if has been accepted to host then should return eJoinStateJoinAccepted
     return getPluginAccessState( netIdent ) == ePluginAccessOk ? eJoinStateJoinAccepted : eJoinStateJoinRequested;
+}
+
+//============================================================================
+EMembershipState HostBaseMgr::getMembershipState( VxNetIdent* netIdent, EHostType hostType )
+{
+    // BRJ TODO if has been accepted to host then should return eJoinStateJoinAccepted
+    return getPluginAccessState( netIdent ) == ePluginAccessOk ? eMembershipStateJoined : eMembershipStateJoinDenied;
 }

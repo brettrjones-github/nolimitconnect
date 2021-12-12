@@ -258,6 +258,12 @@ bool PluginBase::fromGuiInstMsg(	VxNetIdent *	netIdent,
 }
 
 //============================================================================ 
+bool PluginBase::fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk )
+{
+    return false;
+}
+
+//============================================================================ 
 void PluginBase::makeShortFileName( const char * pFullFileName, std::string& strShortFileName )
 {
     VxFileUtil::makeShortFileName( pFullFileName, strShortFileName );

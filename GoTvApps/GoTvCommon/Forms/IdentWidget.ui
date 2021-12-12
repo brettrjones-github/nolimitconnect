@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>569</width>
     <height>73</height>
    </rect>
   </property>
@@ -99,6 +99,31 @@
          </widget>
         </item>
         <item>
+         <widget class="VxPushButton" name="m_PushToTalkButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="VxPushButton" name="m_FriendshipButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -119,7 +144,7 @@
            </size>
           </property>
           <property name="text">
-           <string/>
+           <string notr="true"/>
           </property>
           <property name="iconSize">
            <size>
@@ -187,6 +212,7 @@
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -200,6 +226,7 @@
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -236,6 +263,7 @@
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -313,7 +341,7 @@
            </size>
           </property>
           <property name="text">
-           <string/>
+           <string notr="true"/>
           </property>
           <property name="iconSize">
            <size>

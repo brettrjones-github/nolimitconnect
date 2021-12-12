@@ -188,7 +188,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4996;26812;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
@@ -594,6 +594,10 @@
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Membership\Membership.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipAvailableMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipHostedMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipMgrBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionAnnounce.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionIdle.cpp" />
@@ -961,6 +965,12 @@
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\RawAudio.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\RawVideo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Membership\Membership.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipAvailableCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipAvailableMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipHostedCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipHostedMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionAnnounce.h" />
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionIdle.h" />

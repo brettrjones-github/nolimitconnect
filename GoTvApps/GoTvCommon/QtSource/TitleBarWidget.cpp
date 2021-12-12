@@ -756,26 +756,17 @@ void TitleBarWidget::checkTitleBarIconsFit( void )
 //============================================================================
 void TitleBarWidget::slotApplicationIconClicked( void )
 {
-    LogMsg( LOG_VERBOSE, "slotApplicationIconClicked" );
-
-    // bring up friends list unless is already active
-    if( !m_MyApp.getAppletMgr().findAppletDialog( eAppletFriendListClient ) )
+    if( m_MyApp.getIsAppInitialized() )
     {
-        m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getTitleBarParentPage() );
-    }
-
-    // for testing orientation on devices that do not have changing orientation
-    /*
-    static Qt::Orientation orientation{ Qt::Horizontal };
-    if( orientation == Qt::Horizontal )
-    {
-        orientation = Qt::Vertical;
+        LogMsg( LOG_VERBOSE, "slotApplicationIconClicked" );
+        // bring up friends list unless is already active
+        if( !m_MyApp.getAppletMgr().findAppletDialog( eAppletFriendListClient ) )
+        {
+            m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getTitleBarParentPage() );
+        }
     }
     else
     {
-        orientation = Qt::Horizontal;
+        QMessageBox::information( this, QObject::tr( "Application Not Ready" ), QObject::tr( "Cannot Launch Applet Until Application Has Initialized" ) );
     }
-
-    m_MyApp.getAppDisplay().setOrientation( orientation );
-    */
 }

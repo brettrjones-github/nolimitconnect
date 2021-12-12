@@ -101,6 +101,8 @@ public:
     virtual ThumbMgr&			getThumbMgr( void )									    { return m_ThumbMgr; }
     virtual ThumbXferMgr&       getThumbXferMgr( void )							        { return m_ThumbXferMgr; }
 
+	virtual EMembershipState	getMembershipState( VxNetIdent* netIdent )				{ return eMembershipStateJoinDenied; }
+
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
 	virtual void				fromGuiStartPluginSession( PluginSessionBase * poOffer )	{};
@@ -133,6 +135,7 @@ public:
 														uint8_t *		fileHashId );
 
 	virtual bool				fromGuiInstMsg(	VxNetIdent * netIdent, const char *	pMsg );
+	virtual bool				fromGuiPushToTalk( VxNetIdent* netIdent, bool enableTalk );
 
 	virtual bool				fromGuiSetGameValueVar(	VxNetIdent * netIdent, int32_t varId, int32_t varValue )		{ return false; };
 	virtual bool				fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t	actionId, int32_t actionValue )	{ return false; };

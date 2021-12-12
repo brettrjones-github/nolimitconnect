@@ -21,6 +21,7 @@
 #include "HomeWindow.h"
 #include "FriendList.h"
 #include "GuiConnectMgr.h"
+#include "GuiMembershipAvailableMgr.h"
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
 #include "GuiHostJoinMgr.h"
@@ -143,6 +144,7 @@ public:
     GuiUserJoinMgr&             getUserJoinMgr( void )						{ return m_UserJoinMgr; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
     GuiThumbMgr&                getThumbMgr( void )						    { return m_ThumbMgr; }
+    GuiMembershipAvailableMgr&  getMembershipAvailableMgr( void )           { return m_MembershipAvailableMgr; }
     QApplication&				getQApplication( void )						{ return m_QApp; }
 
 	void						setCamCaptureRotation( uint32_t rot );
@@ -619,7 +621,7 @@ public:
     void                        onMessengerReady( bool isReady );
     bool                        isMessengerReady( void ) { return m_IsMessengerReady; }
     void                        onUserLoggedOn( void );
-    void                        checkSystemReady( void );
+    bool                        checkSystemReady( void );
 
 signals:
     void						signalMessengerReady( bool isReady );    // emitted when messenger ready state changes
@@ -742,6 +744,7 @@ private:
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
     GuiThumbMgr					m_ThumbMgr;
+    GuiMembershipAvailableMgr   m_MembershipAvailableMgr;
     GuiOfferClientMgr		    m_OfferClientMgr;
     GuiOfferHostMgr		        m_OfferHostMgr;
     GuiUserMgr					m_UserMgr;

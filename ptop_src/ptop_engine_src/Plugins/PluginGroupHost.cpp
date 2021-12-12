@@ -120,3 +120,14 @@ void PluginGroupHost::onPluginSettingChange( PluginSetting& pluginSetting )
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostGroupAnnounce( pluginSetting );
 }
+
+//============================================================================
+EMembershipState PluginGroupHost::getMembershipState( VxNetIdent* netIdent )
+{
+    if( eFriendStateIgnore == getPluginPermission() )
+    {
+        return eMembershipStateJoinDenied;
+    }
+
+    return m_HostServerMgr.getMembershipState( netIdent, PluginTypeToHostType( getPluginType() ) );
+}

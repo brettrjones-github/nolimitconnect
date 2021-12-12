@@ -36,6 +36,13 @@ void IdentLogicInterface::setupIdentLogic( void ) // call after derived class ui
 		connect( getIdentOfferButton(), SIGNAL( clicked() ), this, SLOT( slotIdentOfferButtonClicked() ) );
 	}
 
+	if( getIdentPushToTalkButton() )
+	{
+		getIdentPushToTalkButton()->setVisible( false );
+		connect( getIdentPushToTalkButton(), SIGNAL( pressed() ), this, SLOT( slotIdentPushToTalkButtonPressed() ) );
+		connect( getIdentPushToTalkButton(), SIGNAL( released() ), this, SLOT( slotIdentPushToTalkButtonReleased() ) );
+	}
+
 	connect( getIdentAvatarButton(), SIGNAL( clicked() ), this, SLOT( slotIdentAvatarButtonClicked() ) );
 	connect( getIdentFriendshipButton(), SIGNAL( clicked() ), this, SLOT( slotIdentFrienshipButtonClicked() ) );
 	connect( getIdentMenuButton(), SIGNAL( clicked() ), this, SLOT( slotIdentMenuButtonClicked() ) );
@@ -75,6 +82,12 @@ void IdentLogicInterface::setIdentWidgetSize( EButtonSize buttonSize )
 	{
 		getIdentOfferButton()->setFixedSize( buttonSize );
 	}
+	
+	if( getIdentPushToTalkButton() )
+	{
+		getIdentPushToTalkButton()->setFixedSize( buttonSize );
+		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkNormal );
+	}
 
 	getIdentMenuButton()->setFixedSize( buttonSize );
 	setIdentMenuIcon( eMyIconMenu );
@@ -110,6 +123,18 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent )
 		if( netIdent->getMyFriendshipToHim() == eFriendStateFriend && netIdent->getHisFriendshipToMe() == eFriendStateFriend )
 		{
 			getIdentFriendshipButton()->setIcon( eMyIconFriendJoined );		
+		}
+
+		if( getIdentPushToTalkButton() )
+		{
+			if( m_MyApp.getMembershipAvailableMgr().canPushToTalk( netIdent->getMyOnlineId() ) )
+			{
+				getIdentPushToTalkButton()->setVisible( true );
+			}
+			else
+			{
+				getIdentPushToTalkButton()->setVisible( false );
+			}
 		}
 
 		if( getIdentLine3() )
@@ -264,6 +289,48 @@ void IdentLogicInterface::onIdentFriendshipButtonClicked( void )
 			{
 				applet->setFriend( m_NetIdent );
 			}
+		}
+	}
+}
+
+//============================================================================
+void IdentLogicInterface::slotIdentPushToTalkButtonPressed( void )
+{
+	emit signalIdentPushToTalkButtonPressed();
+	onIdentPushToTalkButtonPressed();
+}
+
+//============================================================================
+void IdentLogicInterface::slotIdentPushToTalkButtonReleased( void )
+{
+	emit signalIdentPushToTalkButtonReleased();
+	onIdentPushToTalkButtonReleased();
+}
+
+//============================================================================
+void IdentLogicInterface::onIdentPushToTalkButtonPressed( void )
+{
+	emit signalIdentPushToTalkButtonPressed();
+	if( m_NetIdent )
+	{
+		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_NetIdent->getMyOnlineId(), true );
+		if( result && getIdentPushToTalkButton() )
+		{
+			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+		}
+	}
+}
+
+//============================================================================
+void IdentLogicInterface::onIdentPushToTalkButtonReleased( void )
+{
+	emit signalIdentPushToTalkButtonReleased();
+	if( m_NetIdent )
+	{
+		bool result = m_MyApp.getFromGuiInterface().fromGuiPushToTalk( m_NetIdent->getMyOnlineId(), false );
+		if( result && getIdentPushToTalkButton() )
+		{
+			getIdentPushToTalkButton()->setIconOverrideColor( m_MyApp.getAppTheme().getColor( eButtonForegroundNormal ) );
 		}
 	}
 }

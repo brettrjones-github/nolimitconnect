@@ -203,6 +203,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostSession.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiMembershipAvailableCallback.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiMembershipAvailableMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgrBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferClientMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferHostMgr.h \
@@ -549,6 +551,7 @@ SOURCES += $$PWD/GoTvApps/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostJoinSession.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHostSession.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiMembershipAvailableMgr.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferMgrBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferClientMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferHostMgr.cpp \

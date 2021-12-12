@@ -866,6 +866,9 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VideoSinkGrabber.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\GuiMembershipAvailableMgr.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
@@ -1912,6 +1915,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VideoSinkGrabber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiMembershipAvailableMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h">
@@ -2137,6 +2143,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiUserMgrGuiUserUpdateClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiMembershipAvailableCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
