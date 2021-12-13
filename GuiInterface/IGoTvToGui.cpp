@@ -1,7 +1,7 @@
 #include <CommonHdr.h>
 
 #include "IGoTv.h"
-#include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
+#include "AppsSrc/GoTvCommon/QtSource/AppCommon.h"
 
 //============================================================================
 void IGoTv::toGuiLog( int logLevel, const char * msg )

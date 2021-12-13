@@ -20,6 +20,6 @@ But the debugging worked anyway
 # ANDROID_NDK_ROOT <ndk installed directory>\android-ndk-r18b
 
 //=== build NoLimitMinApp ===//
-under <checkout directory>/GoTvApps/NoLimitMinTestApp
+under <checkout directory>/AppsSrc/NoLimitMinTestApp
 open NoLimitMinTestApp.pro
 Rebuild and run

@@ -15,7 +15,7 @@
 #include "utils/log.h"
 #include "Application.h"
 #include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
-#include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
+#include "AppsSrc/GoTvCommon/QtSource/AppCommon.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <NetLib/VxPeerMgr.h>

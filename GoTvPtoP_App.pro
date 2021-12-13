@@ -37,7 +37,7 @@ DEFINES += LIB_STATIC _LIB
     QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
 }
 
-RESOURCES += $$PWD/GoTvApps/GoTvCommon/NoLimitConnect.qrc
+RESOURCES += $$PWD/AppsSrc/GoTvCommon/NoLimitConnect.qrc
 
 # Translations
 # TRANSLATIONS += $$files(lang/nolimitconnect_*.ts)

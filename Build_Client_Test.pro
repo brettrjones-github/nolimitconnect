@@ -12,4 +12,4 @@ SUBDIRS += $$PWD/libpktlib.pro
 SUBDIRS += $$PWD/libcorelib.pro
 SUBDIRS += $$PWD/libcrossguid.pro
 
-SUBDIRS += $$PWD/GoTvApps/NetClientTest/NetClientTest.pro
+SUBDIRS += $$PWD/AppsSrc/NetClientTest/NetClientTest.pro

@@ -7,7 +7,7 @@
 #include <libavfilter/avfilter.h>
 
 #include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
-#include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
+#include "AppsSrc/GoTvCommon/QtSource/AppCommon.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxMutex.h>

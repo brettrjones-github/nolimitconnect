@@ -134,7 +134,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libptop", "..\..\ptop_src\b
 		{7704F9E4-13F8-42B4-8E13-0AFA075ABC15} = {7704F9E4-13F8-42B4-8E13-0AFA075ABC15}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NoLimitConnect", "..\..\GoTvApps\NoLimitConnectMain\build\VS2019\NoLimitConnect.vcxproj", "{14347A1B-2425-4619-9F37-4B5EBB4476BE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NoLimitConnect", "..\..\AppsSrc\NoLimitConnectMain\build\VS2019\NoLimitConnect.vcxproj", "{14347A1B-2425-4619-9F37-4B5EBB4476BE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3A68081D-E8F9-4523-9436-530DE9E5530A} = {3A68081D-E8F9-4523-9436-530DE9E5530A}
 	EndProjectSection

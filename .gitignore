@@ -35,9 +35,9 @@ build/objs/
 
 build/VS2015/objs
 
-GoTvApps/GoTvPtoP/build/VS2015/debug/
+AppsSrc/GoTvPtoP/build/VS2015/debug/
 
-GoTvApps/GoTvPtoP/build/VS2015/GeneratedFiles/
+AppsSrc/GoTvPtoP/build/VS2015/GeneratedFiles/
 
 build/VS2015/objs/libkvazaar/Debug/
 /build/VS2015/objs

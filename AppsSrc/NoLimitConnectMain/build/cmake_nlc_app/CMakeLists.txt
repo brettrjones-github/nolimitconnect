@@ -779,30 +779,30 @@ set_property(TARGET _NoLimitConnectApp
     $ENV{QTDIR}\include\QtSvg;
     $ENV{QTDIR}\include\QtMultimedia;
     $ENV{QTDIR}\include\QtOpenGL;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\PlayerCommon;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\libgotvptop;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\GoTvCommon\QtSource;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\ffmpeg;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\openssl-1.0.2p\include;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libpcre;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\Effects11\inc;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libfreetype\include;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\;
-    F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\GoTvCore;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\PlayerCommon;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\libgotvptop;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\GoTvCommon\QtSource;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\ffmpeg;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\openssl-1.0.2p\include;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libpcre;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\Effects11\inc;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs\libfreetype\include;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\GoTvCore;
     $ENV{QTDIR}\include\QtMultimediaWidgets>
 )
 
@@ -1583,15 +1583,15 @@ endif ()
 if (MSVC)
   target_link_options(_NoLimitConnectApp PRIVATE
     $<$<CONFIG:Debug>:
-      /LIBPATH:F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\build-sharedlibs\Windows\x64\
-      /LIBPATH:F:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\build-staticlibs\Windows\x64\
+      /LIBPATH:F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\build-sharedlibs\Windows\x64\
+      /LIBPATH:F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\build-staticlibs\Windows\x64\
       /LIBPATH:$ENV{QTDIR}\lib>
   )
 else ()
   target_link_options(_NoLimitConnectApp PRIVATE
     $<$<CONFIG:Debug>:
-      -LF:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\build-sharedlibs\Windows\x64\
-      -LF:\NoLimitConnectWindows\GoTvApps\GoTvPtoP\build\VS2017\..\..\..\..\build-staticlibs\Windows\x64\
+      -LF:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\build-sharedlibs\Windows\x64\
+      -LF:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\build-staticlibs\Windows\x64\
       -L$ENV{QTDIR}\lib>
   )
 endif ()
