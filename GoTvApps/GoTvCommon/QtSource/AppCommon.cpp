@@ -59,7 +59,9 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/FileShareSettings.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/Membership/Membership.h>
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 
 #include <PktLib/VxCommon.h>
 
@@ -2224,5 +2226,8 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<uint32_t>("uint32_t");
 	qRegisterMetaType<uint64_t>( "uint64_t" );
 	qRegisterMetaType<EUserViewType>( "EUserViewType" );
+	qRegisterMetaType<ThumbInfo>( "ThumbInfo" );
+	qRegisterMetaType<MembershipAvailable>( "MembershipAvailable" );
+	qRegisterMetaType<MembershipHosted>( "MembershipHosted" );
 }
 

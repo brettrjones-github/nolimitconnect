@@ -121,7 +121,8 @@ public:
 
 	void						debugDumpIdent( void );
 
-    bool                        isIdentValid( void )                                        { return getMyOnlineId().isVxGUIDValid(); } // TODO validate ident
+	bool                        isValidNetIdent( void );
+	bool						isOnlineNameValid( void );
 
 private:
 	EPluginAccess			    getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );

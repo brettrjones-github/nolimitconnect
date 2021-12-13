@@ -31,8 +31,8 @@ GuiThumbMgr::GuiThumbMgr( AppCommon& app )
 //============================================================================
 void GuiThumbMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalThumbAdded( ThumbInfo * ) ),	    this, SLOT( slotInternalThumbAdded( ThumbInfo * ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalThumbUpdated( ThumbInfo *) ),      this, SLOT( slotInternalThumbUpdated( ThumbInfo * ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalThumbAdded( ThumbInfo ) ),	    this, SLOT( slotInternalThumbAdded( ThumbInfo ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalThumbUpdated( ThumbInfo ) ),      this, SLOT( slotInternalThumbUpdated( ThumbInfo ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalThumbRemoved(VxGUID) ),	        this, SLOT( slotInternalThumbRemoved(VxGUID) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getThumbMgr().addThumbMgrClient( this, true );
@@ -45,15 +45,29 @@ bool GuiThumbMgr::isMessengerReady( void )
 }
 
 //============================================================================
-void GuiThumbMgr::callbackThumbAdded( ThumbInfo *  thumb )
+void GuiThumbMgr::callbackThumbAdded( ThumbInfo * thumb )
 {
-    emit signalInternalThumbAdded( thumb );
+    if( thumb && thumb->isValidThumbnail() )
+    {
+        emit signalInternalThumbAdded( *thumb );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiThumbMgr::callbackThumbAdded invalid thumb" );
+    }
 }
 
 //============================================================================
 void GuiThumbMgr::callbackThumbUpdated( ThumbInfo * thumb )
 {
-    emit signalInternalThumbUpdated( thumb );
+    if( thumb && thumb->isValidThumbnail() )
+    {
+        emit signalInternalThumbUpdated( *thumb );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiThumbMgr::callbackThumbUpdated invalid thumb" );
+    }
 }
 
 //============================================================================
@@ -63,13 +77,13 @@ void GuiThumbMgr::callbackThumbRemoved( VxGUID& thumbId )
 }
 
 //============================================================================
-void GuiThumbMgr::slotInternalThumbAdded( ThumbInfo* thumbInfo )
+void GuiThumbMgr::slotInternalThumbAdded( ThumbInfo thumbInfo )
 {
     updateThumb( thumbInfo );
 }
 
 //============================================================================
-void GuiThumbMgr::slotInternalThumbUpdated( ThumbInfo* thumbInfo )
+void GuiThumbMgr::slotInternalThumbUpdated( ThumbInfo thumbInfo )
 {
     updateThumb( thumbInfo );
 }
@@ -112,16 +126,16 @@ GuiThumb* GuiThumbMgr::getThumb( VxGUID& thumbId )
 }
 
 //============================================================================
-GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo * thumbInfo )
+GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo& thumbInfo )
 {
-    if( !thumbInfo )
+    if( !thumbInfo.isValidThumbnail() )
     {
         LogMsg( LOG_ERROR, "GuiThumbMgr::updateThumbOnline invalid param" );
         return nullptr;
     }
 
     m_ThumbListMutex.lock();
-    GuiThumb* guiThumb = findThumb( thumbInfo->getAssetUniqueId() );
+    GuiThumb* guiThumb = findThumb( thumbInfo.getAssetUniqueId() );
     m_ThumbListMutex.unlock();
     if( guiThumb )
     {

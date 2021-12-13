@@ -56,7 +56,7 @@ void HostJoinMgr::fromGuiUserLoggedOn( void )
                 {
                     joinInfo->setNetIdent( netIdent );
                 }
-                else if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isIdentValid() )
+                else if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isValidNetIdent() )
                 {
                     // is myself
                     joinInfo->setNetIdent( m_Engine.getMyNetIdent() );

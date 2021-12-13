@@ -192,6 +192,33 @@ bool AssetBaseInfo::isValid( void )
 }
 
 //============================================================================
+bool AssetBaseInfo::isValidFile( void )
+{
+	bool valid = !m_AssetName.empty() && m_s64AssetLen == VxFileUtil::fileExists( m_AssetName.c_str() );
+	if( !valid )
+	{
+		LogMsg( LOG_ERROR, "AssetBaseInfo::isValidFile fail %lld %s ", m_s64AssetLen, m_AssetName.empty() ? "NO FILE NAME" : m_AssetName.c_str() );
+		vx_assert( false );
+	}
+
+	return valid;
+}
+
+//============================================================================
+bool AssetBaseInfo::isValidThumbnail( void )
+{
+	bool valid = isValid() && getAssetType() == eAssetTypeThumbnail;
+	valid &= isValidFile();
+	if( !valid )
+	{
+		LogMsg( LOG_ERROR, "AssetBaseInfo::isValidThumbnail invalid " );
+		vx_assert( false );
+	}
+
+	return valid;
+}
+
+//============================================================================
 bool AssetBaseInfo::isMine( void )
 {
 	return isValid() && ( getCreatorId() == GetPtoPEngine().getMyOnlineId() );

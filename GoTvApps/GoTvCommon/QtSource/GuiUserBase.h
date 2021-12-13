@@ -14,7 +14,6 @@
 //============================================================================
 
 #include <PktLib/VxCommon.h>
-#include <CoreLib/VxGUID.h>
 
 #include <set>
 
@@ -33,11 +32,12 @@ public:
     GuiUserBase( const GuiUserBase& rhs );
 	virtual ~GuiUserBase() override = default;
 
-    bool                        isValid( void )                         { return isIdentValid(); }
+    bool                        isValid( void )                         { return isValidNetIdent(); }
+    bool                        isValidNetIdent( void )                 { return m_NetIdent.isValidNetIdent(); }
 
     void                        setNetIdent( VxNetIdent* netIdent );
     VxNetIdent&                 getNetIdent( void )                     { return m_NetIdent; }
-    bool                        isIdentValid( void )                    { return m_NetIdent.isIdentValid(); }
+   
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 

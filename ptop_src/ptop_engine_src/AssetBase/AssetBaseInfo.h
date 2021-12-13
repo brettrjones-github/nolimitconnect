@@ -52,6 +52,8 @@ public:
     AssetBaseInfo&				operator=( const AssetBaseInfo& rhs );
 
     virtual bool				isValid( void );
+    virtual bool				isValidFile( void );
+    virtual bool				isValidThumbnail( void );
     virtual bool				isMine( void );
     virtual bool                validateAssetExist( void );
 

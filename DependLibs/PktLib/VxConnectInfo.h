@@ -235,7 +235,7 @@ public:
     bool                        isRandomConnectThumbValid( void )                               { return m_RandomConnectThumbModifiedTime && m_RandomConnectThumbGuid.isVxGUIDValid(); }
 
 	//=== vars ===//
-private:
+protected:
 	char						m_OnlineName[ MAX_ONLINE_NAME_LEN ];	// users online name
 	char						m_OnlineDesc[ MAX_ONLINE_DESC_LEN ];    // users online description
     int64_t	    				m_TimeLastContactMs{ 0 };

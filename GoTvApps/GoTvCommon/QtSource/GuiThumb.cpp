@@ -17,8 +17,6 @@
 #include "GuiThumbMgr.h"
 #include "GuiParams.h"
 
-#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
-
 //============================================================================
 GuiThumb::GuiThumb( AppCommon& app )
     : QWidget( &app )
@@ -28,7 +26,7 @@ GuiThumb::GuiThumb( AppCommon& app )
 }
 
 //============================================================================
-GuiThumb::GuiThumb( AppCommon& app, ThumbInfo* thumbInfo, VxGUID& sessionId )
+GuiThumb::GuiThumb( AppCommon& app, ThumbInfo& thumbInfo, VxGUID& sessionId )
     : QWidget( &app )
     , m_MyApp( app )
     , m_GuiThumbMgr( m_MyApp.getThumbMgr() )
@@ -50,7 +48,7 @@ GuiThumb::GuiThumb( const GuiThumb& rhs )
 }
 
 //============================================================================
-void GuiThumb::setThumbInfo( ThumbInfo* thumbInfo )
+void GuiThumb::setThumbInfo( ThumbInfo& thumbInfo )
 {
     m_ThumbInfo = thumbInfo;
     updateThumbInfoIds();
@@ -59,42 +57,27 @@ void GuiThumb::setThumbInfo( ThumbInfo* thumbInfo )
 //============================================================================
 void GuiThumb::updateThumbInfoIds( void )
 {
-    if( m_ThumbInfo )
-    {
-        m_ThumbId = m_ThumbInfo->getAssetUniqueId();
-        m_CreatorId = m_ThumbInfo->getCreatorId();
-    }
+    m_ThumbId = m_ThumbInfo.getAssetUniqueId();
+    m_CreatorId = m_ThumbInfo.getCreatorId();
 }
 
 //============================================================================
 bool GuiThumb::operator == ( const GuiThumb& rhs ) const
 {
-    bool isEqual = false;
-    if( m_ThumbInfo && rhs.m_ThumbInfo )
-    {
-        isEqual = m_ThumbId == rhs.m_ThumbId && m_CreatorId == rhs.m_CreatorId;
-    }
-
-    return isEqual;
+    return m_ThumbId == rhs.m_ThumbId && m_CreatorId == rhs.m_CreatorId;
 }
 
 //============================================================================
 bool GuiThumb::operator == ( GuiThumb& rhs )
 {
-    bool isEqual = false;
-    if( m_ThumbInfo && rhs.m_ThumbInfo )
-    {
-        isEqual = m_ThumbId == rhs.m_ThumbId && m_CreatorId == rhs.m_CreatorId;
-    }
-
-    return isEqual;
+    return m_ThumbId == rhs.m_ThumbId && m_CreatorId == rhs.m_CreatorId;
 }
 
 //============================================================================
 bool GuiThumb::isEqualTo( GuiThumb* guiThumb )
 {
     bool isEqual = false;
-    if( m_ThumbInfo && guiThumb && guiThumb->getThumbInfo() )
+    if( guiThumb )
     {
         isEqual = m_ThumbId == guiThumb->getThumbId() && m_CreatorId == guiThumb->getCreatorId();
     }
@@ -106,9 +89,9 @@ bool GuiThumb::isEqualTo( GuiThumb* guiThumb )
 bool GuiThumb::createImage( QImage& retAvatarImage )
 {
     bool status = false;
-    if( m_ThumbInfo && !m_ThumbInfo->getAssetName().empty() )
+    if( !m_ThumbInfo.getAssetName().empty() )
     {
-        QString filename = m_ThumbInfo->getAssetName().c_str();
+        QString filename = m_ThumbInfo.getAssetName().c_str();
         status = retAvatarImage.load( filename ) && !retAvatarImage.isNull();
     }
 

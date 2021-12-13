@@ -90,6 +90,12 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	BigListInfo * bigListInfo = 0;
 	EPktAnnUpdateType updateType = m_BigListMgr.updatePktAnn(	pkt,				// announcement pkt received
 																&bigListInfo );		// return pointer to all we know about this contact
+	if( !bigListInfo->isValidNetIdent() )
+	{
+		LogMsg( LOG_ERROR, "PktAnnounce updatePktAnn INVALID" );
+		return;
+	}
+
 	if( ePktAnnUpdateTypeIgnored == updateType )
 	{
 		LogModule( eLogConnect, LOG_VERBOSE, "Ignoring %s ip %s id %s",

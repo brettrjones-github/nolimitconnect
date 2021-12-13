@@ -286,6 +286,52 @@ VxNetIdent& VxNetIdent::operator =( const VxNetIdent& rhs  )
 }
 
 //============================================================================
+bool VxNetIdent::isValidNetIdent()
+{
+	bool result = getMyOnlineId().isVxGUIDValid();
+	if( result )
+	{
+		result &= isOnlineNameValid();
+	}
+
+	return result;
+} 
+
+//============================================================================
+bool VxNetIdent::isOnlineNameValid( void )
+{
+	bool result = !m_OnlineName[0] == 0;
+	if( result )
+	{
+		int asciiCnt = 0;
+		bool foundTerminator{ false };
+		bool invalidChar{ false };
+		for( int i = 0; i < MAX_ONLINE_NAME_LEN; i++ )
+		{
+			if( 0 == m_OnlineName[i] )
+			{
+				foundTerminator = true;
+				break;
+			}
+			else if( isascii( m_OnlineName[i] ) )
+			{
+				asciiCnt++;
+			}
+			else
+			{
+				// invalid char
+				invalidChar = true;
+				break;
+			}
+		}
+
+		result &= !invalidChar && foundTerminator && asciiCnt >= 3;
+	}
+
+	return result;
+}
+
+//============================================================================
 void VxNetIdent::setPingTimeMs( uint16_t pingTime )
 {
 	m_u16PingTimeMs = htons( pingTime );

@@ -14,7 +14,7 @@
 //============================================================================
 
 #include <PktLib/VxCommon.h>
-#include <CoreLib/VxGUID.h>
+#include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 
 #include <QWidget>
 
@@ -28,7 +28,7 @@ class GuiThumb : public QWidget
 public:
     GuiThumb() = delete;
     GuiThumb( AppCommon& app );
-    GuiThumb( AppCommon& app, ThumbInfo* thumbInfo, VxGUID& sessionId );
+    GuiThumb( AppCommon& app, ThumbInfo& thumbInfo, VxGUID& sessionId );
     GuiThumb( const GuiThumb& rhs );
 	virtual ~GuiThumb() = default;
 
@@ -37,9 +37,9 @@ public:
 
     bool                        isEqualTo( GuiThumb* guiThumb );
 
-    void                        setThumbInfo( ThumbInfo* thumbInfo );
-    ThumbInfo*                  getThumbInfo( void )                    { return m_ThumbInfo; }
-    bool                        isThumbValid( void )                    { return m_ThumbInfo && m_ThumbId.isVxGUIDValid(); }
+    void                        setThumbInfo( ThumbInfo& thumbInfo );
+    ThumbInfo&                  getThumbInfo( void )                    { return m_ThumbInfo; }
+    bool                        isThumbValid( void )                    { return m_ThumbId.isVxGUIDValid(); }
     void                        setSessionId( VxGUID& sessionId )       { m_SessionId = sessionId; }
     VxGUID&                     getSessionId( void )                    { return m_SessionId; }
 
@@ -54,7 +54,7 @@ protected:
     AppCommon&                  m_MyApp;
     GuiThumbMgr&                m_GuiThumbMgr;
 
-    ThumbInfo*                  m_ThumbInfo{ nullptr };
+    ThumbInfo                   m_ThumbInfo;
     VxGUID                      m_SessionId;
     VxGUID                      m_ThumbId;
     VxGUID                      m_CreatorId;

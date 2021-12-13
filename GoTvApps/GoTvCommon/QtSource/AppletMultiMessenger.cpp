@@ -248,7 +248,7 @@ void AppletMultiMessenger::showReasonAccessNotAllowed( void )
 //============================================================================
 void AppletMultiMessenger::slotUserOnlineStatus( GuiUser* user, bool isOnline )
 {
-    if( !user || !user->isIdentValid() )
+    if( !user || !user->isValid() )
     {
         LogMsg( LOG_ERROR, "AppletMultiMessenger slotUserOnlineStatus invalid param" );
         return;

@@ -370,6 +370,7 @@ void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnou
             }
         }
 
+#if defined(TARGET_OS_ANDROID) // BRJ temp for debugging
         LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr attempting connect on lan to %s ", netIdent->getOnlineName() );
 
         VxSktBase* sktBase = nullptr;
@@ -382,6 +383,7 @@ void NearbyMgr::multicastPktAnnounceAvail( VxSktBase* skt, PktAnnounce* pktAnnou
         {
             LogModule( eLogMulticast, LOG_VERBOSE, "NearbyMgr FAILED to connect on lan to %s ", netIdent->getOnlineName() );
         }
+#endif // defined(TARGET_OS_ANDROID)
     }
 }
 

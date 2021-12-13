@@ -123,6 +123,12 @@ void ThumbMgr::addThumbMgrClient( ThumbCallbackInterface * client, bool enable )
 //============================================================================
 void ThumbMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 {
+    if( !assetInfo || !assetInfo->isValidThumbnail() )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::announceThumbAdded invalid thumbnil" );
+        vx_assert( false );
+    }
+
     AssetBaseMgr::announceAssetAdded( assetInfo );
     ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
     if( thumbInfo )
@@ -149,6 +155,12 @@ void ThumbMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 //============================================================================
 void ThumbMgr::announceAssetUpdated( AssetBaseInfo * assetInfo )
 {
+    if( !assetInfo || !assetInfo->isValidThumbnail() )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::announceAssetUpdated invalid thumbnil" );
+        vx_assert( false );
+    }
+
     AssetBaseMgr::announceAssetUpdated( assetInfo );
     ThumbInfo * thumbInfo = dynamic_cast<ThumbInfo *>( assetInfo );
     if( thumbInfo )
@@ -227,6 +239,12 @@ void ThumbMgr::announceThumbAdded( ThumbInfo& thumbInfo )
 //============================================================================
 void ThumbMgr::announceThumbUpdated( ThumbInfo& thumbInfo )
 {
+    if( !thumbInfo.isValidThumbnail() )
+    {
+        LogMsg( LOG_ERROR, "ThumbMgr::announceThumbUpdated invalid thumbnil" );
+        vx_assert( false );
+    }
+
     lockClientList();
     std::vector<ThumbCallbackInterface *>::iterator iter;
     for( iter = m_ThumbClients.begin();	iter != m_ThumbClients.end(); ++iter )

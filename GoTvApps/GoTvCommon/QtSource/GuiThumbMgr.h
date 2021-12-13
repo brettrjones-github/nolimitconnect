@@ -69,17 +69,17 @@ signals:
     void                        signalThumbUpdated( GuiThumb* thumb );
     void				        signalThumbRemoved( VxGUID thumbId ); 
 
-    void                        signalInternalThumbAdded( ThumbInfo * thumbInfo );
-    void                        signalInternalThumbUpdated( ThumbInfo* thumbInfo );
+    void                        signalInternalThumbAdded( ThumbInfo thumbInfo );
+    void                        signalInternalThumbUpdated( ThumbInfo thumbInfo );
     void                        signalInternalThumbRemoved( VxGUID thumbId );
 
 private slots:
-    void                        slotInternalThumbAdded( ThumbInfo * thumbInfo );
-    void                        slotInternalThumbUpdated( ThumbInfo* thumbInfo );
+    void                        slotInternalThumbAdded( ThumbInfo thumbInfo );
+    void                        slotInternalThumbUpdated( ThumbInfo thumbInfo );
     void                        slotInternalThumbRemoved( VxGUID onlineId );
 
 protected:
-    GuiThumb*                   updateThumb( ThumbInfo * thumbInfo  );
+    GuiThumb*                   updateThumb( ThumbInfo& thumbInfo  );
     void                        removeThumb( VxGUID& thumbId );
     GuiThumb*                   findThumb( VxGUID& thumbId );
     
