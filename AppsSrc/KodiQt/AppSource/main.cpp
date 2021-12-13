@@ -42,8 +42,8 @@
 #ifdef BUILD_GOTV_APP
 
 #include "KodiQtSettings.h"
-#include <GoTvCommon/QtSource/AppCommon.h>
-#include <GoTvCommon/QtSource/HomeWindow.h>
+#include <CommonSrc/QtSource/AppCommon.h>
+#include <CommonSrc/QtSource/HomeWindow.h>
 
 #include <QApplication>
 #include <QCommandLineParser>

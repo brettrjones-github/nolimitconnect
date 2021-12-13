@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GoTvCommon/QtSource/AppSettings.h>
+#include <CommonSrc/QtSource/AppSettings.h>
 
 class KodiAppSettings : public AppSettings
 {

@@ -4,9 +4,9 @@
 #include "GoTvAppConfig.h"
 #ifdef BUILD_GOTV_APP
 
-#include <AppsSrc/GoTvCommon/QtSource/AppCommon.h>
-#include <AppsSrc/GoTvCommon/QtSource/HomeWindow.h>
-#include <AppsSrc/GoTvCommon/QtSource/GuiParams.h>
+#include <AppsSrc/CommonSrc/QtSource/AppCommon.h>
+#include <AppsSrc/CommonSrc/QtSource/HomeWindow.h>
+#include <AppsSrc/CommonSrc/QtSource/GuiParams.h>
 
 #include <QApplication>
 #include <QCommandLineParser>

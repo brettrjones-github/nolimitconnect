@@ -32,7 +32,7 @@ MOBILITY =
 
 # Resource files
 #QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
-#RESOURCES += $$PWD/AppsSrc/GoTvCommon/NoLimitConnect.qrc
+#RESOURCES += $$PWD/AppsSrc/CommonSrc/NoLimitConnect.qrc
 
 
 # Translations

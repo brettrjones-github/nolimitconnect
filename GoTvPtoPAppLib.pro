@@ -31,7 +31,7 @@ MOBILITY =
 
 # Resource files
 #QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
-#RESOURCES += $$PWD/AppsSrc/GoTvCommon/NoLimitConnect.qrc
+#RESOURCES += $$PWD/AppsSrc/CommonSrc/NoLimitConnect.qrc
 
 
 # Translations
@@ -108,10 +108,10 @@ include(GoTvPtoPAppLib.pri)
 #### QMAKE_LFLAGS += -static
 
 HEADERS += \
-    AppsSrc/GoTvCommon/QtSource/LogoRenderer.h \
-    AppsSrc/GoTvCommon/QtSource/RenderLogoShaders.h
+    AppsSrc/CommonSrc/QtSource/LogoRenderer.h \
+    AppsSrc/CommonSrc/QtSource/RenderLogoShaders.h
 
 SOURCES += \
-    AppsSrc/GoTvCommon/QtSource/LogoRenderer.cpp \
-    AppsSrc/GoTvCommon/QtSource/RenderLogoShaders.cpp
+    AppsSrc/CommonSrc/QtSource/LogoRenderer.cpp \
+    AppsSrc/CommonSrc/QtSource/RenderLogoShaders.cpp
 

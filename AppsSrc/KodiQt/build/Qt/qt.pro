@@ -2,7 +2,7 @@ HEADERS       = $$PWD/../../AppSource/mainwindow.h \
                 $$PWD/../../AppSource/svgview.h \
                 $$PWD/../../AppSource/exportdialog.h
 
-RESOURCES     = $$PWD/../../../GoTvCommon/NoLimitConnect.qrc
+RESOURCES     = $$PWD/../../../CommonSrc/NoLimitConnect.qrc
 
 SOURCES       = $$PWD/../../AppSource/main.cpp \
                 $$PWD/../../AppSource/mainwindow.cpp \

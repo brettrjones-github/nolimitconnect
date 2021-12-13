@@ -48,632 +48,632 @@ add_executable(_NoLimitConnectApp
   ../../../../GuiInterface/OsWin32/IWin32.cpp
   ../../../../GuiInterface/OsWin32/IWin32.h
   ../../../config_gotvapps.h
-  ../../../GoTvCommon/QtSource/AcceptCancelWidget.cpp
-  ../../../GoTvCommon/QtSource/AcceptCancelWidget.h
-  ../../../GoTvCommon/QtSource/AccountDb.cpp
-  ../../../GoTvCommon/QtSource/AccountDb.h
-  ../../../GoTvCommon/QtSource/AccountMgr.cpp
-  ../../../GoTvCommon/QtSource/AccountMgr.h
-  ../../../GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.cpp
-  ../../../GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.h
-  ../../../GoTvCommon/QtSource/ActivityAppSetup.cpp
-  ../../../GoTvCommon/QtSource/ActivityAppSetup.h
-  ../../../GoTvCommon/QtSource/ActivityBase.cpp
-  ../../../GoTvCommon/QtSource/ActivityBase.h
-  ../../../GoTvCommon/QtSource/ActivityBrowseFiles.cpp
-  ../../../GoTvCommon/QtSource/ActivityBrowseFiles.h
-  ../../../GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.cpp
-  ../../../GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.h
-  ../../../GoTvCommon/QtSource/ActivityCreateAccount.cpp
-  ../../../GoTvCommon/QtSource/ActivityCreateAccount.h
-  ../../../GoTvCommon/QtSource/ActivityDownloadItemMenu.cpp
-  ../../../GoTvCommon/QtSource/ActivityDownloadItemMenu.h
-  ../../../GoTvCommon/QtSource/ActivityFileSearch.cpp
-  ../../../GoTvCommon/QtSource/ActivityFileSearch.h
-  ../../../GoTvCommon/QtSource/ActivityHelpSignal.cpp
-  ../../../GoTvCommon/QtSource/ActivityHelpSignal.h
-  ../../../GoTvCommon/QtSource/ActivityInformation.cpp
-  ../../../GoTvCommon/QtSource/ActivityInformation.h
-  ../../../GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp
-  ../../../GoTvCommon/QtSource/ActivityIsPortOpenTest.h
-  ../../../GoTvCommon/QtSource/ActivityMessageBox.cpp
-  ../../../GoTvCommon/QtSource/ActivityMessageBox.h
-  ../../../GoTvCommon/QtSource/ActivityNetworkState.cpp
-  ../../../GoTvCommon/QtSource/ActivityNetworkState.h
-  ../../../GoTvCommon/QtSource/ActivityPermissions.cpp
-  ../../../GoTvCommon/QtSource/ActivityPermissions.h
-  ../../../GoTvCommon/QtSource/ActivityScanPeopleSearch.cpp
-  ../../../GoTvCommon/QtSource/ActivityScanPeopleSearch.h
-  ../../../GoTvCommon/QtSource/ActivityScanProfiles.cpp
-  ../../../GoTvCommon/QtSource/ActivityScanProfiles.h
-  ../../../GoTvCommon/QtSource/ActivityScanStoryBoards.cpp
-  ../../../GoTvCommon/QtSource/ActivityScanStoryBoards.h
-  ../../../GoTvCommon/QtSource/ActivityScanWebCams.cpp
-  ../../../GoTvCommon/QtSource/ActivityScanWebCams.h
-  ../../../GoTvCommon/QtSource/ActivitySessionOptions.cpp
-  ../../../GoTvCommon/QtSource/ActivitySessionOptions.h
-  ../../../GoTvCommon/QtSource/ActivityShowHelp.cpp
-  ../../../GoTvCommon/QtSource/ActivityShowHelp.h
-  ../../../GoTvCommon/QtSource/ActivitySnapShot.cpp
-  ../../../GoTvCommon/QtSource/ActivitySnapShot.h
-  ../../../GoTvCommon/QtSource/ActivitySoundOptions.cpp
-  ../../../GoTvCommon/QtSource/ActivitySoundOptions.h
-  ../../../GoTvCommon/QtSource/ActivityTimedMessage.cpp
-  ../../../GoTvCommon/QtSource/ActivityTimedMessage.h
-  ../../../GoTvCommon/QtSource/ActivityViewAudioFile.cpp
-  ../../../GoTvCommon/QtSource/ActivityViewAudioFile.h
-  ../../../GoTvCommon/QtSource/ActivityViewLibraryFiles.cpp
-  ../../../GoTvCommon/QtSource/ActivityViewLibraryFiles.h
-  ../../../GoTvCommon/QtSource/ActivityViewMySharedFiles.cpp
-  ../../../GoTvCommon/QtSource/ActivityViewMySharedFiles.h
-  ../../../GoTvCommon/QtSource/ActivityViewVideoFile.cpp
-  ../../../GoTvCommon/QtSource/ActivityViewVideoFile.h
-  ../../../GoTvCommon/QtSource/ActivityYesNoMsgBox.cpp
-  ../../../GoTvCommon/QtSource/ActivityYesNoMsgBox.h
-  ../../../GoTvCommon/QtSource/AppCommon.cpp
-  ../../../GoTvCommon/QtSource/AppCommon.h
-  ../../../GoTvCommon/QtSource/AppCommonAudio.cpp
-  ../../../GoTvCommon/QtSource/AppCommonEvents.cpp
-  ../../../GoTvCommon/QtSource/AppCommonLogin.cpp
-  ../../../GoTvCommon/QtSource/AppCommonRender.cpp
-  ../../../GoTvCommon/QtSource/AppDefs.cpp
-  ../../../GoTvCommon/QtSource/AppDefs.h
-  ../../../GoTvCommon/QtSource/AppGlobals.cpp
-  ../../../GoTvCommon/QtSource/AppGlobals.h
-  ../../../GoTvCommon/QtSource/AppletAboutApp.cpp
-  ../../../GoTvCommon/QtSource/AppletAboutApp.h
-  ../../../GoTvCommon/QtSource/AppletApplicationInfo.cpp
-  ../../../GoTvCommon/QtSource/AppletApplicationInfo.h
-  ../../../GoTvCommon/QtSource/AppletBase.cpp
-  ../../../GoTvCommon/QtSource/AppletBase.h
-  ../../../GoTvCommon/QtSource/AppletBrowseFiles.cpp
-  ../../../GoTvCommon/QtSource/AppletBrowseFiles.h
-  ../../../GoTvCommon/QtSource/AppletCallList.cpp
-  ../../../GoTvCommon/QtSource/AppletCallList.h
-  ../../../GoTvCommon/QtSource/AppletCamSettings.cpp
-  ../../../GoTvCommon/QtSource/AppletCamSettings.h
-  ../../../GoTvCommon/QtSource/AppletChatRoomClient.cpp
-  ../../../GoTvCommon/QtSource/AppletChatRoomClient.h
-  ../../../GoTvCommon/QtSource/AppletChatRoomJoin.cpp
-  ../../../GoTvCommon/QtSource/AppletChatRoomJoin.h
-  ../../../GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp
-  ../../../GoTvCommon/QtSource/AppletChatRoomJoinSearch.h
-  ../../../GoTvCommon/QtSource/AppletChooseThumbnail.cpp
-  ../../../GoTvCommon/QtSource/AppletChooseThumbnail.h
-  ../../../GoTvCommon/QtSource/AppletClientAvatarImage.cpp
-  ../../../GoTvCommon/QtSource/AppletClientAvatarImage.h
-  ../../../GoTvCommon/QtSource/AppletClientBase.cpp
-  ../../../GoTvCommon/QtSource/AppletClientBase.h
-  ../../../GoTvCommon/QtSource/AppletClientRandomConnect.cpp
-  ../../../GoTvCommon/QtSource/AppletClientRandomConnect.h
-  ../../../GoTvCommon/QtSource/AppletClientShareFiles.cpp
-  ../../../GoTvCommon/QtSource/AppletClientShareFiles.h
-  ../../../GoTvCommon/QtSource/AppletClientShareWebCam.cpp
-  ../../../GoTvCommon/QtSource/AppletClientShareWebCam.h
-  ../../../GoTvCommon/QtSource/AppletClientStoryboard.cpp
-  ../../../GoTvCommon/QtSource/AppletClientStoryboard.h
-  ../../../GoTvCommon/QtSource/AppletDownloads.cpp
-  ../../../GoTvCommon/QtSource/AppletDownloads.h
-  ../../../GoTvCommon/QtSource/AppletEditAboutMe.cpp
-  ../../../GoTvCommon/QtSource/AppletEditAboutMe.h
-  ../../../GoTvCommon/QtSource/AppletEditAvatarImage.cpp
-  ../../../GoTvCommon/QtSource/AppletEditAvatarImage.h
-  ../../../GoTvCommon/QtSource/AppletEditStoryboard.cpp
-  ../../../GoTvCommon/QtSource/AppletEditStoryboard.h
-  ../../../GoTvCommon/QtSource/AppletGalleryImage.cpp
-  ../../../GoTvCommon/QtSource/AppletGalleryImage.h
-  ../../../GoTvCommon/QtSource/AppletGalleryThumb.cpp
-  ../../../GoTvCommon/QtSource/AppletGalleryThumb.h
-  ../../../GoTvCommon/QtSource/AppletGroupJoin.cpp
-  ../../../GoTvCommon/QtSource/AppletGroupJoin.h
-  ../../../GoTvCommon/QtSource/AppletGroupJoinSearch.cpp
-  ../../../GoTvCommon/QtSource/AppletGroupJoinSearch.h
-  ../../../GoTvCommon/QtSource/AppletJoinBase.cpp
-  ../../../GoTvCommon/QtSource/AppletJoinBase.h
-  ../../../GoTvCommon/QtSource/AppletKodi.cpp
-  ../../../GoTvCommon/QtSource/AppletKodi.h
-  ../../../GoTvCommon/QtSource/AppletLaunchPage.cpp
-  ../../../GoTvCommon/QtSource/AppletLaunchPage.h
-  ../../../GoTvCommon/QtSource/AppletLaunchWidget.cpp
-  ../../../GoTvCommon/QtSource/AppletLaunchWidget.h
-  ../../../GoTvCommon/QtSource/AppletLibrary.cpp
-  ../../../GoTvCommon/QtSource/AppletLibrary.h
-  ../../../GoTvCommon/QtSource/AppletLog.cpp
-  ../../../GoTvCommon/QtSource/AppletLog.h
-  ../../../GoTvCommon/QtSource/AppletLogSettings.cpp
-  ../../../GoTvCommon/QtSource/AppletLogSettings.h
-  ../../../GoTvCommon/QtSource/AppletLogView.cpp
-  ../../../GoTvCommon/QtSource/AppletLogView.h
-  ../../../GoTvCommon/QtSource/AppletMgr.cpp
-  ../../../GoTvCommon/QtSource/AppletMgr.h
-  ../../../GoTvCommon/QtSource/AppletMultiMessenger.cpp
-  ../../../GoTvCommon/QtSource/AppletMultiMessenger.h
-  ../../../GoTvCommon/QtSource/AppletNetHostingPage.cpp
-  ../../../GoTvCommon/QtSource/AppletNetHostingPage.h
-  ../../../GoTvCommon/QtSource/AppletNetworkSettings.cpp
-  ../../../GoTvCommon/QtSource/AppletNetworkSettings.h
-  ../../../GoTvCommon/QtSource/AppletOfferList.cpp
-  ../../../GoTvCommon/QtSource/AppletOfferList.h
-  ../../../GoTvCommon/QtSource/AppletPeerBase.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerBase.h
-  ../../../GoTvCommon/QtSource/AppletPeerChangeFriendship.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerChangeFriendship.h
-  ../../../GoTvCommon/QtSource/AppletPeerReplyFileOffer.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerReplyFileOffer.h
-  ../../../GoTvCommon/QtSource/AppletPeerSelectFileToSend.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerSelectFileToSend.h
-  ../../../GoTvCommon/QtSource/AppletPeerSessionFileOffer.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerSessionFileOffer.h
-  ../../../GoTvCommon/QtSource/AppletPeerTodGame.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerTodGame.h
-  ../../../GoTvCommon/QtSource/AppletPeerVideoPhone.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerVideoPhone.h
-  ../../../GoTvCommon/QtSource/AppletPeerViewSharedFiles.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerViewSharedFiles.h
-  ../../../GoTvCommon/QtSource/AppletPeerVoicePhone.cpp
-  ../../../GoTvCommon/QtSource/AppletPeerVoicePhone.h
-  ../../../GoTvCommon/QtSource/AppletPermissionList.cpp
-  ../../../GoTvCommon/QtSource/AppletPermissionList.h
-  ../../../GoTvCommon/QtSource/AppletPersonalRecorder.cpp
-  ../../../GoTvCommon/QtSource/AppletPersonalRecorder.h
-  ../../../GoTvCommon/QtSource/AppletPlayerBase.cpp
-  ../../../GoTvCommon/QtSource/AppletPlayerBase.h
-  ../../../GoTvCommon/QtSource/AppletPlayerVideo.cpp
-  ../../../GoTvCommon/QtSource/AppletPlayerVideo.h
-  ../../../GoTvCommon/QtSource/AppletRandomConnectJoin.cpp
-  ../../../GoTvCommon/QtSource/AppletRandomConnectJoin.h
-  ../../../GoTvCommon/QtSource/AppletRandomConnectJoinSearch.cpp
-  ../../../GoTvCommon/QtSource/AppletRandomConnectJoinSearch.h
-  ../../../GoTvCommon/QtSource/AppletSearchPage.cpp
-  ../../../GoTvCommon/QtSource/AppletSearchPage.h
-  ../../../GoTvCommon/QtSource/AppletServiceAboutMe.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceAboutMe.h
-  ../../../GoTvCommon/QtSource/AppletServiceAvatarImage.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceAvatarImage.h
-  ../../../GoTvCommon/QtSource/AppletServiceBase.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceBase.h
-  ../../../GoTvCommon/QtSource/AppletServiceBaseSettings.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceBaseSettings.h
-  ../../../GoTvCommon/QtSource/AppletServiceChatRoom.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceChatRoom.h
-  ../../../GoTvCommon/QtSource/AppletServiceConnectionTest.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceConnectionTest.h
-  ../../../GoTvCommon/QtSource/AppletServiceHostGroup.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceHostGroup.h
-  ../../../GoTvCommon/QtSource/AppletServiceHostNetwork.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceHostNetwork.h
-  ../../../GoTvCommon/QtSource/AppletServiceRandomConnect.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceRandomConnect.h
-  ../../../GoTvCommon/QtSource/AppletServiceRandomConnectRelay.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceRandomConnectRelay.h
-  ../../../GoTvCommon/QtSource/AppletServiceRelay.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceRelay.h
-  ../../../GoTvCommon/QtSource/AppletServiceShareFiles.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceShareFiles.h
-  ../../../GoTvCommon/QtSource/AppletServiceShareWebCam.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceShareWebCam.h
-  ../../../GoTvCommon/QtSource/AppletServiceStoryboard.cpp
-  ../../../GoTvCommon/QtSource/AppletServiceStoryboard.h
-  ../../../GoTvCommon/QtSource/AppletSettingsAboutMe.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsAboutMe.h
-  ../../../GoTvCommon/QtSource/AppletSettingsAvatarImage.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsAvatarImage.h
-  ../../../GoTvCommon/QtSource/AppletSettingsBase.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsBase.h
-  ../../../GoTvCommon/QtSource/AppletSettingsChatRoom.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsChatRoom.h
-  ../../../GoTvCommon/QtSource/AppletSettingsConnectionTest.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsConnectionTest.h
-  ../../../GoTvCommon/QtSource/AppletSettingsFileXfer.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsFileXfer.h
-  ../../../GoTvCommon/QtSource/AppletSettingsHostBase.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsHostBase.h
-  ../../../GoTvCommon/QtSource/AppletSettingsHostChatRoom.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsHostChatRoom.h
-  ../../../GoTvCommon/QtSource/AppletSettingsHostGroup.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsHostGroup.h
-  ../../../GoTvCommon/QtSource/AppletSettingsHostNetwork.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsHostNetwork.h
-  ../../../GoTvCommon/QtSource/AppletSettingsHostRandomConnect.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsHostRandomConnect.h
-  ../../../GoTvCommon/QtSource/AppletSettingsMessenger.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsMessenger.h
-  ../../../GoTvCommon/QtSource/AppletSettingsPage.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsPage.h
-  ../../../GoTvCommon/QtSource/AppletSettingsRandomConnect.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsRandomConnect.h
-  ../../../GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.h
-  ../../../GoTvCommon/QtSource/AppletSettingsShareFiles.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsShareFiles.h
-  ../../../GoTvCommon/QtSource/AppletSettingsShareWebCam.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsShareWebCam.h
-  ../../../GoTvCommon/QtSource/AppletSettingsStoryboard.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsStoryboard.h
-  ../../../GoTvCommon/QtSource/AppletSettingsTruthOrDare.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsTruthOrDare.h
-  ../../../GoTvCommon/QtSource/AppletSettingsVideoPhone.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsVideoPhone.h
-  ../../../GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp
-  ../../../GoTvCommon/QtSource/AppletSettingsVoicePhone.h
-  ../../../GoTvCommon/QtSource/AppletShareServicesPage.cpp
-  ../../../GoTvCommon/QtSource/AppletShareServicesPage.h
-  ../../../GoTvCommon/QtSource/AppletSnapshot.cpp
-  ../../../GoTvCommon/QtSource/AppletSnapshot.h
-  ../../../GoTvCommon/QtSource/AppletTestAndDebug.cpp
-  ../../../GoTvCommon/QtSource/AppletTestAndDebug.h
-  ../../../GoTvCommon/QtSource/AppletTheme.cpp
-  ../../../GoTvCommon/QtSource/AppletTheme.h
-  ../../../GoTvCommon/QtSource/AppletUploads.cpp
-  ../../../GoTvCommon/QtSource/AppletUploads.h
-  ../../../GoTvCommon/QtSource/AppletUserIdentity.cpp
-  ../../../GoTvCommon/QtSource/AppletUserIdentity.h
-  ../../../GoTvCommon/QtSource/AppProfile.cpp
-  ../../../GoTvCommon/QtSource/AppProfile.h
-  ../../../GoTvCommon/QtSource/AppSettings.cpp
-  ../../../GoTvCommon/QtSource/AppSettings.h
-  ../../../GoTvCommon/QtSource/AppSetup.cpp
-  ../../../GoTvCommon/QtSource/AppSetup.h
-  ../../../GoTvCommon/QtSource/AppTranslate.cpp
-  ../../../GoTvCommon/QtSource/AppTranslate.h
-  ../../../GoTvCommon/QtSource/AssetBaseWidget.cpp
-  ../../../GoTvCommon/QtSource/AssetBaseWidget.h
-  ../../../GoTvCommon/QtSource/AssetFaceWidget.cpp
-  ../../../GoTvCommon/QtSource/AssetFaceWidget.h
-  ../../../GoTvCommon/QtSource/AssetPhotoWidget.cpp
-  ../../../GoTvCommon/QtSource/AssetPhotoWidget.h
-  ../../../GoTvCommon/QtSource/AssetTextWidget.cpp
-  ../../../GoTvCommon/QtSource/AssetTextWidget.h
-  ../../../GoTvCommon/QtSource/AssetVideoWidget.cpp
-  ../../../GoTvCommon/QtSource/AssetVideoWidget.h
-  ../../../GoTvCommon/QtSource/AssetVoiceWidget.cpp
-  ../../../GoTvCommon/QtSource/AssetVoiceWidget.h
-  ../../../GoTvCommon/QtSource/AvatarBar.cpp
-  ../../../GoTvCommon/QtSource/AvatarBar.h
-  ../../../GoTvCommon/QtSource/BottomBarWidget.cpp
-  ../../../GoTvCommon/QtSource/BottomBarWidget.h
-  ../../../GoTvCommon/QtSource/CallListItem.cpp
-  ../../../GoTvCommon/QtSource/CallListItem.h
-  ../../../GoTvCommon/QtSource/CallListWidget.cpp
-  ../../../GoTvCommon/QtSource/CallListWidget.h
-  ../../../GoTvCommon/QtSource/CamLogic.cpp
-  ../../../GoTvCommon/QtSource/CamLogic.h
-  ../../../GoTvCommon/QtSource/CamTitleBarPreview.cpp
-  ../../../GoTvCommon/QtSource/CamTitleBarPreview.h
-  ../../../GoTvCommon/QtSource/ChatEntryWidget.cpp
-  ../../../GoTvCommon/QtSource/ChatEntryWidget.h
-  ../../../GoTvCommon/QtSource/ChatRoomWidget.cpp
-  ../../../GoTvCommon/QtSource/ChatRoomWidget.h
-  ../../../GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp
-  ../../../GoTvCommon/QtSource/DialogConfirmRemoveMessage.h
-  ../../../GoTvCommon/QtSource/EventsQtToGoTv.cpp
-  ../../../GoTvCommon/QtSource/EventsQtToGoTv.h
-  ../../../GoTvCommon/QtSource/FileActionBarWidget.cpp
-  ../../../GoTvCommon/QtSource/FileActionBarWidget.h
-  ../../../GoTvCommon/QtSource/FileActionMenu.cpp
-  ../../../GoTvCommon/QtSource/FileActionMenu.h
-  ../../../GoTvCommon/QtSource/FileItemInfo.cpp
-  ../../../GoTvCommon/QtSource/FileItemInfo.h
-  ../../../GoTvCommon/QtSource/FileItemWidget.cpp
-  ../../../GoTvCommon/QtSource/FileItemWidget.h
-  ../../../GoTvCommon/QtSource/FileListReplySession.cpp
-  ../../../GoTvCommon/QtSource/FileListReplySession.h
-  ../../../GoTvCommon/QtSource/FileShareItemWidget.cpp
-  ../../../GoTvCommon/QtSource/FileShareItemWidget.h
-  ../../../GoTvCommon/QtSource/FileXferWidget.cpp
-  ../../../GoTvCommon/QtSource/FileXferWidget.h
-  ../../../GoTvCommon/QtSource/FriendList.cpp
-  ../../../GoTvCommon/QtSource/FriendList.h
-  ../../../GoTvCommon/QtSource/FriendListDelegate.cpp
-  ../../../GoTvCommon/QtSource/FriendListDelegate.h
-  ../../../GoTvCommon/QtSource/FriendListEntryWidget.cpp
-  ../../../GoTvCommon/QtSource/FriendListEntryWidget.h
-  ../../../GoTvCommon/QtSource/FriendListWidget.cpp
-  ../../../GoTvCommon/QtSource/FriendListWidget.h
-  ../../../GoTvCommon/QtSource/GoTvP2P.ico
-  ../../../GoTvCommon/QtSource/GoTvP2P.rc
-  ../../../GoTvCommon/QtSource/GuiConnectMgr.cpp
-  ../../../GoTvCommon/QtSource/GuiConnectMgr.h
-  ../../../GoTvCommon/QtSource/GuiFileActionSession.cpp
-  ../../../GoTvCommon/QtSource/GuiFileActionSession.h
-  ../../../GoTvCommon/QtSource/GuiFileXferSession.cpp
-  ../../../GoTvCommon/QtSource/GuiFileXferSession.h
-  ../../../GoTvCommon/QtSource/GuiHelpers.cpp
-  ../../../GoTvCommon/QtSource/GuiHelpers.h
-  ../../../GoTvCommon/QtSource/GuiHostSession.cpp
-  ../../../GoTvCommon/QtSource/GuiHostSession.h
-  ../../../GoTvCommon/QtSource/GuiOfferMgr.cpp
-  ../../../GoTvCommon/QtSource/GuiOfferMgr.h
-  ../../../GoTvCommon/QtSource/GuiOfferSession.cpp
-  ../../../GoTvCommon/QtSource/GuiOfferSession.h
-  ../../../GoTvCommon/QtSource/GuiParams.cpp
-  ../../../GoTvCommon/QtSource/GuiThumb.cpp
-  ../../../GoTvCommon/QtSource/GuiThumb.h
-  ../../../GoTvCommon/QtSource/GuiThumbList.cpp
-  ../../../GoTvCommon/QtSource/GuiThumbList.h
-  ../../../GoTvCommon/QtSource/GuiThumbMgr.cpp
-  ../../../GoTvCommon/QtSource/GuiThumbMgr.h
-  ../../../GoTvCommon/QtSource/GuiUser.cpp
-  ../../../GoTvCommon/QtSource/GuiUser.h
-  ../../../GoTvCommon/QtSource/GuiUserJoin.cpp
-  ../../../GoTvCommon/QtSource/GuiUserJoin.h
-  ../../../GoTvCommon/QtSource/GuiUserJoinList.cpp
-  ../../../GoTvCommon/QtSource/GuiUserJoinList.h
-  ../../../GoTvCommon/QtSource/GuiUserJoinMgr.cpp
-  ../../../GoTvCommon/QtSource/GuiUserJoinMgr.h
-  ../../../GoTvCommon/QtSource/GuiUserJoinSession.cpp
-  ../../../GoTvCommon/QtSource/GuiUserJoinSession.h
-  ../../../GoTvCommon/QtSource/GuiUserMgr.cpp
-  ../../../GoTvCommon/QtSource/GuiUserMgr.h
-  ../../../GoTvCommon/QtSource/GuiUserSessionBase.cpp
-  ../../../GoTvCommon/QtSource/GuiUserSessionBase.h
-  ../../../GoTvCommon/QtSource/HelpBrowser.cpp
-  ../../../GoTvCommon/QtSource/HelpBrowser.h
-  ../../../GoTvCommon/QtSource/HistoryEntryWidget.cpp
-  ../../../GoTvCommon/QtSource/HistoryEntryWidget.h
-  ../../../GoTvCommon/QtSource/HistoryListWidget.cpp
-  ../../../GoTvCommon/QtSource/HistoryListWidget.h
-  ../../../GoTvCommon/QtSource/HomeWindow.cpp
-  ../../../GoTvCommon/QtSource/HomeWindow.h
-  ../../../GoTvCommon/QtSource/HostListItem.cpp
-  ../../../GoTvCommon/QtSource/HostListItem.h
-  ../../../GoTvCommon/QtSource/HostListWidget.cpp
-  ../../../GoTvCommon/QtSource/HostListWidget.h
-  ../../../GoTvCommon/QtSource/IdentWidget.cpp
-  ../../../GoTvCommon/QtSource/IdentWidget.h
-  ../../../GoTvCommon/QtSource/ImageListEntry.cpp
-  ../../../GoTvCommon/QtSource/ImageListEntry.h
-  ../../../GoTvCommon/QtSource/ImageListRow.cpp
-  ../../../GoTvCommon/QtSource/ImageListRow.h
-  ../../../GoTvCommon/QtSource/ImageListWidget.cpp
-  ../../../GoTvCommon/QtSource/ImageListWidget.h
-  ../../../GoTvCommon/QtSource/ImagePickBar.cpp
-  ../../../GoTvCommon/QtSource/ImagePickBar.h
-  ../../../GoTvCommon/QtSource/InformationWidget.cpp
-  ../../../GoTvCommon/QtSource/InformationWidget.h
-  ../../../GoTvCommon/QtSource/InputAllWidget.cpp
-  ../../../GoTvCommon/QtSource/InputAllWidget.h
-  ../../../GoTvCommon/QtSource/InputBaseWidget.cpp
-  ../../../GoTvCommon/QtSource/InputBaseWidget.h
-  ../../../GoTvCommon/QtSource/InputFaceWidget.cpp
-  ../../../GoTvCommon/QtSource/InputFaceWidget.h
-  ../../../GoTvCommon/QtSource/InputPhotoWidget.cpp
-  ../../../GoTvCommon/QtSource/InputPhotoWidget.h
-  ../../../GoTvCommon/QtSource/InputTextWidget.cpp
-  ../../../GoTvCommon/QtSource/InputTextWidget.h
-  ../../../GoTvCommon/QtSource/InputVideoWidget.cpp
-  ../../../GoTvCommon/QtSource/InputVideoWidget.h
-  ../../../GoTvCommon/QtSource/InputVoiceWidget.cpp
-  ../../../GoTvCommon/QtSource/InputVoiceWidget.h
-  ../../../GoTvCommon/QtSource/InstMsgWidget.cpp
-  ../../../GoTvCommon/QtSource/InstMsgWidget.h
-  ../../../GoTvCommon/QtSource/LogMgr.cpp
-  ../../../GoTvCommon/QtSource/LogMgr.h
-  ../../../GoTvCommon/QtSource/LogWidget.cpp
-  ../../../GoTvCommon/QtSource/LogWidget.h
-  ../../../GoTvCommon/QtSource/MenuBase.cpp
-  ../../../GoTvCommon/QtSource/MenuBase.h
-  ../../../GoTvCommon/QtSource/MenuCam.cpp
-  ../../../GoTvCommon/QtSource/MenuCam.h
-  ../../../GoTvCommon/QtSource/MenuDefs.h
-  ../../../GoTvCommon/QtSource/MessengerPage.cpp
-  ../../../GoTvCommon/QtSource/MessengerPage.h
-  ../../../GoTvCommon/QtSource/MultiSessionState.cpp
-  ../../../GoTvCommon/QtSource/MultiSessionState.h
-  ../../../GoTvCommon/QtSource/MyIcons.cpp
-  ../../../GoTvCommon/QtSource/MyIcons.h
-  ../../../GoTvCommon/QtSource/MyIconsDefs.h
-  ../../../GoTvCommon/QtSource/MySndMgr.cpp
-  ../../../GoTvCommon/QtSource/MySndMgr.h
-  ../../../GoTvCommon/QtSource/NetAvailStatusWidget.cpp
-  ../../../GoTvCommon/QtSource/NetAvailStatusWidget.h
-  ../../../GoTvCommon/QtSource/NetClientGuiLogic.cpp
-  ../../../GoTvCommon/QtSource/NetClientGuiLogic.h
-  ../../../GoTvCommon/QtSource/NetHostGuiLogic.cpp
-  ../../../GoTvCommon/QtSource/NetHostGuiLogic.h
-  ../../../GoTvCommon/QtSource/NetworkKeyWidget.cpp
-  ../../../GoTvCommon/QtSource/NetworkKeyWidget.h
-  ../../../GoTvCommon/QtSource/NetworkTestWidget.cpp
-  ../../../GoTvCommon/QtSource/NetworkTestWidget.h
-  ../../../GoTvCommon/QtSource/OfferBarWidget.cpp
-  ../../../GoTvCommon/QtSource/OfferBarWidget.h
-  ../../../GoTvCommon/QtSource/OfferListItem.cpp
-  ../../../GoTvCommon/QtSource/OfferListItem.h
-  ../../../GoTvCommon/QtSource/OfferListWidget.cpp
-  ../../../GoTvCommon/QtSource/OfferListWidget.h
-  ../../../GoTvCommon/QtSource/OfferMgr.cpp
-  ../../../GoTvCommon/QtSource/OfferMgr.h
-  ../../../GoTvCommon/QtSource/OfferSessionCallbackInterface.h
-  ../../../GoTvCommon/QtSource/OfferSessionLogic.cpp
-  ../../../GoTvCommon/QtSource/OfferSessionLogic.h
-  ../../../GoTvCommon/QtSource/OfferSessionState.cpp
-  ../../../GoTvCommon/QtSource/OfferSessionState.h
-  ../../../GoTvCommon/QtSource/OfferWidget.cpp
-  ../../../GoTvCommon/QtSource/OfferWidget.h
-  ../../../GoTvCommon/QtSource/P2PThingFileMenu.cpp
-  ../../../GoTvCommon/QtSource/P2PThingFileShare.cpp
-  ../../../GoTvCommon/QtSource/P2PThingFriend.cpp
-  ../../../GoTvCommon/QtSource/P2PThingMedia.cpp
-  ../../../GoTvCommon/QtSource/P2PThingNotify.cpp
-  ../../../GoTvCommon/QtSource/P2PThingOfferToFriend.cpp
-  ../../../GoTvCommon/QtSource/P2PThingOptions.cpp
-  ../../../GoTvCommon/QtSource/P2PThingScan.cpp
-  ../../../GoTvCommon/QtSource/P2PThingSearch.cpp
-  ../../../GoTvCommon/QtSource/P2PThingServers.cpp
-  ../../../GoTvCommon/QtSource/PermissionListItem.cpp
-  ../../../GoTvCommon/QtSource/PermissionListItem.h
-  ../../../GoTvCommon/QtSource/PermissionWidget.cpp
-  ../../../GoTvCommon/QtSource/PermissionWidget.h
-  ../../../GoTvCommon/QtSource/PlayerGlWidget.cpp
-  ../../../GoTvCommon/QtSource/PlayerGlWidget.h
-  ../../../GoTvCommon/QtSource/PluginSettingsWidget.cpp
-  ../../../GoTvCommon/QtSource/PluginSettingsWidget.h
-  ../../../GoTvCommon/QtSource/PopupMenu.cpp
-  ../../../GoTvCommon/QtSource/PopupMenu.h
-  ../../../GoTvCommon/QtSource/PopupMenuDelegate.cpp
-  ../../../GoTvCommon/QtSource/PopupMenuDelegate.h
-  ../../../GoTvCommon/QtSource/RasterWindow.cpp
-  ../../../GoTvCommon/QtSource/RasterWindow.h
-  ../../../GoTvCommon/QtSource/RelayServiceWidget.cpp
-  ../../../GoTvCommon/QtSource/RelayServiceWidget.h
-  ../../../GoTvCommon/QtSource/RenderGlLogic.cpp
-  ../../../GoTvCommon/QtSource/RenderGlLogic.h
-  ../../../GoTvCommon/QtSource/RenderGlMatrix.cpp
-  ../../../GoTvCommon/QtSource/RenderGlOffScreenSurface.cpp
-  ../../../GoTvCommon/QtSource/RenderGlOffScreenSurface.h
-  ../../../GoTvCommon/QtSource/RenderGlShaders.cpp
-  ../../../GoTvCommon/QtSource/RenderGlShaders.h
-  ../../../GoTvCommon/QtSource/RenderGlWidget.cpp
-  ../../../GoTvCommon/QtSource/RenderGlWidget.h
-  ../../../GoTvCommon/QtSource/RenderGlWidgetFonts.cpp
-  ../../../GoTvCommon/QtSource/RenderGlWidgetRender.cpp
-  ../../../GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp
-  ../../../GoTvCommon/QtSource/RenderGlWidgetTextures.cpp
-  ../../../GoTvCommon/QtSource/RenderKodiThread.cpp
-  ../../../GoTvCommon/QtSource/RenderKodiThread.h
-  ../../../GoTvCommon/QtSource/RenderLogoShaders.cpp
-  ../../../GoTvCommon/QtSource/RenderLogoShaders.h
-  ../../../GoTvCommon/QtSource/RenderShaderDefsGl.cpp
-  ../../../GoTvCommon/QtSource/RenderShaderDefsGles.cpp
-  ../../../GoTvCommon/QtSource/RenderShaderQt.cpp
-  ../../../GoTvCommon/QtSource/RenderShaderQt.h
-  ../../../GoTvCommon/QtSource/SearchParamsWidget.cpp
-  ../../../GoTvCommon/QtSource/SearchParamsWidget.h
-  ../../../GoTvCommon/QtSource/ServiceSettingsWidget.cpp
-  ../../../GoTvCommon/QtSource/ServiceSettingsWidget.h
-  ../../../GoTvCommon/QtSource/SessionWidget.cpp
-  ../../../GoTvCommon/QtSource/SessionWidget.h
-  ../../../GoTvCommon/QtSource/SoundCtrlWidget.cpp
-  ../../../GoTvCommon/QtSource/SoundCtrlWidget.h
-  ../../../GoTvCommon/QtSource/SoundDefs.h
-  ../../../GoTvCommon/QtSource/soundio/AudioDefs.h
-  ../../../GoTvCommon/QtSource/soundio/AudioInIo.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioInIo.h
-  ../../../GoTvCommon/QtSource/soundio/AudioInThread.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioInThread.h
-  ../../../GoTvCommon/QtSource/soundio/AudioIoMgr.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioIoMgr.h
-  ../../../GoTvCommon/QtSource/soundio/AudioMixer.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioMixer.h
-  ../../../GoTvCommon/QtSource/soundio/AudioOutIo.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioOutIo.h
-  ../../../GoTvCommon/QtSource/soundio/AudioOutThread.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioOutThread.h
-  ../../../GoTvCommon/QtSource/soundio/AudioTestGenerator.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioTestGenerator.h
-  ../../../GoTvCommon/QtSource/soundio/AudioUtils.cpp
-  ../../../GoTvCommon/QtSource/soundio/AudioUtils.h
-  ../../../GoTvCommon/QtSource/soundio/IAudioInterface.h
-  ../../../GoTvCommon/QtSource/StoryWidget.cpp
-  ../../../GoTvCommon/QtSource/StoryWidget.h
-  ../../../GoTvCommon/QtSource/TextChatLogic.cpp
-  ../../../GoTvCommon/QtSource/TextChatLogic.h
-  ../../../GoTvCommon/QtSource/ThumbnailChooseWidget.cpp
-  ../../../GoTvCommon/QtSource/ThumbnailChooseWidget.h
-  ../../../GoTvCommon/QtSource/ThumbnailEditWidget.cpp
-  ../../../GoTvCommon/QtSource/ThumbnailEditWidget.h
-  ../../../GoTvCommon/QtSource/ThumbnailViewWidget.cpp
-  ../../../GoTvCommon/QtSource/ThumbnailViewWidget.h
-  ../../../GoTvCommon/QtSource/TitleBarWidget.cpp
-  ../../../GoTvCommon/QtSource/TitleBarWidget.h
-  ../../../GoTvCommon/QtSource/TodGameDefs.cpp
-  ../../../GoTvCommon/QtSource/TodGameDefs.h
-  ../../../GoTvCommon/QtSource/TodGameLogic.cpp
-  ../../../GoTvCommon/QtSource/TodGameLogic.h
-  ../../../GoTvCommon/QtSource/TodGameWidget.cpp
-  ../../../GoTvCommon/QtSource/TodGameWidget.h
-  ../../../GoTvCommon/QtSource/ToGuiActivityClient.cpp
-  ../../../GoTvCommon/QtSource/ToGuiActivityClient.h
-  ../../../GoTvCommon/QtSource/ToGuiActivityInterface.h
-  ../../../GoTvCommon/QtSource/ToGuiFileXferClient.cpp
-  ../../../GoTvCommon/QtSource/ToGuiFileXferClient.h
-  ../../../GoTvCommon/QtSource/ToGuiFileXferInterface.h
-  ../../../GoTvCommon/QtSource/ToGuiHardwareControlInterface.h
-  ../../../GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp
-  ../../../GoTvCommon/QtSource/ToGuiHardwareCtrlClient.h
-  ../../../GoTvCommon/QtSource/ToGuiOfferInterface.h
-  ../../../GoTvCommon/QtSource/ToGuiThumbUpdateClient.cpp
-  ../../../GoTvCommon/QtSource/ToGuiThumbUpdateClient.h
-  ../../../GoTvCommon/QtSource/ToGuiThumbUpdateInterface.h
-  ../../../GoTvCommon/QtSource/ToGuiUserUpdateClient.cpp
-  ../../../GoTvCommon/QtSource/ToGuiUserUpdateClient.h
-  ../../../GoTvCommon/QtSource/ToGuiUserUpdateInterface.h
-  ../../../GoTvCommon/QtSource/UserJoinListItem.cpp
-  ../../../GoTvCommon/QtSource/UserJoinListItem.h
-  ../../../GoTvCommon/QtSource/UserJoinListWidget.cpp
-  ../../../GoTvCommon/QtSource/UserJoinListWidget.h
-  ../../../GoTvCommon/QtSource/UserListItem.cpp
-  ../../../GoTvCommon/QtSource/UserListItem.h
-  ../../../GoTvCommon/QtSource/UserListWidget.cpp
-  ../../../GoTvCommon/QtSource/UserListWidget.h
-  ../../../GoTvCommon/QtSource/UserProfile.h
-  ../../../GoTvCommon/QtSource/VidWidget.cpp
-  ../../../GoTvCommon/QtSource/VidWidget.h
-  ../../../GoTvCommon/QtSource/VxAppDisplay.cpp
-  ../../../GoTvCommon/QtSource/VxAppDisplay.h
-  ../../../GoTvCommon/QtSource/VxAppStyle.cpp
-  ../../../GoTvCommon/QtSource/VxAppStyle.h
-  ../../../GoTvCommon/QtSource/VxAppStyle2.cpp
-  ../../../GoTvCommon/QtSource/VxAppStyle2.h
-  ../../../GoTvCommon/QtSource/VxAppTheme.cpp
-  ../../../GoTvCommon/QtSource/VxAppTheme.h
-  ../../../GoTvCommon/QtSource/VxAspectFrame.cpp
-  ../../../GoTvCommon/QtSource/VxAspectFrame.h
-  ../../../GoTvCommon/QtSource/VxAvatarImage.cpp
-  ../../../GoTvCommon/QtSource/VxAvatarImage.h
-  ../../../GoTvCommon/QtSource/VxComboBox.cpp
-  ../../../GoTvCommon/QtSource/VxComboBox.h
-  ../../../GoTvCommon/QtSource/VxComboBoxFileFilter.cpp
-  ../../../GoTvCommon/QtSource/VxComboBoxFileFilter.h
-  ../../../GoTvCommon/QtSource/VxContextMenu.cpp
-  ../../../GoTvCommon/QtSource/VxContextMenu.h
-  ../../../GoTvCommon/QtSource/VxFlatButton.cpp
-  ../../../GoTvCommon/QtSource/VxFlatButton.h
-  ../../../GoTvCommon/QtSource/VxFrame.cpp
-  ../../../GoTvCommon/QtSource/VxFrame.h
-  ../../../GoTvCommon/QtSource/VxLabel.cpp
-  ../../../GoTvCommon/QtSource/VxLabel.h
-  ../../../GoTvCommon/QtSource/VxMenu.cpp
-  ../../../GoTvCommon/QtSource/VxMenu.h
-  ../../../GoTvCommon/QtSource/VxMenuButton.cpp
-  ../../../GoTvCommon/QtSource/VxMenuButton.h
-  ../../../GoTvCommon/QtSource/VxMenuButtonBottom.cpp
-  ../../../GoTvCommon/QtSource/VxMenuButtonBottom.h
-  ../../../GoTvCommon/QtSource/VxMenuButtonTop.cpp
-  ../../../GoTvCommon/QtSource/VxMenuButtonTop.h
-  ../../../GoTvCommon/QtSource/VxMyFileInfo.cpp
-  ../../../GoTvCommon/QtSource/VxMyFileInfo.h
-  ../../../GoTvCommon/QtSource/VxPlainTextEdit.cpp
-  ../../../GoTvCommon/QtSource/VxPlainTextEdit.h
-  ../../../GoTvCommon/QtSource/VxProgressBar.cpp
-  ../../../GoTvCommon/QtSource/VxProgressBar.h
-  ../../../GoTvCommon/QtSource/VxPushButton.cpp
-  ../../../GoTvCommon/QtSource/VxPushButton.h
-  ../../../GoTvCommon/QtSource/VxResourceToRealFile.cpp
-  ../../../GoTvCommon/QtSource/VxResourceToRealFile.h
-  ../../../GoTvCommon/QtSource/VxScrollArea.cpp
-  ../../../GoTvCommon/QtSource/VxScrollArea.h
-  ../../../GoTvCommon/QtSource/VxShredderButton.cpp
-  ../../../GoTvCommon/QtSource/VxShredderButton.h
-  ../../../GoTvCommon/QtSource/VxSndInstance.cpp
-  ../../../GoTvCommon/QtSource/VxSndInstance.h
-  ../../../GoTvCommon/QtSource/VxSpinProgress.cpp
-  ../../../GoTvCommon/QtSource/VxSpinProgress.h
-  ../../../GoTvCommon/QtSource/VxTagLabel.cpp
-  ../../../GoTvCommon/QtSource/VxTagLabel.h
-  ../../../GoTvCommon/QtSource/VxTilePositioner.cpp
-  ../../../GoTvCommon/QtSource/VxTilePositioner.h
-  ../../../GoTvCommon/QtSource/VxWidgetBase.cpp
-  ../../../GoTvCommon/QtSource/VxWidgetBase.h
-  ../../../GoTvCommon/Resources/bars_1_internet.png
-  ../../../GoTvCommon/Resources/bars_2_test_avail.png
-  ../../../GoTvCommon/Resources/bars_3_net_avail.png
-  ../../../GoTvCommon/Resources/bars_4_relay_search.png
-  ../../../GoTvCommon/Resources/bars_5_onlie_with_relay.png
-  ../../../GoTvCommon/Resources/bars_6_direct.png
-  ../../../GoTvCommon/Resources/bars_7_hosted_direct.png
-  ../../../GoTvCommon/Resources/bars_7_hosted_with_relay.png
-  ../../../GoTvCommon/Resources/msg_state_fail_resend.png
+  ../../../CommonSrc/QtSource/AcceptCancelWidget.cpp
+  ../../../CommonSrc/QtSource/AcceptCancelWidget.h
+  ../../../CommonSrc/QtSource/AccountDb.cpp
+  ../../../CommonSrc/QtSource/AccountDb.h
+  ../../../CommonSrc/QtSource/AccountMgr.cpp
+  ../../../CommonSrc/QtSource/AccountMgr.h
+  ../../../CommonSrc/QtSource/ActivityAddRemoveLibraryFiles.cpp
+  ../../../CommonSrc/QtSource/ActivityAddRemoveLibraryFiles.h
+  ../../../CommonSrc/QtSource/ActivityAppSetup.cpp
+  ../../../CommonSrc/QtSource/ActivityAppSetup.h
+  ../../../CommonSrc/QtSource/ActivityBase.cpp
+  ../../../CommonSrc/QtSource/ActivityBase.h
+  ../../../CommonSrc/QtSource/ActivityBrowseFiles.cpp
+  ../../../CommonSrc/QtSource/ActivityBrowseFiles.h
+  ../../../CommonSrc/QtSource/ActivityChooseTestWebsiteUrl.cpp
+  ../../../CommonSrc/QtSource/ActivityChooseTestWebsiteUrl.h
+  ../../../CommonSrc/QtSource/ActivityCreateAccount.cpp
+  ../../../CommonSrc/QtSource/ActivityCreateAccount.h
+  ../../../CommonSrc/QtSource/ActivityDownloadItemMenu.cpp
+  ../../../CommonSrc/QtSource/ActivityDownloadItemMenu.h
+  ../../../CommonSrc/QtSource/ActivityFileSearch.cpp
+  ../../../CommonSrc/QtSource/ActivityFileSearch.h
+  ../../../CommonSrc/QtSource/ActivityHelpSignal.cpp
+  ../../../CommonSrc/QtSource/ActivityHelpSignal.h
+  ../../../CommonSrc/QtSource/ActivityInformation.cpp
+  ../../../CommonSrc/QtSource/ActivityInformation.h
+  ../../../CommonSrc/QtSource/ActivityIsPortOpenTest.cpp
+  ../../../CommonSrc/QtSource/ActivityIsPortOpenTest.h
+  ../../../CommonSrc/QtSource/ActivityMessageBox.cpp
+  ../../../CommonSrc/QtSource/ActivityMessageBox.h
+  ../../../CommonSrc/QtSource/ActivityNetworkState.cpp
+  ../../../CommonSrc/QtSource/ActivityNetworkState.h
+  ../../../CommonSrc/QtSource/ActivityPermissions.cpp
+  ../../../CommonSrc/QtSource/ActivityPermissions.h
+  ../../../CommonSrc/QtSource/ActivityScanPeopleSearch.cpp
+  ../../../CommonSrc/QtSource/ActivityScanPeopleSearch.h
+  ../../../CommonSrc/QtSource/ActivityScanProfiles.cpp
+  ../../../CommonSrc/QtSource/ActivityScanProfiles.h
+  ../../../CommonSrc/QtSource/ActivityScanStoryBoards.cpp
+  ../../../CommonSrc/QtSource/ActivityScanStoryBoards.h
+  ../../../CommonSrc/QtSource/ActivityScanWebCams.cpp
+  ../../../CommonSrc/QtSource/ActivityScanWebCams.h
+  ../../../CommonSrc/QtSource/ActivitySessionOptions.cpp
+  ../../../CommonSrc/QtSource/ActivitySessionOptions.h
+  ../../../CommonSrc/QtSource/ActivityShowHelp.cpp
+  ../../../CommonSrc/QtSource/ActivityShowHelp.h
+  ../../../CommonSrc/QtSource/ActivitySnapShot.cpp
+  ../../../CommonSrc/QtSource/ActivitySnapShot.h
+  ../../../CommonSrc/QtSource/ActivitySoundOptions.cpp
+  ../../../CommonSrc/QtSource/ActivitySoundOptions.h
+  ../../../CommonSrc/QtSource/ActivityTimedMessage.cpp
+  ../../../CommonSrc/QtSource/ActivityTimedMessage.h
+  ../../../CommonSrc/QtSource/ActivityViewAudioFile.cpp
+  ../../../CommonSrc/QtSource/ActivityViewAudioFile.h
+  ../../../CommonSrc/QtSource/ActivityViewLibraryFiles.cpp
+  ../../../CommonSrc/QtSource/ActivityViewLibraryFiles.h
+  ../../../CommonSrc/QtSource/ActivityViewMySharedFiles.cpp
+  ../../../CommonSrc/QtSource/ActivityViewMySharedFiles.h
+  ../../../CommonSrc/QtSource/ActivityViewVideoFile.cpp
+  ../../../CommonSrc/QtSource/ActivityViewVideoFile.h
+  ../../../CommonSrc/QtSource/ActivityYesNoMsgBox.cpp
+  ../../../CommonSrc/QtSource/ActivityYesNoMsgBox.h
+  ../../../CommonSrc/QtSource/AppCommon.cpp
+  ../../../CommonSrc/QtSource/AppCommon.h
+  ../../../CommonSrc/QtSource/AppCommonAudio.cpp
+  ../../../CommonSrc/QtSource/AppCommonEvents.cpp
+  ../../../CommonSrc/QtSource/AppCommonLogin.cpp
+  ../../../CommonSrc/QtSource/AppCommonRender.cpp
+  ../../../CommonSrc/QtSource/AppDefs.cpp
+  ../../../CommonSrc/QtSource/AppDefs.h
+  ../../../CommonSrc/QtSource/AppGlobals.cpp
+  ../../../CommonSrc/QtSource/AppGlobals.h
+  ../../../CommonSrc/QtSource/AppletAboutApp.cpp
+  ../../../CommonSrc/QtSource/AppletAboutApp.h
+  ../../../CommonSrc/QtSource/AppletApplicationInfo.cpp
+  ../../../CommonSrc/QtSource/AppletApplicationInfo.h
+  ../../../CommonSrc/QtSource/AppletBase.cpp
+  ../../../CommonSrc/QtSource/AppletBase.h
+  ../../../CommonSrc/QtSource/AppletBrowseFiles.cpp
+  ../../../CommonSrc/QtSource/AppletBrowseFiles.h
+  ../../../CommonSrc/QtSource/AppletCallList.cpp
+  ../../../CommonSrc/QtSource/AppletCallList.h
+  ../../../CommonSrc/QtSource/AppletCamSettings.cpp
+  ../../../CommonSrc/QtSource/AppletCamSettings.h
+  ../../../CommonSrc/QtSource/AppletChatRoomClient.cpp
+  ../../../CommonSrc/QtSource/AppletChatRoomClient.h
+  ../../../CommonSrc/QtSource/AppletChatRoomJoin.cpp
+  ../../../CommonSrc/QtSource/AppletChatRoomJoin.h
+  ../../../CommonSrc/QtSource/AppletChatRoomJoinSearch.cpp
+  ../../../CommonSrc/QtSource/AppletChatRoomJoinSearch.h
+  ../../../CommonSrc/QtSource/AppletChooseThumbnail.cpp
+  ../../../CommonSrc/QtSource/AppletChooseThumbnail.h
+  ../../../CommonSrc/QtSource/AppletClientAvatarImage.cpp
+  ../../../CommonSrc/QtSource/AppletClientAvatarImage.h
+  ../../../CommonSrc/QtSource/AppletClientBase.cpp
+  ../../../CommonSrc/QtSource/AppletClientBase.h
+  ../../../CommonSrc/QtSource/AppletClientRandomConnect.cpp
+  ../../../CommonSrc/QtSource/AppletClientRandomConnect.h
+  ../../../CommonSrc/QtSource/AppletClientShareFiles.cpp
+  ../../../CommonSrc/QtSource/AppletClientShareFiles.h
+  ../../../CommonSrc/QtSource/AppletClientShareWebCam.cpp
+  ../../../CommonSrc/QtSource/AppletClientShareWebCam.h
+  ../../../CommonSrc/QtSource/AppletClientStoryboard.cpp
+  ../../../CommonSrc/QtSource/AppletClientStoryboard.h
+  ../../../CommonSrc/QtSource/AppletDownloads.cpp
+  ../../../CommonSrc/QtSource/AppletDownloads.h
+  ../../../CommonSrc/QtSource/AppletEditAboutMe.cpp
+  ../../../CommonSrc/QtSource/AppletEditAboutMe.h
+  ../../../CommonSrc/QtSource/AppletEditAvatarImage.cpp
+  ../../../CommonSrc/QtSource/AppletEditAvatarImage.h
+  ../../../CommonSrc/QtSource/AppletEditStoryboard.cpp
+  ../../../CommonSrc/QtSource/AppletEditStoryboard.h
+  ../../../CommonSrc/QtSource/AppletGalleryImage.cpp
+  ../../../CommonSrc/QtSource/AppletGalleryImage.h
+  ../../../CommonSrc/QtSource/AppletGalleryThumb.cpp
+  ../../../CommonSrc/QtSource/AppletGalleryThumb.h
+  ../../../CommonSrc/QtSource/AppletGroupJoin.cpp
+  ../../../CommonSrc/QtSource/AppletGroupJoin.h
+  ../../../CommonSrc/QtSource/AppletGroupJoinSearch.cpp
+  ../../../CommonSrc/QtSource/AppletGroupJoinSearch.h
+  ../../../CommonSrc/QtSource/AppletJoinBase.cpp
+  ../../../CommonSrc/QtSource/AppletJoinBase.h
+  ../../../CommonSrc/QtSource/AppletKodi.cpp
+  ../../../CommonSrc/QtSource/AppletKodi.h
+  ../../../CommonSrc/QtSource/AppletLaunchPage.cpp
+  ../../../CommonSrc/QtSource/AppletLaunchPage.h
+  ../../../CommonSrc/QtSource/AppletLaunchWidget.cpp
+  ../../../CommonSrc/QtSource/AppletLaunchWidget.h
+  ../../../CommonSrc/QtSource/AppletLibrary.cpp
+  ../../../CommonSrc/QtSource/AppletLibrary.h
+  ../../../CommonSrc/QtSource/AppletLog.cpp
+  ../../../CommonSrc/QtSource/AppletLog.h
+  ../../../CommonSrc/QtSource/AppletLogSettings.cpp
+  ../../../CommonSrc/QtSource/AppletLogSettings.h
+  ../../../CommonSrc/QtSource/AppletLogView.cpp
+  ../../../CommonSrc/QtSource/AppletLogView.h
+  ../../../CommonSrc/QtSource/AppletMgr.cpp
+  ../../../CommonSrc/QtSource/AppletMgr.h
+  ../../../CommonSrc/QtSource/AppletMultiMessenger.cpp
+  ../../../CommonSrc/QtSource/AppletMultiMessenger.h
+  ../../../CommonSrc/QtSource/AppletNetHostingPage.cpp
+  ../../../CommonSrc/QtSource/AppletNetHostingPage.h
+  ../../../CommonSrc/QtSource/AppletNetworkSettings.cpp
+  ../../../CommonSrc/QtSource/AppletNetworkSettings.h
+  ../../../CommonSrc/QtSource/AppletOfferList.cpp
+  ../../../CommonSrc/QtSource/AppletOfferList.h
+  ../../../CommonSrc/QtSource/AppletPeerBase.cpp
+  ../../../CommonSrc/QtSource/AppletPeerBase.h
+  ../../../CommonSrc/QtSource/AppletPeerChangeFriendship.cpp
+  ../../../CommonSrc/QtSource/AppletPeerChangeFriendship.h
+  ../../../CommonSrc/QtSource/AppletPeerReplyFileOffer.cpp
+  ../../../CommonSrc/QtSource/AppletPeerReplyFileOffer.h
+  ../../../CommonSrc/QtSource/AppletPeerSelectFileToSend.cpp
+  ../../../CommonSrc/QtSource/AppletPeerSelectFileToSend.h
+  ../../../CommonSrc/QtSource/AppletPeerSessionFileOffer.cpp
+  ../../../CommonSrc/QtSource/AppletPeerSessionFileOffer.h
+  ../../../CommonSrc/QtSource/AppletPeerTodGame.cpp
+  ../../../CommonSrc/QtSource/AppletPeerTodGame.h
+  ../../../CommonSrc/QtSource/AppletPeerVideoPhone.cpp
+  ../../../CommonSrc/QtSource/AppletPeerVideoPhone.h
+  ../../../CommonSrc/QtSource/AppletPeerViewSharedFiles.cpp
+  ../../../CommonSrc/QtSource/AppletPeerViewSharedFiles.h
+  ../../../CommonSrc/QtSource/AppletPeerVoicePhone.cpp
+  ../../../CommonSrc/QtSource/AppletPeerVoicePhone.h
+  ../../../CommonSrc/QtSource/AppletPermissionList.cpp
+  ../../../CommonSrc/QtSource/AppletPermissionList.h
+  ../../../CommonSrc/QtSource/AppletPersonalRecorder.cpp
+  ../../../CommonSrc/QtSource/AppletPersonalRecorder.h
+  ../../../CommonSrc/QtSource/AppletPlayerBase.cpp
+  ../../../CommonSrc/QtSource/AppletPlayerBase.h
+  ../../../CommonSrc/QtSource/AppletPlayerVideo.cpp
+  ../../../CommonSrc/QtSource/AppletPlayerVideo.h
+  ../../../CommonSrc/QtSource/AppletRandomConnectJoin.cpp
+  ../../../CommonSrc/QtSource/AppletRandomConnectJoin.h
+  ../../../CommonSrc/QtSource/AppletRandomConnectJoinSearch.cpp
+  ../../../CommonSrc/QtSource/AppletRandomConnectJoinSearch.h
+  ../../../CommonSrc/QtSource/AppletSearchPage.cpp
+  ../../../CommonSrc/QtSource/AppletSearchPage.h
+  ../../../CommonSrc/QtSource/AppletServiceAboutMe.cpp
+  ../../../CommonSrc/QtSource/AppletServiceAboutMe.h
+  ../../../CommonSrc/QtSource/AppletServiceAvatarImage.cpp
+  ../../../CommonSrc/QtSource/AppletServiceAvatarImage.h
+  ../../../CommonSrc/QtSource/AppletServiceBase.cpp
+  ../../../CommonSrc/QtSource/AppletServiceBase.h
+  ../../../CommonSrc/QtSource/AppletServiceBaseSettings.cpp
+  ../../../CommonSrc/QtSource/AppletServiceBaseSettings.h
+  ../../../CommonSrc/QtSource/AppletServiceChatRoom.cpp
+  ../../../CommonSrc/QtSource/AppletServiceChatRoom.h
+  ../../../CommonSrc/QtSource/AppletServiceConnectionTest.cpp
+  ../../../CommonSrc/QtSource/AppletServiceConnectionTest.h
+  ../../../CommonSrc/QtSource/AppletServiceHostGroup.cpp
+  ../../../CommonSrc/QtSource/AppletServiceHostGroup.h
+  ../../../CommonSrc/QtSource/AppletServiceHostNetwork.cpp
+  ../../../CommonSrc/QtSource/AppletServiceHostNetwork.h
+  ../../../CommonSrc/QtSource/AppletServiceRandomConnect.cpp
+  ../../../CommonSrc/QtSource/AppletServiceRandomConnect.h
+  ../../../CommonSrc/QtSource/AppletServiceRandomConnectRelay.cpp
+  ../../../CommonSrc/QtSource/AppletServiceRandomConnectRelay.h
+  ../../../CommonSrc/QtSource/AppletServiceRelay.cpp
+  ../../../CommonSrc/QtSource/AppletServiceRelay.h
+  ../../../CommonSrc/QtSource/AppletServiceShareFiles.cpp
+  ../../../CommonSrc/QtSource/AppletServiceShareFiles.h
+  ../../../CommonSrc/QtSource/AppletServiceShareWebCam.cpp
+  ../../../CommonSrc/QtSource/AppletServiceShareWebCam.h
+  ../../../CommonSrc/QtSource/AppletServiceStoryboard.cpp
+  ../../../CommonSrc/QtSource/AppletServiceStoryboard.h
+  ../../../CommonSrc/QtSource/AppletSettingsAboutMe.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsAboutMe.h
+  ../../../CommonSrc/QtSource/AppletSettingsAvatarImage.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsAvatarImage.h
+  ../../../CommonSrc/QtSource/AppletSettingsBase.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsBase.h
+  ../../../CommonSrc/QtSource/AppletSettingsChatRoom.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsChatRoom.h
+  ../../../CommonSrc/QtSource/AppletSettingsConnectionTest.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsConnectionTest.h
+  ../../../CommonSrc/QtSource/AppletSettingsFileXfer.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsFileXfer.h
+  ../../../CommonSrc/QtSource/AppletSettingsHostBase.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsHostBase.h
+  ../../../CommonSrc/QtSource/AppletSettingsHostChatRoom.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsHostChatRoom.h
+  ../../../CommonSrc/QtSource/AppletSettingsHostGroup.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsHostGroup.h
+  ../../../CommonSrc/QtSource/AppletSettingsHostNetwork.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsHostNetwork.h
+  ../../../CommonSrc/QtSource/AppletSettingsHostRandomConnect.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsHostRandomConnect.h
+  ../../../CommonSrc/QtSource/AppletSettingsMessenger.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsMessenger.h
+  ../../../CommonSrc/QtSource/AppletSettingsPage.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsPage.h
+  ../../../CommonSrc/QtSource/AppletSettingsRandomConnect.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsRandomConnect.h
+  ../../../CommonSrc/QtSource/AppletSettingsRandomConnectRelay.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsRandomConnectRelay.h
+  ../../../CommonSrc/QtSource/AppletSettingsShareFiles.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsShareFiles.h
+  ../../../CommonSrc/QtSource/AppletSettingsShareWebCam.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsShareWebCam.h
+  ../../../CommonSrc/QtSource/AppletSettingsStoryboard.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsStoryboard.h
+  ../../../CommonSrc/QtSource/AppletSettingsTruthOrDare.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsTruthOrDare.h
+  ../../../CommonSrc/QtSource/AppletSettingsVideoPhone.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsVideoPhone.h
+  ../../../CommonSrc/QtSource/AppletSettingsVoicePhone.cpp
+  ../../../CommonSrc/QtSource/AppletSettingsVoicePhone.h
+  ../../../CommonSrc/QtSource/AppletShareServicesPage.cpp
+  ../../../CommonSrc/QtSource/AppletShareServicesPage.h
+  ../../../CommonSrc/QtSource/AppletSnapshot.cpp
+  ../../../CommonSrc/QtSource/AppletSnapshot.h
+  ../../../CommonSrc/QtSource/AppletTestAndDebug.cpp
+  ../../../CommonSrc/QtSource/AppletTestAndDebug.h
+  ../../../CommonSrc/QtSource/AppletTheme.cpp
+  ../../../CommonSrc/QtSource/AppletTheme.h
+  ../../../CommonSrc/QtSource/AppletUploads.cpp
+  ../../../CommonSrc/QtSource/AppletUploads.h
+  ../../../CommonSrc/QtSource/AppletUserIdentity.cpp
+  ../../../CommonSrc/QtSource/AppletUserIdentity.h
+  ../../../CommonSrc/QtSource/AppProfile.cpp
+  ../../../CommonSrc/QtSource/AppProfile.h
+  ../../../CommonSrc/QtSource/AppSettings.cpp
+  ../../../CommonSrc/QtSource/AppSettings.h
+  ../../../CommonSrc/QtSource/AppSetup.cpp
+  ../../../CommonSrc/QtSource/AppSetup.h
+  ../../../CommonSrc/QtSource/AppTranslate.cpp
+  ../../../CommonSrc/QtSource/AppTranslate.h
+  ../../../CommonSrc/QtSource/AssetBaseWidget.cpp
+  ../../../CommonSrc/QtSource/AssetBaseWidget.h
+  ../../../CommonSrc/QtSource/AssetFaceWidget.cpp
+  ../../../CommonSrc/QtSource/AssetFaceWidget.h
+  ../../../CommonSrc/QtSource/AssetPhotoWidget.cpp
+  ../../../CommonSrc/QtSource/AssetPhotoWidget.h
+  ../../../CommonSrc/QtSource/AssetTextWidget.cpp
+  ../../../CommonSrc/QtSource/AssetTextWidget.h
+  ../../../CommonSrc/QtSource/AssetVideoWidget.cpp
+  ../../../CommonSrc/QtSource/AssetVideoWidget.h
+  ../../../CommonSrc/QtSource/AssetVoiceWidget.cpp
+  ../../../CommonSrc/QtSource/AssetVoiceWidget.h
+  ../../../CommonSrc/QtSource/AvatarBar.cpp
+  ../../../CommonSrc/QtSource/AvatarBar.h
+  ../../../CommonSrc/QtSource/BottomBarWidget.cpp
+  ../../../CommonSrc/QtSource/BottomBarWidget.h
+  ../../../CommonSrc/QtSource/CallListItem.cpp
+  ../../../CommonSrc/QtSource/CallListItem.h
+  ../../../CommonSrc/QtSource/CallListWidget.cpp
+  ../../../CommonSrc/QtSource/CallListWidget.h
+  ../../../CommonSrc/QtSource/CamLogic.cpp
+  ../../../CommonSrc/QtSource/CamLogic.h
+  ../../../CommonSrc/QtSource/CamTitleBarPreview.cpp
+  ../../../CommonSrc/QtSource/CamTitleBarPreview.h
+  ../../../CommonSrc/QtSource/ChatEntryWidget.cpp
+  ../../../CommonSrc/QtSource/ChatEntryWidget.h
+  ../../../CommonSrc/QtSource/ChatRoomWidget.cpp
+  ../../../CommonSrc/QtSource/ChatRoomWidget.h
+  ../../../CommonSrc/QtSource/DialogConfirmRemoveMessage.cpp
+  ../../../CommonSrc/QtSource/DialogConfirmRemoveMessage.h
+  ../../../CommonSrc/QtSource/EventsQtToGoTv.cpp
+  ../../../CommonSrc/QtSource/EventsQtToGoTv.h
+  ../../../CommonSrc/QtSource/FileActionBarWidget.cpp
+  ../../../CommonSrc/QtSource/FileActionBarWidget.h
+  ../../../CommonSrc/QtSource/FileActionMenu.cpp
+  ../../../CommonSrc/QtSource/FileActionMenu.h
+  ../../../CommonSrc/QtSource/FileItemInfo.cpp
+  ../../../CommonSrc/QtSource/FileItemInfo.h
+  ../../../CommonSrc/QtSource/FileItemWidget.cpp
+  ../../../CommonSrc/QtSource/FileItemWidget.h
+  ../../../CommonSrc/QtSource/FileListReplySession.cpp
+  ../../../CommonSrc/QtSource/FileListReplySession.h
+  ../../../CommonSrc/QtSource/FileShareItemWidget.cpp
+  ../../../CommonSrc/QtSource/FileShareItemWidget.h
+  ../../../CommonSrc/QtSource/FileXferWidget.cpp
+  ../../../CommonSrc/QtSource/FileXferWidget.h
+  ../../../CommonSrc/QtSource/FriendList.cpp
+  ../../../CommonSrc/QtSource/FriendList.h
+  ../../../CommonSrc/QtSource/FriendListDelegate.cpp
+  ../../../CommonSrc/QtSource/FriendListDelegate.h
+  ../../../CommonSrc/QtSource/FriendListEntryWidget.cpp
+  ../../../CommonSrc/QtSource/FriendListEntryWidget.h
+  ../../../CommonSrc/QtSource/FriendListWidget.cpp
+  ../../../CommonSrc/QtSource/FriendListWidget.h
+  ../../../CommonSrc/QtSource/GoTvP2P.ico
+  ../../../CommonSrc/QtSource/GoTvP2P.rc
+  ../../../CommonSrc/QtSource/GuiConnectMgr.cpp
+  ../../../CommonSrc/QtSource/GuiConnectMgr.h
+  ../../../CommonSrc/QtSource/GuiFileActionSession.cpp
+  ../../../CommonSrc/QtSource/GuiFileActionSession.h
+  ../../../CommonSrc/QtSource/GuiFileXferSession.cpp
+  ../../../CommonSrc/QtSource/GuiFileXferSession.h
+  ../../../CommonSrc/QtSource/GuiHelpers.cpp
+  ../../../CommonSrc/QtSource/GuiHelpers.h
+  ../../../CommonSrc/QtSource/GuiHostSession.cpp
+  ../../../CommonSrc/QtSource/GuiHostSession.h
+  ../../../CommonSrc/QtSource/GuiOfferMgr.cpp
+  ../../../CommonSrc/QtSource/GuiOfferMgr.h
+  ../../../CommonSrc/QtSource/GuiOfferSession.cpp
+  ../../../CommonSrc/QtSource/GuiOfferSession.h
+  ../../../CommonSrc/QtSource/GuiParams.cpp
+  ../../../CommonSrc/QtSource/GuiThumb.cpp
+  ../../../CommonSrc/QtSource/GuiThumb.h
+  ../../../CommonSrc/QtSource/GuiThumbList.cpp
+  ../../../CommonSrc/QtSource/GuiThumbList.h
+  ../../../CommonSrc/QtSource/GuiThumbMgr.cpp
+  ../../../CommonSrc/QtSource/GuiThumbMgr.h
+  ../../../CommonSrc/QtSource/GuiUser.cpp
+  ../../../CommonSrc/QtSource/GuiUser.h
+  ../../../CommonSrc/QtSource/GuiUserJoin.cpp
+  ../../../CommonSrc/QtSource/GuiUserJoin.h
+  ../../../CommonSrc/QtSource/GuiUserJoinList.cpp
+  ../../../CommonSrc/QtSource/GuiUserJoinList.h
+  ../../../CommonSrc/QtSource/GuiUserJoinMgr.cpp
+  ../../../CommonSrc/QtSource/GuiUserJoinMgr.h
+  ../../../CommonSrc/QtSource/GuiUserJoinSession.cpp
+  ../../../CommonSrc/QtSource/GuiUserJoinSession.h
+  ../../../CommonSrc/QtSource/GuiUserMgr.cpp
+  ../../../CommonSrc/QtSource/GuiUserMgr.h
+  ../../../CommonSrc/QtSource/GuiUserSessionBase.cpp
+  ../../../CommonSrc/QtSource/GuiUserSessionBase.h
+  ../../../CommonSrc/QtSource/HelpBrowser.cpp
+  ../../../CommonSrc/QtSource/HelpBrowser.h
+  ../../../CommonSrc/QtSource/HistoryEntryWidget.cpp
+  ../../../CommonSrc/QtSource/HistoryEntryWidget.h
+  ../../../CommonSrc/QtSource/HistoryListWidget.cpp
+  ../../../CommonSrc/QtSource/HistoryListWidget.h
+  ../../../CommonSrc/QtSource/HomeWindow.cpp
+  ../../../CommonSrc/QtSource/HomeWindow.h
+  ../../../CommonSrc/QtSource/HostListItem.cpp
+  ../../../CommonSrc/QtSource/HostListItem.h
+  ../../../CommonSrc/QtSource/HostListWidget.cpp
+  ../../../CommonSrc/QtSource/HostListWidget.h
+  ../../../CommonSrc/QtSource/IdentWidget.cpp
+  ../../../CommonSrc/QtSource/IdentWidget.h
+  ../../../CommonSrc/QtSource/ImageListEntry.cpp
+  ../../../CommonSrc/QtSource/ImageListEntry.h
+  ../../../CommonSrc/QtSource/ImageListRow.cpp
+  ../../../CommonSrc/QtSource/ImageListRow.h
+  ../../../CommonSrc/QtSource/ImageListWidget.cpp
+  ../../../CommonSrc/QtSource/ImageListWidget.h
+  ../../../CommonSrc/QtSource/ImagePickBar.cpp
+  ../../../CommonSrc/QtSource/ImagePickBar.h
+  ../../../CommonSrc/QtSource/InformationWidget.cpp
+  ../../../CommonSrc/QtSource/InformationWidget.h
+  ../../../CommonSrc/QtSource/InputAllWidget.cpp
+  ../../../CommonSrc/QtSource/InputAllWidget.h
+  ../../../CommonSrc/QtSource/InputBaseWidget.cpp
+  ../../../CommonSrc/QtSource/InputBaseWidget.h
+  ../../../CommonSrc/QtSource/InputFaceWidget.cpp
+  ../../../CommonSrc/QtSource/InputFaceWidget.h
+  ../../../CommonSrc/QtSource/InputPhotoWidget.cpp
+  ../../../CommonSrc/QtSource/InputPhotoWidget.h
+  ../../../CommonSrc/QtSource/InputTextWidget.cpp
+  ../../../CommonSrc/QtSource/InputTextWidget.h
+  ../../../CommonSrc/QtSource/InputVideoWidget.cpp
+  ../../../CommonSrc/QtSource/InputVideoWidget.h
+  ../../../CommonSrc/QtSource/InputVoiceWidget.cpp
+  ../../../CommonSrc/QtSource/InputVoiceWidget.h
+  ../../../CommonSrc/QtSource/InstMsgWidget.cpp
+  ../../../CommonSrc/QtSource/InstMsgWidget.h
+  ../../../CommonSrc/QtSource/LogMgr.cpp
+  ../../../CommonSrc/QtSource/LogMgr.h
+  ../../../CommonSrc/QtSource/LogWidget.cpp
+  ../../../CommonSrc/QtSource/LogWidget.h
+  ../../../CommonSrc/QtSource/MenuBase.cpp
+  ../../../CommonSrc/QtSource/MenuBase.h
+  ../../../CommonSrc/QtSource/MenuCam.cpp
+  ../../../CommonSrc/QtSource/MenuCam.h
+  ../../../CommonSrc/QtSource/MenuDefs.h
+  ../../../CommonSrc/QtSource/MessengerPage.cpp
+  ../../../CommonSrc/QtSource/MessengerPage.h
+  ../../../CommonSrc/QtSource/MultiSessionState.cpp
+  ../../../CommonSrc/QtSource/MultiSessionState.h
+  ../../../CommonSrc/QtSource/MyIcons.cpp
+  ../../../CommonSrc/QtSource/MyIcons.h
+  ../../../CommonSrc/QtSource/MyIconsDefs.h
+  ../../../CommonSrc/QtSource/MySndMgr.cpp
+  ../../../CommonSrc/QtSource/MySndMgr.h
+  ../../../CommonSrc/QtSource/NetAvailStatusWidget.cpp
+  ../../../CommonSrc/QtSource/NetAvailStatusWidget.h
+  ../../../CommonSrc/QtSource/NetClientGuiLogic.cpp
+  ../../../CommonSrc/QtSource/NetClientGuiLogic.h
+  ../../../CommonSrc/QtSource/NetHostGuiLogic.cpp
+  ../../../CommonSrc/QtSource/NetHostGuiLogic.h
+  ../../../CommonSrc/QtSource/NetworkKeyWidget.cpp
+  ../../../CommonSrc/QtSource/NetworkKeyWidget.h
+  ../../../CommonSrc/QtSource/NetworkTestWidget.cpp
+  ../../../CommonSrc/QtSource/NetworkTestWidget.h
+  ../../../CommonSrc/QtSource/OfferBarWidget.cpp
+  ../../../CommonSrc/QtSource/OfferBarWidget.h
+  ../../../CommonSrc/QtSource/OfferListItem.cpp
+  ../../../CommonSrc/QtSource/OfferListItem.h
+  ../../../CommonSrc/QtSource/OfferListWidget.cpp
+  ../../../CommonSrc/QtSource/OfferListWidget.h
+  ../../../CommonSrc/QtSource/OfferMgr.cpp
+  ../../../CommonSrc/QtSource/OfferMgr.h
+  ../../../CommonSrc/QtSource/OfferSessionCallbackInterface.h
+  ../../../CommonSrc/QtSource/OfferSessionLogic.cpp
+  ../../../CommonSrc/QtSource/OfferSessionLogic.h
+  ../../../CommonSrc/QtSource/OfferSessionState.cpp
+  ../../../CommonSrc/QtSource/OfferSessionState.h
+  ../../../CommonSrc/QtSource/OfferWidget.cpp
+  ../../../CommonSrc/QtSource/OfferWidget.h
+  ../../../CommonSrc/QtSource/P2PThingFileMenu.cpp
+  ../../../CommonSrc/QtSource/P2PThingFileShare.cpp
+  ../../../CommonSrc/QtSource/P2PThingFriend.cpp
+  ../../../CommonSrc/QtSource/P2PThingMedia.cpp
+  ../../../CommonSrc/QtSource/P2PThingNotify.cpp
+  ../../../CommonSrc/QtSource/P2PThingOfferToFriend.cpp
+  ../../../CommonSrc/QtSource/P2PThingOptions.cpp
+  ../../../CommonSrc/QtSource/P2PThingScan.cpp
+  ../../../CommonSrc/QtSource/P2PThingSearch.cpp
+  ../../../CommonSrc/QtSource/P2PThingServers.cpp
+  ../../../CommonSrc/QtSource/PermissionListItem.cpp
+  ../../../CommonSrc/QtSource/PermissionListItem.h
+  ../../../CommonSrc/QtSource/PermissionWidget.cpp
+  ../../../CommonSrc/QtSource/PermissionWidget.h
+  ../../../CommonSrc/QtSource/PlayerGlWidget.cpp
+  ../../../CommonSrc/QtSource/PlayerGlWidget.h
+  ../../../CommonSrc/QtSource/PluginSettingsWidget.cpp
+  ../../../CommonSrc/QtSource/PluginSettingsWidget.h
+  ../../../CommonSrc/QtSource/PopupMenu.cpp
+  ../../../CommonSrc/QtSource/PopupMenu.h
+  ../../../CommonSrc/QtSource/PopupMenuDelegate.cpp
+  ../../../CommonSrc/QtSource/PopupMenuDelegate.h
+  ../../../CommonSrc/QtSource/RasterWindow.cpp
+  ../../../CommonSrc/QtSource/RasterWindow.h
+  ../../../CommonSrc/QtSource/RelayServiceWidget.cpp
+  ../../../CommonSrc/QtSource/RelayServiceWidget.h
+  ../../../CommonSrc/QtSource/RenderGlLogic.cpp
+  ../../../CommonSrc/QtSource/RenderGlLogic.h
+  ../../../CommonSrc/QtSource/RenderGlMatrix.cpp
+  ../../../CommonSrc/QtSource/RenderGlOffScreenSurface.cpp
+  ../../../CommonSrc/QtSource/RenderGlOffScreenSurface.h
+  ../../../CommonSrc/QtSource/RenderGlShaders.cpp
+  ../../../CommonSrc/QtSource/RenderGlShaders.h
+  ../../../CommonSrc/QtSource/RenderGlWidget.cpp
+  ../../../CommonSrc/QtSource/RenderGlWidget.h
+  ../../../CommonSrc/QtSource/RenderGlWidgetFonts.cpp
+  ../../../CommonSrc/QtSource/RenderGlWidgetRender.cpp
+  ../../../CommonSrc/QtSource/RenderGlWidgetShaderInterface.cpp
+  ../../../CommonSrc/QtSource/RenderGlWidgetTextures.cpp
+  ../../../CommonSrc/QtSource/RenderKodiThread.cpp
+  ../../../CommonSrc/QtSource/RenderKodiThread.h
+  ../../../CommonSrc/QtSource/RenderLogoShaders.cpp
+  ../../../CommonSrc/QtSource/RenderLogoShaders.h
+  ../../../CommonSrc/QtSource/RenderShaderDefsGl.cpp
+  ../../../CommonSrc/QtSource/RenderShaderDefsGles.cpp
+  ../../../CommonSrc/QtSource/RenderShaderQt.cpp
+  ../../../CommonSrc/QtSource/RenderShaderQt.h
+  ../../../CommonSrc/QtSource/SearchParamsWidget.cpp
+  ../../../CommonSrc/QtSource/SearchParamsWidget.h
+  ../../../CommonSrc/QtSource/ServiceSettingsWidget.cpp
+  ../../../CommonSrc/QtSource/ServiceSettingsWidget.h
+  ../../../CommonSrc/QtSource/SessionWidget.cpp
+  ../../../CommonSrc/QtSource/SessionWidget.h
+  ../../../CommonSrc/QtSource/SoundCtrlWidget.cpp
+  ../../../CommonSrc/QtSource/SoundCtrlWidget.h
+  ../../../CommonSrc/QtSource/SoundDefs.h
+  ../../../CommonSrc/QtSource/soundio/AudioDefs.h
+  ../../../CommonSrc/QtSource/soundio/AudioInIo.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioInIo.h
+  ../../../CommonSrc/QtSource/soundio/AudioInThread.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioInThread.h
+  ../../../CommonSrc/QtSource/soundio/AudioIoMgr.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioIoMgr.h
+  ../../../CommonSrc/QtSource/soundio/AudioMixer.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioMixer.h
+  ../../../CommonSrc/QtSource/soundio/AudioOutIo.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioOutIo.h
+  ../../../CommonSrc/QtSource/soundio/AudioOutThread.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioOutThread.h
+  ../../../CommonSrc/QtSource/soundio/AudioTestGenerator.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioTestGenerator.h
+  ../../../CommonSrc/QtSource/soundio/AudioUtils.cpp
+  ../../../CommonSrc/QtSource/soundio/AudioUtils.h
+  ../../../CommonSrc/QtSource/soundio/IAudioInterface.h
+  ../../../CommonSrc/QtSource/StoryWidget.cpp
+  ../../../CommonSrc/QtSource/StoryWidget.h
+  ../../../CommonSrc/QtSource/TextChatLogic.cpp
+  ../../../CommonSrc/QtSource/TextChatLogic.h
+  ../../../CommonSrc/QtSource/ThumbnailChooseWidget.cpp
+  ../../../CommonSrc/QtSource/ThumbnailChooseWidget.h
+  ../../../CommonSrc/QtSource/ThumbnailEditWidget.cpp
+  ../../../CommonSrc/QtSource/ThumbnailEditWidget.h
+  ../../../CommonSrc/QtSource/ThumbnailViewWidget.cpp
+  ../../../CommonSrc/QtSource/ThumbnailViewWidget.h
+  ../../../CommonSrc/QtSource/TitleBarWidget.cpp
+  ../../../CommonSrc/QtSource/TitleBarWidget.h
+  ../../../CommonSrc/QtSource/TodGameDefs.cpp
+  ../../../CommonSrc/QtSource/TodGameDefs.h
+  ../../../CommonSrc/QtSource/TodGameLogic.cpp
+  ../../../CommonSrc/QtSource/TodGameLogic.h
+  ../../../CommonSrc/QtSource/TodGameWidget.cpp
+  ../../../CommonSrc/QtSource/TodGameWidget.h
+  ../../../CommonSrc/QtSource/ToGuiActivityClient.cpp
+  ../../../CommonSrc/QtSource/ToGuiActivityClient.h
+  ../../../CommonSrc/QtSource/ToGuiActivityInterface.h
+  ../../../CommonSrc/QtSource/ToGuiFileXferClient.cpp
+  ../../../CommonSrc/QtSource/ToGuiFileXferClient.h
+  ../../../CommonSrc/QtSource/ToGuiFileXferInterface.h
+  ../../../CommonSrc/QtSource/ToGuiHardwareControlInterface.h
+  ../../../CommonSrc/QtSource/ToGuiHardwareCtrlClient.cpp
+  ../../../CommonSrc/QtSource/ToGuiHardwareCtrlClient.h
+  ../../../CommonSrc/QtSource/ToGuiOfferInterface.h
+  ../../../CommonSrc/QtSource/ToGuiThumbUpdateClient.cpp
+  ../../../CommonSrc/QtSource/ToGuiThumbUpdateClient.h
+  ../../../CommonSrc/QtSource/ToGuiThumbUpdateInterface.h
+  ../../../CommonSrc/QtSource/ToGuiUserUpdateClient.cpp
+  ../../../CommonSrc/QtSource/ToGuiUserUpdateClient.h
+  ../../../CommonSrc/QtSource/ToGuiUserUpdateInterface.h
+  ../../../CommonSrc/QtSource/UserJoinListItem.cpp
+  ../../../CommonSrc/QtSource/UserJoinListItem.h
+  ../../../CommonSrc/QtSource/UserJoinListWidget.cpp
+  ../../../CommonSrc/QtSource/UserJoinListWidget.h
+  ../../../CommonSrc/QtSource/UserListItem.cpp
+  ../../../CommonSrc/QtSource/UserListItem.h
+  ../../../CommonSrc/QtSource/UserListWidget.cpp
+  ../../../CommonSrc/QtSource/UserListWidget.h
+  ../../../CommonSrc/QtSource/UserProfile.h
+  ../../../CommonSrc/QtSource/VidWidget.cpp
+  ../../../CommonSrc/QtSource/VidWidget.h
+  ../../../CommonSrc/QtSource/VxAppDisplay.cpp
+  ../../../CommonSrc/QtSource/VxAppDisplay.h
+  ../../../CommonSrc/QtSource/VxAppStyle.cpp
+  ../../../CommonSrc/QtSource/VxAppStyle.h
+  ../../../CommonSrc/QtSource/VxAppStyle2.cpp
+  ../../../CommonSrc/QtSource/VxAppStyle2.h
+  ../../../CommonSrc/QtSource/VxAppTheme.cpp
+  ../../../CommonSrc/QtSource/VxAppTheme.h
+  ../../../CommonSrc/QtSource/VxAspectFrame.cpp
+  ../../../CommonSrc/QtSource/VxAspectFrame.h
+  ../../../CommonSrc/QtSource/VxAvatarImage.cpp
+  ../../../CommonSrc/QtSource/VxAvatarImage.h
+  ../../../CommonSrc/QtSource/VxComboBox.cpp
+  ../../../CommonSrc/QtSource/VxComboBox.h
+  ../../../CommonSrc/QtSource/VxComboBoxFileFilter.cpp
+  ../../../CommonSrc/QtSource/VxComboBoxFileFilter.h
+  ../../../CommonSrc/QtSource/VxContextMenu.cpp
+  ../../../CommonSrc/QtSource/VxContextMenu.h
+  ../../../CommonSrc/QtSource/VxFlatButton.cpp
+  ../../../CommonSrc/QtSource/VxFlatButton.h
+  ../../../CommonSrc/QtSource/VxFrame.cpp
+  ../../../CommonSrc/QtSource/VxFrame.h
+  ../../../CommonSrc/QtSource/VxLabel.cpp
+  ../../../CommonSrc/QtSource/VxLabel.h
+  ../../../CommonSrc/QtSource/VxMenu.cpp
+  ../../../CommonSrc/QtSource/VxMenu.h
+  ../../../CommonSrc/QtSource/VxMenuButton.cpp
+  ../../../CommonSrc/QtSource/VxMenuButton.h
+  ../../../CommonSrc/QtSource/VxMenuButtonBottom.cpp
+  ../../../CommonSrc/QtSource/VxMenuButtonBottom.h
+  ../../../CommonSrc/QtSource/VxMenuButtonTop.cpp
+  ../../../CommonSrc/QtSource/VxMenuButtonTop.h
+  ../../../CommonSrc/QtSource/VxMyFileInfo.cpp
+  ../../../CommonSrc/QtSource/VxMyFileInfo.h
+  ../../../CommonSrc/QtSource/VxPlainTextEdit.cpp
+  ../../../CommonSrc/QtSource/VxPlainTextEdit.h
+  ../../../CommonSrc/QtSource/VxProgressBar.cpp
+  ../../../CommonSrc/QtSource/VxProgressBar.h
+  ../../../CommonSrc/QtSource/VxPushButton.cpp
+  ../../../CommonSrc/QtSource/VxPushButton.h
+  ../../../CommonSrc/QtSource/VxResourceToRealFile.cpp
+  ../../../CommonSrc/QtSource/VxResourceToRealFile.h
+  ../../../CommonSrc/QtSource/VxScrollArea.cpp
+  ../../../CommonSrc/QtSource/VxScrollArea.h
+  ../../../CommonSrc/QtSource/VxShredderButton.cpp
+  ../../../CommonSrc/QtSource/VxShredderButton.h
+  ../../../CommonSrc/QtSource/VxSndInstance.cpp
+  ../../../CommonSrc/QtSource/VxSndInstance.h
+  ../../../CommonSrc/QtSource/VxSpinProgress.cpp
+  ../../../CommonSrc/QtSource/VxSpinProgress.h
+  ../../../CommonSrc/QtSource/VxTagLabel.cpp
+  ../../../CommonSrc/QtSource/VxTagLabel.h
+  ../../../CommonSrc/QtSource/VxTilePositioner.cpp
+  ../../../CommonSrc/QtSource/VxTilePositioner.h
+  ../../../CommonSrc/QtSource/VxWidgetBase.cpp
+  ../../../CommonSrc/QtSource/VxWidgetBase.h
+  ../../../CommonSrc/Resources/bars_1_internet.png
+  ../../../CommonSrc/Resources/bars_2_test_avail.png
+  ../../../CommonSrc/Resources/bars_3_net_avail.png
+  ../../../CommonSrc/Resources/bars_4_relay_search.png
+  ../../../CommonSrc/Resources/bars_5_onlie_with_relay.png
+  ../../../CommonSrc/Resources/bars_6_direct.png
+  ../../../CommonSrc/Resources/bars_7_hosted_direct.png
+  ../../../CommonSrc/Resources/bars_7_hosted_with_relay.png
+  ../../../CommonSrc/Resources/msg_state_fail_resend.png
   ../../AppSource/main.cpp
   GeneratedFiles/ui_AcceptCancelWidget.h
   GeneratedFiles/ui_ActivityAddRemoveLibraryFiles.h
@@ -782,7 +782,7 @@ set_property(TARGET _NoLimitConnectApp
     F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\;
     F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\PlayerCommon;
     F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\libgotvptop;
-    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\GoTvCommon\QtSource;
+    F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\CommonSrc\QtSource;
     F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\DependLibs;
     F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc;
     F:\NoLimitConnectWindows\AppsSrc\GoTvPtoP\build\VS2017\..\..\..\..\kodi_src\xbmc\xbmc\cores\AudioEngine\;
@@ -833,745 +833,745 @@ if (MSVC)
   set_property(SOURCE ../../../../app_precompiled_hdr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yc"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AccountDb.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AccountDb.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AccountMgr.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AccountMgr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/CamLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/CamLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/MessengerPage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/MessengerPage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/DialogConfirmRemoveMessage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileActionBarWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileActionBarWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileActionMenu.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileActionMenu.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileItemInfo.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileItemInfo.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileItemWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileItemWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileListReplySession.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileListReplySession.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileShareItemWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileShareItemWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FriendList.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FriendList.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InstMsgWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InstMsgWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/MultiSessionState.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/MultiSessionState.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingFileMenu.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingFileMenu.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingFileShare.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingFileShare.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingFriend.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingFriend.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingNotify.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingNotify.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingOfferToFriend.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingOfferToFriend.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingOptions.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingOptions.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingScan.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingScan.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingSearch.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingSearch.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingServers.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingServers.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/P2PThingMedia.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/P2PThingMedia.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/PopupMenu.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/PopupMenu.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/PopupMenuDelegate.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/PopupMenuDelegate.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RasterWindow.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RasterWindow.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/TextChatLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/TextChatLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ChatEntryWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ChatEntryWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputAllWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputAllWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputBaseWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputBaseWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputFaceWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputFaceWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputPhotoWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputPhotoWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputTextWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputTextWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputVideoWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputVideoWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InputVoiceWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InputVoiceWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityAddRemoveLibraryFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityAppSetup.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityAppSetup.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityBrowseFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityBrowseFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityChooseTestWebsiteUrl.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityCreateAccount.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityCreateAccount.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityDownloadItemMenu.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityDownloadItemMenu.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityFileSearch.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityFileSearch.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityInformation.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityInformation.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityIsPortOpenTest.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityMessageBox.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityMessageBox.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityNetworkState.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityNetworkState.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityPermissions.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityPermissions.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityScanPeopleSearch.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityScanPeopleSearch.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityScanProfiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityScanProfiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityScanStoryBoards.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityScanStoryBoards.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityScanWebCams.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityScanWebCams.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivitySessionOptions.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivitySessionOptions.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityShowHelp.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityShowHelp.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivitySoundOptions.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivitySoundOptions.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityTimedMessage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityTimedMessage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityViewAudioFile.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityViewAudioFile.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityViewLibraryFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityViewLibraryFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityViewMySharedFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityViewMySharedFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityViewVideoFile.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityViewVideoFile.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ActivityYesNoMsgBox.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ActivityYesNoMsgBox.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AssetBaseWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AssetBaseWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AssetFaceWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AssetFaceWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AssetPhotoWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AssetPhotoWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AssetTextWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AssetTextWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AssetVideoWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AssetVideoWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AssetVoiceWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AssetVoiceWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AcceptCancelWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AcceptCancelWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AvatarBar.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AvatarBar.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/BottomBarWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/BottomBarWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ImageListEntry.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ImageListEntry.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ImageListRow.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ImageListRow.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ImageListWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ImageListWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ImagePickBar.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ImagePickBar.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/InformationWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/InformationWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/NetAvailStatusWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/NetAvailStatusWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/NetworkKeyWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/NetworkKeyWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/NetworkTestWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/NetworkTestWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/PermissionListItem.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/PermissionListItem.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/PermissionWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/PermissionWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/PlayerGlWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/PlayerGlWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/PluginSettingsWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/PluginSettingsWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RelayServiceWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RelayServiceWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ServiceSettingsWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ServiceSettingsWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxAspectFrame.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxAspectFrame.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxComboBox.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxComboBox.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxContextMenu.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxContextMenu.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/IdentWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/IdentWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxAvatarImage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxAvatarImage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxFrame.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxFrame.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxMenu.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxMenu.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxMenuButton.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxMenuButton.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxMenuButtonBottom.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxMenuButtonBottom.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxMenuButtonTop.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxMenuButtonTop.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxPlainTextEdit.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxPlainTextEdit.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxPushButton.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxPushButton.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxComboBoxFileFilter.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxComboBoxFileFilter.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxFlatButton.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxFlatButton.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxLabel.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxLabel.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxMyFileInfo.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxMyFileInfo.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxSndInstance.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxSndInstance.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxResourceToRealFile.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxResourceToRealFile.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxScrollArea.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxScrollArea.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxShredderButton.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxShredderButton.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxSpinProgress.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxSpinProgress.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxTagLabel.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxTagLabel.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxTilePositioner.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxTilePositioner.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/SessionWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/SessionWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/SoundCtrlWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/SoundCtrlWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/StoryWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/StoryWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VidWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VidWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxWidgetBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxWidgetBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/TodGameDefs.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/TodGameDefs.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/TodGameLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/TodGameLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/TodGameWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/TodGameWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPeerBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPeerBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPeerChangeFriendship.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPeerChangeFriendship.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPeerTodGame.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPeerTodGame.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPeerVideoPhone.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPeerVideoPhone.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPeerViewSharedFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPeerViewSharedFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPeerVoicePhone.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPeerVoicePhone.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletAboutApp.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletAboutApp.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletApplicationInfo.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletApplicationInfo.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletChooseThumbnail.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletChooseThumbnail.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletClientAvatarImage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletClientAvatarImage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletClientBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletClientBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletClientRandomConnect.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletClientRandomConnect.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletClientShareFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletClientShareFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletClientShareWebCam.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletClientShareWebCam.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletClientStoryboard.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletClientStoryboard.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletEditAboutMe.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletEditAboutMe.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletEditAvatarImage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletEditAvatarImage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletEditStoryboard.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletEditStoryboard.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletGalleryImage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletGalleryImage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletGalleryThumb.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletGalleryThumb.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletKodi.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletKodi.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletLibrary.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletLibrary.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletLogSettings.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletLogSettings.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletLogView.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletLogView.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletMgr.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletMgr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletNetHostingPage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletNetHostingPage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletNetworkSettings.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletNetworkSettings.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPermissionList.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPermissionList.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPersonalRecorder.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPersonalRecorder.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPlayerBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPlayerBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSearchPage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSearchPage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceAboutMe.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceAboutMe.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceAvatarImage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceAvatarImage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceBase.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceBase.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceBaseSettings.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceBaseSettings.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceChatRoom.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceChatRoom.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceConnectionTest.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceConnectionTest.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceHostGroup.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceHostGroup.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceHostNetwork.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceHostNetwork.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceRandomConnect.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceRandomConnect.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceRandomConnectRelay.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceRandomConnectRelay.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceRelay.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceRelay.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceShareFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceShareFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceShareWebCam.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceShareWebCam.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletServiceStoryboard.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletServiceStoryboard.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsAboutMe.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsAboutMe.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsAvatarImage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsAvatarImage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsChatRoom.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsChatRoom.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsConnectionTest.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsConnectionTest.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsFileXfer.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsFileXfer.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsHostGroup.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsHostGroup.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsHostNetwork.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsHostNetwork.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsMessenger.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsMessenger.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsRandomConnect.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsRandomConnect.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsRandomConnectRelay.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsShareFiles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsShareFiles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsShareWebCam.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsShareWebCam.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsStoryboard.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsStoryboard.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsTruthOrDare.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsTruthOrDare.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsVideoPhone.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsVideoPhone.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSettingsVoicePhone.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletShareServicesPage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletShareServicesPage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletSnapshot.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletSnapshot.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletTheme.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletTheme.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletPlayerVideo.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletPlayerVideo.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletUserIdentity.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletUserIdentity.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletLaunchWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletLaunchWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppletLaunchPage.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppletLaunchPage.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppCommon.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppCommon.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppCommonAudio.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppCommonAudio.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppCommonEvents.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppCommonEvents.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppCommonLogin.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppCommonLogin.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppCommonRender.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppCommonRender.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppDefs.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppDefs.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppGlobals.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppGlobals.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppProfile.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppProfile.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppSettings.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppSettings.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/AppSetup.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/AppSetup.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/EventsQtToGoTv.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/EventsQtToGoTv.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/GuiParams.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/GuiParams.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxAppStyle.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxAppStyle.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxAppTheme.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxAppTheme.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/GuiHelpers.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/GuiHelpers.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/HomeWindow.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/HomeWindow.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/VxAppDisplay.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/VxAppDisplay.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioInIo.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioInIo.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioInThread.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioInThread.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioIoMgr.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioIoMgr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioMixer.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioMixer.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioOutIo.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioOutIo.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioOutThread.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioOutThread.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioTestGenerator.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioTestGenerator.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/soundio/AudioUtils.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/soundio/AudioUtils.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/MySndMgr.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/MySndMgr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/NetClientGuiLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/NetClientGuiLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/NetHostGuiLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/NetHostGuiLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/GuiFileActionSession.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/GuiFileActionSession.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/GuiFileXferSession.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/GuiFileXferSession.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/GuiOfferSession.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/GuiOfferSession.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FileXferWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FileXferWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FriendListDelegate.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FriendListDelegate.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/FriendListWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/FriendListWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/HistoryEntryWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/HistoryEntryWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/HistoryListWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/HistoryListWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/LogMgr.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/LogMgr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/LogWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/LogWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/OfferBarWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/OfferBarWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/OfferSessionLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/OfferSessionLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/OfferSessionState.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/OfferSessionState.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/OfferMgr.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/OfferMgr.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/OfferWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/OfferWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/MyIcons.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/MyIcons.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/TitleBarWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/TitleBarWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ThumbnailChooseWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ThumbnailChooseWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ThumbnailEditWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ThumbnailEditWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/ThumbnailViewWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/ThumbnailViewWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlLogic.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlLogic.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlMatrix.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlMatrix.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlOffScreenSurface.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlOffScreenSurface.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlShaders.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlShaders.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlWidget.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlWidget.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlWidgetFonts.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlWidgetFonts.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlWidgetRender.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlWidgetRender.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlWidgetShaderInterface.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderGlWidgetTextures.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderGlWidgetTextures.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderKodiThread.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderKodiThread.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderLogoShaders.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderLogoShaders.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderShaderDefsGl.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderShaderDefsGl.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderShaderDefsGles.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderShaderDefsGles.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
-  set_property(SOURCE ../../../GoTvCommon/QtSource/RenderShaderQt.cpp
+  set_property(SOURCE ../../../CommonSrc/QtSource/RenderShaderQt.cpp
     APPEND_STRING PROPERTY COMPILE_FLAGS
     "$<$<CONFIG:Debug>:/Yu"app_precompiled_hdr.h" /Fp"$(ProjectDir)/../../../app_precompiled_hdr.pch">")
   set_property(SOURCE ../../AppSource/main.cpp
