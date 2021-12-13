@@ -2658,7 +2658,6 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\CommonSrc\QtSource\GoTvP2P.aps" />
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri">
       <Filter>QtBuild</Filter>
     </None>

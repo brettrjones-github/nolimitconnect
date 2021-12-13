@@ -1,9 +1,9 @@
 APP_NAME GoTvViewer
-APP_PACKAGE com.gotvp2p.gotvviewer
-COMPANY_NAME GoTvP2P
-WEBSITE http://www.gotvp2p.net/
+APP_PACKAGE com.nolimitconnect.gotvviewer
+COMPANY_NAME NoLimitConnect
+WEBSITE http://www.nolimitconnect.net/
 APP_EMAIL brett.j@myself.com
-APP_STICKYURL http://www.gotvp2p.net/
+APP_STICKYURL http://www.nolimitconnect.net/
 VERSION_MAJOR 1
 VERSION_MINOR 7
 VERSION_TAG 00

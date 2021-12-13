@@ -87,7 +87,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\;..\..\..\..\;..\..\OpusTools\include;..\..\include;..\..\opus\win32;..\..\opus\celt;..\..\opus\silk;..\..\opus\silk\float;..\..\..\;..\..\..\..\GuiInterface;..\..\..\..\GoTvCore\GoTvP2P;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\..\..\;..\..\OpusTools\include;..\..\include;..\..\opus\win32;..\..\opus\celt;..\..\opus\silk;..\..\opus\silk\float;..\..\..\;..\..\..\..\GuiInterface;..\..\..\..\GoTvCore\NoLimitConnect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;OUTSIDE_SPEEX;__LITTLE_ENDIAN__;HAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -108,7 +108,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\;..\..\..\..\;..\..\OpusTools\include;..\..\include;..\..\opus\win32;..\..\opus\celt;..\..\opus\silk;..\..\opus\silk\float;..\..\..\;..\..\..\..\GuiInterface;..\..\..\..\GoTvCore\GoTvP2P;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\..\..\;..\..\OpusTools\include;..\..\include;..\..\opus\win32;..\..\opus\celt;..\..\opus\silk;..\..\opus\silk\float;..\..\..\;..\..\..\..\GuiInterface;..\..\..\..\GoTvCore\NoLimitConnect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;OUTSIDE_SPEEX;__LITTLE_ENDIAN__;HAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -149,7 +149,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\;..\..\..\..\;..\..\OpusTools\include;..\..\include;..\..\opus\win32;..\..\opus\celt;..\..\opus\silk;..\..\opus\silk\float;..\..\..\;..\..\..\..\GuiInterface;..\..\..\..\GoTvCore\GoTvP2P;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\..\..\;..\..\OpusTools\include;..\..\include;..\..\opus\win32;..\..\opus\celt;..\..\opus\silk;..\..\opus\silk\float;..\..\..\;..\..\..\..\GuiInterface;..\..\..\..\GoTvCore\NoLimitConnect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;OUTSIDE_SPEEX;__LITTLE_ENDIAN__;HAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>false</FunctionLevelLinking>

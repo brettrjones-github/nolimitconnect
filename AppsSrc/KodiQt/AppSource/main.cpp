@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 
 	//QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
 	//QGuiApplication app( argc, argv );
-	//QGuiApplication::setApplicationDisplayName( QObject::tr("GoTvP2P Player") );
+	//QGuiApplication::setApplicationDisplayName( QObject::tr("NoLimitConnect Player") );
 	//QCoreApplication::setOrganizationDomain( VxGetCompanyDomain() );
 	// NOTE OrganizationName and ApplicationName become part of data storage location path
 	//QCoreApplication::setOrganizationName( "" );

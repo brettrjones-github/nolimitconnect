@@ -1,5 +1,5 @@
 === GoTvPtoP Build Prerequisites ====
-External Prerequisites to install GoTvP2P or KodiP2P
+External Prerequisites to install NoLimitConnect or KodiP2P
 
 === For reference here is my install paths. ====
 should not be required but if is then Python - C:/Python27
@@ -46,7 +46,7 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin
 
 
 
-=== GoTvPtoP Android GoTvP2P custom build ====
+=== GoTvPtoP Android NoLimitConnect custom build ====
 After many frustrating days attempting to work within qt android frame work I did the following
 
 1.) Install AndroidStudio to F:/android/AndroidStudio

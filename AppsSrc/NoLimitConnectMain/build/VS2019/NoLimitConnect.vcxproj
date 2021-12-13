@@ -998,7 +998,6 @@
     <None Include="..\..\..\..\bin-Android\gradlew" />
     <None Include="..\..\..\..\bin-Android\gradlew.bat" />
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
-    <None Include="..\..\..\CommonSrc\QtSource\GoTvP2P.aps" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.rc" />

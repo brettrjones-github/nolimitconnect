@@ -370,8 +370,8 @@ add_executable(_NoLimitConnectApp
   ../../../CommonSrc/QtSource/FriendListEntryWidget.h
   ../../../CommonSrc/QtSource/FriendListWidget.cpp
   ../../../CommonSrc/QtSource/FriendListWidget.h
-  ../../../CommonSrc/QtSource/GoTvP2P.ico
-  ../../../CommonSrc/QtSource/GoTvP2P.rc
+  ../../../CommonSrc/QtSource/NoLimitConnect.ico
+  ../../../CommonSrc/QtSource/NoLimitConnect.rc
   ../../../CommonSrc/QtSource/GuiConnectMgr.cpp
   ../../../CommonSrc/QtSource/GuiConnectMgr.h
   ../../../CommonSrc/QtSource/GuiFileActionSession.cpp

@@ -980,7 +980,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
-    <None Include="..\..\..\CommonSrc\QtSource\GoTvP2P.aps" />
+    <None Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.aps" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.rc" />

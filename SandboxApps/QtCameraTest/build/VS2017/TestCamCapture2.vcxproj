@@ -190,11 +190,11 @@
     </CustomBuild>
     <ClInclude Include="..\..\QtSource\CoreLib\VxUrl.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxValuePair.h" />
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaClient.h" />
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.h" />
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawAudio.h" />
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawVideo.h" />
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\MediaClient.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\MediaProcessor.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\RawAudio.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\RawVideo.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\P2PEngine\P2PEngine.h" />
     <ClInclude Include="..\..\QtSource\GuiInterface\IDefs.h" />
     <ClInclude Include="..\..\QtSource\GuiInterface\IFromGui.h" />
     <ClInclude Include="..\..\QtSource\GuiInterface\IGoTv.h" />
@@ -373,8 +373,8 @@
     <ClCompile Include="..\..\QtSource\CoreLib\VxTimeUtil.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxUrl.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxValuePair.cpp" />
-    <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.cpp" />
-    <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.cpp" />
+    <ClCompile Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\MediaProcessor.cpp" />
+    <ClCompile Include="..\..\QtSource\GoTvCore\NoLimitConnect\P2PEngine\P2PEngine.cpp" />
     <ClCompile Include="..\..\QtSource\GuiInterface\IGoTv.cpp" />
     <ClCompile Include="..\..\QtSource\GuiParams.cpp" />
     <ClCompile Include="..\..\QtSource\ImageSettings.cpp" />

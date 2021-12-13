@@ -1,5 +1,5 @@
 
-//=== GoTvP2P announcement and group listing propagation ===//
+//=== NoLimitConnect announcement and group listing propagation ===//
 service definitions
 tier4 - end user service
 tier3 - group hosting service

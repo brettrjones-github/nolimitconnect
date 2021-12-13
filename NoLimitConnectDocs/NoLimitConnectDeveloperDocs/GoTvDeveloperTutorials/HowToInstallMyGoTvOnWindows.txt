@@ -1,5 +1,5 @@
 Install Instructions:
 1.) Download the zip archive to your prefered location on your device
 2.) Unzip the archive.
-3.) Run GoTv P2P by double clicking the GoTvP2P.exe
-4.) If you get a message about missing dlls then install vcredist_x86.exe from the same folder as GoTvP2P.exe.
+3.) Run GoTv P2P by double clicking the NoLimitConnect.exe
+4.) If you get a message about missing dlls then install vcredist_x86.exe from the same folder as NoLimitConnect.exe.

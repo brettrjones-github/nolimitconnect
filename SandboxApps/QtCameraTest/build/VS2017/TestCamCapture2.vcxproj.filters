@@ -26,10 +26,10 @@
     <Filter Include="QtSource\GoTvCore">
       <UniqueIdentifier>{b990029f-54c5-4f5e-b58e-3e85133310f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="QtSource\GoTvCore\GoTvP2P">
+    <Filter Include="QtSource\GoTvCore\NoLimitConnect">
       <UniqueIdentifier>{61e33c82-41cb-427b-bca1-d71c2f125f8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="QtSource\GoTvCore\GoTvP2P\P2PEngine">
+    <Filter Include="QtSource\GoTvCore\NoLimitConnect\P2PEngine">
       <UniqueIdentifier>{086fcb36-709e-44c2-9e0d-f0c031780293}</UniqueIdentifier>
     </Filter>
     <Filter Include="QtSource\MediaProcessor">
@@ -161,8 +161,8 @@
     <ClInclude Include="..\..\QtSource\GuiInterface\IFromGui.h">
       <Filter>QtSource\GuiInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.h">
-      <Filter>QtSource\GoTvCore\GoTvP2P\P2PEngine</Filter>
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\P2PEngine\P2PEngine.h">
+      <Filter>QtSource\GoTvCore\NoLimitConnect\P2PEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSource\MyIcons.h">
       <Filter>QtSource</Filter>
@@ -179,16 +179,16 @@
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaClient.h">
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\MediaClient.h">
       <Filter>QtSource\MediaProcessor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.h">
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\MediaProcessor.h">
       <Filter>QtSource\MediaProcessor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawAudio.h">
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\RawAudio.h">
       <Filter>QtSource\MediaProcessor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawVideo.h">
+    <ClInclude Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\RawVideo.h">
       <Filter>QtSource\MediaProcessor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\QtSource\CoreLib\VxMutex.h">
@@ -664,8 +664,8 @@
     <ClCompile Include="..\..\QtSource\AppSettings.cpp">
       <Filter>QtSource</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.cpp">
-      <Filter>QtSource\GoTvCore\GoTvP2P\P2PEngine</Filter>
+    <ClCompile Include="..\..\QtSource\GoTvCore\NoLimitConnect\P2PEngine\P2PEngine.cpp">
+      <Filter>QtSource\GoTvCore\NoLimitConnect\P2PEngine</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_app_resources.cpp">
       <Filter>Generated Files</Filter>
@@ -700,7 +700,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CamLogic.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.cpp">
+    <ClCompile Include="..\..\QtSource\GoTvCore\NoLimitConnect\MediaProcessor\MediaProcessor.cpp">
       <Filter>QtSource\MediaProcessor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\QtSource\CoreLib\VxMutex.cpp">

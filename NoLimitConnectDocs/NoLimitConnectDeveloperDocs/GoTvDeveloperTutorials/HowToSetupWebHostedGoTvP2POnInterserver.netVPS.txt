@@ -1,4 +1,4 @@
-How To Setup Web Hosted GoTvP2P On interserver.net VPS
+How To Setup Web Hosted NoLimitConnect On interserver.net VPS
 
 Required applications.
 1. Putty from http://http://www.putty.org/

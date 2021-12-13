@@ -21,9 +21,9 @@
 #if BUILD_GOTV_APP
 # define HAVE_QT_GUI            1 // define if have qt application interface and rendering
 
-# define PROGRAM_NAME			"GoTvP2P"
-# define PACKAGE_STRING			"GoTvP2P 1.0"	
-# define PACKAGE_URL		    "http://www.gotvp2p.net"
+# define PROGRAM_NAME			"NoLimitConnect"
+# define PACKAGE_STRING			"NoLimitConnect 1.0"	
+# define PACKAGE_URL		    "http://www.nolimitconnect.net"
 #else
 # define PROGRAM_NAME			"KodiP2P"
 # define PACKAGE_STRING			"KodiP2P 1.0"	

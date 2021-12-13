@@ -315,7 +315,7 @@ set_property(TARGET MediaToolsLib
     ..\..\opus\silk\float;
     ..\..\..\;
     ..\..\..\..\GuiInterface;
-    ..\..\..\..\GoTvCore\GoTvP2P>
+    ..\..\..\..\GoTvCore\NoLimitConnect>
 )
 
 # Preprocessor definitions

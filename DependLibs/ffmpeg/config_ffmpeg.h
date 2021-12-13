@@ -3,7 +3,7 @@
 
 #include <GoTvDependLibrariesConfig.h>
 #define FFMPEG_LICENSE				"GPL version 2 or later"
-#define FFMPEG_CONFIGURATION		"ffmpeg_built_for_GoTvP2P"
+#define FFMPEG_CONFIGURATION		"ffmpeg_built_for_NoLimitConnect"
 #define FFMPEG_CONFIG_H				1 // some code relies on this being defined to detect if config has been included ( template compile )
 
 #define av_restrict GOTV_RESTRICT

@@ -24,8 +24,8 @@
 
 # define HAVE_QT_GUI            1 // define if have qt application interface and rendering
 
-# define PROGRAM_NAME			"GoTvP2P"
-# define PACKAGE_STRING			"GoTvP2P 1.0"	
+# define PROGRAM_NAME			"NoLimitConnect"
+# define PACKAGE_STRING			"NoLimitConnect 1.0"	
 # define PACKAGE_URL		    "http://www.nolimitconnect.com"
 # define BUILD_KODI_MAIN        1
 

@@ -2707,7 +2707,7 @@
     <None Include="..\..\..\CommonSrc\Resources\call-list.svg">
       <Filter>CommonSrc\Resource Files</Filter>
     </None>
-    <None Include="..\..\..\CommonSrc\QtSource\GoTvP2P.aps">
+    <None Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.aps">
       <Filter>CommonSrc\Source Files\Applets</Filter>
     </None>
   </ItemGroup>
@@ -3194,7 +3194,7 @@
     <Image Include="..\..\..\CommonSrc\Resources\msg_state_fail_resend.png">
       <Filter>CommonSrc\Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\CommonSrc\QtSource\GoTvP2P.ico" />
+    <Image Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.ico" />
     <Image Include="..\..\..\CommonSrc\Resources\bars_1_internet.png">
       <Filter>CommonSrc\Resource Files</Filter>
     </Image>
@@ -3221,7 +3221,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\CommonSrc\QtSource\GoTvP2P.rc" />
+    <ResourceCompile Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.rc" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\CommonSrc\Resources\CreditsArt.txt">

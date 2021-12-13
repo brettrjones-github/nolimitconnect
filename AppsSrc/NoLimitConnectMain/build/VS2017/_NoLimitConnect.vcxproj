@@ -1509,7 +1509,7 @@
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
     <None Include="..\..\..\..\GoTvPtoPAppLib.pro" />
     <None Include="..\..\..\..\GoTvPtoP_App.pro" />
-    <None Include="..\..\..\CommonSrc\QtSource\GoTvP2P.aps" />
+    <None Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.aps" />
     <None Include="..\..\..\CommonSrc\Resources\aligh-left.svg" />
     <None Include="..\..\..\CommonSrc\Resources\align-center.svg" />
     <None Include="..\..\..\CommonSrc\Resources\align-left.svg" />
@@ -2550,7 +2550,7 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\CommonSrc\QtSource\GoTvP2P.ico" />
+    <Image Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.ico" />
     <Image Include="..\..\..\CommonSrc\Resources\bars_1_internet.png" />
     <Image Include="..\..\..\CommonSrc\Resources\bars_2_test_avail.png" />
     <Image Include="..\..\..\CommonSrc\Resources\bars_3_net_avail.png" />
@@ -2562,7 +2562,7 @@
     <Image Include="..\..\..\CommonSrc\Resources\msg_state_fail_resend.png" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\CommonSrc\QtSource\GoTvP2P.rc" />
+    <ResourceCompile Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.rc" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\CommonSrc\Resources\CreditsArt.txt" />
