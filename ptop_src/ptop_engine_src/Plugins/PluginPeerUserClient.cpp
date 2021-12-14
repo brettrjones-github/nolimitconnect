@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginClientPeerUser.h"
+#include "PluginPeerUserClient.h"
 #include "PluginMgr.h"
 #include "P2PSession.h"
 #include "RxSession.h"
@@ -26,67 +26,67 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginClientPeerUser::PluginClientPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginPeerUserClient::PluginPeerUserClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PluginBaseHostClient( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeClientPeerUser );
 }
 
 //============================================================================
-void PluginClientPeerUser::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginPeerUserClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
     std::string url = ptopUrl ? ptopUrl : "";
     m_HostClientMgr.fromGuiAnnounceHost( hostType, sessionId, url );
 }
 
 //============================================================================
-void PluginClientPeerUser::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginPeerUserClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
 {
     std::string url = ptopUrl ? ptopUrl : "";
     m_HostClientMgr.fromGuiJoinHost( hostType, sessionId, url );
 }
 
 //============================================================================
-void PluginClientPeerUser::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
+void PluginPeerUserClient::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
     m_HostClientMgr.fromGuiSearchHost( hostType, searchParams, enable );
 }
 
 //============================================================================
-void PluginClientPeerUser::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPeerUserClient::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginClientPeerUser got join request" );
+    LogMsg( LOG_DEBUG, "PluginPeerUserClient got join request" );
 }
 
 //============================================================================
-void PluginClientPeerUser::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPeerUserClient::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginClientPeerUser got join reply" );
+    LogMsg( LOG_DEBUG, "PluginPeerUserClient got join reply" );
     m_HostClientMgr.onPktHostJoinReply( sktBase, pktHdr,  netIdent );
 }
 
 //============================================================================
-void PluginClientPeerUser::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPeerUserClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginClientPeerUser got search reply" );
+    LogMsg( LOG_DEBUG, "PluginPeerUserClient got search reply" );
     m_HostClientMgr.onPktHostSearchReply( sktBase, pktHdr,  netIdent );
 }
 
 //============================================================================
-void PluginClientPeerUser::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPeerUserClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginClientPeerUser got plugin setting reply" );
+    LogMsg( LOG_DEBUG, "PluginPeerUserClient got plugin setting reply" );
     m_HostClientMgr.onPktPluginSettingReply( sktBase, pktHdr,  netIdent );
 }
 
 //============================================================================
-void PluginClientPeerUser::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPeerUserClient::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginClientPeerUser got join offer request" );
+    LogMsg( LOG_DEBUG, "PluginPeerUserClient got join offer request" );
 }
 
 //============================================================================
-void PluginClientPeerUser::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginPeerUserClient::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginClientPeerUser got join offer reply" );
+    LogMsg( LOG_DEBUG, "PluginPeerUserClient got join offer reply" );
 }

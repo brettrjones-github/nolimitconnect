@@ -33,6 +33,9 @@ public:
     virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
+    virtual bool				fromGuiRequestPluginThumb       ( VxNetIdent* netIdent, VxGUID& thumbId ) override;
+    virtual bool                ptopEngineRequestPluginThumb    ( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) override;
+
 protected:
     virtual void				onContactWentOffline            ( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
     virtual void				onConnectionLost                ( VxSktBase * sktBase ) override;

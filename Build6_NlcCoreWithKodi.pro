@@ -9,7 +9,7 @@ CONFIG += no_docs_target
 
 
 #SUBDIRS += $$PWD/libcrossguid.pro
-#SUBDIRS += $$PWD/GoTvPtoP_App.pro
+#SUBDIRS += $$PWD/NoLimit_App.pro
 
 SUBDIRS += $$PWD/libkodi.pro
 SUBDIRS += $$PWD/libptopengine.pro

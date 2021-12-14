@@ -10,8 +10,6 @@ Build either Release or Debug x64
 NOTE: libkazza has a build issue. If you get error about linking asm object file 
 	then rebuild it from the right click project menu
 	
-GoTvPtoPAndCore.sln - a cut down subset of GoTvAll.sln to most likely to change projects 
-	This solution can be used after GoTvAll.sln is built to cut down on rebuild time
 
 
 

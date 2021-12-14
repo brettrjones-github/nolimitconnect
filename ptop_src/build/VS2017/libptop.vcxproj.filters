@@ -868,10 +868,10 @@
     <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginBasePktHandlers.cpp">
       <Filter>ptop_engine_src\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginClientPeerUser.cpp">
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginPeerUserClient.cpp">
       <Filter>ptop_engine_src\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginHostPeerUser.cpp">
+    <ClCompile Include="..\..\ptop_engine_src\\Plugins\PluginPeerUserHost.cpp">
       <Filter>ptop_engine_src\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\\UserOnlineMgr\UserOnlineMgr.cpp">
@@ -1894,10 +1894,10 @@
     <ClInclude Include="..\..\ptop_engine_src\\UserJoinMgr\UserJoinMgr.h">
       <Filter>ptop_engine_src\UserJoinMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginClientPeerUser.h">
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginPeerUserClient.h">
       <Filter>ptop_engine_src\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginHostPeerUser.h">
+    <ClInclude Include="..\..\ptop_engine_src\\Plugins\PluginPeerUserHost.h">
       <Filter>ptop_engine_src\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\\UserOnlineMgr\UserOnlineMgr.h">

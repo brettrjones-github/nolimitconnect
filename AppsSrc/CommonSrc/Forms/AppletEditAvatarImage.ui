@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
+    <width>290</width>
     <height>703</height>
    </rect>
   </property>
@@ -35,7 +35,7 @@
      <property name="title">
       <string>Edit My Avatar Image</string>
      </property>
-     <layout class="QVBoxLayout" name="DialogItemsGroupBox_3">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
        <number>2</number>
       </property>
@@ -62,11 +62,22 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="m_ApplyAboutMeButton">
-        <property name="text">
-         <string>Apply Avatar Image Changes</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="m_ApplyAvatarButton">
+          <property name="text">
+           <string>Apply Avatar Image</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_RemoveAvatarButton">
+          <property name="text">
+           <string>Remove Avatar Image</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="m_PictureOfMeLabel">

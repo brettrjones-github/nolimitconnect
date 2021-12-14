@@ -10,7 +10,7 @@ CONFIG += ordered
 
 #SUBDIRS += $$PWD/GoTvOpenSslLib.pro
 
-SUBDIRS += $$PWD/GoTvPtoP_AppWithKodi.pro
+SUBDIRS += $$PWD/NoLimit_AppWithKodi.pro
 
 
 

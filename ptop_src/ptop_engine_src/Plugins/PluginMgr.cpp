@@ -23,10 +23,10 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginInvalid.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMessenger.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceAboutMe.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginClientPeerUser.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginHostPeerUser.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h>
@@ -113,11 +113,11 @@ void PluginMgr::pluginMgrStartup( void )
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create client peer user plugin" );
-    poPlugin = new PluginClientPeerUser( m_Engine, *this, &this->m_PktAnn, ePluginTypeClientPeerUser );
+    poPlugin = new PluginPeerUserClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeClientPeerUser );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host peer user plugin" );
-    poPlugin = new PluginHostPeerUser( m_Engine, *this, &this->m_PktAnn, ePluginTypeHostPeerUser );
+    poPlugin = new PluginPeerUserHost( m_Engine, *this, &this->m_PktAnn, ePluginTypeHostPeerUser );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create connection test client plugin" );

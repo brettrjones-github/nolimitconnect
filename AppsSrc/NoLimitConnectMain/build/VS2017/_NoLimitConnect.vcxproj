@@ -1506,9 +1506,9 @@
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\PlayerGlWidget.ui">
     </QtUic>
-    <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
-    <None Include="..\..\..\..\GoTvPtoPAppLib.pro" />
-    <None Include="..\..\..\..\GoTvPtoP_App.pro" />
+    <None Include="..\..\..\..\NoLimitAppLib.pri" />
+    <None Include="..\..\..\..\NoLimitAppLib.pro" />
+    <None Include="..\..\..\..\NoLimit_App.pro" />
     <None Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.aps" />
     <None Include="..\..\..\CommonSrc\Resources\aligh-left.svg" />
     <None Include="..\..\..\CommonSrc\Resources\align-center.svg" />

@@ -979,7 +979,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\VidWidget.ui" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
+    <None Include="..\..\..\..\NoLimitAppLib.pri" />
     <None Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.aps" />
   </ItemGroup>
   <ItemGroup>

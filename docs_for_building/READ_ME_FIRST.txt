@@ -21,7 +21,6 @@ If building with Visual Studio then
 	2.) Rebuild All
 	3.) Open $(SRC_ROOT)/build/VS2015/GoTvAll.sln
 	4.) Rebuild All
-	5.) optionally you can use GoTvPtoPAndCore.sln for build/Debug ( it contains a subset of GoTvAll.sln projects which are likely to be modified )
 	
 If building with Qt
 	2.) Open GoTvAll.pro with Qt creator

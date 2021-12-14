@@ -151,6 +151,8 @@ protected:
     virtual PktBaseListReq*			    createPktBaseListReq( void );
     virtual PktBaseListReply*			createPktBaseListReply( void );
 
+	virtual bool						isAssetRequested( AssetBaseInfo& assetInfo );
+
 	//=== vars ===//
 	bool						        m_Initialized;
 	std::map<VxGUID, AssetBaseRxSession *>	m_RxSessions;

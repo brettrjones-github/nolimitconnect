@@ -1445,12 +1445,30 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
         return false;
     }
 
+	if( isAssetRequested( assetInfo ) )
+	{
+		// already in transfer
+		return true;
+	}
+
     bool xferFailed = true;
-    if( netIdent )
-    {
-		if( sktBaseIn && sktBaseIn->isConnected() )
+
+	if( sktBaseIn && sktBaseIn->isConnected() )
+	{
+		EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBaseIn );
+		if( xferError == eXferErrorNone )
 		{
-			EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBaseIn );
+			xferFailed = false;
+		}
+	}
+	else
+	{
+		// first try to connect and send.. if that fails then que and will send when next connected
+		VxSktBase* sktBase = 0;
+		m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
+		if( sktBase )
+		{
+			EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
 			if( xferError == eXferErrorNone )
 			{
 				xferFailed = false;
@@ -1458,27 +1476,9 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 		}
 		else
 		{
-			// first try to connect and send.. if that fails then que and will send when next connected
-			VxSktBase* sktBase = 0;
-			m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
-			if( sktBase )
-			{
-				EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
-				if( xferError == eXferErrorNone )
-				{
-					xferFailed = false;
-				}
-			}
-			else
-			{
-				LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase Not connected to user" );
-			}
+			LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase Not connected to user" );
 		}
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "AssetBaseXferMgr::fromGuiRequestAssetBase NetIdent not found" );
-    }
+	}
 
     if( xferFailed )
     {
@@ -2345,4 +2345,22 @@ void AssetBaseXferMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poO
 void AssetBaseXferMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
 	checkQueForMoreAssetsToSend( false, netIdent, sktBase );
+}
+
+//============================================================================
+bool AssetBaseXferMgr::isAssetRequested( AssetBaseInfo& assetInfo )
+{
+	bool inQue = false;
+	m_AssetBaseSendQueMutex.lock();
+	for( auto &assetInQue : m_AssetBaseSendQue )
+	{
+		if( assetInQue.getAssetUniqueId() == assetInfo.getAssetUniqueId() )
+		{
+			inQue = true;
+			break;
+		}
+	}
+
+	m_AssetBaseSendQueMutex.unlock();
+	return inQue;
 }

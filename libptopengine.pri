@@ -290,7 +290,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginClientPeerUser.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupClient.h \	
@@ -300,7 +300,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h \
-	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginHostPeerUser.h \
+	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.h \
@@ -608,14 +608,14 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServerPktHandlers.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginClientPeerUser.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginGroupHost.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginHostPeerUser.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMgrSktApi.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.cpp \

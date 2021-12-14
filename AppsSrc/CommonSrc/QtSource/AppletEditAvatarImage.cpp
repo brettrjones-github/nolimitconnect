@@ -60,13 +60,13 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
         }
     }
 
-    connect( ui.m_ApplyAboutMeButton, SIGNAL( clicked() ), this, SLOT( onApplyButClick() ) );
+    connect( ui.m_ApplyAvatarButton, SIGNAL( clicked() ), this, SLOT( onApplyButClick() ) );
+    connect( ui.m_RemoveAvatarButton, SIGNAL( clicked() ), this, SLOT( onRemoveButClick() ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
 
-//============================================================================
-//! Implement the OnClickListener callback    
+//============================================================================    
 void AppletEditAvatarImage::onApplyButClick( void )
 {
     bool assetExists = ui.m_ThumbnailEditWidget->isAssetIdValid();
@@ -118,5 +118,32 @@ void AppletEditAvatarImage::onApplyButClick( void )
             QString msgText = QObject::tr( "Applied Avatar Image Changes " );
             QMessageBox::information( this, QObject::tr( "Applied Avatar Image Success" ), msgText );
         }
+    }
+}
+
+//============================================================================    
+void AppletEditAvatarImage::onRemoveButClick( void )
+{
+    QString removeConfirmmsgText = QObject::tr( "Are you sure you want to remove your avatar image? " );
+    if( QMessageBox::Yes == QMessageBox::question( this, QObject::tr( "Remove Avatar Image" ), removeConfirmmsgText ) )
+    {
+        // setup identity with null avatar image
+        VxGUID nullGuid;
+        m_MyIdent->setAvatarGuid( nullGuid, 0 );
+
+        // technically this should have resource lock but because there is no damage if read wrong by another thread during write it is ok to set directly
+        m_Engine.getMyNetIdent()->setAvatarGuid( nullGuid, 0 );
+
+        // notify others of change to identity
+        m_MyApp.updateMyIdent( m_MyIdent );
+
+        QString msgText = QObject::tr( "Remove Avatar Image Success" );
+        QMessageBox::information( this, QObject::tr( "Remove Avatar Image" ), msgText );   
+        close();
+    }
+    else
+    {
+        QString msgText = QObject::tr( "Remove Avatar Image canceled " );
+        QMessageBox::information( this, msgText, msgText );
     }
 }

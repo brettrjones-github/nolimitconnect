@@ -43,6 +43,7 @@ public:
     void                        fromGuiUserLoggedOn( void ) override;
     bool				        fromGuiThumbCreated( ThumbInfo& thumbInfo );
     bool				        fromGuiThumbUpdated( ThumbInfo& thumbInfo );
+    virtual bool			    fromGuiRequestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
     std::string				    fromGuiGetThumbFile( VxGUID& thumbId );
     virtual uint64_t			fromGuiClearCache( ECacheType cacheType );
 
@@ -69,8 +70,7 @@ public:
     virtual void				onPktThumbSendCompleteReply ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-    virtual bool                requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId, VxSktBase* sktBase = nullptr );
-    virtual bool                requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
+    virtual bool                ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
     virtual bool                requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo );
 
 protected:

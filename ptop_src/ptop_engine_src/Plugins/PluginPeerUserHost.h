@@ -20,11 +20,11 @@
 #include <PktLib/PktHostAnnounce.h>
 #include <CoreLib/VxMutex.h>
 
-class PluginHostPeerUser : public PluginBaseHostService, public IConnectRequestCallback
+class PluginPeerUserHost : public PluginBaseHostService, public IConnectRequestCallback
 {
 public:
-    PluginHostPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-    virtual ~PluginHostPeerUser() override = default;
+    PluginPeerUserHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+    virtual ~PluginPeerUserHost() override = default;
 
     virtual void				pluginStartup( void ) override;
 

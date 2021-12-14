@@ -115,7 +115,7 @@ void ThumbXferMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 }
 
 //============================================================================
-bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, VxSktBase* sktBase )
+bool ThumbXferMgr::requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId )
 {
     if( !netIdent || !thumbId.isVxGUIDValid() )
     {
@@ -124,7 +124,13 @@ bool ThumbXferMgr::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, Vx
         return false;
     }
 
+    if( !sktBase || !sktBase->isConnected() )
+    {
+        LogMsg( LOG_ERROR, "ThumbXferMgr::requestPluginThumb skt not connected" );
+        return false;
+    }
+
     ThumbInfo thumbInfo( netIdent->getMyOnlineId(), thumbId );
 
-    return fromGuiRequestAssetBase( netIdent, thumbInfo, sktBase );
+    return AssetBaseXferMgr::fromGuiRequestAssetBase( netIdent, thumbInfo, sktBase );
 }

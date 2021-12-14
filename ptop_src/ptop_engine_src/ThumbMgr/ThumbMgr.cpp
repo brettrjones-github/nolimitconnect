@@ -447,11 +447,10 @@ void ThumbMgr::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetI
 {
 }
 
-
 //============================================================================
-bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId, VxSktBase* sktBase )
+bool ThumbMgr::fromGuiRequestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
 {
-    if( !netIdent || ePluginTypeInvalid == pluginType )
+    if( !netIdent || ePluginTypeInvalid == pluginType || !thumbId.isVxGUIDValid() )
     {
         LogMsg( LOG_ERROR, "ThumbMgr::requestPluginThumb invalid param " );
         vx_assert( false );
@@ -468,7 +467,7 @@ bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType,
     PluginBase* plugin = m_Engine.getPluginMgr().getPlugin( pluginType );
     if( plugin )
     {
-        return plugin->requestPluginThumb( netIdent, thumbId, sktBase );
+        return plugin->fromGuiRequestPluginThumb( netIdent, thumbId );
     }
     else
     {
@@ -476,12 +475,10 @@ bool ThumbMgr::requestPluginThumb( VxNetIdent* netIdent, EPluginType pluginType,
         vx_assert( false );
         return false;
     }
-
-    return false;
 }
 
 //============================================================================
-bool ThumbMgr::requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
+bool ThumbMgr::ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId )
 {
     if( !netIdent || ePluginTypeInvalid == pluginType || !thumbId.isVxGUIDValid() )
     {
@@ -500,7 +497,7 @@ bool ThumbMgr::requestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPl
     PluginBase* plugin = m_Engine.getPluginMgr().getPlugin( pluginType );
     if( plugin )
     {
-        return plugin->requestPluginThumb( netIdent, thumbId, sktBase );
+        return plugin->ptopEngineRequestPluginThumb( sktBase, netIdent, thumbId );
     }
     else
     {
@@ -531,7 +528,7 @@ bool ThumbMgr::requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo )
             if( thumbId.isVxGUIDValid() && thumbTimestamp && !isThumbUpToDate( thumbId, thumbTimestamp ) )
             {
                 EPluginType pluginType = HostTypeToClientPlugin( hostType );
-                requestPluginThumb( sktBase, poInfo, pluginType, thumbId );
+                ptopEngineRequestPluginThumb( sktBase, poInfo, pluginType, thumbId );
             }
         }
     }

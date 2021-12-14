@@ -206,7 +206,7 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
             }
             else if( requestFromUserIfValid )
             {
-                m_MyApp.getEngine().getThumbMgr().requestPluginThumb( &user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeClientPeerUser, thumbId );
+                m_MyApp.getEngine().getThumbMgr().fromGuiRequestPluginThumb( &user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeClientPeerUser, thumbId );
             }
         }
     }

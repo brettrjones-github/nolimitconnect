@@ -21,17 +21,18 @@
 
 #include <PktLib/PktHostAnnounce.h>
 
-class PluginClientPeerUser : public PluginBaseHostClient
+class PluginPeerUserClient : public PluginBaseHostClient
 {
 public:
 
-    PluginClientPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
-	virtual ~PluginClientPeerUser() override = default;
+    PluginPeerUserClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	virtual ~PluginPeerUserClient() override = default;
 
     //=== hosting ===//
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl ) override;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl ) override;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) override;
+
 
 protected:
 

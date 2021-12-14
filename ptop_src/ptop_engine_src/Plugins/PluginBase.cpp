@@ -437,9 +437,3 @@ EPluginType PluginBase::getDestinationPluginOverride( EHostType hostType )
     vx_assert( false );
     return ePluginTypeInvalid;
 }
-
-//============================================================================ 
-bool PluginBase::requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, VxSktBase* sktBase )
-{
-    return getThumbXferMgr().requestPluginThumb( netIdent, thumbId, sktBase );
-}

@@ -2587,13 +2587,13 @@
     <None Include="gotvptop_en.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="..\..\..\..\GoTvPtoP_App.pro">
+    <None Include="..\..\..\..\NoLimit_App.pro">
       <Filter>QtBuild</Filter>
     </None>
-    <None Include="..\..\..\..\GoTvPtoPAppLib.pri">
+    <None Include="..\..\..\..\NoLimitAppLib.pri">
       <Filter>QtBuild</Filter>
     </None>
-    <None Include="..\..\..\..\GoTvPtoPAppLib.pro">
+    <None Include="..\..\..\..\NoLimitAppLib.pro">
       <Filter>QtBuild</Filter>
     </None>
     <None Include="..\..\..\CommonSrc\Resources\wireless-7.svg">

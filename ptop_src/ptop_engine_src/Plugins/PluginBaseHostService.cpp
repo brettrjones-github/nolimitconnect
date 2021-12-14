@@ -13,6 +13,7 @@
 //============================================================================
 
 #include "PluginBaseHostService.h"
+#include "PluginMgr.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
@@ -248,4 +249,31 @@ void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * p
 void PluginBaseHostService::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer reply" );
+}
+
+//============================================================================
+bool PluginBaseHostService::fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId )
+{
+    if( netIdent && thumbId.isVxGUIDValid() )
+    {
+        VxSktBase* sktBase = 0;
+        m_PluginMgr.pluginApiSktConnectTo( getPluginType(), netIdent, 0, &sktBase );
+        if( sktBase && sktBase->isConnected() )
+        {
+            // the netIdent from gui is not the same one as in big list
+            BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( netIdent->getMyOnlineId() );
+            if( bigListInfo )
+            {
+                return ptopEngineRequestPluginThumb( sktBase, ( VxNetIdent* )bigListInfo, thumbId );
+            }
+        }
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PluginBaseHostService::ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId )
+{
+    return m_ThumbXferMgr.requestPluginThumb( sktBase, netIdent, thumbId );
 }

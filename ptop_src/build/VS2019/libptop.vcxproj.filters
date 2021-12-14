@@ -859,12 +859,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBasePktHandlers.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginClientPeerUser.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginHostPeerUser.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineMgr.cpp">
       <Filter>Source Files\UserOnlineMgr</Filter>
     </ClCompile>
@@ -933,6 +927,12 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Membership\MembershipHostedMgr.cpp">
       <Filter>Source Files\Membership</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPeerUserClient.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPeerUserHost.cpp">
+      <Filter>Source Files\Plugins</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1930,12 +1930,6 @@
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinMgr.h">
       <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginClientPeerUser.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginHostPeerUser.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserOnlineMgr\UserOnlineMgr.h">
       <Filter>Source Files\UserOnlineMgr</Filter>
     </ClInclude>
@@ -2016,6 +2010,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Membership\MembershipHostedMgr.h">
       <Filter>Source Files\Membership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPeerUserClient.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPeerUserHost.h">
+      <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

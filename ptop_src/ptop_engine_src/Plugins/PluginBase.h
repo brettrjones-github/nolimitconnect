@@ -160,6 +160,8 @@ public:
     virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )  {};
 	virtual void				fromGuiSendAnnouncedList( EHostType hostType ) {};
 
+	virtual bool				fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }
+
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase ) = 0;
@@ -232,7 +234,7 @@ public:
 
     virtual EPluginType         getDestinationPluginOverride( EHostType hostType );
 
-	virtual bool				requestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId, VxSktBase* sktBase = nullptr );
+	virtual bool				ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }
 
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );

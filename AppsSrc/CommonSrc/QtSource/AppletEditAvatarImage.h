@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void						onApplyButClick( void );
+    void						onRemoveButClick( void );
 
 protected:
 

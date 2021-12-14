@@ -868,10 +868,10 @@
     <ClCompile Include="..\..\ptop_src\Plugins\PluginBasePktHandlers.cpp">
       <Filter>NoLimitConnect\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_src\Plugins\PluginClientPeerUser.cpp">
+    <ClCompile Include="..\..\ptop_src\Plugins\PluginPeerUserClient.cpp">
       <Filter>NoLimitConnect\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_src\Plugins\PluginHostPeerUser.cpp">
+    <ClCompile Include="..\..\ptop_src\Plugins\PluginPeerUserHost.cpp">
       <Filter>NoLimitConnect\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_src\UserOnlineMgr\UserOnlineMgr.cpp">
@@ -1894,10 +1894,10 @@
     <ClInclude Include="..\..\ptop_src\UserJoinMgr\UserJoinMgr.h">
       <Filter>NoLimitConnect\UserJoinMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_src\Plugins\PluginClientPeerUser.h">
+    <ClInclude Include="..\..\ptop_src\Plugins\PluginPeerUserClient.h">
       <Filter>NoLimitConnect\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_src\Plugins\PluginHostPeerUser.h">
+    <ClInclude Include="..\..\ptop_src\Plugins\PluginPeerUserHost.h">
       <Filter>NoLimitConnect\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_src\UserOnlineMgr\UserOnlineMgr.h">

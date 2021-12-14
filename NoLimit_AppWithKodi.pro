@@ -90,7 +90,7 @@ unix:!android{
     message( linux dirs obj $${OBJECTS_DIR} moc $${MOC_DIR} qrc $${RCC_DIR} ui $${UI_DIR} )
 }
 
-include(GoTvPtoPAppLib.pri)
+include(NoLimitAppLib.pri)
 
 # look in same directory as executable for shared libraries
 unix:{

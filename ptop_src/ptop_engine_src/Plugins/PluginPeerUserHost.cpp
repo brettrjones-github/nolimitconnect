@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginHostPeerUser.h"
+#include "PluginPeerUserHost.h"
 #include "PluginMgr.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
@@ -28,20 +28,20 @@
  
 
 //============================================================================
-PluginHostPeerUser::PluginHostPeerUser( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
+PluginPeerUserHost::PluginPeerUserHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
     : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostPeerUser );
 }
 
 //============================================================================
-void PluginHostPeerUser::pluginStartup( void )
+void PluginPeerUserHost::pluginStartup( void )
 {
     PluginBaseHostService::pluginStartup();
 }
 
 //============================================================================
-bool PluginHostPeerUser::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginPeerUserHost::setPluginSetting( PluginSetting& pluginSetting )
 {
     bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
     buildHostAnnounce( pluginSetting );
@@ -50,7 +50,7 @@ bool PluginHostPeerUser::setPluginSetting( PluginSetting& pluginSetting )
 }
 
 //============================================================================
-void PluginHostPeerUser::buildHostGroupAnnounce( PluginSetting& pluginSetting )
+void PluginPeerUserHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
 {
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
@@ -70,7 +70,7 @@ void PluginHostPeerUser::buildHostGroupAnnounce( PluginSetting& pluginSetting )
 }
 
 //============================================================================
-void PluginHostPeerUser::sendHostGroupAnnounce( void )
+void PluginPeerUserHost::sendHostGroupAnnounce( void )
 {
     if( m_Engine.isDirectConnectReady() )
     {
@@ -108,7 +108,7 @@ void PluginHostPeerUser::sendHostGroupAnnounce( void )
 }
 
 //============================================================================
-void PluginHostPeerUser::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginPeerUserHost::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostGroupAnnounce( pluginSetting );
