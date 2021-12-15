@@ -1,6 +1,7 @@
 #include <CommonHdr.h>
 #include "IGoTv.h"
 #include "ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h"
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
 #include <CoreLib/VxGlobals.h>
 
@@ -437,7 +438,12 @@ void IGoTv::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID oOnlineId,
 bool IGoTv::fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID oOnlineId, int pvUserData, VxGUID lclSessionId )
 {
     BigListInfo * bigListInfo = getPtoP().getBigListMgr().findBigListInfo( oOnlineId );
-    return getPtoP().fromGuiIsPluginInSession( ePluginType, ( VxNetIdent * )bigListInfo, pvUserData, lclSessionId );
+    if( bigListInfo )
+    {
+        return getPtoP().fromGuiIsPluginInSession( ePluginType, bigListInfo->getVxNetIdent(), pvUserData, lclSessionId );
+    }
+
+    return false;
 }
 
 //============================================================================

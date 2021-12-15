@@ -49,10 +49,10 @@ namespace
 {
 #if defined(DEBUG)
     uint32_t g_ModuleEnableLoggingFlags = ( uint32_t )(
-                    eLogMulticast
-                    | eLogConnect
-                    | eLogListen
-                    | eLogSkt
+                    // eLogMulticast
+                    // | eLogConnect
+                    // | eLogListen
+                    eLogSkt
                     | eLogPkt
                     | eLogNetworkState
                     | eLogNetworkMgr
@@ -66,7 +66,7 @@ namespace
                     | eLogHosts
                     //| eLogMediaStream
                     | eLogTcpData
-                    | eLogUdpData
+                    //| eLogUdpData
                     //| eLogAcceptConn
                     //| eLogNetworkRelay
                     | eLogNetService

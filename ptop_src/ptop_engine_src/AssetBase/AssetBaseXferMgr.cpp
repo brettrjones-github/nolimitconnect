@@ -1445,16 +1445,17 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
         return false;
     }
 
-	if( isAssetRequested( assetInfo ) )
+	if( sktBaseIn && isAssetRequested( assetInfo.getAssetUniqueId(), sktBaseIn->getConnectionId() ) )
 	{
 		// already in transfer
 		return true;
 	}
 
     bool xferFailed = true;
-
+	VxGUID sktConnectId;
 	if( sktBaseIn && sktBaseIn->isConnected() )
 	{
+		sktConnectId = sktBaseIn->getConnectionId();
 		EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBaseIn );
 		if( xferError == eXferErrorNone )
 		{
@@ -1468,6 +1469,7 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 		m_PluginMgr.pluginApiSktConnectTo( m_XferInterface.getPluginType(), netIdent, 0, &sktBase );
 		if( sktBase )
 		{
+			sktConnectId = sktBase->getConnectionId();
 			EXferError xferError = createAssetRxSessionAndReceive( false, assetInfo, netIdent, sktBase );
 			if( xferError == eXferErrorNone )
 			{
@@ -1482,16 +1484,21 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 
     if( xferFailed )
     {
-        onRequestAssetFailed( netIdent, assetInfo, false );
+        onRequestAssetFailed( netIdent, assetInfo, sktConnectId, false );
     }
+	else
+	{
+		m_AssetRequestedList.addGuidIfDoesntExist( assetInfo.getAssetUniqueId(), sktConnectId );
+	}
 
     return !xferFailed;
 
 }
 
 //============================================================================
-void AssetBaseXferMgr::onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, bool pluginIsLocked )
+void AssetBaseXferMgr::onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxGUID& sktConnectId, bool pluginIsLocked )
 {
+	m_AssetRequestedList.removeGuid( assetInfo.getAssetUniqueId(), sktConnectId );
     updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateRxFail, 0 );
 }
 
@@ -2348,19 +2355,17 @@ void AssetBaseXferMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * s
 }
 
 //============================================================================
-bool AssetBaseXferMgr::isAssetRequested( AssetBaseInfo& assetInfo )
+bool AssetBaseXferMgr::isAssetRequested( VxGUID& assetId, VxGUID& sktConnectId )
 {
-	bool inQue = false;
-	m_AssetBaseSendQueMutex.lock();
-	for( auto &assetInQue : m_AssetBaseSendQue )
-	{
-		if( assetInQue.getAssetUniqueId() == assetInfo.getAssetUniqueId() )
-		{
-			inQue = true;
-			break;
-		}
-	}
-
-	m_AssetBaseSendQueMutex.unlock();
+	static uint64_t timeoutMs = ( 1000 * 5 * 60 ); // 5 minutes
+	bool inQue = m_AssetRequestedList.doesGuidExist( assetId, sktConnectId, timeoutMs );
+	uint64_t timeNowMs = GetTimeStampMs(); 
+	m_AssetRequestedList.removeExpired( timeNowMs, timeoutMs );
 	return inQue;
+}
+
+//============================================================================
+void AssetBaseXferMgr::assetXferComplete( VxGUID& assetId, VxGUID& sktConnectId )
+{
+	m_AssetRequestedList.removeGuid( assetId, sktConnectId );
 }

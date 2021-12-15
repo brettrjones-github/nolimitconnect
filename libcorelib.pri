@@ -41,6 +41,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxFileUtil.h \
     $$PWD/DependLibs/CoreLib/VxGUID.h \
     $$PWD/DependLibs/CoreLib/VxGUIDList.h \
+    $$PWD/DependLibs/CoreLib/VxGuidPairList.h \
     $$PWD/DependLibs/CoreLib/VxGlobals.h \
     $$PWD/DependLibs/CoreLib/VxKeyDefs.h \
     $$PWD/DependLibs/CoreLib/VxLinuxOnly.h \
@@ -101,6 +102,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxFunctionsMissingInWindows.cpp \
     $$PWD/DependLibs/CoreLib/VxGUID.cpp \
     $$PWD/DependLibs/CoreLib/VxGUIDList.cpp \
+    $$PWD/DependLibs/CoreLib/VxGuidPairList.cpp \
     $$PWD/DependLibs/CoreLib/VxGlobals.cpp \
     $$PWD/DependLibs/CoreLib/VxLinuxOnly.cpp \
     $$PWD/DependLibs/CoreLib/VxMathDef.cpp \

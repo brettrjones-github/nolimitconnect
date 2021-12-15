@@ -12,26 +12,10 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include "config_corelib.h"
 
 #include "VxGUIDList.h"
 
-#include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
-
-#ifdef TARGET_OS_WINDOWS
-	#include <Rpc.h>
-#else
-	#ifdef TARGET_OS_ANDROID
-		// android has no uuid.h.. get from java
-        //#include <GuiInterface/AndroidInterface/NativeToJava.h>
-	#else
-		#include <uuid/uuid.h>
-	#endif
-#endif
-
-#include <string.h>
-#include <stdio.h>
 
 //============================================================================
 VxGUIDList::VxGUIDList()

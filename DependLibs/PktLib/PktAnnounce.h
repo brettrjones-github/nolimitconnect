@@ -107,6 +107,8 @@ public:
 
 	bool						isValidPktAnn( void );
 
+    VxNetIdent*                 getVxNetIdent( void ) { return this; } // access from this to avoid virtual table cast conversion issues with derived classes
+
 	bool						isOnlineStatusExpired( void );
 	bool						isNearbyStatusExpired( void );
 	void						updateNearbyPermissions( void );

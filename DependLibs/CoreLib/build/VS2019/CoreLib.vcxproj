@@ -298,6 +298,7 @@
     <ClInclude Include="..\..\VxGlobals.h" />
     <ClInclude Include="..\..\VxGUID.h" />
     <ClInclude Include="..\..\VxGUIDList.h" />
+    <ClInclude Include="..\..\VxGuidPairList.h" />
     <ClInclude Include="..\..\VxJava.h" />
     <ClInclude Include="..\..\VxKeyDefs.h" />
     <ClInclude Include="..\..\VxLinuxOnly.h" />
@@ -368,6 +369,7 @@
     <ClCompile Include="..\..\VxGlobals.cpp" />
     <ClCompile Include="..\..\VxGUID.cpp" />
     <ClCompile Include="..\..\VxGUIDList.cpp" />
+    <ClCompile Include="..\..\VxGuidPairList.cpp" />
     <ClCompile Include="..\..\VxJava.cpp" />
     <ClCompile Include="..\..\VxLinuxOnly.cpp" />
     <ClCompile Include="..\..\VxMathDef.cpp" />

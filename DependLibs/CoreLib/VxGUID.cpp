@@ -28,17 +28,6 @@
 # include "VxJava.h"
 #endif //TARGET_OS_ANDROID
 
-//#ifdef TARGET_OS_WINDOWS
-//	#include <Rpc.h>
-//#else
-//	//#ifdef TARGET_OS_ANDROID
-//		// android has no uuid.h.. get from java
-//        //#include <GuiInterface/AndroidInterface/NativeToJava.h>
-//	//#else
-//		#include <uuid/uuid.h>
-//	//#endif
-//#endif
-
 #include <string.h>
 #include <stdio.h>
 

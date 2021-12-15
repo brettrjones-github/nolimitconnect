@@ -16,6 +16,7 @@
 #include "PluginMgr.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
 #include <PktLib/SearchParams.h>
 
@@ -85,7 +86,7 @@ bool PluginBaseHostClient::fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGU
             BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( netIdent->getMyOnlineId() );
             if( bigListInfo )
             {
-                return ptopEngineRequestPluginThumb( sktBase, ( VxNetIdent* )bigListInfo, thumbId );
+                return ptopEngineRequestPluginThumb( sktBase, bigListInfo->getVxNetIdent(), thumbId );
             }
         }
     }

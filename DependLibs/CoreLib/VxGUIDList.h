@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones
+// Copyright (C) 2016 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
@@ -28,7 +28,7 @@ public:
     //! copy operator
     VxGUIDList& operator =( const VxGUIDList & rhs );
 
-	int							size( void )						{ return (int)m_GuidList.size(); }
+	int							size( void )							{ return (int)m_GuidList.size(); }
 
 	void						addGuid( const VxGUID& guid );
 	// returns false if guid already exists
@@ -39,7 +39,7 @@ public:
 	bool						removeGuid( VxGUID& guid );
 	void						clearList( void );
 
-	std::vector<VxGUID>&		getGuidList( void )					{ return m_GuidList; }
+	std::vector<VxGUID>&		getGuidList( void )						{ return m_GuidList; }
 	void						copyTo( VxGUIDList& destGuidList );
 
     void                        setLastActiveTime( uint64_t timeMs )    { m_LastActiveTimeMs = timeMs; }

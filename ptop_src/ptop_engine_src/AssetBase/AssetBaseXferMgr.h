@@ -14,8 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
-
 #include "AssetBaseXferDb.h"
 #include "AssetBaseInfo.h"
 #include "BaseXferInterface.h"
@@ -24,6 +22,7 @@
 
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxThread.h>
+#include <CoreLib/VxGuidPairList.h>
 
 #include <map>
 
@@ -94,7 +93,7 @@ public:
 protected:
 	virtual void				onAssetBaseReceived( AssetBaseRxSession * xferSession, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
 	virtual void				onAssetBaseSent( VxNetIdent * netIdent, VxSktBase * sktBase, AssetBaseInfo& assetInfo, EXferError error, bool pluginIsLocked );
-    virtual void				onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, bool pluginIsLocked );
+    virtual void				onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxGUID& sktConnectId, bool pluginIsLocked );
 	virtual void				onTxFailed( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				onTxSuccess( VxGUID& assetUniqueId, bool pluginIsLocked );
 	virtual void				updateAssetMgrSendState( VxGUID& assetUniqueId, EAssetSendState sendState, int param );
@@ -151,7 +150,8 @@ protected:
     virtual PktBaseListReq*			    createPktBaseListReq( void );
     virtual PktBaseListReply*			createPktBaseListReply( void );
 
-	virtual bool						isAssetRequested( AssetBaseInfo& assetInfo );
+	virtual bool						isAssetRequested( VxGUID& assetId, VxGUID& sktConnectId );
+	virtual void						assetXferComplete( VxGUID& assetId, VxGUID& sktConnectId );
 
 	//=== vars ===//
 	bool						        m_Initialized;
@@ -170,6 +170,8 @@ protected:
 	std::vector<AssetBaseInfo>	        m_AssetBaseSendQue;
 	VxThread					        m_WorkerThread;
     std::string                         m_WorkerThreadName;
+
+	VxGuidPairList						m_AssetRequestedList;
 };
 
 
