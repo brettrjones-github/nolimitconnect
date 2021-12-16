@@ -29,6 +29,7 @@ public:
 
 signals:
     void                        signalAvatarImageChanged( ThumbInfo* avatarThumb );
+    void                        signalAvatarImageRemoved( void );
 
 public slots:
     void						onApplyButClick( void );

@@ -264,11 +264,11 @@ bool AssetBaseMgr::doesAssetExist( AssetBaseInfo& assetInfo ) // check if file s
         return false;
     }
 
-    if( assetInfo.hasFileName() )
+    if( assetInfo.isFileAsset() || assetInfo.isThumbAsset() )
     {
-        if( !( assetInfo.getAssetLength() == (int64_t)VxFileUtil::getFileLen( assetInfo.getAssetName().c_str() ) ) )
+        if( !assetInfo.getAssetLength() || !( assetInfo.getAssetLength() == (int64_t)VxFileUtil::getFileLen( assetInfo.getAssetName().c_str() ) ) )
         {
-            LogMsg( LOG_WARN, "File %s no longer exists for asset %s", assetInfo.getAssetName().c_str(), assetInfo.getAssetUniqueId().toOnlineIdString().c_str() );
+            LogMsg( LOG_WARN, "File %s no longer exists for asset %s length %lld", assetInfo.getAssetName().c_str(), assetInfo.getAssetUniqueId().toOnlineIdString().c_str(), assetInfo.getAssetLength() );
             assetInfo.setIsDeleted( true );
             updateDatabase( &assetInfo );
             return false;

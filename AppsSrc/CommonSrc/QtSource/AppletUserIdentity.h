@@ -40,6 +40,7 @@ public slots:
 
     void                        slotAccountSelectionChanged( int idx );
     void                        slotAvatarImageChanged( ThumbInfo* avatarThumb );
+    void                        slotAvatarImageRemoved( void );
 
 protected:
 

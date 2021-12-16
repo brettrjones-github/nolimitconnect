@@ -82,6 +82,7 @@ protected:
     GuiThumb*                   updateThumb( ThumbInfo& thumbInfo  );
     void                        removeThumb( VxGUID& thumbId );
     GuiThumb*                   findThumb( VxGUID& thumbId );
+    GuiThumb*                   generateEmoticon( VxGUID& thumbId );
     
     AppCommon&                  m_MyApp;
     VxMutex                     m_ThumbListMutex;

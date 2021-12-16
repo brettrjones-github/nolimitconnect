@@ -171,6 +171,7 @@ protected:
 	VxThread					        m_WorkerThread;
     std::string                         m_WorkerThreadName;
 
+	VxMutex						        m_AssetRequestedListMutex;
 	VxGuidPairList						m_AssetRequestedList;
 };
 

@@ -274,6 +274,7 @@ void AppletUserIdentity::slotEditAvatarButClick( void )
     if( editAvatarImage )
     {
         connect( editAvatarImage, SIGNAL( signalAvatarImageChanged( ThumbInfo * ) ), this, SLOT( slotAvatarImageChanged( ThumbInfo * ) ) );
+        connect( editAvatarImage, SIGNAL( signalAvatarImageRemoved() ), this, SLOT( slotAvatarImageRemoved() ) );
     }
 }
 
@@ -374,4 +375,10 @@ void AppletUserIdentity::updateAvatarImage( VxGUID& thumbId, int64_t thumbModifi
 void AppletUserIdentity::slotAvatarImageChanged( ThumbInfo* avatarThumb )
 {
     updateAvatarImage( avatarThumb->getAssetUniqueId(), avatarThumb->getModifiedTime() );
+}
+
+//============================================================================
+void AppletUserIdentity::slotAvatarImageRemoved( void )
+{
+    ui.m_AvatarImageButton->clearIconOverrideImage();
 }

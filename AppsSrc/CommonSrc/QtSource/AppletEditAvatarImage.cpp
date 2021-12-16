@@ -114,11 +114,14 @@ void AppletEditAvatarImage::onApplyButClick( void )
 
             // notify others of change to identity
             m_MyApp.updateMyIdent( m_MyIdent );
+            emit signalAvatarImageChanged( &thumbInfo );
 
             QString msgText = QObject::tr( "Applied Avatar Image Changes " );
             QMessageBox::information( this, QObject::tr( "Applied Avatar Image Success" ), msgText );
         }
     }
+
+    close();
 }
 
 //============================================================================    
@@ -136,9 +139,10 @@ void AppletEditAvatarImage::onRemoveButClick( void )
 
         // notify others of change to identity
         m_MyApp.updateMyIdent( m_MyIdent );
+        emit signalAvatarImageRemoved();
 
         QString msgText = QObject::tr( "Remove Avatar Image Success" );
-        QMessageBox::information( this, QObject::tr( "Remove Avatar Image" ), msgText );   
+        QMessageBox::information( this, QObject::tr( "Remove Avatar Image" ), msgText );  
         close();
     }
     else

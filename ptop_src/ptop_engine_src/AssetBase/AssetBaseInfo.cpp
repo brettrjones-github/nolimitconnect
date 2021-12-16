@@ -245,7 +245,7 @@ bool AssetBaseInfo::isFileAsset( void )
 //============================================================================
 bool AssetBaseInfo::hasFileName( void )
 {
-	return ( 0 != m_AssetName.length() ) && isFileAsset();
+	return isFileAsset() || isThumbAsset();
 }
 
 //============================================================================

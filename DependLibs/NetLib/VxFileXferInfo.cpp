@@ -21,32 +21,8 @@
 #include <stdio.h>
 
 //============================================================================
-VxFileXferInfo::VxFileXferInfo()
-: m_hFile( 0 )
-, m_u64FileOffs( 0 )
-, m_u64FileLen( 0 )
-, m_LclSessionId()
-, m_RmtSessionId()
-, m_FileHashId()
-, m_strRemoteFileName( "" )
-, m_strLocalFileName( "" )
-, m_XferDirection( eXferDirectionRx )
-, m_PercentProgress( 0 )
-{
-}
-
-//============================================================================
 VxFileXferInfo::VxFileXferInfo( VxGUID& lclSessionId )
-: m_hFile( 0 )
-, m_u64FileOffs( 0 )
-, m_u64FileLen( 0 )
-, m_LclSessionId( lclSessionId )
-, m_RmtSessionId()
-, m_FileHashId()
-, m_strRemoteFileName( "" )
-, m_strLocalFileName( "" )
-, m_XferDirection( eXferDirectionRx )
-, m_PercentProgress( 0 )
+: m_LclSessionId( lclSessionId )
 {
 }
 
@@ -56,7 +32,7 @@ VxFileXferInfo::~VxFileXferInfo()
 	if( m_hFile )
 	{
 		fclose(m_hFile);
-		m_hFile = NULL;
+        m_hFile = nullptr;
 	}
 }
 
@@ -81,7 +57,7 @@ std::string VxFileXferInfo::getDownloadIncompleteFileName( void )
 //============================================================================
 std::string VxFileXferInfo::getDownloadCompleteFileName( void )
 {
-	std::string completedFileName = VxGetDownloadsDirectory();
+    std::string completedFileName = eAssetTypeThumbnail == getAssetType() ? VxGetAppThumbnailDirectory() : VxGetDownloadsDirectory();
 	std::string strPath;
 	std::string strAssetNameOnly;
 	RCODE rc = VxFileUtil::seperatePathAndFile(	m_strLocalFileName,			

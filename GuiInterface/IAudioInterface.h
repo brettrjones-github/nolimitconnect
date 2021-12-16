@@ -1,3 +1,4 @@
+#pragma once
 //============================================================================
 // Copyright (C) 2019 Brett R. Jones
 //
@@ -11,9 +12,9 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#pragma once
 
 #include <GuiInterface/IDefs.h>
+#include <typeinfo>
 
 class IAudioCallbacks
 {

@@ -452,6 +452,8 @@ void AssetBaseXferMgr::onPktAssetBaseGetReq( VxSktBase * sktBase, VxPktHdr * pkt
     VxFileXferInfo& xferInfo = xferSession->getXferInfo();
     xferInfo.setLclSessionId( lclSessionId );
     xferInfo.setRmtSessionId( rmtSessionId );
+    xferInfo.setAssetId( assetInfo->getAssetUniqueId() );
+    xferInfo.setAssetType( assetInfo->getAssetType() );
     xferInfo.setFileHashId( pktGetReq->getFileHashId() );
     xferInfo.setFileOffset( pktGetReq->getAssetOffset() );
     xferInfo.setLclFileName( lclFileName.c_str() );
@@ -1488,7 +1490,9 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
     }
 	else
 	{
+		m_AssetRequestedListMutex.lock();
 		m_AssetRequestedList.addGuidIfDoesntExist( assetInfo.getAssetUniqueId(), sktConnectId );
+		m_AssetRequestedListMutex.unlock();
 	}
 
     return !xferFailed;
@@ -1498,7 +1502,10 @@ bool AssetBaseXferMgr::fromGuiRequestAssetBase( VxNetIdent * netIdent, AssetBase
 //============================================================================
 void AssetBaseXferMgr::onRequestAssetFailed( VxNetIdent * netIdent, AssetBaseInfo& assetInfo, VxGUID& sktConnectId, bool pluginIsLocked )
 {
+	m_AssetRequestedListMutex.lock();
 	m_AssetRequestedList.removeGuid( assetInfo.getAssetUniqueId(), sktConnectId );
+	m_AssetRequestedListMutex.unlock();
+
     updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateRxFail, 0 );
 }
 
@@ -2358,14 +2365,23 @@ void AssetBaseXferMgr::onContactWentOnline( VxNetIdent * netIdent, VxSktBase * s
 bool AssetBaseXferMgr::isAssetRequested( VxGUID& assetId, VxGUID& sktConnectId )
 {
 	static uint64_t timeoutMs = ( 1000 * 5 * 60 ); // 5 minutes
-	bool inQue = m_AssetRequestedList.doesGuidExist( assetId, sktConnectId, timeoutMs );
-	uint64_t timeNowMs = GetTimeStampMs(); 
+
+	uint64_t timeNowMs = GetTimeStampMs();
+
+	bool inQue{ false };
+
+	m_AssetRequestedListMutex.lock();
+	inQue = m_AssetRequestedList.doesGuidExist( assetId, sktConnectId, timeoutMs );
 	m_AssetRequestedList.removeExpired( timeNowMs, timeoutMs );
+	m_AssetRequestedListMutex.unlock();
+
 	return inQue;
 }
 
 //============================================================================
 void AssetBaseXferMgr::assetXferComplete( VxGUID& assetId, VxGUID& sktConnectId )
 {
+	m_AssetRequestedListMutex.lock();
 	m_AssetRequestedList.removeGuid( assetId, sktConnectId );
+	m_AssetRequestedListMutex.unlock();
 }

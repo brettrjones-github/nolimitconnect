@@ -408,6 +408,15 @@ void VxPushButton::setIconOverrideImage( QImage& iconImage )
 }
 
 //============================================================================
+void VxPushButton::clearIconOverrideImage( void )
+{
+    m_IconOverrideImage = QImage();
+    m_IconOverrideImageWasSet = false;
+    m_IconOverrideImageWasDrawn = false;
+    update();
+}
+
+//============================================================================
 void VxPushButton::drawBorder(  VxAppTheme& appTheme, QPainter& painter )
 {
     // draw button border if needed

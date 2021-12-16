@@ -1,6 +1,4 @@
-#ifndef VX_FILE_XFER_INFO_H
-#define VX_FILE_XFER_INFO_H
-
+#pragma once
 //============================================================================
 // Copyright (C) 2013 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
@@ -20,22 +18,14 @@
 
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxSha1Hash.h>
-#include <CoreLib/VxGUID.h>
+#include <CoreLib/AssetDefs.h>
 
 #include <string>
-
-//#define FILE_XFER_OK							0x0001
-//#define FILE_XFER_ERR_ALREADY_DOWNLOADING		0x0002
-//#define FILE_XFER_ERR_ALREADY_DOWNLOADED		0x0004
-//#define FILE_XFER_ERR_FAILED_TO_CREATE			0x0008
-//#define FILE_XFER_ERR_BUSY						0x0010
-//#define FILE_XFER_ERR_FILE_NOT_FOUND			0x0020
-//#define FILE_XFER_ERR_PERMISSION				0x0040
 
 class VxFileXferInfo
 {
 public:
-	VxFileXferInfo();
+    VxFileXferInfo() = default;
 	VxFileXferInfo( VxGUID& lclSessionId );
 	virtual ~VxFileXferInfo();
 
@@ -47,8 +37,10 @@ public:
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileHashId = fileHashId; }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileHashId; }
 
-	void						setAssetId( VxGUID& fileHashId )			{ m_AssetId = fileHashId; }
+    void						setAssetId( VxGUID& assetId )               { m_AssetId = assetId; }
 	VxGUID&						getAssetId( void )							{ return m_AssetId; }
+    void						setAssetType( EAssetType assetType )        { m_AssetType = assetType; }
+    EAssetType                  getAssetType( void )						{ return m_AssetType; }
 
 	void						setFileOffset( uint64_t fileOffs )			{ m_u64FileOffs = fileOffs; }
 	uint64_t					getFileOffset( void )						{ return m_u64FileOffs; }
@@ -72,19 +64,20 @@ public:
 	std::string					getDownloadCompleteFileName( void );
 
 	//=== vars ===//
-	FILE *						m_hFile;						
-	uint64_t					m_u64FileOffs;					// current offset into file we are at
-	uint64_t					m_u64FileLen;					// total file length
+    FILE *						m_hFile{nullptr};
+    uint64_t					m_u64FileOffs{0};					// current offset into file we are at
+    uint64_t					m_u64FileLen{0};                     // total file length
 	VxGUID						m_AssetId;
+    EAssetType                  m_AssetType{eAssetTypeUnknown};
 
 protected:
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
-	std::string					m_strRemoteFileName;		
-	std::string					m_strLocalFileName;				
-	EXferDirection				m_XferDirection;
-	int							m_PercentProgress;
+    std::string					m_strRemoteFileName{""};
+    std::string					m_strLocalFileName{""};
+    EXferDirection				m_XferDirection{eXferDirectionRx};
+    int							m_PercentProgress{0};
 };
 
-#endif // VX_FILE_XFER_INFO_H
+
