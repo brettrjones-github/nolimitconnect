@@ -1,0 +1,4 @@
+PIL/_imagingft.so
+PIL/_imagingmath.so
+PIL/_imaging.so
+PIL/_imagingmorph.so

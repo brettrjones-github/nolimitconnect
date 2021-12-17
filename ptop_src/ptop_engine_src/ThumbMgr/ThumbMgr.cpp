@@ -126,7 +126,7 @@ bool ThumbMgr::addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAss
     bool result = AssetBaseMgr::addAsset( assetInfo, retCreatedAsset );
     if( result )
     {
-        announceAssetAdded( &assetInfo );
+        announceAssetAdded( retCreatedAsset );
     }
 
     return result;
@@ -562,7 +562,8 @@ bool ThumbMgr::isThumbUpToDate( VxGUID& thumbId, int64_t thumbModifiedTime )
     m_ThumbInfoMutex.lock();
     for( AssetBaseInfo* thumbInfo : m_ThumbInfoList )
     {
-        if( thumbInfo->getThumbId() == thumbId && ( isEmoteThumb || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) )
+        if( thumbInfo->getThumbId() == thumbId && ( isEmoteThumb || thumbModifiedTime <= thumbInfo->getInfoModifiedTime() ) &&
+               ( isEmoteThumb || thumbInfo->isValidFile() ) )
         {
             m_ThumbInfoMutex.unlock();
             return true;

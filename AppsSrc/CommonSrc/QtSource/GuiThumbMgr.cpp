@@ -217,7 +217,29 @@ bool GuiThumbMgr::requestAvatarImage( GuiUser* user, EPluginType pluginType, QIm
                 }
                 else
                 {
-                    thumbMgr.fromGuiRequestPluginThumb( &user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeHostPeerUser, thumbId );
+                    GuiThumb* newThumb{ nullptr };
+
+                    thumbMgr.lockResources();
+                    AssetBaseInfo* assetInfo = thumbMgr.findAsset( thumbId );
+                    ThumbInfo* thumbInfo = dynamic_cast< ThumbInfo* >( assetInfo );
+                    if( thumbInfo && thumbInfo->isValidThumbnail() )
+                    {
+                        newThumb = new GuiThumb( m_MyApp );
+                        newThumb->setThumbInfo( *thumbInfo );
+                    }
+
+                    thumbMgr.unlockResources();
+
+                    if( newThumb )
+                    {
+                        m_ThumbList.addThumbIfDoesntExist( newThumb );
+                        onThumbAdded( newThumb );
+                        return newThumb->createImage( retAvatarImage );
+                    }
+                    else
+                    {
+                        thumbMgr.fromGuiRequestPluginThumb( &user->getNetIdent(), hostImageValid ? pluginType : ePluginTypeHostPeerUser, thumbId );
+                    }
                 }
             }
         }

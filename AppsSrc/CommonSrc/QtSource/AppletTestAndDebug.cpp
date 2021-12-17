@@ -401,8 +401,9 @@ void AppletTestAndDebug::fillBasicInfo( void )
     infoMsg( "personal records: %s", VxGetAppDirectory( eAppDirPersonalRecords ).c_str() );
     infoMsg( "downloads: %s", VxGetAppDirectory( eAppDirDownloads ).c_str() );
     infoMsg( "user account specific: %s", VxGetAppDirectory( eAppDirUserSpecific ).c_str() );
-    infoMsg( "kodi assets: %s", VxGetAppDirectory( eAppDirExeKodiAssets ).c_str() );
     infoMsg( "nolimit assets: %s", VxGetAppDirectory( eAppDirExeNoLimitAssets ).c_str() );
+    infoMsg( "thumbs: %s", VxGetAppDirectory( eAppDirThumbs ).c_str() );
+    infoMsg( "kodi assets: %s", VxGetAppDirectory( eAppDirExeKodiAssets ).c_str() );
     infoMsg( "python exe: %s", VxGetAppDirectory( eAppDirExePython ).c_str() );
     infoMsg( "python dlls: %s", VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
     infoMsg( "python libs: %s", VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );

@@ -1899,6 +1899,8 @@ EXferError AssetBaseXferMgr::beginAssetBaseReceive( AssetBaseRxSession * xferSes
 		}
 		else
 		{
+            LogMsg( LOG_INFO, "AssetBaseXferMgr: opening file for recieve %s %s ",
+                    xferInfo.getLclFileName().c_str(), xferInfo.getDownloadCompleteFileName().c_str() );
 			// open file and truncate if exists
 			xferInfo.m_hFile = fopen( xferInfo.getLclFileName().c_str(), "wb+" ); // pointer to name of the file
 			if( NULL == xferInfo.m_hFile )
@@ -2224,7 +2226,7 @@ void AssetBaseXferMgr::onAssetBaseReceived( AssetBaseRxSession * xferSession, As
 	{
 		std::string incompleteAsset = xferInfo.getDownloadIncompleteFileName();
 		std::string completedAssetBase = xferInfo.getDownloadCompleteFileName();
-		LogMsg( LOG_VERBOSE, "AssetBaseXferMgr::onAssetBaseReceived: moving completed file from %s to %s", incompleteAsset.c_str(), completedAssetBase.c_str() );
+        LogMsg( LOG_VERBOSE, "AssetBaseXferMgr::onAssetBaseReceived: moving completed file from: %s to: %s", incompleteAsset.c_str(), completedAssetBase.c_str() );
 
 		RCODE rc = 0;
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteAsset.c_str(), completedAssetBase.c_str() ) ) )
