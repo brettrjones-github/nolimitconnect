@@ -2165,7 +2165,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\GoTvVersion.txt" />
     <Text Include="..\..\ptop_engine_src\EchoCancel\WEBRTC_LICENSE.txt">
       <Filter>Source Files\EchoCancel</Filter>
     </Text>

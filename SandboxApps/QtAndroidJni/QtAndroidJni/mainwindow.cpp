@@ -149,9 +149,9 @@ bool RunFileCopyTest()
     //VxFileUtil::deleteFile( (externalDir + settingsFile).c_str() );
     bool result = CopyIfRequiredApkFile( "kodi/system/settings/settings.xml", externalDir + settingsFile );
 
-    result &= CopyIfRequiredApkDirectory( "gotv/gui", externalDir + "/assets/gotv/gui" );
-    result &= CopyIfRequiredApkDirectory( "gotv/profile", externalDir + "/assets/gotv/profile" );
-    result &= CopyIfRequiredApkDirectory( "gotv/textures", externalDir + "/assets/gotv/textures" );
+    result &= CopyIfRequiredApkDirectory( "gotv/gui", externalDir + "/assets/nolimit/gui" );
+    result &= CopyIfRequiredApkDirectory( "gotv/profile", externalDir + "/assets/nolimit/profile" );
+    result &= CopyIfRequiredApkDirectory( "gotv/textures", externalDir + "/assets/nolimit/textures" );
     return result;
 }
 

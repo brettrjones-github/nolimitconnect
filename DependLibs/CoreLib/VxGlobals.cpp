@@ -487,8 +487,8 @@ std::string& VxGetKodiExeDirectory(void) { return g_strKodiExeDir; }
 void VxSetExeKodiAssetsDirectory(const char * assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
 
-void VxSetExeGoTvAssetsDirectory(const char * assetsDir){ g_strExeNoLimitAssetsDir = assetsDir; }
-std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeNoLimitAssetsDir; }
+void VxSetExeNoLimitAssetsDirectory(const char * assetsDir){ g_strExeNoLimitAssetsDir = assetsDir; }
+std::string& VxGetExeNoLimitAssetsDirectory(void) { return g_strExeNoLimitAssetsDir; }
 
 void VxSetPythonExeDirectory( const char * pythonDir ){ g_strExeDirPython = pythonDir; }
 void VxSetPythonDllDirectory( const char * pythonDir ){ g_strExeDirPythonDlls = pythonDir; }

@@ -121,19 +121,19 @@ const char *    VxGetNetworkHostUrl( void )                         { return g_s
 // /exe/assets/kodi/system/Python/Lib	python libs path
 // /exe/assets/kodi/system/Python/DLLs	python dlls path
 // /exe/assets/kodi		kodi exe assets path
-//            /gotv		gotv assets path
+//            /nolimit		gotv assets path
 
 // data storage paths linux      /home/user/.local/share/nolimitconnect
 //                    windows    C:\Users\user\AppData\Roaming\NoLimitConnect
 //                    android ?
 // /storage/nolimitconnect/temp/		temporary files path
 //                  /logs/		log files path
-//                  /gotv/		ShredFilesDb.db3 and app generated files
+//                  /nolimit/	ShredFilesDb.db3 and app generated files
 //                  /kodi/		kodi plugins and writable data directory
-//                  /gotv/gui/	gui assets
-//						 /shaders/ opengl shaders
-//                       /profile/ profile default files
-//                       /thumbs/ thumbnail assets directory
+//                  /nolimit/gui/	gui assets
+//							/shaders/ opengl shaders
+//							/profile/ profile default files
+//							/thumbs/ thumbnail assets directory
 //
 // user specific directories.. NOTE: hasnum is 4 digit hash of exe path and userId is user login name
 //                  /storage/NoLimitConnect/hashnum/accounts/userId/settings/		databases for user settings etc
@@ -491,7 +491,7 @@ void VxSetKodiExeDirectory(const char * exeDir)
     g_strExeDirPythonLib = g_strExeDirPythonLib + "Lib/";
 
 	g_strExeKodiAssetsDir = g_strKodiExeDir + "assets/kodi/";
-	g_strExeGoTvAssetsDir = g_strKodiExeDir + "assets/gotv/";
+	g_strExeGoTvAssetsDir = g_strKodiExeDir + "assets/nolimit/";
 }
 
 //============================================================================
@@ -501,8 +501,8 @@ std::string& VxGetKodiExeDirectory(void) { return g_strKodiExeDir; }
 void VxSetExeKodiAssetsDirectory(const char * assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
 
-void VxSetExeGoTvAssetsDirectory(const char * assetsDir){ g_strExeGoTvAssetsDir = assetsDir; }
-std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeGoTvAssetsDir; }
+void VxSetExeNoLimitAssetsDirectory(const char * assetsDir){ g_strExeGoTvAssetsDir = assetsDir; }
+std::string& VxGetExeNoLimitAssetsDirectory(void) { return g_strExeGoTvAssetsDir; }
 
 void VxSetPythonExeDirectory( const char * pythonDir ){ g_strExeDirPython = pythonDir; }
 void VxSetPythonDllDirectory( const char * pythonDir ){ g_strExeDirPythonDlls = pythonDir; }

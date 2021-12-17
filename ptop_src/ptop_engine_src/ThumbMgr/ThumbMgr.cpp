@@ -121,6 +121,18 @@ void ThumbMgr::addThumbMgrClient( ThumbCallbackInterface * client, bool enable )
 }
 
 //============================================================================
+bool ThumbMgr::addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset )
+{
+    bool result = AssetBaseMgr::addAsset( assetInfo, retCreatedAsset );
+    if( result )
+    {
+        announceAssetAdded( &assetInfo );
+    }
+
+    return result;
+}
+
+//============================================================================
 void ThumbMgr::announceAssetAdded( AssetBaseInfo * assetInfo )
 {
     if( !assetInfo || !assetInfo->isValidThumbnail() )

@@ -98,8 +98,8 @@ std::string&					VxGetKodiExeDirectory( void );
 void							VxSetExeKodiAssetsDirectory( const char * assetsDir );
 std::string&					VxGetExeKodiAssetsDirectory( void );
 
-void							VxSetExeGoTvAssetsDirectory( const char * assetsDir );
-std::string&					VxGetExeGoTvAssetsDirectory(void);
+void							VxSetExeNoLimitAssetsDirectory( const char * assetsDir );
+std::string&					VxGetExeNoLimitAssetsDirectory(void);
 
 void							VxSetPythonExeDirectory( const char * pythonDir );
 void							VxSetPythonDllDirectory( const char * pythonDir );

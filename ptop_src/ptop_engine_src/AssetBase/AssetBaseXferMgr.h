@@ -69,6 +69,8 @@ public:
 	virtual void				fromGuiCancelDownload( VxGUID& lclSessionId );
 	virtual void				fromGuiCancelUpload( VxGUID& lclSessionId );
 
+	virtual void				sendToGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
+
 	void						fileAboutToBeDeleted( std::string& fileName );
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase );
 	virtual void				onConnectionLost( VxSktBase * sktBase );

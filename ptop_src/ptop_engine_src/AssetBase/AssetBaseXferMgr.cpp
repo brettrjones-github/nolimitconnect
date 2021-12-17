@@ -566,8 +566,8 @@ void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * p
 			LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendReq: failed add asset" );
 		}
 
-        IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
-        IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
+        sendToGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
+        sendToGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
     }
     else
     {
@@ -585,7 +585,7 @@ void AssetBaseXferMgr::onPktAssetBaseGetReply( VxSktBase * sktBase, VxPktHdr * p
             EXferError xferErr = beginAssetBaseReceive( xferSession, assetInfo, rmtSessionId, startOffs );
             if( eXferErrorNone != xferErr )
             {
-                //IToGui::getToGui().toGuiUpdateAssetDownload( xferSession->getLclSessionId(), 0, rc );
+                //sendToGuiUpdateAssetDownload( xferSession->getLclSessionId(), 0, rc );
                 endAssetBaseXferSession( xferSession, true );
             }
         }
@@ -657,8 +657,8 @@ void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase * sktBase, VxPktHdr * pk
 		}
 
 		m_XferInterface.txPacket( netIdent, sktBase, pktReply );
-		IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
-		IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
+		sendToGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
+		sendToGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
 	}
 	else
 	{
@@ -676,7 +676,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendReq( VxSktBase * sktBase, VxPktHdr * pk
 			EXferError xferErr = beginAssetBaseReceive( xferSession, assetInfo, poPkt, *pktReply );
 			if( eXferErrorNone != xferErr )
 			{
-				//IToGui::getToGui().toGuiUpdateAssetDownload( xferSession->getLclSessionId(), 0, rc );
+				//sendToGuiUpdateAssetDownload( xferSession->getLclSessionId(), 0, rc );
 				endAssetBaseXferSession( xferSession, true );
 			}
 		}
@@ -740,7 +740,7 @@ void AssetBaseXferMgr::onPktAssetBaseSendReply( VxSktBase * sktBase, VxPktHdr * 
 				//RCODE rc = txNextAssetBaseChunk( xferSession );
 				//if( rc )
 				//{
-				//	//IToGui::getToGui().toGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
+				//	//sendToGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
 				//	LogMsg( LOG_ERROR, "AssetBaseXferMgr::onPktAssetSendReply beginAssetBaseSend returned error %d\n", rc );
 				//	endAssetBaseXferSession( xferSession, true );
 				//}
@@ -810,7 +810,7 @@ void AssetBaseXferMgr::onPktAssetBaseChunkReq( VxSktBase * sktBase, VxPktHdr * p
 
             delete pktReply;
 
-			IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, xferSession->getAssetBaseInfo().getAssetUniqueId(), xferErr );
+			sendToGuiAssetAction( eAssetActionRxError, xferSession->getAssetBaseInfo().getAssetUniqueId(), xferErr );
 
 			endAssetBaseXferSession( xferSession, true );
 		}
@@ -859,7 +859,7 @@ static int cnt = 0;
 
 		if( eXferErrorNone != xferErr )
 		{
-			//IToGui::getToGui().toGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
+			//sendToGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
 			endAssetBaseXferSession( xferSession, true, false );
 		}
 	}
@@ -2055,7 +2055,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
 	}
 	if( eXferErrorNone != xferErr )
 	{
-		IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, assetId, xferErr );
+		sendToGuiAssetAction( eAssetActionTxError, assetId, xferErr );
 	}
 	else
 	{
@@ -2066,7 +2066,7 @@ EXferError AssetBaseXferMgr::txNextAssetBaseChunk( AssetBaseTxSession * xferSess
             VxFileXferInfo& xferInfo2 = xferSession2->getXferInfo();
             if( xferInfo2.calcProgress() )
             {
-                IToGui::getToGui().toGuiAssetAction( eAssetActionTxProgress, xferSession2->getAssetBaseInfo().getAssetUniqueId(), xferInfo2.getProgress() );
+                sendToGuiAssetAction( eAssetActionTxProgress, xferSession2->getAssetBaseInfo().getAssetUniqueId(), xferInfo2.getProgress() );
             }
         }
 	}
@@ -2168,13 +2168,13 @@ EXferError AssetBaseXferMgr::rxAssetBaseChunk( bool pluginIsLocked, AssetBaseRxS
             VxFileXferInfo& xferInfo2 = xferSession2->getXferInfo();
             if( xferInfo2.calcProgress() )
             {
-                IToGui::getToGui().toGuiAssetAction( eAssetActionRxProgress, xferSession->getAssetBaseInfo().getAssetUniqueId(), xferInfo2.getProgress() );
+                sendToGuiAssetAction( eAssetActionRxProgress, xferSession->getAssetBaseInfo().getAssetUniqueId(), xferInfo2.getProgress() );
             }
         }
 	}
 	else
 	{
-		IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, assetId, xferErr );
+		sendToGuiAssetAction( eAssetActionRxError, assetId, xferErr );
 	}
 
     if( !pluginIsLocked )
@@ -2224,11 +2224,7 @@ void AssetBaseXferMgr::onAssetBaseReceived( AssetBaseRxSession * xferSession, As
 	{
 		std::string incompleteAsset = xferInfo.getDownloadIncompleteFileName();
 		std::string completedAssetBase = xferInfo.getDownloadCompleteFileName();
-        if( eAssetTypeThumbnail == assetInfo.getAssetType() )
-        {
-            // move to thumbnails instead of downloads folder
-            completedAssetBase = assetInfo.getAssetName();
-        }
+		LogMsg( LOG_VERBOSE, "AssetBaseXferMgr::onAssetBaseReceived: moving completed file from %s to %s", incompleteAsset.c_str(), completedAssetBase.c_str() );
 
 		RCODE rc = 0;
 		if( 0 == ( rc = VxFileUtil::moveAFile( incompleteAsset.c_str(), completedAssetBase.c_str() ) ) )
@@ -2258,11 +2254,11 @@ void AssetBaseXferMgr::onAssetBaseReceived( AssetBaseRxSession * xferSession, As
                     m_Engine.fromGuiAddFileToLibrary( completedAssetBase.c_str(), true, xferInfo.getFileHashId().getHashData() );
                 }
 
-				IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, xferSession->getAssetBaseInfo().getAssetUniqueId(), 0 );
+				sendToGuiAssetAction( eAssetActionRxSuccess, xferSession->getAssetBaseInfo().getAssetUniqueId(), 0 );
 			}
 			else
 			{
-				IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, xferSession->getAssetBaseInfo().getAssetUniqueId(), error );
+				sendToGuiAssetAction( eAssetActionRxError, xferSession->getAssetBaseInfo().getAssetUniqueId(), error );
 			}
 		}
 		else
@@ -2281,12 +2277,12 @@ void AssetBaseXferMgr::onAssetBaseSent( VxNetIdent*netIdent, VxSktBase* sktBase,
 	if( eXferErrorNone != error )
 	{
 		updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxFail, (int)error );
-		IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, assetInfo.getAssetUniqueId(), error );
+		sendToGuiAssetAction( eAssetActionTxError, assetInfo.getAssetUniqueId(), error );
 	}
 	else
 	{
 		updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxSuccess, (int)error );
-		IToGui::getToGui().toGuiAssetAction( eAssetActionTxSuccess, assetInfo.getAssetUniqueId(), 0 );
+		sendToGuiAssetAction( eAssetActionTxSuccess, assetInfo.getAssetUniqueId(), 0 );
 	}
 
 	if( sktBase && sktBase->isConnected() && false == VxIsAppShuttingDown() )
@@ -2384,4 +2380,10 @@ void AssetBaseXferMgr::assetXferComplete( VxGUID& assetId, VxGUID& sktConnectId 
 	m_AssetRequestedListMutex.lock();
 	m_AssetRequestedList.removeGuid( assetId, sktConnectId );
 	m_AssetRequestedListMutex.unlock();
+}
+
+//============================================================================
+void AssetBaseXferMgr::sendToGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
+{
+	IToGui::getToGui().toGuiAssetAction( assetAction, assetId, pos0to100000 );
 }

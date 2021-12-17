@@ -185,7 +185,7 @@ int main(int argc, char **argv)
 		result = myApp->exec();
 	}
 
-    //gotv.doPreShutdown();
+    //nolimit.doPreShutdown();
 	//delete myApp;
 	return result;
 }

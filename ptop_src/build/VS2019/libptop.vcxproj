@@ -1153,7 +1153,6 @@
     <ClInclude Include="..\..\ptop_engine_src\WebServer\RcWebSkt.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\GoTvVersion.txt" />
     <Text Include="..\..\ptop_engine_src\EchoCancel\WEBRTC_LICENSE.txt" />
     <Text Include="..\..\ptop_engine_src\EchoCancel\WEBRTC_LICENSE_THIRD_PARTY.txt" />
   </ItemGroup>
