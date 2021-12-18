@@ -13,6 +13,8 @@
 //============================================================================
 
 #include "VideoSinkGrabber.h"
+#include "GuiParams.h"
+
 #include <QDebug>
 
 //============================================================================
@@ -36,7 +38,9 @@ void VideoSinkGrabber::setFps( int fps )
 //============================================================================
 void VideoSinkGrabber::enableGrab( bool enable )
 {
-    m_GrabEnabled = enable;
+    m_DesiredFrameSize = GuiParams::getSnapshotDesiredSize();
+    m_availFrames.clear();
+    m_GrabEnabled = enable;  
     m_ElapsedTimer.start();
 }
 
@@ -45,6 +49,22 @@ void VideoSinkGrabber::slotVideoFrameChanged( const QVideoFrame& frame )
 {
     int64_t elapsedMs = m_ElapsedTimer.elapsed();
     qDebug() << "slotVideoFrameChanged elapsed " << elapsedMs;
+    m_ElapsedTimer.start();
+    static int frameNum = 0;
+    frameNum++;
+
+    QImage frameImage = frame.toImage();
+    lockGrabberQueue();
+    if( m_availFrames.empty() )
+    {
+        m_availFrames.push_back( std::make_pair( m_DesiredFrameSize == frameImage.size() ? frameImage : frameImage.scaled( m_DesiredFrameSize ), frameNum ) );
+    }
+
+    unlockGrabberQueue();
+
+
+    /*
+
     // do toImage every time because if is not done every frame on android then it will stop working
     // toImage is broken on Android version 11 on Galaxy Tab A7 model SM-T500
     // QTBUG-99135 Qt 6.2.2 QVideoFrame.toImage unsupported format or has no image.. just white color
@@ -57,4 +77,5 @@ void VideoSinkGrabber::slotVideoFrameChanged( const QVideoFrame& frame )
         m_ElapsedTimer.start();
         emit signalSinkFrameAvailable( frameNum, image );
     }
+    */
 }

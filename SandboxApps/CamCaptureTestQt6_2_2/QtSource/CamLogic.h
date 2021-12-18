@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
+#include "config_apps.h"
 
 #include "VideoSinkGrabber.h"
 
@@ -44,6 +44,7 @@
 
 class CamCaptureTest;
 class QVideoWidget;
+class VxLabel;
 
 class CamLogic : public QWidget
 {
@@ -55,6 +56,8 @@ public:
     CamLogic( CamCaptureTest& myApp );
     virtual ~CamLogic() = default;
 
+    void                        setCapturePreviewScreen( VxLabel* vidScreen )               { m_PreviewCaptureScreen = vidScreen; }
+    void                        setCamPlaybackScreen( VxLabel* vidScreen )                  { m_CamPlaybackScreen = vidScreen; }
     void                        setVideoPreviewWidget( QVideoWidget* vidWidget );
 
     void                        cameraEnable( bool wantVidCapture );
@@ -185,6 +188,10 @@ protected:
     QVideoWidget*               m_VidPreviewWidget{ nullptr };
 
     VideoSinkGrabber            m_VideoSinkGrabber;
+    int                         m_LastFrameNum{ 0 };
+    QSize                       m_DesiredFrameSize;
+    VxLabel*                    m_PreviewCaptureScreen{ nullptr };
+    VxLabel*                    m_CamPlaybackScreen{ nullptr };
 };
 
 

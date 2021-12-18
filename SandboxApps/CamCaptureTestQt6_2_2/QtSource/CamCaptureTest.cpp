@@ -32,9 +32,11 @@ CamCaptureTest::CamCaptureTest( QWidget * parent )
 
     ui.m_ImageScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
     ui.m_SnapshotScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
+    m_CamLogic.setCapturePreviewScreen( ui.m_SnapshotScreen );
+    m_CamLogic.setCamPlaybackScreen( ui.m_ImageScreen );
 
     // in order for capture to work on android the parent of VideoSinkGrabber must be a application parented widget
-    m_CamLogic.setVideoPreviewWidget( ui.m_VideoPreviewWidget );
+    // m_CamLogic.setVideoPreviewWidget( ui.m_VideoPreviewWidget );
     m_CamLogic.getVideoSinkGrabber().setParent( ui.m_ImageScreen );
 
     connect( ui.snapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapShotButClick() ) );

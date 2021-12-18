@@ -41,10 +41,12 @@ public:
 
 signals:
 	void						clicked();
-	void						signalPlayVideoFrame( QImage picBitmap, int iRotate );
+	// Qt 6.2.2 passing QImage through queued signal/slot makes the image white.. must use QPixmap instead
+	void						signalPlayVideoFrame( QPixmap picBitmap, int iRotate );
 
 protected slots:
-	void						slotPlayVideoFrame( QImage picBitmap, int iRotate );
+	// Qt 6.2.2 passing QImage through queued signal/slot makes the image white.. must use QPixmap instead
+	void						slotPlayVideoFrame( QPixmap picBitmap, int iRotate );
 
 protected:
 	void						resizeBitmapToFitScreen( QImage& picBitmap );

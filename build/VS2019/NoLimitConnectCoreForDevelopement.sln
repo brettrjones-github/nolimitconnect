@@ -17,19 +17,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PktLib", "..\..\DependLibs\
 		{56462B02-59B7-4672-8F89-30A674E802FE} = {56462B02-59B7-4672-8F89-30A674E802FE}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoTvConfig", "GoTvConfig", "{22F1DA5B-FD83-4D3B-9E81-802F73F85AB6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppConfigHeaders", "AppConfigHeaders", "{22F1DA5B-FD83-4D3B-9E81-802F73F85AB6}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\AppCommonConfig.h = ..\..\AppCommonConfig.h
+		..\..\AppCompilerConfig.h = ..\..\AppCompilerConfig.h
+		..\..\AppCpuArchDefines.h = ..\..\AppCpuArchDefines.h
+		..\..\AppDependLibrariesConfig.h = ..\..\AppDependLibrariesConfig.h
+		..\..\AppTargetOsConfig.h = ..\..\AppTargetOsConfig.h
+		..\..\config_appcorelibs.h = ..\..\config_appcorelibs.h
+		..\..\config_apps.h = ..\..\config_apps.h
 		..\..\DependLibs\ffmpeg\config_ffmpeg.h = ..\..\DependLibs\ffmpeg\config_ffmpeg.h
-		..\..\config_gotvapps.h = ..\..\config_gotvapps.h
-		..\..\config_gotvcore.h = ..\..\config_gotvcore.h
 		..\..\kodi_src\xbmc\xbmc\config_kodi.h = ..\..\kodi_src\xbmc\xbmc\config_kodi.h
-		..\..\GoTvAppConfig.h = ..\..\GoTvAppConfig.h
-		..\..\GoTvCompilerConfig.h = ..\..\GoTvCompilerConfig.h
-		..\..\GoTvCpuArchDefines.h = ..\..\GoTvCpuArchDefines.h
-		..\..\GoTvDebugConfig.h = ..\..\GoTvDebugConfig.h
-		..\..\GoTvDependLibrariesConfig.h = ..\..\GoTvDependLibrariesConfig.h
-		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
-		..\..\GoTvVersion.txt = ..\..\GoTvVersion.txt
+		..\..\config_libkodi.h = ..\..\config_libkodi.h
+		..\..\config_libptop.h = ..\..\config_libptop.h
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VxVideoLib", "..\..\DependLibs\VxVideoLib\build\VS2019\VxVideoLib.vcxproj", "{B0E1DCDB-85B0-4A7E-A97A-AC1DFB7E69B5}"
@@ -282,7 +282,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 		Qt5Version = 64BitVs2017Qt5.15.2
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 	EndGlobalSection
 EndGlobal

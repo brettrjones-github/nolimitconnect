@@ -88,8 +88,6 @@ public slots:
     void setCamera( const QCameraInfo &cameraInfo );
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
 
-    void                        slotSinkFrameAvailable( QImage& frame );
-
     void                        startCamera();
     void                        stopCamera();
 
@@ -177,6 +175,8 @@ protected:
 #endif //  QT_VERSION < QT_VERSION_CHECK(6,0,0)
     QString                     m_CamDescription;
     VideoSinkGrabber            m_VideoSinkGrabber;
+    int                         m_LastFrameNum{ 0 };
+    QSize                       m_DesiredFrameSize;
 };
 
 

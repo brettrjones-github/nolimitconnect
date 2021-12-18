@@ -302,10 +302,10 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
     // see if engine thumb manager has it
     ThumbMgr& thumbMgr = m_MyApp.getEngine().getThumbMgr();
     thumbMgr.lockResources();
-    ThumbInfo* thumbInfo = dynamic_cast< ThumbInfo* >( thumbMgr.findAsset( thumbId ) );
-    if( thumbInfo && thumbInfo->isValidFile() )
+    ThumbInfo* existingThumbInfo = dynamic_cast< ThumbInfo* >( thumbMgr.findAsset( thumbId ) );
+    if( existingThumbInfo && existingThumbInfo->isValidFile() )
     {
-        thumb = updateThumb( *thumbInfo );
+        thumb = updateThumb( *existingThumbInfo );
         if( thumb )
         {
             thumbMgr.unlockResources();
@@ -368,7 +368,7 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
             ThumbInfo assetInfo( ( const char* )fileName.toUtf8().constData(), fileLen, thumbId );
             assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
             assetInfo.setCreationTime( GetTimeStampMs() );
-            thumb = updateThumb( *thumbInfo );
+            thumb = updateThumb( assetInfo );
 
             if( !thumbMgr.fromGuiThumbCreated( assetInfo ) )
             {
@@ -394,7 +394,6 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
 //============================================================================
 void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
 {
-    const int emoteMargin = 20;
     ThumbMgr& thumbMgr = m_MyApp.getEngine().getThumbMgr();
     std::vector<VxGUID>& emoticonIdList = thumbMgr.getEmoticonIdList();
     int emoticonNum = 0;
@@ -402,8 +401,6 @@ void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
     {
         if( assetGuid.isVxGUIDValid() )
         {
-            bool assetExists = false;
-
             GuiThumb *thumb = generateEmoticon( assetGuid );
             if( !thumb )
             {

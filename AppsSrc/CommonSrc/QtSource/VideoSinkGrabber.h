@@ -13,11 +13,11 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
-
 #include <QVideoFrame>
 #include <QElapsedTimer>
 #include <QVideoSink>
+
+#include <CoreLib/VxMutex.h>
 
 class VideoSinkGrabber : public QVideoSink
 {
@@ -26,11 +26,15 @@ class VideoSinkGrabber : public QVideoSink
 public:
     VideoSinkGrabber( QObject* widget );
 
-    void                         setFps( int fps );
-    void                         enableGrab( bool enable );
+    void                        setFps( int fps );
+    void                        enableGrab( bool enable );
+    void                        lockGrabberQueue() { m_GrabberQueueMutex.lock(); }
+    void                        unlockGrabberQueue() { m_GrabberQueueMutex.unlock(); }
+
+    std::list<std::pair<QImage, int>> m_availFrames;
 
 signals:
-    void                        signalSinkFrameAvailable( QImage& frame );
+    void                        signalSinkFrameAvailable( int frameNum, QImage& frameImage );
 
 protected slots:
     void                        slotVideoFrameChanged( const QVideoFrame& frame );
@@ -40,4 +44,6 @@ protected:
     int64_t                     m_MinFrameIntervalMs{ 1000 / 15 };
     bool                        m_GrabEnabled{ true };
     QElapsedTimer               m_ElapsedTimer;
+    VxMutex                     m_GrabberQueueMutex;
+    QSize                       m_DesiredFrameSize;
 };
