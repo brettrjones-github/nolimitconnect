@@ -11,7 +11,8 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
+#include "ActivityInformation.h"
 #include "AppletSettingsHostRandomConnect.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -28,11 +29,15 @@ AppletSettingsHostRandomConnect::AppletSettingsHostRandomConnect( AppCommon& app
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostRandomConnect );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+
     getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostRandomConnect, ePluginTypeHostRandomConnect );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
+
     getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
+
+    connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );
     connectServiceWidgets();
     loadPluginSetting();
 
@@ -105,4 +110,14 @@ void AppletSettingsHostRandomConnect::slotApplyServiceSettings()
     }
 
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+}
+
+//============================================================================
+void AppletSettingsHostRandomConnect::slotHostRequirementsButtonClicked()
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeHostChatRoom );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
 }

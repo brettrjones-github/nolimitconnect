@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config_gotvapps.h"
+#include "config_apps.h"
 #include "AppDefs.h"
 
 #include "ui_HomeWindow.h"

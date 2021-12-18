@@ -32,7 +32,7 @@
  * MT safe
  */
 
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>

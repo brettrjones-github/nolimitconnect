@@ -12,7 +12,7 @@
          Copyright (C) 2009-2010 Mathias Svensson ( http://result42.com )
 */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #ifdef BUILD_MY_MINI_UNZIP
 
 //#define DEBUG_UNZIP 1

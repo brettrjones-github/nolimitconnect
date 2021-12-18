@@ -28,8 +28,8 @@
 class PluginSettingHdr
 {
 public:
-    PluginSettingHdr(){};  // default constructor
-    ~PluginSettingHdr(){};
+    PluginSettingHdr() = default;  // default constructor
+    virtual ~PluginSettingHdr() = default;
 
     //! copy constructor
     PluginSettingHdr( const PluginSettingHdr & rhs ) = default;

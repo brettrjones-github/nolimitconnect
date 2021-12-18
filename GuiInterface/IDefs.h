@@ -614,7 +614,7 @@ enum EPluginAccess
 };
 
 //! \public Enumerated plugins
-enum EPluginType
+enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePluginType if you change this
 {
     //! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
     ePluginTypeInvalid			    = 0,	//!< unknown or disabled

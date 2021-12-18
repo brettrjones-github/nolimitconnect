@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /* The number of bytes in a double.  */
 #define SIZEOF_DOUBLE 8

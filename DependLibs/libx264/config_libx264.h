@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #define HAVE_INTERLACED			0
 #define X264_BIT_DEPTH			8
 #define X264_GPL				1

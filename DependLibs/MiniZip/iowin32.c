@@ -11,7 +11,7 @@
 
 */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef _MSC_VER
 

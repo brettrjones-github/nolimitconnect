@@ -39,7 +39,7 @@
 extern "C" {
 #endif
 
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 #include "bigint_impl.h"
 #include "bigint.h"
 

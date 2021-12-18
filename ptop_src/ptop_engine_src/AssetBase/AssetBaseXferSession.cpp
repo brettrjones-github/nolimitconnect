@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include "AssetBaseXferSession.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IToGui.h>

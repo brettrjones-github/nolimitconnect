@@ -5,10 +5,10 @@ INCLUDEPATH += $$PWD/DependLibs/libcurl/include
 INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
 
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/ffmpeg/atomics/dummy/stdatomic.h \
     $$PWD/DependLibs/ffmpeg/atomics/gcc/stdatomic.h \
     $$PWD/DependLibs/ffmpeg/atomics/pthread/stdatomic.h \

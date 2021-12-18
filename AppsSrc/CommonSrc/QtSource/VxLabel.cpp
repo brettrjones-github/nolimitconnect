@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 
 #include "VxLabel.h"
 

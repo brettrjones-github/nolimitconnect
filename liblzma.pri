@@ -1,7 +1,7 @@
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/liblzma/api/lzma.h \
     $$PWD/DependLibs/liblzma/api/lzma/base.h \
     $$PWD/DependLibs/liblzma/api/lzma/bcj.h \

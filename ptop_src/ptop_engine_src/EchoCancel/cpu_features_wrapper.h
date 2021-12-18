@@ -11,7 +11,7 @@
 #ifndef WEBRTC_SYSTEM_WRAPPERS_INCLUDE_CPU_FEATURES_WRAPPER_H_
 #define WEBRTC_SYSTEM_WRAPPERS_INCLUDE_CPU_FEATURES_WRAPPER_H_
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 
 #if defined(__cplusplus) || defined(c_plusplus)
 extern "C" {

@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+#include "ActivityInformation.h"
 #include "AppletSettingsHostGroup.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -29,10 +29,13 @@ AppletSettingsHostGroup::AppletSettingsHostGroup( AppCommon& app, QWidget * pare
     setAppletType( eAppletSettingsHostGroup );
     setPluginType( ePluginTypeHostGroup );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+
     getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostGroup, ePluginTypeHostGroup );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
+
+    connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );
     connectServiceWidgets();
     loadPluginSetting();
 
@@ -97,4 +100,14 @@ void AppletSettingsHostGroup::slotApplyServiceSettings()
 
     savePluginSetting();
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+}
+
+//============================================================================
+void AppletSettingsHostGroup::slotHostRequirementsButtonClicked()
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeHostGroup );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
 }

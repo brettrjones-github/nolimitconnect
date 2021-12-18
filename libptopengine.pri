@@ -16,9 +16,9 @@ INCLUDEPATH += $$PWD/DependLibs/
 
 
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GuiInterface/IDefs.h \
     $$PWD/GuiInterface/IFromGui.h \
     $$PWD/GuiInterface/IGoTv.h \
@@ -26,7 +26,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GuiInterface/IScan.h \
     $$PWD/GuiInterface/IToGui.h \
     $$PWD/GuiInterface/config_libgotvptop.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppTargetOsConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseInfo.h \
     $$PWD/ptop_src/ptop_engine_src/AssetBase/AssetBaseInfoDb.h \

@@ -174,19 +174,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetLib", "..\..\DependLibs\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PktLib", "..\..\DependLibs\PktLib\build\VS2019\PktLib.vcxproj", "{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoTvConfig", "GoTvConfig", "{22F1DA5B-FD83-4D3B-9E81-802F73F85AB6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppConfig", "AppConfig", "{22F1DA5B-FD83-4D3B-9E81-802F73F85AB6}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\AppCommonConfig.h = ..\..\AppCommonConfig.h
+		..\..\AppCompilerConfig.h = ..\..\AppCompilerConfig.h
+		..\..\AppCpuArchDefines.h = ..\..\AppCpuArchDefines.h
+		..\..\AppDependLibrariesConfig.h = ..\..\AppDependLibrariesConfig.h
+		..\..\AppTargetOsConfig.h = ..\..\AppTargetOsConfig.h
+		..\..\config_appcorelibs.h = ..\..\config_appcorelibs.h
+		..\..\config_apps.h = ..\..\config_apps.h
 		..\..\DependLibs\ffmpeg\config_ffmpeg.h = ..\..\DependLibs\ffmpeg\config_ffmpeg.h
-		..\..\config_gotvapps.h = ..\..\config_gotvapps.h
-		..\..\config_gotvcore.h = ..\..\config_gotvcore.h
 		..\..\kodi_src\xbmc\xbmc\config_kodi.h = ..\..\kodi_src\xbmc\xbmc\config_kodi.h
-		..\..\GoTvAppConfig.h = ..\..\GoTvAppConfig.h
-		..\..\GoTvCompilerConfig.h = ..\..\GoTvCompilerConfig.h
-		..\..\GoTvCpuArchDefines.h = ..\..\GoTvCpuArchDefines.h
-		..\..\GoTvDebugConfig.h = ..\..\GoTvDebugConfig.h
-		..\..\GoTvDependLibrariesConfig.h = ..\..\GoTvDependLibrariesConfig.h
-		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
-		..\..\GoTvVersion.txt = ..\..\GoTvVersion.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "..\..\DependLibs\libpng\build\VS2019\libpng.vcxproj", "{1E3986AE-8AB8-4D85-9BA7-E5582D8DA983}"
@@ -308,6 +306,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 		..\..\GoTvDependLibs.pro = ..\..\GoTvDependLibs.pro
 		..\..\GoTvLibsAll.pro = ..\..\GoTvLibsAll.pro
 		..\..\GoTvOpenSslLib.pro = ..\..\GoTvOpenSslLib.pro
+		..\..\GoTvPtoPVersion.txt = ..\..\GoTvPtoPVersion.txt
+		..\..\GoTvPythonLib.pro = ..\..\GoTvPythonLib.pro
+		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
 		..\..\NoLimit_App.pro = ..\..\NoLimit_App.pro
 		..\..\NoLimit_AppAndroid.pro = ..\..\NoLimit_AppAndroid.pro
 		..\..\NoLimit_AppLink.pro = ..\..\NoLimit_AppLink.pro
@@ -316,9 +317,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 		..\..\NoLimit_link.pri = ..\..\NoLimit_link.pri
 		..\..\NoLimitAppLib.pri = ..\..\NoLimitAppLib.pri
 		..\..\NoLimitAppLib.pro = ..\..\NoLimitAppLib.pro
-		..\..\GoTvPtoPVersion.txt = ..\..\GoTvPtoPVersion.txt
-		..\..\GoTvPythonLib.pro = ..\..\GoTvPythonLib.pro
-		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvpx", "..\..\DependLibs\libvpx-win64\build\VS2019\vpx.vcxproj", "{DCE19DAF-69AC-46DB-B14A-39F0FAA5DB74}"
@@ -1135,7 +1133,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = 64BitVs2017Qt5.15.2
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = 64BitVs2017Qt5.15.2
 	EndGlobalSection
 EndGlobal

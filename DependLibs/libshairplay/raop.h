@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 # define RAOP_API	GOTV_API
 
 #ifdef __cplusplus

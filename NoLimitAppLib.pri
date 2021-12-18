@@ -345,11 +345,11 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAppTheme.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAppDisplay.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxPlainTextEdit.h \
-    $$PWD/GoTvAppConfig.h \
-    $$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/AppCommonConfig.h \
+    $$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/GuiInterface/config_libgotvptop.h \
     $$PWD/GuiInterface/GoTvRenderFrame.h \
     $$PWD/GuiInterface/IAudioInterface.h \

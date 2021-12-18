@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <CoreLib/StdMinMaxForWindows.h>
 
 #include "PktsPluginOffer.h"

@@ -2,7 +2,7 @@
 //============================================================================
 // Created by Brett R. Jones in 2017 and issued to public domain
 //============================================================================
-#include "GoTvCompilerConfig.h"
+#include "AppCompilerConfig.h"
 
 //============================================================================
 //=== Windows Specific ===//
@@ -182,9 +182,9 @@ echo GoTv Compiler Config error no os defined
 # endif // defined(HAVE_XBMC_NONFREE)
 #endif
 
-//#define HAS_WIN32_NETWORK     // defined in GoTvCompilerConfig.h
-//#define HAS_AUDIO 1           // defined in GoTvCompilerConfig.h
-//#define HAS_FILESYSTEM_SMB 1  // defined in GoTvCompilerConfig.h
+//#define HAS_WIN32_NETWORK     // defined in AppCompilerConfig.h
+//#define HAS_AUDIO 1           // defined in AppCompilerConfig.h
+//#define HAS_FILESYSTEM_SMB 1  // defined in AppCompilerConfig.h
 
 //#define HAS_SDL_JOYSTICK  // define for joystick control
 
@@ -236,9 +236,9 @@ extern "C" {
 //=== Windows Specific ===//
 //============================================================================
 #if defined(TARGET_OS_WINDOWS)
-//#define HAS_WIN32_NETWORK     // defined in GoTvCompilerConfig.h
-//#define HAS_AUDIO 1           // defined in GoTvCompilerConfig.h
-//#define HAS_FILESYSTEM_SMB 1  // defined in GoTvCompilerConfig.h
+//#define HAS_WIN32_NETWORK     // defined in AppCompilerConfig.h
+//#define HAS_AUDIO 1           // defined in AppCompilerConfig.h
+//#define HAS_FILESYSTEM_SMB 1  // defined in AppCompilerConfig.h
 
 //#define HAS_SDL_JOYSTICK  // define for joystick control
 # ifndef HAVE_QT_GUI

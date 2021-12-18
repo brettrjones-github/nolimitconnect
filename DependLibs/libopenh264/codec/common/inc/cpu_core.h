@@ -39,7 +39,7 @@
  */
 #if !defined(WELS_CPU_CORE_FEATURE_DETECTION_H__)
 #define WELS_CPU_CORE_FEATURE_DETECTION_H__
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /*
  *  WELS CPU feature flags

@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define HAVE_PTHREAD_H			1
 

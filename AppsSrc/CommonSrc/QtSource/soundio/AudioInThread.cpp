@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "AudioInThread.h"
 #include "AudioIoMgr.h"
 #include <QDebug>

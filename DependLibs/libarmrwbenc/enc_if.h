@@ -18,7 +18,7 @@
 
 #ifndef VO_AMRWBENC_ENC_IF_H
 #define VO_AMRWBENC_ENC_IF_H
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef __cplusplus
 extern "C" {

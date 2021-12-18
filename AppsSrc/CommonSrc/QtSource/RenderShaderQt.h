@@ -19,7 +19,7 @@
  */
 
 #pragma once
-#include "config_gotvapps.h"
+#include "config_apps.h"
 
 #include "GuiInterface/IGoTvRender.h"
 #include "cores/VideoPlayer/VideoRenderers/VideoShaders/ShaderFormats.h"

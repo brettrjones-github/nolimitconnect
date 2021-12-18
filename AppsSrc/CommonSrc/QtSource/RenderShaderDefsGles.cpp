@@ -1,4 +1,4 @@
-#include <app_precompiled_hdr.h>
+
 //#define SHADERS_INCLUDE
 #if defined(SHADERS_INCLUDE)
 

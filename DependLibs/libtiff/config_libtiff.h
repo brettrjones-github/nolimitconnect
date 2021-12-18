@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /* Define if building universal (internal helper macro) */
 //#undef AC_APPLE_UNIVERSAL_BUILD

@@ -1425,7 +1425,7 @@ bool GuiHelpers::widgetToPluginSettings( EPluginType pluginType, PluginSettingsW
         pluginSetting.setGender( (EGenderType)settingsWidget->getGenderComboBox()->currentIndex() );
         pluginSetting.setAgeType( (EAgeType)settingsWidget->getAgeComboBox()->currentIndex() );
         pluginSetting.setPluginUrl( settingsWidget->getServiceUrlEdit()->text().toUtf8().constData() );
-        pluginSetting.setTitle( settingsWidget->getServiceNameEdit()->text().toUtf8().constData() );
+        pluginSetting.setTitle( settingsWidget->getServiceTitleEdit()->text().toUtf8().constData() );
         pluginSetting.setGreetingMsg( settingsWidget->getGreetingEdit()->toPlainText().toUtf8().constData() );
         pluginSetting.setRejectMsg( settingsWidget->getRejectEdit()->toPlainText().toUtf8().constData() );
 
@@ -1459,7 +1459,7 @@ bool GuiHelpers::pluginSettingsToWidget( EPluginType pluginType, PluginSetting& 
         settingsWidget->getLanguageComboBox()->setCurrentIndex( GuiHelpers::languageToIndex( pluginSetting.getLanguage() ) );
 
         settingsWidget->getServiceUrlEdit()->setText( pluginSetting.getPluginUrl().c_str() );
-        settingsWidget->getServiceNameEdit()->setText( pluginSetting.getTitle().c_str() );
+        settingsWidget->getServiceTitleEdit()->setText( pluginSetting.getTitle().c_str() );
         settingsWidget->getServiceDescriptionEdit()->appendPlainText( pluginSetting.getDescription().c_str() );
         settingsWidget->getGreetingEdit()->appendPlainText( pluginSetting.getGreetingMsg().c_str() );
         settingsWidget->getRejectEdit()->appendPlainText( pluginSetting.getRejectMsg().c_str() );
@@ -1596,6 +1596,8 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
 #endif // defined (Q_OS_ANDROID)
 }
 
+//============================================================================
+// Saved as example code
 int convertToRgb()
 {
     QImage image( 100, 100, QImage::Format_RGB888 );

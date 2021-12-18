@@ -2,7 +2,7 @@ $$PWD/DependLibs/libasprintf/
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/DependLibs/libasprintf/alloca.in.h \
     $$PWD/DependLibs/libasprintf/autosprintf.h \

@@ -41,7 +41,7 @@
 #ifndef SVGVIEW_H
 #define SVGVIEW_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <QGraphicsView>
 
 QT_BEGIN_NAMESPACE

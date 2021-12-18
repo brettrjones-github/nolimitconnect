@@ -8,7 +8,7 @@
 //   http://www.agner.org/optimize/calling_conventions.pdf
 //   or with gcc, run: "echo | gcc -E -dM -"
 
-#include "GoTvTargetOsConfig.h"
+#include "AppTargetOsConfig.h"
 
 #define GOTV_FLOATING_POINT        1 // use floats and don't support fixed point
 //#define GOTV_FIXED_POINT        1 // support fixed point

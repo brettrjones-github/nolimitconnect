@@ -26,7 +26,7 @@
  *$Id: cr-cascade.c,v 1.7 2005/05/10 19:48:56 dodji Exp $
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-cascade.h"
 

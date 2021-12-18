@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define CONFIG_BIGINT_BARRETT 1
 #define CONFIG_BIGINT_CRT 1

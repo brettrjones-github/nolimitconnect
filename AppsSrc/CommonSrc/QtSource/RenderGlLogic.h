@@ -13,7 +13,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include "config_gotvapps.h"
+#include "config_apps.h"
 #include <QWidget>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QOpenGLWidget>

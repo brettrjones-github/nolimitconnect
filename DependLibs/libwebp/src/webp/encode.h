@@ -14,7 +14,7 @@
 #ifndef WEBP_WEBP_ENCODE_H_
 #define WEBP_WEBP_ENCODE_H_
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include "./types.h"
 

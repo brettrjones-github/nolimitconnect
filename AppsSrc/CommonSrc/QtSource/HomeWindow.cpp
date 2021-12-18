@@ -1,4 +1,4 @@
-#include <app_precompiled_hdr.h>
+
 #include "HomeWindow.h"
 #include "AppCommon.h"
 #include "AppSettings.h"

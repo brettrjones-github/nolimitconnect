@@ -90,7 +90,7 @@
  * First version.
  *****************************************************************************/
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef _MSC_VER
 # include <CoreLib/dirent_sim.h>

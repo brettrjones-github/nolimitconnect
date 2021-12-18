@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef TARGET_OS_WINDOWS
 # include <libvpx/vpx_dsp_rtcd.h>

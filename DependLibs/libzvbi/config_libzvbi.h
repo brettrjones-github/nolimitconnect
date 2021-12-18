@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define VBI_BEGIN_DECLS		GOTV_BEGIN_CDECLARES
 #define VBI_END_DECLS		GOTV_END_CDECLARES

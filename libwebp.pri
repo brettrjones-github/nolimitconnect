@@ -6,7 +6,7 @@ INCLUDEPATH += $NDK_MODULE_PATH
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/DependLibs/libwebp/config_libwebp.h \
     $$PWD/DependLibs/libwebp/src/dec/alphai_dec.h \

@@ -29,7 +29,7 @@
  *The definition of the #CREncHandler class.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include "cr-enc-handler.h"
 #include "cr-utils.h"
 

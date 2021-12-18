@@ -1148,7 +1148,7 @@ typedef int64_t              time64_t;
 /* define to 1 if Cocoa is available */
 #define HAVE_COCOA				1
 
-#define HAVE_CONFIG_H			1	// define so opus uses GoTvDependLibrariesConfig.h local file ( most everything requires one anyway )
+#define HAVE_CONFIG_H			1	// define so opus uses AppDependLibrariesConfig.h local file ( most everything requires one anyway )
 #ifndef HAVE_CHAR16_T
 # define HAVE_CHAR16_T			1
 #endif // HAVE_CHAR16_T

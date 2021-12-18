@@ -28,7 +28,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 
 #ifdef CONFIG_SSL_GENERATE_X509_CERT
 #include <string.h>

@@ -37,7 +37,7 @@
 #ifndef SFTP_H
 #define SFTP_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <sys/types.h>
 

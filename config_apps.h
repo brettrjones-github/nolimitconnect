@@ -2,7 +2,7 @@
 //============================================================================
 // Created by Brett R. Jones in 2017 and issued to public domain
 //============================================================================
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define GOTV_APP_RESOURCE_PREFIX		":/AppRes/Resources/"
 

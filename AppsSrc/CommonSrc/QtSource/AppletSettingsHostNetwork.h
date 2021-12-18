@@ -34,6 +34,7 @@ public:
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
 
 protected slots:
+    void                        slotHostRequirementsButtonClicked();
     void                        slotApplyServiceSettings();
 
 protected:

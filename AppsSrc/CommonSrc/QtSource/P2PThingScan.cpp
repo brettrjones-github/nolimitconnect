@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "AppCommon.h"
 #include "ActivityScanProfiles.h"
 #include "ActivityScanWebCams.h"

@@ -30,7 +30,7 @@
  *
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <string.h>
 

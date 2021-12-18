@@ -11,7 +11,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "AppletServiceShareFiles.h"
 #include "AppCommon.h"
 #include "AppSettings.h"

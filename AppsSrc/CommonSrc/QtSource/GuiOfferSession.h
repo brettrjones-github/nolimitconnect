@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
+#include "config_apps.h"
 
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/VxSha1Hash.h>

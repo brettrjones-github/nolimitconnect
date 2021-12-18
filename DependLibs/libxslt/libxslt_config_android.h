@@ -231,9 +231,9 @@ __inline int c99_snprintf( char *outBuf, size_t size, const char *format, ... )
 
 #endif /* defined(_MSC_VER) && _MSC_VER < 1900 */
 
-//#define HAVE_SYS_STAT_H // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_STAT_H // defined in AppCompilerConfig.h
 #define HAVE__STAT
-// #define HAVE_STRING_H // defined in GoTvCompilerConfig.h
+// #define HAVE_STRING_H // defined in AppCompilerConfig.h
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED

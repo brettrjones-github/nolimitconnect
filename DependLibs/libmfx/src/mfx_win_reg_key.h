@@ -31,7 +31,7 @@ File Name: mfx_win_reg_key.h
 #if !defined(__MFX_WIN_REG_KEY_H)
 #define __MFX_WIN_REG_KEY_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #if defined(_WIN32) || defined(_WIN64)
 

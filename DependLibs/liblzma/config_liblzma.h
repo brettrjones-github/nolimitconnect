@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 # define LZMA_API_EXPORT		GOTV_EXPORT
 # define LZMA_RESTRICT			GOTV_RESTRICT

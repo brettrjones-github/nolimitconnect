@@ -25,7 +25,7 @@ INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc/platform/qt
 HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvDebugConfig.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/kodi_src/xbmc/xbmc/config_kodi.h \
     $$PWD/kodi_src/xbmc/xbmc/AppParamParser.h \
     $$PWD/kodi_src/xbmc/xbmc/platform/qt/KodiQtApp.h \

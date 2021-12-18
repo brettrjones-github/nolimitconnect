@@ -32,7 +32,7 @@
 #ifndef _AP4_CONFIG_H_
 #define _AP4_CONFIG_H_
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /*----------------------------------------------------------------------
 |   defaults

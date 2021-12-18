@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include "opus_defines.h"
 

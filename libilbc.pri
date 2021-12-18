@@ -3,9 +3,9 @@ INCLUDEPATH += $$PWD/DependLibs/libilbc/include
 
 
 
-HEADERS += 	$$PWD/DependLibs/libilbc/../../GoTvCompilerConfig.h \
-    $$PWD/DependLibs/libilbc/../../GoTvCpuArchDefines.h \
-    $$PWD/DependLibs/libilbc/../../GoTvDependLibrariesConfig.h \
+HEADERS += 	$$PWD/DependLibs/libilbc/../../AppCompilerConfig.h \
+    $$PWD/DependLibs/libilbc/../../AppCpuArchDefines.h \
+    $$PWD/DependLibs/libilbc/../../AppDependLibrariesConfig.h \
     $$PWD/DependLibs/libilbc/ilbc/abs_quant.h \
     $$PWD/DependLibs/libilbc/ilbc/abs_quant_loop.h \
     $$PWD/DependLibs/libilbc/ilbc/augmented_cb_corr.h \

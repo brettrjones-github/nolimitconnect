@@ -20,7 +20,7 @@
  * See COPRYRIGHTS file for copyright information.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-doc-handler.h"
 #include "cr-parser.h"

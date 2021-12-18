@@ -13,8 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
-#include "config_gotvapps.h"
+
+#include "config_apps.h"
 
 #include "VxComboBoxFileFilter.h"
 

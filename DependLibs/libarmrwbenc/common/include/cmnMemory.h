@@ -23,7 +23,7 @@
 #ifndef __cmnMemory_H__
 #define __cmnMemory_H__
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 GOTV_BEGIN_CDECLARES
 

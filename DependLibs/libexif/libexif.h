@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #define EXIF_EXPORT		GOTV_EXPORT
 
 #ifdef __cplusplus

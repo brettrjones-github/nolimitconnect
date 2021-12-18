@@ -1,7 +1,7 @@
 #ifndef LAYER3_H
 #define LAYER3_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <stdint.h>
 

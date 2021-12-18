@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+#include "ActivityInformation.h"
 #include "AppletSettingsHostChatRoom.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -29,10 +29,13 @@ AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget 
     setAppletType( eAppletSettingsHostChatRoom );
     setPluginType( ePluginTypeHostChatRoom );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+
     getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostChatRoom, ePluginTypeHostChatRoom );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
+
+    connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );
     connectServiceWidgets();
     loadPluginSetting();
 
@@ -113,4 +116,14 @@ bool AppletSettingsHostChatRoom::verifyPluginSettings()
     }
     
     return settingsOk && ( ePluginTypeInvalid != getPluginType() );
+}
+
+//============================================================================
+void AppletSettingsHostChatRoom::slotHostRequirementsButtonClicked()
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeIgnoredList );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
 }

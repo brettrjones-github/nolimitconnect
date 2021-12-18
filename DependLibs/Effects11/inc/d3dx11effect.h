@@ -14,7 +14,7 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-//#include <GoTvDependLibrariesConfig.h>
+//#include <AppDependLibrariesConfig.h>
 #ifdef TARGET_OS_WINDOWS
 
 #define D3DX11_EFFECTS_VERSION 1117

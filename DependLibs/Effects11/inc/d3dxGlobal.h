@@ -14,7 +14,7 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-//#include <GoTvDependLibrariesConfig.h>
+//#include <AppDependLibrariesConfig.h>
 #include <assert.h>
 #include <string.h>
 

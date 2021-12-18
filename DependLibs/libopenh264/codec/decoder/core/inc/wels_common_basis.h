@@ -33,7 +33,7 @@
 //wels_common_basis.h
 #ifndef WELS_COMMON_BASIS_H__
 #define WELS_COMMON_BASIS_H__
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include "typedefs.h"
 #include "macros.h"

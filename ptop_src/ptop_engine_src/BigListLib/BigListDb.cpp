@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListDb.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListMgr.h>

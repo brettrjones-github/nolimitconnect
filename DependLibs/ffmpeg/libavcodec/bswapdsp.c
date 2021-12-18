@@ -21,7 +21,7 @@
 #include "libavutil/avutil_attributes.h"
 #include "libavutil/bswap.h"
 #include "bswapdsp.h"
-#include <GoTvCpuArchDefines.h>
+#include <AppCpuArchDefines.h>
 
 static void bswap_buf(uint32_t *dst, const uint32_t *src, int w)
 {

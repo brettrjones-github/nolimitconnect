@@ -15,7 +15,7 @@ HEADERS += 	$$PWD/DependLibs/libnfs/config_libnfs.h \
     $$PWD/GoTvAppConfig.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h
+    $$PWD/AppDependLibrariesConfig.h
 
 SOURCES += 	$$PWD/DependLibs/libnfs/init.c \
     $$PWD/DependLibs/libnfs/libnfs-raw-mount.c \

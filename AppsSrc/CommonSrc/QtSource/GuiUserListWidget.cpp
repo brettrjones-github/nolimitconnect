@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "UserListItem.h"
 #include "GuiUser.h"
 #include "GuiUserListWidget.h"

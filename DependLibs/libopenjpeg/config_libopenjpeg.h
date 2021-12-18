@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #define OPJ_HAVE_STDINT_H 		HAVE_STDINT_H
 #define OPJ_HAVE_INTTYPES_H 	1
 #define OPJ_STATIC				1

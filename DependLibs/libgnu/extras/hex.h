@@ -1,7 +1,7 @@
 /* CC0 (Public domain) - see LICENSE file for details */
 #ifndef CCAN_HEX_H
 #define CCAN_HEX_H
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 #include <stdbool.h>
 #include <stdlib.h>
 

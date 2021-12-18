@@ -1,5 +1,5 @@
 #pragma once
-# include <GoTvDependLibrariesConfig.h>
+# include <AppDependLibrariesConfig.h>
 
 #define OPUSTOOLS             1
 #define SPX_RESAMPLE_EXPORT

@@ -185,7 +185,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="m_NameEdit">
+    <widget class="QLineEdit" name="m_ServiceTitleEdit">
      <property name="maxLength">
       <number>127</number>
      </property>

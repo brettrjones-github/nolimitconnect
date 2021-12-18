@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "VxResourceToRealFile.h"
 
 #include <CoreLib/VxGlobals.h>

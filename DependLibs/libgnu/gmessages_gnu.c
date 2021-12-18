@@ -28,7 +28,7 @@
  * Modified by Bruno Haible for use as a gnulib module.
  */
 
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 
 #include "glib.h"
 #include <CoreLib/VxDebug.h>

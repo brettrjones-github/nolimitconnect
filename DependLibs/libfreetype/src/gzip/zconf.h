@@ -7,7 +7,7 @@
 
 #ifndef _ZCONF_H
 #define _ZCONF_H
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /*
  * If you *really* need a unique prefix for all types and library functions,

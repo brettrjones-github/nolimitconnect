@@ -1,4 +1,4 @@
-#include <app_precompiled_hdr.h>
+
 #include "EventsQtToGoTv.h"
 #include "AppCommon.h"
 

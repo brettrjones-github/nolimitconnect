@@ -20,7 +20,7 @@
 #include <libpng/config_libpng.h>
 
 #if defined(HAVE_CONFIG_H) && !defined(PNG_NO_CONFIG_H)
-# include "GoTvDependLibrariesConfig.h"
+# include "AppDependLibrariesConfig.h"
 #endif
 #ifdef PNG_USER_CONFIG
 # include "pngusr.h"

@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "RelayServiceWidget.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"

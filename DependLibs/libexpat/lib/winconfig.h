@@ -10,8 +10,8 @@
 #ifndef WINCONFIG_H_
 #define WINCONFIG_H_
 
-// cannot include GoTvDependLibrariesConfig because of name clash with EXP_ELEMENT_TYPE
-//#include <GoTvDependLibrariesConfig.h>
+// cannot include AppDependLibrariesConfig because of name clash with EXP_ELEMENT_TYPE
+//#include <AppDependLibrariesConfig.h>
 
 //#ifdef TARGET_OS_WINDOWS
 
@@ -34,6 +34,6 @@
 //#endif // TARGET_OS_WINDOWS
 
 /* Windows has memmove() available. */
-//#define HAVE_MEMMOVE defined in GoTvDependLibrariesConfig
+//#define HAVE_MEMMOVE defined in AppDependLibrariesConfig
 
 #endif /* ndef WINCONFIG_H */

@@ -201,25 +201,25 @@
 /* #undef HAVE_SYS_NDIR_H */
 
 /* Define to 1 if you have the <sys/select.h> header file. */
-//#define HAVE_SYS_SELECT_H 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-//#define HAVE_SYS_SOCKET_H 1  // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_SOCKET_H 1  // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-//#define HAVE_SYS_STAT_H 1  // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_STAT_H 1  // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <sys/timeb.h> header file. */
 /* #undef HAVE_SYS_TIMEB_H */
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-//#define HAVE_SYS_TIME_H 1  // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_TIME_H 1  // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <time.h> header file. */
-//#define HAVE_TIME_H 1  // defined in GoTvCompilerConfig.h
+//#define HAVE_TIME_H 1  // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <unistd.h> header file. */
 //#define HAVE_UNISTD_H 1

@@ -1,7 +1,7 @@
 
-#include <app_precompiled_hdr.h>
 
-#include "GoTvAppConfig.h"
+
+#include "AppCommonConfig.h"
 #ifdef BUILD_GOTV_APP
 
 #include <AppsSrc/CommonSrc/QtSource/AppCommon.h>

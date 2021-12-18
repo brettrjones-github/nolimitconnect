@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 
 #include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 #include "OpusCallbackInterface.h"

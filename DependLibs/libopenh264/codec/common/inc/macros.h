@@ -39,7 +39,7 @@
  */
 #ifndef WELS_MACRO_UTILIZATIONS_H__
 #define WELS_MACRO_UTILIZATIONS_H__
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <math.h>
 #include <assert.h>

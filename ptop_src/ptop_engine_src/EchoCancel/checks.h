@@ -11,7 +11,7 @@
 #ifndef WEBRTC_BASE_CHECKS_H_
 #define WEBRTC_BASE_CHECKS_H_
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 
 #include <sstream>
 #include <string>

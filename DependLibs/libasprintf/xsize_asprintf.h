@@ -17,7 +17,7 @@
 
 #ifndef _XSIZE_H
 #define _XSIZE_H
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /* Get size_t.  */
 #include <stddef.h>

@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 //#define USE_ECHO_CANCEL		1	// define to enable webrtc echo cancel 
 //#define OUTSIDE_SPEEX		1	// define so speex resampler compiles with correct prefixes for opus build

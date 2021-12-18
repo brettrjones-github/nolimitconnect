@@ -5,12 +5,12 @@ INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/modes
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/asn1
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/evp
 
-HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../GoTvAppConfig.h \
-    $$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
-    $$PWD/config_gotvcore.h \
+HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../AppCommonConfig.h \
+    $$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
+    $$PWD/config_appcorelibs.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/apps.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/progs.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/s_apps.h \

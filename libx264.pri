@@ -1,9 +1,9 @@
 INCLUDEPATH += $$PWD/DependLibs/libx264/
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libx264/common/bitstream.h \
     $$PWD/DependLibs/libx264/common/cabac.h \
     $$PWD/DependLibs/libx264/common/common.h \

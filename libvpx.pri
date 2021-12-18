@@ -22,7 +22,7 @@ INCLUDEPATH += $$PWD/DependLibs/libvpx/vpx_dsp
 HEADERS += 	$$PWD/GoTvAppConfig.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/DependLibs/libvpx/vp8/common/alloccommon.h \
     $$PWD/DependLibs/libvpx/vp8/common/blockd.h \

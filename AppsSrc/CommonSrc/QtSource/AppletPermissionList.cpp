@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "AppletPermissionList.h"
 #include "ActivityInformation.h"
 #include "PermissionListItem.h"

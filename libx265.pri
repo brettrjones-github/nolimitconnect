@@ -4,10 +4,10 @@
 
 INCLUDEPATH += $$PWD/DependLibs/libx265/
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libx265/common/bitstream.h \
     $$PWD/DependLibs/libx265/common/common.h \
     $$PWD/DependLibs/libx265/common/constants.h \

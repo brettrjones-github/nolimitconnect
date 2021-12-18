@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "AppletJoinGroupStatus.h"
 #include "AppCommon.h"
 #include "AppSettings.h"

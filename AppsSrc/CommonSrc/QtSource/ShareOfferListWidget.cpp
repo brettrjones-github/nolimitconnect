@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "ShareOfferListItem.h"
 #include "ShareOfferListWidget.h"
 #include "GuiOfferClientMgr.h"

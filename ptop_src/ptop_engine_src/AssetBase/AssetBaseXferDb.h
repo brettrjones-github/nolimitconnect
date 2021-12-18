@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 
 #include <CoreLib/DbBase.h>
 #include <CoreLib/VxGUID.h>

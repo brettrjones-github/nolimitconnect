@@ -64,7 +64,7 @@
 */
 
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <stdio.h>
 #include <stdlib.h>

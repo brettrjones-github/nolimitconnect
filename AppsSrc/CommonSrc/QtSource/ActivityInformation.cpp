@@ -11,7 +11,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "ActivityInformation.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -375,6 +375,18 @@ QString ActivityInformation::m_NearbyList( QObject::tr(
     "An easy way to get connected without being in the same group is to connect his/her device on your home Wireless or LAN network.\n"
 ) );
 
+QString ActivityInformation::m_UserHostRequrements( QObject::tr(
+    "=== Hosting Requirements any of these host services Chat Room, Group, Random Connect ===\n"
+    "You will need to port forward the listen port you specified in Network Settings\n"
+    "Articles about port forwarding can be found by search engine or at https://www.jguru.com/vpn-port-forwarding \n"
+    "The author of No Limit Connect used PureVPN because it has port forwarding and also fixed ip address (additional costs of course)  .\n"
+) );
+
+QString ActivityInformation::m_NetworkHostRequrements( QObject::tr(
+    "=== Hosting Requirements Network Host ===\n"
+    "If you want to host your own network the network host must have port forwarding and also a fixed ip address.\n"
+) );
+
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -422,6 +434,14 @@ QString ActivityInformation::getInfoText( void )
         return m_IgnoredList;
     case eInfoTypeNearbyList:
         return m_NearbyList;
+
+    case eInfoTypeGroupStatus:
+    case eInfoTypeHostChatRoom:
+    case eInfoTypeHostGroup:
+    case eInfoTypeHostRandomConnect:
+        return m_UserHostRequrements;
+    case eInfoTypeHostNetwork:
+        return m_NetworkHostRequrements + m_UserHostRequrements;
     default:
         return m_NoInfoAvailable;
     }

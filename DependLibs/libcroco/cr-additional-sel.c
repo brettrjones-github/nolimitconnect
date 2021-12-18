@@ -22,7 +22,7 @@
  *
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include "cr-additional-sel.h"
 #include "string.h"
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "config_gotvcore.h"
+#include "config_appcorelibs.h"
 
 #define EQZ_BANDS_MAX 10
 

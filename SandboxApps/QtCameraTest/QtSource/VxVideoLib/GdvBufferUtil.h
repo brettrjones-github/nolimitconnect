@@ -29,7 +29,7 @@
  
 #ifndef __GDVBUFFERUTIL_H__
 #define __GDVBUFFERUTIL_H__
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #ifdef TARGET_OS_WINDOWS
     typedef int32_t			gint32;
     typedef uint32_t        guint32;

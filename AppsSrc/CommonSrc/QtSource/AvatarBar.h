@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvapps.h>
+#include <config_apps.h>
 #include "ui_AvatarBarWidget.h"
 
 class AppCommon;

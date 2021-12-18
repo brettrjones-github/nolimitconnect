@@ -24,7 +24,7 @@
 
 #ifndef __TWOLAME_H__
 #define __TWOLAME_H__
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef __cplusplus
 extern "C" {

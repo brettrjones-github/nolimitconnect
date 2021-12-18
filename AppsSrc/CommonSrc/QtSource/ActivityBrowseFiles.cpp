@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "ActivityBrowseFiles.h"
 #include "ActivityYesNoMsgBox.h"
 #include "AppCommon.h"

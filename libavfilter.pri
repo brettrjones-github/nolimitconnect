@@ -68,7 +68,7 @@ HEADERS += 	$$PWD/DependLibs/ffmpeg/libavfilter/af_afir.h \
     $$PWD/DependLibs/ffmpeg/libavfilter/yadif.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h
 
 SOURCES += 	    $$PWD/DependLibs/ffmpeg/libavfilter/allfilters.c \

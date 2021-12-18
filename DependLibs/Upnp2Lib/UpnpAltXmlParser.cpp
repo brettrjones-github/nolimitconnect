@@ -1,6 +1,6 @@
 // from code project
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <memory.h>
 #include <assert.h>

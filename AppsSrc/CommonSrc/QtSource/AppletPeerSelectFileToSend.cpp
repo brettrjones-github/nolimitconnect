@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "AppletPeerSelectFileToSend.h"
 #include "ActivityMessageBox.h"
 #include "ActivityBrowseFiles.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #undef HAVE_MMX // libxavs seems to be missing some functions and uses defined instead of #if
 #undef HAVE_MMXEXT // libxavs seems to be missing some functions and uses defined instead of #if

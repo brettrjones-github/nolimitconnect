@@ -21,7 +21,7 @@
 #ifndef _LIBSSH_H
 #define _LIBSSH_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define LIBSSH_API
 

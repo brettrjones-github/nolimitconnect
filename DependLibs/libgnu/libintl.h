@@ -16,7 +16,7 @@
 #if !defined(TARGET_OS_LINUX) || defined(BUILD_GNU_INTERNAL)
 #ifndef _LIBINTL_H
 #define _LIBINTL_H 1
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 
 #include  <locale.h>
 #if (defined __APPLE__ && defined __MACH__) && 1

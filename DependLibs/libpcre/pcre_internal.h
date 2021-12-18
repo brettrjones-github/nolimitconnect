@@ -482,8 +482,8 @@ variable-length repeat, or a anything other than literal characters. */
 
 typedef int BOOL;
 
-//#define FALSE   0 // defined in GoTvCompilerConfig.h
-//#define TRUE    1 // defined in GoTvCompilerConfig.h
+//#define FALSE   0 // defined in AppCompilerConfig.h
+//#define TRUE    1 // defined in AppCompilerConfig.h
 
 /* Escape items that are just an encoding of a particular data value. */
 

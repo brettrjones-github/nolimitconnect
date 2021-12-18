@@ -39,7 +39,7 @@
  *  @{
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <libspeex/speex/speex_bits.h>
 #include <libspeex/speex/speex_types.h>

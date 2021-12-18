@@ -13,7 +13,7 @@ INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptArray.h \

@@ -38,7 +38,7 @@
 # ifndef __GNUC__
  // defined in GoTvDependLi
  //# if !defined( _MSC_FULL_VER )
- // typedef long ssize_t; // defined in GoTvCompilerConfig
+ // typedef long ssize_t; // defined in AppCompilerConfig
  //# endif //_MSC_FULL_VER
  //  typedef int  pid_t;
  //# endif /*!__GNUC__*/

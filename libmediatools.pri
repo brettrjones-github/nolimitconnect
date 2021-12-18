@@ -19,10 +19,10 @@ win32{
 INCLUDEPATH += $$PWD/DependLibs/MediaToolsLib/opus/win32
 }
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/MediaToolsLib/AviDefs.h \
     $$PWD/DependLibs/MediaToolsLib/MJPEGReader.h \
     $$PWD/DependLibs/MediaToolsLib/MJPEGWriter.h \

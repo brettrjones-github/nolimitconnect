@@ -51,7 +51,7 @@
 #ifndef RASTERWINDOW_H
 #define RASTERWINDOW_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <QWindow>
 
 class RasterWindow : public QWindow

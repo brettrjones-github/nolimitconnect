@@ -1,7 +1,7 @@
 //#include <PktLib/VxCommon.h>
 //#include <CoreLib/VxGUID.h>
 //#include <CoreLib/config_corelib.h>
-//#include <GoTvDependLibrariesConfig.h>
+//#include <AppDependLibrariesConfig.h>
 #include <GoTvCompilerConfig.h>
 
 #include "qtteststaticlib3.h"

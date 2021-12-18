@@ -27,7 +27,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 
 #ifdef TARGET_OS_WINDOWS
 #include "libcpluff/win32/cpluffdef.h"

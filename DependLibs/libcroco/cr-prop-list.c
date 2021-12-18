@@ -19,7 +19,7 @@
  * See COPYRIGHTS file for copyrights information.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-prop-list.h"
 

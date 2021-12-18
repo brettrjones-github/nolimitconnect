@@ -2,7 +2,7 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../../../GoTvCompilerIntTypes.h \
 	$$PWD/../../../../GoTvConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
-	$$PWD/../../../../GoTvDependLibrariesConfig.h \
+	$$PWD/../../../../AppDependLibrariesConfig.h \
 	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../src/bitstream.h \

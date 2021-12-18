@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "HostListItem.h"
 #include "HostListWidget.h"
 #include "GuiHostSession.h"

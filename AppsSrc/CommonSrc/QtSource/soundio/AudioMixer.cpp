@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "AudioMixer.h"
 #include <GuiInterface/IAudioInterface.h>
 #include "AudioIoMgr.h"

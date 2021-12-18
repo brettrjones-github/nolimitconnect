@@ -12,7 +12,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
 #include "PluginSettingsWidget.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -101,7 +100,7 @@ void PluginSettingsWidget::loadUiFromSetting()
         ui.m_ContentRatingComboBox->setCurrentIndex( GuiHelpers::contentRatingToIndex( m_PluginSetting.getContentRating() ) );
         ui.m_LanguageComboBox->setCurrentIndex( GuiHelpers::languageToIndex( m_PluginSetting.getLanguage() ) );
         ui.m_UrlEdit->setText( m_PluginSetting.getPluginUrl().c_str() );
-        ui.m_NameEdit->setText( m_PluginSetting.getTitle().c_str() );
+        ui.m_ServiceTitleEdit->setText( m_PluginSetting.getTitle().c_str() );
         ui.m_DescriptionEdit->appendPlainText( m_PluginSetting.getDescription().c_str() );
         ui.m_ThumbnailChooseWidget->loadThumbnail( m_PluginSetting.getThumnailId(), m_PluginSetting.getThumbnailIsCircular() );
     }
@@ -115,7 +114,7 @@ void PluginSettingsWidget::saveUiToSetting()
         m_PluginSetting.setContentRating( ( EContentRating)ui.m_ContentRatingComboBox->currentIndex() );
         m_PluginSetting.setLanguage( ( ELanguageType )ui.m_LanguageComboBox->currentIndex() );
         m_PluginSetting.setPluginUrl( ui.m_UrlEdit->text().toUtf8().constData() );
-        m_PluginSetting.setTitle( ui.m_NameEdit->text().toUtf8().constData() );
+        m_PluginSetting.setTitle( ui.m_ServiceTitleEdit->text().toUtf8().constData() );
         m_PluginSetting.setThumnailId( ui.m_ThumbnailChooseWidget->getThumbnailId(), ui.m_ThumbnailChooseWidget->getThumbnailIsCircular() );
 
         QString description = ui.m_DescriptionEdit->toPlainText().trimmed();

@@ -11,7 +11,8 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
+#include "ActivityInformation.h"
 #include "AppletSettingsHostNetwork.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -28,10 +29,13 @@ AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * 
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostNetwork );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+
     getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostNetwork, ePluginTypeHostNetwork );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
+
+    connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
     connectServiceWidgets();
     loadPluginSetting();
@@ -105,4 +109,14 @@ void AppletSettingsHostNetwork::slotApplyServiceSettings()
     }
 
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+}
+
+//============================================================================
+void AppletSettingsHostNetwork::slotHostRequirementsButtonClicked()
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeHostNetwork );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
 }

@@ -13,7 +13,7 @@
 
 // This header file contains all the definitions required to use the
 // functions in "wputils.c" to read and write WavPack files and streams.
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <sys/types.h>
 

@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "ThumbnailEditWidget.h"
 #include "AppletGalleryEmoticon.h"
 #include "AppletGalleryThumb.h"

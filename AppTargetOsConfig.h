@@ -55,4 +55,4 @@ echo GoTv Target OS Config error - apple not supported
 # endif
 #endif 
 
-#include "GoTvAppConfig.h" // compile defines for compile time application switches
+#include "AppCommonConfig.h" // compile defines for compile time application switches

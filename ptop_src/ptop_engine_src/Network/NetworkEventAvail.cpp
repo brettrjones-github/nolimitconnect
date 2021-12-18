@@ -15,7 +15,6 @@
 
 #include "NetworkEventAvail.h"
 #include "NetworkStateMachine.h"
-#include "GoTvDebugConfig.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 

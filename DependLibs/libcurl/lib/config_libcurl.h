@@ -1,6 +1,6 @@
 
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define HAVE_ZLIB_H 1
 #define USE_OPENSSL 1

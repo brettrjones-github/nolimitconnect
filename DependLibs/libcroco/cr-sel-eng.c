@@ -21,7 +21,7 @@
  * See  COPYRIGHTS file for copyright informations.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-sel-eng.h"
 

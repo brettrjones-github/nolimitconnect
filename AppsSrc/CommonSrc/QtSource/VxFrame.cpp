@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "VxFrame.h"
 
 #include <CoreLib/VxDebug.h>

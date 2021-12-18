@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include "OfferBaseXferMgr.h"
 #include "OfferBaseInfo.h"
 #include "OfferBaseMgr.h"

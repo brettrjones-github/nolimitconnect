@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef TARGET_OS_WINDOWS
 # define MHD_W32LIB 1
@@ -206,7 +206,7 @@ _MHD_bool. */
 //#define HAVE_SYS_PARAM_H 1
 
 /* Define to 1 if you have the <sys/select.h> header file. */
-//#define HAVE_SYS_SELECT_H 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_SELECT_H 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
 //#define HAVE_SYS_SOCKET_H 1

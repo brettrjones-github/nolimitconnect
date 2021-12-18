@@ -14,7 +14,7 @@
 // http://www.p2panarchy.com
 //============================================================================
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <NetLib/VxHttpParse.h>
 
 #include <vector>

@@ -32,7 +32,7 @@
 */
 #pragma once
 
-//#include <GoTvDependLibrariesConfig.h>
+//#include <AppDependLibrariesConfig.h>
 
 #define opus_int         int                     /* used for counters etc; at least 16 bits */
 #define opus_int64       long long

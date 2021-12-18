@@ -11,7 +11,7 @@ INCLUDEPATH += $$PWD/DependLibs/libopencore-amr/
 
 HEADERS += 	$$PWD/DependLibs/libopencore-amr/../../GoTvCompilerConfig.h \
     $$PWD/DependLibs/libopencore-amr/../../GoTvCpuArchDefines.h \
-    $$PWD/DependLibs/libopencore-amr/../../GoTvDependLibrariesConfig.h \
+    $$PWD/DependLibs/libopencore-amr/../../AppDependLibrariesConfig.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/abs_s.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/add.h \
     $$PWD/DependLibs/libopencore-amr/amrnb/common/az_lsp.h \

@@ -26,4 +26,4 @@ HEADERS += \
     GoTvAppConfig.h \
     GoTvCompilerConfig.h \
     GoTvCpuArchDefines.h \
-    GoTvDependLibrariesConfig.h
+    AppDependLibrariesConfig.h

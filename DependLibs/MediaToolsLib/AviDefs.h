@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define RIFF_2GB_FILESIZE_LIMIT			2147483648ULL 
 #define AVI_FILEPOS_RIFF				0 

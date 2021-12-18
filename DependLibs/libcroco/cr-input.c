@@ -21,7 +21,7 @@
  * See COPYRIGHTS file for copyright information.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include "stdio.h"
 #include <string.h>
 #include "cr-input.h"

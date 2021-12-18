@@ -5,7 +5,7 @@ INCLUDEPATH += $$PWD/DependLibs/libzvbi
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/DependLibs/libzvbi/config_libzvbi.h \
     $$PWD/DependLibs/libzvbi/contrib/dvbsubs.h \

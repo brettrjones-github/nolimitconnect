@@ -57,7 +57,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*************************************************************************/
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 
 #define SIZEOF_INT 4

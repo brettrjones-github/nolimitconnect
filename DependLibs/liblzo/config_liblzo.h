@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
@@ -61,7 +61,7 @@
 #define HAVE_FLOAT_H 1
 
 /* Define to 1 if you have the `fstat' function. */
-//#define HAVE_FSTAT 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_FSTAT 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the `getenv' function. */
 #define HAVE_GETENV 1
@@ -94,7 +94,7 @@
 #define HAVE_LONGJMP 1
 
 /* Define to 1 if you have the `lstat' function. */
-//#define HAVE_LSTAT 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_LSTAT 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <malloc.h> header file. */
 #define HAVE_MALLOC_H 1
@@ -121,10 +121,10 @@
 #define HAVE_MKTIME 1
 
 /* Define to 1 if you have the `mmap' function. */
-//#define HAVE_MMAP 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_MMAP 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the `mprotect' function. */
-//#define HAVE_MPROTECT 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_MPROTECT 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the `munmap' function. */
 #define HAVE_MUNMAP 1
@@ -205,7 +205,7 @@
 #define HAVE_STRSTR 1
 
 /* Define to 1 if you have the <sys/mman.h> header file. */
-//#define HAVE_SYS_MMAN_H 1 // defined in GoTvCompilerConfig.h
+//#define HAVE_SYS_MMAN_H 1 // defined in AppCompilerConfig.h
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
@@ -297,7 +297,7 @@
 #endif // ARCH_32_BITS
 
 /* The size of `int', as computed by sizeof. */
-//#define SIZEOF_INT 4 // defined in GoTvCpuArchDefines.h
+//#define SIZEOF_INT 4 // defined in AppCpuArchDefines.h
 
 /* The size of `intmax_t', as computed by sizeof. */
 #if ARCH_32_BITS
@@ -314,7 +314,7 @@
 #endif // ARCH_32_BITS
 
 /* The size of `long', as computed by sizeof. */
-//#define SIZEOF_LONG 8 // defined in GoTvCpuArchDefines.h
+//#define SIZEOF_LONG 8 // defined in AppCpuArchDefines.h
 
 /* The size of `long double', as computed by sizeof. */
 #define SIZEOF_LONG_DOUBLE 16
@@ -391,7 +391,7 @@
 #define SIZEOF___INT32 0
 
 /* The size of `__int64', as computed by sizeof. */
-#undef SIZEOF___INT64 // defined in GoTvCompilerConfig.h
+#undef SIZEOF___INT64 // defined in AppCompilerConfig.h
 #define SIZEOF___INT64 0
 
 /* Define to 1 if you have the ANSI C header files. */

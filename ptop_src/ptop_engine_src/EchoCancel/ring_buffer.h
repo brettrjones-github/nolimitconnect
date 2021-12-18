@@ -14,7 +14,7 @@
 #ifndef WEBRTC_COMMON_AUDIO_RING_BUFFER_H_
 #define WEBRTC_COMMON_AUDIO_RING_BUFFER_H_
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include <stdlib.h>
 #include <stddef.h>
 

@@ -41,7 +41,7 @@
 //# endif
 //#endif
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <stdarg.h>
 

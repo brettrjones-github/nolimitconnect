@@ -11,10 +11,10 @@ INCLUDEPATH += $$PWD/DependLibs/libcurl/include
 INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
 
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
-    $$PWD/GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
+    $$PWD/AppTargetOsConfig.h \
     $$PWD/DependLibs/libcurl/lib/amigaos.h \
     $$PWD/DependLibs/libcurl/lib/arpa_telnet.h \
     $$PWD/DependLibs/libcurl/lib/asyn.h \

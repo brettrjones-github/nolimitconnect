@@ -3,7 +3,7 @@ INCLUDEPATH += $$PWD/DependLibs/libzip/
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/DependLibs/libzip/config_libzip.h \
     $$PWD/DependLibs/libzip/zip.h \

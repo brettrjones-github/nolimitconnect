@@ -41,7 +41,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <QMainWindow>
 #include <QString>

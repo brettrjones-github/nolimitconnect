@@ -34,7 +34,7 @@
 #ifndef WELS_TYPE_DEFINES_H__
 #define WELS_TYPE_DEFINES_H__
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <limits.h>
 #include <stddef.h>

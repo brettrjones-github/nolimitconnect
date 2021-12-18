@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #define SPEEX_EXPORT	GOTV_EXPORT
 

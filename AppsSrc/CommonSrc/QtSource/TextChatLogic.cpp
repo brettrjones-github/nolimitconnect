@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "TextChatLogic.h"
 #include "AppCommon.h"
 #include "MyIcons.h"

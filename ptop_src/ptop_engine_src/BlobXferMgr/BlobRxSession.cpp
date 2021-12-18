@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include "BlobRxSession.h"
 
 #include <CoreLib/VxFileUtil.h>

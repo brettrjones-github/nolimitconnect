@@ -18,7 +18,7 @@
  *
  */
 
-#include <app_precompiled_hdr.h>
+
 #include "RenderGlWidget.h"
 
 #include "rendering/MatrixGL.h"

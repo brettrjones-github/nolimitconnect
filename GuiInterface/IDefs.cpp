@@ -347,6 +347,7 @@ namespace
         "Play Truth Or Dare ",
         "Video Chat ",
         "Voice Call ",
+        "Push To Talk ",
         "Client Group ",
         "Client Chat Room ",
         "Client Random Connect ",

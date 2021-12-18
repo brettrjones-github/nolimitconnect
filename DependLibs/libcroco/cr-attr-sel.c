@@ -20,7 +20,7 @@
  * See COPYRIGHTS file for copyrights information.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <stdio.h>
 #include "cr-attr-sel.h"
 

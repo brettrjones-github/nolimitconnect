@@ -22,7 +22,7 @@
 #ifndef _BZLIB_H
 #define _BZLIB_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

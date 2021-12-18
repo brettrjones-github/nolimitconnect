@@ -1,7 +1,7 @@
 #ifndef RENDER_LOGO_SHADERS_H
 #define RENDER_LOGO_SHADERS_H
 
-#include "config_gotvapps.h"
+#include "config_apps.h"
 
 #include <QtGui/qopenglfunctions.h>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)

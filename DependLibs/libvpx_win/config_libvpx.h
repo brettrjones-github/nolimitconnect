@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #ifdef TARGET_OS_WINDOWS
 # include "config_libvpx_win32.h"
 #else

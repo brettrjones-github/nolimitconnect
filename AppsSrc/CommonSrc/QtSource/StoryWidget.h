@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
+#include "config_apps.h"
 #include <QMap>
 #include <QPointer>
 #include "ui_StoryWidget.h"

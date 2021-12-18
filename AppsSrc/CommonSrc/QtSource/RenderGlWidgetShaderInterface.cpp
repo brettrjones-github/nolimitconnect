@@ -1,5 +1,5 @@
 
-#include <app_precompiled_hdr.h>
+
 
 #include "RenderGlWidget.h"
 

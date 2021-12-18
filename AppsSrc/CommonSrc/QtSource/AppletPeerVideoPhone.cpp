@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "GuiOfferSession.h"
 #include "AppletPeerVideoPhone.h"
 #include "AppGlobals.h"

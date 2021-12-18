@@ -41,7 +41,7 @@
 #ifndef EXPORTDIALOG_H
 #define EXPORTDIALOG_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <QDialog>
 
 QT_FORWARD_DECLARE_CLASS(QLineEdit)

@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include "BlobXferMgr.h"
 #include "BlobInfo.h"
 #include "BlobMgr.h"

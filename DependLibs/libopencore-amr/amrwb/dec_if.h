@@ -19,7 +19,7 @@
 #ifndef OPENCORE_AMRWB_DEC_IF_H
 #define OPENCORE_AMRWB_DEC_IF_H
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #ifdef __cplusplus
 extern "C" {

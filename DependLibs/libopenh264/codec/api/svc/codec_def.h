@@ -33,7 +33,7 @@
 #ifndef WELS_VIDEO_CODEC_DEFINITION_H__
 #define WELS_VIDEO_CODEC_DEFINITION_H__
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /**
   * @file  codec_def.h

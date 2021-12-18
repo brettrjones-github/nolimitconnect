@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvcore.h"
+#include "config_appcorelibs.h"
 #include "GuiInterface/IDefs.h"
 #include "GuiInterface/OsInterface/OsInterface.h"
 #include "GuiInterface/ILog.h"

@@ -33,8 +33,8 @@ public:
     virtual QLabel *            getServiceUrlLabel()        { return ui.m_UrlDescriptionLabel; }
     virtual QLineEdit *         getServiceUrlEdit()         { return ui.m_UrlEdit; }
 
-    virtual QLabel *            getServiceNameLabel()       { return ui.m_UserDisplayedNameLabel; }
-    virtual QLineEdit *         getServiceNameEdit()        { return ui.m_NameEdit; }
+    virtual QLabel *            getServiceTitleLabel()      { return ui.m_UserDisplayedNameLabel; }
+    virtual QLineEdit *         getServiceTitleEdit()       { return ui.m_ServiceTitleEdit; }
 
     virtual QLabel *            getServiceDescriptionLabel() { return ui.m_DescriptionLabel; }
     virtual QPlainTextEdit *    getServiceDescriptionEdit() { return ui.m_DescriptionEdit; }

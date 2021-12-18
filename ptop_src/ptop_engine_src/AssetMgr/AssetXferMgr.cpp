@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #include "AssetXferMgr.h"
 #include "AssetInfo.h"
 #include "AssetMgr.h"

@@ -22,7 +22,7 @@
 #ifndef _BZLIB_PRIVATE_H
 #define _BZLIB_PRIVATE_H
 
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 
 #include <stdlib.h>
 

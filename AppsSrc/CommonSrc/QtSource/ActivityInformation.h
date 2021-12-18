@@ -36,6 +36,12 @@ enum EInfoType
     eInfoTypeIgnoredList,
     eInfoTypeNearbyList,
 
+    eInfoTypeGroupStatus,
+    eInfoTypeHostChatRoom,
+    eInfoTypeHostGroup,
+    eInfoTypeHostNetwork,
+    eInfoTypeHostRandomConnect,
+
     eMaxInfoType // must be last
 };
 
@@ -92,4 +98,7 @@ protected:
     static QString              m_FriendList;
     static QString              m_IgnoredList;
     static QString              m_NearbyList;
+
+    static QString              m_UserHostRequrements;
+    static QString              m_NetworkHostRequrements;
 };

@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+#include "ActivityInformation.h"
 #include "AppletHostGroupStatus.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -55,12 +55,6 @@ AppletHostGroupStatus::~AppletHostGroupStatus()
 }
 
 //============================================================================
-void AppletHostGroupStatus::slotHostRequirementsButtonClicked()
-{
-    // m_MyApp.launchApplet(eAppletInformation)
-}
-
-//============================================================================
 void AppletHostGroupStatus::slotUpdateStatusTimeout()
 {
     bool haveOpenPort = m_MyApp.getEngine().getNetStatusAccum().isRxPortOpen();
@@ -91,4 +85,14 @@ void AppletHostGroupStatus::slotUpdateStatusTimeout()
     std::string url;
     m_MyApp.getFromGuiInterface().fromGuiGetNodeUrl( url );
     ui.m_UrlText->setText( url.c_str() );
+}
+
+//============================================================================
+void AppletHostGroupStatus::slotHostRequirementsButtonClicked()
+{
+    ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeIgnoredList );
+    if( activityInfo )
+    {
+        activityInfo->show();
+    }
 }

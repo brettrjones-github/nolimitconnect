@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <app_precompiled_hdr.h>
+
 #include "GuiOfferMgrBase.h"
 #include "AppCommon.h"
 #include "GuiOfferSession.h"

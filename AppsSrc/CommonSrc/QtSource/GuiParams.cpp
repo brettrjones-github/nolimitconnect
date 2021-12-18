@@ -926,6 +926,10 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Voice Call");
         break;
 
+    case ePluginTypePushToTalk:	// VOIP push to talk
+        strPluginType = QObject::tr( "Push To Talk" );
+        break;
+
     case ePluginTypeVideoPhone:
         strPluginType = QObject::tr("Video Chat");
         break;
@@ -1064,6 +1068,7 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
     case ePluginTypeClientChatRoom:
         strPluginDesc = QObject::tr( "Chat Room User" ).toUtf8().constData();
         break;
+
     case ePluginTypeHostChatRoom:
         strPluginDesc = QObject::tr( "Host Chat Room Service" ).toUtf8().constData();
         break;
@@ -1177,7 +1182,7 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         break;
 
     case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-        strPluginOffer = QObject::tr(" View Profile Page " );
+        strPluginOffer = QObject::tr(" View About Me Page " );
         break;
 
     case ePluginTypeFileXfer:	// file offer plugin
@@ -1214,7 +1219,7 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
 
     default:
         strPluginOffer = QObject::tr("Unknown Plugin Offer");
-        LogMsg( LOG_ERROR, "AppletPeerBase::describePluginOffer: unrecognized plugin %d\n", ePluginType );
+        LogMsg( LOG_ERROR, "GuiParams::describePluginOffer: unrecognized plugin %d", ePluginType );
     }
 
     return strPluginOffer;

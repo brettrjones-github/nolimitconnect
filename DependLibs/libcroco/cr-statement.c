@@ -21,7 +21,7 @@
  * See COPYRIGHTS files for copyrights information.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-statement.h"
 #include "cr-parser.h"

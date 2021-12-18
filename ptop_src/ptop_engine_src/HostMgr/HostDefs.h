@@ -13,7 +13,7 @@
 //============================================================================
 #pragma once
 
-#include "config_gotvcore.h"
+#include "config_appcorelibs.h"
 
 enum EOtherHostType
 {

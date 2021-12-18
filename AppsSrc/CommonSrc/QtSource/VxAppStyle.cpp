@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include <app_precompiled_hdr.h>
+
 #include "VxAppStyle.h"
 #include "AppCommon.h"
 #include "VxAppTheme.h"

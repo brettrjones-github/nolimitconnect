@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include "config_gotvapps.h"
+#include "config_apps.h"
 
 #include <QtCore/QObject>
 #include <QtGui/QScreen>

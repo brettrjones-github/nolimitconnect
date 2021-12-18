@@ -1,5 +1,5 @@
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /* compiler does lsbf in struct bitfields */
 //#undef BITFIELD_LSBF

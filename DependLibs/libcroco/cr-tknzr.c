@@ -27,7 +27,7 @@
  *class.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include "string.h"
 #include "cr-tknzr.h"
 #include "cr-doc-handler.h"

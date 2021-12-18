@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_gotvapps.h"
+#include "config_apps.h"
 #include "ui_SessionWidget.h"
 
 #include <CoreLib/AssetDefs.h>

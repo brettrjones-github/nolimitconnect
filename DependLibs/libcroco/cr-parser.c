@@ -29,7 +29,7 @@
  *The definition of the #CRParser class.
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include "string.h"
 #include "cr-parser.h"
 #include "cr-num.h"

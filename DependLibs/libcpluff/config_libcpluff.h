@@ -1,5 +1,5 @@
 #pragma once
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 /* The earliest ABI compatible version or undefined */
 #define CP_ABI_COMPATIBILITY "0.1"
 

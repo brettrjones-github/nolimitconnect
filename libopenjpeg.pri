@@ -4,10 +4,10 @@ INCLUDEPATH += $$PWD/DependLibs/libopenjpeg/src/lib/openjp2
 INCLUDEPATH += $$PWD/DependLibs/libopenjpeg/
 
 
-HEADERS += 	$$PWD/DependLibs/libopenjpeg/../../GoTvCompilerConfig.h \
-    $$PWD/DependLibs/libopenjpeg/../../GoTvCpuArchDefines.h \
-    $$PWD/DependLibs/libopenjpeg/../../GoTvDependLibrariesConfig.h \
-    $$PWD/DependLibs/libopenjpeg/../../GoTvTargetOsConfig.h \
+HEADERS += 	$$PWD/DependLibs/libopenjpeg/../../AppCompilerConfig.h \
+    $$PWD/DependLibs/libopenjpeg/../../AppCpuArchDefines.h \
+    $$PWD/DependLibs/libopenjpeg/../../AppDependLibrariesConfig.h \
+    $$PWD/DependLibs/libopenjpeg/../../AppTargetOsConfig.h \
     $$PWD/DependLibs/libopenjpeg/config_libopenjpeg.h \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/bio.h \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/cidx_manager.h \

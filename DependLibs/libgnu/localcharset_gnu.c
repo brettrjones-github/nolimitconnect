@@ -58,7 +58,7 @@
 # endif
 #elif defined TARGET_OS_WINDOWS
 //# define WIN32_LEAN_AND_MEAN
-//# include <windows.h> // included in GoTvCompilerConfig.h
+//# include <windows.h> // included in AppCompilerConfig.h
 #endif
 #if defined OS2
 # define INCL_DOS

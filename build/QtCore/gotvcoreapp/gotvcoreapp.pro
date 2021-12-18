@@ -42,7 +42,7 @@ HEADERS += \
     ../../../GoTvCompilerConfig.h \
     ../../../GoTvConfig.h \
     ../../../GoTvCpuArchDefines.h \
-    ../../../GoTvDependLibrariesConfig.h \
+    ../../../AppDependLibrariesConfig.h \
     ../../../GoTvFeaturesConfig.h \
     ../../../GoTvTargetOsConfig.h
 

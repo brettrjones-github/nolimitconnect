@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <config_gotvcore.h>
+#include <config_appcorelibs.h>
 #ifdef TARGET_OS_ANDROID
 
 //#include <cpu-features.h>

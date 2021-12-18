@@ -101,7 +101,7 @@ HEADERS += 	$$PWD/DependLibs/ffmpeg/libavformat/aiff.h \
     $$PWD/GoTvAppConfig.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h
 
 SOURCES += 	$$PWD/DependLibs/ffmpeg/libavformat/3dostr.c \

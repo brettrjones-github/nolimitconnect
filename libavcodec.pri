@@ -5,9 +5,9 @@ INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 
 $$PWD/DependLibs/ffmpeg/libavcodec/
 
-HEADERS += 	$$PWD/GoTvCompilerConfig.h \
-    $$PWD/GoTvCpuArchDefines.h \
-    $$PWD/GoTvDependLibrariesConfig.h \
+HEADERS += 	$$PWD/AppCompilerConfig.h \
+    $$PWD/AppCpuArchDefines.h \
+    $$PWD/AppDependLibrariesConfig.h \
     $$PWD/DependLibs/ffmpeg/config_ffmpeg.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/a64colors.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/a64tables.h \

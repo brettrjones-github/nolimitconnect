@@ -32,7 +32,7 @@
  * MT safe
  */
 
-#include "GoTvDependLibrariesConfig.h"
+#include "AppDependLibrariesConfig.h"
 
 #include "glib.h"
 #if 0

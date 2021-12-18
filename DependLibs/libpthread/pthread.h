@@ -32,7 +32,7 @@
  */
 
 
-#include <GoTvCompilerConfig.h>
+#include <AppCompilerConfig.h>
 #include <libpthread/config_pthread.h>
 #ifndef TARGET_OS_WINDOWS
 // only windows needs pthread lib.. all others have it built in

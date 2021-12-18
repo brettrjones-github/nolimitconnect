@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 /* vc++/config.h - manually adapted from include/config.h.in */
 

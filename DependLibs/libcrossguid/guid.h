@@ -23,7 +23,7 @@ THE SOFTWARE.
 */
 
 #pragma once
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 
 #include <iostream>
 #include <vector>

@@ -23,7 +23,7 @@
  * see COPYRIGTHS file for copyright information
  */
 
-#include <GoTvDependLibrariesConfig.h>
+#include <AppDependLibrariesConfig.h>
 #include <string.h>
 #include "cr-style.h"
 
