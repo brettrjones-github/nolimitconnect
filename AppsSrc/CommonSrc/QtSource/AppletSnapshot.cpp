@@ -48,13 +48,13 @@ AppletSnapshot::AppletSnapshot(	AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    ui.m_ImageScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
-    ui.m_SnapshotScreen->setFixedSize( GuiParams::getSnapshotScaledSize() );
+    ui.m_ImageScreen->setFixedSize( GuiParams::getSnapshotDesiredSize() );
+    ui.m_SnapshotScreen->setFixedSize( GuiParams::getSnapshotDesiredSize() );
 
     ui.m_CamStopStartButton->setVisible( false );
-    ui.m_CamStopStartButton->setFixedSize( eButtonSizeMedium );
+    ui.m_CamStopStartButton->setFixedSize( eButtonSizeSmall );
 
-    ui.m_CamFrontBackButton->setFixedSize( eButtonSizeMedium );
+    ui.m_CamFrontBackButton->setFixedSize( eButtonSizeSmall );
     ui.m_CamFrontBackButton->setIcon( eMyIconSelectCameraNormal );
 
     connect( ui.snapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapShotButClick() ) );

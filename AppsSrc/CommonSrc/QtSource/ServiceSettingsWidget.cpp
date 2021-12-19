@@ -38,6 +38,8 @@ ServiceSettingsWidget::ServiceSettingsWidget( QWidget * parent )
 void ServiceSettingsWidget::initServiceSettingsWidget( void )
 {
 	ui.setupUi( this );
+    ui.m_SettingsButton->setFixedSize( eButtonSizeSmall );
+    ui.m_ViewServiceButton->setFixedSize( eButtonSizeSmall );
 
     connect( ui.m_SettingsButton, SIGNAL( clicked() ), this, SLOT( slotServiceSettingsClicked() ) );
     connect( ui.m_ViewServiceButton, SIGNAL( clicked() ), this, SLOT( slotViewServiceClicked() ) );

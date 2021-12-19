@@ -20,8 +20,20 @@
    <string>Thumbnail Edit Widget</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
    <property name="topMargin">
     <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -38,10 +50,16 @@
       <number>5</number>
      </property>
      <property name="bottomMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <item>
       <widget class="QPushButton" name="m_ThumbGalleryButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Thumbnail Gallery</string>
        </property>
@@ -49,6 +67,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="m_EmoticonGalleryButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Emoticon Gallery</string>
        </property>
@@ -59,7 +83,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <property name="spacing">
-      <number>10</number>
+      <number>7</number>
      </property>
      <property name="leftMargin">
       <number>5</number>
@@ -71,10 +95,16 @@
       <number>5</number>
      </property>
      <property name="bottomMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <item>
       <widget class="QPushButton" name="m_TakeSnapshotButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Take Snapshot</string>
        </property>
@@ -82,6 +112,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="m_BrowsePictureButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Browse</string>
        </property>
@@ -100,7 +136,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>5</height>
+       <height>2</height>
       </size>
      </property>
     </spacer>
@@ -135,6 +171,21 @@
         <enum>QFrame::Plain</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="horizontalSpacing">
+         <number>2</number>
+        </property>
         <item row="0" column="0">
          <widget class="ThumbnailViewWidget" name="m_ThumbnailViewWidget">
           <property name="sizePolicy">
@@ -177,7 +228,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>5</height>
+       <height>3</height>
       </size>
      </property>
     </spacer>

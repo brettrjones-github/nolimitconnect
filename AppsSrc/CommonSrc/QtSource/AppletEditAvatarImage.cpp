@@ -47,6 +47,7 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
     ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeHostPeerUser );
     ui.m_ServiceSettingsWidget->setViewServiceVisible( false );
     ui.m_ThumbnailEditWidget->setThumnailIsCircular( true );
+    ui.m_StatusLabel->setVisible( false );
 
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
