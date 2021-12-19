@@ -74,6 +74,7 @@ void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& plu
 //============================================================================
 void PluginRandomConnectHost::sendHostRandomConnectAnnounce( void )
 {
+    LogModule( eLogHosts, LOG_DEBUG, "%s sendHostRandomConnectAnnounce", DescribeHostType( getHostType() ) );
     if( m_Engine.isDirectConnectReady() )
     {
         if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )

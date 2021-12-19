@@ -392,26 +392,7 @@ uint32_t AppSettings::getLogModules( void )
 {
     uint32_t logModuleFlags = 0;
 #if defined(DEBUG)
-    uint32_t logModuleFlagsDefault = ( uint32_t )(
-        eLogMulticast
-        | eLogConnect
-        | eLogListen
-        | eLogSkt
-        | eLogPkt
-        | eLogNetworkState
-        | eLogNetworkMgr
-        | eLogIsPortOpenTest
-        | eLogThread
-        | eLogStorage
-        | eLogAssets
-        | eLogPlugins
-        | eLogStartup
-        | eLogHosts
-        | eLogTcpData
-        | eLogUdpData
-        //| eLogMediaStream
-        //| eLogWindowPositions
-        );
+	uint32_t logModuleFlagsDefault = 0;
     getIniValue( getAppShortName(), "LogModulesD", logModuleFlags, logModuleFlagsDefault );
 #else
     getIniValue( getAppShortName(), "LogModules", logModuleFlags, logModuleFlags );

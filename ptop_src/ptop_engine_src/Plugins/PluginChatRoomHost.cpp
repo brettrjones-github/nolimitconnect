@@ -73,6 +73,8 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
 //============================================================================
 void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
+    LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce", DescribeHostType( getHostType() ) );
+
     if( m_Engine.isDirectConnectReady() )
     {
         if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )

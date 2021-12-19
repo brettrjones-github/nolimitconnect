@@ -88,7 +88,7 @@ void PluginBaseHostService::onConnectionLost( VxSktBase * sktBase )
 //============================================================================
 void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginBaseHostService %s got join request", DescribeHostType( getHostType() ) );
+    LogModule( eLogHosts, LOG_DEBUG, "PluginBaseHostService %s got join request from %s", DescribeHostType( getHostType() ), netIdent->getOnlineName() );
     PktHostJoinReq * joinReq = (PktHostJoinReq *)pktHdr;
     PktHostJoinReply joinReply;
     if( joinReq->isValidPkt() )
@@ -201,7 +201,7 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
 //============================================================================
 void PluginBaseHostService::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginBaseHostService onPktPluginSettingReq" );
+    LogModule( eLogHosts, LOG_DEBUG, "PluginBaseHostService %s onPktPluginSettingReq from %s", DescribeHostType( getHostType() ), netIdent->getOnlineName() );
     PktPluginSettingReply settingReply;
     PktPluginSettingReq* settingReq = (PktPluginSettingReq*)pktHdr;
     if( settingReq->isValidPkt() )

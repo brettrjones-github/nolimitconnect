@@ -31,32 +31,40 @@ QString describeLogModule( ELogModule logModule )
     switch( logModule )
     {
     case eLogNone: return QObject::tr( "Log None" );
+
     case eLogMulticast: return QObject::tr( "Log Multicast" );
     case eLogConnect: return QObject::tr( "Log Connect" );
     case eLogListen : return QObject::tr( "Log Listen" );
+    case eLogAcceptConn: return QObject::tr( "Log Accept Connection" );
+
     case eLogSkt: return QObject::tr( "Log Skt" );
-    case eLogPkt: return QObject::tr( "Log Pkt" );
     case eLogNetAccessStatus: return QObject::tr( "Log Net Access Status" );
     case eLogNetworkState: return QObject::tr( "Log Network State" );
     case eLogNetworkMgr: return QObject::tr( "Log Network Mgr" );
-    case eLogIsPortOpenTest: return QObject::tr( "Log Is Port Open Test" );
+
+    case eLogNetService: return QObject::tr( "Log Net Service" );
     case eLogThread : return QObject::tr( "Log Thread" );
     case eLogStorage: return QObject::tr( "Log Storage" );
     case eLogAssets: return QObject::tr( "Log Assets" );
-    case eLogPlugins: return QObject::tr( "Log Plugins" );
-    case eLogWindowPositions: return QObject::tr( "Log Window Position" );
+
     case eLogStartup: return QObject::tr( "Log Startup" );
-    case eLogHosts: return QObject::tr( "Log Hosts" );
-    case eLogMediaStream: return QObject::tr( "Log Media Stream" );
     case eLogTcpData: return QObject::tr( "Log Tcp Data" );
     case eLogUdpData: return QObject::tr( "Log Udp Data" );
-    case eLogAcceptConn: return QObject::tr( "Log Accept Connection" );
+    case eLogPkt: return QObject::tr( "Log Pkt" );
+
+    case eLogPlugins: return QObject::tr( "Log Plugins" );
+    case eLogHosts: return QObject::tr( "Log Hosts" );
+    case eLogClients: return QObject::tr( "Log Clients" );
+    case eLogGroups: return QObject::tr( "Log Groups" );
+
     case eLogNetworkRelay: return QObject::tr( "Log Network Relay" );
-    case eLogNetService: return QObject::tr( "Log Net Service" );
+    case eLogIsPortOpenTest: return QObject::tr( "Log Is Port Open Test" );
     case eLogRunTest: return QObject::tr( "Log Run Test" );
     case eLogHostConnect: return QObject::tr( "Log Host Connect" );
+
     case eLogHostSearch: return QObject::tr( "Log Host Search" );
-    case eLogVideo: return QObject::tr( "Log Cam And Video" );
+    case eLogMediaStream: return QObject::tr( "Log Media Streams" );
+
     default:
         return QObject::tr( "Invalid Log Module" );
     }

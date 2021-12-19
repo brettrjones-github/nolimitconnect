@@ -49,34 +49,35 @@ enum ELogModule
     eLogMulticast       = 0x0001, // 1
     eLogConnect         = 0x0002, // 2
     eLogListen          = 0x0004, // 3
-    eLogSkt             = 0x0008, // 4
+    eLogAcceptConn		= 0x0008, // 4
 
-    eLogPkt             = 0x0010, // 5
+	eLogSkt				= 0x0010, // 5
     eLogNetAccessStatus = 0x0020, // 6 internet and p2p access status
     eLogNetworkState    = 0x0040, // 7
     eLogNetworkMgr      = 0x0080, // 8
 
-    eLogIsPortOpenTest  = 0x0100, // 9
+	eLogNetService      = 0x0100, // 9
     eLogThread          = 0x0200, // 10
     eLogStorage         = 0x0400, // 11 mostly user and app directories
     eLogAssets          = 0x0800, // 12
 
-    eLogPlugins         = 0x1000, // 13
-    eLogWindowPositions = 0x2000, // 14
-    eLogStartup         = 0x4000, // 15
-    eLogHosts           = 0x8000, // 16
+	eLogStartup			= 0x1000, // 13
+	eLogTcpData			= 0x2000, // 14
+	eLogUdpData			= 0x4000, // 15
+	eLogPkt				= 0x8000, // 16
 
-    eLogMediaStream     = 0x00010000, // 17
-    eLogTcpData         = 0x00020000, // 18
-    eLogUdpData         = 0x00040000, // 19
-    eLogAcceptConn      = 0x00080000, // 20
+	eLogPlugins			= 0x00010000, // 17
+	eLogHosts			= 0x00020000, // 18
+	eLogClients			= 0x00040000, // 19
+	eLogGroups			= 0x00080000, // 20
 
     eLogNetworkRelay    = 0x00100000, // 21
-    eLogNetService      = 0x00200000, // 22
+	eLogIsPortOpenTest  = 0x00200000, // 22
     eLogRunTest         = 0x00400000, // 23
     eLogHostConnect     = 0x00800000, // 24
+
     eLogHostSearch      = 0x01000000, // 25
-    eLogVideo           = 0x02000000, // 26
+    eLogMediaStream     = 0x02000000, // 26
 
     eMaxLogModule
 };

@@ -112,14 +112,14 @@ void HomeWindow::reject()
 //============================================================================
 void HomeWindow::resizeEvent( QResizeEvent * ev)
 {
-    LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height() );
+    // LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height() );
 	emit signalMainWindowResized();
 }
 
 //============================================================================
 void HomeWindow::moveEvent( QMoveEvent * )
 {
-    LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
+    // LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
     emit signalMainWindowMoved();
 }
 

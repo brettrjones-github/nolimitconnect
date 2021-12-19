@@ -49,7 +49,8 @@ void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnn
         LogMsg( LOG_VERBOSE, "HostServerMgr network host url is empty" );
         return;
     }
-
+    
+    LogModule( eLogHosts, LOG_DEBUG, "sendHostAnnounceToNetworkHost %s", DescribePluginType( m_Plugin.getPluginType() ) );
     addAnnounceSession( sessionId, hostAnnounce.makeHostAnnCopy() );
     connectToHost( eHostTypeNetwork, sessionId, url, connectReason );
 }
@@ -161,6 +162,7 @@ bool HostServerMgr::removeClient( VxGUID& onlineId )
 //============================================================================
 void HostServerMgr::onJoinRequested( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
+    LogModule( eLogHosts, LOG_DEBUG, "onJoinRequested %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
     BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
     m_Engine.getHostJoinMgr().onHostJoinRequestedByUser( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onHostJoinRequestedByUser( sktBase, netIdent, sessionInfo );
@@ -169,6 +171,7 @@ void HostServerMgr::onJoinRequested( VxSktBase* sktBase, VxNetIdent* netIdent, V
 //============================================================================
 void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType )
 {
+    LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
     BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
     m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
