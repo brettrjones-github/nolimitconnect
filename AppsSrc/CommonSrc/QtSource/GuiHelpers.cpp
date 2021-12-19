@@ -813,7 +813,7 @@ QFrame* GuiHelpers::getOppositePageFrame( QWidget * curWidget )
                 for( auto iter = childList.begin();  iter != childList.end(); ++iter )
                 {
                     QFrame* childFrame = dynamic_cast<QFrame *>(*iter);
-                    if( childFrame && childFrame->objectName() == otherPageObjeName )
+                    if( childFrame && childFrame->objectName() == otherPageObjeName && childFrame == GetAppInstance().getHomePage().getMessengerParentFrame() )
                     {
                         pageFrame = childFrame;
                         foundOtherFrame = true;

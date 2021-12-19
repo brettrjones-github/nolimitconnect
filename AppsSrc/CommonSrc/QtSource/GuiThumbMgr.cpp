@@ -310,7 +310,7 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
     ThumbMgr& thumbMgr = m_MyApp.getEngine().getThumbMgr();
     thumbMgr.lockResources();
     ThumbInfo* existingThumbInfo = dynamic_cast< ThumbInfo* >( thumbMgr.findAsset( thumbId ) );
-    if( existingThumbInfo && existingThumbInfo->isValidFile() )
+    if( existingThumbInfo && existingThumbInfo->isValidThumbnail() )
     {
         thumb = updateThumb( *existingThumbInfo );
         if( thumb )
@@ -383,6 +383,7 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
             ThumbInfo assetInfo( ( const char* )fileName.toUtf8().constData(), fileLen, thumbId );
             assetInfo.setCreatorId( m_MyApp.getEngine().getMyOnlineId() );
             assetInfo.setCreationTime( GetTimeStampMs() );
+            assetInfo.setModifiedTime( assetInfo.getCreationTime() );
             thumb = updateThumb( assetInfo );
 
             if( !thumbMgr.fromGuiThumbCreated( assetInfo ) )
@@ -393,13 +394,13 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
         }
         else
         {
-            QString msgText = QObject::tr( "Could create emoticon png file" );
+            QString msgText = QObject::tr( "Could not create emoticon png file" );
             QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Error occured creating emoticon file " ) + fileName, msgText, QMessageBox::Ok );
         }
     }
     else
     {
-        QString msgText = QObject::tr( "Could create emoticon image" );
+        QString msgText = QObject::tr( "Could not create emoticon image" );
         QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Error occured creating emoticon image %1" ).arg( emoticonNum ), msgText, QMessageBox::Ok );
     }
 

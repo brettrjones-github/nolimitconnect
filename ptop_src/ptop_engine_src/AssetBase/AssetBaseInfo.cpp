@@ -207,8 +207,8 @@ bool AssetBaseInfo::isValidFile( void )
 //============================================================================
 bool AssetBaseInfo::isValidThumbnail( void )
 {
-	bool valid = isValid() && getAssetType() == eAssetTypeThumbnail;
-	valid &= isValidFile();
+    // dont use isValid.. thumbs may not have a creator id if is an emoticon
+    bool valid = getAssetType() == eAssetTypeThumbnail && isValidFile() && m_InfoModifiedTime && m_UniqueId.isVxGUIDValid();
 	if( !valid )
 	{
 		LogMsg( LOG_ERROR, "AssetBaseInfo::isValidThumbnail invalid " );
