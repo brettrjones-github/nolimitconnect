@@ -131,7 +131,7 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsMyPortOpenButtonClicked() ) );
     connect( ui.m_QueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostIdButtonClicked() ) );
     connect( ui.m_GenerateGuidButton, SIGNAL( clicked() ), this, SLOT( slotGenerateGuidButtonClicked() ) );
-    connect( ui.m_PurgeCacheButton, SIGNAL( clicked() ), this, SLOT( slotPurgeThumbnailsButtonClicked() ) );
+    connect( ui.m_PurgeCacheButton, SIGNAL( clicked() ), this, SLOT( slotPurgeCacheButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -452,7 +452,7 @@ void AppletTestAndDebug::slotGenerateGuidButtonClicked( void )
 //============================================================================
 void AppletTestAndDebug::slotPurgeCacheButtonClicked( void )
 {
-    if( yesNoMessageBox( QObject::tr( "Are you sure?" ), QObject::tr( "This will delete all thumbnail images not currently in use by application" ) ) )
+    if( yesNoMessageBox( QObject::tr( "Are you sure?" ), QObject::tr( "This will delete all thumbnail images not currently in use by your identity or hosts" ) ) )
     {
         int64_t bytesPurged = m_MyApp.getEngine().fromGuiClearCache( eCacheTypeThumbnail );
         infoMsg( QString( GuiParams::describeFileLength( bytesPurged ) + QObject::tr( " of disk space freed by deleting cached thumbnails" ) ).toUtf8().constData() );

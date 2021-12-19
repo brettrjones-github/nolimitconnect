@@ -292,6 +292,13 @@ bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
 //============================================================================
 GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
 {
+    if( !thumbId.isVxGUIDValid() )
+    {
+        QString msgText = QObject::tr( "Invalid emoticon id" );
+        QMessageBox::warning( &m_MyApp.getHomePage(), msgText, msgText, QMessageBox::Ok );
+        return nullptr;
+    }
+
     // see if already have it
     GuiThumb* thumb = findThumb( thumbId );
     if( thumb )
@@ -337,16 +344,24 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
 
     // static member so no need to make copy
     std::vector<VxGUID>& emoticonIdList = thumbMgr.getEmoticonIdList();
-    // 1 based emoticon number
-    int emoticonNum = 1;
+    // 0 based emoticon number but first id is always null
+    int emoticonNum = 0;
+    bool foundId = false;
     for( auto& assetGuid : emoticonIdList )
     {
         if( assetGuid == thumbId )
         {
+            foundId = true;
             break;
         }
 
         emoticonNum++;
+    }
+
+    if( !foundId || emoticonNum > emoticonIdList.size() )
+    {
+        QString msgText = QObject::tr( "Invalid emoticon id" );
+        QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Invalid emoticon id " ), msgText + thumbId.toOnlineIdString().c_str(), QMessageBox::Ok );
     }
 
     QPixmap image;
@@ -372,14 +387,14 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
 
             if( !thumbMgr.fromGuiThumbCreated( assetInfo ) )
             {
-                QString msgText = QObject::tr( "Could not create thumbnail asset" );
-                QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Error occured creating thumbnail asset " ) + fileName, msgText, QMessageBox::Ok );
+                QString msgText = QObject::tr( "Could not create emoticon asset" );
+                QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Error occured creating emoticon asset " ) + fileName, msgText, QMessageBox::Ok );
             }
         }
         else
         {
-            QString msgText = QObject::tr( "Could create thumbnail png file" );
-            QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Error occured creating thumbnail file " ) + fileName, msgText, QMessageBox::Ok );
+            QString msgText = QObject::tr( "Could create emoticon png file" );
+            QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Error occured creating emoticon file " ) + fileName, msgText, QMessageBox::Ok );
         }
     }
     else

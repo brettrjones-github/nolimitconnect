@@ -48,6 +48,8 @@ GOTV_END_CDECLARES
 namespace
 {
 #if defined(DEBUG)
+    uint32_t g_ModuleEnableLoggingFlags = 0;
+    /*
     uint32_t g_ModuleEnableLoggingFlags = ( uint32_t )(
                     // eLogMulticast
                     // | eLogConnect
@@ -75,6 +77,8 @@ namespace
                     | eLogHostSearch
                     | eLogVideo
                     );
+*/
+
 #else
     uint32_t g_ModuleEnableLoggingFlags = 0;
 #endif // defined(DEBUG)

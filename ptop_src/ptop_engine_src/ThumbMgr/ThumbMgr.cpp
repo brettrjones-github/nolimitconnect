@@ -27,6 +27,7 @@
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>
 
+#include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
 
@@ -580,10 +581,38 @@ uint64_t ThumbMgr::fromGuiClearCache( ECacheType cacheType )
     uint64_t cacheDeletedAmt{ 0 };
     if( eCacheTypeThumbnail == cacheType )
     {
-        // delete every thumbnail not in use by identity or plugin
+        // delete every thumbnail not in use by my identity or plugin
         std::vector<VxGUID> inUseList;
-        // TODO implement
+        for( int i = eHostTypeNetwork; i < eMaxHostType; i++ )
+        {
+            VxGUID thumbId = m_Engine.getMyPktAnnounce().getHostThumbId( ( EHostType )i, false );
+            if( thumbId.isVxGUIDValid() )
+            {
+                inUseList.push_back( thumbId );
+            }
+        }
 
+        AssetBaseInfoDb& assetDb = getAssetInfoDb();
+        m_ThumbInfoMutex.lock();
+        for( auto iter = m_ThumbInfoList.begin(); iter != m_ThumbInfoList.end(); )
+        {
+            AssetBaseInfo* assetInfo = ( *iter );
+            if( inUseList.end() == std::find( inUseList.begin(), inUseList.end(), assetInfo->getAssetUniqueId() ) )
+            {
+                assetDb.removeAsset( assetInfo );
+                cacheDeletedAmt += VxFileUtil::fileExists( assetInfo->getAssetName().c_str() );
+                VxFileUtil::deleteFile( assetInfo->getAssetName().c_str() );
+                iter = m_ThumbInfoList.erase( iter );
+            }
+            else
+            {
+                ++iter;
+            }
+        }
+
+        m_ThumbInfoMutex.unlock();
+
+        // TODO clean up any not in database but the file exists?
     }
 
     return cacheDeletedAmt;
