@@ -148,7 +148,13 @@ InetAddress	VxConnectBaseInfo::getRelayIpAddress( void )
 bool VxConnectBaseInfo::setOnlineIpAddress( const char * pIp )			
 { 
 	return m_DirectConnectId.setIpAddress( pIp ); 
-};
+}
+
+//============================================================================
+bool VxConnectBaseInfo::isOnlineIpAddressValid( void )
+{
+    return m_DirectConnectId.isIpAddressValid();
+}
 
 //============================================================================
 bool VxConnectBaseInfo::setOnlineIpAddress( InetAddress& oIp )			

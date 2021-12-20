@@ -109,6 +109,7 @@ public:
 	virtual bool				isTcpSocket( void )								{ return ((eSktTypeTcpConnect == m_eSktType)||(eSktTypeTcpAccept == m_eSktType))?1:0; };
 	virtual bool				isAcceptSocket( void )							{ return ((eSktTypeTcpAccept == m_eSktType)?1:0);};
 	virtual bool				isConnectSocket( void )							{ return ((eSktTypeTcpConnect == m_eSktType)?1:0);};
+	virtual bool				isLoopbackSocket( void )						{ return m_LoopbackConnectId == getConnectionId(); };
 
 	virtual void				setIsWebSkt( bool webSkt )						{ m_bIsWebSkt = webSkt; }
 	virtual bool				isWebSkt( void )								{ return m_bIsWebSkt; }
@@ -350,5 +351,6 @@ protected:
     static std::string          m_SktDirBroadcast;
     static std::string          m_SktDirLoopback;
     static std::string          m_SktDirUnknown;
+	static VxGUID				m_LoopbackConnectId;
 };
 

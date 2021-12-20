@@ -14,7 +14,9 @@
 
 #include "NetStatusAccum.h"
 
-#include "../P2PEngine/P2PEngine.h"
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
+
 #include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxGlobals.h>
@@ -310,6 +312,8 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
     {
         m_Engine.lockAnnouncePktAccess();
         m_Engine.getMyPktAnnounce().setOnlineIpAddress( myExternalIp.c_str() );
+        std::string myNodeUrl = m_Engine.getMyPktAnnounce().getMyOnlineUrl();
+        m_Engine.getUrlMgr().setMyOnlineNodeUrl( myNodeUrl );
         m_Engine.unlockAnnouncePktAccess();
 
         if( isTested != m_ConnectionTestAvail || isTested != m_DirectConnectTested || requiresRelay != m_RequriesRelay )

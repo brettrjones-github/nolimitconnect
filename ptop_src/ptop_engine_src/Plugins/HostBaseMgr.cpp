@@ -21,6 +21,8 @@
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
+
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
 #include <PktLib/PktsSearch.h>
@@ -222,8 +224,9 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
 }
 
 //============================================================================
-void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason )
+void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::string& urlIn, EConnectReason connectReason )
 {
+    std::string url = m_Engine.getUrlMgr().resolveUrl( urlIn );
     if( !url.empty() )
     {
         VxGUID hostGuid;

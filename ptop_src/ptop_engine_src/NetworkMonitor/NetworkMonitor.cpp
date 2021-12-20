@@ -112,13 +112,14 @@ void NetworkMonitor::onOncePerSecond( void )
     {
         std::string externIp;
         m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr( externIp );
-        if( externIp != m_LastConnectedLclIp )
+        if( !externIp.empty() && externIp != m_LastConnectedLclIp )
         {
             m_LastConnectedLclIp = externIp;
             // LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new fixed ip addr %s", externIp.c_str() );
 
             m_Engine.getNetStatusAccum().setIsFixedIpAddress( true );
             setIsInternetAvailable( true );
+            m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, externIp );
             m_Engine.fromGuiNetworkAvailable( externIp.c_str(), false );
         }
 

@@ -934,6 +934,9 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPeerUserHost.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\UrlMgr\UrlMgr.cpp">
+      <Filter>Source Files\UrlMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -2017,6 +2020,9 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPeerUserHost.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\UrlMgr\UrlMgr.h">
+      <Filter>Source Files\UrlMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2162,6 +2168,9 @@
     </Filter>
     <Filter Include="Source Files\Membership">
       <UniqueIdentifier>{6a8cbc11-9cb6-40dc-9d8c-d9f4efe32988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UrlMgr">
+      <UniqueIdentifier>{b8bc13e3-0f2e-4ddf-b28f-045608b10045}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

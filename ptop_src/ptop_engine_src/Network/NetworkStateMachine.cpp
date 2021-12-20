@@ -356,9 +356,21 @@ void NetworkStateMachine::updateFromEngineSettings( EngineSettings& engineSettin
 	uint16_t u16TcpPort = engineSettings.getTcpIpPort();
 	m_PktAnn.setOnlinePort( u16TcpPort );
 
+    m_Engine.getNetStatusAccum().setIpPort( u16TcpPort );
+	EFirewallTestType firewallTestType = engineSettings.getFirewallTestSetting();
+	m_Engine.getNetStatusAccum().setFirewallTestType( firewallTestType );
+	if( eFirewallTestAssumeNoFirewall == firewallTestType )
+	{
+		std::string externIp;
+		engineSettings.getUserSpecifiedExternIpAddr( externIp );
+		if( !externIp.empty() )
+		{
+			m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, externIp );
+		}
+	}
+
 	std::string networkKey;
 	engineSettings.getNetworkKey( networkKey );
-    m_Engine.getNetStatusAccum().setIpPort( u16TcpPort );
     if( !networkKey.empty() && ( networkKey != m_NetworkMgr.getNetworkKey() ) )
     {
         m_NetworkMgr.setNetworkKey( networkKey.c_str() );

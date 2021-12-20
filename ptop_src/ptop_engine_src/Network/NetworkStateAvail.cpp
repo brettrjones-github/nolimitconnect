@@ -19,6 +19,7 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/EngineSettings.h>
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
 
 #include <NetLib/VxPeerMgr.h>
 
@@ -57,6 +58,7 @@ void NetworkStateAvail::runNetworkState( void )
 
     std::string netServiceUrl;
 	m_Engine.getEngineSettings().getConnectTestUrl( netServiceUrl );
+    netServiceUrl = m_Engine.getUrlMgr().resolveUrl( netServiceUrl );
 
 	// wait for log on if need be
 	while( ( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )

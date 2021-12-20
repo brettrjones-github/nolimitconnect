@@ -361,7 +361,7 @@ void HomeWindow::updateAndroidGeomety()
     int width = screenGeometry.width() - 20;
     resize(width, height);
     move( screenGeometry.left() + 10, screenGeometry.top() + 10 );
-    LogModule(eLogWindowPositions, LOG_VERBOSE, "Home Screen Size %d %d", width, height);
+    LogMsg( LOG_VERBOSE, "Home Screen Size %d %d", width, height );
 #endif // defined(TARGET_OS_ANDROID)
 }
 

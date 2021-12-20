@@ -81,6 +81,7 @@ class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
 class RunUrlAction;
+class UrlMgr;
 class UserJoinMgr;
 class UserOnlineMgr;
 class VxPeerMgr;
@@ -140,6 +141,7 @@ public:
     OfferClientMgr&             getOfferClientMgr( void )                       { return m_OfferClientMgr; }
     OfferHostMgr&               getOfferHostMgr( void )                         { return m_OfferHostMgr; }
     OfferBaseMgr&               getOfferMgr( EOfferMgrType mgrType );
+    UrlMgr&                     getUrlMgr( void );
     HostJoinMgr&                getHostJoinMgr( void )                          { return m_HostJoinMgr; }
     UserJoinMgr&                getUserJoinMgr( void )                          { return m_UserJoinMgr; }
     UserOnlineMgr&              getUserOnlineMgr( void )                        { return m_UserOnlineMgr; }

@@ -23,6 +23,8 @@
 #include <ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
+
 #include <NetLib/VxSktConnect.h>
 #include <NetLib/VxPeerMgr.h>
 #include <NetLib/VxSktCrypto.h>
@@ -151,7 +153,8 @@ EHostJoinStatus ConnectionMgr::lookupOrQueryJoinId( VxGUID& sessionId, std::stri
     {
         joinStatus = eHostJoinQueryIdInProgress;
         std::string myUrl = m_Engine.getMyOnlineUrl();
-        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
+        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, 
+            m_Engine.getUrlMgr().resolveUrl(hostUrl).c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
     }
 
     return joinStatus;
@@ -283,8 +286,9 @@ void ConnectionMgr::resetDefaultHostUrl( EHostType hostType )
 }
 
 //============================================================================
-void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUrl )
+void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUrlIn )
 {
+    std::string hostUrl = m_Engine.getUrlMgr().resolveUrl( hostUrlIn );
     m_ConnectionMutex.lock();
     m_DefaultHostUrlList[hostType] = hostUrl;
     m_ConnectionMutex.unlock();
@@ -301,7 +305,8 @@ void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUr
             m_ConnectionMutex.lock();
             m_DefaultHostIdList[hostType] = onlineId;  
             m_ConnectionMutex.unlock();
-            updateUrlCache( hostUrl, onlineId );     
+            updateUrlCache( hostUrl, onlineId );   
+            m_Engine.getUrlMgr().updateUrlCache( hostUrl, onlineId );
         }
 
         if( needOnlineId )
@@ -367,6 +372,13 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
     {
         LogMsg( LOG_ERROR, "ConnectionMgr::requestConnection must have valid online id" );
         return eConnectStatusBadParam;
+    }
+
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s Loopback Socket", DescribeConnectReason( connectReason ) );
+        retSktBase = m_Engine.getSktLoopback();
+        return eConnectStatusReady;
     }
 
     LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s", DescribeConnectReason( connectReason ) );
@@ -489,8 +501,12 @@ void ConnectionMgr::updateUrlCache( std::string& hostUrl, VxGUID& onlineId )
 //============================================================================
 bool ConnectionMgr::urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& onlineId )
 {
-    bool foundId = false;
     onlineId.clearVxGUID();
+    bool foundId = m_Engine.getUrlMgr().lookupOnlineId( hostUrl, onlineId );
+    if( foundId )
+    {
+        return foundId;
+    }
 
     // it may be part of the url .. if so no lookup required
     VxUrl testUrl( hostUrl );

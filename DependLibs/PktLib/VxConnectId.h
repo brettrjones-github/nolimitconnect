@@ -50,6 +50,7 @@ public:
 	bool						setIpAddress( const char * ipAddr ); // return true if changed
 	//! get ip address based on can connect ipv6 or need ipv4
 	void						getIpAddress( std::string& retString );
+	bool						isIpAddressValid( void );
 
 	void						getIPv4( std::string& retString );
 	void						getIPv6( std::string& retString );

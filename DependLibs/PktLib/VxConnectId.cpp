@@ -111,6 +111,12 @@ void VxConnectId::getIpAddress( std::string& retString )
 };
 
 //============================================================================
+bool VxConnectId::isIpAddressValid( void )
+{
+	return m_IPv4OnlineIp.isValid() || m_IPv6OnlineIp.isValid();
+}
+
+//============================================================================
 void VxConnectId::getIPv4( std::string& retString )	
 { 
 	retString = m_IPv4OnlineIp.toStdString(); 

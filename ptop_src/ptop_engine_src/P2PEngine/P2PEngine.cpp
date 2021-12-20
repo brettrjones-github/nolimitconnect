@@ -46,6 +46,8 @@
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
+
 #include <NetLib/VxSktUtil.h>
 #include <NetLib/VxPeerMgr.h>
 
@@ -168,6 +170,12 @@ OfferBaseMgr& P2PEngine::getOfferMgr( EOfferMgrType mgrType )
         vx_assert( false );
         return getOfferClientMgr();
     }
+}
+
+//============================================================================
+UrlMgr& P2PEngine::getUrlMgr()
+{
+	return GetUrlMgrInstance();
 }
 
 //============================================================================

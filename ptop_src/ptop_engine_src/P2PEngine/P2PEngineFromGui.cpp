@@ -39,6 +39,8 @@
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
+
 #include <NetLib/VxGetRandomPort.h>
 #include <NetLib/VxPeerMgr.h>
 #include <CoreLib/VxParse.h>
@@ -216,7 +218,6 @@ void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
     m_UserOnlineMgr.fromGuiUserLoggedOn();
 
     // set network settings from saved settings
-
 	startupEngine();
     updateFromEngineSettings( getEngineSettings() );
 	m_PluginMgr.fromGuiUserLoggedOn();
@@ -1158,6 +1159,7 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
 
     if( origSettings != netHostSetting )
     {
+		bool haveFixedIp{ false };
         m_EngineSettings.setNetHostSettings( netHostSetting );
         if( origSettings.getUserSpecifiedExternIpAddr() != netHostSetting.getUserSpecifiedExternIpAddr() )
         {
@@ -1165,6 +1167,7 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
             {
                 getMyPktAnnounce().setOnlineIpAddress( netHostSetting.getUserSpecifiedExternIpAddr().c_str() );
                 setPktAnnLastModTime( GetTimeStampMs() );
+				haveFixedIp = true;
             }
         }
 
@@ -1176,6 +1179,12 @@ void P2PEngine::fromGuiApplyNetHostSettings( NetHostSetting& netHostSetting )
             getNetStatusAccum().setIpPort( netHostSetting.getTcpPort() );
             IGoTv::getIGoTv().getPeerMgr().startListening( netHostSetting.getTcpPort() );   
         }
+
+		if( haveFixedIp )
+		{
+            std::string myOnlineUrl = getMyPktAnnounce().getMyOnlineUrl();
+            getUrlMgr().setMyOnlineNodeUrl( myOnlineUrl );
+		}
 
         if( origSettings.getNetworkHostUrl() != netHostSetting.getNetworkHostUrl() )
         {

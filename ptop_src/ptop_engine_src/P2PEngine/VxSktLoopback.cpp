@@ -20,6 +20,7 @@ VxSktLoopback::VxSktLoopback( P2PEngine& engine )
     , m_Engine( engine )
 {
 	m_eSktType = eSktTypeLoopback;
+    m_ConnectionId = m_LoopbackConnectId;
 }
 
 //============================================================================

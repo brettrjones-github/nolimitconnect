@@ -117,6 +117,7 @@ public:
 
     bool						setOnlineIpAddress( InetAddress& oIp );
 	bool						setOnlineIpAddress( const char * pIp ); // return true if changed
+    bool						isOnlineIpAddressValid( void );
 
 	uint16_t					getOnlinePort( void );
 	void						getOnlinePort( std::string& strRetPort );
