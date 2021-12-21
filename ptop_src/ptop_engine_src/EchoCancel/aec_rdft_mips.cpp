@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifdef ANDROID_MIPS_PLATFORM //BRJ
+#ifdef ANDROID_MIPS_PLATFORM 
 #include "aec_rdft.h"
 #include "WebRtcTypeDefs.h"
 

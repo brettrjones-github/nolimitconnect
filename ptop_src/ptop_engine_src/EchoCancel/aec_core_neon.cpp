@@ -14,7 +14,7 @@
  * Based on aec_core_sse2.c.
  */
 
-#ifdef ANDROID_NEON_PLATFORM //BRJ
+#ifdef ANDROID_NEON_PLATFORM 
 
 #include <arm_neon.h>
 #include <math.h>

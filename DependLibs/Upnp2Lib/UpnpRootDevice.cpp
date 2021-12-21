@@ -264,9 +264,9 @@ bool UpnpRootDevice::requestAddPortMap( InetAddress& lclAddr, int iPortToMap, co
 		return false;
 	}
 
-	LogMsg( LOG_INFO, "UPNP: Requesting Add Port Map %d\n", iPortToMap );
+	LogMsg( LOG_INFO, "UPNP: Requesting Add Port Map %d", iPortToMap );
 	std::string strLclIp = lclAddr.toStdString();
-	//BRJ in newer Century link routers anything besides 0 lease duration causes http error 500
+	// in newer Century link routers anything besides 0 lease duration causes http error 500
 	int leaseDuration = 0; // was 0 in utorrent //1440;
 	//int leaseDuration = 3700; // was 0 in utorrent //1440;
 	std::string strSoapAction = "AddPortMapping";

@@ -207,7 +207,7 @@ void OfferBaseInfoDb::getAllOffers( std::vector<OfferBaseInfo*>& OfferList )
 	std::string destasset;
 	std::string consoleId;
 	lockOfferInfoDb();
-	DbCursor * cursor = startQuery( "SELECT * FROM tblOffers" ); // ORDER BY unique_id DESC  // BRJ don't know why ORDER BY quit working on android.. do in code
+	DbCursor * cursor = startQuery( "SELECT * FROM tblOffers" ); // ORDER BY unique_id DESC  // don't know why ORDER BY quit working on android.. do in code
 	if( NULL != cursor )
 	{
 		while( cursor->getNextRow() )

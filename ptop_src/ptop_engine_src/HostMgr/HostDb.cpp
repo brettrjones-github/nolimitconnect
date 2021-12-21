@@ -160,12 +160,12 @@ RCODE HostDb::handleAnnounce(		HostList&			anchorListIn,
 	else if( eHostActionRelaysOnly == anchorListIn.m_HostAction )
 	{
 		// get rows where user is not firewalled ( potential relays )
-		cursor =  startQuery( "SELECT ann_datetime,ann_blob FROM table_ann WHERE firewalled=0" ); // ORDER BY ann_datetime DESC" ); // BRJ don't know why ORDER BY quit working on android.. do in code
+		cursor =  startQuery( "SELECT ann_datetime,ann_blob FROM table_ann WHERE firewalled=0" ); // ORDER BY ann_datetime DESC" ); // don't know why ORDER BY quit working on android.. do in code
 	}
 	else
 	{
 		// get all rows
-		cursor =  startQuery( "SELECT ann_datetime,ann_blob FROM table_ann" ); // ORDER BY ann_datetime DESC" ); // BRJ don't know why ORDER BY quit working on android.. do in code
+		cursor =  startQuery( "SELECT ann_datetime,ann_blob FROM table_ann" ); // ORDER BY ann_datetime DESC" ); // don't know why ORDER BY quit working on android.. do in code
 	}
 
 	bool foundCallerContact = false;

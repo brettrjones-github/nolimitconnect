@@ -123,8 +123,9 @@ void NetworkStateRelaySearch::fromGuiUseRelay( VxConnectInfo& connectInfo, bool 
 //============================================================================
 void NetworkStateRelaySearch::runNetworkState( void )
 {
-    LogModule( eLogNetworkRelay, LOG_INFO, "111 NetworkStateRelaySearch::runNetworkState start\n" );
-    // BRJ for now do not do relay stuff.. relay service now must be provided by group host
+    LogModule( eLogNetworkRelay, LOG_INFO, "111 NetworkStateRelaySearch::runNetworkState start" );
+    // for now do not do relay stuff.. relay service now must be provided by group host
+	// TODO remove relay search code
     VxSleep( 200 );
 	// doRelaySearchState();
 	// m_RelaySearchThread.abortThreadRun( true );
@@ -327,8 +328,9 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
                 VxSleep( (int)( 30000 - ( timeNow - timeStartSearch  ) ) );
             }
 
-			//BRJ.. we queried anchors and tried all.. just start over
-            LogModule( eLogNetworkRelay, LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network\n" );
+			// we queried anchors and tried all.. just start over
+			// TODO remove relay search code.. is now provided by host group/chat room etc
+            LogModule( eLogNetworkRelay, LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network" );
 			// m_NetworkStateMachine.restartNetwork();
 			return;
 		}

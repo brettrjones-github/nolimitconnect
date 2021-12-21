@@ -1057,7 +1057,7 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 		if( 1 == m_aoWantAppIdle.size() )
 		{
 			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to start idle" );
-			// BRJ idle runs all the time
+			// idle runs all the time.. TODO remove all idle code ?
 			//IToGui::getToGui().toGuiStartAppIdle();
 		}
 	}

@@ -553,14 +553,14 @@ void PluginMgr::handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		}
 		else // TODO BRJ handle case of valid netIdent not needed?
 		{
-			LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets unknown ident 0x%llX 0x%llX\n", 
+			LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets unknown ident 0x%llX 0x%llX", 
 				pktHdr->getSrcOnlineId().getVxGUIDHiPart(),
 				pktHdr->getSrcOnlineId().getVxGUIDLoPart() );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets invalid plugin num %d\n", u8PluginNum );
+		LogMsg( LOG_ERROR, "PluginMgr::handleNonSystemPackets invalid plugin num %d", u8PluginNum );
 	}
 }
 

@@ -211,7 +211,7 @@ LogMessage::~LogMessage() {
   }
 
   CritScope cs(&g_log_crit);
-  //BRJ
+  // 
   //for (auto& kv : streams_) {
   //  if (severity_ >= kv.second) {
   //    kv.first->OnLogMessage(str);
@@ -250,7 +250,7 @@ void LogMessage::SetLogToStderr(bool log_to_stderr) {
 int LogMessage::GetLogToStream(LogSink* stream) {
   CritScope cs(&g_log_crit);
   LoggingSeverity sev = LS_NONE;
-  //BRJ for (auto& kv : streams_) {
+  //  for (auto& kv : streams_) {
   //  if (!stream || stream == kv.first) {
   //    sev = std::min(sev, kv.second);
   //  }
@@ -282,7 +282,7 @@ void LogMessage::ConfigureLogging(const char* params) {
   std::vector<std::string> tokens;
   tokenize(params, ' ', &tokens);
 
-  //BRJ for (const std::string& token : tokens) {
+  //  for (const std::string& token : tokens) {
   //  if (token.empty())
   //    continue;
 
@@ -339,7 +339,7 @@ void LogMessage::ConfigureLogging(const char* params) {
 
 void LogMessage::UpdateMinLogSeverity() EXCLUSIVE_LOCKS_REQUIRED(g_log_crit) {
   LoggingSeverity min_sev = dbg_sev_;
-  //BRJ for (auto& kv : streams_) {
+  //  for (auto& kv : streams_) {
   //  min_sev = std::min(dbg_sev_, kv.second);
   //}
   min_sev_ = min_sev;

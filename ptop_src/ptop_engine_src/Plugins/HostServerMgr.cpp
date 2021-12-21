@@ -111,9 +111,6 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
         {
             if( iter->second->isValidPkt() )
             {
-                // BRJ temporary for debugging
-                // TODO REMOVE
-                // iter->second->setIsLoopback( true );
                 m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeHostNetwork );
             }
             else

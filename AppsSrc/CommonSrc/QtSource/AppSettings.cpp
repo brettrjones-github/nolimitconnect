@@ -86,7 +86,7 @@ void AppSettings::setFeatureEnable( EAppFeatures appFeature, bool enable )
 //============================================================================
 bool AppSettings::getFeatureEnable( EAppFeatures appFeature )
 {
-	// BRJ for now app features are used for disable
+	// for now app features are used for disable
 	// in the future if features are enabled then should let this code work
 	if( eAppFeatureTheme == appFeature )
 	{

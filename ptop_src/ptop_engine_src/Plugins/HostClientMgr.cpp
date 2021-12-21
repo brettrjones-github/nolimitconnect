@@ -193,9 +193,6 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
 
             if( result && searchReq.isValidPkt() )
             {
-                // BRJ temporary for debugging
-                // TODO REMOVE
-                // searchReq.setIsLoopback( true );
                 if( !m_Plugin.txPacket( onlineId, sktBase, &searchReq, false, m_Plugin.getDestinationPluginOverride( hostType ) ) )
                 {
                     LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onConnectToHostSuccess failed send PktHostSearchReq" );

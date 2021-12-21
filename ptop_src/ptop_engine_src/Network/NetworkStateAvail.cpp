@@ -72,7 +72,7 @@ void NetworkStateAvail::runNetworkState( void )
 		return;
 	}
 
-	//BRJ it seems that while upnp is communicating with router the router may temporarily stop accepting incoming connections
+	// NOTE: it seems that while upnp is communicating with router the router may temporarily stop accepting incoming connections
 	// so startup order has been changed. 
 	// 1. test if port is open
 	// 2. if open move to online

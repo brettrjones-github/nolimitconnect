@@ -185,7 +185,7 @@ EApplet GuiHelpers::getAppletThatPlaysFile( AppCommon& myApp, uint8_t fileType, 
     }
 
     // TODO: Photo player
-    // TODO: BRJ Vlc style audio player  
+    // TODO: Vlc style audio player  
 
     return applet;
 }

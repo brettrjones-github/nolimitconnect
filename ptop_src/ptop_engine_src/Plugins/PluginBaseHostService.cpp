@@ -190,8 +190,6 @@ void PluginBaseHostService::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * 
     searchReply.setSearchSessionId( searchReq->getSearchSessionId() );
     EPluginType overridePlugin = searchReq->getPluginType();
 
-    // BRJ temp for debug
-    // searchReply.setIsLoopback( true );
     if( !txPacket( netIdent->getMyOnlineId(), sktBase, &searchReply, false, overridePlugin ) )
     {
         LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
@@ -226,8 +224,6 @@ void PluginBaseHostService::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr
 
     EPluginType overridePlugin = settingReq->getPluginType();
 
-    // BRJ temp for debug
-    // settingReply.setIsLoopback( true );
     if( !txPacket( netIdent->getMyOnlineId(), sktBase, &settingReply, false, overridePlugin ) )
     {
         LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );

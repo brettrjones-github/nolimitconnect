@@ -149,7 +149,7 @@ bool HostJoinInfoDb::addHostJoin( HostJoinInfo* hostInfo )
 void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJoinList )
 {
     lockHostJoinInfoDb();
-    DbCursor * cursor = startQuery( "SELECT * FROM tblHostJoins" ); // ORDER BY unique_id DESC  // BRJ don't know why ORDER BY quit working on android.. do in code
+    DbCursor * cursor = startQuery( "SELECT * FROM tblHostJoins" ); // ORDER BY unique_id DESC  //   don't know why ORDER BY quit working on android.. do in code
     if( NULL != cursor )
     {
         while( cursor->getNextRow() )

@@ -51,7 +51,7 @@ void aec_rdft_init_sse2(void);
 void aec_rdft_forward_128(float* a);
 void aec_rdft_inverse_128(float* a);
 
-// BRJ commented out so just use c version
+// commented out because of compile issue so just use c versions of these functions
 //#if defined(MIPS_FPU_LE)
 //void aec_rdft_init_mips(void);
 //#endif

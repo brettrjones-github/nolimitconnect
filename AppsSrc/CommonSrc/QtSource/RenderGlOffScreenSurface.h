@@ -183,7 +183,7 @@ private:
     /// @brief (Re-)allocate FBO and paint device if needed due to size changes etc.
     void                        recreateFBOAndPaintDevice();
 
-    /// @brief BRJ test texture render
+    /// @brief test texture render (for testing only)
     void                        testTexureRender( bool startRender );
 
 	//=== vars ===//

@@ -57,7 +57,7 @@ bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
     "    m_cord1 = m_attrcord1;\n"
     "}\n";
 
-    //BRJ NOTE: had to remove "#version 100\n"  from code or failed with error about keyword float
+    // NOTE: had to remove "#version 100\n"  from code or failed with error about keyword float
     //"#version 120\n\n"
     //"precision mediump float;\n"
     static const char * gles_shader_default_frag =

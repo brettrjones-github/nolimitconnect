@@ -26,9 +26,6 @@
 #include <CoreLib/VxLinuxOnly.h>
 #include <CoreLib/IsBigEndianCpu.h>
 
-// BRJ remove me
-#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

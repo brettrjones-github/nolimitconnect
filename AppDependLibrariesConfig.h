@@ -125,7 +125,7 @@ echo GoTv Compiler Config error no os defined
 //#define HAS_MYSQL 1 // uses sqlite3 instead
 
 #define HAS_UPNP            1 
-#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_LINUX) // BRJ FIXME .. implement existing zero config for android
+#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_LINUX) // TODO implement existing zero config for android
 # define HAS_ZEROCONF        1
 #endif // TARGET_OS_ANDROID
 

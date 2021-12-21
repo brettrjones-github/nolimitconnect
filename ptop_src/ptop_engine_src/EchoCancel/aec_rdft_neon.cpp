@@ -14,7 +14,7 @@
  * Based on the sse2 version.
  */
 
-#ifdef ANDROID_NEON_PLATFORM //BRJ
+#ifdef ANDROID_NEON_PLATFORM 
 #include "aec_rdft.h"
 
 #include <arm_neon.h>
