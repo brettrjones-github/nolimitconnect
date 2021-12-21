@@ -257,7 +257,7 @@ void AppCommon::loadWithoutThread( void )
     // after user has logged into account
 
     uint64_t loadingMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "LoadSettings " PRId64 " ms alive ms " PRId64 "", loadingMs - startMs, loadingMs );
+    LogMsg( LOG_DEBUG, "LoadSettings %" PRId64 " ms alive ms %" PRId64 "", loadingMs - startMs, loadingMs );
 
 	if( getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
 	{
@@ -268,7 +268,7 @@ void AppCommon::loadWithoutThread( void )
     m_MyIcons.myIconsStartup();
 
     uint64_t iconsMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Load Icons " PRId64 " ms alive ms " PRId64 "", iconsMs - loadingMs, iconsMs );
+    LogMsg( LOG_DEBUG, "Load Icons %" PRId64 " ms alive ms %" PRId64 "", iconsMs - loadingMs, iconsMs );
 
 	// QT 6.2.0 has broken scroll bars.. TODO fix when 6.2.0 is no longer beta
 	if( getAppSettings().getFeatureEnable( eAppFeatureTheme ) )
@@ -280,7 +280,7 @@ void AppCommon::loadWithoutThread( void )
     m_MySndMgr.sndMgrStartup();
 
     uint64_t styleMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Setup Style " PRId64 " ms alive ms " PRId64 "", styleMs - iconsMs, styleMs );
+    LogMsg( LOG_DEBUG, "Setup Style %" PRId64 " ms alive ms %" PRId64 "", styleMs - iconsMs, styleMs );
 
 	// make sure the engine has been created
 	int retryCnt = 0;
@@ -310,7 +310,7 @@ void AppCommon::loadWithoutThread( void )
 
 
     uint64_t homePageMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Initialize Home Page " PRId64 " ms alive ms " PRId64 "", homePageMs - styleMs, homePageMs );
+    LogMsg( LOG_DEBUG, "Initialize Home Page %" PRId64 " ms alive ms %" PRId64 "", homePageMs - styleMs, homePageMs );
 
 
 }
@@ -1404,7 +1404,7 @@ void AppCommon::onOncePerSecond( void )
     else
     {
         waitCnt++;
-        LogMsg( LOG_DEBUG, "Wait to login seconds %d alive ms " PRId64 "", waitCnt, GetApplicationAliveMs() );
+        LogMsg( LOG_DEBUG, "Wait to login seconds %d alive ms %" PRId64 "", waitCnt, GetApplicationAliveMs() );
     }
 }
 

@@ -192,7 +192,7 @@ bool InputBaseWidget::videoRecord( EAssetAction action )
 				{
 					// not long enough to be a recording
 					VxFileUtil::deleteFile( m_FileName.c_str() );
-					LogMsg( LOG_ERROR, "InputBaseWidget::videoRecord file %s has to short len " PRId64 "", m_FileName.c_str(), fileLen );
+					LogMsg( LOG_ERROR, "InputBaseWidget::videoRecord file %s has to short len %" PRId64 "", m_FileName.c_str(), fileLen );
 					actionResult = false;
 				}
 				else

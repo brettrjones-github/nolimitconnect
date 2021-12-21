@@ -65,12 +65,12 @@ void ActivityAppSetup::slotCopyResult( QObject * workerObj, int rc, qint64 bytes
 {
     if( rc )
     {
-        LogMsg( LOG_INFO, "Setup error %d at " PRId64 " bytes", rc, bytesCopied );
+        LogMsg( LOG_INFO, "Setup error %d at %" PRId64 " bytes", rc, bytesCopied );
         ui.m_TitleBarWidget->setBackButtonVisibility( true );
     }
     else
     {
-        LogMsg( LOG_INFO, "Setup copied " PRId64 " bytes", bytesCopied );
+        LogMsg( LOG_INFO, "Setup copied %" PRId64 " bytes", bytesCopied );
         QString bytesStr = GuiParams::describeFileLength( bytesCopied );
 
         QMessageBox::information( this, QObject::tr("Setup completed"), QObject::tr( "Setup success. Bytes Copied " ) + bytesStr, QMessageBox::Ok );

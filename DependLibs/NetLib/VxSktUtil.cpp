@@ -880,7 +880,7 @@ SOCKET VxConnectToAddr(SOCKET sktHandle, struct sockaddr* sktAddr, socklen_t skt
 
             if( iResult < 0 && TimeElapsedGmtMs( timeStartConnect ) < iConnectTimeoutMs)
             {
-                LogMsg( LOG_ERROR, "VxConnectToAddr: ERROR socket select time out is %d but " PRId64 " ms elapsed to %s",
+                LogMsg( LOG_ERROR, "VxConnectToAddr: ERROR socket select time out is %d but %" PRId64 " ms elapsed to %s",
                         iConnectTimeoutMs, TimeElapsedGmtMs( timeStartConnect ), ipAndPort.c_str() );
             }
 
@@ -1765,7 +1765,7 @@ RCODE VxReceiveSktData( SOCKET&			sktHandle,
 	} while ( ( iRecvResult > 0 ) || ( iTimeoutMilliSeconds && ( iTimeoutMilliSeconds > oTimer.elapsedMs() ) ) );
 
     int64_t timeEnd = GetApplicationAliveMs();
-    LogMsg( LOG_VERBOSE, "VxReceiveSktData len %d in " PRId64 " ms with timeout %d ms thread 0x%x", iRecvResult, timeEnd - timeStart, iTimeoutMilliSeconds, VxGetCurrentThreadId() );
+    LogMsg( LOG_VERBOSE, "VxReceiveSktData len %d in %" PRId64 " ms with timeout %d ms thread 0x%x", iRecvResult, timeEnd - timeStart, iTimeoutMilliSeconds, VxGetCurrentThreadId() );
 
 	return m_rcLastError;
 }
@@ -1775,7 +1775,7 @@ bool VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr )
 {
 	if ( SOCKET_ERROR == bind( oSocket, ( struct sockaddr * )poAddr, VxGetSktAddressLength( poAddr ) ) )
 	{
-		LogMsg( LOG_ERROR, "ERROR Bind Socket Failed rc = %d\n", VxGetLastError() );
+		LogMsg( LOG_ERROR, "ERROR Bind Socket Failed rc = %d", VxGetLastError() );
 		return false;
 	}
 	return true;

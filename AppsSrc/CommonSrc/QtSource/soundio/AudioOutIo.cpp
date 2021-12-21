@@ -193,7 +193,7 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
         if( secondsNow != secondsStart )
         {
             qint64 byteRate = totalRead / ( secondsNow - secondsStart );
-            LogMsg( LOG_DEBUG, "speaker out byte rate = " PRId64 " at " PRId64 " sec delay %3.3f ms", byteRate, secondsNow - secondsStart, m_AudioIoMgr.getDataReadyForSpeakersLen() * BYTES_TO_MS_MULTIPLIER_SPEAKERS );
+            LogMsg( LOG_DEBUG, "speaker out byte rate = %" PRId64 " at %" PRId64 " sec delay %3.3f ms", byteRate, secondsNow - secondsStart, m_AudioIoMgr.getDataReadyForSpeakersLen() * BYTES_TO_MS_MULTIPLIER_SPEAKERS );
         }
     }*/
 
@@ -233,7 +233,7 @@ qint64 AudioOutIo::bytesAvailable() const
 {
     qint64 avail = std::min( m_AudioIoMgr.getAudioOutMixer().getDataReadyForSpeakersLen(), m_AudioOutBufferSize );
     //avail += QIODevice::bytesAvailable();
-    //LogMsg( LOG_DEBUG, "bytesAvailable " PRId64 " device avail " PRId64 "", avail, QIODevice::bytesAvailable() );
+    //LogMsg( LOG_DEBUG, "bytesAvailable %" PRId64 " device avail %" PRId64 "", avail, QIODevice::bytesAvailable() );
     return avail;
 }
 
@@ -256,7 +256,7 @@ void AudioOutIo::slotAudioNotify()
         // round down to nearest 80 ms
         m_ProccessedMs = processedMs - ( processedMs % AUDIO_MS_SPEAKERS );
         m_AudioOutThread.releaseAudioOutThread();
-//        LogMsg( LOG_DEBUG, "AudioOutIo Notify %3.3f ms processed " PRId64 " interval %d buf size %d elapsed %d", m_NotifyTimer.elapsedMs(), processedMs, m_AudioOutputDevice->notifyInterval(), 
+//        LogMsg( LOG_DEBUG, "AudioOutIo Notify %3.3f ms processed %" PRId64 " interval %d buf size %d elapsed %d", m_NotifyTimer.elapsedMs(), processedMs, m_AudioOutputDevice->notifyInterval(), 
 //            m_AudioOutputDevice->bufferSize(), m_ElapsedTimer.elapsed() );
 
         callCnt++;

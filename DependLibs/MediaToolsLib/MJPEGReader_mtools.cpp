@@ -239,7 +239,7 @@ bool MJPEGReader::startVideoRead( const char * fileName, VxGUID& assetId, int po
 	m_FileLen = (uint32_t)VxFileUtil::getFileLen( m_FileName.c_str() );
 	if( 3000 > m_FileLen )
 	{
-		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead to short len " PRId64 " file %s\n", m_FileLen, m_FileName.c_str() );
+		LogMsg( LOG_ERROR, "MJPEGReader::startAviRead to short len %" PRId64 " file %s\n", m_FileLen, m_FileName.c_str() );
 		return false;
 	}
 
