@@ -221,7 +221,6 @@ EPluginType HostServerSearchMgr::getSearchPluginType( EHostType hostType )
     }
 }
 
-
 //============================================================================
 void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
 {
@@ -240,4 +239,34 @@ void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
     }
 
     m_SearchMutex.unlock();
+}
+
+//============================================================================
+void HostServerSearchMgr::fromGuiListAction( EListAction listAction )
+{
+    LogMsg( LOG_DEBUG, "HostServerSearchMgr fromGuiListAction" );
+
+    doFromGuiListAction( listAction, ePluginTypeHostGroup, m_GroupBlob );
+    doFromGuiListAction( listAction, ePluginTypeHostChatRoom, m_ChatBlob );
+    doFromGuiListAction( listAction, ePluginTypeHostRandomConnect, m_RandConnectList );
+}
+
+//============================================================================
+void HostServerSearchMgr::doFromGuiListAction( EListAction listAction, EPluginType pluginType, std::map<PluginId, HostSearchEntry>& hostedList )
+{
+    if( eListActionAnnounced == listAction )
+    {
+        uint64_t timeNow = GetGmtTimeMs();
+        int entryNum = 0;
+        LogMsg( LOG_INFO, "== Announced Hosts %s count %d ==", DescribePluginType( pluginType ), hostedList.size() );
+        m_SearchMutex.lock();
+        for( auto iter = hostedList.begin(); iter != hostedList.end(); ++iter )
+        {
+            entryNum++;
+            LogMsg( LOG_INFO, " #%d - %lld sec ago client %s title %s", entryNum, ( timeNow - iter->second.m_LastRxTime ) / 1000, 
+                iter->second.m_PktHostAnn.getOnlineName(), iter->second.m_PluginSetting.getTitle().c_str() );
+        }
+
+        m_SearchMutex.unlock();
+    }
 }

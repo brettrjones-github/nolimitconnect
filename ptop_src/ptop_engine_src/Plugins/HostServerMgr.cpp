@@ -185,3 +185,9 @@ EMembershipState HostServerMgr::getMembershipState( VxNetIdent* netIdent, EHostT
 {
     return m_Engine.getHostJoinMgr().fromGuiQueryMembership( hostType, *netIdent );
 }
+
+//============================================================================
+void HostServerMgr::fromGuiListAction( EListAction listAction )
+{
+    HostServerSearchMgr::fromGuiListAction( listAction );
+}

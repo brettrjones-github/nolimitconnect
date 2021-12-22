@@ -180,12 +180,12 @@ namespace
     {
         // must sync with EHostType
         "Host Unknown ",
+        "Host Network ",
+        "Host Connect Test ",
         "Host Group ",
         "Host Chat Room ",
         "Host Random Connect ",
         "Host Peer User ",
-        "Host Connect Test ",
-        "Host Network ",
 
         "Max Host Type ",
     };
@@ -703,6 +703,22 @@ const char * DescribeJoinState( EJoinState joinState )
     }
 
     return JoinStateEnumStrings[ joinState ];
+}
+
+//============================================================================
+const char* DescribeListAction( EListAction listAction )
+{
+    switch( listAction )
+    {
+    case eListActionAnnounced:
+        return "eListActionAnnounced";
+    case eListActionJoinedHost:
+        return "eListActionJoinedHost";
+    case eListActionJoinedClient:
+        return "eListActionJoinedClient";
+    default:
+        return "UNKNOWN EListAction";
+    }
 }
 
 //============================================================================

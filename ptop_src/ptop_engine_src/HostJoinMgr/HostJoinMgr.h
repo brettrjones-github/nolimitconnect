@@ -36,6 +36,7 @@ public:
     virtual EJoinState	        fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
     EMembershipState            fromGuiQueryMembership( EHostType hostType, VxNetIdent& netIdent );
     void                        fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList );
+    void                        fromGuiListAction( EListAction listAction );
 
     void                        addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable );
 

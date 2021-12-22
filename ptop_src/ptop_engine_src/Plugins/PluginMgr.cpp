@@ -702,6 +702,16 @@ void PluginMgr::fromGuiAppResume( void )
 }
 
 //============================================================================
+void PluginMgr::fromGuiListAction( EListAction listAction )
+{
+	std::vector<PluginBase* >::iterator iter;
+	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
+	{
+		( *iter )->fromGuiListAction( listAction );
+	}
+}
+
+//============================================================================
 void PluginMgr::onOncePerSecond( void )
 {
 	//NOTE: TODO ?

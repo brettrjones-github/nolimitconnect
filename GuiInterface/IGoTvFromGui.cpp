@@ -784,3 +784,10 @@ int IGoTv::fromGuiGetJoinedListCount( EPluginType pluginType )
 {
     return getPtoP().fromGuiGetJoinedListCount( pluginType );
 }
+
+//============================================================================
+void IGoTv::fromGuiListAction( EListAction listAction )
+{
+    getPtoP().fromGuiListAction( listAction );
+}
+

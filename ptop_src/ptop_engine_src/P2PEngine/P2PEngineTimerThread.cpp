@@ -98,23 +98,13 @@ void P2PEngine::onOncePerSecond( void )
     m_NetworkMgr.onOncePerSecond();
     m_PluginMgr.onOncePerSecond();
 
-    //static int announceCntInSeconds = 60;
-    //	announceCntInSeconds--;
-    //	if( 0 >= announceCntInSeconds )
-    //	{
-    //		announceCntInSeconds = 60;
-    //		if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
-    //		{
-    //			m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
-    //		}
-    //	}
     static int thirtySecCntInSeconds = 31;
     thirtySecCntInSeconds--;
     if( 0 >= thirtySecCntInSeconds )
     {
         thirtySecCntInSeconds = 30;
         onOncePer30Seconds();
-        onOncePer15Minutes();
+        onOncePer15Minutes(); // BRJ for testing only.. remove me
     }
 
     static int minuteCntInSeconds = 62;
@@ -162,10 +152,6 @@ void P2PEngine::onOncePerMinute( void )
     m_ConnectionList.broadcastSystemPkt( &m_PktImAliveReq, false );
     m_RcScan.onOncePerMinute();
 
-    //m_ConnectionList.broadcastSystemPkt( &m_PktImAliveReq, false );
-    //m_RcScan.onOncePerMinute();
-    //LogMsg( LOG_INFO, "Sockets current in memory %d total created %d\n", VxSktBase::getCurrentSktCount(), VxSktBase::getTotalCreatedSktCount() );
-
 //#ifdef _DEBUG
 //	VxThread::dumpRunningThreads();
 //#endif // _DEBUG
@@ -174,7 +160,6 @@ void P2PEngine::onOncePerMinute( void )
 //============================================================================
 void P2PEngine::onOncePer15Minutes( void )
 {
-    //m_RcScan.onOncePer30Seconds();
     m_PluginMgr.onThreadOncePer15Minutes();
 }
 

@@ -30,7 +30,7 @@ class InetAddress;
 class FileShareSettings;
 class AssetBaseInfo;
 
-//! \public Plugin server state
+// Plugin server state
 enum EPluginServerState
 {
 	ePluginServerStateDisabled,		//< server is disabled
@@ -40,7 +40,7 @@ enum EPluginServerState
 	eMaxPluginServerState
 };
 
-//! \public Video recording state
+// Video recording state
 enum EVideoRecordState
 {
 	eVideoRecordStateDisabled,
@@ -417,11 +417,12 @@ public:
 	/// For testing and debug only 
 	virtual bool				fromGuiTestCmd(	IFromGui::ETestParam1		eTestParam1, 
 												int							testParam2 = 0, 
-												const char *				testParam3 = NULL ) = 0;
+												const char *				testParam3 = nullptr ) = 0;
 	/// Debug only set which logging to filter
-	virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL ) = 0;
+	virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char * pLogFileName = nullptr ) = 0;
 	/// Debug only send capture of log messages to GUI
 	virtual void				fromGuiSendLog( uint32_t u32LogFlags ) = 0;
 
 	virtual int					fromGuiGetJoinedListCount( EPluginType pluginType ) = 0;
+	virtual void				fromGuiListAction( EListAction listAction ) = 0;
 };

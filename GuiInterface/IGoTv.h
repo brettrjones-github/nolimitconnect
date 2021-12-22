@@ -610,7 +610,7 @@ public:
 
     /// return number of items currently in list
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
-
+    virtual void				fromGuiListAction( EListAction listAction );
   
     //============================================================================
     //=== utilities ===//

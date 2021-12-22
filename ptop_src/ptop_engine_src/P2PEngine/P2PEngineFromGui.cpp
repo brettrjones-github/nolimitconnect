@@ -1585,3 +1585,9 @@ EJoinState P2PEngine::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& net
 {
 	return getHostJoinMgr().fromGuiQueryJoinState( hostType, netIdent );
 }
+
+//============================================================================
+void P2PEngine::fromGuiListAction( EListAction listAction )
+{
+	m_PluginMgr.fromGuiListAction( listAction );
+}

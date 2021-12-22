@@ -204,6 +204,38 @@
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QPushButton" name="m_ListActionButton">
+          <property name="text">
+           <string>Log checked lists</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_AnnouncedCheckBox">
+          <property name="text">
+           <string>Announced</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_HostJoinedCheckBox">
+          <property name="text">
+           <string>Host Joined</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_ClientJoinedCheckBox">
+          <property name="text">
+           <string>Client Joined</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QPushButton" name="m_CopyResultToClipboardButton">
         <property name="text">
          <string>Copy Results To Clipboard</string>

@@ -120,6 +120,10 @@ void AppletTestAndDebug::setupApplet( void )
         }     
     }
 
+    ui.m_AnnouncedCheckBox->setChecked( true );
+    ui.m_HostJoinedCheckBox->setChecked( true );
+    ui.m_ClientJoinedCheckBox->setChecked( true );
+
     connect( ui.gotoWebsiteButton, SIGNAL( clicked() ), this, SLOT( gotoWebsite() ) );
     connect( ui.m_ShowLogButton, SIGNAL( clicked() ), this, SLOT( slotShowLogButtonClick() ) );
     connect( ui.m_ShowAppInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowAppInfoButtonClick() ) );
@@ -132,6 +136,7 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_QueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostIdButtonClicked() ) );
     connect( ui.m_GenerateGuidButton, SIGNAL( clicked() ), this, SLOT( slotGenerateGuidButtonClicked() ) );
     connect( ui.m_PurgeCacheButton, SIGNAL( clicked() ), this, SLOT( slotPurgeCacheButtonClicked() ) );
+    connect( ui.m_ListActionButton, SIGNAL( clicked() ), this, SLOT( slotListActionButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -412,7 +417,7 @@ void AppletTestAndDebug::fillBasicInfo( void )
 //============================================================================
 void AppletTestAndDebug::fillCpuInfo( void )
 {
-    infoMsg( "C++ value sizes: int %d long %d long long %d int64_t %d", sizeof( int ), sizeof( long ), sizeof( long long ), sizeof( int64_t ) );
+    infoMsg( "C++ value sizes: int %d long %d long long %d int64_t %d PRId64 %s", sizeof( int ), sizeof( long ), sizeof( long long ), sizeof( int64_t ), PRId64 );
 }
 
 //============================================================================
@@ -456,5 +461,31 @@ void AppletTestAndDebug::slotPurgeCacheButtonClicked( void )
     {
         int64_t bytesPurged = m_MyApp.getEngine().fromGuiClearCache( eCacheTypeThumbnail );
         infoMsg( QString( GuiParams::describeFileLength( bytesPurged ) + QObject::tr( " of disk space freed by deleting cached thumbnails" ) ).toUtf8().constData() );
+    }
+}
+
+//============================================================================
+void AppletTestAndDebug::slotListActionButtonClicked( void )
+{
+    if( m_ShowListMsg )
+    {
+        m_ShowListMsg = false;
+        okMessageBox( QObject::tr( "List Action" ),
+            QObject::tr( "To see list result click Show Log. Also review log setting to make sure logging is enabled" ) );
+    }
+
+    if( ui.m_AnnouncedCheckBox->isChecked() )
+    {
+        getFromGuiInterface().fromGuiListAction( eListActionAnnounced );
+    }
+
+    if( ui.m_HostJoinedCheckBox->isChecked() )
+    {
+        getFromGuiInterface().fromGuiListAction( eListActionJoinedHost );
+    }
+
+    if( ui.m_ClientJoinedCheckBox->isChecked() )
+    {
+        getFromGuiInterface().fromGuiListAction( eListActionJoinedClient );
     }
 }

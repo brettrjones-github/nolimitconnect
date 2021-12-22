@@ -28,6 +28,7 @@ PluginRandomConnectHost::PluginRandomConnectHost( P2PEngine& engine, PluginMgr& 
 : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostRandomConnect );
+    setHostType( eHostTypeRandomConnect );
 }
 
 //============================================================================
@@ -65,7 +66,7 @@ void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& plu
     m_PluginSetting.setUpdateTimestampToNow();
     BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
-    m_PktHostAnnounce.setHostType( eHostTypeRandomConnect );
+    m_PktHostAnnounce.setHostType( getHostType() );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
     m_HostAnnounceBuilt = true;
     m_AnnMutex.unlock();
@@ -74,9 +75,9 @@ void PluginRandomConnectHost::buildHostRandomConnectAnnounce( PluginSetting& plu
 //============================================================================
 void PluginRandomConnectHost::sendHostRandomConnectAnnounce( void )
 {
-    LogModule( eLogHosts, LOG_DEBUG, "%s sendHostRandomConnectAnnounce", DescribeHostType( getHostType() ) );
     if( m_Engine.isDirectConnectReady() )
     {
+        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce built %d ", DescribeHostType( getHostType() ), m_HostAnnounceBuilt );
         if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
             PluginSetting pluginSetting;
@@ -85,6 +86,10 @@ void PluginRandomConnectHost::sendHostRandomConnectAnnounce( void )
                 buildHostRandomConnectAnnounce( pluginSetting );
             }
         }
+    }
+    else
+    {
+        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostRandomConnectAnnounce requires direct connect ", DescribeHostType( getHostType() ) );
     }
 
     if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )

@@ -351,6 +351,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbXferDb.h \
     $$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbXferMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbXferSession.h \
+    $$PWD/ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h \
 	$$PWD/ptop_src/ptop_engine_src/User/User.h \
 	$$PWD/ptop_src/ptop_engine_src/User/UserList.h \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinCallbackInterface.h \
@@ -665,6 +666,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbXferMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbXferPktCreate.cpp \
 	$$PWD/ptop_src/ptop_engine_src/ThumbMgr/ThumbXferSession.cpp \
+    $$PWD/ptop_src/ptop_engine_src/UrlMgr/UrlMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/User/User.cpp \
 	$$PWD/ptop_src/ptop_engine_src/User/UserList.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.cpp \

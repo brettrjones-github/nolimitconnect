@@ -417,3 +417,9 @@ void HostJoinMgr::changeJoinState( VxGUID& onlineId, EPluginType pluginType, EJo
 
     unlockResources();
 }
+
+//============================================================================
+void HostJoinMgr::fromGuiListAction( EListAction listAction )
+{
+    
+}

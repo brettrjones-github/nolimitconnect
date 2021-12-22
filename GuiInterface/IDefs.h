@@ -397,6 +397,15 @@ enum EJoinState
     eMaxJoinState	
 };
 
+enum EListAction
+{
+    eListActionAnnounced,
+    eListActionJoinedHost,
+    eListActionJoinedClient,
+
+    eMaxListAction
+};
+
 enum EMembershipState
 {
     eMembershipStateNone = 0,
@@ -1011,84 +1020,85 @@ enum ESubCatagory
 // There is a qt translated version of these functions in GuiParams for the user interface
 //============================================================================
 
-const char * DescribeAppModule( enum EAppModule appModule );
-const char * DescribeAge( enum EAgeType ageType );
-const char * DescribeCommError( enum ECommErr commErr );
-const char * DescribeConnectReason( enum EConnectReason connectReason );
-const char * DescribeConnectStatus( enum EConnectStatus connectStatus );
+const char * DescribeAppModule( EAppModule appModule );
+const char * DescribeAge( EAgeType ageType );
+const char * DescribeCommError( ECommErr commErr );
+const char * DescribeConnectReason( EConnectReason connectReason );
+const char * DescribeConnectStatus( EConnectStatus connectStatus );
 //! describe friend state
-const char * DescribeFriendState( enum EFriendState eFriendState );
-const char * DescribeHackerLevel( enum EHackerLevel hackLevel );
-const char * DescribeHackerReason( enum EHackerReason hackReason );
+const char * DescribeFriendState( EFriendState eFriendState );
+const char * DescribeHackerLevel( EHackerLevel hackLevel );
+const char * DescribeHackerReason( EHackerReason hackReason );
 //! Host announce status as text
-const char * DescribeHostAnnounceStatus( enum EHostAnnounceStatus hostStatus );
+const char * DescribeHostAnnounceStatus( EHostAnnounceStatus hostStatus );
 //! Host join status as text
-const char * DescribeHostJoinStatus( enum EHostJoinStatus hostStatus );
+const char * DescribeHostJoinStatus( EHostJoinStatus hostStatus );
 //! Host search status as text
-const char * DescribeHostSearchStatus( enum EHostSearchStatus hostStatus );
+const char * DescribeHostSearchStatus( EHostSearchStatus hostStatus );
 //! Host connection test state as text
 // const char * DescribeHostTestStatus( EHostTestStatus eHostStatus );
 //! Host type as text
-const char * DescribeHostType( enum EHostType hostType );
+const char * DescribeHostType( EHostType hostType );
 //! Internet Status as text
-const char * DescribeInternetStatus( enum EInternetStatus internetStatus );
-const char * DescribeJoinState( enum EJoinState joinState );
-const char * DescribeModuleState( enum EModuleState moduleState );
+const char * DescribeInternetStatus( EInternetStatus internetStatus );
+const char * DescribeJoinState( EJoinState joinState );
+const char * DescribeModuleState( EModuleState moduleState );
+const char * DescribeListAction( EListAction listAction );
 //! Network State as text
-const char * DescribeNetworkState( enum ENetworkStateType networkStateType );
+const char * DescribeNetworkState( ENetworkStateType networkStateType );
 //! Net Available Status as text
-const char * DescribeNetAvailStatus( enum ENetAvailStatus netAvailStatus );
+const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus );
 //! Net Command type as text
-const char * DescribeNetCmdType( enum ENetCmdType netCmdType );
+const char * DescribeNetCmdType( ENetCmdType netCmdType );
 //! Net Command Error as text
-const char * DescribeNetCmdError( enum ENetCmdError netCmdError );
+const char * DescribeNetCmdError( ENetCmdError netCmdError );
 //! Offer state as text
-const char * DescribeOfferState( enum EOfferState offerState );
+const char * DescribeOfferState( EOfferState offerState );
 //! Offer type as text
-const char * DescribeOfferType( enum EOfferType offerType );
+const char * DescribeOfferType( EOfferType offerType );
 //! Plugin Access as text
-const char * DescribePluginAccess( enum EPluginAccess pluginAccess );
+const char * DescribePluginAccess( EPluginAccess pluginAccess );
 //! Describe plugin.. the first DescribePluginType is translated.. this one is not
-const char * DescribePluginType( enum EPluginType ePluginType );
+const char * DescribePluginType( EPluginType ePluginType );
 //! Describe Direct Connect test state as text
-const char * DescribePortOpenStatus( enum EIsPortOpenStatus ePortOpenStatus );
+const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
 //! Describe connect by shaking phone ( or press simulate phone shake ) status as text
-const char * DescribeRandomConnectStatus( enum ERandomConnectStatus ePortOpenStatus );
+const char * DescribeRandomConnectStatus( ERandomConnectStatus ePortOpenStatus );
 //! Describe Relay Search Status as text
-const char * DescribeRelayStatus( enum EMyRelayStatus eRelayStatus );
+const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus );
 //! Describe run network test state as text
-const char * DescribeRunTestStatus( enum ERunTestStatus eTestStatus );
+const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
 //! Describe scan type
-const char * DescribeScanType( enum EScanType scanType );
+const char * DescribeScanType( EScanType scanType );
 //! Describe search type
-const char * DescribeSearchType( enum ESearchType searchType );
+const char * DescribeSearchType( ESearchType searchType );
 //! Describe socket close reason
-const char * DescribeSktCloseReason( enum ESktCloseReason closeReason );
+const char * DescribeSktCloseReason( ESktCloseReason closeReason );
 //! Describe skt type
-const char * DescribeSktType( enum ESktType sktType );
+const char * DescribeSktType( ESktType sktType );
 
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName
-const char * getPluginName( enum EPluginType pluginType );
+const char * getPluginName( EPluginType pluginType );
 
 //! convert Host Type to connect reason
-enum EConnectReason HostTypeToConnectAnnounceReason( enum EHostType hostType );
+EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType );
 //! convert Host Type to connect reason
-enum EConnectReason HostTypeToConnectJoinReason( enum EHostType hostType );
+EConnectReason HostTypeToConnectJoinReason( EHostType hostType );
 //! convert Host Type to connect reason
-enum EConnectReason HostTypeToConnectSearchReason( enum EHostType hostType );
+EConnectReason HostTypeToConnectSearchReason( EHostType hostType );
 
 //! convert Host Type to service plugin  type
-enum EPluginType HostTypeToHostPlugin( enum EHostType hostType );
+EPluginType HostTypeToHostPlugin( EHostType hostType );
 //! convert Host Type to client plugin type
-enum EPluginType HostTypeToClientPlugin( enum EHostType hostType );
+EPluginType HostTypeToClientPlugin( EHostType hostType );
 //! convert Plugin Type to host type
-enum EHostType PluginTypeToHostType( enum EPluginType pluginType );
+EHostType PluginTypeToHostType( EPluginType pluginType );
 // if host plugin return its client plugin else return pluginType param
-enum EPluginType HostPluginToClientPluginType( enum EPluginType pluginType );
+EPluginType HostPluginToClientPluginType( EPluginType pluginType );
 // if client plugin return its host plugin else return pluginType param
-enum EPluginType ClientPluginToHostPluginType( enum EPluginType pluginType );
+EPluginType ClientPluginToHostPluginType( EPluginType pluginType );
 //! return true if is a client plugin
-bool IsClientPluginType( enum EPluginType pluginType );
+bool IsClientPluginType( EPluginType pluginType );
 //! return true if is a host plugin
-bool IsHostPluginType( enum EPluginType pluginType );
+bool IsHostPluginType( EPluginType pluginType );

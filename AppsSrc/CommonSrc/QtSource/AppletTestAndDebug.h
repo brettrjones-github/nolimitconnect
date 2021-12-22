@@ -59,6 +59,7 @@ protected slots:
     void                        slotQueryHostIdButtonClicked( void );
     void                        slotGenerateGuidButtonClicked( void );
     void                        slotPurgeCacheButtonClicked( void );
+    void                        slotListActionButtonClicked( void );
 
     void                        slotNewUrlSelected( const QString &newUrl );
 
@@ -79,8 +80,13 @@ protected:
     void *                      m_OldLogUserData{ nullptr};
     bool                        m_VerboseLog{ false };
     VxGUID                      m_SessionId;
+#if defined(DEBUG)
+    bool                        m_ShowListMsg{ false }; // if debugging it is assumed user does not need instruction message
+#else
+    bool                        m_ShowListMsg{ true }; 
+#endif // defined(DEBUG)
 
-    Ui::AppletTestAndDebugUi ui;
+    Ui::AppletTestAndDebugUi    ui;
 };
 
 

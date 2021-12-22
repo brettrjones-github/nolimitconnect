@@ -44,7 +44,9 @@ public:
     void                        updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent );
     virtual ECommErr            searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual ECommErr            settingsRequest( PluginId& pluginId, PktPluginSettingReply& searchReply, VxSktBase* sktBase, VxNetIdent* netIdent );
+
     virtual void				fromGuiSendAnnouncedList( EHostType hostType );
+    virtual void				fromGuiListAction( EListAction listAction );
 
 protected:
     std::map<PluginId, HostSearchEntry>& getSearchList( EHostType hostType );
@@ -54,6 +56,7 @@ protected:
     // remove entries does not lock m_SearchMutex
     void                        removeEntries( std::map<PluginId, HostSearchEntry>& searchMap, PluginIdList& toRemoveList );
     EPluginType                 getSearchPluginType( EHostType hostType );
+    void                        doFromGuiListAction( EListAction listAction, EPluginType pluginType, std::map<PluginId, HostSearchEntry>& hostedList );
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;

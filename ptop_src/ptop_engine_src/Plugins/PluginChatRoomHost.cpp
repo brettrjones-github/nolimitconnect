@@ -27,6 +27,7 @@ PluginChatRoomHost::PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr,
     : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostChatRoom );
+    setHostType( eHostTypeChatRoom );
 }
 
 //============================================================================
@@ -63,7 +64,7 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
     m_PluginSetting.setUpdateTimestampToNow();
     BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
-    m_PktHostAnnounce.setHostType( eHostTypeChatRoom );
+    m_PktHostAnnounce.setHostType( getHostType() );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
     m_HostAnnounceBuilt = true;
     m_AnnMutex.unlock();
@@ -72,10 +73,9 @@ void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting
 //============================================================================
 void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
-    LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce", DescribeHostType( getHostType() ) );
-
     if( m_Engine.isDirectConnectReady() )
     {
+        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce built %d ", DescribeHostType( getHostType() ), m_HostAnnounceBuilt );
         if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
             PluginSetting pluginSetting;
@@ -84,6 +84,10 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
                 buildHostChatRoomAnnounce( pluginSetting );
             }
         }
+    }
+    else
+    {
+        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce requires direct connect ", DescribeHostType( getHostType() ) );
     }
 
     if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )
@@ -124,5 +128,5 @@ EMembershipState PluginChatRoomHost::getMembershipState( VxNetIdent* netIdent )
         return eMembershipStateJoinDenied;
     }
 
-    return m_HostServerMgr.getMembershipState( netIdent, PluginTypeToHostType( getPluginType() ) );
+    return m_HostServerMgr.getMembershipState( netIdent, getHostType() );
 }

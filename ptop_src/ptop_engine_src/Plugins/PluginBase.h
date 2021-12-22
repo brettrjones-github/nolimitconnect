@@ -161,6 +161,7 @@ public:
 	virtual void				fromGuiSendAnnouncedList( EHostType hostType ) {};
 
 	virtual bool				fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }
+	virtual void				fromGuiListAction( EListAction listAction ) {};
 
     //=== connections ===//
 	virtual void				onContactWentOnline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};

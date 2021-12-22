@@ -24,6 +24,7 @@ public:
 
     virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent ) override;
     virtual void				fromGuiSendAnnouncedList( EHostType hostType ) override;
+    virtual void				fromGuiListAction( EListAction listAction ) override;
 
 protected:
     virtual void				onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;

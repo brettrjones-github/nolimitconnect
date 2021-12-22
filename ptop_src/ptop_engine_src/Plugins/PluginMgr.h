@@ -118,8 +118,10 @@ public:
 	virtual void				fromGuiAppIdle( void );
 	virtual void				onAppStartup( void );
 	virtual void				onAppShutdown( void );
+
 	virtual void				fromGuiAppPause( void );
 	virtual void				fromGuiAppResume( void );
+	virtual void				fromGuiListAction( EListAction listAction );
 
 	virtual void				onOncePerSecond( void );
     virtual void				onThreadOncePer15Minutes( void );
