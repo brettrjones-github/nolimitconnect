@@ -14,18 +14,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <string>
-
-enum ENetActionType
-{
-	eNetActionUnknown			= 0,
-	eNetActionIdle				= 1,
-	eNetActionAnnounce			= 2,
-	eNetActionIsPortOpen		= 3,
-	eNetActionRandomConnect		= 4,
-
-	eMaxNetAction
-};
 
 class P2PEngine;
 class NetServicesMgr;

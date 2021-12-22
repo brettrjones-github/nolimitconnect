@@ -730,6 +730,25 @@ const char* DescribeListAction( EListAction listAction )
 }
 
 //============================================================================
+const char* DescribeNetAction( ENetActionType netAction )
+{
+    switch( netAction )
+    {
+    case eNetActionIdle:
+        return "eNetActionIdle";
+    case eNetActionAnnounce:
+        return "eNetActionAnnounce";
+    case eNetActionIsPortOpen:
+        return "eNetActionIsPortOpen";
+    case eNetActionRandomConnect:
+        return "eNetActionRandomConnect";
+
+    default:
+        return "UNKNOWN ENetActionType";
+    }
+}
+
+//============================================================================
 const char * DescribeModuleState( EModuleState moduleState )
 {
     switch( moduleState )

@@ -427,6 +427,17 @@ enum EModuleState
     eMaxModuleState // must be last
 };
 
+enum ENetActionType
+{
+    eNetActionUnknown = 0,
+    eNetActionIdle = 1,
+    eNetActionAnnounce = 2,
+    eNetActionIsPortOpen = 3,
+    eNetActionRandomConnect = 4,
+
+    eMaxNetAction
+};
+
 //! \public Enumeration of Network State Machine states/actions
 enum ENetworkStateType
 {
@@ -1053,6 +1064,7 @@ const char * DescribeInternetStatus( EInternetStatus internetStatus );
 const char * DescribeJoinState( EJoinState joinState );
 const char * DescribeModuleState( EModuleState moduleState );
 const char * DescribeListAction( EListAction listAction );
+const char * DescribeNetAction( ENetActionType netAction );
 //! Network State as text
 const char * DescribeNetworkState( ENetworkStateType networkStateType );
 //! Net Available Status as text

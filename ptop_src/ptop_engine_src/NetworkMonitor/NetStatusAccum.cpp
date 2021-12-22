@@ -85,7 +85,7 @@ void NetStatusAccum::onNetStatusChange( void )
             }
             else
             {
-                m_NetAvailStatus = eNetAvailFullOnlineWithRelay; // 4 bars orange
+                netAvailStatus = eNetAvailFullOnlineWithRelay; // 4 bars orange
                 if( m_GroupHostAvail )
                 {
                     netAvailStatus = eNetAvailRelayGroupHost; // 6 bars orange
@@ -310,6 +310,15 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
 {
     if( VxIsIpValid( myExternalIp ) )
     {
+        if( requiresRelay )
+        {
+            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP %s", m_Engine.getMyPktAnnounce().getMyOnlinePort(), myExternalIp.c_str() );
+        }
+        else
+        {
+            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :) IP %s", m_Engine.getMyPktAnnounce().getMyOnlinePort(), myExternalIp.c_str() );
+        }
+
         m_Engine.lockAnnouncePktAccess();
         m_Engine.getMyPktAnnounce().setOnlineIpAddress( myExternalIp.c_str() );
         std::string myNodeUrl = m_Engine.getMyPktAnnounce().getMyOnlineUrl();

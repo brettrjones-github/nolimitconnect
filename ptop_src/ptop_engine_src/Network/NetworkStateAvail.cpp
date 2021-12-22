@@ -127,7 +127,7 @@ void NetworkStateAvail::runNetworkState( void )
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
             if( IsLogEnabled( eLogNetworkState ) )
             {
-                LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Assume No Firewall User Extern IP %s\n", externIp.c_str() );
+                LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Assume No Firewall User Extern IP %s", externIp.c_str() );
             }
 
 			m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, externIp.c_str() );
@@ -177,23 +177,29 @@ void NetworkStateAvail::runNetworkState( void )
         if( m_Engine.getPeerMgr().isListening() )
         {
             // already listening
-            LogMsg( LOG_INFO, "Listening on port %d at time %3.3f\n", m_Engine.getPeerMgr().getListenPort(), availTimer.elapsedSec() );
+            LogMsg( LOG_INFO, "Listening on port %d at time %3.3f", m_Engine.getPeerMgr().getListenPort(), availTimer.elapsedSec() );
             m_Engine.getToGui().toGuiStatusMessage( "#Network Testing listen port is open" );
             break;
         }
 
-        LogMsg( LOG_INFO, "Waiting for listen port %d to open at sec %3.3f\n", m_Engine.getPeerMgr().getListenPort(), availTimer.elapsedSec() );
+        LogMsg( LOG_INFO, "Waiting for listen port %d to open at sec %3.3f", m_Engine.getPeerMgr().getListenPort(), availTimer.elapsedSec() );
         m_Engine.getToGui().toGuiStatusMessage( "#Network Testing waiting for our listen port to open" );
         VxSleep( 1000 );
         timeEnd = GetGmtTimeMs();
     }
 
-    LogModule( eLogNetworkState, LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f thread %d", availTimer.elapsedSec(), VxGetCurrentThreadId() );
-
     if( shouldAbort )
     {
         return;
     }
+
+    if( m_Engine.getNetStatusAccum().isDirectConnectTested() )
+    {
+        // all done
+        return;
+    }
+
+    LogModule( eLogNetworkState, LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f thread %d", availTimer.elapsedSec(), VxGetCurrentThreadId() );
 
     // wait for test result or timeout
 	DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();
