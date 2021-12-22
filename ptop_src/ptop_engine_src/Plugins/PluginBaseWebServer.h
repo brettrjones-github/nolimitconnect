@@ -171,7 +171,7 @@ public:
 											int				iFileOffset,
 											bool			bCloseAfterSend );
 
-	RCODE						handleHttpConnection( VxSktBase * sktBase, VxNetIdent * netIdent );
+	RCODE						handlePtopConnection( VxSktBase * sktBase, VxNetIdent * netIdent );
 	bool						searchActionProfilePic( VxNetIdent * netIdent, VxSktBase * sktBase );
 
 protected:

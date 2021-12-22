@@ -124,12 +124,18 @@ bool ConnectionMgr::getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostO
 }
 
 //============================================================================
-EHostAnnounceStatus ConnectionMgr::lookupOrQueryAnnounceId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
+EHostAnnounceStatus ConnectionMgr::lookupOrQueryAnnounceId( EHostType hostType, VxGUID& sessionId, std::string hostUrl, 
+    VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason )
 {
     EHostAnnounceStatus hostStatus = eHostAnnounceUnknown;
     if( urlCacheOnlineIdLookup( hostUrl, hostGuid ) )
     {
         hostStatus = eHostAnnounceQueryIdSuccess;
+    }
+    else if( getQueryIdFailedCount( hostType ) > 2 )
+    {
+        // dont keep hammering server if is sending an error
+        hostStatus = eHostAnnounceQueryIdFailed;
     }
     else
     {
@@ -282,7 +288,7 @@ void ConnectionMgr::resetDefaultHostUrl( EHostType hostType )
     m_DefaultHostIdList[hostType] = VxGUID::nullVxGUID();
     m_DefaultHostUrlList[hostType] = "";
     m_DefaultHostRequiresOnlineId[hostType] = "";
-    m_DefaultHostQueryIdFailed[hostType] = eRunTestStatusUnknown;
+    m_DefaultHostQueryIdFailed[hostType] = std::make_pair(eRunTestStatusUnknown, 0);
 }
 
 //============================================================================
@@ -350,8 +356,9 @@ void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestSta
 {
     if( eHostTypeUnknown != actionInfo.getHostType() )
     {
+        int failedCount = getQueryIdFailedCount( actionInfo.getHostType() );
         m_ConnectionMutex.lock();
-        m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = eStatus;
+        m_DefaultHostQueryIdFailed[actionInfo.getHostType()] = std::make_pair(eStatus, failedCount);
         m_ConnectionMutex.unlock();
     }
 
@@ -363,6 +370,34 @@ void ConnectionMgr::callbackActionFailed( UrlActionInfo& actionInfo, ERunTestSta
 
     LogMsg( LOG_ERROR, "ConnectionMgr: query host %s for id failed %s %s",  hostUrl.c_str(),
         DescribeRunTestStatus( eStatus ), DescribeNetCmdError( netCmdError ));
+}
+
+//============================================================================
+void ConnectionMgr::setQueryIdFailedCount( EHostType hostType, int failedCount )
+{
+    m_ConnectionMutex.lock();
+    auto iter = m_DefaultHostQueryIdFailed.find( hostType );
+    if( iter != m_DefaultHostQueryIdFailed.end() )
+    {
+        iter->second.second = failedCount;
+    }
+
+    m_ConnectionMutex.unlock();
+}
+
+//============================================================================
+int ConnectionMgr::getQueryIdFailedCount( EHostType hostType )
+{
+    int failedCount = 0;
+    m_ConnectionMutex.lock();
+    auto iter = m_DefaultHostQueryIdFailed.find( hostType );
+    if( iter != m_DefaultHostQueryIdFailed.end() )
+    {
+        failedCount = iter->second.second;
+    }
+
+    m_ConnectionMutex.unlock();
+    return failedCount;
 }
 
 //============================================================================
@@ -472,6 +507,7 @@ void ConnectionMgr::updateUrlCache( std::string& hostUrl, VxGUID& onlineId )
     {
         // there should be only one online id per ip and port however the ip may change
         // only keep the latest url
+        m_Engine.getUrlMgr().updateUrlCache( hostUrl, onlineId );
         m_ConnectionMutex.lock();
         for( auto iter = m_UrlCache.begin(); iter != m_UrlCache.end(); ++iter )
         {
@@ -505,6 +541,7 @@ bool ConnectionMgr::urlCacheOnlineIdLookup( std::string& hostUrl, VxGUID& online
     bool foundId = m_Engine.getUrlMgr().lookupOnlineId( hostUrl, onlineId );
     if( foundId )
     {
+        LogMsg( LOG_VERBOSE, "ConnectionMgr::urlCacheOnlineIdLookup found online Id in cache url %s", hostUrl.c_str() );
         return foundId;
     }
 

@@ -26,12 +26,12 @@ public:
     PluginNetServices() = delete; // don't allow default constructor
     PluginNetServices( const PluginNetServices& ) = delete; // don't allow copy constructor
 
-	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	virtual RCODE				handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 	void						testIsMyPortOpen( void );
 
 protected:
-	RCODE						internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						internalHandlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )	{};
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )	{};

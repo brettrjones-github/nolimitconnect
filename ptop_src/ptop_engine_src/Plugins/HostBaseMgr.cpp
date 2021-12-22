@@ -234,7 +234,7 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
                   DescribeConnectReason( connectReason ));
         if( isAnnounceConnectReason( connectReason ) )
         {
-            EHostAnnounceStatus annStatus = m_ConnectionMgr.lookupOrQueryAnnounceId( sessionId, url.c_str(), hostGuid, this, connectReason);
+            EHostAnnounceStatus annStatus = m_ConnectionMgr.lookupOrQueryAnnounceId( hostType, sessionId, url.c_str(), hostGuid, this, connectReason);
             if( eHostAnnounceQueryIdSuccess == annStatus )
             {
                 // no need for id query.. just request connection

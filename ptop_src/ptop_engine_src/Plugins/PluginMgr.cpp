@@ -388,7 +388,7 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase * sktBase )
 	if( poPlugin )
 	{
 		sktBase->sktBufAmountRead( 0 );		
-		if( 0 == poPlugin->handleHttpConnection( sktBase, netIdent ) )
+		if( 0 == poPlugin->handlePtopConnection( sktBase, netIdent ) )
 		{
 			return true;
 		}
@@ -443,6 +443,20 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
         PluginBase * poPlugin = getPlugin( pluginType );
         if( poPlugin )
         {
+			bool hasAnnonService{ false };
+			std::string onlineId;
+			if( m_Engine.getHasAnyAnnonymousHostService() )
+			{
+				// if we have any anonymous hosting we send back valid id but will still set error if plugin is disabled
+				onlineId = m_Engine.getMyOnlineId().toHexString();
+				hasAnnonService = true;
+			}
+			else
+			{
+				VxGUID nullGuid;
+				onlineId = nullGuid.toHexString();
+			}
+
             if( eAppStatePermissionErr != poPlugin->getPluginState() )
             {
                 std::string onlineId = m_Engine.getMyOnlineId().toHexString();
@@ -452,9 +466,11 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
             }
             else
             {
-                m_Engine.hackerOffense( eHackerLevelSuspicious, eHackerReasonNetSrvQueryIdPermission, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed", sktBase->getRemoteIp().c_str() );
-                VxGUID nullGuid;
-                std::string onlineId = nullGuid.toHexString();
+				if( !hasAnnonService )
+				{
+					m_Engine.hackerOffense( eHackerLevelSuspicious, eHackerReasonNetSrvQueryIdPermission, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed", sktBase->getRemoteIp().c_str() );
+				}
+   
                 m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId, ( eFriendStateIgnore == poPlugin->getPluginPermission() ) ? eNetCmdErrorServiceDisabled : eNetCmdErrorPermissionLevel );
                 sktBase->dumpSocketStats();
                 // flush then close
@@ -493,11 +509,11 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 			RCODE rc = 0;
 			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeHostConnectTest == poPlugin->getPluginType() )
 			{
-				rc = poPlugin->handleHttpConnection( sktBase, netServiceHdr );
+				rc = poPlugin->handlePtopConnection( sktBase, netServiceHdr );
 			}
 			else
 			{
-				rc = poPlugin->handleHttpConnection( sktBase, netServiceHdr.m_Ident );
+				rc = poPlugin->handlePtopConnection( sktBase, netServiceHdr.m_Ident );
 			}
 
 			if( 0 == rc )

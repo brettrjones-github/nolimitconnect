@@ -36,7 +36,7 @@ public:
 	void				httpConnectionStartup( P2PEngine * poEngine );
 	void				httpConnectionShutdown( void );
 
-	void				handleHttpConnection( RcSktBase * sktBase );
+	void				handlePtopConnection( RcSktBase * sktBase );
 
 	RCODE				sendHttpErr( VxNetIdent * netIdent, RcSktBase * sktBase, int iError ); 
 

@@ -247,6 +247,14 @@ namespace
         "Cmd Error: None ",
         "Cmd Error: Service Disabled ",
         "Cmd Error: Permission Level ",
+        "Cmd Error: Failed Resolve IP Address ",
+        "Cmd Error: Invalid Content ",
+        "Cmd Error: Port Is Closed ",
+        "Cmd Error: Connect Failed ",
+        "Cmd Error: Transmit Failed ",
+        "Cmd Error: Recieve Failed ",
+        "Cmd Error: Invalid Parameter ",
+        "Cmd Error: Response Timed Out ",
     };
 
     const char * NetworkStateEnumStrings[] = 

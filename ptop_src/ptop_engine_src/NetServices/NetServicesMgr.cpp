@@ -242,16 +242,16 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServi
 
 	if( strRmtAddr.empty() )
 	{
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not determine remote address\n");
-		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrFailedToResolveAddr );
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not determine remote address");
+		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, eNetCmdErrorFailedResolveIpAddr );
 	}
 
 	char * pSktBuf = (char *)sktBase->getSktReadBuf();
 	if( false == ( '/' == pSktBuf[ netServiceHdr.m_TotalDataLen - 1 ] ) )
 	{
 		sktBase->sktBufAmountRead( 0 );
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: invalid content\n");
-		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrFailedToResolveAddr );
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: invalid content");
+		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, eNetCmdErrorInvalidContent );
 	}
 
 	sktBase->sktBufAmountRead( 0 );
@@ -262,30 +262,30 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServi
 	
 	if( fromClientContent.empty() )
 	{
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not parse from client content\n");
-		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrParseError );
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not parse from client content");
+		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, eNetCmdErrorInvalidContent );
 	}
 
 	uint16_t u16Port = (uint16_t)atoi( fromClientContent.c_str() );
 	if( 0 == u16Port )
 	{
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not parse client port\n" );
-		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrParseError );
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not parse client port" );
+		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, eNetCmdErrorInvalidContent );
 	}
 
-    LogModule( eLogIsPortOpenTest, LOG_ERROR, "handleNetCmdIsMyPortOpenReq: Attempting ping ip %s port %d\n", strRmtAddr.c_str(), u16Port );
+    LogModule( eLogIsPortOpenTest, LOG_ERROR, "handleNetCmdIsMyPortOpenReq: Attempting ping ip %s port %d", strRmtAddr.c_str(), u16Port );
 	std::string retPong;
 	bool pingSuccess = doNetCmdPing( strRmtAddr.c_str(), u16Port, retPong );
 	if( false == pingSuccess )
 	{
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "handleNetCmdIsMyPortOpenReq: FAILED PING ip %s port %d\n", strRmtAddr.c_str(), u16Port );
-		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrPortIsClosed );
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "handleNetCmdIsMyPortOpenReq: FAILED PING ip %s port %d", strRmtAddr.c_str(), u16Port );
+		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, eNetCmdErrorPortIsClosed );
 	}
 
-    LogModule( eLogIsPortOpenTest, LOG_ERROR, "handleNetCmdIsMyPortOpenReq: SUCCESS PING ip %s port %d\n", strRmtAddr.c_str(), u16Port );
+    LogModule( eLogIsPortOpenTest, LOG_ERROR, "handleNetCmdIsMyPortOpenReq: SUCCESS PING ip %s port %d", strRmtAddr.c_str(), u16Port );
 	toClientContent = "1-";
 	toClientContent += strRmtAddr;
-	return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrNone );
+	return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, eNetCmdErrorNone );
 }
 
 //============================================================================
@@ -421,12 +421,12 @@ void NetServicesMgr::performRandomConnect( void )
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "Net Action Random Connect already qued\n" );
+		LogMsg( LOG_INFO, "Net Action Random Connect already qued" );
 	}
 }
 
 //============================================================================
-void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * anchorList )
+void NetServicesMgr::netActionResultRandomConnect( ENetCmdError eAppErr, HostList * anchorList )
 {
 	if( eAppErrNone == eAppErr )
 	{
@@ -439,15 +439,15 @@ void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * a
 }
 
 //============================================================================
-void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp )
+void NetServicesMgr::netActionResultIsMyPortOpen( ENetCmdError eAppErr, std::string& myExternalIp )
 {
-    if( eAppErr == eAppErrNone )
+    if( eAppErr == eNetCmdErrorNone )
     {
         LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen CAN DIRECT CONNECT extern ip %s", myExternalIp.c_str() );
         // tested and can direct connect
         m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, myExternalIp );
     }
-    else if( eAppErr == eAppErrPortIsClosed )
+    else if( eAppErr == eNetCmdErrorPortIsClosed )
     {
         // tested but cannot direct connect
         LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen REQUIRES RELAY extern ip %s", myExternalIp.c_str() );
@@ -456,7 +456,7 @@ void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& 
     else
     {
         // port open test failed with other error
-        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s\n", eAppErr, myExternalIp.c_str() );
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s", eAppErr, myExternalIp.c_str() );
         m_Engine.getNetStatusAccum().setDirectConnectTested( false, false, myExternalIp );
     }
 
@@ -467,7 +467,7 @@ void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& 
 }
 
 //============================================================================
-void NetServicesMgr::netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction )
+void NetServicesMgr::netActionResultAnnounce( ENetCmdError eAppErr, HostList * anchorList, EHostAction eHostAction )
 {
 	if( eAppErrNone == eAppErr )
 	{
@@ -568,7 +568,7 @@ bool NetServicesMgr::actionReqConnectToHost( VxSktConnectSimple& sktSimple )
 }
 
 //============================================================================
-EAppErr NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool testLoopbackFirst )
+ENetCmdError NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool testLoopbackFirst )
 {
     retMyExternalIp = "";
 	std::string lclIP = m_NetworkMgr.getLocalIpAddress();
@@ -576,10 +576,10 @@ EAppErr NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool testL
     {
         if( IsLogEnabled( eLogNetworkState ) )
         {
-            LogMsg( LOG_ERROR, "NetServicesMgr::doIsMyPortOpen no local ip\n" );
+            LogMsg( LOG_ERROR, "NetServicesMgr::doIsMyPortOpen no local ip" );
         }
 
-        return eAppErrBadParameter;
+        return eNetCmdErrorBadParameter;
     }
 
 	uint16_t tcpListenPort = m_Engine.getMyPktAnnounce().getOnlinePort();
@@ -670,13 +670,13 @@ static int uint16_t = 0;
         {
             LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS ASSUMED OPEN :) IP is %s->%s in %3.3f sec thread 0x%x", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
             m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS ASSUMED OPEN ON IP %s)", tcpListenPort, retMyExternalIp.c_str() );
-            return eAppErrNone;
+            return eNetCmdErrorNone;
         }
         else
         {
             LogMsg( LOG_ERROR, "NetActionIsMyPortOpen::doAction: Test Port %d Is Open ERROR no external IP specified for Assume No Firewall thread 0x%x", tcpListenPort, VxGetCurrentThreadId() );
             m_Engine.sendToGuiStatusMessage( "Test Port %d Is Open ERROR no external IP specified for Assume No Firewall thread 0x%x", tcpListenPort, VxGetCurrentThreadId() );
-            return eAppErrBadParameter;
+            return eNetCmdErrorBadParameter;
         }
     }
 
@@ -701,7 +701,7 @@ static int uint16_t = 0;
     std::string strHost;
     std::string strFile;
     uint16_t u16Port = 0;
-    EAppErr	portOpenTestError = eAppErrNone;
+	ENetCmdError portOpenTestError = eNetCmdErrorNone;
     if( VxSplitHostAndFile( netSrvUrl.c_str(), strHost, strFile, u16Port ) )
     {
         portOpenConn1.connectTo( lclIP.c_str(), strHost.c_str(), u16Port, NETSERVICE_CONNECT_TIMEOUT );
@@ -709,7 +709,7 @@ static int uint16_t = 0;
         {
             LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::actionReqConnectToNetService: FAILED to Connect lcl ip %s to connect service %s thread 0x%x", lclIP.c_str(), netSrvUrl.c_str(), VxGetCurrentThreadId() );
             m_Engine.sendToGuiStatusMessage( "FAILED Connect lcl ip %s to connect service %s\n", lclIP.c_str(), netSrvUrl.c_str() );
-            return eAppErrFailedConnectNetServices;
+            return eNetCmdErrorConnectFailed;
         }
         else
         {
@@ -724,7 +724,7 @@ static int uint16_t = 0;
     else
     {
         LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: FAILED to Split Service URL %s thread 0x%x", netSrvUrl.c_str(), VxGetCurrentThreadId() );
-        portOpenTestError = eAppErrParseError;
+        portOpenTestError = eNetCmdErrorBadParameter;
     }
 
     if( isCellDataNetwork 
@@ -741,12 +741,12 @@ static int uint16_t = 0;
 		}
 		else
 		{
-            LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s->%s sec %3.3f thread 0x%x", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
-            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
-            m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
-            portOpenTestError = eAppErrPortIsClosed;
+			LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s->%s sec %3.3f thread 0x%x", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
+			m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
+			m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
+			portOpenTestError = eNetCmdErrorPortIsClosed;
 		}
-;
+
 		return portOpenTestError; // messages sent and result set and no sense in retying because all ports blocked on cell network
 	}
 
@@ -775,11 +775,11 @@ bool NetServicesMgr::testLoobackPing( std::string localIP, uint16_t tcpListenPor
 }
 
 //============================================================================
-EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer, 
-													VxSktConnectSimple *	netServConn, 
-													int						tcpListenPort,
-													std::string&			retMyExternalIp,
-													bool					sendMsgToUser )
+ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
+														VxSktConnectSimple *	netServConn, 
+														int						tcpListenPort,
+														std::string&			retMyExternalIp,
+														bool					sendMsgToUser )
 {
     if( nullptr == netServConn || !netServConn->isConnected() )
     {
@@ -789,7 +789,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Connect FAILED (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
-		return eAppErrFailedToConnect;
+		return eNetCmdErrorConnectFailed;
 	}
 
 	std::string strNetActionUrl;
@@ -806,7 +806,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Send Command Error (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
-		return eAppErrTxError;
+		return eNetCmdErrorTxFailed;
 	}
 
 	VxSleep( 1000 );
@@ -825,8 +825,8 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 			LogMsg( LOG_ERROR,  "Is TCP Port %d Open Connect Test Server Response Time Out (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		}
 
-		m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Connect Test Server Response Time Out (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
-		return eAppErrNetServicesFailedToRespond;
+		m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Connect Test Server Response Time Out (%3.3f sec)", tcpListenPort, portTestTimer.elapsedSec()  );
+		return eNetCmdErrorResponseTimedOut;
 	}
 
     rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
@@ -836,10 +836,10 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 		LogMsg( LOG_ERROR, "Is TCP Port %d Open No Server Response Content (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		if( sendMsgToUser )
 		{
-			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open No Server Response Content (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
+			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open No Server Response Content (%3.3f sec)", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
-		return eAppErrRxError;
+		return eNetCmdErrorNone;
 	}
 
 	const char * contentBuf = content.c_str();
@@ -848,10 +848,10 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 		LogMsg( LOG_ERROR, "Is TCP Port %d Open Test Invalid Response Content (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		if( sendMsgToUser )
 		{
-			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Invalid Response Content (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
+			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Invalid Response Content (%3.3f sec)", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
-		return eAppErrRxError;
+		return eNetCmdErrorInvalidContent;
 	}
 
 	((char *)contentBuf)[content.length() -1] = 0;
@@ -863,10 +863,10 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 		LogMsg( LOG_ERROR, "Is TCP Port %d Open Test Invalid Content Parts (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		if( sendMsgToUser )
 		{
-			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Invalid Content Parts (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
+			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Invalid Content Parts (%3.3f sec)", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
-		return eAppErrParseError;
+		return eNetCmdErrorInvalidContent;
 	}
 
 	retMyExternalIp = contentParts[1];
@@ -876,7 +876,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 
     LogModule( eLogConnect, LOG_INFO, "NetActionIsMyPortOpen::doAction: test can direct connect %s my ip %s:%d thread 0x%x", strPayload.c_str(), retMyExternalIp.c_str(), tcpListenPort, VxGetCurrentThreadId() );
 
-	return iIsOpen ? eAppErrNone : eAppErrPortIsClosed;
+	return iIsOpen ? eNetCmdErrorNone : eNetCmdErrorPortIsClosed;
 }
 
 //============================================================================
@@ -896,15 +896,15 @@ RCODE NetServicesMgr::handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServic
     if( false == ( '/' == pSktBuf[ netServiceHdr.m_TotalDataLen - 1 ] ) )
     {
         sktBase->sktBufAmountRead( 0 );
-        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: invalid content\n" );
-        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, ( int )eAppErrBadParameter );
+        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: invalid content" );
+        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, eNetCmdErrorInvalidContent );
     }
 
-    if( !m_Engine.getHasHostService( eHostServiceNetworkHost ) )
+    if( !m_Engine.getHasAnyAnnonymousHostService() )
     {
-        // only allowed to query host Id if we have Network Host Service
-        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: Access Denied.. Not a Network Host" );
-        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, ( int )eAppErrAccessDenied );
+        // only allowed to query host Id if we have an annonymous Host Service
+        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: Access Denied.. No Annonymous host service" );
+        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, eNetCmdErrorPermissionLevel );
     }
 
     VxGUID myId = m_Engine.getMyOnlineId();
@@ -912,15 +912,15 @@ RCODE NetServicesMgr::handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServic
     if( !myId.toHexString( hexMyId ) )
     {
         LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: Access Denied.. Invalid My Online Id" );
-        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, ( int )eAppErrAccessDenied );
+        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, eNetCmdErrorInvalidContent );
     }
 
     LogModule( eLogNetService, LOG_INFO, "handleNetCmdQueryHostIdReq: SUCCESS %s", hexMyId.c_str() );
-    return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, hexMyId, ( int )eAppErrNone );
+    return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, hexMyId, eNetCmdErrorNone );
 }
 
 //============================================================================
-EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
+ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
                                                    VxSktConnectSimple *	netServConn,
                                                    VxGUID&			    retHostId,
                                                    bool					sendMsgToUser )
@@ -931,26 +931,26 @@ EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         LogModule( eLogNetService, LOG_INFO, "Query Host Online Id Connect FAILED (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
         if( sendMsgToUser )
         {
-            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Connect FAILED (%3.3f sec)\n", testTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Connect FAILED (%3.3f sec)", testTimer.elapsedSec() );
         }
 
-        return eAppErrFailedToConnect;
+        return eNetCmdErrorConnectFailed;
     }
 
     std::string strContent("0");
 
     LogMsg( LOG_INFO, "Query Host Online Id Connected in  %3.3f sec now Sending data thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
     testTimer.startTimer();
-    RCODE rc = m_NetServiceUtils.buildAndSendCmd( netServConn, eNetCmdQueryHostOnlineIdReq, strContent, ( int )eAppErrNone );
+    RCODE rc = m_NetServiceUtils.buildAndSendCmd( netServConn, eNetCmdQueryHostOnlineIdReq, strContent, eNetCmdErrorNone );
     if( rc )
     {
         LogMsg( LOG_ERROR, "Query Host Online Id Send Command Error (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
         if( sendMsgToUser )
         {
-            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Send Command Error (%3.3f sec)\n", testTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Send Command Error (%3.3f sec)", testTimer.elapsedSec() );
         }
 
-        return eAppErrTxError;
+        return eNetCmdErrorTxFailed;
     }
 
     VxSleep( 100 );
@@ -970,7 +970,7 @@ EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         }
 
         m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Time Out (%3.3f sec)\n", testTimer.elapsedSec() );
-        return eAppErrNetServicesFailedToRespond;
+        return eNetCmdErrorResponseTimedOut;
     }
 
     if( netServiceHdr.getError() )
@@ -981,7 +981,7 @@ EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
             m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server ResponseHas Error Code %d (%3.3f sec)\n", netServiceHdr.getError(), testTimer.elapsedSec() );
         }
 
-        return eAppErrRxError;
+        return eNetCmdErrorNone;
     }
 
     rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
@@ -994,7 +994,7 @@ EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
             m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Content (%3.3f sec)\n", testTimer.elapsedSec() );
         }
 
-        return eAppErrRxError;
+        return eNetCmdErrorRxFailed;
     }
 
     const char * contentBuf = content.c_str();
@@ -1003,10 +1003,10 @@ EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         LogMsg( LOG_ERROR, "Query Host Online Id Invalid Response Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
         if( sendMsgToUser )
         {
-            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Response Content (%3.3f sec)\n", testTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Response Content (%3.3f sec)", testTimer.elapsedSec() );
         }
 
-        return eAppErrSeviceError;
+        return eNetCmdErrorInvalidContent;
     }
 
     ( ( char * )contentBuf )[ content.length() - 1 ] = 0;
@@ -1021,11 +1021,11 @@ EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
             m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Content (%3.3f sec)\n", testTimer.elapsedSec() );
         }
 
-        return eAppErrParseError;
+        return eNetCmdErrorInvalidContent;
     }
 
     retHostId = hostId;
-    return eAppErrNone;
+    return eNetCmdErrorNone;
 }
 
 //============================================================================
@@ -1037,7 +1037,7 @@ RCODE NetServicesMgr::handleNetCmdQueryHostIdReply( VxSktBase * sktBase, NetServ
 }
 
 //============================================================================
-void NetServicesMgr::netActionResultQueryHostId( EAppErr eAppErr, VxGUID& hostId )
+void NetServicesMgr::netActionResultQueryHostId( ENetCmdError eAppErr, VxGUID& hostId )
 {
     if( eAppErr == eAppErrNone )
     {

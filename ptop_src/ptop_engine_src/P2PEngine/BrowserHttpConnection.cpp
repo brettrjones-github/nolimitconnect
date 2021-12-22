@@ -50,7 +50,7 @@ void RcHttpConnection::httpConnectionShutdown( void )
 }
 
 //============================================================================
-void RcHttpConnection::handleHttpConnection( RcSktBase * sktBase )
+void RcHttpConnection::handlePtopConnection( RcSktBase * sktBase )
 {
 	LogMsg( LOG_INFO, "RcPluginMgr::HandleHttpConnection\n" );
 	bool bSktAccepted = false;
@@ -75,7 +75,7 @@ void RcHttpConnection::handleHttpConnection( RcSktBase * sktBase )
 			RcPluginBase * poPlugin = m_Engine->getPlugin(ePluginTypeWebServer);
 			if( poPlugin )
 			{
-				poPlugin->handleHttpConnection( sktBase, netIdent );
+				poPlugin->handlePtopConnection( sktBase, netIdent );
 			}
 		}
 		else
@@ -90,7 +90,7 @@ void RcHttpConnection::handleHttpConnection( RcSktBase * sktBase )
 	}
 	if( bSktAccepted )
 	{
-		// this socket is no longer needed .. in handleHttpConnection it was moved to new RcWebSkt
+		// this socket is no longer needed .. in handlePtopConnection it was moved to new RcWebSkt
 		sktBase->CloseSkt( 642 );
 	}
 }

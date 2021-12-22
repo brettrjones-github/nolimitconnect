@@ -1,5 +1,4 @@
-#ifndef NET_SERVICE_HDR_H
-#define NET_SERVICE_HDR_H
+#pragma once
 //============================================================================
 // Copyright (C) 2014 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
@@ -24,12 +23,12 @@ class NetServiceHdr
 public:
     NetServiceHdr() = default;
 
-    int                         getError() { return m_CmdError; }
+	ENetCmdError                getError() { return m_CmdError; }
 
 	std::string					m_ChallengeHash;
     ENetCmdType					m_NetCmdType{ eNetCmdUnknown };
     int							m_CmdVersion{ 0 };
-	int							m_CmdError{ 0 };
+	ENetCmdError				m_CmdError{ eNetCmdErrorUnknown };
 	int							m_TotalDataLen{ 0 };
 	int							m_ContentDataLen{ 0 };
 	VxGUID					    m_OnlineId;
@@ -37,4 +36,3 @@ public:
 	int							m_SktDataUsed{ 0 };
 };
 
-#endif // NET_SERVICE_HDR_H

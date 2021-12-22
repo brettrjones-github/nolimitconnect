@@ -230,8 +230,8 @@ public:
 
     //=== http ===//
 	virtual void				handlePluginSpecificSkt( VxSktBase * sktBase ) {};
-	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
-	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, VxNetIdent * netIdent )				{ return -1; }
+	virtual RCODE				handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )		{ return -1; }
+	virtual RCODE				handlePtopConnection( VxSktBase * sktBase, VxNetIdent * netIdent )				{ return -1; }
 
     virtual EPluginType         getDestinationPluginOverride( EHostType hostType );
 

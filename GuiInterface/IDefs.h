@@ -331,6 +331,7 @@ enum EHostServiceType
     eHostServiceNetworkHost,        // Tier 1 network host service
     eHostServiceGroupListing,       // Tier 2 group listing service
     eHostServiceGroup,              // Tier 3 host a group service ( group users are considered Tier 4 )
+    eHostServiceChatRoom,           // Tier 3 host a chat room service ( chat room users are considered Tier 4 )
     eHostServiceRelay,              // relay service normally provided by group host ( Tier 3 )
     eHostServiceRandomConnect,      // random connect service normally provided by network host ( Tier 1 )
     eHostServiceRandomConnectRelay, // random connection relay service normally provided by network host ( Tier 1 )
@@ -812,6 +813,14 @@ enum ENetCmdError
     eNetCmdErrorNone                    = 1,
     eNetCmdErrorServiceDisabled         = 2,
     eNetCmdErrorPermissionLevel         = 3,  
+    eNetCmdErrorFailedResolveIpAddr     = 4,
+    eNetCmdErrorInvalidContent          = 5,
+    eNetCmdErrorPortIsClosed            = 6,
+    eNetCmdErrorConnectFailed           = 7,
+    eNetCmdErrorTxFailed                = 8,
+    eNetCmdErrorRxFailed                = 9,
+    eNetCmdErrorBadParameter            = 10,
+    eNetCmdErrorResponseTimedOut        = 11,
 
     eMaxNetCmdError
 };

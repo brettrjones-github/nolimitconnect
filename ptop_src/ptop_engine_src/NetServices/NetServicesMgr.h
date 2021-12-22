@@ -39,14 +39,16 @@ class PktAnnounce;
 class NetworkMgr;
 class HostList;
 
-typedef void (*MY_PORT_OPEN_CALLBACK_FUNCTION )( void *, EAppErr, std::string& );
-typedef void( *QUERY_HOST_ID_CALLBACK_FUNCTION )( void *, EAppErr, VxGUID& );
+typedef void (*MY_PORT_OPEN_CALLBACK_FUNCTION )( void *, ENetCmdError, std::string& );
+typedef void( *QUERY_HOST_ID_CALLBACK_FUNCTION )( void *, ENetCmdError, VxGUID& );
 
 class NetServicesMgr
 {
 public:
 	NetServicesMgr( P2PEngine& engine );
 	virtual ~NetServicesMgr();
+	NetServicesMgr() = delete; // don't allow default constructor
+	NetServicesMgr( const NetServicesMgr& ) = delete; // don't allow copy constructor
 
 	static const int			MINIMUM_CONTENT_PARTS		= 9;
 	static const int			CONTENT_PART_IDX_VERSION	= 5;
@@ -68,10 +70,10 @@ public:
 	void						announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction = eHostActionAnnounce );
 	void						performRandomConnect( void );
 
-	void						netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp );
-    void                        netActionResultQueryHostId( EAppErr eAppErr, VxGUID& hostId );
-	void						netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );
-	void						netActionResultRandomConnect( EAppErr eAppErr, HostList * anchorList );
+	void						netActionResultIsMyPortOpen( ENetCmdError eCmdErr, std::string& myExternalIp );
+    void                        netActionResultQueryHostId( ENetCmdError eCmdErr, VxGUID& hostId );
+	void						netActionResultAnnounce( ENetCmdError eCmdErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );
+	void						netActionResultRandomConnect( ENetCmdError eCmdErr, HostList * anchorList );
 
 	void						setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION pfuncPortOpenCallbackHandler, void * userData );
     void						setQueryHostOnlineIdResultCallback( QUERY_HOST_ID_CALLBACK_FUNCTION pfuncQueryHostIdCallbackHandler, void * userData );
@@ -94,14 +96,14 @@ public:
 
 	bool						doNetCmdPing( const char * ipAddress, uint16_t u16Port, std::string& retPong );
 
-	EAppErr						doIsMyPortOpen( std::string& retMyExternalIp, bool testLoopbackFirst = false );
+	ENetCmdError				doIsMyPortOpen( std::string& retMyExternalIp, bool testLoopbackFirst = false );
 	bool						testLoobackPing( std::string localIP, uint16_t tcpListenPort );
-	EAppErr						sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer, 
+	ENetCmdError				sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 															VxSktConnectSimple *	sktSimple, 
 															int						tcpListenPort,
 															std::string&			retMyExternalIp,
 															bool					sendMsgToUser );
-    EAppErr                     sendAndRecieveQueryHostId( VxTimer&				portTestTimer,
+	ENetCmdError                sendAndRecieveQueryHostId( VxTimer&				portTestTimer,
                                                            VxSktConnectSimple *	netServConn,
                                                            VxGUID&			    retHostId,
                                                            bool					sendMsgToUser );
@@ -140,10 +142,6 @@ protected:
     void *						m_QueryHostIdCallbackUserData{ nullptr };
 
 	VxSktConnectSimple			m_SktToHost;
-
-private:
-	NetServicesMgr(); // don't allow default constructor
-	NetServicesMgr(const NetServicesMgr&); // don't allow copy constructor
 };
 
 

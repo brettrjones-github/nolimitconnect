@@ -69,7 +69,7 @@ void PluginBaseWebServer::pluginShutdown( void )
 
 //============================================================================
 //! this is called if incoming http connection (NOTE: only used by WebServer)
-RCODE PluginBaseWebServer::handleHttpConnection( VxSktBase * sktBase, VxNetIdent * netIdent )
+RCODE PluginBaseWebServer::handlePtopConnection( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
 	RCODE rc = 0;
 	RcWebSkt * poWebSkt = NULL;

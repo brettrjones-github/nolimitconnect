@@ -24,8 +24,8 @@ class IConnectRequestCallback;
 class UrlActionResultInterface
 {
 public:
-    virtual void                callbackActionStatus( UrlActionInfo& actionInfo, ERunTestStatus eStatus, std::string statusMsg ) = 0;
-    virtual void                callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError = eNetCmdErrorUnknown ) = 0;
+    virtual void                callbackActionStatus( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError, std::string statusMsg ) = 0;
+    virtual void                callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError ) = 0;
 
     virtual void                callbackPingSuccess( UrlActionInfo& actionInfo, std::string myIp ) = 0;
     virtual void                callbackConnectionTestSuccess( UrlActionInfo& actionInfo, bool canDirectConnect, std::string myIp ) = 0;
@@ -98,10 +98,10 @@ private:
     void                        startUrlActionThread( void );
     bool                        isThreadRunningActions( void );
     ERunTestStatus			    doUrlAction( UrlActionInfo& urlInfo );
-    ERunTestStatus			    doRunTestFailed( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus );
+    ERunTestStatus			    doRunTestFailed( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, ENetCmdError cmdErr );
     ERunTestStatus			    doRunTestSuccess( UrlActionInfo& urlAction, std::string& urlActionName );
 
-    void						sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, const char * msg, ... );
+    void						sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, ENetCmdError cmdErr, const char * msg, ... );
     void						sendTestLog( UrlActionInfo& urlAction, std::string& urlActionName, const char * msg, ... );
 
     //=== vars ===//

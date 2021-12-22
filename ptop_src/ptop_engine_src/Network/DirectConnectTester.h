@@ -14,6 +14,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
+
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/AppErr.h>
@@ -26,10 +28,7 @@ class P2PEngine;
 class DirectConnectTestResults
 {
 public:
-	DirectConnectTestResults()
-		: m_eAppErr( eAppErrUnknown )
-	{
-	}
+	DirectConnectTestResults() = default;
 
 	DirectConnectTestResults( const DirectConnectTestResults& rhs )
 	{
@@ -48,15 +47,17 @@ public:
 
 	bool						getCanDirectConnect( void )							{ return ( eAppErrNone == m_eAppErr) ? true : false ; }
 
-	EAppErr						m_eAppErr;
-	std::string					m_MyIpAddr;
+	ENetCmdError				m_eAppErr{ eNetCmdErrorUnknown };
+	std::string					m_MyIpAddr{ "" };
 };
 
 class DirectConnectTester
 {
 public:
 	DirectConnectTester( NetworkStateMachine& stateMachine );
-	virtual ~DirectConnectTester();
+	virtual ~DirectConnectTester() = default;
+	DirectConnectTester() = delete; // don't allow default constructor
+	DirectConnectTester( const DirectConnectTester& ) = delete; // don't allow copy constructor
 
 	DirectConnectTestResults&	getDirectConnectTestResults( void )		{ return m_TestResults; }
 
@@ -65,7 +66,7 @@ public:
 	bool						isDirectConnectTestComplete( void );
 	bool						isTestResultCanDirectConnect( void );
 
-	void						myPortOpenCallback( EAppErr eAppErr, std::string& myExternalIp );
+	void						myPortOpenCallback( ENetCmdError eAppErr, std::string& myExternalIp );
 protected:
 
 	//=== vars ===//
@@ -74,12 +75,8 @@ protected:
 	NetworkMgr&					m_NetworkMgr;
 	NetServicesMgr&				m_NetServicesMgr;
 
-	bool						m_bTestIsRunning;
+	bool						m_bTestIsRunning{ false };
 	DirectConnectTestResults	m_TestResults;
-
-private:
-	DirectConnectTester(); // don't allow default constructor
-	DirectConnectTester(const DirectConnectTester&); // don't allow copy constructor
 };
 
 

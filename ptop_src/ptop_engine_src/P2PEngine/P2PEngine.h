@@ -154,6 +154,7 @@ public:
     bool                        isNetworkHostEnabled( void );    // true if netowrk host plugin is enabled
 
     bool                        getHasHostService( EHostServiceType hostService );
+    bool                        getHasAnyAnnonymousHostService( void );
     bool                        getHasFixedIpAddress( void );
 
     /// if skt exists in connection list then lock access to connection list

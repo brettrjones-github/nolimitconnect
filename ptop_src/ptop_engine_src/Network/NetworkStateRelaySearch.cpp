@@ -579,7 +579,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 		HostList			anchorListOut;
 
 		m_NetServicesMgr.getNetServiceHost().getHostDb().handleAnnounce( anchorListIn, anchorListOut );
-		m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, &anchorListOut );
+		m_NetServicesMgr.netActionResultAnnounce( eNetCmdErrorNone, &anchorListOut );
 		return;
 	}
 
@@ -639,7 +639,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	}
 
 	netServConn.closeSkt();
-	m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, (HostList *)rxBuf, eHostActionRelaysOnly );
+	m_NetServicesMgr.netActionResultAnnounce( eNetCmdErrorNone, (HostList *)rxBuf, eHostActionRelaysOnly );
 }
 
 //============================================================================

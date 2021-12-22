@@ -55,7 +55,7 @@ std::string NetServiceUtils::getNetworkKey( void )
 //============================================================================
 bool NetServiceUtils::verifyAllDataArrivedOfNetServiceUrl( VxSktBase * sktBase )
 {
-	//http://GET /Crypto Key/total length of data/ 
+	//ptop://GET /Crypto Key/total length of data/ 
 	// 12 + 32 + 1 + MAX_CONTENT_LEN_DIGITS + 1
 
 	int iSktDataLen = sktBase->getSktBufDataLen();
@@ -71,8 +71,8 @@ bool NetServiceUtils::verifyAllDataArrivedOfNetServiceUrl( VxSktBase * sktBase )
 	if( 0 >= contentLen )
 	{
 		sktBase->sktBufAmountRead( 0 );
-		LogMsg( LOG_ERROR, "verifyAllDataArrivedOfNetServiceUrl: not valid\n" );
-		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetSrvUrlInvalid, sktBase, "parseHttpNetServiceUrl: not http prefix\n" );
+		LogMsg( LOG_ERROR, "verifyAllDataArrivedOfNetServiceUrl: not valid" );
+		VxReportHack( eHackerLevelSuspicious, eHackerReasonNetSrvUrlInvalid, sktBase, "parseHttpNetServiceUrl: not http prefix" );
 		sktBase->closeSkt( eSktCloseNetSrvUrlInvalid );
 		return false;
 	}
@@ -86,35 +86,35 @@ bool NetServiceUtils::verifyAllDataArrivedOfNetServiceUrl( VxSktBase * sktBase )
 int  NetServiceUtils::getTotalLengthFromNetServiceUrl(  char * dataBuf, int dataLen )
 {
 	//                     			32
-	//http://GET /url version/Crypto Key/total length of data/Net service command/VxGUID/cmd version/error code/content"
+	//ptop://GET /url version/Crypto Key/total length of data/Net service command/VxGUID/cmd version/error code/content"
 	//               15                46 
-	//http://GET /001/                 /
+	//ptop://GET /001/                 /
 	if( dataLen < NET_SERVICE_HDR_LEN )
 	{
 		return -1;
 	}
 
-	if( 0 != strncmp( dataBuf, "http://GET /", 12 ) )
+	if( 0 != strncmp( dataBuf, "ptop://GET /", 12 ) )
 	{
-		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid prefix\n");
+		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid prefix");
 		return -1;
 	}
 
 	if( '/' != dataBuf[15] )
 	{
-		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid / location1\n");
+		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid / location1");
 		return -1;
 	}
 
 	if( '/' != dataBuf[48] )
 	{
-		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid / location2\n");
+		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid / location2");
 		return -1;
 	}
 
 	if( '/' != dataBuf[ 48 + MAX_CONTENT_LEN_DIGITS + 1 ] )
 	{
-		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid / location3\n");
+		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid / location3");
 		return -1;
 	}
 
@@ -122,7 +122,7 @@ int  NetServiceUtils::getTotalLengthFromNetServiceUrl(  char * dataBuf, int data
 	if( ( NET_SERVICE_HDR_LEN > contentLen   )
 		|| ( MAX_NET_SERVICE_URL_LEN < contentLen ) )
 	{
-		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid content length %d\n", contentLen );
+		LogMsg( LOG_ERROR, "getTotalLengthFromNetServiceUrl: invalid content length %d", contentLen );
 		return -1;
 	}
 
@@ -131,11 +131,11 @@ int  NetServiceUtils::getTotalLengthFromNetServiceUrl(  char * dataBuf, int data
 
 
 //============================================================================
-void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, std::string& strContent, int errCode, int version )
+void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, std::string& strContent, ENetCmdError errCode, int version )
 {
 	std::string strNetCmd = netCmdEnumToString( netCmd );
-	//http://GET /  1/ = len 16 + 6 /'s
-	//http://GET /url version/Crypto Key/total length of data/Net service command/cmd version/error code/content/"
+	//ptop://GET /  1/ = len 16 + 6 /'s
+	//ptop://GET /url version/Crypto Key/total length of data/Net service command/cmd version/error code/content/"
 	// total header = 16 + 6 + 32 + 13 + 19 + 3 + 8   = 96
 
 	int totalLen = (int)(16 + 6
@@ -148,7 +148,7 @@ void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, 
 
 	if( strContent.length() )
 	{
-		StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d/%s/", 
+		StdStringFormat( retResult, "ptop://GET /  1/%s/%13d/%s/%3d/%8d/%s/", 
 			netServChallengeHash.c_str(), 
 			totalLen, 
 			strNetCmd.c_str(), 
@@ -158,7 +158,7 @@ void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, 
 	}
 	else
 	{
-		StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d//", 
+		StdStringFormat( retResult, "ptop://GET /  1/%s/%13d/%s/%3d/%8d//", 
 			netServChallengeHash.c_str(), 
 			totalLen, 
 			strNetCmd.c_str(), 
@@ -170,10 +170,10 @@ void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, 
 }
 
 //============================================================================
-int  NetServiceUtils::buildNetCmdHeader( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, int contentLength, int errCode, int version )
+int  NetServiceUtils::buildNetCmdHeader( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, int contentLength, ENetCmdError errCode, int version )
 {
 	std::string strNetCmd = netCmdEnumToString( netCmd );
-	//http://GET /  1/ = len 16
+	//ptop://GET /  1/ = len 16
 	// + 5 /s  = 22 for header and /'s
 
 	int totalLen = (int)(16 + 5
@@ -184,7 +184,7 @@ int  NetServiceUtils::buildNetCmdHeader( std::string& retResult, ENetCmdType net
 		+ MAX_ERROR_LEN_DIGITS
 		+ contentLength);
 
-	StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d/", 
+	StdStringFormat( retResult, "ptop://GET /  1/%s/%13d/%s/%3d/%8d/", 
 		netServChallengeHash.c_str(), 
 		totalLen, 
 		strNetCmd.c_str(), 
@@ -219,7 +219,7 @@ bool NetServiceUtils::buildPingTestUrl( VxSktConnectSimple * netServConn, std::s
 }
 
 //============================================================================
-bool NetServiceUtils::buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode, int version )
+bool NetServiceUtils::buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, ENetCmdError errCode, int version )
 {
     if( netServConn && netServConn->isConnected() )
     {
@@ -231,7 +231,7 @@ bool NetServiceUtils::buildNetCmd( VxSktConnectSimple * netServConn, std::string
 }
 
 //============================================================================
-bool NetServiceUtils::buildNetCmd( uint16_t cryptoKeyPort, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode, int version )
+bool NetServiceUtils::buildNetCmd( uint16_t cryptoKeyPort, std::string& retResult, ENetCmdType netCmd, std::string& strContent, ENetCmdError errCode, int version )
 {
     if( cryptoKeyPort )
     {
@@ -288,13 +288,13 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 {
 	if( dataLen < NET_SERVICE_HDR_LEN )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceHdr: data len < NET_SERVICE_HDR_LEN\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceHdr: data len < NET_SERVICE_HDR_LEN" );
 		return ePluginTypeInvalid;
 	}
 
-	if( 0 != strncmp( dataBuf, "http://GET /", 12 ) )
+	if( 0 != strncmp( dataBuf, "ptop://GET /", 12 ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceHdr: not http prefix\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceHdr: not http prefix" );
 		return ePluginTypeInvalid;
 	}
 
@@ -308,7 +308,7 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	if( ( MAX_URL_VERSION_LEN_DIGITS != partLen )
 		|| ( dataUsed >= dataLen ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: Invalid URL Version\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: Invalid URL Version" );
 		return ePluginTypeInvalid;
 	}
 
@@ -319,13 +319,13 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	if( ( 0 == partLen )
 		|| ( dataUsed >= dataLen ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past crypto Key\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past crypto Key" );
 		return ePluginTypeInvalid;
 	}
 	
 	if( 32 != partLen )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: crypto Key wrong length %d\n", partLen );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: crypto Key wrong length %d", partLen );
 		return ePluginTypeInvalid;
 	}
 
@@ -333,7 +333,7 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	const char * pKeyBegin = strKey.c_str();
 	if( false == isValidHexString( pKeyBegin, 32 ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: crypto Key contains invalid chars %s\n", strKey.c_str() );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: crypto Key contains invalid chars %s", strKey.c_str() );
 		return ePluginTypeInvalid;
 	}
 
@@ -345,14 +345,14 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	if( ( MAX_CONTENT_LEN_DIGITS != partLen )
 		|| ( dataUsed >= dataLen ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past total data length\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past total data length" );
 		return ePluginTypeInvalid;
 	}
 
 	netServiceHdr.m_TotalDataLen = atoi( strValue.c_str() );
 	if( netServiceHdr.m_TotalDataLen < NET_SERVICE_HDR_LEN )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: invalid total data length %d\n", netServiceHdr.m_TotalDataLen );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: invalid total data length %d", netServiceHdr.m_TotalDataLen );
 		return ePluginTypeInvalid;
 	}
 	
@@ -365,14 +365,14 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	if( ( 0 == partLen )
 		|| ( dataUsed >= dataLen ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past net command\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past net command" );
 		return ePluginTypeInvalid;
 	}
 
 	netServiceHdr.m_NetCmdType = netCmdStringToEnum( strValue.c_str() );
 	if( eNetCmdUnknown == netServiceHdr.m_NetCmdType )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: not known NET COMMAND\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: not known NET COMMAND" );
 		return ePluginTypeInvalid;
 	}
 
@@ -382,7 +382,7 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	if( ( MAX_CMD_VERSION_LEN_DIGITS != partLen )
 		|| ( dataUsed >= dataLen ) )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past Net command\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: no data past Net command" );
 		return ePluginTypeInvalid;
 	}
 	
@@ -393,11 +393,11 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	dataUsed += partLen + 1;
 	if( MAX_ERROR_LEN_DIGITS != partLen )
 	{
-		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: invalid error digit len\n" );
+		LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: invalid error digit len" );
 		return ePluginTypeInvalid;
 	}
 
-	netServiceHdr.m_CmdError = atoi( strValue.c_str() );
+	netServiceHdr.m_CmdError = (ENetCmdError)atoi( strValue.c_str() );
 
 	netServiceHdr.m_SktDataUsed = dataUsed;
 
@@ -419,7 +419,8 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
         ePluginType = ePluginTypeHostConnectTest;
     }
 
-    LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %d\n", netCmdEnumToString( netServiceHdr.m_NetCmdType ), ePluginType );
+    LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %s %s", netCmdEnumToString( netServiceHdr.m_NetCmdType ), 
+		DescribePluginType( ePluginType ), DescribeNetCmdError( netServiceHdr.m_CmdError ) );
 
 	return ePluginType;
 }
@@ -447,7 +448,7 @@ bool  NetServiceUtils::getNetServiceUrlContent( std::string& netServiceUrl, std:
 	retFromClientContent = "";
 	if( NET_SERVICE_HDR_LEN >= netServiceUrl.length() )
 	{
-		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: invalid netService Length\n" );
+		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: invalid netService Length" );
 		return false;
 	}
 
@@ -455,14 +456,14 @@ bool  NetServiceUtils::getNetServiceUrlContent( std::string& netServiceUrl, std:
 	retFromClientContent = &buf1[ NET_SERVICE_HDR_LEN ];
 	if( 0 == retFromClientContent.length() )
 	{
-		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: invalid content Length\n" );
+		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: invalid content Length" );
 		return false;
 	}
 
 	const char * content = retFromClientContent.c_str();
 	if( '/' != content[ retFromClientContent.length() - 1 ] )
 	{
-		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: no trailing /\n" );
+		LogMsg( LOG_ERROR, "NetServiceUtils::getNetServiceUrlContent: no trailing /" );
 		retFromClientContent = "";
 		return false;
 	}
@@ -574,7 +575,7 @@ int  NetServiceUtils::getIndexOfCrLfCrLf( VxSktBase * sktBase )
 }
 
 //============================================================================
-RCODE NetServiceUtils::buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd, std::string& cmdContent, int errCode, int version )
+RCODE NetServiceUtils::buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd, std::string& cmdContent, ENetCmdError errCode, int version )
 {
 	std::string retResult;
 	std::string netServChallengeHash;
@@ -585,7 +586,7 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd,
 }
 
 //============================================================================
-RCODE NetServiceUtils::buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdType netCmd, std::string& cmdContent, int errCode, int version )
+RCODE NetServiceUtils::buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdType netCmd, std::string& cmdContent, ENetCmdError errCode, int version )
 {
     std::string retResult;
     std::string netServChallengeHash;
@@ -660,7 +661,7 @@ bool NetServiceUtils::decryptNetServiceContent( char * content, int contentDataL
 	if( ( 0 == contentDataLen )
 		|| ( 0x0f & contentDataLen ) )
 	{
-		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptNetServiceContent: invalid length %d\n", contentDataLen );
+		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptNetServiceContent: invalid length %d", contentDataLen );
 		return false;
 	}
 
@@ -688,26 +689,26 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 
 	if( iRxed != NET_SERVICE_HDR_LEN )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: hdr timeout %3.3f sec rxed data len %d\n", rxCmdTimer.elapsedSec(), iRxed );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: hdr timeout %3.3f sec rxed data len %d", rxCmdTimer.elapsedSec(), iRxed );
 		return false;
 	}
 
 	rxBuf[ NET_SERVICE_HDR_LEN ] = 0;
 	if( ePluginTypeNetServices != parseHttpNetServiceHdr( rxBuf, NET_SERVICE_HDR_LEN, netServiceHdr ) )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: hdr parse error\n" );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: hdr parse error" );
 		return false;
 	}
 
     if( netServiceHdr.m_TotalDataLen <= NET_SERVICE_HDR_LEN )
     {
-        LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: too smal netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
+        LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: too smal netServiceHdr.m_TotalDataLen %d", netServiceHdr.m_TotalDataLen );
         return false;
     }
 
 	if( netServiceHdr.m_TotalDataLen > rxBufLen )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: too large netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: too large netServiceHdr.m_TotalDataLen %d", netServiceHdr.m_TotalDataLen );
 		return false;
 	}
 
@@ -721,7 +722,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 									&bGotCrLfCrLf );	
 	if( contentLen != iRxed )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: timeout %3.3f sec recieving content\n", rxTimer.elapsedSec() );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: timeout %3.3f sec recieving content", rxTimer.elapsedSec() );
 		return false;
 	}
 

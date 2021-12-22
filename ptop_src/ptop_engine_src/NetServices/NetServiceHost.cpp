@@ -103,7 +103,7 @@ RCODE NetServiceHost::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& n
 	int sendContentLen = anchorResult.calculateLength();
 
 	std::string cmdHdr;
-	m_NetServiceUtils.buildNetCmdHeader( cmdHdr, eNetCmdHostReply, netServiceHdr.m_ChallengeHash, sendContentLen, rc, 1 );
+	m_NetServiceUtils.buildNetCmdHeader( cmdHdr, eNetCmdHostReply, netServiceHdr.m_ChallengeHash, sendContentLen, rc ? eNetCmdErrorPermissionLevel : eNetCmdErrorNone, 1 );
 	VxSymEncrypt( &key, (char *)&anchorResult, sendContentLen );
 
 	if( sktBase->isConnected() )

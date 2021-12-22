@@ -40,17 +40,17 @@ void PluginConnectionTestClient::testIsMyPortOpen( void )
 }
 
 //============================================================================
-RCODE PluginConnectionTestClient::handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginConnectionTestClient::handlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
     //if( false == m_NetServiceUtil.isAllHttpContentArrived( sktBase ) )
     //{
-    //	LogMsg( LOG_ERROR, "PluginNetServices::handleHttpConnection: not all of http content arrived\n" );
+    //	LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: not all of http content arrived\n" );
     //	return 0; // don't error.. we should get more later
     //}
     RCODE rc = 0;
     if( sktBase->isConnected() )
     {
-        rc = internalHandleHttpConnection( sktBase, netServiceHdr );
+        rc = internalHandlePtopConnection( sktBase, netServiceHdr );
 
         // flush the socket
         sktBase->getSktReadBuf();// so lock.. will unlock with sktBufAmountRead
@@ -61,24 +61,24 @@ RCODE PluginConnectionTestClient::handleHttpConnection( VxSktBase * sktBase, Net
 }
 
 //============================================================================
-RCODE PluginConnectionTestClient::internalHandleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE PluginConnectionTestClient::internalHandlePtopConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
     switch( netServiceHdr.m_NetCmdType )
     {
     case eNetCmdAboutMePage:
-        LogMsg( LOG_ERROR, "PluginNetServices::handleHttpConnection: invalid cmd  eNetCmdAboutMePage\n" );
+        LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: invalid cmd  eNetCmdAboutMePage\n" );
         return -1;
 
     case eNetCmdStoryboardPage:
-        LogMsg( LOG_ERROR, "PluginNetServices::handleHttpConnection: invalid cmd  eNetCmdStoryboardPage\n" );
+        LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: invalid cmd  eNetCmdStoryboardPage\n" );
         return -1;
 
     case eNetCmdPing:
-        //LogMsg( LOG_INFO, "PluginNetServices::handleHttpConnection: eNetCmdPing\n" );
+        //LogMsg( LOG_INFO, "PluginNetServices::handlePtopConnection: eNetCmdPing\n" );
         return m_NetServicesMgr.handleNetCmdPing( sktBase, netServiceHdr );
 
     case eNetCmdPong:
-        //LogMsg( LOG_INFO, "PluginNetServices::handleHttpConnection: eNetCmdPong\n" );
+        //LogMsg( LOG_INFO, "PluginNetServices::handlePtopConnection: eNetCmdPong\n" );
         return m_NetServicesMgr.handleNetCmdPong( sktBase, netServiceHdr );
 
     case eNetCmdIsMyPortOpenReq:
@@ -95,7 +95,7 @@ RCODE PluginConnectionTestClient::internalHandleHttpConnection( VxSktBase * sktB
 
     case eNetCmdUnknown:
     default:
-        LogMsg( LOG_ERROR, "PluginNetServices::handleHttpConnection: unknown cmd type\n" );
+        LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: unknown cmd type\n" );
         return -1;
     }
 

@@ -26,6 +26,12 @@ UrlMgr& GetUrlMgrInstance()
 //============================================================================
 void UrlInfo::updateOnlineId( VxGUID& onlineId )
 {
+    if( m_OnlineId == onlineId )
+    {
+        // no changes needed
+        return;
+    }
+
     m_OnlineId = onlineId;
     std::string url( "ptop://" );
     if( m_Url.size() > 7 && 0 == strncmp( m_Url.c_str(), "http://", 7 ) )
@@ -128,7 +134,11 @@ void UrlMgr::updateUrlCache( std::string& hostUrl, VxGUID& onlineId )
     auto iter = m_UrlMap.find( hostUrl );
     if( iter != m_UrlMap.end() )
     {
-        iter->second.m_OnlineId = onlineId;
+        if( onlineId != iter->second.m_OnlineId )
+        {
+            iter->second.updateOnlineId( onlineId );
+        }
+
         m_UrlMutex.unlock();
         return;
     }

@@ -91,13 +91,14 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 				pSktBuf[ iDataLen ] = 0;
 				sktBase->sktBufAmountRead( 0 ); // release mutex
                 LogMsg( LOG_VERBOSE, "Rxed ascii %s", pSktBuf );
-				if( m_PluginMgr.handleFirstWebPageConnection( sktBase ) )
-				{
+				// BRJ we no longer handle http. web pages will be replaced with more secure file xfer
+				// if( m_PluginMgr.handleFirstWebPageConnection( sktBase ) )
+				// {
 					// was either profile or storyboard web page
-					return;
-				} 
+				// 	return;
+				// } 
 				
-                if( ( iDataLen > 7 ) && ( 0 == strncmp( ( char * )pSktBuf, "http://", 7 ) ) )
+                if( ( iDataLen > 7 ) && ( 0 == strncmp( ( char * )pSktBuf, "ptop://", 7 ) ) )
 				{
                     LogMsg( LOG_VERBOSE, "Rxed net %s", pSktBuf );
 					// probably net services

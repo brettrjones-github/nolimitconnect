@@ -21,6 +21,8 @@
 #define MAX_ARG_LEN						255		// maximum length of command argument
 
 #define BASE_PKT_TYPE								0 // packet type 0 is not allowed
+// limit by ptop protocol ptop:// = { 0x70, 0x74, 0x6F, 0x70, (ptop) 0x58, 0x47 0x47 (://) }
+// which means pkt len 0x7074 (28,788) and packet type 0x6F70 (28,528) combination is not allowed
 
 #define PKT_TYPE_ANNOUNCE							( BASE_PKT_TYPE	+ 1 )					        // 1
 #define PKT_TYPE_ANN_LIST							( PKT_TYPE_ANNOUNCE	+ 1 )				        // 2 ( 0x02 )

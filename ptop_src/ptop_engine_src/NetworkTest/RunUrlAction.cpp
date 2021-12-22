@@ -16,6 +16,7 @@
 #include "RunUrlAction.h"
 
 #include <GuiInterface/IGoTv.h>
+#include <GuiInterface/IDefs.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/NetServices/NetServiceHdr.h>
@@ -164,14 +165,14 @@ void RunUrlAction::runUrlAction( VxGUID& sessionId, ENetCmdType netCmdType, cons
     {
         // if have callback interface then no need to send testing message
         LogModule( eLogRunTest, LOG_DEBUG, "RunUrlAction::runUrlAction Local URL is invalid" );
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusTestFail, "My URL is invalid" );
-        doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusTestFail, eNetCmdErrorBadParameter, "My URL is invalid" );
+        doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam, eNetCmdErrorBadParameter );
     }
     else if( !urlAction.getRemoteVxUrl().validateUrl( false ) )
     {
         LogModule( eLogRunTest, LOG_DEBUG, "RunUrlAction::runUrlAction Remote URL is invalid" );
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusTestFail, "Test URL is invalid" );
-        doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusTestFail, eNetCmdErrorBadParameter, "Test URL is invalid" );
+        doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam, eNetCmdErrorBadParameter );
     }
     else
     {
@@ -190,8 +191,8 @@ void RunUrlAction::runUrlAction( VxGUID& sessionId, ENetCmdType netCmdType, cons
         if( existsInQue )
         {
             m_ActionListMutex.unlock();
-            sendRunTestStatus( urlAction, actionName, eRunTestStatusTestFail, "URL action already qued for run" );
-            doRunTestFailed( urlAction, actionName, eRunTestStatusAlreadyQueued );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusTestFail, eNetCmdErrorTxFailed, "URL action already qued for run" );
+            doRunTestFailed( urlAction, actionName, eRunTestStatusAlreadyQueued, eNetCmdErrorTxFailed );
         }
         else
         {
@@ -266,8 +267,8 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         break;
     default:
         LogModule( eLogRunTest, LOG_INFO, "RunUrlAction: unsupport net cmd %s", DescribeNetCmdType( netCmdType ) );
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusTestBadParam, ": Unsupport net cmd %s", DescribeNetCmdType( netCmdType ) );
-        doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusTestBadParam, eNetCmdErrorBadParameter, ": Unsupport net cmd %s", DescribeNetCmdType( netCmdType ) );
+        doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam, eNetCmdErrorBadParameter );
         return eRunTestStatusConnectFail;
     }
 
@@ -281,10 +282,10 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
                                                 resolveIp,
 		                                        NETSERVICE_CONNECT_TIMEOUT ) )
 	{
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectFail, "Could not connected to %s IP %s..Please check settings",
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectFail, eNetCmdErrorConnectFailed, "Could not connected to %s IP %s..Please check settings",
                             nodeUrl.c_str(), resolveIp.c_str() );
 
-		doRunTestFailed( urlAction, actionName, eRunTestStatusConnectFail );
+		doRunTestFailed( urlAction, actionName, eRunTestStatusConnectFail, eNetCmdErrorConnectFailed );
 
 		return eRunTestStatusConnectFail;
 	}
@@ -308,9 +309,9 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         if( 0 == myPort )
         {
             LogModule( eLogRunTest, LOG_INFO, "RunUrlAction: Invalid listen port %d", myPort );
-            sendRunTestStatus( urlAction, actionName, eRunTestStatusTestBadParam, ": Invalid listen port %d", myPort );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusTestBadParam, eNetCmdErrorBadParameter, ": Invalid listen port %d", myPort );
             netServConn.closeSkt();
-            doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam );
+            doRunTestFailed( urlAction, actionName, eRunTestStatusTestBadParam, eNetCmdErrorBadParameter );
             return eRunTestStatusTestBadParam;
         }
 
@@ -327,7 +328,7 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 
     default:
         netServConn.closeSkt();
-        doRunTestFailed( urlAction, actionName, eRunTestStatusConnectFail );
+        doRunTestFailed( urlAction, actionName, eRunTestStatusConnectFail, eNetCmdErrorConnectFailed );
         return eRunTestStatusConnectFail;
     }
 
@@ -339,9 +340,9 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 	{
         netServConn.closeSkt();
         LogModule( eLogRunTest, LOG_ERROR, "RunUrlAction: sendData error %d", rc );
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectionDropped,
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectionDropped, eNetCmdErrorTxFailed,
 			"Connected to %s but connection was dropped (wrong network key ?) %s", nodeUrl.c_str(), m_Engine.getNetworkMgr().getNetworkKey() );
-		return doRunTestFailed( urlAction, actionName, eRunTestStatusConnectionDropped );
+		return doRunTestFailed( urlAction, actionName, eRunTestStatusConnectionDropped, eNetCmdErrorTxFailed );
 	}
 
 	sendTime = testTimer.elapsedSec();
@@ -358,9 +359,9 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
                                                     rxCmdDataTimeout ) )
 	{
         netServConn.closeSkt();
-		sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectionDropped,
+		sendRunTestStatus( urlAction, actionName, eRunTestStatusConnectionDropped, eNetCmdErrorResponseTimedOut,
 			"%s Connected to %s but failed to respond (wrong network key ?) thread 0x%x", actionName.c_str(), nodeUrl.c_str(), VxGetCurrentThreadId() );
-		return doRunTestFailed( urlAction, actionName, eRunTestStatusConnectionDropped );
+		return doRunTestFailed( urlAction, actionName, eRunTestStatusConnectionDropped, eNetCmdErrorResponseTimedOut );
 	}
 
     netServConn.closeSkt();
@@ -374,16 +375,16 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 	if( 0 == content.length() )
 	{
         LogModule( eLogRunTest, LOG_ERROR, "RunUrlAction: no content in response" );
-		sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "Invalid response content %s\n", content.c_str() );
-		return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse );
+		sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "Invalid response content %s", content.c_str() );
+		return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
 	}
 
 	const char * contentBuf = content.c_str();
     if( '/' != contentBuf[content.length() -1] )
     {
         LogModule( eLogRunTest, LOG_ERROR, "%s no trailing / in content thread 0x%x", actionName.c_str(), VxGetCurrentThreadId() );
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "Invalid response content %s\n", content.c_str() );
-        return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "Invalid response content %s", content.c_str() );
+        return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
     }
 
     ((char *)contentBuf)[content.length() -1] = 0;
@@ -392,8 +393,8 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
     if( content.empty() )
     {
         LogModule( eLogRunTest, LOG_ERROR, "%s No content thread 0x%x", actionName.c_str(), VxGetCurrentThreadId() );
-        sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "Invalid host id %s\n", content.c_str() );
-        return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse );
+        sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "Invalid host id %s", content.c_str() );
+        return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
     }
 
     if( eNetCmdPing == netCmdType )
@@ -401,16 +402,16 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         if( strPayload.empty() || strPayload.length() < 5  )
         {
             LogModule( eLogRunTest, LOG_ERROR, "RunUrlAction no content" );
-            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "%s No PONG content\n", actionName.c_str() );
-            return doRunTestFailed(  urlAction, actionName, eRunTestStatusInvalidResponse );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "%s No PONG content", actionName.c_str() );
+            return doRunTestFailed(  urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
         }
 
         sendTestLog( urlAction, actionName, "%s PONG Content (%s)", actionName.c_str(), strPayload.c_str() );
         std::string strPongSig = strPayload.substr( 0, 5 );
         if( strPongSig != "PONG-" )
         {
-            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "Content did not contain PONG- %s\n", content.c_str() );
-            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "Content did not contain PONG- %s", content.c_str() );
+            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
         }
         else
         {
@@ -431,9 +432,9 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         if( !hostId.isVxGUIDValid() )
         {
             LogModule( eLogRunTest, LOG_ERROR, "Query Host Online Id %s Invalid Content (%3.3f sec) thread 0x%x", content.c_str(), testTimer.elapsedSec(), VxGetCurrentThreadId() );
-            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "Invalid host id %s\n", content.c_str() );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "Invalid host id %s", content.c_str() );
             netServConn.closeSkt();
-            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse );
+            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
         }
 
         std::string hostIdStr = hostId.toHexString();
@@ -451,8 +452,8 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         if( 2 != contentParts.size() )
         {
             LogModule( eLogRunTest, LOG_ERROR, "NetActionIsMyPortOpen::doAction: not enough parts to content" );
-            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, "Invalid response content %s\n", content.c_str() );
-            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "Invalid response content %s", content.c_str() );
+            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
         }
 
         std::string retMyExternalIp = contentParts[1];
@@ -463,11 +464,11 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         LogModule( eLogRunTest, LOG_VERBOSE, "NetActionIsMyPortOpen::doAction: direct connect %s my ip %s result %d thread 0x%x", strPayload.c_str(), retMyExternalIp.c_str(), iIsOpen, VxGetCurrentThreadId() );
         if( iIsOpen )
         {
-            sendRunTestStatus(  urlAction, actionName, eRunTestStatusMyPortIsOpen, "My ip %s port %d is open\n", retMyExternalIp.c_str(), myPort );
+            sendRunTestStatus(  urlAction, actionName, eRunTestStatusMyPortIsOpen, eNetCmdErrorNone, "My ip %s port %d is open", retMyExternalIp.c_str(), myPort );
         }
         else
         {
-            sendRunTestStatus(  urlAction, actionName, eRunTestStatusMyPortIsClosed, "My ip %s port %d is NOT open (Relay will be required)\n", retMyExternalIp.c_str(), myPort );
+            sendRunTestStatus(  urlAction, actionName, eRunTestStatusMyPortIsClosed, netServiceHdr.getError(), "My ip %s port %d is NOT open (Relay will be required)", retMyExternalIp.c_str(), myPort );
             if( m_Engine.getNetworkStateMachine().getLocalNetworkIp().length()
                 && m_Engine.getNetworkStateMachine().isCellularNetwork() )
             {
@@ -487,27 +488,27 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 }
 
 //============================================================================
-ERunTestStatus RunUrlAction::doRunTestFailed( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus )
+ERunTestStatus RunUrlAction::doRunTestFailed( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eTestStatus, ENetCmdError cmdErr )
 {
     if( urlAction.getResultInterface() )
     {
-        urlAction.getResultInterface()->callbackActionFailed( urlAction, eTestStatus );
+        urlAction.getResultInterface()->callbackActionFailed( urlAction, eTestStatus, cmdErr );
     }
 
-    sendRunTestStatus( urlAction, urlActionName, eTestStatus, "" );
-	sendRunTestStatus( urlAction, urlActionName, eRunTestStatusTestCompleteFail, "" );
+    sendRunTestStatus( urlAction, urlActionName, eTestStatus, cmdErr, "" );
+	sendRunTestStatus( urlAction, urlActionName, eRunTestStatusTestCompleteFail, cmdErr, "" );
 	return eRunTestStatusTestCompleteFail;
 }
 
 //============================================================================
 ERunTestStatus RunUrlAction::doRunTestSuccess( UrlActionInfo& urlAction, std::string& urlActionName )
 {
-	sendRunTestStatus( urlAction, urlActionName, eRunTestStatusTestCompleteSuccess, "" );
+	sendRunTestStatus( urlAction, urlActionName, eRunTestStatusTestCompleteSuccess, eNetCmdErrorNone, "" );
 	return eRunTestStatusTestCompleteSuccess;
 }
 
 //============================================================================
-void RunUrlAction::sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eStatus, const char * msg, ... )
+void RunUrlAction::sendRunTestStatus( UrlActionInfo& urlAction, std::string& urlActionName, ERunTestStatus eStatus, ENetCmdError cmdErr, const char * msg, ... )
 {
     char as8Buf[ 1024 ];
     va_list argList;
@@ -515,13 +516,17 @@ void RunUrlAction::sendRunTestStatus( UrlActionInfo& urlAction, std::string& url
     vsnprintf( as8Buf, sizeof( as8Buf ), msg, argList );
     as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
     va_end( argList );
+    std::string cmdMsg = as8Buf;
+    cmdMsg += " - ";
+    cmdMsg += DescribeNetCmdError( cmdErr );
+
     if( !urlAction.getResultInterface() )
     {
-        IToGui::getToGui().toGuiRunTestStatus( urlActionName.c_str(), eStatus, as8Buf );
+        IToGui::getToGui().toGuiRunTestStatus( urlActionName.c_str(), eStatus, cmdMsg.c_str() );
     }
     else
     {
-        urlAction.getResultInterface()->callbackActionStatus( urlAction, eStatus, as8Buf );
+        urlAction.getResultInterface()->callbackActionStatus( urlAction, eStatus, cmdErr, cmdMsg.c_str() );
     }
 }
 

@@ -55,15 +55,15 @@ void NetActionRandomConnect::doAction( void )
 		anchorListIn.m_HostAction = eHostActionRandomConnect;
 
 		m_NetServicesMgr.getNetServiceHost().getHostDb().handleAnnounce( anchorListIn, anchorListOut );
-		m_NetServicesMgr.netActionResultRandomConnect( eAppErrNone, &anchorListOut );
+		m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorNone, &anchorListOut );
 		return;
 	}
 
 	VxSktConnectSimple netServConn;
 	if( false == m_NetServicesMgr.actionReqConnectToHost( netServConn ) )
 	{
-		m_NetServicesMgr.netActionResultRandomConnect( eAppErrFailedConnectHost, 0 );
-		sendRandomConnectStatus( eRandomConnectStatusContactHostFail, "Could not connect to Host\n" );
+		m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorConnectFailed, 0 );
+		sendRandomConnectStatus( eRandomConnectStatusContactHostFail, "Could not connect to Host" );
 		return;
 	}
 
@@ -73,8 +73,8 @@ void NetActionRandomConnect::doAction( void )
 		VxSleep( 10000 );
 		if( false == m_NetServicesMgr.actionReqConnectToHost( netServConn ) )
 		{
-			m_NetServicesMgr.netActionResultRandomConnect( eAppErrFailedConnectHost, 0 );
-			sendRandomConnectStatus( eRandomConnectStatusContactHostFail, "Could not connect to Host\n" );
+			m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorConnectFailed, 0 );
+			sendRandomConnectStatus( eRandomConnectStatusContactHostFail, "Could not connect to Host" );
 			return;
 		}
 
@@ -83,8 +83,8 @@ void NetActionRandomConnect::doAction( void )
 			VxSleep( 10000 );
 			if( false == m_NetServicesMgr.actionReqConnectToHost( netServConn ) )
 			{
-				m_NetServicesMgr.netActionResultRandomConnect( eAppErrFailedConnectHost, 0 );
-				sendRandomConnectStatus( eRandomConnectStatusContactHostFail, "Could not connect to Host\n" );
+				m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorConnectFailed, 0 );
+				sendRandomConnectStatus( eRandomConnectStatusContactHostFail, "Could not connect to Host" );
 				return;
 			}
 
@@ -92,7 +92,7 @@ void NetActionRandomConnect::doAction( void )
 		}
 	}
 
-	sendRandomConnectStatus( eRandomConnectStatusSearchComplete, "Random Connect: search complete %d found\n", m_FoundCnt );
+	sendRandomConnectStatus( eRandomConnectStatusSearchComplete, "Random Connect: search complete %d found", m_FoundCnt );
 }
 
 //============================================================================
@@ -109,9 +109,9 @@ bool NetActionRandomConnect::doRandomConnectAction( VxSktConnectSimple& netServC
 	if( rc )
 	{
 		netServConn.closeSkt();
-		LogMsg( LOG_ERROR, "NetActionRandomConnect::doAction: send header error %d\n", rc );
-		m_NetServicesMgr.netActionResultRandomConnect( eAppErrTxError, 0 );
-		sendRandomConnectStatus( eRandomConnectStatusSendRequestFail, "Random Connect: send anchor header error %d\n", rc );
+		LogMsg( LOG_ERROR, "NetActionRandomConnect::doAction: send header error %d", rc );
+		m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorTxFailed, 0 );
+		sendRandomConnectStatus( eRandomConnectStatusSendRequestFail, "Random Connect: send anchor header error %d", rc );
 		return false;
 	}
 
@@ -124,7 +124,7 @@ bool NetActionRandomConnect::doRandomConnectAction( VxSktConnectSimple& netServC
 	{
 		netServConn.closeSkt();
 		LogMsg( LOG_ERROR, "NetActionRandomConnect::doAction: send anchor list error %d\n", rc );
-		m_NetServicesMgr.netActionResultRandomConnect( eAppErrTxError, 0 );
+		m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorTxFailed, 0 );
 		sendRandomConnectStatus( eRandomConnectStatusSendRequestFail, "Random Connect: send anchor list error %d\n", rc );
 		return false;
 	}
@@ -134,7 +134,7 @@ bool NetActionRandomConnect::doRandomConnectAction( VxSktConnectSimple& netServC
     if( false == m_NetServiceUtils.rxNetServiceCmd( &netServConn, rxBuf, sizeof( rxBuf ), netServiceHdr, RANDOM_CONNECT_RX_TIMEOUT, RANDOM_CONNECT_RX_TIMEOUT ) )
 	{
 		netServConn.closeSkt();
-		m_NetServicesMgr.netActionResultRandomConnect( eAppErrRxError, 0 );
+		m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorRxFailed, 0 );
 		sendRandomConnectStatus( eRandomConnectStatusInvalidResponse, "Random Connect: Invalid Host Response\n" );
 		return false;
 	}
@@ -142,7 +142,7 @@ bool NetActionRandomConnect::doRandomConnectAction( VxSktConnectSimple& netServC
 	if( false == decryptHostList( rxBuf, netServiceHdr.m_ContentDataLen, cryptoPort ) )
 	{
 		netServConn.closeSkt();
-		m_NetServicesMgr.netActionResultRandomConnect( eAppErrRxError, 0 );
+		m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorRxFailed, 0 );
 		sendRandomConnectStatus( eRandomConnectStatusDecryptError, "Random Connect: decrypt error \n" );
 		return false;
 	}
@@ -162,7 +162,7 @@ bool NetActionRandomConnect::doRandomConnectAction( VxSktConnectSimple& netServC
 		m_FoundCnt = anchorListResult->m_EntryCount;
 	}
 
-	m_NetServicesMgr.netActionResultRandomConnect( eAppErrNone, anchorListResult );
+	m_NetServicesMgr.netActionResultRandomConnect( eNetCmdErrorNone, anchorListResult );
 	return true;
 }
 
@@ -177,13 +177,13 @@ bool NetActionRandomConnect::decryptHostList( char * content, int contentDataLen
 	HostList * anchorList = (HostList *)content;
 	if( anchorList->m_TotalLen != contentDataLen )
 	{
-		LogMsg( LOG_ERROR, "NetActionRandomConnect::decryptHostList: invalid anchorList->m_TotalLen\n" );
+		LogMsg( LOG_ERROR, "NetActionRandomConnect::decryptHostList: invalid anchorList->m_TotalLen" );
 		return false;
 	}
 
     if( MAX_ANCHOR_ENTRIES <= anchorList->m_EntryCount )
 	{
-		LogMsg( LOG_ERROR, "NetActionRandomConnect::decryptHostList: invalid anchorList->m_EntryCount\n" );
+		LogMsg( LOG_ERROR, "NetActionRandomConnect::decryptHostList: invalid anchorList->m_EntryCount" );
 		return false;
 	}
 

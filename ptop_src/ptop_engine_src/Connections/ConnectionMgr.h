@@ -49,7 +49,7 @@ public:
     void                        setDefaultHostOnlineId( EHostType hostType, VxGUID& hostOnlineId );
     bool                        getDefaultHostOnlineId( EHostType hostType, VxGUID& retHostOnlineId );
 
-    EHostAnnounceStatus         lookupOrQueryAnnounceId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
+    EHostAnnounceStatus         lookupOrQueryAnnounceId( EHostType hostType, VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
     EHostJoinStatus             lookupOrQueryJoinId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
     EHostSearchStatus           lookupOrQuerySearchId( VxGUID& sessionId, std::string hostUrl, VxGUID& hostGuid, IConnectRequestCallback* callback, EConnectReason connectReason = eConnectReasonUnknown );
 
@@ -67,8 +67,8 @@ protected:
     virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) override;
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) override;
 
-    virtual void                callbackActionStatus( UrlActionInfo& actionInfo, ERunTestStatus eStatus, std::string statusMsg ) override {};
-    virtual void                callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError = eNetCmdErrorUnknown ) override;
+    virtual void                callbackActionStatus( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError, std::string statusMsg ) override {};
+    virtual void                callbackActionFailed( UrlActionInfo& actionInfo, ERunTestStatus eStatus, ENetCmdError netCmdError ) override;
 
     virtual void                callbackPingSuccess( UrlActionInfo& actionInfo, std::string myIp ) override {};
     virtual void                callbackConnectionTestSuccess( UrlActionInfo& actionInfo, bool canDirectConnect, std::string myIp ) override {};
@@ -142,6 +142,9 @@ protected:
                                                                     VxConnectInfo&		connectInfo );
     bool                        doConnectRequest( ConnectReqInfo& connectRequest, bool ignoreToSoonToConnectAgain );
 
+    void                        setQueryIdFailedCount( EHostType hostType, int failedCount );
+    int                         getQueryIdFailedCount( EHostType hostType );
+
     //=== vars ===//
     P2PEngine&					m_Engine;
     BigListMgr&					m_BigListMgr;
@@ -155,7 +158,7 @@ protected:
     std::map<EHostType, VxGUID>         m_DefaultHostIdList;
     std::map<EHostType, std::string>    m_DefaultHostUrlList;
     std::map<EHostType, std::string>    m_DefaultHostRequiresOnlineId;
-    std::map<EHostType, ERunTestStatus> m_DefaultHostQueryIdFailed;
+    std::map<EHostType, std::pair<ERunTestStatus, int>> m_DefaultHostQueryIdFailed;
 
     /// keep a cache of urls to online id to avoid time consuming query host id
     std::map<std::string, VxGUID>       m_UrlCache;

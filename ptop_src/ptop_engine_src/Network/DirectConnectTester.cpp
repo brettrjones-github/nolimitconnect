@@ -21,7 +21,7 @@
 
 namespace
 {
-	void MyPortOpenCallback( void * userData, EAppErr eAppErr, std::string& myExternalIp )
+	void MyPortOpenCallback( void * userData, ENetCmdError eAppErr, std::string& myExternalIp )
 	{
 		if( userData )
 		{
@@ -41,21 +41,16 @@ DirectConnectTester::DirectConnectTester( NetworkStateMachine& stateMachine )
 }
 
 //============================================================================
-DirectConnectTester::~DirectConnectTester()
-{
-}
-
-//============================================================================
 void DirectConnectTester::testCanDirectConnect( void )
 {
 	while( m_bTestIsRunning )
 	{
-		LogMsg( LOG_INFO, "DirectConnectTester::testCanDirectConnect: waiting for prev test to complete\n" );
+		LogMsg( LOG_INFO, "DirectConnectTester::testCanDirectConnect: waiting for prev test to complete" );
 		VxSleep( 400 );
 	}
 
 	m_bTestIsRunning = true;
-	m_TestResults.m_eAppErr  = eAppErrUnknown;
+	m_TestResults.m_eAppErr = eNetCmdErrorNone;
 
 	m_NetServicesMgr.setMyPortOpenResultCallback( MyPortOpenCallback, this );
 
@@ -75,15 +70,8 @@ bool DirectConnectTester::isTestResultCanDirectConnect( void )
 }
 
 //============================================================================
-void DirectConnectTester::myPortOpenCallback( EAppErr eAppErr, std::string& myExternalIp )
+void DirectConnectTester::myPortOpenCallback( ENetCmdError eAppErr, std::string& myExternalIp )
 {
-	// results can be
-	// eAppErrNone						// port is open
-	// eAppErrPortIsClosed				// port is closed
-	// eAppErrFailedConnectNetServices	// could not connect to net services
-	// eAppErrTxError;
-	// eAppErrRxError;
-	// eAppErrParseError;
 	m_TestResults.m_eAppErr  = eAppErr;
 	m_TestResults.m_MyIpAddr = myExternalIp;
 
