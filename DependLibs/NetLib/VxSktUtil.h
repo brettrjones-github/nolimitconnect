@@ -89,6 +89,7 @@ SOCKET                          VxConnectToAddr(SOCKET sktHandle, struct sockadd
 std::string                     VxSktAddrToString( struct sockaddr* sktAddr, int sktAddrLen );
 
 RCODE							VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
+std::string						VxGetLclIpAddress( SOCKET sktHandle, uint16_t *	retPort = nullptr );
 RCODE							VxGetRmtAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
 
 bool							VxIsIPv6Address( const char *addr );

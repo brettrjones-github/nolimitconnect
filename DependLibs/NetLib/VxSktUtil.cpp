@@ -1485,7 +1485,7 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 		// error occurred
 		oRetAddr.setToInvalid();
 		rc = VxGetLastError();
-        LogMsg( LOG_DEBUG, "VxGetRmtAddress: skt handle %d error %d %s\n", sktHandle, rc, VxDescribeSktError( rc ) );
+        LogMsg( LOG_DEBUG, "VxGetRmtAddress: skt handle %d error %d %s", sktHandle, rc, VxDescribeSktError( rc ) );
 	}
 	else
 	{
@@ -1493,6 +1493,31 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 	}
 
 	return rc;
+}
+
+//============================================================================
+std::string	VxGetLclIpAddress( SOCKET sktHandle, uint16_t* retPort )
+{
+	std::string ipAddr( "" );
+	struct sockaddr sktAddr;
+	memset( &sktAddr, 0, sizeof( struct sockaddr ) );
+	socklen_t iSktAddrLen = sizeof( struct sockaddr );
+
+	if( 0 == getsockname( sktHandle, ( struct sockaddr* )&sktAddr, &iSktAddrLen ) )
+	{
+		InetAddress inetAddr;
+		uint16_t port = inetAddr.setIp( sktAddr );
+		if( port )
+		{
+			ipAddr = inetAddr.toStdString();
+			if( retPort )
+			{
+				*retPort = port;
+			}
+		}
+	}
+
+	return ipAddr;
 }
 
 //============================================================================

@@ -215,27 +215,26 @@ void NetworkStateAvail::runNetworkState( void )
         return;
     }
 
-    if( eAppErrNone == directConnectTestResults.m_eAppErr )
+    if( eNetCmdErrorNone == directConnectTestResults.m_eNetCmdErr )
     {
         m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, directConnectTestResults.m_MyIpAddr );
     }
-    else if( eAppErrPortIsClosed == directConnectTestResults.m_eAppErr )
+    else if( eNetCmdErrorPortIsClosed == directConnectTestResults.m_eNetCmdErr )
     {
         m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, directConnectTestResults.m_MyIpAddr );
     }
     else
     {
-        m_Engine.getNetStatusAccum().setDirectConnectTested( false, false, directConnectTestResults.m_MyIpAddr );
-        LogModule( eLogNetworkState, LOG_STATUS, "eNetworkStateTypeAvail Failed To Connect To Connection Test Server %s  %3.3f", netServiceUrl.c_str(), availTimer.elapsedSec() );
+        LogModule( eLogNetworkState, LOG_STATUS, "eNetworkStateTypeAvail %s Connection Test Server %s  %3.3f", 
+            DescribeNetCmdError( directConnectTestResults.m_eNetCmdErr ), netServiceUrl.c_str(), availTimer.elapsedSec() );
 
         if( IsLogEnabled( eLogNetworkState ) )
         {
             if( eFirewallTestUrlConnectionTest == firewallTestType )
             {
-                if( eAppErrRxError == directConnectTestResults.m_eAppErr )
+                if( eNetCmdErrorResponseTimedOut == directConnectTestResults.m_eNetCmdErr )
                 {
                     AppErr( eAppErrFailedConnectNetServices, "Connection test node failed to respond.\nPlease check connection test settings" );
-
                 }
                 else
                 {

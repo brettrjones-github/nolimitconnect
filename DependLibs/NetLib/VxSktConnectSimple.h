@@ -28,7 +28,7 @@ public:
 	const char *				getRemoteIpAddress( void )                      { return m_RmtIp.toStdString().c_str(); }
 	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
     void				        setLocalIpAddress( const char * lclIp )			{ m_LclIp.setIp( lclIp ); }
-	const char *				getLocalIpAddress( void )						{ return m_LclIp.toStdString().c_str(); }
+	std::string					getLocalIpAddress( void );
     void				        setLocalIpAndPort( const char * lclIp, uint16_t port )			{ m_LclIp.setIpAndPort( lclIp, port ); }
 
 	uint16_t					getCryptoKeyPort( void )						{ return m_RmtIp.getPort(); }

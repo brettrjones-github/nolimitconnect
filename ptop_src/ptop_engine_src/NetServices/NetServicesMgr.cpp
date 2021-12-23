@@ -404,7 +404,7 @@ void NetServicesMgr::setQueryHostOnlineIdResultCallback( QUERY_HOST_ID_CALLBACK_
 }
 
 //============================================================================
-void NetServicesMgr::testIsMyPortOpen( void )
+void NetServicesMgr::addNetActionIsMyPortOpenToQueue( void )
 {
 	addNetActionCommand( new NetActionIsMyPortOpen( *this ) );
 }
@@ -572,6 +572,9 @@ bool NetServicesMgr::actionReqConnectToHost( VxSktConnectSimple& sktSimple )
 ENetCmdError NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool testLoopbackFirst )
 {
     retMyExternalIp = "";
+	// Dont use local ip.. on some systems the local ip given is not the one with actual internet access or in some vpns when use local ip the connection fails
+	std::string lclIP = "";
+	/*
 	std::string lclIP = m_NetworkMgr.getLocalIpAddress();
     if( lclIP.empty() )
     {
@@ -587,6 +590,7 @@ ENetCmdError NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool 
 
         return eNetCmdErrorBadParameter;
     }
+	*/
 
 	uint16_t tcpListenPort = m_Engine.getMyPktAnnounce().getOnlinePort();
 
@@ -729,11 +733,20 @@ static int uint16_t = 0;
 			}
 
             LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::actionReqConnectToNetService: FAILED to Connect lcl ip %s to connect service %s thread 0x%x", lclIP.c_str(), netSrvUrl.c_str(), VxGetCurrentThreadId() );
-            m_Engine.sendToGuiStatusMessage( "FAILED Connect lcl ip %s to connect service %s\n", lclIP.c_str(), netSrvUrl.c_str() );
+            m_Engine.sendToGuiStatusMessage( "FAILED Connect lcl ip %s to connect service %s", lclIP.c_str(), netSrvUrl.c_str() );
             return eNetCmdErrorConnectFailed;
         }
         else
         {
+			if( lclIP.empty() )
+			{
+				lclIP = portOpenConn1.getLocalIpAddress();
+				if( !lclIP.empty() && m_NetworkMgr.getLocalIpAddress().empty() )
+				{
+					m_NetworkMgr.setLocalIpAddress( lclIP );
+				}
+			}
+
             portOpenTestError = sendAndRecieveIsMyPortOpen( portTestTimer,
                                                             &portOpenConn1,
                                                             tcpListenPort,
@@ -750,44 +763,42 @@ static int uint16_t = 0;
 		{
 			m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, eNetCmdErrorBadParameter, retMyExternalIp );
 		}
+
+		return portOpenTestError;
     }
 
-    if( isCellDataNetwork 
-		|| ( eNetCmdErrorNone == portOpenTestError )
-		|| ( portTestTimer.elapsedMs() > 15000 ) )
-	{
-
-		if( eNetCmdErrorNone == portOpenTestError )
-		{
-			if( m_pfuncPortOpenCallbackHandler )
-			{
-				m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, eNetCmdErrorNone, retMyExternalIp );
-			}
-
-            LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s sec %3.3f thread 0x%x", 
-                tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
-            m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, retMyExternalIp );
-			m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
-		}
-		else
-		{
-			if( m_pfuncPortOpenCallbackHandler )
-			{
-				m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, portOpenTestError, retMyExternalIp );
-			}
-
-			m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
-			LogModule( eLogIsPortOpenTest, LOG_INFO, "Your TCP Port %d IS CLOSED :( IP %s->%s->%s sec %3.3f", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec() );
-			portOpenTestError = eNetCmdErrorPortIsClosed;
-		}
-
-		return portOpenTestError; // messages sent and result set and no sense in retying because all ports blocked on cell network
-	}
-
+	// release the thread waiting for port open test result as soon as possible
 	if( m_pfuncPortOpenCallbackHandler )
 	{
 		m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, portOpenTestError, retMyExternalIp );
 	}
+
+	if( eNetCmdErrorNone == portOpenTestError )
+	{
+        LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s sec %3.3f thread 0x%x", 
+            tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
+
+		m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
+
+		if( !m_pfuncPortOpenCallbackHandler )
+		{
+			m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, retMyExternalIp );
+		}
+	}
+	else
+	{
+		portOpenTestError = eNetCmdErrorPortIsClosed;
+
+		LogModule( eLogIsPortOpenTest, LOG_INFO, "Your TCP Port %d IS CLOSED :( IP %s->%s->%s sec %3.3f", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec() );
+
+		m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSDE :( IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
+
+		if( !m_pfuncPortOpenCallbackHandler )
+		{
+			m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
+		}
+	}
+
 
 	return portOpenTestError; 
 }

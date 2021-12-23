@@ -50,11 +50,11 @@ void DirectConnectTester::testCanDirectConnect( void )
 	}
 
 	m_bTestIsRunning = true;
-	m_TestResults.m_eAppErr = eNetCmdErrorNone;
+	m_TestResults.m_eNetCmdErr = eNetCmdErrorNone;
 
 	m_NetServicesMgr.setMyPortOpenResultCallback( MyPortOpenCallback, this );
 
-	m_NetServicesMgr.testIsMyPortOpen();
+	m_NetServicesMgr.addNetActionIsMyPortOpenToQueue();
 }
 
 //============================================================================
@@ -72,7 +72,7 @@ bool DirectConnectTester::isTestResultCanDirectConnect( void )
 //============================================================================
 void DirectConnectTester::myPortOpenCallback( ENetCmdError eAppErr, std::string& myExternalIp )
 {
-	m_TestResults.m_eAppErr  = eAppErr;
+	m_TestResults.m_eNetCmdErr = eAppErr;
 	m_TestResults.m_MyIpAddr = myExternalIp;
 
 	m_bTestIsRunning = false;

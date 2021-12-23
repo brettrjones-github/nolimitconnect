@@ -45,6 +45,7 @@ public:
 	P2PEngine&					getEngine( void )											{ return m_Engine; }
 	VxPeerMgr&					getPeerMgr( void )											{ return m_PeerMgr; }
 	NearbyMgr&					getNearbyMgr( void )										{ return m_NearbyMgr; }
+	void						setLocalIpAddress( std::string lclIp )						{ m_strLocalIpAddr = lclIp; }
 	std::string					getLocalIpAddress( void )									{ return m_strLocalIpAddr; }
 	void						setNetworkKey( const char * networkName )					{ m_NetworkName = networkName; }
 	const char *				getNetworkKey( void )										{ return m_NetworkName.c_str(); }

@@ -1126,7 +1126,7 @@ uint16_t InetAddress::setIp( struct sockaddr& ipAddr )
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "InetAddress::setIp unknown family\n" );
+		LogMsg( LOG_ERROR, "InetAddress::setIp unknown family" );
 		return 0;
 	}
 }

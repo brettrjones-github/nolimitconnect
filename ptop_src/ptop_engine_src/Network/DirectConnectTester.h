@@ -40,14 +40,14 @@ public:
 		if( this != &rhs )
 		{
 			m_MyIpAddr			= rhs.m_MyIpAddr;
-			m_eAppErr			= rhs.m_eAppErr;
+			m_eNetCmdErr		= rhs.m_eNetCmdErr;
 		}
 		return *this;
 	}
 
-	bool						getCanDirectConnect( void )							{ return ( eAppErrNone == m_eAppErr) ? true : false ; }
+	bool						getCanDirectConnect( void )							{ return ( eNetCmdErrorNone == m_eNetCmdErr ) ? true : false ; }
 
-	ENetCmdError				m_eAppErr{ eNetCmdErrorUnknown };
+	ENetCmdError				m_eNetCmdErr{ eNetCmdErrorUnknown };
 	std::string					m_MyIpAddr{ "" };
 };
 

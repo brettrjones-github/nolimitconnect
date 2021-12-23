@@ -40,7 +40,7 @@ void NetworkStateTestConnection::runNetworkState( void )
 	if( false == m_NetworkStateMachine.shouldAbort() )
 	{
 		m_DirectConnectTester.testCanDirectConnect();
-		if( ( eAppErrNone != testResults.m_eAppErr )
+		if( ( eNetCmdErrorNone != testResults.m_eNetCmdErr )
 			|| ( false == testResults.getCanDirectConnect() ) )
 		{
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( testResults.m_MyIpAddr, true );

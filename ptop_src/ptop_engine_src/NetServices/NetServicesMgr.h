@@ -66,7 +66,7 @@ public:
 	void						netServicesStartup( void );
 	void						netServicesShutdown( void );
 
-	void						testIsMyPortOpen( void );
+	void						addNetActionIsMyPortOpenToQueue( void );
 	void						announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction = eHostActionAnnounce );
 	void						performRandomConnect( void );
 

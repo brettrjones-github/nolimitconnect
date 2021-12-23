@@ -40,6 +40,27 @@ VxSktConnectSimple::~VxSktConnectSimple()
 }
 
 //============================================================================
+std::string VxSktConnectSimple::getLocalIpAddress( void )
+{ 
+	std::string lclIp = m_LclIp.toStdString();
+	if( lclIp.empty() )
+	{
+		lclIp = "";
+		if( INVALID_SOCKET != m_Socket )
+		{
+			uint16_t retPort{ 0 };
+			lclIp = VxGetLclIpAddress( m_Socket, &retPort );
+			if( retPort && !lclIp.empty() )
+			{
+				m_LclIp.setIpAndPort( lclIp.c_str(), retPort );
+			}
+		}
+	}
+
+	return lclIp;
+}
+
+//============================================================================
 bool VxSktConnectSimple::isConnected( void )
 {
 	if( INVALID_SOCKET == m_Socket )

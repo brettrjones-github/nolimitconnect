@@ -30,7 +30,7 @@ PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, V
 //============================================================================
 void PluginNetServices::testIsMyPortOpen( void )
 {
-	m_NetServicesMgr.testIsMyPortOpen();
+	m_NetServicesMgr.addNetActionIsMyPortOpenToQueue();
 }
 
 //============================================================================
