@@ -137,6 +137,8 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_GenerateGuidButton, SIGNAL( clicked() ), this, SLOT( slotGenerateGuidButtonClicked() ) );
     connect( ui.m_PurgeCacheButton, SIGNAL( clicked() ), this, SLOT( slotPurgeCacheButtonClicked() ) );
     connect( ui.m_ListActionButton, SIGNAL( clicked() ), this, SLOT( slotListActionButtonClicked() ) );
+    connect( ui.m_HostClientTestButton, SIGNAL( clicked() ), this, SLOT( slotHostClientTestButtonClicked() ) );
+    connect( ui.m_HostServiceTestButton, SIGNAL( clicked() ), this, SLOT( slotHostServiceTestButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -488,4 +490,16 @@ void AppletTestAndDebug::slotListActionButtonClicked( void )
     {
         getFromGuiInterface().fromGuiListAction( eListActionJoinedClient );
     }
+}
+
+//============================================================================
+void AppletTestAndDebug::slotHostClientTestButtonClicked( void )
+{
+    m_MyApp.launchApplet( eAppletTestHostClient, getContentFrameOfOppositePageFrame() );
+}
+
+//============================================================================
+void AppletTestAndDebug::slotHostServiceTestButtonClicked( void )
+{
+    m_MyApp.launchApplet( eAppletTestHostService, getContentFrameOfOppositePageFrame() );
 }

@@ -65,21 +65,6 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>2</number>
-      </property>
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="topMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
       <item>
        <widget class="QPushButton" name="gotoWebsiteButton">
         <property name="sizePolicy">
@@ -198,6 +183,24 @@
          <widget class="QPushButton" name="m_PurgeCacheButton">
           <property name="text">
            <string>Purge Cache</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QPushButton" name="m_HostClientTestButton">
+          <property name="text">
+           <string>Test Hosts As Client</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_HostServiceTestButton">
+          <property name="text">
+           <string>Test Host Service</string>
           </property>
          </widget>
         </item>

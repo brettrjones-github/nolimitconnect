@@ -108,7 +108,7 @@ public slots:
     void                        displayCameraError();
 
     void                        updateCameraDevice( QAction *action );
-;
+
     void                        updateCaptureMode( int );
     void                        setExposureCompensation( int index );
 

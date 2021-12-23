@@ -158,6 +158,9 @@
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
 
 #define OBJNAME_APPLET_TEST_AND_DEBUG				    "AppletTestAndDebug"
+#define OBJNAME_APPLET_TEST_HOST_CLIENT					"AppletTestHostClient"
+#define OBJNAME_APPLET_TEST_HOST_SERVICE				"AppletTestHostService"
+
 #define OBJNAME_APPLET_THEME							"AppletTheme"
 #define OBJNAME_APPLET_USER_IDENTITY				    "AppletUserIdentity"
 

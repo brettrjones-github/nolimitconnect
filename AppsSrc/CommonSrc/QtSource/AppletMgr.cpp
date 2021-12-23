@@ -118,6 +118,9 @@
 #include "AppletSnapshot.h"
 
 #include "AppletTestAndDebug.h"
+#include "AppletTestHostClient.h"
+#include "AppletTestHostService.h"
+
 #include "AppletTheme.h"
 #include "AppletUploads.h"
 #include "AppletUserIdentity.h"
@@ -329,6 +332,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
 
     case eAppletTestAndDebug:               appletDialog = new AppletTestAndDebug( m_MyApp, parent ); break;
+    case eAppletTestHostClient:             appletDialog = new AppletTestHostClient( m_MyApp, parent ); break;
+    case eAppletTestHostService:            appletDialog = new AppletTestHostService( m_MyApp, parent ); break;
+
     case eAppletTheme:                      appletDialog = new AppletTheme( m_MyApp, parent ); break;
     case eAppletUnknown:                    m_MyApp.errMessageBox( appletMissingTitle, QObject::tr("Unknown Or Not Implemented") ); return nullptr;
     case eAppletUserIdentity:               appletDialog = new AppletUserIdentity( m_MyApp, parent ); break;

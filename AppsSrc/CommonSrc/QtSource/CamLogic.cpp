@@ -49,7 +49,6 @@ CamLogic::CamLogic( AppCommon& myApp )
     connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
 
     m_VideoSinkGrabber.setFps( 15 );
-    connect( &m_VideoSinkGrabber, SIGNAL( signalSinkFrameAvailable( QImage& ) ), this, SLOT( slotSinkFrameAvailable( QImage& ) ) );
 }
 
 //============================================================================
@@ -355,7 +354,7 @@ void CamLogic::processCapturedImage( int requestId, const QImage& imgIn )
     }
     else 
     {
-        QImage img = imgIn.size() == m_DesiredFrameSize ? imgIn : img.scaled( m_DesiredFrameSize );
+        QImage img = imgIn.size() == m_DesiredFrameSize ? imgIn : imgIn.scaled( m_DesiredFrameSize );
 
         if( img.format() == QImage::Format_RGB888 )
         {

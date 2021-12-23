@@ -33,9 +33,6 @@ public:
 
     std::list<std::pair<QImage, int>> m_availFrames;
 
-signals:
-    void                        signalSinkFrameAvailable( int frameNum, QImage& frameImage );
-
 protected slots:
     void                        slotVideoFrameChanged( const QVideoFrame& frame );
 

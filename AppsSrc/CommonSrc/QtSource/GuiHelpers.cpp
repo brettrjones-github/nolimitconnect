@@ -1597,25 +1597,39 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
 }
 
 //============================================================================
-// Saved as example code
-int convertToRgb()
+void GuiHelpers::fillHostType( QComboBox* comboBox, bool excludeConnectTestAndPeer )
 {
-    QImage image( 100, 100, QImage::Format_RGB888 );
-    image.fill( QColor( 50, 100, 200 ) );
-
-    if( image.format() == QImage::Format_Invalid )
-        return EXIT_FAILURE;
-    QVideoFrameFormat video_frame_format( image.size(), QVideoFrameFormat::Format_RGBX8888 );
-    QImage rgbx = image.convertToFormat( QVideoFrameFormat::imageFormatFromPixelFormat( video_frame_format.pixelFormat() ) );
-    QVideoFrame video_frame( video_frame_format );
-    if( !video_frame.isValid() || !video_frame.map( QVideoFrame::WriteOnly ) ) {
-        qWarning() << "QVideoFrame is not valid or not writable";
-        return EXIT_FAILURE;
+    comboBox->addItem( GuiParams::describeHostType( eHostTypeGroup ) );
+    comboBox->addItem( GuiParams::describeHostType( eHostTypeChatRoom ) );
+    comboBox->addItem( GuiParams::describeHostType( eHostTypeRandomConnect ) );
+    comboBox->addItem( GuiParams::describeHostType( eHostTypeNetwork ) );
+    if( !excludeConnectTestAndPeer )
+    {
+        comboBox->addItem( GuiParams::describeHostType( eHostTypePeerUser ) );
+        comboBox->addItem( GuiParams::describeHostType( eHostTypeConnectTest ) );
     }
-    int plane = 0;
-    std::memcpy( video_frame.bits( plane ), rgbx.bits(), video_frame.mappedBytes( plane ) );
-    video_frame.unmap();
+}
 
-    qDebug() << video_frame << rgbx.format();
-    return 0;
+//============================================================================
+EHostType GuiHelpers::comboIdxToHostType( int comboIdx )
+{
+    EHostType hostType{ eHostTypeUnknown };
+    switch( comboIdx )
+    {
+    case 0:
+        return eHostTypeGroup;
+    case 1:
+        return eHostTypeChatRoom;
+    case 2:
+        return eHostTypeRandomConnect;
+    case 3:
+        return eHostTypeNetwork;
+    case 4:
+        return eHostTypePeerUser;
+    case 5:
+        return eHostTypeConnectTest;
+
+    default:
+        return eHostTypeUnknown;
+    }
 }

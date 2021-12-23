@@ -135,5 +135,8 @@ public:
     static uint64_t             saveToPngFile( QPixmap& pixmap, QString& fileName ); // returns file length
 
     static bool                 checkUserPermission( QString permissionName ); // returns false if user denies permission to use android hardware
+
+    static void                 fillHostType( QComboBox* comboBox, bool excludeConnectTestAndPeer = false );
+    static EHostType            comboIdxToHostType( int comboIdx );
 };
 

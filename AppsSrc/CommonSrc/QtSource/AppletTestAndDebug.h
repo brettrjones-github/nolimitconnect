@@ -60,6 +60,8 @@ protected slots:
     void                        slotGenerateGuidButtonClicked( void );
     void                        slotPurgeCacheButtonClicked( void );
     void                        slotListActionButtonClicked( void );
+    void                        slotHostClientTestButtonClicked( void );
+    void                        slotHostServiceTestButtonClicked( void );
 
     void                        slotNewUrlSelected( const QString &newUrl );
 

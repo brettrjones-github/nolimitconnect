@@ -92,6 +92,9 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletScanWebCam:	                return eMyIconSearchWebCam;
 
     case eAppletTestAndDebug:	            return eMyIconDebug;
+    case eAppletTestHostClient:	            return eMyIconDebug;
+    case eAppletTestHostService:	        return eMyIconDebug;
+
     case eAppletTheme:					    return eMyIconTheme;
 
 	case ePluginAppletCamProvider:		    return eMyIconCamStreamProvider;
@@ -231,6 +234,8 @@ QString DescribeApplet( EApplet applet )
     case eAppletPersonalRecorder:		    return QObject::tr( "Personal Notes And Records" );
 
     case eAppletTestAndDebug:			    return QObject::tr( "Test And Debug" );
+    case eAppletTestHostClient:			    return QObject::tr( "Test Host Client" );
+    case eAppletTestHostService:			return QObject::tr( "Test Host Service" );
 	case eAppletTheme:					    return QObject::tr( "Theme" );
     case eAppletUserIdentity:			    return QObject::tr( "User Identity" );
 

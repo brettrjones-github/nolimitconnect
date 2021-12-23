@@ -264,6 +264,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareServicesPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSnapshot.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestAndDebug.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestBase.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestHostClient.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestHostService.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTheme.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletUploads.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletUserIdentity.cpp" />
@@ -509,6 +512,9 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHelpNetSignalBars.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostSelect.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletGalleryEmoticon.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestHostClient.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestHostService.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestBase.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -931,6 +937,8 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletShareOfferList.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSnapshot.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestAndDebug.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestHostClient.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestHostService.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTheme.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletUploads.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletUserIdentity.ui" />
@@ -997,7 +1005,8 @@
     <None Include="..\..\..\..\bin-Android\gradle.properties" />
     <None Include="..\..\..\..\bin-Android\gradlew" />
     <None Include="..\..\..\..\bin-Android\gradlew.bat" />
-    <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
+    <None Include="..\..\..\..\NoLimitAppLib.pri" />
+    <None Include="..\..\..\..\NoLimit_App.pro" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\CommonSrc\QtSource\NoLimitConnect.rc" />

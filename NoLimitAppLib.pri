@@ -165,6 +165,9 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletTestAndDebug.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestBase.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestHostClient.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestHostService.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTheme.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletUploads.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletUserIdentity.h \
@@ -514,6 +517,9 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletTestAndDebug.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestBase.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestHostClient.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestHostService.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTheme.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletUploads.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletUserIdentity.cpp \
@@ -809,6 +815,8 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletShareOfferList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSnapshot.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletTestAndDebug.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostClient.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostService.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTheme.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletUploads.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletUserIdentity.ui \
