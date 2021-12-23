@@ -1597,16 +1597,17 @@ bool GuiHelpers::checkUserPermission( QString permissionName ) // returns false 
 }
 
 //============================================================================
-void GuiHelpers::fillHostType( QComboBox* comboBox, bool excludeConnectTestAndPeer )
+void GuiHelpers::fillHostType( QComboBox* comboBox, bool excludePeerHost )
 {
     comboBox->addItem( GuiParams::describeHostType( eHostTypeGroup ) );
     comboBox->addItem( GuiParams::describeHostType( eHostTypeChatRoom ) );
     comboBox->addItem( GuiParams::describeHostType( eHostTypeRandomConnect ) );
     comboBox->addItem( GuiParams::describeHostType( eHostTypeNetwork ) );
-    if( !excludeConnectTestAndPeer )
+    comboBox->addItem( GuiParams::describeHostType( eHostTypeConnectTest ) );
+
+    if( !excludePeerHost )
     {
-        comboBox->addItem( GuiParams::describeHostType( eHostTypePeerUser ) );
-        comboBox->addItem( GuiParams::describeHostType( eHostTypeConnectTest ) );
+        comboBox->addItem( GuiParams::describeHostType( eHostTypePeerUser ) );   
     }
 }
 
@@ -1625,9 +1626,9 @@ EHostType GuiHelpers::comboIdxToHostType( int comboIdx )
     case 3:
         return eHostTypeNetwork;
     case 4:
-        return eHostTypePeerUser;
-    case 5:
         return eHostTypeConnectTest;
+    case 5:
+        return eHostTypePeerUser;
 
     default:
         return eHostTypeUnknown;

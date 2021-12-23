@@ -611,6 +611,9 @@ public:
     /// return number of items currently in list
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType );
     virtual void				fromGuiListAction( EListAction listAction );
+    virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType );
+    virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl );
+    virtual std::string			fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId );
   
     //============================================================================
     //=== utilities ===//

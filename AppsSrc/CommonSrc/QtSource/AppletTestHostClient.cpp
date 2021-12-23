@@ -34,6 +34,11 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	connect( ui.m_HostUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostUrlSelectionChange( int ) ) );
 	connect( ui.m_QueryButton, SIGNAL( clicked() ), this, SLOT( slotQueryButtonClicked() ) );
 
+	if( ui.m_HostTypeComboBox->count() )
+	{
+		slotHostTypeComboBoxSelectionChange( 0 );
+	}
+
 	m_MyApp.activityStateChange( this, true );
 }
 
@@ -74,5 +79,25 @@ void AppletTestHostClient::updateHostType( EHostType hostType )
 		return;
 	}
 
+	ui.m_HostUrlComboBox->clear();
+	std::string defaultUrlStr = m_MyApp.getFromGuiInterface().fromGuiQueryDefaultUrl( hostType );
+	if( !defaultUrlStr.empty() )
+	{
+		QString defaultUrl;
+		VxGUID onlineId;
+		std::string userName = m_MyApp.getFromGuiInterface().fromGuiQueryUrlUserName( defaultUrlStr, onlineId );
+		if( !userName.empty() )
+		{
+			defaultUrl = userName.c_str();
+			defaultUrl += " - ";
+			defaultUrl += defaultUrlStr.c_str();
+		}
+		else
+		{
+			defaultUrl = defaultUrlStr.c_str();
+		}
+
+		ui.m_HostUrlComboBox->addItem( defaultUrl );
+	}
 
 }

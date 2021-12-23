@@ -791,3 +791,20 @@ void IGoTv::fromGuiListAction( EListAction listAction )
     getPtoP().fromGuiListAction( listAction );
 }
 
+//============================================================================
+std::string IGoTv::fromGuiQueryDefaultUrl( EHostType hostType )
+{
+    return getPtoP().fromGuiQueryDefaultUrl( hostType );
+}
+
+//============================================================================
+bool IGoTv::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
+{
+    return getPtoP().fromGuiSetDefaultUrl( hostType, hostUrl );
+}
+
+//============================================================================
+std::string	IGoTv::fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId )
+{
+    return getPtoP().fromGuiQueryUrlUserName( url, onlineId );
+}

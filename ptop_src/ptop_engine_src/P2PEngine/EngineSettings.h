@@ -52,8 +52,6 @@ public:
 	void						setNetworkHostUrl( std::string& strWebsiteUrl );
 	void						getNetworkHostUrl( std::string& strWebsiteUrl );
 
-    //void						setExternalIpAddr( std::string& externIp );
-    //void						getExternalIpAddr( std::string& externIp );
     void						setUserSpecifiedExternIpAddr( std::string& externIp );
     void						getUserSpecifiedExternIpAddr( std::string& externIp );
     std::string                 getUserSpecifiedExternIpAddr( void );
@@ -115,6 +113,9 @@ public:
 
 	void						setLastFirewallPort( uint16_t u16IpPort );
 	uint16_t					getLastFirewallPort( void );
+
+	std::string					fromGuiQueryDefaultUrl( EHostType hostType );
+	bool    					fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl );
 
 private:
 	bool						m_Initialized;

@@ -395,6 +395,9 @@ public:
     virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
     virtual int					fromGuiGetJoinedListCount( EPluginType pluginType ) override;
     virtual void                fromGuiListAction( EListAction listAction ) override;
+    virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType ) override;
+    virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl ) override;
+    virtual std::string			fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
 

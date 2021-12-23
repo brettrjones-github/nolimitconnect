@@ -714,4 +714,70 @@ uint16_t EngineSettings::getLastFirewallPort( void )
 	return u16IpPort;
 }
 
+//============================================================================
+std::string EngineSettings::fromGuiQueryDefaultUrl( EHostType hostType )
+{
+    std::string hostUrl( "" );
+    switch( hostType )
+    {
+    case eHostTypeNetwork:
+        getNetworkHostUrl( hostUrl );
+        break;
+    case eHostTypeConnectTest:
+        getConnectTestUrl( hostUrl );
+        break;
+    case eHostTypeGroup:
+        getGroupHostUrl( hostUrl );
+        break;
+    case eHostTypeChatRoom:
+        getChatRoomHostUrl( hostUrl );
+        break;
+    case eHostTypeRandomConnect:
+        getRandomConnectUrl( hostUrl );
+        break;
 
+    default:
+        break;
+    }
+
+    return hostUrl;
+}
+
+//============================================================================
+bool EngineSettings::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
+{
+    if( hostUrl.empty() )
+    {
+        return false;
+    }
+
+    bool result{ false };
+    switch( hostType )
+    {
+    case eHostTypeNetwork:
+        setNetworkHostUrl( hostUrl );
+        result = true;
+        break;
+    case eHostTypeConnectTest:
+        setConnectTestUrl( hostUrl );
+        result = true;
+        break;
+    case eHostTypeGroup:
+        setGroupHostUrl( hostUrl );
+        result = true;
+        break;
+    case eHostTypeChatRoom:
+        setChatRoomHostUrl( hostUrl );
+        result = true;
+        break;
+    case eHostTypeRandomConnect:
+        setRandomConnectUrl( hostUrl );
+        result = true;
+        break;
+
+    default:
+        break;
+    }
+
+    return result;
+}

@@ -1606,3 +1606,33 @@ void P2PEngine::fromGuiListAction( EListAction listAction )
 {
 	m_PluginMgr.fromGuiListAction( listAction );
 }
+
+//============================================================================
+std::string P2PEngine::fromGuiQueryDefaultUrl( EHostType hostType )
+{
+	std::string defaultUrl = getEngineSettings().fromGuiQueryDefaultUrl( hostType );
+	return getUrlMgr().resolveUrl( defaultUrl );
+}
+
+//============================================================================
+std::string P2PEngine::fromGuiQueryUrlUserName( std::string& urlIn, VxGUID& onlineId )
+{
+	std::string userName( "" );
+	getUrlMgr().lookupOnlineId( urlIn, onlineId );
+	if( onlineId.isVxGUIDValid() )
+	{
+		BigListInfo* bigListInfo = m_BigListMgr.findBigListInfo( onlineId );
+		if( bigListInfo )
+		{
+			userName = bigListInfo->getOnlineName();
+		}
+	}
+
+	return userName;
+}
+
+//============================================================================
+bool P2PEngine::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
+{
+	return getEngineSettings().fromGuiSetDefaultUrl( hostType, hostUrl );
+}

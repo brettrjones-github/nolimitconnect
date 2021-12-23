@@ -136,7 +136,7 @@ public:
 
     static bool                 checkUserPermission( QString permissionName ); // returns false if user denies permission to use android hardware
 
-    static void                 fillHostType( QComboBox* comboBox, bool excludeConnectTestAndPeer = false );
+    static void                 fillHostType( QComboBox* comboBox, bool excludePeerHost = true );
     static EHostType            comboIdxToHostType( int comboIdx );
 };
 
