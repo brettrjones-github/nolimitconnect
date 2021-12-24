@@ -65,13 +65,13 @@ RCODE PluginConnectionTestClient::internalHandlePtopConnection( VxSktBase * sktB
 {
     switch( netServiceHdr.m_NetCmdType )
     {
-    case eNetCmdAboutMePage:
-        LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: invalid cmd  eNetCmdAboutMePage\n" );
-        return -1;
+    //case eNetCmdAboutMePage:
+    //    LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: invalid cmd  eNetCmdAboutMePage\n" );
+    //    return -1;
 
-    case eNetCmdStoryboardPage:
-        LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: invalid cmd  eNetCmdStoryboardPage\n" );
-        return -1;
+    //case eNetCmdStoryboardPage:
+    //    LogMsg( LOG_ERROR, "PluginNetServices::handlePtopConnection: invalid cmd  eNetCmdStoryboardPage\n" );
+    //    return -1;
 
     case eNetCmdPing:
         //LogMsg( LOG_INFO, "PluginNetServices::handlePtopConnection: eNetCmdPing\n" );
@@ -87,11 +87,11 @@ RCODE PluginConnectionTestClient::internalHandlePtopConnection( VxSktBase * sktB
     case eNetCmdIsMyPortOpenReply:
         return m_NetServicesMgr.handleNetCmdIsMyPortOpenReply( sktBase, netServiceHdr );
 
-    case eNetCmdHostReq:
-        return m_NetServicesMgr.handleNetCmdHostReq( sktBase, netServiceHdr );
+    //case eNetCmdHostReq:
+    //    return m_NetServicesMgr.handleNetCmdHostReq( sktBase, netServiceHdr );
 
-    case eNetCmdHostReply:
-        return m_NetServicesMgr.handleNetCmdHostReply( sktBase, netServiceHdr );
+    //case eNetCmdHostReply:
+    //    return m_NetServicesMgr.handleNetCmdHostReply( sktBase, netServiceHdr );
 
     case eNetCmdUnknown:
     default:

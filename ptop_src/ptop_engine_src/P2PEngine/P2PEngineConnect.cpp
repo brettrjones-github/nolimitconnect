@@ -45,7 +45,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 	{
 		if( eConnectReasonRelaySearch == connectReason )
 		{
-			m_NetConnector.handlePossibleRelayConnect( connectInfo, *ppoRetSkt, retIsNewConnection, connectReason );
+			//m_NetConnector.handlePossibleRelayConnect( connectInfo, *ppoRetSkt, retIsNewConnection, connectReason );
 			return true;
 		}
 		else if( retIsNewConnection )

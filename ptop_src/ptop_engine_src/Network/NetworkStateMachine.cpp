@@ -17,11 +17,9 @@
 #include "NetworkStateLost.h"
 #include "NetworkStateAvail.h"
 #include "NetworkStateTestConnection.h"
-#include "NetworkStateRelaySearch.h"
-#include "NetworkStateAnnounce.h"
 #include "NetworkStateOnlineDirect.h"
 #include "NetworkStateOnlineThroughRelay.h"
-#include "NetworkStateGetRelayList.h"
+#include "NetworkStateWaitForRelay.h"
 
 #include "NetworkEventBase.h"
 #include "NetworkEventAvail.h"
@@ -121,11 +119,9 @@ void NetworkStateMachine::stateMachineStartup( void )
 	m_NetworkStateList.push_back( m_NetworkStateLost );
 	m_NetworkStateList.push_back( new NetworkStateAvail( *this ) );
 	m_NetworkStateList.push_back( new NetworkStateTestConnection( *this ) );
-	m_NetworkStateList.push_back( new NetworkStateRelaySearch( *this ) );
-	m_NetworkStateList.push_back( new NetworkStateAnnounce( *this ) );
 	m_NetworkStateList.push_back( new NetworkStateOnlineDirect( *this ) );
+	m_NetworkStateList.push_back( new NetworkStateWaitForRelay( *this ) );
 	m_NetworkStateList.push_back( new NetworkStateOnlineThroughRelay( *this ) );
-	m_NetworkStateList.push_back( new NetworkStateGetRelayList( *this ) );
 	m_StateMachineInitialized = true;
 
     m_NetworkStateThread.startThread( (VX_THREAD_FUNCTION_T)NetworkStateMachineThreadFunc, this, "NetworkStateMachineThread" );
@@ -257,6 +253,10 @@ void NetworkStateMachine::changeNetworkState( ENetworkStateType eNetworkStateTyp
 		m_NetworkStateMutex.lock();
 		m_CurNetworkState = findNetworkState( eNetworkStateType );
 		m_NetworkStateMutex.unlock();
+		if( !m_CurNetworkState )
+		{
+			LogMsg( LOG_FATAL, "NULL NetworkState %s to %s", DescribeNetworkState( curNetworkStateType ), DescribeNetworkState( eNetworkStateType ) );
+		}
 	}
 }
 
@@ -748,8 +748,8 @@ void NetworkStateMachine::onOncePerHour( void )
 	//	}
 	//}
 
-	if( isP2POnline() && ( false == m_Engine.getHasHostService( eHostServiceNetworkHost ) ) )
-	{
-		m_NetServicesMgr.announceToHost( getHostIp(), getHostPort() );
-	}
+	//if( isP2POnline() && ( false == m_Engine.getHasHostService( eHostServiceNetworkHost ) ) )
+	//{
+	//	m_NetServicesMgr.announceToHost( getHostIp(), getHostPort() );
+	//}
 }

@@ -65,8 +65,8 @@ public:
 
 	bool						getShouldRequestTop10( void );
 
-	void						handleAnnounceResults( HostList * anchorList, EConnectReason connectReason = eConnectReasonAnnouncePing );
-	void						handleRandomConnectResults( HostList * anchorList );
+	//void						handleAnnounceResults( HostList * anchorList, EConnectReason connectReason = eConnectReasonAnnouncePing );
+	//void						handleRandomConnectResults( HostList * anchorList );
 
 	void						doNetConnectionsThread( void );
 	void						doStayConnectedThread( void );
@@ -78,10 +78,10 @@ public:
 	void						addConnectRequestToQue( VxConnectInfo& connectInfo, EConnectReason connectReason = eConnectReasonStayConnected, bool addToHeadOfQue = false, bool replaceExisting = true );
 
 	void						handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );
-	void						handlePossibleRelayConnect(	VxConnectInfo&		connectInfo, 
-															VxSktBase *			sktBase,
-															bool				retIsNewConnection,
-															EConnectReason		connectReason );
+	//void						handlePossibleRelayConnect(	VxConnectInfo&		connectInfo, 
+	//														VxSktBase *			sktBase,
+	//														bool				retIsNewConnection,
+	//														EConnectReason		connectReason );
 
 protected:
 	bool						connectUsingTcp(	VxConnectInfo&		connectInfo, 

@@ -770,7 +770,7 @@ protected:
     EFriendViewType				m_eFriendView{ eFriendViewEverybody };
 	unsigned int				m_iCurPreferredRelayConnectIdx{ 0 };
 	VxGUID						m_NextFileInstance;
-    int64_t						m_LastTimeAnnounceFromContactListCalled{ 0 };
+   // int64_t						m_LastTimeAnnounceFromContactListCalled{ 0 };
     bool						m_AppStartupCalled{ false };
 	bool						m_AppIsPaused{ false };
 	bool						m_IsUserSpecificDirSet{ false };

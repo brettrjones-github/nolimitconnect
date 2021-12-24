@@ -24,7 +24,6 @@
 namespace
 {
     std::string 		DATABASE_NAME = "plugin_setting.db";
-    const int 			DATABASE_VERSION = 1;
 
     std::string 		TABLE_PLUGIN_SETTING = "plugin_setting";
 

@@ -131,15 +131,15 @@ void RcScan::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t
 
 	if( eScanTypeRandomConnect == eScanType )
 	{
-		m_Engine.getNetServicesMgr().performRandomConnect();
+		//m_Engine.getNetServicesMgr().performRandomConnect();
 		return;
 	}
 
 	// stop any previous scans
-	LogMsg( LOG_INFO, "** fromGuiStartScan stop prev scan\n");
+	LogMsg( LOG_INFO, "** fromGuiStartScan stop prev scan");
 	fromGuiStopScan( m_eScanType );
 
-	LogMsg( LOG_INFO, "** fromGuiStartScan begin\n");
+	LogMsg( LOG_INFO, "** fromGuiStartScan begin");
 	m_eScanType = eScanType;
 	m_s64LastActionTimeMs = GetGmtTimeMs();
 

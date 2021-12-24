@@ -16,10 +16,9 @@
 #include "NetConnector.h"
 #include <ptop_src/ptop_engine_src/Network/NetworkMgr.h>
 #include <ptop_src/ptop_engine_src/Network/NetworkStateMachine.h>
-#include <ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-#include <ptop_src/ptop_engine_src/HostMgr/HostList.h>
+//#include <ptop_src/ptop_engine_src/HostMgr/HostList.h>
 
 #include <ptop_src/ptop_engine_src/BigListLib/BigListLib.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
@@ -134,57 +133,57 @@ void NetConnector::stayConnectedShutdown( void )
 	m_StayConnectedThread.abortThreadRun( true );
 }
 
-//============================================================================
-void NetConnector::handleRandomConnectResults( HostList * anchorList )
-{
-	//handleAnnounceResults( anchorList, eConnectReasonRandomConnect );
-}
-
-//============================================================================
-void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason connectReason )
-{
-	if( 0 == anchorList->m_EntryCount )
-	{
-		LogMsg( LOG_INFO, "handleAnnounceResults: no entries from anchor\n" );
-	}
-
-	// the list is in time order.. do oldest to newest so newest replace oldest
-	//for( int i = anchorList->m_EntryCount - 1; i >= 0; --i )
-	for( int i = 0; i < anchorList->m_EntryCount; ++i )
-	{	
-		HostListEntry * entry = &anchorList->m_List[i];
-		if( entry->getMyOnlineId() == m_PktAnn.getMyOnlineId() )
-		{
-			// it is ourself
-			continue;
-		}
-
-		std::string onlineName = entry->getOnlineName();
-		if( ( onlineName == "nolimitconnect.net" ) 
-			|| ( onlineName == "nolimitconnect.com" ) )
-		{
-			// hack to exclude nolimitconnect anchor and connect servers.. TODO fix with some kind of settings instead
-			continue;
-		}
-
-		if( false == m_ConnectList.isContactConnected( entry->getMyOnlineId() ) )
-		{
-			ConnectRequest connectRequest( connectReason );
-			VxConnectInfo& connectInfo = connectRequest.getConnectInfo();
-			memcpy( (VxConnectIdent *)&connectInfo, (VxConnectIdent *)entry, sizeof( VxConnectIdent ) );
-
-			addConnectRequestToQue( connectRequest, false, false );
-		}
-		else 
-		{
-			if( eConnectReasonRandomConnectJoin == connectReason )
-			{
-				BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( entry->getMyOnlineId() );
-				m_Engine.getToGui().toGuiScanResultSuccess( eScanTypeRandomConnect, bigListInfo );
-			}
-		}
-	}
-}
+////============================================================================
+//void NetConnector::handleRandomConnectResults( HostList * anchorList )
+//{
+//	//handleAnnounceResults( anchorList, eConnectReasonRandomConnect );
+//}
+//
+////============================================================================
+//void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason connectReason )
+//{
+//	if( 0 == anchorList->m_EntryCount )
+//	{
+//		LogMsg( LOG_INFO, "handleAnnounceResults: no entries from anchor\n" );
+//	}
+//
+//	// the list is in time order.. do oldest to newest so newest replace oldest
+//	//for( int i = anchorList->m_EntryCount - 1; i >= 0; --i )
+//	for( int i = 0; i < anchorList->m_EntryCount; ++i )
+//	{	
+//		HostListEntry * entry = &anchorList->m_List[i];
+//		if( entry->getMyOnlineId() == m_PktAnn.getMyOnlineId() )
+//		{
+//			// it is ourself
+//			continue;
+//		}
+//
+//		std::string onlineName = entry->getOnlineName();
+//		if( ( onlineName == "nolimitconnect.net" ) 
+//			|| ( onlineName == "nolimitconnect.com" ) )
+//		{
+//			// hack to exclude nolimitconnect anchor and connect servers.. TODO fix with some kind of settings instead
+//			continue;
+//		}
+//
+//		if( false == m_ConnectList.isContactConnected( entry->getMyOnlineId() ) )
+//		{
+//			ConnectRequest connectRequest( connectReason );
+//			VxConnectInfo& connectInfo = connectRequest.getConnectInfo();
+//			memcpy( (VxConnectIdent *)&connectInfo, (VxConnectIdent *)entry, sizeof( VxConnectIdent ) );
+//
+//			addConnectRequestToQue( connectRequest, false, false );
+//		}
+//		else 
+//		{
+//			if( eConnectReasonRandomConnectJoin == connectReason )
+//			{
+//				BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( entry->getMyOnlineId() );
+//				m_Engine.getToGui().toGuiScanResultSuccess( eScanTypeRandomConnect, bigListInfo );
+//			}
+//		}
+//	}
+//}
 
 //============================================================================
 void NetConnector::addConnectRequestToQue( VxConnectInfo& connectInfo, EConnectReason connectReason, bool addToHeadOfQue, bool replaceExisting )
@@ -1005,29 +1004,29 @@ void NetConnector::handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * 
 	}
 }
 
-//============================================================================
-void NetConnector::handlePossibleRelayConnect(	VxConnectInfo&		connectInfo, 
-												VxSktBase *			sktBase,
-												bool				isNewConnection,
-												EConnectReason		connectReason )
-{
-	NetworkStateMachine& netStateMachine = m_Engine.getNetworkStateMachine();
-	netStateMachine.lockResources();
-	NetworkStateBase * netState = netStateMachine.getCurNetworkState();
-	netStateMachine.unlockResources();
-	if( eNetworkStateTypeRelaySearch == netState->getNetworkStateType() )
-	{
-		( ( NetworkStateRelaySearch *)netState )->handlePossibleRelayConnect(	connectInfo, 
-																				sktBase,
-																				isNewConnection,
-																				connectReason );
-	}
-	else
-	{
-		BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( connectInfo.getMyOnlineId() );
-		handleConnectSuccess( bigListInfo, sktBase, isNewConnection, connectReason );
-	}
-}
+////============================================================================
+//void NetConnector::handlePossibleRelayConnect(	VxConnectInfo&		connectInfo, 
+//												VxSktBase *			sktBase,
+//												bool				isNewConnection,
+//												EConnectReason		connectReason )
+//{
+//	NetworkStateMachine& netStateMachine = m_Engine.getNetworkStateMachine();
+//	netStateMachine.lockResources();
+//	NetworkStateBase * netState = netStateMachine.getCurNetworkState();
+//	netStateMachine.unlockResources();
+//	if( eNetworkStateTypeRelaySearch == netState->getNetworkStateType() )
+//	{
+//		( ( NetworkStateRelaySearch *)netState )->handlePossibleRelayConnect(	connectInfo, 
+//																				sktBase,
+//																				isNewConnection,
+//																				connectReason );
+//	}
+//	else
+//	{
+//		BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( connectInfo.getMyOnlineId() );
+//		handleConnectSuccess( bigListInfo, sktBase, isNewConnection, connectReason );
+//	}
+//}
 
 //============================================================================
 void NetConnector::closeIfAnnonymous( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo )

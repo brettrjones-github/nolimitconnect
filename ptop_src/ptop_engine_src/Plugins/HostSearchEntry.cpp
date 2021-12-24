@@ -18,7 +18,7 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
-#include <ptop_src/ptop_engine_src/HostMgr/HostedEntry.h>
+//#include <ptop_src/ptop_engine_src/HostMgr/HostedEntry.h>
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
@@ -98,14 +98,14 @@ bool HostSearchEntry::searchMatch( SearchParams& searchParams, std::string& sear
     return false;
 }
 
-//============================================================================
-void HostSearchEntry::toHostedEntry( HostedEntry& entry )
-{
-    entry.setConnectIdent( (const VxConnectIdent &)m_Ident );
-    BinaryBlob blob;
-    fillSearchReplyBlob( blob );
-    entry.setPluginSettingsBlob( blob );
-}
+////============================================================================
+//void HostSearchEntry::toHostedEntry( HostedEntry& entry )
+//{
+//    entry.setConnectIdent( (const VxConnectIdent &)m_Ident );
+//    BinaryBlob blob;
+//    fillSearchReplyBlob( blob );
+//    entry.setPluginSettingsBlob( blob );
+//}
 
 //============================================================================
 void HostSearchEntry::fillSearchReplyBlob( BinaryBlob& blob )

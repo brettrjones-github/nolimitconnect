@@ -36,7 +36,7 @@ public:
 
     void                        updateLastRxTime( void );
     bool                        searchMatch( SearchParams& searchParams, std::string& searchStr );
-    void                        toHostedEntry( HostedEntry& entry );
+    //void                        toHostedEntry( HostedEntry& entry );
     void                        fillSearchReplyBlob( BinaryBlob& blob );
 
     bool                        addToBlob( PktBlobEntry& entryBlob );

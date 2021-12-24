@@ -1338,11 +1338,11 @@ bool P2PEngine::fromGuiTestCmd(	ETestParam1		eTestParam1,
 		}
 		break;
 
-	case eTestParam1AnnounceNow:
-		{
-			m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
-		}
-		break;
+	//case eTestParam1AnnounceNow:
+	//	{
+	//		m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
+	//	}
+	//	break;
 
 	case eTestParamSoundDelayTest:
 		{

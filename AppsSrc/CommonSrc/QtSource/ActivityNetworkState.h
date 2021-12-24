@@ -44,7 +44,7 @@ protected:
 
 	void						showNoInternetHelp( void );
 	void						showDiscoverNetworkHelp( void );
-	void						showRelaySearchHelp( void );
+	void						showWaitForRelayHelp( void );
 	void						showDirectConnectMessage( void );
 	void						showRelayConnectedHelp( void );
     void						showHostNetworkError( void );

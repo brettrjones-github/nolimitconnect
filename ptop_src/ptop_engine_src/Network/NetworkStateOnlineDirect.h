@@ -23,9 +23,6 @@ public:
 
 	virtual void				enterNetworkState( void );
 	void						runNetworkState( void );
-
-protected:
-	//=== vars ===//
 };
 
 

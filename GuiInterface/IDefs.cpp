@@ -736,12 +736,9 @@ const char* DescribeNetAction( ENetActionType netAction )
     {
     case eNetActionIdle:
         return "eNetActionIdle";
-    case eNetActionAnnounce:
-        return "eNetActionAnnounce";
+
     case eNetActionIsPortOpen:
         return "eNetActionIsPortOpen";
-    case eNetActionRandomConnect:
-        return "eNetActionRandomConnect";
 
     default:
         return "UNKNOWN ENetActionType";

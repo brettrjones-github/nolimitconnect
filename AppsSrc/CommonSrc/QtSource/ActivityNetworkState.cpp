@@ -78,13 +78,10 @@ void ActivityNetworkState::slotNetworkStateChanged( ENetworkStateType eNetworkSt
 
 	case eNetworkStateTypeAvail:
 	case eNetworkStateTypeTestConnection:
-	case eNetworkStateTypeAnnounce:
 		showDiscoverNetworkHelp();
 		break;
-
-	case eNetworkStateTypeGetRelayList:
-	case eNetworkStateTypeRelaySearch:
-		showRelaySearchHelp();
+	case eNetworkStateTypeWaitForRelay:
+		showWaitForRelayHelp();
 		break;
 
 	case eNetworkStateTypeOnlineDirect:
@@ -136,14 +133,13 @@ void ActivityNetworkState::showDiscoverNetworkHelp( void )
 }
 
 //============================================================================
-void ActivityNetworkState::showRelaySearchHelp( void )
+void ActivityNetworkState::showWaitForRelayHelp( void )
 {
 	setHelpLine( 0, QObject::tr("Internet connected but incoming TCP Port is blocked. ") );
-	setHelpLine( 1, QObject::tr("This may be because UPNP is disable on the router or ") );
-	setHelpLine( 2, QObject::tr("your device has a firewall or anti-virus program that ") );
-	setHelpLine( 3, QObject::tr("blocks the TCP Port used by NoLimitConnect.  ") );
-	setHelpLine( 4, QObject::tr("NoLimitConnect is searching for another node to act as  ") );
-	setHelpLine( 5, QObject::tr("relay/proxy for this device. Check Website for more details ") );
+	setHelpLine( 1, QObject::tr("This may be because your device has a firewall or ") );
+	setHelpLine( 2, QObject::tr("anti-virus program that blocks the TCP Port used by NoLimitConnect. ") );
+	setHelpLine( 3, QObject::tr("NoLimitConnect is waiting for connection to a host that  ") );
+	setHelpLine( 4, QObject::tr("relay/proxy for this device. Check Website for more details ") );
 }
 
 //============================================================================

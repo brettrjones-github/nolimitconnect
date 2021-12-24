@@ -15,11 +15,8 @@
 
 #include "NetworkStateOnlineDirect.h"
 #include "NetworkStateMachine.h"
-#include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
-#include <ptop_src/ptop_engine_src/HostMgr/HostDb.h>
-#include <ptop_src/ptop_engine_src/HostMgr/HostList.h>
 
 //============================================================================
 NetworkStateOnlineDirect::NetworkStateOnlineDirect( NetworkStateMachine& stateMachine )
@@ -31,13 +28,6 @@ NetworkStateOnlineDirect::NetworkStateOnlineDirect( NetworkStateMachine& stateMa
 //============================================================================
 void NetworkStateOnlineDirect::enterNetworkState( void )
 {
-	// force update of ourself in anchor db in case we are being used as anchor
-	HostList			anchorListIn;
-	anchorListIn.addEntry( &m_Engine.getMyPktAnnounce() );
-	HostList			anchorListOut;
-
-	m_Engine.getNetServicesMgr().getNetServiceHost().getHostDb().handleAnnounce( anchorListIn, anchorListOut );
-
 	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeOnlineDirect );
 }
 
@@ -50,19 +40,9 @@ void NetworkStateOnlineDirect::runNetworkState( void )
 		if( m_PktAnn.requiresRelay() 
 			&& ( false == m_NetworkStateMachine.isRelayServiceConnected() ) )
 		{
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
 			return;
 		}
-		//else
-		//{
-		//	loopCnt++;
-		//	if( loopCnt >= ((1000 * 60 * 10) / 2000) )
-		//	{
-		//		// every 10 minutes refresh UPNP
-		//		loopCnt = 0;
-		//		m_NetworkStateMachine.startUpnpOpenPort();
-		//	}
-		//}
 
 		VxSleep( 2000 );
 	}

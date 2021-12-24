@@ -13,40 +13,40 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "NetworkStateOnlineThroughRelay.h"
+#include "NetworkStateWaitForRelay.h"
 #include "NetworkStateMachine.h"
-#include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 //============================================================================
-NetworkStateOnlineThroughRelay::NetworkStateOnlineThroughRelay( NetworkStateMachine& stateMachine )
-: NetworkStateBase( stateMachine )
+NetworkStateWaitForRelay::NetworkStateWaitForRelay( NetworkStateMachine& stateMachine )
+	: NetworkStateBase( stateMachine )
 {
-	setNetworkStateType( eNetworkStateTypeOnlineThroughRelay );
+	setNetworkStateType( eNetworkStateTypeWaitForRelay );
 }
 
 //============================================================================
-void NetworkStateOnlineThroughRelay::enterNetworkState( void )
+void NetworkStateWaitForRelay::enterNetworkState( void )
 {
-	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeOnlineThroughRelay );
+	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeWaitForRelay );
 }
 
 //============================================================================
-void NetworkStateOnlineThroughRelay::runNetworkState( void )
+void NetworkStateWaitForRelay::runNetworkState( void )
 {
 	while( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )
 	{
-		if( m_PktAnn.requiresRelay() 
-			&& ( false == m_NetworkStateMachine.isRelayServiceConnected() ) )
+		if( m_PktAnn.requiresRelay() &&  m_NetworkStateMachine.isRelayServiceConnected() )
 		{
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeOnlineThroughRelay );
 			return;
 		}
 
+		LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkStateWaitForRelay waiting for relay connect" );
 		VxSleep( 2000 );
 	}
 }
+
 
 
 

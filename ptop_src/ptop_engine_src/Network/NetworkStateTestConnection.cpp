@@ -45,12 +45,12 @@ void NetworkStateTestConnection::runNetworkState( void )
 		{
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( testResults.m_MyIpAddr, true );
 			m_Engine.getMyPktAnnounce().setRequiresRelay( true );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
 		}
 		else
 		{
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( testResults.m_MyIpAddr, testResults.getCanDirectConnect() ? false : true );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeOnlineDirect );
 		}
 	}
 }

@@ -181,9 +181,6 @@
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp">
       <Filter>Source Files\MediaProcessor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionAnnounce.cpp">
-      <Filter>Source Files\NetServices</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionBase.cpp">
       <Filter>Source Files\NetServices</Filter>
     </ClCompile>
@@ -226,16 +223,10 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkMgr.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateAnnounce.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateAvail.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateBase.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateGetRelayList.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateLost.cpp">
@@ -248,9 +239,6 @@
       <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateOnlineThroughRelay.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateRelaySearch.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.cpp">
@@ -520,21 +508,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayTests.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostDb.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\NetServices\NetActionRandomConnect.cpp">
-      <Filter>Source Files\NetServices</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\NetServices\NetServiceHost.cpp">
-      <Filter>Source Files\NetServices</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkMonitor\NetStatusAccum.cpp">
       <Filter>Source Files\NetworkMonitor</Filter>
     </ClCompile>
@@ -564,12 +537,6 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\NetworkTest\NetworkTestBase.cpp">
       <Filter>Source Files\NetworkTest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostDefs.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostConnectInterface.cpp">
-      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.cpp">
       <Filter>Source Files\Plugins</Filter>
@@ -628,12 +595,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginNetworkSearchList.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostList.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostListEntry.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostClientMgr.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -654,12 +615,6 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostSearchEntry.cpp">
       <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\HostedEntry.cpp">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.cpp">
-      <Filter>Source Files\HostMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\BlobXferMgr\BlobInfo.cpp">
       <Filter>Source Files\BlobXferMgr</Filter>
@@ -936,6 +891,9 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\UrlMgr\UrlMgr.cpp">
       <Filter>Source Files\UrlMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateWaitForRelay.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1240,9 +1198,6 @@
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\RawVideo.h">
       <Filter>Source Files\MediaProcessor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionAnnounce.h">
-      <Filter>Source Files\NetServices</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionBase.h">
       <Filter>Source Files\NetServices</Filter>
     </ClInclude>
@@ -1294,16 +1249,10 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkMgr.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateAnnounce.h">
-      <Filter>Source Files\Network</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateAvail.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateBase.h">
-      <Filter>Source Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateGetRelayList.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateLost.h">
@@ -1316,9 +1265,6 @@
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateOnlineThroughRelay.h">
-      <Filter>Source Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateRelaySearch.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateTestConnection.h">
@@ -1555,24 +1501,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostSettingBase.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\RandomConnectEntry.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostDb.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostDefs.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\NetServices\NetActionRandomConnect.h">
-      <Filter>Source Files\NetServices</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\NetServices\NetServiceHost.h">
-      <Filter>Source Files\NetServices</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkMonitor\NetStatusAccum.h">
       <Filter>Source Files\NetworkMonitor</Filter>
     </ClInclude>
@@ -1596,9 +1524,6 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\NetworkTest\NetworkTestBase.h">
       <Filter>Source Files\NetworkTest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostConnectInterface.h">
-      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.h">
       <Filter>Source Files\Plugins</Filter>
@@ -1657,12 +1582,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginNetworkSearchList.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostList.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostListEntry.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostBaseMgr.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -1683,12 +1602,6 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostSearchEntry.h">
       <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\HostedEntry.h">
-      <Filter>Source Files\HostMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostMgr\JoinedEntry.h">
-      <Filter>Source Files\HostMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\BlobXferMgr\BlobCallbackInterface.h">
       <Filter>Source Files\BlobXferMgr</Filter>
@@ -2023,6 +1936,9 @@
     <ClInclude Include="..\..\ptop_engine_src\UrlMgr\UrlMgr.h">
       <Filter>Source Files\UrlMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateWaitForRelay.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2108,9 +2024,6 @@
     </Filter>
     <Filter Include="Source Files\WebServer">
       <UniqueIdentifier>{caa85f20-2991-480c-8d7d-78d5db3ecf35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\HostMgr">
-      <UniqueIdentifier>{5d9a321a-319e-43d0-941b-9e189c002499}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\PluginSettings">
       <UniqueIdentifier>{79d61f45-dfd4-45b2-aff4-e88593f636a1}</UniqueIdentifier>

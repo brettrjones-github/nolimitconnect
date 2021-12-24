@@ -16,16 +16,12 @@
 
 #include "NetworkStateBase.h"
 
-class NetworkStateGetRelayList : public NetworkStateBase
+class NetworkStateWaitForRelay : public NetworkStateBase
 {
 public:
-	NetworkStateGetRelayList( NetworkStateMachine& stateMachine );
+	NetworkStateWaitForRelay( NetworkStateMachine& stateMachine );
 
-	void						enterNetworkState( void );
+	virtual void				enterNetworkState( void );
 	void						runNetworkState( void );
-
-protected:
-	//=== vars ===//
 };
-
 

@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "LogMgr.h"
 
 #include "ToGuiActivityInterface.h"
@@ -39,14 +38,7 @@
 #include "AppletMultiMessenger.h"
 #include "AppletUploads.h"
 
-//#include "ActivityWebCamClient.h"
-//#include "ActivityReplyFileOffer.h"
 #include "AppletPeerSessionFileOffer.h"
-
-//#include "ActivityToFriendTodGame.h"
-//#include "ActivityToFriendVoicePhone.h"
-//#include "ActivityToFriendVideoPhone.h"
-
 
 #include "GuiOfferSession.h"
 
@@ -493,15 +485,6 @@ void AppCommon::connectSignals( void )
 
 	//connect( //ui.m_RelayHelpButton, SIGNAL(clicked()),								this, SLOT(slotRelayHelpButtonClicked()));
 	connect( this, SIGNAL(signalSetRelayHelpButtonVisibility(bool)),				this, SLOT(slotSetRelayHelpButtonVisibility(bool)));
-
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List Everybody Except Ignored" ) );
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List Administrators" ) );
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List Friends And Guests" ) );
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List Anonymous Contacts" ) );
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List People I Ignore" ) );
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List My Preferred Relays" ) );
-	//ui.m_ListViewTypeComboBox->addItem( QObject::tr( "List All Possible Relays" ) );
-	//ui.m_RefreshListButton->setVisible( false );
 }
 
 //============================================================================
@@ -818,16 +801,6 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 	}
 }
 
-/*
-//============================================================================
-void AppCommon::slotRefreshListButtonClick( void )
-{
-	//ui.mainFriendList->clear();
-	//ui.mainFriendList->update();
-	//LogMsg( LOG_INFO, "AppCommon::slotRefreshListButtonClick count %d\n", //ui.mainFriendList->count() );
-	getEngine().fromGuiRefreshContactList( 500 );
-}*/
-
 //============================================================================
 void AppCommon::setCamCaptureRotation( uint32_t rot )
 { 
@@ -940,14 +913,6 @@ void AppCommon::toGuiLog( int logFlags, const char * pMsg )
     qDebug() << strMsg;
 #endif // TARGET_OS_WINDOWS
     emit signalLog( logFlags, strMsg );
-
-	//m_AppMutex.lock();
-	//m_AppErrLogQue.push_back( pMsg );
-	//if( m_DebugLogQue.size() > 500 )
-	//{
-	//	m_DebugLogQue.erase( m_DebugLogQue.begin() );
-	//}
-	//m_AppMutex.unlock();
 }
 
 //============================================================================
@@ -1079,9 +1044,7 @@ void AppCommon::slotNetworkStateChanged( ENetworkStateType eNetworkState )
 
 	case eNetworkStateTypeAvail:
 	case eNetworkStateTypeTestConnection:
-	case eNetworkStateTypeRelaySearch:
-	case eNetworkStateTypeAnnounce:
-	case eNetworkStateTypeGetRelayList:
+	case eNetworkStateTypeWaitForRelay:
 		//ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateDiscover ) );
 		break;
 

@@ -124,7 +124,7 @@ void NetworkStateAvail::runNetworkState( void )
 		else
 		{
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( externIp, false );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeOnlineDirect );
             if( IsLogEnabled( eLogNetworkState ) )
             {
                 LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Assume No Firewall User Extern IP %s", externIp.c_str() );
@@ -290,8 +290,9 @@ void NetworkStateAvail::runNetworkState( void )
 
 	if( m_DirectConnectTester.isTestResultCanDirectConnect() )
 	{
+        // port is open
 		std::string availMsg;
-		StdStringFormat( availMsg, "IP %s\n", directConnectTestResults.m_MyIpAddr.c_str() );
+		StdStringFormat( availMsg, "IP %s", directConnectTestResults.m_MyIpAddr.c_str() );
         LogModule( eLogNetworkState, LOG_STATUS, "eNetworkStateTypeAvail %s %3.3f", availMsg.c_str(), availTimer.elapsedSec() );
 
         m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, availMsg.c_str() );
@@ -300,38 +301,39 @@ void NetworkStateAvail::runNetworkState( void )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState eFirewallTestAssumeFirewalled %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
 		}
 		else
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState announce with direct connect %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
 			m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeOnlineDirect );
             canDirectConnect = true;
 		}
 	}
 	else
 	{
+        // port is closed
 		if( eFirewallTestUrlConnectionTest == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState relay search %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
 		}
 		else if( eFirewallTestAssumeNoFirewall == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState assume no firewall %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
 			m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeOnlineDirect );
             canDirectConnect = true;
 		}
 		else if( eFirewallTestAssumeFirewalled == firewallTestType )
 		{
             LogModule( eLogNetworkState, LOG_STATUS, "NetworkStateAvail::runNetworkState assume firewall %3.3f", availTimer.elapsedSec() );
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
-			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
+			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
 		}
 		else
 		{

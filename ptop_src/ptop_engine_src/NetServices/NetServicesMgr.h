@@ -16,7 +16,6 @@
 
 #include "NetServiceDefs.h"
 #include "NetServiceUtils.h"
-#include "NetServiceHost.h"
 
 #include "NetActionIdle.h"
 
@@ -58,7 +57,6 @@ public:
 	P2PEngine&					getEngine( void )			{ return m_Engine; }
     EngineSettings&				getEngineSettings( void )	{ return m_EngineSettings; }
 	NetServiceUtils&			getNetUtils( void )			{ return m_NetServiceUtils; }
-	NetServiceHost&			    getNetServiceHost( void )	{ return m_NetServiceHost; }
 
     std::string                 getNetworkKey( void );
 	VxGUID&						getMyOnlineId( void );
@@ -67,13 +65,9 @@ public:
 	void						netServicesShutdown( void );
 
 	void						addNetActionIsMyPortOpenToQueue( void );
-	void						announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction = eHostActionAnnounce );
-	void						performRandomConnect( void );
 
 	void						netActionResultIsMyPortOpen( ENetCmdError eCmdErr, std::string& myExternalIp );
     void                        netActionResultQueryHostId( ENetCmdError eCmdErr, VxGUID& hostId );
-	void						netActionResultAnnounce( ENetCmdError eCmdErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );
-	void						netActionResultRandomConnect( ENetCmdError eCmdErr, HostList * anchorList );
 
 	void						setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION pfuncPortOpenCallbackHandler, void * userData );
     void						setQueryHostOnlineIdResultCallback( QUERY_HOST_ID_CALLBACK_FUNCTION pfuncQueryHostIdCallbackHandler, void * userData );
@@ -82,8 +76,6 @@ public:
 	RCODE						handleNetCmdPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
     RCODE						handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
     RCODE						handleNetCmdQueryHostIdReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
@@ -124,7 +116,6 @@ protected:
 	EngineSettings&				m_EngineSettings;
 	NetworkMgr&					m_NetworkMgr;
 	NetServiceUtils				m_NetServiceUtils;
-	NetServiceHost			    m_NetServiceHost;
 
 	std::vector<NetActionBase*>	m_NetActionList;
 	NetActionIdle				m_NetActionIdle;

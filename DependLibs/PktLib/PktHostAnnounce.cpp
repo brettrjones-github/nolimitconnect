@@ -57,7 +57,7 @@ void PktHostAnnounce::setPktAnn( PktAnnounce& pktAnn )
     pktAnnData += sizeof( VxPktHdr );
     char * pktHost = ( char * )this;
     pktHost += sizeof( VxPktHdr );
-    if( pktAnnDataLen > 0 && pktAnnDataLen < sizeof( PktHostAnnounce ) )
+    if( pktAnnDataLen > 0 && pktAnnDataLen < (int)sizeof( PktHostAnnounce ) )
     {
         memcpy( pktHost, pktAnnData, pktAnnDataLen );
     }
@@ -73,7 +73,7 @@ bool PktHostAnnounce::fillPktHostAnn( PktHostAnnounce& pktAnn )
     char * pktHost = ( char * )this;
 
     int pktAnnDataLen = getPktLength();
-    if( pktAnnDataLen > 0 && pktAnnDataLen <= sizeof( PktHostAnnounce ) )
+    if( pktAnnDataLen > 0 && pktAnnDataLen <= (int)sizeof( PktHostAnnounce ) )
     {
         memcpy( pktAnnData, pktHost, pktAnnDataLen );
         result = true;

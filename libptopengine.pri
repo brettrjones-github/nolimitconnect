@@ -154,15 +154,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostDb.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostDefs.h \
-	$$PWD/ptop_src/ptop_engine_src/HostMgr/HostedEntry.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostInfoBase.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostList.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostListEntry.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostSettingBase.h \
-	$$PWD/ptop_src/ptop_engine_src/HostMgr/JoinedEntry.h \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/RandomConnectEntry.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h \
@@ -184,12 +175,9 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipMgrBase.h \
-    $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionAnnounce.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionBase.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionIdle.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionIsMyPortOpen.h \
-    $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionRandomConnect.h \
-    $$PWD/ptop_src/ptop_engine_src/NetServices/NetServiceHost.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetServiceDefs.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetServiceHdr.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetServiceUtils.h \
@@ -205,16 +193,14 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkEventBase.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkEventLost.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateAnnounce.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateAvail.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateBase.h \
-    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateGetRelayList.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateLost.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateMachine.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineDirect.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineThroughRelay.h \
-    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateTestConnection.h \
+    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateWaitForRelay.h \
     $$PWD/ptop_src/ptop_engine_src/Network/RcMulticast.h \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.h \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h \
@@ -464,16 +450,6 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostConnectInterface.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostDb.cpp \
-	$$PWD/ptop_src/ptop_engine_src/HostMgr/HostDefs.cpp \
-	$$PWD/ptop_src/ptop_engine_src/HostMgr/HostedEntry.cpp \
-	$$PWD/ptop_src/ptop_engine_src/HostMgr/HostInfoBase.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostList.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostListEntry.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/HostSettingBase.cpp \
-	$$PWD/ptop_src/ptop_engine_src/HostMgr/JoinedEntry.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostMgr/RandomConnectEntry.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.cpp \
@@ -489,12 +465,9 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipMgrBase.cpp \
-    $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionAnnounce.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionIdle.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionIsMyPortOpen.cpp \
-    $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionRandomConnect.cpp \
-    $$PWD/ptop_src/ptop_engine_src/NetServices/NetServiceHost.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetServiceUtils.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetServicesMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/ConnectRequest.cpp \
@@ -507,16 +480,14 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkEventBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkEventLost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateAnnounce.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateAvail.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateBase.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateGetRelayList.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateLost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateMachine.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineDirect.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineThroughRelay.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateTestConnection.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateWaitForRelay.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/RcMulticast.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.cpp \
     $$PWD/ptop_src/ptop_engine_src/NetworkMonitor/NetworkMonitor.cpp \

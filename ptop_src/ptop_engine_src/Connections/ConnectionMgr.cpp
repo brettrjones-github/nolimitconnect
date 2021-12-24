@@ -20,7 +20,6 @@
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/Network/NetworkMgr.h>
 #include <ptop_src/ptop_engine_src/Network/NetworkStateMachine.h>
-#include <ptop_src/ptop_engine_src/Network/NetworkStateRelaySearch.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>

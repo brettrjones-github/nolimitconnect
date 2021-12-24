@@ -402,15 +402,16 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	netServiceHdr.m_SktDataUsed = dataUsed;
 
 	EPluginType ePluginType = ePluginTypeNetServices;
-	if( eNetCmdAboutMePage == netServiceHdr.m_NetCmdType )
-	{
-		ePluginType = ePluginTypeWebServer; 
-	}
-	else if( eNetCmdStoryboardPage == netServiceHdr.m_NetCmdType )
-	{
-		ePluginType = ePluginTypeStoryboard; 
-	}
-    else if( eNetCmdQueryHostOnlineIdReq == netServiceHdr.m_NetCmdType )
+	//if( eNetCmdAboutMePage == netServiceHdr.m_NetCmdType )
+	//{
+	//	ePluginType = ePluginTypeWebServer; 
+	//}
+	//else if( eNetCmdStoryboardPage == netServiceHdr.m_NetCmdType )
+	//{
+	//	ePluginType = ePluginTypeStoryboard; 
+	//}
+ //   else 
+	if( eNetCmdQueryHostOnlineIdReq == netServiceHdr.m_NetCmdType )
     {
         ePluginType = ePluginTypeHostNetwork;
     }
@@ -475,15 +476,17 @@ bool  NetServiceUtils::getNetServiceUrlContent( std::string& netServiceUrl, std:
 //============================================================================
 ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
 {
-	if( 0 == strcmp( NET_CMD_PROFILE, netCmd ) )
-	{
-		return eNetCmdAboutMePage;
-	}
-	else if( 0 == strcmp( NET_CMD_STORYBOARD, netCmd ) )
-	{
-		return eNetCmdStoryboardPage;
-	}
-	else if( 0 == strcmp( NET_CMD_PING, netCmd ) )
+	//if( 0 == strcmp( NET_CMD_PROFILE, netCmd ) )
+	//{
+	//	return eNetCmdAboutMePage;
+	//}
+	//else if( 0 == strcmp( NET_CMD_STORYBOARD, netCmd ) )
+	//{
+	//	return eNetCmdStoryboardPage;
+	//}
+	//else 
+		
+	if( 0 == strcmp( NET_CMD_PING, netCmd ) )
 	{
 		return eNetCmdPing;
 	}
@@ -491,14 +494,14 @@ ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
 	{
 		return eNetCmdPong;
 	}
-	else if( 0 == strcmp( NET_CMD_ANCHOR_REQ, netCmd ) )
-	{
-		return eNetCmdHostReq;
-	}
-	else if( 0 == strcmp( NET_CMD_ANCHOR_REPLY, netCmd ) )
-	{
-		return eNetCmdHostReply;
-	}
+	//else if( 0 == strcmp( NET_CMD_ANCHOR_REQ, netCmd ) )
+	//{
+	//	return eNetCmdHostReq;
+	//}
+	//else if( 0 == strcmp( NET_CMD_ANCHOR_REPLY, netCmd ) )
+	//{
+	//	return eNetCmdHostReply;
+	//}
 	else if( 0 == strcmp( NET_CMD_PORT_TEST_REQ, netCmd ) )
 	{
 		return eNetCmdIsMyPortOpenReq;
@@ -534,14 +537,14 @@ const char *  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
 		return NET_CMD_PORT_TEST_REQ;
 	case eNetCmdIsMyPortOpenReply:
 		return NET_CMD_PORT_TEST_REPLY;
-	case eNetCmdHostReq:
-		return NET_CMD_ANCHOR_REQ;
-	case eNetCmdHostReply	:
-		return NET_CMD_ANCHOR_REPLY;
-	case eNetCmdAboutMePage:
-		return NET_CMD_PROFILE;
-	case eNetCmdStoryboardPage:
-		return NET_CMD_STORYBOARD;
+	//case eNetCmdHostReq:
+	//	return NET_CMD_ANCHOR_REQ;
+	//case eNetCmdHostReply	:
+	//	return NET_CMD_ANCHOR_REPLY;
+	//case eNetCmdAboutMePage:
+	//	return NET_CMD_PROFILE;
+	//case eNetCmdStoryboardPage:
+	//	return NET_CMD_STORYBOARD;
     case eNetCmdQueryHostOnlineIdReq:
         return NET_CMD_HOST_ID_REQ;
     case eNetCmdQueryHostOnlineIdReply:

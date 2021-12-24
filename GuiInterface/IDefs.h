@@ -431,9 +431,7 @@ enum ENetActionType
 {
     eNetActionUnknown = 0,
     eNetActionIdle = 1,
-    eNetActionAnnounce = 2,
-    eNetActionIsPortOpen = 3,
-    eNetActionRandomConnect = 4,
+    eNetActionIsPortOpen = 2,
 
     eMaxNetAction
 };
@@ -445,15 +443,13 @@ enum ENetworkStateType
     eNetworkStateTypeLost					= 1,
     eNetworkStateTypeAvail					= 2,
     eNetworkStateTypeTestConnection			= 3,
-    eNetworkStateTypeRelaySearch			= 4,
-    eNetworkStateTypeAnnounce				= 5,
-    eNetworkStateTypeOnlineDirect			= 6,
-    eNetworkStateTypeOnlineThroughRelay		= 7,
-    eNetworkStateTypeGetRelayList			= 8,
-    eNetworkStateTypeNoInternetConnection	= 9,
-    eNetworkStateTypeFailedResolveHostNetwork	= 10,
-    eNetworkStateTypeFailedResolveHostGroupList = 11,
-    eNetworkStateTypeFailedResolveHostGroup     = 12,
+    eNetworkStateTypeOnlineDirect			= 4,
+    eNetworkStateTypeWaitForRelay           = 5,
+    eNetworkStateTypeOnlineThroughRelay		= 6,
+    eNetworkStateTypeNoInternetConnection	= 7,
+    eNetworkStateTypeFailedResolveHostNetwork	= 8,
+    eNetworkStateTypeFailedResolveHostGroupList = 9,
+    eNetworkStateTypeFailedResolveHostGroup     = 10,
 
     eMaxNetworkStateType
 };
@@ -807,13 +803,9 @@ enum ENetCmdType
     eNetCmdPing							= 1,		
     eNetCmdPong							= 2,		
     eNetCmdIsMyPortOpenReq				= 3,		
-    eNetCmdIsMyPortOpenReply			= 4,		
-    eNetCmdHostReq					    = 5,		
-    eNetCmdHostReply					= 6,		
-    eNetCmdAboutMePage					= 7,		
-    eNetCmdStoryboardPage				= 8,	
-    eNetCmdQueryHostOnlineIdReq         = 9,
-    eNetCmdQueryHostOnlineIdReply      = 10,
+    eNetCmdIsMyPortOpenReply			= 4,			
+    eNetCmdQueryHostOnlineIdReq         = 5,
+    eNetCmdQueryHostOnlineIdReply       = 6,
 
     eMaxNetCmdType
 };

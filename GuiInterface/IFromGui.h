@@ -408,8 +408,7 @@ public:
 		eTestParam1Ping						= 2,
 		eTestParam1WhatsMyIp				= 3,
 		eTestParam1IsMyPortOpen				= 4,
-		eTestParam1AnnounceNow				= 5,
-		eTestParamSoundDelayTest			= 6,
+		eTestParamSoundDelayTest			= 5,
 
 		eMaxTestParam1
 	};
