@@ -24,15 +24,16 @@ public:
 	virtual ~AppletTestHostClient();
 
 protected slots:
+    void                        slotNetworkHostComboBoxSelectionChange( int comboIdx );
     void                        slotHostTypeComboBoxSelectionChange( int comboIdx );
     void                        slotHostUrlSelectionChange( int comboIdx );
     void                        slotQueryButtonClicked();
 
 protected:
+    void                        fillHostList( EHostType hostType, QComboBox* comboBox );
     void                        updateHostType( EHostType hostType );
 
     Ui::AppletTestHostClientUi  ui;
-    EHostType                   m_HostType{ eHostTypeUnknown };
 };
 
 

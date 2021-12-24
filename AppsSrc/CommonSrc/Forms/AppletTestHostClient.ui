@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>283</width>
+    <width>368</width>
     <height>626</height>
    </rect>
   </property>
@@ -41,27 +41,28 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>5</number>
-      </property>
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
       <item>
        <widget class="QLabel" name="m_StatusLabel">
         <property name="text">
          <string notr="true"/>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="m_NetworkHostLabel">
+        <property name="text">
+         <string>Choose A Network Host</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="m_NetworkHostComboBox"/>
+      </item>
+      <item>
+       <widget class="IdentWidget" name="m_NetworkIdentWidget" native="true"/>
       </item>
       <item>
        <widget class="QLabel" name="m_Label1">
@@ -84,7 +85,25 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="m_GroupUserStatusLabel">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="IdentWidget" name="m_HostIdentWidget" native="true"/>
+      </item>
+      <item>
        <widget class="QComboBox" name="m_HostUrlComboBox"/>
+      </item>
+      <item>
+       <widget class="HostedPluginWidget" name="m_HostedPluginidget" native="true"/>
       </item>
       <item>
        <widget class="QPushButton" name="m_QueryButton">
@@ -102,18 +121,6 @@
         </property>
         <property name="text">
          <string>Query</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_GroupUserStatusLabel">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
         </property>
        </widget>
       </item>
@@ -151,6 +158,18 @@
    <class>HostListWidget</class>
    <extends>QWidget</extends>
    <header location="global">HostListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>IdentWidget</class>
+   <extends>QWidget</extends>
+   <header>IdentWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HostedPluginWidget</class>
+   <extends>QWidget</extends>
+   <header>HostedPluginWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

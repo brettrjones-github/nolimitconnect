@@ -27,12 +27,19 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
     setAppletType( eAppletTestHostClient );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
+	fillHostList( eHostTypeNetwork, ui.m_NetworkHostComboBox );
 	GuiHelpers::fillHostType( ui.m_HostTypeComboBox, true );
 	
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+	connect( ui.m_NetworkHostComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotNetworkHostComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostTypeComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostTypeComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostUrlSelectionChange( int ) ) );
 	connect( ui.m_QueryButton, SIGNAL( clicked() ), this, SLOT( slotQueryButtonClicked() ) );
+
+	if( ui.m_HostTypeComboBox->count() )
+	{
+		slotNetworkHostComboBoxSelectionChange( 0 );
+	}
 
 	if( ui.m_HostTypeComboBox->count() )
 	{
@@ -46,6 +53,16 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 AppletTestHostClient::~AppletTestHostClient()
 {
     m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletTestHostClient::slotNetworkHostComboBoxSelectionChange( int comboIdx )
+{
+	EHostType hostType = GuiHelpers::comboIdxToHostType( comboIdx );
+	if( hostType != eHostTypeUnknown )
+	{
+		updateHostType( hostType );
+	}
 }
 
 //============================================================================
@@ -79,7 +96,14 @@ void AppletTestHostClient::updateHostType( EHostType hostType )
 		return;
 	}
 
-	ui.m_HostUrlComboBox->clear();
+	m_HostType = hostType;
+
+}
+
+void AppletTestHostClient::fillHostList( EHostType hostType, QComboBox* comboBox )
+{
+	comboBox->clear();
+
 	std::string defaultUrlStr = m_MyApp.getFromGuiInterface().fromGuiQueryDefaultUrl( hostType );
 	if( !defaultUrlStr.empty() )
 	{
@@ -97,7 +121,7 @@ void AppletTestHostClient::updateHostType( EHostType hostType )
 			defaultUrl = defaultUrlStr.c_str();
 		}
 
-		ui.m_HostUrlComboBox->addItem( defaultUrl );
+		comboBox->addItem( defaultUrl );
 	}
 
 }

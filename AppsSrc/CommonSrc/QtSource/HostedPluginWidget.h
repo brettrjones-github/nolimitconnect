@@ -17,16 +17,16 @@
 #include "ui_HostListItem.h"
 #include "IdentLogicInterface.h"
 
-#include <QListWidgetItem>
+#include <QWidget>
 
 class GuiHostSession;
 
-class HostListItem : public IdentLogicInterface, public QListWidgetItem
+class HostedPluginWidget : public IdentLogicInterface
 {
 	Q_OBJECT;
 public:
-	HostListItem( QWidget *parent=0 );
-	virtual ~HostListItem();
+	HostedPluginWidget( QWidget *parent=0 );
+	virtual ~HostedPluginWidget();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
@@ -48,14 +48,6 @@ public:
 
     void						updateWidgetFromInfo( void );
 
-signals:
-    void						signalHostListItemClicked( QListWidgetItem * poItemWidget );
-	void						signalIconButtonClicked( HostListItem* listEntryWidget );
-    void						signalFriendshipButtonClicked( HostListItem* listEntryWidget );
-	void						signalMenuButtonClicked( HostListItem* listEntryWidget );
-    void						signalJoinButtonClicked( HostListItem* listEntryWidget );
-    void						signalConnectButtonClicked( HostListItem* listEntryWidget );
-
 public slots:
     void						slotJoinButtonPressed( void );
     void						slotConnectButtonPressed( void );
@@ -68,6 +60,7 @@ protected:
 	//=== vars ===//
     Ui::HostListItemUi	        ui;
     AppCommon&					m_MyApp;
+    GuiHostSession*             m_HostSession{ nullptr };
 };
 
 

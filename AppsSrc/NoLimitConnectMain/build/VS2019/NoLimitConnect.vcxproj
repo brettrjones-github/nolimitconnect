@@ -338,6 +338,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HomeWindow.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListItem.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListItem.cpp" />
@@ -553,6 +554,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ListWidgetBase.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\IdentLogicInterface.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\MenuDefs.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\MyIcons.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\MyIconsDefs.h" />

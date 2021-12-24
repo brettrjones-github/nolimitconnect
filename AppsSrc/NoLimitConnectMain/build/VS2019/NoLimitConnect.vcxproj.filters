@@ -878,6 +878,9 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp">
@@ -1934,6 +1937,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

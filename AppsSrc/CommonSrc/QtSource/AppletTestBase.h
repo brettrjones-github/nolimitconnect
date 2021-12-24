@@ -22,7 +22,9 @@ public:
 	AppletTestBase( const char* ObjName, AppCommon& app, QWidget * parent );
 	virtual ~AppletTestBase();
 
-
+protected:
+	EHostType                   m_HostType{ eHostTypeUnknown };
+	VxGUID						m_HostOnlineId;
 };
 
 

@@ -228,6 +228,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/HelpBrowser.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HistoryEntryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HistoryListWidget.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/HostedPluginWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListItem.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListWidget.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/HostListWidget.h \
@@ -575,6 +576,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/HostedPluginWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HomeWindow.cpp \
