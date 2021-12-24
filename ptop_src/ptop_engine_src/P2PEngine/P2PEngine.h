@@ -25,9 +25,9 @@
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/Connections/ConnectionMgr.h>
 #include <ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.h>
+#include <ptop_src/ptop_engine_src/HostListMgr/HostListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
-#include <ptop_src/ptop_engine_src/IdentListMgrs/GroupListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/OnlineListMgr.h>
@@ -39,9 +39,6 @@
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
-//#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
-//#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
-//#include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
 #include <GuiInterface/IDefs.h>
 #include <GuiInterface/IFromGui.h>
@@ -118,7 +115,7 @@ public:
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
     DirectConnectListMgr&       getDirectConnectListMgr( void )                 { return m_DirectConnectListMgr; }
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
-    GroupListMgr&               getGroupListMgr( void )                         { return m_GroupListMgr; }
+    HostListMgr&                getHostListMgr( void )                          { return m_HostListMgr; }
     IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
     MembershipAvailableMgr&     getMembershipAvailableMgr( void )               { return m_MembershipAvailableMgr; }
     MembershipHostedMgr&        getMembershipHostedMgr( void )                  { return m_MembershipHostedMgr; }
@@ -722,7 +719,7 @@ protected:
     DirectConnectListMgr        m_DirectConnectListMgr;
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
-    GroupListMgr                m_GroupListMgr;
+    HostListMgr                m_HostListMgr;
     NearbyListMgr               m_NearbyListMgr;
     OnlineListMgr               m_OnlineListMgr;
     BigListMgr					m_BigListMgr;

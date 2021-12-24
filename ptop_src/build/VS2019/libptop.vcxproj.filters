@@ -835,9 +835,6 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.cpp">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
@@ -894,6 +891,12 @@
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateWaitForRelay.cpp">
       <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostListMgr.cpp">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostListDb.cpp">
+      <Filter>Source Files\HostListMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1867,9 +1870,6 @@
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\GroupListMgr.h">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
@@ -1938,6 +1938,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateWaitForRelay.h">
       <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostListMgr.h">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostListDb.h">
+      <Filter>Source Files\HostListMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2084,6 +2090,9 @@
     </Filter>
     <Filter Include="Source Files\UrlMgr">
       <UniqueIdentifier>{b8bc13e3-0f2e-4ddf-b28f-045608b10045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HostListMgr">
+      <UniqueIdentifier>{3c0ac8c8-fcfa-42bb-922c-b041a277187c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
