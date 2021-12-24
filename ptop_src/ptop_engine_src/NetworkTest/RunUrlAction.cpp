@@ -23,6 +23,7 @@
 #include <ptop_src/ptop_engine_src/NetServices/NetServiceUtils.h>
 #include <ptop_src/ptop_engine_src/Network/NetworkStateMachine.h>
 #include <ptop_src/ptop_engine_src/Network/NetworkMgr.h>
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxParse.h>
@@ -249,6 +250,16 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
     std::string actionName = urlAction.getTestName();
     std::string nodeUrl = urlAction.getRemoteUrl();
     ENetCmdType netCmdType = urlAction.getNetCmdType();
+    if( eNetCmdQueryHostOnlineIdReq == netCmdType && urlAction.getResultInterface() )
+    {
+        // if we are quering the host id a previous query for another service may have already gotten it for the given ip/port
+        VxGUID hostId;
+        if( m_Engine.getUrlMgr().lookupOnlineId( nodeUrl, hostId ) )
+        {
+            urlAction.getResultInterface()->callbackQueryIdSuccess( urlAction, hostId );
+            return eRunTestStatusTestSuccess;
+        }
+    }
 
 	VxSktConnectSimple netServConn;
 	std::string strHost;

@@ -58,13 +58,13 @@ std::string						VxIpToString( struct sockaddr * addr );
 void							VxFillHints( struct addrinfo& oHints, bool bUdpSkt = false, bool ipv6Only = false );
 void							VxGetLocalIps( std::vector<InetAddress>& aRetIpAddress );
 
-//void							VxSetSelectedLocalIp( InetAddress& oIpAddr );
 InetAddress						VxGetSelectedLocalIp( void );
 InetAddress						VxGetMyGlobalIPv6Address( void );
 InetAddress						VxGetDefaultIPv4Address( void );
 InetAddress						VxGetDefaultIPv6Address( void );
 bool							VxTestConnectionOnSpecificLclAddress( InetAddress &oLclAddr );
-bool							VxResolveUrl( const char * pUrl, uint16_t u16Port, InetAddress& oRetAddr );
+bool							VxResolveUrl( const char* pUrl, uint16_t u16Port, InetAddress& oRetAddr );
+bool							VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr );
 
 //! return true if ip is in list of local ips
 bool							VxLocalIpExists( std::string& strIpAddress );
@@ -95,8 +95,7 @@ RCODE							VxGetRmtAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
 bool							VxIsIPv6Address( const char *addr );
 bool							VxIsIPv4Address( const char *addr );
 int								VxGetIPv6ScopeID( const char *addr );
-const char *					VxStripIPv6ScopeID( const char *addr, std::string &buf );
-//! if new connection refresh default ip(s)
+
 void							VxRefreshDefaultIps( void );
 bool							VxCanConnectUsingIPv6( void );
 SOCKET							VxConnectToIPv6( const char * ipv6, uint16_t u16Port, int iTimeoutMs = SKT_IPV6_CONNECT_TIMEOUT, RCODE * retSktErr = nullptr );

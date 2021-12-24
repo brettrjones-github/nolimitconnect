@@ -130,21 +130,42 @@ std::string UrlMgr::resolveUrl( std::string& hostUrl )
 //============================================================================
 void UrlMgr::updateUrlCache( std::string& hostUrl, VxGUID& onlineId )
 {
+    if( !onlineId.isVxGUIDValid() )
+    {
+        return;
+    }
+
+    std::string ipAddr;
+    uint16_t tcpPort{ 0 };
+
+    bool result = VxResolveUrl( hostUrl, tcpPort, ipAddr );
+
+    bool foundUrl = false;
     m_UrlMutex.lock();
     auto iter = m_UrlMap.find( hostUrl );
     if( iter != m_UrlMap.end() )
     {
+        foundUrl = true;
         if( onlineId != iter->second.m_OnlineId )
         {
             iter->second.updateOnlineId( onlineId );
         }
+    }
 
-        m_UrlMutex.unlock();
-        return;
+    for( auto iter = m_UrlMap.begin(); iter != m_UrlMap.end(); ++iter )
+    {
+        if( !iter->second.m_OnlineId.isVxGUIDValid() && iter->second.m_Port == tcpPort && iter->second.m_IpAddr == ipAddr )
+        {
+            iter->second.updateOnlineId( onlineId );
+        }
     }
 
     m_UrlMutex.unlock();
-    addUrlAndOnlineId( hostUrl, onlineId );
+
+    if( !foundUrl )
+    {
+        addUrlAndOnlineId( hostUrl, onlineId );
+    }
 }
 
 //============================================================================
@@ -170,7 +191,7 @@ bool UrlMgr::addUrlAndOnlineId( std::string& hostUrl, VxGUID& onlineId )
     UrlInfo urlInfo;
     if( fillUrlInfo( hostUrl, urlInfo ) )
     {
-        urlInfo.m_OnlineId = onlineId;
+        urlInfo.updateOnlineId( onlineId );
         m_UrlMutex.lock();
         m_UrlMap[hostUrl] = urlInfo;
         m_UrlMutex.unlock();

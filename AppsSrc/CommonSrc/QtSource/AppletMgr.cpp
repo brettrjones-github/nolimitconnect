@@ -386,7 +386,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
 //		m_MyApp.errMessageBox( appletMissingTitle, "Network Host Not Implemented" );
 //		return;
 	default:
-		m_MyApp.errMessageBox2( QObject::tr( "AppCommon::launchApplet").toUtf8().constData(), QObject::tr( "Invalid Applet enum %d\n" ).toUtf8().constData(), applet );
+		m_MyApp.errMessageBox2( QObject::tr( "AppCommon::launchApplet").toUtf8().constData(), QObject::tr( "Invalid Applet enum %d" ).toUtf8().constData(), applet );
 		return nullptr;
 	}
 
