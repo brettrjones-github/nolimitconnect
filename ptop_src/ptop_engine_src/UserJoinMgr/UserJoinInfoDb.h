@@ -21,16 +21,12 @@
 class P2PEngine;
 class UserJoinInfo;
 class UserJoinMgr;
-class VxGUID;
 
 class UserJoinInfoDb : public DbBase
 {
 public:
     UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& mgr, const char *dbName );
     virtual ~UserJoinInfoDb() = default;
-
-    void						lockUserJoinInfoDb( void ) { m_UserJoinInfoDbMutex.lock(); }
-    void						unlockUserJoinInfoDb( void ) { m_UserJoinInfoDbMutex.unlock(); }
 
     bool						addUserJoin( UserJoinInfo * hostInfo );
     void						removeUserJoin( VxGUID& onlineId, EPluginType pluginType );
@@ -58,6 +54,5 @@ protected:
 
     P2PEngine&					m_Engine;
     UserJoinMgr&				m_UserJoinMgr;
-    VxMutex						m_UserJoinInfoDbMutex;
 };
 

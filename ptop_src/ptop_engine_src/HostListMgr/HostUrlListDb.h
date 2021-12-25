@@ -14,29 +14,25 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
+#include "HostUrlInfo.h"
 
 #include <CoreLib/DbBase.h>
-#include <CoreLib/VxGUID.h>
 
-class HostList;
-
-class HostListDb : public DbBase
+class HostUrlListDb : public DbBase
 {
 public:
-	HostListDb();
-	virtual ~HostListDb();
+	HostUrlListDb();
+	virtual ~HostUrlListDb();
 
-	bool						saveHostEntry( EHostType hostType, std::string hostUrl, VxGUID& onlineId, int64_t timestamp );
+	RCODE						hostUrlListDbStartup( int dbVersion, const char* dbFileName );
+	RCODE						hostUrlListDbShutdown( void );
+
+	void						getAllHostUrls( std::vector<HostUrlInfo>& hostUrlList );
+	bool						saveHostUrl( HostUrlInfo& hostUrlInfo );
 
 protected:
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
-
-	bool						validateId( std::string& onlineId );
-	bool						validatePort( std::string& port );
-	bool						validateIPv4( std::string& ipv4 );
-	bool						validateIPv6( std::string& ipv6 );
 };
 
 

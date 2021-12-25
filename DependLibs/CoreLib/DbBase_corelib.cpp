@@ -308,7 +308,7 @@ RCODE DbBase::dbStartup( int iDbVersion, const char * pDbName )
 		rc = onCreateDatabase(iDbVersion);
 		if( 0 != rc )
 		{
-			handleSqlError( 0,"DbBase:Cannot create database %s\n", m_strDbFileName.c_str() );
+			handleSqlError( 0,"DbBase:Cannot create database %s", m_strDbFileName.c_str() );
 			g_DbBaseStartupMutex.unlock();
 			return rc;
 		}
@@ -342,7 +342,7 @@ RCODE DbBase::onCreateDatabase( int iDbVersion )
 	RCODE rc = sqlite3_open( m_strDbFileName.c_str(), &db);
 	if( SQLITE_OK != rc )
 	{
-		handleSqlError( LOG_ERROR, "DbCreateDatabase:ERROR %d Unable to create database %s\n", rc, m_strDbFileName.c_str() );
+		handleSqlError( LOG_ERROR, "DbCreateDatabase:ERROR %d Unable to create database %s", rc, m_strDbFileName.c_str() );
 		sqlite3_close(db);
 		return rc;
 	}
@@ -354,7 +354,7 @@ RCODE DbBase::onCreateDatabase( int iDbVersion )
 	rc = onCreateTables( iDbVersion );
 	if( rc )
 	{
-		handleSqlError( LOG_ERROR, "CreateDataBase:ERROR %d Unable to create Table in db %s\n", rc, m_strDbFileName.c_str() );
+		handleSqlError( LOG_ERROR, "CreateDataBase:ERROR %d Unable to create Table in db %s", rc, m_strDbFileName.c_str() );
 		VxFileUtil::deleteFile( m_strDbFileName.c_str() );
 	}
 	// create version table
@@ -372,7 +372,7 @@ RCODE DbBase::onUpgradeDatabase(int iOldDbVersion, int iNewDbVersion)
 	}
 	if( rc )
 	{
-		handleSqlError( LOG_ERROR, "onUpgradeDatabase:ERROR %d in db %s\n", rc, m_strDbFileName.c_str() );
+		handleSqlError( LOG_ERROR, "onUpgradeDatabase:ERROR %d in db %s", rc, m_strDbFileName.c_str() );
 	}
 	else
 	{
@@ -389,7 +389,7 @@ RCODE DbBase::dbOpen( void )
 {
 	if( 0 == m_strDbFileName.size() )
 	{
-		LogMsg( LOG_ERROR, "ERROR Attempted DbBase::dbOpen %s without a file name\n", m_strDatabaseName.c_str() );
+		LogMsg( LOG_ERROR, "ERROR Attempted DbBase::dbOpen %s without a file name", m_strDatabaseName.c_str() );
 		vx_assert( m_strDbFileName.size() );
 		return -1;
 	}
@@ -397,7 +397,7 @@ RCODE DbBase::dbOpen( void )
 	int retval = sqlite3_open( m_strDbFileName.c_str(), &m_Db );
 	if (!(SQLITE_OK == retval))
 	{
-		handleSqlError( LOG_ERROR, "DbBase:Unable to open db %s\n", m_strDbFileName.c_str() );
+		handleSqlError( LOG_ERROR, "DbBase:Unable to open db %s", m_strDbFileName.c_str() );
 		sqlite3_close(m_Db);
 		m_Db = NULL;
 		return -1;
@@ -418,7 +418,7 @@ RCODE DbBase::dbClose( void )
 		return 0;
 	}
 
-	handleSqlError( 0, "DbBase:Tried to close already closed db %s\n", m_strDbFileName.c_str() );
+	handleSqlError( 0, "DbBase:Tried to close already closed db %s", m_strDbFileName.c_str() );
 	return -1;
 }
 
@@ -433,7 +433,7 @@ int DbBase::readDatabaseVersion( void )
 	int iResult = sqlite3_prepare_v2( m_Db, prepString.c_str(), (int)( prepString.length() + 1 ), &poSqlStatement, NULL );
 	if( SQLITE_OK != iResult ) 
 	{
-		handleSqlError( 0, "DbBase::readDatabaseVersion: error %s\n", sqlite3_errmsg(m_Db) );
+		handleSqlError( 0, "DbBase::readDatabaseVersion: error %s", sqlite3_errmsg(m_Db) );
 		return 0;
 	}
 
@@ -608,7 +608,7 @@ RCODE DbBase::sqlExec( const char *		SQL_Statement,
 					break;
 
                 default:
-                    LogMsg( LOG_ERROR,"DbBase::sqlExec UNKNOWN bind type\n");
+                    LogMsg( LOG_ERROR,"DbBase::sqlExec UNKNOWN bind type");
                     dbClose();
                     return -1;
 				}
@@ -634,7 +634,7 @@ RCODE DbBase::sqlExec( const char *		SQL_Statement,
 			retVal = -1;
 			if( SQLITE_DONE != sqlite3_step(pSqlStatement) )
 			{
-				LogMsg( LOG_ERROR, "DbBase::finalizeIniSetTransaction:ERROR %s while stepping\n", sqlite3_errmsg(m_Db) );
+				LogMsg( LOG_ERROR, "DbBase::finalizeIniSetTransaction:ERROR %s while stepping", sqlite3_errmsg(m_Db) );
 			}
 			else
 			{
@@ -645,7 +645,7 @@ RCODE DbBase::sqlExec( const char *		SQL_Statement,
 				}
 				else
 				{
-					LogMsg( LOG_ERROR, "DbBase::finalizeIniSetTransaction:ERROR %s in finalize\n", sqlite3_errmsg(m_Db) );
+					LogMsg( LOG_ERROR, "DbBase::finalizeIniSetTransaction:ERROR %s in finalize", sqlite3_errmsg(m_Db) );
 				}
 			}
 
@@ -766,7 +766,7 @@ DbCursor * DbBase::startQuery( const char * pSqlString )
 		if( SQLITE_OK != iResult ) 
 		{
 			const char * sqliteErrMsg = sqlite3_errmsg(m_Db);
-			handleSqlError( LOG_ERROR, "DbBase::StartDataQuery: error %s statement %s\n", sqliteErrMsg, pSqlString );
+			handleSqlError( LOG_ERROR, "DbBase::StartDataQuery: error %s statement %s", sqliteErrMsg, pSqlString );
 			return NULL;
 		}
 		DbCursor * poCursor = new DbCursor();
@@ -779,8 +779,7 @@ DbCursor * DbBase::startQuery( const char * pSqlString )
 }
 
 //============================================================================
-DbCursor* DbBase::startQuery(	const char* pSqlString , 
-								const char* textParam  )
+DbCursor* DbBase::startQuery( const char* pSqlString, const char* textParam )
 {
 	vx_assert( pSqlString );
 	const char*   srcStr = "DbBase::StartDataQueryTxt: error";
@@ -816,11 +815,68 @@ DbCursor* DbBase::startQuery(	const char* pSqlString ,
 			{
 				LogMsg( LOG_ERROR, "ERROR: %s BIND TEXT %s", srcStr, sqlite3_errmsg( m_Db ) );
 			}
-
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "ERROR: %s %s statement %s\n", srcStr, sqlite3_errmsg( m_Db ), pSqlString );
+			LogMsg( LOG_ERROR, "ERROR: %s %s statement %s", srcStr, sqlite3_errmsg( m_Db ), pSqlString );
+		}
+	}
+
+	return retVal;
+}
+
+//============================================================================
+DbCursor* DbBase::startQuery( const char* pSqlString, const char* textParam, int secondParam )
+{
+	vx_assert( pSqlString );
+	const char* srcStr = "DbBase::StartDataQueryTxtInt: error";
+	DbCursor* retVal = NULL;
+	int           iResult;
+
+	sqlite3_stmt* poSqlStatement;
+
+	if( 0 == dbOpen() )
+	{
+		poSqlStatement = NULL;
+		iResult = sqlite3_prepare_v2( m_Db,
+			pSqlString,
+			( int )strlen( pSqlString ),
+			&poSqlStatement,
+			NULL );
+
+		if( SQLITE_OK == iResult )
+		{
+			iResult = sqlite3_bind_text( poSqlStatement,
+				1,
+				textParam,
+				strlen( textParam ),
+				SQLITE_TRANSIENT );
+
+			if( SQLITE_OK == iResult )
+			{
+				iResult = sqlite3_bind_int( poSqlStatement,
+					2,
+					secondParam);
+
+				if( SQLITE_OK == iResult )
+				{
+					retVal = new DbCursor();
+					retVal->m_DbBase = this;
+					retVal->m_Stmt = poSqlStatement;
+				}
+				else
+				{
+					LogMsg( LOG_ERROR, "ERROR: %s BIND INTEGER %s", srcStr, sqlite3_errmsg( m_Db ) );
+				}
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "ERROR: %s BIND TEXT %s", srcStr, sqlite3_errmsg( m_Db ) );
+			}
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "ERROR: %s %s statement %s", srcStr, sqlite3_errmsg( m_Db ), pSqlString );
 		}
 	}
 
@@ -869,7 +925,7 @@ void DbCursor::close( void )
 
 	if( SQLITE_OK != iResult ) 
 	{
-		LogMsg( LOG_ERROR, "DatabaseClass::CloseQuery: error %s\n", sqlite3_errmsg(m_DbBase->m_Db) );
+		LogMsg( LOG_ERROR, "DatabaseClass::CloseQuery: error %s", sqlite3_errmsg(m_DbBase->m_Db) );
 	}
 
 	vx_assert( ( DbBase* )0 != m_DbBase );
@@ -890,7 +946,7 @@ bool DbCursor::getNextRow( void )
 		return false;
 		break;
 	default:
-		LogMsg( LOG_ERROR, "DbBase::GetDbRow: error %s\n", sqlite3_errmsg(m_DbBase->m_Db) );
+		LogMsg( LOG_ERROR, "DbBase::GetDbRow: error %s", sqlite3_errmsg(m_DbBase->m_Db) );
 		break;
 	}
 	return false;

@@ -45,10 +45,10 @@ UserJoinInfoDb::UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& hostListMgr, con
 //! create tables in database 
 RCODE UserJoinInfoDb::onCreateTables( int iDbVersion )
 {
-    lockUserJoinInfoDb();
+    lockDb();
     std::string strCmd = "CREATE TABLE " + TABLE_USER_HOST + CREATE_COLUMNS_USER_HOST;
     RCODE rc = sqlExec(strCmd);
-    unlockUserJoinInfoDb();
+    unlockDb();
     return rc;
 }
 
@@ -56,20 +56,20 @@ RCODE UserJoinInfoDb::onCreateTables( int iDbVersion )
 // delete tables in database
 RCODE UserJoinInfoDb::onDeleteTables( int iOldVersion ) 
 {
-    lockUserJoinInfoDb();
+    lockDb();
     std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_USER_HOST;
     RCODE rc = sqlExec(strCmd);
-    unlockUserJoinInfoDb();
+    unlockDb();
     return rc;
 }
 
 //============================================================================
 void UserJoinInfoDb::purgeAllUserJoins( void ) 
 {
-    lockUserJoinInfoDb();
+    lockDb();
     std::string strCmd = "DELETE FROM " + TABLE_USER_HOST;
     RCODE rc = sqlExec( strCmd );
-    unlockUserJoinInfoDb();
+    unlockDb();
     if( rc )
     {
         LogMsg( LOG_ERROR, "UserJoinInfoDb::purgeAllUserJoins error %d", rc );
@@ -123,7 +123,7 @@ bool UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId,
     vx_assert( 0 == rc );
     if( rc )
     {
-        LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin error %d\n", rc );
+        LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin error %d", rc );
     }
 
     return ( 0 == rc );
@@ -148,7 +148,7 @@ bool UserJoinInfoDb::addUserJoin( UserJoinInfo* hostInfo )
 //============================================================================
 void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJoinList )
 {
-    lockUserJoinInfoDb();
+    lockDb();
     DbCursor * cursor = startQuery( "SELECT * FROM tblUserJoin" ); 
     if( NULL != cursor )
     {
@@ -175,7 +175,7 @@ void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJo
         cursor->close();
     }
 
-    unlockUserJoinInfoDb();
+    unlockDb();
 } 
 
 //============================================================================

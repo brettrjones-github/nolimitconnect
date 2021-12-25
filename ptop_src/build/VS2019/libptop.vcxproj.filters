@@ -892,10 +892,13 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateWaitForRelay.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostListMgr.cpp">
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListDb.cpp">
       <Filter>Source Files\HostListMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostListDb.cpp">
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.cpp">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.cpp">
       <Filter>Source Files\HostListMgr</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1939,10 +1942,13 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateWaitForRelay.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostListMgr.h">
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlListDb.h">
       <Filter>Source Files\HostListMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostListDb.h">
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.h">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.h">
       <Filter>Source Files\HostListMgr</Filter>
     </ClInclude>
   </ItemGroup>

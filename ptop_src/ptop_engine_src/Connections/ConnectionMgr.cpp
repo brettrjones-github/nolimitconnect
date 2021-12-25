@@ -130,6 +130,10 @@ EHostAnnounceStatus ConnectionMgr::lookupOrQueryAnnounceId( EHostType hostType, 
     if( urlCacheOnlineIdLookup( hostUrl, hostGuid ) )
     {
         hostStatus = eHostAnnounceQueryIdSuccess;
+        if( hostType != eHostTypeUnknown )
+        {
+            m_Engine.getHostUrlListMgr().updateHostUrl( hostType, hostGuid, hostUrl );
+        }
     }
     else if( getQueryIdFailedCount( hostType ) > 2 )
     {
@@ -140,7 +144,7 @@ EHostAnnounceStatus ConnectionMgr::lookupOrQueryAnnounceId( EHostType hostType, 
     {
         hostStatus = eHostAnnounceQueryIdInProgress;
         std::string myUrl = m_Engine.getMyOnlineUrl();
-        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, eHostTypeUnknown, connectReason );
+        m_Engine.getRunUrlAction().runUrlAction( sessionId, eNetCmdQueryHostOnlineIdReq, hostUrl.c_str(), myUrl.c_str(), this, callback, hostType, connectReason );
     }
 
     return hostStatus;
@@ -312,6 +316,10 @@ void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUr
             m_ConnectionMutex.unlock();
             updateUrlCache( hostUrl, onlineId );   
             m_Engine.getUrlMgr().updateUrlCache( hostUrl, onlineId );
+            if( hostType != eHostTypeUnknown )
+            {
+                m_Engine.getHostUrlListMgr().updateHostUrl( hostType, onlineId, m_Engine.getUrlMgr().resolveUrl( hostUrl ) );
+            }
         }
 
         if( needOnlineId )
@@ -341,6 +349,11 @@ void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID on
 
     std::string hostUrl = actionInfo.getRemoteUrl();
     updateUrlCache( hostUrl, onlineId );
+    if( actionInfo.getHostType() != eHostTypeUnknown )
+    {
+        m_Engine.getHostUrlListMgr().updateHostUrl( actionInfo.getHostType(), onlineId, m_Engine.getUrlMgr().resolveUrl( hostUrl ) );
+    }
+
     if( actionInfo.getConnectReqInterface() )
     {
         actionInfo.getConnectReqInterface()->onUrlActionQueryIdSuccess( actionInfo.getSessionId(), hostUrl, onlineId, actionInfo.getConnectReason() );
@@ -1403,12 +1416,8 @@ bool ConnectionMgr::doConnectRequest( ConnectReqInfo& connectRequest, bool ignor
     VxConnectInfo& connectInfo = connectRequest.getConnectInfo();
     if( false == m_Engine.getNetworkStateMachine().isP2POnline() )
     {
-        if( eConnectReasonRelaySearch != connectRequest.getConnectReason() )
-        {
-            LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online\n" );
-        }
+         LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online" );
     }
-
 
     P2PConnectList& connectedList = m_Engine.getConnectList();
     connectedList.connectListLock();

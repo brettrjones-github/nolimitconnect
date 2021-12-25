@@ -25,7 +25,7 @@
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/Connections/ConnectionMgr.h>
 #include <ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.h>
-#include <ptop_src/ptop_engine_src/HostListMgr/HostListMgr.h>
+#include <ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
@@ -115,7 +115,7 @@ public:
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
     DirectConnectListMgr&       getDirectConnectListMgr( void )                 { return m_DirectConnectListMgr; }
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
-    HostListMgr&                getHostListMgr( void )                          { return m_HostListMgr; }
+    HostUrlListMgr&             getHostUrlListMgr( void )                       { return m_HostUrlListMgr; }
     IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
     MembershipAvailableMgr&     getMembershipAvailableMgr( void )               { return m_MembershipAvailableMgr; }
     MembershipHostedMgr&        getMembershipHostedMgr( void )                  { return m_MembershipHostedMgr; }
@@ -719,7 +719,7 @@ protected:
     DirectConnectListMgr        m_DirectConnectListMgr;
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
-    HostListMgr                m_HostListMgr;
+    HostUrlListMgr              m_HostUrlListMgr;
     NearbyListMgr               m_NearbyListMgr;
     OnlineListMgr               m_OnlineListMgr;
     BigListMgr					m_BigListMgr;

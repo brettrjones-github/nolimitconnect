@@ -914,12 +914,8 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 	VxConnectInfo& connectInfo = connectRequest.getConnectInfo();
 	if( false == m_Engine.getNetworkStateMachine().isP2POnline() )
 	{
-		if( eConnectReasonRelaySearch != connectRequest.getConnectReason() )
-		{
-			LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online" );
-		}
+		LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online" );
 	}
-
 
 	P2PConnectList& connectedList = m_Engine.getConnectList();
 	connectedList.connectListLock();

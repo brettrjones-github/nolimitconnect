@@ -166,7 +166,7 @@ void ConnectMgr::announceConnectRemoved( VxGUID& hostOnlineId )
 //============================================================================
 void ConnectMgr::announceConnectOfferState( VxGUID& hostOnlineId, EOfferState userHostOfferState )
 {
-	LogMsg( LOG_INFO, "ConnectMgr::announceConnectXferState state %d start\n", userHostOfferState );
+	LogMsg( LOG_INFO, "ConnectMgr::announceConnectXferState state %d start", userHostOfferState );
 	lockClientList();
 	std::vector<ConnectCallbackInterface *>::iterator iter;
 	for( iter = m_ConnectClients.begin();	iter != m_ConnectClients.end(); ++iter )
@@ -176,13 +176,13 @@ void ConnectMgr::announceConnectOfferState( VxGUID& hostOnlineId, EOfferState us
 	}
 
 	unlockClientList();
-	LogMsg( LOG_INFO, "ConnectMgr::announceConnectXferState state %d done\n", userHostOfferState );
+	LogMsg( LOG_INFO, "ConnectMgr::announceConnectXferState state %d done", userHostOfferState );
 }
 
 //============================================================================
 void ConnectMgr::announceConnectOnlineState( VxGUID& hostOnlineId, EOnlineState onlineState, VxGUID& connectionId )
 {
-    LogMsg( LOG_INFO, "ConnectMgr::announceConnectOnlineState state %d start\n", onlineState );
+    LogMsg( LOG_INFO, "ConnectMgr::announceConnectOnlineState state %d start", onlineState );
     lockClientList();
     std::vector<ConnectCallbackInterface *>::iterator iter;
     for( iter = m_ConnectClients.begin();	iter != m_ConnectClients.end(); ++iter )
@@ -192,7 +192,7 @@ void ConnectMgr::announceConnectOnlineState( VxGUID& hostOnlineId, EOnlineState 
     }
 
     unlockClientList();
-    LogMsg( LOG_INFO, "ConnectMgr::announceConnectOnlineState state %d done\n", onlineState );
+    LogMsg( LOG_INFO, "ConnectMgr::announceConnectOnlineState state %d done", onlineState );
 }
 
 //============================================================================

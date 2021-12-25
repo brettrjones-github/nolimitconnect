@@ -82,21 +82,17 @@ enum EConnectReason
 {
     eConnectReasonUnknown = 0,
 
-    eConnectReasonChatRoomAnnounce,
-    eConnectReasonChatRoomJoin,
-    eConnectReasonChatRoomSearch,
-
     eConnectReasonGroupAnnounce,
     eConnectReasonGroupJoin,
     eConnectReasonGroupSearch,
 
+    eConnectReasonChatRoomAnnounce,
+    eConnectReasonChatRoomJoin,
+    eConnectReasonChatRoomSearch,
+
     eConnectReasonRandomConnectAnnounce,
     eConnectReasonRandomConnectJoin,
     eConnectReasonRandomConnectSearch,
-
-    eConnectReasonRelayAnnounce,
-    eConnectReasonRelayJoin,
-    eConnectReasonRelaySearch,
 
     eConnectReasonAnnouncePing,
     eConnectReasonStayConnected,
@@ -362,12 +358,13 @@ enum EHostTestStatus
 enum EHostType
 {
     eHostTypeUnknown = 0,
-    eHostTypeNetwork = 1,
-    eHostTypeConnectTest = 2,
-    eHostTypeGroup = 3,
-    eHostTypeChatRoom = 4,
-    eHostTypeRandomConnect = 5,
-    eHostTypePeerUser = 6,
+    eHostTypeConnectTest = 1,
+    eHostTypeNetwork = 2,
+    eHostTypePeerUser = 3,
+    // these hosts provide relay services and are announced to network hosts
+    eHostTypeGroup = 4,
+    eHostTypeChatRoom = 5,
+    eHostTypeRandomConnect = 6,
 
     eMaxHostType
 };

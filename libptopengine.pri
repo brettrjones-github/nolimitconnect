@@ -154,8 +154,9 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostListDb.h \
-    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListCallbackInterface.h \
@@ -451,8 +452,9 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostListDb.cpp \
-    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.cpp \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.cpp \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.cpp \

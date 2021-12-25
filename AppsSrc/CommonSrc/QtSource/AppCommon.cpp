@@ -276,7 +276,7 @@ void AppCommon::loadWithoutThread( void )
 
 	// make sure the engine has been created
 	int retryCnt = 0;
-	while( !getEngine().isEngineCreated() )
+	while( !GetPtoPEngine().isEngineCreated() )
 	{
 		retryCnt++;
 		if( retryCnt > 10 )

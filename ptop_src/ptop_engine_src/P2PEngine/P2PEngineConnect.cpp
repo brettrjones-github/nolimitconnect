@@ -43,12 +43,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 	bool result = m_NetConnector.connectToContact( connectInfo, ppoRetSkt, retIsNewConnection, connectReason );
 	if(  true == result )
 	{
-		if( eConnectReasonRelaySearch == connectReason )
-		{
-			//m_NetConnector.handlePossibleRelayConnect( connectInfo, *ppoRetSkt, retIsNewConnection, connectReason );
-			return true;
-		}
-		else if( retIsNewConnection )
+		if( retIsNewConnection )
 		{
 			// handle success connect
 			BigListInfo * bigListInfo = 0;
@@ -67,7 +62,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 
 			if( bigListInfo )
 			{
-                LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectToContact: success  %s", bigListInfo->getOnlineName() );
+                LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectToContact: success %s", bigListInfo->getOnlineName() );
 				m_NetConnector.handleConnectSuccess( bigListInfo, *ppoRetSkt, retIsNewConnection, connectReason );
 
                 // nearby elevate to guest permission

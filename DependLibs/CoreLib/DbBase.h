@@ -159,13 +159,17 @@ public:
 	//! returns null if error
 	virtual DbCursor *			startQuery( const char * pSqlString );
 	virtual DbCursor *			startQueryInsecure( const char * pSqlString, ... );
-	virtual DbCursor *			startQuery( const char * pSqlString, const char * textParam );
+	virtual DbCursor *			startQuery( const char* pSqlString, const char* textParam );
+	virtual DbCursor*			startQuery( const char* pSqlString, const char* textParam, int secondParam );
 
 	//! get the row id of the last inserted row
 	virtual int64_t				getLastInsertId( void );
 
 	//! return true if table exists
 	bool						dbTableExists( const char * pTableName );
+
+	void						lockDb( void )		{ m_DbMutex.lock(); }
+	void						unlockDb( void )	{ m_DbMutex.unlock(); }
 
 protected:
 	void						handleSqlError( RCODE rc, const char * errMsg, ... );
