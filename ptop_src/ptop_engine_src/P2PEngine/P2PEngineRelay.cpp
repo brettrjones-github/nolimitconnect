@@ -241,7 +241,7 @@ void P2PEngine::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pk
 //								knownContactNameFromId( poPkt->m_ConnectId.getOnlineId() ),
 //								poPkt->m_ConnectId.getOnlineId().describeVxGUID().c_str() );
 //#endif // DEBUG_RELAY
-		m_NetConnector.sendMyPktAnnounce(  poPkt->m_ConnectId.getOnlineId(), sktBase, true, m_NetConnector.getShouldRequestTop10() );
+		m_NetConnector.sendMyPktAnnounce(  poPkt->m_ConnectId.getOnlineId(), sktBase, true );
 		BigListInfo * bigListInfo = m_BigListMgr.findBigListInfo(poPkt->m_ConnectId.getOnlineId());
 		if( 0 != bigListInfo )
 		{

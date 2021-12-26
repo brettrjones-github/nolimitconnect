@@ -111,15 +111,6 @@ public:
 	virtual bool				isConnectSocket( void )							{ return ((eSktTypeTcpConnect == m_eSktType)?1:0);};
 	virtual bool				isLoopbackSocket( void )						{ return m_LoopbackConnectId == getConnectionId(); };
 
-	virtual void				setIsWebSkt( bool webSkt )						{ m_bIsWebSkt = webSkt; }
-	virtual bool				isWebSkt( void )								{ return m_bIsWebSkt; }
-
-	virtual void				setIsPluginSpecificSkt( bool isPluginSpecific )	{ m_bIsPluginSpecificSkt = isPluginSpecific; };
-	virtual bool				isPluginSpecificSkt( void )						{ return m_bIsPluginSpecificSkt; };
-
-	virtual void				setPluginSpecificNum( uint8_t pluginNum )		{ m_u8PluginSpecificNum = pluginNum; };
-	virtual uint8_t				getPluginSpecificNum( void )					{ return m_u8PluginSpecificNum; };
-
     uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
     const char *				getRemoteIpAddress( void )                      { return m_strRmtIp.c_str(); }
 	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
@@ -331,9 +322,6 @@ protected:
 	void *						m_pvRxCallbackUserData{ nullptr };  // user defined rx callback data
 	void *						m_pvTxCallbackUserData{ nullptr };  // user defined tx callback data
 	void *						m_pvUserExtraData{ nullptr };       // user defined extra data
-	bool						m_bIsWebSkt{ false };
-	bool						m_bIsPluginSpecificSkt{ false };
-	uint8_t						m_u8PluginSpecificNum{ 0 };
     RCODE						m_rcLastSktError{ 0 };			    // last error that occurred
     bool                        m_InUseByRxThread{ false };
 

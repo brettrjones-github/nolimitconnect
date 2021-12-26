@@ -92,7 +92,6 @@ public:
     void						removeConnection( const VxGUID& oOnlineId );
 
 	void						removeContactInfo( VxConnectInfo& contactInfo );
-    void						sendMyTop10( VxSktBase * sktBase, const VxGUID& idToExclude );
 	void						onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
 
 	void						cancelRelayService( void );

@@ -427,6 +427,11 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
     {
         LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s Loopback Socket", DescribeConnectReason( connectReason ) );
         retSktBase = m_Engine.getSktLoopback();
+        if( callback )
+        {
+            callback->onContactConnected( sessionId, retSktBase, onlineId, connectReason );
+        }
+
         return eConnectStatusReady;
     }
 
@@ -446,6 +451,10 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
                 uint64_t timeNow = GetTimeStampMs();
                 HandshakeInfo shakeInfo( sktBase, sessionId, onlineId, callback, connectReason, timeNow );
                 connectInfo->addConnectReason( shakeInfo );
+                if( callback )
+                {
+                    callback->onContactConnected( sessionId, sktBase, onlineId, connectReason );
+                }
             }
             else
             {
@@ -667,7 +676,7 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
 #endif // DEBUG_SKTS
 
         //LogMsg( LOG_INFO, "sendMyPktAnnounce 2\n" ); 
-        if( false == sendMyPktAnnounce( onlineId, sktBase, true, false, false, false ) )
+        if( false == sendMyPktAnnounce( onlineId, sktBase, true, false, false ) )
         {
             LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
             m_ConnectionMutex.unlock();
@@ -963,7 +972,6 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
             bool sendAnnResult = sendMyPktAnnounce(	connectInfo.getMyOnlineId(), 
                                                     sktBase, 
                                                     true, 
-                                                    false,
                                                     requestReverseConnection,
                                                     requestSTUN );
 #ifdef DEBUG_NET_CONNECTOR
@@ -1108,7 +1116,6 @@ bool ConnectionMgr::tryIPv6Connect(	VxConnectInfo& connectInfo, VxSktBase *& ppo
 bool ConnectionMgr::sendMyPktAnnounce(  VxGUID&				destinationId,
                                         VxSktBase *			sktBase, 
                                         bool				requestAnnReply,
-                                        bool				requestTop10,
                                         bool				requestReverseConnection,
                                         bool				requestSTUN )
 {
@@ -1116,7 +1123,6 @@ bool ConnectionMgr::sendMyPktAnnounce(  VxGUID&				destinationId,
     PktAnnounce pktAnn;
     memcpy( &pktAnn, &m_PktAnn, sizeof(PktAnnounce) );
     pktAnn.setIsPktAnnReplyRequested( requestAnnReply );
-    pktAnn.setIsTopTenRequested( requestTop10 );
     pktAnn.setIsPktAnnRevConnectRequested( requestReverseConnection );
     pktAnn.setIsPktAnnStunRequested( requestSTUN );
 
@@ -1144,6 +1150,7 @@ bool ConnectionMgr::txPacket(	VxGUID&				destinationId,
 {
     bool bSendSuccess = false;
     poPkt->setSrcOnlineId( m_PktAnn.getMyOnlineId() );
+    vx_assert( poPkt->getPktType() == PKT_TYPE_ANNOUNCE );
 
     if( 0 == (poPkt->getPktLength() & 0xf ) )
     {
@@ -1288,29 +1295,27 @@ EConnectStatus ConnectionMgr::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo
         // we are connected to users proxy
         // first send announcement to his proxy then to him
         VxGUID& oRelayOnlineId = connectInfo.m_RelayConnectId.getOnlineId();
-        LogMsg( LOG_INFO, "sendMyPktAnnounce 3\n" ); 
+        LogMsg( LOG_INFO, "sendMyPktAnnounce 3" ); 
         bool bResult =  sendMyPktAnnounce(	oRelayOnlineId, 
                                             sktBase, 
                                             eFriendStateAnonymous, 
                                             eFriendStateAnonymous,
-                                            true,
-                                            false );
+                                            true );
         if( true == bResult )
         {
             // now send announce to remote user
             bool requestReverseConnection = ( ( false == m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
             bool requestSTUN = ( ( m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
-            LogMsg( LOG_INFO, "sendMyPktAnnounce 4\n" ); 
+            LogMsg( LOG_INFO, "sendMyPktAnnounce 4" ); 
             bResult = sendMyPktAnnounce( connectInfo.getMyOnlineId(), 
                                             sktBase, 
                                             true, 
-                                            false,
                                             requestReverseConnection,
                                             requestSTUN );
             if( false == bResult )
             {
                 RCODE rc = sktBase->getLastSktError();
-                LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact\n", rc, sktBase->describeSktError( rc ) );
+                LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact", rc, sktBase->describeSktError( rc ) );
                 sktBase->closeSkt( eSktCloseThroughRelayPktAnnSendFail );
                 sktBase = nullptr;
             }

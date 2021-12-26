@@ -223,18 +223,6 @@ bool PktAnnActionData::extractFromBlob( PktBlobEntry& blob )
 }
 
 //============================================================================
-void PktAnnActionData::setIsTopTenRequested( bool enable )
-{
-	if( enable )(m_u8RequestFlags |= FLAG_PKT_ANN_REQ_TOP_TEN); else m_u8RequestFlags &= (~FLAG_PKT_ANN_REQ_TOP_TEN); 
-}
-
-//============================================================================
-bool PktAnnActionData::getIsTopTenRequested( void )
-{
-	return (m_u8RequestFlags & FLAG_PKT_ANN_REQ_TOP_TEN) ? true : false;
-}
-
-//============================================================================
 void		PktAnnActionData::setIsPktAnnReplyRequested( bool bReqReply )		{ if( bReqReply )(m_u8RequestFlags |= FLAG_PKT_ANN_REQ_REPLY); else m_u8RequestFlags &= (~FLAG_PKT_ANN_REQ_REPLY); }
 bool		PktAnnActionData::getIsPktAnnReplyRequested( void )					{ return (m_u8RequestFlags & FLAG_PKT_ANN_REQ_REPLY)?true:false; }
 void		PktAnnActionData::setIsPktAnnRevConnectRequested( bool bReqConnect ){ if( bReqConnect )(m_u8RequestFlags |= FLAG_PKT_ANN_REQ_REV_CONNECT); else m_u8RequestFlags &= (~FLAG_PKT_ANN_REQ_REV_CONNECT); }

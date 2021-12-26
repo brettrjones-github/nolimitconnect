@@ -359,7 +359,7 @@ void LogAppendLineFeed( char * buf, size_t sizeOfBuf )
 
 //============================================================================
 // This function is called by vx_assert() when the assertion fails.
-void  vx_error_output( unsigned long u32MsgType, char* exp,char * file, int line)
+void  vx_error_output( unsigned long u32MsgType, char* exp, char* file, int line)
 {
     vx_error(u32MsgType, "** VX ASSERTION **\r\n expression: %s\r\n file: %s\r\n line: %d\r\n", exp, file, line);
 	AppErr( eAppErrBadParameter, "ASSERTION: %s\r\n file: %s\r\n line: %d\r\n", exp, file, line );
@@ -367,7 +367,7 @@ void  vx_error_output( unsigned long u32MsgType, char* exp,char * file, int line
 
 //============================================================================
 // This function is called by vx_assert2() when the assertion fails.
-void vx_error_output2(unsigned long u32MsgType, char* exp,  char* msg, char* file, int line)
+void vx_error_output2(unsigned long u32MsgType, char* exp, char* msg, char* file, int line)
 {
     vx_error(u32MsgType, "** VX ASSERTION ***\r\n programmer says: %s\r\nexpression: %s\r\n file: %s\r\n line: %d\r\n", msg, exp, file, line);
 	AppErr( eAppErrBadParameter, "ASSERTION: %s\r\n expression: %s\r\n file: %s\r\n line: %d\r\n", msg, exp, file, line );

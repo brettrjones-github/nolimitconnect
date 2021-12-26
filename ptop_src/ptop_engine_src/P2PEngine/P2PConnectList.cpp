@@ -52,7 +52,6 @@ void P2PConnectList::fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 			PktAnnounce pktAnn;
 			memcpy( &pktAnn, &m_Engine.getMyPktAnnounce(), sizeof(PktAnnounce) );
 			pktAnn.setIsPktAnnReplyRequested( false );
-			pktAnn.setIsTopTenRequested( false );
 			pktAnn.setIsPktAnnRevConnectRequested( false );
 			pktAnn.setIsPktAnnStunRequested( false );
 
@@ -446,9 +445,4 @@ void P2PConnectList::removeContactInfo( VxConnectInfo& contactInfo )
 	LogMsg( LOG_INFO, "P2PConnectList::removeContactInfo connectListUnlock\n" );
 #endif // DEBUG_MUTEXES
 	connectListUnlock();
-}
-
-//============================================================================
-void P2PConnectList::sendMyTop10( VxSktBase * sktBase, const VxGUID& idToExclude )
-{
 }

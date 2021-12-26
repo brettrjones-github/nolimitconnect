@@ -143,7 +143,7 @@ public:
 	void						handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	void						handleFirstNetServiceConnection( VxSktBase * sktBase );
 	bool						handleFirstWebPageConnection( VxSktBase * sktBase );
-	void						handlePluginSpecificSkt( VxSktBase * sktBase );
+
 	PluginBase*				    findPlugin( EPluginType ePluginType );
     PluginBase*				    findHostClientPlugin( EHostType hostType );
     PluginBase*				    findHostServicePlugin( EHostType hostType );

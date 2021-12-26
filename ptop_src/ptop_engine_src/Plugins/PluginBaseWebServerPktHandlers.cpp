@@ -249,6 +249,7 @@ RCODE PluginBaseWebServer::sendWebServerData(	bool					bIsGetData,				// if true
 											int						iSendTimeoutSeconds )	// timeout attempt to send
 {
 	RCODE rc = 0;
+	/*
 	if( poSktIn->isWebSkt() )
 	{
 		RcWebSkt * sktBase = (RcWebSkt *)poSktIn;
@@ -327,7 +328,7 @@ RCODE PluginBaseWebServer::sendWebServerData(	bool					bIsGetData,				// if true
 			LogMsg( LOG_ERROR, "sendWebServerData ERROR skt %d\n", poRmtSkt );
 		}
 	}
-
+	*/
 	return rc;
 }
 

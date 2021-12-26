@@ -29,7 +29,11 @@ PktHandlerBase::PktHandlerBase()
 	}
 
 	int maxPktType = MAX_PKT_TYPE_CNT;
-    vx_assert( 156 == maxPktType );
+	vx_assert( 64 == PKT_TYPE_THUMB_SEND_COMPLETE_REQ );
+	vx_assert( 128 == PKT_TYPE_OFFER_SEND_REQ );
+	vx_assert( 143 == PKT_TYPE_STORY_DATA_REQ );
+	vx_assert( 150 == PKT_TYPE_RELAY_SESSION_REPLY );
+    vx_assert( 160 == maxPktType );
 	m_aBaseSysPktFuncTable[ 0 ] = &PktHandlerBase::onPktInvalid;
 
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ANNOUNCE ]							= &PktHandlerBase::onPktAnnounce;

@@ -59,11 +59,8 @@ public:
 	bool						sendMyPktAnnounce(  VxGUID&					destinationId,
 													VxSktBase *				sktBase, 
 													bool					requestAnnReply = false,
-													bool					requestTop10 = false,
 													bool					requestReverseConnection = false,
 													bool					requestSTUN = false );
-
-	bool						getShouldRequestTop10( void );
 
 	//void						handleAnnounceResults( HostList * anchorList, EConnectReason connectReason = eConnectReasonAnnouncePing );
 	//void						handleRandomConnectResults( HostList * anchorList );

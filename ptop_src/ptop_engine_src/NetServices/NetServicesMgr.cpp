@@ -747,6 +747,8 @@ static int uint16_t = 0;
 				}
 			}
 
+            m_Engine.sendToGuiStatusMessage( "Success Connect lcl ip %s to connect service %s.. starting test", lclIP.c_str(), netSrvUrl.c_str() );
+
             portOpenTestError = sendAndRecieveIsMyPortOpen( portTestTimer,
                                                             &portOpenConn1,
                                                             tcpListenPort,
@@ -775,30 +777,29 @@ static int uint16_t = 0;
 
 	if( eNetCmdErrorNone == portOpenTestError )
 	{
+        if( !m_pfuncPortOpenCallbackHandler )
+        {
+            m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, retMyExternalIp );
+        }
+
         LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s sec %3.3f thread 0x%x", 
             tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 
 		m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :) IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
-
-		if( !m_pfuncPortOpenCallbackHandler )
-		{
-			m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, retMyExternalIp );
-		}
 	}
 	else
 	{
 		portOpenTestError = eNetCmdErrorPortIsClosed;
 
+        if( !m_pfuncPortOpenCallbackHandler )
+        {
+            m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
+        }
+
 		LogModule( eLogIsPortOpenTest, LOG_INFO, "Your TCP Port %d IS CLOSED :( IP %s->%s->%s sec %3.3f", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec() );
 
-		m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSDE :( IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
-
-		if( !m_pfuncPortOpenCallbackHandler )
-		{
-			m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, retMyExternalIp );
-		}
+        m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP %s->%s->connect test %s", tcpListenPort, lclIP.c_str(), retMyExternalIp.c_str(), netSrvUrl.c_str() );
 	}
-
 
 	return portOpenTestError; 
 }

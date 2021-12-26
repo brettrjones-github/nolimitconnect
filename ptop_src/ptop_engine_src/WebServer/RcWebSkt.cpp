@@ -35,7 +35,6 @@ RcWebSkt::RcWebSkt()
 , m_u64LenSent(0)
 , m_WebServerPlugin(0)
 {
-	setIsWebSkt( true );
 }
 
 //============================================================================

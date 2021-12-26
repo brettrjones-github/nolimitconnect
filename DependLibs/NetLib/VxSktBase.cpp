@@ -110,13 +110,11 @@ bool VxSktBase::checkForImAliveTimeout( bool calledFromSktThread )
 	bool timedOut = false;
 	if( ( INVALID_SOCKET != m_Socket )
 		&& ( ( eSktTypeTcpConnect == m_eSktType ) || ( eSktTypeTcpAccept == m_eSktType ) )
-		&& !m_bIsWebSkt
-		&& !m_bIsPluginSpecificSkt
 		&& ( IM_ALIVE_TIMEOUT_MS < ( GetGmtTimeMs() - getLastImAliveTimeMs() ) ) )
 	{
 		timedOut = true;
 		m_bClosingFromRxThread = calledFromSktThread;
-		LogMsg( LOG_INFO, "VxSktBase::checkForImAliveTimeout skt %d %s\n", m_iSktId, m_strRmtIp.c_str() );
+		LogMsg( LOG_INFO, "VxSktBase::checkForImAliveTimeout skt %d %s", m_iSktId, m_strRmtIp.c_str() );
 		closeSkt( eSktCloseImAliveTimeout );
 	}
 

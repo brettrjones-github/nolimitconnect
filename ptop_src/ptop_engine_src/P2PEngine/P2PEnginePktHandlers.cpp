@@ -145,13 +145,6 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
 	}
 
-	if( pkt->getIsTopTenRequested() )
-	{
-		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s top ten requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
-		pkt->setIsTopTenRequested( false );
-		m_ConnectionList.sendMyTop10( sktBase, pkt->getSrcOnlineId() );
-	}
-
 	if( pkt->getTTL() )
 	{
 		pkt->setTTL( pkt->getTTL() - 1 );

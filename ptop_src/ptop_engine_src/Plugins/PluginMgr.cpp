@@ -382,8 +382,8 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase * sktBase )
 
 	parseOffset += 33;
 	sktBase->sktBufAmountRead( 0 );
-	sktBase->setIsPluginSpecificSkt( true );
-	sktBase->setPluginSpecificNum( (uint8_t)ePluginTypeWebServer );
+	//sktBase->setIsPluginSpecificSkt( true );
+	//sktBase->setPluginSpecificNum( (uint8_t)ePluginTypeWebServer );
 	PluginBase * poPlugin = getPlugin( ePluginTypeWebServer );
 	if( poPlugin )
 	{
@@ -488,8 +488,8 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	if( ePluginTypeInvalid != pluginType )
 	{
-		sktBase->setIsPluginSpecificSkt( true );
-		sktBase->setPluginSpecificNum( (uint8_t)pluginType );
+		//sktBase->setIsPluginSpecificSkt( true );
+		//sktBase->setPluginSpecificNum( (uint8_t)pluginType );
 		
 		VxNetIdent * netIdent = NULL;
 		if( netServiceHdr.m_OnlineId == m_Engine.getMyPktAnnounce().getMyOnlineId() )
@@ -536,20 +536,6 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
         m_Engine.hackerOffense( eHackerLevelSevere, eHackerReasonHttpAttack, nullptr, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s", sktBase->getRemoteIp().c_str() );
         sktBase->dumpSocketStats();
 		sktBase->closeSkt( eSktCloseHttpHandleError );
-	}
-}
-
-//============================================================================
-void PluginMgr::handlePluginSpecificSkt( VxSktBase * sktBase )
-{
-	uint8_t u8PluginNum = sktBase->getPluginSpecificNum();
-	if( isValidPluginNum( u8PluginNum ) )
-	{
-		getPlugin( (EPluginType)u8PluginNum )->handlePluginSpecificSkt( sktBase );
-	}
-	else
-	{
-		LogMsg( LOG_ERROR, "PluginMgr::handlePluginSpecificSkt invalid plugin num %d\n", u8PluginNum );
 	}
 }
 

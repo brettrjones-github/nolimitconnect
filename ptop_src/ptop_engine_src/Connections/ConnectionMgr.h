@@ -126,7 +126,6 @@ protected:
     bool                        sendMyPktAnnounce(  VxGUID&				destinationId,
                                                     VxSktBase *			sktBase,
                                                     bool				requestAnnReply,
-                                                    bool				requestTop10,
                                                     bool				requestReverseConnection,
                                                     bool				requestSTUN );
     bool                        txPacket( VxGUID&				destinationId,

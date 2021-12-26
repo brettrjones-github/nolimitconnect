@@ -29,7 +29,6 @@
 #define FLAG_PKT_ANN_REQ_REPLY					0x01
 #define FLAG_PKT_ANN_REQ_REV_CONNECT			0x02
 #define FLAG_PKT_ANN_REQ_STUN					0x04
-#define FLAG_PKT_ANN_REQ_TOP_TEN				0x08
 
 // +  1 m_u8TimeToLive
 // +  1 m_u8RequestFlags
@@ -47,8 +46,6 @@ public:
 
 	void						setTTL( uint8_t timeToLive )					{ m_u8TimeToLive = timeToLive; }
 	uint8_t						getTTL( void )							        { return m_u8TimeToLive; }
-	void						setIsTopTenRequested( bool enable );
-	bool						getIsTopTenRequested( void );
 
 	void						setIsPktAnnReplyRequested( bool bReqReply );
 	bool						getIsPktAnnReplyRequested( void );

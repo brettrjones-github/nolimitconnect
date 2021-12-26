@@ -450,7 +450,6 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 			bool sendAnnResult = sendMyPktAnnounce(	connectInfo.getMyOnlineId(), 
 													sktBase, 
 													true, 
-													getShouldRequestTop10(),
 													requestReverseConnection,
 													requestSTUN );
 #ifdef DEBUG_NET_CONNECTOR
@@ -643,7 +642,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 
 		GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
 
-		if( false == sendMyPktAnnounce( connectInfo.getMyOnlineId(), sktBase, true, getShouldRequestTop10() ) )
+		if( false == sendMyPktAnnounce( connectInfo.getMyOnlineId(), sktBase, true ) )
 		{
             LogModule( eLogConnect, LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce" );
 			return -1;
@@ -687,29 +686,27 @@ RCODE NetConnector::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo,
 		// we are connected to users proxy
 		// first send announcement to his proxy then to him
 		VxGUID& oRelayOnlineId = connectInfo.m_RelayConnectId.getOnlineId();
-		LogMsg( LOG_INFO, "sendMyPktAnnounce 3\n" ); 
+		LogMsg( LOG_INFO, "sendMyPktAnnounce 3" ); 
 		bool bResult =  sendMyPktAnnounce(	oRelayOnlineId, 
 			sktBase, 
 			eFriendStateAnonymous, 
 			eFriendStateAnonymous,
-			true,
-			false );
+			true );
 		if( true == bResult )
 		{
 			// now send announce to remote user
 			bool requestReverseConnection = ( ( false == m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
 			bool requestSTUN = ( ( m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
-			LogMsg( LOG_INFO, "sendMyPktAnnounce 4\n" ); 
+			LogMsg( LOG_INFO, "sendMyPktAnnounce 4" ); 
 			bResult = sendMyPktAnnounce( connectInfo.getMyOnlineId(), 
 										sktBase, 
 										true, 
-										getShouldRequestTop10(),
 										requestReverseConnection,
 										requestSTUN );
 			if( false == bResult )
 			{
 				RCODE rc = sktBase->getLastSktError();
-				LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact\n", rc, sktBase->describeSktError( rc ) );
+				LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact", rc, sktBase->describeSktError( rc ) );
 				sktBase->closeSkt( eSktCloseThroughRelayPktAnnSendFail );
 				sktBase = NULL;
 			}
@@ -734,7 +731,6 @@ RCODE NetConnector::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo,
 bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
 									   VxSktBase *			sktBase, 
 									   bool					requestAnnReply,
-									   bool					requestTop10,
 									   bool					requestReverseConnection,
 									   bool					requestSTUN )
 {
@@ -742,7 +738,6 @@ bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
 	PktAnnounce pktAnn;
 	m_Engine.copyMyPktAnnounce( pktAnn );
 	pktAnn.setIsPktAnnReplyRequested( requestAnnReply );
-	pktAnn.setIsTopTenRequested( requestTop10 );
 	pktAnn.setIsPktAnnRevConnectRequested( requestReverseConnection );
 	pktAnn.setIsPktAnnStunRequested( requestSTUN );
 
@@ -761,18 +756,6 @@ bool NetConnector::sendMyPktAnnounce(  VxGUID&				destinationId,
 	//	requestAnnReply );
 
 	return txPacket( destinationId, sktBase, &pktAnn );	
-}
-
-//============================================================================
-bool NetConnector::getShouldRequestTop10( void )
-{
-	if( (  m_PktAnn.requiresRelay() && ( false == m_Engine.getConnectList().isMyRelayAvailable() ) )
-		|| ( eScanTypeNone != m_Engine.getRcScan().getScanType() ) )
-	{
-		return true;
-	}
-
-	return false;
 }
 
 //============================================================================

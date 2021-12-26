@@ -1617,6 +1617,8 @@ bool P2PEngine::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent,
 	VxPtopUrl ptopUrl( url );
 	if( ptopUrl.isValid() )
 	{
+		VxGUID onlineId = ptopUrl.getOnlineId();
+		LogMsg( LOG_DEBUG, "P2PEngine::fromGuiQueryIdentity onlineId hex %s online %s url %s", onlineId.toHexString().c_str(), onlineId.toOnlineIdString().c_str(), ptopUrl.getUrl().c_str() );
 		if( getMyOnlineId() == ptopUrl.getOnlineId() )
 		{
 			retNetIdent = *getMyPktAnnounce().getVxNetIdent();
