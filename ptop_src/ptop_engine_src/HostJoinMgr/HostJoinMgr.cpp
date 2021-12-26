@@ -43,7 +43,7 @@ void HostJoinMgr::fromGuiUserLoggedOn( void )
         dbFileName += m_HostJoinInfoDb.getDatabaseName(); 
         lockResources();
         m_HostJoinInfoDb.dbShutdown();
-        m_HostJoinInfoDb.dbStartup( USER_HOST_DB_VERSION, dbFileName );
+        m_HostJoinInfoDb.dbStartup( USER_HOST_JOIN_DB_VERSION, dbFileName );
 
         clearHostJoinInfoList();
         m_HostJoinInfoDb.getAllHostJoins( m_HostJoinInfoList );

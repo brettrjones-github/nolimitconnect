@@ -105,6 +105,8 @@ enum EConnectReason
     eConnectReasonPktTcpPunch,
     eConnectReasonRelayService,
 
+    eConnectReasonRequestIdentity,
+
     eMaxConnectReason
 };
 

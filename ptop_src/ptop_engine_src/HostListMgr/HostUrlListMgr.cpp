@@ -13,7 +13,11 @@
 //============================================================================
 
 #include "HostUrlListMgr.h"
+#include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+
+#include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
 HostUrlListMgr::HostUrlListMgr( P2PEngine& engine )
@@ -80,6 +84,7 @@ void HostUrlListMgr::updateHostUrl( EHostType hostType, VxGUID& onlineId, std::s
 bool HostUrlListMgr::getHostUrls( EHostType hostType, std::vector<HostUrlInfo>& retHostUrls )
 {
     retHostUrls.clear();
+    lockList();
     for( auto iter = m_HostUrlsList.begin(); iter != m_HostUrlsList.end(); ++iter )
     {
         if( iter->getHostType() == hostType )
@@ -88,5 +93,87 @@ bool HostUrlListMgr::getHostUrls( EHostType hostType, std::vector<HostUrlInfo>& 
         }
     }
 
+    unlockList();
+
     return !retHostUrls.empty();
+}
+
+//============================================================================
+/// return false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
+bool HostUrlListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) 
+{ 
+    if( eConnectReasonRequestIdentity == connectReason )
+    {
+        BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( onlineId );
+        if( bigListInfo )
+        {
+            updateHostUrls( bigListInfo->getVxNetIdent() );
+            m_Engine.getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
+        }
+
+        m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
+    }
+
+    return false; 
+}
+
+//============================================================================
+void HostUrlListMgr::requestIdentity( std::string& url )
+{
+    VxPtopUrl ptopUrl( url );
+    if( ptopUrl.isValid() )
+    {
+        // just make up any session.. we only care about the identity then will disconnect
+        VxGUID sessionId;
+        sessionId.initializeWithNewVxGUID();
+        VxSktBase* sktBase{ nullptr };
+        m_Engine.getConnectionMgr().requestConnection( sessionId, ptopUrl.getUrl(), ptopUrl.getOnlineId(), this, sktBase, eConnectReasonRequestIdentity );
+    }
+}
+
+//============================================================================
+void HostUrlListMgr::updateHostUrls( VxNetIdent* netIdent )
+{
+    if( !netIdent )
+    {
+        LogMsg( LOG_ERROR, "HostUrlListMgr::updateHostUrls null netIdent" );
+        return;
+    }
+
+    if( netIdent->requiresRelay() )
+    {
+        removeClosedPortIdent( netIdent->getMyOnlineId() );
+    }
+    else
+    {     
+        std::string nodeUrl = netIdent->getMyOnlineUrl();
+        for( int i = eHostTypeUnknown + 1; i < eMaxHostType; ++i )
+        {
+            EHostType hostType = ( EHostType )i;
+            if( netIdent->canRequestJoin( hostType ) )
+            {
+                updateHostUrl( hostType, netIdent->getMyOnlineId(), nodeUrl );
+            }
+        }
+    }
+}
+
+//============================================================================
+void HostUrlListMgr::removeClosedPortIdent( VxGUID& onlineId )
+{
+    lockList();
+    for( auto iter = m_HostUrlsList.begin(); iter != m_HostUrlsList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId )
+        {
+            m_HostUrlsList.erase( iter );
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+
+    unlockList();
+    m_HostUrlListDb.removeClosedPortIdent( onlineId );
 }

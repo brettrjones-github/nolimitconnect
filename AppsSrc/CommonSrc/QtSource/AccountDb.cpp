@@ -162,7 +162,7 @@ bool AccountDb::insertAccount( VxNetIdent& oUserAccount )
 	RCODE rc = sqlExec( "INSERT INTO account_login (online_name,ident,online_id) values(?,?,?)", bindList );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "AccountDb::insertAccount: ERROR %d %s\n", rc, sqlite3_errmsg(m_Db) );
+		LogMsg( LOG_ERROR, "AccountDb::insertAccount: ERROR %d %s", rc, sqlite3_errmsg(m_Db) );
 	}
 	
 	return rc ? false : true;

@@ -124,6 +124,9 @@ public:
 	bool                        isValidNetIdent( void );
 	bool						isOnlineNameValid( void );
 
+	bool						canRequestJoin( EHostType hostType );
+	bool						canJoinImmediate( EHostType hostType ); // request to join will be granted immediate because have sufficient permission
+
 private:
 	EPluginAccess			    getPluginAccessState( EPluginType ePluginType, EFriendState eFriendState );
 

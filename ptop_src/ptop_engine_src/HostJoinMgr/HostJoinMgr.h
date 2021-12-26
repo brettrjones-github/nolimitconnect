@@ -26,7 +26,7 @@ class VxNetIdent;
 
 class HostJoinMgr 
 {
-    const int USER_HOST_DB_VERSION = 1;
+    const int USER_HOST_JOIN_DB_VERSION = 1;
 public:
 	HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
 	virtual ~HostJoinMgr() = default;

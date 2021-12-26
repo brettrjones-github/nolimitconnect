@@ -29,6 +29,7 @@ public:
 
 	void						getAllHostUrls( std::vector<HostUrlInfo>& hostUrlList );
 	bool						saveHostUrl( HostUrlInfo& hostUrlInfo );
+	void						removeClosedPortIdent( VxGUID& onlineId );
 
 protected:
 	virtual RCODE				onCreateTables( int iDbVersion );

@@ -366,10 +366,6 @@ public:
     virtual EInternetStatus     fromGuiGetInternetStatus( void ) override;
     /// Get network status
     virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) override;
-
-#ifdef TARGET_OS_ANDROID
-    virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) override;
-#endif // TARGET_OS_ANDROID
     virtual bool				fromGuiNearbyBroadcastEnable( bool enable ) override;
 
     virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL ) override;
@@ -394,7 +390,7 @@ public:
     virtual void                fromGuiListAction( EListAction listAction ) override;
     virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType ) override;
     virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl ) override;
-    virtual std::string			fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId ) override;
+    virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
 

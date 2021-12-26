@@ -13,10 +13,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_appcorelibs.h>
-#include <ptop_src/ptop_engine_src/BigListLib/BigListDb.h>
-#include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
-#include <ptop_src/ptop_engine_src/BigListLib/BigListMgr.h>
+#include "BigListDb.h"
+#include "BigListInfo.h"
+#include "BigListMgr.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IGoTv.h>
 

@@ -318,7 +318,8 @@ void ConnectionMgr::applyDefaultHostUrl( EHostType hostType, std::string& hostUr
             m_Engine.getUrlMgr().updateUrlCache( hostUrl, onlineId );
             if( hostType != eHostTypeUnknown )
             {
-                m_Engine.getHostUrlListMgr().updateHostUrl( hostType, onlineId, m_Engine.getUrlMgr().resolveUrl( hostUrl ) );
+                std::string resolvedUrl = m_Engine.getUrlMgr().resolveUrl( hostUrl );
+                m_Engine.getHostUrlListMgr().updateHostUrl( hostType, onlineId, resolvedUrl );
             }
         }
 
@@ -351,7 +352,8 @@ void ConnectionMgr::callbackQueryIdSuccess( UrlActionInfo& actionInfo, VxGUID on
     updateUrlCache( hostUrl, onlineId );
     if( actionInfo.getHostType() != eHostTypeUnknown )
     {
-        m_Engine.getHostUrlListMgr().updateHostUrl( actionInfo.getHostType(), onlineId, m_Engine.getUrlMgr().resolveUrl( hostUrl ) );
+        std::string resolvedUrl = m_Engine.getUrlMgr().resolveUrl( hostUrl );
+        m_Engine.getHostUrlListMgr().updateHostUrl( actionInfo.getHostType(), onlineId, resolvedUrl );
     }
 
     if( actionInfo.getConnectReqInterface() )

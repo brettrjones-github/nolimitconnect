@@ -18,6 +18,7 @@
 #include "GuiHelpers.h"
 
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
 AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
@@ -35,6 +36,9 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	connect( ui.m_HostTypeComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostTypeComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostUrlSelectionChange( int ) ) );
 	connect( ui.m_QueryButton, SIGNAL( clicked() ), this, SLOT( slotQueryButtonClicked() ) );
+	connect( ui.m_GetNetworkHostIdentityButton, SIGNAL( clicked() ), this, SLOT( slotNetworkHostIdentityButtonClicked() ) );
+	connect( ui.m_GetNetHostListButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostListFromNetworkHostButtonClicked() ) );
+	connect( ui.m_JoinHostButton, SIGNAL( clicked() ), this, SLOT( slotJoinHostButtonClicked() ) );
 
 	if( ui.m_HostTypeComboBox->count() )
 	{
@@ -47,22 +51,37 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	}
 
 	m_MyApp.activityStateChange( this, true );
+	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
 }
 
 //============================================================================
 AppletTestHostClient::~AppletTestHostClient()
 {
+	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletTestHostClient::callbackOnUserAdded( GuiUser* guiUser )
+{
+	if( m_NetHostOnlineId == guiUser->getMyOnlineId() )
+	{
+		ui.m_HostIdentWidget->updateIdentity( guiUser );
+	}
+}
+
+//============================================================================
+void AppletTestHostClient::callbackOnUserUpdated( GuiUser* guiUser )
+{
+	if( m_NetHostOnlineId == guiUser->getMyOnlineId() )
+	{
+		ui.m_HostIdentWidget->updateIdentity( guiUser );
+	}
 }
 
 //============================================================================
 void AppletTestHostClient::slotNetworkHostComboBoxSelectionChange( int comboIdx )
 {
-	EHostType hostType = GuiHelpers::comboIdxToHostType( comboIdx );
-	if( hostType != eHostTypeUnknown )
-	{
-		updateHostType( hostType );
-	}
 }
 
 //============================================================================
@@ -100,6 +119,7 @@ void AppletTestHostClient::updateHostType( EHostType hostType )
 
 }
 
+//============================================================================
 void AppletTestHostClient::fillHostList( EHostType hostType, QComboBox* comboBox )
 {
 	comboBox->clear();
@@ -108,11 +128,10 @@ void AppletTestHostClient::fillHostList( EHostType hostType, QComboBox* comboBox
 	if( !defaultUrlStr.empty() )
 	{
 		QString defaultUrl;
-		VxGUID onlineId;
-		std::string userName = m_MyApp.getFromGuiInterface().fromGuiQueryUrlUserName( defaultUrlStr, onlineId );
-		if( !userName.empty() )
+		VxNetIdent netIdent;
+		if( m_MyApp.getFromGuiInterface().fromGuiQueryIdentity( defaultUrlStr, netIdent, false ) )
 		{
-			defaultUrl = userName.c_str();
+			defaultUrl = netIdent.getOnlineName();
 			defaultUrl += " - ";
 			defaultUrl += defaultUrlStr.c_str();
 		}
@@ -123,5 +142,39 @@ void AppletTestHostClient::fillHostList( EHostType hostType, QComboBox* comboBox
 
 		comboBox->addItem( defaultUrl );
 	}
+}
+
+//============================================================================
+void AppletTestHostClient::slotNetworkHostIdentityButtonClicked( void )
+{
+	QString url = ui.m_NetworkHostComboBox->currentText();
+	if( !url.isEmpty() )
+	{
+		VxPtopUrl ptopUrl( url.toUtf8().constData() );
+		if( ptopUrl.isValid() )
+		{
+			m_NetHostOnlineId = ptopUrl.getOnlineId();
+			VxNetIdent netIdent;
+			if( m_MyApp.getEngine().fromGuiQueryIdentity( ptopUrl.getUrl(), netIdent, true ) )
+			{
+				ui.m_HostIdentWidget->updateIdentity( &netIdent );
+			}
+		}
+		else
+		{
+			okMessageBox( QObject::tr( "Invalid URL" ), QObject::tr( "Invalid URL" ) );
+		}
+	}
+}
+
+//============================================================================
+void AppletTestHostClient::slotQueryHostListFromNetworkHostButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void AppletTestHostClient::slotJoinHostButtonClicked( void )
+{
 
 }

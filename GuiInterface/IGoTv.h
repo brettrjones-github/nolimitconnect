@@ -579,7 +579,6 @@ public:
     virtual bool				fromGuiTestCmd( IFromGui::ETestParam1		eTestParam1,
                                                 int							testParam2 = 0,
                                                 const char *				testParam3 = NULL );
-    virtual void				fromGuiMulitcastPkt( uint8_t * pktData, int dataLen );
     virtual bool				fromGuiNearbyBroadcastEnable( bool enable );
     virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL );
     virtual void				fromGuiSendLog( uint32_t u32LogFlags );
@@ -613,7 +612,7 @@ public:
     virtual void				fromGuiListAction( EListAction listAction );
     virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType );
     virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl );
-    virtual std::string			fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId );
+    virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown );
   
     //============================================================================
     //=== utilities ===//

@@ -646,14 +646,6 @@ bool IGoTv::fromGuiTestCmd( IFromGui::ETestParam1		eTestParam1,
 }
 
 //============================================================================
-void IGoTv::fromGuiMulitcastPkt( uint8_t * pktData, int dataLen )
-{
-#ifdef TARGET_OS_ANDROID
-    getPtoP().fromGuiMulitcastPkt( pktData, dataLen );
-#endif // TARGET_OS_ANDROID
-}
-
-//============================================================================
 bool IGoTv::fromGuiNearbyBroadcastEnable( bool enable )
 {
     return getPtoP().fromGuiNearbyBroadcastEnable( enable );
@@ -804,7 +796,7 @@ bool IGoTv::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
 }
 
 //============================================================================
-std::string	IGoTv::fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId )
+bool IGoTv::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown )
 {
-    return getPtoP().fromGuiQueryUrlUserName( url, onlineId );
+    return getPtoP().fromGuiQueryIdentity( url, retNetIdent, requestIdentityIfUnknown );
 }

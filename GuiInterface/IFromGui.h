@@ -394,10 +394,6 @@ public:
     virtual EInternetStatus     fromGuiGetInternetStatus( void ) = 0;
     /// Get network status
     virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) = 0;
-#ifdef TARGET_OS_ANDROID
-	/// Not used.. in android multicast for discovery of contact on same LAN is done in Jave code
-	virtual int					fromGuiMulitcastPkt( uint8_t * data, int len ) = 0;
-#endif // TARGET_OS_ANDROID
 
 	virtual bool				fromGuiNearbyBroadcastEnable( bool enable ) = 0;
 
@@ -426,5 +422,5 @@ public:
 	virtual void				fromGuiListAction( EListAction listAction ) = 0;
 	virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType ) = 0;
 	virtual bool				fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl ) = 0;
-	virtual std::string			fromGuiQueryUrlUserName( std::string& url, VxGUID& onlineId ) = 0;
+	virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) = 0;
 };

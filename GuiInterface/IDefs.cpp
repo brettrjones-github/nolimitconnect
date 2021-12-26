@@ -21,30 +21,31 @@ namespace
     const char * ConnectReasonEnumStrings[] =
     { 
         "Connect Reason Unknown ",
-        "Connect Reason Chat RoomAnnounce ",
-        "Connect Reason Chat Room Join ",
-        "Connect Reason Chat Room Search ",
+
         "Connect Reason Group Announce ",
         "Connect Reason Group Join ",
         "Connect Reason Group Search ",
 
+        "Connect Reason Chat RoomAnnounce ",
+        "Connect Reason Chat Room Join ",
+        "Connect Reason Chat Room Search ",
+
         "Connect Reason Random Connect Announce ",
         "Connect Reason Random Connect Join ",
         "Connect Reason Random Connect Search ",  
-        "Connect Reason Relay Announce ",
-        "Connect Reason Relay Join ",
-        "Connect Reason Relay Search ",
 
         "Connect Reason Announce Ping ",  
         "Connect Reason Stay Connected ",
         "Connect Reason Plugin ",  
         "Connect Reason Other Search ",
 
-        "Connect Reason Nearby LAN "
+        "Connect Reason Nearby LAN ",
         "Connect Reason Same External Ip ",
-        "Connect Reason Reverse Connect Requested "
-        "Connect Reason Pkt Tcp Punch "
-        "Connect Reason Relay Service "
+        "Connect Reason Reverse Connect Requested ",
+        "Connect Reason Pkt Tcp Punch ",
+        "Connect Reason Relay Service ",
+
+        "Connect Reason Request Identity ",
 
         "Max Connect Reason ",
     };
@@ -272,7 +273,7 @@ namespace
         "Network State Failed Resolve Network Host URL ", // 10 eNetworkStateTypeFailedResolveHostNetwork
         "Network State Failed Resolve Group List Host URL ", // 11 eNetworkStateTypeFailedResolveHostGroupList
         "Network State Failed Resolve Group Host URL ", // 12 eNetworkStateTypeFailedResolveHostGroup
-        "Max Network State "
+        "Max Network State ",
     };
 
     const char * RelayStatusEnumStrings[] =
@@ -285,7 +286,7 @@ namespace
         "Relay List Exhausted ",        // 5 eMyRelayStatusRelayListExhasted
         "Relay Assume Firewalled ",     // 6 eMyRelayStatusAssumeFirewalled
         "Relay Assume Can Direct Connect ", // 7 eMyRelayStatusAssumeCanDirectConnect
-        "Max Relay Status "
+        "Max Relay Status ",
     };
 
     const char * OfferStateEnumStrings[] =

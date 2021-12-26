@@ -53,6 +53,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxMutex.h \
     $$PWD/DependLibs/CoreLib/VxParse.h \
     $$PWD/DependLibs/CoreLib/VxProfile.h \
+    $$PWD/DependLibs/CoreLib/VxPtopUrl.h \
     $$PWD/DependLibs/CoreLib/VxRefCount.h \
     $$PWD/DependLibs/CoreLib/VxSemaphore.h \
     $$PWD/DependLibs/CoreLib/VxSettings.h \
@@ -110,6 +111,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxMutex.cpp \
     $$PWD/DependLibs/CoreLib/VxParse.cpp \
     $$PWD/DependLibs/CoreLib/VxProfile.cpp \
+    $$PWD/DependLibs/CoreLib/VxPtopUrl.cpp \
     $$PWD/DependLibs/CoreLib/VxRefCount.cpp \
     $$PWD/DependLibs/CoreLib/VxSemaphore.cpp \
     $$PWD/DependLibs/CoreLib/VxSettings.cpp \

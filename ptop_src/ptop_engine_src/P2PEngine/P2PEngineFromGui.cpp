@@ -47,6 +47,7 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileShredder.h>
+#include <CoreLib/VxPtopUrl.h>
 
 #include <string.h>
 #include <stdio.h>
@@ -1389,15 +1390,6 @@ ENetAvailStatus P2PEngine::fromGuiGetNetAvailStatus( void )
 }
 
 //============================================================================
-#ifdef TARGET_OS_ANDROID
-int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
-{
-	LogMsg( LOG_INFO, "fromGuiMulitcastPkt len %d", len );
-	return 0;
-}
-#endif // TARGET_OS_ANDROID
-
-//============================================================================
 bool P2PEngine::fromGuiNearbyBroadcastEnable( bool enable )
 {
 	return m_NetworkMgr.getNearbyMgr().fromGuiNearbyBroadcastEnable( enable );
@@ -1619,20 +1611,33 @@ std::string P2PEngine::fromGuiQueryDefaultUrl( EHostType hostType )
 }
 
 //============================================================================
-std::string P2PEngine::fromGuiQueryUrlUserName( std::string& urlIn, VxGUID& onlineId )
+bool P2PEngine::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown )
 {
-	std::string userName( "" );
-	getUrlMgr().lookupOnlineId( urlIn, onlineId );
-	if( onlineId.isVxGUIDValid() )
+	bool result{ false };
+	VxPtopUrl ptopUrl( url );
+	if( ptopUrl.isValid() )
 	{
-		BigListInfo* bigListInfo = m_BigListMgr.findBigListInfo( onlineId );
+		if( getMyOnlineId() == ptopUrl.getOnlineId() )
+		{
+			retNetIdent = *getMyPktAnnounce().getVxNetIdent();
+			return true;
+		}
+
+		BigListInfo* bigListInfo = m_BigListMgr.findBigListInfo( ptopUrl.getOnlineId() );
 		if( bigListInfo )
 		{
-			userName = bigListInfo->getOnlineName();
+			retNetIdent = *bigListInfo->getVxNetIdent();
+			result = true;
+		}
+
+		if( !result && requestIdentityIfUnknown )
+		{
+			// connect to url just to get identity
+			getHostUrlListMgr().requestIdentity( ptopUrl.getUrl() );
 		}
 	}
 
-	return userName;
+	return result;
 }
 
 //============================================================================

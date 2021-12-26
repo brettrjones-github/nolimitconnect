@@ -466,6 +466,24 @@ EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 }
 
 //============================================================================
+bool VxNetIdent::canRequestJoin( EHostType hostType )
+{
+	EPluginType pluginType = HostTypeToHostPlugin( hostType );
+	EFriendState pluginPermissionLevel = getPluginPermission( pluginType );
+	return pluginPermissionLevel != eFriendStateIgnore && getHisFriendshipToMe() != eFriendStateIgnore &&
+		getMyFriendshipToHim() != eFriendStateIgnore;
+}
+
+//============================================================================
+bool VxNetIdent::canJoinImmediate( EHostType hostType ) // request to join will be granted immediate because have sufficient permission
+{
+	EPluginType pluginType = HostTypeToHostPlugin( hostType );
+	EFriendState pluginPermissionLevel = getPluginPermission( pluginType );
+	return pluginPermissionLevel != eFriendStateIgnore && getHisFriendshipToMe() != eFriendStateIgnore &&
+		getMyFriendshipToHim() != eFriendStateIgnore && getHisFriendshipToMe() >= pluginPermissionLevel;
+}
+
+//============================================================================
 //! dump identity
 void VxNetIdent::debugDumpIdent( void )
 {

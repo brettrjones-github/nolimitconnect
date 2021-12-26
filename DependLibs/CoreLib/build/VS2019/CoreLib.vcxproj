@@ -310,6 +310,7 @@
     <ClInclude Include="..\..\VxMutex.h" />
     <ClInclude Include="..\..\VxParse.h" />
     <ClInclude Include="..\..\VxProfile.h" />
+    <ClInclude Include="..\..\VxPtopUrl.h" />
     <ClInclude Include="..\..\VxRefCount.h" />
     <ClInclude Include="..\..\VxSemaphore.h" />
     <ClInclude Include="..\..\VxSettings.h" />
@@ -377,6 +378,7 @@
     <ClCompile Include="..\..\VxMutex.cpp" />
     <ClCompile Include="..\..\VxParse.cpp" />
     <ClCompile Include="..\..\VxProfile.cpp" />
+    <ClCompile Include="..\..\VxPtopUrl.cpp" />
     <ClCompile Include="..\..\VxRefCount.cpp" />
     <ClCompile Include="..\..\VxSemaphore.cpp" />
     <ClCompile Include="..\..\VxSettings.cpp" />
