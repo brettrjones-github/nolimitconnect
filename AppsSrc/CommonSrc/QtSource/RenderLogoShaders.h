@@ -1,7 +1,8 @@
-#ifndef RENDER_LOGO_SHADERS_H
-#define RENDER_LOGO_SHADERS_H
+#pragma once
 
-#include "config_apps.h"
+#ifdef TARGET_OS_WINDOWS
+#include "WinSock2.h"
+#endif // TARGET_OS_WINDOWS
 
 #include <QtGui/qopenglfunctions.h>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
@@ -35,4 +36,3 @@ protected:
     int                         matrixUniform1;
 };
 
-#endif // RENDER_LOGO_SHADERS_H

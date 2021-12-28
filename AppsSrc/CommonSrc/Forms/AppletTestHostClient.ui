@@ -88,7 +88,7 @@
        <widget class="QComboBox" name="m_NetworkHostComboBox"/>
       </item>
       <item>
-       <widget class="IdentWidget" name="m_NetworkIdentWidget" native="true"/>
+       <widget class="IdentWidget" name="m_NetworkHostIdentWidget" native="true"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -133,7 +133,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="m_GroupUserStatusLabel">
+       <widget class="QLabel" name="m_HostedStatusLabel">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -145,7 +145,7 @@
        </widget>
       </item>
       <item>
-       <widget class="IdentWidget" name="m_HostIdentWidget" native="true"/>
+       <widget class="IdentWidget" name="m_HostIeddentWidget" native="true"/>
       </item>
       <item>
        <widget class="QComboBox" name="m_HostUrlComboBox"/>

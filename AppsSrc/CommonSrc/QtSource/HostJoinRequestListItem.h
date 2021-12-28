@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
 #include "ui_HostJoinRequestListItem.h"
 #include "IdentLogicInterface.h"
 

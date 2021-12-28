@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
 #include "IdentWidget.h"
 
 #include <QListWidgetItem>

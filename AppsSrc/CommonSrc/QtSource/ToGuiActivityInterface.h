@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
 #include <CoreLib/VxDefs.h>
 #include <CoreLib/AssetDefs.h>
 #include <CoreLib/VxGUID.h>

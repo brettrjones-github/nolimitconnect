@@ -13,7 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-//#include "config_apps.h"
 #include <QIODevice>
 #include <QtGlobal>
 #if QT_VERSION >= 0x050000

@@ -14,8 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
-
 #include "AppDefs.h"
 #include <QtSvg/QSvgRenderer>
 #include <QPixmap>
@@ -177,6 +175,8 @@ class QPushButton;
 class VxAppTheme : public QWidget
 {
 	Q_OBJECT
+
+	const char* QT_APP_RESOURCE_PREFIX = ":/AppRes/Resources/";
 public:
 	VxAppTheme( AppCommon& appCommon );
 

@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_apps.h>
 #include "AppDefs.h"
 #include "AppProfile.h"
 #include "HomeWindow.h"

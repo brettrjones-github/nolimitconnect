@@ -12,7 +12,10 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include "config_apps.h"
+
+#ifdef TARGET_OS_WINDOWS
+#include "WinSock2.h"
+#endif // TARGET_OS_WINDOWS
 
 #include <QtCore/QObject>
 #include <QtGui/QScreen>

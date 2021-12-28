@@ -46,7 +46,7 @@ protected:
     void                        updateHostType( EHostType hostType );
 
     Ui::AppletTestHostClientUi  ui;
-    VxGUID                      m_NetHostOnlineId;
+    VxGUID                      m_NetworkHostOnlineId;
 };
 
 

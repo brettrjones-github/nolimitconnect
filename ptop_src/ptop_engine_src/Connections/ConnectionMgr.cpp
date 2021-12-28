@@ -1130,13 +1130,6 @@ bool ConnectionMgr::sendMyPktAnnounce(  VxGUID&				destinationId,
     pktAnn.setMyFriendshipToHim( eMyFriendshipToHim );
     pktAnn.setHisFriendshipToMe( eHisFriendshipToMe );
 
-    //LogMsg( LOG_INFO, "SendMyPktAnnounce; to %s Hi 0x%llX, Lo 0x%llX skt %d request reply %d\n", 
-    //	m_Engine.knownContactNameFromId( destinationId ),
-    //	destinationId.getVxGUIDHiPart(),
-    //	destinationId.getVxGUIDLoPart(),
-    //	sktBase->m_iSktId,
-    //	requestAnnReply );
-
     return txPacket( destinationId, sktBase, &pktAnn );	
 }
 

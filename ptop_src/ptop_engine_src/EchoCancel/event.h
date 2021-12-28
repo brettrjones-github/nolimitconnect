@@ -11,8 +11,6 @@
 #ifndef WEBRTC_BASE_EVENT_H__
 #define WEBRTC_BASE_EVENT_H__
 
-#include <config_apps.h>
-
 #if defined(TARGET_OS_WINDOWS)
 #include "win32.h"  // NOLINT: consider this a system header.
 #elif defined(TARGET_POSIX)

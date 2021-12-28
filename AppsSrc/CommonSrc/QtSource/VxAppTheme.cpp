@@ -175,7 +175,7 @@ QString  VxAppTheme::getResourceFullFileName( QString resourceName )
 		}
 	}
 
-	if( resourceName.contains( GOTV_APP_RESOURCE_PREFIX ) )
+	if( resourceName.contains( QT_APP_RESOURCE_PREFIX ) )
 	{
 		if( VxFileUtil::fileExists( resourceName.toUtf8().constData() ) )
 		{
@@ -183,7 +183,7 @@ QString  VxAppTheme::getResourceFullFileName( QString resourceName )
 		}
 	}
 
-	QString resourcePathAndName = GOTV_APP_RESOURCE_PREFIX + resourceName;
+	QString resourcePathAndName = QT_APP_RESOURCE_PREFIX + resourceName;
 	if( VxFileUtil::fileExists( resourcePathAndName.toUtf8().constData() ) )
 	{
 		return resourcePathAndName;

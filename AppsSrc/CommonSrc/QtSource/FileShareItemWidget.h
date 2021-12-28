@@ -14,8 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
-
 #include "ui_FileShareItemWidget.h"
 #include <QListWidgetItem>
 

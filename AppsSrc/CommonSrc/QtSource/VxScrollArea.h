@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
 #include <QScrollArea>
 
 class VxScrollArea : public QScrollArea

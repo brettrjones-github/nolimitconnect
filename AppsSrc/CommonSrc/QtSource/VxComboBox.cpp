@@ -13,9 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
-#include "config_apps.h"
-
 #include "VxComboBox.h"
 #include "AppCommon.h"
 #include "VxAppTheme.h"

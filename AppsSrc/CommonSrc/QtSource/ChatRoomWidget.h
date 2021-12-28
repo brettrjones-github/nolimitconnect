@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
 #include "ui_ChatRoomWidget.h"
 
 #include <CoreLib/AssetDefs.h>

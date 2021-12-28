@@ -64,18 +64,18 @@ AppletTestHostClient::~AppletTestHostClient()
 //============================================================================
 void AppletTestHostClient::callbackOnUserAdded( GuiUser* guiUser )
 {
-	if( m_NetHostOnlineId == guiUser->getMyOnlineId() )
+	if( m_NetworkHostOnlineId == guiUser->getMyOnlineId() )
 	{
-		ui.m_HostIdentWidget->updateIdentity( guiUser );
+		ui.m_NetworkHostIdentWidget->updateIdentity( guiUser );
 	}
 }
 
 //============================================================================
 void AppletTestHostClient::callbackOnUserUpdated( GuiUser* guiUser )
 {
-	if( m_NetHostOnlineId == guiUser->getMyOnlineId() )
+	if( m_NetworkHostOnlineId == guiUser->getMyOnlineId() )
 	{
-		ui.m_HostIdentWidget->updateIdentity( guiUser );
+		ui.m_NetworkHostIdentWidget->updateIdentity( guiUser );
 	}
 }
 
@@ -153,11 +153,11 @@ void AppletTestHostClient::slotNetworkHostIdentityButtonClicked( void )
 		VxPtopUrl ptopUrl( url.toUtf8().constData() );
 		if( ptopUrl.isValid() )
 		{
-			m_NetHostOnlineId = ptopUrl.getOnlineId();
+			m_NetworkHostOnlineId = ptopUrl.getOnlineId();
 			VxNetIdent netIdent;
 			if( m_MyApp.getEngine().fromGuiQueryIdentity( ptopUrl.getUrl(), netIdent, true ) )
 			{
-				ui.m_HostIdentWidget->updateIdentity( &netIdent );
+				ui.m_NetworkHostIdentWidget->updateIdentity( &netIdent );
 			}
 		}
 		else

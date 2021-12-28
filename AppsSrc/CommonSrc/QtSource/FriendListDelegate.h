@@ -13,8 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
-
 #include <QPainter>
 #include <QAbstractItemDelegate>
 

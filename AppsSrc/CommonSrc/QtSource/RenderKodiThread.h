@@ -1,5 +1,4 @@
 #pragma once
-#include "config_apps.h"
 
 #include <QThread>
 #include <QOpenGLContext>

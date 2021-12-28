@@ -13,9 +13,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
-#include "config_apps.h"
-
 #include "VxComboBoxFileFilter.h"
 
 #include <CoreLib/VxFileInfo.h>

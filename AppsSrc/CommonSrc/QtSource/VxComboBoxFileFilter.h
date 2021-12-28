@@ -14,7 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
 #include <QComboBox>
 
 #include <CoreLib/VxFileInfo.h>

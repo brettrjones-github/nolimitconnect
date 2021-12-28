@@ -14,8 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "config_apps.h"
-
 #include <QDialog>
 #include <QTimer>
 #include "ui_ActivityTimedMessage.h"

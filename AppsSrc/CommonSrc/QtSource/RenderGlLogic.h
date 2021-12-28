@@ -13,7 +13,11 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#include "config_apps.h"
+
+#ifdef TARGET_OS_WINDOWS
+#include "WinSock2.h"
+#endif // TARGET_OS_WINDOWS
+
 #include <QWidget>
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <QOpenGLWidget>

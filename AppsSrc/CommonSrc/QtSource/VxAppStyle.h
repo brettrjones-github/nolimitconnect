@@ -14,8 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_apps.h>
-
 #include <QtGlobal>
 #include <QProxyStyle>
 #include <QProxyStyle>
