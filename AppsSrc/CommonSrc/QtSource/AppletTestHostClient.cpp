@@ -40,7 +40,7 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	connect( ui.m_GetNetHostListButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostListFromNetworkHostButtonClicked() ) );
 	connect( ui.m_JoinHostButton, SIGNAL( clicked() ), this, SLOT( slotJoinHostButtonClicked() ) );
 
-	if( ui.m_HostTypeComboBox->count() )
+    if( ui.m_NetworkHostComboBox->count() )
 	{
 		slotNetworkHostComboBoxSelectionChange( 0 );
 	}

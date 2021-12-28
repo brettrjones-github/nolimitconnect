@@ -65,6 +65,7 @@ InetAddress						VxGetDefaultIPv6Address( void );
 bool							VxTestConnectionOnSpecificLclAddress( InetAddress &oLclAddr );
 bool							VxResolveUrl( const char* pUrl, uint16_t u16Port, InetAddress& oRetAddr );
 bool							VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr );
+bool							VxResolveUrl( const char* pUrl, uint16_t u16Port, std::string& resolvedIp ); // assumes pUrl is just host name
 
 //! return true if ip is in list of local ips
 bool							VxLocalIpExists( std::string& strIpAddress );

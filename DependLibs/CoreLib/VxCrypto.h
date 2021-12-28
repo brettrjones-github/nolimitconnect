@@ -64,7 +64,10 @@ public:
 	RCODE						setKeyFromPassword( const char *	pUserName,			// user name
 													const char *	pPassword,			// password
 													const char *	pSalt = "NoLm" );	// salt
-											//=== vars ===//
+
+	std::string					describeKey( void );
+
+	//=== vars ===//
 	uint32_t					m_au32Key[ CHEEZY_SYM_KEY_LEN / sizeof( uint32_t ) ];
 	bool						m_bIsSet{ false };		// true if key has been set	
 };

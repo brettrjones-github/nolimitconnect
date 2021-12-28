@@ -67,7 +67,7 @@ RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
         cryptoPort
     );
 
-    //LogMsg( LOG_INFO, "GenerateConnectionKey: setting pwd Key size %d addr 0x%x\n", sizeof( VxKey ), poRetKey);
+    LogModule( eLogTcpData, LOG_VERBOSE, "GenerateConnectionKey: setting Key %s for %s:%d %d", strPwd.c_str(), strIPv4.c_str(), port, cryptoPort );
     poRetKey->setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
     return 0;
 }

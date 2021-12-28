@@ -51,6 +51,7 @@ RCODE GenerateRxConnectionKey(	VxSktBase *				sktBase,
 		rc = GenerateConnectionKey(	&sktBase->m_RxKey, poConnectId, sktBase->getCryptoKeyPort(), networkName );
 		if( 0 == rc )
 		{
+            LogMsg( LOG_VERBOSE, "GenerateRxConnectionKey %s skt %d id %d", sktBase->m_RxKey.describeKey().c_str(), sktBase->getSktHandle(), sktBase->getSktId() );
 			sktBase->m_RxCrypto.importKey( &sktBase->m_RxKey );
 		}
 
@@ -74,6 +75,7 @@ RCODE GenerateTxConnectionKey(	VxSktBase *			sktBase,
 		rc = GenerateConnectionKey(	&sktBase->m_TxKey, poConnectId, sktBase->getCryptoKeyPort(), networkName );
 		if( 0 == rc )
 		{
+            LogMsg( LOG_VERBOSE, "GenerateTxConnectionKey %s skt %d id %d", sktBase->m_TxKey.describeKey().c_str(), sktBase->getSktHandle(), sktBase->getSktId() );
 			sktBase->m_TxCrypto.importKey( &sktBase->m_TxKey );
 		}
 		
@@ -100,6 +102,7 @@ RCODE GenerateTxConnectionKey(  VxSktBase *				sktBase,
         rc = GenerateConnectionKey(	&sktBase->m_TxKey, ipAddr, port, onlineId, sktBase->getCryptoKeyPort(), strNetworkName );
         if( 0 == rc )
         {
+            LogMsg( LOG_VERBOSE, "GenerateTxConnectionKey %s skt %d id %d", sktBase->m_TxKey.describeKey().c_str(), sktBase->getSktHandle(), sktBase->getSktId() );
             sktBase->m_TxCrypto.importKey( &sktBase->m_TxKey );
         }
 

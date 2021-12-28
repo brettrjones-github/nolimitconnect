@@ -62,6 +62,7 @@ void NetAvailStatusWidget::paintEvent( QPaintEvent* ev )
 //============================================================================
 void NetAvailStatusWidget::resizeEvent( QResizeEvent * ev )
 {
+    QWidget::resizeEvent( ev );
     update();
 }
 

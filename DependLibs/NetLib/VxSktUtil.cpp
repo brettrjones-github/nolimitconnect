@@ -1341,88 +1341,56 @@ bool VxTestConnectionOnSpecificLclAddress( InetAddress& oLclAddr )
 //============================================================================
 bool VxResolveUrl( const char * pUrl, uint16_t u16Port, InetAddress& retInetAddr )
 {
-	bool bResult = false;
-	retInetAddr.setToInvalid();
-
-	// get addresses
-	struct addrinfo Hints;
-	struct addrinfo * AI;
-	struct addrinfo * AddrInfo;
-
-	memset( &Hints, 0, sizeof( Hints ) );
-
-#ifdef TARGET_OS_WINDOWS
-	Hints.ai_family = PF_UNSPEC;
-	Hints.ai_socktype = SOCK_STREAM;
-	Hints.ai_protocol = IPPROTO_TCP;
-#else
-	Hints.ai_family = AI_PASSIVE | AI_ADDRCONFIG;
-	Hints.ai_socktype = SOCK_STREAM;
-	Hints.ai_protocol = IPPROTO_TCP;
-#endif
-
-	char as8Buf[ 32 ];
-	sprintf( as8Buf, "%d", u16Port );
-
-	//LogMsg( LOG_INFO, "VxResolveUrl %s:%d\n", pUrl, u16Port ); 
-	int RetVal = getaddrinfo( pUrl, as8Buf, &Hints, &AddrInfo );
-	if ( RetVal != 0 )
+	std::string resolvedIp;
+	if( VxResolveUrl( pUrl, u16Port, resolvedIp ) )
 	{
-		LogMsg( LOG_ERROR, " getaddrinfo() failed with error %d", RetVal );
+		retInetAddr.setIp( resolvedIp.c_str() );
+		return true;
 	}
 	else
 	{
-		for ( AI = AddrInfo; AI != NULL; AI = AI->ai_next )
-		{
-			if ( ( AI->ai_family != PF_INET ) && ( AI->ai_family != PF_INET6 ) )
-			{
-				continue;
-			}
-
-			struct sockaddr_storage * poSktAddr = ( struct sockaddr_storage * )AI->ai_addr;
-			retInetAddr.setIp( *poSktAddr );
-			if ( retInetAddr.isIPv6() )
-			{
-				continue;
-			}
-
-			bResult = true;
-			break;
-		}
-
-		freeaddrinfo( AddrInfo ); // free the linked list
+		retInetAddr.setToInvalid();
+		return false;
 	}
-
-	return bResult;
 }
 
 //============================================================================
 bool VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr )
 {
-	bool bResult{ false };
 	std::string strHost;
 	std::string strFile;
 	uint16_t tcpPort{ 0 };
 
 	bool result = VxSplitHostAndFile( urlIn.c_str(), strHost, strFile, tcpPort );
 	retPort = tcpPort;
+	return VxResolveUrl( strHost.c_str(), tcpPort, retIpAddr );
+}
 
-	if( VxIsIPv4Address( strHost.c_str() ) )
-	{	
-		retIpAddr = strHost;
+//============================================================================
+bool VxResolveUrl( const char* pUrl, uint16_t u16Port, std::string& resolvedIp ) // assumes pUrl is just host name
+{
+	if( !pUrl || strlen( pUrl ) < 5 )
+	{
+		return false;
+	}
+
+	if( VxIsIPv4Address( pUrl ) || VxIsIPv6Address( pUrl ) )
+	{
+		resolvedIp = pUrl;
 		return true;
 	}
 
+	bool bResult = false;
+	
 	// get addresses
 	InetAddress inetAddr;
-
 	struct addrinfo Hints;
 	struct addrinfo* AI;
 	struct addrinfo* AddrInfo;
 
 	memset( &Hints, 0, sizeof( Hints ) );
 
-#ifdef TARGET_OS_WINDOWS
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
 	Hints.ai_family = PF_UNSPEC;
 	Hints.ai_socktype = SOCK_STREAM;
 	Hints.ai_protocol = IPPROTO_TCP;
@@ -1433,13 +1401,13 @@ bool VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr
 #endif
 
 	char as8Buf[32];
-	sprintf( as8Buf, "%d", retPort );
+	sprintf( as8Buf, "%d", u16Port );
 
 	//LogMsg( LOG_INFO, "VxResolveUrl %s:%d\n", pUrl, u16Port ); 
-	int RetVal = getaddrinfo( urlIn.c_str(), as8Buf, &Hints, &AddrInfo );
+	int RetVal = getaddrinfo( pUrl, as8Buf, &Hints, &AddrInfo );
 	if( RetVal != 0 )
 	{
-		LogMsg( LOG_ERROR, " getaddrinfo() failed with error %d", RetVal );
+		LogMsg( LOG_ERROR, " getaddrinfo() failed with error %d %s", RetVal, VxDescribeSktError( RetVal ) );
 	}
 	else
 	{
@@ -1449,6 +1417,7 @@ bool VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr
 			{
 				continue;
 			}
+
 			struct sockaddr_storage* poSktAddr = ( struct sockaddr_storage* )AI->ai_addr;
 			inetAddr.setIp( *poSktAddr );
 			if( inetAddr.isIPv6() )
@@ -1456,7 +1425,7 @@ bool VxResolveUrl( std::string& urlIn, uint16_t& retPort, std::string& retIpAddr
 				continue;
 			}
 
-			retIpAddr = inetAddr.toStdString();
+			resolvedIp = inetAddr.toStdString();
 			bResult = true;
 			break;
 		}
