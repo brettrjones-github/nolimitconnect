@@ -18,6 +18,7 @@
 #include <GuiInterface/IToGui.h>
 
 #include <CoreLib/VxDebug.h> // needed for ILogCallbackInterface
+#include <CoreLib/VxCrypto.h>
 
 #include <QMutex>
 #include <QFile>
@@ -52,12 +53,14 @@ protected slots:
     void                        slotCopyMyUrlToClipboardClicked( void );
     void                        slotCopyTestUrlToClipboardClicked( void );
     void                        slotCopyResultToClipboardClicked( void );
+    void                        slotClearResultsButtonClicked( void );
 
     void                        slotBrowseFilesButtonClicked( void );
     void                        slotPingTestButtonClicked( void );
     void                        slotIsMyPortOpenButtonClicked( void );
     void                        slotQueryHostIdButtonClicked( void );
     void                        slotGenerateGuidButtonClicked( void );
+    void                        slotGenKeyButtonClicked( void );
     void                        slotPurgeCacheButtonClicked( void );
     void                        slotListActionButtonClicked( void );
     void                        slotHostClientTestButtonClicked( void );

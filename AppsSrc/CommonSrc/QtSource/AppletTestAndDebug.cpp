@@ -130,12 +130,14 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_CopyMyUrlButton, SIGNAL( clicked() ), this, SLOT( slotCopyMyUrlToClipboardClicked() ) );
     connect( ui.m_CopyTestUrlButton, SIGNAL( clicked() ), this, SLOT( slotCopyTestUrlToClipboardClicked() ) );
     connect( ui.m_CopyResultToClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyResultToClipboardClicked() ) );
+    connect( ui.m_ClearResultsButton, SIGNAL( clicked() ), this, SLOT( slotClearResultsButtonClicked() ) );
 
     connect( ui.m_BrowseFilesButton, SIGNAL( clicked() ), this, SLOT( slotBrowseFilesButtonClicked() ) );
     connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsMyPortOpenButtonClicked() ) );
     connect( ui.m_QueryHostIdButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostIdButtonClicked() ) );
     connect( ui.m_GenerateGuidButton, SIGNAL( clicked() ), this, SLOT( slotGenerateGuidButtonClicked() ) );
     connect( ui.m_PurgeCacheButton, SIGNAL( clicked() ), this, SLOT( slotPurgeCacheButtonClicked() ) );
+    connect( ui.m_GenKeyButton, SIGNAL( clicked() ), this, SLOT( slotGenKeyButtonClicked() ) );
     connect( ui.m_ListActionButton, SIGNAL( clicked() ), this, SLOT( slotListActionButtonClicked() ) );
     connect( ui.m_HostClientTestButton, SIGNAL( clicked() ), this, SLOT( slotHostClientTestButtonClicked() ) );
     connect( ui.m_HostServiceTestButton, SIGNAL( clicked() ), this, SLOT( slotHostServiceTestButtonClicked() ) );
@@ -365,6 +367,12 @@ void AppletTestAndDebug::slotCopyResultToClipboardClicked( void )
 }
 
 //============================================================================
+void AppletTestAndDebug::slotClearResultsButtonClicked( void )
+{
+    getInfoEdit()->setPlainText( "" );
+}
+
+//============================================================================
 void AppletTestAndDebug::infoMsg( const char* errMsg, ... )
 {
     char as8Buf[ MAX_INFO_MSG_SIZE ];
@@ -464,6 +472,21 @@ void AppletTestAndDebug::slotPurgeCacheButtonClicked( void )
         int64_t bytesPurged = m_MyApp.getEngine().fromGuiClearCache( eCacheTypeThumbnail );
         infoMsg( QString( GuiParams::describeFileLength( bytesPurged ) + QObject::tr( " of disk space freed by deleting cached thumbnails" ) ).toUtf8().constData() );
     }
+}
+
+//============================================================================
+void AppletTestAndDebug::slotGenKeyButtonClicked( void )
+{
+    std::string keyPwd1( "4512448476bf2836979cf61b7c88f8fc70099NoLimitNet172.94.58.10345124" );
+    VxKey key1;
+    key1.setKeyFromPassword( keyPwd1.c_str(), keyPwd1.length() );
+    infoMsg( "Gen Key 1 pwd %s", keyPwd1.c_str() );
+    infoMsg( "Gen Key 1 result %s", key1.describeKey().c_str() );
+
+    std::string keyPwd2 = ui.m_GenKeyPwdEdit->text().toUtf8().constData();
+    key1.setKeyFromPassword( keyPwd2.c_str(), keyPwd2.length() );
+    infoMsg( "Gen Key 1 pwd %s", keyPwd2.c_str() );
+    infoMsg( "Gen Key 1 result %s", key1.describeKey().c_str() );
 }
 
 //============================================================================

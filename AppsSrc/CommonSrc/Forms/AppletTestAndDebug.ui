@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>464</width>
-    <height>442</height>
+    <height>625</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -65,6 +65,21 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
        <widget class="QPushButton" name="gotoWebsiteButton">
         <property name="sizePolicy">
@@ -189,6 +204,24 @@
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QPushButton" name="m_GenKeyButton">
+          <property name="text">
+           <string>Gen Key</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="m_GenKeyPwdEdit">
+          <property name="text">
+           <string>4512448476bf2836979cf61b7c88f8fc70099NoLimitNet172.94.58.10345124</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
          <widget class="QPushButton" name="m_HostClientTestButton">
@@ -239,11 +272,22 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="m_CopyResultToClipboardButton">
-        <property name="text">
-         <string>Copy Results To Clipboard</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QPushButton" name="m_CopyResultToClipboardButton">
+          <property name="text">
+           <string>Copy Results To Clipboard</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_ClearResultsButton">
+          <property name="text">
+           <string>Clear Results</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QPlainTextEdit" name="m_InfoPlainTextEdit"/>
