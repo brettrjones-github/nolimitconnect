@@ -144,6 +144,8 @@ RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
 		return -1;
 	}
 
+	LogMsg( LOG_VERBOSE, "VxKey::setKeyFromPassword %s len %d", pPassword, iPasswordLen );
+
 	// key gen does not seem to be thread save.. TODO make key generation thread safe
 	g_KeyGenMutex.lock();
 	struct VxMD5Context   md5c;
