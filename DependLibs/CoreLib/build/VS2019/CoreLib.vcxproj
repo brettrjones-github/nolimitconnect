@@ -265,7 +265,6 @@
     <ClInclude Include="..\..\DbQueryData.h" />
     <ClInclude Include="..\..\dirent_sim.h" />
     <ClInclude Include="..\..\IsBigEndianCpu.h" />
-    <ClInclude Include="..\..\md5.h" />
     <ClInclude Include="..\..\MediaCallbackInterface.h" />
     <ClInclude Include="..\..\ObjectCommon.h" />
     <ClInclude Include="..\..\OsDetect.h" />
@@ -307,6 +306,7 @@
     <ClInclude Include="..\..\VxMathVec2f.h" />
     <ClInclude Include="..\..\VxMathVec3f.h" />
     <ClInclude Include="..\..\VxMathVec4f.h" />
+    <ClInclude Include="..\..\VxMd5.h" />
     <ClInclude Include="..\..\VxMutex.h" />
     <ClInclude Include="..\..\VxParse.h" />
     <ClInclude Include="..\..\VxProfile.h" />
@@ -338,7 +338,6 @@
     <ClCompile Include="..\..\DbDataset_corelib.cpp" />
     <ClCompile Include="..\..\DbQueryData_corelib.cpp" />
     <ClCompile Include="..\..\dirent_sim.cpp" />
-    <ClCompile Include="..\..\md5_corelib.cpp" />
     <ClCompile Include="..\..\ObjectCommon_corelib.cpp" />
     <ClCompile Include="..\..\OsDetect_corelib.cpp" />
     <ClCompile Include="..\..\rsa_eay_corelib.c" />
@@ -375,6 +374,7 @@
     <ClCompile Include="..\..\VxLinuxOnly.cpp" />
     <ClCompile Include="..\..\VxMathDef.cpp" />
     <ClCompile Include="..\..\VxMathVec3f.cpp" />
+    <ClCompile Include="..\..\VxMd5.cpp" />
     <ClCompile Include="..\..\VxMutex.cpp" />
     <ClCompile Include="..\..\VxParse.cpp" />
     <ClCompile Include="..\..\VxProfile.cpp" />

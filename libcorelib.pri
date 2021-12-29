@@ -71,7 +71,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxValuePair.h \
     $$PWD/DependLibs/CoreLib/VxXml.h \
     $$PWD/DependLibs/CoreLib/dirent_sim.h \
-    $$PWD/DependLibs/CoreLib/md5.h \
+    $$PWD/DependLibs/CoreLib/VxMd5.h \
     $$PWD/DependLibs/CoreLib/rsa.h \
 #	$$PWD/DependLibs/CoreLib/sqlite3.h \
 #	$$PWD/DependLibs/CoreLib/sqlite3ext.h \
@@ -128,7 +128,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxUrl.cpp \
     $$PWD/DependLibs/CoreLib/VxJava.cpp \
     $$PWD/DependLibs/CoreLib/VxFunctionsMissingInAndroid.cpp \
-    $$PWD/DependLibs/CoreLib/md5_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/VxMd5.cpp \
     $$PWD/DependLibs/CoreLib/Blowfish_corelib.cpp \
     $$PWD/DependLibs/CoreLib/AppErr_corelib.cpp \
     $$PWD/DependLibs/CoreLib/DbBase_corelib.cpp \

@@ -26,7 +26,7 @@
 #include <cstdlib>
 #endif // _MSC_VER
 
-#include "md5.h"
+#include "VxMd5.h"
 
 #include "VxParse.h"
 #include <PktLib/VxCommon.h>
@@ -134,7 +134,7 @@ RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
 {
 	//vx_assert( pPassword );
 	//vx_assert( (iPasswordLen > 0) && (iPasswordLen < 256) );
-	struct MD5Context   md5c;
+	struct VxMD5Context   md5c;
 
 	if( !pPassword || 1 > iPasswordLen || !pSalt || 4 > strlen( pSalt ) )
 	{
@@ -143,9 +143,9 @@ RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
 		return -1;
 	}
 
-	MD5Init( &md5c );
-	MD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
-	MD5Final( (unsigned char *)m_au32Key, &md5c );
+	VxMD5Init( &md5c );
+	VxMD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
+	VxMD5Final( (unsigned char *)m_au32Key, &md5c );
 	m_bIsSet = true;
 	return 0;
 }
@@ -167,7 +167,7 @@ std::string	VxKey::describeKey( void )
 //! NOTE: Max password len 255
 RCODE VxCrypto::setPassword( const char * pPassword, int iPasswordLen )
 {
-	struct MD5Context   md5c;
+	struct VxMD5Context   md5c;
 	unsigned char       bfvec[ CHEEZY_SYM_KEY_LEN ];
 
     if ( !pPassword || 1 > iPasswordLen )
@@ -177,9 +177,9 @@ RCODE VxCrypto::setPassword( const char * pPassword, int iPasswordLen )
 		return -1;
 	}
 
-	MD5Init( &md5c );
-	MD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
-	MD5Final( bfvec, &md5c );
+	VxMD5Init( &md5c );
+	VxMD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
+	VxMD5Final( bfvec, &md5c );
 	BlowsetKey( &m_BlowCtx, bfvec, CHEEZY_SYM_KEY_LEN );
 	m_bIsKeyValid = true;
 	return 0;
@@ -188,7 +188,7 @@ RCODE VxCrypto::setPassword( const char * pPassword, int iPasswordLen )
 //! Generate encryption key from password
 RCODE VxCrypto::generateKey( const char * pPassword, int iPasswordLen, VxKey * poRetKey )
 {
-	struct MD5Context   md5c;
+	struct VxMD5Context   md5c;
 	unsigned char       bfvec[ CHEEZY_SYM_KEY_LEN ];
 
 	if ( pPassword == NULL )
@@ -196,9 +196,9 @@ RCODE VxCrypto::generateKey( const char * pPassword, int iPasswordLen, VxKey * p
 		return -1;
 	}
 
-	MD5Init( &md5c );
-	MD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
-	MD5Final( bfvec, &md5c );
+	VxMD5Init( &md5c );
+	VxMD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
+	VxMD5Final( bfvec, &md5c );
 	memcpy( poRetKey->m_au32Key, bfvec, CHEEZY_SYM_KEY_LEN );
 	importKey( poRetKey );
 	return 0;

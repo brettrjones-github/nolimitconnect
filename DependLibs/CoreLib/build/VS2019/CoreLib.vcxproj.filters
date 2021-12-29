@@ -148,9 +148,6 @@
     <ClInclude Include="..\..\IsBigEndianCpu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\md5.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\MediaCallbackInterface.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -340,6 +337,9 @@
     <ClInclude Include="..\..\VxPtopUrl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\VxMd5.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp">
@@ -358,9 +358,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\dirent_sim.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\md5_corelib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ObjectCommon_corelib.cpp">
@@ -529,6 +526,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\VxPtopUrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VxMd5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
