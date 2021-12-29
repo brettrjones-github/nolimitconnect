@@ -17,6 +17,7 @@
 
 #include "VxCrypto.h"
 #include "VxDebug.h"
+#include "VxMutex.h"
 
 #include <memory.h>
 #include <string>
@@ -35,6 +36,10 @@
 //=== cheezy crypto with known weeknesses ===//
 // issued to public domain year 2006
 //===========================================//
+namespace
+{
+	VxMutex g_KeyGenMutex;
+};
 
 //============================================================================
 VxKey::~VxKey()
@@ -132,10 +137,6 @@ RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
 								 int			iPasswordLen,		// length of password	int iPasswordLen )
 								 const char *	pSalt )	// salt
 {
-	//vx_assert( pPassword );
-	//vx_assert( (iPasswordLen > 0) && (iPasswordLen < 256) );
-	struct VxMD5Context   md5c;
-
 	if( !pPassword || 1 > iPasswordLen || !pSalt || 4 > strlen( pSalt ) )
 	{
 		LogMsg( LOG_ERROR, "VxKey::setKeyFromPassword invalid param" );
@@ -143,10 +144,16 @@ RCODE VxKey::setKeyFromPassword( const char *	pPassword,			// password
 		return -1;
 	}
 
+	// key gen does not seem to be thread save.. TODO make key generation thread safe
+	g_KeyGenMutex.lock();
+	struct VxMD5Context   md5c;
+
 	VxMD5Init( &md5c );
 	VxMD5Update( &md5c, (unsigned char *)pPassword, (unsigned int)iPasswordLen );
 	VxMD5Final( (unsigned char *)m_au32Key, &md5c );
 	m_bIsSet = true;
+	g_KeyGenMutex.unlock();
+
 	return 0;
 }
 

@@ -85,28 +85,32 @@ void VxMD5Update(struct VxMD5Context *ctx, unsigned char const *buf, uint32_t le
 
     /* Handle any leading odd-sized chunks */
 
-    if (t != 0) {
-	unsigned char *p = (unsigned char *) ctx->in + t;
+    if (t != 0) 
+    {
+	    unsigned char *p = (unsigned char *) ctx->in + t;
 
-	t = 64 - t;
-    if ((uint32_t)len < t) {
-	    memcpy(p, buf, (size_t)len);
-	    return;
-	}
-	memcpy(p, buf, (size_t)t);
-	byteReverse(ctx->in, 16);
-    VxMD5Transform(ctx->buf, (uint32_t *) ctx->in);
-	buf += t;
-	len -= t;
+	    t = 64 - t;
+        if ((uint32_t)len < t) 
+        {
+	        memcpy(p, buf, (size_t)len);
+	        return;
+	    }
+
+	    memcpy(p, buf, (size_t)t);
+	    byteReverse(ctx->in, 16);
+        VxMD5Transform(ctx->buf, (uint32_t *) ctx->in);
+	    buf += t;
+	    len -= t;
     }
     /* Process data in 64-byte chunks */
 
-    while (len >= 64) {
-	memcpy(ctx->in, buf, 64);
-	byteReverse(ctx->in, 16);
-    VxMD5Transform(ctx->buf, (uint32_t *) ctx->in);
-	buf += 64;
-	len -= 64;
+    while (len >= 64) 
+    {
+	    memcpy(ctx->in, buf, 64);
+	    byteReverse(ctx->in, 16);
+        VxMD5Transform(ctx->buf, (uint32_t *) ctx->in);
+	    buf += 64;
+	    len -= 64;
     }
 
     /* Handle any remaining bytes of data. */
@@ -118,7 +122,7 @@ void VxMD5Update(struct VxMD5Context *ctx, unsigned char const *buf, uint32_t le
  * Final wrapup - pad to 64-byte boundary with the bit pattern 
  * 1 0* (64-bit count of bits processed, MSB-first)
  */
-void VxMD5Final(unsigned char digest[16], struct VxMD5Context *ctx)
+void VxMD5Final( unsigned char digest[16], struct VxMD5Context *ctx )
 {
     uint32_t count;
     unsigned char *p;
@@ -135,18 +139,22 @@ void VxMD5Final(unsigned char digest[16], struct VxMD5Context *ctx)
     count = 64 - 1 - count;
 
     /* Pad out to 56 mod 64 */
-    if (count < 8) {
-	/* Two lots of padding:  Pad the first block to 64 bytes */
-	memset(p, 0, (size_t)count);
-	byteReverse(ctx->in, 16);
-    VxMD5Transform(ctx->buf, (uint32_t *) ctx->in);
+    if (count < 8) 
+    {
+	    /* Two lots of padding:  Pad the first block to 64 bytes */
+	    memset(p, 0, (size_t)count);
+	    byteReverse(ctx->in, 16);
+        VxMD5Transform(ctx->buf, (uint32_t *) ctx->in);
 
-	/* Now fill the next block with 56 bytes */
-	memset(ctx->in, 0, 56);
-    } else {
-	/* Pad block to 56 bytes */
-	memset(p, 0, count - 8);
+	    /* Now fill the next block with 56 bytes */
+	    memset(ctx->in, 0, 56);
+    } 
+    else 
+    {
+	    /* Pad block to 56 bytes */
+	    memset(p, 0, count - 8);
     }
+
     byteReverse(ctx->in, 14);
 
     /* Append length in bits and transform */
