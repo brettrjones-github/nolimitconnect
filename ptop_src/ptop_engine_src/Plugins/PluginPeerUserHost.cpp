@@ -111,4 +111,5 @@ void PluginPeerUserHost::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostGroupAnnounce( pluginSetting );
+    onPluginSettingsChanged();
 }

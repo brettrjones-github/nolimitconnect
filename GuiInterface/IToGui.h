@@ -113,6 +113,8 @@ public:
 
 	//! Called from engine when need to update my online identity
 	virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) = 0;
+	//! called from engine when identity changes need saved for next bootup
+	virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) = 0;
 
 	//! Contact has sent a offer
 	virtual void				toGuiRxedPluginOffer(  VxNetIdent *		netIdent, 

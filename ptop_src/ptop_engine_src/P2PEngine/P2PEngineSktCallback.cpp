@@ -49,7 +49,6 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
         return;
     }
 
-	// NOTE: TODO check if is in our ip address ignore list
 	int	iDataLen =	sktBase->getSktBufDataLen();
 	if( iDataLen < 32 )
 	{
@@ -112,7 +111,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			iDataLen = sktBase->getRxDecryptedLen();
 		}
 
-		// not http.. better be a announce packet
+		// not ptop.. better be a announce packet
 		if( (false == sktBase->isAcceptSocket()) 
 			&& (false == sktBase->isRxEncryptionKeySet() ) )
 		{
@@ -122,10 +121,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 
         if( false == sktBase->isRxEncryptionKeySet() )
 		{
-			// this data has not been decrypted.. set encryption key and
-			// decrypt it
-			//m_PktAnn.DebugDump();
-			//vx_assert( sktBase->getRxDecryptedLen() == 0 );
+			// this data has not been decrypted.. set encryption key and decrypt it
 			GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
 			sktBase->decryptReceiveData();
 			iDataLen = sktBase->getRxDecryptedLen();
@@ -136,7 +132,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			 ( pktHdr->getPktLength() > sizeof( PktAnnounce ) + 100 ) ) // leave room for expanding pkt announce in the future
 		{
 			// somebody tried to send crap .. this may be a hack attack or it may be that our ip and port is same as someone else or network key has changed
-			LogMsg( LOG_INFO, "First packet is not Announce pkt skt %d type %d length %d ip %s:%d id %s\n", sktBase->getSktId(), 
+			LogMsg( LOG_INFO, "First packet is not Announce pkt skt %d type %d length %d ip %s:%d id %s", sktBase->getSktId(), 
 																							pktHdr->getPktType(),  
 																							pktHdr->getPktLength(),
                                                                                             sktBase->getRemoteIp().c_str(),
@@ -204,7 +200,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			break;
 		}
 
-		if( 16 > ( sktBase->getRxDecryptedLen() - u32UsedLen ) )
+		if( sizeof( VxPktHdr ) > ( sktBase->getRxDecryptedLen() - u32UsedLen ) )
 		{
 			//not enough for a valid packet
 			break;
@@ -226,10 +222,16 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		if( u32UsedLen + u16PktLen > sktBase->getRxDecryptedLen() )
 		{
 			//not all of packet is here
-			//LogMsg( LOG_INFO,  "AppRcpCallback.. Skt %d num %d Not all of packet arrived\n", 
+			//LogMsg( LOG_VERBOSE,  "AppRcpCallback.. Skt %d num %d Not all of packet arrived\n", 
 			//		sktBase->GetSocketId(),
 			//		sktBase->m_iSktId );
 			break;
+		}
+
+		uint16_t pktType = pktHdr->getPktType();
+		if( PKT_TYPE_IM_ALIVE_REQ != pktType && PKT_TYPE_IM_ALIVE_REPLY != pktType && PKT_TYPE_PING_REQ != pktType && PKT_TYPE_PING_REPLY != pktType )
+		{
+			sktBase->setLastSessionTimeMs( GetGmtTimeMs() );
 		}
 
 		if( pktHdr->getDestOnlineId() == m_PktAnn.getMyOnlineId() )
@@ -243,12 +245,6 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 
 		//we used up this packet
 		u32UsedLen += u16PktLen;
-		//LogMsg( LOG_INFO, "AppRcpCallback.. skt %d num %d Used Len %d of %d \n", 
-		//			sktBase->GetSocketId(),
-		//			sktBase->m_iSktId,
-		//			u32UsedLen, 
-		//			sktBase->m_u32DecryptedLen );
-
 	}			
 
 	sktBase->sktBufAmountRead( u32UsedLen );
@@ -265,11 +261,11 @@ void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr
 	std::string strDestId;
 	pktHdr->getDestOnlineId().getVxGUID( strDestId );
 	uint16_t pktLen = pktHdr->getPktLength();
-	LogMsg( LOG_ERROR, "handleIncommingRelayData pkt type %d len %d src id %s dest id %s\n", 
+	LogMsg( LOG_ERROR, "handleIncommingRelayData pkt type %d len %d src id %s dest id %s", 
 									pktType, pktLen, strSrcId.c_str(), strDestId.c_str() );
 	if( false == pktHdr->getDestOnlineId().isVxGUIDValid() )
 	{
-		LogMsg( LOG_ERROR, "handleIncommingRelayData invalid dest id pkt type %d len %d\n", pktHdr->getPktType(), pktHdr->getPktLength() );
+		LogMsg( LOG_ERROR, "handleIncommingRelayData invalid dest id pkt type %d len %d", pktHdr->getPktType(), pktHdr->getPktLength() );
 		return;
 	}
 
@@ -334,7 +330,7 @@ void P2PEngine::handleMulticastData( VxSktBase * sktBase )
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "P2PEngine::handleMulticastData: Invalid Packet\n" );
+		LogMsg( LOG_ERROR, "P2PEngine::handleMulticastData: Invalid Packet" );
 	}
 
 	sktBase->sktBufAmountRead( iDataLen );

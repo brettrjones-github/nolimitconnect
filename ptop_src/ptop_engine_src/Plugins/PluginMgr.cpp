@@ -253,7 +253,7 @@ PluginBase* PluginMgr::getPlugin( EPluginType ePluginType )
 		}
 	}
 
-	LogMsg( LOG_ERROR, "PluginMgr::getPlugin pluin type %d out of range\n", ePluginType );
+	LogMsg( LOG_ERROR, "PluginMgr::getPlugin pluin type %d out of range", ePluginType );
 	vx_assert( false );
 	return NULL;
 }

@@ -357,7 +357,7 @@ void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EHo
 {
     if( eHostTypeUnknown != hostType && netIdent->hasThumbId( hostType ) )
     {
-        queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getThumbModifiedTime( hostType ) );
+        queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getHostOrThumbModifiedTime( hostType ) );
     }   
 }
 
@@ -367,7 +367,7 @@ void ThumbMgr::queryThumbIfNeeded( VxSktBase* sktBase, VxNetIdent* netIdent, EPl
     EHostType hostType = PluginTypeToHostType( pluginType );
     if( eHostTypeUnknown != hostType && netIdent->hasThumbId( hostType ) )
     {
-        queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getThumbModifiedTime( hostType ) );
+        queryThumbIfNeeded( sktBase, netIdent, hostType, netIdent->getThumbId( hostType ), netIdent->getHostOrThumbModifiedTime( hostType ) );
     }    
 }
 
@@ -529,9 +529,9 @@ bool ThumbMgr::ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* net
 }
 
 //============================================================================
-bool ThumbMgr::requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo )
+bool ThumbMgr::requestThumbs( VxSktBase* sktBase, VxNetIdent* netIdent )
 {
-    if( !sktBase || !poInfo || poInfo->isIgnored() )
+    if( !sktBase || !netIdent || netIdent->isIgnored() )
     {
         LogMsg( LOG_ERROR, "ThumbMgr::requestThumbs invalid param " );
         return false;
@@ -540,14 +540,14 @@ bool ThumbMgr::requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo )
     for( int i = eHostTypeNetwork; i < eMaxHostType; i++ )
     {
         EHostType hostType = ( EHostType )i;
-        if( poInfo->hasThumbId( hostType ) )
+        if( netIdent->hasThumbId( hostType ) )
         {
-            VxGUID thumbId = poInfo->getHostThumbId( hostType, false );
-            int64_t thumbTimestamp = poInfo->getThumbModifiedTime( hostType );
+            VxGUID thumbId = netIdent->getHostThumbId( hostType, false );
+            int64_t thumbTimestamp = netIdent->getHostOrThumbModifiedTime( hostType );
             if( thumbId.isVxGUIDValid() && thumbTimestamp && !isThumbUpToDate( thumbId, thumbTimestamp ) )
             {
                 EPluginType pluginType = HostTypeToClientPlugin( hostType );
-                ptopEngineRequestPluginThumb( sktBase, poInfo->getVxNetIdent(), pluginType, thumbId );
+                ptopEngineRequestPluginThumb( sktBase, netIdent, pluginType, thumbId );
             }
         }
     }

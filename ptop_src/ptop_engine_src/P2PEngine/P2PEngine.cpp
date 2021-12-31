@@ -505,20 +505,6 @@ void P2PEngine::setHasSharedWebCam( int hasSharedWebCam )
 }
 
 //============================================================================
-void P2PEngine::onFirstPktAnnounce( PktAnnounce * pktAnn )
-{
-    if( pktAnn && pktAnn->getMyOnlineId() != getMyOnlineId() )
-    {
-        m_FirstPktAnnounce = false;
-        if( getHasFixedIpAddress() )
-        {
-            std::string externAddr = getEngineSettings().getUserSpecifiedExternIpAddr();
-            getNetStatusAccum().setDirectConnectTested( true, false, externAddr );
-        }
-    }
-}
-
-//============================================================================
 void P2PEngine::updateIdentLists( BigListInfo* bigListInfo, int64_t timestampMs )
 {
 	int64_t timestamp;
@@ -600,9 +586,22 @@ bool P2PEngine::validateIdent( VxNetIdent* netIdent )
 }
 
 //============================================================================
-// a handy debug function with access to almost everything
-void EngineCheck( int val )
+void P2PEngine::onFirstPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, BigListInfo* bigListInfo )
 {
-	// LogMsg( LOG_VERBOSE, "Engine Check %d skt id %d", val, GetPtoPEngine().getNetworkMgr().getNearbyMgr().getUdpSkt().getSktId() );
-}
+	if( pktAnn && pktAnn->getMyOnlineId() != getMyOnlineId() && sktBase && bigListInfo )
+	{
+		m_FirstPktAnnounce = false;
+		if( getHasFixedIpAddress() )
+		{
+			std::string externAddr = getEngineSettings().getUserSpecifiedExternIpAddr();
+			getNetStatusAccum().setDirectConnectTested( true, false, externAddr );
+		}
 
+		getHostUrlListMgr().updateHostUrls( bigListInfo->getVxNetIdent(), sktBase->getLastActiveTimeMs() );
+		getHostedListMgr().updateHostedList( bigListInfo->getVxNetIdent(), sktBase );
+
+		getThumbMgr().requestThumbs( sktBase, bigListInfo->getVxNetIdent() );
+
+		getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
+	}
+}

@@ -79,11 +79,8 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 
 	pkt->reversePermissions();
-	if( pkt->getLanIPv4().isIPv4() )
-	{
-		// TODO validate if really nearby
-	}
 
+	// TODO validate if really nearby
 
 	BigListInfo * bigListInfo = 0;
 	EPktAnnUpdateType updateType = m_BigListMgr.updatePktAnn(	pkt,				// announcement pkt received
@@ -109,16 +106,6 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		return;
 	}
 
-	if( isFirstAnnounce )
-	{
-		LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s myFriendship %d hisFriendship %d",
-			pkt->getOnlineName(),
-            sktBase->getRemoteIp().c_str(),
-			bigListInfo->getMyFriendshipToHim(),
-			bigListInfo->getHisFriendshipToMe()
-			);
-	}
-
 	if( pkt->getIsPktAnnReplyRequested() )
 	{
         LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
@@ -128,7 +115,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 				false,
 				false ) )
 		{
-			LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::sendMyPktAnnounce failed ti %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+			LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::sendMyPktAnnounce failed to %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 			sktBase->closeSkt( eSktClosePktAnnSendFail );
 		}
 	}
@@ -143,7 +130,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
 	}
 
-	if( pkt->getTTL() )
+	if( pkt->getTTL() > 0 )
 	{
 		pkt->setTTL( pkt->getTTL() - 1 );
 		pkt->setIsPktAnnReplyRequested( false );
@@ -194,7 +181,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
     if( m_FirstPktAnnounce )
     {
 		updateOnFirstConnect( sktBase, bigListInfo, false );
-        onFirstPktAnnounce( pkt );
+        onFirstPktAnnounce( pkt, sktBase, bigListInfo );
     }
 }
 
@@ -1263,4 +1250,20 @@ EMembershipState P2PEngine::getMembershipState( PktAnnounce& myPktAnn, VxNetIden
 	}
 
 	return membershipState;
+}
+
+//============================================================================
+void P2PEngine::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInfoReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInfoReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }

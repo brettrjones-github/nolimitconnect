@@ -21,6 +21,7 @@
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
 #include <PktLib/PktsHostSearch.h>
+#include <PktLib/PktsHostInfo.h>
 
 //============================================================================
 PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
@@ -245,6 +246,37 @@ void PluginBaseHostService::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * p
 //============================================================================
 void PluginBaseHostService::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+    LogMsg( LOG_DEBUG, "PluginBaseHostService got host offer reply" );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    LogMsg( LOG_DEBUG, "PluginBaseHostService got host info request" );
+    PktHostInfoReq* pktReq = ( PktHostInfoReq* )pktHdr;
+    PktHostInfoReply pktReply;
+    pktReply.setHostType( pktReq->getHostType() );
+    pktReply.setSessionId( pktReq->getSessionId() );
+
+    std::string hostDesc;
+    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet && getHostDescription( hostDesc ) )
+    {
+        pktReply.setHostDescription( hostDesc );
+    }
+    else
+    {
+        pktReply.setCommError( eCommErrPluginNotEnabled );
+    }
+
+    if( !txPacket( netIdent, sktBase, &pktReply ) )
+    {
+        LogMsg( LOG_DEBUG, "PluginBaseHostService failed send onPktHostInfoReq" );
+    }
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
     LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer reply" );
 }
 
@@ -273,4 +305,23 @@ bool PluginBaseHostService::fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxG
 bool PluginBaseHostService::ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId )
 {
     return m_ThumbXferMgr.requestPluginThumb( sktBase, netIdent, thumbId );
+}
+
+//============================================================================
+bool PluginBaseHostService::getHostDescription( std::string& hostDesc )
+{
+    return getEngine().getPluginSettingMgr().getHostDescription( getPluginType(), hostDesc );
+}
+
+//============================================================================
+void PluginBaseHostService::onPluginSettingsChanged( void )
+{
+    int64_t timeNow = GetGmtTimeMs();
+    m_Engine.lockAnnouncePktAccess();
+    m_Engine.getMyPktAnnounce().setHostOrThumbModifiedTime( getPluginType(), timeNow );
+    m_Engine.setPktAnnLastModTime( timeNow );
+    // just time changes so other users will update when next connect.. no need to reannounce 
+    m_Engine.getToGui().toGuiSaveMyIdent(m_Engine.getMyPktAnnounce().getVxNetIdent() );
+    m_Engine.unlockAnnouncePktAccess();
+   
 }

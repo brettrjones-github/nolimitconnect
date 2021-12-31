@@ -218,8 +218,11 @@
 // 158 ( 0x9E )     
 #define PKT_TYPE_MEMBERSHIP_REQ				        ( PKT_TYPE_PUSH_TO_TALK_REPLY + 1 )		        // 158 ( 0x9E )
 #define PKT_TYPE_MEMBERSHIP_REPLY			        ( PKT_TYPE_MEMBERSHIP_REQ	+ 1 )               // 159 ( 0x9F )
+// 160 ( 0xA0 )     
+#define PKT_TYPE_HOST_INFO_REQ				        ( PKT_TYPE_MEMBERSHIP_REPLY + 1 )		        // 160 ( 0xA0 )
+#define PKT_TYPE_HOST_INFO_REPLY			        ( PKT_TYPE_HOST_INFO_REQ	+ 1 )               // 161 ( 0xA1 )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_MEMBERSHIP_REPLY + 1) // 160
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_HOST_INFO_REPLY + 1) // 162
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

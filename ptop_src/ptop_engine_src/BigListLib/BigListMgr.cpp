@@ -253,7 +253,7 @@ bool BigListMgr::canAddFriend( void )
 	{
 		return true;
 	}
-	LogMsg( LOG_ERROR, "BigListMgr::canAddFriend false\n" );
+	LogMsg( LOG_ERROR, "BigListMgr::canAddFriend false" );
 	return false;
 }
 

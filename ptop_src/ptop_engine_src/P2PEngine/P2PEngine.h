@@ -53,9 +53,6 @@
 #include <PktLib/PktSysHandlerBase.h>
 #include <PktLib/PktsImAlive.h>
 
-// a handy debug function with access to almost everything
-void EngineCheck( int val = 0 );
-
 class AssetMgr;
 class BlobMgr;
 class ConnectMgr;
@@ -687,6 +684,9 @@ public:
     virtual void				onPktMembershipReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktMembershipReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
+    virtual void				onPktHostInfoReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostInfoReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
 
 protected:
@@ -708,9 +708,9 @@ protected:
 	virtual	void				attemptConnectionToRelayService( BigListInfo * poInfo );
 	void						handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	void						sendToGuiTheContactList( int maxContactsToSend );
-    void						onFirstPktAnnounce( PktAnnounce * pktAnn );
-    void                        updateIdentLists( BigListInfo* poInfo, int64_t timestampMs = 0 );
-    void                        updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, bool nearbyLanConnected );
+    void                        updateIdentLists( BigListInfo* bigListInfo, int64_t timestampMs = 0 );
+    void                        updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* bigListInfo, bool nearbyLanConnected );
+    void						onFirstPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, BigListInfo* bigListInfo );
 
     EMembershipState            getMembershipState( PktAnnounce& myPktAnn, VxNetIdent* netIdent, EPluginType pluginType, EFriendState myFriendshipToHim );
 

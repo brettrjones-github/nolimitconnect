@@ -129,3 +129,34 @@ bool PluginSettingMgr::getPluginSetting( EPluginType pluginType, PluginSetting& 
     m_SettingMutex.unlock();
     return result;
 }
+
+//============================================================================
+bool PluginSettingMgr::getHostDescription( EPluginType pluginType, std::string& hostDesc )
+{
+    m_SettingMutex.lock();
+    bool result = initPluginSettingMgr();
+    if( result )
+    {
+        result = false;
+        if( pluginType != ePluginTypeInvalid )
+        {
+            for( PluginSetting& setting : m_SettingList )
+            {
+                if( setting.getPluginType() == pluginType )
+                {
+                    hostDesc = setting.getDescription();
+                    result = true;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "getHostDescription invalid plugin type " );
+            result = false;
+        }
+    }
+
+    m_SettingMutex.unlock();
+    return result;
+}

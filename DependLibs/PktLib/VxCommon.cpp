@@ -408,7 +408,7 @@ bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType )
 }
 
 //============================================================================
-EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriendState eHisPermissionToMe )
+EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriendState eHisPermissionToMe )
 {
 	if( eFriendStateIgnore == eHisPermissionToMe )
 	{
@@ -468,6 +468,11 @@ EPluginAccess	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 //============================================================================
 bool VxNetIdent::canRequestJoin( EHostType hostType )
 {
+	if( requiresRelay() )
+	{
+		return false;
+	}
+
 	EPluginType pluginType = HostTypeToHostPlugin( hostType );
 	EFriendState pluginPermissionLevel = getPluginPermission( pluginType );
 	return pluginPermissionLevel != eFriendStateIgnore && getHisFriendshipToMe() != eFriendStateIgnore &&
@@ -477,6 +482,11 @@ bool VxNetIdent::canRequestJoin( EHostType hostType )
 //============================================================================
 bool VxNetIdent::canJoinImmediate( EHostType hostType ) // request to join will be granted immediate because have sufficient permission
 {
+	if( requiresRelay() )
+	{
+		return false;
+	}
+
 	EPluginType pluginType = HostTypeToHostPlugin( hostType );
 	EFriendState pluginPermissionLevel = getPluginPermission( pluginType );
 	return pluginPermissionLevel != eFriendStateIgnore && getHisFriendshipToMe() != eFriendStateIgnore &&

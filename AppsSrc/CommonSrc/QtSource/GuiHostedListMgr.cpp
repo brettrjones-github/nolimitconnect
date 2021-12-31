@@ -29,11 +29,8 @@ GuiHostedListMgr::GuiHostedListMgr( AppCommon& app )
 //============================================================================
 void GuiHostedListMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalHostedRequested( HostedInfo ) ), this, SLOT( slotInternalHostedRequested( HostedInfo ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostedUpdated( HostedInfo ) ), this, SLOT( slotInternalHostedUpdated( HostedInfo ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostedRemoved( VxGUID, EPluginType ) ), this, SLOT( slotInternalHostedRemoved( VxGUID, EPluginType ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostedOfferState( VxGUID, EPluginType, EJoinState ) ), this, SLOT( slotInternalHostedOfferState( VxGUID, EPluginType, EJoinState ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostedOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), this, SLOT( slotInternalHostedOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostedRemoved( VxGUID, EHostType ) ), this, SLOT( slotInternalHostedRemoved( VxGUID, EHostType ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getHostedListMgr().addHostedListMgrClient( dynamic_cast< HostedListCallbackInterface*>(this), true );
 }
@@ -42,18 +39,6 @@ void GuiHostedListMgr::onAppCommonCreated( void )
 bool GuiHostedListMgr::isMessengerReady( void )
 {
     return m_MyApp.isMessengerReady();
-}
-
-//============================================================================
-void GuiHostedListMgr::callbackHostedRequested( HostedInfo* userJoinInfo )
-{
-    if( !userJoinInfo )
-    {
-        LogMsg( LOG_ERROR, "GuiHostedListMgr::callbackHostedAdded null userJoinInfo" );
-        return;
-    }
-
-    emit signalInternalHostedRequested( new HostedInfo( *userJoinInfo ) );
 }
 
 //============================================================================
@@ -69,28 +54,9 @@ void GuiHostedListMgr::callbackHostedUpdated( HostedInfo* userJoinInfo )
 }
 
 //============================================================================
-void GuiHostedListMgr::callbackHostedRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
+void GuiHostedListMgr::callbackHostedRemoved( VxGUID& hostOnlineId, EHostType hostType )
 {
-    emit signalInternalHostedRemoved( hostOnlineId, pluginType );
-}
-
-//============================================================================
-void GuiHostedListMgr::callbackHostedOfferState( VxGUID& hostOnlineId, EPluginType pluginType, EJoinState userOfferState )
-{
-    emit signalInternalHostedOfferState( hostOnlineId, pluginType, userOfferState );
-}
-
-//============================================================================
-void GuiHostedListMgr::callbackHostedOnlineState( VxGUID& hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId )
-{
-    emit signalInternalHostedOnlineState( hostOnlineId, pluginType, onlineState, connectionId );
-}
-
-//============================================================================
-void GuiHostedListMgr::slotInternalHostedRequested( HostedInfo* userJoinInfo )
-{
-    updateHosted( userJoinInfo );
-    delete userJoinInfo;
+    emit signalInternalHostedRemoved( hostOnlineId, hostType );
 }
 
 //============================================================================
@@ -101,9 +67,8 @@ void GuiHostedListMgr::slotInternalHostedUpdated( HostedInfo* userJoinInfo )
 }
 
 //============================================================================
-void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID onlineId, EPluginType pluginType )
+void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID onlineId, EHostType hostType )
 {
-    EHostType hostType = PluginTypeToHostType( pluginType );
     auto iter = m_HostedList.find( onlineId );
     GuiHosted* joinInfo = nullptr;
     if( iter != m_HostedList.end() && hostType != eHostTypeUnknown )
@@ -120,34 +85,6 @@ void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID onlineId, EPluginType p
                 joinInfo->deleteLater();
             }
         }
-    }
-}
-
-//============================================================================
-void GuiHostedListMgr::slotInternalHostedOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState joinOfferState )
-{
-    EHostType hostType = PluginTypeToHostType( pluginType );
-    GuiHosted* joinInfo = findHosted( userOnlineId );
-    if( joinInfo && hostType != eHostTypeUnknown && joinOfferState != eJoinStateNone )
-    {
-        if( joinInfo->getJoinState( hostType ) != joinOfferState )
-        {
-            joinInfo->setJoinState( hostType, joinOfferState );
-            emit signalHostedOfferStateChange( userOnlineId, hostType, joinOfferState );
-        }
-    }
-}
-
-//============================================================================
-void GuiHostedListMgr::slotInternalHostedOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId )
-{
-    EHostType hostType = PluginTypeToHostType( pluginType );
-    GuiHosted* joinInfo = findHosted( userOnlineId );
-    bool isOnline = onlineState == eOnlineStateOnline ? true : false;
-    if( joinInfo && hostType != eHostTypeUnknown && isOnline != joinInfo->isOnline() )
-    {
-        joinInfo->setOnlineStatus( isOnline );
-        emit signalHostedOnlineStatus( joinInfo, isOnline );
     }
 }
 

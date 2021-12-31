@@ -178,7 +178,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\AllPkts.h" />
     <ClInclude Include="..\..\MatchParams.h" />
     <ClInclude Include="..\..\PktAnnList.h" />
     <ClInclude Include="..\..\PktAnnounce.h" />
@@ -196,6 +195,7 @@
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
     <ClInclude Include="..\..\PktsFriendOffer.h" />
+    <ClInclude Include="..\..\PktsHostInfo.h" />
     <ClInclude Include="..\..\PktsHostJoin.h" />
     <ClInclude Include="..\..\PktsHostSearch.h" />
     <ClInclude Include="..\..\PktsImAlive.h" />
@@ -252,6 +252,7 @@
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />
+    <ClCompile Include="..\..\PktsHostInfo.cpp" />
     <ClCompile Include="..\..\PktsHostJoin.cpp" />
     <ClCompile Include="..\..\PktsHostSearch.cpp" />
     <ClCompile Include="..\..\PktsImAlive.cpp" />

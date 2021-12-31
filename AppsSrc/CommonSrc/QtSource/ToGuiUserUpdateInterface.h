@@ -39,6 +39,7 @@ public:
     virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) = 0; 
 
     virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) = 0; 
+    virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) = 0;
 };
 
 

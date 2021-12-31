@@ -287,7 +287,7 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		return;
 	}
 
-	int64_t timestamp = GetGmtTimeMs();
+	int64_t timestamp = sktBase->getLastActiveTimeMs();
 	if( poInfo->isIgnored() )
 	{
 		getIgnoreListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
@@ -333,7 +333,6 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 	}
 
 	getOnlineListMgr().updateOnlineIdent( poInfo->getMyOnlineId(), sktBase->getConnectionId(), timestamp );
-
 	
 	if( isNearby )
 	{
@@ -344,7 +343,4 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 	{
 		getFriendListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
 	}
-
-	
-	getThumbMgr().requestThumbs( sktBase, poInfo );
 }

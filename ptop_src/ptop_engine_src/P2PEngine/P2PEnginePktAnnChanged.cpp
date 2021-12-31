@@ -70,7 +70,7 @@ void P2PEngine::doPktAnnHasChanged( bool connectionListIsLocked )
 
 	if( false == connectionListIsLocked )
 	{
-		LogMsg( LOG_INFO, "P2PEngine::doPktAnnHasChanged: m_ConnectListMutex.unlock()\n" );
+		LogMsg( LOG_INFO, "P2PEngine::doPktAnnHasChanged: m_ConnectListMutex.unlock()" );
 		m_ConnectionList.connectListUnlock();
 	}
 

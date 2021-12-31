@@ -71,7 +71,7 @@ public:
     virtual void				onPktThumbXferErr           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
     virtual bool                ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, EPluginType pluginType, VxGUID& thumbId );
-    virtual bool                requestThumbs( VxSktBase* sktBase, BigListInfo* poInfo );
+    virtual bool                requestThumbs( VxSktBase* sktBase, VxNetIdent* netIdent );
 
 protected:
     virtual bool				addAsset( AssetBaseInfo& assetInfo, AssetBaseInfo*& retCreatedAsset ) override;

@@ -29,11 +29,9 @@ PktHandlerBase::PktHandlerBase()
 	}
 
 	int maxPktType = MAX_PKT_TYPE_CNT;
-	vx_assert( 64 == PKT_TYPE_THUMB_SEND_COMPLETE_REQ );
-	vx_assert( 128 == PKT_TYPE_OFFER_SEND_REQ );
-	vx_assert( 143 == PKT_TYPE_STORY_DATA_REQ );
 	vx_assert( 150 == PKT_TYPE_RELAY_SESSION_REPLY );
-    vx_assert( 160 == maxPktType );
+    vx_assert( 162 == maxPktType );
+
 	m_aBaseSysPktFuncTable[ 0 ] = &PktHandlerBase::onPktInvalid;
 
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ANNOUNCE ]							= &PktHandlerBase::onPktAnnounce;
@@ -228,6 +226,9 @@ PktHandlerBase::PktHandlerBase()
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REQ]					= &PktHandlerBase::onPktPushToTalkReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_PUSH_TO_TALK_REPLY]					= &PktHandlerBase::onPktPushToTalkReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REQ]						= &PktHandlerBase::onPktHostInfoReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REPLY]					= &PktHandlerBase::onPktHostInfoReply;
 }
 
 //============================================================================
@@ -1038,6 +1039,18 @@ void PktHandlerBase::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 
 //============================================================================
 void PktHandlerBase::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }

@@ -28,16 +28,16 @@ HostedListMgr::HostedListMgr( P2PEngine& engine )
 //============================================================================
 RCODE HostedListMgr::hostedListMgrStartup( std::string& dbFileName )
 {
-    RCODE rc = m_HostedListDb.hostedListDbStartup( HOSTED_LIST_DB_VERSION, dbFileName.c_str() );
-    m_HostedList.clear();
-    m_HostedListDb.getAllHosteds( m_HostedList );
+    RCODE rc = m_HostedInfoListDb.hostedListDbStartup( HOSTED_LIST_DB_VERSION, dbFileName.c_str() );
+    m_HostedInfoList.clear();
+    m_HostedInfoListDb.getAllHosteds( m_HostedInfoList );
     return rc;
 }
 
 //============================================================================
 RCODE HostedListMgr::hostedListMgrShutdown( void )
 {
-    return m_HostedListDb.hostedListDbShutdown();
+    return m_HostedInfoListDb.hostedListDbShutdown();
 }
 
 //============================================================================
@@ -51,7 +51,7 @@ void HostedListMgr::updateHosted( EHostType hostType, VxGUID& onlineId, std::str
 
     bool wasUpdated = false;
     lockList();
-    for( auto iter = m_HostedList.begin(); iter != m_HostedList.end(); ++iter )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )
     {
         if( iter->getHostType() == hostType && iter->getOnlineId() == onlineId )
         {
@@ -59,7 +59,7 @@ void HostedListMgr::updateHosted( EHostType hostType, VxGUID& onlineId, std::str
             if( timestampMs )
             {
                 iter->setTimestamp( timestampMs );
-                m_HostedListDb.saveHosted( *iter );
+                m_HostedInfoListDb.saveHosted( *iter );
             }
             
             wasUpdated = true;
@@ -70,10 +70,10 @@ void HostedListMgr::updateHosted( EHostType hostType, VxGUID& onlineId, std::str
     if( !wasUpdated )
     {
         HostedInfo hostedInfo( hostType, onlineId, hosted, timestampMs );
-        m_HostedList.push_back( hostedInfo );
+        m_HostedInfoList.push_back( hostedInfo );
         if( timestampMs )
         {
-            m_HostedListDb.saveHosted( hostedInfo );
+            m_HostedInfoListDb.saveHosted( hostedInfo );
         }
     }
 
@@ -85,7 +85,7 @@ bool HostedListMgr::getHosteds( EHostType hostType, std::vector<HostedInfo>& ret
 {
     retHosteds.clear();
     lockList();
-    for( auto iter = m_HostedList.begin(); iter != m_HostedList.end(); ++iter )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )
     {
         if( iter->getHostType() == hostType )
         {
@@ -107,8 +107,7 @@ bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, V
         BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( onlineId );
         if( bigListInfo )
         {
-            updateHosteds( bigListInfo->getVxNetIdent() );
-            m_Engine.getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
+            updateHostedList( bigListInfo->getVxNetIdent(), sktBase );
         }
 
         m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
@@ -132,11 +131,11 @@ void HostedListMgr::requestIdentity( std::string& url )
 }
 
 //============================================================================
-void HostedListMgr::updateHosteds( VxNetIdent* netIdent )
+void HostedListMgr::updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase )
 {
-    if( !netIdent )
+    if( !netIdent || !sktBase )
     {
-        LogMsg( LOG_ERROR, "HostedListMgr::updateHosteds null netIdent" );
+        LogMsg( LOG_ERROR, "HostedListMgr::updateHosteds null netIdent or sktBase" );
         return;
     }
 
@@ -152,7 +151,7 @@ void HostedListMgr::updateHosteds( VxNetIdent* netIdent )
             EHostType hostType = ( EHostType )i;
             if( netIdent->canRequestJoin( hostType ) )
             {
-                updateHosted( hostType, netIdent->getMyOnlineId(), nodeUrl );
+                updateHosted( hostType, netIdent->getMyOnlineId(), nodeUrl, sktBase->getLastActiveTimeMs() );
             }
         }
     }
@@ -162,11 +161,11 @@ void HostedListMgr::updateHosteds( VxNetIdent* netIdent )
 void HostedListMgr::removeClosedPortIdent( VxGUID& onlineId )
 {
     lockList();
-    for( auto iter = m_HostedList.begin(); iter != m_HostedList.end(); )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
     {
         if( iter->getOnlineId() == onlineId )
         {
-            m_HostedList.erase( iter );
+            m_HostedInfoList.erase( iter );
         }
         else
         {
@@ -175,7 +174,7 @@ void HostedListMgr::removeClosedPortIdent( VxGUID& onlineId )
     }
 
     unlockList();
-    m_HostedListDb.removeClosedPortIdent( onlineId );
+    m_HostedInfoListDb.removeClosedPortIdent( onlineId );
 }
 
 //============================================================================
@@ -195,7 +194,75 @@ bool HostedListMgr::fromGuiQueryHosts( VxPtopUrl& netHostUrl, EHostType hostType
 }
 
 //============================================================================
+void HostedListMgr::clearHostedInfoList( void )
+{
+    /*
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )
+    {
+        delete ( *iter );
+    }
+    */
+
+    m_HostedInfoList.clear();
+}
+
+//============================================================================
 void HostedListMgr::addHostedListMgrClient( HostedListCallbackInterface* client, bool enable )
 {
+    lockClientList();
+    for( auto iter = m_HostedInfoListClients.begin(); iter != m_HostedInfoListClients.end(); ++iter )
+    {
+        if( *iter == client )
+        {
+            m_HostedInfoListClients.erase( iter );
+            break;
+        }
+    }
 
+    if( enable )
+    {
+        m_HostedInfoListClients.push_back( client );
+    }
+
+    unlockClientList();
 }
+
+/*
+//============================================================================
+void HostedListMgr::announceHostJoinUpdated( HostJoinInfo* hostInfo )
+{
+    HostJoinInfo* userHostInfo = dynamic_cast< HostJoinInfo* >( hostInfo );
+    if( userHostInfo )
+    {
+        lockClientList();
+        std::vector<HostJoinCallbackInterface*>::iterator iter;
+        for( iter = m_HostedInfoListClients.begin(); iter != m_HostedInfoListClients.end(); ++iter )
+        {
+            HostJoinCallbackInterface* client = *iter;
+            client->callbackHostJoinUpdated( userHostInfo );
+        }
+
+        unlockClientList();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostJoinUpdated dynamic_cast failed" );
+    }
+}
+
+//============================================================================
+void HostJoinMgr::announceHostJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
+{
+    removeFromDatabase( hostOnlineId, pluginType, false );
+    lockClientList();
+    std::vector<HostJoinCallbackInterface*>::iterator iter;
+    for( iter = m_HostedInfoListClients.begin(); iter != m_HostedInfoListClients.end(); ++iter )
+    {
+        HostJoinCallbackInterface* client = *iter;
+        client->callbackHostJoinRemoved( hostOnlineId, pluginType );
+    }
+
+    unlockClientList();
+}
+*/
+

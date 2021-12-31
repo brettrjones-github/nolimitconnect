@@ -186,6 +186,9 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_MEMBERSHIP_REQ]						= &PktPluginHandlerBase::onPktMembershipReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_MEMBERSHIP_REPLY]					= &PktPluginHandlerBase::onPktMembershipReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REQ]						= &PktPluginHandlerBase::onPktHostInfoReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REPLY]					= &PktPluginHandlerBase::onPktHostInfoReply;
 }
 
 //============================================================================
@@ -975,6 +978,18 @@ void PktPluginHandlerBase::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pkt
 
 //============================================================================
 void PktPluginHandlerBase::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }

@@ -208,7 +208,6 @@ VxConnectIdent::VxConnectIdent()
 {
 	m_OnlineName[ 0 ] = 0;
 	m_OnlineDesc[ 0 ] = 0;
-
 }
 
 //============================================================================
@@ -523,7 +522,32 @@ VxGUID VxConnectIdent::getHostThumbId( EHostType hostType, bool defaultToAvatarT
 }
 
 //============================================================================
-int64_t VxConnectIdent::getThumbModifiedTime( EHostType hostType )
+void VxConnectIdent::setHostOrThumbModifiedTime( EHostType hostType, int64_t& timeModified )
+{
+    switch( hostType )
+    {
+    case eHostTypeChatRoom:
+        setModifiedTime( m_ChatRoomThumbModifiedTime, timeModified );
+        break;
+    case eHostTypeGroup:
+        setModifiedTime( m_GroupThumbModifiedTime, timeModified );
+        break;
+    case eHostTypeNetwork:
+        setModifiedTime( m_NetHostThumbModifiedTime, timeModified );
+        break;
+    case eHostTypeRandomConnect:
+        setModifiedTime( m_RandomConnectThumbModifiedTime, timeModified );
+        break;
+    case eHostTypePeerUser:
+        setModifiedTime( m_AvatarModifiedTime, timeModified );
+        break;
+    default:
+        break;
+    }
+}
+
+//============================================================================
+int64_t VxConnectIdent::getHostOrThumbModifiedTime( EHostType hostType )
 {
     switch( hostType )
     {
@@ -594,7 +618,33 @@ VxGUID& VxConnectIdent::getThumbId( EPluginType pluginType  )
 }
 
 //============================================================================
-int64_t VxConnectIdent::getThumbModifiedTime( EPluginType pluginType  )
+void VxConnectIdent::setHostOrThumbModifiedTime( EPluginType pluginType, int64_t& timeModified )
+{
+    switch( pluginType )
+    {
+    case ePluginTypeHostChatRoom:
+        setModifiedTime( m_ChatRoomThumbModifiedTime, timeModified );
+        break;
+    case ePluginTypeHostGroup:
+        setModifiedTime( m_GroupThumbModifiedTime, timeModified );
+        break;
+    case ePluginTypeHostNetwork:
+        setModifiedTime( m_NetHostThumbModifiedTime, timeModified );
+        break;
+    case ePluginTypeHostRandomConnect:
+        setModifiedTime( m_RandomConnectThumbModifiedTime, timeModified );
+        break;
+    case ePluginTypeClientPeerUser:
+    case ePluginTypeHostPeerUser:
+        setModifiedTime( m_AvatarModifiedTime, timeModified );
+        break;
+    default:
+        break;
+    }
+}
+
+//============================================================================
+int64_t VxConnectIdent::getHostOrThumbModifiedTime( EPluginType pluginType  )
 {
     switch( pluginType )
     {

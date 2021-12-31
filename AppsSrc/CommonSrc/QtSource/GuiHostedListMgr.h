@@ -60,29 +60,20 @@ signals:
     void                        signalHostedOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
     void                        signalHostedOnlineStatus( GuiHosted* user, bool isOnline );
 
-    void                        signalInternalHostedRequested( HostedInfo* userJoinInfo );
     void                        signalInternalHostedUpdated( HostedInfo* userJoinInfo );
-    void                        signalInternalHostedRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        signalInternalHostedOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState hostOfferState );
-    void                        signalInternalHostedOnlineState( VxGUID hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
+    void                        signalInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
 
 private slots:
-    void                        slotInternalHostedRequested( HostedInfo* userJoinInfo );
     void                        slotInternalHostedUpdated( HostedInfo* userJoinInfo );
-    void                        slotInternalHostedRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        slotInternalHostedOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState );
-    void                        slotInternalHostedOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
+    void                        slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
 
 protected:
     void                        removeHosted( VxGUID& onlineId );
-    GuiHosted*                findHosted( VxGUID& onlineId );
-    GuiHosted*                updateHosted( HostedInfo* userJoinInfo );
+    GuiHosted*                  findHosted( VxGUID& onlineId );
+    GuiHosted*                  updateHosted( HostedInfo* userJoinInfo );
     
-    virtual void				callbackHostedRequested( HostedInfo* userJoinInfo ) override;
     virtual void				callbackHostedUpdated( HostedInfo* userJoinInfo ) override;
-    virtual void				callbackHostedRemoved( VxGUID& userOnlineId, EPluginType pluginType ) override;
-    virtual void				callbackHostedOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userOfferState ) override;
-    virtual void				callbackHostedOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
+    virtual void				callbackHostedRemoved( VxGUID& userOnlineId, EHostType hostType ) override;
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiHosted

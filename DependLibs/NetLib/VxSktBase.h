@@ -63,8 +63,8 @@ public:
 	{
 	}
 
-	char						m_as8RemoteFileName[ 256 ];
-	char						m_as8LocalFileName[ 256 ];
+	char						m_as8RemoteFileName[ 512 ];
+	char						m_as8LocalFileName[ 512 ];
 	FILE *						m_hFile;
 	uint64_t					m_u64FileOffs;
 	uint64_t					m_u64FileLen;
@@ -118,13 +118,20 @@ public:
 
 	uint16_t					getCryptoKeyPort( void )						{ return (eSktTypeTcpAccept == getSktType()) ? m_LclIp.getPort() : m_RmtIp.getPort(); }
 
+	// PktImAlive activity time
 	virtual void				setLastImAliveTimeMs( int64_t gmtTimeMs )	    { m_LastImAliveTimeGmtMs = gmtTimeMs; m_LastActiveTimeGmtMs = gmtTimeMs; }
 	virtual int64_t			    getLastImAliveTimeMs( void )					{ return m_LastImAliveTimeGmtMs; }
 	virtual bool				checkForImAliveTimeout( bool calledFromSktThread = true );
 
+	// last any send or recieve activity
 	virtual void				setLastActiveTimeMs( int64_t gmtTimeMs )	    { m_LastActiveTimeGmtMs = gmtTimeMs; }
 	virtual int64_t		    	getLastActiveTimeMs( void )					    { return m_LastActiveTimeGmtMs; }
 	virtual void                updateLastActiveTime( void );
+
+	// send or recieve activity not PktImAlive or PktPing
+	virtual void				setLastSessionTimeMs( int64_t gmtTimeMs )		{ m_LastSessionTimeGmtMs = gmtTimeMs; }
+	virtual int64_t		    	getLastSessionTimeMs( void )					{ return m_LastSessionTimeGmtMs; }
+	virtual void                updateLastSessionTime( void );
 
     virtual void				setToDeleteTimeMs( int64_t gmtTimeMs )          { m_ToDeleteTimeGmtMs = gmtTimeMs; }
     virtual int64_t		    	getToDeleteTimeMs( void )                       { return m_ToDeleteTimeGmtMs; }
@@ -287,6 +294,7 @@ public:
 	//=== state vars ===//
     int64_t			    		m_LastActiveTimeGmtMs{ 0 };	    // last time received data
 	int64_t		    			m_LastImAliveTimeGmtMs{ 0 };    // last time received PktImAliveReply
+	int64_t		    			m_LastSessionTimeGmtMs{ 0 };    // last time received or sent pkt that is not PktImAlive or PktPing
 	int64_t	    				m_ToDeleteTimeGmtMs{ 0 };
 
 	VxThread					m_SktRxThread;			        // thread for handling socket receive

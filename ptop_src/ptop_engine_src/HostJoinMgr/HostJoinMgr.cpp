@@ -73,21 +73,19 @@ void HostJoinMgr::fromGuiUserLoggedOn( void )
 void HostJoinMgr::addHostJoinMgrClient( HostJoinCallbackInterface * client, bool enable )
 {
     lockClientList();
+    std::vector<HostJoinCallbackInterface*>::iterator iter;
+    for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
+    {
+        if( *iter == client )
+        {
+            m_HostJoinClients.erase( iter );
+            break;
+        }
+    }
+
     if( enable )
     {
         m_HostJoinClients.push_back( client );
-    }
-    else
-    {
-        std::vector<HostJoinCallbackInterface *>::iterator iter;
-        for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
-        {
-            if( *iter == client )
-            {
-                m_HostJoinClients.erase( iter );
-                break;
-            }
-        }
     }
 
     unlockClientList();

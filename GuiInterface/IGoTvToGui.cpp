@@ -258,6 +258,12 @@ void IGoTv::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 }
 
 //============================================================================
+void IGoTv::toGuiSaveMyIdent( VxNetIdent* netIdent )
+{
+    getAppCommon().toGuiSaveMyIdent( netIdent );
+}
+
+//============================================================================
 void IGoTv::toGuiRxedPluginOffer(   VxNetIdent *	netIdent,
                                     EPluginType		ePluginType,
                                     const char *	pMsg,

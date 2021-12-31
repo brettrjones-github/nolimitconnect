@@ -191,6 +191,9 @@ public:
 	virtual void				onPktMembershipReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktMembershipReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
+	virtual void				onPktHostInfoReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktHostInfoReply			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

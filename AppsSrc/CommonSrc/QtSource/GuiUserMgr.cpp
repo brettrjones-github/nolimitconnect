@@ -15,6 +15,7 @@
 
 #include "GuiUserMgr.h"
 #include "AppCommon.h"
+#include "AccountMgr.h"
 #include "GuiUserMgrGuiUserUpdateClient.h"
 #include "GuiUserMgrGuiUserUpdateInterface.h"
 
@@ -36,6 +37,7 @@ void GuiUserMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalUpdateUser(VxNetIdent*,EHostType) ),	                this, SLOT( slotInternalUpdateUser(VxNetIdent*,EHostType) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserRemoved(VxGUID) ),	                                this, SLOT( slotInternalUserRemoved(VxGUID) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserOnlineStatus( VxNetIdent*, EHostType, bool ) ),    this, SLOT( slotInternalUserOnlineStatus( VxNetIdent*, EHostType, bool ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalSaveMyIdent( VxNetIdent* ) ),                          this, SLOT( slotInternalSaveMyIdent( VxNetIdent* ) ), Qt::QueuedConnection );
 
     m_MyApp.wantToGuiUserUpdateCallbacks( this, true );
 }
@@ -125,9 +127,16 @@ void GuiUserMgr::toGuiContactLastSessionTimeChange( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void GuiUserMgr::toGuiUpdateMyIdent( VxNetIdent * netIdent )
+void GuiUserMgr::toGuiUpdateMyIdent( VxNetIdent* netIdent )
 {
-    emit signalInternalUpdateMyIdent( new VxNetIdent( *netIdent ) );
+    // NOT sure we really need this
+    // emit signalInternalSaveMyIdent( new VxNetIdent( *netIdent ) );
+}
+
+//============================================================================
+void GuiUserMgr::toGuiSaveMyIdent( VxNetIdent * netIdent )
+{
+    emit signalInternalSaveMyIdent( new VxNetIdent( *netIdent ) );
 }
 
 //============================================================================
@@ -252,10 +261,11 @@ void GuiUserMgr::slotInternalUpdateUser( VxNetIdent* netIdent, EHostType hostTyp
 }
 
 //============================================================================
-void GuiUserMgr::slotInternalUpdateMyIdent( VxNetIdent* netIdent )
+void GuiUserMgr::slotInternalSaveMyIdent( VxNetIdent* myIdent )
 {
-    updateMyIdent( netIdent );
-    delete netIdent;
+    memcpy( m_MyApp.getAppGlobals().getUserIdent(), myIdent, sizeof( VxNetIdent ) );
+    m_MyApp.getAccountMgr().updateAccount( *myIdent );
+    delete myIdent;
 }
 
 //============================================================================

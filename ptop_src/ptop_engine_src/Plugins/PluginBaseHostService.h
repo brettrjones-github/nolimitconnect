@@ -32,6 +32,8 @@ public:
     virtual void				onPktPluginSettingReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostInfoReq                ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktHostInfoReply              ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
     virtual bool				fromGuiRequestPluginThumb       ( VxNetIdent* netIdent, VxGUID& thumbId ) override;
     virtual bool                ptopEngineRequestPluginThumb    ( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) override;
@@ -43,6 +45,8 @@ protected:
 
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting );
     virtual void				sendHostAnnounce( void );
+    virtual bool				getHostDescription( std::string& hostDesc );
+    virtual void				onPluginSettingsChanged( void );
 
     //=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };

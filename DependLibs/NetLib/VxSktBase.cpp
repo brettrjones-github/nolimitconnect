@@ -19,7 +19,8 @@
 #include "VxSktUtil.h"
 #include "InetAddress.h"
 
-#include <PktLib/VxPktHdr.h>
+#include <PktLib/PktTypes.h>
+
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
@@ -427,6 +428,12 @@ RCODE VxSktBase::setSktBlocking( bool bBlock )
 void VxSktBase::updateLastActiveTime( void )					
 { 
 	setLastActiveTimeMs( GetGmtTimeMs() ); 
+}
+
+//============================================================================
+void VxSktBase::updateLastSessionTime( void )
+{
+	setLastSessionTimeMs( GetGmtTimeMs() );
 }
 
 //============================================================================
@@ -896,6 +903,14 @@ RCODE VxSktBase::txPacketWithDestId(	VxPktHdr *			pktHdr, 		// packet to send
 	m_u8TxSeqNum = (uint8_t)rand();
 	pktHdr->setPktSeqNum( m_u8TxSeqNum );
 	vx_assert( pktHdr->getDestOnlineId().isVxGUIDValid() );
+	uint64_t timestamp = GetGmtTimeMs();
+	setLastActiveTimeMs( timestamp );
+	uint16_t pktType = pktHdr->getPktType();
+	if( PKT_TYPE_IM_ALIVE_REQ != pktType && PKT_TYPE_IM_ALIVE_REPLY != pktType && PKT_TYPE_PING_REQ != pktType && PKT_TYPE_PING_REPLY != pktType )
+	{
+		setLastSessionTimeMs( timestamp );
+	}
+
 	return txEncrypted( (const char *)pktHdr, pktHdr->getPktLength(), bDisconnect );
 }
 

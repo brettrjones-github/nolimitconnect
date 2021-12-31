@@ -54,7 +54,8 @@ public:
     virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) override; 
-    virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) override; 
+    virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
+    virtual void				toGuiSaveMyIdent( VxNetIdent * netIdent ) override; 
 
     bool                        isUserInSession( VxGUID& onlineId );
     void                        setUserOffline( VxGUID& onlineId );
@@ -88,7 +89,7 @@ signals:
     void				        signalInternalIndentListRemove( EUserViewType listType, VxGUID onlineId );
 
     void                        signalInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
-    void                        signalInternalUpdateMyIdent( VxNetIdent* netIdent );
+    void                        signalInternalSaveMyIdent( VxNetIdent* netIdent );
     void                        signalInternalUserRemoved( VxGUID onlineId );
     void                        signalInternalUserOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
 
@@ -97,7 +98,7 @@ private slots:
     void				        slotInternalIndentListRemove( EUserViewType listType, VxGUID onlineId );
 
     void                        slotInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
-    void                        slotInternalUpdateMyIdent( VxNetIdent* netIdent );
+    void                        slotInternalSaveMyIdent( VxNetIdent* netIdent );
     void                        slotInternalUserRemoved( VxGUID onlineId );
     void                        slotInternalUserOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
 

@@ -324,7 +324,7 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiUpdateMyIdent %s\n", netIdent->getOnlineName());
+	LogMsg( LOG_INFO, "AppCommon::toGuiUpdateMyIdent %s", netIdent->getOnlineName());
     toGuiUserUpdateClientsLock();
     for( auto iter = m_ToGuiUserUpdateClientList.begin(); iter != m_ToGuiUserUpdateClientList.end(); ++iter )
     {
@@ -333,6 +333,17 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::toGuiSaveMyIdent( VxNetIdent* netIdent )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    getUserMgr().toGuiSaveMyIdent( netIdent );
 }
 
 //============================================================================

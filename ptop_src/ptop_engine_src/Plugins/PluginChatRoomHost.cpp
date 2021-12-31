@@ -118,6 +118,7 @@ void PluginChatRoomHost::onPluginSettingChange( PluginSetting& pluginSetting )
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostChatRoomAnnounce( pluginSetting );
+    onPluginSettingsChanged();
 }
 
 //============================================================================

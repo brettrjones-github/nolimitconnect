@@ -120,4 +120,5 @@ void PluginRandomConnectHost::onPluginSettingChange( PluginSetting& pluginSettin
 {
     m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
     buildHostRandomConnectAnnounce( pluginSetting );
+    onPluginSettingsChanged();
 }

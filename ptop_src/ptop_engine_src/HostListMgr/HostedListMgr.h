@@ -49,7 +49,7 @@ public:
     bool                        getHosteds( EHostType hostType, std::vector<HostedInfo>& retHosteds );
 
     void                        requestIdentity( std::string& url );
-    void                        updateHosteds( VxNetIdent* netIdent );
+    void                        updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase );
 
 protected:
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
@@ -68,10 +68,18 @@ protected:
 
     void						removeClosedPortIdent( VxGUID& onlineId );
 
+    void						clearHostedInfoList( void );
+
+    void						lockClientList( void )          { m_HostedInfoListClientMutex.lock(); }
+    void						unlockClientList( void )        { m_HostedInfoListClientMutex.unlock(); }
+
     P2PEngine&                  m_Engine;
     VxMutex                     m_HostedMutex;
-    HostedListDb                m_HostedListDb;
+    HostedListDb                m_HostedInfoListDb;
 
-    std::vector<HostedInfo>     m_HostedList;
+    std::vector<HostedInfo>    m_HostedInfoList;
+
+    std::vector<HostedListCallbackInterface*> m_HostedInfoListClients;
+    VxMutex						m_HostedInfoListClientMutex;
 };
 

@@ -479,6 +479,7 @@ public:
     virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) override;
 
     virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) override;
+    virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) override;
 
 	virtual void				toGuiRxedPluginOffer(	VxNetIdent *	netIdent,				// identity of friend
 														EPluginType		ePluginType,			// plugin type

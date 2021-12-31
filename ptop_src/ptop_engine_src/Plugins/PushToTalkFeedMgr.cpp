@@ -190,11 +190,11 @@ void PushToTalkFeedMgr::onPktPushToTalkReq( VxSktBase * sktBase, VxPktHdr * pktH
 	}
 
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
-    LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq PluginBase::AutoPluginLock autoLock start\n" );
+    LogModule( eLogMediaStream, LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq PluginBase::AutoPluginLock autoLock start" );
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 	PluginBase::AutoPluginLock autoLock( &m_Plugin );
 	#ifdef DEBUG_AUTOPLUGIN_LOCK
-    LogModule( eLogMediaStream,  LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq PluginBase::AutoPluginLock autoLock done\n" );
+    LogModule( eLogMediaStream,  LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq PluginBase::AutoPluginLock autoLock done" );
 	#endif // DEBUG_AUTOPLUGIN_LOCK
 
 	PluginSessionMgr::SessionIter iter;
@@ -205,7 +205,7 @@ void PushToTalkFeedMgr::onPktPushToTalkReq( VxSktBase * sktBase, VxPktHdr * pktH
 		if( netIdent->getMyOnlineId() == poSession->getOnlineId() )
 		{
 			AudioJitterBuffer& jitterBuf = poSession->getJitterBuffer();
-			//LogMsg( LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq jitterBuf.lockResource\n" );
+			//LogMsg( LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq jitterBuf.lockResource" );
 			jitterBuf.lockResource();
 
 			char * audioBuf = poSession->getJitterBuffer().getBufToFill();
@@ -215,7 +215,7 @@ void PushToTalkFeedMgr::onPktPushToTalkReq( VxSktBase * sktBase, VxPktHdr * pktH
 				poSession->getAudioDecoder()->decodeToPcmData( poPkt->getCompressedData(), poPkt->getFrame1Len(), poPkt->getFrame2Len(), (uint16_t *)audioBuf, (int32_t)MY_OPUS_PKT_UNCOMPRESSED_DATA_LEN );
 			}
 
-			//LogMsg( LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq jitterBuf.unlockResource\n" );
+			//LogMsg( LOG_INFO, "PushToTalkFeedMgr::onPktPushToTalkReq jitterBuf.unlockResource" );
 			jitterBuf.unlockResource();
 			break;
 		}

@@ -314,6 +314,9 @@ public:
 
     //! called from engine when need to update identity
     virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) override;
+    //! called from engine when identity changes need saved for next bootup
+    virtual void				toGuiSaveMyIdent( VxNetIdent* netIdent ) override;
+
     virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers );
 
     //! add offer to notify list

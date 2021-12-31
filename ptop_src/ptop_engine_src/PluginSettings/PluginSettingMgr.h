@@ -28,6 +28,7 @@ public:
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );
+    bool                        getHostDescription( EPluginType pluginType, std::string& hostDesc );
 
 protected:
     bool                        initPluginSettingMgr( void );
