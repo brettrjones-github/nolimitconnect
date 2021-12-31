@@ -310,6 +310,9 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHosted.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedList.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostJoin.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostJoinList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostJoinMgr.cpp" />
@@ -529,6 +532,9 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiFileXferSession.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHelpers.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostJoinMgr.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedList.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoin.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinList.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinSession.h" />

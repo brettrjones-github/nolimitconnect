@@ -30,18 +30,16 @@
 
 #include <memory.h>
 
-//#define DEBUG_ENGINE_PKTS
-
 //============================================================================
 void P2PEngine::onPktUnhandled( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	LogMsg( LOG_INFO, "onPktUnhandled pkt type %d", pktHdr->getPktType() );
+	LogMsg( LOG_ERROR, "onPktUnhandled pkt type %d", pktHdr->getPktType() );
 }
 
 //============================================================================
 void P2PEngine::onPktInvalid( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	LogMsg( LOG_INFO, "onPktInvalid pkt type %d", pktHdr->getPktType() );
+	LogMsg( LOG_ERROR, "onPktInvalid pkt type %d", pktHdr->getPktType() );
 }
 
 //============================================================================
@@ -203,584 +201,514 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 //============================================================================
 void P2PEngine::onPktAnnList( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAnnList\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAnnList" );
 }
 
 //============================================================================
 void P2PEngine::onPktLogReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktLogReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktLogReq" );
 }
 
 //============================================================================
 void P2PEngine::onPktLogReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktLogReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktLogReply" );
 }
 	
 //============================================================================
 void P2PEngine::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktPluginOfferReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPluginOfferReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktPluginOfferReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPluginOfferReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktChatReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktChatReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktChatReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktChatReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktChatReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVoiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVoiceReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVoiceReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVoiceReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVoiceReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVoiceReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVideoFeedReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVideoFeedReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVideoFeedStatus( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVideoFeedStatus\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedStatus" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVideoFeedPic( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVideoFeedPic\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedPic" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVideoFeedPicChunk( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVideoFeedPicChunk\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedPicChunk" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktVideoFeedPicAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktVideoFeedPicAck\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktVideoFeedPicAck" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileGetReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileGetReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileSendReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileSendReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
-
-//virtual void				onPktFindFileReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-//virtual void				onPktFindFileReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 //============================================================================
 void P2PEngine::onPktFileListReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileListReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileListReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileListReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileListReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileListReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileInfoReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileInfoReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileChunkReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileChunkReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileChunkReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileChunkReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileSendCompleteReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendCompleteReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileSendCompleteReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileSendCompleteReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileGetCompleteReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetCompleteReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileGetCompleteReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileGetCompleteReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFileShareErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktFileShareErr\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileShareErr" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetSendReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetSendReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetChunkReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetChunkReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetChunkReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetChunkReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetCompleteReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetCompleteReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktAssetGetCompleteReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetGetCompleteReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetSendCompleteReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendCompleteReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetSendCompleteReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetSendCompleteReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktAssetXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktAssetXferErr\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktAssetXferErr" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktMultiSessionReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMultiSessionReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktMultiSessionReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMultiSessionReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktSessionStartReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktSessionStartReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStartReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktSessionStartReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktSessionStartReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStartReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktSessionStopReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktSessionStopReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStopReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktSessionStopReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktSessionStopReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktSessionStopReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelayDisconnect( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelayDisconnect\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayDisconnect" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelayConnectReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelayConnectReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayConnectReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelayConnectReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelayConnectReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayConnectReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelaySessionReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelaySessionReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelaySessionReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelaySessionReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelaySessionReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelaySessionReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelayTestReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelayTestReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayTestReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktRelayTestReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktRelayTestReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktRelayTestReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktMyPicSendReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMyPicSendReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktMyPicSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktMyPicSendReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMyPicSendReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktWebServerPicChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktWebServerPicChunkTx\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPicChunkTx" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktWebServerPicChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktWebServerPicChunkAck\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPicChunkAck" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktWebServerGetChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktWebServerGetChunkTx\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerGetChunkTx" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktWebServerGetChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktWebServerGetChunkAck\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerGetChunkAck" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktWebServerPutChunkTx( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktWebServerPutChunkTx\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPutChunkTx" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktWebServerPutChunkAck( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktWebServerPutChunkAck\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktWebServerPutChunkAck" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktTodGameStats\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTodGameStats" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktTodGameAction\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTodGameAction" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktTodGameValue\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTodGameValue" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktTcpPunch( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-//#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktTcpPunch\n" );
-//#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktTcpPunch" );
+
 	PktTcpPunch * pktPunch = ( PktTcpPunch * )pktHdr;
 	VxSktBase * poNewSkt = 0;
 	if( 0 == m_NetConnector.directConnectTo( pktPunch->m_ConnectInfo, &poNewSkt, eConnectReasonPktTcpPunch ) )
 	{
-		LogMsg( LOG_INFO, "P2PEngine:: TcpPunch SUCCESS\n" );
+		LogMsg( LOG_INFO, "P2PEngine:: TcpPunch SUCCESS" );
 		if( 0 != poNewSkt )
 		{
-			LogMsg( LOG_INFO, "sendMyPktAnnounce 7\n" ); 
+			LogMsg( LOG_INFO, "sendMyPktAnnounce 7" ); 
 			m_NetConnector.sendMyPktAnnounce(	pktPunch->m_ConnectInfo.getMyOnlineId(), 
 												poNewSkt,
 												true,
@@ -790,16 +718,15 @@ void P2PEngine::onPktTcpPunch( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "P2PEngine:: TcpPunch FAIL\n" );
+		LogMsg( LOG_INFO, "P2PEngine:: TcpPunch FAIL" );
 	}
 }
 
 //============================================================================
 void P2PEngine::onPktPingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktPingReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPingReq" );
+
 	PktPingReq * pktPingReq = (PktPingReq *)pktHdr;
 	PktPingReply pktPingReply;
 	pktPingReply.setSrcOnlineId( m_PktAnn.getMyOnlineId() );
@@ -810,9 +737,8 @@ void P2PEngine::onPktPingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 //============================================================================
 void P2PEngine::onPktPingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktPingReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPingReply" );
+
 	PktPingReply * pktPingReply = (PktPingReply *)pktHdr;
 	int64_t timeDiffTmp = GetGmtTimeMs() - pktPingReply->getTimestamp();
 	uint16_t timeDiff = timeDiffTmp > 30000 ? 30000 : (uint16_t)timeDiffTmp;
@@ -829,399 +755,356 @@ void P2PEngine::onPktPingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		pktHdr->getSrcOnlineId().toHexString( onlineName );
 	}
 	
-	LogMsg( LOG_DEBUG, "Ping %s Time ms %d\n", onlineName.c_str(), timeDiff );
+	LogMsg( LOG_DEBUG, "Ping %s Time ms %d", onlineName.c_str(), timeDiff );
 }
 
 
 //============================================================================
 void P2PEngine::onPktImAliveReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktImAliveReq\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktImAliveReq" );
+
 	sktBase->setLastImAliveTimeMs(  GetGmtTimeMs() );
 	PktImAliveReq * pktImAliveReq = (PktImAliveReq *)pktHdr;
 	PktImAliveReply pktImAliveReply;
 	pktImAliveReply.setSrcOnlineId( m_PktAnn.getMyOnlineId() );
-	//pktImAliveReply.setTimestamp( pktImAliveReq->getTimestamp() );
+
 	sktBase->txPacket( pktImAliveReq->getSrcOnlineId(), &pktImAliveReply );
 }
 
 //============================================================================
 void P2PEngine::onPktImAliveReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktImAliveReply\n" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktImAliveReply" );
+
 	sktBase->setLastImAliveTimeMs(  GetGmtTimeMs() );
 }
 
 //============================================================================
 void P2PEngine::onPktPluginSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktPluginSettingReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPluginSettingReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktPluginSettingReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPluginSettingReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSettingReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSettingReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSettingReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSettingReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSettingReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSettingChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSettingChunkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSettingChunkReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSettingChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSettingChunkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSettingChunkReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbAvatarReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbAvatarReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbAvatarReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbAvatarReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbAvatarReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbAvatarReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbAvatarChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbAvatarChunkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbAvatarChunkReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbAvatarChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbAvatarChunkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbAvatarChunkReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbFileReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbFileReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbFileReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbFileReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbFileReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbFileReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbFileChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbFileChunkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbFileChunkReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbFileChunkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbFileChunkReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostAnnounce" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostAnnounce" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobChunkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobChunkReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobChunkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobChunkReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendCompleteReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendCompleteReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobSendCompleteReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobSendCompleteReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktBlobXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktBlobXferErr" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktBlobXferErr" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostJoinReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostJoinReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostJoinReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostJoinReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostSearchReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostSearchReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostSearchReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostSearchReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostSearchReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostOfferReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostOfferReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktHostOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktHostOfferReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostOfferReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFriendOfferReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktFriendOfferReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFriendOfferReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktFriendOfferReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktFriendOfferReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFriendOfferReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbGetReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSendReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSendReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbChunkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbChunkReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbChunkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbChunkReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbGetCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetCompleteReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetCompleteReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbGetCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbGetCompleteReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbGetCompleteReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSendCompleteReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendCompleteReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbSendCompleteReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbSendCompleteReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktThumbXferErr" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktThumbXferErr" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
@@ -1229,91 +1112,80 @@ void P2PEngine::onPktThumbXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 //============================================================================
 void P2PEngine::onPktOfferSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktOfferSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktOfferChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferChunkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferChunkReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktOfferChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferChunkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferChunkReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktOfferSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendCompleteReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendCompleteReq" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktOfferSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferSendCompleteReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferSendCompleteReply" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktOfferXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-    LogMsg( LOG_INFO, "P2PEngine::onPktOfferXferErr" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktOfferXferErr" );
+
     m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktPushToTalkReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktPushToTalkReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPushToTalkReq" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
 
 //============================================================================
 void P2PEngine::onPktPushToTalkReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktPushToTalkReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktPushToTalkReply" );
+
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
-
 
 //============================================================================
 void P2PEngine::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktMembershipReq" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMembershipReq" );
+
 	VxNetIdent* netIdent = pktHdr->getSrcOnlineId() == getMyOnlineId() ? getMyNetIdent() : m_BigListMgr.findBigListInfo( pktHdr->getSrcOnlineId() );
 	if( netIdent && !netIdent->isIgnored() && sktBase && sktBase->isConnected() )
 	{
@@ -1335,9 +1207,8 @@ void P2PEngine::onPktMembershipReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 //============================================================================
 void P2PEngine::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
-#ifdef DEBUG_ENGINE_PKTS
-	LogMsg( LOG_INFO, "P2PEngine::onPktMembershipReply" );
-#endif // DEBUG_ENGINE_PKTS
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktMembershipReply" );
+
 	PktMembershipReply* pktReply = ( PktMembershipReply* )pktHdr;
 	if( pktReply && pktReply->isValidPkt() )
 	{
@@ -1351,9 +1222,6 @@ void P2PEngine::onPktMembershipReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 			membership.setMembershipState( eHostTypeGroup, pktReply->getHostMembership( eHostTypeGroup ) );
 			membership.setMembershipState( eHostTypeChatRoom, pktReply->getHostMembership( eHostTypeChatRoom ) );
 			membership.setMembershipState( eHostTypeRandomConnect, pktReply->getHostMembership( eHostTypeRandomConnect ) );
-
-
-
 		}
 	}
 }

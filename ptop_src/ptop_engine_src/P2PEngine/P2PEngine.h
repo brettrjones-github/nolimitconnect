@@ -25,6 +25,7 @@
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/Connections/ConnectionMgr.h>
 #include <ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.h>
+#include <ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
@@ -116,6 +117,7 @@ public:
     DirectConnectListMgr&       getDirectConnectListMgr( void )                 { return m_DirectConnectListMgr; }
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
     HostUrlListMgr&             getHostUrlListMgr( void )                       { return m_HostUrlListMgr; }
+    HostedListMgr&              getHostedListMgr( void )                        { return m_HostedListMgr; }
     IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
     MembershipAvailableMgr&     getMembershipAvailableMgr( void )               { return m_MembershipAvailableMgr; }
     MembershipHostedMgr&        getMembershipHostedMgr( void )                  { return m_MembershipHostedMgr; }
@@ -391,6 +393,8 @@ public:
     virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType ) override;
     virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl ) override;
     virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) override;
+    virtual bool				fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) override;
+    virtual bool				fromGuiQueryMyHosted( EHostType hostType ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
 
@@ -716,6 +720,7 @@ protected:
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
     HostUrlListMgr              m_HostUrlListMgr;
+    HostedListMgr               m_HostedListMgr;
     NearbyListMgr               m_NearbyListMgr;
     OnlineListMgr               m_OnlineListMgr;
     BigListMgr					m_BigListMgr;

@@ -15,34 +15,41 @@
 
 #include <ptop_src/ptop_engine_src/Connections/IConnectRequest.h>
 
-#include "HostUrlInfo.h"
-#include "HostUrlListDb.h"
+#include "HostedInfo.h"
+#include "HostedListDb.h"
 
 #include <CoreLib/VxMutex.h>
 
 class P2PEngine;
 class VxGUID;
 class VxNetIdent;
+class VxPtopUrl;
+class HostedListCallbackInterface;
 
-class HostUrlListMgr : public IConnectRequestCallback
+class HostedListMgr : public IConnectRequestCallback
 {
-    const int HOST_URL_LIST_DB_VERSION = 1;
+    const int HOSTED_LIST_DB_VERSION = 1;
 public:
-    HostUrlListMgr() = delete;
-    HostUrlListMgr( P2PEngine& engine );
-    virtual ~HostUrlListMgr() = default;
+    HostedListMgr() = delete;
+    HostedListMgr( P2PEngine& engine );
+    virtual ~HostedListMgr() = default;
 
-    RCODE                       hostUrlListMgrStartup( std::string& dbFileName );
-    RCODE                       hostUrlListMgrShutdown( void );
+    RCODE                       hostedListMgrStartup( std::string& dbFileName );
+    RCODE                       hostedListMgrShutdown( void );
 
-    void                        lockList( void )    { m_HostUrlsMutex.lock(); }
-    void                        unlockList( void )  { m_HostUrlsMutex.unlock(); }
+    void                        lockList( void )    { m_HostedMutex.lock(); }
+    void                        unlockList( void )  { m_HostedMutex.unlock(); }
 
-    void                        updateHostUrl( EHostType hostType, VxGUID& hostGuid, std::string& hostUrl, int64_t timestampMs = 0 );
-    bool                        getHostUrls( EHostType hostType, std::vector<HostUrlInfo>& retHostUrls );
+    void                        addHostedListMgrClient( HostedListCallbackInterface* client, bool enable );
+
+    bool                        fromGuiQueryMyHosted( EHostType hostType );
+    bool                        fromGuiQueryHosts( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
+
+    void                        updateHosted( EHostType hostType, VxGUID& hostGuid, std::string& hosted, int64_t timestampMs = 0 );
+    bool                        getHosteds( EHostType hostType, std::vector<HostedInfo>& retHosteds );
 
     void                        requestIdentity( std::string& url );
-    void                        updateHostUrls( VxNetIdent* netIdent, int64_t timestampMs = 0 );
+    void                        updateHosteds( VxNetIdent* netIdent );
 
 protected:
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
@@ -62,9 +69,9 @@ protected:
     void						removeClosedPortIdent( VxGUID& onlineId );
 
     P2PEngine&                  m_Engine;
-    VxMutex                     m_HostUrlsMutex;
-    HostUrlListDb               m_HostUrlListDb;
+    VxMutex                     m_HostedMutex;
+    HostedListDb                m_HostedListDb;
 
-    std::vector<HostUrlInfo>    m_HostUrlsList;
+    std::vector<HostedInfo>     m_HostedList;
 };
 

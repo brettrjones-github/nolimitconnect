@@ -12,55 +12,54 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "HostUrlListMgr.h"
+#include "HostedListMgr.h"
 #include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 
 #include <CoreLib/VxPtopUrl.h>
-#include <NetLib/VxSktBase.h>
 
 //============================================================================
-HostUrlListMgr::HostUrlListMgr( P2PEngine& engine )
+HostedListMgr::HostedListMgr( P2PEngine& engine )
     : m_Engine( engine )
 {
 }
 
 //============================================================================
-RCODE HostUrlListMgr::hostUrlListMgrStartup( std::string& dbFileName )
+RCODE HostedListMgr::hostedListMgrStartup( std::string& dbFileName )
 {
-    RCODE rc = m_HostUrlListDb.hostUrlListDbStartup( HOST_URL_LIST_DB_VERSION, dbFileName.c_str() );
-    m_HostUrlsList.clear();
-    m_HostUrlListDb.getAllHostUrls( m_HostUrlsList );
+    RCODE rc = m_HostedListDb.hostedListDbStartup( HOSTED_LIST_DB_VERSION, dbFileName.c_str() );
+    m_HostedList.clear();
+    m_HostedListDb.getAllHosteds( m_HostedList );
     return rc;
 }
 
 //============================================================================
-RCODE HostUrlListMgr::hostUrlListMgrShutdown( void )
+RCODE HostedListMgr::hostedListMgrShutdown( void )
 {
-    return m_HostUrlListDb.hostUrlListDbShutdown();
+    return m_HostedListDb.hostedListDbShutdown();
 }
 
 //============================================================================
-void HostUrlListMgr::updateHostUrl( EHostType hostType, VxGUID& onlineId, std::string& hostUrl, int64_t timestampMs )
+void HostedListMgr::updateHosted( EHostType hostType, VxGUID& onlineId, std::string& hosted, int64_t timestampMs )
 {
     if( !onlineId.isVxGUIDValid() )
     {
-        LogMsg( LOG_ERROR, "HostUrlListMgr::updateDirectConnectIdent invalid id" );
+        LogMsg( LOG_ERROR, "HostedListMgr::updateDirectConnectIdent invalid id" );
         return;
     }
 
     bool wasUpdated = false;
     lockList();
-    for( auto iter = m_HostUrlsList.begin(); iter != m_HostUrlsList.end(); ++iter )
+    for( auto iter = m_HostedList.begin(); iter != m_HostedList.end(); ++iter )
     {
         if( iter->getHostType() == hostType && iter->getOnlineId() == onlineId )
         {
-            iter->setHostUrl( hostUrl );
+            iter->setHosted( hosted );
             if( timestampMs )
             {
                 iter->setTimestamp( timestampMs );
-                m_HostUrlListDb.saveHostUrl( *iter );
+                m_HostedListDb.saveHosted( *iter );
             }
             
             wasUpdated = true;
@@ -70,11 +69,11 @@ void HostUrlListMgr::updateHostUrl( EHostType hostType, VxGUID& onlineId, std::s
 
     if( !wasUpdated )
     {
-        HostUrlInfo hostUrlInfo( hostType, onlineId, hostUrl, timestampMs );
-        m_HostUrlsList.push_back( hostUrlInfo );
+        HostedInfo hostedInfo( hostType, onlineId, hosted, timestampMs );
+        m_HostedList.push_back( hostedInfo );
         if( timestampMs )
         {
-            m_HostUrlListDb.saveHostUrl( hostUrlInfo );
+            m_HostedListDb.saveHosted( hostedInfo );
         }
     }
 
@@ -82,33 +81,33 @@ void HostUrlListMgr::updateHostUrl( EHostType hostType, VxGUID& onlineId, std::s
 }
 
 //============================================================================
-bool HostUrlListMgr::getHostUrls( EHostType hostType, std::vector<HostUrlInfo>& retHostUrls )
+bool HostedListMgr::getHosteds( EHostType hostType, std::vector<HostedInfo>& retHosteds )
 {
-    retHostUrls.clear();
+    retHosteds.clear();
     lockList();
-    for( auto iter = m_HostUrlsList.begin(); iter != m_HostUrlsList.end(); ++iter )
+    for( auto iter = m_HostedList.begin(); iter != m_HostedList.end(); ++iter )
     {
         if( iter->getHostType() == hostType )
         {
-            retHostUrls.push_back( *iter );
+            retHosteds.push_back( *iter );
         }
     }
 
     unlockList();
 
-    return !retHostUrls.empty();
+    return !retHosteds.empty();
 }
 
 //============================================================================
 /// return false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
-bool HostUrlListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) 
+bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) 
 { 
     if( eConnectReasonRequestIdentity == connectReason )
     {
         BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( onlineId );
         if( bigListInfo )
         {
-            updateHostUrls( bigListInfo->getVxNetIdent(), sktBase->getLastActiveTimeMs() );
+            updateHosteds( bigListInfo->getVxNetIdent() );
             m_Engine.getToGui().toGuiContactAdded( bigListInfo->getVxNetIdent() );
         }
 
@@ -119,7 +118,7 @@ bool HostUrlListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, 
 }
 
 //============================================================================
-void HostUrlListMgr::requestIdentity( std::string& url )
+void HostedListMgr::requestIdentity( std::string& url )
 {
     VxPtopUrl ptopUrl( url );
     if( ptopUrl.isValid() )
@@ -133,11 +132,11 @@ void HostUrlListMgr::requestIdentity( std::string& url )
 }
 
 //============================================================================
-void HostUrlListMgr::updateHostUrls( VxNetIdent* netIdent, int64_t timestampMs )
+void HostedListMgr::updateHosteds( VxNetIdent* netIdent )
 {
     if( !netIdent )
     {
-        LogMsg( LOG_ERROR, "HostUrlListMgr::updateHostUrls null netIdent" );
+        LogMsg( LOG_ERROR, "HostedListMgr::updateHosteds null netIdent" );
         return;
     }
 
@@ -153,21 +152,21 @@ void HostUrlListMgr::updateHostUrls( VxNetIdent* netIdent, int64_t timestampMs )
             EHostType hostType = ( EHostType )i;
             if( netIdent->canRequestJoin( hostType ) )
             {
-                updateHostUrl( hostType, netIdent->getMyOnlineId(), nodeUrl, timestampMs );
+                updateHosted( hostType, netIdent->getMyOnlineId(), nodeUrl );
             }
         }
     }
 }
 
 //============================================================================
-void HostUrlListMgr::removeClosedPortIdent( VxGUID& onlineId )
+void HostedListMgr::removeClosedPortIdent( VxGUID& onlineId )
 {
     lockList();
-    for( auto iter = m_HostUrlsList.begin(); iter != m_HostUrlsList.end(); )
+    for( auto iter = m_HostedList.begin(); iter != m_HostedList.end(); )
     {
         if( iter->getOnlineId() == onlineId )
         {
-            m_HostUrlsList.erase( iter );
+            m_HostedList.erase( iter );
         }
         else
         {
@@ -176,5 +175,27 @@ void HostUrlListMgr::removeClosedPortIdent( VxGUID& onlineId )
     }
 
     unlockList();
-    m_HostUrlListDb.removeClosedPortIdent( onlineId );
+    m_HostedListDb.removeClosedPortIdent( onlineId );
+}
+
+//============================================================================
+bool HostedListMgr::fromGuiQueryMyHosted( EHostType hostType )
+{
+    bool result{ false };
+
+    return result;
+}
+
+//============================================================================
+bool HostedListMgr::fromGuiQueryHosts( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll )
+{
+    bool result{ false };
+
+    return result;
+}
+
+//============================================================================
+void HostedListMgr::addHostedListMgrClient( HostedListCallbackInterface* client, bool enable )
+{
+
 }

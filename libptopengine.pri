@@ -154,6 +154,10 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedInfo.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListDb.h \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h \
@@ -175,7 +179,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipAvailableCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionBase.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionIdle.h \
@@ -452,6 +456,9 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedInfo.cpp \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListDb.cpp \
+    $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.cpp \

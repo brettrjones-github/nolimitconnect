@@ -574,6 +574,9 @@
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedListDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.cpp" />
@@ -930,6 +933,10 @@
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlListDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlListMgr.h" />

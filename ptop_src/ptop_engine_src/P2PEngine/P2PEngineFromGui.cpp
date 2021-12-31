@@ -149,6 +149,10 @@ void P2PEngine::fromGuiSetUserSpecificDir( const char * userSpecificDir  )
 	strDbFileName += "EngineParams.db3";
 	getEngineParams().engineParamsStartup( strDbFileName );
 
+	strDbFileName = VxGetSettingsDirectory();
+	strDbFileName += "HostedList.db3";
+	getHostedListMgr().hostedListMgrStartup( strDbFileName );
+
 	m_IsUserSpecificDirSet = true;
 	m_AppStartupCalled = true;
 }
@@ -1618,7 +1622,6 @@ bool P2PEngine::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent,
 	if( ptopUrl.isValid() )
 	{
 		VxGUID onlineId = ptopUrl.getOnlineId();
-		// LogModule( eLogNetworkState, LOG_VERBOSE, "P2PEngine::fromGuiQueryIdentity onlineId %s url %s", onlineId.toOnlineIdString().c_str(), ptopUrl.getUrl().c_str() );
 		if( getMyOnlineId() == ptopUrl.getOnlineId() )
 		{
 			retNetIdent = *getMyPktAnnounce().getVxNetIdent();
@@ -1646,4 +1649,29 @@ bool P2PEngine::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent,
 bool P2PEngine::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
 {
 	return getEngineSettings().fromGuiSetDefaultUrl( hostType, hostUrl );
+}
+
+//============================================================================
+bool P2PEngine::fromGuiQueryHosts( std::string& netHostUrlIn, EHostType hostType, VxGUID& hostIdIfNullThenAll )
+{
+	bool result{ false };
+	VxPtopUrl netHostUrl( netHostUrlIn );
+	if( netHostUrl.isValid() )
+	{
+		VxGUID onlineId = netHostUrl.getOnlineId();
+		if( getMyOnlineId() == netHostUrl.getOnlineId() )
+		{
+			return fromGuiQueryMyHosted( hostType );
+		}
+
+		return getHostedListMgr().fromGuiQueryHosts( netHostUrl, hostType, hostIdIfNullThenAll );
+	}
+
+	return result;
+}
+
+//============================================================================
+bool P2PEngine::fromGuiQueryMyHosted( EHostType hostType )
+{
+	return getHostedListMgr().fromGuiQueryMyHosted( hostType );
 }

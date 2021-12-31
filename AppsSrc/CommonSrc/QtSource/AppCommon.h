@@ -23,6 +23,7 @@
 #include "GuiMembershipAvailableMgr.h"
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
+#include "GuiHostedListMgr.h"
 #include "GuiHostJoinMgr.h"
 #include "GuiUserJoinMgr.h"
 #include "GuiUserMgr.h"
@@ -139,6 +140,7 @@ public:
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
     GuiConnectMgr&              getConnectMgr( void )						{ return m_ConnectMgr; }
+    GuiHostedListMgr&           getHostedListMgr( void )                    { return m_HostedListMgr; }
     GuiHostJoinMgr&             getHostJoinMgr( void )                      { return m_HostJoinMgr; }
     GuiUserJoinMgr&             getUserJoinMgr( void )						{ return m_UserJoinMgr; }
     GuiUserMgr&                 getUserMgr( void )						    { return m_UserMgr; }
@@ -747,6 +749,7 @@ private:
     GuiOfferClientMgr		    m_OfferClientMgr;
     GuiOfferHostMgr		        m_OfferHostMgr;
     GuiUserMgr					m_UserMgr;
+    GuiHostedListMgr			m_HostedListMgr;
     GuiHostJoinMgr				m_HostJoinMgr;
     GuiUserJoinMgr				m_UserJoinMgr;
     GuiConnectMgr				m_ConnectMgr;

@@ -901,6 +901,15 @@
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.cpp">
       <Filter>Source Files\HostListMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedInfo.cpp">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedListDb.cpp">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedListMgr.cpp">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1825,9 +1834,6 @@
     <ClInclude Include="..\..\ptop_engine_src\BaseInfo\BaseHostInfo.h">
       <Filter>Source Files\BaseInfo</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinCallbackInterface.h">
-      <Filter>Source Files\HostJoinMgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.h">
       <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
@@ -1949,6 +1955,21 @@
       <Filter>Source Files\HostListMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostUrlInfo.h">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedInfo.h">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListDb.h">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListMgr.h">
+      <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinCallbackInterface.h">
+      <Filter>Source Files\HostJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListCallbackInterface.h">
       <Filter>Source Files\HostListMgr</Filter>
     </ClInclude>
   </ItemGroup>

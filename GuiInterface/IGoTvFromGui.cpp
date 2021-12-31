@@ -800,3 +800,15 @@ bool IGoTv::fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, boo
 {
     return getPtoP().fromGuiQueryIdentity( url, retNetIdent, requestIdentityIfUnknown );
 }
+
+//============================================================================
+bool IGoTv::fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll )
+{
+    return getPtoP().fromGuiQueryHosts( netHostUrl, hostType, hostIdIfNullThenAll );
+}
+
+//============================================================================
+bool IGoTv::fromGuiQueryMyHosted( EHostType hostType )
+{
+    return getPtoP().fromGuiQueryMyHosted( hostType );
+}

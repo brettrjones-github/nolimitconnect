@@ -613,6 +613,8 @@ public:
     virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType );
     virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl );
     virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown );
+    virtual bool				fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
+    virtual bool				fromGuiQueryMyHosted( EHostType hostType );
   
     //============================================================================
     //=== utilities ===//

@@ -118,7 +118,7 @@ public:
 
 	uint16_t					getCryptoKeyPort( void )						{ return (eSktTypeTcpAccept == getSktType()) ? m_LclIp.getPort() : m_RmtIp.getPort(); }
 
-	virtual void				setLastImAliveTimeMs( int64_t gmtTimeMs )	    { m_LastImAliveTimeGmtMs = gmtTimeMs; }
+	virtual void				setLastImAliveTimeMs( int64_t gmtTimeMs )	    { m_LastImAliveTimeGmtMs = gmtTimeMs; m_LastActiveTimeGmtMs = gmtTimeMs; }
 	virtual int64_t			    getLastImAliveTimeMs( void )					{ return m_LastImAliveTimeGmtMs; }
 	virtual bool				checkForImAliveTimeout( bool calledFromSktThread = true );
 

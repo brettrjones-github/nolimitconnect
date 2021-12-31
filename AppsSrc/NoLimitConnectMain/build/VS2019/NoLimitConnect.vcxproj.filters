@@ -881,6 +881,9 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp">
@@ -1942,6 +1945,15 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHosted.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2171,6 +2183,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiMembershipAvailableCallback.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedList.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
