@@ -196,6 +196,7 @@
     <ClInclude Include="..\..\PktsFileShare.h" />
     <ClInclude Include="..\..\PktsFriendOffer.h" />
     <ClInclude Include="..\..\PktsHostInfo.h" />
+    <ClInclude Include="..\..\PktsHostInvite.h" />
     <ClInclude Include="..\..\PktsHostJoin.h" />
     <ClInclude Include="..\..\PktsHostSearch.h" />
     <ClInclude Include="..\..\PktsImAlive.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="..\..\PktsFileShare.cpp" />
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />
     <ClCompile Include="..\..\PktsHostInfo.cpp" />
+    <ClCompile Include="..\..\PktsHostInvite.cpp" />
     <ClCompile Include="..\..\PktsHostJoin.cpp" />
     <ClCompile Include="..\..\PktsHostSearch.cpp" />
     <ClCompile Include="..\..\PktsImAlive.cpp" />

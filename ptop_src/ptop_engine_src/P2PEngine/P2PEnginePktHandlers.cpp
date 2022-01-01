@@ -1267,3 +1267,51 @@ void P2PEngine::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
+
+//============================================================================
+void P2PEngine::onPktHostInviteAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInviteAnnReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostInviteAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInviteAnnReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInviteSearchReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostInviteSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInviteSearchReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInviteMoreReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostInviteMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostInviteMoreReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}

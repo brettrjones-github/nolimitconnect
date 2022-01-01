@@ -9,6 +9,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktChatReq.h \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.h \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.h \
+    $$PWD/DependLibs/PktLib/PktsHostInfo.h \
+    $$PWD/DependLibs/PktLib/PktsHostInvite.h \
 	$$PWD/DependLibs/PktLib/PktsHostSearch.h \
     $$PWD/DependLibs/PktLib/PktLogReply.h \
     $$PWD/DependLibs/PktLib/PktLogReq.h \
@@ -67,7 +69,6 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktChatReq.cpp \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.cpp \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.cpp \
-	$$PWD/DependLibs/PktLib/PktsHostSearch.cpp \
     $$PWD/DependLibs/PktLib/PktLogReply.cpp \
     $$PWD/DependLibs/PktLib/PktLogReq.cpp \
 	$$PWD/DependLibs/PktLib/PktsOfferXfer.cpp \
@@ -82,7 +83,10 @@ SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
     $$PWD/DependLibs/PktLib/PktsFileList.cpp \
     $$PWD/DependLibs/PktLib/PktsFileShare.cpp \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.cpp \
+    $$PWD/DependLibs/PktLib/PktsHostInfo.cpp \
+    $$PWD/DependLibs/PktLib/PktsHostInvite.cpp \
 	$$PWD/DependLibs/PktLib/PktsHostJoin.cpp \
+    $$PWD/DependLibs/PktLib/PktsHostSearch.cpp \
     $$PWD/DependLibs/PktLib/PktsImAlive.cpp \
     $$PWD/DependLibs/PktLib/PktsMembership.cpp \
     $$PWD/DependLibs/PktLib/PktsMultiSession.cpp \

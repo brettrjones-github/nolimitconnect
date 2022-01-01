@@ -229,6 +229,13 @@ PktHandlerBase::PktHandlerBase()
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REQ]						= &PktHandlerBase::onPktHostInfoReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REPLY]					= &PktHandlerBase::onPktHostInfoReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_ANN_REQ]				= &PktHandlerBase::onPktHostInviteAnnReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_ANN_REPLY]				= &PktHandlerBase::onPktHostInviteAnnReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_SEARCH_REQ]				= &PktHandlerBase::onPktHostInviteSearchReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_SEARCH_REPLY]			= &PktHandlerBase::onPktHostInviteSearchReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_MORE_REQ]				= &PktHandlerBase::onPktHostInviteMoreReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_MORE_REPLY]				= &PktHandlerBase::onPktHostInviteMoreReply;
 }
 
 //============================================================================
@@ -1051,6 +1058,42 @@ void PktHandlerBase::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 
 //============================================================================
 void PktHandlerBase::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInviteAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInviteAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInviteSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostInviteMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }

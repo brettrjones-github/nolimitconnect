@@ -194,6 +194,13 @@ public:
 	virtual void				onPktHostInfoReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktHostInfoReply			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
+	virtual void				onPktHostInviteAnnReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktHostInviteAnnReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktHostInviteSearchReq	( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktHostInviteSearchReply	( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktHostInviteMoreReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktHostInviteMoreReply	( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

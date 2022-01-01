@@ -687,6 +687,13 @@ public:
     virtual void				onPktHostInfoReq            ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostInfoReply          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
+    virtual void				onPktHostInviteAnnReq       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostInviteAnnReply     ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostInviteSearchReq    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostInviteSearchReply  ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostInviteMoreReq      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostInviteMoreReply    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
 
 protected:

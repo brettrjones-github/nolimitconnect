@@ -221,8 +221,15 @@
 // 160 ( 0xA0 )     
 #define PKT_TYPE_HOST_INFO_REQ				        ( PKT_TYPE_MEMBERSHIP_REPLY + 1 )		        // 160 ( 0xA0 )
 #define PKT_TYPE_HOST_INFO_REPLY			        ( PKT_TYPE_HOST_INFO_REQ	+ 1 )               // 161 ( 0xA1 )
+// 162 ( 0xA2 )     
+#define PKT_TYPE_HOST_INVITE_ANN_REQ				( PKT_TYPE_HOST_INFO_REPLY + 1 )		        // 162 ( 0xA2 )
+#define PKT_TYPE_HOST_INVITE_ANN_REPLY			    ( PKT_TYPE_HOST_INVITE_ANN_REQ	+ 1 )           // 163 ( 0xA3 )
+#define PKT_TYPE_HOST_INVITE_SEARCH_REQ				( PKT_TYPE_HOST_INVITE_ANN_REPLY + 1 )		    // 164 ( 0xA4 )
+#define PKT_TYPE_HOST_INVITE_SEARCH_REPLY			( PKT_TYPE_HOST_INVITE_SEARCH_REQ	+ 1 )       // 165 ( 0xA5 )
+#define PKT_TYPE_HOST_INVITE_MORE_REQ				( PKT_TYPE_HOST_INVITE_SEARCH_REPLY + 1 )		// 166 ( 0xA6 )
+#define PKT_TYPE_HOST_INVITE_MORE_REPLY			    ( PKT_TYPE_HOST_INVITE_MORE_REQ	+ 1 )           // 167 ( 0xA7 )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_HOST_INFO_REPLY + 1) // 162
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_HOST_INVITE_MORE_REPLY + 1) // 168
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

@@ -189,6 +189,13 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REQ]						= &PktPluginHandlerBase::onPktHostInfoReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INFO_REPLY]					= &PktPluginHandlerBase::onPktHostInfoReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_ANN_REQ]				= &PktPluginHandlerBase::onPktHostInviteAnnReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_ANN_REPLY]				= &PktPluginHandlerBase::onPktHostInviteAnnReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_SEARCH_REQ]				= &PktPluginHandlerBase::onPktHostInviteSearchReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_SEARCH_REPLY]			= &PktPluginHandlerBase::onPktHostInviteSearchReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_MORE_REQ]				= &PktPluginHandlerBase::onPktHostInviteMoreReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_INVITE_MORE_REPLY]				= &PktPluginHandlerBase::onPktHostInviteMoreReply;
 }
 
 //============================================================================
@@ -990,6 +997,42 @@ void PktPluginHandlerBase::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktHd
 
 //============================================================================
 void PktPluginHandlerBase::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInviteAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInviteAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInviteSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktHostInviteMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }

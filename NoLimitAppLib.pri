@@ -203,7 +203,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHosted.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedList.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinMgr.h \
@@ -558,7 +558,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHosted.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedList.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoin.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinMgr.cpp \
