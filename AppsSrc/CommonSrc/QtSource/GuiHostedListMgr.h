@@ -72,8 +72,8 @@ protected:
     GuiHosted*                  findHosted( VxGUID& onlineId );
     GuiHosted*                  updateHosted( HostedInfo* userJoinInfo );
     
-    virtual void				callbackHostedUpdated( HostedInfo* userJoinInfo ) override;
-    virtual void				callbackHostedRemoved( VxGUID& userOnlineId, EHostType hostType ) override;
+    virtual void				callbackHostedInfoListUpdated( HostedInfo* userJoinInfo ) override;
+    virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ) override;
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiHosted

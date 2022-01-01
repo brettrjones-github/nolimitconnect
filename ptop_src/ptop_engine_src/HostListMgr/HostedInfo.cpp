@@ -15,11 +15,10 @@
 #include "HostedInfo.h"
 
 //============================================================================
-HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl, int64_t timestamp )
+HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl )
     : m_HostType( hostType )
     , m_OnlineId( onlineId )
-    , m_Hosted( hostUrl )
-    , m_TimestampMs( timestamp )
+    , m_HostUrl( hostUrl )
 {
 }
 
@@ -27,8 +26,12 @@ HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostU
 HostedInfo::HostedInfo( const HostedInfo& rhs )
     : m_HostType( rhs.m_HostType )
     , m_OnlineId( rhs.m_OnlineId )
-    , m_Hosted( rhs.m_Hosted )
-    , m_TimestampMs( rhs.m_TimestampMs )
+    , m_ConnectedTimestampMs( rhs.m_ConnectedTimestampMs )
+    , m_JoinedTimestampMs( rhs.m_JoinedTimestampMs )
+    , m_HostInfoTimestampMs( rhs.m_HostInfoTimestampMs )
+    , m_HostUrl( rhs.m_HostUrl )
+    , m_HostTitle( rhs.m_HostTitle )
+    , m_HostDesc( rhs.m_HostDesc )
 {
 }
 
@@ -39,8 +42,12 @@ HostedInfo& HostedInfo::operator=( const HostedInfo& rhs )
 	{
         m_HostType = rhs.m_HostType;
         m_OnlineId = rhs.m_OnlineId;
-        m_Hosted = rhs.m_Hosted;
-        m_TimestampMs = rhs.m_TimestampMs;
+        m_ConnectedTimestampMs = rhs.m_ConnectedTimestampMs;
+        m_JoinedTimestampMs = rhs.m_JoinedTimestampMs;
+        m_HostInfoTimestampMs = rhs.m_HostInfoTimestampMs;
+        m_HostUrl = rhs.m_HostUrl;
+        m_HostTitle = rhs.m_HostTitle;
+        m_HostDesc = rhs.m_HostDesc;
     }
 
 	return *this;

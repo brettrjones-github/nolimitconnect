@@ -30,10 +30,20 @@ public:
 	void						getAllHosteds( std::vector<HostedInfo>& hostedList );
 	bool						saveHosted( HostedInfo& hostedInfo );
 	void						removeClosedPortIdent( VxGUID& onlineId );
+	void						removeHostedInfo( EHostType hostType, VxGUID& onlineId );
+
+	bool                        updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite );
+	bool                        updateLastConnected( EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
+	bool                        updateLastJoined( EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
+	bool						updateHostUrl( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
+	bool                        updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime );
+
 
 protected:
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
+
+	bool						doesHostInfoExist( EHostType hostType, VxGUID& onlineId, std::string& retOnlineHexStr );
 };
 
 

@@ -37,16 +37,16 @@ public:
     RCODE                       hostedListMgrStartup( std::string& dbFileName );
     RCODE                       hostedListMgrShutdown( void );
 
-    void                        lockList( void )    { m_HostedMutex.lock(); }
-    void                        unlockList( void )  { m_HostedMutex.unlock(); }
+    void                        lockList( void )    { m_HostedInfoMutex.lock(); }
+    void                        unlockList( void )  { m_HostedInfoMutex.unlock(); }
 
     void                        addHostedListMgrClient( HostedListCallbackInterface* client, bool enable );
 
-    bool                        fromGuiQueryMyHosted( EHostType hostType );
-    bool                        fromGuiQueryHosts( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
+    bool                        fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList );
+    bool                        fromGuiQueryHostedInfoList( EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll );
+    bool                        fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
 
     void                        updateHosted( EHostType hostType, VxGUID& hostGuid, std::string& hosted, int64_t timestampMs = 0 );
-    bool                        getHosteds( EHostType hostType, std::vector<HostedInfo>& retHosteds );
 
     void                        requestIdentity( std::string& url );
     void                        updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase );
@@ -70,14 +70,28 @@ protected:
 
     void						clearHostedInfoList( void );
 
+    bool                        isHostInfoUpToDate( EHostType hostType, VxNetIdent* netIdent, std::string& nodeUrl );
+
+    bool                        updateLastConnected( EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
+    bool                        updateLastJoined( EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
+    bool                        updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite );
+    bool                        updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime );
+
+    bool                        requestHostedInfo( EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase );
+
+    void                        announceHostInfoUpdated( HostedInfo* hostedInfo );
+    void                        announceHostInfoRemoved( EHostType hostType, VxGUID& onlineId );
+
+    void						addToListInJoinedTimestampOrder( std::vector<HostedInfo>& hostedInfoList, HostedInfo& hostedInfo );
+
     void						lockClientList( void )          { m_HostedInfoListClientMutex.lock(); }
     void						unlockClientList( void )        { m_HostedInfoListClientMutex.unlock(); }
 
     P2PEngine&                  m_Engine;
-    VxMutex                     m_HostedMutex;
+    VxMutex                     m_HostedInfoMutex;
     HostedListDb                m_HostedInfoListDb;
 
-    std::vector<HostedInfo>    m_HostedInfoList;
+    std::vector<HostedInfo>     m_HostedInfoList;
 
     std::vector<HostedListCallbackInterface*> m_HostedInfoListClients;
     VxMutex						m_HostedInfoListClientMutex;

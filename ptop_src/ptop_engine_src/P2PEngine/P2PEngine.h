@@ -390,8 +390,8 @@ public:
     virtual std::string			fromGuiQueryDefaultUrl( EHostType hostType ) override;
     virtual bool                fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl ) override;
     virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) override;
-    virtual bool				fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) override;
-    virtual bool				fromGuiQueryMyHosted( EHostType hostType ) override;
+    virtual bool				fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll ) override;
+    virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList ) override;
 
     virtual EJoinState		    fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent );
 

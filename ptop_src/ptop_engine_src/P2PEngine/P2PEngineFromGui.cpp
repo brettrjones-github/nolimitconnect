@@ -1652,7 +1652,7 @@ bool P2PEngine::fromGuiSetDefaultUrl( EHostType hostType, std::string& hostUrl )
 }
 
 //============================================================================
-bool P2PEngine::fromGuiQueryHosts( std::string& netHostUrlIn, EHostType hostType, VxGUID& hostIdIfNullThenAll )
+bool P2PEngine::fromGuiQueryHosts( std::string& netHostUrlIn, EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll )
 {
 	bool result{ false };
 	VxPtopUrl netHostUrl( netHostUrlIn );
@@ -1661,17 +1661,18 @@ bool P2PEngine::fromGuiQueryHosts( std::string& netHostUrlIn, EHostType hostType
 		VxGUID onlineId = netHostUrl.getOnlineId();
 		if( getMyOnlineId() == netHostUrl.getOnlineId() )
 		{
-			return fromGuiQueryMyHosted( hostType );
+			return fromGuiQueryMyHostedInfo( hostType, hostedInfoList );
 		}
 
-		return getHostedListMgr().fromGuiQueryHosts( netHostUrl, hostType, hostIdIfNullThenAll );
+		getHostedListMgr().fromGuiQueryHostedInfoList( hostType, hostedInfoList, hostIdIfNullThenAll );
+		return getHostedListMgr().fromGuiQueryHostListFromNetworkHost( netHostUrl, hostType, hostIdIfNullThenAll );
 	}
 
 	return result;
 }
 
 //============================================================================
-bool P2PEngine::fromGuiQueryMyHosted( EHostType hostType )
+bool P2PEngine::fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList )
 {
-	return getHostedListMgr().fromGuiQueryMyHosted( hostType );
+	return getHostedListMgr().fromGuiQueryMyHostedInfo( hostType, hostedInfoList );
 }

@@ -42,7 +42,7 @@ bool GuiHostedListMgr::isMessengerReady( void )
 }
 
 //============================================================================
-void GuiHostedListMgr::callbackHostedUpdated( HostedInfo* userJoinInfo )
+void GuiHostedListMgr::callbackHostedInfoListUpdated( HostedInfo* userJoinInfo )
 {
     if( !userJoinInfo )
     {
@@ -54,7 +54,7 @@ void GuiHostedListMgr::callbackHostedUpdated( HostedInfo* userJoinInfo )
 }
 
 //============================================================================
-void GuiHostedListMgr::callbackHostedRemoved( VxGUID& hostOnlineId, EHostType hostType )
+void GuiHostedListMgr::callbackHostedInfoListRemoved( VxGUID& hostOnlineId, EHostType hostType )
 {
     emit signalInternalHostedRemoved( hostOnlineId, hostType );
 }

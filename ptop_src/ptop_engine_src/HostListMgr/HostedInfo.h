@@ -24,9 +24,9 @@ class HostedInfo
 public:
 	HostedInfo() = default;
 	HostedInfo( const HostedInfo& rhs );
-    HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl, int64_t timestamp = 0 );
+    HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
 
-	HostedInfo&				operator=( const HostedInfo& rhs ); 
+	HostedInfo&				    operator=( const HostedInfo& rhs ); 
 
     virtual void				setOnlineId( VxGUID& onlineId )                     { m_OnlineId = onlineId; }
     virtual VxGUID&             getOnlineId( void )                                 { return m_OnlineId; }
@@ -34,16 +34,34 @@ public:
     virtual void			    setHostType( EHostType friendshipToHim )            { m_HostType = friendshipToHim; }
     virtual EHostType	        getHostType( void )                                 { return m_HostType; }
 
-    virtual void			    setHosted( std::string hostUrl )                   { m_Hosted = hostUrl; }
-    virtual std::string&	    getHosted( void )                                  { return m_Hosted; }
+    virtual void                setIsFavorite( bool isFavorite )                    { m_IsFavorite = isFavorite; }
+    virtual bool                getIsFavorite( void )                               { return m_IsFavorite; }
 
-    virtual void			    setTimestamp( int64_t timestampMs )                 { m_TimestampMs = timestampMs; }
-    virtual int64_t             getTimestamp( void )                                { return m_TimestampMs; }
+    virtual void			    setConnectedTimestamp( int64_t timestampMs )        { m_ConnectedTimestampMs = timestampMs; }
+    virtual int64_t             getConnectedTimestamp( void )                       { return m_ConnectedTimestampMs; }
+    virtual void			    setJoinedTimestamp( int64_t timestampMs )           { m_JoinedTimestampMs = timestampMs; }
+    virtual int64_t             getJoinedTimestamp( void )                          { return m_JoinedTimestampMs; }
+    virtual void			    setHostInfoTimestamp( int64_t timestampMs )         { m_HostInfoTimestampMs = timestampMs; }
+    virtual int64_t             getHostInfoTimestamp( void )                        { return m_HostInfoTimestampMs; }
+
+    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
+    virtual std::string&        getHostUrl( void )                                  { return m_HostUrl; }
+
+    virtual void                setHostTitle( std::string hostTitle )               { m_HostTitle = hostTitle; }
+    virtual std::string&        getHostTitle( void )                                { return m_HostTitle; }
+
+    virtual void                setHostDescription( std::string hostDesc )          { m_HostDesc = hostDesc; }
+    virtual std::string&        getHostDescription( void )                          { return m_HostDesc; }
 
 protected:
 	//=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };
     VxGUID                      m_OnlineId;
-    std::string                 m_Hosted{ "" };
-    int64_t                     m_TimestampMs{ 0 };
+    int64_t                     m_ConnectedTimestampMs{ 0 };
+    int64_t                     m_JoinedTimestampMs{ 0 };
+    int64_t                     m_HostInfoTimestampMs{ 0 };
+    bool                        m_IsFavorite{ false };
+    std::string                 m_HostUrl{ "" };
+    std::string                 m_HostTitle{ "" };
+    std::string                 m_HostDesc{ "" };
 };

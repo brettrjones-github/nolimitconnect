@@ -21,7 +21,7 @@ class VxGUID;
 class HostedListCallbackInterface
 {
 public:
-    virtual void				callbackHostedUpdated( HostedInfo* hostedInfo ){};
-    virtual void				callbackHostedRemoved( VxGUID& userOnlineId, EHostType hostType ){};
+    virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ){};
+    virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ){};
 };
 
