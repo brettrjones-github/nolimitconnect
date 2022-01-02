@@ -28,11 +28,16 @@ public:
     void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const { return ( EHostType )m_HostType; }
     void						setSessionId( VxGUID& guid ) { m_SessionId = guid; }
-    VxGUID& getSessionId( void ) { return m_SessionId; }
+    VxGUID&                     getSessionId( void ) { return m_SessionId; }
 
-    PktBlobEntry& getBlobEntry( void ) { return m_BlobEntry; }
+    bool                        setHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+    bool                        getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+
+    PktBlobEntry&               getBlobEntry( void ) { return m_BlobEntry; }
 
     void                        calcPktLen( void );
+
+    PktHostInviteAnnounceReq*   makeHostAnnCopy( void );
 
 protected:
     uint8_t					    m_HostType{ 0 };

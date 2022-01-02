@@ -14,11 +14,13 @@
 
 #include "HostedInfo.h"
 
+#include <PktLib/PktsHostInvite.h>
+
 //============================================================================
 HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl )
     : m_HostType( hostType )
     , m_OnlineId( onlineId )
-    , m_HostUrl( hostUrl )
+    , m_HostInviteUrl( hostUrl )
 {
 }
 
@@ -29,7 +31,8 @@ HostedInfo::HostedInfo( const HostedInfo& rhs )
     , m_ConnectedTimestampMs( rhs.m_ConnectedTimestampMs )
     , m_JoinedTimestampMs( rhs.m_JoinedTimestampMs )
     , m_HostInfoTimestampMs( rhs.m_HostInfoTimestampMs )
-    , m_HostUrl( rhs.m_HostUrl )
+    , m_IsFavorite( rhs.m_IsFavorite )
+    , m_HostInviteUrl( rhs.m_HostInviteUrl )
     , m_HostTitle( rhs.m_HostTitle )
     , m_HostDesc( rhs.m_HostDesc )
 {
@@ -45,10 +48,31 @@ HostedInfo& HostedInfo::operator=( const HostedInfo& rhs )
         m_ConnectedTimestampMs = rhs.m_ConnectedTimestampMs;
         m_JoinedTimestampMs = rhs.m_JoinedTimestampMs;
         m_HostInfoTimestampMs = rhs.m_HostInfoTimestampMs;
-        m_HostUrl = rhs.m_HostUrl;
+        m_IsFavorite = rhs.m_IsFavorite;
+        m_HostInviteUrl = rhs.m_HostInviteUrl;
         m_HostTitle = rhs.m_HostTitle;
         m_HostDesc = rhs.m_HostDesc;
     }
 
 	return *this;
+}
+
+//============================================================================
+bool HostedInfo::shouldSaveToDb( void )
+{
+    return m_IsFavorite || m_JoinedTimestampMs;
+}
+
+//============================================================================
+bool HostedInfo::isValidForGui( void )
+{
+    return !m_HostInviteUrl.empty() && !m_HostTitle.empty() && !m_HostDesc.empty();
+}
+
+//============================================================================
+bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
+{
+    VxGUID onlineId = hostAnn->getSrcOnlineId();
+    setOnlineId( onlineId );
+    return hostAnn->getHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDesc, m_HostInfoTimestampMs );
 }

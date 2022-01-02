@@ -264,6 +264,7 @@
     <ClInclude Include="..\..\DbDataset.h" />
     <ClInclude Include="..\..\DbQueryData.h" />
     <ClInclude Include="..\..\dirent_sim.h" />
+    <ClInclude Include="..\..\Invite.h" />
     <ClInclude Include="..\..\IsBigEndianCpu.h" />
     <ClInclude Include="..\..\MediaCallbackInterface.h" />
     <ClInclude Include="..\..\ObjectCommon.h" />
@@ -338,6 +339,7 @@
     <ClCompile Include="..\..\DbDataset_corelib.cpp" />
     <ClCompile Include="..\..\DbQueryData_corelib.cpp" />
     <ClCompile Include="..\..\dirent_sim.cpp" />
+    <ClCompile Include="..\..\Invite.cpp" />
     <ClCompile Include="..\..\ObjectCommon_corelib.cpp" />
     <ClCompile Include="..\..\OsDetect_corelib.cpp" />
     <ClCompile Include="..\..\rsa_eay_corelib.c" />

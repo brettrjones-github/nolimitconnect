@@ -16,7 +16,7 @@
 #include "HostServerSearchMgr.h"
 #include <ptop_src/ptop_engine_src/User/UserList.h>
 
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 #include <PktLib/PluginId.h>
 
 class HostServerMgr : public HostServerSearchMgr
@@ -28,7 +28,7 @@ public:
     virtual void				fromGuiListAction( EListAction listAction );
 
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) override;
-    virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason );
+    virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostInviteAnnounceReq& hostAnnounce, EConnectReason connectReason );
 
     virtual EJoinState	        getJoinState( VxNetIdent* netIdent, EHostType hostType ) override;
     virtual EMembershipState	getMembershipState( VxNetIdent* netIdent, EHostType hostType ) override;
@@ -44,12 +44,12 @@ protected:
     virtual bool                addClient( VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual bool                removeClient( VxGUID& onlineId );
 
-    virtual void                addAnnounceSession( VxGUID& sessionId, PktHostAnnounce* hostAnn );
+    virtual void                addAnnounceSession( VxGUID& sessionId, PktHostInviteAnnounceReq* hostAnn );
     virtual void                removeAnnounceSession( VxGUID& sessionId );
 
     VxMutex                     m_ServerMutex;
     VxGUIDList                  m_ClientList;
-    std::map<VxGUID, PktHostAnnounce*> m_AnnList;
+    std::map<VxGUID, PktHostInviteAnnounceReq*> m_AnnList;
     VxMutex                     m_AnnListMutex;
 };
 

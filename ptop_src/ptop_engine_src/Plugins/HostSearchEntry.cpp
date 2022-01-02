@@ -38,18 +38,26 @@ void HostSearchEntry::updateLastRxTime( void )
 }
 
 //============================================================================
+bool HostSearchEntry::updateHostedInfo( PktHostInviteAnnounceReq* hostAnn )
+{
+    return m_HostedInfo.fillFromHostInvite( hostAnn );
+}
+
+//============================================================================
 HostSearchEntry::HostSearchEntry( const HostSearchEntry& rhs )
 : m_LastRxTime( rhs.m_LastRxTime )
-, m_PluginSetting( rhs.m_PluginSetting )
-, m_Url( rhs.m_Url )
-, m_SearchStrings( rhs.m_SearchStrings )
+, m_HostedInfo( rhs.m_HostedInfo )
+//, m_Url( rhs.m_Url )
+//, m_SearchStrings( rhs.m_SearchStrings )
 {
+    /*
     memcpy( &m_Ident, &rhs.m_Ident, sizeof( VxNetIdent ) );
     m_PktHostAnn.setPktLength( 0 );
     if( rhs.m_PktHostAnn.getPktLength() )
     {
         memcpy( &m_PktHostAnn, &rhs.m_PktHostAnn, rhs.m_PktHostAnn.getPktLength() );
     }
+    */
 }
 
 //============================================================================
@@ -58,6 +66,8 @@ HostSearchEntry& HostSearchEntry::operator=( const HostSearchEntry& rhs )
     if( this != &rhs )
     {
         m_LastRxTime = rhs.m_LastRxTime;
+        m_HostedInfo = rhs.m_HostedInfo;
+        /*
         memcpy( &m_Ident, &rhs.m_Ident, sizeof( VxNetIdent ) );
         m_PktHostAnn.setPktLength( 0 );
         if( rhs.m_PktHostAnn.getPktLength() )
@@ -68,13 +78,14 @@ HostSearchEntry& HostSearchEntry::operator=( const HostSearchEntry& rhs )
         m_PluginSetting = rhs.m_PluginSetting;
         m_Url = rhs.m_Url;
         m_SearchStrings = rhs.m_SearchStrings;
+        */
     }
 
     return *this;
 }
 
 //============================================================================
-bool HostSearchEntry::searchMatch( SearchParams& searchParams, std::string& searchStr )
+bool HostSearchEntry::searchHostedMatch( SearchParams& searchParams, std::string& searchStr )
 {
     if( searchParams.getSearchListAll() )
     {
@@ -83,15 +94,14 @@ bool HostSearchEntry::searchMatch( SearchParams& searchParams, std::string& sear
 
     if( !searchStr.empty() )
     {
-        for( auto& str : m_SearchStrings )
+        if( -1 != CaseInsensitiveFindSubstr( m_HostedInfo.getHostTitle(), searchStr ) )
         {
-            if( !str.empty() )
-            {
-                if( -1 != CaseInsensitiveFindSubstr( str, searchStr ) )
-                {
-                    return true;
-                }
-            }
+            return true;
+        }
+
+        if( -1 != CaseInsensitiveFindSubstr( m_HostedInfo.getHostDescription(), searchStr ) )
+        {
+            return true;
         }
     }
 
@@ -107,6 +117,7 @@ bool HostSearchEntry::searchMatch( SearchParams& searchParams, std::string& sear
 //    entry.setPluginSettingsBlob( blob );
 //}
 
+/*
 //============================================================================
 void HostSearchEntry::fillSearchReplyBlob( BinaryBlob& blob )
 {
@@ -120,3 +131,4 @@ bool HostSearchEntry::addToBlob( PktBlobEntry& entryBlob )
     result &= m_PluginSetting.addToBlob( entryBlob );
     return result;
 }
+*/

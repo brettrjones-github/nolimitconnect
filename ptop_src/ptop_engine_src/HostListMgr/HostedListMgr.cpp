@@ -17,6 +17,8 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
 
 #include <CoreLib/VxPtopUrl.h>
 
@@ -130,21 +132,20 @@ void HostedListMgr::updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase )
     }
     else
     {     
-        std::string nodeUrl = netIdent->getMyOnlineUrl();
         VxGUID onlineId = netIdent->getMyOnlineId();
+        if( !onlineId.isVxGUIDValid() )
+        {
+            LogMsg( LOG_ERROR, "HostedListMgr::updateHostedList invalid id" );
+            return;
+        }
+
+        std::string nodeUrl = netIdent->getMyOnlineUrl();
         for( int i = eHostTypeUnknown + 1; i < eMaxHostType; ++i )
         {
             EHostType hostType = ( EHostType )i;
             if( netIdent->canRequestJoin( hostType ) )
             {
-                if( isHostInfoUpToDate( hostType, netIdent, nodeUrl ) )
-                {
-                    updateLastConnected( hostType, onlineId, sktBase->getLastActiveTimeMs() );
-                }
-                else
-                {
-                    requestHostedInfo( hostType, netIdent, sktBase );
-                }
+                updateHostInfo( hostType, onlineId, nodeUrl, netIdent, sktBase );
             }
         }
     }
@@ -168,6 +169,33 @@ void HostedListMgr::removeClosedPortIdent( VxGUID& onlineId )
 
     unlockList();
     m_HostedInfoListDb.removeClosedPortIdent( onlineId );
+}
+
+//============================================================================
+void HostedListMgr::removeHostedInfo( EHostType hostType, VxGUID& onlineId )
+{
+    bool wasRemoved{ false };
+    lockList();
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
+        {
+            m_HostedInfoList.erase( iter );
+            wasRemoved = true;
+            break;
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+
+    unlockList();
+    if( wasRemoved )
+    {
+        m_HostedInfoListDb.removeHostedInfo( hostType, onlineId );
+        announceHostInfoRemoved( hostType, onlineId );
+    }
 }
 
 //============================================================================
@@ -234,18 +262,89 @@ void HostedListMgr::announceHostInfoRemoved( EHostType hostType, VxGUID& hostOnl
 }
 
 //============================================================================
-bool HostedListMgr::isHostInfoUpToDate( EHostType hostType, VxNetIdent* netIdent, std::string& nodeUrl )
+void HostedListMgr::updateHostInfo( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
-    bool result{ false };
+    bool requiresSendHostInfoRequest{ false };
+    bool requiresAnnounceUpdate{ false };
+    bool wasFound{ false };
+    bool urlChanged{ false };
+    lockList();
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
+        {
+            wasFound = true;
+            iter->setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
+            if( iter->getHostInfoTimestamp() < netIdent->getHostOrThumbModifiedTime( hostType ) )
+            {
+                requiresSendHostInfoRequest = true;
+            }
 
-    return result;
+            if( nodeUrl != iter->getHostInviteUrl() )
+            {
+                urlChanged = true;
+                iter->setHostInviteUrl( nodeUrl );
+                if( !requiresSendHostInfoRequest && iter->isValidForGui() )
+                {
+                    requiresAnnounceUpdate = true;
+                }
+            }       
+
+            if( iter->shouldSaveToDb() )
+            {
+                if( urlChanged )
+                {
+                    m_HostedInfoListDb.saveHosted( *iter );
+                }
+                else
+                {
+                    m_HostedInfoListDb.updateLastConnected( hostType, onlineId, iter->getConnectedTimestamp() );
+                }
+            }
+
+            if( requiresAnnounceUpdate )
+            {
+                announceHostInfoUpdated( &( *iter ) );
+            }
+        }
+    }
+
+    if( !wasFound )
+    {
+        requiresSendHostInfoRequest = true;
+        HostedInfo hostedInfo( hostType, onlineId, nodeUrl );
+        hostedInfo.setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
+        m_HostedInfoList.push_back( hostedInfo );
+    }
+
+    unlockList();
+
+    if( requiresSendHostInfoRequest )
+    {
+        requestHostedInfo( hostType, netIdent, sktBase );
+    }
 }
 
 //============================================================================
 bool HostedListMgr::updateLastConnected( EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime )
 {
     bool result{ false };
+    lockList();
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
+        {
+            iter->setConnectedTimestamp( lastConnectedTime );
+            result = true;
 
+            if( iter->shouldSaveToDb() )
+            {
+                m_HostedInfoListDb.updateLastConnected( hostType, onlineId, iter->getConnectedTimestamp() );
+            }
+        }
+    }
+
+    unlockList();
     return result;
 }
 
@@ -253,7 +352,32 @@ bool HostedListMgr::updateLastConnected( EHostType hostType, VxGUID& onlineId, i
 bool HostedListMgr::updateLastJoined( EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime )
 {
     bool result{ false };
+    lockList();
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
+        {
+            int64_t oldJoinedTime = iter->getJoinedTimestamp();
+            iter->setJoinedTimestamp( lastJoinedTime );
+            result = true;
 
+            if( iter->shouldSaveToDb() )
+            {
+                m_HostedInfoListDb.updateLastConnected( hostType, onlineId, lastJoinedTime );
+            }
+            else if( oldJoinedTime )
+            {
+                m_HostedInfoListDb.removeHostedInfo( hostType, onlineId );
+            }
+
+            if( iter->isValidForGui() )
+            {
+                announceHostInfoUpdated( &( *iter ) );
+            }
+        }
+    }
+
+    unlockList();
     return result;
 }
 
@@ -261,7 +385,32 @@ bool HostedListMgr::updateLastJoined( EHostType hostType, VxGUID& onlineId, int6
 bool HostedListMgr::updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite )
 {
     bool result{ false };
+    lockList();
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
+        {
+            bool wasFavorite = iter->getIsFavorite();
+            iter->setIsFavorite( isFavorite );
+            result = true;
 
+            if( iter->shouldSaveToDb() )
+            {
+                m_HostedInfoListDb.updateIsFavorite( hostType, onlineId, isFavorite );
+            }
+            else if( wasFavorite )
+            {
+                m_HostedInfoListDb.removeHostedInfo( hostType, onlineId );
+            }
+
+            if( iter->isValidForGui() )
+            {
+                announceHostInfoUpdated( &( *iter ) );
+            }
+        }
+    }
+
+    unlockList();
     return result;
 }
 
@@ -269,7 +418,29 @@ bool HostedListMgr::updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool
 bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime )
 {
     bool result{ false };
+    lockList();
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    {
+        if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
+        {
+            result = true;
+            iter->setHostTitle( title );
+            iter->setHostDescription( description );
+            iter->setHostInfoTimestamp( lastDescUpdateTime );
 
+            if( iter->shouldSaveToDb() )
+            {
+                m_HostedInfoListDb.updateHostTitleAndDescription( hostType, onlineId, title, description, lastDescUpdateTime );
+            }
+
+            if( iter->isValidForGui() )
+            {
+                announceHostInfoUpdated( &( *iter ) );
+            }
+        }
+    }
+
+    unlockList();
     return result;
 }
 
@@ -284,9 +455,18 @@ bool HostedListMgr::requestHostedInfo( EHostType hostType, VxNetIdent* netIdent,
 //============================================================================
 bool HostedListMgr::fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList )
 {
-    bool result{ false };
+    hostedInfoList.clear();
+    PluginBase* pluginBase = m_Engine.getPluginMgr().getPlugin( HostTypeToHostPlugin( hostType ) );
+    if( pluginBase && pluginBase->isPluginEnabled() )
+    {
+        HostedInfo hostedInfo;
+        if( pluginBase->getHostedInfo( hostedInfo ) )
+        {
+            hostedInfoList.push_back( hostedInfo );
+        }
+    }
 
-    return result;
+    return !hostedInfoList.empty();
 }
 
 //============================================================================

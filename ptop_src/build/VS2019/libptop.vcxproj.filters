@@ -829,9 +829,6 @@
     <ClCompile Include="..\..\ptop_engine_src\AssetMgr\AssetXferPktCreate.cpp">
       <Filter>Source Files\AssetMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Invite\Invite.cpp">
-      <Filter>Source Files\Invite</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
@@ -1873,9 +1870,6 @@
     <ClInclude Include="..\..\ptop_engine_src\AssetBase\BaseXferInterface.h">
       <Filter>Source Files\AssetBase</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Invite\Invite.h">
-      <Filter>Source Files\Invite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\FriendListMgr.h">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
@@ -2102,9 +2096,6 @@
     </Filter>
     <Filter Include="Source Files\UserOnlineMgr">
       <UniqueIdentifier>{561633c7-da30-44ae-8a97-6d77364bfe60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Invite">
-      <UniqueIdentifier>{f4416758-6cbd-4c72-88c2-b32685c48253}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\IdentListMgrs">
       <UniqueIdentifier>{2cde1acc-ffb6-4ce6-aafc-fa8155b40dab}</UniqueIdentifier>

@@ -67,14 +67,15 @@ protected:
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBased, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
     void						removeClosedPortIdent( VxGUID& onlineId );
-
+    void						removeHostedInfo( EHostType hostType, VxGUID& onlineId );
     void						clearHostedInfoList( void );
 
-    bool                        isHostInfoUpToDate( EHostType hostType, VxNetIdent* netIdent, std::string& nodeUrl );
+    void                        updateHostInfo( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase );
 
+    bool                        updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite );
     bool                        updateLastConnected( EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
     bool                        updateLastJoined( EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
-    bool                        updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite );
+    bool						updateHostUrl( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
     bool                        updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime );
 
     bool                        requestHostedInfo( EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase );

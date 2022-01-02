@@ -195,9 +195,19 @@ EHostType Invite::getHostTypeFromSuffix( const char suffix )
 }
 
 //============================================================================
+bool Invite::isValidHostTypeSuffix( const char suffix )
+{
+    return SUFFIX_CHAR_PERSON == suffix ||
+        SUFFIX_CHAR_NETWORK_HOST == suffix ||
+        SUFFIX_CHAR_CONNECT_TEST == suffix ||
+        SUFFIX_CHAR_GROUP == suffix ||
+        SUFFIX_CHAR_CHAT_ROOM == suffix ||
+        SUFFIX_CHAR_RANDOM_CONNECT == suffix;
+}
+
+//============================================================================
 bool Invite::parseInviteText( void )
 {
-
     bool result = !m_InviteText.empty();
     std::vector<std::string> strList;
     if( result )
@@ -263,5 +273,17 @@ bool Invite::parseInviteText( void )
     }
 
     return result;
+}
+
+//============================================================================
+// assumes vaild node url with online id
+std::string Invite::makeInviteUrl( EHostType hostType, std::string& onlineUrl )
+{
+    if( !onlineUrl.empty() )
+    {
+        return onlineUrl + Invite::getHostTypeSuffix( hostType );
+    }
+
+    return onlineUrl;
 }
 

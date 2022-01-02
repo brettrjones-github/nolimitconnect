@@ -19,6 +19,8 @@
 
 #include <string>
 
+class PktHostInviteAnnounceReq;
+
 class HostedInfo
 {
 public:
@@ -44,14 +46,19 @@ public:
     virtual void			    setHostInfoTimestamp( int64_t timestampMs )         { m_HostInfoTimestampMs = timestampMs; }
     virtual int64_t             getHostInfoTimestamp( void )                        { return m_HostInfoTimestampMs; }
 
-    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
-    virtual std::string&        getHostUrl( void )                                  { return m_HostUrl; }
+    virtual void			    setHostInviteUrl( std::string hostUrl )             { m_HostInviteUrl = hostUrl; }
+    virtual std::string&        getHostInviteUrl( void )                            { return m_HostInviteUrl; }
 
     virtual void                setHostTitle( std::string hostTitle )               { m_HostTitle = hostTitle; }
     virtual std::string&        getHostTitle( void )                                { return m_HostTitle; }
 
     virtual void                setHostDescription( std::string hostDesc )          { m_HostDesc = hostDesc; }
     virtual std::string&        getHostDescription( void )                          { return m_HostDesc; }
+
+    bool                        shouldSaveToDb( void );
+    bool                        isValidForGui( void );
+
+    bool                        fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn );
 
 protected:
 	//=== vars ===//
@@ -61,7 +68,7 @@ protected:
     int64_t                     m_JoinedTimestampMs{ 0 };
     int64_t                     m_HostInfoTimestampMs{ 0 };
     bool                        m_IsFavorite{ false };
-    std::string                 m_HostUrl{ "" };
+    std::string                 m_HostInviteUrl{ "" };
     std::string                 m_HostTitle{ "" };
     std::string                 m_HostDesc{ "" };
 };

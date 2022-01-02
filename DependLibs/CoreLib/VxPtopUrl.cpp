@@ -17,6 +17,7 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGUID.h>
+#include <CoreLib/Invite.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -207,6 +208,19 @@ void VxPtopUrl::setUrl( std::string& url )
         {
             // there is nothing past the online id but it looks valid
             m_OnlineId.fromOnlineIdString( strOnlineId.c_str() );
+        }
+        else if( strOnlineId.length() == 35 )
+        {
+            // may have a invite type character
+            m_OnlineId.fromOnlineIdString( strOnlineId.c_str() );
+            if( m_OnlineId.isVxGUIDValid() )
+            {
+                char suffixChar = strOnlineId[strOnlineId.length() - 1];
+                if( Invite::isValidHostTypeSuffix( suffixChar ) )
+                {
+                    m_HostType = Invite::getHostTypeFromSuffix( suffixChar );
+                }
+            }
         }
 
         iReadIdx += strOnlineId.length();

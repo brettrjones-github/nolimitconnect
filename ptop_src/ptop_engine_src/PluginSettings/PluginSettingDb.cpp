@@ -100,7 +100,7 @@ bool PluginSettingDb::updatePluginSetting( EPluginType pluginType, PluginSetting
             RCODE rc = sqlExec( "INSERT INTO plugin_setting (plugin_name,setting_blob) values(?,?)", bindList );
             if( rc )
             {
-                LogMsg( LOG_ERROR, "PluginSettingDb::updatePluginSetting: ERROR %d %s\n", rc, sqlite3_errmsg( m_Db ) );
+                LogMsg( LOG_ERROR, "PluginSettingDb::updatePluginSetting: ERROR %d %s", rc, sqlite3_errmsg( m_Db ) );
             }
             else
             {
@@ -109,7 +109,7 @@ bool PluginSettingDb::updatePluginSetting( EPluginType pluginType, PluginSetting
         }
         else
         {
-            LogMsg( LOG_ERROR, "PluginSettingDb::updatePluginSetting: Invalid params\n" );
+            LogMsg( LOG_ERROR, "PluginSettingDb::updatePluginSetting: Invalid params" );
         }
     }
 

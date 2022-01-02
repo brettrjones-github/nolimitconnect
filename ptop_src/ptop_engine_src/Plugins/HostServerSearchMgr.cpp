@@ -37,7 +37,7 @@ HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMg
 }
 
 //============================================================================
-void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )
+void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent )
 {
     if( haveBlob( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
     {
@@ -83,7 +83,7 @@ ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHost
             {
                 toRemoveList.addPluginId( iter->first );
             }
-            else if( iter->second.searchMatch( searchParams, searchStr ) )
+            else if( iter->second.searchHostedMatch( searchParams, searchStr ) )
             {
                 const PluginId& pluginId = iter->first;
                 searchReply.addPluginId( pluginId );
@@ -103,6 +103,7 @@ ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHost
 //============================================================================
 ECommErr HostServerSearchMgr::settingsRequest( PluginId& pluginId, PktPluginSettingReply& settingReply, VxSktBase* sktBase, VxNetIdent* netIdent )
 {
+    /*
     EHostType hostType = settingReply.getHostType();
     ECommErr searchErr = haveBlob(hostType) ? eCommErrNone : eCommErrInvalidHostType;
     if( eCommErrNone == searchErr )
@@ -141,6 +142,9 @@ ECommErr HostServerSearchMgr::settingsRequest( PluginId& pluginId, PktPluginSett
     }
 
     return searchErr;
+    */
+
+    return eCommErrInvalidPkt;
 }
 
 //============================================================================
@@ -157,30 +161,10 @@ void HostServerSearchMgr::removeEntries( std::map<PluginId, HostSearchEntry>& se
 }
 
 //============================================================================
-bool HostServerSearchMgr::fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent, bool forced )
+bool HostServerSearchMgr::fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, bool forced )
 {
-    bool result = false;
-
     searchEntry.updateLastRxTime();
-    memcpy( &searchEntry.m_Ident, netIdent, sizeof( VxNetIdent ) );
-    searchEntry.m_PktHostAnn.setPktLength( 0 );
-    hostAnn->fillPktHostAnn( searchEntry.m_PktHostAnn );
-    BinaryBlob binarySettings;
-    if( hostAnn->getPluginSettingBinary( binarySettings ) )
-    {
-        if( searchEntry.m_PluginSetting.fromBinary( binarySettings ) )
-        {
-            searchEntry.m_SearchStrings.clear();
-            if( searchEntry.m_PluginSetting.fillSearchStrings( searchEntry.m_SearchStrings ) )
-            {
-                result = true;
-            }
-        }
-    }
-
-    searchEntry.m_Url = netIdent->getMyOnlineUrl();
-
-    return result;
+    return searchEntry.updateHostedInfo( hostAnn );
 }
 
 //============================================================================
@@ -234,7 +218,7 @@ void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
         // if currently active
         if( timeNow - iter->second.m_LastRxTime <= MIN_HOST_RX_UPDATE_TIME_MS )
         {
-            m_Engine.getToGui().toGuiHostSearchResult( hostType, iter->second.m_Ident.getMyOnlineId(), iter->second.m_Ident, iter->second.m_PluginSetting );
+            //m_Engine.getToGui().toGuiHostSearchResult( hostType, iter->second.getHostOnlineId(), iter->second.m_Ident, iter->second.m_PluginSetting );
         }
     }
 
@@ -263,8 +247,8 @@ void HostServerSearchMgr::doFromGuiListAction( EListAction listAction, EPluginTy
         for( auto iter = hostedList.begin(); iter != hostedList.end(); ++iter )
         {
             entryNum++;
-            LogMsg( LOG_INFO, " #%d - %lld sec ago client %s title %s", entryNum, ( timeNow - iter->second.m_LastRxTime ) / 1000, 
-                iter->second.m_PktHostAnn.getOnlineName(), iter->second.m_PluginSetting.getTitle().c_str() );
+            //LogMsg( LOG_INFO, " #%d - %lld sec ago client %s title %s", entryNum, ( timeNow - iter->second.m_LastRxTime ) / 1000, 
+            //    iter->second.m_PktHostAnn.getOnlineName(), iter->second.m_PluginSetting.getTitle().c_str() );
         }
 
         m_SearchMutex.unlock();

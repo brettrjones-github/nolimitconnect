@@ -41,9 +41,9 @@ void PluginPeerUserHost::pluginStartup( void )
 }
 
 //============================================================================
-bool PluginPeerUserHost::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginPeerUserHost::setPluginSetting( PluginSetting& pluginSetting, int64_t lastModifiedTime )
 {
-    bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
+    bool result = PluginBaseHostService::setPluginSetting( pluginSetting, lastModifiedTime );
     buildHostAnnounce( pluginSetting );
     sendHostAnnounce();
     return result;
@@ -52,6 +52,8 @@ bool PluginPeerUserHost::setPluginSetting( PluginSetting& pluginSetting )
 //============================================================================
 void PluginPeerUserHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
 {
+    updateHostInvite( pluginSetting );
+    /*
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
@@ -64,8 +66,9 @@ void PluginPeerUserHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setHostType( eHostTypeGroup );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    m_HostAnnounceBuilt = true;
+    m_PktHostInviteIsValid = true;
     m_AnnMutex.unlock();
+    */
 }
 
 //============================================================================
@@ -73,7 +76,7 @@ void PluginPeerUserHost::sendHostGroupAnnounce( void )
 {
     if( m_Engine.isDirectConnectReady() )
     {
-        if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
+        if( !m_PktHostInviteIsValid || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
             PluginSetting pluginSetting;
             if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
@@ -83,7 +86,7 @@ void PluginPeerUserHost::sendHostGroupAnnounce( void )
         }
     }
 
-    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )
+    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.isDirectConnectReady() )
     {
         if( m_Engine.isNetworkHostEnabled() )
         {
@@ -92,7 +95,7 @@ void PluginPeerUserHost::sendHostGroupAnnounce( void )
             if( netHostPlugin )
             {
                 m_AnnMutex.lock();
-                netHostPlugin->updateHostSearchList( m_PktHostAnnounce.getHostType(), &m_PktHostAnnounce, m_MyIdent );
+                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent );
                 m_AnnMutex.unlock();
             }
         }
@@ -100,16 +103,16 @@ void PluginPeerUserHost::sendHostGroupAnnounce( void )
         {
             VxGUID::generateNewVxGUID( m_AnnounceSessionId );
             m_AnnMutex.lock();
-            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonGroupAnnounce );
+            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, eConnectReasonGroupAnnounce );
             m_AnnMutex.unlock();
         }
     }
 }
 
 //============================================================================
-void PluginPeerUserHost::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginPeerUserHost::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
-    m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostGroupAnnounce( pluginSetting );
-    onPluginSettingsChanged();
+    updateHostInvite( pluginSetting );
+
+    onPluginSettingsChanged( pluginSetting.getLastUpdateTimestamp() );
 }

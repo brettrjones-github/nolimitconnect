@@ -60,8 +60,8 @@ public:
     void                        setCommError( ECommErr commError )                          { m_CommError = (uint8_t)commError; }
     ECommErr                    getCommError( void ) const                                  { return (ECommErr)m_CommError; }
 
-    bool                        setHostDescription( std::string& hostDesc );
-    bool                        getHostDescription( std::string& hostDesc );
+    bool                        setHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+    bool                        getHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
 
     PktBlobEntry&               getBlobEntry( void )                                        { return m_BlobEntry; }
 

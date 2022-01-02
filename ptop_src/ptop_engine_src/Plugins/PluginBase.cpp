@@ -23,6 +23,7 @@
 
 #include <CoreLib/VxFileUtil.h>
 
+//============================================================================
 std::string PluginBase::getThumbXferDbName( EPluginType pluginType )
 {
     std::string thumbXferName( "ThumbXferDb" );
@@ -30,6 +31,7 @@ std::string PluginBase::getThumbXferDbName( EPluginType pluginType )
     return thumbXferName + ".db3";
 }
 
+//============================================================================
 std::string PluginBase::getThumbXferThreadName( EPluginType pluginType )
 {
     std::string thumbXferName( "ThumbXferDb" );
@@ -68,21 +70,21 @@ void PluginBase::pluginStartup( void )
     if( getPluginType() != ePluginTypeInvalid )
     {
         m_Engine.getPluginSetting( getPluginType(), m_PluginSetting );
-        generateSettingPkt( m_PluginSetting );
+        generateSettingPkt( m_PluginSetting, 0 );
     }
 }
 
 //============================================================================
-bool PluginBase::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginBase::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     m_PluginSetting = pluginSetting;
-    generateSettingPkt( pluginSetting );
-    onPluginSettingChange( m_PluginSetting );
+    generateSettingPkt( pluginSetting, modifiedTimeMs );
+    onPluginSettingChange( m_PluginSetting, modifiedTimeMs );
     return true;
 }
 
 //============================================================================
-bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting )
+bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     PktBlobEntry& blobEntry = m_PktPluginSettingReply.getBlobEntry();
     blobEntry.resetWrite();

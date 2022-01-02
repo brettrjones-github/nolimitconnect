@@ -22,7 +22,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxFileUtil.h>
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 
 //============================================================================
 PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
@@ -33,9 +33,9 @@ PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, V
 }
 
 //============================================================================
-void PluginNetworkHost::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
+void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
-    PktHostAnnounce* hostAnn = (PktHostAnnounce*)pktHdr;
+    PktHostInviteAnnounceReq* hostAnn = ( PktHostInviteAnnounceReq*)pktHdr;
     if( eHostTypeChatRoom == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce" );
@@ -68,7 +68,7 @@ void PluginNetworkHost::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHd
 }
 
 //============================================================================
-void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )
+void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent )
 {
     m_HostServerMgr.updateHostSearchList( hostType, hostAnn, netIdent );
 }

@@ -43,6 +43,9 @@ public:
 
     static char                 getHostTypeSuffix( EHostType hostType );
     static EHostType            getHostTypeFromSuffix( const char suffix );
+    static bool                 isValidHostTypeSuffix( const char suffix );
+
+    static std::string          makeInviteUrl( EHostType hostType, std::string& onlineUrl ); // assumes vaild node url with online id
 
 protected:
     bool                        parseInviteText( void );

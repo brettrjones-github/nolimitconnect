@@ -14,6 +14,7 @@
 //============================================================================
 
 #include <CoreLib/VxGUID.h>
+#include <GuiInterface/IDefs.h>
 
 class VxPtopUrl
 {
@@ -36,6 +37,7 @@ public:
     std::string&                getHost( void )								{ return m_Host; }
 	uint16_t					getPort( void )								{ return m_Port; }
 	VxGUID&						getOnlineId( void )							{ return m_OnlineId; }
+	EHostType					getHostType( void )							{ return m_HostType; }
 
 protected:
     std::string					m_Url{ "" };
@@ -43,6 +45,7 @@ protected:
 	std::string					m_Host{ "" };
 	uint16_t					m_Port{ 0 };
 	VxGUID						m_OnlineId;
+	EHostType					m_HostType{ eHostTypeUnknown };
 };
 
 

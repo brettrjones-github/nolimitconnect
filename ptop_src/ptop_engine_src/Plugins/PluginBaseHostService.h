@@ -16,7 +16,7 @@
 #include "PluginNetServices.h"
 #include "HostServerMgr.h"
 
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 
 class PluginBaseHostService : public PluginNetServices
 {
@@ -26,6 +26,7 @@ public:
 
     void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
     EHostType                   getHostType(  void ) override       { return m_HostType; }
+    virtual bool				getHostedInfo( HostedInfo& hostedInfo ) override;
 
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
@@ -45,16 +46,24 @@ protected:
 
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting );
     virtual void				sendHostAnnounce( void );
-    virtual bool				getHostDescription( std::string& hostDesc );
-    virtual void				onPluginSettingsChanged( void );
+    virtual bool				getHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+    virtual void				onPluginSettingsChanged( int64_t modifiedTimeMs );
+
+    virtual void				updateHostInvite( PluginSetting& pluginSetting );
+    virtual void				updateHostInviteUrl( void );
 
     //=== vars ===//
     EHostType                   m_HostType{ eHostTypeUnknown };
 
     HostServerMgr               m_HostServerMgr;
-    bool                        m_SendAnnounceEnabled{ false };
-    bool                        m_HostAnnounceBuilt{ false };
-    PktHostAnnounce             m_PktHostAnnounce;
+
+    std::string                 m_HostInviteUrl{ "" };
+    std::string                 m_HostTitle{ "" };
+    std::string                 m_HostDescription{ "" };
+    int64_t                     m_HostInfoModifiedTime{ 0 };
+    bool                        m_PktHostInviteIsValid{ false };
+    PktHostInviteAnnounceReq    m_PktHostInviteAnnounceReq;
+
     VxMutex                     m_AnnMutex;
     VxGUID                      m_AnnounceSessionId;
     int64_t                     m_PktAnnLastModTime{ 0 };

@@ -29,6 +29,33 @@ PktHostInviteAnnounceReq::PktHostInviteAnnounceReq()
 }
 
 //============================================================================
+bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+{
+    bool result = lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
+    if( result )
+    {
+        result &= m_BlobEntry.setValue( lastModifiedTime );
+        result &= m_BlobEntry.setValue( inviteUrl );
+        result &= m_BlobEntry.setValue( hostTitle );
+        result &= m_BlobEntry.setValue( hostDesc );
+        calcPktLen();
+    }
+
+    return result;
+}
+
+//============================================================================
+bool PktHostInviteAnnounceReq::getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+{
+    bool result = m_BlobEntry.getValue( lastModifiedTime );
+    result &= m_BlobEntry.getValue( inviteUrl );
+    result &= m_BlobEntry.getValue( hostTitle );
+    result &= m_BlobEntry.getValue( hostDesc );  
+    
+    return result && lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
+}
+
+//============================================================================
 void PktHostInviteAnnounceReq::calcPktLen()
 {
     uint16_t pktLen = ( uint16_t )sizeof( PktHostInviteAnnounceReq ) - sizeof( PktBlobEntry );
@@ -37,6 +64,18 @@ void PktHostInviteAnnounceReq::calcPktLen()
 
     // LogMsg( LOG_DEBUG, "PktHostInviteReq calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktHostInviteAnnounceReq* PktHostInviteAnnounceReq::makeHostAnnCopy( void )
+{
+    vx_assert( getPktLength() );
+    vx_assert( ( getPktLength() & 0x0f ) == 0 );
+    vx_assert( PKT_TYPE_HOST_INVITE_ANN_REQ == getPktType() );
+    char* pTemp = new char[getPktLength()];
+    vx_assert( pTemp );
+    memcpy( pTemp, this, getPktLength() );
+    return ( PktHostInviteAnnounceReq* )pTemp;
 }
 
 //============================================================================

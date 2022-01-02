@@ -145,6 +145,8 @@ public:
     void                        setRes1( std::string res )                          { m_Res1 = res.empty() ? "" : res; }
     std::string&                getRes1( void )                                     { return m_Res1; }
 
+    bool                        getHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+
     bool                        toBinary( BinaryBlob& binarySetting, bool networkOrder = false );
     bool                        fromBinary( BinaryBlob& binarySetting, bool networkOrder = false );
 

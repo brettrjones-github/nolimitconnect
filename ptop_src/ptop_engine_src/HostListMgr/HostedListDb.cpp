@@ -87,7 +87,7 @@ void HostedListDb::getAllHosteds( std::vector<HostedInfo>& hostedList )
 
 			hostInfo.getOnlineId().fromVxGUIDHexString( cursor->getString( COLUMN_IDX_ONLINE_ID ) );
 			hostInfo.setHostType( (EHostType)cursor->getS32( COLUMN_IDX_HOST_TYPE ) );
-			hostInfo.setHostUrl( cursor->getString( COLUMN_IDX_HOST_URL ) );
+			hostInfo.setHostInviteUrl( cursor->getString( COLUMN_IDX_HOST_URL ) );
 			hostInfo.setHostTitle( cursor->getString( COLUMN_IDX_HOST_TITLE ) );
 			hostInfo.setHostDescription( cursor->getString( COLUMN_IDX_HOST_DESC ) );
 			hostInfo.setIsFavorite( cursor->getS32( COLUMN_IDX_IS_FAVORITE ) );
@@ -271,7 +271,7 @@ bool HostedListDb::saveHosted( HostedInfo& hostedInfo )
 
 	DbBindList bindList( onlineId.c_str() );
 	bindList.add( ( int )hostedInfo.getHostType() );
-	bindList.add( hostedInfo.getHostUrl().c_str() );
+	bindList.add( hostedInfo.getHostInviteUrl().c_str() );
 	bindList.add( hostedInfo.getHostTitle().c_str() );
 	bindList.add( hostedInfo.getHostDescription().c_str() );
 

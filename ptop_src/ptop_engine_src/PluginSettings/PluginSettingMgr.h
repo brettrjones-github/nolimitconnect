@@ -26,9 +26,9 @@ public:
     PluginSettingMgr( P2PEngine& engine );
     virtual ~PluginSettingMgr() = default;
 
-    bool                        setPluginSetting( PluginSetting& pluginSetting );
+    bool                        setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );
-    bool                        getHostDescription( EPluginType pluginType, std::string& hostDesc );
+    bool                        getHostTitleAndDescription( EPluginType pluginType, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
 
 protected:
     bool                        initPluginSettingMgr( void );

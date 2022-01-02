@@ -14,6 +14,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/DbBase.h \
     $$PWD/DependLibs/CoreLib/DbDataset.h \
     $$PWD/DependLibs/CoreLib/DbQueryData.h \
+    $$PWD/DependLibs/CoreLib/Invite.h \
     $$PWD/DependLibs/CoreLib/IsBigEndianCpu.h \
     $$PWD/DependLibs/CoreLib/MediaCallbackInterface.h \
     $$PWD/DependLibs/CoreLib/ObjectCommon.h \
@@ -84,6 +85,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
 	$$PWD/DependLibs/CoreLib/AssetDefs.cpp \
 	$$PWD/DependLibs/CoreLib/BinaryBlob.cpp \
+    $$PWD/DependLibs/CoreLib/Invite.cpp \
     $$PWD/DependLibs/CoreLib/VxBuffer.cpp \
     $$PWD/DependLibs/CoreLib/VxChop.cpp \
     $$PWD/DependLibs/CoreLib/VxChopMap.cpp \

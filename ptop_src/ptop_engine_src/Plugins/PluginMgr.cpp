@@ -292,25 +292,25 @@ void PluginMgr::setPluginPermission( EPluginType ePluginType, EFriendState ePlug
 }
 
 //============================================================================
-bool PluginMgr::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginMgr::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     bool result = false;
     PluginBase * plugin = getPlugin( pluginSetting.getPluginType() );
     if( plugin )
     {
-        result = plugin->setPluginSetting( pluginSetting );
+        result = plugin->setPluginSetting( pluginSetting, modifiedTimeMs );
     }
 
     return result;
 }
 
 //============================================================================
-void PluginMgr::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginMgr::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     PluginBase * plugin = getPlugin( pluginSetting.getPluginType() );
     if( plugin )
     {
-        plugin->setPluginSetting( pluginSetting );
+        plugin->setPluginSetting( pluginSetting, modifiedTimeMs );
     }
 }
 

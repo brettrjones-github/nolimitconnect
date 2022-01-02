@@ -42,9 +42,9 @@ void PluginGroupHost::pluginStartup( void )
 }
 
 //============================================================================
-bool PluginGroupHost::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginGroupHost::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
-    bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
+    bool result = PluginBaseHostService::setPluginSetting( pluginSetting, modifiedTimeMs );
     buildHostAnnounce( pluginSetting );
     sendHostAnnounce();
     return result;
@@ -60,6 +60,8 @@ void PluginGroupHost::onThreadOncePer15Minutes( void )
 //============================================================================
 void PluginGroupHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
 {
+    updateHostInvite( pluginSetting );
+    /*
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
@@ -72,8 +74,9 @@ void PluginGroupHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setHostType( getHostType() );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    m_HostAnnounceBuilt = true;
+    m_PktHostInviteIsValid = true;
     m_AnnMutex.unlock();
+    */
 }
 
 //============================================================================
@@ -81,8 +84,8 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
 {
     if( m_Engine.isDirectConnectReady() )
     {
-        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostGroupAnnounce built %d ", DescribeHostType( getHostType() ), m_HostAnnounceBuilt );
-        if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
+        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostGroupAnnounce built %d ", DescribeHostType( getHostType() ), m_PktHostInviteIsValid );
+        if( !m_PktHostInviteIsValid || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
             PluginSetting pluginSetting;
             if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
@@ -96,7 +99,7 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
         LogModule( eLogHosts, LOG_DEBUG, "%s sendHostGroupAnnounce requires direct connect ", DescribeHostType( getHostType() ) );
     }
 
-    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )
+    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.isDirectConnectReady() )
     {
         if( m_Engine.isNetworkHostEnabled() )
         {
@@ -105,7 +108,7 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
             if( netHostPlugin )
             {
                 m_AnnMutex.lock();
-                netHostPlugin->updateHostSearchList( m_PktHostAnnounce.getHostType(), &m_PktHostAnnounce, m_MyIdent );
+                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent );
                 m_AnnMutex.unlock();
             }
         }
@@ -113,18 +116,18 @@ void PluginGroupHost::sendHostGroupAnnounce( void )
         {
             VxGUID::generateNewVxGUID( m_AnnounceSessionId );
             m_AnnMutex.lock();
-            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonGroupAnnounce );
+            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, eConnectReasonGroupAnnounce );
             m_AnnMutex.unlock();
         }
     }
 }
 
 //============================================================================
-void PluginGroupHost::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginGroupHost::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
-    m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostGroupAnnounce( pluginSetting );
-    onPluginSettingsChanged();
+    updateHostInvite( pluginSetting );
+
+    onPluginSettingsChanged( pluginSetting.getLastUpdateTimestamp() );
 }
 
 //============================================================================

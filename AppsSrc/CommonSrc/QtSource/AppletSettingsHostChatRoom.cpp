@@ -20,6 +20,7 @@
 #include "GuiHelpers.h"
 
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxTime.h>
 
 //============================================================================
 AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget * parent )
@@ -76,7 +77,7 @@ void AppletSettingsHostChatRoom::savePluginSetting()
     {
         saveUiToSetting();
         m_PluginSetting.setPluginType( getPluginType() );
-        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting, GetGmtTimeMs() );
     }
 }
 

@@ -17,6 +17,7 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <CoreLib/Invite.h>
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
@@ -31,25 +32,47 @@ PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& plug
 }
 
 //============================================================================
+bool PluginBaseHostService::getHostedInfo( HostedInfo& hostedInfo )
+{
+    bool result = false;
+    if( !m_HostInviteUrl.empty() && !m_HostTitle.empty() && !m_HostDescription.empty() && m_HostInfoModifiedTime )
+    {
+        m_AnnMutex.lock();
+        hostedInfo.setHostInfoTimestamp( m_HostInfoModifiedTime );
+        hostedInfo.setHostInviteUrl( m_HostInviteUrl );
+        hostedInfo.setHostTitle( m_HostTitle );
+        hostedInfo.setHostDescription( m_HostDescription );
+
+        m_AnnMutex.unlock();
+    }
+
+    return result;
+}
+
+//============================================================================
 void PluginBaseHostService::buildHostAnnounce( PluginSetting& pluginSetting )
 {
+    updateHostInvite( pluginSetting );
+
+    /*
     m_AnnMutex.lock();
     m_Engine.lockAnnouncePktAccess();
-    m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
+    //m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
     m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
     m_Engine.unlockAnnouncePktAccess();
     m_PluginSetting = pluginSetting;
     BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    m_HostAnnounceBuilt = true;
+    m_PktHostInviteIsValid = true;
     m_AnnMutex.unlock();
+    */
 }
 
 //============================================================================
 void PluginBaseHostService::sendHostAnnounce( void )
 {
-    if( !m_HostAnnounceBuilt && 
+    if( !m_PktHostInviteIsValid && 
         ( m_Engine.getEngineSettings().getFirewallTestSetting() == eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
             m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
     {
@@ -60,10 +83,10 @@ void PluginBaseHostService::sendHostAnnounce( void )
         }
     }
 
-    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
     {
         VxGUID::generateNewVxGUID( m_AnnounceSessionId );
-        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, getHostAnnounceConnectReason() );
+        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, getHostAnnounceConnectReason() );
     }
 }
 
@@ -258,10 +281,12 @@ void PluginBaseHostService::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktH
     pktReply.setHostType( pktReq->getHostType() );
     pktReply.setSessionId( pktReq->getSessionId() );
 
+    std::string hostTitle;
     std::string hostDesc;
-    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet && getHostDescription( hostDesc ) )
+    int64_t lastModifiedTime;
+    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet && getHostTitleAndDescription( hostTitle,  hostDesc, lastModifiedTime ) )
     {
-        pktReply.setHostDescription( hostDesc );
+        pktReply.setHostTitleAndDescription( hostTitle, hostDesc, lastModifiedTime );
     }
     else
     {
@@ -308,20 +333,72 @@ bool PluginBaseHostService::ptopEngineRequestPluginThumb( VxSktBase* sktBase, Vx
 }
 
 //============================================================================
-bool PluginBaseHostService::getHostDescription( std::string& hostDesc )
+bool PluginBaseHostService::getHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
 {
-    return getEngine().getPluginSettingMgr().getHostDescription( getPluginType(), hostDesc );
+    return m_PluginSetting.getHostTitleAndDescription( hostTitle, hostDesc, lastModifiedTime );
 }
 
 //============================================================================
-void PluginBaseHostService::onPluginSettingsChanged( void )
+void PluginBaseHostService::onPluginSettingsChanged( int64_t modifiedTimeMs )
 {
+    /*
     int64_t timeNow = GetGmtTimeMs();
+    m_Engine.setPktAnnLastModTime( timeNow );
+
     m_Engine.lockAnnouncePktAccess();
-    m_Engine.getMyPktAnnounce().setHostOrThumbModifiedTime( getPluginType(), timeNow );
+    //m_Engine.getMyPktAnnounce().setHostOrThumbModifiedTime( getPluginType(), modifiedTimeMs );
     m_Engine.setPktAnnLastModTime( timeNow );
     // just time changes so other users will update when next connect.. no need to reannounce 
     m_Engine.getToGui().toGuiSaveMyIdent(m_Engine.getMyPktAnnounce().getVxNetIdent() );
     m_Engine.unlockAnnouncePktAccess();
-   
+    */
+}
+
+//============================================================================
+void PluginBaseHostService::updateHostInvite( PluginSetting& pluginSetting )
+{
+    pluginSetting.getHostTitleAndDescription( m_HostTitle, m_HostDescription, m_HostInfoModifiedTime );
+
+    updateHostInviteUrl();
+}
+
+//============================================================================
+void PluginBaseHostService::updateHostInviteUrl( void )
+{
+    if( m_HostInfoModifiedTime && m_Engine.getNetStatusAccum().isDirectConnectTested() && !m_Engine.getMyPktAnnounce().requiresRelay() )
+    {
+        std::string myOnlineUrl;
+
+        m_Engine.lockAnnouncePktAccess();
+        PktAnnounce& pktAnn = m_Engine.getMyPktAnnounce();
+        myOnlineUrl = pktAnn.getMyOnlineUrl();
+        pktAnn.setHostOrThumbModifiedTime( getPluginType(), m_HostInfoModifiedTime );
+        m_Engine.getToGui().toGuiSaveMyIdent( pktAnn.getVxNetIdent() );
+        m_Engine.unlockAnnouncePktAccess();
+
+        m_Engine.setPktAnnLastModTime( GetGmtTimeMs() );
+
+        std::string inviteUrl = Invite::makeInviteUrl( getHostType(), myOnlineUrl );
+        if( !inviteUrl.empty() )
+        {
+            VxGUID sessionId;
+            sessionId.initializeWithNewVxGUID();
+
+            m_AnnMutex.lock();
+            m_HostInviteUrl = inviteUrl;
+            m_PktHostInviteAnnounceReq.setHostType( getHostType() );
+            m_PktHostInviteAnnounceReq.setSessionId( sessionId );
+            bool result = m_PktHostInviteAnnounceReq.setHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDescription, m_HostInfoModifiedTime );
+            m_AnnMutex.unlock();
+
+            if( result )
+            {
+                m_PktHostInviteIsValid = true;
+            }
+        }
+    }
+    else
+    {
+        m_PktHostInviteIsValid = false;
+    }
 }

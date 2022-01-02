@@ -18,7 +18,7 @@
 
 #include <ptop_src/ptop_engine_src/Connections/IConnectRequest.h>
 
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 #include <CoreLib/VxGUIDList.h>
 
 class VxNetIdent;
@@ -69,7 +69,7 @@ protected:
     VxGUIDList                  m_JoinedHosts;
 
     bool                        m_SendAnnounceEnabled{ false };
-    bool                        m_HostAnnounceBuilt{ false };
-    PktHostAnnounce             m_PktHostAnnounce;
+    bool                        m_PktHostInviteIsValid{ false };
+    PktHostInviteAnnounceReq    m_PktHostInviteAnnounceReq;
     VxMutex                     m_AnnMutex;
 };

@@ -21,7 +21,7 @@
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
 
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 #include <PktLib/VxCommon.h>
 
 //============================================================================
@@ -40,7 +40,7 @@ void HostServerMgr::onClientJoined( VxSktBase * sktBase, VxNetIdent * netIdent )
 }
 
 //============================================================================
-void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnnounce& hostAnnounce, EConnectReason connectReason )
+void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostInviteAnnounceReq& hostAnnounce, EConnectReason connectReason )
 {
     // save announce pkt in announce session list
     std::string url = m_ConnectionMgr.getDefaultHostUrl( eHostTypeNetwork );
@@ -56,7 +56,7 @@ void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostAnn
 }
 
 //============================================================================
-void HostServerMgr::addAnnounceSession( VxGUID& sessionId, PktHostAnnounce* hostAnn )
+void HostServerMgr::addAnnounceSession( VxGUID& sessionId, PktHostInviteAnnounceReq* hostAnn )
 {
     removeAnnounceSession( sessionId );
     m_AnnListMutex.lock();
@@ -115,7 +115,7 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
             }
             else
             {
-                LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostAnnounce is invalid" );
+                LogMsg( LOG_VERBOSE, "HostServerMgr m_PktHostInviteAnnounceReq is invalid" );
             }
 
             delete iter->second;

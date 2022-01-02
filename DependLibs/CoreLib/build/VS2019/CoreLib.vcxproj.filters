@@ -340,6 +340,9 @@
     <ClInclude Include="..\..\VxMd5.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Invite.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp">
@@ -529,6 +532,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\VxMd5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Invite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

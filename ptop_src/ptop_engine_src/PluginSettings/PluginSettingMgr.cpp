@@ -49,13 +49,18 @@ bool PluginSettingMgr::initPluginSettingMgr( void )
 }
 
 //============================================================================
-bool PluginSettingMgr::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginSettingMgr::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
     m_SettingMutex.lock();
     bool result = initPluginSettingMgr();
     if( result )
     {
         result = false;
+        if( modifiedTimeMs )
+        {
+            pluginSetting.setLastUpdateTimestamp( modifiedTimeMs );
+        }
+
         if( pluginSetting.getPluginType() != ePluginTypeInvalid )
         {
             for( PluginSetting& setting : m_SettingList )
@@ -131,7 +136,7 @@ bool PluginSettingMgr::getPluginSetting( EPluginType pluginType, PluginSetting& 
 }
 
 //============================================================================
-bool PluginSettingMgr::getHostDescription( EPluginType pluginType, std::string& hostDesc )
+bool PluginSettingMgr::getHostTitleAndDescription( EPluginType pluginType, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
 {
     m_SettingMutex.lock();
     bool result = initPluginSettingMgr();
@@ -144,15 +149,14 @@ bool PluginSettingMgr::getHostDescription( EPluginType pluginType, std::string& 
             {
                 if( setting.getPluginType() == pluginType )
                 {
-                    hostDesc = setting.getDescription();
-                    result = true;
+                    result = setting.getHostTitleAndDescription( hostTitle, hostDesc, lastModifiedTime );
                     break;
                 }
             }
         }
         else
         {
-            LogMsg( LOG_ERROR, "getHostDescription invalid plugin type " );
+            LogMsg( LOG_ERROR, "getHostTitleAndDescription INVALID plugin type " );
             result = false;
         }
     }

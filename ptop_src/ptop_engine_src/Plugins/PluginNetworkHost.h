@@ -22,12 +22,12 @@ public:
     PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginNetworkHost() override = default;
 
-    virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent ) override;
+    virtual void                updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent ) override;
     virtual void				fromGuiSendAnnouncedList( EHostType hostType ) override;
     virtual void				fromGuiListAction( EListAction listAction ) override;
 
 protected:
-    virtual void				onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostInviteAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
     //=== vars ===//
 };

@@ -275,3 +275,25 @@ bool PluginSetting::setDefaultValues( P2PEngine& engine, EPluginType pluginType 
     m_PluginDesc += onlineDesc;
     return true;
 }
+
+//============================================================================
+//! set to default values for case use has not set anything but has enabled the plugin
+bool PluginSetting::getHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+{
+    hostTitle = getTitle();
+    hostDesc = getDescription();
+    bool result = !hostTitle.empty() && !hostDesc.empty();
+    if( !result )
+    {
+        LogMsg( LOG_ERROR, "getHostTitleAndDescription %s INVALID title or description ", DescribePluginType( getPluginType() ) );
+    }
+
+    lastModifiedTime = getLastUpdateTimestamp();
+    if( lastModifiedTime <= 0 )
+    {
+        result = false;
+        LogMsg( LOG_ERROR, "getHostTitleAndDescription %s INVALID modified time ", DescribePluginType( getPluginType() ) );
+    }
+
+    return result;
+}

@@ -61,8 +61,8 @@ public:
 	EFriendState				getPluginPermission( EPluginType ePluginType );
 	void						setPluginPermission( EPluginType ePluginType, EFriendState ePluginPermission );
 
-    bool                        setPluginSetting( PluginSetting& pluginSetting );
-    void                        onPluginSettingChange( PluginSetting& pluginSetting );
+    bool                        setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
+    void                        onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
 
 	virtual void				fromGuiNetworkAvailable( void );
 

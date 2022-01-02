@@ -16,9 +16,9 @@
 #include "HostBaseMgr.h"
 #include "HostSearchEntry.h"
 
-#include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
+#include <ptop_src/ptop_engine_src/HostListMgr/HostedInfo.h>
 
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 
 #include <string>
 #include <vector>
@@ -35,16 +35,24 @@ public:
     HostSearchEntry&			operator=( const HostSearchEntry& rhs );
 
     void                        updateLastRxTime( void );
-    bool                        searchMatch( SearchParams& searchParams, std::string& searchStr );
-    //void                        toHostedEntry( HostedEntry& entry );
-    void                        fillSearchReplyBlob( BinaryBlob& blob );
+    bool                        updateHostedInfo( PktHostInviteAnnounceReq* hostAnn );
 
-    bool                        addToBlob( PktBlobEntry& entryBlob );
+    bool                        searchHostedMatch( SearchParams& searchParams, std::string& searchStr );
+    //void                        toHostedEntry( HostedEntry& entry );
+    //void                        fillSearchReplyBlob( BinaryBlob& blob );
+
+    // bool                        addToBlob( PktBlobEntry& entryBlob );
+
+    VxGUID&                     getHostOnlineId( void )         { return m_HostedInfo.getOnlineId(); }
 
     uint64_t                    m_LastRxTime{ 0 }; // time last recieved announce
-    VxNetIdent                  m_Ident;
-    PktHostAnnounce             m_PktHostAnn;
-    PluginSetting               m_PluginSetting;
-    std::string                 m_Url;
-    std::vector<std::string>    m_SearchStrings;  
+    // PktHostInviteAnnounceReq    m_PktHostInviteAnnounceReq;
+    HostedInfo                  m_HostedInfo;
+    /*
+    std::string                 m_HostInviteUrl;
+    std::string                 m_HostTitle;
+    std::string                 m_HostDesc;
+    int64_t                     m_HostLastModifiedTime{ 0 };
+    */
+    
 };

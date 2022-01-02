@@ -19,7 +19,7 @@
 
 #include <CoreLib/VxMutex.h>
 
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 
 class PluginPeerUserClient : public PluginBaseHostClient
 {

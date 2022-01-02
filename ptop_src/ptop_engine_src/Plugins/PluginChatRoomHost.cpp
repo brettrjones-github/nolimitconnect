@@ -37,9 +37,9 @@ void PluginChatRoomHost::pluginStartup( void )
 }
 
 //============================================================================
-bool PluginChatRoomHost::setPluginSetting( PluginSetting& pluginSetting )
+bool PluginChatRoomHost::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
-    bool result = PluginBaseHostService::setPluginSetting( pluginSetting );
+    bool result = PluginBaseHostService::setPluginSetting( pluginSetting, modifiedTimeMs );
     buildHostChatRoomAnnounce( pluginSetting );
     sendHostChatRoomAnnounce();
     return result;
@@ -54,20 +54,29 @@ void PluginChatRoomHost::onThreadOncePer15Minutes( void )
 //============================================================================
 void PluginChatRoomHost::buildHostChatRoomAnnounce( PluginSetting& pluginSetting )
 {
+    updateHostInvite( pluginSetting );
+
+    /*
     m_AnnMutex.lock();
+
     m_Engine.lockAnnouncePktAccess();
+    std::string myOnlineUrl = m_Engine.getMyPktAnnounce().getMyOnlineUrl();
+
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
-    pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyOnlineUrl() );
+    pluginSetting.setPluginUrl( myOnlineUrl );
     m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
     m_Engine.unlockAnnouncePktAccess();
+
     m_PluginSetting = pluginSetting;
     m_PluginSetting.setUpdateTimestampToNow();
     BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setHostType( getHostType() );
     m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    m_HostAnnounceBuilt = true;
+
+    m_PktHostInviteIsValid = true;
     m_AnnMutex.unlock();
+    */
 }
 
 //============================================================================
@@ -75,8 +84,8 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
 {
     if( m_Engine.isDirectConnectReady() )
     {
-        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce built %d ", DescribeHostType( getHostType() ), m_HostAnnounceBuilt );
-        if( !m_HostAnnounceBuilt || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
+        LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce built %d ", DescribeHostType( getHostType() ), m_PktHostInviteIsValid );
+        if( !m_PktHostInviteIsValid || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
         {
             PluginSetting pluginSetting;
             if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
@@ -90,7 +99,7 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
         LogModule( eLogHosts, LOG_DEBUG, "%s sendHostChatRoomAnnounce requires direct connect ", DescribeHostType( getHostType() ) );
     }
 
-    if( m_HostAnnounceBuilt && isPluginEnabled() && m_Engine.isDirectConnectReady() )
+    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.isDirectConnectReady() )
     {
         if( m_Engine.isNetworkHostEnabled() )
         {
@@ -99,7 +108,7 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
             if( netHostPlugin )
             {
                 m_AnnMutex.lock();
-                netHostPlugin->updateHostSearchList( m_PktHostAnnounce.getHostType(), &m_PktHostAnnounce, m_MyIdent );
+                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent );
                 m_AnnMutex.unlock();
             }
         }
@@ -107,18 +116,18 @@ void PluginChatRoomHost::sendHostChatRoomAnnounce( void )
         {
             VxGUID::generateNewVxGUID( m_AnnounceSessionId );
             m_AnnMutex.lock();
-            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostAnnounce, eConnectReasonChatRoomAnnounce );
+            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, eConnectReasonChatRoomAnnounce );
             m_AnnMutex.unlock();
         }
     }
 }
 
 //============================================================================
-void PluginChatRoomHost::onPluginSettingChange( PluginSetting& pluginSetting )
+void PluginChatRoomHost::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
 {
-    m_SendAnnounceEnabled = pluginSetting.getAnnounceToHost();
-    buildHostChatRoomAnnounce( pluginSetting );
-    onPluginSettingsChanged();
+    updateHostInvite( pluginSetting );
+
+    onPluginSettingsChanged( pluginSetting.getLastUpdateTimestamp() );
 }
 
 //============================================================================

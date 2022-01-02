@@ -18,7 +18,7 @@
 #include <ptop_src/ptop_engine_src/Connections/IConnectRequest.h>
 
 #include <CoreLib/VxMutex.h>
-#include <PktLib/PktHostAnnounce.h>
+#include <PktLib/PktsHostInvite.h>
 
 class PluginChatRoomHost : public PluginBaseHostService, public IConnectRequestCallback
 {
@@ -28,13 +28,13 @@ public:
 
     virtual void				pluginStartup( void ) override;
 
-    virtual bool                setPluginSetting( PluginSetting& pluginSetting ) override;
+    virtual bool                setPluginSetting( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
     virtual void				onThreadOncePer15Minutes( void ) override;
 
     virtual EMembershipState	getMembershipState( VxNetIdent* netIdent ) override;
 
 protected:
-    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting ) override;
+    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
     /// return true if have use for this connection
     //=== callback overrides ==//
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};

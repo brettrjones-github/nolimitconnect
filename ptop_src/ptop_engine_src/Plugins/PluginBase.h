@@ -35,7 +35,7 @@ class NetServiceHdr;
 class P2PEngine;
 class P2PSession;
 class PktAnnounce;
-class PktHostAnnounce;
+class PktHostInviteAnnounceReq;
 class PluginMgr;
 class PluginSessionBase;
 class PluginSetting;
@@ -44,6 +44,7 @@ class SearchParams;
 class ThumbMgr;
 class TxSession;
 class VxSktBase;
+class HostedInfo;
 
 class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface, public BaseXferInterface
 {
@@ -86,7 +87,7 @@ public:
     virtual IToGui&			    getToGui( void );
     virtual void				setPluginType( EPluginType ePluginType );
     virtual EPluginType			getPluginType( void ) override							{ return m_ePluginType; }
-    virtual bool                setPluginSetting( PluginSetting& pluginSetting );
+    virtual bool                setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
     virtual PluginSetting&      getPluginSetting( void )                                { return m_PluginSetting; }
     virtual EHostType			getHostType( void );
 
@@ -102,6 +103,8 @@ public:
     virtual ThumbXferMgr&       getThumbXferMgr( void )							        { return m_ThumbXferMgr; }
 
 	virtual EMembershipState	getMembershipState( VxNetIdent* netIdent )				{ return eMembershipStateJoinDenied; }
+
+	virtual bool				getHostedInfo( HostedInfo& hostedInfo )					{ return false; }
 
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
@@ -157,7 +160,7 @@ public:
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	        {};
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	            {};
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )            {};
-    virtual void                updateHostSearchList( EHostType hostType, PktHostAnnounce* hostAnn, VxNetIdent* netIdent )  {};
+    virtual void                updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent )  {};
 	virtual void				fromGuiSendAnnouncedList( EHostType hostType ) {};
 
 	virtual bool				fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }
@@ -173,10 +176,10 @@ public:
     bool						txPacket( VxGUID& onlineId, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false, EPluginType overridePlugin = ePluginTypeInvalid );
 
     //=== maintenence ===//
-	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )							{};
-    virtual void				onMyPktAnnounceChange( PktAnnounce& pktAnn )							{};
-    virtual void				onThreadOncePer15Minutes( void )							            {};
-    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting )                   {};
+	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )									{};
+    virtual void				onMyPktAnnounceChange( PktAnnounce& pktAnn )									{};
+    virtual void				onThreadOncePer15Minutes( void )												{};
+    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )   {};
 
     //=== packet handlers ===//
     virtual void				onPktUserConnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
@@ -239,7 +242,7 @@ public:
 
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
-    virtual bool                generateSettingPkt( PluginSetting& pluginSetting );
+    virtual bool                generateSettingPkt( PluginSetting& pluginSetting, int64_t modifiedTimeMs );
 
     static std::string          getThumbXferDbName( EPluginType pluginType );
     static std::string          getThumbXferThreadName( EPluginType pluginType );
