@@ -59,6 +59,9 @@ public:
     bool                        isValidForGui( void );
 
     bool                        fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn );
+    int                         getSearchBlobSpaceRequirement( void );
+    bool                        fillSearchBlob( PktBlobEntry& blobEntry );
+    bool                        extractFromSearchBlob( PktBlobEntry& blobEntry );
 
 protected:
 	//=== vars ===//

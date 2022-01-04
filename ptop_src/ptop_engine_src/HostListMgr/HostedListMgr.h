@@ -48,8 +48,9 @@ public:
 
     void                        updateHosted( EHostType hostType, VxGUID& hostGuid, std::string& hosted, int64_t timestampMs = 0 );
 
-    void                        requestIdentity( std::string& url );
     void                        updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo );
+    void                        hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr );
 
 protected:
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
@@ -78,7 +79,7 @@ protected:
     bool						updateHostUrl( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
     bool                        updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime );
 
-    bool                        requestHostedInfo( EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase );
+    bool                        requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
     void                        announceHostInfoUpdated( HostedInfo* hostedInfo );
     void                        announceHostInfoRemoved( EHostType hostType, VxGUID& onlineId );
@@ -96,5 +97,9 @@ protected:
 
     std::vector<HostedListCallbackInterface*> m_HostedInfoListClients;
     VxMutex						m_HostedInfoListClientMutex;
+
+    EHostType                   m_SearchHostType{ eHostTypeUnknown };
+    VxGUID                      m_SearchSessionId;
+    VxGUID                      m_SearchSpecificOnlineId;
 };
 

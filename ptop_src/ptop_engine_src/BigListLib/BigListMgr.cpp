@@ -92,15 +92,15 @@ RCODE BigListMgr::updateBigListDatabase( BigListInfo * poInfo, const char * netw
 }
 
 //============================================================================
-bool BigListMgr::getFriendships( 	VxGUID&			hisOnlineId,
-									EFriendState&	retMyFriendshipToHim,
-									EFriendState&	retHisFriendshipToMe )
+bool BigListMgr::getFriendships( VxGUID& hisOnlineId,
+	EFriendState& retMyFriendshipToHim,
+	EFriendState& retHisFriendshipToMe )
 {
 	retMyFriendshipToHim = eFriendStateAnonymous;
 	retHisFriendshipToMe = eFriendStateAnonymous;
 
 	BigListAutoLock bigListAutoLock( *this );
-	BigListInfo * poInfo = findBigListInfo( hisOnlineId, true );	// id of friend to look for
+	BigListInfo* poInfo = findBigListInfo( hisOnlineId, true );	// id of friend to look for
 	if( poInfo )
 	{
 		retMyFriendshipToHim = poInfo->getMyFriendshipToHim();
@@ -111,6 +111,20 @@ bool BigListMgr::getFriendships( 	VxGUID&			hisOnlineId,
 	return false;
 }
 
+//============================================================================
+bool BigListMgr::getOnlineName( VxGUID& hisOnlineId, std::string& onlineName )
+{
+	BigListAutoLock bigListAutoLock( *this );
+	BigListInfo * poInfo = findBigListInfo( hisOnlineId, true );	// id of friend to look for
+	if( poInfo )
+	{
+		onlineName = poInfo->getOnlineName();
+		return true;
+	}
+
+	onlineName = "";
+	return false;
+}
 
 //============================================================================
 //! add a or update remote friend.. return true 

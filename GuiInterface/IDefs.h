@@ -106,6 +106,7 @@ enum EConnectReason
     eConnectReasonRelayService,
 
     eConnectReasonRequestIdentity,
+    eConnectReasonNetworkHostListSearch,
 
     eMaxConnectReason
 };

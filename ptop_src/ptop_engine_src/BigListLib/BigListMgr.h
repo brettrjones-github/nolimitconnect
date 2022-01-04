@@ -53,6 +53,7 @@ public:
 	bool						getFriendships( 	VxGUID&		hisOnlineId,
 													EFriendState&	retMyFriendshipToHim,
 													EFriendState&	retHisFriendshipToMe );
+	bool						getOnlineName( VxGUID& hisOnlineId, std::string& onlineName );
 	//! return true if can add friend to list
 	bool						canAddFriend( void );
 	//! remove from big list.. also from db if bRemoveStorage = true 

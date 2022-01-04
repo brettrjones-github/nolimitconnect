@@ -99,14 +99,18 @@ public:
     void						setSearchSessionId( VxGUID& guid )      { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )              { return m_SearchSessionId; }
 
+    void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
+
     void						setInviteCountThisPkt( uint16_t inviteCnt ) { m_InviteThisPktCount = inviteCnt; }
-    uint16_t&                   setInviteCountThisPkt( void )           { return m_InviteThisPktCount; }
+    uint16_t&                   getInviteCountThisPkt( void )           { return m_InviteThisPktCount; }
+    void                        incrementInviteCount( void )            { m_InviteThisPktCount++; }
 
     void						setMoreInvitesExist( bool moreExist)    { m_MoreInvitesExist = moreExist; }
     bool                        getMoreInvitesExist( void )             { return m_MoreInvitesExist; }
 
-    void						setLastOnlineIdThisPkt( VxGUID& guid )  { m_LastOnlineIdThisPkt = guid; }
-    VxGUID&                     getLastOnlineIdThisPkt( void )          { return m_LastOnlineIdThisPkt; }
+    void						setNextSearchOnlineId( VxGUID& guid )   { m_NextSearchOnlineId = guid; }
+    VxGUID&                     getNextSearchOnlineId( void )           { return m_NextSearchOnlineId; }
 
     PktBlobEntry&               getBlobEntry( void )                    { return m_BlobEntry; }
 
@@ -115,10 +119,12 @@ public:
 protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_MoreInvitesExist{ 0 };
+    uint8_t                     m_CommError{ 0 };
+    uint8_t                     m_Res1{ 0 };
     uint16_t                    m_InviteThisPktCount{ 0 };
-    uint32_t                    m_Res3{ 0 };
+    uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
-    VxGUID                      m_LastOnlineIdThisPkt;
+    VxGUID                      m_NextSearchOnlineId;
     PktBlobEntry                m_BlobEntry;
 };
 
@@ -133,8 +139,8 @@ public:
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
 
-    void						setLastOnlineIdGiven( VxGUID& guid ) { m_LastOnlineIdGiven = guid; }
-    VxGUID&                     getLastOnlineIdGiven( void )        { return m_LastOnlineIdGiven; }
+    void						setNextSearchOnlineId( VxGUID& guid ) { m_NextSearchOnlineId = guid; }
+    VxGUID&                     getNextSearchOnlineId( void )        { return m_NextSearchOnlineId; }
 
 protected:
     uint8_t					    m_HostType{ 0 };
@@ -142,7 +148,7 @@ protected:
     uint16_t                    m_Res2{ 0 };
     uint32_t                    m_Res3{ 0 };
     VxGUID                      m_SearchSessionId;
-    VxGUID                      m_LastOnlineIdGiven;
+    VxGUID                      m_NextSearchOnlineId;
 };
 
 class PktHostInviteMoreReply : public VxPktHdr
@@ -156,14 +162,18 @@ public:
     void						setSearchSessionId( VxGUID& guid )  { m_SearchSessionId = guid; }
     VxGUID&                     getSearchSessionId( void )          { return m_SearchSessionId; }
 
+    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
+
     void						setInviteCountThisPkt( uint16_t inviteCnt ) { m_InviteThisPktCount = inviteCnt; }
-    uint16_t&                   setInviteCountThisPkt( void )       { return m_InviteThisPktCount; }
+    uint16_t&                   getInviteCountThisPkt( void )       { return m_InviteThisPktCount; }
+    void                        incrementInviteCount( void )        { m_InviteThisPktCount++; }
 
     void						setMoreInvitesExist( bool moreExist ) { m_MoreInvitesExist = moreExist; }
     bool                        getMoreInvitesExist( void )         { return m_MoreInvitesExist; }
 
-    void						setLastOnlineIdThisPkt( VxGUID& guid ) { m_LastOnlineIdThisPkt = guid; }
-    VxGUID&                     getLastOnlineIdThisPkt( void )      { return m_LastOnlineIdThisPkt; }
+    void						setNextSearchOnlineId( VxGUID& guid ) { m_NextSearchOnlineId = guid; }
+    VxGUID&                     getNextSearchOnlineId( void )       { return m_NextSearchOnlineId; }
 
     PktBlobEntry&               getBlobEntry( void )                { return m_BlobEntry; }
 
@@ -172,10 +182,12 @@ public:
 protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_MoreInvitesExist{ 0 };
+    uint8_t                     m_CommError{ 0 };
+    uint8_t                     m_Res1{ 0 };
     uint16_t                    m_InviteThisPktCount{ 0 };
-    uint32_t                    m_Res3{ 0 };
+    uint16_t                    m_Res2{ 0 };
     VxGUID                      m_SearchSessionId;
-    VxGUID                      m_LastOnlineIdThisPkt;
+    VxGUID                      m_NextSearchOnlineId;
     PktBlobEntry                m_BlobEntry;
 };
 

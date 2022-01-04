@@ -21,6 +21,8 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
 
 #include <CoreLib/VxPtopUrl.h>
+#include <PktLib/PktsHostInvite.h>
+#include <PktLib/PktsHostInfo.h>
 
 //============================================================================
 HostedListMgr::HostedListMgr( P2PEngine& engine )
@@ -83,38 +85,6 @@ void HostedListMgr::updateHosted( EHostType hostType, VxGUID& onlineId, std::str
 
     unlockList();
     */
-}
-
-//============================================================================
-/// return false if one time use and packet has been sent. Connect Manager will disconnect if nobody else needs the connection
-bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) 
-{ 
-    if( eConnectReasonRequestIdentity == connectReason )
-    {
-        BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( onlineId );
-        if( bigListInfo )
-        {
-            updateHostedList( bigListInfo->getVxNetIdent(), sktBase );
-        }
-
-        m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
-    }
-
-    return false; 
-}
-
-//============================================================================
-void HostedListMgr::requestIdentity( std::string& url )
-{
-    VxPtopUrl ptopUrl( url );
-    if( ptopUrl.isValid() )
-    {
-        // just make up any session.. we only care about the identity then will disconnect
-        VxGUID sessionId;
-        sessionId.initializeWithNewVxGUID();
-        VxSktBase* sktBase{ nullptr };
-        m_Engine.getConnectionMgr().requestConnection( sessionId, ptopUrl.getUrl(), ptopUrl.getOnlineId(), this, sktBase, eConnectReasonRequestIdentity );
-    }
 }
 
 //============================================================================
@@ -321,7 +291,7 @@ void HostedListMgr::updateHostInfo( EHostType hostType, VxGUID& onlineId, std::s
 
     if( requiresSendHostInfoRequest )
     {
-        requestHostedInfo( hostType, netIdent, sktBase );
+        requestHostedInfo( hostType, onlineId, netIdent, sktBase );
     }
 }
 
@@ -445,11 +415,14 @@ bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& o
 }
 
 //============================================================================
-bool HostedListMgr::requestHostedInfo( EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase )
+bool HostedListMgr::requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
     bool result{ false };
+    PktHostInfoReq pktReq;
+    pktReq.setHostType( hostType );
+    pktReq.getSessionId().initializeWithNewVxGUID();
 
-    return result;
+    return sktBase->txPacket( netIdent->getMyOnlineId(), &pktReq);
 }
 
 //============================================================================
@@ -492,10 +465,34 @@ bool HostedListMgr::fromGuiQueryHostedInfoList( EHostType hostType, std::vector<
 //============================================================================
 bool HostedListMgr::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll )
 {
-    bool result{ false };
+    if( netHostUrl.isValid() )
+    {
+        m_SearchHostType = hostType;
+        m_SearchSpecificOnlineId = hostIdIfNullThenAll;
+        m_SearchSessionId.initializeWithNewVxGUID();
+        VxSktBase* sktBase{ nullptr };
+        m_Engine.getConnectionMgr().requestConnection( m_SearchSessionId, netHostUrl.getUrl(), netHostUrl.getOnlineId(), this, sktBase, eConnectReasonNetworkHostListSearch );
+        return true;
+    }
 
-    return result;
+    return false;
 }
+
+//============================================================================
+bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    if( eConnectReasonNetworkHostListSearch == connectReason )
+    {
+        PktHostInviteSearchReq pktReq;
+        pktReq.setSearchSessionId( sessionId );
+        pktReq.setHostType( m_SearchHostType );
+        pktReq.setSpecificOnlineId( m_SearchSpecificOnlineId );
+        return 0 == sktBase->txPacket( onlineId, &pktReq );
+    }
+
+    return false;
+}
+
 
 //============================================================================
 void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& hostedInfoList, HostedInfo& hostedInfo )
@@ -531,4 +528,116 @@ void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& ho
     {
         hostedInfoList.push_back( hostedInfo );
     }
+}
+
+//============================================================================
+void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo )
+{
+    VxPtopUrl ptopUrl( hostedInfo.getHostInviteUrl() );
+    if( !ptopUrl.isValid() )
+    {
+        LogMsg( LOG_ERROR, "HostedListMgr::hostSearchResult INVALID url" );
+        return;
+    }
+
+    VxNetIdent hostIdent;
+    bool needsIdentityReq = !m_Engine.getBigListMgr().queryIdent( ptopUrl.getOnlineId(), hostIdent );
+    if( needsIdentityReq )
+    {
+        m_Engine.getHostUrlListMgr().requestIdentity( hostedInfo.getHostInviteUrl() );
+    }
+
+    LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchResult host url %s title %s desc %s time %lld", hostedInfo.getHostInviteUrl().c_str(),
+        hostedInfo.getHostTitle().c_str(), hostedInfo.getHostDescription().c_str(), hostedInfo.getHostInfoTimestamp() );
+
+    bool alreadyExisted{ false };
+    bool hostedInfoUpdated{ false };
+    HostedInfo updatedHostedInfo;
+    lockList();
+    // if exists see if needs update
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )
+    {
+        if( iter->getHostType() == hostType && iter->getOnlineId() == hostedInfo.getOnlineId() )
+        {
+            alreadyExisted = true;
+            if( !needsIdentityReq && !hostIdent.canRequestJoin( hostType ) )
+            {
+                // can never join anyway so ignore
+                break;
+            }
+
+            if( iter->getHostInviteUrl() != hostedInfo.getHostInviteUrl() )
+            {
+                // url has changed. just update
+                iter->setHostInviteUrl( hostedInfo.getHostInviteUrl() );
+                // update our url list also
+                m_Engine.getHostUrlListMgr().updateHostUrl( hostType, hostedInfo.getOnlineId(), hostedInfo.getHostInviteUrl() );
+                if( iter->shouldSaveToDb() )
+                {
+                    m_HostedInfoListDb.updateHostUrl( iter->getHostType(), iter->getOnlineId(), hostedInfo.getHostInviteUrl() );
+                }
+                // TODO do we need to update if just url changed ?
+            }
+
+            if( iter->getHostInfoTimestamp() > hostedInfo.getHostInfoTimestamp() )
+            {
+                iter->setHostInfoTimestamp( hostedInfo.getHostInfoTimestamp() );
+                iter->setHostTitle( hostedInfo.getHostTitle() );
+                iter->setHostDescription( hostedInfo.getHostDescription() );
+                updatedHostedInfo = *iter;
+                hostedInfoUpdated = true;
+                if( iter->shouldSaveToDb() )
+                {
+                    m_HostedInfoListDb.saveHosted( *iter );
+                }
+            }
+            else
+            {
+                // in theory they should be same if we are up to date.. check anyway
+                if( iter->getHostTitle() != hostedInfo.getHostTitle() || iter->getHostDescription() != hostedInfo.getHostDescription() )
+                {
+                    LogMsg( LOG_ERROR, "HostedListMgr::hostSearchResult title or description is different" );
+                    iter->setHostTitle( hostedInfo.getHostTitle() );
+                    iter->setHostDescription( hostedInfo.getHostDescription() );
+                    updatedHostedInfo = *iter;
+                    hostedInfoUpdated = true;
+                    if( iter->shouldSaveToDb() )
+                    {
+                        m_HostedInfoListDb.updateHostTitleAndDescription( iter->getHostType(), iter->getOnlineId(), hostedInfo.getHostTitle(), hostedInfo.getHostDescription(), iter->getHostInfoTimestamp() );
+                    }
+                }
+            }
+
+            break;
+        }
+    }
+
+    if( !alreadyExisted )
+    {
+        m_HostedInfoList.push_back( hostedInfo );
+        updatedHostedInfo = hostedInfo;
+        hostedInfoUpdated = true;
+    }
+
+    unlockList();
+
+    if( hostedInfoUpdated )
+    {
+        announceHostInfoUpdated( &updatedHostedInfo );
+    }
+}
+
+//============================================================================
+void HostedListMgr::hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
+{
+    if( commErr )
+    {
+        LogMsg( LOG_ERROR, "HostedListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+    }
+    else
+    {
+        LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchCompleted with no errors" );
+    }
+
+    m_Engine.getConnectionMgr().doneWithConnection( searchSessionId, netIdent->getMyOnlineId(), this, eConnectReasonNetworkHostListSearch );
 }

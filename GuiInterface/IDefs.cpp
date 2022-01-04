@@ -46,6 +46,7 @@ namespace
         "Connect Reason Relay Service ",
 
         "Connect Reason Request Identity ",
+        "Connect Reason Network Host List Search",
 
         "Max Connect Reason ",
     };

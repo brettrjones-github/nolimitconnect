@@ -70,9 +70,46 @@ bool HostedInfo::isValidForGui( void )
 }
 
 //============================================================================
+int HostedInfo::getSearchBlobSpaceRequirement( void )
+{
+    // the +3 is for string \0 terminators
+    return sizeof( int64_t ) + m_HostInviteUrl.length() + m_HostTitle.length() + m_HostDesc.length() + 3;
+}
+
+//============================================================================
+bool HostedInfo::fillSearchBlob( PktBlobEntry& blobEntry )
+{
+    bool result{ true };
+    if( getSearchBlobSpaceRequirement() <= blobEntry.getRemainingStorageLen() )
+    {
+        result &= blobEntry.setValue( m_HostInfoTimestampMs );
+        result &= blobEntry.setValue( m_HostInviteUrl );
+        result &= blobEntry.setValue( m_HostTitle );
+        result &= blobEntry.setValue( m_HostDesc );  
+    }
+    else
+    {
+        result = false;
+    }
+
+    return result;
+}
+
+//============================================================================
+bool HostedInfo::extractFromSearchBlob( PktBlobEntry& blobEntry )
+{
+    bool result = blobEntry.getValue( m_HostInfoTimestampMs );
+    result &= blobEntry.getValue( m_HostInviteUrl );
+    result &= blobEntry.getValue( m_HostTitle );
+    result &= blobEntry.getValue( m_HostDesc );
+    return result;
+}
+
+//============================================================================
 bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
 {
     VxGUID onlineId = hostAnn->getSrcOnlineId();
     setOnlineId( onlineId );
     return hostAnn->getHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDesc, m_HostInfoTimestampMs );
 }
+

@@ -84,3 +84,27 @@ void PluginNetworkHost::fromGuiListAction( EListAction listAction )
 {
     m_HostServerMgr.fromGuiListAction( listAction );
 }
+
+//============================================================================
+void PluginNetworkHost::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_HostServerMgr.onPktHostInviteSearchReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginNetworkHost::onPktHostInviteSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_HostServerMgr.onPktHostInviteSearchReply( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginNetworkHost::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_HostServerMgr.onPktHostInviteMoreReq( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PluginNetworkHost::onPktHostInviteMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_HostServerMgr.onPktHostInviteMoreReply( sktBase, pktHdr, netIdent );
+}

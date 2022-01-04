@@ -48,21 +48,32 @@ public:
     virtual void				fromGuiSendAnnouncedList( EHostType hostType );
     virtual void				fromGuiListAction( EListAction listAction );
 
+    virtual bool				onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktHostInviteSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual bool				onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktHostInviteMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+
 protected:
-    std::map<PluginId, HostSearchEntry>& getSearchList( EHostType hostType );
-    bool                        haveBlob( EHostType hostType );
+    std::map<PluginId, HostSearchEntry>& getHostAnnList( EHostType hostType );
+    bool                        haveHostAnnList( EHostType hostType );
     bool                        fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, bool forced );
 
     // remove entries does not lock m_SearchMutex
     void                        removeEntries( std::map<PluginId, HostSearchEntry>& searchMap, PluginIdList& toRemoveList );
     EPluginType                 getSearchPluginType( EHostType hostType );
     void                        doFromGuiListAction( EListAction listAction, EPluginType pluginType, std::map<PluginId, HostSearchEntry>& hostedList );
+    bool                        fillSearchPktBlob( PktBlobEntry& blobEntry, HostedInfo& hostedInfo );
+    bool                        extractSearchBlobToHostedInfo( PktBlobEntry& blobEntry, HostedInfo& hostedInfo );
+
+    void                        logCommError( ECommErr commErr, const char* desc, VxSktBase* sktBase, VxNetIdent* netIdent );
+    void                        updateFromHostInviteSearchBlob( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount );
+    bool                        requestMoreHostInfoFromNetworkHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextHostOnlineId );
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;
-    std::map<PluginId, HostSearchEntry>   m_ChatBlob;
-    std::map<PluginId, HostSearchEntry>   m_GroupBlob;
-    std::map<PluginId, HostSearchEntry>   m_RandConnectList;
+    std::map<PluginId, HostSearchEntry>   m_ChatRoomHostAnnList;
+    std::map<PluginId, HostSearchEntry>   m_GroupHostAnnList;
+    std::map<PluginId, HostSearchEntry>   m_RandConnectHostAnnList;
     std::map<PluginId, HostSearchEntry>   m_NullList; // empty list and list for network hosts
 };
 
