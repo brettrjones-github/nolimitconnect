@@ -38,6 +38,8 @@ public:
     bool                        isMessengerReady( void );
     virtual void                onSystemReady( bool ready ) { }
 
+    void                        toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo );
+
     bool                        isHostedInSession( VxGUID& onlineId );
     void                        setHostedOffline( VxGUID& onlineId );
 
@@ -47,33 +49,38 @@ public:
     void                        onUserOnlineStatusChange( GuiHosted* user, bool isOnline );
     void                        onMyIdentUpdated( GuiHosted* user );
 
-    GuiHosted*                getHosted( VxGUID& onlineId );
+    GuiHosted*                  getHosted( VxGUID& onlineId );
     std::map<VxGUID, GuiHosted*>& getHostedList( void )             { return m_HostedList; }
-    GuiHosted*                updateHosted( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
+    GuiHosted*                  updateHosted( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
 signals:
     void				        signalMyIdentUpdated( GuiHosted* user ); 
 
-    void				        signalHostedRequested( GuiHosted* user ); 
-    void                        signalHostedUpdated( GuiHosted* user );
+    void				        signalHostedRequested( GuiHosted* guiHosted ); 
+    void                        signalHostedUpdated( GuiHosted* guiHosted );
     void				        signalHostedRemoved( VxGUID onlineId, EHostType hostType );
     void                        signalHostedOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
-    void                        signalHostedOnlineStatus( GuiHosted* user, bool isOnline );
+    void                        signalHostedOnlineStatus( GuiHosted* guiHosted, bool isOnline );
 
-    void                        signalInternalHostedUpdated( HostedInfo* userJoinInfo );
+    void                        signalInternalHostedUpdated( HostedInfo* hostedInfo );
     void                        signalInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
+    void                        signalInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo );
 
 private slots:
     void                        slotInternalHostedUpdated( HostedInfo* userJoinInfo );
     void                        slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
+    void                        slotInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo );
 
 protected:
     void                        removeHosted( VxGUID& onlineId );
     GuiHosted*                  findHosted( VxGUID& onlineId );
     GuiHosted*                  updateHosted( HostedInfo* userJoinInfo );
+    void                        updateHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo& hostedInfo );
     
-    virtual void				callbackHostedInfoListUpdated( HostedInfo* userJoinInfo ) override;
+    virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ) override;
     virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ) override;
+
+    void                        announceHostSearchResult( EHostType hostType, VxGUID& sessionId, GuiHosted* guiHosted );
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiHosted

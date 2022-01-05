@@ -1243,3 +1243,11 @@ bool IsHostPluginType( EPluginType pluginType )
         return false;
     }
 }
+
+//! return true plugin should announce to network host
+bool PluginShouldAnnounceToNetwork( EPluginType pluginType )
+{
+    return ePluginTypeHostGroup == pluginType ||
+        ePluginTypeHostChatRoom == pluginType ||
+        ePluginTypeHostRandomConnect == pluginType;
+}

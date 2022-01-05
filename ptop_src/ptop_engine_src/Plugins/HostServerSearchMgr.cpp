@@ -53,12 +53,18 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInvit
         else
         {
             HostSearchEntry searchEntry;
-            fillSearchEntry( searchEntry, hostType, hostAnn, netIdent, true );
-            searchMap[pluginId] = searchEntry;
+            if( fillSearchEntry( searchEntry, hostType, hostAnn, netIdent, true ) )
+            {
+                searchMap[pluginId] = searchEntry;
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "fillSearchEntry failed from %s", netIdent->getOnlineName() );
+            }
         }
 
         m_SearchMutex.unlock();
-        LogModule( eLogHostConnect, LOG_DEBUG, "HostServerSearchMgr host ann plugin %s updated ", pluginId.describePluginId().c_str() );
+        LogModule( eLogHostConnect, LOG_VERBOSE, "HostServerSearchMgr host ann plugin %s updated ", pluginId.describePluginId().c_str() );
     }
 }
 
@@ -218,7 +224,7 @@ void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
         // if currently active
         if( timeNow - iter->second.m_LastRxTime <= MIN_HOST_RX_UPDATE_TIME_MS )
         {
-            //m_Engine.getToGui().toGuiHostSearchResult( hostType, iter->second.getHostOnlineId(), iter->second.m_Ident, iter->second.m_PluginSetting );
+            m_Engine.getToGui().toGuiHostSearchResult( hostType, iter->second.getHostOnlineId(), iter->second.m_HostedInfo );
         }
     }
 

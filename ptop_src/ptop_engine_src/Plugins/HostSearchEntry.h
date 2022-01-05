@@ -38,21 +38,9 @@ public:
     bool                        updateHostedInfo( PktHostInviteAnnounceReq* hostAnn );
 
     bool                        searchHostedMatch( SearchParams& searchParams, std::string& searchStr );
-    //void                        toHostedEntry( HostedEntry& entry );
-    //void                        fillSearchReplyBlob( BinaryBlob& blob );
-
-    // bool                        addToBlob( PktBlobEntry& entryBlob );
 
     VxGUID&                     getHostOnlineId( void )         { return m_HostedInfo.getOnlineId(); }
 
     uint64_t                    m_LastRxTime{ 0 }; // time last recieved announce
-    // PktHostInviteAnnounceReq    m_PktHostInviteAnnounceReq;
     HostedInfo                  m_HostedInfo;
-    /*
-    std::string                 m_HostInviteUrl;
-    std::string                 m_HostTitle;
-    std::string                 m_HostDesc;
-    int64_t                     m_HostLastModifiedTime{ 0 };
-    */
-    
 };

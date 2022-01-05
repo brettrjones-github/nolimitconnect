@@ -34,6 +34,7 @@ bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::s
     bool result = lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
     if( result )
     {
+        m_BlobEntry.resetWrite();
         result &= m_BlobEntry.setValue( lastModifiedTime );
         result &= m_BlobEntry.setValue( inviteUrl );
         result &= m_BlobEntry.setValue( hostTitle );
@@ -47,6 +48,7 @@ bool PktHostInviteAnnounceReq::setHostInviteInfo( std::string& inviteUrl, std::s
 //============================================================================
 bool PktHostInviteAnnounceReq::getHostInviteInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
 {
+    m_BlobEntry.resetRead();
     bool result = m_BlobEntry.getValue( lastModifiedTime );
     result &= m_BlobEntry.getValue( inviteUrl );
     result &= m_BlobEntry.getValue( hostTitle );

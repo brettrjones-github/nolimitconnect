@@ -338,6 +338,7 @@ void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSkt
 //============================================================================
 void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
+    /*
     PktPluginSettingReply* settingReply = ( PktPluginSettingReply* )pktHdr;
     PktBlobEntry& blobEntry = settingReply->getBlobEntry();
     blobEntry.resetRead();
@@ -366,4 +367,5 @@ void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pkt
         m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchNoMatches );
         stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent->getMyOnlineId() );
     }
+    */
 }

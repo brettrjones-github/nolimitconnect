@@ -73,7 +73,7 @@ bool HostedInfo::isValidForGui( void )
 int HostedInfo::getSearchBlobSpaceRequirement( void )
 {
     // the +3 is for string \0 terminators
-    return sizeof( int64_t ) + m_HostInviteUrl.length() + m_HostTitle.length() + m_HostDesc.length() + 3;
+    return sizeof( int64_t ) + m_HostInviteUrl.length() + m_HostTitle.length() + m_HostDesc.length() + 3 * 5; // each string requires null terminator and 4 byte length of data in the blob
 }
 
 //============================================================================

@@ -80,6 +80,7 @@ bool PluginBase::setPluginSetting( PluginSetting& pluginSetting, int64_t modifie
     m_PluginSetting = pluginSetting;
     generateSettingPkt( pluginSetting, modifiedTimeMs );
     onPluginSettingChange( m_PluginSetting, modifiedTimeMs );
+
     return true;
 }
 

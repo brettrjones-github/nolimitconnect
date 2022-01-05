@@ -1190,16 +1190,15 @@ void AppCommon::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EH
 }
 
 //============================================================================
-void AppCommon::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+void AppCommon::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    emit signalHostSearchResult( hostType, sessionId, hostIdent, pluginSetting );
+	getHostedListMgr().toGuiHostSearchResult( hostType, sessionId, hostedInfo );
 }
-
 
 //============================================================================
 void AppCommon::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent *hostIdent, VxGUID& sessionId, bool isOnline )

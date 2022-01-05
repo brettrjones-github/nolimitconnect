@@ -64,6 +64,8 @@ public:
     bool                        setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
     void                        onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs = 0 );
 
+	virtual void				onMyOnlineUrlIsValid( bool isValidUrl );
+
 	virtual void				fromGuiNetworkAvailable( void );
 
 	virtual void				fromGuiUserLoggedOn( void );

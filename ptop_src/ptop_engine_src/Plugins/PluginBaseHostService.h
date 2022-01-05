@@ -28,6 +28,8 @@ public:
     EHostType                   getHostType(  void ) override       { return m_HostType; }
     virtual bool				getHostedInfo( HostedInfo& hostedInfo ) override;
 
+    virtual void				onMyOnlineUrlIsValid( bool iValid ) override;
+
     virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktHostSearchReq              ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
     virtual void				onPktPluginSettingReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
@@ -39,6 +41,10 @@ public:
 
     virtual bool				fromGuiRequestPluginThumb       ( VxNetIdent* netIdent, VxGUID& thumbId ) override;
     virtual bool                ptopEngineRequestPluginThumb    ( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) override;
+
+    virtual bool                setPluginSetting( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
+    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
+    virtual void				onThreadOncePer15Minutes( void ) override;
 
 protected:
     virtual void				onContactWentOffline            ( VxNetIdent * netIdent, VxSktBase * sktBase ) override;

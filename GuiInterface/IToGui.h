@@ -28,7 +28,7 @@ class OfferClientInfo;
 class OfferHostInfo;
 class ThumbInfo;
 class VxGUID;
-class PluginSetting;
+class HostedInfo;
 
 //! IToGui is an abstract interface for calls to GUI from native C++/C code
 class IToGui
@@ -61,7 +61,7 @@ public:
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) = 0;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) = 0;
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) = 0;
-    virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting ) = 0;
+    virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) = 0;
 
     virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline ) = 0;
 

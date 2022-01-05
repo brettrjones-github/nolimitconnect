@@ -138,9 +138,9 @@ void IGoTv::toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostS
 }
 
 //============================================================================
-void IGoTv::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, VxNetIdent &hostIdent, PluginSetting &pluginSetting )
+void IGoTv::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
 {
-    getAppCommon().toGuiHostSearchResult( hostType, sessionId, hostIdent, pluginSetting );
+    getAppCommon().toGuiHostSearchResult( hostType, sessionId, hostedInfo );
 }
 
 //============================================================================

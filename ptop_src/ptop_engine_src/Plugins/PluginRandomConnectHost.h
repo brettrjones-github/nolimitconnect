@@ -29,11 +29,7 @@ public:
 
     virtual void				pluginStartup( void ) override;
 
-    virtual bool                setPluginSetting( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
-    virtual void				onThreadOncePer15Minutes( void ) override;
-
 protected:
-    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t lastModifiedTime = 0 ) override;
     /// return true if have use for this connection
     //=== callback overrides ==//
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
@@ -49,8 +45,4 @@ protected:
     virtual void                onContactSessionDone( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
 
-    void                        buildHostRandomConnectAnnounce( PluginSetting& pluginSetting );
-    void                        sendHostRandomConnectAnnounce( void );
-
-    //=== vars ===//
 };

@@ -16,6 +16,7 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 
 #include <GuiInterface/IToGui.h>
 
@@ -337,6 +338,11 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
 
             LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d extern ip %s", isTested, requiresRelay, myExternalIp.c_str() );
             onNetStatusChange();
+
+            if( m_DirectConnectTested )
+            {
+                m_Engine.getPluginMgr().onMyOnlineUrlIsValid( true );
+            }
         }
     }
 }

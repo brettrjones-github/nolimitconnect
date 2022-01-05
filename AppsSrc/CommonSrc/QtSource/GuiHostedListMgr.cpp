@@ -31,6 +31,7 @@ void GuiHostedListMgr::onAppCommonCreated( void )
 {
     connect( this, SIGNAL( signalInternalHostedUpdated( HostedInfo ) ), this, SLOT( slotInternalHostedUpdated( HostedInfo ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostedRemoved( VxGUID, EHostType ) ), this, SLOT( slotInternalHostedRemoved( VxGUID, EHostType ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostSearchResult( EHostType, VxGUID, HostedInfo* ) ), this, SLOT( slotInternalHostSearchResult( EHostType, VxGUID, HostedInfo* ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getHostedListMgr().addHostedListMgrClient( dynamic_cast< HostedListCallbackInterface*>(this), true );
 }
@@ -115,15 +116,14 @@ void GuiHostedListMgr::removeHosted( VxGUID& onlineId )
 //============================================================================
 bool GuiHostedListMgr::isHostedInSession( VxGUID& onlineId )
 {
-    GuiHosted* guiHosted = findHosted( onlineId );
-    return guiHosted && guiHosted->isInSession();
+    // TODO ?
+    return false;
 }
 
 //============================================================================
 GuiHosted* GuiHostedListMgr::getHosted( VxGUID& onlineId )
 {
-    GuiHosted* guiHosted = findHosted( onlineId );
-    return guiHosted;
+    return findHosted( onlineId );
 }
 
 //============================================================================
@@ -196,7 +196,7 @@ void GuiHostedListMgr::setHostedOffline( VxGUID& onlineId )
     GuiHosted* guiHosted = findHosted( onlineId );
     if( guiHosted )
     {
-        guiHosted->setOnlineStatus( false );
+        //guiHosted->setOnlineStatus( false );
     }
 }
 
@@ -243,4 +243,56 @@ void GuiHostedListMgr::onMyIdentUpdated( GuiHosted* user )
     {
         emit signalMyIdentUpdated( user );
     }
+}
+
+//============================================================================
+void GuiHostedListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
+{
+    HostedInfo* newHostedInfo = new HostedInfo( hostedInfo );
+    emit signalInternalHostSearchResult( hostType, sessionId, newHostedInfo );
+}
+
+//============================================================================
+void GuiHostedListMgr::slotInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo )
+{
+    updateHostSearchResult( hostType, sessionId, *hostedInfo );
+    delete hostedInfo;
+}
+
+//============================================================================
+void GuiHostedListMgr::updateHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo& hostedInfo )
+{
+    // hosted info is temporary and will soon be deleted so make copy if required
+    GuiHosted* guiHosted = findHosted( hostedInfo.getOnlineId() );
+    if( !guiHosted )
+    {
+        GuiUser* guiUser = m_MyApp.getUserMgr().getUser( hostedInfo.getOnlineId() );
+        // make a new one
+        guiHosted = new GuiHosted( m_MyApp, guiUser, sessionId, hostedInfo );
+
+        m_HostedList[hostedInfo.getOnlineId()] = guiHosted;
+        onHostedAdded( guiHosted );
+    }
+    else
+    {
+        // make sure is up to date. search results should be the latest info
+        guiHosted->setHostType( hostedInfo.getHostType() );
+        // skip setIsFavorite.. is probably not set correctly in search result
+
+        guiHosted->setHostInfoTimestamp( hostedInfo.getHostType() );
+        guiHosted->setHostInviteUrl( hostedInfo.getHostInviteUrl() );
+        guiHosted->setHostTitle( hostedInfo.getHostTitle() );
+        guiHosted->setHostDescription( hostedInfo.getHostDescription() );
+    }
+
+    if( guiHosted )
+    {
+        announceHostSearchResult( hostType, sessionId, guiHosted );
+    }
+}
+
+//============================================================================
+void GuiHostedListMgr::announceHostSearchResult( EHostType hostType, VxGUID& sessionId, GuiHosted* guiHosted )
+{
+
 }

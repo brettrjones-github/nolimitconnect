@@ -24,13 +24,15 @@
 class AppCommon;
 class GuiUser;
 class GuiHostedListMgr;
+class HostedInfo;
 
 class GuiHosted : public QWidget
 {
 public:
     GuiHosted() = delete;
     GuiHosted( AppCommon& app );
-    GuiHosted( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, bool online = false );
+    GuiHosted( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId );
+    GuiHosted( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, HostedInfo& hostedInfo );
     GuiHosted( const GuiHosted& rhs );
 	virtual ~GuiHosted() = default;
 
@@ -39,15 +41,26 @@ public:
     void                        setUser( GuiUser* user )        { m_GuiUser = user; }
     GuiUser*                    getUser( void )                 { return m_GuiUser; }
 
-    virtual bool                setOnlineStatus( bool isOnline );
-    bool                        isOnline( void )                { return m_IsOnline; }
-    bool                        isInSession( void )             { return m_IsOnline && m_SessionId.isVxGUIDValid(); }
+    virtual void				setOnlineId( VxGUID& onlineId ) { m_OnlineId = onlineId; }
+    virtual VxGUID&             getOnlineId( void )             { return m_OnlineId; }
 
-    EJoinState                  getJoinState( EHostType hostType );
-    bool                        setJoinState( EHostType hostType, EJoinState joinState ); // return true if state changed
-    int                         getHostRequestCount( void );
-    int                         getRequestStateCount( EJoinState joinState );
-    void                        getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests );
+    virtual void			    setHostType( EHostType hostType ) { m_HostType = hostType; }
+    virtual EHostType	        getHostType( void )             { return m_HostType; }
+
+    virtual void                setIsFavorite( bool isFavorite ) { m_IsFavorite = isFavorite; }
+    virtual bool                getIsFavorite( void )           { return m_IsFavorite; }
+
+    virtual void			    setHostInfoTimestamp( int64_t timestampMs ) { m_HostInfoTimestampMs = timestampMs; }
+    virtual int64_t             getHostInfoTimestamp( void )    { return m_HostInfoTimestampMs; }
+
+    virtual void			    setHostInviteUrl( std::string hostUrl ) { m_HostInviteUrl = hostUrl; }
+    virtual std::string&        getHostInviteUrl( void )        { return m_HostInviteUrl; }
+
+    virtual void                setHostTitle( std::string hostTitle ) { m_HostTitle = hostTitle; }
+    virtual std::string&        getHostTitle( void )            { return m_HostTitle; }
+
+    virtual void                setHostDescription( std::string hostDesc ) { m_HostDesc = hostDesc; }
+    virtual std::string&        getHostDescription( void )      { return m_HostDesc; }
 
 protected:
     AppCommon&                  m_MyApp;
@@ -55,6 +68,11 @@ protected:
 
     GuiUser*                    m_GuiUser{ nullptr };
     VxGUID                      m_SessionId;
-    bool                        m_IsOnline{ false };
-    std::vector<std::pair<EHostType, EJoinState>>  m_JoinStateList;
+    EHostType                   m_HostType{ eHostTypeUnknown };
+    VxGUID                      m_OnlineId;
+    bool                        m_IsFavorite{ false };
+    int64_t                     m_HostInfoTimestampMs{ 0 };
+    std::string                 m_HostInviteUrl{ "" };
+    std::string                 m_HostTitle{ "" };
+    std::string                 m_HostDesc{ "" };
 };

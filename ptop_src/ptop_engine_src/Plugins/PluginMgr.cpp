@@ -382,8 +382,6 @@ bool PluginMgr::handleFirstWebPageConnection( VxSktBase * sktBase )
 
 	parseOffset += 33;
 	sktBase->sktBufAmountRead( 0 );
-	//sktBase->setIsPluginSpecificSkt( true );
-	//sktBase->setPluginSpecificNum( (uint8_t)ePluginTypeWebServer );
 	PluginBase * poPlugin = getPlugin( ePluginTypeWebServer );
 	if( poPlugin )
 	{
@@ -488,14 +486,11 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	if( ePluginTypeInvalid != pluginType )
 	{
-		//sktBase->setIsPluginSpecificSkt( true );
-		//sktBase->setPluginSpecificNum( (uint8_t)pluginType );
-		
 		VxNetIdent * netIdent = NULL;
 		if( netServiceHdr.m_OnlineId == m_Engine.getMyPktAnnounce().getMyOnlineId() )
 		{
 			netIdent = &m_Engine.getMyPktAnnounce();
-			LogMsg( LOG_INFO, "PluginMgr::handleFirstNetServiceConnection: parseOnlineId was myself\n" );
+			LogMsg( LOG_INFO, "PluginMgr::handleFirstNetServiceConnection: parseOnlineId was myself" );
 		}
 		else
 		{
@@ -710,6 +705,16 @@ void PluginMgr::fromGuiListAction( EListAction listAction )
 	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
 	{
 		( *iter )->fromGuiListAction( listAction );
+	}
+}
+
+//============================================================================
+void PluginMgr::onMyOnlineUrlIsValid( bool iValid )
+{
+	std::vector<PluginBase* >::iterator iter;
+	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
+	{
+		( *iter )->onMyOnlineUrlIsValid( iValid );
 	}
 }
 

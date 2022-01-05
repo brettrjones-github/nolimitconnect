@@ -1115,3 +1115,5 @@ EPluginType ClientPluginToHostPluginType( EPluginType pluginType );
 bool IsClientPluginType( EPluginType pluginType );
 //! return true if is a host plugin
 bool IsHostPluginType( EPluginType pluginType );
+//! return true plugin should announce to network host
+bool PluginShouldAnnounceToNetwork( EPluginType pluginType );

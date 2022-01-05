@@ -103,8 +103,8 @@ void P2PEngine::onOncePerSecond( void )
     if( 0 >= thirtySecCntInSeconds )
     {
         thirtySecCntInSeconds = 30;
-        //onOncePer30Seconds();
-        //onOncePer15Minutes(); // BRJ for testing only.. remove me
+        onOncePer30Seconds();
+        onOncePer15Minutes(); // BRJ for testing only.. remove me
     }
 
     static int minuteCntInSeconds = 62;

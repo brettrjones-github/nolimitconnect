@@ -18,6 +18,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <CoreLib/Invite.h>
+#include <CoreLib/VxPtopUrl.h>
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsHostJoin.h>
@@ -50,28 +51,65 @@ bool PluginBaseHostService::getHostedInfo( HostedInfo& hostedInfo )
 }
 
 //============================================================================
+bool PluginBaseHostService::setPluginSetting( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
+{
+    bool result = PluginNetServices::setPluginSetting( pluginSetting, modifiedTimeMs );
+    if( isPluginEnabled() && PluginShouldAnnounceToNetwork( getPluginType() ) )
+    {
+        buildHostAnnounce( pluginSetting );
+        sendHostAnnounce();
+    }
+
+    return result;
+}
+
+//============================================================================
+void PluginBaseHostService::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
+{
+    if( isPluginEnabled() && PluginShouldAnnounceToNetwork( getPluginType() ) )
+    {
+        updateHostInvite( pluginSetting );
+    }
+
+    onPluginSettingsChanged( pluginSetting.getLastUpdateTimestamp() );
+}
+
+//============================================================================
+void PluginBaseHostService::onThreadOncePer15Minutes( void )
+{
+    if( isPluginEnabled() && PluginShouldAnnounceToNetwork( getPluginType() ) )
+    {
+        sendHostAnnounce();
+    }
+}
+
+//============================================================================
+void PluginBaseHostService::onMyOnlineUrlIsValid( bool isValidUrl )
+{
+    if( isValidUrl )
+    {
+        sendHostAnnounce();
+    }
+    else
+    {
+        m_PktHostInviteIsValid = false;
+    }
+}
+
+//============================================================================
 void PluginBaseHostService::buildHostAnnounce( PluginSetting& pluginSetting )
 {
     updateHostInvite( pluginSetting );
-
-    /*
-    m_AnnMutex.lock();
-    m_Engine.lockAnnouncePktAccess();
-    //m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
-    m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
-    m_Engine.unlockAnnouncePktAccess();
-    m_PluginSetting = pluginSetting;
-    BinaryBlob binarySetting;
-    m_PluginSetting.toBinary( binarySetting );
-    m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    m_PktHostInviteIsValid = true;
-    m_AnnMutex.unlock();
-    */
 }
 
 //============================================================================
 void PluginBaseHostService::sendHostAnnounce( void )
 {
+    if( !isPluginEnabled() )
+    {
+        return;
+    }
+
     if( !m_PktHostInviteIsValid && 
         ( m_Engine.getEngineSettings().getFirewallTestSetting() == eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
             m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid
@@ -83,10 +121,36 @@ void PluginBaseHostService::sendHostAnnounce( void )
         }
     }
 
-    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+    if( !m_PktHostInviteIsValid )
     {
-        VxGUID::generateNewVxGUID( m_AnnounceSessionId );
-        m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, getHostAnnounceConnectReason() );
+        return;
+    }
+
+    bool sentToOurself = false;
+    if( m_Engine.isNetworkHostEnabled() )
+    {
+        VxPtopUrl netHostUrl( m_Engine.fromGuiQueryDefaultUrl( eHostTypeNetwork ) );
+        if( netHostUrl.isValid() && netHostUrl.getOnlineId() == m_Engine.getMyOnlineId() )
+        {
+            // if we are also network host then send to ourself also
+            PluginBase* netHostPlugin = m_PluginMgr.getPlugin( ePluginTypeHostNetwork );
+            if( netHostPlugin )
+            {
+                m_AnnMutex.lock();
+                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent );
+                m_AnnMutex.unlock();
+                sentToOurself = true;
+            }
+        }
+    }
+    
+    if( !sentToOurself )
+    {
+        if( m_PktHostInviteIsValid && m_Engine.getNetStatusAccum().getNetAvailStatus() != eNetAvailNoInternet )
+        {
+            VxGUID::generateNewVxGUID( m_AnnounceSessionId );
+            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, getHostAnnounceConnectReason() );
+        }
     }
 }
 
@@ -365,6 +429,17 @@ void PluginBaseHostService::updateHostInvite( PluginSetting& pluginSetting )
 //============================================================================
 void PluginBaseHostService::updateHostInviteUrl( void )
 {
+    if( !PluginShouldAnnounceToNetwork( getPluginType() ) )
+    {
+        return;
+    }
+
+    if( eHostTypeUnknown == getHostType() )
+    {
+        LogMsg( LOG_VERBOSE, "PluginBaseHostService::updateHostInviteUrl unknown host type" );
+        return;
+    }
+
     if( m_HostInfoModifiedTime && m_Engine.getNetStatusAccum().isDirectConnectTested() && !m_Engine.getMyPktAnnounce().requiresRelay() )
     {
         std::string myOnlineUrl;

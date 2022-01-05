@@ -26,7 +26,6 @@
 # pragma warning(disable: 4355) //'this' : used in base member initializer list
 #endif
  
-
 //============================================================================
 PluginPeerUserHost::PluginPeerUserHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
     : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
@@ -38,81 +37,4 @@ PluginPeerUserHost::PluginPeerUserHost( P2PEngine& engine, PluginMgr& pluginMgr,
 void PluginPeerUserHost::pluginStartup( void )
 {
     PluginBaseHostService::pluginStartup();
-}
-
-//============================================================================
-bool PluginPeerUserHost::setPluginSetting( PluginSetting& pluginSetting, int64_t lastModifiedTime )
-{
-    bool result = PluginBaseHostService::setPluginSetting( pluginSetting, lastModifiedTime );
-    buildHostAnnounce( pluginSetting );
-    sendHostAnnounce();
-    return result;
-}
-
-//============================================================================
-void PluginPeerUserHost::buildHostGroupAnnounce( PluginSetting& pluginSetting )
-{
-    updateHostInvite( pluginSetting );
-    /*
-    m_AnnMutex.lock();
-    m_Engine.lockAnnouncePktAccess();
-    m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
-    pluginSetting.setPluginUrl( m_Engine.getMyPktAnnounce().getMyOnlineUrl() );
-    m_PktAnnLastModTime = m_Engine.getPktAnnLastModTime();
-    m_Engine.unlockAnnouncePktAccess();
-    m_PluginSetting = pluginSetting;
-    m_PluginSetting.setUpdateTimestampToNow();
-    BinaryBlob binarySetting;
-    m_PluginSetting.toBinary( binarySetting );
-    m_PktHostAnnounce.setHostType( eHostTypeGroup );
-    m_PktHostAnnounce.setPluginSettingBinary( binarySetting );
-    m_PktHostInviteIsValid = true;
-    m_AnnMutex.unlock();
-    */
-}
-
-//============================================================================
-void PluginPeerUserHost::sendHostGroupAnnounce( void )
-{
-    if( m_Engine.isDirectConnectReady() )
-    {
-        if( !m_PktHostInviteIsValid || m_Engine.getPktAnnLastModTime() != m_PktAnnLastModTime )
-        {
-            PluginSetting pluginSetting;
-            if( m_Engine.getPluginSettingMgr().getPluginSetting( getPluginType(), pluginSetting ) )
-            {
-                buildHostGroupAnnounce( pluginSetting );
-            }
-        }
-    }
-
-    if( m_PktHostInviteIsValid && isPluginEnabled() && m_Engine.isDirectConnectReady() )
-    {
-        if( m_Engine.isNetworkHostEnabled() )
-        {
-            // if we are also network host then send to ourself also
-            PluginBase* netHostPlugin = m_PluginMgr.getPlugin( ePluginTypeHostNetwork );
-            if( netHostPlugin )
-            {
-                m_AnnMutex.lock();
-                netHostPlugin->updateHostSearchList( m_PktHostInviteAnnounceReq.getHostType(), &m_PktHostInviteAnnounceReq, m_MyIdent );
-                m_AnnMutex.unlock();
-            }
-        }
-        else
-        {
-            VxGUID::generateNewVxGUID( m_AnnounceSessionId );
-            m_AnnMutex.lock();
-            m_HostServerMgr.sendHostAnnounceToNetworkHost( m_AnnounceSessionId, m_PktHostInviteAnnounceReq, eConnectReasonGroupAnnounce );
-            m_AnnMutex.unlock();
-        }
-    }
-}
-
-//============================================================================
-void PluginPeerUserHost::onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )
-{
-    updateHostInvite( pluginSetting );
-
-    onPluginSettingsChanged( pluginSetting.getLastUpdateTimestamp() );
 }

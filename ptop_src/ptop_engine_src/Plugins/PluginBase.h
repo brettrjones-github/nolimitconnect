@@ -74,6 +74,8 @@ public:
 	virtual EFriendState		getPluginPermission( void );
 	virtual void				setPluginPermission( EFriendState eFriendState );
 
+	virtual void				onMyOnlineUrlIsValid( bool isValidUrl ) {};
+
 	virtual bool				isAccessAllowed( VxNetIdent * hisIdent );
 	virtual bool				isAppPaused( void )										{ return m_AppIsPaused; }
 	virtual void				setIsPluginInSession( bool inSession )					{ m_bPluginIsInSession = inSession; }
