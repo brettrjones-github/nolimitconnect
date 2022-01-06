@@ -202,8 +202,11 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileXferSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHosted.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedList.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListCallback.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListItem.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListSession.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinMgr.h \
@@ -557,8 +560,10 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileXferSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHosted.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedList.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListSession.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoin.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinMgr.cpp \
@@ -847,6 +852,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileShareItemWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileXferWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FriendListDlg.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/GuiHostedListItem.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/GuiUserListEntryWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/HostJoinRequestListItem.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/HistoryEntryWidget.ui \

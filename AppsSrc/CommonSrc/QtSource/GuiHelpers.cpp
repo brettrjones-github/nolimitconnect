@@ -1614,7 +1614,6 @@ void GuiHelpers::fillHostType( QComboBox* comboBox, bool excludePeerHost )
 //============================================================================
 EHostType GuiHelpers::comboIdxToHostType( int comboIdx )
 {
-    EHostType hostType{ eHostTypeUnknown };
     switch( comboIdx )
     {
     case 0:

@@ -78,7 +78,7 @@
        </widget>
       </item>
       <item>
-       <widget class="HostListWidget" name="m_HostListWidget" native="true">
+       <widget class="GuiHostedListWidget" name="m_HostedListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -94,14 +94,12 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>HostListWidget</class>
+   <class>GuiHostedListWidget</class>
    <extends>QWidget</extends>
-   <header>HostListWidget.h</header>
+   <header>GuiHostedListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../NoLimitConnect.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

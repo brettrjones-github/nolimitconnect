@@ -884,6 +884,12 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.h">
       <Filter>Source Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.cpp">
@@ -1417,12 +1423,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HomeWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\IdentWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1945,13 +1945,25 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHosted.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2187,7 +2199,10 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedList.h">
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2702,6 +2717,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestHostService.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\CommonSrc\Forms\GuiHostedListItem.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -311,8 +311,10 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHosted.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedList.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostJoin.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostJoinList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostJoinMgr.cpp" />
@@ -533,8 +535,11 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHelpers.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostJoinMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h" />
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedList.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoin.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinList.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinSession.h" />
@@ -969,6 +974,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\FileShareItemWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FileXferWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FriendListDlg.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\GuiHostedListItem.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\HistoryEntryWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\HomeWindow.ui" />

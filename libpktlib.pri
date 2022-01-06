@@ -1,7 +1,7 @@
 INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 
-HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
+HEADERS += 	$$PWD/DependLibs/PktLib/HostedId.h \
     $$PWD/DependLibs/PktLib/MatchParams.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \
@@ -62,7 +62,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/VxSearchDefs.h \
     $$PWD/DependLibs/PktLib/VxSearchFlags.h
 
-SOURCES += 	$$PWD/DependLibs/PktLib/MatchParams.cpp \
+SOURCES += 	$$PWD/DependLibs/PktLib/HostedId.cpp \
+    $$PWD/DependLibs/PktLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktAnnounce.cpp \
 	$$PWD/DependLibs/PktLib/PktBlobEntry.cpp \

@@ -25,7 +25,7 @@ public:
     HostServerMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostServerMgr() = default;
 
-    virtual void				fromGuiListAction( EListAction listAction );
+    virtual void				fromGuiListAction( EListAction listAction ) override;
 
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) override;
     virtual void                sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostInviteAnnounceReq& hostAnnounce, EConnectReason connectReason );

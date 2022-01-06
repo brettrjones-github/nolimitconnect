@@ -15,6 +15,7 @@
 
 #include <GuiInterface/IDefs.h>
 
+#include <PktLib/HostedId.h>
 #include <CoreLib/VxGUID.h>
 
 #include <QWidget>
@@ -37,6 +38,8 @@ public:
 	virtual ~GuiHosted() = default;
 
     GuiHostedListMgr&           getHostedListMgr( void )        { return m_HostedListMgr; }
+
+    HostedId                    getHostedId( void )             { return HostedId( m_OnlineId, m_HostType ); }
 
     void                        setUser( GuiUser* user )        { m_GuiUser = user; }
     GuiUser*                    getUser( void )                 { return m_GuiUser; }

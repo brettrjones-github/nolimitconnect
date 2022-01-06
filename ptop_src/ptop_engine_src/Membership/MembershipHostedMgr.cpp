@@ -112,7 +112,7 @@ void MembershipHostedMgr::removeConnection( VxGUID& onlineId, VxGUID& sktConnect
 
     MembershipHosted memberHosted;
     VxGUID sktId;
-    bool updateHosted = false;
+    bool updateMembership = false;
     if( wasRemoved )
     {
         lockList();
@@ -122,7 +122,7 @@ void MembershipHostedMgr::removeConnection( VxGUID& onlineId, VxGUID& sktConnect
             {
                 sktId = iter->second.first;
                 memberHosted = iter->second.second;
-                updateHosted = true;
+                updateMembership = true;
                 break;
             }
         }
@@ -130,7 +130,7 @@ void MembershipHostedMgr::removeConnection( VxGUID& onlineId, VxGUID& sktConnect
         unlockList();
     }
 
-    if( updateHosted )
+    if( updateMembership )
     {
         onMembershipUpdated( onlineId, sktId, memberHosted );
     }

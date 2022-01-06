@@ -129,7 +129,8 @@ void PluginBaseHostService::sendHostAnnounce( void )
     bool sentToOurself = false;
     if( m_Engine.isNetworkHostEnabled() )
     {
-        VxPtopUrl netHostUrl( m_Engine.fromGuiQueryDefaultUrl( eHostTypeNetwork ) );
+        std::string netHostUrlStr = m_Engine.fromGuiQueryDefaultUrl( eHostTypeNetwork );
+        VxPtopUrl netHostUrl( netHostUrlStr );
         if( netHostUrl.isValid() && netHostUrl.getOnlineId() == m_Engine.getMyOnlineId() )
         {
             // if we are also network host then send to ourself also

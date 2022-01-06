@@ -360,7 +360,7 @@ void HostServerSearchMgr::onPktHostInviteSearchReply( VxSktBase* sktBase, VxPktH
         updateFromHostInviteSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getInviteCountThisPkt() );
         if( pktReply->getMoreInvitesExist() )
         {
-            if( !requestMoreHostInfoFromNetworkHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId() ) )
+            if( !requestMoreHostInvitesFromNetworkHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId() ) )
             {
                 m_Engine.getHostedListMgr().hostSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
             }
@@ -441,7 +441,7 @@ void HostServerSearchMgr::onPktHostInviteMoreReply( VxSktBase* sktBase, VxPktHdr
         updateFromHostInviteSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getInviteCountThisPkt() );
         if( pktReply->getMoreInvitesExist() )
         {
-            if( !requestMoreHostInfoFromNetworkHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId() ) )
+            if( !requestMoreHostInvitesFromNetworkHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId() ) )
             {
                 m_Engine.getHostedListMgr().hostSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
             }
@@ -478,7 +478,7 @@ void HostServerSearchMgr::updateFromHostInviteSearchBlob( EHostType hostType, Vx
 }
 
 //============================================================================
-bool HostServerSearchMgr::requestMoreHostInfoFromNetworkHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextHostOnlineId )
+bool HostServerSearchMgr::requestMoreHostInvitesFromNetworkHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextHostOnlineId )
 {
     PktHostInviteMoreReq pktReq;
     pktReq.setHostType( hostType );

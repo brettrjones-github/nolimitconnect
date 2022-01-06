@@ -358,7 +358,7 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
         emoticonNum++;
     }
 
-    if( !foundId || emoticonNum > emoticonIdList.size() )
+    if( !foundId || emoticonNum > (int)emoticonIdList.size() )
     {
         QString msgText = QObject::tr( "Invalid emoticon id" );
         QMessageBox::warning( &m_MyApp.getHomePage(), QObject::tr( "Invalid emoticon id " ), msgText + thumbId.toOnlineIdString().c_str(), QMessageBox::Ok );

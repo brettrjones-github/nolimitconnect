@@ -25,6 +25,7 @@ enum class EPopupMenuType
 	ePopupMenuAppSystem,
 	ePopupMenuFriend,
 	ePopupMenuHostSession,
+	ePopupMenuHostedListSession,
 	ePopupMenuListOptions1,
 	ePopupMenuOfferFriendship,
 	ePopupMenuTitleBar,
@@ -34,6 +35,7 @@ enum class EPopupMenuType
 };
 
 class GuiHostSession;
+class GuiHostedListSession;
 
 class AppletPopupMenu : public AppletBase, public MediaCallbackInterface
 {
@@ -55,6 +57,7 @@ public:
 
 	void						showAppSystemMenu( void );
 	void						showFriendMenu( GuiUser* poSelectedFriend );
+	void						showHostedListSessionMenu( GuiHostedListSession* hostSession );
 	void						showHostSessionMenu( GuiHostSession* hostSession );
 	void						showPersonOfferMenu( GuiUser* poSelectedFriend );
 	void						showTitleBarMenu( void );
@@ -87,6 +90,7 @@ protected:
 	AppletBase*					m_ParentActivity{ nullptr };
 	int							m_iMenuItemHeight{ 48 };
 	GuiHostSession*				m_HostSession{ nullptr };
+	GuiHostedListSession*		m_HostedListSession{ nullptr };
 	GuiUser*					m_SelectedFriend{ nullptr };
 	GuiUserSessionBase*			m_UserSession{ nullptr };
 	QFrame*						m_ContentItemsFrame{ nullptr };

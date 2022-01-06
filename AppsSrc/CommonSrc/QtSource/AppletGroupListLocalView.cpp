@@ -59,12 +59,19 @@ AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app,
     connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
         this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
 
-    connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
+    connect( ui.m_HostedListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_HostedListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_HostedListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
 
     setStatusLabel( QObject::tr( "Groups Announced To Network Host" ) );
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
     slotRefreshGroupList();
+}
+
+//============================================================================
+AppletGroupListLocalView::~AppletGroupListLocalView()
+{
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
 }
 
 //============================================================================
@@ -148,18 +155,6 @@ void AppletGroupListLocalView::slotHostSearchStatus( EHostType hostType, VxGUID 
 }
 
 //============================================================================
-void AppletGroupListLocalView::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
-{
-    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
-        DescribePluginType( pluginSetting.getPluginType() ) );
-
-    QString strMsg = QObject::tr( "Match found: " );
-    strMsg += hostIdent.getOnlineName();
-    setInfoLabel( strMsg );
-    addPluginSettingToList( hostType, sessionId, hostIdent, pluginSetting );
-}
-
-//============================================================================
 void AppletGroupListLocalView::toGuiInfoMsg( char * infoMsg )
 {
     QString infoStr( infoMsg );
@@ -185,15 +180,9 @@ void AppletGroupListLocalView::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletGroupListLocalView::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
-{
-    ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
-}
-
-//============================================================================
 void AppletGroupListLocalView::clearPluginSettingToList( void )
 {
-    ui.m_HostListWidget->clearHostList();
+    ui.m_HostedListWidget->clearHostList();
 }
 
 //============================================================================
@@ -204,19 +193,37 @@ void AppletGroupListLocalView::clearStatus( void )
 }
 
 //============================================================================
-void AppletGroupListLocalView::slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListLocalView::slotIconButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletGroupListLocalView::slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListLocalView::slotMenuButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletGroupListLocalView::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListLocalView::slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
+}
+
+
+//============================================================================
+void AppletGroupListLocalView::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
+{
+    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s title %s", DescribeHostType( hostedId.getHostType() ), guiHosted->getHostTitle().c_str() );
+
+    QString strMsg = QObject::tr( "Match found: " );
+    strMsg += guiHosted->getHostTitle().c_str();
+    setInfoLabel( strMsg );
+    updateHostedList( hostedId, guiHosted, sessionId );
+}
+
+//============================================================================
+void AppletGroupListLocalView::updateHostedList( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
+{
+    ui.m_HostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
 }

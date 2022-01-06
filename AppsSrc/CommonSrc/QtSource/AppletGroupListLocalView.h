@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "AppletClientBase.h"
+#include "GuiHostedListCallback.h"
 
 #include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
@@ -27,13 +28,12 @@
 class VxNetIdent;
 class GuiHostSession;
 
-class AppletGroupListLocalView : public AppletClientBase
+class AppletGroupListLocalView : public AppletClientBase, public GuiHostedListCallback
 {
 	Q_OBJECT
 public:
-	AppletGroupListLocalView(	AppCommon&		    app, 
-							QWidget *			parent = NULL );
-	virtual ~AppletGroupListLocalView() = default;
+	AppletGroupListLocalView( AppCommon& app, QWidget *	parent = nullptr );
+	virtual ~AppletGroupListLocalView();
 
     void                        infoMsg( const char * infoMsg, ... );
     void                        toGuiInfoMsg( char * logMsg );
@@ -41,7 +41,7 @@ public:
     void						setStatusLabel( QString strMsg );
     void                        setInfoLabel( QString strMsg );
 
-    void						addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting );
+    void						updateHostedList( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId );
     void                        clearPluginSettingToList( void );
     void                        clearStatus( void );
 
@@ -59,13 +59,14 @@ private slots:
     void						slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
     void						slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
     void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
-    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
-    virtual void                slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
-    virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
-    virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem );
+    virtual void                slotIconButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
+    virtual void                slotMenuButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
+    virtual void                slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
+    virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
+
     void						showEvent( QShowEvent * ev ) override;
     void						hideEvent( QHideEvent * ev ) override;
 

@@ -28,6 +28,7 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 #include "GuiHostSession.h"
+#include "GuiHostedListSession.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/AssetMgr/AssetMgr.h>
@@ -418,6 +419,38 @@ void AppletPopupMenu::showHostSessionMenu( GuiHostSession* hostSession )
 	addMenuItem( 2, getMyIcons().getIcon( eMyIconConnect ), QObject::tr( "Connect To Host" ) );
 	addMenuItem( 3, getMyIcons().getIcon( eMyIconDisconnect ), QObject::tr( "Disconnect From Host" ) );
 }
+
+//============================================================================
+void AppletPopupMenu::showHostedListSessionMenu( GuiHostedListSession* hostSession )
+{
+	if( !hostSession )
+	{
+		LogMsg( LOG_ERROR, "AppletPopupMenu::showHostSessionMenu null session" );
+		return;
+	}
+
+	setMenuType( EPopupMenuType::ePopupMenuHostedListSession );
+	m_HostedListSession = hostSession;
+
+	setTitle( GuiParams::describeHostType( hostSession->getHostType() ) );
+	if( hostSession->getHostType() == eHostTypeGroup )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceHostGroup ), QObject::tr( "Join" ) );
+	}
+	else if( hostSession->getHostType() == eHostTypeChatRoom )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceChatRoom ), QObject::tr( "Join" ) );
+	}
+	else if( hostSession->getHostType() == eHostTypeRandomConnect )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceRandomConnect ), QObject::tr( "Join" ) );
+	}
+
+	addMenuItem( 1, getMyIcons().getIcon( eMyIconCancelNormal ), QObject::tr( "Unjoin" ) );
+	addMenuItem( 2, getMyIcons().getIcon( eMyIconConnect ), QObject::tr( "Connect To Host" ) );
+	addMenuItem( 3, getMyIcons().getIcon( eMyIconDisconnect ), QObject::tr( "Disconnect From Host" ) );
+}
+
 
 //============================================================================
 void AppletPopupMenu::onHostSessionActionSelected( int iMenuId )

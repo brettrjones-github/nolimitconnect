@@ -137,7 +137,7 @@ RCODE RcWebSkt::doSendFile( const char * pFileName )
 	else
 	{
 		bBinary = true;
-		sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %lld\r\nContent-disposition: attachment; filename=%s\r\nConnection: Keep-Alive\r\n\r\n",
+        sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %llu\r\nContent-disposition: attachment; filename=%s\r\nConnection: Keep-Alive\r\n\r\n",
 						m_u64FileLen,
 						strJustFileName.c_str() );
 	}

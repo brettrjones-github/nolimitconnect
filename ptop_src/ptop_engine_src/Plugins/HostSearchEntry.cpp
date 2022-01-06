@@ -47,17 +47,7 @@ bool HostSearchEntry::updateHostedInfo( PktHostInviteAnnounceReq* hostAnn )
 HostSearchEntry::HostSearchEntry( const HostSearchEntry& rhs )
 : m_LastRxTime( rhs.m_LastRxTime )
 , m_HostedInfo( rhs.m_HostedInfo )
-//, m_Url( rhs.m_Url )
-//, m_SearchStrings( rhs.m_SearchStrings )
 {
-    /*
-    memcpy( &m_Ident, &rhs.m_Ident, sizeof( VxNetIdent ) );
-    m_PktHostAnn.setPktLength( 0 );
-    if( rhs.m_PktHostAnn.getPktLength() )
-    {
-        memcpy( &m_PktHostAnn, &rhs.m_PktHostAnn, rhs.m_PktHostAnn.getPktLength() );
-    }
-    */
 }
 
 //============================================================================
@@ -67,18 +57,6 @@ HostSearchEntry& HostSearchEntry::operator=( const HostSearchEntry& rhs )
     {
         m_LastRxTime = rhs.m_LastRxTime;
         m_HostedInfo = rhs.m_HostedInfo;
-        /*
-        memcpy( &m_Ident, &rhs.m_Ident, sizeof( VxNetIdent ) );
-        m_PktHostAnn.setPktLength( 0 );
-        if( rhs.m_PktHostAnn.getPktLength() )
-        {
-            memcpy( &m_PktHostAnn, &rhs.m_PktHostAnn, rhs.m_PktHostAnn.getPktLength() );
-        }
-
-        m_PluginSetting = rhs.m_PluginSetting;
-        m_Url = rhs.m_Url;
-        m_SearchStrings = rhs.m_SearchStrings;
-        */
     }
 
     return *this;
@@ -107,28 +85,3 @@ bool HostSearchEntry::searchHostedMatch( SearchParams& searchParams, std::string
 
     return false;
 }
-
-////============================================================================
-//void HostSearchEntry::toHostedEntry( HostedEntry& entry )
-//{
-//    entry.setConnectIdent( (const VxConnectIdent &)m_Ident );
-//    BinaryBlob blob;
-//    fillSearchReplyBlob( blob );
-//    entry.setPluginSettingsBlob( blob );
-//}
-
-/*
-//============================================================================
-void HostSearchEntry::fillSearchReplyBlob( BinaryBlob& blob )
-{
-    m_PluginSetting.toBinary( blob );
-}
-
-//============================================================================
-bool HostSearchEntry::addToBlob( PktBlobEntry& entryBlob )
-{
-    bool result = m_Ident.addToBlob( entryBlob );
-    result &= m_PluginSetting.addToBlob( entryBlob );
-    return result;
-}
-*/

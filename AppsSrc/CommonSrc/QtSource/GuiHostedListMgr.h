@@ -24,6 +24,7 @@
 
 class AppCommon;
 class VxNetIdent;
+class GuiHostedListCallback;
 
 class GuiHostedListMgr : public QObject, public HostedListCallbackInterface
 {
@@ -43,18 +44,21 @@ public:
     bool                        isHostedInSession( VxGUID& onlineId );
     void                        setHostedOffline( VxGUID& onlineId );
 
-    void                        onHostedAdded( GuiHosted* user );
+    void                        onHostedAdded( GuiHosted* guiHosted );
     void                        onHostedRemoved( VxGUID& onlineId, EHostType hostType );
-    void                        onHostedUpdated( GuiHosted* user );
+    void                        onHostedUpdated( GuiHosted* guiHosted );
     void                        onUserOnlineStatusChange( GuiHosted* user, bool isOnline );
-    void                        onMyIdentUpdated( GuiHosted* user );
+    void                        onMyIdentUpdated( GuiHosted* guiHosted );
 
-    GuiHosted*                  getHosted( VxGUID& onlineId );
-    std::map<VxGUID, GuiHosted*>& getHostedList( void )             { return m_HostedList; }
-    GuiHosted*                  updateHosted( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
+    GuiHosted*                  getHosted( VxGUID& onlineId, EHostType hostType )   { return findHosted( onlineId, hostType ); }
+    GuiHosted*                  getHosted( HostedId& hostTypeId )                   { return findHosted( hostTypeId ); }
+    std::map<HostedId, GuiHosted*>& getHostedList( void )                            { return m_HostedList; }
+    GuiHosted*                  updateHosted( VxNetIdent* hisIdent, EHostType hostType );
+
+    void                        wantHostedListCallbacks( GuiHostedListCallback* client, bool enable );
 
 signals:
-    void				        signalMyIdentUpdated( GuiHosted* user ); 
+    void				        signalMyIdentUpdated( GuiHosted* guiHosted );
 
     void				        signalHostedRequested( GuiHosted* guiHosted ); 
     void                        signalHostedUpdated( GuiHosted* guiHosted );
@@ -72,17 +76,22 @@ private slots:
     void                        slotInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo );
 
 protected:
-    void                        removeHosted( VxGUID& onlineId );
-    GuiHosted*                  findHosted( VxGUID& onlineId );
-    GuiHosted*                  updateHosted( HostedInfo* userJoinInfo );
+    void                        removeHosted( VxGUID& onlineId, EHostType hostType );
+    GuiHosted*                  findHosted( VxGUID& onlineId, EHostType hostType );
+    GuiHosted*                  findHosted( HostedId& hostTypeId );
+    GuiHosted*                  updateHostedInfo( HostedInfo& hostedInfo );
     void                        updateHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo& hostedInfo );
     
     virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ) override;
     virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ) override;
 
-    void                        announceHostSearchResult( EHostType hostType, VxGUID& sessionId, GuiHosted* guiHosted );
+    void                        announceHostedListUpdated( HostedId& hostedId, GuiHosted* guiHosted );
+    void                        announceHostedListRemoved( HostedId& hostedId );
+    void                        announceHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId );
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiHosted
-    std::map<VxGUID, GuiHosted*>  m_HostedList;
+    std::map<HostedId, GuiHosted*>  m_HostedList;
+
+    std::vector<GuiHostedListCallback*>  m_HostedListClients;
 };

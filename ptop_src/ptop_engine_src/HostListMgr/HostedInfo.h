@@ -27,6 +27,7 @@ public:
 	HostedInfo() = default;
 	HostedInfo( const HostedInfo& rhs );
     HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
+    virtual ~HostedInfo() = default;
 
 	HostedInfo&				    operator=( const HostedInfo& rhs ); 
 
