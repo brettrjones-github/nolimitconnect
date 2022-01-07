@@ -367,7 +367,7 @@ void PluginBaseHostService::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktH
 //============================================================================
 void PluginBaseHostService::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-    LogMsg( LOG_DEBUG, "PluginChatRoomHost got join offer reply" );
+    m_Engine.getHostedListMgr().onPktHostInfoReply( sktBase, pktHdr, netIdent );
 }
 
 //============================================================================

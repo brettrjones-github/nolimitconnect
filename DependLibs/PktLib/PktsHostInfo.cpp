@@ -45,6 +45,7 @@ void PktHostInfoReply::calcPktLen( void )
 //============================================================================
 bool PktHostInfoReply::setHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
 {
+    m_BlobEntry.resetWrite();
     bool result = m_BlobEntry.setValue( lastModifiedTime );
     result &= m_BlobEntry.setValue( hostTitle );
     result &= m_BlobEntry.setValue( hostDesc );
@@ -54,6 +55,7 @@ bool PktHostInfoReply::setHostTitleAndDescription( std::string& hostTitle, std::
 //============================================================================
 bool PktHostInfoReply::getHostTitleAndDescription( std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
 {
+    m_BlobEntry.resetRead();
     bool result = m_BlobEntry.getValue( lastModifiedTime );
     result &= m_BlobEntry.getValue( hostTitle );
     result &= m_BlobEntry.getValue( hostDesc );

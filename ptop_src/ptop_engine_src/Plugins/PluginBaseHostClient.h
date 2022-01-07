@@ -62,6 +62,8 @@ protected:
     virtual void				replaceConnection           ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override {};
     virtual void				onConnectionLost            ( VxSktBase * sktBase ) override {};
 
+    virtual void				onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+
     //=== vars ===//
     ConnectionMgr&              m_ConnectionMgr; 
     HostClientMgr               m_HostClientMgr;

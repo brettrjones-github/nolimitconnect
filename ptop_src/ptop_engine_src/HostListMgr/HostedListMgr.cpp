@@ -385,7 +385,7 @@ bool HostedListMgr::updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool
 }
 
 //============================================================================
-bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime )
+bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxNetIdent* netIdent )
 {
     bool result{ false };
     lockList();
@@ -423,6 +423,49 @@ bool HostedListMgr::requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxN
     pktReq.getSessionId().initializeWithNewVxGUID();
 
     return sktBase->txPacket( netIdent->getMyOnlineId(), &pktReq);
+}
+
+//============================================================================
+void HostedListMgr::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    bool result{ false };
+    PktHostInfoReply* pktReply = (PktHostInfoReply *)pktHdr;
+
+    VxGUID sessionId = pktReply->getSessionId();
+    EHostType hostType = pktReply->getHostType();
+    std::string hostTitle;
+    std::string hostDesc;
+    int64_t lastModifiedTime{ 0 };
+    ECommErr commErr = pktReply->getCommError();
+    if( eCommErrNone == commErr )
+    {
+        if( pktReply->getHostTitleAndDescription( hostTitle, hostDesc, lastModifiedTime ) )
+        {
+            if( !hostTitle.empty() && !hostDesc.empty() && lastModifiedTime )
+            {
+                result = true;
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "HostedListMgr::onPktHostInfoReply INVALID host info %s", netIdent->getOnlineName() );
+            }
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "HostedListMgr::onPktHostInfoReply extract host info FAILED %s", netIdent->getOnlineName() );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostedListMgr::onPktHostInfoReply error %s %s", DescribeCommError( commErr ), netIdent->getOnlineName() );
+    }
+
+
+    if( result )
+    {
+        LogMsg( LOG_VERBOSE, "HostedListMgr::onPktHostInfoReply success title %s desc %s", hostTitle.c_str(), hostDesc.c_str() );
+        updateHostTitleAndDescription( hostType, netIdent->getMyOnlineId(), hostTitle, hostDesc, lastModifiedTime, netIdent );
+    }
 }
 
 //============================================================================

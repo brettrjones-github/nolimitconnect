@@ -99,3 +99,9 @@ bool PluginBaseHostClient::ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxN
 {
     return m_ThumbXferMgr.requestPluginThumb( sktBase, netIdent, thumbId );
 }
+
+//============================================================================
+void PluginBaseHostClient::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getHostedListMgr().onPktHostInfoReply( sktBase, pktHdr, netIdent );
+}
