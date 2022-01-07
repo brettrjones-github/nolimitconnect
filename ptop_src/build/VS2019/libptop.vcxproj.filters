@@ -907,6 +907,9 @@
     <ClCompile Include="..\..\ptop_engine_src\HostListMgr\HostedListMgr.cpp">
       <Filter>Source Files\HostListMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.cpp">
+      <Filter>Source Files\HostJoinMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1965,6 +1968,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\HostListMgr\HostedListCallbackInterface.h">
       <Filter>Source Files\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.h">
+      <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "HostJoinInfoDb.h"
+#include "HostJoinedLastDb.h"
 
 #include <CoreLib/VxMutex.h>
 
@@ -27,8 +28,9 @@ class VxNetIdent;
 class HostJoinMgr 
 {
     const int USER_HOST_JOIN_DB_VERSION = 1;
+    const int JOINED_LAST_DB_VERSION = 1;
 public:
-	HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
+	HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName );
 	virtual ~HostJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
@@ -67,6 +69,7 @@ protected:
 
     P2PEngine&					m_Engine;
     HostJoinInfoDb              m_HostJoinInfoDb;
+    HostJoinedLastDb            m_HostJoinedLastDb;
     VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  

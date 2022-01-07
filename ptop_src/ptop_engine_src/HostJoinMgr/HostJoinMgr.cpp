@@ -25,9 +25,10 @@
 #include <CoreLib/VxTime.h>
 
 //============================================================================
-HostJoinMgr::HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
+HostJoinMgr::HostJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName )
 : m_Engine( engine )
 , m_HostJoinInfoDb( engine, *this, dbName )
+, m_HostJoinedLastDb( engine, *this, dbJoinedLastName )
 {
 }
 
@@ -39,11 +40,17 @@ void HostJoinMgr::fromGuiUserLoggedOn( void )
     {
         m_Initialized = true;
         // user specific directory should be set
-        std::string dbFileName = VxGetSettingsDirectory();
-        dbFileName += m_HostJoinInfoDb.getDatabaseName(); 
+        std::string dbJoinFileName = VxGetSettingsDirectory();
+        std::string dbJoinedLastName = VxGetSettingsDirectory();
+        dbJoinFileName += m_HostJoinInfoDb.getDatabaseName();
+        dbJoinedLastName += m_HostJoinedLastDb.getDatabaseName();
+
         lockResources();
         m_HostJoinInfoDb.dbShutdown();
-        m_HostJoinInfoDb.dbStartup( USER_HOST_JOIN_DB_VERSION, dbFileName );
+        m_HostJoinInfoDb.dbStartup( USER_HOST_JOIN_DB_VERSION, dbJoinFileName );
+
+        m_HostJoinedLastDb.dbShutdown();
+        m_HostJoinedLastDb.dbStartup( JOINED_LAST_DB_VERSION, dbJoinedLastName );      
 
         clearHostJoinInfoList();
         m_HostJoinInfoDb.getAllHostJoins( m_HostJoinInfoList );

@@ -571,6 +571,7 @@
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.cpp" />
@@ -929,6 +930,7 @@
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32.h" />
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinMgr.h" />
