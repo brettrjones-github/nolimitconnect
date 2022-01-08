@@ -37,7 +37,7 @@ HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMg
 }
 
 //============================================================================
-void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent )
+void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
     if( haveHostAnnList( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
     {
@@ -48,18 +48,39 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInvit
         auto iter = searchMap.find( pluginId );
         if( iter != searchMap.end() )
         {
+            HostedInfo& hostInfo = iter->second.m_HostedInfo;
+            int64_t prevTimestamp  = hostInfo.getHostInfoTimestamp();
             fillSearchEntry( iter->second, hostType, hostAnn, netIdent, false );
+            if( hostInfo.isHostInviteValid() )
+            {
+                if( prevTimestamp != hostInfo.getHostInfoTimestamp() )
+                {
+                    onHostInviteAnnounceUpdated( hostType, iter->second.m_HostedInfo, netIdent, sktBase );
+                }
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "HostServerSearchMgr Invalid Host Invite Announce from %s", netIdent->getOnlineName() );
+            }
         }
         else
         {
             HostSearchEntry searchEntry;
             if( fillSearchEntry( searchEntry, hostType, hostAnn, netIdent, true ) )
             {
-                searchMap[pluginId] = searchEntry;
+                if( searchEntry.m_HostedInfo.isHostInviteValid() )
+                {
+                    searchMap[pluginId] = searchEntry;
+                    onHostInviteAnnounceAdded( hostType, searchEntry.m_HostedInfo, netIdent, sktBase );
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "HostServerSearchMgr Invalid Host Invite Announce from %s", netIdent->getOnlineName() );
+                }
             }
             else
             {
-                LogMsg( LOG_ERROR, "fillSearchEntry failed from %s", netIdent->getOnlineName() );
+                LogMsg( LOG_ERROR, "HostServerSearchMgr fillSearchEntry failed from %s", netIdent->getOnlineName() );
             }
         }
 
@@ -485,4 +506,18 @@ bool HostServerSearchMgr::requestMoreHostInvitesFromNetworkHost( EHostType hostT
     pktReq.setSearchSessionId( searchSessionId );
     pktReq.setNextSearchOnlineId( nextHostOnlineId );
     return m_Plugin.txPacket( netIdent, sktBase, &pktReq );
+}
+
+//============================================================================
+void HostServerSearchMgr::onHostInviteAnnounceAdded( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase )
+{
+    // NOTE: search mutex is still locked
+    m_Engine.getHostedListMgr().onHostInviteAnnounceAdded( hostType, hostedInfo, netIdent, sktBase );
+}
+
+//============================================================================
+void HostServerSearchMgr::onHostInviteAnnounceUpdated( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase )
+{
+    // NOTE: search mutex is still locked
+    m_Engine.getHostedListMgr().onHostInviteAnnounceAdded( hostType, hostedInfo, netIdent, sktBase );
 }

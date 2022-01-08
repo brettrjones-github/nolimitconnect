@@ -31,6 +31,8 @@ public:
 
 	HostedInfo&				    operator=( const HostedInfo& rhs ); 
 
+    bool                        isHostInviteValid( void );
+
     virtual void				setOnlineId( VxGUID& onlineId )                     { m_OnlineId = onlineId; }
     virtual VxGUID&             getOnlineId( void )                                 { return m_OnlineId; }
 

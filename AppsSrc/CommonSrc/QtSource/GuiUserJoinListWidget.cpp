@@ -13,10 +13,10 @@
 //============================================================================
 
 
-#include "UserListItem.h"
-#include "UserListWidget.h"
-#include "GuiUserMgr.h"
-#include "GuiUserSessionBase.h"
+#include "GuiUserJoinListItem.h"
+#include "GuiUserJoinListWidget.h"
+#include "GuiUserJoinMgr.h"
+#include "GuiUserJoinSession.h"
 
 #include "MyIcons.h"
 #include "AppletPopupMenu.h"
@@ -27,18 +27,22 @@
 #include <CoreLib/VxDebug.h>
  
 //============================================================================
-UserListWidget::UserListWidget( QWidget * parent )
-: ListWidgetBase( parent )
+GuiUserJoinListWidget::GuiUserJoinListWidget( QWidget * parent )
+: QListWidget( parent )
+, m_MyApp( GetAppInstance() )
+, m_Engine( m_MyApp.getEngine() )
+, m_UserJoinMgr( m_MyApp.getUserJoinMgr() )
+, m_ThumbMgr( m_MyApp.getThumbMgr() )
 {
 	QListWidget::setSortingEnabled( true );
 	sortItems( Qt::DescendingOrder );
 
-    connect( &m_UserMgr, SIGNAL(signalMyIdentUpdated( GuiUser*)),           this, SLOT(slotMyIdentUpdated( GuiUser*))) ;
+    connect( &m_UserJoinMgr, SIGNAL(signalMyIdentUpdated( GuiUserJoin*)),           this, SLOT(slotMyIdentUpdated( GuiUserJoin*))) ;
 
-    connect( &m_UserMgr, SIGNAL(signalUserAdded( GuiUser*)),                this, SLOT(slotUserAdded( GuiUser*))) ;
-    connect( &m_UserMgr, SIGNAL(signalUserRemoved( VxGUID)),                this, SLOT(slotUserRemoved( VxGUID))) ;
-    connect( &m_UserMgr, SIGNAL(signalUserUpdated( GuiUser*)),              this, SLOT(slotUserUpdated( GuiUser*))) ;
-    connect( &m_UserMgr, SIGNAL(signalUserOnlineStatus( GuiUser*,bool)),    this, SLOT(slotUserOnlineStatus( GuiUser*,bool))) ;
+    connect( &m_UserJoinMgr, SIGNAL(signalUserJoinAdded( GuiUserJoin*)),                this, SLOT(slotUserJoinAdded( GuiUserJoin*))) ;
+    connect( &m_UserJoinMgr, SIGNAL(signalUserJoinRemoved( VxGUID)),                this, SLOT(slotUserJoinRemoved( VxGUID))) ;
+    connect( &m_UserJoinMgr, SIGNAL(signalUserJoinUpdated( GuiUserJoin*)),              this, SLOT(slotUserJoinUpdated( GuiUserJoin*))) ;
+    connect( &m_UserJoinMgr, SIGNAL(signalUserJoinOnlineStatus( GuiUserJoin*,bool)),    this, SLOT(slotUserJoinOnlineStatus( GuiUserJoin*,bool))) ;
 
     connect( &m_ThumbMgr, SIGNAL( signalThumbAdded( GuiThumb* ) ),          this, SLOT( slotThumbAdded( GuiThumb* ) ) );
     connect( &m_ThumbMgr, SIGNAL(signalThumbUpdated( GuiThumb*)),           this, SLOT(slotThumbUpdated( GuiThumb*))) ;
@@ -48,20 +52,20 @@ UserListWidget::UserListWidget( QWidget * parent )
     //connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
     //connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-    setUserViewType( eUserViewTypeEverybody );
+    setUserJoinViewType( eUserJoinViewTypeEverybody );
 }
 
 //============================================================================
-UserListItem* UserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
+GuiUserJoinListItem* GuiUserJoinListWidget::sessionToWidget( GuiUserJoinSession* userSession )
 {
-    UserListItem* userItem = new UserListItem(this);
-    userItem->setUserSession( userSession );
+    GuiUserJoinListItem* userItem = new GuiUserJoinListItem(this);
+    userItem->setUserJoinSession( userSession );
     userItem->setSizeHint( userItem->calculateSizeHint() );
 
-    connect( userItem, SIGNAL(signalUserListItemClicked(UserListItem *)),           this, SLOT(slotUserListItemClicked(UserListItem *)) );
-    connect( userItem, SIGNAL(signalAvatarButtonClicked(UserListItem *)),	        this, SLOT(slotAvatarButtonClicked(UserListItem *)) );
-    connect( userItem, SIGNAL(signalMenuButtonClicked(UserListItem *)),	            this, SLOT(slotMenuButtonClicked(UserListItem *)) );
-    connect( userItem, SIGNAL(signalFriendshipButtonClicked(UserListItem *)),		this, SLOT(slotFriendshipButtonClicked(UserListItem *)) );
+    connect( userItem, SIGNAL(signalUserJoinListItemClicked(QListWidgetItem *)),	    this, SLOT(slotUserJoinListItemClicked(QListWidgetItem *)) );
+    connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserJoinListItem *)),	        this, SLOT(slotAvatarButtonClicked(GuiUserJoinListItem *)) );
+    connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserJoinListItem *)),	            this, SLOT(slotMenuButtonClicked(GuiUserJoinListItem *)) );
+    connect( userItem, SIGNAL(signalFriendshipButtonClicked(GuiUserJoinListItem *)),		this, SLOT(slotFriendshipButtonClicked(GuiUserJoinListItem *)) );
 
     userItem->updateWidgetFromInfo();
 
@@ -69,21 +73,27 @@ UserListItem* UserListWidget::sessionToWidget( GuiUserSessionBase* userSession )
 }
 
 //============================================================================
-GuiUserSessionBase* UserListWidget::widgetToSession( UserListItem * item )
+GuiUserJoinSession* GuiUserJoinListWidget::widgetToSession( GuiUserJoinListItem * item )
 {
-    return item->getUserSession();
+    return item->getUserJoinSession();
 }
 
 //============================================================================
-GuiUserSessionBase * UserListWidget::findSession( VxGUID& lclSessionId )
+MyIcons&  GuiUserJoinListWidget::getMyIcons( void )
+{
+	return m_MyApp.getMyIcons();
+}
+
+//============================================================================
+GuiUserJoinSession * GuiUserJoinListWidget::findSession( VxGUID& lclSessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        UserListItem* listItem =  (UserListItem*)item( iRow );
+        GuiUserJoinListItem* listItem =  (GuiUserJoinListItem*)item( iRow );
         if( listItem )
         {
-            GuiUserSessionBase * userSession = listItem->getUserSession();
+            GuiUserJoinSession * userSession = listItem->getUserJoinSession();
             if( userSession && userSession->getSessionId() == lclSessionId )
             {
                 return userSession;
@@ -95,15 +105,15 @@ GuiUserSessionBase * UserListWidget::findSession( VxGUID& lclSessionId )
 }
 
 //============================================================================
-UserListItem* UserListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
+GuiUserJoinListItem* GuiUserJoinListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        UserListItem*  userItem = (UserListItem*)item( iRow );
+        GuiUserJoinListItem*  userItem = (GuiUserJoinListItem*)item( iRow );
         if( userItem )
         {
-            GuiUserSessionBase * userSession = userItem->getUserSession();
+            GuiUserJoinSession * userSession = userItem->getUserJoinSession();
             if( userSession && ( userSession->getSessionId() == sessionId ) )
             {
                 return userItem;
@@ -115,15 +125,15 @@ UserListItem* UserListWidget::findListEntryWidgetBySessionId( VxGUID& sessionId 
 }
 
 //============================================================================
-UserListItem* UserListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
+GuiUserJoinListItem* GuiUserJoinListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
-        UserListItem*  userItem = (UserListItem*)item( iRow );
+        GuiUserJoinListItem*  userItem = (GuiUserJoinListItem*)item( iRow );
         if( userItem )
         {
-            GuiUserSessionBase * userSession = userItem->getUserSession();
+            GuiUserJoinSession * userSession = userItem->getUserJoinSession();
             if( userSession && ( userSession->getMyOnlineId() == onlineId ) )
             {
                 return userItem;
@@ -135,19 +145,7 @@ UserListItem* UserListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 }
 
 //============================================================================
-void UserListWidget::slotUserListItemClicked( UserListItem* userItem )
-{
-	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-	{
-		return;
-	}
-
-	m_ClickEventTimer.startTimer();
-    onUserListItemClicked(userItem);
-}
-
-//============================================================================
-void UserListWidget::slotAvatarButtonClicked( UserListItem* userItem )
+void GuiUserJoinListWidget::slotAvatarButtonClicked( GuiUserJoinListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
     {
@@ -159,7 +157,7 @@ void UserListWidget::slotAvatarButtonClicked( UserListItem* userItem )
 }
 
 //============================================================================
-void UserListWidget::slotMenuButtonClicked( UserListItem* userItem )
+void GuiUserJoinListWidget::slotMenuButtonClicked( GuiUserJoinListItem* userItem )
 {
 	if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
 	{
@@ -171,35 +169,23 @@ void UserListWidget::slotMenuButtonClicked( UserListItem* userItem )
 }
 
 //============================================================================
-void UserListWidget::slotFriendshipButtonClicked( UserListItem* userItem )
+void GuiUserJoinListWidget::addUserJoinToList( EHostType userType, VxGUID& sessionId, GuiUserJoin * userIdent )
 {
-    if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
-    {
-        return;
-    }
+    GuiUserJoinSession* userSession = new GuiUserJoinSession( userType, sessionId, userIdent, this );
 
-    m_ClickEventTimer.startTimer();
-    onFriendshipButtonClicked( userItem );
+    addOrUpdateUserJoinSession( userSession );
 }
 
 //============================================================================
-void UserListWidget::addUserToList( EHostType userType, VxGUID& sessionId, GuiUser * userIdent )
+GuiUserJoinListItem* GuiUserJoinListWidget::addOrUpdateUserJoinSession( GuiUserJoinSession* userSession )
 {
-    GuiUserSessionBase* userSession = new GuiUserSessionBase( userType, sessionId, userIdent, this );
-
-    addOrUpdateUserSession( userSession );
-}
-
-//============================================================================
-UserListItem* UserListWidget::addOrUpdateUserSession( GuiUserSessionBase* userSession )
-{
-    UserListItem* userItem = findListEntryWidgetBySessionId( userSession->getSessionId() );
+    GuiUserJoinListItem* userItem = findListEntryWidgetBySessionId( userSession->getSessionId() );
     if( userItem )
     {
-        GuiUserSessionBase* userOldSession = userItem->getUserSession();
+        GuiUserJoinSession* userOldSession = userItem->getUserJoinSession();
         if( userOldSession != userSession )
         {
-            userItem->setUserSession( userSession );
+            userItem->setUserJoinSession( userSession );
             if( !userOldSession->parent() )
             {
                 delete userOldSession;
@@ -230,26 +216,12 @@ UserListItem* UserListWidget::addOrUpdateUserSession( GuiUserSessionBase* userSe
 }
 
 //============================================================================
-void UserListWidget::onUserListItemClicked( UserListItem* userItem )
-{
-    LogMsg( LOG_DEBUG, "onUserListItemClicked" );
-    if( userItem )
-    {
-        GuiUserSessionBase* userSession = userItem->getUserSession();
-        if( userSession )
-        {
-            emit signalUserListItemClicked( userSession, userItem );
-        }
-    }
-}
-
-//============================================================================
-void UserListWidget::onAvatarButtonClicked( UserListItem* userItem )
+void GuiUserJoinListWidget::onAvatarButtonClicked( GuiUserJoinListItem* userItem )
 {
     LogMsg( LOG_DEBUG, "onAvatarButtonClicked" );
     if( userItem )
     {
-        GuiUserSessionBase* userSession = userItem->getUserSession();
+        GuiUserJoinSession* userSession = userItem->getUserJoinSession();
         if( userSession )
         {
             emit signalAvatarButtonClicked( userSession, userItem );
@@ -258,122 +230,106 @@ void UserListWidget::onAvatarButtonClicked( UserListItem* userItem )
 }
 
 //============================================================================
-void UserListWidget::onMenuButtonClicked( UserListItem* userItem )
+void GuiUserJoinListWidget::onMenuButtonClicked( GuiUserJoinListItem* userItem )
 {
-    LogMsg( LOG_DEBUG, "UserListWidget::onMenuButtonClicked" );
+    LogMsg( LOG_DEBUG, "onMenuButtonClicked" );
     if( userItem )
     {
-        GuiUserSessionBase* userSession = userItem->getUserSession();
+        GuiUserJoinSession* userSession = userItem->getUserJoinSession();
         if( userSession )
         {
-            // emit signalFriendClicked( m_SelectedFriend );
+            emit signalMenuButtonClicked( userSession, userItem );
 
-            AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
-            if( popupMenu )
+            if( userSession->getUserIdent() )
             {
-                if( getAppletType() == eAppletMultiMessenger )
+                AppletPopupMenu* popupMenu = dynamic_cast<AppletPopupMenu*>(m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast<QWidget*>(this->parent()) ));
+                if( popupMenu )
                 {
                     popupMenu->showFriendMenu( userSession->getUserIdent() );
                 }
-                else
-                {
-                    popupMenu->showUserSessionMenu( getAppletType(), userSession );
-                }            
             }
         }
     }
 }
 
 //============================================================================
-void UserListWidget::onFriendshipButtonClicked( UserListItem* userItem )
-{
-    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
-    if( userItem )
-    {
-        GuiUserSessionBase* userSession = userItem->getUserSession();
-        if( userSession && userSession->getUserIdent() )
-        {
-            launchChangeFriendship( userSession->getUserIdent() );
-        }
-    }
-}
-
-//============================================================================
-void UserListWidget::slotMyIdentUpdated( GuiUser* user )
+void GuiUserJoinListWidget::slotMyIdentUpdated( GuiUserJoin* user )
 {
     if( getShowMyself() )
     {
-        updateUser( user );
+        updateUserJoin( user );
     }
 }
 
 //============================================================================
-void UserListWidget::slotUserAdded( GuiUser* user )
+void GuiUserJoinListWidget::slotUserJoinAdded( GuiUserJoin* user )
 {
-    updateUser( user );
+    updateUserJoin( user );
 }
 
 //============================================================================
-void UserListWidget::slotUserRemoved( VxGUID onlineId )
+void GuiUserJoinListWidget::slotUserJoinRemoved( VxGUID onlineId )
 {
-    removeUser( onlineId );
+    removeUserJoin( onlineId );
 }
 
 //============================================================================
-void UserListWidget::slotUserUpdated( GuiUser* user )
+void GuiUserJoinListWidget::slotUserJoinUpdated( GuiUserJoin* user )
 {
-    updateUser( user );
+    updateUserJoin( user );
 }
 
 //============================================================================
-void UserListWidget::slotUserOnlineStatus( GuiUser* user, bool isOnline )
+void GuiUserJoinListWidget::slotUserJoinOnlineStatus( GuiUserJoin* user, bool isOnline )
 {
-    updateUser( user );
+    updateUserJoin( user );
 }
 
 //============================================================================
-void UserListWidget::slotThumbAdded( GuiThumb* thumb )
-{
-    updateThumb( thumb );
-}
-
-//============================================================================
-void UserListWidget::slotThumbUpdated( GuiThumb* thumb )
+void GuiUserJoinListWidget::slotThumbAdded( GuiThumb* thumb )
 {
     updateThumb( thumb );
 }
 
 //============================================================================
-void UserListWidget::slotThumbRemoved( VxGUID thumbId )
+void GuiUserJoinListWidget::slotThumbUpdated( GuiThumb* thumb )
+{
+    updateThumb( thumb );
+}
+
+//============================================================================
+void GuiUserJoinListWidget::slotThumbRemoved( VxGUID thumbId )
 {
     // TODO
 }
 
 //============================================================================
-void UserListWidget::setUserViewType( EUserViewType viewType )
+void GuiUserJoinListWidget::setUserJoinViewType( EUserJoinViewType viewType )
 {
-    if( viewType != m_UserViewType )
+    if( viewType != m_UserJoinViewType )
     {
-        m_UserViewType = viewType;
+        m_UserJoinViewType = viewType;
         refreshList();
     }
 }
 
 //============================================================================
-void UserListWidget::refreshList( void )
+void GuiUserJoinListWidget::refreshList( void )
 {
-    clearUserList();
-    std::vector<GuiUser *> userList;
+    clearUserJoinList();
+    std::vector<GuiUserJoin *> userList;
 
-    if( isListViewMatch( m_UserMgr.getMyIdent() ) )
+    if( isListViewMatch( m_MyApp.getUserMgr().getMyIdent() ) )
     {
-        userList.push_back( m_UserMgr.getMyIdent() );
+        // temporary for dev.. add ourself
+        GuiUserJoin* myself = m_UserJoinMgr.updateUserJoin( &m_MyApp.getUserMgr().getMyIdent()->getNetIdent() );
+        userList.push_back( myself );
     }
 
-    std::map<VxGUID, GuiUser*>& mgrList = m_UserMgr.getUserList();
+    std::map<VxGUID, GuiUserJoin*>& mgrList = m_UserJoinMgr.getUserJoinList();
     for( auto iter = mgrList.begin(); iter != mgrList.end(); ++iter )
     {
-        if( isListViewMatch( iter->second ) )
+        if( isListViewMatch( iter->second->getUser() ) )
         {
             userList.push_back( iter->second );
         }
@@ -381,26 +337,26 @@ void UserListWidget::refreshList( void )
 
     for( auto user : userList )
     {
-        updateUser( user );
+        updateUserJoin( user );
     }
 }
 
 
 //============================================================================
-void UserListWidget::clearUserList( void )
+void GuiUserJoinListWidget::clearUserJoinList( void )
 {
-    m_UserCache.clear();
+    m_UserJoinCache.clear();
     for(int i = 0; i < count(); ++i)
     {
         QListWidgetItem* userItem = item(i);
-        delete ((UserListItem *)userItem);
+        delete ((GuiUserJoinListItem *)userItem);
     }
 
     clear();
 }
 
 //============================================================================
-bool UserListWidget::isListViewMatch( GuiUser * user )
+bool GuiUserJoinListWidget::isListViewMatch( GuiUser* user )
 {
     if( user && !user->isIgnored())
     {
@@ -408,29 +364,25 @@ bool UserListWidget::isListViewMatch( GuiUser * user )
         { 
             return getShowMyself();
         }
-        else if( eUserViewTypeEverybody == getUserViewType() )
+        else if( eUserJoinViewTypeEverybody == getUserJoinViewType() )
         {
             return true;
         }
-        else if( eUserViewTypeFriends == getUserViewType() )
+        else if( eUserJoinViewTypeFriends == getUserJoinViewType() )
         {
             return user->isFriend() || user->isAdmin();
         }
-        else if( eUserViewTypeGroup == getUserViewType() )
+        else if( eUserJoinViewTypeGroup == getUserJoinViewType() )
         {
             return user->isGroupHosted() && !user->isAnonymous();
         }
-        else if( eUserViewTypeChatRoom == getUserViewType() )
+        else if( eUserJoinViewTypeChatRoom == getUserJoinViewType() )
         {
             return user->isChatRoomHosted() && !user->isAnonymous();
         }
-        else if( eUserViewTypeRandomConnect == getUserViewType() )
+        else if( eUserJoinViewTypeRandomConnect == getUserJoinViewType() )
         {
             return user->isRandomConnectHosted() && !user->isAnonymous();
-        }
-        else if( eUserViewTypeNearby == getUserViewType() )
-        {
-            return user->isNearby();
         }
 
         if( user->isPeerHosted() && user->isFriend() )
@@ -438,7 +390,7 @@ bool UserListWidget::isListViewMatch( GuiUser * user )
             return true;
         }
     }
-    else if( user && user->isIgnored() && eUserViewTypeIgnored == getUserViewType() )
+    else if( user && user->isIgnored() && eUserJoinViewTypeIgnored == getUserJoinViewType() )
     {
         return true;
     }
@@ -447,17 +399,17 @@ bool UserListWidget::isListViewMatch( GuiUser * user )
 }
 
 //============================================================================
-void UserListWidget::updateUser( GuiUser * user )
+void GuiUserJoinListWidget::updateUserJoin( GuiUserJoin * userJoin )
 {
-    if( isListViewMatch( user ) )
+    if( isListViewMatch( userJoin->getUser() ) )
     {
-        auto iter = m_UserCache.find( user->getMyOnlineId() );
-        if( iter == m_UserCache.end() )
+        auto iter = m_UserJoinCache.find( userJoin->getUser()->getMyOnlineId() );
+        if( iter == m_UserJoinCache.end() )
         {
-            GuiUserSessionBase * userSession = new GuiUserSessionBase( user, this );
+            GuiUserJoinSession * userSession = new GuiUserJoinSession( userJoin, this );
             if( userSession )
             {
-                UserListItem* userItem = sessionToWidget( userSession );
+                GuiUserJoinListItem* userItem = sessionToWidget( userSession );
                 if( 0 == count() )
                 {
                     LogMsg( LOG_INFO, "add user %s", userSession->getOnlineName().c_str() );
@@ -470,19 +422,19 @@ void UserListWidget::updateUser( GuiUser * user )
                 }
 
                 setItemWidget( (QListWidgetItem *)userItem, (QWidget *)userItem );
-                m_UserCache[user->getMyOnlineId()] = userSession;
+                m_UserJoinCache[userJoin->getUser()->getMyOnlineId()] = userSession;
                 onListItemAdded( userSession, userItem );
             }
         }
         else
         {
-            UserListItem* userItem = findListEntryWidgetByOnlineId( user->getMyOnlineId() );
+            GuiUserJoinListItem* userItem = findListEntryWidgetByOnlineId( userJoin->getUser()->getMyOnlineId() );
             if( userItem )
             {
-                GuiUserSessionBase * userSession = userItem->getUserSession();
+                GuiUserJoinSession * userSession = userItem->getUserJoinSession();
                 if( userSession )
                 {
-                    onListItemUpdated( userItem->getUserSession(), userItem );
+                    onListItemUpdated( userItem->getUserJoinSession(), userItem );
                 }
                
                 userItem->update();
@@ -492,16 +444,16 @@ void UserListWidget::updateUser( GuiUser * user )
 }
 
 //============================================================================
-void UserListWidget::removeUser( VxGUID& onlineId )
+void GuiUserJoinListWidget::removeUserJoin( VxGUID& onlineId )
 {
-    auto iter = m_UserCache.find( onlineId );
-    if( iter != m_UserCache.end() )
+    auto iter = m_UserJoinCache.find( onlineId );
+    if( iter != m_UserJoinCache.end() )
     {
-        m_UserCache.erase( iter );
-        UserListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
+        m_UserJoinCache.erase( iter );
+        GuiUserJoinListItem* userItem = findListEntryWidgetByOnlineId( onlineId );
         if( userItem )
         {
-            GuiUserSessionBase * userSession = userItem->getUserSession();
+            GuiUserJoinSession * userSession = userItem->getUserJoinSession();
             delete userItem;
             delete userSession;
         }
@@ -509,9 +461,9 @@ void UserListWidget::removeUser( VxGUID& onlineId )
 }
 
 //============================================================================
-void UserListWidget::updateThumb( GuiThumb* thumb )
+void GuiUserJoinListWidget::updateThumb( GuiThumb* thumb )
 {
-    UserListItem* userItem = findListEntryWidgetByOnlineId( thumb->getCreatorId() );
+    GuiUserJoinListItem* userItem = findListEntryWidgetByOnlineId( thumb->getCreatorId() );
     if( userItem )
     {
         userItem->updateThumb( thumb );
@@ -519,45 +471,42 @@ void UserListWidget::updateThumb( GuiThumb* thumb )
 }
 
 //============================================================================
-void UserListWidget::onListItemAdded( GuiUserSessionBase* userSession, UserListItem* userItem )
+void GuiUserJoinListWidget::onListItemAdded( GuiUserJoinSession* userSession, GuiUserJoinListItem* userItem )
 {
     onListItemUpdated( userSession, userItem );
 }
 
 //============================================================================
-void UserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, UserListItem* userItem )
+void GuiUserJoinListWidget::onListItemUpdated( GuiUserJoinSession* userSession, GuiUserJoinListItem* userItem )
 {
     if( userSession && userItem && userSession->getUserIdent() )
     {
         EHostType hostType = eHostTypeUnknown;
-        EPluginType pluginType = ePluginTypeInvalid;
-        switch( m_UserViewType )
+        switch( m_UserJoinViewType )
         {
-        case eUserViewTypeGroup:
+        case eUserJoinViewTypeGroup:
             hostType = eHostTypeGroup;
-            pluginType = ePluginTypeClientGroup;
             break;
-        case eUserViewTypeChatRoom:
+        case eUserJoinViewTypeChatRoom:
             hostType = eHostTypeChatRoom;
-            pluginType = ePluginTypeClientChatRoom;
             break;
-        case eUserViewTypeRandomConnect:
+        case eUserJoinViewTypeRandomConnect:
             hostType = eHostTypeRandomConnect;
-            pluginType = ePluginTypeClientRandomConnect;
             break;
         default:
             hostType = eHostTypePeerUser;
-            pluginType = ePluginTypeHostPeerUser;
         }
         
-        VxPushButton* avatarButton = userItem->getAvatarButton();
+        VxPushButton* avatarButton = userItem->getIdentAvatarButton();
         GuiUser* user = userSession->getUserIdent();
-
-        QImage	avatarImage;
-        bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, pluginType, avatarImage, true );
-        if( havAvatarImage && avatarButton )
+        if( avatarButton && user )
         {
-            avatarButton->setIconOverrideImage( avatarImage );
+            QImage	avatarImage;
+            bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
+            if( havAvatarImage && avatarButton )
+            {
+                avatarButton->setIconOverrideImage( avatarImage );
+            }
         }
     }
 }

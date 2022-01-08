@@ -13,14 +13,14 @@
 //============================================================================
 
 #include "AppCommon.h"
-#include "UserJoinListItem.h"
+#include "GuiUserJoinListItem.h"
 #include "GuiUserJoinSession.h"
 #include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-UserJoinListItem::UserJoinListItem(QWidget *parent  )
+GuiUserJoinListItem::GuiUserJoinListItem(QWidget *parent  )
 : IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 , m_ConnectMgr( m_MyApp.getConnectMgr() )
@@ -31,7 +31,7 @@ UserJoinListItem::UserJoinListItem(QWidget *parent  )
 }
 
 //============================================================================
-UserJoinListItem::~UserJoinListItem()
+GuiUserJoinListItem::~GuiUserJoinListItem()
 {
     GuiUserJoinSession * hostSession = (GuiUserJoinSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
     if( hostSession && !hostSession->parent() )
@@ -41,70 +41,70 @@ UserJoinListItem::~UserJoinListItem()
 }
 
 //============================================================================
-QSize UserJoinListItem::calculateSizeHint( void )
+QSize GuiUserJoinListItem::calculateSizeHint( void )
 {
     return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize().height() + 8 ) );
 }
 
 //============================================================================
-MyIcons& UserJoinListItem::getMyIcons( void )
+MyIcons& GuiUserJoinListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void UserJoinListItem::resizeEvent(QResizeEvent* resizeEvent)
+void GuiUserJoinListItem::resizeEvent(QResizeEvent* resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
     updateWidgetFromInfo();
 }
 
 //============================================================================
-void UserJoinListItem::mousePressEvent(QMouseEvent * event)
+void GuiUserJoinListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
     // emit signalUserJoinListItemClicked( this );
 }
 
 //============================================================================
-void UserJoinListItem::setUserJoinSession( GuiUserJoinSession* hostSession )
+void GuiUserJoinListItem::setUserJoinSession( GuiUserJoinSession* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)hostSession) );
 }
 
 //============================================================================
-GuiUserJoinSession * UserJoinListItem::getUserJoinSession( void )
+GuiUserJoinSession * GuiUserJoinListItem::getUserJoinSession( void )
 {
     return (GuiUserJoinSession *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-void UserJoinListItem::onIdentAvatarButtonClicked()
+void GuiUserJoinListItem::onIdentAvatarButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "UserJoinListItem::slotIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "GuiUserJoinListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserJoinListItem::onIdentMenuButtonClicked( void )
+void GuiUserJoinListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void UserJoinListItem::updateWidgetFromInfo( void )
+void GuiUserJoinListItem::updateWidgetFromInfo( void )
 {
     GuiUserJoinSession* hostSession = getUserJoinSession();
     if( nullptr == hostSession )
     {
-        LogMsg( LOG_DEBUG, "UserJoinListItem::updateWidgetFromInfo null user session" );
+        LogMsg( LOG_DEBUG, "GuiUserJoinListItem::updateWidgetFromInfo null user session" );
         return;
     }
 
     GuiUser * hostIdent = hostSession->getUserIdent();
     if( nullptr == hostIdent )
     {
-        LogMsg( LOG_DEBUG, "UserJoinListItem::updateWidgetFromInfo null gui user" );
+        LogMsg( LOG_DEBUG, "GuiUserJoinListItem::updateWidgetFromInfo null gui user" );
         return;
     }
 
@@ -112,7 +112,7 @@ void UserJoinListItem::updateWidgetFromInfo( void )
 }
 
 //============================================================================
-void UserJoinListItem::updateThumb( GuiThumb* thumb )
+void GuiUserJoinListItem::updateThumb( GuiThumb* thumb )
 {
     if( thumb )
     {

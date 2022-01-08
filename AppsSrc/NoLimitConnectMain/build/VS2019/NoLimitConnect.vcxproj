@@ -333,9 +333,12 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoin.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinList.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListItem.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinSession.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserListEntryWidget.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.cpp" />
@@ -439,10 +442,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ToGuiHardwareCtrlClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ToGuiThumbUpdateClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ToGuiUserUpdateClient.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserJoinListItem.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserJoinListWidget.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserListItem.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VideoSinkGrabber.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VidWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VxAppDisplay.cpp" />
@@ -556,7 +555,10 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserBase.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoin.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoinList.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListItem.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoinSession.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserMgrGuiUserUpdateClient.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserMgrGuiUserUpdateInterface.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h" />
@@ -631,10 +633,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxAppTheme.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VxAppDisplay.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VidWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserListWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserListItem.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserJoinListWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserJoinListItem.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\TodGameWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\TodGameLogic.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\TitleBarWidget.h" />

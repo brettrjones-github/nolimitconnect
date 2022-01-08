@@ -21,12 +21,12 @@
 class GuiUserSessionBase;
 class GuiThumb;
 
-class UserListItem : public IdentWidget, public QListWidgetItem
+class GuiUserListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	UserListItem( QWidget *parent=0 );
-	virtual ~UserListItem();
+	GuiUserListItem( QWidget *parent=0 );
+	virtual ~GuiUserListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
@@ -47,9 +47,9 @@ public:
     QSize                       calculateSizeHint( void );
 
 signals:
-    void						signalUserListItemClicked( UserListItem * poItemWidget );
-	void						signalAvatarButtonClicked( UserListItem* listEntryWidget );
-	void						signalMenuButtonClicked( UserListItem* listEntryWidget );
+    void						signalGuiUserListItemClicked( GuiUserListItem * poItemWidget );
+	void						signalAvatarButtonClicked( GuiUserListItem* listEntryWidget );
+	void						signalMenuButtonClicked( GuiUserListItem* listEntryWidget );
 
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;

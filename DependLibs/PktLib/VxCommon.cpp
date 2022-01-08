@@ -56,7 +56,6 @@ RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
     std::string strIPv4 = ipAddr;
     vx_assert( port );
 
-    //LogMsg( LOG_INFO, "GenerateConnectionKey: creating pwd\n");
     std::string strPwd;
     StdStringFormat( strPwd, "%d%llx%llx%s%s%d",
         port,
@@ -67,7 +66,7 @@ RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
         cryptoPort
     );
 
-    LogModule( eLogTcpData, LOG_VERBOSE, "GenerateConnectionKey: setting Key %s for %s:%d %d", strPwd.c_str(), strIPv4.c_str(), port, cryptoPort );
+    // LogModule( eLogTcpData, LOG_VERBOSE, "GenerateConnectionKey: setting Key %s for %s:%d %d", strPwd.c_str(), strIPv4.c_str(), port, cryptoPort );
     poRetKey->setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
     return 0;
 }

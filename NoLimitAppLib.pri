@@ -222,9 +222,12 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUser.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserBase.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListItem.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListWidget.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoin.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinList.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinListItem.h \
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinListWidget.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinMgr.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.h \
@@ -321,10 +324,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiUserUpdateInterface.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiThumbUpdateClient.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiThumbUpdateInterface.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserJoinListItem.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserJoinListWidget.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserListItem.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/TitleBarWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VideoSinkGrabber.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAspectFrame.h \
@@ -579,8 +578,11 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserBase.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoin.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinList.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinListItem.cpp \
+	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinListWidget.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinMgr.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinSession.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserMgr.cpp \
@@ -683,10 +685,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ToGuiHardwareCtrlClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiUserUpdateClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/ToGuiThumbUpdateClient.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserJoinListItem.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserJoinListWidget.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserListItem.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/UserListWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VideoSinkGrabber.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxAspectFrame.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/VxComboBox.cpp \

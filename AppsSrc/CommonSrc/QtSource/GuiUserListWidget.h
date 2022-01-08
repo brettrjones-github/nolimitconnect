@@ -14,21 +14,11 @@
 //============================================================================
 
 #include "ListWidgetBase.h"
-
-enum EUserListViewType
-{
-    eUserListViewTypeNone,
-    eUserListViewTypeFriends,
-    eUserListViewTypeGroupHosted,
-    eUserListViewTypeChatRoomHosted,
-    eUserListViewTypeRandomConnectHosted,
-
-    eMaxUserListViewType
-};
+#include "AppDefs.h"
 
 class GuiUserMgr;
 class GuiUserSessionBase;
-class UserListItem;
+class GuiUserListItem;
 class PluginSetting;
 class VxNetIdent;
 
@@ -39,27 +29,33 @@ class GuiUserListWidget : public ListWidgetBase
 public:
 	GuiUserListWidget( QWidget * parent );
 
+    void						setAppletType( EApplet appletType )     { m_AppletType = appletType; };
+    EApplet						getAppletType( void )                   { return m_AppletType; };
+
+    void                        setUserViewType( EUserViewType viewType );
+    EUserViewType               getUserViewType( void )                 { return m_ViewType; };
+
     void                        clearUserList( void );
 
     void                        setShowMyself( bool showMe )            { m_ShowMyself = showMe; }
     bool                        getShowMyself( void )                   { return m_ShowMyself; }
 
     void                        addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent );
-    UserListItem*               addOrUpdateSession( GuiUserSessionBase* hostSession );
+    GuiUserListItem*            addOrUpdateSession( GuiUserSessionBase* hostSession );
 
     GuiUserSessionBase*         findSession( VxGUID& lclSessionId );
-    UserListItem*               findListEntryWidgetBySessionId( VxGUID& sessionId );
-    UserListItem*               findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    GuiUserListItem*            findListEntryWidgetBySessionId( VxGUID& sessionId );
+    GuiUserListItem*            findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
-    void                        setUserListViewType( EUserListViewType viewType );
-
+    void                        updateUser( GuiUser* user );
+    void                        removeUser( VxGUID& onlineId );
     virtual GuiUserSessionBase* makeSession( GuiUser* user );
 
 signals:
-    void                        signalUserListItemClicked( GuiUserSessionBase* hostSession, UserListItem* hostItem );
-    void                        signalAvatarButtonClicked( GuiUserSessionBase* hostSession, UserListItem* hostItem );
-    void                        signalFriendshipButtonClicked( GuiUserSessionBase* hostSession, UserListItem* hostItem );
-    void                        signalMenuButtonClicked( GuiUserSessionBase* hostSession, UserListItem* hostItem ); 
+    void                        signalUserListItemClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
+    void                        signalAvatarButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
+    void                        signalFriendshipButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
+    void                        signalMenuButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem ); 
 
 protected slots:
     void                        slotMyIdentUpdated( GuiUser* user );
@@ -70,31 +66,39 @@ protected slots:
     void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
     
 	void						slotItemClicked( QListWidgetItem* item );
-    void                        slotUserListItemClicked( UserListItem* hostItem );
-    void                        slotAvatarButtonClicked( UserListItem* hostItem );
-    void                        slotFriendshipButtonClicked( UserListItem* hostItem );
-    void                        slotMenuButtonClicked( UserListItem* hostItem ); 
+    void                        slotUserListItemClicked( GuiUserListItem* hostItem );
+    void                        slotAvatarButtonClicked( GuiUserListItem* hostItem );
+    void                        slotFriendshipButtonClicked( GuiUserListItem* hostItem );
+    void                        slotMenuButtonClicked( GuiUserListItem* hostItem ); 
+
+    void				        slotThumbAdded( GuiThumb* thumb );
+    void                        slotThumbUpdated( GuiThumb* thumb );
+    void				        slotThumbRemoved( VxGUID thumbId );
 
 protected:
     virtual void				showEvent( QShowEvent * ev ) override;
 
-    bool                        isUserAListMatch( GuiUser* user );
+    bool                        isListViewMatch( GuiUser* user );
 
-    UserListItem*               sessionToWidget( GuiUserSessionBase* hostSession );
-    GuiUserSessionBase*			widgetToSession( UserListItem* hostItem );
+    GuiUserListItem*            sessionToWidget( GuiUserSessionBase* hostSession );
+    GuiUserSessionBase*			widgetToSession( GuiUserListItem* hostItem );
 
-    virtual void                onUserListItemClicked( UserListItem* hostItem );
-    virtual void                onAvatarButtonClicked( UserListItem* hostItem );
-    virtual void                onFriendshipButtonClicked( UserListItem* hostItem );
-    virtual void                onMenuButtonClicked( UserListItem* hostItem );
+    virtual void                onUserListItemClicked( GuiUserListItem* hostItem );
+    virtual void                onAvatarButtonClicked( GuiUserListItem* hostItem );
+    virtual void                onFriendshipButtonClicked( GuiUserListItem* hostItem );
+    virtual void                onMenuButtonClicked( GuiUserListItem* hostItem );
+
+    virtual void                onListItemAdded( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    virtual void                onListItemUpdated( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
 
     void                        refreshUserList( void );
-    void                        updateUser( GuiUser* user );
     void                        updateEntryWidget( VxGUID& onlineId );
-    void                        removeUser( VxGUID& onlineId );
+
+    void                        updateThumb( GuiThumb* thumb );
 
 	//=== vars ===//
-    EUserListViewType           m_ViewType{ eUserListViewTypeNone };
+    EApplet						m_AppletType{ eAppletUnknown };
+    EUserViewType               m_ViewType{ eUserViewTypeNone };
     bool                        m_ShowMyself{ false };
     std::map<VxGUID, GuiUserSessionBase*> m_UserCache;
 };

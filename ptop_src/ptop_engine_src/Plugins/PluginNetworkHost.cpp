@@ -39,17 +39,17 @@ void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * p
     if( eHostTypeChatRoom == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce" );
-        updateHostSearchList( eHostTypeChatRoom, hostAnn, netIdent );
+        updateHostSearchList( eHostTypeChatRoom, hostAnn, netIdent, sktBase );
     }
     else if( eHostTypeGroup == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got group announce" );
-        updateHostSearchList( eHostTypeGroup, hostAnn, netIdent );
+        updateHostSearchList( eHostTypeGroup, hostAnn, netIdent, sktBase );
     }
     else if( eHostTypeRandomConnect == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got random connect announce" );
-       updateHostSearchList( eHostTypeRandomConnect, hostAnn, netIdent );
+       updateHostSearchList( eHostTypeRandomConnect, hostAnn, netIdent, sktBase );
     }
     else if( eHostTypeNetwork == hostAnn->getHostType() )
     {
@@ -59,7 +59,7 @@ void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * p
     else if( eHostTypeConnectTest == hostAnn->getHostType() )
     {
         LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce" );
-        updateHostSearchList( eHostTypeConnectTest, hostAnn, netIdent );
+        updateHostSearchList( eHostTypeConnectTest, hostAnn, netIdent, sktBase );
     }
     else
     {
@@ -68,7 +68,7 @@ void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * p
 }
 
 //============================================================================
-void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent )
+void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
     m_HostServerMgr.updateHostSearchList( hostType, hostAnn, netIdent );
 }

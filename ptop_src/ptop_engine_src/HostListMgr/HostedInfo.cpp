@@ -110,6 +110,12 @@ bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
 {
     VxGUID onlineId = hostAnn->getSrcOnlineId();
     setOnlineId( onlineId );
+    setHostType( hostAnn->getHostType() );
     return hostAnn->getHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDesc, m_HostInfoTimestampMs );
 }
 
+//============================================================================
+bool HostedInfo::isHostInviteValid( void )
+{
+    return eHostTypeUnknown != getHostType() && m_OnlineId.isVxGUIDValid() && m_HostInfoTimestampMs && !m_HostInviteUrl.empty() && !m_HostTitle.empty() && !m_HostDesc.empty();
+}

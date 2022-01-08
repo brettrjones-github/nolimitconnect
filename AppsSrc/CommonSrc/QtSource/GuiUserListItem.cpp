@@ -13,14 +13,14 @@
 //============================================================================
 
 #include "AppCommon.h"
-#include "UserListItem.h"
+#include "GuiUserListItem.h"
 #include "GuiUserSessionBase.h"
 #include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-UserListItem::UserListItem(QWidget *parent  )
+GuiUserListItem::GuiUserListItem(QWidget *parent  )
 : IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
 {
@@ -28,7 +28,7 @@ UserListItem::UserListItem(QWidget *parent  )
 }
 
 //============================================================================
-UserListItem::~UserListItem()
+GuiUserListItem::~GuiUserListItem()
 {
     GuiUserSessionBase * hostSession = getUserSession();
     if( hostSession && !hostSession->parent() )
@@ -38,70 +38,70 @@ UserListItem::~UserListItem()
 }
 
 //============================================================================
-QSize UserListItem::calculateSizeHint( void )
+QSize GuiUserListItem::calculateSizeHint( void )
 {
     return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize().height() + 8 ) );
 }
 
 //============================================================================
-MyIcons& UserListItem::getMyIcons( void )
+MyIcons& GuiUserListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
 }
 
 //============================================================================
-void UserListItem::resizeEvent(QResizeEvent* resizeEvent)
+void GuiUserListItem::resizeEvent(QResizeEvent* resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
     updateWidgetFromInfo();
 }
 
 //============================================================================
-void UserListItem::mousePressEvent(QMouseEvent * event)
+void GuiUserListItem::mousePressEvent(QMouseEvent * event)
 {
     QWidget::mousePressEvent(event);
-    emit signalUserListItemClicked( this );
+    emit signalGuiUserListItemClicked( this );
 }
 
 //============================================================================
-void UserListItem::setUserSession( GuiUserSessionBase* hostSession )
+void GuiUserListItem::setUserSession( GuiUserSessionBase* hostSession )
 {
     QListWidgetItem::setData( Qt::UserRole + 1, QVariant((qulonglong)hostSession) );
 }
 
 //============================================================================
-GuiUserSessionBase * UserListItem::getUserSession( void )
+GuiUserSessionBase * GuiUserListItem::getUserSession( void )
 {
     return (GuiUserSessionBase *)QListWidgetItem::data( Qt::UserRole + 1 ).toULongLong();
 }
 
 //============================================================================
-void UserListItem::onIdentAvatarButtonClicked()
+void GuiUserListItem::onIdentAvatarButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "UserListItem::slotIconButtonClicked" );
+    LogMsg( LOG_DEBUG, "GuiUserListItem::slotIconButtonClicked" );
 	emit signalAvatarButtonClicked( this );
 }
 
 //============================================================================
-void UserListItem::onIdentMenuButtonClicked( void )
+void GuiUserListItem::onIdentMenuButtonClicked( void )
 {
 	emit signalMenuButtonClicked( this );
 }
 
 //============================================================================
-void UserListItem::updateWidgetFromInfo( void )
+void GuiUserListItem::updateWidgetFromInfo( void )
 {
     GuiUserSessionBase* hostSession = getUserSession();
     if( nullptr == hostSession )
     {
-        LogMsg( LOG_DEBUG, "UserListItem::updateWidgetFromInfo null user session" );
+        LogMsg( LOG_DEBUG, "GuiUserListItem::updateWidgetFromInfo null user session" );
         return;
     }
 
     GuiUser * hostIdent = hostSession->getUserIdent();
     if( nullptr == hostIdent )
     {
-        LogMsg( LOG_DEBUG, "UserListItem::updateWidgetFromInfo null gui user" );
+        LogMsg( LOG_DEBUG, "GuiUserListItem::updateWidgetFromInfo null gui user" );
         return;
     }
 
@@ -109,7 +109,7 @@ void UserListItem::updateWidgetFromInfo( void )
 }
 
 //============================================================================
-void UserListItem::updateThumb( GuiThumb* thumb )
+void GuiUserListItem::updateThumb( GuiThumb* thumb )
 {
     if( thumb )
     {

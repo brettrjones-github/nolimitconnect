@@ -41,7 +41,8 @@ public:
     HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostServerSearchMgr() = default;
 
-    void                        updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent );
+    void                        updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase = nullptr );
+
     virtual ECommErr            searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual ECommErr            settingsRequest( PluginId& pluginId, PktPluginSettingReply& searchReply, VxSktBase* sktBase, VxNetIdent* netIdent );
 
@@ -57,6 +58,9 @@ protected:
     std::map<PluginId, HostSearchEntry>& getHostAnnList( EHostType hostType );
     bool                        haveHostAnnList( EHostType hostType );
     bool                        fillSearchEntry( HostSearchEntry& searchEntry, EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, bool forced );
+
+    void                        onHostInviteAnnounceAdded( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        onHostInviteAnnounceUpdated( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
 
     // remove entries does not lock m_SearchMutex
     void                        removeEntries( std::map<PluginId, HostSearchEntry>& searchMap, PluginIdList& toRemoveList );

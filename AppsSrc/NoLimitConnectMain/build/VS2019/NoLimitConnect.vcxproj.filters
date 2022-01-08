@@ -656,18 +656,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\TodGameWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserJoinListItem.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserJoinListWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserListItem.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\UserListWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\VidWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -889,6 +877,15 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListItem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1654,18 +1651,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ToGuiUserUpdateClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserJoinListItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserJoinListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserListItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\UserListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\VidWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1964,6 +1949,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

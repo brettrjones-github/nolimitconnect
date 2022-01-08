@@ -418,11 +418,17 @@ bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& o
 bool HostedListMgr::requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
     bool result{ false };
-    PktHostInfoReq pktReq;
-    pktReq.setHostType( hostType );
-    pktReq.getSessionId().initializeWithNewVxGUID();
+    // only hosts that announce to network respond to Host Info requests
+    if( HostShouldAnnounceToNetwork( hostType ) )
+    {
+        PktHostInfoReq pktReq;
+        pktReq.setHostType( hostType );
+        pktReq.getSessionId().initializeWithNewVxGUID();
 
-    return sktBase->txPacket( netIdent->getMyOnlineId(), &pktReq);
+        result = sktBase->txPacket( netIdent->getMyOnlineId(), &pktReq);
+    }
+
+    return result;
 }
 
 //============================================================================
@@ -536,7 +542,6 @@ bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, V
     return false;
 }
 
-
 //============================================================================
 void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& hostedInfoList, HostedInfo& hostedInfo )
 {
@@ -576,18 +581,62 @@ void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& ho
 //============================================================================
 void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo )
 {
+    updateHostInfo( hostType, hostedInfo, netIdent, sktBase );
+}
+
+//============================================================================
+void HostedListMgr::hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
+{
+    if( commErr )
+    {
+        LogMsg( LOG_ERROR, "HostedListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
+    }
+    else
+    {
+        LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchCompleted with no errors" );
+    }
+
+    m_Engine.getConnectionMgr().doneWithConnection( searchSessionId, netIdent->getMyOnlineId(), this, eConnectReasonNetworkHostListSearch );
+}
+
+//============================================================================
+void HostedListMgr::onHostInviteAnnounceAdded( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase )
+{
+    LogMsg( LOG_VERBOSE, "HostedListMgr::onHostInviteAnnounceAdded %s from %s ", DescribeHostType( hostType), netIdent->getOnlineName() );
+    updateHostInfo( hostType, hostedInfo, netIdent, sktBase );
+}
+
+//============================================================================
+void HostedListMgr::onHostInviteAnnounceUpdated( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase )
+{
+    LogMsg( LOG_VERBOSE, "HostedListMgr::onHostInviteAnnounceUpdated %s from %s ", DescribeHostType( hostType ), netIdent->getOnlineName() );
+    updateHostInfo( hostType, hostedInfo, netIdent, sktBase );
+}
+
+//============================================================================
+bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase )
+{
     VxPtopUrl ptopUrl( hostedInfo.getHostInviteUrl() );
     if( !ptopUrl.isValid() )
     {
         LogMsg( LOG_ERROR, "HostedListMgr::hostSearchResult INVALID url" );
-        return;
+        return false;
     }
 
-    VxNetIdent hostIdent;
-    bool needsIdentityReq = !m_Engine.getBigListMgr().queryIdent( ptopUrl.getOnlineId(), hostIdent );
-    if( needsIdentityReq )
+    bool needsIdentityReq = false;
+    if( !netIdent )
     {
-        m_Engine.getHostUrlListMgr().requestIdentity( hostedInfo.getHostInviteUrl() );
+        VxNetIdent hostIdent;
+        BigListInfo* bigListInfo = m_Engine.getBigListMgr().findBigListInfo( ptopUrl.getOnlineId() );
+        if( bigListInfo )
+        {
+            netIdent = bigListInfo->getVxNetIdent();
+        }
+        else
+        {
+            needsIdentityReq = true;
+            m_Engine.getHostUrlListMgr().requestIdentity( hostedInfo.getHostInviteUrl() );
+        }
     }
 
     LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchResult host url %s title %s desc %s time %lld", hostedInfo.getHostInviteUrl().c_str(),
@@ -596,6 +645,7 @@ void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionI
     bool alreadyExisted{ false };
     bool hostedInfoUpdated{ false };
     HostedInfo updatedHostedInfo;
+
     lockList();
     // if exists see if needs update
     for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )
@@ -603,10 +653,9 @@ void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionI
         if( iter->getHostType() == hostType && iter->getOnlineId() == hostedInfo.getOnlineId() )
         {
             alreadyExisted = true;
-            if( !needsIdentityReq && !hostIdent.canRequestJoin( hostType ) )
+            if( sktBase )
             {
-                // can never join anyway so ignore
-                break;
+                iter->setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
             }
 
             if( iter->getHostInviteUrl() != hostedInfo.getHostInviteUrl() )
@@ -651,12 +700,23 @@ void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionI
                 }
             }
 
+            if( !needsIdentityReq && netIdent && !netIdent->canRequestJoin( hostType ) )
+            {
+                // clear hostedInfoUpdated.. if cannot possibly join dont announce it
+                hostedInfoUpdated = false;
+            }
+
             break;
         }
     }
 
     if( !alreadyExisted )
     {
+        if( sktBase )
+        {
+            hostedInfo.setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
+        }
+
         m_HostedInfoList.push_back( hostedInfo );
         updatedHostedInfo = hostedInfo;
         hostedInfoUpdated = true;
@@ -668,19 +728,6 @@ void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionI
     {
         announceHostInfoUpdated( &updatedHostedInfo );
     }
-}
 
-//============================================================================
-void HostedListMgr::hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
-{
-    if( commErr )
-    {
-        LogMsg( LOG_ERROR, "HostedListMgr::hostSearchCompleted with error %s from %s", DescribeCommError( commErr ), sktBase->describeSktConnection().c_str() );
-    }
-    else
-    {
-        LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchCompleted with no errors" );
-    }
-
-    m_Engine.getConnectionMgr().doneWithConnection( searchSessionId, netIdent->getMyOnlineId(), this, eConnectReasonNetworkHostListSearch );
+    return true;
 }

@@ -162,7 +162,7 @@ public:
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	        {};
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )	            {};
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )            {};
-    virtual void                updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent )  {};
+    virtual void                updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase = nullptr )  {};
 	virtual void				fromGuiSendAnnouncedList( EHostType hostType ) {};
 
 	virtual bool				fromGuiRequestPluginThumb( VxNetIdent* netIdent, VxGUID& thumbId ) { return false; }

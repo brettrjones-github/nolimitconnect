@@ -33,7 +33,7 @@ enum EUserJoinViewType
     eMaxUserJoinViewTypeNone,
 };
 
-class UserJoinListItem;
+class GuiUserJoinListItem;
 class GuiUserJoin;
 class AppCommon;
 class MyIcons;
@@ -44,23 +44,23 @@ class GuiUserJoinMgr;
 class GuiThumb;
 class GuiThumbMgr;
 
-class UserJoinListWidget : public QListWidget
+class GuiUserJoinListWidget : public QListWidget
 {
 	Q_OBJECT
 
 public:
-	UserJoinListWidget( QWidget * parent );
+	GuiUserJoinListWidget( QWidget * parent );
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
     void                        clearUserJoinList( void );
 
     void                        addUserJoinToList( EHostType hostType, VxGUID& sessionId,  GuiUserJoin * userIdent );
-    UserJoinListItem*           addOrUpdateUserJoinSession( GuiUserJoinSession* hostSession );
+    GuiUserJoinListItem*           addOrUpdateUserJoinSession( GuiUserJoinSession* hostSession );
 
     GuiUserJoinSession*         findSession( VxGUID& lclSessionId );
-    UserJoinListItem*           findListEntryWidgetBySessionId( VxGUID& sessionId );
-    UserJoinListItem*           findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    GuiUserJoinListItem*           findListEntryWidgetBySessionId( VxGUID& sessionId );
+    GuiUserJoinListItem*           findListEntryWidgetByOnlineId( VxGUID& onlineId );
 
     void                        updateUserJoin( GuiUserJoin * user );
     void                        removeUserJoin( VxGUID& onlineId );
@@ -72,8 +72,8 @@ public:
     EUserJoinViewType           getUserJoinViewType( void )                     { return m_UserJoinViewType; }
 
 signals:
-    void                        signalAvatarButtonClicked( GuiUserJoinSession* hostSession, UserJoinListItem* hostItem );
-    void                        signalMenuButtonClicked( GuiUserJoinSession* hostSession, UserJoinListItem* hostItem );
+    void                        signalAvatarButtonClicked( GuiUserJoinSession* hostSession, GuiUserJoinListItem* hostItem );
+    void                        signalMenuButtonClicked( GuiUserJoinSession* hostSession, GuiUserJoinListItem* hostItem );
 
 protected slots:
     void				        slotMyIdentUpdated( GuiUserJoin* user ); 
@@ -87,18 +87,18 @@ protected slots:
     void                        slotThumbUpdated( GuiThumb* thumb );
     void				        slotThumbRemoved( VxGUID thumbId ); 
 
-    void                        slotAvatarButtonClicked( UserJoinListItem* hostItem );
-    void                        slotMenuButtonClicked( UserJoinListItem* hostItem );
+    void                        slotAvatarButtonClicked( GuiUserJoinListItem* hostItem );
+    void                        slotMenuButtonClicked( GuiUserJoinListItem* hostItem );
 
 protected:
-    UserJoinListItem*           sessionToWidget( GuiUserJoinSession* hostSession );
-    GuiUserJoinSession*			widgetToSession( UserJoinListItem* hostItem );
+    GuiUserJoinListItem*           sessionToWidget( GuiUserJoinSession* hostSession );
+    GuiUserJoinSession*			widgetToSession( GuiUserJoinListItem* hostItem );
 
-    virtual void                onListItemAdded( GuiUserJoinSession* userSession, UserJoinListItem* userItem );
-    virtual void                onListItemUpdated( GuiUserJoinSession* userSession, UserJoinListItem* userItem );
+    virtual void                onListItemAdded( GuiUserJoinSession* userSession, GuiUserJoinListItem* userItem );
+    virtual void                onListItemUpdated( GuiUserJoinSession* userSession, GuiUserJoinListItem* userItem );
 
-    virtual void                onAvatarButtonClicked( UserJoinListItem* hostItem );
-    virtual void                onMenuButtonClicked( UserJoinListItem* hostItem );
+    virtual void                onAvatarButtonClicked( GuiUserJoinListItem* hostItem );
+    virtual void                onMenuButtonClicked( GuiUserJoinListItem* hostItem );
 
     void                        refreshList( void );
     bool                        isListViewMatch( GuiUser * user );

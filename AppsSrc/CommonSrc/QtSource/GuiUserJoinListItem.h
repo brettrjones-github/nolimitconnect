@@ -27,12 +27,12 @@ class GuiUserJoinMgr;
 class GuiUserMgr;
 class GuiThumb;
 
-class UserJoinListItem : public IdentWidget, public QListWidgetItem
+class GuiUserJoinListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	UserJoinListItem( QWidget *parent=0 );
-	virtual ~UserJoinListItem();
+	GuiUserJoinListItem( QWidget *parent=0 );
+	virtual ~GuiUserJoinListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
     MyIcons&					getMyIcons( void );
@@ -46,8 +46,8 @@ public:
     QSize                       calculateSizeHint( void );
 
 signals:
-	void						signalAvatarButtonClicked( UserJoinListItem* listEntryWidget );
-	void						signalMenuButtonClicked( UserJoinListItem* listEntryWidget );
+	void						signalAvatarButtonClicked( GuiUserJoinListItem* listEntryWidget );
+	void						signalMenuButtonClicked( GuiUserJoinListItem* listEntryWidget );
 
 protected:
     void						onIdentAvatarButtonClicked( void ) override;
