@@ -207,6 +207,7 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 		break;
 
 	case eSktCallbackReasonClosing:
+		m_Engine.onConnectionLost( sktBase );
         LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktId(), VxGetCurrentThreadId() );
 		break;
 

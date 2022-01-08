@@ -43,6 +43,7 @@ public:
 	virtual void				sktMgrSetLocalIp( InetAddress& oLclIp );
 	virtual void				sktMgrShutdown( void );
 
+
 	//! make a new socket... give derived classes a chance to override
 	virtual VxSktBase *			makeNewSkt( void );
 	//! make a new socket... give derived classes a chance to override

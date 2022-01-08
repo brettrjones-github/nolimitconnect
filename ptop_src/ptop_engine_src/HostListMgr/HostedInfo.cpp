@@ -15,6 +15,7 @@
 #include "HostedInfo.h"
 
 #include <PktLib/PktsHostInvite.h>
+#include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
 HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl )
@@ -108,10 +109,15 @@ bool HostedInfo::extractFromSearchBlob( PktBlobEntry& blobEntry )
 //============================================================================
 bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
 {
-    VxGUID onlineId = hostAnn->getSrcOnlineId();
-    setOnlineId( onlineId );
-    setHostType( hostAnn->getHostType() );
-    return hostAnn->getHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDesc, m_HostInfoTimestampMs );
+    VxPtopUrl hostUrl( m_HostInviteUrl );
+    if( hostUrl.isValid() )
+    {
+        setOnlineId( hostUrl.getOnlineId() );
+        setHostType( hostAnn->getHostType() );
+        return hostAnn->getHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDesc, m_HostInfoTimestampMs );
+    }
+
+    return false;
 }
 
 //============================================================================

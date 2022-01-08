@@ -2285,6 +2285,7 @@ const char * VxDescribeSktError( int iErr )
 	case WSAEREMOTE:		return "Item is not available locally.";
 	case WSASYSNOTREADY:	return "WSAStartup cannot function at this time because the underlying system it uses to provide network services is currently unavailable.";
 	case WSAVERNOTSUPPORTED:return "The Windows Sockets version requested is not supported.";
+		
 	case EIM_ALIVE_TIMEDOUT: return "Connection I Am Alive Request Timed Out";
 	default:				return "Windows Unknown socket error";
 	}

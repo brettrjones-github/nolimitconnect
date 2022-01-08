@@ -568,6 +568,12 @@ void VxSktBase::closeSkt( ESktCloseReason closeReason, bool bFlushThenClose )
         m_SktCloseReason = closeReason;
     }
 
+	setCallbackReason( eSktCallbackReasonClosing );
+	if( m_pfnReceive )
+	{
+		m_pfnReceive( this, getRxCallbackUserData() );
+	}
+
     LogModule( eLogConnect, LOG_VERBOSE, "%s %s", DescribeSktCloseReason( closeReason ), describeSktConnection().c_str() );
 
 	if( m_bClosingFromRxThread || m_bClosingFromDestructor )
@@ -795,7 +801,7 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
     m_TxMutex.unlock();
     if( rc )
     {
-        LogModule( eLogTcpData, LOG_ERROR, "VxSktBase::txEncrypted: sendData error %d", rc );
+        LogModule( eLogTcpData, LOG_ERROR, "VxSktBase::txEncrypted: sendData error %d %s", rc, VxDescribeSktError( rc ) );
     }
 
 	if( bDisconnect )
