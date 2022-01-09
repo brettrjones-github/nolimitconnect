@@ -126,10 +126,12 @@ GuiUserListItem* GuiUserListWidget::sessionToWidget( GuiUserSessionBase* userSes
 
     userItem->setUserSession( userSession );
 
-    connect( userItem, SIGNAL(signalUserListItemClicked(GuiUserListItem *)),	    this, SLOT(slotUserListItemClicked(GuiUserListItem *)) );
+    connect( userItem, SIGNAL(signalGuiUserListItemClicked(GuiUserListItem *)),	    this, SLOT(slotUserListItemClicked(GuiUserListItem *)) );
     connect( userItem, SIGNAL(signalAvatarButtonClicked(GuiUserListItem *)),	    this, SLOT(slotAvatarButtonClicked(GuiUserListItem *)) );
+    connect( userItem, SIGNAL( signalOfferButtonClicked( GuiUserListItem* ) ),      this, SLOT( slotOfferButtonClicked( GuiUserListItem* ) ) );
+    connect( userItem, SIGNAL( signalPushToTalkButtonPressed( GuiUserListItem* ) ), this, SLOT( slotPushToTalkButtonPressed( GuiUserListItem* ) ) );
+    connect( userItem, SIGNAL( signalPushToTalkButtonReleased( GuiUserListItem* ) ), this, SLOT( slotPushToTalkButtonReleased( GuiUserListItem* ) ) );
     connect( userItem, SIGNAL(signalMenuButtonClicked(GuiUserListItem *)),	        this, SLOT(slotMenuButtonClicked(GuiUserListItem *)) );
-    connect( userItem, SIGNAL(signalFriendshipButtonClicked(GuiUserListItem *)),	this, SLOT(slotFriendshipButtonClicked(GuiUserListItem *)) );
 
     userItem->updateWidgetFromInfo();
 
@@ -277,6 +279,12 @@ GuiUserListItem* GuiUserListWidget::findListEntryWidgetBySessionId( VxGUID& sess
 //============================================================================
 GuiUserListItem* GuiUserListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
 {
+    if( !onlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "ERROR GuiUserListWidget::findListEntryWidgetByOnlineId: invalid online id" );
+        return nullptr;
+    }
+
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {
@@ -331,7 +339,7 @@ void GuiUserListWidget::slotAvatarButtonClicked( GuiUserListItem* userItem )
 }
 
 //============================================================================
-void GuiUserListWidget::slotFriendshipButtonClicked( GuiUserListItem* userItem )
+void GuiUserListWidget::slotOfferButtonClicked( GuiUserListItem* userItem )
 {
     if( 300 > m_ClickEventTimer.elapsedMs()  ) // avoid duplicate clicks
     {
@@ -339,7 +347,31 @@ void GuiUserListWidget::slotFriendshipButtonClicked( GuiUserListItem* userItem )
     }
 
     m_ClickEventTimer.startTimer();
-    onFriendshipButtonClicked( userItem );
+    onOfferButtonClicked( userItem );
+}
+
+//============================================================================
+void GuiUserListWidget::slotPushToTalkButtonPressed( GuiUserListItem* userItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onPushToTalkButtonPressed( userItem );
+}
+
+//============================================================================
+void GuiUserListWidget::slotPushToTalkButtonReleased( GuiUserListItem* userItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onPushToTalkButtonReleased( userItem );
 }
 
 //============================================================================
@@ -472,15 +504,43 @@ void GuiUserListWidget::onAvatarButtonClicked( GuiUserListItem* userItem )
 }
 
 //============================================================================
-void GuiUserListWidget::onFriendshipButtonClicked( GuiUserListItem* userItem )
+void GuiUserListWidget::onOfferButtonClicked( GuiUserListItem* userItem )
 {
-    LogMsg( LOG_DEBUG, "onFriendshipButtonClicked" );
+    LogMsg( LOG_DEBUG, "onOfferButtonClicked" );
     if( userItem )
     {
         GuiUserSessionBase* userSession = userItem->getUserSession();
-        if( userSession && userSession->getUserIdent() )
+        if( userSession )
         {
-            launchChangeFriendship( userSession->getUserIdent() );
+            emit signalOfferButtonClicked( userSession, userItem );
+        }
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::onPushToTalkButtonPressed( GuiUserListItem* userItem )
+{
+    LogMsg( LOG_DEBUG, "onPushToTalkButtonPressed" );
+    if( userItem )
+    {
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalPushToTalkButtonPressed( userSession, userItem );
+        }
+    }
+}
+
+//============================================================================
+void GuiUserListWidget::onPushToTalkButtonReleased( GuiUserListItem* userItem )
+{
+    LogMsg( LOG_DEBUG, "onPushToTalkButtonReleased" );
+    if( userItem )
+    {
+        GuiUserSessionBase* userSession = userItem->getUserSession();
+        if( userSession )
+        {
+            emit signalPushToTalkButtonReleased( userSession, userItem );
         }
     }
 }
@@ -494,8 +554,6 @@ void GuiUserListWidget::onMenuButtonClicked( GuiUserListItem* userItem )
         GuiUserSessionBase* userSession = userItem->getUserSession();
         if( userSession )
         {
-            // emit signalFriendClicked( m_SelectedFriend );
-
             AppletPopupMenu* popupMenu = dynamic_cast< AppletPopupMenu* >( m_MyApp.launchApplet( eAppletPopupMenu, dynamic_cast< QWidget* >( this->parent() ) ) );
             if( popupMenu )
             {

@@ -642,8 +642,6 @@ signals:
     void						signalHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
     void						signalHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
 
-    void						signalUserOnlineStatus( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, bool isOnline );
-
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
     void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );
 	void						signalRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, QString strMsg );

@@ -26,7 +26,7 @@
 #include "core/Video.h"
 #include "core/VideoDelegate.h"
 
-#if LIBGOTV_VERSION >= 0x020200
+#if LIBNO_LIMIT_VERSION >= 0x020200
 #include "core/Equalizer.h"
 #endif
 
@@ -44,7 +44,7 @@ GoTvPtoPMediaPlayer::GoTvPtoPMediaPlayer(GoTvPtoPInstance *instance)
 
     _gotvptopAudio = new GoTvPtoPAudio(this);
     _gotvptopVideo = new GoTvPtoPVideo(this);
-#if LIBGOTV_VERSION >= 0x020200
+#if LIBNO_LIMIT_VERSION >= 0x020200
     _gotvptopEqualizer = new GoTvPtoPEqualizer(this);
 #endif
 
@@ -62,7 +62,7 @@ GoTvPtoPMediaPlayer::~GoTvPtoPMediaPlayer()
 
     delete _gotvptopAudio;
     delete _gotvptopVideo;
-#if LIBGOTV_VERSION >= 0x020200
+#if LIBNO_LIMIT_VERSION >= 0x020200
     delete _gotvptopEqualizer;
 #endif
 
@@ -86,7 +86,7 @@ GoTvPtoPVideo *GoTvPtoPMediaPlayer::video() const
     return _gotvptopVideo;
 }
 
-#if LIBGOTV_VERSION >= 0x020200
+#if LIBNO_LIMIT_VERSION >= 0x020200
 GoTvPtoPEqualizer *GoTvPtoPMediaPlayer::equalizer() const
 {
     return _gotvptopEqualizer;
@@ -421,7 +421,7 @@ float GoTvPtoPMediaPlayer::sampleAspectRatio()
 {
     if (!_gotvptopMediaPlayer)
         return 0.0;
-#if LIBGOTV_VERSION >= 0x020100
+#if LIBNO_LIMIT_VERSION >= 0x020100
     float sar = 0.0;
 
     libgotvptop_media_track_t **tracks;
@@ -442,7 +442,7 @@ float GoTvPtoPMediaPlayer::sampleAspectRatio()
     return sar;
 #else
     return 1.0;
-#endif // LIBGOTV_VERSION >= 0x020100
+#endif // LIBNO_LIMIT_VERSION >= 0x020100
 }
 
 void GoTvPtoPMediaPlayer::setPosition(float pos)

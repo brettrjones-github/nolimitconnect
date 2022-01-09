@@ -34,11 +34,16 @@ public:
     void                        setUserSession( GuiUserSessionBase* hostSession );
     GuiUserSessionBase*         getUserSession( void );
 
-    VxPushButton *              getAvatarButton( void )                 { return getIdentAvatarButton(); }
-    VxPushButton *              getFriendshipButton( void )             { return getIdentFriendshipButton(); }
-    VxPushButton *              getMenuButton( void )                   { return getIdentMenuButton(); }
+    VxPushButton*               getAvatarButton( void )                 { return getIdentAvatarButton(); }
+    VxPushButton*               getFriendshipButton( void )             { return getIdentFriendshipButton(); }
+    VxPushButton*               getOfferButton( void )                  { return getIdentOfferButton(); }
+    VxPushButton*               getPushToTalkButton( void )             { return getIdentPushToTalkButton(); }
+    VxPushButton*               getMenuButton( void )                   { return getIdentMenuButton(); }
 
     void						onIdentAvatarButtonClicked( void ) override;
+    void						onIdentOfferButtonClicked( void ) override;
+    void						onIdentPushToTalkButtonPressed( void ) override;
+    void						onIdentPushToTalkButtonReleased( void ) override;
     void						onIdentMenuButtonClicked( void ) override;
 
     void						updateWidgetFromInfo( void );
@@ -49,6 +54,9 @@ public:
 signals:
     void						signalGuiUserListItemClicked( GuiUserListItem * poItemWidget );
 	void						signalAvatarButtonClicked( GuiUserListItem* listEntryWidget );
+    void						signalOfferButtonClicked( GuiUserListItem* listEntryWidget );
+    void						signalPushToTalkButtonPressed( GuiUserListItem* listEntryWidget );
+    void						signalPushToTalkButtonReleased( GuiUserListItem* listEntryWidget );
 	void						signalMenuButtonClicked( GuiUserListItem* listEntryWidget );
 
 protected:

@@ -19,4 +19,4 @@
 #define LIBGOTVQT_QML_MODULE "GoTvQtPlugin"
 
 // libVLC this library is built with
-#define LIBGOTV_VERSION  0x010100
+#define LIBNO_LIMIT_VERSION  0x010100

@@ -78,8 +78,28 @@ GuiUserSessionBase * GuiUserListItem::getUserSession( void )
 //============================================================================
 void GuiUserListItem::onIdentAvatarButtonClicked()
 {
-    LogMsg( LOG_DEBUG, "GuiUserListItem::slotIconButtonClicked" );
-	emit signalAvatarButtonClicked( this );
+    LogMsg( LOG_DEBUG, "GuiUserListItem::onIdentAvatarButtonClicked" );
+    emit signalAvatarButtonClicked( this );
+}
+//============================================================================
+void GuiUserListItem::onIdentOfferButtonClicked()
+{
+    LogMsg( LOG_DEBUG, "GuiUserListItem::onIdentOfferButtonClicked" );
+    emit signalOfferButtonClicked( this );
+}
+
+//============================================================================
+void GuiUserListItem::onIdentPushToTalkButtonPressed()
+{
+    LogMsg( LOG_DEBUG, "GuiUserListItem::onIdentPushToTalkButtonPressed" );
+    emit signalPushToTalkButtonPressed( this );
+}
+
+//============================================================================
+void GuiUserListItem::onIdentPushToTalkButtonReleased()
+{
+    LogMsg( LOG_DEBUG, "GuiUserListItem::onIdentPushToTalkButtonReleased" );
+    emit signalPushToTalkButtonReleased( this );
 }
 
 //============================================================================

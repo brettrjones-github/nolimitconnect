@@ -1208,7 +1208,7 @@ void AppCommon::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent *hostIdent
         return;
     }
 
-    emit signalUserOnlineStatus( hostType, sessionId, *hostIdent, isOnline );
+    getUserMgr().toGuiUserOnlineStatus( hostType, hostIdent, sessionId, isOnline );
 }
 
 //============================================================================
@@ -2194,5 +2194,7 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<MembershipHosted>( "MembershipHosted" );
 	qRegisterMetaType<HostedInfo>( "HostedInfo" );
 	qRegisterMetaType<HostJoinInfo>( "HostJoinInfo" );
+	qRegisterMetaType<EJoinState>( "EJoinState" );
+	qRegisterMetaType<EOnlineState>( "EOnlineState" );
 }
 

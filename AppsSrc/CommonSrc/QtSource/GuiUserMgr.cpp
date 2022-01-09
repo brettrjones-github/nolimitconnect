@@ -604,3 +604,14 @@ void GuiUserMgr::sendUserUpdatedToCallbacks( GuiUser* guiUser )
         LogMsg( LOG_ERROR, "GuiUserMgr::sendUserUpdatedToCallbacks invalid guiUser" );
     }
 }
+
+//============================================================================
+void GuiUserMgr::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* hostIdent, VxGUID& sessionId, bool isOnline )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    emit signalInternalUserOnlineStatus( new VxNetIdent( *hostIdent ), hostType, isOnline );
+}

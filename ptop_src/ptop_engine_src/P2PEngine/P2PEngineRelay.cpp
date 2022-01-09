@@ -172,7 +172,7 @@ void P2PEngine::onPktRelayConnectToUserReq( VxSktBase * sktBase, VxPktHdr * pktH
 	LogMsg( LOG_INFO, "P2PEngine::onPktRelayConnectToUserReq: m_ConnectListMutex.lock()\n" );
 #endif // DEBUG_CONNECT_MUTEXES
 	m_ConnectionList.connectListLock();
-	RcConnectInfo * poDestConnectInfo = m_ConnectionList.findConnection( poPkt->m_ConnectId.getOnlineId() );
+	RcConnectInfo * poDestConnectInfo = m_ConnectionList.findConnection( poPkt->m_ConnectId.getOnlineId(), true );
 	if( poDestConnectInfo )
 	{
 		oPkt.setConnectFailed( false );
@@ -195,7 +195,7 @@ void P2PEngine::onPktRelayConnectToUserReq( VxSktBase * sktBase, VxPktHdr * pktH
 	}
 
 	oPkt.m_ConnectId = poPkt->m_ConnectId;
-	RcConnectInfo * poCallerConnectInfo = m_ConnectionList.findConnection(poPkt->getSrcOnlineId());
+	RcConnectInfo * poCallerConnectInfo = m_ConnectionList.findConnection(poPkt->getSrcOnlineId(), true );
 	if( poCallerConnectInfo )
 	{
 		poCallerConnectInfo->setIsRelayClient( true );

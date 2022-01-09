@@ -753,6 +753,12 @@ RCODE VxSktBase::txEncrypted(	const char *	pDataIn, 		// data to send
         return -2;
     }
 
+	if( !isConnected() )
+	{
+		LogMsg( LOG_VERBOSE, "VxSktBase::txEncrypted skt is already disconnected" );
+		return -5;
+	}
+
 	if( 0 != (iDataLen & 0x0f) )
 	{
 		LogMsg( LOG_ERROR, "VxSktBase::txEncrypted invalid pkt len %d (pkt type %d)", iDataLen, ((VxPktHdr *)pDataIn)->getPktType() );

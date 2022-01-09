@@ -167,7 +167,7 @@ void HostUrlListMgr::removeClosedPortIdent( VxGUID& onlineId )
     {
         if( iter->getOnlineId() == onlineId )
         {
-            m_HostUrlsList.erase( iter );
+            iter = m_HostUrlsList.erase( iter );
         }
         else
         {

@@ -38,7 +38,7 @@ DEFINES += LIB_STATIC _LIB
 include(../config_detect_os.pri)
 
 #not required .. just for test
-include(../config_version.pri)
+# include(../config_version.pri)
 include(../config_compiler.pri)
 include(../config_opensslp_include.pri)
 

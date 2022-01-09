@@ -252,29 +252,37 @@ bool NetConnector::connectToContact(	VxConnectInfo&		connectInfo,
 		connectInfo.getOnlineName(),
 		connectInfo.getMyOnlineId().describeVxGUID().c_str() );
 #endif // DEBUG_CONNECTIONS
-	//if( 30200 == connectInfo.getOnlinePort() ) // Core8's port
-	//{
-	//	// just for debug break point
-	//	LogMsg( LOG_INFO, "Connecting to Core8's port\n" );
-	//}
 
 	m_ConnectList.connectListLock();
-	RcConnectInfo * rmtUserConnectInfo = m_ConnectList.findConnection( connectInfo.getMyOnlineId() );
+	RcConnectInfo * rmtUserConnectInfo = m_ConnectList.findConnection( connectInfo.getMyOnlineId(), true );
 	if( rmtUserConnectInfo )
 	{
 #ifdef DEBUG_CONNECTIONS
 		std::string strId;
 		connectInfo.getMyOnlineId(strId);
-		LogMsg( LOG_SKT, "connectToContact: User is already connected %s id %s\n", 
+		LogMsg( LOG_SKT, "connectToContact: User is already connected %s id %s", 
 			m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
 			strId.c_str() );
 #endif // DEBUG_CONNECTIONS
 
-		* ppoRetSkt = rmtUserConnectInfo->m_SktBase;
+		VxSktBase* sktBase = rmtUserConnectInfo->m_SktBase;
+		if( sktBase && sktBase->isConnected() )
+		{
+			int64_t timeNow = GetGmtTimeMs();
+			sktBase->setLastActiveTimeMs( timeNow );
+			sktBase->setLastSessionTimeMs( timeNow );
+			*ppoRetSkt = sktBase;
+			gotConnected = true;
+		}
+
 		m_ConnectList.connectListUnlock();
-		gotConnected = true;
+		if( sktBase && !gotConnected )
+		{
+			m_ConnectList.removeSocket( sktBase, true );
+		}
 	}
-	else
+	
+	if( !gotConnected )
 	{
 		m_ConnectList.connectListUnlock();
 		if( connectUsingTcp( connectInfo, ppoRetSkt, connectReason ) )
@@ -426,7 +434,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 		LogMsg( LOG_SKT, "connectUsingTcp: m_ConnectListMutex.lock()\n" );
 #endif // DEBUG_MUTEXES
 		m_ConnectList.connectListLock();
-		RcConnectInfo * poRelayConnectInfo = m_ConnectList.findConnection( connectInfo.m_RelayConnectId.getOnlineId() );
+		RcConnectInfo * poRelayConnectInfo = m_ConnectList.findConnection( connectInfo.m_RelayConnectId.getOnlineId(), true );
 		//LogMsg( LOG_INFO, "P2PEngine::ConnectToContact:User %s existing connection to proxy %d\n", connectInfo.getOnlineName(), poConnectInfo );
 		if( poRelayConnectInfo )
 		{
@@ -520,7 +528,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 			}
 
 			m_ConnectList.connectListLock();
-			RcConnectInfo * poUserConnectInfo = m_ConnectList.findConnection( connectInfo.getMyOnlineId() );
+			RcConnectInfo * poUserConnectInfo = m_ConnectList.findConnection( connectInfo.getMyOnlineId(), true );
 			if( poUserConnectInfo )
 			{
 #ifdef DEBUG_NET_CONNECTOR
@@ -900,13 +908,12 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 		LogMsg( LOG_ERROR, "NetConnector::doConnectRequest when not online" );
 	}
 
-	P2PConnectList& connectedList = m_Engine.getConnectList();
-	connectedList.connectListLock();
-	RcConnectInfo *	rcInfo = connectedList.findConnection( connectRequest.getMyOnlineId() );
+	m_ConnectList.connectListLock();
+	RcConnectInfo *	rcInfo = m_ConnectList.findConnection( connectRequest.getMyOnlineId(), true );
 	if( rcInfo )
 	{
 		// already connected
-		connectedList.connectListUnlock();
+		m_ConnectList.connectListUnlock();
 		BigListInfo * bigInfo = rcInfo->getBigListInfo();
 		bigInfo->setTimeLastTcpContactMs( timeNow );
 		bigInfo->setTimeLastConnectAttemptMs( timeNow );
@@ -915,7 +922,7 @@ bool NetConnector::doConnectRequest( ConnectRequest& connectRequest, bool ignore
 		return true;
 	}
 
-	connectedList.connectListUnlock();
+	m_ConnectList.connectListUnlock();
 
 	if( ( false == ignoreToSoonToConnectAgain )
 		&& connectRequest.isTooSoonToAttemptConnectAgain() )
@@ -1047,7 +1054,8 @@ void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& online
 		return;
 	}
 
-	RcConnectInfo * poRmtUserConnectInfo = m_ConnectList.findConnection( onlineId );
+	m_ConnectList.connectListLock();
+	RcConnectInfo * poRmtUserConnectInfo = m_ConnectList.findConnection( onlineId, true );
 	if( poRmtUserConnectInfo )
 	{
 		if( poRmtUserConnectInfo->isRelayServer()
@@ -1068,4 +1076,6 @@ void  NetConnector::closeConnection( ESktCloseReason closeReason, VxGUID& online
 		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s\n", onlineId.toOnlineIdString().c_str() );
 		skt->closeSkt( eSktCloseFindConnectedInfoFail );
 	}
+
+	m_ConnectList.connectListLock();
 }

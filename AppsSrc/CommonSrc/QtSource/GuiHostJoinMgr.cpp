@@ -29,9 +29,9 @@ GuiHostJoinMgr::GuiHostJoinMgr( AppCommon& app )
 void GuiHostJoinMgr::onAppCommonCreated( void )
 {
     connect( this, SIGNAL( signalInternalHostJoinRequested( HostJoinInfo* ) ),	                                this, SLOT( slotInternalHostJoinRequested( HostJoinInfo* ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinUpdated( HostJoinInfo* ) ),                                     this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinUpdated( HostJoinInfo* ) ),                                    this, SLOT( slotInternalHostJoinUpdated( HostJoinInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinRemoved( VxGUID, EPluginType ) ),	                            this, SLOT( slotInternalHostJoinRemoved( VxGUID, EPluginType ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostJoinOfferState( VxGUID, EPluginType, EOfferState ) ),              this, SLOT( slotInternalHostJoinOfferState( VxGUID, EPluginType, EOfferState ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostJoinOfferState( VxGUID, EPluginType, EJoinState ) ),               this, SLOT( slotInternalHostJoinOfferState( VxGUID, EPluginType, EJoinState ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ),    this, SLOT( slotInternalHostJoinOnlineState( VxGUID, EPluginType, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getHostJoinMgr().addHostJoinMgrClient( this, true );
@@ -102,9 +102,9 @@ void GuiHostJoinMgr::callbackHostJoinRemoved( VxGUID& hostOnlineId, EPluginType 
 }
 
 //============================================================================
-void GuiHostJoinMgr::callbackHostJoinOfferState( VxGUID& hostOnlineId, EPluginType pluginType, EJoinState userOfferState )
+void GuiHostJoinMgr::callbackHostJoinOfferState( VxGUID& hostOnlineId, EPluginType pluginType, EJoinState joinOfferState )
 {
-    emit signalInternalHostJoinOfferState( hostOnlineId, pluginType, userOfferState );
+    emit signalInternalHostJoinOfferState( hostOnlineId, pluginType, joinOfferState );
 }
 
 //============================================================================

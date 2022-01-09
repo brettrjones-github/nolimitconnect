@@ -856,15 +856,6 @@ void HostBaseMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID
         BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
         m_Engine.getUserOnlineMgr().onUserOnline( sktBase, netIdent, sessionInfo );
 
-        //User* user = m_Engine.getUserOnlineMgr().findUser( netIdent->getMyOnlineId() );
-        //if( user )
-        //{
-        //    m_UserListMutex.lock();
-        //    m_UserList.addOrUpdateUser( user );
-        //    m_UserListMutex.unlock();
-        //}
-
-
         m_Engine.getToGui().toGuiUserOnlineStatus( m_Plugin.getHostType(), netIdent, sessionId, true );
     }
     else

@@ -45,6 +45,8 @@ public:
 	{
 	}
 
+	bool						isConnectionValid( void );
+
 	bool						isRelayServer( void )							{ return m_bIsRelayServer; }
 	void						setIsRelayServer( bool bIsServer )				{ m_bIsRelayServer = bIsServer; }
 	bool						isRelayClient( void )							{ return m_bIsRelayClient; }
@@ -88,8 +90,9 @@ public:
 
 	RcConnectInfo *				addConnection( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bNewContact = false );
     RcConnectInfo *				addConnection( const VxGUID& oOnlineId, RcConnectInfo * poInfo, bool bNewContact = false );
-    RcConnectInfo *				findConnection( const VxGUID& oOnlineId );
+    RcConnectInfo *				findConnection( const VxGUID& oOnlineId, bool listIsLocked );
     void						removeConnection( const VxGUID& oOnlineId );
+	void						removeSocket( VxSktBase* sktBase, bool listIsLocked );
 
 	void						removeContactInfo( VxConnectInfo& contactInfo );
 	void						onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );

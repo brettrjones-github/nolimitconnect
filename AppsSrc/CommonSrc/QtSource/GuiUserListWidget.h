@@ -54,7 +54,9 @@ public:
 signals:
     void                        signalUserListItemClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
     void                        signalAvatarButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
-    void                        signalFriendshipButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
+    void                        signalOfferButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
+    void                        signalPushToTalkButtonPressed( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
+    void                        signalPushToTalkButtonReleased( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
     void                        signalMenuButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem ); 
 
 protected slots:
@@ -68,7 +70,9 @@ protected slots:
 	void						slotItemClicked( QListWidgetItem* item );
     void                        slotUserListItemClicked( GuiUserListItem* hostItem );
     void                        slotAvatarButtonClicked( GuiUserListItem* hostItem );
-    void                        slotFriendshipButtonClicked( GuiUserListItem* hostItem );
+    void                        slotOfferButtonClicked( GuiUserListItem* hostItem );
+    void                        slotPushToTalkButtonPressed( GuiUserListItem* hostItem );
+    void                        slotPushToTalkButtonReleased( GuiUserListItem* hostItem );
     void                        slotMenuButtonClicked( GuiUserListItem* hostItem ); 
 
     void				        slotThumbAdded( GuiThumb* thumb );
@@ -85,7 +89,9 @@ protected:
 
     virtual void                onUserListItemClicked( GuiUserListItem* hostItem );
     virtual void                onAvatarButtonClicked( GuiUserListItem* hostItem );
-    virtual void                onFriendshipButtonClicked( GuiUserListItem* hostItem );
+    virtual void                onOfferButtonClicked( GuiUserListItem* hostItem );
+    virtual void                onPushToTalkButtonPressed( GuiUserListItem* hostItem );
+    virtual void                onPushToTalkButtonReleased( GuiUserListItem* hostItem );
     virtual void                onMenuButtonClicked( GuiUserListItem* hostItem );
 
     virtual void                onListItemAdded( GuiUserSessionBase* userSession, GuiUserListItem* userItem );

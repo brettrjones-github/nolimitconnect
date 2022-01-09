@@ -209,7 +209,7 @@ void P2PEngine::attemptConnectionToRelayService( BigListInfo * poInfo )
 //============================================================================
 bool P2PEngine::isContactConnected( VxGUID& oOnlineId )
 {
-	return (nullptr != m_ConnectionList.findConnection( oOnlineId )) ? true : false;
+	return (nullptr != m_ConnectionList.findConnection( oOnlineId, false )) ? true : false;
 }
 
 //============================================================================

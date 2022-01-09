@@ -57,6 +57,8 @@ public:
     virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
     virtual void				toGuiSaveMyIdent( VxNetIdent * netIdent ) override; 
 
+    virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* hostIdent, VxGUID& sessionId, bool isOnline );
+
     bool                        isUserInSession( VxGUID& onlineId );
     void                        setUserOffline( VxGUID& onlineId );
 

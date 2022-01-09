@@ -65,14 +65,14 @@ signals:
     void                        signalInternalHostJoinRequested( HostJoinInfo* hostJoinInfo );
     void                        signalInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo );
     void                        signalInternalHostJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        signalInternalHostJoinOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState hostOfferState );
+    void                        signalInternalHostJoinOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState joinOfferState );
     void                        signalInternalHostJoinOnlineState( VxGUID hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
 
 private slots:
     void                        slotInternalHostJoinRequested( HostJoinInfo* hostJoinInfo );
     void                        slotInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo );
     void                        slotInternalHostJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        slotInternalHostJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState );
+    void                        slotInternalHostJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState joinOfferState );
     void                        slotInternalHostJoinOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
 
 protected:

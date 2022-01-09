@@ -1418,7 +1418,7 @@ bool ConnectionMgr::doConnectRequest( ConnectReqInfo& connectRequest, bool ignor
 
     P2PConnectList& connectedList = m_Engine.getConnectList();
     connectedList.connectListLock();
-    RcConnectInfo *	rcInfo = connectedList.findConnection( connectRequest.getMyOnlineId() );
+    RcConnectInfo *	rcInfo = connectedList.findConnection( connectRequest.getMyOnlineId(), true );
     if( rcInfo )
     {
         // already connected

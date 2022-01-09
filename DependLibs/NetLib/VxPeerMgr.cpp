@@ -185,27 +185,32 @@ bool VxPeerMgr::txPacketWithDestId(	VxSktBase *			sktBase,
 									VxPktHdr *			pktHdr, 		
 									bool				bDisconnect )
 {
-	if( false == isSktActive( sktBase ) )
+    if( !sktBase || false == isSktActive( sktBase ) )
 	{
 		if( false == m_ClientMgr.isSktActive( sktBase ) )
 		{
-			LogMsg( LOG_ERROR, "ERROR VxPeerMgr::txPacketWithDestId: skt no longer active\n" );
-			if( sktBase->isConnected() )
-			{
-				vx_assert( false );
-			}
-
-			return false;;
+            LogMsg( LOG_ERROR, "ERROR VxPeerMgr::txPacketWithDestId: skt no longer active" );
 		}
+
+        return false;
 	}
 
-	RCODE rc = sktBase->txPacketWithDestId( pktHdr, bDisconnect );
-	if( 0 != rc )
-	{
-		LogMsg( LOG_INFO, "VxPeerMgr::txPacketWithDestId: skt %d returned error %d %s\n", sktBase->getSktId(), rc, sktBase->describeSktError( rc ) );
-	}
+    if( sktBase->isConnected() )
+    {
+        RCODE rc = sktBase->txPacketWithDestId( pktHdr, bDisconnect );
+        if( 0 != rc )
+        {
+            LogMsg( LOG_VERBOSE, "VxPeerMgr::txPacketWithDestId: skt %d returned error %d %s", sktBase->getSktId(), rc, sktBase->describeSktError( rc ) );
+        }
 
-	return  ( 0 == rc );
+        return  ( 0 == rc );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "ERROR VxPeerMgr::txPacketWithDestId: skt no longer connecte" );
+    }
+
+    return false;
 }
 
 //============================================================================

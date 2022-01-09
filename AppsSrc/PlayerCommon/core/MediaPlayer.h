@@ -85,7 +85,7 @@ public:
     */
     GoTvPtoPVideo *video() const;
 
-#if LIBGOTV_VERSION >= 0x020200
+#if LIBNO_LIMIT_VERSION >= 0x020200
     /*!
         \brief Returns equalizer object.
         \return equalizer (GoTvPtoPEqualizer *)
@@ -361,7 +361,7 @@ private:
 
     GoTvPtoPAudio *_gotvptopAudio;
     GoTvPtoPVideo *_gotvptopVideo;
-#if LIBGOTV_VERSION >= 0x020200
+#if LIBNO_LIMIT_VERSION >= 0x020200
     GoTvPtoPEqualizer *_gotvptopEqualizer;
 #endif
 

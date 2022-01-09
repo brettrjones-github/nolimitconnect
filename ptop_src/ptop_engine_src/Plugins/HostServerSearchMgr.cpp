@@ -50,17 +50,23 @@ void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInvit
         {
             HostedInfo& hostInfo = iter->second.m_HostedInfo;
             int64_t prevTimestamp  = hostInfo.getHostInfoTimestamp();
-            fillSearchEntry( iter->second, hostType, hostAnn, netIdent, false );
-            if( hostInfo.isHostInviteValid() )
+            if( fillSearchEntry( iter->second, hostType, hostAnn, netIdent, false ) )
             {
-                if( prevTimestamp != hostInfo.getHostInfoTimestamp() )
+                if( hostInfo.isHostInviteValid() )
                 {
-                    onHostInviteAnnounceUpdated( hostType, iter->second.m_HostedInfo, netIdent, sktBase );
+                    if( prevTimestamp != hostInfo.getHostInfoTimestamp() )
+                    {
+                        onHostInviteAnnounceUpdated( hostType, iter->second.m_HostedInfo, netIdent, sktBase );
+                    }
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "HostServerSearchMgr Invalid Host Invite Announce from %s", netIdent->getOnlineName() );
                 }
             }
             else
             {
-                LogMsg( LOG_ERROR, "HostServerSearchMgr Invalid Host Invite Announce from %s", netIdent->getOnlineName() );
+                LogMsg( LOG_ERROR, "HostServerSearchMgr fillSearchEntry failed from Announce from %s", netIdent->getOnlineName() );
             }
         }
         else

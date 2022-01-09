@@ -170,7 +170,7 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 	sktBaseMgrUnlock();
 	if( bDelete )
 	{
-		LogMsg( LOG_INFO, "Deleting Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktId(), sktBase->describeSktType().c_str() );
+        LogMsg( LOG_VERBOSE, "Deleting Skt ID %d type %s from VxSktBaseMgr skt list", sktBase->getSktId(), sktBase->describeSktType().c_str() );
 		delete sktBase;
 	}
 
@@ -180,6 +180,12 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 //============================================================================
 bool VxSktBaseMgr::isSktActive( VxSktBase * sktBase )
 {
+    if( !sktBase )
+    {
+        LogMsg( LOG_ERROR, "VxSktBaseMgr::isSktActive null sktBase" );
+        return false;
+    }
+
 	bool isActive = false;
     vx_assert( sktBase );
     if( sktBase == m_SktLoopback )

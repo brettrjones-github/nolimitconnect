@@ -274,7 +274,7 @@ void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr
 	{
 		relayAvailable = true;
 		m_ConnectionList.connectListLock();
-		RcConnectInfo * connectInfo = m_ConnectionList.findConnection( pktHdr->getDestOnlineId() );
+		RcConnectInfo * connectInfo = m_ConnectionList.findConnection( pktHdr->getDestOnlineId(), true );
 		if( 0 != connectInfo )
 		{
 			rc = connectInfo->getSkt()->txPacket( pktHdr->getDestOnlineId(), pktHdr );

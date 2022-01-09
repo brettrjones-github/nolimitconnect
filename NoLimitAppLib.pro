@@ -37,8 +37,7 @@ MOBILITY =
 # Translations
 # TRANSLATIONS += $$files(lang/gotvptop_*.ts)
 
-
-include(config_version.pri)
+# include(config_version.pri) # not needed unless building kodi
 include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)

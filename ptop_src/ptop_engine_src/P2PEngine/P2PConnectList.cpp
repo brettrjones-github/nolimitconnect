@@ -30,6 +30,12 @@
 //#define DEBUG_MUTEXES
 
 //============================================================================
+bool RcConnectInfo::isConnectionValid( void )
+{ 
+	return m_SktBase && m_SktBase->isConnected(); 
+}
+
+//============================================================================
 P2PConnectList::P2PConnectList( P2PEngine& engine )
 : m_RelayServiceConnection(0)
 , m_Engine( engine )
@@ -44,7 +50,7 @@ void P2PConnectList::fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 														EFriendState	eHisFriendshipToMe )
 {
 	connectListLock();
-	RcConnectInfo * poInfo = findConnection(oOnlineId);
+	RcConnectInfo * poInfo = findConnection( oOnlineId, true );
 	if( NULL != poInfo )
 	{
 		if( poInfo->m_SktBase && poInfo->m_SktBase->isConnected() )
@@ -143,7 +149,7 @@ RcConnectInfo * P2PConnectList::addConnection( const VxGUID& oOnlineId, RcConnec
 	poInfoIn->m_BigListInfo->setIsOnline( true );
 
 	connectListLock();
-	RcConnectInfo * poInfo = findConnection(oOnlineId);
+	RcConnectInfo * poInfo = findConnection( oOnlineId, true);
 	if( NULL == poInfo )
 	{
 		// not found so insert
@@ -260,8 +266,13 @@ void P2PConnectList::removeConnection( const VxGUID& oOnlineId )
 }
 
 //============================================================================
-RcConnectInfo * P2PConnectList::findConnection( const VxGUID& oOnlineId )
+RcConnectInfo * P2PConnectList::findConnection( const VxGUID& oOnlineId, bool isLocked )
 {
+	if( !isLocked )
+	{
+		connectListLock();
+	}
+
 	RcConnectInfo * poInfo = NULL;
 	ConnectListIter oMapIter;
 	oMapIter = m_ConnectList.find(oOnlineId);
@@ -270,64 +281,54 @@ RcConnectInfo * P2PConnectList::findConnection( const VxGUID& oOnlineId )
 		poInfo = (*oMapIter).second;
 	}
 
+	if( !isLocked )
+	{
+		connectListUnlock();
+	}
+
 	return poInfo;
+}
+
+//============================================================================
+void P2PConnectList::removeSocket( VxSktBase* sktBase, bool isLocked )
+{
+	if( !sktBase )
+	{
+		LogMsg( LOG_ERROR, "P2PConnectList::removeSocket null skt" );
+		return;
+	}
+
+	if( !isLocked )
+	{
+		connectListLock();
+	}
+
+	m_Engine.getNetStatusAccum().onConnectionLost( sktBase->getConnectionId() );
+	for( auto iter = m_ConnectList.begin(); iter != m_ConnectList.end(); )
+	{
+		RcConnectInfo* connectInfo = iter->second;
+		if( connectInfo->m_SktBase == sktBase )
+		{
+			m_Engine.onContactDisconnected( connectInfo, true );
+			delete connectInfo;
+			iter = m_ConnectList.erase( iter );
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
+	if( !isLocked )
+	{
+		connectListUnlock();
+	}
 }
 
 //============================================================================
 void P2PConnectList::onConnectionLost( VxSktBase * sktBase )
 {
-#ifdef DEBUG_MUTEXES
-	LogMsg( LOG_INFO, "P2PConnectList::onConnectionLost connectListLock\n" );
-#endif // DEBUG_MUTEXES
-	m_Engine.getNetStatusAccum().onConnectionLost( sktBase->getConnectionId() );
-	connectListLock();
-#ifdef TARGET_OS_WINDOWS
-	RcConnectInfo * poInfo = NULL;
-	ConnectListIter iter = m_ConnectList.begin();
-
-	// remove from general connection list
-    while( iter != m_ConnectList.end() )
-    {
-        poInfo = (*iter).second;
-        if( poInfo->m_SktBase == sktBase )
-        {
-            m_Engine.onContactDisconnected( poInfo, true );
-            delete poInfo;
-            iter = m_ConnectList.erase(iter);
-        }
-        else
-        {
-            ++iter;
-        }
-    }
-#else
-    RcConnectInfo * poInfo = NULL;
-    bool bErased = true;
-	while( bErased )
-	{
-		bErased = false;
-        ConnectListIter iter = m_ConnectList.begin();
-		while( iter != m_ConnectList.end() )
-		{
-			poInfo = (*iter).second;
-			if( poInfo->m_SktBase == sktBase )
-			{
-				m_Engine.onContactDisconnected( poInfo, true );
-				delete poInfo;
-				m_ConnectList.erase(iter);
-				bErased = true;
-				break;
-			}
-
-            ++iter;
-		}
-	}
-#endif // TARGET_OS_ANDROID
-
-#ifdef DEBUG_MUTEXES
-	LogMsg( LOG_INFO, "P2PConnectList::onConnectionLost connectListUnlock\n" );
-#endif // DEBUG_MUTEXES
-	connectListUnlock();
+	removeSocket( sktBase, false );
 }        
 
 //============================================================================

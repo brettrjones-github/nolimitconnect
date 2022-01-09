@@ -15,6 +15,7 @@
 #include "HostedInfo.h"
 
 #include <PktLib/PktsHostInvite.h>
+#include <CoreLib/VxDebug.h>
 #include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
@@ -109,12 +110,32 @@ bool HostedInfo::extractFromSearchBlob( PktBlobEntry& blobEntry )
 //============================================================================
 bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
 {
-    VxPtopUrl hostUrl( m_HostInviteUrl );
-    if( hostUrl.isValid() )
+    std::string hostInviteUrl;
+    std::string hostTitle;
+    std::string hostDesc;
+    int64_t hostTimestampMs{ 0 };
+
+    if( hostAnn->getHostInviteInfo( hostInviteUrl, hostTitle, hostDesc, hostTimestampMs ) )
     {
-        setOnlineId( hostUrl.getOnlineId() );
-        setHostType( hostAnn->getHostType() );
-        return hostAnn->getHostInviteInfo( m_HostInviteUrl, m_HostTitle, m_HostDesc, m_HostInfoTimestampMs );
+        VxPtopUrl hostUrl( hostInviteUrl );
+        if( hostUrl.isValid() && hostTimestampMs && !hostTitle.empty() && !hostDesc.empty() )
+        {
+            setOnlineId( hostUrl.getOnlineId() );
+            setHostType( hostAnn->getHostType() );
+            setHostInviteUrl( hostInviteUrl );
+            setHostTitle( hostTitle );
+            setHostDescription( hostDesc );
+            setHostInfoTimestamp( hostTimestampMs );
+            return true;
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "HostedInfo::fillFromHostInvite extract failed" );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostedInfo::fillFromHostInvite extract failed");
     }
 
     return false;

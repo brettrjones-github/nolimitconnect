@@ -58,7 +58,7 @@ echo you must define your application information
 /* The time this package was configured for a build */
 #define BUILD_TIMESTAMP			"2017-06-11T20:45+0000"
 /* Version number: (major<<16) + (minor<<8) + subminor */
-#define GOTV_VERSION_BINARY		0x010002
+#define NO_LIMIT_VERSION_BINARY		0x010002
 
 
 #ifdef TARGET_POSIX

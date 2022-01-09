@@ -38,5 +38,5 @@
  extern int x;                                                          \
  void * IMP(x) = &x;
 
-VARIABLE( GOTV_VERSION_BINARY )
+VARIABLE( NO_LIMIT_VERSION_BINARY )
 #endif // #if 0 // not creating a dll
