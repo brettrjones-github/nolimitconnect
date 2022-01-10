@@ -145,7 +145,7 @@ void AppletTestAndDebug::setupApplet( void )
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
-    connect( ui.m_TestUrlsComboBox, SIGNAL(currentText(const QString &)),	this,	SLOT(slotNewUrlSelected(const QString &)) );
+    connect( ui.m_TestUrlsComboBox, SIGNAL( currentIndexChanged( int ) ),	this,	SLOT(slotNewUrlSelected( int )) );
     connect( &m_MyApp, SIGNAL(signalRunTestStatus( QString,ERunTestStatus,QString )),
             this, SLOT(slotRunTestStatus( QString,ERunTestStatus,QString )) );
 
@@ -174,11 +174,12 @@ void AppletTestAndDebug::updateSettingsFromDlg()
 }
 
 //============================================================================
-void AppletTestAndDebug::slotNewUrlSelected( const QString& newUrl )
+void AppletTestAndDebug::slotNewUrlSelected( int comboBoxIdx )
 {
-    if( !newUrl.isEmpty() )
+    QString urlText = ui.m_TestUrlsComboBox->currentText();
+    if( !urlText.isEmpty() )
     {
-        ui.m_TestUrlEdit->setText( newUrl );
+        ui.m_TestUrlEdit->setText( urlText );
     }
 }
 

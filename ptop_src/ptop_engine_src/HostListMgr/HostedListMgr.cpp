@@ -115,7 +115,7 @@ void HostedListMgr::updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase )
             EHostType hostType = ( EHostType )i;
             if( netIdent->canRequestJoin( hostType ) )
             {
-                updateHostInfo( hostType, onlineId, nodeUrl, netIdent, sktBase );
+                updateAndRequestInfoIfNeeded( hostType, onlineId, nodeUrl, netIdent, sktBase );
             }
         }
     }
@@ -232,7 +232,28 @@ void HostedListMgr::announceHostInfoRemoved( EHostType hostType, VxGUID& hostOnl
 }
 
 //============================================================================
-void HostedListMgr::updateHostInfo( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase )
+void HostedListMgr::announceHostInfoSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId )
+{
+    if( hostedInfo )
+    {
+        lockClientList();
+        std::vector<HostedListCallbackInterface*>::iterator iter;
+        for( iter = m_HostedInfoListClients.begin(); iter != m_HostedInfoListClients.end(); ++iter )
+        {
+            HostedListCallbackInterface* client = *iter;
+            client->callbackHostedInfoListSearchResult( hostedInfo, sessionId );
+        }
+
+        unlockClientList();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostInfoSearchResult invalid param" );
+    }
+}
+
+//============================================================================
+void HostedListMgr::updateAndRequestInfoIfNeeded( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
     bool requiresSendHostInfoRequest{ false };
     bool requiresAnnounceUpdate{ false };
@@ -533,6 +554,8 @@ bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, V
     if( eConnectReasonNetworkHostListSearch == connectReason )
     {
         PktHostInviteSearchReq pktReq;
+        pktReq.setPluginNum( ( uint8_t )ePluginTypeHostNetwork );
+        pktReq.setSrcOnlineId( m_Engine.getMyOnlineId() );
         pktReq.setSearchSessionId( sessionId );
         pktReq.setHostType( m_SearchHostType );
         pktReq.setSpecificOnlineId( m_SearchSpecificOnlineId );
@@ -581,7 +604,11 @@ void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& ho
 //============================================================================
 void HostedListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo )
 {
-    updateHostInfo( hostType, hostedInfo, netIdent, sktBase );
+    HostedInfo resultInfo;
+    if( updateHostInfo( hostType, hostedInfo, netIdent, sktBase, &resultInfo ) )
+    {
+        announceHostInfoSearchResult( &resultInfo, searchSessionId );
+    }
 }
 
 //============================================================================
@@ -614,7 +641,8 @@ void HostedListMgr::onHostInviteAnnounceUpdated( EHostType hostType, HostedInfo&
 }
 
 //============================================================================
-bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase )
+// returns true if retHostedInfo was filled
+bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase, HostedInfo* retResultInfo )
 {
     VxPtopUrl ptopUrl( hostedInfo.getHostInviteUrl() );
     if( !ptopUrl.isValid() )
@@ -623,6 +651,7 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
         return false;
     }
 
+    bool filledResultInfo = false;
     bool needsIdentityReq = false;
     if( !netIdent )
     {
@@ -639,8 +668,8 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
         }
     }
 
-    LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchResult host url %s title %s desc %s time %lld", hostedInfo.getHostInviteUrl().c_str(),
-        hostedInfo.getHostTitle().c_str(), hostedInfo.getHostDescription().c_str(), hostedInfo.getHostInfoTimestamp() );
+    LogMsg( LOG_VERBOSE, "HostedListMgr::hostSearchResult title %s desc %s time %lld host url %s", 
+        hostedInfo.getHostTitle().c_str(), hostedInfo.getHostDescription().c_str(), hostedInfo.getHostInfoTimestamp(), hostedInfo.getHostInviteUrl().c_str() );
 
     bool alreadyExisted{ false };
     bool hostedInfoUpdated{ false };
@@ -706,6 +735,12 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
                 hostedInfoUpdated = false;
             }
 
+            if( retResultInfo )
+            {
+                *retResultInfo = updatedHostedInfo;
+                filledResultInfo = true;
+            }
+
             break;
         }
     }
@@ -715,6 +750,12 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
         if( sktBase )
         {
             hostedInfo.setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
+        }
+
+        if( retResultInfo )
+        {
+            *retResultInfo = hostedInfo;
+            filledResultInfo = true;
         }
 
         m_HostedInfoList.push_back( hostedInfo );
@@ -729,5 +770,5 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
         announceHostInfoUpdated( &updatedHostedInfo );
     }
 
-    return true;
+    return filledResultInfo;
 }

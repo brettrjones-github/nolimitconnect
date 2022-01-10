@@ -55,12 +55,10 @@ AppletRandomConnectJoinSearch::AppletRandomConnectJoinSearch(	AppCommon&		    ap
         this, SLOT(slotHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )) );
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
         this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
-    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
-        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
 
-    connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
 
     setStatusLabel( QObject::tr( "Search For Random Connect Host To Join" ) );
     std::string lastHostSearchText;
@@ -69,6 +67,16 @@ AppletRandomConnectJoinSearch::AppletRandomConnectJoinSearch(	AppCommon&		    ap
     {
         ui.m_SearchsParamWidget->getSearchTextEdit()->setText( lastHostSearchText.c_str() );
     }
+
+    m_MyApp.activityStateChange( this, true );
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
+}
+
+//============================================================================
+AppletRandomConnectJoinSearch::~AppletRandomConnectJoinSearch()
+{
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
@@ -192,15 +200,15 @@ void AppletRandomConnectJoinSearch::slotHostSearchStatus( EHostType hostType, Vx
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
+void AppletRandomConnectJoinSearch::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
-    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
-        DescribePluginType( pluginSetting.getPluginType() ) );
+    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s title %s desc %s", DescribeHostType( hostedId.getHostType() ), guiHosted->getHostTitle().c_str(),
+        guiHosted->getHostDescription().c_str() );
 
     QString strMsg = QObject::tr( "Match found: " );
-    strMsg += hostIdent.getOnlineName();
+    strMsg += guiHosted->getHostTitle().c_str();
     setInfoLabel( strMsg );
-    addPluginSettingToList( hostType, sessionId, hostIdent, pluginSetting );
+    ui.m_GuiHostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
 }
 
 //============================================================================
@@ -229,15 +237,9 @@ void AppletRandomConnectJoinSearch::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
-{
-    ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
-}
-
-//============================================================================
 void AppletRandomConnectJoinSearch::clearPluginSettingToList( void )
 {
-    ui.m_HostListWidget->clearHostList();
+    ui.m_GuiHostedListWidget->clearHostList();
 }
 
 //============================================================================
@@ -248,19 +250,19 @@ void AppletRandomConnectJoinSearch::clearStatus( void )
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletRandomConnectJoinSearch::slotIconButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletRandomConnectJoinSearch::slotMenuButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletRandomConnectJoinSearch::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletRandomConnectJoinSearch::slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
 }

@@ -18,7 +18,6 @@
 #include "GuiHostedListCallback.h"
 
 #include <GuiInterface/IDefs.h>
-#include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
 
 #include <QString>
 #include <QDialog>

@@ -56,8 +56,6 @@ AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app,
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
         this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
 
-    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
-        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
 
     connect( ui.m_HostedListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
     connect( ui.m_HostedListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
@@ -66,6 +64,8 @@ AppletGroupListLocalView::AppletGroupListLocalView(	AppCommon&		    app,
     setStatusLabel( QObject::tr( "Groups Announced To Network Host" ) );
     m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
     slotRefreshGroupList();
+
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
 }
 
 //============================================================================
@@ -214,7 +214,7 @@ void AppletGroupListLocalView::slotJoinButtonClicked( GuiHostSession* hostSessio
 //============================================================================
 void AppletGroupListLocalView::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
-    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s title %s", DescribeHostType( hostedId.getHostType() ), guiHosted->getHostTitle().c_str() );
+    LogMsg( LOG_DEBUG, "AppletGroupListLocalView::callbackGuiHostedListSearchResult host %s title %s", DescribeHostType( hostedId.getHostType() ), guiHosted->getHostTitle().c_str() );
 
     QString strMsg = QObject::tr( "Match found: " );
     strMsg += guiHosted->getHostTitle().c_str();

@@ -28,13 +28,14 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
     setAppletType( eAppletTestHostClient );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-	fillHostList( eHostTypeNetwork, ui.m_NetworkHostComboBox );
 	GuiHelpers::fillHostType( ui.m_HostTypeComboBox, true );
+	fillHostList( eHostTypeNetwork, ui.m_NetworkHostComboBox );
+	setNetworkHostIdFromNetHostComboBoxSelection();
 	
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 	connect( ui.m_NetworkHostComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotNetworkHostComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostTypeComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostTypeComboBoxSelectionChange( int ) ) );
-	connect( ui.m_HostUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostUrlSelectionChange( int ) ) );
+	connect( ui.m_HostListUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHosListtUrlSelectionChange( int ) ) );
 	connect( ui.m_QueryButton, SIGNAL( clicked() ), this, SLOT( slotQueryButtonClicked() ) );
 	connect( ui.m_GetNetworkHostIdentityButton, SIGNAL( clicked() ), this, SLOT( slotNetworkHostIdentityButtonClicked() ) );
 	connect( ui.m_GetNetHostListButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostListFromNetworkHostButtonClicked() ) );
@@ -52,13 +53,26 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 
 	m_MyApp.activityStateChange( this, true );
 	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
+	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
 }
 
 //============================================================================
 AppletTestHostClient::~AppletTestHostClient()
 {
 	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
+	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletTestHostClient::setNetworkHostIdFromNetHostComboBoxSelection( void )
+{
+	std::string curNetHostUrl = ui.m_NetworkHostComboBox->currentText().toUtf8().constData();
+	if( !curNetHostUrl.empty() )
+	{
+		VxPtopUrl hostUrl( curNetHostUrl );
+		m_NetworkHostOnlineId = hostUrl.getOnlineId();
+	}
 }
 
 //============================================================================
@@ -82,6 +96,8 @@ void AppletTestHostClient::callbackOnUserUpdated( GuiUser* guiUser )
 //============================================================================
 void AppletTestHostClient::slotNetworkHostComboBoxSelectionChange( int comboIdx )
 {
+	setNetworkHostIdFromNetHostComboBoxSelection();
+	slotQueryHostListFromNetworkHostButtonClicked();
 }
 
 //============================================================================
@@ -95,7 +111,7 @@ void AppletTestHostClient::slotHostTypeComboBoxSelectionChange( int comboIdx )
 }
 
 //============================================================================
-void AppletTestHostClient::slotHostUrlSelectionChange( int comboIdx )
+void AppletTestHostClient::slotHosListtUrlSelectionChange( int comboIdx )
 {
 
 
@@ -104,7 +120,29 @@ void AppletTestHostClient::slotHostUrlSelectionChange( int comboIdx )
 //============================================================================
 void AppletTestHostClient::slotQueryButtonClicked( void )
 {
-	
+	std::string networkHostUrl = ui.m_NetworkHostComboBox->currentText().toUtf8().constData();
+	// strip the host name
+	size_t foundOffs = networkHostUrl.find( "ptop:");
+	if( foundOffs == std::string::npos ) 
+	{
+		// not found 
+	}
+
+	std::string hostUrlStr = networkHostUrl.substr( foundOffs, networkHostUrl.length() );
+	if( !hostUrlStr.empty() )
+	{
+		EHostType hostType = GuiHelpers::comboIdxToHostType( ui.m_HostTypeComboBox->currentIndex() );
+		VxPtopUrl hostUrl( hostUrlStr );
+		if( hostUrl.isValid() && hostType != eHostTypeUnknown )
+		{
+			VxGUID nullGuid;
+			m_MyApp.getFromGuiInterface().fromGuiQueryHostListFromNetworkHost( hostUrl, hostType, nullGuid );
+		}
+		else
+		{
+			okMessageBox( "Invalid Url", "Invalid Network Host Url" );
+		}
+	}
 }
 
 //============================================================================
@@ -116,14 +154,12 @@ void AppletTestHostClient::updateHostType( EHostType hostType )
 	}
 
 	m_HostType = hostType;
-
 }
 
 //============================================================================
 void AppletTestHostClient::fillHostList( EHostType hostType, QComboBox* comboBox )
 {
 	comboBox->clear();
-
 	std::string defaultUrlStr = m_MyApp.getFromGuiInterface().fromGuiQueryDefaultUrl( hostType );
 	if( !defaultUrlStr.empty() )
 	{
@@ -170,11 +206,41 @@ void AppletTestHostClient::slotNetworkHostIdentityButtonClicked( void )
 //============================================================================
 void AppletTestHostClient::slotQueryHostListFromNetworkHostButtonClicked( void )
 {
+	std::string networkHostUrl = ui.m_NetworkHostComboBox->currentText().toUtf8().constData();
+	// strip the host name
+	size_t foundOffs = networkHostUrl.find( "ptop:" );
+	if( foundOffs == std::string::npos )
+	{
+		// not found 
+		return;
+	}
 
+	ui.m_HostListUrlComboBox->clear();
+	std::string netHostUrlStr = networkHostUrl.substr( foundOffs, networkHostUrl.length() );
+	if( !netHostUrlStr.empty() )
+	{
+		EHostType hostType = GuiHelpers::comboIdxToHostType( ui.m_HostTypeComboBox->currentIndex() );
+		VxPtopUrl hostUrl( netHostUrlStr );
+		if( hostUrl.isValid() && hostType != eHostTypeUnknown )
+		{
+			VxGUID nullGuid;
+			m_MyApp.getFromGuiInterface().fromGuiQueryHostListFromNetworkHost( hostUrl, hostType, nullGuid );
+		}
+		else
+		{
+			okMessageBox( "Invalid Url", "Invalid Network Host Url" );
+		}
+	}
 }
 
 //============================================================================
 void AppletTestHostClient::slotJoinHostButtonClicked( void )
+{
+
+}
+
+//============================================================================
+void AppletTestHostClient::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
 
 }

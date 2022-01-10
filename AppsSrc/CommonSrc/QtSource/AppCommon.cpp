@@ -293,6 +293,7 @@ void AppCommon::loadWithoutThread( void )
 	m_UserMgr.onAppCommonCreated();
 	m_OfferClientMgr.onAppCommonCreated();
 	m_OfferHostMgr.onAppCommonCreated();
+	m_HostedListMgr.onAppCommonCreated();
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
 	m_ConnectMgr.onAppCommonCreated();

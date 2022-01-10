@@ -148,7 +148,7 @@
        <widget class="IdentWidget" name="m_HostIeddentWidget" native="true"/>
       </item>
       <item>
-       <widget class="QComboBox" name="m_HostUrlComboBox"/>
+       <widget class="QComboBox" name="m_HostListUrlComboBox"/>
       </item>
       <item>
        <widget class="HostedPluginWidget" name="m_HostedPluginWidget" native="true"/>
@@ -187,7 +187,7 @@
        </widget>
       </item>
       <item>
-       <widget class="HostListWidget" name="m_HostListWidget" native="true">
+       <widget class="GuiHostedListWidget" name="m_HostListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -203,12 +203,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>HostListWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">HostListWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>IdentWidget</class>
    <extends>QWidget</extends>
    <header>IdentWidget.h</header>
@@ -218,6 +212,12 @@
    <class>HostedPluginWidget</class>
    <extends>QWidget</extends>
    <header>HostedPluginWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GuiHostedListWidget</class>
+   <extends>QWidget</extends>
+   <header>GuiHostedListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

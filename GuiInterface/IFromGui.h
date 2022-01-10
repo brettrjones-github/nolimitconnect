@@ -90,6 +90,7 @@ enum EMediaInputType
 };
 
 class SearchParams;
+class VxPtopUrl;
 
 /// IFromGui is an abstract interface for from GUI to P2PEngine calls
 class IFromGui
@@ -427,4 +428,5 @@ public:
 	virtual bool				fromGuiQueryIdentity( std::string& url, VxNetIdent& retNetIdent, bool requestIdentityIfUnknown ) = 0;
 	virtual bool				fromGuiQueryHosts( std::string& netHostUrl, EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll ) = 0;
 	virtual bool				fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList ) = 0;
+	virtual bool				fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll ) = 0;
 };

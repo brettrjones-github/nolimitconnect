@@ -191,7 +191,7 @@ bool PluginBase::txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr 
 {
 	if( nullptr == sktBase )
 	{
-		LogMsg( LOG_WARN, "PluginBase::txPacket NULL sktBase\n" );
+		LogMsg( LOG_WARN, "PluginBase::txPacket NULL sktBase" );
 		return false;
 	}
 

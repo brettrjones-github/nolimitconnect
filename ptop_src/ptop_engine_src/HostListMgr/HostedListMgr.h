@@ -47,7 +47,8 @@ public:
     bool                        fromGuiQueryHostedInfoList( EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll );
     bool                        fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll );
 
-    bool                        updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+    // returns true if retHostedInfo was filled
+    bool                        updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase, HostedInfo* retHostedInfo = nullptr );
     void                        updateHosted( EHostType hostType, VxGUID& hostGuid, std::string& hosted, int64_t timestampMs = 0 );
 
     void                        updateHostedList( VxNetIdent* netIdent, VxSktBase* sktBase );
@@ -58,7 +59,6 @@ public:
 
     void                        onHostInviteAnnounceAdded( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
     void                        onHostInviteAnnounceUpdated( EHostType hostType, HostedInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
-    void                        hostAnnouncedUpdate( EHostType hostType, VxSktBase* sktBase, VxNetIdent* netIdent, HostedInfo& hostedInfo );
 
 protected:
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
@@ -79,17 +79,17 @@ protected:
     void						removeHostedInfo( EHostType hostType, VxGUID& onlineId );
     void						clearHostedInfoList( void );
 
-    void                        updateHostInfo( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        updateAndRequestInfoIfNeeded( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase );
 
     bool                        updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool isFavorite );
     bool                        updateLastConnected( EHostType hostType, VxGUID& onlineId, int64_t lastConnectedTime );
     bool                        updateLastJoined( EHostType hostType, VxGUID& onlineId, int64_t lastJoinedTime );
-    bool						updateHostUrl( EHostType hostType, VxGUID& onlineId, std::string& hostUrl );
     bool                        updateHostTitleAndDescription( EHostType hostType, VxGUID& onlineId, std::string& title, std::string& description, int64_t lastDescUpdateTime, VxNetIdent* netIdent = nullptr );
 
     bool                        requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxNetIdent* netIdent, VxSktBase* sktBase );
 
     void                        announceHostInfoUpdated( HostedInfo* hostedInfo );
+    void                        announceHostInfoSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId );
     void                        announceHostInfoRemoved( EHostType hostType, VxGUID& onlineId );
 
     void						addToListInJoinedTimestampOrder( std::vector<HostedInfo>& hostedInfoList, HostedInfo& hostedInfo );

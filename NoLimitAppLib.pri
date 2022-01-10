@@ -240,8 +240,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostedPluginWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListItem.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HostJoinRequestListWidget.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/HostListWidget.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/HostListItem.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/HomeWindow.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/IdentLogicInterface.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/IdentWidget.h \
@@ -596,8 +594,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/HelpBrowser.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HistoryEntryWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/HistoryListWidget.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/HostListWidget.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/HostListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ImageListEntry.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ImagePickBar.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/ImageListRow.cpp \
@@ -855,7 +851,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/HostJoinRequestListItem.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/HistoryEntryWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/HomeWindow.ui \
-	$$PWD/AppsSrc/CommonSrc/Forms/HostListItem.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/IdentWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ImageListEntry.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ImageListRow.ui \

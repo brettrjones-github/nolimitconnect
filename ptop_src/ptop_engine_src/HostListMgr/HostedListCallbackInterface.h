@@ -23,6 +23,6 @@ class HostedListCallbackInterface
 public:
     virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ){};
     virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ){};
-    virtual void				callbackHostedInfoListSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) {};
+    virtual void				callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId ) {};
 };
 

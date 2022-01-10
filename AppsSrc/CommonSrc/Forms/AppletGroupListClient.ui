@@ -74,7 +74,7 @@
        </widget>
       </item>
       <item>
-       <widget class="HostListWidget" name="m_HostListWidget" native="true">
+       <widget class="GuiHostedListWidget" name="m_GuiHostedListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -90,20 +90,18 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>GuiHostedListWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">GuiHostedListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>SearchParamsWidget</class>
    <extends>QWidget</extends>
    <header>SearchParamsWidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>HostListWidget</class>
-   <extends>QWidget</extends>
-   <header>HostListWidget.h</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../NoLimitConnect.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

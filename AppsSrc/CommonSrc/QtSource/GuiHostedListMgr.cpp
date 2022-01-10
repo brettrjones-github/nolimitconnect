@@ -31,9 +31,9 @@ GuiHostedListMgr::GuiHostedListMgr( AppCommon& app )
 //============================================================================
 void GuiHostedListMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalHostedUpdated( HostedInfo ) ), this, SLOT( slotInternalHostedUpdated( HostedInfo ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostedUpdated( HostedInfo* ) ), this, SLOT( slotInternalHostedUpdated( HostedInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostedRemoved( VxGUID, EHostType ) ), this, SLOT( slotInternalHostedRemoved( VxGUID, EHostType ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostSearchResult( EHostType, VxGUID, HostedInfo* ) ), this, SLOT( slotInternalHostSearchResult( EHostType, VxGUID, HostedInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostSearchResult( HostedInfo*, VxGUID) ), this, SLOT( slotInternalHostSearchResult( HostedInfo*, VxGUID ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getHostedListMgr().addHostedListMgrClient( dynamic_cast< HostedListCallbackInterface*>(this), true );
 }
@@ -53,13 +53,19 @@ void GuiHostedListMgr::callbackHostedInfoListUpdated( HostedInfo* hostedInfo )
         return;
     }
 
-    emit signalInternalHostedUpdated( new HostedInfo(*hostedInfo) );
+    emit signalInternalHostedUpdated( new HostedInfo( *hostedInfo ) );
 }
 
 //============================================================================
 void GuiHostedListMgr::callbackHostedInfoListRemoved( VxGUID& hostOnlineId, EHostType hostType )
 {
     emit signalInternalHostedRemoved( hostOnlineId, hostType );
+}
+
+//============================================================================
+void GuiHostedListMgr::callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& hostOnlineId )
+{
+    emit signalInternalHostSearchResult( new HostedInfo( *hostedInfo ), hostOnlineId );
 }
 
 //============================================================================
@@ -73,13 +79,13 @@ void GuiHostedListMgr::slotInternalHostedUpdated( HostedInfo* hostedInfo )
 }
 
 //============================================================================
-void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID onlineId, EHostType hostType )
+void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType )
 {
-    HostedId hostedId( onlineId, hostType );
+    HostedId hostedId( hostOnlineId, hostType );
     auto iter = m_HostedList.find( hostedId );
     if( iter != m_HostedList.end() && hostType != eHostTypeUnknown )
     {
-        emit signalHostedRemoved( onlineId, hostType );
+        emit signalHostedRemoved( hostOnlineId, hostType );
     }
 }
 
@@ -87,13 +93,13 @@ void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID onlineId, EHostType hos
 void GuiHostedListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
 {
     HostedInfo* newHostedInfo = new HostedInfo( hostedInfo );
-    emit signalInternalHostSearchResult( hostType, sessionId, newHostedInfo );
+    emit signalInternalHostSearchResult( newHostedInfo, sessionId );
 }
 
 //============================================================================
-void GuiHostedListMgr::slotInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo )
+void GuiHostedListMgr::slotInternalHostSearchResult( HostedInfo* hostedInfo, VxGUID sessionId )
 {
-    updateHostSearchResult( hostType, sessionId, *hostedInfo );
+    updateHostSearchResult( *hostedInfo, sessionId );
     delete hostedInfo;
 }
 
@@ -257,15 +263,21 @@ void GuiHostedListMgr::onMyIdentUpdated( GuiHosted* guiHosted )
 }
 
 //============================================================================
-void GuiHostedListMgr::updateHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo& hostedInfo )
+void GuiHostedListMgr::updateHostSearchResult( HostedInfo& hostedInfo, VxGUID& sessionId )
 {
     // hosted info is temporary and will soon be deleted so make copy if required
-
-    HostedId hostedId( hostedInfo.getOnlineId(), hostType );
-    GuiHosted* guiHosted = updateHostedInfo( hostedInfo );
-    if( guiHosted )
-    {        
-        announceHostedListSearchResult( hostedId, guiHosted, sessionId );
+    if( hostedInfo.isHostInviteValid() )
+    {
+        HostedId hostedId( hostedInfo.getOnlineId(), hostedInfo.getHostType() );
+        GuiHosted* guiHosted = updateHostedInfo( hostedInfo );
+        if( guiHosted )
+        {
+            announceHostedListSearchResult( hostedId, guiHosted, sessionId );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiHostedListMgr::updateHostSearchResult invalid invite" );
     }
 }
 

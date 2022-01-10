@@ -538,7 +538,7 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 //! this is called for all valid packets that are not sys packets
 void PluginMgr::handleNonSystemPackets( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	//LogMsg( LOG_INFO, "PluginMgr::handleNonSystemPackets\n" );
+	//LogMsg( LOG_INFO, "PluginMgr::handleNonSystemPackets" );
 	uint8_t u8PluginNum = pktHdr->getPluginNum();
 	if( isValidPluginNum( u8PluginNum ) )
 	{

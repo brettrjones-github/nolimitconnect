@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ui_HostListItem.h"
+#include "ui_GuiHostedListItem.h"
 #include "IdentLogicInterface.h"
 
 #include <QWidget>
@@ -58,7 +58,7 @@ protected:
     virtual void                showConnectButton( bool isAccepted );
 
 	//=== vars ===//
-    Ui::HostListItemUi	        ui;
+    Ui::GuiHostedListItemUi	    ui;
     AppCommon&					m_MyApp;
     GuiHostSession*             m_HostSession{ nullptr };
 };

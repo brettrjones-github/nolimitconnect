@@ -489,6 +489,7 @@ void HostServerSearchMgr::logCommError( ECommErr commErr, const char* desc, VxSk
 //============================================================================
 void HostServerSearchMgr::updateFromHostInviteSearchBlob( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount )
 {
+    blobEntry.resetRead();
     for( int i = 0; i < hostInfoCount; i++ )
     {
         HostedInfo hostedInfo;

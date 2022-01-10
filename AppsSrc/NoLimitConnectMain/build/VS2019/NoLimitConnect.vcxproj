@@ -349,8 +349,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListItem.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListWidget.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListItem.cpp" />
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\HostListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\IdentLogicInterface.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\IdentWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\ImageListEntry.cpp" />
@@ -681,8 +679,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ImageListRow.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\ImageListEntry.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\IdentWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\HostListWidget.h" />
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\HostListItem.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HomeWindow.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HistoryListWidget.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.h" />
@@ -977,7 +973,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\HistoryEntryWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\HomeWindow.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\HostJoinRequestListItem.ui" />
-    <QtUic Include="..\..\..\CommonSrc\Forms\HostListItem.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\IdentWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ImageListEntry.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ImageListRow.ui" />

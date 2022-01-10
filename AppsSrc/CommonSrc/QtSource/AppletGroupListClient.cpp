@@ -56,13 +56,10 @@ AppletGroupListClient::AppletGroupListClient(	AppCommon&		    app,
     connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
         this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
 
-    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )),
-        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent, PluginSetting  )) );
-
-    connect( ui.m_HostListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, HostListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, HostListItem* ) ) );
-    connect( ui.m_HostListWidget,      SIGNAL( signalConnectButtonClicked( GuiHostSession*, HostListItem* ) ), this, SLOT( slotConnectButtonClicked( GuiHostSession*, HostListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotIconButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotMenuButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ),  this, SLOT( slotJoinButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
+    connect( ui.m_GuiHostedListWidget,      SIGNAL( signalConnectButtonClicked( GuiHostSession*, GuiHostedListItem* ) ), this, SLOT( slotConnectButtonClicked( GuiHostSession*, GuiHostedListItem* ) ) );
 
     setStatusLabel( QObject::tr( "Fetch Group Host List" ) );
     std::string lastHostSearchText;
@@ -75,6 +72,16 @@ AppletGroupListClient::AppletGroupListClient(	AppCommon&		    app,
     ui.m_SearchsParamWidget->setVisible( false );
     ui.m_SearchsParamWidget->setSearchListAll( true );
     slotStartSearchState( true );
+
+    m_MyApp.activityStateChange( this, true );
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
+}
+
+//============================================================================
+AppletGroupListClient::~AppletGroupListClient()
+{
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
@@ -199,15 +206,15 @@ void AppletGroupListClient::slotHostSearchStatus( EHostType hostType, VxGUID ses
 }
 
 //============================================================================
-void AppletGroupListClient::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
+void AppletGroupListClient::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
-    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
-        DescribePluginType( pluginSetting.getPluginType() ) );
+    LogMsg( LOG_DEBUG, "AppletGroupListClient::callbackGuiHostSearchResult host %s title %s desc %s", DescribeHostType( hostedId.getHostType() ), guiHosted->getHostTitle().c_str(),
+        guiHosted->getHostDescription().c_str() );
 
     QString strMsg = QObject::tr( "Match found: " );
-    strMsg += hostIdent.getOnlineName();
+    strMsg += guiHosted->getHostTitle().c_str();
     setInfoLabel( strMsg );
-    addPluginSettingToList( hostType, sessionId, hostIdent, pluginSetting );
+    ui.m_GuiHostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
 }
 
 //============================================================================
@@ -236,15 +243,9 @@ void AppletGroupListClient::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletGroupListClient::addPluginSettingToList( EHostType hostType, VxGUID& sessionId, VxNetIdent& hostIdent, PluginSetting& pluginSetting )
-{
-    ui.m_HostListWidget->addHostAndSettingsToList( hostType, sessionId, hostIdent, pluginSetting );
-}
-
-//============================================================================
 void AppletGroupListClient::clearPluginSettingToList( void )
 {
-    ui.m_HostListWidget->clearHostList();
+    ui.m_GuiHostedListWidget->clearHostList();
 }
 
 //============================================================================
@@ -255,25 +256,25 @@ void AppletGroupListClient::clearStatus( void )
 }
 
 //============================================================================
-void AppletGroupListClient::slotIconButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListClient::slotIconButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletGroupListClient::slotMenuButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListClient::slotMenuButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
 
 }
 
 //============================================================================
-void AppletGroupListClient::slotJoinButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListClient::slotJoinButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
 }
 
 //============================================================================
-void AppletGroupListClient::slotConnectButtonClicked( GuiHostSession* hostSession, HostListItem* hostItem )
+void AppletGroupListClient::slotConnectButtonClicked( GuiHostSession* hostSession, GuiHostedListItem* hostItem )
 {
     onJointButtonClicked( hostSession );
 }

@@ -68,22 +68,23 @@ signals:
 
     void                        signalInternalHostedUpdated( HostedInfo* hostedInfo );
     void                        signalInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
-    void                        signalInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo );
+    void                        signalInternalHostSearchResult( HostedInfo* hostedInfo, VxGUID sessionId );
 
 private slots:
-    void                        slotInternalHostedUpdated( HostedInfo* userJoinInfo );
+    void                        slotInternalHostedUpdated( HostedInfo* hostedInfo );
     void                        slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
-    void                        slotInternalHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo* hostedInfo );
+    void                        slotInternalHostSearchResult( HostedInfo* hostedInfoe, VxGUID sessionId );
 
 protected:
     void                        removeHosted( VxGUID& onlineId, EHostType hostType );
     GuiHosted*                  findHosted( VxGUID& onlineId, EHostType hostType );
     GuiHosted*                  findHosted( HostedId& hostTypeId );
     GuiHosted*                  updateHostedInfo( HostedInfo& hostedInfo );
-    void                        updateHostSearchResult( EHostType hostType, VxGUID sessionId, HostedInfo& hostedInfo );
+    void                        updateHostSearchResult( HostedInfo& hostedInfo, VxGUID& sessionId );
     
     virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ) override;
-    virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ) override;
+    virtual void				callbackHostedInfoListRemoved( VxGUID& hostOnlineId, EHostType hostType ) override;
+    virtual void				callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& hostOnlineId ) override;
 
     void                        announceHostedListUpdated( HostedId& hostedId, GuiHosted* guiHosted );
     void                        announceHostedListRemoved( HostedId& hostedId );

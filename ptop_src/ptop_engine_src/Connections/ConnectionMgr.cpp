@@ -427,6 +427,11 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
     {
         LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s Loopback Socket", DescribeConnectReason( connectReason ) );
         retSktBase = m_Engine.getSktLoopback();
+        int64_t timeMs = GetGmtTimeMs();
+        retSktBase->setLastActiveTimeMs( timeMs );
+        retSktBase->setLastSessionTimeMs( timeMs );
+        retSktBase->setLastImAliveTimeMs( timeMs );
+
         if( callback )
         {
             callback->onContactConnected( sessionId, retSktBase, onlineId, connectReason );

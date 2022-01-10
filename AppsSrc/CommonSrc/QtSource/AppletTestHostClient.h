@@ -17,8 +17,9 @@
 #include "ui_AppletTestHostClient.h"
 
 #include "GuiUserMgrGuiUserUpdateInterface.h"
+#include "GuiHostedListCallback.h"
 
-class AppletTestHostClient : public AppletTestBase, public GuiUserMgrGuiUserUpdateInterface
+class AppletTestHostClient : public AppletTestBase, public GuiUserMgrGuiUserUpdateInterface, public GuiHostedListCallback
 {
 	Q_OBJECT
 public:
@@ -31,11 +32,12 @@ public:
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override {};
 
+    virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
 
 protected slots:
     void                        slotNetworkHostComboBoxSelectionChange( int comboIdx );
     void                        slotHostTypeComboBoxSelectionChange( int comboIdx );
-    void                        slotHostUrlSelectionChange( int comboIdx );
+    void                        slotHosListtUrlSelectionChange( int comboIdx );
     void                        slotQueryButtonClicked();
     void                        slotNetworkHostIdentityButtonClicked( void );
     void                        slotQueryHostListFromNetworkHostButtonClicked( void );
@@ -43,6 +45,7 @@ protected slots:
 
 protected:
     void                        fillHostList( EHostType hostType, QComboBox* comboBox );
+    void                        setNetworkHostIdFromNetHostComboBoxSelection( void );
     void                        updateHostType( EHostType hostType );
 
     Ui::AppletTestHostClientUi  ui;

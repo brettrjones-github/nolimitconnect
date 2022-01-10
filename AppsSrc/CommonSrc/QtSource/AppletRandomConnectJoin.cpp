@@ -34,20 +34,6 @@ AppletRandomConnectJoin::AppletRandomConnectJoin( AppCommon& app, QWidget * pare
     setHostType( eHostTypeRandomConnect );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    setupApplet();
-
-	m_MyApp.activityStateChange( this, true );
-}
-
-//============================================================================
-AppletRandomConnectJoin::~AppletRandomConnectJoin()
-{
-    m_MyApp.activityStateChange( this, false );
-}
-
-//============================================================================
-void AppletRandomConnectJoin::setupApplet( void )
-{
     getInfoEdit()->setMaximumBlockCount( MAX_LOG_EDIT_BLOCK_CNT );
     getInfoEdit()->setReadOnly( true );
 
@@ -58,14 +44,22 @@ void AppletRandomConnectJoin::setupApplet( void )
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
-    connect( &m_MyApp, SIGNAL(signalHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )),
-        this, SLOT(slotHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString )) );
-    connect( &m_MyApp, SIGNAL(signalHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )),
-        this, SLOT(slotHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString )) );
-    connect( &m_MyApp, SIGNAL(signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )),
-        this, SLOT(slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString )) );
-    connect( &m_MyApp, SIGNAL(signalHostSearchResult( EHostType, VxGUID, VxNetIdent , PluginSetting  )),
-        this, SLOT(slotHostSearchResult( EHostType, VxGUID, VxNetIdent , PluginSetting  )) );
+    connect( &m_MyApp, SIGNAL( signalHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString ) ),
+        this, SLOT( slotHostAnnounceStatus( EHostType, VxGUID, EHostAnnounceStatus, QString ) ) );
+    connect( &m_MyApp, SIGNAL( signalHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString ) ),
+        this, SLOT( slotHostJoinStatus( EHostType, VxGUID, EHostJoinStatus, QString ) ) );
+    connect( &m_MyApp, SIGNAL( signalHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString ) ),
+        this, SLOT( slotHostSearchStatus( EHostType, VxGUID, EHostSearchStatus, QString ) ) );
+
+    m_MyApp.activityStateChange( this, true );
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
+}
+
+//============================================================================
+AppletRandomConnectJoin::~AppletRandomConnectJoin()
+{
+    m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
@@ -123,10 +117,15 @@ void AppletRandomConnectJoin::slotHostSearchStatus( EHostType hostType, VxGUID s
 }
 
 //============================================================================
-void AppletRandomConnectJoin::slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting )
+void AppletRandomConnectJoin::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
-    LogMsg( LOG_DEBUG, "slotHostSearchResult host %s ident %s plugin %s", DescribeHostType( hostType ), hostIdent.getOnlineName(), 
-           DescribePluginType( pluginSetting.getPluginType() ) );
+    LogMsg( LOG_DEBUG, "AppletRandomConnectJoin::callbackGuiHostedListSearchResult host %s title %s desc %s", DescribeHostType( hostedId.getHostType() ), guiHosted->getHostTitle().c_str(),
+        guiHosted->getHostDescription().c_str() );
+
+    QString strMsg = QObject::tr( "Match found: " );
+    strMsg += guiHosted->getHostTitle().c_str();
+    slotInfoMsg( strMsg );
+    //ui.m_GuiHostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
 }
 
 //============================================================================

@@ -15,11 +15,11 @@
 
 #include "AppletClientBase.h"
 
-#include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
+#include "GuiHostedListCallback.h"
 
 #include "ui_AppletChatRoomJoin.h"
 
-class AppletChatRoomJoin : public AppletClientBase
+class AppletChatRoomJoin : public AppletClientBase, public GuiHostedListCallback
 {
 	Q_OBJECT
 public:
@@ -30,6 +30,8 @@ public:
 
     void                        toGuiInfoMsg( char * logMsg );
 
+    virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
+
 signals:
     void                        signalInfoMsg( const QString& logMsg );
 
@@ -38,13 +40,11 @@ protected slots:
     void						slotHostAnnounceStatus( EHostType hostType, VxGUID sessionId, EHostAnnounceStatus hostStatus, QString strMsg );
     void						slotHostJoinStatus( EHostType hostType, VxGUID sessionId, EHostJoinStatus hostStatus, QString strMsg );
     void						slotHostSearchStatus( EHostType hostType, VxGUID sessionId, EHostSearchStatus hostStatus, QString strMsg );
-    void                        slotHostSearchResult( EHostType hostType, VxGUID sessionId, VxNetIdent hostIdent, PluginSetting pluginSetting );
 
     void                        slotJoinDefaultChatRoom( void );
     void                        slotCopyResultToClipboardClicked( void );
 
 protected:
-    void						setupApplet( void );
     QPlainTextEdit *            getInfoEdit( void )     { return ui.m_InfoPlainTextEdit; }
 
     //=== vars ===//

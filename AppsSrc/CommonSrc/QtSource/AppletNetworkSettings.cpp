@@ -114,7 +114,6 @@ void AppletNetworkSettings::connectSignals( void )
 
     connect( ui.RandomPortButton, SIGNAL( clicked() ), this, SLOT( slotRandomPortButtonClick() ) );
     connect( ui.m_UseUpnpCheckBox, SIGNAL( clicked() ), this, SLOT( slotUseUpnpCheckBoxClick() ) );
-    connect( ui.m_ConnectTestHostButton, SIGNAL( clicked() ), this, SLOT( slotShowConnectUrlInformation() ) );
     connect( ui.m_ConnectTestUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowConnectTestUrlInformation() ) );
     connect( ui.m_ConnectIsOpenInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowConnectTestSettingsInformation() ) );
     connect( ui.m_SaveSettingsButton, SIGNAL( clicked() ), this, SLOT( onSaveButtonClick() ) );

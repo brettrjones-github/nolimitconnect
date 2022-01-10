@@ -812,3 +812,9 @@ bool IGoTv::fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo
 {
     return getPtoP().fromGuiQueryMyHostedInfo( hostType, hostedInfoList );
 }
+
+//============================================================================
+bool IGoTv::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll )
+{
+    return getPtoP().fromGuiQueryHostListFromNetworkHost( netHostUrl, hostType, hostIdIfNullThenAll );
+}

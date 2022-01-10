@@ -1676,3 +1676,9 @@ bool P2PEngine::fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<Hosted
 {
 	return getHostedListMgr().fromGuiQueryMyHostedInfo( hostType, hostedInfoList );
 }
+
+//============================================================================
+bool P2PEngine::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& hostIdIfNullThenAll )
+{
+	return getHostedListMgr().fromGuiQueryHostListFromNetworkHost( netHostUrl, hostType, hostIdIfNullThenAll );
+}

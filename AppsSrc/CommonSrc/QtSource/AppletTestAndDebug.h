@@ -66,7 +66,7 @@ protected slots:
     void                        slotHostClientTestButtonClicked( void );
     void                        slotHostServiceTestButtonClicked( void );
 
-    void                        slotNewUrlSelected( const QString &newUrl );
+    void                        slotNewUrlSelected( int comboBoxIdx );
 
 protected:
     void						setupApplet( void );
