@@ -38,7 +38,7 @@ protected slots:
     void                        slotNetworkHostComboBoxSelectionChange( int comboIdx );
     void                        slotHostTypeComboBoxSelectionChange( int comboIdx );
     void                        slotHosListtUrlSelectionChange( int comboIdx );
-    void                        slotQueryButtonClicked();
+
     void                        slotNetworkHostIdentityButtonClicked( void );
     void                        slotQueryHostListFromNetworkHostButtonClicked( void );
     void                        slotJoinHostButtonClicked( void );
@@ -47,6 +47,8 @@ protected:
     void                        fillHostList( EHostType hostType, QComboBox* comboBox );
     void                        setNetworkHostIdFromNetHostComboBoxSelection( void );
     void                        updateHostType( EHostType hostType );
+    bool                        updateHostedUrlComboBox( std::string& hostUrl );
+    void                        updateHostedIdent( GuiHosted* guiHosted );
 
     Ui::AppletTestHostClientUi  ui;
     VxGUID                      m_NetworkHostOnlineId;

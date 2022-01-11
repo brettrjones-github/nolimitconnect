@@ -94,24 +94,53 @@ void IdentLogicInterface::setIdentWidgetSize( EButtonSize buttonSize )
 }
 
 //============================================================================
-void IdentLogicInterface::updateIdentity( GuiUser* netIdent )
+void IdentLogicInterface::updateIdentity( GuiUser* netIdent, bool queryThumb )
 {
-	m_NetIdent = netIdent;
-	if( m_NetIdent )
+	if( netIdent )
 	{
-		updateIdentity( &netIdent->getNetIdent() );
+		m_NetIdent = netIdent;
+		if( m_NetIdent )
+		{
+			updateIdentity( &netIdent->getNetIdent(), queryThumb );
+		}
 	}
 }
 
 //============================================================================
-void IdentLogicInterface::updateIdentity( GuiHostJoin* hostIdent )
+void IdentLogicInterface::updateHosted( GuiHosted* guiHosted )
 {
-	m_NetIdent = hostIdent->getUser();
-	updateIdentity( &hostIdent->getUser()->getNetIdent() );
+	if( guiHosted )
+	{
+		GuiUser* guiUser = guiHosted->getUser();
+		if( guiUser )
+		{
+			m_NetIdent = guiUser;
+			if( m_NetIdent )
+			{
+				updateIdentity( m_NetIdent, false );
+			}
+
+			VxGUID thumbId = m_NetIdent->getHostThumbId( guiHosted->getHostType(), true );
+			if( thumbId.isVxGUIDValid() )
+			{
+				setIdentAvatarThumbnail( thumbId );
+			}
+		}
+
+		getIdentLine1()->setText( guiHosted->getHostTitle().c_str() );
+		getIdentLine2()->setText( guiHosted->getHostDescription().c_str() );
+	}
 }
 
 //============================================================================
-void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent )
+void IdentLogicInterface::updateIdentity( GuiHostJoin* hostIdent, bool queryThumb )
+{
+	m_NetIdent = hostIdent->getUser();
+	updateIdentity( &hostIdent->getUser()->getNetIdent(), queryThumb );
+}
+
+//============================================================================
+void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent, bool queryThumb )
 {
 	if( netIdent )
 	{
@@ -144,7 +173,10 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent )
 			getIdentLine3()->setText( QString( truths + "%1" + dares + "%2" ).arg( netIdent->getTruthCount() ).arg( netIdent->getDareCount() ) );
 		}
 
-		setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
+		if( queryThumb )
+		{
+			setIdentAvatarThumbnail( netIdent->getAvatarThumbGuid() );
+		}
 
 		bool isMyself = netIdent->getMyOnlineId() == m_MyApp.getMyOnlineId();
 		if( isMyself )
@@ -215,10 +247,13 @@ void IdentLogicInterface::setIdentDirectConnectState( bool canDirectConnect )
 //============================================================================
 void IdentLogicInterface::setIdentAvatarThumbnail( VxGUID& thumbId )
 {
-	QImage thumbImage;
-	if( m_MyApp.getThumbMgr().getThumbImage( thumbId, thumbImage ) )
+	if( thumbId.isVxGUIDValid() )
 	{
-		getIdentAvatarButton()->setIconOverrideImage( thumbImage );
+		QImage thumbImage;
+		if( m_MyApp.getThumbMgr().getThumbImage( thumbId, thumbImage ) )
+		{
+			getIdentAvatarButton()->setIconOverrideImage( thumbImage );
+		}
 	}
 }
 

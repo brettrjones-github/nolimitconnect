@@ -36,7 +36,7 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	connect( ui.m_NetworkHostComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotNetworkHostComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostTypeComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostTypeComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostListUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHosListtUrlSelectionChange( int ) ) );
-	connect( ui.m_QueryButton, SIGNAL( clicked() ), this, SLOT( slotQueryButtonClicked() ) );
+
 	connect( ui.m_GetNetworkHostIdentityButton, SIGNAL( clicked() ), this, SLOT( slotNetworkHostIdentityButtonClicked() ) );
 	connect( ui.m_GetNetHostListButton, SIGNAL( clicked() ), this, SLOT( slotQueryHostListFromNetworkHostButtonClicked() ) );
 	connect( ui.m_JoinHostButton, SIGNAL( clicked() ), this, SLOT( slotJoinHostButtonClicked() ) );
@@ -71,7 +71,15 @@ void AppletTestHostClient::setNetworkHostIdFromNetHostComboBoxSelection( void )
 	if( !curNetHostUrl.empty() )
 	{
 		VxPtopUrl hostUrl( curNetHostUrl );
-		m_NetworkHostOnlineId = hostUrl.getOnlineId();
+		if( hostUrl.isValid() )
+		{
+			m_NetworkHostOnlineId = hostUrl.getOnlineId();
+			GuiUser* netHostUser = m_MyApp.getUserMgr().getOrQueryUser( m_NetworkHostOnlineId );
+			if( netHostUser )
+			{
+				ui.m_NetworkHostIdentWidget->updateIdentity( netHostUser );
+			}
+		}
 	}
 }
 
@@ -115,34 +123,6 @@ void AppletTestHostClient::slotHosListtUrlSelectionChange( int comboIdx )
 {
 
 
-}
-
-//============================================================================
-void AppletTestHostClient::slotQueryButtonClicked( void )
-{
-	std::string networkHostUrl = ui.m_NetworkHostComboBox->currentText().toUtf8().constData();
-	// strip the host name
-	size_t foundOffs = networkHostUrl.find( "ptop:");
-	if( foundOffs == std::string::npos ) 
-	{
-		// not found 
-	}
-
-	std::string hostUrlStr = networkHostUrl.substr( foundOffs, networkHostUrl.length() );
-	if( !hostUrlStr.empty() )
-	{
-		EHostType hostType = GuiHelpers::comboIdxToHostType( ui.m_HostTypeComboBox->currentIndex() );
-		VxPtopUrl hostUrl( hostUrlStr );
-		if( hostUrl.isValid() && hostType != eHostTypeUnknown )
-		{
-			VxGUID nullGuid;
-			m_MyApp.getFromGuiInterface().fromGuiQueryHostListFromNetworkHost( hostUrl, hostType, nullGuid );
-		}
-		else
-		{
-			okMessageBox( "Invalid Url", "Invalid Network Host Url" );
-		}
-	}
 }
 
 //============================================================================
@@ -216,6 +196,8 @@ void AppletTestHostClient::slotQueryHostListFromNetworkHostButtonClicked( void )
 	}
 
 	ui.m_HostListUrlComboBox->clear();
+	ui.m_GuiHostedListWidget->clear();
+	ui.m_GuiUserListWidget->clear();
 	std::string netHostUrlStr = networkHostUrl.substr( foundOffs, networkHostUrl.length() );
 	if( !netHostUrlStr.empty() )
 	{
@@ -242,5 +224,33 @@ void AppletTestHostClient::slotJoinHostButtonClicked( void )
 //============================================================================
 void AppletTestHostClient::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
+	if( hostedId.getHostType() == m_HostType && guiHosted )
+	{
+		if( updateHostedUrlComboBox( guiHosted->getHostInviteUrl() ) )
+		{
+			updateHostedIdent( guiHosted );
+		}
 
+		ui.m_GuiHostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
+	}
+}
+
+//============================================================================
+bool AppletTestHostClient::updateHostedUrlComboBox( std::string& hostUrl )
+{
+	bool result = 0 == ui.m_HostListUrlComboBox->count();
+	QString url = hostUrl.c_str();
+	if( !url.isEmpty() )
+	{
+		ui.m_HostListUrlComboBox->addItem( url );
+	}
+	
+	return result && !url.isEmpty();
+}
+
+//============================================================================
+void AppletTestHostClient::updateHostedIdent( GuiHosted* guiHosted )
+{
+	ui.m_HostedIdentWidget->updateIdentity( guiHosted->getUser() );
+	ui.m_HostedPluginWidget->updateHosted( guiHosted );
 }

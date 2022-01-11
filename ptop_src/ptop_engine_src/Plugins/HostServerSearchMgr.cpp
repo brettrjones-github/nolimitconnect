@@ -495,6 +495,11 @@ void HostServerSearchMgr::updateFromHostInviteSearchBlob( EHostType hostType, Vx
         HostedInfo hostedInfo;
         if( extractSearchBlobToHostedInfo( blobEntry, hostedInfo ) )
         {
+            if( eHostTypeUnknown == hostedInfo.getHostType() && eHostTypeUnknown != hostType )
+            {
+                hostedInfo.setHostType( hostType );
+            }
+
             m_Engine.getHostedListMgr().hostSearchResult( hostType, searchSessionId, sktBase, netIdent, hostedInfo );
         }
         else

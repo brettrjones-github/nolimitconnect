@@ -63,9 +63,16 @@ void GuiHostedListMgr::callbackHostedInfoListRemoved( VxGUID& hostOnlineId, EHos
 }
 
 //============================================================================
-void GuiHostedListMgr::callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& hostOnlineId )
+void GuiHostedListMgr::callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId )
 {
-    emit signalInternalHostSearchResult( new HostedInfo( *hostedInfo ), hostOnlineId );
+    if( hostedInfo && hostedInfo->isHostInviteValid() )
+    {
+        emit signalInternalHostSearchResult( new HostedInfo( *hostedInfo ), sessionId );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiHostedListMgr::callbackHostedInfoListSearchResult invalid invite" );
+    }
 }
 
 //============================================================================
@@ -92,8 +99,15 @@ void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType
 //============================================================================
 void GuiHostedListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
 {
-    HostedInfo* newHostedInfo = new HostedInfo( hostedInfo );
-    emit signalInternalHostSearchResult( newHostedInfo, sessionId );
+    if( hostedInfo.isHostInviteValid() )
+    {
+        HostedInfo* newHostedInfo = new HostedInfo( hostedInfo );
+        emit signalInternalHostSearchResult( newHostedInfo, sessionId );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiHostedListMgr::toGuiHostSearchResult invalid invite" );
+    }
 }
 
 //============================================================================

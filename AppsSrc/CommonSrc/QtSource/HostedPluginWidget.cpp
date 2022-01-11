@@ -20,7 +20,7 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-HostedPluginWidget::HostedPluginWidget(QWidget *parent  )
+HostedPluginWidget::HostedPluginWidget( QWidget *parent )
 : IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
 {

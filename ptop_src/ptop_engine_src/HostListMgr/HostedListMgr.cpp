@@ -737,7 +737,7 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
 
             if( retResultInfo )
             {
-                *retResultInfo = updatedHostedInfo;
+                *retResultInfo = *iter;
                 filledResultInfo = true;
             }
 

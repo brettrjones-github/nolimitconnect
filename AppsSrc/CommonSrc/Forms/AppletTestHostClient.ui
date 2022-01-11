@@ -133,44 +133,13 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="m_HostedStatusLabel">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="IdentWidget" name="m_HostIeddentWidget" native="true"/>
-      </item>
-      <item>
        <widget class="QComboBox" name="m_HostListUrlComboBox"/>
       </item>
       <item>
-       <widget class="HostedPluginWidget" name="m_HostedPluginWidget" native="true"/>
+       <widget class="IdentWidget" name="m_HostedIdentWidget" native="true"/>
       </item>
       <item>
-       <widget class="QPushButton" name="m_QueryButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Query</string>
-        </property>
-       </widget>
+       <widget class="HostedPluginWidget" name="m_HostedPluginWidget" native="true"/>
       </item>
       <item>
        <widget class="QPushButton" name="m_RefreshListButton">
@@ -187,7 +156,24 @@
        </widget>
       </item>
       <item>
-       <widget class="GuiHostedListWidget" name="m_HostListWidget" native="true">
+       <widget class="GuiHostedListWidget" name="m_GuiHostedListWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Users Online With Selected Host</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="GuiUserListWidget" name="m_GuiUserListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -218,6 +204,12 @@
    <class>GuiHostedListWidget</class>
    <extends>QWidget</extends>
    <header>GuiHostedListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GuiUserListWidget</class>
+   <extends>QWidget</extends>
+   <header>GuiUserListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

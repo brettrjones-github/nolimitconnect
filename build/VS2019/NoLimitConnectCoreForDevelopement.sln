@@ -25,7 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppConfigHeaders", "AppConf
 		..\..\AppDependLibrariesConfig.h = ..\..\AppDependLibrariesConfig.h
 		..\..\AppTargetOsConfig.h = ..\..\AppTargetOsConfig.h
 		..\..\config_appcorelibs.h = ..\..\config_appcorelibs.h
-		..\..\config_apps.h = ..\..\config_apps.h
 		..\..\DependLibs\ffmpeg\config_ffmpeg.h = ..\..\DependLibs\ffmpeg\config_ffmpeg.h
 		..\..\kodi_src\xbmc\xbmc\config_kodi.h = ..\..\kodi_src\xbmc\xbmc\config_kodi.h
 		..\..\config_libkodi.h = ..\..\config_libkodi.h
@@ -282,7 +281,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = 64BitVs2017Qt5.15.2
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = 64BitVs2017Qt5.15.2
 	EndGlobalSection
 EndGlobal

@@ -104,6 +104,20 @@ bool HostedInfo::extractFromSearchBlob( PktBlobEntry& blobEntry )
     result &= blobEntry.getValue( m_HostInviteUrl );
     result &= blobEntry.getValue( m_HostTitle );
     result &= blobEntry.getValue( m_HostDesc );
+    if( result )
+    {
+        VxPtopUrl hostUrl( m_HostInviteUrl );
+        result = hostUrl.isValid() && m_HostInfoTimestampMs && !m_HostTitle.empty() && !m_HostDesc.empty();
+        if( result )
+        {
+            setOnlineId( hostUrl.getOnlineId() );
+            if( eHostTypeUnknown != hostUrl.getHostType() )
+            {
+                setHostType( hostUrl.getHostType() );
+            }
+        }
+    }
+
     return result;
 }
 

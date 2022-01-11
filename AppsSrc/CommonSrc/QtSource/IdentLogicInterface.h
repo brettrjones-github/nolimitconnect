@@ -24,6 +24,7 @@ class VxNetIdent;
 class QLabel;
 class GuiUser;
 class GuiHostJoin;
+class GuiHosted;
 
 class IdentLogicInterface : public QWidget
 {
@@ -49,9 +50,10 @@ public:
 	virtual QLabel*				getIdentLine2( void ) = 0;
 	virtual QLabel*				getIdentLine3( void )						{ return nullptr; }
 
-	virtual void				updateIdentity( GuiUser* guiUser );
-	virtual void				updateIdentity( GuiHostJoin* hostIdent );
-	virtual void				updateIdentity( VxNetIdent* netIdent );
+	virtual void				updateIdentity( GuiUser* guiUser, bool queryThumb = true );
+	virtual void				updateIdentity( GuiHostJoin* hostIdent, bool queryThumb = true );
+	virtual void				updateIdentity( VxNetIdent* netIdent, bool queryThumb = true );
+	virtual void				updateHosted( GuiHosted* guiHosted );
 
 	void						setDisableFriendshipChange( bool disable ) { m_DisableFriendshipChange = disable; }
 

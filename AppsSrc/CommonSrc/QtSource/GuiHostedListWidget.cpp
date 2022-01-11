@@ -29,8 +29,8 @@
 GuiHostedListWidget::GuiHostedListWidget( QWidget * parent )
 : ListWidgetBase( parent )
 {
-	QListWidget::setSortingEnabled( true );
-	sortItems( Qt::DescendingOrder );
+	// QListWidget::setSortingEnabled( true );
+	// sortItems( Qt::DescendingOrder );
 
     connect( this, SIGNAL(itemClicked(QListWidgetItem *)),          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
     connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),    this, SLOT(slotItemClicked(QListWidgetItem *))) ;
@@ -45,12 +45,12 @@ GuiHostedListItem* GuiHostedListWidget::sessionToWidget( GuiHostedListSession* h
 
     hostItem->setHostSession( hostSession );
 
-    connect( hostItem, SIGNAL( signalGuiHostedListItemClicked( QListWidgetItem  *) ),	this, SLOT( slotGuiHostedListItemClicked( QListWidgetItem * ) ) );
+    connect( hostItem, SIGNAL( signalGuiHostedListItemClicked( QListWidgetItem  *) ),	    this, SLOT( slotGuiHostedListItemClicked( QListWidgetItem * ) ) );
     connect( hostItem, SIGNAL( signalIconButtonClicked( GuiHostedListItem * ) ),	        this, SLOT( slotIconButtonClicked( GuiHostedListItem * ) ) );
-    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( GuiHostedListItem* ) ),    this, SLOT( slotFriendshipButtonClicked( GuiHostedListItem* ) ) );
+    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( GuiHostedListItem* ) ),       this, SLOT( slotFriendshipButtonClicked( GuiHostedListItem* ) ) );
     connect( hostItem, SIGNAL( signalMenuButtonClicked( GuiHostedListItem * ) ),	        this, SLOT( slotMenuButtonClicked( GuiHostedListItem * ) ) );
     connect( hostItem, SIGNAL( signalJoinButtonClicked( GuiHostedListItem * ) ),		    this, SLOT( slotJoinButtonClicked( GuiHostedListItem * ) ) );
-    connect( hostItem, SIGNAL( signalConnectButtonClicked( GuiHostedListItem* ) ),       this, SLOT( slotConnectButtonClicked( GuiHostedListItem* ) ) );
+    connect( hostItem, SIGNAL( signalConnectButtonClicked( GuiHostedListItem* ) ),          this, SLOT( slotConnectButtonClicked( GuiHostedListItem* ) ) );
 
     hostItem->updateWidgetFromInfo();
 
@@ -270,28 +270,31 @@ GuiHostedListItem* GuiHostedListWidget::addOrUpdateHostSession( GuiHostedListSes
         {
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s\n", hostSession->getUserIdent()->getOnlineName().c_str() );
+                LogMsg( LOG_INFO, "add host %s", hostSession->getUserIdent() ? hostSession->getUserIdent()->getOnlineName().c_str() : hostSession->getHostTitle().c_str() );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s\n", hostSession->getUserIdent()->getOnlineName().c_str() );
+                LogMsg( LOG_INFO, "insert host %s", hostSession->getUserIdent() ? hostSession->getUserIdent()->getOnlineName().c_str() : hostSession->getHostTitle().c_str() );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            VxGUID thumbId = hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), true );
-            GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
-            if( thumb )
+            if( hostSession->getUserIdent() )
             {
-                QImage hostIconImage;
-                thumb->createImage( hostIconImage );
-                VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
-                if( hostImageButton && !hostIconImage.isNull() )
+                VxGUID thumbId = hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), true );
+                GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
+                if( thumb )
                 {
-                    hostImageButton->setIconOverrideImage( hostIconImage );
+                    QImage hostIconImage;
+                    thumb->createImage( hostIconImage );
+                    VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
+                    if( hostImageButton && !hostIconImage.isNull() )
+                    {
+                        hostImageButton->setIconOverrideImage( hostIconImage );
+                    }
                 }
-            }           
+            }         
         }
     }
 
