@@ -37,11 +37,11 @@ public:
 protected slots:
     void                        slotNetworkHostComboBoxSelectionChange( int comboIdx );
     void                        slotHostTypeComboBoxSelectionChange( int comboIdx );
-    void                        slotHosListtUrlSelectionChange( int comboIdx );
+    void                        slotHostListUrlSelectionChange( int comboIdx );
 
     void                        slotNetworkHostIdentityButtonClicked( void );
     void                        slotQueryHostListFromNetworkHostButtonClicked( void );
-    void                        slotJoinHostButtonClicked( void );
+    void                        slotQueryHostedUsersButtonClicked( void );
 
 protected:
     void                        fillHostList( EHostType hostType, QComboBox* comboBox );

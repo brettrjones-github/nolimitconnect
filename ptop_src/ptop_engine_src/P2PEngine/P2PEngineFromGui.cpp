@@ -1682,3 +1682,9 @@ bool P2PEngine::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHos
 {
 	return getHostedListMgr().fromGuiQueryHostListFromNetworkHost( netHostUrl, hostType, hostIdIfNullThenAll );
 }
+
+//============================================================================
+bool P2PEngine::fromGuiQueryUserListFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
+{
+	return getHostedListMgr().fromGuiQueryUserListFromHosted( hostedUrl, hostType, onlineIdIfNullThenAll );
+}

@@ -818,3 +818,9 @@ bool IGoTv::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHostTyp
 {
     return getPtoP().fromGuiQueryHostListFromNetworkHost( netHostUrl, hostType, hostIdIfNullThenAll );
 }
+
+//============================================================================
+bool IGoTv::fromGuiQueryUserListFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
+{
+    return getPtoP().fromGuiQueryUserListFromHosted( hostedUrl, hostType, onlineIdIfNullThenAll );
+}

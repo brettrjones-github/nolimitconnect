@@ -124,9 +124,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="m_JoinHostButton">
+         <widget class="QPushButton" name="m_QueryHostedUsersButton">
           <property name="text">
-           <string>Join Host</string>
+           <string>Get Host Online User List</string>
           </property>
          </widget>
         </item>

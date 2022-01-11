@@ -549,6 +549,45 @@ bool HostedListMgr::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, 
 }
 
 //============================================================================
+bool HostedListMgr::fromGuiQueryUserListFromHosted( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
+{
+    if( netHostUrl.isValid() )
+    {
+        m_SearchHostType = hostType;
+        m_SearchSpecificOnlineId = onlineIdIfNullThenAll;
+        m_SearchSessionId.initializeWithNewVxGUID();
+        VxSktBase* sktBase{ nullptr };
+        EConnectReason connectReason{ eConnectReasonUnknown };
+        switch( hostType )
+        {
+        case eHostTypeGroup:
+            connectReason = eConnectReasonGroupHostedUserListSearch;
+            break;
+        case eHostTypeChatRoom:
+            connectReason = eConnectReasonChatRoomHostedUserListSearch;
+            break;
+        case eHostTypeRandomConnect:
+            connectReason = eConnectReasonRandomConnectHostedUserListSearch;
+            break;
+        default:
+            break;
+        }
+
+        if( connectReason != eConnectReasonUnknown )
+        {
+            m_Engine.getConnectionMgr().requestConnection( m_SearchSessionId, netHostUrl.getUrl(), netHostUrl.getOnlineId(), this, sktBase, eConnectReasonGroupHostedUserListSearch );
+            return true;
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "HostedListMgr::fromGuiQueryUserListFromHosted invalid host type" );
+        }
+    }
+
+    return false;
+}
+
+//============================================================================
 bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
     if( eConnectReasonNetworkHostListSearch == connectReason )
@@ -560,6 +599,45 @@ bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, V
         pktReq.setHostType( m_SearchHostType );
         pktReq.setSpecificOnlineId( m_SearchSpecificOnlineId );
         return 0 == sktBase->txPacket( onlineId, &pktReq );
+    }
+    else if( eConnectReasonGroupHostedUserListSearch == connectReason || eConnectReasonChatRoomHostedUserListSearch == connectReason || eConnectReasonRandomConnectHostedUserListSearch == connectReason )
+    {
+        EHostType hostType{ eHostTypeUnknown };
+        EPluginType pluginType{ ePluginTypeInvalid };
+
+        switch( connectReason )
+        {
+        case eConnectReasonGroupHostedUserListSearch:
+            hostType = eHostTypeGroup;
+            pluginType = ePluginTypeHostGroup;
+            break;
+        case eConnectReasonChatRoomHostedUserListSearch:
+            hostType = eHostTypeChatRoom;
+            pluginType = ePluginTypeHostChatRoom;
+            break;
+        case eConnectReasonRandomConnectHostedUserListSearch:
+            hostType = eHostTypeRandomConnect;
+            pluginType = ePluginTypeHostRandomConnect;
+            break;
+        default:
+            break;
+        }
+
+        if( hostType != eHostTypeUnknown && pluginType != ePluginTypeInvalid )
+        {
+            PktHostInviteSearchReq pktReq;
+
+            pktReq.setPluginNum( ( uint8_t )pluginType );
+            pktReq.setSrcOnlineId( m_Engine.getMyOnlineId() );
+            pktReq.setSearchSessionId( sessionId );
+            pktReq.setHostType( hostType );
+            pktReq.setSpecificOnlineId( m_SearchSpecificOnlineId );
+            return 0 == sktBase->txPacket( onlineId, &pktReq );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "HostedListMgr::onContactConnected invalid param" );
+        }
     }
 
     return false;

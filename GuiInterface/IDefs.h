@@ -108,6 +108,10 @@ enum EConnectReason
     eConnectReasonRequestIdentity,
     eConnectReasonNetworkHostListSearch,
 
+    eConnectReasonGroupHostedUserListSearch,
+    eConnectReasonChatRoomHostedUserListSearch,
+    eConnectReasonRandomConnectHostedUserListSearch,
+
     eMaxConnectReason
 };
 
