@@ -171,6 +171,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_OfferClientMgr( *this )
 , m_OfferHostMgr( *this )
 , m_UserMgr( *this )
+, m_GroupieListMgr( *this )
 , m_HostedListMgr( *this )
 , m_HostJoinMgr( *this )
 , m_UserJoinMgr( *this )

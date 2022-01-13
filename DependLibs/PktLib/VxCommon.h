@@ -116,8 +116,11 @@ public:
 	void						setPingTimeMs( uint16_t pingTime );
 	uint16_t					getPingTimeMs( void );
 
-	void						setLastSessionTimeMs( int64_t lastSessionTimeGmtMs )		{ m_LastSessionTimeGmtMs = lastSessionTimeGmtMs; }
-	int64_t					    getLastSessionTimeMs( void )							    { return m_LastSessionTimeGmtMs; }
+	void						setLastSessionTimeMs( int64_t lastSessionTimeGmtMs )			{ m_LastSessionTimeGmtMs = lastSessionTimeGmtMs; }
+	int64_t					    getLastSessionTimeMs( void )									{ return m_LastSessionTimeGmtMs; }
+
+	void						setLastGroupieInfoModifiedTimeMs( int64_t lastModifiedTimeMs )  { if( lastModifiedTimeMs > m_GroupieInfoModifiedTimeMs ) { m_GroupieInfoModifiedTimeMs = lastModifiedTimeMs; } }
+	int64_t					    getLastGroupieInfoModifiedTimeMs( void )						{ return m_GroupieInfoModifiedTimeMs; }
 
 	void						debugDumpIdent( void );
 
@@ -136,7 +139,7 @@ private:
     uint16_t					m_NetIdentRes1{ 0 };  
     uint8_t					    m_NetIdentRes2{ 0 };     
     uint8_t						m_NetIdentRes3{ 0 };
-    int64_t                     m_NetIdentRes4{ 0 };
+    int64_t                     m_GroupieInfoModifiedTimeMs{ 0 };
     int64_t					    m_LastSessionTimeGmtMs{ 0 };
 };
 

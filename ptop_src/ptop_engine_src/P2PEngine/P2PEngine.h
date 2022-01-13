@@ -25,6 +25,7 @@
 #include <ptop_src/ptop_engine_src/BlobXferMgr/BlobCallbackInterface.h>
 #include <ptop_src/ptop_engine_src/Connections/ConnectionMgr.h>
 #include <ptop_src/ptop_engine_src/ConnectMgr/ConnectMgr.h>
+#include <ptop_src/ptop_engine_src/GroupieListMgr/GroupieListMgr.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h>
@@ -113,6 +114,7 @@ public:
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
     DirectConnectListMgr&       getDirectConnectListMgr( void )                 { return m_DirectConnectListMgr; }
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
+    GroupieListMgr&             getGroupieListMgr( void )                       { return m_GroupieListMgr; }
     HostUrlListMgr&             getHostUrlListMgr( void )                       { return m_HostUrlListMgr; }
     HostedListMgr&              getHostedListMgr( void )                        { return m_HostedListMgr; }
     IgnoreListMgr&              getIgnoreListMgr( void )                        { return m_IgnoreListMgr; }
@@ -696,6 +698,16 @@ public:
     virtual void				onPktHostInviteMoreReq      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostInviteMoreReply    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
+    virtual void				onPktGroupieInfoReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktGroupieInfoReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
+    virtual void				onPktGroupieAnnReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktGroupieAnnReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktGroupieSearchReq       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktGroupieSearchReply     ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktGroupieMoreReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktGroupieMoreReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
 
 protected:
@@ -728,6 +740,7 @@ protected:
     DirectConnectListMgr        m_DirectConnectListMgr;
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
+    GroupieListMgr              m_GroupieListMgr;
     HostUrlListMgr              m_HostUrlListMgr;
     HostedListMgr               m_HostedListMgr;
     NearbyListMgr               m_NearbyListMgr;

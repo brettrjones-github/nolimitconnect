@@ -228,8 +228,18 @@
 #define PKT_TYPE_HOST_INVITE_SEARCH_REPLY			( PKT_TYPE_HOST_INVITE_SEARCH_REQ	+ 1 )       // 165 ( 0xA5 )
 #define PKT_TYPE_HOST_INVITE_MORE_REQ				( PKT_TYPE_HOST_INVITE_SEARCH_REPLY + 1 )		// 166 ( 0xA6 )
 #define PKT_TYPE_HOST_INVITE_MORE_REPLY			    ( PKT_TYPE_HOST_INVITE_MORE_REQ	+ 1 )           // 167 ( 0xA7 )
+// 168 ( 0xA8 )     
+#define PKT_TYPE_GROUPIE_INFO_REQ				    ( PKT_TYPE_HOST_INVITE_MORE_REPLY + 1 )		    // 168 ( 0xA8 )
+#define PKT_TYPE_GROUPIE_INFO_REPLY			        ( PKT_TYPE_GROUPIE_INFO_REQ	+ 1 )               // 169 ( 0xA9 )  
+// 170 ( 0xAA )     
+#define PKT_TYPE_GROUPIE_ANN_REQ				    ( PKT_TYPE_GROUPIE_INFO_REPLY + 1 )		        // 170 ( 0xAA )
+#define PKT_TYPE_GROUPIE_ANN_REPLY			        ( PKT_TYPE_GROUPIE_ANN_REQ	+ 1 )               // 171 ( 0xAB )
+#define PKT_TYPE_GROUPIE_SEARCH_REQ				    ( PKT_TYPE_GROUPIE_ANN_REPLY + 1 )		        // 172 ( 0xAC )
+#define PKT_TYPE_GROUPIE_SEARCH_REPLY			    ( PKT_TYPE_GROUPIE_SEARCH_REQ	+ 1 )           // 173 ( 0xAD )
+#define PKT_TYPE_GROUPIE_MORE_REQ				    ( PKT_TYPE_GROUPIE_SEARCH_REPLY + 1 )		    // 174 ( 0xAE )
+#define PKT_TYPE_GROUPIE_MORE_REPLY			        ( PKT_TYPE_GROUPIE_MORE_REQ	+ 1 )               // 175 ( 0xAF )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_HOST_INVITE_MORE_REPLY + 1) // 168
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_GROUPIE_MORE_REPLY + 1) // 176
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

@@ -161,6 +161,7 @@ public:
 	virtual DbCursor *			startQueryInsecure( const char * pSqlString, ... );
 	virtual DbCursor *			startQuery( const char* pSqlString, const char* textParam );
 	virtual DbCursor*			startQuery( const char* pSqlString, const char* textParam, int secondParam );
+	virtual DbCursor*			startQuery( const char* pSqlString, const char* textParam1, const char* textParam2, int thirdParam );
 
 	//! get the row id of the last inserted row
 	virtual int64_t				getLastInsertId( void );

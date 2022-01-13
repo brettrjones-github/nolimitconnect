@@ -42,6 +42,12 @@
     <Filter Include="Android Files">
       <UniqueIdentifier>{a4d97f58-12d7-4abf-bcfe-f658f7eb17d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Groupie">
+      <UniqueIdentifier>{d0a9aaaf-a671-408e-9f6c-1bb5f85ca1e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hosted">
+      <UniqueIdentifier>{548f0231-f375-4d1b-801e-16dc63f80e72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AcceptCancelWidget.h">
@@ -863,15 +869,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.h">
       <Filter>Source Files</Filter>
     </QtMoc>
@@ -880,6 +877,24 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiGroupieListItem.h">
+      <Filter>Source Files\Groupie</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiGroupieListMgr.h">
+      <Filter>Source Files\Groupie</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiGroupieListWidget.h">
+      <Filter>Source Files\Groupie</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.h">
+      <Filter>Source Files\Hosted</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.h">
+      <Filter>Source Files\Hosted</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.h">
+      <Filter>Source Files\Hosted</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1924,21 +1939,6 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\HostedPluginWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHosted.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1947,6 +1947,36 @@
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListItem.cpp">
+      <Filter>Source Files\Groupie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListMgr.cpp">
+      <Filter>Source Files\Groupie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListSession.cpp">
+      <Filter>Source Files\Groupie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListWidget.cpp">
+      <Filter>Source Files\Groupie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHosted.cpp">
+      <Filter>Source Files\Hosted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListItem.cpp">
+      <Filter>Source Files\Hosted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListMgr.cpp">
+      <Filter>Source Files\Hosted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.cpp">
+      <Filter>Source Files\Hosted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.cpp">
+      <Filter>Source Files\Hosted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupie.cpp">
+      <Filter>Source Files\Groupie</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2178,14 +2208,23 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiMembershipAvailableCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupieListCallback.h">
+      <Filter>Source Files\Groupie</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupieListSession.h">
+      <Filter>Source Files\Groupie</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h">
+      <Filter>Source Files\Hosted</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Hosted</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupie.h">
+      <Filter>Source Files\Groupie</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2699,6 +2738,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\GuiHostedListItem.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\CommonSrc\Forms\GuiGroupieListItem.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

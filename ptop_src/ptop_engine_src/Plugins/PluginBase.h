@@ -45,6 +45,7 @@ class ThumbMgr;
 class TxSession;
 class VxSktBase;
 class HostedInfo;
+class GroupieInfo;
 
 class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface, public BaseXferInterface
 {
@@ -107,6 +108,7 @@ public:
 	virtual EMembershipState	getMembershipState( VxNetIdent* netIdent )				{ return eMembershipStateJoinDenied; }
 
 	virtual bool				getHostedInfo( HostedInfo& hostedInfo )					{ return false; }
+	virtual bool				getGroupieInfo( GroupieInfo& hostedInfo )				{ return false; }
 
 	virtual void				fromGuiUserLoggedOn( void )								{};
 

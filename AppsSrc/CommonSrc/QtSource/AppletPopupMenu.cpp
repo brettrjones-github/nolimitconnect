@@ -27,6 +27,7 @@
 #include "FileActionMenu.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
+#include "GuiGroupieListSession.h"
 #include "GuiHostSession.h"
 #include "GuiHostedListSession.h"
 
@@ -421,6 +422,38 @@ void AppletPopupMenu::showHostSessionMenu( GuiHostSession* hostSession )
 }
 
 //============================================================================
+void AppletPopupMenu::showGroupieListSessionMenu( GuiGroupieListSession* groupieSession )
+{
+	if( !groupieSession )
+	{
+		LogMsg( LOG_ERROR, "AppletPopupMenu::showHostSessionMenu null session" );
+		return;
+	}
+
+	setMenuType( EPopupMenuType::ePopupMenuGroupieListSession );
+	m_GroupieListSession = groupieSession;
+
+	setTitle( GuiParams::describeHostType( groupieSession->getHostType() ) );
+	if( groupieSession->getHostType() == eHostTypeGroup )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceHostGroup ), QObject::tr( "Join" ) );
+	}
+	else if( groupieSession->getHostType() == eHostTypeChatRoom )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceChatRoom ), QObject::tr( "Join" ) );
+	}
+	else if( groupieSession->getHostType() == eHostTypeRandomConnect )
+	{
+		addMenuItem( 0, getMyIcons().getIcon( eMyIconServiceRandomConnect ), QObject::tr( "Join" ) );
+	}
+
+	addMenuItem( 1, getMyIcons().getIcon( eMyIconCancelNormal ), QObject::tr( "Unjoin" ) );
+	addMenuItem( 2, getMyIcons().getIcon( eMyIconConnect ), QObject::tr( "Connect To Host" ) );
+	addMenuItem( 3, getMyIcons().getIcon( eMyIconDisconnect ), QObject::tr( "Disconnect From Host" ) );
+}
+
+
+//============================================================================
 void AppletPopupMenu::showHostedListSessionMenu( GuiHostedListSession* hostSession )
 {
 	if( !hostSession )
@@ -451,6 +484,23 @@ void AppletPopupMenu::showHostedListSessionMenu( GuiHostedListSession* hostSessi
 	addMenuItem( 3, getMyIcons().getIcon( eMyIconDisconnect ), QObject::tr( "Disconnect From Host" ) );
 }
 
+//============================================================================
+void AppletPopupMenu::onGroupieSessionActionSelected( int iMenuId )
+{
+	switch( iMenuId )
+	{
+	case 0: // friends listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletFriendListClient, getParentPageFrame() );
+		break;
+
+	case 1: // group listing
+		m_MyApp.getAppletMgr().launchApplet( eAppletGroupListClient, getParentPageFrame() );
+		break;
+
+	default:
+		LogMsg( LOG_ERROR, "Unknown AppletPopupMenu::onTitleBarActionSelected value %d", iMenuId );
+	}
+}
 
 //============================================================================
 void AppletPopupMenu::onHostSessionActionSelected( int iMenuId )

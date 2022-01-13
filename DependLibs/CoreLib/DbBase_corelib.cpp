@@ -884,6 +884,77 @@ DbCursor* DbBase::startQuery( const char* pSqlString, const char* textParam, int
 }
 
 //============================================================================
+DbCursor* DbBase::startQuery( const char* pSqlString, const char* textParam1, const char* textParam2, int thirdParam )
+{
+	vx_assert( pSqlString );
+	const char* srcStr = "DbBase::StartDataQueryTxtInt: error";
+	DbCursor* retVal = NULL;
+	int           iResult;
+
+	sqlite3_stmt* poSqlStatement;
+
+	if( 0 == dbOpen() )
+	{
+		poSqlStatement = NULL;
+		iResult = sqlite3_prepare_v2( m_Db,
+			pSqlString,
+			( int )strlen( pSqlString ),
+			&poSqlStatement,
+			NULL );
+
+		if( SQLITE_OK == iResult )
+		{
+			iResult = sqlite3_bind_text( poSqlStatement,
+				1,
+				textParam1,
+				strlen( textParam1 ),
+				SQLITE_TRANSIENT );
+
+			if( SQLITE_OK == iResult )
+			{
+				iResult = sqlite3_bind_text( poSqlStatement,
+					1,
+					textParam2,
+					strlen( textParam2 ),
+					SQLITE_TRANSIENT );
+
+				if( SQLITE_OK == iResult )
+				{
+					iResult = sqlite3_bind_int( poSqlStatement,
+						2,
+						thirdParam );
+
+					if( SQLITE_OK == iResult )
+					{
+						retVal = new DbCursor();
+						retVal->m_DbBase = this;
+						retVal->m_Stmt = poSqlStatement;
+					}
+					else
+					{
+						LogMsg( LOG_ERROR, "ERROR: %s BIND INTEGER %s", srcStr, sqlite3_errmsg( m_Db ) );
+					}
+				}
+				else
+				{
+					LogMsg( LOG_ERROR, "ERROR: %s BIND TEXT2 %s", srcStr, sqlite3_errmsg( m_Db ) );
+				}
+			}
+			else
+			{
+				LogMsg( LOG_ERROR, "ERROR: %s BIND TEXT1 %s", srcStr, sqlite3_errmsg( m_Db ) );
+			}
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "ERROR: %s %s statement %s", srcStr, sqlite3_errmsg( m_Db ), pSqlString );
+		}
+	}
+
+	return retVal;
+}
+
+//============================================================================
 //! start query and use DbCursor to access column's data.. be sure to call DbCursor.close() when done
 // TODO use bind list to avoid possible injection
 DbCursor * DbBase::startQueryInsecure( const char * pSqlString, ... )

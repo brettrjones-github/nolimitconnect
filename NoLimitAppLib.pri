@@ -201,6 +201,12 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileActionSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileXferSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupie.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListCallback.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListItem.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListSession.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHosted.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListCallback.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListItem.h \
@@ -556,6 +562,11 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileActionSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileXferSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupie.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListItem.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListSession.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiGroupieListWidget.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHosted.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListItem.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListMgr.cpp \
@@ -846,6 +857,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileShareItemWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FileXferWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/FriendListDlg.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/GuiGroupieListItem.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/GuiHostedListItem.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/GuiUserListEntryWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/HostJoinRequestListItem.ui \

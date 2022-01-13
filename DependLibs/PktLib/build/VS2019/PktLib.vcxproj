@@ -178,6 +178,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\GroupieId.h" />
     <ClInclude Include="..\..\HostedId.h" />
     <ClInclude Include="..\..\MatchParams.h" />
     <ClInclude Include="..\..\PktAnnList.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
     <ClInclude Include="..\..\PktsFriendOffer.h" />
+    <ClInclude Include="..\..\PktsGroupie.h" />
     <ClInclude Include="..\..\PktsHostInfo.h" />
     <ClInclude Include="..\..\PktsHostInvite.h" />
     <ClInclude Include="..\..\PktsHostJoin.h" />
@@ -238,6 +240,7 @@
     <ClInclude Include="..\..\VxSearchFlags.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\GroupieId.cpp" />
     <ClCompile Include="..\..\HostedId.cpp" />
     <ClCompile Include="..\..\MatchParams.cpp" />
     <ClCompile Include="..\..\PktAnnList.cpp" />
@@ -255,6 +258,7 @@
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />
+    <ClCompile Include="..\..\PktsGroupie.cpp" />
     <ClCompile Include="..\..\PktsHostInfo.cpp" />
     <ClCompile Include="..\..\PktsHostInvite.cpp" />
     <ClCompile Include="..\..\PktsHostJoin.cpp" />

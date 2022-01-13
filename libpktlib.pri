@@ -1,7 +1,8 @@
 INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 
-HEADERS += 	$$PWD/DependLibs/PktLib/HostedId.h \
+HEADERS += 	$$PWD/DependLibs/PktLib/GroupieId.h \
+    $$PWD/DependLibs/PktLib/HostedId.h \
     $$PWD/DependLibs/PktLib/MatchParams.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \
@@ -31,6 +32,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/HostedId.h \
     $$PWD/DependLibs/PktLib/PktsFileList.h \
     $$PWD/DependLibs/PktLib/PktsFileShare.h \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.h \
+    $$PWD/DependLibs/PktLib/PktsGroupie.h \
 	$$PWD/DependLibs/PktLib/PktsHostJoin.h \
     $$PWD/DependLibs/PktLib/PktsImAlive.h \
     $$PWD/DependLibs/PktLib/PktsMembership.h \
@@ -62,7 +64,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/HostedId.h \
     $$PWD/DependLibs/PktLib/VxSearchDefs.h \
     $$PWD/DependLibs/PktLib/VxSearchFlags.h
 
-SOURCES += 	$$PWD/DependLibs/PktLib/HostedId.cpp \
+SOURCES += 	$$PWD/DependLibs/PktLib/GroupieId.cpp \
+    $$PWD/DependLibs/PktLib/HostedId.cpp \
     $$PWD/DependLibs/PktLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktAnnounce.cpp \
@@ -84,6 +87,7 @@ SOURCES += 	$$PWD/DependLibs/PktLib/HostedId.cpp \
     $$PWD/DependLibs/PktLib/PktsFileList.cpp \
     $$PWD/DependLibs/PktLib/PktsFileShare.cpp \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.cpp \
+    $$PWD/DependLibs/PktLib/PktsGroupie.cpp \
     $$PWD/DependLibs/PktLib/PktsHostInfo.cpp \
     $$PWD/DependLibs/PktLib/PktsHostInvite.cpp \
 	$$PWD/DependLibs/PktLib/PktsHostJoin.cpp \

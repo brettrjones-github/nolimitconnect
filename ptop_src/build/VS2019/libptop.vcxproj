@@ -571,6 +571,9 @@
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieInfo.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListDb.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfoDb.cpp" />
@@ -929,6 +932,10 @@
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\WebRtcTypeDefs.h" />
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32.h" />
     <ClInclude Include="..\..\ptop_engine_src\EchoCancel\win32filesystem.h" />
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieInfo.h" />
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListDb.h" />
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinInfo.h" />

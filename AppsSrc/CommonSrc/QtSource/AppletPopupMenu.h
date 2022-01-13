@@ -25,6 +25,7 @@ enum class EPopupMenuType
 	ePopupMenuAppSystem,
 	ePopupMenuFriend,
 	ePopupMenuHostSession,
+	ePopupMenuGroupieListSession,
 	ePopupMenuHostedListSession,
 	ePopupMenuListOptions1,
 	ePopupMenuOfferFriendship,
@@ -36,6 +37,7 @@ enum class EPopupMenuType
 
 class GuiHostSession;
 class GuiHostedListSession;
+class GuiGroupieListSession;
 
 class AppletPopupMenu : public AppletBase, public MediaCallbackInterface
 {
@@ -57,6 +59,7 @@ public:
 
 	void						showAppSystemMenu( void );
 	void						showFriendMenu( GuiUser* poSelectedFriend );
+	void						showGroupieListSessionMenu( GuiGroupieListSession* hostSession );
 	void						showHostedListSessionMenu( GuiHostedListSession* hostSession );
 	void						showHostSessionMenu( GuiHostSession* hostSession );
 	void						showPersonOfferMenu( GuiUser* poSelectedFriend );
@@ -68,6 +71,7 @@ signals:
 
 public slots:
 	void						onFriendActionSelected( int iMenuId );
+	void						onGroupieSessionActionSelected( int iMenuId );
 	void						onHostSessionActionSelected( int iMenuId );
 	void						onPersonActionSelected( int iMenuId );
 	void						onTitleBarActionSelected( int iMenuId );
@@ -90,6 +94,7 @@ protected:
 	AppletBase*					m_ParentActivity{ nullptr };
 	int							m_iMenuItemHeight{ 48 };
 	GuiHostSession*				m_HostSession{ nullptr };
+	GuiGroupieListSession*		m_GroupieListSession{ nullptr };
 	GuiHostedListSession*		m_HostedListSession{ nullptr };
 	GuiUser*					m_SelectedFriend{ nullptr };
 	GuiUserSessionBase*			m_UserSession{ nullptr };

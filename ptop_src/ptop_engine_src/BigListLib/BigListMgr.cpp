@@ -137,7 +137,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 	BigListInfo * poInfo = findBigListInfo( poPktAnnIn->getMyOnlineId(), true );	// id of friend to look for
 	if( poInfo )
 	{
-		LogMsg( LOG_INFO, "Found BigListInfo for %s isMyRelay %d\n", poInfo->getOnlineName(),  poInfo->isMyRelay() );
+		LogMsg( LOG_INFO, "Found BigListInfo for %s isMyRelay %d", poInfo->getOnlineName(),  poInfo->isMyRelay() );
 		// set flag in pkt announce so gui can read if is my proxy or not
 		poPktAnnIn->setIsMyPreferedRelay( poInfo->isMyRelay() );
 

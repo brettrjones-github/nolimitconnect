@@ -201,6 +201,16 @@ public:
 	virtual void				onPktHostInviteMoreReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktHostInviteMoreReply	( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
+	virtual void				onPktGroupieInfoReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktGroupieInfoReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
+	virtual void				onPktGroupieAnnReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktGroupieAnnReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktGroupieSearchReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktGroupieSearchReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktGroupieMoreReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktGroupieMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

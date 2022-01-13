@@ -304,6 +304,11 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiConnectMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFileActionSession.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFileXferSession.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupie.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListItem.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListMgr.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListSession.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiGroupieListWidget.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiHelpers.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
@@ -529,6 +534,12 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FriendList.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\FriendListDelegate.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiFileXferSession.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupie.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupieListCallback.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiGroupieListItem.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiGroupieListMgr.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupieListSession.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiGroupieListWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHelpers.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostJoinMgr.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHosted.h" />
@@ -968,6 +979,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\FileShareItemWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FileXferWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\FriendListDlg.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\GuiGroupieListItem.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\GuiHostedListItem.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\GuiUserListEntryWidget.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\HistoryEntryWidget.ui" />

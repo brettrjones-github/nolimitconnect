@@ -155,6 +155,10 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinedLastDb.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.h \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieListCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieInfo.h \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieListDb.h \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedInfo.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListDb.h \
@@ -457,6 +461,9 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinedLastDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieInfo.cpp \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieListDb.cpp \
+    $$PWD/ptop_src/ptop_engine_src/GroupieListMgr/GroupieListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.cpp \

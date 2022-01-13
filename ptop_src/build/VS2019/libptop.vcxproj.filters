@@ -910,6 +910,15 @@
     <ClCompile Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.cpp">
       <Filter>Source Files\HostJoinMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieInfo.cpp">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListDb.cpp">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListMgr.cpp">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1972,6 +1981,18 @@
     <ClInclude Include="..\..\ptop_engine_src\HostJoinMgr\HostJoinedLastDb.h">
       <Filter>Source Files\HostJoinMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieInfo.h">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListCallbackInterface.h">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListDb.h">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListMgr.h">
+      <Filter>Source Files\GroupieListMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -2117,6 +2138,9 @@
     </Filter>
     <Filter Include="Source Files\HostListMgr">
       <UniqueIdentifier>{3c0ac8c8-fcfa-42bb-922c-b041a277187c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GroupieListMgr">
+      <UniqueIdentifier>{26198458-8e0f-4ffc-bca9-924f271970a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -112,6 +112,10 @@ enum EConnectReason
     eConnectReasonChatRoomHostedUserListSearch,
     eConnectReasonRandomConnectHostedUserListSearch,
 
+    eConnectReasonGroupGroupieUserListSearch,
+    eConnectReasonChatRoomGroupieUserListSearch,
+    eConnectReasonRandomConnectGroupieUserListSearch,
+
     eMaxConnectReason
 };
 
