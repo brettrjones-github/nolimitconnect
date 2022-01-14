@@ -20,6 +20,7 @@
 #include <string>
 
 class PktGroupieAnnounceReq;
+class GroupieId;
 
 class GroupieInfo
 {
@@ -27,11 +28,16 @@ public:
 	GroupieInfo() = default;
 	GroupieInfo( const GroupieInfo& rhs );
     GroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& groupieUrl );
+    GroupieInfo( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t timeModified );
     virtual ~GroupieInfo() = default;
 
 	GroupieInfo&				operator=( const GroupieInfo& rhs ); 
 
     bool                        isGroupieValid( void );
+    bool                        isMatch( GroupieId& groupieId );
+
+    bool                        setGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
+    bool                        getGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
     virtual void				setGroupieOnlineId( VxGUID& onlineId )              { m_GroupieOnlineId = onlineId; }
     virtual VxGUID&             getGroupieOnlineId( void )                          { return m_GroupieOnlineId; }

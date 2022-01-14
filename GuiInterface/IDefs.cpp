@@ -15,6 +15,7 @@ namespace
         "Comm Error Invalid Host Type ",
         "Comm Error Plugin Not Enabled ",
         "Comm Error Plugin Permission Level ",
+        "Comm Error Not Found ",
         "Max Comm Error ",
     };
 

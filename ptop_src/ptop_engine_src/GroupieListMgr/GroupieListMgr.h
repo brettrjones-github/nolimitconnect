@@ -26,6 +26,7 @@ class VxNetIdent;
 class VxPktHdr;
 class VxPtopUrl;
 class GroupieListCallbackInterface;
+class PluginBaseHostService;
 
 class GroupieListMgr : public IConnectRequestCallback
 {
@@ -43,21 +44,32 @@ public:
 
     void                        addGroupieListMgrClient( GroupieListCallbackInterface* client, bool enable );
 
-    bool                        fromGuiQueryMyGroupieInfo( EHostType hostType, std::vector<GroupieInfo>& hostedInfoList );
-    bool                        fromGuiQueryGroupieInfoList( EHostType hostType, std::vector<GroupieInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll );
+    bool                        setGroupieUrlAndTitleAndDescription( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
+    bool                        getGroupieUrlAndTitleAndDescription( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
+
+    bool                        fromGuiQueryMyGroupieInfo( EHostType hostType, std::vector<GroupieInfo>& groupieInfoList );
+    bool                        fromGuiQueryGroupieInfoList( EHostType hostType, std::vector<GroupieInfo>& groupieInfoList, VxGUID& hostIdIfNullThenAll );
 
     // returns true if retGroupieInfo was filled
-    bool                        updateGroupieInfo( EHostType hostType, GroupieInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase, GroupieInfo* retGroupieInfo = nullptr );
+    bool                        updateGroupieInfo( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase, GroupieInfo* retGroupieInfo = nullptr );
     void                        updateGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& hosted, int64_t timestampMs = 0 );
 
     void                        updateGroupieList( VxNetIdent* netIdent, VxSktBase* sktBase );
-    void                        hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, GroupieInfo& hostedInfo );
+    void                        hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, GroupieInfo& groupieInfo );
     void                        hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr );
 
-    void                        onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktGroupieInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin );
 
-    void                        onGroupieAnnounceAdded( EHostType hostType, GroupieInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
-    void                        onGroupieAnnounceUpdated( EHostType hostType, GroupieInfo& hostedInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+    virtual void				onPktGroupieAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin );
+    virtual void				onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin );
+
+    void                        onGroupieAnnounceAdded( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+    void                        onGroupieAnnounceUpdated( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
 
 protected:
     virtual void                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override {};
@@ -86,20 +98,20 @@ protected:
 
     bool                        requestGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, VxNetIdent* netIdent, VxSktBase* sktBase );
 
-    void                        announceGroupieInfoUpdated( GroupieInfo* hostedInfo );
-    void                        announceGroupieInfoSearchResult( GroupieInfo* hostedInfo, VxGUID& sessionId );
+    void                        announceGroupieInfoUpdated( GroupieInfo* groupieInfo );
+    void                        announceGroupieInfoSearchResult( GroupieInfo* groupieInfo, VxGUID& sessionId );
     void                        announceGroupieInfoRemoved( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType );
 
-    void						addToListInJoinedTimestampOrder( std::vector<GroupieInfo>& hostedInfoList, GroupieInfo& hostedInfo );
+    void						addToListInJoinedTimestampOrder( std::vector<GroupieInfo>& groupieInfoList, GroupieInfo& groupieInfo );
 
     void						lockClientList( void )          { m_GroupieInfoListClientMutex.lock(); }
     void						unlockClientList( void )        { m_GroupieInfoListClientMutex.unlock(); }
 
     P2PEngine&                  m_Engine;
     VxMutex                     m_GroupieInfoMutex;
-    GroupieListDb                m_GroupieInfoListDb;
+    GroupieListDb               m_GroupieInfoListDb;
 
-    std::vector<GroupieInfo>     m_GroupieInfoList;
+    std::vector<GroupieInfo>    m_GroupieInfoList;
 
     std::vector<GroupieListCallbackInterface*> m_GroupieInfoListClients;
     VxMutex						m_GroupieInfoListClientMutex;

@@ -1684,7 +1684,7 @@ bool P2PEngine::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, EHos
 }
 
 //============================================================================
-bool P2PEngine::fromGuiQueryUserListFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
+bool P2PEngine::fromGuiQueryGroupiesFromHosted( VxPtopUrl& hostedUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
 {
-	return getHostedListMgr().fromGuiQueryUserListFromHosted( hostedUrl, hostType, onlineIdIfNullThenAll );
+	return getHostedListMgr().fromGuiQueryGroupiesFromHosted( hostedUrl, hostType, onlineIdIfNullThenAll );
 }

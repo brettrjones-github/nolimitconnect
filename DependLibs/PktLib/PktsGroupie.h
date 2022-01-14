@@ -24,23 +24,27 @@ class PktGroupieInfoReq : public VxPktHdr
 public:
     PktGroupieInfoReq();
 
-    void						setSessionId( VxGUID& guid ) { m_SessionId = guid; }
-    VxGUID& getSessionId( void ) { return m_SessionId; }
+    void						setSessionId( VxGUID& guid )        { m_SessionId = guid; }
+    VxGUID&                     getSessionId( void )                { return m_SessionId; }
 
-    void                        setHostType( EHostType hostType ) { m_HostType = ( uint8_t )hostType; }
-    EHostType                   getHostType( void ) const { return ( EHostType )m_HostType; }
+    void						setGroupieOnlineId( VxGUID& guid )  { m_GroupieOnlineId = guid; }
+    VxGUID&                     getGroupieOnlineId( void )          { return m_GroupieOnlineId; }
 
-    void                        setCommError( ECommErr commError ) { m_CommError = ( uint8_t )commError; }
-    ECommErr                    getCommError( void ) const { return ( ECommErr )m_CommError; }
+    void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
+    EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
+
+    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
 
 private:
     //=== vars ===//
     // VxPktHdr 40 bytes 
-    VxGUID                      m_SessionId;        // 16 bytes
     uint8_t					    m_HostType{ 0 };    // 1 byte
     uint8_t					    m_CommError{ 0 };   // 1 byte
     uint16_t                    m_Res1{ 0 };        // fill to 16 byte boundry
     uint32_t                    m_Res2{ 0 };        // fill to 16 byte boundry
+    VxGUID                      m_SessionId;        // 16 bytes
+    VxGUID                      m_GroupieOnlineId;  // 16 bytes
 };
 
 class PktGroupieInfoReply : public VxPktHdr
@@ -62,7 +66,7 @@ public:
     bool                        setGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
     bool                        getGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
-    PktBlobEntry& getBlobEntry( void ) { return m_BlobEntry; }
+    PktBlobEntry&               getBlobEntry( void ) { return m_BlobEntry; }
 
 private:
     //=== vars ===//
@@ -86,8 +90,8 @@ public:
     void						setSessionId( VxGUID& guid ) { m_SessionId = guid; }
     VxGUID&                     getSessionId( void ) { return m_SessionId; }
 
-    bool                        setGroupieInfo( std::string& groupieUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
-    bool                        getGroupieInfo( std::string& groupieUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime );
+    bool                        setGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
+    bool                        getGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
     PktBlobEntry&               getBlobEntry( void ) { return m_BlobEntry; }
 
@@ -135,6 +139,13 @@ public:
     void						setSpecificOnlineId( VxGUID& guid )     { m_SpecificOnlineId = guid; }
     VxGUID&                     getSpecificOnlineId( void )             { return m_SpecificOnlineId; }
 
+    bool						setSearchText( std::string& searchText );
+    bool						getSearchText( std::string& searchText );
+
+    PktBlobEntry&               getBlobEntry( void ) { return m_BlobEntry; }
+
+    void                        calcPktLen( void );
+
 protected:
     uint8_t					    m_HostType{ 0 };
     uint8_t					    m_Res1{ 0 };
@@ -142,6 +153,7 @@ protected:
     uint32_t                    m_Res3{ 0 };
     VxGUID                      m_SearchSessionId;
     VxGUID                      m_SpecificOnlineId;
+    PktBlobEntry                m_BlobEntry;	
 };
 
 class PktGroupieSearchReply : public VxPktHdr
@@ -157,6 +169,8 @@ public:
 
     void                        setCommError( ECommErr commError )      { m_CommError = ( uint8_t )commError; }
     ECommErr                    getCommError( void ) const              { return ( ECommErr )m_CommError; }
+
+    bool                        addGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
     void						setGroupieCountThisPkt( uint16_t inviteCnt ) { m_GroupieThisPktCount = inviteCnt; }
     uint16_t&                   getGroupieCountThisPkt( void )           { return m_GroupieThisPktCount; }

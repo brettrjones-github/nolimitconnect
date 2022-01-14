@@ -56,6 +56,8 @@ public:
     // get a description of the plugin id
     std::string                 describeGroupieId( void ) const;
 
+    bool                        isValid( void )                                     { return eHostTypeUnknown != m_HostType && m_GroupieOnlineId.isVxGUIDValid() && m_HostOnlineId.isVxGUIDValid();  }
+
 protected:
 	//=== vars ===//
     VxGUID					    m_GroupieOnlineId;

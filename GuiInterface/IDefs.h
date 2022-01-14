@@ -74,6 +74,7 @@ enum ECommErr
     eCommErrInvalidHostType, 
     eCommErrPluginNotEnabled,
     eCommErrPluginPermission,
+    eCommErrNotFound,
 
     eMaxCommErr
 };

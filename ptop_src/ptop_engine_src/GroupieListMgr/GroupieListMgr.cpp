@@ -19,9 +19,11 @@
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h>
 
 #include <CoreLib/VxPtopUrl.h>
 #include <PktLib/PktsGroupie.h>
+#include <PktLib/GroupieId.h>
 
 //============================================================================
 GroupieListMgr::GroupieListMgr( P2PEngine& engine )
@@ -247,7 +249,7 @@ void GroupieListMgr::updateAndRequestInfoIfNeeded( VxGUID& groupieOnlineId, VxGU
     bool wasFound{ false };
     bool urlChanged{ false };
     lockList();
-    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); )
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
         if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
@@ -308,7 +310,7 @@ bool GroupieListMgr::updateLastConnected( VxGUID& groupieOnlineId, VxGUID& hostO
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); )
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
         if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
@@ -331,7 +333,7 @@ bool GroupieListMgr::updateLastJoined( VxGUID& groupieOnlineId, VxGUID& hostOnli
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); )
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
         if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
@@ -364,7 +366,7 @@ bool GroupieListMgr::updateIsFavorite( VxGUID& groupieOnlineId, VxGUID& hostOnli
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); )
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
         if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
@@ -397,7 +399,7 @@ bool GroupieListMgr::updateGroupieUrlAndTitleAndDescription( VxGUID& groupieOnli
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); )
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
         if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
@@ -437,61 +439,6 @@ bool GroupieListMgr::requestGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOn
     }
 
     return result;
-}
-
-//============================================================================
-void GroupieListMgr::onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
-{
-    bool result{ false };
-    PktGroupieInfoReply* pktReply = (PktGroupieInfoReply *)pktHdr;
-
-    VxGUID sessionId = pktReply->getSessionId();
-    EHostType hostType = pktReply->getHostType();
-    std::string groupieUrl;
-    VxGUID groupieOnlineId;
-    std::string groupieTitle;
-    std::string groupieDesc;
-    int64_t lastModifiedTime{ 0 };
-    ECommErr commErr = pktReply->getCommError();
-    if( eCommErrNone == commErr )
-    {
-        if( pktReply->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime ) )
-        {
-            VxPtopUrl ptopUrl( groupieUrl );
-            if( ptopUrl.isValid() )
-            {
-                groupieOnlineId = ptopUrl.getOnlineId();
-                if( !groupieTitle.empty() && !groupieDesc.empty() && lastModifiedTime )
-                {
-                    result = true;
-                }
-                else
-                {
-                    LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply INVALID host info %s", netIdent->getOnlineName() );
-                }
-            }
-            else
-            {
-                LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply INVALID url%s", netIdent->getOnlineName() );
-            }
-        }
-        else
-        {
-            LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply extract host info FAILED %s", netIdent->getOnlineName() );
-        }
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply error %s %s", DescribeCommError( commErr ), netIdent->getOnlineName() );
-    }
-
-
-    if( result )
-    {
-        LogMsg( LOG_VERBOSE, "GroupieListMgr::onPktGroupieInfoReply success title %s desc %s", groupieTitle.c_str(), groupieDesc.c_str() );
-
-        updateGroupieUrlAndTitleAndDescription( groupieOnlineId, netIdent->getMyOnlineId(), hostType, groupieTitle, groupieDesc, lastModifiedTime, netIdent );
-    }
 }
 
 //============================================================================
@@ -595,11 +542,15 @@ void GroupieListMgr::addToListInJoinedTimestampOrder( std::vector<GroupieInfo>& 
     int64_t connectedTimestamp = groupieInfo.getConnectedTimestamp();
     if( !groupieInfoList.empty() && (joinedTimestamp || connectedTimestamp) )
     {
-        for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+        for( auto iter = groupieInfoList.begin(); iter != groupieInfoList.end(); ++iter )
         {
             if( joinedTimestamp )
             {
-
+                if( joinedTimestamp > iter->getJoinedTimestamp() )
+                {
+                    groupieInfoList.insert( iter, groupieInfo );
+                    wasInserted = true;
+                }
             }
             else if( connectedTimestamp )
             {
@@ -607,6 +558,11 @@ void GroupieListMgr::addToListInJoinedTimestampOrder( std::vector<GroupieInfo>& 
                 if( iter->getJoinedTimestamp() )
                 {
                     continue;
+                }
+                else if( connectedTimestamp > iter->getConnectedTimestamp() )
+                {
+                    groupieInfoList.insert( iter, groupieInfo );
+                    wasInserted = true;
                 }
             }
 
@@ -793,4 +749,239 @@ bool GroupieListMgr::updateGroupieInfo( EHostType hostType, GroupieInfo& groupie
     }
 
     return filledResultInfo;
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin )
+{
+    LogMsg( LOG_VERBOSE, "PluginBaseHostService got groupie info request" );
+    PktGroupieInfoReq* pktReq = ( PktGroupieInfoReq* )pktHdr;
+    PktGroupieInfoReply pktReply;
+    pktReply.setHostType( pktReq->getHostType() );
+    pktReply.setSessionId( pktReq->getSessionId() );
+    if( eCommErrNone == commErr )
+    {
+        std::string groupieUrl;
+        std::string groupieTitle;
+        std::string groupieDesc;
+        int64_t lastModifiedTime;
+        VxGUID groupieOnlineId = pktReq->getGroupieOnlineId();
+        GroupieId groupieId( groupieOnlineId, m_Engine.getMyOnlineId(), pktReq->getHostType() );
+        bool foundGroupie{ false };
+        if( groupieId.isValid() && getGroupieUrlAndTitleAndDescription( groupieId, groupieUrl, groupieTitle, groupieDesc, lastModifiedTime ) )
+        {
+            foundGroupie = pktReply.setGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime );
+        }
+
+        if( !foundGroupie )
+        {
+            commErr = eCommErrNotFound;
+        }
+    }
+
+    pktReply.setCommError( commErr );
+
+    if( !plugin->txPacket( netIdent, sktBase, &pktReply ) )
+    {
+        LogMsg( LOG_DEBUG, "PluginBaseHostService failed send onPktHostInfoReq" );
+    }
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+{
+    bool result{ false };
+    PktGroupieInfoReply* pktReply = ( PktGroupieInfoReply* )pktHdr;
+
+    VxGUID sessionId = pktReply->getSessionId();
+    EHostType hostType = pktReply->getHostType();
+    std::string groupieUrl;
+    VxGUID groupieOnlineId;
+    std::string groupieTitle;
+    std::string groupieDesc;
+    int64_t lastModifiedTime{ 0 };
+    ECommErr commErr = pktReply->getCommError();
+    if( eCommErrNone == commErr )
+    {
+        if( pktReply->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime ) )
+        {
+            VxPtopUrl ptopUrl( groupieUrl );
+            if( ptopUrl.isValid() )
+            {
+                groupieOnlineId = ptopUrl.getOnlineId();
+                if( !groupieTitle.empty() && !groupieDesc.empty() && lastModifiedTime )
+                {
+                    GroupieId groupieId( groupieOnlineId, netIdent->getMyOnlineId(), hostType );
+                    if( groupieId.isValid() && setGroupieUrlAndTitleAndDescription( groupieId, groupieUrl, groupieTitle, groupieDesc, lastModifiedTime ) )
+                    {
+                        result = true;
+                    }              
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply INVALID host info %s", netIdent->getOnlineName() );
+                }
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply INVALID url%s", netIdent->getOnlineName() );
+            }
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply extract host info FAILED %s", netIdent->getOnlineName() );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GroupieListMgr::onPktGroupieInfoReply error %s %s", DescribeCommError( commErr ), netIdent->getOnlineName() );
+    }
+
+
+    if( result )
+    {
+        LogMsg( LOG_VERBOSE, "GroupieListMgr::onPktGroupieInfoReply success title %s desc %s", groupieTitle.c_str(), groupieDesc.c_str() );
+
+        updateGroupieUrlAndTitleAndDescription( groupieOnlineId, netIdent->getMyOnlineId(), hostType, groupieTitle, groupieDesc, lastModifiedTime, netIdent );
+    }
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin )
+{
+
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+{
+
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin )
+{
+    LogMsg( LOG_DEBUG, "PluginBaseHostService onPktGroupieSearchReq" );
+    PktGroupieSearchReq* pktReq = ( PktGroupieSearchReq* )pktHdr;
+    PktGroupieSearchReply pktReply;
+    pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
+    pktReply.setHostType( pktReq->getHostType() );
+    pktReply.setCommError( commErr );
+    if( eCommErrNone == commErr && pktReq->isValidPkt() )
+    {
+        pktReply.getBlobEntry().resetWrite();
+
+        std::string searchText;
+        if( pktReq->getSearchText( searchText ) )
+        {
+            // search by text
+
+        }
+        else if( pktReq->getSpecificOnlineId().isVxGUIDValid() )
+        {
+            // search specific user
+            GroupieId groupieId( pktReq->getSpecificOnlineId(), m_Engine.getMyOnlineId(), pktReq->getHostType() );
+            bool foundUser{ false };
+            if( groupieId.isValid() )
+            lockList();
+            for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+            {
+                if( iter->isMatch( groupieId ) )
+                {
+                    std::string groupieUrl;
+                    std::string groupieTitle;
+                    std::string groupieDesc;
+                    int64_t timeModified{ 0 };
+
+                    foundUser = iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, timeModified );
+                    if( foundUser )
+                    {
+                        foundUser = pktReply.addGroupieInfo( groupieUrl, groupieTitle, groupieDesc, timeModified );
+                    }
+                   
+                    break;
+                }
+            }
+
+            unlockList();
+
+        }
+        else
+        {
+            // all users
+
+        }
+    }
+
+    if( !plugin->txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply, false, plugin->getClientPluginType() ) )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
+    }
+}
+
+
+//============================================================================
+void GroupieListMgr::onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+{
+
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin )
+{
+
+}
+
+//============================================================================
+void GroupieListMgr::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+{
+
+}
+
+//============================================================================
+bool GroupieListMgr::setGroupieUrlAndTitleAndDescription( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
+{
+    bool result{ false };
+    bool foundGroupie{ false };
+    lockList();
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+    {
+        if( iter->isMatch( groupieId ) )
+        {
+            result = iter->setGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime );
+            foundGroupie = true;
+            break;
+        }
+    }
+
+    if( !foundGroupie )
+    {
+        GroupieInfo groupieInfo( groupieId, groupieUrl, groupieTitle, groupieDesc, lastModifiedTime );
+        if( groupieInfo.isValidForGui() )
+        {
+            m_GroupieInfoList.push_back( groupieInfo );
+            result = true;
+        }
+    }
+
+    unlockList();
+    return result;
+}
+
+//============================================================================
+bool GroupieListMgr::getGroupieUrlAndTitleAndDescription( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
+{
+    bool result{ false };
+    lockList();
+    for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+    {
+        if( iter->isMatch( groupieId ) )
+        {
+            result = iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime );
+            break;
+        }
+    }
+
+    unlockList();
+    return result;
 }

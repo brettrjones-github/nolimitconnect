@@ -77,16 +77,16 @@ PktGroupieAnnounceReq::PktGroupieAnnounceReq()
 }
 
 //============================================================================
-bool PktGroupieAnnounceReq::setGroupieInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+bool PktGroupieAnnounceReq::setGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
 {
-    bool result = lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
+    bool result = lastModifiedTime && !groupieUrl.empty() && !groupieTitle.empty() && !groupieDesc.empty();
     if( result )
     {
         m_BlobEntry.resetWrite();
         result &= m_BlobEntry.setValue( lastModifiedTime );
-        result &= m_BlobEntry.setValue( inviteUrl );
-        result &= m_BlobEntry.setValue( hostTitle );
-        result &= m_BlobEntry.setValue( hostDesc );
+        result &= m_BlobEntry.setValue( groupieUrl );
+        result &= m_BlobEntry.setValue( groupieTitle );
+        result &= m_BlobEntry.setValue( groupieDesc );
         calcPktLen();
     }
 
@@ -94,15 +94,15 @@ bool PktGroupieAnnounceReq::setGroupieInfo( std::string& inviteUrl, std::string&
 }
 
 //============================================================================
-bool PktGroupieAnnounceReq::getGroupieInfo( std::string& inviteUrl, std::string& hostTitle, std::string& hostDesc, int64_t& lastModifiedTime )
+bool PktGroupieAnnounceReq::getGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
 {
     m_BlobEntry.resetRead();
     bool result = m_BlobEntry.getValue( lastModifiedTime );
-    result &= m_BlobEntry.getValue( inviteUrl );
-    result &= m_BlobEntry.getValue( hostTitle );
-    result &= m_BlobEntry.getValue( hostDesc );  
+    result &= m_BlobEntry.getValue( groupieUrl );
+    result &= m_BlobEntry.getValue( groupieTitle );
+    result &= m_BlobEntry.getValue( groupieDesc );
     
-    return result && lastModifiedTime && !inviteUrl.empty() && !hostTitle.empty() && !hostDesc.empty();
+    return result && lastModifiedTime && !groupieUrl.empty() && !groupieTitle.empty() && !groupieDesc.empty();
 }
 
 //============================================================================
@@ -143,9 +143,38 @@ PktGroupieSearchReq::PktGroupieSearchReq()
     : VxPktHdr()
 {
     setPktType( PKT_TYPE_GROUPIE_SEARCH_REQ );
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktGroupieSearchReq ) ) );
-    // LogMsg( LOG_DEBUG, "PktGroupieReq size %d %d", sizeof( PktGroupieReq ), (getPktLength() & 0x0f) ); 
+    calcPktLen();
+
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+bool PktGroupieSearchReq::setSearchText( std::string& searchText )
+{
+    getBlobEntry().resetWrite();
+    if( !searchText.empty() )
+    {
+        bool result = getBlobEntry().setValue( searchText );
+        calcPktLen();
+        return result;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool PktGroupieSearchReq::getSearchText( std::string& searchText )
+{
+    getBlobEntry().resetRead();
+    return getBlobEntry().getValue( searchText );
+}
+
+//============================================================================
+void PktGroupieSearchReq::calcPktLen( void )
+{
+    uint16_t pktLen = ( uint16_t )sizeof( PktGroupieSearchReq ) - sizeof( PktBlobEntry );
+    uint16_t blobLen = getBlobEntry().getTotalBlobLen();
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) );
 }
 
 //============================================================================
@@ -156,6 +185,23 @@ PktGroupieSearchReply::PktGroupieSearchReply()
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktGroupieSearchReply ) ) );
     // LogMsg( LOG_DEBUG, "PktGroupieReq size %d %d", sizeof( PktGroupieReq ), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+bool PktGroupieSearchReply::addGroupieInfo( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
+{
+    bool result{ false };
+    int requiredSpace = groupieUrl.length() + groupieTitle.length() + groupieDesc.length() + 3 * sizeof( uint32_t );
+    if( m_BlobEntry.haveRoom( requiredSpace ) )
+    {
+        result = m_BlobEntry.setValue( lastModifiedTime );
+        result &= m_BlobEntry.setValue( groupieUrl );
+        result &= m_BlobEntry.setValue( groupieTitle );
+        result &= m_BlobEntry.setValue( groupieDesc );
+    }
+
+    calcPktLen();
+    return result;
 }
 
 //============================================================================

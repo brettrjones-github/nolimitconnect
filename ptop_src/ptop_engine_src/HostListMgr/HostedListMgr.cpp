@@ -23,6 +23,7 @@
 #include <CoreLib/VxPtopUrl.h>
 #include <PktLib/PktsHostInvite.h>
 #include <PktLib/PktsHostInfo.h>
+#include <PktLib/PktsGroupie.h>
 
 //============================================================================
 HostedListMgr::HostedListMgr( P2PEngine& engine )
@@ -260,7 +261,7 @@ void HostedListMgr::updateAndRequestInfoIfNeeded( EHostType hostType, VxGUID& on
     bool wasFound{ false };
     bool urlChanged{ false };
     lockList();
-    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter)
     {
         if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
         {
@@ -321,7 +322,7 @@ bool HostedListMgr::updateLastConnected( EHostType hostType, VxGUID& onlineId, i
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter)
     {
         if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
         {
@@ -344,7 +345,7 @@ bool HostedListMgr::updateLastJoined( EHostType hostType, VxGUID& onlineId, int6
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter)
     {
         if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
         {
@@ -377,7 +378,7 @@ bool HostedListMgr::updateIsFavorite( EHostType hostType, VxGUID& onlineId, bool
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter)
     {
         if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
         {
@@ -410,7 +411,7 @@ bool HostedListMgr::updateHostTitleAndDescription( EHostType hostType, VxGUID& o
 {
     bool result{ false };
     lockList();
-    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); )
+    for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter)
     {
         if( iter->getOnlineId() == onlineId && iter->getHostType() == hostType )
         {
@@ -549,7 +550,7 @@ bool HostedListMgr::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, 
 }
 
 //============================================================================
-bool HostedListMgr::fromGuiQueryUserListFromHosted( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
+bool HostedListMgr::fromGuiQueryGroupiesFromHosted( VxPtopUrl& netHostUrl, EHostType hostType, VxGUID& onlineIdIfNullThenAll )
 {
     if( netHostUrl.isValid() )
     {
@@ -580,7 +581,7 @@ bool HostedListMgr::fromGuiQueryUserListFromHosted( VxPtopUrl& netHostUrl, EHost
         }
         else
         {
-            LogMsg( LOG_ERROR, "HostedListMgr::fromGuiQueryUserListFromHosted invalid host type" );
+            LogMsg( LOG_ERROR, "HostedListMgr::fromGuiQueryGroupiesFromHosted invalid host type" );
         }
     }
 
@@ -625,7 +626,7 @@ bool HostedListMgr::onContactConnected( VxGUID& sessionId, VxSktBase* sktBase, V
 
         if( hostType != eHostTypeUnknown && pluginType != ePluginTypeInvalid )
         {
-            PktHostInviteSearchReq pktReq;
+            PktGroupieSearchReq pktReq;
 
             pktReq.setPluginNum( ( uint8_t )pluginType );
             pktReq.setSrcOnlineId( m_Engine.getMyOnlineId() );
@@ -651,11 +652,15 @@ void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& ho
     int64_t connectedTimestamp = hostedInfo.getConnectedTimestamp();
     if( !hostedInfoList.empty() && (joinedTimestamp || connectedTimestamp) )
     {
-        for( auto iter = m_HostedInfoList.begin(); iter != m_HostedInfoList.end(); ++iter )
+        for( auto iter = hostedInfoList.begin(); iter != hostedInfoList.end(); ++iter )
         {
             if( joinedTimestamp )
             {
-
+                if( joinedTimestamp > iter->getJoinedTimestamp() )
+                {
+                    hostedInfoList.insert( iter, hostedInfo );
+                    wasInserted = true;
+                }
             }
             else if( connectedTimestamp )
             {
@@ -663,6 +668,11 @@ void HostedListMgr::addToListInJoinedTimestampOrder( std::vector<HostedInfo>& ho
                 if( iter->getJoinedTimestamp() )
                 {
                     continue;
+                }
+                else if( connectedTimestamp > iter->getConnectedTimestamp() )
+                {
+                    hostedInfoList.insert( iter, hostedInfo );
+                    wasInserted = true;
                 }
             }
 

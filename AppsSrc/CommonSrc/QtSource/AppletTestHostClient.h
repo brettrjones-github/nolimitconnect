@@ -18,8 +18,9 @@
 
 #include "GuiUserMgrGuiUserUpdateInterface.h"
 #include "GuiHostedListCallback.h"
+#include "GuiGroupieListCallback.h"
 
-class AppletTestHostClient : public AppletTestBase, public GuiUserMgrGuiUserUpdateInterface, public GuiHostedListCallback
+class AppletTestHostClient : public AppletTestBase, public GuiUserMgrGuiUserUpdateInterface, public GuiHostedListCallback, public GuiGroupieListCallback
 {
 	Q_OBJECT
 public:
@@ -34,6 +35,8 @@ public:
 
     virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
 
+    virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) override;
+
 protected slots:
     void                        slotNetworkHostComboBoxSelectionChange( int comboIdx );
     void                        slotHostTypeComboBoxSelectionChange( int comboIdx );
@@ -41,7 +44,7 @@ protected slots:
 
     void                        slotNetworkHostIdentityButtonClicked( void );
     void                        slotQueryHostListFromNetworkHostButtonClicked( void );
-    void                        slotQueryHostedUsersButtonClicked( void );
+    void                        slotQueryGroupiesButtonClicked( void );
 
 protected:
     void                        fillHostList( EHostType hostType, QComboBox* comboBox );

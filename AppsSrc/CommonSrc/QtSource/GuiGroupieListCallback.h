@@ -20,8 +20,8 @@ class GuiGroupie;
 class GuiGroupieListCallback
 {
 public:
-    virtual void				callbackGuiGroupieListUpdated( GroupieId& hostedId, GuiGroupie* guiGroupie ) {};
-    virtual void				callbackGuiGroupieListRemoved( GroupieId& hostedId ) {};
-    virtual void				callbackGuiGroupieListSearchResult( GroupieId& hostedId, GuiGroupie* guiGroupie, VxGUID& sessionId ) {};
+    virtual void				callbackGuiGroupieListUpdated( GroupieId& groupieId, GuiGroupie* guiGroupie ) {};
+    virtual void				callbackGuiGroupieListRemoved( GroupieId& groupieId ) {};
+    virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) {};
 };
 

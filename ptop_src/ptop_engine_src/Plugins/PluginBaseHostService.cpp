@@ -24,12 +24,19 @@
 #include <PktLib/PktsHostJoin.h>
 #include <PktLib/PktsHostSearch.h>
 #include <PktLib/PktsHostInfo.h>
+#include <PktLib/PktsGroupie.h>
 
 //============================================================================
 PluginBaseHostService::PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
     : PluginNetServices( engine, pluginMgr, myIdent, pluginType )
     , m_HostServerMgr(engine, pluginMgr, myIdent, *this)
 {
+}
+
+//============================================================================
+EPluginType PluginBaseHostService::getClientPluginType( void )
+{
+    return HostPluginToClientPluginType( getPluginType() );
 }
 
 //============================================================================
@@ -477,4 +484,72 @@ void PluginBaseHostService::updateHostInviteUrl( void )
     {
         m_PktHostInviteIsValid = false;
     }
+}
+
+//============================================================================
+ECommErr PluginBaseHostService::getCommAccessState( VxNetIdent* netIdent )
+{
+    ECommErr commErr{ eCommErrNone };
+    if( !isPluginEnabled() )
+    {
+        commErr = eCommErrPluginNotEnabled;
+    }
+    else
+    {
+        EPluginAccess pluginAccess = m_HostServerMgr.getPluginAccessState( netIdent );
+        if( ePluginAccessOk != pluginAccess )
+        {
+            commErr = eCommErrPluginPermission;
+        }
+    }
+
+    return commErr;
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieInfoReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieInfoReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieAnnReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieAnnReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieSearchReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieSearchReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieMoreReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseHostService::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    m_Engine.getGroupieListMgr().onPktGroupieMoreReply( sktBase, pktHdr, netIdent, this );
 }

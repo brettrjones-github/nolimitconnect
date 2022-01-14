@@ -14,7 +14,9 @@
 
 #include "GroupieInfo.h"
 
+#include <PktLib/GroupieId.h>
 #include <PktLib/PktsGroupie.h>
+
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxPtopUrl.h>
 
@@ -24,6 +26,18 @@ GroupieInfo::GroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostTy
     , m_GroupieOnlineId( groupieOnlineId )
     , m_HostOnlineId( hostOnlineId )
     , m_GroupieUrl( groupieUrl )
+{
+}
+
+//============================================================================
+GroupieInfo::GroupieInfo( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t timeModified )
+    : m_HostType( groupieId.getHostType() )
+    , m_GroupieOnlineId( groupieId.getGroupieOnlineId() )
+    , m_HostOnlineId( groupieId.getHostOnlineId() )
+    , m_GroupieInfoTimestampMs( timeModified )
+    , m_GroupieUrl( groupieUrl )
+    , m_GroupieTitle( groupieTitle )
+    , m_GroupieDesc( groupieDesc )
 {
 }
 
@@ -164,4 +178,37 @@ bool GroupieInfo::isGroupieValid( void )
 {
     return eHostTypeUnknown != getHostType() && m_HostOnlineId.isVxGUIDValid() && m_GroupieOnlineId.isVxGUIDValid() && 
         m_GroupieInfoTimestampMs && !m_GroupieUrl.empty() && !m_GroupieTitle.empty() && !m_GroupieDesc.empty();
+}
+
+//============================================================================
+bool GroupieInfo::isMatch( GroupieId& groupieId )
+{
+    return m_HostType == groupieId.getHostType() && m_GroupieOnlineId == groupieId.getGroupieOnlineId() &&
+        m_HostOnlineId == groupieId.getHostOnlineId();
+}
+
+//============================================================================
+bool GroupieInfo::setGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
+{
+    if( !groupieUrl.empty() && !groupieTitle.empty() && !groupieDesc.empty() && lastModifiedTime )
+    {
+        m_GroupieInfoTimestampMs = lastModifiedTime;
+        m_GroupieUrl = groupieUrl;
+        m_GroupieTitle = groupieTitle;
+        m_GroupieDesc = groupieDesc;
+        return true;
+    }
+
+    return false;
+}
+
+//============================================================================
+bool GroupieInfo::getGroupieUrlAndTitleAndDescription(std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime )
+{
+    lastModifiedTime = m_GroupieInfoTimestampMs;
+    groupieUrl = m_GroupieUrl;
+    groupieTitle = m_GroupieTitle;
+    groupieDesc = m_GroupieDesc;
+
+    return !groupieUrl.empty() && !groupieTitle.empty() && !groupieDesc.empty() && lastModifiedTime;
 }

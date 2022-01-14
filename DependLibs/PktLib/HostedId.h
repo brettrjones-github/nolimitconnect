@@ -43,7 +43,7 @@ public:
     void						setOnlineId( VxGUID& onlineId )             { m_OnlineId = onlineId; }
     VxGUID&					    getOnlineId( void )                         { return m_OnlineId; }
 
-    void						setHostType( EHostType hostType )         { m_HostType = (uint8_t)hostType; }
+    void						setHostType( EHostType hostType )           { m_HostType = (uint8_t)hostType; }
     EHostType  				    getHostType( void ) const                   { return (EHostType)m_HostType; }
 
     // returns 0 if equal else -1 if less or 1 if greater
@@ -52,6 +52,8 @@ public:
     bool						isEqualTo( const HostedId& guid );
     // get a description of the plugin id
     std::string                 describeHostedId( void ) const;
+
+    bool                        isValid( void )                             { return eHostTypeUnknown != m_HostType && m_OnlineId.isVxGUIDValid(); }
 
 protected:
 	//=== vars ===//
