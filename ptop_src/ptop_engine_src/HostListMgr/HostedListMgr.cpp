@@ -454,7 +454,7 @@ bool HostedListMgr::requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxN
 }
 
 //============================================================================
-void HostedListMgr::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+void HostedListMgr::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin )
 {
     bool result{ false };
     PktHostInfoReply* pktReply = (PktHostInfoReply *)pktHdr;

@@ -115,14 +115,18 @@ public:
 
     void                        setHostType( EHostType hostType )   { m_HostType = ( uint8_t )hostType; }
     EHostType                   getHostType( void ) const           { return ( EHostType )m_HostType; }
+
     void						setSessionId( VxGUID& guid )        { m_SessionId = guid; }
     VxGUID&                     getSessionId( void )                { return m_SessionId; }
 
+    void                        setCommError( ECommErr commError )  { m_CommError = ( uint8_t )commError; }
+    ECommErr                    getCommError( void ) const          { return ( ECommErr )m_CommError; }
+
 protected:
     uint8_t					    m_HostType{ 0 };
-    uint8_t					    m_Res1{ 0 };
-    uint16_t                    m_Res2{ 0 };
-    uint32_t                    m_Res3{ 0 };
+    uint8_t					    m_CommError{ 0 };
+    uint16_t                    m_Res1{ 0 };
+    uint32_t                    m_Res2{ 0 };
     VxGUID                      m_SessionId;
 };
 

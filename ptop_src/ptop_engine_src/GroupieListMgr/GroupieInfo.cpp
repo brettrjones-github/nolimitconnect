@@ -19,6 +19,7 @@
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxPtopUrl.h>
+#include <CoreLib/VxParse.h>
 
 //============================================================================
 GroupieInfo::GroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& groupieUrl )
@@ -181,10 +182,27 @@ bool GroupieInfo::isGroupieValid( void )
 }
 
 //============================================================================
-bool GroupieInfo::isMatch( GroupieId& groupieId )
+bool GroupieInfo::isIdMatch( GroupieId& groupieId )
 {
     return m_HostType == groupieId.getHostType() && m_GroupieOnlineId == groupieId.getGroupieOnlineId() &&
         m_HostOnlineId == groupieId.getHostOnlineId();
+}
+
+//============================================================================
+bool GroupieInfo::isSearchTextMatch( std::string& searchText )
+{
+    if( searchText.empty() )
+    {
+        return false;
+    }
+
+    bool hasMatch = CaseInsensitiveFindSubstr( m_GroupieTitle, searchText ) >= 0;
+    if( !hasMatch )
+    {
+        hasMatch = CaseInsensitiveFindSubstr( m_GroupieDesc, searchText ) >= 0;
+    }
+
+    return hasMatch;
 }
 
 //============================================================================

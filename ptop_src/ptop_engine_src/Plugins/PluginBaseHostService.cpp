@@ -374,7 +374,7 @@ void PluginBaseHostService::onPktHostInfoReq( VxSktBase* sktBase, VxPktHdr* pktH
 //============================================================================
 void PluginBaseHostService::onPktHostInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
-    m_Engine.getHostedListMgr().onPktHostInfoReply( sktBase, pktHdr, netIdent );
+    m_Engine.getHostedListMgr().onPktHostInfoReply( sktBase, pktHdr, netIdent, this );
 }
 
 //============================================================================

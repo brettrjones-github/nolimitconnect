@@ -34,7 +34,8 @@ public:
 	GroupieInfo&				operator=( const GroupieInfo& rhs ); 
 
     bool                        isGroupieValid( void );
-    bool                        isMatch( GroupieId& groupieId );
+    bool                        isIdMatch( GroupieId& groupieId );
+    bool                        isSearchTextMatch( std::string& searchText );
 
     bool                        setGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
     bool                        getGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );

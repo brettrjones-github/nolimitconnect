@@ -72,7 +72,6 @@ PktGroupieAnnounceReq::PktGroupieAnnounceReq()
 {
     setPktType( PKT_TYPE_GROUPIE_ANN_REQ );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktGroupieAnnounceReq ) ) );
-    // LogMsg( LOG_DEBUG, "PktGroupieReq size %d %d", sizeof( PktGroupieReq ), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
@@ -112,7 +111,6 @@ void PktGroupieAnnounceReq::calcPktLen()
     uint16_t blobLen = getBlobEntry().getTotalBlobLen();
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) );
 
-    // LogMsg( LOG_DEBUG, "PktGroupieReq calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
@@ -134,7 +132,7 @@ PktGroupieAnnounceReply::PktGroupieAnnounceReply()
 {
     setPktType( PKT_TYPE_GROUPIE_ANN_REPLY );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktGroupieAnnounceReply ) ) );
-    // LogMsg( LOG_DEBUG, "PktGroupieReq size %d %d", sizeof( PktGroupieReq ), (getPktLength() & 0x0f) ); 
+
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
@@ -200,6 +198,11 @@ bool PktGroupieSearchReply::addGroupieInfo( std::string& groupieUrl, std::string
         result &= m_BlobEntry.setValue( groupieDesc );
     }
 
+    if( result )
+    {
+        incrementGroupieCount();
+    }
+
     calcPktLen();
     return result;
 }
@@ -211,7 +214,6 @@ void PktGroupieSearchReply::calcPktLen()
     uint16_t blobLen = getBlobEntry().getTotalBlobLen();
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) );
 
-    // LogMsg( LOG_DEBUG, "PktGroupieReq calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
@@ -221,7 +223,7 @@ PktGroupieMoreReq::PktGroupieMoreReq()
 {
     setPktType( PKT_TYPE_GROUPIE_MORE_REQ );
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktGroupieMoreReq ) ) );
-    // LogMsg( LOG_DEBUG, "PktGroupieReq size %d %d", sizeof( PktGroupieReq ), (getPktLength() & 0x0f) ); 
+
     vx_assert( 0 == (getPktLength() & 0x0f) );
 }
 
@@ -232,7 +234,7 @@ PktGroupieMoreReply::PktGroupieMoreReply()
 {
     setPktType( PKT_TYPE_GROUPIE_MORE_REPLY );
     setPktLength( sizeof( PktGroupieMoreReply ) );
-    // LogMsg( LOG_DEBUG, "PktGroupieMoreReply size %d %d", sizeof( PktGroupieReply ), (getPktLength() & 0x0f) ); 
+
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
 
@@ -243,6 +245,6 @@ void PktGroupieMoreReply::calcPktLen()
     uint16_t blobLen = getBlobEntry().getTotalBlobLen();
     setPktLength( ROUND_TO_16BYTE_BOUNDRY( pktLen + blobLen ) ); 
 
-    LogMsg( LOG_DEBUG, "PktGroupieMoreReply calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
+    // LogMsg( LOG_DEBUG, "PktGroupieMoreReply calcPktLen blob %d len %d %d", blobLen, getPktLength(), (getPktLength() & 0x0f) ); 
     vx_assert( 0 == (getPktLength() & 0x0f) );
 }

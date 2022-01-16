@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>283</width>
+    <width>368</width>
     <height>626</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Join Group</string>
+   <string>Test Host Clent</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -42,19 +42,19 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="topMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="rightMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <item>
        <widget class="QLabel" name="m_StatusLabel">
@@ -64,59 +64,82 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="SearchLabel">
-        <property name="text">
-         <string>Find And Join A Group</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="m_NetworkHostLabel">
+          <property name="text">
+           <string>Choose A Network Host</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_GetNetworkHostIdentityButton">
+          <property name="text">
+           <string>Get Network Host Identity</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="m_GroupHostButton">
-        <property name="text">
-         <string>Choose Group Host</string>
-        </property>
-       </widget>
+       <widget class="QComboBox" name="m_NetworkHostComboBox"/>
       </item>
       <item>
-       <widget class="QLabel" name="m_GroupHostLabel">
-        <property name="text">
-         <string>Group Host Not Selected</string>
-        </property>
-       </widget>
+       <widget class="IdentWidget" name="m_NetworkHostIdentWidget" native="true"/>
       </item>
       <item>
-       <widget class="QPushButton" name="m_ConnectToHostButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Join Group</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="m_Label1">
+          <property name="text">
+           <string>Choose A Host Service Type</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_GetNetHostListButton">
+          <property name="text">
+           <string>Get Host List From Network Host</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="m_GroupUserStatusLabel">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
+       <widget class="QComboBox" name="m_HostTypeComboBox"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="m_Label2">
+          <property name="text">
+           <string>Choose A Host Url</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_QueryHostedUsersButton">
+          <property name="text">
+           <string>Get Host Online User List</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QComboBox" name="m_HostListUrlComboBox"/>
+      </item>
+      <item>
+       <widget class="IdentWidget" name="m_HostedIdentWidget" native="true"/>
+      </item>
+      <item>
+       <widget class="HostedPluginWidget" name="m_HostedPluginWidget" native="true"/>
       </item>
       <item>
        <widget class="QPushButton" name="m_RefreshListButton">
@@ -133,7 +156,24 @@
        </widget>
       </item>
       <item>
-       <widget class="GuiHostedListWidget" name="m_GuiHostListWidget" native="true">
+       <widget class="GuiHostedListWidget" name="m_GuiHostedListWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Users Online With Selected Host</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="GuiGroupieListWidget" name="m_GuiGroupieListWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -152,6 +192,24 @@
    <class>GuiHostedListWidget</class>
    <extends>QWidget</extends>
    <header location="global">GuiHostedListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>IdentWidget</class>
+   <extends>QWidget</extends>
+   <header>IdentWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HostedPluginWidget</class>
+   <extends>QWidget</extends>
+   <header>HostedPluginWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GuiGroupieListWidget</class>
+   <extends>QWidget</extends>
+   <header>GuiGroupieListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

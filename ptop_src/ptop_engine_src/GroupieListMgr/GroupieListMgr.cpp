@@ -580,7 +580,7 @@ void GroupieListMgr::addToListInJoinedTimestampOrder( std::vector<GroupieInfo>& 
 }
 
 //============================================================================
-void GroupieListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, GroupieInfo& groupieInfo )
+void GroupieListMgr::groupieSearchResult( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, GroupieInfo& groupieInfo )
 {
     GroupieInfo resultInfo;
     if( updateGroupieInfo( hostType, groupieInfo, netIdent, sktBase, &resultInfo ) )
@@ -590,7 +590,7 @@ void GroupieListMgr::hostSearchResult( EHostType hostType, VxGUID& searchSession
 }
 
 //============================================================================
-void GroupieListMgr::hostSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
+void GroupieListMgr::groupieSearchCompleted( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, ECommErr commErr )
 {
     if( commErr )
     {
@@ -788,7 +788,7 @@ void GroupieListMgr::onPktGroupieInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, 
 }
 
 //============================================================================
-void GroupieListMgr::onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+void GroupieListMgr::onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin )
 {
     bool result{ false };
     PktGroupieInfoReply* pktReply = ( PktGroupieInfoReply* )pktHdr;
@@ -849,13 +849,49 @@ void GroupieListMgr::onPktGroupieInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr
 //============================================================================
 void GroupieListMgr::onPktGroupieAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin )
 {
+    PktGroupieAnnounceReq* pktReq = ( PktGroupieAnnounceReq* )pktHdr;
+    PktGroupieAnnounceReply pktReply;
+    pktReply.setHostType( pktReq->getHostType() );
+    pktReply.setCommError( commErr );
+    if( eCommErrNone == commErr )
+    {
+        std::string groupieUrl;
+        std::string groupieTitle;
+        std::string groupieDesc;
+        int64_t timeModified{ 0 };
 
+        if( pktReq->getGroupieInfo( groupieUrl, groupieTitle, groupieDesc, timeModified ) )
+        {
+            VxPtopUrl ptopUrl( groupieUrl );
+            if( ptopUrl.isValid() && !groupieUrl.empty() && !groupieTitle.empty() && !groupieDesc.empty() && timeModified )
+            {
+                GroupieId groupieId( ptopUrl.getOnlineId(), m_Engine.getMyOnlineId(), pktReq->getHostType() );
+                if( groupieId.isValid() )
+                {
+                    setGroupieUrlAndTitleAndDescription( groupieId, groupieUrl, groupieTitle, groupieDesc, timeModified );
+                }
+            }
+            else
+            {
+                pktReply.setCommError( eCommErrInvalidPkt );
+            }
+        }
+        else
+        {
+            pktReply.setCommError( eCommErrInvalidPkt );
+        }
+    }
+
+    if( !plugin->txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply, false, plugin->getClientPluginType() ) )
+    {
+        LogModule( eLogHostSearch, LOG_DEBUG, "GroupieListMgr::onPktGroupieAnnReq failed send reply" );
+    }
 }
 
 //============================================================================
-void GroupieListMgr::onPktGroupieAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+void GroupieListMgr::onPktGroupieAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin )
 {
-
+    // nothing to do I think
 }
 
 //============================================================================
@@ -863,19 +899,53 @@ void GroupieListMgr::onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr
 {
     LogMsg( LOG_DEBUG, "PluginBaseHostService onPktGroupieSearchReq" );
     PktGroupieSearchReq* pktReq = ( PktGroupieSearchReq* )pktHdr;
+    EHostType hostType = pktReq->getHostType();
     PktGroupieSearchReply pktReply;
     pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
-    pktReply.setHostType( pktReq->getHostType() );
+    pktReply.setHostType( hostType );
     pktReply.setCommError( commErr );
     if( eCommErrNone == commErr && pktReq->isValidPkt() )
     {
         pktReply.getBlobEntry().resetWrite();
 
         std::string searchText;
-        if( pktReq->getSearchText( searchText ) )
+        if( pktReq->getSearchText( searchText ) && !searchText.empty() )
         {
             // search by text
+            lockList();
+            for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+            {
+                if( iter->getHostType() != hostType )
+                {
+                    continue;
+                }
 
+                if( iter->isSearchTextMatch( searchText ) )
+                {
+                    std::string groupieUrl;
+                    std::string groupieTitle;
+                    std::string groupieDesc;
+                    int64_t timeModified{ 0 };
+
+                    if( iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, timeModified ) )
+                    {
+                        if( !pktReply.addGroupieInfo( groupieUrl, groupieTitle, groupieDesc, timeModified ) )
+                        {
+                            LogModule( eLogHostSearch, LOG_DEBUG, "GroupieListMgr::onPktGroupieSearchReq search text full count %d", pktReply.getGroupieCountThisPkt() );
+                            // normally would set next online id so client can ask for more but because is a text search we just quit when a single packet is full
+                            // this is so client side does not have to remember search params between searches
+                            // this might be changed in the future
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        LogModule( eLogHostSearch, LOG_DEBUG, "GroupieListMgr::onPktGroupieSearchReq search text failed extract groupie info" );
+                    }
+                }
+            }
+
+            unlockList();
         }
         else if( pktReq->getSpecificOnlineId().isVxGUIDValid() )
         {
@@ -883,59 +953,189 @@ void GroupieListMgr::onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr
             GroupieId groupieId( pktReq->getSpecificOnlineId(), m_Engine.getMyOnlineId(), pktReq->getHostType() );
             bool foundUser{ false };
             if( groupieId.isValid() )
+            {
+                lockList();
+                for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+                {
+                    if( iter->getHostType() != hostType )
+                    {
+                        continue;
+                    }
+
+                    if( iter->isIdMatch( groupieId ) )
+                    {
+                        std::string groupieUrl;
+                        std::string groupieTitle;
+                        std::string groupieDesc;
+                        int64_t timeModified{ 0 };
+
+                        foundUser = iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, timeModified );
+                        if( foundUser )
+                        {
+                            foundUser = pktReply.addGroupieInfo( groupieUrl, groupieTitle, groupieDesc, timeModified );
+                        }
+                   
+                        break;
+                    }
+                }
+
+                unlockList();
+                if( !foundUser )
+                {
+                    LogModule( eLogHostSearch, LOG_DEBUG, "GroupieListMgr::onPktGroupieSearchReq user not found" );
+                    pktReply.setCommError( eCommErrNotFound );
+                }
+            }
+            else
+            {
+                LogModule( eLogHostSearch, LOG_DEBUG, "GroupieListMgr::onPktGroupieSearchReq invalid groupieId" );
+            }
+        }
+        else
+        {
+            // all users
             lockList();
+            PktBlobEntry& blobEntry = pktReply.getBlobEntry();
             for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
             {
-                if( iter->isMatch( groupieId ) )
+                if( iter->getHostType() != hostType )
+                {
+                    continue;
+                }
+
+                int spaceRequired = iter->getSearchBlobSpaceRequirement();
+                if( blobEntry.haveRoom( spaceRequired ) )
                 {
                     std::string groupieUrl;
                     std::string groupieTitle;
                     std::string groupieDesc;
                     int64_t timeModified{ 0 };
 
-                    foundUser = iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, timeModified );
-                    if( foundUser )
+                    if( iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, timeModified ) )
                     {
-                        foundUser = pktReply.addGroupieInfo( groupieUrl, groupieTitle, groupieDesc, timeModified );
+                        pktReply.addGroupieInfo( groupieUrl, groupieTitle, groupieDesc, timeModified );
                     }
-                   
+                }
+                else
+                {
+                    pktReply.setMoreGroupiesExist( true );
+                    pktReply.setNextSearchOnlineId( iter->getGroupieOnlineId() );
                     break;
                 }
             }
 
             unlockList();
-
-        }
-        else
-        {
-            // all users
-
         }
     }
 
-    if( !plugin->txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply, false, plugin->getClientPluginType() ) )
+    pktReply.calcPktLen();
+    if( !plugin->txPacket( netIdent->getMyOnlineId(), sktBase, &pktReply ) )
     {
-        LogModule( eLogHostSearch, LOG_DEBUG, "PluginBaseHostService failed send search reply" );
+        LogModule( eLogHostSearch, LOG_DEBUG, "GroupieListMgr::onPktGroupieSearchReq failed send search reply" );
     }
 }
 
-
 //============================================================================
-void GroupieListMgr::onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+void GroupieListMgr::onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin )
 {
-
+    PktGroupieSearchReply* pktReply = ( PktGroupieSearchReply* )pktHdr;
+    if( pktReply->getCommError() )
+    {
+        logCommError( pktReply->getCommError(), "PktGroupieSearchReply", sktBase, netIdent );
+        groupieSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getCommError() );
+    }
+    else
+    {
+        updateFromGroupieSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getGroupieCountThisPkt() );
+        if( pktReply->getMoreGroupiesExist() )
+        {
+            if( !requestMoreGroupiesFromHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId(), plugin ) )
+            {
+                groupieSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+            }
+        }
+        else
+        {
+            groupieSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+        }
+    }
 }
 
 //============================================================================
 void GroupieListMgr::onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, ECommErr commErr, PluginBaseHostService* plugin )
 {
+    PktGroupieMoreReq* pktReq = ( PktGroupieMoreReq* )pktHdr;
+    PktGroupieMoreReply pktReply;
+    EHostType hostType = pktReq->getHostType();
+    VxGUID nextSearchOnlineId = pktReq->getNextSearchOnlineId();
 
+    pktReply.setHostType( hostType );
+    pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
+    pktReply.setCommError( commErr );
+
+    if( eCommErrNone == commErr )
+    {
+        bool foundNextId{ false };
+
+        lockList();
+        for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
+        {
+            if( iter->getHostType() != hostType )
+            {
+                continue;
+            }
+
+            if( !foundNextId && iter->getGroupieOnlineId() == nextSearchOnlineId )
+            {
+                foundNextId = true;
+            }
+
+            if( foundNextId )
+            {
+                if( iter->fillSearchBlob( pktReply.getBlobEntry() ) )
+                {
+                    pktReply.incrementGroupieCount();
+                }
+                else
+                {
+                    pktReply.setMoreGroupiesExist( true );
+                    pktReply.setNextSearchOnlineId( iter->getGroupieOnlineId() );
+                    break;
+                }
+            }
+        }
+
+        unlockList();
+    }
+
+    pktReply.calcPktLen();
+    plugin->txPacket( netIdent, sktBase, &pktReply );
 }
 
 //============================================================================
-void GroupieListMgr::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBaseHostService* plugin )
+void GroupieListMgr::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent, PluginBase* plugin )
 {
-
+    PktGroupieMoreReply* pktReply = ( PktGroupieMoreReply* )pktHdr;
+    if( pktReply->getCommError() )
+    {
+        logCommError( pktReply->getCommError(), "PktHostInviteSearchReply", sktBase, netIdent );
+        groupieSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getCommError() );
+    }
+    else
+    {
+        updateFromGroupieSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getGroupieCountThisPkt() );
+        if( pktReply->getMoreGroupiesExist() )
+        {
+            if( !requestMoreGroupiesFromHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId(), plugin ) )
+            {
+                groupieSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+            }
+        }
+        else
+        {
+            groupieSearchCompleted( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, eCommErrNone );
+        }
+    }
 }
 
 //============================================================================
@@ -946,7 +1146,7 @@ bool GroupieListMgr::setGroupieUrlAndTitleAndDescription( GroupieId& groupieId, 
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->isMatch( groupieId ) )
+        if( iter->isIdMatch( groupieId ) )
         {
             result = iter->setGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime );
             foundGroupie = true;
@@ -975,7 +1175,7 @@ bool GroupieListMgr::getGroupieUrlAndTitleAndDescription( GroupieId& groupieId, 
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->isMatch( groupieId ) )
+        if( iter->isIdMatch( groupieId ) )
         {
             result = iter->getGroupieUrlAndTitleAndDescription( groupieUrl, groupieTitle, groupieDesc, lastModifiedTime );
             break;
@@ -984,4 +1184,41 @@ bool GroupieListMgr::getGroupieUrlAndTitleAndDescription( GroupieId& groupieId, 
 
     unlockList();
     return result;
+}
+
+//============================================================================
+void GroupieListMgr::logCommError( ECommErr commErr, const char* desc, VxSktBase* sktBase, VxNetIdent* netIdent )
+{
+    LogMsg( LOG_ERROR, "%s %s from %s %s", desc, DescribeCommError( commErr ), netIdent->getOnlineName(), sktBase->describeSktConnection().c_str() );
+}
+
+//============================================================================
+void GroupieListMgr::updateFromGroupieSearchBlob( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount )
+{
+    blobEntry.resetRead();
+    for( int i = 0; i < hostInfoCount; i++ )
+    {
+        GroupieInfo groupieInfo;
+        if( groupieInfo.extractFromSearchBlob( blobEntry ) )
+        {
+            groupieInfo.setHostType( hostType );
+
+            groupieSearchResult( hostType, searchSessionId, sktBase, netIdent, groupieInfo );
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "Could not extract GroupieListMgr::updateFromGroupieSearchBlob" );
+            break;
+        }
+    }
+}
+
+//============================================================================
+bool GroupieListMgr::requestMoreGroupiesFromHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextGroupieOnlineId, PluginBase* plugin )
+{
+    PktHostInviteMoreReq pktReq;
+    pktReq.setHostType( hostType );
+    pktReq.setSearchSessionId( searchSessionId );
+    pktReq.setNextSearchOnlineId( nextGroupieOnlineId );
+    return plugin->txPacket( netIdent, sktBase, &pktReq );
 }
