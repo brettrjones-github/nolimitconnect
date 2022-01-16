@@ -239,7 +239,7 @@ EPluginType HostServerSearchMgr::getSearchPluginType( EHostType hostType )
 }
 
 //============================================================================
-void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
+void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId )
 {
     LogMsg( LOG_DEBUG, "HostServerMgr fromGuiSendAnnouncedList" );
 
@@ -251,11 +251,12 @@ void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType )
         // if currently active
         if( timeNow - iter->second.m_LastRxTime <= MIN_HOST_RX_UPDATE_TIME_MS )
         {
-            m_Engine.getToGui().toGuiHostSearchResult( hostType, iter->second.getHostOnlineId(), iter->second.m_HostedInfo );
+            m_Engine.getToGui().toGuiHostSearchResult( hostType, sessionId, iter->second.m_HostedInfo );
         }
     }
 
     m_SearchMutex.unlock();
+    m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
 }
 
 //============================================================================

@@ -72,4 +72,5 @@ protected:
     //=== vars ===//
     Ui::AppletGroupListLocalViewUi ui;
     bool                        m_SearchStarted{ false };
+    VxGUID                      m_SearchSessionId;
 };

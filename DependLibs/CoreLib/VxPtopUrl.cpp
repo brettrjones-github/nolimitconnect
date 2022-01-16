@@ -87,6 +87,11 @@ VxPtopUrl& VxPtopUrl::operator = ( const VxPtopUrl& rhs )
     if( this != &rhs )
     {
         m_Url = rhs.m_Url;
+        m_Protocol = rhs.m_Protocol;
+        m_Host = rhs.m_Host;
+        m_Port = rhs.m_Port;
+        m_OnlineId = rhs.m_OnlineId;
+        m_HostType = rhs.m_HostType;
     }
 
     return *this;

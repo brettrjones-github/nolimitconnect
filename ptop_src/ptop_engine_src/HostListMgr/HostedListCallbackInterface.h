@@ -24,5 +24,6 @@ public:
     virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ){};
     virtual void				callbackHostedInfoListRemoved( VxGUID& userOnlineId, EHostType hostType ){};
     virtual void				callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId ) {};
+    virtual void				callbackHostedListSearchComplete( VxGUID& networkHostOnlineId, VxGUID& sessionId ) {};
 };
 

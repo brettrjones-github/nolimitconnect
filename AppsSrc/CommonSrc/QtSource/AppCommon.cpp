@@ -1203,6 +1203,64 @@ void AppCommon::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, Ho
 }
 
 //============================================================================
+void AppCommon::toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	getHostedListMgr().toGuiHostSearchComplete( hostType, sessionId );
+}
+
+//============================================================================
+void AppCommon::toGuiGroupieSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char* msg )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	QString hostStatus = GuiParams::describeHostSearchStatus( searchStatus );
+	if( eCommErrNone != commErr )
+	{
+		hostStatus += GuiParams::describeCommError( commErr );
+	}
+
+	if( msg )
+	{
+		hostStatus += msg;
+	}
+
+	emit signalLog( 0, hostStatus );
+	emit signalStatusMsg( hostStatus );
+
+	emit signalGroupieSearchStatus( hostType, sessionId, searchStatus, hostStatus );
+}
+
+//============================================================================
+void AppCommon::toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& groupieInfo )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	getGroupieListMgr().toGuiGroupieSearchResult( hostType, sessionId, groupieInfo );
+}
+
+//============================================================================
+void AppCommon::toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+	if( VxIsAppShuttingDown() )
+	{
+		return;
+	}
+
+	getGroupieListMgr().toGuiGroupieSearchComplete( hostType, sessionId );
+}
+
+//============================================================================
 void AppCommon::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent *hostIdent, VxGUID& sessionId, bool isOnline )
 {
     if( VxIsAppShuttingDown() )

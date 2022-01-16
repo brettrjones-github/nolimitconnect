@@ -39,7 +39,8 @@ public:
     bool                        isMessengerReady( void );
     virtual void                onSystemReady( bool ready ) { }
 
-    void                        toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& hostedInfo );
+    void                        toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& hostedInfo );
+    void                        toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId );
 
     bool                        isGroupieInSession( VxGUID& onlineId );
     void                        setGroupieOffline( VxGUID& onlineId );
@@ -68,12 +69,14 @@ signals:
 
     void                        signalInternalGroupieUpdated( GroupieInfo* hostedInfo );
     void                        signalInternalGroupieRemoved( VxGUID groupieOnlineId, VxGUID hostOnlineId, EHostType hostType );
-    void                        signalInternalHostSearchResult( GroupieInfo* hostedInfo, VxGUID sessionId );
+    void                        signalInternalGroupieSearchResult( GroupieInfo* hostedInfo, VxGUID sessionId );
+    void                        signalInternalGroupieSearchComplete( EHostType hostType, VxGUID sessionId );
 
 private slots:
     void                        slotInternalGroupieUpdated( GroupieInfo* hostedInfo );
     void                        slotInternalGroupieRemoved( VxGUID groupieOnlineId, VxGUID hostOnlineId, EHostType hostType );
-    void                        slotInternalHostSearchResult( GroupieInfo* hostedInfoe, VxGUID sessionId );
+    void                        slotInternalGroupieSearchResult( GroupieInfo* hostedInfo, VxGUID sessionId );
+    void                        slotInternalGroupieSearchComplete( EHostType hostType, VxGUID sessionId );
 
 protected:
     void                        removeGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType );
@@ -89,6 +92,7 @@ protected:
     void                        announceGroupieListUpdated( GroupieId& groupieId, GuiGroupie* guiGroupie );
     void                        announceGroupieListRemoved( GroupieId& groupieId );
     void                        announceGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId );
+    void                        announceGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId );
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiGroupie

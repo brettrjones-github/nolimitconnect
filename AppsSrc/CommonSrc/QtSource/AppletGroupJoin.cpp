@@ -15,24 +15,123 @@
 #include "AppletGroupJoin.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
-#include "MyIcons.h"
+#include "GuiHelpers.h"
 
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
 AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_GROUP_JOIN, app, parent )
+: AppletJoinBase( OBJNAME_APPLET_GROUP_JOIN, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletGroupJoin );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+	setHostType( eHostTypeGroup );
+
+	// so is actually destroyed
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 
 	m_MyApp.activityStateChange( this, true );
+	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
+	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
+
+	// TODO probably can remove m_HostedPluginWidget completely
+	ui.m_HostedPluginWidget->setVisible( false );
+
+	queryHostedList();
 }
 
 //============================================================================
 AppletGroupJoin::~AppletGroupJoin()
 {
-    m_MyApp.activityStateChange( this, false );
+	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
+	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
+	m_MyApp.activityStateChange( this, false );
 }
+
+//============================================================================
+void AppletGroupJoin::setStatusMsg( QString statusMsg )
+{
+	ui.m_StatusLabel->setText( statusMsg );
+}
+
+//============================================================================
+void AppletGroupJoin::setListLabel( QString labelText )
+{
+	ui.m_HostOrListViewLabel->setText( labelText );
+}
+
+//============================================================================
+void AppletGroupJoin::queryHostedList( void )
+{
+	setStatusMsg( QObject::tr("Fetching host list from network host") );
+	setListLabel( QObject::tr( "Group Host List" ) );
+	ui.m_HostedIdentWidget->setVisible( false );
+	ui.m_GuiHostedListWidget->setVisible( true );
+	ui.m_GuiGroupieListWidget->setVisible( false );
+
+	ui.m_GuiHostedListWidget->clear();
+	ui.m_GuiGroupieListWidget->clear();
+
+	AppletJoinBase::queryHostedList();
+}
+
+//============================================================================
+void AppletGroupJoin::callbackOnUserAdded( GuiUser* guiUser )
+{
+}
+
+//============================================================================
+void AppletGroupJoin::callbackOnUserUpdated( GuiUser* guiUser )
+{
+}
+
+//============================================================================
+void AppletGroupJoin::callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
+{
+	if( hostedId.getHostType() == m_HostType && guiHosted )
+	{
+		ui.m_GuiHostedListWidget->updateHostedList( hostedId, guiHosted, sessionId );
+	}
+}
+
+//============================================================================
+void AppletGroupJoin::callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId )
+{
+	if( groupieId.getHostType() == m_HostType && guiGroupie )
+	{
+		ui.m_GuiGroupieListWidget->updateGroupieList( groupieId, guiGroupie, sessionId );
+	}
+}
+
+//============================================================================
+void AppletGroupJoin::updateHostedIdent( GuiHosted* guiHosted )
+{
+	ui.m_HostedIdentWidget->updateIdentity( guiHosted->getUser() );
+	ui.m_HostedPluginWidget->updateHosted( guiHosted );
+}
+
+//============================================================================
+void AppletGroupJoin::slotQueryGroupiesButtonClicked( void )
+{
+	/*
+	std::string hostedListUrl = ui.m_HostListUrlComboBox->currentText().toUtf8().constData();
+	if( !hostedListUrl.empty() )
+	{
+		ui.m_GuiGroupieListWidget->clear();
+		VxPtopUrl hostUrl( hostedListUrl );
+		EHostType hostType = hostUrl.getHostType();
+		if( hostUrl.isValid() && hostType != eHostTypeUnknown )
+		{
+			VxGUID nullGuid;
+			m_MyApp.getFromGuiInterface().fromGuiQueryGroupiesFromHosted( hostUrl, hostType, nullGuid );
+		}
+		else
+		{
+			okMessageBox( "Invalid Url", "Invalid Groupie Host Url" );
+		}
+	}
+	*/
+}
+
+

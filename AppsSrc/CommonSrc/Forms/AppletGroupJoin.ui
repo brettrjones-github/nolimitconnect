@@ -64,76 +64,11 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="m_NetworkHostLabel">
-          <property name="text">
-           <string>Choose A Network Host</string>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_GetNetworkHostIdentityButton">
-          <property name="text">
-           <string>Get Network Host Identity</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QComboBox" name="m_NetworkHostComboBox"/>
-      </item>
-      <item>
-       <widget class="IdentWidget" name="m_NetworkHostIdentWidget" native="true"/>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="m_Label1">
-          <property name="text">
-           <string>Choose A Host Service Type</string>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_GetNetHostListButton">
-          <property name="text">
-           <string>Get Host List From Network Host</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QComboBox" name="m_HostTypeComboBox"/>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLabel" name="m_Label2">
-          <property name="text">
-           <string>Choose A Host Url</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_QueryHostedUsersButton">
-          <property name="text">
-           <string>Get Host Online User List</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QComboBox" name="m_HostListUrlComboBox"/>
+       <widget class="QLabel" name="m_HostAdminLabel">
+        <property name="text">
+         <string>Host Administrator</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="IdentWidget" name="m_HostedIdentWidget" native="true"/>
@@ -144,14 +79,14 @@
       <item>
        <widget class="QPushButton" name="m_RefreshListButton">
         <property name="text">
-         <string>Refresh Group List</string>
+         <string>Choose An Different Host</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="m_HostOrListViewLabel">
         <property name="text">
-         <string>Group Host List From Network Host</string>
+         <string>Group Host List</string>
         </property>
        </widget>
       </item>
@@ -162,13 +97,6 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Users Online With Selected Host</string>
         </property>
        </widget>
       </item>

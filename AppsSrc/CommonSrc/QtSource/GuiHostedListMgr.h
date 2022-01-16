@@ -40,6 +40,7 @@ public:
     virtual void                onSystemReady( bool ready ) { }
 
     void                        toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo );
+    void                        toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId );
 
     bool                        isHostedInSession( VxGUID& onlineId );
     void                        setHostedOffline( VxGUID& onlineId );
@@ -69,11 +70,13 @@ signals:
     void                        signalInternalHostedUpdated( HostedInfo* hostedInfo );
     void                        signalInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
     void                        signalInternalHostSearchResult( HostedInfo* hostedInfo, VxGUID sessionId );
+    void                        signalInternalHostSearchComplete( EHostType hostType, VxGUID sessionId );
 
 private slots:
     void                        slotInternalHostedUpdated( HostedInfo* hostedInfo );
     void                        slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType hostType );
-    void                        slotInternalHostSearchResult( HostedInfo* hostedInfoe, VxGUID sessionId );
+    void                        slotInternalHostSearchResult( HostedInfo* hostedInfo, VxGUID sessionId );
+    void                        slotInternalHostSearchComplete( EHostType hostType, VxGUID sessionId );
 
 protected:
     void                        removeHosted( VxGUID& onlineId, EHostType hostType );
@@ -89,6 +92,8 @@ protected:
     void                        announceHostedListUpdated( HostedId& hostedId, GuiHosted* guiHosted );
     void                        announceHostedListRemoved( HostedId& hostedId );
     void                        announceHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId );
+    void                        announceHostedListSearchComplete( EHostType hostType, VxGUID& sessionId );
+
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiHosted

@@ -72,7 +72,6 @@ void PluginRandomConnectClient::onPktHostSearchReply( VxSktBase * sktBase, VxPkt
 void PluginRandomConnectClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginRandomConnectClient got plugin setting reply" );
-    m_HostClientMgr.onPktPluginSettingReply( sktBase, pktHdr,  netIdent );
 }
 
 //============================================================================

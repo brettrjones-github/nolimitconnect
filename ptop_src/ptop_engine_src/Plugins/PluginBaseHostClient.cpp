@@ -70,6 +70,7 @@ void PluginBaseHostClient::fromGuiSearchHost( EHostType hostType, SearchParams& 
     else
     {
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidUrl );
+        m_Engine.getToGui().toGuiHostSearchComplete( hostType, searchParams.getSearchSessionId() );
     }
 }
 

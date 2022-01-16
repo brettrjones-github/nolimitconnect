@@ -139,6 +139,11 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 }
 
 //============================================================================
+ActivityBase::~ActivityBase()
+{
+}
+
+//============================================================================
 void ActivityBase::connectBarWidgets( )
 {
     connectTitleBarWidget( getTitleBarWidget() );

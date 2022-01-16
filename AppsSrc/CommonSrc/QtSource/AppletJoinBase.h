@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
+#include <CoreLib/VxPtopUrl.h>
 
 class AppletJoinBase : public AppletBase
 {
@@ -21,6 +22,24 @@ class AppletJoinBase : public AppletBase
 public:
     AppletJoinBase( const char *name, AppCommon& app, QWidget * parent );
 	virtual ~AppletJoinBase() override;
+
+	void                        setHostType( EHostType hostType )						{ m_HostType = hostType; }
+	EHostType                   getHostType( void )										{ return m_HostType; }
+
+	void                        setNetworkHostOnlineId( VxGUID& networkHostOnlineId )	{ m_NetworkHostOnlineId = networkHostOnlineId; }
+	VxGUID&                     getNetworkHostOnlineId( void )							{ return m_NetworkHostOnlineId; }
+
+	VxPtopUrl&					getNetworkHostPtopUrl( void )							{ return m_NetHostPtopUrl; }
+	bool						isNetworkHostUrlValid( void )							{ return m_NetHostPtopUrl.isValid(); }
+
+	virtual void				queryHostedList( void );
+
+protected:
+	std::string					m_NetworkHostUrl;
+	VxPtopUrl					m_NetHostPtopUrl;
+	VxGUID                      m_NetworkHostOnlineId;
+
+	EHostType                   m_HostType{ eHostTypeUnknown };
 
 };
 

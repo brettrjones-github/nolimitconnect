@@ -31,9 +31,10 @@ public:
     HostClientSearchMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostClientSearchMgr() = default;
 
+    virtual void                onPktHostSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
+    virtual void                onPktPluginSettingReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
+
 protected:
-    virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
-    virtual void                onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
 
     //=== vars ===//
     VxMutex                     m_SearchMutex;

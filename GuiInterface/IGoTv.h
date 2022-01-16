@@ -278,8 +278,15 @@ public:
 
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) override;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) override;
+
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) override;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) override;
+    virtual void				toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
+
+    virtual void				toGuiGroupieSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char* msg = "" ) override;
+    virtual void				toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& hostedInfo ) override;
+    virtual void				toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
+
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
 
@@ -497,7 +504,7 @@ public:
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
-    virtual void				fromGuiSendAnnouncedList( EHostType hostType );
+    virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId );
 
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
     virtual void				fromGuiRunUrlAction( VxGUID& sessionId, const char * myUrl, const char * ptopUrl, ENetCmdType testType );

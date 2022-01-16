@@ -329,43 +329,9 @@ bool HostClientMgr::sendNextPluginSettingRequest( EHostType hostType, VxGUID& se
 void HostClientMgr::stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId )
 {
     m_Engine.getToGui().toGuiHostSearchStatus( hostType, onlineId, eHostSearchCompleted );
+    m_Engine.getToGui().toGuiHostSearchComplete( hostType, onlineId );
 
     removeSearchSession( sessionId );
     EConnectReason connectReason = getSearchConnectReason(hostType);
     m_Engine.getConnectionMgr().doneWithConnection( sessionId, onlineId, this, connectReason );
-}
-
-//============================================================================
-void HostClientMgr::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
-{
-    /*
-    PktPluginSettingReply* settingReply = ( PktPluginSettingReply* )pktHdr;
-    PktBlobEntry& blobEntry = settingReply->getBlobEntry();
-    blobEntry.resetRead();
-    if( 0 != blobEntry.getBlobLen() )
-    {
-        // extract ident and plugin settings and send to gui
-        VxNetIdent hostIdent;
-        PluginSetting pluginSetting;
-        bool extractResult = hostIdent.extractFromBlob( blobEntry );
-        extractResult &= pluginSetting.extractFromBlob( blobEntry );
-        if( extractResult )
-        {
-            m_Engine.getToGui().toGuiHostSearchResult( settingReply->getHostType(), settingReply->getSessionId(), hostIdent, pluginSetting );
-            sendNextPluginSettingRequest( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent );
-        }
-        else
-        {
-            LogMsg( LOG_ERROR, "HostClientMgr plugin setting reply extract error" );
-            m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchInvalidParam );
-            stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent->getMyOnlineId() );
-        }
-    }
-    else
-    {
-        LogModule( eLogHostSearch, LOG_VERBOSE, "HostClientMgr plugin setting reply empty" );
-        m_Engine.getToGui().toGuiHostSearchStatus( settingReply->getHostType(), settingReply->getSessionId(), eHostSearchNoMatches );
-        stopHostSearch( settingReply->getHostType(), settingReply->getSessionId(), sktBase, netIdent->getMyOnlineId() );
-    }
-    */
 }

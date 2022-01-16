@@ -23,5 +23,6 @@ public:
     virtual void				callbackGuiHostedListUpdated( HostedId& hostedId, GuiHosted* guiHosted ) {};
     virtual void				callbackGuiHostedListRemoved( HostedId& hostedId ) {};
     virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) {};
+    virtual void				callbackGuiHostedListSearchComplete( EHostType hostType, VxGUID& sessionId ) {};
 };
 

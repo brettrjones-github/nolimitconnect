@@ -1444,12 +1444,12 @@ void P2PEngine::fromGuiSearchHost( EHostType hostType, SearchParams& searchParam
 }
 
 //============================================================================
-void P2PEngine::fromGuiSendAnnouncedList( EHostType hostType )
+void P2PEngine::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId )
 {
 	PluginBase* plugin = m_PluginMgr.findPlugin( ePluginTypeHostNetwork );
 	if( plugin )
 	{
-		plugin->fromGuiSendAnnouncedList( hostType );
+		plugin->fromGuiSendAnnouncedList( hostType, sessionId );
 	}
 	else
 	{

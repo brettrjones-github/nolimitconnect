@@ -167,6 +167,7 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
     {
         LogMsg( LOG_VERBOSE, "HostBaseMgr Invalid url or host type %d", hostType );
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidUrl );
+        m_Engine.getToGui().toGuiHostSearchComplete( hostType, searchParams.getSearchSessionId() );
         return;
     }
 
@@ -174,6 +175,7 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
     {
         LogMsg( LOG_VERBOSE, "HostBaseMgr Search GUID invalid" );
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidParam );
+        m_Engine.getToGui().toGuiHostSearchComplete( hostType, searchParams.getSearchSessionId() );
         return;
     }
 
@@ -181,8 +183,9 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
     if( m_Engine.isNetworkHostEnabled() )
     {
         // I am network host so search myself
-        m_Engine.fromGuiSendAnnouncedList( hostType );
+        m_Engine.fromGuiSendAnnouncedList( hostType, m_Engine.getMyOnlineId() );
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, m_Engine.getMyOnlineId(), eHostSearchCompleted );
+        m_Engine.getToGui().toGuiHostSearchComplete( hostType, searchParams.getSearchSessionId() );
     }
     else
     {
@@ -206,6 +209,7 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
         default:
             LogMsg( LOG_VERBOSE, "HostBaseMgr Unknown search type" );
             m_Engine.getToGui().toGuiHostSearchStatus( hostType, searchParams.getSearchSessionId(), eHostSearchInvalidParam );
+            m_Engine.getToGui().toGuiHostSearchComplete( hostType, searchParams.getSearchSessionId() );
             return;
         }
 
@@ -286,6 +290,8 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
             else
             {
                 m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchInvalidUrl );
+                m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
+
                 onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchInvalidUrl );
             }
         }
@@ -394,6 +400,7 @@ void HostBaseMgr::onConnectToHostFail( EHostType hostType, VxGUID& sessionId, EC
     LogMsg( LOG_VERBOSE, "HostBaseMgr connect reason %s to host %s failed %s ", DescribeConnectReason( connectReason ), DescribeHostType( hostType ),
         DescribeHostSearchStatus(hostSearchStatus));
     m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, hostSearchStatus );
+    m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
     removeSession( sessionId, connectReason );
 }
 
@@ -572,14 +579,17 @@ void HostBaseMgr::onUrlActionQueryIdFail( VxGUID& sessionId, std::string& url, E
         if( isAnnounceConnectReason( connectReason ) )
         {
             m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+            m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
         }
         else if( isSearchConnectReason( connectReason ) )
         {
             m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdFailed, commErr, DescribeRunTestStatus( testStatus ) );
+            m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
         }
         else if( isJoinConnectReason( connectReason ) )
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinQueryIdFailed, DescribeRunTestStatus( testStatus ) );
+            m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
         }
         else
         {
@@ -740,6 +750,7 @@ void HostBaseMgr::onConnectRequestFail( VxGUID& sessionId, VxGUID& onlineId, ECo
     else if( eConnectReasonChatRoomSearch == connectReason )
     {
         m_Engine.getToGui().toGuiHostSearchStatus( eHostTypeChatRoom, sessionId, eHostSearchConnectFailed, commErr, DescribeConnectStatus( connectStatus ) );
+        m_Engine.getToGui().toGuiHostSearchComplete( eHostTypeChatRoom, sessionId );
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }

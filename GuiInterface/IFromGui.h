@@ -247,7 +247,7 @@ public:
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) = 0;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr ) = 0;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) = 0;
-	virtual void				fromGuiSendAnnouncedList( EHostType hostType ) = 0;
+	virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId ) = 0;
 
 	/// Set file share settings
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) = 0;

@@ -33,7 +33,8 @@ void GuiGroupieListMgr::onAppCommonCreated( void )
 {
     connect( this, SIGNAL( signalInternalGroupieUpdated( GroupieInfo* ) ), this, SLOT( slotInternalGroupieUpdated( GroupieInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalGroupieRemoved( VxGUID, VxGUID, EHostType ) ), this, SLOT( slotInternalGroupieRemoved( VxGUID, VxGUID, EHostType ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalHostSearchResult( GroupieInfo*, VxGUID) ), this, SLOT( slotInternalHostSearchResult( GroupieInfo*, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalGroupieSearchResult( GroupieInfo*, VxGUID) ), this, SLOT( slotInternalGroupieSearchResult( GroupieInfo*, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalGroupieSearchComplete( EHostType, VxGUID ) ), this, SLOT( slotInternalGroupieSearchComplete( EHostType, VxGUID ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getGroupieListMgr().addGroupieListMgrClient( dynamic_cast< GroupieListCallbackInterface*>(this), true );
 }
@@ -67,7 +68,7 @@ void GuiGroupieListMgr::callbackGroupieInfoListSearchResult( GroupieInfo* groupi
 {
     if( groupieInfo && groupieInfo->isGroupieValid() )
     {
-        emit signalInternalHostSearchResult( new GroupieInfo( *groupieInfo ), sessionId );
+        emit signalInternalGroupieSearchResult( new GroupieInfo( *groupieInfo ), sessionId );
     }
     else
     {
@@ -97,12 +98,12 @@ void GuiGroupieListMgr::slotInternalGroupieRemoved( VxGUID groupieOnlineId, VxGU
 }
 
 //============================================================================
-void GuiGroupieListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& groupieInfo )
+void GuiGroupieListMgr::toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& groupieInfo )
 {
     if( groupieInfo.isGroupieValid() )
     {
         GroupieInfo* newGroupieInfo = new GroupieInfo( groupieInfo );
-        emit signalInternalHostSearchResult( newGroupieInfo, sessionId );
+        emit signalInternalGroupieSearchResult( newGroupieInfo, sessionId );
     }
     else
     {
@@ -111,10 +112,22 @@ void GuiGroupieListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessi
 }
 
 //============================================================================
-void GuiGroupieListMgr::slotInternalHostSearchResult( GroupieInfo* groupieInfo, VxGUID sessionId )
+void GuiGroupieListMgr::toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    emit signalInternalGroupieSearchComplete( hostType, sessionId );
+}
+
+//============================================================================
+void GuiGroupieListMgr::slotInternalGroupieSearchResult( GroupieInfo* groupieInfo, VxGUID sessionId )
 {
     updateHostSearchResult( *groupieInfo, sessionId );
     delete groupieInfo;
+}
+
+//============================================================================
+void GuiGroupieListMgr::slotInternalGroupieSearchComplete( EHostType hostType, VxGUID sessionId )
+{
+    announceGroupieListSearchComplete( hostType, sessionId );
 }
 
 //============================================================================
@@ -340,5 +353,14 @@ void GuiGroupieListMgr::announceGroupieListSearchResult( GroupieId& groupieId, G
     for( auto client : m_GroupieListClients )
     {
         client->callbackGuiGroupieListSearchResult( groupieId, guiGroupie, sessionId );
+    }
+}
+
+//============================================================================
+void GuiGroupieListMgr::announceGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    for( auto client : m_GroupieListClients )
+    {
+        client->callbackGuiGroupieListSearchComplete( hostType, sessionId );
     }
 }

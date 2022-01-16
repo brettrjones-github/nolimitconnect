@@ -76,7 +76,6 @@ void PluginGroupClient::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pk
 void PluginGroupClient::onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     LogMsg( LOG_DEBUG, "PluginGroupClient got plugin setting reply" );
-    m_HostClientMgr.onPktPluginSettingReply( sktBase, pktHdr,  netIdent );
 }
 
 //============================================================================

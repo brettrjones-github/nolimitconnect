@@ -46,7 +46,7 @@ public:
     virtual ECommErr            searchRequest( SearchParams& searchParams, PktHostSearchReply& searchReply, std::string& searchStr, VxSktBase* sktBase, VxNetIdent* netIdent );
     virtual ECommErr            settingsRequest( PluginId& pluginId, PktPluginSettingReply& searchReply, VxSktBase* sktBase, VxNetIdent* netIdent );
 
-    virtual void				fromGuiSendAnnouncedList( EHostType hostType );
+    virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId );
     virtual void				fromGuiListAction( EListAction listAction );
 
     virtual bool				onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );

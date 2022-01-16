@@ -144,6 +144,30 @@ void IGoTv::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, Hosted
 }
 
 //============================================================================
+void IGoTv::toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    getAppCommon().toGuiHostSearchComplete( hostType, sessionId );
+}
+
+//============================================================================
+void IGoTv::toGuiGroupieSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr, const char* msg )
+{
+    getAppCommon().toGuiGroupieSearchStatus( hostType, sessionId, searchStatus, commErr, msg );
+}
+
+//============================================================================
+void IGoTv::toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& groupieInfo )
+{
+    getAppCommon().toGuiGroupieSearchResult( hostType, sessionId, groupieInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    getAppCommon().toGuiGroupieSearchComplete( hostType, sessionId );
+}
+
+//============================================================================
 void IGoTv::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg )
 {
     getAppCommon().toGuiIsPortOpenStatus( eIsPortOpenStatus, msg );

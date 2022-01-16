@@ -13,18 +13,44 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletJoinBase.h"
 #include "ui_AppletGroupJoin.h"
 
-class AppletGroupJoin : public AppletBase
+#include "GuiUserMgrGuiUserUpdateInterface.h"
+#include "GuiHostedListCallback.h"
+#include "GuiGroupieListCallback.h"
+
+class AppletGroupJoin : public AppletJoinBase, public GuiUserMgrGuiUserUpdateInterface, public GuiHostedListCallback, public GuiGroupieListCallback
 {
 	Q_OBJECT
 public:
     AppletGroupJoin( AppCommon& app, QWidget * parent );
 	virtual ~AppletGroupJoin();
 
+    virtual void                setStatusMsg( QString statusMsg );
+    virtual void                setListLabel( QString labelText );
+
+    virtual void				callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) override {};
+    virtual void				callbackIndentListRemove( EUserViewType listType, VxGUID& onlineId ) override {};
+    virtual void				callbackOnUserAdded( GuiUser* guiUser ) override;
+    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
+    virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override {};
+
+    virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
+
+    virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) override;
+
+protected slots:
+    void                        slotQueryGroupiesButtonClicked( void );
+
 protected:
-    Ui::AppletGroupJoinUi          ui;
+    virtual void				queryHostedList( void ) override;
+
+    void                        updateHostedIdent( GuiHosted* guiHosted );
+
+protected:
+    Ui::AppletGroupJoinUi       ui;
+
 };
 
 

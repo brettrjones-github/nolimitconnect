@@ -2208,9 +2208,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiMembershipAvailableCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupieListCallback.h">
       <Filter>Source Files\Groupie</Filter>
     </ClInclude>
@@ -2225,6 +2222,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiGroupie.h">
       <Filter>Source Files\Groupie</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h">
+      <Filter>Source Files\Hosted</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

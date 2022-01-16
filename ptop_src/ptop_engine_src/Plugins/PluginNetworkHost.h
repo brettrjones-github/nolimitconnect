@@ -23,7 +23,7 @@ public:
 	virtual ~PluginNetworkHost() override = default;
 
     virtual void                updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase = nullptr ) override;
-    virtual void				fromGuiSendAnnouncedList( EHostType hostType ) override;
+    virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId ) override;
     virtual void				fromGuiListAction( EListAction listAction ) override;
 
 protected:

@@ -363,9 +363,9 @@ void IGoTv::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, b
 }
 
 //============================================================================
-void IGoTv::fromGuiSendAnnouncedList( EHostType hostType )
+void IGoTv::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId )
 {
-    getPtoP().fromGuiSendAnnouncedList( hostType );
+    getPtoP().fromGuiSendAnnouncedList( hostType, sessionId );
 }
 
 //============================================================================

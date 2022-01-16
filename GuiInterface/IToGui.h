@@ -28,6 +28,7 @@ class OfferClientInfo;
 class OfferHostInfo;
 class ThumbInfo;
 class VxGUID;
+class GroupieInfo;
 class HostedInfo;
 
 //! IToGui is an abstract interface for calls to GUI from native C++/C code
@@ -60,8 +61,14 @@ public:
     /// Send host status to GUI for display
     virtual void				toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, EHostAnnounceStatus joinStatus, const char * msg = "" ) = 0;
     virtual void				toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoinStatus joinStatus, const char * msg = "" ) = 0;
+
     virtual void				toGuiHostSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char * msg = "" ) = 0;
     virtual void				toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo ) = 0;
+	virtual void				toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId ) = 0;
+
+	virtual void				toGuiGroupieSearchStatus( EHostType hostType, VxGUID& sessionId, EHostSearchStatus searchStatus, ECommErr commErr = eCommErrNone, const char* msg = "" ) = 0;
+	virtual void				toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& groupieInfo ) = 0;
+	virtual void				toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId ) = 0;
 
     virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline ) = 0;
 

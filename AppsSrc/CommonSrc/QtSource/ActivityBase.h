@@ -47,7 +47,7 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 	Q_OBJECT
 public:
 	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessengerFrame, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
-	virtual ~ActivityBase() override = default;
+	virtual ~ActivityBase() override;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );

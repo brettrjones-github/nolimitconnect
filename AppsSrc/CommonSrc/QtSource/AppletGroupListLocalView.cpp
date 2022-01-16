@@ -111,8 +111,8 @@ void AppletGroupListLocalView::slotRefreshGroupList( void )
 {
     clearPluginSettingToList();
     clearStatus();
-
-    m_MyApp.getFromGuiInterface().fromGuiSendAnnouncedList( eHostTypeGroup );
+    m_SearchSessionId.initializeWithNewVxGUID();
+    m_MyApp.getFromGuiInterface().fromGuiSendAnnouncedList( eHostTypeGroup, m_SearchSessionId );
 }
 
 //============================================================================

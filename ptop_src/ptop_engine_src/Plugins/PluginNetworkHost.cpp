@@ -74,9 +74,9 @@ void PluginNetworkHost::updateHostSearchList( EHostType hostType, PktHostInviteA
 }
 
 //============================================================================
-void PluginNetworkHost::fromGuiSendAnnouncedList( EHostType hostType )
+void PluginNetworkHost::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId )
 {
-    m_HostServerMgr.fromGuiSendAnnouncedList( hostType );
+    m_HostServerMgr.fromGuiSendAnnouncedList( hostType, sessionId );
 }
 
 //============================================================================

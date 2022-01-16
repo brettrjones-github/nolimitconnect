@@ -34,6 +34,7 @@ void GuiHostedListMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalHostedUpdated( HostedInfo* ) ), this, SLOT( slotInternalHostedUpdated( HostedInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostedRemoved( VxGUID, EHostType ) ), this, SLOT( slotInternalHostedRemoved( VxGUID, EHostType ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostSearchResult( HostedInfo*, VxGUID) ), this, SLOT( slotInternalHostSearchResult( HostedInfo*, VxGUID ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalHostSearchComplete( EHostType, VxGUID ) ), this, SLOT( slotInternalHostSearchComplete( EHostType, VxGUID ) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getHostedListMgr().addHostedListMgrClient( dynamic_cast< HostedListCallbackInterface*>(this), true );
 }
@@ -97,6 +98,12 @@ void GuiHostedListMgr::slotInternalHostedRemoved( VxGUID hostOnlineId, EHostType
 }
 
 //============================================================================
+void GuiHostedListMgr::slotInternalHostSearchComplete( EHostType hostType, VxGUID sessionId )
+{
+    announceHostedListSearchComplete( hostType, sessionId );
+}
+
+//============================================================================
 void GuiHostedListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessionId, HostedInfo& hostedInfo )
 {
     if( hostedInfo.isHostInviteValid() )
@@ -108,6 +115,12 @@ void GuiHostedListMgr::toGuiHostSearchResult( EHostType hostType, VxGUID& sessio
     {
         LogMsg( LOG_ERROR, "GuiHostedListMgr::toGuiHostSearchResult invalid invite" );
     }
+}
+
+//============================================================================
+void GuiHostedListMgr::toGuiHostSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    emit signalInternalHostSearchComplete( hostType, sessionId );
 }
 
 //============================================================================
@@ -337,5 +350,14 @@ void GuiHostedListMgr::announceHostedListSearchResult( HostedId& hostedId, GuiHo
     for( auto client : m_HostedListClients )
     {
         client->callbackGuiHostedListSearchResult( hostedId, guiHosted, sessionId );
+    }
+}
+
+//============================================================================
+void GuiHostedListMgr::announceHostedListSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    for( auto client : m_HostedListClients )
+    {
+        client->callbackGuiHostedListSearchComplete( hostType, sessionId );
     }
 }

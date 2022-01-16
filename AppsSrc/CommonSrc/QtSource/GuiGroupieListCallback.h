@@ -23,5 +23,6 @@ public:
     virtual void				callbackGuiGroupieListUpdated( GroupieId& groupieId, GuiGroupie* guiGroupie ) {};
     virtual void				callbackGuiGroupieListRemoved( GroupieId& groupieId ) {};
     virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) {};
+    virtual void				callbackGuiGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId ) {};
 };
 
