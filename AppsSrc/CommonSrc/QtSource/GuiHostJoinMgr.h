@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+// hosted side callbacks with client user states
+
 class AppCommon;
 
 class GuiHostJoinMgr : public QObject, public HostJoinCallbackInterface

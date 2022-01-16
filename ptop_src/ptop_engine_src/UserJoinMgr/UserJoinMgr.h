@@ -14,8 +14,11 @@
 //============================================================================
 
 #include "UserJoinInfoDb.h"
+#include "UserJoinedLastDb.h"
 
 #include <CoreLib/VxMutex.h>
+
+// client side manager of user join to host service states
 
 class BaseSessionInfo;
 class UserJoinInfo;
@@ -27,15 +30,17 @@ class VxNetIdent;
 class UserJoinMgr 
 {
     const int USER_JOIN_DB_VERSION = 1;
+    const int USER_JOINED_LAST_DB_VERSION = 1;
 public:
-	UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
+	UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName );
 	virtual ~UserJoinMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
+    bool                        getLastJoinedHostUrl( EHostType hostType, std::string& retHostUrl );
 
     void                        addUserJoinMgrClient( UserJoinCallbackInterface * client, bool enable );
 
-    void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
@@ -56,10 +61,14 @@ protected:
     void						unlockClientList( void )					{ m_UserJoinClientMutex.unlock(); }
 
     bool                        saveToDatabase( UserJoinInfo* joinInfo, bool isLocked = false );
-    void                        removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked );
+    void                        removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool isLocked );
+
+    bool                        saveToJoinedLastDatabase( UserJoinInfo* joinInfo, bool isLocked = false );
+    void                        removeFromJoinedLastDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool isLocked );
 
     P2PEngine&					m_Engine;
     UserJoinInfoDb              m_UserJoinInfoDb;
+    UserJoinedLastDb            m_UserJoinedLastDb;
     VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  

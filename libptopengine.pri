@@ -351,6 +351,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/User/User.h \
 	$$PWD/ptop_src/ptop_engine_src/User/UserList.h \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinedLastDb.h \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.h \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfoDb.h \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h \
@@ -658,6 +659,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/UrlMgr/UrlMgr.cpp \
 	$$PWD/ptop_src/ptop_engine_src/User/User.cpp \
 	$$PWD/ptop_src/ptop_engine_src/User/UserList.cpp \
+    $$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinedLastDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfoDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.cpp \

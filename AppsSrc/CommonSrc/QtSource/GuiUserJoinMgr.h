@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+// client side manager of user join to host service states
+
 class AppCommon;
 
 class GuiUserJoinMgr : public QObject, public UserJoinCallbackInterface

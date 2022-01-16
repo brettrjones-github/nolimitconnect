@@ -357,6 +357,12 @@ void IGoTv::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char *
 }
 
 //============================================================================
+void IGoTv::fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId )
+{
+    getPtoP().fromGuiJoinLastJoinedHost( hostType, sessionId );
+}
+
+//============================================================================
 void IGoTv::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
     getPtoP().fromGuiSearchHost( hostType, searchParams, enable );

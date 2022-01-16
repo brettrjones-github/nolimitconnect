@@ -23,17 +23,20 @@
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
+#include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
-UserJoinMgr::UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
+UserJoinMgr::UserJoinMgr( P2PEngine& engine, const char * dbName, const char * dbJoinedLastName )
 : m_Engine( engine )
 , m_UserJoinInfoDb( engine, *this, dbName )
+, m_UserJoinedLastDb( engine, *this, dbJoinedLastName )
 {
 }
 
 //============================================================================
 void UserJoinMgr::fromGuiUserLoggedOn( void )
 {
+    LogModule( eLogStartup, LOG_VERBOSE, "UserJoinMgr::fromGuiUserLoggedOn start" );
     // dont call HostBaseMgr::fromGuiUserLoggedOn because we never generate sha hash for thumbnails
     if( !m_Initialized )
     {
@@ -41,9 +44,16 @@ void UserJoinMgr::fromGuiUserLoggedOn( void )
         // user specific directory should be set
         std::string dbFileName = VxGetSettingsDirectory();
         dbFileName += m_UserJoinInfoDb.getDatabaseName(); 
+
+        std::string dbLastJoinedFileName = VxGetSettingsDirectory();
+        dbLastJoinedFileName += m_UserJoinedLastDb.getDatabaseName();
+
         lockResources();
         m_UserJoinInfoDb.dbShutdown();
         m_UserJoinInfoDb.dbStartup( USER_JOIN_DB_VERSION, dbFileName );
+
+        m_UserJoinedLastDb.dbShutdown();
+        m_UserJoinedLastDb.dbStartup( USER_JOINED_LAST_DB_VERSION, dbLastJoinedFileName );
 
         clearUserJoinInfoList();
         m_UserJoinInfoDb.getAllUserJoins( m_UserJoinInfoList );
@@ -67,6 +77,8 @@ void UserJoinMgr::fromGuiUserLoggedOn( void )
         m_UserJoinListInitialized = true;
         unlockResources();
     }
+
+    LogModule( eLogStartup, LOG_VERBOSE, "UserJoinMgr::fromGuiUserLoggedOn done" );
 }
 
 //============================================================================
@@ -233,12 +245,21 @@ UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType p
 //============================================================================
 bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo, bool isLocked )
 {
+    bool result{ false };
     if( !isLocked )
     {
         lockResources();
     }
 
-    bool result = m_UserJoinInfoDb.addUserJoin( joinInfo );
+    VxPtopUrl ptopUrl( joinInfo->getHostUrl() );
+    if( ptopUrl.isValid() )
+    {
+        result = m_UserJoinInfoDb.addUserJoin( joinInfo );
+
+        result &= m_UserJoinedLastDb.setJoinedLast( joinInfo->getHostType(), ptopUrl.getOnlineId(), joinInfo->getLastJoinTime(), joinInfo->getHostUrl() );
+
+        result &= m_UserJoinedLastDb.setJoinedLastHostType( joinInfo->getHostType() );
+    }
 
     if( !isLocked )
     {
@@ -264,7 +285,63 @@ void UserJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginTy
 }
 
 //============================================================================
+bool UserJoinMgr::saveToJoinedLastDatabase( UserJoinInfo* joinInfo, bool isLocked )
+{
+    if( !isLocked )
+    {
+        lockResources();
+    }
+
+    bool result = m_UserJoinInfoDb.addUserJoin( joinInfo );
+
+    if( !isLocked )
+    {
+        unlockResources();
+    }
+
+    return result;
+}
+
+//============================================================================
+void UserJoinMgr::removeFromJoinedLastDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked )
+{
+    if( !resourcesLocked )
+    {
+        lockResources();
+    }
+
+    m_UserJoinInfoDb.removeUserJoin( hostOnlineId, pluginType );
+    if( !resourcesLocked )
+    {
+        unlockResources();
+    }
+}
+
+//============================================================================
 void UserJoinMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId )
 {
     // TODO BRJ handle disconnect
+}
+
+//============================================================================
+bool UserJoinMgr::getLastJoinedHostUrl( EHostType hostType, std::string& retHostUrl )
+{
+    VxGUID onlineId;
+    int64_t lastJoinMs;
+    bool result = m_UserJoinedLastDb.getJoinedLast( hostType, onlineId, lastJoinMs, retHostUrl );
+    if( result )
+    {
+        VxPtopUrl ptopUrl( retHostUrl );
+        result = ptopUrl.isValid();
+        if( !result )
+        {
+            LogMsg( LOG_ERROR, "UserJoinMgr::getLastJoinedHostUrl invalid url for host type %d", hostType );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "UserJoinMgr::getLastJoinedHostUrl no last joined host url for host type %d", hostType );
+    }
+
+    return result;
 }

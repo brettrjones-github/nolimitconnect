@@ -28,6 +28,9 @@ public:
     UserJoinInfoDb( P2PEngine& engine, UserJoinMgr& mgr, const char *dbName );
     virtual ~UserJoinInfoDb() = default;
 
+    bool						userJoinInfoDbStartup( int dbVersion, const char* dbFileName );
+    bool						userJoinInfoDbShutdown( void );
+
     bool						addUserJoin( UserJoinInfo * hostInfo );
     void						removeUserJoin( VxGUID& onlineId, EPluginType pluginType );
 

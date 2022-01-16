@@ -30,23 +30,60 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 
 	// so is actually destroyed
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+	connect( ui.m_ChooseHostButton, SIGNAL( clicked() ), this, SLOT( slotChooseHostModeButtonClick() ) );
 
 	m_MyApp.activityStateChange( this, true );
 	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
 	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
+	m_MyApp.getGroupieListMgr().wantGroupieListCallbacks( this, true );
 
-	// TODO probably can remove m_HostedPluginWidget completely
-	ui.m_HostedPluginWidget->setVisible( false );
-
+	setupGuiMode( false );
 	queryHostedList();
+
+	m_JoinedHostSession.initializeWithNewVxGUID();
+	m_MyApp.getFromGuiInterface().fromGuiJoinHost( getHostType(), m_JoinedHostSession );
 }
 
 //============================================================================
 AppletGroupJoin::~AppletGroupJoin()
 {
 	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
+	m_MyApp.getGroupieListMgr().wantGroupieListCallbacks( this, false );
 	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
 	m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
+void AppletGroupJoin::slotChooseHostModeButtonClick( void )
+{
+	setupGuiMode( false );
+}
+
+//============================================================================
+void AppletGroupJoin::setupGuiMode( bool userListMode )
+{
+	if( userListMode )
+	{
+		setListLabel( QObject::tr( "User List" ) );
+		ui.m_ChooseHostButton->setVisible( true );
+		ui.m_HostedIdentWidget->setVisible( true );
+		// TODO probably can remove m_HostedPluginWidget completely
+		ui.m_HostedPluginWidget->setVisible( true );
+
+		ui.m_GuiGroupieListWidget->setVisible( false );
+		ui.m_GuiHostedListWidget->setVisible( true );
+	}
+	else
+	{
+		setListLabel( QObject::tr( "Group Host List" ) );
+		ui.m_ChooseHostButton->setVisible( false );
+		ui.m_HostedIdentWidget->setVisible( false );
+		ui.m_HostedPluginWidget->setVisible( false );
+
+		ui.m_GuiHostedListWidget->setVisible( true );
+		ui.m_GuiGroupieListWidget->setVisible( false );
+	}
+
 }
 
 //============================================================================
@@ -65,11 +102,7 @@ void AppletGroupJoin::setListLabel( QString labelText )
 void AppletGroupJoin::queryHostedList( void )
 {
 	setStatusMsg( QObject::tr("Fetching host list from network host") );
-	setListLabel( QObject::tr( "Group Host List" ) );
-	ui.m_HostedIdentWidget->setVisible( false );
-	ui.m_GuiHostedListWidget->setVisible( true );
-	ui.m_GuiGroupieListWidget->setVisible( false );
-
+	setupGuiMode( false );
 	ui.m_GuiHostedListWidget->clear();
 	ui.m_GuiGroupieListWidget->clear();
 
@@ -110,28 +143,3 @@ void AppletGroupJoin::updateHostedIdent( GuiHosted* guiHosted )
 	ui.m_HostedIdentWidget->updateIdentity( guiHosted->getUser() );
 	ui.m_HostedPluginWidget->updateHosted( guiHosted );
 }
-
-//============================================================================
-void AppletGroupJoin::slotQueryGroupiesButtonClicked( void )
-{
-	/*
-	std::string hostedListUrl = ui.m_HostListUrlComboBox->currentText().toUtf8().constData();
-	if( !hostedListUrl.empty() )
-	{
-		ui.m_GuiGroupieListWidget->clear();
-		VxPtopUrl hostUrl( hostedListUrl );
-		EHostType hostType = hostUrl.getHostType();
-		if( hostUrl.isValid() && hostType != eHostTypeUnknown )
-		{
-			VxGUID nullGuid;
-			m_MyApp.getFromGuiInterface().fromGuiQueryGroupiesFromHosted( hostUrl, hostType, nullGuid );
-		}
-		else
-		{
-			okMessageBox( "Invalid Url", "Invalid Groupie Host Url" );
-		}
-	}
-	*/
-}
-
-

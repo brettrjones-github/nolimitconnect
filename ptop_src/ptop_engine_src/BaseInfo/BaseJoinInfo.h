@@ -28,6 +28,7 @@ public:
 
     virtual void			    setPluginType( EPluginType pluginType )             { m_PluginType = pluginType; }
     virtual EPluginType			getPluginType( void )                               { return m_PluginType; }
+    virtual EHostType			getHostType( void )                                 { return PluginTypeToHostType( m_PluginType ); }
 
     virtual bool			    setJoinState( EJoinState joinState )                { if(m_JoinState == joinState) return false; m_JoinState = joinState; return true; }
     virtual EJoinState			getJoinState( void )                                { return m_JoinState; }

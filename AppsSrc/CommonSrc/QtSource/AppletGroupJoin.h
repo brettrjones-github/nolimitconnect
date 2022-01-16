@@ -41,16 +41,17 @@ public:
     virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) override;
 
 protected slots:
-    void                        slotQueryGroupiesButtonClicked( void );
+    void                        slotChooseHostModeButtonClick( void );
 
 protected:
+    void                        setupGuiMode( bool userListMode );
     virtual void				queryHostedList( void ) override;
 
     void                        updateHostedIdent( GuiHosted* guiHosted );
 
 protected:
     Ui::AppletGroupJoinUi       ui;
-
+    VxGUID                      m_JoinedHostSession;
 };
 
 

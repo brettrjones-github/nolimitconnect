@@ -919,6 +919,9 @@
     <ClCompile Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListMgr.cpp">
       <Filter>Source Files\GroupieListMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.cpp">
+      <Filter>Source Files\UserJoinMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1992,6 +1995,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\GroupieListMgr\GroupieListMgr.h">
       <Filter>Source Files\GroupieListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.h">
+      <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

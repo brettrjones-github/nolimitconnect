@@ -774,6 +774,7 @@
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferPktCreate.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\UrlMgr\UrlMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfoDb.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinMgr.cpp" />
@@ -1131,6 +1132,7 @@
     <ClInclude Include="..\..\ptop_engine_src\ThumbMgr\ThumbXferSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\UrlMgr\UrlMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinCallbackInterface.h" />
+    <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinInfoDb.h" />
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinMgr.h" />

@@ -77,7 +77,7 @@
        <widget class="HostedPluginWidget" name="m_HostedPluginWidget" native="true"/>
       </item>
       <item>
-       <widget class="QPushButton" name="m_RefreshListButton">
+       <widget class="QPushButton" name="m_ChooseHostButton">
         <property name="text">
          <string>Choose An Different Host</string>
         </property>

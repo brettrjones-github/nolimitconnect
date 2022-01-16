@@ -1430,6 +1430,28 @@ void P2PEngine::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const ch
 }
 
 //============================================================================
+void P2PEngine::fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId )
+{
+	std::string hostUrl;
+	if( getUserJoinMgr().getLastJoinedHostUrl( hostType, hostUrl ) )
+	{
+		PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
+		if( plugin )
+		{
+			plugin->fromGuiJoinHost( hostType, sessionId, hostUrl.c_str() );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "Plugin not found for host %d", hostType );
+		}
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "P2PEngine::fromGuiJoinLastJoinedHost no last joined host url for host type %d", hostType );
+	}
+}
+
+//============================================================================
 void P2PEngine::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
     PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
