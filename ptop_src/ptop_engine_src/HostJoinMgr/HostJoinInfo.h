@@ -28,6 +28,7 @@ public:
 	HostJoinInfo&				operator=( const HostJoinInfo& rhs ); 
 
     bool                        isValid( void )                                     { return m_NetIdent != nullptr;  }
+    bool                        isUrlValid( void );
 
     virtual void			    setNetIdent( VxNetIdent* netIdent )                 { m_NetIdent = netIdent; }
     virtual VxNetIdent*         getNetIdent( void )                                 { return m_NetIdent; }

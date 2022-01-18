@@ -281,6 +281,13 @@ HostJoinInfo* HostJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType p
 //============================================================================
 bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked )
 {
+    if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // do not add ourself to database. If we joined then we are the admin
+        // and we may join another host at the same time
+        return true;
+    }
+
     if( !resourcesLocked )
     {
         lockResources();

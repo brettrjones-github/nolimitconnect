@@ -53,6 +53,10 @@ public:
     virtual void                setIsFavorite( bool isFavorite ) { m_IsFavorite = isFavorite; }
     virtual bool                getIsFavorite( void )           { return m_IsFavorite; }
 
+    virtual void			    setConnectedTimestamp( int64_t timestampMs ) { m_ConnectedTimestampMs = timestampMs; }
+    virtual int64_t             getConnectedTimestamp( void )   { return m_ConnectedTimestampMs; }
+    virtual void			    setJoinedTimestamp( int64_t timestampMs ) { m_JoinedTimestampMs = timestampMs; }
+    virtual int64_t             getJoinedTimestamp( void )      { return m_JoinedTimestampMs; }
     virtual void			    setHostInfoTimestamp( int64_t timestampMs ) { m_HostInfoTimestampMs = timestampMs; }
     virtual int64_t             getHostInfoTimestamp( void )    { return m_HostInfoTimestampMs; }
 
@@ -74,6 +78,8 @@ protected:
     EHostType                   m_HostType{ eHostTypeUnknown };
     VxGUID                      m_OnlineId;
     bool                        m_IsFavorite{ false };
+    int64_t                     m_ConnectedTimestampMs{ 0 };
+    int64_t                     m_JoinedTimestampMs{ 0 };
     int64_t                     m_HostInfoTimestampMs{ 0 };
     std::string                 m_HostInviteUrl{ "" };
     std::string                 m_HostTitle{ "" };

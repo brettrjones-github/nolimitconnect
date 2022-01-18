@@ -118,7 +118,7 @@ void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
         for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
         {
             UserJoinCallbackInterface* client = *iter;
-            client->callbackUserJoinRequested( userHostInfo );
+            client->callbackUserJoinAdded( userHostInfo );
         }
 
         unlockClientList();
@@ -246,6 +246,13 @@ UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType p
 bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo, bool isLocked )
 {
     bool result{ false };
+    if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // do not add ourself to database. If we joined then we are the admin
+        // and we may join another host at the same time
+        return true;
+    }
+
     if( !isLocked )
     {
         lockResources();
@@ -287,6 +294,13 @@ void UserJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginTy
 //============================================================================
 bool UserJoinMgr::saveToJoinedLastDatabase( UserJoinInfo* joinInfo, bool isLocked )
 {
+    if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() )
+    {
+        // do not add ourself to database. If we joined then we are the admin
+        // and we may join another host at the same time
+        return true;
+    }
+
     if( !isLocked )
     {
         lockResources();

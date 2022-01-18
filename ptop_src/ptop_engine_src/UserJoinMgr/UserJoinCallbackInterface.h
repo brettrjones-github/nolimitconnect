@@ -21,7 +21,7 @@ class VxGUID;
 class UserJoinCallbackInterface
 {
 public:
-    virtual void				callbackUserJoinRequested( UserJoinInfo* hostJoinInfo ) {};
+    virtual void				callbackUserJoinAdded( UserJoinInfo* hostJoinInfo ) {};
     virtual void				callbackUserJoinUpdated( UserJoinInfo* hostJoinInfo ) {};
     virtual void				callbackUserJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) {};
 

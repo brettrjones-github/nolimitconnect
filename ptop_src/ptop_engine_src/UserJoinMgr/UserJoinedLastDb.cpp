@@ -15,6 +15,8 @@
 #include "UserJoinedLastDb.h"
 #include "UserJoinInfo.h"
 
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+
 namespace
 {
     std::string 		TABLE_USER_HOST = "tblUserJoinedLast";
@@ -140,6 +142,13 @@ void UserJoinedLastDb::removeJoinedLast( EHostType hostType )
 //============================================================================
 bool UserJoinedLastDb::setJoinedLast( EHostType hostType, VxGUID& onlineId, int64_t lastJoinMs, std::string hostUrl )
 {
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        // do not add ourself to database. If we joined then we are the admin
+        // and we may join another host at the same time
+        return true;
+    }
+
     lockDb();
     removeJoinedLast( hostType );
 

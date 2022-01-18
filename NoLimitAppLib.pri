@@ -237,6 +237,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinMgr.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserSessionBase.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserUpdateCallback.h \  
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbList.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiThumbMgr.h \

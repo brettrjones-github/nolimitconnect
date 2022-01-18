@@ -569,8 +569,8 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoinSession.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListItem.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserMgrGuiUserUpdateClient.h" />
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserMgrGuiUserUpdateInterface.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\HelpBrowser.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListItem.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HostJoinRequestListWidget.h" />

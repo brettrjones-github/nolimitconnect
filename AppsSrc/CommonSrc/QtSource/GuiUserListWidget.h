@@ -40,8 +40,8 @@ public:
     void                        setShowMyself( bool showMe )            { m_ShowMyself = showMe; }
     bool                        getShowMyself( void )                   { return m_ShowMyself; }
 
-    void                        addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* hostIdent );
-    GuiUserListItem*            addOrUpdateSession( GuiUserSessionBase* hostSession );
+    void                        addSessionToList( EHostType hostType, VxGUID& sessionId, GuiUser* userIdent );
+    GuiUserListItem*            addOrUpdateSession( GuiUserSessionBase* userSession );
 
     GuiUserSessionBase*         findSession( VxGUID& lclSessionId );
     GuiUserListItem*            findListEntryWidgetBySessionId( VxGUID& sessionId );
@@ -52,12 +52,12 @@ public:
     virtual GuiUserSessionBase* makeSession( GuiUser* user );
 
 signals:
-    void                        signalUserListItemClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
-    void                        signalAvatarButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
-    void                        signalOfferButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
-    void                        signalPushToTalkButtonPressed( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
-    void                        signalPushToTalkButtonReleased( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem );
-    void                        signalMenuButtonClicked( GuiUserSessionBase* hostSession, GuiUserListItem* hostItem ); 
+    void                        signalUserListItemClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    void                        signalAvatarButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    void                        signalOfferButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    void                        signalPushToTalkButtonPressed( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    void                        signalPushToTalkButtonReleased( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
+    void                        signalMenuButtonClicked( GuiUserSessionBase* userSession, GuiUserListItem* userItem ); 
 
 protected slots:
     void                        slotMyIdentUpdated( GuiUser* user );
@@ -68,12 +68,12 @@ protected slots:
     void                        slotUserOnlineStatus( GuiUser* user, bool isOnline );
     
 	void						slotItemClicked( QListWidgetItem* item );
-    void                        slotUserListItemClicked( GuiUserListItem* hostItem );
-    void                        slotAvatarButtonClicked( GuiUserListItem* hostItem );
-    void                        slotOfferButtonClicked( GuiUserListItem* hostItem );
-    void                        slotPushToTalkButtonPressed( GuiUserListItem* hostItem );
-    void                        slotPushToTalkButtonReleased( GuiUserListItem* hostItem );
-    void                        slotMenuButtonClicked( GuiUserListItem* hostItem ); 
+    void                        slotUserListItemClicked( GuiUserListItem* userItem );
+    void                        slotAvatarButtonClicked( GuiUserListItem* userItem );
+    void                        slotOfferButtonClicked( GuiUserListItem* userItem );
+    void                        slotPushToTalkButtonPressed( GuiUserListItem* userItem );
+    void                        slotPushToTalkButtonReleased( GuiUserListItem* userItem );
+    void                        slotMenuButtonClicked( GuiUserListItem* userItem ); 
 
     void				        slotThumbAdded( GuiThumb* thumb );
     void                        slotThumbUpdated( GuiThumb* thumb );
@@ -84,15 +84,15 @@ protected:
 
     bool                        isListViewMatch( GuiUser* user );
 
-    GuiUserListItem*            sessionToWidget( GuiUserSessionBase* hostSession );
-    GuiUserSessionBase*			widgetToSession( GuiUserListItem* hostItem );
+    GuiUserListItem*            sessionToWidget( GuiUserSessionBase* userSession );
+    GuiUserSessionBase*			widgetToSession( GuiUserListItem* userItem );
 
-    virtual void                onUserListItemClicked( GuiUserListItem* hostItem );
-    virtual void                onAvatarButtonClicked( GuiUserListItem* hostItem );
-    virtual void                onOfferButtonClicked( GuiUserListItem* hostItem );
-    virtual void                onPushToTalkButtonPressed( GuiUserListItem* hostItem );
-    virtual void                onPushToTalkButtonReleased( GuiUserListItem* hostItem );
-    virtual void                onMenuButtonClicked( GuiUserListItem* hostItem );
+    virtual void                onUserListItemClicked( GuiUserListItem* userItem );
+    virtual void                onAvatarButtonClicked( GuiUserListItem* userItem );
+    virtual void                onOfferButtonClicked( GuiUserListItem* userItem );
+    virtual void                onPushToTalkButtonPressed( GuiUserListItem* userItem );
+    virtual void                onPushToTalkButtonReleased( GuiUserListItem* userItem );
+    virtual void                onMenuButtonClicked( GuiUserListItem* userItem );
 
     virtual void                onListItemAdded( GuiUserSessionBase* userSession, GuiUserListItem* userItem );
     virtual void                onListItemUpdated( GuiUserSessionBase* userSession, GuiUserListItem* userItem );

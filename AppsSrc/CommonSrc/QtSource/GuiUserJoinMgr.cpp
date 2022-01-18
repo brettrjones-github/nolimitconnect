@@ -45,7 +45,7 @@ bool GuiUserJoinMgr::isMessengerReady( void )
 }
 
 //============================================================================
-void GuiUserJoinMgr::callbackUserJoinRequested( UserJoinInfo* userJoinInfo )
+void GuiUserJoinMgr::callbackUserJoinAdded( UserJoinInfo* userJoinInfo )
 {
     if( !userJoinInfo )
     {

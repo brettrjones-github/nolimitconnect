@@ -113,18 +113,24 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 		return;
 	}
 
-	LogMsg( LOG_INFO, "toGuiContactOffline: toGuiActivityClientsLock" );
     GuiUser *user = m_UserMgr.getUser( netIdent->getMyOnlineId() );
-	// don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiContactOffline( client.m_UserData, user );
-	}
+    if( user )
+    {
+        LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOffline user %s", netIdent->getOnlineName() );
+	    toGuiActivityClientsLock();
+	    std::vector<ToGuiActivityClient>::iterator iter;
+	    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+	    {
+		    ToGuiActivityClient& client = *iter;
+		    client.m_Callback->toGuiContactOffline( client.m_UserData, user );
+	    }
 
-	toGuiActivityClientsUnlock();
+	    toGuiActivityClientsUnlock();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactOffline null user for %s", netIdent->getOnlineName() );
+    }
 }
 
 //============================================================================
@@ -136,19 +142,24 @@ void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, b
 		return;
 	}
 
-	//LogMsg( LOG_INFO, "AppCommon::toGuiContactOnline %s \n", netIdent->getOnlineName());
+    if( netIdent )
+    {
+        LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOnline user %s host type %s", netIdent->getOnlineName(), DescribeHostType( hostType ) );
 
-	//LogMsg( LOG_INFO, "toGuiContactOnline: toGuiActivityClientsLock\n" );
-	// don't put in slot because want to call from thread so can return and avoid callback mutex deadlock
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiContactOnline( client.m_UserData, netIdent, hostType, newContact );
-	}
+        toGuiActivityClientsLock();
+        std::vector<ToGuiActivityClient>::iterator iter;
+        for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+        {
+            ToGuiActivityClient& client = *iter;
+            client.m_Callback->toGuiContactOnline( client.m_UserData, netIdent, hostType, newContact );
+        }
 
-	toGuiActivityClientsUnlock();
+        toGuiActivityClientsUnlock();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "AppCommon::toGuiContactOffline null netIdent" );
+    }
 }
 
 //============================================================================

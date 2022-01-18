@@ -460,12 +460,12 @@ GuiUserListItem* GuiUserListWidget::addOrUpdateSession( GuiUserSessionBase* user
         userItem = sessionToWidget( userSession );
         if( 0 == count() )
         {
-            LogMsg( LOG_INFO, "add user %s\n", userSession->getUserIdent()->getOnlineName().c_str() );
+            LogMsg( LOG_VERBOSE, "add user %s", userSession->getUserIdent()->getOnlineName().c_str() );
             addItem( userItem );
         }
         else
         {
-            LogMsg( LOG_INFO, "insert user %s\n", userSession->getUserIdent()->getOnlineName().c_str() );
+            LogMsg( LOG_VERBOSE, "insert user %s", userSession->getUserIdent()->getOnlineName().c_str() );
             insertItem( 0, (QListWidgetItem *)userItem );
         }
 

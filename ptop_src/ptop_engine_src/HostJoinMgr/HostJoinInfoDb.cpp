@@ -167,7 +167,7 @@ void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJo
             hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
             hostInfo->setUserUrl( cursor->getString( COLUMN_USER_URL ) );
 
-            vx_assert( hostInfo->isValid() );
+            vx_assert( hostInfo->isUrlValid() );
 
             insertHostJoinInTimeOrder( hostInfo, HostJoinHostJoinList );
         }
@@ -181,7 +181,8 @@ void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJo
 //============================================================================
 void HostJoinInfoDb::insertHostJoinInTimeOrder( HostJoinInfo *hostInfo, std::vector<HostJoinInfo*>& hostList )
 {
-    vx_assert( hostInfo && hostInfo->isValid() );
+    vx_assert( hostInfo && hostInfo->isUrlValid() );
+
     if( hostInfo->isDefaultHost() )
     {
         hostList.insert( hostList.begin(), hostInfo );

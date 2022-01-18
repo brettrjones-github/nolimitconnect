@@ -2205,9 +2205,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AccountDb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserMgrGuiUserUpdateInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserMgrGuiUserUpdateClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2231,6 +2228,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h">
       <Filter>Source Files\GuiHosted</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

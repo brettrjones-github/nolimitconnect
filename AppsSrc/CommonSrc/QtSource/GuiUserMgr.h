@@ -22,7 +22,7 @@
 #include <QObject>
 
 class AppCommon;
-class GuiUserMgrGuiUserUpdateInterface;
+class GuiUserUpdateCallback;
 
 class GuiUserMgr : public QObject, public ToGuiUserUpdateInterface
 {
@@ -76,7 +76,7 @@ public:
     GuiUser*                    updateMyIdent( VxNetIdent* myIdent );
     GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
-    void                        wantGuiUserMgrGuiUserUpdateCallbacks( GuiUserMgrGuiUserUpdateInterface* callback, bool wantCallback );
+    void                        wantGuiUserMgrGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
 signals:
     void				        signalMyIdentUpdated( GuiUser* guiUser );

@@ -17,7 +17,7 @@
 #include "AppCommon.h"
 #include "AccountMgr.h"
 #include "GuiUserMgrGuiUserUpdateClient.h"
-#include "GuiUserMgrGuiUserUpdateInterface.h"
+#include "GuiUserUpdateCallback.h"
 
 #include <CoreLib/VxGlobals.h>
 
@@ -515,7 +515,7 @@ void GuiUserMgr::guiUserUpdateClientsUnlock( void )
 }
 
 //============================================================================
-void GuiUserMgr::wantGuiUserMgrGuiUserUpdateCallbacks( GuiUserMgrGuiUserUpdateInterface* callback, bool wantCallback )
+void GuiUserMgr::wantGuiUserMgrGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback )
 {
     static bool userCallbackShutdownComplete = false;
     if( VxIsAppShuttingDown() )

@@ -77,6 +77,19 @@ void GuiHostedListMgr::callbackHostedInfoListSearchResult( HostedInfo* hostedInf
 }
 
 //============================================================================
+void GuiHostedListMgr::callbackHostedInfoListSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    if( hostType != eHostTypeUnknown )
+    {
+        emit signalInternalHostSearchComplete( hostType, sessionId );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GuiHostedListMgr::callbackHostedInfoListSearchResult invalid host type" );
+    }
+}
+
+//============================================================================
 void GuiHostedListMgr::slotInternalHostedUpdated( HostedInfo* hostedInfo )
 {
     if( hostedInfo )
@@ -223,11 +236,18 @@ GuiHosted* GuiHostedListMgr::updateHostedInfo( HostedInfo& hostedInfo )
         // make sure is up to date. search results should be the latest info
         guiHosted->setHostType( hostedInfo.getHostType() );
         // skip setIsFavorite.. is probably not set correctly in search result
+        bool updated = guiHosted->getJoinedTimestamp() != hostedInfo.getJoinedTimestamp() || guiHosted->getHostInfoTimestamp() != hostedInfo.getHostInfoTimestamp();
 
-        guiHosted->setHostInfoTimestamp( hostedInfo.getHostType() );
+        guiHosted->setConnectedTimestamp( hostedInfo.getConnectedTimestamp() );
+        guiHosted->setJoinedTimestamp( hostedInfo.getJoinedTimestamp() );
+        guiHosted->setHostInfoTimestamp( hostedInfo.getHostInfoTimestamp() );
         guiHosted->setHostInviteUrl( hostedInfo.getHostInviteUrl() );
         guiHosted->setHostTitle( hostedInfo.getHostTitle() );
         guiHosted->setHostDescription( hostedInfo.getHostDescription() );
+        if( updated )
+        {
+            onHostedUpdated( guiHosted );
+        }
     }
 
     return guiHosted;

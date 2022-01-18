@@ -1128,3 +1128,7 @@ bool IsHostPluginType( EPluginType pluginType );
 bool PluginShouldAnnounceToNetwork( EPluginType pluginType );
 //! return true if host should announce to network host
 bool HostShouldAnnounceToNetwork( EHostType hostType );
+//! return true if plugin can act as relay for user
+bool IsPluginARelayForUser( EPluginType pluginType );
+//! return true if host can act as relay for user
+bool IsHostARelayForUser( EHostType hostType );

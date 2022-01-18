@@ -183,12 +183,12 @@ namespace
     {
         // must sync with EHostType
         "Host Unknown ",
-        "Host Network ",
         "Host Connect Test ",
+        "Host Network ",
+        "Host Peer User ",
         "Host Group ",
         "Host Chat Room ",
         "Host Random Connect ",
-        "Host Peer User ",
 
         "Max Host Type ",
     };
@@ -1257,6 +1257,23 @@ bool PluginShouldAnnounceToNetwork( EPluginType pluginType )
 //============================================================================
 //! return true if host should announce to network host
 bool HostShouldAnnounceToNetwork( EHostType hostType )
+{
+    return eHostTypeGroup == hostType ||
+        eHostTypeChatRoom == hostType ||
+        eHostTypeRandomConnect == hostType;
+}
+//============================================================================
+//! return true if plugin can act as relay for user
+bool IsPluginARelayForUser( EPluginType pluginType )
+{
+    return ePluginTypeHostGroup == pluginType ||
+        ePluginTypeHostChatRoom == pluginType ||
+        ePluginTypeHostRandomConnect == pluginType;
+}
+
+//============================================================================
+//! return true if host can act as relay for user
+bool IsHostARelayForUser( EHostType hostType )
 {
     return eHostTypeGroup == hostType ||
         eHostTypeChatRoom == hostType ||

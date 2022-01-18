@@ -16,11 +16,11 @@
 #include "AppletTestBase.h"
 #include "ui_AppletTestHostClient.h"
 
-#include "GuiUserMgrGuiUserUpdateInterface.h"
+#include "GuiUserUpdateCallback.h"
 #include "GuiHostedListCallback.h"
 #include "GuiGroupieListCallback.h"
 
-class AppletTestHostClient : public AppletTestBase, public GuiUserMgrGuiUserUpdateInterface, public GuiHostedListCallback, public GuiGroupieListCallback
+class AppletTestHostClient : public AppletTestBase, public GuiUserUpdateCallback, public GuiHostedListCallback, public GuiGroupieListCallback
 {
 	Q_OBJECT
 public:

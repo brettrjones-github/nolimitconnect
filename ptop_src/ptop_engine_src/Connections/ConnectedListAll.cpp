@@ -91,11 +91,7 @@ void ConnectedListAll::removeConnectedInfo( const VxGUID& onlineId )
 void ConnectedListAll::onSktDisconnected( VxSktBase* sktBase )
 {
     ConnectedInfo* connectInfo = getConnectedInfo( sktBase->getPeerOnlineId() );
-    if( nullptr == connectInfo )
-    {
-        LogMsg( LOG_ERROR, "ConnectionMgr get connection info FAILED" );
-    }
-    else
+    if( connectInfo )
     {
         connectInfo->onSktDisconnected( sktBase );
         if( !connectInfo->getSktBase() )

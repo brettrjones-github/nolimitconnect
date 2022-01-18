@@ -92,6 +92,7 @@ protected:
 
     void                        announceHostInfoUpdated( HostedInfo* hostedInfo );
     void                        announceHostInfoSearchResult( HostedInfo* hostedInfo, VxGUID& sessionId );
+    void                        announceHostInfoSearchComplete( EHostType hostType, VxGUID& sessionId );
     void                        announceHostInfoRemoved( EHostType hostType, VxGUID& onlineId );
 
     void						addToListInJoinedTimestampOrder( std::vector<HostedInfo>& hostedInfoList, HostedInfo& hostedInfo );

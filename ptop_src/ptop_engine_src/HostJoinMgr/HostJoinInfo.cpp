@@ -22,6 +22,7 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxPtopUrl.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -35,7 +36,6 @@ HostJoinInfo::HostJoinInfo()
 //============================================================================
 HostJoinInfo::HostJoinInfo( const HostJoinInfo& rhs )
     : BaseJoinInfo( rhs )
-    , m_NetIdent( rhs.m_NetIdent )
     , m_HostFlags( rhs.m_HostFlags )
     , m_UserUrl( rhs.m_UserUrl )
     , m_ConnectionId( rhs.m_ConnectionId )
@@ -49,7 +49,6 @@ HostJoinInfo& HostJoinInfo::operator=( const HostJoinInfo& rhs )
 	if( this != &rhs )
 	{
         BaseJoinInfo::operator = ( rhs );
-        m_NetIdent = rhs.m_NetIdent;
         m_HostFlags = rhs.m_HostFlags;
         m_UserUrl = rhs.m_UserUrl;
         m_ConnectionId = rhs.m_ConnectionId;
@@ -57,4 +56,11 @@ HostJoinInfo& HostJoinInfo::operator=( const HostJoinInfo& rhs )
     }
 
 	return *this;
+}
+
+//============================================================================
+bool HostJoinInfo::isUrlValid( void )
+{
+    VxPtopUrl ptopUrl( m_UserUrl );
+    return ptopUrl.isValid() && ptopUrl.getOnlineId() == getOnlineId();
 }

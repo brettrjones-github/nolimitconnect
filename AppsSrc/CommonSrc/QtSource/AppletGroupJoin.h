@@ -16,11 +16,13 @@
 #include "AppletJoinBase.h"
 #include "ui_AppletGroupJoin.h"
 
-#include "GuiUserMgrGuiUserUpdateInterface.h"
+#include "GuiUserUpdateCallback.h"
 #include "GuiHostedListCallback.h"
 #include "GuiGroupieListCallback.h"
 
-class AppletGroupJoin : public AppletJoinBase, public GuiUserMgrGuiUserUpdateInterface, public GuiHostedListCallback, public GuiGroupieListCallback
+class GuiUserListItem;
+
+class AppletGroupJoin : public AppletJoinBase, public GuiUserUpdateCallback, public GuiHostedListCallback, public GuiGroupieListCallback
 {
 	Q_OBJECT
 public:
@@ -37,11 +39,18 @@ public:
     virtual void				callbackOnUserRemoved( VxGUID& onlineId ) override {};
 
     virtual void				callbackGuiHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId ) override;
+    virtual void				callbackGuiHostedListSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
     virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) override;
+    virtual void				callbackGuiGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
 protected slots:
     void                        slotChooseHostModeButtonClick( void );
+
+    void                        slotIconButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotMenuButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
     void                        setupGuiMode( bool userListMode );

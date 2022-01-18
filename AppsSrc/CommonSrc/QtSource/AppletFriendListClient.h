@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "AppletClientBase.h"
-#include "GuiUserMgrGuiUserUpdateInterface.h"
+#include "GuiUserUpdateCallback.h"
 
 #include <GuiInterface/IDefs.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSetting.h>
@@ -28,7 +28,7 @@
 class VxNetIdent;
 class GuiHostSession;
 
-class AppletFriendListClient : public AppletClientBase, public GuiUserMgrGuiUserUpdateInterface
+class AppletFriendListClient : public AppletClientBase, public GuiUserUpdateCallback
 {
 	Q_OBJECT
 public:
@@ -41,7 +41,7 @@ public:
 
     void						setStatusLabel( QString strMsg );
 
-    EUserViewType             getListType( void )             { return m_FriendListType; }
+    EUserViewType               getListType( void )             { return m_FriendListType; }
     void                        clearList( void );
     void                        clearStatus( void );
 

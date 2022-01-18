@@ -32,6 +32,13 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 	connect( ui.m_ChooseHostButton, SIGNAL( clicked() ), this, SLOT( slotChooseHostModeButtonClick() ) );
 
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalIconButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotIconButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalMenuButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotMenuButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalJoinButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotJoinButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalConnectButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotConnectButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
+
+
+
 	m_MyApp.activityStateChange( this, true );
 	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
 	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
@@ -66,6 +73,7 @@ void AppletGroupJoin::setupGuiMode( bool userListMode )
 	{
 		setListLabel( QObject::tr( "User List" ) );
 		ui.m_ChooseHostButton->setVisible( true );
+		ui.m_HostAdminLabel->setVisible( true );
 		ui.m_HostedIdentWidget->setVisible( true );
 		// TODO probably can remove m_HostedPluginWidget completely
 		ui.m_HostedPluginWidget->setVisible( true );
@@ -77,13 +85,13 @@ void AppletGroupJoin::setupGuiMode( bool userListMode )
 	{
 		setListLabel( QObject::tr( "Group Host List" ) );
 		ui.m_ChooseHostButton->setVisible( false );
+		ui.m_HostAdminLabel->setVisible( false );
 		ui.m_HostedIdentWidget->setVisible( false );
 		ui.m_HostedPluginWidget->setVisible( false );
 
 		ui.m_GuiHostedListWidget->setVisible( true );
 		ui.m_GuiGroupieListWidget->setVisible( false );
 	}
-
 }
 
 //============================================================================
@@ -129,6 +137,12 @@ void AppletGroupJoin::callbackGuiHostedListSearchResult( HostedId& hostedId, Gui
 }
 
 //============================================================================
+void AppletGroupJoin::callbackGuiHostedListSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+	setStatusMsg( QObject::tr( "Host list from network host completed" ) );
+}
+
+//============================================================================
 void AppletGroupJoin::callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId )
 {
 	if( groupieId.getHostType() == m_HostType && guiGroupie )
@@ -138,8 +152,38 @@ void AppletGroupJoin::callbackGuiGroupieListSearchResult( GroupieId& groupieId, 
 }
 
 //============================================================================
+void AppletGroupJoin::callbackGuiGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+	setStatusMsg( QObject::tr( "User list from host completed" ) );
+}
+
+//============================================================================
 void AppletGroupJoin::updateHostedIdent( GuiHosted* guiHosted )
 {
 	ui.m_HostedIdentWidget->updateIdentity( guiHosted->getUser() );
 	ui.m_HostedPluginWidget->updateHosted( guiHosted );
+}
+
+//============================================================================
+void AppletGroupJoin::slotIconButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotIconButtonClicked" );
+}
+
+//============================================================================
+void AppletGroupJoin::slotMenuButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotMenuButtonClicked" );
+}
+
+//============================================================================
+void AppletGroupJoin::slotJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotJoinButtonClicked" );
+}
+
+//============================================================================
+void AppletGroupJoin::slotConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotConnectButtonClicked" );
 }

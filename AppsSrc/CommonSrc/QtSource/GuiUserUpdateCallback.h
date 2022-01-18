@@ -16,7 +16,7 @@
 class VxGUID;
 class GuiUser;
 
-class GuiUserMgrGuiUserUpdateInterface
+class GuiUserUpdateCallback
 {
 public:
     virtual void				callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;

@@ -79,7 +79,7 @@ protected:
     GuiUserJoin*                findUserJoin( VxGUID& onlineId );
     GuiUserJoin*                updateUserJoin( UserJoinInfo* userJoinInfo );
     
-    virtual void				callbackUserJoinRequested( UserJoinInfo* userJoinInfo ) override;
+    virtual void				callbackUserJoinAdded( UserJoinInfo* userJoinInfo ) override;
     virtual void				callbackUserJoinUpdated( UserJoinInfo* userJoinInfo ) override;
     virtual void				callbackUserJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) override;
     virtual void				callbackUserJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userOfferState ) override;

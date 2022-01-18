@@ -13,12 +13,12 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-class GuiUserMgrGuiUserUpdateInterface;
+class GuiUserUpdateCallback;
 
 class GuiUserMgrGuiUserUpdateClient
 {
 public:
-    GuiUserMgrGuiUserUpdateClient( GuiUserMgrGuiUserUpdateInterface* callback )
+    GuiUserMgrGuiUserUpdateClient( GuiUserUpdateCallback* callback )
         : m_Callback( callback )
     {
     }
@@ -39,6 +39,6 @@ public:
     }
 
     //=== vars ===//
-    GuiUserMgrGuiUserUpdateInterface* m_Callback{ nullptr };
+    GuiUserUpdateCallback* m_Callback{ nullptr };
 };
 

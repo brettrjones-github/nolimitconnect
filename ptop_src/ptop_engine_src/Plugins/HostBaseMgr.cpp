@@ -28,6 +28,8 @@
 #include <PktLib/PktsSearch.h>
 #include <PktLib/SearchParams.h>
 
+#include <CoreLib/VxPtopUrl.h>
+
 #include <memory.h>
 
 #ifdef _MSC_VER
@@ -230,7 +232,18 @@ void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchPar
 //============================================================================
 void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::string& urlIn, EConnectReason connectReason )
 {
-    std::string url = m_Engine.getUrlMgr().resolveUrl( urlIn );
+    std::string url;
+    VxPtopUrl ptopUrl( urlIn );
+    if( ptopUrl.isValid() )
+    {
+        // no need to resolve. is already valid
+        url = urlIn;
+    }
+    else
+    {
+        url = m_Engine.getUrlMgr().resolveUrl( urlIn );
+    }
+
     if( !url.empty() )
     {
         VxGUID hostGuid;
@@ -238,61 +251,82 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
                   DescribeConnectReason( connectReason ));
         if( isAnnounceConnectReason( connectReason ) )
         {
-            EHostAnnounceStatus annStatus = m_ConnectionMgr.lookupOrQueryAnnounceId( hostType, sessionId, url.c_str(), hostGuid, this, connectReason);
-            if( eHostAnnounceQueryIdSuccess == annStatus )
+            if( ptopUrl.isValid() )
             {
-                // no need for id query.. just request connection
                 onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
-            }
-            else if( eHostAnnounceQueryIdInProgress == annStatus )
-            {
-                // manager is attempting to query id
-                m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceQueryIdInProgress );
             }
             else
             {
-                m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceInvalidUrl );
-                onConnectToHostFail( hostType, sessionId, connectReason, eHostAnnounceInvalidUrl );
+                EHostAnnounceStatus annStatus = m_ConnectionMgr.lookupOrQueryAnnounceId( hostType, sessionId, url.c_str(), hostGuid, this, connectReason);
+                if( eHostAnnounceQueryIdSuccess == annStatus )
+                {
+                    // no need for id query.. just request connection
+                    onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+                }
+                else if( eHostAnnounceQueryIdInProgress == annStatus )
+                {
+                    // manager is attempting to query id
+                    m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceQueryIdInProgress );
+                }
+                else
+                {
+                    m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceInvalidUrl );
+                    onConnectToHostFail( hostType, sessionId, connectReason, eHostAnnounceInvalidUrl );
+                }
             }
         }
         else if( isJoinConnectReason( connectReason ) )
         {
-            EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryJoinId( sessionId, url.c_str(), hostGuid, this, connectReason);
-            if( eHostJoinQueryIdSuccess == joinStatus )
+            if( ptopUrl.isValid() )
             {
-                // no need for id query.. just request connection
                 onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
-            }
-            else if( eHostJoinQueryIdInProgress == joinStatus )
-            {
-                // manager is attempting to query id
-                m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinQueryIdInProgress );
             }
             else
             {
-                m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
-                onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinInvalidUrl );
+                EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryJoinId( sessionId, url.c_str(), hostGuid, this, connectReason);
+                if( eHostJoinQueryIdSuccess == joinStatus )
+                {
+                    // no need for id query.. just request connection
+                    onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+                }
+                else if( eHostJoinQueryIdInProgress == joinStatus )
+                {
+                    // manager is attempting to query id
+                    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinQueryIdInProgress );
+                }
+                else
+                {
+                    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+                    onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinInvalidUrl );
+                }
             }
         }
         else if( isSearchConnectReason( connectReason ) )
         {
-            EHostSearchStatus searchStatus = m_ConnectionMgr.lookupOrQuerySearchId( sessionId, url.c_str(), hostGuid, this, connectReason);
-            if( eHostSearchQueryIdSuccess == searchStatus )
+            if( ptopUrl.isValid() )
             {
-                // no need for id query.. just request connection
                 onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
-            }
-            else if( eHostSearchQueryIdInProgress == searchStatus )
-            {
-                // manager is attempting to query id
-                m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdInProgress );
             }
             else
             {
-                m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchInvalidUrl );
-                m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
+                EHostSearchStatus searchStatus = m_ConnectionMgr.lookupOrQuerySearchId( sessionId, url.c_str(), hostGuid, this, connectReason);
+                if( eHostSearchQueryIdSuccess == searchStatus )
+                {
+                    // no need for id query.. just request connection
+                    onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+                }
+                else if( eHostSearchQueryIdInProgress == searchStatus )
+                {
+                    // manager is attempting to query id
+                    m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchQueryIdInProgress );
+                }
+                else
+                {
+                    m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchInvalidUrl );
+                    m_Engine.getToGui().toGuiHostSearchComplete( hostType, sessionId );
 
-                onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchInvalidUrl );
+                    onConnectToHostFail( hostType, sessionId, connectReason, eHostSearchInvalidUrl );
+                }
             }
         }
         else

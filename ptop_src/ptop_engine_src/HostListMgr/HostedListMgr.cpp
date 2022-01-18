@@ -253,6 +253,28 @@ void HostedListMgr::announceHostInfoSearchResult( HostedInfo* hostedInfo, VxGUID
     }
 }
 
+
+//============================================================================
+void HostedListMgr::announceHostInfoSearchComplete( EHostType hostType, VxGUID& sessionId )
+{
+    if( hostType != eHostTypeUnknown )
+    {
+        lockClientList();
+        std::vector<HostedListCallbackInterface*>::iterator iter;
+        for( iter = m_HostedInfoListClients.begin(); iter != m_HostedInfoListClients.end(); ++iter )
+        {
+            HostedListCallbackInterface* client = *iter;
+            client->callbackHostedInfoListSearchComplete( hostType, sessionId );
+        }
+
+        unlockClientList();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "HostJoinMgr::announceHostInfoSearchResult invalid param" );
+    }
+}
+
 //============================================================================
 void HostedListMgr::updateAndRequestInfoIfNeeded( EHostType hostType, VxGUID& onlineId, std::string& nodeUrl, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
@@ -712,6 +734,7 @@ void HostedListMgr::hostSearchCompleted( EHostType hostType, VxGUID& searchSessi
     }
 
     m_Engine.getConnectionMgr().doneWithConnection( searchSessionId, netIdent->getMyOnlineId(), this, eConnectReasonNetworkHostListSearch );
+    announceHostInfoSearchComplete( hostType, searchSessionId );
 }
 
 //============================================================================
@@ -788,7 +811,7 @@ bool HostedListMgr::updateHostInfo( EHostType hostType, HostedInfo& hostedInfo, 
                 // TODO do we need to update if just url changed ?
             }
 
-            if( iter->getHostInfoTimestamp() > hostedInfo.getHostInfoTimestamp() )
+            if( hostedInfo.getHostInfoTimestamp() > iter->getHostInfoTimestamp() )
             {
                 iter->setHostInfoTimestamp( hostedInfo.getHostInfoTimestamp() );
                 iter->setHostTitle( hostedInfo.getHostTitle() );

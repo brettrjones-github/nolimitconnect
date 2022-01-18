@@ -88,6 +88,7 @@ protected:
     virtual void				callbackHostedInfoListUpdated( HostedInfo* hostedInfo ) override;
     virtual void				callbackHostedInfoListRemoved( VxGUID& hostOnlineId, EHostType hostType ) override;
     virtual void				callbackHostedInfoListSearchResult( HostedInfo* hostedInfo, VxGUID& hostOnlineId ) override;
+    virtual void				callbackHostedInfoListSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
     void                        announceHostedListUpdated( HostedId& hostedId, GuiHosted* guiHosted );
     void                        announceHostedListRemoved( HostedId& hostedId );
