@@ -39,6 +39,12 @@ HostServerSearchMgr::HostServerSearchMgr( P2PEngine& engine, PluginMgr& pluginMg
 //============================================================================
 void HostServerSearchMgr::updateHostSearchList( EHostType hostType, PktHostInviteAnnounceReq* hostAnn, VxNetIdent* netIdent, VxSktBase* sktBase )
 {
+    if( netIdent->requiresRelay() )
+    {
+        LogModule( eLogHosts, LOG_VERBOSE, "Host %s announce requries open port from %s %s", DescribeHostType( hostType ), netIdent->getOnlineName(), sktBase->describeSktConnection().c_str() );
+        return;
+    }
+
     if( haveHostAnnList( hostType ) && netIdent->getMyOnlineId().isVxGUIDValid() )
     {
         EPluginType pluginType = getSearchPluginType( hostType );

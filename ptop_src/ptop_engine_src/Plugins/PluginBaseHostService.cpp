@@ -117,6 +117,13 @@ void PluginBaseHostService::sendHostAnnounce( void )
         return;
     }
 
+    if( m_Engine.getMyPktAnnounce().requiresRelay() )
+    {
+        VxGUID sessionId;
+        m_Engine.getToGui().toGuiHostAnnounceStatus( getHostType(), sessionId, eHostAnnounceFailRequiresOpenPort, "Announce Host Requires An Open Port" );
+        return;
+    }
+
     if( !m_PktHostInviteIsValid && 
         ( m_Engine.getEngineSettings().getFirewallTestSetting() == eFirewallTestAssumeNoFirewall || // assume no firewall means extern ip should be set
             m_Engine.getNetStatusAccum().isDirectConnectTested() ) ) // isDirectConnectTested means my url should be valid

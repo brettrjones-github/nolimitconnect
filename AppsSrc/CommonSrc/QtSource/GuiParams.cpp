@@ -1373,8 +1373,8 @@ QString GuiParams::describeStatus( EHostAnnounceStatus hostStatus )
         return QObject::tr( "Host Announce Send Request Failed" );
     case eHostAnnounceSuccess:
         return QObject::tr( "Host Announce Success" );
-    case eHostAnnounceFail:
-        return QObject::tr( "Host Announce Failed" );
+    case eHostAnnounceFailRequiresOpenPort:
+        return QObject::tr( "Host Announce Fail (No Open Port)" );
     case eHostAnnounceFailPermission:
         return QObject::tr( "Host Announce Fail Permission" );
     case eHostAnnounceFailConnectDropped:

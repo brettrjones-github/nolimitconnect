@@ -108,7 +108,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 
 	if( pkt->getIsPktAnnReplyRequested() )
 	{
-        LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
+        LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::onPktAnnounce from %s at %s relay %d reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str(), pkt->requiresRelay() );
 		if( !m_NetConnector.sendMyPktAnnounce( pkt->getMyOnlineId(),
 				sktBase,
 				false,

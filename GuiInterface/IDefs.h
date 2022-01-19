@@ -165,6 +165,21 @@ enum EContentCatagory
     eMaxContentCatagory
 };
 
+enum EGroupieViewType
+{
+    eGroupieViewTypeNone,
+    eGroupieViewTypeFriendsOnly,
+    eGroupieViewTypeGroupOnly,
+    eGroupieViewTypeGroupAndFriends,
+    eGroupieViewTypeEverybody,
+    eGroupieViewTypeIgnored,
+    eGroupieViewTypeNearby,
+    eGroupieViewTypeOnline,
+    eGroupieViewTypeDirectConnect,
+
+    eMaxGroupieViewType,
+};
+
 enum EUserViewType
 {
     eUserViewTypeNone,
@@ -271,7 +286,7 @@ enum EHostAnnounceStatus
     eHostAnnounceSendingJoinRequest = 10,
     eHostAnnounceSendJoinRequestFailed = 11,
     eHostAnnounceSuccess = 12,
-    eHostAnnounceFail = 13,
+    eHostAnnounceFailRequiresOpenPort = 13,
     eHostAnnounceFailPermission = 14,
     eHostAnnounceFailConnectDropped = 15,
     eHostAnnounceInvalidParam = 16,
@@ -1048,6 +1063,7 @@ const char * DescribeConnectReason( EConnectReason connectReason );
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
 //! describe friend state
 const char * DescribeFriendState( EFriendState eFriendState );
+const char* DescribeGroupieViewType( EGroupieViewType groupieViewType );
 const char * DescribeHackerLevel( EHackerLevel hackLevel );
 const char * DescribeHackerReason( EHackerReason hackReason );
 //! Host announce status as text

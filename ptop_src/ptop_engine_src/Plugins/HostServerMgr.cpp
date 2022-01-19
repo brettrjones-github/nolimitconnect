@@ -20,6 +20,7 @@
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <ptop_src/ptop_engine_src/UserOnlineMgr/UserOnlineMgr.h>
+#include <ptop_src/ptop_engine_src/UrlMgr/UrlMgr.h>
 
 #include <PktLib/PktsHostInvite.h>
 #include <PktLib/VxCommon.h>
@@ -50,6 +51,14 @@ void HostServerMgr::sendHostAnnounceToNetworkHost( VxGUID& sessionId, PktHostInv
         return;
     }
     
+    url = m_Engine.getUrlMgr().resolveUrl(url);
+
+    if( m_Engine.getMyPktAnnounce().requiresRelay() )
+    {
+        m_Engine.getToGui().toGuiHostAnnounceStatus( hostAnnounce.getHostType(), sessionId, eHostAnnounceFailRequiresOpenPort, "Announce Host Requires An Open Port");
+        return;
+    }
+
     LogModule( eLogHosts, LOG_DEBUG, "sendHostAnnounceToNetworkHost %s", DescribePluginType( m_Plugin.getPluginType() ) );
     addAnnounceSession( sessionId, hostAnnounce.makeHostAnnCopy() );
     connectToHost( eHostTypeNetwork, sessionId, url, connectReason );

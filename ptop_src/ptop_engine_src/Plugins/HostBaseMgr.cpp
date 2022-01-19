@@ -246,7 +246,8 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
 
     if( !url.empty() )
     {
-        VxGUID hostGuid;
+        VxGUID hostGuid = ptopUrl.getOnlineId();
+
         LogModule( eLogHostConnect, LOG_DEBUG, "HostBaseMgr::connectToHost %s url %s reason %s", DescribeHostType( hostType ), url.c_str(), 
                   DescribeConnectReason( connectReason ));
         if( isAnnounceConnectReason( connectReason ) )

@@ -629,6 +629,34 @@ const char * DescribeFriendState( EFriendState eFriendState )
 }
 
 //============================================================================
+const char* DescribeGroupieViewType( EGroupieViewType groupieViewType )
+{
+    switch( groupieViewType )
+    {
+    case eGroupieViewTypeNone:	
+        return "No View Type ";
+    case eGroupieViewTypeFriendsOnly:	
+        return "Friends Only ";
+    case eGroupieViewTypeGroupOnly:	
+        return "Hosted Users Only ";
+    case eGroupieViewTypeGroupAndFriends:		
+        return "Hosted Users And Friends ";
+    case eGroupieViewTypeEverybody:
+        return "Everybody ";
+    case eGroupieViewTypeIgnored:
+        return "Ignored ";
+    case eGroupieViewTypeNearby:
+        return "Nearby ";
+    case eGroupieViewTypeOnline:
+        return "Online ";
+    case eGroupieViewTypeDirectConnect:
+        return "Direct Connect ";
+    default:
+        return "Invalid Group View Type ";
+    }
+}
+
+//============================================================================
 const char * DescribeHackerLevel( EHackerLevel hackLevel )
 {
     if( hackLevel < 0 || eMaxHackerLevel <= hackLevel )
