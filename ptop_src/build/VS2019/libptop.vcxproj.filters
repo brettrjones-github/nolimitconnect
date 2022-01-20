@@ -1469,28 +1469,28 @@
       <Filter>Source Files\WebServer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\config_libgotvptop.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IGoTv.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IDefs.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IFromGui.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IGoTvLib.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\ILog.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IScan.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IToGui.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.h">
       <Filter>Source Files\Plugins</Filter>
@@ -1817,28 +1817,28 @@
       <Filter>Source Files\BaseInfo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\GoTvRenderFrame.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IAudioInterface.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IGoTvEvents.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IGoTvGeometry.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\IGoTvRender.h">
-      <Filter>GuiInterface</Filter>
+      <Filter>Source Files\GuiInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\OsWin32\IWin32.h">
-      <Filter>GuiInterface\OsWin32</Filter>
+      <Filter>Source Files\GuiInterface\OsWin32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\AssetDirectoryList.hh">
-      <Filter>GuiInterface\OsInterface</Filter>
+      <Filter>Source Files\GuiInterface\OsInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GuiInterface\OsInterface\OsInterface.h">
-      <Filter>GuiInterface\OsInterface</Filter>
+      <Filter>Source Files\GuiInterface\OsInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\P2PEngine\VxSktLoopback.h">
       <Filter>Source Files\P2PEngine</Filter>
@@ -2028,26 +2028,8 @@
     <Filter Include="build\Qt">
       <UniqueIdentifier>{7883f807-8169-423d-917d-cdaa181a3534}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GuiInterface">
-      <UniqueIdentifier>{a7d7cf01-9fe8-4738-89a1-b8f9e2826363}</UniqueIdentifier>
-    </Filter>
     <Filter Include="QtBuild">
       <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GuiInterface\OsAndroid">
-      <UniqueIdentifier>{4081e437-7215-437e-991e-b897737cac6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GuiInterface\OsApple">
-      <UniqueIdentifier>{e6bae512-40cb-4671-8f41-a2253a4ad19c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GuiInterface\OsInterface">
-      <UniqueIdentifier>{e837defc-6b40-4d1a-a09c-13ce9d0a5057}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GuiInterface\OsLinux">
-      <UniqueIdentifier>{144cdece-b4b9-416a-80ca-d5870fd2e442}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GuiInterface\OsWin32">
-      <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4ec8ff0d-76a6-4311-89b3-1305b2840f0a}</UniqueIdentifier>
@@ -2147,6 +2129,24 @@
     </Filter>
     <Filter Include="Source Files\GroupieListMgr">
       <UniqueIdentifier>{26198458-8e0f-4ffc-bca9-924f271970a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiInterface">
+      <UniqueIdentifier>{a7d7cf01-9fe8-4738-89a1-b8f9e2826363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiInterface\OsAndroid">
+      <UniqueIdentifier>{4081e437-7215-437e-991e-b897737cac6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiInterface\OsApple">
+      <UniqueIdentifier>{e6bae512-40cb-4671-8f41-a2253a4ad19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiInterface\OsInterface">
+      <UniqueIdentifier>{e837defc-6b40-4d1a-a09c-13ce9d0a5057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiInterface\OsLinux">
+      <UniqueIdentifier>{144cdece-b4b9-416a-80ca-d5870fd2e442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GuiInterface\OsWin32">
+      <UniqueIdentifier>{dc2d9eed-7634-4ff4-9d0f-761341621f86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

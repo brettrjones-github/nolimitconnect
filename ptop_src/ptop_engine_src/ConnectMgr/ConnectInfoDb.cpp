@@ -139,7 +139,7 @@ void ConnectInfoDb::addConnect( ConnectInfo* hostInfo )
         hostInfo->getOfferId(),				
         hostInfo->getOfferState(),
         hostInfo->getOfferModifiedTime(),
-        hostInfo->getHostUrl()
+        hostInfo->getHostUrl().getUrl()
     );
 }
 

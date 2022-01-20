@@ -549,6 +549,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiHostedListWidget.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListSession.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoin.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinCallback.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinList.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinSession.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostSession.h" />
@@ -563,6 +564,7 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUser.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserBase.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoin.h" />
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoinCallback.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoinList.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListItem.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserJoinListWidget.h" />

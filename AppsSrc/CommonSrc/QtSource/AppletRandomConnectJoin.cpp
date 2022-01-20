@@ -66,7 +66,8 @@ AppletRandomConnectJoin::~AppletRandomConnectJoin()
 void AppletRandomConnectJoin::slotJoinDefaultRandomConnect( void )
 {
     VxGUID::generateNewVxGUID( m_JoinSessionId );
-    m_Engine.fromGuiJoinHost( getHostType(), m_JoinSessionId );
+    std::string emptyUrl;
+    m_Engine.fromGuiJoinHost( getHostType(), m_JoinSessionId, emptyUrl );
 }
 
 //============================================================================

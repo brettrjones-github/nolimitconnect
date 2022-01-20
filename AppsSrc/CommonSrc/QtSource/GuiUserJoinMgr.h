@@ -25,6 +25,8 @@
 // client side manager of user join to host service states
 
 class AppCommon;
+class GuiUserJoinCallback;
+class GroupieId;
 
 class GuiUserJoinMgr : public QObject, public UserJoinCallbackInterface
 {
@@ -51,6 +53,8 @@ public:
     GuiUserJoin*                getUserJoin( VxGUID& onlineId );
     std::map<VxGUID, GuiUserJoin*>& getUserJoinList( void )             { return m_UserJoinList; }
     GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
+
+    void                        wantUserJoinCallbacks( GuiUserJoinCallback* client, bool enable );
 
 signals:
     void				        signalMyIdentUpdated( GuiUserJoin* user ); 
@@ -85,7 +89,16 @@ protected:
     virtual void				callbackUserJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userOfferState ) override;
     virtual void				callbackUserJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
 
+    virtual void				announceUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				announceUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				announceUserJoinLeaveHost( GroupieId& groupieId );
+    virtual void				announceUserJoinRemoved( GroupieId& groupieId );
+
+
     AppCommon&                  m_MyApp;
     // map of online id to GuiUserJoin
     std::map<VxGUID, GuiUserJoin*>  m_UserJoinList;
+
+    std::vector<GuiUserJoinCallback*>  m_UserJoinClients;
 };

@@ -29,16 +29,16 @@ PluginRandomConnectClient::PluginRandomConnectClient( P2PEngine& engine, PluginM
     setPluginType( ePluginTypeClientRandomConnect );
 }
 //============================================================================
-void PluginRandomConnectClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginRandomConnectClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : "";
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
     m_HostClientMgr.fromGuiAnnounceHost( hostType, sessionId, url );
 }
 
 //============================================================================
-void PluginRandomConnectClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginRandomConnectClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : "";
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
     m_HostClientMgr.fromGuiJoinHost( hostType, sessionId, url );
 }
 

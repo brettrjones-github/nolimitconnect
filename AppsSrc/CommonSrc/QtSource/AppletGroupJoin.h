@@ -19,10 +19,12 @@
 #include "GuiUserUpdateCallback.h"
 #include "GuiHostedListCallback.h"
 #include "GuiGroupieListCallback.h"
+#include "GuiHostJoinCallback.h"
+#include "GuiUserJoinCallback.h"
 
 class GuiUserListItem;
 
-class AppletGroupJoin : public AppletJoinBase, public GuiUserUpdateCallback, public GuiHostedListCallback, public GuiGroupieListCallback
+class AppletGroupJoin : public AppletJoinBase, public GuiUserUpdateCallback, public GuiHostedListCallback, public GuiGroupieListCallback, public GuiHostJoinCallback, public GuiUserJoinCallback
 {
 	Q_OBJECT
 public:
@@ -43,6 +45,18 @@ public:
 
     virtual void				callbackGuiGroupieListSearchResult( GroupieId& groupieId, GuiGroupie* guiGroupie, VxGUID& sessionId ) override;
     virtual void				callbackGuiGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
+
+    virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+    virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+    virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+    virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId ) override;
+    virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId ) override;
+
+    virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+    virtual void				callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+    virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+    virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId ) override;
+    virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId ) override;
 
 protected slots:
     void                        slotChooseHostModeButtonClick( void );

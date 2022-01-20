@@ -20,7 +20,7 @@
 class ConnectInfo;
 class ConnectCallbackInterface;
 class P2PEngine;
-class VxUrl;
+class VxPtopUrl;
 class VxSktBase;
 
 class ConnectMgr 
@@ -31,7 +31,7 @@ public:
 	virtual ~ConnectMgr() = default;
 
     void                        fromGuiUserLoggedOn( void );
-    bool                        isConnectedToHost( EHostType hostType, VxUrl& hostUrl, VxSktBase*& sktBase );
+    bool                        isConnectedToHost( EHostType hostType, VxPtopUrl& hostUrl, VxSktBase*& sktBase );
 
     void                        addConnectMgrClient( ConnectCallbackInterface * client, bool enable );
 

@@ -72,7 +72,7 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
     connect( ui.m_NearbyInfoButton, SIGNAL( clicked() ), this, SLOT( slotNearbyInfoButtonClicked() ) );
 
     m_MyApp.activityStateChange( this, true );
-    m_UserMgr.wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
+    m_UserMgr.wantGuiUserUpdateCallbacks( this, true );
     onShowFriendList();
 }
 
@@ -80,7 +80,7 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
 AppletFriendListClient::~AppletFriendListClient()
 {
     m_Engine.fromGuiNearbyBroadcastEnable( false );
-    m_UserMgr.wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
+    m_UserMgr.wantGuiUserUpdateCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }
 

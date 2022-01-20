@@ -39,7 +39,7 @@ public:
     std::string                 getHostDescription( void );
 
     void						setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
-    VxGUID&					    getSessionId( void )                        { return m_SessionId; }
+    VxGUID&                     getSessionId( void );
 
     void						setWidget( QWidget* widget )                { m_Widget = widget; }
     QWidget*                    getWidget( void )                           { return m_Widget; }

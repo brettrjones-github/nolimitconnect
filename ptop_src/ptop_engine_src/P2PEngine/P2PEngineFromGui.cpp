@@ -1400,7 +1400,7 @@ bool P2PEngine::fromGuiNearbyBroadcastEnable( bool enable )
 }
 
 //============================================================================
-void P2PEngine::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void P2PEngine::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
     //assureUserSpecificDirIsSet( "P2PEngine::fromGuiAnnounceHost" );
     PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
@@ -1415,13 +1415,13 @@ void P2PEngine::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, cons
 }
 
 //============================================================================
-void P2PEngine::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void P2PEngine::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
     PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
     if( plugin )
     {
-        plugin->fromGuiJoinHost( hostType, sessionId, ptopUrl );
+        plugin->fromGuiJoinHost( hostType, sessionId, hostUrl );
     }
     else
     {
@@ -1438,7 +1438,7 @@ void P2PEngine::fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId
 		PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
 		if( plugin )
 		{
-			plugin->fromGuiJoinHost( hostType, sessionId, hostUrl.c_str() );
+			plugin->fromGuiJoinHost( hostType, sessionId, hostUrl );
 		}
 		else
 		{

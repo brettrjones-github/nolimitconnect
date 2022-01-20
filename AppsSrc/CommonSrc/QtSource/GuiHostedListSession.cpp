@@ -85,6 +85,17 @@ std::string GuiHostedListSession::getHostDescription( void )
 }
 
 //============================================================================
+VxGUID& GuiHostedListSession::getSessionId( void )
+{
+    if( !m_SessionId.isVxGUIDValid() )
+    {
+        m_SessionId.initializeWithNewVxGUID();
+    }
+
+    return m_SessionId; 
+}
+
+//============================================================================
 VxGUID GuiHostedListSession::getHostThumbId( void )
 {
     if( m_GuiHosted && m_GuiHosted->getUser() )

@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "GuiUserJoinMgr.h"
+#include "GuiUserJoinCallback.h"
 #include "AppCommon.h"
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinInfo.h>
 #include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
@@ -302,5 +303,68 @@ void GuiUserJoinMgr::onMyIdentUpdated( GuiUserJoin* user )
     if( isMessengerReady() )
     {
         emit signalMyIdentUpdated( user );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::wantUserJoinCallbacks( GuiUserJoinCallback* client, bool enable )
+{
+    for( auto iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
+    {
+        if( *iter == client )
+        {
+            m_UserJoinClients.erase( iter );
+            break;
+        }
+    }
+
+    if( enable )
+    {
+        m_UserJoinClients.push_back( client );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserJoinRequested( groupieId, guiUserJoin );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserJoinGranted( groupieId, guiUserJoin );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserJoinDenied( groupieId, guiUserJoin );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserJoinLeaveHost( GroupieId& groupieId )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserJoinLeaveHost( groupieId );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserJoinRemoved( GroupieId& groupieId )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserJoinRemoved( groupieId );
     }
 }

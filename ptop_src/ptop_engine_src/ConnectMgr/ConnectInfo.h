@@ -15,7 +15,7 @@
 
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseHostInfo.h>
 
-#include <CoreLib/VxGUID.h>
+#include <CoreLib/VxPtopUrl.h>
 
 #define HOST_FLAG_DEFAULT_HOST			0x0001
 #define HOST_FLAG_IS_TEMP			    0x0002
@@ -41,8 +41,9 @@ public:
     virtual void			    setOfferModifiedTime( uint64_t timeMs )             { m_OfferModMs = timeMs; }
     virtual uint64_t			getOfferModifiedTime( void )                        { return m_OfferModMs; }
 
-    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl = hostUrl; }
-    virtual std::string&	    getHostUrl( void )                                  { return m_HostUrl; }
+    virtual void			    setHostUrl( std::string hostUrl )                   { m_HostUrl.setUrl(hostUrl ); }
+    virtual void			    setHostUrl( VxPtopUrl& hostUrl )                    { m_HostUrl = hostUrl; }
+    virtual VxPtopUrl&	        getHostUrl( void )                                  { return m_HostUrl; }
 
     void						setIsDefaultHost( bool isDefault )	                { if( isDefault ) m_HostFlags |= HOST_FLAG_DEFAULT_HOST; else m_HostFlags &= ~HOST_FLAG_DEFAULT_HOST; }
     bool						isDefaultHost( void )				                { return m_HostFlags & HOST_FLAG_DEFAULT_HOST ? true : false; }
@@ -67,8 +68,7 @@ protected:
     VxGUID                      m_OfferId;
     EOfferState                 m_OfferState{ eOfferStateNone };
     uint64_t			        m_OfferModMs{ 0 };
-    std::string                 m_HostUrl{ "" };
-
+    VxPtopUrl                   m_HostUrl;
 
     // temporaries
     VxGUID                      m_ConnectionId;

@@ -27,6 +27,7 @@
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
+#include <CoreLib/VxPtopUrl.h>
 
 #include <time.h>
 
@@ -60,7 +61,7 @@ void ConnectMgr::fromGuiUserLoggedOn( void )
 }
 
 //============================================================================
-bool ConnectMgr::isConnectedToHost( EHostType hostType, VxUrl& hostUrl, VxSktBase*& sktBase )
+bool ConnectMgr::isConnectedToHost( EHostType hostType, VxPtopUrl& hostUrl, VxSktBase*& sktBase )
 {
     bool isConnected = false;
     if( hostUrl.getOnlineId() == m_Engine.getMyOnlineId() )
@@ -72,7 +73,17 @@ bool ConnectMgr::isConnectedToHost( EHostType hostType, VxUrl& hostUrl, VxSktBas
     else
     {
         // lookup connection
+        lockResources();
+        for( auto iter = m_ConnectInfoList.begin(); iter != m_ConnectInfoList.end(); ++iter )
+        {
+            if( ( *iter )->getHostUrl() == hostUrl.getUrl() )
+            {
+                isConnected = true;
+                break;
+            }
+        }
 
+        unlockResources();
     }
 
     return isConnected;

@@ -515,7 +515,7 @@ void GuiUserMgr::guiUserUpdateClientsUnlock( void )
 }
 
 //============================================================================
-void GuiUserMgr::wantGuiUserMgrGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback )
+void GuiUserMgr::wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback )
 {
     static bool userCallbackShutdownComplete = false;
     if( VxIsAppShuttingDown() )

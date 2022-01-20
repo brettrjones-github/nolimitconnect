@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "GuiHostJoinMgr.h"
+#include "GuiHostJoinCallback.h"
 #include "AppCommon.h"
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinInfo.h>
 #include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
@@ -321,5 +322,68 @@ void GuiHostJoinMgr::joinRejected( GuiHostJoin* hostJoin, EHostType hostType )
     {
         m_MyApp.getEngine().getHostJoinMgr().changeJoinState( hostJoin->getUser()->getMyOnlineId(), HostTypeToHostPlugin( hostType ), eJoinStateJoinDenied );
         emit signalHostJoinUpdated( hostJoin );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::wantHostJoinCallbacks( GuiHostJoinCallback* client, bool enable )
+{
+    for( auto iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
+    {
+        if( *iter == client )
+        {
+            m_HostJoinClients.erase( iter );
+            break;
+        }
+    }
+
+    if( enable )
+    {
+        m_HostJoinClients.push_back( client );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::announceHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    for( auto client : m_HostJoinClients )
+    {
+        client->callbackGuiHostJoinRequested( groupieId, guiHostJoin );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::announceHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    for( auto client : m_HostJoinClients )
+    {
+        client->callbackGuiHostJoinGranted( groupieId, guiHostJoin );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::announceHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    for( auto client : m_HostJoinClients )
+    {
+        client->callbackGuiHostJoinDenied( groupieId, guiHostJoin );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::announceHostJoinLeaveHost( GroupieId& groupieId )
+{
+    for( auto client : m_HostJoinClients )
+    {
+        client->callbackGuiHostJoinLeaveHost( groupieId );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::announceHostJoinRemoved( GroupieId& groupieId )
+{
+    for( auto client : m_HostJoinClients )
+    {
+        client->callbackGuiHostJoinRemoved( groupieId );
     }
 }

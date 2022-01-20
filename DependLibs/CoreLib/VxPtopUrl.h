@@ -39,6 +39,8 @@ public:
 	VxGUID&						getOnlineId( void )							{ return m_OnlineId; }
 	EHostType					getHostType( void )							{ return m_HostType; }
 
+	std::string					stripHost( const std::string& url ) const; // remove suffix invite type if exists
+
 protected:
     std::string					m_Url{ "" };
 	std::string					m_Protocol{ "" };

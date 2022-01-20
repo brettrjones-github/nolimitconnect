@@ -100,7 +100,21 @@ VxPtopUrl& VxPtopUrl::operator = ( const VxPtopUrl& rhs )
 //============================================================================
 bool VxPtopUrl::operator == ( const VxPtopUrl& rhs ) const
 {
-    return m_Url == rhs.m_Url;
+    return m_OnlineId == rhs.m_OnlineId && m_Port == rhs.m_Port && m_Host == rhs.m_Host;
+}
+
+//============================================================================
+std::string VxPtopUrl::stripHost( const std::string& url ) const // remove suffix host type if exists
+{
+    if( url.length() > 32 )
+    {
+        if( url[url.length() - 2] == '!')
+        {
+            return url.substr( 0, url.length() - 1 );
+        }
+    }
+
+    return url;
 }
 
 //============================================================================

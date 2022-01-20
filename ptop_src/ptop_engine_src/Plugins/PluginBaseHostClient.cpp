@@ -29,9 +29,9 @@ PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& plugin
 }
 
 //============================================================================
-void PluginBaseHostClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginBaseHostClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
+    std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
     if( !url.empty() )
     {
         VxGUID hostGuid;
@@ -44,9 +44,9 @@ void PluginBaseHostClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sess
 }
 
 //============================================================================
-void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
+    std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
     if( !url.empty() )
     {
         VxGUID hostGuid;

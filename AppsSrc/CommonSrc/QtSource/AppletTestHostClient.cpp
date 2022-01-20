@@ -42,7 +42,7 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	connect( ui.m_QueryHostedUsersButton, SIGNAL( clicked() ), this, SLOT( slotQueryGroupiesButtonClicked() ) );
 
 	m_MyApp.activityStateChange( this, true );
-	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, true );
+	m_MyApp.getUserMgr().wantGuiUserUpdateCallbacks( this, true );
 	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, true );
 
 	if( ui.m_NetworkHostComboBox->count() )
@@ -59,7 +59,7 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 //============================================================================
 AppletTestHostClient::~AppletTestHostClient()
 {
-	m_MyApp.getUserMgr().wantGuiUserMgrGuiUserUpdateCallbacks( this, false );
+	m_MyApp.getUserMgr().wantGuiUserUpdateCallbacks( this, false );
 	m_MyApp.getHostedListMgr().wantHostedListCallbacks( this, false );
     m_MyApp.activityStateChange( this, false );
 }

@@ -33,16 +33,16 @@ PluginGroupClient::PluginGroupClient( P2PEngine& engine, PluginMgr& pluginMgr, V
 }
 
 //============================================================================
-void PluginGroupClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginGroupClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : "";
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
     m_HostClientMgr.fromGuiAnnounceHost( hostType, sessionId, url );
 }
 
 //============================================================================
-void PluginGroupClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginGroupClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : "";
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
     m_HostClientMgr.fromGuiJoinHost( hostType, sessionId, url );
 }
 

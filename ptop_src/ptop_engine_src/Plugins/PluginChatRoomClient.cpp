@@ -38,16 +38,16 @@ PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& plugin
 }
 
 //============================================================================
-void PluginChatRoomClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginChatRoomClient::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : "";
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
     m_HostClientMgr.fromGuiAnnounceHost( hostType, sessionId, url );
 }
 
 //============================================================================
-void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void PluginChatRoomClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
-    std::string url = ptopUrl ? ptopUrl : "";
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
     m_HostClientMgr.fromGuiJoinHost( hostType, sessionId, url );
 }
 

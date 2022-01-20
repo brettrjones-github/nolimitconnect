@@ -25,6 +25,8 @@
 // hosted side callbacks with client user states
 
 class AppCommon;
+class GuiHostJoinCallback;
+class GroupieId;
 
 class GuiHostJoinMgr : public QObject, public HostJoinCallbackInterface
 {
@@ -54,6 +56,8 @@ public:
 
     void                        joinAccepted( GuiHostJoin* hostJoin, EHostType hostType );
     void                        joinRejected( GuiHostJoin* hostJoin, EHostType hostType );
+
+    void                        wantHostJoinCallbacks( GuiHostJoinCallback* callback, bool wantCallback );
 
 signals:
     void                        signalHostJoinRequestCount( int requestCnt );
@@ -87,6 +91,12 @@ protected:
     virtual void				callbackHostJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) override;
     virtual void				callbackHostJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userHostOfferState ) override;
     virtual void				callbackHostJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
+
+    virtual void				announceHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				announceHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				announceHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				announceHostJoinLeaveHost( GroupieId& groupieId );
+    virtual void				announceHostJoinRemoved( GroupieId& groupieId );
     
     AppCommon&                  m_MyApp;
     // map of online id to GuiHostJoin
@@ -94,4 +104,6 @@ protected:
     GuiHostJoin*                m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
     int                         m_HostRequestCount{ 0 };
+
+    std::vector<GuiHostJoinCallback*>  m_HostJoinClients;
 };

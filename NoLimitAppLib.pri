@@ -214,6 +214,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostedListWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoin.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinCallback.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinMgr.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHostJoinSession.h \
@@ -231,6 +232,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListItem.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserListWidget.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoin.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinCallback.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinListItem.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/GuiUserJoinListWidget.h \

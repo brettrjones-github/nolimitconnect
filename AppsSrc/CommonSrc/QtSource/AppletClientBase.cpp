@@ -34,7 +34,7 @@ void AppletClientBase::onJointButtonClicked( GuiHostSession* hostSession )
         VxGUID::generateNewVxGUID( m_JoinSessionId );
         m_JoinHostType = hostSession->getHostType();
         m_JoinHostUrl = hostSession->getHostUrl();
-        m_Engine.fromGuiJoinHost( m_JoinHostType, m_JoinSessionId, m_JoinHostUrl.c_str() );
+        m_Engine.fromGuiJoinHost( m_JoinHostType, m_JoinSessionId, m_JoinHostUrl );
     }
     else
     {

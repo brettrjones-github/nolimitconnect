@@ -345,15 +345,15 @@ void IGoTv::fromGuiRunIsPortOpenTest( uint16_t port )
 }
 
 //============================================================================
-void IGoTv::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void IGoTv::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
 {
-    getPtoP().fromGuiAnnounceHost( hostType, sessionId, ptopUrl );
+    getPtoP().fromGuiAnnounceHost( hostType, sessionId, hostUrl );
 }
 
 //============================================================================
-void IGoTv::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl )
+void IGoTv::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
 {
-    getPtoP().fromGuiJoinHost( hostType, sessionId, ptopUrl );
+    getPtoP().fromGuiJoinHost( hostType, sessionId, hostUrl );
 }
 
 //============================================================================

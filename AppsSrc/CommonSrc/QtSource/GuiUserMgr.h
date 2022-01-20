@@ -76,7 +76,7 @@ public:
     GuiUser*                    updateMyIdent( VxNetIdent* myIdent );
     GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
-    void                        wantGuiUserMgrGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
+    void                        wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
 signals:
     void				        signalMyIdentUpdated( GuiUser* guiUser );

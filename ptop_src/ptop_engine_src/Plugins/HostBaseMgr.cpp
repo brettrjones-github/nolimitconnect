@@ -110,7 +110,7 @@ EConnectReason HostBaseMgr::getSearchConnectReason( EHostType hostType )
 }
 
 //============================================================================
-void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl )
+void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
     std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
 
@@ -124,7 +124,7 @@ void HostBaseMgr::fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, st
 }
 
 //============================================================================
-void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string ptopUrl )
+void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
     std::string url = ptopUrl.empty() ? m_ConnectionMgr.getDefaultHostUrl( hostType ) : ptopUrl;
     if( url.empty() || hostType == eHostTypeUnknown )
@@ -134,8 +134,8 @@ void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::s
         return;
     }
 
-    VxUrl hostUrl( url );
-    if( hostUrl.hasValidOnlineId() )
+    VxPtopUrl hostUrl( url );
+    if( hostUrl.isValid() )
     {
         VxSktBase* sktBase = nullptr;
         if( m_Engine.getConnectMgr().isConnectedToHost( hostType, hostUrl, sktBase ) )

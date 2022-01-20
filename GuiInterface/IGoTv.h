@@ -501,8 +501,8 @@ public:
     virtual void				fromGuiNetworkLost( void );
     virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
 
-    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
-    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, const char * ptopUrl = nullptr );
+    virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl );
+    virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl );
     virtual void				fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId );
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable );
     virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId );
