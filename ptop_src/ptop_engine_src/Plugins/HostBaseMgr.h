@@ -36,6 +36,9 @@ public:
     HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, PluginBase& pluginBase );
 	virtual ~HostBaseMgr() = default;
 
+    EPluginType                 getPluginType( void );
+    EHostType                   getHostType( void );
+
     //=== hosting ===//
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );

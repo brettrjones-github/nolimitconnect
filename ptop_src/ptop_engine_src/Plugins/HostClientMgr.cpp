@@ -41,7 +41,8 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
         {
             m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinSuccess );
             BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );
-            onUserJoinedHost( sktBase, netIdent, sessionInfo );    
+            GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
+            onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
         }
         else if( ePluginAccessLocked == hostReply->getAccessState() )
         {
@@ -97,11 +98,11 @@ void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr
 }
 
 //============================================================================
-void HostClientMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+void HostClientMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
-    m_ServerList.addGuidIfDoesntExist( netIdent->getMyOnlineId() );
-    m_Engine.getUserJoinMgr().onUserJoinedHost( sktBase, netIdent, sessionInfo );
-    m_Engine.getUserOnlineMgr().onUserJoinedHost( sktBase, netIdent, sessionInfo );
+    m_ServerList.insert( groupieId );
+    m_Engine.getUserJoinMgr().onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
     m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
 }
 
@@ -156,7 +157,8 @@ void HostClientMgr::removeSession( VxGUID& sessionId, EConnectReason connectReas
 //============================================================================
 void HostClientMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
-    m_ServerList.removeGuid( onlineId );
+    GroupieId groupieId( m_Engine.getMyOnlineId(), onlineId, getHostType() );
+    m_ServerList.erase( groupieId );
     removeContact( onlineId );
 }
 

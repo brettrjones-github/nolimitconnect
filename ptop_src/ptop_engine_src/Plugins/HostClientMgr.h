@@ -17,6 +17,9 @@
 
 #include <PktLib/PluginIdList.h>
 #include <PktLib/SearchParams.h>
+#include <PktLib/GroupieId.h>
+
+#include <set>
 
 class BaseSessionInfo;
 class PktHostSearchReply;
@@ -37,7 +40,7 @@ protected:
     virtual void                onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason ) override;
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
-    virtual void                onUserJoinedHost( VxSktBase * sktBase,  VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    virtual void                onUserJoinedHost( GroupieId& groupieId, VxSktBase * sktBase,  VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void                startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual void                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId );
@@ -47,7 +50,7 @@ protected:
     bool                        sendNextPluginSettingRequest( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
 
     VxMutex                     m_ClientMutex;
-    VxGUIDList                  m_ServerList;
+    std::set<GroupieId>         m_ServerList;
     std::map<VxGUID, PluginIdList> m_PluginRxList;
     VxMutex                     m_PluginRxListMutex;
 };

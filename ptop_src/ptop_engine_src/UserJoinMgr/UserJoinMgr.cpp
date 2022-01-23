@@ -179,10 +179,9 @@ void UserJoinMgr::clearUserJoinInfoList( void )
 }
 
 //============================================================================
-void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
-    GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), sessionInfo.getHostType() );
     lockResources();
     UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( !joinInfo )

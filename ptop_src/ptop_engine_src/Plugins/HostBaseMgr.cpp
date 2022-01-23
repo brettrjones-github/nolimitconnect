@@ -47,6 +47,18 @@ HostBaseMgr::HostBaseMgr( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * 
 }
 
 //============================================================================
+EPluginType HostBaseMgr::getPluginType( void )
+{
+    return m_Plugin.getPluginType();
+}
+
+//============================================================================
+EHostType HostBaseMgr::getHostType( void )
+{
+    return PluginTypeToHostType( getPluginType() );
+}
+
+//============================================================================
 EPluginAccess HostBaseMgr::getPluginAccessState( VxNetIdent * netIdent )
 {
     EPluginAccess pluginAccess = ePluginAccessNotSet;

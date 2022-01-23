@@ -42,8 +42,8 @@ public:
 
     void                        addUserJoinMgrClient( UserJoinCallbackInterface * client, bool enable );
 
-    void                        onUserJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
-    void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
     virtual void				announceUserJoinRequested( UserJoinInfo* userHostInfo );

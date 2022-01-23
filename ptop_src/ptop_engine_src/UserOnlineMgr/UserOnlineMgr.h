@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
+#include <PktLib/GroupieId.h>
 
 #include <CoreLib/VxMutex.h>
 
@@ -21,7 +21,6 @@ class BaseSessionInfo;
 class P2PEngine;
 class User;
 class UserOnlineCallbackInterface;
-class VxGUID;
 class VxSktBase;
 class VxNetIdent;
 
@@ -44,12 +43,14 @@ public:
     void                        onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onHostJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
     User*                       findUser( VxGUID& onlineId );
 
 protected:
     void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    void                        updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void				announceUserOnlineAdded( User* userJoinInfo, BaseSessionInfo& sessionInfo );
     virtual void				announceUserOnlineUpdated( User* userJoinInfo, BaseSessionInfo& sessionInfo );
