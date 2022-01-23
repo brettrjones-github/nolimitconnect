@@ -37,8 +37,8 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ANNOUNCE ]							= &PktHandlerBase::onPktAnnounce;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ANN_LIST ]							= &PktHandlerBase::onPktAnnList;
 
-	m_aBaseSysPktFuncTable[ PKT_TYPE_LOG_REQ ]							= &PktHandlerBase::onPktLogReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_LOG_REPLY ]						= &PktHandlerBase::onPktLogReply;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_UNJOIN_REQ ]							= &PktHandlerBase::onPktHostUnjoinReq;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_UNJOIN_REPLY ]						= &PktHandlerBase::onPktHostUnjoinReply;
 	// 5 ( 0x05 )
 	m_aBaseSysPktFuncTable[PKT_TYPE_SCAN_REQ]							= &PktHandlerBase::onPktScanReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_SCAN_REPLY]							= &PktHandlerBase::onPktScanReply;
@@ -555,13 +555,13 @@ void PktHandlerBase::onPktAnnList( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }	
 
 //============================================================================
-void PktHandlerBase::onPktLogReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostUnjoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	
 
 //============================================================================
-void PktHandlerBase::onPktLogReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void PktHandlerBase::onPktHostUnjoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }	

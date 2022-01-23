@@ -32,6 +32,7 @@ public:
 
     virtual void				setPluginType( EPluginType hostType )           { m_PluginType = hostType; }
     virtual EPluginType			getPluginType( void )                           { return m_PluginType; }
+    virtual EHostType			getHostType( void )                             { return PluginTypeToHostType( m_PluginType ); }
 
     virtual void				setOnlineId( VxGUID onlineId )                  { m_OnlineId = onlineId; }
     virtual void				setOnlineId( const char * onlineId )            { m_OnlineId.fromVxGUIDHexString( onlineId ); }

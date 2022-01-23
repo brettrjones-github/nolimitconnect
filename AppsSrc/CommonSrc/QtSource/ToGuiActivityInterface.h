@@ -43,7 +43,7 @@ public:
     virtual void				toGuiContactAdded( void * callbackData, VxNetIdent * netIdent ){}; 
     virtual void				toGuiContactRemoved( void * callbackData, VxGUID& onlineId ) {}; 
 
-	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent, EHostType hostType, bool newContact ){}; 
+	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * netIdent ){}; 
 	virtual void				toGuiContactOffline( void * callbackData, GuiUser * netIdent ){}; 
     virtual void				toGuiContactNameChange( void * callbackData, GuiUser * netIdent ){}; 
     virtual void				toGuiContactDescChange( void * callbackData, GuiUser * netIdent ){}; 

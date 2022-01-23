@@ -193,7 +193,7 @@ GuiHosted* GuiHostedListMgr::updateHosted( VxNetIdent* hisIdent, EHostType hostT
 
     HostedId hostTypeId( hisIdent->getMyOnlineId(), hostType );
     GuiHosted* guiHosted = findHosted( hisIdent->getMyOnlineId(), hostType );
-    GuiUser * user = m_MyApp.getUserMgr().updateUser( hisIdent, hostType );
+    GuiUser * user = m_MyApp.getUserMgr().updateUser( hisIdent );
     if( user )
     {
         if( guiHosted && guiHosted->getUser()->getMyOnlineId() == hisIdent->getMyOnlineId() )

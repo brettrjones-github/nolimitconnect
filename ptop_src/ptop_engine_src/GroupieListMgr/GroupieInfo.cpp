@@ -23,18 +23,14 @@
 
 //============================================================================
 GroupieInfo::GroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& groupieUrl )
-    : m_HostType( hostType )
-    , m_GroupieOnlineId( groupieOnlineId )
-    , m_HostOnlineId( hostOnlineId )
+    : m_GroupieId( groupieOnlineId, hostOnlineId, hostType )
     , m_GroupieUrl( groupieUrl )
 {
 }
 
 //============================================================================
 GroupieInfo::GroupieInfo( GroupieId& groupieId, std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t timeModified )
-    : m_HostType( groupieId.getHostType() )
-    , m_GroupieOnlineId( groupieId.getGroupieOnlineId() )
-    , m_HostOnlineId( groupieId.getHostOnlineId() )
+    : m_GroupieId( groupieId )
     , m_GroupieInfoTimestampMs( timeModified )
     , m_GroupieUrl( groupieUrl )
     , m_GroupieTitle( groupieTitle )
@@ -44,9 +40,7 @@ GroupieInfo::GroupieInfo( GroupieId& groupieId, std::string& groupieUrl, std::st
 
 //============================================================================
 GroupieInfo::GroupieInfo( const GroupieInfo& rhs )
-    : m_HostType( rhs.m_HostType )
-    , m_GroupieOnlineId( rhs.m_GroupieOnlineId )
-    , m_HostOnlineId( rhs.m_HostOnlineId )
+    : m_GroupieId( rhs.m_GroupieId )
     , m_ConnectedTimestampMs( rhs.m_ConnectedTimestampMs )
     , m_JoinedTimestampMs( rhs.m_JoinedTimestampMs )
     , m_GroupieInfoTimestampMs( rhs.m_GroupieInfoTimestampMs )
@@ -62,9 +56,7 @@ GroupieInfo& GroupieInfo::operator=( const GroupieInfo& rhs )
 {	
 	if( this != &rhs )
 	{
-        m_HostType = rhs.m_HostType;
-        m_GroupieOnlineId = rhs.m_GroupieOnlineId;
-        m_HostOnlineId = rhs.m_HostOnlineId;
+        m_GroupieId = rhs.m_GroupieId;
         m_ConnectedTimestampMs = rhs.m_ConnectedTimestampMs;
         m_JoinedTimestampMs = rhs.m_JoinedTimestampMs;
         m_GroupieInfoTimestampMs = rhs.m_GroupieInfoTimestampMs;
@@ -153,7 +145,7 @@ bool GroupieInfo::fillFromGroupie( PktGroupieAnnounceReq* hostAnn )
         if( hostUrl.isValid() && hostTimestampMs && !hostTitle.empty() && !hostDesc.empty() )
         {
             setGroupieOnlineId( hostUrl.getOnlineId() );
-            setHostOnlineId( hostUrl.getOnlineId() );
+            setHostedOnlineId( hostUrl.getOnlineId() );
             setHostType( hostAnn->getHostType() );
             setGroupieUrl( hostInviteUrl );
             setGroupieTitle( hostTitle );
@@ -177,15 +169,14 @@ bool GroupieInfo::fillFromGroupie( PktGroupieAnnounceReq* hostAnn )
 //============================================================================
 bool GroupieInfo::isGroupieValid( void )
 {
-    return eHostTypeUnknown != getHostType() && m_HostOnlineId.isVxGUIDValid() && m_GroupieOnlineId.isVxGUIDValid() && 
+    return m_GroupieId.isValid() && 
         m_GroupieInfoTimestampMs && !m_GroupieUrl.empty() && !m_GroupieTitle.empty() && !m_GroupieDesc.empty();
 }
 
 //============================================================================
 bool GroupieInfo::isIdMatch( GroupieId& groupieId )
 {
-    return m_HostType == groupieId.getHostType() && m_GroupieOnlineId == groupieId.getGroupieOnlineId() &&
-        m_HostOnlineId == groupieId.getHostOnlineId();
+    return m_GroupieId == groupieId;
 }
 
 //============================================================================

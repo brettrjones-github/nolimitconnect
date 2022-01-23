@@ -418,6 +418,7 @@ enum EJoinState
     eJoinStateJoinRequested,
     eJoinStateJoinAccepted,
     eJoinStateJoinDenied,
+    eJoinStateJoinLeaveHost,
 
     eMaxJoinState	
 };

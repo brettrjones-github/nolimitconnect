@@ -187,8 +187,6 @@
     <ClInclude Include="..\..\PktChatReq.h" />
     <ClInclude Include="..\..\PktDebugHelpers.h" />
     <ClInclude Include="..\..\PktHostAnnounce.h" />
-    <ClInclude Include="..\..\PktLogReply.h" />
-    <ClInclude Include="..\..\PktLogReq.h" />
     <ClInclude Include="..\..\PktPluginHandlerBase.h" />
     <ClInclude Include="..\..\PktRequestErrors.h" />
     <ClInclude Include="..\..\PktsAssetXfer.h" />
@@ -249,8 +247,6 @@
     <ClCompile Include="..\..\PktChatReq.cpp" />
     <ClCompile Include="..\..\PktDebugHelpers.cpp" />
     <ClCompile Include="..\..\PktHostAnnounce.cpp" />
-    <ClCompile Include="..\..\PktLogReply.cpp" />
-    <ClCompile Include="..\..\PktLogReq.cpp" />
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp" />
     <ClCompile Include="..\..\PktsAssetXfer.cpp" />
     <ClCompile Include="..\..\PktsBaseXfer.cpp" />

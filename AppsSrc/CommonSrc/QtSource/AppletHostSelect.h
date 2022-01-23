@@ -19,6 +19,7 @@
 
 class GuiHostJoin;
 class GuiHostJoinMgr;
+class GroupieId;
 
 class AppletHostSelect : public AppletBase
 {
@@ -31,10 +32,10 @@ signals:
 	void                        signalGroupHostSelected( QString hostUrl );
 
 protected slots:
-	void				        slotHostJoinRequested( GuiHostJoin* user );
-	void				        slotlHostJoinUpdated( GuiHostJoin* user );
-	void				        slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType );
-	void                        slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
+	void				        slotHostJoinRequested( GuiHostJoin* guiHostJoin );
+	void				        slotlHostJoinUpdated( GuiHostJoin* guiHostJoin );
+	void				        slotHostJoinRemoved( GroupieId& groupieId );
+	void                        slotHostJoinOfferStateChange( GroupieId& groupieId, EJoinState hostOfferState );
 	void                        slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline );
 
 	void                        slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem );
@@ -45,7 +46,7 @@ protected slots:
 
 protected:
 	void						updateJoinList( void );
-	void						updateHostJoinRequest( GuiHostJoin* user );
+	void						updateHostJoinRequest( GuiHostJoin* guiHostJoin );
 
 	//=== vars ===//
 	Ui::AppletHostSelectUi		ui;

@@ -126,9 +126,9 @@ void IGoTv::toGuiHostJoinStatus( EHostType hostType, VxGUID& sessionId, EHostJoi
 }
 
 //============================================================================
-void IGoTv::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline )
+void IGoTv::toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline )
 {
-    getAppCommon().toGuiUserOnlineStatus( hostType, netIdent, sessionId, isOnline );
+    getAppCommon().toGuiUserOnlineStatus( netIdent, isOnline );
 }
 
 //============================================================================
@@ -210,9 +210,9 @@ void IGoTv::toGuiContactRemoved( VxGUID& onlineId )
 }
 
 //============================================================================
-void IGoTv::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact )
+void IGoTv::toGuiContactOnline( VxNetIdent * netIdent )
 {
-    getAppCommon().toGuiContactOnline( netIdent, hostType, newContact );
+    getAppCommon().toGuiContactOnline( netIdent );
 }
 
 //============================================================================

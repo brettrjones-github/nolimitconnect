@@ -103,13 +103,13 @@ void HostJoinRequestListItem::onIdentMenuButtonClicked( void )
 void HostJoinRequestListItem::updateWidgetFromInfo( void )
 {
     GuiHostJoinSession* hostSession = getHostSession();
-    if( !hostSession || !hostSession->getUserIdent() )
+    if( !hostSession || !hostSession->getGuiUser() )
     {
         LogMsg( LOG_ERROR, "HostJoinRequestListItem::updateWidgetFromInfo null ident" );
         return;
     }
 
-    GuiHostJoin* hostIdent = hostSession->getUserIdent();
+    GuiHostJoin* hostIdent = hostSession->getHostJoin();
     if( hostIdent )
     {
         updateIdentity( hostIdent );

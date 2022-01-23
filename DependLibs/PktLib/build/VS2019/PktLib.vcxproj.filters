@@ -22,12 +22,6 @@
     <ClInclude Include="..\..\PktDebugHelpers.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\PktLogReply.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\PktLogReq.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\PktPluginHandlerBase.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -202,12 +196,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktDebugHelpers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PktLogReply.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PktLogReq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp">

@@ -16,7 +16,8 @@
 #include <GuiInterface/IDefs.h>
 
 #include <CoreLib/DbBase.h>
-#include <CoreLib/VxGUID.h>
+#include <PktLib/GroupieId.h>
+#include <map>
 
 class P2PEngine;
 class UserJoinInfo;
@@ -32,17 +33,16 @@ public:
     bool						userJoinInfoDbShutdown( void );
 
     bool						addUserJoin( UserJoinInfo * hostInfo );
-    void						removeUserJoin( VxGUID& onlineId, EPluginType pluginType );
+    void						removeUserJoin( GroupieId& groupieId );
 
-    void						getAllUserJoins( std::vector<UserJoinInfo*>& userHostList );
+    void						getAllUserJoins( std::map<GroupieId, UserJoinInfo*>& userHostList );
     void						purgeAllUserJoins( void ); 
 
 protected:
 
-    bool						addUserJoin(    VxGUID&			onlineId, 
+    bool						addUserJoin(    GroupieId&      groupieId,
                                                 VxGUID&			thumbId,
-                                                uint64_t		infoModTime,
-                                                EPluginType     pluginType,                                       
+                                                uint64_t		infoModTime,                                    
                                                 EJoinState      joinState,
                                                 uint64_t		lastConnectMs,
                                                 uint64_t		lastJoinMs,
@@ -53,7 +53,7 @@ protected:
 
     virtual RCODE				onCreateTables( int iDbVersion );
     virtual RCODE				onDeleteTables( int iOldVersion );
-    void						insertUserJoinInTimeOrder( UserJoinInfo * hostInfo, std::vector<UserJoinInfo*>& assetList );
+    void						insertUserJoinInTimeOrder( UserJoinInfo * hostInfo, std::map<GroupieId, UserJoinInfo*>& assetList );
 
     P2PEngine&					m_Engine;
     UserJoinMgr&				m_UserJoinMgr;

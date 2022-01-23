@@ -28,12 +28,13 @@ public:
 
 	GuiGroupieListSession&		operator =( const GuiGroupieListSession &rhs );
 
+    GuiUser*                    getUserIdent( void )                        { return m_GuiGroupie ? m_GuiGroupie->getUser() : nullptr; }
+
     GroupieId&                  getGroupieId( void )                        { return m_GroupieId; }
     GuiGroupie*                 getGroupie( void )                          { return m_GuiGroupie; }
-    GuiUser*                    getUserIdent( void )                        { return m_GuiGroupie ? m_GuiGroupie->getUser() : nullptr; }
-    EHostType                   getHostType( void )                         { return m_GroupieId.getHostType(); }
     VxGUID&					    getGroupieOnlineId( void )                  { return m_GroupieId.getGroupieOnlineId(); }
-    VxGUID&                     getHostOnlineId( void )                     { return m_GroupieId.getHostOnlineId(); }
+    VxGUID&                     getHostedOnlineId( void )                   { return m_GroupieId.getHostedOnlineId(); }
+    EHostType                   getHostType( void )                         { return m_GroupieId.getHostType(); }
 
     std::string                 getGroupieUrl( void );
     std::string                 getGroupieTitle( void );

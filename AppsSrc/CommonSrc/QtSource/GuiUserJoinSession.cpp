@@ -23,30 +23,28 @@ GuiUserJoinSession::GuiUserJoinSession( QWidget* parent )
 }
 
 //============================================================================
-GuiUserJoinSession::GuiUserJoinSession( GuiUserJoin* hostIdent, QWidget* parent )
+GuiUserJoinSession::GuiUserJoinSession( GuiUserJoin* guiUserJoin, QWidget* parent )
     : QWidget( parent )
-    , m_UserJoin( hostIdent )
+    , m_GroupieId( guiUserJoin->getGroupieId() )
+    , m_GuiUserJoin( guiUserJoin )
 {
-    setUserJoin( m_UserJoin );
 }
 
 //============================================================================
-GuiUserJoinSession::GuiUserJoinSession( EHostType hostType, VxGUID& sessionId, GuiUserJoin* hostIdent, QWidget* parent )
+GuiUserJoinSession::GuiUserJoinSession( VxGUID& sessionId, GuiUserJoin* guiUserJoin, QWidget* parent )
     : QWidget( parent )
-    , m_HostType( hostType )
-    , m_UserJoin( hostIdent )
+    , m_GroupieId( guiUserJoin->getGroupieId() )
+    , m_GuiUserJoin( guiUserJoin )
     , m_SessionId( sessionId )
 {
-    setUserJoin( m_UserJoin );
 }
 
 //============================================================================
 GuiUserJoinSession::GuiUserJoinSession( const GuiUserJoinSession &rhs )
     : QWidget()
-    , m_HostType( rhs.m_HostType )
-    , m_UserJoin( rhs.m_UserJoin )
+    , m_GroupieId( rhs.m_GroupieId )
+    , m_GuiUserJoin( rhs.m_GuiUserJoin )
     , m_SessionId( rhs.m_SessionId )
-    , m_OnlineId( rhs.m_OnlineId )
 {
 }
 
@@ -55,27 +53,20 @@ GuiUserJoinSession& GuiUserJoinSession::operator =( const GuiUserJoinSession &rh
 {
 	if( this != &rhs )   
 	{
-        m_HostType		        = rhs.m_HostType;
+        m_GroupieId             = rhs.m_GroupieId;
         m_SessionId				= rhs.m_SessionId;
-        m_UserJoin		        = rhs.m_UserJoin;
-        m_OnlineId		        = rhs.m_OnlineId;
+        m_GuiUserJoin           = rhs.m_GuiUserJoin;
 	}
 
 	return *this;
 }
 
 //============================================================================
-std::string GuiUserJoinSession::getOnlineName( void )
-{ 
-    return m_UserJoin ? m_UserJoin->getUser()->getOnlineName() : ""; 
-}
-
-//============================================================================
 bool GuiUserJoinSession::setIsOnline( bool isOnline )
 {
-    if( m_UserJoin && m_UserJoin->isOnline() != isOnline )
+    if( m_GuiUserJoin && m_GuiUserJoin->isOnline() != isOnline )
     {
-        m_UserJoin->setOnlineStatus( isOnline );
+        m_GuiUserJoin->setOnlineStatus( isOnline );
         return true;
     }
 
@@ -83,11 +74,27 @@ bool GuiUserJoinSession::setIsOnline( bool isOnline )
 }
 
 //============================================================================
-void GuiUserJoinSession::setUserJoin( GuiUserJoin* user )
+void GuiUserJoinSession::setUserJoin( GuiUserJoin* guiUserJoin )
 { 
-    m_UserJoin = user; 
-    if( m_UserJoin )
+    m_GuiUserJoin = guiUserJoin;
+    if( m_GuiUserJoin )
     {
-        m_OnlineId = m_UserJoin->getUser()->getMyOnlineId();
+        m_GroupieId = guiUserJoin->getGroupieId();
     }
+    else
+    {
+        m_GroupieId.clear();
+    }
+}
+
+//============================================================================
+GuiUser* GuiUserJoinSession::getGuiUser( void )
+{
+    return m_GuiUserJoin ? m_GuiUserJoin->getUser() : nullptr;
+}
+
+//============================================================================
+EHostType GuiUserJoinSession::getHostType( void )
+{ 
+    return m_GroupieId.getHostType(); 
 }

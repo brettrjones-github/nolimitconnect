@@ -45,7 +45,7 @@ public:
 
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override; 
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact ) override; 
+    virtual void				toGuiContactOnline( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override; 
     virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override; 
@@ -57,7 +57,7 @@ public:
     virtual void				toGuiUpdateMyIdent( VxNetIdent* netIdent ) override;
     virtual void				toGuiSaveMyIdent( VxNetIdent * netIdent ) override; 
 
-    virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* hostIdent, VxGUID& sessionId, bool isOnline );
+    virtual void				toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline );
 
     bool                        isUserInSession( VxGUID& onlineId );
     void                        setUserOffline( VxGUID& onlineId );
@@ -74,7 +74,7 @@ public:
     std::map<VxGUID, GuiUser*>& getUserList( void )             { return m_UserList; }
 
     GuiUser*                    updateMyIdent( VxNetIdent* myIdent );
-    GuiUser*                    updateUser( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
+    GuiUser*                    updateUser( VxNetIdent* hisIdent );
 
     void                        wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
@@ -90,19 +90,19 @@ signals:
     void				        signalInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
     void				        signalInternalIndentListRemove( EUserViewType listType, VxGUID onlineId );
 
-    void                        signalInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
+    void                        signalInternalUpdateUser( VxNetIdent* netIdent );
     void                        signalInternalSaveMyIdent( VxNetIdent* netIdent );
     void                        signalInternalUserRemoved( VxGUID onlineId );
-    void                        signalInternalUserOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
+    void                        signalInternalUserOnlineStatus( VxNetIdent* netIdent, bool online );
 
 private slots:
     void				        slotInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
     void				        slotInternalIndentListRemove( EUserViewType listType, VxGUID onlineId );
 
-    void                        slotInternalUpdateUser( VxNetIdent* netIdent, EHostType hostType );
+    void                        slotInternalUpdateUser( VxNetIdent* netIdent );
     void                        slotInternalSaveMyIdent( VxNetIdent* netIdent );
     void                        slotInternalUserRemoved( VxGUID onlineId );
-    void                        slotInternalUserOnlineStatus( VxNetIdent* netIdent, EHostType hostType, bool online );
+    void                        slotInternalUserOnlineStatus( VxNetIdent* netIdent, bool online );
 
 protected:
     void                        removeUser( VxGUID& onlineId );

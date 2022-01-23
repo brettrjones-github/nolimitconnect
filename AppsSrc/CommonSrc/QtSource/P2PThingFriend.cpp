@@ -135,7 +135,7 @@ void AppCommon::toGuiContactOffline( VxNetIdent * netIdent )
 
 //============================================================================
 //! called when friend goes online
-void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact )
+void AppCommon::toGuiContactOnline( VxNetIdent * netIdent )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -144,14 +144,14 @@ void AppCommon::toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, b
 
     if( netIdent )
     {
-        LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOnline user %s host type %s", netIdent->getOnlineName(), DescribeHostType( hostType ) );
+        LogMsg( LOG_VERBOSE, "AppCommon::toGuiContactOnline user %s", netIdent->getOnlineName() );
 
         toGuiActivityClientsLock();
         std::vector<ToGuiActivityClient>::iterator iter;
         for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
         {
             ToGuiActivityClient& client = *iter;
-            client.m_Callback->toGuiContactOnline( client.m_UserData, netIdent, hostType, newContact );
+            client.m_Callback->toGuiContactOnline( client.m_UserData, netIdent );
         }
 
         toGuiActivityClientsUnlock();

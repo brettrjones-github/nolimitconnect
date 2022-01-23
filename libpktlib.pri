@@ -13,8 +13,6 @@ HEADERS += 	$$PWD/DependLibs/PktLib/GroupieId.h \
     $$PWD/DependLibs/PktLib/PktsHostInfo.h \
     $$PWD/DependLibs/PktLib/PktsHostInvite.h \
 	$$PWD/DependLibs/PktLib/PktsHostSearch.h \
-    $$PWD/DependLibs/PktLib/PktLogReply.h \
-    $$PWD/DependLibs/PktLib/PktLogReq.h \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.h \
 	$$PWD/DependLibs/PktLib/PktsOfferXfer.h \
 	$$PWD/DependLibs/PktLib/PktsPing.h \
@@ -73,8 +71,6 @@ SOURCES += 	$$PWD/DependLibs/PktLib/GroupieId.cpp \
     $$PWD/DependLibs/PktLib/PktChatReq.cpp \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.cpp \
     $$PWD/DependLibs/PktLib/PktHostAnnounce.cpp \
-    $$PWD/DependLibs/PktLib/PktLogReply.cpp \
-    $$PWD/DependLibs/PktLib/PktLogReq.cpp \
 	$$PWD/DependLibs/PktLib/PktsOfferXfer.cpp \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.cpp \
     $$PWD/DependLibs/PktLib/PktSysHandlerBase.cpp \

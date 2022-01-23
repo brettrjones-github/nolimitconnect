@@ -87,7 +87,7 @@ void GroupieListDb::getAllGroupies( std::vector<GroupieInfo>& groupieList )
 			GroupieInfo hostInfo;
 
 			hostInfo.getGroupieOnlineId().fromVxGUIDHexString( cursor->getString( COLUMN_IDX_GROUPIE_ONLINE_ID ) );
-			hostInfo.getHostOnlineId().fromVxGUIDHexString( cursor->getString( COLUMN_IDX_HOST_ONLINE_ID ) );
+			hostInfo.getHostedOnlineId().fromVxGUIDHexString( cursor->getString( COLUMN_IDX_HOST_ONLINE_ID ) );
 			hostInfo.setHostType( (EHostType)cursor->getS32( COLUMN_IDX_HOST_TYPE ) );
 			hostInfo.setGroupieUrl( cursor->getString( COLUMN_IDX_HOST_URL ) );
 			hostInfo.setGroupieTitle( cursor->getString( COLUMN_IDX_HOST_TITLE ) );
@@ -104,6 +104,12 @@ void GroupieListDb::getAllGroupies( std::vector<GroupieInfo>& groupieList )
 	}
 
 	unlockDb();
+}
+
+//============================================================================
+void GroupieListDb::removeGroupieInfo( GroupieId& groupieId )
+{
+	removeGroupieInfo( groupieId.getGroupieOnlineId(), groupieId.getHostedOnlineId(), groupieId.getHostType() );
 }
 
 //============================================================================
@@ -155,6 +161,12 @@ bool GroupieListDb::doesGroupieInfoExist( VxGUID& groupieOnlineId, VxGUID& hostO
 }
 
 //============================================================================
+bool GroupieListDb::updateIsFavorite( GroupieId& groupieId, bool isFavorite )
+{
+	return updateIsFavorite( groupieId.getGroupieOnlineId(), groupieId.getHostedOnlineId(), groupieId.getHostType(), isFavorite );
+}
+
+//============================================================================
 bool GroupieListDb::updateIsFavorite( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, bool isFavorite )
 {
 	std::string groupieOnlineHexStr;
@@ -174,6 +186,12 @@ bool GroupieListDb::updateIsFavorite( VxGUID& groupieOnlineId, VxGUID& hostOnlin
 	}
 
 	return result;
+}
+
+//============================================================================
+bool GroupieListDb::updateLastConnected( GroupieId& groupieId, int64_t lastConnectedTime )
+{
+	return updateLastConnected( groupieId.getGroupieOnlineId(), groupieId.getHostedOnlineId(), groupieId.getHostType(), lastConnectedTime );
 }
 
 //============================================================================
@@ -199,6 +217,12 @@ bool GroupieListDb::updateLastConnected( VxGUID& groupieOnlineId, VxGUID& hostOn
 }
 
 //============================================================================
+bool GroupieListDb::updateLastJoined( GroupieId& groupieId, int64_t lastJoinedTime )
+{
+	return updateLastJoined( groupieId.getGroupieOnlineId(), groupieId.getHostedOnlineId(), groupieId.getHostType(), lastJoinedTime );
+}
+
+//============================================================================
 bool GroupieListDb::updateLastJoined( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, int64_t lastJoinedTime )
 {
 	std::string groupieOnlineHexStr;
@@ -221,6 +245,12 @@ bool GroupieListDb::updateLastJoined( VxGUID& groupieOnlineId, VxGUID& hostOnlin
 }
 
 //============================================================================
+bool GroupieListDb::updateGroupieUrl( GroupieId& groupieId, std::string& hostUrl )
+{
+	return updateGroupieUrl( groupieId.getGroupieOnlineId(), groupieId.getHostedOnlineId(), groupieId.getHostType(), hostUrl );
+}
+
+//============================================================================
 bool GroupieListDb::updateGroupieUrl( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType, std::string& hostUrl )
 {
 	std::string groupieOnlineHexStr;
@@ -240,6 +270,12 @@ bool GroupieListDb::updateGroupieUrl( VxGUID& groupieOnlineId, VxGUID& hostOnlin
 	}
 
 	return result;
+}
+
+//============================================================================
+bool GroupieListDb::updateGroupieTitleAndDescription( GroupieId& groupieId, std::string& title, std::string& description, int64_t lastDescUpdateTime )
+{
+	return updateGroupieTitleAndDescription( groupieId.getGroupieOnlineId(), groupieId.getHostedOnlineId(), groupieId.getHostType(), title, description, lastDescUpdateTime );
 }
 
 //============================================================================
@@ -271,20 +307,20 @@ bool GroupieListDb::updateGroupieTitleAndDescription( VxGUID& groupieOnlineId, V
 bool GroupieListDb::saveGroupie( GroupieInfo& hostedInfo )
 {
 	std::string groupieOnlineId;
-	if( !hostedInfo.getGroupieOnlineId().isVxGUIDValid() || !hostedInfo.getGroupieOnlineId().toHexString( groupieOnlineId ) )
+	if( !hostedInfo.getGroupieId().isValid() || !hostedInfo.getGroupieOnlineId().toHexString( groupieOnlineId ) )
 	{
 		LogMsg( LOG_ERROR, "ERROR: GroupieListDb::saveGroupie INVALID ONLINE ID" );
 		return false;
 	}
 
 	std::string hostOnlineId;
-	if( !hostedInfo.getHostOnlineId().isVxGUIDValid() || !hostedInfo.getHostOnlineId().toHexString( hostOnlineId ) )
+	if( !hostedInfo.getHostedOnlineId().toHexString( hostOnlineId ) )
 	{
-		LogMsg( LOG_ERROR, "ERROR: GroupieListDb::saveGroupie INVALID ONLINE ID" );
+		LogMsg( LOG_ERROR, "ERROR: GroupieListDb::saveGroupie INVALID HOSTED ID" );
 		return false;
 	}
 
-	removeGroupieInfo( hostedInfo.getGroupieOnlineId(), hostedInfo.getHostOnlineId(), hostedInfo.getHostType() );
+	removeGroupieInfo( hostedInfo.getGroupieId() );
 
 	m_DbMutex.lock(); // make thread safe
 

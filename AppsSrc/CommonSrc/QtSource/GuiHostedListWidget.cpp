@@ -393,3 +393,39 @@ void GuiHostedListWidget::onConnectButtonClicked( GuiHostedListItem* hostItem )
         emit signalConnectButtonClicked( hostSession, hostItem );
     }
 }
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinRequested" );
+    HostedId hostedId = groupieId.getHostedId();
+    GuiHostedListItem* listItem = findListItemWidgetByHostId( hostedId );
+    if( listItem && listItem->getHostSession() )
+    {
+        listItem->setJoinedState( guiHostJoin->getJoinState() );
+    }
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinGranted" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinDenied" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinLeaveHost" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiHostJoinRemoved( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinRemoved" );
+}

@@ -40,6 +40,8 @@ public:
     bool                        addToBlob( PktBlobEntry& blob );
     bool                        extractFromBlob( PktBlobEntry& blob );
 
+    bool						setHostedId( VxGUID& onlineId, EHostType hostType ) { m_OnlineId = onlineId; setHostType( hostType ); return isValid(); }
+
     void						setOnlineId( VxGUID& onlineId )             { m_OnlineId = onlineId; }
     VxGUID&					    getOnlineId( void )                         { return m_OnlineId; }
 
@@ -54,6 +56,7 @@ public:
     std::string                 describeHostedId( void ) const;
 
     bool                        isValid( void )                             { return eHostTypeUnknown != m_HostType && m_OnlineId.isVxGUIDValid(); }
+    void                        clear( void )                               { m_OnlineId.clearVxGUID(); m_HostType = 0; }
 
 protected:
 	//=== vars ===//

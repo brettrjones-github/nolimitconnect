@@ -87,8 +87,8 @@ public:
 	virtual void				onPktAnnounce				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktAnnList				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
-	virtual void				onPktLogReq					( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktLogReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktHostUnjoinReq					( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+	virtual void				onPktHostUnjoinReply				( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 
 	virtual void				onPktRelayServiceReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
 	virtual void				onPktRelayServiceReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

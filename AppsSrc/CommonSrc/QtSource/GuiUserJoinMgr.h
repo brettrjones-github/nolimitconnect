@@ -20,13 +20,14 @@
 
 #include <CoreLib/VxMutex.h>
 
+#include <PktLib/GroupieId.h>
+
 #include <QObject>
 
 // client side manager of user join to host service states
 
 class AppCommon;
 class GuiUserJoinCallback;
-class GroupieId;
 
 class GuiUserJoinMgr : public QObject, public UserJoinCallbackInterface
 {
@@ -41,53 +42,53 @@ public:
     bool                        isMessengerReady( void );
     virtual void                onSystemReady( bool ready ) { }
 
-    bool                        isUserJoinInSession( VxGUID& onlineId );
-    void                        setUserJoinOffline( VxGUID& onlineId );
+    bool                        isUserJoinInSession( GroupieId& groupieId );
+    void                        setUserJoinOffline( GroupieId& groupieId );
 
-    void                        onUserJoinAdded( GuiUserJoin* user );
-    void                        onUserJoinRemoved( VxGUID& onlineId, EHostType hostType );
-    void                        onUserJoinUpdated( GuiUserJoin* user );
-    void                        onUserOnlineStatusChange( GuiUserJoin* user, bool isOnline );
-    void                        onMyIdentUpdated( GuiUserJoin* user );
+    void                        onUserJoinAdded( GuiUserJoin* guiUserJoin );
+    void                        onUserJoinRemoved( GroupieId& groupieId );
+    void                        onUserJoinUpdated( GuiUserJoin* guiUserJoin );
+    void                        onUserOnlineStatusChange( GuiUserJoin* guiUserJoin, bool isOnline );
+    void                        onMyIdentUpdated( GuiUserJoin* guiUserJoin );
 
-    GuiUserJoin*                getUserJoin( VxGUID& onlineId );
-    std::map<VxGUID, GuiUserJoin*>& getUserJoinList( void )             { return m_UserJoinList; }
+    GuiUserJoin*                getUserJoin( GroupieId& groupieId );
+    std::map<GroupieId, GuiUserJoin*>& getUserJoinList( void )             { return m_UserJoinList; }
     GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
     void                        wantUserJoinCallbacks( GuiUserJoinCallback* client, bool enable );
 
 signals:
-    void				        signalMyIdentUpdated( GuiUserJoin* user ); 
+    void				        signalMyIdentUpdated( GuiUserJoin* guiUserJoin );
 
-    void				        signalUserJoinRequested( GuiUserJoin* user ); 
-    void                        signalUserJoinUpdated( GuiUserJoin* user );
-    void				        signalUserJoinRemoved( VxGUID onlineId, EHostType hostType );
-    void                        signalUserJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
-    void                        signalUserJoinOnlineStatus( GuiUserJoin* user, bool isOnline );
+    void				        signalUserJoinRequested( GuiUserJoin* guiUserJoin );
+    void                        signalUserJoinUpdated( GuiUserJoin* guiUserJoin );
+    void				        signalUserJoinRemoved( GroupieId& groupieId );
+    void                        signalUserJoinOfferStateChange( GroupieId& groupieId, EJoinState hostOfferState );
+    void                        signalUserJoinOnlineStatus( GuiUserJoin* guiUserJoin, bool isOnline );
 
     void                        signalInternalUserJoinRequested( UserJoinInfo* userJoinInfo );
     void                        signalInternalUserJoinUpdated( UserJoinInfo* userJoinInfo );
-    void                        signalInternalUserJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        signalInternalUserJoinOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState hostOfferState );
-    void                        signalInternalUserJoinOnlineState( VxGUID hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
+    void                        signalInternalUserJoinRemoved( GroupieId groupieId );
+    void                        signalInternalUserJoinOfferState( GroupieId groupieId, EJoinState hostOfferState );
+    void                        signalInternalUserJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
 
 private slots:
     void                        slotInternalUserJoinRequested( UserJoinInfo* userJoinInfo );
     void                        slotInternalUserJoinUpdated( UserJoinInfo* userJoinInfo );
-    void                        slotInternalUserJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        slotInternalUserJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState hostOfferState );
-    void                        slotInternalUserJoinOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
+    void                        slotInternalUserJoinRemoved( GroupieId groupieId );
+    void                        slotInternalUserJoinOfferState( GroupieId groupieId, EJoinState hostOfferState );
+    void                        slotInternalUserJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
 
 protected:
-    void                        removeUserJoin( VxGUID& onlineId );
-    GuiUserJoin*                findUserJoin( VxGUID& onlineId );
+    void                        removeUserJoin( GroupieId& groupieId );
+    GuiUserJoin*                findUserJoin( GroupieId& groupieId );
     GuiUserJoin*                updateUserJoin( UserJoinInfo* userJoinInfo );
     
     virtual void				callbackUserJoinAdded( UserJoinInfo* userJoinInfo ) override;
     virtual void				callbackUserJoinUpdated( UserJoinInfo* userJoinInfo ) override;
-    virtual void				callbackUserJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) override;
-    virtual void				callbackUserJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userOfferState ) override;
-    virtual void				callbackUserJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
+    virtual void				callbackUserJoinRemoved( GroupieId& groupieId ) override;
+    virtual void				callbackUserJoinOfferState( GroupieId& groupieId, EJoinState userOfferState ) override;
+    virtual void				callbackUserJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) override;
 
     virtual void				announceUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
@@ -98,7 +99,7 @@ protected:
 
     AppCommon&                  m_MyApp;
     // map of online id to GuiUserJoin
-    std::map<VxGUID, GuiUserJoin*>  m_UserJoinList;
+    std::map<GroupieId, GuiUserJoin*>  m_UserJoinList;
 
     std::vector<GuiUserJoinCallback*>  m_UserJoinClients;
 };

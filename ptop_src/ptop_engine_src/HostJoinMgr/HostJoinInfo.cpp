@@ -36,10 +36,13 @@ HostJoinInfo::HostJoinInfo()
 //============================================================================
 HostJoinInfo::HostJoinInfo( const HostJoinInfo& rhs )
     : BaseJoinInfo( rhs )
+    , m_NetIdent( rhs.m_NetIdent )
+    , m_FriendState( rhs.m_FriendState )
     , m_HostFlags( rhs.m_HostFlags )
+    , m_GroupieId( rhs.m_GroupieId )
     , m_UserUrl( rhs.m_UserUrl )
     , m_ConnectionId( rhs.m_ConnectionId )
-    , m_SessionId( rhs.m_SessionId )
+    , m_SessionId( rhs.m_SessionId )    
 {
 }
 
@@ -49,7 +52,10 @@ HostJoinInfo& HostJoinInfo::operator=( const HostJoinInfo& rhs )
 	if( this != &rhs )
 	{
         BaseJoinInfo::operator = ( rhs );
+        m_NetIdent = rhs.m_NetIdent;
+        m_FriendState = rhs.m_FriendState;
         m_HostFlags = rhs.m_HostFlags;
+        m_GroupieId = rhs.m_GroupieId;
         m_UserUrl = rhs.m_UserUrl;
         m_ConnectionId = rhs.m_ConnectionId;
         m_SessionId = rhs.m_SessionId;

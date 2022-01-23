@@ -20,6 +20,8 @@ class GuiHostedListItem;
 class VxNetIdent;
 class GuiHostedListSession;
 class GuiHosted;
+class GroupieId;
+class GuiHostJoin;
 
 class GuiHostedListWidget : public ListWidgetBase
 {
@@ -37,6 +39,12 @@ public:
     GuiHostedListSession*       findSession( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByHostId( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByOnlineId( VxGUID& onlineId );
+
+    virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId );
+    virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId );
 
 signals:
     void                        signalIconButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );

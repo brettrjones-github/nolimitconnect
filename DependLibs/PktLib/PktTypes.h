@@ -27,10 +27,10 @@
 #define PKT_TYPE_ANNOUNCE							( BASE_PKT_TYPE	+ 1 )					        // 1
 #define PKT_TYPE_ANN_LIST							( PKT_TYPE_ANNOUNCE	+ 1 )				        // 2 ( 0x02 )
 // 3 ( 0x03 )
-#define PKT_TYPE_LOG_REQ							( PKT_TYPE_ANN_LIST	+ 1 )				        // 3 ( 0x03 )
-#define PKT_TYPE_LOG_REPLY							( PKT_TYPE_LOG_REQ	+ 1 )				        // 4 ( 0x04 )
+#define PKT_TYPE_HOST_UNJOIN_REQ					( PKT_TYPE_ANN_LIST	+ 1 )				        // 3 ( 0x03 )
+#define PKT_TYPE_HOST_UNJOIN_REPLY					( PKT_TYPE_HOST_UNJOIN_REQ + 1 )				// 4 ( 0x04 )
 // 5 ( 0x05 )
-#define PKT_TYPE_SCAN_REQ							( PKT_TYPE_LOG_REPLY	+ 1 )			        // 5 ( 0x05 )
+#define PKT_TYPE_SCAN_REQ							( PKT_TYPE_HOST_UNJOIN_REPLY + 1 )			    // 5 ( 0x05 )
 #define PKT_TYPE_SCAN_REPLY						    ( PKT_TYPE_SCAN_REQ	+ 1 )			            // 6 ( 0x06 )
 // 7 ( 0x07 )
 #define PKT_TYPE_PLUGIN_OFFER_REQ					( PKT_TYPE_SCAN_REPLY	+ 1 )			        // 7 ( 0x07 )

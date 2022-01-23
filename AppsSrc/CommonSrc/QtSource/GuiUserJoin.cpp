@@ -41,9 +41,10 @@ GuiUserJoin::GuiUserJoin( const GuiUserJoin& rhs )
     , m_MyApp( rhs.m_MyApp )
     , m_UserJoinMgr( rhs.m_UserJoinMgr )
     , m_GuiUser( rhs.m_GuiUser )
+    , m_GroupieId( rhs.m_GroupieId )
+    , m_JoinState( rhs.m_JoinState )
     , m_SessionId( rhs.m_SessionId )
     , m_IsOnline( rhs.m_IsOnline )
-    , m_JoinStateList( rhs.m_JoinStateList )
 {
 }
 
@@ -64,47 +65,14 @@ bool GuiUserJoin::setOnlineStatus( bool isOnline )
 }
 
 //============================================================================
-EJoinState GuiUserJoin::getJoinState( EHostType hostType )
+bool GuiUserJoin::setJoinState( EJoinState joinState )
 {
-    EJoinState joinState = eJoinStateNone;
-    for( auto& statePair : m_JoinStateList )
+    if( joinState != m_JoinState )
     {
-        if( statePair.first == hostType )
-        {
-            joinState = statePair.second;
-            break;
-        }
+        m_JoinState = joinState;
+        return true;
     }
 
-    return joinState;
-}
-
-//============================================================================
-bool GuiUserJoin::setJoinState( EHostType hostType, EJoinState joinState )
-{
-    bool stateChanged = false;
-    bool foundState = false;
-    for( auto& statePair : m_JoinStateList )
-    {
-        if( statePair.first == hostType )
-        {
-            foundState = true;
-            if( statePair.second != joinState )
-            {
-                statePair.second = joinState;
-                stateChanged = true;
-            }
-
-            break;
-        }
-    }
-
-    if( !foundState )
-    {
-        m_JoinStateList.push_back( std::make_pair( hostType, joinState ) );
-        stateChanged = true;
-    }
-
-    return stateChanged;
+    return false;
 }
 

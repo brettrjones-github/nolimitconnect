@@ -20,16 +20,14 @@
 
 //============================================================================
 HostedInfo::HostedInfo( EHostType hostType, VxGUID& onlineId, std::string& hostUrl )
-    : m_HostType( hostType )
-    , m_OnlineId( onlineId )
+    : m_HostedId( onlineId, hostType )
     , m_HostInviteUrl( hostUrl )
 {
 }
 
 //============================================================================
 HostedInfo::HostedInfo( const HostedInfo& rhs )
-    : m_HostType( rhs.m_HostType )
-    , m_OnlineId( rhs.m_OnlineId )
+    : m_HostedId( rhs.m_HostedId )
     , m_ConnectedTimestampMs( rhs.m_ConnectedTimestampMs )
     , m_JoinedTimestampMs( rhs.m_JoinedTimestampMs )
     , m_HostInfoTimestampMs( rhs.m_HostInfoTimestampMs )
@@ -45,8 +43,7 @@ HostedInfo& HostedInfo::operator=( const HostedInfo& rhs )
 {	
 	if( this != &rhs )
 	{
-        m_HostType = rhs.m_HostType;
-        m_OnlineId = rhs.m_OnlineId;
+        m_HostedId = rhs.m_HostedId;
         m_ConnectedTimestampMs = rhs.m_ConnectedTimestampMs;
         m_JoinedTimestampMs = rhs.m_JoinedTimestampMs;
         m_HostInfoTimestampMs = rhs.m_HostInfoTimestampMs;
@@ -158,5 +155,5 @@ bool HostedInfo::fillFromHostInvite( PktHostInviteAnnounceReq* hostAnn )
 //============================================================================
 bool HostedInfo::isHostInviteValid( void )
 {
-    return eHostTypeUnknown != getHostType() && m_OnlineId.isVxGUIDValid() && m_HostInfoTimestampMs && !m_HostInviteUrl.empty() && !m_HostTitle.empty() && !m_HostDesc.empty();
+    return m_HostedId.isValid() && m_HostInfoTimestampMs && !m_HostInviteUrl.empty() && !m_HostTitle.empty() && !m_HostDesc.empty();
 }

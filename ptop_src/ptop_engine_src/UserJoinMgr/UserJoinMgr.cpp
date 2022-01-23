@@ -57,19 +57,20 @@ void UserJoinMgr::fromGuiUserLoggedOn( void )
 
         clearUserJoinInfoList();
         m_UserJoinInfoDb.getAllUserJoins( m_UserJoinInfoList );
-        for( auto* joinInfo : m_UserJoinInfoList )
+        for( auto iter = m_UserJoinInfoList.begin();  iter != m_UserJoinInfoList.end(); ++iter )
         {
-            if( !joinInfo->getNetIdent() )
+            UserJoinInfo* userJoinInfo = iter->second;
+            if( !userJoinInfo->getNetIdent() )
             {
-                VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( joinInfo->getOnlineId() );
+                VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( userJoinInfo->getOnlineId() );
                 if( netIdent )
                 {
-                    joinInfo->setNetIdent( netIdent );
+                    userJoinInfo->setNetIdent( netIdent );
                 }
-                else if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isValidNetIdent() )
+                else if( userJoinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isValidNetIdent() )
                 {
                     // is myself
-                    joinInfo->setNetIdent( m_Engine.getMyNetIdent() );
+                    userJoinInfo->setNetIdent( m_Engine.getMyNetIdent() );
                 }
             }
         }
@@ -106,10 +107,9 @@ void UserJoinMgr::addUserJoinMgrClient( UserJoinCallbackInterface * client, bool
 }
 
 //============================================================================
-void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
+void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* userJoinInfo )
 {
-    UserJoinInfo* userHostInfo = dynamic_cast<UserJoinInfo*>(joinInfo);
-    if( userHostInfo )
+    if( userJoinInfo )
     {
         LogMsg( LOG_INFO, "UserJoinMgr::announceUserJoinRequested start" );
 
@@ -118,7 +118,7 @@ void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
         for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
         {
             UserJoinCallbackInterface* client = *iter;
-            client->callbackUserJoinAdded( userHostInfo );
+            client->callbackUserJoinAdded( userJoinInfo );
         }
 
         unlockClientList();
@@ -131,17 +131,16 @@ void UserJoinMgr::announceUserJoinRequested( UserJoinInfo* joinInfo )
 }
 
 //============================================================================
-void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * joinInfo )
+void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * userJoinInfo )
 {
-    UserJoinInfo * userHostInfo = dynamic_cast<UserJoinInfo *>( joinInfo );
-    if( userHostInfo )
+    if( userJoinInfo )
     {
         lockClientList();
         std::vector<UserJoinCallbackInterface *>::iterator iter;
         for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )
         {
             UserJoinCallbackInterface * client = *iter;
-            client->callbackUserJoinUpdated( userHostInfo );
+            client->callbackUserJoinUpdated( userJoinInfo );
         }
 
         unlockClientList();
@@ -153,16 +152,16 @@ void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * joinInfo )
 }
 
 //============================================================================
-void UserJoinMgr::announceUserJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
+void UserJoinMgr::announceUserJoinRemoved( GroupieId& groupieId )
 {
-    removeFromDatabase( hostOnlineId, pluginType, false );
+    removeFromDatabase( groupieId, false );
 
 	lockClientList();
 	std::vector<UserJoinCallbackInterface *>::iterator iter;
 	for( iter = m_UserJoinClients.begin();	iter != m_UserJoinClients.end(); ++iter )
 	{
 		UserJoinCallbackInterface * client = *iter;
-		client->callbackUserJoinRemoved( hostOnlineId, pluginType );
+		client->callbackUserJoinRemoved( groupieId );
 	}
 
 	unlockClientList();
@@ -173,7 +172,7 @@ void UserJoinMgr::clearUserJoinInfoList( void )
 {
     for( auto iter = m_UserJoinInfoList.begin(); iter != m_UserJoinInfoList.end(); ++iter )
     {
-        delete (*iter);
+        delete iter->second;
     }
 
     m_UserJoinInfoList.clear();
@@ -183,11 +182,13 @@ void UserJoinMgr::clearUserJoinInfoList( void )
 void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
+    GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), sessionInfo.getHostType() );
     lockResources();
-    UserJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), sessionInfo.getPluginType() );
+    UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( !joinInfo )
     {
         joinInfo = new UserJoinInfo();
+        joinInfo->setGroupieId( groupieId );
         joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
         joinInfo->setPluginType( sessionInfo.getPluginType() );
         wasAdded = true;
@@ -207,7 +208,7 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
     joinInfo->setLastJoinTime( timeNowMs );
     if( wasAdded )
     {
-        m_UserJoinInfoList.push_back( joinInfo );
+        m_UserJoinInfoList[groupieId] = joinInfo;
     }
 
     saveToDatabase( joinInfo, true );
@@ -227,19 +228,15 @@ void UserJoinMgr::onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, Ba
 }
 
 //============================================================================
-UserJoinInfo* UserJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType )
+UserJoinInfo* UserJoinMgr::findUserJoinInfo( GroupieId& groupieId )
 {
-    UserJoinInfo* joinFoundInfo = nullptr;
-    for( auto joinInfo : m_UserJoinInfoList )
+    auto iter = m_UserJoinInfoList.find( groupieId );
+    if( iter != m_UserJoinInfoList.end() )
     {
-        if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getPluginType() == pluginType )
-        {
-            joinFoundInfo = joinInfo;
-            break;
-        }
+        return iter->second;
     }
 
-    return joinFoundInfo;
+    return nullptr;
 }
 
 //============================================================================
@@ -277,14 +274,14 @@ bool UserJoinMgr::saveToDatabase( UserJoinInfo* joinInfo, bool isLocked )
 }
 
 //============================================================================
-void UserJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked )
+void UserJoinMgr::removeFromDatabase( GroupieId& groupieId, bool resourcesLocked )
 {
     if( !resourcesLocked )
     {
         lockResources();
     }
 
-    m_UserJoinInfoDb.removeUserJoin( hostOnlineId, pluginType );
+    m_UserJoinInfoDb.removeUserJoin( groupieId );
     if( !resourcesLocked )
     {
         unlockResources();
@@ -317,14 +314,14 @@ bool UserJoinMgr::saveToJoinedLastDatabase( UserJoinInfo* joinInfo, bool isLocke
 }
 
 //============================================================================
-void UserJoinMgr::removeFromJoinedLastDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked )
+void UserJoinMgr::removeFromJoinedLastDatabase( GroupieId& groupieId, bool resourcesLocked )
 {
     if( !resourcesLocked )
     {
         lockResources();
     }
 
-    m_UserJoinInfoDb.removeUserJoin( hostOnlineId, pluginType );
+    m_UserJoinInfoDb.removeUserJoin( groupieId );
     if( !resourcesLocked )
     {
         unlockResources();

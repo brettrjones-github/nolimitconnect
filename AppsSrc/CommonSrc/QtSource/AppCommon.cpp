@@ -1261,14 +1261,14 @@ void AppCommon::toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionI
 }
 
 //============================================================================
-void AppCommon::toGuiUserOnlineStatus( EHostType hostType, VxNetIdent *hostIdent, VxGUID& sessionId, bool isOnline )
+void AppCommon::toGuiUserOnlineStatus( VxNetIdent *hostIdent, bool isOnline )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    getUserMgr().toGuiUserOnlineStatus( hostType, hostIdent, sessionId, isOnline );
+    getUserMgr().toGuiUserOnlineStatus( hostIdent, isOnline );
 }
 
 //============================================================================
@@ -2256,5 +2256,6 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<HostJoinInfo>( "HostJoinInfo" );
 	qRegisterMetaType<EJoinState>( "EJoinState" );
 	qRegisterMetaType<EOnlineState>( "EOnlineState" );
+	qRegisterMetaType<GroupieId>( "GroupieId" );
 }
 

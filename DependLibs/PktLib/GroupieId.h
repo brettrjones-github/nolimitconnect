@@ -13,9 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxGUID.h>
+#include "HostedId.h"
 
 class PktBlobEntry;
 
@@ -27,6 +25,7 @@ class GroupieId
 public:
 	GroupieId() = default;
     GroupieId( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType );
+    GroupieId( VxGUID& groupieOnlineId, HostedId& hostedId );
     GroupieId( const GroupieId& rhs );
     //do not use virtuals because this object is packed in packets
 	GroupieId&				    operator =( const GroupieId& rhs );
@@ -43,11 +42,12 @@ public:
     void						setGroupieOnlineId( VxGUID& onlineId )             { m_GroupieOnlineId = onlineId; }
     VxGUID&					    getGroupieOnlineId( void )                         { return m_GroupieOnlineId; }
 
-    void						setHostOnlineId( VxGUID& onlineId )                 { m_HostOnlineId = onlineId; }
-    VxGUID&                     getHostOnlineId( void )                             { return m_HostOnlineId; }
-
-    void						setHostType( EHostType hostType )                   { m_HostType = hostType; }
-    EHostType                   getHostType( void )                                 { return m_HostType; }
+    void				        setHostedId( HostedId& hostedId )                   { m_HostedId = hostedId; }
+    HostedId&                   getHostedId( void )                                 { return m_HostedId; }
+    void				        setHostedOnlineId( VxGUID& onlineId )               { m_HostedId.setOnlineId( onlineId ); }
+    VxGUID&                     getHostedOnlineId( void )                           { return m_HostedId.getOnlineId(); }
+    void			            setHostType( EHostType hostType )                   { m_HostedId.setHostType( hostType ); }
+    EHostType	                getHostType( void )                                 { return m_HostedId.getHostType(); }
 
     // returns 0 if equal else -1 if less or 1 if greater
     int							compareTo( GroupieId& guid );
@@ -56,13 +56,13 @@ public:
     // get a description of the plugin id
     std::string                 describeGroupieId( void ) const;
 
-    bool                        isValid( void )                                     { return eHostTypeUnknown != m_HostType && m_GroupieOnlineId.isVxGUIDValid() && m_HostOnlineId.isVxGUIDValid();  }
+    bool                        isValid( void )                                 { return m_GroupieOnlineId.isVxGUIDValid() && m_HostedId.isValid();  }
+    void                        clear( void )                                   { m_GroupieOnlineId.clearVxGUID(); m_HostedId.clear(); }
 
 protected:
 	//=== vars ===//
     VxGUID					    m_GroupieOnlineId;
-    VxGUID					    m_HostOnlineId;
-    EHostType                   m_HostType{ eHostTypeUnknown };
+    HostedId					m_HostedId;
 };
 
 #pragma pack(pop)

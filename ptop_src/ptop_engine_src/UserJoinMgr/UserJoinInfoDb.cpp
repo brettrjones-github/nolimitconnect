@@ -15,6 +15,8 @@
 #include "UserJoinInfoDb.h"
 #include "UserJoinInfo.h"
 
+#include <CoreLib/VxPtopUrl.h>
+
 namespace
 {
     std::string 		TABLE_USER_HOST	 				= "tblUserJoin";
@@ -81,19 +83,18 @@ void UserJoinInfoDb::purgeAllUserJoins( void )
 }
 
 //============================================================================
-void UserJoinInfoDb::removeUserJoin( VxGUID& onlineId, EPluginType pluginType )
+void UserJoinInfoDb::removeUserJoin( GroupieId& groupieId )
 {
-    std::string onlineIdStr = onlineId.toHexString();
+    std::string onlineIdStr = groupieId.getHostedOnlineId().toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
-    bindList.add( (int)pluginType );
+    bindList.add( (int)groupieId.getHostType() );
     sqlExec( "DELETE FROM tblUserJoin WHERE onlineId=? AND pluginType=?", bindList );
 }
 
 //============================================================================
-bool UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId, 
+bool UserJoinInfoDb::addUserJoin(   GroupieId&      groupieId,
                                     VxGUID&			thumbId,
                                     uint64_t		infoModTime,
-                                    EPluginType     pluginType,
                                     EJoinState      joinState,
                                     uint64_t		lastConnectMs,
                                     uint64_t		lastJoinMs,
@@ -102,15 +103,15 @@ bool UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId,
                                     std::string     hostUrl
                                    )
 {
-    removeUserJoin( onlineId, pluginType );
+    removeUserJoin( groupieId );
 
-    std::string onlineIdStr = onlineId.toHexString();
+    std::string onlineIdStr = groupieId.getHostedOnlineId().toHexString();
     std::string thumbIdStr = thumbId.toHexString();
 
     DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( thumbIdStr.c_str() );
     bindList.add( infoModTime );
-    bindList.add( (int)pluginType );
+    bindList.add( (int)groupieId.getHostType() );
     bindList.add( (int)friendState );
     bindList.add( (int)joinState );
     bindList.add( lastConnectMs );
@@ -132,10 +133,9 @@ bool UserJoinInfoDb::addUserJoin(   VxGUID&			onlineId,
 //============================================================================
 bool UserJoinInfoDb::addUserJoin( UserJoinInfo* hostInfo )
 {
-    return addUserJoin(	hostInfo->BaseInfo::getOnlineId(),
+    return addUserJoin(	hostInfo->getGroupieId(),
                         hostInfo->BaseInfo::getThumbId(),
                         hostInfo->BaseInfo::getInfoModifiedTime(),  
-                        hostInfo->BaseJoinInfo::getPluginType(),  
                         hostInfo->BaseJoinInfo::getJoinState(),		
                         hostInfo->BaseJoinInfo::getLastConnectTime(),	
                         hostInfo->BaseJoinInfo::getLastJoinTime(),
@@ -146,7 +146,7 @@ bool UserJoinInfoDb::addUserJoin( UserJoinInfo* hostInfo )
 }
 
 //============================================================================
-void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJoinList )
+void UserJoinInfoDb::getAllUserJoins( std::map<GroupieId, UserJoinInfo*>& UserJoinUserJoinList )
 {
     lockDb();
     DbCursor * cursor = startQuery( "SELECT * FROM tblUserJoin" ); 
@@ -168,8 +168,17 @@ void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJo
             hostInfo->setHostUrl( cursor->getString( COLUMN_HOST_URL ) );
 
             vx_assert( hostInfo->isValid() );
-
-            insertUserJoinInTimeOrder( hostInfo, UserJoinUserJoinList );
+            VxPtopUrl ptopUrl( hostInfo->getHostUrl() );
+            if( ptopUrl.isValid() && hostInfo->getOnlineId().isVxGUIDValid() )
+            {
+                GroupieId groupieId( hostInfo->getOnlineId(), ptopUrl.getOnlineId(), hostInfo->getHostType() );
+                hostInfo->setGroupieId( groupieId );
+                insertUserJoinInTimeOrder( hostInfo, UserJoinUserJoinList );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "UserJoinInfoDb::getAllUserJoins invalid id or host url" );
+            }         
         }
 
         cursor->close();
@@ -179,12 +188,14 @@ void UserJoinInfoDb::getAllUserJoins( std::vector<UserJoinInfo*>& UserJoinUserJo
 } 
 
 //============================================================================
-void UserJoinInfoDb::insertUserJoinInTimeOrder( UserJoinInfo *hostInfo, std::vector<UserJoinInfo*>& hostList )
+void UserJoinInfoDb::insertUserJoinInTimeOrder( UserJoinInfo *hostInfo, std::map<GroupieId, UserJoinInfo*>& hostList )
 {
+    hostList[hostInfo->getGroupieId() ] = hostInfo;
+    /*
     vx_assert( hostInfo && hostInfo->isValid() );
     if( hostInfo->isDefaultHost() )
     {
-        hostList.insert( hostList.begin(), hostInfo );
+        hostList[ hostInfo->get( hostList.begin(), hostInfo );
         return;
     }
 
@@ -204,5 +215,6 @@ void UserJoinInfoDb::insertUserJoinInTimeOrder( UserJoinInfo *hostInfo, std::vec
     }
 
     hostList.push_back( hostInfo );
+    */
 }
 

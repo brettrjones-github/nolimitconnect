@@ -1686,6 +1686,8 @@ QString GuiParams::describeJoinState( EJoinState joinState )
         return  QObject::tr( "Join Accepted " );
     case eJoinStateJoinDenied:
         return  QObject::tr( "Join Denied " );
+    case eJoinStateJoinLeaveHost:
+        return  QObject::tr( "Disconnected From Host " );
     default:
         return  QObject::tr( "Unknown Join State " );
     }

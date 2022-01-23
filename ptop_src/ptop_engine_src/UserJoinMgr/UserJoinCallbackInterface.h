@@ -23,9 +23,9 @@ class UserJoinCallbackInterface
 public:
     virtual void				callbackUserJoinAdded( UserJoinInfo* hostJoinInfo ) {};
     virtual void				callbackUserJoinUpdated( UserJoinInfo* hostJoinInfo ) {};
-    virtual void				callbackUserJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) {};
+    virtual void				callbackUserJoinRemoved( GroupieId& groupieId ) {};
 
-    virtual void				callbackUserJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userOfferState ) {};
-    virtual void				callbackUserJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) {};
+    virtual void				callbackUserJoinOfferState( GroupieId& groupieId, EJoinState userOfferState ) {};
+    virtual void				callbackUserJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) {};
 };
 

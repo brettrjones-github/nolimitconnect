@@ -13,9 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxGUID.h>
+#include <PktLib/GroupieId.h>
 
 #include <string>
 
@@ -33,11 +31,12 @@ public:
 
     bool                        isHostInviteValid( void );
 
-    virtual void				setOnlineId( VxGUID& onlineId )                     { m_OnlineId = onlineId; }
-    virtual VxGUID&             getOnlineId( void )                                 { return m_OnlineId; }
-
-    virtual void			    setHostType( EHostType hostType )                   { m_HostType = hostType; }
-    virtual EHostType	        getHostType( void )                                 { return m_HostType; }
+    virtual void				setHostedId( HostedId& hostedId )                   { m_HostedId = hostedId; }
+    HostedId&                   getHostedId( void )                                 { return m_HostedId; }
+    virtual void				setOnlineId( VxGUID& onlineId )                     { m_HostedId.setOnlineId( onlineId ); }
+    virtual VxGUID&             getOnlineId( void )                                 { return m_HostedId.getOnlineId(); }
+    virtual void			    setHostType( EHostType hostType )                   { m_HostedId.setHostType( hostType ); }
+    virtual EHostType	        getHostType( void )                                 { return m_HostedId.getHostType(); }
 
     virtual void                setIsFavorite( bool isFavorite )                    { m_IsFavorite = isFavorite; }
     virtual bool                getIsFavorite( void )                               { return m_IsFavorite; }
@@ -68,8 +67,7 @@ public:
 
 protected:
 	//=== vars ===//
-    EHostType                   m_HostType{ eHostTypeUnknown };
-    VxGUID                      m_OnlineId;
+    HostedId                    m_HostedId;
     int64_t                     m_ConnectedTimestampMs{ 0 };
     int64_t                     m_JoinedTimestampMs{ 0 };
     int64_t                     m_HostInfoTimestampMs{ 0 };

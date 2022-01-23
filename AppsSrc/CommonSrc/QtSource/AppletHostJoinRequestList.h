@@ -19,6 +19,7 @@
 
 class GuiHostJoin;
 class GuiHostJoinMgr;
+class GroupieId;
 
 class AppletHostJoinRequestList : public AppletBase
 {
@@ -30,9 +31,9 @@ public:
 protected slots:
 	void				        slotHostJoinRequested( GuiHostJoin* user );
 	void				        slotlHostJoinUpdated( GuiHostJoin* user );
-	void				        slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType );
-	void                        slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
-	void                        slotHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline );
+	void				        slotHostJoinRemoved( GroupieId& groupieId );
+	void                        slotHostJoinOfferStateChange( GroupieId& groupieId, EJoinState hostOfferState );
+	void                        slotHostJoinOnlineStatus( GuiHostJoin* guiHostJoin, bool isOnline );
 
 	void                        slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem );
 	void                        slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem );
@@ -43,7 +44,7 @@ protected slots:
 
 protected:
 	void						updateJoinList( void );
-	void						updateHostJoinRequest( GuiHostJoin* user );
+	void						updateHostJoinRequest( GuiHostJoin* guiHostJoin );
 
 	//=== vars ===//
 	Ui::AppletHostJoinRequestListUi		ui;

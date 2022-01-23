@@ -13,9 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GuiInterface/IDefs.h>
-
-#include <CoreLib/VxGUID.h>
+#include <PktLib/GroupieId.h>
 
 #include <string>
 
@@ -40,14 +38,17 @@ public:
     bool                        setGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
     bool                        getGroupieUrlAndTitleAndDescription( std::string& groupieUrl, std::string& groupieTitle, std::string& groupieDesc, int64_t& lastModifiedTime );
 
-    virtual void				setGroupieOnlineId( VxGUID& onlineId )              { m_GroupieOnlineId = onlineId; }
-    virtual VxGUID&             getGroupieOnlineId( void )                          { return m_GroupieOnlineId; }
+    void				        setGroupieId( GroupieId& onlineId )                 { m_GroupieId = onlineId; }
+    GroupieId&                  getGroupieId( void )                                { return m_GroupieId; }
 
-    virtual void				setHostOnlineId( VxGUID& onlineId )                 { m_HostOnlineId = onlineId; }
-    virtual VxGUID&             getHostOnlineId( void )                             { return m_HostOnlineId; }
+    void				        setGroupieOnlineId( VxGUID& onlineId )              { m_GroupieId.setGroupieOnlineId( onlineId ); }
+    VxGUID&                     getGroupieOnlineId( void )                          { return m_GroupieId.getGroupieOnlineId(); }
 
-    virtual void			    setHostType( EHostType hostType )                   { m_HostType = hostType; }
-    virtual EHostType	        getHostType( void )                                 { return m_HostType; }
+    void				        setHostedOnlineId( VxGUID& onlineId )               { m_GroupieId.setHostedOnlineId( onlineId ); }
+    VxGUID&                     getHostedOnlineId( void )                           { return m_GroupieId.getHostedOnlineId(); }
+
+    void			            setHostType( EHostType hostType )                   { m_GroupieId.setHostType( hostType ); }
+    EHostType	                getHostType( void )                                 { return m_GroupieId.getHostType(); }
 
     virtual void                setIsFavorite( bool isFavorite )                    { m_IsFavorite = isFavorite; }
     virtual bool                getIsFavorite( void )                               { return m_IsFavorite; }
@@ -66,7 +67,7 @@ public:
     virtual std::string&        getGroupieTitle( void )                             { return m_GroupieTitle; }
 
     virtual void                setGroupieDescription( std::string hostDesc )       { m_GroupieDesc = hostDesc; }
-    virtual std::string&        getGroupieDescription( void )                        { return m_GroupieDesc; }
+    virtual std::string&        getGroupieDescription( void )                       { return m_GroupieDesc; }
 
     bool                        shouldSaveToDb( void );
     bool                        isValidForGui( void );
@@ -78,9 +79,7 @@ public:
 
 protected:
 	//=== vars ===//
-    EHostType                   m_HostType{ eHostTypeUnknown };
-    VxGUID                      m_GroupieOnlineId;
-    VxGUID                      m_HostOnlineId;
+    GroupieId                   m_GroupieId;
     int64_t                     m_ConnectedTimestampMs{ 0 };
     int64_t                     m_JoinedTimestampMs{ 0 };
     int64_t                     m_GroupieInfoTimestampMs{ 0 };

@@ -15,7 +15,7 @@
 
 #include <GuiInterface/IDefs.h>
 
-#include <CoreLib/VxGUID.h>
+#include <PktLib/GroupieId.h>
 
 #include <QWidget>
 
@@ -34,17 +34,21 @@ public:
     GuiHostJoin( const GuiHostJoin& rhs );
 	virtual ~GuiHostJoin() = default;
 
-    GuiHostJoinMgr&             getHostJoinMgr( void )      { return m_HostJoinMgr; }
+    GuiHostJoinMgr&             getHostJoinMgr( void )                  { return m_HostJoinMgr; }
 
-    void                        setUser( GuiUser* user )    { m_GuiUser = user; }
-    GuiUser*                    getUser( void )             { return m_GuiUser; }
+    void                        setUser( GuiUser* user )                { m_GuiUser = user; }
+    GuiUser*                    getUser( void )                         { return m_GuiUser; }
+
+    void                        setGroupieId( GroupieId& groupieId )    { m_GroupieId = groupieId; }
+    GroupieId&                  getGroupieId( void )                    { return m_GroupieId; }
+
+    bool                        setJoinState( EJoinState joinState );
+    EJoinState                  getJoinState( void )                    { return m_JoinState; }
 
     virtual bool                setOnlineStatus( bool isOnline );
-    bool                        isOnline( void )            { return m_IsOnline; }
-    bool                        isInSession( void )         { return m_IsOnline && m_SessionId.isVxGUIDValid(); }
+    bool                        isOnline( void )                        { return m_IsOnline; }
+    bool                        isInSession( void )                     { return m_IsOnline && m_SessionId.isVxGUIDValid(); }
 
-    EJoinState                  getJoinState( EHostType hostType );
-    bool                        setJoinState( EHostType hostType, EJoinState joinState ); // return true if state changed
     int                         getHostRequestCount( void );
     int                         getRequestStateCount( EJoinState joinState );
     void                        getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests );
@@ -54,7 +58,9 @@ protected:
     GuiHostJoinMgr&             m_HostJoinMgr;
 
     GuiUser*                    m_GuiUser{ nullptr };
+    GroupieId                   m_GroupieId;
+    EJoinState                  m_JoinState{ eJoinStateNone };
     VxGUID                      m_SessionId;
     bool                        m_IsOnline{ false };
-    std::vector<std::pair<EHostType, EJoinState>>  m_JoinStateList;
+
 };

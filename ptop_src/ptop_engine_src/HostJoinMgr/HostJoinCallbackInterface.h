@@ -23,9 +23,9 @@ class HostJoinCallbackInterface
 public:
     virtual void				callbackHostJoinRequested( HostJoinInfo* hostJoinInfo ) {};
     virtual void				callbackHostJoinUpdated( HostJoinInfo* hostJoinInfo ){};
-    virtual void				callbackHostJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ){};
+    virtual void				callbackHostJoinRemoved( GroupieId& groupieId ){};
 
-    virtual void				callbackHostJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userHostOfferState ) {};
-    virtual void				callbackHostJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) {};
+    virtual void				callbackHostJoinOfferState( GroupieId& groupieId, EJoinState userHostOfferState ) {};
+    virtual void				callbackHostJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) {};
 };
 

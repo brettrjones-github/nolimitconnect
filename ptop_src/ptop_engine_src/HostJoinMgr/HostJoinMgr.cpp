@@ -21,6 +21,8 @@
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseSessionInfo.h>
 
+#include <PktLib/PktAnnounce.h>
+
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
 
@@ -54,19 +56,20 @@ void HostJoinMgr::fromGuiUserLoggedOn( void )
 
         clearHostJoinInfoList();
         m_HostJoinInfoDb.getAllHostJoins( m_HostJoinInfoList );
-        for( auto* joinInfo : m_HostJoinInfoList )
+        for( auto iter = m_HostJoinInfoList.begin(); iter != m_HostJoinInfoList.end(); ++iter )
         {
-            if( !joinInfo->getNetIdent() )
+            HostJoinInfo* hostJoinInfo = iter->second;
+            if( !hostJoinInfo->getNetIdent() )
             {
-                VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( joinInfo->getOnlineId() );
+                VxNetIdent* netIdent = m_Engine.getBigListMgr().findBigListInfo( hostJoinInfo->getOnlineId() );
                 if( netIdent )
                 {
-                    joinInfo->setNetIdent( netIdent );
+                    hostJoinInfo->setNetIdent( netIdent );
                 }
-                else if( joinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isValidNetIdent() )
+                else if( hostJoinInfo->getOnlineId() == m_Engine.getMyOnlineId() && m_Engine.getMyNetIdent()->isValidNetIdent() )
                 {
                     // is myself
-                    joinInfo->setNetIdent( m_Engine.getMyNetIdent() );
+                    hostJoinInfo->setNetIdent( m_Engine.getMyNetIdent() );
                 }
             }
         }
@@ -146,15 +149,15 @@ void HostJoinMgr::announceHostJoinUpdated( HostJoinInfo * hostInfo )
 }
 
 //============================================================================
-void HostJoinMgr::announceHostJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType )
+void HostJoinMgr::announceHostJoinRemoved( GroupieId& groupieId )
 {
-    removeFromDatabase( hostOnlineId, pluginType, false );
+    removeFromDatabase( groupieId, false );
 	lockClientList();
 	std::vector<HostJoinCallbackInterface *>::iterator iter;
 	for( iter = m_HostJoinClients.begin();	iter != m_HostJoinClients.end(); ++iter )
 	{
 		HostJoinCallbackInterface * client = *iter;
-		client->callbackHostJoinRemoved( hostOnlineId, pluginType );
+		client->callbackHostJoinRemoved( groupieId );
 	}
 
 	unlockClientList();
@@ -165,7 +168,7 @@ void HostJoinMgr::clearHostJoinInfoList( void )
 {
     for( auto iter = m_HostJoinInfoList.begin(); iter != m_HostJoinInfoList.end(); ++iter )
     {
-        delete (*iter);
+        delete iter->second;
     }
 
     m_HostJoinInfoList.clear();
@@ -175,11 +178,13 @@ void HostJoinMgr::clearHostJoinInfoList( void )
 void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
     lockResources();
-    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), sessionInfo.getPluginType() );
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( !joinInfo )
     {
         joinInfo = new HostJoinInfo();
+        joinInfo->setGroupieId( groupieId );
         wasAdded = true;
     }
 
@@ -201,7 +206,7 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
     joinInfo->setLastJoinTime( timeNowMs );
     if( wasAdded )
     {
-        m_HostJoinInfoList.push_back( joinInfo );
+        m_HostJoinInfoList[joinInfo->getGroupieId()] = joinInfo;
     }
     
     saveToDatabase( joinInfo, true );
@@ -221,11 +226,13 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
 void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
     lockResources();
-    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent->getMyOnlineId(), sessionInfo.getPluginType() );
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( !joinInfo )
     {
         joinInfo = new HostJoinInfo();
+        joinInfo->setGroupieId( groupieId );
         wasAdded = true;
     }
 
@@ -263,19 +270,17 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
 }
 
 //============================================================================
-HostJoinInfo* HostJoinMgr::findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType )
+HostJoinInfo* HostJoinMgr::findUserJoinInfo( GroupieId& groupieId )
 {
     HostJoinInfo* joinFoundInfo = nullptr;
-    for( auto joinInfo : m_HostJoinInfoList )
+    auto iter = m_HostJoinInfoList.find( groupieId );
+
+    if( iter != m_HostJoinInfoList.end() )
     {
-        if( joinInfo->getOnlineId() == hostOnlineId && joinInfo->getPluginType() == pluginType )
-        {
-            joinFoundInfo = joinInfo;
-            break;
-        }
+        return iter->second;
     }
 
-    return joinFoundInfo;
+    return nullptr;
 }
 
 //============================================================================
@@ -303,14 +308,14 @@ bool HostJoinMgr::saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked )
 }
 
 //============================================================================
-void HostJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked )
+void HostJoinMgr::removeFromDatabase( GroupieId& groupieId, bool resourcesLocked )
 {
     if( !resourcesLocked )
     {
         lockResources();
     }
 
-    m_HostJoinInfoDb.removeHostJoin( hostOnlineId, pluginType );
+    m_HostJoinInfoDb.removeHostJoin( groupieId );
     if( !resourcesLocked )
     {
         unlockResources();
@@ -321,11 +326,11 @@ void HostJoinMgr::removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginTy
 void HostJoinMgr::fromGuiGetJoinedStateList( EPluginType pluginType, EJoinState joinState, std::vector<HostJoinInfo*>& hostJoinList )
 {
     // NOTE: assumes resources have been locked
-    for( auto* joinInfo : m_HostJoinInfoList )
+    for( auto iter = m_HostJoinInfoList.begin(); iter != m_HostJoinInfoList.end(); ++iter )
     {
-        if( joinInfo->getPluginType() == pluginType && joinInfo->getJoinState() == joinState )
+        if( iter->second->getPluginType() == pluginType && iter->second->getJoinState() == joinState )
         {
-            hostJoinList.push_back(joinInfo);
+            hostJoinList.push_back( iter->second );
         }
     }
 }
@@ -336,9 +341,9 @@ int HostJoinMgr::fromGuiGetJoinedListCount( EPluginType pluginType )
     int joinedCnt = 0;
     lockResources();
 
-    for( auto joinInfo : m_HostJoinInfoList )
+    for( auto iter = m_HostJoinInfoList.begin(); iter != m_HostJoinInfoList.end(); ++iter)
     {
-        if( joinInfo->getPluginType() == pluginType )
+        if( iter->second->getPluginType() == pluginType )
         {
             joinedCnt++;
         }
@@ -352,9 +357,10 @@ int HostJoinMgr::fromGuiGetJoinedListCount( EPluginType pluginType )
 EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& netIdent )
 {
     EJoinState hostJoinState = eJoinStateNone;
+    GroupieId groupieId( netIdent.getMyOnlineId(), m_Engine.getMyOnlineId(), hostType );
 
     lockResources();
-    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent.getMyOnlineId(), HostTypeToHostPlugin( hostType ) );
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( joinInfo )
     {
         hostJoinState = joinInfo->getJoinState();
@@ -374,9 +380,9 @@ EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& n
 EMembershipState HostJoinMgr::fromGuiQueryMembership( EHostType hostType, VxNetIdent& netIdent )
 {
     EMembershipState membershipState{ eMembershipStateNone };
-
+    GroupieId groupieId( netIdent.getMyOnlineId(), m_Engine.getMyOnlineId(), hostType );
     lockResources();
-    HostJoinInfo* joinInfo = findUserJoinInfo( netIdent.getMyOnlineId(), HostTypeToHostPlugin( hostType ) );
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( joinInfo )
     {
         EJoinState hostJoinState = joinInfo->getJoinState();
@@ -413,13 +419,13 @@ void HostJoinMgr::onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, Vx
 }
 
 //============================================================================
-void HostJoinMgr::changeJoinState( VxGUID& onlineId, EPluginType pluginType, EJoinState joinState )
+void HostJoinMgr::changeJoinState( GroupieId& groupieId, EJoinState joinState )
 {
     lockResources();
-    HostJoinInfo* joinInfo = findUserJoinInfo( onlineId, pluginType );
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( joinInfo && joinInfo->setJoinState( joinState ) )
     {
-        if( onlineId != m_Engine.getMyOnlineId() )
+        if( groupieId.getGroupieOnlineId() != m_Engine.getMyOnlineId() )
         {
             saveToDatabase( joinInfo, true );
         }

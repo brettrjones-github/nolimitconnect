@@ -20,6 +20,7 @@
 #include "InetAddress.h"
 
 #include <PktLib/PktAnnounce.h>
+#include <PktLib/GroupieId.h>
 
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxSemaphore.h>
@@ -36,6 +37,8 @@
 	#include <sys/socket.h>
 	#include <arpa/inet.h>
 #endif
+
+#include <set>
 
 enum EConnectionType
 {
@@ -258,6 +261,9 @@ public:
 	struct sockaddr_in&			getMulticastRxAddr( void )							{ return m_MulticastRxAddr; }
 	socklen_t					getMulticastRxAddrLen( void )						{ return sizeof( m_MulticastRxAddr ); }
 
+	void						addGroupieId( GroupieId& groupieId )				{ m_GroupieSet.insert( groupieId ); }
+	bool						removeGroupieId( GroupieId& groupieId )				{ m_GroupieSet.erase( groupieId ); return m_GroupieSet.empty(); }
+
 protected:
 	bool						toSocketAddrInfo(	int sockType, 
 													const char *addr, 
@@ -337,6 +343,8 @@ protected:
     PktAnnounce                 m_PeerPktAnn;
     VxGUID                      m_PeerOnlineId;
     VxMutex                     m_PeerAnnMutex;
+
+	std::set<GroupieId>			m_GroupieSet;
 
     static int					m_TotalCreatedSktCnt;	            // total number of sockets created since program started
     static int					m_CurrentSktCnt;		            // current number of sockets exiting in memory

@@ -43,9 +43,10 @@ GuiHostJoin::GuiHostJoin( const GuiHostJoin& rhs )
     , m_MyApp( rhs.m_MyApp )
     , m_HostJoinMgr( rhs.m_HostJoinMgr )
     , m_GuiUser( rhs.m_GuiUser )
+    , m_GroupieId( rhs.m_GroupieId )
     , m_SessionId( rhs.m_SessionId )
     , m_IsOnline( rhs.m_IsOnline )
-    , m_JoinStateList( rhs.m_JoinStateList )
+    , m_JoinState( rhs.m_JoinState )
 {
 }
 
@@ -66,48 +67,15 @@ bool GuiHostJoin::setOnlineStatus( bool isOnline )
 }
 
 //============================================================================
-EJoinState GuiHostJoin::getJoinState( EHostType hostType )
+bool GuiHostJoin::setJoinState( EJoinState joinState )
 {
-    EJoinState joinState = eJoinStateNone;
-    for( auto& statePair : m_JoinStateList )
+    if( joinState != m_JoinState )
     {
-        if( statePair.first == hostType )
-        {
-            joinState = statePair.second;
-            break;
-        }
+        m_JoinState = joinState;
+        return true;
     }
 
-    return joinState;
-}
-
-//============================================================================
-bool GuiHostJoin::setJoinState( EHostType hostType, EJoinState joinState )
-{
-    bool stateChanged = false;
-    bool foundState = false;
-    for( auto& statePair : m_JoinStateList )
-    {
-        if( statePair.first == hostType )
-        {
-            foundState = true;
-            if( statePair.second != joinState )
-            {
-                statePair.second = joinState;
-                stateChanged = true;
-            }
-            
-            break;
-        }
-    }
-
-    if( !foundState )
-    {
-        m_JoinStateList.push_back( std::make_pair( hostType, joinState ) );
-        stateChanged = true;
-    }
-
-    return stateChanged;
+    return false;
 }
 
 //============================================================================
@@ -119,28 +87,11 @@ int GuiHostJoin::getHostRequestCount( void )
 //============================================================================
 int GuiHostJoin::getRequestStateCount( EJoinState joinState )
 {
-    int stateCnt = 0;
-    for( auto& joinPair : m_JoinStateList )
-    {
-        if( joinPair.second == joinState )
-        {
-            stateCnt++;
-        }
-    }
-
-    return stateCnt;
+    return joinState == m_JoinState;
 }
-
 
 //============================================================================
 void GuiHostJoin::getRequestStateHosts( EJoinState joinState, std::vector<EHostType>& hostRequests )
 {
     hostRequests.clear();
-    for( auto& joinPair : m_JoinStateList )
-    {
-        if( joinPair.second == joinState )
-        {
-            hostRequests.push_back( joinPair.first );
-        }
-    }
 }

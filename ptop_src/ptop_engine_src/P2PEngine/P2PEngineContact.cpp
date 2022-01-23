@@ -116,8 +116,8 @@ int P2PEngine::toGuiSendAdministratorList( int iSentCnt, int iMaxSendCnt )
 		poInfo = *iter;
 		if( shouldNotifyGui( poInfo ) )
 		{
-			LogMsg( LOG_INFO, "toGuiSendAdministratorList: %s\n", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+			LogMsg( LOG_INFO, "toGuiSendAdministratorList: %s", poInfo->getOnlineName());
+			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 		}
 
 		iSentCnt++;
@@ -145,7 +145,7 @@ int P2PEngine::toGuiSendFriendList( int iSentCnt, int iMaxSendCnt )
 		if( shouldNotifyGui( poInfo ) )
 		{
 			LogMsg( LOG_INFO, "toGuiSendFriendList: %s\n", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 		}
 
 		iSentCnt++;
@@ -173,8 +173,8 @@ int P2PEngine::toGuiSendGuestList( int iSentCnt, int iMaxSendCnt )
 			poInfo = *iter;
 			if( shouldNotifyGui( poInfo ) )
 			{
-				LogMsg( LOG_INFO, "toGuiSendGuestList: %s\n", poInfo->getOnlineName());
-				IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+				LogMsg( LOG_INFO, "toGuiSendGuestList: %s", poInfo->getOnlineName());
+				IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 			}
 
 			iSentCnt++;
@@ -202,8 +202,8 @@ int P2PEngine::toGuiSendAnonymousList( int iSentCnt, int iMaxSendCnt )
 		poInfo = *iter;
 		if( shouldNotifyGui( poInfo ) )
 		{
-			LogMsg( LOG_INFO, "toGuiSendAnonymousList: %s\n", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+			LogMsg( LOG_INFO, "toGuiSendAnonymousList: %s", poInfo->getOnlineName());
+			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 		}
 
 		iSentCnt++;
@@ -230,8 +230,8 @@ int P2PEngine::toGuiSendIgnoreList( int iSentCnt, int iMaxSendCnt )
 		poInfo = *iter;
 		if( shouldNotifyGui( poInfo ) )
 		{
-			LogMsg( LOG_INFO, "toGuiSendIgnoreList: %s\n", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+			LogMsg( LOG_INFO, "toGuiSendIgnoreList: %s", poInfo->getOnlineName());
+			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 		}
 
 		iSentCnt++;
@@ -257,8 +257,8 @@ int P2PEngine::toGuiSendMyProxiesList( int iSentCnt, int iMaxSendCnt )
 		poInfo = iter->second;
 		if( poInfo->isMyRelay() || poInfo->isMyPreferedRelay() )
 		{
-			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s\n", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s", poInfo->getOnlineName());
+			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 		}
 
 		iSentCnt++;
@@ -285,8 +285,8 @@ int P2PEngine::toGuiSendAllProxiesList( int iSentCnt, int iMaxSendCnt )
 		if( ( false == poInfo->requiresRelay() ) &&
 			( ePluginAccessOk == poInfo->getMyAccessPermissionFromHim( ePluginTypeRelay ) ) )
 		{
-			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s\n", poInfo->getOnlineName());
-			IToGui::getToGui().toGuiContactOnline( poInfo, eHostTypeUnknown );
+			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s", poInfo->getOnlineName());
+			IToGui::getToGui().toGuiContactOnline( poInfo->getVxNetIdent() );
 		}
 
 		iSentCnt++;

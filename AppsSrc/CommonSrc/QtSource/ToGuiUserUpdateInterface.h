@@ -27,7 +27,7 @@ public:
     virtual void				toGuiContactAdded( VxNetIdent * netIdent ) = 0; 
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) = 0; 
 
-	virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact ) = 0; 
+	virtual void				toGuiContactOnline( VxNetIdent * netIdent ) = 0; 
 	virtual void				toGuiContactOffline( VxNetIdent * netIdent ) = 0; 
 
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) = 0; 

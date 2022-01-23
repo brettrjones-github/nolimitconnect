@@ -15,6 +15,10 @@
 #include "HostJoinInfoDb.h"
 #include "HostJoinInfo.h"
 
+#include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+
+#include <CoreLib/VxPtopUrl.h>
+
 namespace
 {
     std::string 		TABLE_USER_HOST	 				= "tblHostJoins";
@@ -81,19 +85,18 @@ void HostJoinInfoDb::purgeAllHostJoins( void )
 }
 
 //============================================================================
-void HostJoinInfoDb::removeHostJoin( VxGUID& onlineId, EPluginType pluginType )
+void HostJoinInfoDb::removeHostJoin( GroupieId& groupieId )
 {
-    std::string onlineIdStr = onlineId.toHexString();
+    std::string onlineIdStr = groupieId.getGroupieOnlineId().toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
-    bindList.add( (int)pluginType );
+    bindList.add( (int)groupieId.getHostType() );
     sqlExec( "DELETE FROM tblHostJoins WHERE onlineId=? AND pluginType=?", bindList );
 }
 
 //============================================================================
-bool HostJoinInfoDb::addHostJoin(   VxGUID&			onlineId, 
+bool HostJoinInfoDb::addHostJoin(   GroupieId&      groupieId,
                                     VxGUID&			thumbId,
                                     uint64_t		infoModTime,
-                                    EPluginType     pluginType,
                                     EJoinState      joinState,
                                     uint64_t		lastConnectMs,
                                     uint64_t		lastJoinMs,
@@ -102,15 +105,15 @@ bool HostJoinInfoDb::addHostJoin(   VxGUID&			onlineId,
                                     std::string     hostUrl
                                    )
 {
-    removeHostJoin( onlineId, pluginType );
+    removeHostJoin( groupieId );
 
-    std::string onlineIdStr = onlineId.toHexString();
+    std::string onlineIdStr = groupieId.getGroupieOnlineId().toHexString();
     std::string thumbIdStr = thumbId.toHexString();
 
     DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( thumbIdStr.c_str() );
     bindList.add( infoModTime );
-    bindList.add( (int)pluginType );
+    bindList.add( (int)groupieId.getHostType() );
     bindList.add( (int)friendState );
     bindList.add( (int)joinState );
     bindList.add( lastConnectMs );
@@ -123,7 +126,7 @@ bool HostJoinInfoDb::addHostJoin(   VxGUID&			onlineId,
     vx_assert( 0 == rc );
     if( rc )
     {
-        LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin error %d\n", rc );
+        LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin error %d", rc );
     }
 
     return ( 0 == rc );
@@ -132,10 +135,9 @@ bool HostJoinInfoDb::addHostJoin(   VxGUID&			onlineId,
 //============================================================================
 bool HostJoinInfoDb::addHostJoin( HostJoinInfo* hostInfo )
 {
-    return addHostJoin(	hostInfo->BaseInfo::getOnlineId(),
+    return addHostJoin(	hostInfo->getGroupieId(),
                         hostInfo->BaseInfo::getThumbId(),
                         hostInfo->BaseInfo::getInfoModifiedTime(),  
-                        hostInfo->BaseJoinInfo::getPluginType(),  
                         hostInfo->BaseJoinInfo::getJoinState(),		
                         hostInfo->BaseJoinInfo::getLastConnectTime(),	
                         hostInfo->BaseJoinInfo::getLastJoinTime(),
@@ -146,7 +148,7 @@ bool HostJoinInfoDb::addHostJoin( HostJoinInfo* hostInfo )
 }
 
 //============================================================================
-void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJoinList )
+void HostJoinInfoDb::getAllHostJoins( std::map<GroupieId, HostJoinInfo*>& HostJoinHostJoinList )
 {
     lockHostJoinInfoDb();
     DbCursor * cursor = startQuery( "SELECT * FROM tblHostJoins" ); // ORDER BY unique_id DESC  //   don't know why ORDER BY quit working on android.. do in code
@@ -167,9 +169,17 @@ void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJo
             hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
             hostInfo->setUserUrl( cursor->getString( COLUMN_USER_URL ) );
 
-            vx_assert( hostInfo->isUrlValid() );
-
-            insertHostJoinInTimeOrder( hostInfo, HostJoinHostJoinList );
+            VxPtopUrl ptopUrl( hostInfo->getUserUrl() );
+            if( ptopUrl.isValid() && hostInfo->getOnlineId().isVxGUIDValid() )
+            {
+                GroupieId groupieId( ptopUrl.getOnlineId(), m_Engine.getMyOnlineId(), hostInfo->getHostType() );
+                hostInfo->setGroupieId( groupieId );
+                insertHostJoinInTimeOrder( hostInfo, HostJoinHostJoinList );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "HostJoinInfoDb::getAllHostJoins invalid id or user url" );
+            }
         }
 
         cursor->close();
@@ -179,8 +189,10 @@ void HostJoinInfoDb::getAllHostJoins( std::vector<HostJoinInfo*>& HostJoinHostJo
 } 
 
 //============================================================================
-void HostJoinInfoDb::insertHostJoinInTimeOrder( HostJoinInfo *hostInfo, std::vector<HostJoinInfo*>& hostList )
+void HostJoinInfoDb::insertHostJoinInTimeOrder( HostJoinInfo *hostInfo, std::map<GroupieId, HostJoinInfo*>& hostList )
 {
+    hostList[hostInfo->getGroupieId()] = hostInfo;
+    /*
     vx_assert( hostInfo && hostInfo->isUrlValid() );
 
     if( hostInfo->isDefaultHost() )
@@ -205,5 +217,6 @@ void HostJoinInfoDb::insertHostJoinInTimeOrder( HostJoinInfo *hostInfo, std::vec
     }
 
     hostList.push_back( hostInfo );
+    */
 }
 

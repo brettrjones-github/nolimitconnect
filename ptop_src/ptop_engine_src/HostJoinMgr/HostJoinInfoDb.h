@@ -16,7 +16,8 @@
 #include <GuiInterface/IDefs.h>
 
 #include <CoreLib/DbBase.h>
-#include <CoreLib/VxGUID.h>
+#include <PktLib/GroupieId.h>
+#include <map>
 
 class P2PEngine;
 class HostJoinInfo;
@@ -33,17 +34,16 @@ public:
     void						unlockHostJoinInfoDb( void ) { m_HostJoinInfoDbMutex.unlock(); }
 
     bool						addHostJoin( HostJoinInfo * hostInfo );
-    void						removeHostJoin( VxGUID& onlineId, EPluginType pluginType );
+    void						removeHostJoin( GroupieId& groupieId );
 
-    void						getAllHostJoins( std::vector<HostJoinInfo*>& userHostList );
+    void						getAllHostJoins( std::map<GroupieId, HostJoinInfo*>& userHostList );
     void						purgeAllHostJoins( void ); 
 
 protected:
 
-    bool						addHostJoin(    VxGUID&			onlineId, 
+    bool						addHostJoin( GroupieId& groupieId,
                                                 VxGUID&			thumbId,
-                                                uint64_t		infoModTime,
-                                                EPluginType     pluginType,                               
+                                                uint64_t		infoModTime,                             
                                                 EJoinState      joinState,
                                                 uint64_t		lastConnectMs,
                                                 uint64_t		lastJoinMs,
@@ -54,7 +54,7 @@ protected:
 
     virtual RCODE				onCreateTables( int iDbVersion );
     virtual RCODE				onDeleteTables( int iOldVersion );
-    void						insertHostJoinInTimeOrder( HostJoinInfo * hostInfo, std::vector<HostJoinInfo*>& assetList );
+    void						insertHostJoinInTimeOrder( HostJoinInfo * hostInfo, std::map<GroupieId, HostJoinInfo*>& assetList );
 
     P2PEngine&					m_Engine;
     HostJoinMgr&				m_HostJoinMgr;

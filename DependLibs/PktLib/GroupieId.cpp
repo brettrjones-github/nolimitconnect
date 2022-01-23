@@ -18,16 +18,21 @@
 //============================================================================
 GroupieId::GroupieId( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType )
     : m_GroupieOnlineId( groupieOnlineId )
-    , m_HostOnlineId( hostOnlineId )
-    , m_HostType( hostType )
+    , m_HostedId( hostOnlineId, hostType )
+{
+}
+
+//============================================================================
+GroupieId::GroupieId( VxGUID& groupieOnlineId, HostedId& hostedId )
+    : m_GroupieOnlineId( groupieOnlineId )
+    , m_HostedId( hostedId )
 {
 }
 
 //============================================================================
 GroupieId::GroupieId( const GroupieId& rhs )
-    : m_GroupieOnlineId(rhs.m_GroupieOnlineId)
-    , m_HostOnlineId(rhs.m_HostOnlineId)
-    , m_HostType( rhs.m_HostType )
+    : m_GroupieOnlineId( rhs.m_GroupieOnlineId )
+    , m_HostedId( rhs.m_HostedId )
 {
 }
 
@@ -37,8 +42,7 @@ GroupieId& GroupieId::operator =( const GroupieId& rhs )
 	if( this != &rhs )
 	{
         m_GroupieOnlineId         = rhs.m_GroupieOnlineId;
-        m_HostOnlineId            = rhs.m_HostOnlineId;
-        m_HostType                = rhs.m_HostType;
+        m_HostedId                = rhs.m_HostedId;
 	}
 
 	return *this;
@@ -47,7 +51,7 @@ GroupieId& GroupieId::operator =( const GroupieId& rhs )
 //============================================================================
 bool GroupieId::operator == ( const GroupieId& rhs ) const
 {
-    return ( m_GroupieOnlineId == rhs.m_GroupieOnlineId ) && ( m_HostOnlineId == rhs.m_HostOnlineId ) && ( m_HostType == rhs.m_HostType );
+    return ( m_GroupieOnlineId == rhs.m_GroupieOnlineId ) && ( m_HostedId == rhs.m_HostedId );
 }
 
 //============================================================================
@@ -59,13 +63,11 @@ bool GroupieId::operator != ( const GroupieId& rhs ) const
 //============================================================================
 bool GroupieId::operator < ( const GroupieId& rhs ) const
 {
-    if( m_HostOnlineId < rhs.m_HostOnlineId )
-        return true;
-    if( m_HostOnlineId > rhs.m_HostOnlineId )
-        return false;
-
     if( m_GroupieOnlineId < rhs.m_GroupieOnlineId )
         return true;
+    if( m_HostedId < rhs.m_HostedId )
+        return true;
+
     return false;
 }
 
@@ -77,12 +79,13 @@ bool GroupieId::operator <= ( const GroupieId& rhs ) const
         return true;
     }
 
-    if( m_HostOnlineId < rhs.m_HostOnlineId )
-        return true;
-    if( m_HostOnlineId > rhs.m_HostOnlineId )
-        return false;
-
     if( m_GroupieOnlineId < rhs.m_GroupieOnlineId )
+        return true;
+
+    if( m_HostedId < rhs.m_HostedId )
+        return true;
+
+    if( m_GroupieOnlineId == rhs.m_GroupieOnlineId && m_HostedId == rhs.m_HostedId )
         return true;
 
     return false;
@@ -91,12 +94,10 @@ bool GroupieId::operator <= ( const GroupieId& rhs ) const
 //============================================================================
 bool GroupieId::operator > ( const GroupieId& rhs ) const
 {
-    if( m_HostOnlineId > rhs.m_HostOnlineId )
-        return true;
-    if( m_HostOnlineId < rhs.m_HostOnlineId )
-        return false;
-
     if( m_GroupieOnlineId > rhs.m_GroupieOnlineId )
+        return true;
+
+    if( m_HostedId > rhs.m_HostedId )
         return true;
 
     return false;
@@ -110,12 +111,13 @@ bool GroupieId::operator >= ( const GroupieId& rhs ) const
         return true;
     }
 
-    if( m_HostOnlineId > rhs.m_HostOnlineId )
-        return true;
-    if( m_HostOnlineId < rhs.m_HostOnlineId )
-        return false;
-
     if( m_GroupieOnlineId > rhs.m_GroupieOnlineId )
+        return true;
+
+    if( m_HostedId > rhs.m_HostedId )
+        return true;
+
+    if( m_GroupieOnlineId == rhs.m_GroupieOnlineId && m_HostedId == rhs.m_HostedId )
         return true;
 
     return false;
@@ -125,7 +127,7 @@ bool GroupieId::operator >= ( const GroupieId& rhs ) const
 bool GroupieId::addToBlob( PktBlobEntry& blob )
 {
     bool result = blob.setValue( m_GroupieOnlineId );
-    result &= blob.setValue( m_HostOnlineId );
+    result &= m_HostedId.addToBlob( blob );
     return result;
 }
 
@@ -133,7 +135,7 @@ bool GroupieId::addToBlob( PktBlobEntry& blob )
 bool GroupieId::extractFromBlob( PktBlobEntry& blob )
 {
     bool result = blob.getValue( m_GroupieOnlineId );
-    result &= blob.getValue( m_HostOnlineId );
+    result &= m_HostedId.extractFromBlob( blob );
     return result;
 }
 
@@ -142,11 +144,11 @@ bool GroupieId::extractFromBlob( PktBlobEntry& blob )
 int GroupieId::compareTo( GroupieId& groupieId )
 {
     int result = 0;
-    if( m_HostOnlineId > groupieId.m_HostOnlineId )
+    if( *this > groupieId )
     {
         result = 1;
     }
-    else if( m_HostOnlineId < groupieId.m_HostOnlineId )
+    else if( *this < groupieId )
     {
         result = -1;
     }
@@ -172,9 +174,7 @@ std::string GroupieId::describeGroupieId( void ) const
 {
     std::string desc = "user id ";
     desc += m_GroupieOnlineId.toOnlineIdString();
-    desc += " host id ";
-    desc += m_HostOnlineId.toOnlineIdString();
-    desc += " host type ";
-    desc += DescribeHostType( m_HostType );
+    desc += " ";
+    desc += m_HostedId.describeHostedId();
     return desc;
 }

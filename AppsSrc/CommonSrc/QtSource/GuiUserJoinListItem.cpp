@@ -101,14 +101,14 @@ void GuiUserJoinListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser * hostIdent = hostSession->getUserIdent();
-    if( nullptr == hostIdent )
+    GuiUser* guiUser = hostSession->getGuiUser();
+    if( nullptr == guiUser )
     {
         LogMsg( LOG_DEBUG, "GuiUserJoinListItem::updateWidgetFromInfo null gui user" );
         return;
     }
 
-    updateIdentity( hostIdent );
+    updateIdentity( guiUser );
 }
 
 //============================================================================

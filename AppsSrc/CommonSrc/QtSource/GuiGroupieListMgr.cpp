@@ -163,7 +163,7 @@ void GuiGroupieListMgr::removeGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnli
 }
 
 //============================================================================
-bool GuiGroupieListMgr::isGroupieInSession( VxGUID& onlineId )
+bool GuiGroupieListMgr::isGroupieInSession( GroupieId& groupieId )
 {
     // TODO ?
     return false;
@@ -208,26 +208,21 @@ GuiGroupie* GuiGroupieListMgr::updateGroupie( VxNetIdent* hisIdent, EHostType ho
 //============================================================================
 GuiGroupie* GuiGroupieListMgr::updateGroupieInfo( GroupieInfo& groupieInfo )
 {
-    EHostType hostType = groupieInfo.getHostType();
-    GroupieId groupieId( groupieInfo.getGroupieOnlineId(), groupieInfo.getHostOnlineId(), hostType );
-
-    GuiGroupie* guiGroupie = findGroupie( groupieId );
+    GuiGroupie* guiGroupie = findGroupie( groupieInfo.getGroupieId() );
     if( !guiGroupie )
     {
         GuiUser* guiUser = m_MyApp.getUserMgr().getUser( groupieInfo.getGroupieOnlineId() );
         // make a new one
         guiGroupie = new GuiGroupie( m_MyApp, guiUser, groupieInfo.getGroupieOnlineId(), groupieInfo );
 
-        m_GroupieList[groupieId] = guiGroupie;
+        m_GroupieList[groupieInfo.getGroupieId()] = guiGroupie;
         onGroupieAdded( guiGroupie );
     }
     else
     {
         // make sure is up to date. search results should be the latest info
-        guiGroupie->setHostType( groupieInfo.getHostType() );
+        guiGroupie->setGroupieInfoTimestamp( groupieInfo.getGroupieInfoTimestamp() );
         // skip setIsFavorite.. is probably not set correctly in search result
-
-        guiGroupie->setGroupieInfoTimestamp( groupieInfo.getHostType() );
         guiGroupie->setGroupieUrl( groupieInfo.getGroupieUrl() );
         guiGroupie->setGroupieTitle( groupieInfo.getGroupieTitle() );
         guiGroupie->setGroupieDescription( groupieInfo.getGroupieDescription() );
@@ -237,7 +232,7 @@ GuiGroupie* GuiGroupieListMgr::updateGroupieInfo( GroupieInfo& groupieInfo )
 }
 
 //============================================================================
-void GuiGroupieListMgr::setGroupieOffline( VxGUID& onlineId )
+void GuiGroupieListMgr::setGroupieOffline( GroupieId& groupieId )
 {
     /*
     GuiGroupie* guiGroupie = findGroupie( onlineId );
@@ -298,11 +293,10 @@ void GuiGroupieListMgr::updateHostSearchResult( GroupieInfo& groupieInfo, VxGUID
     // hosted info is temporary and will soon be deleted so make copy if required
     if( groupieInfo.isGroupieValid() )
     {
-        GroupieId groupieId( groupieInfo.getGroupieOnlineId(), groupieInfo.getHostOnlineId(), groupieInfo.getHostType() );
         GuiGroupie* guiGroupie = updateGroupieInfo( groupieInfo );
         if( guiGroupie )
         {
-            announceGroupieListSearchResult( groupieId, guiGroupie, sessionId );
+            announceGroupieListSearchResult( groupieInfo.getGroupieId(), guiGroupie, sessionId );
         }
     }
     else

@@ -77,7 +77,6 @@ const char * PktHostOfferReply::getOfferMsg( void )
 PktHostJoinReq::PktHostJoinReq()
 {
     setPktType( PKT_TYPE_HOST_JOIN_REQ );
-    LogMsg( LOG_DEBUG, "PktHostJoinReq size %d", sizeof( PktHostJoinReq ) );
     setPktLength( sizeof(PktHostJoinReq) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }
@@ -87,5 +86,21 @@ PktHostJoinReply::PktHostJoinReply()
 {
     setPktType( PKT_TYPE_HOST_JOIN_REPLY );
     setPktLength( sizeof(PktHostJoinReply) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktHostUnJoinReq::PktHostUnJoinReq()
+{
+    setPktType( PKT_TYPE_HOST_UNJOIN_REQ );
+    setPktLength( sizeof( PktHostUnJoinReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktHostUnJoinReply::PktHostUnJoinReply()
+{
+    setPktType( PKT_TYPE_HOST_UNJOIN_REPLY );
+    setPktLength( sizeof( PktHostUnJoinReply ) );
     vx_assert( 0 == ( getPktLength() & 0x0f ) );
 }

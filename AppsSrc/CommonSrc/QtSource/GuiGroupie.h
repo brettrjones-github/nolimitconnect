@@ -33,52 +33,46 @@ public:
     GuiGroupie() = delete;
     GuiGroupie( AppCommon& app );
     GuiGroupie( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId );
-    GuiGroupie( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, GroupieInfo& hostedInfo );
+    GuiGroupie( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, GroupieInfo& groupieInfo );
     GuiGroupie( const GuiGroupie& rhs );
 	virtual ~GuiGroupie() = default;
 
-    GuiGroupieListMgr&          getGroupieListMgr( void )               { return m_GroupieListMgr; }
+    GuiGroupieListMgr&          getGroupieListMgr( void )                   { return m_GroupieListMgr; }
 
-    GroupieId                   getGroupieId( void )                    { return GroupieId( m_GroupieOnlineId, m_HostOnlineId, m_HostType ); }
+    void                        setUser( GuiUser* user )                    { m_GuiUser = user; }
+    GuiUser*                    getUser( void )                             { return m_GuiUser; }
 
-    void                        setUser( GuiUser* user )                { m_GuiUser = user; }
-    GuiUser*                    getUser( void )                         { return m_GuiUser; }
+    void				        setGroupieOnlineId( GroupieId& groupieId )  { m_GroupieId = groupieId; }
+    GroupieId&                  getGroupieId( void )                        { return m_GroupieId; }
+    void				        setGroupieOnlineId( VxGUID& onlineId )      { m_GroupieId.setGroupieOnlineId( onlineId ); }
+    VxGUID&                     getGroupieOnlineId( void )                  { return m_GroupieId.getGroupieOnlineId(); }
+    void			            setHostedOnlineId( VxGUID& onlineId )       { m_GroupieId.setHostedOnlineId( onlineId ); }
+    VxGUID&                     getHostedOnlineId( void )                   { return m_GroupieId.getHostedOnlineId(); }
+    void			            setHostType( EHostType hostType )           { m_GroupieId.setHostType( hostType ); }
+    EHostType	                getHostType( void )                         { return m_GroupieId.getHostType(); }
 
-    virtual void				setGroupieOnlineId( VxGUID& onlineId ) { m_GroupieOnlineId = onlineId; }
-    virtual VxGUID&             getGroupieOnlineId( void )             { return m_GroupieOnlineId; }
-
-    virtual void			    setHostOnlineId( VxGUID& onlineId )     { m_HostOnlineId = onlineId; }
-    virtual VxGUID&             getHostOnlineId( void )                 { return m_HostOnlineId; }
-
-    virtual void			    setHostType( EHostType hostType )       { m_HostType = hostType; }
-    virtual EHostType	        getHostType( void )                     { return m_HostType; }
-
-    virtual void                setIsFavorite( bool isFavorite )        { m_IsFavorite = isFavorite; }
-    virtual bool                getIsFavorite( void )                   { return m_IsFavorite; }
+    virtual void                setIsFavorite( bool isFavorite )            { m_IsFavorite = isFavorite; }
+    virtual bool                getIsFavorite( void )                       { return m_IsFavorite; }
 
     virtual void			    setGroupieInfoTimestamp( int64_t timestampMs ) { m_GroupieInfoTimestampMs = timestampMs; }
-    virtual int64_t             getGroupieInfoTimestamp( void )         { return m_GroupieInfoTimestampMs; }
+    virtual int64_t             getGroupieInfoTimestamp( void )             { return m_GroupieInfoTimestampMs; }
 
-    virtual void			    setGroupieUrl( std::string hostUrl )    { m_GroupieUrl = hostUrl; }
-    virtual std::string&        getGroupieUrl( void )                   { return m_GroupieUrl; }
+    virtual void			    setGroupieUrl( std::string hostUrl )        { m_GroupieUrl = hostUrl; }
+    virtual std::string&        getGroupieUrl( void )                       { return m_GroupieUrl; }
 
-    virtual void                setGroupieTitle( std::string hostTitle ) { m_GroupieTitle = hostTitle; }
-    virtual std::string&        getGroupieTitle( void )                 { return m_GroupieTitle; }
+    virtual void                setGroupieTitle( std::string hostTitle )    { m_GroupieTitle = hostTitle; }
+    virtual std::string&        getGroupieTitle( void )                     { return m_GroupieTitle; }
 
     virtual void                setGroupieDescription( std::string hostDesc ) { m_GroupieDesc = hostDesc; }
-    virtual std::string&        getGroupieDescription( void )           { return m_GroupieDesc; }
+    virtual std::string&        getGroupieDescription( void )               { return m_GroupieDesc; }
 
 protected:
     AppCommon&                  m_MyApp;
     GuiGroupieListMgr&          m_GroupieListMgr;
 
     GuiUser*                    m_GuiUser{ nullptr };
+    GroupieId                   m_GroupieId;
     VxGUID                      m_SessionId;
-
-    VxGUID                      m_GroupieOnlineId;
-    VxGUID                      m_HostOnlineId;
-    EHostType                   m_HostType{ eHostTypeUnknown };
-
     
     bool                        m_IsFavorite{ false };
     int64_t                     m_GroupieInfoTimestampMs{ 0 };

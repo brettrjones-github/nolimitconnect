@@ -64,7 +64,7 @@ GuiHostJoinSession* HostJoinRequestListWidget::widgetToSession( HostJoinRequestL
 }
 
 //============================================================================
-HostJoinRequestListItem* HostJoinRequestListWidget::findListEntryWidgetByHostId( EHostType hostType, VxGUID& onlineId )
+HostJoinRequestListItem* HostJoinRequestListWidget::findListEntryWidgetByGroupieId( GroupieId& groupieId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -73,7 +73,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::findListEntryWidgetByHostId(
         if( hostItem )
         {
             GuiHostJoinSession * hostSession = hostItem->getHostSession();
-            if( hostSession && hostSession->getOnlineId() == onlineId && hostType == hostSession->getHostType() )
+            if( hostSession && hostSession->getGroupieId() == groupieId )
             {
                 return hostItem;
             }
@@ -84,27 +84,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::findListEntryWidgetByHostId(
 }
 
 //============================================================================
-HostJoinRequestListItem* HostJoinRequestListWidget::findListEntryWidgetByOnlineId( VxGUID& onlineId )
-{
-    int iCnt = count();
-    for( int iRow = 0; iRow < iCnt; iRow++ )
-    {
-        HostJoinRequestListItem*  hostItem = (HostJoinRequestListItem*)item( iRow );
-        if( hostItem )
-        {
-            GuiHostJoinSession * hostSession = hostItem->getHostSession();
-            if( hostSession && hostSession->getOnlineId() == onlineId )
-            {
-                return hostItem;
-            }
-        }
-    }
-
-    return nullptr;
-}
-
-//============================================================================
-void HostJoinRequestListWidget::removeHostJoinRequest( VxGUID& onlineId, EHostType hostType )
+void HostJoinRequestListWidget::removeHostJoinRequest( GroupieId& groupieId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -113,7 +93,7 @@ void HostJoinRequestListWidget::removeHostJoinRequest( VxGUID& onlineId, EHostTy
         if( hostItem )
         {
             GuiHostJoinSession* hostSession = hostItem->getHostSession();
-            if( hostSession && hostSession->getOnlineId() == onlineId && hostSession->getHostType() == hostType)
+            if( hostSession && hostSession->getGroupieId() == groupieId )
             {
                 removeItemWidget( hostItem );  
                 hostSession->deleteLater();
@@ -209,10 +189,10 @@ void HostJoinRequestListWidget::slotRejectButtonClicked( HostJoinRequestListItem
 }
 
 //============================================================================
-void HostJoinRequestListWidget::addOrUpdateHostRequest( EHostType hostType, GuiHostJoin* hostJoin )
+void HostJoinRequestListWidget::addOrUpdateHostRequest( GuiHostJoin* hostJoin )
 {
     GuiHostJoinSession* hostSession = nullptr;
-    HostJoinRequestListItem* hostItem = findListEntryWidgetByHostId( hostType, hostJoin->getUser()->getMyOnlineId() );
+    HostJoinRequestListItem* hostItem = findListEntryWidgetByGroupieId( hostJoin->getGroupieId() );
     if( hostItem )
     {
         hostSession = hostItem->getHostSession();
@@ -220,7 +200,7 @@ void HostJoinRequestListWidget::addOrUpdateHostRequest( EHostType hostType, GuiH
     
     if( !hostSession )
     {
-        hostSession = new GuiHostJoinSession( hostType, hostJoin, this );
+        hostSession = new GuiHostJoinSession( hostJoin, this );
     }
 
     addOrUpdateHostRequestSession( hostSession );
@@ -230,7 +210,7 @@ void HostJoinRequestListWidget::addOrUpdateHostRequest( EHostType hostType, GuiH
 HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostRequestSession( GuiHostJoinSession* hostSession )
 {
     vx_assert( hostSession );
-    HostJoinRequestListItem* hostItem = findListEntryWidgetByHostId( hostSession->getHostType(), hostSession->getOnlineId() );
+    HostJoinRequestListItem* hostItem = findListEntryWidgetByGroupieId( hostSession->getGroupieId() );
     if( hostItem )
     {
         GuiHostJoinSession* hostOldSession = hostItem->getHostSession();
@@ -252,17 +232,17 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostRequestSessio
         {
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s", hostSession->getUserIdent()->getUser()->getOnlineName().c_str() );
+                LogMsg( LOG_INFO, "add host %s", hostSession->getOnlineName().c_str() );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s", hostSession->getUserIdent()->getUser()->getOnlineName().c_str() );
+                LogMsg( LOG_INFO, "insert host %s", hostSession->getOnlineName().c_str() );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            VxGUID thumbId = hostSession->getUserIdent()->getUser()->getHostThumbId( hostSession->getHostType(), false );
+            VxGUID thumbId = hostSession->getGuiUser()->getHostThumbId( hostSession->getHostType(), false );
             GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
             if( thumb )
             {
@@ -279,7 +259,7 @@ HostJoinRequestListItem* HostJoinRequestListWidget::addOrUpdateHostRequestSessio
 
     if( hostItem )
     {
-        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getUserIdent()->getUser()->getNetIdent() ) );
+        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getGuiUser()->getNetIdent() ) );
     }
 
     return hostItem;

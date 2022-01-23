@@ -28,11 +28,13 @@ public:
 
 	GuiHostedListSession&		operator =( const GuiHostedListSession &rhs );
 
+    GuiHosted* getHosted( void ) { return m_GuiHosted; }
+
     HostedId&                   getHostedId( void )                         { return m_HostedId; }
-    GuiHosted*                  getHosted( void )                           { return m_GuiHosted; }
-    GuiUser*                    getUserIdent( void )                        { return m_GuiHosted ? m_GuiHosted->getUser() : nullptr; }
+    VxGUID&                     getOnlineId( void )                         { return m_HostedId.getOnlineId(); }
     EHostType                   getHostType( void )                         { return m_HostedId.getHostType(); }
-    VxGUID&					    getOnlineId( void )                         { return m_HostedId.getOnlineId(); }
+
+    GuiUser*                    getUserIdent( void )                        { return m_GuiHosted ? m_GuiHosted->getUser() : nullptr; }
 
     std::string                 getHostUrl( void );
     std::string                 getHostTitle( void );
@@ -48,9 +50,9 @@ public:
 
 protected:
 	//=== vars ===//
-    HostedId                    m_HostedId;
     GuiHosted*                  m_GuiHosted{ nullptr };
-	VxGUID					    m_SessionId;
+    HostedId                    m_HostedId;
+    VxGUID					    m_SessionId;
 
     QWidget*					m_Widget{ nullptr };
 };

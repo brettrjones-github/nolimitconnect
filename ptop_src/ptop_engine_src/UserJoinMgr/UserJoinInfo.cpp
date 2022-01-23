@@ -37,6 +37,7 @@ UserJoinInfo::UserJoinInfo( const UserJoinInfo& rhs )
     : BaseJoinInfo( rhs )
     , m_NetIdent( rhs.m_NetIdent )
     , m_HostFlags( rhs.m_HostFlags )
+    , m_GroupieId( rhs.m_GroupieId )
     , m_HostUrl( rhs.m_HostUrl )
     , m_ConnectionId( rhs.m_ConnectionId )
     , m_SessionId( rhs.m_SessionId )
@@ -51,6 +52,7 @@ UserJoinInfo& UserJoinInfo::operator=( const UserJoinInfo& rhs )
         BaseJoinInfo::operator = ( rhs );
         m_NetIdent = rhs.m_NetIdent;
         m_HostFlags = rhs.m_HostFlags;
+        m_GroupieId = rhs.m_GroupieId;
         m_HostUrl = rhs.m_HostUrl;
         m_ConnectionId = rhs.m_ConnectionId;
         m_SessionId = rhs.m_SessionId;

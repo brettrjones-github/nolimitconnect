@@ -18,7 +18,7 @@
 class HostJoinRequestListItem;
 class GuiHostJoin;
 class GuiHostJoinSession;
-class PluginSetting;
+class GroupieId;
 
 class HostJoinRequestListWidget : public ListWidgetBase
 {
@@ -29,12 +29,11 @@ public:
 
     void                        clearHostJoinRequestList( void );
 
-    void                        addOrUpdateHostRequest( EHostType hostType, GuiHostJoin* hostJoin );
+    void                        addOrUpdateHostRequest( GuiHostJoin* hostJoin );
     HostJoinRequestListItem*    addOrUpdateHostRequestSession( GuiHostJoinSession* hostSession );
 
-    HostJoinRequestListItem*    findListEntryWidgetByHostId( EHostType hostType, VxGUID& onlineId );
-    HostJoinRequestListItem*    findListEntryWidgetByOnlineId( VxGUID& onlineId );
-    void                        removeHostJoinRequest( VxGUID& onlineId, EHostType hostType );
+    HostJoinRequestListItem*    findListEntryWidgetByGroupieId( GroupieId& groupieId );
+    void                        removeHostJoinRequest( GroupieId& groupieId );
 
 signals:
     void                        signalAvatarButtonClicked( GuiHostJoinSession* hostSession, HostJoinRequestListItem* hostItem );
@@ -54,7 +53,7 @@ protected slots:
 
 protected:
     HostJoinRequestListItem*    sessionToWidget( GuiHostJoinSession* hostSession );
-    GuiHostJoinSession*				widgetToSession( HostJoinRequestListItem* hostItem );
+    GuiHostJoinSession*			widgetToSession( HostJoinRequestListItem* hostItem );
 
     virtual void                onHostJoinRequestListItemClicked( HostJoinRequestListItem* hostItem );
     virtual void                onAvatarButtonClicked( HostJoinRequestListItem* hostItem );

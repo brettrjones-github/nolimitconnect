@@ -23,20 +23,19 @@ GuiHostJoinSession::GuiHostJoinSession( QWidget* parentWidget )
 }
 
 //============================================================================
-GuiHostJoinSession::GuiHostJoinSession( EHostType hostType, GuiHostJoin* hostJoinIdent, QWidget* parentWidget )
+GuiHostJoinSession::GuiHostJoinSession( GuiHostJoin* guiHostJoin, QWidget* parentWidget )
     : QWidget( parentWidget )
-    , m_HostType( hostType )
-    , m_OnlineId( hostJoinIdent->getUser()->getMyOnlineId() )
-    , m_HostIdent( hostJoinIdent )
+    , m_GroupieId( guiHostJoin->getGroupieId() )
+    , m_GuiHostJoin( guiHostJoin )
 {
 }
 
 //============================================================================
 GuiHostJoinSession::GuiHostJoinSession( const GuiHostJoinSession &rhs )
     : QWidget()
-    , m_HostType( rhs.m_HostType )
-    , m_OnlineId( rhs.m_OnlineId )
-    , m_HostIdent( rhs.m_HostIdent )
+    , m_GroupieId( rhs.m_GroupieId )
+    , m_GuiHostJoin( rhs.m_GuiHostJoin )
+    , m_SessionId( rhs.m_SessionId )
 {
 }
 
@@ -45,26 +44,32 @@ GuiHostJoinSession& GuiHostJoinSession::operator =( const GuiHostJoinSession &rh
 {
 	if( this != &rhs )   
 	{
-        m_HostType		        = rhs.m_HostType;
-        m_HostIdent		        = rhs.m_HostIdent;
-        m_OnlineId			    = rhs.m_OnlineId;
+        m_GroupieId             = rhs.m_GroupieId;
+        m_GuiHostJoin           = rhs.m_GuiHostJoin;
+        m_SessionId             = rhs.m_SessionId;
 	}
 
 	return *this;
 }
 
 //============================================================================
+std::string GuiHostJoinSession::getGroupieUrl( void )
+{
+    return m_GuiHostJoin->getUser()->getMyOnlineUrl();
+}
+
+//============================================================================
 std::string GuiHostJoinSession::getHostUrl( void )
 {
-    return m_HostIdent->getUser()->getMyOnlineUrl();
+    return m_GuiHostJoin->getUser()->getMyOnlineUrl();
 }
 
 //============================================================================
 std::string GuiHostJoinSession::getHostDescription( void )
 {
-    if( !m_HostIdent->getUser()->getOnlineDescription().empty() )
+    if( !m_GuiHostJoin->getUser()->getOnlineDescription().empty() )
     {
-        return m_HostIdent->getUser()->getOnlineDescription();
+        return m_GuiHostJoin->getUser()->getOnlineDescription();
     }
     else
     {
@@ -75,5 +80,31 @@ std::string GuiHostJoinSession::getHostDescription( void )
 //============================================================================
 VxGUID GuiHostJoinSession::getHostThumbId( void )
 {
-    return m_HostIdent->getUser()->getAvatarThumbId();
+    return m_GuiHostJoin->getUser()->getAvatarThumbId();
+}
+
+//============================================================================
+void GuiHostJoinSession::setHostJoin( GuiHostJoin* guiHostJoin )
+{
+    m_GuiHostJoin = guiHostJoin;
+    if( m_GuiHostJoin )
+    {
+        m_GroupieId = guiHostJoin->getGroupieId();
+    }
+    else
+    {
+        m_GroupieId.clear();
+    }
+}
+
+//============================================================================
+GuiUser* GuiHostJoinSession::getGuiUser( void )
+{ 
+    return m_GuiHostJoin ? m_GuiHostJoin->getUser() : nullptr; 
+}
+
+//============================================================================
+EHostType GuiHostJoinSession::getHostType( void )
+{
+    return m_GroupieId.getHostType();
 }

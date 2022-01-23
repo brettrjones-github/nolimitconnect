@@ -42,9 +42,9 @@ AppletHostJoinRequestList::AppletHostJoinRequestList( AppCommon& app,  QWidget* 
 	ui.m_InviteAcceptButton->setFixedSize( eButtonSizeSmall );
 	ui.m_InviteAcceptButton->setIcon( eMyIconInvite );
 
-	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
-	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );
-	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRemoved( VxGUID&, EHostType ) ), this, SLOT( slotHostJoinRemoved( VxGUID&, EHostType ) ) );
+	//connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRequested( GuiHostJoin * ) ), this, SLOT( slotHostJoinRequested( GuiHostJoin *) ) );
+	//connect( &m_HostJoinMgr, SIGNAL( signalHostJoinUpdated( GuiHostJoin* ) ), this, SLOT( slotlHostJoinUpdated( GuiHostJoin * ) ) );
+	//connect( &m_HostJoinMgr, SIGNAL( signalHostJoinRemoved( VxGUID&, EHostType ) ), this, SLOT( slotHostJoinRemoved( VxGUID&, EHostType ) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinOfferStateChange( VxGUID&, EHostType, EJoinState ) ), this, SLOT( slotHostJoinOfferStateChange( VxGUID&, EHostType, EJoinState ) ) );
 	connect( &m_HostJoinMgr, SIGNAL( signalHostJoinOnlineStatus( GuiHostJoin *, bool ) ), this, SLOT( slotHostJoinOnlineStatus( GuiHostJoin*, bool ) ) );
 
@@ -70,37 +70,37 @@ AppletHostJoinRequestList::~AppletHostJoinRequestList()
 void AppletHostJoinRequestList::updateJoinList( void )
 {
 	ui.m_HostJoinRequestList->clear();
-	std::map<VxGUID, GuiHostJoin*>& joinList = m_HostJoinMgr.getHostJoinList();
+	std::map<GroupieId, GuiHostJoin*>& joinList = m_HostJoinMgr.getHostJoinList();
 	for( auto& iter : joinList )
 	{
-		GuiHostJoin* user = iter.second;
-		if( !user->getUser()->isIgnored() && m_JoinState == user->getJoinState( m_HostType ) )
+		GuiHostJoin* guiHostJoin = iter.second;
+		if( guiHostJoin->getUser() && !guiHostJoin->getUser()->isIgnored() && m_JoinState == guiHostJoin->getJoinState() )
 		{
-			updateHostJoinRequest( user );
+			updateHostJoinRequest( guiHostJoin );
 		}
 	}
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinRequested( GuiHostJoin* user )
+void AppletHostJoinRequestList::slotHostJoinRequested( GuiHostJoin* guiHostJoin )
 {
-	updateHostJoinRequest( user );
+	updateHostJoinRequest( guiHostJoin );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotlHostJoinUpdated( GuiHostJoin* user )
+void AppletHostJoinRequestList::slotlHostJoinUpdated( GuiHostJoin* guiHostJoin )
 {
-	updateHostJoinRequest( user );
+	updateHostJoinRequest( guiHostJoin );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinRemoved( VxGUID& onlineId, EHostType hostType )
+void AppletHostJoinRequestList::slotHostJoinRemoved( GroupieId& groupieId )
 {
-	ui.m_HostJoinRequestList->removeHostJoinRequest( onlineId, hostType );
+	ui.m_HostJoinRequestList->removeHostJoinRequest( groupieId );
 }
 
 //============================================================================
-void AppletHostJoinRequestList::slotHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState )
+void AppletHostJoinRequestList::slotHostJoinOfferStateChange( GroupieId& groupieId, EJoinState hostOfferState )
 {
 	updateJoinList();
 }
@@ -112,39 +112,32 @@ void AppletHostJoinRequestList::slotHostJoinOnlineStatus( GuiHostJoin* user, boo
 }
 
 //============================================================================
-void AppletHostJoinRequestList::updateHostJoinRequest( GuiHostJoin* user )
+void AppletHostJoinRequestList::updateHostJoinRequest( GuiHostJoin* guiHostJoin )
 {
-	vx_assert( user );
-	VxGUID& onlineId = user->getUser()->getMyOnlineId();
-	std::vector<EHostType> hostRequests;
-	user->getRequestStateHosts( m_JoinState, hostRequests );
-	for( int hostEnum = eHostTypeUnknown; hostEnum < eMaxHostType; hostEnum++ )
+	vx_assert( guiHostJoin );
+	if( guiHostJoin->getJoinState() == eJoinStateJoinRequested )
 	{
-		EHostType hostType = (EHostType)hostEnum;
-		if( std::find( hostRequests.begin(), hostRequests.end(), hostType ) != hostRequests.end() )
-		{
-			ui.m_HostJoinRequestList->addOrUpdateHostRequest( hostType, user );
-		}
-		else
-		{
-			ui.m_HostJoinRequestList->removeHostJoinRequest( onlineId, hostType );
-		}
+		ui.m_HostJoinRequestList->addOrUpdateHostRequest( guiHostJoin );
+	}
+	else
+	{
+		ui.m_HostJoinRequestList->removeHostJoinRequest( guiHostJoin->getGroupieId() );
 	}
 }
 
 //============================================================================
 void AppletHostJoinRequestList::slotAcceptButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
 {
-	if( joinSession && joinSession->getUserIdent() )
+	if( joinSession && joinSession->getHostJoin() )
 	{
-		m_HostJoinMgr.joinAccepted( joinSession->getUserIdent(), joinSession->getHostType() );
+		m_HostJoinMgr.joinAccepted( joinSession->getHostJoin() );
 	}
 }
 
 //============================================================================
 void AppletHostJoinRequestList::slotRejectButtonClicked( GuiHostJoinSession* joinSession, HostJoinRequestListItem* joinItem )
 {
-	m_HostJoinMgr.joinRejected( joinSession->getUserIdent(), joinSession->getHostType() );
+	m_HostJoinMgr.joinRejected( joinSession->getHostJoin() );
 }
 
 //============================================================================

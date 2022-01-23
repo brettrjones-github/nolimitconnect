@@ -17,6 +17,7 @@
 #include "HostJoinedLastDb.h"
 
 #include <CoreLib/VxMutex.h>
+#include <map>
 
 class BaseSessionInfo;
 class HostJoinInfo;
@@ -24,6 +25,7 @@ class HostJoinCallbackInterface;
 class P2PEngine;
 class VxSktBase;
 class VxNetIdent;
+class GroupieId;
 
 class HostJoinMgr 
 {
@@ -44,7 +46,7 @@ public:
 
     virtual void				announceHostJoinRequested( HostJoinInfo* userHostInfo );
     virtual void				announceHostJoinUpdated( HostJoinInfo* userHostInfo );
-    virtual void				announceHostJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType );
+    virtual void				announceHostJoinRemoved( GroupieId& groupieId );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
@@ -54,9 +56,9 @@ public:
     void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
-    HostJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType ); 
+    HostJoinInfo*               findUserJoinInfo( GroupieId& groupieId );
 
-    void                        changeJoinState( VxGUID& onlineId, EPluginType pluginType, EJoinState joinState );
+    void                        changeJoinState( GroupieId& groupieId, EJoinState joinState );
 
 protected:
     void						clearHostJoinInfoList( void );
@@ -65,7 +67,7 @@ protected:
     void						unlockClientList( void )					{ m_HostJoinClientMutex.unlock(); }
 
     bool                        saveToDatabase( HostJoinInfo* joinInfo, bool resourcesLocked = false );
-    void                        removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool resourcesLocked );
+    void                        removeFromDatabase( GroupieId& groupieId, bool resourcesLocked );
 
     P2PEngine&					m_Engine;
     HostJoinInfoDb              m_HostJoinInfoDb;
@@ -73,7 +75,7 @@ protected:
     VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  
-    std::vector<HostJoinInfo*>	m_HostJoinInfoList;
+    std::map<GroupieId, HostJoinInfo*>	m_HostJoinInfoList;
     VxMutex						m_HostJoinInfoMutex;
     bool                        m_HostJoinListInitialized{ false };
 

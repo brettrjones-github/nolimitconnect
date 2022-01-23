@@ -24,16 +24,16 @@ GuiHostedListSession::GuiHostedListSession( QWidget* parent )
 //============================================================================
 GuiHostedListSession::GuiHostedListSession( HostedId& hostedId, GuiHosted* guiHosted, QWidget* parent )
     : QWidget( parent )
-    , m_HostedId( hostedId )
     , m_GuiHosted( guiHosted )
+    , m_HostedId( hostedId )
 {
 }
 
 //============================================================================
 GuiHostedListSession::GuiHostedListSession( const GuiHostedListSession &rhs )
     : QWidget()
-    , m_HostedId( rhs.m_HostedId )
     , m_GuiHosted( rhs.m_GuiHosted )
+    , m_HostedId( rhs.m_HostedId )
     , m_SessionId( rhs.m_SessionId )
 {
 }
@@ -43,9 +43,9 @@ GuiHostedListSession& GuiHostedListSession::operator =( const GuiHostedListSessi
 {
 	if( this != &rhs )   
 	{
+        m_GuiHosted             = rhs.m_GuiHosted;
         m_HostedId              = rhs.m_HostedId;
         m_SessionId				= rhs.m_SessionId;
-        m_GuiHosted             = rhs.m_GuiHosted;
 	}
 
 	return *this;

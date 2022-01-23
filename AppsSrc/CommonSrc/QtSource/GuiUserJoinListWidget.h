@@ -16,7 +16,7 @@
 #include <GuiInterface/IDefs.h>
 
 #include <CoreLib/VxTimer.h>
-#include <CoreLib/VxGUID.h>
+#include <PktLib/GroupieId.h>
 
 #include <QListWidget>
 
@@ -55,18 +55,18 @@ public:
 	MyIcons&					getMyIcons( void );
     void                        clearUserJoinList( void );
 
-    void                        addUserJoinToList( EHostType hostType, VxGUID& sessionId,  GuiUserJoin * userIdent );
-    GuiUserJoinListItem*           addOrUpdateUserJoinSession( GuiUserJoinSession* hostSession );
+    void                        addUserJoinToList( VxGUID& sessionId, GuiUserJoin* guiUserJoin );
+    GuiUserJoinListItem*        addOrUpdateUserJoinSession( GuiUserJoinSession* hostSession );
 
     GuiUserJoinSession*         findSession( VxGUID& lclSessionId );
-    GuiUserJoinListItem*           findListEntryWidgetBySessionId( VxGUID& sessionId );
-    GuiUserJoinListItem*           findListEntryWidgetByOnlineId( VxGUID& onlineId );
+    GuiUserJoinListItem*        findListEntryWidgetBySessionId( VxGUID& sessionId );
+    GuiUserJoinListItem*        findListEntryWidgetByGroupieId( GroupieId& groupieId );
 
-    void                        updateUserJoin( GuiUserJoin * user );
-    void                        removeUserJoin( VxGUID& onlineId );
+    void                        updateUserJoin( GuiUserJoin* guiUserJoin );
+    void                        removeUserJoin( GroupieId& groupieId );
 
-    void                        setShowMyself( bool show )                  { m_ShowMyself = show; }
-    bool                        getShowMyself( void )                       { return m_ShowMyself; }
+    void                        setShowMyself( bool show )                      { m_ShowMyself = show; }
+    bool                        getShowMyself( void )                           { return m_ShowMyself; }
 
     void                        setUserJoinViewType( EUserJoinViewType viewType );
     EUserJoinViewType           getUserJoinViewType( void )                     { return m_UserJoinViewType; }
@@ -76,12 +76,12 @@ signals:
     void                        signalMenuButtonClicked( GuiUserJoinSession* hostSession, GuiUserJoinListItem* hostItem );
 
 protected slots:
-    void				        slotMyIdentUpdated( GuiUserJoin* user ); 
+    void				        slotMyIdentUpdated( GuiUserJoin* guiUserJoin );
 
-    void				        slotUserJoinAdded( GuiUserJoin* user ); 
-    void				        slotUserJoinRemoved( VxGUID onlineId ); 
-    void                        slotUserJoinUpdated( GuiUserJoin* user );
-    void                        slotUserJoinOnlineStatus( GuiUserJoin* user, bool isOnline );
+    void				        slotUserJoinAdded( GuiUserJoin* guiUserJoin );
+    void				        slotUserJoinRemoved( GroupieId& groupieId );
+    void                        slotUserJoinUpdated( GuiUserJoin* guiUserJoin );
+    void                        slotUserJoinOnlineStatus( GuiUserJoin* guiUserJoin, bool isOnline );
 
     void				        slotThumbAdded( GuiThumb* thumb ); 
     void                        slotThumbUpdated( GuiThumb* thumb );
@@ -91,7 +91,7 @@ protected slots:
     void                        slotMenuButtonClicked( GuiUserJoinListItem* hostItem );
 
 protected:
-    GuiUserJoinListItem*           sessionToWidget( GuiUserJoinSession* hostSession );
+    GuiUserJoinListItem*        sessionToWidget( GuiUserJoinSession* hostSession );
     GuiUserJoinSession*			widgetToSession( GuiUserJoinListItem* hostItem );
 
     virtual void                onListItemAdded( GuiUserJoinSession* userSession, GuiUserJoinListItem* userItem );
@@ -111,7 +111,7 @@ protected:
     GuiUserJoinMgr&				m_UserJoinMgr;
     GuiThumbMgr&				m_ThumbMgr;
 	VxTimer						m_ClickEventTimer; // avoid duplicate clicks
-    std::map<VxGUID, GuiUserJoinSession*> m_UserJoinCache;
+    std::map<GroupieId, GuiUserJoinSession*> m_UserJoinCache;
     bool                        m_ShowMyself{ true };
     EUserJoinViewType           m_UserJoinViewType{ eUserJoinViewTypeNone };
 };

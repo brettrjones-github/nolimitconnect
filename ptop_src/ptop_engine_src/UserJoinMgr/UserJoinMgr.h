@@ -17,6 +17,8 @@
 #include "UserJoinedLastDb.h"
 
 #include <CoreLib/VxMutex.h>
+#include <PktLib/GroupieId.h>
+#include <map>
 
 // client side manager of user join to host service states
 
@@ -46,13 +48,13 @@ public:
 
     virtual void				announceUserJoinRequested( UserJoinInfo* userHostInfo );
     virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
-    virtual void				announceUserJoinRemoved( VxGUID& hostOnlineId, EPluginType pluginType );
+    virtual void				announceUserJoinRemoved( GroupieId& groupieId );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
     void						lockResources( void )						{ m_ResourceMutex.lock(); }
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
-    UserJoinInfo*               findUserJoinInfo( VxGUID& hostOnlineId, EPluginType pluginType );
+    UserJoinInfo*               findUserJoinInfo( GroupieId& groupieId );
 
 protected:
     void						clearUserJoinInfoList( void );
@@ -61,10 +63,10 @@ protected:
     void						unlockClientList( void )					{ m_UserJoinClientMutex.unlock(); }
 
     bool                        saveToDatabase( UserJoinInfo* joinInfo, bool isLocked = false );
-    void                        removeFromDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool isLocked );
+    void                        removeFromDatabase( GroupieId& groupieId, bool isLocked );
 
     bool                        saveToJoinedLastDatabase( UserJoinInfo* joinInfo, bool isLocked = false );
-    void                        removeFromJoinedLastDatabase( VxGUID& hostOnlineId, EPluginType pluginType, bool isLocked );
+    void                        removeFromJoinedLastDatabase( GroupieId& groupieId, bool isLocked );
 
     P2PEngine&					m_Engine;
     UserJoinInfoDb              m_UserJoinInfoDb;
@@ -72,7 +74,7 @@ protected:
     VxMutex						m_ResourceMutex;
     bool						m_Initialized{ false };
  
-    std::vector<UserJoinInfo*>	m_UserJoinInfoList;
+    std::map<GroupieId, UserJoinInfo*>	m_UserJoinInfoList;
     VxMutex						m_UserJoinInfoMutex;
     bool                        m_UserJoinListInitialized{ false };
 

@@ -15,6 +15,7 @@
 
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseJoinInfo.h>
 #include <GuiInterface/IDefs.h>
+#include <PktLib/GroupieId.h>
 
 #define HOST_FLAG_DEFAULT_HOST			0x0001
 #define HOST_FLAG_IS_TEMP			    0x0002
@@ -41,6 +42,9 @@ public:
     void						setIsTemp( bool isTemp )	                        { if( isTemp ) m_HostFlags |= HOST_FLAG_IS_TEMP; else m_HostFlags &= ~HOST_FLAG_IS_TEMP; }
     bool						isTemp( void )				                        { return m_HostFlags & HOST_FLAG_IS_TEMP ? true : false; }
 
+    void                        setGroupieId( GroupieId& groupieId )                { m_GroupieId = groupieId; }
+    GroupieId&                  getGroupieId( void )                                { return m_GroupieId; }
+
     virtual void			    setUserUrl( std::string userUrl )                   { m_UserUrl = userUrl; }
     virtual std::string&	    getUserUrl( void )                                  { return m_UserUrl; }
     virtual void			    setFriendState( EFriendState friendshipToHim )      { m_FriendState = friendshipToHim; }
@@ -57,6 +61,7 @@ protected:
     VxNetIdent*                 m_NetIdent{ nullptr };
     EFriendState                m_FriendState{ eFriendStateIgnore };
     uint32_t                    m_HostFlags{ 0 };
+    GroupieId                   m_GroupieId;
     std::string                 m_UserUrl{ "" };
 
     // temporaries

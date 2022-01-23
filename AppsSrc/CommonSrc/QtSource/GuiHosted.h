@@ -39,16 +39,17 @@ public:
 
     GuiHostedListMgr&           getHostedListMgr( void )        { return m_HostedListMgr; }
 
-    HostedId                    getHostedId( void )             { return HostedId( m_OnlineId, m_HostType ); }
-
     void                        setUser( GuiUser* user )        { m_GuiUser = user; }
     GuiUser*                    getUser( void )                 { return m_GuiUser; }
 
-    virtual void				setOnlineId( VxGUID& onlineId ) { m_OnlineId = onlineId; }
-    virtual VxGUID&             getOnlineId( void )             { return m_OnlineId; }
+    void                        setHostedId( HostedId& hostedId ) { m_HostedId = hostedId; }
+    HostedId&                   getHostedId( void )             { return m_HostedId; }
 
-    virtual void			    setHostType( EHostType hostType ) { m_HostType = hostType; }
-    virtual EHostType	        getHostType( void )             { return m_HostType; }
+    virtual void				setOnlineId( VxGUID& onlineId ) { m_HostedId.setOnlineId( onlineId ); }
+    virtual VxGUID&             getOnlineId( void )             { return m_HostedId.getOnlineId(); }
+
+    virtual void			    setHostType( EHostType hostType ) { m_HostedId.setHostType( hostType ); }
+    virtual EHostType	        getHostType( void )             { return m_HostedId.getHostType(); }
 
     virtual void                setIsFavorite( bool isFavorite ) { m_IsFavorite = isFavorite; }
     virtual bool                getIsFavorite( void )           { return m_IsFavorite; }
@@ -74,9 +75,8 @@ protected:
     GuiHostedListMgr&           m_HostedListMgr;
 
     GuiUser*                    m_GuiUser{ nullptr };
+    HostedId                    m_HostedId;
     VxGUID                      m_SessionId;
-    EHostType                   m_HostType{ eHostTypeUnknown };
-    VxGUID                      m_OnlineId;
     bool                        m_IsFavorite{ false };
     int64_t                     m_ConnectedTimestampMs{ 0 };
     int64_t                     m_JoinedTimestampMs{ 0 };

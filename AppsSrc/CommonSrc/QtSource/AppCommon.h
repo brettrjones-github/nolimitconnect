@@ -446,7 +446,7 @@ public:
     virtual void				toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& hostedInfo ) override;
     virtual void				toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
-    virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline ) override;
+    virtual void				toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline ) override;
 
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
@@ -474,7 +474,7 @@ public:
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) override;
 
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType , bool newContact = false ) override;
+    virtual void				toGuiContactOnline( VxNetIdent * netIdent ) override;
 
     virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override;
     virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override;

@@ -902,7 +902,7 @@ void HostBaseMgr::onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID
         BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
         m_Engine.getUserOnlineMgr().onUserOnline( sktBase, netIdent, sessionInfo );
 
-        m_Engine.getToGui().toGuiUserOnlineStatus( m_Plugin.getHostType(), netIdent, sessionId, true );
+        m_Engine.getToGui().toGuiUserOnlineStatus( netIdent, true );
     }
     else
     {

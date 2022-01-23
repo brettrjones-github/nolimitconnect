@@ -17,6 +17,8 @@
 
 #include "GuiUser.h"
 
+#include <PktLib/GroupieId.h>
+
 #include <QWidget>
 
 class P2PEngine;
@@ -27,33 +29,32 @@ class GuiUserJoinSession : public QWidget
 {
 public:
 	GuiUserJoinSession( QWidget* parent = nullptr );
-    GuiUserJoinSession( GuiUserJoin* hostIdent, QWidget* parent = nullptr );
-	GuiUserJoinSession(	VxGUID& sessionId, GuiUserJoin* hostIdent, QWidget* parent = nullptr );
-    GuiUserJoinSession(	EHostType userType, VxGUID& sessionId, GuiUserJoin * userIdent, QWidget* parent = nullptr );
+    GuiUserJoinSession( GuiUserJoin* guiUserJoin, QWidget* parent = nullptr );
+	GuiUserJoinSession(	VxGUID& sessionId, GuiUserJoin* guiUserJoin, QWidget* parent = nullptr );
 	GuiUserJoinSession( const GuiUserJoinSession &rhs );
 
 	GuiUserJoinSession&			operator =( const GuiUserJoinSession &rhs );
 
-    GuiUser *                   getUserIdent( void ) { return nullptr; }
+    GuiUser*                    getGuiUser( void );
 
-    void				        setUserJoin( GuiUserJoin* user );
-    GuiUserJoin*				getUserJoin( void )                         { return m_UserJoin; }
+    void				        setUserJoin( GuiUserJoin* guiUserJoin );
+    GuiUserJoin*				getUserJoin( void )                         { return m_GuiUserJoin; }
 
-    EHostType                   getHostType( void )                         { return m_HostType; }
+    void						setGroupieId( GroupieId& groupieId )        { m_GroupieId = groupieId; }
+    GroupieId&                  getGroupieId( void )                        { return m_GroupieId; }
+    EHostType                   getHostType( void );
 
     void						setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
-    VxGUID&					    getSessionId( void )                        { return m_SessionId; }
+    VxGUID&                     getSessionId( void )                        { return m_SessionId; }
 
-    VxGUID&					    getMyOnlineId( void )                       { return m_OnlineId; }
-    std::string                 getOnlineName( void );
+    std::string                 getOnlineName( void )                       { return getGuiUser() ? getGuiUser()->getOnlineName() : ""; }
 
     bool                        setIsOnline( bool isOnline );
 
 protected:
 	//=== vars ===//
-    EHostType                   m_HostType{ eHostTypeUnknown };
-    GuiUserJoin*			    m_UserJoin;
+    GroupieId                   m_GroupieId;
+    GuiUserJoin*                m_GuiUserJoin;
     VxGUID					    m_SessionId;
-    VxGUID                      m_OnlineId;
 };
 

@@ -17,40 +17,50 @@
 
 #include "GuiUser.h"
 
+#include <PktLib/GroupieId.h>
+
 #include <QWidget>
 
 class GuiHostJoin;
 class P2PEngine;
-class VxGUID;
 class VxNetIdent;
-class PluginSetting;
 
 class GuiHostJoinSession : public QWidget
 {
 public:
 	GuiHostJoinSession( QWidget* parent = nullptr );
-	GuiHostJoinSession(	EHostType hostType, GuiHostJoin* hostJoinIdent, QWidget* parent = nullptr );
+	GuiHostJoinSession(	GuiHostJoin* hostJoinIdent, QWidget* parent = nullptr );
 	GuiHostJoinSession( const GuiHostJoinSession &rhs );
 
 	GuiHostJoinSession&			operator =( const GuiHostJoinSession &rhs );
 
-    GuiHostJoin*                getUserIdent( void )                        { return m_HostIdent; }
-    EHostType                   getHostType( void )                         { return m_HostType; }
-    std::string                 getHostUrl( void );
+    GuiUser*                    getGuiUser( void );
 
-    VxGUID&					    getOnlineId( void )                         { return m_OnlineId; }
+    void                        setHostJoin( GuiHostJoin* guiHostJoin );
+    GuiHostJoin*                getHostJoin( void )                         { return m_GuiHostJoin; }
+
+    void						setGroupieId( GroupieId& groupieId )        { m_GroupieId = groupieId; }
+    GroupieId&                  getGroupieId( void )                        { return m_GroupieId; }
+    EHostType                   getHostType( void );
+
+    void						setSessionId( VxGUID& sessionId )           { m_SessionId = sessionId; }
+    VxGUID&                     getSessionId( void )                        { return m_SessionId; }
+
+    std::string                 getGroupieUrl( void );
+    std::string                 getHostUrl( void );
 
     void						setWidget( QWidget * widget )				{ m_Widget = widget; }
     QWidget *					getWidget( void )							{ return m_Widget; }
 
+    std::string                 getOnlineName( void )                       { return getGuiUser() ? getGuiUser()->getOnlineName() : ""; }
     std::string                 getHostDescription( void );
     VxGUID                      getHostThumbId( void );
 
 protected:
 	//=== vars ===//
-    EHostType                   m_HostType{ eHostTypeUnknown };
-    VxGUID					    m_OnlineId;
-    GuiHostJoin*			    m_HostIdent{ nullptr };
+    GroupieId                   m_GroupieId;
+    GuiHostJoin*			    m_GuiHostJoin{ nullptr };
+    VxGUID					    m_SessionId;
     QWidget*					m_Widget{ nullptr };
 };
 

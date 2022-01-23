@@ -70,7 +70,7 @@ public:
 	virtual void				toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& groupieInfo ) = 0;
 	virtual void				toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId ) = 0;
 
-    virtual void				toGuiUserOnlineStatus( EHostType hostType, VxNetIdent* netIdent, VxGUID& sessionId, bool isOnline ) = 0;
+    virtual void				toGuiUserOnlineStatus( VxNetIdent* netIdent, bool isOnline ) = 0;
 
     /// Send is port open test state/status to GUI
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
@@ -94,7 +94,7 @@ public:
     virtual void				toGuiContactRemoved( VxGUID& onlineId ) = 0;
 
 	/// Update contact to online state GUI
-	virtual void				toGuiContactOnline( VxNetIdent * netIdent, EHostType hostType, bool newContact = false ) = 0;
+	virtual void				toGuiContactOnline( VxNetIdent * netIdent ) = 0;
 	/// Update contact to offline state GUI
 	virtual void				toGuiContactOffline( VxNetIdent * netIdent ) = 0;
 

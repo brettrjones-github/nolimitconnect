@@ -42,8 +42,8 @@ public:
     void                        toGuiGroupieSearchResult( EHostType hostType, VxGUID& sessionId, GroupieInfo& hostedInfo );
     void                        toGuiGroupieSearchComplete( EHostType hostType, VxGUID& sessionId );
 
-    bool                        isGroupieInSession( VxGUID& onlineId );
-    void                        setGroupieOffline( VxGUID& onlineId );
+    bool                        isGroupieInSession( GroupieId& groupieId );
+    void                        setGroupieOffline( GroupieId& groupieId );
 
     void                        onGroupieAdded( GuiGroupie* guiGroupie );
     void                        onGroupieRemoved( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType );
@@ -52,7 +52,7 @@ public:
     void                        onMyIdentUpdated( GuiGroupie* guiGroupie );
 
     GuiGroupie*                  getGroupie( VxGUID& groupieOnlineId, VxGUID& hostOnlineId, EHostType hostType )   { return findGroupie( groupieOnlineId, hostOnlineId, hostType ); }
-    GuiGroupie*                  getGroupie( GroupieId& hostTypeId )                    { return findGroupie( hostTypeId ); }
+    GuiGroupie*                  getGroupie( GroupieId& groupieId )                    { return findGroupie( groupieId ); }
     std::map<GroupieId, GuiGroupie*>& getGroupieList( void )                            { return m_GroupieList; }
     GuiGroupie*                  updateGroupie( VxNetIdent* hisIdent, EHostType hostType );
 

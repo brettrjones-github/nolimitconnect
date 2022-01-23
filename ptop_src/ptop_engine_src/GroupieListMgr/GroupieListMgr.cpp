@@ -137,7 +137,7 @@ void GroupieListMgr::removeGroupieInfo( VxGUID& groupieOnlineId, VxGUID& hostOnl
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); )
     {
-        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
+        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostedOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
             m_GroupieInfoList.erase( iter );
             wasRemoved = true;
@@ -251,7 +251,7 @@ void GroupieListMgr::updateAndRequestInfoIfNeeded( VxGUID& groupieOnlineId, VxGU
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
+        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostedOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
             wasFound = true;
             iter->setConnectedTimestamp( sktBase->getLastActiveTimeMs() );
@@ -312,7 +312,7 @@ bool GroupieListMgr::updateLastConnected( VxGUID& groupieOnlineId, VxGUID& hostO
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
+        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostedOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
             iter->setConnectedTimestamp( lastConnectedTime );
             result = true;
@@ -335,7 +335,7 @@ bool GroupieListMgr::updateLastJoined( VxGUID& groupieOnlineId, VxGUID& hostOnli
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
+        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostedOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
             int64_t oldJoinedTime = iter->getJoinedTimestamp();
             iter->setJoinedTimestamp( lastJoinedTime );
@@ -368,7 +368,7 @@ bool GroupieListMgr::updateIsFavorite( VxGUID& groupieOnlineId, VxGUID& hostOnli
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
+        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostedOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
             bool wasFavorite = iter->getIsFavorite();
             iter->setIsFavorite( isFavorite );
@@ -401,7 +401,7 @@ bool GroupieListMgr::updateGroupieUrlAndTitleAndDescription( VxGUID& groupieOnli
     lockList();
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostOnlineId() == hostOnlineId && iter->getHostType() == hostType )
+        if( iter->getGroupieOnlineId() == groupieOnlineId && iter->getHostedOnlineId() == hostOnlineId && iter->getHostType() == hostType )
         {
             result = true;
             iter->setGroupieTitle( title );
@@ -657,7 +657,7 @@ bool GroupieListMgr::updateGroupieInfo( EHostType hostType, GroupieInfo& groupie
     // if exists see if needs update
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getHostType() == hostType && iter->getGroupieOnlineId() == groupieInfo.getGroupieOnlineId() && iter->getHostOnlineId() == groupieInfo.getHostOnlineId() )
+        if( iter->getHostType() == hostType && iter->getGroupieOnlineId() == groupieInfo.getGroupieOnlineId() && iter->getHostedOnlineId() == groupieInfo.getHostedOnlineId() )
         {
             alreadyExisted = true;
             if( sktBase )
@@ -673,7 +673,7 @@ bool GroupieListMgr::updateGroupieInfo( EHostType hostType, GroupieInfo& groupie
                 //m_Engine.getHostUrlListMgr().updateHostUrl( hostType, groupieInfo.getOnlineId(), groupieInfo.getGroupieUrl() );
                 if( iter->shouldSaveToDb() )
                 {
-                    m_GroupieInfoListDb.updateGroupieUrl( iter->getGroupieOnlineId(), iter->getHostOnlineId(), iter->getHostType(), groupieInfo.getGroupieUrl() );
+                    m_GroupieInfoListDb.updateGroupieUrl( iter->getGroupieOnlineId(), iter->getHostedOnlineId(), iter->getHostType(), groupieInfo.getGroupieUrl() );
                 }
                 // TODO do we need to update if just url changed ?
             }
@@ -702,7 +702,7 @@ bool GroupieListMgr::updateGroupieInfo( EHostType hostType, GroupieInfo& groupie
                     groupieInfoUpdated = true;
                     if( iter->shouldSaveToDb() )
                     {
-                        m_GroupieInfoListDb.updateGroupieTitleAndDescription( iter->getGroupieOnlineId(), iter->getHostOnlineId(), iter->getHostType(), groupieInfo.getGroupieTitle(), groupieInfo.getGroupieDescription(), iter->getGroupieInfoTimestamp() );
+                        m_GroupieInfoListDb.updateGroupieTitleAndDescription( iter->getGroupieId(), groupieInfo.getGroupieTitle(), groupieInfo.getGroupieDescription(), iter->getGroupieInfoTimestamp() );
                     }
                 }
             }

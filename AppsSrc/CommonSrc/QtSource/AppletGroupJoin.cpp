@@ -201,6 +201,7 @@ void AppletGroupJoin::slotConnectButtonClicked( GuiHostedListSession* hostSessio
 void AppletGroupJoin::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRequested" );
+	ui.m_GuiHostedListWidget->callbackGuiHostJoinRequested( groupieId, guiHostJoin );
 }
 
 //============================================================================

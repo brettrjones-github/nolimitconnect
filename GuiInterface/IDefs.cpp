@@ -214,6 +214,7 @@ namespace
         "Join: Requested ",
         "Join: Accepted ",
         "Join: Denied ",
+        "Join: Leave Host ",
         "Join: Max JoinState ",
     };
 

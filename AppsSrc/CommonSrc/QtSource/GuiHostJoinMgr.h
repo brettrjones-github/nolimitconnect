@@ -44,53 +44,52 @@ public:
     GuiHostJoin *               getMyIdent( void )                          { return m_MyIdent; }  
     VxGUID                      getMyOnlineId( void )                       { return m_MyOnlineId; }  
 
-    bool                        isHostJoinInSession( VxGUID& onlineId );
-    void                        setHostJoinOffline( VxGUID& onlineId );
+    bool                        isHostJoinInSession( GroupieId& groupieId );
+    void                        setHostJoinOffline( GroupieId& groupieId );
 
-    void                        onHostJoinAdded( GuiHostJoin* user );
-    void                        onHostJoinUpdated( GuiHostJoin* user );
-    void                        onUserOnlineStatusChange( GuiHostJoin* user, bool isOnline );
+    void                        onHostJoinAdded( GuiHostJoin* guiHostJoin );
+    void                        onHostJoinUpdated( GuiHostJoin* guiHostJoin, EJoinState prevState );
+    void                        onUserOnlineStatusChange( GuiHostJoin* guiHostJoin, bool isOnline );
 
-    GuiHostJoin*                    getHostJoin( VxGUID& onlineId );
-    std::map<VxGUID, GuiHostJoin*>& getHostJoinList( void )             { return m_HostJoinList; }
+    GuiHostJoin*                getHostJoin( GroupieId& groupieId );
+    std::map<GroupieId, GuiHostJoin*>& getHostJoinList( void )             { return m_HostJoinList; }
 
-    void                        joinAccepted( GuiHostJoin* hostJoin, EHostType hostType );
-    void                        joinRejected( GuiHostJoin* hostJoin, EHostType hostType );
+    void                        joinAccepted( GuiHostJoin* guiHostJoin );
+    void                        joinRejected( GuiHostJoin* guiHostJoin );
 
     void                        wantHostJoinCallbacks( GuiHostJoinCallback* callback, bool wantCallback );
 
 signals:
     void                        signalHostJoinRequestCount( int requestCnt );
 
-    void                        signalHostJoinRequested( GuiHostJoin* user );
-    void				        signalHostJoinUpdated( GuiHostJoin* user );
-    void				        signalHostJoinRemoved( VxGUID& onlineId, EHostType hostType );
-    void                        signalHostJoinOfferStateChange( VxGUID& userOnlineId, EHostType hostType, EJoinState hostOfferState );
-    void                        signalHostJoinOnlineStatus( GuiHostJoin* user, bool isOnline );
+    void                        signalHostJoinOfferStateChange( GroupieId groupieId, EJoinState hostOfferState );
+    void                        signalHostJoinOnlineStatus( GuiHostJoin* guiHostJoin, bool isOnline );
 
     void                        signalInternalHostJoinRequested( HostJoinInfo* hostJoinInfo );
     void                        signalInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo );
-    void                        signalInternalHostJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        signalInternalHostJoinOfferState( VxGUID hostOnlineId, EPluginType pluginType, EJoinState joinOfferState );
-    void                        signalInternalHostJoinOnlineState( VxGUID hostOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
+    void                        signalInternalHostJoinRemoved( GroupieId groupieId );
+    void                        signalInternalHostJoinOfferState( GroupieId groupieId, EJoinState joinOfferState );
+    void                        signalInternalHostJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
 
 private slots:
     void                        slotInternalHostJoinRequested( HostJoinInfo* hostJoinInfo );
     void                        slotInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo );
-    void                        slotInternalHostJoinRemoved( VxGUID hostOnlineId, EPluginType pluginType );
-    void                        slotInternalHostJoinOfferState( VxGUID userOnlineId, EPluginType pluginType, EJoinState joinOfferState );
-    void                        slotInternalHostJoinOnlineState( VxGUID userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID connectionId );
+    void                        slotInternalHostJoinRemoved( GroupieId& groupieId );
+    void                        slotInternalHostJoinOfferState( GroupieId groupieId, EJoinState joinOfferState );
+    void                        slotInternalHostJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
 
 protected:
-    GuiHostJoin*                findHostJoin( VxGUID& onlineId );
+    GuiHostJoin*                findHostJoin( GroupieId groupieId );
     GuiHostJoin*                updateHostJoin( HostJoinInfo* hostJoinInfo );
     void                        updateHostRequestCount( bool forceEmit = false );
 
     virtual void				callbackHostJoinRequested( HostJoinInfo* userHostInfo ) override;
     virtual void				callbackHostJoinUpdated( HostJoinInfo* userHostInfo ) override;
-    virtual void				callbackHostJoinRemoved( VxGUID& userOnlineId, EPluginType pluginType ) override;
-    virtual void				callbackHostJoinOfferState( VxGUID& userOnlineId, EPluginType pluginType, EJoinState userHostOfferState ) override;
-    virtual void				callbackHostJoinOnlineState( VxGUID& userOnlineId, EPluginType pluginType, EOnlineState onlineState, VxGUID& connectionId ) override;
+    virtual void				callbackHostJoinRemoved( GroupieId& groupieId ) override;
+    virtual void				callbackHostJoinOfferState( GroupieId& groupieId, EJoinState userHostOfferState ) override;
+    virtual void				callbackHostJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) override;
+
+    void                        announceJoinState( GuiHostJoin* guiHostJoin, EJoinState joinState );
 
     virtual void				announceHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				announceHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
@@ -100,7 +99,7 @@ protected:
     
     AppCommon&                  m_MyApp;
     // map of online id to GuiHostJoin
-    std::map<VxGUID, GuiHostJoin*>  m_HostJoinList;
+    std::map<GroupieId, GuiHostJoin*>  m_HostJoinList;
     GuiHostJoin*                m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
     int                         m_HostRequestCount{ 0 };
