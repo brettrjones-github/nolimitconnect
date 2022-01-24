@@ -50,15 +50,8 @@ void NetworkStateAvail::enterNetworkState( void )
 //============================================================================
 void NetworkStateAvail::runNetworkState( void )
 {
-	VxTimer availTimer;
-    if( IsLogEnabled( eLogNetworkState ) )
-    {
-        LogMsg( LOG_INFO, "111 NetworkStateAvail::runNetworkState start %3.3f", availTimer.elapsedSec() );
-    }
-
-    std::string netServiceUrl;
-	m_Engine.getEngineSettings().getConnectTestUrl( netServiceUrl );
-    netServiceUrl = m_Engine.getUrlMgr().resolveUrl( netServiceUrl );
+    VxTimer availTimer;
+    LogModule( eLogNetworkState, LOG_VERBOSE, "111 NetworkStateAvail::runNetworkState start" ); 
 
 	// wait for log on if need be
 	while( ( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -71,6 +64,10 @@ void NetworkStateAvail::runNetworkState( void )
 	{
 		return;
 	}
+
+    std::string netServiceUrl;
+    m_Engine.getEngineSettings().getConnectTestUrl( netServiceUrl );
+    netServiceUrl = m_Engine.getUrlMgr().resolveUrl( netServiceUrl );
 
 	// NOTE: it seems that while upnp is communicating with router the router may temporarily stop accepting incoming connections
 	// so startup order has been changed. 
@@ -195,11 +192,23 @@ void NetworkStateAvail::runNetworkState( void )
 
     if( m_Engine.getNetStatusAccum().isDirectConnectTested() )
     {
-        // all done
+        // all done.. move to next state
+        if( m_Engine.getMyPktAnnounce().canDirectConnectToUser() )
+        {
+            LogModule( eLogNetworkState, LOG_VERBOSE, "Network State Avail already tested.. move to direct connect" );
+            m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeOnlineDirect );
+        }
+        else
+        {
+            LogModule( eLogNetworkState, LOG_VERBOSE, "Network State Avail already tested.. move to wait for relay" );
+            m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeWaitForRelay );
+        }
+
+        VxSleep( 500 );
         return;
     }
 
-    LogModule( eLogNetworkState, LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f thread %d", availTimer.elapsedSec(), VxGetCurrentThreadId() );
+    LogModule( eLogNetworkState, LOG_VERBOSE, "Network State Avail Starting Direct connect Test %3.3f thread %d", availTimer.elapsedSec(), VxGetCurrentThreadId() );
 
     // wait for test result or timeout
 	DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();

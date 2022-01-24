@@ -500,6 +500,7 @@ void NetworkStateMachine::fromGuiNetworkSettingsChanged( void )
         LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiNetworkSettingsChanged" );
 		fromGuiNetworkLost();
 		m_PktAnn.getLanIPv4().setIp( ip.c_str() );
+		m_Engine.getNetStatusAccum().fromGuiNetworkSettingsChanged();
 		fromGuiNetworkAvailable( ip.c_str(), isCell );
 	}
 }

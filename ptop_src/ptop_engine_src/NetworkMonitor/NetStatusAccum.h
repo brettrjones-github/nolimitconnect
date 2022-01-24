@@ -81,6 +81,8 @@ public:
     void                        addNetStatusCallback( NetAvailStatusCallbackInterface* callbackInt );
     void                        removeNetStatusCallback( NetAvailStatusCallbackInterface* callbackInt );
 
+    void                        fromGuiNetworkSettingsChanged( void );
+
     void                        resetNetStatus( void );
 
     void                        setIsFixedIpAddress( bool fixedIpAddr ) { m_FixedIpAddr = fixedIpAddr; }

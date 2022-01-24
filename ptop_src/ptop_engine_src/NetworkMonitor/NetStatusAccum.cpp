@@ -46,6 +46,12 @@ void NetStatusAccum::resetNetStatus( void )
 }
 
 //============================================================================
+void NetStatusAccum::fromGuiNetworkSettingsChanged( void )
+{
+    resetNetStatus();
+}
+
+//============================================================================
 void NetStatusAccum::onNetStatusChange( void )
 {
     ENetAvailStatus netAvailStatus = eNetAvailNoInternet;
