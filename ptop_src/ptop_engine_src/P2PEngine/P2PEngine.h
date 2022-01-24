@@ -532,8 +532,8 @@ public:
     virtual void				onPktAnnounce				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAnnList				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-    virtual void				onPktHostUnjoinReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostUnjoinReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostUnJoinReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostUnJoinReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
     virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktScanReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;

@@ -147,7 +147,28 @@ void UserJoinMgr::announceUserJoinUpdated( UserJoinInfo * userJoinInfo )
     }
     else
     {
-        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRemoved dynamic_cast failed" );
+        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserJoinRemoved null" );
+    }
+}
+
+//============================================================================
+void UserJoinMgr::announceUserUnJoinUpdated( UserJoinInfo* userJoinInfo )
+{
+    if( userJoinInfo )
+    {
+        lockClientList();
+        std::vector<UserJoinCallbackInterface*>::iterator iter;
+        for( iter = m_UserJoinClients.begin(); iter != m_UserJoinClients.end(); ++iter )
+        {
+            UserJoinCallbackInterface* client = *iter;
+            client->callbackUserUnJoinUpdated( userJoinInfo );
+        }
+
+        unlockClientList();
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "UserJoinMgr::announceUserUnJoinUpdated null" );
     }
 }
 
@@ -224,6 +245,39 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
     {
         announceUserJoinUpdated( joinInfo );
     } 
+}
+
+//============================================================================
+void UserJoinMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    lockResources();
+    UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( joinInfo )
+    {
+
+
+        joinInfo->setNetIdent( netIdent );
+        int64_t timeNowMs = GetTimeStampMs();
+        joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
+        joinInfo->setJoinState( eJoinStateJoinAccepted );
+        joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
+
+        joinInfo->setConnectionId( sktBase->getConnectionId() );
+        joinInfo->setSessionId( sessionInfo.getSessionId() );
+
+        joinInfo->setInfoModifiedTime( timeNowMs );
+        joinInfo->setLastConnectTime( timeNowMs );
+        joinInfo->setLastJoinTime( 0 );
+
+
+        saveToDatabase( joinInfo, true );
+
+        unlockResources();
+
+        m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
+
+        announceUserUnJoinUpdated( joinInfo );
+    }
 }
 
 //============================================================================

@@ -34,6 +34,7 @@ public:
     virtual void                sendHostSearchToNetworkHost( VxGUID& sessionId, SearchParams& searchParams, EConnectReason connectReason );
 
     virtual void                onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void                onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
     virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 protected:
@@ -41,6 +42,7 @@ protected:
     virtual void                onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override;
 
     virtual void                onUserJoinedHost( GroupieId& groupieId, VxSktBase * sktBase,  VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    virtual void                onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void                startHostDetailSession( PktHostSearchReply* hostReply, VxSktBase * sktBase, VxNetIdent * netIdent );
     virtual void                stopHostSearch( EHostType hostType, VxGUID& sessionId, VxSktBase * sktBase, VxGUID& onlineId );

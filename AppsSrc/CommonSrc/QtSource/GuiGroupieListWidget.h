@@ -20,6 +20,8 @@ class GuiGroupieListItem;
 class VxNetIdent;
 class GuiGroupieListSession;
 class GuiGroupie;
+class GuiHostJoin;
+class GuiUserJoin;
 
 class GuiGroupieListWidget : public ListWidgetBase
 {
@@ -35,8 +37,24 @@ public:
 
     GuiGroupieListSession*      findSession( VxGUID& lclSessionId );
     GuiGroupieListSession*      findSession( GroupieId& hostedId );
-    GuiGroupieListItem*         findListItemWidgetByHostId( GroupieId& hostedId );
+    GuiGroupieListItem*         findListItemWidgetByGroupieId( GroupieId& hostedId );
     GuiGroupieListItem*         findListItemWidgetByOnlineId( VxGUID& onlineId );
+
+    virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+
+    virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId );
+    virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId );
+
+    virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+
+    virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId );
+    virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId );
 
 signals:
     void                        signalIconButtonClicked( GuiGroupieListSession* hostSession, GuiGroupieListItem* hostItem );

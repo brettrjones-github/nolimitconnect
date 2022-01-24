@@ -70,6 +70,18 @@ void GuiUserJoinMgr::callbackUserJoinUpdated( UserJoinInfo* userJoinInfo )
 }
 
 //============================================================================
+void GuiUserJoinMgr::callbackUserUnJoinUpdated( UserJoinInfo* userJoinInfo )
+{
+    if( !userJoinInfo )
+    {
+        LogMsg( LOG_ERROR, "GuiUserJoinMgr::callbackUserJoinAdded null userJoinInfo" );
+        return;
+    }
+
+    emit signalInternalUserUnJoinUpdated( new UserJoinInfo( *userJoinInfo ) );
+}
+
+//============================================================================
 void GuiUserJoinMgr::callbackUserJoinRemoved( GroupieId& groupieId )
 {
     emit signalInternalUserJoinRemoved( groupieId );
@@ -98,6 +110,13 @@ void GuiUserJoinMgr::slotInternalUserJoinRequested( UserJoinInfo* userJoinInfo )
 void GuiUserJoinMgr::slotInternalUserJoinUpdated( UserJoinInfo* userJoinInfo )
 {
     updateUserJoin( userJoinInfo );
+    delete userJoinInfo;
+}
+
+//============================================================================
+void GuiUserJoinMgr::slotInternalUserUnJoinUpdated( UserJoinInfo* userJoinInfo )
+{
+    updateUserJoin( userJoinInfo, true  );
     delete userJoinInfo;
 }
 
@@ -204,7 +223,7 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( VxNetIdent* hisIdent, EHostType hos
 }
 
 //============================================================================
-GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo )
+GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo, bool unJoin )
 {
     GuiUserJoin* guiUserJoin = findUserJoin( userJoinInfo->getGroupieId() );
     GuiUser* user = m_MyApp.getUserMgr().updateUser( userJoinInfo->getNetIdent() );
@@ -213,7 +232,14 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo )
         if( guiUserJoin )
         {
             guiUserJoin->setJoinState( userJoinInfo->getJoinState() );
-            onUserJoinUpdated( guiUserJoin );
+            if( unJoin )
+            {
+                onUserUnJoinUpdated( guiUserJoin );
+            }
+            else
+            {
+                onUserJoinUpdated( guiUserJoin );
+            }
         }
         else
         {
@@ -257,29 +283,35 @@ void GuiUserJoinMgr::onUserJoinRemoved( GroupieId& groupieId )
 }
 
 //============================================================================
-void GuiUserJoinMgr::onUserOnlineStatusChange( GuiUserJoin* user, bool isOnline )
+void GuiUserJoinMgr::onUserOnlineStatusChange( GuiUserJoin* guiUserJoin, bool isOnline )
 {
     if( isMessengerReady() )
     {
-        emit signalUserJoinOnlineStatus( user, isOnline );
+        emit signalUserJoinOnlineStatus( guiUserJoin, isOnline );
     }
 }
 
 //============================================================================
-void GuiUserJoinMgr::onUserJoinUpdated( GuiUserJoin* user )
+void GuiUserJoinMgr::onUserJoinUpdated( GuiUserJoin* guiUserJoin )
 {
     if( isMessengerReady() )
     {
-        emit signalUserJoinUpdated( user );
+        emit signalUserJoinUpdated( guiUserJoin );
     }
 }
 
 //============================================================================
-void GuiUserJoinMgr::onMyIdentUpdated( GuiUserJoin* user )
+void GuiUserJoinMgr::onUserUnJoinUpdated( GuiUserJoin* guiUserJoin )
+{
+    announceUserUnJoinGranted( guiUserJoin->getGroupieId(), guiUserJoin );
+}
+
+//============================================================================
+void GuiUserJoinMgr::onMyIdentUpdated( GuiUserJoin* guiUserJoin )
 {
     if( isMessengerReady() )
     {
-        emit signalMyIdentUpdated( user );
+        emit signalMyIdentUpdated( guiUserJoin );
     }
 }
 
@@ -316,6 +348,15 @@ void GuiUserJoinMgr::announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin*
     for( auto client : m_UserJoinClients )
     {
         client->callbackGuiUserJoinGranted( groupieId, guiUserJoin );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserUnJoinGranted( groupieId, guiUserJoin );
     }
 }
 

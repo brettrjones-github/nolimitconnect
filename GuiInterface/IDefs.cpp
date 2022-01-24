@@ -25,14 +25,17 @@ namespace
 
         "Connect Reason Group Announce ",
         "Connect Reason Group Join ",
+        "Connect Reason Group UnJoin ",
         "Connect Reason Group Search ",
 
         "Connect Reason Chat RoomAnnounce ",
         "Connect Reason Chat Room Join ",
+        "Connect Reason Chat Room UnJoin ",
         "Connect Reason Chat Room Search ",
 
         "Connect Reason Random Connect Announce ",
         "Connect Reason Random Connect Join ",
+        "Connect Reason Random Connect UnJoin ",
         "Connect Reason Random Connect Search ",  
 
         "Connect Reason Announce Ping ",  
@@ -142,6 +145,9 @@ namespace
         "Host Join Sending Request ",
         "Host Join Send Request Failed ",
         "Host Join Success ",
+        "Host UnJoin Sending Request ",
+        "Host UnJoin Send Request Failed ",
+        "Host UnJoin Success "
         "Host Join Failed ",
         "Host Join Fail Permission ",  
         "Host Join Fail Connect Dropped ",

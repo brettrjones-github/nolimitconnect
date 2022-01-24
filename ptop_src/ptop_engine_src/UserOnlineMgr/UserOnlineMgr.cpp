@@ -168,6 +168,12 @@ void UserOnlineMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, 
 }
 
 //============================================================================
+void UserOnlineMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    updateUserSession( groupieId, sktBase, netIdent, sessionInfo );
+}
+
+//============================================================================
 void UserOnlineMgr::updateUserSession( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     if( IsHostPluginType( sessionInfo.getPluginType() ) )

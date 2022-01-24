@@ -12,7 +12,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include "GuiGroupieListItem.h"
 #include "GuiGroupieListWidget.h"
 #include "GuiGroupieListSession.h"
@@ -104,7 +103,7 @@ GuiGroupieListSession* GuiGroupieListWidget::findSession( GroupieId& hostedId )
 }
 
 //============================================================================
-GuiGroupieListItem* GuiGroupieListWidget::findListItemWidgetByHostId( GroupieId& hostedId )
+GuiGroupieListItem* GuiGroupieListWidget::findListItemWidgetByGroupieId( GroupieId& hostedId )
 {
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
@@ -248,7 +247,7 @@ void GuiGroupieListWidget::updateGroupieList( GroupieId& hostedId, GuiGroupie* g
 //============================================================================
 GuiGroupieListItem* GuiGroupieListWidget::addOrUpdateHostSession( GuiGroupieListSession* groupieSession )
 {
-    GuiGroupieListItem* hostItem = findListItemWidgetByHostId( groupieSession->getGroupieId() );
+    GuiGroupieListItem* hostItem = findListItemWidgetByGroupieId( groupieSession->getGroupieId() );
     if( hostItem )
     {
         GuiGroupieListSession* hostOldSession = hostItem->getHostSession();
@@ -392,4 +391,84 @@ void GuiGroupieListWidget::onConnectButtonClicked( GuiGroupieListItem* hostItem 
     {
         emit signalConnectButtonClicked( groupieSession, hostItem );
     }
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinRequested" );
+    HostedId hostedId = groupieId.getHostedId();
+    GuiGroupieListItem* listItem = findListItemWidgetByGroupieId( groupieId );
+    if( listItem && listItem->getHostSession() )
+    {
+        listItem->setJoinedState( guiHostJoin->getJoinState() );
+    }
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinGranted" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostUnJoinGranted" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinDenied" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinLeaveHost" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostJoinRemoved( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinRemoved" );
+}
+//============================================================================
+//============================================================================
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinRequested" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinGranted" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserUnJoinGranted" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinDenied" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserJoinLeaveHost( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinLeaveHost" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserJoinRemoved( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinRemoved" );
 }

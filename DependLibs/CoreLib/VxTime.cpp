@@ -8,6 +8,9 @@
 
 #include <sysheaders/sys/time.h>
 
+#include <cstdlib>
+
+
 #if !defined(TARGET_OS_WINDOWS)
 #include <time.h>
 #include <sys/time.h>

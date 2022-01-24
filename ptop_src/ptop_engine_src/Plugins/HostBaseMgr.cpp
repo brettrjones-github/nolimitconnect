@@ -406,6 +406,24 @@ bool HostBaseMgr::isJoinConnectReason( EConnectReason connectReason )
 }
 
 //============================================================================
+bool HostBaseMgr::isUnJoinConnectReason( EConnectReason connectReason )
+{
+    bool isJoinReason = false;
+    switch( connectReason )
+    {
+    case eConnectReasonChatRoomUnJoin:
+    case eConnectReasonGroupUnJoin:
+    case eConnectReasonRandomConnectUnJoin:
+        isJoinReason = true;
+        break;
+    default:
+        break;
+    }
+
+    return isJoinReason;
+}
+
+//============================================================================
 bool HostBaseMgr::isSearchConnectReason( EConnectReason connectReason )
 {
     bool isSearchReason = false;
@@ -464,6 +482,11 @@ void HostBaseMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId,
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
         sendJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
+    }
+    else if( isUnJoinConnectReason( connectReason ) )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinConnectSuccess );
+        sendUnJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
     }
     else if( isSearchConnectReason( connectReason ) )
     {
@@ -779,6 +802,10 @@ void HostBaseMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase, 
     {
         sendJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
     }
+    else if( eConnectReasonChatRoomUnJoin == connectReason )
+    {
+        sendUnJoinRequest( hostType, sessionId, sktBase, onlineId, connectReason );
+    }
 }
 
 //============================================================================
@@ -836,6 +863,23 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendJoinRequestFailed );
         m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
+    }
+}
+
+//============================================================================
+void HostBaseMgr::sendUnJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+{
+    vx_assert( nullptr != sktBase );
+    PktHostUnJoinReq pktJoin;
+
+    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendingUnJoinRequest );
+    pktJoin.setPluginType( m_Plugin.getPluginType() );
+    pktJoin.setHostType( hostType );
+    pktJoin.setSessionId( sessionId );
+    if( !m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendUnJoinRequestFailed );
+        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason );
     }
 }
 

@@ -22,6 +22,7 @@ class GuiUserJoinCallback
 public:
     virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) {};
     virtual void				callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) {};
+    virtual void				callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) {};
     virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) {};
     virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId ) {};
     virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId ) {};

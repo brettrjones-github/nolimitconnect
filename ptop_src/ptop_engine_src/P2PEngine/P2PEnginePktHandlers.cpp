@@ -192,15 +192,15 @@ void P2PEngine::onPktAnnList( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
-void P2PEngine::onPktHostUnjoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostUnJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostUnjoinReq" );
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostUnJoinReq" );
 }
 
 //============================================================================
-void P2PEngine::onPktHostUnjoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+void P2PEngine::onPktHostUnJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
-	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostUnjoinReply" );
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostUnJoinReply" );
 }
 	
 //============================================================================

@@ -43,11 +43,13 @@ public:
     void                        addUserJoinMgrClient( UserJoinCallbackInterface * client, bool enable );
 
     void                        onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
     virtual void				announceUserJoinRequested( UserJoinInfo* userHostInfo );
     virtual void				announceUserJoinUpdated( UserJoinInfo * userJoinInfo );
+    virtual void				announceUserUnJoinUpdated( UserJoinInfo* userJoinInfo );
     virtual void				announceUserJoinRemoved( GroupieId& groupieId );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }

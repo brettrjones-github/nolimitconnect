@@ -1415,10 +1415,16 @@ QString GuiParams::describeStatus( EHostJoinStatus hostStatus )
         return QObject::tr( "Host Join Connect Failed" );
     case eHostJoinSendingJoinRequest:
         return QObject::tr( "Host Join Sending Request" );
+    case eHostJoinSendingUnJoinRequest:
+        return QObject::tr( "Host Sending UnJoin Request" );
     case eHostJoinSendJoinRequestFailed:
         return QObject::tr( "Host Join Send Request Failed" );
+    case eHostJoinSendUnJoinRequestFailed:
+        return QObject::tr( "Host Send UnJoin Request Failed" );
     case eHostJoinSuccess:
         return QObject::tr( "Host Join Success" );
+    case eHostJoinUnJoinSuccess:
+        return QObject::tr( "Host UnJoin Success" );
     case eHostJoinFail:
         return QObject::tr( "Host Join Failed" );
     case eHostJoinFailPermission:

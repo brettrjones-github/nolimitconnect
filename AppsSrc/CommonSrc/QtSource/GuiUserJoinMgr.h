@@ -48,6 +48,7 @@ public:
     void                        onUserJoinAdded( GuiUserJoin* guiUserJoin );
     void                        onUserJoinRemoved( GroupieId& groupieId );
     void                        onUserJoinUpdated( GuiUserJoin* guiUserJoin );
+    void                        onUserUnJoinUpdated( GuiUserJoin* guiUserJoin );
     void                        onUserOnlineStatusChange( GuiUserJoin* guiUserJoin, bool isOnline );
     void                        onMyIdentUpdated( GuiUserJoin* guiUserJoin );
 
@@ -68,6 +69,7 @@ signals:
 
     void                        signalInternalUserJoinRequested( UserJoinInfo* userJoinInfo );
     void                        signalInternalUserJoinUpdated( UserJoinInfo* userJoinInfo );
+    void                        signalInternalUserUnJoinUpdated( UserJoinInfo* userJoinInfo );
     void                        signalInternalUserJoinRemoved( GroupieId groupieId );
     void                        signalInternalUserJoinOfferState( GroupieId groupieId, EJoinState hostOfferState );
     void                        signalInternalUserJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
@@ -75,6 +77,7 @@ signals:
 private slots:
     void                        slotInternalUserJoinRequested( UserJoinInfo* userJoinInfo );
     void                        slotInternalUserJoinUpdated( UserJoinInfo* userJoinInfo );
+    void                        slotInternalUserUnJoinUpdated( UserJoinInfo* userJoinInfo );
     void                        slotInternalUserJoinRemoved( GroupieId groupieId );
     void                        slotInternalUserJoinOfferState( GroupieId groupieId, EJoinState hostOfferState );
     void                        slotInternalUserJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
@@ -82,16 +85,18 @@ private slots:
 protected:
     void                        removeUserJoin( GroupieId& groupieId );
     GuiUserJoin*                findUserJoin( GroupieId& groupieId );
-    GuiUserJoin*                updateUserJoin( UserJoinInfo* userJoinInfo );
+    GuiUserJoin*                updateUserJoin( UserJoinInfo* userJoinInfo, bool unJoin = false );
     
     virtual void				callbackUserJoinAdded( UserJoinInfo* userJoinInfo ) override;
     virtual void				callbackUserJoinUpdated( UserJoinInfo* userJoinInfo ) override;
+    virtual void				callbackUserUnJoinUpdated( UserJoinInfo* userJoinInfo ) override;
     virtual void				callbackUserJoinRemoved( GroupieId& groupieId ) override;
     virtual void				callbackUserJoinOfferState( GroupieId& groupieId, EJoinState userOfferState ) override;
     virtual void				callbackUserJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) override;
 
     virtual void				announceUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				announceUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinLeaveHost( GroupieId& groupieId );
     virtual void				announceUserJoinRemoved( GroupieId& groupieId );

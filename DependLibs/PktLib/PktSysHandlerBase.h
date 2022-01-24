@@ -34,8 +34,8 @@ public:
 	virtual void				onPktAnnounce				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktAnnList				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
-	virtual void				onPktHostUnjoinReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktHostUnjoinReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+	virtual void				onPktHostUnJoinReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
+	virtual void				onPktHostUnJoinReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktScanReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr );

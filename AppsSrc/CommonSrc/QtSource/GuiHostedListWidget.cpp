@@ -413,6 +413,12 @@ void GuiHostedListWidget::callbackGuiHostJoinGranted( GroupieId& groupieId, GuiH
 }
 
 //============================================================================
+void GuiHostedListWidget::callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostUnJoinGranted" );
+}
+
+//============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
     LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinDenied" );
@@ -428,4 +434,42 @@ void GuiHostedListWidget::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
 void GuiHostedListWidget::callbackGuiHostJoinRemoved( GroupieId& groupieId )
 {
     LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinRemoved" );
+}
+//============================================================================
+//============================================================================
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRequested" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserUnJoinGranted" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinDenied" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserJoinLeaveHost( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinLeaveHost" );
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserJoinRemoved( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRemoved" );
 }

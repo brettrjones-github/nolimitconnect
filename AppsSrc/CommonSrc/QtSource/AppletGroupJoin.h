@@ -48,12 +48,15 @@ public:
 
     virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+    virtual void				callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId ) override;
     virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId ) override;
 
     virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
     virtual void				callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+    virtual void				callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+
     virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
     virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId ) override;
     virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId ) override;

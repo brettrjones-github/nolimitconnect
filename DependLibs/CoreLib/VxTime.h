@@ -11,6 +11,7 @@
 #include "VxDefs.h"
 
 #include <inttypes.h>
+#include <cmath>
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,7 +19,7 @@ extern "C" {
 
 // set time format to military 24hr or AM/PM
 void                        SetUseMillitaryTime( bool useMilitaryTime );
-bool                        GetUseMillitaryTime( );
+bool                        GetUseMillitaryTime( void );
 
 int64_t				        GetTimeStampMs( void );			            // milli seconds since January 1, 1970 GMT time ( Same as GetGmtTimeMs )
 
@@ -38,11 +39,11 @@ int64_t				        LocalTimeZoneDifferenceMs( void );		      // time difference 
 inline int64_t				LocalTimeZoneDifferenceSec( void )            { return LocalTimeZoneDifferenceMs() / 1000; }
 inline int64_t				LocalTimeZoneDifferenceMinutes( void )        { return LocalTimeZoneDifferenceMs() / 60000; }
 
-inline int32_t              TimeElapsedSec( int64_t startTimeMs, int64_t endTimeMs ) { return (int32_t)( ( endTimeMs - startTimeMs ) / 1000 ); };
-inline int64_t              TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs ) { return ( endTimeMs - startTimeMs ); };
+inline int32_t              TimeElapsedSec( int64_t startTimeMs, int64_t endTimeMs ) { return (int32_t)( std::abs( endTimeMs - startTimeMs ) / 1000 ); };
+inline int64_t              TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs ) { return ( std::abs( endTimeMs - startTimeMs ) ); };
 
-inline int32_t              TimeElapsedGmtSec( int64_t startTimeGmtMs )   { return (int32_t)( ( GetGmtTimeMs() - startTimeGmtMs ) / 1000 ); };
-inline int64_t              TimeElapsedGmtMs( int64_t startTimeGmtMs )    { return ( GetGmtTimeMs() - startTimeGmtMs ); };
+inline int32_t              TimeElapsedGmtSec( int64_t startTimeGmtMs )   { return (int32_t)( std::abs( GetGmtTimeMs() - startTimeGmtMs ) / 1000 ); };
+inline int64_t              TimeElapsedGmtMs( int64_t startTimeGmtMs )    { return std::abs( GetGmtTimeMs() - startTimeGmtMs ); };
 
 #ifdef __cplusplus
 }

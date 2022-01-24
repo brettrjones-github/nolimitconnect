@@ -78,8 +78,11 @@ protected:
 
     void                        sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
     void                        sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    void                        sendUnJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+
 
     virtual void                onPktHostJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
+    virtual void                onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) {};
     virtual void                onPktPluginSettingReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
     virtual void                onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) {};
 
@@ -89,6 +92,7 @@ protected:
 
     virtual bool                isAnnounceConnectReason( EConnectReason connectReason );
     virtual bool                isJoinConnectReason( EConnectReason connectReason );
+    virtual bool                isUnJoinConnectReason( EConnectReason connectReason );
     virtual bool                isSearchConnectReason( EConnectReason connectReason );
 
     virtual bool                stopHostSearch( EHostType hostType, SearchParams& searchParams );

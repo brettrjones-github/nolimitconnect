@@ -22,6 +22,7 @@ class GuiHostedListSession;
 class GuiHosted;
 class GroupieId;
 class GuiHostJoin;
+class GuiUserJoin;
 
 class GuiHostedListWidget : public ListWidgetBase
 {
@@ -42,9 +43,18 @@ public:
 
     virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId );
     virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId );
+
+    virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+
+    virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId );
+    virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId );
 
 signals:
     void                        signalIconButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );

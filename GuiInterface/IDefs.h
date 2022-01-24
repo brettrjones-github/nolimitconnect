@@ -85,14 +85,17 @@ enum EConnectReason
 
     eConnectReasonGroupAnnounce,
     eConnectReasonGroupJoin,
+    eConnectReasonGroupUnJoin,
     eConnectReasonGroupSearch,
 
     eConnectReasonChatRoomAnnounce,
     eConnectReasonChatRoomJoin,
+    eConnectReasonChatRoomUnJoin,
     eConnectReasonChatRoomSearch,
 
     eConnectReasonRandomConnectAnnounce,
     eConnectReasonRandomConnectJoin,
+    eConnectReasonRandomConnectUnJoin,
     eConnectReasonRandomConnectSearch,
 
     eConnectReasonAnnouncePing,
@@ -311,12 +314,15 @@ enum EHostJoinStatus
     eHostJoinSendingJoinRequest = 10,
     eHostJoinSendJoinRequestFailed = 11,
     eHostJoinSuccess = 12,
-    eHostJoinFail = 13,
-    eHostJoinFailPermission = 14,
-    eHostJoinFailConnectDropped = 15,
-    eHostJoinInvalidParam = 16,
-    eHostJoinPluginDisabled = 17,
-    eHostJoinDone = 18,
+    eHostJoinSendingUnJoinRequest = 13,
+    eHostJoinSendUnJoinRequestFailed = 14,
+    eHostJoinUnJoinSuccess = 15,
+    eHostJoinFail = 16,
+    eHostJoinFailPermission = 17,
+    eHostJoinFailConnectDropped = 18,
+    eHostJoinInvalidParam = 19,
+    eHostJoinPluginDisabled = 20,
+    eHostJoinDone = 21,
 
     eMaxHostJoinStatus
 };

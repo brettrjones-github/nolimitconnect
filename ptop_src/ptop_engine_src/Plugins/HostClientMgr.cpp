@@ -62,6 +62,36 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 }
 
 //============================================================================
+void HostClientMgr::onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    PktHostUnJoinReply* hostReply = ( PktHostUnJoinReply* )pktHdr;
+    if( hostReply->isValidPkt() )
+    {
+        if( ePluginAccessOk == hostReply->getAccessState() )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinUnJoinSuccess );
+            BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), hostReply->getSessionId(), sktBase->getConnectionId() );
+            GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
+            onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+        }
+        else if( ePluginAccessLocked == hostReply->getAccessState() )
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinFailPermission );
+            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, HostTypeToConnectJoinReason( hostReply->getHostType() ) );
+        }
+        else
+        {
+            m_Engine.getToGui().toGuiHostJoinStatus( hostReply->getHostType(), netIdent->getMyOnlineId(), eHostJoinFail, DescribePluginAccess( hostReply->getAccessState() ) );
+            m_Engine.getConnectionMgr().doneWithConnection( hostReply->getSessionId(), netIdent->getMyOnlineId(), this, HostTypeToConnectJoinReason( hostReply->getHostType() ) );
+        }
+    }
+    else
+    {
+        onInvalidRxedPacket( sktBase, pktHdr, netIdent );
+    }
+}
+
+//============================================================================
 void HostClientMgr::onPktHostSearchReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     PktHostSearchReply* hostReply = ( PktHostSearchReply* )pktHdr;
@@ -104,6 +134,14 @@ void HostClientMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase * sktBase,
     m_Engine.getUserJoinMgr().onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onUserJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
     m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
+}
+
+//============================================================================
+void HostClientMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    m_ServerList.erase( groupieId );
+    m_Engine.getUserJoinMgr().onUserUnJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onUserUnJoinedHost( groupieId, sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================
