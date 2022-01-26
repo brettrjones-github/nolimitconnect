@@ -78,7 +78,8 @@ private:
 
 namespace
 {
-    int							g_ThreadCreateCnt	= 0;
+    int							g_ThreadCreateCnt{ 0 };
+	unsigned int				g_GuiThreadId{ 0 };
     VxMutex						g_DebugThreadsMutex;
     std::vector<VxThread *>		g_RuningThreadList;
     std::vector<VxThreadInfo>   g_RuningThreadInfo;
@@ -94,11 +95,11 @@ void VxThreadDefaultStartCallback( unsigned int threadId, const char * threadNam
         VxThreadInfo threadInfo( threadId, threadName );
         g_RuningThreadInfo.push_back( threadInfo );
         g_DebugThreadsMutex.unlock();
-        LogMsg( LOG_DEBUG, "VxThreadStartCallback: thread id 0x%X %s total count%d\n", threadId, threadName, g_RuningThreadInfo.size() );
+        LogMsg( LOG_DEBUG, "VxThreadStartCallback: thread id 0x%X %s total count%d", threadId, threadName, g_RuningThreadInfo.size() );
    }
     else
     {
-        LogMsg( LOG_DEBUG, "ERROR VxThreadStartCallback: thread id 0x%X has no name\n" );
+        LogMsg( LOG_DEBUG, "ERROR VxThreadStartCallback: thread id 0x%X has no name" );
     }
 #endif //ENABLE_THREAD_INFO
 }
@@ -109,11 +110,11 @@ void VxThreadDefaultStopCallback( unsigned int threadId, bool iIsExitCallbackLoc
 #ifdef ENABLE_THREAD_INFO
     if( threadName )
     {
-        LogMsg( LOG_DEBUG, "VxThreadStopCallback: thread id 0x%X %s Locked = %d\n", threadId, threadName, iIsExitCallbackLocked );
+        LogMsg( LOG_DEBUG, "VxThreadStopCallback: thread id 0x%X %s Locked = %d", threadId, threadName, iIsExitCallbackLocked );
     }
     else
     {
-        LogMsg( LOG_DEBUG, "ERROR VxThreadStopCallback: thread id 0x%X has no name\n" );
+        LogMsg( LOG_DEBUG, "ERROR VxThreadStopCallback: thread id 0x%X has no name" );
     }
 #endif //ENABLE_THREAD_INFO
 }
@@ -142,6 +143,20 @@ unsigned int VxGetCurrentThreadTid( void )
 		return pthread_self();
 	#endif // TARGET_OS_ANDROID
 #endif
+}
+
+//============================================================================
+//! set the thread id of qt application using current thread id
+void VxSetGuiThreadId( void )
+{
+	g_GuiThreadId = VxGetCurrentThreadTid();
+}
+
+//============================================================================
+//! get the thread id of qt application
+unsigned int VxGetGuiThreadId( void )
+{
+	return g_GuiThreadId;
 }
 
 //============================================================================

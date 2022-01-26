@@ -109,6 +109,11 @@ unsigned int	VxGetCurrentThreadId( void );
 unsigned int	VxGetCurrentThreadTid( void );
 std::string		VxGetThreadInfo( void ); 
 
+//! set the thread id of qt application using current thread id
+void VxSetGuiThreadId( void );
+//! get the thread id of qt application
+unsigned int VxGetGuiThreadId( void );
+
 void            VxThreadDefaultStartCallback( unsigned int threadId, const char * threadName );
 void            VxThreadDefaultStopCallback( unsigned int threadId, bool iIsExitCallbackLocked, const char * threadName );
 

@@ -208,7 +208,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
         {
             if( !netIdent->isIgnored() )
             {
-                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinAccepted )
+                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
                     joinReply.setAccessState( ePluginAccessOk );
@@ -242,6 +242,63 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
         LogMsg( LOG_DEBUG, "PluginBaseHostService onPktHostJoinReq Invalid Packet" );
         joinReply.setCommError( eCommErrInvalidPkt );
         onInvalidRxedPacket( sktBase, pktHdr, netIdent );   
+    }
+}
+
+//============================================================================
+void PluginBaseHostService::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+    LogModule( eLogHosts, LOG_DEBUG, "PluginBaseHostService %s got unjoin request from %s", DescribeHostType( getHostType() ), netIdent->getOnlineName() );
+    PktHostUnJoinReq* joinReq = ( PktHostUnJoinReq* )pktHdr;
+    PktHostUnJoinReply joinReply;
+    if( joinReq->isValidPkt() )
+    {
+        joinReply.setHostType( joinReq->getHostType() );
+        joinReply.setPluginType( getPluginType() );
+        joinReply.setSessionId( joinReq->getSessionId() );
+        joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
+        if( ePluginAccessOk == joinReply.getAccessState() )
+        {
+            m_HostServerMgr.onUserUnJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
+        }
+        else if( ePluginAccessLocked == joinReply.getAccessState() )
+        {
+            if( !netIdent->isIgnored() )
+            {
+                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinGranted )
+                {
+                    // even though friendship not high enough if admin has accepted then send accepted
+                    joinReply.setAccessState( ePluginAccessOk );
+                }
+                else
+                {
+                    // add to join request list
+                    m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
+                }
+            }
+            else
+            {
+                // TODO .. should we drop the connection?
+            }
+        }
+        else if( ePluginAccessDisabled == joinReply.getAccessState() )
+        {
+            // join request sent to disabled plugin.. this should not happen
+            LogMsg( LOG_ERROR, "PluginBaseHostService %s got join request to disabled plugin from %s", DescribeHostType( getHostType() ), netIdent->getMyOnlineUrl().c_str() );
+        }
+        else if( ePluginAccessIgnored == joinReply.getAccessState() )
+        {
+            // TODO .. should we drop the connection of ignored person?
+            LogMsg( LOG_ERROR, "PluginBaseHostService %s got join request from ignored person %s", DescribeHostType( getHostType() ), netIdent->getMyOnlineUrl().c_str() );
+        }
+
+        txPacket( netIdent, sktBase, &joinReply );
+    }
+    else
+    {
+        LogMsg( LOG_DEBUG, "PluginBaseHostService onPktHostJoinReq Invalid Packet" );
+        joinReply.setCommError( eCommErrInvalidPkt );
+        onInvalidRxedPacket( sktBase, pktHdr, netIdent );
     }
 }
 

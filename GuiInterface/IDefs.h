@@ -422,7 +422,7 @@ enum EJoinState
     eJoinStateSendFail,
     eJoinStateSendAcked,
     eJoinStateJoinRequested,
-    eJoinStateJoinAccepted,
+    eJoinStateJoinGranted,
     eJoinStateJoinDenied,
     eJoinStateJoinLeaveHost,
 
@@ -1130,6 +1130,8 @@ const char * getPluginName( EPluginType pluginType );
 EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType );
 //! convert Host Type to connect reason
 EConnectReason HostTypeToConnectJoinReason( EHostType hostType );
+//! convert Host Type to connect reason
+EConnectReason HostTypeToConnectUnJoinReason( EHostType hostType );
 //! convert Host Type to connect reason
 EConnectReason HostTypeToConnectSearchReason( EHostType hostType );
 

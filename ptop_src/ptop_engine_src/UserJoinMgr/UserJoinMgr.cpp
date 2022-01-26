@@ -217,7 +217,7 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
     joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-    joinInfo->setJoinState( eJoinStateJoinAccepted );
+    joinInfo->setJoinState( eJoinStateJoinGranted );
     joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
     joinInfo->setConnectionId( sktBase->getConnectionId() );
@@ -259,7 +259,7 @@ void UserJoinMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, 
         joinInfo->setNetIdent( netIdent );
         int64_t timeNowMs = GetTimeStampMs();
         joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-        joinInfo->setJoinState( eJoinStateJoinAccepted );
+        joinInfo->setJoinState( eJoinStateJoinGranted );
         joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
         joinInfo->setConnectionId( sktBase->getConnectionId() );

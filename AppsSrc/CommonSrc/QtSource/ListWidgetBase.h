@@ -42,6 +42,9 @@ public:
     P2PEngine&                  getEngine( void )           { return m_Engine; }
     GuiThumbMgr&                getThumbMgr( void )         { return m_ThumbMgr; }
 
+    void                        setIsHostView( bool isHost ) { m_IsHostView = isHost; }
+    bool                        getIsHostView( void )       { return m_IsHostView; }
+
     void                        launchChangeFriendship( GuiUser* ident );
 
 protected:
@@ -51,6 +54,7 @@ protected:
     GuiUserMgr&                 m_UserMgr;
     P2PEngine&                  m_Engine;
     GuiThumbMgr&                m_ThumbMgr;
+    bool                        m_IsHostView{ false };
 
     VxTimer						m_ClickEventTimer; // avoid duplicate clicks
 };

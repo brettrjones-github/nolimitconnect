@@ -36,6 +36,11 @@ public:
     void						updateHostedList( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId );
     GuiHostedListItem*          addOrUpdateHostSession( GuiHostedListSession* hostSession );
 
+    void                        updateHostJoinState( HostedId& hostedId, EJoinState joinState );
+    void                        updateUserJoinState( HostedId& hostedId, EJoinState joinState );
+    void                        updateJoinState( HostedId& hostedId, EJoinState joinState );
+    void                        removeFromList( HostedId& hostedId );
+
     GuiHostedListSession*       findSession( VxGUID& lclSessionId );
     GuiHostedListSession*       findSession( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByHostId( HostedId& hostedId );
@@ -46,6 +51,7 @@ public:
     virtual void				callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId );
+    virtual void				callbackGuiHostUnJoin( GroupieId& groupieId );
     virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId );
 
     virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
@@ -61,15 +67,17 @@ signals:
     void                        signalMenuButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        signalJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        signalConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        signalKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected slots:
-	void						slotItemClicked( QListWidgetItem* item );
     void                        slotGuiHostedListItemClicked( QListWidgetItem* hostItem );
     void                        slotIconButtonClicked( GuiHostedListItem* hostItem );
     void                        slotFriendshipButtonClicked( GuiHostedListItem* hostItem );
     void                        slotMenuButtonClicked( GuiHostedListItem* hostItem );
+
     void                        slotJoinButtonClicked( GuiHostedListItem* hostItem );
     void                        slotConnectButtonClicked( GuiHostedListItem* hostItem );
+    void                        slotKickButtonClicked( GuiHostedListItem* hostItem );
 
 protected:
     GuiHostedListItem*          sessionToWidget( GuiHostedListSession* hostSession );
@@ -79,8 +87,10 @@ protected:
     virtual void                onIconButtonClicked( GuiHostedListItem* hostItem );
     virtual void                onFriendshipButtonClicked( GuiHostedListItem* hostItem );
     virtual void                onMenuButtonClicked( GuiHostedListItem* hostItem );
+
     virtual void                onJoinButtonClicked( GuiHostedListItem* hostItem );
     virtual void                onConnectButtonClicked( GuiHostedListItem* hostItem );
+    virtual void                onKickButtonClicked( GuiHostedListItem* hostItem );
 
 	//=== vars ===//
 };

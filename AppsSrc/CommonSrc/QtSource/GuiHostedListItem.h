@@ -48,6 +48,8 @@ public:
 
     void						updateWidgetFromInfo( void );
 
+    QSize                       calculateSizeHint( void );
+
 signals:
     void						signalGuiHostedListItemClicked( QListWidgetItem * poItemWidget );
 	void						signalIconButtonClicked( GuiHostedListItem* listEntryWidget );
@@ -55,15 +57,19 @@ signals:
 	void						signalMenuButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalJoinButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalConnectButtonClicked( GuiHostedListItem* listEntryWidget );
+    void						signalKickButtonClicked( GuiHostedListItem* listEntryWidget );
 
 public slots:
-    void						slotJoinButtonPressed( void );
-    void						slotConnectButtonPressed( void );
+    void						slotJoinButtonClicked( void );
+    void						slotConnectButtonClicked( void );
+    void						slotKickButtonClicked( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
-    virtual void                showConnectButton( bool isAccepted );
+
+    void                        showConnectButton( bool isAccepted );
+    void                        showKickButton( bool isVisible );
 
 	//=== vars ===//
     Ui::GuiHostedListItemUi	    ui;

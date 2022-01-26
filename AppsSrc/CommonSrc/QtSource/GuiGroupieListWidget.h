@@ -46,6 +46,7 @@ public:
 
     virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId );
+    virtual void				callbackGuiHostUnJoin( GroupieId& groupieId );
     virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId );
 
     virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );

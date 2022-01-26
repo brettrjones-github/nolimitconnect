@@ -149,6 +149,20 @@ void HostJoinMgr::announceHostJoinUpdated( HostJoinInfo * hostInfo )
 }
 
 //============================================================================
+void HostJoinMgr::announceHostUnJoin( GroupieId& groupieId )
+{
+    lockClientList();
+    std::vector<HostJoinCallbackInterface*>::iterator iter;
+    for( iter = m_HostJoinClients.begin(); iter != m_HostJoinClients.end(); ++iter )
+    {
+        HostJoinCallbackInterface* client = *iter;
+        client->callbackHostUnJoin( groupieId );
+    }
+
+    unlockClientList();
+}
+
+//============================================================================
 void HostJoinMgr::announceHostJoinRemoved( GroupieId& groupieId )
 {
     removeFromDatabase( groupieId, false );
@@ -223,6 +237,41 @@ void HostJoinMgr::onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* net
 }
 
 //============================================================================
+void HostJoinMgr::onHostUnJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( !joinInfo )
+    {
+        unlockResources();
+        return;
+    }
+
+    joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+    joinInfo->setPluginType( sessionInfo.getPluginType() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+    joinInfo->setNetIdent( netIdent );
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
+    joinInfo->setJoinState( eJoinStateNone );
+    joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
+    joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+    unlockResources();
+
+    removeFromDatabase( joinInfo->getGroupieId(), false );
+
+    announceHostUnJoin( joinInfo->getGroupieId() );
+}
+
+//============================================================================
 void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
@@ -242,7 +291,7 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
     joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-    joinInfo->setJoinState( eJoinStateJoinAccepted );
+    joinInfo->setJoinState( eJoinStateJoinGranted );
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
@@ -267,6 +316,43 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
     {
         announceHostJoinUpdated( joinInfo );
     }
+}
+
+//============================================================================
+void HostJoinMgr::onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    bool wasAdded = false;
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( !joinInfo )
+    {
+        unlockResources();
+        return;
+    }
+
+    joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+    joinInfo->setPluginType( sessionInfo.getPluginType() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+    joinInfo->setNetIdent( netIdent );
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
+    joinInfo->setJoinState( eJoinStateNone );
+    joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
+    joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+
+    unlockResources();
+
+    removeFromDatabase( joinInfo->getGroupieId(), false );
+
+    announceHostUnJoin( joinInfo->getGroupieId() );
 }
 
 //============================================================================
@@ -368,7 +454,7 @@ EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& n
     else if( netIdent.getMyOnlineId() == m_Engine.getMyOnlineId() )
     {
         // if we are host we can always join our own hosted servers
-        hostJoinState = eJoinStateJoinAccepted;
+        hostJoinState = eJoinStateJoinGranted;
     }
 
     unlockResources();
@@ -395,7 +481,7 @@ EMembershipState HostJoinMgr::fromGuiQueryMembership( EHostType hostType, VxNetI
         case eJoinStateJoinRequested:
             return eMembershipStateCanBeRequested;
 
-        case eJoinStateJoinAccepted:
+        case eJoinStateJoinGranted:
             return eMembershipStateJoined;
 
         case eJoinStateJoinDenied:

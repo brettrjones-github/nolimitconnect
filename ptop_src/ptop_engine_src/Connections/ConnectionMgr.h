@@ -63,6 +63,9 @@ public:
     void						doNetConnectionsThread( void );
     void						doStayConnectedThread( void );
 
+    void                        lockConnectionList( void )      { m_ConnectionMutex.lock(); }
+    void                        unlockConnectionList( void )    { m_ConnectionMutex.unlock(); }
+
 protected:
     virtual void				callbackInternetStatusChanged( EInternetStatus internetStatus ) override;
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) override;

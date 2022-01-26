@@ -59,6 +59,21 @@ void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionI
 }
 
 //============================================================================
+void PluginBaseHostClient::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
+{
+    std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
+    if( !url.empty() )
+    {
+        VxGUID hostGuid;
+        //EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryId( hostType, url.c_str(), hostGuid, this);
+    }
+    else
+    {
+        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+    }
+}
+
+//============================================================================
 void PluginBaseHostClient::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
     std::string url = searchParams.getSearchUrl();

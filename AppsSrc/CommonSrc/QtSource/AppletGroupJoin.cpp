@@ -28,6 +28,8 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
     setAppletType( eAppletGroupJoin );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	setHostType( eHostTypeGroup );
+	ui.m_GuiHostedListWidget->setIsHostView( false );
+	ui.m_GuiGroupieListWidget->setIsHostView( false );
 
 	// so is actually destroyed
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
@@ -37,8 +39,7 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalMenuButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotMenuButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalJoinButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotJoinButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalConnectButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotConnectButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
-
-
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalKickButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotKickButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
 
 	m_MyApp.activityStateChange( this, true );
 	m_MyApp.getUserMgr().wantGuiUserUpdateCallbacks( this, true );
@@ -198,6 +199,17 @@ void AppletGroupJoin::slotConnectButtonClicked( GuiHostedListSession* hostSessio
 }
 
 //============================================================================
+void AppletGroupJoin::slotKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotKickButtonClicked" );
+	if( yesNoMessageBox( QObject::tr( "Revoke Membership" ), QObject::tr( "Are You Sure You Want To Revoke Membership?" ) ) )
+	{
+		std::string ptopUrl = hostSession->getHostUrl();
+		m_MyApp.getFromGuiInterface().fromGuiUnJoinHost( hostSession->getHostType(), hostSession->getSessionId(), ptopUrl );
+	}
+}
+
+//============================================================================
 void AppletGroupJoin::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRequested" );
@@ -233,11 +245,19 @@ void AppletGroupJoin::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
 }
 
 //============================================================================
+void AppletGroupJoin::callbackGuiHostUnJoin( GroupieId& groupieId )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostUnJoin" );
+	ui.m_GuiHostedListWidget->callbackGuiHostUnJoin( groupieId );
+}
+
+//============================================================================
 void AppletGroupJoin::callbackGuiHostJoinRemoved( GroupieId& groupieId )
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRemoved" );
 	ui.m_GuiHostedListWidget->callbackGuiHostJoinRemoved( groupieId );
 }
+
 //============================================================================
 //============================================================================
 

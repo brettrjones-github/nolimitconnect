@@ -42,7 +42,7 @@ public:
 
     void                        onHandshakeComplete( HandshakeInfo& shakeInfo );
     void                        addConnectReason( HandshakeInfo& shakeInfo );
-    void                        removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason );
+    bool                        removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason, VxSktBase** retSktBaseIfDisconnected );
 
     void                        onSktDisconnected( VxSktBase * sktBase );
     void                        aboutToDelete( void );

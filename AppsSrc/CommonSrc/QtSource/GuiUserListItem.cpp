@@ -40,7 +40,7 @@ GuiUserListItem::~GuiUserListItem()
 //============================================================================
 QSize GuiUserListItem::calculateSizeHint( void )
 {
-    return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize().height() + 8 ) );
+    return QSize( (int)( GuiParams::getGuiScale() * 200 ), (int)( GuiParams::getButtonSize( eButtonSizeSmall ).height() + 8 ) );
 }
 
 //============================================================================

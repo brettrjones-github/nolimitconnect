@@ -38,22 +38,21 @@ GuiGroupieListWidget::GuiGroupieListWidget( QWidget * parent )
 //============================================================================
 GuiGroupieListItem* GuiGroupieListWidget::sessionToWidget( GuiGroupieListSession* groupieSession )
 {
-    GuiGroupieListItem* hostItem = new GuiGroupieListItem(this);
-    hostItem->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
-        ( int )( 62 * GuiParams::getGuiScale() ) ) );
+    GuiGroupieListItem* groupieItem = new GuiGroupieListItem(this);
+    groupieItem->setSizeHint( groupieItem->calculateSizeHint() );
 
-    hostItem->setHostSession( groupieSession );
+    groupieItem->setHostSession( groupieSession );
 
-    connect( hostItem, SIGNAL( signalGuiGroupieListItemClicked( QListWidgetItem  *) ),	    this, SLOT( slotGuiGroupieListItemClicked( QListWidgetItem * ) ) );
-    connect( hostItem, SIGNAL( signalIconButtonClicked( GuiGroupieListItem * ) ),	        this, SLOT( slotIconButtonClicked( GuiGroupieListItem * ) ) );
-    connect( hostItem, SIGNAL( signalFriendshipButtonClicked( GuiGroupieListItem* ) ),       this, SLOT( slotFriendshipButtonClicked( GuiGroupieListItem* ) ) );
-    connect( hostItem, SIGNAL( signalMenuButtonClicked( GuiGroupieListItem * ) ),	        this, SLOT( slotMenuButtonClicked( GuiGroupieListItem * ) ) );
-    connect( hostItem, SIGNAL( signalJoinButtonClicked( GuiGroupieListItem * ) ),		    this, SLOT( slotJoinButtonClicked( GuiGroupieListItem * ) ) );
-    connect( hostItem, SIGNAL( signalConnectButtonClicked( GuiGroupieListItem* ) ),          this, SLOT( slotConnectButtonClicked( GuiGroupieListItem* ) ) );
+    connect( groupieItem, SIGNAL( signalGuiGroupieListItemClicked( QListWidgetItem  *) ),	    this, SLOT( slotGuiGroupieListItemClicked( QListWidgetItem * ) ) );
+    connect( groupieItem, SIGNAL( signalIconButtonClicked( GuiGroupieListItem * ) ),	        this, SLOT( slotIconButtonClicked( GuiGroupieListItem * ) ) );
+    connect( groupieItem, SIGNAL( signalFriendshipButtonClicked( GuiGroupieListItem* ) ),       this, SLOT( slotFriendshipButtonClicked( GuiGroupieListItem* ) ) );
+    connect( groupieItem, SIGNAL( signalMenuButtonClicked( GuiGroupieListItem * ) ),	        this, SLOT( slotMenuButtonClicked( GuiGroupieListItem * ) ) );
+    connect( groupieItem, SIGNAL( signalJoinButtonClicked( GuiGroupieListItem * ) ),		    this, SLOT( slotJoinButtonClicked( GuiGroupieListItem * ) ) );
+    connect( groupieItem, SIGNAL( signalConnectButtonClicked( GuiGroupieListItem* ) ),          this, SLOT( slotConnectButtonClicked( GuiGroupieListItem* ) ) );
 
-    hostItem->updateWidgetFromInfo();
+    groupieItem->updateWidgetFromInfo();
 
-    return hostItem;
+    return groupieItem;
 }
 
 //============================================================================
@@ -427,6 +426,12 @@ void GuiGroupieListWidget::callbackGuiHostJoinDenied( GroupieId& groupieId, GuiH
 void GuiGroupieListWidget::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
 {
     LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinLeaveHost" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostUnJoin( GroupieId& groupieId )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostUnJoin" );
 }
 
 //============================================================================

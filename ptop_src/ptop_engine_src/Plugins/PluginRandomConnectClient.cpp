@@ -43,6 +43,13 @@ void PluginRandomConnectClient::fromGuiJoinHost( EHostType hostType, VxGUID& ses
 }
 
 //============================================================================
+void PluginRandomConnectClient::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
+{
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
+    m_HostClientMgr.fromGuiUnJoinHost( hostType, sessionId, url );
+}
+
+//============================================================================
 void PluginRandomConnectClient::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
     m_HostClientMgr.fromGuiSearchHost( hostType, searchParams, enable );

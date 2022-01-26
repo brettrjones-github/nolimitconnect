@@ -169,6 +169,40 @@ void HostBaseMgr::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::s
 }
 
 //============================================================================
+void HostBaseMgr::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
+{
+    std::string url = ptopUrl.empty() ? m_ConnectionMgr.getDefaultHostUrl( hostType ) : ptopUrl;
+    if( url.empty() || hostType == eHostTypeUnknown )
+    {
+        LogMsg( LOG_ERROR, "HostBaseMgr::fromGuiJoinHost invalid param" );
+        m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+        return;
+    }
+
+    VxPtopUrl hostUrl( url );
+    if( hostUrl.isValid() )
+    {
+        VxSktBase* sktBase = nullptr;
+        if( m_Engine.getConnectMgr().isConnectedToHost( hostType, hostUrl, sktBase ) )
+        {
+            // handle already connected
+            onConnectToHostSuccess( hostType, sessionId, sktBase, hostUrl.getOnlineId(), HostTypeToConnectUnJoinReason( hostType ) );
+        }
+        else
+        {
+            // connect without having to query host id
+            connectToHost( hostType, sessionId, ptopUrl, HostTypeToConnectUnJoinReason( hostType ) );
+        }
+    }
+    else
+    {
+        // the url may not have online id and will have to be queried from host
+        connectToHost( hostType, sessionId, url, HostTypeToConnectUnJoinReason( hostType ) );
+    }
+}
+
+
+//============================================================================
 void HostBaseMgr::fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable )
 {
     std::string url = searchParams.getSearchUrl();
@@ -297,6 +331,32 @@ void HostBaseMgr::connectToHost( EHostType hostType, VxGUID& sessionId, std::str
             else
             {
                 EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryJoinId( sessionId, url.c_str(), hostGuid, this, connectReason);
+                if( eHostJoinQueryIdSuccess == joinStatus )
+                {
+                    // no need for id query.. just request connection
+                    onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+                }
+                else if( eHostJoinQueryIdInProgress == joinStatus )
+                {
+                    // manager is attempting to query id
+                    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinQueryIdInProgress );
+                }
+                else
+                {
+                    m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+                    onConnectToHostFail( hostType, sessionId, connectReason, eHostJoinInvalidUrl );
+                }
+            }
+        }
+        else if( isUnJoinConnectReason( connectReason ) )
+        {
+            if( ptopUrl.isValid() )
+            {
+                onUrlActionQueryIdSuccess( sessionId, url, hostGuid, connectReason );
+            }
+            else
+            {
+                EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryJoinId( sessionId, url.c_str(), hostGuid, this, connectReason );
                 if( eHostJoinQueryIdSuccess == joinStatus )
                 {
                     // no need for id query.. just request connection
@@ -977,13 +1037,13 @@ void HostBaseMgr::onUserOffline( VxGUID& onlineId, VxGUID& sessionId )
 //============================================================================
 EJoinState HostBaseMgr::getJoinState( VxNetIdent* netIdent, EHostType hostType )
 {
-    // BRJ TODO if has been accepted to host then should return eJoinStateJoinAccepted
-    return getPluginAccessState( netIdent ) == ePluginAccessOk ? eJoinStateJoinAccepted : eJoinStateJoinRequested;
+    // BRJ TODO if has been accepted to host then should return eJoinStateJoinGranted
+    return getPluginAccessState( netIdent ) == ePluginAccessOk ? eJoinStateJoinGranted : eJoinStateJoinRequested;
 }
 
 //============================================================================
 EMembershipState HostBaseMgr::getMembershipState( VxNetIdent* netIdent, EHostType hostType )
 {
-    // BRJ TODO if has been accepted to host then should return eJoinStateJoinAccepted
+    // BRJ TODO if has been accepted to host then should return eJoinStateJoinGranted
     return getPluginAccessState( netIdent ) == ePluginAccessOk ? eMembershipStateJoined : eMembershipStateJoinDenied;
 }

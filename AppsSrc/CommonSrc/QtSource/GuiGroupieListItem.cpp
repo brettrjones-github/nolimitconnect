@@ -49,6 +49,12 @@ GuiGroupieListItem::~GuiGroupieListItem()
 }
 
 //============================================================================
+QSize GuiGroupieListItem::calculateSizeHint( void )
+{
+    return QSize( ( int )( GuiParams::getGuiScale() * 200 ), ( int )( GuiParams::getButtonSize( eButtonSizeMedium ).height() + 8 ) );
+}
+
+//============================================================================
 MyIcons& GuiGroupieListItem::getMyIcons( void )
 {
     return m_MyApp.getMyIcons();
@@ -151,7 +157,7 @@ void GuiGroupieListItem::setJoinedState( EJoinState joinState )
     // todo update join 
     switch( joinState )
     {
-    case eJoinStateJoinAccepted:
+    case eJoinStateJoinGranted:
         showConnectButton( true );
         break;
     case eJoinStateSending:

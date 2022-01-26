@@ -67,6 +67,7 @@ signals:
 
     void                        signalInternalHostJoinRequested( HostJoinInfo* hostJoinInfo );
     void                        signalInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo );
+    void                        signalInternalHostUnJoin( GroupieId groupieId );
     void                        signalInternalHostJoinRemoved( GroupieId groupieId );
     void                        signalInternalHostJoinOfferState( GroupieId groupieId, EJoinState joinOfferState );
     void                        signalInternalHostJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
@@ -74,7 +75,8 @@ signals:
 private slots:
     void                        slotInternalHostJoinRequested( HostJoinInfo* hostJoinInfo );
     void                        slotInternalHostJoinUpdated( HostJoinInfo* hostJoinInfo );
-    void                        slotInternalHostJoinRemoved( GroupieId& groupieId );
+    void                        slotInternalHostUnJoin( GroupieId groupieId );
+    void                        slotInternalHostJoinRemoved( GroupieId groupieId );
     void                        slotInternalHostJoinOfferState( GroupieId groupieId, EJoinState joinOfferState );
     void                        slotInternalHostJoinOnlineState( GroupieId groupieId, EOnlineState onlineState, VxGUID connectionId );
 
@@ -85,6 +87,7 @@ protected:
 
     virtual void				callbackHostJoinRequested( HostJoinInfo* userHostInfo ) override;
     virtual void				callbackHostJoinUpdated( HostJoinInfo* userHostInfo ) override;
+    virtual void				callbackHostUnJoin( GroupieId& groupieId ) override;
     virtual void				callbackHostJoinRemoved( GroupieId& groupieId ) override;
     virtual void				callbackHostJoinOfferState( GroupieId& groupieId, EJoinState userHostOfferState ) override;
     virtual void				callbackHostJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) override;
@@ -95,6 +98,7 @@ protected:
     virtual void				announceHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				announceHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				announceHostJoinLeaveHost( GroupieId& groupieId );
+    virtual void				announceHostUnJoin( GroupieId& groupieId );
     virtual void				announceHostJoinRemoved( GroupieId& groupieId );
     
     AppCommon&                  m_MyApp;

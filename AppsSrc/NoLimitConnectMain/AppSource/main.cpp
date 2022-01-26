@@ -82,7 +82,9 @@ const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
 
 int main(int argc, char **argv)
 {
+    VxSetGuiThreadId();
     LogMsg( LOG_DEBUG, "Creating QApplication" );
+
     QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
     QApplication::setAttribute( Qt::AA_DontCheckOpenGLContextThreadAffinity );
 #if !defined(TARGET_OS_ANDROID) // on android AA_EnableHighDpiScaling causes main page to be quarter size

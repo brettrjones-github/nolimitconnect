@@ -46,6 +46,7 @@ public:
 
     virtual void				announceHostJoinRequested( HostJoinInfo* userHostInfo );
     virtual void				announceHostJoinUpdated( HostJoinInfo* userHostInfo );
+    virtual void				announceHostUnJoin( GroupieId& groupieId );
     virtual void				announceHostJoinRemoved( GroupieId& groupieId );
 
     VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
@@ -53,7 +54,9 @@ public:
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
     void                        onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onHostUnJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
+    void                        onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
     HostJoinInfo*               findUserJoinInfo( GroupieId& groupieId );

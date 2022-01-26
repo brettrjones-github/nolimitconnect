@@ -335,7 +335,7 @@ void P2PConnectList::onConnectionLost( VxSktBase * sktBase )
 void P2PConnectList::connectListLock( void )
 { 
 #ifdef DEBUG_MUTEXES
-    LogMsg( LOG_INFO, "P2PConnectList::connectListLock m_ConnectListMutex.Lock\n" );
+    LogMsg( LOG_INFO, "P2PConnectList::connectListLock m_ConnectListMutex.Lock" );
 #endif // DEBUG_MUTEXES
 	m_ConnectListMutex.lock(); 
 }

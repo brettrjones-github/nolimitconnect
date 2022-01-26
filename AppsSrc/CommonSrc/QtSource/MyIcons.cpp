@@ -807,6 +807,9 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconArrowUpRight:
 		return ":/AppRes/Resources/arrow-up-right.svg";
 
+	case eMyIconBoot:
+		return ":/AppRes/Resources/boot.svg";
+
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}

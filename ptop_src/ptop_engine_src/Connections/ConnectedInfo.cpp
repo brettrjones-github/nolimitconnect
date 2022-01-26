@@ -91,8 +91,9 @@ void ConnectedInfo::onHandshakeComplete( HandshakeInfo& shakeInfo )
 }
 
 //============================================================================
-void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason )
+bool ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallback* callback, EConnectReason connectReason, VxSktBase** retSktBaseIfDisconnected )
 {
+    bool sktDisconnected{ false };
     std::vector<HandshakeInfo>  completedList;
     for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end();  )
     {
@@ -114,10 +115,13 @@ void ConnectedInfo::removeConnectReason( VxGUID& sessionId, IConnectRequestCallb
         HandshakeInfo& shakeInfo = completedList[0];
         if( shakeInfo.getSktBase() && shakeInfo.getSktBase()->isConnected() )
         {
-            // let the normal socket disconnected code do the work of removing the connection
-            shakeInfo.getSktBase()->closeSkt( eSktCloseConnectReasonsEmpty );
+            // return skt so caller can close it if disconnected to avoid mutex deadlock
+            sktDisconnected = true;
+            *retSktBaseIfDisconnected = shakeInfo.getSktBase();
         }
     }
+
+    return sktDisconnected;
 }
 
 //============================================================================

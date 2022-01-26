@@ -48,6 +48,8 @@ public:
 
     void						updateWidgetFromInfo( void );
 
+    QSize                       calculateSizeHint( void );
+
 signals:
     void						signalGuiGroupieListItemClicked( QListWidgetItem * poItemWidget );
 	void						signalIconButtonClicked( GuiGroupieListItem* listEntryWidget );

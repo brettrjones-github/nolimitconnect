@@ -143,7 +143,7 @@ void HostedPluginWidget::setJoinedState( EJoinState joinState )
     // todo update join 
     switch( joinState )
     {
-    case eJoinStateJoinAccepted:
+    case eJoinStateJoinGranted:
         showConnectButton( true );
         break;
     case eJoinStateSending:

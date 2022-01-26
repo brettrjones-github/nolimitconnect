@@ -267,6 +267,7 @@ public:
 
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
+    virtual void				fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
     virtual void				fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId ) override;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) override;
     virtual void				fromGuiSendAnnouncedList( EHostType hostType, VxGUID& sessionId ) override;
@@ -532,9 +533,6 @@ public:
     virtual void				onPktAnnounce				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktAnnList				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-    virtual void				onPktHostUnJoinReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-    virtual void				onPktHostUnJoinReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
-
     virtual void				onPktScanReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktScanReply			    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
@@ -656,6 +654,8 @@ public:
 
     virtual void				onPktHostJoinReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostJoinReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostUnJoinReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostUnJoinReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostSearchReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostSearchReply        ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostOfferReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;

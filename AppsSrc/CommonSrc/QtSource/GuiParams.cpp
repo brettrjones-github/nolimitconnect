@@ -1688,7 +1688,7 @@ QString GuiParams::describeJoinState( EJoinState joinState )
         return  QObject::tr( "Send Join Acked " );
     case eJoinStateJoinRequested:
         return  QObject::tr( "Join Requested " );
-    case eJoinStateJoinAccepted:
+    case eJoinStateJoinGranted:
         return  QObject::tr( "Join Accepted " );
     case eJoinStateJoinDenied:
         return  QObject::tr( "Join Denied " );

@@ -51,6 +51,7 @@ public:
     virtual void				callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId ) override;
+    virtual void				callbackGuiHostUnJoin( GroupieId& groupieId ) override;
     virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId ) override;
 
     virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
@@ -68,6 +69,7 @@ protected slots:
     void                        slotMenuButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
     void                        setupGuiMode( bool userListMode );

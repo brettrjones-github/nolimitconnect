@@ -26,16 +26,20 @@ GuiHostedListItem::GuiHostedListItem(QWidget *parent  )
 {
 	ui.setupUi( this );
     setupIdentLogic();
-    connect( ui.m_JoinButton,		SIGNAL(pressed()),	this, SLOT(slotJoinButtonPressed()) );
-    connect( ui.m_ConnectButton,    SIGNAL( pressed() ), this, SLOT( slotConnectButtonPressed() ) );
+    connect( ui.m_JoinButton,		SIGNAL( clicked() ),	this, SLOT( slotJoinButtonClicked() ) );
+    connect( ui.m_ConnectButton,    SIGNAL( clicked() ),    this, SLOT( slotConnectButtonClicked() ) );
+    connect( ui.m_KickButton,       SIGNAL( clicked() ),    this, SLOT( slotConnectButtonClicked() ) );
    
     ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
     ui.m_MenuButton->setIcon( eMyIconMenu );
     ui.m_JoinButton->setIcon( eMyIconPersonAdd );
-    ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_JoinButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     ui.m_ConnectButton->setIcon( eMyIconConnect );
     ui.m_ConnectButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_KickButton->setIcon( eMyIconBoot );
+    ui.m_KickButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     showConnectButton( false );
+    showKickButton( false );
 }
 
 //============================================================================
@@ -46,6 +50,12 @@ GuiHostedListItem::~GuiHostedListItem()
     {
         delete hostSession;
     }
+}
+
+//============================================================================
+QSize GuiHostedListItem::calculateSizeHint( void )
+{
+    return QSize( ( int )( GuiParams::getGuiScale() * 200 ), ( int )( GuiParams::getButtonSize( eButtonSizeSmall ).height() + GuiParams::getButtonSize( eButtonSizeSmall ).height() ) + 16 );
 }
 
 //============================================================================
@@ -151,17 +161,40 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
     // todo update join 
     switch( joinState )
     {
-    case eJoinStateJoinAccepted:
+    case eJoinStateJoinGranted:
         showConnectButton( true );
+        ui.m_ConnectButton->setIcon( eMyIconDisconnect );
+        ui.m_ConnectLabel->setText( QObject::tr( "Disconnect" ) );
+        ui.m_JoinButton->setIcon( eMyIconPersonAdd );
+        ui.m_ConnectButton->setEnabled( true );
+        showKickButton( true );
         break;
     case eJoinStateSending:
     case eJoinStateSendFail:
     case eJoinStateSendAcked:
     case eJoinStateJoinRequested:
+        showConnectButton( true );
+        ui.m_ConnectLabel->setText( QObject::tr( "Connect" ) );
+        ui.m_ConnectButton->setIcon( eMyIconConnect );
+        ui.m_JoinButton->setIcon( eMyIconPersonAdd );
+        ui.m_ConnectButton->setEnabled( false );
+        showKickButton( false );
+        break;
+
     case eJoinStateJoinDenied:
+        showConnectButton( false );
+        ui.m_ConnectButton->setIcon( eMyIconIgnored );
+        ui.m_JoinButton->setIcon( eMyIconIgnored );
+        ui.m_ConnectButton->setEnabled( false );
+        showKickButton( false );
+        break;
     case eJoinStateNone:
     default:
         showConnectButton( false );
+        ui.m_ConnectButton->setIcon( eMyIconPersonAdd );
+        ui.m_JoinButton->setIcon( eMyIconPersonAdd );
+        ui.m_ConnectButton->setEnabled( true );
+        showKickButton( false );
         break;
     }
 }
@@ -176,13 +209,26 @@ void GuiHostedListItem::showConnectButton( bool isAccepted )
 }
 
 //============================================================================
-void GuiHostedListItem::slotJoinButtonPressed( void )
+void GuiHostedListItem::showKickButton( bool isVisible )
+{
+    ui.m_KickButton->setVisible( isVisible );
+    ui.m_KickLabel->setVisible( isVisible );
+}
+
+//============================================================================
+void GuiHostedListItem::slotJoinButtonClicked( void )
 {
     emit signalJoinButtonClicked( this );
 }
 
 //============================================================================
-void GuiHostedListItem::slotConnectButtonPressed( void )
+void GuiHostedListItem::slotConnectButtonClicked( void )
 {
     emit signalConnectButtonClicked( this );
+}
+
+//============================================================================
+void GuiHostedListItem::slotKickButtonClicked( void )
+{
+    emit signalKickButtonClicked( this );
 }

@@ -1229,7 +1229,7 @@ void GuiHelpers::fillJoinRequest( QComboBox* comboBox )
     {
         comboBox->clear();
         comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinRequested ) );
-        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinAccepted ) );
+        comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinGranted ) );
         comboBox->addItem( GuiParams::describeJoinState( eJoinStateJoinDenied ) );
     }
 }
@@ -1240,7 +1240,7 @@ EJoinState GuiHelpers::comboIdxToJoinState( int comboIdx )
     switch( comboIdx )
     {
     case 0: return eJoinStateJoinRequested;
-    case 1: return eJoinStateJoinAccepted;
+    case 1: return eJoinStateJoinGranted;
     default: return  eJoinStateJoinDenied;
     }
 }
@@ -1252,7 +1252,7 @@ uint8_t GuiHelpers::joinRequestToIndex( EJoinState joinState )
     {
     case eJoinStateJoinRequested:
         return 0;
-    case eJoinStateJoinAccepted:
+    case eJoinStateJoinGranted:
         return 1;
     default:
         return 2;

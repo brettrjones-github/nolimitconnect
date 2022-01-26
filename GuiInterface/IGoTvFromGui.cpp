@@ -357,6 +357,12 @@ void IGoTv::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string&
 }
 
 //============================================================================
+void IGoTv::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
+{
+    getPtoP().fromGuiUnJoinHost( hostType, sessionId, hostUrl );
+}
+
+//============================================================================
 void IGoTv::fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId )
 {
     getPtoP().fromGuiJoinLastJoinedHost( hostType, sessionId );

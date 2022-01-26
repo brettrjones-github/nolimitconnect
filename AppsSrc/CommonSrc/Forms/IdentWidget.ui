@@ -7,17 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>569</width>
-    <height>73</height>
+    <height>66</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Ident</string>
+   <string notr="true">Ident</string>
   </property>
   <property name="toolTipDuration">
    <number>0</number>
@@ -43,13 +43,22 @@
    </property>
    <item row="0" column="0">
     <widget class="QFrame" name="m_IdentFrame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <property name="spacing">
+       <number>2</number>
+      </property>
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -62,10 +71,7 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <item row="0" column="0">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="spacing">
          <number>2</number>
@@ -203,7 +209,7 @@
                </font>
               </property>
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
              </widget>
             </item>
@@ -259,7 +265,7 @@
              <number>2</number>
             </property>
             <item>
-             <widget class="QLabel" name="m_DescPrefixLabel">
+             <widget class="QLabel" name="m_DescTextLabel">
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
@@ -269,6 +275,9 @@
               </property>
               <property name="text">
                <string notr="true"/>
+              </property>
+              <property name="indent">
+               <number>-1</number>
               </property>
              </widget>
             </item>
@@ -280,19 +289,19 @@
                </font>
               </property>
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="m_DescTextLabel">
+             <widget class="QLabel" name="m_DescSuffixLabel">
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
                </font>
               </property>
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
              </widget>
             </item>
