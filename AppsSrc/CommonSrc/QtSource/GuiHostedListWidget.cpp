@@ -133,7 +133,7 @@ GuiHostedListItem* GuiHostedListWidget::findListItemWidgetByOnlineId( VxGUID& on
         if( hostItem )
         {
             GuiHostedListSession * hostSession = hostItem->getHostSession();
-            if( hostSession && hostSession->getUserIdent()->getMyOnlineId() == onlineId )
+            if( hostSession && hostSession->getGuiUser() && hostSession->getGuiUser()->getMyOnlineId() == onlineId )
             {
                 return hostItem;
             }
@@ -251,6 +251,7 @@ void GuiHostedListWidget::updateHostedList( HostedId& hostedId, GuiHosted* guiHo
 //============================================================================
 GuiHostedListItem* GuiHostedListWidget::addOrUpdateHostSession( GuiHostedListSession* hostSession )
 {
+    GuiUser* guiUser = hostSession->getGuiUser();
     GuiHostedListItem* hostItem = findListItemWidgetByHostId( hostSession->getHostedId() );
     if( hostItem )
     {
@@ -270,22 +271,22 @@ GuiHostedListItem* GuiHostedListWidget::addOrUpdateHostSession( GuiHostedListSes
     {
         hostItem = sessionToWidget( hostSession );
         if( hostItem )
-        {
+        {          
             if( 0 == count() )
             {
-                LogMsg( LOG_INFO, "add host %s", hostSession->getUserIdent() ? hostSession->getUserIdent()->getOnlineName().c_str() : hostSession->getHostTitle().c_str() );
+                LogMsg( LOG_INFO, "add host %s user %s",  hostSession->getHostTitle().c_str(), guiUser ? guiUser->getOnlineName().c_str() : "" );
                 addItem( hostItem );
             }
             else
             {
-                LogMsg( LOG_INFO, "insert host %s", hostSession->getUserIdent() ? hostSession->getUserIdent()->getOnlineName().c_str() : hostSession->getHostTitle().c_str() );
+                LogMsg( LOG_INFO, "insert host %s user %s", hostSession->getHostTitle().c_str(), guiUser ? guiUser->getOnlineName().c_str() : "" );
                 insertItem( 0, (QListWidgetItem*)hostItem );
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            if( hostSession->getUserIdent() )
+            if( guiUser )
             {
-                VxGUID thumbId = hostSession->getUserIdent()->getHostThumbId( hostSession->getHostType(), true );
+                VxGUID thumbId = guiUser->getHostThumbId( hostSession->getHostType(), true );
                 GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
                 if( thumb )
                 {
@@ -301,9 +302,9 @@ GuiHostedListItem* GuiHostedListWidget::addOrUpdateHostSession( GuiHostedListSes
         }
     }
 
-    if( hostItem )
+    if( hostItem && guiUser )
     {
-        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), hostSession->getUserIdent()->getNetIdent() ) );
+        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( hostSession->getHostType(), guiUser->getNetIdent() ) );
     }
 
     return hostItem;
@@ -348,9 +349,9 @@ void GuiHostedListWidget::onFriendshipButtonClicked( GuiHostedListItem* hostItem
         GuiHostedListSession* hostSession = hostItem->getHostSession();
         if( hostSession )
         {
-            if( hostSession && hostSession->getUserIdent() )
+            if( hostSession && hostSession->getGuiUser() )
             {
-                launchChangeFriendship( hostSession->getUserIdent() );
+                launchChangeFriendship( hostSession->getGuiUser() );
             }
         }
     }

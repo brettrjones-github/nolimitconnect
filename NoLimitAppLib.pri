@@ -105,6 +105,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletLogView.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletMultiMessenger.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletNearbyListClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletNetHostingPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletNetworkSettings.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletPersonOfferList.h \
@@ -471,6 +472,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletLogView.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletMgr.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletMultiMessenger.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletNearbyListClient.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletNetHostingPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletNetworkSettings.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletPersonOfferList.cpp \
@@ -809,6 +811,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletLogSettings.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletLogView.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletMultiMessenger.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletNearbyListClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletNetworkKey.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletNetworkSettings.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletPersonOfferList.ui \

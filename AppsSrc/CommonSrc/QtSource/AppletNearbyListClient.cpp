@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletFriendListClient.h"
+#include "AppletNearbyListClient.h"
 #include "ActivityInformation.h"
 
 #include "AppCommon.h"
@@ -34,11 +34,11 @@ namespace
 }
 
 //============================================================================
-AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app, 
+AppletNearbyListClient::AppletNearbyListClient(	AppCommon&		    app, 
 												QWidget *			parent )
-: AppletClientBase( OBJNAME_APPLET_FRIEND_LIST_CLIENT, app, parent )
+: AppletClientBase( OBJNAME_APPLET_NEARBY_LIST_CLIENT, app, parent )
 {
-    setAppletType( eAppletFriendListClient );
+    setAppletType( eAppletNearbyListClient );
     setHostType( eHostTypeGroup );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
@@ -73,11 +73,21 @@ AppletFriendListClient::AppletFriendListClient(	AppCommon&		    app,
 
     m_MyApp.activityStateChange( this, true );
     m_UserMgr.wantGuiUserUpdateCallbacks( this, true );
-    onShowFriendList();
+    if( !GuiHelpers::checkUserPermission( "android.permission.CHANGE_WIFI_MULTICAST_STATE" ) )
+    {
+        okMessageBox( QObject::tr( "Broadcast Permission" ), QObject::tr( "Cannot discover nearby users without Broadcast Permission" ) );
+    }
+
+    m_Engine.fromGuiNearbyBroadcastEnable( true );
+    if( m_FriendListType != eUserViewTypeNearby )
+    {
+        m_FriendListType = eUserViewTypeNearby;
+        onShowFriendTypeChanged();
+    }
 }
 
 //============================================================================
-AppletFriendListClient::~AppletFriendListClient()
+AppletNearbyListClient::~AppletNearbyListClient()
 {
     m_Engine.fromGuiNearbyBroadcastEnable( false );
     m_UserMgr.wantGuiUserUpdateCallbacks( this, false );
@@ -85,27 +95,27 @@ AppletFriendListClient::~AppletFriendListClient()
 }
 
 //============================================================================
-void AppletFriendListClient::setStatusLabel( QString strMsg )
+void AppletNearbyListClient::setStatusLabel( QString strMsg )
 {
     ui.m_StatusLabel->setText( strMsg );
 }
 
 //============================================================================
-void AppletFriendListClient::showEvent( QShowEvent * ev )
+void AppletNearbyListClient::showEvent( QShowEvent * ev )
 {
     ActivityBase::showEvent( ev );
     m_MyApp.wantToGuiActivityCallbacks( this, this, true );
 }
 
 //============================================================================
-void AppletFriendListClient::hideEvent( QHideEvent * ev )
+void AppletNearbyListClient::hideEvent( QHideEvent * ev )
 {
     m_MyApp.wantToGuiActivityCallbacks( this, this, false );
     ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void AppletFriendListClient::toGuiInfoMsg( char * infoMsg )
+void AppletNearbyListClient::toGuiInfoMsg( char * infoMsg )
 {
     QString infoStr( infoMsg );
 #if QT_VERSION > QT_VERSION_CHECK(6,0,0)
@@ -117,7 +127,7 @@ void AppletFriendListClient::toGuiInfoMsg( char * infoMsg )
 }
 
 //============================================================================
-void AppletFriendListClient::infoMsg( const char* errMsg, ... )
+void AppletNearbyListClient::infoMsg( const char* errMsg, ... )
 {
     char as8Buf[ MAX_INFO_MSG_SIZE ];
     va_list argList;
@@ -130,20 +140,20 @@ void AppletFriendListClient::infoMsg( const char* errMsg, ... )
 }
 
 //============================================================================
-void AppletFriendListClient::clearList( void )
+void AppletNearbyListClient::clearList( void )
 {
     ui.m_UserListWidget->clear();
     setStatusLabel( GuiParams::describeUserViewType( m_FriendListType ) + QObject::tr( "List" ) );
 }
 
 //============================================================================
-void AppletFriendListClient::clearStatus( void )
+void AppletNearbyListClient::clearStatus( void )
 {
     setStatusLabel( "" );
 }
 
 //============================================================================
-void AppletFriendListClient::onShowFriendList( void )
+void AppletNearbyListClient::onShowFriendList( void )
 {
     std::vector<std::pair<VxGUID, int64_t>> friendList;
     FriendListMgr& friendMgr = m_Engine.getFriendListMgr();
@@ -156,7 +166,7 @@ void AppletFriendListClient::onShowFriendList( void )
 }
 
 //============================================================================
-void AppletFriendListClient::onShowIgnoreList( void )
+void AppletNearbyListClient::onShowIgnoreList( void )
 {
     std::vector<std::pair<VxGUID, int64_t>> ignoreList;
     IgnoreListMgr& ignoreMgr = m_Engine.getIgnoreListMgr();
@@ -169,7 +179,7 @@ void AppletFriendListClient::onShowIgnoreList( void )
 }
 
 //============================================================================
-void AppletFriendListClient::onShowNearbyList( void )
+void AppletNearbyListClient::onShowNearbyList( void )
 {
     std::vector<std::pair<VxGUID, int64_t>> nearbyList;
     NearbyListMgr& nearbyMgr = m_Engine.getNearbyListMgr();
@@ -182,12 +192,12 @@ void AppletFriendListClient::onShowNearbyList( void )
 }
 
 //============================================================================
-void AppletFriendListClient::callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
+void AppletNearbyListClient::callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp )
 {
 }
 
 //============================================================================
-void AppletFriendListClient::callbackIndentListRemove( EUserViewType listType, VxGUID& onlineId )
+void AppletNearbyListClient::callbackIndentListRemove( EUserViewType listType, VxGUID& onlineId )
 {
     if( listType == getListType() )
     {
@@ -196,25 +206,25 @@ void AppletFriendListClient::callbackIndentListRemove( EUserViewType listType, V
 }
 
 //============================================================================
-void AppletFriendListClient::callbackOnUserAdded( GuiUser* guiUser )
+void AppletNearbyListClient::callbackOnUserAdded( GuiUser* guiUser )
 {
     updateUser( guiUser );
 }
 
 //============================================================================
-void AppletFriendListClient::callbackOnUserUpdated( GuiUser* guiUser )
+void AppletNearbyListClient::callbackOnUserUpdated( GuiUser* guiUser )
 {
     updateUser( guiUser );
 }
 
 //============================================================================
-void AppletFriendListClient::callbackOnUserRemoved( VxGUID& onlineId )
+void AppletNearbyListClient::callbackOnUserRemoved( VxGUID& onlineId )
 {
     removeUser( onlineId );
 }
 
 //============================================================================
-void AppletFriendListClient::onShowFriendTypeChanged( void )
+void AppletNearbyListClient::onShowFriendTypeChanged( void )
 {
     switch( m_FriendListType )
     {
@@ -234,8 +244,9 @@ void AppletFriendListClient::onShowFriendTypeChanged( void )
 }
 
 //============================================================================
-void AppletFriendListClient::slotFriendsButtonClicked( void )
+void AppletNearbyListClient::slotFriendsButtonClicked( void )
 {
+    m_Engine.fromGuiNearbyBroadcastEnable( false );
     if( m_FriendListType != eUserViewTypeFriends )
     {
         m_FriendListType = eUserViewTypeFriends;
@@ -244,8 +255,9 @@ void AppletFriendListClient::slotFriendsButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::slotIgnoredButtonClicked( void )
+void AppletNearbyListClient::slotIgnoredButtonClicked( void )
 {
+    m_Engine.fromGuiNearbyBroadcastEnable( false );
     if( m_FriendListType != eUserViewTypeIgnored )
     {
         m_FriendListType = eUserViewTypeIgnored;
@@ -254,7 +266,7 @@ void AppletFriendListClient::slotIgnoredButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::slotNearbyButtonClicked( void )
+void AppletNearbyListClient::slotNearbyButtonClicked( void )
 {
     if( !GuiHelpers::checkUserPermission("android.permission.CHANGE_WIFI_MULTICAST_STATE") )
     {
@@ -272,7 +284,7 @@ void AppletFriendListClient::slotNearbyButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::slotIgnoredInfoButtonClicked( void )
+void AppletNearbyListClient::slotIgnoredInfoButtonClicked( void )
 {
     ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeIgnoredList );
     if( activityInfo )
@@ -282,7 +294,7 @@ void AppletFriendListClient::slotIgnoredInfoButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::slotFriendsInfoButtonClicked( void )
+void AppletNearbyListClient::slotFriendsInfoButtonClicked( void )
 {
     ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeFriendsList );
     if( activityInfo )
@@ -292,7 +304,7 @@ void AppletFriendListClient::slotFriendsInfoButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::slotNearbyInfoButtonClicked( void )
+void AppletNearbyListClient::slotNearbyInfoButtonClicked( void )
 {
     ActivityInformation* activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeNearbyList );
     if( activityInfo )
@@ -302,7 +314,7 @@ void AppletFriendListClient::slotNearbyInfoButtonClicked( void )
 }
 
 //============================================================================
-void AppletFriendListClient::updateUser( EUserViewType listType, VxGUID& onlineId )
+void AppletNearbyListClient::updateUser( EUserViewType listType, VxGUID& onlineId )
 {
     GuiUser* user = m_MyApp.getUserMgr().getOrQueryUser( onlineId );
     if( user )
@@ -312,7 +324,7 @@ void AppletFriendListClient::updateUser( EUserViewType listType, VxGUID& onlineI
 }
 
 //============================================================================
-void AppletFriendListClient::updateUser( GuiUser* guiUser )
+void AppletNearbyListClient::updateUser( GuiUser* guiUser )
 {
     if( guiUser )
     {
@@ -326,13 +338,13 @@ void AppletFriendListClient::updateUser( GuiUser* guiUser )
 }
 
 //============================================================================
-void AppletFriendListClient::removeUser( VxGUID& onlineId )
+void AppletNearbyListClient::removeUser( VxGUID& onlineId )
 {
     ui.m_UserListWidget->removeUser( onlineId );
 }
 
 //============================================================================
-void AppletFriendListClient::updateFriendList( EUserViewType listType, std::vector<std::pair<VxGUID, int64_t>> idList )
+void AppletNearbyListClient::updateFriendList( EUserViewType listType, std::vector<std::pair<VxGUID, int64_t>> idList )
 {
     clearList();
     m_FriendListType = listType;

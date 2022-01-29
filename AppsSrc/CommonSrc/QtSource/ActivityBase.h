@@ -247,6 +247,9 @@ signals:
 
 	void						signalShowShouldExitMsgBox( QString exitReason );
 
+public slots:
+	virtual void				closeApplet( void );
+
 protected slots:
 
 	//==== activity slots ====//
@@ -255,7 +258,7 @@ protected slots:
 	void						slotStatusMsg( QString strMsg );
 	void						slotShowShouldExitMsgBox( QString exitReason );
 
-	void						slotResizeWindowTimeout();
+	void						slotResizeWindowTimeout( void );
 
 	//=== title bar slots ====//
 	virtual void				slotPowerButtonClicked( void );
@@ -325,4 +328,5 @@ protected:
     bool						m_IsPopup{false}; // center on parent filling about half of parent
     bool						m_FullWindowSize{false};
     bool						m_InitialFocusWasSet{false};
+	bool						m_HasBeenClosed{ false };
 };

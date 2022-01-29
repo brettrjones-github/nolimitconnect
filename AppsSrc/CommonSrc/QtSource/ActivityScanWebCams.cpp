@@ -51,7 +51,7 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
     connect( this, SIGNAL(signalPlayAudio(unsigned short *, unsigned short)), this, SLOT(signalPlayAudio(unsigned short *, unsigned short)));
 
     connect(m_CountdownTimer, SIGNAL(timeout()), this, SLOT(onCountdownTimer()));
-    connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(close()));
+    connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()));
 	connect( this, SIGNAL(finished(int)), this, SLOT(slotHomeButtonClicked()));
 
 	connect( ui.m_StartScanButton, SIGNAL(clicked()), this, SLOT(slotStartScanClicked()));

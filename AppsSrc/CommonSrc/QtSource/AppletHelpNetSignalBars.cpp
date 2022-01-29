@@ -27,7 +27,7 @@ AppletHelpNetSignalBars::AppletHelpNetSignalBars( AppCommon& app, QWidget * pare
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletHelpNetSignalBars );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 
     m_MyApp.activityStateChange( this, true );
     initAppletHelpNetSignalBars();

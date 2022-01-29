@@ -267,7 +267,7 @@ void ThumbnailEditWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbnai
         }
 
         disconnect( thumbGallery, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
-        thumbGallery->close();
+        thumbGallery->closeApplet();
         emit signalImageChanged();
     }
 }

@@ -72,7 +72,7 @@ AppletBrowseFiles::AppletBrowseFiles( AppCommon& app, QWidget * parent )
 
 	setDefaultCurrentDir( m_eFileFilterType );
 
-    connect(this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()));
+    connect(this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()));
 
     m_MyApp.activityStateChange(this, true);
 	

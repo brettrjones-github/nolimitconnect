@@ -25,7 +25,7 @@ AppletSettingsRandomConnect::AppletSettingsRandomConnect( AppCommon& app, QWidge
 {
 	setAppletType( eAppletSettingsRandomConnect );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
 
 	m_MyApp.activityStateChange( this, true );
 }

@@ -76,7 +76,7 @@ void AppletLogView::updateSettingsFromDlg()
 //============================================================================
 void AppletLogView::slotExitButtonClick()
 {
-    close();
+    closeApplet();
 }
 
 //============================================================================

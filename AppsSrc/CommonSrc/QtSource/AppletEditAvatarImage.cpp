@@ -122,7 +122,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
         }
     }
 
-    close();
+    closeApplet();
 }
 
 //============================================================================    
@@ -144,7 +144,7 @@ void AppletEditAvatarImage::onRemoveButClick( void )
 
         QString msgText = QObject::tr( "Remove Avatar Image Success" );
         QMessageBox::information( this, QObject::tr( "Remove Avatar Image" ), msgText );  
-        close();
+        closeApplet();
     }
     else
     {

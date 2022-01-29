@@ -149,7 +149,7 @@ void AppletUserIdentity::slotAccountSelectionChanged( int idx )
                     LogMsg( LOG_SEVERE, "ERROR AppletUserIdentity could not get global identity" );
                 }
 
-                close();
+                closeApplet();
             }
             else
             {
@@ -295,7 +295,7 @@ void AppletUserIdentity::slotCreateNewAccount( void )
     {
         ActivityCreateAccount * createAccountActivity = new ActivityCreateAccount( m_MyApp, &m_MyApp.getHomePage() );
         createAccountActivity->show();
-        close();
+        closeApplet();
     }
 }
 

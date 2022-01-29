@@ -73,6 +73,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletLog:	                    return eMyIconDebug;
     case eAppletMessengerFrame:				return eMyIconMessenger;
     case eAppletMultiMessenger:				return eMyIconMessenger;
+    case eAppletNearbyListClient:	        return eMyIconFriendBroadcast;
     case eAppletNetHostingPage:             return eMyIconServiceHostNetwork;
     case eAppletNetworkSettings:	        return eMyIconNetworkSettings;
     case eAppletPlayerVideo:			    return eMyIconVideoPhoneNormal;
@@ -215,6 +216,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletHostNetworkStatus:          return QObject::tr( "Host A Network Status" );
     case eAppletInviteAccept:               return QObject::tr( "Open Invite" );
     case eAppletInviteCreate:               return QObject::tr( "Create Invite" );
+    case eAppletNearbyListClient:	        return QObject::tr( "Nearby List" );
     case eAppletJoinGroupStatus:            return QObject::tr( "Join Group Status" );
     case eAppletRandomConnectJoin:          return QObject::tr( "Join Random Connect" );
     case eAppletRandomConnectJoinSearch:	return QObject::tr( "Search For Random Connect Host To Join" );

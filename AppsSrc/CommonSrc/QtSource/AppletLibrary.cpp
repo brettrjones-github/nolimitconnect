@@ -406,7 +406,7 @@ void AppletLibrary::addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLib
 //============================================================================
 void AppletLibrary::slotHomeButtonClicked( void )
 {
-    close();
+    closeApplet();
 }
 
 //============================================================================

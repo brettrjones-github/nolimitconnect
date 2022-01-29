@@ -405,7 +405,7 @@ void AppletNetworkSettings::populateNetHostSettingsFromDlg( NetHostSetting& netH
 //============================================================================
 void AppletNetworkSettings::slotExitButtonClick()
 {
-    close();
+    closeApplet();
 }
 
 //============================================================================

@@ -79,6 +79,7 @@
 #define OBJNAME_APPLET_JOIN_GROUP_STATUS				"AppletJoinGroupStatus"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
+#define OBJNAME_APPLET_NEARBY_LIST_CLIENT			    "AppletNearbyListClient"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
 
 #define OBJNAME_APPLET_ABOUT_APP						"AppletAboutApp"

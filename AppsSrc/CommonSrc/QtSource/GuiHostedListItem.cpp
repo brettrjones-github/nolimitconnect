@@ -112,24 +112,42 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
         return;
     }
 
-    GuiUser* hostIdent = hostSession->getUserIdent();
-    if( hostIdent )
+    GuiHosted* guiHosted = hostSession->getGuiHosted();
+    if( nullptr == guiHosted )
     {
-        updateIdentity( hostIdent );
+        return;
     }
 
-    if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getMyOnlineId() )
+    GuiUser* guiUser = hostSession->getGuiUser();
+    //if( !guiUser )
+    //{
+    //    // if posible get user identity
+    //    guiUser = m_MyApp.getUserMgr().getOrQueryUser( hostSession->getHostedId().getOnlineId() );
+    //    if( guiUser )
+    //    {
+    //        hostSession->setGuiUser( guiUser );
+    //    }
+    //}
+
+    if( guiUser )
+    {
+        updateIdentity( guiUser );
+    }
+
+    updateHosted( guiHosted );
+
+    if( guiUser && m_MyApp.getEngine().getMyOnlineId() == hostSession->getHostedId().getOnlineId() )
     {
         ui.m_TitlePart2->setText( QObject::tr( "Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
 
-    if( !ui.m_IconButton->hasImage() )
+    if( !ui.m_IconButton->hasImage() && guiUser )
     {
         VxGUID thumbId = hostSession->getHostThumbId();
         if( !thumbId.isVxGUIDValid() )
         {
-            thumbId = hostIdent->getHostThumbId( hostSession->getHostType(), true );
+            thumbId = guiUser->getHostThumbId( hostSession->getHostType(), true );
         }
        
         if( thumbId.isVxGUIDValid() )
@@ -144,12 +162,12 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
 
     // set text of line 2
     std::string strDesc = hostSession->getHostDescription();
-    if( strDesc.empty() )
+    if( strDesc.empty() && guiUser )
     {
-        strDesc = hostIdent->getOnlineDescription();
+        strDesc = guiUser->getOnlineDescription();
     }
 
-    if( !strDesc.empty() )
+    if( !strDesc.empty() && guiUser )
     {
         ui.m_DescPart2->setText( strDesc.c_str() );
     }

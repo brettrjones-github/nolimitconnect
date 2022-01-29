@@ -87,7 +87,7 @@ void ActivityScanStoryBoards::slotScanStoryBoard( VxNetIdent * netIdent, QString
 //! clicked the upper right x button
 void ActivityScanStoryBoards::slotHomeButtonClicked( void )
 {
-	close();
+	closeApplet();
 }
 
 //============================================================================

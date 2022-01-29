@@ -32,7 +32,7 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	ui.m_GuiGroupieListWidget->setIsHostView( false );
 
 	// so is actually destroyed
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 	connect( ui.m_ChooseHostButton, SIGNAL( clicked() ), this, SLOT( slotChooseHostModeButtonClick() ) );
 
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalIconButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotIconButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );

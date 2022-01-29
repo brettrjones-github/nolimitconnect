@@ -27,7 +27,7 @@ AppletChatRoomClient::AppletChatRoomClient( AppCommon& app, QWidget * parent )
     setHostType( eHostTypeChatRoom );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
 
 	m_MyApp.activityStateChange( this, true );
 }

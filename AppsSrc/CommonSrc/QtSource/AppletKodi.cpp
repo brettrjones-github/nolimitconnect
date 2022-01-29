@@ -78,7 +78,7 @@ void AppletKodi::initAppletKodi( void )
 {
     setAppletType( eAppletKodi );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 
 	ui.setupUi( getContentItemsFrame() );
     setMenuBottomVisibility( true );

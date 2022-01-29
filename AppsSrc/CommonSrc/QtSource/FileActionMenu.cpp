@@ -151,7 +151,7 @@ void FileActionMenu::addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItem
 //! clicked the upper right x button
 void FileActionMenu::slotHomeButtonClicked( void )
 {
-	close();
+	closeApplet();
 }
 
 //============================================================================
@@ -249,7 +249,7 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 		break;
 	}
 
-	close();
+	closeApplet();
 }
 
 //============================================================================

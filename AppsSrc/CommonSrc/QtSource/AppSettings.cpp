@@ -103,6 +103,16 @@ bool AppSettings::getFeatureEnable( EAppFeatures appFeature )
 		return true;
 	}
 
+	if( eAppFeatureChatRoom == appFeature )
+	{
+		return true;
+	}
+
+	if( eAppFeatureRandomConnect == appFeature )
+	{
+		return true;
+	}
+
 	return false;
 
 	if( m_AppFeatureIsCached[appFeature] )

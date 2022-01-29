@@ -53,7 +53,7 @@ ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app,
 
     connect(this, SIGNAL(signalSearchResultProfilePic(VxNetIdent*, QImage)), this, SLOT(slotSearchResultProfilePic(VxNetIdent*, QImage)));
     connect(m_CountdownTimer, SIGNAL(timeout()), this, SLOT(onCountdownTimer()));
-    connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(close()));
+    connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()));
 	connect( this, SIGNAL(finished(int)), this, SLOT(slotHomeButtonClicked()));
 
 	connect( ui.m_StartScanButton, SIGNAL(clicked()), this, SLOT(slotStartScanClicked()));

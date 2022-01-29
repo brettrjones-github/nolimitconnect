@@ -28,13 +28,14 @@ public:
 
 	GuiHostedListSession&		operator =( const GuiHostedListSession &rhs );
 
-    GuiHosted* getHosted( void ) { return m_GuiHosted; }
+    GuiHosted*                  getGuiHosted( void )                        { return m_GuiHosted; }
 
     HostedId&                   getHostedId( void )                         { return m_HostedId; }
     VxGUID&                     getOnlineId( void )                         { return m_HostedId.getOnlineId(); }
     EHostType                   getHostType( void )                         { return m_HostedId.getHostType(); }
 
-    GuiUser*                    getUserIdent( void )                        { return m_GuiHosted ? m_GuiHosted->getUser() : nullptr; }
+    void                        setGuiUser( GuiUser* guiUser )              { if( m_GuiHosted && guiUser ) m_GuiHosted->setUser( guiUser ); }
+    GuiUser*                    getGuiUser( void )                          { return m_GuiHosted ? m_GuiHosted->getUser() : nullptr; }
 
     std::string                 getHostUrl( void );
     std::string                 getHostTitle( void );

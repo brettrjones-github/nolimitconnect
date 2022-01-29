@@ -99,7 +99,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
 
         /*
         disconnect( thumbGallery, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
-        thumbGallery->close();
+        thumbGallery->closeApplet();
         */
     }
 }

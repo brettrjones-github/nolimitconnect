@@ -142,7 +142,7 @@ AppletLogSettings::~AppletLogSettings()
 void AppletLogSettings::connectSignals( void )
 {
     connect( ui.m_SavePushButton, SIGNAL( clicked() ), this, SLOT( slotSaveSettings() ) );
-    connect( ui.m_CancelPushButton, SIGNAL( clicked() ), this, SLOT( close() ) );
+    connect( ui.m_CancelPushButton, SIGNAL( clicked() ), this, SLOT( closeApplet() ) );
     connect( ui.m_SelectAllLevelsButton, SIGNAL( clicked() ), this, SLOT( slotSelectAllLevels() ) );
     connect( ui.m_ClearAllLevelsButton, SIGNAL( clicked() ), this, SLOT( slotClearAllLevels() ) );
     connect( ui.m_SelectAllModulesButton, SIGNAL( clicked() ), this, SLOT( slotSelectAllModules() ) );
@@ -221,14 +221,14 @@ void AppletLogSettings::slotSaveSettings( void )
 {
     updateSettingsFromDlg();
     m_MyApp.activityStateChange( this, false );
-    close();
+    closeApplet();
 }
 
 //============================================================================
 void AppletLogSettings::slotCancel( void )
 {
     m_MyApp.activityStateChange( this, false );
-    close();
+    closeApplet();
 }
 
 //============================================================================
@@ -271,5 +271,5 @@ void AppletLogSettings::slotClearAllModules( void )
 void AppletLogSettings::slotExitButtonClick()
 {
     m_MyApp.activityStateChange( this, false );
-    close();
+    closeApplet();
 }

@@ -26,7 +26,7 @@ AppletTestHostService::AppletTestHostService( AppCommon& app, QWidget * parent )
 	ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletTestHostService );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 
 	m_MyApp.activityStateChange( this, true );
 }

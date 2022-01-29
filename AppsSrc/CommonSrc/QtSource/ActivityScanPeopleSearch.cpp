@@ -35,7 +35,7 @@ ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		    app,
 
     connectBarWidgets();
 
-    connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()),			this, SLOT(close()) );
+    connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()),			this, SLOT(closeApplet()) );
 	connect( this,					SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
 
 	connect( ui.StartSearchButton,	SIGNAL(clicked()),							this, SLOT(slotStartSearchClicked()) );

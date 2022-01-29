@@ -205,6 +205,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletLogView.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletMgr.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletMultiMessenger.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletNearbyListClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletNetHostingPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletNetworkSettings.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletPeerBase.cpp" />
@@ -523,6 +524,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestHostClient.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestHostService.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletTestBase.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletNearbyListClient.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -926,6 +928,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletLogSettings.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletLogView.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletMultiMessenger.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletNearbyListClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletNetworkKey.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletNetworkSettings.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletPeerChangeFriendship.ui" />

@@ -112,7 +112,7 @@ void AppletInviteAccept::slotAcceptInviteButtonClicked( void )
 //============================================================================
 void AppletInviteAccept::slotRejectInviteButtonClicked( void )
 {
-    close();
+    closeApplet();
 }
 
 //============================================================================

@@ -32,7 +32,7 @@ AppletTestHostClient::AppletTestHostClient( AppCommon& app, QWidget * parent )
 	fillHostList( eHostTypeNetwork, ui.m_NetworkHostComboBox );
 	setNetworkHostIdFromNetHostComboBoxSelection();
 	
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
 	connect( ui.m_NetworkHostComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotNetworkHostComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostTypeComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostTypeComboBoxSelectionChange( int ) ) );
 	connect( ui.m_HostListUrlComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHostListUrlSelectionChange( int ) ) );

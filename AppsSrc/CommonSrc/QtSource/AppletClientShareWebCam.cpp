@@ -25,7 +25,7 @@ AppletClientShareWebCam::AppletClientShareWebCam( AppCommon& app, QWidget * pare
 {
 	m_EAppletType = eAppletClientShareWebCam;
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
 
 	m_MyApp.activityStateChange( this, true );
 }

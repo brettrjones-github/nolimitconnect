@@ -49,7 +49,7 @@ void AppletTheme::slotThemeAccepted( void )
 	m_MyApp.getAppSettings().setLastSelectedTheme( m_CurTheme );
     getMyApp().getAppTheme().selectTheme( m_CurTheme );
     m_MyApp.activityStateChange( this, false );
-    close();
+	closeApplet();
 }
 
 //============================================================================
@@ -63,7 +63,7 @@ void AppletTheme::slotThemeCanceled( void )
 {
 	restoreSavedTheme();
     m_MyApp.activityStateChange( this, false );
-    close();
+	closeApplet();
 }
 
 //============================================================================

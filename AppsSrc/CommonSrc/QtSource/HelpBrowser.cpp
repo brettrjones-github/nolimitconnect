@@ -59,7 +59,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path,
     file->insertItem( tr("&Open File"), this, SLOT( openFile() ), CTRL+Key_O );
     file->insertItem( tr("&Print"), this, SLOT( print() ), CTRL+Key_P );
     file->insertSeparator();
-    file->insertItem( tr("&Close"), this, SLOT( close() ), CTRL+Key_Q );
+    file->insertItem( tr("&Close"), this, SLOT( closeApplet() ), CTRL+Key_Q );
     file->insertItem( tr("E&xit"), qApp, SLOT( closeAllWindows() ), CTRL+Key_X );
 
     // The same three icons are used twice each.

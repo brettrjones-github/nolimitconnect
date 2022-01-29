@@ -53,18 +53,19 @@
 #include "AppletGroupListClient.h"
 #include "AppletGroupListLocalView.h"
 #include "AppletHelpNetSignalBars.h"
-#include "AppletInviteAccept.h"
-#include "AppletInviteCreate.h"
 #include "AppletHostJoinRequestList.h"
 #include "AppletHostGroupStatus.h"
 #include "AppletHostNetworkStatus.h"
 #include "AppletHostSelect.h"
+#include "AppletInviteAccept.h"
+#include "AppletInviteCreate.h"
 #include "AppletJoinGroupStatus.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
 #include "AppletLog.h"
 #include "AppletLogSettings.h"
 #include "AppletLogView.h"
+#include "AppletNearbyListClient.h"
 
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
@@ -280,6 +281,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
 
     case eAppletFriendListClient:           appletDialog = new AppletFriendListClient( m_MyApp, parent ); break;
+    case eAppletNearbyListClient:           appletDialog = new AppletNearbyListClient( m_MyApp, parent ); break;
     case eAppletGroupListClient:            appletDialog = new AppletGroupListClient( m_MyApp, parent ); break;
 
     case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;

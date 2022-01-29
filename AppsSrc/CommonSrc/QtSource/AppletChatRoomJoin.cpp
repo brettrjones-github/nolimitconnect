@@ -37,7 +37,7 @@ AppletChatRoomJoin::AppletChatRoomJoin( AppCommon& app, QWidget * parent )
     getInfoEdit()->setMaximumBlockCount( MAX_LOG_EDIT_BLOCK_CNT );
     getInfoEdit()->setReadOnly( true );
 
-    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
     connect( ui.m_JoinDefaultButton, SIGNAL( clicked() ), this, SLOT( slotJoinDefaultChatRoom() ) );
     connect( ui.m_CopyResultToClipboardButton, SIGNAL( clicked() ), this, SLOT( slotCopyResultToClipboardClicked() ) );
 

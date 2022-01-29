@@ -1141,7 +1141,7 @@ void ActivityBase::onBackButtonClicked( void )
 {
     emit signalBackButtonClicked();
     m_MyApp.activityStateChange( this, false );
-    close();
+    closeApplet();
 }
 
 //=== bottom bar slots ====//
@@ -1254,5 +1254,17 @@ void ActivityBase::slotAppIconSpecialClick( void )
 //============================================================================
 void ActivityBase::onAppIconSpecialClick( ActivityBase * activityBase )
 {
-    LogMsg( LOG_DEBUG, "onAppIconSpecialClick" );
+    LogMsg( LOG_VERBOSE, "onAppIconSpecialClick" );
+}
+
+//============================================================================
+void ActivityBase::closeApplet( void )
+{
+	if( !m_HasBeenClosed )
+	{
+		LogMsg( LOG_VERBOSE, "closeApplet %s", this->objectName().isEmpty() ? "UNKNOWN APPLET" : this->objectName().toUtf8().constData());
+		m_HasBeenClosed = true;
+		close();
+		deleteLater();
+	}
 }

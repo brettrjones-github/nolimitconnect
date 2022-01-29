@@ -54,7 +54,7 @@ AppletPopupMenu::AppletPopupMenu( AppCommon& app, QWidget * parent, VxGUID asset
 	getTitleBarWidget()->setVisible( false );
 	getBottomBarWidget()->setVisible( false );
 
-    connect( ui.m_ExitPopupButton, SIGNAL( clicked() ), this, SLOT( close() ) );
+    connect( ui.m_ExitPopupButton, SIGNAL( clicked() ), this, SLOT( closeApplet() ) );
     connect( ui.m_MenuItemList, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( itemClicked( QListWidgetItem* ) ) );
 
     // NOT USED FOR POPUP  m_MyApp.activityStateChange( this, true );
@@ -142,7 +142,7 @@ void AppletPopupMenu::itemClicked( QListWidgetItem* item )
 		emit menuItemClicked( iItemId, this, m_ParentActivity );
 	}
 
-	close();
+	closeApplet();
 }
 
 //============================================================================
@@ -387,7 +387,7 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 		LogMsg( LOG_ERROR, "Unknown Menu id" );
 	}
 
-	close();
+	closeApplet();
 }
 
 //============================================================================

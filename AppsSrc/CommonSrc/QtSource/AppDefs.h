@@ -63,14 +63,16 @@ enum EApplet
     eAppletHomePage,
     // start of home page applets.. shown in order of enumeration
     eAppletGetStarted,
-    eAppletSearchPage,
-    eAppletGroupJoin,
     eAppletKodi,
+    eAppletFriendListClient,
+    eAppletNearbyListClient,
+    eAppletGroupJoin,
+    eAppletChatRoomJoin,
+    eAppletRandomConnectJoin,
+    eAppletSearchPage,
     eAppletUserIdentity,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletChatRoomJoin,
-    eAppletRandomConnectJoin,	
     eAppletShareServicesPage,       // page to setup share with others services
     eAppletDownloads,
     eAppletUploads,
@@ -151,7 +153,6 @@ enum EApplet
     eAppletClientStoryboard,
 
     eAppletChooseThumbnail,
-    eAppletFriendListClient,
     eAppletGalleryEmoticon,
     eAppletGalleryImage,
     eAppletGalleryThumb,
