@@ -31,8 +31,22 @@ GuiUserJoin::GuiUserJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, b
     , m_UserJoinMgr( app.getUserJoinMgr() )
     , m_GuiUser( guiUser )
     , m_SessionId( sessionId )
-    , m_IsOnline( online )
 {
+}
+
+//============================================================================
+GuiUserJoin::GuiUserJoin( AppCommon& app, GuiUser* guiUser, UserJoinInfo* userJoinInfo )
+    : QWidget( &app )
+    , m_MyApp( app )
+    , m_UserJoinMgr( app.getUserJoinMgr() )
+    , m_GuiUser( guiUser )
+{
+    if( userJoinInfo )
+    {
+        m_GroupieId = userJoinInfo->getGroupieId();
+        m_JoinState = userJoinInfo->getJoinState();
+        m_SessionId = userJoinInfo->getSessionId();
+    }
 }
 
 //============================================================================
@@ -44,24 +58,7 @@ GuiUserJoin::GuiUserJoin( const GuiUserJoin& rhs )
     , m_GroupieId( rhs.m_GroupieId )
     , m_JoinState( rhs.m_JoinState )
     , m_SessionId( rhs.m_SessionId )
-    , m_IsOnline( rhs.m_IsOnline )
 {
-}
-
-//============================================================================
-bool GuiUserJoin::setOnlineStatus( bool isOnline )
-{
-    if( m_IsOnline != isOnline )
-    {
-        m_IsOnline = isOnline;
-        if( m_GuiUser && m_GuiUser->setOnlineStatus( isOnline ) )
-        {
-            m_UserJoinMgr.onUserOnlineStatusChange( this, m_IsOnline );
-            return true;
-        }
-    }
-
-    return m_IsOnline;
 }
 
 //============================================================================
@@ -76,3 +73,8 @@ bool GuiUserJoin::setJoinState( EJoinState joinState )
     return false;
 }
 
+//============================================================================
+bool GuiUserJoin::isOnline( void ) 
+{ 
+    return getUser() && getUser()->isOnline(); 
+}

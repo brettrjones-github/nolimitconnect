@@ -16,7 +16,7 @@
 #include "GuiUserMgr.h"
 #include "AppCommon.h"
 #include "AccountMgr.h"
-#include "GuiUserMgrGuiUserUpdateClient.h"
+#include "GuiUserUpdateCallback.h"
 #include "GuiUserUpdateCallback.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -178,11 +178,11 @@ void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID on
             guiUserUpdateClientsLock();
             for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
             {
-                GuiUserMgrGuiUserUpdateClient& client = *iter;
-                if( client.m_Callback )
+                GuiUserUpdateCallback* client = *iter;
+                if( client )
                 {
-                    client.m_Callback->callbackIndentListUpdate( listType, onlineId, timestamp );
-                    client.m_Callback->callbackOnUserUpdated( user );
+                    client->callbackIndentListUpdate( listType, onlineId, timestamp );
+                    client->callbackOnUserUpdated( user );
                 }
                 else
                 {
@@ -236,11 +236,11 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
             guiUserUpdateClientsLock();
             for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
             {
-                GuiUserMgrGuiUserUpdateClient& client = *iter;
-                if( client.m_Callback )
+                GuiUserUpdateCallback* client = *iter;
+                if( client )
                 {
-                    client.m_Callback->callbackIndentListRemove( listType, onlineId );
-                    client.m_Callback->callbackOnUserUpdated( user );
+                    client->callbackIndentListRemove( listType, onlineId );
+                    client->callbackOnUserUpdated( user );
                 }
                 else
                 {
@@ -427,10 +427,10 @@ void GuiUserMgr::onUserAdded( GuiUser* guiUser )
         guiUserUpdateClientsLock();
         for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
         {
-            GuiUserMgrGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback )
+            GuiUserUpdateCallback* client = *iter;
+            if( client )
             {
-                client.m_Callback->callbackOnUserAdded( guiUser );
+                client->callbackOnUserAdded( guiUser );
             }
             else
             {
@@ -451,10 +451,10 @@ void GuiUserMgr::onUserRemoved( VxGUID& onlineId )
         guiUserUpdateClientsLock();
         for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
         {
-            GuiUserMgrGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback )
+            GuiUserUpdateCallback* client = *iter;
+            if( client )
             {
-                client.m_Callback->callbackOnUserRemoved( onlineId );
+                client->callbackOnUserRemoved( onlineId );
             }
             else
             {
@@ -534,8 +534,8 @@ void GuiUserMgr::wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bo
     {
         for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
         {
-            GuiUserMgrGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback == callback )
+            GuiUserUpdateCallback* client = *iter;
+            if( client == callback )
             {
                 LogMsg( LOG_INFO, "WARNING. Ignoring New wantToGuiUserUpdateCallbacks because already in list" );
                 guiUserUpdateClientsUnlock();
@@ -543,16 +543,15 @@ void GuiUserMgr::wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bo
             }
         }
 
-        GuiUserMgrGuiUserUpdateClient newClient( callback );
-        m_GuiUserUpdateClientList.push_back( newClient );
+        m_GuiUserUpdateClientList.push_back( callback );
         guiUserUpdateClientsUnlock();
         return;
     }
 
     for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
     {
-        GuiUserMgrGuiUserUpdateClient& client = *iter;
-        if( client.m_Callback == callback )
+        GuiUserUpdateCallback* client = *iter;
+        if( client == callback )
         {
             m_GuiUserUpdateClientList.erase( iter );
             guiUserUpdateClientsUnlock();
@@ -584,10 +583,10 @@ void GuiUserMgr::sendUserUpdatedToCallbacks( GuiUser* guiUser )
         guiUserUpdateClientsLock();
         for( auto iter = m_GuiUserUpdateClientList.begin(); iter != m_GuiUserUpdateClientList.end(); ++iter )
         {
-            GuiUserMgrGuiUserUpdateClient& client = *iter;
-            if( client.m_Callback )
+            GuiUserUpdateCallback* client = *iter;
+            if( client )
             {
-                client.m_Callback->callbackOnUserUpdated( guiUser );
+                client->callbackOnUserUpdated( guiUser );
             }
             else
             {

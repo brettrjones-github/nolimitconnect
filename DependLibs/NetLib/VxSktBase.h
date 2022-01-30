@@ -99,6 +99,9 @@ public:
 
 	virtual void				setCallbackReason( ESktCallbackReason eReason )	{ m_eSktCallbackReason = eReason; }
 	virtual ESktCallbackReason	getCallbackReason( void )						{ return m_eSktCallbackReason; }
+	virtual void				setConnectReason( EConnectReason connectReason ) { m_ConnectReason = connectReason; }
+	virtual EConnectReason		getConnectReason( void )						{ return m_ConnectReason; }
+	virtual bool				isTempConnection( void );
 
 	virtual void				setRxCallbackUserData( void * pvData )			{ m_pvRxCallbackUserData = pvData; }
 	virtual void *				getRxCallbackUserData( void )					{ return m_pvRxCallbackUserData; }
@@ -230,8 +233,6 @@ public:
 	bool						isRxCryptoKeySet( void );
     std::string                 describeSktType( void );
 
-	void						lockSkt( void )							        { m_SktMutex.lock(); }
-	void						unlockSkt( void )						        { m_SktMutex.unlock(); }
 	void						lockCryptoAccess( void )				        { m_CryptoMutex.lock(); }
 	void						unlockCryptoAccess( void )				        { m_CryptoMutex.unlock(); }
 
@@ -248,7 +249,7 @@ public:
     bool                        getPeerPktAnnCopy( PktAnnounce &peerAnn );
 
     // returns peer online id. caller should check VxGUID::isVxGUIDValid() for validity
-    VxGUID&                      getPeerOnlineId( void ) { return m_PeerOnlineId; }
+    VxGUID&                     getPeerOnlineId( void )							{ return m_PeerOnlineId; }
 
     virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 
@@ -306,7 +307,6 @@ public:
 	VxThread					m_SktRxThread;			        // thread for handling socket receive
 	VxThread					m_SktTxThread;			        // thread for handling socket transmit
 	VxSemaphore					m_SktTxSemaphore;		        // semaphore for tx 
-	VxMutex						m_SktMutex;				        // mutex
 	VxMutex						m_CryptoMutex;			        // mutex
 	bool						m_bClosingFromRxThread{ false };   // if true then call to close function was made by receive thread
 	bool						m_bClosingFromDestructor{ false };  // if true then call to close function was made by destructor
@@ -345,6 +345,8 @@ protected:
     VxMutex                     m_PeerAnnMutex;
 
 	std::set<GroupieId>			m_GroupieSet;
+
+	EConnectReason				m_ConnectReason{ eConnectReasonUnknown };
 
     static int					m_TotalCreatedSktCnt;	            // total number of sockets created since program started
     static int					m_CurrentSktCnt;		            // current number of sockets exiting in memory

@@ -76,6 +76,7 @@
 #include "AppletPersonOfferList.h"
 #include "AppletPlayerVideo.h"
 #include "AppletPopupMenu.h"
+#include "AppletRandomConnectJoin.h"
 #include "AppletRandomConnectJoinSearch.h"
 
 #include "AppletServiceAboutMe.h"
@@ -83,7 +84,6 @@
 #include "AppletServiceChatRoom.h"
 #include "AppletServiceConnectionTest.h"
 #include "AppletServiceHostGroup.h"
-//#include "AppletServiceHostGroupListing.h"
 #include "AppletServiceHostNetwork.h"
 #include "AppletServiceShareFiles.h"
 #include "AppletServiceShareWebCam.h"
@@ -250,6 +250,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
     case eAppletGroupListLocalView:         appletDialog = new AppletGroupListLocalView( m_MyApp, parent ); break;
     case eAppletHelpNetSignalBars:          appletDialog = new AppletHelpNetSignalBars( m_MyApp, parent ); break;
+    case eAppletRandomConnectJoin:          appletDialog = new AppletRandomConnectJoin( m_MyApp, parent ); break;
     case eAppletRandomConnectJoinSearch:    appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
     case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 

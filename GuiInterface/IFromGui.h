@@ -246,6 +246,7 @@ public:
 
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) = 0;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) = 0;
+	virtual void				fromGuiLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) = 0;
 	virtual void				fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) = 0;
 	virtual void				fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId ) = 0;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) = 0;

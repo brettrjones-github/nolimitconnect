@@ -25,6 +25,7 @@ ListWidgetBase::ListWidgetBase( QWidget* parent )
     , m_Engine( m_MyApp.getEngine() )
     , m_ThumbMgr( m_MyApp.getThumbMgr() )
 {
+    setFocusPolicy( Qt::NoFocus );
 }
 
 //============================================================================

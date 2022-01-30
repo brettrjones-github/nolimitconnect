@@ -287,3 +287,14 @@ std::string Invite::makeInviteUrl( EHostType hostType, std::string& onlineUrl )
     return onlineUrl;
 }
 
+//============================================================================
+bool Invite::appendHostTypeSuffix( EHostType hostType, std::string& onlineUrl )
+{
+    if( hostType != eHostTypeUnknown && !onlineUrl.empty() && '!' == onlineUrl[onlineUrl.length() - 1] )
+    {
+        onlineUrl += Invite::getHostTypeSuffix( hostType );
+        return true;
+    }
+
+    return false;
+}

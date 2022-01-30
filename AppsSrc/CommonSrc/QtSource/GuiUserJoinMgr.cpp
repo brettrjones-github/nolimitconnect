@@ -30,8 +30,9 @@ GuiUserJoinMgr::GuiUserJoinMgr( AppCommon& app )
 //============================================================================
 void GuiUserJoinMgr::onAppCommonCreated( void )
 {
-    connect( this, SIGNAL( signalInternalUserJoinRequested( UserJoinInfo ) ), this, SLOT( slotInternalUserJoinRequested( UserJoinInfo ) ), Qt::QueuedConnection );
-    connect( this, SIGNAL( signalInternalUserJoinUpdated( UserJoinInfo ) ), this, SLOT( slotInternalUserJoinUpdated( UserJoinInfo ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinRequested( UserJoinInfo* ) ), this, SLOT( slotInternalUserJoinRequested( UserJoinInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserJoinUpdated( UserJoinInfo* ) ), this, SLOT( slotInternalUserJoinUpdated( UserJoinInfo* ) ), Qt::QueuedConnection );
+    connect( this, SIGNAL( signalInternalUserUnJoinUpdated( UserJoinInfo* ) ), this, SLOT( slotInternalUserUnJoinUpdated( UserJoinInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserJoinRemoved( GroupieId ) ), this, SLOT( slotInternalUserJoinRemoved( GroupieId ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserJoinOfferState( GroupieId, EJoinState ) ), this, SLOT( slotInternalUserJoinOfferState( GroupieId, EJoinState ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalUserJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ), this, SLOT( slotInternalUserJoinOnlineState( GroupieId, EOnlineState, VxGUID ) ), Qt::QueuedConnection );
@@ -123,6 +124,7 @@ void GuiUserJoinMgr::slotInternalUserUnJoinUpdated( UserJoinInfo* userJoinInfo )
 //============================================================================
 void GuiUserJoinMgr::slotInternalUserJoinRemoved( GroupieId groupieId )
 {
+    announceUserJoinRemoved( groupieId );
     auto iter = m_UserJoinList.find( groupieId );
     GuiUserJoin* guiUserJoin = nullptr;
     if( iter != m_UserJoinList.end() )
@@ -154,7 +156,7 @@ void GuiUserJoinMgr::slotInternalUserJoinOnlineState( GroupieId groupieId, EOnli
     bool isOnline = onlineState == eOnlineStateOnline ? true : false;
     if( guiUserJoin && isOnline != guiUserJoin->isOnline() )
     {
-        guiUserJoin->setOnlineStatus( isOnline );
+        // guiUserJoin->setOnlineStatus( isOnline );
         emit signalUserJoinOnlineStatus( guiUserJoin, isOnline );
     }
 }
@@ -243,8 +245,7 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo, bool un
         }
         else
         {
-            guiUserJoin = new GuiUserJoin( m_MyApp );
-            guiUserJoin->setUser( user );
+            guiUserJoin = new GuiUserJoin( m_MyApp, user, userJoinInfo );
             guiUserJoin->setJoinState( userJoinInfo->getJoinState() );
             m_UserJoinList[guiUserJoin->getGroupieId()] = guiUserJoin;
             onUserJoinAdded( guiUserJoin );
@@ -255,31 +256,15 @@ GuiUserJoin* GuiUserJoinMgr::updateUserJoin( UserJoinInfo* userJoinInfo, bool un
 }
 
 //============================================================================
-void GuiUserJoinMgr::setUserJoinOffline( GroupieId& groupieId )
-{
-    GuiUserJoin* guiUserJoin = findUserJoin( groupieId );
-    if( guiUserJoin )
-    {
-        guiUserJoin->setOnlineStatus( false );
-    }
-}
-
-//============================================================================
 void GuiUserJoinMgr::onUserJoinAdded( GuiUserJoin* guiUserJoin )
 {
-    if( isMessengerReady() )
-    {
-        emit signalUserJoinRequested( guiUserJoin );
-    }
+    announceUserJoinState( guiUserJoin->getJoinState(), guiUserJoin );
 }
 
 //============================================================================
 void GuiUserJoinMgr::onUserJoinRemoved( GroupieId& groupieId )
 {
-    if( isMessengerReady() )
-    {
-        emit signalUserJoinRemoved( groupieId );
-    }
+    announceUserJoinRemoved( groupieId );
 }
 
 //============================================================================
@@ -294,16 +279,39 @@ void GuiUserJoinMgr::onUserOnlineStatusChange( GuiUserJoin* guiUserJoin, bool is
 //============================================================================
 void GuiUserJoinMgr::onUserJoinUpdated( GuiUserJoin* guiUserJoin )
 {
-    if( isMessengerReady() )
-    {
-        emit signalUserJoinUpdated( guiUserJoin );
-    }
+    announceUserJoinState( guiUserJoin->getJoinState(), guiUserJoin );
 }
 
 //============================================================================
+void GuiUserJoinMgr::announceUserJoinState( EJoinState joinState, GuiUserJoin* guiUserJoin )
+{
+    switch( joinState )
+    {
+    case eJoinStateJoinRequested:
+        announceUserJoinRequested( guiUserJoin->getGroupieId(), guiUserJoin );
+        break;
+    case eJoinStateJoinGranted:
+        announceUserJoinGranted( guiUserJoin->getGroupieId(), guiUserJoin );
+        break;
+    case eJoinStateJoinDenied:
+        announceUserJoinDenied( guiUserJoin->getGroupieId(), guiUserJoin );
+        break;
+    case eJoinStateJoinLeaveHost:
+        announceUserJoinLeaveHost( guiUserJoin->getGroupieId() );
+        break;
+
+    case eJoinStateSending:
+    case eJoinStateSendFail:
+    case eJoinStateSendAcked:
+    case eJoinStateNone:
+    default:
+        break;
+    }
+}
+//============================================================================
 void GuiUserJoinMgr::onUserUnJoinUpdated( GuiUserJoin* guiUserJoin )
 {
-    announceUserUnJoinGranted( guiUserJoin->getGroupieId(), guiUserJoin );
+    announceUserJoinState( guiUserJoin->getJoinState(), guiUserJoin );
 }
 
 //============================================================================

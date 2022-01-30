@@ -248,6 +248,52 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
 }
 
 //============================================================================
+void UserJoinMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    bool wasAdded = false;
+    lockResources();
+    UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( !joinInfo )
+    {
+        joinInfo = new UserJoinInfo();
+        joinInfo->setGroupieId( groupieId );
+        joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+        joinInfo->setPluginType( sessionInfo.getPluginType() );
+        wasAdded = true;
+    }
+
+    joinInfo->setNetIdent( netIdent );
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
+    joinInfo->setJoinState( eJoinStateJoinLeaveHost );
+    joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+    if( wasAdded )
+    {
+        m_UserJoinInfoList[groupieId] = joinInfo;
+    }
+
+    saveToDatabase( joinInfo, true );
+
+    unlockResources();
+
+    if( wasAdded )
+    {
+        announceUserJoinRequested( joinInfo );
+    }
+    else
+    {
+        announceUserJoinUpdated( joinInfo );
+    }
+}
+
+//============================================================================
 void UserJoinMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     lockResources();
@@ -408,4 +454,22 @@ bool UserJoinMgr::getLastJoinedHostUrl( EHostType hostType, std::string& retHost
     }
 
     return result;
+}
+
+//============================================================================
+void UserJoinMgr::changeJoinState( GroupieId& groupieId, EJoinState joinState )
+{
+    lockResources();
+    UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( joinInfo && joinInfo->setJoinState( joinState ) )
+    {
+        if( groupieId.getGroupieOnlineId() != m_Engine.getMyOnlineId() )
+        {
+            saveToDatabase( joinInfo, true );
+        }
+
+        announceUserJoinUpdated( joinInfo );
+    }
+
+    unlockResources();
 }

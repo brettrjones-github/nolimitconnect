@@ -49,8 +49,6 @@ public:
 
     std::string                 getOnlineName( void )                       { return getGuiUser() ? getGuiUser()->getOnlineName() : ""; }
 
-    bool                        setIsOnline( bool isOnline );
-
 protected:
 	//=== vars ===//
     GroupieId                   m_GroupieId;

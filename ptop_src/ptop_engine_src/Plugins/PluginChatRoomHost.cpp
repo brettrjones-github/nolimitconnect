@@ -27,7 +27,6 @@ PluginChatRoomHost::PluginChatRoomHost( P2PEngine& engine, PluginMgr& pluginMgr,
     : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostChatRoom );
-    setHostType( eHostTypeChatRoom );
 }
 
 //============================================================================

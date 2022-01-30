@@ -17,8 +17,11 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <NetLib/VxPeerMgr.h>
 
+#include <CoreLib/VxPtopUrl.h>
 #include <PktLib/SearchParams.h>
+#include <PktLib/PktsHostJoin.h>
 
 //============================================================================
 PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
@@ -55,6 +58,16 @@ void PluginBaseHostClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionI
     else
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinInvalidUrl );
+    }
+}
+
+//============================================================================
+void PluginBaseHostClient::fromGuiLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
+{
+    std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
+    if( !url.empty() )
+    {
+        sendLeaveHost( hostType, sessionId, url );
     }
 }
 
@@ -144,4 +157,37 @@ void PluginBaseHostClient::onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr
 void PluginBaseHostClient::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
     m_Engine.getGroupieListMgr().onPktGroupieMoreReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseHostClient::sendLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
+{
+    VxPtopUrl ptopUrl( hostUrl );
+    if( ptopUrl.isValid() )
+    {
+        GroupieId groupieId( m_Engine.getMyOnlineId(), ptopUrl.getOnlineId(), hostType );
+        VxGUID connectId;
+        if( m_Engine.getOnlineListMgr().findConnection( groupieId, connectId ) )
+        {
+            PktHostLeaveReq leaveReq;
+            leaveReq.setHostType( hostType );
+            leaveReq.setPluginType( HostTypeToClientPlugin( hostType ) );
+            if( m_Engine.getMyOnlineId() == ptopUrl.getOnlineId() )
+            {
+                // is ourself
+                txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &leaveReq );
+            }
+            else
+            {
+                m_Engine.getPeerMgr().lockSktList();
+                VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectId );
+                if( sktBase )
+                {
+                    txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
+                }
+
+                m_Engine.getPeerMgr().unlockSktList();
+            }
+        }
+    }
 }

@@ -62,18 +62,6 @@ GuiUserJoinSession& GuiUserJoinSession::operator =( const GuiUserJoinSession &rh
 }
 
 //============================================================================
-bool GuiUserJoinSession::setIsOnline( bool isOnline )
-{
-    if( m_GuiUserJoin && m_GuiUserJoin->isOnline() != isOnline )
-    {
-        m_GuiUserJoin->setOnlineStatus( isOnline );
-        return true;
-    }
-
-    return false;
-}
-
-//============================================================================
 void GuiUserJoinSession::setUserJoin( GuiUserJoin* guiUserJoin )
 { 
     m_GuiUserJoin = guiUserJoin;

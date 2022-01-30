@@ -1430,6 +1430,21 @@ void P2PEngine::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::str
 }
 
 //============================================================================
+void P2PEngine::fromGuiLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
+{
+	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );
+	PluginBase* plugin = m_PluginMgr.findHostClientPlugin( hostType );
+	if( plugin )
+	{
+		plugin->fromGuiLeaveHost( hostType, sessionId, hostUrl );
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "Plugin not found for host %d", hostType );
+	}
+}
+
+//============================================================================
 void P2PEngine::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiJoinHost" );

@@ -31,7 +31,6 @@ PluginConnectionTestHost::PluginConnectionTestHost( P2PEngine& engine, PluginMgr
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 {
     setPluginType( ePluginTypeHostConnectTest );
-    setHostType( eHostTypeConnectTest );
 }
 
 //============================================================================

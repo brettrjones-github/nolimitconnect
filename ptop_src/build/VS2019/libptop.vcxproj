@@ -590,6 +590,7 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\MediaProcessor\MediaProcessor.cpp" />
@@ -955,7 +956,9 @@
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListMgrBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IgnoreListMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\NearbyListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListCallbackInterface.h" />
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\EchoCancel.h" />
     <ClInclude Include="..\..\ptop_engine_src\MediaProcessor\MediaClient.h" />

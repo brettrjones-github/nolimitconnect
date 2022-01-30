@@ -81,6 +81,7 @@ namespace
 //============================================================================
 P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	: m_PeerMgr( peerMgr )
+	, m_OnlineListMgr( *this )
 	, m_DirectConnectListMgr( *this )
 	, m_IgnoreListMgr( *this )
 	, m_FriendListMgr( *this )
@@ -88,7 +89,6 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	, m_HostUrlListMgr( *this )
 	, m_HostedListMgr( *this )
 	, m_NearbyListMgr( *this )
-	, m_OnlineListMgr( *this )
 	, m_BigListMgr( *this )
 	, m_EngineSettings()
 	, m_EngineParams()
@@ -132,19 +132,6 @@ P2PEngine::~P2PEngine()
 {
 	m_PeerMgr.stopListening();
 	m_PluginMgr.pluginMgrShutdown();
-}
-
-//============================================================================
-/// if skt exists in connection list then lock access to connection list
-bool P2PEngine::lockSkt( VxSktBase* sktBase )
-{
-    return m_PeerMgr.lockSkt( sktBase );
-}
-
-//============================================================================
-void P2PEngine::unlockSkt( VxSktBase* sktBase )
-{
-    m_PeerMgr.unlockSkt( sktBase );
 }
 
 //============================================================================

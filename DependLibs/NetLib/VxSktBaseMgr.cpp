@@ -56,40 +56,23 @@ VxSktBaseMgr::~VxSktBaseMgr()
 	deleteAllSockets();
 }
 
+
 //============================================================================
-/// if skt exists in connection list then lock access to connection list
-bool VxSktBaseMgr::lockSkt( VxSktBase* sktBase )
+// find a socket.. assumes list has been locked
+VxSktBase* VxSktBaseMgr::findSktBase( const VxGUID& connectId, bool acceptSktsOnly )
 {
-    bool lockResult = false;
-    sktBaseMgrLock();
-    m_LockRequestCnt++;
-    for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
+    if( connectId.isVxGUIDValid() && ( !acceptSktsOnly || eSktMgrTypeTcpAccept == m_eSktMgrType ) )
     {
-        if( ( *iter ) == sktBase )
+        for( auto sktBase : m_aoSkts )
         {
-            // found it in our list
-            lockResult = true;
-            break;
+            if( sktBase && sktBase->getConnectionId() == connectId )
+            {
+                return sktBase;
+            }
         }
     }
 
-    if( !lockResult )
-    {
-        m_LockRequestCnt--;
-        sktBaseMgrUnlock();
-    }
-
-    return lockResult;
-}
-
-//============================================================================
-void VxSktBaseMgr::unlockSkt( VxSktBase* sktBase )
-{
-    if( m_LockRequestCnt )
-    {
-        m_LockRequestCnt--;
-        sktBaseMgrUnlock();
-    }
+    return nullptr;
 }
 
 //============================================================================

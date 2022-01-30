@@ -307,7 +307,8 @@ void GuiHostJoinMgr::onUserOnlineStatusChange( GuiHostJoin* guiHostJoin, bool is
 //============================================================================
 void GuiHostJoinMgr::onHostJoinUpdated( GuiHostJoin* guiHostJoin, EJoinState prevState )
 {
-    if( prevState != guiHostJoin->getJoinState() )
+    // BRJ temp always update for testing
+    // if( prevState != guiHostJoin->getJoinState() )
     {
         announceJoinState( guiHostJoin, guiHostJoin->getJoinState() );
     }

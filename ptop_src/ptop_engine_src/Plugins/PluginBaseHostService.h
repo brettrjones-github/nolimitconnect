@@ -24,33 +24,32 @@ public:
     PluginBaseHostService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
     virtual ~PluginBaseHostService() override = default;
 
-    void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
-    EHostType                   getHostType(  void ) override       { return m_HostType; }
     EPluginType                 getClientPluginType( void );
     virtual bool				getHostedInfo( HostedInfo& hostedInfo ) override;
 
     virtual void				onMyOnlineUrlIsValid( bool iValid ) override;
 
-    virtual void				onPktHostJoinReq                ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostJoinReq                ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktHostLeaveReq               ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
     virtual void				onPktHostUnJoinReq              ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
-    virtual void				onPktPluginSettingReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktPluginSettingReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-    virtual void				onPktHostOfferReq               ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
-    virtual void				onPktHostOfferReply             ( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktHostOfferReq               ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktHostOfferReply             ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
     virtual void				onPktHostInfoReq                ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
     virtual void				onPktHostInfoReply              ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
     virtual void				onPktHostSearchReq              ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-    virtual void				onPktGroupieInfoReq             ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktGroupieInfoReply           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktGroupieInfoReq             ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktGroupieInfoReply           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
-    virtual void				onPktGroupieAnnReq              ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktGroupieAnnReply            ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktGroupieSearchReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktGroupieSearchReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktGroupieMoreReq             ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
-    virtual void				onPktGroupieMoreReply           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+    virtual void				onPktGroupieAnnReq              ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktGroupieAnnReply            ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktGroupieSearchReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktGroupieSearchReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktGroupieMoreReq             ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
+    virtual void				onPktGroupieMoreReply           ( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent ) override;
 
     virtual bool				fromGuiRequestPluginThumb       ( VxNetIdent* netIdent, VxGUID& thumbId ) override;
     virtual bool                ptopEngineRequestPluginThumb    ( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) override;
@@ -60,9 +59,9 @@ public:
     virtual void				onThreadOncePer15Minutes( void ) override;
 
 protected:
-    virtual void				onContactWentOffline            ( VxNetIdent * netIdent, VxSktBase * sktBase ) override;
-    virtual void				onConnectionLost                ( VxSktBase * sktBase ) override;
-    virtual void				replaceConnection               ( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt ) override;
+    virtual void				onContactWentOffline            ( VxNetIdent* netIdent, VxSktBase* sktBase ) override;
+    virtual void				onConnectionLost                ( VxSktBase* sktBase ) override;
+    virtual void				replaceConnection               ( VxNetIdent* netIdent, VxSktBase* poOldSkt, VxSktBase* poNewSkt ) override;
 
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting );
     virtual void				sendHostAnnounce( void );
@@ -75,8 +74,6 @@ protected:
     ECommErr                    getCommAccessState( VxNetIdent* netIdent );
 
     //=== vars ===//
-    EHostType                   m_HostType{ eHostTypeUnknown };
-
     HostServerMgr               m_HostServerMgr;
 
     std::string                 m_HostInviteUrl{ "" };

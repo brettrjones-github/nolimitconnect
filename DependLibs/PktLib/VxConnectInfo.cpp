@@ -16,6 +16,7 @@
 #include "VxConnectInfo.h"
 #include "PktBlobEntry.h"
 
+#include <CoreLib/Invite.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
 #include <NetLib/VxSktUtil.h>
@@ -87,7 +88,7 @@ VxConnectBaseInfo& VxConnectBaseInfo::operator =( const VxConnectBaseInfo &rhs )
 }
 
 //============================================================================
-std::string VxConnectBaseInfo::getMyOnlineUrl( void )
+std::string VxConnectBaseInfo::getMyOnlineUrl( EHostType hostType )
 {
     std::string strIPv4; 
     m_DirectConnectId.getIPv4(strIPv4);
@@ -97,6 +98,11 @@ std::string VxConnectBaseInfo::getMyOnlineUrl( void )
 
     std::string myUrl;
     StdStringFormat( myUrl, "ptop://%s:%d/%s", myIp.c_str(), m_DirectConnectId.getPort(), getMyOnlineId().toOnlineIdString().c_str() );
+    if( hostType != eHostTypeUnknown )
+    {
+        Invite::appendHostTypeSuffix( hostType, myUrl );
+    }
+
     return myUrl;
 }
 

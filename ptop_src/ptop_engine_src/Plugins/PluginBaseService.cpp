@@ -19,13 +19,43 @@
 #include "TxSession.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
+#include <NetLib/VxPeerMgr.h>
 
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
 PluginBaseService::PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
+, m_HostType( PluginTypeToHostType( pluginType ) )
+, m_HostedId( myIdent->getMyOnlineId(), m_HostType )
 {
+}
+
+//============================================================================
+void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr )
+{
+    if( pktHdr && pktHdr->isValidPkt() )
+    {
+        std::set<std::pair<VxGUID, VxGUID>> connectIdSet;
+        if( m_Engine.getOnlineListMgr().getConnections( getHostedId(), connectIdSet ) )
+        {
+            for( auto& connectPair : connectIdSet )
+            {
+                m_Engine.getPeerMgr().lockSktList();
+                VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectPair.first, true );
+                if( sktBase && sktBase->isConnected() )
+                {
+                    txPacket( connectPair.second, sktBase, pktHdr );
+                }
+
+                m_Engine.getPeerMgr().unlockSktList();
+            }
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "PluginBaseService::broadcastToHostClients invalid pkt host %s", DescribeHostType( getHostType() ) );
+    }
 }
 
 //============================================================================

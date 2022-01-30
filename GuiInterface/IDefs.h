@@ -1067,6 +1067,7 @@ const char * DescribeAppModule( EAppModule appModule );
 const char * DescribeAge( EAgeType ageType );
 const char * DescribeCommError( ECommErr commErr );
 const char * DescribeConnectReason( EConnectReason connectReason );
+bool        IsConnectReasonJoin( EConnectReason connectReason );
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
 //! describe friend state
 const char * DescribeFriendState( EFriendState eFriendState );

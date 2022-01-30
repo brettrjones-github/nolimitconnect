@@ -43,7 +43,6 @@ public:
     virtual void                onSystemReady( bool ready ) { }
 
     bool                        isUserJoinInSession( GroupieId& groupieId );
-    void                        setUserJoinOffline( GroupieId& groupieId );
 
     void                        onUserJoinAdded( GuiUserJoin* guiUserJoin );
     void                        onUserJoinRemoved( GroupieId& groupieId );
@@ -52,8 +51,8 @@ public:
     void                        onUserOnlineStatusChange( GuiUserJoin* guiUserJoin, bool isOnline );
     void                        onMyIdentUpdated( GuiUserJoin* guiUserJoin );
 
-    GuiUserJoin*                getUserJoin( GroupieId& groupieId );
-    std::map<GroupieId, GuiUserJoin*>& getUserJoinList( void )             { return m_UserJoinList; }
+    GuiUserJoin*                getUserJoin( GroupieId& groupieId )         { return findUserJoin( groupieId ); }
+    std::map<GroupieId, GuiUserJoin*>& getUserJoinList( void )              { return m_UserJoinList; }
     GuiUserJoin*                updateUserJoin( VxNetIdent* hisIdent, EHostType hostType = eHostTypeUnknown );
 
     void                        wantUserJoinCallbacks( GuiUserJoinCallback* client, bool enable );
@@ -93,6 +92,8 @@ protected:
     virtual void				callbackUserJoinRemoved( GroupieId& groupieId ) override;
     virtual void				callbackUserJoinOfferState( GroupieId& groupieId, EJoinState userOfferState ) override;
     virtual void				callbackUserJoinOnlineState( GroupieId& groupieId, EOnlineState onlineState, VxGUID& connectionId ) override;
+
+    void                        announceUserJoinState( EJoinState joinState, GuiUserJoin* guiUserJoin );
 
     virtual void				announceUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );

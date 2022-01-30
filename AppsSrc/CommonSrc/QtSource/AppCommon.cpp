@@ -823,15 +823,15 @@ void AppCommon::slotMainWindowMoved( void )
 }
 
 //============================================================================
-VxNetIdent * AppCommon::getMyIdentity( void )
+VxNetIdent* AppCommon::getMyIdentity( void )
 {
 	return getAppGlobals().getUserIdent();
 }
 
 //============================================================================
-VxGUID AppCommon::getMyOnlineId( void )
+VxGUID& AppCommon::getMyOnlineId( void )
 {
-    return getAppGlobals().getUserIdent()->getMyOnlineId();
+    return getMyIdentity()->getMyOnlineId();
 }
 
 //============================================================================

@@ -450,19 +450,7 @@ bool HostBaseMgr::isAnnounceConnectReason( EConnectReason connectReason )
 //============================================================================
 bool HostBaseMgr::isJoinConnectReason( EConnectReason connectReason )
 {
-    bool isJoinReason = false;
-    switch( connectReason )
-    {
-    case eConnectReasonChatRoomJoin:
-    case eConnectReasonGroupJoin:
-    case eConnectReasonRandomConnectJoin:
-        isJoinReason = true;
-        break;
-    default:
-        break;
-    }
-
-    return isJoinReason;
+    return IsConnectReasonJoin( connectReason );
 }
 
 //============================================================================

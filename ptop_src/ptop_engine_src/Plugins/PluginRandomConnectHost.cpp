@@ -28,7 +28,6 @@ PluginRandomConnectHost::PluginRandomConnectHost( P2PEngine& engine, PluginMgr& 
 : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostRandomConnect );
-    setHostType( eHostTypeRandomConnect );
 }
 
 //============================================================================

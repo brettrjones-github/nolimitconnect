@@ -294,8 +294,6 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		return;
 	}
 
-	poInfo->setIsOnline( true );
-
 	poInfo->setLastSessionTimeMs( timestamp );
 	poInfo->setConnectSuccessCnt( poInfo->getConnectSuccessCnt() + 1 );
 	poInfo->setConnectErrCnt( 0 );
@@ -327,20 +325,23 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		poInfo->setMyFriendshipToHim( eFriendStateGuest );
 	}
 
-	if( isNearby || !poInfo->requiresRelay() )
-	{
-		getDirectConnectListMgr().updateDirectConnectIdent( poInfo->getMyOnlineId(), sktBase->getConnectionId(), timestamp );
-	}
-
-	getOnlineListMgr().updateOnlineIdent( poInfo->getMyOnlineId(), sktBase->getConnectionId(), timestamp );
-	
-	if( isNearby )
-	{
-		getNearbyListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
-	}
-
 	if( poInfo->isFriend() || poInfo->isAdministrator() )
 	{
 		getFriendListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
+	}
+
+	GroupieId groupieId( poInfo->getMyOnlineId(), poInfo->getMyOnlineId(), eHostTypePeerUser );
+	if( isNearby || !poInfo->requiresRelay() )
+	{
+		if( isNearby )
+		{
+			getNearbyListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
+		}
+
+		if( !sktBase->isTempConnection() )
+		{
+			getDirectConnectListMgr().updateDirectConnectIdent( poInfo->getMyOnlineId(), sktBase->getConnectionId(), timestamp );
+			getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+		}
 	}
 }

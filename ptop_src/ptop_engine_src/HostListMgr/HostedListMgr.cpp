@@ -17,8 +17,12 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginBase.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h>
 
 #include <CoreLib/VxPtopUrl.h>
 #include <PktLib/PktsHostInvite.h>
@@ -563,6 +567,22 @@ bool HostedListMgr::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, 
         m_SearchHostType = hostType;
         m_SearchSpecificOnlineId = hostIdIfNullThenAll;
         m_SearchSessionId.initializeWithNewVxGUID();
+
+        EPluginType pluginType = HostTypeToHostPlugin( hostType );
+        if( m_Engine.getMyPktAnnounce().isPluginEnabled( pluginType ) )
+        {
+            PluginBaseHostService* plugin = dynamic_cast< PluginBaseHostService*>( m_Engine.getPluginMgr().findPlugin( pluginType ));
+            HostedInfo myHostedInfo;
+            if( plugin && plugin->getHostedInfo( myHostedInfo ) )
+            {
+                // so we can work with join our own host always start out as needing request join
+                GroupieId groupieId( m_Engine.getMyOnlineId(), m_Engine.getMyOnlineId(), hostType );
+                m_Engine.getHostJoinMgr().changeJoinState( groupieId, eJoinStateNone );
+                m_Engine.getUserJoinMgr().changeJoinState( groupieId, eJoinStateNone );
+                hostSearchResult( hostType, m_SearchSessionId, m_Engine.getSktLoopback(), m_Engine.getMyPktAnnounce().getVxNetIdent(), myHostedInfo );
+            }
+        }
+
         VxSktBase* sktBase{ nullptr };
         m_Engine.getConnectionMgr().requestConnection( m_SearchSessionId, netHostUrl.getUrl(), netHostUrl.getOnlineId(), this, sktBase, eConnectReasonNetworkHostListSearch );
         return true;

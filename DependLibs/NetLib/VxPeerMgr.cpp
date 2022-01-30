@@ -44,48 +44,6 @@ VxPeerMgr::~VxPeerMgr()
 	sktMgrShutdown();
 }
 
-
-//============================================================================
-/// if skt exists in connection list then lock access to connection list
-bool VxPeerMgr::lockSkt( VxSktBase* sktBase )
-{
-    if( sktBase )
-    {
-        if( sktBase->isAcceptSocket() )
-        {
-            // one we handle
-            return VxSktBaseMgr::lockSkt( sktBase );
-        }
-        else
-        {
-            // client skt
-            return m_ClientMgr.lockSkt( sktBase );
-        }
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//============================================================================
-void VxPeerMgr::unlockSkt( VxSktBase* sktBase )
-{
-    if( sktBase )
-    {
-        if( sktBase->isAcceptSocket() )
-        {
-            // one we handle
-            return VxSktBaseMgr::unlockSkt( sktBase );
-        }
-        else
-        {
-            // client skt
-            return m_ClientMgr.unlockSkt( sktBase );
-        }
-    }
-}
-
 //============================================================================
 void VxPeerMgr::sktMgrShutdown( void )
 {
@@ -116,6 +74,25 @@ VxSktBase * VxPeerMgr::makeNewSkt( void )
 }
 
 //============================================================================
+// find a socket.. assumes list has been locked
+VxSktBase* VxPeerMgr::findSktBase( const VxGUID& connectId, bool acceptSktsOnly )
+{
+	if( !connectId.isVxGUIDValid() )
+	{
+		LogMsg( LOG_ERROR, "VxPeerMgr::findSktBase invalid connectId" );
+		return nullptr;
+	}
+
+	VxSktBase* sktBase = VxSktBaseMgr::findSktBase( connectId, acceptSktsOnly );
+	if( !sktBase )
+	{
+		sktBase = m_ClientMgr.findSktBase( connectId, acceptSktsOnly );
+	}
+
+	return sktBase;
+}
+
+//============================================================================
 //! Connect to ip or url and return socket.. if cannot connect return NULL
 VxSktConnect * VxPeerMgr::connectTo(	const char *	pIpOrUrl,				// remote ip or url 
 										uint16_t		u16Port,				// port to connect to
@@ -123,7 +100,7 @@ VxSktConnect * VxPeerMgr::connectTo(	const char *	pIpOrUrl,				// remote ip or u
 {
 	if( NULL ==  m_pfnUserReceive )
 	{
-		LogMsg( LOG_INFO, "VxPeerMgr::VxConnectTo: you must call setReceiveCallback first\n" );
+		LogMsg( LOG_INFO, "VxPeerMgr::VxConnectTo: you must call setReceiveCallback first" );
 		vx_assert( m_pfnUserReceive );
 	}
 		
@@ -150,7 +127,7 @@ VxSktConnect * VxPeerMgr::createConnectionUsingSocket( SOCKET skt, const char * 
 {
 	if( NULL ==  m_pfnUserReceive )
 	{
-		LogMsg( LOG_ERROR, "VxPeerMgr::createConnectionUsingSocket: you must call setReceiveCallback first\n" );
+		LogMsg( LOG_ERROR, "VxPeerMgr::createConnectionUsingSocket: you must call setReceiveCallback first" );
 		vx_assert( m_pfnUserReceive );
 	}
 
@@ -161,7 +138,7 @@ VxSktConnect * VxPeerMgr::createConnectionUsingSocket( SOCKET skt, const char * 
 	sktBase->setTransmitCallback( m_pfnOurTransmit, this );
 	sktBase->createConnectionUsingSocket(	skt, rmtIp, port );
 	addSkt( sktBase );
-	LogMsg( LOG_INFO, "VxPeerMgr::createConnectionUsingSocket: done skt id %d rmt ip %s port %d\n", sktBase->getSktId(), rmtIp, port  );
+	LogMsg( LOG_INFO, "VxPeerMgr::createConnectionUsingSocket: done skt id %d rmt ip %s port %d", sktBase->getSktId(), rmtIp, port  );
 	return sktBase;
 }
 
@@ -172,7 +149,7 @@ void VxPeerMgr::handleSktCallback( VxSktBase * sktBase )
 
 //============================================================================
 bool VxPeerMgr::txPacket(	VxSktBase *			sktBase,
-							VxGUID&				destOnlineId,			
+							const VxGUID&		destOnlineId,
 							VxPktHdr *			pktHdr, 				
 							bool				bDisconnect )
 {

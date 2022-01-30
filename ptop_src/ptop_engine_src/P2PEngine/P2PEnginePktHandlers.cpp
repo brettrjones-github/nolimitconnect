@@ -946,6 +946,20 @@ void P2PEngine::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 }
 
 //============================================================================
+void P2PEngine::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostLeaveReq" );
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostLeaveReply" );
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
 void P2PEngine::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktHostUnJoinReq" );

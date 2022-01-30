@@ -14,17 +14,25 @@
 //============================================================================
 
 #include "PluginBase.h"
+#include <PktLib/HostedId.h>
 
 class PluginBaseService : public PluginBase
 {
 public:
-
     PluginBaseService( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginBaseService() override = default;
+
+    EHostType                   getHostType( void ) override        { return m_HostType; }
+    HostedId&                   getHostedId( void )                 { return m_HostedId; }
+
+    void                        broadcastToClients( VxPktHdr* pktHdr );
 
 protected:
     EConnectReason              getHostAnnounceConnectReason( void );
     EConnectReason              getHostJoinConnectReason( void );
     EConnectReason              getHostSearchConnectReason( void );
 
+    //=== vars ===//
+    EHostType                   m_HostType{ eHostTypeUnknown };
+    HostedId                    m_HostedId;
 };

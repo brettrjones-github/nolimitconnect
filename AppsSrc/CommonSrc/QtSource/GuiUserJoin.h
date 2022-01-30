@@ -22,13 +22,15 @@
 class AppCommon;
 class GuiUser;
 class GuiUserJoinMgr;
+class UserJoinInfo;
 
 class GuiUserJoin : public QWidget
 {
 public:
     GuiUserJoin() = delete;
     GuiUserJoin( AppCommon& app );
-    GuiUserJoin( AppCommon& app, GuiUser* netIdent, VxGUID& sessionId, bool online = false );
+    GuiUserJoin( AppCommon& app, GuiUser* guiUser, VxGUID& sessionId, bool online = false );
+    GuiUserJoin( AppCommon& app, GuiUser* guiUser, UserJoinInfo* userJoinInfo );
     GuiUserJoin( const GuiUserJoin& rhs );
     virtual ~GuiUserJoin() = default;
 
@@ -43,9 +45,8 @@ public:
     bool                        setJoinState( EJoinState joinState );
     EJoinState                  getJoinState( void )                    { return m_JoinState; }
 
-    virtual bool                setOnlineStatus( bool isOnline );
-    bool                        isOnline( void )                        { return m_IsOnline; }
-    bool                        isInSession( void )                     { return m_IsOnline && m_SessionId.isVxGUIDValid(); }
+    bool                        isOnline( void );
+    bool                        isInSession( void )                     { return isOnline() && m_SessionId.isVxGUIDValid(); }
 
 protected:
     AppCommon&                  m_MyApp;
@@ -55,5 +56,4 @@ protected:
     GroupieId                   m_GroupieId;
     EJoinState                  m_JoinState{ eJoinStateNone };
     VxGUID                      m_SessionId;
-    bool                        m_IsOnline{ false };
 };

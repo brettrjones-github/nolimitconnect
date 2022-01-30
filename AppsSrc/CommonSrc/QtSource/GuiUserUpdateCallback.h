@@ -19,10 +19,10 @@ class GuiUser;
 class GuiUserUpdateCallback
 {
 public:
-    virtual void				callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) = 0;
-    virtual void				callbackIndentListRemove( EUserViewType listType, VxGUID& onlineId ) = 0;
+    virtual void				callbackIndentListUpdate( EUserViewType listType, VxGUID& onlineId, uint64_t timestamp ) {};
+    virtual void				callbackIndentListRemove( EUserViewType listType, VxGUID& onlineId ) {};
 
-    virtual void				callbackOnUserAdded( GuiUser* guiUser ) = 0;
-    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) = 0;
-    virtual void				callbackOnUserRemoved( VxGUID& onlineId ) = 0;
+    virtual void				callbackOnUserAdded( GuiUser* guiUser ) {};
+    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) {};
+    virtual void				callbackOnUserRemoved( VxGUID& onlineId ) {};
 };

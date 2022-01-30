@@ -60,21 +60,8 @@ VxSktBase::VxSktBase()
 : VxSktBuf()
 , VxSktThrottle()	
 , m_iSktId(0)
-, m_LclIp()
-, m_RmtIp()
 , m_LastImAliveTimeGmtMs( GetGmtTimeMs() )
-, m_SktRxThread()
-, m_SktTxThread()
-, m_SktTxSemaphore()
-, m_SktMutex()
-, m_CryptoMutex()
-
-, m_RxKey()					// encryption key for receive
-, m_RxCrypto()				// encryption object for receive
-, m_TxKey()					// encryption key for transmit
-, m_TxCrypto()				// encryption object for transmit
 //, m_u8TxSeqNum;			// sequence number used to twart replay attacks ( do not set )
-, m_RelayEventSemaphore()
 {
 	m_TotalCreatedSktCnt++;
 	m_iSktId = m_TotalCreatedSktCnt;
@@ -84,7 +71,7 @@ VxSktBase::VxSktBase()
 	m_LclIp.setToInvalid();
 	m_RmtIp.setToInvalid();
 #ifdef DEBUG_SKTS
-	LogMsg( LOG_SKT,  "skt %d created\n", m_iSktId );
+	LogMsg( LOG_SKT,  "skt %d created", m_iSktId );
 #endif // DEBUG_SKTS
 }
 
@@ -1552,3 +1539,9 @@ const std::string& VxSktBase::describeSktDirection( void )
     }
 }
 
+//============================================================================
+bool VxSktBase::isTempConnection( void )
+{
+	bool isPerm = ( eConnectReasonUnknown == m_ConnectReason || IsConnectReasonJoin( m_ConnectReason )) && ( eSktTypeTcpConnect == m_eSktType || eSktTypeTcpAccept == m_eSktType );
+	return !isPerm;
+}

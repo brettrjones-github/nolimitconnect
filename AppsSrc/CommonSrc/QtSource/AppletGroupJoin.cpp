@@ -195,7 +195,22 @@ void AppletGroupJoin::slotConnectButtonClicked( GuiHostedListSession* hostSessio
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotConnectButtonClicked" );
 	std::string ptopUrl = hostSession->getHostUrl();
-	m_MyApp.getFromGuiInterface().fromGuiJoinHost( hostSession->getHostType(), hostSession->getSessionId(), ptopUrl );
+	GroupieId groupieId( m_MyApp.getMyOnlineId(), hostSession->getHostedId() );
+	GuiUserJoin* userJoin = m_MyApp.getUserJoinMgr().getUserJoin( groupieId );
+	EJoinState joinState{ eJoinStateNone };
+	if( userJoin )
+	{
+		joinState = userJoin->getJoinState();
+	}
+
+	if( joinState == eJoinStateJoinGranted )
+	{
+		m_MyApp.getFromGuiInterface().fromGuiLeaveHost( hostSession->getHostType(), hostSession->getSessionId(), ptopUrl );
+	}
+	else
+	{
+		m_MyApp.getFromGuiInterface().fromGuiJoinHost( hostSession->getHostType(), hostSession->getSessionId(), ptopUrl );
+	}
 }
 
 //============================================================================

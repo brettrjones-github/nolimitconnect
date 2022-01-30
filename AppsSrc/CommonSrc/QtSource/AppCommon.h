@@ -132,7 +132,7 @@ public:
     bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
     MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
     VxNetIdent *				getMyIdentity( void );
-    VxGUID				        getMyOnlineId( void );
+    VxGUID&				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
     GuiOfferClientMgr&			getOfferClientMgr( void )				    { return m_OfferClientMgr; }
     GuiOfferHostMgr&            getOfferHostMgr( void )                     { return m_OfferHostMgr; }

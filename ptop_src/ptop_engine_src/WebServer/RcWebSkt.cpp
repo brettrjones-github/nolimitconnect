@@ -215,7 +215,6 @@ void * RcSktWebTransmitThreadFunc(  void * pvContext )
                 EWbMyFiles		eFileType;
                 EHttpReqType	eHttpReqType;
 
-                sktBase->lockSkt();
                 //if( sktBase->m_aoQuedFiles.size() )
                 //{
                     WbQueEntry * poEntry = &sktBase->m_aoQuedFiles[0];
@@ -226,7 +225,6 @@ void * RcSktWebTransmitThreadFunc(  void * pvContext )
                     sktBase->m_aoQuedFiles.erase( sktBase->m_aoQuedFiles.begin() );
                 //}
 
-                sktBase->unlockSkt();
     #ifdef USE_WEB_FILESHARE
                 if( eFileType )
                 {

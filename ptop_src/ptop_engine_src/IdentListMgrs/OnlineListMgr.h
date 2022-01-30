@@ -13,32 +13,30 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "IdentListMgrBase.h"
-
-#include <CoreLib/VxGUID.h>
+#include "OnlineSktList.h"
 
 #include <vector>
 
-// maintains a list of online users sorted by timestamp for faster lookup
+class OnlineListCallbackInterface;
 
-class OnlineListMgr : public IdentListMgrBase
+class OnlineListMgr : public OnlineSktList
 {
 public:
     OnlineListMgr() = delete;
     OnlineListMgr( P2PEngine& engine );
     virtual ~OnlineListMgr() = default;
 
-    bool                        isOnline( VxGUID& onlineId );
-    virtual void                updateOnlineIdent( VxGUID& onlineId, VxGUID& sktConnectId, int64_t timestamp );
-    virtual void                removeConnection( VxGUID& sktConnectId );
-    virtual void                removeIdent( VxGUID& onlineId ) override;
-    virtual void                removeAll( void ) override;
+    virtual void                onUserOnlineStatusChange( VxGUID& onlineId, bool isOnline ) override;
+    virtual void                onUserOnlineStatusChange( GroupieId& groupieId, bool isOnline ) override;
 
-    std::vector< std::pair<VxGUID, std::pair<VxGUID, int64_t>>>& getIdentList()         { return m_OnlineIdentList; };
+    void                        wantOnlineCallback( OnlineListCallbackInterface* client, bool enable );
 
-protected:
-    virtual void                removeConnection( VxGUID& onlineId, VxGUID& sktConnectId );
+    void                        announceOnlineStatus( VxGUID& onlineId, bool isOnline );
 
-    std::vector< std::pair<VxGUID, std::pair<VxGUID, int64_t>>> m_OnlineIdentList;
+    void						lockClientList( void ) { m_ClientCallbackMutex.lock(); }
+    void						unlockClientList( void ) { m_ClientCallbackMutex.unlock(); }
+
+    std::vector<OnlineListCallbackInterface*> m_CallbackClients;
+    VxMutex						m_ClientCallbackMutex;
 };
 

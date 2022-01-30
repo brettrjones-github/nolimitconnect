@@ -81,6 +81,7 @@
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 #define OBJNAME_APPLET_NEARBY_LIST_CLIENT			    "AppletNearbyListClient"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
+#define OBJNAME_APPLET_RANDOM_CONNECT_JOIN			    "AppletRandomConnectJoin"
 
 #define OBJNAME_APPLET_ABOUT_APP						"AppletAboutApp"
 #define OBJNAME_APPLET_APPLICATION_INFO				    "AppletApplicationInfo"

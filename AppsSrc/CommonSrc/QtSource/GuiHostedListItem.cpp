@@ -25,6 +25,7 @@ GuiHostedListItem::GuiHostedListItem(QWidget *parent  )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
+    setFocusPolicy( Qt::NoFocus );
     setupIdentLogic();
     connect( ui.m_JoinButton,		SIGNAL( clicked() ),	this, SLOT( slotJoinButtonClicked() ) );
     connect( ui.m_ConnectButton,    SIGNAL( clicked() ),    this, SLOT( slotConnectButtonClicked() ) );

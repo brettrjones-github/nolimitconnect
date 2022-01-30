@@ -30,7 +30,7 @@ public:
 
     bool                        isDirectConnect( VxGUID& onlineId );
     virtual void                updateDirectConnectIdent( VxGUID& onlineId, VxGUID& sktConnectId, int64_t timestamp );
-    virtual void                removeConnection( VxGUID& sktConnectId );
+    virtual void                onConnectionLost( VxGUID& sktConnectId );
     virtual void                removeIdent( VxGUID& onlineId ) override;
     virtual void                removeAll( void ) override;
 

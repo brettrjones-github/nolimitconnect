@@ -10,6 +10,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetLib", "..\..\DependLibs\NetLib\build\VS2019\NetLib.vcxproj", "{7704F9E4-13F8-42B4-8E13-0AFA075ABC15}"
 	ProjectSection(ProjectDependencies) = postProject
 		{56462B02-59B7-4672-8F89-30A674E802FE} = {56462B02-59B7-4672-8F89-30A674E802FE}
+		{E952F7BB-75CE-4552-ADC3-88E81C95ECE6} = {E952F7BB-75CE-4552-ADC3-88E81C95ECE6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PktLib", "..\..\DependLibs\PktLib\build\VS2019\PktLib.vcxproj", "{E952F7BB-75CE-4552-ADC3-88E81C95ECE6}"
@@ -281,7 +282,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 		Qt5Version = 64BitVs2017Qt5.15.2
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 	EndGlobalSection
 EndGlobal

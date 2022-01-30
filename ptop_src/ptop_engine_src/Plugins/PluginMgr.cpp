@@ -891,7 +891,7 @@ bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent 
 
 //============================================================================
 bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType, 
-                                    VxGUID&		        onlineId, 
+									const VxGUID&		onlineId,
                                     VxSktBase *			sktBase, 
                                     VxPktHdr *			pktHdr, 
                                     bool				bDisconnectAfterSend,

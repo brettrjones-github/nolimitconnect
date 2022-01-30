@@ -43,6 +43,7 @@ public:
     void                        addUserJoinMgrClient( UserJoinCallbackInterface * client, bool enable );
 
     void                        onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
@@ -57,6 +58,8 @@ public:
     void						unlockResources( void )						{ m_ResourceMutex.unlock(); }
 
     UserJoinInfo*               findUserJoinInfo( GroupieId& groupieId );
+
+    void                        changeJoinState( GroupieId& groupieId, EJoinState joinState );
 
 protected:
     void						clearUserJoinInfoList( void );

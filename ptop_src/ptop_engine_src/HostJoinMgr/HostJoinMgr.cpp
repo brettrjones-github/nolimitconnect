@@ -319,6 +319,41 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
 }
 
 //============================================================================
+void HostJoinMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    bool wasAdded = false;
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( !joinInfo )
+    {
+        unlockResources();
+        return;
+    }
+
+    joinInfo->fillBaseInfo( netIdent, PluginTypeToHostType( sessionInfo.getPluginType() ) );
+    joinInfo->setPluginType( sessionInfo.getPluginType() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+    joinInfo->setNetIdent( netIdent );
+    int64_t timeNowMs = GetTimeStampMs();
+    joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
+    joinInfo->setJoinState( eJoinStateJoinLeaveHost );
+    joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
+    joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
+
+    joinInfo->setConnectionId( sktBase->getConnectionId() );
+    joinInfo->setSessionId( sessionInfo.getSessionId() );
+
+    joinInfo->setInfoModifiedTime( timeNowMs );
+    joinInfo->setLastConnectTime( timeNowMs );
+    joinInfo->setLastJoinTime( timeNowMs );
+
+    unlockResources();
+
+    announceHostJoinUpdated( joinInfo );
+}
+
+//============================================================================
 void HostJoinMgr::onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     bool wasAdded = false;
@@ -337,7 +372,7 @@ void HostJoinMgr::onHostUnJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent
     joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-    joinInfo->setJoinState( eJoinStateNone );
+    joinInfo->setJoinState( eJoinStateJoinLeaveHost );
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
@@ -479,6 +514,7 @@ EMembershipState HostJoinMgr::fromGuiQueryMembership( EHostType hostType, VxNetI
         case eJoinStateSendFail:
         case eJoinStateSendAcked:
         case eJoinStateJoinRequested:
+        case eJoinStateJoinLeaveHost:
             return eMembershipStateCanBeRequested;
 
         case eJoinStateJoinGranted:

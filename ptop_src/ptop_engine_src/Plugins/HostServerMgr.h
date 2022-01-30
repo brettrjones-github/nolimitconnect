@@ -35,6 +35,7 @@ public:
 
     virtual void				onJoinRequested( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType );
     virtual void				onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType );
+    virtual void				onUserLeftHost( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType );
     virtual void				onUserUnJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID sessionId, EHostType hostType );
 
 protected:

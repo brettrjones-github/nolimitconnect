@@ -32,7 +32,6 @@ PluginGroupHost::PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNet
     : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostGroup );
-    setHostType( eHostTypeGroup );
 }
 
 //============================================================================

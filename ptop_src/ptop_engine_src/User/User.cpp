@@ -108,3 +108,21 @@ bool User::addSession( BaseSessionInfo& sessionInfo )
     unlockUser();
     return true;
 }
+
+//============================================================================
+bool User::removeSession( BaseSessionInfo& sessionInfo )
+{
+    lockUser();
+    for( auto iter = m_SessionList.begin(); iter != m_SessionList.end(); ++iter)
+    {
+        if( *iter == sessionInfo )
+        {
+            m_SessionList.erase( iter );
+            unlockUser();
+            return true;
+        }
+    }
+
+    unlockUser();
+    return false;
+}

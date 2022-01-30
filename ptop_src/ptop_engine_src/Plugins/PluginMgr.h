@@ -86,7 +86,7 @@ public:
 	virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile );
 
     virtual bool                pluginApiTxPacket(  EPluginType			ePluginType,
-                                                    VxGUID&		        onlineId,
+													const VxGUID&		onlineId,
                                                     VxSktBase *			sktBase,
                                                     VxPktHdr *			poPkt,
                                                     bool				bDisconnectAfterSend = false,

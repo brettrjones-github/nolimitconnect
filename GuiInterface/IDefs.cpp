@@ -605,6 +605,12 @@ const char * DescribeConnectReason( EConnectReason eConnectReason )
 }
 
 //============================================================================
+bool IsConnectReasonJoin( EConnectReason connectReason )
+{
+    return eConnectReasonGroupJoin == connectReason || eConnectReasonChatRoomJoin == connectReason || eConnectReasonRandomConnectJoin == connectReason;
+}
+
+//============================================================================
 const char * DescribeConnectStatus( EConnectStatus eConnectStatus )
 {
     if( eConnectStatus < 0 || eMaxConnectStatus <= eConnectStatus )

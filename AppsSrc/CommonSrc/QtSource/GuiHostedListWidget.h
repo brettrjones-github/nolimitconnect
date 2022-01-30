@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "ListWidgetBase.h"
+#include "GuiUserUpdateCallback.h"
 
 class HostedId;
 class GuiHostedListItem;
@@ -24,7 +25,7 @@ class GroupieId;
 class GuiHostJoin;
 class GuiUserJoin;
 
-class GuiHostedListWidget : public ListWidgetBase
+class GuiHostedListWidget : public ListWidgetBase, public GuiUserUpdateCallback
 {
 	Q_OBJECT
 
@@ -45,6 +46,8 @@ public:
     GuiHostedListSession*       findSession( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByHostId( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByOnlineId( VxGUID& onlineId );
+
+    virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
 
     virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );

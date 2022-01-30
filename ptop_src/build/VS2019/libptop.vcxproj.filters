@@ -922,6 +922,9 @@
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.cpp">
       <Filter>Source Files\UserJoinMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1998,6 +2001,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.h">
       <Filter>Source Files\UserJoinMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListCallbackInterface.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

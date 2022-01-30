@@ -410,59 +410,83 @@ void GuiHostedListWidget::onKickButtonClicked( GuiHostedListItem* hostItem )
 }
 
 //============================================================================
+void GuiHostedListWidget::callbackOnUserUpdated( GuiUser* guiUser )
+{
+
+}
+
+
+//============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
     LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinRequested" );
     updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinRequested );
+    /*
     HostedId hostedId = groupieId.getHostedId();
     GuiHostedListItem* listItem = findListItemWidgetByHostId( hostedId );
     if( listItem && listItem->getHostSession() )
     {
         listItem->setJoinedState( guiHostJoin->getJoinState() );
     }
+    */
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinGranted" );
-    updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinGranted );
+    if( getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinGranted" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinGranted );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostUnJoinGranted" );
-    updateHostJoinState( groupieId.getHostedId(), eJoinStateNone );
+    if( getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostUnJoinGranted" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinLeaveHost );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinDenied" );
-    updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinDenied );
+    if( getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinDenied" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinDenied );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinLeaveHost( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinLeaveHost" );
-    updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinLeaveHost );
+    if( getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinLeaveHost" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinLeaveHost );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostUnJoin( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostUnJoin" );
-    updateHostJoinState( groupieId.getHostedId(), eJoinStateNone );
+    if( getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostUnJoin" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateNone );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinRemoved( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinRemoved" );
     if( getIsHostView() )
     {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinRemoved" );
         removeFromList( groupieId.getHostedId() );
     }
 }
@@ -472,36 +496,51 @@ void GuiHostedListWidget::callbackGuiHostJoinRemoved( GroupieId& groupieId )
 //============================================================================
 void GuiHostedListWidget::callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRequested" );
-    updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinRequested );
+    if( !getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRequested" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinRequested );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted" );
-    updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinGranted );
+    if( !getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinGranted );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserUnJoinGranted" );
-    updateUserJoinState( groupieId.getHostedId(), eJoinStateNone );
+    if( !getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserUnJoinGranted" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinLeaveHost );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinDenied" );
-    updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinDenied );
+    if( !getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinDenied" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinDenied );
+    }
 }
 
 //============================================================================
 void GuiHostedListWidget::callbackGuiUserJoinLeaveHost( GroupieId& groupieId )
 {
-    LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinLeaveHost" );
-    updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinLeaveHost );
+    if( !getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinLeaveHost" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinLeaveHost );
+    }
 }
 
 //============================================================================

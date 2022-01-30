@@ -115,7 +115,7 @@ void DirectConnectListMgr::updateDirectConnectIdent( VxGUID& onlineId, VxGUID& s
 }
 
 //============================================================================
-void DirectConnectListMgr::removeConnection( VxGUID& sktConnectId )
+void DirectConnectListMgr::onConnectionLost( VxGUID& sktConnectId )
 {
     std::vector<VxGUID> identList;
     lockList();

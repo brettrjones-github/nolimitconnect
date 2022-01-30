@@ -29,7 +29,6 @@ PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, V
 : PluginBaseHostService( engine, pluginMgr, myIdent, pluginType )
 {
     setPluginType( ePluginTypeHostNetwork );
-    setHostType( eHostTypeNetwork );
 }
 
 //============================================================================

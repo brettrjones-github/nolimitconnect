@@ -50,8 +50,8 @@ void P2PEngine::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, 
 void P2PEngine::onConnectionLost( VxSktBase * sktBase )								
 {
 	LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::connectionLost: skt %d", sktBase->m_iSktId );
-	getDirectConnectListMgr().removeConnection( sktBase->getConnectionId() );
-	getOnlineListMgr().removeConnection( sktBase->getConnectionId() );
+	getDirectConnectListMgr().onConnectionLost( sktBase->getConnectionId() );
+	getOnlineListMgr().onConnectionLost( sktBase->getConnectionId() );
 
 	getHostJoinMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );
 	getUserOnlineMgr().onConnectionLost( sktBase, sktBase->getConnectionId(), sktBase->getPeerOnlineId() );

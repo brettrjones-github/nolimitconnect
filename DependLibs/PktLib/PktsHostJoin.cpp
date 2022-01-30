@@ -90,6 +90,22 @@ PktHostJoinReply::PktHostJoinReply()
 }
 
 //============================================================================
+PktHostLeaveReq::PktHostLeaveReq()
+{
+    setPktType( PKT_TYPE_HOST_LEAVE_REQ );
+    setPktLength( sizeof( PktHostLeaveReq ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
+PktHostLeaveReply::PktHostLeaveReply()
+{
+    setPktType( PKT_TYPE_HOST_LEAVE_REPLY );
+    setPktLength( sizeof( PktHostLeaveReply ) );
+    vx_assert( 0 == ( getPktLength() & 0x0f ) );
+}
+
+//============================================================================
 PktHostUnJoinReq::PktHostUnJoinReq()
 {
     setPktType( PKT_TYPE_HOST_UNJOIN_REQ );

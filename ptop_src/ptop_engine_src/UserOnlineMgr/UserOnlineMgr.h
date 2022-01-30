@@ -13,6 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <ptop_src/ptop_engine_src/IdentListMgrs/OnlineListCallbackInterface.h>
+
 #include <PktLib/GroupieId.h>
 
 #include <CoreLib/VxMutex.h>
@@ -24,7 +26,7 @@ class UserOnlineCallbackInterface;
 class VxSktBase;
 class VxNetIdent;
 
-class UserOnlineMgr 
+class UserOnlineMgr : public OnlineListCallbackInterface
 {
 
 public:
@@ -42,22 +44,27 @@ public:
     void                        onUserOnline( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onHostJoinRequestedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onHostJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserJoinedHost( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
 
     User*                       findUser( VxGUID& onlineId );
 
 protected:
-    void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo );
-    void                        updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void				        callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) override;
+
+    void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo, bool leftHost = false );
+    void                        updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo, bool leftHost );
 
     virtual void				announceUserOnlineAdded( User* userJoinInfo, BaseSessionInfo& sessionInfo );
     virtual void				announceUserOnlineUpdated( User* userJoinInfo, BaseSessionInfo& sessionInfo );
     virtual void				announceUserOnlineRemoved( VxGUID& hostOnlineId, EHostType hostType );
 
-    virtual void				announceUserOnlineState( User* userJoinInfo, bool isOnline );
+    void				        announceUserOnlineState( User* userJoinInfo, bool isOnline );
+    void                        announceUserSessionState( User* user, bool isInSession );
 
     void						lockClientList( void )						{ m_UserOnlineClientMutex.lock(); }
     void						unlockClientList( void )					{ m_UserOnlineClientMutex.unlock(); }

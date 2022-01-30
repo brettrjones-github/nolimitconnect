@@ -29,11 +29,13 @@ public:
 
     virtual void				sktMgrShutdown( void ) override;
 
-    /// if skt exists in connection list then lock access to connection list
-    virtual bool				lockSkt( VxSktBase* sktBase ) override;
-    virtual void				unlockSkt( VxSktBase* sktBase ) override;
-
 	VxClientMgr&				getClientMgr( void )			                            { return m_ClientMgr; }
+
+	virtual void				lockSktList( void ) override								{ m_SktListMutex.lock(); m_ClientMgr.lockSktList(); }
+	virtual void				unlockSktList( void ) override								{ m_SktListMutex.unlock(); m_ClientMgr.unlockSktList(); }
+
+	// find a socket.. assumes list has been locked
+	virtual VxSktBase*			findSktBase( const VxGUID& connectId, bool acceptSktsOnly = false ) override;
 
     virtual void				setReceiveCallback( VX_SKT_CALLBACK pfnReceive, void * pvUserData ) override;
 	void						setLocalIp( InetAddress& newLocalIp );
@@ -49,7 +51,7 @@ public:
 	virtual VxSktConnect *		createConnectionUsingSocket( SOCKET skt, const char * rmtIp, uint16_t port );
 
 	virtual bool				txPacket(	VxSktBase *			sktBase,
-											VxGUID&				destOnlineId,			    // online id of destination user
+											const VxGUID&		destOnlineId,			    // online id of destination user
 											VxPktHdr *			pktHdr, 				    // packet to send
 											bool				bDisconnect = false );	    // if true disconnect after send
 	virtual bool				txPacketWithDestId(	VxSktBase *		sktBase,

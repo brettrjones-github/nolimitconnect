@@ -315,7 +315,7 @@ void GuiHostedListMgr::updateHostSearchResult( HostedInfo& hostedInfo, VxGUID& s
     // hosted info is temporary and will soon be deleted so make copy if required
     if( hostedInfo.isHostInviteValid() )
     {
-        HostedId hostedId( hostedInfo.getOnlineId(), hostedInfo.getHostType() );
+        HostedId hostedId( hostedInfo.getHostedId() );
         GuiHosted* guiHosted = updateHostedInfo( hostedInfo );
         if( guiHosted )
         {

@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "GuiUser.h"
-#include "GuiUserMgrGuiUserUpdateClient.h"
+#include "GuiUserUpdateCallback.h"
 #include "ToGuiUserUpdateInterface.h"
 
 #include <CoreLib/VxMutex.h>
@@ -116,7 +116,7 @@ protected:
     
     AppCommon&                  m_MyApp;
     VxMutex                     m_GuiUserUpdateClientMutex;
-    std::vector<GuiUserMgrGuiUserUpdateClient> m_GuiUserUpdateClientList;
+    std::vector<GuiUserUpdateCallback*> m_GuiUserUpdateClientList;
 
     // map of online id to GuiUser
     std::map<VxGUID, GuiUser*>  m_UserList;

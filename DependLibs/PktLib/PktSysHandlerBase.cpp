@@ -180,6 +180,9 @@ PktHandlerBase::PktHandlerBase()
 	// 120 ( 0x78 ) 
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REQ ]                    = &PktHandlerBase::onPktHostJoinReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_JOIN_REPLY ]                  = &PktHandlerBase::onPktHostJoinReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_LEAVE_REQ]						= &PktHandlerBase::onPktHostLeaveReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_HOST_LEAVE_REPLY]					= &PktHandlerBase::onPktHostLeaveReply;
+
 	// 122 ( 0x7A )  
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_OFFER_REQ ]                   = &PktHandlerBase::onPktHostOfferReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_OFFER_REPLY ]                 = &PktHandlerBase::onPktHostOfferReply;
@@ -888,6 +891,18 @@ void PktHandlerBase::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 void PktHandlerBase::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
 }
 
 //============================================================================

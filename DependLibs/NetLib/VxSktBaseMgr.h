@@ -26,6 +26,7 @@
 #define SKT_ALIVE_TIMEOUT (2 * 60 * 1000)
 
 class VxSktBase;
+class VxGUID;
 
 // implements a manager to manage multiple sockets
 // NOTE: applications should use VxServerMgr or ConnnectMgr
@@ -85,9 +86,10 @@ public:
     //! move to erase/delete when safe to do so
     virtual void				moveToEraseList( VxSktBase * sktBase );
 
-    /// if skt exists in connection list then lock access to connection list
-    virtual bool				lockSkt( VxSktBase* sktBase );
-    virtual void				unlockSkt( VxSktBase* sktBase );
+	virtual void				lockSktList( void )								{ m_SktListMutex.lock(); }
+    virtual void				unlockSktList( void )							{ m_SktListMutex.unlock(); }
+	// find a socket.. assumes list has been locked
+	virtual VxSktBase*			findSktBase( const VxGUID& connectId, bool acceptSktsOnly = false );
 
     virtual void                dumpSocketStats( const char* reason = nullptr, bool fullDump = false );
 
@@ -99,6 +101,7 @@ public:
 	std::vector<VxSktBase *>	m_aoSkts;					        // array of sockets to manage
 	std::vector<VxSktBase *>	m_aoSktsToDelete;			        // skts that will be deleted after 10 sec 
 	VxMutex						m_SktMgrMutex;			            // thread mutex
+	VxMutex						m_SktListMutex;			            // thread mutex
 
 	VX_SKT_CALLBACK				m_pfnUserReceive{ nullptr };		// receive function must be set by user
 	VX_SKT_CALLBACK				m_pfnOurReceive{ nullptr };		    // our receive function to receive Socket states etc
@@ -110,7 +113,6 @@ public:
 	UINT						m_uiCreatorVxThreadId{ 0 };		    // thread id of thread that created this object
 
 	InetAddress					m_LclIp;
-    uint32_t                    m_LockRequestCnt{ 0 };
 
 protected:
     //! delete sockets that have expired

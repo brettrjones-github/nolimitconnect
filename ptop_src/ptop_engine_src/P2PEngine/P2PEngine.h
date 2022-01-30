@@ -155,10 +155,6 @@ public:
     bool                        getHasAnyAnnonymousHostService( void );
     bool                        getHasFixedIpAddress( void );
 
-    /// if skt exists in connection list then lock access to connection list
-    bool						lockSkt( VxSktBase* sktBase );
-    void						unlockSkt( VxSktBase* sktBase );
-
     void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
     void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
@@ -169,7 +165,7 @@ public:
     int64_t                     getPktAnnLastModTime( void )                    { return m_PktAnnLastModTime; }
 
     VxGUID&						getMyOnlineId( void )							{ return m_MyOnlineId; }
-    std::string					getMyOnlineUrl( void )							{ m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyOnlineUrl() ); m_AnnouncePktMutex.unlock(); return myUrl; }
+    std::string					getMyOnlineUrl( EHostType hostType = eHostTypeUnknown )	{ m_AnnouncePktMutex.lock(); std::string myUrl( m_PktAnn.getMyOnlineUrl( hostType ) ); m_AnnouncePktMutex.unlock(); return myUrl; }
     VxNetIdent*				    getMyNetIdent( void )						    { return &m_PktAnn; }
     bool						addMyIdentToBlob( PktBlobEntry& blobEntry );
 
@@ -267,6 +263,7 @@ public:
 
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
+    virtual void				fromGuiLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
     virtual void				fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl ) override;
     virtual void				fromGuiJoinLastJoinedHost( EHostType hostType, VxGUID& sessionId ) override;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) override;
@@ -654,6 +651,9 @@ public:
 
     virtual void				onPktHostJoinReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktHostJoinReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostLeaveReq           ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktHostLeaveReply         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     virtual void				onPktHostUnJoinReq          ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostUnJoinReply        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktHostSearchReq          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
@@ -738,6 +738,7 @@ protected:
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
+    OnlineListMgr               m_OnlineListMgr;
     DirectConnectListMgr        m_DirectConnectListMgr;
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
@@ -745,7 +746,6 @@ protected:
     HostUrlListMgr              m_HostUrlListMgr;
     HostedListMgr               m_HostedListMgr;
     NearbyListMgr               m_NearbyListMgr;
-    OnlineListMgr               m_OnlineListMgr;
     BigListMgr					m_BigListMgr;
 	PktAnnounce					m_PktAnn;
     int64_t                     m_PktAnnLastModTime{ 0 };

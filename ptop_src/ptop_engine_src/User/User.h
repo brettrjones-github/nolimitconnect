@@ -43,9 +43,10 @@ public:
     VxNetIdent *                getNetIdent( void )                     { return m_NetIdent; }
     VxGUID&                     getMyOnlineId( void )                   { return m_MyOnlineId; }
 
-    bool                        isOnline( void )                        { return 0 != m_SessionList.size(); }
+    bool                        isInSession( void )                     { return 0 != m_SessionList.size(); }
 
     bool                        addSession( BaseSessionInfo& sessionInfo );
+    bool                        removeSession( BaseSessionInfo& sessionInfo );
 
 protected:
     P2PEngine&                  m_Engine;

@@ -26,6 +26,7 @@
 UserOnlineMgr::UserOnlineMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
 : m_Engine( engine )
 {
+    m_Engine.getOnlineListMgr().wantOnlineCallback( this, true );
 }
 
 //============================================================================
@@ -36,6 +37,23 @@ void UserOnlineMgr::fromGuiUserLoggedOn( void )
     {
         m_Initialized = true;
     }
+}
+
+//============================================================================
+void UserOnlineMgr::callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline )
+{
+    lockResources();
+    User* user = findUser( onlineId );
+    if( user && user->getNetIdent() )
+    {
+        if( user->getNetIdent()->isOnline() != isOnline )
+        {
+            user->getNetIdent()->setIsOnline( isOnline );
+            announceUserOnlineState( user, isOnline );
+        }
+    }
+
+    unlockResources();
 }
 
 //============================================================================
@@ -138,6 +156,22 @@ void UserOnlineMgr::announceUserOnlineState( User* user, bool isOnline )
 }
 
 //============================================================================
+void UserOnlineMgr::announceUserSessionState( User* user, bool isInSession )
+{
+    /*
+    lockClientList();
+    std::vector<UserOnlineCallbackInterface*>::iterator iter;
+    for( iter = m_UserOnlineClients.begin(); iter != m_UserOnlineClients.end(); ++iter )
+    {
+        UserOnlineCallbackInterface* client = *iter;
+        client->callbackUserSessionState( user, isInSession );
+    }
+
+    unlockClientList();
+    */
+}
+
+//============================================================================
 void UserOnlineMgr::onUserOnline( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     updateUserSession( sktBase, netIdent, sessionInfo );
@@ -156,6 +190,12 @@ void UserOnlineMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIde
 }
 
 //============================================================================
+void UserOnlineMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    updateUserSession( sktBase, netIdent, sessionInfo, true );
+}
+
+//============================================================================
 void UserOnlineMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
 {
     updateUserSession( sktBase, netIdent, sessionInfo );
@@ -164,36 +204,42 @@ void UserOnlineMgr::onUserJoinedHost( VxSktBase * sktBase, VxNetIdent * netIdent
 //============================================================================
 void UserOnlineMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
-    updateUserSession( groupieId, sktBase, netIdent, sessionInfo );
+    updateUserSession( groupieId, sktBase, netIdent, sessionInfo, false );
+}
+
+//============================================================================
+void UserOnlineMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    updateUserSession( groupieId, sktBase, netIdent, sessionInfo, true );
 }
 
 //============================================================================
 void UserOnlineMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
-    updateUserSession( groupieId, sktBase, netIdent, sessionInfo );
+    updateUserSession( groupieId, sktBase, netIdent, sessionInfo, true );
 }
 
 //============================================================================
-void UserOnlineMgr::updateUserSession( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+void UserOnlineMgr::updateUserSession( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo, bool leftHost )
 {
     if( IsHostPluginType( sessionInfo.getPluginType() ) )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), sessionInfo.getOnlineId(), PluginTypeToHostType( sessionInfo.getPluginType() ) );
-        updateUserSession( groupieId, sktBase, netIdent, sessionInfo );
+        updateUserSession( groupieId, sktBase, netIdent, sessionInfo, leftHost );
     }
     else
     {
         GroupieId groupieId(sessionInfo.getOnlineId(), m_Engine.getMyOnlineId(), PluginTypeToHostType( sessionInfo.getPluginType() ) );
-        updateUserSession( groupieId, sktBase, netIdent, sessionInfo );
+        updateUserSession( groupieId, sktBase, netIdent, sessionInfo, leftHost );
     }
 }
 
 //============================================================================
-void UserOnlineMgr::updateUserSession( GroupieId& groupieId, VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo )
+void UserOnlineMgr::updateUserSession( GroupieId& groupieId, VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo, bool leftHost )
 {
     bool wasAdded = false;
-    bool wasOnline = false;
-    bool isOnline = false;
+    bool wasInSession = false;
+    bool isinSession = false;
     lockResources();
     User* user = findUser( groupieId.getGroupieOnlineId() );
     if( !user )
@@ -203,14 +249,25 @@ void UserOnlineMgr::updateUserSession( GroupieId& groupieId, VxSktBase * sktBase
     }
     else
     {
-        wasOnline = user->isOnline();
-        user->addSession( sessionInfo );
-        isOnline = user->isOnline();
+        wasInSession = user->isInSession();
+        if( leftHost )
+        {
+            user->removeSession( sessionInfo );
+        }
+        else
+        {
+            user->addSession( sessionInfo );
+        }
+        
+        isinSession = user->isInSession();
     }
 
     unlockResources();
 
-    m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
+    if( !leftHost )
+    {
+        m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
+    }
 
     if( wasAdded )
     {
@@ -221,9 +278,9 @@ void UserOnlineMgr::updateUserSession( GroupieId& groupieId, VxSktBase * sktBase
         announceUserOnlineUpdated( user, sessionInfo );
     }
 
-    if( wasOnline != isOnline )
+    if( wasInSession != isinSession )
     {
-        announceUserOnlineState( user, isOnline );
+        announceUserSessionState( user, isinSession );
     }
 }
 

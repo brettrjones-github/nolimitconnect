@@ -39,8 +39,8 @@ public:
     bool                        addToBlob( PktBlobEntry& blob );
     bool                        extractFromBlob( PktBlobEntry& blob );
 
-    void						setGroupieOnlineId( VxGUID& onlineId )             { m_GroupieOnlineId = onlineId; }
-    VxGUID&					    getGroupieOnlineId( void )                         { return m_GroupieOnlineId; }
+    void						setGroupieOnlineId( VxGUID& onlineId )              { m_GroupieOnlineId = onlineId; }
+    VxGUID&					    getGroupieOnlineId( void )                          { return m_GroupieOnlineId; }
 
     void				        setHostedId( HostedId& hostedId )                   { m_HostedId = hostedId; }
     HostedId&                   getHostedId( void )                                 { return m_HostedId; }

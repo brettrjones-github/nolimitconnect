@@ -34,6 +34,7 @@ public:
     //=== hosting ===//
     virtual void				fromGuiAnnounceHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl ) override;
     virtual void				fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl ) override;
+    virtual void				fromGuiLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl ) override;
     virtual void				fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl ) override;
     virtual void				fromGuiSearchHost( EHostType hostType, SearchParams& searchParams, bool enable ) override;
 
@@ -57,6 +58,8 @@ protected:
 
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting ) {};
     virtual void				sendHostAnnounce( void ) {};
+    virtual void				sendLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );
+
 
     virtual void				onContactWentOnline         ( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};
     virtual void				onContactWentOffline        ( VxNetIdent *	netIdent, VxSktBase * sktBase ) override {};
