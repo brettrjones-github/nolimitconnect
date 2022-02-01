@@ -32,7 +32,7 @@ public:
     MyIcons&					getMyIcons( void );
 
     void                        setHostSession( GuiGroupieListSession* hostSession );
-    GuiGroupieListSession*       getHostSession( void );
+    GuiGroupieListSession*      getHostSession( void );
 
     VxPushButton*               getIdentAvatarButton( void ) override         { return ui.m_IconButton; }
     VxPushButton*               getIdentFriendshipButton( void ) override { return ui.m_FriendshipButton; }
@@ -49,6 +49,11 @@ public:
     void						updateWidgetFromInfo( void );
 
     QSize                       calculateSizeHint( void );
+
+    void                        updateUser( GuiUser* guiUser );
+
+    void                        setIsThumbUpdated( bool updated )   { m_IsThumbUpdated = updated; }
+    bool                        getIsThumbUpdated( void )           { return m_IsThumbUpdated; }
 
 signals:
     void						signalGuiGroupieListItemClicked( QListWidgetItem * poItemWidget );
@@ -68,8 +73,10 @@ protected:
     virtual void                showConnectButton( bool isAccepted );
 
 	//=== vars ===//
-    Ui::GuiGroupieListItemUi	    ui;
+    Ui::GuiGroupieListItemUi	ui;
     AppCommon&					m_MyApp;
+    bool                        m_IsThumbUpdated{ false };
+
 };
 
 

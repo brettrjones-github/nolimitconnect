@@ -126,11 +126,13 @@ void AppletGroupJoin::queryHostedList( void )
 //============================================================================
 void AppletGroupJoin::callbackOnUserAdded( GuiUser* guiUser )
 {
+	updateUser( guiUser );
 }
 
 //============================================================================
 void AppletGroupJoin::callbackOnUserUpdated( GuiUser* guiUser )
 {
+	updateUser( guiUser );
 }
 
 //============================================================================
@@ -316,4 +318,11 @@ void AppletGroupJoin::callbackGuiUserJoinRemoved( GroupieId& groupieId )
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinRemoved" );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinLeaveHost( groupieId );
+}
+
+//============================================================================
+void AppletGroupJoin::updateUser( GuiUser* guiUser )
+{
+	ui.m_GuiHostedListWidget->updateUser( guiUser );
+	ui.m_GuiGroupieListWidget->updateUser( guiUser );
 }

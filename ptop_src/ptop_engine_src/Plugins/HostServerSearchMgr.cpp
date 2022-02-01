@@ -118,7 +118,7 @@ ECommErr HostServerSearchMgr::searchRequest( SearchParams& searchParams, PktHost
         std::map<PluginId, HostSearchEntry>& searchMap = getHostAnnList( hostType );
         for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
         {
-            if( timeNow - iter->second.m_LastRxTime > MIN_HOST_RX_UPDATE_TIME_MS )
+            if( iter->second.announceTimeExpired( timeNow ) )
             {
                 toRemoveList.addPluginId( iter->first );
             }
@@ -252,12 +252,17 @@ void HostServerSearchMgr::fromGuiSendAnnouncedList( EHostType hostType, VxGUID& 
     uint64_t timeNow = GetGmtTimeMs();
     m_SearchMutex.lock();
     std::map<PluginId, HostSearchEntry>& searchMap = getHostAnnList( hostType );
-    for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end(); ++iter )
+    for( std::map<PluginId, HostSearchEntry>::iterator iter = searchMap.begin(); iter != searchMap.end();  )
     {
         // if currently active
-        if( timeNow - iter->second.m_LastRxTime <= MIN_HOST_RX_UPDATE_TIME_MS )
+        if( !iter->second.announceTimeExpired( timeNow ) )
         {
             m_Engine.getToGui().toGuiHostSearchResult( hostType, sessionId, iter->second.m_HostedInfo );
+            iter++;
+        }
+        else
+        {
+            iter = searchMap.erase( iter );
         }
     }
 
@@ -337,6 +342,7 @@ bool HostServerSearchMgr::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr
     else
     {
         std::map<PluginId, HostSearchEntry>& hostAnnList = getHostAnnList( hostType );
+        uint64_t timeNow = GetGmtTimeMs();
 
         m_SearchMutex.lock();
         if( searchHostId.isVxGUIDValid() )
@@ -346,7 +352,7 @@ bool HostServerSearchMgr::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr
             auto iter = hostAnnList.find( pluginId );
             if( iter != hostAnnList.end() )
             {
-                if( fillSearchPktBlob( pktReply.getBlobEntry(), iter->second.m_HostedInfo ) )
+                if( !iter->second.announceTimeExpired( timeNow ) && fillSearchPktBlob( pktReply.getBlobEntry(), iter->second.m_HostedInfo ) )
                 {
                     pktReply.incrementInviteCount();
                 }
@@ -355,20 +361,33 @@ bool HostServerSearchMgr::onPktHostInviteSearchReq( VxSktBase* sktBase, VxPktHdr
                     pktReply.setCommError( eCommErrSearchNoMatch );
                 }
             }
+            else
+            {
+                pktReply.setCommError( eCommErrSearchNoMatch );
+            }
         }
         else
         {
-            for( auto iter = hostAnnList.begin(); iter != hostAnnList.end(); ++iter )
+            for( auto iter = hostAnnList.begin(); iter != hostAnnList.end(); )
             {
-                if( fillSearchPktBlob( pktReply.getBlobEntry(), iter->second.m_HostedInfo ) )
+                if( !iter->second.announceTimeExpired( timeNow ) )
                 {
-                    pktReply.incrementInviteCount();
+                    if( fillSearchPktBlob( pktReply.getBlobEntry(), iter->second.m_HostedInfo ) )
+                    {
+                        pktReply.incrementInviteCount();
+                    }
+                    else
+                    {
+                        pktReply.setMoreInvitesExist( true );
+                        pktReply.setNextSearchOnlineId( iter->second.m_HostedInfo.getOnlineId() );
+                        break;
+                    }
+
+                    ++iter;
                 }
                 else
                 {
-                    pktReply.setMoreInvitesExist( true );
-                    pktReply.setNextSearchOnlineId( iter->second.m_HostedInfo.getOnlineId() );
-                    break;
+                    iter = hostAnnList.erase( iter );
                 }
             }
         }
@@ -426,6 +445,7 @@ bool HostServerSearchMgr::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* 
         PluginId pluginId( nextHostId, pluginType );
         std::map<PluginId, HostSearchEntry>& hostAnnList = getHostAnnList( hostType );
         bool foundNextId{ false };
+        uint64_t timeNow = GetGmtTimeMs();
 
         m_SearchMutex.lock();
         auto iter = hostAnnList.find( pluginId );
@@ -433,19 +453,25 @@ bool HostServerSearchMgr::onPktHostInviteMoreReq( VxSktBase* sktBase, VxPktHdr* 
         {
             while( iter != hostAnnList.end() )
             {
-
-                if( fillSearchPktBlob( pktReply.getBlobEntry(), iter->second.m_HostedInfo ) )
+                if( !iter->second.announceTimeExpired( timeNow ) )
                 {
-                    pktReply.incrementInviteCount();
+                    if( fillSearchPktBlob( pktReply.getBlobEntry(), iter->second.m_HostedInfo ) )
+                    {
+                        pktReply.incrementInviteCount();
+                    }
+                    else
+                    {
+                        pktReply.setMoreInvitesExist( true );
+                        pktReply.setNextSearchOnlineId( iter->second.m_HostedInfo.getOnlineId() );
+                        break;
+                    }
+
+                    ++iter;
                 }
                 else
                 {
-                    pktReply.setMoreInvitesExist( true );
-                    pktReply.setNextSearchOnlineId( iter->second.m_HostedInfo.getOnlineId() );
-                    break;
+                    iter = hostAnnList.erase( iter );
                 }
-
-                ++iter;
             }
         }
         else

@@ -49,6 +49,8 @@ public:
 
     VxGUID                      getHostThumbId( void );
 
+    void                        updateUser( GuiUser* guiUser );
+
 protected:
 	//=== vars ===//
     GuiHosted*                  m_GuiHosted{ nullptr };

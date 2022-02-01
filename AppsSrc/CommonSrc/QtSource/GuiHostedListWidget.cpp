@@ -284,18 +284,22 @@ GuiHostedListItem* GuiHostedListWidget::addOrUpdateHostSession( GuiHostedListSes
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            if( guiUser )
+            if( guiUser && hostItem )
             {
-                VxGUID thumbId = guiUser->getHostThumbId( hostSession->getHostType(), true );
-                GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
-                if( thumb )
+                if( !hostItem->getIsThumbUpdated() )
                 {
-                    QImage hostIconImage;
-                    thumb->createImage( hostIconImage );
-                    VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
-                    if( hostImageButton && !hostIconImage.isNull() )
+                    VxGUID thumbId = guiUser->getHostThumbId( hostSession->getHostType(), true );
+                    GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
+                    if( thumb )
                     {
-                        hostImageButton->setIconOverrideImage( hostIconImage );
+                        QImage hostIconImage;
+                        thumb->createImage( hostIconImage );
+                        VxPushButton* hostImageButton = hostItem->getIdentAvatarButton();
+                        if( hostImageButton && !hostIconImage.isNull() )
+                        {
+                            hostImageButton->setIconOverrideImage( hostIconImage );
+                            hostItem->setIsThumbUpdated( true );
+                        }
                     }
                 }
             }         
@@ -595,6 +599,26 @@ void GuiHostedListWidget::removeFromList( HostedId& hostedId )
             {
                 removeItemWidget( hostItem );
                 break;
+            }
+        }
+    }
+}
+
+//============================================================================
+void GuiHostedListWidget::updateUser( GuiUser* guiUser )
+{
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        GuiHostedListItem* hostItem = ( GuiHostedListItem* )item( iRow );
+        if( hostItem )
+        {
+            GuiHostedListSession* hostSession = hostItem->getHostSession();
+            if( hostSession && hostSession->getOnlineId() == guiUser->getMyOnlineId() )
+            {
+                hostSession->updateUser( guiUser );
+                hostItem->updateUser( guiUser );
+                addOrUpdateHostSession( hostSession );
             }
         }
     }

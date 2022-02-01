@@ -192,3 +192,9 @@ void GuiGroupieListItem::slotConnectButtonPressed( void )
 {
     emit signalConnectButtonClicked( this );
 }
+
+//============================================================================
+void GuiGroupieListItem::updateUser( GuiUser* guiUser )
+{
+    updateWidgetFromInfo();
+}

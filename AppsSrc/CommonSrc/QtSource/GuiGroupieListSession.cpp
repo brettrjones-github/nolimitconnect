@@ -95,3 +95,12 @@ VxGUID GuiGroupieListSession::getHostThumbId( void )
     VxGUID emptyThumbId;
     return emptyThumbId;
 }
+
+//============================================================================
+void GuiGroupieListSession::updateUser( GuiUser* guiUser )
+{
+    if( m_GuiGroupie && m_GuiGroupie->getUser() != guiUser )
+    {
+        return m_GuiGroupie->setUser( guiUser );
+    }
+}

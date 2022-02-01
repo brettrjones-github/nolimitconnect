@@ -49,6 +49,8 @@ public:
 
     std::string                 getOnlineName( void )                       { return getGuiUser() ? getGuiUser()->getOnlineName() : ""; }
 
+    void                        updateUser( GuiUser* guiUser );
+
 protected:
 	//=== vars ===//
     GroupieId                   m_GroupieId;

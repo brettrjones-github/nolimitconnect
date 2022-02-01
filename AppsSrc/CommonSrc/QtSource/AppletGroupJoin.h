@@ -76,6 +76,7 @@ protected:
     virtual void				queryHostedList( void ) override;
 
     void                        updateHostedIdent( GuiHosted* guiHosted );
+    void                        updateUser( GuiUser* guiUser );
 
 protected:
     Ui::AppletGroupJoinUi       ui;

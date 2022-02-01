@@ -106,3 +106,12 @@ VxGUID GuiHostedListSession::getHostThumbId( void )
     VxGUID emptyThumbId;
     return emptyThumbId;
 }
+
+//============================================================================
+void GuiHostedListSession::updateUser( GuiUser* guiUser )
+{
+    if( m_GuiHosted && m_GuiHosted->getUser() != guiUser )
+    {
+        return m_GuiHosted->setUser( guiUser );
+    }
+}

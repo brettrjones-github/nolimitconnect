@@ -71,6 +71,8 @@ public:
     void                        setUserJoinViewType( EUserJoinViewType viewType );
     EUserJoinViewType           getUserJoinViewType( void )                     { return m_UserJoinViewType; }
 
+    void                        updateUser( GuiUser* guiUser );
+
 signals:
     void                        signalAvatarButtonClicked( GuiUserJoinSession* hostSession, GuiUserJoinListItem* hostItem );
     void                        signalMenuButtonClicked( GuiUserJoinSession* hostSession, GuiUserJoinListItem* hostItem );

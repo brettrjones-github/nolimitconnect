@@ -35,6 +35,7 @@ public:
     HostSearchEntry&			operator=( const HostSearchEntry& rhs );
 
     void                        updateLastRxTime( void );
+    bool                        announceTimeExpired( int64_t timeNow );
     bool                        updateHostedInfo( PktHostInviteAnnounceReq* hostAnn );
 
     bool                        searchHostedMatch( SearchParams& searchParams, std::string& searchStr );

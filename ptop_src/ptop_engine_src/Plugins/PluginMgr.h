@@ -135,7 +135,7 @@ public:
 	virtual void				fromGuiSendAsset( AssetBaseInfo& assetInfo );
 	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
-	virtual EPluginAccess	canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );
+	virtual EPluginAccess		canAcceptNewSession( EPluginType ePluginType, VxNetIdent * netIdent );
 
 	//! return true if access ok
 	bool						canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent );
@@ -149,6 +149,8 @@ public:
 	PluginBase*				    findPlugin( EPluginType ePluginType );
     PluginBase*				    findHostClientPlugin( EHostType hostType );
     PluginBase*				    findHostServicePlugin( EHostType hostType );
+
+	void						leavePreviousHost( GroupieId& groupieId );
 
 protected:
 	bool						isValidPluginNum( uint8_t u8PluginNum );

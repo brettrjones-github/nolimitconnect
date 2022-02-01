@@ -95,6 +95,8 @@ public:
 
     virtual void                setSktLoopback( VxSktBase * sktLoopback )       { m_SktLoopback = sktLoopback; }
 
+	virtual bool				closeConnection( VxGUID& connectId, ESktCloseReason closeReason );
+
 	//=== vars ===//
 	RCODE						m_rcLastError{ 0 };
     ESktMgrType					m_eSktMgrType{ eSktMgrTypeNone };   // type of sockets we manage

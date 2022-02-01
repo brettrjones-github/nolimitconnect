@@ -15,6 +15,7 @@
 #include "OnlineSktList.h"
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <NetLib/VxPeerMgr.h>
 
 //============================================================================
 OnlineSktList::OnlineSktList( P2PEngine& engine )
@@ -195,4 +196,34 @@ void OnlineSktList::userJoinedHost( VxGUID& sktConnectId, GroupieId& groupieId )
 void OnlineSktList::userLeftHost( VxGUID& sktConnectId, GroupieId& groupieId )
 {
     removeConnection( sktConnectId, groupieId );
+}
+
+//============================================================================
+void OnlineSktList::disconnectIfIsOnlyUser( GroupieId& groupieId )
+{
+    bool wasLastUser = false;
+    VxGUID disconnectConnectId;
+    lockList();
+    for( auto mapIter = m_OnlineSktList.begin(); mapIter != m_OnlineSktList.end(); ++mapIter )
+    {
+        auto iter = mapIter->second.find( groupieId );
+        if( iter != mapIter->second.end() )
+        {
+            mapIter->second.erase( iter );
+            if( mapIter->second.empty() )
+            {
+                wasLastUser = true;
+                disconnectConnectId = mapIter->first;
+            }
+
+            break;
+        }
+    }
+
+    unlockList();
+
+    if( wasLastUser && disconnectConnectId.isVxGUIDValid() )
+    {
+        m_Engine.getPeerMgr().closeConnection( disconnectConnectId, eSktCloseNotNeeded );
+    }
 }

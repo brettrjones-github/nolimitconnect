@@ -45,6 +45,11 @@ public:
 
     QSize                       calculateSizeHint( void );
 
+    void                        updateUser( GuiUser* guiUser );
+
+    void                        setIsThumbUpdated( bool updated )   { m_IsThumbUpdated = updated; }
+    bool                        getIsThumbUpdated( void )           { return m_IsThumbUpdated; }
+
 signals:
 	void						signalAvatarButtonClicked( GuiUserJoinListItem* listEntryWidget );
 	void						signalMenuButtonClicked( GuiUserJoinListItem* listEntryWidget );
@@ -62,6 +67,7 @@ protected:
     GuiOfferClientMgr&			m_OfferClientMgr;
     GuiUserMgr&					m_UserMgr;
     GuiUserJoinMgr&				m_UserJoinMgr;
+    bool                        m_IsThumbUpdated{ false };
 };
 
 

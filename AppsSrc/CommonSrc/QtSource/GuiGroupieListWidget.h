@@ -57,6 +57,8 @@ public:
     virtual void				callbackGuiUserJoinLeaveHost( GroupieId& groupieId );
     virtual void				callbackGuiUserJoinRemoved( GroupieId& groupieId );
 
+    void                        updateUser( GuiUser* guiUser );
+
 signals:
     void                        signalIconButtonClicked( GuiGroupieListSession* hostSession, GuiGroupieListItem* hostItem );
     void                        signalMenuButtonClicked( GuiGroupieListSession* hostSession, GuiGroupieListItem* hostItem );

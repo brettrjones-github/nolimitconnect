@@ -86,3 +86,12 @@ EHostType GuiUserJoinSession::getHostType( void )
 { 
     return m_GroupieId.getHostType(); 
 }
+
+//============================================================================
+void GuiUserJoinSession::updateUser( GuiUser* guiUser )
+{
+    if( m_GuiUserJoin && m_GuiUserJoin->getUser() != guiUser )
+    {
+        return m_GuiUserJoin->setUser( guiUser );
+    }
+}

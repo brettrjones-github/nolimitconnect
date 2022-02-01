@@ -649,14 +649,18 @@ void GuiUserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, GuiU
             pluginType = ePluginTypeHostPeerUser;
         }
 
-        VxPushButton* avatarButton = userItem->getAvatarButton();
-        GuiUser* user = userSession->getUserIdent();
-
-        QImage	avatarImage;
-        bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, pluginType, avatarImage, true );
-        if( havAvatarImage && avatarButton )
+        if( !userItem->getIsThumbUpdated() )
         {
-            avatarButton->setIconOverrideImage( avatarImage );
+            VxPushButton* avatarButton = userItem->getAvatarButton();
+            GuiUser* user = userSession->getUserIdent();
+
+            QImage	avatarImage;
+            bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, pluginType, avatarImage, true );
+            if( havAvatarImage && avatarButton )
+            {
+                avatarButton->setIconOverrideImage( avatarImage );
+                userItem->setIsThumbUpdated( true );
+            }
         }
     }
 }

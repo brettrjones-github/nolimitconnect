@@ -278,7 +278,7 @@ GuiGroupieListItem* GuiGroupieListWidget::addOrUpdateHostSession( GuiGroupieList
             }
 
             setItemWidget( (QListWidgetItem*)hostItem, (QWidget*)hostItem );
-            if( groupieSession->getUserIdent() )
+            if( groupieSession->getUserIdent() && !hostItem->getIsThumbUpdated() )
             {
                 VxGUID thumbId = groupieSession->getUserIdent()->getHostThumbId( groupieSession->getHostType(), true );
                 GuiThumb* thumb = m_MyApp.getThumbMgr().getThumb( thumbId );
@@ -290,6 +290,7 @@ GuiGroupieListItem* GuiGroupieListWidget::addOrUpdateHostSession( GuiGroupieList
                     if( hostImageButton && !hostIconImage.isNull() )
                     {
                         hostImageButton->setIconOverrideImage( hostIconImage );
+                        hostItem->setIsThumbUpdated( true );
                     }
                 }
             }         
@@ -476,4 +477,24 @@ void GuiGroupieListWidget::callbackGuiUserJoinLeaveHost( GroupieId& groupieId )
 void GuiGroupieListWidget::callbackGuiUserJoinRemoved( GroupieId& groupieId )
 {
     LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinRemoved" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::updateUser( GuiUser* guiUser )
+{
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        GuiGroupieListItem* listItem = ( GuiGroupieListItem* )item( iRow );
+        if( listItem )
+        {
+            GuiGroupieListSession* groupieSession = listItem->getHostSession();
+            if( groupieSession && groupieSession->getGroupieId().getGroupieOnlineId() == guiUser->getMyOnlineId() )
+            {
+                groupieSession->updateUser( guiUser );
+                listItem->updateUser( guiUser );
+                addOrUpdateHostSession( groupieSession );
+            }
+        }
+    }
 }

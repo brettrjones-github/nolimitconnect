@@ -102,7 +102,7 @@ void HostedPluginWidget::updateWidgetFromInfo( void )
 
     if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getMyOnlineId() )
     {
-        ui.m_TitlePart2->setText( QObject::tr( "Hosted By Me") );
+        ui.m_TitlePart2->setText( QObject::tr( " Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
 

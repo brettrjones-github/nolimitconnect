@@ -50,6 +50,11 @@ public:
 
     QSize                       calculateSizeHint( void );
 
+    void                        updateUser( GuiUser* guiUser );
+
+    void                        setIsThumbUpdated( bool updated )   { m_IsThumbUpdated = updated; }
+    bool                        getIsThumbUpdated( void )           { return m_IsThumbUpdated; }
+
 signals:
     void						signalGuiHostedListItemClicked( QListWidgetItem * poItemWidget );
 	void						signalIconButtonClicked( GuiHostedListItem* listEntryWidget );
@@ -74,6 +79,7 @@ protected:
 	//=== vars ===//
     Ui::GuiHostedListItemUi	    ui;
     AppCommon&					m_MyApp;
+    bool                        m_IsThumbUpdated{ false };
 };
 
 

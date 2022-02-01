@@ -62,6 +62,8 @@ public:
 
     virtual void                setSktLoopback( VxSktBase * sktLoopback ) override          { m_SktLoopback = sktLoopback; m_ClientMgr.setSktLoopback( sktLoopback ); }
 
+	virtual bool				closeConnection( VxGUID& connectId, ESktCloseReason closeReason ) override;
+
 protected:
 	VxClientMgr					m_ClientMgr;
 };

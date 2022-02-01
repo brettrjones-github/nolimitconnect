@@ -94,8 +94,8 @@ enum EApplet
 
     eMaxSettingsApplets,            // marker.. end of settings applets.. past here is search applets
 
-    eAppletChatRoomJoinSearch,      // search for chat room to join
     eAppletGroupJoinSearch,         // search for group to join
+    eAppletChatRoomJoinSearch,      // search for chat room to join
     eAppletRandomConnectJoinSearch, // search for group to join
     eAppletSearchPersons,           // search for person in group by name
     eAppletSearchMood,              // search for mood message
@@ -109,8 +109,8 @@ enum EApplet
 
     eMaxSearchApplets,              // marker.. end of search applets.. past here is hosting applets
 
-    eAppletServiceChatRoom,	        // hosts a chat room. provide chat room services for group users
     eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
+    eAppletServiceChatRoom,	        // hosts a chat room. provide chat room services for group users
     eAppletServiceHostNetwork,      // network host service for a nolimitconnect network.. requires fixed ip address, group list hosts announce to network host
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
     eAppletServiceRelay,            // network relay service for users without a open port
@@ -169,8 +169,8 @@ enum EApplet
     eAppletSettingsShareFiles,
     eAppletSettingsFileXfer,
 
-    eAppletSettingsHostChatRoom,
     eAppletSettingsHostGroup,
+    eAppletSettingsHostChatRoom,
     eAppletSettingsHostRandomConnect,
     eAppletSettingsHostNetwork,
 

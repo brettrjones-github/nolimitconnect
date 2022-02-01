@@ -500,15 +500,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiThumbMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListEntryWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserMgr.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\HistoryEntryWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -907,6 +898,15 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletNearbyListClient.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListEntryWidget.h">
+      <Filter>Source Files\GuiUser</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserListWidget.h">
+      <Filter>Source Files\GuiUser</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserMgr.h">
+      <Filter>Source Files\GuiUser</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2049,12 +2049,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiThumbList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\HelpBrowser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2187,9 +2181,6 @@
     <ClInclude Include="..\..\..\..\GuiInterface\OsWin32\IWin32.h">
       <Filter>Source Files\GuiInterface\OsWin32</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AccountMgr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2217,9 +2208,6 @@
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostedListCallback.h">
       <Filter>Source Files\GuiHosted</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserJoin.h">
       <Filter>Source Files\GuiUserJoin</Filter>
     </ClInclude>
@@ -2243,6 +2231,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiHostJoinSession.h">
       <Filter>Source Files\GuiHostJoin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUser.h">
+      <Filter>Source Files\GuiUser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserBase.h">
+      <Filter>Source Files\GuiUser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserSessionBase.h">
+      <Filter>Source Files\GuiUser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h">
+      <Filter>Source Files\GuiUser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

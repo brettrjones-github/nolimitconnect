@@ -197,3 +197,15 @@ void VxPeerMgr::dumpSocketStats( const char *reason, bool fullDump )
     VxSktBaseMgr::dumpSocketStats( std::string( reasonMsg + " server: " ).c_str(), fullDump );
     m_ClientMgr.dumpSocketStats( std::string( reasonMsg + " client: " ).c_str(), fullDump );
 }
+
+//============================================================================
+bool VxPeerMgr::closeConnection( VxGUID& connectId, ESktCloseReason closeReason )
+{
+	bool wasClosed = m_ClientMgr.closeConnection( connectId, closeReason );
+	if( !wasClosed )
+	{
+		wasClosed = VxSktBaseMgr::closeConnection( connectId, closeReason );
+	}
+
+	return wasClosed;
+}

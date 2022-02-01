@@ -139,7 +139,7 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
 
     if( guiUser && m_MyApp.getEngine().getMyOnlineId() == hostSession->getHostedId().getOnlineId() )
     {
-        ui.m_TitlePart2->setText( QObject::tr( "Hosted By Me") );
+        ui.m_TitlePart2->setText( QObject::tr( " Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
 
@@ -250,4 +250,10 @@ void GuiHostedListItem::slotConnectButtonClicked( void )
 void GuiHostedListItem::slotKickButtonClicked( void )
 {
     emit signalKickButtonClicked( this );
+}
+
+//============================================================================
+void GuiHostedListItem::updateUser( GuiUser* guiUser )
+{
+    updateWidgetFromInfo();
 }

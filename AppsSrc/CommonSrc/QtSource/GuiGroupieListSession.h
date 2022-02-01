@@ -48,6 +48,8 @@ public:
 
     VxGUID                      getHostThumbId( void );
 
+    void                        updateUser( GuiUser* guiUser );
+
 protected:
 	//=== vars ===//
     GroupieId                   m_GroupieId;

@@ -40,6 +40,7 @@ public:
     virtual void                addConnection( VxGUID& sktConnectId, GroupieId& groupieId );
     virtual bool                findConnection( GroupieId& groupieId, VxGUID& retSktConnectId );
     virtual void                removeConnection( VxGUID& sktConnectId, GroupieId& groupieId );
+    void                        disconnectIfIsOnlyUser( GroupieId& groupieId );
 
     virtual void                onConnectionLost( VxGUID& sktConnectId );
 

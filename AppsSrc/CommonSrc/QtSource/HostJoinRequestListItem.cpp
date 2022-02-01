@@ -117,7 +117,7 @@ void HostJoinRequestListItem::updateWidgetFromInfo( void )
 
     if( m_MyApp.getEngine().getMyOnlineId() == hostIdent->getUser()->getMyOnlineId() )
     {
-        ui.m_TitlePart2->setText( QObject::tr( "Hosted By Me") );
+        ui.m_TitlePart2->setText( QObject::tr( " Hosted By Me") );
         ui.m_FriendshipButton->setIcon( eMyIconAdministrator );
     }
 

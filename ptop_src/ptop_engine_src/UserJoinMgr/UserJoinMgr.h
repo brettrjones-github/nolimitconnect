@@ -85,5 +85,6 @@ protected:
 
     std::vector<UserJoinCallbackInterface *> m_UserJoinClients;
     VxMutex						m_UserJoinClientMutex;
+    GroupieId                   m_LastJoinedGroupieId;
 };
 

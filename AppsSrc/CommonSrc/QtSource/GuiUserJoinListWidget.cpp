@@ -505,15 +505,39 @@ void GuiUserJoinListWidget::onListItemUpdated( GuiUserJoinSession* userSession, 
             hostType = eHostTypePeerUser;
         }
         
-        VxPushButton* avatarButton = userItem->getIdentAvatarButton();
-        GuiUser* user = userSession->getGuiUser();
-        if( avatarButton && user )
+        if( !userItem->getIsThumbUpdated() )
         {
-            QImage	avatarImage;
-            bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
-            if( havAvatarImage && avatarButton )
+            VxPushButton* avatarButton = userItem->getIdentAvatarButton();
+            GuiUser* user = userSession->getGuiUser();
+            if( avatarButton && user )
             {
-                avatarButton->setIconOverrideImage( avatarImage );
+                QImage	avatarImage;
+                bool havAvatarImage = m_ThumbMgr.requestAvatarImage( user, hostType, avatarImage, true );
+                if( havAvatarImage && avatarButton )
+                {
+                    avatarButton->setIconOverrideImage( avatarImage );
+                    userItem->setIsThumbUpdated( true );
+                }
+            }
+        }
+    }
+}
+
+//============================================================================
+void GuiUserJoinListWidget::updateUser( GuiUser* guiUser )
+{
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        GuiUserJoinListItem* userItem = ( GuiUserJoinListItem* )item( iRow );
+        if( userItem )
+        {
+            GuiUserJoinSession* userSession = userItem->getUserJoinSession();
+            if( userSession && userSession->getGroupieId().getGroupieOnlineId() == guiUser->getMyOnlineId() )
+            {
+                userSession->updateUser( guiUser );
+                userItem->updateUser( guiUser );
+                onListItemUpdated( userSession, userItem );
             }
         }
     }

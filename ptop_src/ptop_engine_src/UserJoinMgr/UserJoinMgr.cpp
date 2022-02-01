@@ -20,6 +20,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseSessionInfo.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
@@ -202,6 +203,11 @@ void UserJoinMgr::clearUserJoinInfoList( void )
 //============================================================================
 void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
+    if( !groupieId.isValid() )
+    {
+        LogMsg( LOG_ERROR, "UserJoinMgr::onUserJoinedHost invalid groupieId" );
+    }
+
     bool wasAdded = false;
     lockResources();
     UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
@@ -234,6 +240,17 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
     saveToDatabase( joinInfo, true );
 
     unlockResources();
+
+    if( groupieId.getHostedOnlineId() != m_Engine.getMyOnlineId() )
+    {
+        if( m_LastJoinedGroupieId.isValid() && m_LastJoinedGroupieId != groupieId )
+        {
+            m_Engine.getPluginMgr().leavePreviousHost( groupieId );
+            m_Engine.getOnlineListMgr().disconnectIfIsOnlyUser( groupieId );
+        }
+
+        m_LastJoinedGroupieId = groupieId;
+    }
 
     m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
 

@@ -166,28 +166,37 @@ void PluginBaseHostClient::sendLeaveHost( EHostType hostType, VxGUID& sessionId,
     if( ptopUrl.isValid() )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), ptopUrl.getOnlineId(), hostType );
-        VxGUID connectId;
-        if( m_Engine.getOnlineListMgr().findConnection( groupieId, connectId ) )
-        {
-            PktHostLeaveReq leaveReq;
-            leaveReq.setHostType( hostType );
-            leaveReq.setPluginType( HostTypeToClientPlugin( hostType ) );
-            if( m_Engine.getMyOnlineId() == ptopUrl.getOnlineId() )
-            {
-                // is ourself
-                txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &leaveReq );
-            }
-            else
-            {
-                m_Engine.getPeerMgr().lockSktList();
-                VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectId );
-                if( sktBase )
-                {
-                    txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
-                }
+        sendLeaveHost( groupieId );
+    }
+}
 
-                m_Engine.getPeerMgr().unlockSktList();
+//============================================================================
+bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
+{
+    bool leaveSent{ false };
+    VxGUID connectId;
+    if( m_Engine.getOnlineListMgr().findConnection( groupieId, connectId ) )
+    {
+        PktHostLeaveReq leaveReq;
+        leaveReq.setHostType( groupieId.getHostType() );
+        leaveReq.setPluginType( HostTypeToClientPlugin( groupieId.getHostType() ) );
+        if( m_Engine.getMyOnlineId() == groupieId.getHostedOnlineId() )
+        {
+            // is ourself
+            leaveSent = txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &leaveReq );
+        }
+        else
+        {
+            m_Engine.getPeerMgr().lockSktList();
+            VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectId );
+            if( sktBase )
+            {
+                leaveSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
             }
+
+            m_Engine.getPeerMgr().unlockSktList();
         }
     }
+
+    return leaveSent;
 }

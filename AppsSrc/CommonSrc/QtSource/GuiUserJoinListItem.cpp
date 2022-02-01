@@ -124,3 +124,9 @@ void GuiUserJoinListItem::updateThumb( GuiThumb* thumb )
         }
     }
 }
+
+//============================================================================
+void GuiUserJoinListItem::updateUser( GuiUser* guiUser )
+{
+    updateWidgetFromInfo();
+}

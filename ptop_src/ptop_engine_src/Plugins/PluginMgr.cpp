@@ -1169,3 +1169,15 @@ void PluginMgr::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, 
 		poPlugin->replaceConnection( netIdent, poOldSkt, poNewSkt );
 	}
 }
+
+//============================================================================
+void PluginMgr::leavePreviousHost( GroupieId& groupieId )
+{
+	PluginBaseHostClient* plugin = dynamic_cast< PluginBaseHostClient* >( findPlugin( HostTypeToClientPlugin( groupieId.getHostType() ) ) );
+	if( plugin )
+	{
+		plugin->sendLeaveHost( groupieId );
+	}
+
+	m_Engine.getOnlineListMgr().disconnectIfIsOnlyUser( groupieId );
+}

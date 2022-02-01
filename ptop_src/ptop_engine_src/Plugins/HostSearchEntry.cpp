@@ -38,6 +38,12 @@ void HostSearchEntry::updateLastRxTime( void )
 }
 
 //============================================================================
+bool HostSearchEntry::announceTimeExpired( int64_t timeNow )
+{
+    return timeNow - m_LastRxTime > MIN_HOST_RX_UPDATE_TIME_MS;
+}
+
+//============================================================================
 bool HostSearchEntry::updateHostedInfo( PktHostInviteAnnounceReq* hostAnn )
 {
     return m_HostedInfo.fillFromHostInvite( hostAnn );

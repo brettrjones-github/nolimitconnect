@@ -51,6 +51,9 @@ public:
 
     QSize                       calculateSizeHint( void );
 
+    void                        setIsThumbUpdated( bool updated )       { m_IsThumbUpdated = updated; }
+    bool                        getIsThumbUpdated( void )               { return m_IsThumbUpdated; }
+
 signals:
     void						signalGuiUserListItemClicked( GuiUserListItem * poItemWidget );
 	void						signalAvatarButtonClicked( GuiUserListItem* listEntryWidget );
@@ -65,6 +68,7 @@ protected:
 
 	//=== vars ===//
     AppCommon&					m_MyApp;
+    bool                        m_IsThumbUpdated{ false };
 };
 
 

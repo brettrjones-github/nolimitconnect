@@ -412,3 +412,31 @@ void VxSktBaseMgr::dumpSocketStats( const char* reason, bool fullDump )
         m_SktMgrMutex.unlock( __FILE__, __LINE__ );
     }
 }
+
+//============================================================================
+bool VxSktBaseMgr::closeConnection( VxGUID& connectId, ESktCloseReason closeReason )
+{
+	bool wasClosed{ false };
+	if( connectId.isVxGUIDValid() )
+	{
+		VxSktBase* sktBase{ nullptr };
+		sktBaseMgrLock();
+		for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
+		{
+			if( ( *iter )->getConnectionId() == connectId )
+			{
+				sktBase = (*iter);
+				break;
+			}
+		}
+
+		sktBaseMgrUnlock();
+		if( sktBase )
+		{
+			sktBase->closeSkt( closeReason, true );
+			wasClosed = true;
+		}
+	}
+
+	return wasClosed;
+}
