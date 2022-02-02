@@ -159,7 +159,7 @@ bool UserJoinedLastDb::setJoinedLast( EHostType hostType, VxGUID& onlineId, int6
     bindList.add( lastJoinMs ); 
     bindList.add( hostUrl.c_str() );
 
-    RCODE rc = sqlExec( "INSERT INTO tblUserJoinedLast (onlineId, hostType, lastJoinMs, userUrl) values(?,?,?,?)",
+    RCODE rc = sqlExec( "INSERT INTO tblUserJoinedLast (onlineId, hostType, lastJoinMs, hostUrl) values(?,?,?,?)",
         bindList );
     vx_assert( 0 == rc );
     if( rc )

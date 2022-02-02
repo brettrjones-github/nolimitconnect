@@ -470,7 +470,7 @@ bool HostedListMgr::requestHostedInfo( EHostType hostType, VxGUID& onlineId, VxN
     if( HostShouldAnnounceToNetwork( hostType ) )
     {
         PktHostInfoReq pktReq;
-        pktReq.setHostType( hostType );
+        pktReq.setPluginNum( ( uint8_t )HostTypeToHostPlugin( hostType ) );
         pktReq.getSessionId().initializeWithNewVxGUID();
 
         result = sktBase->txPacket( netIdent->getMyOnlineId(), &pktReq);
