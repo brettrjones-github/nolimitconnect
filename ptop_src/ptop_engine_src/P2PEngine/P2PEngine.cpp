@@ -578,7 +578,6 @@ void P2PEngine::onFirstPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, Big
 {
 	if( pktAnn && pktAnn->getMyOnlineId() != getMyOnlineId() && sktBase && bigListInfo )
 	{
-		m_FirstPktAnnounce = false;
 		if( getHasFixedIpAddress() )
 		{
 			std::string externAddr = getEngineSettings().getUserSpecifiedExternIpAddr();

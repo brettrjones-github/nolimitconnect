@@ -109,73 +109,58 @@ bool VxGUID::operator != ( const VxGUID &a ) const
 }
 
 //============================================================================
-bool VxGUID::operator < ( const VxGUID &b ) const
+bool VxGUID::operator < ( const VxGUID &rhs ) const
 {
-	if( m_u64HiPart < b.m_u64HiPart )
-		return true;
-	if( m_u64HiPart == b.m_u64HiPart )
-		if( m_u64LoPart < b.m_u64LoPart )
-			return true;
-	return false;
+    return m_u64HiPart < rhs.m_u64HiPart || ( m_u64HiPart == rhs.m_u64HiPart && m_u64LoPart < rhs.m_u64LoPart );
 }
 
 //============================================================================
-bool VxGUID::operator <= ( const VxGUID &b ) const
+bool VxGUID::operator <= ( const VxGUID &rhs ) const
 {
-	if( *this == b )
+	if( *this == rhs )
 	{
 		return true;
 	}
 
-	if( m_u64HiPart < b.m_u64HiPart )
-		return true;
-	if( m_u64HiPart == b.m_u64HiPart )
-		if( m_u64LoPart < b.m_u64LoPart )
-			return true;
+    if( *this < rhs )
+    {
+        return true;
+    }
 
 	return false;
 }
 
 //============================================================================
-bool VxGUID::operator > ( const VxGUID &b ) const
+bool VxGUID::operator > ( const VxGUID & rhs ) const
 {
-	if( m_u64HiPart > b.m_u64HiPart )
-		return true;
-	if( m_u64HiPart == b.m_u64HiPart )
-		if( m_u64LoPart > b.m_u64LoPart )
-			return true;
-	return false;
+    return m_u64HiPart > rhs.m_u64HiPart || ( m_u64HiPart == rhs.m_u64HiPart && m_u64LoPart > rhs.m_u64LoPart );
 }
 
 //============================================================================
-bool VxGUID::operator >= ( const VxGUID &b ) const
+bool VxGUID::operator >= ( const VxGUID & rhs ) const
 {
-	if( *this == b )
+	if( *this == rhs )
 	{
 		return true;
 	}
 
-	if( m_u64HiPart > b.m_u64HiPart )
-		return true;
-	if( m_u64HiPart == b.m_u64HiPart )
-		if( m_u64LoPart > b.m_u64LoPart )
-			return true;
+    if( *this > rhs )
+    {
+        return true;
+    }
 
 	return false;
 }
 
 //============================================================================
 // returns 0 if equal else -1 if less or 1 if greater
-int VxGUID::compareTo( VxGUID& guid )
+int VxGUID::compareTo( VxGUID& rhs )
 {
-	if( m_u64HiPart < guid.m_u64HiPart )
+	if( *this < rhs )
 		return -1;
-	if( m_u64HiPart > guid.m_u64HiPart )
+	if( *this > rhs )
 		return 1;
-	if( m_u64LoPart < guid.m_u64LoPart )
-		return -1;
-	if( m_u64LoPart > guid.m_u64LoPart )
-		return 1;
+
 	return 0;
 }
 

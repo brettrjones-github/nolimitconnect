@@ -104,7 +104,16 @@ void OnlineSktList::addConnection( VxGUID& sktConnectId, GroupieId& groupieId )
     }
     else
     {
-        mapIter->second.insert( groupieId );
+        if( mapIter->second.empty() )
+        {
+            std::set<GroupieId> groupieSet{ groupieId };
+            mapIter->second = groupieSet;
+        }
+        else
+        {
+            mapIter->second.insert( groupieId );
+
+        }
     }
 
     unlockList();

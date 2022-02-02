@@ -607,6 +607,8 @@ void GuiHostedListWidget::removeFromList( HostedId& hostedId )
 //============================================================================
 void GuiHostedListWidget::updateUser( GuiUser* guiUser )
 {
+    LogMsg( LOG_VERBOSE, "GuiHostedListWidget::updateUser %s", guiUser->getOnlineName().c_str() );
+
     int iCnt = count();
     for( int iRow = 0; iRow < iCnt; iRow++ )
     {

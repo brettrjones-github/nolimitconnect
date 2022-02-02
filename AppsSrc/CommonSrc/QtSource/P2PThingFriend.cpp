@@ -44,7 +44,8 @@ void AppCommon::toGuiIndentListUpdate( EUserViewType listType, VxGUID& onlineId,
         client.m_Callback->toGuiIndentListUpdate( listType, onlineId, timestamp );
     }
 
-    toGuiUserUpdateClientsUnlock();;
+    toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiIndentListUpdate( listType, onlineId, timestamp );
 }
 
 //============================================================================
@@ -64,6 +65,7 @@ void AppCommon::toGuiIndentListRemove( EUserViewType listType, VxGUID& onlineId 
     }
 
     toGuiUserUpdateClientsUnlock();;
+    getUserMgr().toGuiIndentListRemove( listType, onlineId );
 }
 
 //============================================================================
@@ -83,6 +85,7 @@ void AppCommon::toGuiContactAdded( VxNetIdent * netIdent )
     }
 
     toGuiActivityClientsUnlock();
+    getUserMgr().toGuiContactAdded( netIdent );
 }
 
 //============================================================================
@@ -102,6 +105,7 @@ void AppCommon::toGuiContactRemoved( VxGUID& onlineId )
     }
 
     toGuiActivityClientsUnlock();
+    getUserMgr().toGuiContactRemoved( onlineId );
 }
 
 //============================================================================
@@ -180,6 +184,7 @@ void AppCommon::toGuiContactNameChange( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiContactNameChange( netIdent );
 }
 
 //============================================================================
@@ -200,6 +205,7 @@ void AppCommon::toGuiContactDescChange( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiContactDescChange( netIdent );
 }
 
 //============================================================================
@@ -220,6 +226,7 @@ void AppCommon::toGuiContactMyFriendshipChange( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiContactMyFriendshipChange( netIdent );
 }
 
 //============================================================================
@@ -240,6 +247,7 @@ void AppCommon::toGuiContactHisFriendshipChange( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiContactHisFriendshipChange( netIdent );
 }
 
 //============================================================================
@@ -260,6 +268,7 @@ void AppCommon::toGuiPluginPermissionChange( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiPluginPermissionChange( netIdent );
 }
 
 //============================================================================
@@ -280,6 +289,7 @@ void AppCommon::toGuiContactSearchFlagsChange( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiContactSearchFlagsChange( netIdent );
 }
 
 //============================================================================
@@ -296,15 +306,15 @@ void AppCommon::toGuiContactConnectionChange( VxNetIdent * netIdent )
 
 //============================================================================
 //! called when any contact info changes ( including any of the above )
-void AppCommon::toGuiContactAnythingChange( VxNetIdent * netIdent )
+void AppCommon::toGuiContactAnythingChange( VxNetIdent* netIdent )
 {
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
 
-	LogMsg( LOG_INFO, "AppCommon::toGuiContactAnythingChange %s\n", netIdent->getOnlineName());
-	//emit signalContactSearchFlagsChange( netIdent );
+    LogMsg( LOG_INFO, "AppCommon::toGuiContactAnythingChange %s\n", netIdent->getOnlineName() );
+    //emit signalContactSearchFlagsChange( netIdent );
 }
 
 //============================================================================
@@ -344,6 +354,7 @@ void AppCommon::toGuiUpdateMyIdent( VxNetIdent * netIdent )
     }
 
     toGuiUserUpdateClientsUnlock();
+    getUserMgr().toGuiUpdateMyIdent( netIdent );
 }
 
 //============================================================================

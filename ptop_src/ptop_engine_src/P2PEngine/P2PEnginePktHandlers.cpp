@@ -77,6 +77,10 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		m_EngineSettings.getNetworkKey( networkName );
 		GenerateTxConnectionKey( sktBase, &pkt->m_DirectConnectId, networkName.c_str() );
 	}
+	else if( !sktBase->getIsPeerPktAnnSet() )
+	{
+		isFirstAnnounce = true;
+	}
 
 	pkt->reversePermissions();
 
@@ -117,6 +121,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		{
 			LogModule( eLogConnect, LOG_VERBOSE, "P2PEngine::sendMyPktAnnounce failed to %s at %s reply requested", pkt->getOnlineName(), sktBase->getRemoteIp().c_str() );
 			sktBase->closeSkt( eSktClosePktAnnSendFail );
+			return;
 		}
 	}
 
@@ -164,6 +169,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
             else
             {
                 poNewSkt->closeSkt( eSktClosePktAnnSendFail );
+				return;
             }
 		}
 	}
@@ -175,10 +181,11 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		{
 			getConnectList().onConnectionLost( sktBase );
             sktBase->closeSkt(eSktClosePktPingReqSendFail);
+			return;
 		}
 	}
 
-    if( m_FirstPktAnnounce )
+    if( isFirstAnnounce )
     {
 		updateOnFirstConnect( sktBase, bigListInfo, false );
         onFirstPktAnnounce( pkt, sktBase, bigListInfo );

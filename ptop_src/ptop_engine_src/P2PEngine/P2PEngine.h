@@ -795,7 +795,6 @@ protected:
     bool						m_AppStartupCalled{ false };
 	bool						m_AppIsPaused{ false };
 	bool						m_IsUserSpecificDirSet{ false };
-    bool                        m_FirstPktAnnounce{ true };
     bool                        m_EngineInitialized{ false };
     bool                        m_IsEngineCreated{ false };
     bool                        m_IsEngineReady{ false };

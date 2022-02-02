@@ -66,6 +66,11 @@ ConnectedInfo* ConnectedListAll::getConnectedInfo( const VxGUID& onlineId )
     if( iter != m_ConnectList.end() )
     {
         connectedInfo = iter->second;
+        if( !connectedInfo->getSktBase() || !connectedInfo->getSktBase()->isConnected() )
+        {
+            connectedInfo = nullptr;
+            removeConnectedInfo( onlineId );
+        }
     }
 
     return connectedInfo;
@@ -94,9 +99,27 @@ void ConnectedListAll::onSktDisconnected( VxSktBase* sktBase )
     if( connectInfo )
     {
         connectInfo->onSktDisconnected( sktBase );
-        if( !connectInfo->getSktBase() )
+        removeConnectedInfo( sktBase->getPeerOnlineId() );
+    }
+    else
+    {
+        // if never recieved a PktAnnounce the online id is invalid
+        // remove by connectId which is always valid
+        for(auto iter = m_ConnectList.begin(); iter != m_ConnectList.end(); ++iter )
         {
-            removeConnectedInfo( sktBase->getPeerOnlineId() );
+            ConnectedInfo* connectedInfo = iter->second;
+            if( connectedInfo )
+            {
+                VxSktBase* connectSktBase = connectedInfo->getSktBase();
+                if( connectSktBase && ( connectSktBase == sktBase || connectSktBase->getConnectionId() == sktBase->getConnectionId() ) )
+                {
+                    connectInfo->onSktDisconnected( sktBase );
+                    m_ConnectList.erase( iter );
+                    connectedInfo->aboutToDelete();
+                    delete connectedInfo;
+                    break;
+                }
+            }
         }
     }
 }

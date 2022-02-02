@@ -34,7 +34,7 @@ HostedId& HostedId::operator =( const HostedId& rhs )
 {
 	if( this != &rhs )
 	{
-        m_OnlineId              = rhs.m_OnlineId;
+        m_OnlineId            = rhs.m_OnlineId;
         m_HostType            = rhs.m_HostType;
 	}
 
@@ -56,14 +56,7 @@ bool HostedId::operator != ( const HostedId& rhs ) const
 //============================================================================
 bool HostedId::operator < ( const HostedId& rhs ) const
 {
-    if( m_HostType < rhs.m_HostType )
-        return true;
-    if( m_HostType > rhs.m_HostType )
-        return false;
-
-    if( m_OnlineId < rhs.m_OnlineId )
-        return true;
-    return false;
+    return m_OnlineId < rhs.m_OnlineId || ( m_OnlineId == rhs.m_OnlineId && m_HostType < rhs.m_HostType );
 }
 
 //============================================================================
@@ -74,13 +67,10 @@ bool HostedId::operator <= ( const HostedId& rhs ) const
         return true;
     }
 
-    if( m_HostType < rhs.m_HostType )
+    if( *this < rhs )
+    {
         return true;
-    if( m_HostType > rhs.m_HostType )
-        return false;
-
-    if( m_OnlineId < rhs.m_OnlineId )
-        return true;
+    }
 
     return false;
 }
@@ -88,15 +78,7 @@ bool HostedId::operator <= ( const HostedId& rhs ) const
 //============================================================================
 bool HostedId::operator > ( const HostedId& rhs ) const
 {
-    if( m_HostType > rhs.m_HostType )
-        return true;
-    if( m_HostType < rhs.m_HostType )
-        return false;
-
-    if( m_OnlineId > rhs.m_OnlineId )
-        return true;
-
-    return false;
+    return m_OnlineId > rhs.m_OnlineId || ( m_OnlineId == rhs.m_OnlineId && m_HostType > rhs.m_HostType );
 }
 
 //============================================================================
@@ -107,13 +89,10 @@ bool HostedId::operator >= ( const HostedId& rhs ) const
         return true;
     }
 
-    if( m_HostType > rhs.m_HostType )
+    if( *this > rhs )
+    {
         return true;
-    if( m_HostType < rhs.m_HostType )
-        return false;
-
-    if( m_OnlineId > rhs.m_OnlineId )
-        return true;
+    }
 
     return false;
 }

@@ -51,7 +51,7 @@ GroupieId& GroupieId::operator =( const GroupieId& rhs )
 //============================================================================
 bool GroupieId::operator == ( const GroupieId& rhs ) const
 {
-    return ( m_GroupieOnlineId == rhs.m_GroupieOnlineId ) && ( m_HostedId == rhs.m_HostedId );
+    return m_GroupieOnlineId == rhs.m_GroupieOnlineId &&  m_HostedId == rhs.m_HostedId;
 }
 
 //============================================================================
@@ -63,12 +63,7 @@ bool GroupieId::operator != ( const GroupieId& rhs ) const
 //============================================================================
 bool GroupieId::operator < ( const GroupieId& rhs ) const
 {
-    if( m_GroupieOnlineId < rhs.m_GroupieOnlineId )
-        return true;
-    if( m_HostedId < rhs.m_HostedId )
-        return true;
-
-    return false;
+    return m_GroupieOnlineId < rhs.m_GroupieOnlineId || ( m_GroupieOnlineId == rhs.m_GroupieOnlineId && m_HostedId < rhs.m_HostedId );
 }
 
 //============================================================================
@@ -79,14 +74,10 @@ bool GroupieId::operator <= ( const GroupieId& rhs ) const
         return true;
     }
 
-    if( m_GroupieOnlineId < rhs.m_GroupieOnlineId )
+    if( *this < rhs )
+    {
         return true;
-
-    if( m_HostedId < rhs.m_HostedId )
-        return true;
-
-    if( m_GroupieOnlineId == rhs.m_GroupieOnlineId && m_HostedId == rhs.m_HostedId )
-        return true;
+    }
 
     return false;
 }
@@ -94,13 +85,7 @@ bool GroupieId::operator <= ( const GroupieId& rhs ) const
 //============================================================================
 bool GroupieId::operator > ( const GroupieId& rhs ) const
 {
-    if( m_GroupieOnlineId > rhs.m_GroupieOnlineId )
-        return true;
-
-    if( m_HostedId > rhs.m_HostedId )
-        return true;
-
-    return false;
+    return m_GroupieOnlineId > rhs.m_GroupieOnlineId || ( m_GroupieOnlineId == rhs.m_GroupieOnlineId && m_HostedId > rhs.m_HostedId );
 }
 
 //============================================================================
@@ -111,14 +96,10 @@ bool GroupieId::operator >= ( const GroupieId& rhs ) const
         return true;
     }
 
-    if( m_GroupieOnlineId > rhs.m_GroupieOnlineId )
+    if( *this > rhs )
+    {
         return true;
-
-    if( m_HostedId > rhs.m_HostedId )
-        return true;
-
-    if( m_GroupieOnlineId == rhs.m_GroupieOnlineId && m_HostedId == rhs.m_HostedId )
-        return true;
+    }
 
     return false;
 }
