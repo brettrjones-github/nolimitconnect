@@ -134,7 +134,7 @@ void HostedListMgr::removeClosedPortIdent( VxGUID& onlineId )
     {
         if( iter->getOnlineId() == onlineId )
         {
-            m_HostedInfoList.erase( iter );
+            iter = m_HostedInfoList.erase( iter );
         }
         else
         {
@@ -187,7 +187,7 @@ void HostedListMgr::addHostedListMgrClient( HostedListCallbackInterface* client,
     {
         if( *iter == client )
         {
-            m_HostedInfoListClients.erase( iter );
+            iter = m_HostedInfoListClients.erase( iter );
             break;
         }
     }
