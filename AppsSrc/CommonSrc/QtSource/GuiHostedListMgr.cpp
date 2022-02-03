@@ -16,10 +16,12 @@
 #include "GuiHostedListMgr.h"
 #include "GuiHostedListCallback.h"
 #include "AppCommon.h"
+#include "AppSettings.h"
 
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedInfo.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h>
 #include <PktLib/VxCommon.h>
+#include <CoreLib/VxPtopUrl.h>
 
 //============================================================================
 GuiHostedListMgr::GuiHostedListMgr( AppCommon& app )
@@ -31,6 +33,8 @@ GuiHostedListMgr::GuiHostedListMgr( AppCommon& app )
 //============================================================================
 void GuiHostedListMgr::onAppCommonCreated( void )
 {
+    m_MyApp.getAppSettings().getFavoriteHostGroupUrl( m_FavoriteHostGroup );
+
     connect( this, SIGNAL( signalInternalHostedUpdated( HostedInfo* ) ), this, SLOT( slotInternalHostedUpdated( HostedInfo* ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostedRemoved( VxGUID, EHostType ) ), this, SLOT( slotInternalHostedRemoved( VxGUID, EHostType ) ), Qt::QueuedConnection );
     connect( this, SIGNAL( signalInternalHostSearchResult( HostedInfo*, VxGUID) ), this, SLOT( slotInternalHostSearchResult( HostedInfo*, VxGUID ) ), Qt::QueuedConnection );
@@ -379,5 +383,50 @@ void GuiHostedListMgr::announceHostedListSearchComplete( EHostType hostType, VxG
     for( auto client : m_HostedListClients )
     {
         client->callbackGuiHostedListSearchComplete( hostType, sessionId );
+    }
+}
+
+//============================================================================
+void GuiHostedListMgr::setJoinOnStartup( std::string& hostUrl, bool enable )
+{
+    if( !enable && isJoinOnStartup( hostUrl ) )
+    {
+        m_FavoriteHostGroup = "";
+        m_MyApp.getAppSettings().setFavoriteHostGroupUrl( m_FavoriteHostGroup );
+    }
+    else if( enable && !hostUrl.empty() )
+    {
+        m_FavoriteHostGroup = hostUrl;
+        m_MyApp.getAppSettings().setFavoriteHostGroupUrl( m_FavoriteHostGroup );
+    }
+}
+
+//============================================================================
+bool GuiHostedListMgr::isJoinOnStartup( std::string& hostUrl )
+{
+    VxPtopUrl nowUrl( m_FavoriteHostGroup );
+    VxPtopUrl checkUrl( hostUrl );
+    return nowUrl.isValid() && checkUrl.isValid() && nowUrl.getOnlineId() == checkUrl.getOnlineId() && nowUrl.getHostType() == checkUrl.getHostType();
+}
+
+//============================================================================
+void GuiHostedListMgr::slotNetAvailableStatus( ENetAvailStatus eNetAvailStatus )
+{
+    if( eNetAvailStatus >= eNetAvailOnlineButNoRelay )
+    {
+        checkAutoJoinGroupHost();
+    }
+}
+
+//============================================================================
+void GuiHostedListMgr::checkAutoJoinGroupHost( void )
+{
+    if( !m_AttemptedJoinHostGroup && !m_FavoriteHostGroup.empty() )
+    {
+        LogMsg( LOG_VERBOSE, "checkAutoJoinGroupHost attempt join %s", m_FavoriteHostGroup.c_str() );
+
+        m_AttemptedJoinHostGroup = true;
+        VxGUID sessionId;
+        m_MyApp.getFromGuiInterface().fromGuiJoinHost( eHostTypeGroup, sessionId, m_FavoriteHostGroup );
     }
 }

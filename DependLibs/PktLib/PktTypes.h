@@ -241,7 +241,7 @@
 #define PKT_TYPE_GROUPIE_MORE_REQ				    ( PKT_TYPE_GROUPIE_SEARCH_REPLY + 1 )		    // 176 ( 0xB0 )
 #define PKT_TYPE_GROUPIE_MORE_REPLY			        ( PKT_TYPE_GROUPIE_MORE_REQ	+ 1 )               // 177 ( 0xB1 )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_GROUPIE_MORE_REPLY + 1) // 179
+#define MAX_PKT_TYPE_CNT							(PKT_TYPE_GROUPIE_MORE_REPLY + 1) // 178
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

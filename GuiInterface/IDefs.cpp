@@ -1189,6 +1189,12 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
     case ePluginTypeClientConnectTest:
         return eHostTypeConnectTest;
 
+    case ePluginTypeRelay:
+    case ePluginTypeNetServices:
+    case ePluginTypeFileServer:
+    case ePluginTypeNetworkSearchList:
+        return eHostTypeUnknown;
+
     case ePluginTypeInvalid:
     default:
         LogMsg( LOG_ERROR, "PluginTypeToHostType unknown plugin type %d", pluginType );

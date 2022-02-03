@@ -400,6 +400,8 @@ enum EMyIcons
 
 	eMyIconArrowUpRight,
 	eMyIconBoot,
+	eMyIconStarEmpty,
+	eMyIconStarFull,
 
 	eMaxMyIcon	// must be last
 };

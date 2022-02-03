@@ -222,6 +222,8 @@ void AppCommon::loadWithoutThread( void )
 
     registerMetaData();
 
+	connect( this, SIGNAL( signalInternalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotInternalNetAvailStatus( ENetAvailStatus ) ), Qt::QueuedConnection );
+
     // set application short name used for directory paths
     VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
     m_AppSettings.setAppShortName( m_AppShortName );
@@ -317,6 +319,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 
 	QObject::connect( this, SIGNAL( signalFinishedLoadingGui() ), this, SLOT( slotFinishedLoadingGui() ) );
 	QObject::connect( this, SIGNAL( signalFinishedLoadingEngine() ), this, SLOT( slotFinishedLoadingEngine() ) );
+	connect( this, SIGNAL( signalInternalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotInternalNetAvailStatus( ENetAvailStatus ) ), Qt::QueuedConnection );
 
 	// set application short name used for directory paths
 	VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
@@ -982,16 +985,23 @@ void AppCommon::toGuiUserMessage( const char * userMsg, ... )
 		emit signalStatusMsg( szBuffer );
 	}
 }
+
 //============================================================================
 /// Send Network available status to GUI for display
-void AppCommon::toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus )
+void AppCommon::toGuiNetAvailableStatus( ENetAvailStatus netAvailStatus )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    emit signalNetAvailStatus( eNetAvailStatus );
+    emit signalInternalNetAvailStatus( netAvailStatus );
+}
+
+//============================================================================
+void AppCommon::slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus )
+{
+	emit signalNetAvailStatus( netAvailStatus );
 }
 
 //============================================================================
@@ -1132,7 +1142,7 @@ void AppCommon::toGuiHostAnnounceStatus( EHostType hostType, VxGUID& sessionId, 
     }
     else
     {
-        StdStringFormat( formatedMsg, "#%s\n", hostStatus );
+        StdStringFormat( formatedMsg, "#%s", hostStatus );
     }
 
     emit signalLog( 0, formatedMsg.c_str() );

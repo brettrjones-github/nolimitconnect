@@ -53,10 +53,14 @@ public:
 
     GuiHosted*                  getHosted( VxGUID& onlineId, EHostType hostType )   { return findHosted( onlineId, hostType ); }
     GuiHosted*                  getHosted( HostedId& hostTypeId )                   { return findHosted( hostTypeId ); }
-    std::map<HostedId, GuiHosted*>& getHostedList( void )                            { return m_HostedList; }
+    std::map<HostedId, GuiHosted*>& getHostedList( void )                           { return m_HostedList; }
     GuiHosted*                  updateHosted( VxNetIdent* hisIdent, EHostType hostType );
 
     void                        wantHostedListCallbacks( GuiHostedListCallback* client, bool enable );
+
+    void                        setJoinOnStartup( std::string& hostUrl, bool enable );
+    std::string&                getJoinOnStartup( void )                            { return m_FavoriteHostGroup; }
+    bool                        isJoinOnStartup( std::string& hostUrl );
 
 signals:
     void				        signalMyIdentUpdated( GuiHosted* guiHosted );
@@ -78,6 +82,8 @@ private slots:
     void                        slotInternalHostSearchResult( HostedInfo* hostedInfo, VxGUID sessionId );
     void                        slotInternalHostSearchComplete( EHostType hostType, VxGUID sessionId );
 
+    void                        slotNetAvailableStatus( ENetAvailStatus eNetAvailStatus );
+
 protected:
     void                        removeHosted( VxGUID& onlineId, EHostType hostType );
     GuiHosted*                  findHosted( VxGUID& onlineId, EHostType hostType );
@@ -95,8 +101,11 @@ protected:
     void                        announceHostedListSearchResult( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId );
     void                        announceHostedListSearchComplete( EHostType hostType, VxGUID& sessionId );
 
-
+    void                        checkAutoJoinGroupHost( void );
+    
     AppCommon&                  m_MyApp;
+    std::string                 m_FavoriteHostGroup{ "" };
+    bool                        m_AttemptedJoinHostGroup{ false };
     // map of online id to GuiHosted
     std::map<HostedId, GuiHosted*>  m_HostedList;
 

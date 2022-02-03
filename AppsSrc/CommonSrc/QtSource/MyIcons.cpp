@@ -809,6 +809,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 	case eMyIconBoot:
 		return ":/AppRes/Resources/boot.svg";
+	case eMyIconStarEmpty:
+		return ":/AppRes/Resources/star-empty.svg";
+	case eMyIconStarFull:
+		return ":/AppRes/Resources/star-full.svg";
 
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark

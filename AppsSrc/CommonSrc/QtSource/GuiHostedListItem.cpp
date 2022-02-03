@@ -20,16 +20,18 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-GuiHostedListItem::GuiHostedListItem(QWidget *parent  )
+GuiHostedListItem::GuiHostedListItem( EHostType hostType, QWidget *parent  )
 : IdentLogicInterface( parent )
 , m_MyApp( GetAppInstance() )
+, m_HostType( hostType )
 {
 	ui.setupUi( this );
     setFocusPolicy( Qt::NoFocus );
     setupIdentLogic();
     connect( ui.m_JoinButton,		SIGNAL( clicked() ),	this, SLOT( slotJoinButtonClicked() ) );
     connect( ui.m_ConnectButton,    SIGNAL( clicked() ),    this, SLOT( slotConnectButtonClicked() ) );
-    connect( ui.m_KickButton,       SIGNAL( clicked() ),    this, SLOT( slotConnectButtonClicked() ) );
+    connect( ui.m_KickButton,       SIGNAL( clicked() ),    this, SLOT( slotKickButtonClicked() ) );
+    connect( ui.m_FavoriteButton,   SIGNAL( clicked() ),    this, SLOT( slotFavoriteButtonClicked() ) );
    
     ui.m_MenuButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeMedium ) );
     ui.m_MenuButton->setIcon( eMyIconMenu );
@@ -39,8 +41,11 @@ GuiHostedListItem::GuiHostedListItem(QWidget *parent  )
     ui.m_ConnectButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     ui.m_KickButton->setIcon( eMyIconBoot );
     ui.m_KickButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
+    ui.m_FavoriteButton->setIcon( eMyIconStarEmpty );
+    ui.m_FavoriteButton->setFixedSize( GuiParams::getButtonSize( eButtonSizeSmall ) );
     showConnectButton( false );
     showKickButton( false );
+    showFavoriteButton( false );
 }
 
 //============================================================================
@@ -172,6 +177,17 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     {
         ui.m_DescPart2->setText( strDesc.c_str() );
     }
+
+    if( m_MyApp.getHostedListMgr().isJoinOnStartup( guiHosted->getHostInviteUrl() ) )
+    {
+        // make sure the saved favorite host url is up to data
+        m_MyApp.getHostedListMgr().setJoinOnStartup( guiHosted->getHostInviteUrl(), true );
+        ui.m_FavoriteButton->setIcon( eMyIconStarFull );
+    }
+    else
+    {
+        ui.m_FavoriteButton->setIcon( eMyIconStarEmpty );
+    }
 }
 
 //============================================================================
@@ -187,6 +203,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( true );
         showKickButton( true );
+        showFavoriteButton( true );
         break;
     case eJoinStateSending:
     case eJoinStateSendFail:
@@ -198,6 +215,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( false );
         showKickButton( false );
+        showFavoriteButton( false );
         break;
 
     case eJoinStateJoinDenied:
@@ -206,6 +224,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconIgnored );
         ui.m_ConnectButton->setEnabled( false );
         showKickButton( false );
+        showFavoriteButton( false );
         break;
     case eJoinStateNone:
     default:
@@ -214,6 +233,7 @@ void GuiHostedListItem::setJoinedState( EJoinState joinState )
         ui.m_JoinButton->setIcon( eMyIconPersonAdd );
         ui.m_ConnectButton->setEnabled( true );
         showKickButton( false );
+        showFavoriteButton( false );
         break;
     }
 }
@@ -235,6 +255,16 @@ void GuiHostedListItem::showKickButton( bool isVisible )
 }
 
 //============================================================================
+void GuiHostedListItem::showFavoriteButton( bool isVisible )
+{
+    if( !isVisible || eHostTypeGroup == m_HostType )
+    {
+        ui.m_FavoriteButton->setVisible( isVisible );
+        ui.m_FavoriteLabel->setVisible( isVisible );
+    }
+}
+
+//============================================================================
 void GuiHostedListItem::slotJoinButtonClicked( void )
 {
     emit signalJoinButtonClicked( this );
@@ -250,6 +280,12 @@ void GuiHostedListItem::slotConnectButtonClicked( void )
 void GuiHostedListItem::slotKickButtonClicked( void )
 {
     emit signalKickButtonClicked( this );
+}
+
+//============================================================================
+void GuiHostedListItem::slotFavoriteButtonClicked( void )
+{
+    emit signalFavoriteButtonClicked( this );
 }
 
 //============================================================================

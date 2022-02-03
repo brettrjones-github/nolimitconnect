@@ -519,3 +519,15 @@ void AppSettings::getLastUsedTestUrl( std::string& testUrl )
 {
     getIniValue( getAppShortName(), "LastTestUrl", testUrl, "" );
 }
+
+//============================================================================
+void AppSettings::setFavoriteHostGroupUrl( std::string& hostUrl )
+{
+	setIniValue( getAppShortName(), "FavGroupHostUrl", hostUrl );
+}
+
+//============================================================================
+void AppSettings::getFavoriteHostGroupUrl( std::string& hostUrl )
+{
+	getIniValue( getAppShortName(), "FavGroupHostUrl", hostUrl, "" );
+}

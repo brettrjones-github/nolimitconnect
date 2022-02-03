@@ -25,7 +25,7 @@ class GuiHostedListItem : public IdentLogicInterface, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
-	GuiHostedListItem( QWidget *parent=0 );
+	GuiHostedListItem( EHostType hostType, QWidget *parent=0 );
 	virtual ~GuiHostedListItem();
 
     AppCommon&					getMyApp( void ) { return m_MyApp; }
@@ -63,11 +63,13 @@ signals:
     void						signalJoinButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalConnectButtonClicked( GuiHostedListItem* listEntryWidget );
     void						signalKickButtonClicked( GuiHostedListItem* listEntryWidget );
+    void						signalFavoriteButtonClicked( GuiHostedListItem* listEntryWidget );
 
 public slots:
     void						slotJoinButtonClicked( void );
     void						slotConnectButtonClicked( void );
     void						slotKickButtonClicked( void );
+    void						slotFavoriteButtonClicked( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
@@ -75,10 +77,12 @@ protected:
 
     void                        showConnectButton( bool isAccepted );
     void                        showKickButton( bool isVisible );
+    void                        showFavoriteButton( bool isVisible );
 
 	//=== vars ===//
     Ui::GuiHostedListItemUi	    ui;
     AppCommon&					m_MyApp;
+    EHostType                   m_HostType{ eHostTypeUnknown };
     bool                        m_IsThumbUpdated{ false };
 };
 

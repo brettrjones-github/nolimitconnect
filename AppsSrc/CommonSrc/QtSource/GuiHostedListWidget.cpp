@@ -39,7 +39,7 @@ GuiHostedListWidget::GuiHostedListWidget( QWidget * parent )
 //============================================================================
 GuiHostedListItem* GuiHostedListWidget::sessionToWidget( GuiHostedListSession* hostSession )
 {
-    GuiHostedListItem* hostItem = new GuiHostedListItem(this);
+    GuiHostedListItem* hostItem = new GuiHostedListItem( getHostType(), this );
     hostItem->setSizeHint( hostItem->calculateSizeHint() );
 
     hostItem->setHostSession( hostSession );
@@ -51,6 +51,8 @@ GuiHostedListItem* GuiHostedListWidget::sessionToWidget( GuiHostedListSession* h
     connect( hostItem, SIGNAL( signalJoinButtonClicked( GuiHostedListItem * ) ),		    this, SLOT( slotJoinButtonClicked( GuiHostedListItem * ) ) );
     connect( hostItem, SIGNAL( signalConnectButtonClicked( GuiHostedListItem* ) ),          this, SLOT( slotConnectButtonClicked( GuiHostedListItem* ) ) );
     connect( hostItem, SIGNAL( signalKickButtonClicked( GuiHostedListItem* ) ),             this, SLOT( slotKickButtonClicked( GuiHostedListItem* ) ) );
+    connect( hostItem, SIGNAL( signalFavoriteButtonClicked( GuiHostedListItem* ) ),         this, SLOT( slotFavoriteButtonClicked( GuiHostedListItem* ) ) );
+
 
     hostItem->updateWidgetFromInfo();
 
@@ -232,6 +234,18 @@ void GuiHostedListWidget::slotKickButtonClicked( GuiHostedListItem* hostItem )
 }
 
 //============================================================================
+void GuiHostedListWidget::slotFavoriteButtonClicked( GuiHostedListItem* hostItem )
+{
+    if( 300 > m_ClickEventTimer.elapsedMs() ) // avoid duplicate clicks
+    {
+        return;
+    }
+
+    m_ClickEventTimer.startTimer();
+    onFavoriteButtonClicked( hostItem );
+}
+
+//============================================================================
 void GuiHostedListWidget::updateHostedList( HostedId& hostedId, GuiHosted* guiHosted, VxGUID& sessionId )
 {
     GuiHostedListSession* hostSession = findSession( hostedId );
@@ -410,6 +424,17 @@ void GuiHostedListWidget::onKickButtonClicked( GuiHostedListItem* hostItem )
     if( hostSession )
     {
         emit signalKickButtonClicked( hostSession, hostItem );
+    }
+}
+
+//============================================================================
+void GuiHostedListWidget::onFavoriteButtonClicked( GuiHostedListItem* hostItem )
+{
+    LogMsg( LOG_VERBOSE, "onFavoriteButtonClicked" );
+    GuiHostedListSession* hostSession = hostItem->getHostSession();
+    if( hostSession )
+    {
+        emit signalFavoriteButtonClicked( hostSession, hostItem );
     }
 }
 

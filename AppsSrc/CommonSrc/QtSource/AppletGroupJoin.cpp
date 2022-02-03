@@ -29,7 +29,9 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	setHostType( eHostTypeGroup );
 	ui.m_GuiHostedListWidget->setIsHostView( false );
+	ui.m_GuiHostedListWidget->setHostType( eHostTypeGroup );
 	ui.m_GuiGroupieListWidget->setIsHostView( false );
+	ui.m_GuiGroupieListWidget->setHostType( eHostTypeGroup );
 
 	// so is actually destroyed
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
@@ -40,6 +42,7 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalJoinButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotJoinButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalConnectButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotConnectButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
 	connect( ui.m_GuiHostedListWidget, SIGNAL( signalKickButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotKickButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
+	connect( ui.m_GuiHostedListWidget, SIGNAL( signalFavoriteButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ), this, SLOT( slotFavoriteButtonClicked( GuiHostedListSession*, GuiHostedListItem* ) ) );
 
 	m_MyApp.activityStateChange( this, true );
 	m_MyApp.getUserMgr().wantGuiUserUpdateCallbacks( this, true );
@@ -48,7 +51,7 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	m_MyApp.getHostJoinMgr().wantHostJoinCallbacks( this, true );
 	m_MyApp.getUserJoinMgr().wantUserJoinCallbacks( this, true );
 
-	setupGuiMode( false );
+	changeGuiMode( false );
 	queryHostedList();
 
 	m_JoinedHostSession.initializeWithNewVxGUID();
@@ -69,34 +72,38 @@ AppletGroupJoin::~AppletGroupJoin()
 //============================================================================
 void AppletGroupJoin::slotChooseHostModeButtonClick( void )
 {
-	setupGuiMode( false );
+	changeGuiMode( false );
 }
 
 //============================================================================
-void AppletGroupJoin::setupGuiMode( bool userListMode )
+void AppletGroupJoin::changeGuiMode( bool userListMode )
 {
-	if( userListMode )
+	if( userListMode != m_UserListMode )
 	{
-		setListLabel( QObject::tr( "User List" ) );
-		ui.m_ChooseHostButton->setVisible( true );
-		ui.m_HostAdminLabel->setVisible( true );
-		ui.m_HostedIdentWidget->setVisible( true );
-		// TODO probably can remove m_HostedPluginWidget completely
-		ui.m_HostedPluginWidget->setVisible( true );
+		m_UserListMode = userListMode;
+		if( userListMode )
+		{
+			setListLabel( QObject::tr( "User List" ) );
+			ui.m_ChooseHostButton->setVisible( true );
+			ui.m_HostAdminLabel->setVisible( true );
+			ui.m_HostedIdentWidget->setVisible( true );
+			// TODO probably can remove m_HostedPluginWidget completely
+			ui.m_HostedPluginWidget->setVisible( true );
 
-		ui.m_GuiGroupieListWidget->setVisible( false );
-		ui.m_GuiHostedListWidget->setVisible( true );
-	}
-	else
-	{
-		setListLabel( QObject::tr( "Group Host List" ) );
-		ui.m_ChooseHostButton->setVisible( false );
-		ui.m_HostAdminLabel->setVisible( false );
-		ui.m_HostedIdentWidget->setVisible( false );
-		ui.m_HostedPluginWidget->setVisible( false );
+			ui.m_GuiGroupieListWidget->setVisible( false );
+			ui.m_GuiHostedListWidget->setVisible( true );
+		}
+		else
+		{
+			setListLabel( QObject::tr( "Group Host List" ) );
+			ui.m_ChooseHostButton->setVisible( false );
+			ui.m_HostAdminLabel->setVisible( false );
+			ui.m_HostedIdentWidget->setVisible( false );
+			ui.m_HostedPluginWidget->setVisible( false );
 
-		ui.m_GuiHostedListWidget->setVisible( true );
-		ui.m_GuiGroupieListWidget->setVisible( false );
+			ui.m_GuiHostedListWidget->setVisible( true );
+			ui.m_GuiGroupieListWidget->setVisible( false );
+		}
 	}
 }
 
@@ -116,7 +123,7 @@ void AppletGroupJoin::setListLabel( QString labelText )
 void AppletGroupJoin::queryHostedList( void )
 {
 	setStatusMsg( QObject::tr("Fetching host list from network host") );
-	setupGuiMode( false );
+	changeGuiMode( false );
 	ui.m_GuiHostedListWidget->clear();
 	ui.m_GuiGroupieListWidget->clear();
 
@@ -227,6 +234,24 @@ void AppletGroupJoin::slotKickButtonClicked( GuiHostedListSession* hostSession, 
 }
 
 //============================================================================
+void AppletGroupJoin::slotFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem )
+{
+	LogMsg( LOG_VERBOSE, "AppletGroupJoin::slotFavoriteButtonClicked" );
+	std::string ptopUrl = hostSession->getHostUrl();
+	if( !ptopUrl.empty() )
+	{
+		if( yesNoMessageBox( QObject::tr( "Join Host On Startup?" ), QObject::tr( "Join This Host When Application Starts?" ) ) )
+		{
+			m_MyApp.getHostedListMgr().setJoinOnStartup( ptopUrl, true );
+		}
+		else
+		{
+			m_MyApp.getHostedListMgr().setJoinOnStartup( ptopUrl, false );
+		}
+	}
+}
+
+//============================================================================
 void AppletGroupJoin::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostJoinRequested" );
@@ -245,6 +270,7 @@ void AppletGroupJoin::callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHos
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiHostUnJoinGranted" );
 	ui.m_GuiHostedListWidget->callbackGuiHostUnJoinGranted( groupieId, guiHostJoin );
+	changeGuiMode( true );
 }
 
 //============================================================================

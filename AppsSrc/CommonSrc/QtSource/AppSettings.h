@@ -100,6 +100,9 @@ public:
     void                        setLogModules( uint32_t logModuleFlags );
     uint32_t                    getLogModules( void );
 
+	void						setFavoriteHostGroupUrl( std::string& hostUrl );
+	void						getFavoriteHostGroupUrl( std::string& hostUrl );
+
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );

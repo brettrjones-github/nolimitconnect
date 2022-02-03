@@ -675,6 +675,8 @@ signals:
 	void						signalToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
     void                        signalSystemReady( bool isReady );
 
+    void                        signalInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
+
 protected slots:
 
 	void						slotPlaySound( ESndDef sndDef );
@@ -715,6 +717,8 @@ private slots:
 	void						slotStartLoadingFromThread( void );
 	void						slotFinishedLoadingGui( void );
 	void						slotFinishedLoadingEngine( void );
+
+    void                        slotInternalNetAvailStatus( ENetAvailStatus netAvailStatus );
 
 private:
 	void						showUserNameInTitle();

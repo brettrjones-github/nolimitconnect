@@ -29,8 +29,8 @@ PktHandlerBase::PktHandlerBase()
 	}
 
 	int maxPktType = MAX_PKT_TYPE_CNT;
-	vx_assert( 150 == PKT_TYPE_RELAY_SESSION_REPLY );
-    vx_assert( 176 == maxPktType );
+	vx_assert( 152 == PKT_TYPE_RELAY_SESSION_REPLY );
+    vx_assert( 178 == maxPktType );
 
 	m_aBaseSysPktFuncTable[ 0 ] = &PktHandlerBase::onPktInvalid;
 

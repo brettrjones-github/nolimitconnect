@@ -36,14 +36,16 @@ class ListWidgetBase : public QListWidget
 public:
     ListWidgetBase( QWidget* parent );
 
-    AppCommon&                  getMyApp( void )            { return m_MyApp; }
-    MyIcons&                    getMyIcons( void )          { return m_MyIcons; }
-    GuiUserMgr&                 getUserMgr( void )          { return m_UserMgr; }
-    P2PEngine&                  getEngine( void )           { return m_Engine; }
-    GuiThumbMgr&                getThumbMgr( void )         { return m_ThumbMgr; }
+    AppCommon&                  getMyApp( void )                    { return m_MyApp; }
+    MyIcons&                    getMyIcons( void )                  { return m_MyIcons; }
+    GuiUserMgr&                 getUserMgr( void )                  { return m_UserMgr; }
+    P2PEngine&                  getEngine( void )                   { return m_Engine; }
+    GuiThumbMgr&                getThumbMgr( void )                 { return m_ThumbMgr; }
 
-    void                        setIsHostView( bool isHost ) { m_IsHostView = isHost; }
-    bool                        getIsHostView( void )       { return m_IsHostView; }
+    void                        setIsHostView( bool isHost )        { m_IsHostView = isHost; }
+    bool                        getIsHostView( void )               { return m_IsHostView; }
+    void                        setHostType( EHostType hostType )   { m_HostType = hostType; }
+    EHostType                   getHostType( void )                 { return m_HostType; }
 
     void                        launchChangeFriendship( GuiUser* ident );
 
@@ -55,6 +57,7 @@ protected:
     P2PEngine&                  m_Engine;
     GuiThumbMgr&                m_ThumbMgr;
     bool                        m_IsHostView{ false };
+    EHostType                   m_HostType{ eHostTypeUnknown };
 
     VxTimer						m_ClickEventTimer; // avoid duplicate clicks
 };

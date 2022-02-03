@@ -70,9 +70,10 @@ protected slots:
     void                        slotJoinButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotConnectButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
     void                        slotKickButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
+    void                        slotFavoriteButtonClicked( GuiHostedListSession* hostSession, GuiHostedListItem* hostItem );
 
 protected:
-    void                        setupGuiMode( bool userListMode );
+    void                        changeGuiMode( bool userListMode );
     virtual void				queryHostedList( void ) override;
 
     void                        updateHostedIdent( GuiHosted* guiHosted );
@@ -81,6 +82,7 @@ protected:
 protected:
     Ui::AppletGroupJoinUi       ui;
     VxGUID                      m_JoinedHostSession;
+    bool                        m_UserListMode{ false };
 };
 
 
