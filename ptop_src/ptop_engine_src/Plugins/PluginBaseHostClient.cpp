@@ -174,8 +174,8 @@ void PluginBaseHostClient::sendLeaveHost( EHostType hostType, VxGUID& sessionId,
 bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
 {
     bool leaveSent{ false };
-    VxGUID connectId;
-    if( m_Engine.getOnlineListMgr().findConnection( groupieId, connectId ) )
+    VxSktBase* sktBase =  m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+    if( sktBase )
     {
         PktHostLeaveReq leaveReq;
         leaveReq.setHostType( groupieId.getHostType() );
@@ -187,14 +187,7 @@ bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
         }
         else
         {
-            m_Engine.getPeerMgr().lockSktList();
-            VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectId );
-            if( sktBase )
-            {
-                leaveSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
-            }
-
-            m_Engine.getPeerMgr().unlockSktList();
+            leaveSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
         }
     }
 

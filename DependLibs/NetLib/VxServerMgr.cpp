@@ -956,6 +956,32 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	//LogMsg( LOG_INFO, "111 IN THREAD VxServerMgr::listen port %d ip %s skt %d\n", m_LclIp.getPort(), m_LclIp.toStdString().c_str(), m_aoListenSkts[0] ); 
 #endif // DEBUG_SKT_CONNECTIONS
 
+    uint16_t listenPort = m_u16ListenPort;
+
+    struct sockaddr_in serverAddr;
+    memset( &serverAddr, 0, sizeof( struct sockaddr_in ) );
+
+    serverAddr.sin_family = AF_INET;                // sets listen socket protocol type
+    serverAddr.sin_addr.s_addr = htonl( INADDR_ANY ); // sets our local IP address
+    serverAddr.sin_port = htons( listenPort );        // sets the listen port number 
+
+    // Bind Socket
+    int bindStatus = bind( m_aoListenSkts[0], ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
+    int retryCnt = 0;
+    while( bindStatus < 0 )
+    {
+        retryCnt++;
+        if( retryCnt >= 3 )
+        {
+            LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket bind socket %d failed event after %d tries", m_aoListenSkts[0], retryCnt );
+            break;
+        }
+
+        VxSleep( 1000 );
+        bindStatus = bind( m_aoListenSkts[0], ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
+    }
+
+
     m_IsReadyToAcceptConnections = true;
 //#ifdef TARGET_OS_ANDROID
 	// android set listen skt back to blocking doesn't work so just set to non blocking always ( part of accept hang fix ) 
@@ -1062,14 +1088,6 @@ bool VxServerMgr::createListenSocket( std::string &preferredIp, SOCKET &listenSo
         return false;
     }
 
-    listenSock = INVALID_SOCKET;
-    struct sockaddr_in serverAddr;
-    memset( &serverAddr, 0, sizeof( struct sockaddr_in ) );
-
-    serverAddr.sin_family = AF_INET;                // sets listen socket protocol type
-    serverAddr.sin_addr.s_addr = htonl(INADDR_ANY); // sets our local IP address
-    serverAddr.sin_port = htons(listenPort);        // sets the listen port number 
-
     listenSock = socket(AF_INET, SOCK_STREAM, 0);               // creates IP based TCP socket
     if( listenSock < 0 ) 
     { 
@@ -1077,34 +1095,7 @@ bool VxServerMgr::createListenSocket( std::string &preferredIp, SOCKET &listenSo
         return false;
     }
 
-    // Bind Socket
-    int bindStatus = bind( listenSock, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr) );
-    int retryCnt = 0;
-    while( bindStatus < 0 )
-    {
-        retryCnt++;
-        if( retryCnt >= 3 )
-        {
-            LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket bind socket %d failed event after %d tries", listenSock, retryCnt );
-            return false;
-        }
-
-        VxSleep( 1000 );
-        bindStatus = bind( listenSock, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr) );
-    }
-
-    if( bindStatus >= 0 )
-    {
-        // unfortunately (At least in windows) getpeername is invalid and getsockname returns 0.0.0.0 if you bind to INADDR_ANY
-        // there seems to be no way to get the actual address of the adapter we will get the incomming connection on
-        struct sockaddr lclSockName;
-        memset( &lclSockName, 0, sizeof( struct sockaddr ) );
-        socklen_t sockNameLen = sizeof( struct sockaddr );
-        getsockname( listenSock, &lclSockName, &sockNameLen );
-
-        VxGetLclAddress( listenSock, m_LclIp );
-        actualListenLocalIp = m_LclIp.toStdString();
-    }
-
-    return bindStatus >= 0;
+    // bind seems inconsistent when using a vpn. do not bind
+    actualListenLocalIp = "";
+    return true;
 }

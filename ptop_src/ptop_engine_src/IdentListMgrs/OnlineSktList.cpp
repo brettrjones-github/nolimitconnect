@@ -124,26 +124,6 @@ void OnlineSktList::addConnection( VxGUID& sktConnectId, GroupieId& groupieId )
 }
 
 //============================================================================
-bool OnlineSktList::findConnection( GroupieId& groupieId, VxGUID& retSktConnectId )
-{
-    bool foundConnection = false;
-    lockList();
-    for( auto mapIter = m_OnlineSktList.begin(); mapIter != m_OnlineSktList.end(); ++mapIter )
-    {
-        auto iter = mapIter->second.find( groupieId );
-        if( iter != mapIter->second.end() )
-        {
-            foundConnection = true;
-            retSktConnectId = mapIter->first;
-            break;
-        }
-    }
-
-    unlockList();
-    return foundConnection;
-}
-
-//============================================================================
 void OnlineSktList::removeConnection( VxGUID& sktConnectId, GroupieId& groupieId )
 {
     bool wasRemoved = false;
@@ -235,4 +215,77 @@ void OnlineSktList::disconnectIfIsOnlyUser( GroupieId& groupieId )
     {
         m_Engine.getPeerMgr().closeConnection( disconnectConnectId, eSktCloseNotNeeded );
     }
+}
+
+//============================================================================
+VxSktBase* OnlineSktList::findHostConnection( GroupieId& groupieId, bool tryPeerFirst )
+{
+    VxSktBase* sktBase = nullptr;
+    if( groupieId.isValid() )
+    {
+        if( tryPeerFirst )
+        {
+            sktBase = findPeerConnection( groupieId.getGroupieOnlineId() );
+        }
+
+        if( !sktBase )
+        {
+            sktBase = findHostConnection( groupieId );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "findHostConnection invalid groupieId" );
+    }
+
+    return sktBase;
+}
+
+//============================================================================
+VxSktBase* OnlineSktList::findPeerConnection( VxGUID& onlineId )
+{
+    VxSktBase* sktBase = nullptr;
+    GroupieId groupieId( onlineId, onlineId, eHostTypePeerUser );
+    VxGUID connectId;
+    if( findConnectionId( groupieId, connectId ) )
+    {
+        sktBase = findSktBase( connectId );
+    }
+
+    return sktBase;
+}
+
+//============================================================================
+bool OnlineSktList::findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId )
+{
+    bool foundConnection = false;
+    lockList();
+    for( auto mapIter = m_OnlineSktList.begin(); mapIter != m_OnlineSktList.end(); ++mapIter )
+    {
+        auto iter = mapIter->second.find( groupieId );
+        if( iter != mapIter->second.end() )
+        {
+            foundConnection = true;
+            retSktConnectId = mapIter->first;
+            break;
+        }
+    }
+
+    unlockList();
+    return foundConnection;
+}
+
+//============================================================================
+VxSktBase* OnlineSktList::findSktBase( VxGUID& connectId )
+{
+    bool isConnected{ false };
+    m_Engine.getPeerMgr().lockSktList();
+    VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectId );
+    if( sktBase )
+    {
+        sktBase = sktBase->isConnected() ? sktBase : nullptr;
+    }
+
+    m_Engine.getPeerMgr().unlockSktList();
+    return sktBase;
 }

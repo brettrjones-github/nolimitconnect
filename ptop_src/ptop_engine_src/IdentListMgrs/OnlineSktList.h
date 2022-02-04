@@ -21,6 +21,7 @@
 
 // maintains a list of online users
 class P2PEngine;
+class VxSktBase;
 
 class OnlineSktList : public IdentListMgrBase
 {
@@ -37,8 +38,12 @@ public:
 
     bool                        getConnections( HostedId& hostId, std::set<std::pair<VxGUID,VxGUID>>& retConnectIdSet );
 
+    VxSktBase*                  findHostConnection( GroupieId& groupieId, bool tryPeerFirst = false );
+    VxSktBase*                  findPeerConnection( VxGUID& onlineId );
+    virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
+    VxSktBase*                  findSktBase( VxGUID& connectId );
+
     virtual void                addConnection( VxGUID& sktConnectId, GroupieId& groupieId );
-    virtual bool                findConnection( GroupieId& groupieId, VxGUID& retSktConnectId );
     virtual void                removeConnection( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        disconnectIfIsOnlyUser( GroupieId& groupieId );
 

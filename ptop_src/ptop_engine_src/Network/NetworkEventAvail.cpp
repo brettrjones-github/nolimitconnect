@@ -45,17 +45,12 @@ NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const c
 //============================================================================
 void NetworkEventAvail::runNetworkEvent( void )
 {
-	LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent start\n" );
+	LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent start" );
 	m_NetworkStateMachine.resolveWebsiteUrls();
     uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();
     m_Engine.getNetStatusAccum().setIpPort( listenPort );
     if( !m_Engine.getPeerMgr().isListening() || ( listenPort != m_Engine.getPeerMgr().getListenPort() ) )
     {
-        if( m_Engine.getPeerMgr().isListening() )
-        {
-            m_Engine.getPeerMgr().stopListening();
-        }
-
         m_Engine.getPeerMgr().startListening( m_Engine.getEngineSettings().getTcpIpPort(), m_LclIp.c_str() );
     }
 
@@ -66,7 +61,7 @@ void NetworkEventAvail::runNetworkEvent( void )
         m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
     }
 
-    LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent done\n" );
+    LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent done" );
 }
 
 
