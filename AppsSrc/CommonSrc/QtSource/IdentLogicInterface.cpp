@@ -130,6 +130,10 @@ void IdentLogicInterface::updateHosted( GuiHosted* guiHosted )
 		getIdentLine1()->setText( guiHosted->getHostTitle().c_str() );
 		getIdentLine2()->setText( guiHosted->getHostDescription().c_str() );
 	}
+	else
+	{
+		LogMsg( LOG_ERROR, "IdentLogicInterface::updateHosted null guiHosted" );
+	}
 }
 
 //============================================================================

@@ -157,7 +157,8 @@ void HostJoinRequestListItem::setJoinedState( EJoinState joinState )
 {
     switch( joinState )
     {
-    case eJoinStateJoinGranted:
+    case eJoinStateJoinWasGranted:
+    case eJoinStateJoinIsGranted:
         showAcceptButton( false );
         showRejectButton( true );
         break;

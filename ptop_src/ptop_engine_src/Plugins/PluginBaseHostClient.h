@@ -42,6 +42,7 @@ public:
     virtual bool                ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) override;
 
     virtual bool                sendLeaveHost( GroupieId& groupieId );
+    virtual bool                queryUserListFromHost( GroupieId& groupieId );
 
 protected:
     //=== callback overrides ==//

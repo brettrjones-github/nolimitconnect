@@ -41,6 +41,7 @@ GuiHostedListItem* GuiHostedListWidget::sessionToWidget( GuiHostedListSession* h
 {
     GuiHostedListItem* hostItem = new GuiHostedListItem( getHostType(), this );
     hostItem->setSizeHint( hostItem->calculateSizeHint() );
+    hostItem->setIsHostView( getIsHostView() );
 
     hostItem->setHostSession( hostSession );
 
@@ -252,6 +253,12 @@ void GuiHostedListWidget::updateHostedList( HostedId& hostedId, GuiHosted* guiHo
     if( hostSession )
     {
         hostSession->setSessionId( sessionId );
+        if( guiHosted )
+        {
+            hostSession->setGuiHosted( guiHosted );
+        }
+
+        addOrUpdateHostSession( hostSession );
     }
     else
     {
@@ -444,7 +451,6 @@ void GuiHostedListWidget::callbackOnUserUpdated( GuiUser* guiUser )
 
 }
 
-
 //============================================================================
 void GuiHostedListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
@@ -461,12 +467,22 @@ void GuiHostedListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, Gu
 }
 
 //============================================================================
-void GuiHostedListWidget::callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+void GuiHostedListWidget::callbackGuiHostJoinWasGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
     if( getIsHostView() )
     {
-        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinGranted" );
-        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinGranted );
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinWasGranted" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinWasGranted );
+    }
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiHostJoinIsGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    if( getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "GuiHostedListWidget::callbackGuiHostJoinIsGranted" );
+        updateHostJoinState( groupieId.getHostedId(), eJoinStateJoinIsGranted );
     }
 }
 
@@ -533,12 +549,22 @@ void GuiHostedListWidget::callbackGuiUserJoinRequested( GroupieId& groupieId, Gu
 }
 
 //============================================================================
-void GuiHostedListWidget::callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+void GuiHostedListWidget::callbackGuiUserJoinWasGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
     if( !getIsHostView() )
     {
-        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted" );
-        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinGranted );
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinWasGranted" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinWasGranted );
+    }
+}
+
+//============================================================================
+void GuiHostedListWidget::callbackGuiUserJoinIsGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    if( !getIsHostView() )
+    {
+        LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinIsGranted" );
+        updateUserJoinState( groupieId.getHostedId(), eJoinStateJoinIsGranted );
     }
 }
 

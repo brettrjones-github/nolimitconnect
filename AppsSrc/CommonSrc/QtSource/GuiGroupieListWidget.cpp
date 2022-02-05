@@ -406,9 +406,15 @@ void GuiGroupieListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, G
 }
 
 //============================================================================
-void GuiGroupieListWidget::callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+void GuiGroupieListWidget::callbackGuiHostJoinWasGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
-    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinGranted" );
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinWasGranted" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiHostJoinIsGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinIsGranted" );
 }
 
 //============================================================================
@@ -450,9 +456,15 @@ void GuiGroupieListWidget::callbackGuiUserJoinRequested( GroupieId& groupieId, G
 }
 
 //============================================================================
-void GuiGroupieListWidget::callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+void GuiGroupieListWidget::callbackGuiUserJoinWasGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
-    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinGranted" );
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinWasGranted" );
+}
+
+//============================================================================
+void GuiGroupieListWidget::callbackGuiUserJoinIsGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiUserJoinIsGranted" );
 }
 
 //============================================================================

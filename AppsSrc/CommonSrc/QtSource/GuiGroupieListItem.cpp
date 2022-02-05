@@ -157,7 +157,12 @@ void GuiGroupieListItem::setJoinedState( EJoinState joinState )
     // todo update join 
     switch( joinState )
     {
-    case eJoinStateJoinGranted:
+    case eJoinStateJoinWasGranted:
+        ui.m_ConnectButton->setIcon( eMyIconConnect );
+        showConnectButton( true );
+        break;
+    case eJoinStateJoinIsGranted:
+        ui.m_ConnectButton->setIcon( eMyIconDisconnect );
         showConnectButton( true );
         break;
     case eJoinStateSending:

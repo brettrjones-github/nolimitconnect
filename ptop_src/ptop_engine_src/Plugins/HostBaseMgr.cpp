@@ -893,7 +893,6 @@ void HostBaseMgr::sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, Vx
     else
     {
         m_Engine.getToGui().toGuiHostAnnounceStatus( hostType, sessionId, eHostAnnounceSendJoinRequestFailed );
-        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }
 
@@ -910,7 +909,6 @@ void HostBaseMgr::sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktB
     if( !m_Plugin.txPacket( onlineId, sktBase, &pktJoin ) )
     {
         m_Engine.getToGui().toGuiHostJoinStatus( hostType, sessionId, eHostJoinSendJoinRequestFailed );
-        m_ConnectionMgr.doneWithConnection( sessionId, onlineId, this, connectReason);
     }
 }
 
@@ -1026,7 +1024,7 @@ void HostBaseMgr::onUserOffline( VxGUID& onlineId, VxGUID& sessionId )
 EJoinState HostBaseMgr::getJoinState( VxNetIdent* netIdent, EHostType hostType )
 {
     // BRJ TODO if has been accepted to host then should return eJoinStateJoinGranted
-    return getPluginAccessState( netIdent ) == ePluginAccessOk ? eJoinStateJoinGranted : eJoinStateJoinRequested;
+    return getPluginAccessState( netIdent ) == ePluginAccessOk ? eJoinStateJoinWasGranted : eJoinStateJoinRequested;
 }
 
 //============================================================================

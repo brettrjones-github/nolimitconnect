@@ -290,8 +290,11 @@ void GuiUserJoinMgr::announceUserJoinState( EJoinState joinState, GuiUserJoin* g
     case eJoinStateJoinRequested:
         announceUserJoinRequested( guiUserJoin->getGroupieId(), guiUserJoin );
         break;
-    case eJoinStateJoinGranted:
-        announceUserJoinGranted( guiUserJoin->getGroupieId(), guiUserJoin );
+    case eJoinStateJoinWasGranted:
+        announceUserJoinWasGranted( guiUserJoin->getGroupieId(), guiUserJoin );
+        break;
+    case eJoinStateJoinIsGranted:
+        announceUserJoinIsGranted( guiUserJoin->getGroupieId(), guiUserJoin );
         break;
     case eJoinStateJoinDenied:
         announceUserJoinDenied( guiUserJoin->getGroupieId(), guiUserJoin );
@@ -351,11 +354,20 @@ void GuiUserJoinMgr::announceUserJoinRequested( GroupieId& groupieId, GuiUserJoi
 }
 
 //============================================================================
-void GuiUserJoinMgr::announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+void GuiUserJoinMgr::announceUserJoinWasGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
 {
     for( auto client : m_UserJoinClients )
     {
-        client->callbackGuiUserJoinGranted( groupieId, guiUserJoin );
+        client->callbackGuiUserJoinWasGranted( groupieId, guiUserJoin );
+    }
+}
+
+//============================================================================
+void GuiUserJoinMgr::announceUserJoinIsGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin )
+{
+    for( auto client : m_UserJoinClients )
+    {
+        client->callbackGuiUserJoinIsGranted( groupieId, guiUserJoin );
     }
 }
 
@@ -393,4 +405,10 @@ void GuiUserJoinMgr::announceUserJoinRemoved( GroupieId& groupieId )
     {
         client->callbackGuiUserJoinRemoved( groupieId );
     }
+}
+
+//============================================================================
+EJoinState GuiUserJoinMgr::getUserJoinState( GroupieId& groupieId )
+{
+    return m_MyApp.getEngine().getUserJoinMgr().getUserJoinState( groupieId );
 }

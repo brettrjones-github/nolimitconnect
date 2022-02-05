@@ -55,6 +55,9 @@ public:
     void                        setIsThumbUpdated( bool updated )   { m_IsThumbUpdated = updated; }
     bool                        getIsThumbUpdated( void )           { return m_IsThumbUpdated; }
 
+    void                        setIsHostView( bool isHost )        { m_IsHostView = isHost; }
+    bool                        getIsHostView( void )               { return m_IsHostView; }
+
 signals:
     void						signalGuiHostedListItemClicked( QListWidgetItem * poItemWidget );
 	void						signalIconButtonClicked( GuiHostedListItem* listEntryWidget );
@@ -84,6 +87,7 @@ protected:
     AppCommon&					m_MyApp;
     EHostType                   m_HostType{ eHostTypeUnknown };
     bool                        m_IsThumbUpdated{ false };
+    bool                        m_IsHostView{ false };
 };
 
 

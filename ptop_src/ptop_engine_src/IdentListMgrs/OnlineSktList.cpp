@@ -230,7 +230,11 @@ VxSktBase* OnlineSktList::findHostConnection( GroupieId& groupieId, bool tryPeer
 
         if( !sktBase )
         {
-            sktBase = findHostConnection( groupieId );
+            VxGUID connectId;
+            if( findConnectionId( groupieId, connectId ) )
+            {
+                sktBase = findSktBase( connectId );
+            }
         }
     }
     else

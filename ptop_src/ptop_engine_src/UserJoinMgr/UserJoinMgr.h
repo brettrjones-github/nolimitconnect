@@ -44,6 +44,7 @@ public:
 
     void                        onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
     void                        onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onUserLeftHost( GroupieId& groupieId );
     void                        onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
     virtual void                onConnectionLost( VxSktBase* sktBase, VxGUID& connectionId, VxGUID& peerOnlineId );
@@ -60,6 +61,8 @@ public:
     UserJoinInfo*               findUserJoinInfo( GroupieId& groupieId );
 
     void                        changeJoinState( GroupieId& groupieId, EJoinState joinState );
+    EJoinState                  getUserJoinState( GroupieId& groupieId );
+    void                        queryUserListFromHost( GroupieId& groupieId );
 
 protected:
     void						clearUserJoinInfoList( void );

@@ -924,14 +924,19 @@ const char * DescribePluginAccess( EPluginAccess pluginAccess )
 }
 
 //============================================================================
-const char * DescribePluginType( EPluginType plugType )
+const char * DescribePluginType( EPluginType pluginType )
 {
-    if(  plugType < 0 || eMaxImplementedPluginType <= plugType )
+    if( pluginType < 0 || eMaxImplementedPluginType <= pluginType )
     {
+        if( ePluginTypeNetServices == pluginType )
+        {
+            return "Net Services ";
+        }
+
         return ENUM_BAD_PARM;
     }
 
-    return PluginTypeEnumStrings[ plugType ]; 
+    return PluginTypeEnumStrings[pluginType];
 }
 
 //============================================================================

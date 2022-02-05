@@ -63,6 +63,7 @@ public:
     HostJoinInfo*               findUserJoinInfo( GroupieId& groupieId );
 
     void                        changeJoinState( GroupieId& groupieId, EJoinState joinState );
+    EJoinState                  getHostJoinState( GroupieId& groupieId );
 
 protected:
     void						clearHostJoinInfoList( void );

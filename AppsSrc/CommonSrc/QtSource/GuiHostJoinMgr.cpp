@@ -334,10 +334,10 @@ void GuiHostJoinMgr::updateHostRequestCount( bool forceEmit )
 //============================================================================
 void GuiHostJoinMgr::joinAccepted( GuiHostJoin* guiHostJoin )
 {
-    if( guiHostJoin && guiHostJoin->setJoinState( eJoinStateJoinGranted ) )
+    if( guiHostJoin && guiHostJoin->setJoinState( eJoinStateJoinIsGranted ) )
     {
-        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( guiHostJoin->getGroupieId(), eJoinStateJoinGranted );
-        announceJoinState( guiHostJoin, eJoinStateJoinGranted );
+        m_MyApp.getEngine().getHostJoinMgr().changeJoinState( guiHostJoin->getGroupieId(), eJoinStateJoinIsGranted );
+        announceJoinState( guiHostJoin, eJoinStateJoinIsGranted );
     }
 }
 
@@ -380,8 +380,11 @@ void GuiHostJoinMgr::announceJoinState( GuiHostJoin* guiHostJoin, EJoinState joi
     case eJoinStateJoinRequested:
         announceHostJoinRequested( guiHostJoin->getGroupieId(), guiHostJoin );
         break;
-    case eJoinStateJoinGranted:
-        announceHostJoinGranted( guiHostJoin->getGroupieId(), guiHostJoin );
+    case eJoinStateJoinWasGranted:
+        announceHostJoinWasGranted( guiHostJoin->getGroupieId(), guiHostJoin );
+        break;
+    case eJoinStateJoinIsGranted:
+        announceHostJoinIsGranted( guiHostJoin->getGroupieId(), guiHostJoin );
         break;
     case eJoinStateJoinDenied:
         announceHostJoinDenied( guiHostJoin->getGroupieId(), guiHostJoin );
@@ -402,11 +405,20 @@ void GuiHostJoinMgr::announceHostJoinRequested( GroupieId& groupieId, GuiHostJoi
 }
 
 //============================================================================
-void GuiHostJoinMgr::announceHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+void GuiHostJoinMgr::announceHostJoinWasGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
     for( auto client : m_HostJoinClients )
     {
-        client->callbackGuiHostJoinGranted( groupieId, guiHostJoin );
+        client->callbackGuiHostJoinWasGranted( groupieId, guiHostJoin );
+    }
+}
+
+//============================================================================
+void GuiHostJoinMgr::announceHostJoinIsGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
+{
+    for( auto client : m_HostJoinClients )
+    {
+        client->callbackGuiHostJoinIsGranted( groupieId, guiHostJoin );
     }
 }
 
@@ -444,4 +456,10 @@ void GuiHostJoinMgr::announceHostJoinRemoved( GroupieId& groupieId )
     {
         client->callbackGuiHostJoinRemoved( groupieId );
     }
+}
+
+//============================================================================
+EJoinState GuiHostJoinMgr::getHostJoinState( GroupieId& groupieId )
+{
+    return m_MyApp.getEngine().getHostJoinMgr().getHostJoinState( groupieId );
 }

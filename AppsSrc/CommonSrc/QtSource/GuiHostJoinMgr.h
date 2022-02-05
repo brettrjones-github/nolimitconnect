@@ -53,6 +53,7 @@ public:
 
     GuiHostJoin*                getHostJoin( GroupieId& groupieId );
     std::map<GroupieId, GuiHostJoin*>& getHostJoinList( void )             { return m_HostJoinList; }
+    EJoinState                  getHostJoinState( GroupieId& groupieId );
 
     void                        joinAccepted( GuiHostJoin* guiHostJoin );
     void                        joinRejected( GuiHostJoin* guiHostJoin );
@@ -95,7 +96,8 @@ protected:
     void                        announceJoinState( GuiHostJoin* guiHostJoin, EJoinState joinState );
 
     virtual void				announceHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
-    virtual void				announceHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				announceHostJoinWasGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
+    virtual void				announceHostJoinIsGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				announceHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin );
     virtual void				announceHostJoinLeaveHost( GroupieId& groupieId );
     virtual void				announceHostUnJoin( GroupieId& groupieId );

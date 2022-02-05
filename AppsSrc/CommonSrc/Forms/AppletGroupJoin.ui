@@ -71,10 +71,7 @@
        </widget>
       </item>
       <item>
-       <widget class="IdentWidget" name="m_HostedIdentWidget" native="true"/>
-      </item>
-      <item>
-       <widget class="HostedPluginWidget" name="m_HostedPluginWidget" native="true"/>
+       <widget class="IdentWidget" name="m_AdminIdentWidget" native="true"/>
       </item>
       <item>
        <widget class="QPushButton" name="m_ChooseHostButton">
@@ -126,12 +123,6 @@
    <class>IdentWidget</class>
    <extends>QWidget</extends>
    <header>IdentWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>HostedPluginWidget</class>
-   <extends>QWidget</extends>
-   <header>HostedPluginWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

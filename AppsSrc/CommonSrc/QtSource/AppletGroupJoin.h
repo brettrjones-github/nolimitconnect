@@ -47,15 +47,18 @@ public:
     virtual void				callbackGuiGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId ) override;
 
     virtual void				callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
-    virtual void				callbackGuiHostJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+    virtual void				callbackGuiHostJoinWasGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+    virtual void				callbackGuiHostJoinIsGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostUnJoinGranted( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
+
     virtual void				callbackGuiHostJoinDenied( GroupieId& groupieId, GuiHostJoin* guiHostJoin ) override;
     virtual void				callbackGuiHostJoinLeaveHost( GroupieId& groupieId ) override;
     virtual void				callbackGuiHostUnJoin( GroupieId& groupieId ) override;
     virtual void				callbackGuiHostJoinRemoved( GroupieId& groupieId ) override;
 
     virtual void				callbackGuiUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
-    virtual void				callbackGuiUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+    virtual void				callbackGuiUserJoinWasGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
+    virtual void				callbackGuiUserJoinIsGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
     virtual void				callbackGuiUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
 
     virtual void				callbackGuiUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin ) override;
@@ -78,6 +81,8 @@ protected:
 
     void                        updateHostedIdent( GuiHosted* guiHosted );
     void                        updateUser( GuiUser* guiUser );
+
+    void                        onJoinedHost( GroupieId& groupieId );
 
 protected:
     Ui::AppletGroupJoinUi       ui;

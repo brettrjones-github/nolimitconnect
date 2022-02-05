@@ -20,6 +20,7 @@
 
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedInfo.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h>
+#include <ptop_src/ptop_engine_src/HostJoinMgr/HostJoinMgr.h>
 #include <PktLib/VxCommon.h>
 #include <CoreLib/VxPtopUrl.h>
 
@@ -429,4 +430,10 @@ void GuiHostedListMgr::checkAutoJoinGroupHost( void )
         VxGUID sessionId;
         m_MyApp.getFromGuiInterface().fromGuiJoinHost( eHostTypeGroup, sessionId, m_FavoriteHostGroup );
     }
+}
+
+//============================================================================
+EJoinState GuiHostedListMgr::getHostJoinState( GroupieId& groupieId )
+{
+    return m_MyApp.getEngine().getHostJoinMgr().getHostJoinState( groupieId );
 }

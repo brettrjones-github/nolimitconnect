@@ -28,6 +28,8 @@ public:
 
 	GuiHostedListSession&		operator =( const GuiHostedListSession &rhs );
 
+   
+    void                        setGuiHosted( GuiHosted* guiHosted )        { m_GuiHosted = guiHosted; if( guiHosted->getUser() ) setGuiUser( guiHosted->getUser() ); }
     GuiHosted*                  getGuiHosted( void )                        { return m_GuiHosted; }
 
     HostedId&                   getHostedId( void )                         { return m_HostedId; }

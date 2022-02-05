@@ -139,7 +139,7 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     {
         updateIdentity( guiUser );
     }
-
+    
     updateHosted( guiHosted );
 
     if( guiUser && m_MyApp.getEngine().getMyOnlineId() == hostSession->getHostedId().getOnlineId() )
@@ -166,18 +166,6 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
         }
     }
 
-    // set text of line 2
-    std::string strDesc = hostSession->getHostDescription();
-    if( strDesc.empty() && guiUser )
-    {
-        strDesc = guiUser->getOnlineDescription();
-    }
-
-    if( !strDesc.empty() && guiUser )
-    {
-        ui.m_DescPart2->setText( strDesc.c_str() );
-    }
-
     if( m_MyApp.getHostedListMgr().isJoinOnStartup( guiHosted->getHostInviteUrl() ) )
     {
         // make sure the saved favorite host url is up to data
@@ -188,15 +176,39 @@ void GuiHostedListItem::updateWidgetFromInfo( void )
     {
         ui.m_FavoriteButton->setIcon( eMyIconStarEmpty );
     }
+
+    EJoinState joinState{ eJoinStateNone };
+    GroupieId groupiId( m_MyApp.getMyOnlineId(), guiHosted->getHostedId() );
+    if( getIsHostView() )
+    {
+        joinState = m_MyApp.getHostJoinMgr().getHostJoinState( groupiId );
+    }
+    else
+    {
+        joinState = m_MyApp.getUserJoinMgr().getUserJoinState( groupiId );
+    }
+
+    if( eJoinStateNone != joinState )
+    {
+        setJoinedState( joinState );
+    }
 }
 
 //============================================================================
 void GuiHostedListItem::setJoinedState( EJoinState joinState )
 {
-    // todo update join 
     switch( joinState )
     {
-    case eJoinStateJoinGranted:
+    case eJoinStateJoinWasGranted:
+        showConnectButton( true );
+        ui.m_ConnectButton->setIcon( eMyIconConnect );
+        ui.m_ConnectLabel->setText( QObject::tr( "Connect" ) );
+        ui.m_JoinButton->setIcon( eMyIconPersonAdd );
+        ui.m_ConnectButton->setEnabled( true );
+        showKickButton( false );
+        showFavoriteButton( false );
+        break;
+    case eJoinStateJoinIsGranted:
         showConnectButton( true );
         ui.m_ConnectButton->setIcon( eMyIconDisconnect );
         ui.m_ConnectLabel->setText( QObject::tr( "Disconnect" ) );

@@ -111,7 +111,7 @@ bool VxServerMgr::checkWatchdog( void )
 		return true;
 	}
 
-	LogMsg( LOG_INFO, "Listen Watchdog Timeout\n" );
+	LogMsg( LOG_INFO, "Listen Watchdog Timeout" );
 	return false;
 }
 
@@ -128,23 +128,57 @@ bool VxServerMgr::isListening( void )
 }
 
 //============================================================================
-bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
+bool VxServerMgr::startListening( uint16_t u16ListenPort, const char* ip )
 {
     stopListening();
 
-	if( VxIsAppShuttingDown() )
-	{
-		return false;
-	}
+    if( VxIsAppShuttingDown() )
+    {
+        return false;
+    }
 
-	if( 0 == u16ListenPort )
-	{
-		AppErr( eAppErrBadParameter, "VxServerMgr::startListening Bad param port %d", u16ListenPort );
-		return false;
-	}
+    if( 0 == u16ListenPort )
+    {
+        AppErr( eAppErrBadParameter, "VxServerMgr::startListening Bad param port %d", u16ListenPort );
+        return false;
+    }
 
-	m_LastWatchdogKickMs = GetTimeStampMs();    
+    m_LastWatchdogKickMs = GetTimeStampMs();
+    m_u16ListenPort = u16ListenPort;
+    m_IsReadyToAcceptConnections = false;
 
+    if( 0 != internalStartListen() )
+    {
+        LogModule( eLogListen, LOG_ERROR, "ipv4 listen() internalStartListen failed" );
+        return false;
+    }
+    
+    // wait for thread to open the socket
+    bool isReady = false;
+    int waitCnt = 0;
+    while( !isReady && waitCnt < 40 )
+    {
+        isReady = m_IsReadyToAcceptConnections;
+        if( !isReady )
+        {
+            VxSleep( 200 );
+            waitCnt++;
+        }
+    }
+
+    if( !isReady )
+    {
+        LogMsg( LOG_ERROR, "ipv4 listen() open listen port failed" );
+        return false;
+    }
+
+    return true;
+}
+
+//============================================================================
+// old failed attempts at a consisten listen
+ bool VxServerMgr::startListeningOldAttepts( uint16_t u16ListenPort, const char* ip )
+ {
     std::string ipv4String("");
     if( ip && strlen(ip) )
     {
@@ -332,7 +366,7 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 		// Highly unlikely, but check anyway.
 		if( FD_SETSIZE == m_iActiveListenSktCnt ) 
 		{
-			LogMsg( LOG_ERROR, "getaddrinfo returned more addresses than we could use.\n");
+			LogMsg( LOG_ERROR, "getaddrinfo returned more addresses than we could use.");
 			break;
 		}
 
@@ -348,7 +382,7 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 			}
 			else
 			{
-                LogModule( eLogListen, LOG_INFO, "VxServerMgr::startListening found local ip4 %s\n", thisIp.c_str() );
+                LogModule( eLogListen, LOG_INFO, "VxServerMgr::startListening found local ip4 %s", thisIp.c_str() );
 			}
 		}
 		else
@@ -957,6 +991,21 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 #endif // DEBUG_SKT_CONNECTIONS
 
     uint16_t listenPort = m_u16ListenPort;
+    if( listenPort < 80 )
+    {
+        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket invalid listen port %d", listenPort );
+        return;
+    }
+
+    SOCKET listenSock = socket( AF_INET, SOCK_STREAM, 0 );               // creates IP based TCP socket
+    if( listenSock < 0 )
+    {
+        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket failed" );
+        return;
+    }
+
+    // don't know why reuse port doesn't work
+    VxSetSktAllowReusePort( listenSock );
 
     struct sockaddr_in serverAddr;
     memset( &serverAddr, 0, sizeof( struct sockaddr_in ) );
@@ -966,7 +1015,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
     serverAddr.sin_port = htons( listenPort );        // sets the listen port number 
 
     // Bind Socket
-    int bindStatus = bind( m_aoListenSkts[0], ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
+    int bindStatus = bind( listenSock, ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
     int retryCnt = 0;
     while( bindStatus < 0 )
     {
@@ -978,9 +1027,14 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
         }
 
         VxSleep( 1000 );
-        bindStatus = bind( m_aoListenSkts[0], ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
+        bindStatus = bind( listenSock, ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
     }
 
+    // don't know why reuse port doesn't work
+    VxSetSktAllowReusePort( listenSock );
+
+    m_aoListenSkts[0] = listenSock;
+    m_iActiveListenSktCnt = 1;
 
     m_IsReadyToAcceptConnections = true;
 //#ifdef TARGET_OS_ANDROID
@@ -1075,7 +1129,6 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	}
 
     LogModule( eLogConnect, LOG_INFO, "Listen Thread is exiting thread 0x%x", VxGetCurrentThreadId() );
-	m_IsReadyToAcceptConnections = false;
 }
 
 //============================================================================

@@ -17,11 +17,13 @@
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
+#include <ptop_src/ptop_engine_src/UserJoinMgr/UserJoinMgr.h>
 #include <NetLib/VxPeerMgr.h>
 
 #include <CoreLib/VxPtopUrl.h>
 #include <PktLib/SearchParams.h>
 #include <PktLib/PktsHostJoin.h>
+#include <PktLib/PktsGroupie.h>
 
 //============================================================================
 PluginBaseHostClient::PluginBaseHostClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
@@ -173,7 +175,7 @@ void PluginBaseHostClient::sendLeaveHost( EHostType hostType, VxGUID& sessionId,
 //============================================================================
 bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
 {
-    bool leaveSent{ false };
+    bool pktSent{ false };
     VxSktBase* sktBase =  m_Engine.getOnlineListMgr().findHostConnection( groupieId );
     if( sktBase )
     {
@@ -183,13 +185,44 @@ bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
         if( m_Engine.getMyOnlineId() == groupieId.getHostedOnlineId() )
         {
             // is ourself
-            leaveSent = txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &leaveReq );
+            pktSent = txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &leaveReq );
         }
         else
         {
-            leaveSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
+            pktSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
+            if( pktSent )
+            {
+                m_Engine.getUserJoinMgr().onUserLeftHost( groupieId );
+            }
         }
     }
 
-    return leaveSent;
+    return pktSent;
+}
+
+//============================================================================
+bool PluginBaseHostClient::queryUserListFromHost( GroupieId& groupieId )
+{
+    bool pktSent{ false };
+    VxSktBase* sktBase = m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+    if( sktBase )
+    {
+        PktGroupieSearchReq pktReq;
+        VxGUID sessionId;
+        sessionId.initializeWithNewVxGUID();
+
+        pktReq.setSearchSessionId( sessionId );
+        pktReq.setHostType( groupieId.getHostType() );
+        if( m_Engine.getMyOnlineId() == groupieId.getHostedOnlineId() )
+        {
+            // is ourself
+            pktSent = txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &pktReq );
+        }
+        else
+        {
+            pktSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &pktReq );
+        }
+    }
+
+    return pktSent;
 }

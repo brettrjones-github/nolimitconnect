@@ -43,6 +43,7 @@ public:
     virtual void                onSystemReady( bool ready ) { }
 
     bool                        isUserJoinInSession( GroupieId& groupieId );
+    EJoinState                  getUserJoinState( GroupieId& groupieId );
 
     void                        onUserJoinAdded( GuiUserJoin* guiUserJoin );
     void                        onUserJoinRemoved( GroupieId& groupieId );
@@ -96,7 +97,8 @@ protected:
     void                        announceUserJoinState( EJoinState joinState, GuiUserJoin* guiUserJoin );
 
     virtual void				announceUserJoinRequested( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
-    virtual void				announceUserJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				announceUserJoinWasGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
+    virtual void				announceUserJoinIsGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserUnJoinGranted( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinDenied( GroupieId& groupieId, GuiUserJoin* guiUserJoin );
     virtual void				announceUserJoinLeaveHost( GroupieId& groupieId );

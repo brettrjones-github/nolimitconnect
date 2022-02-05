@@ -56,6 +56,8 @@ public:
     std::map<HostedId, GuiHosted*>& getHostedList( void )                           { return m_HostedList; }
     GuiHosted*                  updateHosted( VxNetIdent* hisIdent, EHostType hostType );
 
+    EJoinState                  getHostJoinState( GroupieId& groupieId );
+
     void                        wantHostedListCallbacks( GuiHostedListCallback* client, bool enable );
 
     void                        setJoinOnStartup( std::string& hostUrl, bool enable );

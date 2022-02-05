@@ -21,6 +21,7 @@
 #include <ptop_src/ptop_engine_src/BigListLib/BigListInfo.h>
 #include <ptop_src/ptop_engine_src/BaseInfo/BaseSessionInfo.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMgr.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h>
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxTime.h>
@@ -223,7 +224,7 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
     joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-    joinInfo->setJoinState( eJoinStateJoinGranted );
+    joinInfo->setJoinState( eJoinStateJoinIsGranted );
     joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
     joinInfo->setConnectionId( sktBase->getConnectionId() );
@@ -311,18 +312,22 @@ void UserJoinMgr::onUserLeftHost( GroupieId& groupieId, VxSktBase* sktBase, VxNe
 }
 
 //============================================================================
+void UserJoinMgr::onUserLeftHost( GroupieId& groupieId )
+{
+    changeJoinState( groupieId, eJoinStateJoinLeaveHost );
+}
+
+//============================================================================
 void UserJoinMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
 {
     lockResources();
     UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
     if( joinInfo )
     {
-
-
         joinInfo->setNetIdent( netIdent );
         int64_t timeNowMs = GetTimeStampMs();
         joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-        joinInfo->setJoinState( eJoinStateJoinGranted );
+        joinInfo->setJoinState( eJoinStateJoinLeaveHost );
         joinInfo->setHostUrl( netIdent->getMyOnlineUrl() );
 
         joinInfo->setConnectionId( sktBase->getConnectionId() );
@@ -336,8 +341,6 @@ void UserJoinMgr::onUserUnJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, 
         saveToDatabase( joinInfo, true );
 
         unlockResources();
-
-        m_Engine.getThumbMgr().queryThumbIfNeeded( sktBase, netIdent, sessionInfo.getPluginType() );
 
         announceUserUnJoinUpdated( joinInfo );
     }
@@ -482,11 +485,36 @@ void UserJoinMgr::changeJoinState( GroupieId& groupieId, EJoinState joinState )
     {
         if( groupieId.getGroupieOnlineId() != m_Engine.getMyOnlineId() )
         {
-            saveToDatabase( joinInfo, true );
+            saveToDatabase( joinInfo, false );
         }
 
         announceUserJoinUpdated( joinInfo );
     }
 
     unlockResources();
+}
+
+//============================================================================
+EJoinState UserJoinMgr::getUserJoinState( GroupieId& groupieId )
+{
+    EJoinState joinState{ eJoinStateNone };
+    lockResources();
+    UserJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( joinInfo )
+    {
+        joinState = joinInfo->getJoinState();
+    }
+
+    unlockResources();
+    return joinState;
+}
+
+//============================================================================
+void UserJoinMgr::queryUserListFromHost( GroupieId& groupieId )
+{
+    PluginBaseHostClient* plugin = dynamic_cast< PluginBaseHostClient*>(m_Engine.getPluginMgr().findHostClientPlugin( groupieId.getHostType() ) );
+    if( plugin )
+    {
+        plugin->queryUserListFromHost( groupieId );
+    }
 }

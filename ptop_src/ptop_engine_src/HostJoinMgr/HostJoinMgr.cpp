@@ -291,7 +291,7 @@ void HostJoinMgr::onHostJoinedByUser( VxSktBase * sktBase, VxNetIdent * netIdent
     joinInfo->setNetIdent( netIdent );
     int64_t timeNowMs = GetTimeStampMs();
     joinInfo->setThumbId( netIdent->getThumbId( PluginTypeToHostType( sessionInfo.getPluginType() ) ) );
-    joinInfo->setJoinState( eJoinStateJoinGranted );
+    joinInfo->setJoinState( eJoinStateJoinIsGranted );
     joinInfo->setUserUrl( netIdent->getMyOnlineUrl() );
     joinInfo->setFriendState( netIdent->getMyFriendshipToHim() );
 
@@ -489,7 +489,7 @@ EJoinState HostJoinMgr::fromGuiQueryJoinState( EHostType hostType, VxNetIdent& n
     else if( netIdent.getMyOnlineId() == m_Engine.getMyOnlineId() )
     {
         // if we are host we can always join our own hosted servers
-        hostJoinState = eJoinStateJoinGranted;
+        hostJoinState = eJoinStateJoinWasGranted;
     }
 
     unlockResources();
@@ -517,7 +517,8 @@ EMembershipState HostJoinMgr::fromGuiQueryMembership( EHostType hostType, VxNetI
         case eJoinStateJoinLeaveHost:
             return eMembershipStateCanBeRequested;
 
-        case eJoinStateJoinGranted:
+        case eJoinStateJoinIsGranted:
+        case eJoinStateJoinWasGranted:
             return eMembershipStateJoined;
 
         case eJoinStateJoinDenied:
@@ -562,4 +563,19 @@ void HostJoinMgr::changeJoinState( GroupieId& groupieId, EJoinState joinState )
 void HostJoinMgr::fromGuiListAction( EListAction listAction )
 {
     
+}
+
+//============================================================================
+EJoinState HostJoinMgr::getHostJoinState( GroupieId& groupieId )
+{
+    EJoinState joinState{ eJoinStateNone };
+    lockResources();
+    HostJoinInfo* joinInfo = findUserJoinInfo( groupieId );
+    if( joinInfo )
+    {
+        joinState = joinInfo->getJoinState();
+    }
+
+    unlockResources();
+    return joinState;
 }

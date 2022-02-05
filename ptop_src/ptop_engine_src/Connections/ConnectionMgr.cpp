@@ -458,12 +458,7 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
                 uint64_t timeNow = GetTimeStampMs();
                 HandshakeInfo shakeInfo( sktBase, sessionId, onlineId, callback, connectReason, timeNow );
                 connectInfo->addConnectReason( shakeInfo );
-                if( callback )
-                {
-                    LogMsg( LOG_DEBUG, "requestConnection onContactConnected start" );
-                    callback->onContactConnected( sessionId, sktBase, onlineId, connectReason );
-                    LogMsg( LOG_DEBUG, "requestConnection onContactConnected done" );
-                }
+                isDisconnected = false;
             }
             else
             {
@@ -473,10 +468,15 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
     }
 
     unlockConnectionList();
+
     if( isDisconnected && sktBase )
     {
         onSktDisconnected( sktBase );
         sktBase = nullptr;
+    }
+    else if( sktBase && callback )
+    {
+        callback->onContactConnected( sessionId, sktBase, onlineId, connectReason );
     }
 
     if( sktBase )

@@ -214,7 +214,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
         {
             if( !netIdent->isIgnored() )
             {
-                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinGranted )
+                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
                     m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
@@ -229,7 +229,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
             }
             else
             {
-                // TODO .. should we drop the connection?
+                // TODO .. should we drop the connection or just ignore ?
             }
         }
         else if( ePluginAccessDisabled == joinReply.getAccessState() )
@@ -279,7 +279,7 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
         {
             if( !netIdent->isIgnored() )
             {
-                if( m_HostServerMgr.getJoinState( netIdent, pktReq->getHostType() ) == eJoinStateJoinGranted )
+                if( m_HostServerMgr.getJoinState( netIdent, pktReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
                     m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
@@ -344,7 +344,7 @@ void PluginBaseHostService::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pk
         {
             if( !netIdent->isIgnored() )
             {
-                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinGranted )
+                if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
                     joinReply.setAccessState( ePluginAccessOk );

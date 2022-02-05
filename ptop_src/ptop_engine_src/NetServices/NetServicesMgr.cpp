@@ -295,20 +295,29 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServi
 }
 
 //============================================================================
-bool NetServicesMgr::doNetCmdPing( const char * ipAddress, uint16_t u16Port,	std::string& retPong )
+bool NetServicesMgr::doNetCmdPing( const char * ipAddress, uint16_t u16Port, std::string& retPong )
 {
-	VxSktConnectSimple toClientConn;
 	VxTimer	pingTimer;
 
-	if( INVALID_SOCKET == toClientConn.connectTo( ipAddress, u16Port, PORT_TEST_CONNECT_TO_CLIENT_TIMEOUT ) )
+	VxSktConnectSimple toClientConn;
+	if( INVALID_SOCKET != toClientConn.connectTo( ipAddress, u16Port, PORT_TEST_CONNECT_TO_CLIENT1_TIMEOUT ) )
 	{
-		LogMsg( LOG_ERROR, "##P NetServicesMgr::doNetCmdPing: timeout %d could not connect to %s:%d %3.3f sec thread 0x%x", PORT_TEST_CONNECT_TO_CLIENT_TIMEOUT, ipAddress, u16Port, pingTimer.elapsedSec(), VxGetCurrentThreadId() );
-		return false;
+		double connectTime = pingTimer.elapsedSec();
+		LogMsg( LOG_INFO, "##P NetServicesMgr::doNetCmdPing connect to %s:%d in %3.3f sec thread 0x%x", ipAddress, u16Port, connectTime, VxGetCurrentThreadId() );
+		return sendAndRecievePing( pingTimer, toClientConn, retPong, PONG_RX_TIMEOUT );
+	}
+
+	LogMsg( LOG_WARNING, "##P NetServicesMgr::doNetCmdPing:  timeout %d could not connect to %s:%d %3.3f sec will try again", PORT_TEST_CONNECT_TO_CLIENT1_TIMEOUT, ipAddress, u16Port, pingTimer.elapsedSec() );
+	VxSktConnectSimple toClientConn2;
+	if( INVALID_SOCKET != toClientConn2.connectTo( ipAddress, u16Port, PORT_TEST_CONNECT_TO_CLIENT2_TIMEOUT ) )
+	{
+		double connectTime = pingTimer.elapsedSec();
+		LogMsg( LOG_INFO, "##P NetServicesMgr::doNetCmdPing connect to %s:%d in %3.3f sec thread 0x%x", ipAddress, u16Port, connectTime, VxGetCurrentThreadId() );
+		return sendAndRecievePing( pingTimer, toClientConn2, retPong, PONG_RX_TIMEOUT );
 	}
 	
-	double connectTime = pingTimer.elapsedSec();
-	LogMsg( LOG_INFO, "##P NetServicesMgr::doNetCmdPing connect to %s:%d in %3.3f sec thread 0x%x", ipAddress, u16Port, connectTime, VxGetCurrentThreadId() );
-	return sendAndRecievePing( pingTimer, toClientConn, retPong, PONG_RX_TIMEOUT );
+	LogMsg( LOG_ERROR, "##P NetServicesMgr::doNetCmdPing:  timeout %d could not connect to %s:%d %3.3f sec FAIL", PORT_TEST_CONNECT_TO_CLIENT2_TIMEOUT, ipAddress, u16Port, pingTimer.elapsedSec() );
+	return false;
 }
 
 //============================================================================
@@ -377,18 +386,6 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 	return true;
 }
 
-////============================================================================
-//RCODE NetServicesMgr::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
-//{
-//	return m_NetServiceHost.handleNetCmdHostReq( sktBase, netServiceHdr );
-//}
-//
-////============================================================================
-//RCODE NetServicesMgr::handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
-//{
-//	return m_NetServiceHost.handleNetCmdHostReply( sktBase, netServiceHdr );
-//}
-
 //============================================================================
 void NetServicesMgr::setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION pfuncPortOpenCallbackHandler, void * userData )
 {
@@ -408,41 +405,6 @@ void NetServicesMgr::addNetActionIsMyPortOpenToQueue( void )
 {
 	addNetActionCommand( new NetActionIsMyPortOpen( *this ) );
 }
-
-////============================================================================
-//void NetServicesMgr::announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction )
-//{
-//	addNetActionCommand( new NetActionAnnounce( *this, anchorIp, u16HostPort, eHostAction ) );
-//}
-//
-////============================================================================
-//void NetServicesMgr::performRandomConnect( void )
-//{
-//	if( false == isActionQued( eNetActionRandomConnect ) )
-//	{
-//		addNetActionCommand( new NetActionRandomConnect( *this, 
-//			m_Engine.getNetworkStateMachine().getHostIp(),
-//			m_Engine.getNetworkStateMachine().getHostPort(),
-//			eHostActionRandomConnect ) );
-//	}
-//	else
-//	{
-//		LogMsg( LOG_INFO, "Net Action Random Connect already qued" );
-//	}
-//}
-
-////============================================================================
-//void NetServicesMgr::netActionResultRandomConnect( ENetCmdError eAppErr, HostList * anchorList )
-//{
-//	if( eAppErrNone == eAppErr )
-//	{
-//		m_Engine.getNetConnector().handleRandomConnectResults( anchorList );
-//	}
-//	else
-//	{
-//		LogMsg( LOG_INFO, "NetServicesMgr::netActionResultRandomConnect ERROR %d", eAppErr );
-//	}
-//}
 
 //============================================================================
 void NetServicesMgr::netActionResultIsMyPortOpen( ENetCmdError eAppErr, std::string& myExternalIp )
@@ -574,23 +536,6 @@ ENetCmdError NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool 
     retMyExternalIp = "";
 	// Dont use local ip.. on some systems the local ip given is not the one with actual internet access or in some vpns when use local ip the connection fails
 	std::string lclIP = "";
-	/*
-	std::string lclIP = m_NetworkMgr.getLocalIpAddress();
-    if( lclIP.empty() )
-    {
-        if( IsLogEnabled( eLogNetworkState ) )
-        {
-            LogMsg( LOG_ERROR, "NetServicesMgr::doIsMyPortOpen no local ip" );
-        }
-
-		if( m_pfuncPortOpenCallbackHandler )
-		{
-			m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, eNetCmdErrorBadParameter, retMyExternalIp );
-		}
-
-        return eNetCmdErrorBadParameter;
-    }
-	*/
 
 	uint16_t tcpListenPort = m_Engine.getMyPktAnnounce().getOnlinePort();
 
@@ -837,7 +782,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTim
 		LogMsg( LOG_INFO, "Is Your TCP Port %d Open Test Connect FAILED (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		if( sendMsgToUser )
 		{
-			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Connect FAILED (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
+			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Connect FAILED (%3.3f sec)", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
 		return eNetCmdErrorConnectFailed;
@@ -854,7 +799,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTim
 		LogMsg( LOG_ERROR, "Is TCP Port %d Open Send Command Error (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		if( sendMsgToUser )
 		{
-			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Send Command Error (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
+			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Send Command Error (%3.3f sec)", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
 		return eNetCmdErrorTxFailed;

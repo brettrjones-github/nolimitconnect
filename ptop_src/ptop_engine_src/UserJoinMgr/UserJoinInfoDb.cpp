@@ -103,6 +103,8 @@ bool UserJoinInfoDb::addUserJoin(   GroupieId&      groupieId,
                                     std::string     hostUrl
                                    )
 {
+    // always change is granted to was granted so when loaded the app knows have not rejoined yet
+    joinState = joinState == eJoinStateJoinIsGranted ? eJoinStateJoinWasGranted : joinState;
     removeUserJoin( groupieId );
 
     std::string onlineIdStr = groupieId.getHostedOnlineId().toHexString();

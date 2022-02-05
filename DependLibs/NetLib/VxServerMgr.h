@@ -47,8 +47,11 @@ public:
 	virtual bool				checkWatchdog( void );
 
     virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr );
-    /// @brief listen on port without binding to a ip address
+
+    // old attempts to make listen for incomming connection stable.. just for reference
+    virtual bool                startListeningOldAttepts( uint16_t u16ListenPort, const char* ip );
     virtual bool                startListeningNoBind( uint16_t u16ListenPort );
+
 	virtual RCODE				stopListening( void );
 
 	void						listenForConnectionsToAccept( VxThread * poVxThread );

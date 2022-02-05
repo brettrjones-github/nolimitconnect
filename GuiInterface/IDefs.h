@@ -422,7 +422,8 @@ enum EJoinState
     eJoinStateSendFail,
     eJoinStateSendAcked,
     eJoinStateJoinRequested,
-    eJoinStateJoinGranted,
+    eJoinStateJoinWasGranted,
+    eJoinStateJoinIsGranted,
     eJoinStateJoinDenied,
     eJoinStateJoinLeaveHost,
 
