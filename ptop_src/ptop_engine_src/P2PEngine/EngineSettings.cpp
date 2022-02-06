@@ -491,7 +491,9 @@ void EngineSettings::setUseNatPortForward( bool bUseNatPortForward )
 EFirewallTestType EngineSettings::getFirewallTestSetting( void )
 {
 	uint16_t u16Setting;
+    m_SettingsDbMutex.lock();
 	getIniValue( MY_SETTINGS_KEY, "FirewallTest", u16Setting, 0 );
+    m_SettingsDbMutex.unlock();
 	return ( EFirewallTestType)u16Setting;
 }
 

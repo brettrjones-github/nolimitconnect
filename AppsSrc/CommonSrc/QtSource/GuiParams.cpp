@@ -1413,20 +1413,7 @@ QString GuiParams::describeStatus( EHostJoinStatus hostStatus )
         return QObject::tr( "Host Join Connect Success" );
     case eHostJoinConnectFailed:
         return QObject::tr( "Host Join Connect Failed" );
-    case eHostJoinSendingJoinRequest:
-        return QObject::tr( "Host Join Sending Request" );
-    case eHostJoinSendingUnJoinRequest:
-        return QObject::tr( "Host Sending UnJoin Request" );
-    case eHostJoinSendJoinRequestFailed:
-        return QObject::tr( "Host Join Send Request Failed" );
-    case eHostJoinSendUnJoinRequestFailed:
-        return QObject::tr( "Host Send UnJoin Request Failed" );
-    case eHostJoinSuccess:
-        return QObject::tr( "Host Join Success" );
-    case eHostJoinUnJoinSuccess:
-        return QObject::tr( "Host UnJoin Success" );
-    case eHostJoinFail:
-        return QObject::tr( "Host Join Failed" );
+
     case eHostJoinFailPermission:
         return QObject::tr( "Host Join Fail Permission" );
     case eHostJoinFailConnectDropped:
@@ -1435,6 +1422,34 @@ QString GuiParams::describeStatus( EHostJoinStatus hostStatus )
         return QObject::tr( "Host Join Invalid Param" );
     case eHostJoinDone:
         return QObject::tr( "Host Join Done" );
+
+    case eHostJoinSendingJoinRequest:
+        return QObject::tr( "Host Join Sending Request" );
+    case eHostJoinSendJoinRequestFailed:
+        return QObject::tr( "Host Join Send Request Failed" );
+    case eHostJoinSuccess:
+        return QObject::tr( "Host Join Success" );
+    case eHostJoinFail:
+        return QObject::tr( "Host Join Failed" );
+
+    case eHostJoinSendingLeaveRequest:
+        return QObject::tr( "Host Leave Sending Request" );
+    case eHostJoinSendLeaveRequestFailed:
+        return QObject::tr( "Host Leave Send Request Failed" );
+    case eHostLeaveSuccess:
+        return QObject::tr( "Host Leave Success" );
+    case eHostLeaveFail:
+        return QObject::tr( "Host Leave Failed" );
+
+    case eHostJoinSendingUnJoinRequest:
+        return QObject::tr( "Host Sending UnJoin Request" );
+    case eHostJoinSendUnJoinRequestFailed:
+        return QObject::tr( "Host Send UnJoin Request Failed" );
+    case eHostJoinUnJoinSuccess:
+        return QObject::tr( "Host UnJoin Success" );
+    case eHostJoinUnJoinFail:
+        return QObject::tr( "Host UnJoin Fail" );
+
     default:
         return QObject::tr( "Invalid Host Param" );
     }

@@ -85,16 +85,19 @@ enum EConnectReason
 
     eConnectReasonGroupAnnounce,
     eConnectReasonGroupJoin,
+    eConnectReasonGroupLeave,
     eConnectReasonGroupUnJoin,
     eConnectReasonGroupSearch,
 
     eConnectReasonChatRoomAnnounce,
     eConnectReasonChatRoomJoin,
+    eConnectReasonChatRoomLeave,
     eConnectReasonChatRoomUnJoin,
     eConnectReasonChatRoomSearch,
 
     eConnectReasonRandomConnectAnnounce,
     eConnectReasonRandomConnectJoin,
+    eConnectReasonRandomConnectLeave,
     eConnectReasonRandomConnectUnJoin,
     eConnectReasonRandomConnectSearch,
 
@@ -311,18 +314,27 @@ enum EHostJoinStatus
     eHostJoinHandshakeTimeout = 7,
     eHostJoinConnectSuccess = 8,
     eHostJoinConnectFailed = 9,
-    eHostJoinSendingJoinRequest = 10,
-    eHostJoinSendJoinRequestFailed = 11,
-    eHostJoinSuccess = 12,
-    eHostJoinSendingUnJoinRequest = 13,
-    eHostJoinSendUnJoinRequestFailed = 14,
-    eHostJoinUnJoinSuccess = 15,
-    eHostJoinFail = 16,
-    eHostJoinFailPermission = 17,
-    eHostJoinFailConnectDropped = 18,
-    eHostJoinInvalidParam = 19,
-    eHostJoinPluginDisabled = 20,
-    eHostJoinDone = 21,
+
+    eHostJoinFailPermission = 10,
+    eHostJoinFailConnectDropped = 11,
+    eHostJoinInvalidParam = 12,
+    eHostJoinPluginDisabled = 13,
+    eHostJoinDone = 14,
+
+    eHostJoinSendingJoinRequest = 15,
+    eHostJoinSendJoinRequestFailed = 16,
+    eHostJoinSuccess = 17,
+    eHostJoinFail = 18,
+
+    eHostJoinSendingLeaveRequest = 19,
+    eHostJoinSendLeaveRequestFailed = 20,
+    eHostLeaveSuccess = 21,
+    eHostLeaveFail = 22,
+
+    eHostJoinSendingUnJoinRequest = 23,
+    eHostJoinSendUnJoinRequestFailed = 24,
+    eHostJoinUnJoinSuccess = 25,
+    eHostJoinUnJoinFail = 26,
 
     eMaxHostJoinStatus
 };
@@ -1068,7 +1080,10 @@ const char * DescribeAppModule( EAppModule appModule );
 const char * DescribeAge( EAgeType ageType );
 const char * DescribeCommError( ECommErr commErr );
 const char * DescribeConnectReason( EConnectReason connectReason );
-bool        IsConnectReasonJoin( EConnectReason connectReason );
+bool         IsConnectReasonJoin( EConnectReason connectReason );
+bool         IsConnectReasonLeave( EConnectReason connectReason );
+bool         IsConnectReasonUnJoin( EConnectReason connectReason );
+bool         IsConnectReasonSearch( EConnectReason connectReason );
 const char * DescribeConnectStatus( EConnectStatus connectStatus );
 //! describe friend state
 const char * DescribeFriendState( EFriendState eFriendState );

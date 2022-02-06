@@ -90,7 +90,9 @@ void HostJoinInfoDb::removeHostJoin( GroupieId& groupieId )
     std::string onlineIdStr = groupieId.getGroupieOnlineId().toHexString();
     DbBindList bindList( onlineIdStr.c_str() );
     bindList.add( (int)groupieId.getHostType() );
+    lockHostJoinInfoDb();
     sqlExec( "DELETE FROM tblHostJoins WHERE onlineId=? AND pluginType=?", bindList );
+    unlockHostJoinInfoDb();
 }
 
 //============================================================================
@@ -122,9 +124,10 @@ bool HostJoinInfoDb::addHostJoin(   GroupieId&      groupieId,
     bindList.add( lastJoinMs ); 
     bindList.add( (int)hostFlags );
     bindList.add( hostUrl.c_str() );
-
+    lockHostJoinInfoDb();
     RCODE rc = sqlExec( "INSERT INTO tblHostJoins (onlineId, thumbId, infoModMs, pluginType, friendState, joinState, lastConnMs, lastJoinMs, hostFlags, userUrl) values(?,?,?,?,?,?,?,?,?,?)",
         bindList );
+    unlockHostJoinInfoDb();
     vx_assert( 0 == rc );
     if( rc )
     {

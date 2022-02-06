@@ -50,7 +50,8 @@ public:
     virtual EMembershipState	getMembershipState( VxNetIdent* netIdent, EHostType hostType );
     virtual EConnectReason      getSearchConnectReason( EHostType hostType );
 
-    virtual void                connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason );
+    virtual bool                connectToHostByPtopUrlAndReason( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl, EConnectReason connectReason );
+    virtual bool                connectToHost( EHostType hostType, VxGUID& sessionId, std::string& url, EConnectReason connectReason );
     virtual void                removeSession( VxGUID& sessionId, EConnectReason connectReason = eConnectReasonUnknown ) {};
 
     // error handling for invalid packet
@@ -79,6 +80,7 @@ protected:
 
     void                        sendAnnounceRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
     void                        sendJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
+    void                        sendLeaveRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
     void                        sendUnJoinRequest( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason );
 
 
@@ -94,6 +96,7 @@ protected:
 
     virtual bool                isAnnounceConnectReason( EConnectReason connectReason );
     virtual bool                isJoinConnectReason( EConnectReason connectReason );
+    virtual bool                isLeaveConnectReason( EConnectReason connectReason );
     virtual bool                isUnJoinConnectReason( EConnectReason connectReason );
     virtual bool                isSearchConnectReason( EConnectReason connectReason );
 

@@ -25,16 +25,19 @@ namespace
 
         "Connect Reason Group Announce ",
         "Connect Reason Group Join ",
+        "Connect Reason Group Leave ",
         "Connect Reason Group UnJoin ",
         "Connect Reason Group Search ",
 
         "Connect Reason Chat RoomAnnounce ",
         "Connect Reason Chat Room Join ",
+        "Connect Reason Chat Room Leave ",
         "Connect Reason Chat Room UnJoin ",
         "Connect Reason Chat Room Search ",
 
         "Connect Reason Random Connect Announce ",
         "Connect Reason Random Connect Join ",
+        "Connect Reason Random Connect Leave ",
         "Connect Reason Random Connect UnJoin ",
         "Connect Reason Random Connect Search ",  
 
@@ -142,18 +145,27 @@ namespace
         "Host Join HandShake Timeout ",
         "Host Join Connect Success ",
         "Host Join Connect Failed ",
-        "Host Join Sending Request ",
-        "Host Join Send Request Failed ",
-        "Host Join Success ",
-        "Host UnJoin Sending Request ",
-        "Host UnJoin Send Request Failed ",
-        "Host UnJoin Success "
-        "Host Join Failed ",
-        "Host Join Fail Permission ",  
+
+        "Host Join Fail Permission ",
         "Host Join Fail Connect Dropped ",
         "Host Join Invalid Param ",
         "Host Join Plugin Disabled ",
         "Host Join Done ",
+
+        "Host Join Sending Request ",
+        "Host Join Send Request Failed ",
+        "Host Join Success ",
+        "Host Join Failed ",
+
+        "Host Leave Sending Request ",
+        "Host Leave Send Request Failed ",
+        "Host Leave Success ",
+        "Host Leave Failed ",
+
+        "Host UnJoin Sending Request ",
+        "Host UnJoin Send Request Failed ",
+        "Host UnJoin Success "
+        "Host UnJoin Failed ",
 
         "Max Host Join Status ",
     };
@@ -608,6 +620,24 @@ const char * DescribeConnectReason( EConnectReason eConnectReason )
 bool IsConnectReasonJoin( EConnectReason connectReason )
 {
     return eConnectReasonGroupJoin == connectReason || eConnectReasonChatRoomJoin == connectReason || eConnectReasonRandomConnectJoin == connectReason;
+}
+
+//============================================================================
+bool IsConnectReasonLeave( EConnectReason connectReason )
+{
+    return eConnectReasonGroupLeave == connectReason || eConnectReasonChatRoomLeave == connectReason || eConnectReasonRandomConnectLeave == connectReason;
+}
+
+//============================================================================
+bool IsConnectReasonUnJoin( EConnectReason connectReason )
+{
+    return eConnectReasonGroupUnJoin == connectReason || eConnectReasonChatRoomUnJoin == connectReason || eConnectReasonRandomConnectUnJoin == connectReason;
+}
+
+//============================================================================
+bool IsConnectReasonSearch( EConnectReason connectReason )
+{
+    return eConnectReasonGroupSearch == connectReason || eConnectReasonChatRoomSearch == connectReason || eConnectReasonRandomConnectSearch == connectReason;
 }
 
 //============================================================================
