@@ -18,6 +18,7 @@
 #include "AudioIoMgr.h"
 
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
 
 #include <QDebug>
 #include <QtEndian>
@@ -207,6 +208,12 @@ qint64 AudioInIo::readData( char *data, qint64 maxlen )
 //============================================================================
 qint64 AudioInIo::writeData( const char * data, qint64 len )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return 0;
+    }
+
     m_AudioBufMutex.lock();
     m_AudioBuffer.append( data, len );
     updateAtomicBufferSize();
@@ -220,6 +227,12 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
 /// best guess at delay time
 int AudioInIo::calculateMicrophonDelayMs()
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return 0;
+    }
+
     return (int)( ( getAtomicBufferSize() * ( BYTES_TO_MS_MULTIPLIER_MICROPHONE / m_DivideCnt )  ) + m_AudioIoMgr.toGuiGetAudioDelayMs( eAppModulePtoP ) );
 }
 
@@ -227,6 +240,12 @@ int AudioInIo::calculateMicrophonDelayMs()
 /// space available to que audio data into buffer
 int AudioInIo::audioQueFreeSpace()
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return 0;
+    }
+
 	int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - m_AtomicBufferSize;
 	if( freeSpace < 0 )
 	{
@@ -248,6 +267,12 @@ int AudioInIo::audioQueUsedSpace()
 //============================================================================
 qint64 AudioInIo::bytesAvailable() const
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return 0;
+    }
+
 	//m_AudioBufMutex.lock();
 	qint64 audioBytesAvailableToRead = m_AudioBuffer.size() + QIODevice::bytesAvailable();
 	//m_AudioBufMutex.unlock();
@@ -263,6 +288,12 @@ void AudioInIo::slotAudioNotified()
 //============================================================================
 void AudioInIo::onAudioDeviceStateChanged( QAudio::State state )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return;
+    }
+
     if( m_AudioInState != state )
     {
         LogMsg( LOG_DEBUG, "Audio In state change from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioInState ), m_AudioIoMgr.describeAudioState( state ) );
@@ -274,6 +305,12 @@ void AudioInIo::onAudioDeviceStateChanged( QAudio::State state )
 // resume qt audio if needed
 void AudioInIo::slotCheckForBufferUnderun()
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return;
+    }
+
 	int bufferedAudioData = m_AtomicBufferSize;
 
     if( bufferedAudioData && m_AudioInputDevice )

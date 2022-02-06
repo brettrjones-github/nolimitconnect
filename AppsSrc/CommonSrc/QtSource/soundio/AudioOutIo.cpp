@@ -18,6 +18,7 @@
 #include "AudioIoMgr.h"
 
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
 
 #include <QDebug>
 #include <QtEndian>
@@ -282,11 +283,27 @@ void AudioOutIo::slotAudioNotify()
 //============================================================================
 void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return;
+    }
+
     if( m_AudioOutState != state )
     {
         LogMsg( LOG_DEBUG, "onAudioDeviceStateChanged  from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioOutState ), m_AudioIoMgr.describeAudioState( state ) );
         m_AudioOutState = state;
+        if( m_AudioOutState == QAudio::State::StoppedState )
+        {
+            // do not attempt anythig while stopped in slot
+            return;
+        }
     }
+    else
+    {
+        return;
+    }
+
 
 #if defined(TARGET_OS_WINDOWS)
     if( m_AudioOutputDevice )
@@ -310,6 +327,12 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 // resume qt audio if needed
 void AudioOutIo::slotCheckForBufferUnderun()
 {
+    if( VxIsAppShuttingDown() )
+    {
+        // do not attempt anythig while being destroyed
+        return;
+    }
+
     int bufferedAudioData = m_AudioIoMgr.getDataReadyForSpeakersLen();
     
 	if( m_AudioOutputDevice )
