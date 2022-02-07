@@ -47,6 +47,13 @@ void PluginGroupClient::fromGuiJoinHost( EHostType hostType, VxGUID& sessionId, 
 }
 
 //============================================================================
+void PluginGroupClient::fromGuiLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
+{
+    std::string url = !ptopUrl.empty() ? ptopUrl : "";
+    m_HostClientMgr.fromGuiLeaveHost( hostType, sessionId, url );
+}
+
+//============================================================================
 void PluginGroupClient::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl )
 {
     std::string url = !ptopUrl.empty() ? ptopUrl : "";

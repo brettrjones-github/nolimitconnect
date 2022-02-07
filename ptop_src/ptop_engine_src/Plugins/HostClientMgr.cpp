@@ -254,8 +254,9 @@ void HostClientMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase
 }
 
 //============================================================================
-void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+bool HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
+    bool result{ false };
     if( isSearchConnectReason( connectReason ) )
     {
         m_Engine.getToGui().toGuiHostSearchStatus( hostType, sessionId, eHostSearchConnectSuccess );
@@ -290,6 +291,10 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
                 {
                     LogModule( eLogHostSearch, LOG_DEBUG, "HostClientMgr::onConnectToHostSuccess failed send PktHostSearchReq" );
                 }
+                else
+                {
+                    result = true;
+                }
             }
             else
             {
@@ -309,6 +314,8 @@ void HostClientMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
     {
         HostBaseMgr::onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason );
     }
+
+    return result;
 }
 
 //============================================================================

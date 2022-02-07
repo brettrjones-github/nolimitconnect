@@ -34,7 +34,6 @@ namespace
 //============================================================================
 VxPeerMgr::VxPeerMgr()
 {
-	m_eSktMgrType = eSktMgrTypeTcpConnect;
 	setReceiveCallback( VxPeerMgrRxCallbackHandler, this );
 }
 

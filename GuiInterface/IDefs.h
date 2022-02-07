@@ -1148,6 +1148,8 @@ EConnectReason HostTypeToConnectAnnounceReason( EHostType hostType );
 //! convert Host Type to connect reason
 EConnectReason HostTypeToConnectJoinReason( EHostType hostType );
 //! convert Host Type to connect reason
+EConnectReason HostTypeToConnectLeaveReason( EHostType hostType );
+//! convert Host Type to connect reason
 EConnectReason HostTypeToConnectUnJoinReason( EHostType hostType );
 //! convert Host Type to connect reason
 EConnectReason HostTypeToConnectSearchReason( EHostType hostType );

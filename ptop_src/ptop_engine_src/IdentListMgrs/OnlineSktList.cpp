@@ -35,7 +35,6 @@ bool OnlineSktList::getConnections( HostedId& hostId, std::set<std::pair<VxGUID,
             if( ( ( GroupieId& )*iter ).getHostedId() == hostId )
             {
                 retConnectIdSet.insert( std::make_pair(mapIter->first, ( ( GroupieId& )*iter ).getGroupieOnlineId() ) );
-                break;
             }
         }
     }

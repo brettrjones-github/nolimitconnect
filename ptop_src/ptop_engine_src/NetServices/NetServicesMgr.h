@@ -94,7 +94,8 @@ public:
 															VxSktConnectSimple *	sktSimple, 
 															int						tcpListenPort,
 															std::string&			retMyExternalIp,
-															bool					sendMsgToUser );
+															bool					sendMsgToUser,
+															int						sendRecieveTimeout = IS_PORT_OPEN_RX_DATA_TIMEOUT );
 	ENetCmdError                sendAndRecieveQueryHostId( VxTimer&				portTestTimer,
                                                            VxSktConnectSimple *	netServConn,
                                                            VxGUID&			    retHostId,

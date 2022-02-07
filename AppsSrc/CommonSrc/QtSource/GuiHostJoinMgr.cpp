@@ -372,7 +372,14 @@ void GuiHostJoinMgr::wantHostJoinCallbacks( GuiHostJoinCallback* client, bool en
 //============================================================================
 void GuiHostJoinMgr::announceJoinState( GuiHostJoin* guiHostJoin, EJoinState joinState )
 {
-    switch( guiHostJoin->getJoinState() )
+    if( guiHostJoin->getJoinState() != joinState )
+    {
+        LogMsg( LOG_ERROR, "GuiHostJoinMgr::announceJoinState join state %s != param state %s",
+                GuiParams::describeJoinState( guiHostJoin->getJoinState() ).toUtf8().constData(),
+                GuiParams::describeJoinState( joinState ).toUtf8().constData() );
+    }
+
+    switch( joinState )
     {
     case eJoinStateSending:
     case eJoinStateSendFail:
@@ -391,9 +398,13 @@ void GuiHostJoinMgr::announceJoinState( GuiHostJoin* guiHostJoin, EJoinState joi
         break;
     case eJoinStateJoinLeaveHost:
         announceHostJoinLeaveHost( guiHostJoin->getGroupieId() );
+        break;
+    default:
+        LogMsg( LOG_ERROR, "GuiHostJoinMgr::announceJoinState unknown join state %s",
+                GuiParams::describeJoinState( joinState ).toUtf8().constData() );
+        break;
     }
 }
-
 
 //============================================================================
 void GuiHostJoinMgr::announceHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )

@@ -219,6 +219,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
                     // even though friendship not high enough if admin has accepted then send accepted
                     m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
                     joinReply.setAccessState( ePluginAccessOk );
+                    m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
                 }
                 else
                 {
@@ -273,24 +274,21 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
         {
             m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
 
-            m_HostServerMgr.onUserUnJoined( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
+            m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
         }
         else if( ePluginAccessLocked == pktReply.getAccessState() )
         {
             if( !netIdent->isIgnored() )
             {
+                m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
                 if( m_HostServerMgr.getJoinState( netIdent, pktReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
-                    m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
                     pktReply.setAccessState( ePluginAccessOk );
                 }
-                else
-                {
-                    // add to join request list
-                    m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
-                    m_HostServerMgr.onJoinRequested( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
-                }
+      
+                m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );                
+                m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
             }
             else
             {
@@ -349,11 +347,9 @@ void PluginBaseHostService::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pk
                     // even though friendship not high enough if admin has accepted then send accepted
                     joinReply.setAccessState( ePluginAccessOk );
                 }
-                else
-                {
-                    // add to join request list
-                    m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
-                }
+
+                m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+                m_HostServerMgr.onUserUnJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
             }
             else
             {

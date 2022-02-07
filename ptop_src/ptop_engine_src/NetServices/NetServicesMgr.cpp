@@ -698,7 +698,18 @@ static int uint16_t = 0;
                                                             &portOpenConn1,
                                                             tcpListenPort,
                                                             retMyExternalIp,
-                                                            isCellDataNetwork );
+                                                            isCellDataNetwork,
+															6000);
+			if( portOpenTestError == eNetCmdErrorResponseTimedOut || portOpenTestError == eNetCmdErrorPortIsClosed )
+			{
+				portOpenTestError = sendAndRecieveIsMyPortOpen( portTestTimer,
+					&portOpenConn1,
+					tcpListenPort,
+					retMyExternalIp,
+					isCellDataNetwork,
+					20000 );
+			}
+
             portOpenConn1.closeSkt();
         }
     }
@@ -775,7 +786,8 @@ ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTim
 														VxSktConnectSimple *	netServConn, 
 														int						tcpListenPort,
 														std::string&			retMyExternalIp,
-														bool					sendMsgToUser )
+														bool					sendMsgToUser,
+														int						sendRecieveTimeout )
 {
     if( nullptr == netServConn || !netServConn->isConnected() )
     {
@@ -806,15 +818,15 @@ ENetCmdError NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTim
 	}
 
 	VxSleep( 1000 );
-	char rxBuf[ 513 ];
+	char rxBuf[ 1024 ];
 	rxBuf[ 0 ] = 0;
 	NetServiceHdr netServiceHdr;
 	if( false == m_NetServiceUtils.rxNetServiceCmd( netServConn, 
 													rxBuf, 
 													sizeof( rxBuf ) - 1, 
 													netServiceHdr, 
-													IS_PORT_OPEN_RX_HDR_TIMEOUT, 
-													IS_PORT_OPEN_RX_DATA_TIMEOUT ) )
+													sendRecieveTimeout,
+													sendRecieveTimeout ) )
 	{
 		if( sendMsgToUser )
 		{

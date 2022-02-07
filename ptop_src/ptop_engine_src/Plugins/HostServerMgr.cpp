@@ -107,8 +107,9 @@ void HostServerMgr::onContactDisconnected( VxGUID& sessionId, VxSktBase* sktBase
 }
 
 //============================================================================
-void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
+bool HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionId, VxSktBase* sktBase, VxGUID& onlineId, EConnectReason connectReason )
 {
+    bool result{ false };
     if( hostType == eHostTypeNetwork &&
         ( connectReason == eConnectReasonChatRoomAnnounce ||
             connectReason == eConnectReasonGroupAnnounce ||
@@ -120,7 +121,7 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
         {
             if( iter->second->isValidPkt() )
             {
-                m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeHostNetwork );
+                result = m_Plugin.txPacket( onlineId, sktBase, iter->second, false, ePluginTypeHostNetwork );
             }
             else
             {
@@ -138,7 +139,10 @@ void HostServerMgr::onConnectToHostSuccess( EHostType hostType, VxGUID& sessionI
     else
     {
         HostBaseMgr::onConnectToHostSuccess( hostType, sessionId, sktBase, onlineId, connectReason );
+        result = true;
     }
+
+    return result;
 }
 
 //============================================================================

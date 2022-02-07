@@ -1106,6 +1106,25 @@ EConnectReason HostTypeToConnectJoinReason( EHostType hostType )
 
 //============================================================================
 //! convert Host Type to connect reason
+EConnectReason HostTypeToConnectLeaveReason( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        return eConnectReasonGroupLeave;
+    case eHostTypeChatRoom:
+        return eConnectReasonChatRoomLeave;
+    case eHostTypeRandomConnect:
+        return eConnectReasonRandomConnectLeave;
+    default:
+        LogMsg( LOG_ERROR, "HostTypeToConnectJoinReason unknown host type %d", hostType );
+        vx_assert( false );
+        return eConnectReasonUnknown;
+    }
+}
+
+//============================================================================
+//! convert Host Type to connect reason
 EConnectReason HostTypeToConnectUnJoinReason( EHostType hostType )
 {
     switch( hostType )
