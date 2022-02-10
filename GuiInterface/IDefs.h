@@ -494,6 +494,7 @@ enum ENetworkStateType
     eNetworkStateTypeFailedResolveHostNetwork	= 8,
     eNetworkStateTypeFailedResolveHostGroupList = 9,
     eNetworkStateTypeFailedResolveHostGroup     = 10,
+    eNetworkStateTypeIpChange                   = 12,
 
     eMaxNetworkStateType
 };

@@ -53,7 +53,7 @@ public:
 	DirectConnectTester&		getDirectConnectTester( void )					{ return m_DirectConnectTester; }
 
 	bool						isThisNodeHostWebsite( void )					{ return m_bHostIpMatch; }
-	bool						isThisNodeConnectTest( void )				{ return m_bNetServiceIpMatch; }
+	bool						isThisNodeConnectTest( void )					{ return m_bNetServiceIpMatch; }
 	bool						isNetworkWebsitesResolved( void )				{ return m_bWebsiteUrlsResolved; }
 	std::string&				getHostIp( void )								{ return m_HostIp; }
 	uint16_t					getHostPort( void )							    { return m_u16HostPort; }
@@ -106,6 +106,8 @@ public:
 
     void                        setNetLayerState( ENetLayerType layerType, ENetLayerState layerState );
     ENetLayerState              getNetLayerState( ENetLayerType layerType );
+
+	void						externalIpAddressHasChanged( std::string& oldIpAddress, std::string& newIpAddress );
 
 protected:
 	void						destroyNetworkStates( void );

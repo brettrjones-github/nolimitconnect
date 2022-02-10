@@ -622,6 +622,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateAvail.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateBase.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateLost.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateMachine.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateOnlineDirect.cpp" />
@@ -998,6 +999,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateAvail.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateBase.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateLost.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateMachine.h" />
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateOnlineDirect.h" />

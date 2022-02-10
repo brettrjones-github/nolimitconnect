@@ -47,14 +47,15 @@ public:
 	virtual bool				checkWatchdog( void );
 
     virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr );
+    virtual RCODE				stopListening( void );
+    virtual bool				restartListening( void );
 
     // old attempts to make listen for incomming connection stable.. just for reference
     virtual bool                startListeningOldAttepts( uint16_t u16ListenPort, const char* ip );
     virtual bool                startListeningNoBind( uint16_t u16ListenPort );
 
-	virtual RCODE				stopListening( void );
-
 	void						listenForConnectionsToAccept( VxThread * poVxThread );
+    bool                        createNewListenSocket( uint16_t listenPort, SOCKET& retListenSock );
 
 public:
     VxThread					m_ListenVxThread;		// thread to listen for incoming connections
@@ -79,5 +80,6 @@ protected:
     VxMutex                     m_ListenMutex;
     bool                        m_ListenSktIsBoundToIp{ false };
     bool                        m_IsAndroidOs{ false };
+    bool                        m_RestartListen{ false };
 };
 

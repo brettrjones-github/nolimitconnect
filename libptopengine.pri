@@ -207,6 +207,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateAvail.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateBase.h \
+    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateIpChange.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateLost.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateMachine.h \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineDirect.h \
@@ -504,6 +505,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateAvail.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateBase.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateIpChange.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateLost.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateMachine.cpp \
     $$PWD/ptop_src/ptop_engine_src/Network/NetworkStateOnlineDirect.cpp \

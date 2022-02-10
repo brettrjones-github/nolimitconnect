@@ -17,11 +17,14 @@
 
 #include "../P2PEngine/P2PEngine.h"
 
+#include <ptop_src/ptop_engine_src/NetServices/NetServicesMgr.h>
+#include <ptop_src/ptop_engine_src/Network/NetworkStateMachine.h>
+
+
 #include <CoreLib/VxGlobals.h>
 #include <NetLib/InetAddress.h>
 #include <NetLib/VxSktUtil.h>
 #include <NetLib/VxSktConnectSimple.h>
-
 
 #include <vector>
 #include <time.h>
@@ -363,7 +366,18 @@ std::string NetworkMonitor::determineLocalIp( void )
             m_Engine.getNetStatusAccum().setNetHostAvail( true );
         }
 
-        VxCloseSkt( skt );
+        std::string newIpAddr;
+        if( m_Engine.getNetServicesMgr().fetchExternalIpAddress( &sktConnect, newIpAddr ) && !newIpAddr.empty() )
+        {
+            std::string oldIpAddr = m_Engine.getNetStatusAccum().getIpAddress();
+            if( newIpAddr != oldIpAddr )
+            {
+                m_Engine.getNetworkStateMachine().externalIpAddressHasChanged( oldIpAddr, newIpAddr );
+                m_Engine.getNetStatusAccum().setIpAddress( newIpAddr );
+            }
+        }
+
+        sktConnect.closeSkt();
     }
     else
     {

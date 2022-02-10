@@ -16,6 +16,7 @@
 #include "NetworkStateMachine.h"
 #include "NetworkStateLost.h"
 #include "NetworkStateAvail.h"
+#include "NetworkStateIpChange.h"
 #include "NetworkStateTestConnection.h"
 #include "NetworkStateOnlineDirect.h"
 #include "NetworkStateOnlineThroughRelay.h"
@@ -724,7 +725,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 	else
 	{
-        LogModule( eLogNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s\n", networkHostUrl.c_str(), connectTestHostUrl.c_str() );
+        LogModule( eLogNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s", networkHostUrl.c_str(), connectTestHostUrl.c_str() );
 	}
 
 
@@ -753,4 +754,14 @@ void NetworkStateMachine::onOncePerHour( void )
 	//{
 	//	m_NetServicesMgr.announceToHost( getHostIp(), getHostPort() );
 	//}
+}
+
+//============================================================================
+void NetworkStateMachine::externalIpAddressHasChanged( std::string& oldIpAddress, std::string& newIpAddress )
+{
+	m_Engine.getPeerMgr().restartListening();
+	m_LocalNetworkIp = "";
+	m_NetworkStateMutex.lock();
+	m_NetworkStateList.push_back( new NetworkStateIpChange( *this, oldIpAddress, newIpAddress ) );
+	m_NetworkStateMutex.unlock();
 }

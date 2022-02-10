@@ -40,7 +40,7 @@ namespace
     const int			COLUMN_ACCESSED_TIME			= 12;
 	const int			COLUMN_ASSET_TAG				= 13;
 	const int			COLUMN_ASSET_SEND_STATE			= 14;
-    const int			COLUMN_IS_TEMPORARY			    = 15;
+    // const int			COLUMN_IS_TEMPORARY			    = 15;
 }
 
 //============================================================================

@@ -1061,3 +1061,80 @@ void NetServicesMgr::netActionResultQueryHostId( ENetCmdError eAppErr, VxGUID& h
         m_pfuncQueryHostIdCallbackHandler( m_QueryHostIdCallbackUserData, eAppErr, hostId );
     }
 }
+
+//============================================================================
+bool NetServicesMgr::fetchExternalIpAddress( VxSktConnectSimple* sktSimple, std::string& retExternIpAddr, int receiveTimeout )
+{
+	if( !sktSimple || !sktSimple->isConnected() )
+	{
+		LogMsg( LOG_ERROR, "fetchExternalIpAddress null or not connected socket" );
+		return false;
+	}
+
+	std::string strNetCmd;
+	std::string strPing = "PING";
+
+	std::string netServChallengeHash;
+	uint16_t cryptoKeyPort = sktSimple->getCryptoKeyPort();
+	m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, cryptoKeyPort, getNetworkKey() );
+
+	m_NetServiceUtils.buildNetCmd( strNetCmd, eNetCmdPing, netServChallengeHash, strPing );
+
+	RCODE rc = sktSimple->sendData( strNetCmd.c_str(), ( int )strNetCmd.length(), 8000 );
+	if( rc )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress sendData error %d", rc );
+		return false;
+	}
+
+	char rxBuf[513];
+	rxBuf[0] = 0;
+	NetServiceHdr netServiceHdr;
+	if( false == m_NetServiceUtils.rxNetServiceCmd( sktSimple, rxBuf, sizeof( rxBuf ) - 1, netServiceHdr, receiveTimeout, receiveTimeout ) )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress failed recieve response" );
+		return false;
+	}
+
+	rxBuf[sizeof( rxBuf ) - 1] = 0;
+
+	if( netServiceHdr.m_ContentDataLen <= 0 )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress no content recieved" );
+		return false;
+	}
+
+	if( ( 0 == netServiceHdr.m_TotalDataLen )
+		|| ( 511 <= netServiceHdr.m_TotalDataLen )
+		|| ( '/' != rxBuf[netServiceHdr.m_ContentDataLen - 1] ) )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress invalid content recieved" );
+		return false;
+	}
+
+	rxBuf[netServiceHdr.m_ContentDataLen - 1] = 0;
+	std::string content = rxBuf;
+	// strip PONG-
+	size_t pongPos = content.find( "PONG-" );
+	if( pongPos == std::string::npos )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress PONG not found" );
+		return false;
+	}
+
+	std::string ipAddr = content.substr( pongPos + 5 );
+	if( ipAddr.empty() )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress Empty PONG content" );
+		return false;
+	}
+
+	if( !VxIsIPv4Address( ipAddr.c_str() ) )
+	{
+		LogMsg( LOG_VERBOSE, "fetchExternalIpAddress Invalid ip v4 addr %s", ipAddr.c_str() );
+		return false;
+	}
+
+	retExternIpAddr = ipAddr;
+	return true;
+}

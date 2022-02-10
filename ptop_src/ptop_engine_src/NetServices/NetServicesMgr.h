@@ -102,6 +102,8 @@ public:
                                                            bool					sendMsgToUser );
 	bool						sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout = 3000 );
 
+	bool						fetchExternalIpAddress( VxSktConnectSimple* sktSimple, std::string& retExternIpAddr, int receiveTimeout = 6000 );
+
 protected:
 	void						addNetActionCommand( NetActionBase * netActionBase );
 	bool						isActionQued( ENetActionType eNetActionType );

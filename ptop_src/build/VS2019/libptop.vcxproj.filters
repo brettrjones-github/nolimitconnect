@@ -925,6 +925,9 @@
     <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.cpp">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -2007,6 +2010,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListCallbackInterface.h">
       <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.h">
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

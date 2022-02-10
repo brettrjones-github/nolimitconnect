@@ -128,6 +128,29 @@ bool VxServerMgr::isListening( void )
 }
 
 //============================================================================
+bool VxServerMgr::restartListening( void )
+{
+    bool result{ false };
+    if( isListening() )
+    {
+        LogModule( eLogListen, LOG_VERBOSE, "restartListen thread will restart port 0x%x", m_u16ListenPort );
+        m_RestartListen = true;
+        result = true;
+    }
+    else if( m_u16ListenPort != 0 )
+    {
+        LogModule( eLogListen, LOG_VERBOSE, "restartListen start listen on port 0x%x", m_u16ListenPort );
+        result = startListening( m_u16ListenPort, nullptr );
+    }
+    else
+    {
+        LogModule( eLogListen, LOG_ERROR, "restartListen listen not running and invalid port %d", m_u16ListenPort );
+    }
+
+    return result;
+}
+
+//============================================================================
 bool VxServerMgr::startListening( uint16_t u16ListenPort, const char* ip )
 {
     stopListening();
@@ -997,41 +1020,12 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
         return;
     }
 
-    SOCKET listenSock = socket( AF_INET, SOCK_STREAM, 0 );               // creates IP based TCP socket
-    if( listenSock < 0 )
+    SOCKET listenSock = INVALID_SOCKET;
+    if( !createNewListenSocket( listenPort, listenSock ) )
     {
-        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket failed" );
+        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket failed create listen socket for port %d", listenPort );
         return;
     }
-
-    // don't know why reuse port doesn't work
-    VxSetSktAllowReusePort( listenSock );
-
-    struct sockaddr_in serverAddr;
-    memset( &serverAddr, 0, sizeof( struct sockaddr_in ) );
-
-    serverAddr.sin_family = AF_INET;                // sets listen socket protocol type
-    serverAddr.sin_addr.s_addr = htonl( INADDR_ANY ); // sets our local IP address
-    serverAddr.sin_port = htons( listenPort );        // sets the listen port number 
-
-    // Bind Socket
-    int bindStatus = bind( listenSock, ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
-    int retryCnt = 0;
-    while( bindStatus < 0 )
-    {
-        retryCnt++;
-        if( retryCnt >= 3 )
-        {
-            LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket bind socket %d failed event after %d tries", m_aoListenSkts[0], retryCnt );
-            break;
-        }
-
-        VxSleep( 1000 );
-        bindStatus = bind( listenSock, ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
-    }
-
-    // don't know why reuse port doesn't work
-    VxSetSktAllowReusePort( listenSock );
 
     m_aoListenSkts[0] = listenSock;
     m_iActiveListenSktCnt = 1;
@@ -1049,6 +1043,19 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	   && ( checkWatchdog() ) )
 	{
         RCODE rc = 0;
+        if( m_RestartListen )
+        {
+            SOCKET listenSock = INVALID_SOCKET;
+            if( !createNewListenSocket( listenPort, listenSock ) )
+            {
+                LogMsg( LOG_ERROR, "Thread createListenSocket failed create listen socket for port %d", listenPort );
+                break;
+            }
+
+            m_aoListenSkts[0] = listenSock;
+            m_iActiveListenSktCnt = 1;
+        }
+
         int listenResult = listen( m_aoListenSkts[0], 8 );
         if( 0 > listenResult )
 		{
@@ -1129,6 +1136,49 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	}
 
     LogModule( eLogConnect, LOG_INFO, "Listen Thread is exiting thread 0x%x", VxGetCurrentThreadId() );
+}
+
+//============================================================================
+bool VxServerMgr::createNewListenSocket( uint16_t listenPort, SOCKET& retListenSock )
+{
+    SOCKET listenSock = socket( AF_INET, SOCK_STREAM, 0 );               // creates IP based TCP socket
+    if( listenSock < 0 )
+    {
+        LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket failed" );
+        return false;
+    }
+
+    // don't know why reuse port doesn't work
+    VxSetSktAllowReusePort( listenSock );
+
+    struct sockaddr_in serverAddr;
+    memset( &serverAddr, 0, sizeof( struct sockaddr_in ) );
+
+    serverAddr.sin_family = AF_INET;                    // sets listen socket protocol type
+    serverAddr.sin_addr.s_addr = htonl( INADDR_ANY );   // sets our local IP address
+    serverAddr.sin_port = htons( listenPort );          // sets the listen port number 
+
+    // Bind Socket
+    int bindStatus = bind( listenSock, ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
+    int retryCnt = 0;
+    while( bindStatus < 0 )
+    {
+        retryCnt++;
+        if( retryCnt >= 3 )
+        {
+            LogMsg( LOG_ERROR, "VxServerMgr::createListenSocket bind socket %d failed event after %d tries", m_aoListenSkts[0], retryCnt );
+            break;
+        }
+
+        VxSleep( 1000 );
+        bindStatus = bind( listenSock, ( struct sockaddr* )&serverAddr, sizeof( struct sockaddr ) );
+    }
+
+    // don't know why reuse port doesn't work
+    VxSetSktAllowReusePort( listenSock );
+
+    retListenSock = listenSock;
+    return true;
 }
 
 //============================================================================
