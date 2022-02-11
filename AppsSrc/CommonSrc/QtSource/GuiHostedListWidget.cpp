@@ -127,6 +127,26 @@ GuiHostedListItem* GuiHostedListWidget::findListItemWidgetByHostId( HostedId& ho
 }
 
 //============================================================================
+GuiHosted* GuiHostedListWidget::findGuiHostedByHostId( HostedId& hostedId )
+{
+    int iCnt = count();
+    for( int iRow = 0; iRow < iCnt; iRow++ )
+    {
+        GuiHostedListItem* hostItem = ( GuiHostedListItem* )item( iRow );
+        if( hostItem )
+        {
+            GuiHostedListSession* hostSession = hostItem->getHostSession();
+            if( hostSession && hostSession->getHostedId() == hostedId )
+            {
+                return hostSession->getGuiHosted();
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+//============================================================================
 GuiHostedListItem* GuiHostedListWidget::findListItemWidgetByOnlineId( VxGUID& onlineId )
 {
     int iCnt = count();

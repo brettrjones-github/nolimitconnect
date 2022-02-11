@@ -25,6 +25,7 @@ class QLabel;
 class GuiUser;
 class GuiHostJoin;
 class GuiHosted;
+class GuiUserJoin;
 
 class IdentLogicInterface : public QWidget
 {

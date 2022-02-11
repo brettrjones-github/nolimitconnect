@@ -46,6 +46,7 @@ public:
     GuiHostedListSession*       findSession( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByHostId( HostedId& hostedId );
     GuiHostedListItem*          findListItemWidgetByOnlineId( VxGUID& onlineId );
+    GuiHosted*                  findGuiHostedByHostId( HostedId& hostedId );
 
     virtual void				callbackOnUserUpdated( GuiUser* guiUser ) override;
 

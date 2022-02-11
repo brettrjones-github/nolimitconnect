@@ -79,10 +79,9 @@ protected:
     void                        changeGuiMode( bool userListMode );
     virtual void				queryHostedList( void ) override;
 
-    void                        updateHostedIdent( GuiHosted* guiHosted );
     void                        updateUser( GuiUser* guiUser );
 
-    void                        onJoinedHost( GroupieId& groupieId );
+    void                        onJoinedHost( GroupieId& groupieId, GuiHosted* guiHosted );
 
 protected:
     Ui::AppletGroupJoinUi       ui;

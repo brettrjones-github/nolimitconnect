@@ -42,6 +42,7 @@ public:
     virtual bool                ptopEngineRequestPluginThumb( VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& thumbId ) override;
 
     virtual bool                sendLeaveHost( GroupieId& groupieId );
+    virtual bool                sendUnJoinHost( GroupieId& groupieId );
     virtual bool                queryUserListFromHost( GroupieId& groupieId );
 
 protected:
@@ -62,6 +63,7 @@ protected:
     virtual void                buildHostAnnounce( PluginSetting& pluginSetting ) {};
     virtual void				sendHostAnnounce( void ) {};
     virtual void				sendLeaveHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );
+    virtual void				sendUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& ptopUrl );
 
 
     virtual void				onContactWentOnline         ( VxNetIdent * netIdent, VxSktBase * sktBase ) override {};

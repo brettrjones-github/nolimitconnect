@@ -71,7 +71,7 @@
        </widget>
       </item>
       <item>
-       <widget class="IdentWidget" name="m_AdminIdentWidget" native="true"/>
+       <widget class="IdentWidget" name="m_HostAdminIdentWidget" native="true"/>
       </item>
       <item>
        <widget class="QPushButton" name="m_ChooseHostButton">

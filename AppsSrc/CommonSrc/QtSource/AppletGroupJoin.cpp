@@ -89,17 +89,17 @@ void AppletGroupJoin::changeGuiMode( bool userListMode )
 			setListLabel( QObject::tr( "User List" ) );
 			ui.m_ChooseHostButton->setVisible( true );
 			ui.m_HostAdminLabel->setVisible( true );
-			ui.m_AdminIdentWidget->setVisible( true );
+			ui.m_HostAdminIdentWidget->setVisible( true );
 
-			ui.m_GuiGroupieListWidget->setVisible( false );
-			ui.m_GuiHostedListWidget->setVisible( true );
+			ui.m_GuiHostedListWidget->setVisible( false );
+			ui.m_GuiGroupieListWidget->setVisible( true );
 		}
 		else
 		{
 			setListLabel( QObject::tr( "Group Host List" ) );
 			ui.m_ChooseHostButton->setVisible( false );
 			ui.m_HostAdminLabel->setVisible( false );
-			ui.m_AdminIdentWidget->setVisible( false );
+			ui.m_HostAdminIdentWidget->setVisible( false );
 
 			ui.m_GuiHostedListWidget->setVisible( true );
 			ui.m_GuiGroupieListWidget->setVisible( false );
@@ -151,8 +151,7 @@ void AppletGroupJoin::callbackGuiHostedListSearchResult( HostedId& hostedId, Gui
 		GroupieId groupieId( m_MyApp.getMyOnlineId(), hostedId );
 		if( !m_UserListMode && m_MyApp.getUserJoinMgr().getUserJoinState( groupieId ) == eJoinStateJoinIsGranted  )
 		{
-			changeGuiMode( true );
-			onJoinedHost( groupieId );
+			onJoinedHost( groupieId, guiHosted );
 		}
 	}
 }
@@ -176,13 +175,6 @@ void AppletGroupJoin::callbackGuiGroupieListSearchResult( GroupieId& groupieId, 
 void AppletGroupJoin::callbackGuiGroupieListSearchComplete( EHostType hostType, VxGUID& sessionId )
 {
 	setStatusMsg( QObject::tr( "User list from host completed" ) );
-}
-
-//============================================================================
-void AppletGroupJoin::updateHostedIdent( GuiHosted* guiHosted )
-{
-	if( guiHosted )
-	ui.m_AdminIdentWidget->updateIdentity( guiHosted->getUser() );
 }
 
 //============================================================================
@@ -335,11 +327,9 @@ void AppletGroupJoin::callbackGuiUserJoinIsGranted( GroupieId& groupieId, GuiUse
 {
 	LogMsg( LOG_VERBOSE, "AppletGroupJoin::callbackGuiUserJoinGranted" );
 	ui.m_GuiHostedListWidget->callbackGuiUserJoinIsGranted( groupieId, guiUserJoin );
-	if( !m_UserListMode )
-	{
-		changeGuiMode( true );
-		onJoinedHost( groupieId );
-	}
+	ui.m_GuiGroupieListWidget->callbackGuiUserJoinIsGranted( groupieId, guiUserJoin );
+	GuiHosted* guiHosted = ui.m_GuiHostedListWidget->findGuiHostedByHostId( groupieId.getHostedId() );
+	onJoinedHost( groupieId, guiHosted );
 }
 
 //============================================================================
@@ -378,7 +368,13 @@ void AppletGroupJoin::updateUser( GuiUser* guiUser )
 }
 
 //============================================================================
-void AppletGroupJoin::onJoinedHost( GroupieId& groupieId )
+void AppletGroupJoin::onJoinedHost( GroupieId& groupieId, GuiHosted* guiHosted )
 {
-	m_MyApp.getEngine().getUserJoinMgr().queryUserListFromHost( groupieId );
+	if( !m_UserListMode )
+	{
+		changeGuiMode( true );
+		// find and fill in the host admin
+		ui.m_HostAdminIdentWidget->updateHosted( guiHosted );
+		m_MyApp.getEngine().getUserJoinMgr().queryUserListFromHost( groupieId );
+	}
 }

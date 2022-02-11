@@ -79,8 +79,7 @@ void PluginBaseHostClient::fromGuiUnJoinHost( EHostType hostType, VxGUID& sessio
     std::string url = !ptopUrl.empty() ? ptopUrl : m_ConnectionMgr.getDefaultHostUrl( hostType );
     if( !url.empty() )
     {
-        VxGUID hostGuid;
-        //EHostJoinStatus joinStatus = m_ConnectionMgr.lookupOrQueryId( hostType, url.c_str(), hostGuid, this);
+        sendUnJoinHost( hostType, sessionId, url );
     }
     else
     {
@@ -189,7 +188,46 @@ bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
         }
         else
         {
-            pktSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &leaveReq );
+            pktSent = txPacket( groupieId.getHostedOnlineId(), sktBase, &leaveReq );
+            if( pktSent )
+            {
+                m_Engine.getUserJoinMgr().onUserLeftHost( groupieId );
+            }
+        }
+    }
+
+    return pktSent;
+}
+
+//============================================================================
+void PluginBaseHostClient::sendUnJoinHost( EHostType hostType, VxGUID& sessionId, std::string& hostUrl )
+{
+    VxPtopUrl ptopUrl( hostUrl );
+    if( ptopUrl.isValid() )
+    {
+        GroupieId groupieId( m_Engine.getMyOnlineId(), ptopUrl.getOnlineId(), hostType );
+        sendUnJoinHost( groupieId );
+    }
+}
+
+//============================================================================
+bool PluginBaseHostClient::sendUnJoinHost( GroupieId& groupieId )
+{
+    bool pktSent{ false };
+    VxSktBase* sktBase = m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+    if( sktBase )
+    {
+        PktHostUnJoinReq leaveReq;
+        leaveReq.setHostType( groupieId.getHostType() );
+        leaveReq.setPluginType( HostTypeToClientPlugin( groupieId.getHostType() ) );
+        if( m_Engine.getMyOnlineId() == groupieId.getHostedOnlineId() )
+        {
+            // is ourself
+            pktSent = txPacket( m_Engine.getMyOnlineId(), m_Engine.getSktLoopback(), &leaveReq );
+        }
+        else
+        {
+            pktSent = txPacket( groupieId.getHostedOnlineId(), sktBase, &leaveReq );
             if( pktSent )
             {
                 m_Engine.getUserJoinMgr().onUserLeftHost( groupieId );
@@ -220,7 +258,7 @@ bool PluginBaseHostClient::queryUserListFromHost( GroupieId& groupieId )
         }
         else
         {
-            pktSent = txPacket( m_Engine.getMyOnlineId(), sktBase, &pktReq );
+            pktSent = txPacket( groupieId.getHostedOnlineId(), sktBase, &pktReq );
         }
     }
 
