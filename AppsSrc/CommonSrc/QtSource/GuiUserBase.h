@@ -71,7 +71,8 @@ public:
     bool                        isGroupHosted( void )                   { return m_HostSet.find( eHostTypeGroup ) != m_HostSet.end(); }
     bool                        isChatRoomHosted( void )                { return m_HostSet.find( eHostTypeChatRoom ) != m_HostSet.end(); }
     bool                        isRandomConnectHosted( void )           { return m_HostSet.find( eHostTypeRandomConnect ) != m_HostSet.end(); }
-    bool                        isPeerHosted( void )                    { return m_HostSet.find( eHostTypePeerUser ) != m_HostSet.end(); }
+    bool                        isPeerHosted( void )                    { return m_HostSet.find( eHostTypePeerUserRelayed ) != m_HostSet.end() ||
+                                                                            m_HostSet.find( eHostTypePeerUserDirect ) != m_HostSet.end(); }
 
     bool                        isInSession( void );
     bool                        isNearby( void )                        { return m_NetIdent.isNearby(); }

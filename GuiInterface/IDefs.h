@@ -405,11 +405,12 @@ enum EHostType
     eHostTypeUnknown = 0,
     eHostTypeConnectTest = 1,
     eHostTypeNetwork = 2,
-    eHostTypePeerUser = 3,
+    eHostTypePeerUserRelayed = 3,
+    eHostTypePeerUserDirect = 4,
     // these hosts provide relay services and are announced to network hosts
-    eHostTypeGroup = 4,
-    eHostTypeChatRoom = 5,
-    eHostTypeRandomConnect = 6,
+    eHostTypeGroup = 5,
+    eHostTypeChatRoom = 6,
+    eHostTypeRandomConnect = 7,
 
     eMaxHostType
 };

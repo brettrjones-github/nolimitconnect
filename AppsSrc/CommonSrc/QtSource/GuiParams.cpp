@@ -344,8 +344,10 @@ QString GuiParams::describeHostType( EHostType hostType )
         return QObject::tr( "Chat Room Host " );
     case eHostTypeRandomConnect:	
         return QObject::tr( "Random Connect Host " );
-    case eHostTypePeerUser:		
-        return QObject::tr( "Peer User Host " );
+    case eHostTypePeerUserRelayed:		
+        return QObject::tr( "Peer User Relayed " );
+    case eHostTypePeerUserDirect:
+        return QObject::tr( "Peer User Direct " );
     case eHostTypeNetwork:
         return QObject::tr( "Network Host " );
     case eHostTypeConnectTest:

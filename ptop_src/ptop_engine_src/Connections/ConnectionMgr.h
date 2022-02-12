@@ -137,11 +137,7 @@ protected:
 
     void                        handleConnectSuccess( BigListInfo * bigListInfo, VxSktBase * skt, bool isNewConnection, EConnectReason connectReason );
     void                        closeConnection( ESktCloseReason closeReason, VxGUID& onlineId, VxSktBase * skt, BigListInfo * poInfo );
-    EConnectStatus              rmtUserRelayConnectTo(  VxConnectInfo&		connectInfo,
-                                                        VxSktBase *&		ppoRetSkt,			// return pointer to socket if not null
-                                                        int					iConnectTimeout );	// seconds before connect attempt times out
-    bool						sendRequestConnectionThroughRelay(	VxSktBase *			sktBase, 
-                                                                    VxConnectInfo&		connectInfo );
+
     bool                        doConnectRequest( ConnectReqInfo& connectRequest, bool ignoreToSoonToConnectAgain );
 
     void                        setQueryIdFailedCount( EHostType hostType, int failedCount );

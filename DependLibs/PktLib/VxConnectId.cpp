@@ -38,6 +38,7 @@ bool VxConnectId::addToBlob( PktBlobEntry& blob )
     result &= m_IPv6OnlineIp.addToBlob( blob );
     result &= m_IPv4OnlineIp.addToBlob( blob );
     result &= blob.setValue( m_u16OnlinePort );
+	result &= blob.setValue( m_u16ResConnectId1 );
     return result;
 }
 
@@ -48,6 +49,7 @@ bool VxConnectId::extractFromBlob( PktBlobEntry& blob )
     result &= m_IPv6OnlineIp.extractFromBlob( blob );
     result &= m_IPv4OnlineIp.extractFromBlob( blob );
     result &= blob.getValue( m_u16OnlinePort );
+	result &= blob.getValue( m_u16ResConnectId1 );
     return result;
 }
 
@@ -60,6 +62,7 @@ VxConnectId& VxConnectId::operator =( const VxConnectId &rhs )
         m_IPv6OnlineIp = rhs.m_IPv6OnlineIp;
         m_IPv4OnlineIp = rhs.m_IPv4OnlineIp;
         m_u16OnlinePort = rhs.m_u16OnlinePort;
+		m_u16ResConnectId1 = rhs.m_u16ResConnectId1;
 	}
 
 	return *this;

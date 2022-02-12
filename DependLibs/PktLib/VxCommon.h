@@ -94,8 +94,8 @@ private:
 // +    8 bytes m_NetIdentRes4;	
 // +    8 bytes m_LastSessionTime;
 // =   48 bytes
-// +  384 bytes VxNetIdentBase   
-// =  432 bytes total
+// +  352 bytes VxNetIdentBase   
+// =  400 bytes total
 
 /// network indentiy of contact
 class VxNetIdent : public VxNetIdentBase, public PluginPermission

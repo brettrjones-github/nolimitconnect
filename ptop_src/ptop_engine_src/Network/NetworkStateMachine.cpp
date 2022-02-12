@@ -623,18 +623,6 @@ void NetworkStateMachine::setPktAnnounceWithCanDirectConnect( std::string& myIpA
 			m_LastKnownExternalIpAddr = myIpAddr;
 		}
 	}
-
-	m_PktAnn.m_RelayConnectId.clear();
-}
-
-//============================================================================
-void NetworkStateMachine::setPktAnnounceWithRelayInfo( const char * relayOnlineID, const char * relayIP, uint16_t u16Port )
-{
-	m_PktAnn.setRequiresRelay( true );
-	m_PktAnn.setHasRelay( true );
-	m_PktAnn.m_RelayConnectId.getOnlineId().fromVxGUIDHexString( relayOnlineID );
-	m_PktAnn.m_RelayConnectId.getIPv4().setIp( relayIP );
-	m_PktAnn.m_RelayConnectId.setPort( u16Port );
 }
 
 //============================================================================

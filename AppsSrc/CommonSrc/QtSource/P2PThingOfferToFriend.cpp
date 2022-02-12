@@ -88,8 +88,9 @@ void AppCommon::viewWebServerPage( GuiUser * user, const char * webPageFileName 
             }
         }
 
-        netIdent.getProfileUri( uri, myExternIp.c_str(), webPageFileName );
-        getAppGlobals().launchWebBrowser( uri.c_str() );
+        // TODO replace with query web page to rich text edit instead of using browser
+        // netIdent.getProfileUri( uri, myExternIp.c_str(), webPageFileName );
+        // getAppGlobals().launchWebBrowser( uri.c_str() );
     }
 }
 

@@ -23,7 +23,8 @@ const char* Invite::INVITE_HDR_MSG = "!Message!";
 const char* Invite::INVITE_HDR_NET_SETTING = "!NetworkSettings!";
 const char* Invite::INVITE_END = "!End!";
 const char* Invite::PTOP_URL_PREFIX = "ptop://";
-const char Invite::SUFFIX_CHAR_PERSON = 'P'; // P
+const char Invite::SUFFIX_CHAR_PERSON_DIRECT = 'D'; // D
+const char Invite::SUFFIX_CHAR_PERSON_RELAYED = 'P'; // P
 const char Invite::SUFFIX_CHAR_GROUP = 'G'; // G
 const char Invite::SUFFIX_CHAR_CHAT_ROOM = 'C'; // C
 const char Invite::SUFFIX_CHAR_RANDOM_CONNECT = 'R'; // R
@@ -79,7 +80,8 @@ bool Invite::setInviteUrl( EHostType hostType, std::string& url )
         result = !m_RandomConnectUrl.empty();
         break;
 
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         m_PersonUrl = url;
         result = !m_PersonUrl.empty();
         break;
@@ -105,7 +107,8 @@ std::string Invite::getInviteUrl( EHostType hostType )
     case eHostTypeRandomConnect:
         return m_RandomConnectUrl;
 
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         return m_PersonUrl;
 
     default:
@@ -143,8 +146,11 @@ char Invite::getHostTypeSuffix( EHostType hostType )
 {
     switch( hostType )
     {
-    case eHostTypePeerUser:
-        return SUFFIX_CHAR_PERSON;
+    case eHostTypePeerUserDirect:
+        return SUFFIX_CHAR_PERSON_DIRECT;
+
+    case eHostTypePeerUserRelayed:
+        return SUFFIX_CHAR_PERSON_RELAYED;
 
     case eHostTypeNetwork:
         return SUFFIX_CHAR_NETWORK_HOST;
@@ -171,8 +177,11 @@ EHostType Invite::getHostTypeFromSuffix( const char suffix )
 {
     switch( suffix )
     {
-    case SUFFIX_CHAR_PERSON:
-        return eHostTypePeerUser;
+    case SUFFIX_CHAR_PERSON_RELAYED:
+        return eHostTypePeerUserRelayed;
+
+    case SUFFIX_CHAR_PERSON_DIRECT:
+        return eHostTypePeerUserDirect;
 
     case SUFFIX_CHAR_NETWORK_HOST:
         return eHostTypeNetwork;
@@ -197,7 +206,8 @@ EHostType Invite::getHostTypeFromSuffix( const char suffix )
 //============================================================================
 bool Invite::isValidHostTypeSuffix( const char suffix )
 {
-    return SUFFIX_CHAR_PERSON == suffix ||
+    return SUFFIX_CHAR_PERSON_RELAYED == suffix ||
+        SUFFIX_CHAR_PERSON_DIRECT == suffix ||
         SUFFIX_CHAR_NETWORK_HOST == suffix ||
         SUFFIX_CHAR_CONNECT_TEST == suffix ||
         SUFFIX_CHAR_GROUP == suffix ||

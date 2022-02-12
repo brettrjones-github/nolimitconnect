@@ -31,7 +31,8 @@ class PktBlobEntry;
 // +  16 bytes m_IPv6OnlineIp
 // +   4 bytes m_IPv4OnlineIp
 // +   2 bytes m_u16OnlinePort
-// =  38 bytes total
+// +   2 bytes m_u16ResConnectId1
+// =  40 bytes total
 class VxConnectId : public VxGUID
 {
 public:
@@ -68,7 +69,8 @@ public:
 	InetAddrIPv4				m_IPv4OnlineIp;						// users ip4 address
 
 protected:
-	uint16_t					m_u16OnlinePort;						// users incoming connection port
+	uint16_t					m_u16OnlinePort{ 0 };				// users incoming connection port
+	uint16_t					m_u16ResConnectId1{ 0 };			// reserved for possible ipv6 port or local port
 };
 
 #pragma pack(pop)

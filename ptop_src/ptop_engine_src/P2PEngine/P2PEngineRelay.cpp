@@ -41,22 +41,13 @@ void P2PEngine::onRelayServiceAvailable( RcConnectInfo * poConnection, bool conn
 {
 	if( m_PktAnn.requiresRelay() )
 	{
-		LogMsg( LOG_STATUS, "Using Relay Service Available from %s\n", poConnection->m_BigListInfo->getOnlineName() );
+		LogMsg( LOG_STATUS, "Using Relay Service Available from %s", poConnection->m_BigListInfo->getOnlineName() );
 		// our proxy service is now connected
 		// if proxy info in announcement packet is not this server then
 		// update PktAnn
 		BigListInfo * poBigInfo = poConnection->m_BigListInfo;
-		if( ( m_PktAnn.m_RelayConnectId.getOnlineId() != poBigInfo->getMyOnlineId() ) ||
-			( m_PktAnn.m_RelayConnectId != poBigInfo->m_DirectConnectId ) )
-		{
-			if( m_PktAnn.requiresRelay() )
-			{
-				m_PktAnn.useAsRelay( poBigInfo );
-				doPktAnnConnectionInfoChanged( connectionListIsLocked );
-			}
-		}
 
-		LogMsg( LOG_STATUS, "eMyRelayStatusConnected %s\n", poConnection->m_BigListInfo->getOnlineName() );
+		LogMsg( LOG_STATUS, "eMyRelayStatusConnected %s", poConnection->m_BigListInfo->getOnlineName() );
 		getToGui().toGuiMyRelayStatus( eMyRelayStatusConnected, poConnection->m_BigListInfo->getOnlineName() );
 		m_NetworkStateMachine.setIsRelayServiceConnected( true );
 	}

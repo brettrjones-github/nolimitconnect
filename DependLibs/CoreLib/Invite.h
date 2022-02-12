@@ -24,14 +24,15 @@ public:
     static const char * INVITE_HDR_MSG;
     static const char * INVITE_HDR_NET_SETTING;
     static const char * INVITE_END;
-    static const char * PTOP_URL_PREFIX;        // ptop://
-    static const char SUFFIX_CHAR_PERSON;       // P
-    static const char SUFFIX_CHAR_GROUP;        // G
-    static const char SUFFIX_CHAR_CHAT_ROOM;    // C
-    static const char SUFFIX_CHAR_RANDOM_CONNECT; // R
-    static const char SUFFIX_CHAR_NETWORK_HOST; // N
-    static const char SUFFIX_CHAR_CONNECT_TEST; // T
-    static const char SUFFIX_CHAR_UNKNOWN;      // ' '
+    static const char * PTOP_URL_PREFIX;            // ptop://
+    static const char SUFFIX_CHAR_PERSON_RELAYED;   // P
+    static const char SUFFIX_CHAR_PERSON_DIRECT;    // D
+    static const char SUFFIX_CHAR_GROUP;            // G
+    static const char SUFFIX_CHAR_CHAT_ROOM;        // C
+    static const char SUFFIX_CHAR_RANDOM_CONNECT;   // R
+    static const char SUFFIX_CHAR_NETWORK_HOST;     // N
+    static const char SUFFIX_CHAR_CONNECT_TEST;     // T
+    static const char SUFFIX_CHAR_UNKNOWN;          // ' '
 
     bool                        setInviteText( std::string inviteText );
     std::string&                getInviteText( void )                       { return m_InviteText; }

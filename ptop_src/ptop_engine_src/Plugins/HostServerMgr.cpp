@@ -184,6 +184,7 @@ void HostServerMgr::onUserJoined( VxSktBase* sktBase, VxNetIdent* netIdent, VxGU
     LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
     BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
     m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getGroupieListMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
 }
 
@@ -193,6 +194,7 @@ void HostServerMgr::onUserLeftHost( VxSktBase* sktBase, VxNetIdent* netIdent, Vx
     LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
     BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
     m_Engine.getHostJoinMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getGroupieListMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
     m_Engine.getUserOnlineMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
 }
 
@@ -201,8 +203,9 @@ void HostServerMgr::onUserUnJoined( VxSktBase* sktBase, VxNetIdent* netIdent, Vx
 {
     LogModule( eLogHosts, LOG_DEBUG, "onUserJoined %s user %s", DescribePluginType( m_Plugin.getPluginType() ), netIdent->getOnlineName() );
     BaseSessionInfo sessionInfo( m_Plugin.getPluginType(), netIdent->getMyOnlineId(), sessionId, sktBase->getConnectionId() );
-    m_Engine.getHostJoinMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
-    m_Engine.getUserOnlineMgr().onHostJoinedByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getHostJoinMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getGroupieListMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
+    m_Engine.getUserOnlineMgr().onHostLeftByUser( sktBase, netIdent, sessionInfo );
 }
 
 //============================================================================

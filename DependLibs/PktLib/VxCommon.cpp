@@ -500,12 +500,8 @@ void VxNetIdent::debugDumpIdent( void )
 	m_DirectConnectId.getIPv4(strIPv4);
 	std::string strIPv6; 
 	m_DirectConnectId.getIPv6(strIPv6);
-	std::string strRelayIPv4; 
-	m_RelayConnectId.getIPv4(strRelayIPv4);
-	std::string strRelayIPv6; 
-	m_RelayConnectId.getIPv6(strRelayIPv6);
 
-	LogMsg( LOG_INFO, "Ident %s id %s my friendship %s his friendship %s search 0x%x ipv4 %s ipv6 %s port %d proxy flags 0x%x proxy ipv4 %s proxy ipv6 %s port %d\n",
+	LogMsg( LOG_INFO, "Ident %s id %s my friendship %s his friendship %s search 0x%x ipv4 %s ipv6 %s port %d proxy flags 0x%x ",
 		getOnlineName(),
 		getMyOnlineId().describeVxGUID().c_str(),
 		DescribeFriendState(getMyFriendshipToHim()),
@@ -514,10 +510,7 @@ void VxNetIdent::debugDumpIdent( void )
 		strIPv4.c_str(),
 		strIPv6.c_str(),
 		m_DirectConnectId.getPort(),
-		m_u8RelayFlags,
-		strRelayIPv4.c_str(),
-		strRelayIPv6.c_str(),
-		m_RelayConnectId.getPort()
+		m_u8RelayFlags
 		);
 }
 

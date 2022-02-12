@@ -95,7 +95,6 @@ public:
 	bool						didUpnpOpenPortSucceed( void );
 
 	void						setPktAnnounceWithCanDirectConnect( std::string& myIpAddr, bool requiresRelay = false );
-	void						setPktAnnounceWithRelayInfo( const char * relayOnlineID, const char * relayIP, uint16_t u16Port );
 
 	bool						shouldAbort( void );
 	bool						checkAndHandleNetworkEvents( void );

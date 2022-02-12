@@ -22,7 +22,7 @@
 
 //! implements minimum to uniquely identify user as individual on the network
 //! size
-//!   368 bytes VxConnectInfo
+//!   320 bytes VxConnectInfo
 // +    1 byte  VxOnlineStatusFlags
 // +    1 byte  m_IsOnline
 // +    1 byte  m_u8OfferCnt
@@ -30,7 +30,7 @@
 // +    4 bytes m_u32TruthCnt;		
 // +    4 bytes m_u32DareCnt;					
 // +    4 bytes m_u32RejectedCnt;
-// =  384 bytes
+// =  352 bytes
 class VxNetIdentBase : public VxConnectInfo, public VxOnlineStatusFlags
 {
 public:
@@ -61,8 +61,6 @@ public:
 	uint16_t					getRejectedDareCount( void );
 
 	bool						isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) const;
-	void						useAsRelay( VxNetIdentBase * poRelayIdent );
-	void						getProfileUri( std::string& retUri, const char * myIp, const char * webFileName );
 
 protected:
 	//=== vars ===//

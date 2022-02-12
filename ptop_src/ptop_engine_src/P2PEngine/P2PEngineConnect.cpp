@@ -218,16 +218,15 @@ std::string P2PEngine::describeContact( BigListInfo * bigListInfo )
 	VxConnectInfo& connectInfo = bigListInfo->getConnectInfo();
 
 	std::string hexId;
-	connectInfo.getMyOnlineId().toHexString( hexId );
+	connectInfo.getMyOnlineId().toOnlineIdString( hexId );
 
 	std::string strDesc;
 	if( connectInfo.requiresRelay() )
 	{
-		StdStringFormat( strDesc, " %s Connected ? %d Online ID %s using relay ip %s ", 
+		StdStringFormat( strDesc, " %s Connected ? %d Online ID %s requires relay ", 
 			bigListInfo->getOnlineName(),
 			bigListInfo->isConnected() ? 1 : 0,
-			hexId.c_str(), 
-			connectInfo.getRelayIpAddress().toStdString().c_str() );
+			hexId.c_str() );
 	}
 	else
 	{
@@ -251,15 +250,14 @@ std::string P2PEngine::describeContact( VxConnectInfo& connectInfo )
 	}
 
 	std::string hexId;
-	connectInfo.getMyOnlineId().toHexString( hexId );
+	connectInfo.getMyOnlineId().toOnlineIdString( hexId );
 
 	std::string strDesc;
 	if( connectInfo.requiresRelay() )
 	{
-		StdStringFormat( strDesc, " name %s ID %s using relay ip %s ", 
+		StdStringFormat( strDesc, " name %s ID %s requires relay ", 
 			(0 == strlen( connectInfo.getOnlineName() )) ? "UNKNOWN" : connectInfo.getOnlineName(),
-			hexId.c_str(), 
-			connectInfo.getRelayIpAddress().toStdString().c_str() );
+			hexId.c_str() );
 	}
 	else
 	{
@@ -330,7 +328,7 @@ void P2PEngine::updateOnFirstConnect( VxSktBase* sktBase, BigListInfo* poInfo, b
 		getFriendListMgr().updateIdent( poInfo->getMyOnlineId(), timestamp );
 	}
 
-	GroupieId groupieId( poInfo->getMyOnlineId(), poInfo->getMyOnlineId(), eHostTypePeerUser );
+	GroupieId groupieId( poInfo->getMyOnlineId(), poInfo->getMyOnlineId(), poInfo->requiresRelay() ? eHostTypePeerUserRelayed : eHostTypePeerUserDirect );
 	if( isNearby || !poInfo->requiresRelay() )
 	{
 		if( isNearby )

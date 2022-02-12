@@ -73,9 +73,8 @@ private:
 // +  1 byte FriendMatch
 // +  2 bytes VxSearchFlags
 // +  4 bytes m_LanIPv4
-// + 38 bytes m_DirectConnectId
-// + 38 bytes m_RelayConnectId 
-// = 86 bytes 
+// + 40 bytes m_DirectConnectId
+// = 50 bytes 
 class VxConnectBaseInfo : public P2PEngineVersion, public MyOSVersion, public VxRelayFlags, public FriendMatch, public VxSearchFlags
 {
 public:
@@ -97,13 +96,6 @@ public:
 	void						setMyOnlinePort( uint16_t port );
 	uint16_t					getMyOnlinePort( void );
 
-	VxGUID&						getRelayOnlineId();
-    bool						getRelayOnlineId( std::string& strRetId );
-	uint64_t					getRelayOnlineIdLoPart();
-	uint64_t					getRelayOnlineIdHiPart();
-	void						setRelayPort( uint16_t port );
-	uint16_t					getRelayPort( void );
-
 	void						getMyOnlineIPv4( std::string& strRetIp );
 	void						getMyOnlineIPv6( std::string& strRetIp );
 	InetAddrIPv4&				getMyOnlineIPv4( void );
@@ -113,7 +105,6 @@ public:
 	InetAddrIPv4&				getLanIPv4( void )					{ return m_LanIPv4; }
 
 	InetAddress					getOnlineIpAddress( void );
-	InetAddress					getRelayIpAddress( void );
 
     bool						setOnlineIpAddress( InetAddress& oIp );
 	bool						setOnlineIpAddress( const char * pIp ); // return true if changed
@@ -123,15 +114,11 @@ public:
 	void						getOnlinePort( std::string& strRetPort );
 	void						setOnlinePort( uint16_t u16Port );
 
-	bool						hasValidRelay( void );
-
 	VxConnectId&				getDirectConnectId( void )							{ return m_DirectConnectId; }
-	VxConnectId&				geRelayConnectId( void )							{ return m_RelayConnectId; }
 
 	//=== vars ===//
 	InetAddrIPv4				m_LanIPv4;
 	VxConnectId					m_DirectConnectId;
-	VxConnectId					m_RelayConnectId;
 };
 
 // +  28 bytes Online Name
@@ -142,13 +129,14 @@ public:
 // +   1 bytes m_u8Age
 // +   1 bytes m_u8Gender
 // +   1 bytes reserved
+// +   4 bytes reserved
 // +   8 bytes reserved
 // =  82 bytes
 // +  64 bytes (4x16 host guids)
 // + 120 bytes (5x24 thumb guids and modified times)
 // = 266 bytes
-// +  86 bytes VxConnectBaseInfo
-// = 352 bytes
+// +  50 bytes VxConnectBaseInfo
+// = 320 bytes
 
 class VxConnectIdent : public VxConnectBaseInfo
 {
@@ -257,7 +245,8 @@ protected:
     uint8_t						m_u8Age{ 0 };
     uint8_t						m_u8Gender{ 0 };
 	uint8_t					    m_IdentRes1{ 0 };
-    int64_t	    				m_IdentRes2{ 0 };
+    uint32_t					m_IdentRes2{ 0 };
+    int64_t	    				m_IdentRes3{ 0 };
 
     VxGUID                      m_NetHostGuid;
     VxGUID                      m_ChatRoomHostGuid;
@@ -280,8 +269,8 @@ protected:
 //     8 bytes m_s64TimeTcpLastContactMs
 // +   8 bytes last connect attempt
 // =  16 bytes total
-// + 352 bytes VxConnectIdent
-// = 368 bytes total
+// + 320 bytes VxConnectIdent
+// = 336 bytes total
 class VxConnectInfo : public VxConnectIdent
 {
 public:

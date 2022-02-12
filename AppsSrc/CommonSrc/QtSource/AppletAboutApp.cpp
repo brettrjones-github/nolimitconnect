@@ -62,11 +62,7 @@ void AppletAboutApp::setupAboutMe( void )
     std::string strMyId = oMyIdent.m_DirectConnectId.describeVxGUID();
     ui.labelMeLine2->setText( QString( "Id: %1" ).arg( strMyId.c_str() ) );
     ui.labelMeLine3->setText( QString( "My Node Url:%1" ).arg( oMyIdent.getMyOnlineUrl().c_str() ) );
-    std::string strRelayId = oMyIdent.m_RelayConnectId.describeVxGUID();
-    ui.labelMeLine4->setText( QString( "Group Id: %1" ).arg( strRelayId.c_str() ) );
-    std::string strRelayIp = oMyIdent.getRelayIpAddress().toStdString();
-    ui.labelMeLine5->setText( QString( "Group Ip: %1:%2" ).arg( strRelayIp.c_str() ).arg( oMyIdent.m_RelayConnectId.getPort() ) );
-    ui.labelMeLine6->setText( QString( "Requires Relay?: %1 Has Relay?: %2" ).arg( oMyIdent.requiresRelay() ).arg( oMyIdent.hasRelay() ) );
+    ui.labelMeLine6->setText( QString( "Requires Relay?: %1 " ).arg( oMyIdent.requiresRelay() ) );
     ui.labelMeLine7->setText( QString( "Has Profile Pic?: %1" ).arg( oMyIdent.hasProfilePicture() ) );
     ui.labelMeLine9->setText( QString( "Is Big Endian CPU ?: %1" ).arg( IsBigEndianCpu() ? "true" : "false" ) );
 }

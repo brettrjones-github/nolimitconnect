@@ -28,6 +28,7 @@ class VxPtopUrl;
 class GroupieListCallbackInterface;
 class PluginBase;
 class PluginBaseHostService;
+class BaseSessionInfo;
 
 class GroupieListMgr : public IConnectRequestCallback
 {
@@ -71,6 +72,9 @@ public:
 
     void                        onGroupieAnnounceAdded( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
     void                        onGroupieAnnounceUpdated( EHostType hostType, GroupieInfo& groupieInfo, VxNetIdent* netIdent, VxSktBase* sktBase );
+
+    void                        onHostJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
+    void                        onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo );
 
 protected:
     virtual bool                onUrlActionQueryIdSuccess( VxGUID& sessionId, std::string& url, VxGUID& onlineId, EConnectReason connectReason = eConnectReasonUnknown ) override { return true; };

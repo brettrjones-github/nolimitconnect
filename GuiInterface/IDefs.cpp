@@ -203,7 +203,8 @@ namespace
         "Host Unknown ",
         "Host Connect Test ",
         "Host Network ",
-        "Host Peer User ",
+        "Host Peer User Relayed",
+        "Host Peer User Direct",
         "Host Group ",
         "Host Chat Room ",
         "Host Random Connect ",
@@ -1173,7 +1174,8 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
         return ePluginTypeHostChatRoom;
     case eHostTypeRandomConnect:
         return ePluginTypeHostRandomConnect;
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         return ePluginTypeHostPeerUser;
     case eHostTypeNetwork:
         return ePluginTypeHostNetwork;
@@ -1199,7 +1201,8 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
         return ePluginTypeClientChatRoom;
     case eHostTypeRandomConnect:
         return ePluginTypeClientRandomConnect;
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         return ePluginTypeClientPeerUser;
     case eHostTypeNetwork:
         return ePluginTypeClientNetwork;
@@ -1233,7 +1236,7 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
 
     case ePluginTypeHostPeerUser:
     case ePluginTypeClientPeerUser:
-        return eHostTypePeerUser;
+        return eHostTypePeerUserRelayed;
 
     case ePluginTypeHostNetwork:
     case ePluginTypeClientNetwork:

@@ -108,48 +108,9 @@ bool VxNetIdentBase::isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) cons
 }
 
 //============================================================================
-void VxNetIdentBase::useAsRelay( VxNetIdentBase * poRelayIdent )
-{
-	m_RelayConnectId = poRelayIdent->m_DirectConnectId;
-}
-
-//============================================================================
 bool VxNetIdentBase::operator ==( const VxNetIdentBase &a ) const
 {
 	return this->isVxNetIdentMatch( a );
-}
-
-//============================================================================
-void VxNetIdentBase::getProfileUri( std::string& retUri, const char * myIp, const char * webFileName )
-{
-	std::string onlineId;
-	uint16_t u16Port;
-	InetAddress addr;
-	std::string ipAddr = addr.toStdString();
-	if( hasRelay() && requiresRelay() )
-	{
-		u16Port = getRelayPort();
-		addr = getRelayIpAddress();
-		ipAddr = addr.toStdString();
-	}
-	else
-	{
-		u16Port = getOnlinePort();
-		ipAddr = myIp;
-	}
-
-	char as8Port[ 20 ];
-	sprintf( as8Port, "%d", u16Port );
-	getMyOnlineId( onlineId );
-
-	retUri = "http://";
-	retUri += ipAddr;
-	retUri += ":";
-	retUri += as8Port;
-	retUri += "/";
-	retUri += onlineId;
-	retUri += "/";
-	retUri	+= webFileName;
 }
 
 //============================================================================

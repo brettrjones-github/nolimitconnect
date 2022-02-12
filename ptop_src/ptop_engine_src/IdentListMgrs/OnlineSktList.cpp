@@ -248,9 +248,14 @@ VxSktBase* OnlineSktList::findHostConnection( GroupieId& groupieId, bool tryPeer
 VxSktBase* OnlineSktList::findPeerConnection( VxGUID& onlineId )
 {
     VxSktBase* sktBase = nullptr;
-    GroupieId groupieId( onlineId, onlineId, eHostTypePeerUser );
+    GroupieId groupieIdDirect( onlineId, onlineId, eHostTypePeerUserDirect );
+    GroupieId groupieIdRelayed( onlineId, onlineId, eHostTypePeerUserRelayed );
     VxGUID connectId;
-    if( findConnectionId( groupieId, connectId ) )
+    if( findConnectionId( groupieIdDirect, connectId ) )
+    {
+        sktBase = findSktBase( connectId );
+    }
+    else if( findConnectionId( groupieIdRelayed, connectId ) )
     {
         sktBase = findSktBase( connectId );
     }

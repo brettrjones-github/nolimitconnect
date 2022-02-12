@@ -878,40 +878,18 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
     bool requiresRelay = connectInfo.requiresRelay();
     if( requiresRelay )
     {
-        if( connectInfo.m_RelayConnectId.isVxGUIDValid() )
-        {
-            if( connectInfo.m_RelayConnectId.getOnlineId() == m_PktAnn.getMyOnlineId() )
-            {
-                // we are this persons proxy
-                // dont attempt to connect.. he has to connect to us
-#ifdef DEBUG_CONNECTIONS
-                LogMsg( LOG_INFO, "We are Users proxy must wait for them to connect to me\n" );
-#endif // DEBUG_CONNECTIONS
-                // try ipv6 if available
-                return tryIPv6Connect( connectInfo, ppoRetSkt );
-            }
-
-            //LogMsg( LOG_INFO, "User %s has proxy.. attempting proxy connect\n",  connectInfo.m_as8OnlineName );
-        }
-        else
-        {
-            std::string strMyOnlineId;
-            connectInfo.getMyOnlineId(strMyOnlineId);
-#ifdef DEBUG_CONNECTIONS
-            LogMsg( LOG_ERROR, "connectUsingTcp: FAIL User id %s does not have proxy set.. \n", 
-                strMyOnlineId.c_str());
-#endif // DEBUG_CONNECTIONS
-            return tryIPv6Connect( connectInfo, ppoRetSkt );
-        }
+        std::string strMyOnlineId;
+        connectInfo.getMyOnlineId(strMyOnlineId);
+        return tryIPv6Connect( connectInfo, ppoRetSkt );
     }
 
     connectInfo.m_DirectConnectId.getIpAddress( strDirectConnectIp );
 
-    //LogMsg( LOG_INFO, "User %s requires proxy? %d\n",  connectInfo.m_as8OnlineName, requiresRelay );
+    //LogMsg( LOG_INFO, "User %s requires proxy? %d",  connectInfo.m_as8OnlineName, requiresRelay );
     if( false == requiresRelay )
     {
 #ifdef DEBUG_CONNECTIONS
-        LogMsg( LOG_INFO, "P2PEngine::connectUsingTcp: Attempting direct connect to %s ip %s port %d\n",
+        LogMsg( LOG_INFO, "P2PEngine::connectUsingTcp: Attempting direct connect to %s ip %s port %d",
             m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
             strDirectConnectIp.c_str(),
             connectInfo.m_DirectConnectId.getPort() );
@@ -921,7 +899,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
             //LogMsg( LOG_INFO, "P2PEngine::connectUsingTcp: success\n" );
             // direct connection success
 #ifdef DEBUG_CONNECTIONS
-            LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS skt %d direct connect to %s ip %s port %d\n",
+            LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS skt %d direct connect to %s ip %s port %d",
                 sktBase->m_iSktId,
                 m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
                 strDirectConnectIp.c_str(),
@@ -934,7 +912,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
         else
         {
 #ifdef DEBUG_CONNECTIONS
-            LogMsg( LOG_SKT, "directConnectTo: FAIL LAN connect to %s ip %s port %d\n",
+            LogMsg( LOG_SKT, "directConnectTo: FAIL LAN connect to %s ip %s port %d",
                 connectInfo.getOnlineName(),
                 strDirectConnectIp.c_str(),
                 connectInfo.m_DirectConnectId.getPort() );
@@ -946,152 +924,7 @@ bool ConnectionMgr::connectUsingTcp( VxConnectInfo&	connectInfo, VxSktBase *& pp
 #endif // SUPPORT_IPV6
         }
     }
-    else
-    {
-        std::string strRelayConnectIp;
-        connectInfo.m_RelayConnectId.getIpAddress( strRelayConnectIp );
-        std::string strUserId;
-        connectInfo.getMyOnlineId( strUserId );
-#ifdef DEBUG_MUTEXES
-        LogMsg( LOG_SKT, "connectUsingTcp: m_ConnectListMutex.lock()" );
-#endif // DEBUG_MUTEXES
-        lockConnectionList();
-        ConnectedInfo * poRelayConnectInfo = m_AllList.getConnectedInfo( connectInfo.m_RelayConnectId.getOnlineId() );
-        //LogMsg( LOG_INFO, "P2PEngine::ConnectToContact:User %s existing connection to proxy %d\n", connectInfo.getOnlineName(), poConnectInfo );
-        if( poRelayConnectInfo )
-        {
-            sktBase = poRelayConnectInfo->getSktBase();
-            if( !sktBase )
-            {
-                // no relay connection
-                unlockConnectionList();
-                return false;
-            }
 
-#ifdef DEBUG_NET_CONNECTOR
-            LogMsg( LOG_SKT, "connectUsingTcp: FOUND User %s proxy %s connection skt %d proxy ip %s port %d to ip %s port %d id %s",
-                m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
-                poRelayConnectInfo->m_BigListInfo->getOnlineName(),
-                poRelayConnectInfo->m_SktBase->m_iSktId,
-                strRelayConnectIp.c_str(),
-                connectInfo.m_RelayConnectId.getPort(),
-                strDirectConnectIp.c_str(), 
-                connectInfo.m_DirectConnectId.getPort(),
-                strUserId.c_str() );
-#endif // DEBUG_NET_CONNECTOR
-            // now send announce to remote user
-            bool requestReverseConnection = ( ( false == m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
-            bool requestSTUN = ( ( m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
-
-            //LogMsg( LOG_INFO, "sendMyPktAnnounce 1\n" ); 
-            bool sendAnnResult = sendMyPktAnnounce(	connectInfo.getMyOnlineId(), 
-                                                    sktBase, 
-                                                    true, 
-                                                    requestReverseConnection,
-                                                    requestSTUN );
-#ifdef DEBUG_NET_CONNECTOR
-            LogMsg( LOG_SKT, "connectUsingTcp: m_AllList.connectListUnlock()\n" );
-#endif // DEBUG_NET_CONNECTOR
-            unlockConnectionList();
-            if( false == sendAnnResult )
-            {
-                //RCODE rc = sktBase->getLastSktError();
-                //LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact %s\n", 
-                //	rc, 
-                //	sktBase->describeSktError( rc ),
-                //	m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ) );
-                sktBase->closeSkt( eSktClosePktAnnSendFail );
-                sktBase = nullptr;
-            }
-        }
-        else
-        {
-#ifdef DEBUG_NET_CONNECTOR
-            LogMsg( LOG_SKT, "connectUsingTcp: m_AllList.connectListUnlock()\n" );
-#endif // DEBUG_NET_CONNECTOR
-            unlockConnectionList();
-            //LogMsg( LOG_INFO, "P2PEngine::ConnectToContact:User %s RmtUserRelayConnectTo\n", connectInfo.getOnlineName() );
-            // attempt to connect to users proxy
-            if( eConnectStatusConnectSuccess == rmtUserRelayConnectTo( connectInfo, sktBase, TO_PROXY_CONNECT_TIMEOUT ) )
-            {
-#ifdef DEBUG_NET_CONNECTOR
-                LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS connect proxy skt %d to %s ip %s port %d for id %s\n",
-                    sktBase->m_iSktId,
-                    m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
-                    strRelayConnectIp.c_str(),
-                    connectInfo.m_RelayConnectId.getPort(),
-                    strUserId.c_str() );
-#endif // DEBUG_NET_CONNECTOR
-            }
-            else
-            {
-#ifdef DEBUG_NET_CONNECTOR
-                if( IsLogEnabled( eLogConnect ) )
-                    LogMsg( LOG_SKT, "connectUsingTcp: FAIL connect to proxy to %s with proxy ip %s port %d for id %s\n",
-                        m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
-                        strRelayConnectIp.c_str(),
-                        connectInfo.m_RelayConnectId.getPort(),
-                        strUserId.c_str() );
-#endif // DEBUG_NET_CONNECTOR
-            }
-        }
-
-        if( sktBase  )
-        {
-            // if user is behind proxy but we are not then wait for user to direct connect to us
-            if( ( false == m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() )
-            {
-                for( int i = 0; i < 60; i++ )
-                {
-                    if( m_Engine.isContactConnected( connectInfo.getMyOnlineId() ) )
-                    {
-                        break;
-                    }
-
-                    VxSleep( 100 );
-                }
-            }
-            else if( sendRequestConnectionThroughRelay(	sktBase, connectInfo ) )
-            {
-                sktBase->m_RelayEventSemaphore.wait( THROUGH_PROXY_RESPONSE_TIMEOUT );
-            }
-
-            lockConnectionList();
-            ConnectedInfo * poUserConnectInfo = m_AllList.getConnectedInfo( connectInfo.getMyOnlineId() );
-            if( poUserConnectInfo )
-            {
-#ifdef DEBUG_NET_CONNECTOR
-                LogMsg( LOG_SKT, "connectUsingTcp: SUCCESS requestConnectionThroughRelay %s to %s\n",
-                    m_Engine.knownContactNameFromId( connectInfo.m_RelayConnectId.getOnlineId() ),
-                    m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() )
-                );
-#endif // DEBUG_NET_CONNECTOR
-                ppoRetSkt = sktBase;
-            }
-            else
-            {
-#ifdef DEBUG_NET_CONNECTOR
-                LogMsg( LOG_SKT, "connectUsingTcp: FAIL requestConnectionThroughRelay %s to %s\n",
-                    m_Engine.knownContactNameFromId( connectInfo.m_RelayConnectId.getOnlineId() ),
-                    m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() )
-                );
-#endif // DEBUG_NET_CONNECTOR
-            }
-
-            unlockConnectionList();
-        }
-
-#ifdef DEBUG_SKTS
-        else
-        {
-            LogMsg( LOG_SKT, "connectUsingTcp: NULL Socket\n" );
-        }
-#endif // DEBUG_SKTS
-    }
-
-#ifdef DEBUG_CONNECTIONS
-    //LogMsg( LOG_INFO, "P2PEngine::connectUsingTcp: returning skt 0x%x\n", *ppoRetSkt );
-#endif // DEBUG_CONNECTIONS
     if( sktBase )
     {
         ppoRetSkt = sktBase;
@@ -1278,88 +1111,6 @@ void ConnectionMgr::closeConnection( ESktCloseReason closeReason, VxGUID& online
         LogMsg( LOG_ERROR, "Failed to find ConnectedInfo for %s\n", onlineId.toHexString().c_str() );
         skt->closeSkt( eSktCloseFindConnectedInfoFail );
     }
-}
-
-
-//============================================================================-
-//! attempt connect to remote user's proxy ( only connects and send pkt announce )
-EConnectStatus ConnectionMgr::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo,
-                                                        VxSktBase *&		ppoRetSkt,			// return pointer to socket if not null
-                                                        int					iConnectTimeout )	// seconds before connect attempt times out
-{
-    EConnectStatus connectStatus = eConnectStatusConnectFailed;
-    std::string strIpAddress;
-    connectInfo.m_RelayConnectId.getIpAddress( strIpAddress );
-
-    VxSktConnect * sktBase = m_PeerMgr.connectTo(	strIpAddress.c_str(),					// remote ip or url 
-                                                    connectInfo.m_RelayConnectId.getPort(),	// port to connect to
-                                                    iConnectTimeout );						// seconds before connect attempt times out
-    if( sktBase )
-    {
-        // generate encryption keys
-        GenerateTxConnectionKey( sktBase, &connectInfo.m_RelayConnectId, m_Engine.getNetworkMgr().getNetworkKey() );
-        GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_Engine.getNetworkMgr().getNetworkKey() );
-
-        // we are connected to users proxy
-        // first send announcement to his proxy then to him
-        VxGUID& oRelayOnlineId = connectInfo.m_RelayConnectId.getOnlineId();
-        LogMsg( LOG_INFO, "sendMyPktAnnounce 3" ); 
-        bool bResult =  sendMyPktAnnounce(	oRelayOnlineId, 
-                                            sktBase, 
-                                            eFriendStateAnonymous, 
-                                            eFriendStateAnonymous,
-                                            true );
-        if( true == bResult )
-        {
-            // now send announce to remote user
-            bool requestReverseConnection = ( ( false == m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
-            bool requestSTUN = ( ( m_PktAnn.requiresRelay() ) && connectInfo.requiresRelay() );
-            LogMsg( LOG_INFO, "sendMyPktAnnounce 4" ); 
-            bResult = sendMyPktAnnounce( connectInfo.getMyOnlineId(), 
-                                            sktBase, 
-                                            true, 
-                                            requestReverseConnection,
-                                            requestSTUN );
-            if( false == bResult )
-            {
-                RCODE rc = sktBase->getLastSktError();
-                LogMsg( LOG_INFO, "Error %d %s Transmitting PktAnn to contact", rc, sktBase->describeSktError( rc ) );
-                sktBase->closeSkt( eSktCloseThroughRelayPktAnnSendFail );
-                sktBase = nullptr;
-            }
-        }
-        else
-        {
-            sktBase->closeSkt( eSktCloseToRelayPktAnnSendFail );
-            sktBase = nullptr;
-        }
-
-        if( ppoRetSkt && sktBase)
-        {
-            ppoRetSkt = (VxSktBase *)sktBase;
-            connectStatus = eConnectStatusConnectSuccess;
-        }
-    }
-
-    return connectStatus;
-}
-
-//============================================================================
-bool ConnectionMgr::sendRequestConnectionThroughRelay( VxSktBase* sktBase, VxConnectInfo& connectInfo )
-{
-    // request connection to user through his proxy
-
-    PktRelayConnectReq oPkt;
-    oPkt.m_DestOnlineId =  connectInfo.m_DirectConnectId;
-#ifdef DEBUG_CONNECTIONS
-    LogMsg( LOG_INFO, "NetworkMgr::sendRequestConnectionThroughRelay\n" );
-#endif // DEBUG_CONNECTIONS
-    if( true == m_Engine.txSystemPkt( connectInfo.m_RelayConnectId.getOnlineId(), sktBase, &oPkt ) && sktBase->isConnected() )
-    {
-        return true;
-    }
-
-    return false;
 }
 
 //============================================================================

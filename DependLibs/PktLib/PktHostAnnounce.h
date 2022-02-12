@@ -26,8 +26,8 @@
 // +    4 bytes m_SettingLength
 // + 4120 bytes m_SettingData    (4096 + 8 + 16)
 // = 4128
-// +  672 bytes PktAnnounce
-// = 4800 bytes total
+// +  480 bytes PktAnnounce
+// = 4608 bytes total
 
 class PluginSetting;
 

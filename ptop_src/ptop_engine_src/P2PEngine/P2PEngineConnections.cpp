@@ -111,10 +111,6 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 		getNetStatusAccum().onConnectionLost( poInfo->getSkt()->getConnectionId() );
 		poInfo->m_BigListInfo->setIsOnline( false );
 		poInfo->m_BigListInfo->setIsConnected( false );
-		if( poInfo->m_BigListInfo->getMyOnlineId() == m_PktAnn.getRelayOnlineId() )
-		{
-			onRelayServiceUnavailable( poInfo, connectionListLocked );
-		}
 
 		LogMsg( LOG_INFO, "onContactDisconnected %s telling plugin mgr\n", poInfo->m_BigListInfo->getOnlineName() );
 		m_RcScan.onContactWentOffline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );

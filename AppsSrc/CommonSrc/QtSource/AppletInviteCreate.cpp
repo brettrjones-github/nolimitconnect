@@ -194,7 +194,7 @@ void AppletInviteCreate::slotUpdateInvite( void )
                 addInviteText( canDirectConnect ? Invite::INVITE_HDR_DIRECT_CONNECT : Invite::INVITE_HDR_RELAYED );
             }
 
-            addInviteText( ui.m_MyUrlEdit->text() + Invite::SUFFIX_CHAR_PERSON );
+            addInviteText( ui.m_MyUrlEdit->text() + ( canDirectConnect ? Invite::SUFFIX_CHAR_PERSON_DIRECT : Invite::SUFFIX_CHAR_PERSON_RELAYED ) );
         }
 
         if( ui.m_GroupUrlCheckBox->isChecked() && !ui.m_GroupUrlEdit->text().isEmpty() )

@@ -88,14 +88,6 @@ protected:
 	bool						tryIPv6Connect(	VxConnectInfo&		connectInfo, 
 												VxSktBase **		ppoRetSkt );
 
-	bool						sendRequestConnectionThroughRelay(	VxSktBase *			sktBase, 
-																	VxConnectInfo&		connectInfo );
-
-	RCODE						rmtUserRelayConnectTo(	VxConnectInfo&			connectInfo,			 
-														VxSktBase **			ppoRetSkt,			 
-														int						iConnectTimeout = TO_PROXY_CONNECT_TIMEOUT );
- 
-
 	bool						txPacket(	VxGUID&			destinationId, 
 											VxSktBase *			sktBase, 
 											VxPktHdr *			poPkt );

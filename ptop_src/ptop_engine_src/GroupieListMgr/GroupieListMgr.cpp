@@ -657,7 +657,7 @@ bool GroupieListMgr::updateGroupieInfo( EHostType hostType, GroupieInfo& groupie
     // if exists see if needs update
     for( auto iter = m_GroupieInfoList.begin(); iter != m_GroupieInfoList.end(); ++iter )
     {
-        if( iter->getHostType() == hostType && iter->getGroupieOnlineId() == groupieInfo.getGroupieOnlineId() && iter->getHostedOnlineId() == groupieInfo.getHostedOnlineId() )
+        if( iter->getGroupieId() == groupieInfo.getGroupieId() )
         {
             alreadyExisted = true;
             if( sktBase )
@@ -749,6 +749,27 @@ bool GroupieListMgr::updateGroupieInfo( EHostType hostType, GroupieInfo& groupie
     }
 
     return filledResultInfo;
+}
+
+
+//============================================================================
+void GroupieListMgr::onHostJoinedByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), sessionInfo.getHostType() );
+
+    std::string groupieUrl = netIdent->getMyOnlineUrl();
+    std::string groupieTitle = netIdent->getOnlineName();
+    std::string groupieDesc = netIdent->getOnlineDescription();
+
+    GroupieInfo groupieInfo( groupieId, groupieUrl, groupieTitle, groupieDesc, GetGmtTimeMs() );
+    GroupieInfo retResultInfo;
+    updateGroupieInfo( sessionInfo.getHostType(), groupieInfo, netIdent, sktBase, &retResultInfo );
+}
+
+//============================================================================
+void GroupieListMgr::onHostLeftByUser( VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo )
+{
+    // probably could be removed. host join state is managed by HostJoinMgr
 }
 
 //============================================================================

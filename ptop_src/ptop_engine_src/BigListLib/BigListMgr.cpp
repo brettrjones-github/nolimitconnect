@@ -208,8 +208,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 		}
 
 		bool contactInfoChanged = false;
-		if( ( poPktAnnIn->m_RelayConnectId != poInfo->m_RelayConnectId ) ||
-			( poPktAnnIn->m_DirectConnectId != poInfo->m_DirectConnectId ) ||
+		if( ( poPktAnnIn->m_DirectConnectId != poInfo->m_DirectConnectId ) ||
 			( poPktAnnIn->m_u8RelayFlags != poInfo->m_u8RelayFlags ) )
 		{
 			contactInfoChanged = true;

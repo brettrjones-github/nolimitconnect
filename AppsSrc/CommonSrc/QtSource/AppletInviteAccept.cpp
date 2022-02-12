@@ -140,7 +140,7 @@ void AppletInviteAccept::updateInvite( void )
     Invite invite;
     if( invite.setInviteText( inviteText.toUtf8().constData() ) )
     {
-        ui.m_PersonUrlEdit->setText( invite.getInviteUrl( eHostTypePeerUser ).c_str() );
+        ui.m_PersonUrlEdit->setText( invite.getInviteUrl( eHostTypePeerUserRelayed ).c_str() );
         ui.m_GroupUrlEdit->setText( invite.getInviteUrl( eHostTypeGroup ).c_str() );
     }
 }

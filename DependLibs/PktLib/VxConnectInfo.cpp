@@ -37,7 +37,6 @@ VxConnectBaseInfo::VxConnectBaseInfo( const VxConnectBaseInfo &rhs )
     , VxSearchFlags( rhs )
     , m_LanIPv4( rhs.m_LanIPv4 )
     , m_DirectConnectId( rhs.m_DirectConnectId )
-    , m_RelayConnectId( rhs.m_RelayConnectId )
 {
 }
 
@@ -51,7 +50,6 @@ bool VxConnectBaseInfo::addToBlob( PktBlobEntry& blob )
     result &= VxSearchFlags::addToBlob( blob );
     result &= m_LanIPv4.addToBlob( blob );
     result &= m_DirectConnectId.addToBlob( blob );
-    result &= m_RelayConnectId.addToBlob( blob );
     return result;
 }
 
@@ -65,7 +63,6 @@ bool VxConnectBaseInfo::extractFromBlob( PktBlobEntry& blob )
     result &= VxSearchFlags::extractFromBlob( blob );
     result &= m_LanIPv4.extractFromBlob( blob );
     result &= m_DirectConnectId.extractFromBlob( blob );
-    result &= m_RelayConnectId.extractFromBlob( blob );
     return result;
 }
 
@@ -81,7 +78,6 @@ VxConnectBaseInfo& VxConnectBaseInfo::operator =( const VxConnectBaseInfo &rhs )
         *((VxSearchFlags*)this) = *((VxSearchFlags*)&rhs);
         m_LanIPv4 = rhs.m_LanIPv4;
         m_DirectConnectId = rhs.m_DirectConnectId;
-        m_RelayConnectId = rhs.m_RelayConnectId;
 	}
 
 	return *this;
@@ -101,6 +97,14 @@ std::string VxConnectBaseInfo::getMyOnlineUrl( EHostType hostType )
     if( hostType != eHostTypeUnknown )
     {
         Invite::appendHostTypeSuffix( hostType, myUrl );
+    }
+    else if( !requiresRelay() )
+    {
+        Invite::appendHostTypeSuffix( eHostTypePeerUserDirect, myUrl );
+    }
+    else
+    {
+        Invite::appendHostTypeSuffix( eHostTypePeerUserRelayed, myUrl );
     }
 
     return myUrl;
@@ -122,13 +126,6 @@ bool			VxConnectBaseInfo::getMyOnlineId( std::string& strRetId )		{ return m_Dir
 uint64_t		VxConnectBaseInfo::getMyOnlineIdLoPart()						{ return m_DirectConnectId.getVxGUIDLoPart(); }
 uint64_t		VxConnectBaseInfo::getMyOnlineIdHiPart()						{ return m_DirectConnectId.getVxGUIDHiPart(); }
 
-VxGUID&			VxConnectBaseInfo::getRelayOnlineId()							{ return m_RelayConnectId; }
-bool			VxConnectBaseInfo::getRelayOnlineId( std::string& strRetId )	{ return m_RelayConnectId.toHexString( strRetId ); }
-uint64_t		VxConnectBaseInfo::getRelayOnlineIdLoPart()						{ return m_RelayConnectId.getVxGUIDLoPart(); }
-uint64_t		VxConnectBaseInfo::getRelayOnlineIdHiPart()						{ return m_RelayConnectId.getVxGUIDHiPart(); }
-void			VxConnectBaseInfo::setRelayPort( uint16_t port )				{ m_RelayConnectId.setPort( port ); }		
-uint16_t		VxConnectBaseInfo::getRelayPort( void )							{ return m_RelayConnectId.getPort(); }
-
 void			VxConnectBaseInfo::getMyOnlineIPv4( std::string& strRetIp )		{ strRetIp = m_DirectConnectId.m_IPv4OnlineIp.toStdString(); }
 void			VxConnectBaseInfo::getMyOnlineIPv6( std::string& strRetIp )		{ m_DirectConnectId.getIPv6( strRetIp );}
 InetAddrIPv4&	VxConnectBaseInfo::getMyOnlineIPv4( void )						{ return m_DirectConnectId.m_IPv4OnlineIp; }
@@ -141,13 +138,6 @@ uint16_t		VxConnectBaseInfo::getMyOnlinePort( void )						{ return m_DirectConne
 InetAddress	VxConnectBaseInfo::getOnlineIpAddress( void )
 {
 	return m_DirectConnectId.m_IPv4OnlineIp.toInetAddress();
-}
-
-//============================================================================
-//! get ip based on if we can connect ipv6 or ipv4 if not
-InetAddress	VxConnectBaseInfo::getRelayIpAddress( void )
-{
-    return m_RelayConnectId.m_IPv4OnlineIp.toInetAddress();
 }
 
 //============================================================================
@@ -192,19 +182,6 @@ void VxConnectBaseInfo::getOnlinePort( std::string& strRetPort )
 void VxConnectBaseInfo::setOnlinePort( uint16_t u16Port )				
 { 
 	m_DirectConnectId.setPort( u16Port ); 
-}
-
-//============================================================================
-bool VxConnectBaseInfo::hasValidRelay( void )
-{
-	if( 0 == m_RelayConnectId.getVxGUIDHiPart() 
-		|| 0 == m_RelayConnectId.getVxGUIDLoPart() 
-		|| (0 == m_RelayConnectId.getPort()) )
-	{
-		return false;
-	}
-
-	return true;
 }
 
 //============================================================================
@@ -465,7 +442,8 @@ bool VxConnectIdent::hasThumbId( EHostType hostType )
         return m_NetHostThumbGuid.isVxGUIDValid();
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbGuid.isVxGUIDValid();
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         return m_AvatarGuid.isVxGUIDValid();
     default:
         return false;
@@ -486,7 +464,8 @@ VxGUID& VxConnectIdent::getThumbId( EHostType hostType )
         return m_NetHostThumbGuid;
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbGuid;
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         return m_AvatarGuid;
     default:
         return nullGuid;
@@ -544,7 +523,8 @@ void VxConnectIdent::setHostOrThumbModifiedTime( EHostType hostType, int64_t& ti
     case eHostTypeRandomConnect:
         setModifiedTime( m_RandomConnectThumbModifiedTime, timeModified );
         break;
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         setModifiedTime( m_AvatarModifiedTime, timeModified );
         break;
     default:
@@ -565,7 +545,8 @@ int64_t VxConnectIdent::getHostOrThumbModifiedTime( EHostType hostType )
         return m_NetHostThumbModifiedTime;
     case eHostTypeRandomConnect:
         return m_RandomConnectThumbModifiedTime;
-    case eHostTypePeerUser:
+    case eHostTypePeerUserRelayed:
+    case eHostTypePeerUserDirect:
         return m_AvatarModifiedTime;
     default:
         return 0;
