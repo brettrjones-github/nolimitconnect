@@ -645,7 +645,7 @@ void GuiUserListWidget::onListItemUpdated( GuiUserSessionBase* userSession, GuiU
             pluginType = ePluginTypeClientRandomConnect;
             break;
         default:
-            hostType = eHostTypePeerUser;
+            hostType = eHostTypePeerUserRelayed;
             pluginType = ePluginTypeHostPeerUser;
         }
 

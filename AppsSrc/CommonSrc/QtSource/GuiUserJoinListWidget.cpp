@@ -502,7 +502,7 @@ void GuiUserJoinListWidget::onListItemUpdated( GuiUserJoinSession* userSession, 
             hostType = eHostTypeRandomConnect;
             break;
         default:
-            hostType = eHostTypePeerUser;
+            hostType = eHostTypePeerUserRelayed;
         }
         
         if( !userItem->getIsThumbUpdated() )
