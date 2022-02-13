@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceHostGroup.h"
+#include "AppletGroupHostAdmin.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,16 +20,20 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletServiceHostGroup::AppletServiceHostGroup( AppCommon& app, QWidget * parent )
-: AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_GROUP, app, parent )
+AppletGroupHostAdmin::AppletGroupHostAdmin( AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_GROUP_HOST_ADMIN, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceHostGroup, ePluginTypeHostGroup );
+    setAppletType( eAppletGroupHostAdmin );
+    ui.setupUi( getContentItemsFrame() );
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-	m_MyApp.activityStateChange( this, true );
+    connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( closeApplet() ) );
+
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletServiceHostGroup::~AppletServiceHostGroup()
+AppletGroupHostAdmin::~AppletGroupHostAdmin()
 {
     m_MyApp.activityStateChange( this, false );
 }

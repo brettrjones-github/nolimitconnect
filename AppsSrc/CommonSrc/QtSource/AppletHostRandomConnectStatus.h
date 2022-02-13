@@ -22,14 +22,14 @@
 
 #include "ui_AppletHostNetworkStatus.h"
  
-class AppletHostNetworkStatus : public AppletBase
+class AppletHostRandomConnectStatus : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletHostNetworkStatus( AppCommon& app, QWidget * parent );
-	virtual ~AppletHostNetworkStatus();
+    AppletHostRandomConnectStatus( AppCommon& app, QWidget * parent );
+	virtual ~AppletHostRandomConnectStatus();
 
-    PermissionWidget*           getNetworkHostPermissionWidget()    { return ui.m_HostPermissionWidget; }
+    PermissionWidget*           getRandomConnectHostPermissionWidget()    { return ui.m_HostPermissionWidget; }
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissionWidget; }
     PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_AdditionalPermissionWidget; }
     PermissionWidget*           getRandomConnectPermissionWidget()  { return ui.m_RandomConnectPermissionWidget; }

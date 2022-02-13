@@ -13,18 +13,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceBase.h"
+#include "ui_AppletChatRoomClient.h"
 
-#include "ui_AppletServiceBase.h"
+#include "AppletBase.h"
 
-class AppletServiceRandomConnect : public AppletServiceBase
+class AppletGroupHostAdmin : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletServiceRandomConnect( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceRandomConnect() override;
+    AppletGroupHostAdmin( AppCommon& app, QWidget * parent );
+	virtual ~AppletGroupHostAdmin() override;
 
 protected:
+    //=== vars ===//
+    Ui::AppletChatRoomClientUi ui;
 };
 
 

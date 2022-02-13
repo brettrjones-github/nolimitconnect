@@ -84,9 +84,6 @@ enum EApplet
 
     eAppletTheme,
     eAppletNetworkSettings,
-    eAppletJoinGroupStatus,
-    eAppletHostGroupStatus,
-    eAppletHostNetworkStatus,
     eAppletPermissionList,          // list of all users plugin permission levels
     eAppletCamTest,
 
@@ -109,17 +106,28 @@ enum EApplet
 
     eMaxSearchApplets,              // marker.. end of search applets.. past here is hosting applets
 
-    eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
-    eAppletServiceChatRoom,	        // hosts a chat room. provide chat room services for group users
+    eAppletGroupHostAdmin,
+    eAppletSettingsHostGroup,
+    eAppletHostGroupStatus,
+
+    eAppletHostChatRoomAdmin,	       
+    eAppletSettingsHostChatRoom,
+    eAppletHostChatRoomStatus,	   
+
+    eAppletSettingsHostRandomConnect,     // connect to random person service
+    eAppletHostRandomConnectStatus,
+
     eAppletServiceHostNetwork,      // network host service for a nolimitconnect network.. requires fixed ip address, group list hosts announce to network host
+    eAppletSettingsHostNetwork,
+    eAppletHostNetworkStatus,
+
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
     eAppletServiceRelay,            // network relay service for users without a open port
-
-    eAppletServiceRandomConnect,     // connect to random person service
     eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
-    eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
 
-    eMaxHostApplets,                // marker.. end of hosting applets.. start of user share services
+    eMaxHostApplets,                // marker.. end of hosting applets.. start of other services
+
+    eAppletGroupListLocalView,      // view group list announced to hosted network if this node is a network host
 
     eAppletServiceAvatarImage,
     eAppletServiceAboutMe,
@@ -164,15 +172,9 @@ enum EApplet
     eAppletSettingsAboutMe,
     eAppletSettingsAvatarImage,
     eAppletSettingsWebCamServer,
-    eAppletSettingsChatRoom,
     eAppletSettingsConnectTest,
     eAppletSettingsShareFiles,
     eAppletSettingsFileXfer,
-
-    eAppletSettingsHostGroup,
-    eAppletSettingsHostChatRoom,
-    eAppletSettingsHostRandomConnect,
-    eAppletSettingsHostNetwork,
 
     eAppletSettingsMessenger,
     eAppletSettingsRandomConnect,

@@ -82,19 +82,22 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGalleryEmoticon.h \  
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGalleryThumb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGetStarted.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupHostAdmin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupJoinSearch.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupJoin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupListClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupListLocalView.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHelpNetSignalBars.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostBase.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomAdmin.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostGroupStatus.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRamdomConnectStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostJoinRequestList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostNetworkStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostSelect.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteAccept.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteCreate.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinGroupStatus.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinBase.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletKodi.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletLaunchPage.h \
@@ -131,11 +134,8 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceBase.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceBaseSettings.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRelay.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceChatRoom.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceConnectionTest.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceHostGroup.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceHostNetwork.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRandomConnect.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRandomConnectRelay.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRelay.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceShareFiles.h \
@@ -144,7 +144,6 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsAboutMe.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsAvatarImage.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsBase.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsChatRoom.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsConnectionTest.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsFileXfer.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsHostBase.h \
@@ -449,19 +448,22 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGalleryEmoticon.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGalleryThumb.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGetStarted.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupHostAdmin.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupJoin.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupJoinSearch.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupListClient.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletGroupListLocalView.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletHelpNetSignalBars.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostBase.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomAdmin.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostJoinRequestList.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostGroupStatus.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostNetworkStatus.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostSelect.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteAccept.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteCreate.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinGroupStatus.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomStatus.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostGroupStatus.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRamdomConnectStatus.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletKodi.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletLaunchPage.cpp \
@@ -497,12 +499,9 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceAvatarImage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceBaseSettings.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceChatRoom.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceConnectionTest.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsHostBase.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceHostGroup.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceHostNetwork.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRandomConnect.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRandomConnectRelay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceRelay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletServiceShareFiles.cpp \
@@ -511,7 +510,6 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsAboutMe.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsAvatarImage.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsBase.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsChatRoom.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsConnectionTest.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsFileXfer.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsHostChatRoom.cpp \
@@ -791,19 +789,16 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGalleryThumb.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGetStarted.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGoTvPtoPNetworkHost.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletGroupHost.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletGroupJoin.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGroupJoinSearch.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGroupListClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletGroupListLocalView.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHelpNetSignalBars.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHostJoinRequestList.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletHostGroupStatus.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHostNetworkStatus.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletHostSelect.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletInviteAccept.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletInviteCreate.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletJoinGroupStatus.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletKodi.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletLaunchWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletLibrary.ui \
@@ -831,7 +826,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletRandomConnectJoinSearch.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletServiceBase.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletServiceBaseSettings.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletServiceChatRoom.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsHostChatRoom.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsHostGroup.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsHostNetwork.ui \

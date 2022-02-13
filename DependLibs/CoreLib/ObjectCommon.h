@@ -69,18 +69,25 @@
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
 #define OBJNAME_APPLET_FRIEND_LIST_CLIENT			    "AppletFriendListClient"
+
+#define OBJNAME_APPLET_GROUP_HOST_SETTINGS				"AppletHostGroupSettings"
+#define OBJNAME_APPLET_GROUP_HOST_STATUS				"AppletHostGroupStatus"
 #define OBJNAME_APPLET_GROUP_JOIN_SEARCH			    "AppletGroupJoinSearch"
 #define OBJNAME_APPLET_GROUP_LIST_CLIENT			    "AppletGroupListClient"
 #define OBJNAME_APPLET_GROUP_LIST_LOCAL_VIEW			"AppletGroupListLocalView"
-#define OBJNAME_APPLET_HOST_GROUP_STATUS				"AppletHostGroupStatus"
+
 #define OBJNAME_APPLET_HOST_JOIN_REQUEST_LIST			"AppletHostJoinRequestList"
+#define OBJNAME_APPLET_HOST_CHAT_ROOM_ADMIN 			"AppletHostChatRoomAdmin"
+#define OBJNAME_APPLET_HOST_CHAT_ROOM_STATUS			"AppletHostChatRoomStatus"
+#define OBJNAME_APPLET_HOST_GROUP_STATUS				"AppletHostGroupStatus"
 #define OBJNAME_APPLET_HOST_NETWORK_STATUS				"AppletHostNetworkStatus"
+#define OBJNAME_APPLET_HOST_RANDOM_CONNECT_STATUS		"AppletHostRandomConnectStatus"
 #define OBJNAME_APPLET_HOST_SELECT						"AppletHostSelect"
-#define OBJNAME_APPLET_JOIN_GROUP_STATUS				"AppletJoinGroupStatus"
+
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
+#define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 #define OBJNAME_APPLET_NEARBY_LIST_CLIENT			    "AppletNearbyListClient"
-#define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
 #define OBJNAME_APPLET_RANDOM_CONNECT_JOIN			    "AppletRandomConnectJoin"
 
 #define OBJNAME_APPLET_ABOUT_APP						"AppletAboutApp"
@@ -98,6 +105,7 @@
 #define OBJNAME_APPLET_GALLERY_IMAGE				    "AppletGalleryImage"
 #define OBJNAME_APPLET_GALLERY_THUMB				    "AppletGalleryThumb"
 #define OBJNAME_APPLET_GET_STARTED						"AppletGetStarted"
+#define OBJNAME_APPLET_GROUP_HOST_ADMIN				    "AppletGroupHostAdmin"
 #define OBJNAME_APPLET_GROUP_JOIN						"AppletGroupJoin"
 #define OBJNAME_APPLET_HELP_NET_SIGNAL_BARS				"AppletHelpNetSignalBars"
 #define OBJNAME_APPLET_INVITE_CREATE					"AppletInviteCreate"
@@ -120,9 +128,8 @@
 
 #define OBJNAME_APPLET_SERVICE_ABOUT_ME				    "AppletServiceAboutMe"
 #define OBJNAME_APPLET_SERVICE_AVATAR_IMAGE				"AppletServiceAvatarImage"
-#define OBJNAME_APPLET_SERVICE_CHAT_ROOM				"AppletServiceChatRoom"
 #define OBJNAME_APPLET_SERVICE_CONNECT_TEST				"AppletServiceConnectTest"
-#define OBJNAME_APPLET_SERVICE_HOST_GROUP				"AppletServiceHostGroup"
+
 // #define OBJNAME_APPLET_SERVICE_HOST_GROUP_LISTING		"AppletServiceHosGroupListing"
 #define OBJNAME_APPLET_SERVICE_HOST_NETWORK			    "AppletServiceHostNetwork"
 #define OBJNAME_APPLET_SERVICE_RANDOM_PERSON		    "AppletServiceRandomConnect"
@@ -135,7 +142,6 @@
 
 #define OBJNAME_APPLET_SETTINGS_ABOUT_ME				"AppletSettingsAboutMe"
 #define OBJNAME_APPLET_SETTINGS_AVATAR_IMAGE			"AppletSettingsAvatarImage"
-#define OBJNAME_APPLET_SETTINGS_CHAT_ROOM   			"AppletSettingsChatRoom"
 #define OBJNAME_APPLET_SETTINGS_CONNECT_TEST			"AppletSettingsConnectTest"
 #define OBJNAME_APPLET_SETTINGS_FILE_XFER			    "AppletSettingsFileXfer"
 #define OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM			"AppletSettingsHostChatRoom"

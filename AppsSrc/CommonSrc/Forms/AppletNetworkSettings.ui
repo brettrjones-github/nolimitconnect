@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>643</height>
+    <width>437</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -675,14 +675,14 @@
            <item>
             <widget class="QRadioButton" name="AutoDetectProxyRadioButton">
              <property name="text">
-              <string>Use Connection Test Service To Test For Firewall (Recommended)</string>
+              <string>Use Connection Test Service To Test Is Port Open (Recommended)</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QRadioButton" name="AssumeNoProxyRadioButton">
              <property name="text">
-              <string>Assume Users Can Connect Directly ( No Firewall )</string>
+              <string>Assume Users Can Connect Directly (Port Is Always Open And Forwarded )</string>
              </property>
             </widget>
            </item>

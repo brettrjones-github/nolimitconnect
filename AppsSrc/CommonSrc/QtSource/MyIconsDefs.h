@@ -403,5 +403,10 @@ enum EMyIcons
 	eMyIconStarEmpty,
 	eMyIconStarFull,
 
+	eMyIconChatRoomInfo,
+	eMyIconGroupInfo,
+	eMyIconNetworkInfo,
+	eMyIconRandomConnectInfo,
+
 	eMaxMyIcon	// must be last
 };

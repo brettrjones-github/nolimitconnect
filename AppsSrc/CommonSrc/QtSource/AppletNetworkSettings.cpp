@@ -48,41 +48,34 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     // using an specific network adapter ip for outgoing connections has some issues with vpn on some systems.. hide for not
     ui.m_LclIpListComboBox->setVisible(false);
     ui.m_LocalAdapterIpLabel->setVisible(false);
-    // hide features not yet available
-    if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
-    {
-        ui.m_DefaultChatRoomHostButton->setVisible( false );
-        ui.m_DefaultChatRoomHostUrlLabel->setVisible( false );
-        ui.m_DefaultChatRoomHostUrlEdit->setVisible( false );
-        ui.m_ChatRoomUrlInfoButton->setVisible( false );
-    }
 
-    if( !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
-    {
-        ui.m_RandomConnectButton->setVisible( false );
-        ui.m_RandomConnectUrlLabel->setVisible( false );
-        ui.m_RandomConnectUrlEdit->setVisible( false );
-        ui.m_RandomConnectUrlInfoButton->setVisible( false );
-    }
+    // default hosts are now handled by last connected.. these could be removed
+    ui.m_DefaultGroupHostButton->setVisible( false );
+    ui.m_GroupHostUrlLabel->setVisible( false );
+    ui.m_GroupHostUrlEdit->setVisible( false );
+    ui.m_DefaultGroupHostUrlInfoButton->setVisible( false );
 
-    ui.m_NetworkHostInfoButton->setIcon( eMyIconInformation );
-    ui.m_NetworkHostButton->setIcon( eMyIconServiceHostNetwork );
-    ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );
-    ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
-    ui.m_ConnectTestUrlInfoButton->setIcon( eMyIconInformation );
-    ui.m_ConnectIsOpenInfoButton->setIcon( eMyIconInformation );
-    ui.m_ConnectTestHostButton->setIcon( eMyIconServiceConnectionTest );
+    ui.m_DefaultChatRoomHostButton->setVisible( false );
+    ui.m_DefaultChatRoomHostUrlLabel->setVisible( false );
+    ui.m_DefaultChatRoomHostUrlEdit->setVisible( false );
+    ui.m_ChatRoomUrlInfoButton->setVisible( false );
 
-    ui.m_RandomConnectUrlInfoButton->setIcon( eMyIconInformation );
-    ui.m_DefaultGroupHostUrlInfoButton->setIcon( eMyIconInformation );
-    ui.m_ChatRoomUrlInfoButton->setIcon( eMyIconInformation );
+    ui.m_RandomConnectButton->setVisible( false );
+    ui.m_RandomConnectUrlLabel->setVisible( false );
+    ui.m_RandomConnectUrlEdit->setVisible( false );
+    ui.m_RandomConnectUrlInfoButton->setVisible( false );
 
-    ui.m_RandomConnectButton->setIcon( eMyIconServiceRandomConnect );
-    ui.m_DefaultGroupHostButton->setIcon( eMyIconServiceHostGroup );
-    ui.m_DefaultChatRoomHostButton->setIcon( eMyIconServiceChatRoom );
+    //ui.m_DefaultGroupHostUrlInfoButton->setIcon( eMyIconInformation );
+    //ui.m_RandomConnectUrlInfoButton->setIcon( eMyIconInformation );
+    //ui.m_ChatRoomUrlInfoButton->setIcon( eMyIconInformation );
+
+    //ui.m_DefaultGroupHostButton->setIcon( eMyIconServiceHostGroup );
+    //ui.m_RandomConnectButton->setIcon( eMyIconServiceRandomConnect );
+    //ui.m_DefaultChatRoomHostButton->setIcon( eMyIconServiceChatRoom );
 
     // probably could remove this button
     ui.m_ApplySettingsButton->setVisible( false );
+
 
     updateDlgFromSettings( true );
 
@@ -212,17 +205,17 @@ void AppletNetworkSettings::fillNetHostSettingFromEngine( NetHostSetting& netSet
     m_Engine.getEngineSettings().getNetworkKey( strValue );
     netSetting.setNetworkKey( strValue.c_str() );
 
-    m_Engine.getEngineSettings().getGroupHostUrl( strValue );
-    netSetting.setGroupHostUrl( strValue.c_str() );
-
     m_Engine.getEngineSettings().getConnectTestUrl( strValue );
     netSetting.setConnectTestUrl( strValue.c_str() );
 
-    m_Engine.getEngineSettings().getRandomConnectUrl( strValue );
-    netSetting.setRandomConnectUrl( strValue.c_str() );
+    //m_Engine.getEngineSettings().getGroupHostUrl( strValue );
+    //netSetting.setGroupHostUrl( strValue.c_str() );
 
-    m_Engine.getEngineSettings().getChatRoomHostUrl( strValue );
-    netSetting.setGroupHostUrl( strValue.c_str() );
+    //m_Engine.getEngineSettings().getRandomConnectUrl( strValue );
+    //netSetting.setRandomConnectUrl( strValue.c_str() );
+
+    //m_Engine.getEngineSettings().getChatRoomHostUrl( strValue );
+    //netSetting.setGroupHostUrl( strValue.c_str() );
 
     std::string externIP;
     m_Engine.getEngineSettings().getUserSpecifiedExternIpAddr( externIP );

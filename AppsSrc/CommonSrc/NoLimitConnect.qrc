@@ -316,5 +316,9 @@
         <file>Resources/overlay-direct-connected.svg</file>
         <file>Resources/push-to-talk.svg</file>
         <file>Resources/boot.svg</file>
+        <file>Resources/group-info.svg</file>
+        <file>Resources/chat-room-info.svg</file>
+        <file>Resources/random-connect-info.svg</file>
+        <file>Resources/network-host-info.svg</file>
     </qresource>
 </RCC>

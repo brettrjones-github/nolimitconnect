@@ -13,7 +13,7 @@
 //============================================================================
 
 
-#include "AppletHostNetworkStatus.h"
+#include "AppletHostRandomConnectStatus.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -22,16 +22,16 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * parent )
-    : AppletBase( OBJNAME_APPLET_HOST_NETWORK_STATUS, app, parent )
+AppletHostRandomConnectStatus::AppletHostRandomConnectStatus( AppCommon& app, QWidget * parent )
+    : AppletBase( OBJNAME_APPLET_HOST_RANDOM_CONNECT_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {
     ui.setupUi( getContentItemsFrame() );
-    setAppletType( eAppletHostNetworkStatus );
+    setAppletType( eAppletHostRandomConnectStatus );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     ui.m_HostingRequirementsButton->setVisible( false );
-    getNetworkHostPermissionWidget()->setPluginType( ePluginTypeHostNetwork );
+    getRandomConnectHostPermissionWidget()->setPluginType( ePluginTypeHostRandomConnect );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
     getRandomConnectPermissionWidget()->setPluginType( ePluginTypeHostRandomConnect );
     getGroupHostPermissionWidget()->setPluginType( ePluginTypeHostGroup );
@@ -46,7 +46,6 @@ AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * pare
     ui.m_AdditionalLabel1->setVisible( false );
     ui.m_AdditionalLabel2->setVisible( false );
     ui.m_AdditionalPermissionWidget->setVisible( false );
-
     m_MyApp.activityStateChange( this, true );
 
     connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );
@@ -56,33 +55,33 @@ AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * pare
 }
 
 //============================================================================
-AppletHostNetworkStatus::~AppletHostNetworkStatus()
+AppletHostRandomConnectStatus::~AppletHostRandomConnectStatus()
 {
     m_UpdateStatusTimer->stop();
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletHostNetworkStatus::slotHostRequirementsButtonClicked()
+void AppletHostRandomConnectStatus::slotHostRequirementsButtonClicked()
 {
 }
 
 //============================================================================
-void AppletHostNetworkStatus::slotUpdateStatusTimeout()
+void AppletHostRandomConnectStatus::slotUpdateStatusTimeout()
 {
     bool haveOpenPort = m_MyApp.getEngine().getNetStatusAccum().isRxPortOpen();
-    bool networkHostEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    bool networkHostEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostRandomConnect ) != eFriendStateIgnore;
     bool connectTestEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostConnectTest ) != eFriendStateIgnore;
     ui.m_OpenPortCheckBox->setChecked( haveOpenPort );
     ui.m_HostPermissionCheckBox->setChecked( networkHostEnabled );
     ui.m_ConnectionTestPermissionCheckBox->setChecked( connectTestEnabled );
     if( !haveOpenPort )
     {
-        ui.m_HostingStatusText->setText( QObject::tr( "Open Port Required. Check Network Settings" ) );
+        ui.m_HostingStatusText->setText( QObject::tr( "Open Port Required. Check RandomConnect Settings" ) );
     }
     else if( !networkHostEnabled )
     {
-        ui.m_HostingStatusText->setText( QObject::tr( "Network Hosting Permission is disabled" ) );
+        ui.m_HostingStatusText->setText( QObject::tr( "RandomConnect Hosting Permission is disabled" ) );
     }
     else if( !connectTestEnabled )
     {
@@ -90,11 +89,11 @@ void AppletHostNetworkStatus::slotUpdateStatusTimeout()
     }
     else
     {
-        ui.m_HostingStatusText->setText( QObject::tr( "Network Hosting Conditions Are Met" ) );
+        ui.m_HostingStatusText->setText( QObject::tr( "RandomConnect Hosting Conditions Are Met" ) );
     }
 
-    int availGroupsCnt = m_MyApp.getFromGuiInterface().fromGuiGetJoinedListCount( ePluginTypeNetworkSearchList );
-    ui.m_GroupListCountLabel->setText( QString::number( availGroupsCnt ) );
+    //int availGroupsCnt = m_MyApp.getFromGuiInterface().fromGuiGetJoinedListCount( ePluginTypeRandomConnectSearchList );
+    //ui.m_GroupListCountLabel->setText( QString::number( availGroupsCnt ) );
     std::string url;
     m_MyApp.getFromGuiInterface().fromGuiGetNodeUrl( url );
     ui.m_UrlText->setText( url.c_str() );

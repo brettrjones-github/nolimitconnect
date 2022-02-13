@@ -42,6 +42,7 @@ call-list.svg (modified)
 cam-rotate.svg (modified)
 cam-preview.svg (modified)
 cancel.svg
+chat-room-info.svg (modified)
 check-mark.svg
 connect.svg
 connection-test.svg (modified)
@@ -78,6 +79,7 @@ friend.svg
 friend-broadcast.svg (modified)
 friend-joined.svg
 flask.svg
+group-info.svg (modified)
 group-joined.svg
 image-rotate.svg (modified)
 invite.svg
@@ -89,6 +91,7 @@ mediatype-video.svg
 messenger-settings.svg (modified)
 microphone.svg
 microphone-muted.svg (modified)
+network-host-info.svg (modified)
 notify-dot.svg (modified)
 notify-join.svg (modified)
 notify-offer.svg (modified)
@@ -118,6 +121,7 @@ question-mark.svg
 question-mark-outlined.svg (modified)
 radio-tower.svg
 remote-control.svg
+random-connect-info.svg (modified)
 service-group-chat.svg
 service-group-chat-settings.svg ( modified )
 settings-gear.svg

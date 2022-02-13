@@ -67,12 +67,12 @@
        </widget>
       </item>
       <item>
-       <widget class="PermissionWidget" name="m_NetworkHostPermissionWidget" native="true"/>
+       <widget class="PermissionWidget" name="m_HostPermissionWidget" native="true"/>
       </item>
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Other Services Required To Host A Network</string>
+         <string>Other Services Required To Host A Service</string>
         </property>
        </widget>
       </item>
@@ -87,7 +87,7 @@
        <widget class="PermissionWidget" name="m_ConnectTestPermissionWidget" native="true"/>
       </item>
       <item>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="m_OptionalLabel">
         <property name="text">
          <string>Optional: Provide Random Connect Service</string>
         </property>
@@ -97,21 +97,21 @@
        <widget class="PermissionWidget" name="m_RandomConnectPermissionWidget" native="true"/>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="m_AdditionalLabel1">
         <property name="text">
          <string>If your network does not have many group hosts</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="m_AdditionalLabel2">
         <property name="text">
          <string>You might want to host a group on the same device</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PermissionWidget" name="m_GroupPermissionWidget" native="true"/>
+       <widget class="PermissionWidget" name="m_AdditionalPermissionWidget" native="true"/>
       </item>
       <item>
        <widget class="QCheckBox" name="m_OpenPortCheckBox">
@@ -121,9 +121,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="m_NetworkHostPermissionCheckBox">
+       <widget class="QCheckBox" name="m_HostPermissionCheckBox">
         <property name="text">
-         <string>Network Host Is Enabled</string>
+         <string>Host Permission Is Enabled</string>
         </property>
        </widget>
       </item>
@@ -137,7 +137,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label_5">
+         <widget class="QLabel" name="m_GroupCountTitleLabel">
           <property name="text">
            <string>Group Listing Count:</string>
           </property>
@@ -161,7 +161,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="m_StatusTitleLabel">
           <property name="text">
            <string>Status:</string>
           </property>
@@ -179,7 +179,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="label_7">
+         <widget class="QLabel" name="m_UrlTitleLabel">
           <property name="text">
            <string>Url:</string>
           </property>
@@ -229,8 +229,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../NoLimitConnect.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

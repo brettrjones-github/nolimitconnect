@@ -23,7 +23,7 @@
 
 //============================================================================
 AppletHostGroupStatus::AppletHostGroupStatus( AppCommon& app, QWidget * parent )
-    : AppletBase( OBJNAME_APPLET_HOST_NETWORK_STATUS, app, parent )
+    : AppletBase( OBJNAME_APPLET_GROUP_HOST_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {
     ui.setupUi( getContentItemsFrame() );
@@ -35,9 +35,15 @@ AppletHostGroupStatus::AppletHostGroupStatus( AppCommon& app, QWidget * parent )
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
 
     ui.m_OpenPortCheckBox->setEnabled( false );
-    ui.m_GroupHostPermissionCheckBox->setEnabled( false );
+    ui.m_HostPermissionCheckBox->setEnabled( false );
     ui.m_ConnectionTestPermissionCheckBox->setEnabled( false );
 
+    ui.m_OptionalLabel->setVisible( false );
+    ui.m_RandomConnectPermissionWidget->setVisible( false );
+
+    ui.m_AdditionalLabel1->setVisible( false );
+    ui.m_AdditionalLabel2->setVisible( false );
+    ui.m_AdditionalPermissionWidget->setVisible( false );
 
     m_MyApp.activityStateChange( this, true );
 
@@ -61,7 +67,7 @@ void AppletHostGroupStatus::slotUpdateStatusTimeout()
     bool groupHostEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostGroup ) != eFriendStateIgnore;
     bool connectTestEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostConnectTest ) != eFriendStateIgnore;
     ui.m_OpenPortCheckBox->setChecked( haveOpenPort );
-    ui.m_GroupHostPermissionCheckBox->setChecked( groupHostEnabled );
+    ui.m_HostPermissionCheckBox->setChecked( groupHostEnabled );
     ui.m_ConnectionTestPermissionCheckBox->setChecked( connectTestEnabled );
     if( !haveOpenPort )
     {

@@ -13,7 +13,7 @@
 //============================================================================
 
 
-#include "AppletHostNetworkStatus.h"
+#include "AppletHostChatRoomStatus.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -22,22 +22,22 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * parent )
-    : AppletBase( OBJNAME_APPLET_HOST_NETWORK_STATUS, app, parent )
+AppletHostChatRoomStatus::AppletHostChatRoomStatus( AppCommon& app, QWidget * parent )
+    : AppletBase( OBJNAME_APPLET_HOST_CHAT_ROOM_STATUS, app, parent )
     , m_UpdateStatusTimer( new QTimer( this ) )
 {
     ui.setupUi( getContentItemsFrame() );
-    setAppletType( eAppletHostNetworkStatus );
+    setAppletType( eAppletHostChatRoomStatus );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     ui.m_HostingRequirementsButton->setVisible( false );
-    getNetworkHostPermissionWidget()->setPluginType( ePluginTypeHostNetwork );
+    getChatRoomHostPermissionWidget()->setPluginType( ePluginTypeHostChatRoom );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
     getRandomConnectPermissionWidget()->setPluginType( ePluginTypeHostRandomConnect );
     getGroupHostPermissionWidget()->setPluginType( ePluginTypeHostGroup );
 
     ui.m_OpenPortCheckBox->setEnabled( false );
-    ui.m_HostPermissionCheckBox->setEnabled( false );
+    ui.m_HostPermissionWidget->setEnabled( false );
     ui.m_ConnectionTestPermissionCheckBox->setEnabled( false );
 
     ui.m_OptionalLabel->setVisible( false );
@@ -56,33 +56,33 @@ AppletHostNetworkStatus::AppletHostNetworkStatus( AppCommon& app, QWidget * pare
 }
 
 //============================================================================
-AppletHostNetworkStatus::~AppletHostNetworkStatus()
+AppletHostChatRoomStatus::~AppletHostChatRoomStatus()
 {
     m_UpdateStatusTimer->stop();
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletHostNetworkStatus::slotHostRequirementsButtonClicked()
+void AppletHostChatRoomStatus::slotHostRequirementsButtonClicked()
 {
 }
 
 //============================================================================
-void AppletHostNetworkStatus::slotUpdateStatusTimeout()
+void AppletHostChatRoomStatus::slotUpdateStatusTimeout()
 {
     bool haveOpenPort = m_MyApp.getEngine().getNetStatusAccum().isRxPortOpen();
-    bool networkHostEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    bool networkHostEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostChatRoom ) != eFriendStateIgnore;
     bool connectTestEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostConnectTest ) != eFriendStateIgnore;
     ui.m_OpenPortCheckBox->setChecked( haveOpenPort );
     ui.m_HostPermissionCheckBox->setChecked( networkHostEnabled );
     ui.m_ConnectionTestPermissionCheckBox->setChecked( connectTestEnabled );
     if( !haveOpenPort )
     {
-        ui.m_HostingStatusText->setText( QObject::tr( "Open Port Required. Check Network Settings" ) );
+        ui.m_HostingStatusText->setText( QObject::tr( "Open Port Required. Check ChatRoom Settings" ) );
     }
     else if( !networkHostEnabled )
     {
-        ui.m_HostingStatusText->setText( QObject::tr( "Network Hosting Permission is disabled" ) );
+        ui.m_HostingStatusText->setText( QObject::tr( "ChatRoom Hosting Permission is disabled" ) );
     }
     else if( !connectTestEnabled )
     {
@@ -90,11 +90,11 @@ void AppletHostNetworkStatus::slotUpdateStatusTimeout()
     }
     else
     {
-        ui.m_HostingStatusText->setText( QObject::tr( "Network Hosting Conditions Are Met" ) );
+        ui.m_HostingStatusText->setText( QObject::tr( "ChatRoom Hosting Conditions Are Met" ) );
     }
 
-    int availGroupsCnt = m_MyApp.getFromGuiInterface().fromGuiGetJoinedListCount( ePluginTypeNetworkSearchList );
-    ui.m_GroupListCountLabel->setText( QString::number( availGroupsCnt ) );
+    //int availGroupsCnt = m_MyApp.getFromGuiInterface().fromGuiGetJoinedListCount( ePluginTypeChatRoomSearchList );
+    //ui.m_GroupListCountLabel->setText( QString::number( availGroupsCnt ) );
     std::string url;
     m_MyApp.getFromGuiInterface().fromGuiGetNodeUrl( url );
     ui.m_UrlText->setText( url.c_str() );

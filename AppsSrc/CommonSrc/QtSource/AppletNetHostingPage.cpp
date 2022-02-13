@@ -53,9 +53,7 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
 
             // do not include hidden or secondary service hosting plugins
             if( ( eAppletServiceRelay != i ) &&
-                ( eAppletServiceRandomConnect != i ) &&
                 ( eAppletServiceRandomConnectRelay != i ) &&
-                ( eAppletServiceHostGroup != i ) &&
                 ( eAppletServiceHostNetwork != i ) &&
                 ( eAppletServiceConnectionTest != i ) )
             {
@@ -64,6 +62,7 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
             }
         }
 
+        /*
         if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
         {
             AppletLaunchWidget* appletHostChatRoom = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostChatRoom, this );
@@ -86,6 +85,7 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
             AppletLaunchWidget* appletGroupListLocalView = new AppletLaunchWidget( m_MyApp, eAppletGroupListLocalView, this );
             m_AppletList.push_back( appletGroupListLocalView );
         }
+        */
 
         m_IsInitialized = true;
     }

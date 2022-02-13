@@ -134,9 +134,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsConnectionTest.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsChatRoom.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -161,19 +158,10 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnectRelay.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnect.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceHostNetwork.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceHostGroup.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceConnectionTest.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceChatRoom.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletServiceBaseSettings.h">
@@ -818,13 +806,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletGroupListLocalView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostGroupStatus.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostNetworkStatus.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletJoinGroupStatus.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletCamClipPlayer.h">
@@ -907,6 +889,21 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiUserMgr.h">
       <Filter>Source Files\GuiUser</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletGroupHostAdmin.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostChatRoomStatus.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostRandomConnectStatus.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostGroupStatus.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostChatRoomAdmin.h">
+      <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1174,19 +1171,10 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceBaseSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceChatRoom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceConnectionTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceHostGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceHostNetwork.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletServiceRandomConnectRelay.cpp">
@@ -1208,9 +1196,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsChatRoom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsConnectionTest.cpp">
@@ -1798,13 +1783,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAssetPlayerBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostGroupStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostNetworkStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletJoinGroupStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletGroupListLocalView.cpp">
@@ -1991,6 +1970,21 @@
       <Filter>Source Files\GuiUserJoin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletNearbyListClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletGroupHostAdmin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostChatRoomStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostRandomConnectStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostGroupStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletHostChatRoomAdmin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2401,9 +2395,6 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGoTvPtoPNetworkHost.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupHost.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupJoin.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -2482,13 +2473,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletServiceBaseSettings.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletServiceChatRoom.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletServiceConnectionTest.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletServiceGroupHost.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletServiceGroupListingHost.ui">
@@ -2689,13 +2674,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamClipPlayer.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletHostGroupStatus.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletHostNetworkStatus.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\CommonSrc\Forms\AppletJoinGroupStatus.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletGroupListLocalView.ui">

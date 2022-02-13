@@ -814,6 +814,15 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconStarFull:
 		return ":/AppRes/Resources/star-full.svg";
 
+	case eMyIconChatRoomInfo:
+		return ":/AppRes/Resources/chat-room-info.svg";
+	case eMyIconGroupInfo:
+		return ":/AppRes/Resources/group-info.svg";
+	case eMyIconNetworkInfo:
+		return ":/AppRes/Resources/network-host-info.svg";
+	case eMyIconRandomConnectInfo:
+		return ":/AppRes/Resources/random-connect-info.svg";
+
 	default:
 		return ":/AppRes/Resources/question-mark.svg";// Icon with question mark
 	}

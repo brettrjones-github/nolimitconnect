@@ -48,18 +48,26 @@
 #include "AppletGalleryImage.h"
 #include "AppletGalleryThumb.h"
 #include "AppletGetStarted.h"
+
+#include "AppletGroupHostAdmin.h"
 #include "AppletGroupJoin.h"
 #include "AppletGroupJoinSearch.h"
 #include "AppletGroupListClient.h"
 #include "AppletGroupListLocalView.h"
+
 #include "AppletHelpNetSignalBars.h"
 #include "AppletHostJoinRequestList.h"
+
+#include "AppletHostChatRoomAdmin.h"
+#include "AppletHostChatRoomStatus.h"
 #include "AppletHostGroupStatus.h"
 #include "AppletHostNetworkStatus.h"
+#include "AppletHostRandomConnectStatus.h"
+
 #include "AppletHostSelect.h"
 #include "AppletInviteAccept.h"
 #include "AppletInviteCreate.h"
-#include "AppletJoinGroupStatus.h"
+#include "AppletHostGroupStatus.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
 #include "AppletLog.h"
@@ -81,20 +89,16 @@
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
-#include "AppletServiceChatRoom.h"
 #include "AppletServiceConnectionTest.h"
-#include "AppletServiceHostGroup.h"
 #include "AppletServiceHostNetwork.h"
 #include "AppletServiceShareFiles.h"
 #include "AppletServiceShareWebCam.h"
 #include "AppletServiceStoryboard.h"
-#include "AppletServiceRandomConnect.h"
 #include "AppletServiceRandomConnectRelay.h"
 #include "AppletServiceRelay.h"
 
 #include "AppletSettingsAboutMe.h"
 #include "AppletSettingsAvatarImage.h"
-#include "AppletSettingsChatRoom.h"
 #include "AppletSettingsConnectionTest.h"
 #include "AppletSettingsFileXfer.h"
 #include "AppletSettingsHostChatRoom.h"
@@ -285,11 +289,16 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletNearbyListClient:           appletDialog = new AppletNearbyListClient( m_MyApp, parent ); break;
     case eAppletGroupListClient:            appletDialog = new AppletGroupListClient( m_MyApp, parent ); break;
 
+    case eAppletGroupHostAdmin:             appletDialog = new AppletGroupHostAdmin( m_MyApp, parent ); break;
+
+    case eAppletHostChatRoomAdmin:          appletDialog = new AppletHostChatRoomAdmin( m_MyApp, parent ); break;
+    case eAppletHostChatRoomStatus:         appletDialog = new AppletHostChatRoomStatus( m_MyApp, parent ); break;
     case eAppletHostGroupStatus:            appletDialog = new AppletHostGroupStatus( m_MyApp, parent ); break;
     case eAppletHostNetworkStatus:          appletDialog = new AppletHostNetworkStatus( m_MyApp, parent ); break;
+    case eAppletHostRandomConnectStatus:    appletDialog = new AppletHostRandomConnectStatus( m_MyApp, parent ); break;
+
     case eAppletInviteAccept:               appletDialog = new AppletInviteAccept( m_MyApp, parent ); break;
     case eAppletInviteCreate:               appletDialog = new AppletInviteCreate( m_MyApp, parent ); break;
-    case eAppletJoinGroupStatus:            appletDialog = new AppletJoinGroupStatus( m_MyApp, parent ); break;
 
     case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
     case eAppletHostJoinRequestList:        appletDialog = new AppletHostJoinRequestList( m_MyApp, parent ); break;
@@ -300,12 +309,11 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
 
     case eAppletServiceAboutMe:             appletDialog = new AppletServiceAboutMe( m_MyApp, parent ); break;
     case eAppletServiceAvatarImage:         appletDialog = new AppletServiceAvatarImage( m_MyApp, parent ); break;
-    case eAppletServiceChatRoom:            appletDialog = new AppletServiceChatRoom( m_MyApp, parent ); break;
     case eAppletServiceConnectionTest:      appletDialog = new AppletServiceConnectionTest( m_MyApp, parent ); break;
-    case eAppletServiceHostGroup:           appletDialog = new AppletServiceHostGroup( m_MyApp, parent ); break;
+
     case eAppletPermissionList:             appletDialog = new AppletPermissionList( m_MyApp, parent ); break;
     case eAppletServiceHostNetwork:         appletDialog = new AppletServiceHostNetwork( m_MyApp, parent ); break;
-    case eAppletServiceRandomConnect:       appletDialog = new AppletServiceRandomConnect( m_MyApp, parent ); break;
+    
     case eAppletServiceRandomConnectRelay:  appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent ); break;
     case eAppletServiceRelay:               appletDialog = new AppletServiceRelay( m_MyApp, parent ); break;
     case eAppletServiceShareFiles:          appletDialog = new AppletServiceShareFiles( m_MyApp, parent ); break;
@@ -314,7 +322,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
 
     case eAppletSettingsAboutMe:            appletDialog = new AppletSettingsAboutMe( m_MyApp, parent ); break;
     case eAppletSettingsAvatarImage:        appletDialog = new AppletSettingsAvatarImage( m_MyApp, parent ); break;
-    case eAppletSettingsChatRoom:           appletDialog = new AppletSettingsChatRoom( m_MyApp, parent ); break;
     case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
     case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
 

@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,18 +13,20 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceBase.h"
+#include "ui_AppletChatRoomClient.h"
 
-#include "ui_AppletServiceBase.h"
+#include "AppletBase.h"
 
-class AppletServiceHostGroup : public AppletServiceBase
+class AppletHostChatRoomAdmin : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletServiceHostGroup( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceHostGroup();
+    AppletHostChatRoomAdmin( AppCommon& app, QWidget * parent );
+	virtual ~AppletHostChatRoomAdmin() override;
 
 protected:
+    //=== vars ===//
+    Ui::AppletChatRoomClientUi ui;
 };
 
 

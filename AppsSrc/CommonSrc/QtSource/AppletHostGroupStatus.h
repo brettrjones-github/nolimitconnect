@@ -20,7 +20,7 @@
 #include <GuiInterface/IToGui.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 
-#include "ui_AppletHostGroupStatus.h"
+#include "ui_AppletHostNetworkStatus.h"
  
 class AppletHostGroupStatus : public AppletBase
 {
@@ -29,7 +29,7 @@ public:
     AppletHostGroupStatus( AppCommon& app, QWidget * parent );
 	virtual ~AppletHostGroupStatus();
 
-    PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_GroupHostPermissionWidget; }
+    PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_HostPermissionWidget; }
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissionWidget; }
 
 protected slots:
@@ -37,7 +37,7 @@ protected slots:
     void                        slotUpdateStatusTimeout();
 
 protected:
-    Ui::AppletHostGroupStatusUi     ui;
+    Ui::AppletHostNetworkStatusUi     ui;
 
     QTimer*                     m_UpdateStatusTimer;
 };

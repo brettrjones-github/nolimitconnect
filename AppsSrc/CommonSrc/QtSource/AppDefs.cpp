@@ -59,15 +59,22 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletCreateAccount:			    return eMyIconUserIdentity;
     case eAppletFriendListClient:	        return eMyIconFriendJoined;
     case eAppletGetStarted:                 return eMyIconInformation;
+
+    case eAppletGroupHostAdmin:	            return eMyIconClientGroup;
+
     case eAppletGroupJoin:                  return eMyIconClientGroup;
+    case eAppletGroupJoinSearch:	        return eMyIconSearchJoinGroup;
     case eAppletGroupListClient:	        return eMyIconGroupJoined;
+    case eAppletGroupListLocalView:	        return eMyIconEyeAnnouncedGroups;
 
     case eAppletHomePage:				    return eMyIconHome;
-    case eAppletHostGroupStatus:	        return eMyIconServiceHostGroup;
-    case eAppletHostNetworkStatus:	        return eMyIconServiceHostNetwork;
+    case eAppletHostChatRoomAdmin:	        return eMyIconClientChatRoom;
+    case eAppletHostChatRoomStatus:	        return eMyIconChatRoomInfo;
+    case eAppletHostGroupStatus:	        return eMyIconGroupInfo;
+    case eAppletHostNetworkStatus:	        return eMyIconNetworkInfo;
+    case eAppletHostRandomConnectStatus:	return eMyIconRandomConnectInfo;
     case eAppletInviteAccept:	            return eMyIconInviteAccept;
     case eAppletInviteCreate:	            return eMyIconInviteCreate;
-    case eAppletJoinGroupStatus:	        return eMyIconSearchJoinGroup;
     case eAppletKodi:				        return eMyIconKodi;
     case eAppletLibrary:				    return eMyIconLibraryNormal;
     case eAppletLog:	                    return eMyIconDebug;
@@ -82,8 +89,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletSettingsPage:		        return eMyIconSettingsGear;
    
     case eAppletSearchPage:	                return eMyIconSearch;
-    case eAppletGroupJoinSearch:	        return eMyIconSearchJoinGroup;
-    case eAppletGroupListLocalView:	        return eMyIconEyeAnnouncedGroups;
     case eAppletRandomConnectJoinSearch:    return eMyIconSearchJoinRandomConnect;
     case eAppletSearchPersons:	            return eMyIconSearchPerson;
     case eAppletSearchMood:	                return eMyIconSearchHeart;
@@ -110,12 +115,9 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletServiceShareWebCam:         return eMyIconServiceShareWebCam;
     case eAppletServiceStoryboard:          return eMyIconServiceShareStoryboard;
 
-    case eAppletServiceHostGroup:           return eMyIconServiceHostGroup;
     case eAppletServiceHostNetwork:         return eMyIconServiceHostNetwork;
 
-    case eAppletServiceChatRoom:            return eMyIconServiceChatRoom;
     case eAppletServiceConnectionTest:      return eMyIconServiceConnectionTest;
-    case eAppletServiceRandomConnect:       return eMyIconServiceRandomConnect;
     case eAppletServiceRandomConnectRelay:  return eMyIconServiceRandomConnectRelay;
     case eAppletServiceRelay:               return eMyIconServiceRelay;
 
@@ -124,7 +126,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletSettingsAboutMe:            return eMyIconSettingsAboutMe;
     case eAppletSettingsAvatarImage:        return eMyIconSettingsAvatarImage;
     case eAppletSettingsWebCamServer:       return eMyIconSettingsShareWebCam;
-    case eAppletSettingsChatRoom:           return eMyIconSettingsChatRoom;
     case eAppletSettingsConnectTest:        return eMyIconSettingsConnectionTest;
     case eAppletSettingsShareFiles:         return eMyIconSettingsShareFiles;
     case eAppletSettingsFileXfer:           return eMyIconSettingsFileXfer;
@@ -207,17 +208,24 @@ QString DescribeApplet( EApplet applet )
     case eAppletGalleryImage:			    return QObject::tr( "Image Gallery" );
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
     case eAppletGetStarted:			        return QObject::tr( "Get Started" );
+
+    case eAppletGroupHostAdmin:             return QObject::tr( "Group Host Admin" );
     case eAppletGroupJoin:                  return QObject::tr( "Join Group" );
     case eAppletGroupJoinSearch:			return QObject::tr( "Search For Group To Join" );
     case eAppletGroupListClient:	        return QObject::tr( "Group List" );
     case eAppletGroupListLocalView:			return QObject::tr( "View Groups Announced To This Network Host" );
+
     case eAppletHelpNetSignalBars:			return QObject::tr( "Network Signal Bars" );
-    case eAppletHostGroupStatus:            return QObject::tr( "Host A Group Status" );
+
+    case eAppletHostChatRoomAdmin:          return QObject::tr( "Chat Room Host Admin" );
+    case eAppletHostChatRoomStatus:         return QObject::tr( "Host Chat Room Status" );
+    case eAppletHostGroupStatus:            return QObject::tr( "Host Group Status" );
     case eAppletHostNetworkStatus:          return QObject::tr( "Host A Network Status" );
+    case eAppletHostRandomConnectStatus:    return QObject::tr( "Host Random Connect Status" );
+
     case eAppletInviteAccept:               return QObject::tr( "Open Invite" );
     case eAppletInviteCreate:               return QObject::tr( "Create Invite" );
     case eAppletNearbyListClient:	        return QObject::tr( "Nearby List" );
-    case eAppletJoinGroupStatus:            return QObject::tr( "Join Group Status" );
     case eAppletRandomConnectJoin:          return QObject::tr( "Join Random Connect" );
     case eAppletRandomConnectJoinSearch:	return QObject::tr( "Search For Random Connect Host To Join" );
     case eAppletSnapshot:				    return QObject::tr( "Take Snapshot" );
@@ -257,14 +265,11 @@ QString DescribeApplet( EApplet applet )
     case eAppletShareServicesPage:          return QObject::tr( "Share With Others Sevices" );
     case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
     case eAppletServiceAvatarImage:         return QObject::tr( "Share Your Avatar Image For Contact List" );
-    case eAppletServiceChatRoom:            return QObject::tr( "View My Hosted Chat Room" );
     case eAppletServiceConnectionTest:      return QObject::tr( "Service Connection Test" );
-    case eAppletServiceHostGroup:           return QObject::tr( "Host A Group" );
     case eAppletServiceHostNetwork:         return QObject::tr( "Host A NoLimitConnect Network" );
     case eAppletServiceShareFiles:			return QObject::tr( "Share Media Files" );
     case eAppletServiceShareWebCam:         return QObject::tr( "Share your web cam" );
     case eAppletServiceStoryboard:          return QObject::tr( "Share Story Page (Blog)" );
-    case eAppletServiceRandomConnect:       return QObject::tr( "Service Random Person Connect" );
     case eAppletServiceRandomConnectRelay:  return QObject::tr( "Service Random Person Relay" );
     case eAppletServiceRelay:               return QObject::tr( "Service Relay" );
 
@@ -272,7 +277,6 @@ QString DescribeApplet( EApplet applet )
 
     case eAppletSettingsAboutMe:            return QObject::tr( "About Me Page Settings" );
     case eAppletSettingsAvatarImage:        return QObject::tr( "Avatar Image Settings" );
-    case eAppletSettingsChatRoom:           return QObject::tr( "Chat Room Settings" );
     case eAppletSettingsWebCamServer:       return QObject::tr( "Shared Web Cam Settings" );
     case eAppletSettingsConnectTest:        return QObject::tr( "Connection Test Service Settings" );
     case eAppletSettingsShareFiles:         return QObject::tr( "Shared Files Settings" );

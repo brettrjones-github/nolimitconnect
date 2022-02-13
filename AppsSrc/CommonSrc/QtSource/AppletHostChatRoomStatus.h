@@ -20,27 +20,28 @@
 #include <GuiInterface/IToGui.h>
 #include <ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h>
 
-#include "ui_AppletJoinGroupStatus.h"
+#include "ui_AppletHostNetworkStatus.h"
  
-class AppletJoinGroupStatus : public AppletSettingsHostBase
+class AppletHostChatRoomStatus : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletJoinGroupStatus( AppCommon& app, QWidget * parent );
-	virtual ~AppletJoinGroupStatus();
+    AppletHostChatRoomStatus( AppCommon& app, QWidget * parent );
+	virtual ~AppletHostChatRoomStatus();
 
-    PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
-    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
+    PermissionWidget*           getChatRoomHostPermissionWidget()   { return ui.m_HostPermissionWidget; }
+    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissionWidget; }
+    PermissionWidget*           getGroupHostPermissionWidget()      { return ui.m_AdditionalPermissionWidget; }
+    PermissionWidget*           getRandomConnectPermissionWidget()  { return ui.m_RandomConnectPermissionWidget; }
 
 protected slots:
-    void                        slotApplyServiceSettings();
+    void                        slotHostRequirementsButtonClicked();
+    void                        slotUpdateStatusTimeout();
 
 protected:
-    void                        connectServiceWidgets();
-    void                        loadPluginSetting();
-    void                        savePluginSetting();
+    Ui::AppletHostNetworkStatusUi     ui;
 
-    Ui::AppletJoinGroupStatusUi     ui;
+    QTimer*                     m_UpdateStatusTimer;
 };
 
 

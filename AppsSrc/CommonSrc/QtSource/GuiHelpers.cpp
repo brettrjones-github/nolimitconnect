@@ -270,13 +270,9 @@ bool GuiHelpers::isAppletAService( EApplet applet )
 {
     return ( ( eAppletServiceAboutMe == applet )
              || ( eAppletServiceAvatarImage == applet )
-             || ( eAppletServiceConnectionTest == applet )
-             || ( eAppletServiceHostGroup == applet )
-             || ( eAppletServiceHostNetwork == applet )
-             || ( eAppletServiceRandomConnect == applet )
-             || ( eAppletServiceRandomConnectRelay == applet )
              || ( eAppletServiceShareFiles == applet )
              || ( eAppletServiceShareWebCam == applet )
+             || ( eAppletServiceAboutMe == applet )
              || ( eAppletServiceStoryboard == applet )
              || ( eAppletServiceRelay == applet )
              );
@@ -321,9 +317,9 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePage;
     case eAppletServiceAvatarImage:          return ePluginTypeHostPeerUser;
     case eAppletServiceConnectionTest:       return ePluginTypeHostConnectTest;
-    case eAppletServiceHostGroup:            return ePluginTypeHostGroup;
+    case eAppletHostChatRoomAdmin:           return ePluginTypeHostChatRoom;
+    case eAppletGroupHostAdmin:              return ePluginTypeHostGroup;
     case eAppletServiceHostNetwork:          return ePluginTypeHostNetwork;
-    case eAppletServiceRandomConnect:        return ePluginTypeClientRandomConnect;
     case eAppletServiceRandomConnectRelay:   return ePluginTypeHostRandomConnect;
     case eAppletServiceShareFiles:           return ePluginTypeFileServer;
     case eAppletServiceShareWebCam:          return ePluginTypeCamServer;
@@ -468,7 +464,7 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     case ePluginTypeHostRandomConnect:      return eAppletSettingsHostRandomConnect;
 
     //case ePluginTypeMessenger:              return eAppletSettingsMessenger;
-    case ePluginTypeClientRandomConnect:          return eAppletServiceRandomConnect;
+    //case ePluginTypeClientRandomConnect:          return eAppletServiceRandomConnect;
     //case ePluginTypeHostRandomConnect:     return eAppletServiceRandomConnectRelay;
     case ePluginTypeRelay:                  return eAppletServiceRelay;
     case ePluginTypeStoryboard:             return eAppletEditStoryboard;
