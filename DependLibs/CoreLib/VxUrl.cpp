@@ -17,6 +17,8 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGUID.h>
+#include <CoreLib/Invite.h>
+#include <CoreLib/VxDebug.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -248,6 +250,24 @@ void VxUrl::setUrl( const char * pUrl )
         {
             // there is nothing past the online id but it looks valid
             m_OnlineId.fromOnlineIdString( m_strOnlineId.c_str() );
+        }
+        else if( m_strOnlineId.length() == 35 )
+        {
+            // should be online id + host type
+            // may have a invite type character
+            m_OnlineId.fromOnlineIdString( m_strOnlineId.c_str() );
+            if( m_OnlineId.isVxGUIDValid() )
+            {
+                char suffixChar = m_strOnlineId[m_strOnlineId.length() - 1];
+                if( Invite::isValidHostTypeSuffix( suffixChar ) )
+                {
+                    m_HostType = Invite::getHostTypeFromSuffix( suffixChar );
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "VxUrl::setUrl invalid suffix char 0x%X", suffixChar );
+                }
+            }
         }
 
         iReadIdx += m_strOnlineId.length();

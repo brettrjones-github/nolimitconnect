@@ -18,6 +18,7 @@
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGUID.h>
 #include <CoreLib/Invite.h>
+#include <CoreLib/VxDebug.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -238,6 +239,10 @@ void VxPtopUrl::setUrl( std::string& url )
                 if( Invite::isValidHostTypeSuffix( suffixChar ) )
                 {
                     m_HostType = Invite::getHostTypeFromSuffix( suffixChar );
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "VxPtopUrl::setUrl invalid suffix char 0x%X", suffixChar );
                 }
             }
         }

@@ -92,7 +92,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomAdmin.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostGroupStatus.h \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRamdomConnectStatus.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRandomConnectStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostJoinRequestList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostNetworkStatus.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostSelect.h \
@@ -456,14 +456,14 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletHelpNetSignalBars.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomAdmin.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomStatus.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostGroupStatus.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostJoinRequestList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostNetworkStatus.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostSelect.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRandomConnectStatus.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteAccept.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletInviteCreate.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostChatRoomStatus.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostGroupStatus.cpp \
-    $$PWD/AppsSrc/CommonSrc/QtSource/AppletHostRamdomConnectStatus.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletJoinBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletKodi.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletLaunchPage.cpp \

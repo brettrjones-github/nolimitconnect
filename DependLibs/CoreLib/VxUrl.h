@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GuiInterface/IDefs.h>
 #include <CoreLib/VxGUID.h>
 
 class VxUrl
@@ -56,6 +57,8 @@ public:
 	const char *				getRelativeURL( std::string& strRetRelativeUrl, bool bWithParam = false );
 	const char *				getAbsoluteURL( std::string& strRetAbsoluteUrl );
 	const char *				getHostURL( const char * host, int port, const char * uri, std::string& buf );
+	void						setHostType( EHostType hostType )			{ m_HostType = hostType; }
+	EHostType					getHostType( void )							{ return m_HostType; }
 
 protected:
     std::string					m_Url{ "" };
@@ -73,6 +76,7 @@ protected:
 	std::string					m_strFragment{ "" };
     std::string					m_strOnlineId{ "" };
     VxGUID                      m_OnlineId;
+	EHostType					m_HostType{ eHostTypeUnknown };
 };
 
 
