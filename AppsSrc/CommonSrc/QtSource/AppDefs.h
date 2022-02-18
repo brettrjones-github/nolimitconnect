@@ -177,6 +177,7 @@ enum EApplet
     eAppletSettingsFileXfer,
 
     eAppletSettingsMessenger,
+    eAppletSettingsPushToTalk,
     eAppletSettingsRandomConnect,
     eAppletSettingsRandomConnectRelay,
     eAppletSettingsStoryboard,

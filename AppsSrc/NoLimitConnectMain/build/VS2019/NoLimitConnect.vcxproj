@@ -252,6 +252,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsHostRandomConnect.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsMessenger.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsPage.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnect.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsRandomConnectRelay.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsShareFiles.cpp" />
@@ -527,6 +528,7 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostRandomConnectStatus.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostGroupStatus.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostChatRoomAdmin.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -948,6 +950,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSettingsHostChatRoom.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSettingsHostGroup.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSettingsHostNetwork.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletSettingsNoUserSettings.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSharedContent.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletShareOfferList.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSnapshot.ui" />

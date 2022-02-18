@@ -101,12 +101,14 @@
 #include "AppletSettingsAvatarImage.h"
 #include "AppletSettingsConnectionTest.h"
 #include "AppletSettingsFileXfer.h"
+
 #include "AppletSettingsHostChatRoom.h"
 #include "AppletSettingsHostGroup.h"
-// #include "AppletSettingsHostGroupListing.h"
 #include "AppletSettingsHostNetwork.h"
 #include "AppletSettingsHostRandomConnect.h"
+
 #include "AppletSettingsMessenger.h"
+#include "AppletSettingsPushToTalk.h"
 #include "AppletSettingsRandomConnect.h"
 #include "AppletSettingsRandomConnectRelay.h"
 #include "AppletSettingsShareFiles.h"
@@ -331,6 +333,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletSettingsHostRandomConnect:  appletDialog = new AppletSettingsHostRandomConnect( m_MyApp, parent ); break;
 
     case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
+    case eAppletSettingsPushToTalk:         appletDialog = new AppletSettingsPushToTalk( m_MyApp, parent ); break;
     case eAppletSettingsRandomConnectRelay: appletDialog = new AppletSettingsRandomConnectRelay( m_MyApp, parent ); break;
     case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
     case eAppletSettingsStoryboard:         appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;

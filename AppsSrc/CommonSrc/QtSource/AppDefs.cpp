@@ -136,6 +136,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletSettingsHostRandomConnect:  return eMyIconSettingsRandomConnect;
 
     case eAppletSettingsMessenger:          return eMyIconSettingsMessenger;
+    case eAppletSettingsPushToTalk:         return eMyIconSettingsPushToTalk;
     case eAppletSettingsRandomConnect:      return eMyIconSettingsRandomConnect;
     case eAppletSettingsRandomConnectRelay: return eMyIconSettingsRandomConnectRelay;
     case eAppletSettingsStoryboard:         return eMyIconSettingsShareStoryboard;
@@ -288,6 +289,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect" );
 
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );
+    case eAppletSettingsPushToTalk:         return QObject::tr( "Push To Talk Settings" );
     case eAppletSettingsRandomConnect:      return QObject::tr( "Random Connect Service Settings" );
     case eAppletSettingsRandomConnectRelay: return QObject::tr( "Random Connect Relay Service Settings" );
     // case eAppletSettingsRelay:              return QObject::tr( "Relay Service Settings" );

@@ -30,7 +30,6 @@ public:
 	virtual ~AppletSettingsHostNetwork();
 
     PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
-    PermissionWidget*           getGroupListingWidget()             { return ui.m_GroupListPermissionWidget; }
     PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
 
 protected slots:

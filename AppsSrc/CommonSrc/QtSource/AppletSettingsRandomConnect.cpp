@@ -23,9 +23,17 @@
 AppletSettingsRandomConnect::AppletSettingsRandomConnect( AppCommon& app, QWidget * parent )
 : AppletSettingsBase( OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsRandomConnect );
+	setPluginType( ePluginTypeClientRandomConnect );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
 
 	m_MyApp.activityStateChange( this, true );
+}
+
+//============================================================================
+AppletSettingsRandomConnect::~AppletSettingsRandomConnect()
+{
+	m_MyApp.activityStateChange( this, false );
 }

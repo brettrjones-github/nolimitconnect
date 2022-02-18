@@ -23,7 +23,9 @@
 AppletSettingsStoryboard::AppletSettingsStoryboard( AppCommon& app, QWidget * parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_SHARE_STORYBOARD, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsStoryboard );
+	setPluginType( ePluginTypeStoryboard );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

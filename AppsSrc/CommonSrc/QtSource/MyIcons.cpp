@@ -279,8 +279,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 	case eMyIconPushToTalkCancel:
 		return ":/AppRes/Resources/lock.svg";
-	case eMyIconPushToTalkNormal:
-		return ":/AppRes/Resources/push-to-talk.svg";
+	case eMyIconPushToTalkOff:
+		return ":/AppRes/Resources/push-to-talk-off.svg";
+	case eMyIconPushToTalkOn:
+		return ":/AppRes/Resources/push-to-talk-on.svg";
 	case eMyIconPushToTalkLocked:
 	case eMyIconPushToTalkIgnored:
 	case eMyIconPushToTalkDisabled:
@@ -693,6 +695,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/service-group-listing-host-settings.svg";
     case eMyIconSettingsHostNetwork:
         return ":/AppRes/Resources/service-network-host-settings.svg";
+	case eMyIconSettingsSendFile:
+		return ":/AppRes/Resources/cloud-upload-settings.svg";
     case eMyIconSettingsShareFiles:
         return ":/AppRes/Resources/share-files-settings.svg";
     case eMyIconSettingsShareStoryboard:
@@ -715,6 +719,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/video-chat-settings.svg";
     case eMyIconSettingsVoicePhone:
         return ":/AppRes/Resources/voice-phone-settings.svg";
+	case eMyIconSettingsPushToTalk:
+		return ":/AppRes/Resources/push-to-talk-settings.svg";
     case eMyIconFileXfer:
         return ":/AppRes/Resources/file-xfer.svg";
     case eMyIconTruthOrDare:
@@ -885,7 +891,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
         return eMyIconSettingsConnectionTest;
 
     case ePluginTypeFileXfer:
-        return eMyIconSendFileNormal;
+        return eMyIconSettingsSendFile;
 
     case ePluginTypeFileServer:
         return eMyIconSettingsShareFiles;
@@ -925,6 +931,9 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
 
     case ePluginTypeVoicePhone:
         return eMyIconSettingsVoicePhone;
+
+	case ePluginTypePushToTalk:
+		return eMyIconSettingsPushToTalk;
 
     default:
         LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d\n", ePluginType );
@@ -1246,7 +1255,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
-			return eMyIconPushToTalkNormal;
+			return eMyIconPushToTalkOff;
 		case ePluginAccessDisabled:
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:

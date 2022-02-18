@@ -402,6 +402,7 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeHostRandomConnect:      return eAppletSettingsHostRandomConnect;
 
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
+    case ePluginTypePushToTalk:             return eAppletSettingsPushToTalk;
     case ePluginTypeClientRandomConnect:    return eAppletSettingsRandomConnect;
     // case ePluginTypeHostRandomConnect:      return eAppletSettingsRandomConnectRelay;
         // case ePluginTypeRelay:                  return eAppletSettingsRelay;
@@ -503,6 +504,7 @@ EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
     case ePluginTypeTruthOrDare:            return eMyIconSettingsTruthOrDare;
     case ePluginTypeVideoPhone:             return eMyIconSettingsVideoPhone;
     case ePluginTypeVoicePhone:             return eMyIconSettingsVoicePhone;
+    case ePluginTypePushToTalk:             return eMyIconSettingsPushToTalk;
 
     default:
         break;
@@ -561,6 +563,7 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     case ePluginTypeHostNetwork:
     case ePluginTypeHostRandomConnect:
     case ePluginTypeHostConnectTest:
+    case ePluginTypePushToTalk:
         isPrimaryPlugin = true;
         break;
     case ePluginTypeRelay:

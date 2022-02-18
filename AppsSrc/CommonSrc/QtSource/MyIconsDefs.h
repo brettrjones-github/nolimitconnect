@@ -86,7 +86,8 @@ enum EMyIcons
 	eMyIconVoicePhoneIgnored,
 
 	eMyIconPushToTalkCancel,
-	eMyIconPushToTalkNormal,
+	eMyIconPushToTalkOff,
+	eMyIconPushToTalkOn,
 	eMyIconPushToTalkDisabled,
 	eMyIconPushToTalkLocked,
 	eMyIconPushToTalkIgnored,
@@ -338,6 +339,7 @@ enum EMyIcons
     eMyIconSettingsHostGroup,
     eMyIconSettingsHostGroupListing,
     eMyIconSettingsHostNetwork,
+	eMyIconSettingsSendFile,
     eMyIconSettingsShareFiles,
     eMyIconSettingsShareStoryboard,
     eMyIconSettingsShareWebCam,
@@ -351,6 +353,7 @@ enum EMyIcons
     eMyIconSettingsTruthOrDare,
     eMyIconSettingsVoicePhone,
     eMyIconSettingsVideoPhone,
+	eMyIconSettingsPushToTalk,
 
     eMyIconEditRedo,
     eMyIconEditUndo,

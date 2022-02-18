@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsTruthOrDare : public AppletServiceBaseSettings
 {
@@ -22,6 +23,8 @@ public:
     AppletSettingsTruthOrDare( AppCommon& app, QWidget * parent );
 	virtual ~AppletSettingsTruthOrDare() override;
 
+protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

@@ -28,13 +28,13 @@ AppletSettingsHostRandomConnect::AppletSettingsHostRandomConnect( AppCommon& app
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostRandomConnect );
+    setPluginType( ePluginTypeHostRandomConnect );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostRandomConnect, ePluginTypeHostRandomConnect );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
 
-    getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );
 
     connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );

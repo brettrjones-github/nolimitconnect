@@ -14,17 +14,17 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsShareWebCam : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
     AppletSettingsShareWebCam( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsShareWebCam();
-
-
+	virtual ~AppletSettingsShareWebCam() override;
 
 protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

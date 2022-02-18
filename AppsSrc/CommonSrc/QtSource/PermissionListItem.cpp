@@ -36,6 +36,8 @@ PermissionListItem::PermissionListItem( QListWidget * parent, AppletBase *parent
     setSizeHint( m_SizeHint );
     ui.m_PluginInfoButton->setIcon( eMyIconInformation );
     fillPermissionComboBox();
+    // for now jump to service is not enabled so just hide the button
+    ui.m_PluginRunButton->setVisible( false );
 }
 
 //============================================================================

@@ -14,15 +14,17 @@
 //============================================================================
 
 #include "AppletSettingsBase.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsRandomConnect : public AppletSettingsBase
 {
 	Q_OBJECT
 public:
     AppletSettingsRandomConnect( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsRandomConnect() override = default;
+	virtual ~AppletSettingsRandomConnect() override;
 
 protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

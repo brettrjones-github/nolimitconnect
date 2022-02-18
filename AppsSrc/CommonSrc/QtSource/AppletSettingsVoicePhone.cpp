@@ -23,7 +23,9 @@
 AppletSettingsVoicePhone::AppletSettingsVoicePhone( AppCommon& app, QWidget * parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_VOICE_PHONE, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsVoicePhone );
+	setPluginType( ePluginTypeVoicePhone );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

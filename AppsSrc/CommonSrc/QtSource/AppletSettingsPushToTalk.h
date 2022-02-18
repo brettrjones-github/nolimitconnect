@@ -16,12 +16,12 @@
 #include "AppletServiceBaseSettings.h"
 #include "ui_AppletSettingsNoUserSettings.h"
 
-class AppletSettingsFileXfer : public AppletServiceBaseSettings
+class AppletSettingsPushToTalk : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
-    AppletSettingsFileXfer( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsFileXfer() override;
+    AppletSettingsPushToTalk( AppCommon& app, QWidget * parent );
+	virtual ~AppletSettingsPushToTalk() override;
 
 protected:
 	Ui::AppletSettingsNoUserSettingsUi ui;

@@ -28,12 +28,12 @@ AppletSettingsHostNetwork::AppletSettingsHostNetwork( AppCommon& app, QWidget * 
 {
     ui.setupUi( getContentItemsFrame() );
     setAppletType( eAppletSettingsHostNetwork );
+    setPluginType( ePluginTypeHostNetwork );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostNetwork, ePluginTypeHostNetwork );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
-    getGroupListingWidget()->setPluginType( ePluginTypeNetworkSearchList );
 
     connect( ui.m_HostingRequirementsButton, SIGNAL( clicked() ), this, SLOT( slotHostRequirementsButtonClicked() ) );
     getConnectionTestWidget()->setPluginType( ePluginTypeHostConnectTest );

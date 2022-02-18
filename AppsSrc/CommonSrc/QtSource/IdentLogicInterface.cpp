@@ -86,7 +86,7 @@ void IdentLogicInterface::setIdentWidgetSize( EButtonSize buttonSize )
 	if( getIdentPushToTalkButton() )
 	{
 		getIdentPushToTalkButton()->setFixedSize( buttonSize );
-		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkNormal );
+		getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOff );
 	}
 
 	getIdentMenuButton()->setFixedSize( buttonSize );
@@ -342,6 +342,7 @@ void IdentLogicInterface::slotIdentPushToTalkButtonPressed( void )
 //============================================================================
 void IdentLogicInterface::slotIdentPushToTalkButtonReleased( void )
 {
+	getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOn );
 	emit signalIdentPushToTalkButtonReleased();
 	onIdentPushToTalkButtonReleased();
 }
@@ -349,6 +350,7 @@ void IdentLogicInterface::slotIdentPushToTalkButtonReleased( void )
 //============================================================================
 void IdentLogicInterface::onIdentPushToTalkButtonPressed( void )
 {
+	getIdentPushToTalkButton()->setIcon( eMyIconPushToTalkOff );
 	emit signalIdentPushToTalkButtonPressed();
 	if( m_NetIdent )
 	{

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>309</width>
+    <width>313</width>
     <height>512</height>
    </rect>
   </property>
@@ -66,23 +66,6 @@
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Other Services Required To Host Network</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Recommend same permission as host net permission</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PermissionWidget" name="m_GroupListPermissionWidget" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
         </property>
        </widget>
       </item>

@@ -1,0 +1,19 @@
+
+Tier 1                            No Limit Connect Network Host Service
+                                        User Host Listing Service
+                                        Connection Test Service
+                                       /                       \
+                                      /                         \
+Tier 2                User Hosted Service 1                 User Hosted Service N
+                Optional Connection Test Service       Optional Connection Test Service
+                   /                   \                   /                   \
+                  /                     \                 /                     \
+Tier 3        User 1 <-Direct Connect-> User N        User 1 <-Direct Connect-> User N   
+
+User Hosted Services
+Host Group
+Host Chat Room
+Host Random Connect
+
+If user has an open port and has set another user to friend or higher then direct connection
+will be attempted between users

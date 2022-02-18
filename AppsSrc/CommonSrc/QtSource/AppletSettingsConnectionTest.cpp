@@ -23,7 +23,9 @@
 AppletSettingsConnectionTest::AppletSettingsConnectionTest( AppCommon& app, QWidget * parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_CONNECT_TEST, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsConnectTest );
+	setPluginType( ePluginTypeHostConnectTest );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

@@ -23,7 +23,9 @@
 AppletSettingsTruthOrDare::AppletSettingsTruthOrDare( AppCommon& app, QWidget * parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_TRUTH_OR_DARE, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsTruthOrDare );
+	setPluginType( ePluginTypeTruthOrDare );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

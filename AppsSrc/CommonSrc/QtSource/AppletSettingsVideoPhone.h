@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsVideoPhone : public AppletServiceBaseSettings
 {
@@ -22,6 +23,8 @@ public:
     AppletSettingsVideoPhone( AppCommon& app, QWidget * parent );
 	virtual ~AppletSettingsVideoPhone() override;
 
+protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

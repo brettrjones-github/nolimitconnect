@@ -152,6 +152,7 @@
 #define OBJNAME_APPLET_SETTINGS_HOST_RANDOM_CONNECT		"AppletSettingsHostRandomConnect"
 #define OBJNAME_APPLET_SETTINGS_MESSENGER			    "AppletSettingsMessenger"
 #define OBJNAME_APPLET_SETTINGS_PAGE					"AppletSettingsPage"
+#define OBJNAME_APPLET_SETTINGS_PUSH_TO_TALK		    "AppletSettingsPushToTalk"
 #define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT		    "AppletSettingsRandomConnect"
 #define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT_RELAY	"AppletSettingsRandomConnectRelay"
 #define OBJNAME_APPLET_SETTINGS_RELAY					"AppletSettingsRelay"

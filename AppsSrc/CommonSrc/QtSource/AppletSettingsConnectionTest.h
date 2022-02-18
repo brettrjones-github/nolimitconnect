@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
-
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsConnectionTest : public AppletServiceBaseSettings
 {
@@ -24,6 +24,7 @@ public:
 	virtual ~AppletSettingsConnectionTest() override;
 
 protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

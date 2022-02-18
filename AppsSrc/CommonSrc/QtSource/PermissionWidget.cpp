@@ -42,6 +42,9 @@ void PermissionWidget::initPermissionWidget()
     {
         updateUi();
     }
+
+    // for now jump to service is not enabled so just hide the button
+    ui.m_PluginRunButton->setVisible( false );
 }
 
 //============================================================================
@@ -76,7 +79,6 @@ void PermissionWidget::updateUi( void )
         connect( ui.m_PluginRunButton, SIGNAL( clicked() ), this, SLOT( slotRunPlugin() ) );
         connect( ui.m_PluginSettingsButton, SIGNAL( clicked() ), this, SLOT( slotSetupPlugin() ) );
         connect( ui.m_PluginInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPluginInformation() ) );
-;
     }
 
     updatePermissionIcon();

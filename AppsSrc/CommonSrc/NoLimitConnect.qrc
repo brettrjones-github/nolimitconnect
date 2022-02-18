@@ -314,11 +314,14 @@
         <file>Resources/notify-in-group.svg</file>
         <file>Resources/friend-broadcast.svg</file>
         <file>Resources/overlay-direct-connected.svg</file>
-        <file>Resources/push-to-talk.svg</file>
         <file>Resources/boot.svg</file>
         <file>Resources/group-info.svg</file>
         <file>Resources/chat-room-info.svg</file>
         <file>Resources/random-connect-info.svg</file>
         <file>Resources/network-host-info.svg</file>
+        <file>Resources/push-to-talk-settings.svg</file>
+        <file>Resources/push-to-talk-off.svg</file>
+        <file>Resources/push-to-talk-on.svg</file>
+        <file>Resources/cloud-upload-settings.svg</file>
     </qresource>
 </RCC>

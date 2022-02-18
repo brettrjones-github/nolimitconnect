@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsShareFiles : public AppletServiceBaseSettings
 {
@@ -22,6 +23,8 @@ public:
     AppletSettingsShareFiles( AppCommon& app, QWidget * parent );
 	virtual ~AppletSettingsShareFiles() override;
 
+protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

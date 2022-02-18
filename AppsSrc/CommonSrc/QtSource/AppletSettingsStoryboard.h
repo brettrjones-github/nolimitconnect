@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsStoryboard : public AppletServiceBaseSettings
 {
@@ -22,9 +23,8 @@ public:
     AppletSettingsStoryboard( AppCommon& app, QWidget * parent );
 	virtual ~AppletSettingsStoryboard();
 
-
-
 protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

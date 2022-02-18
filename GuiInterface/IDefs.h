@@ -29,7 +29,7 @@
 #define HOURS_24_MS             (HOUR_MS * 24)
 #define HOURS_48_MS             (HOUR_MS * 48)
 #define WEEK_MS                 (HOURS_24_MS * 7)
-#define MONTH_MS                (WEEK_MS * 30)
+#define MONTH_MS                (WEEK_MS * 4)
 #define YEAR_MS                 (MONTH_MS * 12)
 
 #define MIN_SEARCH_TEXT_LEN     3

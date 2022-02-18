@@ -23,8 +23,16 @@
 AppletSettingsMessenger::AppletSettingsMessenger( AppCommon& app, QWidget * parent )
 : AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_MESSENGER, app, parent )
 {
+	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsMessenger );
+	setPluginType( ePluginTypeMessenger );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );
+}
+
+//============================================================================
+AppletSettingsMessenger::~AppletSettingsMessenger()
+{
+	m_MyApp.activityStateChange( this, false );
 }

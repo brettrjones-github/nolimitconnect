@@ -829,6 +829,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsHostChatRoom.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsHostGroup.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsHostNetwork.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletSettingsNoUserSettings.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSharedContent.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletShareOfferList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSnapshot.ui \

@@ -14,14 +14,17 @@
 //============================================================================
 
 #include "AppletServiceBaseSettings.h"
+#include "ui_AppletSettingsNoUserSettings.h"
 
 class AppletSettingsMessenger : public AppletServiceBaseSettings
 {
 	Q_OBJECT
 public:
     AppletSettingsMessenger( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsMessenger() override = default;
+	virtual ~AppletSettingsMessenger() override;
 
+protected:
+	Ui::AppletSettingsNoUserSettingsUi ui;
 };
 
 

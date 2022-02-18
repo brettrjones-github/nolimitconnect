@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletSettingsFileXfer.h"
+#include "AppletSettingsPushToTalk.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,19 +20,20 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsFileXfer::AppletSettingsFileXfer( AppCommon& app, QWidget * parent )
-: AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_FILE_XFER, app, parent )
+AppletSettingsPushToTalk::AppletSettingsPushToTalk( AppCommon& app, QWidget * parent )
+: AppletServiceBaseSettings( OBJNAME_APPLET_SETTINGS_PUSH_TO_TALK, app, parent )
 {
 	ui.setupUi( getContentItemsFrame() );
-	setAppletType( eAppletSettingsFileXfer );
-	setPluginType( ePluginTypeFileXfer );
+	setAppletType( eAppletSettingsPushToTalk );
+	setPluginType( ePluginTypePushToTalk );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT( closeApplet()) );
 
 	m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletSettingsFileXfer::~AppletSettingsFileXfer()
+AppletSettingsPushToTalk::~AppletSettingsPushToTalk()
 {
-    m_MyApp.activityStateChange( this, false );
+	m_MyApp.activityStateChange( this, false );
 }

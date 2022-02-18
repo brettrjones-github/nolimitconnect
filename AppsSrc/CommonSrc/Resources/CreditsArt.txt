@@ -51,6 +51,10 @@ client-chat-room-settings.svg (modified)
 client-group.svg
 client-random-connect.svg (modified)
 client-webcam.svg (modified)
+cloud-checked.svg
+cloud-download.svg
+cloud-upload.svg
+cloud-upload-settings.svg (modified)
 direct-connected.svg (modified)
 overlay-direct-connected.svg (modified)
 disconnect.svg (modified)
@@ -116,7 +120,9 @@ persons-offer-list.svg (modified)
 pin-pinned.svg
 pin-unpinned.svg
 plugin.svg
-push-to-talk.svg (modified) 
+push-to-talk-off.svg 
+push-to-talk-on.svg (modified) 
+push-to-talk-settings (modified) 
 question-mark.svg
 question-mark-outlined.svg (modified)
 radio-tower.svg
