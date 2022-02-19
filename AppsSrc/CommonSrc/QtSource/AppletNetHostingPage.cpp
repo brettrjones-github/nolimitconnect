@@ -41,7 +41,6 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
 	if( ! m_IsInitialized )
     {
         m_AppletList.clear();
-        bool isNetworkHostEnabled = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
         // create launchers for the hosting applets
         for( int i = int( eMaxSearchApplets + 1 ); i < eMaxHostApplets; i++ )
         {
@@ -61,31 +60,6 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
                     m_AppletList.push_back( applet );
             }
         }
-
-        /*
-        if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureChatRoom ) )
-        {
-            AppletLaunchWidget* appletHostChatRoom = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostChatRoom, this );
-            m_AppletList.push_back( appletHostChatRoom );
-        }
-
-        AppletLaunchWidget * appletHostGroup = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostGroup, this );
-        m_AppletList.push_back( appletHostGroup );
-        if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureRandomConnect ) )
-        {
-            AppletLaunchWidget* appletHostRandomConnect = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostRandomConnect, this );
-            m_AppletList.push_back( appletHostRandomConnect );
-        }
-
-        AppletLaunchWidget * appletHostNetwork = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostNetwork, this );
-        m_AppletList.push_back( appletHostNetwork );
-        if( isNetworkHostEnabled )
-        {
-            // show only if is a network host
-            AppletLaunchWidget* appletGroupListLocalView = new AppletLaunchWidget( m_MyApp, eAppletGroupListLocalView, this );
-            m_AppletList.push_back( appletGroupListLocalView );
-        }
-        */
 
         m_IsInitialized = true;
     }

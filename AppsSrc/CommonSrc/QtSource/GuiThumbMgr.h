@@ -82,11 +82,13 @@ protected:
     GuiThumb*                   updateThumb( ThumbInfo& thumbInfo  );
     void                        removeThumb( VxGUID& thumbId );
     GuiThumb*                   findThumb( VxGUID& thumbId );
-    GuiThumb*                   generateEmoticon( VxGUID& thumbId );
+    GuiThumb*                   findOrCreateEmoticonThumb( VxGUID& thumbId );
+    GuiThumb*                   generateEmoticon( VxGUID& thumbId, bool checkIfExists = true );
     
     AppCommon&                  m_MyApp;
     VxMutex                     m_ThumbListMutex;
     GuiThumbList                m_ThumbList;
     GuiThumb*                   m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;
+    std::vector<VxGUID>         m_EmoticonList;
 };

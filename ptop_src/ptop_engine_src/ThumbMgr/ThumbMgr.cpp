@@ -289,6 +289,15 @@ ThumbInfo* ThumbMgr::lookupThumbInfo( VxGUID& thumbId, int64_t thumbModifiedTime
 //============================================================================
 bool ThumbMgr::fromGuiThumbCreated( ThumbInfo& thumbInfo )
 {
+    AssetBaseInfo * existingAsset = findAsset( thumbInfo.getAssetUniqueId() );
+    if( existingAsset )
+    {
+        *existingAsset = thumbInfo;
+        updateDatabase( existingAsset );
+        announceAssetUpdated( existingAsset );
+        return true;
+    }
+
     // thumbInfo will be destroyed.. only use the object created by addAsset
     AssetBaseInfo* createdThumbInfo = nullptr;
     if( AssetBaseMgr::addAsset( thumbInfo, createdThumbInfo ) && createdThumbInfo )

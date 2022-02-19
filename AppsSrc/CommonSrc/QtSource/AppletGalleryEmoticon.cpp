@@ -83,10 +83,13 @@ void AppletGalleryEmoticon::loadAssets( void )
     std::vector<VxGUID>& emoticonIdList = m_ThumbMgr.getEmoticonIdList();
     for( auto &assetId : emoticonIdList )
     {
-        AssetBaseInfo* assetInfo = m_ThumbMgr.findAsset( assetId );
-        if( assetInfo && eAssetTypeThumbnail == assetInfo->getAssetType() )
+        if( assetId.isVxGUIDValid() )
         {
-            ui.m_ImageListWidget->addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
+            AssetBaseInfo* assetInfo = m_ThumbMgr.findAsset( assetId );
+            if( assetInfo && eAssetTypeThumbnail == assetInfo->getAssetType() )
+            {
+                ui.m_ImageListWidget->addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
+            }
         }
     }
 }

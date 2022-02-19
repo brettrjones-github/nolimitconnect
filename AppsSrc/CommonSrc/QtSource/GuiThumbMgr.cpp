@@ -20,6 +20,7 @@
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbMgr.h>
 
 #include <CoreLib/VxFileUtil.h>
+#include <algorithm>
 
 //============================================================================
 GuiThumbMgr::GuiThumbMgr( AppCommon& app )
@@ -36,6 +37,14 @@ void GuiThumbMgr::onAppCommonCreated( void )
     connect( this, SIGNAL( signalInternalThumbRemoved(VxGUID) ),	        this, SLOT( slotInternalThumbRemoved(VxGUID) ), Qt::QueuedConnection );
 
     m_MyApp.getEngine().getThumbMgr().addThumbMgrClient( this, true );
+    std::vector<VxGUID>& emoticonList = m_MyApp.getEngine().getThumbMgr().getEmoticonIdList();
+    for( auto& guid : emoticonList )
+    {
+        if( guid.isVxGUIDValid() )
+        {
+            m_EmoticonList.push_back( guid );
+        }
+    }
 }
 
 //============================================================================
@@ -105,7 +114,25 @@ void GuiThumbMgr::slotInternalThumbRemoved( VxGUID thumbId )
 //============================================================================
 GuiThumb* GuiThumbMgr::findThumb( VxGUID& thumbId )
 {
-    return m_ThumbList.findThumb( thumbId );
+    GuiThumb* guiThumb = m_ThumbList.findThumb( thumbId );
+    if( !guiThumb && std::find( m_EmoticonList.begin(), m_EmoticonList.end(), thumbId ) != m_EmoticonList.end() )
+    {
+        guiThumb = generateEmoticon( thumbId, false );
+    }
+
+    return guiThumb;
+}
+
+//============================================================================
+GuiThumb* GuiThumbMgr::findOrCreateEmoticonThumb( VxGUID& thumbId )
+{
+    GuiThumb* guiThumb = m_ThumbList.findThumb( thumbId );
+    if( !guiThumb && std::find( m_EmoticonList.begin(), m_EmoticonList.end(), thumbId ) != m_EmoticonList.end() )
+    {
+        guiThumb = generateEmoticon( thumbId, false );
+    }
+
+    return guiThumb;
 }
 
 //============================================================================
@@ -135,7 +162,7 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo& thumbInfo )
     }
 
     m_ThumbListMutex.lock();
-    GuiThumb* guiThumb = findThumb( thumbInfo.getAssetUniqueId() );
+    GuiThumb* guiThumb = m_ThumbList.findThumb( thumbInfo.getAssetUniqueId() ); 
     m_ThumbListMutex.unlock();
     if( guiThumb )
     {
@@ -148,6 +175,7 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo& thumbInfo )
         m_ThumbListMutex.lock();
         m_ThumbList.addThumbIfDoesntExist( guiThumb );
         m_ThumbListMutex.unlock();
+        m_MyApp.getEngine().getThumbMgr().fromGuiThumbCreated( thumbInfo );
         onThumbAdded( guiThumb );
     }
 
@@ -290,7 +318,7 @@ bool GuiThumbMgr::getThumbImage( VxGUID& thumbId, QImage& image )
 }
 
 //============================================================================
-GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
+GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId, bool checkIfExists )
 {
     if( !thumbId.isVxGUIDValid() )
     {
@@ -299,11 +327,15 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
         return nullptr;
     }
 
-    // see if already have it
-    GuiThumb* thumb = findThumb( thumbId );
-    if( thumb )
+    GuiThumb* thumb = nullptr;
+    if( checkIfExists )
     {
-        return thumb;
+        // see if already have it
+        thumb = findThumb( thumbId );
+        if( thumb )
+        {
+            return thumb;
+        }
     }
 
     // see if engine thumb manager has it
@@ -312,15 +344,18 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId )
     ThumbInfo* existingThumbInfo = dynamic_cast< ThumbInfo* >( thumbMgr.findAsset( thumbId ) );
     if( existingThumbInfo && existingThumbInfo->isValidThumbnail() )
     {
-        thumb = updateThumb( *existingThumbInfo );
+        ThumbInfo copyThumbInfo = *existingThumbInfo;
+        thumbMgr.unlockResources();
+        thumb = updateThumb( copyThumbInfo );
         if( thumb )
         {
-            thumbMgr.unlockResources();
             return thumb;
         }
     }
-
-    thumbMgr.unlockResources();
+    else
+    {
+        thumbMgr.unlockResources();
+    }
 
     // see if file exists and we just need to create the info
     QString fileName;
@@ -417,7 +452,7 @@ void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
     {
         if( assetGuid.isVxGUIDValid() )
         {
-            GuiThumb *thumb = generateEmoticon( assetGuid );
+            GuiThumb *thumb = findOrCreateEmoticonThumb( assetGuid );
             if( !thumb )
             {
                 QString msgText = QObject::tr( "Could create emoticon image" );

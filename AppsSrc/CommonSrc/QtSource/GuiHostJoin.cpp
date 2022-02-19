@@ -44,9 +44,9 @@ GuiHostJoin::GuiHostJoin( const GuiHostJoin& rhs )
     , m_HostJoinMgr( rhs.m_HostJoinMgr )
     , m_GuiUser( rhs.m_GuiUser )
     , m_GroupieId( rhs.m_GroupieId )
-    , m_SessionId( rhs.m_SessionId )
-    , m_IsOnline( rhs.m_IsOnline )
     , m_JoinState( rhs.m_JoinState )
+    , m_SessionId( rhs.m_SessionId )
+    , m_IsOnline( rhs.m_IsOnline )  
 {
 }
 
