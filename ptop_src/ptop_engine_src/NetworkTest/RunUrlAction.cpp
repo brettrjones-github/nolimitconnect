@@ -273,6 +273,7 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
     switch( netCmdType )
     {
     case eNetCmdPing:
+    case eNetCmdHostPingReq:
     case eNetCmdIsMyPortOpenReq:
     case eNetCmdQueryHostOnlineIdReq:
         break;
@@ -313,6 +314,12 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
         rxCmdHeaderTimeout = PING_TEST_RX_HDR_TIMEOUT;
         rxCmdDataTimeout = PING_TEST_RX_DATA_TIMEOUT;
         m_NetServiceUtils.buildPingTestUrl( &netServConn, strNetActionUrl );
+        break;
+
+    case eNetCmdHostPingReq:
+        rxCmdHeaderTimeout = PING_TEST_RX_HDR_TIMEOUT;
+        rxCmdDataTimeout = PING_TEST_RX_DATA_TIMEOUT;
+        m_NetServiceUtils.buildHostPingReqUrl( &netServConn, strNetActionUrl );
         break;
 
     case eNetCmdIsMyPortOpenReq:
@@ -436,6 +443,17 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
             }
         }
     }
+    else if( eNetCmdHostPingReq == netCmdType )
+    {
+        if( strPayload.empty() || strPayload.length() < 5 )
+        {
+            LogModule( eLogRunTest, LOG_ERROR, "RunUrlAction no content" );
+            sendRunTestStatus( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError(), "%s No HOST PING REPLY content", actionName.c_str() );
+            return doRunTestFailed( urlAction, actionName, eRunTestStatusInvalidResponse, netServiceHdr.getError() );
+        }
+
+        sendTestLog( urlAction, actionName, "%s HOST PING REPLY Content (%s)", actionName.c_str(), strPayload.c_str() );
+    }
     else if( eNetCmdQueryHostOnlineIdReq == netCmdType )
     {
         VxGUID hostId;
@@ -494,6 +512,7 @@ ERunTestStatus RunUrlAction::doUrlAction( UrlActionInfo& urlAction )
 
         sendTestLog(  urlAction, actionName, "Elapsed Seconds Connect %3.3f sec Send %3.3f sec Respond %3.3f sec", connectTime, sendTime - connectTime, reponseTime - sendTime );    
     }
+
 
     return doRunTestSuccess(  urlAction, actionName );
 }

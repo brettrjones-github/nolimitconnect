@@ -929,9 +929,9 @@ RCODE NetServicesMgr::handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServic
 
 //============================================================================
 ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
-                                                   VxSktConnectSimple *	netServConn,
-                                                   VxGUID&			    retHostId,
-                                                   bool					sendMsgToUser )
+														VxSktConnectSimple *	netServConn,
+														VxGUID&					retHostId,
+														bool					sendMsgToUser )
 {
     retHostId.clearVxGUID();
     if( nullptr == netServConn || !netServConn->isConnected() ) 
@@ -977,7 +977,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
             LogMsg( LOG_ERROR, "Query Host Online Id Server Response Time Out (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
         }
 
-        m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Time Out (%3.3f sec)\n", testTimer.elapsedSec() );
+        m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Time Out (%3.3f sec)", testTimer.elapsedSec() );
         return eNetCmdErrorResponseTimedOut;
     }
 
@@ -986,7 +986,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         LogMsg( LOG_ERROR, "Query Host Online Id Server Response Has Error %d (%3.3f sec) thread 0x%x", netServiceHdr.getError(), testTimer.elapsedSec(), VxGetCurrentThreadId() );
         if( sendMsgToUser )
         {
-            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server ResponseHas Error Code %d (%3.3f sec)\n", netServiceHdr.getError(), testTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server ResponseHas Error Code %d (%3.3f sec)", netServiceHdr.getError(), testTimer.elapsedSec() );
         }
 
         return eNetCmdErrorNone;
@@ -999,7 +999,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         LogMsg( LOG_ERROR, "Query Host Online Id Server Response Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
         if( sendMsgToUser )
         {
-            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Content (%3.3f sec)\n", testTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Content (%3.3f sec)", testTimer.elapsedSec() );
         }
 
         return eNetCmdErrorRxFailed;
@@ -1026,7 +1026,7 @@ ENetCmdError NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
         LogMsg( LOG_ERROR, "Query Host Online Id Invalid Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
         if( sendMsgToUser )
         {
-            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Content (%3.3f sec)\n", testTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Content (%3.3f sec)", testTimer.elapsedSec() );
         }
 
         return eNetCmdErrorInvalidContent;

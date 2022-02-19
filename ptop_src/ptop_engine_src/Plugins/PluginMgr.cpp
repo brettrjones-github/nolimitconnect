@@ -433,6 +433,26 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	NetServiceHdr netServiceHdr;
 	EPluginType pluginType = m_NetServiceUtils.parseHttpNetServiceUrl( sktBase, netServiceHdr );
+	if( netServiceHdr.m_NetCmdType == eNetCmdHostPingReq )
+	{
+		if( m_Engine.getHasAnyAnnonymousHostService() )
+		{
+			std::string content = sktBase->getRemoteIp();
+			m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdHostPingReply, content );
+			// flush then close
+			sktBase->closeSkt( eSktCloseNetSrvHostPingReplySent, true );
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "handleFirstNetServiceConnection: connection %s dropped because Host Ping Request Not Allowed", sktBase->getRemoteIp().c_str() );
+			// flush then close
+			sktBase->closeSkt( eSktCloseNetSrvQueryIdPermission, false );
+		}
+
+		return;
+	}
+
+
     if( ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) &&
         ( ePluginTypeHostNetwork == pluginType || ePluginTypeHostGroup == pluginType || 
             ePluginTypeHostChatRoom == pluginType || ePluginTypeHostRandomConnect == pluginType || ePluginTypeHostConnectTest == pluginType) )
@@ -458,9 +478,9 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
             if( eAppStatePermissionErr != poPlugin->getPluginState() )
             {
                 std::string onlineId = m_Engine.getMyOnlineId().toHexString();
-                m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId );
-                // flush then close
-                sktBase->closeSkt( eSktCloseNetSrvQueryIdSent, true );
+				m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId );
+				// flush then close
+				sktBase->closeSkt( eSktCloseNetSrvQueryIdSent, true );
             }
             else
             {

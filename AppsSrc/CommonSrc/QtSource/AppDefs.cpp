@@ -286,7 +286,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsHostChatRoom:       return QObject::tr( "Host A Chat Room Settings" );
     case eAppletSettingsHostGroup:          return QObject::tr( "Host A Group Settings" );
     case eAppletSettingsHostNetwork:        return QObject::tr( "Host A Network Settings" );
-    case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect" );
+    case eAppletSettingsHostRandomConnect:  return QObject::tr( "Host Random Connect Settings" );
 
     case eAppletSettingsMessenger:          return QObject::tr( "Messenger Settings" );
     case eAppletSettingsPushToTalk:         return QObject::tr( "Push To Talk Settings" );

@@ -64,7 +64,7 @@ protected slots:
     void                        slotPurgeCacheButtonClicked( void );
     void                        slotListActionButtonClicked( void );
     void                        slotHostClientTestButtonClicked( void );
-    void                        slotHostServiceTestButtonClicked( void );
+    void                        slotPingRemoteUrlButtonClicked( void );
 
     void                        slotNewUrlSelected( int comboBoxIdx );
 

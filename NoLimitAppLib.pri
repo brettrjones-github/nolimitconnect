@@ -153,6 +153,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsHostRandomConnect.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsMessenger.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPage.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPushToTalk.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnect.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnectRelay.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsShareFiles.h \
@@ -518,6 +519,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsHostRandomConnect.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsMessenger.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPage.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsPushToTalk.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnect.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsRandomConnectRelay.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSettingsShareFiles.cpp \

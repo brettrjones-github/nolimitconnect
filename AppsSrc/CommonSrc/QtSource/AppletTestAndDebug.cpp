@@ -78,8 +78,8 @@ void AppletTestAndDebug::setupApplet( void )
     m_MyApp.getAppSettings().getLastUsedTestUrl( strValue );
     if( !strValue.empty() )
     {
-        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
         ui.m_TestUrlEdit->setText( strValue.c_str() );
+        ui.m_TestUrlsComboBox->addItem( strValue.c_str() );
     }
 
     m_Engine.getEngineSettings().getNetworkHostUrl( strValue );
@@ -140,7 +140,7 @@ void AppletTestAndDebug::setupApplet( void )
     connect( ui.m_GenKeyButton, SIGNAL( clicked() ), this, SLOT( slotGenKeyButtonClicked() ) );
     connect( ui.m_ListActionButton, SIGNAL( clicked() ), this, SLOT( slotListActionButtonClicked() ) );
     connect( ui.m_HostClientTestButton, SIGNAL( clicked() ), this, SLOT( slotHostClientTestButtonClicked() ) );
-    connect( ui.m_HostServiceTestButton, SIGNAL( clicked() ), this, SLOT( slotHostServiceTestButtonClicked() ) );
+    connect( ui.m_PingRemoteUrlButton, SIGNAL( clicked() ), this, SLOT( slotPingRemoteUrlButtonClicked() ) );
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
@@ -186,15 +186,23 @@ void AppletTestAndDebug::slotNewUrlSelected( int comboBoxIdx )
 //============================================================================
 void AppletTestAndDebug::slotPingTestButtonClicked( void )
 {
-    getInfoEdit()->clear();
-    VxUrl myUrl( ui.m_MyUrlEdit->text().toUtf8().constData() );
-    VxUrl testUrl( ui.m_TestUrlEdit->text().toUtf8().constData() );
+    startUrlTest( eNetCmdPing );
+}
 
-    if( myUrl.validateUrl( true ) && testUrl.validateUrl( false ) )
+//============================================================================
+void AppletTestAndDebug::slotIsMyPortOpenButtonClicked( void )
+{
+    getInfoEdit()->clear();
+    QString urlText = ui.m_TestUrlsComboBox->currentText();
+
+    VxUrl myUrl( ui.m_MyUrlEdit->text().toUtf8().constData() );
+    VxUrl testUrl( urlText.toUtf8().constData() );
+
+    if( testUrl.validateUrl( false ) )
     {
-        infoMsg( "Testing Ping" );
-        VxGUID::generateNewVxGUID(m_SessionId);
-        m_MyApp.getEngine().fromGuiRunUrlAction( m_SessionId, myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdPing );
+        infoMsg( "Testing %s with url %s", DescribeNetCmdType( eNetCmdIsMyPortOpenReq ), urlText.toUtf8().constData() );
+        VxGUID::generateNewVxGUID( m_SessionId );
+        m_MyApp.getEngine().fromGuiRunUrlAction( m_SessionId, myUrl.getUrl().c_str(), testUrl.getUrl().c_str(), eNetCmdIsMyPortOpenReq );
     }
     else
     {
@@ -202,18 +210,12 @@ void AppletTestAndDebug::slotPingTestButtonClicked( void )
         {
             infoMsg( "Invalid My URL" );
         }
-        
+
         if( !testUrl.validateUrl( false ) )
         {
             infoMsg( "Invalid Test URL" );
         }
     }
-}
-
-//============================================================================
-void AppletTestAndDebug::slotIsMyPortOpenButtonClicked( void )
-{
-    startUrlTest( eNetCmdIsMyPortOpenReq );
 }
 
 //============================================================================
@@ -452,7 +454,7 @@ void AppletTestAndDebug::fillExtraInfo( void )
 
     infoMsg( "screen size: width %d heigth %d", screenWidth, screenHeight );
     infoMsg( "screen dpi: x %d y %d ratio %d", xDpi, yDpi, ratioDpi );
-    infoMsg( "dpi scale: %d", GuiParams().getGuiScale() );
+    infoMsg( "dpi scale: %3.1f", GuiParams().getGuiScale() );
     infoMsg( "thumbnail size: %d", GuiParams().getThumbnailSize().width() );
 }
 
@@ -523,7 +525,7 @@ void AppletTestAndDebug::slotHostClientTestButtonClicked( void )
 }
 
 //============================================================================
-void AppletTestAndDebug::slotHostServiceTestButtonClicked( void )
+void AppletTestAndDebug::slotPingRemoteUrlButtonClicked( void )
 {
-    m_MyApp.launchApplet( eAppletTestHostService, getContentFrameOfOppositePageFrame() );
+    startUrlTest( eNetCmdHostPingReq );
 }

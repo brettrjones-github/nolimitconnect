@@ -852,6 +852,8 @@ enum ENetCmdType
     eNetCmdIsMyPortOpenReply			= 4,			
     eNetCmdQueryHostOnlineIdReq         = 5,
     eNetCmdQueryHostOnlineIdReply       = 6,
+    eNetCmdHostPingReq                  = 7,
+    eNetCmdHostPingReply                = 8,
 
     eMaxNetCmdType
 };
@@ -874,7 +876,7 @@ enum ENetCmdError
     eMaxNetCmdError
 };
 
-//! \public Can Direct Connect test state
+// Can Direct Connect test state
 enum EIsPortOpenStatus
 {
     eIsPortOpenStatusUnknown						= 0,
@@ -1035,6 +1037,7 @@ enum ESktCloseReason
     eSktCloseP2PNotReadyForAcceptSkt,
     eSktCloseUserIgnored,
     eSktCloseRelaySessionNotFound,
+    eSktCloseNetSrvHostPingReplySent,
 
 
     eMaxSktCloseReason			// always last

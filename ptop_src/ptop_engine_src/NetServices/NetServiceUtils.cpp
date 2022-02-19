@@ -218,6 +218,14 @@ bool NetServiceUtils::buildPingTestUrl( VxSktConnectSimple * netServConn, std::s
 }
 
 //============================================================================
+bool NetServiceUtils::buildHostPingReqUrl( VxSktConnectSimple* netServConn, std::string& strNetCmdHttpUrl )
+{
+	std::string strContent = "PING";
+
+	return buildNetCmd( netServConn, strNetCmdHttpUrl, eNetCmdHostPingReq, strContent );
+}
+
+//============================================================================
 bool NetServiceUtils::buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, ENetCmdError errCode, int version )
 {
     if( netServConn && netServConn->isConnected() )
@@ -490,6 +498,14 @@ ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
     {
         return eNetCmdQueryHostOnlineIdReply;
     }
+	else if( 0 == strcmp( NET_CMD_HOST_PING_REQ, netCmd ) )
+	{
+		return eNetCmdHostPingReq;
+	}
+	else if( 0 == strcmp( NET_CMD_HOST_PING_REPLY, netCmd ) )
+	{
+		return eNetCmdHostPingReply;
+	}
 	else
 	{
 		return eNetCmdUnknown;
@@ -513,6 +529,10 @@ const char *  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
         return NET_CMD_HOST_ID_REQ;
     case eNetCmdQueryHostOnlineIdReply:
         return NET_CMD_HOST_ID_REPLY;
+	case eNetCmdHostPingReq:
+		return NET_CMD_HOST_PING_REQ;
+	case eNetCmdHostPingReply:
+		return NET_CMD_HOST_PING_REPLY;
 
 	case eNetCmdUnknown:
 	default:

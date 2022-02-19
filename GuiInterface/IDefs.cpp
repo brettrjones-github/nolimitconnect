@@ -256,12 +256,10 @@ namespace
         "Net Cmd: Pong ",
         "Net Cmd: Is Port Open Req ",
         "Net Cmd: Is Port Open Reply ",
-        "Net Cmd: Host Req ",
-        "Net Cmd: Host Reply ",
-        "Net Cmd: About Me Page ",
-        "Net Cmd: Storyboard Page ",
         "Net Cmd: Query Host Id Req ",
         "Net Cmd: Query Host Id Reply ",
+        "Net Cmd: Host Ping Req ",
+        "Net Cmd: Host Ping Reply ",
     };
 
     const char * NetCmdErrorEnumStrings[] =
@@ -529,7 +527,8 @@ namespace
         "Skt Close PktPingReq Send Fail ",
         "Skt Close P2P Not Ready For Accept Skt ",
         "Skt Close User Ignored ",
-        "Skt Close Relay Session Not Foune ",
+        "Skt Close Relay Session Not Found ",
+        "Skt Close Host Ping Reply Sent ",
 
         "eMaxSktCloseReason "
   
