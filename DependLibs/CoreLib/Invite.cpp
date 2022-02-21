@@ -14,6 +14,7 @@
 #include "Invite.h"
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxUrl.h>
+#include <CoreLib/VxPtopUrl.h>
 
 #include <algorithm>
 
@@ -67,22 +68,26 @@ bool Invite::setInviteUrl( EHostType hostType, std::string& url )
     {
     case eHostTypeGroup:
         m_GroupUrl = url;
+        VxPtopUrl::setUrlHostType( m_GroupUrl, eHostTypeGroup );
         result = !m_GroupUrl.empty();
         break;
 
     case eHostTypeChatRoom:
         m_ChatRoomUrl = url;
+        VxPtopUrl::setUrlHostType( m_ChatRoomUrl, eHostTypeChatRoom );
         result = !m_ChatRoomUrl.empty();
         break;
 
     case eHostTypeRandomConnect:
         m_RandomConnectUrl = url;
+        VxPtopUrl::setUrlHostType( m_RandomConnectUrl, eHostTypeRandomConnect );
         result = !m_RandomConnectUrl.empty();
         break;
 
     case eHostTypePeerUserRelayed:
     case eHostTypePeerUserDirect:
         m_PersonUrl = url;
+        VxPtopUrl::setUrlHostType( m_PersonUrl, hostType );
         result = !m_PersonUrl.empty();
         break;
 
@@ -289,22 +294,13 @@ bool Invite::parseInviteText( void )
 // assumes vaild node url with online id
 std::string Invite::makeInviteUrl( EHostType hostType, std::string& onlineUrl )
 {
-    if( !onlineUrl.empty() )
-    {
-        return onlineUrl + Invite::getHostTypeSuffix( hostType );
-    }
-
-    return onlineUrl;
+    std::string onlineUrl2 = onlineUrl;
+    VxPtopUrl::setUrlHostType( onlineUrl2, hostType );
+    return onlineUrl2;
 }
 
 //============================================================================
 bool Invite::appendHostTypeSuffix( EHostType hostType, std::string& onlineUrl )
 {
-    if( hostType != eHostTypeUnknown && !onlineUrl.empty() && '!' == onlineUrl[onlineUrl.length() - 1] )
-    {
-        onlineUrl += Invite::getHostTypeSuffix( hostType );
-        return true;
-    }
-
-    return false;
+    return VxPtopUrl::setUrlHostType( onlineUrl, hostType );
 }

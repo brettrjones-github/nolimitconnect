@@ -924,6 +924,7 @@ void GroupieListMgr::onPktGroupieSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr
     PktGroupieSearchReply pktReply;
     pktReply.setSearchSessionId( pktReq->getSearchSessionId() );
     pktReply.setHostType( hostType );
+    pktReply.setHostOnlineId( m_Engine.getMyOnlineId() );
     pktReply.setCommError( commErr );
     if( eCommErrNone == commErr && pktReq->isValidPkt() )
     {
@@ -1067,7 +1068,7 @@ void GroupieListMgr::onPktGroupieSearchReply( VxSktBase* sktBase, VxPktHdr* pktH
     }
     else
     {
-        updateFromGroupieSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getGroupieCountThisPkt() );
+        updateFromGroupieSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), pktReply->getHostOnlineId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getGroupieCountThisPkt() );
         if( pktReply->getMoreGroupiesExist() )
         {
             if( !requestMoreGroupiesFromHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId(), plugin ) )
@@ -1144,7 +1145,8 @@ void GroupieListMgr::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr
     }
     else
     {
-        updateFromGroupieSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getGroupieCountThisPkt() );
+        VxGUID hostOnlineId = pktReply->getDestOnlineId();
+        updateFromGroupieSearchBlob( pktReply->getHostType(), pktReply->getSearchSessionId(), hostOnlineId, sktBase, netIdent, pktReply->getBlobEntry(), pktReply->getGroupieCountThisPkt() );
         if( pktReply->getMoreGroupiesExist() )
         {
             if( !requestMoreGroupiesFromHost( pktReply->getHostType(), pktReply->getSearchSessionId(), sktBase, netIdent, pktReply->getNextSearchOnlineId(), plugin ) )
@@ -1214,7 +1216,7 @@ void GroupieListMgr::logCommError( ECommErr commErr, const char* desc, VxSktBase
 }
 
 //============================================================================
-void GroupieListMgr::updateFromGroupieSearchBlob( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount )
+void GroupieListMgr::updateFromGroupieSearchBlob( EHostType hostType, VxGUID& searchSessionId, VxGUID& hostOnlineId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount )
 {
     blobEntry.resetRead();
     for( int i = 0; i < hostInfoCount; i++ )
@@ -1223,6 +1225,7 @@ void GroupieListMgr::updateFromGroupieSearchBlob( EHostType hostType, VxGUID& se
         if( groupieInfo.extractFromSearchBlob( blobEntry ) )
         {
             groupieInfo.setHostType( hostType );
+            groupieInfo.setHostedOnlineId( hostOnlineId );
 
             groupieSearchResult( hostType, searchSessionId, sktBase, netIdent, groupieInfo );
         }

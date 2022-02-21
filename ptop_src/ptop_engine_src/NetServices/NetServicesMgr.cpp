@@ -306,15 +306,6 @@ bool NetServicesMgr::doNetCmdPing( const char * ipAddress, uint16_t u16Port, std
 		LogMsg( LOG_INFO, "##P NetServicesMgr::doNetCmdPing connect to %s:%d in %3.3f sec thread 0x%x", ipAddress, u16Port, connectTime, VxGetCurrentThreadId() );
 		return sendAndRecievePing( pingTimer, toClientConn, retPong, PONG_RX_TIMEOUT );
 	}
-
-	LogMsg( LOG_WARNING, "##P NetServicesMgr::doNetCmdPing:  timeout %d could not connect to %s:%d %3.3f sec will try again", PORT_TEST_CONNECT_TO_CLIENT1_TIMEOUT, ipAddress, u16Port, pingTimer.elapsedSec() );
-	VxSktConnectSimple toClientConn2;
-	if( INVALID_SOCKET != toClientConn2.connectTo( ipAddress, u16Port, PORT_TEST_CONNECT_TO_CLIENT2_TIMEOUT ) )
-	{
-		double connectTime = pingTimer.elapsedSec();
-		LogMsg( LOG_INFO, "##P NetServicesMgr::doNetCmdPing connect to %s:%d in %3.3f sec thread 0x%x", ipAddress, u16Port, connectTime, VxGetCurrentThreadId() );
-		return sendAndRecievePing( pingTimer, toClientConn2, retPong, PONG_RX_TIMEOUT );
-	}
 	
 	LogMsg( LOG_ERROR, "##P NetServicesMgr::doNetCmdPing:  timeout %d could not connect to %s:%d %3.3f sec FAIL", PORT_TEST_CONNECT_TO_CLIENT2_TIMEOUT, ipAddress, u16Port, pingTimer.elapsedSec() );
 	return false;

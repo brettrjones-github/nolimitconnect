@@ -111,6 +111,12 @@ bool HostJoinInfoDb::addHostJoin(   GroupieId&      groupieId,
     joinState = joinState == eJoinStateJoinIsGranted ? eJoinStateJoinWasGranted : joinState;
     removeHostJoin( groupieId );
 
+    if( !IsAnnounceHostOrClientHostType( groupieId.getHostType() ) )
+    {
+        LogMsg( LOG_ERROR, "UserJoinInfoDb::addUserJoin invalid host type %s", DescribeHostType( groupieId.getHostType() ) );
+        return false;
+    }
+
     std::string onlineIdStr = groupieId.getGroupieOnlineId().toHexString();
     std::string thumbIdStr = thumbId.toHexString();
 
@@ -166,13 +172,22 @@ void HostJoinInfoDb::getAllHostJoins( std::map<GroupieId, HostJoinInfo*>& HostJo
             hostInfo->setOnlineId( cursor->getString( COLUMN_ONLINE_ID ) );
             hostInfo->setThumbId( cursor->getString( COLUMN_HOST_THUMB_ID ) );
             hostInfo->setInfoModifiedTime( (uint64_t)cursor->getS64( COLUMN_INFO_MOD_MS ) );
-            hostInfo->setPluginType( (EPluginType)cursor->getS32( COLUMN_PLUGIN_TYPE ) );
+            EHostType hostType =  ( EHostType )cursor->getS32( COLUMN_PLUGIN_TYPE );
             hostInfo->setFriendState( (EFriendState)cursor->getS32( COLUMN_FRIEND_STATE ) );
             hostInfo->setJoinState( (EJoinState)cursor->getS32( COLUMN_JOIN_STATE ) );
             hostInfo->setLastConnectTime( (uint64_t)cursor->getS64( COLUMN_LAST_CONN_MS ) );
             hostInfo->setLastJoinTime(  (uint64_t)cursor->getS64( COLUMN_LAST_JOIN_MS ) ); 
             hostInfo->setHostFlags( (uint32_t)cursor->getS32( COLUMN_HOST_FLAGS ) );
             hostInfo->setUserUrl( cursor->getString( COLUMN_USER_URL ) );
+
+            EPluginType pluginType = HostTypeToHostPlugin( hostType );
+            if( !IsAnnounceHostOrClientPluginType( pluginType ) )
+            {
+                LogMsg( LOG_ERROR, "UserJoinInfoDb::getAllHostJoins invalid host type %s", DescribeHostType( hostType ) );
+                continue;
+            }
+
+            hostInfo->setPluginType( pluginType );
 
             VxPtopUrl ptopUrl( hostInfo->getUserUrl() );
             if( ptopUrl.isValid() && hostInfo->getOnlineId().isVxGUIDValid() )

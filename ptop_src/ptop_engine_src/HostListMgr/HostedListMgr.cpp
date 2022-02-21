@@ -568,6 +568,7 @@ bool HostedListMgr::fromGuiQueryHostListFromNetworkHost( VxPtopUrl& netHostUrl, 
         m_SearchSpecificOnlineId = hostIdIfNullThenAll;
         m_SearchSessionId.initializeWithNewVxGUID();
 
+        // add ourself to host list if we have enabled hosting of the given host type
         EPluginType pluginType = HostTypeToHostPlugin( hostType );
         if( m_Engine.getMyPktAnnounce().isPluginEnabled( pluginType ) )
         {

@@ -1173,6 +1173,12 @@ EPluginType ClientPluginToHostPluginType( EPluginType pluginType );
 bool IsClientPluginType( EPluginType pluginType );
 //! return true if is a host plugin
 bool IsHostPluginType( EPluginType pluginType );
+//! return true if is a host or client relationship plugin
+bool IsHostOrClientPluginType( EPluginType pluginType );
+//! return true if host can be announced to network or is a client of such a host
+bool IsAnnounceHostOrClientPluginType( EPluginType pluginType );
+//! return true if host can be announced to network or is a client of such a host
+bool IsAnnounceHostOrClientHostType( EHostType hostType );
 //! return true if plugin should announce to network host
 bool PluginShouldAnnounceToNetwork( EPluginType pluginType );
 //! return true if host should announce to network host

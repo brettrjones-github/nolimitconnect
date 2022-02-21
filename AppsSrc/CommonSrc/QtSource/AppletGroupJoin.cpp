@@ -58,7 +58,7 @@ AppletGroupJoin::AppletGroupJoin( AppCommon& app, QWidget * parent )
 	queryHostedList();
 
 	m_JoinedHostSession.initializeWithNewVxGUID();
-	m_MyApp.getFromGuiInterface().fromGuiJoinLastJoinedHost( getHostType(), m_JoinedHostSession );
+	// m_MyApp.getFromGuiInterface().fromGuiJoinLastJoinedHost( getHostType(), m_JoinedHostSession );
 }
 
 //============================================================================

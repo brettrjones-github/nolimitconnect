@@ -41,6 +41,9 @@ public:
 
 	std::string					stripHost( const std::string& url ) const; // remove suffix invite type if exists
 
+	bool						setUrlHostType( EHostType hostType ); 
+	static bool					setUrlHostType( std::string& url, EHostType hostType );
+
 protected:
     std::string					m_Url{ "" };
 	std::string					m_Protocol{ "" };

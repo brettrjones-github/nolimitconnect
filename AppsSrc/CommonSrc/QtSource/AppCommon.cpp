@@ -300,6 +300,7 @@ void AppCommon::loadWithoutThread( void )
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
 	m_ConnectMgr.onAppCommonCreated();
+	m_GroupieListMgr.onAppCommonCreated();
 
     m_HomePage.initializeHomePage();
     connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT( slotMainWindowResized() ) );
@@ -357,9 +358,11 @@ void AppCommon::slotStartLoadingFromThread( void )
 	m_UserMgr.onAppCommonCreated();
 	m_OfferClientMgr.onAppCommonCreated();
 	m_OfferHostMgr.onAppCommonCreated();
+	m_HostedListMgr.onAppCommonCreated();
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
 	m_ConnectMgr.onAppCommonCreated();
+	m_GroupieListMgr.onAppCommonCreated();
 
 	// should have enough to show home page
 	emit signalFinishedLoadingGui();

@@ -35,19 +35,32 @@ PluginNetworkHost::PluginNetworkHost( P2PEngine& engine, PluginMgr& pluginMgr, V
 void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
     PktHostInviteAnnounceReq* hostAnn = ( PktHostInviteAnnounceReq*)pktHdr;
+    std::string identName = netIdent && netIdent->getOnlineName() ? netIdent->getOnlineName() : "";
     if( eHostTypeChatRoom == hostAnn->getHostType() )
     {
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce" );
+        if( netIdent->getMyOnlineId() != m_Engine.getMyOnlineId() )
+        {
+            LogMsg( LOG_VERBOSE, "PluginNetworkHost got chat room announce from %s", identName.c_str() );
+        }
+
         updateHostSearchList( eHostTypeChatRoom, hostAnn, netIdent, sktBase );
     }
     else if( eHostTypeGroup == hostAnn->getHostType() )
     {
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost got group announce" );
+        if( netIdent->getMyOnlineId() != m_Engine.getMyOnlineId() )
+        {
+            LogMsg( LOG_VERBOSE, "PluginNetworkHost got group announce from %s", identName.c_str() );
+        }
+
         updateHostSearchList( eHostTypeGroup, hostAnn, netIdent, sktBase );
     }
     else if( eHostTypeRandomConnect == hostAnn->getHostType() )
     {
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost got random connect announce" );
+        if( netIdent->getMyOnlineId() != m_Engine.getMyOnlineId() )
+        {
+            LogMsg( LOG_VERBOSE, "PluginNetworkHost got random connect announce from %s", identName.c_str() );
+        }
+
        updateHostSearchList( eHostTypeRandomConnect, hostAnn, netIdent, sktBase );
     }
     else if( eHostTypeNetwork == hostAnn->getHostType() )
@@ -57,12 +70,16 @@ void PluginNetworkHost::onPktHostInviteAnnReq( VxSktBase * sktBase, VxPktHdr * p
     }
     else if( eHostTypeConnectTest == hostAnn->getHostType() )
     {
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce" );
+        if( netIdent->getMyOnlineId() != m_Engine.getMyOnlineId() )
+        {
+             LogMsg( LOG_VERBOSE, "PluginNetworkHost got connect test announce from %s", identName.c_str() );
+        }
+
         updateHostSearchList( eHostTypeConnectTest, hostAnn, netIdent, sktBase );
     }
     else
     {
-        LogMsg( LOG_VERBOSE, "PluginNetworkHost unknown announce %d", hostAnn->getHostType() );
+        LogMsg( LOG_VERBOSE, "PluginNetworkHost unknown announce %d from %s", hostAnn->getHostType(), identName.c_str() );
     }
 }
 

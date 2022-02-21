@@ -521,14 +521,10 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 		PluginBase * poPlugin = getPlugin( pluginType );
 		if( poPlugin )
 		{
-			RCODE rc = 0;
+			RCODE rc = -1;
 			if( ePluginTypeNetServices == poPlugin->getPluginType() || ePluginTypeHostConnectTest == poPlugin->getPluginType() )
 			{
 				rc = poPlugin->handlePtopConnection( sktBase, netServiceHdr );
-			}
-			else
-			{
-				rc = poPlugin->handlePtopConnection( sktBase, netServiceHdr.m_Ident );
 			}
 
 			if( 0 == rc )

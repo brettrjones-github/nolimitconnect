@@ -151,20 +151,20 @@ void GuiUserMgr::slotInternalIndentListUpdate( EUserViewType listType, VxGUID on
             if( !user->getNetIdent().isDirectConnect() )
             {
                 user->getNetIdent().setIsDirectConnect( true );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate direct connect" );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is direct connect %s", user->getNetIdent().getOnlineName() );
             }
         case eUserViewTypeNearby:
             if( !user->getNetIdent().isNearby() )
             {
                 user->getNetIdent().setIsNearby( true );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate nearby" );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is nearby %s", user->getNetIdent().getOnlineName() );
             }
             break;
         case eUserViewTypeOnline:
             if( !user->getNetIdent().isOnline() )
             {
                 user->getNetIdent().setIsOnline( true );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate online" );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate is online %s", user->getNetIdent().getOnlineName() );
             }
             break;
 
@@ -207,7 +207,7 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
             if( user->getNetIdent().isDirectConnect() )
             {
                 user->getNetIdent().setIsDirectConnect( false );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT direct connect" );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListRemove Was direct connect %s", user->getNetIdent().getOnlineName() );
             }
             break;
 
@@ -215,7 +215,7 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
             if( user->getNetIdent().isNearby() )
             {
                 user->getNetIdent().setIsNearby( false );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT nearby" );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListRemove Was nearby %s", user->getNetIdent().getOnlineName() );
             }
             break;
 
@@ -223,7 +223,7 @@ void GuiUserMgr::slotInternalIndentListRemove( EUserViewType listType, VxGUID on
             if( user->getNetIdent().isOnline() )
             {
                 user->getNetIdent().setIsOnline( false );
-                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListUpdate NOT online" );
+                LogMsg( LOG_VERBOSE, "GuiUserMgr::slotInternalIndentListRemove Was online %s", user->getNetIdent().getOnlineName() );
             }
             break;
 

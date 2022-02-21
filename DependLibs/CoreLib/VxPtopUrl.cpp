@@ -255,3 +255,43 @@ void VxPtopUrl::setUrl( std::string& url )
         }     
     }
 }
+
+//============================================================================
+bool VxPtopUrl::setUrlHostType( EHostType hostType )
+{
+    bool result = setUrlHostType( m_Url, hostType );
+    if( result )
+    {
+        m_HostType = hostType;
+    }
+
+
+    return result;
+}
+
+//============================================================================
+bool VxPtopUrl::setUrlHostType( std::string& url, EHostType hostType )
+{
+    bool result{ false };
+    if( eHostTypeUnknown != hostType && !url.empty() )
+    {
+        std::size_t foundPos = url.rfind( ONLINE_ID_DELIM );
+        if( foundPos != std::string::npos )
+        {
+            if( foundPos == url.length() - 1 )
+            {
+                // does not have a suffix.. just append
+                url += Invite::getHostTypeSuffix( hostType );
+            }
+            else
+            {
+                // replace the character one past ! online id end char
+                url[foundPos + 1] = Invite::getHostTypeSuffix( hostType );
+            }
+
+            result = true;
+        }
+    }
+
+    return result;
+}

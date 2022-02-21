@@ -162,6 +162,8 @@ void OnlineSktList::onConnectionLost( VxGUID& sktConnectId )
         {
             identList.insert( (( GroupieId& )( *iter )).getGroupieOnlineId() );
         }
+
+        m_OnlineSktList.erase( mapIter );
     }
 
     unlockList();
@@ -222,6 +224,11 @@ VxSktBase* OnlineSktList::findHostConnection( GroupieId& groupieId, bool tryPeer
     VxSktBase* sktBase = nullptr;
     if( groupieId.isValid() )
     {
+        if( groupieId.getHostedOnlineId() == m_Engine.getMyOnlineId() && groupieId.getGroupieOnlineId() == m_Engine.getMyOnlineId() )
+        {
+            return m_Engine.getSktLoopback();
+        }
+
         if( tryPeerFirst )
         {
             sktBase = findPeerConnection( groupieId.getGroupieOnlineId() );

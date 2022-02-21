@@ -1183,7 +1183,7 @@ EPluginType HostTypeToHostPlugin( EHostType hostType )
     case eHostTypeUnknown:
     default:
         LogMsg( LOG_ERROR, "HostTypeToHostPlugin unknown host type %d", hostType );
-        vx_assert( false );
+        // vx_assert( false );
         return ePluginTypeInvalid;
     }
 }
@@ -1249,12 +1249,13 @@ EHostType PluginTypeToHostType( EPluginType pluginType )
     case ePluginTypeNetServices:
     case ePluginTypeFileServer:
     case ePluginTypeNetworkSearchList:
+    case ePluginTypeFileXfer:
         return eHostTypeUnknown;
 
     case ePluginTypeInvalid:
     default:
         LogMsg( LOG_ERROR, "PluginTypeToHostType unknown plugin type %d", pluginType );
-        vx_assert( false );
+        // vx_assert( false );
         return eHostTypeUnknown;
     }
 }
@@ -1368,6 +1369,32 @@ bool IsHostPluginType( EPluginType pluginType )
 }
 
 //============================================================================
+//! return true if is a host or client relationship plugin
+bool IsHostOrClientPluginType( EPluginType pluginType )
+{
+    return IsClientPluginType( pluginType ) || IsHostPluginType( pluginType );
+}
+
+//============================================================================
+//! return true if host can be announced to network or is a client of such a host
+bool IsAnnounceHostOrClientPluginType( EPluginType pluginType )
+{
+    return  ePluginTypeHostGroup == pluginType ||
+        ePluginTypeHostChatRoom == pluginType ||
+        ePluginTypeHostRandomConnect == pluginType ||
+        ePluginTypeClientGroup == pluginType ||
+        ePluginTypeClientChatRoom == pluginType ||
+        ePluginTypeClientRandomConnect == pluginType;
+}
+
+//============================================================================
+//! return true if host can be announced to network or is a client of such a host
+bool IsAnnounceHostOrClientHostType( EHostType hostType )
+{
+    return HostShouldAnnounceToNetwork( hostType );
+}
+
+//============================================================================
 //! return true if plugin should announce to network host
 bool PluginShouldAnnounceToNetwork( EPluginType pluginType )
 {
@@ -1384,6 +1411,7 @@ bool HostShouldAnnounceToNetwork( EHostType hostType )
         eHostTypeChatRoom == hostType ||
         eHostTypeRandomConnect == hostType;
 }
+
 //============================================================================
 //! return true if plugin can act as relay for user
 bool IsPluginARelayForUser( EPluginType pluginType )

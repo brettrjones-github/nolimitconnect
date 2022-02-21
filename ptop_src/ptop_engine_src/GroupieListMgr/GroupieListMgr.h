@@ -113,7 +113,7 @@ protected:
     void						unlockClientList( void )        { m_GroupieInfoListClientMutex.unlock(); }
 
     void                        logCommError( ECommErr commErr, const char* desc, VxSktBase* sktBase, VxNetIdent* netIdent );
-    void                        updateFromGroupieSearchBlob( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount );
+    void                        updateFromGroupieSearchBlob( EHostType hostType, VxGUID& hostOnlineId, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount );
     bool                        requestMoreGroupiesFromHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextGroupieOnlineId, PluginBase* plugin );
 
     P2PEngine&                  m_Engine;

@@ -257,21 +257,39 @@ void NetworkMonitor::onOncePerSecond( void )
 
         m_LastConnectAttemptSuccessfull = m_ConnectAttemptSucessfull;
     }
-    else if( ( !getIsInternetAvailable() && ( timeNow - m_LastConnectAttemptTimeGmtMs ) > NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS ) || // time to attempt internet connect/verifiy local ip
-        ( getIsInternetAvailable() && ( timeNow - m_LastConnectAttemptTimeGmtMs ) > NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS ) ) // time to verify internet still connected and what is local ip
+    else if( !getIsInternetAvailable() &&
+             ( timeNow - m_LastConnectAttemptTimeGmtMs ) >  NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS )
     {
-        // only reevaluate network every 10 seconds
+        // time to attempt internet connect/verifiy local ip so internet available is determined
+
         m_LastConnectAttemptTimeGmtMs = timeNow;
         m_ConnectAttemptCompleted = false;
         m_ConnectAttemptSucessfull = false;
         m_ConnectedLclIp = "";
 
-        // for debug only
-        // netAddr.dumpAddresses( aipAddresses );
-
         // start thread that will run ping/pong is port open test
-        // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond triggerDetermineIp" );
         triggerDetermineIp();
+    }
+    else if( getIsInternetAvailable() &&
+             ( timeNow - m_LastConnectAttemptTimeGmtMs ) > NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS )
+    {
+        // time to verify internet external ip has changed and need a new listen socket
+
+        // only reevalute network if a network connection test has been done at least once
+        if( m_Engine.getNetStatusAccum().isDirectConnectTested())
+        {
+            // only reevaluate network every 10 seconds
+            m_LastConnectAttemptTimeGmtMs = timeNow;
+            m_ConnectAttemptCompleted = false;
+            m_ConnectAttemptSucessfull = false;
+            m_ConnectedLclIp = "";
+
+            // for debug only
+            // netAddr.dumpAddresses( aipAddresses );
+
+            // start thread that will run ping/pong is port open test
+            triggerDetermineIp();
+        }
     }
 
     // LogMsg( LOG_INFO, " NetworkMonitor::onOncePerSecond done" );
