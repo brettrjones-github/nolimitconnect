@@ -178,6 +178,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ConnectId.h" />
     <ClInclude Include="..\..\GroupieId.h" />
     <ClInclude Include="..\..\HostedId.h" />
     <ClInclude Include="..\..\MatchParams.h" />
@@ -238,6 +239,7 @@
     <ClInclude Include="..\..\VxSearchFlags.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\ConnectId.cpp" />
     <ClCompile Include="..\..\GroupieId.cpp" />
     <ClCompile Include="..\..\HostedId.cpp" />
     <ClCompile Include="..\..\MatchParams.cpp" />

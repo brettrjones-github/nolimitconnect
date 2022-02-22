@@ -1,7 +1,8 @@
 INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/kodi_src/xbmc/xbmc
 
-HEADERS += 	$$PWD/DependLibs/PktLib/GroupieId.h \
+HEADERS += 	$$PWD/DependLibs/PktLib/ConnectId.h \
+    $$PWD/DependLibs/PktLib/GroupieId.h \
     $$PWD/DependLibs/PktLib/HostedId.h \
     $$PWD/DependLibs/PktLib/MatchParams.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
@@ -62,7 +63,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/GroupieId.h \
     $$PWD/DependLibs/PktLib/VxSearchDefs.h \
     $$PWD/DependLibs/PktLib/VxSearchFlags.h
 
-SOURCES += 	$$PWD/DependLibs/PktLib/GroupieId.cpp \
+SOURCES += 	$$PWD/DependLibs/PktLib/ConnectId.cpp \
+    $$PWD/DependLibs/PktLib/GroupieId.cpp \
     $$PWD/DependLibs/PktLib/HostedId.cpp \
     $$PWD/DependLibs/PktLib/MatchParams.cpp \
 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \

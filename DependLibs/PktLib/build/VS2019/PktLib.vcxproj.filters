@@ -184,6 +184,7 @@
     <ClInclude Include="..\..\GroupieId.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ConnectId.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\PktAnnList.cpp">
@@ -349,6 +350,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GroupieId.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ConnectId.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

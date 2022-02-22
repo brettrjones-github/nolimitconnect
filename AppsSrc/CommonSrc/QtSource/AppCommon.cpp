@@ -56,6 +56,7 @@
 #include <ptop_src/ptop_engine_src/ThumbMgr/ThumbInfo.h>
 
 #include <PktLib/VxCommon.h>
+#include <PktLib/ConnectId.h>
 
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxParse.h>
@@ -2273,5 +2274,6 @@ void  AppCommon::registerMetaData(void)
 	qRegisterMetaType<EJoinState>( "EJoinState" );
 	qRegisterMetaType<EOnlineState>( "EOnlineState" );
 	qRegisterMetaType<GroupieId>( "GroupieId" );
+	qRegisterMetaType<ConnectId>( "ConnectId" );
 }
 

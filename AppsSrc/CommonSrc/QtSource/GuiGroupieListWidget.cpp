@@ -297,10 +297,10 @@ GuiGroupieListItem* GuiGroupieListWidget::addOrUpdateHostSession( GuiGroupieList
         }
     }
 
-    if( hostItem )
-    {
-        hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( groupieSession->getHostType(), groupieSession->getUserIdent()->getNetIdent() ) );
-    }
+    //if( hostItem )
+    //{
+    //    hostItem->setJoinedState( m_Engine.fromGuiQueryJoinState( groupieSession->getHostType(), groupieSession->getUserIdent()->getNetIdent() ) );
+    //}
 
     return hostItem;
 }
@@ -397,12 +397,12 @@ void GuiGroupieListWidget::onConnectButtonClicked( GuiGroupieListItem* hostItem 
 void GuiGroupieListWidget::callbackGuiHostJoinRequested( GroupieId& groupieId, GuiHostJoin* guiHostJoin )
 {
     LogMsg( LOG_VERBOSE, "GuiGroupieListWidget::callbackGuiHostJoinRequested" );
-    HostedId hostedId = groupieId.getHostedId();
-    GuiGroupieListItem* listItem = findListItemWidgetByGroupieId( groupieId );
-    if( listItem && listItem->getHostSession() )
-    {
-        listItem->setJoinedState( guiHostJoin->getJoinState() );
-    }
+    //HostedId hostedId = groupieId.getHostedId();
+    //GuiGroupieListItem* listItem = findListItemWidgetByGroupieId( groupieId );
+    //if( listItem && listItem->getHostSession() )
+    //{
+    //    listItem->setJoinedState( guiHostJoin->getJoinState() );
+    //}
 }
 
 //============================================================================

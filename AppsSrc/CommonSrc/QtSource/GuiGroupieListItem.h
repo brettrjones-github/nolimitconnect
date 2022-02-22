@@ -14,14 +14,13 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ui_GuiGroupieListItem.h"
-#include "IdentLogicInterface.h"
+#include "IdentWidget.h"
 
 #include <QListWidgetItem>
 
 class GuiGroupieListSession;
 
-class GuiGroupieListItem : public IdentLogicInterface, public QListWidgetItem
+class GuiGroupieListItem : public IdentWidget, public QListWidgetItem
 {
 	Q_OBJECT;
 public:
@@ -34,17 +33,8 @@ public:
     void                        setHostSession( GuiGroupieListSession* hostSession );
     GuiGroupieListSession*      getHostSession( void );
 
-    VxPushButton*               getIdentAvatarButton( void ) override         { return ui.m_IconButton; }
-    VxPushButton*               getIdentFriendshipButton( void ) override { return ui.m_FriendshipButton; }
-    VxPushButton*               getIdentMenuButton( void ) override { return ui.m_MenuButton; }
-
-    virtual QLabel*             getIdentLine1( void ) override { return ui.m_TitlePart1; }
-    virtual QLabel*             getIdentLine2( void ) override { return ui.m_DescPart1; }
-
     void						onIdentAvatarButtonClicked( void ) override;
     void						onIdentMenuButtonClicked( void ) override;
-
-    void                        setJoinedState( EJoinState joinState );
 
     void						updateWidgetFromInfo( void );
 
@@ -60,23 +50,14 @@ signals:
 	void						signalIconButtonClicked( GuiGroupieListItem* listEntryWidget );
     void						signalFriendshipButtonClicked( GuiGroupieListItem* listEntryWidget );
 	void						signalMenuButtonClicked( GuiGroupieListItem* listEntryWidget );
-    void						signalJoinButtonClicked( GuiGroupieListItem* listEntryWidget );
-    void						signalConnectButtonClicked( GuiGroupieListItem* listEntryWidget );
 
-public slots:
-    void						slotJoinButtonPressed( void );
-    void						slotConnectButtonPressed( void );
  
 protected:
     virtual void				mousePressEvent( QMouseEvent * event ) override;
     virtual void				resizeEvent( QResizeEvent* resizeEvent ) override;
-    virtual void                showConnectButton( bool isAccepted );
 
 	//=== vars ===//
-    Ui::GuiGroupieListItemUi	ui;
-    AppCommon&					m_MyApp;
     bool                        m_IsThumbUpdated{ false };
-
 };
 
 
