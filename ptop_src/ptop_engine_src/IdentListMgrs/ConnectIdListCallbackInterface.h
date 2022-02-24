@@ -1,3 +1,4 @@
+#pragma once
 //============================================================================
 // Copyright (C) 2021 Brett R. Jones
 //
@@ -12,24 +13,17 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "GuiConnectMgr.h"
-#include "AppCommon.h"
+#include <GuiInterface/IDefs.h>
 
-//============================================================================
-GuiConnectMgr::GuiConnectMgr( AppCommon& app )
-    : QObject( &app )
-    , m_MyApp( app )
+class VxGUID;
+class ConnectId;
+
+class ConnectIdListCallbackInterface
 {
-}
+public:
+    virtual void				callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) {};
+    virtual void				callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) {};
+    virtual void				callbackConnectionReason( VxGUID& socketId, EConnectReason connectReason, bool enableReason ) {};
+    virtual void				callbackConnectionLost( VxGUID& socketId ) {};
+};
 
-//============================================================================
-void GuiConnectMgr::onAppCommonCreated( void )
-{
-    m_MyApp.getEngine().getConnectMgr().addConnectMgrClient( this, true );
-}
-
-//============================================================================
-bool GuiConnectMgr::isMessengerReady( void )
-{ 
-    return m_MyApp.isMessengerReady(); 
-}

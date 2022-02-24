@@ -88,18 +88,21 @@ enum EConnectReason
     eConnectReasonGroupLeave,
     eConnectReasonGroupUnJoin,
     eConnectReasonGroupSearch,
+    eConnectReasonGroupUserConnect,
 
     eConnectReasonChatRoomAnnounce,
     eConnectReasonChatRoomJoin,
     eConnectReasonChatRoomLeave,
     eConnectReasonChatRoomUnJoin,
     eConnectReasonChatRoomSearch,
+    eConnectReasonChatRoomUserConnect,
 
     eConnectReasonRandomConnectAnnounce,
     eConnectReasonRandomConnectJoin,
     eConnectReasonRandomConnectLeave,
     eConnectReasonRandomConnectUnJoin,
     eConnectReasonRandomConnectSearch,
+    eConnectReasonRandomConnectUserConnect,
 
     eConnectReasonAnnouncePing,
     eConnectReasonStayConnected,
@@ -122,6 +125,11 @@ enum EConnectReason
     eConnectReasonGroupGroupieUserListSearch,
     eConnectReasonChatRoomGroupieUserListSearch,
     eConnectReasonRandomConnectGroupieUserListSearch,
+
+    eConnectReasonUserRelayedConnect,
+    eConnectReasonUserDirectConnect,
+    eConnectReasonNetworkHost,
+    eConnectReasonConnectTest,
 
     eMaxConnectReason
 };
@@ -1163,6 +1171,8 @@ EConnectReason HostTypeToConnectSearchReason( EHostType hostType );
 EPluginType HostTypeToHostPlugin( EHostType hostType );
 //! convert Host Type to client plugin type
 EPluginType HostTypeToClientPlugin( EHostType hostType );
+//! convert Host Type to user connect reason
+EConnectReason HostTypeToGroupieConnectReason( EHostType hostType );
 //! convert Plugin Type to host type
 EHostType PluginTypeToHostType( EPluginType pluginType );
 // if host plugin return its client plugin else return pluginType param

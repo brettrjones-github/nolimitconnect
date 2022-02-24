@@ -38,7 +38,7 @@ void HostClientMgr::onPktHostJoinReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
-        m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
@@ -70,7 +70,7 @@ void HostClientMgr::onPktHostLeaveReply( VxSktBase* sktBase, VxPktHdr* pktHdr, V
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId( hostReply->getOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
-        m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {
@@ -102,7 +102,7 @@ void HostClientMgr::onPktHostUnJoinReply( VxSktBase* sktBase, VxPktHdr* pktHdr, 
     if( hostReply->isValidPkt() )
     {
         GroupieId groupieId( m_Engine.getMyOnlineId(), netIdent->getMyOnlineId(), hostReply->getHostType() );
-        m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
 
         if( ePluginAccessOk == hostReply->getAccessState() )
         {

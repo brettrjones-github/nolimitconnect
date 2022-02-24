@@ -247,7 +247,7 @@ void UserJoinMgr::onUserJoinedHost( GroupieId& groupieId, VxSktBase* sktBase, Vx
         if( m_LastJoinedGroupieId.isValid() && m_LastJoinedGroupieId != groupieId )
         {
             m_Engine.getPluginMgr().leavePreviousHost( groupieId );
-            m_Engine.getOnlineListMgr().disconnectIfIsOnlyUser( groupieId );
+            m_Engine.getConnectIdListMgr().disconnectIfIsOnlyUser( groupieId );
         }
 
         m_LastJoinedGroupieId = groupieId;

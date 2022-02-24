@@ -81,8 +81,7 @@ namespace
 //============================================================================
 P2PEngine::P2PEngine( VxPeerMgr& peerMgr )
 	: m_PeerMgr( peerMgr )
-	, m_OnlineListMgr( *this )
-	, m_DirectConnectListMgr( *this )
+	, m_ConnectIdListMgr( *this )
 	, m_IgnoreListMgr( *this )
 	, m_FriendListMgr( *this )
 	, m_GroupieListMgr( *this )

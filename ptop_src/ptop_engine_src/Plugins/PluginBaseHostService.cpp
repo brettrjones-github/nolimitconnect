@@ -206,7 +206,7 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
 
         if( ePluginAccessOk == joinReply.getAccessState() )
         {
-            m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+            m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
 
             m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
         }
@@ -217,14 +217,14 @@ void PluginBaseHostService::onPktHostJoinReq( VxSktBase * sktBase, VxPktHdr * pk
                 if( m_HostServerMgr.getJoinState( netIdent, joinReq->getHostType() ) == eJoinStateJoinWasGranted )
                 {
                     // even though friendship not high enough if admin has accepted then send accepted
-                    m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+                    m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
                     joinReply.setAccessState( ePluginAccessOk );
                     m_HostServerMgr.onUserJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
                 }
                 else
                 {
                     // add to join request list
-                    m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+                    m_Engine.getConnectIdListMgr().addConnection( sktBase->getConnectionId(), groupieId );
                     m_HostServerMgr.onJoinRequested( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
                 }
             }
@@ -272,7 +272,7 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
 
         if( ePluginAccessOk == pktReply.getAccessState() )
         {
-            m_Engine.getOnlineListMgr().addConnection( sktBase->getConnectionId(), groupieId );
+            m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
 
             m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
         }
@@ -287,7 +287,7 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
                     pktReply.setAccessState( ePluginAccessOk );
                 }
       
-                m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );                
+                m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );                
                 m_HostServerMgr.onUserLeftHost( sktBase, netIdent, pktReq->getSessionId(), pktReq->getHostType() );
             }
             else
@@ -308,7 +308,7 @@ void PluginBaseHostService::onPktHostLeaveReq( VxSktBase* sktBase, VxPktHdr* pkt
 
         broadcastToClients( &pktReply );
 
-        m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
     }
     else
     {
@@ -332,7 +332,7 @@ void PluginBaseHostService::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pk
         joinReply.setAccessState( m_HostServerMgr.getPluginAccessState( netIdent ) );
 
         GroupieId groupieId( netIdent->getMyOnlineId(), m_Engine.getMyOnlineId(), getHostType() );
-        m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+        m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
 
         if( ePluginAccessOk == joinReply.getAccessState() )
         {
@@ -348,7 +348,7 @@ void PluginBaseHostService::onPktHostUnJoinReq( VxSktBase* sktBase, VxPktHdr* pk
                     joinReply.setAccessState( ePluginAccessOk );
                 }
 
-                m_Engine.getOnlineListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
+                m_Engine.getConnectIdListMgr().removeConnection( sktBase->getConnectionId(), groupieId );
                 m_HostServerMgr.onUserUnJoined( sktBase, netIdent, joinReq->getSessionId(), joinReq->getHostType() );
             }
             else

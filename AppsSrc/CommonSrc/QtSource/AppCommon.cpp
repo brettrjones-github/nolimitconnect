@@ -167,6 +167,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AccountMgr( accountMgr )
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
+, m_ConnectIdListMgr( *this )
 , m_ThumbMgr( *this )
 , m_MembershipAvailableMgr( *this )
 , m_OfferClientMgr( *this )
@@ -176,8 +177,6 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_HostedListMgr( *this )
 , m_HostJoinMgr( *this )
 , m_UserJoinMgr( *this )
-, m_ConnectMgr( *this )
-
 , m_MyIcons( *this )
 , m_AppTheme( *this )
 , m_AppStyle( *this, m_AppTheme )
@@ -300,7 +299,7 @@ void AppCommon::loadWithoutThread( void )
 	m_HostedListMgr.onAppCommonCreated();
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
-	m_ConnectMgr.onAppCommonCreated();
+	m_ConnectIdListMgr.onAppCommonCreated();
 	m_GroupieListMgr.onAppCommonCreated();
 
     m_HomePage.initializeHomePage();
@@ -362,7 +361,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 	m_HostedListMgr.onAppCommonCreated();
 	m_HostJoinMgr.onAppCommonCreated();
 	m_UserJoinMgr.onAppCommonCreated();
-	m_ConnectMgr.onAppCommonCreated();
+	m_ConnectIdListMgr.onAppCommonCreated();
 	m_GroupieListMgr.onAppCommonCreated();
 
 	// should have enough to show home page
@@ -2186,7 +2185,7 @@ void AppCommon::onMessengerReady( bool isReady )
 		m_OfferHostMgr.onMessengerReady( isReady );
 		m_HostJoinMgr.onMessengerReady( isReady );
 		m_UserJoinMgr.onMessengerReady( isReady );
-		m_ConnectMgr.onMessengerReady( isReady );
+		m_ConnectIdListMgr.onMessengerReady( isReady );
 		checkSystemReady();
 	}
 }
@@ -2215,7 +2214,7 @@ bool AppCommon::checkSystemReady( void )
 		m_OfferHostMgr.onSystemReady( m_IsSystemReady );
 		m_HostJoinMgr.onSystemReady( m_IsSystemReady );
 		m_UserJoinMgr.onSystemReady( m_IsSystemReady );
-		m_ConnectMgr.onSystemReady( m_IsSystemReady );
+		m_ConnectIdListMgr.onSystemReady( m_IsSystemReady );
 
 		emit signalSystemReady( m_IsSystemReady );
 	}

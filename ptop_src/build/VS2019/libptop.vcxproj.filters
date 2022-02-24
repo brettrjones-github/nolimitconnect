@@ -847,12 +847,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Network\RcMulticast.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListMgr.cpp">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\DirectConnectListMgr.cpp">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -922,11 +916,11 @@
     <ClCompile Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.cpp">
       <Filter>Source Files\UserJoinMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.cpp">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.cpp">
       <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\IdentListMgrs\ConnectIdListMgr.cpp">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1912,12 +1906,6 @@
     <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\IdentListCallbackInterface.h">
       <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListMgr.h">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\DirectConnectListMgr.h">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -2005,14 +1993,14 @@
     <ClInclude Include="..\..\ptop_engine_src\UserJoinMgr\UserJoinedLastDb.h">
       <Filter>Source Files\UserJoinMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineSktList.h">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\OnlineListCallbackInterface.h">
-      <Filter>Source Files\IdentListMgrs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Network\NetworkStateIpChange.h">
       <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\ConnectIdListMgr.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\IdentListMgrs\ConnectIdListCallbackInterface.h">
+      <Filter>Source Files\IdentListMgrs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

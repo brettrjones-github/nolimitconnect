@@ -28,11 +28,12 @@
 #include <ptop_src/ptop_engine_src/GroupieListMgr/GroupieListMgr.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostedListMgr.h>
 #include <ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h>
-#include <ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h>
+
+#include <ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h>
 #include <ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h>
-#include <ptop_src/ptop_engine_src/IdentListMgrs/OnlineListMgr.h>
+
 #include <ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.h>
 #include <ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.h>
 #include <ptop_src/ptop_engine_src/NetworkMonitor/NetStatusAccum.h>
@@ -112,7 +113,7 @@ public:
     BlobMgr&				    getBlobMgr( void )							    { return m_BlobMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
-    DirectConnectListMgr&       getDirectConnectListMgr( void )                 { return m_DirectConnectListMgr; }
+    ConnectIdListMgr&           getConnectIdListMgr( void )                     { return m_ConnectIdListMgr; }
     FriendListMgr&              getFriendListMgr( void )                        { return m_FriendListMgr; }
     GroupieListMgr&             getGroupieListMgr( void )                       { return m_GroupieListMgr; }
     HostUrlListMgr&             getHostUrlListMgr( void )                       { return m_HostUrlListMgr; }
@@ -121,7 +122,6 @@ public:
     MembershipAvailableMgr&     getMembershipAvailableMgr( void )               { return m_MembershipAvailableMgr; }
     MembershipHostedMgr&        getMembershipHostedMgr( void )                  { return m_MembershipHostedMgr; }
     NearbyListMgr&              getNearbyListMgr( void )                        { return m_NearbyListMgr; }
-    OnlineListMgr&              getOnlineListMgr( void )                        { return m_OnlineListMgr; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
     NetStatusAccum&             getNetStatusAccum( void )                       { return m_NetStatusAccum; }
     NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; }
@@ -738,8 +738,7 @@ protected:
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
-    OnlineListMgr               m_OnlineListMgr;
-    DirectConnectListMgr        m_DirectConnectListMgr;
+    ConnectIdListMgr            m_ConnectIdListMgr;
     IgnoreListMgr               m_IgnoreListMgr;
     FriendListMgr               m_FriendListMgr;
     GroupieListMgr              m_GroupieListMgr;

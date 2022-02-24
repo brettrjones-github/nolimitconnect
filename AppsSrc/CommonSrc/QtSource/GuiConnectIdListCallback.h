@@ -13,27 +13,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <ptop_src/ptop_engine_src/ConnectMgr/ConnectCallbackInterface.h>
+#include <PktLib/ConnectId.h>
 
-#include <QObject>
+class GuiGroupie;
 
-class AppCommon;
-
-class GuiConnectMgr : public QObject, public ConnectCallbackInterface
+class GuiConnectIdListCallback
 {
-    Q_OBJECT
 public:
-    GuiConnectMgr() = delete;
-    GuiConnectMgr( AppCommon& app );
-    GuiConnectMgr( const GuiConnectMgr& rhs ) = delete;
-	virtual ~GuiConnectMgr() = default;
-
-    virtual void                onAppCommonCreated( void );
-    virtual void                onMessengerReady( bool ready ) { }
-    virtual bool                isMessengerReady( void );
-    virtual void                onSystemReady( bool ready ) { }
-
-protected:
-    
-    AppCommon&                  m_MyApp;
+    virtual void				callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) {};
+    virtual void				callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) {};
 };
+

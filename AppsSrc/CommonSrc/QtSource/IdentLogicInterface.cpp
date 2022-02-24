@@ -148,7 +148,7 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent, bool queryThumb 
 {
 	if( netIdent )
 	{
-		setIdentOnlineState( netIdent->isOnline() );
+		bool isOnline = m_MyApp.getConnectIdListMgr().isOnline( netIdent->getMyOnlineId() );
 		getIdentLine1()->setText( netIdent->getOnlineName() );
 		getIdentLine2()->setText( netIdent->getOnlineDescription() );
 		getIdentFriendshipButton()->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( netIdent->getMyFriendshipToHim() ) );
@@ -160,7 +160,7 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent, bool queryThumb 
 
 		if( getIdentPushToTalkButton() )
 		{
-			if( m_MyApp.getMembershipAvailableMgr().canPushToTalk( netIdent->getMyOnlineId() ) )
+			if( isOnline && netIdent->isMyAccessAllowedFromHim( ePluginTypePushToTalk ) )
 			{
 				getIdentPushToTalkButton()->setVisible( true );
 			}
@@ -186,22 +186,22 @@ void IdentLogicInterface::updateIdentity( VxNetIdent* netIdent, bool queryThumb 
 		if( isMyself )
 		{
 			getIdentFriendshipButton()->setIcon( eMyIconAdministrator ); // eMyIconAdministrator );
-		}
-
-		if( isMyself || netIdent->canDirectConnectToUser() )
-		{
-			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( true );
-		}
-
-		if( isMyself || netIdent->isOnline() )
-		{
 			getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
 			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
+			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( true );
+			getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOnlineColor ) );
 		}
 		else
 		{
-			getIdentFriendshipButton()->setNotifyOnlineEnabled( true, eMyIconNotifyOfflineOverlay );
-			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( eLayerNotifyOfflineColor ) );
+			getIdentFriendshipButton()->setNotifyOnlineEnabled( true );
+			getIdentFriendshipButton()->setNotifyOnlineColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOnlineColor ) );
+
+			bool canDirectConnect = netIdent->canDirectConnectToUser();
+			getIdentFriendshipButton()->setNotifyDirectConnectEnabled( canDirectConnect );
+			if( canDirectConnect )
+			{		
+				getIdentFriendshipButton()->setNotifyDirectConnectColor( m_MyApp.getAppTheme().getColor( isOnline ? eLayerNotifyOnlineColor : eLayerNotifyOnlineColor ) );
+			}
 		}
 	}
 }

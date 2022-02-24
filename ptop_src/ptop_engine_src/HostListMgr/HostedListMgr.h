@@ -42,7 +42,7 @@ public:
     void                        lockList( void )    { m_HostedInfoMutex.lock(); }
     void                        unlockList( void )  { m_HostedInfoMutex.unlock(); }
 
-    void                        addHostedListMgrClient( HostedListCallbackInterface* client, bool enable );
+    void                        wantHostedListCallback( HostedListCallbackInterface* client, bool enable );
 
     bool                        fromGuiQueryMyHostedInfo( EHostType hostType, std::vector<HostedInfo>& hostedInfoList );
     bool                        fromGuiQueryHostedInfoList( EHostType hostType, std::vector<HostedInfo>& hostedInfoList, VxGUID& hostIdIfNullThenAll );

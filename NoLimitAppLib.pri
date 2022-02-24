@@ -198,7 +198,8 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FileXferWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendListEntryWidget.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendListWidget.h \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiConnectMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiConnectIdListMgr.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiConnectIdListCallback.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileActionSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileXferSession.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.h \
@@ -563,7 +564,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendListDelegate.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/FriendListWidget.cpp \
-	$$PWD/AppsSrc/CommonSrc/QtSource/GuiConnectMgr.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/GuiConnectIdListMgr.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileActionSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiFileXferSession.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/GuiHelpers.cpp \

@@ -1195,5 +1195,5 @@ void PluginMgr::leavePreviousHost( GroupieId& groupieId )
 		plugin->sendLeaveHost( groupieId );
 	}
 
-	m_Engine.getOnlineListMgr().disconnectIfIsOnlyUser( groupieId );
+	m_Engine.getConnectIdListMgr().disconnectIfIsOnlyUser( groupieId );
 }

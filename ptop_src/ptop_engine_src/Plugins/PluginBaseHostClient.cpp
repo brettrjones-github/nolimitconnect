@@ -175,7 +175,7 @@ void PluginBaseHostClient::sendLeaveHost( EHostType hostType, VxGUID& sessionId,
 bool PluginBaseHostClient::sendLeaveHost( GroupieId& groupieId )
 {
     bool pktSent{ false };
-    VxSktBase* sktBase =  m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+    VxSktBase* sktBase =  m_Engine.getConnectIdListMgr().findHostConnection( groupieId );
     if( sktBase )
     {
         PktHostLeaveReq leaveReq;
@@ -214,7 +214,7 @@ void PluginBaseHostClient::sendUnJoinHost( EHostType hostType, VxGUID& sessionId
 bool PluginBaseHostClient::sendUnJoinHost( GroupieId& groupieId )
 {
     bool pktSent{ false };
-    VxSktBase* sktBase = m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+    VxSktBase* sktBase = m_Engine.getConnectIdListMgr().findHostConnection( groupieId );
     if( sktBase )
     {
         PktHostUnJoinReq leaveReq;
@@ -242,7 +242,7 @@ bool PluginBaseHostClient::sendUnJoinHost( GroupieId& groupieId )
 bool PluginBaseHostClient::queryUserListFromHost( GroupieId& groupieId )
 {
     bool pktSent{ false };
-    VxSktBase* sktBase = m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+    VxSktBase* sktBase = m_Engine.getConnectIdListMgr().findHostConnection( groupieId );
     if( sktBase )
     {
         PktGroupieSearchReq pktReq;

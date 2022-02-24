@@ -166,15 +166,13 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.h \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.h \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/OnlineListCallbackInterface.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/OnlineListMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/OnlineSktList.h \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.h \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaClient.h \
@@ -474,13 +472,11 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/HostListMgr/HostUrlListMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/DirectConnectListMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/FriendListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IdentListMgrBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/IgnoreListMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/NearbyListMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/OnlineListMgr.cpp \
-    $$PWD/ptop_src/ptop_engine_src/IdentListMgrs/OnlineSktList.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/AudioUtil.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/EchoCancel.cpp \
     $$PWD/ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.cpp \

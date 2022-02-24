@@ -532,6 +532,11 @@ void ConnectionMgr::doneWithConnection( VxGUID sessionId, VxGUID onlineId, IConn
     }
 
     unlockConnectionList();
+    if( sktBase )
+    {
+        m_Engine.getConnectIdListMgr().removeConnectionReason( sktBase->getConnectionId(), connectReason );
+    }
+
     if( sktDisconnected && sktBase )
     {
         // this has to be done after list is unlocked or mutex delock can occur
@@ -698,11 +703,13 @@ EConnectStatus ConnectionMgr::directConnectTo(  std::string                 ipAd
             return eConnectStatusSendPktAnnFailed;
         }
 
+        m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getConnectionId(), connectReason );
         m_HandshakeMutex.lock();
         m_HandshakeList.addHandshake(sktBase, sessionId, onlineId, callback, connectReason);
         m_HandshakeMutex.unlock();
         connectStatus = eConnectStatusHandshaking;
         retSktBase = (VxSktBase *)sktBase;
+        
     }
     else
     {

@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <ptop_src/ptop_engine_src/IdentListMgrs/OnlineListCallbackInterface.h>
+#include <ptop_src/ptop_engine_src/IdentListMgrs/ConnectIdListCallbackInterface.h>
 
 #include <PktLib/GroupieId.h>
 
@@ -26,9 +26,8 @@ class UserOnlineCallbackInterface;
 class VxSktBase;
 class VxNetIdent;
 
-class UserOnlineMgr : public OnlineListCallbackInterface
+class UserOnlineMgr : public ConnectIdListCallbackInterface
 {
-
 public:
 	UserOnlineMgr( P2PEngine& engine, const char * dbName, const char * dbStateName );
 	virtual ~UserOnlineMgr() = default;
@@ -55,6 +54,7 @@ public:
 
 protected:
     void				        callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline ) override;
+    void				        callbackConnectionStatusChange( ConnectId& connectId, bool isConnected ) override;
 
     void                        updateUserSession( VxSktBase * sktBase, VxNetIdent * netIdent, BaseSessionInfo& sessionInfo, bool leftHost = false );
     void                        updateUserSession( GroupieId& groupieId, VxSktBase* sktBase, VxNetIdent* netIdent, BaseSessionInfo& sessionInfo, bool leftHost );

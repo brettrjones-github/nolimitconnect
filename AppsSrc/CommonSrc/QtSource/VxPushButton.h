@@ -56,11 +56,17 @@ public:
 
     void						setNotifyJoinEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyJoinOverlay );
     bool						getNotifyJoinEnabled( void )						{ return m_NotifyJoinEnabled; }
+
 	void						setNotifyOnlineEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOnlineOverlay );
+    bool						getNotifyOnlineEnabled( void )                      { return m_NotifyOnlineEnabled; }
     void						setNotifyOnlineColor( QColor onlineColor )          { m_NotifyIconOnlineColor = onlineColor; }
-	bool						getNotifyOnlineEnabled( void )						{ return m_NotifyOnlineEnabled; }
+    QColor						getNotifyOnlineColor( void )                        { return m_NotifyIconOnlineColor; }
+
     void						setNotifyDirectConnectEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyDirectConnectOverlay );
     bool						getNotifyDirectConnectEnabled( void )               { return m_NotifyDirectConnectEnabled; }
+    void						setNotifyDirectConnectColor( QColor onlineColor )   { m_NotifyIconnDirectConnectColor = onlineColor; }
+    QColor						getNotifyDirectConnectColor( void )                 { return m_NotifyIconnDirectConnectColor; }
+
     void						setNotifyInGroupEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyInGroupOverlay );
     bool						getNotifyInGroupEnabled( void )                     { return m_NotifyInGroupEnabled; }
     void						setNotifyOfferEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOfferOverlay );
@@ -149,6 +155,7 @@ protected:
     EMyIcons					m_NotifyDirectConnectIcon{ eMyIconNone };
     EMyIcons					m_LastNotifyDirectConnectIcon{ eMyIconNone };
     QPixmap						m_NotifyIconDirectConnectImage;
+    QColor						m_NotifyIconnDirectConnectColor;
     QColor						m_NotifyLastIconDirectConnectColor;
     QSize						m_NotifyLastIconDirectConnectSize{ 0, 0 };
 

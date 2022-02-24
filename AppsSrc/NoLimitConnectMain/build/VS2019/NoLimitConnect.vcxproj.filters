@@ -476,9 +476,6 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\FriendListWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiConnectMgr.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiFileActionSession.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -907,6 +904,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.h">
       <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.h">
+      <Filter>Source Files\GuiUser</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1361,9 +1361,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\FriendListWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiConnectMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiFileActionSession.cpp">
@@ -1993,6 +1990,9 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListMgr.cpp">
+      <Filter>Source Files\GuiUser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppDefs.h">
@@ -2242,6 +2242,9 @@
       <Filter>Source Files\GuiUser</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiUserUpdateCallback.h">
+      <Filter>Source Files\GuiUser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CommonSrc\QtSource\GuiConnectIdListCallback.h">
       <Filter>Source Files\GuiUser</Filter>
     </ClInclude>
   </ItemGroup>

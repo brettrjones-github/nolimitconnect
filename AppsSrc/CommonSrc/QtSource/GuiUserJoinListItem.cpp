@@ -23,7 +23,7 @@
 GuiUserJoinListItem::GuiUserJoinListItem(QWidget *parent  )
 : IdentWidget( parent )
 , m_MyApp( GetAppInstance() )
-, m_ConnectMgr( m_MyApp.getConnectMgr() )
+, m_ConnectIdListMgr( m_MyApp.getConnectIdListMgr() )
 , m_OfferClientMgr( m_MyApp.getOfferClientMgr() )
 , m_UserMgr( m_MyApp.getUserMgr() )
 , m_UserJoinMgr( m_MyApp.getUserJoinMgr() )

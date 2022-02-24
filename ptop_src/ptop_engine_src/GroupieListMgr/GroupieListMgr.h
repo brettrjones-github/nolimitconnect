@@ -116,6 +116,8 @@ protected:
     void                        updateFromGroupieSearchBlob( EHostType hostType, VxGUID& hostOnlineId, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, PktBlobEntry& blobEntry, int hostInfoCount );
     bool                        requestMoreGroupiesFromHost( EHostType hostType, VxGUID& searchSessionId, VxSktBase* sktBase, VxNetIdent* netIdent, VxGUID& nextGroupieOnlineId, PluginBase* plugin );
 
+    void                        connectToGroupieIfPossible( GroupieInfo& groupieInfo, EConnectReason connectReason );
+
     P2PEngine&                  m_Engine;
     VxMutex                     m_GroupieInfoMutex;
     GroupieListDb               m_GroupieInfoListDb;

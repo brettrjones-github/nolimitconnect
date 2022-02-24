@@ -28,18 +28,21 @@ namespace
         "Connect Reason Group Leave ",
         "Connect Reason Group UnJoin ",
         "Connect Reason Group Search ",
+        "Connect Reason Group User Connect ",
 
         "Connect Reason Chat RoomAnnounce ",
         "Connect Reason Chat Room Join ",
         "Connect Reason Chat Room Leave ",
         "Connect Reason Chat Room UnJoin ",
         "Connect Reason Chat Room Search ",
+        "Connect Reason Chat Room User Connect ",
 
         "Connect Reason Random Connect Announce ",
         "Connect Reason Random Connect Join ",
         "Connect Reason Random Connect Leave ",
         "Connect Reason Random Connect UnJoin ",
         "Connect Reason Random Connect Search ",  
+        "Connect Reason Random Connect User Connect ",
 
         "Connect Reason Announce Ping ",  
         "Connect Reason Stay Connected ",
@@ -54,6 +57,19 @@ namespace
 
         "Connect Reason Request Identity ",
         "Connect Reason Network Host List Search",
+
+        "Connect Reason Group User List Search",
+        "Connect Reason Chat Room User List Search",
+        "Connect Reason Random Connect User List Search",
+
+        "Connect Reason Group Groupie List Search",
+        "Connect Reason Chat Room Groupie List Search",
+        "Connect Reason Random Connect Groupie List Search",
+
+        "Connect Reason User Relayed Connect",
+        "Connect Reason User Direct Connect",
+        "Connect Reason Network Host",
+        "Connect Reason Connect Test",
 
         "Max Connect Reason ",
     };
@@ -1212,6 +1228,34 @@ EPluginType HostTypeToClientPlugin( EHostType hostType )
         LogMsg( LOG_ERROR, "HostTypeToClientPlugin unknown host type %d", hostType );
         vx_assert( false );
         return ePluginTypeInvalid;
+    }
+}
+
+//============================================================================
+//! convert Host Type to user connect reason
+EConnectReason HostTypeToGroupieConnectReason( EHostType hostType )
+{
+    switch( hostType )
+    {
+    case eHostTypeGroup:
+        return eConnectReasonGroupUserConnect;
+    case eHostTypeChatRoom:
+        return eConnectReasonChatRoomUserConnect;
+    case eHostTypeRandomConnect:
+        return eConnectReasonRandomConnectUserConnect;
+    case eHostTypePeerUserRelayed:
+        return eConnectReasonUserRelayedConnect;
+    case eHostTypePeerUserDirect:
+        return eConnectReasonUserDirectConnect;
+    case eHostTypeNetwork:
+        return eConnectReasonNetworkHost;
+    case eHostTypeConnectTest:
+        return eConnectReasonConnectTest;
+    case eHostTypeUnknown:
+    default:
+        LogMsg( LOG_ERROR, "HostTypeToHostPlugin unknown host type %d", hostType );
+        // vx_assert( false );
+        return eConnectReasonUnknown;
     }
 }
 

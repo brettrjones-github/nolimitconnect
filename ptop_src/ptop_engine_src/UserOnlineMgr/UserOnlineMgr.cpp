@@ -26,7 +26,7 @@
 UserOnlineMgr::UserOnlineMgr( P2PEngine& engine, const char * dbName, const char * dbStateName )
 : m_Engine( engine )
 {
-    m_Engine.getOnlineListMgr().wantOnlineCallback( this, true );
+    m_Engine.getConnectIdListMgr().wantConnectIdListCallback( this, true );
 }
 
 //============================================================================
@@ -54,6 +54,12 @@ void UserOnlineMgr::callbackOnlineStatusChange( VxGUID& onlineId, bool isOnline 
     }
 
     unlockResources();
+}
+
+//============================================================================
+void UserOnlineMgr::callbackConnectionStatusChange( ConnectId& connectId, bool isConnected )
+{
+
 }
 
 //============================================================================

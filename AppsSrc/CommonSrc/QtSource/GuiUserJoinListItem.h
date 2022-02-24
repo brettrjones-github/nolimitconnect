@@ -18,7 +18,7 @@
 #include <QListWidgetItem>
 #include <QWidget>
 
-class GuiConnectMgr;
+class GuiConnectIdListMgr;
 class GuiOfferClientMgr;
 class GuiUserJoinSession;
 class GuiUser;
@@ -63,7 +63,7 @@ protected:
 
 	//=== vars ===//
     AppCommon&					m_MyApp;
-    GuiConnectMgr&				m_ConnectMgr;
+    GuiConnectIdListMgr&		m_ConnectIdListMgr;
     GuiOfferClientMgr&			m_OfferClientMgr;
     GuiUserMgr&					m_UserMgr;
     GuiUserJoinMgr&				m_UserJoinMgr;

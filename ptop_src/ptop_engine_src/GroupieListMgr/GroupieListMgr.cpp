@@ -586,6 +586,7 @@ void GroupieListMgr::groupieSearchResult( EHostType hostType, VxGUID& searchSess
     if( updateGroupieInfo( hostType, groupieInfo, netIdent, sktBase, &resultInfo ) )
     {
         announceGroupieInfoSearchResult( &resultInfo, searchSessionId );
+        connectToGroupieIfPossible( resultInfo, HostTypeToGroupieConnectReason( hostType ) );
     }
 }
 
@@ -1245,4 +1246,10 @@ bool GroupieListMgr::requestMoreGroupiesFromHost( EHostType hostType, VxGUID& se
     pktReq.setSearchSessionId( searchSessionId );
     pktReq.setNextSearchOnlineId( nextGroupieOnlineId );
     return plugin->txPacket( netIdent, sktBase, &pktReq );
+}
+
+//============================================================================
+void GroupieListMgr::connectToGroupieIfPossible( GroupieInfo& groupieInfo, EConnectReason connectReason )
+{
+
 }

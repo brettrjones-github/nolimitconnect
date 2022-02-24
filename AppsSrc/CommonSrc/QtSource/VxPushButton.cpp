@@ -125,6 +125,7 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 , m_BlinkState( 0 )
 {
     m_NotifyIconOnlineColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
+    m_NotifyIconnDirectConnectColor = m_MyApp.getAppTheme().getButtonColor( this, eColorLayerNotifyOnline );
 	initQButtonPro();
 }
 
@@ -586,7 +587,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
     if( m_NotifyDirectConnectEnabled && (eMyIconNone != m_NotifyDirectConnectIcon) )
     {
         // draw online notify dot
-        iconColor = appTheme.getButtonColor( this, eColorLayerNotifyOnline );
+        iconColor = m_NotifyIconnDirectConnectColor;
 
         if( (m_NotifyLastIconDirectConnectColor != iconColor)
             || m_NotifyIconDirectConnectImage.isNull()
@@ -712,8 +713,7 @@ void VxPushButton::paintEvent( QPaintEvent* ev )
 }
 
 //============================================================================
-void VxPushButton::setIcons(	EMyIcons	normalIcon,
-								EMyIcons	overlay1Icon )
+void VxPushButton::setIcons( EMyIcons normalIcon, EMyIcons overlay1Icon )
 {
 	m_MyIcon = normalIcon;
 	m_OverlayIcon = overlay1Icon;

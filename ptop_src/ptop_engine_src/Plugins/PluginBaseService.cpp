@@ -36,16 +36,16 @@ void PluginBaseService::broadcastToClients( VxPktHdr* pktHdr )
 {
     if( pktHdr && pktHdr->isValidPkt() )
     {
-        std::set<std::pair<VxGUID, VxGUID>> connectIdSet;
-        if( m_Engine.getOnlineListMgr().getConnections( getHostedId(), connectIdSet ) )
+        std::set<ConnectId> connectIdSet;
+        if( m_Engine.getConnectIdListMgr().getConnections( getHostedId(), connectIdSet ) )
         {
-            for( auto& connectPair : connectIdSet )
+            for( auto& connectId : connectIdSet )
             {
                 m_Engine.getPeerMgr().lockSktList();
-                VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( connectPair.first, true );
+                VxSktBase* sktBase = m_Engine.getPeerMgr().findSktBase( const_cast<ConnectId&>(connectId).getSocketId(), true );
                 if( sktBase && sktBase->isConnected() )
                 {
-                    txPacket( connectPair.second, sktBase, pktHdr );
+                    txPacket( const_cast< ConnectId& >( connectId ).getGroupieOnlineId(), sktBase, pktHdr );
                 }
 
                 m_Engine.getPeerMgr().unlockSktList();

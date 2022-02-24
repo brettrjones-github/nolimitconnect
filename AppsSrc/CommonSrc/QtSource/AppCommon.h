@@ -19,7 +19,7 @@
 #include "CamLogic.h"
 #include "HomeWindow.h"
 #include "FriendList.h"
-#include "GuiConnectMgr.h"
+#include "GuiConnectIdListMgr.h"
 #include "GuiMembershipAvailableMgr.h"
 #include "GuiOfferClientMgr.h"
 #include "GuiOfferHostMgr.h"
@@ -140,7 +140,7 @@ public:
     RenderGlWidget *            getRenderConsumer( void );
     MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
 	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
-    GuiConnectMgr&              getConnectMgr( void )						{ return m_ConnectMgr; }
+    GuiConnectIdListMgr&        getConnectIdListMgr( void )					{ return m_ConnectIdListMgr; }
     GuiGroupieListMgr&          getGroupieListMgr( void )                   { return m_GroupieListMgr; }
     GuiHostedListMgr&           getHostedListMgr( void )                    { return m_HostedListMgr; }
     GuiHostJoinMgr&             getHostJoinMgr( void )                      { return m_HostJoinMgr; }
@@ -756,6 +756,7 @@ private:
     AccountMgr&				    m_AccountMgr;
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
+    GuiConnectIdListMgr			m_ConnectIdListMgr;
     GuiThumbMgr					m_ThumbMgr;
     GuiMembershipAvailableMgr   m_MembershipAvailableMgr;
     GuiOfferClientMgr		    m_OfferClientMgr;
@@ -765,8 +766,6 @@ private:
     GuiHostedListMgr			m_HostedListMgr;
     GuiHostJoinMgr				m_HostJoinMgr;
     GuiUserJoinMgr				m_UserJoinMgr;
-    GuiConnectMgr				m_ConnectMgr;
-
 
 	MyIcons					    m_MyIcons;
 	VxAppTheme					m_AppTheme;

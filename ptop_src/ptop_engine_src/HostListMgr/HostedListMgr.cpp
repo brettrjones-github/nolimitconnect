@@ -180,8 +180,14 @@ void HostedListMgr::clearHostedInfoList( void )
 }
 
 //============================================================================
-void HostedListMgr::addHostedListMgrClient( HostedListCallbackInterface* client, bool enable )
+void HostedListMgr::wantHostedListCallback( HostedListCallbackInterface* client, bool enable )
 {
+    if( !client )
+    {
+        LogMsg( LOG_ERROR, "HostJoinMgr::wantHostedListCallback invalid param" );
+        return;
+    }
+
     lockClientList();
     for( auto iter = m_HostedInfoListClients.begin(); iter != m_HostedInfoListClients.end(); ++iter )
     {

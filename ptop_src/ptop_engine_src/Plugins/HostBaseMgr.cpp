@@ -887,7 +887,7 @@ bool HostBaseMgr::connectToHostByPtopUrlAndReason( EHostType hostType, VxGUID& s
         {
             // try lookup by groupie id
             GroupieId groupieId( m_Engine.getMyOnlineId(), hostUrl.getOnlineId(), hostType );
-            sktBase = m_Engine.getOnlineListMgr().findHostConnection( groupieId );
+            sktBase = m_Engine.getConnectIdListMgr().findHostConnection( groupieId );
             if( sktBase )
             {
                 result = true;
