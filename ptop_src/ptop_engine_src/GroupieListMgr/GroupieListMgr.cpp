@@ -1251,5 +1251,19 @@ bool GroupieListMgr::requestMoreGroupiesFromHost( EHostType hostType, VxGUID& se
 //============================================================================
 void GroupieListMgr::connectToGroupieIfPossible( GroupieInfo& groupieInfo, EConnectReason connectReason )
 {
-
+    VxPtopUrl ptopUrl( groupieInfo.getGroupieUrl() );
+    if( ptopUrl.isValid() )
+    {
+        if( !m_Engine.getConnectIdListMgr().isOnline( ptopUrl.getOnlineId() ) )
+        {
+            VxGUID sessionId;
+            sessionId.initializeWithNewVxGUID();
+            VxSktBase* sktBase = nullptr;
+            m_Engine.getConnectionMgr().requestConnection( sessionId, ptopUrl.getUrl(), ptopUrl.getOnlineId(), this, sktBase, connectReason );
+        }     
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "GroupieListMgr::connectToGroupieIfPossible invalid url for %s", groupieInfo.getGroupieTitle().c_str() );
+    }
 }

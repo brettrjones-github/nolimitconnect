@@ -44,6 +44,7 @@ public:
     VxSktBase*                  findPeerConnection( VxGUID& onlineId );
     virtual bool                findConnectionId( GroupieId& groupieId, VxGUID& retSktConnectId );
     VxSktBase*                  findSktBase( VxGUID& connectId );
+    VxSktBase*                  findAnyOnlineConnection( VxGUID& onlineId );
 
     void                        addConnection( VxGUID& sktConnectId, GroupieId& groupieId );
     void                        removeConnection( VxGUID& sktConnectId, GroupieId& groupieId );

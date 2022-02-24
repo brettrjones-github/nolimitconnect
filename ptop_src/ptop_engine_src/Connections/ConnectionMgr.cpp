@@ -443,31 +443,46 @@ EConnectStatus ConnectionMgr::requestConnection( VxGUID& sessionId, std::string 
 
     LogMsg( LOG_DEBUG, "ConnectionMgr::requestConnection %s", DescribeConnectReason( connectReason ) );
     // first see if we already have a connection to the requested onlineId
-    VxSktBase *sktBase = nullptr;
+    VxSktBase* sktBase = nullptr;
     bool isDisconnected = false;
 
-    lockConnectionList();
-    ConnectedInfo* connectInfo = m_AllList.getConnectedInfo( onlineId );
-    if( connectInfo )
+    // see if we already have a connection for a different reason
+    bool isOnline = m_Engine.getConnectIdListMgr().isOnline( onlineId );
+    if( isOnline )
     {
-        sktBase = connectInfo->getSktBase();
-        if( sktBase )
-        {
-            if( sktBase->isConnected() )
-            {
-                uint64_t timeNow = GetTimeStampMs();
-                HandshakeInfo shakeInfo( sktBase, sessionId, onlineId, callback, connectReason, timeNow );
-                connectInfo->addConnectReason( shakeInfo );
-                isDisconnected = false;
-            }
-            else
-            {
-                isDisconnected = true;
-            }
-        }
+        sktBase = m_Engine.getConnectIdListMgr().findAnyOnlineConnection( onlineId );
     }
 
-    unlockConnectionList();
+    if( !sktBase )
+    {
+        lockConnectionList();
+        ConnectedInfo* connectInfo = m_AllList.getConnectedInfo( onlineId );
+        if( connectInfo )
+        {
+            sktBase = connectInfo->getSktBase();
+            if( sktBase )
+            {
+                if( sktBase->isConnected() )
+                {
+                    uint64_t timeNow = GetTimeStampMs();
+                    HandshakeInfo shakeInfo( sktBase, sessionId, onlineId, callback, connectReason, timeNow );
+                    connectInfo->addConnectReason( shakeInfo );
+                    isDisconnected = false;
+                }
+                else
+                {
+                    isDisconnected = true;
+                }
+            }
+        }
+
+        unlockConnectionList();
+    }
+
+    if( sktBase )
+    {
+        m_Engine.getConnectIdListMgr().addConnectionReason( sktBase->getConnectionId(), connectReason );
+    }
 
     if( isDisconnected && sktBase )
     {

@@ -78,6 +78,8 @@ public:
 
     void                        wantGuiUserUpdateCallbacks( GuiUserUpdateCallback* callback, bool wantCallback );
 
+    void                        checkOnlineStatusChange( VxGUID& onlineId, bool isOnline );
+
 signals:
     void				        signalMyIdentUpdated( GuiUser* guiUser );
 
@@ -85,7 +87,7 @@ signals:
     void				        signalUserAdded( GuiUser* guiUser ); 
     void				        signalUserRemoved( VxGUID onlineId ); 
     void                        signalUserUpdated( GuiUser* guiUser );
-    void                        signalUserOnlineStatusChange( GuiUser* user);
+    void                        signalUserOnlineStatus( GuiUser* guiUser, bool isOnline );
 
     void				        signalInternalIndentListUpdate( EUserViewType listType, VxGUID onlineId, uint64_t timestamp );
     void				        signalInternalIndentListRemove( EUserViewType listType, VxGUID onlineId );

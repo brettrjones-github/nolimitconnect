@@ -471,7 +471,9 @@ void GuiUserMgr::onUserOnlineStatusChange( GuiUser* user )
 {
     if( isMessengerReady() )
     {
-        emit signalUserOnlineStatusChange( user );
+        bool isOnline = m_MyApp.getConnectIdListMgr().isOnline( user->getMyOnlineId() );
+        user->setOnlineStatus( isOnline );
+        emit signalUserOnlineStatus( user, isOnline );
         sendUserUpdatedToCallbacks( user );
     }
 }
@@ -611,4 +613,16 @@ void GuiUserMgr::toGuiUserOnlineStatus( VxNetIdent* hostIdent, bool isOnline )
     }
 
     emit signalInternalUserOnlineStatus( new VxNetIdent( *hostIdent ), isOnline );
+}
+
+//============================================================================
+void GuiUserMgr::checkOnlineStatusChange( VxGUID& onlineId, bool isOnline )
+{
+    GuiUser* guiUser = findUser( onlineId );
+    if( guiUser && guiUser->isOnline() != isOnline )
+    {
+        guiUser->setOnlineStatus( isOnline );
+        emit signalUserOnlineStatus( guiUser, isOnline );
+        sendUserUpdatedToCallbacks( guiUser );
+    }
 }

@@ -151,6 +151,7 @@ void GuiConnectIdListMgr::slotInternalConnectionLost( VxGUID socketId )
 //============================================================================
 void GuiConnectIdListMgr::onOnlineStatusChange( VxGUID& onlineId, bool isOnline )
 {
+    m_MyApp.getUserMgr().checkOnlineStatusChange( onlineId, isOnline );
     announceOnlineStatusChange( onlineId, isOnline );
 }
 

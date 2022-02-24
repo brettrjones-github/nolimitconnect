@@ -384,6 +384,34 @@ VxSktBase* ConnectIdListMgr::findSktBase( VxGUID& connectId )
 }
 
 //============================================================================
+VxSktBase* ConnectIdListMgr::findAnyOnlineConnection( VxGUID& onlineId )
+{
+    std::set<VxGUID> sktConnectIdList;
+    lockList();
+    for( auto& connectId : m_ConnectIdList )
+    {
+        if( const_cast<ConnectId& >( connectId ).getGroupieId().getHostedOnlineId() == onlineId )
+        {
+            sktConnectIdList.insert( const_cast< ConnectId& >( connectId ).getSocketId() );
+        }
+    }
+
+    unlockList();
+
+    VxSktBase* sktBase = nullptr;
+    for( auto sktConnectId : sktConnectIdList )
+    {
+        sktBase = findSktBase( sktConnectId );
+        if( sktBase )
+        {
+            break;
+        }
+    }
+
+    return sktBase;
+}
+
+//============================================================================
 void ConnectIdListMgr::onUserOnlineStatusChange( VxGUID& onlineId, bool isOnline )
 {
     announceOnlineStatus( onlineId, isOnline );
