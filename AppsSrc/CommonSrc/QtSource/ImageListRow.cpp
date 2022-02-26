@@ -60,7 +60,7 @@ bool ImageListRow::hasRoomForThumbnail( int idx )
     int curWidth = width();
     int curHeight = height();
     int requiredWidth = ( ( m_ThumbnailCnt + 1 ) * ( GuiParams::getThumbnailSize().width() + 20 ) + 20 );
-    LogMsg( LOG_DEBUG, "ImageListRow hasRoomForThumbnail idx %d ? %d cnt %d w %d h %d\n", idx, requiredWidth < curWidth, m_ThumbnailCnt, curWidth, curHeight );
+    // LogMsg( LOG_DEBUG, "ImageListRow hasRoomForThumbnail idx %d ? %d cnt %d w %d h %d\n", idx, requiredWidth < curWidth, m_ThumbnailCnt, curWidth, curHeight );
     return requiredWidth < sizeHint().width();
 }
 

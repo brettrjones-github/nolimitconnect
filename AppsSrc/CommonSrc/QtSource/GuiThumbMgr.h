@@ -56,9 +56,6 @@ public:
     void                        onThumbRemoved( VxGUID& onlineId );
     void                        onThumbUpdated( GuiThumb* thumb );
 
-    void                        lockThumbMgr( void )             { m_ThumbListMutex.lock(); }
-    void                        unlockThumbMgr( void )           { m_ThumbListMutex.unlock(); }
-
     GuiThumb*                   getThumb( VxGUID& thumbId );
     bool                        getAvatarImage( VxGUID& thumbId, QImage& image ); // get rounded image for avatar
     bool                        getThumbImage( VxGUID& thumbId, QImage& image );
@@ -86,7 +83,6 @@ protected:
     GuiThumb*                   generateEmoticon( VxGUID& thumbId, bool checkIfExists = true );
     
     AppCommon&                  m_MyApp;
-    VxMutex                     m_ThumbListMutex;
     GuiThumbList                m_ThumbList;
     GuiThumb*                   m_MyIdent{ nullptr };
     VxGUID                      m_MyOnlineId;

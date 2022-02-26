@@ -463,6 +463,8 @@ bool VxIsNetworkLoopbackAllowed( void )
 void VxSetAppExeDirectory( const char * exeDir )
 {
     g_strAppExeDir = exeDir;
+	VxFileUtil::assureTrailingDirectorySlash( g_strAppExeDir );
+	g_strExeNoLimitAssetsDir = g_strAppExeDir + "assets/nolimit/";
 }
 
 //============================================================================
@@ -477,7 +479,6 @@ void VxSetKodiExeDirectory(const char * exeDir)
     g_strExeDirPythonLib = g_strExeDirPythonLib + "Lib/";
 
 	g_strExeKodiAssetsDir = g_strKodiExeDir + "assets/kodi/";
-	g_strExeNoLimitAssetsDir = g_strKodiExeDir + "assets/nolimit/";
 }
 
 //============================================================================
@@ -498,6 +499,7 @@ void VxSetPythonLibDirectory( const char * pythonDir ){ g_strExeDirPythonLib = p
 void VxSetRootDataStorageDirectory(const char * rootDataDir)
 {
 	g_strRootDataStorageDir = rootDataDir;
+	VxFileUtil::assureTrailingDirectorySlash( g_strRootDataStorageDir );
 	VxFileUtil::makeDirectory( rootDataDir );
 
 	g_strAppTempDir = g_strRootDataStorageDir + "temp/";
@@ -509,8 +511,6 @@ void VxSetRootDataStorageDirectory(const char * rootDataDir)
 	g_strAppNoLimitDataDir = g_strRootDataStorageDir + "nolimit/";
 	VxFileUtil::makeDirectory(g_strAppNoLimitDataDir.c_str());
 
-    g_strAppThumbsDir = g_strRootDataStorageDir + "nolimit/thumbs/";
-    VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
 
 	g_strAppKodiDataDir = g_strRootDataStorageDir + "kodi/";
 	VxFileUtil::makeDirectory( g_strAppKodiDataDir.c_str());
@@ -531,6 +531,7 @@ void VxSetRootUserDataDirectory( const char * rootUserDataDir )
 {
 	// basically /storage/ NoLimitConnect/hasnum/ where hashnum is hash of exe path
 	g_strRootUserDataDir = rootUserDataDir;
+	VxFileUtil::assureTrailingDirectorySlash( g_strRootUserDataDir );
 	VxFileUtil::makeDirectory( g_strRootUserDataDir.c_str() );
 }
 
@@ -559,7 +560,12 @@ std::string& VxGetUserProfileDirectory( void )		{ return g_strUserProfileDir; }
 void VxSetRootXferDirectory( const char * rootXferDir  )
 { 
 	g_strRootXferDir = rootXferDir; 
+	VxFileUtil::assureTrailingDirectorySlash( g_strRootUserDataDir );
 	VxFileUtil::makeDirectory(g_strRootXferDir.c_str());
+	g_strAppThumbsDir = g_strRootXferDir + "nolimit/";
+	VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
+	g_strAppThumbsDir = g_strAppThumbsDir + "thumbs/";
+	VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
 }
 
 //============================================================================

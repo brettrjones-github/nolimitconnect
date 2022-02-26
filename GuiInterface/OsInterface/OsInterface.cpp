@@ -279,6 +279,18 @@ bool OsInterface::initUserPaths()
 #ifdef DEBUG
     VxTimer loadTimer;
 #endif // DEBUG
+    std::string strExePathAndFileName;
+    if( 0 == VxFileUtil::getExecuteFullPathAndName( strExePathAndFileName ) )
+    {
+        // strip the exe file name
+        VxFileUtil::makeForwardSlashPath( strExePathAndFileName );
+        size_t lastSlash = strExePathAndFileName.rfind( '/' );
+        if( lastSlash != std::string::npos )
+        {
+            std::string exeDirectory = strExePathAndFileName.substr(0, lastSlash + 1 );
+            VxSetAppExeDirectory( exeDirectory.c_str() );
+        }
+    }
 
 #if ENABLE_KODI
     std::string exePath = CUtil::ResolveExecutablePath( true );

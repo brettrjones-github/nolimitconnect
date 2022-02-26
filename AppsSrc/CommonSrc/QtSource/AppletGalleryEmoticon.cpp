@@ -80,6 +80,7 @@ void AppletGalleryEmoticon::showEvent( QShowEvent * ev )
 void AppletGalleryEmoticon::loadAssets( void )
 {
     m_MyApp.getThumbMgr().generateEmoticonsIfNeeded( this );
+    int emoticonNum = 1;
     std::vector<VxGUID>& emoticonIdList = m_ThumbMgr.getEmoticonIdList();
     for( auto &assetId : emoticonIdList )
     {
@@ -88,9 +89,20 @@ void AppletGalleryEmoticon::loadAssets( void )
             AssetBaseInfo* assetInfo = m_ThumbMgr.findAsset( assetId );
             if( assetInfo && eAssetTypeThumbnail == assetInfo->getAssetType() )
             {
+                LogMsg( LOG_VERBOSE, "AppletGalleryEmoticon::loadAssets emoticon %d is %s", emoticonNum, assetId.toOnlineIdString().c_str() );
                 ui.m_ImageListWidget->addAsset( dynamic_cast<ThumbInfo*>(assetInfo) );
             }
+            else
+            {
+                LogMsg( LOG_ERROR, "AppletGalleryEmoticon::loadAssets emoticon %d not found %s", emoticonNum, assetId.toOnlineIdString().c_str() );
+            }
         }
+        else
+        {
+            LogMsg( LOG_ERROR, "AppletGalleryEmoticon::loadAssets emoticon %d invalid %s", emoticonNum, assetId.toOnlineIdString().c_str() );
+        }
+
+        emoticonNum++;
     }
 }
 

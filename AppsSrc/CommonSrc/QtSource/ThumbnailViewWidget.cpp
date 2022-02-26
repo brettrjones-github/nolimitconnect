@@ -64,7 +64,10 @@ bool ThumbnailViewWidget::loadFromAsset( ThumbInfo * asset )
 //============================================================================
 void ThumbnailViewWidget::updateAssetImage( ThumbInfo* thumbAsset )
 {
-    loadFromAsset( thumbAsset );
+    if( !loadFromAsset( thumbAsset ) )
+    {
+        LogMsg( LOG_ERROR, "ThumbnailViewWidget::updateAssetImage failed load %s", thumbAsset->getAssetName().c_str() );
+    }
 }
 
 //============================================================================
@@ -75,6 +78,11 @@ bool ThumbnailViewWidget::loadFromFile( QString fileName )
     if( result )
     {
         cropAndUpdateImage( pixmap );
+    }
+    else
+    {
+        QString msgText = QObject::tr( "Failed to create pixmap " ) + fileName;
+        QMessageBox::warning( this, QObject::tr( "Error loading from file" ), msgText );
     }
 
     return result;

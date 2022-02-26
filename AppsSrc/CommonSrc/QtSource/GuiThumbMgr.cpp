@@ -38,12 +38,22 @@ void GuiThumbMgr::onAppCommonCreated( void )
 
     m_MyApp.getEngine().getThumbMgr().addThumbMgrClient( this, true );
     std::vector<VxGUID>& emoticonList = m_MyApp.getEngine().getThumbMgr().getEmoticonIdList();
+    LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon list size %d", emoticonList.size() );
+    int emoticonNum = 0;
     for( auto& guid : emoticonList )
     {
+        
         if( guid.isVxGUIDValid() )
         {
+            LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon  %d is valid %s", emoticonNum, guid.toOnlineIdString().c_str() );
             m_EmoticonList.push_back( guid );
         }
+        else
+        {
+            LogMsg( LOG_VERBOSE, "GuiThumbMgr::onAppCommonCreated emoticon  %d invalid %s", emoticonNum, guid.toOnlineIdString().c_str() );
+        }
+
+        emoticonNum++;
     }
 }
 
@@ -100,9 +110,7 @@ void GuiThumbMgr::slotInternalThumbUpdated( ThumbInfo thumbInfo )
 //============================================================================
 void GuiThumbMgr::slotInternalThumbRemoved( VxGUID thumbId )
 {
-    m_ThumbListMutex.lock();
     GuiThumb* guiThumb = findThumb( thumbId );
-    m_ThumbListMutex.unlock();
     if( guiThumb )
     {
         onThumbRemoved( thumbId );
@@ -138,17 +146,13 @@ GuiThumb* GuiThumbMgr::findOrCreateEmoticonThumb( VxGUID& thumbId )
 //============================================================================
 void GuiThumbMgr::removeThumb( VxGUID& thumbId )
 {
-    m_ThumbListMutex.lock();
     m_ThumbList.removeThumb( thumbId );
-    m_ThumbListMutex.unlock();
 }
 
 //============================================================================
 GuiThumb* GuiThumbMgr::getThumb( VxGUID& thumbId )
 {
-    m_ThumbListMutex.lock();
     GuiThumb* guiThumb = findThumb( thumbId );
-    m_ThumbListMutex.unlock();
     return guiThumb;
 }
 
@@ -161,9 +165,7 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo& thumbInfo )
         return nullptr;
     }
 
-    m_ThumbListMutex.lock();
     GuiThumb* guiThumb = m_ThumbList.findThumb( thumbInfo.getAssetUniqueId() ); 
-    m_ThumbListMutex.unlock();
     if( guiThumb )
     {
         onThumbUpdated( guiThumb );
@@ -172,9 +174,7 @@ GuiThumb* GuiThumbMgr::updateThumb( ThumbInfo& thumbInfo )
     {
         guiThumb = new GuiThumb( m_MyApp );
         guiThumb->setThumbInfo( thumbInfo );
-        m_ThumbListMutex.lock();
         m_ThumbList.addThumbIfDoesntExist( guiThumb );
-        m_ThumbListMutex.unlock();
         m_MyApp.getEngine().getThumbMgr().fromGuiThumbCreated( thumbInfo );
         onThumbAdded( guiThumb );
     }
@@ -380,7 +380,7 @@ GuiThumb* GuiThumbMgr::generateEmoticon( VxGUID& thumbId, bool checkIfExists )
     // static member so no need to make copy
     std::vector<VxGUID>& emoticonIdList = thumbMgr.getEmoticonIdList();
     // 0 based emoticon number but first id is always null
-    int emoticonNum = 0;
+    int emoticonNum = 1;
     bool foundId = false;
     for( auto& assetGuid : emoticonIdList )
     {
@@ -447,7 +447,7 @@ void GuiThumbMgr::generateEmoticonsIfNeeded( AppletBase * applet )
 {
     ThumbMgr& thumbMgr = m_MyApp.getEngine().getThumbMgr();
     std::vector<VxGUID>& emoticonIdList = thumbMgr.getEmoticonIdList();
-    int emoticonNum = 0;
+    int emoticonNum = 1;
     for( auto& assetGuid : emoticonIdList )
     {
         if( assetGuid.isVxGUIDValid() )

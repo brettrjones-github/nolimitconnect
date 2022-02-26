@@ -274,7 +274,7 @@ void AppProfile::loadProfile( void )
         }
 	}
 
-	LogMsg( LOG_INFO, "User Data Dir %s Xfer Dir %s app data dir %s doc dir %s\n", 
+	LogMsg( LOG_INFO, "User Data Dir %s Xfer Dir %s app data dir %s doc dir %s", 
 			m_strRootUserDataDir.c_str(),
 			m_strRootXferDir.c_str(),
 			getOsSpecificAppDataDir().c_str(),
@@ -325,18 +325,6 @@ RCODE AppProfile::saveDebugSettings( void )
 	}
 	return rc;
 }
-
-////============================================================================
-//void AppProfile::setUserSpecificDataDir( std::string& strDir )
-//{
-//	m_strUserSpecificDataDir = strDir;
-//}
-//
-////============================================================================
-//const char * AppProfile::getUserSpecificDataDir()
-//{
-//	return m_strUserSpecificDataDir.c_str();
-//}
 
 //============================================================================
 const char * AppProfile::getLocalHostIp()

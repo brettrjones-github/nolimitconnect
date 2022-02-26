@@ -91,7 +91,7 @@ void ConnectIdListMgr::addConnection( VxGUID& sktConnectId, GroupieId& groupieId
     ConnectId connectId( sktConnectId,  groupieId );
     bool alreadyOnline = isOnline( groupieId.getGroupieOnlineId() );
     lockList();
-    bool isInList = m_ConnectIdList.find( sktConnectId ) != m_ConnectIdList.end();
+    bool isInList = m_ConnectIdList.find( connectId ) != m_ConnectIdList.end();
     if( !isInList )
     {
         // new connection

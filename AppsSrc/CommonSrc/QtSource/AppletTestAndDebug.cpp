@@ -412,9 +412,9 @@ void AppletTestAndDebug::fillBasicInfo( void )
     std::string strExePathAndFileName;
     if( 0 == VxFileUtil::getExecuteFullPathAndName( strExePathAndFileName ) )
     {
-        infoMsg( "app exe 1: %s", strExePathAndFileName.c_str() );
+        infoMsg( "app exe: %s", strExePathAndFileName.c_str() );
     }
-    infoMsg( "app exe 2: %s", VxGetAppDirectory( eAppDirAppExe ).c_str() );
+    infoMsg( "app exe directory: %s", VxGetAppDirectory( eAppDirAppExe ).c_str() );
     infoMsg( "storage: %s", VxGetAppDirectory( eAppDirRootDataStorage ).c_str() );
     infoMsg( "personal records: %s", VxGetAppDirectory( eAppDirPersonalRecords ).c_str() );
     infoMsg( "downloads: %s", VxGetAppDirectory( eAppDirDownloads ).c_str() );
@@ -463,7 +463,7 @@ void AppletTestAndDebug::slotGenerateGuidButtonClicked( void )
 {
     VxGUID guid;
     guid.initializeWithNewVxGUID();
-    infoMsg( "{ %llu, %llu }, ", guid.getVxGUIDHiPart(), guid.getVxGUIDLoPart() );
+    infoMsg( "{ %lluU, %lluU }, ", guid.getVxGUIDHiPart(), guid.getVxGUIDLoPart() );
     infoMsg( "%s", guid.toOnlineIdString().c_str() );
 }
 

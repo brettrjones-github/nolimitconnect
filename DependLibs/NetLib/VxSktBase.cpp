@@ -53,7 +53,7 @@ std::string VxSktBase::m_SktDirUdp{  "<->" };
 std::string VxSktBase::m_SktDirBroadcast{ "->>" };
 std::string VxSktBase::m_SktDirLoopback{ "<==>" };
 std::string VxSktBase::m_SktDirUnknown{ "<?\?>" }; // use \? instead of just ? to avoid warning: trigraph ignored
-VxGUID VxSktBase::m_LoopbackConnectId{ 8740338989118525749, 11880411481645876119 };	// !794BEC0096E81135A4DFB34C24F98397!
+VxGUID VxSktBase::m_LoopbackConnectId{ 8740338989118525749U, 11880411481645876119U };	// !794BEC0096E81135A4DFB34C24F98397!
 
 //============================================================================
 VxSktBase::VxSktBase()

@@ -114,14 +114,22 @@ void ImageListWidget::addAsset( ThumbInfo * asset )
             if( listRow )
             {
                 ThumbnailViewWidget * thumbnail = new ThumbnailViewWidget( listRow );
-                thumbnail->loadFromAsset( asset );
+                if( !thumbnail->loadFromAsset( asset ) )
+                {
+                    LogMsg( LOG_ERROR, "ImageListWidget failed load of asset %s %s", asset->getAssetUniqueId().toOnlineIdString().c_str(), asset->getAssetName().c_str() );
+                }
+
                 connect( thumbnail, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
                 listRow->addThumbnail( thumbnail );
+            }
+            else
+            {
+                LogMsg( LOG_DEBUG, "ImageListWidget asset row not found for %s %s", asset->getAssetUniqueId().toOnlineIdString().c_str(), asset->getAssetName().c_str() );
             }
         }
         else
         {
-            LogMsg( LOG_DEBUG, "ImageListWidget asset already exists %s %s\n", asset->getAssetUniqueId().toHexString().c_str(), asset->getAssetName().c_str() );
+            LogMsg( LOG_DEBUG, "ImageListWidget asset already exists %s %s", asset->getAssetUniqueId().toOnlineIdString().c_str(), asset->getAssetName().c_str() );
         }
     }
 }
