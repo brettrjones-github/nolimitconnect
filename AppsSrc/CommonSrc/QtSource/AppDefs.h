@@ -225,6 +225,9 @@ enum EApplet
     eAppletInviteAccept,
     eAppletInviteCreate,
 
+    eAppletAboutMeClient,
+    eAppletStoryboardClient,
+
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,
     //	eAppletStreamViewerVideo,

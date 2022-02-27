@@ -1039,7 +1039,8 @@ const char * getPluginName( EPluginType pluginType )
     {
     case ePluginTypeInvalid: return "ePluginTypeInvalid";
     case ePluginTypeAdmin: return "ePluginTypeAdmin";
-    case ePluginTypeAboutMePage: return "ePluginTypeAboutMePage";
+    case ePluginTypeAboutMePageClient: return "ePluginTypeAboutMePageClient";
+    case ePluginTypeAboutMePageServer: return "ePluginTypeAboutMePageServer";
     case ePluginTypeCamServer: return "ePluginTypeCamServer";
     case ePluginTypeFileServer: return "ePluginTypeFileServer";
     case ePluginTypeFileXfer: return "ePluginTypeFileXfer";
@@ -1062,7 +1063,8 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeNetworkSearchList: return "ePluginTypeNetworkSearchList";
 
     case ePluginTypeRelay: return "ePluginTypeRelay";
-    case ePluginTypeStoryboard: return "ePluginTypeStoryboard";
+    case ePluginTypeStoryboardClient: return "ePluginTypeStoryboardClient";
+    case ePluginTypeStoryboardServer: return "ePluginTypeStoryboardServer";
     case ePluginTypeTruthOrDare: return "ePluginTypeTruthOrDare";
     case ePluginTypeVideoPhone: return "ePluginTypeVideoPhone";
     case ePluginTypeVoicePhone: return "ePluginTypeVoicePhone";

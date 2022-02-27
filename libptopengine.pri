@@ -277,6 +277,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostServerSearchMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/LibraryFileInfo.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h \
@@ -284,6 +285,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseMultimedia.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelay.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginChatRoomHost.h \
@@ -296,6 +298,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetworkSearchList.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginPeerUserHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginInvalid.h \
@@ -584,6 +587,7 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/HostServerSearchMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/LibraryFileInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXferPktHandlers.cpp \
@@ -595,6 +599,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelayPktHandlers.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseRelayTests.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseService.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServerFiles.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseWebServerPktHandlers.cpp \
@@ -624,6 +629,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginSessionMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.cpp \

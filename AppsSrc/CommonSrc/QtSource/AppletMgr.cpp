@@ -18,14 +18,15 @@
 #include "AppSettings.h"
 
 #include "ActivityAppSetup.h"
-#include "AppletApplicationInfo.h"
 #include "ActivityFileSearch.h"
 #include "ActivityScanPeopleSearch.h"
 #include "ActivityScanProfiles.h"
 #include "ActivityScanStoryBoards.h"
 #include "ActivityScanWebCams.h"
 
+#include "AppletApplicationInfo.h"
 #include "AppletAboutApp.h"
+#include "AppletAboutMeClient.h"
 
 #include "AppletBrowseFiles.h"
 
@@ -123,6 +124,7 @@
 #include "AppletShareOfferList.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSnapshot.h"
+#include "AppletStoryboardClient.h"
 
 #include "AppletTestAndDebug.h"
 #include "AppletTestHostClient.h"
@@ -240,6 +242,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
 	switch( applet )
 	{
     case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
+    case eAppletAboutMeClient:              appletDialog = new AppletAboutMeClient( m_MyApp, parent ); break;
     case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
     case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
     case eAppletBrowseFiles:                appletDialog = new AppletBrowseFiles (m_MyApp, parent); break;
@@ -258,6 +261,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent, int la
     case eAppletHelpNetSignalBars:          appletDialog = new AppletHelpNetSignalBars( m_MyApp, parent ); break;
     case eAppletRandomConnectJoin:          appletDialog = new AppletRandomConnectJoin( m_MyApp, parent ); break;
     case eAppletRandomConnectJoinSearch:    appletDialog = new AppletRandomConnectJoinSearch( m_MyApp, parent ); break;
+    case eAppletStoryboardClient:           appletDialog = new AppletStoryboardClient( m_MyApp, parent ); break;
     case eAppletLog:                        appletDialog = new AppletLog( m_MyApp, parent ); break;        
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;

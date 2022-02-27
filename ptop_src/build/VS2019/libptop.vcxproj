@@ -700,6 +700,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\HostServerSearchMgr.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\P2PSession.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXferPktHandlers.cpp" />
@@ -711,6 +712,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayPktHandlers.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseRelayTests.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseService.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerFiles.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServerPktHandlers.cpp" />
@@ -740,6 +742,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginTruthOrDare.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.cpp" />
@@ -1061,6 +1064,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\HostServerSearchMgr.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\P2PSession.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileXfer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseHostClient.h" />
@@ -1068,6 +1072,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseMultimedia.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseRelay.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseService.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseWebServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginChatRoomHost.h" />
@@ -1094,6 +1099,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceWebCam.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginSessionMgr.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginTruthOrDare.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVideoPhone.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginVoicePhone.h" />

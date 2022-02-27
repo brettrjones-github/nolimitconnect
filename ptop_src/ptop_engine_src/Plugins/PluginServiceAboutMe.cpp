@@ -22,7 +22,7 @@
 PluginServiceAboutMe::PluginServiceAboutMe( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
 : PluginBase( engine, pluginMgr, myIdent, pluginType )
 {
-	setPluginType( ePluginTypeAboutMePage );
+	setPluginType( ePluginTypeAboutMePageServer );
 }
 
 //============================================================================

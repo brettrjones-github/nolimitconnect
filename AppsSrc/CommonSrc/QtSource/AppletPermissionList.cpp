@@ -66,12 +66,12 @@ void AppletPermissionList::initializePermissionList( void )
         {
             EPluginType pluginType = ( EPluginType )i;
 
-            if( pluginType == ePluginTypeStoryboard && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
+            if( pluginType == ePluginTypeStoryboardServer && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
             {
                 continue;
             }
 
-            if( pluginType == ePluginTypeAboutMePage && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureAboutMePage ) )
+            if( pluginType == ePluginTypeAboutMePageServer && !m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureAboutMePage ) )
             {
                 continue;
             }

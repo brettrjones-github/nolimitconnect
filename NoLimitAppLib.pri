@@ -56,6 +56,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppSettings.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppSetup.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletAboutApp.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletAboutMeClient.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletApplicationInfo.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletAssetPlayerBase.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletBase.h \
@@ -165,6 +166,7 @@ HEADERS += $$PWD/AppsSrc/CommonSrc/QtSource/AccountDb.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareOfferList.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.h \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletStoryboardClient.h \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletTestAndDebug.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestBase.h \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestHostClient.h \
@@ -424,6 +426,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppSettings.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppSetup.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletAboutApp.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletAboutMeClient.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletApplicationInfo.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletAssetPlayerBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletBase.cpp \
@@ -532,6 +535,7 @@ SOURCES += $$PWD/AppsSrc/NoLimitConnectMain/AppSource/main.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareOfferList.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletShareServicesPage.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletSnapshot.cpp \
+    $$PWD/AppsSrc/CommonSrc/QtSource/AppletStoryboardClient.cpp \
 	$$PWD/AppsSrc/CommonSrc/QtSource/AppletTestAndDebug.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestBase.cpp \
     $$PWD/AppsSrc/CommonSrc/QtSource/AppletTestHostClient.cpp \
@@ -772,6 +776,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/ActivityBase.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AcceptCancelWidget.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletAboutApp.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletAboutMeClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletApplicationInfo.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletBrowseFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletCamClipPlayer.ui \
@@ -836,6 +841,7 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSharedContent.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletShareOfferList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSnapshot.ui \
+    $$PWD/AppsSrc/CommonSrc/Forms/AppletStoryboardClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletTestAndDebug.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostService.ui \

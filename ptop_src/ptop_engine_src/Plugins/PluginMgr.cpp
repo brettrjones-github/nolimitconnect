@@ -18,6 +18,7 @@
 
 #include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
+#include <ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginInvalid.h>
@@ -40,6 +41,7 @@
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceStoryboard.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginServiceWebCam.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginStoryboardClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginTruthOrDare.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginVideoPhone.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginVoicePhone.h>
@@ -108,8 +110,8 @@ void PluginMgr::pluginMgrStartup( void )
     poPlugin = new PluginMessenger( m_Engine, *this, &this->m_PktAnn, ePluginTypeMessenger );
     m_aoPlugins.push_back( poPlugin );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create about me plugin" );
-	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn, ePluginTypeAboutMePage );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create about me server plugin" );
+	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn, ePluginTypeAboutMePageServer );
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create client peer user plugin" );
@@ -167,8 +169,8 @@ void PluginMgr::pluginMgrStartup( void )
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create relay plugin" );
     m_aoPlugins.push_back( &m_Engine.getPluginServiceRelay() );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create storyboard plugin" );
-    poPlugin = new PluginServiceStoryboard( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboard );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create storyboard server plugin" );
+    poPlugin = new PluginServiceStoryboard( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboardServer );
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create cam server plugin" );
@@ -188,7 +190,15 @@ void PluginMgr::pluginMgrStartup( void )
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create truth or dare plugin" );
-	poPlugin = new PluginTruthOrDare( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboard );
+	poPlugin = new PluginTruthOrDare( m_Engine, *this, &this->m_PktAnn, ePluginTypeTruthOrDare );
+	m_aoPlugins.push_back( poPlugin );
+
+	LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create about me viewer plugin" );
+	poPlugin = new PluginAboutMePageClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeAboutMePageClient );
+	m_aoPlugins.push_back( poPlugin );
+
+	LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create about me viewer plugin" );
+	poPlugin = new PluginStoryboardClient( m_Engine, *this, &this->m_PktAnn, ePluginTypeStoryboardClient );
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup adding net services" );

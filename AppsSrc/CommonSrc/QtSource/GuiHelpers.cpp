@@ -301,7 +301,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     EPluginType pluginType = ePluginTypeInvalid;
     switch( applet )
     {
-    case eAppletClientAboutMe:              return ePluginTypeAboutMePage;
+    case eAppletClientAboutMe:              return ePluginTypeAboutMePageClient;
     case eAppletClientAvatarImage:          return ePluginTypeClientPeerUser;
     case eAppletClientConnectionTest:       return ePluginTypeClientConnectTest;
     case eAppletClientHostGroup:            return ePluginTypeHostGroup;
@@ -311,10 +311,10 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientRandomConnectRelay:   return ePluginTypeHostRandomConnect;
     case eAppletClientShareFiles:           return ePluginTypeFileServer;
     case eAppletClientShareWebCam:          return ePluginTypeCamServer;
-    case eAppletClientStoryboard:           return ePluginTypeStoryboard;
+    case eAppletClientStoryboard:           return ePluginTypeStoryboardClient;
     case eAppletClientRelay:                return ePluginTypeRelay;
 
-    case eAppletServiceAboutMe:              return ePluginTypeAboutMePage;
+    case eAppletServiceAboutMe:              return ePluginTypeAboutMePageServer;
     case eAppletServiceAvatarImage:          return ePluginTypeHostPeerUser;
     case eAppletServiceConnectionTest:       return ePluginTypeHostConnectTest;
     case eAppletHostChatRoomAdmin:           return ePluginTypeHostChatRoom;
@@ -323,10 +323,10 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletServiceRandomConnectRelay:   return ePluginTypeHostRandomConnect;
     case eAppletServiceShareFiles:           return ePluginTypeFileServer;
     case eAppletServiceShareWebCam:          return ePluginTypeCamServer;
-    case eAppletServiceStoryboard:           return ePluginTypeStoryboard;
+    case eAppletServiceStoryboard:           return ePluginTypeStoryboardServer;
     case eAppletServiceRelay:                return ePluginTypeRelay;
 
-    case eAppletSettingsAboutMe:            return ePluginTypeAboutMePage;
+    case eAppletSettingsAboutMe:            return ePluginTypeAboutMePageServer;
     case eAppletSettingsAvatarImage:        return ePluginTypeHostPeerUser;
     case eAppletSettingsWebCamServer:       return ePluginTypeCamServer;
     case eAppletSettingsConnectTest:        return ePluginTypeHostConnectTest;
@@ -341,8 +341,8 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletSettingsMessenger:          return ePluginTypeMessenger;
     case eAppletSettingsRandomConnect:      return ePluginTypeClientRandomConnect;
     case eAppletSettingsRandomConnectRelay: return ePluginTypeHostRandomConnect;
-    // case eAppletSettingsRelay:              return ePluginTypeRelay;
-    case eAppletSettingsStoryboard:         return ePluginTypeStoryboard;
+
+    case eAppletSettingsStoryboard:         return ePluginTypeStoryboardServer;
     case eAppletSettingsTruthOrDare:        return ePluginTypeTruthOrDare;
     case eAppletSettingsVideoPhone:         return ePluginTypeVideoPhone;
     case eAppletSettingsVoicePhone:         return ePluginTypeVoicePhone;
@@ -362,9 +362,9 @@ EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
 
     switch( pluginType )
     {
-    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
+    case ePluginTypeAboutMePageServer:      return eAppletEditAboutMe;
     case ePluginTypeHostPeerUser:           return eAppletEditAvatarImage;
-    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
+    case ePluginTypeStoryboardServer:       return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
     case ePluginTypeHostConnectTest:        return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletUnknown;
@@ -389,7 +389,7 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
 
     switch( pluginType )
     {
-    case ePluginTypeAboutMePage:            return eAppletSettingsAboutMe;
+    case ePluginTypeAboutMePageServer:      return eAppletSettingsAboutMe;
     case ePluginTypeHostPeerUser:           return eAppletSettingsAvatarImage;
     case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
     case ePluginTypeHostConnectTest:        return eAppletSettingsConnectTest;
@@ -404,9 +404,8 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
     case ePluginTypePushToTalk:             return eAppletSettingsPushToTalk;
     case ePluginTypeClientRandomConnect:    return eAppletSettingsRandomConnect;
-    // case ePluginTypeHostRandomConnect:      return eAppletSettingsRandomConnectRelay;
-        // case ePluginTypeRelay:                  return eAppletSettingsRelay;
-    case ePluginTypeStoryboard:             return eAppletSettingsStoryboard;
+
+    case ePluginTypeStoryboardServer:       return eAppletSettingsStoryboard;
     case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
     case ePluginTypeVideoPhone:             return eAppletSettingsVideoPhone;
     case ePluginTypeVoicePhone:             return eAppletSettingsVoicePhone;
@@ -425,9 +424,9 @@ EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
 
     switch( pluginType )
     {
-    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
+    case ePluginTypeAboutMePageServer:      return eAppletEditAboutMe;
     case ePluginTypeHostPeerUser:           return eAppletEditAvatarImage;
-    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
+    case ePluginTypeStoryboardServer:       return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
     case ePluginTypeHostConnectTest:        return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletUnknown;
@@ -452,8 +451,9 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
 
     switch( pluginType )
     {
-    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
-    case ePluginTypeHostPeerUser:           return eAppletEditAvatarImage;
+    case ePluginTypeAboutMePageServer:     return eAppletEditAboutMe;
+    case ePluginTypeAboutMePageClient:     return eAppletAboutMeClient;
+    case ePluginTypeHostPeerUser:          return eAppletEditAvatarImage;
     //case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
     // case ePluginTypeHostConnectTest:     return eAppletSettingsConnectTest;
     //case ePluginTypeFileServer:             return eAppletShareFiles;
@@ -468,7 +468,8 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     //case ePluginTypeClientRandomConnect:          return eAppletServiceRandomConnect;
     //case ePluginTypeHostRandomConnect:     return eAppletServiceRandomConnectRelay;
     case ePluginTypeRelay:                  return eAppletServiceRelay;
-    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
+    case ePluginTypeStoryboardServer:       return eAppletEditStoryboard;
+    case ePluginTypeStoryboardClient:       return eAppletStoryboardClient;
     //case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
     //case ePluginTypeVideoPhone:             return eAppletSettingsVideoPhone;
     //case ePluginTypeVoicePhone:             return eAppletSettingsVoicePhone;
@@ -487,7 +488,7 @@ EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
 
     switch( pluginType )
     {
-    case ePluginTypeAboutMePage:            return eMyIconSettingsAboutMe;
+    case ePluginTypeAboutMePageServer:      return eMyIconSettingsAboutMe;
     case ePluginTypeHostPeerUser:           return eMyIconSettingsAvatarImage;
     case ePluginTypeCamServer:              return eMyIconSettingsShareWebCam;
     case ePluginTypeHostConnectTest:        return eMyIconSettingsConnectionTest;
@@ -500,7 +501,7 @@ EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
     case ePluginTypeClientRandomConnect:    return eMyIconSettingsRandomConnect;
     case ePluginTypeHostRandomConnect:      return eMyIconSettingsRandomConnectRelay;
     case ePluginTypeRelay:                  return eMyIconSettingsRelay;
-    case ePluginTypeStoryboard:             return eMyIconSettingsShareStoryboard;
+    case ePluginTypeStoryboardServer:       return eMyIconSettingsShareStoryboard;
     case ePluginTypeTruthOrDare:            return eMyIconSettingsTruthOrDare;
     case ePluginTypeVideoPhone:             return eMyIconSettingsVideoPhone;
     case ePluginTypeVoicePhone:             return eMyIconSettingsVoicePhone;
@@ -525,12 +526,14 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 	case ePluginTypeTruthOrDare:
 	case ePluginTypeMessenger:
 	case ePluginTypeAdmin:
+    case ePluginTypeAboutMePageClient:
+    case ePluginTypeStoryboardClient:
 		isSingleSessionPlugin = true;
 		break;
-	case ePluginTypeWebServer:
+	case ePluginTypeAboutMePageServer:
 	case ePluginTypeRelay:
 	case ePluginTypeCamServer:
-	case ePluginTypeStoryboard: 
+	case ePluginTypeStoryboardServer: 
 	case ePluginTypeFileServer:
 	case ePluginTypeFileXfer:
     case ePluginTypeClientChatRoom:
@@ -549,13 +552,13 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     switch( ePluginType )
     {
     case ePluginTypeAdmin:
-    case ePluginTypeAboutMePage:
+    case ePluginTypeAboutMePageServer:
     case ePluginTypeVoicePhone:
     case ePluginTypeVideoPhone:
     case ePluginTypeTruthOrDare:
     case ePluginTypeMessenger:
     case ePluginTypeCamServer:
-    case ePluginTypeStoryboard:
+    case ePluginTypeStoryboardServer:
     case ePluginTypeFileServer:
     case ePluginTypeFileXfer:
     case ePluginTypeHostGroup:

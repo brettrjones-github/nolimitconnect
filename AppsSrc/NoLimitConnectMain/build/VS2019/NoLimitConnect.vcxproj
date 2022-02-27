@@ -156,6 +156,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppDefs.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppGlobals.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAboutApp.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletApplicationInfo.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletAssetPlayerBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletBase.cpp" />
@@ -264,6 +265,7 @@
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareOfferList.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletShareServicesPage.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletSnapshot.cpp" />
+    <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestAndDebug.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestBase.cpp" />
     <ClCompile Include="..\..\..\CommonSrc\QtSource\AppletTestHostClient.cpp" />
@@ -529,6 +531,8 @@
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostGroupStatus.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletHostChatRoomAdmin.h" />
     <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletSettingsPushToTalk.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletStoryboardClient.h" />
+    <QtMoc Include="..\..\..\CommonSrc\QtSource\AppletAboutMeClient.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppSettings.h" />
     <ClInclude Include="..\..\..\CommonSrc\QtSource\AppTranslate.h" />
@@ -888,6 +892,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityWebCamClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\ActivityYesNo.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletAboutApp.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletAboutMeClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletApplicationInfo.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletBrowseFiles.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletCamClipPlayer.ui" />
@@ -955,6 +960,7 @@
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSharedContent.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletShareOfferList.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletSnapshot.ui" />
+    <QtUic Include="..\..\..\CommonSrc\Forms\AppletStoryBoardClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestAndDebug.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestHostClient.ui" />
     <QtUic Include="..\..\..\CommonSrc\Forms\AppletTestHostService.ui" />

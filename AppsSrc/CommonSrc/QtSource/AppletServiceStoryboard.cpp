@@ -23,7 +23,7 @@
 AppletServiceStoryboard::AppletServiceStoryboard( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_STORYBOARD, app, parent )
 {
-    setupServiceBaseApplet( eAppletServiceStoryboard, ePluginTypeStoryboard );
+    setupServiceBaseApplet( eAppletServiceStoryboard, ePluginTypeStoryboardServer );
 
     m_MyApp.activityStateChange( this, true );
 }

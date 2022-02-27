@@ -49,8 +49,8 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 
 	switch( ePluginType )
 	{
-	case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-		ui.PermissionLabel->setText( "Who can view my profile" );
+	case ePluginTypeAboutMePageServer:	// web server plugin ( for profile web page )
+		ui.PermissionLabel->setText( "Who can view my about me page" );
 		ui.AdminsOnlyButton->setEnabled( false );
 		ui.FriendsOnlyButton->setEnabled( false );
 		ui.GuestsAndFriendsButton->setEnabled( false );
@@ -83,8 +83,8 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 		ui.PermissionLabel->setText( "Who can offer to play truth or dare" );
 		break;
 
-	case 	ePluginTypeStoryboard:	
-		ui.PermissionLabel->setText( "Who can read my story board" );
+	case 	ePluginTypeStoryboardServer:	
+		ui.PermissionLabel->setText( "Who can view my story board" );
 		break;
 
 	case 	ePluginTypeInvalid:

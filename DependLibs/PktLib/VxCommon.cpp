@@ -163,10 +163,10 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
 	setPluginPermission( ePluginTypeAdmin, eFriendStateAdmin );	
 
-    setPluginPermission( ePluginTypeMessenger, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeMessenger, eFriendStateGuest );
 
-    setPluginPermission( ePluginTypeAboutMePage, eFriendStateGuest );
-    setPluginPermission( ePluginTypeStoryboard, eFriendStateGuest );
+    setPluginPermission( ePluginTypeAboutMePageServer, eFriendStateGuest );
+    setPluginPermission( ePluginTypeStoryboardServer, eFriendStateGuest );
     setPluginPermission( ePluginTypeTruthOrDare, eFriendStateGuest );
     setPluginPermission( ePluginTypeVideoPhone, eFriendStateGuest );
     setPluginPermission( ePluginTypeVoicePhone, eFriendStateGuest );
@@ -368,8 +368,8 @@ EPluginAccess	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType 
 			return ePluginAccessInactive;
 		}
 
-		if( ( ePluginTypeWebServer == ePluginType )
-			|| ( ePluginTypeStoryboard == ePluginType )
+		if( ( ePluginTypeAboutMePageServer == ePluginType )
+			|| ( ePluginTypeStoryboardServer == ePluginType )
 			|| ( ePluginTypeRelay == ePluginType ) )
 		{
 			if( false == isOnline() )
@@ -439,8 +439,8 @@ EPluginAccess VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriend
 	}
 
 	EPluginAccess accessState = ePluginAccessOk;
-	if( ( ePluginTypeWebServer		== ePluginType )
-		|| ( ePluginTypeStoryboard	== ePluginType )
+	if( ( ePluginTypeAboutMePageServer		== ePluginType )
+		|| ( ePluginTypeStoryboardServer	== ePluginType )
 		|| ( ePluginTypeRelay		== ePluginType ) )
 	{
 		if( false == isOnline() )
@@ -522,8 +522,10 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 	{
     case ePluginTypeInvalid:
         return "Invalid Plugin";
-    case ePluginTypeAboutMePage:
-        return "About Me Web Page";
+    case ePluginTypeAboutMePageServer:
+        return "About Me Web Page Server";
+	case ePluginTypeAboutMePageClient:
+		return "About Me Web Page Viewer";
     case ePluginTypeClientPeerUser:
         return "Client User Avatar Image";
     case ePluginTypeHostPeerUser:
@@ -536,8 +538,10 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Offer A File";
     case ePluginTypeMessenger:
         return "Chat Session";
-    case ePluginTypeStoryboard:	// User Web Page Storyboard
-        return "Story Board";
+    case ePluginTypeStoryboardServer:	// User Web Page Storyboard
+        return "Story Board Server";
+	case ePluginTypeStoryboardClient:	// User Web Page Storyboard
+		return "Story Board Viewer";
     case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
         return "Truth Or Dare Video Chat";
     case ePluginTypeVideoPhone:	// Video phone p2p plugin

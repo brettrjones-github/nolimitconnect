@@ -25,7 +25,7 @@ AppletSettingsStoryboard::AppletSettingsStoryboard( AppCommon& app, QWidget * pa
 {
 	ui.setupUi( getContentItemsFrame() );
 	setAppletType( eAppletSettingsStoryboard );
-	setPluginType( ePluginTypeStoryboard );
+	setPluginType( ePluginTypeStoryboardServer );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );

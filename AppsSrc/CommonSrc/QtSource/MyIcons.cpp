@@ -871,7 +871,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeAdmin:
         return eMyIconAdministrator;
 
-    case ePluginTypeAboutMePage:
+    case ePluginTypeAboutMePageServer:
         return eMyIconSettingsAboutMe;
 
     case ePluginTypeClientPeerUser:
@@ -920,7 +920,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeHostRandomConnect:
         return eMyIconSettingsRandomConnectRelay;
 
-    case ePluginTypeStoryboard:
+    case ePluginTypeStoryboardServer:
         return eMyIconSettingsShareStoryboard;
 
     case ePluginTypeTruthOrDare:
@@ -967,7 +967,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 
 		break;
 
-    case ePluginTypeAboutMePage:
+    case ePluginTypeAboutMePageServer:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -986,6 +986,10 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
             return eMyIconProfileIgnored;
         }
         break;
+
+	case ePluginTypeAboutMePageClient:
+		return eMyIconProfile;
+		break;
 
     case ePluginTypeClientChatRoom:
         switch( ePluginAccess )
@@ -1131,7 +1135,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		return eMyIconUnknown;
 		break;
 
-	case ePluginTypeStoryboard:
+	case ePluginTypeStoryboardServer:
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1149,6 +1153,10 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccess ePluginA
 		case ePluginAccessBusy:
 			return eMyIconStoryBoardIgnored;
 		}
+		break;
+
+	case ePluginTypeStoryboardClient:
+		return eMyIconStoryBoardNormal;
 		break;
 
 	case ePluginTypeWebServer:	// web server plugin ( for profile web page )
@@ -1379,7 +1387,7 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeAdmin:
         return eMyIconUnknown; // not implemented
 
-    case ePluginTypeAboutMePage:
+    case ePluginTypeAboutMePageServer:
         return eMyIconSettingsAboutMe;
 
     case ePluginTypeClientPeerUser:
@@ -1404,7 +1412,7 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeRelay:
         return eMyIconSettingsRelay;
 
-    case ePluginTypeStoryboard:
+    case ePluginTypeStoryboardServer:
         return eMyIconSettingsShareStoryboard;
 
     case ePluginTypeWebServer:	// web server plugin ( for profile web page )

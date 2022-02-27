@@ -50,11 +50,13 @@ bool SessionMgrBase::isPluginSingleSession( void )
 	case ePluginTypeMessenger:
 	case ePluginTypeCamServer:
 	case ePluginTypeAdmin:
+	case ePluginTypeAboutMePageClient:
+	case ePluginTypeStoryboardClient:
 		isSingleSessionPlugin = true;
 		break;
-	case ePluginTypeWebServer:
+	case ePluginTypeAboutMePageServer:
 	case ePluginTypeRelay:
-	case ePluginTypeStoryboard: 
+	case ePluginTypeStoryboardServer: 
 	case ePluginTypeFileServer:
 	case ePluginTypeFileXfer:
 	default:

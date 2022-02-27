@@ -467,7 +467,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         }
         break;
 
-    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
+    case ePluginTypeAboutMePageServer:	// web server plugin ( for profile web page )
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
@@ -475,7 +475,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("View About Me Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeWebServer ) );
+            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeAboutMePageServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -501,7 +501,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
         }
         break;
 
-    case ePluginTypeStoryboard:	// web server plugin ( for storyboard web page )
+    case ePluginTypeStoryboardServer:	// web server plugin ( for storyboard web page )
         switch( ePluginAccess )
         {
         case ePluginAccessOk:			// plugin access allowed
@@ -509,7 +509,7 @@ QString GuiParams::describePluginAction( GuiUser * netIdent, EPluginType ePlugin
             break;
         case ePluginAccessLocked:		// insufficient Friend permission level
             strAction = QObject::tr("View Story Board Requires ");
-            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeStoryboard ) );
+            strAction += describeFriendState(  netIdent->getPluginPermission( ePluginTypeStoryboardServer ) );
             strAction += QObject::tr(" permission");
             break;
         case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -896,8 +896,12 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr( "Admin" );
         break;
 
-    case ePluginTypeAboutMePage:
-        strPluginType = QObject::tr("About Me Page");
+    case ePluginTypeAboutMePageClient:
+        strPluginType = QObject::tr( "About Me Page Viewer" );
+        break;
+
+    case ePluginTypeAboutMePageServer:
+        strPluginType = QObject::tr("About Me Page Server");
         break;
 
     case ePluginTypeClientPeerUser:
@@ -940,10 +944,13 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr("Play Truth Or Dare");
         break;
 
-    case ePluginTypeStoryboard:	// story board plugin
-        strPluginType = QObject::tr("Story Board");
+    case ePluginTypeStoryboardServer:	// story board plugin
+        strPluginType = QObject::tr("Story Board Server");
         break;
 
+    case ePluginTypeStoryboardClient:	// story board plugin
+        strPluginType = QObject::tr( "Story Board Viewer" );
+        break;
 
     case ePluginTypeClientGroup:	//!< group client
         strPluginType = QObject::tr("Client Group");
@@ -1003,16 +1010,11 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Administration Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeAboutMePage:
-        if( rmtInitiated )
-        {
-            strPluginDesc = QObject::tr( "Shared About Me Page" ).toUtf8().constData();
-        }
-        else
-        {
+    case ePluginTypeAboutMePageClient:
+            strPluginDesc = QObject::tr( "View About Me Page" ).toUtf8().constData();
+
+    case ePluginTypeAboutMePageServer:
             strPluginDesc = QObject::tr( "About Me Page Service" ).toUtf8().constData();
-        }
-        break;
 
     case ePluginTypeClientPeerUser:
         strPluginDesc = QObject::tr( "Peer User Client" ).toUtf8().constData();
@@ -1107,15 +1109,12 @@ std::string GuiParams::describePlugin( EPluginType ePluginType, bool rmtInitiate
         strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeStoryboard:
-        if( rmtInitiated )
-        {
-            strPluginDesc = QObject::tr( "Shared Story Page (Blog)" ).toUtf8().constData();
-        }
-        else
-        {
-            strPluginDesc = QObject::tr( "Shared Story Page Service (Blog)" ).toUtf8().constData();
-        }
+    case ePluginTypeStoryboardServer:
+        strPluginDesc = QObject::tr( "Story Page (Blog) Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeStoryboardClient:
+        strPluginDesc = QObject::tr( "View Story Board Page (Blog)" ).toUtf8().constData();
         break;
 
     case ePluginTypeTruthOrDare:
@@ -1183,8 +1182,12 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         strPluginOffer = QObject::tr(" Relay ");
         break;
 
-    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
-        strPluginOffer = QObject::tr(" View About Me Page " );
+    case ePluginTypeAboutMePageServer:	// web server plugin ( for profile web page )
+        strPluginOffer = QObject::tr(" About Me Page Service " );
+        break;
+
+    case ePluginTypeAboutMePageClient:	// web server plugin ( for profile web page )
+        strPluginOffer = QObject::tr( " View About Me Page " );
         break;
 
     case ePluginTypeFileXfer:	// file offer plugin
@@ -1215,7 +1218,11 @@ QString GuiParams::describePluginOffer( EPluginType ePluginType )
         strPluginOffer = QObject::tr(" Play Truth Or Dare ");
         break;
 
-    case ePluginTypeStoryboard:	// story board plugin
+    case ePluginTypeStoryboardServer:	// story board plugin
+        strPluginOffer = QObject::tr( " Story Board Service" );
+        break;
+
+    case ePluginTypeStoryboardClient:	// story board plugin
         strPluginOffer = QObject::tr(" View Story Board ");
         break;
 

@@ -57,6 +57,7 @@
 #define OBJNAME_ACTIVITY_WEB_CAM_CLIENT				    "ActivityWebCamClient"
 #define OBJNAME_ACTIVITY_YES_NO_MSG_BOX					"ActivityYesNoMsgBox"
 
+#define OBJNAME_APPLET_ABOUT_ME_CLIENT					"AppletAboutMeClient"
 #define OBJNAME_APPLET_BASE								"AppletBase"
 #define OBJNAME_APPLET_BROWSE_FILES					    "AppletBrowseFiles"
 #define OBJNAME_APPLET_CAM_CLIP_PLAYER		            "AppletCamClipPlayer"
@@ -165,6 +166,7 @@
 
 #define OBJNAME_APPLET_SHARE_OFFER_LIST			        "AppletShareOfferList"
 #define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
+#define OBJNAME_APPLET_STORYBOARD_CLIENT				"AppletStoryboardClient"
 
 #define OBJNAME_APPLET_TEST_AND_DEBUG				    "AppletTestAndDebug"
 #define OBJNAME_APPLET_TEST_HOST_CLIENT					"AppletTestHostClient"

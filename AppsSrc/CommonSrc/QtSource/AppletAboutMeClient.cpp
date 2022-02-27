@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletEditAboutMe.h"
+#include "AppletAboutMeClient.h"
 #include "AppletMgr.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
@@ -33,13 +33,13 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_EDIT_ABOUT_ME, app, parent )
+AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_ABOUT_ME_CLIENT, app, parent )
 {
-    setAppletType( eAppletEditAboutMe );
+    setAppletType( eAppletAboutMeClient );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-    ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeAboutMePageServer );
+    ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeAboutMePageClient );
  
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
@@ -92,7 +92,7 @@ AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
 
 //============================================================================
 //! browse for picture of me
-void AppletEditAboutMe::onBrowseButClick( void )
+void AppletAboutMeClient::onBrowseButClick( void )
 {
     QString startPath = QDir::current().path();
     std::string lastGalleryPath;
@@ -133,7 +133,7 @@ void AppletEditAboutMe::onBrowseButClick( void )
 
 //============================================================================
 //! Implement the OnClickListener callback    
-void AppletEditAboutMe::onSnapshotButClick( void )
+void AppletAboutMeClient::onSnapshotButClick( void )
 {
     if( m_CameraSourceAvail )
     {
@@ -151,12 +151,12 @@ void AppletEditAboutMe::onSnapshotButClick( void )
 }
 
 //============================================================================
-void AppletEditAboutMe::slotImageSnapshot( QImage snapshotImage )
+void AppletAboutMeClient::slotImageSnapshot( QImage snapshotImage )
 {
     if( !snapshotImage.isNull() )
     {
         QPixmap bitmap = QPixmap::fromImage( snapshotImage );
-        LogMsg( LOG_VERBOSE, "AppletEditAboutMe::slotImageSnapshot w %d h %d" );
+        LogMsg( LOG_VERBOSE, "AppletAboutMeClient::slotImageSnapshot w %d h %d" );
         if( !bitmap.isNull() )
         {
             updateSnapShot( bitmap );
@@ -171,7 +171,7 @@ void AppletEditAboutMe::slotImageSnapshot( QImage snapshotImage )
 
 //============================================================================
 //! Implement the OnClickListener callback    
-void AppletEditAboutMe::onApplyAboutMeButClick( void )
+void AppletAboutMeClient::onApplyAboutMeButClick( void )
 {
     VxFileUtil::makeDirectory( m_strUserSepecificDataDir.c_str() );
     std::string strUserProfileDir = m_strUserSepecificDataDir + "profile/";
@@ -229,7 +229,7 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
 }
 
 //============================================================================
-void AppletEditAboutMe::updateSnapShot( QPixmap& pixmap )
+void AppletAboutMeClient::updateSnapShot( QPixmap& pixmap )
 {
     QPixmap scaledPixmap = pixmap.scaled( QSize( 320, 200 ) );
     ui.m_PictureOfMeFrame->setPixmap( scaledPixmap );
@@ -238,7 +238,7 @@ void AppletEditAboutMe::updateSnapShot( QPixmap& pixmap )
 
 //============================================================================
 //! validate user input
-QString AppletEditAboutMe::validateString( QString charSeq )
+QString AppletAboutMeClient::validateString( QString charSeq )
 {
     //return charSeq.toString();    	
     return charSeq;
@@ -246,7 +246,7 @@ QString AppletEditAboutMe::validateString( QString charSeq )
 
 //============================================================================
 //! load user profile data from database
-void AppletEditAboutMe::loadContentFromDb( void )
+void AppletAboutMeClient::loadContentFromDb( void )
 {
     m_MyApp.getAccountMgr().getUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
     ui.m_AboutMeEdit->setPlainText( m_UserProfile.m_strAboutMe );
@@ -259,7 +259,7 @@ void AppletEditAboutMe::loadContentFromDb( void )
 
 //============================================================================
 //! save user profile data to database
-void AppletEditAboutMe::saveContentToDb( void )
+void AppletAboutMeClient::saveContentToDb( void )
 {
     m_UserProfile.m_strAboutMe = ui.m_AboutMeEdit->toPlainText();
     m_UserProfile.m_strGreeting = ui.m_GreetingEdit->text();

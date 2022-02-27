@@ -1,3 +1,4 @@
+#pragma once
 //============================================================================
 // Copyright (C) 2018 Brett R. Jones
 //
@@ -12,24 +13,27 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceAboutMe.h"
-#include "AppCommon.h"
-#include "AppSettings.h"
-#include "MyIcons.h"
+#include "AppletBase.h"
 
-#include <CoreLib/VxDebug.h>
+#include "ui_AppletStoryBoardClient.h"
+#include "ui_StoryWidget.h"
 
-//============================================================================
-AppletServiceAboutMe::AppletServiceAboutMe( AppCommon& app, QWidget * parent )
-: AppletServiceBase( OBJNAME_APPLET_SERVICE_ABOUT_ME, app, parent )
+class AppletStoryboardClient : public AppletBase
 {
-    setupServiceBaseApplet( eAppletServiceAboutMe, ePluginTypeAboutMePageServer );
+	Q_OBJECT
+public:
+    AppletStoryboardClient( AppCommon& app, QWidget * parent );
+	virtual ~AppletStoryboardClient() = default;
 
-    m_MyApp.activityStateChange( this, true );
-}
+private slots:
+    void						slotStoryBoardSavedModified();
 
-//============================================================================
-AppletServiceAboutMe::~AppletServiceAboutMe()
-{
-    m_MyApp.activityStateChange( this, false );
-}
+protected:
+    //=== vars ===//
+    Ui::AppletStoryboardClientUi	ui;
+    std::string					m_strSavedCwd;
+    std::string					m_strStoryBoardDir;
+    std::string					m_strStoryBoardFile;
+};
+
+

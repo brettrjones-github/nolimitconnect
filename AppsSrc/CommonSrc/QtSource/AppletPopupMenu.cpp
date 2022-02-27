@@ -235,20 +235,20 @@ void AppletPopupMenu::showFriendMenu( GuiUser* poSelectedFriend )
 		addMenuItem( (int)eMaxPluginType + 2, getMyIcons().getIcon( eMyIconFriend ), QObject::tr( "Change Friendship" ) );
 	}
 
-	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeWebServer ) )
+	if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeAboutMePageServer ) )
 	{
-		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeWebServer );
-		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeWebServer, ePluginAccess );
-		addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeWebServer, ePluginAccess ) ), strAction );
+		ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeAboutMePageServer );
+		strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeAboutMePageServer, ePluginAccess );
+		addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeAboutMePageServer, ePluginAccess ) ), strAction );
 	}
 
 	if( m_MyApp.getAppSettings().getFeatureEnable( eAppFeatureStoryboard ) )
 	{
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboard ) )
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboardServer ) )
 		{
-			ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryboard );
-			strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeStoryboard, ePluginAccess );
-			addMenuItem( (int)ePluginTypeStoryboard, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeStoryboard, ePluginAccess ) ), strAction );
+			ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryboardServer );
+			strAction = GuiParams::describePluginAction( poSelectedFriend, ePluginTypeStoryboardServer, ePluginAccess );
+			addMenuItem( (int)ePluginTypeStoryboardServer, getMyIcons().getIcon( getMyIcons().getPluginIcon( ePluginTypeStoryboardServer, ePluginAccess ) ), strAction );
 		}
 	}
 
@@ -312,16 +312,16 @@ void AppletPopupMenu::onFriendActionSelected( int iMenuId )
 {
 	switch( iMenuId )
 	{
-	case ePluginTypeWebServer: // view profile
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeWebServer ) )
+	case ePluginTypeAboutMePageServer: // view profile
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeAboutMePageServer ) )
 		{
 			m_MyApp.offerToFriendViewProfile( m_SelectedFriend );
 		}
 
 		break;
 
-	case ePluginTypeStoryboard:
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboard ) )
+	case ePluginTypeStoryboardServer:
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboardServer ) )
 		{
 			m_MyApp.offerToFriendViewStoryboard( m_SelectedFriend );
 		}

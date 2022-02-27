@@ -691,12 +691,12 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeInvalid			    = 0,	//!< unknown or disabled
 
     ePluginTypeAdmin			    = 1,	//!< Administration ( intended for updates but not currently used )
-    ePluginTypeAboutMePage          = 2,	//!< about me page plugin ( using web page server )
+    ePluginTypeAboutMePageServer    = 2,	//!< about me web page plugin
     ePluginTypeCamServer            = 3,	//!< Web cam broadcast plugin
     ePluginTypeFileServer           = 4,	//!< Shared files server
     ePluginTypeFileXfer             = 5,	//!< Offer/accept send a file person to person
     ePluginTypeMessenger            = 6,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeStoryboard           = 7,	//!< User editable story board web page server
+    ePluginTypeStoryboardServer     = 7,	//!< User editable story board web page server
     ePluginTypeTruthOrDare          = 8,	//!< Video Chat Truth Or Dare game  
     ePluginTypeVideoPhone           = 9,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone           = 10,	//!< VOIP audio only phone call
@@ -733,7 +733,9 @@ enum EPluginType // NOTE: update PluginTypeEnumStrings and GuiParams::describePl
     ePluginTypeSearch,
     ePluginTypeSndReader,
     ePluginTypeSndWriter,
-    ePluginTypeWebServer,	//!< Web server plugin ( for About Me and Story Board web pages )
+    ePluginTypeWebServer,	        //!< Web server plugin ( for About Me and Story Board web pages )
+    ePluginTypeAboutMePageClient,	//!< about me web page plugin client
+    ePluginTypeStoryboardClient,	//!< storyboard web page plugin client
 
     eMaxPluginType	
 };
