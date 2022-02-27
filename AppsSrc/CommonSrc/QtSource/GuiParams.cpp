@@ -896,7 +896,7 @@ QString GuiParams::describePluginType( EPluginType ePluginType )
         strPluginType = QObject::tr( "Admin" );
         break;
 
-    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
+    case ePluginTypeAboutMePage:
         strPluginType = QObject::tr("About Me Page");
         break;
 

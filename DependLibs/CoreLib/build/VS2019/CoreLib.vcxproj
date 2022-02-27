@@ -271,6 +271,10 @@
     <ClInclude Include="..\..\OsDetect.h" />
     <ClInclude Include="..\..\rsa.h" />
     <ClInclude Include="..\..\SHA1.h" />
+    <ClInclude Include="..\..\Sha1ClientInfo.h" />
+    <ClInclude Include="..\..\Sha1GeneratorCallback.h" />
+    <ClInclude Include="..\..\Sha1GeneratorMgr.h" />
+    <ClInclude Include="..\..\Sha1Info.h" />
     <ClInclude Include="..\..\sqlite3.h" />
     <ClInclude Include="..\..\sqlite3ext.h" />
     <ClInclude Include="..\..\sqlitedataset.h" />
@@ -344,6 +348,9 @@
     <ClCompile Include="..\..\OsDetect_corelib.cpp" />
     <ClCompile Include="..\..\rsa_eay_corelib.c" />
     <ClCompile Include="..\..\rsa_gen_corelib.c" />
+    <ClCompile Include="..\..\Sha1ClientInfo.cpp" />
+    <ClCompile Include="..\..\Sha1GeneratorMgr.cpp" />
+    <ClCompile Include="..\..\Sha1Info.cpp" />
     <ClCompile Include="..\..\SHA1_corelib.cpp" />
     <ClCompile Include="..\..\sqlite3_corelib.c" />
     <ClCompile Include="..\..\sqlitedataset_corelib.cpp" />

@@ -14,12 +14,18 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/DbBase.h \
     $$PWD/DependLibs/CoreLib/DbDataset.h \
     $$PWD/DependLibs/CoreLib/DbQueryData.h \
+    $$PWD/DependLibs/CoreLib/dirent_sim.h \
     $$PWD/DependLibs/CoreLib/Invite.h \
     $$PWD/DependLibs/CoreLib/IsBigEndianCpu.h \
     $$PWD/DependLibs/CoreLib/MediaCallbackInterface.h \
     $$PWD/DependLibs/CoreLib/ObjectCommon.h \
     $$PWD/DependLibs/CoreLib/OsDetect.h \
+    $$PWD/DependLibs/CoreLib/rsa.h \
     $$PWD/DependLibs/CoreLib/SHA1.h \
+    $$PWD/DependLibs/CoreLib/Sha1ClientInfo.h \
+    $$PWD/DependLibs/CoreLib/Sha1GeneratorCallback.h \
+    $$PWD/DependLibs/CoreLib/Sha1GeneratorMgr.h \
+    $$PWD/DependLibs/CoreLib/Sha1Info.h \
     $$PWD/DependLibs/CoreLib/StdOutRedirect.h \
 	$$PWD/DependLibs/CoreLib/StringListBinary.h \
     $$PWD/DependLibs/CoreLib/VarToString.h \
@@ -71,20 +77,32 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxTimer.h \
     $$PWD/DependLibs/CoreLib/VxValuePair.h \
     $$PWD/DependLibs/CoreLib/VxXml.h \
-    $$PWD/DependLibs/CoreLib/dirent_sim.h \
     $$PWD/DependLibs/CoreLib/VxMd5.h \
-    $$PWD/DependLibs/CoreLib/rsa.h \
-#	$$PWD/DependLibs/CoreLib/sqlite3.h \
-#	$$PWD/DependLibs/CoreLib/sqlite3ext.h \
-#	$$PWD/DependLibs/CoreLib/sqlitedataset.h
     $$PWD/DependLibs/CoreLib/VxUrl.h \
     $$PWD/DependLibs/CoreLib/VxLinuxOnly.h \
     $$PWD/DependLibs/CoreLib/VxJava.h
 
 SOURCES += 	\
-    $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
-	$$PWD/DependLibs/CoreLib/AssetDefs.cpp \
+    $$PWD/DependLibs/CoreLib/AppErr_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/AssetDefs.cpp \
 	$$PWD/DependLibs/CoreLib/BinaryBlob.cpp \
+    $$PWD/DependLibs/CoreLib/Blowfish_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/DbBase_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/DbDataset_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/DbQueryData_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/ObjectCommon_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/OsDetect_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/rsa_eay_corelib.c \
+    $$PWD/DependLibs/CoreLib/rsa_gen_corelib.c \
+    $$PWD/DependLibs/CoreLib/SHA1_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/Sha1ClientInfo.cpp \
+    $$PWD/DependLibs/CoreLib/Sha1GeneratorMgr.cpp \
+    $$PWD/DependLibs/CoreLib/Sha1Info.cpp \
+    $$PWD/DependLibs/CoreLib/sqlite3_corelib.c \
+    $$PWD/DependLibs/CoreLib/sqlitedataset_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp \
+	$$PWD/DependLibs/CoreLib/StringListBinary.cpp \
+    $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
     $$PWD/DependLibs/CoreLib/Invite.cpp \
     $$PWD/DependLibs/CoreLib/VxBuffer.cpp \
     $$PWD/DependLibs/CoreLib/VxChop.cpp \
@@ -131,19 +149,6 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxJava.cpp \
     $$PWD/DependLibs/CoreLib/VxFunctionsMissingInAndroid.cpp \
     $$PWD/DependLibs/CoreLib/VxMd5.cpp \
-    $$PWD/DependLibs/CoreLib/Blowfish_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/AppErr_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/DbBase_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/DbDataset_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/DbQueryData_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/ObjectCommon_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/OsDetect_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/rsa_eay_corelib.c \
-    $$PWD/DependLibs/CoreLib/rsa_gen_corelib.c \
-    $$PWD/DependLibs/CoreLib/SHA1_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/sqlite3_corelib.c \
-    $$PWD/DependLibs/CoreLib/sqlitedataset_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp \
-	$$PWD/DependLibs/CoreLib/StringListBinary.cpp \
+
 
 

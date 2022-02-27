@@ -41,7 +41,7 @@ public:
 	void						setRmtSessionId( VxGUID& rmtId )			{ m_FileXferInfo.setRmtSessionId( rmtId ); }
 	VxGUID&						getRmtSessionId( void )						{ return m_FileXferInfo.getRmtSessionId(); }
 
-	void						setFileHashId( uint8_t * fileHashId )			{ m_FileXferInfo.setFileHashId( fileHashId ); }
+	void						setFileHashId( uint8_t * fileHashId )		{ m_FileXferInfo.setFileHashId( fileHashId ); }
 	void						setFileHashId( VxSha1Hash& fileHashId )		{ m_FileXferInfo.setFileHashId( fileHashId ); }
 	VxSha1Hash&					getFileHashId( void )						{ return m_FileXferInfo.getFileHashId(); }
 
@@ -65,7 +65,7 @@ protected:
 	int							m_iPercentComplete;
 	VxSktBase *					m_Skt;
 	VxNetIdent *				m_Ident;
-	uint32_t							m_Error;
+	uint32_t					m_Error;
 
 private:
 	void						initLclSessionId( void );

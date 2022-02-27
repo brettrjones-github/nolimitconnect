@@ -88,6 +88,16 @@ bool AppSettings::getFeatureEnable( EAppFeatures appFeature )
 {
 	// for now app features are used for disable
 	// in the future if features are enabled then should let this code work
+	if( eAppFeatureAboutMePage == appFeature )
+	{
+		return true;
+	}
+
+	if( eAppFeatureStoryboard == appFeature )
+	{
+		return true;
+	}
+
 	if( eAppFeatureTheme == appFeature )
 	{
 		return true;

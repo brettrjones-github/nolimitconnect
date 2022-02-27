@@ -158,13 +158,13 @@ void VxFileShredder::shredFiles( void )
 				}
 				else
 				{
-					LogMsg( LOG_ERROR, "FileShredder::shredFiles could not open file %s\n", fileName.c_str() );
+					LogMsg( LOG_ERROR, "FileShredder::shredFiles could not open file %s", fileName.c_str() );
 					VxFileUtil::deleteFile( fileName.c_str() );
 				}
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "FileShredder::shredFiles 0 len file %s\n", fileName.c_str() );
+				LogMsg( LOG_ERROR, "FileShredder::shredFiles 0 len file %s", fileName.c_str() );
 				VxFileUtil::deleteFile( fileName.c_str() );
 			}
 

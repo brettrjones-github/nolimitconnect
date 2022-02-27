@@ -548,12 +548,12 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     bool isPrimaryPlugin = false;
     switch( ePluginType )
     {
+    case ePluginTypeAdmin:
+    case ePluginTypeAboutMePage:
     case ePluginTypeVoicePhone:
     case ePluginTypeVideoPhone:
     case ePluginTypeTruthOrDare:
     case ePluginTypeMessenger:
-    case ePluginTypeAdmin:
-    case ePluginTypeWebServer:
     case ePluginTypeCamServer:
     case ePluginTypeStoryboard:
     case ePluginTypeFileServer:
@@ -569,6 +569,7 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     case ePluginTypeRelay:
     case ePluginTypeNetworkSearchList:
     case ePluginTypeClientConnectTest:
+    case ePluginTypeWebServer:
     default:
         break;
     }

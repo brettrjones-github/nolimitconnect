@@ -111,9 +111,9 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 		poInfo->m_BigListInfo->setIsOnline( false );
 		poInfo->m_BigListInfo->setIsConnected( false );
 
-		LogMsg( LOG_INFO, "onContactDisconnected %s telling plugin mgr\n", poInfo->m_BigListInfo->getOnlineName() );
-		m_RcScan.onContactWentOffline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
-		IToGui::getToGui().toGuiContactOffline( (VxNetIdent *)poInfo->m_BigListInfo );
-		m_PluginMgr.onContactWentOffline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
+		LogMsg( LOG_INFO, "onContactDisconnected %s telling plugin mgr", poInfo->m_BigListInfo->getOnlineName() );
+		m_RcScan.onContactWentOffline( poInfo->m_BigListInfo->getVxNetIdent(), poInfo->getSkt() );
+		IToGui::getToGui().toGuiContactOffline( poInfo->m_BigListInfo->getVxNetIdent() );
+		m_PluginMgr.onContactWentOffline( poInfo->m_BigListInfo->getVxNetIdent(), poInfo->getSkt() );
 	}
 }
