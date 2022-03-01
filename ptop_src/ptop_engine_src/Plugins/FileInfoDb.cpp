@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2022 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,8 +12,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "FileLibraryDb.h"
-#include "LibraryFileInfo.h"
+#include "FileInfoDb.h"
+#include "FileInfo.h"
 
 #include <CoreLib/VxFileUtil.h>
 
@@ -25,66 +24,66 @@ namespace
 }
 
 //============================================================================
-FileLibraryDb::FileLibraryDb( std::string fileLibraryDbName )
+FileInfoDb::FileInfoDb( std::string fileLibraryDbName )
 	: DbBase( fileLibraryDbName.c_str() )
-	, m_FileLibraryDbName( fileLibraryDbName )
+	, m_FileInfoDbName( fileLibraryDbName )
 {
 }
 
 //============================================================================
 //! create tables in database 
-RCODE FileLibraryDb::onCreateTables( int iDbVersion )
+RCODE FileInfoDb::onCreateTables( int iDbVersion )
 {
-	lockFileLibraryDb();
+	lockFileInfoDb();
     std::string strCmd = "CREATE TABLE " + TABLE_LIBRARY_FILES + CREATE_COLUMNS_LIBRARY_FILES;
     RCODE rc = sqlExec(strCmd);
-	unlockFileLibraryDb();
+	unlockFileInfoDb();
 	return rc;
 }
 
 //============================================================================
 // delete tables in database
-RCODE FileLibraryDb::onDeleteTables( int iOldVersion ) 
+RCODE FileInfoDb::onDeleteTables( int iOldVersion ) 
 {
-	lockFileLibraryDb();
+	lockFileInfoDb();
     std::string strCmd = "DROP TABLE IF EXISTS " + TABLE_LIBRARY_FILES;
     RCODE rc = sqlExec(strCmd);
-	unlockFileLibraryDb();
+	unlockFileInfoDb();
 	return rc;
 }
 
 //============================================================================
-void FileLibraryDb::purgeAllFileLibrary( void ) 
+void FileInfoDb::purgeAllFileLibrary( void ) 
 {
-	lockFileLibraryDb();
+	lockFileInfoDb();
     std::string strCmd = "DELETE FROM " + TABLE_LIBRARY_FILES;
     RCODE rc = sqlExec( strCmd );
-	unlockFileLibraryDb();
+	unlockFileInfoDb();
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "FileLibraryDb::purgeAllFileLibrary error %d", rc );
+		LogMsg( LOG_ERROR, "FileInfoDb::purgeAllFileLibrary error %d", rc );
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "FileLibraryDb::purgeAllFileLibrary success" );
+		LogMsg( LOG_INFO, "FileInfoDb::purgeAllFileLibrary success" );
 	}
 }
 
 //============================================================================
-void FileLibraryDb::removeFile( const char * fileName )
+void FileInfoDb::removeFile( const char * fileName )
 {
-	lockFileLibraryDb();
+	lockFileInfoDb();
 	DbBindList bindList( fileName );
 	sqlExec( "DELETE FROM library_files WHERE file_name=?", bindList );
-	unlockFileLibraryDb();
+	unlockFileInfoDb();
 }
 
 //============================================================================
-void FileLibraryDb::addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId, int64_t fileTime )
+void FileInfoDb::addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId, int64_t fileTime )
 {
 	removeFile( fileName );
 
-	lockFileLibraryDb();
+	lockFileInfoDb();
 	DbBindList bindList( fileName );
 	bindList.add( fileLen );
 	bindList.add( (int)fileType );
@@ -96,14 +95,14 @@ void FileLibraryDb::addFile( const char * fileName, int64_t fileLen, uint8_t fil
 		bindList );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "FileLibraryDb::addFile error %d", rc );
+		LogMsg( LOG_ERROR, "FileInfoDb::addFile error %d", rc );
 	}
 
-	unlockFileLibraryDb();
+	unlockFileInfoDb();
 }
 
 //============================================================================
-void FileLibraryDb::addFile( LibraryFileInfo* libFileInfo )
+void FileInfoDb::addFile( FileInfo* libFileInfo )
 {
 	addFile(	libFileInfo->getFileName().c_str(),
 				libFileInfo->getFileLength(),
@@ -114,7 +113,7 @@ void FileLibraryDb::addFile( LibraryFileInfo* libFileInfo )
 }
 
 //============================================================================
-void FileLibraryDb::getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList )
+void FileInfoDb::getAllFiles( std::vector<FileInfo*>& sharedFileList )
 {
 	std::string fileName;
 	uint8_t fileType;
@@ -122,7 +121,7 @@ void FileLibraryDb::getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList )
 	std::string destfile;
 	std::string assetIdStr;
 	VxGUID assetId;
-	lockFileLibraryDb();
+	lockFileInfoDb();
 	std::vector<std::string> deletedFiles; 
 	DbCursor * cursor = startQuery( "SELECT * FROM library_files" );
 	if( NULL != cursor )
@@ -138,7 +137,7 @@ void FileLibraryDb::getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList )
 			uint64_t realFileLen = VxFileUtil::fileExists( fileName.c_str() );
 			if( 0 != realFileLen )
 			{
-				LibraryFileInfo * libFileInfo = new LibraryFileInfo( fileName, realFileLen, fileType, assetId );
+				FileInfo * libFileInfo = new FileInfo( fileName, realFileLen, fileType, assetId );
 				libFileInfo->setFileHashId( (uint8_t *)cursor->getBlob( 3 ) );
 				uint64_t fileTime = cursor->getS64( 4 );
 				libFileInfo->setFileTime( fileTime );
@@ -160,7 +159,7 @@ void FileLibraryDb::getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList )
 		removeFile( (*iter).c_str() );
 	}
 
-	unlockFileLibraryDb();
+	unlockFileInfoDb();
 }
 
 

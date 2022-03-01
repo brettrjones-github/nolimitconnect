@@ -38,7 +38,7 @@ PluginTruthOrDare::PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, V
 , m_VoiceFeedMgr( engine, *this, m_PluginSessionMgr )
 , m_VideoFeedMgr( engine, *this, m_PluginSessionMgr )
 {
-	m_ePluginType = ePluginTypeTruthOrDare;
+	setPluginType( ePluginTypeTruthOrDare );
 }
 
 //============================================================================

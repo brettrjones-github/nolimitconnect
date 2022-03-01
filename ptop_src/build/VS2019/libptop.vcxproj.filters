@@ -931,6 +931,24 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoDb.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfo.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoXferMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -2018,6 +2036,24 @@
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginStoryboardClient.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoMgr.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoDb.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfo.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoXferMgr.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>

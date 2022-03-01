@@ -259,6 +259,9 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/PluginSettings/PluginSettingDb.h \
     $$PWD/ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/AudioJitterBuffer.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfo.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoDb.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryDb.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileRxSession.h \
@@ -279,6 +282,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostService.h \
@@ -569,6 +573,9 @@ SOURCES += \
 	$$PWD/ptop_src/ptop_engine_src/PluginSettings/PluginSettingDb.cpp \
 	$$PWD/ptop_src/ptop_engine_src/PluginSettings/PluginSettingMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/AudioJitterBuffer.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfo.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoDb.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileRxSession.cpp \
@@ -589,6 +596,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXferPktHandlers.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.cpp \

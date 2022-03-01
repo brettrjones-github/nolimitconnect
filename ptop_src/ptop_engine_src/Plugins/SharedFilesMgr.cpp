@@ -16,7 +16,7 @@
 #include "SharedFilesMgr.h"
 #include "SharedFileInfo.h"
 
-#include "PluginServiceFileShare.h"
+#include "PluginBaseFileShare.h"
 
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 #include <GuiInterface/IToGui.h>
@@ -30,8 +30,6 @@
 
 namespace
 {
-	const char * SHARED_FILES_DB_NAME = "SharedFilesDb.db3";
-
 	//============================================================================
     static void * UpdateSharedFilesThreadFunc( void * pvContext )
 	{
@@ -68,11 +66,10 @@ namespace
 }
 
 //============================================================================
-SharedFilesMgr::SharedFilesMgr( P2PEngine& engine, PluginServiceFileShare& plugin )
+SharedFilesMgr::SharedFilesMgr( P2PEngine& engine, PluginBaseFileShare& plugin, std::string fileShareDbName )
 : m_Engine( engine )
 , m_Plugin( plugin )
-, m_s64TotalByteCnt(0)
-, m_u16FileTypes(0)
+, m_FileShareDbName( fileShareDbName )
 {
 }
 
@@ -87,7 +84,7 @@ void SharedFilesMgr::fromGuiUserLoggedOn( void )
 {
 	// user specific directory should be set
 	std::string dbName = VxGetUserSpecificDataDirectory() + "settings/";
-	dbName += SHARED_FILES_DB_NAME; 
+	dbName += m_FileShareDbName;
 	lockSharedFiles();
 	m_SharedFilesDb.dbShutdown();
 	m_SharedFilesDb.dbStartup( 1, dbName );
@@ -232,7 +229,7 @@ void SharedFilesMgr::updateFilesListFromDb( VxThread * thread )
 		}
 
 		SharedFileInfo* shareInfo = (*iter);
-		LogMsg( LOG_INFO, "updateFilesListFromDb %s\n", shareInfo->getFileName().c_str() );
+		LogMsg( LOG_INFO, "updateFilesListFromDb %s", shareInfo->getFileName().c_str() );
 		addFileToGenHashQue( shareInfo->getFileName() );
 		if( (*iter)->getIsDirty() )
 		{

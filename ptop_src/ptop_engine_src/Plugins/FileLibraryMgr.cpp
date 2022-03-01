@@ -32,8 +32,6 @@
 
 namespace
 {
-	const char * FILE_LIBRARY_DB_NAME = "FileLibraryDb.db3";
-
 	//============================================================================
     static void * UpdateFileLibraryThreadFunc( void * pvContext )
 	{
@@ -66,12 +64,11 @@ namespace
 }
 
 //============================================================================
-FileLibraryMgr::FileLibraryMgr( P2PEngine& engine, PluginBase& plugin, SharedFilesMgr& sharedFilesMgr )
+FileLibraryMgr::FileLibraryMgr( P2PEngine& engine, PluginBase& plugin, SharedFilesMgr& sharedFilesMgr, std::string fileLibraryDbName )
 : m_Engine( engine )
 , m_Plugin( plugin )
 , m_SharedFilesMgr( sharedFilesMgr )
-, m_s64TotalByteCnt(0)
-, m_u16FileTypes(0)
+, m_FileLibraryDb( fileLibraryDbName )
 {
 }
 
@@ -86,7 +83,7 @@ void FileLibraryMgr::fromGuiUserLoggedOn( void )
 {
 	// user specific directory should be set
 	std::string dbName = VxGetUserSpecificDataDirectory() + "settings/";
-	dbName += FILE_LIBRARY_DB_NAME; 
+	dbName += m_FileLibraryDb.getFileLibraryDbName();
 	lockFileLibrary();
 	m_FileLibraryDb.dbShutdown();
 	m_FileLibraryDb.dbStartup( 1, dbName );
@@ -97,7 +94,7 @@ void FileLibraryMgr::fromGuiUserLoggedOn( void )
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "FileLibraryMgr::updateFilesList: Thread Still Running\n" );
+		LogMsg( LOG_ERROR, "FileLibraryMgr::updateFilesList: Thread Still Running" );
 	}
 }
 

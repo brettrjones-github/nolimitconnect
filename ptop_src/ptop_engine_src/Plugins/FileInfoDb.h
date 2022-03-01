@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2015 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2022 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -14,37 +13,36 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-
 #include <CoreLib/DbBase.h>
 #include <CoreLib/VxGUID.h>
 
-class LibraryFileInfo;
+class FileInfo;
 
-class FileLibraryDb : public DbBase
+class FileInfoDb : public DbBase
 {
 public:
-	FileLibraryDb() = delete;
-	FileLibraryDb( std::string fileLibraryDbName );
-	virtual ~FileLibraryDb() = default;
+	FileInfoDb() = delete;
+	FileInfoDb( std::string fileLibraryDbName );
+	virtual ~FileInfoDb() = default;
 
-	void						lockFileLibraryDb( void )			{ m_FileLibraryDbMutex.lock(); }
-	void						unlockFileLibraryDb( void )			{ m_FileLibraryDbMutex.unlock(); }
+	void						lockFileInfoDb( void )			{ m_FileInfoDbMutex.lock(); }
+	void						unlockFileInfoDb( void )			{ m_FileInfoDbMutex.unlock(); }
 
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
 
 	void 						addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId, int64_t fileTime = 0 );
-	void 						addFile( LibraryFileInfo* libFileInfo );
+	void 						addFile( FileInfo* libFileInfo );
 	void						removeFile( const char * fileName );
 
-	void						getAllFiles( std::vector<LibraryFileInfo*>& sharedFileList );
+	void						getAllFiles( std::vector<FileInfo*>& sharedFileList );
 	void						purgeAllFileLibrary( void ); 
 	void						updateFileTypes( void );
 
-	std::string&				getFileLibraryDbName( void ) { return m_FileLibraryDbName; }
+	std::string&				getFileInfoDbName( void ) { return m_FileInfoDbName; }
 
 protected:
-	VxMutex						m_FileLibraryDbMutex;
-	std::string					m_FileLibraryDbName{ "" };
+	VxMutex						m_FileInfoDbMutex;
+	std::string					m_FileInfoDbName{ "" };
 };
 

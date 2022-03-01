@@ -22,13 +22,13 @@
 
 class VxThread;
 
-class LibraryFileInfo : public std::string
+class FileInfo : public std::string
 {
 public:
-	LibraryFileInfo();
-	LibraryFileInfo( const std::string& str );
-	LibraryFileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType );
-	LibraryFileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType, VxGUID& assetId );
+	FileInfo();
+	FileInfo( const std::string& str );
+	FileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType );
+	FileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType, VxGUID& assetId );
 
 	bool						isDirectory( void );
 	void						setIsDirty( bool isDirty )				{ m_IsDirty = isDirty; }
@@ -56,11 +56,11 @@ public:
 
 	void						updateFileInfo( VxThread * callingThread );
 
-	LibraryFileInfo&			operator=(const LibraryFileInfo& oInfo); 
-	LibraryFileInfo&			operator=(const std::string& str); 
-	LibraryFileInfo&			operator=(const char * str); 
-	LibraryFileInfo&			operator+=(const std::string& str); 
-	LibraryFileInfo&			operator+=(const char * str); 
+	FileInfo&					operator=(const FileInfo& oInfo); 
+	FileInfo&					operator=(const std::string& str); 
+	FileInfo&					operator=(const char * str); 
+	FileInfo&					operator+=(const std::string& str); 
+	FileInfo&					operator+=(const char * str); 
 
 private:
 	void						determineSharedDir( void );
@@ -68,12 +68,12 @@ private:
 
 public:
 	//=== vars ===//
-	int64_t						m_s64FileLen;
-	uint32_t					m_u32Attributes;
-	uint8_t						m_u8FileType;
+	int64_t						m_s64FileLen{ 0 };
+	uint32_t					m_u32Attributes{ 0 };
+	uint8_t						m_u8FileType{ 0 };
 	VxSha1Hash					m_FileHash;
-    std::string					m_ContainedInDir;
-	bool						m_IsDirty;
+	std::string					m_ContainedInDir{ "" };
+	bool						m_IsDirty{ true };
 	VxGUID						m_AssetId;
 	int64_t						m_FileTime{ 0 };
 };

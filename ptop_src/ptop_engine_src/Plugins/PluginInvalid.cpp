@@ -33,7 +33,7 @@ PluginInvalid::~PluginInvalid()
 //! handle app state change
 void PluginInvalid::onAppStateChange( EAppState eAppState )
 {
-	LogMsg( LOG_INFO, "PluginInvalid::onAppStateChange %d\n", eAppState );
+	LogMsg( LOG_INFO, "PluginInvalid::onAppStateChange %d", eAppState );
 	switch( eAppState)
 	{
 	case eAppStateStartup:	// app has started
@@ -49,7 +49,7 @@ void PluginInvalid::onAppStateChange( EAppState eAppState )
 	case eAppStateResume:	// resume
 		break;
 	default:
-		LogMsg( LOG_ERROR, "PluginInvalid::onAppStateChange unknown state\n");
+		LogMsg( LOG_ERROR, "PluginInvalid::onAppStateChange unknown state");
 	}
 }
 //============================================================================

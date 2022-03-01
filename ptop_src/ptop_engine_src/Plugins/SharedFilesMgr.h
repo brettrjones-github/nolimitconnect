@@ -23,7 +23,7 @@
 
 class SharedFileInfo;
 class IToGui;
-class PluginServiceFileShare;
+class PluginBaseFileShare;
 class P2PEngine;
 class PktFileListReply;
 class VxSha1Hash;
@@ -32,7 +32,7 @@ class AssetMgr;
 class SharedFilesMgr
 {
 public:
-	SharedFilesMgr( P2PEngine& engine, PluginServiceFileShare& plugin );
+	SharedFilesMgr( P2PEngine& engine, PluginBaseFileShare& plugin, std::string fileShareDbName );
 	virtual ~SharedFilesMgr();
 
 	void						lockSharedFiles( void )				{ m_FilesListMutex.lock(); }
@@ -71,10 +71,10 @@ public:
 private:
 	//=== vars ===//
     P2PEngine&					m_Engine;
-	PluginServiceFileShare&		m_Plugin;
+	PluginBaseFileShare&		m_Plugin;
 
-	int64_t						m_s64TotalByteCnt;
-	uint16_t					m_u16FileTypes;
+	int64_t						m_s64TotalByteCnt{ 0 };
+	uint16_t					m_u16FileTypes{ 0 };
 	VxMutex						m_FilesListMutex;
 
 	std::vector<SharedFileInfo*>m_SharedList;
@@ -88,5 +88,7 @@ private:
 
 	std::vector<PktFileListReply*>m_FileListPackets;
 	VxMutex						m_PacketsMutex;
+
+	std::string					m_FileShareDbName;
 };
 

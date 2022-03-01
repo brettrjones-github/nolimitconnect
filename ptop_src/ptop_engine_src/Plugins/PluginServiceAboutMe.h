@@ -14,19 +14,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBase.h"
+#include "PluginBaseFiles.h"
 
-class PluginServiceAboutMe : public PluginBase
+class PluginServiceAboutMe : public PluginBaseFiles
 {
 public:
 	PluginServiceAboutMe( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
 	virtual ~PluginServiceAboutMe() = default;
 
-	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-
-	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
-	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );
-	virtual void				onConnectionLost( VxSktBase * sktBase );
 
 protected:
 };

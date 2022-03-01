@@ -20,32 +20,6 @@
 
 //============================================================================
 PluginServiceAboutMe::PluginServiceAboutMe( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
-: PluginBase( engine, pluginMgr, myIdent, pluginType )
+	: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMeLibrary.db3" )
 {
-	setPluginType( ePluginTypeAboutMePageServer );
-}
-
-//============================================================================
-//! return true if is plugin session
-bool PluginServiceAboutMe::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
-{
-	return true;
-}
-
-//============================================================================
-void PluginServiceAboutMe::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
-{
-	//m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
-}
-
-//============================================================================
-void PluginServiceAboutMe::onConnectionLost( VxSktBase * sktBase )
-{
-	//m_PluginSessionMgr.onConnectionLost( sktBase );
-}
-
-//============================================================================
-void PluginServiceAboutMe::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
-{
-	//m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }
