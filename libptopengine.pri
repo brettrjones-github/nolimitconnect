@@ -281,6 +281,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/LibraryFileInfo.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.h \
@@ -595,6 +596,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/LibraryFileInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/P2PSession.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.cpp \
@@ -630,7 +632,6 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectClient.cpp \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginRandomConnectHost.cpp \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceAboutMe.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceStoryboard.cpp \

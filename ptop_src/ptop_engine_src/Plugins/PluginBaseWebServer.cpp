@@ -115,7 +115,7 @@ RCODE PluginBaseWebServer::handlePtopConnection( VxSktBase * sktBase, VxNetIdent
 //============================================================================
 void PluginBaseWebServer::fromGuiUserLoggedOn( void )
 {
-    std::string strProfileDir = VxGetUserProfileDirectory();
+    std::string strProfileDir = VxGetUserStoryBoardPageDirectory();
 	setWebSiteDir( strProfileDir.c_str() );
 }
 
@@ -123,7 +123,7 @@ void PluginBaseWebServer::fromGuiUserLoggedOn( void )
 void PluginBaseWebServer::getMyPicFileName( std::string& strRetFileName )
 {
 	strRetFileName = getWebSiteDir();
-	strRetFileName += "me.jpg";
+	strRetFileName += "me.png";
 }
 
 //============================================================================

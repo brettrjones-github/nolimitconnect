@@ -89,7 +89,8 @@ namespace
 	std::string			g_strUserXferDir                = "";
 
 	std::string			g_strRootXferDir				= "";
-    std::string			g_strUserProfileDir             = "";
+    std::string			g_strAboutMePageDir             = "";
+	std::string			g_strStoryBoardPageDir			= "";
     std::string			g_strSettingsDir				= "";
 
 	std::string			g_strUploadsDir					= "";
@@ -200,9 +201,12 @@ void VxSetAppDirectory( EAppDir appDir, const char * setDir )
         case eAppDirSettings:
             g_strSettingsDir = setDir;
             break;
-        case eAppDirProfile:
-            g_strUserProfileDir = setDir;
+        case eAppDirAboutMePage:
+            g_strAboutMePageDir = setDir;
             break;
+		case eAppDirStoryBoardPage:
+			g_strStoryBoardPageDir = setDir;
+			break;
         case eAppDirRootXfer:
             g_strRootXferDir = setDir;
             break;
@@ -276,8 +280,10 @@ std::string& VxGetAppDirectory( EAppDir appDir )
 		return g_strUserSpecificDataDir;
 	case eAppDirSettings:
 		return g_strSettingsDir;
-	case eAppDirProfile:
-		return g_strUserProfileDir;
+	case eAppDirAboutMePage:
+		return g_strAboutMePageDir;
+	case eAppDirStoryBoardPage:
+		return g_strStoryBoardPageDir;
 	case eAppDirRootXfer:
 		return g_strRootXferDir;
 	case eAppDirUserXfer:
@@ -547,14 +553,18 @@ void VxSetUserSpecificDataDirectory( const char * userDataDir  )
 	g_strSettingsDir = g_strUserSpecificDataDir + "settings/";
 	VxFileUtil::makeDirectory( g_strSettingsDir.c_str() );
 
-    g_strUserProfileDir = g_strUserSpecificDataDir + "profile/";
-    VxFileUtil::makeDirectory( g_strUserProfileDir.c_str() );
+    g_strAboutMePageDir = g_strUserSpecificDataDir + "aboutmepage/";
+    VxFileUtil::makeDirectory( g_strAboutMePageDir.c_str() );
+
+	g_strStoryBoardPageDir = g_strUserSpecificDataDir + "storyboardpage/";
+	VxFileUtil::makeDirectory( g_strStoryBoardPageDir.c_str() );
 }
 
 //============================================================================
-std::string& VxGetUserSpecificDataDirectory( void ) { return g_strUserSpecificDataDir; }
-std::string& VxGetSettingsDirectory( void )			{ return g_strSettingsDir; }
-std::string& VxGetUserProfileDirectory( void )		{ return g_strUserProfileDir; }
+std::string& VxGetUserSpecificDataDirectory( void )		{ return g_strUserSpecificDataDir; }
+std::string& VxGetSettingsDirectory( void )				{ return g_strSettingsDir; }
+std::string& VxGetUserAboutMePageDirectory( void )		{ return g_strAboutMePageDir; }
+std::string& VxGetUserStoryBoardPageDirectory( void )	{ return g_strStoryBoardPageDir; }
 
 //============================================================================
 void VxSetRootXferDirectory( const char * rootXferDir  )

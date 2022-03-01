@@ -141,7 +141,7 @@ EXferError FileXferMgr::beginFileSend( bool pluginIsLocked, VxSktBase * sktBase,
 					// seek failed
 					fclose( xferInfo.m_hFile );
 					xferInfo.m_hFile = NULL;
-					LogMsg( LOG_INFO, "FileShareXferMgr::beginFileSend: could not seek to position %d in file %s",
+					LogMsg( LOG_INFO, "FileShareXferMgr::beginFileSend: could not seek to position %lld in file %s",
 						xferInfo.m_u64FileOffs,
 						(const char *)xferInfo.getLclFileName().c_str() );
 					xferErr = eXferErrorFileSeekError;

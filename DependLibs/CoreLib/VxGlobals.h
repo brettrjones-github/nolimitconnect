@@ -43,7 +43,8 @@ enum EAppDir
 
 	eAppDirUserSpecific,
 	eAppDirSettings,
-	eAppDirProfile,
+	eAppDirAboutMePage,
+	eAppDirStoryBoardPage,
 	eAppDirRootXfer,
 	eAppDirUserXfer,
 	eAppDirDownloads,
@@ -121,7 +122,8 @@ std::string&					VxGetRootUserDataDirectory( void );
 void							VxSetUserSpecificDataDirectory( const char * userDataDir  );
 std::string&					VxGetUserSpecificDataDirectory( void  );
 std::string&					VxGetSettingsDirectory( void );
-std::string&					VxGetUserProfileDirectory( void ); // storyboard is same as profile directory
+std::string&					VxGetUserAboutMePageDirectory( void ); 
+std::string&					VxGetUserStoryBoardPageDirectory( void );
 
 void							VxSetRootXferDirectory( const char * rootXferDir  );
 std::string&					VxGetRootXferDirectory( void ) ;

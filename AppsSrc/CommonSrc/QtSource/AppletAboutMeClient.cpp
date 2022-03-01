@@ -48,7 +48,7 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
     m_strUserSepecificDataDir = VxGetUserSpecificDataDirectory();
     m_strDefaultPicPath = m_strUserSepecificDataDir + "profile/";
     VxFileUtil::makeDirectory( m_strDefaultPicPath.c_str() );
-    m_strDefaultPicPath += "me.jpg";
+    m_strDefaultPicPath += "me.png";
     uint32_t u32FileLen = VxFileUtil::getFileLen( m_strDefaultPicPath.c_str() );
     if( u32FileLen > 0 )
     {
@@ -63,22 +63,6 @@ AppletAboutMeClient::AppletAboutMeClient( AppCommon& app, QWidget * parent )
         {
             ui.m_PictureOfMeFrame->setPixmap( oBitmap );
         }
-    }
-    else
-    {
-        QPixmap oBitmap;
-        if( false == oBitmap.load( ":/AppRes/Resources/me.png" ) )
-        {
-
-            QString msgText = QObject::tr( "Failed To Read Image File " );
-            QMessageBox::critical( this, QObject::tr( "Error Reading Image" ), msgText );
-        }
-        else
-        {
-            ui.m_PictureOfMeFrame->setPixmap( oBitmap );
-        }
-
-        m_bUsingDefaultImage = true;
     }
 
     connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( onBrowseButClick() ) );

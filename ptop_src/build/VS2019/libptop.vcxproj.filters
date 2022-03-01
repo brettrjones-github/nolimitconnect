@@ -487,9 +487,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginMessenger.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceAboutMe.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -947,6 +944,9 @@
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ptop_engine_src\Plugins\FileInfoXferMgr.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1546,9 +1546,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginMessenger.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceAboutMe.h">
-      <Filter>Source Files\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
@@ -2054,6 +2051,9 @@
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ptop_engine_src\Plugins\FileInfoXferMgr.h">
+      <Filter>Source Files\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.h">
       <Filter>Source Files\Plugins</Filter>
     </ClInclude>
   </ItemGroup>

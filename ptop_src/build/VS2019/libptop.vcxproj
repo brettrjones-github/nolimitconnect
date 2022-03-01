@@ -705,6 +705,7 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\P2PSession.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.cpp" />
+    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBase.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.cpp" />
@@ -741,7 +742,6 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.cpp" />
-    <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceAboutMe.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.cpp" />
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.cpp" />
@@ -1075,6 +1075,7 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\LibraryFileInfo.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\P2PSession.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageClient.h" />
+    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBase.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFiles.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginBaseFileShare.h" />
@@ -1104,7 +1105,6 @@
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginPushToTalk.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectClient.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginRandomConnectHost.h" />
-    <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceAboutMe.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceFileShare.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceRelay.h" />
     <ClInclude Include="..\..\ptop_engine_src\Plugins\PluginServiceStoryboard.h" />

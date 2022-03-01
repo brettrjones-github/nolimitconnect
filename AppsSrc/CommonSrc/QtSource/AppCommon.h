@@ -194,6 +194,7 @@ public:
 	virtual void				shutdownAppCommon( void );
 
 	void						loadAccountSpecificSettings( const char * userName );
+    void                        copyAssetsToFoldersIfRequired( void );
 
     ActivityBase*               launchApplet( EApplet applet, QWidget * parent );
     ActivityBase*               launchApplet( EApplet applet, QWidget* parent, VxGUID& assetId );

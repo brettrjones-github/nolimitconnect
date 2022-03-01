@@ -213,7 +213,7 @@ bool AppCommon::loadLastUserAccount( void )
         {
             // remove old missing or corrupted account 
             m_AccountMgr.removeAccountByName( m_strAccountUserName.c_str() );
-            LogMsg( LOG_INFO, "AppCommon:Could not retrieve user\n" );
+            LogMsg( LOG_INFO, "AppCommon:Could not retrieve user" );
         }
     }
 
@@ -264,21 +264,9 @@ void AppCommon::setupAccountResources( VxNetIdent& userAccountIdent )
     std::string myIPv4 = userAccountIdent.m_DirectConnectId.m_IPv4OnlineIp.toStdString();
     std::string myIPv6 = userAccountIdent.m_DirectConnectId.m_IPv6OnlineIp.toStdString();
 
-    LogMsg( LOG_VERBOSE, "Account %s IPv4 %s IPv6 %s\n", strUserName.c_str(), myIPv4.c_str(), myIPv6.c_str() );
+    LogMsg( LOG_VERBOSE, "Account %s IPv4 %s IPv6 %s", strUserName.c_str(), myIPv4.c_str(), myIPv6.c_str() );
 
-    std::string storyBoardFileName = VxGetUserProfileDirectory();
-    storyBoardFileName += "story_board.htm";
-    if( false == VxFileUtil::fileExists( storyBoardFileName.c_str() ) )
-    {
-        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/story_board.htm", storyBoardFileName.c_str() );
-    }
-
-    std::string storyBoardBackground = VxGetUserProfileDirectory();
-    storyBoardBackground += "storyboard_background.png";
-    if( false == VxFileUtil::fileExists( storyBoardBackground.c_str() ) )
-    {
-        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/storyboard_background.png", storyBoardBackground.c_str() );
-    }
+    copyAssetsToFoldersIfRequired();
 
     getEngine().getNetStatusAccum().setIpPort( tcpPort );
 }
@@ -315,33 +303,8 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
     // gotv (kodi) also needs the directory
     getGoTv().fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
-    std::string userPicture = VxGetUserProfileDirectory();
-    userPicture += "me.jpg";
-    if( false == VxFileUtil::fileExists( userPicture.c_str() ) )
-    {
-        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/me.jpg", userPicture.c_str() );
-    }
 
-    std::string storyBoardFileName = VxGetUserProfileDirectory();
-    storyBoardFileName += "story_board.htm";
-    if( false == VxFileUtil::fileExists( storyBoardFileName.c_str() ) )
-    {
-        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/story_board.htm", storyBoardFileName.c_str() );
-    }
-
-    std::string storyBoardBackground = VxGetUserProfileDirectory();
-    storyBoardBackground += "storyboard_background.png";
-    if( false == VxFileUtil::fileExists( storyBoardBackground.c_str() ) )
-    {
-        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/storyboard_background.png", storyBoardBackground.c_str() );
-    }
-
-    std::string favIcon = VxGetUserProfileDirectory();
-    favIcon += "favicon.ico";
-    if( false == VxFileUtil::fileExists( favIcon.c_str() ) )
-    {
-        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/favicon.ico", favIcon.c_str() );
-    }
+    copyAssetsToFoldersIfRequired();
 
     m_CamSourceId = m_AppSettings.getCamSourceId();
     m_CamCaptureRotation = m_AppSettings.getCamRotation( m_CamSourceId );
@@ -356,6 +319,61 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     LogMsg( LOG_DEBUG, "Account Loaded ms %" PRId64 " alive ms %" PRId64 "", aliveMs - loadStartMs, aliveMs );
     setIsAppInitialized( true );
     getEngine().getNetStatusAccum().setIpPort( tcpPort );
+}
+
+//============================================================================
+void AppCommon::copyAssetsToFoldersIfRequired( void )
+{
+    // setup about me page if requrired
+    std::string userAboutMePicture = VxGetUserAboutMePageDirectory();
+    userAboutMePicture += "me.png";
+    if( false == VxFileUtil::fileExists( userAboutMePicture.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/me.png", userAboutMePicture.c_str() );
+    }
+
+    std::string aboutMePageIndex = VxGetUserAboutMePageDirectory();
+    aboutMePageIndex += "index.htm";
+    if( false == VxFileUtil::fileExists( aboutMePageIndex.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/index.htm", aboutMePageIndex.c_str() );
+    }
+
+    std::string aboutMeFavIcon = VxGetUserAboutMePageDirectory();
+    aboutMeFavIcon += "favicon.ico";
+    if( false == VxFileUtil::fileExists( aboutMeFavIcon.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/favicon.ico", aboutMeFavIcon.c_str() );
+    }
+
+    // setup storyboard page if requrired
+    std::string storyBoardIndexName = VxGetUserStoryBoardPageDirectory();
+    storyBoardIndexName += "story_board.htm";
+    if( false == VxFileUtil::fileExists( storyBoardIndexName.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/story_board.htm", storyBoardIndexName.c_str() );
+    }
+
+    std::string storyBoardBackground = VxGetUserStoryBoardPageDirectory();
+    storyBoardBackground += "storyboard_background.png";
+    if( false == VxFileUtil::fileExists( storyBoardBackground.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/storyboard_background.png", storyBoardBackground.c_str() );
+    }
+
+    std::string storyBoardMePicture = VxGetUserStoryBoardPageDirectory();
+    storyBoardMePicture += "me.png";
+    if( false == VxFileUtil::fileExists( storyBoardMePicture.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/me.png", storyBoardMePicture.c_str() );
+    }
+
+    std::string storyBoardFavIcon = VxGetUserStoryBoardPageDirectory();
+    storyBoardFavIcon += "favicon.ico";
+    if( false == VxFileUtil::fileExists( storyBoardFavIcon.c_str() ) )
+    {
+        GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/favicon.ico", storyBoardFavIcon.c_str() );
+    }
 }
 
 //============================================================================

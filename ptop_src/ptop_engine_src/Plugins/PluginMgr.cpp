@@ -19,11 +19,12 @@
 #include <ptop_src/ptop_engine_src/MediaProcessor/MediaProcessor.h>
 
 #include <ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h>
+#include <ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.h>
+
 #include <ptop_src/ptop_engine_src/Plugins/PluginChatRoomClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginFileXfer.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginInvalid.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginMessenger.h>
-#include <ptop_src/ptop_engine_src/Plugins/PluginServiceAboutMe.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginPeerUserClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestClient.h>
 #include <ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h>
@@ -111,7 +112,7 @@ void PluginMgr::pluginMgrStartup( void )
     m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create about me server plugin" );
-	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn, ePluginTypeAboutMePageServer );
+	poPlugin = new PluginAboutMePageServer( m_Engine, *this, &this->m_PktAnn, ePluginTypeAboutMePageServer );
 	m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create client peer user plugin" );

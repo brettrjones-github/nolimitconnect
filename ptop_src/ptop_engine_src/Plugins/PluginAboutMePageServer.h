@@ -1,5 +1,6 @@
+#pragma once
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
+// Copyright (C) 2013 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
@@ -13,13 +14,16 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceAboutMe.h"
-#include "PluginMgr.h"
+#include "PluginBaseFiles.h"
 
-#include <PktLib/PktsStoryBoard.h>
-
-//============================================================================
-PluginServiceAboutMe::PluginServiceAboutMe( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType )
-	: PluginBaseFiles( engine, pluginMgr, myIdent, pluginType, "AboutMeLibrary.db3" )
+class PluginAboutMePageServer : public PluginBaseFiles
 {
-}
+public:
+	PluginAboutMePageServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent, EPluginType pluginType );
+	virtual ~PluginAboutMePageServer() = default;
+
+protected:
+};
+
+
+

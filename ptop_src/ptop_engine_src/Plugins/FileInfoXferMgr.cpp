@@ -1092,7 +1092,7 @@ EXferError FileInfoXferMgr::beginFileSend( FileTxSession * xferSession )
 
 	if( eXferErrorNone == xferErr )
 	{
-		IToGui::getToGui().toGuiStartUpload(	xferSession->getIdent(), 
+		IToGui::getToGui().toGuiStartUpload(		xferSession->getIdent(), 
 													m_Plugin.getPluginType(), 
 													xferInfo.getLclSessionId(), 
 													u8FileType, 
@@ -1393,46 +1393,7 @@ RCODE FileInfoXferMgr::sendFileShareError(		VxSktBase *		sktBase,		// socket
 	vsnprintf( szBuffer, 2048, pMsg, argList );
 	va_end(argList);
 	LogMsg( LOG_INFO, szBuffer );
-	// now send the message with correct reply depending on type of packet received
-
-	//switch( iPktType )
-	//{	
-	//case PKT_TYPE_FILE_CHUNK:
-	//	{
-	//		PktFileChunkAck gPkt;
-	//		gPkt.u32Error = rc;
-	//		strcpy( gPkt.as8Arg1, szBuffer );
-	//		m_Plugin->m_Plugin.txPacket( sktBase, &gPkt );
-	//		break;
-	//	}
-	//case PKT_TYPE_CMD_1ARG_REQ:
-	//	{
-	//		// make a reply packet
-	//		PktCmd1ArgReply gPkt;
-	//		gPkt.u16Cmd = u16Cmd;
-	//		gPkt.u64Error = rc;
-	//		strcpy( gPkt.as8Arg1, szBuffer );
-	//		m_Plugin->m_Plugin.txPacket( sktBase, &gPkt );
-	//		break;
-	//	}
-	//case PKT_TYPE_CMD_2ARG_REQ:
-	//	{
-	//		// make a reply packet
-	//		PktCmd2ArgReply gPkt;
-	//		gPkt.u16Cmd = u16Cmd;
-	//		gPkt.u32Error = rc;
-	//		strcpy( gPkt.as8Arg1, szBuffer );
-	//		m_Plugin->m_Plugin.txPacket( sktBase, &gPkt );
-	//		break;
-	//	}
-	//default:
-	//	{
-	//		// must never happen
-	//		vx_assert( false );
-	//		LogMsg( LOG_ERROR, "ERROR: unrecognized packet type in Send Error" );
-	//		break;
-	//	}
-	//}// end of switch
+	
 	return rcSendErr;
 }
 
