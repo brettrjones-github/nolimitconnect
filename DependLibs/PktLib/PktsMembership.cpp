@@ -27,7 +27,7 @@ PktMembershipReq::PktMembershipReq()
 //============================================================================
 PktMembershipReply::PktMembershipReply()
 {
-	vx_assert( 0 == sizeof( PktMembershipReply ) & 0x0f );
+	vx_assert( 0 == ( sizeof( PktMembershipReply ) & 0x0f ) );
 	setPktType( PKT_TYPE_MEMBERSHIP_REPLY );
 	setPktLength( sizeof( PktMembershipReply ) );
 }

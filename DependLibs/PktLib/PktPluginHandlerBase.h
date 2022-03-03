@@ -212,6 +212,16 @@ public:
 	virtual void				onPktGroupieMoreReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 	virtual void				onPktGroupieMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
 
+	virtual void				onPktFileInfoInfoReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoInfoReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+
+	virtual void				onPktFileInfoAnnReq			( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoAnnReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoSearchReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoSearchReply	( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoMoreReq		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+	virtual void				onPktFileInfoMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktPluginHandlerBase::*RC_PLUGIN_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr *, VxNetIdent * );  
 protected:

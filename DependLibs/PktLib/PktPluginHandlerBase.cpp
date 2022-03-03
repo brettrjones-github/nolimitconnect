@@ -209,6 +209,16 @@ PktPluginHandlerBase::PktPluginHandlerBase()
 	m_aBaseSysPktFuncTable[PKT_TYPE_GROUPIE_SEARCH_REPLY]				= &PktPluginHandlerBase::onPktGroupieSearchReply;
 	m_aBaseSysPktFuncTable[PKT_TYPE_GROUPIE_MORE_REQ]					= &PktPluginHandlerBase::onPktGroupieMoreReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_GROUPIE_MORE_REPLY]					= &PktPluginHandlerBase::onPktGroupieMoreReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_INFO_REQ]					= &PktPluginHandlerBase::onPktFileInfoInfoReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_INFO_REPLY]				= &PktPluginHandlerBase::onPktFileInfoInfoReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_ANN_REQ]					= &PktPluginHandlerBase::onPktFileInfoAnnReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_ANN_REPLY]				= &PktPluginHandlerBase::onPktFileInfoAnnReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_SEARCH_REQ]				= &PktPluginHandlerBase::onPktFileInfoSearchReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_SEARCH_REPLY]				= &PktPluginHandlerBase::onPktFileInfoSearchReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REQ]					= &PktPluginHandlerBase::onPktFileInfoMoreReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REPLY]				= &PktPluginHandlerBase::onPktFileInfoMoreReply;
 }
 
 //============================================================================
@@ -1106,6 +1116,54 @@ void PktPluginHandlerBase::onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pk
 
 //============================================================================
 void PktPluginHandlerBase::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	onPktUnhandled( sktBase, pktHdr, netIdent );
+}
+
+//============================================================================
+void PktPluginHandlerBase::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
 {
 	onPktUnhandled( sktBase, pktHdr, netIdent );
 }

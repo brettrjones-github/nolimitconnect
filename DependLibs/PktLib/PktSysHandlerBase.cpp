@@ -249,6 +249,16 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[PKT_TYPE_GROUPIE_SEARCH_REPLY]				= &PktHandlerBase::onPktGroupieSearchReply;
 	m_aBaseSysPktFuncTable[PKT_TYPE_GROUPIE_MORE_REQ]					= &PktHandlerBase::onPktGroupieMoreReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_GROUPIE_MORE_REPLY]					= &PktHandlerBase::onPktGroupieMoreReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_INFO_REQ] = &PktHandlerBase::onPktFileInfoInfoReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_INFO_REPLY] = &PktHandlerBase::onPktFileInfoInfoReply;
+
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_ANN_REQ] = &PktHandlerBase::onPktFileInfoAnnReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_ANN_REPLY] = &PktHandlerBase::onPktFileInfoAnnReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_SEARCH_REQ] = &PktHandlerBase::onPktFileInfoSearchReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_SEARCH_REPLY] = &PktHandlerBase::onPktFileInfoSearchReply;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REQ] = &PktHandlerBase::onPktFileInfoMoreReq;
+	m_aBaseSysPktFuncTable[PKT_TYPE_FILE_INFO_MORE_REPLY] = &PktHandlerBase::onPktFileInfoMoreReply;
 }
 
 //============================================================================
@@ -1167,6 +1177,54 @@ void PktHandlerBase::onPktGroupieMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
 
 //============================================================================
 void PktHandlerBase::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 {
 	onPktUnhandled( sktBase, pktHdr );
 }

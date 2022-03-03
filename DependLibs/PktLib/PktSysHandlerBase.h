@@ -214,6 +214,16 @@ public:
 	virtual void				onPktGroupieMoreReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
 	virtual void				onPktGroupieMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
 
+	virtual void				onPktFileInfoInfoReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktFileInfoInfoReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
+	virtual void				onPktFileInfoAnnReq			( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktFileInfoAnnReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktFileInfoSearchReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktFileInfoSearchReply	( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktFileInfoMoreReq		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+	virtual void				onPktFileInfoMoreReply		( VxSktBase* sktBase, VxPktHdr* pktHdr );
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

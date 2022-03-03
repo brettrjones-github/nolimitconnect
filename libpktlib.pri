@@ -28,6 +28,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/ConnectId.h \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.h \
 	$$PWD/DependLibs/PktLib/PktsBaseXfer.h \
 	$$PWD/DependLibs/PktLib/PktsBlobXfer.h \
+    $$PWD/DependLibs/PktLib/PktsFileInfo.h \
     $$PWD/DependLibs/PktLib/PktsFileList.h \
     $$PWD/DependLibs/PktLib/PktsFileShare.h \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.h \
@@ -82,6 +83,7 @@ SOURCES += 	$$PWD/DependLibs/PktLib/ConnectId.cpp \
     $$PWD/DependLibs/PktLib/PktsAssetXfer.cpp \
     $$PWD/DependLibs/PktLib/PktsBaseXfer.cpp \
 	$$PWD/DependLibs/PktLib/PktsBlobXfer.cpp \
+    $$PWD/DependLibs/PktLib/PktsFileInfo.cpp \
     $$PWD/DependLibs/PktLib/PktsFileList.cpp \
     $$PWD/DependLibs/PktLib/PktsFileShare.cpp \
 	$$PWD/DependLibs/PktLib/PktsFriendOffer.cpp \

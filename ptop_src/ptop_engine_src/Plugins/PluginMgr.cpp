@@ -762,8 +762,32 @@ void PluginMgr::onThreadOncePer15Minutes( void )
     std::vector<PluginBase * >::iterator iter;
     for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
     {
-    	(*iter)->onThreadOncePer15Minutes();
+		if( !VxIsAppShuttingDown() )
+		{
+			( *iter )->onThreadOncePer15Minutes();
+		}
+		else
+		{
+			break;
+		}
     }
+}
+
+//============================================================================
+void PluginMgr::onAfterUserLogOnThreaded( void )
+{
+	std::vector<PluginBase* >::iterator iter;
+	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
+	{
+		if( !VxIsAppShuttingDown() )
+		{
+			( *iter )->onAfterUserLogOnThreaded();
+		}
+		else
+		{
+			break;
+		}
+	}
 }
 
 //============================================================================
@@ -914,91 +938,6 @@ bool PluginMgr::canAccessPlugin( EPluginType ePluginType, VxNetIdent * netIdent 
 	}
 
 	return false;
-}
-
-//============================================================================
-bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType, 
-									const VxGUID&		onlineId,
-                                    VxSktBase *			sktBase, 
-                                    VxPktHdr *			pktHdr, 
-                                    bool				bDisconnectAfterSend,
-                                    EPluginType         overridePlugin )
-{
-    // when sending packets they are typically from plugin to the same remote plugin
-    // for host/client we convert host to client and client to hot
-    EPluginType hostClientType = ePluginTypeInvalid;
-    switch( ePluginType )
-    {
-    case ePluginTypeClientChatRoom:
-        hostClientType = ePluginTypeHostChatRoom;
-        break;
-    case ePluginTypeHostChatRoom:
-        hostClientType = ePluginTypeClientChatRoom;
-        break;
-    case ePluginTypeClientConnectTest:
-        hostClientType = ePluginTypeHostConnectTest;
-        break;
-    case ePluginTypeHostConnectTest:
-        hostClientType = ePluginTypeClientConnectTest;
-        break;
-    case ePluginTypeClientGroup:
-        hostClientType = ePluginTypeHostGroup;
-        break;
-    case ePluginTypeHostGroup:
-        hostClientType = ePluginTypeClientGroup;
-        break;
-    case ePluginTypeClientPeerUser:
-        hostClientType = ePluginTypeHostPeerUser;
-        break;
-    case ePluginTypeHostPeerUser:
-        hostClientType = ePluginTypeClientPeerUser;
-        break;
-    case ePluginTypeClientRandomConnect:
-        hostClientType = ePluginTypeHostRandomConnect;
-        break;
-    case ePluginTypeHostRandomConnect:
-        hostClientType = ePluginTypeClientRandomConnect;
-        break;
-
-    default:
-        break;
-    }
-
-    if( overridePlugin != ePluginTypeInvalid )
-    {
-        pktHdr->setPluginNum( (uint8_t)overridePlugin );
-    }
-    else if( hostClientType != ePluginTypeInvalid )
-    {
-        pktHdr->setPluginNum( (uint8_t)hostClientType );
-    }
-    else
-    {
-        pktHdr->setPluginNum( (uint8_t)ePluginType );
-    }
-
-    pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );
-
-    if( onlineId == m_Engine.getMyOnlineId() )
-    {
-        // destination is ourself
-        pktHdr->setDestOnlineId( onlineId );
-        handleNonSystemPackets( sktBase, pktHdr );
-        return true;
-    }
-
-#ifdef DEBUG
-    // loopback flag is only for development convenience and should never be used for production
-    if( pktHdr->getIsLoopback() )
-    {
-        pktHdr->setDestOnlineId( m_Engine.getMyOnlineId() );
-        pktHdr->setSrcOnlineId( onlineId );
-        handleNonSystemPackets( sktBase, pktHdr );
-        return true;
-    }
-#endif // DEBUG
-
-    return m_Engine.getPeerMgr().txPacket( sktBase, onlineId, pktHdr, bDisconnectAfterSend );
 }
 
 //============================================================================

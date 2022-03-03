@@ -396,3 +396,51 @@ void PluginBaseFiles::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * s
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 }
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoInfoReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoInfoReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoAnnReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoAnnReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoSearchReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoSearchReply( sktBase, pktHdr, netIdent, this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoMoreReq( sktBase, pktHdr, netIdent, getCommAccessState( netIdent ), this );
+}
+
+//============================================================================
+void PluginBaseFiles::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr, VxNetIdent* netIdent )
+{
+	//m_Engine.getFileInfoListMgr().onPktFileInfoMoreReply( sktBase, pktHdr, netIdent, this );
+}

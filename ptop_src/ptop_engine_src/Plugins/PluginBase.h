@@ -185,6 +185,7 @@ public:
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )									{};
     virtual void				onMyPktAnnounceChange( PktAnnounce& pktAnn )									{};
     virtual void				onThreadOncePer15Minutes( void )												{};
+	virtual void				onAfterUserLogOnThreaded( void )												{};
     virtual	void				onPluginSettingChange( PluginSetting& pluginSetting, int64_t modifiedTimeMs )   {};
 
     //=== packet handlers ===//

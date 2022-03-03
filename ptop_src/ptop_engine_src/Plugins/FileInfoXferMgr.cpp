@@ -264,9 +264,9 @@ bool FileInfoXferMgr::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,		// identit
 int FileInfoXferMgr::fromGuiPluginControl(	VxNetIdent *		netIdent,
 											const char *		pControl, 
 											const char *		pAction,
-											uint32_t					u32ActionData,
+											uint32_t			u32ActionData,
 											VxGUID&				sessionId,
-											uint8_t *				fileHashIdIn )
+											uint8_t *			fileHashIdIn )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 	VxSha1Hash fileHashId( fileHashIdIn );
@@ -429,7 +429,7 @@ void FileInfoXferMgr::onPktFileGetReq( VxSktBase * sktBase, VxPktHdr * pktHdr, V
 	poPkt->getFileName( rmtFileName );
 	if( false == m_FileInfoMgr.getFileFullName( poPkt->getFileHashId(), strLclFileName ) )
 	{
-		LogMsg( LOG_INFO, "FileXferMgr::onPktFileGetReq file no longer shared %s\n", rmtFileName.c_str() );
+		LogMsg( LOG_INFO, "FileXferMgr::onPktFileGetReq file no longer shared %s", rmtFileName.c_str() );
 		oPkt.setError( eXferErrorFileNotFound );
 	}
 	else
@@ -590,7 +590,7 @@ void FileInfoXferMgr::onPktFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHd
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
 static int cnt = 0;
 	cnt++;
-	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileChuckReply start %d\n", cnt );
+	LogMsg( LOG_INFO, "FileInfoXferMgr::onPktFileChuckReply start %d", cnt );
     PktFileChunkReply * poPkt = (PktFileChunkReply *)pktHdr;
 	FileTxSession * xferSession = findTxSession( poPkt->getRmtSessionId() );
 	if( xferSession )

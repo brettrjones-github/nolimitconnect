@@ -841,7 +841,6 @@ FORMS += $$PWD/AppsSrc/CommonSrc/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSharedContent.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletShareOfferList.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletSnapshot.ui \
-    $$PWD/AppsSrc/CommonSrc/Forms/AppletStoryboardClient.ui \
 	$$PWD/AppsSrc/CommonSrc/Forms/AppletTestAndDebug.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostClient.ui \
     $$PWD/AppsSrc/CommonSrc/Forms/AppletTestHostService.ui \

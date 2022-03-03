@@ -185,6 +185,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ConnectId.h" />
+    <ClInclude Include="..\..\PktsFileInfo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\PktAnnList.cpp">
@@ -353,6 +356,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ConnectId.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PktsFileInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

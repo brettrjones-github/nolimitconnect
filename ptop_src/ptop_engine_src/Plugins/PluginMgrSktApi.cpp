@@ -17,6 +17,7 @@
 #include <ptop_src/ptop_engine_src/P2PEngine/P2PEngine.h>
 
 #include <NetLib/VxSktBase.h>
+#include <NetLib/VxPeerMgr.h>
 
 //============================================================================
 bool PluginMgr::pluginApiSktConnectTo(		EPluginType			ePluginType,	// plugin id
@@ -51,4 +52,99 @@ void PluginMgr::pluginApiSktCloseNow( ESktCloseReason closeReason, VxSktBase * s
 	sktBase->closeSkt(closeReason,  false);
 }
 
+//============================================================================
+bool PluginMgr::pluginApiTxPacket(  EPluginType			ePluginType,
+                                    const VxGUID&       onlineId,
+                                    VxSktBase*          sktBase,
+                                    VxPktHdr*           pktHdr,
+                                    bool				bDisconnectAfterSend,
+                                    EPluginType         overridePlugin )
+{
+    // when sending packets they are typically from plugin to the same remote plugin
+    // for host/client we convert host to client and client to hot
+    EPluginType hostClientType = ePluginTypeInvalid;
+    switch( ePluginType )
+    {
+    case ePluginTypeClientChatRoom:
+        hostClientType = ePluginTypeHostChatRoom;
+        break;
+    case ePluginTypeHostChatRoom:
+        hostClientType = ePluginTypeClientChatRoom;
+        break;
+    case ePluginTypeClientConnectTest:
+        hostClientType = ePluginTypeHostConnectTest;
+        break;
+    case ePluginTypeHostConnectTest:
+        hostClientType = ePluginTypeClientConnectTest;
+        break;
+    case ePluginTypeClientGroup:
+        hostClientType = ePluginTypeHostGroup;
+        break;
+    case ePluginTypeHostGroup:
+        hostClientType = ePluginTypeClientGroup;
+        break;
+    case ePluginTypeClientPeerUser:
+        hostClientType = ePluginTypeHostPeerUser;
+        break;
+    case ePluginTypeHostPeerUser:
+        hostClientType = ePluginTypeClientPeerUser;
+        break;
+    case ePluginTypeClientRandomConnect:
+        hostClientType = ePluginTypeHostRandomConnect;
+        break;
+    case ePluginTypeHostRandomConnect:
+        hostClientType = ePluginTypeClientRandomConnect;
+        break;
+    case ePluginTypeAboutMePageServer:
+        hostClientType = ePluginTypeAboutMePageClient;
+        break;
+    case ePluginTypeAboutMePageClient:
+        hostClientType = ePluginTypeAboutMePageServer;
+        break;
+    case ePluginTypeStoryboardServer:
+        hostClientType = ePluginTypeStoryboardClient;
+        break;
+    case ePluginTypeStoryboardClient:
+        hostClientType = ePluginTypeStoryboardServer;
+        break;
+    default:
+        break;
+    }
+
+    if( overridePlugin != ePluginTypeInvalid )
+    {
+        pktHdr->setPluginNum( ( uint8_t )overridePlugin );
+    }
+    else if( hostClientType != ePluginTypeInvalid )
+    {
+        pktHdr->setPluginNum( ( uint8_t )hostClientType );
+    }
+    else
+    {
+        pktHdr->setPluginNum( ( uint8_t )ePluginType );
+    }
+
+    pktHdr->setSrcOnlineId( m_Engine.getMyOnlineId() );
+
+    if( onlineId == m_Engine.getMyOnlineId() )
+    {
+        // destination is ourself
+        pktHdr->setDestOnlineId( onlineId );
+        handleNonSystemPackets( sktBase, pktHdr );
+        return true;
+    }
+
+#ifdef DEBUG
+    // loopback flag is only for development convenience and should never be used for production
+    if( pktHdr->getIsLoopback() )
+    {
+        pktHdr->setDestOnlineId( m_Engine.getMyOnlineId() );
+        pktHdr->setSrcOnlineId( onlineId );
+        handleNonSystemPackets( sktBase, pktHdr );
+        return true;
+    }
+#endif // DEBUG
+
+    return m_Engine.getPeerMgr().txPacket( sktBase, onlineId, pktHdr, bDisconnectAfterSend );
+}
 

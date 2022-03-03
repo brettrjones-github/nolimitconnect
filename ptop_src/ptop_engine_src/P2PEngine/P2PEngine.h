@@ -709,7 +709,19 @@ public:
     virtual void				onPktGroupieMoreReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
     virtual void				onPktGroupieMoreReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
 
+    virtual void				onPktFileInfoInfoReq        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileInfoInfoReply      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
+    virtual void				onPktFileInfoAnnReq         ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileInfoAnnReply       ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileInfoSearchReq      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileInfoSearchReply    ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileInfoMoreReq        ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+    virtual void				onPktFileInfoMoreReply      ( VxSktBase* sktBase, VxPktHdr* pktHdr ) override;
+
     bool                        validateIdent( VxNetIdent* netIdent ); // extra validatation for at risk connections like multicast
+
+    void                        executeAfterLogOnThreadFunctions( void );
 
 protected:
     //========================================================================
@@ -735,6 +747,8 @@ protected:
     void						onFirstPktAnnounce( PktAnnounce* pktAnn, VxSktBase* sktBase, BigListInfo* bigListInfo );
 
     EMembershipState            getMembershipState( PktAnnounce& myPktAnn, VxNetIdent* netIdent, EPluginType pluginType, EFriendState myFriendshipToHim );
+
+    void                        enableAfterLogOnThread( bool enable );
 
 	//=== vars ===//
 	VxPeerMgr&					m_PeerMgr;
@@ -802,6 +816,7 @@ protected:
 
     VxSemaphore                 m_TimerThreadSemaphore;
     VxThread                    m_TimerThread;
+    VxThread                    m_AfterLogOnThread;
 };
 
 extern P2PEngine& GetPtoPEngine();

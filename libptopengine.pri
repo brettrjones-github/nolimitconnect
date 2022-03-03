@@ -183,7 +183,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipAvailableMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipAvailableCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedMgr.h \
-    $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedListCallbackInterface.h \
+    $$PWD/ptop_src/ptop_engine_src/Membership/MembershipHostedCallbackInterface.h \
     $$PWD/ptop_src/ptop_engine_src/Membership/MembershipMgrBase.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionBase.h \
     $$PWD/ptop_src/ptop_engine_src/NetServices/NetActionIdle.h \
@@ -262,6 +262,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfo.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoDb.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoMgr.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoXferMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryDb.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryMgr.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileRxSession.h \
@@ -283,6 +284,7 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.h \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFiles.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.h \
 	$$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseHostClient.h \
@@ -311,8 +313,6 @@ HEADERS += 	$$PWD/AppCompilerConfig.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginMessenger.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginNetServices.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginPushToTalk.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceAboutMe.h \
-    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginConnectionTestHost.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceFileShare.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceRelay.h \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginServiceStoryboard.h \
@@ -577,6 +577,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfo.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoMgr.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/FileInfoXferMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryDb.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileLibraryMgr.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/FileRxSession.cpp \
@@ -598,6 +599,7 @@ SOURCES += \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageClient.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginAboutMePageServer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBase.cpp \
+    $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFiles.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileShare.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXfer.cpp \
     $$PWD/ptop_src/ptop_engine_src/Plugins/PluginBaseFileXferPktHandlers.cpp \

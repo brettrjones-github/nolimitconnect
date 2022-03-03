@@ -949,6 +949,9 @@
     <ClCompile Include="..\..\ptop_engine_src\Plugins\PluginAboutMePageServer.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ptop_engine_src\P2PEngine\P2PEngineAfterLogOnThread.cpp">
+      <Filter>Source Files\P2PEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -2078,12 +2081,6 @@
     </Filter>
     <Filter Include="GoTvConfig">
       <UniqueIdentifier>{d7ad3967-add1-4a19-9bb0-41db4ec79fb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build">
-      <UniqueIdentifier>{26c997f8-11de-4098-abdd-c9a7a68e65b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\Qt">
-      <UniqueIdentifier>{7883f807-8169-423d-917d-cdaa181a3534}</UniqueIdentifier>
     </Filter>
     <Filter Include="QtBuild">
       <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>

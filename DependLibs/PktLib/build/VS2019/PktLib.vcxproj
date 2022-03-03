@@ -193,6 +193,7 @@
     <ClInclude Include="..\..\PktsAssetXfer.h" />
     <ClInclude Include="..\..\PktsBaseXfer.h" />
     <ClInclude Include="..\..\PktsBlobXfer.h" />
+    <ClInclude Include="..\..\PktsFileInfo.h" />
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
     <ClInclude Include="..\..\PktsFriendOffer.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="..\..\PktsAssetXfer.cpp" />
     <ClCompile Include="..\..\PktsBaseXfer.cpp" />
     <ClCompile Include="..\..\PktsBlobXfer.cpp" />
+    <ClCompile Include="..\..\PktsFileInfo.cpp" />
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />
     <ClCompile Include="..\..\PktsFriendOffer.cpp" />

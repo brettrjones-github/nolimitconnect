@@ -33,7 +33,7 @@ void PktPushToTalkReq::calcPktLen( void )
 //============================================================================
 PktPushToTalkReply::PktPushToTalkReply()
 {
-	vx_assert( 0 == sizeof( PktPushToTalkReply ) & 0x0f );
+    vx_assert( 0 == (sizeof( PktPushToTalkReply ) & 0x0f) );
 	setPktType( PKT_TYPE_PUSH_TO_TALK_REPLY );
 	setPktLength( sizeof( PktPushToTalkReply ) );
 }

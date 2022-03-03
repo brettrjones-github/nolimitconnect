@@ -1400,3 +1400,67 @@ void P2PEngine::onPktGroupieMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
 
 	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
 }
+
+//============================================================================
+void P2PEngine::onPktFileInfoInfoReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoInfoReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoInfoReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoInfoReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoAnnReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoAnnReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoAnnReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoAnnReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoSearchReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoSearchReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoSearchReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoSearchReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoMoreReq( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoMoreReq" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}
+
+//============================================================================
+void P2PEngine::onPktFileInfoMoreReply( VxSktBase* sktBase, VxPktHdr* pktHdr )
+{
+	LogModule( eLogPkt, LOG_VERBOSE, "P2PEngine::onPktFileInfoMoreReply" );
+
+	m_PluginMgr.handleNonSystemPackets( sktBase, pktHdr );
+}

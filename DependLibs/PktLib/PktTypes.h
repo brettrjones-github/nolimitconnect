@@ -241,7 +241,18 @@
 #define PKT_TYPE_GROUPIE_MORE_REQ				    ( PKT_TYPE_GROUPIE_SEARCH_REPLY + 1 )		    // 176 ( 0xB0 )
 #define PKT_TYPE_GROUPIE_MORE_REPLY			        ( PKT_TYPE_GROUPIE_MORE_REQ	+ 1 )               // 177 ( 0xB1 )
 
-#define MAX_PKT_TYPE_CNT							(PKT_TYPE_GROUPIE_MORE_REPLY + 1) // 178
+// 178 ( 0x82 )     
+#define PKT_TYPE_FILE_INFO_INFO_REQ				    ( PKT_TYPE_GROUPIE_MORE_REPLY + 1 )		        // 178 ( 0xB2 )
+#define PKT_TYPE_FILE_INFO_INFO_REPLY			    ( PKT_TYPE_FILE_INFO_INFO_REQ	+ 1 )           // 179 ( 0xB3 )
+// 170 ( 0xB4 )                                                                                     
+#define PKT_TYPE_FILE_INFO_ANN_REQ				    ( PKT_TYPE_FILE_INFO_INFO_REPLY + 1 )		    // 180 ( 0xB4 )
+#define PKT_TYPE_FILE_INFO_ANN_REPLY			    ( PKT_TYPE_FILE_INFO_ANN_REQ	+ 1 )           // 181 ( 0xB5 )
+#define PKT_TYPE_FILE_INFO_SEARCH_REQ				( PKT_TYPE_FILE_INFO_ANN_REPLY + 1 )		    // 182 ( 0xB6 )
+#define PKT_TYPE_FILE_INFO_SEARCH_REPLY			    ( PKT_TYPE_FILE_INFO_SEARCH_REQ	+ 1 )           // 183 ( 0xB7 )
+#define PKT_TYPE_FILE_INFO_MORE_REQ				    ( PKT_TYPE_FILE_INFO_SEARCH_REPLY + 1 )		    // 184 ( 0xB8 )
+#define PKT_TYPE_FILE_INFO_MORE_REPLY			    ( PKT_TYPE_FILE_INFO_MORE_REQ	+ 1 )           // 185 ( 0xB9 )
+
+#define MAX_PKT_TYPE_CNT							( PKT_TYPE_FILE_INFO_MORE_REPLY + 1 ) // 185
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary
