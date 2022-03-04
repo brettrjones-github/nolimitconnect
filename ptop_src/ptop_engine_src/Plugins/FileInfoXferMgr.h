@@ -57,7 +57,9 @@ public:
 
 	void						fileAboutToBeDeleted( std::string& fileName );
 
-	virtual void				fromGuiUserLoggedOn( void );
+	//virtual void				fromGuiUserLoggedOn( void );
+	virtual void				onAfterUserLogOnThreaded( void );
+
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
 

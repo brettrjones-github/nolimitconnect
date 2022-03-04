@@ -27,5 +27,8 @@ PluginAboutMePageServer::PluginAboutMePageServer( P2PEngine& engine, PluginMgr& 
 //============================================================================
 void PluginAboutMePageServer::onAfterUserLogOnThreaded( void )
 {
+	onAfterUserLogOnThreaded();
+
+
 
 }

@@ -147,7 +147,7 @@ void Sha1GeneratorMgr::announceResult( ESha1GenResult sha1GenResult, Sha1ClientI
 {
 	if( sha1Info.getClient() )
 	{
-		sha1Info.getClient()->callbackSha1GenerateResult( sha1GenResult, sha1Info.getSha1Info() );
+		sha1Info.getClient()->callbackSha1GenerateResult( sha1GenResult, sha1Info.getSha1Info().getAssetId(), sha1Info.getSha1Info() );
 	}
 	else
 	{

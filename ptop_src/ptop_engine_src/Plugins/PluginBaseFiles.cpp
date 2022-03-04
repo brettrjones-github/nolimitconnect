@@ -46,10 +46,10 @@ PluginBaseFiles::PluginBaseFiles( P2PEngine& engine, PluginMgr& pluginMgr, VxNet
 }
 
 //============================================================================
-void PluginBaseFiles::fromGuiUserLoggedOn( void )
+void PluginBaseFiles::onAfterUserLogOnThreaded( void )
 {
-	m_FileInfoMgr.fromGuiUserLoggedOn();
-	m_FileInfoXferMgr.fromGuiUserLoggedOn();
+	m_FileInfoMgr.onAfterUserLogOnThreaded();
+	m_FileInfoXferMgr.onAfterUserLogOnThreaded();
 }
 
 //============================================================================
@@ -186,9 +186,11 @@ int PluginBaseFiles::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool PluginBaseFiles::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
+bool PluginBaseFiles::fromGuiAddFileToLibrary( const char * fileNameIn, bool addFile, uint8_t * fileHashId )
 {
-	return m_FileInfoMgr.fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+	std::string fileName = fileNameIn;
+	VxGUID assetId;
+	return m_FileInfoMgr.addFileToLibrary( fileName, assetId, fileHashId );
 }
 
 //============================================================================

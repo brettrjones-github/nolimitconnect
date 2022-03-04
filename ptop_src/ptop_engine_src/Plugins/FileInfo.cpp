@@ -32,81 +32,74 @@ FileInfo::FileInfo()
 }
 
 //============================================================================
-FileInfo::FileInfo( const std::string& str )
+FileInfo::FileInfo( const std::string& fileName )
+	: m_FullFileName( fileName )
 { 
-	*this = str;
 	determineSharedDir();
 	generateAssetId();
 }
 
 //============================================================================
-FileInfo::FileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType )
-: m_s64FileLen(fileLen) 
+FileInfo::FileInfo( const std::string& fileName, uint64_t fileLen, uint8_t fileType )
+: m_FullFileName( fileName )
+, m_s64FileLen(fileLen) 
 , m_u32Attributes(0) 
 , m_u8FileType(fileType)
 , m_ContainedInDir("")
 , m_IsDirty( true )
 { 
-	*this = str;
 	determineSharedDir();
 	generateAssetId();
 }
 
 
 //============================================================================
-FileInfo::FileInfo( const std::string& str, uint64_t fileLen, uint8_t fileType, VxGUID& assetId )
-	: m_s64FileLen( fileLen )
-	, m_u32Attributes( 0 )
+FileInfo::FileInfo( const std::string& fileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId )
+	: m_FullFileName( fileName )
+	, m_s64FileLen( fileLen )
 	, m_u8FileType( fileType )
-	, m_ContainedInDir( "" )
 	, m_IsDirty( true )
 	, m_AssetId( assetId )
 {
-	*this = str;
 	determineSharedDir();
-	generateAssetId();
+}
+
+//============================================================================
+FileInfo::FileInfo( const std::string& fullFileName, uint64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& sha1Hash )
+	: m_FullFileName( fullFileName )
+	, m_s64FileLen( fileLen )
+	, m_u8FileType( fileType )
+	, m_IsDirty( true )
+	, m_AssetId( assetId )
+	, m_FileHash( sha1Hash )
+{
 }
 
 //============================================================================
 FileInfo& FileInfo::operator=( const FileInfo& rhs ) 
 {	
-	std::string::operator	=( rhs ); 
-	m_u32Attributes			= rhs.m_u32Attributes;
+	m_FullFileName			= rhs.m_FullFileName;
 	m_s64FileLen			= rhs.m_s64FileLen;
+	m_u32Attributes			= rhs.m_u32Attributes;
 	m_u8FileType			= rhs.m_u8FileType;
+	m_FileHash				= rhs.m_FileHash;
 	m_ContainedInDir		= rhs.m_ContainedInDir;
+	m_IsDirty				= rhs.m_IsDirty;
 	m_AssetId				= rhs.m_AssetId;
+	m_FileTime				= rhs.m_FileTime;
 	return *this;
 }
 
 //============================================================================
-FileInfo& FileInfo::operator=(const std::string& str) 
-{ 
-	std::string::operator =(str);
-	determineSharedDir();
-	return *this;
-}
+bool FileInfo::isValid( bool includeHashValid )
+{
+	bool valid = !m_FullFileName.empty() && m_s64FileLen && m_u8FileType && m_AssetId.isVxGUIDValid();
+	if( includeHashValid )
+	{
+		valid &= m_FileHash.isHashValid();
+	}
 
-//============================================================================
-FileInfo& FileInfo::operator=(const char * str) 
-{ 
-	std::string::operator =(str); 
-	determineSharedDir();
-	return *this;
-}
-
-//============================================================================
-FileInfo& FileInfo::operator+=(const std::string& str) 
-{ 
-	std::string::operator +=(str); 
-	return *this;
-}
-
-//============================================================================
-FileInfo& FileInfo::operator+=(const char * str) 
-{ 
-	std::string::operator +=(str); 
-	return *this;
+	return valid;
 }
 
 //============================================================================
@@ -149,17 +142,11 @@ std::string FileInfo::getRemoteFileName( void )
 													rmtFileName );	
 		if( 0 != rc )
 		{
-			LogMsg( LOG_ERROR, "FileInfo::getRemoteFileName failed error %d file %s\n", rc, getLocalFileName().c_str() );
+			LogMsg( LOG_ERROR, "FileInfo::getRemoteFileName failed error %d file %s", rc, getLocalFileName().c_str() );
 		}
 	}
 
 	return rmtFileName;
-}
-
-//============================================================================
-void FileInfo::updateFileInfo( VxThread * callingThread )
-{
-	return;
 }
 
 //============================================================================

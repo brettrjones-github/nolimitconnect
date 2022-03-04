@@ -17,6 +17,7 @@
 #include <CoreLib/VxGUID.h>
 
 class FileInfo;
+class VxSha1Hash;
 
 class FileInfoDb : public DbBase
 {
@@ -31,9 +32,9 @@ public:
 	virtual RCODE				onCreateTables( int iDbVersion );
 	virtual RCODE				onDeleteTables( int iOldVersion );
 
-	void 						addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId, int64_t fileTime = 0 );
+	void 						addFile( std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime = 0 );
 	void 						addFile( FileInfo* libFileInfo );
-	void						removeFile( const char * fileName );
+	void						removeFile( std::string& fileName );
 
 	void						getAllFiles( std::vector<FileInfo*>& sharedFileList );
 	void						purgeAllFileLibrary( void ); 

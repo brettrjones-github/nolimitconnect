@@ -252,7 +252,7 @@
 #define PKT_TYPE_FILE_INFO_MORE_REQ				    ( PKT_TYPE_FILE_INFO_SEARCH_REPLY + 1 )		    // 184 ( 0xB8 )
 #define PKT_TYPE_FILE_INFO_MORE_REPLY			    ( PKT_TYPE_FILE_INFO_MORE_REQ	+ 1 )           // 185 ( 0xB9 )
 
-#define MAX_PKT_TYPE_CNT							( PKT_TYPE_FILE_INFO_MORE_REPLY + 1 ) // 185
+#define MAX_PKT_TYPE_CNT							( PKT_TYPE_FILE_INFO_MORE_REPLY + 1 ) // 186
 
 #define ROUND_TO_16BYTE_BOUNDRY( a ) (( a + 15 ) & ~15 )	//round up to even 16 byte boundary
 #define ROUND_TO_4BYTE_BOUNDRY( a ) (( a + 3 ) & ~3 )	    //round up to even 4 byte boundary

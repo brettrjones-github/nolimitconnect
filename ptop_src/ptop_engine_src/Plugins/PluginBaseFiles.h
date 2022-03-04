@@ -45,7 +45,8 @@ public:
 	PluginSessionBase *			createPluginSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	bool						isFileInLibrary( std::string& fileName );
 
-    virtual void				fromGuiUserLoggedOn( void ) override;
+    //virtual void				fromGuiUserLoggedOn( void ) override;
+	virtual void				onAfterUserLogOnThreaded( void ) override;
 
     virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
     virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = NULL, 	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;

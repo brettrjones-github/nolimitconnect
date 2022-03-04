@@ -24,44 +24,12 @@
 #include <PktLib/PktAnnounce.h>
 #include <PktLib/PktsFileList.h>
 
+#include <CoreLib/Sha1GeneratorMgr.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxSha1Hash.h>
 #include <CoreLib/VxFileShredder.h>
-
-namespace
-{
-	//============================================================================
-    static void * UpdateFileLibraryThreadFunc( void * pvContext )
-	{
-		VxThread * poThread = (VxThread *)pvContext;
-		poThread->setIsThreadRunning( true );
-		FileInfoMgr * poMgr = (FileInfoMgr *)poThread->getThreadUserParam();
-        if( poMgr && false == poThread->isAborted() )
-        {
-            poMgr->updateFilesListFromDb( poThread );
-        }
-
-		poThread->threadAboutToExit();
-        return nullptr;
-	}
-
-	//============================================================================
-    static void * GenHashIdsThreadFunc( void * pvContext )
-	{
-		VxThread * poThread = (VxThread *)pvContext;
-		poThread->setIsThreadRunning( true );
-		FileInfoMgr * poMgr = (FileInfoMgr *)poThread->getThreadUserParam();
-        if( poMgr && false == poThread->isAborted() )
-        {
-            poMgr->generateHashIds( poThread );
-        }
-
-		poThread->threadAboutToExit();
-        return nullptr;
-	}
-}
 
 //============================================================================
 FileInfoMgr::FileInfoMgr( P2PEngine& engine, PluginBase& plugin, std::string fileLibraryDbName )
@@ -92,7 +60,7 @@ bool FileInfoMgr::isFileShared( std::string& fileName )
 }
 
 //============================================================================
-void FileInfoMgr::fromGuiUserLoggedOn( void )
+void FileInfoMgr::onAfterUserLogOnThreaded( void )
 {
 	// user specific directory should be set
 	std::string dbName = VxGetUserSpecificDataDirectory() + "settings/";
@@ -101,23 +69,13 @@ void FileInfoMgr::fromGuiUserLoggedOn( void )
 	m_FileInfoDb.dbShutdown();
 	m_FileInfoDb.dbStartup( 1, dbName );
 	unlockFileList();
-	if( false == isThreadCreated() )
-	{
-		std::string fileInfoThread( "FileInfo" );
-		fileInfoThread += m_FileInfoDb.getFileInfoDbName();
-		startThread( (VX_THREAD_FUNCTION_T)UpdateFileLibraryThreadFunc, this, fileInfoThread.c_str() );
-	}
-	else
-	{
-		LogMsg( LOG_ERROR, "FileInfoMgr::updateFilesList: Thread Still Running" );
-	}
+
+	updateFilesListFromDb();
 }
 
 //============================================================================
 void FileInfoMgr::fileLibraryShutdown( void )
 {
-	m_GenHashThread.abortThreadRun( true );
-	killThread();
 	lockFileList();
 	clearLibraryFileList();
 	m_FileInfoDb.dbShutdown();
@@ -125,76 +83,9 @@ void FileInfoMgr::fileLibraryShutdown( void )
 }
 
 //============================================================================
-void FileInfoMgr::addFileToGenHashQue( std::string fileName )
+void FileInfoMgr::addFileToGenHashQue( VxGUID& fileId, std::string fileName )
 {
-	m_GenHashMutex.lock();
-	m_GenHashList.push_back( fileName );
-	m_GenHashMutex.unlock();
-	if( false == m_GenHashThread.isThreadRunning() )
-	{
-		m_GenHashThread.startThread( (VX_THREAD_FUNCTION_T)GenHashIdsThreadFunc, this, "GenHashIds" );
-	}
-}
-
-//============================================================================
-void FileInfoMgr::generateHashIds( VxThread * thread )
-{
-	bool atLeastOneFileUpdated = false;
-	int updatedCnt = 0;
-	while( m_GenHashList.size() )
-	{
-		if( thread->isAborted() )
-		{
-			return;
-		}
-
-		VxSha1Hash fileHash;
-		m_GenHashMutex.lock();
-		std::string thisFile = m_GenHashList[0];
-		m_GenHashList.erase( m_GenHashList.begin() );
-		m_GenHashMutex.unlock();
-		if( fileHash.generateHashFromFile( thisFile.c_str(), thread ) )
-		{
-			if( thread->isAborted() )
-			{
-				return;
-			}
-
-			lockFileList();
-			std::vector<FileInfo*>::iterator iter;
-			for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
-			{
-				if( thisFile == (*iter)->getFileName() )
-				{
-					(*iter)->m_FileHash = fileHash;
-					atLeastOneFileUpdated = true;
-					updatedCnt++;
-					m_FileInfoDb.addFile( *iter );
-					break;
-				}
-			}
-
-			unlockFileList();
-
-			if( updatedCnt >= 5 )
-			{
-				// hashing may take a long time so every 5 files update share info so user
-				// will see shared files right away
-				if( thread->isAborted() )
-				{
-					return;
-				}
-
-				updateFileTypes();
-			}
-		}
-	}
-
-	if( atLeastOneFileUpdated 
-		&& ( false == thread->isAborted() ) )
-	{
-		updateFileTypes();
-	}
+	GetSha1GeneratorMgr().generateSha1( fileId, fileName, this );
 }
 
 //============================================================================
@@ -240,11 +131,7 @@ void FileInfoMgr::updateFilesListFromDb( VxThread * thread )
 		}
 
 		FileInfo* shareInfo = (*iter);
-		addFileToGenHashQue( shareInfo->getFileName() );
-		if( (*iter)->getIsDirty() )
-		{
-			(*iter)->updateFileInfo( thread );
-		}
+		addFileToGenHashQue( shareInfo->getAssetId(), shareInfo->getFileName() );
 	}
 
 	unlockFileList();
@@ -278,76 +165,89 @@ int FileInfoMgr::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 }
 
 //============================================================================
-bool FileInfoMgr::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashIdIn )
+bool FileInfoMgr::addFileToLibrary( std::string& fileName, VxGUID assetId, uint8_t* fileHashIdIn )
 {
-	VxSha1Hash fileHashId( fileHashIdIn );
-	bool isHashValid = fileHashId.isHashValid();
-	lockFileList();
-	std::vector<FileInfo*>::iterator iter;
-	for( iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	if( fileName.empty() )
 	{
-		if( fileName == (*iter)->getFileName() )
-		{
-			if( false == addFile )
-			{
-				m_FileInfoDb.removeFile( fileName );
-
-				delete *iter;
-				m_FileInfoList.erase( iter );
-				unlockFileList();
-				updateFileTypes();
-				return true;
-			}
-			else
-			{
-				if( isHashValid )
-				{
-					(*iter)->setFileHashId( fileHashId );
-				}
-
-				unlockFileList();
-				return true;
-			}
-		}
+		LogMsg( LOG_ERROR, "FileInfoMgr::addFileToLibrary invalid param empty fileName" );
+		return false;
 	}
 
-	unlockFileList();
-
-	if( addFile )
+	VxSha1Hash fileHashId( fileHashIdIn );
+	bool isHashValid = fileHashId.isHashValid();
+	if( !assetId.isVxGUIDValid() )
 	{
-		// file is not currently in library and should be
-		uint64_t fileLen = VxFileUtil::fileExists( fileName );
-		uint8_t fileType = VxFileExtensionToFileTypeFlag( fileName );
-		if( ( false == isAllowedFileOrDir( fileName ) )
-			|| ( 0 == fileLen ) )
-		{
-			return false;
-		}
+		assetId.initializeWithNewVxGUID();
+	}
 
-		FileInfo * sharedInfo = new FileInfo( fileName, fileLen, fileType );
-		lockFileList();
-		m_FileInfoList.push_back( sharedInfo );
-		if( isHashValid )
-		{
-			sharedInfo->setFileHashId( fileHashId );
-			m_FileInfoDb.addFile( sharedInfo );
-		}
-		else
-		{
-			addFileToGenHashQue( fileName );
-		}
+	// file is not currently in library and should be
+	uint64_t fileLen = VxFileUtil::fileExists( fileName.c_str() );
+	uint8_t fileType = VxFileExtensionToFileTypeFlag( fileName.c_str() );
+	if( ( false == isAllowedFileOrDir( fileName ) )
+		|| ( 0 == fileLen ) )
+	{
+		return false;
+	}
 
-		unlockFileList();
+	FileInfo* fileInfo = new FileInfo( fileName, fileLen, fileType, assetId, fileHashId );
+	if( !addFileToLibrary( fileInfo ) )
+	{
+		delete fileInfo;
+		return false;
 	}
 
 	return true;
 }
 
 //============================================================================
+bool FileInfoMgr::addFileToLibrary( FileInfo * fileInfoIn )
+{
+	lockFileList();
+	for( auto iter = m_FileInfoList.begin(); iter != m_FileInfoList.end(); ++iter )
+	{
+		if( fileInfoIn->getFileName() == (*iter)->getFileName() )
+		{
+			m_FileInfoDb.removeFile( fileInfoIn->getFileName() );
+
+			delete *iter;
+			m_FileInfoList.erase( iter );
+			unlockFileList();
+			updateFileTypes();
+			break;
+		}
+	}
+
+	unlockFileList();
+	bool result{ false };
+
+	if( fileInfoIn->isValid( true ) )
+	{
+		lockFileList();
+		m_FileInfoList.push_back( fileInfoIn );
+		m_FileInfoDb.addFile( fileInfoIn );
+		unlockFileList();
+		result = true;
+	}
+	else if( fileInfoIn->isValid( false ) )
+	{
+		// needs file hash then save
+		m_FileInfoNeedHashAndSaveList.push_back( fileInfoIn );
+		addFileToGenHashQue( fileInfoIn->getAssetId(), fileInfoIn->getFileName() );
+		result = true;
+	}
+	else
+	{
+		LogMsg( LOG_ERROR, "FileInfoMgr::fromGuiAddFileToLibrary invalid %s", fileInfoIn->getFileName().c_str() );
+	}
+
+	return result;
+}
+
+//============================================================================
 void FileInfoMgr::addFileToLibrary(	std::string		fileName,
-										uint64_t		fileLen, 
-										uint8_t			fileType,
-										VxSha1Hash&		fileHashId )
+									uint64_t		fileLen, 
+									uint8_t			fileType,
+									VxSha1Hash&		fileHashId )
 {
 	removeFromLibrary( fileName );
 	FileInfo * sharedInfo = new FileInfo( fileName, fileLen, fileType );
@@ -455,7 +355,7 @@ void FileInfoMgr::removeFromLibrary( std::string& fileName )
 	{
 		if( fileName == (*iter)->getFileName() )
 		{
-			m_FileInfoDb.removeFile( fileName.c_str() );
+			m_FileInfoDb.removeFile( fileName );
 			m_FileInfoList.erase( iter );
 			break;
 		}
@@ -508,4 +408,34 @@ bool FileInfoMgr::onFileDownloadComplete( std::string& fileName, bool addFile, u
 {
 	LogMsg( LOG_VERBOSE, "FileInfoMgr::onFileDownloadComplete %s", fileName.c_str() );
 	return true;
+}
+
+//============================================================================
+void FileInfoMgr::callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGUID& assetId, Sha1Info& sha1Info )
+{
+	lockFileList();
+	std::vector<FileInfo*>::iterator iter;
+	for( iter = m_FileInfoNeedHashAndSaveList.begin(); iter != m_FileInfoNeedHashAndSaveList.end(); ++iter )
+	{
+		if( assetId == ( *iter )->getAssetId() )
+		{
+			( *iter )->setFileHashId( sha1Info.getSha1Hash() );
+			m_FileInfoList.push_back( *iter );
+			m_FileInfoDb.addFile( *iter );
+			m_FileInfoNeedHashAndSaveList.erase( iter );
+			break;
+		}
+	}
+
+	unlockFileList();
+
+	updateFileTypes();
+}
+
+//============================================================================
+bool FileInfoMgr::fromGuiAddFileToLibrary( const char* fileNameIn, bool addFile, uint8_t* fileHashId )
+{
+	std::string fileName = fileNameIn;
+	VxGUID assetId;
+	return addFileToLibrary( fileName, assetId, fileHashId );
 }

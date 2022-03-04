@@ -30,15 +30,15 @@ PktHandlerBase::PktHandlerBase()
 
 	int maxPktType = MAX_PKT_TYPE_CNT;
 	vx_assert( 152 == PKT_TYPE_RELAY_SESSION_REPLY );
-    vx_assert( 178 == maxPktType );
+    vx_assert( 186 == maxPktType );
 
 	m_aBaseSysPktFuncTable[ 0 ] = &PktHandlerBase::onPktInvalid;
 
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ANNOUNCE ]							= &PktHandlerBase::onPktAnnounce;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ANN_LIST ]							= &PktHandlerBase::onPktAnnList;
 
-	m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_UNJOIN_REQ ]							= &PktHandlerBase::onPktHostUnJoinReq;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_UNJOIN_REPLY ]						= &PktHandlerBase::onPktHostUnJoinReply;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_UNJOIN_REQ ]					= &PktHandlerBase::onPktHostUnJoinReq;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_UNJOIN_REPLY ]				= &PktHandlerBase::onPktHostUnJoinReply;
 	// 5 ( 0x05 )
 	m_aBaseSysPktFuncTable[PKT_TYPE_SCAN_REQ]							= &PktHandlerBase::onPktScanReq;
 	m_aBaseSysPktFuncTable[PKT_TYPE_SCAN_REPLY]							= &PktHandlerBase::onPktScanReply;

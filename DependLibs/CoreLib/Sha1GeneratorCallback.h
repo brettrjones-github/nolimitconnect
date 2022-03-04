@@ -14,8 +14,6 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <string>
-
 enum ESha1GenResult
 {
 	eSha1GenResultNoError = 0,
@@ -27,9 +25,10 @@ enum ESha1GenResult
 };
 
 class Sha1Info;
+class VxGUID;
 
 class Sha1GeneratorCallback
 {
 public:
-	virtual void				callbackSha1GenerateResult( ESha1GenResult sha1GenResult, Sha1Info& sha1Info ){};
+	virtual void				callbackSha1GenerateResult( ESha1GenResult sha1GenResult, VxGUID& fileId, Sha1Info& sha1Info ) = 0;
 };

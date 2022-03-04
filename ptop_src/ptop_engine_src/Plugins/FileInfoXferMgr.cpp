@@ -87,9 +87,8 @@ void FileInfoXferMgr::clearTxSessionsList( void )
 }
 
 //============================================================================
-void FileInfoXferMgr::fromGuiUserLoggedOn( void )
+void FileInfoXferMgr::onAfterUserLogOnThreaded( void )
 {
-	m_FileShareSettings.loadSettings( m_Engine.getEngineSettings() );
 }
 
 //============================================================================

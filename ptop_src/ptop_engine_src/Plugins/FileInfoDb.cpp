@@ -70,25 +70,25 @@ void FileInfoDb::purgeAllFileLibrary( void )
 }
 
 //============================================================================
-void FileInfoDb::removeFile( const char * fileName )
+void FileInfoDb::removeFile( std::string& fileName )
 {
 	lockFileInfoDb();
-	DbBindList bindList( fileName );
+	DbBindList bindList( fileName.c_str() );
 	sqlExec( "DELETE FROM library_files WHERE file_name=?", bindList );
 	unlockFileInfoDb();
 }
 
 //============================================================================
-void FileInfoDb::addFile( const char * fileName, int64_t fileLen, uint8_t fileType, VxGUID assetId, uint8_t * fileHashId, int64_t fileTime )
+void FileInfoDb::addFile( std::string& fileName, int64_t fileLen, uint8_t fileType, VxGUID& assetId, VxSha1Hash& fileHashId, int64_t fileTime )
 {
 	removeFile( fileName );
 
 	lockFileInfoDb();
-	DbBindList bindList( fileName );
+	DbBindList bindList( fileName.c_str() );
 	bindList.add( fileLen );
 	bindList.add( (int)fileType );
 	bindList.add( assetId.toHexString().c_str() );
-	bindList.add( (void *)fileHashId, 20 );
+	bindList.add( (void *)fileHashId.getHashData(), 20 );
 	bindList.add( fileTime );
 
 	RCODE rc  = sqlExec( "INSERT INTO library_files (file_name,file_length,file_type,asset_id,file_hash) values(?,?,?,?,?,?)",
@@ -104,11 +104,12 @@ void FileInfoDb::addFile( const char * fileName, int64_t fileLen, uint8_t fileTy
 //============================================================================
 void FileInfoDb::addFile( FileInfo* libFileInfo )
 {
-	addFile(	libFileInfo->getFileName().c_str(),
+	addFile(	libFileInfo->getFileName(),
 				libFileInfo->getFileLength(),
 				libFileInfo->getFileType(),
 				libFileInfo->getAssetId(),
-				libFileInfo->getFileHashId().getHashData()
+				libFileInfo->getFileHashId(),
+				libFileInfo->getFileTime()
 				 );
 }
 
@@ -156,7 +157,7 @@ void FileInfoDb::getAllFiles( std::vector<FileInfo*>& sharedFileList )
 	std::vector<std::string>::iterator iter;
 	for( iter = deletedFiles.begin(); iter != deletedFiles.end(); ++iter )
 	{
-		removeFile( (*iter).c_str() );
+		removeFile( (*iter) );
 	}
 
 	unlockFileInfoDb();
